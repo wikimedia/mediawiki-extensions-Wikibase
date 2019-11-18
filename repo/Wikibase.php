@@ -880,14 +880,6 @@ call_user_func( function() {
 			$siteLinkChangeOpFactory
 		);
 	};
-	$wgSpecialPages['EntitiesWithoutLabel'] = [
-		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
-		'newSpecialEntitiesWithoutLabel'
-	];
-	$wgSpecialPages['EntitiesWithoutDescription'] = [
-		Wikibase\Repo\Specials\SpecialEntitiesWithoutPageFactory::class,
-		'newSpecialEntitiesWithoutDescription'
-	];
 	$wgSpecialPages['ListDatatypes'] = Wikibase\Repo\Specials\SpecialListDatatypes::class;
 	$wgSpecialPages['ListProperties'] = function () {
 		$wikibaseRepo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();

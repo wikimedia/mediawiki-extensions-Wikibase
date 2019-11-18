@@ -11,7 +11,6 @@ use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\Store\ChangeStore;
-use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -68,13 +67,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testNewSiteLinkStore( Store $store ) {
 		$this->assertInstanceOf( SiteLinkLookup::class, $store->newSiteLinkStore() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testNewEntitiesWithoutTermFinder( Store $store ) {
-		$this->assertInstanceOf( EntitiesWithoutTermFinder::class, $store->newEntitiesWithoutTermFinder() );
 	}
 
 	/**

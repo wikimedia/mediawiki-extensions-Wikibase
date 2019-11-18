@@ -9,8 +9,6 @@ use Hooks;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -42,10 +40,8 @@ use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
-use Wikibase\Repo\Store\EntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikibase\Repo\Store\Sql\SqlEntitiesWithoutTermFinder;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
@@ -337,22 +333,6 @@ class SqlStore implements Store {
 		Hooks::run( 'GetEntityByLinkedTitleLookup', [ &$lookup ] );
 
 		return $lookup;
-	}
-
-	/**
-	 * @see Store::newEntitiesWithoutTermFinder
-	 *
-	 * @return EntitiesWithoutTermFinder
-	 */
-	public function newEntitiesWithoutTermFinder() {
-		return new SqlEntitiesWithoutTermFinder(
-			$this->entityIdParser,
-			$this->entityNamespaceLookup,
-			[ // TODO: Make this configurable!
-				Item::ENTITY_TYPE => 'Q',
-				Property::ENTITY_TYPE => 'P'
-			]
-		);
 	}
 
 	/**
