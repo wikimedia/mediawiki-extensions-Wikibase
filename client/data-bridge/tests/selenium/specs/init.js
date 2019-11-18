@@ -30,9 +30,7 @@ describe( 'init', () => {
 |}`;
 		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
-		DataBridgePage.open( title );
-		DataBridgePage.overloadedLink.click();
-		DataBridgePage.dialog.waitForDisplayed();
+		DataBridgePage.openBridgeOnPage( title );
 
 		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
@@ -54,10 +52,9 @@ describe( 'init', () => {
 
 			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
-			DataBridgePage.open( title );
-			DataBridgePage.overloadedLink.click();
-			DataBridgePage.error.waitForDisplayed();
+			DataBridgePage.openBridgeOnPage( title );
 
+			DataBridgePage.error.waitForDisplayed( 5000 );
 			assert.ok( DataBridgePage.error.isDisplayed() );
 		} );
 
@@ -84,10 +81,9 @@ describe( 'init', () => {
 |}`;
 			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
 
-			DataBridgePage.open( title );
-			DataBridgePage.overloadedLink.click();
-			DataBridgePage.bridge.waitForDisplayed();
+			DataBridgePage.openBridgeOnPage( title );
 
+			DataBridgePage.bridge.waitForDisplayed( 5000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 		} );
@@ -202,7 +198,7 @@ describe( 'init', () => {
 					pageContentLanguage
 				);
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.bridge.waitForDisplayed();
+				DataBridgePage.bridge.waitForDisplayed( 10000 );
 
 				browser.waitUntil(
 					() => DataBridgePage.propertyLabel.getText() === expectedLabel,

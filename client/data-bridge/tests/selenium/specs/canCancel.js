@@ -30,9 +30,7 @@ describe( 'App', () => {
 	} );
 
 	beforeEach( 'open bridge', () => {
-		DataBridgePage.open( title );
-		DataBridgePage.overloadedLink.click();
-		DataBridgePage.bridge.waitForDisplayed();
+		DataBridgePage.openBridgeOnPage( title );
 	} );
 
 	it( 'closes on Escape-key event', () => {
