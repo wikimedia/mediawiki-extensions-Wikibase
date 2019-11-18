@@ -18,7 +18,7 @@ module.exports = {
 	 * @param {string} moduleStatus 'registered', 'loaded', 'loading', 'ready', 'error', 'missing'
 	 * @param {int} timeout The wait time in milliseconds before the wait fails
 	 */
-	waitForModuleState( moduleName, moduleStatus = 'ready', timeout = 10000 ) {
+	waitForModuleState( moduleName, moduleStatus = 'ready', timeout = 2000 ) {
 		browser.waitUntil( () => {
 			const result = browser.execute( ( module ) => {
 				return typeof mw !== 'undefined' &&

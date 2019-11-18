@@ -49,7 +49,7 @@ class DataBridgePage extends Page {
 
 	open( title ) {
 		super.openTitle( title );
-		ForwardCompatUtil.waitForModuleState( 'wikibase.client.data-bridge.app' );
+		ForwardCompatUtil.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
 	}
 
 	openBridgeOnPage( title ) {
