@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Cache\IntegrationTests\SimpleCacheTest;
+// use Cache\IntegrationTests\SimpleCacheTest;
 use HashBagOStuff;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
@@ -10,11 +10,13 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 
 /**
+ * FIXME: disabled because it's incompatible with PHPUnit 8 (T237164)
  * @group Wikibase
+ * @group Broken
  *
  * @license GPL-2.0-or-later
  */
-class SimpleCacheWithBagOStuffTest extends SimpleCacheTest {
+class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleCacheTest*/ {
 
 	protected $skippedTests = [
 		'testClear' => 'Not possible to implement for BagOStuff'
