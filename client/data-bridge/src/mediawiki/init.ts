@@ -40,7 +40,11 @@ export default async (): Promise<void> => {
 		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
 			let isOpening = false;
 			selectedElement.link.setAttribute( 'aria-haspopup', 'dialog' );
-			selectedElement.link.addEventListener( 'click', async ( event: Event ) => {
+			selectedElement.link.addEventListener( 'click', async ( event: MouseEvent ) => {
+				if ( event.altKey || event.ctrlKey || event.shiftKey || event.metaKey ) {
+					return;
+				}
+
 				stopNativeClickHandling( event );
 				if ( isOpening ) {
 					return; // user clicked link again while we were awaiting dispatcherPromise, ignore

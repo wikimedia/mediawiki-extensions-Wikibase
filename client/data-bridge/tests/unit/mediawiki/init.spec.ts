@@ -93,6 +93,54 @@ describe( 'init', () => {
 		} );
 	} );
 
+	it( 'doesn\'t handle clicks while notorious keys are pressed', async () => {
+		const app = {},
+			require = jest.fn().mockReturnValue( app ),
+			using = jest.fn( () => Promise.resolve( require ) ),
+			entityId = 'Q5',
+			propertyId = 'P4711',
+			editFlow = EditFlow.OVERWRITE,
+			dataBridgeConfig = {
+				hrefRegExp: '',
+				editTags: [],
+				usePublish: false,
+			};
+		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
+
+		const selectedElement = {
+			link: {
+				addEventListener: jest.fn(),
+				setAttribute: jest.fn(),
+			},
+			entityId,
+			propertyId,
+			editFlow,
+		};
+		const event = {
+			preventDefault: jest.fn(),
+			stopPropagation: jest.fn(),
+		};
+		( BridgeDomElementsSelector as jest.Mock ).mockImplementation( () => ( {
+			selectElementsToOverload: () => [ selectedElement ],
+		} ) );
+
+		await init();
+		const notoriousKeys = [ 'altKey', 'ctrlKey', 'shiftKey', 'metaKey' ];
+		const assertionPromises = await notoriousKeys.map(
+			async ( key ) => {
+				await selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( {
+					...event,
+					[ key ]: true,
+				} );
+				expect( event.preventDefault ).not.toHaveBeenCalled();
+				expect( event.stopPropagation ).not.toHaveBeenCalled();
+				expect( mockDispatcher.dispatch ).not.toHaveBeenCalled();
+				return;
+			},
+		);
+		return Promise.all( assertionPromises );
+	} );
+
 	it( 'does not dispatch app twice if clicked a second time before app loads', async () => {
 		const app = {},
 			require = jest.fn().mockReturnValue( app );
