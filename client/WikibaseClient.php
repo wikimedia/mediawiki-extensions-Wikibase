@@ -31,7 +31,21 @@
  * @license GPL-2.0-or-later
  */
 
-// @codingStandardsIgnoreFile
+use MediaWiki\MediaWikiServices;
+use Wikibase\Client\Api\ApiClientInfo;
+use Wikibase\Client\Api\ApiListEntityUsage;
+use Wikibase\Client\Api\ApiPropsEntityUsage;
+use Wikibase\Client\Api\Description;
+use Wikibase\Client\Api\PageTerms;
+use Wikibase\Client\ChangeNotificationJob;
+use Wikibase\Client\Changes\InjectRCRecordsJob;
+use Wikibase\Client\Specials\SpecialEntityUsage;
+use Wikibase\Client\Specials\SpecialPagesWithBadges;
+use Wikibase\Client\Specials\SpecialUnconnectedPages;
+use Wikibase\Client\Store\AddUsagesForPageJob;
+use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
@@ -51,7 +65,7 @@ if ( version_compare( $GLOBALS['wgVersion'], '1.31c', '<' ) ) {
 require_once __DIR__ . '/../lib/WikibaseLib.php';
 
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
-require_once __DIR__  . '/autoload.php';
+require_once __DIR__ . '/autoload.php';
 
 call_user_func( function() {
 	global $wgAPIListModules,
@@ -72,8 +86,8 @@ call_user_func( function() {
 		$wgWBClientSettings;
 
 	// Registry and definition of data types
-	$wgWBClientDataTypes = require ( __DIR__ . '/../lib/WikibaseLib.datatypes.php' );
-	$clientDatatypes = require ( __DIR__ . '/WikibaseClient.datatypes.php' );
+	$wgWBClientDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
+	$clientDatatypes = require __DIR__ . '/WikibaseClient.datatypes.php';
 
 	// merge WikibaseClient.datatypes.php into $wgWBClientDataTypes
 	foreach ( $clientDatatypes as $type => $clientDef ) {
@@ -160,19 +174,20 @@ call_user_func( function() {
 	// magic words
 	$wgHooks['MagicWordwgVariableIDs'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onMagicWordwgVariableIDs';
 	$wgHooks['ParserGetVariableValueSwitch'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onParserGetVariableValueSwitch';
-	$wgHooks['ResourceLoaderJqueryMsgModuleMagicWords'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onResourceLoaderJqueryMsgModuleMagicWords';
+	$wgHooks['ResourceLoaderJqueryMsgModuleMagicWords'][]
+		= '\Wikibase\Client\Hooks\MagicWordHookHandlers::onResourceLoaderJqueryMsgModuleMagicWords';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
 	// job classes
-	$wgJobClasses['wikibase-addUsagesForPage'] = Wikibase\Client\Store\AddUsagesForPageJob::class;
-	$wgJobClasses['ChangeNotification'] = Wikibase\Client\ChangeNotificationJob::class;
+	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
+	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
 	$wgJobClasses['wikibase-InjectRCRecords'] = function ( Title $unused, array $params ) {
-		$mwServices = MediaWiki\MediaWikiServices::getInstance();
-		$wbServices = Wikibase\Client\WikibaseClient::getDefaultInstance();
+		$mwServices = MediaWikiServices::getInstance();
+		$wbServices = WikibaseClient::getDefaultInstance();
 
-		$job = new Wikibase\Client\Changes\InjectRCRecordsJob(
+		$job = new InjectRCRecordsJob(
 			$mwServices->getDBLoadBalancerFactory(),
 			$wbServices->getStore()->getEntityChangeLookup(),
 			$wbServices->getEntityChangeFactory(),
@@ -189,19 +204,19 @@ call_user_func( function() {
 	};
 
 	// api modules
-	$wgAPIMetaModules['wikibase'] = array(
-		'class' => Wikibase\Client\Api\ApiClientInfo::class,
+	$wgAPIMetaModules['wikibase'] = [
+		'class' => ApiClientInfo::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			return new Wikibase\Client\Api\ApiClientInfo(
-				Wikibase\Client\WikibaseClient::getDefaultInstance()->getSettings(),
+			return new ApiClientInfo(
+				WikibaseClient::getDefaultInstance()->getSettings(),
 				$apiQuery,
 				$moduleName
 			);
 		}
-	);
+	];
 
-	$wgAPIPropModules['pageterms'] = array(
-		'class' => Wikibase\Client\Api\PageTerms::class,
+	$wgAPIPropModules['pageterms'] = [
+		'class' => PageTerms::class,
 		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
 			// FIXME: HACK: make pageterms work directly on entity pages on the repo.
 			// We should instead use an EntityIdLookup that combines the repo and the client
@@ -210,31 +225,31 @@ call_user_func( function() {
 			// self-documentation of the API module in the "apihelp-query+pageterms-description"
 			// message and the PageTerms::getExamplesMessages() method.
 			if ( defined( 'WB_VERSION' ) ) {
-				$repo = Wikibase\Repo\WikibaseRepo::getDefaultInstance();
+				$repo = WikibaseRepo::getDefaultInstance();
 				$termIndex = $repo->getStore()->getTermIndex();
 				$entityIdLookup = $repo->getEntityContentFactory();
 			} else {
-				$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
+				$client = WikibaseClient::getDefaultInstance();
 				$termIndex = $client->getItemTermIndex();
 				$entityIdLookup = $client->getStore()->getEntityIdLookup();
 			}
 
-			return new Wikibase\Client\Api\PageTerms(
+			return new PageTerms(
 				$termIndex,
 				$entityIdLookup,
 				$apiQuery,
 				$moduleName
 			);
 		}
-	);
+	];
 
 	$wgAPIPropModules['description'] = [
-		'class' => Wikibase\Client\Api\Description::class,
+		'class' => Description::class,
 		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			$client = Wikibase\Client\WikibaseClient::getDefaultInstance();
+			$client = WikibaseClient::getDefaultInstance();
 			$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
 			$descriptionLookup = $client->getDescriptionLookup();
-			return new Wikibase\Client\Api\Description(
+			return new Description(
 				$apiQuery,
 				$moduleName,
 				$allowLocalShortDesc,
@@ -244,10 +259,10 @@ call_user_func( function() {
 	];
 
 	$wgAPIPropModules['wbentityusage'] = [
-		'class' => Wikibase\Client\Api\ApiPropsEntityUsage::class,
+		'class' => ApiPropsEntityUsage::class,
 		'factory' => function ( ApiQuery $query, $moduleName ) {
-			$repoLinker = Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker();
-			return new Wikibase\Client\Api\ApiPropsEntityUsage(
+			$repoLinker = WikibaseClient::getDefaultInstance()->newRepoLinker();
+			return new ApiPropsEntityUsage(
 				$query,
 				$moduleName,
 				$repoLinker
@@ -255,23 +270,23 @@ call_user_func( function() {
 		}
 	];
 	$wgAPIListModules['wblistentityusage'] = [
-		'class' => Wikibase\Client\Api\ApiListEntityUsage::class,
+		'class' => ApiListEntityUsage::class,
 		'factory' => function ( ApiQuery $apiQuery, $moduleName ) {
-			return new Wikibase\Client\Api\ApiListEntityUsage(
+			return new ApiListEntityUsage(
 				$apiQuery,
 				$moduleName,
-				Wikibase\Client\WikibaseClient::getDefaultInstance()->newRepoLinker()
+				WikibaseClient::getDefaultInstance()->newRepoLinker()
 			);
 		}
 	];
 
 	// Special page registration
-	$wgSpecialPages['UnconnectedPages'] = Wikibase\Client\Specials\SpecialUnconnectedPages::class;
+	$wgSpecialPages['UnconnectedPages'] = SpecialUnconnectedPages::class;
 	$wgSpecialPages['PagesWithBadges'] = function() {
-		$wikibaseClient = Wikibase\Client\WikibaseClient::getDefaultInstance();
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
-		return new Wikibase\Client\Specials\SpecialPagesWithBadges(
-			new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory(
+		return new SpecialPagesWithBadges(
+			new LanguageFallbackLabelDescriptionLookupFactory(
 				$wikibaseClient->getLanguageFallbackChainFactory(),
 				$wikibaseClient->getTermLookup(),
 				$wikibaseClient->getTermBuffer()
@@ -281,8 +296,8 @@ call_user_func( function() {
 		);
 	};
 	$wgSpecialPages['EntityUsage'] = function () {
-		return new Wikibase\Client\Specials\SpecialEntityUsage(
-			Wikibase\Client\WikibaseClient::getDefaultInstance()->getEntityIdParser()
+		return new SpecialEntityUsage(
+			WikibaseClient::getDefaultInstance()->getEntityIdParser()
 		);
 	};
 
@@ -299,10 +314,10 @@ call_user_func( function() {
 		require __DIR__ . '/config/WikibaseClient.default.php'
 	);
 
-	$wgRecentChangesFlags['wikibase-edit'] = array(
+	$wgRecentChangesFlags['wikibase-edit'] = [
 		'letter' => 'wikibase-rc-wikibase-edit-letter',
 		'title' => 'wikibase-rc-wikibase-edit-title',
 		'legend' => 'wikibase-rc-wikibase-edit-legend',
 		'grouping' => 'all',
-	);
+	];
 } );

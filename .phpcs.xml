@@ -75,7 +75,6 @@
 		<exclude-pattern>PerRepositoryServiceWiring\.php</exclude-pattern>
 		<exclude-pattern>SearchEntitiesIntegrationTest\.php</exclude-pattern>
 		<exclude-pattern>TermLookupSearcher\.php</exclude-pattern>
-		<exclude-pattern>Wikibase\.php</exclude-pattern>
 		<exclude-pattern>WikibasePrefixSearcher\.php</exclude-pattern>
 		<exclude-pattern>WikibaseRepo\.entitytypes\.php</exclude-pattern>
 		<exclude-pattern>WikibaseStringValueNormalizer\.php</exclude-pattern>
