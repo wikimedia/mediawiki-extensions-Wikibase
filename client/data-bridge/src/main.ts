@@ -12,6 +12,7 @@ import { EventEmitter } from 'events';
 import repeater from '@/events/repeater';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import DataType from '@/datamodel/DataType';
+import createServices from '@/services/createServices';
 
 Vue.config.productionTip = false;
 
@@ -43,3 +44,5 @@ export function launch(
 
 	return emitter;
 }
+
+export { createServices };

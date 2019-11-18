@@ -17,6 +17,7 @@ import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRe
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
+import createServices from '@/services/createServices';
 import { budge } from '../../util/timer';
 
 const manager = jest.fn();
@@ -45,6 +46,7 @@ describe( 'init', () => {
 				launch: jest.fn( () => {
 					return emitter;
 				} ),
+				createServices,
 			},
 			require = jest.fn( () => app ),
 			using = jest.fn( () => {

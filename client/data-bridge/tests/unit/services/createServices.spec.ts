@@ -1,4 +1,4 @@
-import createServices from '@/mediawiki/createServices';
+import createServices from '@/services/createServices';
 import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';

@@ -2,7 +2,6 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
 import AppBridge from '@/definitions/AppBridge';
 import prepareContainer from '@/mediawiki/prepareContainer';
-import createServices from '@/mediawiki/createServices';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 import subscribeToEvents from '@/mediawiki/subscribeToEvents';
 
@@ -34,7 +33,7 @@ export default class Dispatcher {
 					usePublish: this.dataBridgeConfig.usePublish,
 				},
 			},
-			createServices(
+			this.app.createServices(
 				this.mwWindow,
 				this.dataBridgeConfig.editTags,
 			), // should be made caching when used repeatedly
