@@ -34,7 +34,7 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 		ILBFactory $LBFactory,
 		LoggerInterface $logger,
 		$repoDB,
-		$repoSiteId
+		string $repoSiteId
 	) {
 		$this->lockManager = $lockManager;
 		parent::__construct( $repoDB, $repoSiteId, $LBFactory, $logger );
@@ -47,7 +47,7 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
-	protected function engageClientLock( $lock ) {
+	protected function engageClientLock( string $lock ): bool {
 		return $this->lockManager->lock( [ $lock ] )->isOK();
 	}
 
@@ -59,7 +59,7 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	protected function releaseClientLock( IDatabase $db, $lock ) {
+	protected function releaseClientLock( IDatabase $db, string $lock ): bool {
 		return $this->lockManager->unlock( [ $lock ] )->isOK();
 	}
 
@@ -71,7 +71,7 @@ class LockManagerSqlChangeDispatchCoordinator extends SqlChangeDispatchCoordinat
 	 *
 	 * @return bool false since it's not needed in LockManager-based coordinators
 	 */
-	protected function isClientLockUsed( IDatabase $db, $lock ) {
+	protected function isClientLockUsed( IDatabase $db, string $lock ): bool {
 		// Not needed
 		return false;
 	}

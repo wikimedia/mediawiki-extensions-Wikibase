@@ -38,7 +38,7 @@ interface ChangeDispatchCoordinator {
 	 *
 	 * @see releaseWiki()
 	 */
-	public function selectClient();
+	public function selectClient(): ?array;
 
 	/**
 	 * Initializes the dispatch table by injecting dummy records for all target wikis
@@ -47,7 +47,7 @@ interface ChangeDispatchCoordinator {
 	 * @param string[] $clientWikiDBs Associative array mapping client wiki IDs to
 	 * client wiki (logical) database names.
 	 */
-	public function initState( array $clientWikiDBs );
+	public function initState( array $clientWikiDBs ): void;
 
 	/**
 	 * Attempt to lock the given target wiki. If it can't be locked because
@@ -61,7 +61,7 @@ interface ChangeDispatchCoordinator {
 	 *
 	 * @see selectClient()
 	 */
-	public function lockClient( $siteID );
+	public function lockClient( string $siteID );
 
 	/**
 	 * Updates the given client wiki's entry in the dispatch table and
@@ -77,6 +77,6 @@ interface ChangeDispatchCoordinator {
 	 * @throws Exception
 	 * @see selectWiki()
 	 */
-	public function releaseClient( array $state );
+	public function releaseClient( array $state ): void;
 
 }
