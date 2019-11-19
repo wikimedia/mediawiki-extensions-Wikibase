@@ -17,4 +17,19 @@ describe( 'MwMessagesRepository', () => {
 		expect( mwMessages ).toHaveBeenLastCalledWith( key );
 		expect( translation ).toHaveBeenCalledTimes( 1 );
 	} );
+
+	it( 'get mw.message, the messages keys and parameters to build a message collection', () => {
+		const mwMessages = jest.fn( ( _key: string, ...parameter: string[] ): MwMessage => {
+			return {
+				text: jest.fn().mockReturnValueOnce( parameter[ 0 ] ),
+			};
+		} );
+
+		const key = 'foo';
+		const parameter = 'bar';
+		const repo = new MwMessagesRepository( mwMessages );
+
+		expect( repo.get( key, parameter ) ).toBe( parameter );
+	} );
+
 } );

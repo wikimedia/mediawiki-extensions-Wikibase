@@ -1,3 +1,3 @@
 export default interface MessagesRepository {
-	get( messageKey: string ): string;
+	get( messageKey: string, ...params: string[] ): string;
 }
