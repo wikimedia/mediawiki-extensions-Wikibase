@@ -86,8 +86,6 @@
 	"wikibase-itemmerge-failed-modify": "అంశాలను విలీనం చెయ్యలేకపోయాం. ఘర్షణలేమైనా ఉంటే పరిష్కరించండి.",
 	"wikibase-itemmerge-cant-load-entity-content": "అంశాన్ని లోడు చెయ్యలేకపోయాం.",
 	"wikibase-dispatchstats-average": "సగటు",
-	"wikibase-entitieswithoutlabel-label-language": "భాష సంకేతం:",
-	"wikibase-entitieswithoutlabel-label-type": "రకం:",
 	"special-itemswithoutsitelinks": "సైటులింకులు లేని అంశాలు",
 	"wikibase-special-mergeitems-error-prefix": "ఆ అంశాలను విలీనం చెయ్యలేకపోయాం. కింది లోపం ఎదురైంది:",
 	"wikibase-listdatatypes-wikibase-item-head": "అంశం",

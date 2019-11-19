@@ -124,5 +124,6 @@
 	"unresolved-property-category-desc": "Ця сторінка містить сторінки, які посилаються на властивості {{WBREPONAME}}, які не вдається знайти ані за ідентифікатором, ані за назвою.",
 	"connected-redirect-category": "{{WBREPONAME}}:Перенаправлення Вікіпедії",
 	"connected-redirect-category-desc": "Ця категорія містить сторінки-перенаправлення, які поєднані із елементом {{WBREPONAME}}",
-	"wikibase-client-data-bridge-dialog-title": "Редагування властивості"
+	"wikibase-client-data-bridge-dialog-title": "Редагування властивості",
+	"wikibase-client-data-bridge-references-heading": "Примітки"
 }

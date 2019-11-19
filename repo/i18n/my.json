@@ -76,8 +76,5 @@
 	"wikibase-dispatchstats-pos": "အနေအထား",
 	"wikibase-dispatchstats-lag-num": "ဆိုင်းငံ့နေသည်",
 	"wikibase-listproperties-submit": "ရှာပါ",
-	"wikibase-entitieswithoutlabel-label-language": "ဘာသာစကားကုဒ်:",
-	"wikibase-entitieswithoutlabel-label-type": "အမျိုးအစား:",
-	"wikibase-entitieswithoutlabel-submit": "ရှာပါ",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
 }

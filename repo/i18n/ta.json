@@ -53,8 +53,6 @@
 	"special-setsitelink": "தளஇணைப்பின் உறுப்படியை அமைக்கவும்",
 	"wikibase-modifyentity-id": "அடையாளவிலக்கம்",
 	"wikibase-modifyterm-language": "மொழிக் குறியீடு:",
-	"wikibase-entitieswithoutlabel-label-language": "மொழிக் குறியீடு:",
-	"wikibase-entitieswithoutlabel-submit": "கண்டுபிடி",
 	"wikibase-search-bad-profile-name": "தவறான தேடல் சுயவிவரப் பெயர்: $1",
 	"wikibase-search-config-badclass": "தவறான கேள்வி/வினவல் பில்டர் வர்க்கம்/வகை: $1"
 }

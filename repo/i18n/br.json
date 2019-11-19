@@ -60,7 +60,5 @@
 	"wikibase-setdescription-label": "Deskrivadur :",
 	"wikibase-setaliases-label": "Aliasoù :",
 	"wikibase-modifyterm-language": "Kod yezh :",
-	"wikibase-history-title-with-label": "Istor stummoù disheñvel \"$2\" ($1)",
-	"wikibase-entitieswithoutlabel-label-language": "Kod yezh :",
-	"wikibase-entitieswithoutlabel-label-type": "Seurt :"
+	"wikibase-history-title-with-label": "Istor stummoù disheñvel \"$2\" ($1)"
 }

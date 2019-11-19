@@ -26,6 +26,5 @@
 	"wikibase-gotolinkedpage-submit": "Siiry",
 	"wikibase-newentity-description": "Kuvvaus:",
 	"wikibase-setdescription-submit": "Aseta kuvvaus",
-	"wikibase-setlabeldescriptionaliases-description-label": "Kuvvaus:",
-	"wikibase-entitieswithoutlabel-label-language": "Kielikooti:"
+	"wikibase-setlabeldescriptionaliases-description-label": "Kuvvaus:"
 }

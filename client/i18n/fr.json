@@ -133,5 +133,6 @@
 	"unresolved-property-category-desc": "Cette catégorie répertorie les pages qui utilisent les propriétés {{WBREPONAME}} que l'on ne peut trouver ni par l'identifiant de propriété (ID), ni par l'étiquette.",
 	"connected-redirect-category": "Redirections connectées à un élément {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Cette catégorie liste les pages de redirection qui sont connectées à un élément {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Modifier la propriété"
+	"wikibase-client-data-bridge-dialog-title": "Modifier la propriété",
+	"wikibase-client-data-bridge-references-heading": "Références"
 }

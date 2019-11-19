@@ -42,8 +42,6 @@
 	"wikibase-dispatchstats-large-lag": "(ylen suuri)",
 	"wikibase-dispatchstats-freshest": "Tuorehin",
 	"wikibase-dispatchstats-stalest": "Vahnin",
-	"wikibase-entitieswithoutlabel-label-language": "Kielikoudu:",
-	"wikibase-entitieswithoutlabel-submit": "Eči",
 	"wikibase-listdatatypes-wikibase-item-head": "Elementu",
 	"wikibase-listdatatypes-quantity-head": "Lugu",
 	"wikibase-listdatatypes-monolingualtext-head": "Yksikieline tekstu",

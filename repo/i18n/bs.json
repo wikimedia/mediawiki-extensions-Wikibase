@@ -93,7 +93,5 @@
 	"wikibase-newentity-label": "Oznaka:",
 	"wikibase-setlabel-label": "Oznaka:",
 	"wikibase-modifyentity-id": "ID:",
-	"wikibase-modifyterm-language": "Jezički kôd:",
-	"wikibase-entitieswithoutlabel-submit": "Pronađi",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nije ispravni jezički kod."
+	"wikibase-modifyterm-language": "Jezički kôd:"
 }
