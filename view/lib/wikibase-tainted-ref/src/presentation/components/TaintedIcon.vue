@@ -24,6 +24,7 @@ export default class TaintedIcon extends Vue {
 	public onClick( event: MouseEvent ) {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_SHOW, this.$parent.$data.id );
+		this.$track( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
 	}
 
 	public get popperIsOpened(): boolean {

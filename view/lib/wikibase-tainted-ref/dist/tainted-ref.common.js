@@ -4417,12 +4417,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e705601&
-var TaintedIconvue_type_template_id_7e705601_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
-var TaintedIconvue_type_template_id_7e705601_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e4b37ac&
+var TaintedIconvue_type_template_id_7e4b37ac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
+var TaintedIconvue_type_template_id_7e4b37ac_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e705601&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e4b37ac&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var STORE_INIT = 'initStore';
@@ -4542,6 +4542,7 @@ function (_Vue) {
     value: function onClick(event) {
       event.preventDefault();
       this.$store.dispatch(POPPER_SHOW, this.$parent.$data.id);
+      this.$track('counter.wikibase.view.tainted-ref.taintedIconClick', 1);
     }
   }, {
     key: "popperIsOpened",
@@ -4668,8 +4669,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_7e705601_render,
-  TaintedIconvue_type_template_id_7e705601_staticRenderFns,
+  TaintedIconvue_type_template_id_7e4b37ac_render,
+  TaintedIconvue_type_template_id_7e4b37ac_staticRenderFns,
   false,
   null,
   null,

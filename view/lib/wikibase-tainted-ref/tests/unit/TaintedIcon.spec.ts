@@ -4,9 +4,11 @@ import Application from '@/store/Application';
 import { createStore } from '@/store';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { POPPER_SHOW } from '@/store/actionTypes';
+import Track from '@/vue-plugins/Track';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
+localVue.use( Track, { trackingFunction: () => {} } );
 
 describe( 'TaintedIcon.vue', () => {
 	it( 'should render the icon', () => {
@@ -61,5 +63,19 @@ describe( 'TaintedIcon.vue', () => {
 
 		wrapper.trigger( 'click' );
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
+	} );
+	it( 'clicking the tainted icon triggers a tracking event', () => {
+		const localVue = createLocalVue();
+		localVue.use( Vuex );
+		const trackingFunction = jest.fn();
+		localVue.use( Track, { trackingFunction } );
+		const store: Store<Application> = createStore();
+		const wrapper = shallowMount( TaintedIcon, {
+			store,
+			localVue,
+		} );
+		wrapper.trigger( 'click' );
+		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
+
 	} );
 } );
