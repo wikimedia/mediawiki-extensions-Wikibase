@@ -3,6 +3,7 @@ import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import createServices from '@/services/createServices';
 import {
 	mockForeignApiConstructor,
 	mockMwConfig,
@@ -52,7 +53,7 @@ function prepareTestEnv( options: {
 	const propertyId = options.propertyId || DEFAULT_PROPERTY;
 	const editFlow = options.editFlow || EditFlow.OVERWRITE;
 
-	const app = { launch };
+	const app = { launch, createServices };
 	const require = jest.fn( () => app );
 	const using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
 

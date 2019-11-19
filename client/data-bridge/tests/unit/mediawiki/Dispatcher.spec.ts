@@ -16,12 +16,6 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 	default: ( oo: any, $: any, id: any ) => mockPrepareContainer( oo, $, id ),
 } ) );
 
-const mockCreateServices = jest.fn();
-jest.mock( '@/mediawiki/createServices', () => ( {
-	__esModule: true,
-	default: ( mwWindow: any ) => mockCreateServices( mwWindow ),
-} ) );
-
 const mockSubscribeToEvents = jest.fn();
 jest.mock( '@/mediawiki/subscribeToEvents', () => ( {
 	__esModule: true,
@@ -50,6 +44,7 @@ describe( 'Dispatcher', () => {
 				} as MwWindow,
 				{
 					launch: jest.fn(),
+					createServices: jest.fn(),
 				},
 				{ usePublish: false } as DataBridgeConfig,
 			);
@@ -64,24 +59,24 @@ describe( 'Dispatcher', () => {
 
 		it( 'triggers service creation and launches app', () => {
 			const usePublish = true;
+			const editTags = [ 'my tag' ];
 			const mwWindow = new ( jest.fn() )();
 			const emitter = jest.fn();
+			const mockServices = {};
 			const app = {
 				launch: jest.fn( () => {
 					return emitter;
 				} ),
+				createServices: jest.fn( () => mockServices ),
 			};
 			const entityId = 'Q4711';
 			const propertyId = 'P815';
 			const editFlow = EditFlow.OVERWRITE;
-			const mockServices = {};
-
-			mockCreateServices.mockImplementation( () => mockServices );
 
 			const dispatcher = new Dispatcher(
 				mwWindow as MwWindow,
 				app as any,
-				{ usePublish } as DataBridgeConfig,
+				{ usePublish, editTags } as DataBridgeConfig,
 			);
 
 			dispatcher.dispatch( {
@@ -91,7 +86,7 @@ describe( 'Dispatcher', () => {
 				editFlow,
 			} );
 
-			expect( mockCreateServices ).toHaveBeenCalledWith( mwWindow );
+			expect( app.createServices ).toHaveBeenCalledWith( mwWindow, editTags );
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,

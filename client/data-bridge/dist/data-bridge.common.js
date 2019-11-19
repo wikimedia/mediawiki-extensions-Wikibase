@@ -532,6 +532,112 @@ module.exports = function (it, key) {
 
 /***/ }),
 
+/***/ "0828":
+/***/ (function(module, exports) {
+
+/**
+ * Constants enumerating the HTTP status codes.
+ *
+ * All status codes defined in RFC1945 (HTTP/1.0, RFC2616 (HTTP/1.1),
+ * RFC2518 (WebDAV), RFC6585 (Additional HTTP Status Codes), and
+ * RFC7538 (Permanent Redirect) are supported.
+ *
+ * Based on the org.apache.commons.httpclient.HttpStatus Java API.
+ *
+ * Ported by Bryce Neal.
+ */
+
+var statusCodes = {};
+
+statusCodes[exports.ACCEPTED = 202] = "Accepted";
+statusCodes[exports.BAD_GATEWAY = 502] = "Bad Gateway";
+statusCodes[exports.BAD_REQUEST = 400] = "Bad Request";
+statusCodes[exports.CONFLICT = 409] = "Conflict";
+statusCodes[exports.CONTINUE = 100] = "Continue";
+statusCodes[exports.CREATED = 201] = "Created";
+statusCodes[exports.EXPECTATION_FAILED = 417] = "Expectation Failed";
+statusCodes[exports.FAILED_DEPENDENCY  = 424] = "Failed Dependency";
+statusCodes[exports.FORBIDDEN = 403] = "Forbidden";
+statusCodes[exports.GATEWAY_TIMEOUT = 504] = "Gateway Timeout";
+statusCodes[exports.GONE = 410] = "Gone";
+statusCodes[exports.HTTP_VERSION_NOT_SUPPORTED = 505] = "HTTP Version Not Supported";
+statusCodes[exports.IM_A_TEAPOT = 418] = "I'm a teapot";
+statusCodes[exports.INSUFFICIENT_SPACE_ON_RESOURCE = 419] = "Insufficient Space on Resource";
+statusCodes[exports.INSUFFICIENT_STORAGE = 507] = "Insufficient Storage";
+statusCodes[exports.INTERNAL_SERVER_ERROR = 500] = "Server Error";
+statusCodes[exports.LENGTH_REQUIRED = 411] = "Length Required";
+statusCodes[exports.LOCKED = 423] = "Locked";
+statusCodes[exports.METHOD_FAILURE = 420] = "Method Failure";
+statusCodes[exports.METHOD_NOT_ALLOWED = 405] = "Method Not Allowed";
+statusCodes[exports.MOVED_PERMANENTLY = 301] = "Moved Permanently";
+statusCodes[exports.MOVED_TEMPORARILY = 302] = "Moved Temporarily";
+statusCodes[exports.MULTI_STATUS = 207] = "Multi-Status";
+statusCodes[exports.MULTIPLE_CHOICES = 300] = "Multiple Choices";
+statusCodes[exports.NETWORK_AUTHENTICATION_REQUIRED = 511] = "Network Authentication Required";
+statusCodes[exports.NO_CONTENT = 204] = "No Content";
+statusCodes[exports.NON_AUTHORITATIVE_INFORMATION = 203] = "Non Authoritative Information";
+statusCodes[exports.NOT_ACCEPTABLE = 406] = "Not Acceptable";
+statusCodes[exports.NOT_FOUND = 404] = "Not Found";
+statusCodes[exports.NOT_IMPLEMENTED = 501] = "Not Implemented";
+statusCodes[exports.NOT_MODIFIED = 304] = "Not Modified";
+statusCodes[exports.OK = 200] = "OK";
+statusCodes[exports.PARTIAL_CONTENT = 206] = "Partial Content";
+statusCodes[exports.PAYMENT_REQUIRED = 402] = "Payment Required";
+statusCodes[exports.PERMANENT_REDIRECT = 308] = "Permanent Redirect";
+statusCodes[exports.PRECONDITION_FAILED = 412] = "Precondition Failed";
+statusCodes[exports.PRECONDITION_REQUIRED = 428] = "Precondition Required";
+statusCodes[exports.PROCESSING = 102] = "Processing";
+statusCodes[exports.PROXY_AUTHENTICATION_REQUIRED = 407] = "Proxy Authentication Required";
+statusCodes[exports.REQUEST_HEADER_FIELDS_TOO_LARGE = 431] = "Request Header Fields Too Large";
+statusCodes[exports.REQUEST_TIMEOUT = 408] = "Request Timeout";
+statusCodes[exports.REQUEST_TOO_LONG = 413] = "Request Entity Too Large";
+statusCodes[exports.REQUEST_URI_TOO_LONG = 414] = "Request-URI Too Long";
+statusCodes[exports.REQUESTED_RANGE_NOT_SATISFIABLE = 416] = "Requested Range Not Satisfiable";
+statusCodes[exports.RESET_CONTENT = 205] = "Reset Content";
+statusCodes[exports.SEE_OTHER = 303] = "See Other";
+statusCodes[exports.SERVICE_UNAVAILABLE = 503] = "Service Unavailable";
+statusCodes[exports.SWITCHING_PROTOCOLS = 101] = "Switching Protocols";
+statusCodes[exports.TEMPORARY_REDIRECT = 307] = "Temporary Redirect";
+statusCodes[exports.TOO_MANY_REQUESTS = 429] = "Too Many Requests";
+statusCodes[exports.UNAUTHORIZED = 401] = "Unauthorized";
+statusCodes[exports.UNPROCESSABLE_ENTITY = 422] = "Unprocessable Entity";
+statusCodes[exports.UNSUPPORTED_MEDIA_TYPE = 415] = "Unsupported Media Type";
+statusCodes[exports.USE_PROXY = 305] = "Use Proxy";
+
+exports.getStatusText = function(statusCode) {
+  if (statusCodes.hasOwnProperty(statusCode)) {
+    return statusCodes[statusCode];
+  } else {
+    throw new Error("Status code does not exist: " + statusCode);
+  }
+};
+
+
+/***/ }),
+
+/***/ "0b64":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("f772");
+var isArray = __webpack_require__("9003");
+var SPECIES = __webpack_require__("5168")('species');
+
+module.exports = function (original) {
+  var C;
+  if (isArray(original)) {
+    C = original.constructor;
+    // cross-realm fallback
+    if (typeof C == 'function' && (C === Array || isArray(C.prototype))) C = undefined;
+    if (isObject(C)) {
+      C = C[SPECIES];
+      if (C === null) C = undefined;
+    }
+  } return C === undefined ? Array : C;
+};
+
+
+/***/ }),
+
 /***/ "0bfb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -629,6 +735,18 @@ module.exports = function (index, length) {
 var cof = __webpack_require__("2d95");
 module.exports = Array.isArray || function isArray(arg) {
   return cof(arg) == 'Array';
+};
+
+
+/***/ }),
+
+/***/ "1173":
+/***/ (function(module, exports) {
+
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
 };
 
 
@@ -933,6 +1051,22 @@ module.exports = function (iterator, fn, value, entries) {
 
 /***/ }),
 
+/***/ "20fd":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $defineProperty = __webpack_require__("d9f6");
+var createDesc = __webpack_require__("aebd");
+
+module.exports = function (object, index, value) {
+  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
+  else object[index] = value;
+};
+
+
+/***/ }),
+
 /***/ "214f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1124,6 +1258,300 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "24c5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var LIBRARY = __webpack_require__("b8e3");
+var global = __webpack_require__("e53d");
+var ctx = __webpack_require__("d864");
+var classof = __webpack_require__("40c3");
+var $export = __webpack_require__("63b6");
+var isObject = __webpack_require__("f772");
+var aFunction = __webpack_require__("79aa");
+var anInstance = __webpack_require__("1173");
+var forOf = __webpack_require__("a22a");
+var speciesConstructor = __webpack_require__("f201");
+var task = __webpack_require__("4178").set;
+var microtask = __webpack_require__("aba2")();
+var newPromiseCapabilityModule = __webpack_require__("656e");
+var perform = __webpack_require__("4439");
+var userAgent = __webpack_require__("bc13");
+var promiseResolve = __webpack_require__("cd78");
+var PROMISE = 'Promise';
+var TypeError = global.TypeError;
+var process = global.process;
+var versions = process && process.versions;
+var v8 = versions && versions.v8 || '';
+var $Promise = global[PROMISE];
+var isNode = classof(process) == 'process';
+var empty = function () { /* empty */ };
+var Internal, newGenericPromiseCapability, OwnPromiseCapability, Wrapper;
+var newPromiseCapability = newGenericPromiseCapability = newPromiseCapabilityModule.f;
+
+var USE_NATIVE = !!function () {
+  try {
+    // correct subclassing with @@species support
+    var promise = $Promise.resolve(1);
+    var FakePromise = (promise.constructor = {})[__webpack_require__("5168")('species')] = function (exec) {
+      exec(empty, empty);
+    };
+    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+    return (isNode || typeof PromiseRejectionEvent == 'function')
+      && promise.then(empty) instanceof FakePromise
+      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+      // we can't detect it synchronously, so just check versions
+      && v8.indexOf('6.6') !== 0
+      && userAgent.indexOf('Chrome/66') === -1;
+  } catch (e) { /* empty */ }
+}();
+
+// helpers
+var isThenable = function (it) {
+  var then;
+  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
+};
+var notify = function (promise, isReject) {
+  if (promise._n) return;
+  promise._n = true;
+  var chain = promise._c;
+  microtask(function () {
+    var value = promise._v;
+    var ok = promise._s == 1;
+    var i = 0;
+    var run = function (reaction) {
+      var handler = ok ? reaction.ok : reaction.fail;
+      var resolve = reaction.resolve;
+      var reject = reaction.reject;
+      var domain = reaction.domain;
+      var result, then, exited;
+      try {
+        if (handler) {
+          if (!ok) {
+            if (promise._h == 2) onHandleUnhandled(promise);
+            promise._h = 1;
+          }
+          if (handler === true) result = value;
+          else {
+            if (domain) domain.enter();
+            result = handler(value); // may throw
+            if (domain) {
+              domain.exit();
+              exited = true;
+            }
+          }
+          if (result === reaction.promise) {
+            reject(TypeError('Promise-chain cycle'));
+          } else if (then = isThenable(result)) {
+            then.call(result, resolve, reject);
+          } else resolve(result);
+        } else reject(value);
+      } catch (e) {
+        if (domain && !exited) domain.exit();
+        reject(e);
+      }
+    };
+    while (chain.length > i) run(chain[i++]); // variable length - can't use forEach
+    promise._c = [];
+    promise._n = false;
+    if (isReject && !promise._h) onUnhandled(promise);
+  });
+};
+var onUnhandled = function (promise) {
+  task.call(global, function () {
+    var value = promise._v;
+    var unhandled = isUnhandled(promise);
+    var result, handler, console;
+    if (unhandled) {
+      result = perform(function () {
+        if (isNode) {
+          process.emit('unhandledRejection', value, promise);
+        } else if (handler = global.onunhandledrejection) {
+          handler({ promise: promise, reason: value });
+        } else if ((console = global.console) && console.error) {
+          console.error('Unhandled promise rejection', value);
+        }
+      });
+      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
+      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
+    } promise._a = undefined;
+    if (unhandled && result.e) throw result.v;
+  });
+};
+var isUnhandled = function (promise) {
+  return promise._h !== 1 && (promise._a || promise._c).length === 0;
+};
+var onHandleUnhandled = function (promise) {
+  task.call(global, function () {
+    var handler;
+    if (isNode) {
+      process.emit('rejectionHandled', promise);
+    } else if (handler = global.onrejectionhandled) {
+      handler({ promise: promise, reason: promise._v });
+    }
+  });
+};
+var $reject = function (value) {
+  var promise = this;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  promise._v = value;
+  promise._s = 2;
+  if (!promise._a) promise._a = promise._c.slice();
+  notify(promise, true);
+};
+var $resolve = function (value) {
+  var promise = this;
+  var then;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  try {
+    if (promise === value) throw TypeError("Promise can't be resolved itself");
+    if (then = isThenable(value)) {
+      microtask(function () {
+        var wrapper = { _w: promise, _d: false }; // wrap
+        try {
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } catch (e) {
+          $reject.call(wrapper, e);
+        }
+      });
+    } else {
+      promise._v = value;
+      promise._s = 1;
+      notify(promise, false);
+    }
+  } catch (e) {
+    $reject.call({ _w: promise, _d: false }, e); // wrap
+  }
+};
+
+// constructor polyfill
+if (!USE_NATIVE) {
+  // 25.4.3.1 Promise(executor)
+  $Promise = function Promise(executor) {
+    anInstance(this, $Promise, PROMISE, '_h');
+    aFunction(executor);
+    Internal.call(this);
+    try {
+      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
+    } catch (err) {
+      $reject.call(this, err);
+    }
+  };
+  // eslint-disable-next-line no-unused-vars
+  Internal = function Promise(executor) {
+    this._c = [];             // <- awaiting reactions
+    this._a = undefined;      // <- checked in isUnhandled reactions
+    this._s = 0;              // <- state
+    this._d = false;          // <- done
+    this._v = undefined;      // <- value
+    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
+    this._n = false;          // <- notify
+  };
+  Internal.prototype = __webpack_require__("5c95")($Promise.prototype, {
+    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+    then: function then(onFulfilled, onRejected) {
+      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
+      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
+      reaction.fail = typeof onRejected == 'function' && onRejected;
+      reaction.domain = isNode ? process.domain : undefined;
+      this._c.push(reaction);
+      if (this._a) this._a.push(reaction);
+      if (this._s) notify(this, false);
+      return reaction.promise;
+    },
+    // 25.4.5.1 Promise.prototype.catch(onRejected)
+    'catch': function (onRejected) {
+      return this.then(undefined, onRejected);
+    }
+  });
+  OwnPromiseCapability = function () {
+    var promise = new Internal();
+    this.promise = promise;
+    this.resolve = ctx($resolve, promise, 1);
+    this.reject = ctx($reject, promise, 1);
+  };
+  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
+    return C === $Promise || C === Wrapper
+      ? new OwnPromiseCapability(C)
+      : newGenericPromiseCapability(C);
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
+__webpack_require__("45f2")($Promise, PROMISE);
+__webpack_require__("4c95")(PROMISE);
+Wrapper = __webpack_require__("584a")[PROMISE];
+
+// statics
+$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
+  // 25.4.4.5 Promise.reject(r)
+  reject: function reject(r) {
+    var capability = newPromiseCapability(this);
+    var $$reject = capability.reject;
+    $$reject(r);
+    return capability.promise;
+  }
+});
+$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
+  // 25.4.4.6 Promise.resolve(x)
+  resolve: function resolve(x) {
+    return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
+  }
+});
+$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__("4ee1")(function (iter) {
+  $Promise.all(iter)['catch'](empty);
+})), PROMISE, {
+  // 25.4.4.1 Promise.all(iterable)
+  all: function all(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var resolve = capability.resolve;
+    var reject = capability.reject;
+    var result = perform(function () {
+      var values = [];
+      var index = 0;
+      var remaining = 1;
+      forOf(iterable, false, function (promise) {
+        var $index = index++;
+        var alreadyCalled = false;
+        values.push(undefined);
+        remaining++;
+        C.resolve(promise).then(function (value) {
+          if (alreadyCalled) return;
+          alreadyCalled = true;
+          values[$index] = value;
+          --remaining || resolve(values);
+        }, reject);
+      });
+      --remaining || resolve(values);
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  },
+  // 25.4.4.4 Promise.race(iterable)
+  race: function race(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var reject = capability.reject;
+    var result = perform(function () {
+      forOf(iterable, false, function (promise) {
+        C.resolve(promise).then(capability.resolve, reject);
+      });
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  }
+});
+
+
+/***/ }),
+
 /***/ "25b0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1291,6 +1719,13 @@ $exports.store = store;
 
 module.exports = false;
 
+
+/***/ }),
+
+/***/ "2d7d":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("5037");
 
 /***/ }),
 
@@ -2295,6 +2730,29 @@ var index_esm = {
 
 /***/ }),
 
+/***/ "3024":
+/***/ (function(module, exports) {
+
+// fast apply, http://jsperf.lnkit.com/fast-apply/5
+module.exports = function (fn, args, that) {
+  var un = that === undefined;
+  switch (args.length) {
+    case 0: return un ? fn()
+                      : fn.call(that);
+    case 1: return un ? fn(args[0])
+                      : fn.call(that, args[0]);
+    case 2: return un ? fn(args[0], args[1])
+                      : fn.call(that, args[0], args[1]);
+    case 3: return un ? fn(args[0], args[1], args[2])
+                      : fn.call(that, args[0], args[1], args[2]);
+    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+                      : fn.call(that, args[0], args[1], args[2], args[3]);
+  } return fn.apply(that, args);
+};
+
+
+/***/ }),
+
 /***/ "30f1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2490,6 +2948,21 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "3702":
+/***/ (function(module, exports, __webpack_require__) {
+
+// check on default Array iterator
+var Iterators = __webpack_require__("481b");
+var ITERATOR = __webpack_require__("5168")('iterator');
+var ArrayProto = Array.prototype;
+
+module.exports = function (it) {
+  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+};
+
+
+/***/ }),
+
 /***/ "37c8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2547,6 +3020,34 @@ module.exports = function (name) {
 
 /***/ }),
 
+/***/ "3c11":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// https://github.com/tc39/proposal-promise-finally
+
+var $export = __webpack_require__("63b6");
+var core = __webpack_require__("584a");
+var global = __webpack_require__("e53d");
+var speciesConstructor = __webpack_require__("f201");
+var promiseResolve = __webpack_require__("cd78");
+
+$export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
+  var C = speciesConstructor(this, core.Promise || global.Promise);
+  var isFunction = typeof onFinally == 'function';
+  return this.then(
+    isFunction ? function (x) {
+      return promiseResolve(C, onFinally()).then(function () { return x; });
+    } : onFinally,
+    isFunction ? function (e) {
+      return promiseResolve(C, onFinally()).then(function () { throw e; });
+    } : onFinally
+  );
+} });
+
+
+/***/ }),
+
 /***/ "40c3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2572,6 +3073,97 @@ module.exports = function (it) {
     : ARG ? cof(O)
     // ES3 arguments fallback
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+
+/***/ }),
+
+/***/ "4178":
+/***/ (function(module, exports, __webpack_require__) {
+
+var ctx = __webpack_require__("d864");
+var invoke = __webpack_require__("3024");
+var html = __webpack_require__("32fc");
+var cel = __webpack_require__("1ec9");
+var global = __webpack_require__("e53d");
+var process = global.process;
+var setTask = global.setImmediate;
+var clearTask = global.clearImmediate;
+var MessageChannel = global.MessageChannel;
+var Dispatch = global.Dispatch;
+var counter = 0;
+var queue = {};
+var ONREADYSTATECHANGE = 'onreadystatechange';
+var defer, channel, port;
+var run = function () {
+  var id = +this;
+  // eslint-disable-next-line no-prototype-builtins
+  if (queue.hasOwnProperty(id)) {
+    var fn = queue[id];
+    delete queue[id];
+    fn();
+  }
+};
+var listener = function (event) {
+  run.call(event.data);
+};
+// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+if (!setTask || !clearTask) {
+  setTask = function setImmediate(fn) {
+    var args = [];
+    var i = 1;
+    while (arguments.length > i) args.push(arguments[i++]);
+    queue[++counter] = function () {
+      // eslint-disable-next-line no-new-func
+      invoke(typeof fn == 'function' ? fn : Function(fn), args);
+    };
+    defer(counter);
+    return counter;
+  };
+  clearTask = function clearImmediate(id) {
+    delete queue[id];
+  };
+  // Node.js 0.8-
+  if (__webpack_require__("6b4c")(process) == 'process') {
+    defer = function (id) {
+      process.nextTick(ctx(run, id, 1));
+    };
+  // Sphere (JS game engine) Dispatch API
+  } else if (Dispatch && Dispatch.now) {
+    defer = function (id) {
+      Dispatch.now(ctx(run, id, 1));
+    };
+  // Browsers with MessageChannel, includes WebWorkers
+  } else if (MessageChannel) {
+    channel = new MessageChannel();
+    port = channel.port2;
+    channel.port1.onmessage = listener;
+    defer = ctx(port.postMessage, port, 1);
+  // Browsers with postMessage, skip WebWorkers
+  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
+  } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
+    defer = function (id) {
+      global.postMessage(id + '', '*');
+    };
+    global.addEventListener('message', listener, false);
+  // IE8-
+  } else if (ONREADYSTATECHANGE in cel('script')) {
+    defer = function (id) {
+      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function () {
+        html.removeChild(this);
+        run.call(id);
+      };
+    };
+  // Rest old browsers
+  } else {
+    defer = function (id) {
+      setTimeout(ctx(run, id, 1), 0);
+    };
+  }
+}
+module.exports = {
+  set: setTask,
+  clear: clearTask
 };
 
 
@@ -2606,6 +3198,54 @@ module.exports = function (Constructor, NAME, next) {
 /* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DataBridge_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DataBridge_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
  /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DataBridge_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "43fc":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// https://github.com/tc39/proposal-promise-try
+var $export = __webpack_require__("63b6");
+var newPromiseCapability = __webpack_require__("656e");
+var perform = __webpack_require__("4439");
+
+$export($export.S, 'Promise', { 'try': function (callbackfn) {
+  var promiseCapability = newPromiseCapability.f(this);
+  var result = perform(callbackfn);
+  (result.e ? promiseCapability.reject : promiseCapability.resolve)(result.v);
+  return promiseCapability.promise;
+} });
+
+
+/***/ }),
+
+/***/ "4439":
+/***/ (function(module, exports) {
+
+module.exports = function (exec) {
+  try {
+    return { e: false, v: exec() };
+  } catch (e) {
+    return { e: true, v: e };
+  }
+};
+
+
+/***/ }),
+
+/***/ "4517":
+/***/ (function(module, exports, __webpack_require__) {
+
+var forOf = __webpack_require__("a22a");
+
+module.exports = function (iter, ITERATOR) {
+  var result = [];
+  forOf(iter, false, result.push, result, ITERATOR);
+  return result;
+};
+
 
 /***/ }),
 
@@ -2798,10 +3438,98 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "4c95":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global = __webpack_require__("e53d");
+var core = __webpack_require__("584a");
+var dP = __webpack_require__("d9f6");
+var DESCRIPTORS = __webpack_require__("8e60");
+var SPECIES = __webpack_require__("5168")('species');
+
+module.exports = function (KEY) {
+  var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
+  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
+    configurable: true,
+    get: function () { return this; }
+  });
+};
+
+
+/***/ }),
+
 /***/ "4d16":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("25b0");
+
+/***/ }),
+
+/***/ "4ee1":
+/***/ (function(module, exports, __webpack_require__) {
+
+var ITERATOR = __webpack_require__("5168")('iterator');
+var SAFE_CLOSING = false;
+
+try {
+  var riter = [7][ITERATOR]();
+  riter['return'] = function () { SAFE_CLOSING = true; };
+  // eslint-disable-next-line no-throw-literal
+  Array.from(riter, function () { throw 2; });
+} catch (e) { /* empty */ }
+
+module.exports = function (exec, skipClosing) {
+  if (!skipClosing && !SAFE_CLOSING) return false;
+  var safe = false;
+  try {
+    var arr = [7];
+    var iter = arr[ITERATOR]();
+    iter.next = function () { return { done: safe = true }; };
+    arr[ITERATOR] = function () { return iter; };
+    exec(arr);
+  } catch (e) { /* empty */ }
+  return safe;
+};
+
+
+/***/ }),
+
+/***/ "4f7f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var strong = __webpack_require__("c26b");
+var validate = __webpack_require__("b39a");
+var SET = 'Set';
+
+// 23.2 Set Objects
+module.exports = __webpack_require__("e0b8")(SET, function (get) {
+  return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
+}, {
+  // 23.2.3.1 Set.prototype.add(value)
+  add: function add(value) {
+    return strong.def(validate(this, SET), value = value === 0 ? 0 : value, value);
+  }
+}, strong);
+
+
+/***/ }),
+
+/***/ "5037":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("c207");
+__webpack_require__("1654");
+__webpack_require__("6c1c");
+__webpack_require__("837d");
+__webpack_require__("5cb6");
+__webpack_require__("fe1e");
+__webpack_require__("7554");
+module.exports = __webpack_require__("584a").Map;
+
 
 /***/ }),
 
@@ -2951,6 +3679,51 @@ module.exports = Object.getPrototypeOf || function (O) {
     return O.constructor.prototype;
   } return O instanceof Object ? ObjectProto : null;
 };
+
+
+/***/ }),
+
+/***/ "549b":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ctx = __webpack_require__("d864");
+var $export = __webpack_require__("63b6");
+var toObject = __webpack_require__("241e");
+var call = __webpack_require__("b0dc");
+var isArrayIter = __webpack_require__("3702");
+var toLength = __webpack_require__("b447");
+var createProperty = __webpack_require__("20fd");
+var getIterFn = __webpack_require__("7cd6");
+
+$export($export.S + $export.F * !__webpack_require__("4ee1")(function (iter) { Array.from(iter); }), 'Array', {
+  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
+    var O = toObject(arrayLike);
+    var C = typeof this == 'function' ? this : Array;
+    var aLen = arguments.length;
+    var mapfn = aLen > 1 ? arguments[1] : undefined;
+    var mapping = mapfn !== undefined;
+    var index = 0;
+    var iterFn = getIterFn(O);
+    var length, result, step, iterator;
+    if (mapping) mapfn = ctx(mapfn, aLen > 2 ? arguments[2] : undefined, 2);
+    // if object isn't iterable or it's array with default iterator - use simple case
+    if (iterFn != undefined && !(C == Array && isArrayIter(iterFn))) {
+      for (iterator = iterFn.call(O), result = new C(); !(step = iterator.next()).done; index++) {
+        createProperty(result, index, mapping ? call(iterator, mapfn, [step.value, index], true) : step.value);
+      }
+    } else {
+      length = toLength(O.length);
+      for (result = new C(length); length > index; index++) {
+        createProperty(result, index, mapping ? mapfn(O[index], index) : O[index]);
+      }
+    }
+    result.length = index;
+    return result;
+  }
+});
 
 
 /***/ }),
@@ -3328,6 +4101,57 @@ module.exports = function flags() {
 
 /***/ }),
 
+/***/ "57b1":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 0 -> Array#forEach
+// 1 -> Array#map
+// 2 -> Array#filter
+// 3 -> Array#some
+// 4 -> Array#every
+// 5 -> Array#find
+// 6 -> Array#findIndex
+var ctx = __webpack_require__("d864");
+var IObject = __webpack_require__("335c");
+var toObject = __webpack_require__("241e");
+var toLength = __webpack_require__("b447");
+var asc = __webpack_require__("bfac");
+module.exports = function (TYPE, $create) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  var create = $create || asc;
+  return function ($this, callbackfn, that) {
+    var O = toObject($this);
+    var self = IObject(O);
+    var f = ctx(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var result = IS_MAP ? create($this, length) : IS_FILTER ? create($this, 0) : undefined;
+    var val, res;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
+      val = self[index];
+      res = f(val, index, O);
+      if (TYPE) {
+        if (IS_MAP) result[index] = res;   // map
+        else if (res) switch (TYPE) {
+          case 3: return true;             // some
+          case 5: return val;              // find
+          case 6: return index;            // findIndex
+          case 2: result.push(val);        // filter
+        } else if (IS_EVERY) return false; // every
+      }
+    }
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+  };
+};
+
+
+/***/ }),
+
 /***/ "57ec":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3365,6 +4189,158 @@ if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 /***/ }),
 
+/***/ "5aee":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var dP = __webpack_require__("d9f6").f;
+var create = __webpack_require__("a159");
+var redefineAll = __webpack_require__("5c95");
+var ctx = __webpack_require__("d864");
+var anInstance = __webpack_require__("1173");
+var forOf = __webpack_require__("a22a");
+var $iterDefine = __webpack_require__("30f1");
+var step = __webpack_require__("50ed");
+var setSpecies = __webpack_require__("4c95");
+var DESCRIPTORS = __webpack_require__("8e60");
+var fastKey = __webpack_require__("ebfd").fastKey;
+var validate = __webpack_require__("9f79");
+var SIZE = DESCRIPTORS ? '_s' : 'size';
+
+var getEntry = function (that, key) {
+  // fast case
+  var index = fastKey(key);
+  var entry;
+  if (index !== 'F') return that._i[index];
+  // frozen object case
+  for (entry = that._f; entry; entry = entry.n) {
+    if (entry.k == key) return entry;
+  }
+};
+
+module.exports = {
+  getConstructor: function (wrapper, NAME, IS_MAP, ADDER) {
+    var C = wrapper(function (that, iterable) {
+      anInstance(that, C, NAME, '_i');
+      that._t = NAME;         // collection type
+      that._i = create(null); // index
+      that._f = undefined;    // first entry
+      that._l = undefined;    // last entry
+      that[SIZE] = 0;         // size
+      if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
+    });
+    redefineAll(C.prototype, {
+      // 23.1.3.1 Map.prototype.clear()
+      // 23.2.3.2 Set.prototype.clear()
+      clear: function clear() {
+        for (var that = validate(this, NAME), data = that._i, entry = that._f; entry; entry = entry.n) {
+          entry.r = true;
+          if (entry.p) entry.p = entry.p.n = undefined;
+          delete data[entry.i];
+        }
+        that._f = that._l = undefined;
+        that[SIZE] = 0;
+      },
+      // 23.1.3.3 Map.prototype.delete(key)
+      // 23.2.3.4 Set.prototype.delete(value)
+      'delete': function (key) {
+        var that = validate(this, NAME);
+        var entry = getEntry(that, key);
+        if (entry) {
+          var next = entry.n;
+          var prev = entry.p;
+          delete that._i[entry.i];
+          entry.r = true;
+          if (prev) prev.n = next;
+          if (next) next.p = prev;
+          if (that._f == entry) that._f = next;
+          if (that._l == entry) that._l = prev;
+          that[SIZE]--;
+        } return !!entry;
+      },
+      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
+      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
+      forEach: function forEach(callbackfn /* , that = undefined */) {
+        validate(this, NAME);
+        var f = ctx(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3);
+        var entry;
+        while (entry = entry ? entry.n : this._f) {
+          f(entry.v, entry.k, this);
+          // revert to the last existing entry
+          while (entry && entry.r) entry = entry.p;
+        }
+      },
+      // 23.1.3.7 Map.prototype.has(key)
+      // 23.2.3.7 Set.prototype.has(value)
+      has: function has(key) {
+        return !!getEntry(validate(this, NAME), key);
+      }
+    });
+    if (DESCRIPTORS) dP(C.prototype, 'size', {
+      get: function () {
+        return validate(this, NAME)[SIZE];
+      }
+    });
+    return C;
+  },
+  def: function (that, key, value) {
+    var entry = getEntry(that, key);
+    var prev, index;
+    // change existing entry
+    if (entry) {
+      entry.v = value;
+    // create new entry
+    } else {
+      that._l = entry = {
+        i: index = fastKey(key, true), // <- index
+        k: key,                        // <- key
+        v: value,                      // <- value
+        p: prev = that._l,             // <- previous entry
+        n: undefined,                  // <- next entry
+        r: false                       // <- removed
+      };
+      if (!that._f) that._f = entry;
+      if (prev) prev.n = entry;
+      that[SIZE]++;
+      // add to index
+      if (index !== 'F') that._i[index] = entry;
+    } return that;
+  },
+  getEntry: getEntry,
+  setStrong: function (C, NAME, IS_MAP) {
+    // add .keys, .values, .entries, [@@iterator]
+    // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
+    $iterDefine(C, NAME, function (iterated, kind) {
+      this._t = validate(iterated, NAME); // target
+      this._k = kind;                     // kind
+      this._l = undefined;                // previous
+    }, function () {
+      var that = this;
+      var kind = that._k;
+      var entry = that._l;
+      // revert to the last existing entry
+      while (entry && entry.r) entry = entry.p;
+      // get next entry
+      if (!that._t || !(that._l = entry = entry ? entry.n : that._t._f)) {
+        // or finish the iteration
+        that._t = undefined;
+        return step(1);
+      }
+      // return step by kind
+      if (kind == 'keys') return step(0, entry.k);
+      if (kind == 'values') return step(0, entry.v);
+      return step(0, [entry.k, entry.v]);
+    }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
+
+    // add [@@species], 23.1.2.2, 23.2.2.2
+    setSpecies(NAME);
+  }
+};
+
+
+/***/ }),
+
 /***/ "5b4e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3390,6 +4366,20 @@ module.exports = function (IS_INCLUDES) {
       if (O[index] === el) return IS_INCLUDES || index || 0;
     } return !IS_INCLUDES && -1;
   };
+};
+
+
+/***/ }),
+
+/***/ "5c95":
+/***/ (function(module, exports, __webpack_require__) {
+
+var hide = __webpack_require__("35e8");
+module.exports = function (target, src, safe) {
+  for (var key in src) {
+    if (safe && target[key]) target[key] = src[key];
+    else hide(target, key, src[key]);
+  } return target;
 };
 
 
@@ -3441,6 +4431,17 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
+
+
+/***/ }),
+
+/***/ "5cb6":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/DavidBruant/Map-Set.prototype.toJSON
+var $export = __webpack_require__("63b6");
+
+$export($export.P + $export.R, 'Map', { toJSON: __webpack_require__("f228")('Map') });
 
 
 /***/ }),
@@ -3705,6 +4706,32 @@ $export.W = 32;  // wrap
 $export.U = 64;  // safe
 $export.R = 128; // real proto method for `library`
 module.exports = $export;
+
+
+/***/ }),
+
+/***/ "656e":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 25.4.1.5 NewPromiseCapability(C)
+var aFunction = __webpack_require__("79aa");
+
+function PromiseCapability(C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+}
+
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
 
 
 /***/ }),
@@ -4152,6 +5179,56 @@ module.exports = function bind(that) {
 
 /***/ }),
 
+/***/ "68f7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// https://tc39.github.io/proposal-setmap-offrom/
+var $export = __webpack_require__("63b6");
+var aFunction = __webpack_require__("79aa");
+var ctx = __webpack_require__("d864");
+var forOf = __webpack_require__("a22a");
+
+module.exports = function (COLLECTION) {
+  $export($export.S, COLLECTION, { from: function from(source /* , mapFn, thisArg */) {
+    var mapFn = arguments[1];
+    var mapping, A, n, cb;
+    aFunction(this);
+    mapping = mapFn !== undefined;
+    if (mapping) aFunction(mapFn);
+    if (source == undefined) return new this();
+    A = [];
+    if (mapping) {
+      n = 0;
+      cb = ctx(mapFn, arguments[2], 2);
+      forOf(source, false, function (nextItem) {
+        A.push(cb(nextItem, n++));
+      });
+    } else {
+      forOf(source, false, A.push, A);
+    }
+    return new this(A);
+  } });
+};
+
+
+/***/ }),
+
+/***/ "696e":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("c207");
+__webpack_require__("1654");
+__webpack_require__("6c1c");
+__webpack_require__("24c5");
+__webpack_require__("3c11");
+__webpack_require__("43fc");
+module.exports = __webpack_require__("584a").Promise;
+
+
+/***/ }),
+
 /***/ "69a8":
 /***/ (function(module, exports) {
 
@@ -4269,6 +5346,26 @@ module.exports = function is(a, b) {
 
 /***/ }),
 
+/***/ "7075":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// https://tc39.github.io/proposal-setmap-offrom/
+var $export = __webpack_require__("63b6");
+
+module.exports = function (COLLECTION) {
+  $export($export.S, COLLECTION, { of: function of() {
+    var length = arguments.length;
+    var A = new Array(length);
+    while (length--) A[length] = arguments[length];
+    return new this(A);
+  } });
+};
+
+
+/***/ }),
+
 /***/ "71c1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4289,6 +5386,69 @@ module.exports = function (TO_STRING) {
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
+
+
+/***/ }),
+
+/***/ "733c":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
+var $export = __webpack_require__("63b6");
+var create = __webpack_require__("a159");
+var aFunction = __webpack_require__("79aa");
+var anObject = __webpack_require__("e4ae");
+var isObject = __webpack_require__("f772");
+var fails = __webpack_require__("294c");
+var bind = __webpack_require__("c189");
+var rConstruct = (__webpack_require__("e53d").Reflect || {}).construct;
+
+// MS Edge supports only 2 arguments and argumentsList argument is optional
+// FF Nightly sets third argument as `new.target`, but does not create `this` from it
+var NEW_TARGET_BUG = fails(function () {
+  function F() { /* empty */ }
+  return !(rConstruct(function () { /* empty */ }, [], F) instanceof F);
+});
+var ARGS_BUG = !fails(function () {
+  rConstruct(function () { /* empty */ });
+});
+
+$export($export.S + $export.F * (NEW_TARGET_BUG || ARGS_BUG), 'Reflect', {
+  construct: function construct(Target, args /* , newTarget */) {
+    aFunction(Target);
+    anObject(args);
+    var newTarget = arguments.length < 3 ? Target : aFunction(arguments[2]);
+    if (ARGS_BUG && !NEW_TARGET_BUG) return rConstruct(Target, args, newTarget);
+    if (Target == newTarget) {
+      // w/o altered newTarget, optimization for 0-4 arguments
+      switch (args.length) {
+        case 0: return new Target();
+        case 1: return new Target(args[0]);
+        case 2: return new Target(args[0], args[1]);
+        case 3: return new Target(args[0], args[1], args[2]);
+        case 4: return new Target(args[0], args[1], args[2], args[3]);
+      }
+      // w/o altered newTarget, lot of arguments case
+      var $args = [null];
+      $args.push.apply($args, args);
+      return new (bind.apply(Target, $args))();
+    }
+    // with altered newTarget, not support built-in constructors
+    var proto = newTarget.prototype;
+    var instance = create(isObject(proto) ? proto : Object.prototype);
+    var result = Function.apply.call(Target, instance, args);
+    return isObject(result) ? result : instance;
+  }
+});
+
+
+/***/ }),
+
+/***/ "7554":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://tc39.github.io/proposal-setmap-offrom/#sec-map.from
+__webpack_require__("68f7")('Map');
 
 
 /***/ }),
@@ -4314,6 +5474,13 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
 /***/ }),
 
+/***/ "774e":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("d2d5");
+
+/***/ }),
+
 /***/ "77f1":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4335,6 +5502,13 @@ module.exports = !__webpack_require__("8e60") && !__webpack_require__("294c")(fu
   return Object.defineProperty(__webpack_require__("1ec9")('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
+
+/***/ }),
+
+/***/ "795b":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("696e");
 
 /***/ }),
 
@@ -4673,6 +5847,33 @@ module.exports = function () {
 
 var core = module.exports = { version: '2.6.10' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ }),
+
+/***/ "837d":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var strong = __webpack_require__("5aee");
+var validate = __webpack_require__("9f79");
+var MAP = 'Map';
+
+// 23.1 Map Objects
+module.exports = __webpack_require__("ada4")(MAP, function (get) {
+  return function Map() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
+}, {
+  // 23.1.3.6 Map.prototype.get(key)
+  get: function get(key) {
+    var entry = strong.getEntry(validate(this, MAP), key);
+    return entry && entry.v;
+  },
+  // 23.1.3.9 Map.prototype.set(key, value)
+  set: function set(key, value) {
+    return strong.def(validate(this, MAP), key === 0 ? 0 : key, value);
+  }
+}, strong, true);
 
 
 /***/ }),
@@ -5179,6 +6380,739 @@ module.exports = __webpack_require__("584a").isIterable = function (it) {
 
 /***/ }),
 
+/***/ "96cf":
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
 /***/ "990b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5283,6 +7217,18 @@ module.exports = !__webpack_require__("79e5")(function () {
 
 /***/ }),
 
+/***/ "9f79":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("f772");
+module.exports = function (it, TYPE) {
+  if (!isObject(it) || it._t !== TYPE) throw TypeError('Incompatible receiver, ' + TYPE + ' required!');
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "a0d3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5340,6 +7286,38 @@ module.exports = Object.create || function create(O, Properties) {
   } else result = createDict();
   return Properties === undefined ? result : dPs(result, Properties);
 };
+
+
+/***/ }),
+
+/***/ "a22a":
+/***/ (function(module, exports, __webpack_require__) {
+
+var ctx = __webpack_require__("d864");
+var call = __webpack_require__("b0dc");
+var isArrayIter = __webpack_require__("3702");
+var anObject = __webpack_require__("e4ae");
+var toLength = __webpack_require__("b447");
+var getIterFn = __webpack_require__("7cd6");
+var BREAK = {};
+var RETURN = {};
+var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
+  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
+  var f = ctx(fn, that, entries ? 2 : 1);
+  var index = 0;
+  var length, step, iterator, result;
+  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
+  // fast case for arrays with default iterator
+  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
+    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+    if (result === BREAK || result === RETURN) return result;
+  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
+    result = call(iterator, f, step.value, entries);
+    if (result === BREAK || result === RETURN) return result;
+  }
+};
+exports.BREAK = BREAK;
+exports.RETURN = RETURN;
 
 
 /***/ }),
@@ -5481,6 +7459,13 @@ __webpack_require__("214f")('replace', 2, function (defined, REPLACE, $replace, 
 
 /***/ }),
 
+/***/ "a5b2":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("aa28");
+
+/***/ }),
+
 /***/ "a5b8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5511,6 +7496,15 @@ module.exports.f = function (C) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__("f410");
+
+/***/ }),
+
+/***/ "aa28":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("733c");
+module.exports = __webpack_require__("584a").Reflect.construct;
+
 
 /***/ }),
 
@@ -5547,6 +7541,82 @@ var trim = exporter.trim = function (string, TYPE) {
 };
 
 module.exports = exporter;
+
+
+/***/ }),
+
+/***/ "aba2":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("e53d");
+var macrotask = __webpack_require__("4178").set;
+var Observer = global.MutationObserver || global.WebKitMutationObserver;
+var process = global.process;
+var Promise = global.Promise;
+var isNode = __webpack_require__("6b4c")(process) == 'process';
+
+module.exports = function () {
+  var head, last, notify;
+
+  var flush = function () {
+    var parent, fn;
+    if (isNode && (parent = process.domain)) parent.exit();
+    while (head) {
+      fn = head.fn;
+      head = head.next;
+      try {
+        fn();
+      } catch (e) {
+        if (head) notify();
+        else last = undefined;
+        throw e;
+      }
+    } last = undefined;
+    if (parent) parent.enter();
+  };
+
+  // Node.js
+  if (isNode) {
+    notify = function () {
+      process.nextTick(flush);
+    };
+  // browsers with MutationObserver, except iOS Safari - https://github.com/zloirock/core-js/issues/339
+  } else if (Observer && !(global.navigator && global.navigator.standalone)) {
+    var toggle = true;
+    var node = document.createTextNode('');
+    new Observer(flush).observe(node, { characterData: true }); // eslint-disable-line no-new
+    notify = function () {
+      node.data = toggle = !toggle;
+    };
+  // environments with maybe non-completely correct, but existent Promise
+  } else if (Promise && Promise.resolve) {
+    // Promise.resolve without an argument throws an error in LG WebOS 2
+    var promise = Promise.resolve(undefined);
+    notify = function () {
+      promise.then(flush);
+    };
+  // for other environments - macrotask based on:
+  // - setImmediate
+  // - MessageChannel
+  // - window.postMessag
+  // - onreadystatechange
+  // - setTimeout
+  } else {
+    notify = function () {
+      // strange IE + webpack dev server bug - use .call(global)
+      macrotask.call(global, flush);
+    };
+  }
+
+  return function (fn) {
+    var task = { fn: fn, next: undefined };
+    if (last) last.next = task;
+    if (!head) {
+      head = task;
+      notify();
+    } last = task;
+  };
+};
 
 
 /***/ }),
@@ -5635,6 +7705,73 @@ for (var collections = getKeys(DOMIterables), i = 0; i < collections.length; i++
 
 /***/ }),
 
+/***/ "ada4":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global = __webpack_require__("e53d");
+var $export = __webpack_require__("63b6");
+var meta = __webpack_require__("ebfd");
+var fails = __webpack_require__("294c");
+var hide = __webpack_require__("35e8");
+var redefineAll = __webpack_require__("5c95");
+var forOf = __webpack_require__("a22a");
+var anInstance = __webpack_require__("1173");
+var isObject = __webpack_require__("f772");
+var setToStringTag = __webpack_require__("45f2");
+var dP = __webpack_require__("d9f6").f;
+var each = __webpack_require__("57b1")(0);
+var DESCRIPTORS = __webpack_require__("8e60");
+
+module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
+  var Base = global[NAME];
+  var C = Base;
+  var ADDER = IS_MAP ? 'set' : 'add';
+  var proto = C && C.prototype;
+  var O = {};
+  if (!DESCRIPTORS || typeof C != 'function' || !(IS_WEAK || proto.forEach && !fails(function () {
+    new C().entries().next();
+  }))) {
+    // create collection constructor
+    C = common.getConstructor(wrapper, NAME, IS_MAP, ADDER);
+    redefineAll(C.prototype, methods);
+    meta.NEED = true;
+  } else {
+    C = wrapper(function (target, iterable) {
+      anInstance(target, C, NAME, '_c');
+      target._c = new Base();
+      if (iterable != undefined) forOf(iterable, IS_MAP, target[ADDER], target);
+    });
+    each('add,clear,delete,forEach,get,has,set,keys,values,entries,toJSON'.split(','), function (KEY) {
+      var IS_ADDER = KEY == 'add' || KEY == 'set';
+      if (KEY in proto && !(IS_WEAK && KEY == 'clear')) hide(C.prototype, KEY, function (a, b) {
+        anInstance(this, C, KEY);
+        if (!IS_ADDER && IS_WEAK && !isObject(a)) return KEY == 'get' ? undefined : false;
+        var result = this._c[KEY](a === 0 ? 0 : a, b);
+        return IS_ADDER ? this : result;
+      });
+    });
+    IS_WEAK || dP(C.prototype, 'size', {
+      get: function () {
+        return this._c.size;
+      }
+    });
+  }
+
+  setToStringTag(C, NAME);
+
+  O[NAME] = C;
+  $export($export.G + $export.W + $export.F, O);
+
+  if (!IS_WEAK) common.setStrong(C, NAME, IS_MAP);
+
+  return C;
+};
+
+
+/***/ }),
+
 /***/ "aebd":
 /***/ (function(module, exports) {
 
@@ -5663,6 +7800,25 @@ __webpack_require__("5ca1")({
 }, {
   exec: regexpExec
 });
+
+
+/***/ }),
+
+/***/ "b0dc":
+/***/ (function(module, exports, __webpack_require__) {
+
+// call something on iterator step with safe closing on error
+var anObject = __webpack_require__("e4ae");
+module.exports = function (iterator, fn, value, entries) {
+  try {
+    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+  // 7.4.6 IteratorClose(iterator, completion)
+  } catch (e) {
+    var ret = iterator['return'];
+    if (ret !== undefined) anObject(ret.call(iterator));
+    throw e;
+  }
+};
 
 
 /***/ }),
@@ -5797,6 +7953,18 @@ module.exports = keysShim;
 
 /***/ }),
 
+/***/ "b39a":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("d3f4");
+module.exports = function (it, TYPE) {
+  if (!isObject(it) || it._t !== TYPE) throw TypeError('Incompatible receiver, ' + TYPE + ' required!');
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "b447":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5814,6 +7982,17 @@ module.exports = function (it) {
 /***/ (function(module, exports) {
 
 module.exports = true;
+
+
+/***/ }),
+
+/***/ "bc13":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("e53d");
+var navigator = global.navigator;
+
+module.exports = navigator && navigator.userAgent || '';
 
 
 /***/ }),
@@ -5872,9 +8051,207 @@ exports.f = __webpack_require__("8e60") ? gOPD : function getOwnPropertyDescript
 
 /***/ }),
 
+/***/ "bfac":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 9.4.2.3 ArraySpeciesCreate(originalArray, length)
+var speciesConstructor = __webpack_require__("0b64");
+
+module.exports = function (original, length) {
+  return new (speciesConstructor(original))(length);
+};
+
+
+/***/ }),
+
+/***/ "c189":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aFunction = __webpack_require__("79aa");
+var isObject = __webpack_require__("f772");
+var invoke = __webpack_require__("3024");
+var arraySlice = [].slice;
+var factories = {};
+
+var construct = function (F, len, args) {
+  if (!(len in factories)) {
+    for (var n = [], i = 0; i < len; i++) n[i] = 'a[' + i + ']';
+    // eslint-disable-next-line no-new-func
+    factories[len] = Function('F,a', 'return new F(' + n.join(',') + ')');
+  } return factories[len](F, args);
+};
+
+module.exports = Function.bind || function bind(that /* , ...args */) {
+  var fn = aFunction(this);
+  var partArgs = arraySlice.call(arguments, 1);
+  var bound = function (/* args... */) {
+    var args = partArgs.concat(arraySlice.call(arguments));
+    return this instanceof bound ? construct(fn, args.length, args) : invoke(fn, args, that);
+  };
+  if (isObject(fn.prototype)) bound.prototype = fn.prototype;
+  return bound;
+};
+
+
+/***/ }),
+
 /***/ "c207":
 /***/ (function(module, exports) {
 
+
+
+/***/ }),
+
+/***/ "c26b":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var dP = __webpack_require__("86cc").f;
+var create = __webpack_require__("2aeb");
+var redefineAll = __webpack_require__("dcbc");
+var ctx = __webpack_require__("9b43");
+var anInstance = __webpack_require__("f605");
+var forOf = __webpack_require__("4a59");
+var $iterDefine = __webpack_require__("01f9");
+var step = __webpack_require__("d53b");
+var setSpecies = __webpack_require__("7a56");
+var DESCRIPTORS = __webpack_require__("9e1e");
+var fastKey = __webpack_require__("67ab").fastKey;
+var validate = __webpack_require__("b39a");
+var SIZE = DESCRIPTORS ? '_s' : 'size';
+
+var getEntry = function (that, key) {
+  // fast case
+  var index = fastKey(key);
+  var entry;
+  if (index !== 'F') return that._i[index];
+  // frozen object case
+  for (entry = that._f; entry; entry = entry.n) {
+    if (entry.k == key) return entry;
+  }
+};
+
+module.exports = {
+  getConstructor: function (wrapper, NAME, IS_MAP, ADDER) {
+    var C = wrapper(function (that, iterable) {
+      anInstance(that, C, NAME, '_i');
+      that._t = NAME;         // collection type
+      that._i = create(null); // index
+      that._f = undefined;    // first entry
+      that._l = undefined;    // last entry
+      that[SIZE] = 0;         // size
+      if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
+    });
+    redefineAll(C.prototype, {
+      // 23.1.3.1 Map.prototype.clear()
+      // 23.2.3.2 Set.prototype.clear()
+      clear: function clear() {
+        for (var that = validate(this, NAME), data = that._i, entry = that._f; entry; entry = entry.n) {
+          entry.r = true;
+          if (entry.p) entry.p = entry.p.n = undefined;
+          delete data[entry.i];
+        }
+        that._f = that._l = undefined;
+        that[SIZE] = 0;
+      },
+      // 23.1.3.3 Map.prototype.delete(key)
+      // 23.2.3.4 Set.prototype.delete(value)
+      'delete': function (key) {
+        var that = validate(this, NAME);
+        var entry = getEntry(that, key);
+        if (entry) {
+          var next = entry.n;
+          var prev = entry.p;
+          delete that._i[entry.i];
+          entry.r = true;
+          if (prev) prev.n = next;
+          if (next) next.p = prev;
+          if (that._f == entry) that._f = next;
+          if (that._l == entry) that._l = prev;
+          that[SIZE]--;
+        } return !!entry;
+      },
+      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
+      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
+      forEach: function forEach(callbackfn /* , that = undefined */) {
+        validate(this, NAME);
+        var f = ctx(callbackfn, arguments.length > 1 ? arguments[1] : undefined, 3);
+        var entry;
+        while (entry = entry ? entry.n : this._f) {
+          f(entry.v, entry.k, this);
+          // revert to the last existing entry
+          while (entry && entry.r) entry = entry.p;
+        }
+      },
+      // 23.1.3.7 Map.prototype.has(key)
+      // 23.2.3.7 Set.prototype.has(value)
+      has: function has(key) {
+        return !!getEntry(validate(this, NAME), key);
+      }
+    });
+    if (DESCRIPTORS) dP(C.prototype, 'size', {
+      get: function () {
+        return validate(this, NAME)[SIZE];
+      }
+    });
+    return C;
+  },
+  def: function (that, key, value) {
+    var entry = getEntry(that, key);
+    var prev, index;
+    // change existing entry
+    if (entry) {
+      entry.v = value;
+    // create new entry
+    } else {
+      that._l = entry = {
+        i: index = fastKey(key, true), // <- index
+        k: key,                        // <- key
+        v: value,                      // <- value
+        p: prev = that._l,             // <- previous entry
+        n: undefined,                  // <- next entry
+        r: false                       // <- removed
+      };
+      if (!that._f) that._f = entry;
+      if (prev) prev.n = entry;
+      that[SIZE]++;
+      // add to index
+      if (index !== 'F') that._i[index] = entry;
+    } return that;
+  },
+  getEntry: getEntry,
+  setStrong: function (C, NAME, IS_MAP) {
+    // add .keys, .values, .entries, [@@iterator]
+    // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
+    $iterDefine(C, NAME, function (iterated, kind) {
+      this._t = validate(iterated, NAME); // target
+      this._k = kind;                     // kind
+      this._l = undefined;                // previous
+    }, function () {
+      var that = this;
+      var kind = that._k;
+      var entry = that._l;
+      // revert to the last existing entry
+      while (entry && entry.r) entry = entry.p;
+      // get next entry
+      if (!that._t || !(that._l = entry = entry ? entry.n : that._t._f)) {
+        // or finish the iteration
+        that._t = undefined;
+        return step(1);
+      }
+      // return step by kind
+      if (kind == 'keys') return step(0, entry.k);
+      if (kind == 'values') return step(0, entry.v);
+      return step(0, [entry.k, entry.v]);
+    }, IS_MAP ? 'entries' : 'values', !IS_MAP, true);
+
+    // add [@@species], 23.1.2.2, 23.2.2.2
+    setSpecies(NAME);
+  }
+};
 
 
 /***/ }),
@@ -6312,6 +8689,25 @@ exports.f = __webpack_require__("5168");
 
 /***/ }),
 
+/***/ "cd78":
+/***/ (function(module, exports, __webpack_require__) {
+
+var anObject = __webpack_require__("e4ae");
+var isObject = __webpack_require__("f772");
+var newPromiseCapability = __webpack_require__("656e");
+
+module.exports = function (C, x) {
+  anObject(C);
+  if (isObject(x) && x.constructor === C) return x;
+  var promiseCapability = newPromiseCapability.f(C);
+  var resolve = promiseCapability.resolve;
+  resolve(x);
+  return promiseCapability.promise;
+};
+
+
+/***/ }),
+
 /***/ "ce10":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6349,6 +8745,16 @@ module.exports = function (KEY, exec) {
   exp[KEY] = exec(fn);
   $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
 };
+
+
+/***/ }),
+
+/***/ "d2d5":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("1654");
+__webpack_require__("549b");
+module.exports = __webpack_require__("584a").Array.from;
 
 
 /***/ }),
@@ -6616,6 +9022,99 @@ var redefine = __webpack_require__("2aba");
 module.exports = function (target, src, safe) {
   for (var key in src) redefine(target, key, src[key], safe);
   return target;
+};
+
+
+/***/ }),
+
+/***/ "e0b8":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var global = __webpack_require__("7726");
+var $export = __webpack_require__("5ca1");
+var redefine = __webpack_require__("2aba");
+var redefineAll = __webpack_require__("dcbc");
+var meta = __webpack_require__("67ab");
+var forOf = __webpack_require__("4a59");
+var anInstance = __webpack_require__("f605");
+var isObject = __webpack_require__("d3f4");
+var fails = __webpack_require__("79e5");
+var $iterDetect = __webpack_require__("5cc5");
+var setToStringTag = __webpack_require__("7f20");
+var inheritIfRequired = __webpack_require__("5dbc");
+
+module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
+  var Base = global[NAME];
+  var C = Base;
+  var ADDER = IS_MAP ? 'set' : 'add';
+  var proto = C && C.prototype;
+  var O = {};
+  var fixMethod = function (KEY) {
+    var fn = proto[KEY];
+    redefine(proto, KEY,
+      KEY == 'delete' ? function (a) {
+        return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'has' ? function has(a) {
+        return IS_WEAK && !isObject(a) ? false : fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'get' ? function get(a) {
+        return IS_WEAK && !isObject(a) ? undefined : fn.call(this, a === 0 ? 0 : a);
+      } : KEY == 'add' ? function add(a) { fn.call(this, a === 0 ? 0 : a); return this; }
+        : function set(a, b) { fn.call(this, a === 0 ? 0 : a, b); return this; }
+    );
+  };
+  if (typeof C != 'function' || !(IS_WEAK || proto.forEach && !fails(function () {
+    new C().entries().next();
+  }))) {
+    // create collection constructor
+    C = common.getConstructor(wrapper, NAME, IS_MAP, ADDER);
+    redefineAll(C.prototype, methods);
+    meta.NEED = true;
+  } else {
+    var instance = new C();
+    // early implementations not supports chaining
+    var HASNT_CHAINING = instance[ADDER](IS_WEAK ? {} : -0, 1) != instance;
+    // V8 ~  Chromium 40- weak-collections throws on primitives, but should return false
+    var THROWS_ON_PRIMITIVES = fails(function () { instance.has(1); });
+    // most early implementations doesn't supports iterables, most modern - not close it correctly
+    var ACCEPT_ITERABLES = $iterDetect(function (iter) { new C(iter); }); // eslint-disable-line no-new
+    // for early implementations -0 and +0 not the same
+    var BUGGY_ZERO = !IS_WEAK && fails(function () {
+      // V8 ~ Chromium 42- fails only with 5+ elements
+      var $instance = new C();
+      var index = 5;
+      while (index--) $instance[ADDER](index, index);
+      return !$instance.has(-0);
+    });
+    if (!ACCEPT_ITERABLES) {
+      C = wrapper(function (target, iterable) {
+        anInstance(target, C, NAME);
+        var that = inheritIfRequired(new Base(), target, C);
+        if (iterable != undefined) forOf(iterable, IS_MAP, that[ADDER], that);
+        return that;
+      });
+      C.prototype = proto;
+      proto.constructor = C;
+    }
+    if (THROWS_ON_PRIMITIVES || BUGGY_ZERO) {
+      fixMethod('delete');
+      fixMethod('has');
+      IS_MAP && fixMethod('get');
+    }
+    if (BUGGY_ZERO || HASNT_CHAINING) fixMethod(ADDER);
+    // weak collections should not contains .clear method
+    if (IS_WEAK && proto.clear) delete proto.clear;
+  }
+
+  setToStringTag(C, NAME);
+
+  O[NAME] = C;
+  $export($export.G + $export.W + $export.F * (C != Base), O);
+
+  if (!IS_WEAK) common.setStrong(C, NAME, IS_MAP);
+
+  return C;
 };
 
 
@@ -6916,6 +9415,38 @@ var createDesc = __webpack_require__("4630");
 module.exports = function (object, index, value) {
   if (index in object) $defineProperty.f(object, index, createDesc(0, value));
   else object[index] = value;
+};
+
+
+/***/ }),
+
+/***/ "f201":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.3.20 SpeciesConstructor(O, defaultConstructor)
+var anObject = __webpack_require__("e4ae");
+var aFunction = __webpack_require__("79aa");
+var SPECIES = __webpack_require__("5168")('species');
+module.exports = function (O, D) {
+  var C = anObject(O).constructor;
+  var S;
+  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+};
+
+
+/***/ }),
+
+/***/ "f228":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/DavidBruant/Map-Set.prototype.toJSON
+var classof = __webpack_require__("40c3");
+var from = __webpack_require__("4517");
+module.exports = function (NAME) {
+  return function toJSON() {
+    if (classof(this) != NAME) throw TypeError(NAME + "#toJSON isn't generic");
+    return from(this);
+  };
 };
 
 
@@ -10089,7 +12620,945 @@ function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
 }
+// CONCATENATED MODULE: ./src/datamodel/Entity.ts
+
+
+var Entity_Entity = function Entity(id, statements) {
+  _classCallCheck(this, Entity);
+
+  this.id = id;
+  this.statements = statements;
+};
+
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/map.js
+var core_js_map = __webpack_require__("2d7d");
+var map_default = /*#__PURE__*/__webpack_require__.n(core_js_map);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/isNativeFunction.js
+function _isNativeFunction(fn) {
+  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/reflect/construct.js
+var construct = __webpack_require__("a5b2");
+var construct_default = /*#__PURE__*/__webpack_require__.n(construct);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/construct.js
+
+
+
+function isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !construct_default.a) return false;
+  if (construct_default.a.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Date.prototype.toString.call(construct_default()(Date, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function construct_construct(Parent, args, Class) {
+  if (isNativeReflectConstruct()) {
+    construct_construct = construct_default.a;
+  } else {
+    construct_construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) _setPrototypeOf(instance, Class.prototype);
+      return instance;
+    };
+  }
+
+  return construct_construct.apply(null, arguments);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/wrapNativeSuper.js
+
+
+
+
+
+
+function wrapNativeSuper_wrapNativeSuper(Class) {
+  var _cache = typeof map_default.a === "function" ? new map_default.a() : undefined;
+
+  wrapNativeSuper_wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !_isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct_construct(Class, arguments, getPrototypeOf_getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = create_default()(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return _setPrototypeOf(Wrapper, Class);
+  };
+
+  return wrapNativeSuper_wrapNativeSuper(Class);
+}
+// CONCATENATED MODULE: ./src/data-access/error/TechnicalProblem.ts
+
+
+
+
+
+
+var TechnicalProblem_TechnicalProblem =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(TechnicalProblem, _Error);
+
+  function TechnicalProblem() {
+    _classCallCheck(this, TechnicalProblem);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(TechnicalProblem).apply(this, arguments));
+  }
+
+  return TechnicalProblem;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// CONCATENATED MODULE: ./src/data-access/error/JQueryTechnicalError.ts
+
+
+
+
+
+
+var JQueryTechnicalError_JQueryTechnicalError =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(JQueryTechnicalError, _Error);
+
+  function JQueryTechnicalError(error) {
+    var _this;
+
+    _classCallCheck(this, JQueryTechnicalError);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(JQueryTechnicalError).call(this, 'request error'));
+    _this.error = error;
+    return _this;
+  }
+
+  return JQueryTechnicalError;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// CONCATENATED MODULE: ./src/data-access/error/EntityNotFound.ts
+
+
+
+
+
+
+var EntityNotFound_EntityNotFound =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(EntityNotFound, _Error);
+
+  function EntityNotFound() {
+    _classCallCheck(this, EntityNotFound);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EntityNotFound).apply(this, arguments));
+  }
+
+  return EntityNotFound;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// EXTERNAL MODULE: ./node_modules/http-status-codes/index.js
+var http_status_codes = __webpack_require__("0828");
+var http_status_codes_default = /*#__PURE__*/__webpack_require__.n(http_status_codes);
+
+// CONCATENATED MODULE: ./src/data-access/ForeignApiWritingRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+var ForeignApiWritingRepository_ForeignApiWritingRepository =
+/*#__PURE__*/
+function () {
+  function ForeignApiWritingRepository(api, username, tags) {
+    _classCallCheck(this, ForeignApiWritingRepository);
+
+    this.foreignApi = api;
+    this.username = username || undefined;
+    this.tags = tags || undefined;
+  }
+
+  _createClass(ForeignApiWritingRepository, [{
+    key: "saveEntity",
+    value: function saveEntity(revision) {
+      return Promise.resolve(this.foreignApi.postWithEditToken({
+        action: 'wbeditentity',
+        id: revision.entity.id,
+        baserevid: revision.revisionId,
+        data: JSON.stringify({
+          claims: revision.entity.statements
+        }),
+        assertuser: this.username,
+        tags: this.tags
+      })).then(function (response) {
+        if (typeof_typeof(response) !== 'object') {
+          throw new TechnicalProblem_TechnicalProblem('unknown response type.');
+        }
+
+        if (ForeignApiWritingRepository.isError(response)) {
+          throw new TechnicalProblem_TechnicalProblem(response.error.code);
+        }
+
+        return new EntityRevision_EntityRevision(new Entity_Entity(response.entity.id, response.entity.claims), response.entity.lastrevid);
+      }, function (error) {
+        if (error.status && error.status === http_status_codes_default.a.NOT_FOUND) {
+          throw new EntityNotFound_EntityNotFound('The given api page does not exist.');
+        }
+
+        throw new JQueryTechnicalError_JQueryTechnicalError(error);
+      });
+    }
+  }], [{
+    key: "isError",
+    value: function isError(response) {
+      return !!response.error;
+    }
+  }]);
+
+  return ForeignApiWritingRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/services/ServiceContainer.ts
+
+
+
+var ServiceContainer_ServiceContainer =
+/*#__PURE__*/
+function () {
+  function ServiceContainer() {
+    _classCallCheck(this, ServiceContainer);
+
+    this.services = {};
+  }
+
+  _createClass(ServiceContainer, [{
+    key: "set",
+    value: function set(key, service) {
+      this.services[key] = service;
+    }
+  }, {
+    key: "get",
+    value: function get(key) {
+      if (this.services[key] === undefined) {
+        throw new Error("".concat(key, " is undefined"));
+      }
+
+      return this.services[key];
+    }
+  }]);
+
+  return ServiceContainer;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/SpecialPageReadingEntityRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+
+var SpecialPageReadingEntityRepository_SpecialPageReadingEntityRepository =
+/*#__PURE__*/
+function () {
+  function SpecialPageReadingEntityRepository($, specialEntityDataUrl) {
+    _classCallCheck(this, SpecialPageReadingEntityRepository);
+
+    this.$ = $;
+    this.specialEntityDataUrl = this.trimTrailingSlashes(specialEntityDataUrl);
+  }
+
+  _createClass(SpecialPageReadingEntityRepository, [{
+    key: "getEntity",
+    value: function getEntity(entityId, _rev) {
+      var _this = this;
+
+      return Promise.resolve(this.$.get(this.buildRequestUrl(entityId))).then(function (data) {
+        if (!_this.isWellFormedResponse(data)) {
+          throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
+        }
+
+        if (!data.entities[entityId]) {
+          throw new EntityNotFound_EntityNotFound('Result does not contain relevant entity.');
+        }
+
+        return new EntityRevision_EntityRevision(new Entity_Entity(entityId, data.entities[entityId].claims), data.entities[entityId].lastrevid);
+      }, function (error) {
+        if (error.status && error.status === http_status_codes_default.a.NOT_FOUND) {
+          throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
+        }
+
+        throw new JQueryTechnicalError_JQueryTechnicalError(error);
+      });
+    }
+  }, {
+    key: "isWellFormedResponse",
+    value: function isWellFormedResponse(data) {
+      return typeof_typeof(data) === 'object' && data !== null && 'entities' in data;
+    }
+  }, {
+    key: "buildRequestUrl",
+    value: function buildRequestUrl(entityId) {
+      return "".concat(this.specialEntityDataUrl, "/").concat(entityId, ".json");
+    }
+  }, {
+    key: "trimTrailingSlashes",
+    value: function trimTrailingSlashes(string) {
+      return string.replace(/\/$/, '');
+    }
+  }]);
+
+  return SpecialPageReadingEntityRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/MwLanguageInfoRepository.ts
+
+
+
+var MwLanguageInfoRepository_MwLanguageInfoRepository =
+/*#__PURE__*/
+function () {
+  function MwLanguageInfoRepository(mwLanguage, ulsDirectionality) {
+    _classCallCheck(this, MwLanguageInfoRepository);
+
+    this.directionalityResolver = ulsDirectionality.getDir;
+    this.bcp47Resolver = mwLanguage.bcp47;
+  }
+
+  _createClass(MwLanguageInfoRepository, [{
+    key: "resolve",
+    value: function resolve(languageCode) {
+      return {
+        code: this.bcp47Resolver(languageCode),
+        directionality: this.directionalityResolver(languageCode)
+      };
+    }
+  }]);
+
+  return MwLanguageInfoRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/MwMessagesRepository.ts
+
+
+
+var MwMessagesRepository_MwMessagesRepository =
+/*#__PURE__*/
+function () {
+  function MwMessagesRepository(mwMessages) {
+    _classCallCheck(this, MwMessagesRepository);
+
+    this.mwMessages = mwMessages;
+  }
+
+  _createClass(MwMessagesRepository, [{
+    key: "get",
+    value: function get(messageKey) {
+      return this.mwMessages(messageKey).text();
+    }
+  }]);
+
+  return MwMessagesRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/ForeignApiRepoConfigRepository.ts
+
+
+
+
+
+
+var ForeignApiRepoConfigRepository_ForeignApiRepoConfigRepository =
+/*#__PURE__*/
+function () {
+  function ForeignApiRepoConfigRepository(foreignApi) {
+    _classCallCheck(this, ForeignApiRepoConfigRepository);
+
+    this.foreignApi = foreignApi;
+  }
+
+  _createClass(ForeignApiRepoConfigRepository, [{
+    key: "getRepoConfiguration",
+    value: function getRepoConfiguration() {
+      var _this = this;
+
+      return Promise.resolve(this.foreignApi.get({
+        action: 'query',
+        meta: 'wbdatabridgeconfig',
+        formatversion: 2,
+        errorformat: 'none'
+      })).then(function (response) {
+        if (_this.responseWarnsAboutDisabledRepoConfiguration(response)) {
+          throw new TechnicalProblem_TechnicalProblem('Result indicates repo API is disabled (see dataBridgeEnabled).');
+        }
+
+        if (!_this.isWellFormedResponse(response)) {
+          throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
+        }
+
+        return response.query.wbdatabridgeconfig;
+      }, function (error) {
+        throw new JQueryTechnicalError_JQueryTechnicalError(error);
+      });
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+  }, {
+    key: "responseWarnsAboutDisabledRepoConfiguration",
+    value: function responseWarnsAboutDisabledRepoConfiguration(response) {
+      return Array.isArray(response.warnings) && response.warnings.some(function (warning) {
+        return warning.code === 'unrecognizedvalues' && warning.module === 'query';
+      });
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+  }, {
+    key: "isWellFormedResponse",
+    value: function isWellFormedResponse(response) {
+      try {
+        return typeof response.query.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
+      } catch (e) {
+        return false;
+      }
+    }
+  }]);
+
+  return ForeignApiRepoConfigRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/DataBridgeTrackerService.ts
+
+
+
+var DataBridgeTrackerService_DataBridgeTrackerService =
+/*#__PURE__*/
+function () {
+  function DataBridgeTrackerService(tracker) {
+    _classCallCheck(this, DataBridgeTrackerService);
+
+    this.tracker = tracker;
+  }
+
+  _createClass(DataBridgeTrackerService, [{
+    key: "trackPropertyDatatype",
+    value: function trackPropertyDatatype(datatype) {
+      this.tracker.increment("MediaWiki.wikibase.client.databridge.datatype.".concat(datatype));
+    }
+  }]);
+
+  return DataBridgeTrackerService;
+}();
+
+
+// CONCATENATED MODULE: ./src/mediawiki/facades/EventTracker.ts
+
+
+
+var EventTracker_EventTracker =
+/*#__PURE__*/
+function () {
+  function EventTracker(tracker) {
+    _classCallCheck(this, EventTracker);
+
+    this.tracker = tracker;
+  }
+
+  _createClass(EventTracker, [{
+    key: "increment",
+    value: function increment(topic) {
+      this.tracker("counter.".concat(topic), 1);
+    }
+  }]);
+
+  return EventTracker;
+}();
+
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
+var promise = __webpack_require__("795b");
+var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    promise_default.a.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new promise_default.a(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+// CONCATENATED MODULE: ./src/data-access/DispatchingPropertyDataTypeRepository.ts
+
+
+
+
+
+var DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository =
+/*#__PURE__*/
+function () {
+  function DispatchingPropertyDataTypeRepository(requestDispatcher) {
+    _classCallCheck(this, DispatchingPropertyDataTypeRepository);
+
+    this.requestDispatcher = requestDispatcher;
+  }
+
+  _createClass(DispatchingPropertyDataTypeRepository, [{
+    key: "getDataType",
+    value: function () {
+      var _getDataType = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(entityId) {
+        var entities, entity;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.requestDispatcher.dispatchEntitiesInfoRequest({
+                  props: ['datatype'],
+                  ids: [entityId]
+                });
+
+              case 2:
+                entities = _context.sent;
+                entity = entities[entityId];
+                return _context.abrupt("return", entity.datatype);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getDataType(_x) {
+        return _getDataType.apply(this, arguments);
+      }
+
+      return getDataType;
+    }()
+  }]);
+
+  return DispatchingPropertyDataTypeRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/error/EntityWithoutLabelInLanguageException.ts
+
+
+
+
+
+
+var EntityWithoutLabelInLanguageException_EntityWithoutLabelInLanguageException =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(EntityWithoutLabelInLanguageException, _Error);
+
+  function EntityWithoutLabelInLanguageException() {
+    _classCallCheck(this, EntityWithoutLabelInLanguageException);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EntityWithoutLabelInLanguageException).apply(this, arguments));
+  }
+
+  return EntityWithoutLabelInLanguageException;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// CONCATENATED MODULE: ./src/data-access/DispatchingEntityLabelRepository.ts
+
+
+
+
+
+
+var DispatchingEntityLabelRepository_DispatchingEntityLabelRepository =
+/*#__PURE__*/
+function () {
+  function DispatchingEntityLabelRepository(forLanguageCode, requestDispatcher) {
+    _classCallCheck(this, DispatchingEntityLabelRepository);
+
+    this.forLanguageCode = forLanguageCode;
+    this.requestDispatcher = requestDispatcher;
+  }
+
+  _createClass(DispatchingEntityLabelRepository, [{
+    key: "getLabel",
+    value: function () {
+      var _getLabel = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(entityId) {
+        var entities, entity, label;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.requestDispatcher.dispatchEntitiesInfoRequest({
+                  props: ['labels'],
+                  ids: [entityId],
+                  otherParams: {
+                    languages: this.forLanguageCode,
+                    languagefallback: 1
+                  }
+                });
+
+              case 2:
+                entities = _context.sent;
+                entity = entities[entityId];
+
+                if (this.forLanguageCode in entity.labels) {
+                  _context.next = 6;
+                  break;
+                }
+
+                throw new EntityWithoutLabelInLanguageException_EntityWithoutLabelInLanguageException("Could not find label for language '".concat(this.forLanguageCode, "'."));
+
+              case 6:
+                label = entity.labels[this.forLanguageCode];
+                return _context.abrupt("return", {
+                  value: label.value,
+                  language: label.language
+                });
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getLabel(_x) {
+        return _getLabel.apply(this, arguments);
+      }
+
+      return getLabel;
+    }()
+  }]);
+
+  return DispatchingEntityLabelRepository;
+}();
+
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
+var es6_set = __webpack_require__("4f7f");
+
+// CONCATENATED MODULE: ./src/data-access/ForeignApiEntityInfoDispatcher.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ForeignApiEntityInfoDispatcher_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function ForeignApiEntityInfoDispatcher_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ForeignApiEntityInfoDispatcher_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ForeignApiEntityInfoDispatcher_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+var ForeignApiEntityInfoDispatcher_ForeignApiEntityInfoDispatcher =
+/*#__PURE__*/
+function () {
+  function ForeignApiEntityInfoDispatcher(api) {
+    var waitForProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+    _classCallCheck(this, ForeignApiEntityInfoDispatcher);
+
+    this.parameters = null;
+    this.resolveCallbacks = [];
+    this.rejectCallbacks = [];
+    this.waitForProps = [];
+    this.foreignApi = api;
+    this.waitForProps = waitForProps;
+  }
+
+  _createClass(ForeignApiEntityInfoDispatcher, [{
+    key: "dispatchEntitiesInfoRequest",
+    value: function dispatchEntitiesInfoRequest(requestData) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        _this.addRequest(requestData);
+
+        _this.resolveCallbacks.push(resolve);
+
+        _this.rejectCallbacks.push(reject);
+
+        _this.executeRequestIfPropsAreComplete();
+      });
+    }
+  }, {
+    key: "addRequest",
+    value: function addRequest(requestData) {
+      if (this.parameters === null) {
+        this.parameters = {
+          props: new Set([]),
+          ids: new Set([]),
+          otherParams: {}
+        };
+      }
+
+      this.parameters.props = new Set([].concat(_toConsumableArray(this.parameters.props), _toConsumableArray(requestData.props)));
+      this.parameters.ids = new Set([].concat(_toConsumableArray(this.parameters.ids), _toConsumableArray(requestData.ids)));
+
+      if (requestData.otherParams) {
+        this.parameters.otherParams = ForeignApiEntityInfoDispatcher_objectSpread({}, this.parameters.otherParams, {}, requestData.otherParams);
+      }
+    }
+  }, {
+    key: "executeRequestIfPropsAreComplete",
+    value: function executeRequestIfPropsAreComplete() {
+      var _this2 = this;
+
+      if (this.waitForProps.every(function (prop) {
+        return _this2.parameters !== null && _this2.parameters.props.has(prop);
+      })) {
+        this.executeRequest();
+      }
+    }
+  }, {
+    key: "executeRequest",
+    value: function executeRequest() {
+      var _this3 = this;
+
+      var _this$getAndClearRequ = this.getAndClearRequestData(),
+          parameters = _this$getAndClearRequ.parameters,
+          resolveCallbacks = _this$getAndClearRequ.resolveCallbacks,
+          rejectCallbacks = _this$getAndClearRequ.rejectCallbacks;
+
+      Promise.resolve(this.foreignApi.get(ForeignApiEntityInfoDispatcher_objectSpread({
+        action: 'wbgetentities',
+        ids: _toConsumableArray(parameters.ids),
+        props: _toConsumableArray(parameters.props)
+      }, parameters.otherParams))).then(function (response) {
+        if (!_this3.isWellFormedResponse(response)) {
+          if (_this3.isErrorResponse(response) && response.error.code === 'no-such-entity') {
+            throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
+          }
+
+          throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
+        }
+
+        if (_toConsumableArray(parameters.ids).some(function (entityId) {
+          return !response.entities[entityId];
+        })) {
+          // not a real thing at the moment but guards the following access
+          throw new EntityNotFound_EntityNotFound('Result does not contain relevant entity.');
+        }
+
+        if (Object.values(response.entities).some(function (entity) {
+          return 'missing' in entity;
+        })) {
+          throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
+        }
+
+        resolveCallbacks.forEach(function (resolve) {
+          return resolve(response.entities);
+        });
+      }, function (error) {
+        throw new JQueryTechnicalError_JQueryTechnicalError(error);
+      }).catch(function (error) {
+        return rejectCallbacks.forEach(function (reject) {
+          return reject(error);
+        });
+      });
+    }
+  }, {
+    key: "getAndClearRequestData",
+    value: function getAndClearRequestData() {
+      if (this.parameters === null) {
+        throw new Error('Request was dispatched, but none was scheduled.');
+      }
+
+      var parameters = this.parameters;
+      var resolveCallbacks = this.resolveCallbacks;
+      var rejectCallbacks = this.rejectCallbacks;
+      this.parameters = null;
+      this.resolveCallbacks = [];
+      this.rejectCallbacks = [];
+      return {
+        parameters: parameters,
+        resolveCallbacks: resolveCallbacks,
+        rejectCallbacks: rejectCallbacks
+      };
+    }
+  }, {
+    key: "isWellFormedResponse",
+    value: function isWellFormedResponse(data) {
+      return typeof_typeof(data) === 'object' && data !== null && 'entities' in data;
+    }
+  }, {
+    key: "isErrorResponse",
+    value: function isErrorResponse(data) {
+      return typeof_typeof(data) === 'object' && data !== null && 'error' in data;
+    }
+  }]);
+
+  return ForeignApiEntityInfoDispatcher;
+}();
+
+
+// CONCATENATED MODULE: ./src/services/createServices.ts
+
+
+
+
+
+
+
+
+
+
+
+
+function createServices(mwWindow, editTags) {
+  var services = new ServiceContainer_ServiceContainer();
+  var repoConfig = mwWindow.mw.config.get('wbRepo'),
+      specialEntityDataUrl = repoConfig.url + repoConfig.articlePath.replace('$1', 'Special:EntityData');
+  services.set('readingEntityRepository', new SpecialPageReadingEntityRepository_SpecialPageReadingEntityRepository(mwWindow.$, specialEntityDataUrl));
+
+  if (mwWindow.mw.ForeignApi === undefined) {
+    throw new Error('mw.ForeignApi was not loaded!');
+  }
+
+  var repoForeignApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
+  services.set('writingEntityRepository', new ForeignApiWritingRepository_ForeignApiWritingRepository(repoForeignApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
+  var foreignApiEntityInfoDispatcher = new ForeignApiEntityInfoDispatcher_ForeignApiEntityInfoDispatcher(repoForeignApi, ['labels', 'datatype']);
+  services.set('entityLabelRepository', new DispatchingEntityLabelRepository_DispatchingEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), foreignApiEntityInfoDispatcher));
+  services.set('propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository(foreignApiEntityInfoDispatcher));
+
+  if (mwWindow.$.uls === undefined) {
+    throw new Error('$.uls was not loaded!');
+  }
+
+  services.set('languageInfoRepository', new MwLanguageInfoRepository_MwLanguageInfoRepository(mwWindow.mw.language, mwWindow.$.uls.data));
+  services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
+  services.set('wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository_ForeignApiRepoConfigRepository(repoForeignApi));
+  services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
+  return services;
+}
 // CONCATENATED MODULE: ./src/main.ts
+
 
 
 
@@ -10116,8 +13585,10 @@ function launch(config, information, services) {
   repeater(app, emitter, Object.values(src_events));
   return emitter;
 }
+
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
 /* concated harmony reexport launch */__webpack_require__.d(__webpack_exports__, "launch", function() { return launch; });
+/* concated harmony reexport createServices */__webpack_require__.d(__webpack_exports__, "createServices", function() { return createServices; });
 
 
 
@@ -10129,6 +13600,15 @@ function launch(config, information, services) {
 
 module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003' +
   '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028\u2029\uFEFF';
+
+
+/***/ }),
+
+/***/ "fe1e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://tc39.github.io/proposal-setmap-offrom/#sec-map.of
+__webpack_require__("7075")('Map');
 
 
 /***/ })
