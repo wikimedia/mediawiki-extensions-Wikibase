@@ -1,3 +1,4 @@
+import { ErrorTypes } from '@/definitions/ApplicationError';
 import { getters } from '@/store/getters';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import {
@@ -6,7 +7,7 @@ import {
 } from '@/store/namespaces';
 import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import newApplicationState from './newApplicationState';
-import ApplicationStatus from '@/definitions/ApplicationStatus';
+import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import clone from '@/store/clone';
 import { InitializedApplicationState } from '@/store/Application';
 
@@ -278,4 +279,34 @@ describe( 'root/getters', () => {
 			).toStrictEqual( [] );
 		} );
 	} );
+
+	describe( 'applicationStatus', () => {
+		it.each( [ ValidApplicationStatus.INITIALIZING, ValidApplicationStatus.READY ] )(
+			'returns underlying valid application status (%s) if there are no errors',
+			( status: ValidApplicationStatus ) => {
+				const applicationState = newApplicationState( {
+					applicationStatus: status,
+				} );
+
+				expect(
+					getters.applicationStatus( applicationState, null, applicationState, null ),
+				).toBe( status );
+			},
+		);
+
+		it.each( [ ValidApplicationStatus.INITIALIZING, ValidApplicationStatus.READY ] )(
+			'returns error application status instead of "%s" if there are errors',
+			( status: ValidApplicationStatus ) => {
+				const applicationState = newApplicationState( {
+					applicationStatus: status,
+					applicationErrors: [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ],
+				} );
+
+				expect(
+					getters.applicationStatus( applicationState, null, applicationState, null ),
+				).toBe( ApplicationStatus.ERROR );
+			},
+		);
+	} );
+
 } );

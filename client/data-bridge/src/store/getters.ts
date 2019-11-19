@@ -13,6 +13,7 @@ import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
 import Reference from '@/datamodel/Reference';
 import deepEqual from 'deep-equal';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 export const getters: GetterTree<Application, Application> = {
 	targetValue(
@@ -73,4 +74,13 @@ export const getters: GetterTree<Application, Application> = {
 			{ strict: true },
 		);
 	},
+
+	applicationStatus( state: Application ): ApplicationStatus {
+		if ( state.applicationErrors.length > 0 ) {
+			return ApplicationStatus.ERROR;
+		}
+
+		return state.applicationStatus;
+	},
+
 };

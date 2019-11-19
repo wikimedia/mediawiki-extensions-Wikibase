@@ -39,7 +39,7 @@ import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import { Action, Getter, State } from 'vuex-class';
+import { Action, Getter } from 'vuex-class';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import { BRIDGE_SAVE } from '@/store/actionTypes';
@@ -54,7 +54,7 @@ import { BRIDGE_SAVE } from '@/store/actionTypes';
 	},
 } )
 export default class App extends Vue {
-	@State( 'applicationStatus' )
+	@Getter( 'applicationStatus' )
 	public applicationStatus!: ApplicationStatus;
 
 	public get isInitializing(): boolean {

@@ -1,15 +1,17 @@
+import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
+import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
+import Application from '@/store/Application';
 import { mutations } from '@/store/mutations';
 import {
-	PROPERTY_TARGET_SET,
-	EDITFLOW_SET,
+	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
-	TARGET_LABEL_SET,
+	EDITFLOW_SET,
 	ORIGINAL_STATEMENT_SET,
+	PROPERTY_TARGET_SET,
+	TARGET_LABEL_SET,
 } from '@/store/mutationTypes';
-import Application from '@/store/Application';
 import newApplicationState from './newApplicationState';
-import ApplicationStatus from '@/definitions/ApplicationStatus';
 
 describe( 'root/mutations', () => {
 	it( 'changes the targetProperty of the store', () => {
@@ -53,5 +55,20 @@ describe( 'root/mutations', () => {
 		mutations[ ORIGINAL_STATEMENT_SET ]( store, targetProperty );
 		expect( store.originalStatement ).not.toBe( targetProperty );
 		expect( store.originalStatement ).toStrictEqual( targetProperty );
+	} );
+
+	it( 'adds errors to the store', () => {
+		const store: Application = newApplicationState();
+		const errors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
+		mutations[ APPLICATION_ERRORS_ADD ]( store, errors );
+		expect( store.applicationErrors ).toStrictEqual( errors );
+	} );
+
+	it( 'does not drop existing errors when adding new ones to the store', () => {
+		const oldErrors: ApplicationError[] = [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ];
+		const store: Application = newApplicationState( { applicationErrors: oldErrors.slice() } );
+		const newErrors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
+		mutations[ APPLICATION_ERRORS_ADD ]( store, newErrors );
+		expect( store.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
 	} );
 } );

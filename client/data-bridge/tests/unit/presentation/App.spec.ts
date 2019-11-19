@@ -1,4 +1,5 @@
 import EntityRevision from '@/datamodel/EntityRevision';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 import Vuex, { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
 import {
@@ -13,6 +14,7 @@ import {
 	BRIDGE_SAVE,
 } from '@/store/actionTypes';
 import {
+	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
 } from '@/store/mutationTypes';
 import Events from '@/events';
@@ -237,7 +239,7 @@ describe( 'App.vue', () => {
 
 	describe( 'component switch', () => {
 		it( 'mounts ErrorWrapper, if a error occurs', () => {
-			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+			store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
 			const wrapper = shallowMount( App, {
 				store,
 				localVue,

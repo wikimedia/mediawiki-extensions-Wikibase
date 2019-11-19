@@ -8,6 +8,7 @@ import Application, {
 	InitializedApplicationState,
 } from '@/store/Application';
 import {
+	BRIDGE_ERROR_ADD,
 	BRIDGE_INIT,
 	BRIDGE_SAVE,
 	BRIDGE_SET_TARGET_VALUE,
@@ -15,6 +16,7 @@ import {
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
 import {
+	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
 	EDITFLOW_SET,
 	PROPERTY_TARGET_SET,
@@ -38,6 +40,7 @@ import Term from '@/datamodel/Term';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
 import MainSnakPath from '@/store/entity/statements/MainSnakPath';
+import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 
 function validateEntityState(
 	context: ActionContext<Application, Application>,
@@ -52,6 +55,10 @@ function validateEntityState(
 	}
 
 	return validateBridgeApplicability( context, path );
+}
+
+function commitErrors( context: ActionContext<Application, Application>, errors: ApplicationError[] ): void {
+	context.commit( APPLICATION_ERRORS_ADD, errors );
 }
 
 export default function actions(
@@ -100,13 +107,11 @@ export default function actions(
 						ApplicationStatus.READY,
 					);
 				} else {
-					context.commit(
-						APPLICATION_STATUS_SET,
-						ApplicationStatus.ERROR,
-					);
+					// TODO: somehow store *why* we cannot edit this
+					commitErrors( context, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
 				}
 			}, ( error ) => {
-				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				commitErrors( context, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
 				// TODO: store information about the error somewhere and show it!
 				throw error;
 			} );
@@ -117,7 +122,10 @@ export default function actions(
 			dataValue: DataValue,
 		): Promise<void> {
 			if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
-				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				commitErrors( context, [ {
+					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+					info: { stack: ( new Error() ).stack },
+				} ] );
 				return Promise.reject( null );
 			}
 
@@ -138,7 +146,10 @@ export default function actions(
 					value: dataValue,
 				},
 			).catch( ( error ) => {
-				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				commitErrors( context, [ {
+					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+					info: error,
+				} ] );
 				// TODO: store information about the error somewhere and show it!
 				throw error;
 			} );
@@ -148,7 +159,10 @@ export default function actions(
 			context: ActionContext<Application, Application>,
 		): Promise<void> {
 			if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
-				context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+				commitErrors( context, [ {
+					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+					info: { stack: ( new Error() ).stack },
+				} ] );
 				return Promise.reject( null );
 			}
 
@@ -156,10 +170,17 @@ export default function actions(
 				action( NS_ENTITY, ENTITY_SAVE ),
 			)
 				.catch( ( error: Error ) => {
-					context.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
+					commitErrors( context, [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 					// TODO: store information about the error somewhere and show it!
 					throw error;
 				} );
+		},
+
+		[ BRIDGE_ERROR_ADD ](
+			context: ActionContext<Application, Application>,
+			errors: ApplicationError[],
+		): void {
+			commitErrors( context, errors );
 		},
 	};
 }

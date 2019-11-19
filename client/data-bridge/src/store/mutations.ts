@@ -7,10 +7,12 @@ import {
 	APPLICATION_STATUS_SET,
 	TARGET_LABEL_SET,
 	ORIGINAL_STATEMENT_SET,
+	APPLICATION_ERRORS_ADD,
 } from '@/store/mutationTypes';
-import ApplicationStatus from '@/definitions/ApplicationStatus';
+import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
+import ApplicationError from '@/definitions/ApplicationError';
 
 export const mutations: MutationTree<Application> = {
 	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {
@@ -21,7 +23,7 @@ export const mutations: MutationTree<Application> = {
 		state.editFlow = editFlow;
 	},
 
-	[ APPLICATION_STATUS_SET ]( state: Application, status: ApplicationStatus ): void {
+	[ APPLICATION_STATUS_SET ]( state: Application, status: ValidApplicationStatus ): void {
 		state.applicationStatus = status;
 	},
 
@@ -31,5 +33,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ ORIGINAL_STATEMENT_SET ]( state: Application, revision: Statement ): void {
 		state.originalStatement = clone( revision );
+	},
+
+	[ APPLICATION_ERRORS_ADD ]( state: Application, errors: ApplicationError[] ): void {
+		state.applicationErrors.push( ...errors );
 	},
 };
