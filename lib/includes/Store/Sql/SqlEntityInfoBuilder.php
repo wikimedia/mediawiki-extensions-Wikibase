@@ -410,7 +410,11 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private function collectTermsForEntities( $entityType, array $languages ) {
 		$termTypes = array_keys( self::$termTypeFields );
 
-		list( $uncachedLanguages, $uncachedEntityIds, $cachedResults ) = $this->tryGettingTermsFromCache( $languages, $entityType );
+		list( $uncachedLanguages, $uncachedEntityIds, $cachedResults ) = $this->tryGettingTermsFromCache(
+			$languages,
+			$entityType,
+			$termTypes
+		);
 		if ( $uncachedLanguages === [] ) {
 			return [ $cachedResults ];
 		}
@@ -451,19 +455,21 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		return $results;
 	}
 
-	private function tryGettingTermsFromCache( array $languages, string $entityType ) {
+	private function tryGettingTermsFromCache( array $languages, string $entityType, array $termTypes ) {
 		$uncachedLanguages = [];
 		$uncachedEntityIds = [];
 		$cachedResults = [];
 		foreach ( $languages as $language ) {
 			$isCached = true;
 			foreach ( $this->localIdsByType[$entityType] as $entityId ) {
-				$value = $this->termCache->get( implode( '.', [ $entityId, $language ] ), false );
-				if ( $value === false || $value === null ) { // Paranoia
-					$isCached = false;
-					$uncachedEntityIds[] = $entityId;
-				} else {
-					$cachedResults[] = $value;
+				foreach ( $termTypes as $termType ) {
+					$value = $this->termCache->get( implode( '.', [ $entityId, $language, $termType ] ), false );
+					if ( $value === false || $value === null ) { // Paranoia
+						$isCached = false;
+						$uncachedEntityIds[] = $entityId;
+					} else {
+						$cachedResults[] = $value;
+					}
 				}
 			}
 			if ( $isCached === false ) {
@@ -493,7 +499,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$this->injectRow( $row );
 
 			// Cache it
-			$key = implode( '.', [ $row['term_full_entity_id'], $row['term_language'] ] );
+			$key = implode( '.', [ $row['term_full_entity_id'], $row['term_language'], $row['term_type'] ] );
 			$this->termCache->set( $key, $row, self::TTL );
 
 		}
