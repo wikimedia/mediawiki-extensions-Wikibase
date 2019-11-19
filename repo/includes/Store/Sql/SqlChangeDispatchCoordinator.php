@@ -400,6 +400,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		$dbw = $this->getRepoMaster();
 		foreach ( $untracked as $siteID => $wikiDB ) {
+			$siteID = (string)$siteID;
 			$state = [
 				'chd_site' => $siteID,
 				'chd_db' => $wikiDB,

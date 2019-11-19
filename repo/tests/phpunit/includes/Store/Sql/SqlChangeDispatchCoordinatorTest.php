@@ -328,4 +328,15 @@ class SqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		}
 	}
 
+	public function testInitAndSelectClientWithNumericalIndex() {
+		$this->resetChangesTable();
+		$coordinator = $this->getCoordinator();
+
+		$coordinator->initState( [ 0 => 'zerowiki' ] );
+		$clientArray = $coordinator->selectClient();
+
+		$this->assertSame( '0', $clientArray['chd_site'] );
+		$this->assertSame( 'zerowiki', $clientArray['chd_db'] );
+	}
+
 }

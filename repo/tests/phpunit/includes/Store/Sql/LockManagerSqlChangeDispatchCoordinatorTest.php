@@ -61,10 +61,10 @@ class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
 		$this->resetChangesTable();
 
 		$coordinator = $this->getNullCoordinator();
-		$coordinator->initState( [ 'foowiki' ] );
+		$coordinator->initState( [ 'foowiki' => 'foowikidb' ] );
 		$clientArray = $coordinator->selectClient();
-		$this->assertSame( 'foowiki', $clientArray['chd_db'] );
-		$this->assertSame( '0', $clientArray['chd_site'] );
+		$this->assertSame( 'foowikidb', $clientArray['chd_db'] );
+		$this->assertSame( 'foowiki', $clientArray['chd_site'] );
 		$this->assertSame( '0', $clientArray['chd_seen'] );
 		$this->assertNull( $clientArray['chd_lock'] );
 	}
