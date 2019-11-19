@@ -24,7 +24,7 @@ class NonLanguageBoundChangesCounterTest extends \PHPUnit\Framework\TestCase {
 				1
 			],
 			'Entity did not change' => [
-				new ChangeOpResultStub( $entityId, false, 'en' ),
+				new ChangeOpResultStub( $entityId, false ),
 				0
 			],
 			'Changes on different tree levels' => [

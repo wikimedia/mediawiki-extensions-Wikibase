@@ -12,24 +12,11 @@ class ChangedLanguagesCounter {
 	 *
 	 * @return int count of distinct languages of language-bound results that changed the entity
 	 */
-	public function countChangedLanguages( ChangeOpResult $changeOpResult ) {
-		$uniqueChangedLanguages = $this->collectUniqueChangedLanguages( $changeOpResult );
+	public function countChangedLanguages( ChangeOpResult $changeOpResult ): int {
+		$changedLanguagesCollector = new ChangedLanguagesCollector();
+		$uniqueChangedLanguages = $changedLanguagesCollector->collectChangedLanguages( $changeOpResult );
 
 		return count( $uniqueChangedLanguages );
-	}
-
-	private function collectUniqueChangedLanguages( ChangeOpResult $changeOpResult ) {
-		$languagesAsKeys = [];
-		$changeOpResultsTraversal = new ChangeOpResultTraversal();
-		$traversable = $changeOpResultsTraversal->makeRecursiveTraversable( $changeOpResult );
-
-		foreach ( $traversable as $result ) {
-			if ( $result instanceof LanguageBoundChangeOpResult && $result->isEntityChanged() ) {
-				$languagesAsKeys[$result->getLanguageCode()] = 1;
-			}
-		}
-
-		return $languagesAsKeys;
 	}
 
 }
