@@ -1,5 +1,5 @@
 <template>
-	<div class="wb-tr-popper-wrapper">
+	<div class="wb-tr-popper-wrapper" tabindex="-1" @focusout="onFocusout">
 		<div class="wb-tr-popper-triangle" />
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
@@ -36,6 +36,18 @@ export default class Popper extends Vue {
 	@Getter( 'helpLink' )
 	public helpLink!: string;
 
+	public mounted() {
+		( this.$el as HTMLElement ).focus();
+	}
+
+	public onFocusout( event: FocusEvent ) {
+		const relatedTarget = event.relatedTarget;
+
+		if ( !relatedTarget || !this.$el.contains( ( relatedTarget as Node ) ) ) {
+			this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
+		}
+	}
+
 	public closeClick( event: MouseEvent ) {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
@@ -51,6 +63,10 @@ export default class Popper extends Vue {
 .wb-tr-popper-wrapper {
 	z-index: 1;
 	position: relative;
+}
+
+.wb-tr-popper-wrapper:focus {
+	outline: 0;
 }
 
 .wb-tr-popper-triangle {

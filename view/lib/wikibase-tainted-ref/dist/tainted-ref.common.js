@@ -4417,12 +4417,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=328a49b5&
-var TaintedIconvue_type_template_id_328a49b5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":_vm.onClick}})}
-var TaintedIconvue_type_template_id_328a49b5_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e705601&
+var TaintedIconvue_type_template_id_7e705601_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
+var TaintedIconvue_type_template_id_7e705601_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=328a49b5&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=7e705601&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var STORE_INIT = 'initStore';
@@ -4431,7 +4431,91 @@ var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 var POPPER_SHOW = 'showPopper';
 var POPPER_HIDE = 'hidePopper';
 var HELP_LINK_SET = 'setHelpLink';
+// EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
+var vuex_esm = __webpack_require__("2f62");
+
+// CONCATENATED MODULE: ./node_modules/vuex-class/lib/bindings.js
+
+
+var State = createBindingHelper('computed', vuex_esm["f" /* mapState */]);
+var Getter = createBindingHelper('computed', vuex_esm["d" /* mapGetters */]);
+var Action = createBindingHelper('methods', vuex_esm["c" /* mapActions */]);
+var Mutation = createBindingHelper('methods', vuex_esm["e" /* mapMutations */]);
+function bindings_namespace(namespace, helper) {
+    function createNamespacedHelper(helper) {
+        function namespacedHelper(a, b) {
+            if (typeof b === 'string') {
+                var key = b;
+                var proto = a;
+                return helper(key, { namespace: namespace })(proto, key);
+            }
+            var type = a;
+            var options = merge(b || {}, { namespace: namespace });
+            return helper(type, options);
+        }
+        return namespacedHelper;
+    }
+    if (helper) {
+        console.warn('[vuex-class] passing the 2nd argument to `namespace` function is deprecated. pass only namespace string instead.');
+        return createNamespacedHelper(helper);
+    }
+    return {
+        State: createNamespacedHelper(State),
+        Getter: createNamespacedHelper(Getter),
+        Mutation: createNamespacedHelper(Mutation),
+        Action: createNamespacedHelper(Action)
+    };
+}
+function createBindingHelper(bindTo, mapFn) {
+    function makeDecorator(map, namespace) {
+        return Object(vue_class_component_common["createDecorator"])(function (componentOptions, key) {
+            if (!componentOptions[bindTo]) {
+                componentOptions[bindTo] = {};
+            }
+            var mapObject = (_a = {}, _a[key] = map, _a);
+            componentOptions[bindTo][key] = namespace !== undefined
+                ? mapFn(namespace, mapObject)[key]
+                : mapFn(mapObject)[key];
+            var _a;
+        });
+    }
+    function helper(a, b) {
+        if (typeof b === 'string') {
+            var key = b;
+            var proto = a;
+            return makeDecorator(key, undefined)(proto, key);
+        }
+        var namespace = extractNamespace(b);
+        var type = a;
+        return makeDecorator(type, namespace);
+    }
+    return helper;
+}
+function extractNamespace(options) {
+    var n = options && options.namespace;
+    if (typeof n !== 'string') {
+        return undefined;
+    }
+    if (n[n.length - 1] !== '/') {
+        return n + '/';
+    }
+    return n;
+}
+function merge(a, b) {
+    var res = {};
+    [a, b].forEach(function (obj) {
+        Object.keys(obj).forEach(function (key) {
+            res[key] = obj[key];
+        });
+    });
+    return res;
+}
+
+// CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
+
+
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -4459,10 +4543,17 @@ function (_Vue) {
       event.preventDefault();
       this.$store.dispatch(POPPER_SHOW, this.$parent.$data.id);
     }
+  }, {
+    key: "popperIsOpened",
+    get: function get() {
+      return this.popperStateFunction(this.$parent.$data.id);
+    }
   }]);
 
   return TaintedIcon;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Getter('popperState')], TaintedIconvue_type_script_lang_ts_TaintedIcon.prototype, "popperStateFunction", void 0);
 
 TaintedIconvue_type_script_lang_ts_TaintedIcon = __decorate([vue_class_component_common_default.a], TaintedIconvue_type_script_lang_ts_TaintedIcon);
 /* harmony default export */ var TaintedIconvue_type_script_lang_ts_ = (TaintedIconvue_type_script_lang_ts_TaintedIcon);
@@ -4577,8 +4668,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_328a49b5_render,
-  TaintedIconvue_type_template_id_328a49b5_staticRenderFns,
+  TaintedIconvue_type_template_id_7e705601_render,
+  TaintedIconvue_type_template_id_7e705601_staticRenderFns,
   false,
   null,
   null,
@@ -4587,95 +4678,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
-var vuex_esm = __webpack_require__("2f62");
-
-// CONCATENATED MODULE: ./node_modules/vuex-class/lib/bindings.js
-
-
-var State = createBindingHelper('computed', vuex_esm["f" /* mapState */]);
-var Getter = createBindingHelper('computed', vuex_esm["d" /* mapGetters */]);
-var Action = createBindingHelper('methods', vuex_esm["c" /* mapActions */]);
-var Mutation = createBindingHelper('methods', vuex_esm["e" /* mapMutations */]);
-function bindings_namespace(namespace, helper) {
-    function createNamespacedHelper(helper) {
-        function namespacedHelper(a, b) {
-            if (typeof b === 'string') {
-                var key = b;
-                var proto = a;
-                return helper(key, { namespace: namespace })(proto, key);
-            }
-            var type = a;
-            var options = merge(b || {}, { namespace: namespace });
-            return helper(type, options);
-        }
-        return namespacedHelper;
-    }
-    if (helper) {
-        console.warn('[vuex-class] passing the 2nd argument to `namespace` function is deprecated. pass only namespace string instead.');
-        return createNamespacedHelper(helper);
-    }
-    return {
-        State: createNamespacedHelper(State),
-        Getter: createNamespacedHelper(Getter),
-        Mutation: createNamespacedHelper(Mutation),
-        Action: createNamespacedHelper(Action)
-    };
-}
-function createBindingHelper(bindTo, mapFn) {
-    function makeDecorator(map, namespace) {
-        return Object(vue_class_component_common["createDecorator"])(function (componentOptions, key) {
-            if (!componentOptions[bindTo]) {
-                componentOptions[bindTo] = {};
-            }
-            var mapObject = (_a = {}, _a[key] = map, _a);
-            componentOptions[bindTo][key] = namespace !== undefined
-                ? mapFn(namespace, mapObject)[key]
-                : mapFn(mapObject)[key];
-            var _a;
-        });
-    }
-    function helper(a, b) {
-        if (typeof b === 'string') {
-            var key = b;
-            var proto = a;
-            return makeDecorator(key, undefined)(proto, key);
-        }
-        var namespace = extractNamespace(b);
-        var type = a;
-        return makeDecorator(type, namespace);
-    }
-    return helper;
-}
-function extractNamespace(options) {
-    var n = options && options.namespace;
-    if (typeof n !== 'string') {
-        return undefined;
-    }
-    if (n[n.length - 1] !== '/') {
-        return n + '/';
-    }
-    return n;
-}
-function merge(a, b) {
-    var res = {};
-    [a, b].forEach(function (obj) {
-        Object.keys(obj).forEach(function (key) {
-            res[key] = obj[key];
-        });
-    });
-    return res;
-}
-
-// CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=01fe1426&
+var Poppervue_type_template_id_01fe1426_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('h4',[_vm._v("\n\t\t\tTainted Reference Heading text\n\t\t\t"),_c('small',[_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page for this constraint type","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")])])]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\tThe value of \"point in time\" was changed, but the reference remained the same.\n\t\t")])])])}
+var Poppervue_type_template_id_01fe1426_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=cdfbdd96&
-var Poppervue_type_template_id_cdfbdd96_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper"},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('h4',[_vm._v("\n\t\t\tTainted Reference Heading text\n\t\t\t"),_c('small',[_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page for this constraint type","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")])])]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\tThe value of \"point in time\" was changed, but the reference remained the same.\n\t\t")])])])}
-var Poppervue_type_template_id_cdfbdd96_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=cdfbdd96&
+// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=01fe1426&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=script&lang=ts&
 
@@ -4701,6 +4709,20 @@ function (_Vue) {
   }
 
   _createClass(Popper, [{
+    key: "mounted",
+    value: function mounted() {
+      this.$el.focus();
+    }
+  }, {
+    key: "onFocusout",
+    value: function onFocusout(event) {
+      var relatedTarget = event.relatedTarget;
+
+      if (!relatedTarget || !this.$el.contains(relatedTarget)) {
+        this.$store.dispatch(POPPER_HIDE, this.$parent.$data.id);
+      }
+    }
+  }, {
     key: "closeClick",
     value: function closeClick(event) {
       event.preventDefault();
@@ -4736,8 +4758,8 @@ var Poppervue_type_style_index_0_lang_scss_ = __webpack_require__("51bc");
 
 var Popper_component = normalizeComponent(
   components_Poppervue_type_script_lang_ts_,
-  Poppervue_type_template_id_cdfbdd96_render,
-  Poppervue_type_template_id_cdfbdd96_staticRenderFns,
+  Poppervue_type_template_id_01fe1426_render,
+  Poppervue_type_template_id_01fe1426_staticRenderFns,
   false,
   null,
   null,

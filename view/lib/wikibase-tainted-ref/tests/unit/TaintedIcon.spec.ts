@@ -15,6 +15,7 @@ describe( 'TaintedIcon.vue', () => {
 			store,
 			localVue,
 		} );
+		expect( wrapper.element.tagName ).toEqual( 'A' );
 		expect( wrapper.classes() ).toContain( 'wb-tr-tainted-icon' );
 	} );
 	it( 'opens the popper on click', () => {
@@ -35,5 +36,30 @@ describe( 'TaintedIcon.vue', () => {
 		} );
 		wrapper.trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
+	} );
+	it( 'is an un-clickable div if the popper is open', () => {
+		const store: Store<Application> = createStore();
+		store.dispatch( POPPER_SHOW, 'a-guid' );
+
+		store.dispatch = jest.fn();
+		const parentComponentStub = {
+			name: 'parentStub',
+			template: '<div></div>',
+			data: () => {
+				return { id: 'a-guid' };
+			},
+		};
+
+		const wrapper = shallowMount( TaintedIcon, {
+			store,
+			localVue,
+			parentComponent: parentComponentStub,
+		} );
+
+		expect( wrapper.element.tagName ).toEqual( 'DIV' );
+		expect( wrapper.classes() ).toContain( 'wb-tr-tainted-icon' );
+
+		wrapper.trigger( 'click' );
+		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
 	} );
 } );
