@@ -13112,6 +13112,11 @@ function () {
     value: function increment(topic) {
       this.tracker("counter.".concat(topic), 1);
     }
+  }, {
+    key: "recordTiming",
+    value: function recordTiming(topic, timeInMS) {
+      this.tracker("timing.".concat(topic), timeInMS);
+    }
   }]);
 
   return EventTracker;

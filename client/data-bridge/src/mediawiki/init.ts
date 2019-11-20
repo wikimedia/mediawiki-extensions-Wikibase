@@ -2,6 +2,8 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 import Dispatcher from '@/mediawiki/Dispatcher';
+import EventTracker from '@/mediawiki/facades/EventTracker';
+import MwInitTracker from '@/mediawiki/MwInitTracker';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
@@ -36,6 +38,7 @@ export default async (): Promise<void> => {
 			const app = require( APP_MODULE );
 			return new Dispatcher( mwWindow, app, dataBridgeConfig );
 		} );
+		const initTracker = new MwInitTracker( new EventTracker( mwWindow.mw.track ), window.performance );
 
 		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
 			let isOpening = false;
@@ -50,12 +53,16 @@ export default async (): Promise<void> => {
 					return; // user clicked link again while we were awaiting dispatcherPromise, ignore
 				}
 				isOpening = true;
+
+				const finishTracking = initTracker.startClickDelayTracker();
 				const dispatcher = await dispatcherPromise;
 				dispatcher.dispatch( selectedElement );
+				finishTracking();
 				isOpening = false;
 			} );
 		} );
 
+		initTracker.recordTimeToLinkListenersAttached();
 		await dispatcherPromise; // tests need to know when they can expect the click listeners to work
 	}
 };

@@ -1,9 +1,10 @@
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 
 describe( 'DataBridgeTrackerService', () => {
-	it( 'tracks a given properyDataType', () => {
+	it( 'tracks a given propertyDataType', () => {
 		const tracker = {
 			increment: jest.fn(),
+			recordTiming: jest.fn(),
 		};
 		const service = new DataBridgeTrackerService( tracker );
 
