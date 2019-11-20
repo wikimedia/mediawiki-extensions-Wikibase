@@ -2,9 +2,9 @@
 	<div class="wb-tr-app">
 		<div v-if="isTainted">
 			<span>
-				<TaintedIcon />
+				<TaintedIcon :guid="id" />
 				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
-					<Popper />
+					<Popper :guid="id" />
 				</div>
 			</span>
 		</div>

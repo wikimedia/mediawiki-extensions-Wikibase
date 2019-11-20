@@ -23,18 +23,11 @@ describe( 'TaintedIcon.vue', () => {
 	it( 'opens the popper on click', () => {
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-		const parentComponentStub = {
-			name: 'parentStub',
-			template: '<div></div>',
-			data: () => {
-				return { id: 'a-guid' };
-			},
-		};
 
 		const wrapper = shallowMount( TaintedIcon, {
 			store,
 			localVue,
-			parentComponent: parentComponentStub,
+			propsData: { guid: 'a-guid' },
 		} );
 		wrapper.trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
@@ -44,18 +37,10 @@ describe( 'TaintedIcon.vue', () => {
 		store.dispatch( POPPER_SHOW, 'a-guid' );
 
 		store.dispatch = jest.fn();
-		const parentComponentStub = {
-			name: 'parentStub',
-			template: '<div></div>',
-			data: () => {
-				return { id: 'a-guid' };
-			},
-		};
-
 		const wrapper = shallowMount( TaintedIcon, {
 			store,
 			localVue,
-			parentComponent: parentComponentStub,
+			propsData: { guid: 'a-guid' },
 		} );
 
 		expect( wrapper.element.tagName ).toEqual( 'DIV' );
@@ -65,10 +50,11 @@ describe( 'TaintedIcon.vue', () => {
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_SHOW, 'a-guid' );
 	} );
 	it( 'clicking the tainted icon triggers a tracking event', () => {
+		const trackingFunction = jest.fn();
 		const localVue = createLocalVue();
 		localVue.use( Vuex );
-		const trackingFunction = jest.fn();
 		localVue.use( Track, { trackingFunction } );
+
 		const store: Store<Application> = createStore();
 		const wrapper = shallowMount( TaintedIcon, {
 			store,

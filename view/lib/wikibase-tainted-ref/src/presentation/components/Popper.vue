@@ -31,7 +31,9 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import { Getter } from 'vuex-class';
 
-@Component
+@Component( {
+	props: [ 'guid' ],
+} )
 export default class Popper extends Vue {
 	@Getter( 'helpLink' )
 	public helpLink!: string;
@@ -44,13 +46,13 @@ export default class Popper extends Vue {
 		const relatedTarget = event.relatedTarget;
 
 		if ( !relatedTarget || !this.$el.contains( ( relatedTarget as Node ) ) ) {
-			this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
+			this.$store.dispatch( POPPER_HIDE, this.$props.guid );
 		}
 	}
 
 	public closeClick( event: MouseEvent ) {
 		event.preventDefault();
-		this.$store.dispatch( POPPER_HIDE, this.$parent.$data.id );
+		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
 	}
 
 	public helpClick() {

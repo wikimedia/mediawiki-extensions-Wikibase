@@ -42,18 +42,11 @@ describe( 'Popper.vue', () => {
 	it( 'closes the popper when the x is clicked', () => {
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-		const parentComponentStub = {
-			name: 'parentStub',
-			template: '<div></div>',
-			data: () => {
-				return { id: 'a-guid' };
-			},
-		};
 
 		const wrapper = shallowMount( Popper, {
 			store,
 			localVue,
-			parentComponent: parentComponentStub,
+			propsData: { guid: 'a-guid' },
 		} );
 		wrapper.find( '.wb-tr-popper-close' ).trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
@@ -61,18 +54,11 @@ describe( 'Popper.vue', () => {
 	it( 'closes the popper when the focus is lost', () => {
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-		const parentComponentStub = {
-			name: 'parentStub',
-			template: '<div></div>',
-			data: () => {
-				return { id: 'a-guid' };
-			},
-		};
 
 		const wrapper = shallowMount( Popper, {
 			store,
 			localVue,
-			parentComponent: parentComponentStub,
+			propsData: { guid: 'a-guid' },
 		} );
 		wrapper.trigger( 'focusout' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
@@ -80,18 +66,11 @@ describe( 'Popper.vue', () => {
 	it( 'does not close the popper when the help link is focused', () => {
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-		const parentComponentStub = {
-			name: 'parentStub',
-			template: '<div></div>',
-			data: () => {
-				return { id: 'a-guid' };
-			},
-		};
 
 		const wrapper = shallowMount( Popper, {
 			store,
 			localVue,
-			parentComponent: parentComponentStub,
+			propsData: { guid: 'a-guid' },
 		} );
 		wrapper.trigger(
 			'focusout', {

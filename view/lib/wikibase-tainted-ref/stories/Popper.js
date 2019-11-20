@@ -17,5 +17,5 @@ storiesOf( 'Popper', module )
 			getters,
 		} ),
 		template:
-			'<p><Popper></Popper></p>',
+			'<p><Popper guid="a-guid"></Popper></p>',
 	} ) );
