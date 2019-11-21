@@ -23,7 +23,7 @@
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" />
 			<component
-				:is="isInit ? 'DataBridge' : 'Initializing'"
+				:is="isInitializing ? 'Initializing' : 'DataBridge'"
 				v-else
 			/>
 		</div>
@@ -58,8 +58,8 @@ export default class App extends Vue {
 	@State( 'applicationStatus' )
 	public applicationStatus!: ApplicationStatus;
 
-	public get isInit() {
-		return this.applicationStatus === ApplicationStatus.READY;
+	public get isInitializing() {
+		return this.applicationStatus === ApplicationStatus.INITIALIZING;
 	}
 
 	public get hasError() {
