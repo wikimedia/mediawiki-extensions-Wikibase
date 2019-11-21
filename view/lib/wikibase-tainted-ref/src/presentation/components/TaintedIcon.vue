@@ -16,19 +16,21 @@ import Component from 'vue-class-component';
 import { Getter } from 'vuex-class';
 import Vue from 'vue';
 
-@Component
+@Component( {
+	props: [ 'guid' ],
+} )
 export default class TaintedIcon extends Vue {
 	@Getter( 'popperState' )
 	public popperStateFunction!: Function;
 
 	public onClick( event: MouseEvent ) {
 		event.preventDefault();
-		this.$store.dispatch( POPPER_SHOW, this.$parent.$data.id );
 		this.$track( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
+		this.$store.dispatch( POPPER_SHOW, this.$props.guid );
 	}
 
 	public get popperIsOpened(): boolean {
-		return this.popperStateFunction( this.$parent.$data.id );
+		return this.popperStateFunction( this.$props.guid );
 	}
 }
 </script>
