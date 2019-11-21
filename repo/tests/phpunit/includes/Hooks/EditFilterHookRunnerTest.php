@@ -17,13 +17,12 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
- * @covers \Wikibase\Repo\EditEntity\EditFilterHookRunner
+ * @covers \Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner
  *
  * @group Wikibase
  *
@@ -33,7 +32,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
 class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 
 	/**
-	 * @return EditFilterHookRunner
+	 * @return MediawikiEditFilterHookRunner
 	 */
 	public function getEditFilterHookRunner( RequestContext $context ) {
 		$namespaceLookup = $this->getMockBuilder( EntityNamespaceLookup::class )

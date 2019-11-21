@@ -6,7 +6,8 @@ use Wikibase\IdGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\IdGenerator
+ * @covers \Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator
+ * @covers \Wikibase\SqlIdGenerator
  *
  * @group Wikibase
  * @group WikibaseStore
@@ -17,16 +18,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class IdGeneratorTest extends \MediaWikiTestCase {
 
-	public function instanceProvider() {
-		$instances = [ WikibaseRepo::getDefaultInstance()->newIdGenerator() ];
-
-		return [ $instances ];
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetNewId( IdGenerator $generator ) {
+	public function testGetNewId() {
+		$generator = WikibaseRepo::getDefaultInstance()->newIdGenerator();
 		/**
 		 * @var IdGenerator $clone
 		 */

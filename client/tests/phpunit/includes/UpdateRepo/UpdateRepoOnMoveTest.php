@@ -98,10 +98,11 @@ class UpdateRepoOnMoveTest extends \PHPUnit\Framework\TestCase {
 		// and it doesn't matter anyway
 		$jobQueue = $this->getMockBuilder( JobQueueRedis::class )
 			->disableOriginalConstructor()
+			->setMethods( [ 'supportsDelayedJobs' ] )
 			->getMock();
 
 		$jobQueue->expects( $this->any() )
-			->method( 'delayedJobsEnabled' )
+			->method( 'supportsDelayedJobs' )
 			->will( $this->returnValue( true ) );
 
 		$jobQueueGroupMock->expects( $this->once() )
