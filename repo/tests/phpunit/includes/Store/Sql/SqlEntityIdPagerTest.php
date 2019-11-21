@@ -120,7 +120,7 @@ class SqlEntityIdPagerTest extends MediaWikiTestCase {
 		return $ids;
 	}
 
-	private function assertEqualIds( array $expected, array $actual, $msg = null ) {
+	private function assertEqualIds( array $expected, array $actual ) {
 		$expectedIds = $this->getIdStrings( $expected );
 		$actualIds = $this->getIdStrings( $actual );
 

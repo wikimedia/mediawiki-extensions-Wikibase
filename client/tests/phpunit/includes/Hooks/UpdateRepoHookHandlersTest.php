@@ -153,9 +153,10 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 
 		$jobQueue = $this->getMockBuilder( JobQueue::class )
 			->disableOriginalConstructor()
-			->getMock();
+			->setMethods( [ 'supportsDelayedJobs' ] )
+			->getMockForAbstractClass();
 		$jobQueue->expects( $this->any() )
-			->method( 'delayedJobsEnabled' )
+			->method( 'supportsDelayedJobs' )
 			->will( $this->returnValue( true ) );
 
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )

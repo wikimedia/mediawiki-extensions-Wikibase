@@ -38,13 +38,13 @@ class EntityIdReaderTest extends \PHPUnit\Framework\TestCase {
 		}, $entityIds );
 	}
 
-	protected function assertEqualIds( array $expected, array $actual, $msg = null ) {
+	protected function assertEqualIds( array $expected, array $actual ) {
 		$expectedIds = array_values( $this->getIdStrings( $expected ) );
 		$actualIds = array_values( $this->getIdStrings( $actual ) );
 
 		sort( $expectedIds );
 		sort( $actualIds );
-		$this->assertEquals( $expectedIds, $actualIds, $msg );
+		$this->assertEquals( $expectedIds, $actualIds );
 	}
 
 	/**

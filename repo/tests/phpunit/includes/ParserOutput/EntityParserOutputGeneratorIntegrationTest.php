@@ -16,7 +16,8 @@ use Wikibase\Repo\Tests\NewItem;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator
+ * @covers \Wikibase\Repo\ParserOutput\StatsdTimeRecordingEntityParserOutputGenerator
  *
  * @group Wikibase
  * @group Database
