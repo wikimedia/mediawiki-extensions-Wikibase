@@ -1,5 +1,5 @@
 import MwWindow, {
-	ForeignApi,
+	Api,
 	ForeignApiConstructor,
 } from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
@@ -49,7 +49,7 @@ export function mockForeignApiConstructor(
 		postWithEditToken?: ( ...args: unknown[] ) => any;
 	},
 ): ForeignApiConstructor {
-	return class MockForeignApi implements ForeignApi {
+	return class MockForeignApi implements Api {
 		public constructor( url: string, _options?: any ) {
 			if ( options.expectedUrl ) {
 				expect( url ).toBe( options.expectedUrl );
@@ -97,6 +97,7 @@ export function mockMwEnv(
 			error: jest.fn(),
 			warn,
 		},
+		Api: jest.fn(),
 		ForeignApi,
 		language: {
 			bcp47: jest.fn(),

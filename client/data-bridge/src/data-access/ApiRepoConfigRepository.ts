@@ -1,4 +1,4 @@
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import WikibaseRepoConfigRepository, {
 	WikibaseRepoConfiguration,
 } from '@/definitions/data-access/WikibaseRepoConfigRepository';
@@ -11,15 +11,15 @@ interface WellFormedResponse {
 	};
 }
 
-export default class ForeignApiRepoConfigRepository implements WikibaseRepoConfigRepository {
-	private readonly foreignApi: ForeignApi;
+export default class ApiRepoConfigRepository implements WikibaseRepoConfigRepository {
+	private readonly api: Api;
 
-	public constructor( foreignApi: ForeignApi ) {
-		this.foreignApi = foreignApi;
+	public constructor( api: Api ) {
+		this.api = api;
 	}
 
 	public getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
-		return Promise.resolve( this.foreignApi.get( {
+		return Promise.resolve( this.api.get( {
 			action: 'query',
 			meta: 'wbdatabridgeconfig',
 			formatversion: 2,

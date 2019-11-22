@@ -1,10 +1,10 @@
-import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 
-function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
+function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
 	return {
 		get(): any {
 			if ( successObject ) {
@@ -17,7 +17,7 @@ function mockForeignApi( successObject?: unknown, rejectData?: unknown ): Foreig
 	} as any;
 }
 
-describe( 'ForeignApiRepoConfigRepository', () => {
+describe( 'ApiRepoConfigRepository', () => {
 
 	const wbdatabridgeconfig = {
 		dataTypeLimits: {
@@ -26,20 +26,20 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 			},
 		},
 	};
-	const foreignApi = mockForeignApi( {
+	const api = mockApi( {
 		query: {
 			wbdatabridgeconfig,
 		},
 	} );
 
-	it( 'calls the foreignApi with the correct parameters', () => {
-		jest.spyOn( foreignApi, 'get' );
+	it( 'calls the api with the correct parameters', () => {
+		jest.spyOn( api, 'get' );
 
-		const configurationRepository = new ForeignApiRepoConfigRepository( foreignApi );
+		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return configurationRepository.getRepoConfiguration().then( () => {
-			expect( foreignApi.get ).toHaveBeenCalledTimes( 1 );
-			expect( foreignApi.get ).toHaveBeenCalledWith( {
+			expect( api.get ).toHaveBeenCalledTimes( 1 );
+			expect( api.get ).toHaveBeenCalledWith( {
 				action: 'query',
 				meta: 'wbdatabridgeconfig',
 				errorformat: 'none',
@@ -49,7 +49,7 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 	} );
 
 	it( 'returns the configuration from a well-formed response', () => {
-		const configurationRepository = new ForeignApiRepoConfigRepository( foreignApi );
+		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return configurationRepository.getRepoConfiguration().then( ( configuration: WikibaseRepoConfiguration ) => {
 			expect( configuration ).toStrictEqual( wbdatabridgeconfig );
@@ -57,7 +57,7 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response does not match the agreed-upon format', () => {
-		const foreignApi = mockForeignApi( {
+		const api = mockApi( {
 			query: {
 				wbdatabridgeconfig: {
 					foobar: 'yes',
@@ -65,7 +65,7 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 			},
 		} );
 
-		const configurationRepository = new ForeignApiRepoConfigRepository( foreignApi );
+		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return expect( configurationRepository.getRepoConfiguration() )
 			.rejects
@@ -73,7 +73,7 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response indicates revelant API endpoint is disabled in repo', () => {
-		const foreignApi = mockForeignApi( {
+		const api = mockApi( {
 			warnings: [
 				{
 					code: 'unrecognizedvalues',
@@ -82,7 +82,7 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 			],
 		} );
 
-		const configurationRepository = new ForeignApiRepoConfigRepository( foreignApi );
+		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return expect( configurationRepository.getRepoConfiguration() )
 			.rejects
@@ -90,8 +90,8 @@ describe( 'ForeignApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if there was a serverside problem with the API', () => {
-		const foreignApi = mockForeignApi( null, { status: 500 } );
-		const configurationRepository = new ForeignApiRepoConfigRepository( foreignApi );
+		const api = mockApi( null, { status: 500 } );
+		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return expect( configurationRepository.getRepoConfiguration() )
 			.rejects

@@ -1,7 +1,7 @@
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import EntityInfoDispatcher, { WellFormedResponse } from '@/definitions/data-access/EntityInfoDispatcher';
 
 interface ErrorResponse {
@@ -18,15 +18,15 @@ interface RequestParameters {
 	};
 }
 
-export default class ForeignApiEntityInfoDispatcher implements EntityInfoDispatcher {
-	private foreignApi: ForeignApi;
+export default class ApiEntityInfoDispatcher implements EntityInfoDispatcher {
+	private api: Api;
 	private parameters: RequestParameters | null = null;
 	private resolveCallbacks: Function[] = [];
 	private rejectCallbacks: Function[] = [];
 	private waitForProps: string[] = [];
 
-	public constructor( api: ForeignApi, waitForProps: string[] = [] ) {
-		this.foreignApi = api;
+	public constructor( api: Api, waitForProps: string[] = [] ) {
+		this.api = api;
 		this.waitForProps = waitForProps;
 	}
 
@@ -80,7 +80,7 @@ export default class ForeignApiEntityInfoDispatcher implements EntityInfoDispatc
 
 	private executeRequest(): void {
 		const { parameters, resolveCallbacks, rejectCallbacks } = this.getAndClearRequestData();
-		Promise.resolve( this.foreignApi.get(
+		Promise.resolve( this.api.get(
 			{
 				action: 'wbgetentities',
 				ids: [ ...parameters.ids ],

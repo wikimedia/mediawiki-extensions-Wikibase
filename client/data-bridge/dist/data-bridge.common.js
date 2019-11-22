@@ -12790,7 +12790,7 @@ function (_Error) {
 var http_status_codes = __webpack_require__("0828");
 var http_status_codes_default = /*#__PURE__*/__webpack_require__.n(http_status_codes);
 
-// CONCATENATED MODULE: ./src/data-access/ForeignApiWritingRepository.ts
+// CONCATENATED MODULE: ./src/data-access/ApiWritingRepository.ts
 
 
 
@@ -12802,21 +12802,21 @@ var http_status_codes_default = /*#__PURE__*/__webpack_require__.n(http_status_c
 
 
 
-var ForeignApiWritingRepository_ForeignApiWritingRepository =
+var ApiWritingRepository_ApiWritingRepository =
 /*#__PURE__*/
 function () {
-  function ForeignApiWritingRepository(api, username, tags) {
-    _classCallCheck(this, ForeignApiWritingRepository);
+  function ApiWritingRepository(api, username, tags) {
+    _classCallCheck(this, ApiWritingRepository);
 
-    this.foreignApi = api;
+    this.api = api;
     this.username = username || undefined;
     this.tags = tags || undefined;
   }
 
-  _createClass(ForeignApiWritingRepository, [{
+  _createClass(ApiWritingRepository, [{
     key: "saveEntity",
     value: function saveEntity(revision) {
-      return Promise.resolve(this.foreignApi.postWithEditToken({
+      return Promise.resolve(this.api.postWithEditToken({
         action: 'wbeditentity',
         id: revision.entity.id,
         baserevid: revision.revisionId,
@@ -12830,7 +12830,7 @@ function () {
           throw new TechnicalProblem_TechnicalProblem('unknown response type.');
         }
 
-        if (ForeignApiWritingRepository.isError(response)) {
+        if (ApiWritingRepository.isError(response)) {
           throw new TechnicalProblem_TechnicalProblem(response.error.code);
         }
 
@@ -12850,7 +12850,7 @@ function () {
     }
   }]);
 
-  return ForeignApiWritingRepository;
+  return ApiWritingRepository;
 }();
 
 
@@ -13006,28 +13006,28 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/data-access/ForeignApiRepoConfigRepository.ts
+// CONCATENATED MODULE: ./src/data-access/ApiRepoConfigRepository.ts
 
 
 
 
 
 
-var ForeignApiRepoConfigRepository_ForeignApiRepoConfigRepository =
+var ApiRepoConfigRepository_ApiRepoConfigRepository =
 /*#__PURE__*/
 function () {
-  function ForeignApiRepoConfigRepository(foreignApi) {
-    _classCallCheck(this, ForeignApiRepoConfigRepository);
+  function ApiRepoConfigRepository(api) {
+    _classCallCheck(this, ApiRepoConfigRepository);
 
-    this.foreignApi = foreignApi;
+    this.api = api;
   }
 
-  _createClass(ForeignApiRepoConfigRepository, [{
+  _createClass(ApiRepoConfigRepository, [{
     key: "getRepoConfiguration",
     value: function getRepoConfiguration() {
       var _this = this;
 
-      return Promise.resolve(this.foreignApi.get({
+      return Promise.resolve(this.api.get({
         action: 'query',
         meta: 'wbdatabridgeconfig',
         formatversion: 2,
@@ -13066,7 +13066,7 @@ function () {
     }
   }]);
 
-  return ForeignApiRepoConfigRepository;
+  return ApiRepoConfigRepository;
 }();
 
 
@@ -13358,7 +13358,7 @@ function _toConsumableArray(arr) {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
 var es6_set = __webpack_require__("4f7f");
 
-// CONCATENATED MODULE: ./src/data-access/ForeignApiEntityInfoDispatcher.ts
+// CONCATENATED MODULE: ./src/data-access/ApiEntityInfoDispatcher.ts
 
 
 
@@ -13373,31 +13373,31 @@ var es6_set = __webpack_require__("4f7f");
 
 
 
-function ForeignApiEntityInfoDispatcher_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ApiEntityInfoDispatcher_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function ForeignApiEntityInfoDispatcher_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ForeignApiEntityInfoDispatcher_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ForeignApiEntityInfoDispatcher_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
+function ApiEntityInfoDispatcher_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ApiEntityInfoDispatcher_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ApiEntityInfoDispatcher_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
-var ForeignApiEntityInfoDispatcher_ForeignApiEntityInfoDispatcher =
+
+
+var ApiEntityInfoDispatcher_ApiEntityInfoDispatcher =
 /*#__PURE__*/
 function () {
-  function ForeignApiEntityInfoDispatcher(api) {
+  function ApiEntityInfoDispatcher(api) {
     var waitForProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
-    _classCallCheck(this, ForeignApiEntityInfoDispatcher);
+    _classCallCheck(this, ApiEntityInfoDispatcher);
 
     this.parameters = null;
     this.resolveCallbacks = [];
     this.rejectCallbacks = [];
     this.waitForProps = [];
-    this.foreignApi = api;
+    this.api = api;
     this.waitForProps = waitForProps;
   }
 
-  _createClass(ForeignApiEntityInfoDispatcher, [{
+  _createClass(ApiEntityInfoDispatcher, [{
     key: "dispatchEntitiesInfoRequest",
     value: function dispatchEntitiesInfoRequest(requestData) {
       var _this = this;
@@ -13427,7 +13427,7 @@ function () {
       this.parameters.ids = new Set([].concat(_toConsumableArray(this.parameters.ids), _toConsumableArray(requestData.ids)));
 
       if (requestData.otherParams) {
-        this.parameters.otherParams = ForeignApiEntityInfoDispatcher_objectSpread({}, this.parameters.otherParams, {}, requestData.otherParams);
+        this.parameters.otherParams = ApiEntityInfoDispatcher_objectSpread({}, this.parameters.otherParams, {}, requestData.otherParams);
       }
     }
   }, {
@@ -13451,7 +13451,7 @@ function () {
           resolveCallbacks = _this$getAndClearRequ.resolveCallbacks,
           rejectCallbacks = _this$getAndClearRequ.rejectCallbacks;
 
-      Promise.resolve(this.foreignApi.get(ForeignApiEntityInfoDispatcher_objectSpread({
+      Promise.resolve(this.api.get(ApiEntityInfoDispatcher_objectSpread({
         action: 'wbgetentities',
         ids: _toConsumableArray(parameters.ids),
         props: _toConsumableArray(parameters.props)
@@ -13519,7 +13519,7 @@ function () {
     }
   }]);
 
-  return ForeignApiEntityInfoDispatcher;
+  return ApiEntityInfoDispatcher;
 }();
 
 
@@ -13547,8 +13547,8 @@ function createServices(mwWindow, editTags) {
   }
 
   var repoForeignApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
-  services.set('writingEntityRepository', new ForeignApiWritingRepository_ForeignApiWritingRepository(repoForeignApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
-  var foreignApiEntityInfoDispatcher = new ForeignApiEntityInfoDispatcher_ForeignApiEntityInfoDispatcher(repoForeignApi, ['labels', 'datatype']);
+  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoForeignApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
+  var foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher_ApiEntityInfoDispatcher(repoForeignApi, ['labels', 'datatype']);
   services.set('entityLabelRepository', new DispatchingEntityLabelRepository_DispatchingEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), foreignApiEntityInfoDispatcher));
   services.set('propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository(foreignApiEntityInfoDispatcher));
 
@@ -13558,7 +13558,7 @@ function createServices(mwWindow, editTags) {
 
   services.set('languageInfoRepository', new MwLanguageInfoRepository_MwLanguageInfoRepository(mwWindow.mw.language, mwWindow.$.uls.data));
   services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
-  services.set('wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository_ForeignApiRepoConfigRepository(repoForeignApi));
+  services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoForeignApi));
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
   return services;
 }

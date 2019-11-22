@@ -1,4 +1,4 @@
-import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
+import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
@@ -12,8 +12,8 @@ import {
 } from '../../util/mocks';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
-import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
+import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
@@ -70,7 +70,7 @@ describe( 'init', () => {
 			( window as MwWindow ).$,
 			'http://localhost/wiki/Special:EntityData',
 		) );
-		expectedServices.set( 'writingEntityRepository', new ForeignApiWritingRepository(
+		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
 			ForeignApi,
 			'Test User',
 			editTags,
@@ -79,7 +79,7 @@ describe( 'init', () => {
 			( window as MwWindow ).mw.language,
 			( window as MwWindow ).$.uls!.data,
 		) );
-		const entityInfoDispatcher = new ForeignApiEntityInfoDispatcher( ForeignApi, [ 'labels', 'datatype' ] );
+		const entityInfoDispatcher = new ApiEntityInfoDispatcher( ForeignApi, [ 'labels', 'datatype' ] );
 		expectedServices.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
 			'en',
 			entityInfoDispatcher,
@@ -90,7 +90,7 @@ describe( 'init', () => {
 		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
 			( window as MwWindow ).mw.message,
 		) );
-		expectedServices.set( 'wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository( ForeignApi ) );
+		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( ForeignApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
 			new EventTracker( ( window as MwWindow ).mw.track ),
 		) );

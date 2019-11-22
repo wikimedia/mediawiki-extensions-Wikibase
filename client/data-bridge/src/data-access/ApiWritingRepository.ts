@@ -1,4 +1,4 @@
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
@@ -25,13 +25,13 @@ interface ResponseError {
 
 type Response = ResponseError|ResponseSuccess;
 
-export default class ForeignApiWritingRepository implements WritingEntityRepository {
-	private foreignApi: ForeignApi;
+export default class ApiWritingRepository implements WritingEntityRepository {
+	private api: Api;
 	private username?: string;
 	private tags?: string[];
 
-	public constructor( api: ForeignApi, username: string|null, tags?: string[] ) {
-		this.foreignApi = api;
+	public constructor( api: Api, username: string|null, tags?: string[] ) {
+		this.api = api;
 		this.username = username || undefined;
 		this.tags = tags || undefined;
 	}
@@ -42,7 +42,7 @@ export default class ForeignApiWritingRepository implements WritingEntityReposit
 
 	public saveEntity( revision: EntityRevision ): Promise<EntityRevision> {
 		return Promise.resolve(
-			this.foreignApi.postWithEditToken( {
+			this.api.postWithEditToken( {
 				action: 'wbeditentity',
 				id: revision.entity.id,
 				baserevid: revision.revisionId,
@@ -56,7 +56,7 @@ export default class ForeignApiWritingRepository implements WritingEntityReposit
 			if ( typeof response !== 'object' ) {
 				throw new TechnicalProblem( 'unknown response type.' );
 			}
-			if ( ForeignApiWritingRepository.isError( response ) ) {
+			if ( ApiWritingRepository.isError( response ) ) {
 				throw new TechnicalProblem( response.error.code );
 			}
 

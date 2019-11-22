@@ -1,10 +1,10 @@
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
+import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 
-function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
+function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
 	return {
 		get(): any {
 			if ( successObject ) {
@@ -31,7 +31,7 @@ function mockForeignApi( successObject?: unknown, rejectData?: unknown ): Foreig
 	} as any;
 }
 
-describe( 'ForeignApiEntityInfoDispatcher', () => {
+describe( 'ApiEntityInfoDispatcher', () => {
 	const wellFormedResponse = {
 		entities: {
 			Q1141: {
@@ -47,8 +47,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		}, success: 1,
 	};
 	it( 'returns well-formed entities as received in the request', () => {
-		const foreignApi = mockForeignApi( wellFormedResponse );
-		const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+		const api = mockApi( wellFormedResponse );
+		const dispatcher = new ApiEntityInfoDispatcher( api );
 		const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 			props: [ 'labels' ],
 			ids: [ 'Q1141' ],
@@ -66,7 +66,7 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 	} );
 
 	it( 'bundles requests', () => {
-		const foreignApi = mockForeignApi( {
+		const api = mockApi( {
 			entities: {
 				Q1141: {
 					type: 'item',
@@ -84,8 +84,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 				},
 			}, success: 1,
 		} );
-		jest.spyOn( foreignApi, 'get' );
-		const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi, [ 'labels', 'datatype' ] );
+		jest.spyOn( api, 'get' );
+		const dispatcher = new ApiEntityInfoDispatcher( api, [ 'labels', 'datatype' ] );
 		const labelRequestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 			props: [ 'labels' ],
 			ids: [ 'Q1141' ],
@@ -94,7 +94,7 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 				languagefallback: 1,
 			},
 		} );
-		expect( foreignApi.get ).toHaveBeenCalledTimes( 0 );
+		expect( api.get ).toHaveBeenCalledTimes( 0 );
 		dispatcher.dispatchEntitiesInfoRequest( {
 			props: [ 'datatype' ],
 			ids: [ 'P123' ],
@@ -102,8 +102,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 
 		return labelRequestPromise.then(
 			() => {
-				expect( foreignApi.get ).toHaveBeenCalledTimes( 1 );
-				expect( foreignApi.get ).toHaveBeenCalledWith( {
+				expect( api.get ).toHaveBeenCalledTimes( 1 );
+				expect( api.get ).toHaveBeenCalledWith( {
 					action: 'wbgetentities',
 					ids: [ 'Q1141', 'P123' ],
 					props: [ 'labels', 'datatype' ],
@@ -117,8 +117,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 	describe( 'if there is a problem', () => {
 
 		it( 'rejects on result that does not contain an object', () => {
-			const foreignApi = mockForeignApi( 'noObject' );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const api = mockApi( 'noObject' );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
@@ -130,8 +130,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result missing entities key', () => {
-			const foreignApi = mockForeignApi( {} );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const api = mockApi( {} );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
@@ -143,12 +143,12 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result missing relevant entity in entities', () => {
-			const foreignApi = mockForeignApi( {
+			const api = mockApi( {
 				entities: {
 					'Q4': {},
 				},
 			} );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
@@ -160,14 +160,14 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing (via error)', () => {
-			const foreignApi = mockForeignApi( {
+			const api = mockApi( {
 				error: {
 					code: 'no-such-entity',
 					info: 'Could not find an entity with the ID "P123".',
 					id: 'P123',
 				},
 			} );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
@@ -179,7 +179,7 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing (via missing)', () => {
-			const foreignApi = mockForeignApi( {
+			const api = mockApi( {
 				entities: {
 					P123: {
 						id: 'P123',
@@ -187,7 +187,7 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 					},
 				}, success: 1,
 			} );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
@@ -199,8 +199,8 @@ describe( 'ForeignApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
-			const foreignApi = mockForeignApi( null, { status: 500 } );
-			const dispatcher = new ForeignApiEntityInfoDispatcher( foreignApi );
+			const api = mockApi( null, { status: 500 } );
+			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
 				ids: [ 'P123' ],
