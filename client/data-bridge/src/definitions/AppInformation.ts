@@ -7,6 +7,8 @@ export default interface AppInformation {
 	entityId: EntityId;
 	/** The property ID of the statement(s) to edit. */
 	propertyId: EntityId;
+	/** The page title (including namespace, if any) of the entity ID to edit. */
+	entityTitle: string;
 	/** The edit flow to use for editing. */
 	editFlow: EditFlow;
 	/** The client configuration of Wikibase */

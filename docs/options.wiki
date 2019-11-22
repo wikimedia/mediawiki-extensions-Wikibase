@@ -324,6 +324,6 @@ As usual, the extension is configured in MediaWiki's LocalSettings.php file. How
 ; dataBridgeEnabled
 : Enables the Data Bridge Feature, which allows editing a repository directly from a client wiki. To enable it, set this setting to <code>true</code> on both repo and client and also configure <code>dataBridgeHrefRegExp</code> (see below). Default: <code>false</code>
 ; dataBridgeHrefRegExp
-: Regular expression to match edit links for which the Data Bridge is enabled. Uses JavaScript syntax, with the first capturing group containing the entity ID and the second one containing the property ID to edit. Mandatory if <code>dataBridgeEnabled</code> is set to <code>true</code> – there is no default value.
+: Regular expression to match edit links for which the Data Bridge is enabled. Uses JavaScript syntax, with the first capturing group containing the title of the entity, the second one containing the entity ID (usually a part of the first capturing group) and the third one containing the property ID to edit. Mandatory if <code>dataBridgeEnabled</code> is set to <code>true</code> – there is no default value.
 ; dataBridgeEditTags
 : A list of tags for tracking edits through the Data Bridge. Optional if <code>dataBridgeEnabled</code> is set to <code>true</code>, with a default value of <code>[]</code>. Please note: you also have to create those tags in the target repository via Special:Tags.

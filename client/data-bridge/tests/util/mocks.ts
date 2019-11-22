@@ -14,7 +14,7 @@ export function mockMwConfig( values: {
 	wgUserName?: string;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
-		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)';
+		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/((Q[1-9][0-9]*)).*#(P[1-9][0-9]*)';
 	}
 	return {
 		get( key: string ): any {

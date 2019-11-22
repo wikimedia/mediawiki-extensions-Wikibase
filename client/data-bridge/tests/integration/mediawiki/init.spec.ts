@@ -97,6 +97,7 @@ describe( 'init', () => {
 
 		const entityId = 'Q5';
 		const propertyId = 'P4711';
+		const entityTitle = entityId; // main namespace
 		const editFlow = EditFlow.OVERWRITE;
 		const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
 		document.body.innerHTML = `
@@ -117,6 +118,7 @@ describe( 'init', () => {
 				{
 					entityId,
 					propertyId,
+					entityTitle,
 					editFlow,
 					client: { usePublish },
 				},

@@ -71,6 +71,7 @@ describe( 'Dispatcher', () => {
 			};
 			const entityId = 'Q4711';
 			const propertyId = 'P815';
+			const entityTitle = entityId;
 			const editFlow = EditFlow.OVERWRITE;
 
 			const dispatcher = new Dispatcher(
@@ -83,6 +84,7 @@ describe( 'Dispatcher', () => {
 				link: new ( jest.fn() )(),
 				entityId,
 				propertyId,
+				entityTitle,
 				editFlow,
 			} );
 
@@ -94,6 +96,7 @@ describe( 'Dispatcher', () => {
 				{
 					entityId,
 					propertyId,
+					entityTitle,
 					editFlow,
 					client: {
 						usePublish,

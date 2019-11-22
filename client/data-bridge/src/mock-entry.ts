@@ -90,6 +90,7 @@ launch(
 	{
 		entityId: 'Q42',
 		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
+		entityTitle: 'Q42',
 		editFlow: EditFlow.OVERWRITE,
 		client: {
 			usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',

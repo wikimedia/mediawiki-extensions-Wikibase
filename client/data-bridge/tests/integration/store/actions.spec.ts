@@ -133,6 +133,7 @@ describe( 'store/actions', () => {
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
+			entityTitle: 'Q42',
 			client,
 		};
 
@@ -162,6 +163,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P2312',
 					entityId: 'Q42',
+					entityTitle: 'Q42',
 					client,
 				};
 
@@ -176,6 +178,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P60',
 					entityId: 'Q42',
+					entityTitle: 'Q42',
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
@@ -189,6 +192,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P23',
 					entityId: 'Q42',
+					entityTitle: 'Q42',
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
@@ -202,6 +206,7 @@ describe( 'store/actions', () => {
 					editFlow: EditFlow.OVERWRITE,
 					propertyId: 'P42',
 					entityId: 'Q42',
+					entityTitle: 'Q42',
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
