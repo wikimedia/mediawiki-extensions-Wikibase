@@ -157,7 +157,7 @@ class MwTimeIsoParser extends StringValueParser {
 		$msgRegexp = $this->getRegexpFromMessageText( $msgText );
 
 		if ( preg_match(
-			'/^\s*' . $msgRegexp . '\s*$/i',
+			'@^\s*' . $msgRegexp . '\s*$@i',
 			$value,
 			$matches
 		) ) {
@@ -172,7 +172,7 @@ class MwTimeIsoParser extends StringValueParser {
 		// If the msg string ends with BCE also check for BC
 		if ( substr_compare( $msgRegexp, 'BCE', -3 ) === 0 ) {
 			if ( preg_match(
-				'/^\s*' . substr( $msgRegexp, 0, -1 ) . '\s*$/i',
+				'@^\s*' . substr( $msgRegexp, 0, -1 ) . '\s*$@i',
 				$value,
 				$matches
 			) ) {
