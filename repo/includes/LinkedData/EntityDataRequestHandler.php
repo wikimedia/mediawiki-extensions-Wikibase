@@ -501,6 +501,7 @@ class EntityDataRequestHandler {
 			if ( $entityRevision->getTimestamp() <= $ims ) {
 				$response = $output->getRequest()->response();
 				$response->header( 'Status: 304', true, 304 );
+				$output->setArticleBodyOnly( true );
 				return;
 			}
 		}
