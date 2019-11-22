@@ -14,6 +14,7 @@ $font-size-dialog-process-title: 1.1em;
 
 $padding-panel-form: px-to-em( 16px );
 
+$size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;
 
@@ -24,9 +25,13 @@ $padding-horizontal-base: px-to-em( 12px );
 
 $margin-center-column-left: 26px;
 
+$notice-message-background: $wmui-color-base80;
+$notice-message-border: $wmui-color-base50;
+
 // project specific
 $breakpoint: 500px;// 499+1
 
 $grid-breakpoints: ( breakpoint: $breakpoint );
 
 $svg-cancel: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/close.svg );
+$svg-notice: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/notice.svg );
