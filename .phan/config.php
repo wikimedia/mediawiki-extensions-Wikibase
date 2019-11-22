@@ -27,16 +27,6 @@ $cfg['file_list'] = array_merge(
 		'view/ViewHooks.php',
 		'view/WikibaseView.php',
 		'Wikibase.php',
-		// Include extension stubs so we don't require extensions to be available locally.
-		'.phan/stubs/babel.php',
-		'.phan/stubs/cirrussearch.php',
-		'.phan/stubs/echo.php',
-		'.phan/stubs/geodata.php',
-		'.phan/stubs/math.php',
-		'.phan/stubs/mobilefrontend.php',
-		'.phan/stubs/monolog.php',
-		'.phan/stubs/pageimages.php',
-		'.phan/stubs/scribunto.php',
 	]
 );
 
@@ -61,7 +51,6 @@ $cfg['directory_list'] = array_merge(
 $cfg['exclude_analysis_directory_list'] = array_merge(
 	$cfg['exclude_analysis_directory_list'],
 	[
-		'.phan/stubs',
 		'../../includes',
 		'../../languages',
 		'../../maintenance',
