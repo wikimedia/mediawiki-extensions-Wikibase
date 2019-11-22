@@ -270,6 +270,25 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
 	}
 
+	public function testHandleRequestWith304() {
+		$output = $this->makeOutputPage( [], [ 'If-Modified-Since' => '20131213141516' ] );
+		$request = $output->getRequest();
+
+		/** @var FauxResponse $response */
+		$response = $request->response();
+
+		// construct handler
+		$handler = $this->newHandler();
+		$handler->handleRequest( 'Q42.json', $request, $output );
+		$text = $output->output( true );
+
+		$this->assertSame( 304, $response->getStatusCode(), 'status code' );
+		$this->assertSame( '', $text, 'output' );
+
+		// We always set "Access-Control-Allow-Origin: *"
+		$this->assertSame( '*', $response->getHeader( 'Access-Control-Allow-Origin' ) );
+	}
+
 	public function provideHttpContentNegotiation() {
 		$q13 = new ItemId( 'Q13' );
 		return [
