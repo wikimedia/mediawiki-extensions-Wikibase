@@ -102,12 +102,14 @@
 	"wikibase-otherprojects-beta-description": "Amiesta la seición «{{int:wikibase-otherprojects}}» a la barra llateral qu'ufre enllaces los demás proyeutos de Wikimedia basaos nos datos de {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexón|Conexones}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avisame cuando daquién conecta una páxina que {{GENDER:|creé}} a un elementu de {{WBREPONAME}}.",
-	"notification-header-page-connection": "La páxina <strong>$3</strong> {{GENDER:$2|conectóse}} {{PLURAL:$4|-1=a un elementu de|al elementu $4 de}} {{WBREPONAME}}.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra páxina|otres $4 páxines|100=+99 otres páxines}} {{GENDER:$2|coneutáronse}} con elementos de {{WBREPONAME}}.",
+	"notification-header-page-connection": "La páxina <strong>$3</strong> {{GENDER:$2|conectóse}} {{PLURAL:$4|-1=a un elementu de|al elementu $4 de}} {{WBREPONAME}} onde pueden recoyese datos rellacionaos col asuntu.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra páxina|otres $4 páxines|100=+99 páxines más}} {{GENDER:$2|coneutáronse}} con elementos de {{WBREPONAME}}, onde pueden recoyese datos rellacionaos col asuntu.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} l'elementu",
 	"notification-subject-page-connection": "Una páxina de {{SITENAME}} que {{GENDER:$3|creasti}} {{GENDER:$2|coneutóse}} con un elementu de {{WBREPONAME}}",
 	"unresolved-property-category": "Páxines con propiedaes sin resolver",
 	"unresolved-property-category-desc": "Esta categoría amuesa páxines que referencien propiedaes {{WBREPONAME}} que nun pueden alcontrase nin pol identificador de propiedá nin pola etiqueta.",
 	"connected-redirect-category": "Redireiciones coneutaes con un elementu de {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Esta categoría llista les páxines de redireición que tán conectaes con un elementu de {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Esta categoría llista les páxines de redireición que tán conectaes con un elementu de {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-dialog-title": "Editar Propiedá",
+	"wikibase-client-data-bridge-references-heading": "Referencies"
 }

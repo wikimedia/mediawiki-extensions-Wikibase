@@ -114,5 +114,6 @@
 	"unresolved-property-category-desc": "הקטגוריה הזאת כוללת דפים שמפנים למאפיינים ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} שאי־אפשר למצוא לפי מזהה או תווית.",
 	"connected-redirect-category": "הפניות המקושרות לפריטי {{WBREPONAME}}",
 	"connected-redirect-category-desc": "הקטגוריה הזאת מונה דפי הפניות המקושרות לפריטי {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "עריכת מאפיין"
+	"wikibase-client-data-bridge-dialog-title": "עריכת מאפיין",
+	"wikibase-client-data-bridge-references-heading": "מקורות"
 }

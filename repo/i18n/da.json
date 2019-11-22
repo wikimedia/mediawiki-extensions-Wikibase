@@ -13,7 +13,8 @@
 			"Sarrus",
 			"Ladsgroup",
 			"Saederup92",
-			"Dipsacus fullonum"
+			"Dipsacus fullonum",
+			"Jhertel"
 		]
 	},
 	"wikibase-desc": "Struktureret datalager",
@@ -41,7 +42,7 @@
 	"wikibase-entitytermsforlanguagelistview-language": "Sprog",
 	"wikibase-entitytermsforlanguagelistview-more": "Alle indtastede sprog",
 	"wikibase-entitytermsforlanguagelistview-less": "Færre sprog",
-	"wikibase-label-empty": "Ingen etiket er defineret",
+	"wikibase-label-empty": "Ingen etiket defineret",
 	"wikibase-label-edit-placeholder": "angiv etiket",
 	"wikibase-label-edit-placeholder-language-aware": "angiv etiket på $1",
 	"wikibase-description-empty": "Ingen beskrivelse defineret",
