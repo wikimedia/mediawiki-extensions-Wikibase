@@ -1,15 +1,15 @@
-import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
+import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
-import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
 import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
+import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
 	const services = new ServiceContainer();
@@ -33,13 +33,13 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
 
-	services.set( 'writingEntityRepository', new ForeignApiWritingRepository(
+	services.set( 'writingEntityRepository', new ApiWritingRepository(
 		repoForeignApi,
 		mwWindow.mw.config.get( 'wgUserName' ),
 		editTags.length === 0 ? undefined : editTags,
 	) );
 
-	const foreignApiEntityInfoDispatcher = new ForeignApiEntityInfoDispatcher(
+	const foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher(
 		repoForeignApi,
 		[ 'labels', 'datatype' ],
 	);
@@ -64,7 +64,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 
 	services.set( 'messagesRepository', new MwMessagesRepository( mwWindow.mw.message ) );
 
-	services.set( 'wikibaseRepoConfigRepository', new ForeignApiRepoConfigRepository(
+	services.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository(
 		repoForeignApi,
 	) );
 

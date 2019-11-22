@@ -20,16 +20,18 @@ interface MwLog {
 	warn( ...msg: string[] ): void;
 }
 
-/** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-property-defaultOptions */
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-property-defaultOptions */
 interface ApiOptions {
 	parameters: any;
 	ajax: JQuery.jqXHR;
 	useUse: boolean;
 }
 
-/** see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
-export type ForeignApiConstructor = new( url: string, options?: ApiOptions ) => ForeignApi;
-export interface ForeignApi {
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
+export type ForeignApiConstructor = new( url: string, options?: ApiOptions ) => Api;
+/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api */
+export type ApiConstructor = new( options?: ApiOptions ) => Api;
+export interface Api {
 	get( parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	getEditToken(): JQuery.Promise<any>;
 	getToken( type: string, assert?: string ): JQuery.Promise<any>;
@@ -48,6 +50,8 @@ interface MediaWiki {
 	config: MwConfig;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log */
 	log: MwLog;
+	/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api */
+	Api: ApiConstructor;
 	/** @see https://www.mediawiki.org/wiki/Manual:CORS */
 	ForeignApi?: ForeignApiConstructor;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.language */

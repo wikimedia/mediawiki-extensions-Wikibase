@@ -1,12 +1,12 @@
-import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
-import { ForeignApi } from '@/@types/mediawiki/MwWindow';
+import ApiWritingRepository from '@/data-access/ApiWritingRepository';
+import { Api } from '@/@types/mediawiki/MwWindow';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 
-function mockForeignApi( successObject?: unknown, rejectData?: unknown ): ForeignApi {
+function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
 	return {
 		postWithEditToken(): any {
 			if ( successObject ) {
@@ -29,7 +29,7 @@ function mockForeignApi( successObject?: unknown, rejectData?: unknown ): Foreig
 	} as any;
 }
 
-describe( 'ForeignApiWritingRepository', () => {
+describe( 'ApiWritingRepository', () => {
 	it( 'returns well formatted answer as expected', () => {
 		const response = {
 			entity: {
@@ -60,9 +60,9 @@ describe( 'ForeignApiWritingRepository', () => {
 			success: 1,
 		};
 
-		const foreignApi = mockForeignApi( response );
+		const api = mockApi( response );
 
-		const entityWriter = new ForeignApiWritingRepository( foreignApi, 'user' );
+		const entityWriter = new ApiWritingRepository( api, 'user' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -83,9 +83,9 @@ describe( 'ForeignApiWritingRepository', () => {
 			} );
 	} );
 
-	it( 'delagates the change to the foreignApi', () => {
-		const foreignApi = mockForeignApi();
-		jest.spyOn( foreignApi, 'postWithEditToken' );
+	it( 'delagates the change to the api', () => {
+		const api = mockApi();
+		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -110,12 +110,12 @@ describe( 'ForeignApiWritingRepository', () => {
 		};
 
 		const assertuser = 'sampleUser';
-		const entityWriter = new ForeignApiWritingRepository( foreignApi, assertuser );
+		const entityWriter = new ApiWritingRepository( api, assertuser );
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
+				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser,
 					baserevid: toBeWrittenEntity.revisionId,
@@ -127,9 +127,9 @@ describe( 'ForeignApiWritingRepository', () => {
 			} );
 	} );
 
-	it( 'delegates anonymous user to the foreignApi', () => {
-		const foreignApi = mockForeignApi();
-		jest.spyOn( foreignApi, 'postWithEditToken' );
+	it( 'delegates anonymous user to the api', () => {
+		const api = mockApi();
+		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -154,12 +154,12 @@ describe( 'ForeignApiWritingRepository', () => {
 		};
 
 		const assertuser = null;
-		const entityWriter = new ForeignApiWritingRepository( foreignApi, assertuser );
+		const entityWriter = new ApiWritingRepository( api, assertuser );
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
+				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser: undefined,
 					baserevid: toBeWrittenEntity.revisionId,
@@ -171,9 +171,9 @@ describe( 'ForeignApiWritingRepository', () => {
 			} );
 	} );
 
-	it( 'can delagate tags to the foreignApi', () => {
-		const foreignApi = mockForeignApi();
-		jest.spyOn( foreignApi, 'postWithEditToken' );
+	it( 'can delagate tags to the api', () => {
+		const api = mockApi();
+		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -199,12 +199,12 @@ describe( 'ForeignApiWritingRepository', () => {
 
 		const assertuser = 'sampleUser';
 		const tags = [ 'tag1', 'tag2', 'tag3' ];
-		const entityWriter = new ForeignApiWritingRepository( foreignApi, assertuser, tags );
+		const entityWriter = new ApiWritingRepository( api, assertuser, tags );
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledTimes( 1 );
-				expect( foreignApi.postWithEditToken ).toHaveBeenCalledWith( {
+				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
 					assertuser,
 					baserevid: toBeWrittenEntity.revisionId,
@@ -228,9 +228,9 @@ describe( 'ForeignApiWritingRepository', () => {
 		};
 
 		it( 'rejects on result that does not contain an object', () => {
-			const mock = mockForeignApi( 'noObject' );
+			const mock = mockApi( 'noObject' );
 
-			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'unknown response type.' ) );
@@ -243,27 +243,27 @@ describe( 'ForeignApiWritingRepository', () => {
 				},
 			};
 
-			const mock = mockForeignApi( error );
+			const mock = mockApi( error );
 
-			const entityWriter = new ForeignApiWritingRepository( mock, 'nuterin' );
+			const entityWriter = new ApiWritingRepository( mock, 'nuterin' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( error.error.code ) );
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing', () => {
-			const mock = mockForeignApi( null, { status: 404 } );
+			const mock = mockApi( null, { status: 404 } );
 
-			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'The given api page does not exist.' ) );
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
-			const mock = mockForeignApi( null, { status: 500 } );
+			const mock = mockApi( null, { status: 500 } );
 
-			const entityWriter = new ForeignApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );

@@ -1,8 +1,8 @@
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
+import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 
 export default function mockEntityInfoDispatcher(
 	successEntities?: unknown, error?: unknown,
-): ForeignApiEntityInfoDispatcher {
+): ApiEntityInfoDispatcher {
 	return {
 		dispatchEntitiesInfoRequest(): Promise<any> {
 			if ( successEntities ) {

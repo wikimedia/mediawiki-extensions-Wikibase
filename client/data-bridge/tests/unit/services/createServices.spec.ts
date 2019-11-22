@@ -2,13 +2,13 @@ import createServices from '@/services/createServices';
 import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
-import ForeignApiWritingRepository from '@/data-access/ForeignApiWritingRepository';
+import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ForeignApiEntityInfoDispatcher from '@/data-access/ForeignApiEntityInfoDispatcher';
+import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
-import ForeignApiRepoConfigRepository from '@/data-access/ForeignApiRepoConfigRepository';
+import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
@@ -21,12 +21,12 @@ jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
 } );
 
 const mockWritingEntityRepository = {};
-jest.mock( '@/data-access/ForeignApiWritingRepository', () => {
+jest.mock( '@/data-access/ApiWritingRepository', () => {
 	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
 } );
 
 const mockEntityInfoDispatcher = {};
-jest.mock( '@/data-access/ForeignApiEntityInfoDispatcher', () => {
+jest.mock( '@/data-access/ApiEntityInfoDispatcher', () => {
 	return jest.fn().mockImplementation( () => mockEntityInfoDispatcher );
 } );
 
@@ -53,7 +53,7 @@ jest.mock( '@/data-access/MwMessagesRepository', () => {
 } );
 
 const mockWikibaseRepoConfigRepository = {};
-jest.mock( '@/data-access/ForeignApiRepoConfigRepository', () => {
+jest.mock( '@/data-access/ApiRepoConfigRepository', () => {
 	return jest.fn().mockImplementation( () => mockWikibaseRepoConfigRepository );
 } );
 
@@ -165,11 +165,11 @@ describe( 'createServices', () => {
 
 			expect( mwWindow.mw.ForeignApi )
 				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
-			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 				.toBeInstanceOf( mwWindow.mw.ForeignApi );
-			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBe( wgUserName );
-			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
+			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
 				.toBe( editTags );
 			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );
@@ -189,7 +189,7 @@ describe( 'createServices', () => {
 			const services = createServices( mwWindow, editTags );
 
 			expect( services ).toBeInstanceOf( ServiceContainer );
-			expect( ( ForeignApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
+			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
 				.toBeUndefined();
 			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );
@@ -217,7 +217,7 @@ describe( 'createServices', () => {
 		expect( services.get( 'languageInfoRepository' ) ).toBe( mockMwLanguageInfoRepository );
 	} );
 
-	it( 'creates ForeignApiEntityInfoDispatcher and its two users', () => {
+	it( 'creates ApiEntityInfoDispatcher and its two users', () => {
 		const wgPageContentLanguage = 'de';
 
 		const mwWindow = mockMwWindow( {
@@ -228,9 +228,9 @@ describe( 'createServices', () => {
 
 		expect( services ).toBeInstanceOf( ServiceContainer );
 
-		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+		expect( ( ApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
-		expect( ( ForeignApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+		expect( ( ApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toStrictEqual( [ 'labels', 'datatype' ] );
 
 		expect(
@@ -271,7 +271,7 @@ describe( 'createServices', () => {
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
-		expect( ( ForeignApiRepoConfigRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+		expect( ( ApiRepoConfigRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( services.get( 'wikibaseRepoConfigRepository' ) )
 			.toBe( mockWikibaseRepoConfigRepository );
