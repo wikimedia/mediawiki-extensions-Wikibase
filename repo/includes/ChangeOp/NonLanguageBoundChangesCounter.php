@@ -10,14 +10,15 @@ namespace Wikibase\Repo\ChangeOp;
  */
 class NonLanguageBoundChangesCounter {
 
+	use ChangeOpResultTraversal;
+
 	/**
 	 * @param ChangeOpResult $changeOpResult
 	 *
 	 * @return int count of non-language-bound changes to an entity
 	 */
 	public function countChanges( ChangeOpResult $changeOpResult ) {
-		$changeOpResultsTraversal = new ChangeOpResultTraversal();
-		$traversable = $changeOpResultsTraversal->makeRecursiveTraversable( $changeOpResult );
+		$traversable = $this->makeRecursiveTraversable( $changeOpResult );
 
 		$count = 0;
 		foreach ( $traversable as $result ) {

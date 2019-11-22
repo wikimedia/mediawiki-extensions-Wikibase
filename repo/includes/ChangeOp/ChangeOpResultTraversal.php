@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ChangeOp;
 /**
  * Provides traversal interfaces of ChangeOpResult tree
  */
-class ChangeOpResultTraversal {
+trait ChangeOpResultTraversal {
 
 	/**
 	 * creates a new recursive traversable on ChangeOpResult tree

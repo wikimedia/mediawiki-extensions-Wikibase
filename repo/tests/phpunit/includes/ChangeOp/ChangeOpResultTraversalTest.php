@@ -14,6 +14,8 @@ use Wikibase\Repo\ChangeOp\ChangeOpsResult;
  */
 class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 
+	use ChangeOpResultTraversal;
+
 	public function changeOpResultTreesProvider() {
 		// visual view of the constructed tree below (numeric suffixes used):
 		//       7
@@ -59,8 +61,7 @@ class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 		ChangeOpResult $root,
 		$expectedVisitedNodes
 	) {
-		$traversal = new ChangeOpResultTraversal();
-		$traversable = $traversal->makeRecursiveTraversable( $root );
+		$traversable = $this->makeRecursiveTraversable( $root );
 
 		$actualVisitedNodes = [];
 		foreach ( $traversable as $visitedNode ) {
