@@ -4,6 +4,8 @@ export default function getMockStatement(
 	mainSnakEqual: boolean,
 	referencesEqual = true,
 	emptyReferences = false,
+	itemPresent = true,
+	qualifiersEqual = true,
 ): Statement {
 	return {
 		getClaim: () => {
@@ -12,12 +14,18 @@ export default function getMockStatement(
 					return { equals: () => mainSnakEqual };
 				},
 				getGuid: jest.fn(),
+				getQualifiers: () => {
+					return { equals: () => qualifiersEqual };
+				},
 			};
 		},
 		getReferences: () => {
 			return {
 				equals: () => referencesEqual,
 				isEmpty: () => emptyReferences,
+				hasItem: () => itemPresent,
+				length: 1,
+				each: jest.fn(),
 			};
 		},
 	};
