@@ -22,7 +22,7 @@ import {
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
-import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
+import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
 import { v4 as uuid } from 'uuid';
 
 @Component( {
