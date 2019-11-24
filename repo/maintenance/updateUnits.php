@@ -344,6 +344,7 @@ SELECT ?unit ?unitLabel WHERE {
 }
 QUERY;
 		$baseUnitsData = $this->client->query( $baseQuery );
+		'@phan-var array[] $baseUnitsData';
 		$baseUnits = [];
 		// arrange better lookup
 		foreach ( $baseUnitsData as $base ) {

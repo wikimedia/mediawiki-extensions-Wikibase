@@ -27,6 +27,10 @@ class ItemChange extends EntityChange {
 		return $this->getDiffFromSiteLinkChanges( $aspects->getSiteLinkChanges() );
 	}
 
+	/**
+	 * @param array[] $siteLinkChanges
+	 * @return Diff
+	 */
 	private function getDiffFromSiteLinkChanges( array $siteLinkChanges ) {
 		$siteLinkDiff = [];
 		foreach ( $siteLinkChanges as $wiki => $change ) {

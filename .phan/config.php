@@ -74,8 +74,6 @@ $cfg['suppress_issue_types'] = array_merge(
 		// approximate error count: 72
 		"PhanUndeclaredConstant",
 
-		"PhanTypeArraySuspiciousNullable",
-
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedExtendedClass",
 		"PhanRedefinedInheritedInterface",

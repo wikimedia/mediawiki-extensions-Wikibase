@@ -91,6 +91,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		foreach ( $changeRequest['sitelinks'] as $siteId => $serialization ) {
+			'@phan-var array $serialization';
 			$this->validateSiteLinkSerialization( $serialization, $siteId, $sites );
 			$globalSiteId = $serialization['site'];
 
@@ -193,6 +194,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	/**
 	 * @param mixed $value
 	 * @param string $message
+	 * @phan-assert array $value
 	 */
 	private function assertArray( $value, $message ) {
 		$this->assertType( 'array', $value, $message );
@@ -201,6 +203,7 @@ class SiteLinksChangeOpDeserializer implements ChangeOpDeserializer {
 	/**
 	 * @param mixed $value
 	 * @param string $message
+	 * @phan-assert string $value
 	 */
 	private function assertString( $value, $message ) {
 		$this->assertType( 'string', $value, $message );

@@ -122,7 +122,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 *	return a new array of records to insert, allowing to enhance and/or supply more default
 	 *	values for other columns that are not supplied as part of $neededRecords array.
 	 *
-	 * @return array the array of input records along with their ids
+	 * @return array[] the array of input records along with their ids
 	 *	Example:
 	 *	[
 	 *		[ 'columnA' => 'valueA1', 'columnB' => 'valueB1', 'idColumn' => '1' ],

@@ -91,7 +91,7 @@ class SiteMatrixParser {
 	}
 
 	/**
-	 * @param array $specialSites
+	 * @param array[] $specialSites
 	 *
 	 * @return Site[]
 	 */

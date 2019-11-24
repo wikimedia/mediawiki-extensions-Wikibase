@@ -28,7 +28,8 @@ class ChunkCache implements ChunkAccess {
 	 *
 	 * The entries array is maintained sorted by the 'start' field of its entries.
 	 *
-	 * @var array
+	 * @var array[]
+	 * @phan-var array{start:int,next:int,data:array,touched:int}[]
 	 */
 	private $entries = [];
 

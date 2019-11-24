@@ -14,6 +14,7 @@ class TermboxModule extends ResourceLoaderFileModule {
 	/** @return string[] */
 	public function getMessages() {
 		$data = $this->readJsonFile( $this->getLocalPath( 'resources.json' ) );
+		'@phan-var array[] $data';
 		return array_merge(
 			parent::getMessages(),
 			$data['messages']
