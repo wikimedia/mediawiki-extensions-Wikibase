@@ -174,6 +174,7 @@ class PropertyHandler extends EntityHandler {
 		$updates = [];
 
 		/** @var PropertyContent $content */
+		'@phan-var PropertyContent $content';
 		$property = $content->getProperty();
 		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 

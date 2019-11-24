@@ -133,6 +133,7 @@ class ChangeOpDescription extends ChangeOpBase {
 			$newDescription = null;
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return $this->buildResult( $entity->getId(), $oldDescription, $newDescription );
 	}
 
@@ -143,6 +144,7 @@ class ChangeOpDescription extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Result
+	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function validate( EntityDocument $entity ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {

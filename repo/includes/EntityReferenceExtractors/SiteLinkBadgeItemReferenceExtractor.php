@@ -26,6 +26,7 @@ class SiteLinkBadgeItemReferenceExtractor implements EntityReferenceExtractor {
 		/**
 		 * @var Item $item
 		 */
+		 '@phan-var Item $item';
 		return $this->extractItemIdsFromSiteLinks( $item->getSiteLinkList() );
 	}
 

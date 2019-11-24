@@ -79,6 +79,7 @@ class ChangeOpReferenceRemove extends ChangeOpBase {
 
 		$statement->setReferences( $references );
 
+		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 

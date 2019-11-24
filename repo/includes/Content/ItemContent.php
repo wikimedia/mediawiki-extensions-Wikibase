@@ -20,6 +20,8 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
+ *
+ * @method \Wikibase\Repo\Content\ItemHandler getContentHandler()
  */
 class ItemContent extends EntityContent {
 

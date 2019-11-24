@@ -34,7 +34,6 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ArrayValueCollector;
 use Wikibase\Repo\Content\EntityContentDiff;
-use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -50,6 +49,8 @@ use WikiPage;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
+ *
+ * @method \Wikibase\Repo\Content\EntityHandler getContentHandler()
  */
 abstract class EntityContent extends AbstractContent {
 
@@ -159,7 +160,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return DeferrableUpdate[]
 	 */
 	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$updates = $handler->getEntityDeletionUpdates( $this, $page->getTitle() );
 
@@ -186,7 +186,6 @@ abstract class EntityContent extends AbstractContent {
 		$recursive = false,
 		ParserOutput $parserOutput = null
 	) {
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$updates = $handler->getEntityModificationUpdates( $this, $title );
 
@@ -533,7 +532,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return EntityDocument
 	 */
 	private function makeEmptyEntity() {
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		return $handler->makeEmptyEntity();
 	}
@@ -576,7 +574,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return self
 	 */
 	public function getPatchedCopy( EntityContentDiff $patch ) {
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 
 		if ( $this->isRedirect() ) {
@@ -623,7 +620,6 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		if ( isset( $redirData['redirect'] ) ) {
-			/** @var EntityHandler $handler */
 			$handler = $this->getContentHandler();
 
 			$entityId = $this->getEntityId();
@@ -653,7 +649,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return self
 	 */
 	public function copy() {
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 
 		if ( $this->isRedirect() ) {
@@ -685,7 +680,6 @@ abstract class EntityContent extends AbstractContent {
 
 		if ( $status->isOK() ) {
 			if ( !$this->isRedirect() && !( $flags & self::EDIT_IGNORE_CONSTRAINTS ) ) {
-				/** @var EntityHandler $handler */
 				$handler = $this->getContentHandler();
 				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) !== 0 );
 				$status = $this->applyValidators( $validators );
@@ -713,7 +707,6 @@ abstract class EntityContent extends AbstractContent {
 			}
 		}
 
-		/** @var EntityHandler $handler */
 		$handler = $this->getContentHandler();
 		$status = $handler->getValidationErrorLocalizer()->getResultStatus( $result );
 		return $status;

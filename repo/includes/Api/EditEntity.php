@@ -241,6 +241,7 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			$entity->clear();
 
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );

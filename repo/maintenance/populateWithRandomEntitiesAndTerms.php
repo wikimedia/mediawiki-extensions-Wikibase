@@ -218,6 +218,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		array $languages,
 		Generator $textGenerator
 	) {
+		'@phan-var Item|Property $entity';
 		foreach ( $languages as $language ) {
 			$termText = $textGenerator->current();
 			$textGenerator->next();
@@ -231,6 +232,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		array $languages,
 		Generator $textGenerator
 	) {
+		'@phan-var Item|Property $entity';
 		foreach ( $languages as $language ) {
 			$termText = $textGenerator->current();
 			$textGenerator->next();
@@ -244,6 +246,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 		array $languages,
 		Generator $textGenerator
 	) {
+		'@phan-var Item|Property $entity';
 		foreach ( $languages as $language ) {
 			$termText = $textGenerator->current();
 			$textGenerator->next();

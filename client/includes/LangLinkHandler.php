@@ -107,6 +107,7 @@ class LangLinkHandler {
 
 			/** @var Item $item */
 			$item = $this->entityLookup->getEntity( $itemId );
+			'@phan-var Item|null $item';
 
 			if ( $item ) {
 				$links = iterator_to_array( $item->getSiteLinkList() );

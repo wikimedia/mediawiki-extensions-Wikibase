@@ -150,6 +150,7 @@ class ClientParserOutputDataUpdater {
 	private function setBadgesProperty( ItemId $itemId, ParserOutput $out ) {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
+		'@phan-var Item|null $item';
 
 		if ( !$item || !$item->getSiteLinkList()->hasLinkWithSiteId( $this->siteId ) ) {
 			// Probably some sort of race condition or data inconsistency.

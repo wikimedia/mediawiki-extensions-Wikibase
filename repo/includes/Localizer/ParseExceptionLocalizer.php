@@ -32,6 +32,7 @@ class ParseExceptionLocalizer implements ExceptionLocalizer {
 		$msg = null;
 
 		/** @var ParseException $exception */
+		'@phan-var ParseException $exception';
 		$expectedFormat = $exception->getExpectedFormat();
 		if ( $expectedFormat !== null ) {
 			// Messages:

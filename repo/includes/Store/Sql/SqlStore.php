@@ -473,6 +473,7 @@ class SqlStore implements Store {
 		// in order to update caches.
 		/** @var WikiPageEntityStore $dispatcher */
 		$dispatcher = $this->getEntityStoreWatcher();
+		'@phan-var WikiPageEntityStore $dispatcher';
 
 		$dispatcher->registerWatcher( $this->wikibaseServices->getEntityStoreWatcher() );
 		$nonCachingLookup = $this->wikibaseServices->getEntityRevisionLookup();

@@ -30,6 +30,9 @@ class CoordinatesOutput {
 	public function getPrimary() {
 	}
 
+	public function hasPrimary(): bool {
+	}
+
 	public function addSecondary( Coord $c ) {
 	}
 

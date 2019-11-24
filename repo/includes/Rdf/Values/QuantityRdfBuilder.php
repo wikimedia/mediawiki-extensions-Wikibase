@@ -46,7 +46,6 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
 	 * @param PropertyValueSnak $snak
-	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function addValue(
 		RdfWriter $writer,
@@ -57,6 +56,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	) {
 		/** @var UnboundedQuantityValue $value */
 		$value = $snak->getDataValue();
+		'@phan-var UnboundedQuantityValue $value';
 		$writer->say( $propertyValueNamespace, $propertyValueLName )
 			->value( $value->getAmount(), 'xsd', 'decimal' );
 		//FIXME: this is meaningless without a unit identifier!

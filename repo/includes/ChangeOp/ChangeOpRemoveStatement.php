@@ -71,6 +71,7 @@ class ChangeOpRemoveStatement extends ChangeOpBase {
 		$removedSnak = $statement->getMainSnak();
 		$this->updateSummary( $summary, 'remove', '', $this->getSummaryArgs( $removedSnak ) );
 
+		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return new GenericChangeOpResult( $entity->getId(), true );
 	}
 

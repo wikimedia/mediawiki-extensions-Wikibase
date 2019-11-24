@@ -114,12 +114,15 @@ class ItemDiffView implements DiffView {
 			//FIXME: complex objects as values?
 			if ( $op->getType() === 'add' ) {
 				/** @var DiffOpAdd $op */
+				'@phan-var DiffOpAdd $op';
 				$html .= $this->generateChangeOpHtml( null, $op->getNewValue(), $path );
 			} elseif ( $op->getType() === 'remove' ) {
 				/** @var DiffOpRemove $op */
+				'@phan-var DiffOpRemove $op';
 				$html .= $this->generateChangeOpHtml( $op->getOldValue(), null, $path );
 			} elseif ( $op->getType() === 'change' ) {
 				/** @var DiffOpChange $op */
+				'@phan-var DiffOpChange $op';
 				$html .= $this->generateChangeOpHtml( $op->getOldValue(), $op->getNewValue(), $path );
 			} else {
 				throw new MWException( 'Invalid diffOp type' );
