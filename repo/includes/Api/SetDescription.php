@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDescription;
+use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -94,7 +95,7 @@ class SetDescription extends ModifyTerm {
 			$op = $this->termChangeOpFactory->newSetDescriptionOp( $language, $description );
 		}
 
-		return $op;
+		return $this->termChangeOpFactory->newFingerprintChangeOp( new ChangeOps( $op ) );
 	}
 
 	/**

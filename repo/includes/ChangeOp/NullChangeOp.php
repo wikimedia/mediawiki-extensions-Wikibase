@@ -25,13 +25,13 @@ class NullChangeOp implements ChangeOp {
 	/**
 	 * @see ChangeOp::apply
 	 *
-	 * @param EntityDocument $entity Unused
+	 * @param EntityDocument $entity
 	 * @param Summary|null $summary Unused
 	 */
 	public function apply( EntityDocument $entity, Summary $summary = null ) {
 		// no op
 
-		return new DummyChangeOpResult();
+		return new DummyChangeOpResult( $entity->getId() );
 	}
 
 	/**

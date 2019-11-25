@@ -9,6 +9,7 @@ use Language;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpFingerprint;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -365,24 +366,16 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	}
 
 	/**
-	 * @param ChangeOp[] $changeOps
-	 * @param EntityDocument $entity
-	 *
 	 * @throws ChangeOpException
-	 * @return Summary
 	 */
-	private function applyChangeOpList( array $changeOps, EntityDocument $entity ) {
-		if ( count( $changeOps ) === 1 ) {
-			// special case for single change-op, produces a better edit summary
-			$changeOp = reset( $changeOps );
-			$module = key( $changeOps );
+	private function applyChangeOpList( ChangeOpFingerprint $changeOp, EntityDocument $entity ): Summary {
+		if ( count( $changeOp->getChangeOps() ) === 1 ) {
+			$module = key( $changeOp->getChangeOps() );
 			$summary = new Summary( $module );
 			$this->applyChangeOp( $changeOp, $entity, $summary );
 			return $summary;
 		} else {
-			// NOTE: it's important to bundle all ChangeOp objects into a ChangeOps object,
-			// so validation and modification is properly batched.
-			$this->applyChangeOp( new ChangeOps( $changeOps ), $entity, new Summary() );
+			$this->applyChangeOp( $changeOp, $entity, new Summary() );
 			return $this->getSummaryForLabelDescriptionAliases();
 		}
 	}
@@ -390,7 +383,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @param Fingerprint $fingerprint
 	 *
-	 * @return ChangeOp[]
+	 * @return ChangeOpFingerprint
 	 */
 	private function getChangeOps( Fingerprint $fingerprint ) {
 		$changeOpFactory = $this->changeOpFactory;
@@ -442,7 +435,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			);
 		}
 
-		return $changeOps;
+		return $changeOpFactory->newFingerprintChangeOp( new ChangeOps( $changeOps ) );
 	}
 
 	/**

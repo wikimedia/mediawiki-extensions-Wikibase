@@ -5,7 +5,11 @@ namespace Wikibase\Repo\ChangeOp;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * Class DummyChangeOpResult has no result
+ * Only references the entity, always validates successfully
+ * and always indicates no changes to the entity.
+ *
+ * Suitable as a result for a no-op ChangeOp implementation
+ * @see  NullChangeOp
  */
 class DummyChangeOpResult extends GenericChangeOpResult {
 

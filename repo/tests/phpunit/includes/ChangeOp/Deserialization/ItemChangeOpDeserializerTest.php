@@ -39,12 +39,15 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	const SITELINK_GROUP = 'testwikis';
 
-	public function testGivenEmptyArray_returnsEmptyChangeOps() {
-		$this->assertEmpty(
-			( new ItemChangeOpDeserializer( $this->getChangeOpDeserializerFactoryMock() ) )
-				->createEntityChangeOp( [] )
-				->getChangeOps()
-		);
+	public function testGivenEmptyArray_changesNothingOnEntity() {
+		$item = new Item( new ItemId( 'Q123' ) );
+		$targetItem = $item->copy();
+
+		$changeOp = $this->newItemChangeOpDeserializer()->createEntityChangeOp( [] );
+		$changeOpResult = $changeOp->apply( $item, null );
+
+		$this->assertFalse( $changeOpResult->isEntityChanged() );
+		$this->assertEquals( $item, $targetItem );
 	}
 
 	public function testGivenAllFieldsInChangeRequest_changeOpChangesAllFields() {
@@ -103,12 +106,6 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$wikibaseRepo->getStringNormalizer(),
 			[ self::SITELINK_GROUP ]
 		) );
-	}
-
-	private function getChangeOpDeserializerFactoryMock() {
-		return $this->getMockBuilder( ChangeOpDeserializerFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
 	}
 
 	private function newSiteLinkTargetProvider() {
