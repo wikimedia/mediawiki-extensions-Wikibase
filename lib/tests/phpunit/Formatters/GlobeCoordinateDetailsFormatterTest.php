@@ -81,25 +81,19 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 		$value->expects( $this->any() )
 			->method( 'getLatitude' )
-			->will( $this->returnValue( '<LAT>' ) );
+			->will( $this->returnValue( 0 ) );
 		$value->expects( $this->any() )
 			->method( 'getLongitude' )
-			->will( $this->returnValue( '<LONG>' ) );
+			->will( $this->returnValue( 0 ) );
 		$value->expects( $this->any() )
 			->method( 'getPrecision' )
-			->will( $this->returnValue( '<PRECISION>' ) );
+			->will( $this->returnValue( 1.0 ) );
 
 		$formatter = $this->newFormatter();
 		$formatted = $formatter->format( $value );
 
-		$this->assertContains( '&lt;LAT&gt;', $formatted );
-		$this->assertContains( '&lt;LONG&gt;', $formatted );
-		$this->assertContains( '&lt;PRECISION&gt;', $formatted );
 		$this->assertContains( '&lt;GLOBE&gt;', $formatted );
 
-		$this->assertNotContains( '<LAT>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '<LONG>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '<PRECISION>', $formatted, 'never unescaped' );
 		$this->assertNotContains( '<GLOBE>', $formatted, 'never unescaped' );
 		$this->assertNotContains( '&amp;', $formatted, 'no double escaping' );
 	}
