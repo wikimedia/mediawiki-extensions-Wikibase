@@ -83,5 +83,7 @@
 	"wikibase-undo-firstrev": "Nuk mund të zhbëhet krijimi i faqes",
 	"wikibase-undo-nocontent": "Nuk mund të ngarkohet përmbajtja e revidimit $2 të faqes $1",
 	"wikibase-statementview-rank-normal": "Rangimi normal",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencë|referenca}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referencë|referenca}}",
+	"wikibase-entity-summary-restore": "Rivendos versionin e riparuar $3 nga [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
+	"wikibase-entity-summary-undo": "Rikthe versionin e riparuar $3 nga [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskutimi]])"
 }

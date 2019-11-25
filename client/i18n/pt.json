@@ -23,7 +23,8 @@
 			"Guycn2",
 			"Ldacosta",
 			"CaiusSPQR",
-			"Waldyrious"
+			"Waldyrious",
+			"Mansil alfalb"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",
@@ -129,5 +130,6 @@
 	"unresolved-property-category-desc": "Esta categoria lista páginas que fazem referência a propriedades {{WBREPONAME}} que não se conseguem encontrar, nem pelo seu identificador de propriedade nem pelo seu rótulo.",
 	"connected-redirect-category": "Redirecionamentos ligados a um elemento {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Esta categoria lista páginas de redirecionamento que estão ligadas a um elemento {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Editar propriedade"
+	"wikibase-client-data-bridge-dialog-title": "Editar propriedade",
+	"wikibase-client-data-bridge-references-heading": "Referências"
 }

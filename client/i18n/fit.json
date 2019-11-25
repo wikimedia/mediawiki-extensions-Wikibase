@@ -1,13 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pyscowicz"
+			"Pyscowicz",
+			"Palmtree222"
 		]
 	},
+	"tooltip-t-wikibase": "Linkki yhistethyyn keskustietovaraston kohteesheen",
 	"wikibase-comment-update": "{{WBREPONAME}}-kohetta muutettu",
 	"wikibase-comment-sitelink-add": "Kielilänkki lisätty: $1",
 	"wikibase-comment-sitelink-change": "Kielilänkki $1 muutettu muothoon $2",
 	"wikibase-comment-sitelink-remove": "Kielilänkki otettu poies: $1",
+	"wikibase-dataitem": "objekti",
 	"wikibase-editlinks": "Mookkaa länkkejä",
 	"wikibase-editlinkstitle": "Mookkaa kieltenvälisiä länkkejä",
 	"wikibase-addlinkstitle": "Lissää kieltenvälisiä länkkejä",
@@ -18,9 +21,11 @@
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Piilota",
 	"wikibase-rc-hide-wikidata-show": "Näytä",
+	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}-mookkaus",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}-mookkaukset",
 	"wikibase-pageinfo-description-local": "Paikallinen kuvvaus",
 	"wikibase-pageinfo-entity-usage-S": "Sivulänkki",
-	"wikibase-pageinfo-entity-usage-D-with-modifier": "Kuvvaus: $1"
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Kuvvaus: $1",
+	"wikibase-otherprojects": "Muissa projekteissa"
 }

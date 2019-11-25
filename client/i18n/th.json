@@ -10,7 +10,12 @@
 			"Aefgh39622"
 		]
 	},
+	"wikibase-client-desc": "ไคลเอนต์สำหรับส่วนขยาย Wikibase",
 	"tooltip-t-wikibase": "ลิงก์ไปยังสิ่งนี้ในคลังซึ่งเชื่อมโยงข้อมูลต่างๆ เข้าด้วยกัน",
+	"wikibase-after-page-move": "การย้ายของคุณควร[$1 มีผลในลิงก์ข้ามภาษาของรายการ{{WBREPONAME}}] เราขอแนะนำให้คุณตรวจสอบว่ามีการเปลี่ยนแปลงนี้เกิดขึ้นแล้ว",
+	"wikibase-after-page-move-queued": "[$1 รายการ{{WBREPONAME}}]ที่เชื่อมโยงกับหน้านี้จะถูกอัปเดตโดยอัตโนมัติ โปรดสังเกตว่าการเปลี่ยนแปลงนี้อาจไม่เกิดขึ้นในทันที",
+	"wikibase-after-page-delete": "ลิงก์ที่ไปยังหน้านี้ควรถูกเอาออกจาก[$1 รายการ{{WBREPONAME}}ที่เชื่อมโยง] เราขอแนะนำให้คุณตรวจสอบว่ามีการเปลี่ยนแปลงนี้เกิดขึ้นแล้ว",
+	"wikibase-after-page-delete-queued": "[$1 รายการ{{WBREPONAME}}]ที่เชื่อมโยงกับหน้านี้จะถูกอัปเดตโดยอัตโนมัติ โปรดสังเกตว่าการเปลี่ยนแปลงนี้อาจไม่เกิดขึ้นในทันที",
 	"wikibase-comment-add": "รายการของสิ่งหนึ่งใน {{WBREPONAME}} ได้ถูกสร้างขึ้น",
 	"wikibase-comment-remove": "รายการของสิ่งนี้ใน {{WBREPONAME}} ได้ถูกลบออก. จึงลบลิงก์ข้ามภาษาออก.",
 	"wikibase-comment-linked": "รายการของสิ่งหนึ่งใน {{WBREPONAME}} ได้เชื่อมโยงเข้ากับหน้านี้",
@@ -48,6 +53,10 @@
 	"wikibase-rc-wikibase-edit-title": "การแก้ไขบน {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "การแก้ไขบน {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "การแก้ไขที่เริ่มบน {{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "ตัวกรองนี้ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัว การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}}",
+	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "ตัวกรอง \"การแก้ไขบน{{WBREPONAME}}\" ขัดแย้งกับตัวกรองคุณภาพการมีส่วนร่วมหรือจุดประสงค์ของผู้ใช้อย่างน้อยหนึ่งตัวกรอง การคาดเดาคุณภาพและจุดประสงค์จะใช้ไม่ได้สำหรับการแก้ไขบน{{WBREPONAME}} ตัวกรองที่ขัดแย้งกันได้ถูกทำเครื่องหมายไว้ในส่วนของตัวกรองที่ใช้งานอยู่ด้านบน",
+	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "การคาดเดาคุณภาพการมีส่วนร่วมใช้ไม่ได้สำหรับการเปลี่ยนแปลงบางประเภท ตัวกรองนี้จึงขัดแย้งกับ{{PLURAL:$2|ตัวกรอง}}ประเภทของการเปลี่ยนแปลงดังต่อไปนี้: $1",
+	"wikibase-rcfilters-goodfaith-conflicts-hide-wikibase": "การคาดเดาจุดประสงค์ของผู้ใช้ใช้ไม่ได้สำหรับการเปลี่ยนแปลงบางประเภท ตัวกรองนี้จึงขัดแย้งกับ{{PLURAL:$2|ตัวกรอง}}ประเภทของการเปลี่ยนแปลงดังต่อไปนี้: $1",
 	"wikibase-replicationnote": "โปรดสังเกตว่าอาจใช้เวลาหลายนาทีจนกว่าการเปลี่ยนแปลงจะปรากฏบนวิกิทุกภาษา",
 	"wikibase-watchlist-show-changes-pref": "แสดงการแก้ไขบน {{WBREPONAME}} ในรายการเฝ้าดูของคุณ",
 	"unconnectedpages": "หน้าที่ไม่ได้เชื่อมโยงกับสิ่งใดๆ ใน {{WBREPONAME}}",
@@ -72,5 +81,6 @@
 	"wikibase-otherprojects": "ในโครงการอื่น",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|การเชื่อมโยง}}กับ{{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|ดู}}สิ่งนี้",
-	"notification-subject-page-connection": "หน้าหนึ่งบน {{SITENAME}} ที่คุณ{{GENDER:$3|ได้สร้างไว้}} ได้{{GENDER:$2|เชื่อมโยง}}เข้ากับรายการของสิ่งหนึ่งใน {{WBREPONAME}}"
+	"notification-subject-page-connection": "หน้าหนึ่งบน {{SITENAME}} ที่คุณ{{GENDER:$3|ได้สร้างไว้}} ได้{{GENDER:$2|เชื่อมโยง}}เข้ากับรายการของสิ่งหนึ่งใน {{WBREPONAME}}",
+	"wikibase-client-data-bridge-references-heading": "การอ้างอิง"
 }
