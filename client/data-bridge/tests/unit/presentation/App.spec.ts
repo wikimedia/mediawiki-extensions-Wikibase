@@ -236,16 +236,6 @@ describe( 'App.vue', () => {
 	} );
 
 	describe( 'component switch', () => {
-		it( 'mounts DataBridge, when store is ready', () => {
-			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
-			const wrapper = shallowMount( App, {
-				store,
-				localVue,
-			} );
-
-			expect( wrapper.find( DataBridge ).exists() ).toBeTruthy();
-		} );
-
 		it( 'mounts ErrorWrapper, if a error occurs', () => {
 			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.ERROR );
 			const wrapper = shallowMount( App, {
@@ -256,14 +246,38 @@ describe( 'App.vue', () => {
 			expect( wrapper.find( ErrorWrapper ).exists() ).toBeTruthy();
 		} );
 
-		it( 'mounts Initializing, if the store is not ready', () => {
-			store.commit( APPLICATION_STATUS_SET, ApplicationStatus.INITIALIZING );
-			const wrapper = shallowMount( App, {
-				store,
-				localVue,
+		describe( 'outside of the error scenario', () => {
+			it( 'mounts Initializing & passes DataBridge to it', () => {
+				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+
+				expect( wrapper.find( Initializing ).exists() ).toBeTruthy();
+				expect( wrapper.find( Initializing ).find( DataBridge ).exists() ).toBeTruthy();
 			} );
 
-			expect( wrapper.find( Initializing ).exists() ).toBeTruthy();
+			it( 'instructs Initializing accordingly if the store is not ready', () => {
+				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.INITIALIZING );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+
+				expect( wrapper.find( Initializing ).props( 'isInitializing' ) ).toBe( true );
+			} );
+
+			it( 'instructs Initializing accordingly if the store is ready', () => {
+				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+
+				expect( wrapper.find( Initializing ).props( 'isInitializing' ) ).toBe( false );
+			} );
 		} );
+
 	} );
 } );

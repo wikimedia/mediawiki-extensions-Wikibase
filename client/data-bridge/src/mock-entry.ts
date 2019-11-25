@@ -13,9 +13,11 @@ const services = new ServiceContainer();
 
 services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 	{
-		get() {
-			return Entities;
-		},
+		get: () => new Promise( ( resolve ) => {
+			setTimeout( () => {
+				resolve( Entities );
+			}, 1100 );
+		} ),
 	} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
 	'',
 ) );

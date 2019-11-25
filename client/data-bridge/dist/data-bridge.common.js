@@ -615,6 +615,13 @@ exports.getStatusText = function(statusCode) {
 
 /***/ }),
 
+/***/ "0b31":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "0b64":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6298,6 +6305,17 @@ $export($export.S, 'Object', {
 
 /***/ }),
 
+/***/ "8e97":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndeterminateProgressBar_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0b31");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndeterminateProgressBar_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndeterminateProgressBar_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IndeterminateProgressBar_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "8f60":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10126,12 +10144,12 @@ var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=ee388fee&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.isTargetStatementModified},on:{"click":_vm.saveAndClose}})]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c(_vm.isInitializing ? 'Initializing' : 'DataBridge',{tag:"component"})],1)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=73265c61&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.isTargetStatementModified},on:{"click":_vm.saveAndClose}})]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Initializing',{attrs:{"is-initializing":_vm.isInitializing}},[_c('DataBridge')],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=ee388fee&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=73265c61&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -11358,13 +11376,71 @@ var DataBridge_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_DataBridge = (DataBridge_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=a6836236&
-var Initializingvue_type_template_id_a6836236_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[_vm._v("\n\tLoading…\n")])}
-var Initializingvue_type_template_id_a6836236_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=2e2c0447&
+var Initializingvue_type_template_id_2e2c0447_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[(_vm.ready)?_vm._t("default"):[(_vm.loadingIsSlow)?_c('IndeterminateProgressBar'):_vm._e()]],2)}
+var Initializingvue_type_template_id_2e2c0447_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=a6836236&
+// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=2e2c0447&
 
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=37678dfa&
+var IndeterminateProgressBarvue_type_template_id_37678dfa_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+var IndeterminateProgressBarvue_type_template_id_37678dfa_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-indeterminate-progress-bar__box"},[_c('div',{staticClass:"wb-ui-indeterminate-progress-bar__bar",attrs:{"aria-busy":"true","aria-live":"polite"}})])}]
+
+
+// CONCATENATED MODULE: ./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=37678dfa&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IndeterminateProgressBar.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+var IndeterminateProgressBarvue_type_script_lang_ts_IndeterminateProgressBar =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(IndeterminateProgressBar, _Vue);
+
+  function IndeterminateProgressBar() {
+    _classCallCheck(this, IndeterminateProgressBar);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(IndeterminateProgressBar).apply(this, arguments));
+  }
+
+  return IndeterminateProgressBar;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+IndeterminateProgressBarvue_type_script_lang_ts_IndeterminateProgressBar = __decorate([vue_class_component_common_default.a], IndeterminateProgressBarvue_type_script_lang_ts_IndeterminateProgressBar);
+/* harmony default export */ var IndeterminateProgressBarvue_type_script_lang_ts_ = (IndeterminateProgressBarvue_type_script_lang_ts_IndeterminateProgressBar);
+// CONCATENATED MODULE: ./src/presentation/components/IndeterminateProgressBar.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_IndeterminateProgressBarvue_type_script_lang_ts_ = (IndeterminateProgressBarvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/IndeterminateProgressBar.vue?vue&type=style&index=0&lang=scss&
+var IndeterminateProgressBarvue_type_style_index_0_lang_scss_ = __webpack_require__("8e97");
+
+// CONCATENATED MODULE: ./src/presentation/components/IndeterminateProgressBar.vue
+
+
+
+
+
+
+/* normalize component */
+
+var IndeterminateProgressBar_component = normalizeComponent(
+  components_IndeterminateProgressBarvue_type_script_lang_ts_,
+  IndeterminateProgressBarvue_type_template_id_37678dfa_render,
+  IndeterminateProgressBarvue_type_template_id_37678dfa_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_IndeterminateProgressBar = (IndeterminateProgressBar_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
 
 
@@ -11374,21 +11450,149 @@ var Initializingvue_type_template_id_a6836236_staticRenderFns = []
 
 
 
+
+/**
+ * This
+ * * shows the default slot if isInitializing is false (= ready)
+ * * hides the default slot while isInitializing is true; during that time it
+ * ** shows blank until TIME_UNTIL_CONSIDERED_SLOW
+ * ** shows the IndeterminateProgressBar from there on until isInitializing is false
+ * ** shows the IndeterminateProgressBar for at least MINIMUM_TIME_OF_PROGRESS_ANIMATION[1]
+ *
+ * [1] This condition is only applied while isInitializing is true
+ *
+ * Effectively there are three scenarios:
+ *
+ * Timeline     0s                        1s            1.5s            2s
+ * Scenario 1
+ *   Loading    |------------------|
+ *   Animation      (no animation)  <- ready
+ * Scenario 2
+ *   Loading    |----------------------------|
+ *   Animation                            |--------------|<- ready
+ * Scenario 3
+ *   Loading    |---------------------------------------------|
+ *   Animation                            |-------------------|<- ready
+ */
+
 var Initializingvue_type_script_lang_ts_Initializing =
 /*#__PURE__*/
 function (_Vue) {
   _inherits(Initializing, _Vue);
 
+  /**
+   * This
+   * * shows the default slot if isInitializing is false (= ready)
+   * * hides the default slot while isInitializing is true; during that time it
+   * ** shows blank until TIME_UNTIL_CONSIDERED_SLOW
+   * ** shows the IndeterminateProgressBar from there on until isInitializing is false
+   * ** shows the IndeterminateProgressBar for at least MINIMUM_TIME_OF_PROGRESS_ANIMATION[1]
+   *
+   * [1] This condition is only applied while isInitializing is true
+   *
+   * Effectively there are three scenarios:
+   *
+   * Timeline     0s                        1s            1.5s            2s
+   * Scenario 1
+   *   Loading    |------------------|
+   *   Animation      (no animation)  <- ready
+   * Scenario 2
+   *   Loading    |----------------------------|
+   *   Animation                            |--------------|<- ready
+   * Scenario 3
+   *   Loading    |---------------------------------------------|
+   *   Animation                            |-------------------|<- ready
+   */
   function Initializing() {
+    var _this;
+
     _classCallCheck(this, Initializing);
 
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(Initializing).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(Initializing).apply(this, arguments));
+    _this.ready = false;
+    _this.loadingIsSlow = false;
+    _this.animatedEnough = false;
+    return _this;
   }
+
+  _createClass(Initializing, [{
+    key: "onStatusChange",
+    value: function onStatusChange(isInitializing, _oldStatus) {
+      if (isInitializing) {
+        this.showLoading();
+      } else {
+        this.tendTowardsReady();
+      }
+    }
+  }, {
+    key: "showLoading",
+    value: function showLoading() {
+      var _this2 = this;
+
+      this.ready = false;
+      this.trackSlowness = setTimeout(function () {
+        _this2.loadingIsSlow = true;
+        _this2.trackAnimation = setTimeout(function () {
+          _this2.animatedEnough = true;
+
+          _this2.tendTowardsReady();
+        }, _this2.MINIMUM_TIME_OF_PROGRESS_ANIMATION);
+      }, this.TIME_UNTIL_CONSIDERED_SLOW);
+    }
+  }, {
+    key: "tendTowardsReady",
+    value: function tendTowardsReady() {
+      if (this.isInitializing || this.loadingIsSlow && !this.animatedEnough) {
+        return;
+      }
+
+      this.ready = true;
+      this.resetSlownessTracking();
+    }
+  }, {
+    key: "resetSlownessTracking",
+    value: function resetSlownessTracking() {
+      this.loadingIsSlow = false;
+      this.animatedEnough = false;
+
+      if (this.trackSlowness) {
+        clearTimeout(this.trackSlowness);
+        this.trackSlowness = undefined;
+      }
+
+      if (this.trackAnimation) {
+        clearTimeout(this.trackAnimation);
+        this.trackAnimation = undefined;
+      }
+    }
+  }]);
 
   return Initializing;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_component_common_default.a], Initializingvue_type_script_lang_ts_Initializing);
+__decorate([Prop({
+  required: true
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "isInitializing", void 0);
+
+__decorate([Prop({
+  default: 1000
+}) // in ms
+], Initializingvue_type_script_lang_ts_Initializing.prototype, "TIME_UNTIL_CONSIDERED_SLOW", void 0);
+
+__decorate([Prop({
+  default: 500
+}) // in ms
+], Initializingvue_type_script_lang_ts_Initializing.prototype, "MINIMUM_TIME_OF_PROGRESS_ANIMATION", void 0);
+
+__decorate([Watch('isInitializing', {
+  immediate: true
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "onStatusChange", null);
+
+Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_component_common_default()({
+  components: {
+    IndeterminateProgressBar: components_IndeterminateProgressBar
+  }
+})], Initializingvue_type_script_lang_ts_Initializing);
 /* harmony default export */ var Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_Initializing);
 // CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_); 
@@ -11402,8 +11606,8 @@ Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_compone
 
 var Initializing_component = normalizeComponent(
   components_Initializingvue_type_script_lang_ts_,
-  Initializingvue_type_template_id_a6836236_render,
-  Initializingvue_type_template_id_a6836236_staticRenderFns,
+  Initializingvue_type_template_id_2e2c0447_render,
+  Initializingvue_type_template_id_2e2c0447_staticRenderFns,
   false,
   null,
   null,
