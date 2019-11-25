@@ -75,11 +75,11 @@ class GlobeCoordinateDetailsFormatter extends ValueFormatterBase {
 
 		//TODO: nicer formatting and localization of numbers.
 		$html .= $this->renderLabelValuePair( 'latitude',
-			$value->getLatitude() );
+			htmlspecialchars( $value->getLatitude() ) );
 		$html .= $this->renderLabelValuePair( 'longitude',
-			$value->getLongitude() );
+			htmlspecialchars( $value->getLongitude() ) );
 		$html .= $this->renderLabelValuePair( 'precision',
-			$value->getPrecision() );
+			htmlspecialchars( $value->getPrecision() ) );
 		$html .= $this->renderLabelValuePair( 'globe',
 			$this->formatGlobe( $value->getGlobe() ) );
 
