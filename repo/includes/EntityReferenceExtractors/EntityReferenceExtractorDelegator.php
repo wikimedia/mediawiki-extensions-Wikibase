@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\EntityReferenceExtractors;
 
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -38,7 +38,7 @@ class EntityReferenceExtractorDelegator implements EntityReferenceExtractor {
 			return $this->callbacks[$entity->getType()]()->extractEntityIds( $entity );
 		}
 
-		if ( $entity instanceof StatementListProvider ) {
+		if ( $entity instanceof StatementListProvidingEntity ) {
 			return $this->statementEntityReferenceExtractor->extractEntityIds( $entity );
 		}
 

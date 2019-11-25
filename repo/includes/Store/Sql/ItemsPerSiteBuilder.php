@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -96,7 +97,7 @@ class ItemsPerSiteBuilder {
 	}
 
 	/**
-	 * @param ItemId[] $itemIds
+	 * @param EntityId[] $itemIds
 	 *
 	 * @return int
 	 */

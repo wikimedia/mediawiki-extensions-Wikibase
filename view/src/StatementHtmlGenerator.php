@@ -105,6 +105,7 @@ class StatementHtmlGenerator {
 	 * @param SnakList $qualifiers
 	 *
 	 * @return string HTML
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	private function getHtmlForQualifiers( SnakList $qualifiers ) {
 		$qualifiersByProperty = new ByPropertyIdGrouper( $qualifiers );
@@ -147,6 +148,7 @@ class StatementHtmlGenerator {
 	 * @param Reference $reference
 	 *
 	 * @return string HTML
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	private function getHtmlForReference( Reference $reference ) {
 		$snaks = $reference->getSnaks();

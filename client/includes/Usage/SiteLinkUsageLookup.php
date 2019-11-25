@@ -116,6 +116,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 		$ids = array_filter( $ids, function ( EntityId $id ) {
 			return $id instanceof ItemId;
 		} );
+		'@phan-var ItemId[] $ids';
 
 		return array_map(
 			function ( ItemId $id ) {

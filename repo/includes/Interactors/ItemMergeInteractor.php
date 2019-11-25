@@ -135,6 +135,7 @@ class ItemMergeInteractor {
 	 *
 	 * @throws ItemMergeException
 	 * @throws RedirectCreationException
+	 * @suppress PhanTypeMismatchArgument
 	 */
 	public function mergeItems(
 		ItemId $fromId,

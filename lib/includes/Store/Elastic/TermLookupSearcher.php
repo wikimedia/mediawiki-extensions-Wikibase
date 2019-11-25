@@ -6,7 +6,7 @@ use CirrusSearch\Connection;
 use CirrusSearch\ElasticsearchIntermediary;
 use CirrusSearch\RequestLog;
 use CirrusSearch\SearchRequestLog;
-use Psr\Log\InvalidArgumentException;
+use Elastica\Exception\InvalidException;
 use Title;
 
 /**
@@ -63,7 +63,7 @@ class TermLookupSearcher extends ElasticsearchIntermediary {
 	 */
 	public function getByTitle( array $titles, $sourceFields ) {
 		if ( count( $titles ) > self::MAX_RESULT_SIZE ) {
-			return $this->failure( new InvalidArgumentException( "Too many titles, max is " .
+			return $this->failure( new InvalidException( "Too many titles, max is " .
 				self::MAX_TITLES_PER_QUERY ) );
 		}
 		$namespaces = array_unique( array_map( function ( Title $t ) {
@@ -79,11 +79,12 @@ class TermLookupSearcher extends ElasticsearchIntermediary {
 		$size = count( $this->connection->getAllIndexSuffixesForNamespaces( $namespaces ) );
 		$size *= count( $titles );
 		if ( $size > self::MAX_RESULT_SIZE ) {
-			return $this->failure( new InvalidArgumentException( "Result too big: $size > 10000" ) );
+			return $this->failure( new InvalidException( "Result too big: $size > 10000" ) );
 		}
 
 		try {
 			$this->startNewLog( 'get of {indexType}.{docIds}', 'get', [
+				// @phan-suppress-next-line PhanTypeMismatchArgument
 				'indexType' => $indexType,
 				'docIds' => $titleTexts,
 			] );

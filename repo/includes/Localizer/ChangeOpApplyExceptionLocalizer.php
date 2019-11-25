@@ -43,6 +43,7 @@ class ChangeOpApplyExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		/** @var ChangeOpApplyException $exception  */
+		'@phan-var ChangeOpApplyException $exception';
 		return $this->getMessage( $exception );
 	}
 

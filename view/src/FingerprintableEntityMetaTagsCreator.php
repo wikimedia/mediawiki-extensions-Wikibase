@@ -21,6 +21,10 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 		$this->languageFallbackChain = $languageFallbackChain;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @suppress PhanTypeMismatchArgument
+	 */
 	public function getMetaTags( EntityDocument $entity ) : array {
 		Assert::parameterType( FingerprintProvider::class, $entity, '$entity' );
 		/** @var FingerprintProvider $entity */
