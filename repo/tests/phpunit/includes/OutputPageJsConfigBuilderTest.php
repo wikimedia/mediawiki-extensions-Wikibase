@@ -20,6 +20,7 @@ use Wikibase\OutputPageJsConfigBuilder;
 class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 
 	public function testBuild() {
+		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => false ] );
 		$configBuilder = new OutputPageJsConfigBuilder();
 
 		$configVars = $configBuilder->build(
