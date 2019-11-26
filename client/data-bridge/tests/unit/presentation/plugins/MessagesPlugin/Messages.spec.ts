@@ -20,5 +20,9 @@ describe( 'Messages', () => {
 		expect( messagesRepository.get ).toHaveBeenCalledTimes( 1 );
 		expect( messagesRepository.get ).toHaveBeenCalledWith( 'key' );
 		expect( message ).toBe( 'test key' );
+
+		const parameter = 'something';
+		messages.get( 'key', parameter );
+		expect( messagesRepository.get ).toHaveBeenCalledWith( 'key', parameter );
 	} );
 } );

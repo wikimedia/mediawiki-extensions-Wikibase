@@ -16,7 +16,7 @@ export default class Messages {
 		this.messagesRepository = messagesRepository;
 	}
 
-	public get( messageKey: string ): string {
-		return this.messagesRepository.get( messageKey );
+	public get( messageKey: string, ...params: string[] ): string {
+		return this.messagesRepository.get( messageKey, ...params );
 	}
 }

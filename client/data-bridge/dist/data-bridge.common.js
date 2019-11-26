@@ -12597,7 +12597,13 @@ function () {
   _createClass(Messages, [{
     key: "get",
     value: function get(messageKey) {
-      return this.messagesRepository.get(messageKey);
+      var _this$messagesReposit;
+
+      for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        params[_key - 1] = arguments[_key];
+      }
+
+      return (_this$messagesReposit = this.messagesRepository).get.apply(_this$messagesReposit, [messageKey].concat(params));
     }
   }]);
 
@@ -12998,7 +13004,11 @@ function () {
   _createClass(MwMessagesRepository, [{
     key: "get",
     value: function get(messageKey) {
-      return this.mwMessages(messageKey).text();
+      for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        params[_key - 1] = arguments[_key];
+      }
+
+      return this.mwMessages.apply(this, [messageKey].concat(params)).text();
     }
   }]);
 
