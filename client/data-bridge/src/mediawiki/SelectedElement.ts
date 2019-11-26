@@ -4,5 +4,6 @@ export interface SelectedElement {
 	link: HTMLAnchorElement;
 	entityId: string;
 	propertyId: string;
+	entityTitle: string;
 	editFlow: EditFlow;
 }

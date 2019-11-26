@@ -3,8 +3,8 @@ import BridgeDomElementsSelector from '@/mediawiki/BridgeDomElementsSelector';
 describe( 'domBridgeElementSelector', () => {
 
 	it( 'finds multiple relevant links in mark-up', () => {
-		const validHref = 'https://www.wikidata.org/wiki/Q4115189#P31';
-		const validHrefWithQueryString = 'https://www.wikidata.org/wiki/Q11235?uselang=en#P314';
+		const validHref = 'https://example.com/wiki/Item:Q4115189#P31';
+		const validHrefWithQueryString = 'https://example.com/wiki/Item:Q11235?uselang=en#P314';
 		document.body.innerHTML = `
 		<div>
 		 <span data-bridge-edit-flow="overwrite">
@@ -29,7 +29,7 @@ describe( 'domBridgeElementSelector', () => {
 		</div>`;
 
 		const selector = new BridgeDomElementsSelector(
-			'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+			'https://example\\.com/wiki/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)',
 		);
 		const actualSelectedElementsWithData = selector.selectElementsToOverload();
 
@@ -37,10 +37,12 @@ describe( 'domBridgeElementSelector', () => {
 
 		expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( 'Q4115189' );
 		expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( 'P31' );
+		expect( actualSelectedElementsWithData[ 0 ].entityTitle ).toBe( 'Item:Q4115189' );
 		expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( 'overwrite' );
 
 		expect( actualSelectedElementsWithData[ 1 ].entityId ).toBe( 'Q11235' );
 		expect( actualSelectedElementsWithData[ 1 ].propertyId ).toBe( 'P314' );
+		expect( actualSelectedElementsWithData[ 1 ].entityTitle ).toBe( 'Item:Q11235' );
 		expect( actualSelectedElementsWithData[ 1 ].editFlow ).toBe( 'overwrite' );
 	} );
 
@@ -51,10 +53,11 @@ describe( 'domBridgeElementSelector', () => {
 				{
 					html: `
 <span data-bridge-edit-flow="overwrite">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">a link to be selected</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 </span>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
+					expectedEntityTitle: 'Item:Q4115189',
 					editFlow: 'overwrite',
 				},
 			],
@@ -63,11 +66,12 @@ describe( 'domBridgeElementSelector', () => {
 				{
 					html: `
 <span data-bridge-edit-flow="overwrite">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">a link to be selected</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 	<button>You could also click me!</button>
 </span>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
+					expectedEntityTitle: 'Item:Q4115189',
 					editFlow: 'overwrite',
 				},
 			],
@@ -76,12 +80,13 @@ describe( 'domBridgeElementSelector', () => {
 				{
 					html: `
 <span data-bridge-edit-flow="overwrite" data-bridge-entity-id="Q123456" data-bridge-property-id="P123">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">
 		a link to be selected
 	</a>
 </span>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
+					expectedEntityTitle: 'Item:Q4115189',
 					editFlow: 'overwrite',
 				},
 			],
@@ -90,18 +95,19 @@ describe( 'domBridgeElementSelector', () => {
 				{
 					html: `<table><tr>
 <td data-bridge-edit-flow="overwrite">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">a link to be selected</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 </td></tr></table>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
+					expectedEntityTitle: 'Item:Q4115189',
 					editFlow: 'overwrite',
 				},
 			],
-		] )( '%s', ( _, { html, expectedEntityId, expectedPropertyId, editFlow } ) => {
+		] )( '%s', ( _, { html, expectedEntityId, expectedPropertyId, expectedEntityTitle, editFlow } ) => {
 			document.body.innerHTML = html;
 
 			const selector = new BridgeDomElementsSelector(
-				'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				'https://example\\.com/wiki/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)',
 			);
 			const actualSelectedElementsWithData = selector.selectElementsToOverload();
 
@@ -109,6 +115,7 @@ describe( 'domBridgeElementSelector', () => {
 
 			expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( expectedEntityId );
 			expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( expectedPropertyId );
+			expect( actualSelectedElementsWithData[ 0 ].entityTitle ).toBe( expectedEntityTitle );
 			expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( editFlow );
 		} );
 
@@ -121,7 +128,7 @@ describe( 'domBridgeElementSelector', () => {
 					'skips links without a surrounding span',
 					{
 						html: `
-<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">
+<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">
 	a link without the wrapping span, to not be selected
 </a>`,
 					},
@@ -131,7 +138,7 @@ describe( 'domBridgeElementSelector', () => {
 					{
 						html: `
 <span data-bridge-edit-flow="overwrite">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P31">a link to be selected</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 	<a rel="nofollow" class="external text" href="https://google.com">another link</a>
 </span>`,
 					},
@@ -141,7 +148,7 @@ describe( 'domBridgeElementSelector', () => {
 					{
 						html: `
 <span data-bridge-edit-flow="overwrite">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189">link text</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189">link text</a>
 </span>`,
 					},
 				],
@@ -150,7 +157,7 @@ describe( 'domBridgeElementSelector', () => {
 					{
 						html: `
 <span data-bridge-edit-flow="" data-bridge-entity-id="Q12" data-bridge-property-id="P12">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P123">link text</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P123">link text</a>
 </span>`,
 					},
 				],
@@ -159,7 +166,7 @@ describe( 'domBridgeElementSelector', () => {
 					{
 						html: `
 <span data-bridge-edit-flow="unknownEditflow" data-bridge-entity-id="Q12" data-bridge-property-id="P12">
-	<a rel="nofollow" class="external text" href="https://www.wikidata.org/wiki/Q4115189#P123">link text</a>
+	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P123">link text</a>
 </span>`,
 					},
 				],
@@ -177,7 +184,7 @@ describe( 'domBridgeElementSelector', () => {
 			document.body.innerHTML = html;
 
 			const selector = new BridgeDomElementsSelector(
-				'https://www\\.wikidata\\.org/wiki/(Q[1-9][0-9]*).*#(P[1-9][0-9]*)',
+				'https://example\\.com/wiki/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)',
 			);
 			const actualSelectedElementsWithData = selector.selectElementsToOverload();
 

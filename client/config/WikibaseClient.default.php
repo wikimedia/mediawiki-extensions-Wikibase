@@ -128,7 +128,7 @@ return call_user_func( function() {
 		'entitySources' => [],
 
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified
-		# 'dataBridgeHrefRegExp' => '^http://localhost/index\.php/Item:(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$',
+		# 'dataBridgeHrefRegExp' => '^http://localhost/index\.php/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$',
 
 		/**
 		 * @note This config option is primarily added for Wikidata transition use-case and can be

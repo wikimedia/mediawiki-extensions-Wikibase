@@ -28,6 +28,7 @@ export default class Dispatcher {
 			{
 				entityId: selectedElement.entityId,
 				propertyId: selectedElement.propertyId,
+				entityTitle: selectedElement.entityTitle,
 				editFlow: selectedElement.editFlow,
 				client: {
 					usePublish: this.dataBridgeConfig.usePublish,

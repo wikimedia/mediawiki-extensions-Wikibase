@@ -17,5 +17,5 @@
 require __DIR__ . '/WikibaseClient.example.php';
 
 $wgWBClientSettings['dataBridgeEnabled'] = true;
-$wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=](?:Item:)?(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$';
+$wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=]((?:Item:)?(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$';
 $wgWBClientSettings['dataBridgeEditTags'] = [ 'Data Bridge' ];

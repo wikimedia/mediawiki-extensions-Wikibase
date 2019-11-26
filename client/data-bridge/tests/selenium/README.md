@@ -8,7 +8,7 @@ This means that you need something like this (be sure to check `repo/config/` & 
     $wgEnableWikibaseRepo = true;
     $wgEnableWikibaseClient = true;
     $wgWBClientSettings['dataBridgeEnabled'] = true;
-    $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=](?:Item:)?(Q[1-9][0-9]*).*#(P[1-9][0-9]*)$';
+    $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=]((?:Item:)?(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$';
     $wgWBClientSettings['dataBridgeEditTags'] = [ 'Data Bridge' ];
     $wgWBRepoSettings['dataBridgeEnabled'] = true;
 

@@ -1,23 +1,34 @@
 import EditFlow from '@/definitions/EditFlow';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 
+interface LinkData {
+	entityTitle: string;
+	entityId: string;
+	propertyId: string;
+}
+
 export default class BridgeDomElementsSelector {
 
 	private readonly hrefRegExp: RegExp;
 
-	private readonly ENTITY_ID_REGEX_INDEX = 1;
-	private readonly PROPERTY_ID_REGEX_INDEX = 2;
+	private readonly ENTITY_ID_REGEX_INDEX = 2;
+	private readonly PROPERTY_ID_REGEX_INDEX = 3;
+	private readonly ENTITY_TITLE_REGEX_INDEX = 1;
 
 	public constructor( hrefRegExp: string ) {
 		this.hrefRegExp = new RegExp( hrefRegExp );
 	}
 
-	private extractDataFromLink( link: HTMLAnchorElement ): { entityId: string; propertyId: string } | null {
+	private extractDataFromLink( link: HTMLAnchorElement ): LinkData | null {
 		const match = link.href.match( this.hrefRegExp );
-		if ( match && match[ this.ENTITY_ID_REGEX_INDEX ] && match[ this.PROPERTY_ID_REGEX_INDEX ] ) {
+		if ( match &&
+			match[ this.ENTITY_ID_REGEX_INDEX ] &&
+			match[ this.PROPERTY_ID_REGEX_INDEX ] &&
+			match[ this.ENTITY_TITLE_REGEX_INDEX ] ) {
 			return {
 				entityId: match[ this.ENTITY_ID_REGEX_INDEX ],
 				propertyId: match[ this.PROPERTY_ID_REGEX_INDEX ],
+				entityTitle: match[ this.ENTITY_TITLE_REGEX_INDEX ],
 			};
 		}
 
