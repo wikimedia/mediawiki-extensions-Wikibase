@@ -86,5 +86,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong>, {{PLURAL:$4|кхин тӀе цхьа агӀо|$4 кхин тӀе агӀо|100=99+ кхин тӀе агӀо}} {{GENDER:$2|тӀетесна}} {{WBREPONAME}} элементаш тӀе, цигахь хила мега дийцарца богӀуш болу хаамаш.",
 	"notification-link-text-view-item": "{{GENDER:$1|Хьажа}} элемент",
 	"unresolved-property-category": "Мегаш йоцу билгалонаш йолу агӀонаш",
-	"connected-redirect-category": "{{grammar:genitive|{{WBREPONAME}}}} элементаца йихкина йолу дӀасахьажоргаш"
+	"connected-redirect-category": "{{grammar:genitive|{{WBREPONAME}}}} элементаца йихкина йолу дӀасахьажоргаш",
+	"connected-redirect-category-desc": "ХӀокху категорино гойту агӀонаш-дӀасахьажоргаш, {{grammar:genitive|{{WBREPONAME}}}} тӀера элементаца йихкина йолу."
 }
