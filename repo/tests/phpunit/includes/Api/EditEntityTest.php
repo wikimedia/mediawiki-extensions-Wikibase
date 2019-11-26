@@ -624,7 +624,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				preg_quote( '/* wbeditentity-update:0| */' )
 			],
-			'only one language chaned, no other parts changed' => [
+			'only one language changed, no other parts changed' => [
 				[
 					'action' => 'wbeditentity',
 					'data' => json_encode( [
@@ -633,7 +633,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'aliases' => []
 					] )
 				],
-				preg_quote( '/* wbeditentity-update-languages:0||1 */' )
+				preg_quote( '/* wbeditentity-update-languages-short:0||en */' )
 			],
 			'multiple languages changed, no other parts changed' => [
 				[
@@ -644,7 +644,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 						'aliases' => [ 'es' => [ [ 'language' => 'es', 'value' => 'ooF' ], [ 'language' => 'es', 'value' => 'raB' ] ] ]
 					] )
 				],
-				preg_quote( '/* wbeditentity-update-languages:0||3 */' )
+				preg_quote( '/* wbeditentity-update-languages-short:0||en, de, es */' )
 			],
 			'some languages changed and other parts changed' => [
 				[
@@ -662,8 +662,37 @@ class EditEntityTest extends WikibaseApiTestCase {
 						]
 					] ),
 				],
-				preg_quote( '/* wbeditentity-update-languages-and-other:0||3 */' )
+				preg_quote( '/* wbeditentity-update-languages-and-other-short:0||en, de, es */' )
 			],
+			'more than 50 languages changed' => [
+			[
+				'action' => 'wbeditentity',
+				'data' => json_encode( [
+					'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
+					'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
+					'aliases' => $this->generateLanguageValuePairs( 50 )
+				] ),
+			],
+			preg_quote( '/* wbeditentity-update-languages:0||52 */' )
+		],
+			'more than 50 languages changed and other parts changed' => [
+				[
+					'action' => 'wbeditentity',
+					'data' => json_encode( [
+						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
+						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
+						'aliases' => $this->generateLanguageValuePairs( 50 ),
+						'sitelinks' => [
+							[
+								'site' => 'dewiki',
+								'title' => 'Some other Page',
+								'badges' => []
+							]
+						]
+					] ),
+				],
+				preg_quote( '/* wbeditentity-update-languages-and-other:0||52 */' )
+			]
 		];
 	}
 
@@ -683,6 +712,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$expectedSummaryPattern,
 			$result['entity']['lastrevid']
 		);
+	}
+
+	private function generateLanguageValuePairs( $langCount ) {
+		$result = [];
+		$langCodes = WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+
+		for ( $langCount = min( $langCount, ( count( $langCodes ) ) ); $langCount > 0; $langCount-- ) {
+			$result[ $langCodes[ $langCount ] ] = [ 'language' => $langCodes[ $langCount ], 'value' => "Foo${langCount}" ];
+		}
+		return $result;
 	}
 
 	protected function saveEntity( EntityDocument $entity ) {
