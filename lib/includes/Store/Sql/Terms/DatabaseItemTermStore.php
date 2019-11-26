@@ -13,7 +13,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\StringNormalizer;
 use Wikibase\TermStore\ItemTermStore;
-use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -101,21 +100,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 			$termsArray['alias'][$language] = $aliases;
 		}
 
-		try {
-			$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
-		} catch ( DBError $exception ) {
-			$this->logger->error(
-				'{method}: DBError while storing terms for {itemId}: {exception}',
-				[
-					'method' => __METHOD__,
-					'itemId' => $itemId->getSerialization(),
-					'terms' => $termsArray,
-					'exception' => $exception,
-				]
-			);
-			throw $exception;
-		}
-
+		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
 		if ( $termIdsToClean !== [] ) {
 			$this->cleanTermsIfUnused( $termIdsToClean );
 		}
@@ -184,20 +169,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 	public function deleteTerms( ItemId $itemId ) {
 		$this->disallowForeignItemIds( $itemId );
 
-		try {
-			$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
-		} catch ( DBError $exception ) {
-			$this->logger->error(
-				'{method}: DBError while deleting terms for {itemId}: {exception}',
-				[
-					'method' => __METHOD__,
-					'itemId' => $itemId->getSerialization(),
-					'exception' => $exception,
-				]
-			);
-			throw $exception;
-		}
-
+		$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		if ( $termIdsToClean !== [] ) {
 			$this->cleanTermsIfUnused( $termIdsToClean );
 		}
@@ -252,67 +224,54 @@ class DatabaseItemTermStore implements ItemTermStore {
 	 * @param int[] $termIds
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
-		try {
-			$termIdsUnused = [];
-			foreach ( $termIds as  $termId ) {
-				// Note: Not batching here is intentional, see T234948
-				$usedInProperties = $this->getDbw()->selectField(
-					'wbt_property_terms',
-					'wbpt_term_in_lang_id',
-					[ 'wbpt_term_in_lang_id' => $termId ]
-				);
-				$usedInItems = $this->getDbw()->selectField(
-					'wbt_item_terms',
-					'wbit_term_in_lang_id',
-					[ 'wbit_term_in_lang_id' => $termId ]
-				);
-
-				if ( $usedInProperties === false && $usedInItems === false ) {
-					$termIdsUnused[] = $termId;
-				}
-			}
-			if ( $termIdsUnused === [] ) {
-				return;
-			}
-
-			$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
+		$termIdsUnused = [];
+		foreach ( $termIds as  $termId ) {
+			// Note: Not batching here is intentional, see T234948
+			$usedInProperties = $this->getDbw()->selectField(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
-				__METHOD__,
-				[
-					'FOR UPDATE'  // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-				]
+				[ 'wbpt_term_in_lang_id' => $termId ]
 			);
-			$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
+			$usedInItems = $this->getDbw()->selectField(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termIdsUnused ],
-				__METHOD__,
-				[
-					'FOR UPDATE' // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-				]
+				[ 'wbit_term_in_lang_id' => $termId ]
 			);
 
-			$this->cleaner->cleanTermIds(
-				array_diff(
-					$termIds,
-					$termIdsUsedInProperties,
-					$termIdsUsedInItems
-				)
-			);
-		} catch ( DBError $exception ) {
-			$this->logger->error(
-				'{method}: DBError while cleaning up to {termIdsCount} terms: {exception}',
-				[
-					'method' => __METHOD__,
-					'termIds' => $termIds,
-					'termIdsCount' => count( $termIds ),
-					'exception' => $exception,
-				]
-			);
-			throw $exception;
+			if ( $usedInProperties === false && $usedInItems === false ) {
+				$termIdsUnused[] = $termId;
+			}
 		}
+		if ( $termIdsUnused === [] ) {
+			return;
+		}
+
+		$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
+			'wbt_property_terms',
+			'wbpt_term_in_lang_id',
+			[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
+			__METHOD__,
+			[
+				'FOR UPDATE'  // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+			]
+		);
+		$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
+			'wbt_item_terms',
+			'wbit_term_in_lang_id',
+			[ 'wbit_term_in_lang_id' => $termIdsUnused ],
+			__METHOD__,
+			[
+				'FOR UPDATE' // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
+			]
+		);
+
+		$this->cleaner->cleanTermIds(
+			array_diff(
+				$termIds,
+				$termIdsUsedInProperties,
+				$termIdsUsedInItems
+			)
+		);
 	}
 
 	public function getTerms( ItemId $itemId ): Fingerprint {
