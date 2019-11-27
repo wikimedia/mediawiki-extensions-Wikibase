@@ -167,3 +167,16 @@ export function mockForeignApiEntityInfoResponse(
 		},
 	} );
 }
+
+export function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
+	return {
+		get(): any {
+			if ( successObject ) {
+				return Promise.resolve( successObject );
+			}
+			if ( rejectData ) {
+				return Promise.reject( rejectData );
+			}
+		},
+	} as any;
+}

@@ -1,21 +1,8 @@
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
-import { Api } from '@/@types/mediawiki/MwWindow';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-
-function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
-	return {
-		get(): any {
-			if ( successObject ) {
-				return Promise.resolve( successObject );
-			}
-			if ( rejectData ) {
-				return Promise.reject( rejectData );
-			}
-		},
-	} as any;
-}
+import { mockApi } from '../../util/mocks';
 
 describe( 'ApiRepoConfigRepository', () => {
 
