@@ -4,16 +4,8 @@ import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
 import { PermissionErrorType } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
 import { mockMwApi } from '../../util/mocks';
+import { expectError } from '../../util/promise';
 import jqXHR = JQuery.jqXHR;
-
-function expectError( promise: Promise<any> ): Promise<any> {
-	return promise.then(
-		( _ ) => {
-			throw new Error( 'should not have resolved with a value' );
-		},
-		( error ) => error,
-	);
-}
 
 describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
