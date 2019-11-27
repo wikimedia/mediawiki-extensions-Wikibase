@@ -6,6 +6,8 @@
  * @license GPL-2.0-or-later
  */
 
+use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
+
 $magicWords = [];
 
 /** English (English) */
@@ -16,6 +18,7 @@ $magicWords['en'] = [
 	'wbreponame' => [ 0, 'wbreponame' ],
 	'shortdesc' => [ 1, 'SHORTDESC' ],
 	'shortdesc_noreplace' => [ 0, 'noreplace' ],
+	CommaSeparatedList::NAME => [ 0, 'commaseparatedlist' ],
 ];
 
 /** Arabic (العربية) */
