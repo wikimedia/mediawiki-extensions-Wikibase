@@ -3,6 +3,7 @@ import { addDecorator } from '@storybook/vue';
 import { withInfo } from 'storybook-addon-vue-info';
 import { withA11y } from '@storybook/addon-a11y';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
+import './storybook-global.scss';
 
 addDecorator( withInfo );
 addDecorator( withA11y );
@@ -31,8 +32,10 @@ extendVueEnvironment(
 );
 
 const req = require.context( '../stories', true, /\.js$/ );
-function loadStories() {
-	req.keys().forEach( ( filename ) => req( filename ) );
-}
 
-configure( loadStories, module );
+configure(
+	() => {
+		req.keys().forEach( ( filename ) => req( filename ) );
+	},
+	module,
+);
