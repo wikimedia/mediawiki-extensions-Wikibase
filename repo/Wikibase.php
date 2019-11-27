@@ -90,8 +90,6 @@ use Wikibase\Repo\Specials\SpecialSetDescription;
 use Wikibase\Repo\Specials\SpecialSetLabel;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
-use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
-use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 
@@ -134,7 +132,6 @@ call_user_func( function() {
 		$wgGrantPermissions,
 		$wgGroupPermissions,
 		$wgHooks,
-		$wgJobClasses,
 		$wgMessagesDirs,
 		$wgResourceModules,
 		$wgSpecialPages,
@@ -1017,10 +1014,6 @@ call_user_func( function() {
 			$wikibaseRepo->getSettings()->getSetting( 'badgeItems' )
 		);
 	};
-
-	// Jobs
-	$wgJobClasses['UpdateRepoOnMove'] = UpdateRepoOnMoveJob::class;
-	$wgJobClasses['UpdateRepoOnDelete'] = UpdateRepoOnDeleteJob::class;
 
 	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
