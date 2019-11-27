@@ -1,8 +1,8 @@
 <?php
 
-
 namespace Wikibase\Repo\ChangeOp;
 
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -38,6 +38,16 @@ class ChangeOpsResult implements ChangeOpResult {
 		}
 
 		return false;
+	}
+
+	public function validate(): Result {
+		$finalResult = Result::newSuccess();
+
+		foreach ( $this->changeOpsResults as $result ) {
+			$finalResult = Result::merge( $finalResult, $result );
+		}
+
+		return $finalResult;
 	}
 
 }

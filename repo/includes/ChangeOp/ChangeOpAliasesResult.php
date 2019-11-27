@@ -8,11 +8,9 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Class ChangeOpAliasesResult
  */
-class ChangeOpAliasesResult implements LanguageBoundChangeOpResult {
+class ChangeOpAliasesResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
 
-	private $entityId;
 	private $languageCode;
-	private $isEntityChanged;
 	private $oldAliases;
 	private $newAliases;
 
@@ -21,22 +19,13 @@ class ChangeOpAliasesResult implements LanguageBoundChangeOpResult {
 	 * @param string $languageCode
 	 * @param array $oldAliases
 	 * @param array $newAliases
-	 * @param bool $isEntityChange
+	 * @param bool $isEntityChanged
 	 */
-	public function __construct( $entityId, $languageCode, $oldAliases, $newAliases, $isEntityChange = false ) {
-		$this->entityId = $entityId;
+	public function __construct( $entityId, $languageCode, $oldAliases, $newAliases, $isEntityChanged = false ) {
+		parent::__construct( $entityId, $isEntityChanged );
 		$this->languageCode = $languageCode;
 		$this->oldAliases = $oldAliases;
 		$this->newAliases = $newAliases;
-		$this->isEntityChanged = $isEntityChange;
-	}
-
-	public function getEntityId() {
-		return $this->entityId;
-	}
-
-	public function isEntityChanged() {
-		return $this->isEntityChanged;
 	}
 
 	public function getLanguageCode() {

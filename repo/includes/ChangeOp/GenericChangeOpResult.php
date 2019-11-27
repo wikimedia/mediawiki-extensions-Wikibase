@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\ChangeOp;
 
+use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -23,6 +24,10 @@ class GenericChangeOpResult implements ChangeOpResult {
 
 	public function isEntityChanged() {
 		return $this->isEntityChanged;
+	}
+
+	public function validate(): Result {
+		return Result::newSuccess();
 	}
 
 }

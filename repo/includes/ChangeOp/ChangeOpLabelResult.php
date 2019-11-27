@@ -8,35 +8,24 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Class ChangeOpLabelResult
  */
-class ChangeOpLabelResult implements LanguageBoundChangeOpResult {
+class ChangeOpLabelResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
 
 	private $languageCode;
 	private $newLabel;
 	private $oldLabel;
-	private $entityId;
-	private $isEntityChange;
 
 	/**
 	 * @param EntityId|null $entityId
 	 * @param string $languageCode
 	 * @param $oldLabel
 	 * @param $newLabel
-	 * @param bool $isEntityChange
+	 * @param bool $isEntityChanged
 	 */
-	public function __construct( $entityId, $languageCode, $oldLabel, $newLabel, $isEntityChange = false ) {
+	public function __construct( $entityId, $languageCode, $oldLabel, $newLabel, $isEntityChanged = false ) {
+		parent::__construct( $entityId, $isEntityChanged );
 		$this->languageCode = $languageCode;
-		$this->entityId = $entityId;
-		$this->isEntityChange = $isEntityChange;
 		$this->oldLabel = $oldLabel;
 		$this->newLabel = $newLabel;
-	}
-
-	public function getEntityId() {
-		return $this->entityId;
-	}
-
-	public function isEntityChanged() {
-		return $this->isEntityChange;
 	}
 
 	public function getLanguageCode() {
