@@ -13008,7 +13008,7 @@ function () {
         params[_key - 1] = arguments[_key];
       }
 
-      return this.mwMessages.apply(this, [messageKey].concat(params)).text();
+      return this.mwMessages.apply(this, [messageKey].concat(params)).parse();
     }
   }]);
 

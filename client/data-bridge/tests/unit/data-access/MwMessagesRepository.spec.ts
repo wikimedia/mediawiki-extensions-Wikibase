@@ -7,7 +7,8 @@ describe( 'MwMessagesRepository', () => {
 		const translation = jest.fn( () => message );
 		const mwMessages = jest.fn( (): MwMessage => {
 			return {
-				text: translation,
+				text: jest.fn(),
+				parse: translation,
 			};
 		} );
 		const key = 'foo';
@@ -19,9 +20,10 @@ describe( 'MwMessagesRepository', () => {
 	} );
 
 	it( 'get mw.message, the messages keys and parameters to build a message collection', () => {
-		const mwMessages = jest.fn( ( _key: string, ...parameter: string[] ): MwMessage => {
+		const mwMessages = jest.fn( ( _key: string, ...parameter: ( string|HTMLElement )[] ): MwMessage => {
 			return {
-				text: jest.fn().mockReturnValueOnce( parameter[ 0 ] ),
+				parse: jest.fn().mockReturnValueOnce( parameter[ 0 ] ),
+				text: jest.fn(),
 			};
 		} );
 
