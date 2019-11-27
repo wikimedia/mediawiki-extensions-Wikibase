@@ -20,12 +20,14 @@ const validTypes = [ 'notice' ];
 @Component
 export default class IconMessageBox extends Vue {
 	@Prop( {
+		type: String,
 		required: true,
 		validator: ( type ) => validTypes.includes( type ),
 	} )
 	public type!: string;
 
 	@Prop( {
+		type: Boolean,
 		required: false,
 		default: false,
 	} )

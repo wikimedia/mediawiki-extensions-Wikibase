@@ -23,7 +23,7 @@ storiesOf( 'IconMessageBox', module )
 		components: { IconMessageBox },
 		template:
 			`<div>
-				<IconMessageBox type="notice" inline="true">
+				<IconMessageBox type="notice" :inline="true">
 					Just to inform you...
 				</IconMessageBox>
 			</div>`,
