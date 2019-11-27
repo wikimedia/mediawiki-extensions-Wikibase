@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib\ParserFunctions;
 
+use Parser;
+
 /**
  * Class definition for the CommaSeparatedList parser function
  */
@@ -9,12 +11,7 @@ class CommaSeparatedList {
 
 	public const NAME = "commaSeparatedList";
 
-	/**
-	 * @param \Parser $parser
-	 * @param mixed ...$words
-	 * @return mixed
-	 */
-	public static function handle( $parser, ...$words ) {
+	public static function handle( Parser $parser, string ...$words ) : string {
 		return $parser->getTargetLanguage()->commaList( $words );
 	}
 }
