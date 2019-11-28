@@ -23,7 +23,7 @@ class FingerprintChangeOpFactory {
 	}
 
 	public function newFingerprintChangeOp( ChangeOps $changeOps ): ChangeOp {
-		return new ChangeOpFingerprint( $changeOps );
+		return new ChangeOpFingerprint( $changeOps, $this->termValidatorFactory );
 	}
 
 	/**

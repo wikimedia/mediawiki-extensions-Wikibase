@@ -13,7 +13,6 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,21 +20,24 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Serializers\ItemSerializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\LabelDescriptionDuplicateDetector;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ResultBuilder;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Tests\EntityModificationTestHelper;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Tests\EntityModificationTestHelper;
-use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers \Wikibase\Repo\Api\MergeItems
@@ -253,7 +255,11 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			100,
 			[ 'en', 'de', 'fr' ],
 			new ItemIdParser(),
-			$dupeDetector
+			$dupeDetector,
+			$this->createMock( TermsCollisionDetectorFactory::class ),
+			$this->createMock( TermLookup::class ),
+			[],
+			0
 		);
 	}
 

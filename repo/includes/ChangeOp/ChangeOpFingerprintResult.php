@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * Decorator on ChangeOpsResult for collecting and distinguishing a collection
@@ -15,8 +16,12 @@ class ChangeOpFingerprintResult extends ChangeOpsResult {
 	/** @var ChangeOpsResult */
 	private $innerChangeOpsResult;
 
-	public function __construct( ChangeOpsResult $changeOpsResult ) {
+	/** @var TermValidatorFactory */
+	private $termValidatorFactory;
+
+	public function __construct( ChangeOpsResult $changeOpsResult, TermValidatorFactory $termValidatorFactory ) {
 		$this->innerChangeOpsResult = $changeOpsResult;
+		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
 	public function getChangeOpsResults() {
@@ -32,7 +37,20 @@ class ChangeOpFingerprintResult extends ChangeOpsResult {
 	}
 
 	public function validate(): Result {
-		return $this->innerChangeOpsResult->validate();
+		$result = $this->innerChangeOpsResult->validate();
+
+		$fingerprintUniquenessValidator = $this->termValidatorFactory->getFingerprintUniquenessValidator(
+			$this->getEntityId()->getEntityType()
+		);
+
+		if ( $fingerprintUniquenessValidator !== null ) {
+			$result = Result::merge(
+				$result,
+				$fingerprintUniquenessValidator->validate( $this )
+			);
+		}
+
+		return $result;
 	}
 
 }

@@ -4,10 +4,12 @@ namespace Wikibase\Repo\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 
 /**
  * Provides validators for terms (like the maximum length of labels, etc).
@@ -38,10 +40,28 @@ class TermValidatorFactory {
 	private $duplicateDetector;
 
 	/**
+	 * @var TermsCollisionDetectorFactory
+	 */
+	private $termsCollisionDetectorFactory;
+
+	/**
+	 * @var TermLookup
+	 */
+	private $termLookup;
+
+	/** @var array */
+	private $itemTermsMigrationStage;
+
+	/** @var int */
+	private $propertyTermsMigrationStage;
+
+	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
+	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
+	 * @param TermLookup $termLookup
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -49,7 +69,11 @@ class TermValidatorFactory {
 		$maxLength,
 		array $languageCodes,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $duplicateDetector
+		LabelDescriptionDuplicateDetector $duplicateDetector,
+		TermsCollisionDetectorFactory $termsCollisionDetectorFactory,
+		TermLookup $termLookup,
+		array $itemTermsMigrationStage,
+		int $propertyTermsMigrationStage
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -59,6 +83,27 @@ class TermValidatorFactory {
 		$this->languageCodes = $languageCodes;
 		$this->idParser = $idParser;
 		$this->duplicateDetector = $duplicateDetector;
+		$this->termsCollisionDetectorFactory = $termsCollisionDetectorFactory;
+		$this->termLookup = $termLookup;
+		$this->itemTermsMigrationStage = $itemTermsMigrationStage;
+		$this->propertyTermsMigrationStage = $propertyTermsMigrationStage;
+	}
+
+	public function getFingerprintUniquenessValidator( string $entityType ): ?ValueValidator {
+		if ( in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
+			$fingerprintUniquenessValidator = new FingerprintUniquenessValidator(
+				$this->termsCollisionDetectorFactory->getTermsCollisionDetector( $entityType ),
+				$this->termLookup
+			);
+
+			return new ByIdFingerprintUniquenessValidator(
+				$this->itemTermsMigrationStage,
+				$this->propertyTermsMigrationStage,
+				$fingerprintUniquenessValidator
+			);
+		}
+
+		return null;
 	}
 
 	/**

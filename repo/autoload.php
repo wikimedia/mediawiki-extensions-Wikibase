@@ -134,6 +134,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Store\\Sql\\WikiPageEntityRedirectLookup' => __DIR__ . '/includes/Store/Sql/WikiPageEntityRedirectLookup.php',
 	'Wikibase\\Repo\\Store\\Sql\\WikiPageEntityStore' => __DIR__ . '/includes/Store/Sql/WikiPageEntityStore.php',
 	'Wikibase\\Repo\\Store\\TermsCollisionDetector' => __DIR__ . '/includes/Store/TermsCollisionDetector.php',
+	'Wikibase\\Repo\\Store\\TermsCollisionDetectorFactory' => __DIR__ . '/includes/Store/TermsCollisionDetectorFactory.php',
 	'Wikibase\\Repo\\Store\\TypeDispatchingEntityTitleStoreLookup' => __DIR__ . '/includes/Store/TypeDispatchingEntityTitleStoreLookup.php',
 	'Wikibase\\Repo\\Store\\WikiPageEntityStorePermissionChecker' => __DIR__ . '/includes/Store/WikiPageEntityStorePermissionChecker.php',
 	'Wikibase\\Repo\\ValidatorBuilders' => __DIR__ . '/includes/ValidatorBuilders.php',

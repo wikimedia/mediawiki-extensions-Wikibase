@@ -4,15 +4,18 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
+use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
+use Wikibase\Repo\Validators\ByIdFingerprintUniquenessValidator;
 use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**
  * @covers \Wikibase\Repo\Validators\TermValidatorFactory
@@ -57,8 +60,46 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 			$maxLength,
 			$languageCodes,
 			new BasicEntityIdParser(),
-			$mockProvider->getMockLabelDescriptionDuplicateDetector()
+			$mockProvider->getMockLabelDescriptionDuplicateDetector(),
+			$this->createMock( TermsCollisionDetectorFactory::class ),
+			$this->createMock( TermLookup::class ),
+			[],
+			0
 		);
+	}
+
+	public function entityTypeToFingerprintUniquenessValidatorProvider() {
+		return [
+
+			'unsupported type' => [
+				'entityType' => 'mediainfo',
+				'expectedValidatorType' => false // false means null (no validator) is returned
+			],
+
+			'item is supported' => [
+				'entityType' => Item::ENTITY_TYPE,
+				'expectedValidatorType' => ByIdFingerprintUniquenessValidator::class
+			],
+
+			'property is supported' => [
+				'entityType' => Property::ENTITY_TYPE,
+				'expectedValidatorType' => ByIdFingerprintUniquenessValidator::class
+			]
+
+		];
+	}
+
+	/**
+	 * @dataProvider entityTypeToFingerprintUniquenessValidatorProvider
+	 */
+	public function testGetFingerprintUniquenessValidator( $entityType, $expectedValidatorType ) {
+		$validator = $this->newFactory()->getFingerprintUniquenessValidator( $entityType );
+
+		if ( $expectedValidatorType === false ) {
+			$this->assertNull( $validator );
+		} else {
+			$this->assertInstanceOf( $expectedValidatorType, $validator );
+		}
 	}
 
 	public function testGetFingerprintValidator() {
