@@ -1,42 +1,38 @@
-import { MwApi } from '@/@types/mediawiki/MwWindow';
+import Api, {
+	ApiQueryResponseBody,
+} from '@/definitions/data-access/Api';
 import WikibaseRepoConfigRepository, {
 	WikibaseRepoConfiguration,
 } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 
-interface WellFormedResponse {
-	query: {
-		wbdatabridgeconfig: WikibaseRepoConfiguration;
-	};
+interface ApiQueryDataBridgeConfigBody extends ApiQueryResponseBody {
+	wbdatabridgeconfig: WikibaseRepoConfiguration;
 }
 
 export default class ApiRepoConfigRepository implements WikibaseRepoConfigRepository {
-	private readonly api: MwApi;
+	private readonly api: Api;
 
-	public constructor( api: MwApi ) {
+	public constructor( api: Api ) {
 		this.api = api;
 	}
 
-	public getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
-		return Promise.resolve( this.api.get( {
+	public async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
+		const response = await this.api.get( {
 			action: 'query',
-			meta: 'wbdatabridgeconfig',
+			meta: new Set( [ 'wbdatabridgeconfig' ] ),
 			formatversion: 2,
-			errorformat: 'none',
-		} ) ).then( ( response: unknown ) => {
-			if ( this.responseWarnsAboutDisabledRepoConfiguration( response ) ) {
-				throw new TechnicalProblem( 'Result indicates repo API is disabled (see dataBridgeEnabled).' );
-			}
-
-			if ( !this.isWellFormedResponse( response ) ) {
-				throw new TechnicalProblem( 'Result not well formed.' );
-			}
-
-			return response.query.wbdatabridgeconfig;
-		}, ( error: JQuery.jqXHR ): never => {
-			throw new JQueryTechnicalError( error );
+			errorformat: 'raw',
 		} );
+		if ( this.responseWarnsAboutDisabledRepoConfiguration( response ) ) {
+			throw new TechnicalProblem( 'Result indicates repo API is disabled (see dataBridgeEnabled).' );
+		}
+
+		if ( !this.isWellFormedResponse( response.query ) ) {
+			throw new TechnicalProblem( 'Result not well formed.' );
+		}
+
+		return response.query.wbdatabridgeconfig;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,10 +43,10 @@ export default class ApiRepoConfigRepository implements WikibaseRepoConfigReposi
 			} );
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private isWellFormedResponse( response: any ): response is WellFormedResponse {
+	private isWellFormedResponse( response: ApiQueryResponseBody ): response is ApiQueryDataBridgeConfigBody {
 		try {
-			return typeof response.query.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
+			return typeof ( response as ApiQueryDataBridgeConfigBody )
+				.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
 		} catch ( e ) {
 			return false;
 		}

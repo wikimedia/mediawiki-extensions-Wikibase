@@ -75,3 +75,8 @@ export interface ApiQueryResponsePage {
 	missing?: true;
 	invalid?: true;
 }
+
+export interface ApiError {
+	code: string;
+	data?: object;
+}

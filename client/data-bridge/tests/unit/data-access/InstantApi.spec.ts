@@ -5,7 +5,7 @@ import {
 	ApiParams,
 } from '@/definitions/data-access/Api';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import { mockMwApi } from '../../util/mocks';
+import { mockApi } from '../../util/mocks';
 import { expectError } from '../../util/promise';
 import jqXHR = JQuery.jqXHR;
 
@@ -13,7 +13,7 @@ describe( 'InstantApi', () => {
 
 	it( 'resolves with unmodified API response on success', async () => {
 		const expectedResponse = { some: 'result' };
-		const mwApi = mockMwApi( expectedResponse );
+		const mwApi = mockApi( expectedResponse );
 		const api = new InstantApi( mwApi );
 
 		const actualResponse = await api.get( { action: 'unknown' } );
@@ -23,7 +23,7 @@ describe( 'InstantApi', () => {
 
 	it( 'rejects with jQuery error on failure', async () => {
 		const xhr = {} as jqXHR;
-		const mwApi = mockMwApi( undefined, xhr );
+		const mwApi = mockApi( undefined, xhr );
 		const api = new InstantApi( mwApi );
 
 		const error = await expectError( api.get( { action: 'unknown' } ) );

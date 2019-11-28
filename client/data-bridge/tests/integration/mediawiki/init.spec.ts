@@ -1,4 +1,6 @@
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
+import BatchingApi from '@/data-access/BatchingApi';
+import InstantApi from '@/data-access/InstantApi';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
@@ -53,7 +55,8 @@ describe( 'init', () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} ),
 			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
-			api = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
+			mwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
+			api = new BatchingApi( new InstantApi( mwApi ) ),
 			editTags = [ 'a tag' ],
 			usePublish = true;
 		mockMwEnv(
@@ -71,7 +74,7 @@ describe( 'init', () => {
 			'http://localhost/wiki/Special:EntityData',
 		) );
 		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
-			api,
+			mwApi,
 			'Test User',
 			editTags,
 		) );
@@ -79,7 +82,7 @@ describe( 'init', () => {
 			( window as MwWindow ).mw.language,
 			( window as MwWindow ).$.uls!.data,
 		) );
-		const entityInfoDispatcher = new ApiEntityInfoDispatcher( api, [ 'labels', 'datatype' ] );
+		const entityInfoDispatcher = new ApiEntityInfoDispatcher( mwApi, [ 'labels', 'datatype' ] );
 		expectedServices.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
 			'en',
 			entityInfoDispatcher,

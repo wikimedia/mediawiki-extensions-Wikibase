@@ -4,6 +4,7 @@ import MwWindow, {
 } from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
 import WbRepo from '@/@types/wikibase/WbRepo';
+import Api from '@/definitions/data-access/Api';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
@@ -117,7 +118,10 @@ export function mockMwForeignApiGet(
 	foreignApiEntityInfoResponse: Promise<object>,
 ) {
 	return ( params: any ) => {
-		if ( params.action === 'query' && params.meta === 'wbdatabridgeconfig' ) {
+		if ( params.action === 'query' && (
+			params.meta === 'wbdatabridgeconfig' ||
+				params.meta.includes( 'wbdatabridgeconfig' )
+		) ) {
 			return getDataBridgeConfig;
 		} else if ( params.action === 'wbgetentities' && params.ids ) {
 			return foreignApiEntityInfoResponse;
@@ -168,7 +172,7 @@ export function mockMwForeignApiEntityInfoResponse(
 	} );
 }
 
-export function mockMwApi( successObject?: unknown, rejectData?: unknown ): MwApi {
+export function mockApi( successObject?: unknown, rejectData?: unknown ): Api & MwApi {
 	return {
 		get(): any {
 			if ( successObject ) {

@@ -5654,6 +5654,29 @@ module.exports = function (it, tag, stat) {
 
 /***/ }),
 
+/***/ "7f7f":
+/***/ (function(module, exports, __webpack_require__) {
+
+var dP = __webpack_require__("86cc").f;
+var FProto = Function.prototype;
+var nameRE = /^\s*function ([^ (]*)/;
+var NAME = 'name';
+
+// 19.2.4.2 name
+NAME in FProto || __webpack_require__("9e1e") && dP(FProto, NAME, {
+  configurable: true,
+  get: function () {
+    try {
+      return ('' + this).match(nameRE)[1];
+    } catch (e) {
+      return '';
+    }
+  }
+});
+
+
+/***/ }),
+
 /***/ "7fae":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13064,6 +13087,425 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
+var es6_set = __webpack_require__("4f7f");
+
+// CONCATENATED MODULE: ./src/data-access/BatchingApi.ts
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * A service to batch API requests.
+ * Compatible requests made within the same call stack
+ * (i.e., synchronously) are merged into one.
+ *
+ * Usage example:
+ *
+ * ```
+ * api.get( {
+ *     action: 'query',
+ *     prop: new Set( [ 'info' ] ),
+ *     meta: new Set( [ 'siteinfo' ] ),
+ *     titles: new Set( [ 'Help:Contents', 'Project:Main Page' ] ),
+ *     redirects: true,
+ *     inprop: new Set( [ 'url' ] ),
+ *     siprop: new Set( [ 'usergroups' ] ),
+ *     formatversion: 2,
+ * } );
+ * ```
+ *
+ * Whether two requests are compatible depends on their parameters.
+ * Parameters that only occur in one of two requests have no effect
+ * on compatibility and are always added to the resulting request.
+ * If the same parameter name occurs in both requests,
+ * the result depends on the type of the value:
+ *
+ * - If the values on both sides are sets (instances of Set),
+ *   the sets are merged into one for the resulting request,
+ *   and sent to the underlying API as an array of values.
+ * - If the value on either side is an array (instance of Array),
+ *   the requests are incompatible.
+ *   This only makes sense for parameters where duplicates are significant;
+ *   for most parameters, you should use sets instead.
+ * - If the values on both sides are booleans,
+ *   the requests are incompatible if the values are different.
+ *   Otherwise, they are sent unmodified to the underlying API.
+ * - Otherwise, the values on both sides are converted to strings.
+ *   If the resulting strings are different, the requests are incompatible;
+ *   otherwise, they are added to the resulting request.
+ *   (The string conversion ensures that, for example,
+ *   formatversion: 2 and formatversion: '2' are compatible.)
+ *
+ * Callers should specify all the parameters that they rely on,
+ * even where this means specifying the default value, so that
+ * conflicts with requests specifying non-default values can be detected.
+ * Using formatversion: 2 is strongly encouraged.
+ */
+var BatchingApi_BatchingApi =
+/*#__PURE__*/
+function () {
+  /**
+   * Create a new service for requests to the given (local or foreign) API.
+   * @param api underlying implementation responsible for
+   * making the merged API calls (usually an {@link InstantApi})
+   */
+  function BatchingApi(api) {
+    _classCallCheck(this, BatchingApi);
+
+    this.api = api;
+    this.requests = [];
+  }
+
+  _createClass(BatchingApi, [{
+    key: "get",
+    value: function get(params) {
+      var _this = this;
+
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.requests[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var request = _step.value;
+          var mergedParams = this.mergeParams(request.params, params);
+
+          if (mergedParams !== false) {
+            // add to existing request
+            request.params = mergedParams;
+            return request.promise;
+          }
+        } // no matching existing request, add new request
+
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      var resolve = undefined,
+          reject = undefined;
+      var promise = new Promise(function (resolve_, reject_) {
+        resolve = resolve_;
+        reject = reject_;
+      });
+      this.requests.push({
+        params: params,
+        promise: promise,
+        resolve: resolve,
+        reject: reject
+      });
+
+      if (this.requests.length === 1) {
+        Promise.resolve().then(function () {
+          return _this.flush();
+        });
+      }
+
+      return promise;
+    }
+    /**
+     * Flush the queue of pending requests,
+     * sending them all to the underlying API
+     * and resolving or rejecting their promises as needed.
+     */
+
+  }, {
+    key: "flush",
+    value: function flush() {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.requests[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var _step2$value = _step2.value,
+              params = _step2$value.params,
+              resolve = _step2$value.resolve,
+              reject = _step2$value.reject;
+          this.api.get(params).then(resolve, reject);
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      this.requests.length = 0; // truncate
+    }
+    /**
+     * Merge two sets of parameters into one,
+     * or return `false` if they are incompatible.
+     * The original objects are never modified.
+     */
+
+  }, {
+    key: "mergeParams",
+    value: function mergeParams(params1, params2) {
+      var paramNames = new Set([].concat(_toConsumableArray(Object.getOwnPropertyNames(params1)), _toConsumableArray(Object.getOwnPropertyNames(params2))));
+      var mergedParams = {};
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = paramNames[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var paramName = _step3.value;
+          var inParams1 = Object.prototype.hasOwnProperty.call(params1, paramName),
+              inParams2 = Object.prototype.hasOwnProperty.call(params2, paramName);
+
+          if (inParams1 !== inParams2) {
+            mergedParams[paramName] = (inParams1 ? params1 : params2)[paramName];
+            continue;
+          }
+
+          var value1 = params1[paramName],
+              value2 = params2[paramName];
+
+          if (value1 instanceof Set && value2 instanceof Set) {
+            var mergedSet = new Set();
+            mergedParams[paramName] = mergedSet;
+            value1.forEach(mergedSet.add, mergedSet);
+            value2.forEach(mergedSet.add, mergedSet);
+            continue;
+          }
+
+          if (value1 instanceof Array || value2 instanceof Array) {
+            return false;
+          }
+
+          if (typeof value1 === 'boolean' && typeof value2 === 'boolean') {
+            if (value1 === value2) {
+              mergedParams[paramName] = value1;
+              continue;
+            } else {
+              return false;
+            }
+          }
+
+          var string1 = String(value1),
+              string2 = String(value2);
+
+          if (string1 === string2) {
+            mergedParams[paramName] = string1;
+            continue;
+          } else {
+            return false;
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      return mergedParams;
+    }
+  }]);
+
+  return BatchingApi;
+}();
+
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("7f7f");
+
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
+var promise = __webpack_require__("795b");
+var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    promise_default.a.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new promise_default.a(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+// CONCATENATED MODULE: ./src/data-access/InstantApi.ts
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * A service to make API requests immediately,
+ * wrapping an instance of the MediaWiki API class.
+ * It turns sets into arrays and maps request errors
+ * to JQueryTechnicalError.
+ *
+ * (The name InstantApi was chosen to contrast BatchingApi.)
+ */
+
+var InstantApi_InstantApi =
+/*#__PURE__*/
+function () {
+  function InstantApi(api) {
+    _classCallCheck(this, InstantApi);
+
+    this.api = api;
+  }
+
+  _createClass(InstantApi, [{
+    key: "get",
+    value: function () {
+      var _get = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(params) {
+        var _i, _Object$keys, name, param;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                for (_i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
+                  name = _Object$keys[_i];
+                  param = params[name];
+
+                  if (param instanceof Set) {
+                    params[name] = _toConsumableArray(param);
+                  }
+                }
+
+                _context.prev = 1;
+                _context.next = 4;
+                return this.api.get(params);
+
+              case 4:
+                return _context.abrupt("return", _context.sent);
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](1);
+                throw new JQueryTechnicalError_JQueryTechnicalError(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[1, 7]]);
+      }));
+
+      function get(_x) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }]);
+
+  return InstantApi;
+}();
+
+
 // CONCATENATED MODULE: ./src/services/ServiceContainer.ts
 
 
@@ -13227,6 +13669,10 @@ function () {
 
 
 
+
+
+
+
 var ApiRepoConfigRepository_ApiRepoConfigRepository =
 /*#__PURE__*/
 function () {
@@ -13238,28 +13684,58 @@ function () {
 
   _createClass(ApiRepoConfigRepository, [{
     key: "getRepoConfiguration",
-    value: function getRepoConfiguration() {
-      var _this = this;
+    value: function () {
+      var _getRepoConfiguration = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var response;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.api.get({
+                  action: 'query',
+                  meta: new Set(['wbdatabridgeconfig']),
+                  formatversion: 2,
+                  errorformat: 'raw'
+                });
 
-      return Promise.resolve(this.api.get({
-        action: 'query',
-        meta: 'wbdatabridgeconfig',
-        formatversion: 2,
-        errorformat: 'none'
-      })).then(function (response) {
-        if (_this.responseWarnsAboutDisabledRepoConfiguration(response)) {
-          throw new TechnicalProblem_TechnicalProblem('Result indicates repo API is disabled (see dataBridgeEnabled).');
-        }
+              case 2:
+                response = _context.sent;
 
-        if (!_this.isWellFormedResponse(response)) {
-          throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
-        }
+                if (!this.responseWarnsAboutDisabledRepoConfiguration(response)) {
+                  _context.next = 5;
+                  break;
+                }
 
-        return response.query.wbdatabridgeconfig;
-      }, function (error) {
-        throw new JQueryTechnicalError_JQueryTechnicalError(error);
-      });
-    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                throw new TechnicalProblem_TechnicalProblem('Result indicates repo API is disabled (see dataBridgeEnabled).');
+
+              case 5:
+                if (this.isWellFormedResponse(response.query)) {
+                  _context.next = 7;
+                  break;
+                }
+
+                throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
+
+              case 7:
+                return _context.abrupt("return", response.query.wbdatabridgeconfig);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getRepoConfiguration() {
+        return _getRepoConfiguration.apply(this, arguments);
+      }
+
+      return getRepoConfiguration;
+    }() // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   }, {
     key: "responseWarnsAboutDisabledRepoConfiguration",
@@ -13267,13 +13743,12 @@ function () {
       return Array.isArray(response.warnings) && response.warnings.some(function (warning) {
         return warning.code === 'unrecognizedvalues' && warning.module === 'query';
       });
-    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
+    }
   }, {
     key: "isWellFormedResponse",
     value: function isWellFormedResponse(response) {
       try {
-        return typeof response.query.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
+        return typeof response.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
       } catch (e) {
         return false;
       }
@@ -13337,51 +13812,6 @@ function () {
 }();
 
 
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
-var promise = __webpack_require__("795b");
-var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    promise_default.a.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new promise_default.a(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
 // CONCATENATED MODULE: ./src/data-access/DispatchingPropertyDataTypeRepository.ts
 
 
@@ -13536,41 +13966,6 @@ function () {
   return DispatchingEntityLabelRepository;
 }();
 
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
-var es6_set = __webpack_require__("4f7f");
 
 // CONCATENATED MODULE: ./src/data-access/ApiEntityInfoDispatcher.ts
 
@@ -13750,6 +14145,8 @@ function () {
 
 
 
+
+
 function createServices(mwWindow, editTags) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
@@ -13760,9 +14157,10 @@ function createServices(mwWindow, editTags) {
     throw new Error('mw.ForeignApi was not loaded!');
   }
 
-  var repoForeignApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
-  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoForeignApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
-  var foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher_ApiEntityInfoDispatcher(repoForeignApi, ['labels', 'datatype']);
+  var repoMwApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
+  var repoApi = new BatchingApi_BatchingApi(new InstantApi_InstantApi(repoMwApi));
+  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
+  var foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher_ApiEntityInfoDispatcher(repoMwApi, ['labels', 'datatype']);
   services.set('entityLabelRepository', new DispatchingEntityLabelRepository_DispatchingEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), foreignApiEntityInfoDispatcher));
   services.set('propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository(foreignApiEntityInfoDispatcher));
 
@@ -13772,7 +14170,7 @@ function createServices(mwWindow, editTags) {
 
   services.set('languageInfoRepository', new MwLanguageInfoRepository_MwLanguageInfoRepository(mwWindow.mw.language, mwWindow.$.uls.data));
   services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
-  services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoForeignApi));
+  services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoApi));
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
   return services;
 }

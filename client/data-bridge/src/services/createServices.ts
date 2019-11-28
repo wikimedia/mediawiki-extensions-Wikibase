@@ -1,4 +1,6 @@
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
+import BatchingApi from '@/data-access/BatchingApi';
+import InstantApi from '@/data-access/InstantApi';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -29,18 +31,19 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		throw new Error( 'mw.ForeignApi was not loaded!' );
 	}
 
-	const repoForeignApi = new mwWindow.mw.ForeignApi(
+	const repoMwApi = new mwWindow.mw.ForeignApi(
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
+	const repoApi = new BatchingApi( new InstantApi( repoMwApi ) );
 
 	services.set( 'writingEntityRepository', new ApiWritingRepository(
-		repoForeignApi,
+		repoMwApi,
 		mwWindow.mw.config.get( 'wgUserName' ),
 		editTags.length === 0 ? undefined : editTags,
 	) );
 
 	const foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher(
-		repoForeignApi,
+		repoMwApi,
 		[ 'labels', 'datatype' ],
 	);
 
@@ -65,7 +68,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	services.set( 'messagesRepository', new MwMessagesRepository( mwWindow.mw.message ) );
 
 	services.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository(
-		repoForeignApi,
+		repoApi,
 	) );
 
 	services.set( 'tracker', new DataBridgeTrackerService(

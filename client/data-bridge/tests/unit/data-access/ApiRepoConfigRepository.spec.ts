@@ -2,7 +2,8 @@ import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import { mockMwApi } from '../../util/mocks';
+import { mockApi } from '../../util/mocks';
+import jqXHR = JQuery.jqXHR;
 
 describe( 'ApiRepoConfigRepository', () => {
 
@@ -13,7 +14,7 @@ describe( 'ApiRepoConfigRepository', () => {
 			},
 		},
 	};
-	const api = mockMwApi( {
+	const api = mockApi( {
 		query: {
 			wbdatabridgeconfig,
 		},
@@ -28,8 +29,8 @@ describe( 'ApiRepoConfigRepository', () => {
 			expect( api.get ).toHaveBeenCalledTimes( 1 );
 			expect( api.get ).toHaveBeenCalledWith( {
 				action: 'query',
-				meta: 'wbdatabridgeconfig',
-				errorformat: 'none',
+				meta: new Set( [ 'wbdatabridgeconfig' ] ),
+				errorformat: 'raw',
 				formatversion: 2,
 			} );
 		} );
@@ -44,7 +45,7 @@ describe( 'ApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response does not match the agreed-upon format', () => {
-		const api = mockMwApi( {
+		const api = mockApi( {
 			query: {
 				wbdatabridgeconfig: {
 					foobar: 'yes',
@@ -60,7 +61,7 @@ describe( 'ApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response indicates revelant API endpoint is disabled in repo', () => {
-		const api = mockMwApi( {
+		const api = mockApi( {
 			warnings: [
 				{
 					code: 'unrecognizedvalues',
@@ -76,13 +77,14 @@ describe( 'ApiRepoConfigRepository', () => {
 			.toStrictEqual( new TechnicalProblem( 'Result indicates repo API is disabled (see dataBridgeEnabled).' ) );
 	} );
 
-	it( 'rejects if there was a serverside problem with the API', () => {
-		const api = mockMwApi( null, { status: 500 } );
+	it( 'passes through rejection from underlying API', () => {
+		const rejection = new JQueryTechnicalError( {} as jqXHR );
+		const api = mockApi( null, rejection );
 		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return expect( configurationRepository.getRepoConfiguration() )
 			.rejects
-			.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );
+			.toBe( rejection );
 	} );
 
 } );
