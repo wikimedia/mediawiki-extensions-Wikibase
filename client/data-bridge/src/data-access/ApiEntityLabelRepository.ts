@@ -1,28 +1,32 @@
+import {
+	convertNoSuchEntityError,
+	getApiEntity,
+	EntityWithLabels,
+} from '@/data-access/ApiWbgetentities';
+import Api from '@/definitions/data-access/Api';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWithoutLabelInLanguageException';
-import EntityInfoDispatcher, { EntityWithLabelData } from '@/definitions/data-access/EntityInfoDispatcher';
 
-export default class DispatchingEntityLabelRepository implements EntityLabelRepository {
+export default class ApiEntityLabelRepository implements EntityLabelRepository {
 	private readonly forLanguageCode: string;
-	private readonly requestDispatcher: EntityInfoDispatcher;
+	private readonly api: Api;
 
-	public constructor( forLanguageCode: string, requestDispatcher: EntityInfoDispatcher ) {
+	public constructor( forLanguageCode: string, api: Api ) {
 		this.forLanguageCode = forLanguageCode;
-		this.requestDispatcher = requestDispatcher;
+		this.api = api;
 	}
 
 	public async getLabel( entityId: string ): Promise<Term> {
-		const entities = await this.requestDispatcher.dispatchEntitiesInfoRequest( {
-			props: [ 'labels' ],
-			ids: [ entityId ],
-			otherParams: {
-				languages: this.forLanguageCode,
-				languagefallback: 1,
-			},
-		} );
-
-		const entity = entities[ entityId ] as EntityWithLabelData;
+		const response = await this.api.get( {
+			action: 'wbgetentities',
+			props: new Set( [ 'labels' ] ),
+			ids: new Set( [ entityId ] ),
+			languages: new Set( [ this.forLanguageCode ] ),
+			languagefallback: true,
+			formatversion: 2,
+		} ).catch( convertNoSuchEntityError );
+		const entity = getApiEntity( response, entityId ) as EntityWithLabels;
 
 		if ( !( this.forLanguageCode in entity.labels ) ) {
 			throw new EntityWithoutLabelInLanguageException(

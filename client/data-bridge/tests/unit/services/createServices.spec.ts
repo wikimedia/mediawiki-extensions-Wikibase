@@ -3,8 +3,7 @@ import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
-import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
+import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
@@ -13,7 +12,7 @@ import BatchingApi from '@/data-access/BatchingApi';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
-import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
+import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -27,18 +26,13 @@ jest.mock( '@/data-access/ApiWritingRepository', () => {
 	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
 } );
 
-const mockEntityInfoDispatcher = {};
-jest.mock( '@/data-access/ApiEntityInfoDispatcher', () => {
-	return jest.fn().mockImplementation( () => mockEntityInfoDispatcher );
-} );
-
 const mockEntityLabelRepository = {};
-jest.mock( '@/data-access/DispatchingEntityLabelRepository', () => {
+jest.mock( '@/data-access/ApiEntityLabelRepository', () => {
 	return jest.fn().mockImplementation( () => mockEntityLabelRepository );
 } );
 
 const mockPropertyDataTypeRepository = {};
-jest.mock( '@/data-access/DispatchingPropertyDataTypeRepository', () => {
+jest.mock( '@/data-access/ApiPropertyDataTypeRepository', () => {
 	return jest.fn().mockImplementation( () => mockPropertyDataTypeRepository );
 } );
 
@@ -229,7 +223,32 @@ describe( 'createServices', () => {
 		expect( services.get( 'languageInfoRepository' ) ).toBe( mockMwLanguageInfoRepository );
 	} );
 
-	it( 'creates ApiEntityInfoDispatcher and its two users', () => {
+	it( 'creates ApiEntityLabelRepository', () => {
+		const wgPageContentLanguage = 'de';
+
+		const mwWindow = mockMwWindow( {
+			wgPageContentLanguage,
+		} );
+
+		const services = createServices( mwWindow, [] );
+
+		expect( services ).toBeInstanceOf( ServiceContainer );
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( BatchingApi )
+			.toHaveBeenCalledWith( mockApiCore );
+
+		expect(
+			( ApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
+		).toBe( wgPageContentLanguage );
+		expect( ( ApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toBe( mockBatchingApi );
+		expect( services.get( 'entityLabelRepository' ) ).toBe( mockEntityLabelRepository );
+	} );
+
+	it( 'creates ApiPropertyDataTypeRepository', () => {
 		const wgPageContentLanguage = 'de';
 
 		const mwWindow = mockMwWindow( {
@@ -240,22 +259,16 @@ describe( 'createServices', () => {
 
 		expect( services ).toBeInstanceOf( ServiceContainer );
 
-		expect( ( ApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
-		expect( ( ApiEntityInfoDispatcher as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toStrictEqual( [ 'labels', 'datatype' ] );
+		expect( BatchingApi )
+			.toHaveBeenCalledWith( mockApiCore );
 
-		expect(
-			( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
-		).toBe( wgPageContentLanguage );
-		expect( ( DispatchingEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-			.toBe( mockEntityInfoDispatcher );
-		expect( services.get( 'entityLabelRepository' ) ).toBe( mockEntityLabelRepository );
-
-		expect( ( DispatchingPropertyDataTypeRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
-			.toBe( mockEntityInfoDispatcher );
+		expect( ( ApiPropertyDataTypeRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBe( mockBatchingApi );
 		expect( services.get( 'propertyDatatypeRepository' ) ).toBe( mockPropertyDataTypeRepository );
-
 	} );
 
 	it( 'creates MessagesRepository', () => {

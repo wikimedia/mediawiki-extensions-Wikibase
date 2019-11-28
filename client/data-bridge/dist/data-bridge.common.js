@@ -13874,41 +13874,77 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/data-access/DispatchingPropertyDataTypeRepository.ts
+// CONCATENATED MODULE: ./src/data-access/ApiWbgetentities.ts
 
 
 
 
-
-var DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository =
-/*#__PURE__*/
-function () {
-  function DispatchingPropertyDataTypeRepository(requestDispatcher) {
-    _classCallCheck(this, DispatchingPropertyDataTypeRepository);
-
-    this.requestDispatcher = requestDispatcher;
+function getApiEntity(response, entityId) {
+  if (typeof_typeof(response.entities) !== 'object') {
+    throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
   }
 
-  _createClass(DispatchingPropertyDataTypeRepository, [{
+  var entity = response.entities[entityId];
+
+  if (!entity) {
+    throw new EntityNotFound_EntityNotFound('Result does not contain relevant entity.');
+  }
+
+  if ('missing' in entity) {
+    throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
+  }
+
+  return entity;
+}
+function convertNoSuchEntityError(error) {
+  if (error instanceof ApiErrors_ApiErrors && error.errors.length === 1 && error.errors[0].code === 'no-such-entity') {
+    throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
+  } else {
+    throw error;
+  }
+}
+// CONCATENATED MODULE: ./src/data-access/ApiPropertyDataTypeRepository.ts
+
+
+
+
+
+
+
+
+
+
+var ApiPropertyDataTypeRepository_ApiPropertyDataTypeRepository =
+/*#__PURE__*/
+function () {
+  function ApiPropertyDataTypeRepository(api) {
+    _classCallCheck(this, ApiPropertyDataTypeRepository);
+
+    this.api = api;
+  }
+
+  _createClass(ApiPropertyDataTypeRepository, [{
     key: "getDataType",
     value: function () {
       var _getDataType = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(entityId) {
-        var entities, entity;
+        var response, entity;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.requestDispatcher.dispatchEntitiesInfoRequest({
-                  props: ['datatype'],
-                  ids: [entityId]
-                });
+                return this.api.get({
+                  action: 'wbgetentities',
+                  props: new Set(['datatype']),
+                  ids: new Set([entityId]),
+                  formatversion: 2
+                }).catch(convertNoSuchEntityError);
 
               case 2:
-                entities = _context.sent;
-                entity = entities[entityId];
+                response = _context.sent;
+                entity = getApiEntity(response, entityId);
                 return _context.abrupt("return", entity.datatype);
 
               case 5:
@@ -13927,7 +13963,7 @@ function () {
     }()
   }]);
 
-  return DispatchingPropertyDataTypeRepository;
+  return ApiPropertyDataTypeRepository;
 }();
 
 
@@ -13953,47 +13989,52 @@ function (_Error) {
 }(wrapNativeSuper_wrapNativeSuper(Error));
 
 
-// CONCATENATED MODULE: ./src/data-access/DispatchingEntityLabelRepository.ts
+// CONCATENATED MODULE: ./src/data-access/ApiEntityLabelRepository.ts
 
 
 
 
 
 
-var DispatchingEntityLabelRepository_DispatchingEntityLabelRepository =
+
+
+
+
+
+var ApiEntityLabelRepository_ApiEntityLabelRepository =
 /*#__PURE__*/
 function () {
-  function DispatchingEntityLabelRepository(forLanguageCode, requestDispatcher) {
-    _classCallCheck(this, DispatchingEntityLabelRepository);
+  function ApiEntityLabelRepository(forLanguageCode, api) {
+    _classCallCheck(this, ApiEntityLabelRepository);
 
     this.forLanguageCode = forLanguageCode;
-    this.requestDispatcher = requestDispatcher;
+    this.api = api;
   }
 
-  _createClass(DispatchingEntityLabelRepository, [{
+  _createClass(ApiEntityLabelRepository, [{
     key: "getLabel",
     value: function () {
       var _getLabel = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(entityId) {
-        var entities, entity, label;
+        var response, entity, label;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.requestDispatcher.dispatchEntitiesInfoRequest({
-                  props: ['labels'],
-                  ids: [entityId],
-                  otherParams: {
-                    languages: this.forLanguageCode,
-                    languagefallback: 1
-                  }
-                });
+                return this.api.get({
+                  action: 'wbgetentities',
+                  props: new Set(['labels']),
+                  ids: new Set([entityId]),
+                  languages: new Set([this.forLanguageCode]),
+                  languagefallback: true,
+                  formatversion: 2
+                }).catch(convertNoSuchEntityError);
 
               case 2:
-                entities = _context.sent;
-                entity = entities[entityId];
+                response = _context.sent;
+                entity = getApiEntity(response, entityId);
 
                 if (this.forLanguageCode in entity.labels) {
                   _context.next = 6;
@@ -14025,177 +14066,11 @@ function () {
     }()
   }]);
 
-  return DispatchingEntityLabelRepository;
-}();
-
-
-// CONCATENATED MODULE: ./src/data-access/ApiEntityInfoDispatcher.ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ApiEntityInfoDispatcher_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function ApiEntityInfoDispatcher_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ApiEntityInfoDispatcher_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ApiEntityInfoDispatcher_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
-
-
-
-var ApiEntityInfoDispatcher_ApiEntityInfoDispatcher =
-/*#__PURE__*/
-function () {
-  function ApiEntityInfoDispatcher(api) {
-    var waitForProps = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-
-    _classCallCheck(this, ApiEntityInfoDispatcher);
-
-    this.parameters = null;
-    this.resolveCallbacks = [];
-    this.rejectCallbacks = [];
-    this.waitForProps = [];
-    this.api = api;
-    this.waitForProps = waitForProps;
-  }
-
-  _createClass(ApiEntityInfoDispatcher, [{
-    key: "dispatchEntitiesInfoRequest",
-    value: function dispatchEntitiesInfoRequest(requestData) {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        _this.addRequest(requestData);
-
-        _this.resolveCallbacks.push(resolve);
-
-        _this.rejectCallbacks.push(reject);
-
-        _this.executeRequestIfPropsAreComplete();
-      });
-    }
-  }, {
-    key: "addRequest",
-    value: function addRequest(requestData) {
-      if (this.parameters === null) {
-        this.parameters = {
-          props: new Set([]),
-          ids: new Set([]),
-          otherParams: {}
-        };
-      }
-
-      this.parameters.props = new Set([].concat(_toConsumableArray(this.parameters.props), _toConsumableArray(requestData.props)));
-      this.parameters.ids = new Set([].concat(_toConsumableArray(this.parameters.ids), _toConsumableArray(requestData.ids)));
-
-      if (requestData.otherParams) {
-        this.parameters.otherParams = ApiEntityInfoDispatcher_objectSpread({}, this.parameters.otherParams, {}, requestData.otherParams);
-      }
-    }
-  }, {
-    key: "executeRequestIfPropsAreComplete",
-    value: function executeRequestIfPropsAreComplete() {
-      var _this2 = this;
-
-      if (this.waitForProps.every(function (prop) {
-        return _this2.parameters !== null && _this2.parameters.props.has(prop);
-      })) {
-        this.executeRequest();
-      }
-    }
-  }, {
-    key: "executeRequest",
-    value: function executeRequest() {
-      var _this3 = this;
-
-      var _this$getAndClearRequ = this.getAndClearRequestData(),
-          parameters = _this$getAndClearRequ.parameters,
-          resolveCallbacks = _this$getAndClearRequ.resolveCallbacks,
-          rejectCallbacks = _this$getAndClearRequ.rejectCallbacks;
-
-      Promise.resolve(this.api.get(ApiEntityInfoDispatcher_objectSpread({
-        action: 'wbgetentities',
-        ids: _toConsumableArray(parameters.ids),
-        props: _toConsumableArray(parameters.props)
-      }, parameters.otherParams))).then(function (response) {
-        if (!_this3.isWellFormedResponse(response)) {
-          if (_this3.isErrorResponse(response) && response.error.code === 'no-such-entity') {
-            throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
-          }
-
-          throw new TechnicalProblem_TechnicalProblem('Result not well formed.');
-        }
-
-        if (_toConsumableArray(parameters.ids).some(function (entityId) {
-          return !response.entities[entityId];
-        })) {
-          // not a real thing at the moment but guards the following access
-          throw new EntityNotFound_EntityNotFound('Result does not contain relevant entity.');
-        }
-
-        if (Object.values(response.entities).some(function (entity) {
-          return 'missing' in entity;
-        })) {
-          throw new EntityNotFound_EntityNotFound('Entity flagged missing in response.');
-        }
-
-        resolveCallbacks.forEach(function (resolve) {
-          return resolve(response.entities);
-        });
-      }, function (error) {
-        throw new JQueryTechnicalError_JQueryTechnicalError(error);
-      }).catch(function (error) {
-        return rejectCallbacks.forEach(function (reject) {
-          return reject(error);
-        });
-      });
-    }
-  }, {
-    key: "getAndClearRequestData",
-    value: function getAndClearRequestData() {
-      if (this.parameters === null) {
-        throw new Error('Request was dispatched, but none was scheduled.');
-      }
-
-      var parameters = this.parameters;
-      var resolveCallbacks = this.resolveCallbacks;
-      var rejectCallbacks = this.rejectCallbacks;
-      this.parameters = null;
-      this.resolveCallbacks = [];
-      this.rejectCallbacks = [];
-      return {
-        parameters: parameters,
-        resolveCallbacks: resolveCallbacks,
-        rejectCallbacks: rejectCallbacks
-      };
-    }
-  }, {
-    key: "isWellFormedResponse",
-    value: function isWellFormedResponse(data) {
-      return typeof_typeof(data) === 'object' && data !== null && 'entities' in data;
-    }
-  }, {
-    key: "isErrorResponse",
-    value: function isErrorResponse(data) {
-      return typeof_typeof(data) === 'object' && data !== null && 'error' in data;
-    }
-  }]);
-
-  return ApiEntityInfoDispatcher;
+  return ApiEntityLabelRepository;
 }();
 
 
 // CONCATENATED MODULE: ./src/services/createServices.ts
-
 
 
 
@@ -14222,9 +14097,8 @@ function createServices(mwWindow, editTags) {
   var repoMwApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
   var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
   services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
-  var foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher_ApiEntityInfoDispatcher(repoMwApi, ['labels', 'datatype']);
-  services.set('entityLabelRepository', new DispatchingEntityLabelRepository_DispatchingEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), foreignApiEntityInfoDispatcher));
-  services.set('propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository_DispatchingPropertyDataTypeRepository(foreignApiEntityInfoDispatcher));
+  services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), repoApi));
+  services.set('propertyDatatypeRepository', new ApiPropertyDataTypeRepository_ApiPropertyDataTypeRepository(repoApi));
 
   if (mwWindow.$.uls === undefined) {
     throw new Error('$.uls was not loaded!');
