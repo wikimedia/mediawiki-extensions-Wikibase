@@ -3,8 +3,6 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use ChangesList;
-use FauxRequest;
-use RequestContext;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -126,10 +124,6 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 			$expectedTermTypes,
 			$expectedLanguageCodes
 		);
-
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest() );
-		$context->setTitle( new Title( NS_SPECIAL, 'Watchlist' ) );
 
 		/** @var ChangesList $changesList */
 		$changesList = $this->getMockBuilder( ChangesList::class )
