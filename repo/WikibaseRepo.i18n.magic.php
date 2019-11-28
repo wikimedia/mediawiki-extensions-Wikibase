@@ -1,7 +1,5 @@
 <?php
 
-use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
-
 /**
  * Internationalization file with magic words for the Wikibase Repo extension.
  *
@@ -12,5 +10,5 @@ $magicWords = [];
 
 /** English (English) */
 $magicWords['en'] = [
-	CommaSeparatedList::NAME => [ 0, 'commaseparatedlist' ],
+	'commaSeparatedList' => [ 0, 'commaseparatedlist' ],
 ];
