@@ -78,9 +78,10 @@ function prepareTestEnv( options: {
 			},
 		},
 	} as any;
-	( window as MwWindow ).mw.message = jest.fn( ( key: string ) => {
+	( window as MwWindow ).mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
 		return {
-			text: () => `<${key}>`,
+			text: jest.fn(),
+			parse: () => `<${key}>`,
 		};
 	} );
 	( window as MwWindow ).mw.language = {

@@ -16,7 +16,7 @@ export default class Messages {
 		this.messagesRepository = messagesRepository;
 	}
 
-	public get( messageKey: string, ...params: string[] ): string {
+	public get( messageKey: string, ...params: ( string|HTMLElement )[] ): string {
 		return this.messagesRepository.get( messageKey, ...params );
 	}
 }

@@ -3,8 +3,9 @@ import MwConfig from '@/@types/mediawiki/MwConfig';
 
 export interface MwMessage {
 	text(): string;
+	parse(): string;
 }
-export type MwMessages = ( key: string, ...params: string[] ) => MwMessage;
+export type MwMessages = ( key: string, ...params: ( string|HTMLElement )[] ) => MwMessage;
 
 interface ResourceLoader {
 	using( module: string|string[] ): Promise<any>;
