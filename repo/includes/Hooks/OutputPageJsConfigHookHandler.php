@@ -54,7 +54,7 @@ class OutputPageJsConfigHookHandler {
 	 * @param string $dataRightsUrl
 	 * @param string $dataRightsText
 	 * @param string[] $badgeItems
-	 * @param integer $stringLimit
+	 * @param int $stringLimit
 	 * @param bool $taintedReferencesEnabled
 	 */
 	public function __construct(

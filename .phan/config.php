@@ -71,9 +71,6 @@ if ( is_dir( 'vendor' ) ) {
 $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
-		// approximate error count: 72
-		"PhanUndeclaredConstant",
-
 		// Both local and global vendor directories have to be analysed
 		"PhanRedefinedExtendedClass",
 		"PhanRedefinedInheritedInterface",
