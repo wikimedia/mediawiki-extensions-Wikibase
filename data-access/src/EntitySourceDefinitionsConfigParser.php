@@ -13,6 +13,10 @@ use Wikimedia\Assert\Assert;
  */
 class EntitySourceDefinitionsConfigParser {
 
+	/**
+	 * @param array[] $sourceConfig
+	 * @return EntitySourceDefinitions
+	 */
 	public function newDefinitionsFromConfigArray( array $sourceConfig ) {
 		$this->assertConfigArrayWellFormed( $sourceConfig );
 

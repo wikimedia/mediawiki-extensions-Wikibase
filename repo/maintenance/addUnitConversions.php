@@ -208,6 +208,7 @@ SELECT * WHERE {
 }
 QUERY;
 		$values = $this->client->query( $query );
+		'@phan-var array[] $values';
 		$this->output( "Got " . count( $values ) . " ids\n" );
 		if ( $this->dryRun ) {
 			return;
@@ -289,6 +290,7 @@ SELECT ?s ?p ?v WHERE {
 } ORDER BY ?s
 QUERY;
 		$data = $this->client->query( $query );
+		'@phan-var array[] $data';
 		foreach ( $data as $statement ) {
 			// Split predicate name into $prefix and $name (actual P123 part)
 			$last = strrpos( $statement['p'], '/' );

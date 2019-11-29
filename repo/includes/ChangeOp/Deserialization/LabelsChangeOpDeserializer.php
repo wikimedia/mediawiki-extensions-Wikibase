@@ -55,6 +55,7 @@ class LabelsChangeOpDeserializer implements ChangeOpDeserializer {
 		$changeOps = new ChangeOps();
 
 		foreach ( $changeRequest['labels'] as $langCode => $serialization ) {
+			'@phan-var array $serialization';
 			$this->validator->validateTermSerialization( $serialization, $langCode );
 
 			$language = $serialization['language'];
@@ -75,6 +76,7 @@ class LabelsChangeOpDeserializer implements ChangeOpDeserializer {
 	 * @param array $labels
 	 *
 	 * @throws ChangeOpDeserializationException
+	 * @phan-assert array $labels
 	 */
 	private function assertIsArray( $labels ) {
 		if ( !is_array( $labels ) ) {

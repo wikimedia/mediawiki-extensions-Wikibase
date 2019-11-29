@@ -218,6 +218,11 @@ class InfoActionHookHandler {
 		];
 	}
 
+	/**
+	 * @param string[][] $aspects
+	 * @param IContextSource $context
+	 * @return string
+	 */
 	private function formatAspects( array $aspects, IContextSource $context ) {
 		$aspectContent = '';
 		foreach ( $aspects as $aspect ) {
