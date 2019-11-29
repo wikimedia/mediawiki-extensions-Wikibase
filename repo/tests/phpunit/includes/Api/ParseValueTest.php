@@ -3,6 +3,8 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use FauxRequest;
@@ -68,6 +70,11 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 			'url' => [ $this, 'newArrayWithStringValidator' ],
 		] );
 
+		$propertyDataTypeLookup = new InMemoryDataTypeLookup();
+		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P1' ), 'string' );
+		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), 'url' );
+		$propertyDataTypeLookup->setDataTypeForProperty( new PropertyId( 'P3' ), 'globe-coordinate' );
+
 		return new ParseValue(
 			$main,
 			'wbparsevalue',
@@ -76,6 +83,7 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 			$validatorFactory,
 			$exceptionLocalizer,
 			$validatorErrorLocalizer,
+			$propertyDataTypeLookup,
 			$errorReporter
 		);
 	}
@@ -170,6 +178,69 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 				[
 					'values' => 'INVALID',
 					'datatype' => 'string',
+				],
+				[
+					'0/raw' => 'INVALID',
+					'0/type' => 'unknown',
+				],
+			],
+
+			'property=P[string-type]' => [
+				[
+					'values' => 'foo',
+					'property' => 'P1',
+				],
+				[
+					'0/raw' => 'foo',
+					'0/type' => 'unknown',
+					'0/value' => 'foo',
+				],
+			],
+
+			'property=P[url-type]' => [
+				[
+					'values' => 'foo',
+					'property' => 'P2',
+				],
+				[
+					'0/raw' => 'foo',
+					'0/type' => 'unknown',
+					'0/value' => 'foo',
+				],
+			],
+
+			'property=P[string-type] validation' => [
+				[
+					'values' => 'VALID',
+					'property' => 'P1',
+					'validate' => ''
+				],
+				[
+					'0/raw' => 'VALID',
+					'0/valid' => true,
+				],
+			],
+
+			'property=P[string-type] bad value, validation failure' => [
+				[
+					'values' => 'INVALID',
+					'property' => 'P1',
+					'validate' => ''
+				],
+				[
+					'0/raw' => 'INVALID',
+					'0/valid' => false,
+					'0/error' => 'ValidationError',
+					'0/messages/0/name' => 'wikibase-validator-no-kittens',
+					'0/messages/0/html/*' => '/.+/',
+					'0/validation-errors/0' => 'no-kittens',
+				],
+			],
+
+			'property=P[string-type] bad value, no validation' => [
+				[
+					'values' => 'INVALID',
+					'property' => 'P1',
 				],
 				[
 					'0/raw' => 'INVALID',

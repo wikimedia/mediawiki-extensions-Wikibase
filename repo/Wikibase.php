@@ -660,6 +660,7 @@ call_user_func( function() {
 				$wikibaseRepo->getDataTypeValidatorFactory(),
 				$wikibaseRepo->getExceptionLocalizer(),
 				$wikibaseRepo->getValidatorErrorLocalizer(),
+				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$apiHelperFactory->getErrorReporter( $mainModule )
 			);
 		}
