@@ -1,4 +1,4 @@
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
@@ -26,11 +26,11 @@ interface ResponseError {
 type Response = ResponseError|ResponseSuccess;
 
 export default class ApiWritingRepository implements WritingEntityRepository {
-	private api: Api;
+	private api: MwApi;
 	private username?: string;
 	private tags?: string[];
 
-	public constructor( api: Api, username: string|null, tags?: string[] ) {
+	public constructor( api: MwApi, username: string|null, tags?: string[] ) {
 		this.api = api;
 		this.username = username || undefined;
 		this.tags = tags || undefined;

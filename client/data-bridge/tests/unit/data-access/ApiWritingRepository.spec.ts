@@ -1,12 +1,12 @@
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 
-function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
+function mockMwApi( successObject?: unknown, rejectData?: unknown ): MwApi {
 	return {
 		postWithEditToken(): any {
 			if ( successObject ) {
@@ -60,7 +60,7 @@ describe( 'ApiWritingRepository', () => {
 			success: 1,
 		};
 
-		const api = mockApi( response );
+		const api = mockMwApi( response );
 
 		const entityWriter = new ApiWritingRepository( api, 'user' );
 		const toBeWrittenEntity = {
@@ -84,7 +84,7 @@ describe( 'ApiWritingRepository', () => {
 	} );
 
 	it( 'delagates the change to the api', () => {
-		const api = mockApi();
+		const api = mockMwApi();
 		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
@@ -128,7 +128,7 @@ describe( 'ApiWritingRepository', () => {
 	} );
 
 	it( 'delegates anonymous user to the api', () => {
-		const api = mockApi();
+		const api = mockMwApi();
 		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
@@ -172,7 +172,7 @@ describe( 'ApiWritingRepository', () => {
 	} );
 
 	it( 'can delagate tags to the api', () => {
-		const api = mockApi();
+		const api = mockMwApi();
 		jest.spyOn( api, 'postWithEditToken' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
@@ -228,7 +228,7 @@ describe( 'ApiWritingRepository', () => {
 		};
 
 		it( 'rejects on result that does not contain an object', () => {
-			const mock = mockApi( 'noObject' );
+			const mock = mockMwApi( 'noObject' );
 
 			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
@@ -243,7 +243,7 @@ describe( 'ApiWritingRepository', () => {
 				},
 			};
 
-			const mock = mockApi( error );
+			const mock = mockMwApi( error );
 
 			const entityWriter = new ApiWritingRepository( mock, 'nuterin' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
@@ -252,7 +252,7 @@ describe( 'ApiWritingRepository', () => {
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing', () => {
-			const mock = mockApi( null, { status: 404 } );
+			const mock = mockMwApi( null, { status: 404 } );
 
 			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
@@ -261,7 +261,7 @@ describe( 'ApiWritingRepository', () => {
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
-			const mock = mockApi( null, { status: 500 } );
+			const mock = mockMwApi( null, { status: 500 } );
 
 			const entityWriter = new ApiWritingRepository( mock, 'user' );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )

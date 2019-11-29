@@ -1,4 +1,4 @@
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
@@ -67,9 +67,9 @@ function isApiErrorRawErrorformat( error: ApiError ): error is ApiErrorRawErrorf
 
 export default class ApiPageEditPermissionErrorsRepository implements PageEditPermissionErrorsRepository {
 
-	private readonly api: Api;
+	private readonly api: MwApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: MwApi ) {
 		this.api = api;
 	}
 

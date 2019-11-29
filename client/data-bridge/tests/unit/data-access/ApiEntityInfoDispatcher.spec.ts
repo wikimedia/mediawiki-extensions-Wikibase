@@ -1,10 +1,10 @@
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 
-function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
+function mockMwApi( successObject?: unknown, rejectData?: unknown ): MwApi {
 	return {
 		get(): any {
 			if ( successObject ) {
@@ -47,7 +47,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		}, success: 1,
 	};
 	it( 'returns well-formed entities as received in the request', () => {
-		const api = mockApi( wellFormedResponse );
+		const api = mockMwApi( wellFormedResponse );
 		const dispatcher = new ApiEntityInfoDispatcher( api );
 		const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 			props: [ 'labels' ],
@@ -66,7 +66,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 	} );
 
 	it( 'bundles requests', () => {
-		const api = mockApi( {
+		const api = mockMwApi( {
 			entities: {
 				Q1141: {
 					type: 'item',
@@ -117,7 +117,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 	describe( 'if there is a problem', () => {
 
 		it( 'rejects on result that does not contain an object', () => {
-			const api = mockApi( 'noObject' );
+			const api = mockMwApi( 'noObject' );
 			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
@@ -130,7 +130,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result missing entities key', () => {
-			const api = mockApi( {} );
+			const api = mockMwApi( {} );
 			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],
@@ -143,7 +143,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result missing relevant entity in entities', () => {
-			const api = mockApi( {
+			const api = mockMwApi( {
 				entities: {
 					'Q4': {},
 				},
@@ -160,7 +160,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing (via error)', () => {
-			const api = mockApi( {
+			const api = mockMwApi( {
 				error: {
 					code: 'no-such-entity',
 					info: 'Could not find an entity with the ID "P123".',
@@ -179,7 +179,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects on result indicating relevant entity as missing (via missing)', () => {
-			const api = mockApi( {
+			const api = mockMwApi( {
 				entities: {
 					P123: {
 						id: 'P123',
@@ -199,7 +199,7 @@ describe( 'ApiEntityInfoDispatcher', () => {
 		} );
 
 		it( 'rejects if there was a serverside problem with the API', () => {
-			const api = mockApi( null, { status: 500 } );
+			const api = mockMwApi( null, { status: 500 } );
 			const dispatcher = new ApiEntityInfoDispatcher( api );
 			const requestPromise = dispatcher.dispatchEntitiesInfoRequest( {
 				props: [ 'datatype' ],

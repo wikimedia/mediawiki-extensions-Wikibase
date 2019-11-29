@@ -1,6 +1,6 @@
 import MwWindow, {
-	Api,
-	ForeignApiConstructor,
+	MwApi,
+	MwForeignApiConstructor,
 } from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
 import WbRepo from '@/@types/wikibase/WbRepo';
@@ -42,14 +42,14 @@ export function mockMwConfig( values: {
 	};
 }
 
-export function mockForeignApiConstructor(
+export function mockMwForeignApiConstructor(
 	options: {
 		expectedUrl?: string;
 		get?: ( ...args: unknown[] ) => any;
 		postWithEditToken?: ( ...args: unknown[] ) => any;
 	},
-): ForeignApiConstructor {
-	return class MockForeignApi implements Api {
+): MwForeignApiConstructor {
+	return class MockForeignApi implements MwApi {
 		public constructor( url: string, _options?: any ) {
 			if ( options.expectedUrl ) {
 				expect( url ).toBe( options.expectedUrl );
@@ -84,7 +84,7 @@ export function mockMwEnv(
 	using: () => Promise<any> = jest.fn(),
 	config: MwConfig = mockMwConfig(),
 	warn: () => void = jest.fn(),
-	ForeignApi: ForeignApiConstructor = mockForeignApiConstructor( {} ),
+	ForeignApi: MwForeignApiConstructor = mockMwForeignApiConstructor( {} ),
 ): void {
 	( window as MwWindow ).mw = {
 		loader: {
@@ -112,7 +112,7 @@ export function mockMwEnv(
 	};
 }
 
-export function mockForeignApiGet(
+export function mockMwForeignApiGet(
 	getDataBridgeConfig: Promise<object>,
 	foreignApiEntityInfoResponse: Promise<object>,
 ) {
@@ -140,7 +140,7 @@ export function mockDataBridgeConfig(): Promise<object> {
 	} );
 }
 
-export function mockForeignApiEntityInfoResponse(
+export function mockMwForeignApiEntityInfoResponse(
 	propertyId: string,
 	propertyLabel = 'a property',
 	language = 'en',
@@ -168,7 +168,7 @@ export function mockForeignApiEntityInfoResponse(
 	} );
 }
 
-export function mockApi( successObject?: unknown, rejectData?: unknown ): Api {
+export function mockMwApi( successObject?: unknown, rejectData?: unknown ): MwApi {
 	return {
 		get(): any {
 			if ( successObject ) {

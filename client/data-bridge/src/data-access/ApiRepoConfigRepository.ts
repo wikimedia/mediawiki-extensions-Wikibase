@@ -1,4 +1,4 @@
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import WikibaseRepoConfigRepository, {
 	WikibaseRepoConfiguration,
 } from '@/definitions/data-access/WikibaseRepoConfigRepository';
@@ -12,9 +12,9 @@ interface WellFormedResponse {
 }
 
 export default class ApiRepoConfigRepository implements WikibaseRepoConfigRepository {
-	private readonly api: Api;
+	private readonly api: MwApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: MwApi ) {
 		this.api = api;
 	}
 

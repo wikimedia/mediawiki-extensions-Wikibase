@@ -3,7 +3,7 @@ import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
 import { PermissionErrorType } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
-import { mockApi } from '../../util/mocks';
+import { mockMwApi } from '../../util/mocks';
 import jqXHR = JQuery.jqXHR;
 
 function expectError( promise: Promise<any> ): Promise<any> {
@@ -19,7 +19,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'returns empty array when there are no errors', async () => {
 		const title = 'Title';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [] },
@@ -36,7 +36,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	it( 'detects page protected error', async () => {
 		const title = 'Title';
 		const right = 'editprotected';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [ {
@@ -66,7 +66,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	it( 'detects page semi-protected error with custom right', async () => {
 		const title = 'Title';
 		const right = 'extendedconfirmed';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [ {
@@ -96,7 +96,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	it( 'detects page semi-protected error with standard right', async () => {
 		const title = 'Title';
 		const right = 'editsemiprotected';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [ {
@@ -125,7 +125,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'handles unrecognized error', async () => {
 		const title = 'Title';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [ {
@@ -156,7 +156,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	it( 'combines multiple errors', async () => {
 		const title = 'Title';
 		const right = 'editprotected';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [
@@ -203,7 +203,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	it( 'follows normalized title', async () => {
 		const originalTitle = 'title';
 		const normalizedTitle = 'Title';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			normalized: [ {
 				fromencoded: false,
 				from: originalTitle,
@@ -224,7 +224,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'rejects with jQuery error on API throw', async () => {
 		const xhr = {} as jqXHR;
-		const api = mockApi( undefined, xhr );
+		const api = mockMwApi( undefined, xhr );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
 		const error = await expectError( repo.getPermissionErrors( '' ) );
@@ -233,7 +233,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 	} );
 
 	it( 'rejects with TechnicalProblem if API is missing page', async () => {
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [],
 			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
 		} } );
@@ -246,7 +246,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'rejects with TitleInvalid on invalid title', async () => {
 		const title = '<invalid>';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				invalid: true,
@@ -263,7 +263,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'rejects with TechnicalProblem if API does not return test actions', async () => {
 		const title = 'Title';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ { title } ],
 			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
 		} } );
@@ -276,7 +276,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'rejects with TechnicalProblem if API does not return semi-protected levels', async () => {
 		const title = 'Title';
-		const api = mockApi( { query: { pages: [ {
+		const api = mockMwApi( { query: { pages: [ {
 			title,
 			actions: { edit: [] },
 		} ] } } );
@@ -289,7 +289,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 	it( 'rejects with TechnicalProblem if the API does not return raw errors', async () => {
 		const title = 'Title';
-		const api = mockApi( { query: {
+		const api = mockMwApi( { query: {
 			pages: [ {
 				title,
 				actions: { edit: [ {

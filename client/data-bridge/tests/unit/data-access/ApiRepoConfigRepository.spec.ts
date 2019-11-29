@@ -2,7 +2,7 @@ import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import { mockApi } from '../../util/mocks';
+import { mockMwApi } from '../../util/mocks';
 
 describe( 'ApiRepoConfigRepository', () => {
 
@@ -13,7 +13,7 @@ describe( 'ApiRepoConfigRepository', () => {
 			},
 		},
 	};
-	const api = mockApi( {
+	const api = mockMwApi( {
 		query: {
 			wbdatabridgeconfig,
 		},
@@ -44,7 +44,7 @@ describe( 'ApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response does not match the agreed-upon format', () => {
-		const api = mockApi( {
+		const api = mockMwApi( {
 			query: {
 				wbdatabridgeconfig: {
 					foobar: 'yes',
@@ -60,7 +60,7 @@ describe( 'ApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if the response indicates revelant API endpoint is disabled in repo', () => {
-		const api = mockApi( {
+		const api = mockMwApi( {
 			warnings: [
 				{
 					code: 'unrecognizedvalues',
@@ -77,7 +77,7 @@ describe( 'ApiRepoConfigRepository', () => {
 	} );
 
 	it( 'rejects if there was a serverside problem with the API', () => {
-		const api = mockApi( null, { status: 500 } );
+		const api = mockMwApi( null, { status: 500 } );
 		const configurationRepository = new ApiRepoConfigRepository( api );
 
 		return expect( configurationRepository.getRepoConfiguration() )

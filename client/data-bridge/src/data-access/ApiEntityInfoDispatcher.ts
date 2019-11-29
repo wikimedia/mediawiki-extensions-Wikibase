@@ -1,7 +1,7 @@
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import { Api } from '@/@types/mediawiki/MwWindow';
+import { MwApi } from '@/@types/mediawiki/MwWindow';
 import EntityInfoDispatcher, { WellFormedResponse } from '@/definitions/data-access/EntityInfoDispatcher';
 
 interface ErrorResponse {
@@ -25,13 +25,13 @@ interface GetAndClearRequestData {
 }
 
 export default class ApiEntityInfoDispatcher implements EntityInfoDispatcher {
-	private api: Api;
+	private api: MwApi;
 	private parameters: RequestParameters | null = null;
 	private resolveCallbacks: Function[] = [];
 	private rejectCallbacks: Function[] = [];
 	private waitForProps: string[] = [];
 
-	public constructor( api: Api, waitForProps: string[] = [] ) {
+	public constructor( api: MwApi, waitForProps: string[] = [] ) {
 		this.api = api;
 		this.waitForProps = waitForProps;
 	}

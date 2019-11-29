@@ -5,12 +5,12 @@ import { launch } from '@/main';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import createServices from '@/services/createServices';
 import {
-	mockForeignApiConstructor,
+	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
-	mockForeignApiGet,
+	mockMwForeignApiGet,
 	mockDataBridgeConfig,
-	mockForeignApiEntityInfoResponse,
+	mockMwForeignApiEntityInfoResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -61,10 +61,10 @@ function prepareTestEnv( options: {
 		using,
 		undefined,
 		undefined,
-		mockForeignApiConstructor( {
-			get: mockForeignApiGet(
+		mockMwForeignApiConstructor( {
+			get: mockMwForeignApiGet(
 				mockDataBridgeConfig(),
-				mockForeignApiEntityInfoResponse( propertyId ),
+				mockMwForeignApiEntityInfoResponse( propertyId ),
 			),
 		} ),
 	);
@@ -215,11 +215,11 @@ describe( 'app', () => {
 		} );
 
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: mockForeignApiGet(
+				get: mockMwForeignApiGet(
 					mockDataBridgeConfig(),
-					mockForeignApiEntityInfoResponse( propertyId ),
+					mockMwForeignApiEntityInfoResponse( propertyId ),
 				),
 				postWithEditToken,
 			} );
@@ -332,11 +332,11 @@ describe( 'app', () => {
 
 		it( 'has the save button initially disabled', async () => {
 			const testLink = prepareTestEnv( { propertyId } );
-			( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
+			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: mockForeignApiGet(
+				get: mockMwForeignApiGet(
 					mockDataBridgeConfig(),
-					mockForeignApiEntityInfoResponse( propertyId ),
+					mockMwForeignApiEntityInfoResponse( propertyId ),
 				),
 				postWithEditToken,
 			} );
@@ -417,10 +417,10 @@ describe( 'app', () => {
 		const propertyId = 'P4711';
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
-		( window as MwWindow ).mw.ForeignApi = mockForeignApiConstructor( {
-			get: mockForeignApiGet(
+		( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			get: mockMwForeignApiGet(
 				mockDataBridgeConfig(),
-				mockForeignApiEntityInfoResponse( propertyId, 'something', 'en', dataType ),
+				mockMwForeignApiEntityInfoResponse( propertyId, 'something', 'en', dataType ),
 			),
 		} );
 		const mockTracker = jest.fn();

@@ -6,7 +6,7 @@ import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import {
-	mockForeignApiConstructor,
+	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
 } from '../../util/mocks';
@@ -52,8 +52,8 @@ describe( 'init', () => {
 			using = jest.fn( () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} ),
-			ForeignApiConstructor = mockForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
-			ForeignApi = new ForeignApiConstructor( 'http://localhost/w/api.php' ),
+			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
+			api = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
 			editTags = [ 'a tag' ],
 			usePublish = true;
 		mockMwEnv(
@@ -63,7 +63,7 @@ describe( 'init', () => {
 				usePublish,
 			} ),
 			undefined,
-			ForeignApiConstructor,
+			MwForeignApiConstructor,
 		);
 		const expectedServices = new ServiceContainer();
 		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
@@ -71,7 +71,7 @@ describe( 'init', () => {
 			'http://localhost/wiki/Special:EntityData',
 		) );
 		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
-			ForeignApi,
+			api,
 			'Test User',
 			editTags,
 		) );
@@ -79,7 +79,7 @@ describe( 'init', () => {
 			( window as MwWindow ).mw.language,
 			( window as MwWindow ).$.uls!.data,
 		) );
-		const entityInfoDispatcher = new ApiEntityInfoDispatcher( ForeignApi, [ 'labels', 'datatype' ] );
+		const entityInfoDispatcher = new ApiEntityInfoDispatcher( api, [ 'labels', 'datatype' ] );
 		expectedServices.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
 			'en',
 			entityInfoDispatcher,
@@ -90,7 +90,7 @@ describe( 'init', () => {
 		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
 			( window as MwWindow ).mw.message,
 		) );
-		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( ForeignApi ) );
+		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( api ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
 			new EventTracker( ( window as MwWindow ).mw.track ),
 		) );
