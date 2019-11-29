@@ -22,10 +22,9 @@
 
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" />
-			<component
-				:is="isInitializing ? 'Initializing' : 'DataBridge'"
-				v-else
-			/>
+			<Initializing v-else :is-initializing="isInitializing">
+				<DataBridge />
+			</Initializing>
 		</div>
 	</div>
 </template>
