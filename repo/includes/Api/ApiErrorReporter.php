@@ -227,7 +227,7 @@ class ApiErrorReporter {
 	 * exists, it is included in the error's extra data.
 	 *
 	 * @see ApiBase::dieUsage()
-	 * @deprecated use dieWithError instead.
+	 * @deprecated Use dieWithError() instead.
 	 *
 	 * @param string $description An english, plain text description of the errror,
 	 * for use in logs.

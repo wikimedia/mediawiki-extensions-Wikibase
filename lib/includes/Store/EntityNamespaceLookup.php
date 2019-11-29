@@ -37,7 +37,7 @@ class EntityNamespaceLookup {
 	 * Returns a list of entity types pointing to the ids of the namespaces
 	 * in which they reside.
 	 *
-	 * @deprecated since 0.5, use self::getEntityType instead
+	 * @deprecated Use getEntityType() instead
 	 *
 	 * @return int[] Array mapping entity type strings to namespace IDs
 	 */

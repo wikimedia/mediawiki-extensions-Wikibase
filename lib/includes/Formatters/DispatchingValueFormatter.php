@@ -79,7 +79,7 @@ class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 	/**
 	 * @see ValueFormatter::format
 	 *
-	 * @deprecated, use formatValue() instead
+	 * @deprecated Use formatValue() instead
 	 *
 	 * @param DataValue $value The value to format
 	 *
