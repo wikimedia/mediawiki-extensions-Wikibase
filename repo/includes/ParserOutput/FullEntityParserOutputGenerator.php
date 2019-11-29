@@ -247,7 +247,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		// make css available for JavaScript-less browsers
 		$parserOutput->addModuleStyles( [
 			'wikibase.common',
-			'jquery.ui.core.styles',
 			'jquery.wikibase.toolbar.styles',
 		] );
 
