@@ -621,6 +621,7 @@ final class RepoHooks {
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */
 				$handler = ContentHandler::getForModelID( $contentModel );
+				'@phan-var EntityHandler $handler';
 
 				if ( !in_array( $handler->getEntityType(), $entityTypes ) ) {
 					// If the entity type isn't enabled then Wikibase shouldn't be checking anything.

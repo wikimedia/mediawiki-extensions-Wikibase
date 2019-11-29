@@ -149,6 +149,7 @@ class ApiErrorReporter {
 		if ( !$errors ) {
 			return null;
 		}
+		// @phan-suppress-next-line PhanUndeclaredMethod
 		$msg = ApiMessage::create( $errors[0] )
 			->inLanguage( 'en' )
 			->useDatabase( false );

@@ -45,7 +45,8 @@ class ChangeOpDeserializationExceptionLocalizer implements ExceptionLocalizer {
 			throw new InvalidArgumentException( '$exception cannot be localized.' );
 		}
 
-		/** @var ChangeOpDeserializationException $exception  */
+		/** @var ChangeOpDeserializationException $exception */
+		'@phan-var ChangeOpDeserializationException $exception';
 		return new Message( 'wikibase-api-' . $exception->getErrorCode(), $exception->getParams() );
 	}
 

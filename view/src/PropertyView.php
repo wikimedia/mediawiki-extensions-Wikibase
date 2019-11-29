@@ -72,6 +72,7 @@ class PropertyView extends EntityView {
 
 	/**
 	 * @inheritDoc
+	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function getTitleHtml( EntityDocument $entity ) {
 		if ( $entity instanceof LabelsProvider ) {
@@ -170,6 +171,7 @@ class PropertyView extends EntityView {
 	 * @param EntityDocument $entity
 	 *
 	 * @return string HTML
+	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	private function getHtmlForTerms( EntityDocument $entity ) {
 		$id = $entity->getId();

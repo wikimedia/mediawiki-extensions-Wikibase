@@ -187,6 +187,12 @@ namespace CirrusSearch {
 		 */
 		public function getProfileService() {
 		}
+
+		/**
+		 * @return mixed
+		 */
+		public function getElement( string $configName, string ...$path ) {
+		}
 	}
 
 	interface RequestLog {

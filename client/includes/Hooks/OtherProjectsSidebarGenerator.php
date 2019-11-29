@@ -227,6 +227,7 @@ class OtherProjectsSidebarGenerator {
 	private function getSiteLinks( ItemId $itemId ) {
 		/** @var Item $item */
 		$item = $this->entityLookup->getEntity( $itemId );
+		'@phan-var Item|null $item';
 		if ( $item === null ) {
 			return [];
 		}

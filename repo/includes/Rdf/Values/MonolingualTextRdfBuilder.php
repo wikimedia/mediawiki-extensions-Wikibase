@@ -34,6 +34,7 @@ class MonolingualTextRdfBuilder implements ValueSnakRdfBuilder {
 	) {
 		/** @var MonolingualTextValue $value */
 		$value = $snak->getDataValue();
+		'@phan-var MonolingualTextValue $value';
 		$writer->say( $propertyValueNamespace, $propertyValueLName )
 			->text( $value->getText(), $value->getLanguageCode() );
 	}

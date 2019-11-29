@@ -99,6 +99,7 @@ class ChangeNotifier {
 	public function notifyOnPageUndeleted( Revision $revision ) {
 		/** @var EntityContent $content */
 		$content = $revision->getContent();
+		'@phan-var EntityContent $content';
 
 		if ( $content->isRedirect() ) {
 			// TODO: notify the client about changes to redirects!
@@ -140,6 +141,7 @@ class ChangeNotifier {
 	public function notifyOnPageCreated( Revision $revision ) {
 		/** @var EntityContent $content */
 		$content = $revision->getContent();
+		'@phan-var EntityContent $content';
 
 		if ( $content->isRedirect() ) {
 			// Clients currently don't care about redirected being created.

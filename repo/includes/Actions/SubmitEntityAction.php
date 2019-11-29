@@ -158,6 +158,9 @@ class SubmitEntityAction extends EditEntityAction {
 		$olderContent = $olderRevision->getContent();
 		$newerContent = $newerRevision->getContent();
 		$latestContent = $latestRevision->getContent();
+		'@phan-var EntityContent $olderContent';
+		'@phan-var EntityContent $newerContent';
+		'@phan-var EntityContent $latestContent';
 
 		return $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) );
 	}

@@ -28,6 +28,7 @@ class MessageExceptionLocalizer implements ExceptionLocalizer {
 		}
 
 		/** @var MessageException $exception */
+		'@phan-var MessageException $exception';
 		return new Message( $exception->getKey(), $exception->getParams() );
 	}
 

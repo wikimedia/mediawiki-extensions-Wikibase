@@ -130,6 +130,7 @@ class ChangeOpLabel extends ChangeOpBase {
 			$newLabel = null;
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return $this->buildResult( $entity->getId(), $oldLabel, $newLabel );
 	}
 
@@ -140,6 +141,7 @@ class ChangeOpLabel extends ChangeOpBase {
 	 *
 	 * @throws InvalidArgumentException
 	 * @return Result
+	 * @suppress PhanUndeclaredMethod Phan is confused by intersection types
 	 */
 	public function validate( EntityDocument $entity ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {

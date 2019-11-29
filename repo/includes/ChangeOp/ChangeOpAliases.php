@@ -145,6 +145,7 @@ class ChangeOpAliases extends ChangeOpBase {
 			$newAliases = [];
 		}
 
+		// @phan-suppress-next-line PhanUndeclaredMethod Phan is confused by intersection types
 		return $this->buildResult( $entity->getId(), $oldAliases, $newAliases );
 	}
 

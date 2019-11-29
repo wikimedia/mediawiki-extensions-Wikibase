@@ -145,6 +145,7 @@ class LinkTitles extends ApiBase {
 			/** @var Item $item */
 			$itemRev = $lookup->getEntityRevision( $toId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
+			'@phan-var Item $item';
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
 			$item->addSiteLink( $fromLink );
 			$siteLinkList->addSiteLink( $fromLink );
@@ -154,6 +155,7 @@ class LinkTitles extends ApiBase {
 			/** @var Item $item */
 			$itemRev = $lookup->getEntityRevision( $fromId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
+			'@phan-var Item $item';
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );
 			$item->addSiteLink( $toLink );
 			$siteLinkList->addSiteLink( $toLink );

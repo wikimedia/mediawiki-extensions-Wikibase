@@ -92,6 +92,8 @@ class ItemDiffVisualizer implements EntityDiffVisualizer {
 			[],
 			new Diff(
 				[
+					// FIXME: getSiteLinkDiff only exists in ItemDiff
+					// @phan-suppress-next-line PhanUndeclaredMethod
 					$this->messageLocalizer->msg( 'wikibase-diffview-link' )->text() => $diff->getSiteLinkDiff(),
 				],
 				true
