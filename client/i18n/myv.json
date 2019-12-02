@@ -5,10 +5,13 @@
 			"Rueter"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} элементэсь полавтовсь",
+	"wikibase-dataitem": "{{WBREPONAME}} элементэсь",
 	"wikibase-editlinks": "Витнемс-петнемс сюлмавома петнень",
 	"wikibase-editlinkstitle": "Витнемс-петнемс кельютконь сюлмавома петнень",
 	"wikibase-rc-hide-wikidata-hide": "Кекшемс",
 	"wikibase-rc-hide-wikidata-show": "Невтемс",
+	"wikibase-rc-wikibase-edit-letter": "Д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} витнема-петнема",
 	"pageswithbadges": "Тешкске марто лопат",
 	"wikibase-pageswithbadges-legend": "Максозь тешкске марто лопань лемрисьме",

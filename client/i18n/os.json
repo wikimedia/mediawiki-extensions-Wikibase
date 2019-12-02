@@ -4,7 +4,10 @@
 			"Amikeco"
 		]
 	},
+	"wikibase-comment-update": "{{grammar:genitive|{{WBREPONAME}}}} элемент ивд æрцыдис",
+	"wikibase-dataitem": "{{grammar:genitive|{{WBREPONAME}}}} элемент",
 	"wikibase-editlinks": "Æрвитæнтæ ивын",
+	"wikibase-editlinkstitle": "Æвзæгты ’хсæн æрвитæнтæ баив",
 	"wikibase-rc-hide-wikidata-hide": "Бамбæхс",
 	"wikibase-rc-hide-wikidata-show": "Равдис",
 	"wikibase-rc-wikibase-edit-letter": "Р",

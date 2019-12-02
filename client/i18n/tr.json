@@ -123,5 +123,6 @@
 	"unresolved-property-category-desc": "Bu kategori, özellik kimliği veya etiketi ile bulunamayan {{WBREPONAME}} özelliklerine başvuran sayfaları listeler.",
 	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
 	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler.",
-	"wikibase-client-data-bridge-dialog-title": "Mülkü Düzenle"
+	"wikibase-client-data-bridge-dialog-title": "Mülkü Düzenle",
+	"wikibase-client-data-bridge-references-heading": "Kaynaklar"
 }

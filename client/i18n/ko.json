@@ -113,5 +113,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> 및 {{PLURAL:$4|다른 문서 1개가|다른 문서 $4개가|100=다른 문서 99개 이상이}} {{WBREPONAME}} 항목에 {{GENDER:$2|연결되었습니다}}.",
 	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}",
 	"connected-redirect-category": "{{WBREPONAME}} 항목에 연결된 넘겨주기",
-	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다."
+	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다.",
+	"wikibase-client-data-bridge-references-heading": "각주"
 }

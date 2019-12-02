@@ -3,13 +3,17 @@
 		"authors": [
 			"Rul1902",
 			"Jaeminlovetaejoon",
-			"SawJaemin"
+			"SawJaemin",
+			"Khing"
 		]
 	},
+	"tooltip-t-wikibase": "Link to connected data repository item",
+	"wikibase-comment-update": "{{WBREPONAME}} တၢ်တမံၤလၢဆီတလဲလံ",
 	"wikibase-dataitem": "{{WBREPONAME}} တၢ်ဖိလံး",
 	"wikibase-editlinks": "အဲၣ်ဒံၣ် links",
+	"wikibase-editlinkstitle": "Edit interlanguage links",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
-	"wikibase-rc-hide-wikidata-hide": "ပၤဘၢ",
+	"wikibase-rc-hide-wikidata-hide": "ပာ်ဘၢ",
 	"wikibase-rc-hide-wikidata-show": "နဲၣ်ဖျါ",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} အဲးဒံၣ်"

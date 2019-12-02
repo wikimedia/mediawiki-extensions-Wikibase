@@ -82,7 +82,7 @@
 	"wikibase-pageinfo-entity-id-none": "Puudub",
 	"wikibase-pageinfo-description-local": "Kohalik kirjeldus",
 	"wikibase-pageinfo-description-central": "Keskne kirjeldus",
-	"wikibase-pageinfo-entity-usage": "Kasutusel olevad Vikiandmete olemid",
+	"wikibase-pageinfo-entity-usage": "Kasutusel olevad Vikiandmete olemid:",
 	"wikibase-pageinfo-entity-usage-S": "võrgukohalink",
 	"wikibase-pageinfo-entity-usage-L": "mõned sildid",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "silt ($1)",

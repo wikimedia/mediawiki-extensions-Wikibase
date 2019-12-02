@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jaeminlovetaejoon"
+			"Jaeminlovetaejoon",
+			"Khing"
 		]
 	},
-	"wikibase-edit": "အဲးဒံၣ်",
-	"wikibase-add": "ပၤဖိၣ်"
+	"wikibase-edit": "ပဲာ်ထံ",
+	"wikibase-add": "ပၥ်ဖှိၣ်",
+	"wikibase-sitelinks-special": "စဲၣ်အဂၤတဖၣ်"
 }
