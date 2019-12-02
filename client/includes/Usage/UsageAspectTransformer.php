@@ -9,12 +9,12 @@ use Wikibase\DataModel\Entity\EntityId;
  * Relevant aspects for each entity are collected using the setRelevantAspects()
  * method.
  *
- * @example: If a page uses the "label" (L) and "title" (T) aspects of item Q1, a
+ * Example: If a page uses the "label" (L) and "title" (T) aspects of item Q1, a
  * UsageAspectTransformer that was set up to consider the label aspect of Q1
  * to be relevant will transform the usage Q1#L + Q1#T to the "relevant" usage Q1#L.
  *
- * @example: The "all" (X) aspect is treated specially: If a page uses the X aspect,
- * a  UsageAspectTransformer that was constructed to consider e.g. the label and title
+ * Example: The "all" (X) aspect is treated specially: If a page uses the X aspect,
+ * a UsageAspectTransformer that was constructed to consider e.g. the label and title
  * aspects of Q1 to be relevant will transform the usage Q1#X to the "relevant"
  * usage Q1#L + Q1#T. Conversely, if a page uses the "sitelink" (S) aspect, a
  * UsageAspectTransformer that was constructed to consider all (X) usages relevant
@@ -54,7 +54,7 @@ class UsageAspectTransformer {
 	 * Gets EntityUsage objects for each aspect in $aspects that is relevant according to
 	 * getRelevantAspects( $entityId ).
 	 *
-	 * @example: If was called with setRelevantAspects( $q3, [ 'T', 'L.de', 'L.en' ] ),
+	 * Example: If was called with setRelevantAspects( $q3, [ 'T', 'L.de', 'L.en' ] ),
 	 * getFilteredUsages( $q3, [ 'S', 'L' ] ) will return EntityUsage( $q3, 'L.de', 'L.en' ),
 	 * while getFilteredUsages( $q3, [ 'X' ] ) will return EntityUsage( $q3, 'T' )
 	 * and EntityUsage( $q3, 'L' ).

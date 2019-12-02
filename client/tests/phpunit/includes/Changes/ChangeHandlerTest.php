@@ -185,7 +185,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * The fake page IDs are the IDs of the items that have a sitelink to the
 	 * respective page on the local wiki:
 	 *
-	 * @example if Q100 has a link enwiki => 'Emmy',
+	 * Example: If Q100 has a link enwiki => 'Emmy',
 	 * then 100 => 'Emmy' will be in the map returned by this method.
 	 *
 	 * @param array[] $pageNamesPerItemId Assoc array mapping entity IDs to lists of sitelinks.

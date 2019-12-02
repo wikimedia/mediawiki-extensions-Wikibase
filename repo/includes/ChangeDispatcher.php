@@ -180,7 +180,7 @@ class ChangeDispatcher {
 	 * the batch opf pending changes due to programmatic filtering (e.g. by whether the
 	 * client site is subscribed to a given change).
 	 *
-	 * @example Consider loading a batch of 5 changes to dispatch to foowiki, but of the first
+	 * For example: Consider loading a batch of 5 changes to dispatch to foowiki, but of the first
 	 * 5 changes, only 3 are relevant to foowiki. A chunk factor of 1 means only 5 changes have
 	 * been loaded for examination, meaning at least one more batch has to be loaded. A chunk
 	 * factor of 2 means 10 changes have been loaded for examination, which makes it more likely
