@@ -499,5 +499,6 @@
 	"wikibase-shortcopyrightwarning-heading": "Heading of the license agreement warning.\nSee also:\n* {{msg-mw|wikibase-shortcopyrightwarning}}",
 	"wikibase-entity-save-error-heading": "Heading of an error message shown when a change to an entity could not be published for an unknown reason",
 	"wikibase-entity-save-error-message": "Text of an error message shown when a change to an entity could not be published for an unknown reason",
-	"wikibase-tainted-ref-warning-icon-title": "Title/hover text shown on tainted reference icons"
+	"wikibase-tainted-ref-warning-icon-title": "Title/hover text shown on tainted reference icons",
+	"wikibase-tainted-ref-popper-text": "Text shown inside the dialog explaining why a statement's references were tainted."
 }

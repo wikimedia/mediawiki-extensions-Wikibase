@@ -1,6 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
 import Track from '@/vue-plugins/Track';
+import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import Popper from '@/presentation/components/Popper.vue';
@@ -8,6 +9,9 @@ import { POPPER_HIDE, HELP_LINK_SET } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
+localVue.use( Message, { messageToTextFunction: () => {
+	return 'dummy';
+} } );
 
 describe( 'Popper.vue', () => {
 	it( 'should render the Popper', () => {
@@ -78,5 +82,24 @@ describe( 'Popper.vue', () => {
 			},
 		);
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
+	} );
+	it( 'popper text is taken from our Vue message plugin', () => {
+		const localVue = createLocalVue();
+		const messageToTextFunction = jest.fn();
+		messageToTextFunction.mockReturnValue( 'DUMMY_TEXT' );
+
+		localVue.use( Vuex );
+		localVue.use( Message, { messageToTextFunction } );
+
+		const store: Store<Application> = createStore();
+		store.dispatch = jest.fn();
+
+		const wrapper = shallowMount( Popper, {
+			store,
+			localVue,
+			propsData: { guid: 'a-guid' },
+		} );
+		expect( wrapper.find( '.wb-tr-popper-text' ).element.textContent ).toMatch( 'DUMMY_TEXT' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-text' );
 	} );
 } );

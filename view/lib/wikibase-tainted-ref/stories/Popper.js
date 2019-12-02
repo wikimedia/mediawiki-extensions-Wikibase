@@ -4,10 +4,14 @@ import { getters } from '@/store/getters';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Track from '@/vue-plugins/Track';
+import Message from '@/vue-plugins/Message';
 
 Vue.use( Vuex );
 // eslint-disable-next-line no-console
 Vue.use( Track, { trackingFunction: console.log } );
+Vue.use( Message, { messageToTextFunction: ( key ) => {
+	return `(${key})`;
+} } );
 
 storiesOf( 'Popper', module )
 	.add( 'Popper component', () => ( {

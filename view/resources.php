@@ -868,6 +868,9 @@ return call_user_func( function() {
 				'dependencies' => [
 					'vue2',
 				],
+				'messages' => [
+					'wikibase-tainted-ref-popper-text',
+				],
 				'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
 				'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
 			],
