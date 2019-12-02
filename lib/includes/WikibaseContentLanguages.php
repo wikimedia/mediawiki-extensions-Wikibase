@@ -142,6 +142,7 @@ class WikibaseContentLanguages {
 					'uga', // T155431
 					'umu', // T160531
 					'uun', // T174229
+					'wls', // T239411
 					'xpu', // T167811
 					'yap', // T155433
 					'zun', // T155435
