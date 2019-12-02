@@ -66,6 +66,7 @@ use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
+use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
@@ -296,6 +297,7 @@ call_user_func( function() {
 				$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 				$wikibaseRepo->getEntityChangeOpProvider(),
 				new EditSummaryHelper(
+					new ChangedLanguagesCollector(),
 					new ChangedLanguagesCounter(),
 					new NonLanguageBoundChangesCounter()
 				)

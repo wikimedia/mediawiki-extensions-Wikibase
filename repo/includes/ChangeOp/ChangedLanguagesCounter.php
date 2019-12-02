@@ -7,6 +7,9 @@ namespace Wikibase\Repo\ChangeOp;
  */
 class ChangedLanguagesCounter {
 
+	public const ZERO_EDIT = 0;
+	public const SHORTENED_SUMMARY_MAX_EDIT = 50;
+
 	/**
 	 * @param ChangeOpResult $changeOpResult
 	 *

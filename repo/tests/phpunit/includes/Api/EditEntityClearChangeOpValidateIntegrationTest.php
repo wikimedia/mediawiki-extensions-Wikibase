@@ -14,6 +14,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\EditSummaryHelper;
+use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
@@ -130,6 +131,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			$wikibaseRepo->getEntityChangeOpProvider(),
 			new EditSummaryHelper(
+				new ChangedLanguagesCollector(),
 				new ChangedLanguagesCounter(),
 				new NonLanguageBoundChangesCounter()
 			)
