@@ -433,6 +433,27 @@ abstract class EntityHandler extends ContentHandler {
 	}
 
 	/**
+	 * Returns the appropriate page Titles for the given EntityIds
+	 *
+	 * @param EntityId[] $ids
+	 * @return Title[] Array of Title objects indexed by the entity id serializations
+	 */
+	public function getTitlesForIds( array $ids ) {
+		$titles = [];
+		foreach ( $ids as $id ) {
+			if ( $id->getEntityType() !== $this->getEntityType() ) {
+				throw new InvalidArgumentException(
+					'The given ID does not refer to an entity of type ' . $this->getEntityType()
+				);
+			}
+			$titles[ $id->getSerialization() ] =
+				Title::makeTitle( $this->getEntityNamespace(), $id->getSerialization() );
+		}
+
+		return $titles;
+	}
+
+	/**
 	 * Returns the namespace that is to be used for this kind of entities.
 	 *
 	 * @return int

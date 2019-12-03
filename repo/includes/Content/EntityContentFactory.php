@@ -17,8 +17,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
@@ -30,7 +31,9 @@ use Wikimedia\Assert\Assert;
  * @author Daniel Kinzler
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
+class EntityContentFactory implements
+	BatchedEntityTitleStoreLookup, EntityTitleStoreLookup, EntityIdLookup
+{
 
 	/**
 	 * @var string[] Entity type ID to content model ID mapping.
@@ -55,6 +58,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	private $entitySourceDefinitions;
 	private $localEntitySource;
 	private $dataAccessSettings;
+	private $titleForIdCache;
 
 	/**
 	 * @param string[] $entityContentModels Entity type ID to content model ID mapping.
@@ -120,6 +124,28 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @return Title
 	 */
 	public function getTitleForId( EntityId $id ) {
+		if ( isset( $this->titleForIdCache[ $id->getSerialization() ] ) ) {
+			return $this->titleForIdCache[ $id->getSerialization() ];
+		}
+		$title = $this->getTitleForFederatedId( $id );
+		if ( $title ) {
+			$this->titleForIdCache[ $id->getSerialization() ] = $title;
+			return $title;
+		}
+
+		$handler = $this->getContentHandlerForType( $id->getEntityType() );
+		$title = $handler->getTitleForId( $id );
+		$this->titleForIdCache[ $id->getSerialization() ] = $title;
+		return $title;
+	}
+
+	/**
+	 * If the EntityId is federated, return a Title for it. Otherwise return null
+	 *
+	 * @param EntityId $id
+	 * @return null|Title
+	 */
+	private function getTitleForFederatedId( EntityId $id ) {
 		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
 			if ( $this->entityNotFromLocalEntitySource( $id ) ) {
 				$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getInterwikiPrefix();
@@ -127,7 +153,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 					$pageName = 'EntityPage/' . $id->getSerialization();
 
 					// TODO: use a TitleFactory
-					return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+					$title = Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+					$this->titleForIdCache[ $id->getSerialization() ] = $title;
+					return $title;
 				}
 			}
 
@@ -141,12 +169,54 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 				$pageName = 'EntityPage/' . $id->getLocalPart();
 
 				// TODO: use a TitleFactory
-				return Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+				$title = Title::makeTitle( NS_SPECIAL, $pageName, '', $interwiki );
+				$this->titleForIdCache[ $id->getSerialization() ] = $title;
+				return $title;
 			}
 		}
+		return null;
+	}
 
-		$handler = $this->getContentHandlerForType( $id->getEntityType() );
-		return $handler->getTitleForId( $id );
+	/**
+	 * Returns Title objects for the entities with provided ids
+	 *
+	 * @param EntityId[] $ids
+	 *
+	 * @throws MWException
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
+	 * @return Title[]
+	 */
+	public function getTitlesForIds( array $ids ) {
+		Assert::parameterElementType( 'Wikibase\DataModel\Entity\EntityId', $ids, '$ids' );
+		$titles = [];
+		$idsByType = [];
+		// get whatever federated ids or cached ids we can, and batch the rest of the ids by type
+		foreach ( $ids as $id ) {
+			$idString = $id->getSerialization();
+			if ( isset( $this->titleForIdCache[$idString] ) ) {
+				$titles[$idString] = $this->titleForIdCache[$idString];
+				continue;
+			}
+			$title = $this->getTitleForFederatedId( $id );
+			if ( $title ) {
+				$titles[$idString] = $title;
+				continue;
+			}
+			$idsByType[ $id->getEntityType() ][] = $id;
+		}
+
+		foreach ( $idsByType as $entityType => $idsForType ) {
+			$handler = $this->getContentHandlerForType( $entityType );
+			$titlesForType = $handler->getTitlesForIds( $idsForType );
+			$titles += $titlesForType;
+		}
+
+		foreach ( $titles as $idString => $title ) {
+			$this->titleForIdCache[$idString] = $title;
+		}
+
+		return $titles;
 	}
 
 	private function entityNotFromLocalEntitySource( EntityId $id ) {

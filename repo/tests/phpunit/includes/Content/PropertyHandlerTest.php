@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -65,6 +66,24 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 		$title = $handler->getTitleForId( $id );
 		$this->assertEquals( $id->getSerialization(), $title->getText() );
+	}
+
+	public function testGetTitlesForIds() {
+		$handler = $this->getHandler();
+		$id1 = new PropertyId( 'P123' );
+		$id2 = new PropertyId( 'P124' );
+
+		$titles = $handler->getTitlesForIds( [ $id1, $id2 ] );
+		$this->assertEquals( $id1->getSerialization(), $titles['P123']->getText() );
+		$this->assertEquals( $id2->getSerialization(), $titles['P124']->getText() );
+	}
+
+	public function testGetTitlesForIds_wrongEntityType() {
+		$handler = $this->getHandler();
+		$id = new ItemId( 'Q123' );
+
+		$this->expectException( \InvalidArgumentException::class );
+		$handler->getTitlesForIds( [ $id ] );
 	}
 
 	public function testGetIdForTitle() {

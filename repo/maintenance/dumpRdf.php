@@ -14,6 +14,7 @@ use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\BNodeLabeler;
@@ -96,7 +97,7 @@ class DumpRdf extends DumpEntities {
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfVocabulary $rdfVocabulary,
-		EntityTitleLookup $titleLookup
+		EntityContentFactory $titleLookup
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,

@@ -104,6 +104,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\SiteLinkTargetProvider' => __DIR__ . '/includes/SiteLinkTargetProvider.php',
 	'Wikibase\\Repo\\SnakFactory' => __DIR__ . '/includes/SnakFactory.php',
 	'Wikibase\\Repo\\StatementGrouperBuilder' => __DIR__ . '/includes/StatementGrouperBuilder.php',
+	'Wikibase\\Repo\\Store\\BatchedEntityTitleStoreLookup' => __DIR__ . '/includes/Store/BatchedEntityTitleStoreLookup.php',
 	'Wikibase\\Repo\\Store\\ChangeStore' => __DIR__ . '/includes/Store/ChangeStore.php',
 	'Wikibase\\Repo\\Store\\DispatchingEntityStoreWatcher' => __DIR__ . '/includes/Store/DispatchingEntityStoreWatcher.php',
 	'Wikibase\\Repo\\Store\\EntityPermissionChecker' => __DIR__ . '/includes/Store/EntityPermissionChecker.php',

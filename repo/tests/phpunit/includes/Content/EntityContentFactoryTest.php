@@ -186,6 +186,79 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertSame( 'propertywiki:Special:EntityPage/P42', $title->getFullText() );
 	}
 
+	public function testGetTitlesForIds_singleId() {
+		$factory = $this->newFactory();
+
+		$id = new PropertyId( 'P42' );
+		$titles = $factory->getTitlesForIds( [ $id ] );
+
+		$this->assertEquals( 'P42', $titles['P42']->getText() );
+
+		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
+		$this->assertEquals( $expectedNs, $titles['P42']->getNamespace() );
+	}
+
+	public function testGetTitlesForIds_foreign() {
+		$lookup = $this->createMock( InterwikiLookup::class );
+		$lookup->method( 'isValidInterwiki' )
+			->will( $this->returnValue( true ) );
+		$this->setService( 'InterwikiLookup', $lookup );
+
+		$factory = $this->newFactory();
+		$titles = $factory->getTitlesForIds( [ new ItemId( 'foo:Q42' ) ] );
+		$this->assertSame(
+			'foo:Special:EntityPage/Q42',
+			$titles['foo:Q42']->getFullText()
+		);
+	}
+
+	public function testGetTitlesForIds_entitySourceBasedFederation() {
+		$factory = $this->newFactoryForSourceBasedFederation();
+
+		$id = new PropertyId( 'P42' );
+		$titles = $factory->getTitlesForIds( [ $id ] );
+
+		$this->assertEquals( 'P42', $titles['P42']->getText() );
+
+		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
+		$this->assertEquals( $expectedNs, $titles['P42']->getNamespace() );
+	}
+
+	public function testGetTitlesForIds_multipleIdenticalIds() {
+		$factory = $this->newFactory();
+
+		$id = new PropertyId( 'P42' );
+		$titles = $factory->getTitlesForIds( [ $id, $id ] );
+
+		$this->assertEquals( 1, count( $titles ) );
+		$this->assertEquals( 'P42', $titles['P42']->getText() );
+	}
+
+	public function testGetTitlesForIds_multipleDifferentIds() {
+		$factory = $this->newFactory();
+
+		$titles = $factory->getTitlesForIds( [
+			new PropertyId( 'P42' ),
+			new PropertyId( 'P43' ),
+			new ItemId( 'Q42' ),
+			new ItemId( 'Q43' )
+		] );
+
+		$this->assertEquals( 4, count( $titles ) );
+		$this->assertEquals( 'P42', $titles['P42']->getText() );
+		$this->assertEquals( 'P43', $titles['P43']->getText() );
+		$this->assertEquals( 'Q42', $titles['Q42']->getText() );
+		$this->assertEquals( 'Q43', $titles['Q43']->getText() );
+	}
+
+	public function testGetTitlesForIds_emptyArray() {
+		$factory = $this->newFactory();
+
+		$titles = $factory->getTitlesForIds( [] );
+
+		$this->assertEquals( 0, count( $titles ) );
+	}
+
 	protected function newFactoryForSourceBasedFederation() {
 		$itemSource = new EntitySource(
 			'itemwiki',
