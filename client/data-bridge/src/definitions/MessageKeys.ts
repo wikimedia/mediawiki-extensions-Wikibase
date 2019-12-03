@@ -5,6 +5,22 @@ enum MessageKeys {
 	CANCEL = 'cancel',
 	REFERENCES_HEADING = 'wikibase-client-data-bridge-references-heading',
 	REFERENCE_SNAK_SEPARATOR = 'wikibase-client-data-bridge-reference-snak-separator',
+	PERMISSIONS_HEADING = 'wikibase-client-data-bridge-permissions-error',
+	PERMISSIONS_MORE_INFO = 'wikibase-client-data-bridge-permissions-error-info',
+	PERMISSIONS_BLOCKED_ON_CLIENT_HEADING = 'wikibase-client-data-bridge-blocked-on-client-head',
+	PERMISSIONS_BLOCKED_ON_CLIENT_BODY = 'wikibase-client-data-bridge-blocked-on-client-body',
+	PERMISSIONS_BLOCKED_ON_REPO_HEADING = 'wikibase-client-data-bridge-blocked-on-repo-head',
+	PERMISSIONS_BLOCKED_ON_REPO_BODY = 'wikibase-client-data-bridge-blocked-on-repo-body',
+	PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING = 'wikibase-client-data-bridge-cascadeprotected-on-client-head',
+	PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY = 'wikibase-client-data-bridge-cascadeprotected-on-client-body',
+	PERMISSIONS_PROTECTED_HEADING = 'wikibase-client-data-bridge-protected-on-repo-head',
+	PERMISSIONS_PROTECTED_BODY = 'wikibase-client-data-bridge-protected-on-repo-body',
+	PERMISSIONS_SEMI_PROTECTED_HEADING = 'wikibase-client-data-bridge-semiprotected-on-repo-head',
+	PERMISSIONS_SEMI_PROTECTED_BODY = 'wikibase-client-data-bridge-semiprotected-on-repo-body',
+	PERMISSIONS_CASCADE_PROTECTED_HEADING = 'wikibase-client-data-bridge-cascadeprotected-on-repo-head',
+	PERMISSIONS_CASCADE_PROTECTED_BODY = 'wikibase-client-data-bridge-cascadeprotected-on-repo-body',
+	PERMISSIONS_ERROR_UNKNOWN_HEADING = 'wikibase-client-data-bridge-permissions-error-unknown-head',
+	PERMISSIONS_ERROR_UNKNOWN_BODY = 'wikibase-client-data-bridge-permissions-error-unknown-body',
 }
 
 export default MessageKeys;

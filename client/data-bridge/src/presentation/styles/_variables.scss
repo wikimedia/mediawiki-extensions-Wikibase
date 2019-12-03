@@ -17,6 +17,7 @@ $base-spacing-unit: 8px;
 $binary-input-inter-component-spacing: 2 * $base-spacing-unit;
 
 $size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
+$size-permissions-icon: px-to-em( 14px );
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;
 
@@ -37,3 +38,6 @@ $grid-breakpoints: ( breakpoint: $breakpoint );
 
 $svg-cancel: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/close.svg );
 $svg-notice: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/notice.svg );
+$svg-info: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/infoFilled.svg );
+$svg-collapse: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/collapse-progressive.svg );
+$svg-expand: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/expand-progressive.svg );

@@ -1,0 +1,190 @@
+<template>
+	<section>
+		<h2>{{ $messages.get( $messages.KEYS.PERMISSIONS_HEADING ) }}</h2>
+		<ErrorPermissionInfo
+			v-for="( permissionError, index ) in permissionErrors"
+			:key="index"
+			:message-header="getMessageHeader( permissionError )"
+			:message-body="getMessageBody( permissionError )"
+		/>
+	</section>
+</template>
+
+<script lang="ts">
+import {
+	Prop,
+	Vue,
+} from 'vue-property-decorator';
+import Component from 'vue-class-component';
+import { State } from 'vuex-class';
+import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
+import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
+import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
+import MessageKeys from '@/definitions/MessageKeys';
+
+interface PermissionTypeRenderer {
+	header: keyof typeof MessageKeys;
+	body: keyof typeof MessageKeys;
+}
+
+type PermissionTypeMessageRenderers = {
+	[ key in PageNotEditable ]: PermissionTypeRenderer
+};
+
+const permissionTypeRenderers: PermissionTypeMessageRenderers = {
+	[ PageNotEditable.ITEM_FULLY_PROTECTED ]: {
+		header: 'PERMISSIONS_PROTECTED_HEADING',
+		body: 'PERMISSIONS_PROTECTED_BODY',
+	},
+	[ PageNotEditable.ITEM_SEMI_PROTECTED ]: {
+		header: 'PERMISSIONS_SEMI_PROTECTED_HEADING',
+		body: 'PERMISSIONS_SEMI_PROTECTED_BODY',
+	},
+	[ PageNotEditable.ITEM_CASCADE_PROTECTED ]: {
+		header: 'PERMISSIONS_CASCADE_PROTECTED_HEADING',
+		body: 'PERMISSIONS_CASCADE_PROTECTED_BODY',
+	},
+	[ PageNotEditable.BLOCKED_ON_CLIENT_PAGE ]: {
+		header: 'PERMISSIONS_BLOCKED_ON_CLIENT_HEADING',
+		body: 'PERMISSIONS_BLOCKED_ON_CLIENT_BODY',
+	},
+	[ PageNotEditable.BLOCKED_ON_REPO_ITEM ]: {
+		header: 'PERMISSIONS_BLOCKED_ON_REPO_HEADING',
+		body: 'PERMISSIONS_BLOCKED_ON_REPO_BODY',
+	},
+	[ PageNotEditable.PAGE_CASCADE_PROTECTED ]: {
+		header: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING',
+		body: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY',
+	},
+	[ PageNotEditable.UNKNOWN ]: {
+		header: 'PERMISSIONS_ERROR_UNKNOWN_HEADING',
+		body: 'PERMISSIONS_ERROR_UNKNOWN_BODY',
+	},
+};
+
+@Component( {
+	components: {
+		ErrorPermissionInfo,
+	},
+} )
+
+export default class ErrorPermission extends Vue {
+	@Prop( { required: true } )
+	private readonly permissionErrors!: MissingPermissionsError[];
+	@State( 'entityTitle' )
+	public entityTitle!: string;
+	@State( 'pagesCausingCascadeProtection' )
+	public pagesCausingCascadeProtection!: string[];
+
+	public getMessageHeader( permissionError: MissingPermissionsError ): string {
+		return this.$messages.get(
+			this.$messages.KEYS[ this.messageHeaderKey( permissionError ) ],
+			...this.messageHeaderParameters( permissionError ),
+		);
+	}
+
+	public getMessageBody( permissionError: MissingPermissionsError ): string {
+		return this.$messages.get(
+			this.$messages.KEYS[ this.messageBodyKey( permissionError ) ],
+			...this.messageBodyParameters( permissionError ),
+		);
+	}
+
+	/** A poor (wo)man's implementation of constructing a correct
+		talk page title due to lack of a redirect functionality.
+		This can be removed once T242346 is resolved.
+	*/
+	private buildTalkPageNamespace(): string {
+		if ( this.entityTitle.includes( ':' ) ) {
+			const entityTitleParts: string[] = this.entityTitle.split( ':', 2 );
+			return `${entityTitleParts[ 0 ]}_talk:${entityTitleParts[ 1 ]}`;
+		}
+		return `Talk:${this.entityTitle}`;
+	}
+
+	private messageHeaderKey( permissionError: MissingPermissionsError ): ( keyof typeof MessageKeys ) {
+		return permissionTypeRenderers[ permissionError.type ].header;
+	}
+
+	private messageBodyKey( permissionError: MissingPermissionsError ): ( keyof typeof MessageKeys ) {
+		return permissionTypeRenderers[ permissionError.type ].body;
+	}
+
+	private messageHeaderParameters( permissionError: MissingPermissionsError ): string[] {
+		const params: string[] = [];
+		switch ( permissionError.type ) {
+			case PageNotEditable.ITEM_FULLY_PROTECTED:
+				params.push(
+					this.$repoRouter.getPageUrl( 'Project:Page_protection_policy' ),
+					this.$repoRouter.getPageUrl( 'Project:Administrators' ),
+				);
+				break;
+			case PageNotEditable.ITEM_SEMI_PROTECTED:
+				params.push(
+					this.$repoRouter.getPageUrl( 'Project:Page_protection_policy' ),
+					this.$repoRouter.getPageUrl( 'Project:Autoconfirmed_users' ),
+				);
+				break;
+		}
+		return params;
+	}
+
+	private messageBodyParameters( permissionError: MissingPermissionsError ): string[] {
+		const params: string[] = [];
+		switch ( permissionError.type ) {
+			case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
+				params.push(
+					permissionError.info.blockedBy, // TODO: Convert to user link
+					permissionError.info.blockReason,
+					'', // reserved for currentIP
+					permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
+					permissionError.info.blockedById.toString(),
+					permissionError.info.blockExpiry,
+					'', // reserved for intended blockee
+					permissionError.info.blockedTimestamp,
+				);
+				break;
+			case PageNotEditable.BLOCKED_ON_REPO_ITEM:
+				params.push(
+					permissionError.info.blockedBy, // TODO: Convert to user link
+					permissionError.info.blockReason,
+					'', // reserved for currentIP
+					permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
+					permissionError.info.blockedById.toString(),
+					permissionError.info.blockExpiry,
+					'', // reserved for intended blockee
+					permissionError.info.blockedTimestamp,
+					this.$repoRouter.getPageUrl( 'Project:Administrators' ),
+				);
+				break;
+			case PageNotEditable.ITEM_FULLY_PROTECTED:
+				params.push(
+					this.$repoRouter.getPageUrl( 'Project:Page_protection_policy' ),
+					this.$repoRouter.getPageUrl( 'Project:Project:Edit_warring' ),
+					this.$repoRouter.getPageUrl( 'Special:Log/protect', { page: this.entityTitle } ),
+					this.$repoRouter.getPageUrl( this.buildTalkPageNamespace() ),
+				);
+				break;
+			case PageNotEditable.ITEM_SEMI_PROTECTED:
+				params.push(
+					this.$repoRouter.getPageUrl( 'Special:Log/protect', { page: this.entityTitle } ),
+					this.$repoRouter.getPageUrl( this.buildTalkPageNamespace() ),
+				);
+				break;
+			case PageNotEditable.ITEM_CASCADE_PROTECTED:
+				params.push(
+					this.pagesCausingCascadeProtection.length.toString(),
+					...this.pagesCausingCascadeProtection,
+				);
+				break;
+			case PageNotEditable.PAGE_CASCADE_PROTECTED:
+				params.push(
+					this.pagesCausingCascadeProtection.length.toString(),
+					...this.pagesCausingCascadeProtection,
+				);
+				break;
+		}
+		return params;
+	}
+}
+</script>
