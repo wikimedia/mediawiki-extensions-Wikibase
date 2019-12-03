@@ -209,6 +209,7 @@ class TypeDispatchingEntityStore implements EntityStore {
 	}
 
 	/**
+	 * @internal
 	 * @deprecated This is only here to overcome a violation introduced in
 	 *  https://gerrit.wikimedia.org/r/357812 as part of https://phabricator.wikimedia.org/T162533
 	 *
