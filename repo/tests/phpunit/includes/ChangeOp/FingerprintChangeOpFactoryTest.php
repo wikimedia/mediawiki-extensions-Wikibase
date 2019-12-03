@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 
 /**
@@ -25,6 +26,13 @@ class FingerprintChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new FingerprintChangeOpFactory(
 			$mockProvider->getMockTermValidatorFactory()
 		);
+	}
+
+	public function testNewFingerprintChangeOp() {
+		$innerChangeOp = $this->createMock( ChangeOps::class );
+		$op = $this->newChangeOpFactory()->newFingerprintChangeOp( $innerChangeOp );
+		$this->assertInstanceOf( ChangeOp::class, $op );
+		$this->assertNotEquals( $op, $innerChangeOp );
 	}
 
 	public function testNewAddAliasesOp() {
