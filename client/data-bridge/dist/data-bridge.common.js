@@ -13377,52 +13377,34 @@ function () {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
-var promise = __webpack_require__("795b");
-var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+// CONCATENATED MODULE: ./src/data-access/error/ApiErrors.ts
 
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
+
+
+
+
+var ApiErrors_ApiErrors =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(ApiErrors, _Error);
+
+  function ApiErrors(errors) {
+    var _this;
+
+    _classCallCheck(this, ApiErrors);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ApiErrors).call(this, errors[0].code));
+    _this.errors = errors;
+    return _this;
   }
 
-  if (info.done) {
-    resolve(value);
-  } else {
-    promise_default.a.resolve(value).then(_next, _throw);
-  }
-}
+  return ApiErrors;
+}(wrapNativeSuper_wrapNativeSuper(Error));
 
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new promise_default.a(function (resolve, reject) {
-      var gen = fn.apply(self, args);
 
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
 // CONCATENATED MODULE: ./src/data-access/InstantApi.ts
+
 
 
 
@@ -13438,8 +13420,8 @@ function _asyncToGenerator(fn) {
 /**
  * A service to make API requests immediately,
  * wrapping an instance of the MediaWiki API class.
- * It turns sets into arrays and maps request errors
- * to JQueryTechnicalError.
+ * It turns set parameters into arrays
+ * and maps rejections to appropriate error classes.
  *
  * (The name InstantApi was chosen to contrast BatchingApi.)
  */
@@ -13455,51 +13437,60 @@ function () {
 
   _createClass(InstantApi, [{
     key: "get",
-    value: function () {
-      var _get = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(params) {
-        var _i, _Object$keys, name, param;
+    value: function get(params) {
+      for (var _i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
+        var name = _Object$keys[_i];
+        var param = params[name];
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                for (_i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
-                  name = _Object$keys[_i];
-                  param = params[name];
-
-                  if (param instanceof Set) {
-                    params[name] = _toConsumableArray(param);
-                  }
-                }
-
-                _context.prev = 1;
-                _context.next = 4;
-                return this.api.get(params);
-
-              case 4:
-                return _context.abrupt("return", _context.sent);
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](1);
-                throw new JQueryTechnicalError_JQueryTechnicalError(_context.t0);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this, [[1, 7]]);
-      }));
-
-      function get(_x) {
-        return _get.apply(this, arguments);
+        if (param instanceof Set) {
+          params[name] = _toConsumableArray(param);
+        }
       }
 
-      return get;
-    }()
+      return Promise.resolve( // turn jQuery promise into native one
+      this.api.get(params).catch(this.mwApiRejectionToError));
+    }
+    /**
+     * Translate a rejection from mw.Api into a single error.
+     * Since mw.Api uses jQuery Deferreds, there can be up to four arguments.
+     * (See mw.Api’s ajax method for the code generating the rejections.)
+     */
+
+  }, {
+    key: "mwApiRejectionToError",
+    value: function mwApiRejectionToError(code, arg2, _arg3, _arg4) {
+      switch (code) {
+        case 'http':
+          {
+            // jQuery AJAX failure
+            var detail = arg2; // arg3 and arg4 are not defined
+
+            throw new JQueryTechnicalError_JQueryTechnicalError(detail.xhr);
+          }
+
+        case 'ok-but-empty':
+          {
+            // HTTP 200, empty response body, should never happen™
+            var message = arg2; // arg3 is result, arg4 is jqXHR
+
+            throw new TechnicalProblem_TechnicalProblem(message);
+          }
+
+        default:
+          {
+            // API error(s)
+            var result = arg2; // arg3 is also result, arg4 is jqXHR
+
+            if (result.error) {
+              throw new ApiErrors_ApiErrors([result.error]);
+            } else if (result.errors) {
+              throw new ApiErrors_ApiErrors(result.errors);
+            } else {
+              throw new TechnicalProblem_TechnicalProblem('mw.Api rejected but result does not contain error(s)');
+            }
+          }
+      }
+    }
   }]);
 
   return InstantApi;
@@ -13662,6 +13653,51 @@ function () {
 }();
 
 
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
+var promise = __webpack_require__("795b");
+var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    promise_default.a.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new promise_default.a(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
 // CONCATENATED MODULE: ./src/data-access/ApiRepoConfigRepository.ts
 
 

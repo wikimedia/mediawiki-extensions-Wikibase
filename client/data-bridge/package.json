@@ -69,6 +69,7 @@
     "fork-ts-checker-webpack-plugin": "^1.5.1",
     "gonzales-pe": "^4.2.4",
     "http-status-codes": "^1.3.2",
+    "jquery": "^3.4.1",
     "less-variable-resolver": "^0.1.2",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
