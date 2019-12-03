@@ -17,6 +17,10 @@ tests/browser/.idea
 tests/browser/.bundle/*
 tests/browser/config/config.yml
 
+# Doxygen
+docs/php
+docs/*.tmp
+
 # Editors
 *.kate-swp
 *~
