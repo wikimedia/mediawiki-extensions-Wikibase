@@ -15,4 +15,7 @@ export const getters: GetterTree<Application, Application> = {
 	helpLink( state: Application ): string {
 		return state.helpLink;
 	},
+	feedbackLink( state: Application ): string {
+		return state.feedbackLink;
+	},
 };
