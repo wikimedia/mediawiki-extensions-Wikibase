@@ -87,6 +87,8 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
+	 * @deprecated use WikibaseClient::getEntityLookup instead
+	 *
 	 * @see ClientStore::getEntityIdLookup
 	 *
 	 * @return EntityIdLookup

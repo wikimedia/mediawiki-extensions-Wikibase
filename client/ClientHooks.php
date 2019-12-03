@@ -156,7 +156,7 @@ final class ClientHooks {
 		}
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$entityIdLookup = $wikibaseClient->getStore()->getEntityIdLookup();
+		$entityIdLookup = $wikibaseClient->getEntityIdLookup();
 		return $entityIdLookup->getEntityIdForTitle( $title );
 	}
 

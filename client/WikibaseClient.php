@@ -231,7 +231,7 @@ call_user_func( function() {
 			} else {
 				$client = WikibaseClient::getDefaultInstance();
 				$termIndex = $client->getItemTermIndex();
-				$entityIdLookup = $client->getStore()->getEntityIdLookup();
+				$entityIdLookup = $client->getEntityIdLookup();
 			}
 
 			return new PageTerms(

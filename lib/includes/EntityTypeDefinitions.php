@@ -311,4 +311,13 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'lua-entity-module' );
 	}
 
+	/**
+	 * @return callable[] An array mapping entity type identifiers to callables capable of looking
+	 * up entity ids from Title objects
+	 * Not guaranteed to contain all entity types.
+	 */
+	public function getEntityIdLookupCallbacks() {
+		return $this->getMapForDefinitionField( 'entity-id-lookup-callback' );
+	}
+
 }

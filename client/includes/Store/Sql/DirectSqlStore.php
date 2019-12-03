@@ -122,9 +122,9 @@ class DirectSqlStore implements ClientStore {
 	private $termIndex = null;
 
 	/**
-	 * @var EntityIdLookup|null
+	 * @var EntityIdLookup
 	 */
-	private $entityIdLookup = null;
+	private $entityIdLookup;
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -191,6 +191,7 @@ class DirectSqlStore implements ClientStore {
 		EntityChangeFactory $entityChangeFactory,
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
+		EntityIdLookup $entityIdLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		WikibaseServices $wikibaseServices,
 		SettingsArray $settings,
@@ -200,6 +201,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityChangeFactory = $entityChangeFactory;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
+		$this->entityIdLookup = $entityIdLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->wikibaseServices = $wikibaseServices;
 		$this->repoWiki = $repoWiki;
@@ -382,18 +384,10 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::getEntityIdLookup
-	 *
+	 * @deprecated use WikibaseClient::getEntityLookup instead
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup() {
-		if ( $this->entityIdLookup === null ) {
-			$this->entityIdLookup = new PagePropsEntityIdLookup(
-				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->entityIdParser
-			);
-		}
-
 		return $this->entityIdLookup;
 	}
 

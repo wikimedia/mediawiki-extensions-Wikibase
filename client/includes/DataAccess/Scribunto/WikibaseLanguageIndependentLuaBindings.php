@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use MalformedTitleException;
+use Title;
 use TitleFormatter;
 use TitleParser;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -21,6 +22,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * Actual implementations of various functions to access Wikibase functionality
@@ -38,6 +40,11 @@ class WikibaseLanguageIndependentLuaBindings {
 	 * @var SiteLinkLookup
 	 */
 	private $siteLinkLookup;
+
+	/**
+	 * @var EntityIdLookup
+	 */
+	private $entityIdLookup;
 
 	/**
 	 * @var SettingsArray
@@ -86,6 +93,7 @@ class WikibaseLanguageIndependentLuaBindings {
 
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param EntityIdLookup $entityIdLookup
 	 * @param SettingsArray $settings
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param EntityIdParser $entityIdParser
@@ -98,6 +106,7 @@ class WikibaseLanguageIndependentLuaBindings {
 	 */
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
+		EntityIdLookup $entityIdLookup,
 		SettingsArray $settings,
 		UsageAccumulator $usageAccumulator,
 		EntityIdParser $entityIdParser,
@@ -109,6 +118,7 @@ class WikibaseLanguageIndependentLuaBindings {
 		$siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->entityIdLookup = $entityIdLookup;
 		$this->settings = $settings;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->entityIdParser = $entityIdParser;
@@ -130,7 +140,18 @@ class WikibaseLanguageIndependentLuaBindings {
 	 */
 	public function getEntityId( $pageTitle, $globalSiteId ) {
 		$globalSiteId = $globalSiteId ?: $this->siteId;
-		$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
+		$itemId = null;
+
+		if ( $globalSiteId === $this->siteId ) {
+			$title = Title::newFromDBkey( $pageTitle );
+			if ( $title !== null ) {
+				$itemId = $this->entityIdLookup->getEntityIdForTitle( $title );
+			}
+		}
+
+		if ( !$itemId ) {
+			$itemId = $this->siteLinkLookup->getItemIdForLink( $globalSiteId, $pageTitle );
+		}
 
 		if ( !$itemId ) {
 			try {
