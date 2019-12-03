@@ -26,7 +26,7 @@ export default class IndeterminateProgressBar extends Vue {
 	top: 50%;
 	transform: translate( 0%, -50% );
 	border: 1px solid #a2a9b1;
-	box-shadow: 0 3px 3px rgba( 0, 0, 0, 0.1 ), 0 3px 3px rgba( 0, 0, 0, 0.1 );
+	box-shadow: 0 2px 0 0 rgba( 0, 0, 0, 0.15 );
 	box-sizing: border-box;
 	border-radius: 2px;
 	overflow: hidden;

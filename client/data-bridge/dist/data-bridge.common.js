@@ -11383,12 +11383,12 @@ var Initializingvue_type_template_id_2e2c0447_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=2e2c0447&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=37678dfa&
-var IndeterminateProgressBarvue_type_template_id_37678dfa_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-var IndeterminateProgressBarvue_type_template_id_37678dfa_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-indeterminate-progress-bar__box"},[_c('div',{staticClass:"wb-ui-indeterminate-progress-bar__bar",attrs:{"aria-busy":"true","aria-live":"polite"}})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=7e162aee&
+var IndeterminateProgressBarvue_type_template_id_7e162aee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
+var IndeterminateProgressBarvue_type_template_id_7e162aee_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-indeterminate-progress-bar__box"},[_c('div',{staticClass:"wb-ui-indeterminate-progress-bar__bar",attrs:{"aria-busy":"true","aria-live":"polite"}})])}]
 
 
-// CONCATENATED MODULE: ./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=37678dfa&
+// CONCATENATED MODULE: ./src/presentation/components/IndeterminateProgressBar.vue?vue&type=template&id=7e162aee&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IndeterminateProgressBar.vue?vue&type=script&lang=ts&
 
@@ -11431,8 +11431,8 @@ var IndeterminateProgressBarvue_type_style_index_0_lang_scss_ = __webpack_requir
 
 var IndeterminateProgressBar_component = normalizeComponent(
   components_IndeterminateProgressBarvue_type_script_lang_ts_,
-  IndeterminateProgressBarvue_type_template_id_37678dfa_render,
-  IndeterminateProgressBarvue_type_template_id_37678dfa_staticRenderFns,
+  IndeterminateProgressBarvue_type_template_id_7e162aee_render,
+  IndeterminateProgressBarvue_type_template_id_7e162aee_staticRenderFns,
   false,
   null,
   null,
