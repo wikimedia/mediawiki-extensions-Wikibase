@@ -5,8 +5,9 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -104,7 +105,9 @@ class SpecialSetDescription extends SpecialModifyTerm {
 			$changeOp = $this->termChangeOpFactory->newSetDescriptionOp( $languageCode, $value );
 		}
 
-		$this->applyChangeOp( $changeOp, $entity, $summary );
+		$fingerprintChangeOp = $this->termChangeOpFactory->newFingerprintChangeOp( new ChangeOps( [ $changeOp ] ) );
+
+		$this->applyChangeOp( $fingerprintChangeOp, $entity, $summary );
 
 		return $summary;
 	}

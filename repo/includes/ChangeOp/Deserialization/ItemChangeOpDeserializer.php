@@ -34,29 +34,10 @@ class ItemChangeOpDeserializer implements ChangeOpDeserializer {
 	public function createEntityChangeOp( array $changeRequest ) {
 		$changeOps = new ChangeOps();
 
-		if ( array_key_exists( 'labels', $changeRequest ) ) {
-			$changeOps->add(
-				$this->factory
-					->getLabelsChangeOpDeserializer()
-					->createEntityChangeOp( $changeRequest )
-			);
-		}
-
-		if ( array_key_exists( 'descriptions', $changeRequest ) ) {
-			$changeOps->add(
-				$this->factory
-					->getDescriptionsChangeOpDeserializer()
-					->createEntityChangeOp( $changeRequest )
-			);
-		}
-
-		if ( array_key_exists( 'aliases', $changeRequest ) ) {
-			$changeOps->add(
-				$this->factory
-					->getAliasesChangeOpDeserializer()
-					->createEntityChangeOp( $changeRequest )
-			);
-		}
+		$changeOps->add( $this->factory
+			->getFingerprintChangeOpDeserializer()
+			->createEntityChangeOp( $changeRequest )
+		);
 
 		if ( array_key_exists( 'sitelinks', $changeRequest ) ) {
 			$changeOps->add(

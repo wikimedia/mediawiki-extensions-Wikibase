@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
 
 /**
@@ -24,17 +26,20 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $result->isValid() );
 	}
 
-	public function testDoesNotCallAnyMethodOnEntity_WhenApplied() {
+	public function testDoesNotChangeEntity_WhenApplied() {
 		/** @var EntityDocument|MockObject $entityDocument */
-		$entityDocument = $this->createMock( EntityDocument::class );
+		$entityDocument = new Item( ItemId::newFromNumber( 123 ) );
+		$targetEntityDocument = $entityDocument->copy();
+
 		$nullChangeOp = new NullChangeOp();
 
-		$this->expectNoMethodWillBeEverCalledOn( $entityDocument );
-		$nullChangeOp->apply( $entityDocument );
-	}
+		$nullChangeOpResult = $nullChangeOp->apply( $entityDocument );
 
-	private function expectNoMethodWillBeEverCalledOn( MockObject $entityMock ) {
-		$entityMock->expects( $this->never() )->method( self::anything() );
+		$this->assertFalse( $nullChangeOpResult->isEntityChanged() );
+		$this->assertEquals(
+			$entityDocument,
+			$targetEntityDocument
+		);
 	}
 
 	public function testGetActions() {

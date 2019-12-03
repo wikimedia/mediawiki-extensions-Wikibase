@@ -104,6 +104,15 @@ class ChangeOpDeserializerFactory {
 		$this->siteLinkGroups = $siteLinkGroups;
 	}
 
+	public function getFingerprintChangeOpDeserializer() {
+		return new FingerprintChangeOpDeserializer(
+			$this->getLabelsChangeOpDeserializer(),
+			$this->getDescriptionsChangeOpDeserializer(),
+			$this->getAliasesChangeOpDeserializer(),
+			$this->fingerprintChangeOpFactory
+		);
+	}
+
 	public function getLabelsChangeOpDeserializer() {
 		return new LabelsChangeOpDeserializer(
 			$this->fingerprintChangeOpFactory,

@@ -201,7 +201,7 @@ class SetAliases extends ModifyEntity {
 			}
 		}
 
-		return new ChangeOps( $changeOps );
+		return $this->termChangeOpFactory->newFingerprintChangeOp( new ChangeOps( $changeOps ) );
 	}
 
 	/**
