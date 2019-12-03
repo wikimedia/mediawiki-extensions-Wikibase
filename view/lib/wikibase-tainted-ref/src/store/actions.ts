@@ -3,7 +3,7 @@ import {
 	STORE_INIT,
 	STATEMENT_TAINTED_STATE_TAINT,
 	STATEMENT_TAINTED_STATE_UNTAINT,
-	HELP_LINK_SET,
+	HELP_LINK_SET, FEEDBACK_LINK_SET,
 } from '@/store/actionTypes';
 import Application from './Application';
 import { ActionContext, ActionTree } from 'vuex';
@@ -15,6 +15,7 @@ import {
 	SET_TAINTED,
 	SET_UNTAINTED,
 	SET_HELP_LINK,
+	SET_FEEDBACK_LINK,
 } from '@/store/mutationTypes';
 
 export default function actions(): ActionTree<Application, Application> {
@@ -56,6 +57,12 @@ export default function actions(): ActionTree<Application, Application> {
 			payload: string,
 		): void {
 			context.commit( SET_HELP_LINK, payload );
+		},
+		[ FEEDBACK_LINK_SET ](
+			context: ActionContext<Application, Application>,
+			payload: string,
+		): void {
+			context.commit( SET_FEEDBACK_LINK, payload );
 		},
 
 	};

@@ -5,4 +5,5 @@ export default interface Application {
 	statementsTaintedState: StatementsTaintedState;
 	statementsPopperIsOpen: StatementsPopperIsOpen;
 	helpLink: string;
+	feedbackLink: string;
 }

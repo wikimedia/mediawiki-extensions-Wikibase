@@ -17,4 +17,8 @@ import CSRHookHandler from '@/CSRHookHandler';
 	Vue.use( Message, { messageToTextFunction: messageToTextMock } );
 } )();
 
-launch( new CSRHookHandler(), 'https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sources' );
+launch(
+	new CSRHookHandler(),
+	'https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sources',
+	'https://www.wikidata.org/wiki/Wikidata:Mismatched_reference_notification_input',
+);

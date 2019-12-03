@@ -4431,6 +4431,7 @@ var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 var POPPER_SHOW = 'showPopper';
 var POPPER_HIDE = 'hidePopper';
 var HELP_LINK_SET = 'setHelpLink';
+var FEEDBACK_LINK_SET = 'setFeedbackLink';
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
 
@@ -4686,12 +4687,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=0878ea8f&
-var Poppervue_type_template_id_0878ea8f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('h4',[_vm._v("\n\t\t\tTainted Reference Heading text\n\t\t\t"),_c('small',[_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page for this constraint type","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")])])]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")])])])}
-var Poppervue_type_template_id_0878ea8f_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=f033838e&
+var Poppervue_type_template_id_f033838e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page link","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")]),_c('p',{staticClass:"wb-tr-popper-feedback"},[_vm._v("\n\t\t\tIs this new feature useful?\n\t\t\t"),_c('a',{attrs:{"title":"Feedback page link","href":_vm.feedbackLink,"target":"_blank"}},[_vm._v("Leave your feedback")])])])])}
+var Poppervue_type_template_id_f033838e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=0878ea8f&
+// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=f033838e&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=script&lang=ts&
 
@@ -4753,6 +4754,8 @@ function (_Vue) {
 
 __decorate([Getter('helpLink')], Poppervue_type_script_lang_ts_Popper.prototype, "helpLink", void 0);
 
+__decorate([Getter('feedbackLink')], Poppervue_type_script_lang_ts_Popper.prototype, "feedbackLink", void 0);
+
 Poppervue_type_script_lang_ts_Popper = __decorate([vue_class_component_common_default()({
   props: ['guid']
 })], Poppervue_type_script_lang_ts_Popper);
@@ -4773,8 +4776,8 @@ var Poppervue_type_style_index_0_lang_scss_ = __webpack_require__("51bc");
 
 var Popper_component = normalizeComponent(
   components_Poppervue_type_script_lang_ts_,
-  Poppervue_type_template_id_0878ea8f_render,
-  Poppervue_type_template_id_0878ea8f_staticRenderFns,
+  Poppervue_type_template_id_f033838e_render,
+  Poppervue_type_template_id_f033838e_staticRenderFns,
   false,
   null,
   null,
@@ -4882,6 +4885,7 @@ var SET_UNTAINTED = 'setUntainted';
 var SET_POPPER_HIDDEN = 'setPopperHidden';
 var SET_POPPER_VISIBLE = 'setPopperVisible';
 var SET_HELP_LINK = 'setHelpLink';
+var SET_FEEDBACK_LINK = 'setFeedbackLink';
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -4903,6 +4907,8 @@ function actions() {
     context.commit(SET_POPPER_VISIBLE, payload);
   }), _defineProperty(_ref, HELP_LINK_SET, function (context, payload) {
     context.commit(SET_HELP_LINK, payload);
+  }), _defineProperty(_ref, FEEDBACK_LINK_SET, function (context, payload) {
+    context.commit(SET_FEEDBACK_LINK, payload);
   }), _ref;
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -4931,6 +4937,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED,
   state.statementsPopperIsOpen[payload] = true;
 }), _defineProperty(_mutations, SET_HELP_LINK, function (state, payload) {
   state.helpLink = payload;
+}), _defineProperty(_mutations, SET_FEEDBACK_LINK, function (state, payload) {
+  state.feedbackLink = payload;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/getters.ts
 var getters = {
@@ -4946,6 +4954,9 @@ var getters = {
   },
   helpLink: function helpLink(state) {
     return state.helpLink;
+  },
+  feedbackLink: function feedbackLink(state) {
+    return state.feedbackLink;
   }
 };
 // CONCATENATED MODULE: ./src/store/index.ts
@@ -4959,7 +4970,8 @@ function createStore() {
   var state = {
     statementsTaintedState: {},
     statementsPopperIsOpen: {},
-    helpLink: ''
+    helpLink: '',
+    feedbackLink: ''
   };
   return new vuex_esm["a" /* Store */]({
     state: state,
@@ -4973,7 +4985,7 @@ function createStore() {
 
 
 
-function launch(hookHandler, helpLink) {
+function launch(hookHandler, helpLink, feedbackLink) {
   var store = createStore();
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
@@ -4994,6 +5006,7 @@ function launch(hookHandler, helpLink) {
   });
   store.dispatch(STORE_INIT, guids);
   store.dispatch(HELP_LINK_SET, helpLink);
+  store.dispatch(FEEDBACK_LINK_SET, feedbackLink);
   hookHandler.addStore(store);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
