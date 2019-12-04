@@ -97,6 +97,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 			[ [ '1', 'Q123' ], false ],
 			[ [ '43', 'Q123' ], false ],
 			[ [ '-1', 'Q23' ], true ],
+			[ [ -1, 'Q23' ], true ],
 			[ [ '0', 'Q23' ], true ],
 			[ [ '0.0', 'Q23' ], true ],
 		];

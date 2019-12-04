@@ -88,7 +88,7 @@ class UnitConverter {
 		}
 		$mult = $this->makeDecimalValue( $toUnits['factor'] );
 
-		if ( $toUnits['factor']{0} === '-' || $mult->isZero() ) {
+		if ( $mult->getSign() === '-' || $mult->isZero() ) {
 			// We do not support negative conversion factors, and zero factor makes no sense
 			$this->logger->debug(
 				'Bad factor for {fromUnit}: {factor}',
