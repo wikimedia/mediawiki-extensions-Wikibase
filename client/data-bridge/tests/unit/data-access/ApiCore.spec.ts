@@ -33,16 +33,16 @@ describe( 'ApiCore', () => {
 			string: 's',
 			int: 1,
 			boolean: true,
-			array: [ 'array element' ],
-			set: new Set( [ 'set element' ] ),
+			array: [ 'array element', 123 ],
+			set: new Set( [ 'set element', 456 ] ),
 		} as unknown as ApiParams<ApiAction> );
 
 		expect( mwApi.get ).toHaveBeenCalledWith( {
 			string: 's',
 			int: 1,
 			boolean: true,
-			array: [ 'array element' ],
-			set: [ 'set element' ],
+			array: [ 'array element', 123 ],
+			set: [ 'set element', 456 ],
 		} );
 	} );
 

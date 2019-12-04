@@ -34,6 +34,7 @@ import Api, {
  * - If the values on both sides are sets (instances of Set),
  *   the sets are merged into one for the resulting request,
  *   and sent to the underlying API as an array of values.
+ *   (Integer values are converted to strings.)
  * - If the value on either side is an array (instance of Array),
  *   the requests are incompatible.
  *   This only makes sense for parameters where duplicates are significant;
@@ -134,8 +135,11 @@ export default class BatchingApi implements Api {
 			if ( value1 instanceof Set && value2 instanceof Set ) {
 				const mergedSet = new Set<string>();
 				mergedParams[ paramName ] = mergedSet;
-				value1.forEach( mergedSet.add, mergedSet );
-				value2.forEach( mergedSet.add, mergedSet );
+				for ( const valueSet of [ value1, value2 ] ) {
+					for ( const member of valueSet ) {
+						mergedSet.add( String( member ) );
+					}
+				}
 				continue;
 			}
 			if ( value1 instanceof Array || value2 instanceof Array ) {

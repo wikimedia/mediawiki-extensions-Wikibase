@@ -13285,6 +13285,7 @@ function () {
  * - If the values on both sides are sets (instances of Set),
  *   the sets are merged into one for the resulting request,
  *   and sent to the underlying API as an array of values.
+ *   (Integer values are converted to strings.)
  * - If the value on either side is an array (instance of Array),
  *   the requests are incompatible.
  *   This only makes sense for parameters where duplicates are significant;
@@ -13445,8 +13446,34 @@ function () {
           if (value1 instanceof Set && value2 instanceof Set) {
             var mergedSet = new Set();
             mergedParams[paramName] = mergedSet;
-            value1.forEach(mergedSet.add, mergedSet);
-            value2.forEach(mergedSet.add, mergedSet);
+
+            for (var _i = 0, _arr = [value1, value2]; _i < _arr.length; _i++) {
+              var valueSet = _arr[_i];
+              var _iteratorNormalCompletion4 = true;
+              var _didIteratorError4 = false;
+              var _iteratorError4 = undefined;
+
+              try {
+                for (var _iterator4 = valueSet[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                  var member = _step4.value;
+                  mergedSet.add(String(member));
+                }
+              } catch (err) {
+                _didIteratorError4 = true;
+                _iteratorError4 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion4 && _iterator4.return != null) {
+                    _iterator4.return();
+                  }
+                } finally {
+                  if (_didIteratorError4) {
+                    throw _iteratorError4;
+                  }
+                }
+              }
+            }
+
             continue;
           }
 
