@@ -16,7 +16,8 @@
 			"Jerrykim306",
 			"Ellif",
 			"Nuevo Paso",
-			"Garam"
+			"Garam",
+			"렌즈"
 		]
 	},
 	"wikibase-desc": "구조화한 데이터 저장소",
@@ -30,7 +31,7 @@
 	"wikibase-cancel": "취소",
 	"wikibase-add": "추가",
 	"wikibase-addqualifier": "한정어 추가",
-	"wikibase-addreference": "각주 추가",
+	"wikibase-addreference": "참고문헌 추가",
 	"wikibase-save-inprogress": "저장 중…",
 	"wikibase-publish-inprogress": "게시 중...",
 	"wikibase-remove-inprogress": "삭제 중…",
@@ -59,7 +60,7 @@
 	"wikibase-aliases-edit-label": "다른 이름 (여러 개가 있을 경우, 파이프<code>|</code>로 구분):",
 	"wikibase-content-language-edit-label": "언어:",
 	"wikibase-content-language-edit-not-recognized-language": "지정된 언어 코드를 인식하지 못했습니다.",
-	"wikibase-diffview-reference": "각주",
+	"wikibase-diffview-reference": "참고문헌",
 	"wikibase-diffview-rank": "등급",
 	"wikibase-diffview-rank-preferred": "선호 등급",
 	"wikibase-diffview-rank-normal": "일반 등급",
@@ -109,7 +110,7 @@
 	"wikibase-statementview-rank-normal": "일반 등급",
 	"wikibase-statementview-rank-tooltip-normal": "잠재적으로 역사적이지만 유효한 값",
 	"wikibase-statementview-rank-deprecated": "비사용 등급",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|각주}}",
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|개의 참고문헌}}",
 	"wikibase-snakview-property-input-placeholder": "속성",
 	"wikibase-snakview-unsupportedsnaktype": "\"$1\"의 유형의 Snak입니다. Snak의 이 유형에 대한 처리는 아직 지원하지 않습니다.",
 	"wikibase-snakview-choosesnaktype": "값 유형을 선택하세요.",

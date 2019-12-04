@@ -179,7 +179,7 @@
 	"wikibase-item-summary-wbeditentity-update-languages": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}",
 	"wikibase-item-summary-wbeditentity-update-languages-short": "Endret etikett, beskrivelse og/eller alias på {{#commaseparatedlist:$3}}",
 	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}, og andre deler",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Endret etikett, beskrivelse og/eller alias på $3 {{#commaseparatedlist:$3}}, og andre deler",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Endret etikett, beskrivelse og/eller alias på {{#commaseparatedlist:$3}}, og andre deler",
 	"wikibase-item-summary-wbeditentity-override": "Overstyrte et element",
 	"wikibase-item-summary-wblinktitles-create": "Opprettet dette elementet for å knytte til sidene",
 	"wikibase-item-summary-wblinktitles-connect": "La til språklenke for å koble sidene",
@@ -188,7 +188,9 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Opprettet en ny egenskap",
 	"wikibase-property-summary-wbeditentity-update": "Endret en egenskap",
 	"wikibase-property-summary-wbeditentity-update-languages": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}",
+	"wikibase-property-summary-wbeditentity-update-languages-short": "Endret etikett, beskrivelse og/eller alias på {{#commaseparatedlist:$3}}",
 	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Endret etikett, beskrivelse og/eller alias på $3 {{PLURAL:$3|språk}}, og andre deler",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "Endret etikett, beskrivelse og/eller alias på {{#commaseparatedlist:$3}}, og andre deler",
 	"wikibase-property-summary-wbeditentity-override": "Renset en egenskap",
 	"wikibase-property-summary-special-create-property": "Opprettet en [$2] egenskap med {{PLURAL:$1|verdi|verdiene}}"
 }

@@ -185,7 +185,7 @@
 	"wikibase-item-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou aliases alterados em {{PLURAL:$3|idioma|idiomas}} $3",
 	"wikibase-item-summary-wbeditentity-update-languages-short": "Etiqueta, descrição e/ou aliases alterados em {{#commaseparatedlist: $3}}",
 	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}, e outras partes",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descrição e/ou aliases alterados em $3 {{#commaseparatedlist: $3}}, e outras partes",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descrição e/ou aliases alterados em {{#commaseparatedlist: $3}}, e outras partes",
 	"wikibase-item-summary-wbeditentity-override": "Um item foi sobrescrito",
 	"wikibase-item-summary-wblinktitles-create": "Criado este item para conectar as páginas",
 	"wikibase-item-summary-wblinktitles-connect": "Adicionado um link de idioma para conectar as páginas",
@@ -194,7 +194,9 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Criada uma nova propriedade",
 	"wikibase-property-summary-wbeditentity-update": "Mudou uma propriedade",
 	"wikibase-property-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}",
+	"wikibase-property-summary-wbeditentity-update-languages-short": "Etiqueta, descrição e/ou aliases alterados em {{#commaseparatedlist: $3}}",
 	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou aliases alterados em $3 {{PLURAL:$3|idioma|idiomas}}, e outras partes",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descrição e/ou aliases alterados em {{#commaseparatedlist: $3}}, e outras partes",
 	"wikibase-property-summary-wbeditentity-override": "Limpou uma propriedade",
 	"wikibase-property-summary-special-create-property": "Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}"
 }

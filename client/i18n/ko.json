@@ -14,7 +14,8 @@
 			"Ykhwong",
 			"Tursetic",
 			"Nuevo Paso",
-			"Garam"
+			"Garam",
+			"렌즈"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",
@@ -114,5 +115,5 @@
 	"notification-link-text-view-item": "항목 {{GENDER:$1|보기}}",
 	"connected-redirect-category": "{{WBREPONAME}} 항목에 연결된 넘겨주기",
 	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다.",
-	"wikibase-client-data-bridge-references-heading": "각주"
+	"wikibase-client-data-bridge-references-heading": "참고문헌"
 }

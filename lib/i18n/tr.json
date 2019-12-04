@@ -77,7 +77,10 @@
 	"wikibase-item-summary-wbeditentity-update": "Bir öğe değiştirildi",
 	"wikibase-item-summary-wbeditentity-update-languages": "$3 etiketi, açıklama ve/veya diğer {{PLURAL:$3|dil|dil}} adı değiştirildi",
 	"wikibase-item-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|dil|dil}} ve diğer parçalarda etiket, açıklama ve/veya diğer ad değiştirildi",
+	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "{{#commaseparatedlist: $3}} içindeki etiket, açıklama ve/veya diğer ad değiştirildi ve diğer parçalar",
 	"wikibase-item-summary-wbeditentity-override": "Bir öge temizlendi",
 	"wikibase-property-summary-wbeditentity-update-languages": "$3'deki {{PLURAL:$3|dil|dil}} etiket, açıklama ve/veya diğer ad değiştirildi",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|dil|dil}} ve diğer parçalarda etiket, açıklama ve/veya diğer ad değiştirildi"
+	"wikibase-property-summary-wbeditentity-update-languages-short": "{{#commaseparatedlist: $3}} içindeki etiket, açıklama ve/veya diğer ad değiştirildi",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other": "$3 {{PLURAL:$3|dil|dil}} ve diğer parçalarda etiket, açıklama ve/veya diğer ad değiştirildi",
+	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "{{#commaseparatedlist: $3}} içindeki etiket, açıklama ve/veya diğer ad değiştirildi ve diğer parçalar"
 }
