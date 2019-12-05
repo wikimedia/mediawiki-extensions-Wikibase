@@ -56,6 +56,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			$entityChangeFactory,
 			new ItemIdParser(),
 			new EntityIdComposer( [] ),
+			$this->createMock( EntityIdLookup::class ),
 			new EntityNamespaceLookup( [] ),
 			$wikibaseServices,
 			$wikibaseClient->getSettings(),

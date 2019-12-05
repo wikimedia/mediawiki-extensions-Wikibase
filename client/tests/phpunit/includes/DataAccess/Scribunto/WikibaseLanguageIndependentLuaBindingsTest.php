@@ -23,6 +23,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
+use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings
@@ -60,6 +61,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		return new WikibaseLanguageIndependentLuaBindings(
 			$siteLinkLookup ?: $this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityIdLookup::class ),
 			new SettingsArray(),
 			$usageAccumulator ?: new HashUsageAccumulator(),
 			new BasicEntityIdParser,
@@ -84,6 +86,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		$bindings = new WikibaseLanguageIndependentLuaBindings(
 			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityIdLookup::class ),
 			$settings,
 			new HashUsageAccumulator(),
 			new BasicEntityIdParser,
@@ -211,6 +214,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 
 		$bindings = new WikibaseLanguageIndependentLuaBindings(
 			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( EntityIdLookup::class ),
 			new SettingsArray(),
 			$usages,
 			new BasicEntityIdParser,

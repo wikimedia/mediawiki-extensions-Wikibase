@@ -59,6 +59,7 @@ interface ClientStore {
 	public function getEntityRevisionLookup();
 
 	/**
+	 * @deprecated use WikibaseClient::getEntityLookup instead
 	 * @return EntityIdLookup
 	 */
 	public function getEntityIdLookup();

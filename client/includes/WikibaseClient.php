@@ -8,6 +8,8 @@ use MWNamespace;
 use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
@@ -120,6 +122,7 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
+use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
@@ -171,6 +174,11 @@ final class WikibaseClient {
 	 * @var EntityIdComposer|null
 	 */
 	private $entityIdComposer = null;
+
+	/**
+	 * @var EntityIdLookup|null
+	 */
+	private $entityIdLookup = null;
 
 	/**
 	 * @var ClientStore|null
@@ -655,6 +663,7 @@ final class WikibaseClient {
 				$this->getEntityChangeFactory(),
 				$this->getEntityIdParser(),
 				$this->getEntityIdComposer(),
+				$this->getEntityIdLookup(),
 				$this->getEntityNamespaceLookup(),
 				$this->getWikibaseServices(),
 				$this->getSettings(),
@@ -1618,6 +1627,21 @@ final class WikibaseClient {
 		return $this->itemTermIndex;
 	}
 
+	public function getEntityIdLookup() {
+		if ( $this->entityIdLookup === null ) {
+			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
+				$this->entityTypeDefinitions->getContentModelIds(),
+				$this->entityTypeDefinitions->getEntityIdLookupCallbacks(),
+				new PagePropsEntityIdLookup(
+					MediaWikiServices::getInstance()->getDBLoadBalancer(),
+					$this->getEntityIdParser()
+				)
+			);
+		}
+
+		return $this->entityIdLookup;
+	}
+
 	private function getItemSource( DataAccessSettings $dataAccessSettings ) {
 		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
 			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
@@ -1634,8 +1658,7 @@ final class WikibaseClient {
 	 */
 	public function getDescriptionLookup() {
 		if ( $this->descriptionLookup === null ) {
-			// TODO: EntityIdLookup should probably also not come from ClientStore?
-			$this->descriptionLookup = new DescriptionLookup( $this->getStore()->getEntityIdLookup(), $this->getItemTermIndex() );
+			$this->descriptionLookup = new DescriptionLookup( $this->getEntityIdLookup(), $this->getItemTermIndex() );
 		}
 		return $this->descriptionLookup;
 	}
