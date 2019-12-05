@@ -8,7 +8,7 @@ import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
-import InstantApi from '@/data-access/InstantApi';
+import ApiCore from '@/data-access/ApiCore';
 import BatchingApi from '@/data-access/BatchingApi';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
@@ -54,9 +54,9 @@ jest.mock( '@/data-access/MwMessagesRepository', () => {
 	return jest.fn().mockImplementation( () => mockMessagesRepository );
 } );
 
-const mockInstantApi = {};
-jest.mock( '@/data-access/InstantApi', () => {
-	return jest.fn().mockImplementation( () => mockInstantApi );
+const mockApiCore = {};
+jest.mock( '@/data-access/ApiCore', () => {
+	return jest.fn().mockImplementation( () => mockApiCore );
 } );
 
 const mockBatchingApi = {};
@@ -283,10 +283,10 @@ describe( 'createServices', () => {
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
-		expect( ( InstantApi as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( BatchingApi )
-			.toHaveBeenCalledWith( mockInstantApi );
+			.toHaveBeenCalledWith( mockApiCore );
 		expect( ApiRepoConfigRepository )
 			.toHaveBeenCalledWith( mockBatchingApi );
 		expect( services.get( 'wikibaseRepoConfigRepository' ) )

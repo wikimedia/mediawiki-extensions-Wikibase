@@ -1,7 +1,7 @@
 import { MwApi } from '@/@types/mediawiki/MwWindow';
 import ApiErrors from '@/data-access/error/ApiErrors';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import InstantApi from '@/data-access/InstantApi';
+import ApiCore from '@/data-access/ApiCore';
 import {
 	ApiAction,
 	ApiParams,
@@ -11,12 +11,12 @@ import { mockApi } from '../../util/mocks';
 import $ from 'jquery';
 import jqXHR = JQuery.jqXHR;
 
-describe( 'InstantApi', () => {
+describe( 'ApiCore', () => {
 
 	it( 'resolves with unmodified API response on success', async () => {
 		const expectedResponse = { some: 'result' };
 		const mwApi = mockApi( expectedResponse );
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		const actualResponse = await api.get( { action: 'unknown' } );
 
@@ -27,7 +27,7 @@ describe( 'InstantApi', () => {
 		const mwApi: MwApi = {
 			get: jest.fn( () => Promise.resolve( {} ) ),
 		} as unknown as MwApi;
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		await api.get( {
 			string: 's',
@@ -57,7 +57,7 @@ describe( 'InstantApi', () => {
 		const textStatus = 'error';
 		const exception = 'Not Found';
 		const mwApi = mockRejectingMwApi( 'http', { xhr, textStatus, exception } );
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		return expect( api.get( { action: 'unknown' } ) )
 			.rejects
@@ -72,7 +72,7 @@ describe( 'InstantApi', () => {
 			undefined,
 			{} as jqXHR,
 		);
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		return expect( api.get( { action: 'unknown' } ) )
 			.rejects
@@ -83,7 +83,7 @@ describe( 'InstantApi', () => {
 		const error = { code: 'unknown_action' };
 		const result = { error };
 		const mwApi = mockRejectingMwApi( error.code, result, result, {} as jqXHR );
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		return expect( api.get( { action: 'unknown' } ) )
 			.rejects
@@ -95,7 +95,7 @@ describe( 'InstantApi', () => {
 		const assertUserError = { code: 'assertuserfailed' };
 		const result = { errors: [ unknownActionError, assertUserError ] };
 		const mwApi = mockRejectingMwApi( unknownActionError.code, result, result, {} as jqXHR );
-		const api = new InstantApi( mwApi );
+		const api = new ApiCore( mwApi );
 
 		return expect( api.get( { action: 'unknown', assert: 'user', errorformat: 'none' } ) )
 			.rejects

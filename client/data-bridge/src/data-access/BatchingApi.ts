@@ -65,8 +65,8 @@ export default class BatchingApi implements Api {
 
 	/**
 	 * Create a new service for requests to the given (local or foreign) API.
-	 * @param api underlying implementation responsible for
-	 * making the merged API calls (usually an {@link InstantApi})
+	 * @param api Underlying implementation responsible for
+	 * making the merged API calls (usually an {@link ApiCore}).
 	 */
 	public constructor( api: Api ) {
 		this.api = api;
