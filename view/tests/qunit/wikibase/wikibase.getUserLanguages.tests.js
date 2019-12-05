@@ -35,7 +35,7 @@
 	QUnit.test( 'getUserLanguages uses uls languages if babel is not defined', function ( assert ) {
 		var mwConfigStub = sandbox.stub( mw.config, 'get' );
 		var mwUlsConfigStub = sandbox.stub( mw.uls, 'getFrequentLanguageList' );
-		var ulsLanguages = [ 'de', 'en', 'gr', 'zh' ];
+		var ulsLanguages = [ 'de', 'en', 'fr', 'zh' ];
 		var babelLanguages = [];
 		var userLanguage = 'de';
 
@@ -76,6 +76,18 @@
 
 		assert.deepEqual( wb.getUserLanguages(), [ userLanguage ] );
 		assert.ok( mwUlsConfigStub.notCalled );
+	} );
+
+	QUnit.test( 'filters out invalid term languages', function ( assert ) {
+		var babelLanguages = [ 'de', 'en', 'tokipona', 'nonsense' ];
+		var userLanguage = 'de';
+		var mwConfigStub = sandbox.stub( mw.config, 'get' );
+
+		simulateUlsInstalled( false );
+		mwConfigStub.withArgs( 'wbUserSpecifiedLanguages' ).returns( babelLanguages );
+		mwConfigStub.withArgs( 'wgUserLanguage' ).returns( userLanguage );
+
+		assert.deepEqual( wb.getUserLanguages(), [ 'de', 'en' ] );
 	} );
 
 }( wikibase, sinon ) );
