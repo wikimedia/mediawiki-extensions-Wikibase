@@ -106,6 +106,8 @@ return call_user_func( function() {
 						'messages' => [
 							'wikibase-client-data-bridge-dialog-title',
 							'wikibase-client-data-bridge-permissions-error',
+							'wikibase-client-data-bridge-protected-on-repo-head',
+							'wikibase-client-data-bridge-protected-on-repo-body',
 							'wikibase-client-data-bridge-blocked-on-client-head',
 							'wikibase-client-data-bridge-blocked-on-client-body',
 							'wikibase-client-data-bridge-references-heading',
