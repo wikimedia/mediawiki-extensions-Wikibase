@@ -120,6 +120,7 @@
 	"connected-redirect-category": "Redirects connected to a {{WBREPONAME}} item",
 	"connected-redirect-category-desc": "This category lists redirect pages that are connected to a {{WBREPONAME}} item.",
 	"wikibase-client-data-bridge-dialog-title": "Edit Property",
+	"wikibase-client-data-bridge-permissions-error": "You do not have permission to edit this value, for the following {{PLURAL:$1|reason|reasons}}:",
 	"wikibase-client-data-bridge-references-heading": "References",
 	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;"
 }
