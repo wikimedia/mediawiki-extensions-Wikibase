@@ -1,29 +1,10 @@
 import ApiErrors from '@/data-access/error/ApiErrors';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import DataType from '@/datamodel/DataType';
 import {
-	ApiResponseEntity,
 	ApiWbgetentitiesResponse,
-} from '@/definitions/data-access/Api';
-
-export interface PartialEntity extends ApiResponseEntity {
-	type: string;
-}
-
-export interface EntityWithDataType extends PartialEntity {
-	datatype: DataType;
-}
-
-export interface EntityWithLabels extends PartialEntity {
-	labels: {
-		[ lang: string ]: {
-			language: string;
-			value: string;
-			'for-language'?: string;
-		};
-	};
-}
+	PartialEntity,
+} from '@/definitions/data-access/ApiWbgetentities';
 
 export function getApiEntity( response: ApiWbgetentitiesResponse, entityId: string ): PartialEntity {
 	if ( typeof response.entities !== 'object' ) {

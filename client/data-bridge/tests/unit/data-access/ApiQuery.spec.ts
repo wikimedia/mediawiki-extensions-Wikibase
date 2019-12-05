@@ -2,7 +2,7 @@ import { getApiQueryResponsePage } from '@/data-access/ApiQuery';
 import {
 	ApiQueryResponseBody,
 	ApiQueryResponsePage,
-} from '@/definitions/data-access/Api';
+} from '@/definitions/data-access/ApiQuery';
 
 describe( 'getApiQueryResponsePage', () => {
 
