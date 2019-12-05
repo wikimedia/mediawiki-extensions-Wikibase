@@ -3954,7 +3954,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=5eac9680&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=5eac9680&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-app"},[(_vm.isTainted)?_c('div',[_c('span',[_c('TaintedIcon',{attrs:{"guid":_vm.id}}),(_vm.popperIsOpened)?_c('div',{staticClass:"wb-tr-float-wrapper"},[_c('Popper',{attrs:{"guid":_vm.id}})],1):_vm._e()],1)]):_vm._e()])}
 var staticRenderFns = []
 
@@ -4417,12 +4417,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=419d8be6&
-var TaintedIconvue_type_template_id_419d8be6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
-var TaintedIconvue_type_template_id_419d8be6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=17e80853&
+var TaintedIconvue_type_template_id_17e80853_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
+var TaintedIconvue_type_template_id_17e80853_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=419d8be6&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=17e80853&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var STORE_INIT = 'initStore';
@@ -4671,8 +4671,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_419d8be6_render,
-  TaintedIconvue_type_template_id_419d8be6_staticRenderFns,
+  TaintedIconvue_type_template_id_17e80853_render,
+  TaintedIconvue_type_template_id_17e80853_staticRenderFns,
   false,
   null,
   null,
@@ -4681,12 +4681,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3bd6c424-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=4edd321e&
-var Poppervue_type_template_id_4edd321e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('h4',[_vm._v("\n\t\t\tTainted Reference Heading text\n\t\t\t"),_c('small',[_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page for this constraint type","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")])])]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\tThe value of \"point in time\" was changed, but the reference remained the same.\n\t\t")])])])}
-var Poppervue_type_template_id_4edd321e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=c3e75544&
+var Poppervue_type_template_id_c3e75544_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('h4',[_vm._v("\n\t\t\tTainted Reference Heading text\n\t\t\t"),_c('small',[_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page for this constraint type","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")])])]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\tThe value of \"point in time\" was changed, but the reference remained the same.\n\t\t")])])])}
+var Poppervue_type_template_id_c3e75544_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=4edd321e&
+// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=c3e75544&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=script&lang=ts&
 
@@ -4763,8 +4763,8 @@ var Poppervue_type_style_index_0_lang_scss_ = __webpack_require__("51bc");
 
 var Popper_component = normalizeComponent(
   components_Poppervue_type_script_lang_ts_,
-  Poppervue_type_template_id_4edd321e_render,
-  Poppervue_type_template_id_4edd321e_staticRenderFns,
+  Poppervue_type_template_id_c3e75544_render,
+  Poppervue_type_template_id_c3e75544_staticRenderFns,
   false,
   null,
   null,

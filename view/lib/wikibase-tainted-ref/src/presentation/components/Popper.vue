@@ -38,11 +38,11 @@ export default class Popper extends Vue {
 	@Getter( 'helpLink' )
 	public helpLink!: string;
 
-	public mounted() {
+	public mounted(): void {
 		( this.$el as HTMLElement ).focus();
 	}
 
-	public onFocusout( event: FocusEvent ) {
+	public onFocusout( event: FocusEvent ): void {
 		const relatedTarget = event.relatedTarget;
 
 		if ( !relatedTarget || !this.$el.contains( ( relatedTarget as Node ) ) ) {
@@ -50,12 +50,12 @@ export default class Popper extends Vue {
 		}
 	}
 
-	public closeClick( event: MouseEvent ) {
+	public closeClick( event: MouseEvent ): void {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
 	}
 
-	public helpClick() {
+	public helpClick(): void {
 		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	}
 }
