@@ -20,7 +20,8 @@ class DataAccessSettingsFactory {
 			true,
 			false,
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
 	}
 
@@ -30,7 +31,8 @@ class DataAccessSettingsFactory {
 			true,
 			false,
 			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED
+			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
 	}
 

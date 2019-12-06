@@ -138,7 +138,8 @@ class RebuildTermSqlIndex extends Maintenance {
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
+			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
+			$settings->getSetting( 'tmpItemTermsMigrationStages' )
 		);
 
 		$termSqlIndex = new TermSqlIndex(

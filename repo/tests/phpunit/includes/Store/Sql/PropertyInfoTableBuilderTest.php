@@ -92,7 +92,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
+			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
+			$settings->getSetting( 'tmpItemTermsMigrationStages' )
 		);
 
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), new UnusableEntitySource(), $dataAccessSettings );
@@ -131,7 +132,8 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
+			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
+			$settings->getSetting( 'tmpItemTermsMigrationStages' )
 		);
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantPropertySlotName = 'main';

@@ -196,7 +196,8 @@ class DatabaseSchemaUpdater {
 			$settings->getSetting( 'useTermsTableSearchFields' ),
 			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW
+			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
+			$settings->getSetting( 'tmpItemTermsMigrationStages' )
 		);
 		$entitySource = new UnusableEntitySource();
 

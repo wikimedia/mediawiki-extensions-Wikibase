@@ -355,7 +355,14 @@ QUERY;
 		return new RdfVocabulary(
 			[ '' => $baseUri ],
 			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
-			new DataAccessSettings( $irrelevantValue, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION, false ),
+			new DataAccessSettings(
+				$irrelevantValue,
+				false,
+				false,
+				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+				DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
+				DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			),
 			new EntitySourceDefinitions( [] ),
 			'',
 			[ '' => 'wd' ],

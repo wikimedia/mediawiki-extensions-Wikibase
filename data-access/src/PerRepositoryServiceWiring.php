@@ -20,7 +20,9 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -127,43 +129,44 @@ return [
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
 
-		$termLookup = new BufferingTermLookup(
+		$fallbackTermLookup = new BufferingTermLookup(
 			$termIndex, // TODO: customize buffer sizes
 			1000
 		);
 
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+		$repoDbDomain = $services->getDatabaseName();
+		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $repoDbDomain );
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$repoDbDomain,
+			$logger
+		);
+
+		$termIdsResolver = new DatabaseTermIdsResolver(
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$loadBalancer,
+			$repoDbDomain,
+			$logger
+		);
+
+		$lookups = [
+			'item' => new TermStoresDelegatingPrefetchingItemTermLookup(
+				$settings,
+				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
+				$fallbackTermLookup
+			)
+		];
+
 		if ( $settings->useNormalizedPropertyTerms() ) {
-			$mediaWikiServices = MediaWikiServices::getInstance();
-			$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-			$repoDbDomain = $services->getDatabaseName();
-			$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
-			$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
-			$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-				$loadBalancer,
-				$mediaWikiServices->getMainWANObjectCache(),
-				$repoDbDomain,
-				$logger
-			);
-
-			$propertyTermLookup = new PrefetchingPropertyTermLookup(
-				$loadBalancer,
-				new DatabaseTermIdsResolver(
-					$databaseTypeIdsStore,
-					$databaseTypeIdsStore,
-					$loadBalancer,
-					$repoDbDomain,
-					$logger
-				),
-				$repoDbDomain
-			);
-			$termLookup = new ByTypeDispatchingPrefetchingTermLookup(
-				[ 'property' => $propertyTermLookup ],
-				$termLookup
-			);
+			$lookups['property'] = new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain );
 		}
 
-		return $termLookup;
+		return new ByTypeDispatchingPrefetchingTermLookup( $lookups, $fallbackTermLookup );
 	},
 
 	'PropertyInfoLookup' => function (
