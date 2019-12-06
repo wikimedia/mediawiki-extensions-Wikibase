@@ -464,7 +464,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			foreach ( $this->localIdsByType[$entityType] as $entityId ) {
 				foreach ( $termTypes as $termType ) {
 					$value = $this->termCache->get( implode( '.', [ $entityId, $language, $termType ] ), false );
-					if ( $value === false || $value === null ) { // Paranoia
+					if ( empty( $value ) ) {
 						$isCached = false;
 						$uncachedEntityIds[] = $entityId;
 					} else {
