@@ -14,8 +14,6 @@ class DuplicateFilesAreSameTest extends \PHPUnit\Framework\TestCase {
 	public function duplicateFilesProvider() {
 		$wikibaseLib = __DIR__ . '/../../resources/lib/';
 		$wikibaseDataValueVW = __DIR__ . '/../../../view/lib/wikibase-data-values-value-view/lib/';
-		$wikibaseLibTest = __DIR__ . '/../qunit/lib/';
-		$dataValuesValeuViewTest = __DIR__ . '/../../../view/lib/wikibase-data-values-value-view/tests/lib/';
 
 		return [
 			"jqueryEventSpecialEachchange.js" => [
@@ -49,26 +47,6 @@ class DuplicateFilesAreSameTest extends \PHPUnit\Framework\TestCase {
 			"util.inherit.js" => [
 				$wikibaseLib . 'util/util.inherit.js',
 				__DIR__ . '/../../../view/lib/wikibase-data-values/lib/util/util.inherit.js',
-			],
-			"jquery.event.special.eachchange.tests.js" => [
-				$wikibaseLibTest . 'jquery.event/jquery.event.special.eachchange.tests.js',
-				$dataValuesValeuViewTest . 'jquery.event/jquery.event.special.eachchange.tests.js'
-			],
-			"jquery.ui.ooMenu.tests.js" => [
-				$wikibaseLibTest . 'jquery.ui/jquery.ui.ooMenu.tests.js',
-				$dataValuesValeuViewTest . 'jquery.ui/jquery.ui.ooMenu.tests.js'
-			],
-			"jquery.ui.suggester.tests.js" => [
-				$wikibaseLibTest . 'jquery.ui/jquery.ui.suggester.tests.js',
-				$dataValuesValeuViewTest . 'jquery.ui/jquery.ui.suggester.tests.js'
-			],
-			"jquery.util.getscrollbarwidth.tests.js" => [
-				$wikibaseLibTest . 'jquery.util/jquery.util.getscrollbarwidth.tests.js',
-				$dataValuesValeuViewTest . 'jquery.util/jquery.util.getscrollbarwidth.tests.js'
-			],
-			"util.highlightSubstring.tests.js" => [
-				$wikibaseLibTest . 'util/util.highlightSubstring.tests.js',
-				$dataValuesValeuViewTest . 'util/util.highlightSubstring.tests.js'
 			],
 		];
 	}
