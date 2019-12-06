@@ -54,6 +54,24 @@ return call_user_func( function() {
 				'wikibase',
 			],
 		],
+
+		'wikibase.tests.jquery.ui.suggester' => $moduleBase + [
+			'scripts' => [
+				'lib/jquery.ui/jquery.ui.ooMenu.tests.js',
+				'lib/jquery.ui/jquery.ui.suggester.tests.js',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+			],
+		],
+
+		'wikibase.tests.jquery.util.getscrollbarwidth' => $packageFilesModuleBase + [
+			'packageFiles' => [
+				'tests/qunit/lib/jquery.util/jquery.util.getscrollbarwidth.tests.js',
+
+				'resources/lib/jquery.util/jquery.util.getscrollbarwidth.js'
+			],
+		],
 	];
 
 	return array_merge(
