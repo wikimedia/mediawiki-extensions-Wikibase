@@ -2,22 +2,27 @@
 
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\ByTypeDispatchingEntityInfoBuilder;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
@@ -47,6 +52,10 @@ return [
 	) {
 		global $wgSecretKey;
 
+		$entityNamespaceLookup = $genericServices->getEntityNamespaceLookup();
+		$repositoryName = '';
+		$databaseName = $services->getDatabaseName();
+
 		$cacheSecret = hash( 'sha256', $wgSecretKey );
 
 		$cache = new SimpleCacheWithBagOStuff(
@@ -60,17 +69,69 @@ return [
 			'wikibase.sqlEntityInfoBuilder.miss'
 		);
 
-		return new SqlEntityInfoBuilder(
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+		$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
+		$loadBalancer = $loadBalancerFactory->getMainLB( $databaseName );
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$databaseName,
+			$logger
+		);
+		$termIdsResolver = new DatabaseTermIdsResolver(
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$loadBalancer,
+			$databaseName,
+			$logger
+		);
+
+		$oldEntityInfoBuilder = new SqlEntityInfoBuilder(
 			$services->getEntityIdParser(),
 			$services->getEntityIdComposer(),
-			$genericServices->getEntityNamespaceLookup(),
-			LoggerFactory::getInstance( 'Wikibase' ),
+			$entityNamespaceLookup,
+			$logger,
 			new UnusableEntitySource(),
 			$settings,
 			$cache,
-			$services->getDatabaseName(),
-			$services->getRepositoryName()
+			$databaseName,
+			$repositoryName
 		);
+
+		$newEntityInfoBuilder = new DatabaseEntityInfoBuilder(
+			$services->getEntityIdParser(),
+			$services->getEntityIdComposer(),
+			$entityNamespaceLookup,
+			$logger,
+			new UnusableEntitySource(),
+			$settings,
+			$cache,
+			$loadBalancer,
+			$termIdsResolver
+		);
+
+		$typeDispatchingMapping = [];
+
+		// Properties
+		if ( $settings->useNormalizedPropertyTerms() === true ) {
+			$typeDispatchingMapping[Property::ENTITY_TYPE] = $newEntityInfoBuilder;
+		} else {
+			$typeDispatchingMapping[Property::ENTITY_TYPE] = $oldEntityInfoBuilder;
+		}
+
+		// Items
+		$itemEntityInfoBuilderMapping = [];
+		foreach ( $settings->getItemTermsMigrationStages() as $maxId => $stage ) {
+			if ( $stage >= MIGRATION_WRITE_NEW ) {
+				$itemEntityInfoBuilderMapping[$maxId] = $newEntityInfoBuilder;
+			} else {
+				$itemEntityInfoBuilderMapping[$maxId] = $oldEntityInfoBuilder;
+			}
+		}
+		$typeDispatchingMapping[Item::ENTITY_TYPE] = new ByIdDispatchingEntityInfoBuilder( $itemEntityInfoBuilderMapping );
+
+		return new ByTypeDispatchingEntityInfoBuilder( $typeDispatchingMapping );
 	},
 
 	'EntityPrefetcher' => function (
