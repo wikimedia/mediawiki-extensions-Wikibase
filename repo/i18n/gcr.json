@@ -9,6 +9,8 @@
 	"wikibase-add": "ajouté",
 	"wikibase-label-empty": "Pa di libélé défini",
 	"wikibase-description-empty": "Pyès dèskripsyon fourni",
+	"wikibase-sitelink-page-edit-placeholder": "paj",
 	"wikibase-sitelinks-special": "Ròt sit",
-	"wikibase-statementview-rank-normal": "Ran nòrmal"
+	"wikibase-statementview-rank-normal": "Ran nòrmal",
+	"wikibase-itembytitle-lookup-page": "Paj :"
 }

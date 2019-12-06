@@ -46,6 +46,7 @@
 	"wikibase-itemdisambiguation-description": "Hodnoty použité na vyhľadávanie musia byť kompletné. Identifikátorom je jazyk, napr. „sk“.",
 	"wikibase-newproperty-datatype": "Typ údaju:",
 	"special-newitem": "Vytvoriť novú položku",
+	"wikibase-newitem-fieldset": "Vytvoriť novú položku",
 	"wikibase-modifyterm-language": "Kód jazyka:",
 	"wikibase-listdatatypes-geo-shape-head": "Geografický tvar"
 }
