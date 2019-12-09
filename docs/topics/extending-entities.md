@@ -1,4 +1,4 @@
-= Extending entities =
+# Extending entities {#topic_extending-entities}
 
 This is a checklist of things that need doing when adding a new field to an existing entity type. For example if you want to add “NewThingy” part to entity type called “Foo”:
 
@@ -18,7 +18,7 @@ This is a checklist of things that need doing when adding a new field to an exis
 * Add support in FooChangeOpDeserializer
 * Add support in FooRdfBuilder
 
-''CAVEAT'' (as of January 2017): For the below parts of Wikibase, there are no extension interfaces yet for handling additional fields of entities. Fields of entity types known to Wikibase itself can be hardcoded here, but for supporting entity types defined in other extensions, plug-in interfaces still need to be added.
+**CAVEAT** (as of January 2017): For the below parts of Wikibase, there are no extension interfaces yet for handling additional fields of entities. Fields of entity types known to Wikibase itself can be hardcoded here, but for supporting entity types defined in other extensions, plug-in interfaces still need to be added.
 
 * Add handling (or suppression) to EntityChangeFactory (not currently pluggable)
 * Add handling to EntityDiffVisualizer (not currently pluggable)

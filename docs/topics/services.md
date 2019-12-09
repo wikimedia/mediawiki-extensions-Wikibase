@@ -1,3 +1,5 @@
+# Services {#topic_services}
+
 TODO: add general description about the service container(s) provided, define terms etc here.
 
 Per-repository and multi-repository services are defined using wiring files. They are specified using the following global variables (each being an array of file paths). Extensions can register their custom services by adding their files to those globals in their extension.json file.

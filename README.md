@@ -1,16 +1,15 @@
 - - -
 Introduction to Wikibase
 ====================
-
 [![Build Status](https://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase.svg)](http://travis-ci.org/wikimedia/mediawiki-extensions-Wikibase/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png)](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/)
 
 The Wikibase.git package is part of the [Wikibase software](http://wikiba.se/) and consists of
-three interconnected extensions:
+three interconnected MediaWiki extensions:
 
-* Wikibase Repository (in the directory repo)
-* Wikibase Client (in the directory client)
-* WikibaseLib (in the directory lib)
+* Wikibase Repository (in the `repo` directory)
+* Wikibase Client (in the `client` directory)
+* WikibaseLib (in the `lib` directory)
 
 These extensions allow for the creation, maintenance, dissemination, and usage of structured data
 in MediaWiki.
@@ -26,16 +25,9 @@ The lib bundles common code that is used by both the client and the repo.
 
 ## Install
 
-This package contains three interrelated MediaWiki extensions:
+Wikibase depends on various [composer](http://getcomposer.org/) libraries.
 
-* Wikibase (in the subdirectory repo)
-* WikibaseLib (in the subdirectory lib)
-* Wikibase Client (in the subdirectory client)
-
-Wikibase depends on various libraries such as [DataValues](https://github.com/DataValues/) components,
-and uses [Composer](http://getcomposer.org/) to make it easy to install and manage those.
-
-Once you have Wikibase in your MediaWiki extensions directory, add the `composer.json` of Wikibase to `composer.local.json` at the root of your mediawiki folder, as documented in [MediaWiki's Composer documentation](https://www.mediawiki.org/wiki/Composer#Using_composer-merge-plugin).
+Once you have Wikibase in your MediaWiki extensions directory, add the `composer.json` of Wikibase to `composer.local.json` at the root of your MediaWiki folder, as documented in [MediaWiki's Composer documentation](https://www.mediawiki.org/wiki/Composer#Using_composer-merge-plugin).
 
 It should now look similar to:
 ```
@@ -51,7 +43,7 @@ It should now look similar to:
 ```
 
 
-Then, in the root of your mediawiki folder, run:
+Then, in the root of your MediaWiki folder, run:
 ```bash
 composer install
 ```
@@ -119,9 +111,3 @@ git add -f lib/resources/vendor/vue2.common.prod.js
 
 (The surrounding IIFE is necessary to avoid Vue breaking the page in ResourceLoader’s debug mode, see [T229390](https://phabricator.wikimedia.org/T229390).)
 
-## The Wikibase software
-
-These extensions are part of the [Wikibase software](http://wikiba.se/) created by the Wikidata team
-for the [Wikidata project](https://meta.wikimedia.org/wiki/Special:MyLanguage/Wikidata).
-
-The Wikidata project uses the Wikibase software on [its website](https://www.wikidata.org).
