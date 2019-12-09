@@ -23,6 +23,22 @@ wbt_property_terms ----/          \                    \
                                    \-- wbt_type         \-- wbt_text
 </pre>
 
+Checking data for these tables involves lots of joins.
+The below query selects all terms in the tables for item Q1 and can be used as a starting point for data exploration:
+<pre>
+SELECT
+  wbit_item_id as id,
+  wby_name as type,
+  wbxl_language as language,
+  wbx_text as text
+FROM wbt_item_terms
+LEFT JOIN wbt_term_in_lang ON wbit_term_in_lang_id = wbtl_id
+LEFT JOIN wbt_type ON wbtl_type_id = wby_id
+LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
+LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
+WHERE wbit_item_id = 1;
+</pre>
+
 And now for a summary of the tables including human readable schema description and some examples.
 
 #### wbt_item_terms
