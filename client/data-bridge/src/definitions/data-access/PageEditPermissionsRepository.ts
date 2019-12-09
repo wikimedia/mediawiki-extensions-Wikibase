@@ -42,5 +42,5 @@ export interface UnknownReason extends ApplicationErrorBase {
 export type MissingPermissionsError = BlockReason | ProtectedReason | UnknownReason;
 
 export interface PageEditPermissionsRepository {
-	isUserAllowedToEditPage(): MissingPermissionsError[];
+	isUserAllowedToEditPage(): Promise<MissingPermissionsError[]>;
 }
