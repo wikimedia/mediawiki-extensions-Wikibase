@@ -19,7 +19,6 @@ Below is an excerpt of some configuration of a Wikibase instance providing items
 
 Note that as only foreign properties from the repository “prop” are to be used, this example configuration only enables local items explicitly.
 
-
 	$wgWBRepoSettings['foreignRepositories'] = [
 		'prop' => [
 			'repoDatabase' => 'propwiki',
