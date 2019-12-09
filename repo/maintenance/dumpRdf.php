@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Maintenance;
 
 use MediaWiki\MediaWikiServices;
-use SiteLookup;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -36,11 +35,6 @@ class DumpRdf extends DumpEntities {
 	 * @var EntityPrefetcher
 	 */
 	private $entityPrefetcher;
-
-	/**
-	 * @var SiteLookup
-	 */
-	private $siteLookup;
 
 	/**
 	 * @var PropertyDataTypeLookup
@@ -90,7 +84,6 @@ class DumpRdf extends DumpEntities {
 		array $existingEntityTypes,
 		array $entityTypesWithoutRdfOutput,
 		EntityPrefetcher $entityPrefetcher,
-		SiteLookup $siteLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
@@ -104,7 +97,6 @@ class DumpRdf extends DumpEntities {
 			$entityTypesWithoutRdfOutput
 		);
 		$this->entityPrefetcher = $entityPrefetcher;
-		$this->siteLookup = $siteLookup;
 		$this->propertyDatatypeLookup = $propertyDataTypeLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
@@ -128,7 +120,6 @@ class DumpRdf extends DumpEntities {
 				$wikibaseRepo->getEnabledEntityTypes(),
 				$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
-				$wikibaseRepo->getSiteLookup(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 				$wikibaseRepo->getEntityRdfBuilderFactory(),

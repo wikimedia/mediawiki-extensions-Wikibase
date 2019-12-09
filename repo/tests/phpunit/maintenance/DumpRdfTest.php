@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
-use HashSiteStore;
 use MediaWikiLangTestCase;
 use TestSites;
 use Title;
@@ -168,7 +167,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			$existingEntityTypes,
 			$entityTypesWithoutRdfOutput,
 			new NullEntityPrefetcher(),
-			new HashSiteStore( TestSites::getSites() ),
 			$this->getMockPropertyDataTypeLookup(),
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
