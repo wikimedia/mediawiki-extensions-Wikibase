@@ -5,7 +5,7 @@
 	<component
 		:is="popperIsOpened ? 'div' : 'a'"
 		class="wb-tr-tainted-icon"
-		title="This statement has some potential issues"
+		:title="iconTitle"
 		@click="event => !popperIsOpened && onClick( event )"
 	/>
 </template>
@@ -22,6 +22,10 @@ import Vue from 'vue';
 export default class TaintedIcon extends Vue {
 	@Getter( 'popperState' )
 	public popperStateFunction!: Function;
+
+	public get iconTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-tainted-icon-title' );
+	}
 
 	public onClick( event: MouseEvent ): void {
 		event.preventDefault();

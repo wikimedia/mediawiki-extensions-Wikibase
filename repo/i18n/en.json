@@ -465,5 +465,6 @@
 	"wikibase-entity-save-error-heading": "Something went wrong",
 	"wikibase-entity-save-error-message": "Your change could not be published. You can try clicking the publish button again.",
 	"wikibase-tainted-ref-warning-icon-title": "This statement has some potential issues",
-	"wikibase-tainted-ref-popper-text": "The value changed, but the reference remained the same."
+	"wikibase-tainted-ref-popper-text": "The value changed, but the reference remained the same.",
+	"wikibase-tainted-ref-tainted-icon-title": "This statement has some potential issues."
 }
