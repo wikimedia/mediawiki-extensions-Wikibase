@@ -35,7 +35,7 @@ export interface UnknownReason extends ApplicationErrorBase {
 	info: {
 		code: string;
 		messageKey: string;
-		messageParams: string[];
+		messageParams: ( string|number )[];
 	};
 }
 
