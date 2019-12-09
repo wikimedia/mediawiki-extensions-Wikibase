@@ -58,6 +58,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\StatsdMissRecordingSimpleCache' => __DIR__ . '/includes/StatsdMissRecordingSimpleCache.php',
 	'Wikibase\\Lib\\Store\\AbstractTermPropertyLabelResolver' => __DIR__ . '/includes/Store/AbstractTermPropertyLabelResolver.php',
 	'Wikibase\\Lib\\Store\\BadRevisionException' => __DIR__ . '/includes/Store/BadRevisionException.php',
+	'Wikibase\\Lib\\Store\\ByIdDispatchingEntityInfoBuilder' => __DIR__ . '/includes/Store/ByIdDispatchingEntityInfoBuilder.php',
 	'Wikibase\\Lib\\Store\\CacheAwarePropertyInfoStore' => __DIR__ . '/includes/Store/CacheAwarePropertyInfoStore.php',
 	'Wikibase\\Lib\\Store\\CacheRetrievingEntityRevisionLookup' => __DIR__ . '/includes/Store/CacheRetrievingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\CachingEntityRevisionLookup' => __DIR__ . '/includes/Store/CachingEntityRevisionLookup.php',
