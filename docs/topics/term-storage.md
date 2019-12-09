@@ -16,16 +16,16 @@ The tables were created by AddNormalizedTermsTablesDDL.sql which includes some d
 
 Here is a great plain text version of the relations that are going on:
 
-<pre>
+```
 wbt_item_terms --------\
                         ---- wbt_term_in_lang --- wbt_text_in_lang
 wbt_property_terms ----/          \                    \
                                    \-- wbt_type         \-- wbt_text
-</pre>
+```
 
 Checking data for these tables involves lots of joins.
 The below query selects all terms in the tables for item Q123 and can be used as a starting point for data exploration:
-<pre>
+```
 SELECT
   wbit_item_id as id,
   wby_name as type,
@@ -37,7 +37,7 @@ LEFT JOIN wbt_type ON wbtl_type_id = wby_id
 LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
 LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
 WHERE wbit_item_id = 123;
-</pre>
+```
 
 And now for a summary of the tables including human readable schema description and some examples.
 
@@ -45,7 +45,7 @@ And now for a summary of the tables including human readable schema description 
 
 Stores a record per term per item per language. This table is expected to be the tallest in this group of tables.
 
-<pre>
+```
 +----------------------+---------------------+------+-----+---------+----------------+
 | Field                | Type                | Null | Key | Default | Extra          |
 +----------------------+---------------------+------+-----+---------+----------------+
@@ -53,7 +53,7 @@ Stores a record per term per item per language. This table is expected to be the
 | wbit_item_id         | int(10) unsigned    | NO   | MUL | NULL    |                |
 | wbit_term_in_lang_id | int(10) unsigned    | NO   | MUL | NULL    |                |
 +----------------------+---------------------+------+-----+---------+----------------+
-</pre>
+```
 
 -   wbit_id - an auto increment field
 -   wbit_item_id - numeric value of the item ID. So Q64 # 64
@@ -63,7 +63,7 @@ Stores a record per term per item per language. This table is expected to be the
 
 Stores a record per term per property per language. This table is very similar to / identical to wbt_item_terms, but for properties.
 
-<pre>
+```
 +----------------------+------------------+------+-----+---------+----------------+
 | Field                | Type             | Null | Key | Default | Extra          |
 +----------------------+------------------+------+-----+---------+----------------+
@@ -71,7 +71,7 @@ Stores a record per term per property per language. This table is very similar t
 | wbpt_property_id     | int(10) unsigned | NO   | MUL | NULL    |                |
 | wbpt_term_in_lang_id | int(10) unsigned | NO   | MUL | NULL    |                |
 +----------------------+------------------+------+-----+---------+----------------+
-</pre>
+```
 
 -   wbpt_id - an auto increment field
 -   wbpt_property_id - numeric value of the item ID. So P64 # 64
@@ -81,7 +81,7 @@ Stores a record per term per property per language. This table is very similar t
 
 Stores a record per term per text per language.
 
-<pre>
+```
 +----------------------+------------------+------+-----+---------+----------------+
 | Field                | Type             | Null | Key | Default | Extra          |
 +----------------------+------------------+------+-----+---------+----------------+
@@ -89,7 +89,7 @@ Stores a record per term per text per language.
 | wbtl_type_id         | int(10) unsigned | NO   | MUL | NULL    |                |
 | wbtl_text_in_lang_id | int(10) unsigned | NO   | MUL | NULL    |                |
 +----------------------+------------------+------+-----+---------+----------------+
-</pre>
+```
 
 -   wbtl_id - an auto increment field
 -   wbtl_type_id - reference to the 'wbt_type' table
@@ -99,7 +99,7 @@ Stores a record per term per text per language.
 
 Stores a record per term text per language.
 
-<pre>
+```
 +---------------+------------------+------+-----+---------+----------------+
 | Field         | Type             | Null | Key | Default | Extra          |
 +---------------+------------------+------+-----+---------+----------------+
@@ -107,7 +107,7 @@ Stores a record per term text per language.
 | wbxl_language | varbinary(10)    | NO   | MUL | NULL    |                |
 | wbxl_text_id  | int(10) unsigned | NO   | MUL | NULL    |                |
 +---------------+------------------+------+-----+---------+----------------+
-</pre>
+```
 
 -   wbxl_id - an auto increment field
 -   wbxl_language - Language code, e.g. 'en', or 'fr', or 'de', or 'zh-hans'
@@ -117,42 +117,42 @@ Stores a record per term text per language.
 
 Stores a record per text value that are used in different terms in different languages.
 
-<pre>
+```
 +----------+------------------+------+-----+---------+----------------+
 | Field    | Type             | Null | Key | Default | Extra          |
 +----------+------------------+------+-----+---------+----------------+
 | wbx_id   | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
 | wbx_text | varbinary(255)   | NO   | UNI | NULL    |                |
 +----------+------------------+------+-----+---------+----------------+
-</pre>
+```
 
 For example:
 
-<pre>
+```
 +----------+--------------------------------------------------------------+
 | wbx_id   | wbx_text                                                     |
 +----------+--------------------------------------------------------------+
 | 65680880 | Some Term Text                                               |
 | 66256338 | Some Other Term Text                                         |
 +----------+--------------------------------------------------------------+
-</pre>
+```
 
 #### wbt_type
 
 Normalized term type names. The simplest of the above tables.
 
-<pre>
+```
 +----------+------------------+------+-----+---------+----------------+
 | Field    | Type             | Null | Key | Default | Extra          |
 +----------+------------------+------+-----+---------+----------------+
 | wby_id   | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
 | wby_name | varbinary(45)    | NO   | UNI | NULL    |                |
 +----------+------------------+------+-----+---------+----------------+
-</pre>
+```
 
 For example:
 
-<pre>
+```
 +--------+-------------+
 | wby_id | wby_name    |
 +--------+-------------+
@@ -160,4 +160,4 @@ For example:
 |      2 | description |
 |      3 | alias       |
 +--------+-------------+
-</pre>
+```
