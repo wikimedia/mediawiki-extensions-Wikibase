@@ -3,17 +3,15 @@ export enum PermissionErrorType {
 	UNKNOWN = -1,
 }
 
-export interface PermissionError {
-	type: PermissionErrorType;
-}
+export type PermissionError = PermissionErrorProtectedPage | PermissionErrorUnknown;
 
-export interface PermissionErrorProtectedPage extends PermissionError {
+export interface PermissionErrorProtectedPage {
 	type: PermissionErrorType.PROTECTED_PAGE;
 	right: 'editprotected' | 'editsemiprotected' | string;
 	semiProtected: boolean;
 }
 
-export interface PermissionErrorUnknown extends PermissionError {
+export interface PermissionErrorUnknown {
 	type: PermissionErrorType.UNKNOWN;
 	code: string;
 	messageKey: string;
