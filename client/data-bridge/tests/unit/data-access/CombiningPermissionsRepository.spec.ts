@@ -2,6 +2,7 @@ import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRe
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import PageEditPermissionErrorsRepository, {
 	PermissionError,
+	PermissionErrorCascadeProtectedPage,
 	PermissionErrorProtectedPage,
 	PermissionErrorType,
 	PermissionErrorUnknown,
@@ -82,6 +83,27 @@ describe( 'CombiningPermissionsRepository', () => {
 			.toStrictEqual( [ expected ] );
 	} );
 
+	it( 'detects page cascade-protected on repo', () => {
+		const pages = [ 'Page A', 'Category:Category B' ];
+		const error: PermissionErrorCascadeProtectedPage = {
+			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+			pages,
+		};
+		const repository = new CombiningPermissionsRepository(
+			mockPermissionErrorsRepository( [ error ] ),
+			mockPermissionErrorsRepository(),
+		);
+
+		const expected: ProtectedReason = {
+			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+			info: { pages },
+		};
+
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
+			.resolves
+			.toStrictEqual( [ expected ] );
+	} );
+
 	it( 'handles unknown error on repo', () => {
 		const error: PermissionErrorUnknown = {
 			type: PermissionErrorType.UNKNOWN,
@@ -101,6 +123,27 @@ describe( 'CombiningPermissionsRepository', () => {
 				messageKey: 'ext-some-message',
 				messageParams: [ 'param' ],
 			},
+		};
+
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
+			.resolves
+			.toStrictEqual( [ expected ] );
+	} );
+
+	it( 'detects page cascade-protected on client', () => {
+		const pages = [ 'Page A', 'Category:Category B' ];
+		const error: PermissionErrorCascadeProtectedPage = {
+			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+			pages,
+		};
+		const repository = new CombiningPermissionsRepository(
+			mockPermissionErrorsRepository(),
+			mockPermissionErrorsRepository( [ error ] ),
+		);
+
+		const expected: ProtectedReason = {
+			type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+			info: { pages },
 		};
 
 		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
@@ -153,28 +196,46 @@ describe( 'CombiningPermissionsRepository', () => {
 			.toStrictEqual( [ expected ] );
 	} );
 
-	it( 'combines errors from repo and client', () => {
+	it( 'combines multiple errors from repo and client', () => {
 		const right = 'editprotected';
-		const repoError: PermissionErrorProtectedPage = {
+		const repoError1: PermissionErrorProtectedPage = {
 			type: PermissionErrorType.PROTECTED_PAGE,
 			right,
 			semiProtected: false,
 		};
-		const clientError: PermissionErrorUnknown = {
+		const repoPages = [ 'Wikidata:Main Page' ];
+		const repoError2: PermissionErrorCascadeProtectedPage = {
+			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+			pages: repoPages,
+		};
+		const clientPages = [ 'Wikipedia:Main Page' ];
+		const clientError1: PermissionErrorCascadeProtectedPage = {
+			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+			pages: clientPages,
+		};
+		const clientError2: PermissionErrorUnknown = {
 			type: PermissionErrorType.UNKNOWN,
 			code: 'added-by-extension',
 			messageKey: 'ext-some-message',
 			messageParams: [ 'param' ],
 		};
 		const repository = new CombiningPermissionsRepository(
-			mockPermissionErrorsRepository( [ repoError ] ),
-			mockPermissionErrorsRepository( [ clientError ] ),
+			mockPermissionErrorsRepository( [ repoError1, repoError2 ] ),
+			mockPermissionErrorsRepository( [ clientError1, clientError2 ] ),
 		);
 
-		const expected: [ProtectedReason, UnknownReason] = [
+		const expected: [ProtectedReason, ProtectedReason, ProtectedReason, UnknownReason] = [
 			{
 				type: PageNotEditable.ITEM_FULLY_PROTECTED,
 				info: { right },
+			},
+			{
+				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+				info: { pages: repoPages },
+			},
+			{
+				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+				info: { pages: clientPages },
 			},
 			{
 				type: PageNotEditable.UNKNOWN,
@@ -190,7 +251,5 @@ describe( 'CombiningPermissionsRepository', () => {
 			.resolves
 			.toStrictEqual( expected );
 	} );
-
-	// TODO test multiple errors from repo or multiple errors from client, once “blocked” errors exist
 
 } );

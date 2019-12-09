@@ -51,6 +51,13 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 						right: repoError.right,
 					},
 				};
+			case PermissionErrorType.CASCADE_PROTECTED_PAGE:
+				return {
+					type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+					info: {
+						pages: repoError.pages,
+					},
+				};
 			case PermissionErrorType.UNKNOWN:
 				return this.unknownPermissionErrorToMissingPermissionsError( repoError );
 		}
@@ -60,6 +67,13 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 		switch ( clientError.type ) {
 			case PermissionErrorType.PROTECTED_PAGE:
 				throw new TechnicalProblem( 'Data Bridge should never have been opened on this protected page!' );
+			case PermissionErrorType.CASCADE_PROTECTED_PAGE:
+				return {
+					type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+					info: {
+						pages: clientError.pages,
+					},
+				};
 			case PermissionErrorType.UNKNOWN:
 				return this.unknownPermissionErrorToMissingPermissionsError( clientError );
 		}

@@ -3,6 +3,7 @@ import { ApplicationErrorBase } from '@/definitions/ApplicationError';
 export enum PageNotEditable {
 	BLOCKED_ON_PAGE = 'blocked_on_client_page',
 	BLOCKED_ON_ITEM = 'blocked_on_repo_item',
+	PAGE_CASCADE_PROTECTED = 'cascadeprotected_on_client_page',
 	ITEM_FULLY_PROTECTED = 'protectedpage',
 	ITEM_SEMI_PROTECTED = 'semiprotectedpage',
 	ITEM_CASCADE_PROTECTED = 'cascadeprotected',
@@ -27,7 +28,8 @@ export interface BlockReason extends ApplicationErrorBase {
 export interface ProtectedReason extends ApplicationErrorBase {
 	type: typeof PageNotEditable.ITEM_FULLY_PROTECTED
 	| typeof PageNotEditable.ITEM_SEMI_PROTECTED
-	| typeof PageNotEditable.ITEM_CASCADE_PROTECTED;
+	| typeof PageNotEditable.ITEM_CASCADE_PROTECTED
+	| typeof PageNotEditable.PAGE_CASCADE_PROTECTED;
 }
 
 export interface UnknownReason extends ApplicationErrorBase {

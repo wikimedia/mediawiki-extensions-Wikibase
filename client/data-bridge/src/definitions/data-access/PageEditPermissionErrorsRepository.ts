@@ -1,14 +1,22 @@
 export enum PermissionErrorType {
 	PROTECTED_PAGE = 1,
+	CASCADE_PROTECTED_PAGE,
 	UNKNOWN = -1,
 }
 
-export type PermissionError = PermissionErrorProtectedPage | PermissionErrorUnknown;
+export type PermissionError = PermissionErrorProtectedPage |
+PermissionErrorCascadeProtectedPage |
+PermissionErrorUnknown;
 
 export interface PermissionErrorProtectedPage {
 	type: PermissionErrorType.PROTECTED_PAGE;
 	right: 'editprotected' | 'editsemiprotected' | string;
 	semiProtected: boolean;
+}
+
+export interface PermissionErrorCascadeProtectedPage {
+	type: PermissionErrorType.CASCADE_PROTECTED_PAGE;
+	pages: string[];
 }
 
 export interface PermissionErrorUnknown {
