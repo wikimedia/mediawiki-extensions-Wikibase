@@ -1,6 +1,6 @@
+import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
-import InstantApi from '@/data-access/InstantApi';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
@@ -56,7 +56,7 @@ describe( 'init', () => {
 			} ),
 			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
 			mwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
-			api = new BatchingApi( new InstantApi( mwApi ) ),
+			api = new BatchingApi( new ApiCore( mwApi ) ),
 			editTags = [ 'a tag' ],
 			usePublish = true;
 		mockMwEnv(

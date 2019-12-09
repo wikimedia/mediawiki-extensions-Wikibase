@@ -12853,16 +12853,43 @@ function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
 }
-// CONCATENATED MODULE: ./src/datamodel/Entity.ts
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
 
 
-var Entity_Entity = function Entity(id, statements) {
-  _classCallCheck(this, Entity);
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
 
-  this.id = id;
-  this.statements = statements;
-};
 
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
+var es6_set = __webpack_require__("4f7f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("7f7f");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/map.js
 var core_js_map = __webpack_require__("2d7d");
@@ -12949,6 +12976,32 @@ function wrapNativeSuper_wrapNativeSuper(Class) {
 
   return wrapNativeSuper_wrapNativeSuper(Class);
 }
+// CONCATENATED MODULE: ./src/data-access/error/ApiErrors.ts
+
+
+
+
+
+
+var ApiErrors_ApiErrors =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(ApiErrors, _Error);
+
+  function ApiErrors(errors) {
+    var _this;
+
+    _classCallCheck(this, ApiErrors);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ApiErrors).call(this, errors[0].code));
+    _this.errors = errors;
+    return _this;
+  }
+
+  return ApiErrors;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
 // CONCATENATED MODULE: ./src/data-access/error/TechnicalProblem.ts
 
 
@@ -12995,6 +13048,110 @@ function (_Error) {
 
   return JQueryTechnicalError;
 }(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// CONCATENATED MODULE: ./src/data-access/ApiCore.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Basic implementation of Api using MwApi.
+ * This turns set parameters into arrays
+ * (the other parameter types MwApi can handle itself)
+ * and maps rejections to appropriate error classes.
+ * Other Api implementations often wrap this one.
+ */
+
+var ApiCore_ApiCore =
+/*#__PURE__*/
+function () {
+  function ApiCore(api) {
+    _classCallCheck(this, ApiCore);
+
+    this.api = api;
+  }
+
+  _createClass(ApiCore, [{
+    key: "get",
+    value: function get(params) {
+      for (var _i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
+        var name = _Object$keys[_i];
+        var param = params[name];
+
+        if (param instanceof Set) {
+          params[name] = _toConsumableArray(param);
+        }
+      }
+
+      return Promise.resolve( // turn jQuery promise into native one
+      this.api.get(params).catch(this.mwApiRejectionToError));
+    }
+    /**
+     * Translate a rejection from mw.Api into a single error.
+     * Since mw.Api uses jQuery Deferreds, there can be up to four arguments.
+     * (See mw.Api’s ajax method for the code generating the rejections.)
+     */
+
+  }, {
+    key: "mwApiRejectionToError",
+    value: function mwApiRejectionToError(code, arg2, _arg3, _arg4) {
+      switch (code) {
+        case 'http':
+          {
+            // jQuery AJAX failure
+            var detail = arg2; // arg3 and arg4 are not defined
+
+            throw new JQueryTechnicalError_JQueryTechnicalError(detail.xhr);
+          }
+
+        case 'ok-but-empty':
+          {
+            // HTTP 200, empty response body, should never happen™
+            var message = arg2; // arg3 is result, arg4 is jqXHR
+
+            throw new TechnicalProblem_TechnicalProblem(message);
+          }
+
+        default:
+          {
+            // API error(s)
+            var result = arg2; // arg3 is also result, arg4 is jqXHR
+
+            if (result.error) {
+              throw new ApiErrors_ApiErrors([result.error]);
+            } else if (result.errors) {
+              throw new ApiErrors_ApiErrors(result.errors);
+            } else {
+              throw new TechnicalProblem_TechnicalProblem('mw.Api rejected but result does not contain error(s)');
+            }
+          }
+      }
+    }
+  }]);
+
+  return ApiCore;
+}();
+
+
+// CONCATENATED MODULE: ./src/datamodel/Entity.ts
+
+
+var Entity_Entity = function Entity(id, statements) {
+  _classCallCheck(this, Entity);
+
+  this.id = id;
+  this.statements = statements;
+};
 
 
 // CONCATENATED MODULE: ./src/data-access/error/EntityNotFound.ts
@@ -13087,41 +13244,6 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
-var es6_set = __webpack_require__("4f7f");
-
 // CONCATENATED MODULE: ./src/data-access/BatchingApi.ts
 
 
@@ -13186,8 +13308,8 @@ var BatchingApi_BatchingApi =
 function () {
   /**
    * Create a new service for requests to the given (local or foreign) API.
-   * @param api underlying implementation responsible for
-   * making the merged API calls (usually an {@link InstantApi})
+   * @param api Underlying implementation responsible for
+   * making the merged API calls (usually an {@link ApiCore}).
    */
   function BatchingApi(api) {
     _classCallCheck(this, BatchingApi);
@@ -13371,129 +13493,6 @@ function () {
   }]);
 
   return BatchingApi;
-}();
-
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
-var es6_function_name = __webpack_require__("7f7f");
-
-// CONCATENATED MODULE: ./src/data-access/error/ApiErrors.ts
-
-
-
-
-
-
-var ApiErrors_ApiErrors =
-/*#__PURE__*/
-function (_Error) {
-  _inherits(ApiErrors, _Error);
-
-  function ApiErrors(errors) {
-    var _this;
-
-    _classCallCheck(this, ApiErrors);
-
-    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ApiErrors).call(this, errors[0].code));
-    _this.errors = errors;
-    return _this;
-  }
-
-  return ApiErrors;
-}(wrapNativeSuper_wrapNativeSuper(Error));
-
-
-// CONCATENATED MODULE: ./src/data-access/InstantApi.ts
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * A service to make API requests immediately,
- * wrapping an instance of the MediaWiki API class.
- * It turns set parameters into arrays
- * and maps rejections to appropriate error classes.
- *
- * (The name InstantApi was chosen to contrast BatchingApi.)
- */
-
-var InstantApi_InstantApi =
-/*#__PURE__*/
-function () {
-  function InstantApi(api) {
-    _classCallCheck(this, InstantApi);
-
-    this.api = api;
-  }
-
-  _createClass(InstantApi, [{
-    key: "get",
-    value: function get(params) {
-      for (var _i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
-        var name = _Object$keys[_i];
-        var param = params[name];
-
-        if (param instanceof Set) {
-          params[name] = _toConsumableArray(param);
-        }
-      }
-
-      return Promise.resolve( // turn jQuery promise into native one
-      this.api.get(params).catch(this.mwApiRejectionToError));
-    }
-    /**
-     * Translate a rejection from mw.Api into a single error.
-     * Since mw.Api uses jQuery Deferreds, there can be up to four arguments.
-     * (See mw.Api’s ajax method for the code generating the rejections.)
-     */
-
-  }, {
-    key: "mwApiRejectionToError",
-    value: function mwApiRejectionToError(code, arg2, _arg3, _arg4) {
-      switch (code) {
-        case 'http':
-          {
-            // jQuery AJAX failure
-            var detail = arg2; // arg3 and arg4 are not defined
-
-            throw new JQueryTechnicalError_JQueryTechnicalError(detail.xhr);
-          }
-
-        case 'ok-but-empty':
-          {
-            // HTTP 200, empty response body, should never happen™
-            var message = arg2; // arg3 is result, arg4 is jqXHR
-
-            throw new TechnicalProblem_TechnicalProblem(message);
-          }
-
-        default:
-          {
-            // API error(s)
-            var result = arg2; // arg3 is also result, arg4 is jqXHR
-
-            if (result.error) {
-              throw new ApiErrors_ApiErrors([result.error]);
-            } else if (result.errors) {
-              throw new ApiErrors_ApiErrors(result.errors);
-            } else {
-              throw new TechnicalProblem_TechnicalProblem('mw.Api rejected but result does not contain error(s)');
-            }
-          }
-      }
-    }
-  }]);
-
-  return InstantApi;
 }();
 
 
@@ -14194,7 +14193,7 @@ function createServices(mwWindow, editTags) {
   }
 
   var repoMwApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
-  var repoApi = new BatchingApi_BatchingApi(new InstantApi_InstantApi(repoMwApi));
+  var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
   services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
   var foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher_ApiEntityInfoDispatcher(repoMwApi, ['labels', 'datatype']);
   services.set('entityLabelRepository', new DispatchingEntityLabelRepository_DispatchingEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), foreignApiEntityInfoDispatcher));

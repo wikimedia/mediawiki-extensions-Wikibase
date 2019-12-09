@@ -11,14 +11,13 @@ import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import jqXHR = JQuery.jqXHR;
 
 /**
- * A service to make API requests immediately,
- * wrapping an instance of the MediaWiki API class.
- * It turns set parameters into arrays
+ * Basic implementation of Api using MwApi.
+ * This turns set parameters into arrays
+ * (the other parameter types MwApi can handle itself)
  * and maps rejections to appropriate error classes.
- *
- * (The name InstantApi was chosen to contrast BatchingApi.)
+ * Other Api implementations often wrap this one.
  */
-export default class InstantApi implements Api {
+export default class ApiCore implements Api {
 
 	private readonly api: MwApi;
 

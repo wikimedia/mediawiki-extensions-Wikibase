@@ -1,6 +1,6 @@
+import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
-import InstantApi from '@/data-access/InstantApi';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -34,7 +34,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	const repoMwApi = new mwWindow.mw.ForeignApi(
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
-	const repoApi = new BatchingApi( new InstantApi( repoMwApi ) );
+	const repoApi = new BatchingApi( new ApiCore( repoMwApi ) );
 
 	services.set( 'writingEntityRepository', new ApiWritingRepository(
 		repoMwApi,
