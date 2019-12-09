@@ -1,10 +1,10 @@
-= Change propagation =
+# Change propagation {#topic_change-propagation}
 
 This document describes how changes to entities on the repository are propagated to client wikis. The goal of change propagation is to allow clients to update pages timely after information on the repository changed.
 
-: ''NOTE'': As of this writing in January 2017, change propagation is only possible with direct database access between the wikis (that is, inside a “wiki farm”).
+**NOTE**: As of this writing in January 2017, change propagation is only possible with direct database access between the wikis (that is, inside a “wiki farm”).
 
-: ''NOTE'': As of this writing in January 2017, change propagation does not support federation (change propagation between repositories) nor does it support multi-repository setups on the client wiki.
+**NOTE**: As of this writing in January 2017, change propagation does not support federation (change propagation between repositories) nor does it support multi-repository setups on the client wiki.
 
 Change propagation requires several components to work together. On the repository, we need:
 
@@ -33,69 +33,69 @@ Note that multiple instances of dispatchChanges.php can run at the same time. Th
 
 Below, some components involved in change dispatching are described in more detail.
 
-== Usage Tracking and Subscription Management ==
+## Usage Tracking and Subscription Management
 
 Usage tracking and description management are described in detail in the file usagetracking.wiki.
 
-== Change Buffer ==
+## Change Buffer
 
 The change buffer holds information about each change, stored in the wb_changes table, to be accessed by the client wikis when processing the respective change. This is similar to MediaWiki's recentchanges table. The table structure is as follows:
 
-; change_id
-: An int(10) with an autoincrement id identifying the change.
-; change_type
-: A varchar(25) representing the kind of change. It has the form ''wikibase-&lt;entity-type&gt;~&lt;action&gt;'', e.g. “wikibase-item~add”.
-: Well known entity types are “item” and “property”. Custom entity types will define their own type names.
-: Known actions: “update”, “add”, “remove”, “restore”
-; change_time
-: A varbinary(14) the time at which the edit was made
-; change_object_id
-: A varbinary(14) containing the entity ID
-; change_revision_id
-: A int(10) containing the revision ID
-; change_user_id
-: A int(10) containing the original (repository) user id, or 0 for logged out users.
-; change_info
-: A mediumblob containing a JSON structure with additional information about the change. Well known top level fields are:
-:; “diff”
-:: A serialized diff, as produced by EntityDiffer
-:; “metadata”
-:: A JSON object representing essential revision meta data, using the following fields:
-::; “central_user_id”
-::: The central user ID (int). 0 if the repo is not connected to a central user system, the action was by a logged out user, the particular user is not attached on the repo, or the user is restricted (uses AUDIENCE_PUBLIC)
-::; “user_text”
-::: The user name (string)
-::; “page_id”
-::: The id of the wiki page containing the entity on the repo (int)
-::; “rev_id”
-::: The id of the revision created by this change on the repo (int)
-::; “parent_id”
-::: The id of the parent revision of this change on the repo (int)
-::; “comment”
-::: The edit summary for the change
-::; “bot”
-::: Whether the change was performed as a bot edit (0 or 1)
+* change_id
+  * An int(10) with an autoincrement id identifying the change.
+* change_type
+  * A varchar(25) representing the kind of change. It has the form ''wikibase-&lt;entity-type&gt;~&lt;action&gt;'', e.g. “wikibase-item~add”.
+  * Well known entity types are “item” and “property”. Custom entity types will define their own type names.
+  * Known actions: “update”, “add”, “remove”, “restore”
+* change_time
+  * A varbinary(14) the time at which the edit was made
+* change_object_id
+  * A varbinary(14) containing the entity ID
+* change_revision_id
+  * A int(10) containing the revision ID
+* change_user_id
+  * A int(10) containing the original (repository) user id, or 0 for logged out users.
+* change_info
+  * A mediumblob containing a JSON structure with additional information about the change. Well known top level fields are:
+    * “diff”
+      * A serialized diff, as produced by EntityDiffer
+    * “metadata”
+      * A JSON object representing essential revision meta data, using the following fields:
+        * “central_user_id”
+          * The central user ID (int). 0 if the repo is not connected to a central user system, the action was by a logged out user, the particular user is not attached on the repo, or the user is restricted (uses AUDIENCE_PUBLIC)
+        * “user_text”
+          * The user name (string)
+        * “page_id”
+          * The id of the wiki page containing the entity on the repo (int)
+        * “rev_id”
+          * The id of the revision created by this change on the repo (int)
+        * “parent_id”
+          * The id of the parent revision of this change on the repo (int)
+        * “comment”
+          * The edit summary for the change
+        * “bot”
+          * Whether the change was performed as a bot edit (0 or 1)
 
-== Dispatch State ==
+## Dispatch State
 
 Dispatch state is managed by a ChangeDispatchCoordinator service. The default implementation is based on the wb_changes_dispatch table. This table contains one row per client wiki, with the following information:
 
-; chd_site
-: A varbinary(32) identifying the target wiki with its global site ID.
-; chd_db
-: A varbinary(32) specifying the logical database name of the client wiki.
-; chd_seen
-: A int(11) containing the last change ID that was sent to this client wiki.
-; chd_touched
-: A varbinary(14) representing the time at which this row was last updated. This is useful only for reporting and debugging.
-; chd_lock
-: A varbinary(64), the name of some kind of lock that some process currently holds on this row. The lock name should indicate the locking mechanism. The locking mechanism should be able to reliably detect stale locks belonging to dead processes.
-; chd_disabled
-: A tinyint(3), set to 1 to disable dispatching for this wiki.
+* chd_site
+  * A varbinary(32) identifying the target wiki with its global site ID.
+* chd_db
+  * A varbinary(32) specifying the logical database name of the client wiki.
+* chd_seen
+  * A int(11) containing the last change ID that was sent to this client wiki.
+* chd_touched
+  * A varbinary(14) representing the time at which this row was last updated. This is useful only for reporting and debugging.
+* chd_lock
+  * A varbinary(64), the name of some kind of lock that some process currently holds on this row. The lock name should indicate the locking mechanism. The locking mechanism should be able to reliably detect stale locks belonging to dead processes.
+* chd_disabled
+  * A tinyint(3), set to 1 to disable dispatching for this wiki.
 
 Per default, global MySQL locks are used to ensure that only one process can dispatch to any given client wiki at a time.
 
-== dispatchChanges.php script ==
+## dispatchChanges.php script
 
 The dispatchChanges script notifies client wikis of changes on the repository. It reads information from the wb_changes and wb_changes_dispatch tables, and posts ChangeNotificationJobs to the clients' job queues.
 
@@ -103,23 +103,23 @@ The basic scheduling algorithm is as follows: for each client wiki, define how m
 
 The dispatchChanges is designed to be safe against concurrent execution. It can be scaled easily by simply running more instances in parallel. The locking mechanism used to prevent race conditions can be configured using the dispatchingLockManager setting. Per default, named locks on the repo database are used. Redis based locks are supported as an alternative.
 
-== SiteLinkLookup ==
+## SiteLinkLookup
 
 A SiteLinkLookup allows the client wiki to determine which local pages are “connected” to a given Item on the repository. Each client wiki can access the repo's sitelink information via a SiteLinkLookup service returned by <code>ClientStore::getSiteLinkLookup()</code>. This information is stored in the wb_items_per_site table in the repo's database.
 
-== ChangeHandler ==
+## ChangeHandler
 
 The <code>handleChanges()</code> method of the ChangeHandler class gets called with a list of changes loaded by a ChangeNotificationJob. A ChangeRunCoalescer is then used to merge consecutive changes by the same user to the same entity, reducing the number of logical events to be processed on the client, and to be presented to the user.
 
 ChangeHandler will then for each change determine the affected pages using the AffectedPagesFinder, which uses information from the wbc_entity_usage table (see usagetracking.wiki). It then uses a WikiPageUpdater to update the client wiki's state: rows are injected into the recentchanges database table, pages using the affected entity's data are re-parsed, and the web cache for these pages is purged.
 
-== WikiPageUpdater ==
+## WikiPageUpdater
 
 The WikiPageUpdater class defines three methods for updating the client wikis state according to a given change on the repository:
 
-; scheduleRefreshLinks()
-: Will re-parse each affected page, allowing the link tables to be updated appropriately. This is done asynchronously using RefreshLinksJobs. No batching is applied, since RefreshLinksJobs are slow and this benefit more from deduplication than from batching.
-; purgeWebCache()
-: Will update the web-cache for each affected page. This is done asynchronously in batches, using HTMLCacheUpdateJob. The batch size is controlled by the purgeCacheBatchSize setting.
-; injectRCRecords()
-: Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using InjectRCRecordsJobs. The batch size is controlled by the recentChangesBatchSize setting.
+* scheduleRefreshLinks()
+  * Will re-parse each affected page, allowing the link tables to be updated appropriately. This is done asynchronously using RefreshLinksJobs. No batching is applied, since RefreshLinksJobs are slow and this benefit more from deduplication than from batching.
+* purgeWebCache()
+  * Will update the web-cache for each affected page. This is done asynchronously in batches, using HTMLCacheUpdateJob. The batch size is controlled by the purgeCacheBatchSize setting.
+* injectRCRecords()
+  * Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using InjectRCRecordsJobs. The batch size is controlled by the recentChangesBatchSize setting.

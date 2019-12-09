@@ -1,4 +1,4 @@
-= Federation =
+# Federation {#topic_federation}
 
 This file describes the concept of federated Wikibase repositories.
 
@@ -13,7 +13,7 @@ As of March 2017, in order to enable access to entities from federated repositor
 
 Note that as of March 2017 it is only possible for Wikibase to use entities from a single repository, either local or foreign. For instance, it is not possible to use both local and foreign items in statements.
 
-== Example ==
+## Example
 
 Below is an excerpt of some configuration of a Wikibase instance providing items, and using properties provided by a foreign repository identified as “prop”. It is assumed that the repository “prop” uses a database identified as “propwiki”, and the “prop:” interwiki prefix has been configured already. There is no repository prefix mapping configured.
 

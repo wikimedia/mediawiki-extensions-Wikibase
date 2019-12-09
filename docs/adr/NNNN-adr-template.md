@@ -1,4 +1,4 @@
-# NNN. Title (short noun phrase)
+# NNNN. Title (short noun phrase) {#adr_nnnn}
 
 Date: YYYY-MM-DD
 

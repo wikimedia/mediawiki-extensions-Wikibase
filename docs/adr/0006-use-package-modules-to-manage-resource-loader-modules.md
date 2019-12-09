@@ -1,4 +1,4 @@
-# 6. Use Package Modules for dependency management within ResourceLoader modules
+# 6. Use Package Modules for dependency management within ResourceLoader modules  {#adr_0006}
 
 Date: 2019-10-24
 

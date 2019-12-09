@@ -1,4 +1,4 @@
-= JSON =
+# JSON {#topic_json}
 
 This document describes the canonical [[w:JSON|JSON]] format used to represent Wikibase entities in the API, in JSON dumps, as well as by Special:EntityData (when using JSON output). This format can be expected to be reasonably stable, and is designed with flexibility and robustness in mind.
 
@@ -6,9 +6,9 @@ For an explanation of the terms used in this document, please refer to the [[d:W
 
 Changes to the JSON format are subject to the [[d:Wikidata:Stable Interface Policy|Stable Interface Policy]].
 
-''NOTE: The canonical copy of this document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited there. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].''
+**NOTE: The canonical copy of this document can be found [https://phabricator.wikimedia.org/diffusion/EWBA/browse/master/docs/json.wiki in the Wikibase source code] and should be edited there. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].**
 
-== JSON Flavor ==
+## JSON Flavor
 
 Wikibase follow the JSON specification as given in RFC 7159, aiming for interoperability in the sense of that RFC. When encoding the Wikibase data structure as JSON, several choices have been made as to how values are represented:
 
@@ -24,217 +24,204 @@ Wikibase follow the JSON specification as given in RFC 7159, aiming for interope
 
 Clients should be ready to process any of the forms given above.
 
-== Top Level Structure ==
+## Top Level Structure
 
-<!-- Note: for compatibility with GitHub’s wikitext renderer, we use <source> instead of <syntaxhighlight> throughout this document. -->
-<source lang="javascript">
-{
-  "id": "Q60",
-  "type": "item",
-  "labels": {},
-  "descriptions": {},
-  "aliases": {},
-  "claims": {},
-  "sitelinks": {},
-  "lastrevid": 195301613,
-  "modified": "2015-02-10T12:42:02Z"
-}
-</source>
+	{
+	  "id": "Q60",
+	  "type": "item",
+	  "labels": {},
+	  "descriptions": {},
+	  "aliases": {},
+	  "claims": {},
+	  "sitelinks": {},
+	  "lastrevid": 195301613,
+	  "modified": "2015-02-10T12:42:02Z"
+	}
 
 The JSON representation consists of the following fields in the top level structure:
 
-; id
-: The canonical ID of the entity.
-; type
-: The entity type identifier. “item” for data items, and “property” for properties.
-; labels
-: Contains the labels in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
-; descriptions
-: Contains the descriptions in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
-; aliases
-: Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
-; claims
-: Contains any number of statements, groups by property. See [[#Statements|Statements]] below.
-; sitelinks
-: Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
-; lastrevid
-: The JSON document's version (this is a MediaWiki revision ID).
-; modified
-: The JSON document's publication date (this is a MediaWiki revision timestamp).
+* id
+  * The canonical ID of the entity.
+* type
+  * The entity type identifier. “item” for data items, and “property” for properties.
+* labels
+  * Contains the labels in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* descriptions
+  * Contains the descriptions in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* aliases
+  * Contains aliases in different languages, see ''[[#Labels, Descriptions and Aliases|Labels, Descriptions and Aliases]]'' below.
+* claims
+  * Contains any number of statements, groups by property. See [[#Statements|Statements]] below.
+* sitelinks
+  * Contains site links to pages on different sites describing the item, see ''[[#Site Links|Site Links]]'' below.
+* lastrevid
+  * The JSON document's version (this is a MediaWiki revision ID).
+* modified
+  * The JSON document's publication date (this is a MediaWiki revision timestamp).
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
-<source lang="javascript">
-{
-  "lastrevid": 195301613,
-  "modified": "2015-02-10T12:42:02Z"
-}
-</source>
+	{
+	  "lastrevid": 195301613,
+	  "modified": "2015-02-10T12:42:02Z"
+	}
 
 API modules also often return extra information related to the entity and the wiki:
 
-<source lang="javascript">
-{
-  "title": "Q60",
-  "pageid": 186,
-  "ns": 0
-}
-</source>
+	{
+	  "title": "Q60",
+	  "pageid": 186,
+	  "ns": 0
+	}
 
-; title
-: The title of the page the entity is stored on (this could also include namespace such as 'Item:Q60')
-; pageid
-: The page id the entity is stored on
-; ns
-: The namespace id the entity is stored in
+* title
+  * The title of the page the entity is stored on (this could also include namespace such as 'Item:Q60')
+* pageid
+  * The page id the entity is stored on
+* ns
+  * The namespace id the entity is stored in
 
-== Labels, Descriptions and Aliases ==
+## Labels, Descriptions and Aliases
 
-<source lang="javascript">
-{
-  "labels": {
-    "en": {
-      "language": "en",
-      "value": "New York City"
-    },
-    "ar": {
-      "language": "ar",
-      "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
-    }
-  },
-  "descriptions": {
-    "en": {
-      "language": "en",
-      "value": "largest city in New York and the United States of America"
-    },
-    "it": {
-      "language": "it",
-      "value": "citt\u00e0 degli Stati Uniti d'America"
-    }
-  },
-  "aliases": {
-    "en": [
-      {
-        "language": "en",
-        "value": "NYC"
-      },
-      {
-        "language": "en",
-        "value": "New York"
-      },
-    ],
-    "fr": [
-      {
-        "language": "fr",
-        "value": "New York City"
-      },
-      {
-        "language": "fr",
-        "value": "NYC"
-      },
-      {
-        "language": "fr",
-        "value": "The City"
-      },
-      {
-        "language": "fr",
-        "value": "City of New York"
-      },
-      {
-        "language": "fr",
-        "value": "La grosse pomme"
-      }
-    ]
-  }
-}
-</source>
+	{
+	  "labels": {
+		"en": {
+		  "language": "en",
+		  "value": "New York City"
+		},
+		"ar": {
+		  "language": "ar",
+		  "value": "\u0645\u062f\u064a\u0646\u0629 \u0646\u064a\u0648 \u064a\u0648\u0631\u0643"
+		}
+	  },
+	  "descriptions": {
+		"en": {
+		  "language": "en",
+		  "value": "largest city in New York and the United States of America"
+		},
+		"it": {
+		  "language": "it",
+		  "value": "citt\u00e0 degli Stati Uniti d'America"
+		}
+	  },
+	  "aliases": {
+		"en": [
+		  {
+			"language": "en",
+			"value": "NYC"
+		  },
+		  {
+			"language": "en",
+			"value": "New York"
+		  },
+		],
+		"fr": [
+		  {
+			"language": "fr",
+			"value": "New York City"
+		  },
+		  {
+			"language": "fr",
+			"value": "NYC"
+		  },
+		  {
+			"language": "fr",
+			"value": "The City"
+		  },
+		  {
+			"language": "fr",
+			"value": "City of New York"
+		  },
+		  {
+			"language": "fr",
+			"value": "La grosse pomme"
+		  }
+		]
+	  }
+	}
 
 Labels, descriptions and aliases are represented by the same basic data structure.
 For each language, there is a record using the following fields:
 
-; language
-: The language code.
-; value
-: The actual label or description.
+* language
+  * The language code.
+* value
+  * The actual label or description.
 
 In the case of aliases, each language is associated with a list of such records,
 while for labels and descriptions the record is associated directly with the language.
 
-== Site Links ==
+## Site Links
 
-<source lang="javascript">
-{
-  "sitelinks": {
-    "afwiki": {
-      "site": "afwiki",
-      "title": "New York Stad",
-      "badges": []
-    },
-    "frwiki": {
-      "site": "frwiki",
-      "title": "New York City",
-      "badges": []
-    },
-    "nlwiki": {
-      "site": "nlwiki",
-      "title": "New York City",
-      "badges": [
-        "Q17437796"
-      ]
-    },
-    "enwiki": {
-      "site": "enwiki",
-      "title": "New York City",
-      "badges": []
-    },
-    "dewiki": {
-      "site": "dewiki",
-      "title": "New York City",
-      "badges": [
-        "Q17437798"
-      ]
-    }
-  }
-}
-</source>
+	{
+	  "sitelinks": {
+		"afwiki": {
+		  "site": "afwiki",
+		  "title": "New York Stad",
+		  "badges": []
+		},
+		"frwiki": {
+		  "site": "frwiki",
+		  "title": "New York City",
+		  "badges": []
+		},
+		"nlwiki": {
+		  "site": "nlwiki",
+		  "title": "New York City",
+		  "badges": [
+			"Q17437796"
+		  ]
+		},
+		"enwiki": {
+		  "site": "enwiki",
+		  "title": "New York City",
+		  "badges": []
+		},
+		"dewiki": {
+		  "site": "dewiki",
+		  "title": "New York City",
+		  "badges": [
+			"Q17437798"
+		  ]
+		}
+	  }
+	}
 
 Site links are given as records for each site identifier. Each such record contains the following fields:
 
-; site
-: The site ID.
-; title
-: The page title.
-; ''badges''
-: Any “badges” associated with the page (such as “featured article”). Badges are given as a list of item IDs.
-; ''url''
-: Optionally, the full URL of the page may be included.
+* site
+  * The site ID.
+* title
+  * The page title.
+* ''badges''
+  * Any “badges” associated with the page (such as “featured article”). Badges are given as a list of item IDs.
+* ''url''
+  * Optionally, the full URL of the page may be included.
 
-== Statements ==
+## Statements
 
-<source lang="javascript">
-{
-  "claims": {
-    "P17": [
-      {
-        "id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
-        "mainsnak": {},
-        "type": "statement",
-        "rank": "normal",
-        "qualifiers": {
-          "P580": [],
-          "P5436": []
-         }
-        "references": [
-           {
-             "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
-             "snaks": []
-           }
-         ]
-      }
-    ]
-  }
-}
-</source>
+	{
+	  "claims": {
+		"P17": [
+		  {
+			"id": "q60$5083E43C-228B-4E3E-B82A-4CB20A22A3FB",
+			"mainsnak": {},
+			"type": "statement",
+			"rank": "normal",
+			"qualifiers": {
+			  "P580": [],
+			  "P5436": []
+			 }
+			"references": [
+			   {
+				 "hash": "d103e3541cc531fa54adcaffebde6bef28d87d32",
+				 "snaks": []
+			   }
+			 ]
+		  }
+		]
+	  }
+	}
 
 A Statement consists of a main Snak, a (possibly empty) list of qualifier Snaks, and a (possibly empty) list of references.
 A Statement is always associated with a Property (semantically, the Statement is ''about'' the Property), and there can be multiple Statements about the same Property in a single Entity.
@@ -242,130 +229,122 @@ This is represented by a map structure that uses Property IDs as keys, and maps 
 
 A Statement record uses the following fields:
 
-; id
-: An arbitrary identifier for the Statement, which is unique across the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
-; type
-: Always ''statement''. (Historically, ''claim'' used to be another valid value here.)
-; ''mainsnak''
-: The Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
-; rank
-: The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
-; qualifiers
-: Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [[#Qualifiers|Qualifiers]] below.
-; ''references''
-: References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see [[#References|References]] below.
+* id
+  * An arbitrary identifier for the Statement, which is unique across the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
+* type
+  * Always ''statement''. (Historically, ''claim'' used to be another valid value here.)
+* ''mainsnak''
+  * The Snak representing the value to be associated with the property. See [[#Snaks|Snaks]] below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
+* rank
+  * The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
+* qualifiers
+  * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See [[#Qualifiers|Qualifiers]] below.
+* ''references''
+  * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see [[#References|References]] below.
 
 (Historically, there was a distinction between Claims, which had only a main snak and qualifiers, and Statements, which also had references.
 Traces of this distinction may still be found in the serialization or in outdated documentation.)
 
-=== Snaks ===
+### Snaks
 
-<source lang="javascript">
-{
-  "claims": {
-    "P17": [
-      {
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P17",
-          "datatype": "wikibase-item",
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "id": "Q30",
-              "numeric-id": 30
-            },
-            "type": "wikibase-entityid"
-          }
-        },
-      },
-      {
-        "mainsnak": {
-          "snaktype": "somevalue",
-          "property": "P17",
-        },
-      }
-    ],
-    "P356": [
-      {
-        "mainsnak": {
-          "snaktype": "value",
-          "property": "P356",
-          "datatype": "string",
-          "datavalue": {
-            "value": "SomePicture.jpg",
-            "type": "string"
-          }
-        },
-      }
-    ]
-  }
-}
-</source>
+	{
+	  "claims": {
+		"P17": [
+		  {
+			"mainsnak": {
+			  "snaktype": "value",
+			  "property": "P17",
+			  "datatype": "wikibase-item",
+			  "datavalue": {
+				"value": {
+				  "entity-type": "item",
+				  "id": "Q30",
+				  "numeric-id": 30
+				},
+				"type": "wikibase-entityid"
+			  }
+			},
+		  },
+		  {
+			"mainsnak": {
+			  "snaktype": "somevalue",
+			  "property": "P17",
+			},
+		  }
+		],
+		"P356": [
+		  {
+			"mainsnak": {
+			  "snaktype": "value",
+			  "property": "P356",
+			  "datatype": "string",
+			  "datavalue": {
+				"value": "SomePicture.jpg",
+				"type": "string"
+			  }
+			},
+		  }
+		]
+	  }
+	}
 
 A Snak provides some kind of information about a specific Property of a given Entity. Currently, there are three kinds of Snaks: ''value'', ''somevalue'' or ''novalue''.    A ''value'' snak represents a specific value for the property, which ''novalue'' and ''somevalue'' only express that there is no, or respectively some unknown, value.
 
 A Snak is represented by providing the following fields:
 
-; snaktype
-: The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
-; property
-: The ID of the property this Snak is about.
-; datatype
-: The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on [[d:Special:ListDatatypes|Special:ListDatatypes]].
-; datavalue
-: If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
+* snaktype
+  * The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
+* property
+  * The ID of the property this Snak is about.
+* datatype
+  * The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on [[d:Special:ListDatatypes|Special:ListDatatypes]].
+* datavalue
+  * If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See [[#Data Values|Data Values]] below.
 
-==== Data Values ====
+#### Data Values
 
-<source lang="javascript">
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "id": "Q30",
-              "numeric-id": 30
-            },
-            "type": "wikibase-entityid"
-          }
-
-          "datavalue": {
-            "value": "SomePicture.jpg",
-            "type": "string"
-          }
-</source>
+	"datavalue": {
+	  "value": {
+		"entity-type": "item",
+		"id": "Q30",
+		"numeric-id": 30
+	  },
+	  "type": "wikibase-entityid"
+	}
+	
+	"datavalue": {
+	  "value": "SomePicture.jpg",
+	  "type": "string"
+	}
 
 Data value records represent a value of a specific type. They consist of two fields:
 
-; type
-: The value type. This defines the structure of the ''value'' field, and is not to be confused with the Snak's data type (which is derived from the Snak's Property's data type). The value type does not allow for interpretation of the value, only for processing of the raw structure. As an example, a link to a web page may use the data type “url”, but have the value type “string”.
-; value
-: The actual value. This field may contain a single string, a number, or a complex structure. The structure is defined by the ''type'' field.
+* type
+  * The value type. This defines the structure of the ''value'' field, and is not to be confused with the Snak's data type (which is derived from the Snak's Property's data type). The value type does not allow for interpretation of the value, only for processing of the raw structure. As an example, a link to a web page may use the data type “url”, but have the value type “string”.
+* value
+  * The actual value. This field may contain a single string, a number, or a complex structure. The structure is defined by the ''type'' field.
 
 Some value types and their structure are defined in the following sections.
 
-===== string =====
+##### string
 
-<source lang="javascript">
-          "datavalue": {
-            "value": "SomePicture.jpg",
-            "type": "string"
-          }
-</source>
+	"datavalue": {
+	  "value": "SomePicture.jpg",
+	  "type": "string"
+	}
 
 Strings are given as simple string literals.
 
-===== wikibase-entityid =====
+##### wikibase-entityid
 
-<source lang="javascript">
-          "datavalue": {
-            "value": {
-              "entity-type": "item",
-              "id": "Q30",
-              "numeric-id": 30
-            },
-            "type": "wikibase-entityid"
-          }
-</source>
+	"datavalue": {
+	  "value": {
+		"entity-type": "item",
+		"id": "Q30",
+		"numeric-id": 30
+	  },
+	  "type": "wikibase-entityid"
+	}
 
 Entity IDs are used to reference entities on the same repository. They are represented
 by a map structure containing three fields:
@@ -376,86 +355,80 @@ by a map structure containing three fields:
 
 ''WARNING'': not all entity IDs have a numeric ID – using the full ID is highly recommended.
 
-===== globecoordinate =====
+##### globecoordinate
 
-<source lang="javascript">
-          "datavalue": {
-            "value": {
-              "latitude": 52.516666666667,
-              "longitude": 13.383333333333,
-              "altitude": null,
-              "precision": 0.016666666666667,
-              "globe": "http:\/\/www.wikidata.org\/entity\/Q2"
-            },
-            "type": "globecoordinate"
-          }
-</source>
+	"datavalue": {
+	  "value": {
+		"latitude": 52.516666666667,
+		"longitude": 13.383333333333,
+		"altitude": null,
+		"precision": 0.016666666666667,
+		"globe": "http:\/\/www.wikidata.org\/entity\/Q2"
+	  },
+	  "type": "globecoordinate"
+	}
 
-; latitude
-: The latitude part of the coordinate in degrees, as a float literal (or an equivalent string).
-; longitude
-: The longitude part of the coordinate in degrees, as a float literal (or an equivalent string).
-; precision
-: The coordinate's precision, in (fractions of) degrees, given as a float literal (or an equivalent string).
-; globe
-: The URI of a reference globe. This would typically refer to a data item on wikidata.org. This is usually just an indication of the celestial body (e.g. Q2 = earth), but could be more specific, like WGS 84 or ED50.
-; altitude (''DEPRECATED'')
-: No longer used. Will be dropped in the future.
+* latitude
+  * The latitude part of the coordinate in degrees, as a float literal (or an equivalent string).
+* longitude
+  * The longitude part of the coordinate in degrees, as a float literal (or an equivalent string).
+* precision
+  * The coordinate's precision, in (fractions of) degrees, given as a float literal (or an equivalent string).
+* globe
+  * The URI of a reference globe. This would typically refer to a data item on wikidata.org. This is usually just an indication of the celestial body (e.g. Q2 = earth), but could be more specific, like WGS 84 or ED50.
+* altitude (''DEPRECATED'')
+  * No longer used. Will be dropped in the future.
 
-===== quantity =====
+##### quantity
 
-<source lang="javascript">
-          "datavalue": {
-            "value":{
-              "amount":"+10.38",
-              "upperBound":"+10.375",
-              "lowerBound":"+10.385",
-              "unit":"http://www.wikidata.org/entity/Q712226"
-            },
-            "type":"quantity"
-          }
-</source>
+	"datavalue": {
+	  "value":{
+		"amount":"+10.38",
+		"upperBound":"+10.375",
+		"lowerBound":"+10.385",
+		"unit":"http://www.wikidata.org/entity/Q712226"
+	  },
+	  "type":"quantity"
+	}
 
 Quantity values are given as a map with the following fields:
 
-; amount
-: The nominal value of the quantity, as an arbitrary precision decimal string. The string always starts with a character indicating the sign of the value, either “+” or “-”.
-; upperBound
-: Optionally, the upper bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the upperBound field is given, the lowerBound field must also be given.
-; lowerBound
-: Optionally, the lower bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the lowerBound field is given, the upperBound field must also be given.
-; unit
-: The URI of a unit (or “1” to indicate a unit-less quantity). This would typically refer to a data item on wikidata.org, e.g. http://www.wikidata.org/entity/Q712226 for “square kilometer”.
+* amount
+  * The nominal value of the quantity, as an arbitrary precision decimal string. The string always starts with a character indicating the sign of the value, either “+” or “-”.
+* upperBound
+  * Optionally, the upper bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the upperBound field is given, the lowerBound field must also be given.
+* lowerBound
+  * Optionally, the lower bound of the quantity's uncertainty interval, using the same notation as the amount field. If not given or null, the uncertainty (or precision) of the quantity is not known. If the lowerBound field is given, the upperBound field must also be given.
+* unit
+  * The URI of a unit (or “1” to indicate a unit-less quantity). This would typically refer to a data item on wikidata.org, e.g. http://www.wikidata.org/entity/Q712226 for “square kilometer”.
 
-===== time =====
+##### time
 
-<source lang="javascript">
-          "datavalue": {
-            "value": {
-              "time": "+2001-12-31T00:00:00Z",
-              "timezone": 0,
-              "before": 0,
-              "after": 0,
-              "precision": 11,
-              "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-            },
-            "type": "time"
-          }
-</source>
+	"datavalue": {
+	  "value": {
+		"time": "+2001-12-31T00:00:00Z",
+		"timezone": 0,
+		"before": 0,
+		"after": 0,
+		"precision": 11,
+		"calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+	  },
+	  "type": "time"
+	}
 
 Time values are given as a map with the following fields:
-; time
-: The format and interpretation of this string depends on the calendar model. Currently, only Julian and Gregorian dates are supported.
-: The format used for Gregorian and Julian dates use a notation resembling ISO 8601. E.g. ''“+1994-01-01T00:00:00Z”''. The year is represented by at least four digits, zeros are added on the left side as needed. Years BCE are represented as negative numbers, using the historical numbering, in which year 0 is undefined, and the year 1 BCE is represented as ''-0001,'' the year 44 BCE is represented as ''-0044'', etc., like XSD 1.0 (ISO 8601:1988) does. In contrast, the [[Wikibase/Indexing/RDF Dump Format|RDF mapping]] relies on XSD 1.1 (ISO 8601:2004) dates that use the [[:en:Proleptic Gregorian calendar|proleptic Gregorian calendar]] and [[:en:astronomical year numbering|astronomical year numbering]], where the year 1 BCE is represented as ''+0000'' and the year 44 BCE is represented as ''-0043''. See Wikipedia for more information about the [[:en:0_(year)#ISO_8601|year zero and ISO 8601]]. 
-: Month and day may be 00 if they are unknown or insignificant. The day of the month may have values between 0 and 31 for any month, to accommodate “leap dates” like [[:en:February 30|February 30]]. Hour, minute, and second are currently unused and should always be 00.
-: ''Note'': more calendar models using a completely different notation may be supported in the future. Candidates include [[:en:julian day|Julian day]] and the [[:en:Hebrew calendar|Hebrew calendar]].
-: ''Note'': the notation for Julian and Gregorian dates may be changed to omit any unknown or insignificant parts. E.g. if only the year 1952 is known, this may in the future be represented as just “''+1952''” instead of currently ''“+1952-00-00T00:00:00Z”'' (which some libraries may turn into something like 1951-12-31) and the 19th century may be represented as “''+18**''”.
-; timezone
-: Signed integer. Currently unused, and should always be 0. In the future, timezone information will be given as an offset from UTC in minutes. For dates before the modern implementation of UTC in 1972, this is the offset of the time zone from [[w:en:universal time|universal time]]. Before the implementation of time zones, this is the longitude of the place of the event, expressed in the range &minus;180° to 180° (positive is east of Greenwich), multiplied by 4 to convert to minutes.
-; calendarmodel
-: A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on the repository
-; precision
-: To what unit is the given date/time significant? Given as an integer indicating one of the following units:
+* time
+  * The format and interpretation of this string depends on the calendar model. Currently, only Julian and Gregorian dates are supported.
+  * The format used for Gregorian and Julian dates use a notation resembling ISO 8601. E.g. ''“+1994-01-01T00:00:00Z”''. The year is represented by at least four digits, zeros are added on the left side as needed. Years BCE are represented as negative numbers, using the historical numbering, in which year 0 is undefined, and the year 1 BCE is represented as ''-0001,'' the year 44 BCE is represented as ''-0044'', etc., like XSD 1.0 (ISO 8601:1988) does. In contrast, the [[Wikibase/Indexing/RDF Dump Format|RDF mapping]] relies on XSD 1.1 (ISO 8601:2004) dates that use the [[:en:Proleptic Gregorian calendar|proleptic Gregorian calendar]] and [[:en:astronomical year numbering|astronomical year numbering]], where the year 1 BCE is represented as ''+0000'' and the year 44 BCE is represented as ''-0043''. See Wikipedia for more information about the [[:en:0_(year)#ISO_8601|year zero and ISO 8601]]. 
+  * Month and day may be 00 if they are unknown or insignificant. The day of the month may have values between 0 and 31 for any month, to accommodate “leap dates” like [[:en:February 30|February 30]]. Hour, minute, and second are currently unused and should always be 00.
+  * ''Note'': more calendar models using a completely different notation may be supported in the future. Candidates include [[:en:julian day|Julian day]] and the [[:en:Hebrew calendar|Hebrew calendar]].
+  * ''Note'': the notation for Julian and Gregorian dates may be changed to omit any unknown or insignificant parts. E.g. if only the year 1952 is known, this may in the future be represented as just “''+1952''” instead of currently ''“+1952-00-00T00:00:00Z”'' (which some libraries may turn into something like 1951-12-31) and the 19th century may be represented as “''+18**''”.
+* timezone
+  * Signed integer. Currently unused, and should always be 0. In the future, timezone information will be given as an offset from UTC in minutes. For dates before the modern implementation of UTC in 1972, this is the offset of the time zone from [[w:en:universal time|universal time]]. Before the implementation of time zones, this is the longitude of the place of the event, expressed in the range &minus;180° to 180° (positive is east of Greenwich), multiplied by 4 to convert to minutes.
+* calendarmodel
+  * A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on the repository
+* precision
+  * To what unit is the given date/time significant? Given as an integer indicating one of the following units:
 ** 0: 1 Gigayear
 ** 1: 100 Megayears
 ** 2: 10 Megayears
@@ -471,63 +444,60 @@ Time values are given as a map with the following fields:
 ** 12: hours ''(unused)''
 ** 13: minutes ''(unused)''
 ** 14: seconds ''(unused)''
-; ''before''
-: Begin of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
-; ''after''
-: End of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
+* ''before''
+  * Begin of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
+* ''after''
+  * End of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
 
-=== Qualifiers ===
+### Qualifiers
 
-<source lang="javascript">
-        "qualifiers": {
-          "P580": [
-            {
-              "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
-              "snaktype": "value",
-              "property": "P580",
-              "datatype": "time",
-              "datavalue": {
-                "value": {
-                  "time": "+00000001994-01-01T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-                },
-                "type": "time"
-              }
-            }
-          ],
-          "P582": [
-            {
-              "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
-              "snaktype": "value",
-              "property": "P582",
-              "datatype": "time",
-              "datavalue": {
-                "value": {
-                  "time": "+00000002001-12-31T00:00:00Z",
-                  "timezone": 0,
-                  "before": 0,
-                  "after": 0,
-                  "precision": 11,
-                  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
-                },
-                "type": "time"
-              }
-            }
-          ]
-        }
-</source>
+	"qualifiers": {
+	  "P580": [
+		{
+		  "hash": "sssde3541cc531fa54adcaffebde6bef28g6hgjd",
+		  "snaktype": "value",
+		  "property": "P580",
+		  "datatype": "time",
+		  "datavalue": {
+	"value": {
+	  "time": "+00000001994-01-01T00:00:00Z",
+	  "timezone": 0,
+	  "before": 0,
+	  "after": 0,
+	  "precision": 11,
+	  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+	},
+	"type": "time"
+		  }
+		}
+	  ],
+	  "P582": [
+		{
+		  "hash": "f803e3541cc531fa54n7a9ffebde6bef28d87ddv",
+		  "snaktype": "value",
+		  "property": "P582",
+		  "datatype": "time",
+		  "datavalue": {
+	"value": {
+	  "time": "+00000002001-12-31T00:00:00Z",
+	  "timezone": 0,
+	  "before": 0,
+	  "after": 0,
+	  "precision": 11,
+	  "calendarmodel": "http:\/\/www.wikidata.org\/entity\/Q1985727"
+	},
+	"type": "time"
+		  }
+		}
+	  ]
+	}
 
 Qualifiers provide context for a Statement's value, such as a point in time, a method of measurement, etc.
 Qualifiers are given as snaks. The set of qualifiers for a statement is provided grouped by property ID,
 resulting in a map which associates property IDs with one list of snaks each.
 
-=== References ===
+### References
 
-<source lang="javascript">
         "references": [
             {
                 "hash": "7eb64cf9621d34c54fd4bd040ed4b61a88c4a1a0",
@@ -567,18 +537,16 @@ resulting in a map which associates property IDs with one list of snaks each.
           ]
         }
       ]
-</source>
 
 References provide provenance/authority information for the main Snak and qualifiers of an individual Statement.
 Each reference is a set of Snaks structured in a similar way to how qualifiers are represented:
 Snaks about the same property are grouped together in a list and made accessible by putting all these lists into a map,
 using the property IDs as keys. By ''snaks-order'' the order of those snaks is shown by their property IDs.
 
-== Example ==
+## Example
 
 Below is an example of an extract of a complete entity represented in JSON.
 
-<source lang="javascript">
 {
   "pageid": 186,
   "ns": 0,
@@ -976,4 +944,3 @@ Below is an example of an extract of a complete entity represented in JSON.
     }
   }
 }
-</source>
