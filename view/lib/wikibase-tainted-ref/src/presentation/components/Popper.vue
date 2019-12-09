@@ -19,7 +19,7 @@
 				</small>
 			</h4>
 			<p class="wb-tr-popper-text">
-				The value of "point in time" was changed, but the reference remained the same.
+				{{ popperText }}
 			</p>
 		</div>
 	</div>
@@ -40,6 +40,10 @@ export default class Popper extends Vue {
 
 	public mounted(): void {
 		( this.$el as HTMLElement ).focus();
+	}
+
+	public get popperText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-text' );
 	}
 
 	public onFocusout( event: FocusEvent ): void {

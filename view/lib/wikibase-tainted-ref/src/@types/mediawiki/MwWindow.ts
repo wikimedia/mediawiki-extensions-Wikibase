@@ -49,6 +49,8 @@ interface MediaWiki {
 	util: MwUtil;
 	/** @see https://www.mediawiki.org/wiki/ResourceLoader/Core_modules#mw.track */
 	track( topic: string, data: object|number|string ): void;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw-method-message */
+	message( key: string ): Message;
 }
 
 export type HookRegistry = ( name: string ) => Hook;
@@ -59,6 +61,10 @@ export interface Hook {
 
 export interface MwUtil {
 	getUrl( pageName: string ): string;
+}
+
+interface Message {
+	text(): string;
 }
 
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/OO.ui.WindowInstance */
