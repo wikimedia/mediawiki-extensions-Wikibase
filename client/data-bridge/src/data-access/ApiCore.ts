@@ -5,7 +5,7 @@ import Api, {
 	ApiAction,
 	ApiError,
 	ApiParams,
-	ApiResponses,
+	ApiResponsesMap,
 } from '@/definitions/data-access/Api';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import jqXHR = JQuery.jqXHR;
@@ -25,7 +25,7 @@ export default class ApiCore implements Api {
 		this.api = api;
 	}
 
-	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponses[action]> {
+	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[action]> {
 		for ( const name of Object.keys( params ) ) {
 			const param = params[ name ];
 			if ( param instanceof Set ) {

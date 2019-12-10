@@ -2,7 +2,7 @@ import Api, {
 	ApiAction,
 	ApiParams,
 	ApiResponse,
-	ApiResponses,
+	ApiResponsesMap,
 } from '@/definitions/data-access/Api';
 
 /**
@@ -74,7 +74,7 @@ export default class BatchingApi implements Api {
 		this.requests = [];
 	}
 
-	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponses[ action ]> {
+	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[ action ]> {
 		for ( const request of this.requests ) {
 			const mergedParams = this.mergeParams( request.params, params );
 			if ( mergedParams !== false ) {
