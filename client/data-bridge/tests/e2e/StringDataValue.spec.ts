@@ -144,9 +144,10 @@ describe( 'string data value', () => {
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
-				languagefallback: 1,
-				languages: pageLanguage,
+				languagefallback: true,
+				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype' ],
+				formatversion: '2',
 			} );
 		} );
 
@@ -181,9 +182,10 @@ describe( 'string data value', () => {
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
-				languagefallback: 1,
-				languages: pageLanguage,
+				languagefallback: true,
+				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype' ],
+				formatversion: '2',
 			} );
 		} );
 
@@ -224,9 +226,10 @@ describe( 'string data value', () => {
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
-				languagefallback: 1,
-				languages: pageLanguage,
+				languagefallback: true,
+				languages: [ pageLanguage ],
 				props: [ 'labels', 'datatype' ],
+				formatversion: '2',
 			} );
 		} );
 	} );

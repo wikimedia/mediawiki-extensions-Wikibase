@@ -54,6 +54,7 @@ export type ApiResponse = {
 
 export interface ApiResponses {
 	query: ApiQueryResponse;
+	wbgetentities: ApiWbgetentitiesResponse;
 	[ action: string ]: ApiResponse;
 }
 export type ApiAction = keyof ApiResponses & string;
@@ -75,6 +76,17 @@ export interface ApiQueryResponsePage {
 	title: string;
 	missing?: true;
 	invalid?: true;
+}
+
+export interface ApiWbgetentitiesResponse extends ApiResponse {
+	entities: {
+		[ entityId: string ]: ApiResponseEntity;
+	};
+}
+
+export interface ApiResponseEntity {
+	id: string;
+	missing?: ''; // string '' instead of boolean true – see T145050
 }
 
 export interface ApiError {

@@ -13,12 +13,11 @@ import {
 	mockMwEnv,
 } from '../../util/mocks';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
-import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
+import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
-import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
+import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import createServices from '@/services/createServices';
 import { budge } from '../../util/timer';
 
@@ -82,13 +81,12 @@ describe( 'init', () => {
 			( window as MwWindow ).mw.language,
 			( window as MwWindow ).$.uls!.data,
 		) );
-		const entityInfoDispatcher = new ApiEntityInfoDispatcher( mwApi, [ 'labels', 'datatype' ] );
-		expectedServices.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
+		expectedServices.set( 'entityLabelRepository', new ApiEntityLabelRepository(
 			'en',
-			entityInfoDispatcher,
+			api,
 		) );
-		expectedServices.set( 'propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository(
-			entityInfoDispatcher,
+		expectedServices.set( 'propertyDatatypeRepository', new ApiPropertyDataTypeRepository(
+			api,
 		) );
 		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
 			( window as MwWindow ).mw.message,

@@ -9,9 +9,8 @@ import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
-import DispatchingPropertyDataTypeRepository from '@/data-access/DispatchingPropertyDataTypeRepository';
-import DispatchingEntityLabelRepository from '@/data-access/DispatchingEntityLabelRepository';
-import ApiEntityInfoDispatcher from '@/data-access/ApiEntityInfoDispatcher';
+import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
+import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
 	const services = new ServiceContainer();
@@ -42,18 +41,13 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		editTags.length === 0 ? undefined : editTags,
 	) );
 
-	const foreignApiEntityInfoDispatcher = new ApiEntityInfoDispatcher(
-		repoMwApi,
-		[ 'labels', 'datatype' ],
-	);
-
-	services.set( 'entityLabelRepository', new DispatchingEntityLabelRepository(
+	services.set( 'entityLabelRepository', new ApiEntityLabelRepository(
 		mwWindow.mw.config.get( 'wgPageContentLanguage' ),
-		foreignApiEntityInfoDispatcher,
+		repoApi,
 	) );
 
-	services.set( 'propertyDatatypeRepository', new DispatchingPropertyDataTypeRepository(
-		foreignApiEntityInfoDispatcher,
+	services.set( 'propertyDatatypeRepository', new ApiPropertyDataTypeRepository(
+		repoApi,
 	) );
 
 	if ( mwWindow.$.uls === undefined ) {
