@@ -1,6 +1,5 @@
-import Api, {
-	ApiQueryResponseBody,
-} from '@/definitions/data-access/Api';
+import Api from '@/definitions/data-access/Api';
+import { ApiQueryResponseBody } from '@/definitions/data-access/ApiQuery';
 import WikibaseRepoConfigRepository, {
 	WikibaseRepoConfiguration,
 } from '@/definitions/data-access/WikibaseRepoConfigRepository';

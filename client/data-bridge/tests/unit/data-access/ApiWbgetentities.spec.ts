@@ -6,7 +6,7 @@ import ApiErrors from '@/data-access/error/ApiErrors';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import { ApiWbgetentitiesResponse } from '@/definitions/data-access/Api';
+import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetentities';
 import jqXHR = JQuery.jqXHR;
 
 describe( 'apiEntity', () => {

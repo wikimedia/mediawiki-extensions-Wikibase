@@ -1,3 +1,6 @@
+import { ApiQueryResponse } from '@/definitions/data-access/ApiQuery';
+import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetentities';
+
 /**
  * An interface for MediaWiki API requests.
  * Some implementations may merge compatible requests for efficiency.
@@ -58,36 +61,6 @@ export interface ApiResponses {
 	[ action: string ]: ApiResponse;
 }
 export type ApiAction = keyof ApiResponses & string;
-
-export interface ApiQueryResponse extends ApiResponse {
-	query: ApiQueryResponseBody;
-}
-
-export interface ApiQueryResponseBody {
-	normalized?: {
-		fromencoded: boolean;
-		from: string;
-		to: string;
-	}[];
-	pages?: ApiQueryResponsePage[];
-}
-
-export interface ApiQueryResponsePage {
-	title: string;
-	missing?: true;
-	invalid?: true;
-}
-
-export interface ApiWbgetentitiesResponse extends ApiResponse {
-	entities: {
-		[ entityId: string ]: ApiResponseEntity;
-	};
-}
-
-export interface ApiResponseEntity {
-	id: string;
-	missing?: ''; // string '' instead of boolean true – see T145050
-}
 
 export interface ApiError {
 	code: string;

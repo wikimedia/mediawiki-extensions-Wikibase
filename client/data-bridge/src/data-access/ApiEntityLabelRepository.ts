@@ -1,9 +1,9 @@
 import {
 	convertNoSuchEntityError,
 	getApiEntity,
-	EntityWithLabels,
 } from '@/data-access/ApiWbgetentities';
 import Api from '@/definitions/data-access/Api';
+import { EntityWithLabels } from '@/definitions/data-access/ApiWbgetentities';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
 import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWithoutLabelInLanguageException';
