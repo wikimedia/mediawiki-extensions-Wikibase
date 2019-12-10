@@ -424,5 +424,6 @@
 	"wikibase-shortcopyrightwarning-heading": "Licenstillskrivelse",
 	"wikibase-entity-save-error-heading": "Någonting gick fel",
 	"wikibase-entity-save-error-message": "Din ändring kunde inte publiceras. Du kan försöka klicka på publiceringsknappen igen.",
-	"wikibase-tainted-ref-warning-icon-title": "Detta uttalande har några möjliga problem"
+	"wikibase-tainted-ref-warning-icon-title": "Detta uttalande har några möjliga problem",
+	"wikibase-tainted-ref-popper-text": "Värdet ändrades, men referensen förblev densamma."
 }

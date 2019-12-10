@@ -437,5 +437,6 @@
 	"wikibase-shortcopyrightwarning-heading": "إسناد الترخيص",
 	"wikibase-entity-save-error-heading": "حدث خطأ ما",
 	"wikibase-entity-save-error-message": "لا يمكن نشر تغييرك، يمكنك محاولة النقر فوق زر النشر مرة أخرى.",
-	"wikibase-tainted-ref-warning-icon-title": "يحتوي هذا البيان على بعض القضايا المحتملة"
+	"wikibase-tainted-ref-warning-icon-title": "يحتوي هذا البيان على بعض القضايا المحتملة",
+	"wikibase-tainted-ref-popper-text": "تغيرت القيمة، لكن المرجع ظل كما هو."
 }

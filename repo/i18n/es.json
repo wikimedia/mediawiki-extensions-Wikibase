@@ -39,7 +39,8 @@
 			"MarcoAurelio",
 			"Ladsgroup",
 			"Adjen",
-			"Jelou"
+			"Jelou",
+			"Ihojose"
 		]
 	},
 	"wikibase-desc": "Repositorio de datos estructurados",
@@ -394,5 +395,6 @@
 	"wikibase-search-bad-entity-type": "Tipo de entidad erróneo: $1",
 	"wikibase-search-bad-profile-name": "Nombre de perfil de búsqueda erróneo: $1",
 	"wikibase-search-namespace-mix": "No se admite mezclar los espacios de nombres de las entidades y de los artículos. Solo se buscará en el espacio de nombres de las entidades.",
-	"wikibase-entity-save-error-heading": "Se produjo un error"
+	"wikibase-entity-save-error-heading": "Se produjo un error",
+	"wikibase-tainted-ref-popper-text": "El valor cambió, pero la referencia es la misma."
 }
