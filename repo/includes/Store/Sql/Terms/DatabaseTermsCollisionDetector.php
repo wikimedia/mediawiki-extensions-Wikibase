@@ -4,7 +4,9 @@ namespace Wikibase\Repo\Store\Sql\Terms;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
@@ -34,7 +36,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	private $databaseEntityTermsTableProvider;
 
 	/**
-	 * @param string $entityType one of the two supported types: 'item' or 'property'
+	 * @param string $entityType one of the two supported types: Item::ENTITY_TYPE or Property::ENTITY_TYPE
 	 * @param ILoadBalancer $loadBalancer
 	 * @param TypeIdsLookup $typeIdsLookup
 	 *
@@ -45,7 +47,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 		ILoadBalancer $loadBalancer,
 		TypeIdsLookup $typeIdsLookup
 	) {
-		if ( !in_array( $entityType, [ 'item', 'property' ] ) ) {
+		if ( !in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
 			throw new InvalidArgumentException(
 				'$entityType must be a string, with either "item" or "property" as a value'
 			);
@@ -127,9 +129,9 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	private function composeEntityId( $numericEntityId ) {
-		if ( $this->entityType === 'item' ) {
+		if ( $this->entityType === Item::ENTITY_TYPE ) {
 			return ItemId::newFromNumber( $numericEntityId );
-		} elseif ( $this->entityType === 'property' ) {
+		} elseif ( $this->entityType === Property::ENTITY_TYPE ) {
 			return PropertyId::newFromNumber( $numericEntityId );
 		}
 	}

@@ -32,7 +32,7 @@ class FingerprintChangeOpFactoryTest extends \PHPUnit\Framework\TestCase {
 		$innerChangeOp = $this->createMock( ChangeOps::class );
 		$op = $this->newChangeOpFactory()->newFingerprintChangeOp( $innerChangeOp );
 		$this->assertInstanceOf( ChangeOp::class, $op );
-		$this->assertNotEquals( $op, $innerChangeOp );
+		$this->assertNotSame( $op, $innerChangeOp );
 	}
 
 	public function testNewAddAliasesOp() {

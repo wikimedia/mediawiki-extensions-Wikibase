@@ -11,21 +11,23 @@ use SpecialPageExecutor;
 use Status;
 use ValueValidators\Result;
 use WebRequest;
-use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\CopyrightMessageBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\LabelDescriptionDuplicateDetector;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
@@ -110,7 +112,11 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$maxLength,
 				self::$languageCodes,
 				$this->getIdParser(),
-				$this->getLabelDescriptionDuplicateDetector()
+				$this->getLabelDescriptionDuplicateDetector(),
+				$this->createMock( TermsCollisionDetectorFactory::class ),
+				$this->createMock( TermLookup::class ),
+				[],
+				0
 			)
 		);
 	}

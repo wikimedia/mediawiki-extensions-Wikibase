@@ -11,6 +11,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpFingerprintResult;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\ChangeOpsResult;
 use Wikibase\Repo\ChangeOp\NullChangeOp;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpFingerprint
@@ -22,8 +23,12 @@ use Wikibase\Repo\ChangeOp\NullChangeOp;
  */
 class ChangeOpFingerprintTest extends TestCase {
 
+	/** @var TermValidatorFactory */
+	private $termValidatorFactory;
+
 	public function setUp(): void {
 		$this->innerChangeOp = $this->createMock( ChangeOps::class );
+		$this->termValidatorFactory = $this->createMock( TermValidatorFactory::class );
 	}
 
 	public function testAdd() {
@@ -33,7 +38,7 @@ class ChangeOpFingerprintTest extends TestCase {
 			->method( 'add' )
 			->with( $nullChangeOp );
 
-		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp );
+		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp, $this->termValidatorFactory );
 		$fingerprintChangeOp->add( $nullChangeOp );
 	}
 
@@ -46,7 +51,7 @@ class ChangeOpFingerprintTest extends TestCase {
 		$this->innerChangeOp->method( 'getChangeOps' )
 			->willReturn( $changeOps );
 
-		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp );
+		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp, $this->termValidatorFactory );
 		$this->assertEquals( $changeOps, $fingerprintChangeOp->getChangeOps() );
 	}
 
@@ -57,7 +62,7 @@ class ChangeOpFingerprintTest extends TestCase {
 		$this->innerChangeOp->method( 'validate' )
 			->willReturn( $validateResult );
 
-		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp );
+		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp, $this->termValidatorFactory );
 		$this->assertSame( $validateResult, $fingerprintChangeOp->validate( $entity ) );
 	}
 
@@ -67,7 +72,7 @@ class ChangeOpFingerprintTest extends TestCase {
 		$this->innerChangeOp->method( 'getActions' )
 			->willReturn( $actions );
 
-		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp );
+		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp, $this->termValidatorFactory );
 		$this->assertEquals( $actions, $fingerprintChangeOp->getActions() );
 	}
 
@@ -78,7 +83,7 @@ class ChangeOpFingerprintTest extends TestCase {
 		$this->innerChangeOp->method( 'apply' )
 			->willReturn( $innerChangeOpResult );
 
-		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp );
+		$fingerprintChangeOp = new ChangeOpFingerprint( $this->innerChangeOp, $this->termValidatorFactory );
 		$fingerprintChangeOpResult = $fingerprintChangeOp->apply( $this->createMock( EntityDocument::class ) );
 
 		$this->assertInstanceOf( ChangeOpFingerprintResult::class, $fingerprintChangeOpResult );

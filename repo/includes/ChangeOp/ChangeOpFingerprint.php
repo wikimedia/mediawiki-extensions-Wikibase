@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 
 /**
@@ -16,8 +17,12 @@ class ChangeOpFingerprint extends ChangeOps {
 	/** @var ChangeOps */
 	private $innerChangeOps;
 
-	public function __construct( ChangeOps $innerChangeOps ) {
+	/** @var TermValidatorFactory */
+	private $termValidatorFactory;
+
+	public function __construct( ChangeOps $innerChangeOps, TermValidatorFactory $termValidatorFactory ) {
 		$this->innerChangeOps = $innerChangeOps;
+		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
 	public function add( $changeOps ) {
@@ -40,6 +45,6 @@ class ChangeOpFingerprint extends ChangeOps {
 		$result = $this->innerChangeOps->apply( $entity, $summary );
 
 		'@phan-var ChangeOpsResult $result';
-		return new ChangeOpFingerprintResult( $result );
+		return new ChangeOpFingerprintResult( $result, $this->termValidatorFactory );
 	}
 }
