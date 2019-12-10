@@ -21,10 +21,11 @@
  *
  * - A string or integer, for a plain parameter that must be exactly this value.
  * - A boolean, which is completely omitted if false.
- * - A Set of strings, which may be merged with other sets from compatible requests.
+ * - A Set of strings or integers, which may be merged with other sets from compatible requests.
+ *   (Integers are interchangeable with their string representations.)
  *   This should be used for most multi-value parameters,
  *   replacing most uses of arrays with MediaWiki’s API class.
- * - An Array of strings, which will never be merged with other requests.
+ * - An Array of strings or integers, which will never be merged with other requests.
  *   This is mainly useful for parameters that allow duplicate values,
  *   or where the order is significant.
  *
@@ -44,7 +45,7 @@ export default interface Api {
 
 export interface ApiParams<action extends ApiAction> {
 	action: action;
-	[ name: string ]: string | number | boolean | string[] | Set<string>;
+	[ name: string ]: string | number | boolean | ( string|number )[] | Set<string|number>;
 }
 
 export type ApiResponse = {

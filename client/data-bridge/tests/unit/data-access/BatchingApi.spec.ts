@@ -48,7 +48,7 @@ describe( 'BatchingApi', () => {
 			],
 		],
 		[
-			'merge compatible param, three sets',
+			'merge compatible param, three sets of strings',
 			[
 				{ titles: new Set( [ 'Title A', 'Title B', 'Title C' ] ) },
 				{ titles: new Set( [ 'Title A', 'Title AA', 'Title AAA' ] ) },
@@ -59,6 +59,14 @@ describe( 'BatchingApi', () => {
 				'Title AA', 'Title AAA',
 				'Title',
 			] ) } ],
+		],
+		[
+			'merge compatible param, set of strings and set of integers',
+			[
+				{ pageids: new Set( [ 123, 456 ] ) },
+				{ pageids: new Set( [ '123', '456' ] ) },
+			],
+			[ { pageids: new Set( [ '123', '456' ] ) } ],
 		],
 		[
 			'merge compatible param, two booleans',
