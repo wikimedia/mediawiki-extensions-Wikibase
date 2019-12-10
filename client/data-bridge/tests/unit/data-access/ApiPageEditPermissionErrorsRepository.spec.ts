@@ -4,7 +4,6 @@ import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
 import { PermissionErrorType } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
 import { mockApi } from '../../util/mocks';
-import { expectError } from '../../util/promise';
 import jqXHR = JQuery.jqXHR;
 
 describe( 'ApiPageEditPermissionErrorsRepository', () => {
@@ -192,29 +191,29 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} );
 	} );
 
-	it( 'passes through rejection from underlying API', async () => {
+	it( 'passes through rejection from underlying API', () => {
 		const rejection = new JQueryTechnicalError( {} as jqXHR );
 		const api = mockApi( undefined, rejection );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( '' ) );
-
-		expect( error ).toBe( rejection );
+		return expect( repo.getPermissionErrors( '' ) )
+			.rejects
+			.toBe( rejection );
 	} );
 
-	it( 'rejects with TechnicalProblem if API is missing page', async () => {
+	it( 'rejects with TechnicalProblem if API is missing page', () => {
 		const api = mockApi( { query: {
 			pages: [],
 			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
 		} } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( 'Title' ) );
-
-		expect( error ).toBeInstanceOf( TechnicalProblem );
+		return expect( repo.getPermissionErrors( 'Title' ) )
+			.rejects
+			.toBeInstanceOf( TechnicalProblem );
 	} );
 
-	it( 'rejects with TitleInvalid on invalid title', async () => {
+	it( 'rejects with TitleInvalid on invalid title', () => {
 		const title = '<invalid>';
 		const api = mockApi( { query: {
 			pages: [ {
@@ -226,12 +225,12 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( title ) );
-
-		expect( error ).toStrictEqual( new TitleInvalid( title ) );
+		return expect( repo.getPermissionErrors( title ) )
+			.rejects
+			.toStrictEqual( new TitleInvalid( title ) );
 	} );
 
-	it( 'rejects with TechnicalProblem if API does not return test actions', async () => {
+	it( 'rejects with TechnicalProblem if API does not return test actions', () => {
 		const title = 'Title';
 		const api = mockApi( { query: {
 			pages: [ { title } ],
@@ -239,12 +238,12 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( title ) );
-
-		expect( error ).toBeInstanceOf( TechnicalProblem );
+		return expect( repo.getPermissionErrors( title ) )
+			.rejects
+			.toBeInstanceOf( TechnicalProblem );
 	} );
 
-	it( 'rejects with TechnicalProblem if API does not return semi-protected levels', async () => {
+	it( 'rejects with TechnicalProblem if API does not return semi-protected levels', () => {
 		const title = 'Title';
 		const api = mockApi( { query: { pages: [ {
 			title,
@@ -252,12 +251,12 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} ] } } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( title ) );
-
-		expect( error ).toBeInstanceOf( TechnicalProblem );
+		return expect( repo.getPermissionErrors( title ) )
+			.rejects
+			.toBeInstanceOf( TechnicalProblem );
 	} );
 
-	it( 'rejects with TechnicalProblem if the API does not return raw errors', async () => {
+	it( 'rejects with TechnicalProblem if the API does not return raw errors', () => {
 		const title = 'Title';
 		const api = mockApi( { query: {
 			pages: [ {
@@ -271,9 +270,9 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 
-		const error = await expectError( repo.getPermissionErrors( title ) );
-
-		expect( error ).toBeInstanceOf( TechnicalProblem );
+		return expect( repo.getPermissionErrors( title ) )
+			.rejects
+			.toBeInstanceOf( TechnicalProblem );
 	} );
 
 } );
