@@ -100,7 +100,7 @@ class SiteLinkCommentCreator {
 		$diffOp = $diffOps[$this->siteId];
 
 		if ( $diffOp instanceof Diff ) {
-			if ( array_key_exists( 'name', $diffOp ) ) {
+			if ( $diffOp->offsetExists( 'name' ) ) {
 				$diffOp = $diffOp['name'];
 			} else {
 				// Change to badges only, use original message
@@ -145,7 +145,7 @@ class SiteLinkCommentCreator {
 			$diffOp = $diffOps[$siteId];
 
 			if ( $diffOp instanceof Diff ) {
-				if ( array_key_exists( 'name', $diffOp ) ) {
+				if ( $diffOp->offsetExists( 'name' ) ) {
 					$diffOp = $diffOp['name'];
 				} else {
 					// change to badges only, use original message
@@ -181,7 +181,7 @@ class SiteLinkCommentCreator {
 
 		foreach ( $diffs as $siteId => $diff ) {
 			// backwards compatibility in case of old, pre-badges changes in the queue
-			$diffOp = ( ( $diff instanceof Diff ) && array_key_exists( 'name', $diff ) ) ? $diff['name'] : $diff;
+			$diffOp = ( ( $diff instanceof Diff ) && $diff->offsetExists( 'name' ) ) ? $diff['name'] : $diff;
 			$args = $this->getChangeParamsForDiffOp( $diffOp, $siteId, $messagePrefix );
 
 			if ( empty( $args ) ) {

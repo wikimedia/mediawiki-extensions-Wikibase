@@ -109,7 +109,7 @@ class EntityDiffChangedAspectsFactory {
 			$newValue = $changes['name']->getNewValue();
 		}
 
-		return [ $oldValue, $newValue, array_key_exists( 'badges', $siteLinkDiffOp ) ];
+		return [ $oldValue, $newValue, $siteLinkDiffOp->offsetExists( 'badges' ) ];
 	}
 
 	/**
