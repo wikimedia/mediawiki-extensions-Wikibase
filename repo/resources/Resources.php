@@ -138,8 +138,14 @@ return call_user_func( function() {
 		],
 
 		'wikibase.getUserLanguages' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.getUserLanguages.js'
+			'packageFiles' => [
+				'wikibase.getUserLanguages.js',
+				[
+					'name' => 'termLanguages.json',
+					'callback' => function () {
+						return WikibaseRepo::getDefaultInstance()->getTermsLanguages()->getLanguages();
+					},
+				]
 			],
 			'dependencies' => [
 				'wikibase',
