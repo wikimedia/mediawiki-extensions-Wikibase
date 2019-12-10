@@ -4417,12 +4417,12 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=17e80853&
-var TaintedIconvue_type_template_id_17e80853_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":"This statement has some potential issues"},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
-var TaintedIconvue_type_template_id_17e80853_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=template&id=e86a5184&
+var TaintedIconvue_type_template_id_e86a5184_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.popperIsOpened ? 'div' : 'a',{tag:"component",staticClass:"wb-tr-tainted-icon",attrs:{"title":_vm.iconTitle},on:{"click":function (event) { return !_vm.popperIsOpened && _vm.onClick( event ); }}})}
+var TaintedIconvue_type_template_id_e86a5184_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=17e80853&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedIcon.vue?vue&type=template&id=e86a5184&
 
 // CONCATENATED MODULE: ./src/store/actionTypes.ts
 var STORE_INIT = 'initStore';
@@ -4543,6 +4543,11 @@ function (_Vue) {
       event.preventDefault();
       this.$track('counter.wikibase.view.tainted-ref.taintedIconClick', 1);
       this.$store.dispatch(POPPER_SHOW, this.$props.guid);
+    }
+  }, {
+    key: "iconTitle",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-tainted-icon-title');
     }
   }, {
     key: "popperIsOpened",
@@ -4671,8 +4676,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_TaintedIconvue_type_script_lang_ts_,
-  TaintedIconvue_type_template_id_17e80853_render,
-  TaintedIconvue_type_template_id_17e80853_staticRenderFns,
+  TaintedIconvue_type_template_id_e86a5184_render,
+  TaintedIconvue_type_template_id_e86a5184_staticRenderFns,
   false,
   null,
   null,

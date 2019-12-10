@@ -5,11 +5,15 @@ import { createStore } from '@/store';
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { POPPER_SHOW } from '@/store/actionTypes';
 import Track from '@/vue-plugins/Track';
+import Message from '@/vue-plugins/Message';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
 localVue.use( Track, { trackingFunction: () => {
 	// do nothing on track
+} } );
+localVue.use( Message, { messageToTextFunction: () => {
+	return 'dummy';
 } } );
 
 describe( 'TaintedIcon.vue', () => {
@@ -56,6 +60,9 @@ describe( 'TaintedIcon.vue', () => {
 		const localVue = createLocalVue();
 		localVue.use( Vuex );
 		localVue.use( Track, { trackingFunction } );
+		localVue.use( Message, { messageToTextFunction: () => {
+			return 'dummy';
+		} } );
 
 		const store: Store<Application> = createStore();
 		const wrapper = shallowMount( TaintedIcon, {
@@ -64,6 +71,21 @@ describe( 'TaintedIcon.vue', () => {
 		} );
 		wrapper.trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.taintedIconClick', 1 );
+	} );
+	it( 'uses the title text from the message plugin', () => {
+		const localVue = createLocalVue();
+		const messageToTextFunction = jest.fn();
+		messageToTextFunction.mockReturnValue( 'DUMMY_TEXT' );
 
+		localVue.use( Vuex );
+		localVue.use( Message, { messageToTextFunction } );
+
+		const store: Store<Application> = createStore();
+		const wrapper = shallowMount( TaintedIcon, {
+			store,
+			localVue,
+		} );
+		expect( wrapper.find( '.wb-tr-tainted-icon' ).element.title ).toMatch( 'DUMMY_TEXT' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-tainted-icon-title' );
 	} );
 } );
