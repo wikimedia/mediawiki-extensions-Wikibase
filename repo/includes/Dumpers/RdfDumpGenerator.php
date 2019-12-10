@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -21,6 +21,7 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
 use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -55,7 +56,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $pageProps;
 
 	/**
-	 * @var EntityContentFactory
+	 * @var BatchedEntityTitleStoreLookup
 	 */
 	private $titleLookup;
 
@@ -64,14 +65,14 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRevisionLookup $lookup Must not resolve redirects
 	 * @param RdfBuilder           $rdfBuilder
 	 * @param EntityPrefetcher     $entityPrefetcher
-	 * @param EntityContentFactory    $titleLookup
+	 * @param BatchedEntityTitleStoreLookup $titleLookup
 	 */
 	public function __construct(
 		$out,
 		EntityRevisionLookup $lookup,
 		RdfBuilder $rdfBuilder,
 		EntityPrefetcher $entityPrefetcher,
-		EntityContentFactory $titleLookup
+		BatchedEntityTitleStoreLookup $titleLookup
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 
@@ -232,7 +233,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRdfBuilderFactory    $entityRdfBuilderFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
-	 * @param EntityContentFactory       $titleLookup
+	 * @param EntityTitleLookup|BatchedEntityTitleStoreLookup $titleLookup
 	 * @param BNodeLabeler|null          $labeler
 	 *
 	 * @return static
@@ -249,7 +250,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
-		EntityContentFactory $titleLookup,
+		$titleLookup,
 		BNodeLabeler $labeler = null
 	) {
 		$rdfWriter = self::getRdfWriter( $format, $labeler );
