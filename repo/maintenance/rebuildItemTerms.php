@@ -57,6 +57,13 @@ class RebuildItemTerms extends Maintenance {
 			false,
 			true
 		);
+		$this->addOption(
+			'file',
+			'File path for loading a list of item numeric ids, one numeric id per line. ' .
+				'Works if from-id and to-id are not set',
+			false,
+			true
+		);
 	}
 
 	public function execute() {
@@ -69,10 +76,19 @@ class RebuildItemTerms extends Maintenance {
 		}
 
 		$this->wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		if (
+			$this->getOption( 'from-id' ) === null &&
+			$this->getOption( 'to-id' ) === null &&
+			$this->getOption( 'file' ) !== null
+		) {
+			$iterator = $this->newItemIdIteratorFromFile( $this->getOption( 'file' ) );
+		} else {
+			$iterator = $this->newItemIdIterator();
+		}
 
 		$rebuilder = new ItemTermsRebuilder(
 			$this->wikibaseRepo->getItemTermStore(),
-			$this->newItemIdIterator(),
+			$iterator,
 			$this->getReporter(),
 			$this->getErrorReporter(),
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -84,6 +100,19 @@ class RebuildItemTerms extends Maintenance {
 		$rebuilder->rebuild();
 
 		$this->output( "Done.\n" );
+	}
+
+	private function newItemIdIteratorFromFile( $file ): \Iterator {
+		$itemIds = file_get_contents( $file );
+		$itemIds = explode( "\n", $itemIds );
+
+		foreach ( $itemIds as $itemId ) {
+			// Ignore empty lines
+			if ( !$itemId ) {
+				continue;
+			}
+			yield ItemId::newFromNumber( (int)$itemId );
+		}
 	}
 
 	private function newItemIdIterator(): \Iterator {
