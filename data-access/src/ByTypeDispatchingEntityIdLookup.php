@@ -57,7 +57,7 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 		foreach ( $contentModels as $contentModel => $contentModelTitles ) {
 			$lookup = $this->getLookupForContentModel( $contentModel );
 			$entityIds = $lookup->getEntityIds( $contentModelTitles );
-			$results = array_merge( $results, $entityIds );
+			$results = array_replace( $results, $entityIds );
 		}
 
 		return array_filter( $results, function ( $id ) {
