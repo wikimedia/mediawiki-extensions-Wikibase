@@ -10163,16 +10163,17 @@ var es7_object_values = __webpack_require__("8615");
 var BRIDGE_INIT = 'initBridge';
 var BRIDGE_SAVE = 'saveBridge';
 var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
+var BRIDGE_ERROR_ADD = 'addError';
 // EXTERNAL MODULE: external {"commonjs":"vue2","commonjs2":"vue2","amd":"vue2","root":"vue2"}
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=73265c61&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=3769761e&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.isTargetStatementModified},on:{"click":_vm.saveAndClose}})]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Initializing',{attrs:{"is-initializing":_vm.isInitializing}},[_c('DataBridge')],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=73265c61&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=3769761e&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -11693,14 +11694,53 @@ var ErrorWrapper_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorWrapper = (ErrorWrapper_component.exports);
-// CONCATENATED MODULE: ./src/definitions/ApplicationStatus.ts
-var ApplicationStatus;
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
+var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
 
-(function (ApplicationStatus) {
-  ApplicationStatus["INITIALIZING"] = "initializing";
-  ApplicationStatus["READY"] = "ready";
-  ApplicationStatus["ERROR"] = "error";
-})(ApplicationStatus || (ApplicationStatus = {}));
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("456d");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    define_property_default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+// CONCATENATED MODULE: ./src/definitions/ApplicationStatus.ts
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+var ValidApplicationStatus;
+
+(function (ValidApplicationStatus) {
+  ValidApplicationStatus["INITIALIZING"] = "initializing";
+  ValidApplicationStatus["READY"] = "ready";
+})(ValidApplicationStatus || (ValidApplicationStatus = {}));
+
+var ErrorStatus;
+
+(function (ErrorStatus) {
+  ErrorStatus["ERROR"] = "error";
+})(ErrorStatus || (ErrorStatus = {}));
+
+var ApplicationStatus = _objectSpread({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1de92547-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=0c82f2ee&
@@ -12027,7 +12067,7 @@ function (_Vue) {
   return App;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-__decorate([State('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
+__decorate([Getter('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
 
 __decorate([Getter('isTargetStatementModified')], Appvue_type_script_lang_ts_App.prototype, "isTargetStatementModified", void 0);
 
@@ -12069,28 +12109,6 @@ var App_component = normalizeComponent(
 )
 
 /* harmony default export */ var presentation_App = (App_component.exports);
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    define_property_default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
-var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
-var es6_object_keys = __webpack_require__("456d");
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
 var is_array = __webpack_require__("a745");
 var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
@@ -12197,6 +12215,7 @@ var APPLICATION_STATUS_SET = 'setApplicationStatus';
 var TARGET_LABEL_SET = 'setTargetLabel';
 var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
 var ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
+var APPLICATION_ERRORS_ADD = 'addApplicationErrors';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -12241,6 +12260,14 @@ function validateBridgeApplicability(context, path) {
 
   return true;
 }
+// CONCATENATED MODULE: ./src/definitions/ApplicationError.ts
+var ErrorTypes;
+
+(function (ErrorTypes) {
+  ErrorTypes["APPLICATION_LOGIC_ERROR"] = "APPLICATION_LOGIC_ERROR";
+  ErrorTypes["INVALID_ENTITY_STATE_ERROR"] = "INVALID_ENTITY_STATE_ERROR";
+  ErrorTypes["SAVING_FAILED"] = "SAVING_FAILED";
+})(ErrorTypes || (ErrorTypes = {}));
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -12251,9 +12278,10 @@ function validateBridgeApplicability(context, path) {
 
 
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function actions_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { actions_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { actions_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -12275,6 +12303,10 @@ function validateEntityState(context, path) {
   return validateBridgeApplicability(context, path);
 }
 
+function commitErrors(context, errors) {
+  context.commit(APPLICATION_ERRORS_ADD, errors);
+}
+
 function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
   var _ref3;
 
@@ -12292,7 +12324,7 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
           wikibaseRepoConfiguration = _ref2[0],
           _entityInit = _ref2[1];
 
-      BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, _objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
+      BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, actions_objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
       var state = context.state;
       var path = {
         entityId: state[NS_ENTITY].id,
@@ -12304,16 +12336,27 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
         context.commit(ORIGINAL_STATEMENT_SET, state[NS_ENTITY][NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
       } else {
-        context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+        // TODO: somehow store *why* we cannot edit this
+        commitErrors(context, [{
+          type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
+        }]);
       }
     }, function (error) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      commitErrors(context, [{
+        type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+        info: error
+      }]); // TODO: store information about the error somewhere and show it!
 
       throw error;
     });
   }), _defineProperty(_ref3, BRIDGE_SET_TARGET_VALUE, function (context, dataValue) {
     if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+      commitErrors(context, [{
+        type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+        info: {
+          stack: new Error().stack
+        }
+      }]);
       return Promise.reject(null);
     }
 
@@ -12327,21 +12370,34 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
       path: path,
       value: dataValue
     }).catch(function (error) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      commitErrors(context, [{
+        type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+        info: error
+      }]); // TODO: store information about the error somewhere and show it!
 
       throw error;
     });
   }), _defineProperty(_ref3, BRIDGE_SAVE, function (context) {
     if (context.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR);
+      commitErrors(context, [{
+        type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+        info: {
+          stack: new Error().stack
+        }
+      }]);
       return Promise.reject(null);
     }
 
     return context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_SAVE)).catch(function (error) {
-      context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.ERROR); // TODO: store information about the error somewhere and show it!
+      commitErrors(context, [{
+        type: ErrorTypes.SAVING_FAILED,
+        info: error
+      }]); // TODO: store information about the error somewhere and show it!
 
       throw error;
     });
+  }), _defineProperty(_ref3, BRIDGE_ERROR_ADD, function (context, errors) {
+    commitErrors(context, errors);
   }), _ref3;
 }
 // EXTERNAL MODULE: ./node_modules/deep-equal/index.js
@@ -12349,6 +12405,7 @@ var deep_equal = __webpack_require__("7fae");
 var deep_equal_default = /*#__PURE__*/__webpack_require__.n(deep_equal);
 
 // CONCATENATED MODULE: ./src/store/getters.ts
+
 
 
 
@@ -12398,13 +12455,53 @@ var getters_getters = {
     return !deep_equal_default()(state.originalStatement, initState[NS_ENTITY][NS_STATEMENTS][entityId][state.targetProperty][0], {
       strict: true
     });
+  },
+  applicationStatus: function applicationStatus(state) {
+    if (state.applicationErrors.length > 0) {
+      return definitions_ApplicationStatus.ERROR;
+    }
+
+    return state.applicationStatus;
   }
 };
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
 // CONCATENATED MODULE: ./src/store/clone.ts
 function clone(source) {
   return JSON.parse(JSON.stringify(source));
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
+
 
 
 var _mutations;
@@ -12421,6 +12518,10 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   state.targetLabel = label;
 }), _defineProperty(_mutations, ORIGINAL_STATEMENT_SET, function (state, revision) {
   state.originalStatement = clone(revision);
+}), _defineProperty(_mutations, APPLICATION_ERRORS_ADD, function (state, errors) {
+  var _state$applicationErr;
+
+  (_state$applicationErr = state.applicationErrors).push.apply(_state$applicationErr, _toConsumableArray(errors));
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -12686,9 +12787,9 @@ function snaks_actions_actions(actionTypesAliases, mutationTypesAliases, travelT
 
 
 
-function actions_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function statements_actions_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { actions_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { actions_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function statements_actions_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { statements_actions_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { statements_actions_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -12696,7 +12797,7 @@ function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i+
 
 
 var mainSnakActions = snaks_actions_actions(mainSnakActionTypes, mainSnakMutationTypes, resolveMainSnak);
-var statements_actions_actions = actions_objectSpread({}, statementActions, {}, mainSnakActions);
+var statements_actions_actions = statements_actions_objectSpread({}, statementActions, {}, mainSnakActions);
 // CONCATENATED MODULE: ./src/store/entity/statements/index.ts
 
 
@@ -12748,6 +12849,7 @@ function createStore(services) {
     originalStatement: null,
     editFlow: '',
     applicationStatus: definitions_ApplicationStatus.INITIALIZING,
+    applicationErrors: [],
     wikibaseRepoConfiguration: null
   };
   var storeBundle = {
@@ -12852,38 +12954,6 @@ function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(languageInfoRepo));
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
 var es6_set = __webpack_require__("4f7f");

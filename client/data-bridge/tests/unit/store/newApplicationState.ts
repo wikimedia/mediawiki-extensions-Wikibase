@@ -8,6 +8,7 @@ export default function ( fields?: any ): Application {
 		originalStatement: null,
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
+		applicationErrors: [],
 		wikibaseRepoConfiguration: null,
 	};
 

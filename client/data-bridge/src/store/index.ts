@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex, { Store, StoreOptions } from 'vuex';
-import ApplicationStatus from '@/definitions/ApplicationStatus';
+import ValidApplicationStatus from '@/definitions/ApplicationStatus';
 import Application from '@/store/Application';
 import actions from '@/store/actions';
 import { getters } from '@/store/getters';
@@ -19,7 +19,8 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 		targetProperty: '',
 		originalStatement: null,
 		editFlow: '',
-		applicationStatus: ApplicationStatus.INITIALIZING,
+		applicationStatus: ValidApplicationStatus.INITIALIZING,
+		applicationErrors: [],
 		wikibaseRepoConfiguration: null,
 	};
 

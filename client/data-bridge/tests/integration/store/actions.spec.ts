@@ -168,7 +168,7 @@ describe( 'store/actions', () => {
 				};
 
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
-					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 
@@ -182,7 +182,7 @@ describe( 'store/actions', () => {
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
-					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 
@@ -196,7 +196,7 @@ describe( 'store/actions', () => {
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
-					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 
@@ -210,7 +210,7 @@ describe( 'store/actions', () => {
 					client,
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
-					expect( errorStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 		} );
@@ -287,7 +287,7 @@ describe( 'store/actions', () => {
 					BRIDGE_SET_TARGET_VALUE,
 					{ type: 'string', dataValue: 'passing string' },
 				) ).rejects.toBeDefined();
-				expect( notReadyStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				expect( notReadyStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 			} );
 
 			it( 'sets the new data value', () => {
@@ -309,7 +309,7 @@ describe( 'store/actions', () => {
 					BRIDGE_SAVE,
 					{ type: 'string', dataValue: 'passing string' },
 				) ).rejects.toBeDefined();
-				expect( notReadyStore.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				expect( notReadyStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 			} );
 
 			it( 'rejects and switch to error if the request fails', async () => {
@@ -327,7 +327,7 @@ describe( 'store/actions', () => {
 				).rejects.toBe( rejectError );
 
 				expect( resolver ).toHaveBeenCalledWith( testSet );
-				expect( store.state.applicationStatus ).toBe( ApplicationStatus.ERROR );
+				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
 			} );
 
 			it( 'stores the responded entity, if the request succeeded', async () => {
