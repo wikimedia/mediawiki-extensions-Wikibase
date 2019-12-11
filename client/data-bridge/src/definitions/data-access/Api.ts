@@ -43,7 +43,7 @@ export default interface Api {
 	 * The resulting response may include data from other requests
 	 * which were combined with this one.
 	 */
-	get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponses[ action ]>;
+	get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[ action ]>;
 }
 
 export interface ApiParams<action extends ApiAction> {
@@ -55,12 +55,12 @@ export type ApiResponse = {
 	// there are no members common to all API modules
 };
 
-export interface ApiResponses {
+export interface ApiResponsesMap {
 	query: ApiQueryResponse;
 	wbgetentities: ApiWbgetentitiesResponse;
 	[ action: string ]: ApiResponse;
 }
-export type ApiAction = keyof ApiResponses & string;
+export type ApiAction = keyof ApiResponsesMap & string;
 
 export interface ApiError {
 	code: string;
