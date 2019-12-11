@@ -12,12 +12,14 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -26,6 +28,7 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
@@ -239,6 +242,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->entityInfoBuilder === null ) {
 			// TODO: Having this lookup in GenericServices seems shady, this class should
 			// probably create/provide one for itself (all data needed in in the entity source)
+
 			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
@@ -256,17 +260,70 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				'wikibase.sqlEntityInfoBuilder.miss'
 			);
 
-			$this->entityInfoBuilder = new SqlEntityInfoBuilder(
+			$mediaWikiServices = MediaWikiServices::getInstance();
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+			$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
+			$loadBalancer = $loadBalancerFactory->getMainLB( $databaseName );
+			$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+				$loadBalancer,
+				$mediaWikiServices->getMainWANObjectCache(),
+				$databaseName,
+				$logger
+			);
+			$termIdsResolver = new DatabaseTermIdsResolver(
+				$databaseTypeIdsStore,
+				$databaseTypeIdsStore,
+				$loadBalancer,
+				$databaseName,
+				$logger
+			);
+
+			$oldEntityInfoBuilder = new SqlEntityInfoBuilder(
 				$this->entityIdParser,
 				$this->entityIdComposer,
 				$entityNamespaceLookup,
-				LoggerFactory::getInstance( 'Wikibase' ),
+				$logger,
 				$this->entitySource,
 				$this->settings,
 				$cache,
 				$databaseName,
 				$repositoryName
 			);
+
+			$newEntityInfoBuilder = new DatabaseEntityInfoBuilder(
+				$this->entityIdParser,
+				$this->entityIdComposer,
+				$entityNamespaceLookup,
+				$logger,
+				$this->entitySource,
+				$this->settings,
+				$cache,
+				$loadBalancer,
+				$termIdsResolver
+			);
+
+			$typeDispatchingMapping = [];
+
+			// Properties
+			if ( $this->settings->useNormalizedPropertyTerms() === true ) {
+				$typeDispatchingMapping[Property::ENTITY_TYPE] = $newEntityInfoBuilder;
+			} else {
+				$typeDispatchingMapping[Property::ENTITY_TYPE] = $oldEntityInfoBuilder;
+			}
+
+			// Items
+			$itemEntityInfoBuilderMapping = [];
+			foreach ( $this->settings->getItemTermsMigrationStages() as $maxId => $stage ) {
+				if ( $stage >= MIGRATION_WRITE_NEW ) {
+					$itemEntityInfoBuilderMapping[$maxId] = $newEntityInfoBuilder;
+				} else {
+					$itemEntityInfoBuilderMapping[$maxId] = $oldEntityInfoBuilder;
+				}
+			}
+			$typeDispatchingMapping[Item::ENTITY_TYPE] = new ByIdDispatchingEntityInfoBuilder( $itemEntityInfoBuilderMapping );
+
+			$this->entityInfoBuilder = new ByTypeDispatchingEntityInfoBuilder( $typeDispatchingMapping );
 		}
 
 		return $this->entityInfoBuilder;

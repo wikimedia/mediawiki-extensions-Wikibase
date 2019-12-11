@@ -147,4 +147,11 @@ class DataAccessSettings {
 		return false;
 	}
 
+	/**
+	 * @return array The mapping of maxId to migration stages of item terms
+	 */
+	public function getItemTermsMigrationStages(): array {
+		return $this->itemTermsMigrationStages;
+	}
+
 }
