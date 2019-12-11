@@ -128,7 +128,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		$entityIdSpecific = new ItemId( 'Q1' );
 		$entityIdDefault = new ItemId( 'Q2' );
 		$title = Title::newFromDBkey( 'Q1' );
-		$title->resetArticleID( 1 );
+		$title->resetArticleID( 123 );
 		$title->setContentModel( 'wikibase-item' );
 
 		$lookup = new ByTypeDispatchingEntityIdLookup(
