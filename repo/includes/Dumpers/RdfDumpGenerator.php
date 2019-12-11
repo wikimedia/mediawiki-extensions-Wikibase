@@ -21,7 +21,6 @@ use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
 use Wikimedia\Purtle\BNodeLabeler;
 use Wikimedia\Purtle\RdfWriterFactory;
 
@@ -56,7 +55,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	private $pageProps;
 
 	/**
-	 * @var BatchedEntityTitleStoreLookup
+	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
 
@@ -65,14 +64,14 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRevisionLookup $lookup Must not resolve redirects
 	 * @param RdfBuilder           $rdfBuilder
 	 * @param EntityPrefetcher     $entityPrefetcher
-	 * @param BatchedEntityTitleStoreLookup $titleLookup
+	 * @param EntityTitleLookup $titleLookup
 	 */
 	public function __construct(
 		$out,
 		EntityRevisionLookup $lookup,
 		RdfBuilder $rdfBuilder,
 		EntityPrefetcher $entityPrefetcher,
-		BatchedEntityTitleStoreLookup $titleLookup
+		EntityTitleLookup $titleLookup
 	) {
 		parent::__construct( $out, $entityPrefetcher );
 
@@ -233,7 +232,7 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param EntityRdfBuilderFactory    $entityRdfBuilderFactory
 	 * @param EntityPrefetcher           $entityPrefetcher
 	 * @param RdfVocabulary              $vocabulary
-	 * @param EntityTitleLookup|BatchedEntityTitleStoreLookup $titleLookup
+	 * @param EntityTitleLookup $titleLookup
 	 * @param BNodeLabeler|null          $labeler
 	 *
 	 * @return static
@@ -250,7 +249,7 @@ class RdfDumpGenerator extends DumpGenerator {
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityPrefetcher $entityPrefetcher,
 		RdfVocabulary $vocabulary,
-		$titleLookup,
+		EntityTitleLookup $titleLookup,
 		BNodeLabeler $labeler = null
 	) {
 		$rdfWriter = self::getRdfWriter( $format, $labeler );
