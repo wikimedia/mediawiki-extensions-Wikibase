@@ -136,25 +136,29 @@ export default class Popper extends Vue {
 }
 
 .wb-tr-popper-body {
-	padding: 7px 7px 7px 7px;
+	padding: 8px 16px 8px 16px;
 	width: 415px;
 	height: 150px;
 	border: #a2a9b1 1px solid;
+	border-radius: 2px;
 	overflow: hidden;
 	z-index: 2;
 	position: relative;
-	background-color: #ffff;
+	background-color: #fff;
 }
 
 .wb-tr-popper-title {
 	font-family: sans-serif;
 	font-size: 16px;
 	font-weight: bold;
+	color: #000;
 }
 
 .wb-tr-popper-text {
 	font-family: sans-serif;
-	font-size: 16px;
+	font-size: 14px;
+	margin-top: 22px;
+	color: #222;
 }
 
 .wb-tr-title-wrapper {
@@ -165,20 +169,45 @@ export default class Popper extends Vue {
 
 .wb-tr-popper-close {
 	margin-top: -4px;
+	margin-right: -8px;
 	font-size: 20px;
-	width: 5%;
-	height: 5%;
+	width: 32px;
+	height: 32px;
+	color: #4b4b4b;
+	transition: background-color 100ms;
+	border-radius: 2px;
+	position: relative;
+	text-align: center;
+}
+
+.wb-tr-popper-close:hover {
+	background-color: #f8f9fa;
+}
+
+.wb-tr-popper-close:active {
+	transition-property: fade_out( #eaecf0, 1 );
+	transition-duration: 100ms;
 }
 
 .wb-tr-popper-help {
 	font-weight: normal;
 	float: right;
+	font-size: 12px;
 	margin-left: 1.5em;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	color: #36c;
 }
 
 .wb-tr-popper-feedback {
 	font-weight: normal;
 	position: absolute;
+	color: #222;
+	margin-top: 8px;
 	bottom: 0;
+}
+
+.wb-tr-popper-feedback a {
+	color: #0645ad;
 }
 </style>
