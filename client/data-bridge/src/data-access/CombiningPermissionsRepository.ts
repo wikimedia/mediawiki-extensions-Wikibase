@@ -1,5 +1,6 @@
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import {
+	BlockInfo,
 	BridgePermissionsRepository,
 	MissingPermissionsError,
 	PageNotEditable,
@@ -10,6 +11,7 @@ import PageEditPermissionErrorsRepository, {
 	PermissionErrorType,
 	PermissionErrorUnknown,
 } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
+import { ApiBlockedErrorBlockInfo } from '@/definitions/data-access/Api';
 
 export default class CombiningPermissionsRepository implements BridgePermissionsRepository {
 
@@ -58,6 +60,11 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 						pages: repoError.pages,
 					},
 				};
+			case PermissionErrorType.BLOCKED:
+				return {
+					type: PageNotEditable.BLOCKED_ON_ITEM,
+					info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable( repoError.blockinfo ),
+				};
 			case PermissionErrorType.UNKNOWN:
 				return this.unknownPermissionErrorToMissingPermissionsError( repoError );
 		}
@@ -74,9 +81,27 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 						pages: clientError.pages,
 					},
 				};
+			case PermissionErrorType.BLOCKED:
+				return {
+					type: PageNotEditable.BLOCKED_ON_PAGE,
+					info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable( clientError.blockinfo ),
+				};
 			case PermissionErrorType.UNKNOWN:
 				return this.unknownPermissionErrorToMissingPermissionsError( clientError );
 		}
+	}
+
+	private mapBlockInfoFromPermissionErrorTypeToPageNotEditable( blockinfo: ApiBlockedErrorBlockInfo ): BlockInfo {
+		return {
+			blockId: blockinfo.blockid,
+			blockedBy: blockinfo.blockedby,
+			blockedTimestamp: blockinfo.blockedtimestamp,
+			blockExpiry: blockinfo.blockexpiry,
+			blockPartial: blockinfo.blockpartial,
+			blockReason: blockinfo.blockreason,
+			blockedById: blockinfo.blockedbyid,
+			// ToDO: add currentIP after T240565 is resolved
+		};
 	}
 
 	private unknownPermissionErrorToMissingPermissionsError( error: PermissionErrorUnknown ): UnknownReason {

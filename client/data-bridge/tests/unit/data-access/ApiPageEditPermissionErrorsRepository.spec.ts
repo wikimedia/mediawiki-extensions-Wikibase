@@ -144,6 +144,48 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} );
 	} );
 
+	it( 'detects user blocked on title error', async () => {
+		const title = 'Title';
+		const api = mockApi( { query: {
+			pages: [ {
+				title,
+				actions: { edit: [ {
+					code: 'blocked',
+					key: 'apierror-blocked',
+					params: [],
+					data: {
+						blockinfo: {
+							blockid: 456,
+							blockedby: 'ServerAdmin',
+							blockedbyid: 789,
+							blockreason: 'Testing for T239336',
+							blockedtimestamp: '2019-12-12T11:50:39Z',
+							blockexpiry: 'infinite',
+							blockpartial: false,
+						},
+					},
+				} ] },
+			} ],
+			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
+		} } );
+		const repo = new ApiPageEditPermissionErrorsRepository( api );
+		const permissionErrors = await repo.getPermissionErrors( title );
+		expect( permissionErrors.length ).toBe( 1 );
+		const permissionError = permissionErrors[ 0 ];
+		expect( permissionError ).toStrictEqual( {
+			type: PermissionErrorType.BLOCKED,
+			blockinfo: {
+				blockid: 456,
+				blockedby: 'ServerAdmin',
+				blockedbyid: 789,
+				blockreason: 'Testing for T239336',
+				blockedtimestamp: '2019-12-12T11:50:39Z',
+				blockexpiry: 'infinite',
+				blockpartial: false,
+			},
+		} );
+	} );
+
 	it( 'handles unrecognized error', async () => {
 		const title = 'Title';
 		const api = mockApi( { query: {

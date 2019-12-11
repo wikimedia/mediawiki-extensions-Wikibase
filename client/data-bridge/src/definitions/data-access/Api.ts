@@ -66,3 +66,20 @@ export interface ApiError {
 	code: string;
 	data?: object;
 }
+
+export interface ApiBlockedErrorBlockInfo {
+	blockid: number;
+	blockedby: string;
+	blockedbyid: number;
+	blockreason: string;
+	blockedtimestamp: string;
+	blockexpiry: string;
+	blockpartial: boolean;
+}
+
+export interface ApiBlockedError extends ApiError {
+	code: 'blocked';
+	data: {
+		blockinfo: ApiBlockedErrorBlockInfo;
+	};
+}

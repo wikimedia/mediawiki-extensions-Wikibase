@@ -1,11 +1,13 @@
 export enum PermissionErrorType {
 	PROTECTED_PAGE = 1,
 	CASCADE_PROTECTED_PAGE,
+	BLOCKED,
 	UNKNOWN = -1,
 }
 
 export type PermissionError = PermissionErrorProtectedPage |
 PermissionErrorCascadeProtectedPage |
+PermissionErrorBlockedUser |
 PermissionErrorUnknown;
 
 export interface PermissionErrorProtectedPage {
@@ -17,6 +19,19 @@ export interface PermissionErrorProtectedPage {
 export interface PermissionErrorCascadeProtectedPage {
 	type: PermissionErrorType.CASCADE_PROTECTED_PAGE;
 	pages: string[];
+}
+
+export interface PermissionErrorBlockedUser {
+	type: PermissionErrorType.BLOCKED;
+	blockinfo: {
+		blockid: number;
+		blockedbyid: number;
+		blockedby: string;
+		blockreason: string;
+		blockedtimestamp: string;
+		blockexpiry: string;
+		blockpartial: boolean; // FIXME do we need this?
+	};
 }
 
 export interface PermissionErrorUnknown {

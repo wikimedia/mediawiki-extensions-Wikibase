@@ -10,7 +10,7 @@ export enum PageNotEditable {
 	UNKNOWN = 'unknown',
 }
 
-interface BlockInfo {
+export interface BlockInfo {
 	blockId: number;
 	blockedBy: string;
 	blockedById: number;
@@ -18,7 +18,7 @@ interface BlockInfo {
 	blockedTimestamp: string;
 	blockExpiry: string;
 	blockPartial: boolean;
-	currentIP: string;
+	// currentIP: string; // removed until T240565 is fixed
 }
 
 export interface BlockReason extends ApplicationErrorBase {

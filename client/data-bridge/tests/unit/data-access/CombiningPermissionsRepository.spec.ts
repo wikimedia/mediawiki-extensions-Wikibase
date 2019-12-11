@@ -3,11 +3,13 @@ import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import PageEditPermissionErrorsRepository, {
 	PermissionError,
 	PermissionErrorCascadeProtectedPage,
+	PermissionErrorBlockedUser,
 	PermissionErrorProtectedPage,
 	PermissionErrorType,
 	PermissionErrorUnknown,
 } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
 import {
+	BlockReason,
 	PageNotEditable,
 	ProtectedReason,
 	UnknownReason,
@@ -98,7 +100,40 @@ describe( 'CombiningPermissionsRepository', () => {
 			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
 			info: { pages },
 		};
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
+			.resolves
+			.toStrictEqual( [ expected ] );
+	} );
 
+	it( 'detects user blocked on repo', () => {
+		const error: PermissionErrorBlockedUser = {
+			type: PermissionErrorType.BLOCKED,
+			blockinfo: {
+				blockid: 456,
+				blockedby: 'ServerAdmin',
+				blockedbyid: 789,
+				blockreason: 'Testing for T239336',
+				blockedtimestamp: '2019-12-12T11:50:39Z',
+				blockexpiry: 'infinite',
+				blockpartial: false,
+			},
+		};
+		const repository = new CombiningPermissionsRepository(
+			mockPermissionErrorsRepository( [ error ] ),
+			mockPermissionErrorsRepository(),
+		);
+		const expected: BlockReason = {
+			type: PageNotEditable.BLOCKED_ON_ITEM,
+			info: {
+				blockId: 456,
+				blockedBy: 'ServerAdmin',
+				blockedById: 789,
+				blockReason: 'Testing for T239336',
+				blockedTimestamp: '2019-12-12T11:50:39Z',
+				blockExpiry: 'infinite',
+				blockPartial: false,
+			},
+		};
 		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( [ expected ] );
@@ -168,6 +203,42 @@ describe( 'CombiningPermissionsRepository', () => {
 			.toStrictEqual(
 				new TechnicalProblem( 'Data Bridge should never have been opened on this protected page!' ),
 			);
+	} );
+
+	it( 'detects user blocked on client', () => {
+		const error: PermissionErrorBlockedUser = {
+			type: PermissionErrorType.BLOCKED,
+			blockinfo: {
+				blockid: 456,
+				blockedby: 'ServerAdmin',
+				blockedbyid: 789,
+				blockreason: 'Testing for T239336',
+				blockedtimestamp: '2019-12-12T11:50:39Z',
+				blockexpiry: 'infinite',
+				blockpartial: false,
+			},
+		};
+		const repository = new CombiningPermissionsRepository(
+			mockPermissionErrorsRepository(),
+			mockPermissionErrorsRepository( [ error ] ),
+		);
+
+		const expected: BlockReason = {
+			type: PageNotEditable.BLOCKED_ON_PAGE,
+			info: {
+				blockId: 456,
+				blockedBy: 'ServerAdmin',
+				blockedById: 789,
+				blockReason: 'Testing for T239336',
+				blockedTimestamp: '2019-12-12T11:50:39Z',
+				blockExpiry: 'infinite',
+				blockPartial: false,
+			},
+		};
+
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
+			.resolves
+			.toStrictEqual( [ expected ] );
 	} );
 
 	it( 'handles unknown error on client', () => {

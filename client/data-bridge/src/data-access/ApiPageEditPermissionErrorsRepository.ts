@@ -5,10 +5,11 @@ import {
 } from '@/data-access/ApiQuery';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
-import Api, { ApiError } from '@/definitions/data-access/Api';
+import Api, { ApiBlockedError, ApiError } from '@/definitions/data-access/Api';
 import PageEditPermissionErrorsRepository, {
 	PermissionError,
 	PermissionErrorCascadeProtectedPage,
+	PermissionErrorBlockedUser,
 	PermissionErrorProtectedPage,
 	PermissionErrorType,
 	PermissionErrorUnknown,
@@ -88,6 +89,14 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 				const permissionError: PermissionErrorCascadeProtectedPage = {
 					type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
 					pages,
+				};
+				return permissionError;
+			}
+			case 'blocked': {
+				const permissionError: PermissionErrorBlockedUser = {
+					type: PermissionErrorType.BLOCKED,
+					blockinfo: ( error as ApiBlockedError ).data.blockinfo,
+					// ToDo: current IP missing because of T240565
 				};
 				return permissionError;
 			}
