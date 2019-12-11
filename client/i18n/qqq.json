@@ -133,6 +133,7 @@
 	"connected-redirect-category": "Name for a [[mw:Special:MyLanguage/Help:Tracking categories|tracking category]] where redirect pages are placed automatically if they are connected to a data item.\n\nSee also:\n* {{msg-mw|Connected-redirect-category-desc}}",
 	"connected-redirect-category-desc": "Connected redirect category description. Shown on [[Special:TrackingCategories]].\n\nSee also:\n* {{msg-mw|Connected-redirect-category}}",
 	"wikibase-client-data-bridge-dialog-title": "{{notranslate}}",
+	"wikibase-client-data-bridge-permissions-error": "Message displayed when the user cannot edit this value via Wikidata Bridge due to one or more permission errors, which will be detailed following this message.\n\nParameters:\n* $1 - the number of errors\n\nOnly [[mw:Manual:Messages API#Feature support in JavaScript|limited wikitext syntax]] is supported.",
 	"wikibase-client-data-bridge-references-heading": "Heading of the references section, see also {{msg-mw|wikibase-statementview-references-counter}}",
 	"wikibase-client-data-bridge-reference-snak-separator": "{{optional}} separates the different pieces of information (e.g. retrieved date, url, author, title, ...) in a concisely displayed reference"
 }
