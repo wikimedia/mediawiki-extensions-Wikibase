@@ -18,7 +18,6 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\NullEntityRdfBuilder;
@@ -26,7 +25,7 @@ use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
-use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
@@ -96,10 +95,12 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return EntityTitleLookup
+	 * @return EntityContentFactory
 	 */
 	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( BatchedEntityTitleStoreLookup::class );
+		$entityTitleLookup = $this->getMockBuilder( EntityContentFactory::class )
+			->disableOriginalConstructor()
+			->getMock();
 		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
