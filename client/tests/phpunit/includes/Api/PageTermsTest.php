@@ -43,7 +43,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$main = new ApiMain( $context );
 
 		$pageSet = $this->getMockBuilder( ApiPageSet::class )
-			->setConstructorArgs( [ $main ] )
+			->disableOriginalConstructor()
 			->getMock();
 
 		$pageSet->expects( $this->any() )
