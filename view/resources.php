@@ -870,6 +870,12 @@ return call_user_func( function() {
 				],
 				'messages' => [
 					'wikibase-tainted-ref-popper-text',
+					'wikibase-tainted-ref-popper-title',
+					'wikibase-tainted-ref-popper-help-link-title',
+					'wikibase-tainted-ref-popper-help-link-text',
+					'wikibase-tainted-ref-popper-feedback-text',
+					'wikibase-tainted-ref-popper-feedback-link-text',
+					'wikibase-tainted-ref-popper-feedback-link-title',
 					'wikibase-tainted-ref-tainted-icon-title',
 				],
 				'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',

@@ -501,5 +501,11 @@
 	"wikibase-entity-save-error-message": "Text of an error message shown when a change to an entity could not be published for an unknown reason",
 	"wikibase-tainted-ref-warning-icon-title": "Title/hover text shown on tainted reference icons",
 	"wikibase-tainted-ref-popper-text": "Text shown inside the dialog explaining why a statement's references were tainted.",
+	"wikibase-tainted-ref-popper-title": "Title text for the popper explaining why a statement's references were tainted.",
+	"wikibase-tainted-ref-popper-help-link-title": "Title for the help link shown on a tainted references detailed explanation.",
+	"wikibase-tainted-ref-popper-help-link-text": "Text for the help link shown on a tainted references detailed explanation.",
+	"wikibase-tainted-ref-popper-feedback-text": "Text asking for feedback for the tainted references feature (followed by a link).",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Link text for the feedback link of the tainted references feature.",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Title text for the feedback link of the tainted references feature.",
 	"wikibase-tainted-ref-tainted-icon-title": "Title for icon that indicates that a statement's references were tainted."
 }

@@ -3,26 +3,26 @@
 		<div class="wb-tr-popper-triangle" />
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
-				<span class="wb-tr-popper-title">Potential Reference/Value Mismatch</span>
+				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
 				<a class="wb-tr-popper-close" @click="closeClick">x</a>
 			</div>
 			<a
 				class="wb-tr-popper-help"
-				title="Help page link"
+				:title="popperHelpLinkTitle"
 				:href="helpLink"
 				target="_blank"
 				@click="helpClick"
-			>Help</a>
+			>{{ popperHelpLinkText }}</a>
 			<p class="wb-tr-popper-text">
 				{{ popperText }}
 			</p>
 			<p class="wb-tr-popper-feedback">
-				Is this new feature useful?
+				{{ popperFeedbackText }}
 				<a
-					title="Feedback page link"
+					:title="popperFeedbackLinkTitle"
 					:href="feedbackLink"
 					target="_blank"
-				>Leave your feedback</a>
+				>{{ popperFeedbackLinkText }}</a>
 			</p>
 		</div>
 	</div>
@@ -49,6 +49,30 @@ export default class Popper extends Vue {
 
 	public get popperText(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-text' );
+	}
+
+	public get popperTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-title' );
+	}
+
+	public get popperHelpLinkTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-help-link-title' );
+	}
+
+	public get popperHelpLinkText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-help-link-text' );
+	}
+
+	public get popperFeedbackText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-text' );
+	}
+
+	public get popperFeedbackLinkText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-text' );
+	}
+
+	public get popperFeedbackLinkTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-title' );
 	}
 
 	public onFocusout( event: FocusEvent ): void {
