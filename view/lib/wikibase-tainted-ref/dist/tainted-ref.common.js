@@ -4687,12 +4687,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=f033838e&
-var Poppervue_type_template_id_f033838e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v("Potential Reference/Value Mismatch")]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":"Help page link","href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v("Help")]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")]),_c('p',{staticClass:"wb-tr-popper-feedback"},[_vm._v("\n\t\t\tIs this new feature useful?\n\t\t\t"),_c('a',{attrs:{"title":"Feedback page link","href":_vm.feedbackLink,"target":"_blank"}},[_vm._v("Leave your feedback")])])])])}
-var Poppervue_type_template_id_f033838e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a19a1ec4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=f36fb030&
+var Poppervue_type_template_id_f36fb030_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v(_vm._s(_vm.popperTitle))]),_c('a',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}},[_vm._v("x")])]),_c('a',{staticClass:"wb-tr-popper-help",attrs:{"title":_vm.popperHelpLinkTitle,"href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v(_vm._s(_vm.popperHelpLinkText))]),_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")]),_c('p',{staticClass:"wb-tr-popper-feedback"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperFeedbackText)+"\n\t\t\t"),_c('a',{attrs:{"title":_vm.popperFeedbackLinkTitle,"href":_vm.feedbackLink,"target":"_blank"}},[_vm._v(_vm._s(_vm.popperFeedbackLinkText))])])])])}
+var Poppervue_type_template_id_f36fb030_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=f033838e&
+// CONCATENATED MODULE: ./src/presentation/components/Popper.vue?vue&type=template&id=f36fb030&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=script&lang=ts&
 
@@ -4747,6 +4747,36 @@ function (_Vue) {
     get: function get() {
       return this.$message('wikibase-tainted-ref-popper-text');
     }
+  }, {
+    key: "popperTitle",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-title');
+    }
+  }, {
+    key: "popperHelpLinkTitle",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-help-link-title');
+    }
+  }, {
+    key: "popperHelpLinkText",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-help-link-text');
+    }
+  }, {
+    key: "popperFeedbackText",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-feedback-text');
+    }
+  }, {
+    key: "popperFeedbackLinkText",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-feedback-link-text');
+    }
+  }, {
+    key: "popperFeedbackLinkTitle",
+    get: function get() {
+      return this.$message('wikibase-tainted-ref-popper-feedback-link-title');
+    }
   }]);
 
   return Popper;
@@ -4776,8 +4806,8 @@ var Poppervue_type_style_index_0_lang_scss_ = __webpack_require__("51bc");
 
 var Popper_component = normalizeComponent(
   components_Poppervue_type_script_lang_ts_,
-  Poppervue_type_template_id_f033838e_render,
-  Poppervue_type_template_id_f033838e_staticRenderFns,
+  Poppervue_type_template_id_f36fb030_render,
+  Poppervue_type_template_id_f36fb030_staticRenderFns,
   false,
   null,
   null,
