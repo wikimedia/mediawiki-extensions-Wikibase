@@ -106,11 +106,15 @@ return call_user_func( function() {
 						'messages' => [
 							'wikibase-client-data-bridge-dialog-title',
 							'wikibase-client-data-bridge-permissions-error',
+							'wikibase-client-data-bridge-blocked-on-client-head',
+							'wikibase-client-data-bridge-blocked-on-client-body',
 							'wikibase-client-data-bridge-references-heading',
 							'wikibase-client-data-bridge-reference-snak-separator',
 							'savechanges',
 							'publishchanges',
 							'cancel',
+							'grouppage-sysop',
+							'emailuser',
 						],
 					],
 					__DIR__ . '/../data-bridge/dist'
