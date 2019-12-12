@@ -12,6 +12,7 @@ export function createStore(): Store<Application> {
 		statementsTaintedState: { },
 		statementsPopperIsOpen: { },
 		helpLink: '',
+		feedbackLink: '',
 	};
 	return new Store( {
 		state,

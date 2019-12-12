@@ -6,20 +6,23 @@
 				<span class="wb-tr-popper-title">Potential Reference/Value Mismatch</span>
 				<a class="wb-tr-popper-close" @click="closeClick">x</a>
 			</div>
-			<h4>
-				Tainted Reference Heading text
-				<small>
-					<a
-						class="wb-tr-popper-help"
-						title="Help page for this constraint type"
-						:href="helpLink"
-						target="_blank"
-						@click="helpClick"
-					>Help</a>
-				</small>
-			</h4>
+			<a
+				class="wb-tr-popper-help"
+				title="Help page link"
+				:href="helpLink"
+				target="_blank"
+				@click="helpClick"
+			>Help</a>
 			<p class="wb-tr-popper-text">
 				{{ popperText }}
+			</p>
+			<p class="wb-tr-popper-feedback">
+				Is this new feature useful?
+				<a
+					title="Feedback page link"
+					:href="feedbackLink"
+					target="_blank"
+				>Leave your feedback</a>
 			</p>
 		</div>
 	</div>
@@ -37,6 +40,8 @@ import { Getter } from 'vuex-class';
 export default class Popper extends Vue {
 	@Getter( 'helpLink' )
 	public helpLink!: string;
+	@Getter( 'feedbackLink' )
+	public feedbackLink!: string;
 
 	public mounted(): void {
 		( this.$el as HTMLElement ).focus();
@@ -145,5 +150,11 @@ export default class Popper extends Vue {
 	font-weight: normal;
 	float: right;
 	margin-left: 1.5em;
+}
+
+.wb-tr-popper-feedback {
+	font-weight: normal;
+	position: absolute;
+	bottom: 0;
 }
 </style>

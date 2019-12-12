@@ -7,6 +7,7 @@ import {
 	SET_TAINTED,
 	SET_UNTAINTED,
 	SET_HELP_LINK,
+	SET_FEEDBACK_LINK,
 } from '@/store/mutationTypes';
 import Vue from 'vue';
 import Application from '@/store/Application';
@@ -57,5 +58,11 @@ export const mutations: MutationTree<Application> = {
 		payload: string,
 	): void {
 		state.helpLink = payload;
+	},
+	[ SET_FEEDBACK_LINK ](
+		state: Application,
+		payload: string,
+	): void {
+		state.feedbackLink = payload;
 	},
 };

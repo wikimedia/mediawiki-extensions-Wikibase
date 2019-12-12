@@ -22,7 +22,8 @@ export default async (): Promise<void> => {
 		mwWindow.mw.hook( 'wikibase.entityPage.entityView.rendered' ).add(
 			() => {
 				const helpLink = mwWindow.mw.util.getUrl( 'Special:MyLanguage/Help:Sources' );
-				app.launch( hookHandler, helpLink );
+				const feedbackLink = mwWindow.mw.util.getUrl( 'Project:Mismatched reference notification input' );
+				app.launch( hookHandler, helpLink, feedbackLink );
 			},
 		);
 	}
