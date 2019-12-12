@@ -1,4 +1,4 @@
-( function( util ) {
+( function() {
 	'use strict';
 
 var PARENT = require( './Deserializer.js' ),
@@ -31,4 +31,4 @@ module.exports = util.inherit( 'WbReferenceDeserializer', PARENT, {
 	}
 } );
 
-}( util ) );
+}() );

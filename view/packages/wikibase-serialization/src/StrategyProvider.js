@@ -1,4 +1,4 @@
-( function( $ ) {
+( function() {
 	'use strict';
 
 /**
@@ -71,4 +71,4 @@ $.extend( SELF.prototype, {
 
 module.exports = SELF;
 
-}( jQuery ) );
+}() );

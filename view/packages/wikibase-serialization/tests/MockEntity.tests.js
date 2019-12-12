@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit ) {
+( function() {
 	'use strict';
 
 QUnit.module( 'MockEntity' );
@@ -92,4 +92,4 @@ QUnit.test( 'equals()', function( assert ) {
 	}
 } );
 
-}( QUnit ) );
+}() );

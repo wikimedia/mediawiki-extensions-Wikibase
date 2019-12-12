@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit ) {
+( function() {
 'use strict';
 
 var TermSerializer = require( '../../src/Serializers/TermSerializer.js' ),
@@ -30,4 +30,4 @@ QUnit.test( 'serialize()', function( assert ) {
 	}
 } );
 
-}( QUnit ) );
+}() );

@@ -3,7 +3,7 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-( function( QUnit ) {
+( function() {
 'use strict';
 
 var SnakListDeserializer = require( '../../src/Deserializers/SnakListDeserializer.js' ),
@@ -67,4 +67,4 @@ QUnit.test( 'deserialize()', function( assert ) {
 	}
 } );
 
-}( QUnit ) );
+}() );

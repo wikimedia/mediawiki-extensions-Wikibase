@@ -1,4 +1,4 @@
-( function( util ) {
+( function() {
 	'use strict';
 	var TermSerializer = require( './TermSerializer.js' ),
 		PARENT = require( './Serializer.js' ),
@@ -41,4 +41,4 @@ module.exports = util.inherit( 'WbTermMapSerializer', PARENT, {
 	}
 } );
 
-}( util ) );
+}() );

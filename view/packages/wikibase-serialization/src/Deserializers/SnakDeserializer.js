@@ -1,4 +1,4 @@
-( function( util, dv ) {
+( function( dv ) {
 	'use strict';
 
 var PARENT = require( './Deserializer.js' ),
@@ -45,4 +45,4 @@ module.exports = util.inherit( 'WbSnakDeserializer', PARENT, {
 	}
 } );
 
-}( util, dataValues ) );
+}( dataValues ) );

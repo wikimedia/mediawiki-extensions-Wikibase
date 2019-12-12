@@ -1,4 +1,4 @@
-( function( util, $ ) {
+( function() {
 	'use strict';
 
 	/**
@@ -24,4 +24,4 @@
 	} );
 
 	module.exports = SELF;
-}( util, jQuery ) );
+}() );

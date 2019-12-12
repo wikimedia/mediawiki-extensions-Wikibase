@@ -2,7 +2,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( QUnit ) {
+( function() {
 'use strict';
 
 var StatementGroupDeserializer = require( '../../src/Deserializers/StatementGroupDeserializer.js' ),
@@ -50,4 +50,4 @@ QUnit.test( 'deserialize()', function( assert ) {
 	);
 } );
 
-}( QUnit ) );
+}() );

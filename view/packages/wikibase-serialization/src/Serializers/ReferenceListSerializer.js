@@ -1,4 +1,4 @@
-( function( util ) {
+( function() {
 	'use strict';
 
 var PARENT = require( './Serializer.js' ),
@@ -40,4 +40,4 @@ module.exports = util.inherit( 'WbReferenceLisSerializer', PARENT, {
 	}
 } );
 
-}( util ) );
+}() );
