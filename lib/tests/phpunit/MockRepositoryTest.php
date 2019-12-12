@@ -329,7 +329,7 @@ class MockRepositoryTest extends TestCase {
 		/** @var Item[]|null[] $items */
 		$items = $this->repo->getEntities( $itemIds );
 
-		$this->assertInternalType( 'array', $items, 'return value' );
+		$this->assertIsArray( $items, 'return value' );
 
 		// extract map of entity IDs to label arrays.
 		$actualLabels = [];

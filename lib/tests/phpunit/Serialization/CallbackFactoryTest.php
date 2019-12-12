@@ -31,7 +31,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetCallbackToIndexTags() {
 		$instance = new CallbackFactory();
 		$callback = $instance->getCallbackToIndexTags( 'tagName' );
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$array = [];
 		$array = $callback( $array );
@@ -44,7 +44,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetCallbackToSetArrayType( $kvpKeyName, $expected ) {
 		$instance = new CallbackFactory();
 		$callback = $instance->getCallbackToSetArrayType( 'default', $kvpKeyName );
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$array = [];
 		$array = $callback( $array );
@@ -62,7 +62,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 		$instance = new CallbackFactory();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 		$callback = $instance->getCallbackToAddDataTypeToSnaksGroupedByProperty( $dataTypeLookup );
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$array = [
 			'P1' => [ [] ],
@@ -77,7 +77,7 @@ class CallbackFactoryTest extends \PHPUnit\Framework\TestCase {
 		$instance = new CallbackFactory();
 		$dataTypeLookup = $this->getPropertyDataTypeLookup();
 		$callback = $instance->getCallbackToAddDataTypeToSnak( $dataTypeLookup );
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$array = [
 			'property' => 'P1',

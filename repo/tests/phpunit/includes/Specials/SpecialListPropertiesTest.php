@@ -130,7 +130,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		// and doesn't block. That is, the default should let the user execute the page.
 		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
-		$this->assertInternalType( 'string', $output );
+		$this->assertIsString( $output );
 		$this->assertContains( 'wikibase-listproperties-summary', $output );
 		$this->assertContains( 'wikibase-listproperties-legend', $output );
 		$this->assertNotContains( 'wikibase-listproperties-invalid-datatype', $output );

@@ -505,7 +505,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertArrayHasKey( 'search', $result );
 
 		foreach ( $result['search'] as $key => $searchresult ) {
-			$this->assertInternalType( 'integer', $key );
+			$this->assertIsInt( $key );
 			$this->assertArrayHasKey( 'repository', $searchresult );
 			$this->assertArrayHasKey( 'id', $searchresult );
 			$this->assertArrayHasKey( 'concepturi', $searchresult );

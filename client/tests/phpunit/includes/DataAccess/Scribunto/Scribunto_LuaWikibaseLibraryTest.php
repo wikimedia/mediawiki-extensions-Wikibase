@@ -89,7 +89,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$package = $luaWikibaseLibrary->register();
 
-		$this->assertInternalType( 'array', $package );
+		$this->assertIsArray( $package );
 		$this->assertArrayHasKey( 'setupInterface', $package );
 
 		// The value of setupInterface depends on the Lua runtime in use.

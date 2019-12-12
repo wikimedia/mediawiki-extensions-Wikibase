@@ -302,7 +302,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		// check that the resulting json contains all the ids we asked for.
 		$data = json_decode( $json, true );
 
-		$this->assertInternalType( 'array', $data, 'decode failed: ' . $json );
+		$this->assertIsArray( $data, 'decode failed: ' . $json );
 
 		$actualIds = array_map( function( $entityData ) {
 			return $entityData['id'];
@@ -367,7 +367,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 			// check that the resulting json contains all the ids we asked for.
 			$data = json_decode( $json, true );
-			$this->assertInternalType( 'array', $data, 'decode failed: ' . $json );
+			$this->assertIsArray( $data, 'decode failed: ' . $json );
 
 			$shardIds = array_map( function( $entityData ) {
 				return $entityData['id'];
@@ -492,7 +492,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		// make sure we get valid json even if there were exceptions.
 		$data = json_decode( $json, true );
-		$this->assertInternalType( 'array', $data, 'invalid json generated' );
+		$this->assertIsArray( $data, 'invalid json generated' );
 	}
 
 	public function testProgressReporter() {

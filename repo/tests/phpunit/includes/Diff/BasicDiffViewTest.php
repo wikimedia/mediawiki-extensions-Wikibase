@@ -69,7 +69,7 @@ class BasicDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$diffView = new BasicDiffView( $path, $diff );
 		$html = $diffView->getHtml();
 
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 
 		$pos = strpos( $html, '</tr><tr>' );
 		if ( $pos !== false ) {

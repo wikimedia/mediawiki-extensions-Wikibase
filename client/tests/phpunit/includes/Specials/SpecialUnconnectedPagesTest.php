@@ -77,7 +77,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	public function testGetQueryInfo() {
 		$page = $this->newSpecialPage();
 		$queryInfo = $page->getQueryInfo();
-		$this->assertInternalType( 'array', $queryInfo );
+		$this->assertIsArray( $queryInfo );
 		$this->assertNotEmpty( $queryInfo );
 		$this->assertArrayHasKey( 'conds', $queryInfo );
 	}

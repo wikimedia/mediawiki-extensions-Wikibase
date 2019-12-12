@@ -69,7 +69,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		}
 
 		if ( preg_match( '/^([^\s\w\d]).*\1[a-zA-Z]*$/', $expected ) ) {
-			$this->assertInternalType( 'string', $data, $name );
+			$this->assertIsString( $data, $name );
 			$this->assertRegExp( $expected, $data, $name );
 		} else {
 			$this->assertSame( $expected, $data, $name );

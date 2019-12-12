@@ -133,7 +133,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$this->assertEquals( 23, $pageUsageObject->getPageId() );
 
 		$usages = $pageUsageObject->getUsages();
-		$this->assertInternalType( 'array', $usages );
+		$this->assertIsArray( $usages );
 		$this->assertContainsOnlyInstancesOf( EntityUsage::class, $usages );
 		$this->assertCount( 1, $usages );
 
@@ -150,7 +150,7 @@ class SiteLinkUsageLookupTest extends MediaWikiTestCase {
 		$this->assertEquals( 23, $pageUsageObject->getPageId() );
 
 		$usages = $pageUsageObject->getUsages();
-		$this->assertInternalType( 'array', $usages );
+		$this->assertIsArray( $usages );
 		$this->assertContainsOnlyInstancesOf( EntityUsage::class, $usages );
 		$this->assertCount( 1, $usages );
 

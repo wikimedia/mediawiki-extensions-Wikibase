@@ -211,7 +211,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetNamespaces() {
 		$actual = $this->newInstance()->getNamespaces();
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertContains( '<BASE>', $actual );
 		$this->assertContains( '<DATA>', $actual );
@@ -220,7 +220,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetNamespaces_entitySourceBasedFederation() {
 		$actual = $this->newInstanceForEntitySourceBasedFederation()->getNamespaces();
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertContains( '<BASE>', $actual );
 		$this->assertContains( '<DATA>', $actual );

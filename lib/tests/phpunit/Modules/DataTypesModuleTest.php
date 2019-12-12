@@ -112,7 +112,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 	public function testGetConfigVarName( DataTypesModule $module, array $definition ) {
 		$configVarName = $module->getConfigVarName();
 
-		$this->assertInternalType( 'string', $configVarName );
+		$this->assertIsString( $configVarName );
 
 		$this->assertSame(
 			$definition['datatypesconfigvarname'],
@@ -141,7 +141,7 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 		$module = new DataTypesModule( $definition );
 		$summary = $module->getDefinitionSummary( $this->getContext() );
 
-		$this->assertInternalType( 'array', $summary );
+		$this->assertIsArray( $summary );
 		$this->assertArrayHasKey( 0, $summary );
 		$this->assertArrayHasKey( 'dataHash', $summary[0] );
 	}

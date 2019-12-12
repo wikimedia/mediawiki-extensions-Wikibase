@@ -274,7 +274,7 @@ class FormatSnakValueTest extends ApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element must be an array' );
+		$this->assertIsArray( $resultArray, 'top level element must be an array' );
 		$this->assertArrayHasKey( 'result', $resultArray, 'top level element must have a "result" key' );
 
 		$this->assertRegExp( $pattern, $resultArray['result'] );

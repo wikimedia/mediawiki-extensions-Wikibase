@@ -152,7 +152,7 @@ class EntityContentDiffViewTest extends \MediaWikiTestCase {
 	public function testGenerateContentDiffBody( ItemContent $itemContent, ItemContent $itemContent2, array $matchers ) {
 		$html = $this->newDiffView()->generateContentDiffBody( $itemContent, $itemContent2 );
 
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 		foreach ( $matchers as $name => $matcher ) {
 			$this->assertContains( $matcher, $html, $name );
 		}

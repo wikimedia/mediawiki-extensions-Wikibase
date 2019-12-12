@@ -51,7 +51,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 	public function testExecute() {
 		list( $output, ) = $this->executeSpecialPage( '' );
 
-		$this->assertInternalType( 'string', $output );
+		$this->assertIsString( $output );
 		$this->assertContains( 'mw-specialpage-summary', $output );
 		$this->assertContains( 'wikibase-availablebadges-summary', $output );
 

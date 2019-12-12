@@ -70,7 +70,7 @@ class EntityChangeTest extends ChangeRowTest {
 	 * @param EntityChange $entityChange
 	 */
 	public function testGetType( EntityChange $entityChange ) {
-		$this->assertInternalType( 'string', $entityChange->getType() );
+		$this->assertIsString( $entityChange->getType() );
 	}
 
 	public function testMetadata() {

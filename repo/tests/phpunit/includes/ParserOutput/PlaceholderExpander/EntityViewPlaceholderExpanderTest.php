@@ -86,7 +86,7 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		$expander = $this->newExpander( $this->newUser(), $this->newItem() );
 
 		$html = $expander->getHtmlForPlaceholder( 'termbox' );
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 	}
 
 	public function testGetHtmlForPlaceholderTermbox_resultContainsLabelsAndDescriptionsInAllLanguages() {

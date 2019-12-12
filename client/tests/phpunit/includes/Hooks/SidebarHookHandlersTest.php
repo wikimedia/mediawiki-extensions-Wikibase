@@ -282,7 +282,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {
-		$this->assertInternalType( 'array', $props );
+		$this->assertIsArray( $props );
 
 		foreach ( $props as $key => $value ) {
 			$this->assertEquals( $value, $outputPage->getProperty( $key ), 'OutputProperty: ' . $key );

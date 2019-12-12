@@ -21,7 +21,7 @@ class StaticContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$contentLanguages = new StaticContentLanguages( $expected );
 		$result = $contentLanguages->getLanguages();
 
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 
 		$this->assertSame( $expected, $result );
 	}

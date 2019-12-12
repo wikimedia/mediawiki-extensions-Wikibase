@@ -22,7 +22,7 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 	public function testGetScript() {
 		$instance = new TemplateModule();
 		$script = $instance->getScript( $this->getResourceLoaderContext() );
-		$this->assertInternalType( 'string', $script );
+		$this->assertIsString( $script );
 		$this->assertContains( 'wbTemplates', $script );
 		$this->assertContains( 'set( {', $script );
 	}
@@ -38,8 +38,8 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 
 		$instance = new TemplateModule();
 		$oldSummary = $instance->getDefinitionSummary( $context );
-		$this->assertInternalType( 'array', $oldSummary );
-		$this->assertInternalType( 'string', $oldSummary['mtime'] );
+		$this->assertIsArray( $oldSummary );
+		$this->assertIsString( $oldSummary['mtime'] );
 
 		if ( !is_writable( $file ) || !touch( $file, mt_rand( 0, time() ) ) ) {
 			$this->markTestSkipped( "Can't test the modified hash, if we can't touch the file" );

@@ -532,11 +532,11 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$dbSiteLink = $dbSiteLinks[$site];
 
 			$this->assertArrayHasKey( 'title', $dbSiteLink );
-			$this->assertInternalType( 'string', $dbSiteLink['title'] );
+			$this->assertIsString( $dbSiteLink['title'] );
 			$this->assertSame( $expectedSiteLink['title'], $dbSiteLink['title'] );
 
 			$this->assertArrayHasKey( 'badges', $dbSiteLink );
-			$this->assertInternalType( 'array', $dbSiteLink['badges'] );
+			$this->assertIsArray( $dbSiteLink['badges'] );
 			$this->assertArrayEquals( $expectedSiteLink['badges'], $dbSiteLink['badges'] );
 		}
 	}

@@ -135,7 +135,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		);
 
 		// this is just a sanity check
-		$this->assertInternalType( 'array', $conds );
+		$this->assertIsArray( $conds );
 	}
 
 	/**

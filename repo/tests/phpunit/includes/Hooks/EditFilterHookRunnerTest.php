@@ -172,9 +172,9 @@ class EditFilterHookRunnerTest extends \MediaWikiTestCase {
 			$this->assertSame( $expected['namespace'], $context->getTitle()->getNamespace() );
 			$this->assertEquals( new ItemContent( new EntityInstanceHolder( new Item() ) ), $content );
 			$this->assertTrue( $status->isGood() );
-			$this->assertInternalType( 'string', $summary );
+			$this->assertIsString( $summary );
 			$this->assertSame( 'EditFilterHookRunnerTestUser', $user->getName() );
-			$this->assertInternalType( 'boolean', $minoredit );
+			$this->assertIsBool( $minoredit );
 
 			// Change the status
 			$status->merge( $inputStatus );

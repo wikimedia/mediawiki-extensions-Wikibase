@@ -81,7 +81,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$callback = $registry[$entityType]['serializer-factory-callback'];
 
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$this->assertInstanceOf(
 			Serializer::class,
@@ -101,7 +101,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$callback = $registry[$entityType]['deserializer-factory-callback'];
 
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$this->assertInstanceOf(
 			Deserializer::class,

@@ -463,7 +463,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	}
 
 	private function assertDataUpdates( $updates ) {
-		$this->assertInternalType( 'array', $updates );
+		$this->assertIsArray( $updates );
 		$this->assertContainsOnlyInstancesOf( 'DataUpdate', $updates );
 	}
 

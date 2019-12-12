@@ -37,7 +37,7 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 		// and doesn't block. That is, the default should let the user execute the page.
 		list( $output, ) = $this->executeSpecialPage( '' );
 
-		$this->assertInternalType( 'string', $output );
+		$this->assertIsString( $output );
 		$this->assertContains( 'wikibase-itemswithoutsitelinks-summary', $output );
 		$this->assertContains( '<div class="mw-spcontent">', $output );
 

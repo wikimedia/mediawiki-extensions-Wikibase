@@ -192,7 +192,7 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = $this->getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 	}
 
 	public function testGivenInvalidTimeValue_formatDoesNotAllowHtmlInjection() {
