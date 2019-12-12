@@ -49,7 +49,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$callback = $registry[$entityType]['view-factory-callback'];
 
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		$entityView = call_user_func(
 			$callback,
@@ -84,7 +84,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 
 		$callback = $registry[$entityType]['content-handler-factory-callback'];
 
-		$this->assertInternalType( 'callable', $callback );
+		$this->assertIsCallable( $callback );
 
 		/** @var EntityHandler $entityHandler */
 		$entityHandler = call_user_func( $callback );

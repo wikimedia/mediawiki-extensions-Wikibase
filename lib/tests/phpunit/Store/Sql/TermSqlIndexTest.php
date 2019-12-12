@@ -301,7 +301,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 
 		$actualTermKeys = array_map( [ $this, 'getTermKey' ], $actual );
 
@@ -331,7 +331,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 
 		$actualTermKeys = array_map( [ $this, 'getTermKey' ], $actual );
 
@@ -462,7 +462,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getTopMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 
 		$actualTermKeys = array_map( [ $this, 'getTermKey' ], $actual );
 		$this->assertEquals( $expectedTermKeys, $actualTermKeys );
@@ -487,7 +487,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		$actual = $lookup->getTopMatchingTerms( $criteria, $termTypes, $entityTypes, $options );
 
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 
 		$actualTermKeys = array_map( [ $this, 'getTermKey' ], $actual );
 		$this->assertEquals( $expectedTermKeys, $actualTermKeys );

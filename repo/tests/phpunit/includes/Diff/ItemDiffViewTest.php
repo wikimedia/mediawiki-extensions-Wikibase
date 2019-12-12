@@ -110,7 +110,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$diffView = $this->getDiffView( $path, $diff );
 		$html = $diffView->getHtml();
 
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 
 		$pos = strpos( $html, '</tr><tr>' );
 		if ( $pos !== false ) {

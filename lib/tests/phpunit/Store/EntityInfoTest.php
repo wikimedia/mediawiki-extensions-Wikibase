@@ -124,14 +124,14 @@ class EntityInfoTest extends \PHPUnit\Framework\TestCase {
 		] ) );
 
 		$record = $info->getEntityInfo( new ItemId( 'Q11' ) );
-		$this->assertInternalType( 'array', $record );
+		$this->assertIsArray( $record );
 		$this->assertEquals(
 			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'London' ] ], 'descriptions' => [] ],
 			$record
 		);
 
 		$record = $info->getEntityInfo( new ItemId( 'Q33' ) );
-		$this->assertInternalType( 'array', $record );
+		$this->assertIsArray( $record );
 		$this->assertEquals(
 			[ 'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Berlin' ] ], 'descriptions' => [] ],
 			$record

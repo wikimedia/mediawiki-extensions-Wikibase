@@ -110,7 +110,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 		$actualDataType = $lookup->getDataTypeIdForProperty( $propertyId );
 
 		if ( $expectedDataType !== false ) {
-			$this->assertInternalType( 'string', $actualDataType );
+			$this->assertIsString( $actualDataType );
 			$this->assertEquals( $expectedDataType, $actualDataType );
 		}
 	}

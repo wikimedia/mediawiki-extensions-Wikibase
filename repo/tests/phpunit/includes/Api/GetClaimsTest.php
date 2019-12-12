@@ -159,7 +159,7 @@ class GetClaimsTest extends ApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequest( $params );
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claims', $resultArray, 'top level element has a claims key' );
 
 		// Assert that value mainsnaks have a datatype added

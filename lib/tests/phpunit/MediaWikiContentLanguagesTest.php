@@ -18,7 +18,7 @@ class MediaWikiContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 		$wbContentLanguages = new MediaWikiContentLanguages();
 		$result = $wbContentLanguages->getLanguages();
 
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 
 		// Just check for some langs
 		$knownLangCodes = [ 'en', 'de', 'es', 'fr', 'nl', 'ru', 'zh' ];

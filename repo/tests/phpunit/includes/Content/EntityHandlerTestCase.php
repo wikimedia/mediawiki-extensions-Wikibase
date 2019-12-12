@@ -200,7 +200,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 	public function testGetEntitySlotRole() {
 		$handler = $this->getHandler();
-		$this->assertInternalType( 'string', $handler->getEntitySlotRole() );
+		$this->assertIsString( $handler->getEntitySlotRole() );
 	}
 
 	public function testGetPageLanguage() {
@@ -505,7 +505,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		if ( $detector === null ) {
 			$this->markTestSkipped( 'handler has no legacy export format detector' );
 		} else {
-			$this->assertInternalType( 'callable', $detector );
+			$this->assertIsCallable( $detector );
 		}
 	}
 
@@ -524,7 +524,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 		$validators = $handler->getOnSaveValidators( $forCreation );
 
-		$this->assertInternalType( 'array', $validators );
+		$this->assertIsArray( $validators );
 
 		foreach ( $validators as $validator ) {
 			$this->assertInstanceOf( EntityValidator::class, $validator );

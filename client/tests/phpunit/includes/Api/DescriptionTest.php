@@ -293,7 +293,7 @@ class DescriptionTest extends TestCase {
 				if ( $fitLimit && $fitCount > $fitLimit ) {
 					return false;
 				}
-				$this->assertInternalType( 'array', $path );
+				$this->assertIsArray( $path );
 				$this->assertSame( 'query', $path[0] );
 				$this->assertSame( 'pages', $path[1] );
 				$this->resultData[$path[2]][$name] = $value;

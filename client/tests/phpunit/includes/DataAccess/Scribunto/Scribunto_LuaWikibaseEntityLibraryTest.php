@@ -70,7 +70,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
 		$package = $luaWikibaseLibrary->register();
 
-		$this->assertInternalType( 'array', $package );
+		$this->assertIsArray( $package );
 		$this->assertArrayHasKey( 'create', $package );
 
 		// The value of create depends on the Lua runtime in use.

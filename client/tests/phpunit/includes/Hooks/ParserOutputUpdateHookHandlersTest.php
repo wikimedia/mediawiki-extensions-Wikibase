@@ -413,7 +413,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	}
 
 	private function assertLanguageLinks( $links, ParserOutput $parserOutput ) {
-		$this->assertInternalType( 'array', $links );
+		$this->assertIsArray( $links );
 
 		$actualLinks = $parserOutput->getLanguageLinks();
 

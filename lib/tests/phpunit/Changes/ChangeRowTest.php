@@ -23,7 +23,7 @@ class ChangeRowTest extends MediaWikiTestCase {
 	public function testAgeCalculation() {
 		$change = $this->newChangeRow( [ 'time' => date( 'YmdHis' ) ] );
 		$age = $change->getAge();
-		$this->assertInternalType( 'int', $age );
+		$this->assertIsInt( $age );
 		$this->assertGreaterThanOrEqual( 0, $age );
 	}
 

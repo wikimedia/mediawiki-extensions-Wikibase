@@ -289,19 +289,19 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	 */
 	private function assertEntityPropsInfo( array $entity ) {
 		$this->assertArrayHasKey( 'pageid', $entity, 'An entity is missing the pageid value' );
-		$this->assertInternalType( 'integer', $entity['pageid'] );
+		$this->assertIsInt( $entity['pageid'] );
 		$this->assertGreaterThan( 0, $entity['pageid'] );
 
 		$this->assertArrayHasKey( 'ns', $entity, 'An entity is missing the ns value' );
-		$this->assertInternalType( 'integer', $entity['ns'] );
+		$this->assertIsInt( $entity['ns'] );
 		$this->assertGreaterThanOrEqual( 0, $entity['ns'] );
 
 		$this->assertArrayHasKey( 'title', $entity, 'An entity is missing the title value' );
-		$this->assertInternalType( 'string', $entity['title'] );
+		$this->assertIsString( $entity['title'] );
 		$this->assertNotEmpty( $entity['title'] );
 
 		$this->assertArrayHasKey( 'lastrevid', $entity, 'An entity is missing the lastrevid value' );
-		$this->assertInternalType( 'integer', $entity['lastrevid'] );
+		$this->assertIsInt( $entity['lastrevid'] );
 		$this->assertGreaterThanOrEqual( 0, $entity['lastrevid'] );
 
 		$this->assertArrayHasKey( 'modified', $entity, 'An entity is missing the modified value' );
@@ -331,7 +331,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	private function assertEntityPropsSitelinksBadges( array $entity ) {
 		foreach ( $entity['sitelinks'] as $siteLink ) {
 			$this->assertArrayHasKey( 'badges', $siteLink );
-			$this->assertInternalType( 'array', $siteLink['badges'] );
+			$this->assertIsArray( $siteLink['badges'] );
 
 			foreach ( $siteLink['badges'] as $badge ) {
 				$this->assertStringStartsWith( 'Q', $badge );

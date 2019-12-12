@@ -254,7 +254,7 @@ class QuerySearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$this->assertArrayHasKey( 'wbsearch', $result['query'] );
 
 		foreach ( $result['query']['wbsearch'] as $key => $searchresult ) {
-			$this->assertInternalType( 'integer', $key );
+			$this->assertIsInt( $key );
 			$this->assertArrayHasKey( 'ns', $searchresult );
 			$this->assertArrayHasKey( 'title', $searchresult );
 			$this->assertArrayHasKey( 'pageid', $searchresult );

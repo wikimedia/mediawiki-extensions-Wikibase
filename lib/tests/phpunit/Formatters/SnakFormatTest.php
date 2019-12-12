@@ -40,8 +40,8 @@ class SnakFormatTest extends \PHPUnit\Framework\TestCase {
 			if ( strpos( $cname, 'FORMAT_' ) !== 0 ) {
 				continue;
 			}
-			$this->assertInternalType(
-				'string',
+			$this->assertIsString(
+
 				$snakFormatHelper->getFallbackFormat( $cvalue )
 			);
 		}

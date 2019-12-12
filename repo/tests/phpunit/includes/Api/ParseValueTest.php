@@ -318,13 +318,13 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 		$name = '';
 		foreach ( $path as $step ) {
 			$name .= '/' . $step;
-			$this->assertInternalType( 'array', $data, $name );
+			$this->assertIsArray( $data, $name );
 			$this->assertArrayHasKey( $step, $data, $name );
 			$data = $data[$step];
 		}
 
 		if ( is_string( $expected ) && preg_match( '/^([^\s\w\d]).*\1[a-zA-Z]*$/', $expected ) ) {
-			$this->assertInternalType( 'string', $data, $name );
+			$this->assertIsString( $data, $name );
 			$this->assertRegExp( $expected, $data, $name );
 		} else {
 			$this->assertEquals( $expected, $data, $name );

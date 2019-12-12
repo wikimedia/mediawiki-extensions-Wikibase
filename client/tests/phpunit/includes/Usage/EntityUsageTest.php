@@ -39,7 +39,7 @@ class EntityUsageTest extends \PHPUnit\Framework\TestCase {
 		$aspect = EntityUsage::ALL_USAGE;
 
 		$usage = new EntityUsage( $id, $aspect );
-		$this->assertInternalType( 'string', $usage->getIdentityString() );
+		$this->assertIsString( $usage->getIdentityString() );
 	}
 
 	public function testGetAspectKey() {

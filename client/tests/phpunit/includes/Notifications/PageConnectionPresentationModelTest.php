@@ -112,7 +112,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 			"Failed asserting that the primary link is same"
 		);
 
-		$this->assertInternalType( 'array', $model->getSecondaryLinks() );
+		$this->assertIsArray( $model->getSecondaryLinks() );
 		$this->assertInstanceOf( Message::class, $model->getSubjectMessage() );
 
 		unset( $wgEchoNotifications[EchoNotificationsHandlers::NOTIFICATION_TYPE] );

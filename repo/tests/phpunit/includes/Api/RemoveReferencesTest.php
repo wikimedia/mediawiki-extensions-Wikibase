@@ -92,7 +92,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 				iterator_to_array( $references )
 			);
 
-			$this->assertInternalType( 'string', $statement->getGuid() );
+			$this->assertIsString( $statement->getGuid() );
 
 			if ( $references->isEmpty() ) {
 				$this->makeInvalidRequest(
@@ -147,7 +147,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 
 		$this->makeInvalidRequest( $statementGuid, $hashes, 'no-such-reference' );

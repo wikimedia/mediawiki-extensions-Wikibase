@@ -31,7 +31,7 @@ class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		$expectedString = $wgLanguageCode . ' - ';
-		$this->assertInternalType( 'integer', stripos( $output, $expectedString ),
+		$this->assertIsInt( stripos( $output, $expectedString ),
 			"Cannot find '$expectedString' in the list of fallback languages in '$output'." );
 	}
 

@@ -146,7 +146,7 @@ class ItemDiffVisualizerTest extends MediaWikiTestCase {
 	public function testGenerateEntityContentDiffBody( EntityContentDiff $diff, array $matchers ) {
 		$html = $this->getVisualizer()->visualizeEntityContentDiff( $diff );
 
-		$this->assertInternalType( 'string', $html );
+		$this->assertIsString( $html );
 		foreach ( $matchers as $name => $matcher ) {
 			$this->assertContains( $matcher, $html, $name );
 		}

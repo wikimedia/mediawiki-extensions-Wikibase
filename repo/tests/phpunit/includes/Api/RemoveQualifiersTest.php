@@ -83,7 +83,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
-			$this->assertInternalType( 'string', $statement->getGuid() );
+			$this->assertIsString( $statement->getGuid() );
 
 			$qualifiers = $statement->getQualifiers();
 
@@ -122,7 +122,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
 
-		$this->assertInternalType( 'string', $statement->getGuid() );
+		$this->assertIsString( $statement->getGuid() );
 
 		$qualifiers = $statement->getQualifiers();
 		$hashes = array_map(
@@ -148,7 +148,7 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 
 		$this->makeInvalidRequest( $statementGuid, $hashes, 'no-such-qualifier' );

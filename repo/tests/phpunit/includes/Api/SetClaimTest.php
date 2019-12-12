@@ -396,7 +396,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	private function assertValidResponse( array $resultArray ) {
 		$this->assertResultSuccess( $resultArray );
-		$this->assertInternalType( 'array', $resultArray, 'top level element is an array' );
+		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a statement key' );
 

@@ -203,7 +203,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 			$format = $provider->getFormatName( $expected );
 			$actual = $provider->getExtension( $format );
 
-			$this->assertInternalType( 'string', $actual, $expected );
+			$this->assertIsString( $actual, $expected );
 		}
 
 		foreach ( self::$badFormats as $format ) {
@@ -221,7 +221,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 			$format = $provider->getFormatName( $expected );
 			$actual = $provider->getMimeType( $format );
 
-			$this->assertInternalType( 'string', $actual, $expected );
+			$this->assertIsString( $actual, $expected );
 		}
 
 		foreach ( self::$badFormats as $format ) {

@@ -27,19 +27,19 @@ class IdGeneratorTest extends \MediaWikiTestCase {
 
 		$id = $generator->getNewId( 'foo' );
 
-		$this->assertInternalType( 'integer', $id );
+		$this->assertIsInt( $id );
 
 		$id1 = $generator->getNewId( 'foo' );
 
-		$this->assertInternalType( 'integer', $id1 );
+		$this->assertIsInt( $id1 );
 		$this->assertNotEquals( $id, $id1 );
 
 		$id2 = $generator->getNewId( 'bar' );
-		$this->assertInternalType( 'integer', $id2 );
+		$this->assertIsInt( $id2 );
 
 		$id3 = $clone->getNewId( 'foo' );
 
-		$this->assertInternalType( 'integer', $id3 );
+		$this->assertIsInt( $id3 );
 
 		$this->assertTrue( !in_array( $id3, [ $id, $id1 ], true ) );
 	}

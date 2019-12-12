@@ -48,7 +48,7 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 		// and doesn't block. That is, the default should let the user execute the page.
 		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
-		$this->assertInternalType( 'string', $output );
+		$this->assertIsString( $output );
 		$this->assertContains( 'wikibase-listdatatypes-summary', $output );
 		$this->assertContains( 'wikibase-listdatatypes-intro', $output );
 

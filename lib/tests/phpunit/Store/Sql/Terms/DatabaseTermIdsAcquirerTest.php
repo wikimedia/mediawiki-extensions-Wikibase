@@ -69,7 +69,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
 
-		$this->assertInternalType( 'array', $acquiredTermIds );
+		$this->assertIsArray( $acquiredTermIds );
 		$this->assertCount( 7, $acquiredTermIds );
 	}
 

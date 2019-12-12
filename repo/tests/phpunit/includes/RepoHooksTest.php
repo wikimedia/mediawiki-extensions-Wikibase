@@ -139,18 +139,18 @@ class RepoHooksTest extends MediaWikiTestCase {
 		RepoHooks::onAPIQuerySiteInfoGeneralInfo( $api, $actual );
 
 		foreach ( $actual['wikibase-propertytypes'] as $key => $value ) {
-			$this->assertInternalType( 'string', $key );
-			$this->assertInternalType( 'string', $value['valuetype'] );
+			$this->assertIsString( $key );
+			$this->assertIsString( $value['valuetype'] );
 		}
 
-		$this->assertInternalType( 'string', $actual['wikibase-conceptbaseuri'] );
+		$this->assertIsString( $actual['wikibase-conceptbaseuri'] );
 
-		$this->assertInternalType( 'string', $actual['wikibase-geoshapestoragebaseurl'] );
+		$this->assertIsString( $actual['wikibase-geoshapestoragebaseurl'] );
 
-		$this->assertInternalType( 'string', $actual['wikibase-tabulardatastoragebaseurl'] );
+		$this->assertIsString( $actual['wikibase-tabulardatastoragebaseurl'] );
 
 		if ( array_key_exists( 'wikibase-sparql', $actual ) ) {
-			$this->assertInternalType( 'string', $actual['wikibase-sparql'] );
+			$this->assertIsString( $actual['wikibase-sparql'] );
 		}
 	}
 
@@ -346,9 +346,9 @@ XML
 			'wb',
 			'termboxVersion',
 		], array_keys( $lazyOptions ) );
-		$this->assertInternalType( 'callable', $lazyOptions[ 'wb' ] );
+		$this->assertIsCallable( $lazyOptions[ 'wb' ] );
 		$this->assertSame( EntityHandler::PARSER_VERSION, $lazyOptions[ 'wb' ]() );
-		$this->assertInternalType( 'callable', $lazyOptions[ 'termboxVersion' ] );
+		$this->assertIsCallable( $lazyOptions[ 'termboxVersion' ] );
 	}
 
 	public function testOnParserOptionsRegister_hook() {

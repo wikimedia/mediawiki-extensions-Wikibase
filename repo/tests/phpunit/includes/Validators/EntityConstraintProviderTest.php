@@ -46,7 +46,7 @@ class EntityConstraintProviderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function assertValidators( $validators ) {
-		$this->assertInternalType( 'array', $validators );
+		$this->assertIsArray( $validators );
 
 		foreach ( $validators as $validator ) {
 			$this->assertInstanceOf( EntityValidator::class, $validator );

@@ -22,7 +22,7 @@ class MediaWikiMonthNameProviderTest extends \PHPUnit\Framework\TestCase {
 	public function testGetLocalizedMonthNames( $languageCode ) {
 		$instance = new MediaWikiMonthNameProvider();
 		$actual = $instance->getLocalizedMonthNames( $languageCode );
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertCount( 12, $actual );
 	}
@@ -33,7 +33,7 @@ class MediaWikiMonthNameProviderTest extends \PHPUnit\Framework\TestCase {
 	public function testGetMonthNumbers( $languageCode ) {
 		$instance = new MediaWikiMonthNameProvider();
 		$actual = $instance->getMonthNumbers( $languageCode );
-		$this->assertInternalType( 'array', $actual );
+		$this->assertIsArray( $actual );
 		$this->assertContainsOnly( 'int', $actual );
 		$this->assertGreaterThanOrEqual( 12, count( $actual ) );
 	}
