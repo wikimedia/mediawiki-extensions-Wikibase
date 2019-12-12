@@ -336,7 +336,7 @@ class ParseValue extends ApiBase {
 				self::PARAM_REQUIRED => false,
 			],
 			'property' => [
-				self::PARAM_TYPE => 'text',
+				self::PARAM_TYPE => 'string',
 				self::PARAM_REQUIRED => false,
 			],
 			'parser' => [
