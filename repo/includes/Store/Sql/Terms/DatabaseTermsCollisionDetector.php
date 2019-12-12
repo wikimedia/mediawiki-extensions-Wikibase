@@ -75,7 +75,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			return null;
 		}
 
-		$entityId = $this->findEntityIdsWithTermInLang( $lang, $label, $labelTypeId )[0] ?? null;
+		$entityId = $this->findEntityIdsWithTermInLang( $lang, $label, $labelTypeId, true )[0] ?? null;
 
 		return $entityId !== null ? $this->makeEntityId( $entityId ) : null;
 	}
