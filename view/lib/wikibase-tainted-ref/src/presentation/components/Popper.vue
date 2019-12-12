@@ -130,40 +130,40 @@ export default class Popper extends Vue {
 	-webkit-transform: rotate( 45deg );
 	-ms-transform: rotate( 45deg );
 	transform: rotate( 45deg );
-	border-top: 1px solid #a2a9b1;
-	border-left: 1px solid #a2a9b1;
-	background: #fff;
+	border-top: 1px solid $border-color;
+	border-left: 1px solid $border-color;
+	background: $color-white;
 }
 
 .wb-tr-popper-body {
 	padding: 8px 16px 8px 16px;
 	width: 415px;
-	border: #a2a9b1 1px solid;
+	border: $border-color 1px solid;
 	border-radius: 2px;
 	overflow: hidden;
 	z-index: 2;
 	position: relative;
-	background-color: #fff;
+	background-color: $color-white;
 }
 
 .wb-tr-popper-title {
 	font-family: sans-serif;
 	font-size: 16px;
 	font-weight: bold;
-	color: #000;
+	color: $color-black;
 }
 
 .wb-tr-popper-text {
 	font-family: sans-serif;
 	font-size: 14px;
 	margin-top: 22px;
-	color: #222;
+	color: $basic-text-black;
 }
 
 .wb-tr-title-wrapper {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px #eaecf0 solid;
+	border-bottom: 1px $border-color-grey solid;
 }
 
 .wb-tr-popper-close {
@@ -172,7 +172,7 @@ export default class Popper extends Vue {
 	font-size: 20px;
 	width: 32px;
 	height: 32px;
-	color: #4b4b4b;
+	color: $color-dark-grey;
 	transition: background-color 100ms;
 	border-radius: 2px;
 	position: relative;
@@ -182,11 +182,11 @@ export default class Popper extends Vue {
 }
 
 .wb-tr-popper-close:hover {
-	background-color: #f8f9fa;
+	background-color: $background-color-light-grey;
 }
 
 .wb-tr-popper-close:active {
-	transition-property: fade_out( #eaecf0, 1 );
+	transition-property: fade_out( $border-color-grey, 1 );
 	transition-duration: 100ms;
 }
 
@@ -197,16 +197,16 @@ export default class Popper extends Vue {
 	margin-left: 1.5em;
 	margin-top: 4px;
 	margin-bottom: 4px;
-	color: #36c;
+	color: $help-link-blue;
 }
 
 .wb-tr-popper-feedback {
 	font-weight: normal;
-	color: #222;
+	color: $basic-text-black;
 	margin-top: 8px;
 }
 
 .wb-tr-popper-feedback a {
-	color: #0645ad;
+	color: $feedback-link-blue;
 }
 </style>
