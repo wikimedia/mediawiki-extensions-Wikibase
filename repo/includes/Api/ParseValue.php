@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use Exception;
@@ -58,6 +60,11 @@ class ParseValue extends ApiBase {
 	private $exceptionLocalizer;
 
 	/**
+	 * @var PropertyDataTypeLookup
+	 */
+	private $propertyDataTypeLookup;
+
+	/**
 	 * @var ApiErrorReporter
 	 */
 	private $errorReporter;
@@ -72,6 +79,7 @@ class ParseValue extends ApiBase {
 	 * @param DataTypeValidatorFactory $dataTypeValidatorFactory
 	 * @param ExceptionLocalizer $exceptionLocalizer
 	 * @param ValidatorErrorLocalizer $validatorErrorLocalizer
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ApiErrorReporter $errorReporter
 	 */
 	public function __construct(
@@ -82,6 +90,7 @@ class ParseValue extends ApiBase {
 		DataTypeValidatorFactory $dataTypeValidatorFactory,
 		ExceptionLocalizer $exceptionLocalizer,
 		ValidatorErrorLocalizer $validatorErrorLocalizer,
+		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ApiErrorReporter $errorReporter
 	) {
 		parent::__construct( $mainModule, $moduleName );
@@ -90,6 +99,7 @@ class ParseValue extends ApiBase {
 		$this->dataTypeValidatorFactory = $dataTypeValidatorFactory;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->validatorErrorLocalizer = $validatorErrorLocalizer;
+		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->errorReporter = $errorReporter;
 	}
 
@@ -104,6 +114,7 @@ class ParseValue extends ApiBase {
 		$results = [];
 
 		$params = $this->extractRequestParams();
+		$this->requireMaxOneParameter( $params, 'property', 'datatype', 'parser' );
 		$validator = $params['validate'] ? $this->getValidator() : null;
 
 		foreach ( $params['values'] as $value ) {
@@ -127,6 +138,11 @@ class ParseValue extends ApiBase {
 		// parameter. For backwards compatibility, parsers are also registered under their old names
 		// in $wgValueParsers, and thus in the ValueParserFactory.
 		$name = $params['datatype'] ?: $params['parser'];
+
+		if ( empty( $name ) && isset( $params['property'] ) ) {
+			$propertyId = new PropertyId( $params['property'] );
+			$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		}
 
 		if ( empty( $name ) ) {
 			// If neither 'datatype' not 'parser' is given, tell the client to use 'datatype'.
@@ -155,6 +171,11 @@ class ParseValue extends ApiBase {
 		$params = $this->extractRequestParams();
 
 		$name = $params['datatype'];
+
+		if ( empty( $name ) && isset( $params['property'] ) ) {
+			$propertyId = new PropertyId( $params['property'] );
+			$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+		}
 
 		if ( empty( $name ) ) {
 			// 'datatype' parameter is required for validation.
@@ -307,12 +328,16 @@ class ParseValue extends ApiBase {
 	public function getAllowedParams() {
 		return [
 			'datatype' => [
-				ApiBase::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
+				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
 
 				// Currently, the deprecated 'parser' parameter may be used as an
 				// alternative to the 'datatype' parameter. Once 'parser' is removed,
 				// 'datatype' should be required.
-				ApiBase::PARAM_REQUIRED => false,
+				self::PARAM_REQUIRED => false,
+			],
+			'property' => [
+				self::PARAM_TYPE => 'text',
+				self::PARAM_REQUIRED => false,
 			],
 			'parser' => [
 				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
@@ -332,7 +357,7 @@ class ParseValue extends ApiBase {
 				self::PARAM_REQUIRED => false,
 			],
 			'validate' => [
-				ApiBase::PARAM_TYPE => 'boolean',
+				self::PARAM_TYPE => 'boolean',
 			],
 		];
 	}
@@ -348,6 +373,8 @@ class ParseValue extends ApiBase {
 				'apihelp-wbparsevalue-example-2',
 			'action=wbparsevalue&datatype=time&validate&values=1994-02-08&options={"precision":14}' =>
 				'apihelp-wbparsevalue-example-3',
+			'action=wbparsevalue&property=P123&validate&values=foo' =>
+				'apihelp-wbparsevalue-example-4',
 		];
 	}
 
