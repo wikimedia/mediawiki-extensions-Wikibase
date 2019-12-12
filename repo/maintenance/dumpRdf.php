@@ -14,7 +14,6 @@ use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
-use Wikibase\Repo\Store\BatchedEntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\BNodeLabeler;
@@ -69,7 +68,7 @@ class DumpRdf extends DumpEntities {
 	private $hasHadServicesSet = false;
 
 	/**
-	 * @var EntityTitleLookup|BatchedEntityTitleStoreLookup
+	 * @var EntityTitleLookup
 	 */
 	private $titleLookup;
 

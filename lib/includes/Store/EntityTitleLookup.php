@@ -37,4 +37,18 @@ interface EntityTitleLookup {
 	 */
 	public function getTitleForId( EntityId $id );
 
+	/**
+	 * Returns an array of Titles for the given entity ids, indexed by the id serialization
+	 *
+	 * If an entity does not exist, the array element for the relevant id serialization will be null
+	 *
+	 * @param EntityId[] $ids
+	 *
+	 * @throws MWException
+	 * @throws OutOfBoundsException
+	 * @throws InvalidArgumentException
+	 * @return Title[]
+	 */
+	public function getTitlesForIds( array $ids );
+
 }

@@ -75,4 +75,17 @@ class ClientSiteLinkTitleLookup implements EntityTitleLookup {
 		return $siteLinkData[0][1];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	public function getTitlesForIds( array $ids ) {
+		$result = [];
+		/** @var EntityId $id */
+		foreach ( $ids as $id ) {
+			$result[$id->getSerialization()] = $this->getTitleForId( $id );
+		}
+
+		return $result;
+	}
+
 }
