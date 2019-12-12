@@ -4,7 +4,7 @@
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
 				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
-				<a class="wb-tr-popper-close" @click="closeClick">x</a>
+				<span class="wb-tr-popper-close" @click="closeClick" />
 			</div>
 			<a
 				class="wb-tr-popper-help"
@@ -176,7 +176,9 @@ export default class Popper extends Vue {
 	transition: background-color 100ms;
 	border-radius: 2px;
 	position: relative;
-	text-align: center;
+	background-image: $svg-close-icon;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .wb-tr-popper-close:hover {
