@@ -121,7 +121,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 */
 	public function __construct(
 		$repoDB,
-		$repoSiteId,
+		string $repoSiteId,
 		ILBFactory $LBFactory,
 		LoggerInterface $logger
 	) {
@@ -142,11 +142,11 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param int $batchSize
 	 */
-	public function setBatchSize( $batchSize ) {
+	public function setBatchSize( int $batchSize ): void {
 		$this->batchSize = $batchSize;
 	}
 
-	public function setMessageReporter( MessageReporter $messageReporter ) {
+	public function setMessageReporter( MessageReporter $messageReporter ): void {
 		$this->messageReporter = $messageReporter;
 	}
 
@@ -156,7 +156,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param int $randomness
 	 */
-	public function setRandomness( $randomness ) {
+	public function setRandomness( int $randomness ): void {
 		$this->randomness = $randomness;
 	}
 
@@ -167,7 +167,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param int $dispatchInterval
 	 */
-	public function setDispatchInterval( $dispatchInterval ) {
+	public function setDispatchInterval( int $dispatchInterval ): void {
 		$this->dispatchInterval = $dispatchInterval;
 	}
 
@@ -176,7 +176,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param callable $array_rand
 	 */
-	public function setArrayRandOverride( $array_rand ) {
+	public function setArrayRandOverride( callable $array_rand ): void {
 		$this->array_rand = $array_rand;
 	}
 
@@ -185,7 +185,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param callable $time
 	 */
-	public function setTimeOverride( $time ) {
+	public function setTimeOverride( callable $time ): void {
 		$this->time = $time;
 	}
 
@@ -194,7 +194,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param callable $engageClientLockOverride
 	 */
-	public function setEngageClientLockOverride( $engageClientLockOverride ) {
+	public function setEngageClientLockOverride( callable $engageClientLockOverride ): void {
 		$this->engageClientLockOverride = $engageClientLockOverride;
 	}
 
@@ -203,7 +203,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param callable $isClientLockUsedOverride
 	 */
-	public function setIsClientLockUsedOverride( $isClientLockUsedOverride ) {
+	public function setIsClientLockUsedOverride( callable $isClientLockUsedOverride ): void {
 		$this->isClientLockUsedOverride = $isClientLockUsedOverride;
 	}
 
@@ -212,42 +212,42 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @param callable $releaseClientLockOverride
 	 */
-	public function setReleaseClientLockOverride( $releaseClientLockOverride ) {
+	public function setReleaseClientLockOverride( callable $releaseClientLockOverride ): void {
 		$this->releaseClientLockOverride = $releaseClientLockOverride;
 	}
 
 	/**
 	 * @param string $stateTable
 	 */
-	public function setStateTable( $stateTable ) {
+	public function setStateTable( string $stateTable ): void {
 		$this->stateTable = $stateTable;
 	}
 
 	/**
 	 * @param string $changesTable
 	 */
-	public function setChangesTable( $changesTable ) {
+	public function setChangesTable( string $changesTable ): void {
 		$this->changesTable = $changesTable;
 	}
 
 	/**
 	 * @return ILoadBalancer the repo's database load balancer.
 	 */
-	private function getRepoLB() {
+	private function getRepoLB(): ILoadBalancer {
 		return $this->LBFactory->getMainLB( $this->repoDB );
 	}
 
 	/**
 	 * @return IDatabase A connection to the repo's master database
 	 */
-	private function getRepoMaster() {
+	private function getRepoMaster(): IDatabase {
 		return $this->getRepoLB()->getConnectionRef( DB_MASTER, [], $this->repoDB );
 	}
 
 	/**
 	 * @return IDatabase A connection to the repo's replica database
 	 */
-	private function getRepoReplica() {
+	private function getRepoReplica(): IDatabase {
 		return $this->getRepoLB()->getConnectionRef( DB_REPLICA, [], $this->repoDB );
 	}
 
@@ -258,7 +258,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * Note: this implementation will try a wiki from the list returned by getCandidateClients()
 	 * at random. If all have been tried and failed, it returns null.
 	 *
-	 * @return array An associative array containing the state of the selected client wiki
+	 * @return array|null An associative array containing the state of the selected client wiki
 	 *               (or null, if no target could be locked). Fields are:
 	 *
 	 * * chd_site:     the client wiki's global site ID
@@ -271,7 +271,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @see releaseWiki()
 	 */
-	public function selectClient() {
+	public function selectClient(): ?array {
 		$candidates = $this->getCandidateClients();
 
 		while ( $candidates ) {
@@ -317,7 +317,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	/**
 	 * @return int The current time as a timestamp, in seconds since Epoch.
 	 */
-	private function now() {
+	private function now(): int {
 		return call_user_func( $this->time );
 	}
 
@@ -329,7 +329,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @see selectClient()
 	 */
-	private function getCandidateClients() {
+	private function getCandidateClients(): array {
 		$dbr = $this->getRepoReplica();
 
 		// XXX: subject to clock skew. Use DB based "now" time?
@@ -382,7 +382,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @throws DBUnexpectedError
 	 */
-	public function initState( array $clientWikiDBs ) {
+	public function initState( array $clientWikiDBs ): void {
 		$dbr = $this->getRepoReplica();
 
 		$trackedSiteIds = $dbr->selectFieldValues(
@@ -440,7 +440,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @see selectClient()
 	 */
-	public function lockClient( $siteID ) {
+	public function lockClient( string $siteID ) {
 		$this->trace( "Trying $siteID" );
 
 		$dbr = $this->getRepoReplica();
@@ -504,7 +504,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @throws Exception
 	 * @see selectWiki()
 	 */
-	public function releaseClient( array $state ) {
+	public function releaseClient( array $state ): void {
 		$siteID = $state['chd_site'];
 		$wikiDB = $state['chd_db'];
 
@@ -547,7 +547,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return string the lock name to use.
 	 */
-	private function getClientLockName( $siteID ) {
+	private function getClientLockName( string $siteID ): string {
 		// NOTE: Lock names are global, not scoped per database. To avoid clashes,
 		// we need to include both the ID of the repo and the ID of the client.
 		$name = "Wikibase.{$this->repoSiteId}.dispatchChanges.$siteID";
@@ -561,7 +561,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool whether the lock was engaged successfully.
 	 */
-	protected function engageClientLock( $lock ) {
+	protected function engageClientLock( string $lock ): bool {
 		$dbw = $this->getRepoMaster();
 
 		if ( isset( $this->engageClientLockOverride ) ) {
@@ -581,7 +581,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool whether the lock was released successfully.
 	 */
-	protected function releaseClientLock( IDatabase $db, $lock ) {
+	protected function releaseClientLock( IDatabase $db, string $lock ): bool {
 		if ( isset( $this->releaseClientLockOverride ) ) {
 			return call_user_func( $this->releaseClientLockOverride, $db, $lock );
 		}
@@ -597,7 +597,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 *
 	 * @return bool true if the given lock is currently held by another process, false otherwise.
 	 */
-	protected function isClientLockUsed( IDatabase $db, $lock ) {
+	protected function isClientLockUsed( IDatabase $db, string $lock ): bool {
 		if ( isset( $this->isClientLockUsedOverride ) ) {
 			return call_user_func( $this->isClientLockUsedOverride, $db, $lock );
 		}
@@ -605,13 +605,13 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		return !$db->lockIsFree( $lock, __METHOD__ );
 	}
 
-	private function warn( $message ) {
+	private function warn( string $message ): void {
 		wfLogWarning( $message );
 
 		$this->messageReporter->reportMessage( $message );
 	}
 
-	private function log( $message, array $context ) {
+	private function log( string $message, array $context ): void {
 		$this->logger->debug( $message, $context );
 
 		$this->messageReporter->reportMessage(
@@ -619,7 +619,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 		);
 	}
 
-	private function trace( $message ) {
+	private function trace( string $message ): void {
 		// Currently unused
 	}
 
@@ -628,7 +628,7 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 	 * @param array $context
 	 * @return string
 	 */
-	private function getMessageReportString( $message, array $context ) {
+	private function getMessageReportString( string $message, array $context ): string {
 		$logMessageProcessor = new PsrLogMessageProcessor;
 
 		return $logMessageProcessor( [
