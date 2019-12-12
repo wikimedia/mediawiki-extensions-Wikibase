@@ -1,4 +1,4 @@
-import { MissingPermissionsError } from '@/definitions/data-access/PageEditPermissionsRepository';
+import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 
 export enum ErrorTypes {
 	APPLICATION_LOGIC_ERROR = 'APPLICATION_LOGIC_ERROR',
