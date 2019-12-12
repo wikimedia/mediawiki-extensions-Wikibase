@@ -138,7 +138,6 @@ export default class Popper extends Vue {
 .wb-tr-popper-body {
 	padding: 8px 16px 8px 16px;
 	width: 415px;
-	height: 150px;
 	border: #a2a9b1 1px solid;
 	border-radius: 2px;
 	overflow: hidden;
@@ -201,10 +200,8 @@ export default class Popper extends Vue {
 
 .wb-tr-popper-feedback {
 	font-weight: normal;
-	position: absolute;
 	color: #222;
 	margin-top: 8px;
-	bottom: 0;
 }
 
 .wb-tr-popper-feedback a {
