@@ -47,6 +47,7 @@ module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 
 		if( !order ) {
 			// No order specified: Just loop through the json object:
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( serialization, function( propertyId, snaksPerProperty ) {
 				addSerializedSnaksToSnakList( snaksPerProperty, snaks );
 			} );
@@ -54,8 +55,9 @@ module.exports = util.inherit( 'WbSnakListDeserializer', PARENT, {
 		} else {
 			// Check whether all property ids that are featured by snaks are specified in the order
 			// list:
+			// eslint-disable-next-line no-jquery/no-each-util
 			$.each( serialization, function( propertyId ) {
-				if( $.inArray( propertyId, order ) === -1 ) {
+				if( order.indexOf( propertyId ) === -1 ) {
 					throw new Error( 'Snak featuring the property id ' + propertyId + ' is not '
 						+ 'present within list of property ids defined for ordering' );
 				}

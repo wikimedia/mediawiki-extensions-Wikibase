@@ -43,7 +43,7 @@ QUnit.test( 'Constructor', function( assert ) {
 
 QUnit.test( 'isEmpty()', function( assert ) {
 	assert.expect( 2 );
-	assert.ok(
+	assert.strictEqual(
 		( new MockEntity(
 			'i am an id',
 			new datamodel.Fingerprint(
@@ -52,11 +52,12 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
+		true,
 		'Verified isEmpty() returning TRUE.'
 	);
 
-	assert.ok(
-		!( new MockEntity(
+	assert.strictEqual(
+		( new MockEntity(
 			'i am an id',
 			new datamodel.Fingerprint(
 				new datamodel.TermMap( { de: new datamodel.Term( 'de', 'de-term' ) } ),
@@ -64,6 +65,7 @@ QUnit.test( 'isEmpty()', function( assert ) {
 				new datamodel.MultiTermMap()
 			)
 		) ).isEmpty(),
+		false,
 		'Returning FALSE when Fingerprint is not empty.'
 	);
 } );
@@ -77,15 +79,17 @@ QUnit.test( 'equals()', function( assert ) {
 			var property2 = new MockEntity( testSets[j][0], testSets[j][1] );
 
 			if( i === j ) {
-				assert.ok(
+				assert.strictEqual(
 					property1.equals( property2 ),
+					true,
 					'Test set #' + i + ' equals test set #' + j + '.'
 				);
 				continue;
 			}
 
-			assert.ok(
-				!property1.equals( property2 ),
+			assert.strictEqual(
+				property1.equals( property2 ),
+				false,
 				'Test set #' + i + ' does not equal test set #' + j + '.'
 			);
 		}
