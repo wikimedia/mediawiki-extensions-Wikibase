@@ -15,7 +15,7 @@ export interface PermissionErrorUnknown {
 	type: PermissionErrorType.UNKNOWN;
 	code: string;
 	messageKey: string;
-	messageParams: string[];
+	messageParams: ( string|number )[];
 }
 
 /**

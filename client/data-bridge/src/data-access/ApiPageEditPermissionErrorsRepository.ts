@@ -15,7 +15,7 @@ import PageEditPermissionErrorsRepository, {
 
 interface ApiErrorRawErrorformat extends ApiError {
 	key: string;
-	params: string[];
+	params: ( string|number )[];
 }
 
 function isApiErrorRawErrorformat( error: ApiError ): error is ApiErrorRawErrorformat {
@@ -69,7 +69,7 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 		}
 		switch ( error.code ) {
 			case 'protectedpage': {
-				const right = error.params[ 0 ];
+				const right = error.params[ 0 ] as string;
 				const permissionError: PermissionErrorProtectedPage = {
 					type: PermissionErrorType.PROTECTED_PAGE,
 					right,
