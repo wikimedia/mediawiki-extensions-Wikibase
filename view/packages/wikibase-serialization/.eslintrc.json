@@ -14,7 +14,6 @@
 	},
 	"rules": {
 		"computed-property-spacing": "off",
-		"indent": "off",
 		"keyword-spacing": "off",
 		"new-parens": "off",
 		"no-underscore-dangle": "off",

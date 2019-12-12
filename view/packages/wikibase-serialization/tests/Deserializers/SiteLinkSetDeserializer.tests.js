@@ -3,38 +3,38 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 ( function() {
-'use strict';
+	'use strict';
 
-QUnit.module( 'SiteLinkSetDeserializer' );
-var SiteLinkSetDeserializer = require( '../../src/Deserializers/SiteLinkSetDeserializer.js' ),
-	datamodel = require( 'wikibase.datamodel' );
+	QUnit.module( 'SiteLinkSetDeserializer' );
+	var SiteLinkSetDeserializer = require( '../../src/Deserializers/SiteLinkSetDeserializer.js' ),
+		datamodel = require( 'wikibase.datamodel' );
 
-var testSets = [
-	[
-		{},
-		new datamodel.SiteLinkSet()
-	], [
-		{
-			site: {
-				site: 'site',
-				title: 'page',
-				badges: []
-			}
-		},
-		new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'site', 'page' ) ] )
-	]
-];
+	var testSets = [
+		[
+			{},
+			new datamodel.SiteLinkSet()
+		], [
+			{
+				site: {
+					site: 'site',
+					title: 'page',
+					badges: []
+				}
+			},
+			new datamodel.SiteLinkSet( [ new datamodel.SiteLink( 'site', 'page' ) ] )
+		]
+	];
 
-QUnit.test( 'deserialize()', function( assert ) {
-	assert.expect( 2 );
-	var siteLinkSetDeserializer = new SiteLinkSetDeserializer();
+	QUnit.test( 'deserialize()', function( assert ) {
+		assert.expect( 2 );
+		var siteLinkSetDeserializer = new SiteLinkSetDeserializer();
 
-	for( var i = 0; i < testSets.length; i++ ) {
-		assert.ok(
-			siteLinkSetDeserializer.deserialize( testSets[i][0] ).equals( testSets[i][1] ),
-			'Test set #' + i + ': Deserializing successful.'
-		);
-	}
-} );
+		for( var i = 0; i < testSets.length; i++ ) {
+			assert.ok(
+				siteLinkSetDeserializer.deserialize( testSets[i][0] ).equals( testSets[i][1] ),
+				'Test set #' + i + ': Deserializing successful.'
+			);
+		}
+	} );
 
 }() );

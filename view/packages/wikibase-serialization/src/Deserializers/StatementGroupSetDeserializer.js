@@ -1,37 +1,37 @@
 ( function() {
 	'use strict';
 
-var PARENT = require( './Deserializer.js' ),
-	datamodel = require( 'wikibase.datamodel' ),
-	StatementGroupDeserializer = require( './StatementGroupDeserializer.js' );
+	var PARENT = require( './Deserializer.js' ),
+		datamodel = require( 'wikibase.datamodel' ),
+		StatementGroupDeserializer = require( './StatementGroupDeserializer.js' );
 
-/**
- * @class StatementGroupSetDeserializer
- * @extends Deserializer
- * @since 2.0
- * @license GPL-2.0+
- * @author H. Snater < mediawiki@snater.com >
- *
- * @constructor
- */
-module.exports = util.inherit( 'WbStatementGroupSetDeserializer', PARENT, {
 	/**
-	 * @inheritdoc
+	 * @class StatementGroupSetDeserializer
+	 * @extends Deserializer
+	 * @since 2.0
+	 * @license GPL-2.0+
+	 * @author H. Snater < mediawiki@snater.com >
 	 *
-	 * @return {datamodel.StatementGroupSet}
+	 * @constructor
 	 */
-	deserialize: function( serialization ) {
-		var statemenGroupDeserializer = new StatementGroupDeserializer(),
-			statementGroups = [];
+	module.exports = util.inherit( 'WbStatementGroupSetDeserializer', PARENT, {
+		/**
+		 * @inheritdoc
+		 *
+		 * @return {datamodel.StatementGroupSet}
+		 */
+		deserialize: function( serialization ) {
+			var statemenGroupDeserializer = new StatementGroupDeserializer(),
+				statementGroups = [];
 
-		for( var propertyId in serialization ) {
-			statementGroups.push(
-				statemenGroupDeserializer.deserialize( serialization[propertyId] )
-			);
+			for( var propertyId in serialization ) {
+				statementGroups.push(
+					statemenGroupDeserializer.deserialize( serialization[propertyId] )
+				);
+			}
+
+			return new datamodel.StatementGroupSet( statementGroups );
 		}
-
-		return new datamodel.StatementGroupSet( statementGroups );
-	}
-} );
+	} );
 
 }() );
