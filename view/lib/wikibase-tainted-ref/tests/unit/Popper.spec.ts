@@ -83,10 +83,10 @@ describe( 'Popper.vue', () => {
 		);
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
-	it( 'popper text is taken from our Vue message plugin', () => {
+	it( 'popper texts are taken from our Vue message plugin', () => {
 		const localVue = createLocalVue();
 		const messageToTextFunction = jest.fn();
-		messageToTextFunction.mockReturnValue( 'DUMMY_TEXT' );
+		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
 
 		localVue.use( Vuex );
 		localVue.use( Message, { messageToTextFunction } );
@@ -99,7 +99,26 @@ describe( 'Popper.vue', () => {
 			localVue,
 			propsData: { guid: 'a-guid' },
 		} );
-		expect( wrapper.find( '.wb-tr-popper-text' ).element.textContent ).toMatch( 'DUMMY_TEXT' );
+		expect( wrapper.find( '.wb-tr-popper-text' ).element.textContent )
+			.toMatch( '(wikibase-tainted-ref-popper-text)' );
+		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
+			.toMatch( '(wikibase-tainted-ref-popper-title)' );
+		expect( wrapper.find( '.wb-tr-popper-help' ).element.title )
+			.toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
+		expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
+			.toMatch( '(wikibase-tainted-ref-popper-help-link-text)' );
+		expect( wrapper.find( '.wb-tr-popper-feedback' ).element.textContent )
+			.toMatch( '(wikibase-tainted-ref-popper-feedback-text)' );
+		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.title )
+			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-title)' );
+		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.textContent )
+			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-text)' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-text' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-title' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-title' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-text' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-text' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-text' );
+		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-title' );
 	} );
 } );
