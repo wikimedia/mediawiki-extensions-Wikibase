@@ -329,10 +329,6 @@ class ParseValue extends ApiBase {
 		return [
 			'datatype' => [
 				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
-
-				// Currently, the deprecated 'parser' parameter may be used as an
-				// alternative to the 'datatype' parameter. Once 'parser' is removed,
-				// 'datatype' should be required.
 				self::PARAM_REQUIRED => false,
 			],
 			'property' => [
@@ -341,9 +337,7 @@ class ParseValue extends ApiBase {
 			],
 			'parser' => [
 				self::PARAM_TYPE => $this->valueParserFactory->getParserIds(),
-
 				// Use 'datatype' instead!
-				// NOTE: when removing the 'parser' parameter, set 'datatype' to PARAM_REQUIRED
 				self::PARAM_DEPRECATED => true,
 				self::PARAM_REQUIRED => false,
 			],
