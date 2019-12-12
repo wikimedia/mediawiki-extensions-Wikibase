@@ -5,8 +5,10 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use ApiResult;
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use Exception;
@@ -140,8 +142,22 @@ class ParseValue extends ApiBase {
 		$name = $params['datatype'] ?: $params['parser'];
 
 		if ( empty( $name ) && isset( $params['property'] ) ) {
-			$propertyId = new PropertyId( $params['property'] );
-			$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+			try {
+				$propertyId = new PropertyId( $params['property'] );
+			} catch ( InvalidArgumentException $ex ) {
+				$this->errorReporter->dieWithError(
+					'wikibase-api-invalid-property-id',
+					'param-illegal'
+				);
+			}
+			try {
+				$name = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
+			} catch ( PropertyDataTypeLookupException $ex ) {
+				$this->errorReporter->dieWithError(
+					'wikibase-api-invalid-property-id', // TODO separate error for valid-but-missing property ID?
+					'param-illegal'
+				);
+			}
 		}
 
 		if ( empty( $name ) ) {
