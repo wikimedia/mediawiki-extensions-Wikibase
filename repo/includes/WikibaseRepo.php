@@ -1591,7 +1591,9 @@ class WikibaseRepo {
 	public function getEntityConstraintProvider() {
 		return new EntityConstraintProvider(
 			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->getSiteLinkConflictLookup()
+			$this->getStore()->getSiteLinkConflictLookup(),
+			$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
+			$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' )
 		);
 	}
 

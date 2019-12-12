@@ -48,7 +48,9 @@ class ChangeOpFactoryProviderTest extends \PHPUnit\Framework\TestCase {
 
 		$constraintProvider = new EntityConstraintProvider(
 			$this->mockProvider->getMockLabelDescriptionDuplicateDetector(),
-			$this->mockProvider->getMockSiteLinkConflictLookup()
+			$this->mockProvider->getMockSiteLinkConflictLookup(),
+			[],
+			0
 		);
 
 		return new ChangeOpFactoryProvider(

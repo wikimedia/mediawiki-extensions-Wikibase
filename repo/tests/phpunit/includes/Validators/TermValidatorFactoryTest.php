@@ -105,7 +105,10 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetFingerprintValidator() {
 		$builders = $this->newFactory();
 
-		$validator = $builders->getFingerprintValidator( Item::ENTITY_TYPE );
+		$validator = $builders->getFingerprintValidator(
+			Item::ENTITY_TYPE,
+			$this->createMock( ItemId::class )
+		);
 
 		$this->assertInstanceOf( FingerprintValidator::class, $validator );
 

@@ -681,7 +681,10 @@ abstract class EntityContent extends AbstractContent {
 		if ( $status->isOK() ) {
 			if ( !$this->isRedirect() && !( $flags & self::EDIT_IGNORE_CONSTRAINTS ) ) {
 				$handler = $this->getContentHandler();
-				$validators = $handler->getOnSaveValidators( ( $flags & EDIT_NEW ) !== 0 );
+				$validators = $handler->getOnSaveValidators(
+					( $flags & EDIT_NEW ) !== 0,
+					$this->getEntity()->getId()
+				);
 				$status = $this->applyValidators( $validators );
 			}
 		}
