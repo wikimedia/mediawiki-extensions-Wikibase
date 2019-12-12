@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
@@ -367,6 +368,16 @@ class ParseValueTest extends \PHPUnit\Framework\TestCase {
 					'values' => 'foo',
 					'parser' => 'foo',
 				]
+			],
+			'bad property ID' => [
+				[
+					'property' => 'not a property ID',
+				],
+			],
+			'missing property ID' => [
+				[
+					'property' => 'P' . Int32EntityId::MAX,
+				],
 			],
 		];
 	}
