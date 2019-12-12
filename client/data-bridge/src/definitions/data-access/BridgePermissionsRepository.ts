@@ -10,6 +10,7 @@ export enum PageNotEditable {
 }
 
 interface BlockInfo {
+	blockId: number;
 	blockedBy: string;
 	blockedById: number;
 	blockReason: string;
