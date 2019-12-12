@@ -418,5 +418,7 @@
 	"wikibase-shortcopyrightwarning-heading": "Lisensattribusjon",
 	"wikibase-entity-save-error-heading": "Noe gikk galt",
 	"wikibase-entity-save-error-message": "Endringen din kunne ikke lagres. Du kan prøve å trykke på publiseringsknappen igjen.",
-	"wikibase-tainted-ref-warning-icon-title": "Denne påstanden har mulige problemer"
+	"wikibase-tainted-ref-warning-icon-title": "Denne påstanden har mulige problemer",
+	"wikibase-tainted-ref-popper-text": "Verdien ble endret, men referansen forble den samme.",
+	"wikibase-tainted-ref-tainted-icon-title": "Denne påstanden har mulige problemer."
 }

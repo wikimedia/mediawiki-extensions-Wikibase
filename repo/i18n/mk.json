@@ -416,5 +416,6 @@
 	"wikibase-entity-save-error-heading": "Нешто не е во ред",
 	"wikibase-entity-save-error-message": "Не можев да ви ја објавам промената. Повторно стиснете на копчето.",
 	"wikibase-tainted-ref-warning-icon-title": "Исказов има извесни потенцијални проблеми",
-	"wikibase-tainted-ref-popper-text": "Вредноста е променета, но наводот остана ист."
+	"wikibase-tainted-ref-popper-text": "Вредноста е променета, но наводот остана ист.",
+	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми."
 }

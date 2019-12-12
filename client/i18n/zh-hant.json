@@ -131,5 +131,6 @@
 	"connected-redirect-category": "連結至 {{WBREPONAME}} 項目的重新導向",
 	"connected-redirect-category-desc": "此分類列舉了連接到{{WBREPONAME}}項目的重新導向頁面。",
 	"wikibase-client-data-bridge-dialog-title": "編輯屬性",
+	"wikibase-client-data-bridge-permissions-error": "由於下列{{PLURAL:$1|原因}}，您沒有權限來編輯此值：",
 	"wikibase-client-data-bridge-references-heading": "參考"
 }

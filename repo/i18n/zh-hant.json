@@ -441,5 +441,7 @@
 	"wikibase-shortcopyrightwarning-heading": "授權條款",
 	"wikibase-entity-save-error-heading": "發生不明錯誤",
 	"wikibase-entity-save-error-message": "您的更改無法發佈，您可以嘗試再次點擊發佈按鈕。",
-	"wikibase-tainted-ref-warning-icon-title": "此聲明存在一些潛在問題"
+	"wikibase-tainted-ref-warning-icon-title": "此聲明存在一些潛在問題",
+	"wikibase-tainted-ref-popper-text": "值已更改，但參考內容維持不變。",
+	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。"
 }

@@ -71,6 +71,7 @@
 	"wikibase-disambiguation-title": "\"$1\" nozīmju atdalīšana",
 	"wikibase-propertypage-datatype": "Datu tips",
 	"wikibase-propertypage-bad-datatype": "Nezināms datu tips: $1",
+	"wikibase-referenceview-tabs-manual": "Pamācība",
 	"wikibase-statementview-rank-preferred": "Vēlamais rangs",
 	"wikibase-statementview-rank-normal": "Normāls rangs",
 	"wikibase-statementview-rank-deprecated": "Novecojis rangs",

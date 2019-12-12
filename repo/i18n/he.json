@@ -423,5 +423,7 @@
 	"wikibase-shortcopyrightwarning-heading": "ייחוס רישיון",
 	"wikibase-entity-save-error-heading": "משהו השתבש",
 	"wikibase-entity-save-error-message": "לא היה אפשר לפרסם את השינוי שלך. באפשרותך לנסות ללחוץ שוב על כפתור הפרסום.",
-	"wikibase-tainted-ref-warning-icon-title": "בקביעה הזאת יש סוגיות אפשריות."
+	"wikibase-tainted-ref-warning-icon-title": "בקביעה הזאת יש סוגיות אפשריות.",
+	"wikibase-tainted-ref-popper-text": "הערך השתנה, אבל המקור נשאר זהה.",
+	"wikibase-tainted-ref-tainted-icon-title": "בקביעה הזאת יש סוגיות אפשריות."
 }

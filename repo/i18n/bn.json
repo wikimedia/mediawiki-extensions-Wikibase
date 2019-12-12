@@ -9,7 +9,8 @@
 			"Elias Ahmmad",
 			"আফতাবুজ্জামান",
 			"Mahir256",
-			"Nokib Sarkar"
+			"Nokib Sarkar",
+			"Sohom Datta"
 		]
 	},
 	"wikibase-desc": "কাঠামোবদ্ধ তথ্য ভান্ডার",
@@ -293,5 +294,6 @@
 	"action-property-create": "বৈশিষ্ট্য তৈরি",
 	"right-property-create": "বৈশিষ্ট্য তৈরি",
 	"wikibase-pageinfo-subscription-none": "কিছুই না",
-	"wikibase-tainted-ref-warning-icon-title": "এই বক্তব্যটিতে কিছু গুরুতর সমস্যা রয়েছে"
+	"wikibase-tainted-ref-warning-icon-title": "এই বক্তব্যটিতে কিছু গুরুতর সমস্যা রয়েছে",
+	"wikibase-tainted-ref-tainted-icon-title": "এই বিবৃতির কিছু সম্ভাব্য সমস্যা রয়েছে।"
 }

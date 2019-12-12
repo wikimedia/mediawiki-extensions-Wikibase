@@ -41,6 +41,7 @@
 	"wikibase-error-serialize-error": "Neizdevās serializēt datus.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|starpvalodu saites|starpvalodu saite|starpvalodu saites}} šajā lapā)",
 	"wikibase-unconnectedpages-submit": "Rādīt lapas",
+	"wikibase-pageswithbadges-invalid-id": "$1 nav derīgs vienuma ID",
 	"wikibase-pageswithbadges-submit": "Rādīt lapas",
 	"entityusage": "Entītijas lietojums",
 	"wikibase-entityusage-invalid-id": "$1 nav derīgs entītijas ID",
