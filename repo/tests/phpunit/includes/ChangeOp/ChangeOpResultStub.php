@@ -37,7 +37,7 @@ class ChangeOpResultStub implements ChangeOpResult {
 		if ( $this->validationErrors !== null ) {
 			return Result::newError( $this->validationErrors );
 		} else {
-			return Resutl::newSuccess();
+			return Result::newSuccess();
 		}
 	}
 }
