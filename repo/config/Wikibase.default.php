@@ -330,7 +330,7 @@ return [
 	 *
 	 * @see \Wikibase\Repo\LinkedData\EntityDataSerializationService::serializeEmptyContainersProperly
 	 */
-	'tmpSerializeEmptyListsAsObjects' => false,
+	'tmpSerializeEmptyListsAsObjects' => true,
 
 	// Do not enable this one in production environemtns, unless you know what you are doing when
 	// using the script there.
