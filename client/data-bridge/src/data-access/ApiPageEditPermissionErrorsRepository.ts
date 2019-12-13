@@ -8,6 +8,7 @@ import TitleInvalid from '@/data-access/error/TitleInvalid';
 import Api, { ApiError } from '@/definitions/data-access/Api';
 import PageEditPermissionErrorsRepository, {
 	PermissionError,
+	PermissionErrorCascadeProtectedPage,
 	PermissionErrorProtectedPage,
 	PermissionErrorType,
 	PermissionErrorUnknown,
@@ -77,6 +78,19 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 				};
 				return permissionError;
 			}
+			case 'cascadeprotected': {
+				const pages = this.parseWikitextPagesList( error.params[ 1 ] as string );
+				if ( pages.length !== error.params[ 0 ] ) {
+					throw new TechnicalProblem(
+						`API reported ${error.params[ 0 ]} cascade-protected pages but we parsed ${pages.length}.`,
+					);
+				}
+				const permissionError: PermissionErrorCascadeProtectedPage = {
+					type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+					pages,
+				};
+				return permissionError;
+			}
 			default: {
 				const permissionError: PermissionErrorUnknown = {
 					type: PermissionErrorType.UNKNOWN,
@@ -103,6 +117,36 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 			case 'autoconfirmed': return 'editsemiprotected';
 			default: return rightOrGroup;
 		}
+	}
+
+	/**
+	 * Parse a list of pages from (very limited) wikitext.
+	 * See PermissionManager::checkCascadingSourcesRestrictions()
+	 * for the PHP code generating the list.
+	 */
+	private parseWikitextPagesList( wikitext: string ): string[] {
+		const lines = wikitext.split( '\n' );
+		const trailingLine = lines.pop();
+		if ( trailingLine !== '' ) {
+			throw new TechnicalProblem( `Wikitext did not end in blank line: ${trailingLine}` );
+		}
+		return lines.map( ( line ) => {
+			if ( !line.startsWith( '*' ) ) {
+				throw new TechnicalProblem( `Line does not look like a list item: ${line}` );
+			}
+			let listItem = line.slice( 1 );
+			if ( listItem.startsWith( ' ' ) ) {
+				listItem = listItem.slice( 1 );
+			}
+			if ( !listItem.startsWith( '[[' ) || !listItem.endsWith( ']]' ) ) {
+				throw new TechnicalProblem( `List item does not look like a wikilink: ${listItem}` );
+			}
+			let title = listItem.slice( 2, -2 );
+			if ( title.startsWith( ':' ) ) {
+				title = title.slice( 1 );
+			}
+			return title;
+		} );
 	}
 
 }

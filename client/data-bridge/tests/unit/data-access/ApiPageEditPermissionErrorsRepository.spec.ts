@@ -114,6 +114,36 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} );
 	} );
 
+	it( 'detects page cascade-protected error', async () => {
+		const title = 'Title';
+		const pages = [ 'Art', 'Category:Cat' ];
+		const api = mockApi( { query: {
+			pages: [ {
+				title,
+				actions: { edit: [ {
+					code: 'cascadeprotected',
+					key: 'cascadeprotected',
+					params: [
+						pages.length,
+						pages.reduce( ( wikitext, page ) => `${wikitext}* [[:${page}]]\n`, '' ),
+						'edit',
+					],
+				} ] },
+			} ],
+			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
+		} } );
+		const repo = new ApiPageEditPermissionErrorsRepository( api );
+
+		const permissionErrors = await repo.getPermissionErrors( title );
+
+		expect( permissionErrors.length ).toBe( 1 );
+		const permissionError = permissionErrors[ 0 ];
+		expect( permissionError ).toStrictEqual( {
+			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+			pages,
+		} );
+	} );
+
 	it( 'handles unrecognized error', async () => {
 		const title = 'Title';
 		const api = mockApi( { query: {
@@ -264,6 +294,35 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 				actions: { edit: [ {
 					code: 'protectedpage',
 					text: 'This page has been protected to prevent editing or other actions.',
+				} ] },
+			} ],
+			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
+		} } );
+		const repo = new ApiPageEditPermissionErrorsRepository( api );
+
+		return expect( repo.getPermissionErrors( title ) )
+			.rejects
+			.toBeInstanceOf( TechnicalProblem );
+	} );
+
+	it.each( [
+		[ '* [[:Page A]]', 1, 'missing trailing newline' ],
+		[ '[[:Page A]]\n', 1, 'no list syntax' ],
+		[ '* Page A\n', 1, 'no wikilink' ],
+		[ '* [[:Page A]]\n* [[:Page B]]\n', 1, 'length mismatch' ],
+	] )( 'rejects with TechnicalProblem if the API returns bad cascade-protected pages', ( pages, length ) => {
+		const title = 'Title';
+		const api = mockApi( { query: {
+			pages: [ {
+				title,
+				actions: { edit: [ {
+					code: 'cascadeprotected',
+					key: 'cascadeprotected',
+					params: [
+						length,
+						pages,
+						'edit',
+					],
 				} ] },
 			} ],
 			restrictions: { semiprotectedlevels: [ 'autoconfirmed' ] },
