@@ -133,8 +133,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				'test',
 				[ 'test' => 'wd' ],
 				[ 'test' => '' ]
-			),
-			true
+			)
 		);
 
 		$entityDataFormatProvider->setAllowedFormats(
