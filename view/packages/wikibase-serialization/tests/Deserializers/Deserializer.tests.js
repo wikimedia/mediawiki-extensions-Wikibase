@@ -2,24 +2,24 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-( function( util, QUnit ) {
-'use strict';
+( function() {
+	'use strict';
 
-QUnit.module( 'Deserializer' );
+	QUnit.module( 'Deserializer' );
 
-var Deserializer = require( '../../src/Deserializers/Deserializer.js' );
+	var Deserializer = require( '../../src/Deserializers/Deserializer.js' );
 
-QUnit.test( 'deserialize()', function( assert ) {
-	assert.expect( 1 );
-	var SomeDeserializer = util.inherit( 'WbTestDeserializer', Deserializer, {} ),
-		someDeserializer = new SomeDeserializer();
+	QUnit.test( 'deserialize()', function( assert ) {
+		assert.expect( 1 );
+		var SomeDeserializer = util.inherit( 'WbTestDeserializer', Deserializer, {} ),
+			someDeserializer = new SomeDeserializer();
 
-	assert.throws(
-		function() {
-			someDeserializer.deserialize( {} );
-		},
-		'Trying to deserialize on a Deserializer not having deserialize() specified fails.'
-	);
-} );
+		assert.throws(
+			function() {
+				someDeserializer.deserialize( {} );
+			},
+			'Trying to deserialize on a Deserializer not having deserialize() specified fails.'
+		);
+	} );
 
-}( util, QUnit ) );
+}() );

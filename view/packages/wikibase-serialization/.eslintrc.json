@@ -1,21 +1,19 @@
 {
-        "extends": "wikimedia",
-        "plugins": [
-                "mediawiki"
-        ],
-        "env": {
-                "browser": true,
-                "jquery": true,
-                "commonjs": true
+	"root": true,
+	"extends": [
+		"wikimedia/client",
+		"wikimedia/jquery",
+		"wikimedia/mediawiki"
+	],
+	"env": {
+		"commonjs": true
 	},
 	"globals": {
 		"dataValues": false,
 		"util": false
 	},
 	"rules": {
-		"mediawiki/valid-package-file-require": "error",
 		"computed-property-spacing": "off",
-		"indent": "off",
 		"keyword-spacing": "off",
 		"new-parens": "off",
 		"no-underscore-dangle": "off",
