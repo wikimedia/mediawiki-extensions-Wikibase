@@ -28,14 +28,13 @@ use DataValues\Geo\Parsers\GlobeCoordinateParser;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWiki\Logger\LoggerFactory;
-use MediaWiki\MediaWikiServices;
 use ValueFormatters\FormatterOptions;
 use ValueParsers\ParserOptions;
 use ValueParsers\QuantityParser;
 use ValueParsers\StringParser;
 use ValueParsers\ValueParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\Lib\Formatters\ControlledFallbackEntityIdFormatter;
+use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\FieldPropertyInfoProvider;
@@ -404,23 +403,9 @@ return call_user_func( function() {
 				$snakFormat = new SnakFormat();
 
 				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
-					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
-
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
 					try {
-						$statsdDataFactory = MediaWikiServices::getInstance()
-							->getStatsdDataFactory();
-
-						$formatter = new ControlledFallbackEntityIdFormatter(
-							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
-							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
-							$statsdDataFactory,
-							'wikibase.repo.wb_terms.newItemIdFormatter.'
-						);
-
-						$formatter->setLogger( $logger );
-
-						return new \Wikibase\Lib\Formatters\EntityIdValueFormatter( $formatter );
+						return new EntityIdValueFormatter( $factory->newItemPropertyIdHtmlLinkFormatter( $options ) );
 					} catch ( \Exception $e ) {
 						$logger->error(
 							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
@@ -448,23 +433,9 @@ return call_user_func( function() {
 				$snakFormat = new SnakFormat();
 
 				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
-					//TODO Cleanup the code once https://phabricator.wikimedia.org/T196882 is Done.
-
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewPropertyIdFormatter' );
 					try {
-						$statsdDataFactory = MediaWikiServices::getInstance()
-							->getStatsdDataFactory();
-
-						$formatter = new ControlledFallbackEntityIdFormatter(
-							$factory->newItemPropertyIdHtmlLinkFormatter( $options ),
-							$factory->newLabelsProviderEntityIdHtmlLinkFormatter( $options ),
-							$statsdDataFactory,
-							'wikibase.repo.wb_terms.newPropertyIdFormatter.'
-						);
-
-						$formatter->setLogger( $logger );
-
-						return new \Wikibase\Lib\Formatters\EntityIdValueFormatter( $formatter );
+						return new EntityIdValueFormatter( $factory->newItemPropertyIdHtmlLinkFormatter( $options ) );
 					} catch ( \Exception $e ) {
 						$logger->error(
 							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",
