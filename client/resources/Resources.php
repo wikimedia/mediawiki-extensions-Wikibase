@@ -108,6 +108,8 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-permissions-error',
 							'wikibase-client-data-bridge-protected-on-repo-head',
 							'wikibase-client-data-bridge-protected-on-repo-body',
+							'wikibase-client-data-bridge-semiprotected-on-repo-head',
+							'wikibase-client-data-bridge-semiprotected-on-repo-body',
 							'wikibase-client-data-bridge-blocked-on-repo-head',
 							'wikibase-client-data-bridge-blocked-on-repo-body',
 							'wikibase-client-data-bridge-blocked-on-client-head',
