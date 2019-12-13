@@ -1,6 +1,6 @@
 import Initializing from '@/presentation/components/Initializing.vue';
 import { shallowMount } from '@vue/test-utils';
-import IndeterminateProgressBar from '@/presentation/components/IndeterminateProgressBar.vue';
+import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 
 describe( 'Initializing', () => {
 	beforeEach( () => {
