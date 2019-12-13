@@ -10,7 +10,7 @@ import {
 	PageNotEditable,
 	ProtectedReason,
 	UnknownReason,
-} from '@/definitions/data-access/PageEditPermissionsRepository';
+} from '@/definitions/data-access/BridgePermissionsRepository';
 
 describe( 'CombiningPermissionsRepository', () => {
 
@@ -21,12 +21,10 @@ describe( 'CombiningPermissionsRepository', () => {
 		const clientTitle = 'Client title';
 		const repository = new CombiningPermissionsRepository(
 			repoRepository,
-			repoTitle,
 			clientRepository,
-			clientTitle,
 		);
 
-		await repository.isUserAllowedToEditPage();
+		await repository.canUseBridgeForItemAndPage( repoTitle, clientTitle );
 
 		expect( repoRepository.getPermissionErrors ).toHaveBeenCalledWith( repoTitle );
 		expect( clientRepository.getPermissionErrors ).toHaveBeenCalledWith( clientTitle );
@@ -49,9 +47,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository( [ error ] ),
-			'Repo title',
 			mockPermissionErrorsRepository(),
-			'Client title',
 		);
 
 		const expected: ProtectedReason = {
@@ -59,7 +55,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			info: { right },
 		};
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( [ expected ] );
 	} );
@@ -73,9 +69,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository( [ error ] ),
-			'Repo title',
 			mockPermissionErrorsRepository(),
-			'Client title',
 		);
 
 		const expected: ProtectedReason = {
@@ -83,7 +77,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			info: { right },
 		};
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( [ expected ] );
 	} );
@@ -97,9 +91,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository( [ error ] ),
-			'Repo title',
 			mockPermissionErrorsRepository(),
-			'Client title',
 		);
 
 		const expected: UnknownReason = {
@@ -111,7 +103,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			},
 		};
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( [ expected ] );
 	} );
@@ -125,12 +117,10 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository(),
-			'Repo title',
 			mockPermissionErrorsRepository( [ error ] ),
-			'Client title',
 		);
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.rejects
 			.toStrictEqual(
 				new TechnicalProblem( 'Data Bridge should never have been opened on this protected page!' ),
@@ -146,9 +136,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository(),
-			'Repo title',
 			mockPermissionErrorsRepository( [ error ] ),
-			'Client title',
 		);
 
 		const expected: UnknownReason = {
@@ -160,7 +148,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			},
 		};
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( [ expected ] );
 	} );
@@ -180,9 +168,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		};
 		const repository = new CombiningPermissionsRepository(
 			mockPermissionErrorsRepository( [ repoError ] ),
-			'Repo title',
 			mockPermissionErrorsRepository( [ clientError ] ),
-			'Client title',
 		);
 
 		const expected: [ProtectedReason, UnknownReason] = [
@@ -200,7 +186,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			},
 		];
 
-		return expect( repository.isUserAllowedToEditPage() )
+		return expect( repository.canUseBridgeForItemAndPage( 'Repo title', 'Client title' ) )
 			.resolves
 			.toStrictEqual( expected );
 	} );

@@ -41,6 +41,15 @@ export interface UnknownReason extends ApplicationErrorBase {
 
 export type MissingPermissionsError = BlockReason | ProtectedReason | UnknownReason;
 
-export interface PageEditPermissionsRepository {
-	isUserAllowedToEditPage(): Promise<MissingPermissionsError[]>;
+/**
+ * A repository for determining potential permission errors when using the Data Bridge.
+ */
+export interface BridgePermissionsRepository {
+	/**
+	 * Is the user allowed to use the Data Bridge for this target item and client page?
+	 * @param repoItemTitle The title of the item page on the repo wiki.
+	 * This is a title, not an entity ID, so it may include a namespace.
+	 * @param clientPageTitle The title of the page on the client wiki.
+	 */
+	canUseBridgeForItemAndPage( repoItemTitle: string, clientPageTitle: string ): Promise<MissingPermissionsError[]>;
 }
