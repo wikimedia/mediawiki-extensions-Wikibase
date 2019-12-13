@@ -6,13 +6,14 @@
 				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
 				<span class="wb-tr-popper-close" @click="closeClick" />
 			</div>
-			<a
-				class="wb-tr-popper-help"
-				:title="popperHelpLinkTitle"
-				:href="helpLink"
-				target="_blank"
-				@click="helpClick"
-			>{{ popperHelpLinkText }}</a>
+			<div class="wb-tr-popper-help">
+				<a
+					:title="popperHelpLinkTitle"
+					:href="helpLink"
+					target="_blank"
+					@click="helpClick"
+				>{{ popperHelpLinkText }}</a>
+			</div>
 			<p class="wb-tr-popper-text">
 				{{ popperText }}
 			</p>
@@ -140,7 +141,6 @@ export default class Popper extends Vue {
 	width: 415px;
 	border: $border-color 1px solid;
 	border-radius: 2px;
-	overflow: hidden;
 	z-index: 2;
 	position: relative;
 	background-color: $color-white;
@@ -148,16 +148,19 @@ export default class Popper extends Vue {
 
 .wb-tr-popper-title {
 	font-family: sans-serif;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	color: $color-black;
+	line-height: 22px;
 }
 
 .wb-tr-popper-text {
 	font-family: sans-serif;
 	font-size: 14px;
-	margin-top: 22px;
 	color: $basic-text-black;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	line-height: 22px;
 }
 
 .wb-tr-title-wrapper {
@@ -179,6 +182,7 @@ export default class Popper extends Vue {
 	background-image: $svg-close-icon;
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: 14px 14px;
 }
 
 .wb-tr-popper-close:hover {
@@ -192,18 +196,20 @@ export default class Popper extends Vue {
 
 .wb-tr-popper-help {
 	font-weight: normal;
-	float: right;
+	text-align: right;
 	font-size: 12px;
-	margin-left: 1.5em;
 	margin-top: 4px;
 	margin-bottom: 4px;
 	color: $help-link-blue;
+	line-height: 20px;
 }
 
 .wb-tr-popper-feedback {
 	font-weight: normal;
 	color: $basic-text-black;
 	margin-top: 8px;
+	margin-bottom: 0;
+	line-height: 22px;
 }
 
 .wb-tr-popper-feedback a {

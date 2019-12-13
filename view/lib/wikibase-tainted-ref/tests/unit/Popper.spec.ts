@@ -29,7 +29,7 @@ describe( 'Popper.vue', () => {
 			localVue,
 		} );
 		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
-		expect( wrapper.find( '.wb-tr-popper-help' ).attributes().href ).toEqual( 'https://wdtest/Help' );
+		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( 'https://wdtest/Help' );
 	} );
 	it( 'clicking the help link triggers a tracking event', () => {
 		const trackingFunction = jest.fn();
@@ -40,7 +40,7 @@ describe( 'Popper.vue', () => {
 			localVue,
 		} );
 		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
-		wrapper.find( '.wb-tr-popper-help' ).trigger( 'click' );
+		wrapper.find( '.wb-tr-popper-help a' ).trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	} );
 	it( 'closes the popper when the x is clicked', () => {
@@ -103,7 +103,7 @@ describe( 'Popper.vue', () => {
 			.toMatch( '(wikibase-tainted-ref-popper-text)' );
 		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-title)' );
-		expect( wrapper.find( '.wb-tr-popper-help' ).element.title )
+		expect( wrapper.find( '.wb-tr-popper-help a' ).element.title )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
 		expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-text)' );
