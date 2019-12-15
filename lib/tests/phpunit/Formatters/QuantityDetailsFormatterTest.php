@@ -114,9 +114,9 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = QuantityValue::newFromNumber( '+2', '<a>m</a>', '+2', '+2' );
 
 		$html = $formatter->format( $value );
-		$this->assertNotContains( '<a>', $html );
-		$this->assertContains( '&lt;a&gt;', $html );
-		$this->assertNotContains( '&amp;', $html );
+		$this->assertStringNotContainsString( '<a>', $html );
+		$this->assertStringContainsString( '&lt;a&gt;', $html );
+		$this->assertStringNotContainsString( '&amp;', $html );
 	}
 
 	public function testFormatError() {

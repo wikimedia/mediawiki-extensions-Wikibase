@@ -92,16 +92,16 @@ class GlobeCoordinateDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$formatter = $this->newFormatter();
 		$formatted = $formatter->format( $value );
 
-		$this->assertContains( '&lt;LAT&gt;', $formatted );
-		$this->assertContains( '&lt;LONG&gt;', $formatted );
-		$this->assertContains( '&lt;PRECISION&gt;', $formatted );
-		$this->assertContains( '&lt;GLOBE&gt;', $formatted );
+		$this->assertStringContainsString( '&lt;LAT&gt;', $formatted );
+		$this->assertStringContainsString( '&lt;LONG&gt;', $formatted );
+		$this->assertStringContainsString( '&lt;PRECISION&gt;', $formatted );
+		$this->assertStringContainsString( '&lt;GLOBE&gt;', $formatted );
 
-		$this->assertNotContains( '<LAT>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '<LONG>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '<PRECISION>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '<GLOBE>', $formatted, 'never unescaped' );
-		$this->assertNotContains( '&amp;', $formatted, 'no double escaping' );
+		$this->assertStringNotContainsString( '<LAT>', $formatted, 'never unescaped' );
+		$this->assertStringNotContainsString( '<LONG>', $formatted, 'never unescaped' );
+		$this->assertStringNotContainsString( '<PRECISION>', $formatted, 'never unescaped' );
+		$this->assertStringNotContainsString( '<GLOBE>', $formatted, 'never unescaped' );
+		$this->assertStringNotContainsString( '&amp;', $formatted, 'no double escaping' );
 	}
 
 }

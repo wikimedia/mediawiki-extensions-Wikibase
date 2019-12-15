@@ -64,9 +64,9 @@ class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$generator = $this->getSnakHtmlGenerator( $this->once() );
 		$html = $generator->getSnakHtml( $snak, true );
 
-		$this->assertContains( '<ID>', $html );
-		$this->assertContains( $className, $html, 'snak variation css' );
-		$this->assertContains( '<SNAK>', $html, 'formatted snak' );
+		$this->assertStringContainsString( '<ID>', $html );
+		$this->assertStringContainsString( $className, $html, 'snak variation css' );
+		$this->assertStringContainsString( '<SNAK>', $html, 'formatted snak' );
 	}
 
 	/**
@@ -76,9 +76,9 @@ class SnakHtmlGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$generator = $this->getSnakHtmlGenerator( $this->never() );
 		$html = $generator->getSnakHtml( $snak, false );
 
-		$this->assertNotContains( '<ID>', $html );
-		$this->assertContains( $className, $html, 'snak variation css' );
-		$this->assertContains( '<SNAK>', $html, 'formatted snak' );
+		$this->assertStringNotContainsString( '<ID>', $html );
+		$this->assertStringContainsString( $className, $html, 'snak variation css' );
+		$this->assertStringContainsString( '<SNAK>', $html, 'formatted snak' );
 	}
 
 	public function getSnakHtmlProvider() {

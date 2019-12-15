@@ -557,7 +557,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$context = $this->getContext( $title );
 		$handler->showMissingEntity( $title, $context );
 
-		$this->assertContains( '(wikibase-noentity)', $context->getOutput()->getHTML() );
+		$this->assertStringContainsString( '(wikibase-noentity)', $context->getOutput()->getHTML() );
 	}
 
 	public function testSupportsSections() {

@@ -143,7 +143,7 @@ class ItemDiffViewTest extends \PHPUnit\Framework\TestCase {
 		$diffView = $this->getDiffView( $path, $diff );
 		$html = $diffView->getHtml();
 
-		$this->assertContains( htmlspecialchars( $badgeId ), $html );
+		$this->assertStringContainsString( htmlspecialchars( $badgeId ), $html );
 	}
 
 	public function invalidBadgeIdProvider() {

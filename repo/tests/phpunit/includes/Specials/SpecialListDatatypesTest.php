@@ -49,12 +49,12 @@ class SpecialListDatatypesTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
-		$this->assertContains( 'wikibase-listdatatypes-summary', $output );
-		$this->assertContains( 'wikibase-listdatatypes-intro', $output );
+		$this->assertStringContainsString( 'wikibase-listdatatypes-summary', $output );
+		$this->assertStringContainsString( 'wikibase-listdatatypes-intro', $output );
 
-		$this->assertContains( 'id="wikibase-item"', $output );
-		$this->assertContains( 'wikibase-listdatatypes-listproperties', $output );
-		$this->assertContains( 'Special:ListProperties/wikibase-item', $output );
+		$this->assertStringContainsString( 'id="wikibase-item"', $output );
+		$this->assertStringContainsString( 'wikibase-listdatatypes-listproperties', $output );
+		$this->assertStringContainsString( 'Special:ListProperties/wikibase-item', $output );
 	}
 
 }

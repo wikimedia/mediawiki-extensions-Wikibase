@@ -52,12 +52,12 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );
-		$this->assertContains( 'mw-specialpage-summary', $output );
-		$this->assertContains( 'wikibase-availablebadges-summary', $output );
+		$this->assertStringContainsString( 'mw-specialpage-summary', $output );
+		$this->assertStringContainsString( 'wikibase-availablebadges-summary', $output );
 
-		$this->assertContains( '<li><span class="wb-badge test-badge"></span>', $output );
-		$this->assertContains( 'Q4', $output );
-		$this->assertContains( 'Test badge item', $output );
+		$this->assertStringContainsString( '<li><span class="wb-badge test-badge"></span>', $output );
+		$this->assertStringContainsString( 'Q4', $output );
+		$this->assertStringContainsString( 'Test badge item', $output );
 	}
 
 }

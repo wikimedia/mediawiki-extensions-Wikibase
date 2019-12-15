@@ -56,7 +56,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 	) {
 		$generator = $this->newToolbarEditSectionGenerator();
 		$html = $generator->getLabelDescriptionAliasesEditSection( $languageCode, $entityId );
-		$this->assertContains( $expected, $html );
+		$this->assertStringContainsString( $expected, $html );
 	}
 
 	public function getLabelDescriptionAliasesEditSectionProvider() {
@@ -75,7 +75,7 @@ class ToolbarEditSectionGeneratorTest extends \PHPUnit\Framework\TestCase {
 	public function testGetSiteLinksEditSection( EntityId $entityId, $expected ) {
 		$generator = $this->newToolbarEditSectionGenerator();
 		$html = $generator->getSiteLinksEditSection( $entityId );
-		$this->assertContains( $expected, $html );
+		$this->assertStringContainsString( $expected, $html );
 	}
 
 	public function getSiteLinksEditSectionProvider() {

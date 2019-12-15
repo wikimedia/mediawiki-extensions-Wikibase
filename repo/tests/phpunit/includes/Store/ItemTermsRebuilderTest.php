@@ -176,7 +176,7 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 	private function assertLastMessageContains( $expectedString ) {
 		$messages = $this->progressReporter->getMessages();
 
-		$this->assertContains(
+		$this->assertStringContainsString(
 			$expectedString,
 			end( $messages )
 		);

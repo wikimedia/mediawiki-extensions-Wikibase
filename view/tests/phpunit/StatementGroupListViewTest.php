@@ -43,12 +43,12 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 		$html = $statementGroupListView->getHtml( $statements );
 
-		$this->assertContains( 'id="P77', $html );
-		$this->assertContains( '<PROPERTY><ID></PROPERTY>', $html );
+		$this->assertStringContainsString( 'id="P77', $html );
+		$this->assertStringContainsString( '<PROPERTY><ID></PROPERTY>', $html );
 		foreach ( $statements as $statement ) {
-			$this->assertContains( $statement->getGuid(), $html );
+			$this->assertStringContainsString( $statement->getGuid(), $html );
 		}
-		$this->assertContains( '<TOOLBAR></TOOLBAR>', $html );
+		$this->assertStringContainsString( '<TOOLBAR></TOOLBAR>', $html );
 	}
 
 	public function testGivenIdPrefix_getHtmlPrefixesId() {
@@ -58,7 +58,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 		$statementGroupListView = $this->newStatementGroupListView();
 
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'id="' . $prefix . StatementGroupListView::ID_PREFIX_SEPARATOR . $id . '"',
 			$statementGroupListView->getHtml( $statements, $prefix )
 		);
@@ -70,7 +70,7 @@ class StatementGroupListViewTest extends \PHPUnit\Framework\TestCase {
 
 		$statementGroupListView = $this->newStatementGroupListView();
 
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'data-property-id="' . $id . '"',
 			$statementGroupListView->getHtml( $statements )
 		);

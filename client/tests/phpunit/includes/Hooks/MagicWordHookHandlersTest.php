@@ -120,8 +120,8 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 			[ &$parser, &$cache, &$word, &$ret ]
 		);
 
-		$this->assertType(
-			'string',
+		$this->assertIsString(
+
 			$out->getProperty( 'noexternallanglinks' )
 		);
 	}

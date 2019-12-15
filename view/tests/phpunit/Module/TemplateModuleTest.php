@@ -23,8 +23,8 @@ class TemplateModuleTest extends \PHPUnit\Framework\TestCase {
 		$instance = new TemplateModule();
 		$script = $instance->getScript( $this->getResourceLoaderContext() );
 		$this->assertIsString( $script );
-		$this->assertContains( 'wbTemplates', $script );
-		$this->assertContains( 'set( {', $script );
+		$this->assertStringContainsString( 'wbTemplates', $script );
+		$this->assertStringContainsString( 'set( {', $script );
 	}
 
 	public function testSupportsURLLoading() {

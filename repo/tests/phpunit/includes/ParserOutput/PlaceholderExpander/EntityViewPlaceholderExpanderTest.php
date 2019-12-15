@@ -96,14 +96,14 @@ class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 		// 'de' and 'ru', since 'en' is already covered by the interface language.
 		$html = $expander->getHtmlForPlaceholder( 'termbox' );
 
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
-		$this->assertContains( 'Moskow', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-en', $html );
+		$this->assertStringContainsString( 'Moskow', $html );
 
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-de', $html );
-		$this->assertContains( 'Moskau', $html );
-		$this->assertContains( 'Hauptstadt Russlands', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-de', $html );
+		$this->assertStringContainsString( 'Moskau', $html );
+		$this->assertStringContainsString( 'Hauptstadt Russlands', $html );
 
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-ru', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-ru', $html );
 	}
 
 	public function testGivenCookieSetToTrue_placeholderIsInitiallyExpanded() {

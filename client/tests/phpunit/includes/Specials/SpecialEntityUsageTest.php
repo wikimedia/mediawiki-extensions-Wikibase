@@ -79,21 +79,21 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$aspectListTehran = $lang->commaList( $aspectsTehran );
 		$aspectListAthena = $lang->commaList( $aspectsAthena );
 
-		$this->assertContains( 'Tehran', $result );
-		$this->assertContains( 'Athena', $result );
-		$this->assertNotContains( '<p class="error"', $result );
+		$this->assertStringContainsString( 'Tehran', $result );
+		$this->assertStringContainsString( 'Athena', $result );
+		$this->assertStringNotContainsString( '<p class="error"', $result );
 		$expected = MediaWikiServices::getInstance()->getSpecialPageFactory()
 			->getLocalNameFor( 'EntityUsage', 'Q3' );
-		$this->assertContains( $expected, $result );
-		$this->assertContains( '(colon-separator)' . $aspectListTehran . '</li>', $result );
-		$this->assertContains( '(colon-separator)' . $aspectListAthena . '</li>', $result );
+		$this->assertStringContainsString( $expected, $result );
+		$this->assertStringContainsString( '(colon-separator)' . $aspectListTehran . '</li>', $result );
+		$this->assertStringContainsString( '(colon-separator)' . $aspectListAthena . '</li>', $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
 		list( $result, ) = $this->executeSpecialPage( 'FooBar', null, 'qqx' );
 
-		$this->assertContains( '<p class="error"', $result );
-		$this->assertContains( '(wikibase-entityusage-invalid-id: FooBar)', $result );
+		$this->assertStringContainsString( '<p class="error"', $result );
+		$this->assertStringContainsString( '(wikibase-entityusage-invalid-id: FooBar)', $result );
 	}
 
 	public function testReallyDoQuery() {

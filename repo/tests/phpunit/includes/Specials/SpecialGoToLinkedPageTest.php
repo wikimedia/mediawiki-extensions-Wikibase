@@ -165,7 +165,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 		$this->assertHtmlContainsSubmitControl( $output );
 
 		if ( !empty( $error ) ) {
-			$this->assertContains( '<p class="error">' . $error . '</p>', $output,
+			$this->assertStringContainsString( '<p class="error">' . $error . '</p>', $output,
 				'Failed to match error: ' . $error );
 		}
 	}

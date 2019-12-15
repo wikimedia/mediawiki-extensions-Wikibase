@@ -126,7 +126,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$this->assertEquals( $expected, $row );
 
-		$this->assertType( 'int', $change->getId() );
+		$this->assertIsInt( $change->getId() );
 	}
 
 	public function testSaveChange_update() {

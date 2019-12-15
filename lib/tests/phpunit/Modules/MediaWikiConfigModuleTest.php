@@ -31,8 +31,8 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 
 		$script = $this->newInstance()->getScript( $context );
 		$this->assertStringStartsWith( 'mw.config.set({', $script );
-		$this->assertContains( 'dummyKey', $script );
-		$this->assertContains( 'dummyValue', $script );
+		$this->assertStringContainsString( 'dummyKey', $script );
+		$this->assertStringContainsString( 'dummyValue', $script );
 	}
 
 	public function testEnableModuleContentVersion_returnsTrue() {

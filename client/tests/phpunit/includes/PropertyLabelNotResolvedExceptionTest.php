@@ -19,8 +19,8 @@ class PropertyLabelNotResolvedExceptionTest extends \PHPUnit\Framework\TestCase 
 	public function testWithDefaultParameters() {
 		$ex = new PropertyLabelNotResolvedException( '<LABEL>', '<LANGUAGECODE>' );
 		$message = $ex->getMessage();
-		$this->assertContains( '<LABEL>', $message );
-		$this->assertContains( '<LANGUAGECODE>', $message );
+		$this->assertStringContainsString( '<LABEL>', $message );
+		$this->assertStringContainsString( '<LANGUAGECODE>', $message );
 		$this->assertSame( 0, $ex->getCode() );
 		$this->assertNull( $ex->getPrevious() );
 	}

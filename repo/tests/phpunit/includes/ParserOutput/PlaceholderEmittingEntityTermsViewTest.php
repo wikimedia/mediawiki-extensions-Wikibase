@@ -47,7 +47,7 @@ class PlaceholderEmittingEntityTermsViewTest extends \PHPUnit\Framework\TestCase
 		$markers = $textInjector->getMarkers();
 
 		foreach ( $markers as $marker => $name ) {
-			$this->assertContains( $marker, $html );
+			$this->assertStringContainsString( $marker, $html );
 		}
 
 		$this->assertSame(

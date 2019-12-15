@@ -83,7 +83,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	 */
 	public function testEncodeAndDecodeEntity( EntityDocument $entity, $format ) {
 		$blob = $this->getCodec()->encodeEntity( $entity, $format );
-		$this->assertType( 'string', $blob );
+		$this->assertIsString( $blob );
 
 		$actual = $this->getCodec()->decodeEntity( $blob, $format );
 		$this->assertEquals( $entity, $actual, 'round trip' );
@@ -119,7 +119,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 	 */
 	public function testEncodeAndDecodeRedirect( EntityRedirect $redirect, $format ) {
 		$blob = $this->getCodec()->encodeRedirect( $redirect, $format );
-		$this->assertType( 'string', $blob );
+		$this->assertIsString( $blob );
 
 		$actual = $this->getCodec()->decodeRedirect( $blob, $format );
 		$this->assertTrue( $redirect->equals( $actual ), 'round trip' );
@@ -132,7 +132,7 @@ class EntityContentDataCodecTest extends MediaWikiTestCase {
 
 	public function testGetSupportedFormats() {
 		$supportedFormats = $this->getCodec()->getSupportedFormats();
-		$this->assertType( 'array', $supportedFormats );
+		$this->assertIsArray( $supportedFormats );
 		$this->assertNotEmpty( $supportedFormats );
 		$this->assertContainsOnly( 'string', $supportedFormats );
 	}

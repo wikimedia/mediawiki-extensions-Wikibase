@@ -147,7 +147,7 @@ class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
 
 		$this->assertIsString( $html );
 		foreach ( $matchers as $name => $matcher ) {
-			$this->assertContains( $matcher, $html, $name );
+			$this->assertStringContainsString( $matcher, $html, $name );
 		}
 	}
 

@@ -128,7 +128,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$entityTermsView = $this->getEntityTermsView( 1 );
 		$html = $entityTermsView->getHtml( $languageCode, $labels, $descriptions, $aliasGroups, $entityId );
 
-		$this->assertContains( '<EDITSECTION>', $html );
+		$this->assertStringContainsString( '<EDITSECTION>', $html );
 	}
 
 	public function testGetHtml_valuesAreEscaped() {
@@ -138,21 +138,21 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', new TermList(), $descriptions, $aliasGroups, null );
 
-		$this->assertContains( 'evil html', $html, 'make sure it works' );
-		$this->assertNotContains( 'href="#"', $html );
-		$this->assertNotContains( '<script>', $html );
-		$this->assertNotContains( '<b>', $html );
-		$this->assertNotContains( '<i>', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+		$this->assertStringContainsString( 'evil html', $html, 'make sure it works' );
+		$this->assertStringNotContainsString( 'href="#"', $html );
+		$this->assertStringNotContainsString( '<script>', $html );
+		$this->assertStringNotContainsString( '<b>', $html );
+		$this->assertStringNotContainsString( '<i>', $html );
+		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
 	public function testGetHtml_isMarkedAsEmptyValue() {
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', new TermList(), new TermList() );
 
-		$this->assertContains( 'wb-empty', $html );
-		$this->assertContains( '(wikibase-description-empty)', $html );
-		$this->assertNotContains( 'wikibase-entitytermsview-heading-aliases', $html );
+		$this->assertStringContainsString( 'wb-empty', $html );
+		$this->assertStringContainsString( '(wikibase-description-empty)', $html );
+		$this->assertStringNotContainsString( 'wikibase-entitytermsview-heading-aliases', $html );
 	}
 
 	public function testGetHtml_isNotMarkedAsEmpty() {
@@ -161,9 +161,9 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
 		$html = $entityTermsView->getHtml( 'en', $terms, $terms, $aliasGroups, new ItemId( 'Q111' ) );
 
-		$this->assertNotContains( 'wb-empty', $html );
-		$this->assertNotContains( '(wikibase-description-empty)', $html );
-		$this->assertContains( 'wikibase-entitytermsview-aliases', $html );
+		$this->assertStringNotContainsString( 'wb-empty', $html );
+		$this->assertStringNotContainsString( '(wikibase-description-empty)', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsview-aliases', $html );
 	}
 
 	public function testGetHtml_containsEmptyDescriptionPlaceholder() {
@@ -173,16 +173,16 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$aliasGroups = $this->getAliasGroupList( [ 'not empty' ] );
 		$html = $view->getHtml( 'en', $labels, $descriptions, $aliasGroups, null );
 
-		$this->assertContains( 'wb-empty', $html );
-		$this->assertContains( '(wikibase-description-empty)', $html );
-		$this->assertContains( 'wikibase-entitytermsview-aliases', $html );
+		$this->assertStringContainsString( 'wb-empty', $html );
+		$this->assertStringContainsString( '(wikibase-description-empty)', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsview-aliases', $html );
 	}
 
 	public function testGetHtml_containsEmptyAliasesList() {
 		$view = $this->getEntityTermsView( 1 );
 		$html = $view->getHtml( 'en', new TermList(), new TermList(), new AliasGroupList() );
 
-		$this->assertContains( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
+		$this->assertStringContainsString( '<div class="wikibase-entitytermsview-heading-aliases wb-empty"></div>', $html );
 	}
 
 	/**
@@ -210,48 +210,48 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 		$entityTermsView = $this->getEntityTermsView( 1, $termsListView );
 		$html = $entityTermsView->getHtml( $languageCode, $labels, $descriptions, $aliases, $entityId );
 
-		$this->assertContains( '<TERMSLISTVIEW>', $html );
+		$this->assertStringContainsString( '<TERMSLISTVIEW>', $html );
 	}
 
 	public function testGetTitleHtml_withEntityId() {
 		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( new ItemId( 'Q111' ) );
 
-		$this->assertContains( '(parentheses: Q111)', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
+		$this->assertStringContainsString( '(parentheses: Q111)', $html );
+		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
 	}
 
 	public function testGetTitleHtml_withoutEntityId() {
 		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( null );
 
-		$this->assertNotContains( '(parentheses', $html );
-		$this->assertNotContains( '&lt;LABEL&gt;', $html );
+		$this->assertStringNotContainsString( '(parentheses', $html );
+		$this->assertStringNotContainsString( '&lt;LABEL&gt;', $html );
 	}
 
 	public function testGetTitleHtml_labelIsEscaped() {
 		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( new ItemId( 'Q666' ) );
 
-		$this->assertContains( 'evil html', $html, 'make sure it works' );
-		$this->assertNotContains( 'href="#"', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+		$this->assertStringContainsString( 'evil html', $html, 'make sure it works' );
+		$this->assertStringNotContainsString( 'href="#"', $html );
+		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
 	public function testGetTitleHtml_isMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( null );
 
-		$this->assertContains( 'wb-empty', $html );
-		$this->assertContains( '(wikibase-label-empty)', $html );
+		$this->assertStringContainsString( 'wb-empty', $html );
+		$this->assertStringContainsString( '(wikibase-label-empty)', $html );
 	}
 
 	public function testGetTitleHtml_isNotMarkedAsEmpty() {
 		$entityTermsView = $this->getEntityTermsView( 0 );
 		$html = $entityTermsView->getTitleHtml( new ItemId( 'Q111' ) );
 
-		$this->assertNotContains( 'wb-empty', $html );
-		$this->assertNotContains( '(wikibase-label-empty)', $html );
+		$this->assertStringNotContainsString( 'wb-empty', $html );
+		$this->assertStringNotContainsString( '(wikibase-label-empty)', $html );
 	}
 
 }

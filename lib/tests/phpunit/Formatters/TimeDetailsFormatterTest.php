@@ -210,12 +210,12 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = $this->getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertContains( '>&lt;a&gt;time&lt;/a&gt;<', $html );
-		$this->assertContains( '>&lt;a&gt;timezone&lt;/a&gt;<', $html );
-		$this->assertContains( '>&lt;a&gt;before&lt;/a&gt;<', $html );
-		$this->assertContains( '>&lt;a&gt;after&lt;/a&gt;<', $html );
-		$this->assertContains( '>&lt;a&gt;precision&lt;/a&gt;<', $html );
-		$this->assertContains( '>&lt;a&gt;calendarmodel&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;time&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;timezone&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;before&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;after&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;precision&lt;/a&gt;<', $html );
+		$this->assertStringContainsString( '>&lt;a&gt;calendarmodel&lt;/a&gt;<', $html );
 	}
 
 	public function testGivenValidTimeValueWithInvalidPrecision_formatEchoesTimeValueFields() {

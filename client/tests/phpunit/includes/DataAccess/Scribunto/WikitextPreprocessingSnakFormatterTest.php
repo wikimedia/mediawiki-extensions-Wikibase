@@ -86,9 +86,9 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 
 		$formattedSnak = $formatter->formatSnak( $snak );
 		// Make sure that the parser stripped <stripme> (looks like UNIQ--stripme-00000000-QINU)
-		$this->assertContains( 'UNIQ-', $formattedSnak );
-		$this->assertContains( '-stripme-', $formattedSnak );
-		$this->assertNotContains( '<stripme>', $formattedSnak );
+		$this->assertStringContainsString( 'UNIQ-', $formattedSnak );
+		$this->assertStringContainsString( '-stripme-', $formattedSnak );
+		$this->assertStringNotContainsString( '<stripme>', $formattedSnak );
 	}
 
 	public function testFormatSnak_onlyPreprocessed() {

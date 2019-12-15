@@ -104,52 +104,52 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$view = $this->getTermsListView( 1 );
 		$html = $view->getHtml( $labels, $descriptions, $aliasGroups, [ $languageCode ] );
 
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-' . $languageCode, $html );
-		$this->assertContains( '&lt;LANGUAGENAME-' . $languageCode . '&gt;', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-language)', $html );
+		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-' . $languageCode, $html );
+		$this->assertStringContainsString( '&lt;LANGUAGENAME-' . $languageCode . '&gt;', $html );
 
 		if ( !$hasLabel || !$hasDescription || !$hasAliases ) {
-			$this->assertContains( 'wb-empty', $html );
+			$this->assertStringContainsString( 'wb-empty', $html );
 		}
 		if ( $hasLabel ) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				'class="wikibase-labelview " dir="' . $languageDirectionality . '" lang="' . $languageCode . '"',
 				$html
 			);
-			$this->assertNotContains( '(wikibase-label-empty)', $html );
-			$this->assertContains( '&lt;LABEL&gt;', $html );
+			$this->assertStringNotContainsString( '(wikibase-label-empty)', $html );
+			$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
 		} else {
-			$this->assertContains( 'class="wikibase-labelview wb-empty" dir="ltr" lang="qqx"', $html );
-			$this->assertContains( '(wikibase-label-empty)', $html );
+			$this->assertStringContainsString( 'class="wikibase-labelview wb-empty" dir="ltr" lang="qqx"', $html );
+			$this->assertStringContainsString( '(wikibase-label-empty)', $html );
 		}
 
 		if ( $hasDescription ) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				'class="wikibase-descriptionview " dir="' . $languageDirectionality . '" lang="' . $languageCode . '"',
 				$html
 			);
-			$this->assertNotContains( '(wikibase-description-empty)', $html );
-			$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
+			$this->assertStringNotContainsString( '(wikibase-description-empty)', $html );
+			$this->assertStringContainsString( '&lt;DESCRIPTION&gt;', $html );
 		} else {
-			$this->assertContains( 'class="wikibase-descriptionview wb-empty" dir="ltr" lang="qqx"', $html );
-			$this->assertContains( '(wikibase-description-empty)', $html );
+			$this->assertStringContainsString( 'class="wikibase-descriptionview wb-empty" dir="ltr" lang="qqx"', $html );
+			$this->assertStringContainsString( '(wikibase-description-empty)', $html );
 		}
 
 		if ( $hasAliases ) {
-			$this->assertContains( '&lt;ALIAS1&gt;', $html );
-			$this->assertContains( '&lt;ALIAS2&gt;', $html );
-			$this->assertContains(
+			$this->assertStringContainsString( '&lt;ALIAS1&gt;', $html );
+			$this->assertStringContainsString( '&lt;ALIAS2&gt;', $html );
+			$this->assertStringContainsString(
 				'class="wikibase-aliasesview-list" dir="' . $languageDirectionality . '" lang="' . $languageCode . '"',
 				$html
 			);
 		}
 
 		// List headings
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-description)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-label)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-description)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
 
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
 	public function testGetTermsListView_isEscaped() {
@@ -162,8 +162,8 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$view = $this->getTermsListView( 0, $textProvider );
 		$html = $view->getHtml( new TermList(), new TermList(), new AliasGroupList(), [] );
 
-		$this->assertContains( '&quot;RAW&quot;', $html );
-		$this->assertNotContains( '"RAW"', $html );
+		$this->assertStringContainsString( '&quot;RAW&quot;', $html );
+		$this->assertStringNotContainsString( '"RAW"', $html );
 	}
 
 	public function testGetTermsListView_noAliasesProvider() {
@@ -172,18 +172,18 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$view = $this->getTermsListView( 1 );
 		$html = $view->getHtml( $labels, $descriptions, null, [ 'en' ] );
 
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-language)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-label)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-description)', $html );
-		$this->assertContains( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-language)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-label)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-description)', $html );
+		$this->assertStringContainsString( '(wikibase-entitytermsforlanguagelistview-aliases)', $html );
 
-		$this->assertContains( 'wikibase-entitytermsforlanguageview-en', $html );
-		$this->assertContains( '&lt;LANGUAGENAME-en&gt;', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
-		$this->assertContains( '&lt;DESCRIPTION&gt;', $html );
-		$this->assertNotContains( '&lt;ALIAS1&gt;', $html );
-		$this->assertNotContains( '&lt;ALIAS2&gt;', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+		$this->assertStringContainsString( 'wikibase-entitytermsforlanguageview-en', $html );
+		$this->assertStringContainsString( '&lt;LANGUAGENAME-en&gt;', $html );
+		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
+		$this->assertStringContainsString( '&lt;DESCRIPTION&gt;', $html );
+		$this->assertStringNotContainsString( '&lt;ALIAS1&gt;', $html );
+		$this->assertStringNotContainsString( '&lt;ALIAS2&gt;', $html );
+		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
 }
