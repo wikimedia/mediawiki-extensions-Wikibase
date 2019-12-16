@@ -120,6 +120,7 @@
 	"apihelp-wbparsevalue-summary": "Analisar valores usando um <code>ValueParser</code>.",
 	"apihelp-wbparsevalue-param-parser": "ID do <code>ValueParser</code> a ser usado. <span class=\"apihelp-deprecated\">Depreciado</span>. Use o parâmetro <var>datatype</var> em vez disso.",
 	"apihelp-wbparsevalue-param-datatype": "Tipo de dados do valor a analisar. Determina o analisador a ser usado.",
+	"apihelp-wbparsevalue-param-property": "ID da propriedade ao qual o valor a analisar pertence. Determina o analisador a ser usado.",
 	"apihelp-wbparsevalue-param-validate": "Se deve ser verificado adicionalmente os dados passados.",
 	"apihelp-wbparsevalue-param-values": "Os valores a analisar",
 	"apihelp-wbparsevalue-param-options": "As opções que o analisador deve usar. Fornecido como um objeto JSON.",

@@ -13,5 +13,6 @@
 	"wikibase-sitelinks-special": "ٻیاں سائٹاں",
 	"wikibase-statementview-rank-normal": "عام درجہ",
 	"wikibase-listdatavaluetypes-name-string": "سٹرنگ",
-	"wikibase-listdatavaluetypes-name-time": "ویلا"
+	"wikibase-listdatavaluetypes-name-time": "ویلا",
+	"wikibase-tainted-ref-popper-help-link-text": "مدد"
 }

@@ -420,5 +420,11 @@
 	"wikibase-entity-save-error-message": "Endringen din kunne ikke lagres. Du kan prøve å trykke på publiseringsknappen igjen.",
 	"wikibase-tainted-ref-warning-icon-title": "Denne påstanden har mulige problemer",
 	"wikibase-tainted-ref-popper-text": "Verdien ble endret, men referansen forble den samme.",
+	"wikibase-tainted-ref-popper-title": "Potensiell mangel på samsvar mellom referanse og verdi",
+	"wikibase-tainted-ref-popper-help-link-title": "Hjelpeside for denne begrensningstypen",
+	"wikibase-tainted-ref-popper-help-link-text": "Hjelp",
+	"wikibase-tainted-ref-popper-feedback-text": "Er denne nye funksjonen nyttig?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Send tilbakemelding",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Lenke til tilbakemeldingsside",
 	"wikibase-tainted-ref-tainted-icon-title": "Denne påstanden har mulige problemer."
 }

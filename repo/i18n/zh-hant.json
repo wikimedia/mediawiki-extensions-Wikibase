@@ -285,7 +285,7 @@
 	"wikibase-tokencheck-mustposttoken": "只可使用 POST 請求進行編輯。",
 	"wikibase-tokencheck-badtoken": "錯誤的編輯密鑰 (您的連線階段可能已過期)。",
 	"special-dispatchstats": "變更發佈統計",
-	"wikibase-dispatchstats-intro": "此頁面提供有關發佈變更至客戶端的統計資訊。\n客戶端 Wiki 會在 {{SITENAME}} 發佈變更後收到變更的通知，於該 Wiki 的工作序列會開處理該通知。\n\n* {{int:wikibase-dispatchstats-changes}} 顯示目前在序列中最舊與最新的項目編號與日期。\n* {{int:wikibase-dispatchstats-stats}} 提供有關最快、中等、最慢的客戶端 Wiki 統計資訊。 會提供每個 Wiki 的以下資訊：\n** \"{{int:wikibase-dispatchstats-site-id}}\" 客戶端 Wiki 的內部 ID。\n** \"{{int:wikibase-dispatchstats-pos}}\" 最後變更發佈至該 Wiki 的 ID。\n** \"{{int:wikibase-dispatchstats-lag-num}}\" 是尚未發佈至該 Wiki 的變更數量。\n** \"{{int:wikibase-dispatchstats-lag-time}}\" 是上次發佈變至 Wiki 與上次在 {{SITENAME}} 執行的時間之間的間隔時間。\n** \"{{int:wikibase-dispatchstats-touched}}\" 是上次批次變更發佈至該 Wiki 的時間。",
+	"wikibase-dispatchstats-intro": "此頁面提供有關發佈變更至客戶端的統計資訊。\n客戶端 Wiki 會在{{SITENAME}}發佈變更後收到變更的通知，於該 Wiki 的工作序列會開處理該通知。\n\n* {{int:wikibase-dispatchstats-changes}} 顯示目前在序列中最舊與最新的項目編號與日期。\n* {{int:wikibase-dispatchstats-stats}} 提供有關最快、中等、最慢的客戶端 Wiki 統計資訊。 會提供每個 Wiki 的以下資訊：\n**「{{int:wikibase-dispatchstats-site-id}}」客戶端 Wiki 的內部 ID。\n**「{{int:wikibase-dispatchstats-pos}}」最後變更發佈至該 Wiki 的 ID。\n**「{{int:wikibase-dispatchstats-lag-num}}」是尚未發佈至該 Wiki 的變更數量。\n**「{{int:wikibase-dispatchstats-lag-time}}」是上次發佈變至 Wiki 與上次在{{SITENAME}}執行的時間之間的間隔時間。\n**「{{int:wikibase-dispatchstats-touched}}」是上次批次變更發佈至該 Wiki 的時間。",
 	"wikibase-dispatchstats-no-stats": "目前沒有統計資料可用。",
 	"wikibase-dispatchstats-changes": "變更日誌統計資訊",
 	"wikibase-dispatchstats-stats": "發佈統計資訊",
@@ -443,5 +443,11 @@
 	"wikibase-entity-save-error-message": "您的更改無法發佈，您可以嘗試再次點擊發佈按鈕。",
 	"wikibase-tainted-ref-warning-icon-title": "此聲明存在一些潛在問題",
 	"wikibase-tainted-ref-popper-text": "值已更改，但參考內容維持不變。",
+	"wikibase-tainted-ref-popper-title": "潛在參考/值不相配",
+	"wikibase-tainted-ref-popper-help-link-title": "此受限類型的說明頁面",
+	"wikibase-tainted-ref-popper-help-link-text": "說明",
+	"wikibase-tainted-ref-popper-feedback-text": "此新功能有用嗎？",
+	"wikibase-tainted-ref-popper-feedback-link-text": "留下您的回饋意見",
+	"wikibase-tainted-ref-popper-feedback-link-title": "回饋意見頁面連結",
 	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。"
 }
