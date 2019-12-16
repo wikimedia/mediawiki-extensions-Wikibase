@@ -8,10 +8,15 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Andmetüübi \"$1\" väärtuste töötlemise tugi puudub veel.",
 	"valueview-expert-emptyvalue-empty": "tühi",
 	"valueview-expert-globecoordinateinput-precision": "Esitustäpsus:",
+	"valueview-expert-globecoordinateinput-nullprecision": "määramata",
+	"valueview-expert-globecoordinateinput-customprecision": "erivalik ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "uue kalendri järgi",
 	"valueview-expert-timevalue-calendar-julian": "vana kalendri järgi",
 	"valueview-expert-timeinput-precision": "Esitustäpsus:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
+	"valueview-expertextender-languageselector-label": "Keel (nõutav):",
+	"valueview-expertextender-unitsuggester-label": "Ühik (valikuline):",
 	"valueview-preview-label": "kuvatakse nii:",
-	"valueview-preview-novalue": "sobimatu väärtus tuvastatud"
+	"valueview-preview-novalue": "sobimatu väärtus tuvastatud",
+	"valueview-listrotator-manually": "määra käsitsi"
 }
