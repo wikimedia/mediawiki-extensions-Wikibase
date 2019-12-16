@@ -139,6 +139,10 @@ describe( 'store/getters', () => {
 			trackPropertyDatatype: jest.fn(),
 		} );
 
+		services.set( 'editAuthorizationChecker', {
+			canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
+		} );
+
 		info = {
 			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,

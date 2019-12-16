@@ -5,12 +5,14 @@ import { launch } from '@/main';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import createServices from '@/services/createServices';
 import {
+	addDataBridgeConfigResponse,
+	addPageInfoNoEditRestrictionsResponse,
+	addPropertyLabelResponse,
+	addSiteinfoRestrictionsResponse,
 	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
-	mockMwForeignApiGet,
-	mockDataBridgeConfig,
-	mockMwForeignApiEntityInfoResponse,
+	mockMwApiConstructor,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -50,6 +52,7 @@ function prepareTestEnv( options: {
 	editFlow?: string;
 } ): HTMLElement {
 	const entityId = options.entityId || DEFAULT_ENTITY;
+	const entityTitle = entityId;
 	const propertyId = options.propertyId || DEFAULT_PROPERTY;
 	const editFlow = options.editFlow || EditFlow.OVERWRITE;
 
@@ -62,9 +65,28 @@ function prepareTestEnv( options: {
 		undefined,
 		undefined,
 		mockMwForeignApiConstructor( {
-			get: mockMwForeignApiGet(
-				mockDataBridgeConfig(),
-				mockMwForeignApiEntityInfoResponse( propertyId ),
+			get: jest.fn().mockResolvedValue(
+				addPropertyLabelResponse(
+					{ propertyId },
+					addPageInfoNoEditRestrictionsResponse(
+						entityTitle,
+						addSiteinfoRestrictionsResponse(
+							addDataBridgeConfigResponse(
+								{},
+							),
+						),
+					),
+				),
+			),
+		} ),
+		mockMwApiConstructor( {
+			get: jest.fn().mockResolvedValue(
+				addPageInfoNoEditRestrictionsResponse(
+					'Client_page',
+					addSiteinfoRestrictionsResponse(
+						{},
+					),
+				),
 			),
 		} ),
 	);
@@ -88,7 +110,7 @@ function prepareTestEnv( options: {
 		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
 
-	const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
+	const testLinkHref = `https://www.wikidata.org/wiki/${entityTitle}?uselang=en#${propertyId}`;
 	document.body.innerHTML = `
 <span data-bridge-edit-flow="${editFlow}">
 	<a rel="nofollow" class="external text" href="${testLinkHref}">a link to be selected</a>
@@ -166,6 +188,7 @@ describe( 'app', () => {
 	describe( 'api call and ooui trigger on save', () => {
 		const propertyId = 'P31';
 		const entityId = 'Q42';
+		const entityTitle = entityId;
 		const testSet = {
 			entities: {
 				[ entityId ]: {
@@ -215,9 +238,18 @@ describe( 'app', () => {
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: mockMwForeignApiGet(
-					mockDataBridgeConfig(),
-					mockMwForeignApiEntityInfoResponse( propertyId ),
+				get: jest.fn().mockResolvedValue(
+					addPropertyLabelResponse(
+						{ propertyId },
+						addPageInfoNoEditRestrictionsResponse(
+							entityTitle,
+							addSiteinfoRestrictionsResponse(
+								addDataBridgeConfigResponse(
+									{},
+								),
+							),
+						),
+					),
 				),
 				postWithEditToken,
 			} );
@@ -332,9 +364,18 @@ describe( 'app', () => {
 			const testLink = prepareTestEnv( { propertyId } );
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: mockMwForeignApiGet(
-					mockDataBridgeConfig(),
-					mockMwForeignApiEntityInfoResponse( propertyId ),
+				get: jest.fn().mockResolvedValue(
+					addPropertyLabelResponse(
+						{ propertyId },
+						addPageInfoNoEditRestrictionsResponse(
+							entityTitle,
+							addSiteinfoRestrictionsResponse(
+								addDataBridgeConfigResponse(
+									{},
+								),
+							),
+						),
+					),
 				),
 				postWithEditToken,
 			} );
@@ -416,9 +457,18 @@ describe( 'app', () => {
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
 		( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
-			get: mockMwForeignApiGet(
-				mockDataBridgeConfig(),
-				mockMwForeignApiEntityInfoResponse( propertyId, 'something', 'en', dataType ),
+			get: jest.fn().mockResolvedValue(
+				addPropertyLabelResponse(
+					{ propertyId, propertyLabel: 'something', dataType },
+					addPageInfoNoEditRestrictionsResponse(
+						DEFAULT_ENTITY,
+						addSiteinfoRestrictionsResponse(
+							addDataBridgeConfigResponse(
+								{},
+							),
+						),
+					),
+				),
 			),
 		} );
 		const mockTracker = jest.fn();

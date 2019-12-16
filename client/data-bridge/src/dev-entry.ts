@@ -84,6 +84,10 @@ services.set( 'tracker', {
 	},
 } );
 
+services.set( 'editAuthorizationChecker', {
+	canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',

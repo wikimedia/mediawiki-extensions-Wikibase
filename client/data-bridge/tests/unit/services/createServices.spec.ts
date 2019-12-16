@@ -13,6 +13,8 @@ import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
+import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
+import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -48,9 +50,10 @@ jest.mock( '@/data-access/MwMessagesRepository', () => {
 	return jest.fn().mockImplementation( () => mockMessagesRepository );
 } );
 
-const mockApiCore = {};
+const mockRepoApiCore = {};
+const mockClientApiCore = {};
 jest.mock( '@/data-access/ApiCore', () => {
-	return jest.fn().mockImplementation( () => mockApiCore );
+	return jest.fn().mockImplementation( () => {} );
 } );
 
 const mockBatchingApi = {};
@@ -71,6 +74,26 @@ jest.mock( '@/data-access/DataBridgeTrackerService', () => {
 const mockEventTracker = {};
 jest.mock( '@/mediawiki/facades/EventTracker', () => {
 	return jest.fn().mockImplementation( () => mockEventTracker );
+} );
+
+const mockCombiningPermissionsRepository = {};
+jest.mock( '@/data-access/CombiningPermissionsRepository', () => {
+	return jest.fn().mockImplementation( () => mockCombiningPermissionsRepository );
+} );
+
+const mockRepoEditPermissionsErrorsRepository = {};
+const mockClientEditPermissionsErrorsRepository = {};
+jest.mock( '@/data-access/ApiPageEditPermissionErrorsRepository', () => {
+	return jest.fn().mockImplementation( () => {} );
+} );
+
+beforeEach( () => {
+	( ApiCore as jest.Mock )
+		.mockImplementationOnce( () => mockRepoApiCore )
+		.mockImplementationOnce( () => mockClientApiCore );
+	( ApiPageEditPermissionErrorsRepository as jest.Mock )
+		.mockImplementationOnce( () => mockRepoEditPermissionsErrorsRepository )
+		.mockImplementationOnce( () => mockClientEditPermissionsErrorsRepository );
 } );
 
 function mockMwWindow( options: {
@@ -123,6 +146,7 @@ function mockMwWindow( options: {
 			config: {
 				get,
 			},
+			Api: jest.fn(),
 			ForeignApi: jest.fn(),
 			language,
 			message,
@@ -238,7 +262,7 @@ describe( 'createServices', () => {
 		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( BatchingApi )
-			.toHaveBeenCalledWith( mockApiCore );
+			.toHaveBeenCalledWith( mockRepoApiCore );
 
 		expect(
 			( ApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
@@ -264,7 +288,7 @@ describe( 'createServices', () => {
 		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( BatchingApi )
-			.toHaveBeenCalledWith( mockApiCore );
+			.toHaveBeenCalledWith( mockRepoApiCore );
 
 		expect( ( ApiPropertyDataTypeRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBe( mockBatchingApi );
@@ -299,7 +323,7 @@ describe( 'createServices', () => {
 		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 			.toBeInstanceOf( mwWindow.mw.ForeignApi );
 		expect( BatchingApi )
-			.toHaveBeenCalledWith( mockApiCore );
+			.toHaveBeenCalledWith( mockRepoApiCore );
 		expect( ApiRepoConfigRepository )
 			.toHaveBeenCalledWith( mockBatchingApi );
 		expect( services.get( 'wikibaseRepoConfigRepository' ) )
@@ -316,5 +340,34 @@ describe( 'createServices', () => {
 		expect( EventTracker ).toHaveBeenCalledWith( tracker );
 		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( mockEventTracker );
 		expect( services.get( 'tracker' ) ).toBe( mockDataBridgeTrackerService );
+	} );
+
+	it( 'creates CombiningPermissionsRepository', () => {
+		const mwWindow = mockMwWindow();
+		const services = createServices( mwWindow, [] );
+
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ApiCore as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( ( BatchingApi as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBe( mockRepoApiCore );
+		expect( ( ApiPageEditPermissionErrorsRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBe( mockBatchingApi );
+
+		expect( mwWindow.mw.Api ).toHaveBeenCalledTimes( 1 );
+		expect( ( ApiCore as jest.Mock ).mock.calls[ 1 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.Api );
+		expect( ( ApiPageEditPermissionErrorsRepository as jest.Mock ).mock.calls[ 1 ][ 0 ] )
+			.toBe( mockClientApiCore );
+
+		expect( CombiningPermissionsRepository ).toHaveBeenCalledTimes( 1 );
+		expect( ( CombiningPermissionsRepository as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBe( mockRepoEditPermissionsErrorsRepository );
+		expect( ( CombiningPermissionsRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
+			.toBe( mockClientEditPermissionsErrorsRepository );
+
+		expect( services.get( 'editAuthorizationChecker' ) )
+			.toBe( mockCombiningPermissionsRepository );
 	} );
 } );

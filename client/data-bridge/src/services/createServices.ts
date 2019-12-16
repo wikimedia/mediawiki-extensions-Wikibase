@@ -11,6 +11,8 @@ import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
+import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
+import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
 	const services = new ServiceContainer();
@@ -67,6 +69,13 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 
 	services.set( 'tracker', new DataBridgeTrackerService(
 		new EventTracker( mwWindow.mw.track ),
+	) );
+
+	const clientApi = new ApiCore( new mwWindow.mw.Api() );
+
+	services.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
+		new ApiPageEditPermissionErrorsRepository( repoApi ),
+		new ApiPageEditPermissionErrorsRepository( clientApi ),
 	) );
 
 	return services;

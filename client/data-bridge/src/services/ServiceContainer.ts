@@ -6,6 +6,7 @@ import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
+import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
 
 export interface Services {
 	readingEntityRepository: ReadingEntityRepository;
@@ -16,6 +17,7 @@ export interface Services {
 	messagesRepository: MessagesRepository;
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository;
 	tracker: BridgeTracker;
+	editAuthorizationChecker: BridgePermissionsRepository;
 }
 
 export default class ServiceContainer {
