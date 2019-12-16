@@ -128,5 +128,8 @@
 	"connected-redirect-category": "تحويلات متصلة بعنصر {{WBREPONAME}}",
 	"connected-redirect-category-desc": "هذا التصنيف يعرض صفحات التحويل المرتبطة بعنصر {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "تحرير الخاصية",
+	"wikibase-client-data-bridge-permissions-error": "ليست لديك صلاحية لتعديل هذه القيمة؛ {{PLURAL:$1|للسبب التالي|للأسباب التالية}}:",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>هذه القيمة حاليا [$1 محمية بالكامل] في {{WBREPONAME}} ويمكن تحريرها فقط بواسطة [$2 الإداريين].</strong>",
+	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>تم منع اسم المستخدم أو عنوان الآيبي الخاص بك على هذا الويكي.</strong>",
 	"wikibase-client-data-bridge-references-heading": "مراجع"
 }

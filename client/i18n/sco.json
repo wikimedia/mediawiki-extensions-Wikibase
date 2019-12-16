@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"John Reid",
-			"AmaryllisGardener"
+			"AmaryllisGardener",
+			"MJL"
 		]
 	},
 	"wikibase-client-desc": "Client fer the Wikibase extension",
@@ -65,6 +66,7 @@
 	"wikibase-pageswithbadges-submit": "Shaw pages",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} eetem ID",
 	"wikibase-pageinfo-entity-id-none": "Nane",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descreeption: $1",
 	"wikibase-property-render-error": "Failed tae render propertie $1: $2",
 	"wikibase-otherprojects": "In ither projects",
 	"wikibase-otherprojects-beta-message": "Ither projects sidebar",

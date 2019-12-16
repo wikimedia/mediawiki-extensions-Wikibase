@@ -436,5 +436,13 @@
 	"wikibase-shortcopyrightwarning-heading": "Atribuição de licença",
 	"wikibase-entity-save-error-heading": "Algo deu errado",
 	"wikibase-entity-save-error-message": "Sua alteração não pôde ser publicada. Você pode tentar clicar no botão publicar novamente.",
-	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns problemas em potencial"
+	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns problemas em potencial",
+	"wikibase-tainted-ref-popper-text": "O valor mudou, mas a referência permaneceu a mesma",
+	"wikibase-tainted-ref-popper-title": "Potencial incompatibilidade de referência/valor",
+	"wikibase-tainted-ref-popper-help-link-title": "Página de ajuda para este tipo de restrição",
+	"wikibase-tainted-ref-popper-help-link-text": "Ajuda",
+	"wikibase-tainted-ref-popper-feedback-text": "Esse novo recurso é útil?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Deixe seu comentário",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Link da página de comentários",
+	"wikibase-tainted-ref-tainted-icon-title": "Esta declaração tem alguns problemas em potencial."
 }

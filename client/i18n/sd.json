@@ -5,7 +5,8 @@
 			"Mehtab ahmed",
 			"Aursani",
 			"Indus Asia",
-			"Tweety"
+			"Tweety",
+			"KaleemBhatti"
 		]
 	},
 	"tooltip-t-wikibase": "اعدادخاني ۾ موجود لاڳاپيل اسم سان ڳنڍيو",
@@ -36,6 +37,7 @@
 	"wikibase-replicationnote": "مھرباني ڪري اھو ياد رھي تہ سڀني وڪين تي تبديليون نظر اچڻ ۾ ڪجھ منٽن جو وقت لڳي سگھي ٿو.",
 	"wikibase-unconnectedpages-submit": "صفحا ڏيکاريو",
 	"wikibase-pageswithbadges-submit": "صفحا ڏيکاريو",
+	"entityusage": "وجود جو استعمال",
 	"wikibase-entityusage-submit": "صفحا ڏيکاريو",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} آئٽم آئِڊي",
 	"wikibase-pageinfo-entity-id-none": "ڪوبہ نہ",

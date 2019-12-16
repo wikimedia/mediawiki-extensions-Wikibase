@@ -125,12 +125,16 @@
 	"notification-header-page-connection": "頁面<strong>$3</strong>{{GENDER:$2|已連結}}到{{PLURAL:$4|-1=一個{{WBREPONAME}}項目|{{WBREPONAME}}項目 $4}}，在那可收集與主題相關的資料。",
 	"notification-bundle-header-page-connection": "<strong>$3</strong>及{{PLURAL:$4|一個其它頁面|$4 個其它頁面|100=99+ 個其它頁面}}{{GENDER:$2|已連結}}到{{WBREPONAME}}項目。可收集相關主題的資料。",
 	"notification-link-text-view-item": "{{GENDER:$1|檢視}}項目",
-	"notification-subject-page-connection": "您於 {{SITENAME}} 上{{GENDER:$3|建立的}}頁面{{GENDER:$2|已連結}}到 {{WBREPONAME}} 項目",
+	"notification-subject-page-connection": "您於{{SITENAME}}上{{GENDER:$3|建立的}}頁面{{GENDER:$2|已連結}}到 {{WBREPONAME}} 項目",
 	"unresolved-property-category": "有未處理屬性的頁面",
 	"unresolved-property-category-desc": "此分類列舉了無法透過屬性 ID 或標籤來找出參照到{{WBREPONAME}}屬性的頁面。",
 	"connected-redirect-category": "連結至 {{WBREPONAME}} 項目的重新導向",
 	"connected-redirect-category-desc": "此分類列舉了連接到{{WBREPONAME}}項目的重新導向頁面。",
 	"wikibase-client-data-bridge-dialog-title": "編輯屬性",
 	"wikibase-client-data-bridge-permissions-error": "由於下列{{PLURAL:$1|原因}}，您沒有權限來編輯此值：",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>此值目前在{{WBREPONAME}}上被[$1 全保護]，並且僅能被[$2 管理員]編輯。</strong>",
+	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>為什麼這個值被保護？</strong></p>\n<ul>\n<li>出於能見度緣故，一些模版與項目（與它們各自的值）被不限期[$1 保護]。有時這些是出自於[$2 編輯戰]而被保護。而多數的項目仍可被任何人編輯。</li>\n<li>保護原因可在[$3 保護日誌]裡查找。</li>\n</ul>\n<p><strong>我可以怎麼做？</strong></p>\n<ul><li>與其他人[$4 討論此項目]。</li></ul>",
+	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>您的使用者名稱或是 IP 位址已在此 wiki 上被封鎖。</strong>",
+	"wikibase-client-data-bridge-blocked-on-client-body": "<p>由$1做出封鎖。原因為<em>$2</em>。</p>\n<ul>\n<li>封鎖開始時間：$8</li>\n<li>封鎖結束時間：$6</li>\n</ul>\n<p><strong>我可以怎麼做？</strong></p>\n<p>\n您可以聯絡$4或其他的[[{{int:grouppage-sysop}}|管理員]]討論封鎖的相關問題。在您於[[Special:Preferences|帳號偏好設定]]指定有效的電子郵件位址之前，您會無法使用「{{int:emailuser}}」功能。\n您目前的IP位址是$3，此次封鎖的ID為#$5。\n請您在詢問時附註以上詳細訊息。\n</p>",
 	"wikibase-client-data-bridge-references-heading": "參考"
 }
