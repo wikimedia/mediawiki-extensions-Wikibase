@@ -158,7 +158,7 @@ export default class Popper extends Vue {
 	font-family: sans-serif;
 	font-size: 14px;
 	color: $basic-text-black;
-	margin-top: 8px;
+	margin-top: 0;
 	margin-bottom: 8px;
 	line-height: 22px;
 }
@@ -199,7 +199,7 @@ export default class Popper extends Vue {
 	text-align: right;
 	font-size: 12px;
 	margin-top: 4px;
-	margin-bottom: 4px;
+	margin-bottom: 0;
 	color: $help-link-blue;
 	line-height: 20px;
 }
