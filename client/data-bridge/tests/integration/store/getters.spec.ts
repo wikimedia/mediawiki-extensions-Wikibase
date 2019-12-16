@@ -132,6 +132,7 @@ describe( 'store/getters', () => {
 		} );
 
 		info = {
+			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
