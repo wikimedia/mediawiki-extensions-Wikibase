@@ -123,7 +123,7 @@ class EntityDataSerializationService {
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
 		RdfVocabulary $rdfVocabulary,
-		$serializeEmptyListsAsObjects = false
+		$serializeEmptyListsAsObjects = true
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
