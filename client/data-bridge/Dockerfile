@@ -10,7 +10,7 @@ ARG GID=1000
 
 RUN addgroup --gid $GID runuser && adduser --uid $UID --gid $GID --disabled-password --gecos "" runuser
 
-RUN npm install --global npm@6.9.2
+RUN npm install --global npm@6.13.4
 
 RUN npm install --global @vue/cli@3.8.4
 
