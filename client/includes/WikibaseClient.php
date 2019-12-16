@@ -1672,7 +1672,10 @@ final class WikibaseClient {
 	 */
 	public function getDescriptionLookup() {
 		if ( $this->descriptionLookup === null ) {
-			$this->descriptionLookup = new DescriptionLookup( $this->getEntityIdLookup(), $this->getItemTermIndex() );
+			$this->descriptionLookup = new DescriptionLookup(
+				$this->getEntityIdLookup(),
+				$this->getTermBuffer()
+			);
 		}
 		return $this->descriptionLookup;
 	}

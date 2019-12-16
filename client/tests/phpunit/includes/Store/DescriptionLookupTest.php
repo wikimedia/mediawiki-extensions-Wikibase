@@ -9,12 +9,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\Client\Store\DescriptionLookup;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
-use Wikimedia\Assert\Assert;
 use Wikimedia\ScopedCallback;
 
 /**
@@ -59,7 +56,7 @@ class DescriptionLookupTest extends TestCase {
 				'titles' => [ 1, 2, 3, 4, 5 ],
 				'sources' => $local,
 				'local descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions' => [ 2 => null, 3 => 'C3', 4 => 'C4' ],
+				'central descriptions' => [ 2 => false, 3 => 'C3', 4 => 'C4' ],
 				'expected descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
 				'expected sources' => [ 1 => $local, 2 => $local, 3 => $local ],
 			],
@@ -67,7 +64,7 @@ class DescriptionLookupTest extends TestCase {
 				'titles' => [ 1, 2, 3, 4, 5 ],
 				'sources' => [ $local ],
 				'local descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions' => [ 2 => null, 3 => 'C3', 4 => 'C4' ],
+				'central descriptions' => [ 2 => false, 3 => 'C3', 4 => 'C4' ],
 				'expected descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
 				'expected sources' => [ 1 => $local, 2 => $local, 3 => $local ],
 			],
@@ -75,7 +72,7 @@ class DescriptionLookupTest extends TestCase {
 				'titles' => [ 1, 2, 3, 4, 5 ],
 				'sources' => $central,
 				'local descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions' => [ 2 => null, 3 => 'C3', 4 => 'C4' ],
+				'central descriptions' => [ 2 => false, 3 => 'C3', 4 => 'C4' ],
 				'expected descriptions' => [ 3 => 'C3', 4 => 'C4' ],
 				'expected sources' => [ 3 => $central, 4 => $central ],
 			],
@@ -83,7 +80,7 @@ class DescriptionLookupTest extends TestCase {
 				'titles' => [ 1, 2, 3, 4, 5 ],
 				'sources' => [ $local, $central ],
 				'local descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions' => [ 2 => null, 3 => 'C3', 4 => 'C4' ],
+				'central descriptions' => [ 2 => false, 3 => 'C3', 4 => 'C4' ],
 				'expected descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3', 4 => 'C4' ],
 				'expected sources' => [ 1 => $local, 2 => $local, 3 => $local, 4 => $central ],
 			],
@@ -91,7 +88,7 @@ class DescriptionLookupTest extends TestCase {
 				'titles' => [ 1, 2, 3, 4, 5 ],
 				'sources' => [ $central, $local ],
 				'local descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
-				'central descriptions' => [ 2 => null, 3 => 'C3', 4 => 'C4' ],
+				'central descriptions' => [ 2 => false, 3 => 'C3', 4 => 'C4' ],
 				'expected descriptions' => [ 1 => 'L1', 2 => 'L2', 3 => 'C3', 4 => 'C4' ],
 				'expected sources' => [ 1 => $local, 2 => $local, 3 => $central, 4 => $central ],
 			],
@@ -161,8 +158,8 @@ class DescriptionLookupTest extends TestCase {
 	private function makeDescriptionLookup( $localDescriptions, $centralDescriptions ) {
 		$scope = $this->mockPageProps( $localDescriptions );
 		$idLookup = $this->getIdLookup( $centralDescriptions );
-		$termIndex = $this->getTermIndex( $centralDescriptions );
-		$descriptionLookup = new DescriptionLookup( $idLookup, $termIndex );
+		$termBuffer = $this->getTermBuffer( $centralDescriptions );
+		$descriptionLookup = new DescriptionLookup( $idLookup, $termBuffer );
 		$descriptionLookup->scope = $scope;
 		return $descriptionLookup;
 	}
@@ -265,42 +262,25 @@ class DescriptionLookupTest extends TestCase {
 	 *   if it is null, there is no description.
 	 *   Description can be a string or an array of descriptions, indexed by language.
 	 *
-	 * @return MockObject|TermIndex
+	 * @return MockObject|TermBuffer
 	 */
-	private function getTermIndex( array $centralDescriptions ) {
-		$termIndex = $this->getMockBuilder( TermIndex::class )
+	private function getTermBuffer( array $centralDescriptions ) {
+		$termBuffer = $this->getMockBuilder( TermBuffer::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$termIndex->expects( $this->any() )
-			->method( 'getTermsOfEntities' )
+		$termBuffer->expects( $this->any() )
+			->method( 'getPrefetchedTerm' )
 			->willReturnCallback(
-				function ( $entityIdsByPageId, $_, $langCodes ) use ( $centralDescriptions ) {
-					$entries = [];
-					foreach ( $entityIdsByPageId as $pageId => $entityId ) {
-						/** @var EntityId $entityId */
-						Assert::precondition( $pageId === (int)substr( $entityId->getLocalPart(), 1 ),
-							'wrong id' );
-						$description = $centralDescriptions[$pageId];
-
-						if ( $description === null ) {
-							continue;
-						} elseif ( !is_array( $description ) ) {
-							$description = [ 'en' => $description ];
-						}
-
-						foreach ( $description as $termLanguage => $termText ) {
-							$entries[] = new TermIndexEntry( [
-								'termType' => TermIndexEntry::TYPE_DESCRIPTION,
-								'termLanguage' => $termLanguage,
-								'termText' => $termText,
-								'entityId' => $entityId,
-							] );
-						}
+				function ( $entityId, $termType, $langCode ) use ( $centralDescriptions ) {
+					$pageId = (int)substr( $entityId->getLocalPart(), 1 );
+					$description = $centralDescriptions[$pageId];
+					if ( is_array( $description ) ) {
+						$description = $description[$langCode] ?? false;
 					}
-					return $entries;
+					return $description;
 				}
 			);
-		return $termIndex;
+		return $termBuffer;
 	}
 
 }

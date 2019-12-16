@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use PageProps;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
@@ -39,13 +39,13 @@ class DescriptionLookup {
 	private $idLookup;
 
 	/**
-	 * @var TermIndex
+	 * @var TermBuffer
 	 */
-	private $termIndex;
+	private $termLookup;
 
-	public function __construct( EntityIdLookup $idLookup, TermIndex $termIndex ) {
+	public function __construct( EntityIdLookup $idLookup, TermBuffer $termLookup ) {
 		$this->idLookup = $idLookup;
-		$this->termIndex = $termIndex;
+		$this->termLookup = $termLookup;
 	}
 
 	/**
@@ -137,20 +137,25 @@ class DescriptionLookup {
 		}, $titlesByPageId ) );
 
 		$entityIdsByPageId = $this->idLookup->getEntityIds( $titlesByPageId );
-		$termIndexEntries = $this->termIndex->getTermsOfEntities( $entityIdsByPageId,
-			[ TermIndexEntry::TYPE_DESCRIPTION ], $languages );
+		$this->termLookup->prefetchTerms(
+			$entityIdsByPageId,
+			[ TermIndexEntry::TYPE_DESCRIPTION ],
+			$languages
+		);
 
 		$pageIdsByEntityId = array_flip( array_map( function ( EntityId $entityId ) {
 			return $entityId->getSerialization();
 		}, $entityIdsByPageId ) );
 		$descriptionsByPageId = [];
-		foreach ( $termIndexEntries as $termIndexEntry ) {
-			$pageId = $pageIdsByEntityId[$termIndexEntry->getEntityId()->getSerialization()];
+		foreach ( $entityIdsByPageId as $entityId ) {
+			$pageId = $pageIdsByEntityId[$entityId->getSerialization()];
 			$pageLanguage = $titlesByPageId[$pageId]->getPageLanguage()->getCode();
-			if ( $termIndexEntry->getLanguage() !== $pageLanguage ) {
+			$term = $this->termLookup->getPrefetchedTerm( $entityId, TermIndexEntry::TYPE_DESCRIPTION, $pageLanguage );
+
+			if ( $term === false ) {
 				continue;
 			}
-			$descriptionsByPageId[$pageId] = $termIndexEntry->getText();
+			$descriptionsByPageId[$pageId] = $term;
 		}
 		return $descriptionsByPageId;
 	}
