@@ -10,20 +10,20 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class ChangeOpsResult implements ChangeOpResult {
 
-	private $changeOpsResults;
+	private $changeOpResults;
 	private $entityId;
 
 	/**
 	 * @param EntityId|null $entityId
-	 * @param array $changeOpsResults
+	 * @param ChangeOpResult[] $changeOpResults
 	 */
-	public function __construct( EntityId $entityId = null, $changeOpsResults = [] ) {
+	public function __construct( EntityId $entityId = null, array $changeOpResults = [] ) {
 		$this->entityId = $entityId;
-		$this->changeOpsResults = $changeOpsResults;
+		$this->changeOpResults = $changeOpResults;
 	}
 
 	public function getChangeOpsResults() {
-		return $this->changeOpsResults;
+		return $this->changeOpResults;
 	}
 
 	public function getEntityId() {
@@ -31,7 +31,7 @@ class ChangeOpsResult implements ChangeOpResult {
 	}
 
 	public function isEntityChanged() {
-		foreach ( $this->changeOpsResults as $result ) {
+		foreach ( $this->changeOpResults as $result ) {
 			if ( $result->isEntityChanged() ) {
 				return true;
 			}
@@ -43,8 +43,8 @@ class ChangeOpsResult implements ChangeOpResult {
 	public function validate(): Result {
 		$finalResult = Result::newSuccess();
 
-		foreach ( $this->changeOpsResults as $result ) {
-			$finalResult = Result::merge( $finalResult, $result );
+		foreach ( $this->changeOpResults as $result ) {
+			$finalResult = Result::merge( $finalResult, $result->validate() );
 		}
 
 		return $finalResult;
