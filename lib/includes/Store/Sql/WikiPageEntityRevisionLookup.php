@@ -171,6 +171,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *
+	 * @throws InconsistentRedirectException
 	 * @return LatestRevisionIdResult
 	 */
 	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
