@@ -136,6 +136,18 @@ use Wikibase\WikibaseSettings;
 final class WikibaseClient {
 
 	/**
+	 * @warning only for use in getDefaultInstance()!
+	 * @var WikibaseClient
+	 */
+	private static $defaultInstance = null;
+
+	/**
+	 * @warning only for use in getDefaultSnakFormatterBuilders()!
+	 * @var WikibaseSnakFormatterBuilders
+	 */
+	private static $defaultSnakFormatterBuilders = null;
+
+	/**
 	 * @var SettingsArray
 	 */
 	private $settings;
@@ -361,15 +373,13 @@ final class WikibaseClient {
 	 * @return WikibaseSnakFormatterBuilders
 	 */
 	public static function getDefaultSnakFormatterBuilders() {
-		static $builders;
-
-		if ( $builders === null ) {
-			$builders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
+		if ( self::$defaultSnakFormatterBuilders === null ) {
+			self::$defaultSnakFormatterBuilders = self::getDefaultInstance()->newWikibaseSnakFormatterBuilders(
 				self::getDefaultValueFormatterBuilders()
 			);
 		}
 
-		return $builders;
+		return self::$defaultSnakFormatterBuilders;
 	}
 
 	/**
@@ -950,13 +960,16 @@ final class WikibaseClient {
 	 * @return self
 	 */
 	public static function getDefaultInstance( $reset = 'noreset' ) {
-		static $instance = null;
-
-		if ( $instance === null || $reset === 'reset' ) {
-			$instance = self::newInstance();
+		if ( $reset === 'reset' ) {
+			self::$defaultInstance = null;
+			self::$defaultSnakFormatterBuilders = null;
 		}
 
-		return $instance;
+		if ( self::$defaultInstance === null ) {
+			self::$defaultInstance = self::newInstance();
+		}
+
+		return self::$defaultInstance;
 	}
 
 	public function getLogger() {
