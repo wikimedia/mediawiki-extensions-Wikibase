@@ -25,3 +25,6 @@ $wgDisableSearchUpdate = true;
 
 // enable data bridge
 $wgWBRepoSettings['dataBridgeEnabled'] = true;
+
+// enable tainted-refs
+$wgWBRepoSettings['taintedReferencesEnabled'] = true;
