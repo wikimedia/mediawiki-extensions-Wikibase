@@ -1,15 +1,10 @@
 <template>
-	<div
-		class="wb-tr-popper-wrapper"
-		tabindex="-1"
-		@focusout="onFocusout"
-		@keydown.esc="closeKeyPress"
-	>
+	<div class="wb-tr-popper-wrapper" tabindex="-1" @focusout="onFocusout">
 		<div class="wb-tr-popper-triangle" />
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
 				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
-				<button class="wb-tr-popper-close" @click="closeClick" />
+				<span class="wb-tr-popper-close" @click="closeClick" />
 			</div>
 			<div class="wb-tr-popper-help">
 				<a
@@ -94,11 +89,6 @@ export default class Popper extends Vue {
 		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
 	}
 
-	public closeKeyPress( event: KeyboardEvent ): void {
-		event.preventDefault();
-		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
-	}
-
 	public helpClick(): void {
 		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	}
@@ -179,19 +169,8 @@ export default class Popper extends Vue {
 	border-bottom: 1px $border-color-grey solid;
 }
 
-button {
-	background: none;
-	color: inherit;
-	border-color: transparent;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
 .wb-tr-popper-close {
 	margin-top: -4px;
-	margin-bottom: 4px;
 	margin-right: -8px;
 	font-size: 20px;
 	width: 32px;
@@ -207,10 +186,6 @@ button {
 }
 
 .wb-tr-popper-close:hover {
-	background-color: $background-color-light-grey;
-}
-
-.wb-tr-popper-close:focus {
 	background-color: $background-color-light-grey;
 }
 
