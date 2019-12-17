@@ -108,5 +108,6 @@
 	"connected-redirect-category": "Redirezionaminde collegate a 'nu elemende {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Sta categorije elenghe le redirezionaminde ca sò collegate a 'nu elemende {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Cange 'a probbietà",
+	"wikibase-client-data-bridge-permissions-error": "Tu non ge tìne 'u permesse pe cangià stu valore, pe {{PLURAL:$1|stu mutive|ste mutive}}:",
 	"wikibase-client-data-bridge-references-heading": "Refereminde"
 }
