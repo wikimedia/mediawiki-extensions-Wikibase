@@ -1912,15 +1912,19 @@ class WikibaseRepo {
 			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
 				$loadBalancerFactory,
-				$typeIdsStore
+				$typeIdsStore,
+				$this->getLogger()
 			),
 			new DatabaseTermIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
-				$loadBalancer
+				$loadBalancer,
+				false,
+				$this->getLogger()
 			),
 			new DatabaseTermIdsCleaner(
-				$loadBalancer
+				$loadBalancer,
+				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
 			$this->getLogger()
@@ -1985,15 +1989,19 @@ class WikibaseRepo {
 			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
 				$loadBalancerFactory,
-				$typeIdsStore
+				$typeIdsStore,
+				$this->getLogger()
 			),
 			new DatabaseTermIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
-				$loadBalancer
+				$loadBalancer,
+				false,
+				$this->getLogger()
 			),
 			new DatabaseTermIdsCleaner(
-				$loadBalancer
+				$loadBalancer,
+				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
 			$this->getLogger()
