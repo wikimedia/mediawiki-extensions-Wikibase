@@ -1,10 +1,15 @@
 <template>
-	<div class="wb-tr-popper-wrapper" tabindex="-1" @focusout="onFocusout">
+	<div
+		class="wb-tr-popper-wrapper"
+		tabindex="-1"
+		@focusout="onFocusout"
+		@keydown.esc="closeKeyPress"
+	>
 		<div class="wb-tr-popper-triangle" />
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
 				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
-				<span class="wb-tr-popper-close" @click="closeClick" />
+				<button class="wb-tr-popper-close" @click="closeClick" />
 			</div>
 			<div class="wb-tr-popper-help">
 				<a
@@ -85,6 +90,11 @@ export default class Popper extends Vue {
 	}
 
 	public closeClick( event: MouseEvent ): void {
+		event.preventDefault();
+		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
+	}
+
+	public closeKeyPress( event: KeyboardEvent ): void {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
 	}
@@ -170,7 +180,10 @@ export default class Popper extends Vue {
 }
 
 .wb-tr-popper-close {
+	border-color: transparent;
+	background: transparent;
 	margin-top: -4px;
+	margin-bottom: 4px;
 	margin-right: -8px;
 	font-size: 20px;
 	width: 32px;
