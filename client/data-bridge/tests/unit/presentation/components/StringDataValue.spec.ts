@@ -1,6 +1,6 @@
 import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
-import ResizingTextField from '@/presentation/components/ResizingTextField.vue';
+import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
 import { shallowMount } from '@vue/test-utils';
 
 describe( 'StringDataValue', () => {
