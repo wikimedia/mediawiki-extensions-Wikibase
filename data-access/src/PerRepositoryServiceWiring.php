@@ -108,7 +108,9 @@ return [
 			$settings,
 			$cache,
 			$loadBalancer,
-			$termIdsResolver
+			$termIdsResolver,
+			$repositoryName,
+			$databaseName
 		);
 
 		$typeDispatchingMapping = [];

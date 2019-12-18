@@ -144,6 +144,11 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	private $dbTermIdsResolver;
 
 	/**
+	 * @var string|bool
+	 */
+	private $databaseName;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
@@ -154,6 +159,8 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	 * @param ILoadBalancer $loadBalancer
 	 * @param DatabaseTermIdsResolver $databaseTermIdsResolver
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
+	 * @param string|bool $databaseName The wiki's database to connect to.
+	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -165,7 +172,8 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 		CacheInterface $termCache,
 		ILoadBalancer $loadBalancer,
 		DatabaseTermIdsResolver $databaseTermIdsResolver,
-		$repositoryName = ''
+		$repositoryName = '',
+		$databaseName = false
 	) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
 
@@ -179,6 +187,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 		$this->termCache = $termCache;
 		$this->loadBalancer = $loadBalancer;
 		$this->dbTermIdsResolver = $databaseTermIdsResolver;
+		$this->databaseName = $databaseName;
 	}
 
 	/**
@@ -429,7 +438,6 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 			'wikibase.repo.term_store.EntityInfoBuilder_collectTermsForEntities.idCount.' . $idCount
 		);
 
-		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 		$numericIds = [];
 		foreach ( $uncachedEntityIds as $stringEntityId ) {
 			$entityId = $this->getEntityId( $stringEntityId );
@@ -642,7 +650,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 			return $this->pageInfoByType[$entityType];
 		}
 
-		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->loadBalancer->getConnection( DB_REPLICA, [], $this->databaseName );
 
 		$fields = [
 			'page_title',
