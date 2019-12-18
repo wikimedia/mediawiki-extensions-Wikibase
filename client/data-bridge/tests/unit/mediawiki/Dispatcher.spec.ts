@@ -3,6 +3,7 @@ import MwWindow from '@/@types/mediawiki/MwWindow';
 import AppBridge from '@/definitions/AppBridge';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
+import { mockMwConfig } from '../../util/mocks';
 
 const manager = jest.fn();
 const dialog = {
@@ -41,6 +42,7 @@ describe( 'Dispatcher', () => {
 				{
 					OO,
 					$,
+					mw: { config: mockMwConfig() },
 				} as MwWindow,
 				{
 					launch: jest.fn(),
@@ -60,7 +62,8 @@ describe( 'Dispatcher', () => {
 		it( 'triggers service creation and launches app', () => {
 			const usePublish = true;
 			const editTags = [ 'my tag' ];
-			const mwWindow = new ( jest.fn() )();
+			const pageTitle = 'Client_page';
+			const mwWindow = { mw: { config: mockMwConfig( { wgPageName: pageTitle } ) } };
 			const emitter = jest.fn();
 			const mockServices = {};
 			const app = {
@@ -94,6 +97,7 @@ describe( 'Dispatcher', () => {
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
 				},
 				{
+					pageTitle,
 					entityId,
 					propertyId,
 					entityTitle,

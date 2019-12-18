@@ -26,6 +26,7 @@ export default class Dispatcher {
 				containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,
 			},
 			{
+				pageTitle: this.mwWindow.mw.config.get( 'wgPageName' ),
 				entityId: selectedElement.entityId,
 				propertyId: selectedElement.propertyId,
 				entityTitle: selectedElement.entityTitle,

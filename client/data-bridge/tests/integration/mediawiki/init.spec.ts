@@ -57,12 +57,14 @@ describe( 'init', () => {
 			mwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
 			api = new BatchingApi( new ApiCore( mwApi ) ),
 			editTags = [ 'a tag' ],
-			usePublish = true;
+			usePublish = true,
+			pageTitle = 'Client_page';
 		mockMwEnv(
 			using,
 			mockMwConfig( {
 				editTags,
 				usePublish,
+				wgPageName: pageTitle,
 			} ),
 			undefined,
 			MwForeignApiConstructor,
@@ -117,6 +119,7 @@ describe( 'init', () => {
 					containerSelector: '#data-bridge-container',
 				},
 				{
+					pageTitle,
 					entityId,
 					propertyId,
 					entityTitle,

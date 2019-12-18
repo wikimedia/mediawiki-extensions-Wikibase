@@ -90,6 +90,7 @@ launch(
 		containerSelector: '#data-bridge-container',
 	},
 	{
+		pageTitle: 'Client_page',
 		entityId: 'Q42',
 		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
 		entityTitle: 'Q42',

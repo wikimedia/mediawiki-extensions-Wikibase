@@ -3,6 +3,8 @@ import EntityId from '@/datamodel/EntityId';
 import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
 
 export default interface AppInformation {
+	/** The page title (including namespace, if any) of the client page using the data. */
+	pageTitle: string;
 	/** The entity ID to edit. */
 	entityId: EntityId;
 	/** The property ID of the statement(s) to edit. */

@@ -130,6 +130,7 @@ describe( 'store/actions', () => {
 		} );
 
 		info = {
+			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
