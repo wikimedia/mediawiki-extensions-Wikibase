@@ -20,7 +20,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "events": "^3.0.0",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0"
   },
@@ -48,8 +48,8 @@
     "@wdio/mocha-framework": "^5.12.1",
     "@wdio/spec-reporter": "^5.12.1",
     "@wdio/sync": "^5.12.3",
-    "@wmde/vuex-helpers": "^0.1.2",
     "@wmde/eslint-config-wikimedia-typescript": "^0.1.1",
+    "@wmde/vuex-helpers": "^0.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -79,7 +79,7 @@
     "typescript": "3.5.3",
     "url-search-params-polyfill": "^5.1.0",
     "vue-cli-plugin-typescript": "0.0.1",
-    "vue-template-compiler": "^2.6.10",
+    "vue-template-compiler": "^2.6.11",
     "vuex": "^3.1.1",
     "vuex-class": "^0.3.2",
     "wdio-mediawiki": "0.4.0",
