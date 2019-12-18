@@ -300,7 +300,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$this->settings,
 				$cache,
 				$loadBalancer,
-				$termIdsResolver
+				$termIdsResolver,
+				$repositoryName,
+				$databaseName
 			);
 
 			$typeDispatchingMapping = [];
