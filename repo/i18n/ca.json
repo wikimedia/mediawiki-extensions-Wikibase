@@ -369,5 +369,6 @@
 	"wikibase-shortcopyrightwarning-heading": "Atribució de llicència",
 	"wikibase-entity-save-error-heading": "Ha fallat quelcom",
 	"wikibase-entity-save-error-message": "No s'ha pogut publicar el vostre canvi. Podeu provar de clicar el botó Publica de nou.",
-	"wikibase-tainted-ref-warning-icon-title": "Aquesta declaració té algunes incidències"
+	"wikibase-tainted-ref-warning-icon-title": "Aquesta declaració té algunes incidències",
+	"wikibase-tainted-ref-popper-help-link-text": "Ajuda"
 }

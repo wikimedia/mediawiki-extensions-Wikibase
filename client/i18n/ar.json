@@ -130,6 +130,10 @@
 	"wikibase-client-data-bridge-dialog-title": "تحرير الخاصية",
 	"wikibase-client-data-bridge-permissions-error": "ليست لديك صلاحية لتعديل هذه القيمة؛ {{PLURAL:$1|للسبب التالي|للأسباب التالية}}:",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>هذه القيمة حاليا [$1 محمية بالكامل] في {{WBREPONAME}} ويمكن تحريرها فقط بواسطة [$2 الإداريين].</strong>",
+	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>لماذا هذه القيمة محمية؟</strong></p>\n<ul>\n<li>بعض القوالب والعناصر (وقيمها) محمية بشكل دائم [$1] نظرا للرؤية، في بعض الأحيان، تكون محمية بسبب [$2 نزاعات التحرير]، يمكن تحرير معظم العناصر بواسطة أي شخص.</li>\n<li>يمكن العثور على سبب الحماية في [$3 سجل الحماية].</li>\n</ul>\n<p><strong>ماذا يمكنني أن أفعل؟</strong></p>\n<ul><li>[$4 ناقش هذا العنصر] مع الآخرين.</li></ul>",
+	"wikibase-client-data-bridge-semiprotected-on-repo-head": "<strong>هذه القيمة حاليا [$1 محمية جزئيا] في {{WBREPONAME}} ويمكن تحريرها فقط بواسطة [$2 المستخدمين المؤقتين تلقائيا].</strong>",
+	"wikibase-client-data-bridge-semiprotected-on-repo-body": "<p><strong>لماذا هذه القيمة محمية؟</strong></p>\n<ul>\n<li>بينما يمكن لأي شخص تحرير معظم القيم، إلا أن الحماية الجزئية ضرورية في بعض الأحيان لمنع التخريب للعناصر الشائعة.</li>\n<li>يمكن العثور على سبب الحماية في [$1 سجل الحماية].</li>\n</ul>\n<p><strong>ماذا يمكنني أن أفعل؟</strong></p>\n<ul>\n<li>إذا كان لديك حساب مستخدم على {{WBREPONAME}}, [[Special:UserLogin|فسجل الدخول]] أولا،</li>\n<li>إذا لم يكن لديك حساب، [[Special:CreateAccount|فأنشئ حسابا]] في {{WBREPONAME}}، بعد التأكيد التلقائي، ستتمكن من تعديل الصفحات شبه المحمية،</li>\n<li>[$2 ناقش هذا العنصر] مع الآخرين.</li>\n</ul>",
+	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>تم منع اسم المستخدم أو عنوان الآيبي الخاص بك على {{WBREPONAME}}.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>تم منع اسم المستخدم أو عنوان الآيبي الخاص بك على هذا الويكي.</strong>",
 	"wikibase-client-data-bridge-references-heading": "مراجع"
 }
