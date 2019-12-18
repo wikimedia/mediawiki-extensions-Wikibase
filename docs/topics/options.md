@@ -290,6 +290,23 @@ Enable/Disable the tainted reference feature. The default setting is `false`, so
 
 *DEFAULT*: `false`
 
+statementSections
+Configuration to group statements together based on their datatype or other criteria like "propertySet". For example, putting all of external identifiers in one place. Here's an example:
+```
+$wgWBRepoSettings['statementSections'] = [
+	'item' => [
+		'statements' => null,
+		'identifiers' => [
+			'type' => 'dataType',
+			'dataTypes' => [ 'external-id' ],
+		],
+	],
+];
+```
+This configuration requires you to define `wikibase-statementsection-identifiers` message, otherwise rendering items will be broken.
+
+*DEFAULT*: []
+
 Client Settings
 ---------------
 
