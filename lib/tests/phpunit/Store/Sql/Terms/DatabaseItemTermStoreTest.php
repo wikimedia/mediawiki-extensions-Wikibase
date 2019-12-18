@@ -30,7 +30,7 @@ use Wikimedia\Rdbms\IMaintainableDatabase;
 class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 	/** @var DatabaseItemTermStore */
-	private $propertyTermStore;
+	private $itemTermStore;
 
 	/** @var ItemId */
 	private $i1;
@@ -62,7 +62,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$loadBalancer,
 			WANObjectCache::newEmpty()
 		);
-		$this->propertyTermStore = new DatabaseItemTermStore(
+		$this->itemTermStore = new DatabaseItemTermStore(
 			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
 				$lbFactory,
@@ -108,89 +108,89 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testStoreAndGetTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testGetTermsWithoutStore() {
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreEmptyAndGetTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testDeleteTermsWithoutStore() {
-		$this->propertyTermStore->deleteTerms( $this->i1 );
+		$this->itemTermStore->deleteTerms( $this->i1 );
 		$this->assertTrue( true, 'did not throw an error' );
 	}
 
 	public function testStoreSameFingerprintTwiceAndGetTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoreTwoFingerprintsAndGetTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint2
 		);
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint2, $fingerprint );
 	}
 
 	public function testStoreAndDeleteAndGetTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$this->propertyTermStore->deleteTerms( $this->i1 );
+		$this->itemTermStore->deleteTerms( $this->i1 );
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreTermsCleansUpRemovedTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
 			)
 		);
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
@@ -204,13 +204,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteTermsCleansUpRemovedTerms() {
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
 			)
 		);
-		$this->propertyTermStore->deleteTerms( $this->i1 );
+		$this->itemTermStore->deleteTerms( $this->i1 );
 
 		$this->assertSelect(
 			'wbt_text',
@@ -222,17 +222,17 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 	public function testStoreTerms_throwsForForeignItemId() {
 		$this->expectException( InvalidArgumentException::class );
-		$this->propertyTermStore->storeTerms( new ItemId( 'wd:P1' ), $this->fingerprintEmpty );
+		$this->itemTermStore->storeTerms( new ItemId( 'wd:P1' ), $this->fingerprintEmpty );
 	}
 
 	public function testDeleteTerms_throwsForForeignItemId() {
 		$this->expectException( InvalidArgumentException::class );
-		$this->propertyTermStore->deleteTerms( new ItemId( 'wd:P1' ) );
+		$this->itemTermStore->deleteTerms( new ItemId( 'wd:P1' ) );
 	}
 
 	public function testGetTerms_throwsForForeignItemId() {
 		$this->expectException( InvalidArgumentException::class );
-		$this->propertyTermStore->getTerms( new ItemId( 'wd:P1' ) );
+		$this->itemTermStore->getTerms( new ItemId( 'wd:P1' ) );
 	}
 
 	public function testStoresAndGetsUTF8Text() {
@@ -241,12 +241,12 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			'ఒక వ్యక్తి లేదా సంస్థ సాధించిన రికార్డు. ఈ రికార్డును సాధించిన కోల్పోయిన తేదీలను చూపేందుకు క్'
 		);
 
-		$this->propertyTermStore->storeTerms(
+		$this->itemTermStore->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->propertyTermStore->getTerms( $this->i1 );
+		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
