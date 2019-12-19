@@ -15,7 +15,7 @@ import {
 	Watch,
 } from 'vue-property-decorator';
 import Component from 'vue-class-component';
-import IndeterminateProgressBar from './IndeterminateProgressBar.vue';
+import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 
 /**
  * This
