@@ -4,8 +4,14 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 import { Hook, HookRegistry } from '@/@types/mediawiki/MwWindow';
 import getMockStatement from './getMockStatement';
+import StatementTracker from '@/StatementTracker';
 
 Vue.use( Vuex );
+
+function getMockStatementTracker(): StatementTracker {
+	return { trackChanges: jest.fn() } as any;
+}
+
 describe( 'MWHookHandler', () => {
 	it( `should dispatch ${STATEMENT_TAINTED_STATE_UNTAINT} with statement guid on edit hook firing`, () => {
 		const dummyEditHook = ( randomFunction: Function ): Hook => {
@@ -19,7 +25,7 @@ describe( 'MWHookHandler', () => {
 
 		const mockTaintedChecker = { check: () => true };
 
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
 		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } as any } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
@@ -40,7 +46,7 @@ describe( 'MWHookHandler', () => {
 
 		const mockTaintedChecker = { check: () => true };
 
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
 		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } as any } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
@@ -65,12 +71,34 @@ describe( 'MWHookHandler', () => {
 		const mockTaintedChecker = { check: jest.fn() };
 		mockTaintedChecker.check.mockReturnValue( false );
 
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker );
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
 		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } as any } );
 		store.dispatch = jest.fn();
 		hookHandler.addStore( store );
 		expect( mockTaintedChecker.check ).toHaveBeenCalledWith( s1, s2 );
 		expect( mwHookRegistry ).toHaveBeenCalledWith( 'wikibase.statement.saved' );
 		expect( store.dispatch ).not.toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_TAINT, 'gooGuid' );
+	} );
+
+	it( 'should call the statementTracker on save hook firing', () => {
+		const s1 = getMockStatement( false );
+		const s2 = getMockStatement( false );
+		const dummySaveHook = ( randomFunction: Function ): Hook => {
+			randomFunction( 'Q1', 'gooGuid', s1, s2 );
+			return { add: jest.fn() };
+		};
+
+		const mwHookRegistry = jest.fn( ( _hookName: string ) => {
+			return { add: dummySaveHook };
+		} );
+
+		const mockTaintedChecker = { check: () => true };
+
+		const trackChanges = jest.fn();
+		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } as any } );
+		store.dispatch = jest.fn();
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, { trackChanges } as any );
+		hookHandler.addStore( store );
+		expect( trackChanges ).toHaveBeenCalledWith( s1, s2 );
 	} );
 } );

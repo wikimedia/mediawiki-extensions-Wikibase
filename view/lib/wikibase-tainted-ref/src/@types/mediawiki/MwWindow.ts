@@ -34,7 +34,7 @@ export interface ForeignApi {
 	login( username: string, password: string ): JQuery.Promise<any>;
 }
 
-interface MediaWiki {
+export interface MediaWiki {
 	loader: ResourceLoader;
 	config: MwConfig;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.log */

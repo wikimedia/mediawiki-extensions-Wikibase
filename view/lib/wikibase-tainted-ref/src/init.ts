@@ -3,6 +3,8 @@ import Message from '@/vue-plugins/Message';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import MWHookHandler from '@/MWHookHandler';
 import TaintedChecker from '@/TaintedChecker';
+import StatementTracker from '@/StatementTracker';
+import ReferenceListChangeCounter from '@/ReferenceListChangeCounter';
 
 const RL_COMMON_MODULE_NAME = 'wikibase.tainted-ref';
 export default async (): Promise<void> => {
@@ -15,7 +17,9 @@ export default async (): Promise<void> => {
 		const require = await mwWindow.mw.loader.using( RL_COMMON_MODULE_NAME );
 		const app = require( RL_COMMON_MODULE_NAME );
 		const Vue = require( 'vue2' );
-		const hookHandler = new MWHookHandler( mwWindow.mw.hook, new TaintedChecker() );
+
+		const statementTracker = new StatementTracker( mwWindow.mw.track, new ReferenceListChangeCounter() );
+		const hookHandler = new MWHookHandler( mwWindow.mw.hook, new TaintedChecker(), statementTracker );
 
 		Vue.use( Track, { trackingFunction: mwWindow.mw.track } );
 		Vue.use( Message, { messageToTextFunction } );
