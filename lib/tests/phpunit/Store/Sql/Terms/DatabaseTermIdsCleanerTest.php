@@ -275,4 +275,107 @@ class DatabaseTermIdsCleanerTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testT237984_sharedTextInLangIdsAreNotDeleted() {
+		$this->db->insert( 'wbt_type',
+			[ 'wby_name' => 'label' ] );
+		$typeIdLabel = $this->db->insertId();
+		$this->db->insert( 'wbt_type',
+			[ 'wby_name' => 'description' ] );
+		$typeIdDescription = $this->db->insertId();
+
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'someText' ] );
+		$textId = $this->db->insertId();
+
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $textId ] );
+		$textInLangIdSingleUse1 = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $textId ] );
+		$textInLangIdSingleUse2 = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'fr', 'wbxl_text_id' => $textId ] );
+		$textInLangIdShared = $this->db->insertId();
+
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdSingleUse1 ] );
+		$termInLangIdToDelete1 = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdSingleUse2 ] );
+		$termInLangIdToDelete2 = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
+		$termInLangIdToDelete3 = $this->db->insertId();
+
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdDescription, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
+		$termInLangIdToRemain = $this->db->insertId();
+
+		$this->getCleaner()->cleanTermIds( [ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3 ] );
+
+		$this->assertSelect(
+			'wbt_term_in_lang',
+			'wbtl_id',
+			'*',
+			[ [ $termInLangIdToRemain ] ]
+		);
+		// This row should not be deleted, as it is still used by $termInLangIdToRemain
+		$this->assertSelect(
+			'wbt_text_in_lang',
+			'wbxl_id',
+			'*',
+			[ [ $textInLangIdShared ] ]
+		);
+	}
+
+	public function testT237984_sharedTextIdsAreNotDeleted() {
+		$this->db->insert( 'wbt_type',
+			[ 'wby_name' => 'label' ] );
+		$typeIdLabel = $this->db->insertId();
+
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'someText1' ] );
+		$textIdSingleUse = $this->db->insertId();
+		$this->db->insert( 'wbt_text',
+			[ 'wbx_text' => 'someText2' ] );
+		$textIdShared = $this->db->insertId();
+
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $textIdSingleUse ] );
+		$textInLangIdToDelete1 = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $textIdShared ] );
+		$textInLangIdToDelete2 = $this->db->insertId();
+		$this->db->insert( 'wbt_text_in_lang',
+			[ 'wbxl_language' => 'fr', 'wbxl_text_id' => $textIdShared ] );
+		$textInLangIdToRemain3 = $this->db->insertId();
+
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToDelete1 ] );
+		$termInLangIdToDelete1 = $this->db->insertId();
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToDelete2 ] );
+		$termInLangIdToDelete2 = $this->db->insertId();
+
+		$this->db->insert( 'wbt_term_in_lang',
+			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToRemain3 ] );
+		$termInLangIdToRemain3 = $this->db->insertId();
+
+		$this->getCleaner()->cleanTermIds( [ $termInLangIdToDelete1, $termInLangIdToDelete2 ] );
+
+		$this->assertSelect(
+			'wbt_term_in_lang',
+			'wbtl_id',
+			'*',
+			[ [ $termInLangIdToRemain3 ] ]
+		);
+		// This row should not be deleted, as it is still used by $textIdShared
+		$this->assertSelect(
+			'wbt_text',
+			'wbx_id',
+			'*',
+			[ [ $textIdShared ] ]
+		);
+	}
+
 }
