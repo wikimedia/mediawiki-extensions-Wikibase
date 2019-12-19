@@ -6,10 +6,12 @@ use InvalidArgumentException;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
@@ -44,6 +46,10 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
+	private $loadBalancer;
+	private $lbFactory;
+	private $typeIdsStore;
+
 	protected function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_type';
@@ -52,29 +58,29 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_item_terms';
 
-		$loadBalancer = new FakeLoadBalancer( [
+		$this->loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
-		$lbFactory = new FakeLBFactory( [
-			'lb' => $loadBalancer
+		$this->lbFactory = new FakeLBFactory( [
+			'lb' => $this->loadBalancer
 		] );
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
+		$this->typeIdsStore = new DatabaseTypeIdsStore(
+			$this->loadBalancer,
 			WANObjectCache::newEmpty()
 		);
 		$this->itemTermStore = new DatabaseItemTermStore(
-			$loadBalancer,
+			$this->loadBalancer,
 			new DatabaseTermIdsAcquirer(
-				$lbFactory,
-				$typeIdsStore
+				$this->lbFactory,
+				$this->typeIdsStore
 			),
 			new DatabaseTermIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
+				$this->typeIdsStore,
+				$this->typeIdsStore,
+				$this->loadBalancer
 			),
 			new DatabaseTermIdsCleaner(
-				$loadBalancer
+				$this->loadBalancer
 			),
 			new StringNormalizer()
 		);
@@ -249,6 +255,40 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	public function testT237984UnexpectedMissingTextRow() {
+		$propertyTermStore = new DatabasePropertyTermStore(
+			$this->loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$this->lbFactory,
+				$this->typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$this->typeIdsStore,
+				$this->typeIdsStore,
+				$this->loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$this->loadBalancer
+			),
+			new StringNormalizer()
+		);
+
+		$propertyTermStore->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
+			new TermList( [ new Term( 'nl', 'van' ) ] )
+		) );
+		$this->itemTermStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
+			new TermList(),
+			new TermList( [ new Term( 'af', 'van' ) ] )
+		) );
+
+		// Store with empty fingerprint (will delete things)
+		$this->itemTermStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
+
+		$r = $propertyTermStore->getTerms( new PropertyId( 'P12' ) );
+		$this->assertTrue( $r->hasLabel( 'nl' ) );
+		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
 	}
 
 }
