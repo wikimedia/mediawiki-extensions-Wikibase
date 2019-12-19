@@ -27,6 +27,8 @@ describe( 'ReferenceSection', () => {
 				wikibaseRepoConfigRepository: {},
 				readingEntityRepository: {},
 				writingEntityRepository: {},
+				propertyDatatypeRepository: {},
+				tracker: {},
 			} ),
 		);
 	} );

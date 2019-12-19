@@ -12673,7 +12673,7 @@ function commitErrors(context, errors) {
   context.commit(APPLICATION_ERRORS_ADD, errors);
 }
 
-function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
+function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDatatypeRepository, tracker) {
   var _ref3;
 
   return _ref3 = {}, _defineProperty(_ref3, BRIDGE_INIT, function (context, information) {
@@ -12682,6 +12682,9 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository) {
     entityLabelRepository.getLabel(information.propertyId).then(function (label) {
       context.commit(TARGET_LABEL_SET, label);
     }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
+    });
+    propertyDatatypeRepository.getDataType(information.propertyId).then(function (dataType) {
+      tracker.trackPropertyDatatype(dataType);
     });
     return Promise.all([wikibaseRepoConfigRepository.getRepoConfiguration(), context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
       entity: information.entityId
@@ -13220,7 +13223,7 @@ function createStore(services) {
   };
   var storeBundle = {
     state: state,
-    actions: actions(services.get('entityLabelRepository'), services.get('wikibaseRepoConfigRepository')),
+    actions: actions(services.get('entityLabelRepository'), services.get('wikibaseRepoConfigRepository'), services.get('propertyDatatypeRepository'), services.get('tracker')),
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
@@ -14567,9 +14570,6 @@ function launch(config, information, services) {
   extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client);
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
-  services.get('propertyDatatypeRepository').getDataType(information.propertyId).then(function (dataType) {
-    services.get('tracker').trackPropertyDatatype(dataType);
-  });
   var app = new presentation_App({
     store: store
   }).$mount(config.containerSelector);
