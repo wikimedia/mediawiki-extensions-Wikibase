@@ -3,16 +3,7 @@ import newMockServiceContainer from '../services/newMockServiceContainer';
 
 describe( 'store/index', () => {
 	it( 'creates the store', () => {
-		const store = createStore(
-			newMockServiceContainer( {
-				readingEntityRepository: {},
-				writingEntityRepository: {},
-				entityLabelRepository: {},
-				wikibaseRepoConfigRepository: {},
-				propertyDatatypeRepository: {},
-				tracker: {},
-			} ),
-		);
+		const store = createStore( newMockServiceContainer( {} ) );
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();
 		expect( store.state.targetProperty ).toBe( '' );

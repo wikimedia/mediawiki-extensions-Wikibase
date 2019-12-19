@@ -24,11 +24,11 @@ import DataBridge from '@/presentation/components/DataBridge.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
-import ServiceContainer from '@/services/ServiceContainer';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
 import MessageKeys from '@/definitions/MessageKeys';
 import EntityId from '@/datamodel/EntityId';
+import newMockServiceContainer from '../services/newMockServiceContainer';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -38,7 +38,6 @@ describe( 'App.vue', () => {
 	let entityId: EntityId;
 	let propertyId: string;
 	let editFlow: EditFlow;
-	const services = new ServiceContainer();
 
 	beforeEach( async () => {
 		entityId = 'Q42';
@@ -46,46 +45,38 @@ describe( 'App.vue', () => {
 		editFlow = EditFlow.OVERWRITE;
 		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
 
-		services.set( 'readingEntityRepository', {
-			getEntity: () => {
-				return Promise.resolve( {
+		store = createStore( newMockServiceContainer( {
+			'readingEntityRepository': {
+				getEntity: () => Promise.resolve( {
 					revisionId: 984899757,
 					entity: Entities.entities.Q42,
-				} as any );
+				} as any ),
 			},
-		} );
-		services.set( 'writingEntityRepository', {
-			saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
-				return Promise.resolve( new EntityRevision(
+			'writingEntityRepository': {
+				saveEntity: ( entity: EntityRevision ) => Promise.resolve( new EntityRevision(
 					entity.entity,
 					entity.revisionId + 1,
-				) );
+				) ),
 			},
-		} );
-		services.set( 'entityLabelRepository', {
-			getLabel( _id ) {
-				return Promise.reject();
+			'entityLabelRepository': {
+				getLabel: () => Promise.reject(),
 			},
-		} );
-		services.set( 'wikibaseRepoConfigRepository', {
-			getRepoConfiguration() {
-				return Promise.resolve( {
+			'wikibaseRepoConfigRepository': {
+				getRepoConfiguration: () => Promise.resolve( {
 					dataTypeLimits: {
 						string: {
 							maxLength: 200,
 						},
 					},
-				} );
+				} ),
 			},
-		} );
-		services.set( 'propertyDatatypeRepository', {
-			getDataType: jest.fn().mockResolvedValue( 'string' ),
-		} );
-		services.set( 'tracker', {
-			trackPropertyDatatype: jest.fn(),
-		} );
-
-		store = createStore( services );
+			'propertyDatatypeRepository': {
+				getDataType: jest.fn().mockResolvedValue( 'string' ),
+			},
+			'tracker': {
+				trackPropertyDatatype: jest.fn(),
+			},
+		} ) );
 
 		const information = {
 			entityId,

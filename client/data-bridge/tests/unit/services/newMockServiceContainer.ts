@@ -6,7 +6,7 @@ export default function newMockServiceContainer( services: Partial<{
 	return {
 		get( name: keyof Services ) {
 			if ( !services[ name ] ) {
-				throw new Error( `Service ${name} not mocked` );
+				return {};
 			}
 			return services[ name ];
 		},

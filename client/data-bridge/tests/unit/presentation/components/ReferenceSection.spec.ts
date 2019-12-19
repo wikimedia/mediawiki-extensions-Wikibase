@@ -21,16 +21,7 @@ describe( 'ReferenceSection', () => {
 	let store: Store<Application>;
 
 	beforeEach( () => {
-		store = createStore(
-			newMockServiceContainer( {
-				entityLabelRepository: {},
-				wikibaseRepoConfigRepository: {},
-				readingEntityRepository: {},
-				writingEntityRepository: {},
-				propertyDatatypeRepository: {},
-				tracker: {},
-			} ),
-		);
+		store = createStore( newMockServiceContainer( {} ) );
 	} );
 
 	it( 'shows the Reference message as the header', () => {
