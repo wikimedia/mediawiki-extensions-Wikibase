@@ -77,6 +77,8 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			]
 		);
 
+		// This is all of the text in lang ids for the term in lang ids that we are about to delete
+		// Once we delete them, those rows MIGHT be orphaned, if they are orphaned we need to clean them up, else we should just leave them.
 		$potentiallyUnusedTextInLangIds = $this->selectFieldValuesForPrimaryKey(
 			'wbt_term_in_lang',
 			'wbtl_text_in_lang_id',
@@ -95,6 +97,16 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
+		/**
+		 * This loop checks for text_in_lang ids that are currently unused, without locking
+		 * the rows in the term_in_lang table.
+		 *
+		 * The unused text_in_lang ids found by this loop, will later be double checked for
+		 * use before being locked in the term_in_lang table.
+		 *
+		 * This is done to reduce the number of rows that we have to lock, while still ensuring
+		 * we never remove an actually used text_in_lang id
+		 */
 		$unusedTextInLangIds = [];
 		foreach ( $potentiallyUnusedTextInLangIds as  $textInLangId ) {
 			// Note: Not batching here is intentional, see T234948
@@ -113,7 +125,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
-		$stillUsedTextInLangIds = $this->dbw->selectFieldValues(
+		$textInLangIdsUsedSinceLastLoopRan = $this->dbw->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_text_in_lang_id',
 			[ 'wbtl_text_in_lang_id' => $unusedTextInLangIds ],
@@ -140,12 +152,19 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 				'FOR UPDATE',
 			]
 		);
-		$unusedTextInLangIds = array_diff(
-			$potentiallyUnusedTextInLangIds,
-			$stillUsedTextInLangIds
-		);
 
-		$this->cleanTextInLangIds( $unusedTextInLangIds );
+		if ( count( $textInLangIdsUsedSinceLastLoopRan ) ) {
+			$this->logger->info(
+				'{method}: found {count} new rows referring to wbtl_text_in_lang_id since check',
+				[
+					'method' => __METHOD__,
+					'count' => count( $textInLangIdsUsedSinceLastLoopRan ),
+				]
+			);
+		}
+
+		$finalUnusedTextInLangIds = array_diff( $unusedTextInLangIds, $textInLangIdsUsedSinceLastLoopRan );
+		$this->cleanTextInLangIds( $finalUnusedTextInLangIds );
 	}
 
 	/**
@@ -185,6 +204,16 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
+		/**
+		 * This loop checks for text ids that are currently unused, without locking
+		 * the rows in the text_in_lang table.
+		 *
+		 * The unused text ids found by this loop, will later be double checked for
+		 * use before being locked in the text_in_lang table.
+		 *
+		 * This is done to reduce the number of rows that we have to lock, while still ensuring
+		 * we never remove an actually used text_id
+		 */
 		$unusedTextIds = [];
 		foreach ( $potentiallyUnusedTextIds as  $textId ) {
 			// Note: Not batching here is intentional, see T234948
@@ -203,19 +232,26 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			return;
 		}
 
-		$stillUsedTextIds = $this->dbw->selectFieldValues(
+		$textIdsUsedSinceLastLoopRan = $this->dbw->selectFieldValues(
 			'wbt_text_in_lang',
 			'wbxl_text_id',
 			[ 'wbxl_text_id' => $unusedTextIds ],
 			__METHOD__,
 			[ 'FOR UPDATE' ]
 		);
-		$unusedTextIds = array_diff(
-			$potentiallyUnusedTextIds,
-			$stillUsedTextIds
-		);
 
-		$this->cleanTextIds( $unusedTextIds );
+		if ( count( $textIdsUsedSinceLastLoopRan ) ) {
+			$this->logger->info(
+				'{method}: found {count} new rows referring to wbxl_text_id since check',
+				[
+					'method' => __METHOD__,
+					'count' => count( $textIdsUsedSinceLastLoopRan ),
+				]
+			);
+		}
+
+		$finalUnusedTextIds = array_diff( $unusedTextIds, $textIdsUsedSinceLastLoopRan );
+		$this->cleanTextIds( $finalUnusedTextIds );
 	}
 
 	/**
