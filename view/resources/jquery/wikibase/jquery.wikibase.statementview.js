@@ -187,7 +187,7 @@
 				value: rank,
 				templateParams: [ 'ui-state-disabled', '', '' ],
 				// TODO: Directionality should be determined on entityview level and forwarded to here
-				isRTL: $( 'html' ).prop( 'dir' ) === 'rtl'
+				isRTL: $( document.documentElement ).prop( 'dir' ) === 'rtl'
 			}, $rankSelector );
 
 			var self = this,

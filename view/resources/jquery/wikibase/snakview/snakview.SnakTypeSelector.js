@@ -53,7 +53,7 @@
 		_create: function () {
 			var self = this,
 				widgetName = this.widgetName,
-				$menu = this._buildMenu().appendTo( 'body' ).hide();
+				$menu = this._buildMenu().appendTo( document.body ).hide();
 
 			this._menu = $menu.data( 'menu' );
 
@@ -225,7 +225,7 @@
 		 * (Re-)aligns the menu.
 		 */
 		repositionMenu: function () {
-			var isRtl = $( 'body' ).hasClass( 'rtl' );
+			var isRtl = $( document.body ).hasClass( 'rtl' );
 
 			this._menu.element.position( {
 				of: this._$icon,

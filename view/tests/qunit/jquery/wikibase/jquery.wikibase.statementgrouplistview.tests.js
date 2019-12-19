@@ -30,7 +30,7 @@
 			value: new datamodel.StatementGroupSet()
 		}, options || {} );
 
-		$node = $node || $( '<div>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( document.body );
 
 		return $node
 			.addClass( 'test_statementgrouplistview' )

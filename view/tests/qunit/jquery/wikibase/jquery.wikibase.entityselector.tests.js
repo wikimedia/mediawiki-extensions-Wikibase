@@ -41,7 +41,7 @@
 
 		return $( '<input>' )
 			.addClass( 'test-entityselector' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.entityselector( options );
 	};
 

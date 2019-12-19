@@ -14,7 +14,7 @@
 	var newTestPageSuggester = function ( options ) {
 		return $( '<input>' )
 			.addClass( 'test_pagesuggester' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.pagesuggester( options );
 	};
 

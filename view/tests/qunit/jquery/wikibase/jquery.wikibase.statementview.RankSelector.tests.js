@@ -14,7 +14,7 @@
 	function createTestRankSelector( options ) {
 		var $node = $( '<span>' )
 			.addClass( 'test_rankselector' )
-			.appendTo( 'body' );
+			.appendTo( document.body );
 
 		var rankSelector = new $.wikibase.statementview.RankSelector( ( options || {} ), $node );
 		$node.data( 'test_rankselector', rankSelector );

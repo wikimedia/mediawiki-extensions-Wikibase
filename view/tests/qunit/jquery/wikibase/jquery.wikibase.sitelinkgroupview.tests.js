@@ -44,7 +44,7 @@
 
 		var $sitelinkgroupview = $( '<div>' )
 			.addClass( 'test_sitelinkgroupview' )
-			.appendTo( $( 'body' ) )
+			.appendTo( document.body )
 			.sitelinkgroupview( options );
 
 		return $sitelinkgroupview;

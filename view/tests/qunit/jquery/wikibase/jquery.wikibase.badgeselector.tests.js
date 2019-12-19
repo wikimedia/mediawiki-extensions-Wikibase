@@ -37,7 +37,7 @@
 
 		var $badgeselector = $( '<span>' )
 			.addClass( 'test_badgeselector' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.badgeselector( options );
 
 		return $badgeselector;

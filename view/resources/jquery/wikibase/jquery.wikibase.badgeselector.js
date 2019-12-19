@@ -196,7 +196,7 @@
 			$menu = $( '<ul>' )
 				.text( '...' )
 				.addClass( this.widgetFullName + '-menu' )
-				.appendTo( 'body' );
+				.appendTo( document.body );
 
 			return $menu.menu();
 		},

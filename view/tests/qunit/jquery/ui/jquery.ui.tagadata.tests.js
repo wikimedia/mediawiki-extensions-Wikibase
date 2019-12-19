@@ -16,7 +16,7 @@
 			.append( $( '<li>' ).text( 'B' ) )
 			.append( $( '<li>' ).text( 'C' ) )
 			.tagadata()
-			.appendTo( 'body' );
+			.appendTo( document.body );
 	}
 
 	QUnit.module( 'jquery.ui.tagadata', QUnit.newMwEnvironment( {
