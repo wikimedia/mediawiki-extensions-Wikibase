@@ -20,16 +20,7 @@ localVue.use( Vuex );
 
 describe( 'DataBridge', () => {
 	beforeEach( () => {
-		store = createStore(
-			newMockServiceContainer( {
-				readingEntityRepository: {},
-				writingEntityRepository: {},
-				entityLabelRepository: {},
-				wikibaseRepoConfigRepository: {},
-				propertyDatatypeRepository: {},
-				tracker: {},
-			} ),
-		);
+		store = createStore( newMockServiceContainer( {} ) );
 	} );
 
 	it( 'mounts StringDataValue', () => {

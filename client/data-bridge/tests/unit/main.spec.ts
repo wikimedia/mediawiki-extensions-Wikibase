@@ -85,12 +85,7 @@ describe( 'launch', () => {
 	} );
 
 	it( 'builds app', () => {
-		const languageInfoRepository = {};
-
-		const services = newMockServiceContainer( {
-			languageInfoRepository,
-			messagesRepository,
-		} );
+		const services = newMockServiceContainer( {} );
 
 		const emitter = launch( appConfiguration, appInformation as any, services as any );
 
