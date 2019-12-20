@@ -55,12 +55,6 @@ jest.mock( '@/presentation/extendVueEnvironment', () => ( {
 } ) );
 
 const messagesRepository = {};
-const propertyDatatypeRepository = {
-	getDataType: jest.fn().mockResolvedValue( 'string' ),
-};
-const tracker = {
-	trackPropertyDatatype: jest.fn(),
-};
 const appInformation = {
 	client: {
 		usePublish: true,
@@ -79,8 +73,6 @@ describe( 'launch', () => {
 		const services = newMockServiceContainer( {
 			languageInfoRepository,
 			messagesRepository,
-			propertyDatatypeRepository,
-			tracker,
 		} );
 
 		launch( appConfiguration, appInformation as any, services as any );
@@ -98,8 +90,6 @@ describe( 'launch', () => {
 		const services = newMockServiceContainer( {
 			languageInfoRepository,
 			messagesRepository,
-			propertyDatatypeRepository,
-			tracker,
 		} );
 
 		const emitter = launch( appConfiguration, appInformation as any, services as any );
@@ -116,25 +106,4 @@ describe( 'launch', () => {
 		);
 	} );
 
-	it( 'tracks opening of the bridge with the expected data type', () => {
-		const languageInfoRepository = {};
-		const dataType = 'string';
-		const getDataTypePromise = Promise.resolve( dataType );
-		const propertyDatatypeRepository = {
-			getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
-		};
-		const services = newMockServiceContainer( {
-			languageInfoRepository,
-			messagesRepository,
-			propertyDatatypeRepository,
-			tracker,
-		} );
-
-		launch( appConfiguration, appInformation as any, services as any );
-
-		return getDataTypePromise.then( () => {
-			expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( appInformation.propertyId );
-			expect( tracker.trackPropertyDatatype ).toHaveBeenCalledWith( dataType );
-		} );
-	} );
 } );

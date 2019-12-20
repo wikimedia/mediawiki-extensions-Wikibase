@@ -29,6 +29,8 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 		actions: actions(
 			services.get( 'entityLabelRepository' ),
 			services.get( 'wikibaseRepoConfigRepository' ),
+			services.get( 'propertyDatatypeRepository' ),
+			services.get( 'tracker' ),
 		),
 		getters,
 		mutations,

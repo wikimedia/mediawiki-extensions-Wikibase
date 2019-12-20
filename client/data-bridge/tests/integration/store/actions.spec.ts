@@ -129,6 +129,14 @@ describe( 'store/actions', () => {
 			},
 		} );
 
+		services.set( 'propertyDatatypeRepository', {
+			getDataType: jest.fn().mockResolvedValue( 'string' ),
+		} );
+
+		services.set( 'tracker', {
+			trackPropertyDatatype: jest.fn(),
+		} );
+
 		info = {
 			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,

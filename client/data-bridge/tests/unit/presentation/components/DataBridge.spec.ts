@@ -26,6 +26,8 @@ describe( 'DataBridge', () => {
 				writingEntityRepository: {},
 				entityLabelRepository: {},
 				wikibaseRepoConfigRepository: {},
+				propertyDatatypeRepository: {},
+				tracker: {},
 			} ),
 		);
 	} );

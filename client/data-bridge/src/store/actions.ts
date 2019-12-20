@@ -41,6 +41,9 @@ import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepo
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
 import MainSnakPath from '@/store/entity/statements/MainSnakPath';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
+import DataType from '@/datamodel/DataType';
+import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
+import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 
 function validateEntityState(
 	context: ActionContext<Application, Application>,
@@ -64,6 +67,8 @@ function commitErrors( context: ActionContext<Application, Application>, errors:
 export default function actions(
 	entityLabelRepository: EntityLabelRepository,
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository,
+	propertyDatatypeRepository: PropertyDatatypeRepository,
+	tracker: BridgeTracker,
 ): ActionTree<Application, Application> {
 	return {
 		[ BRIDGE_INIT ](
@@ -78,6 +83,11 @@ export default function actions(
 					context.commit( TARGET_LABEL_SET, label );
 				}, ( _error ) => {
 				// TODO: handling on failed label loading, which is not a bocking error for now
+				} );
+
+			propertyDatatypeRepository.getDataType( information.propertyId )
+				.then( ( dataType: DataType ) => {
+					tracker.trackPropertyDatatype( dataType );
 				} );
 
 			return Promise.all( [

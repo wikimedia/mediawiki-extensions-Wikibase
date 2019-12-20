@@ -78,6 +78,12 @@ describe( 'App.vue', () => {
 				} );
 			},
 		} );
+		services.set( 'propertyDatatypeRepository', {
+			getDataType: jest.fn().mockResolvedValue( 'string' ),
+		} );
+		services.set( 'tracker', {
+			trackPropertyDatatype: jest.fn(),
+		} );
 
 		store = createStore( services );
 

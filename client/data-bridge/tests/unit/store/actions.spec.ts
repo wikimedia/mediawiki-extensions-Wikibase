@@ -35,6 +35,8 @@ import {
 } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import Vue, { VueConstructor } from 'vue';
+import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
+import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 
 const mockValidateBridgeApplicability = jest.fn().mockReturnValue( true );
 jest.mock( '@/store/validateBridgeApplicability', () => ( {
@@ -62,6 +64,12 @@ describe( 'root/actions', () => {
 				},
 			},
 		} ) ),
+	};
+	const propertyDatatypeRepository: PropertyDatatypeRepository = {
+		getDataType: jest.fn().mockResolvedValue( 'string' ),
+	};
+	const tracker: BridgeTracker = {
+		trackPropertyDatatype: jest.fn(),
 	};
 
 	describe( BRIDGE_INIT, () => {
@@ -95,10 +103,14 @@ describe( 'root/actions', () => {
 		function initAction( services: {
 			entityLabelRepository?: EntityLabelRepository;
 			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
+			propertyDatatypeRepository?: PropertyDatatypeRepository;
+			tracker?: BridgeTracker;
 		} = {} ): Function {
 			return ( actions as Function )(
 				services.entityLabelRepository || entityLabelRepository,
 				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
+				services.propertyDatatypeRepository || propertyDatatypeRepository,
+				services.tracker || tracker,
 			)[ BRIDGE_INIT ];
 		}
 
@@ -135,6 +147,30 @@ describe( 'root/actions', () => {
 					PROPERTY_TARGET_SET,
 					propertyId,
 				);
+			} );
+		} );
+
+		it( 'tracks opening of the bridge with the expected data type', () => {
+			const dataType = 'string';
+			const getDataTypePromise = Promise.resolve( dataType );
+			const propertyDatatypeRepository: PropertyDatatypeRepository = {
+				getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
+			};
+			const tracker: BridgeTracker = {
+				trackPropertyDatatype: jest.fn(),
+			};
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: defaultPropertyId,
+			};
+
+			return initAction( {
+				propertyDatatypeRepository,
+				tracker,
+			} )( mockedStore(), information ).then( () => {
+				expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( information.propertyId );
+				expect( tracker.trackPropertyDatatype ).toHaveBeenCalledWith( dataType );
 			} );
 		} );
 

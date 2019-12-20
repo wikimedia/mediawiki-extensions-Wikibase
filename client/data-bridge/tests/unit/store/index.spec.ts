@@ -9,6 +9,8 @@ describe( 'store/index', () => {
 				writingEntityRepository: {},
 				entityLabelRepository: {},
 				wikibaseRepoConfigRepository: {},
+				propertyDatatypeRepository: {},
+				tracker: {},
 			} ),
 		);
 		expect( store ).toBeDefined();
