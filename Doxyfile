@@ -10,15 +10,23 @@ JAVADOC_AUTOBRIEF      = YES
 QT_AUTOBRIEF           = YES
 
 MARKDOWN_SUPPORT       = YES
-USE_MDFILE_AS_MAINPAGE = README.md
+USE_MDFILE_AS_MAINPAGE = docs/Mainpage.md
 
-# README.md file must be specified as the first INPUT for USE_MDFILE_AS_MAINPAGE to work
-INPUT                  = README.md .
+INPUT                  = docs/Mainpage.md .
 
-EXCLUDE                = docs/php vendor node_modules
+EXCLUDE                = docs/php vendor
 
-EXCLUDE_PATTERNS       = */lib/resources/*/*.md \
-                         */view/lib/*/*.md
+EXCLUDE_PATTERNS       = */node_modules/* \
+                         */lib/resources/*/*.md \
+                         */view/lib/wikibase-data-model/*.md \
+                         */view/lib/wikibase-data-values/*.md \
+                         */view/lib/wikibase-data-values-value-view/*.md \
+                         */view/lib/wikibase-serialization/*.md \
+                         */view/lib/wikibase-tainted-ref/*.md \
+                         */view/lib/wikibase-termbox/*.md \
+                         */client/data-bridge/*.md \
+                         */tests/*/*.md \
+                         */jmeter/*
 
 FILE_PATTERNS          = *.php \
                          *.md

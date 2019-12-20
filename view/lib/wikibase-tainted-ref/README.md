@@ -1,4 +1,4 @@
-# tainted references
+# Tainted references
 
 ## Project setup
 ```

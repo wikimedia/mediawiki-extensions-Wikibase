@@ -1,9 +1,3 @@
-# Wikibase View
+**Wikibase View** is the Mediawiki extension responsible for the HTML-based frontend to a [Wikibase](http://wikiba.se/) repository.
 
-**Wikibase View** is the component responsible for the HTML-based frontend to a [Wikibase](http://wikiba.se/) repository.
-
-## Release notes
-
-### 0.1 (dev)
-
-Initial release.
+You can find further documentation at: https://doc.wikimedia.org/Wikibase/master/php/components_view.html

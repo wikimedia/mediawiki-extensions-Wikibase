@@ -5,24 +5,13 @@ Introduction to Wikibase
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/badges/quality-score.png)](https://scrutinizer-ci.com/g/wikimedia/mediawiki-extensions-Wikibase/)
 
 The Wikibase.git package is part of the [Wikibase software](http://wikiba.se/) and consists of
-four interconnected MediaWiki extensions:
+multiple MediaWiki extensions and other components.
 
-* Wikibase Repository (in the `repo` directory)
-* Wikibase Client (in the `client` directory)
-* WikibaseLib (in the `lib` directory)
-* WikibaseView (in the `view` directory)
-
-These extensions allow for the creation, maintenance, dissemination, and usage of structured data
+The package allows for the creation, maintenance, dissemination, and usage of structured data
 in MediaWiki.
 
-The repo is the extension for the repository. It allows the creation and maintenance of structured
-data. This is being used on [wikidata.org](https://www.wikidata.org).
-
-The client is the extension for the client. It allows several MediaWiki instances to use data provided
-by a Wikidata instance. Usually, you would not use them in a single wiki. This is being used on the
-Wikipedias.
-
-The lib bundles common code that is used by both the client and the repo.
+High level documentation can be found on [wikiba.se](https://wikiba.se/) and [mediawiki.org](https://www.mediawiki.org/wiki/Wikibase).
+Lower level documentation can be found on doc.wikimedia.org [here](https://doc.wikimedia.org/Wikibase/master/php/).
 
 ## Install
 
