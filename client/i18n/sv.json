@@ -108,5 +108,6 @@
 	"unresolved-property-category-desc": "Denna kategori listar upp sidor som hänvisar {{WBREPONAME}}-egenskaper som inte kan hittas antingen av dess egenskaps-ID eller etikett.",
 	"connected-redirect-category": "Omdirigeringar anslutna till ett {{WBREPONAME}}-objekt",
 	"connected-redirect-category-desc": "Denna kategori listar omdirigeringssidor som är anslutna till ett {{WBREPONAME}}-objekt.",
-	"wikibase-client-data-bridge-dialog-title": "Redigera egenskap"
+	"wikibase-client-data-bridge-dialog-title": "Redigera egenskap",
+	"wikibase-client-data-bridge-blocked-on-repo-body": "<p>Blockeringen gjordes av $1. Den angivna orsaken var <em>$2</em>.</p>\n<ul>\n<li>Blockeringens början: $8</li>\n<li>Blockeringens längd: $6</li>\n</ul>\n<p><strong>Vad kan jag göra?</strong></p>\n<p>\nDu kan kontakta $4 eller någon annan [$9 administratör] för att diskutera blockeringen.\nDu kan inte använda funktionen \"{{int:emailuser}}\" såvida en giltig e-postadress anges i dina [[Special:Preferences|kontoinställningar]] och du inte har blockerats från att använda den.\nDin nuvarande IP-adress är $3 och blockerings-ID är #$5.\nVar god inkludera all ovanstående information i alla förfrågningar du gör.\n</p>"
 }

@@ -17,7 +17,8 @@
 			"Idontknow",
 			"Matiia",
 			"Lemondoge",
-			"Dgstranz"
+			"Dgstranz",
+			"Silverie04"
 		]
 	},
 	"wikibase-client-desc": "Cliente para la extensión Wikibase",
@@ -115,5 +116,6 @@
 	"connected-redirect-category": "Redirecciones asociadas con un elemento de {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Esta categoría enumera las páginas de redirección conectadas con algún elemento de {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Editar propiedad",
+	"wikibase-client-data-bridge-blocked-on-repo-body": "<p>El bloque estuvo hecho por $1. La razón dada es <em>$2</em>.</p>\n<ul>\n</li>Inicio de bloque: $6</li>\n</ul>\n<p><strong>¿Qué puedo hacer?</strong></p>\n<p>\nPuedes contactar $4 o otro [$9 administrador] discutir el bloque.\nNo puedes usar el función de \"{{int:emailuser}}\" a menos que un correo electrónico válido es especificado en tu [[Special:Preferences|account preferences]]y no está bloqueado de usas.\nSu dirección IP es $3, y el ID de bloque es $5.\nPor favor incluya todo todos los detalles anteriores en cualquier consulta que hagas.\n</p>",
 	"wikibase-client-data-bridge-references-heading": "Referencias"
 }
