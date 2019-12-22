@@ -73,6 +73,7 @@ class AddUsagesForPageJob extends Job {
 
 		Assert::parameterElementType(
 			'array',
+			// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset assertion above
 			$params['usages'],
 			'$params["usages"]' );
 

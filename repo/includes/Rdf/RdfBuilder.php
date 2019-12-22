@@ -28,7 +28,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * is an EntityId, this indicates that the entity has not yet been resolved
 	 * (defined).
 	 *
-	 * @var bool[]
+	 * @var (bool|EntityId)[]
 	 */
 	private $entitiesResolved = [];
 

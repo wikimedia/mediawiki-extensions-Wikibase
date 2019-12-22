@@ -127,7 +127,7 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 			$targetLookup = $this->normalizedStorePrefetchingTermLookup;
 		}
 
-		call_user_func_array( [ $targetLookup, $method ], $params );
+		return call_user_func_array( [ $targetLookup, $method ], $params );
 	}
 
 }

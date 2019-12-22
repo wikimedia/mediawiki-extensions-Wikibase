@@ -112,12 +112,10 @@ class EntityDataFormatProvider {
 		$format = trim( strtolower( $format ) );
 
 		if ( array_key_exists( $format, $this->mimeTypes ) ) {
-			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable Obvious false positive
 			return $this->mimeTypes[$format];
 		}
 
 		if ( array_key_exists( $format, $this->fileExtensions ) ) {
-			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable Obvious false positive
 			return $this->fileExtensions[$format];
 		}
 

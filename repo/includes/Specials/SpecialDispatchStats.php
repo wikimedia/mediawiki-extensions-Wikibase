@@ -25,7 +25,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 				if ( is_int( $v ) || is_float( $v ) ) {
 					$attr['align'] = 'right';
 				} else {
-					$attr['align'] = 'right';
+					$attr['align'] = 'left';
 				}
 			}
 

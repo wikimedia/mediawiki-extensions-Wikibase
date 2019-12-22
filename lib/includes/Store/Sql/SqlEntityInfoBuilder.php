@@ -634,7 +634,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->releaseConnection( $dbr );
 
-		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable It's set before the foreach
 		return $this->pageInfoByType[$entityType];
 	}
 
@@ -668,7 +667,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 			$this->entityIds[$idString] = $this->idParser->parse( $idString );
 		}
 
-		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable Set above
 		return $this->entityIds[$idString];
 	}
 

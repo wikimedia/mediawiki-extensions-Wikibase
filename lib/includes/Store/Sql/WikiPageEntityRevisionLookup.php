@@ -212,7 +212,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 *        LATEST_FROM_MASTER.
 	 *
 	 * @throws StorageException
-	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
+	 * @return array list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	private function loadEntity( $row, $mode = self::LATEST_FROM_REPLICA ) {
