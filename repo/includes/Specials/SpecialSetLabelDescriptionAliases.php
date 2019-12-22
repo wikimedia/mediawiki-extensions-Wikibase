@@ -9,7 +9,6 @@ use Language;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpFingerprint;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -368,9 +367,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @throws ChangeOpException
 	 */
-	private function applyChangeOpList( ChangeOpFingerprint $changeOp, EntityDocument $entity ): Summary {
-		if ( count( $changeOp->getChangeOps() ) === 1 ) {
-			$module = key( $changeOp->getChangeOps() );
+	private function applyChangeOpList( array $changeOps, EntityDocument $entity ): Summary {
+		$changeOp = $this->changeOpFactory->newFingerprintChangeOp( new ChangeOps( $changeOps ) );
+		if ( count( $changeOps ) === 1 ) {
+			$module = key( $changeOps );
 			$summary = new Summary( $module );
 			$this->applyChangeOp( $changeOp, $entity, $summary );
 			return $summary;
@@ -383,7 +383,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	/**
 	 * @param Fingerprint $fingerprint
 	 *
-	 * @return ChangeOpFingerprint
+	 * @return ChangeOp[]
 	 */
 	private function getChangeOps( Fingerprint $fingerprint ) {
 		$changeOpFactory = $this->changeOpFactory;
@@ -435,7 +435,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 			);
 		}
 
-		return $changeOpFactory->newFingerprintChangeOp( new ChangeOps( $changeOps ) );
+		return $changeOps;
 	}
 
 	/**
