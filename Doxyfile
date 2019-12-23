@@ -47,6 +47,18 @@ CALLER_GRAPH           = NO
 # Makes dot run faster. Requires graphviz >1.8.10
 DOT_MULTI_TARGETS      = YES
 
+ALIASES                = "access=\par Access:\n" \
+                         "private=\access private" \
+                         "protected=\access protected" \
+                         "license=\copyright" \
+                         "inheritDoc=\inheritdoc" \
+                         "covers=" \
+                         "codeCoverageIgnore=" \
+                         "codingStandardsIgnoreEnd=" \
+                         "codingStandardsIgnoreStart=" \
+                         "phan=" \
+                         "suppress="
+
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 EXTRACT_PACKAGE        = NO
