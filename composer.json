@@ -59,7 +59,8 @@
 			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
 			"phpcs -p -s",
 			"minus-x check ."
-		]
+		],
+		"doxygen-docker": "bash build/doxygen-docker.sh"
 	},
 	"config": {
 		"process-timeout": 600
