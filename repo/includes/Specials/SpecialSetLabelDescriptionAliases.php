@@ -369,6 +369,10 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 	 */
 	private function applyChangeOpList( array $changeOps, EntityDocument $entity ): Summary {
 		$changeOp = $this->changeOpFactory->newFingerprintChangeOp( new ChangeOps( $changeOps ) );
+		/**
+		 * XXX: The $changeOps array is still used below as it is indexed with the
+		 * module name to pass to the Summary object.
+		 */
 		if ( count( $changeOps ) === 1 ) {
 			$module = key( $changeOps );
 			$summary = new Summary( $module );
