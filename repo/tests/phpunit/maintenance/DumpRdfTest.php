@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Test;
+namespace Wikibase\Tests;
 
 use DataValues\StringValue;
 use HashSiteStore;
