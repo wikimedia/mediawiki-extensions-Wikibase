@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"UV"
+			"UV",
+			"Tacsipacsi"
 		]
 	},
 	"wikibase-edit": "recensere",
-	"wikibase-add": "addere"
+	"wikibase-save": "servare",
+	"wikibase-add": "addere",
+	"wikibase-entitytermsforlanguagelistview-description": "Descriptio",
+	"wikibase-entitytermsforlanguagelistview-language": "Lingua"
 }
