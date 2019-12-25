@@ -25,7 +25,7 @@ EXCLUDE_PATTERNS       = */node_modules/* \
                          */view/lib/wikibase-tainted-ref/*.md \
                          */view/lib/wikibase-termbox/*.md \
                          */client/data-bridge/*.md \
-                         */tests/*/*.md \
+                         */tests/* \
                          */jmeter/*
 
 FILE_PATTERNS          = *.php \
