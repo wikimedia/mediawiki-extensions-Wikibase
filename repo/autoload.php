@@ -149,7 +149,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Store\\SubscriptionLookup' => __DIR__ . '/includes/Store/SubscriptionLookup.php',
 	'Wikibase\\SubmitEntityAction' => __DIR__ . '/includes/Actions/SubmitEntityAction.php',
 	'Wikibase\\SummaryFormatter' => __DIR__ . '/includes/SummaryFormatter.php',
-	'Wikibase\\Test\\MockAddUnits' => __DIR__ . '/tests/phpunit/maintenance/MockAddUnits.php',
+	'Wikibase\\Tests\\MockAddUnits' => __DIR__ . '/tests/phpunit/maintenance/MockAddUnits.php',
 	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
 	'Wikibase\\ViewEntityAction' => __DIR__ . '/includes/Actions/ViewEntityAction.php',
 ];

@@ -1,6 +1,7 @@
 <?php
-
 /**
+ * @file
+ * @internal
  * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
  */
 
