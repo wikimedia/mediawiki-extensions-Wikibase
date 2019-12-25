@@ -17,7 +17,8 @@ Property data types are used to declare which kinds of values can be associated 
 
 ## Data Type Definitions
 
-Property data types are defined in the global <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code> arrays, respectively. These arrays are constructed at bootstrap time in Wikibase.php resp. WikibaseClient.php based on the information returned when including the files WikibaseLib.datatypes.php, Wikibase.datatypes.php, and WikibaseClient.datatypes.php, respectively.
+Property data types are defined in the global <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code> arrays, respectively.
+These arrays are constructed at bootstrap time in [Wikibase.php] resp. [WikibaseClient.php] based on the information returned when including the files [WikibaseLib.datatypes.php], [Wikibase.datatypes.php], and [WikibaseClient.datatypes.php], respectively.
 
 The <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code> are associative arrays that map property data types and value types to a set of constructor callbacks (aka factory methods).
 
@@ -40,9 +41,9 @@ Each key is associated with a map that provides the following fields:
 * snak-formatter-factory-callback (repo and client)
   * A callable that acts as a factory for SnakFormatters for use with this data type. If not defined, a SnakFormatter is created from the ValueFormatter for the given data type.
 * rdf-builder-factory-callback (repo only)
-  * A callable that acts as a factory for ValueSnakRdfBuilder for use with this data type.
+  * A callable that acts as a factory for [ValueSnakRdfBuilder] for use with this data type.
 * rdf-data-type (repo only)
-  * RDF/OWL data type of a property having this data type (either ObjectProperty or DatatypeProperty, use constants from PropertyRdfBuilder). Default is DatatypeProperty.
+  * RDF/OWL data type of a property having this data type (either ObjectProperty or DatatypeProperty, use constants from [PropertyRdfBuilder]). Default is DatatypeProperty.
 
 Since for each property data type the associated value type is known, this provides a convenient fallback mechanism  * If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
 
@@ -50,12 +51,27 @@ Extensions that wish to register a data type should use the WikibaseRepoDataType
 
 ## Programmatic Access
 
-Information about data types can be accessed programmaticaly using the appropriate service objects.
+Information about data types can be accessed programmatically using the appropriate service objects.
 
-The data type definitions themselves are wrapped by a DataTypeDefinitions object* the DataType objects can be obtained from the DataTypeFactory service available via the <code>getDataTypeFactory()</code> method on WikibaseRepo and WikibaseClient.
+The data type definitions themselves are wrapped by a [DataTypeDefinitions] object* the DataType objects can be obtained from the [DataTypeFactory] service available via [WikibaseRepo::getDataTypeFactory()] and [WikibaseClient::getDataTypeFactory()]
 
-WikibaseRepo also defines the method <code>getDataTypeValidatorFactory()</code> which returns a DataTypeValidatorFactory for obtaining the validators for each data type.
+[WikibaseRepo] also has [WikibaseRepo::getDataTypeValidatorFactory()] which returns a [DataTypeValidatorFactory] for obtaining the validators for each data type.
 
 ## Caveats
 
 * **FIXME**  * the Methods <code>getSnakFormatterFactory()</code> does not yet use <code>$wgWikibaseDataTypeDefinitions</code>.
+
+[DataTypeDefinitions]: @ref Wikibase::Lib::DataTypeDefinitions
+[DataTypeFactory]: @ref Wikibase::Lib::DataTypeFactory
+[WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
+[ValueSnakRdfBuilder]: @ref Wikibase::Rdf::ValueSnakRdfBuilder
+[PropertyRdfBuilder]: @ref Wikibase::Rdf::PropertyRdfBuilder
+[WikibaseClient::getDataTypeFactory()]: @ref Wikibase::Client::WikibaseClient::getDataTypeFactory()
+[WikibaseRepo::getDataTypeFactory()]: @ref Wikibase::Repo::WikibaseRepo::getDataTypeFactory()
+[WikibaseRepo::getDataTypeValidatorFactory()]: @ref Wikibase::Repo::WikibaseRepo::getDataTypeValidatorFactory()
+[DataTypeValidatorFactory]: @ref Wikibase::Repo::DataTypeValidatorFactory
+[WikibaseLib.datatypes.php]: @ref WikibaseLib.datatypes.php
+[Wikibase.datatypes.php]: @ref Wikibase.datatypes.php
+[WikibaseClient.datatypes.php]: @ref WikibaseClient.datatypes.php
+[WikibaseClient.php]: @ref client/WikibaseClient.php
+[Wikibase.php]: @ref repo/Wikibase.php

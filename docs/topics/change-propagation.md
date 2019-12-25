@@ -11,35 +11,40 @@ Change propagation requires several components to work together. On the reposito
 * Subscription management, so the repository knows which client wiki is interested in changes to which entities.
 * Dispatch state, so the repository knows which changes have already been dispatched to which client.
 * A buffer of the changes themselves.
-* Access to each client's job queue, to push ChangeNotificationJobs to.
+* Access to each client's job queue, to push [ChangeNotificationJob]s to.
 
 On each client, there needs to be:
 
-* Usage tracking.
+* Usage tracking (see @ref topic_usagetracking).
 * Access to sitelinks stored in the repository.
-* ChangeHandler for processing changes on the repo, triggered by ChangeNotificationJobs being executed.
-* AffectedPagesFinder, a mechanism to determine which pages are affected by which change, based on usage tracking information (see usagetracking.wiki).
-* WikiPageUpdater, for updating the client wiki's state.
+* [ChangeHandler] for processing changes on the repo, triggered by [ChangeNotificationJob]s being executed.
+* [AffectedPagesFinder], a mechanism to determine which pages are affected by which change, based on usage tracking information (see @ref topic_usagetracking).
+* [WikiPageUpdater], for updating the client wiki's state.
 
-The basic operation of change dispatching involves running two scripts regularly, typically as cron jobs: dispatchChanges.php and pruneChanges.php, both located in the repo/maintenance/ directory. A typical cron setup could look like this:
+The basic operation of change dispatching involves running two scripts regularly, typically as cron jobs: [dispatchChanges.php] and [pruneChanges.php], both located in the repo/maintenance/ directory.
+A typical cron setup could look like this:
 
-* Every minute, run dispatchChanges.php --max-time 120
-* Every hour, run pruneChanges.php --keep-hours 3 --grace-minutes 20
+* Every minute, run [dispatchChanges.php] --max-time 120
+* Every hour, run [pruneChanges.php] --keep-hours 3 --grace-minutes 20
 * Every minute, run runJobs.php on all clients.
 
-The --max-time 120 parameters tells dispatchChanges.php to be active for at most two minutes. --grace-minutes 20 tells pruneChanges.php to keep changes for at least 20 minutes after they have been dispatched. This allows the client side job queue to lag for up to 20 minutes before problems arise.
+The --max-time 120 parameters tells [dispatchChanges.php] to be active for at most two minutes. --grace-minutes 20 tells [pruneChanges.php] to keep changes for at least 20 minutes after they have been dispatched.
+This allows the client side job queue to lag for up to 20 minutes before problems arise.
 
-Note that multiple instances of dispatchChanges.php can run at the same time. They are designed to automatically coordinate. For details, refer to the --help output of these maintenance scripts.
+Note that multiple instances of [dispatchChanges.php] can run at the same time.
+They are designed to automatically coordinate. For details, refer to the --help output of these maintenance scripts.
 
 Below, some components involved in change dispatching are described in more detail.
 
 ## Usage Tracking and Subscription Management
 
-Usage tracking and description management are described in detail in the file usagetracking.wiki.
+Usage tracking and description management are described in detail in @ref topic_usagetracking.
 
 ## Change Buffer
 
-The change buffer holds information about each change, stored in the wb_changes table, to be accessed by the client wikis when processing the respective change. This is similar to MediaWiki's recentchanges table. The table structure is as follows:
+The change buffer holds information about each change, stored in the wb_changes table, to be accessed by the client wikis when processing the respective change.
+This is similar to MediaWiki's recentchanges table.
+The table structure is as follows:
 
 * change_id
   * An int(10) with an autoincrement id identifying the change.
@@ -78,7 +83,9 @@ The change buffer holds information about each change, stored in the wb_changes 
 
 ## Dispatch State
 
-Dispatch state is managed by a ChangeDispatchCoordinator service. The default implementation is based on the wb_changes_dispatch table. This table contains one row per client wiki, with the following information:
+Dispatch state is managed by a [ChangeDispatchCoordinator] service.
+The default implementation is based on the wb_changes_dispatch table.
+This table contains one row per client wiki, with the following information:
 
 * chd_site
   * A varbinary(32) identifying the target wiki with its global site ID.
@@ -97,29 +104,58 @@ Per default, global MySQL locks are used to ensure that only one process can dis
 
 ## dispatchChanges.php script
 
-The dispatchChanges script notifies client wikis of changes on the repository. It reads information from the wb_changes and wb_changes_dispatch tables, and posts ChangeNotificationJobs to the clients' job queues.
+The dispatchChanges script notifies client wikis of changes on the repository.
+It reads information from the wb_changes and wb_changes_dispatch tables, and posts [ChangeNotificationJob]s to the clients' job queues.
 
-The basic scheduling algorithm is as follows: for each client wiki, define how many changes they have not yet seen according to wb_changes_dispatch (we refer to that number as “dispatch lag”). Find the ''n'' client wikis that have the most lag (and have not been touched for some minimal delay). Pick one of these wikis at random. For the selected target wiki, find changes it has not yet seen to entities it is subscribed to, up to some maximum number of m changes. Construct a ChangeNotificationJob event containing the IDs of these changes, and push it to the target wiki's JobQueue. In wb_changes_dispatch, record all changes touched in this process as seen by the target wiki.
+The basic scheduling algorithm is as follows: for each client wiki, define how many changes they have not yet seen according to wb_changes_dispatch (we refer to that number as “dispatch lag”).
+Find the ''n'' client wikis that have the most lag (and have not been touched for some minimal delay).
+Pick one of these wikis at random. For the selected target wiki, find changes it has not yet seen to entities it is subscribed to, up to some maximum number of m changes.
+Construct a [ChangeNotificationJob] event containing the IDs of these changes, and push it to the target wiki's JobQueue.
+In wb_changes_dispatch, record all changes touched in this process as seen by the target wiki.
 
-The dispatchChanges is designed to be safe against concurrent execution. It can be scaled easily by simply running more instances in parallel. The locking mechanism used to prevent race conditions can be configured using the dispatchingLockManager setting. Per default, named locks on the repo database are used. Redis based locks are supported as an alternative.
+The [dispatchChanges.php] is designed to be safe against concurrent execution.
+It can be scaled easily by simply running more instances in parallel.
+The locking mechanism used to prevent race conditions can be configured using the dispatchingLockManager setting.
+Per default, named locks on the repo database are used.
+Redis based locks are supported as an alternative.
 
 ## SiteLinkLookup
 
-A SiteLinkLookup allows the client wiki to determine which local pages are “connected” to a given Item on the repository. Each client wiki can access the repo's sitelink information via a SiteLinkLookup service returned by <code>ClientStore::getSiteLinkLookup()</code>. This information is stored in the wb_items_per_site table in the repo's database.
+A [SiteLinkLookup] allows the client wiki to determine which local pages are “connected” to a given Item on the repository.
+Each client wiki can access the repo's sitelink information via a [SiteLinkLookup] service returned by [ClientStore::getSiteLinkLookup()].
+This information is stored in the wb_items_per_site table in the repo's database.
 
 ## ChangeHandler
 
-The <code>handleChanges()</code> method of the ChangeHandler class gets called with a list of changes loaded by a ChangeNotificationJob. A ChangeRunCoalescer is then used to merge consecutive changes by the same user to the same entity, reducing the number of logical events to be processed on the client, and to be presented to the user.
+The [ChangeHandler::handleChanges()] method gets called with a list of changes loaded by a [ChangeNotificationJob]s.
+A [ChangeRunCoalescer] is then used to merge consecutive changes by the same user to the same entity, reducing the number of logical events to be processed on the client, and to be presented to the user.
 
-ChangeHandler will then for each change determine the affected pages using the AffectedPagesFinder, which uses information from the wbc_entity_usage table (see usagetracking.wiki). It then uses a WikiPageUpdater to update the client wiki's state: rows are injected into the recentchanges database table, pages using the affected entity's data are re-parsed, and the web cache for these pages is purged.
+ChangeHandler will then for each change determine the affected pages using the [AffectedPagesFinder], which uses information from the wbc_entity_usage table (see @ref topic_usagetracking).
+It then uses a [WikiPageUpdater] to update the client wiki's state: rows are injected into the recentchanges database table, pages using the affected entity's data are re-parsed, and the web cache for these pages is purged.
 
 ## WikiPageUpdater
 
-The WikiPageUpdater class defines three methods for updating the client wikis state according to a given change on the repository:
+The [WikiPageUpdater] class defines three methods for updating the client wikis state according to a given change on the repository:
 
-* scheduleRefreshLinks()
+* [WikiPageUpdater::scheduleRefreshLinks()]
   * Will re-parse each affected page, allowing the link tables to be updated appropriately. This is done asynchronously using RefreshLinksJobs. No batching is applied, since RefreshLinksJobs are slow and this benefit more from deduplication than from batching.
-* purgeWebCache()
+* [WikiPageUpdater::purgeWebCache()]
   * Will update the web-cache for each affected page. This is done asynchronously in batches, using HTMLCacheUpdateJob. The batch size is controlled by the purgeCacheBatchSize setting.
-* injectRCRecords()
-  * Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using InjectRCRecordsJobs. The batch size is controlled by the recentChangesBatchSize setting.
+* [WikiPageUpdater::injectRCRecords()]
+  * Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using [InjectRCRecordsJob]s. The batch size is controlled by the recentChangesBatchSize setting.
+
+[dispatchChanges.php]: @ref dispatchChanges.php
+[pruneChanges.php]: @ref pruneChanges.php
+[AffectedPagesFinder]: @ref Wikibase::Client::Changes::AffectedPagesFinder
+[ChangeHandler]: @ref Wikibase::Client::Changes::ChangeHandler
+[ChangeHandler::handleChanges()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChanges()
+[WikiPageUpdater]: @ref Wikibase::Client::Changes::WikiPageUpdater
+[WikiPageUpdater::scheduleRefreshLinks()]: @ref Wikibase::Client::Changes::WikiPageUpdater::scheduleRefreshLinks()
+[WikiPageUpdater::purgeWebCache()]: @ref Wikibase::Client::Changes::WikiPageUpdater::purgeWebCache()
+[WikiPageUpdater::injectRCRecords()]: @ref Wikibase::Client::Changes::WikiPageUpdater::injectRCRecords()
+[ChangeRunCoalescer]: @ref Wikibase::Client::Changes::ChangeRunCoalescer
+[InjectRCRecordsJob]: @ref Wikibase::Client::Changes::InjectRCRecordsJob
+[ChangeNotificationJob]: @ref Wikibase::Client::ChangeNotificationJob
+[ClientStore::getSiteLinkLookup()]: @ref Wikibase::Client::Store::ClientStore::getSiteLinkLookup()
+[SiteLinkLookup]: @ref Wikibase::Lib::Store::SiteLinkLookup
+[ChangeDispatchCoordinator]: @ref Wikibase::Store::ChangeDispatchCoordinator

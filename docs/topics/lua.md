@@ -4,7 +4,9 @@ Wikibase Client provides a Lua [Scribunto](https://www.mediawiki.org/wiki/Scribu
 
 Changes to the Wikibase Lua interface are subject to the [Stable Interface Policy](https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy).
 
-For ease of access and convinence Wikibase Lua library provides access to aspects (labels, descriptions, statements) either directly or by loading the whole entity. For improved performance, when accessing only specific aspects it is recommended to access them directly (without getEntity). On multilingual wikis accessing labels is based on user's language rather than Wiki's language. The following table summarizes the most common functions:
+For ease of access and continence Wikibase Lua library provides access to aspects (labels, descriptions, statements) either directly or by loading the whole entity.
+For improved performance, when accessing only specific aspects it is recommended to access them directly (without getEntity).
+On multilingual wikis accessing labels is based on user's language rather than Wiki's language. The following table summarizes the most common functions:
 
 |Aspect|mw.wikibase.FUNCTION|entity:FUNCTION|
 |------|--------------------|---------------|

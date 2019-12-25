@@ -18,7 +18,7 @@ To support an entity type, additionally to defining the entity itself, the follo
 * Each entity needs a view to provide an HTML representation to the user. Each view has to implement the EntityDocumentView interface from the WikibaseView component.
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler class extending EntityHandler. Furthermore, the handler has to be registered in the entity types repository. It is used to create instances of the content class.
 
-Entity types are defined in WikibaseLib.entitytypes.php and WikibaseRepo.entitytypes.php. They can be amended by extensions using WikibaseRepoEntityTypes hook.
+Entity types are defined in [WikibaseLib.entitytypes.php] and [WikibaseRepo.entitytypes.php]. They can be amended by extensions using WikibaseRepoEntityTypes hook.
 
 The entity types repository is an associative array mapping entity type identifiers to a set of callbacks that act as factory methods. The structure of this set is defined as follows, where each string key is associated with a function having the dedicated signature:
 
@@ -35,27 +35,27 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-composer-callback (repo and client)
   * A callable that returns an EntityId instance for the given unique part of an entity ID serialization. Only entity types with IDs that are constructed from a static and a unique part can and should specify this.
 * view-factory-callback (repo only)
-  * A callable that returns an EntityDocumentView instance, with the arguments being a language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
+  * A callable that returns an [EntityDocumentView] instance, with the arguments being a language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
 * content-model-id (repo only)
   * A string representing the id of the content model
 * content-handler-factory-callback (repo only)
-  * A callable that returns an EntityHandler instance supporting this entity type
+  * A callable that returns an [EntityHandler] instance supporting this entity type
 * entity-factory-callback (repo only)
   * A callback for creating an empty entity of this type
 * entity-revision-lookup-factory-callback (repo only)
-  * A callback for creating an EntityRevisionLookup for and entity of this type, with first and only argument being the default lookup, which will be an instance of EntityRevisionLookup.
+  * A callback for creating an [EntityRevisionLookup] for and entity of this type, with first and only argument being the default lookup, which will be an instance of EntityRevisionLookup.
 * entity-metadata-accessor-callback
-  * A callback for creating a WikiPageEntityMetaDataAccessor for an entity of this type, with the arguments being the wiki database name (string|false), and the repository name (string)
+  * A callback for creating a [WikiPageEntityMetaDataAccessor] for an entity of this type, with the arguments being the wiki database name (string|false), and the repository name (string)
 * js-deserializer-factory-function (repo only)
   * A string representing a resource loader module that, when `require`d, returns a function returning a `wikibase.serialization.Deserializer` instance supporting this entity type
 * changeop-deserializer-callback (repo only)
-  * A callable that returns a ChangeOpDeserializer instance for change requests to the entity of this type
+  * A callable that returns a [ChangeOpDeserializer] instance for change requests to the entity of this type
 * rdf-builder-factory-callback (repo only)
-  * A callable that returns a EntityRdfBuilder instance. See EntityRdfBuilderFactory::getEntityRdfBuilders for arguments in the callback
+  * A callable that returns a [EntityRdfBuilder] instance. See [EntityRdfBuilderFactory::getEntityRdfBuilders] for arguments in the callback
 * rdf-builder-label-predicates (repo only)
   * List on pairs [ns,local] specifying predicates for RDF export of labels for this entity.
 * entity-search-callback (repo only)
-  * A callable that returns EntitySearchHelper instance. Takes WebRequest as an argument. This defines how the completion search (wbsearchentities) for the entity type works.
+  * A callable that returns [EntitySearchHelper] instance. Takes WebRequest as an argument. This defines how the completion search (wbsearchentities) for the entity type works.
 * sub-entity-types (optional) (repo and client)
   * An array of strings listing the sub entity types that this entity type contains.
 * fulltext-search-context (repo only)
@@ -65,10 +65,24 @@ The entity types repository is an associative array mapping entity type identifi
 * lua-entity-module (optional) (client only)
   * The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function* mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
 * entity-id-lookup-callback (client only)
-* A callback for creating an EntityIdLookup to resolve Title instances to EntityIds for entities of this types
+* A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 
-Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or WikibaseClientEntityTypes hooks to provide additional entity type definitions.
+Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or WikibaseClientEntityTypes hooks to provide additional entity type definitions. (See @ref topic_hooks-php)
 
 ## Programmatic Access
 
-Information about entity types can be accessed programmaticaly using the appropriate service objects. The entity type definitions themselves are wrapped by the EntityTypeDefinitions class.
+Information about entity types can be accessed programmatically using the appropriate service objects.
+The entity type definitions themselves are wrapped by the [EntityTypeDefinitions] class.
+
+[EntityIdLookup]: @ref Wikibase::Store::EntityIdLookup
+[EntityTypeDefinitions]: @ref Wikibase::Lib::EntityTypeDefinitions
+[EntityRevisionLookup]: @ref Wikibase::Lib::Store::EntityRevisionLookup
+[WikiPageEntityMetaDataAccessor]: @ref Wikibase::Lib::Store::Sql::WikiPageEntityMetaDataAccessor
+[ChangeOpDeserializer]: @ref Wikibase::Repo::ChangeOp::ChangeOpDeserializer
+[EntityHandler]: @ref Wikibase::Repo::Content::EntityHandler
+[EntitySearchHelper]: @ref Wikibase::Repo::Api::EntitySearchHelper
+[EntityRdfBuilder]: @ref Wikibase::Rdf::EntityRdfBuilder
+[EntityRdfBuilderFactory::getEntityRdfBuilders]: @ref Wikibase::Rdf::EntityRdfBuilderFactory::getEntityRdfBuilders
+[EntityDocumentView]: @ref Wikibase::View::EntityDocumentView
+[WikibaseLib.entitytypes.php]: @ref WikibaseLib.entitytypes.php
+[WikibaseRepo.entitytypes.php]: @ref WikibaseRepo.entitytypes.php
