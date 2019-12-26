@@ -42,7 +42,7 @@
 	"wikibase-pageswithbadges-invalid-id": "$1 అనేది సరైన అంశం ID కాదు",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} అంశం ID",
 	"wikibase-pageinfo-entity-id-none": "ఏమీలేదు",
-	"wikibase-otherprojects": "ఇతర ప్రాజక్టులలో",
+	"wikibase-otherprojects": "ఇతర ప్రాజెక్టులలో",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} తో {{PLURAL:$1|కనెక్షను|కనెక్షన్లు}}",
 	"echo-pref-tooltip-wikibase-action": "{{GENDER:|నేను సృష్టించిన}} పేజీని ఎవరైనా {{WBREPONAME}} అంశానికి జోడిస్తే నాకు తెలియబరచు.",
 	"notification-header-page-connection": "<strong>$3</strong> పేజీని {{PLURAL:$4|-1=ఒక {{WBREPONAME}} అంశానికి|$4 అనే {{WBREPONAME}} అంశానికి}} {{GENDER:$2|జోడించారు}}. అందులో విషయానికి సంబంధించిన డేటా ఉంది.",
