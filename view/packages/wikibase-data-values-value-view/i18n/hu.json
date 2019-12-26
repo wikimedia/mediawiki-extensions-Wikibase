@@ -3,16 +3,24 @@
 		"authors": [
 			"Bencemac",
 			"Wolf Rex",
-			"--szabi--"
+			"--szabi--",
+			"Tacsipacsi"
 		]
 	},
+	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "A(z) „$1” adatokat még nem támogatjuk.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "A(z) „$1” típusú adatokat még nem támogatjuk.",
 	"valueview-expert-emptyvalue-empty": "üres",
 	"valueview-expert-globecoordinateinput-precision": "Pontosság:",
 	"valueview-expert-globecoordinateinput-nullprecision": "meghatározatlan",
 	"valueview-expert-globecoordinateinput-customprecision": "különleges ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gergely",
+	"valueview-expert-timevalue-calendar-julian": "Juliánus",
+	"valueview-expert-timeinput-precision": "Pontosság:",
 	"valueview-expert-timeinput-calendar": "Naptár:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
-	"valueview-expertextender-languageselector-label": "Nyelv (kötelező):"
+	"valueview-expertextender-languageselector-label": "Nyelv (kötelező):",
+	"valueview-expertextender-unitsuggester-label": "Mértékegység (nem kötelező):",
+	"valueview-preview-label": "így jelenik meg:",
+	"valueview-preview-novalue": "nem ismerhető fel érvényes érték",
+	"valueview-listrotator-manually": "kézi beállítás"
 }
