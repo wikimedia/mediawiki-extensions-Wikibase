@@ -4,25 +4,19 @@
 
 The top level Mediawiki extensions are:
 
-* %Wikibase Repository (in the [repo directory])
-* %Wikibase Client (in the [client directory])
-* %Wikibase Lib (in the [lib directory])
-* @subpage components_view (in the [view directory])
+* @subpage components_repo (in the [repo directory])
+  * @subpage components_view (in the [view directory])
+* @subpage components_client (in the [client directory])
+* @subpage components_lib (in the [lib directory])
 
-The **repo** is the extension for the repository. It allows the creation and maintenance of structured data.
-This is being used on [wikidata.org].
+The primary development of these extensions takes place in [Wikibase.git] on [Wikimedia Gerrit].
 
-The **client** is the extension for the client.
-It allows several MediaWiki instances to use data provided by a Wikidata instance.
-Usually, you would not use them in a single wiki.
-This is being used on the Wikipedias.
-
-The **lib** bundles common code that is used by both the client and the repo.
-
-**View** is the component responsible for the HTML-based frontend for the repo.
+Wikibase also makes use of multiple libraries installed via Composer.
+See @subpage libraries
 
 [repo directory]: @ref repo
 [client directory]: @ref client
 [lib directory]: @ref lib
 [view directory]: @ref view
-[wikidata.org]: https://www.wikidata.org
+[Wikimedia Gerrit]: https://gerrit.wikimedia.org/r/
+[Wikibase.git]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase

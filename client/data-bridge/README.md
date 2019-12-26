@@ -1,4 +1,4 @@
-# data-bridge
+The **Wikidata Bridge** (formerly known as “client editing”) is a project aiming to make it possible to edit Wikidata’s data directly from Wikipedia.
 
 ## Project setup
 ```

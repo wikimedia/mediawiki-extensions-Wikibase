@@ -39,6 +39,26 @@ namespace Wikibase\Client\Api;
 namespace Wikibase\Client\Changes;
 
 /**
+ * @brief Root namespace for the CLient component DataBridge
+ */
+namespace Wikibase\Client\DataBridge;
+
+/**
+ * @brief Accessing Repo data from a Client
+ */
+namespace Wikibase\Client\DataAccess;
+
+/**
+ * @brief Client data access implementations of <a href="https://www.mediawiki.org/wiki/Manual:Parser_functions">MediaWiki's Parser functions</a>
+ */
+namespace Wikibase\Client\DataAccess\ParserFunctions;
+
+/**
+ * @brief Client integration with the <a href="https://www.mediawiki.org/wiki/Extension:Scribunto">Scribunto extension</a>. (LUA data access)
+ */
+namespace Wikibase\Client\DataAccess\Scribunto;
+
+/**
  * @brief Client handling of <a href="https://www.mediawiki.org/wiki/Manual:Hooks">MediaWiki's Hooks</a>
  */
 namespace Wikibase\Client\Hooks;
@@ -201,6 +221,11 @@ namespace Wikibase\Repo\Tests;
  * @brief Root namespace for View extension code
  */
 namespace Wikibase\View;
+
+/**
+ * @brief Root namespace for View component Termbox
+ */
+namespace Wikibase\View\Termbox;
 
 /**
  * @brief Root namespace for View extension test code
