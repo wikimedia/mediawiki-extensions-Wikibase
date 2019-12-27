@@ -14,3 +14,5 @@ And the lower level generated documentation:
 * [**Files**](files.html)
 * @subpage deprecated
 * @subpage todo
+
+If you want to see the documentation for the docs, take a look at @subpage documentation

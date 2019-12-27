@@ -16,6 +16,24 @@ Part of the \ref topic_usagetracking system on a Client.
 +--------------+----------------+------+-----+---------+----------------+
 ```
 
+**Extra Indexes:**
+
+```
++------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table            | Non_unique | Key_name     | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| wbc_entity_usage |          0 | PRIMARY      |            1 | eu_row_id    | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
+| wbc_entity_usage |          0 | eu_entity_id |            1 | eu_entity_id | A         |     3636259 |     NULL | NULL   |      | BTREE      |         |               |
+| wbc_entity_usage |          0 | eu_entity_id |            2 | eu_aspect    | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
+| wbc_entity_usage |          0 | eu_entity_id |            3 | eu_page_id   | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
+| wbc_entity_usage |          1 | eu_page_id   |            1 | eu_page_id   | A         |      404028 |     NULL | NULL   |      | BTREE      |         |               |
+| wbc_entity_usage |          1 | eu_page_id   |            2 | eu_entity_id | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
++------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+```
+
+ - UNIQUE eu_entity_id , eu_aspect, eu_page_id - record one usage per page per aspect of an entity
+ - eu_page_id, eu_entity_id - look up (and especially, delete) usage entries by page id
+
 **Example data:**
 
 | eu_row_id | eu_entity_id | eu_aspect | eu_page_id |
