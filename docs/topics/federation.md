@@ -7,7 +7,7 @@ This file describes the concept of federated Wikibase repositories.
 
 As of March 2017, in order to enable access to entities from federated repositories both Repo and Client components must be enabled. Also as of March 2017, accessing data of foreign entities relies on the shared database access (databases of federated repositories must be in the same database cluster).
 
-* Local repository is configured as documented in docs/options.wiki.
+* Local repository is configured as documented in @ref topic_options.
 * Configuration of foreign repositories is done using the ''foreignRepositories'' setting in $wgWBRepoSettings or ''repositories'' in $wgWBClientSettings, as documented in the file docs/options.wiki.
 * In order to correctly link entities from foreign repositories, the local wiki must have MediaWiki interwiki prefixes configured for each foreign repository. As of March 2017, the interwiki prefix must be the same as the name used for the foreign repository. If there is no interwiki prefix configured for the wiki containing the foreign repository, it can be added e.g. by adding a row to the <code>interwiki</code> database table, or by using [[Special:Interwiki]] if the Interwiki extension is enabled on the local wiki.
 
@@ -19,12 +19,14 @@ Below is an excerpt of some configuration of a Wikibase instance providing items
 
 Note that as only foreign properties from the repository “prop” are to be used, this example configuration only enables local items explicitly.
 
-	$wgWBRepoSettings['foreignRepositories'] = [
-		'prop' => [
-			'repoDatabase' => 'propwiki',
-			'entityNamespaces' => [ 'property' => WB_NS_PROPERTY ],
-			'prefixMapping' => [],
-			'baseUri' => 'http://prop.wiki/entity/',
-		],
-	];
-	$wgWBRepoSettings['entityNamespaces'] = [ 'item' => WB_NS_ITEM ];
+```php
+$wgWBRepoSettings['foreignRepositories'] = [
+	'prop' => [
+		'repoDatabase' => 'propwiki',
+		'entityNamespaces' => [ 'property' => WB_NS_PROPERTY ],
+		'prefixMapping' => [],
+		'baseUri' => 'http://prop.wiki/entity/',
+	],
+];
+$wgWBRepoSettings['entityNamespaces'] = [ 'item' => WB_NS_ITEM ];
+```

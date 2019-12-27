@@ -17,7 +17,8 @@ At the time of writing the following parameters influence the result of the Term
 * user's preferred languages
 * toggle state of the "in more languages" section
 
-Typically, only non-user-specific markup of entity pages is added to MediaWiki's `ParserOutput` and cached within `ParserCache`. The `PlaceholderEmittingEntityTermsView` PHP version of the Termbox (v1) works around the `ParserCache` by injecting markers in place of the user-specific markup before it's added to `ParserOutput` and replacing the markers with the user-specific markup before the page is rendered in `OutputPageBeforeHTMLHookHandler::doOutputPageBeforeHTML`. This option is not viable for the new Termbox (v2) as it would split the logic of injecting and replacing markers across two services and would require the new service to be able to produce results for individual components which contradicts the architectural reality that it itself decides what to display, not only how (cue: "application vs. renderer").
+Typically, only non-user-specific markup of entity pages is added to MediaWiki's `ParserOutput` and cached within `ParserCache`.
+The [PlaceholderEmittingEntityTermsView] PHP version of the Termbox (v1) works around the `ParserCache` by injecting markers in place of the user-specific markup before it's added to `ParserOutput` and replacing the markers with the user-specific markup before the page is rendered in `OutputPageBeforeHTMLHookHandler::doOutputPageBeforeHTML`. This option is not viable for the new Termbox (v2) as it would split the logic of injecting and replacing markers across two services and would require the new service to be able to produce results for individual components which contradicts the architectural reality that it itself decides what to display, not only how (cue: "application vs. renderer").
 
 The `ParserCache` drastically reduces the time it takes to render entity pages, it should consequently be leveraged whenever possible.
 
@@ -44,3 +45,5 @@ In case the SSR service does not produce a usable result (e.g. not reachable), [
 In order for this option to be viable the Termbox SSR service has to be sufficiently performant.
 
 Logging information will be closely observed in the future to ensure that the default configuration (resulting in the non-user-specific version of the page) in fact constitutes the largest share of page requests to maximize cache hit rate and minimize Termbox (v2) service requests.
+
+[PlaceholderEmittingEntityTermsView]: @ref Wikibase::Repo::ParserOutput::PlaceholderEmittingEntityTermsView
