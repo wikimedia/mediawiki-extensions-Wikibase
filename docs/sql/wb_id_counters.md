@@ -1,16 +1,4 @@
-# Id Counters {#topic_id-counter-storage}
-
-Entity IDs are created based on counters maintained by Wikibase in the wb_id_counters table.
- - Some extensions also use this table, such as Lexeme.
- - Other extensions such as EntitySchema choose not to use the table (instead creating their own).
-
-### Code
-
-The \ref IdGenerator interface is generally used when interacting with this storage.
- - \ref SqlIdGenerator is the oldest ID generator implementation that works for all DB types.
- - \ref UpsertSqlIdGenerator is a newer 'better' generator that only works for MySql.
-
-### SQL table (wb_id_counters)
+Part of the \ref md_docs_storage_id-counters storage system.
 
 **Fields:**
 

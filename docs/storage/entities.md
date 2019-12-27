@@ -1,8 +1,8 @@
-# Entity storage {#topic_entity-storage}
+# Entity Storage
 
 This page describes how Wikibase entities are represented and stored inside MediaWiki.
 
-## Storage
+### Storage
 
 Entities (or more precisely representations of entities, conceptually called entity description documents) are stored as MediaWiki page content, serialized according to JSON binding of the Wikibase data model.
 The JSON structure encodes an EntityDocument.
@@ -22,25 +22,25 @@ This implies that the relationship between entity IDs and page titles is unique 
 
 The same is true for the relationship between entity types and MediaWiki namespaces; each entity type is associated with a single namespace, but multiple entity types can map to the same namespace.
 
-## Identification
+### Identification
 
 Neither top-level nor sub-entities can be renamed.
 In other words, no entity can change its only identifying feature: its ID.
 If the title of the MediaWiki page that holds an entity directly derives from the entity ID, the page cannot be renamed either.
 
-## Enumeration
+### Enumeration
 
 As a consequence of the above principles, efficient enumeration of all entity IDs can be achieved by enumerating all titles in a namespace, but this is only possible for top-level entities.
 In order to enumerate sub-entities contained within top-level entities, it may be required to load each top-level entity, or use a secondary index.
 
-## Redirects
+### Redirects
 
 Some entity types may support redirects.
 A MediaWiki redirect from one page title to another shall be interpreted as the two entity IDs referring to the same entity (conceptually: to the same entity description).
 The titles of redirect pages correspond to secondary IDs of the entity, while the title of the page that actually contains the entity description corresponds to the canonical entity ID.
 The entity description will typically only contain the canonical ID.
 
-## Versioning
+### Versioning
 
 Wikibase supports the concepts of versioning through EntityRevisions.
 These roughly correspond to MediaWiki page revisions, with one notable difference: the revision ID is considered to be unique only relative to a given entity ID, not globally, as in MediaWiki.
@@ -50,7 +50,7 @@ This implies that it also creates a new revision for every other entity containe
 When looking at such revisions from the perspective of an entity not affected by the edit the revision represents, such “incidental” revisions correspond to the concept of “null revisions” in MediaWiki: between the new revision and its parent, only the (sub-)entities touched by the intentional edit change; all other entities on the page remain unchanged between the old and the new revision.
 This is an undesired artifact of the storage mechanism, but acceptable, since revision IDs alone are never used to identify an entity.
 
-## Permissions
+### Permissions
 
 The permission to perform actions on entities are mapped to MediaWiki page permissions by an EntityPermissionChecker.
 This means that the same permissions apply to all top-level as well as sub-entities on a page, and page protection (restrictions) also apply to all entities.

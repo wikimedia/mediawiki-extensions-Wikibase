@@ -36,69 +36,18 @@ They are designed to automatically coordinate. For details, refer to the --help 
 
 Below, some components involved in change dispatching are described in more detail.
 
-## Usage Tracking and Subscription Management
+**Usage Tracking and Subscription Management**
 
 Usage tracking and description management are described in detail in @ref topic_usagetracking.
 
-## Change Buffer
+**Change Buffer**
 
-The change buffer holds information about each change, stored in the wb_changes table, to be accessed by the client wikis when processing the respective change.
-This is similar to MediaWiki's recentchanges table.
-The table structure is as follows:
+The change buffer holds information about each change, stored in the [wb_changes] table, to be accessed by the client wikis when processing the respective change.
 
-* change_id
-  * An int(10) with an autoincrement id identifying the change.
-* change_type
-  * A varchar(25) representing the kind of change. It has the form ''wikibase-&lt;entity-type&gt;~&lt;action&gt;'', e.g. “wikibase-item~add”.
-  * Well known entity types are “item” and “property”. Custom entity types will define their own type names.
-  * Known actions: “update”, “add”, “remove”, “restore”
-* change_time
-  * A varbinary(14) the time at which the edit was made
-* change_object_id
-  * A varbinary(14) containing the entity ID
-* change_revision_id
-  * A int(10) containing the revision ID
-* change_user_id
-  * A int(10) containing the original (repository) user id, or 0 for logged out users.
-* change_info
-  * A mediumblob containing a JSON structure with additional information about the change. Well known top level fields are:
-    * “diff”
-      * A serialized diff, as produced by EntityDiffer
-    * “metadata”
-      * A JSON object representing essential revision meta data, using the following fields:
-        * “central_user_id”
-          * The central user ID (int). 0 if the repo is not connected to a central user system, the action was by a logged out user, the particular user is not attached on the repo, or the user is restricted (uses AUDIENCE_PUBLIC)
-        * “user_text”
-          * The user name (string)
-        * “page_id”
-          * The id of the wiki page containing the entity on the repo (int)
-        * “rev_id”
-          * The id of the revision created by this change on the repo (int)
-        * “parent_id”
-          * The id of the parent revision of this change on the repo (int)
-        * “comment”
-          * The edit summary for the change
-        * “bot”
-          * Whether the change was performed as a bot edit (0 or 1)
-
-## Dispatch State
+**Dispatch State**
 
 Dispatch state is managed by a [ChangeDispatchCoordinator] service.
 The default implementation is based on the wb_changes_dispatch table.
-This table contains one row per client wiki, with the following information:
-
-* chd_site
-  * A varbinary(32) identifying the target wiki with its global site ID.
-* chd_db
-  * A varbinary(32) specifying the logical database name of the client wiki.
-* chd_seen
-  * A int(11) containing the last change ID that was sent to this client wiki.
-* chd_touched
-  * A varbinary(14) representing the time at which this row was last updated. This is useful only for reporting and debugging.
-* chd_lock
-  * A varbinary(64), the name of some kind of lock that some process currently holds on this row. The lock name should indicate the locking mechanism. The locking mechanism should be able to reliably detect stale locks belonging to dead processes.
-* chd_disabled
-  * A tinyint(3), set to 1 to disable dispatching for this wiki.
 
 Per default, global MySQL locks are used to ensure that only one process can dispatch to any given client wiki at a time.
 
@@ -159,3 +108,4 @@ The [WikiPageUpdater] class defines three methods for updating the client wikis 
 [ClientStore::getSiteLinkLookup()]: @ref Wikibase::Client::Store::ClientStore::getSiteLinkLookup()
 [SiteLinkLookup]: @ref Wikibase::Lib::Store::SiteLinkLookup
 [ChangeDispatchCoordinator]: @ref Wikibase::Store::ChangeDispatchCoordinator
+[wb_changes] @ref md_docs_sql_wb_changes

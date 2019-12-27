@@ -28,6 +28,7 @@ EXCLUDE_PATTERNS       = */node_modules/* \
                          */jmeter/*
 
 FILE_PATTERNS          = *.php \
+                         *.sql \
                          *.md
 RECURSIVE              = YES
 

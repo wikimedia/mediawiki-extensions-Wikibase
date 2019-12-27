@@ -1,13 +1,4 @@
-# Property Info Secondary Storage {#topic_propertyinfo-storage}
-
-A secondary lookup table for information associated with wikibase properties.
-This information is derived from the primary data blob describing the property.
-
-### Code
-
-TBA
-
-### SQL table (wb_property_info)
+Part of the \ref md_docs_storage_propertyinfo storage system.
 
 **Fields:**
 

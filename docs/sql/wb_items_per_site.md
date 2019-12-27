@@ -1,16 +1,6 @@
-# Sitelink Secondary Storage {#topic_sitelink-storage}
-
-Secondary storage is needed for sitelinks in order to have:
- - Uniqueness of sitelinks across all Wikibase Items.
- - Lookup of an Item using a site identifier and page name.
-
-### Code
-
-TBA
-
-### SQL table (wb_items_per_site)
-
 This table holds links from items to Client articles.
+
+Part of the \ref md_docs_storage_sitelinks storage system.
 
 **Fields:**
 
