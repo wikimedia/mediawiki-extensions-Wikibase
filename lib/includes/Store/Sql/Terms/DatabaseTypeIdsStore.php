@@ -12,6 +12,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
 /**
  * An acquirer and resolver for term type IDs implemented using a NameTableStore for wbt_type.
  *
+ * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTypeIdsStore implements TypeIdsAcquirer, TypeIdsResolver, TypeIdsLookup {

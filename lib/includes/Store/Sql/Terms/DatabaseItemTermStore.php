@@ -2,24 +2,24 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\StringNormalizer;
 use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
+ * ItemTermStore implementation for the 2019 SQL based secondary item term storage
+ *
+ * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseItemTermStore implements ItemTermStore {
+
+	use FingerprintableEntityTermStoreTrait;
 
 	/** @var ILoadBalancer */
 	private $loadBalancer;
@@ -75,52 +75,31 @@ class DatabaseItemTermStore implements ItemTermStore {
 		return $this->dbw;
 	}
 
-	private function disallowForeignItemIds( ItemId $itemId ) {
-		if ( $itemId->isForeign() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with foreign item IDs!'
-			);
-		}
-	}
+	public function storeTerms( ItemId $itemId, Fingerprint $fingerprint ) {
+		$this->disallowForeignEntityIds( $itemId );
 
-	public function storeTerms( ItemId $itemId, Fingerprint $terms ) {
-		$this->disallowForeignItemIds( $itemId );
-
-		$termsArray = [];
-		foreach ( $terms->getLabels()->toTextArray() as $language => $label ) {
-			$label = $this->stringNormalizer->cleanupToNFC( $label );
-			$termsArray['label'][$language] = $label;
-		}
-		foreach ( $terms->getDescriptions()->toTextArray() as $language => $description ) {
-			$description = $this->stringNormalizer->cleanupToNFC( $description );
-			$termsArray['description'][$language] = $description;
-		}
-		foreach ( $terms->getAliasGroups()->toTextArray() as $language => $aliases ) {
-			$aliases = array_map( [ $this->stringNormalizer, 'cleanupToNFC' ], $aliases );
-			$termsArray['alias'][$language] = $aliases;
-		}
-
-		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $termsArray );
+		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
 		if ( $termIdsToClean !== [] ) {
 			$this->cleanTermsIfUnused( $termIdsToClean );
 		}
 	}
 
 	/**
-	 * Acquire term IDs for the given terms array,
+	 * Acquire term IDs for the given Fingerprint,
 	 * store them in wbt_item_terms for the given item ID,
 	 * and return term IDs that are no longer referenced
 	 * and might now need to be cleaned up.
 	 *
-	 * (The returned term IDs might still be used in wbt_item_terms rows
-	 * for other item IDs or elsewhere, and this should be checked just before cleanup.
-	 * However, that may happen in a different transaction than this call.)
-	 *
 	 * @param ItemId $itemId
-	 * @param array $termsArray
-	 * @return int[]
+	 * @param Fingerprint $fingerprint
+	 *
+	 * @return int[] wbit_term_in_lang_ids to that are no longer used by $itemId
+	 * The returned term IDs might still be used in wbt_item_terms rows
+	 * for other item IDs or elsewhere, and this should be checked just before cleanup.
+	 * However, that may happen in a different transaction than this call.
 	 */
-	private function acquireAndInsertTerms( ItemId $itemId, array $termsArray ): array {
+	private function acquireAndInsertTerms( ItemId $itemId, Fingerprint $fingerprint ): array {
+		// Find term entries that already exist for the item
 		$oldTermIds = $this->getDbw()->selectFieldValues(
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
@@ -129,8 +108,10 @@ class DatabaseItemTermStore implements ItemTermStore {
 			[ 'FOR UPDATE' ]
 		);
 
+		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
 		$termIdsToClean = [];
 
+		// Acquire all of the Term Ids needed for the wbt_item_terms table
 		$this->acquirer->acquireTermIds(
 			$termsArray,
 			function ( array $newTermIds ) use ( $itemId, $oldTermIds, &$termIdsToClean ) {
@@ -153,6 +134,8 @@ class DatabaseItemTermStore implements ItemTermStore {
 		);
 
 		if ( $termIdsToClean !== [] ) {
+			// Delete entries in wbt_item_terms that are no longer needed
+			// Further cleanup should then done by the caller of this method
 			$this->getDbw()->delete(
 				'wbt_item_terms',
 				[
@@ -167,7 +150,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 	}
 
 	public function deleteTerms( ItemId $itemId ) {
-		$this->disallowForeignItemIds( $itemId );
+		$this->disallowForeignEntityIds( $itemId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		if ( $termIdsToClean !== [] ) {
@@ -217,65 +200,16 @@ class DatabaseItemTermStore implements ItemTermStore {
 	/**
 	 * Of the given term IDs, delete those that aren’t used by any other items or properties.
 	 *
-	 * Currently, this does not account for term IDs that may be used anywhere else,
-	 * e. g. by other entity types; anyone who uses term IDs elsewhere runs the risk
-	 * of those terms being deleted at any time. This may be improved in the future.
-	 *
-	 * @param int[] $termIds
+	 * @param int[] $termIds (wbtl_id)
 	 */
 	private function cleanTermsIfUnused( array $termIds ) {
-		$termIdsUnused = [];
-		foreach ( $termIds as  $termId ) {
-			// Note: Not batching here is intentional, see T234948
-			$usedInProperties = $this->getDbw()->selectField(
-				'wbt_property_terms',
-				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termId ]
-			);
-			$usedInItems = $this->getDbw()->selectField(
-				'wbt_item_terms',
-				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termId ]
-			);
-
-			if ( $usedInProperties === false && $usedInItems === false ) {
-				$termIdsUnused[] = $termId;
-			}
-		}
-		if ( $termIdsUnused === [] ) {
-			return;
-		}
-
-		$termIdsUsedInProperties = $this->getDbw()->selectFieldValues(
-			'wbt_property_terms',
-			'wbpt_term_in_lang_id',
-			[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
-			__METHOD__,
-			[
-				'FOR UPDATE'  // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-			]
-		);
-		$termIdsUsedInItems = $this->getDbw()->selectFieldValues(
-			'wbt_item_terms',
-			'wbit_term_in_lang_id',
-			[ 'wbit_term_in_lang_id' => $termIdsUnused ],
-			__METHOD__,
-			[
-				'FOR UPDATE' // See comment in DatabaseTermIdsCleaner::cleanTermInLangIds()
-			]
-		);
-
 		$this->cleaner->cleanTermIds(
-			array_diff(
-				$termIds,
-				$termIdsUsedInProperties,
-				$termIdsUsedInItems
-			)
+			$this->findActuallyUnusedTermIds( $termIds, $this->getDbw() )
 		);
 	}
 
 	public function getTerms( ItemId $itemId ): Fingerprint {
-		$this->disallowForeignItemIds( $itemId );
+		$this->disallowForeignEntityIds( $itemId );
 
 		$termIds = $this->getDbr()->selectFieldValues(
 			'wbt_item_terms',
@@ -284,30 +218,8 @@ class DatabaseItemTermStore implements ItemTermStore {
 			__METHOD__
 		);
 
-		$terms = $this->resolver->resolveTermIds( $termIds );
-		$labels = $terms['label'] ?? [];
-		$descriptions = $terms['description'] ?? [];
-		$aliases = $terms['alias'] ?? [];
-
-		return new Fingerprint(
-			new TermList( array_map(
-				function ( $language, $labels ) {
-					return new Term( $language, $labels[0] );
-				},
-				array_keys( $labels ), $labels
-			) ),
-			new TermList( array_map(
-				function ( $language, $descriptions ) {
-					return new Term( $language, $descriptions[0] );
-				},
-				array_keys( $descriptions ), $descriptions
-			) ),
-			new AliasGroupList( array_map(
-				function ( $language, $aliases ) {
-					return new AliasGroup( $language, $aliases );
-				},
-				array_keys( $aliases ), $aliases
-			) )
+		return $this->resolveTermIdsResultToFingerprint(
+			$this->resolver->resolveTermIds( $termIds )
 		);
 	}
 

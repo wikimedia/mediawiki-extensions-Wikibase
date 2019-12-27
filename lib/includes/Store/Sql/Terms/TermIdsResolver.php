@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 /**
  * A service to turn term IDs into terms,
  * the inverse of {@link TermIdsAcquirer}.
+ *
+ * @see @ref md_docs_storage_terms
  */
 interface TermIdsResolver {
 

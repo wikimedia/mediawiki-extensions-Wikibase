@@ -14,3 +14,4 @@ See also \ref topic_usagetracking.
 | cs_subscriber_id | varbinary(255) | NO   | MUL | NULL    |                |
 +------------------+----------------+------+-----+---------+----------------+
 ```
+

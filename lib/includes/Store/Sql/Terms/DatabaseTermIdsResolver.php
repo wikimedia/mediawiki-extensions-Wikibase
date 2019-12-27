@@ -13,6 +13,7 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Term ID resolver using the normalized database schema.
  *
+ * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTermIdsResolver implements TermIdsResolver {

@@ -9,14 +9,14 @@ use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Cleans up the normalized term store after some terms are no longer needed.
- * Unused term_in_lang, text_in_lang and text rows are automatically removed.
- * (Unused type rows are never cleaned up.)
+ * Unused wbt_term_in_lang, wbt_text_in_lang and wbt_text rows are automatically removed.
+ * Unused type rows are never cleaned up.
  *
+ * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTermIdsCleaner implements TermIdsCleaner {
 
-	/** @var ILoadBalancer */
 	private $lb;
 
 	/** @var IDatabase a connection to DB_REPLICA */
@@ -38,18 +38,22 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	}
 
 	/**
-	 * Delete the specified term_in_lang rows from the database,
-	 * as well as any text_in_lang and text rows that are now unused.
+	 * Delete the specified wbt_term_in_lang rows from the database,
+	 * as well as any wbt_text_in_lang and wbt_text rows that are now unused.
 	 *
 	 * It is the caller’s responsibility ensure
-	 * that the term_in_lang rows are no longer referenced anywhere;
+	 * that the wbt_term_in_lang rows are no longer referenced anywhere;
 	 * callers will most likely want to wrap this call in a transaction for that.
-	 * On the other hand, this class takes care that text_in_lang and text rows
-	 * used by other term_in_lang rows are not removed.
+	 * On the other hand, this class takes care that wbt_text_in_lang and text rows
+	 * used by other wbt_term_in_lang rows are not removed.
 	 *
-	 * @param int[] $termIds
+	 * @param int[] $termIds (wbtl_id)
 	 */
 	public function cleanTermIds( array $termIds ) {
+		if ( $termIds === [] ) {
+			return;
+		}
+
 		if ( $this->dbr === null ) {
 			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA );
 			$this->dbw = $this->lb->getConnection( ILoadBalancer::DB_MASTER );
@@ -62,13 +66,9 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	 * Delete the specified term_in_lang rows from the database,
 	 * as well as any text_in_lang and text rows that are now unused.
 	 *
-	 * @param int[] $termInLangIds
+	 * @param int[] $termInLangIds (wbtl_id)
 	 */
 	private function cleanTermInLangIds( array $termInLangIds ) {
-		if ( $termInLangIds === [] ) {
-			return;
-		}
-
 		$this->logger->debug(
 			'{method}: deleting {count} term_in_lang rows',
 			[
@@ -77,8 +77,12 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			]
 		);
 
-		// This is all of the text in lang ids for the term in lang ids that we are about to delete
-		// Once we delete them, those rows MIGHT be orphaned, if they are orphaned we need to clean them up, else we should just leave them.
+		/**
+		 * @var $potentiallyUnusedTextInLangIds string[] All of the wbt_text_in_lang ids for the
+		 * wbt_term_in_lang ids that we are about to delete.
+		 * Once we delete them, those rows MIGHT be orphaned.
+		 * If they are orphaned we need to clean them up.
+		 */
 		$potentiallyUnusedTextInLangIds = $this->selectFieldValuesForPrimaryKey(
 			'wbt_term_in_lang',
 			'wbtl_text_in_lang_id',
@@ -98,14 +102,14 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 		}
 
 		/**
-		 * This loop checks for text_in_lang ids that are currently unused, without locking
+		 * This loop checks for wbt_text_in_lang ids that are currently unused, without locking
 		 * the rows in the term_in_lang table.
 		 *
 		 * The unused text_in_lang ids found by this loop, will later be double checked for
-		 * use before being locked in the term_in_lang table.
+		 * use before being locked in the wbt_term_in_lang table.
 		 *
 		 * This is done to reduce the number of rows that we have to lock, while still ensuring
-		 * we never remove an actually used text_in_lang id
+		 * we never remove an actually used wbt_text_in_lang id
 		 */
 		$unusedTextInLangIds = [];
 		foreach ( $potentiallyUnusedTextInLangIds as  $textInLangId ) {
@@ -153,6 +157,11 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			]
 		);
 
+		/**
+		 * If this condition hits, then our extra checks actually stopped the "bad" race condition
+		 * from happening.
+		 * Currently we assume that it might happen, hence all of the extra logic in the cleaner.
+		 */
 		if ( count( $textInLangIdsUsedSinceLastLoopRan ) ) {
 			$this->logger->info(
 				'{method}: found {count} new rows referring to wbtl_text_in_lang_id since check',
@@ -168,7 +177,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	}
 
 	/**
-	 * Delete the specified text_in_lang rows from the database,
+	 * Delete the specified wbt_text_in_lang rows from the database,
 	 * as well as any text rows that are now unused.
 	 *
 	 * @param int[] $textInLangIds

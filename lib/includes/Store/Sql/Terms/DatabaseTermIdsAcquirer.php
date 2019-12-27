@@ -12,11 +12,13 @@ use Wikimedia\Rdbms\ILoadBalancer;
 /**
  * A {@link TermIdsAcquirer} implementation using the database tables
  * wbt_term_in_lang, wbt_text_in_lang, and wbt_text.
+ *
  * Because the wbt_text.wbx_text column can only hold up to 255 bytes,
  * terms longer than that (typically non-Latin descriptions)
  * will be truncated, and different terms that only differ after the first
  * 255 bytes will get the same ID.
  *
+ * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
 class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
