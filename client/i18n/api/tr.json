@@ -1,9 +1,43 @@
 {
 	"@metadata": {
 		"authors": [
-			"Alpkant"
+			"Alpkant",
+			"BaRaN6161 TURK"
 		]
 	},
+	"apihelp-query+wbentityusage-description": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
+	"apihelp-query+wbentityusage-summary": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
+	"apihelp-query+wbentityusage-param-aspect": "Yalnızca bu yönü kullanan varlık kimliklerini döndürün.",
 	"apihelp-query+wbentityusage-param-prop": "Özellikleri sonuca ekle.",
-	"apihelp-query+wbentityusage-paramvalue-prop-url": "Eğer aktifleştirildiyse,nesnenin linki eklenecektir."
+	"apihelp-query+wbentityusage-paramvalue-prop-url": "Eğer aktifleştirildiyse,nesnenin linki eklenecektir.",
+	"apihelp-query+wbentityusage-param-entities": "Yalnızca bu varlıkları kullanan sayfayı döndür.",
+	"apihelp-query+wbentityusage-param-limit": "Kaç varlık geri dönmek için kullanır.",
+	"apihelp-query+wbentityusage-example-simple": "Varlıkları <kbd>Main Page</kbd> sayfasında kullanın.",
+	"apihelp-query+wblistentityusage-description": "Belirli varlık kimliklerini kullanan tüm sayfaları döndürür.",
+	"apihelp-query+wblistentityusage-summary": "Belirli varlık kimliklerini kullanan tüm sayfaları döndürür.",
+	"apihelp-query+wblistentityusage-param-prop": "Sonuca eklenecek özellikler.",
+	"apihelp-query+wblistentityusage-paramvalue-prop-url": "Etkinleştirilirse, varlığın URL'si sonuca eklenir.",
+	"apihelp-query+wblistentityusage-param-aspect": "Yalnızca bu yönü kullanan varlık kimliklerini döndürün.",
+	"apihelp-query+wblistentityusage-param-entities": "Kullanılan varlıklar.",
+	"apihelp-query+wblistentityusage-param-limit": "Kaç varlık geri dönmek için kullanır.",
+	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
+	"apihelp-query+wblistentityusage-example-url": "URL dahil olarak <kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
+	"apihelp-query+wblistentityusage-example-aspect": "<kbd>Q2</kbd> varlığını kullanan sayfalar olsun ve görünüm site bağlantısı veya ifade oldu.",
+	"apihelp-query+pageterms-description": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın. Varlık sayfasının kendisinde, terimler doğrudan kullanılır. Uyarı: Depo wikide bu modül, bir site bağlantısı yoluyla bir varlığa bağlı sayfalarda değil, yalnızca doğrudan varlık sayfalarında çalışır. Bu gelecekte değişebilir.",
+	"apihelp-query+pageterms-summary": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın. Varlık sayfasının kendisinde, terimler doğrudan kullanılır. Uyarı: Depo wikide bu modül, bir site bağlantısı yoluyla bir varlığa bağlı sayfalarda değil, yalnızca doğrudan varlık sayfalarında çalışır. Bu gelecekte değişebilir.",
+	"apihelp-query+pageterms-example-simple": "'Londra' sayfası ile ilişkili tüm terimleri kullanıcı dilinde edinin.",
+	"apihelp-query+pageterms-example-label-en": "İngilizce 'Londra' sayfası ile ilişkili etiketler ve takma adlar alın.",
+	"apihelp-query+pageterms-example-item": "Q84 öğesinin etiketlerini ve takma adlarını alın.",
+	"apihelp-query+pageterms-param-terms": "Alınacak terim türleri, ör. her biri türlerine göre anahtarlanmış bir dizeler dizisi olarak dönen 'açıklama' ör. {\"açıklama\": [\"ör\"]}. Belirtilmezse, tüm türler döndürülür.",
+	"apihelp-query+description-summary": "Hedef sayfanın ne hakkında olduğunu açıklayan kısa bir açıklama altyazısı edinin.",
+	"apihelp-query+description-extended-description": "Açıklama, tek bir satırda düz metindir, ancak aksi takdirde keyfidir (potansiyel olarak düz metin olarak da yorumlanması gereken ham HTML etiketleri dahil). Kaçınılmaz HTML'de kullanılmamalıdır!",
+	"apihelp-query+description-param-prefersource": "Varsa hangi açıklama kaynağı tercih edilir:",
+	"apihelp-query+description-paramvalue-prefersource-local": "Sayfanın wiki metinde<code><nowiki>{{SHORTDESC:...}}</nowiki></code> ayrıştırıcı işlevi aracılığıyla yerel açıklamalar.",
+	"apihelp-query+description-paramvalue-prefersource-central": "İlişkili {{WBREPONAME}} öğesinden merkezi açıklamalar.",
+	"apihelp-query+description-example": "'Londra' sayfası için açıklama alın.",
+	"apihelp-query+description-example-central": "Varsa merkezi açıklamayı tercih ederek 'Londra' sayfasının açıklamasını alın.",
+	"apihelp-query+wikibase-description": "Wikibase istemcisi ve ilgili Wikibase deposu hakkında bilgi edinin.",
+	"apihelp-query+wikibase-summary": "Wikibase istemcisi hakkında bilgi alın ve Wikibase istemcisi ve ilgili Wikibase deposu hakkında bilgi alın.",
+	"apihelp-query+wikibase-example": "URL yolunu ve Wikibase istemcisi ve deposu hakkında diğer bilgileri alın.",
+	"apihelp-query+wikibase-param-prop": "Hangi özelliklere sahip olunur:\n;<kbd>url</kbd>: Wikibase deposunun temel URL'si, betik yolu ve makale yolu.\n;<kbd>siteid</kbd>: Bu sitenin site kimliği."
 }

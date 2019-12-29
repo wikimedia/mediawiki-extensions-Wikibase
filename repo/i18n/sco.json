@@ -81,5 +81,6 @@
 	"wikibase-listdatatypes-quantity-body": "Literal data field fer aen amoont that relates til some kyn o weel-defined unit. The actual unit gaes in the data values that ar entered.\n* amoont – impleecit pairt o the string (mappin o unit prefix is onclear)\n* unit – impleecit pairt o the string that defauts til \"1\" (mappin til staundairdizin bodie is onclear)\n* upperboond - amoont's upper boond\n* lowerboond - amoont's lower boond",
 	"right-item-term": "Chynge eetem terms (labels, descreeptions, aliases)",
 	"right-item-merge": "Merge eetems",
-	"right-property-term": "Chynge propertie terms (labels, descreeptions, aliases)"
+	"right-property-term": "Chynge propertie terms (labels, descreeptions, aliases)",
+	"wikibase-tainted-ref-popper-help-link-text": "Help"
 }

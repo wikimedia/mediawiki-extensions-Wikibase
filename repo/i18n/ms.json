@@ -221,5 +221,6 @@
 	"content-model-wikibase-query": "Pertanyaan Wikibase",
 	"action-property-create": "mewujudkan sifat",
 	"right-property-create": "Mewujudkan sifat",
-	"wikibase-entity-save-error-heading": "Sesuatu menjadi masalah"
+	"wikibase-entity-save-error-heading": "Sesuatu menjadi masalah",
+	"wikibase-tainted-ref-popper-help-link-text": "Bantuan"
 }

@@ -10,7 +10,7 @@
 	"wikibase-comment-sitelink-add": "Kielilänkki lisätty: $1",
 	"wikibase-comment-sitelink-change": "Kielilänkki $1 muutettu muothoon $2",
 	"wikibase-comment-sitelink-remove": "Kielilänkki otettu poies: $1",
-	"wikibase-dataitem": "objekti",
+	"wikibase-dataitem": "{{WBREPONAME}}-kohde",
 	"wikibase-editlinks": "Mookkaa länkkejä",
 	"wikibase-editlinkstitle": "Mookkaa kieltenvälisiä länkkejä",
 	"wikibase-addlinkstitle": "Lissää kieltenvälisiä länkkejä",
