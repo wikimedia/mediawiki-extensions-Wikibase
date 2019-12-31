@@ -31,12 +31,14 @@
 		"Wikibase\\Repo\\ParserOutput\\": "repo/includes/ParserOutput/",
 		"Wikibase\\Repo\\Parsers\\": "repo/includes/Parsers/",
 		"Wikibase\\Repo\\Search\\": "repo/includes/Search/",
-		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Specials\\": "repo/includes/Specials/",
 		"Wikibase\\Repo\\Store\\Sql\\Terms\\": "repo/includes/Store/Sql/Terms/",
 		"Wikibase\\Repo\\UpdateRepo\\": "repo/includes/UpdateRepo/",
 		"Wikibase\\Repo\\Validators\\": "repo/includes/Validators/",
 		"Wikibase\\Repo\\View\\": "repo/includes/View/"
+	},
+	"TestAutoloadNamespaces": {
+		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/"
 	},
 	"manifest_version": 2
 }

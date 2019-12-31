@@ -35,8 +35,10 @@
 		"Wikibase\\Lib\\Interactors\\": "lib/includes/Interactors/",
 		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
 		"Wikibase\\Lib\\Store\\Sql\\": "lib/includes/Store/Sql/",
-		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParseFunctions/"
+	},
+	"TestAutoloadNamespaces": {
+		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/"
 	},
 	"manifest_version": 2
 }
