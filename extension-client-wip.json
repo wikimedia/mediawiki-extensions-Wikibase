@@ -11,7 +11,9 @@
 		"MediaWiki": ">= 1.26"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Client\\": "client/includes/",
+		"Wikibase\\Client\\": "client/includes/"
+	},
+	"TestAutoloadNamespaces": {
 		"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes/"
 	},
 	"manifest_version": 2
