@@ -13,6 +13,29 @@ This will generate the static HTML for the docs site in `docs/php` in this repo.
 
 The command uses the `docker-registry.wikimedia.org/releng/doxygen:latest` docker image.
 
+### Structure
+
+The structure of the site is dictated by the subpage relations.
+
+The top level of the tree of pages is Mainpage.md
+
+### Markdown
+
+Markdown documentation: http://doxygen.nl/manual/markdown.html
+
+**Linking to other markdown files**
+
+The easiest way to link to another markdown file it to use md_ prefixed reference and add the full link to the bottom of the file.
+
+```md
+Foo bar baz [wbc_entity_usage] talks about the [wbc_entity_usage] table.
+
+[wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
+```
+
+This allows the main text to be easily read while only having to specify the target once.
+This also avoid manually maintaining [header attributes](http://doxygen.nl/manual/markdown.html#md_header_id) at the top of files.
+
 ### Diagrams
 
 Doxygen allows you to incorporate multiple types of diagrams in your docs.

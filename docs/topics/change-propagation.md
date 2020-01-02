@@ -99,7 +99,7 @@ In [wb_changes_dispatch], record all changes touched in this process as seen by 
 
 The [dispatchChanges.php] is designed to be safe against concurrent execution.
 It can be scaled easily by simply running more instances in parallel.
-The locking mechanism used to prevent race conditions can be configured using the `dispatchingLockManager` setting.
+The locking mechanism used to prevent race conditions can be configured using the [dispatchingLockManager] setting.
 Per default, named locks on the repo database are used.
 Redis based locks are supported as an alternative and use on wikidata.org
 
@@ -108,7 +108,7 @@ Redis based locks are supported as an alternative and use on wikidata.org
 Dispatch lag is linked to max lag.
 If dispatch lag increases max lag will also increase.
 Dispatching is not as efficient as DB replication so the raw lag value is not used, instead a factor is applied.
-The factor is configurable using the `dispatchLagToMaxLagFactor` setting.
+The factor is configurable using the [dispatchLagToMaxLagFactor] setting.
 
 For more about maxlag see https://www.mediawiki.org/wiki/Manual:Maxlag_parameter
 
@@ -135,9 +135,9 @@ The [WikiPageUpdater] class defines three methods for updating the client wikis 
 * [WikiPageUpdater::scheduleRefreshLinks()]
   * Will re-parse each affected page, allowing the link tables to be updated appropriately. This is done asynchronously using RefreshLinksJobs. No batching is applied, since RefreshLinksJobs are slow and this benefit more from deduplication than from batching.
 * [WikiPageUpdater::purgeWebCache()]
-  * Will update the web-cache for each affected page. This is done asynchronously in batches, using HTMLCacheUpdateJob. The batch size is controlled by the purgeCacheBatchSize setting.
+  * Will update the web-cache for each affected page. This is done asynchronously in batches, using HTMLCacheUpdateJob. The batch size is controlled by the [purgeCacheBatchSize] setting.
 * [WikiPageUpdater::injectRCRecords()]
-  * Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using [InjectRCRecordsJob]s. The batch size is controlled by the recentChangesBatchSize setting.
+  * Will create a RecentChange entry for each affected page. This is done asynchronously in batches, using [InjectRCRecordsJob]s. The batch size is controlled by the [recentChangesBatchSize] setting.
 
 [dispatchChanges.php]: @ref dispatchChanges.php
 [pruneChanges.php]: @ref pruneChanges.php
@@ -149,11 +149,15 @@ The [WikiPageUpdater] class defines three methods for updating the client wikis 
 [WikiPageUpdater::purgeWebCache()]: @ref Wikibase::Client::Changes::WikiPageUpdater::purgeWebCache()
 [WikiPageUpdater::injectRCRecords()]: @ref Wikibase::Client::Changes::WikiPageUpdater::injectRCRecords()
 [ChangeRunCoalescer]: @ref Wikibase::Client::Changes::ChangeRunCoalescer
-[InjectRCRecordsJob]: @ref Wikibase::Client::Changes::InjectRCRecordsJob
+[InjectRCRecordsJob]: @ref Wikibase::Client::Changes::InjectRCRecordsJobpurgeCacheBatchSize
 [ChangeNotificationJob]: @ref Wikibase::Client::ChangeNotificationJob
 [ClientStore::getSiteLinkLookup()]: @ref Wikibase::Client::Store::ClientStore::getSiteLinkLookup()
 [SiteLinkLookup]: @ref Wikibase::Lib::Store::SiteLinkLookup
 [ChangeDispatchCoordinator]: @ref Wikibase::Store::ChangeDispatchCoordinator
-[wb_changes] @ref md_docs_sql_wb_changes
-[wb_changes_dispatch] @ref md_docs_sql_wb_changes_dispatch
-[wb_items_per_site] @ref md_docs_sql_wb_items_per_site
+[wb_changes]: @ref md_docs_sql_wb_changes
+[wb_changes_dispatch]: @ref md_docs_sql_wb_changes_dispatch
+[wb_items_per_site]: @ref md_docs_sql_wb_items_per_site
+[purgeCacheBatchSize]: @ref client_purgeCacheBatchSize
+[recentChangesBatchSize]: @ref client_recentChangesBatchSize
+[dispatchLagToMaxLagFactor]: @ref repo_dispatchLagToMaxLagFactor
+[dispatchingLockManager]: @ref repo_dispatchingLockManager

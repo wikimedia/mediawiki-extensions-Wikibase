@@ -45,7 +45,7 @@ To enable usage tracking on a client wiki:
 
 -   Deploy the schema change by running update.php.
 -   Run client/maintenance/populateEntityUsage.php to initialize the wbc\_entity\_usage table based on repowiki.wb\_items\_per\_site.
--   If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
+-   If desired, enable arbitrary access by setting [allowArbitraryDataAccess] = true
 
 Start tracking client subscriptions based on entity usage
 ---------------------------------------------------------
@@ -55,9 +55,11 @@ Client wikis should automatically update their subscription to changes on the re
 -   Make sure the client has the wbc\_entity\_usage table set up, see above.
 -   Make sure the repo has the wb\_changes\_subscription table set up, see above.
 -   Run client/maintenance/updateSubscriptions.php to put entries into repowiki.wb\_changes\_subscription based on the client wiki's wbc\_entity\_usage table.
--   If desired, enable arbitrary access by setting allowArbitraryDataAccess = true
+-   If desired, enable arbitrary access by setting [allowArbitraryDataAccess] = true
 
 Start using subscriptions for dispatching
 -----------------------------------------
 
 This is not yet implemented, see [T66590](https://phabricator.wikimedia.org/T66590) and [T90755](https://phabricator.wikimedia.org/T90755).
+
+[allowArbitraryDataAccess]: @ref client_allowArbitraryDataAccess

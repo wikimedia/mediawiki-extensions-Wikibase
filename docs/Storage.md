@@ -16,7 +16,7 @@
   * @subpage md_docs_sql_wb_changes
   * @subpage md_docs_sql_wb_changes_dispatch
   * @subpage md_docs_sql_wb_changes_subscription
-* \ref md_docs_storage_id-countersAddNormalizedTermsTablesDDL.sql
+* \ref md_docs_storage_id-counters
   * @subpage md_docs_sql_wb_id_counters
 * \ref md_docs_storage_sitelinks
   * @subpage md_docs_sql_wb_items_per_site
