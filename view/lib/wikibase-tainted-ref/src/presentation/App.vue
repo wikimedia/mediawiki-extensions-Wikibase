@@ -4,7 +4,18 @@
 			<span>
 				<TaintedIcon :guid="id" />
 				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
-					<Popper :guid="id" :title="popperTitle" />
+					<Popper :guid="id" :title="popperTitle">
+						<template v-slot:subheading-area>
+							<div class="wb-tr-popper-help">
+								<a
+									:title="popperHelpLinkTitle"
+									:href="helpLink"
+									target="_blank"
+									@click="helpClick"
+								>{{ popperHelpLinkText }}</a>
+							</div>
+						</template>
+					</Popper>
 				</div>
 			</span>
 		</div>
@@ -44,6 +55,21 @@ export default class App extends Vue {
 	public get popperTitle(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-title' );
 	}
+
+	public get popperHelpLinkTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-help-link-title' );
+	}
+
+	public get popperHelpLinkText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-help-link-text' );
+	}
+
+	public helpClick(): void {
+		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
+	}
+
+	@Getter( 'helpLink' )
+	public helpLink!: string;
 
 }
 </script>

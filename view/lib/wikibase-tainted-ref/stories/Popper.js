@@ -21,5 +21,6 @@ storiesOf( 'Popper', module )
 			getters,
 		} ),
 		template:
-			'<p><Popper guid="a-guid" title="Some Title"></Popper></p>',
+			'<p><Popper guid="a-guid" title="Some Title">' +
+			'<template v-slot:subheading-area><a href="#">Some Subheading Link</a></template></Popper></p>',
 	} ) );

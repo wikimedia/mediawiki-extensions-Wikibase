@@ -11,13 +11,8 @@
 				<span class="wb-tr-popper-title">{{ title }}</span>
 				<button class="wb-tr-popper-close" @click="closeClick" />
 			</div>
-			<div class="wb-tr-popper-help">
-				<a
-					:title="popperHelpLinkTitle"
-					:href="helpLink"
-					target="_blank"
-					@click="helpClick"
-				>{{ popperHelpLinkText }}</a>
+			<div class="wb-tr-popper-subheading-area">
+				<slot name="subheading-area" />
 			</div>
 			<p class="wb-tr-popper-text">
 				{{ popperText }}
@@ -47,8 +42,6 @@ import { Getter } from 'vuex-class';
 	},
 } )
 export default class Popper extends Vue {
-	@Getter( 'helpLink' )
-	public helpLink!: string;
 	@Getter( 'feedbackLink' )
 	public feedbackLink!: string;
 
@@ -58,14 +51,6 @@ export default class Popper extends Vue {
 
 	public get popperText(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-text' );
-	}
-
-	public get popperHelpLinkTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-help-link-title' );
-	}
-
-	public get popperHelpLinkText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-help-link-text' );
 	}
 
 	public get popperFeedbackText(): string {
@@ -96,10 +81,6 @@ export default class Popper extends Vue {
 	public closeKeyPress( event: KeyboardEvent ): void {
 		event.preventDefault();
 		this.$store.dispatch( POPPER_HIDE, this.$props.guid );
-	}
-
-	public helpClick(): void {
-		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	}
 }
 </script>
@@ -201,7 +182,7 @@ export default class Popper extends Vue {
 	transition-duration: 100ms;
 }
 
-.wb-tr-popper-help {
+.wb-tr-popper-subheading-area {
 	font-weight: normal;
 	text-align: right;
 	font-size: 12px;
