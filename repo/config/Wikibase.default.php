@@ -61,7 +61,7 @@ return [
 	// Items allowed to be used as badges pointing to their CSS class names
 	'badgeItems' => [],
 
-	// Number of seconds for which data output shall be cached.
+	// Number of seconds for which data output on Special:EntityData should be cached.
 	// Note: keep that low, because such caches cannot always be purged easily.
 	'dataCdnMaxAge' => $wgCdnMaxAge,
 
@@ -79,7 +79,7 @@ return [
 	'dispatchDefaultDispatchInterval' => 60,
 	'dispatchDefaultDispatchRandomness' => 15,
 
-	// Formats that shall be available via SpecialEntityData.
+	// Formats that shall be available via Special:EntityData.
 	// The first format will be used as the default.
 	// This is a whitelist, some formats may not be supported because when missing
 	// optional dependencies (e.g. purtle).
@@ -289,10 +289,7 @@ return [
 	'enableRefTabs' => false,
 
 	/**
-	 * @note This config options is primarily added for Wikidata transition use-case and can be
-	 * considered temporary. It could be removed in the future with no warning.
-	 *
-	 * XXX: The default for this idGenerator will have to remain using the 'original'
+	 * The default for this idGenerator will have to remain using the 'original'
 	 * generator as the 'upsert' generator only supports MySQL currently.
 	 *
 	 * @var string 'original' or 'mysql-upsert' depending on what implementation of IdGenerator
@@ -304,9 +301,6 @@ return [
 
 	/**
 	 * Whether use a separate master database connection to generate new id or not.
-	 *
-	 * @note This parameter is added solely for Wikidata transition use-case and is temporary.
-	 *       Do not use it.
 	 *
 	 * @var bool
 	 * @see https://phabricator.wikimedia.org/T213817
@@ -332,7 +326,7 @@ return [
 	 */
 	'tmpSerializeEmptyListsAsObjects' => true,
 
-	// Do not enable this one in production environemtns, unless you know what you are doing when
+	// Do not enable this one in production environments, unless you know what you are doing when
 	// using the script there.
 	'enablePopulateWithRandomEntitiesAndTermsScript' => false,
 
