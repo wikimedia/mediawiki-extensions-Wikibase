@@ -15,6 +15,19 @@
 								>{{ popperHelpLinkText }}</a>
 							</div>
 						</template>
+						<template v-slot:content>
+							<p class="wb-tr-popper-text">
+								{{ popperText }}
+							</p>
+							<p class="wb-tr-popper-feedback">
+								{{ popperFeedbackText }}
+								<a
+									:title="popperFeedbackLinkTitle"
+									:href="feedbackLink"
+									target="_blank"
+								>{{ popperFeedbackLinkText }}</a>
+							</p>
+						</template>
 					</Popper>
 				</div>
 			</span>
@@ -71,6 +84,24 @@ export default class App extends Vue {
 	@Getter( 'helpLink' )
 	public helpLink!: string;
 
+	public get popperText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-text' );
+	}
+
+	public get popperFeedbackText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-text' );
+	}
+
+	public get popperFeedbackLinkText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-text' );
+	}
+
+	public get popperFeedbackLinkTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-title' );
+	}
+
+	@Getter( 'feedbackLink' )
+	public feedbackLink!: string;
 }
 </script>
 
@@ -88,5 +119,24 @@ export default class App extends Vue {
 		// Move left by 50% of its width, minus half the icon width
 		transform: translateX( calc( -50% + 1.4em / 2 ) );
 		z-index: 999;
+	}
+
+	.wb-tr-popper-feedback a {
+		color: $link-blue;
+	}
+
+	.wb-tr-popper-feedback {
+		font-weight: normal;
+		color: $basic-text-black;
+		margin: 8px 16px 8px 16px;
+		line-height: 22px;
+	}
+
+	.wb-tr-popper-text {
+		font-family: sans-serif;
+		font-size: 14px;
+		color: $basic-text-black;
+		margin: 0 16px 8px 16px;
+		line-height: 22px;
 	}
 </style>

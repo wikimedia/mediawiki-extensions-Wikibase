@@ -14,17 +14,9 @@
 			<div class="wb-tr-popper-subheading-area">
 				<slot name="subheading-area" />
 			</div>
-			<p class="wb-tr-popper-text">
-				{{ popperText }}
-			</p>
-			<p class="wb-tr-popper-feedback">
-				{{ popperFeedbackText }}
-				<a
-					:title="popperFeedbackLinkTitle"
-					:href="feedbackLink"
-					target="_blank"
-				>{{ popperFeedbackLinkText }}</a>
-			</p>
+			<div class="wb-tr-popper-content">
+				<slot name="content" />
+			</div>
 		</div>
 	</div>
 </template>
@@ -33,7 +25,6 @@
 import { POPPER_HIDE } from '@/store/actionTypes';
 import Component from 'vue-class-component';
 import Vue from 'vue';
-import { Getter } from 'vuex-class';
 
 @Component( {
 	props: {
@@ -42,27 +33,8 @@ import { Getter } from 'vuex-class';
 	},
 } )
 export default class Popper extends Vue {
-	@Getter( 'feedbackLink' )
-	public feedbackLink!: string;
-
 	public mounted(): void {
 		( this.$el as HTMLElement ).focus();
-	}
-
-	public get popperText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-text' );
-	}
-
-	public get popperFeedbackText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-text' );
-	}
-
-	public get popperFeedbackLinkText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-text' );
-	}
-
-	public get popperFeedbackLinkTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-title' );
 	}
 
 	public onFocusout( event: FocusEvent ): void {
@@ -144,14 +116,6 @@ export default class Popper extends Vue {
 	margin: 8px 0 0 16px;
 }
 
-.wb-tr-popper-text {
-	font-family: sans-serif;
-	font-size: 14px;
-	color: $basic-text-black;
-	margin: 0 16px 8px 16px;
-	line-height: 22px;
-}
-
 .wb-tr-title-wrapper {
 	display: flex;
 	justify-content: space-between;
@@ -187,19 +151,24 @@ export default class Popper extends Vue {
 	text-align: right;
 	font-size: 12px;
 	margin: 4px 16px 0 16px;
-	color: $help-link-blue;
+	color: $link-blue;
 	line-height: 20px;
 	border-top: 1px $border-color-grey solid;
 }
 
-.wb-tr-popper-feedback {
-	font-weight: normal;
+.wb-tr-popper-content {
+	font-family: sans-serif;
+	font-size: 14px;
 	color: $basic-text-black;
-	margin: 8px 16px 8px 16px;
+	margin: 4px 16px 8px 16px;
 	line-height: 22px;
 }
 
-.wb-tr-popper-feedback a {
-	color: $feedback-link-blue;
+.wb-tr-popper-content > :first-child {
+	margin-top: 0;
+}
+
+.wb-tr-popper-content > :last-child {
+	margin-bottom: 0;
 }
 </style>

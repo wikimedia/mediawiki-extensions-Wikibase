@@ -102,7 +102,7 @@ describe( 'Popper.vue', () => {
 			.toMatch( 'kitten' );
 	} );
 
-	it( 'popper texts are taken from our Vue message plugin', () => {
+	it.skip( 'popper texts are taken from our Vue message plugin', () => {
 		const localVue = createLocalVue();
 		const messageToTextFunction = jest.fn();
 		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
