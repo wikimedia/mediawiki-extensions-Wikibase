@@ -290,6 +290,17 @@ class EditEntityAction extends ViewEntityAction {
 			return;
 		}
 
+		if ( $this->getUser()->isAnon() ) {
+			$this->getOutput()->addHTML( Html::rawElement(
+				'p',
+				[ 'class' => 'warning' ],
+				$this->msg(
+					'wikibase-anonymouseditwarning',
+					$this->msg( 'wikibase-entity-item' )->text()
+				)->parse()
+			) );
+		}
+
 		$this->displayUndoDiff( $appDiff );
 
 		if ( $restore ) {
