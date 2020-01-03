@@ -10,6 +10,8 @@ easyrdf/
 !.*
 .idea/
 
+.DS_Store
+
 .eslintcache
 
 selenium/configuration.yml
