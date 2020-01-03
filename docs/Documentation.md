@@ -1,7 +1,7 @@
 # Documentation {#documentation}
 
- - General documentation: http://www.doxygen.nl/manual
  - Published at: https://doc.wikimedia.org/Wikibase/master/php/
+ - Generated with Doxygen ([manual](http://www.doxygen.nl/manual))
  - Configuration: Doxyfile (in the root of this repo)
 
 Mainpage.md is the main entry point to the generated documentation site.
