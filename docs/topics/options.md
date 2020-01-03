@@ -394,9 +394,9 @@ Relevant only for search engines supporting it.
 ### Termbox & SSR
 
 #### termboxEnabled {#repo_termboxEnabled}
-Enable/Disable the server-side-rendered (SSR) termbox.
+Enable/Disable Termbox v2. Setting it to ```true``` will enable both client-side and server-side rendering functionality. In order for server-side rendering to work the respective service needs to be set up and ```ssrServerUrl``` has to be set accordingly.
 
-DEFAULT: ```false``` (so the SSR feature for termbox is disabled)
+DEFAULT: ```false``` (so all Termbox v2 functionality is disabled)
 
 #### ssrServerUrl
 The url to where the server-side-renderer server (for termbox) is running.

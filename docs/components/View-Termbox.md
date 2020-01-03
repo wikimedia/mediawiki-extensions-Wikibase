@@ -1,10 +1,10 @@
-# Wikibase Termbox {#components_view_termbox}
+# Wikibase Termbox v2 {#components_view_termbox}
 
-The Termbox is developed on Wikimedia Gerrit in the [wikibase/termbox] repository.
+The Termbox v2 is developed on Wikimedia Gerrit in the [wikibase/termbox] repository.
 
 You may want to read the [README] for more details.
 
-By default all 'termbox' functionality is disabled.
+By default all Termbox v2 functionality is disabled.
 In order to enable it, please see the [termboxEnabled] setting.
 
 [README]: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/README.md
