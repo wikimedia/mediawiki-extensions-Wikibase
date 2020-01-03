@@ -46,6 +46,19 @@ export function mockMwConfig( values: {
 	};
 }
 
+class MockApi implements MwApi {
+	public get( ..._args: any[] ): any { return jest.fn(); }
+
+	public getEditToken( ..._args: any[] ): any { return jest.fn(); }
+	public getToken( ..._args: any[] ): any { return jest.fn(); }
+	public post( ..._args: any[] ): any { return jest.fn(); }
+
+	public postWithEditToken( ..._args: any[] ): any { return jest.fn(); }
+
+	public postWithToken( ..._args: any[] ): any { return jest.fn(); }
+	public login( ..._args: any[] ): any { return jest.fn(); }
+}
+
 export function mockMwForeignApiConstructor(
 	options: {
 		expectedUrl?: string;
@@ -53,35 +66,22 @@ export function mockMwForeignApiConstructor(
 		postWithEditToken?: ( ...args: unknown[] ) => any;
 	},
 ): MwForeignApiConstructor {
-	return class MockForeignApi implements MwApi {
+	class MockForeignApi extends MockApi {
 		public constructor( url: string, _options?: any ) {
+			super();
 			if ( options.expectedUrl ) {
 				expect( url ).toBe( options.expectedUrl );
 			}
 		}
+	}
+	if ( options.get ) {
+		MockForeignApi.prototype.get = options.get;
+	}
+	if ( options.postWithEditToken ) {
+		MockForeignApi.prototype.postWithEditToken = options.postWithEditToken;
+	}
 
-		public get( ...args: any[] ): any {
-			if ( options.get ) {
-				return options.get( ...args );
-			}
-			return jest.fn();
-		}
-
-		public getEditToken( ..._args: any[] ): any { return jest.fn(); }
-		public getToken( ..._args: any[] ): any { return jest.fn(); }
-		public post( ..._args: any[] ): any { return jest.fn(); }
-
-		public postWithEditToken( ...args: any[] ): any {
-			if ( options.postWithEditToken ) {
-				return options.postWithEditToken( ...args );
-			}
-
-			return jest.fn();
-		}
-
-		public postWithToken( ..._args: any[] ): any { return jest.fn(); }
-		public login( ..._args: any[] ): any { return jest.fn(); }
-	};
+	return MockForeignApi;
 }
 
 export function mockMwEnv(
