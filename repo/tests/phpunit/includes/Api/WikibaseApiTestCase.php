@@ -24,6 +24,9 @@ use WikiPage;
  */
 abstract class WikibaseApiTestCase extends ApiTestCase {
 
+	/** @var User */
+	protected $user;
+
 	protected function setUp() : void {
 
 		parent::setUp();
@@ -56,7 +59,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	private function setupUser() {
 		self::$users['wbeditor'] = $this->createTestUser();
 
-		$this->setMwGlobals( 'wgUser', self::$users['wbeditor']->getUser() );
+		$this->user = self::$users['wbeditor']->getUser();
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [
 			'property-create' => true,
 			'createpage' => true,

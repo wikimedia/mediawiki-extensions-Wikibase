@@ -23,14 +23,14 @@ use Wikimedia\TestingAccessWrapper;
  */
 class CreateClaimTest extends WikibaseApiTestCase {
 
-	protected static function getNewItemAndProperty() {
+	protected function getNewItemAndProperty() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$store->saveEntity( $item, 'test', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, 'test', $this->user, EDIT_NEW );
 
 		$property = Property::newFromType( 'commonsMedia' );
-		$store->saveEntity( $property, 'test', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, 'test', $this->user, EDIT_NEW );
 
 		return [ $item, $property ];
 	}
@@ -50,7 +50,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = self::getNewItemAndProperty();
+		list( $item, $property ) = $this->getNewItemAndProperty();
 
 		$params = [
 			'action' => 'wbcreateclaim',
@@ -84,7 +84,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = self::getNewItemAndProperty();
+		list( $item, $property ) = $this->getNewItemAndProperty();
 
 		$this->assertCanTagSuccessfulRequest( [
 			'action' => 'wbcreateclaim',
@@ -195,11 +195,11 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		return $argLists;
 	}
 
-	public static function getItemAndPropertyForInvalid() {
+	public function getItemAndPropertyForInvalid() {
 		static $array = null;
 
 		if ( $array === null ) {
-			$array = self::getNewItemAndProperty();
+			$array = $this->getNewItemAndProperty();
 		}
 
 		return $array;
@@ -216,7 +216,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = self::getItemAndPropertyForInvalid();
+		list( $item, $property ) = $this->getItemAndPropertyForInvalid();
 
 		if ( array_key_exists( 'entity', $params ) && $params['entity'] === '-' ) {
 			$params['entity'] = $item->getId()->getSerialization();
@@ -248,7 +248,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		 * @var Item $item
 		 * @var Property $property
 		 */
-		list( $item, $property ) = self::getNewItemAndProperty();
+		list( $item, $property ) = $this->getNewItemAndProperty();
 
 		$params = [
 			'action' => 'wbcreateclaim',

@@ -214,7 +214,8 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 	private function executeSpecialMergeItems( $params, User $user = null ) {
 		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
+			// TODO Matching the token of a non-anonymous user is complicated.
+			$user = new User;
 			$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'item-merge' => true, 'edit' => true ] ] );
 		}
 
@@ -454,7 +455,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$this->expectException( PermissionsError::class );
 
-		$html = $this->executeSpecialMergeItems( $params, $GLOBALS['wgUser'] );
+		$html = $this->executeSpecialMergeItems( $params, $this->getTestUser()->getUser() );
 	}
 
 	public function testMergePermission() {

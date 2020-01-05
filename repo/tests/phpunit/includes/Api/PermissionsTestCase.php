@@ -28,35 +28,31 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 
 	/**
 	 * Utility function for applying a set of permissions to $wgGroupPermissions.
-	 * Automatically resets the rights cache for $wgUser.
-	 * This modifies the global $wgGroupPermissions and $wgUser variables, but both will be
+	 * Automatically resets the rights cache for $this->user.
+	 * This modifies the global $wgGroupPermissions, but it will be
 	 * automatically restored at the end of the test.
 	 *
 	 * @param array[]|null $permissions
-	 * @param string[]|null $groups groups to apply to $wgUser. If not given, group
+	 * @param string[]|null $groups groups to apply to $this->user. If not given, group
 	 * membership is not modified.
 	 *
 	 * @todo try to do this without messing with the globals, or at least without hardcoding them.
 	 */
 	protected function applyPermissions( array $permissions = null, array $groups = null ) {
-		global $wgUser;
-
 		if ( !$permissions ) {
 			return;
 		}
 
-		$this->setMwGlobals( 'wgUser', clone $wgUser );
-
-		$wgUser->addToDatabase();
+		$this->user->addToDatabase();
 
 		if ( is_array( $groups ) ) {
-			$oldGroups = $wgUser->getGroups();
+			$oldGroups = $this->user->getGroups();
 			foreach ( $oldGroups as $group ) {
-				$wgUser->removeGroup( $group );
+				$this->user->removeGroup( $group );
 			}
 
 			foreach ( $groups as $group ) {
-				$wgUser->addGroup( $group );
+				$this->user->addGroup( $group );
 			}
 		}
 
@@ -67,8 +63,8 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		}
 
 		// reset rights cache
-		$wgUser->addGroup( "dummy" );
-		$wgUser->removeGroup( "dummy" );
+		$this->user->addGroup( "dummy" );
+		$this->user->removeGroup( "dummy" );
 
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'PermissionManager' );
 	}
@@ -79,13 +75,11 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 		array $permissions = null,
 		$expectedError = null
 	) {
-		global $wgUser;
-
 		$this->applyPermissions( $permissions );
 
 		try {
 			$params[ 'action' ] = $action;
-			$this->doApiRequestWithToken( $params, null, $wgUser );
+			$this->doApiRequestWithToken( $params, null, $this->user );
 
 			if ( $expectedError !== null ) {
 				$this->fail( 'API call should have failed with a permission error!' );

@@ -60,7 +60,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		for ( $i = 0; $i < 4; $i++ ) {
 			$property = Property::newFromType( 'string' );
 
-			$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 
 			$propertyIds[] = $property->getId();
 		}
@@ -129,7 +129,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		foreach ( $statements as $statement ) {
 			$entity = new Item();
-			$store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 			$entityId = $entity->getId();
 
 			$guidGenerator = new GuidGenerator();
@@ -166,7 +166,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, 'setclaimtest', $this->user, EDIT_NEW );
 
 		$this->assertCanTagSuccessfulRequest( [
 			'action' => 'wbsetclaim',
@@ -182,22 +182,22 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$store->saveEntity( $item, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, 'setclaimtest', $this->user, EDIT_NEW );
 		$q17 = $item->getId();
 
 		$property = Property::newFromType( 'string' );
-		$store->saveEntity( $property, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, 'setclaimtest', $this->user, EDIT_NEW );
 		$p11 = $property->getId();
 
 		$entity = new Item();
-		$store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 		$deletedEntityId = $entity->getId();
-		$store->deleteEntity( $deletedEntityId, 'setclaimtest', $GLOBALS['wgUser'] );
+		$store->deleteEntity( $deletedEntityId, 'setclaimtest', $this->user );
 
 		$property = Property::newFromType( 'string' );
-		$store->saveEntity( $property, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, 'setclaimtest', $this->user, EDIT_NEW );
 		$px = $property->getId();
-		$store->deleteEntity( $px, 'setclaimtest', $GLOBALS['wgUser'] );
+		$store->deleteEntity( $px, 'setclaimtest', $this->user );
 
 		$goodSnak = new PropertyValueSnak( $p11, new StringValue( 'good' ) );
 		$badSnak = new PropertyValueSnak( $p11, new StringValue( ' x ' ) );
@@ -291,7 +291,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		$entity = new Item();
 
-		$store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 		$entityId = $entity->getId();
 
 		$guidGenerator = new GuidGenerator();
@@ -305,7 +305,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			);
 		}
 
-		$store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_UPDATE );
 
 		$guid = $guidGenerator->newGuid( $entityId );
 		foreach ( $this->getStatements() as $statement ) {
@@ -442,7 +442,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 		// Save new entity with empty statements:
 		$entity = new Item();
-		$store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
 
 		// Update the same entity with a single statement:
 		$entityId = $entity->getId();
@@ -453,7 +453,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			null,
 			$guidGenerator->newGuid( $entityId )
 		);
-		$revision = $store->saveEntity( $entity, 'setclaimtest', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$revision = $store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_UPDATE );
 
 		// Add new statement at index 3 using the baserevid and a different property id
 		$statement = new Statement( new PropertyNoValueSnak( self::$propertyIds[2] ) );
@@ -465,22 +465,22 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$property = Property::newFromType( 'quantity' );
-		$property = $store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+		$property = $store->saveEntity( $property, '', $this->user, EDIT_NEW )->getEntity();
 
 		$entity = new Item();
 		/** @var EntityDocument|StatementListProvider $entity */
-		$entity = $store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+		$entity = $store->saveEntity( $entity, '', $this->user, EDIT_NEW )->getEntity();
 
 		$guidGenerator = new GuidGenerator();
 		$statement = new Statement( new PropertyNoValueSnak( $property->getId() ) );
 		$statement->setGuid( $guidGenerator->newGuid( $entity->getId() ) );
 
 		$entity->getStatements()->addStatement( $statement );
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $entity, '', $this->user, EDIT_UPDATE );
 
 		// try to change the main snak's property
 		$badProperty = Property::newFromType( 'string' );
-		$badProperty = $store->saveEntity( $badProperty, '', $GLOBALS['wgUser'], EDIT_NEW )->getEntity();
+		$badProperty = $store->saveEntity( $badProperty, '', $this->user, EDIT_NEW )->getEntity();
 
 		$badSerialization = [
 			'id' => $statement->getGuid(),

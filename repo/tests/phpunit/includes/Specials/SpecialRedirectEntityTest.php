@@ -153,7 +153,8 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 
 	private function executeSpecialEntityRedirect( array $params, User $user = null ) {
 		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
+			// TODO Matching the token of a non-anonymous user is complicated.
+			$user = new User;
 			$this->setMwGlobals(
 				'wgGroupPermissions',
 				[ '*' => [ 'item-redirect' => true, 'edit' => true ] ]

@@ -154,10 +154,8 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return MergeItems
 	 */
 	private function newMergeItemsApiModule( array $params, EntityRedirect $expectedRedirect = null ) {
-		global $wgUser;
-
 		if ( !isset( $params['token'] ) ) {
-			$params['token'] = $wgUser->getToken();
+			$params['token'] = $this->getTestUser()->getUser()->getToken();
 		}
 
 		$request = new FauxRequest( $params, true );

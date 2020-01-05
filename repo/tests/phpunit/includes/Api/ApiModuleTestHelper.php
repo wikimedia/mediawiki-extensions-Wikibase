@@ -24,15 +24,11 @@ class ApiModuleTestHelper {
 	 *        Will be called with two parameters, the ApiMain instance and $name.
 	 * @param string $name
 	 * @param array $params Request parameter. The 'token' parameter will be supplied automatically.
-	 * @param User|null $user Defaults to the global user object
+	 * @param User $user
 	 *
 	 * @return ApiBase
 	 */
-	public function newApiModule( $instantiator, $name, array $params, User $user = null ) {
-		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
-		}
-
+	public function newApiModule( $instantiator, $name, array $params, User $user ) {
 		if ( !array_key_exists( 'token', $params ) ) {
 			$params['token'] = $user->getToken();
 		}

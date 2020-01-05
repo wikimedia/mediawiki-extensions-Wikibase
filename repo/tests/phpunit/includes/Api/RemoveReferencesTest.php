@@ -75,13 +75,13 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 			$item = new Item();
 
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+			$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 			$references = $statement->getReferences();
 
@@ -113,14 +113,14 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		$item = new Item();
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		$statement = $this->statementProvider()[1];
 		$guidGenerator = new GuidGenerator();
 		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 		$item->getStatements()->addStatement( $statement );
 
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 		$references = $statement->getReferences();
 

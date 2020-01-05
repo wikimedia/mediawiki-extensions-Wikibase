@@ -40,7 +40,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 	 */
 	private function addStatementsAndSave( Item $item ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		if ( !isset( self::$propertyId ) ) {
 			self::$propertyId = $this->getNewProperty( 'string' )->getId();
@@ -60,7 +60,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 			$item->getStatements()->addStatement( $statement );
 		}
 
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 		return $item;
 	}
@@ -191,7 +191,7 @@ class RemoveClaimsTest extends WikibaseApiTestCase {
 		$property = Property::newFromType( $type );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		return $property;
 	}

@@ -289,7 +289,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		 * @var EntityRevisionLookup $lookup
 		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -341,7 +341,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		 * @var EntityRevisionLookup $lookup
 		 */
 		list( $store, $lookup ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -385,7 +385,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
 		$store = TestingAccessWrapper::newFromObject( $store );
 
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		$item = new Item();
 		$invalidItemContent = $this->createMock( ItemContent::class );
@@ -455,7 +455,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveEntityError( EntityDocument $entity, $flags, $baseRevId, $error ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// setup target item
 		$one = new Item();
@@ -475,7 +475,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// check for error
 		$this->expectException( $error );
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$store->saveEntity( $entity, '', $user, $flags, $baseRevId );
 	}
 
 	/**
@@ -484,7 +484,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveEntityError_entitySourceBasedFederation( EntityDocument $entity, $flags, $baseRevId, $error ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// setup target item
 		$one = new Item();
@@ -504,7 +504,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// check for error
 		$this->expectException( $error );
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$store->saveEntity( $entity, '', $user, $flags, $baseRevId );
 	}
 
 	public function testSaveEntity_equalContentYieldsNoEdit() {
@@ -555,7 +555,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		 * @var EntityRevisionLookup $lookup
 		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -579,7 +579,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveRedirect() {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -629,7 +629,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveRedirect_entitySourceBasedFederation() {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -699,7 +699,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		$this->expectException( StorageException::class );
 		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
@@ -711,7 +711,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveRedirectFailure_entitySourceBasedFederation( EntityRedirect $redirect ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		$this->expectException( StorageException::class );
 		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
@@ -926,7 +926,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$baseRevId = false
 	) {
 		if ( $user === null ) {
-			$user = $GLOBALS['wgUser'];
+			$user = $this->getTestUser()->getUser();
 		}
 
 		try {
@@ -1275,7 +1275,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		 * @var EntityRevisionLookup $lookup
 		 */
 		list( $store, $lookup ) = $this->createStoreAndLookup();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -1318,7 +1318,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		 * @var EntityRevisionLookup $lookup
 		 */
 		list( $store, $lookup ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// register mock watcher
 		$watcher = $this->createMock( EntityStoreWatcher::class );
@@ -1407,7 +1407,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->saveEntity( new Item( new ItemId( 'foo:Q123' ) ), 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( new Item( new ItemId( 'foo:Q123' ) ), 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
 	}
 
 	public function testDeleteEntityFails_GivenForeignEntityId() {
@@ -1415,7 +1415,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->deleteEntity( new ItemId( 'foo:Q123' ), 'testing', $GLOBALS['wgUser'] );
+		$store->deleteEntity( new ItemId( 'foo:Q123' ), 'testing', $this->getTestUser()->getUser() );
 	}
 
 	public function testUserWasLastToEditFails_GivenForeignEntityId() {
@@ -1423,7 +1423,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->userWasLastToEdit( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ), false );
+		$store->userWasLastToEdit( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ), false );
 	}
 
 	/**
@@ -1437,7 +1437,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store->saveRedirect(
 			new EntityRedirect( $source, $target ),
 			'testing',
-			$GLOBALS['wgUser']
+			$this->getTestUser()->getUser()
 		);
 	}
 
@@ -1453,7 +1453,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->updateWatchlist( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ), false );
+		$store->updateWatchlist( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ), false );
 	}
 
 	public function testIsWatchingFails_GivenForeignEntityId() {
@@ -1461,7 +1461,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		list( $store, ) = $this->createStoreAndLookup();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->isWatching( $GLOBALS['wgUser'], new ItemId( 'foo:Q123' ) );
+		$store->isWatching( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ) );
 	}
 
 	public function testGetWikiPageForEntityFails_GivenEntityIdFromOtherSource() {
@@ -1475,21 +1475,21 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->saveEntity( new Property( new PropertyId( 'P123' ), null, 'string' ), 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( new Property( new PropertyId( 'P123' ), null, 'string' ), 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
 	}
 
 	public function testDeleteEntityFails_GivenEntityIdFromOtherSource() {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->deleteEntity( new PropertyId( 'P123' ), 'testing', $GLOBALS['wgUser'] );
+		$store->deleteEntity( new PropertyId( 'P123' ), 'testing', $this->getTestUser()->getUser() );
 	}
 
 	public function testUserWasLastToEditFails_GivenEntityIdFromOtherSource() {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->userWasLastToEdit( $GLOBALS['wgUser'], new PropertyId( 'P123' ), false );
+		$store->userWasLastToEdit( $this->getTestUser()->getUser(), new PropertyId( 'P123' ), false );
 	}
 
 	public function testSaveRedirectFails_GivenEntityIdFromOtherSource() {
@@ -1502,7 +1502,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store->saveRedirect(
 			new EntityRedirect( $source, $target ),
 			'testing',
-			$GLOBALS['wgUser']
+			$this->getTestUser()->getUser()
 		);
 	}
 
@@ -1510,14 +1510,14 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->updateWatchlist( $GLOBALS['wgUser'], new PropertyId( 'P123' ), false );
+		$store->updateWatchlist( $this->getTestUser()->getUser(), new PropertyId( 'P123' ), false );
 	}
 
 	public function testIsWatchingFails_GivenEntityIdFromOtherSource() {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->isWatching( $GLOBALS['wgUser'], new PropertyId( 'P123' ) );
+		$store->isWatching( $this->getTestUser()->getUser(), new PropertyId( 'P123' ) );
 	}
 
 	private function createStoreForItemsOnly() {

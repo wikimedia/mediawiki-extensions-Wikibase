@@ -42,11 +42,12 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	*/
 	public function testApiConventions( $moduleClass, $moduleName ) {
 		$params = [];
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request );
-		$main->getContext()->setUser( $user );
+		$ctx = new \ApiTestContext();
+		$ctx = $ctx->newTestContext( $request, $user );
+		$main = new ApiMain( $ctx );
 		$module = new $moduleClass( $main, $moduleName );
 
 		$this->assertGetFinalParamDescription( $moduleClass, $module );

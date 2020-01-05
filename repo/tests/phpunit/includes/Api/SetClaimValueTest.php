@@ -71,13 +71,13 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 	 */
 	private function addStatementsAndSave( EntityDocument $entity, PropertyId $propertyId ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $entity, '', $this->user, EDIT_NEW );
 
 		$snak = new PropertyValueSnak( $propertyId, new StringValue( 'o_O' ) );
 		$guid = $entity->getId()->getSerialization() . '$D8404CDA-25E4-4334-AG93-A3290BCD9C0P';
 		$entity->getStatements()->addNewStatement( $snak, null, null, $guid );
 
-		$store->saveEntity( $entity, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $entity, '', $this->user, EDIT_UPDATE );
 
 		return $entity;
 	}
@@ -88,7 +88,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$property = Property::newFromType( 'commonsMedia' );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
 
@@ -111,7 +111,7 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$property = Property::newFromType( 'commonsMedia' );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 		$entity = $this->addStatementsAndSave( new Item(), $property->getId() );
 

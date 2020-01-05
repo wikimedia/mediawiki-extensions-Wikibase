@@ -48,12 +48,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 			$store = $wikibaseRepo->getEntityStore();
 
 			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP56', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $prop, 'EditEntityTestP56', $this->user, EDIT_NEW );
 			self::$idMap['%P56%'] = $prop->getId()->getSerialization();
 			self::$idMap['%StringProp%'] = $prop->getId()->getSerialization();
 
 			$prop = Property::newFromType( 'string' );
-			$store->saveEntity( $prop, 'EditEntityTestP72', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $prop, 'EditEntityTestP72', $this->user, EDIT_NEW );
 			self::$idMap['%P72%'] = $prop->getId()->getSerialization();
 
 			$this->initTestEntities( [ 'Berlin' ], self::$idMap );
@@ -64,15 +64,15 @@ class EditEntityTest extends WikibaseApiTestCase {
 			self::$idMap['%BerlinP56%'] = $berlinData['claims'][$p56][0]['id'];
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ42', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'EditEntityTestQ42', $this->user, EDIT_NEW );
 			self::$idMap['%Q42%'] = $badge->getId()->getSerialization();
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ149', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'EditEntityTestQ149', $this->user, EDIT_NEW );
 			self::$idMap['%Q149%'] = $badge->getId()->getSerialization();
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'EditEntityTestQ32', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'EditEntityTestQ32', $this->user, EDIT_NEW );
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 		}
 
@@ -159,7 +159,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [
 					'labels' => [ 'en' => 'A Label' ],
 					'descriptions' => [ 'en' => 'DESC' ] ]
-				],
+			],
 			'remove a label..' => [
 				'p' => [ 'data' => '{"labels":{"en":{"language":"en","value":""}}}' ],
 				'e' => [ 'descriptions' => [ 'en' => 'DESC' ] ] ],
@@ -290,21 +290,21 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'change the claim' => [
 				'p' => [ 'data' => [
 					'claims' => [
-							[
-								'id' => '%lastClaimId%',
-								'mainsnak' => [
-									'snaktype' => 'value',
-									'property' => '%P56%',
-									'datavalue' => [
-										'value' => 'diffstring',
-										'type' => 'string'
-									],
+						[
+							'id' => '%lastClaimId%',
+							'mainsnak' => [
+								'snaktype' => 'value',
+								'property' => '%P56%',
+								'datavalue' => [
+									'value' => 'diffstring',
+									'type' => 'string'
 								],
-								'type' => 'statement',
-								'rank' => 'normal',
 							],
+							'type' => 'statement',
+							'rank' => 'normal',
 						],
-					] ],
+					],
+				] ],
 				'e' => [ 'claims' => [
 					'%P56%' => [
 						'mainsnak' => [ 'snaktype' => 'value', 'property' => '%P56%',
@@ -489,9 +489,9 @@ class EditEntityTest extends WikibaseApiTestCase {
 
 	private function createItemUsing( User $user ) {
 		$createItemParams = [ 'action' => 'wbeditentity',
-							  'new' => 'item',
-							  'data' =>
-							  '{"labels":{"en":{"language":"en","value":"something"}}}' ];
+			'new' => 'item',
+			'data' =>
+				'{"labels":{"en":{"language":"en","value":"something"}}}' ];
 		list( $result, ) = $this->doApiRequestWithToken( $createItemParams, null, $user );
 		return $result['entity'];
 	}
@@ -665,16 +665,16 @@ class EditEntityTest extends WikibaseApiTestCase {
 				preg_quote( '/* wbeditentity-update-languages-and-other-short:0||en, de, es */' )
 			],
 			'more than 50 languages changed' => [
-			[
-				'action' => 'wbeditentity',
-				'data' => json_encode( [
-					'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
-					'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
-					'aliases' => $this->generateLanguageValuePairs( 50 )
-				] ),
+				[
+					'action' => 'wbeditentity',
+					'data' => json_encode( [
+						'labels' => [ 'en' => [ 'language' => 'en', 'value' => 'Foo' ] ],
+						'descriptions' => [ 'de' => [ 'language' => 'de', 'value' => 'Bar' ] ],
+						'aliases' => $this->generateLanguageValuePairs( 50 )
+					] ),
+				],
+				preg_quote( '/* wbeditentity-update-languages:0||52 */' )
 			],
-			preg_quote( '/* wbeditentity-update-languages:0||52 */' )
-		],
 			'more than 50 languages changed and other parts changed' => [
 				[
 					'action' => 'wbeditentity',
@@ -833,7 +833,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'not-recognized-string'
-					] ] ],
+				] ] ],
 			'must be a json object (json_decode s this an a string)' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'data' => '"string"' ],
 				'e' => [ 'exception' => [
@@ -1053,21 +1053,21 @@ class EditEntityTest extends WikibaseApiTestCase {
 			],
 			'bad main snak replacement' => [
 				'p' => [ 'id' => '%Berlin%', 'data' => json_encode( [
-						'claims' => [
-							[
-								'id' => '%BerlinP56%',
-								'mainsnak' => [
-									'snaktype' => 'value',
-									'property' => '%P72%',
-									'datavalue' => [
-										'value' => 'anotherstring',
-										'type' => 'string'
-									],
+					'claims' => [
+						[
+							'id' => '%BerlinP56%',
+							'mainsnak' => [
+								'snaktype' => 'value',
+								'property' => '%P72%',
+								'datavalue' => [
+									'value' => 'anotherstring',
+									'type' => 'string'
 								],
-								'type' => 'statement',
-								'rank' => 'normal' ],
-						],
-					] ) ],
+							],
+							'type' => 'statement',
+							'rank' => 'normal' ],
+					],
+				] ) ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
 					'code' => 'modification-failed',

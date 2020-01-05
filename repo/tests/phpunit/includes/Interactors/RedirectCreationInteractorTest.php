@@ -126,7 +126,7 @@ class RedirectCreationInteractorTest extends \PHPUnit\Framework\TestCase {
 		User $user = null
 	) {
 		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
+			$user = $this->createMock( User::class );
 		}
 
 		$summaryFormatter = WikibaseRepo::getDefaultInstance()->getSummaryFormatter();

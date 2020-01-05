@@ -444,7 +444,7 @@ class MockRepositoryTest extends TestCase {
 			$this->expectException( $error );
 		}
 
-		$rev = $this->repo->saveEntity( $item, 'f00', $GLOBALS['wgUser'], $flags, $baseRevId );
+		$rev = $this->repo->saveEntity( $item, 'f00', $this->getUserMock(), $flags, $baseRevId );
 		$itemId = $item->getId();
 		$revisionId = $rev->getRevisionId();
 
@@ -476,7 +476,7 @@ class MockRepositoryTest extends TestCase {
 		$q1 = new ItemId( 'Q1' );
 
 		$redirect = new EntityRedirect( $q10, $q1 );
-		$revId = $this->repo->saveRedirect( $redirect, 'redirected Q10 to Q1', $GLOBALS['wgUser'] );
+		$revId = $this->repo->saveRedirect( $redirect, 'redirected Q10 to Q1', $this->getUserMock() );
 
 		$this->assertGreaterThan( 0, $revId );
 
@@ -497,7 +497,7 @@ class MockRepositoryTest extends TestCase {
 		$q11 = new ItemId( 'Q11' );
 
 		$redirect = new EntityRedirect( $q10, $q11 );
-		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->repo->saveRedirect( $redirect, 'foo', $this->getUserMock(), EDIT_NEW );
 
 		$logEntry = $this->repo->getLogEntry( $revId );
 
@@ -516,7 +516,7 @@ class MockRepositoryTest extends TestCase {
 
 		// first entry
 		$redirect = new EntityRedirect( $q10, $q11 );
-		$revId = $this->repo->saveRedirect( $redirect, 'foo', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->repo->saveRedirect( $redirect, 'foo', $this->getUserMock(), EDIT_NEW );
 
 		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
 
@@ -527,7 +527,7 @@ class MockRepositoryTest extends TestCase {
 
 		// second entry
 		$redirect = new EntityRedirect( $q10, $q12 );
-		$revId = $this->repo->saveRedirect( $redirect, 'bar', $GLOBALS['wgUser'], EDIT_NEW );
+		$revId = $this->repo->saveRedirect( $redirect, 'bar', $this->getUserMock(), EDIT_NEW );
 
 		$logEntry = $this->repo->getLatestLogEntryFor( $q10 );
 
@@ -541,7 +541,7 @@ class MockRepositoryTest extends TestCase {
 		$item = new Item( new ItemId( 'Q23' ) );
 		$this->repo->putEntity( $item );
 
-		$this->repo->deleteEntity( $item->getId(), 'testing', $GLOBALS['wgUser'] );
+		$this->repo->deleteEntity( $item->getId(), 'testing', $this->getUserMock() );
 		$this->assertFalse( $this->repo->hasEntity( $item->getId() ) );
 	}
 
@@ -575,7 +575,7 @@ class MockRepositoryTest extends TestCase {
 		$this->repo->putRedirect( $redirect );
 
 		$this->expectException( RevisionedUnresolvedRedirectException::class );
-		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $GLOBALS['wgUser'] );
+		$this->repo->deleteEntity( $redirect->getEntityId(), 'testing', $this->getUserMock() );
 	}
 
 	public function testUpdateWatchlist() {
@@ -701,4 +701,11 @@ class MockRepositoryTest extends TestCase {
 		$this->assertEquals( $redirectsTo, $gotTargetId );
 	}
 
+	private function getUserMock() : User {
+		$u = $this->getMockBuilder( User::class )
+			->setMethods( [ 'getName' ] )
+			->getMock();
+		$u->method( 'getName' )->willReturn( __CLASS__ );
+		return $u;
+	}
 }

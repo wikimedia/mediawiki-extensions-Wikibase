@@ -57,7 +57,7 @@ class GetClaimsTest extends ApiTestCase {
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$rev = $store->saveEntity( $entity, '', $GLOBALS['wgUser'], $flags );
+		$rev = $store->saveEntity( $entity, '', $this->getTestUser()->getUser(), $flags );
 
 		$entity->setId( $rev->getEntity()->getId() );
 	}

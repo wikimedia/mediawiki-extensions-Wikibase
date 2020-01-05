@@ -51,22 +51,21 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	}
 
 	private function setUpEntities() {
-		global $wgUser;
-
+		$user = $this->getTestUser()->getUser();
 		$entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$entityStore->saveEntity( $item, "WikiPageEntityRedirectLookupTest", $wgUser, EDIT_NEW );
+		$entityStore->saveEntity( $item, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
 
 		$redirectItem1 = new Item();
 		$entityStore->assignFreshId( $redirectItem1 );
 		$redirect = new EntityRedirect( $redirectItem1->getId(), $item->getId() );
-		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $wgUser, EDIT_NEW );
+		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
 
 		$redirectItem2 = new Item();
 		$entityStore->assignFreshId( $redirectItem2 );
 		$redirect = new EntityRedirect( $redirectItem2->getId(), $item->getId() );
-		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $wgUser, EDIT_NEW );
+		$entityStore->saveRedirect( $redirect, "WikiPageEntityRedirectLookupTest", $user, EDIT_NEW );
 
 		$this->itemId = $item->getId();
 		$this->redirectItemIds = [ $redirectItem1->getId(), $redirectItem2->getId() ];
@@ -77,8 +76,6 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 	 * interfere with WikiPageEntityRedirectLookup (especially getRedirectIds).
 	 */
 	private function setUpNonEntityRedirect() {
-		global $wgUser;
-
 		$entityTitleLookup = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup();
 		$title = $entityTitleLookup->getTitleForId( $this->itemId );
 
@@ -90,7 +87,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
 			'test',
 			0,
 			false,
-			$wgUser
+			$this->getTestUser()->getUser()
 		);
 	}
 

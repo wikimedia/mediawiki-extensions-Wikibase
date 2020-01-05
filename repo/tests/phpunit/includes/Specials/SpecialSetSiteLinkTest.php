@@ -126,17 +126,18 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 	private function createItems() {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+		$user = $this->getTestUser()->getUser();
 
 		$badge = new Item();
 		$badge->setLabel( 'de', 'Guter Artikel' );
-		$store->saveEntity( $badge, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $badge, "testing", $user, EDIT_NEW );
 
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'Wikidata', [ $badge->getId() ] );
-		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, "testing", $user, EDIT_NEW );
 
 		$redirect = new EntityRedirect( new ItemId( 'Q12345678' ), $item->getId() );
-		$store->saveRedirect( $redirect, "testing", $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveRedirect( $redirect, "testing", $user, EDIT_NEW );
 
 		self::$badgeId = $badge->getId()->getSerialization();
 		self::$itemId = $item->getId()->getSerialization();

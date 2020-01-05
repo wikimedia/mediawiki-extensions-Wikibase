@@ -70,7 +70,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 				$property->getStatements()->addNewStatement( $mainSnak );
 			}
 
-			$revision = $store->saveEntity( $property, "test", $GLOBALS['wgUser'], EDIT_NEW );
+			$revision = $store->saveEntity( $property, "test", $this->getTestUser()->getUser(), EDIT_NEW );
 
 			$id = $revision->getEntity()->getId()->getSerialization();
 			$properties[$id] = $info;
