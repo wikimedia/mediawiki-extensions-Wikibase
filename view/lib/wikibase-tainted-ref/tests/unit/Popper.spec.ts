@@ -1,11 +1,10 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
-import Track from '@/vue-plugins/Track';
 import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
 import { createStore } from '@/store';
 import Popper from '@/presentation/components/Popper.vue';
-import { POPPER_HIDE, HELP_LINK_SET } from '@/store/actionTypes';
+import { POPPER_HIDE } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -21,27 +20,6 @@ describe( 'Popper.vue', () => {
 			localVue,
 		} );
 		expect( wrapper.classes() ).toContain( 'wb-tr-popper-wrapper' );
-	} );
-	it.skip( 'sets the help link according to the store', () => {
-		const store: Store<Application> = createStore();
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-		} );
-		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
-		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( 'https://wdtest/Help' );
-	} );
-	it.skip( 'clicking the help link triggers a tracking event', () => {
-		const trackingFunction = jest.fn();
-		localVue.use( Track, { trackingFunction } );
-		const store: Store<Application> = createStore();
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-		} );
-		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
-		wrapper.find( '.wb-tr-popper-help a' ).trigger( 'click' );
-		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	} );
 	it( 'closes the popper when the x is clicked', () => {
 		const store: Store<Application> = createStore();
@@ -67,29 +45,11 @@ describe( 'Popper.vue', () => {
 		wrapper.trigger( 'focusout' );
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
-	it.skip( 'does not close the popper when the help link is focused', () => {
-		const store: Store<Application> = createStore();
-		store.dispatch = jest.fn();
-
-		const wrapper = shallowMount( Popper, {
-			store,
-			localVue,
-			propsData: { guid: 'a-guid' },
-		} );
-		wrapper.trigger(
-			'focusout', {
-				relatedTarget: wrapper.find( '.wb-tr-popper-help' ).element,
-			},
-		);
-		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
-	} );
-
 	it( 'should use injected title text', () => {
 		const localVue = createLocalVue();
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-		const messageToTextFunction = jest.fn();
-		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
+		const messageToTextFunction = ( key: any ): string => `(${key})`;
 		localVue.use( Vuex );
 		localVue.use( Message, { messageToTextFunction } );
 		const wrapper = shallowMount( Popper, {
@@ -101,40 +61,27 @@ describe( 'Popper.vue', () => {
 		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
 			.toMatch( 'kitten' );
 	} );
-
-	it.skip( 'popper texts are taken from our Vue message plugin', () => {
+	it( 'should display the injected slots', () => {
 		const localVue = createLocalVue();
-		const messageToTextFunction = jest.fn();
-		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
-
-		localVue.use( Vuex );
-		localVue.use( Message, { messageToTextFunction } );
-
 		const store: Store<Application> = createStore();
 		store.dispatch = jest.fn();
-
+		const messageToTextFunction = ( key: any ): string => `(${key})`;
+		localVue.use( Vuex );
+		localVue.use( Message, { messageToTextFunction } );
 		const wrapper = shallowMount( Popper, {
 			store,
 			localVue,
-			propsData: { guid: 'a-guid' },
+			propsData: { guid: 'a-guid', title: 'title' },
+			slots: {
+				'subheading-area': '<div class="the-subheading">subhead</div>',
+				content: '<div class="the-content">content</div>',
+			},
 		} );
-		expect( wrapper.find( '.wb-tr-popper-text' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-text)' );
-		// expect( wrapper.find( '.wb-tr-popper-help a' ).element.title )
-		// .toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
-		// expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
-		// .toMatch( '(wikibase-tainted-ref-popper-help-link-text)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-text)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.title )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-title)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-text)' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-text' );
-		// expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-title' );
-		// expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-title' );
+
+		expect( wrapper.find( '.the-subheading' ).element.textContent )
+			.toMatch( 'subhead' );
+		expect( wrapper.find( '.the-content' ).element.textContent )
+			.toMatch( 'content' );
 	} );
+
 } );
