@@ -42,7 +42,7 @@ class OutputPageEditability {
 
 	/**
 	 * This is mostly a duplicate of
-	 * @see \Wikibase\ViewEntityAction::isEditable
+	 * @see \Wikibase\ViewEntityAction::isEditable()
 	 *
 	 * @param OutputPage $out
 	 *

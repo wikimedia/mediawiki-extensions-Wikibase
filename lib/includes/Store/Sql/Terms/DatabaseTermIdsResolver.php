@@ -119,6 +119,8 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 	 * @param string $groupColumn Resolved terms will be grouped by values
 	 *	of this column in $joinTable.
 	 * @param array $conditions
+	 * @param array|null $types
+	 * @param array|null $languages
 	 *
 	 * @return array[] keys of returned array are the distinct values of $groupColumn, and values
 	 *	will be term arrays containing terms per type per language.

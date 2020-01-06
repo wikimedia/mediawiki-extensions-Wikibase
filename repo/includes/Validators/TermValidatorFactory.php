@@ -62,6 +62,8 @@ class TermValidatorFactory {
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
 	 * @param TermLookup $termLookup
+	 * @param array $itemTermsMigrationStage
+	 * @param int $propertyTermsMigrationStage
 	 *
 	 * @throws InvalidArgumentException
 	 */

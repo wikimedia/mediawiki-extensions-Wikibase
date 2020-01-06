@@ -95,7 +95,7 @@ class LineReader implements Iterator {
 	/**
 	 * Return the current line.
 	 *
-	 * @link http://php.net/manual/en/iterator.current.php
+	 * @see http://php.net/manual/en/iterator.current.php
 	 * @return string
 	 */
 	public function current() {
@@ -105,7 +105,7 @@ class LineReader implements Iterator {
 	/**
 	 * Reads the next line. Use current() to get the line's content.
 	 *
-	 * @link http://php.net/manual/en/iterator.next.php
+	 * @see http://php.net/manual/en/iterator.next.php
 	 */
 	public function next() {
 		$this->current = fgets( $this->fileHandle );
@@ -119,7 +119,7 @@ class LineReader implements Iterator {
 
 	/**
 	 * Return the current line number.
-	 * @link http://php.net/manual/en/iterator.key.php
+	 * @see http://php.net/manual/en/iterator.key.php
 	 * @return int
 	 */
 	public function key() {
@@ -130,7 +130,7 @@ class LineReader implements Iterator {
 	 * Checks if current position is valid. Returns true if and only if
 	 * next() has been called at least once and the end of file has not yet been reached.
 	 *
-	 * @link http://php.net/manual/en/iterator.valid.php
+	 * @see http://php.net/manual/en/iterator.valid.php
 	 * @return boolean whether there is a current line
 	 */
 	public function valid() {
@@ -141,7 +141,7 @@ class LineReader implements Iterator {
 	 * Sets the file pointer to the beginning of the file, if supported.
 	 * Has no effect if this LineReader has already been disposed.
 	 *
-	 * @link http://php.net/manual/en/iterator.rewind.php
+	 * @see http://php.net/manual/en/iterator.rewind.php
 	 * @return void Any returned value is ignored.
 	 */
 	public function rewind() {

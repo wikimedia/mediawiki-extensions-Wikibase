@@ -89,6 +89,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
+	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityInfoBuilder $entityInfoBuilder
