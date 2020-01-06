@@ -109,6 +109,7 @@ export default class Popper extends Vue {
 .wb-tr-popper-wrapper {
 	z-index: 1;
 	position: relative;
+	width: 415px;
 }
 
 .wb-tr-popper-wrapper:focus {
@@ -147,8 +148,6 @@ export default class Popper extends Vue {
 }
 
 .wb-tr-popper-body {
-	padding: 8px 16px 8px 16px;
-	width: 415px;
 	border: $border-color 1px solid;
 	border-radius: 2px;
 	z-index: 2;
@@ -162,30 +161,26 @@ export default class Popper extends Vue {
 	font-weight: bold;
 	color: $color-black;
 	line-height: 22px;
+	margin: 8px 0 0 16px;
 }
 
 .wb-tr-popper-text {
 	font-family: sans-serif;
 	font-size: 14px;
 	color: $basic-text-black;
-	margin-top: 0;
-	margin-bottom: 8px;
+	margin: 0 16px 8px 16px;
 	line-height: 22px;
 }
 
 .wb-tr-title-wrapper {
 	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px $border-color-grey solid;
 }
 
 .wb-tr-popper-close {
 	border-color: transparent;
 	background: transparent;
-	margin-top: -4px;
-	margin-bottom: 4px;
-	margin-right: -8px;
-	font-size: 20px;
+	margin: 1px 8px 1px 0;
 	width: 32px;
 	height: 32px;
 	color: $color-dark-grey;
@@ -211,17 +206,16 @@ export default class Popper extends Vue {
 	font-weight: normal;
 	text-align: right;
 	font-size: 12px;
-	margin-top: 4px;
-	margin-bottom: 0;
+	margin: 4px 16px 0 16px;
 	color: $help-link-blue;
 	line-height: 20px;
+	border-top: 1px $border-color-grey solid;
 }
 
 .wb-tr-popper-feedback {
 	font-weight: normal;
 	color: $basic-text-black;
-	margin-top: 8px;
-	margin-bottom: 0;
+	margin: 8px 16px 8px 16px;
 	line-height: 22px;
 }
 
