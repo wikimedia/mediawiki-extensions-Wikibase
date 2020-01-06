@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\TermFallback;
  * A {@link LabelDescriptionLookup} that is guaranteed to return
  * {@link TermFallback}s, not merely {@link Term}s.
  *
- * @since 3.16.0
+ * @since 4.0.0
  *
  * @license GPL-2.0-or-later
  */
