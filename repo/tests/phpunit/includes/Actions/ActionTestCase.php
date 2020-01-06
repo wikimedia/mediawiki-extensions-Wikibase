@@ -27,15 +27,18 @@ use WikiPage;
  */
 class ActionTestCase extends \MediaWikiTestCase {
 
+	/** @var User */
+	protected $user;
+
 	protected function setUp() : void {
 		parent::setUp();
 
 		$testUser = new \TestUser( 'ActionTestUser' );
 		$user = $testUser->getUser();
 		$user->setId( 123456789 );
+		$this->user = $user;
 
 		$this->setMwGlobals( [
-			'wgUser' => $user,
 			'wgRequest' => new FauxRequest(),
 			'wgGroupPermissions' => [ '*' => [ 'edit' => true, 'read' => true ] ]
 		] );
@@ -114,8 +117,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @return Action
 	 */
 	protected function createAction( $action, WikiPage $page, array $params = null, $wasPosted = false ) {
-		global $wgLang,
-			$wgUser;
+		global $wgLang;
 
 		if ( $params == null ) {
 			$params = [];
@@ -129,7 +131,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, $wasPosted ) );
-		$context->setUser( $wgUser );     // determined by setUser()
+		$context->setUser( $this->user );     // determined by setUser()
 		$context->setLanguage( $wgLang ); // qqx as per setUp()
 		$context->setTitle( $article->getTitle() );
 
@@ -204,15 +206,13 @@ class ActionTestCase extends \MediaWikiTestCase {
 	 * @throws RuntimeException
 	 */
 	private function createTestContent( array $revisions ) {
-		global $wgUser;
-
 		/** @var EntityRevision $rev */
 		$id = null;
 		$result = null;
 
 		foreach ( $revisions as $entity ) {
 			$flags = ( $id !== null ) ? EDIT_UPDATE : EDIT_NEW;
-			$result = $this->createTestContentRevision( $entity, $id, $wgUser, $flags );
+			$result = $this->createTestContentRevision( $entity, $id, $this->user, $flags );
 
 			if ( $result instanceof EntityRedirect ) {
 				$id = $result->getEntityId();

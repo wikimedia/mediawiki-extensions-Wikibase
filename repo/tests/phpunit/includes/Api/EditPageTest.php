@@ -34,7 +34,7 @@ class EditPageTest extends WikibaseApiTestCase {
 
 		$item = new Item(); //@todo: do this with all kinds of entities.
 		$item->setLabel( "en", "EditPageTest" );
-		$store->saveEntity( $item, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, 'testing', $this->user, EDIT_NEW );
 
 		$item->setLabel( "de", "EditPageTest" );
 

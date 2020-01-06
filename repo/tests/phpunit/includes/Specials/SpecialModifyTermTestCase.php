@@ -45,7 +45,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 		// save the item
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveEntity( $item, "testing", $GLOBALS['wgUser'], EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
+		$store->saveEntity( $item, "testing", $this->getTestUser()->getUser(), EDIT_NEW | EntityContent::EDIT_IGNORE_CONSTRAINTS );
 
 		// return the id
 		return $item->getId()->getSerialization();

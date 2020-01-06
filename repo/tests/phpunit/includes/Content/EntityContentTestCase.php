@@ -33,7 +33,6 @@ use WikiPage;
 abstract class EntityContentTestCase extends \MediaWikiTestCase {
 
 	private $originalGroupPermissions;
-	private $originalUser;
 
 	/**
 	 * @var EntityStore
@@ -41,30 +40,19 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 	protected $entityStore;
 
 	protected function setUp() : void {
-		global $wgGroupPermissions, $wgUser;
+		global $wgGroupPermissions;
 
 		parent::setUp();
 
 		$this->originalGroupPermissions = $wgGroupPermissions;
-		$this->originalUser = $wgUser;
 
 		$this->entityStore = WikibaseRepo::getDefaultInstance()->getEntityStore();
 	}
 
 	protected function tearDown() : void {
-		global $wgGroupPermissions,
-			$wgUser;
+		global $wgGroupPermissions;
 
 		$wgGroupPermissions = $this->originalGroupPermissions;
-
-		if ( $this->originalUser ) { // should not be null, but sometimes, it is
-			$wgUser = $this->originalUser;
-		}
-
-		if ( $wgUser ) { // should not be null, but sometimes, it is
-			// reset rights cache
-			$wgUser->clearInstanceCache();
-		}
 
 		parent::tearDown();
 	}
@@ -431,7 +419,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 
 		if ( !$title->exists( Title::GAID_FOR_UPDATE ) ) {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-			$store->saveEntity( $entity, 'test', $GLOBALS['wgUser'] );
+			$store->saveEntity( $entity, 'test', $this->getTestUser()->getUser() );
 
 			// $title lies, make a new one
 			$title = Title::makeTitleSafe( $title->getNamespace(), $title->getText() );

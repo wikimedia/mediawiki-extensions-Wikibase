@@ -128,7 +128,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 	 */
 	private function newInteractor( User $user = null ) {
 		if ( !$user ) {
-			$user = $GLOBALS['wgUser'];
+			$user = $this->getTestUser()->getUser();
 		}
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

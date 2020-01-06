@@ -222,8 +222,6 @@ class FormatSnakValueTest extends ApiTestCase {
 	}
 
 	private function saveEntities() {
-		global $wgUser;
-
 		$this->testingItem = new Item();
 		$this->testingItem->getFingerprint()->setLabel( 'en', 'George Washington' );
 
@@ -233,8 +231,8 @@ class FormatSnakValueTest extends ApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
 
 		// Save them, this will also automatically assign new IDs
-		$store->saveEntity( $this->testingItem, 'testing', $wgUser, EDIT_NEW );
-		$store->saveEntity( $this->testingProperty, 'testing', $wgUser, EDIT_NEW );
+		$store->saveEntity( $this->testingItem, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
+		$store->saveEntity( $this->testingProperty, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
 	}
 
 	/**

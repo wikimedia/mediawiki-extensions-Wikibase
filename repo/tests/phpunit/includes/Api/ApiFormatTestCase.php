@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use FauxRequest;
+use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -34,6 +35,17 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	 */
 	protected $lastItemId;
 
+	/** @var User */
+	protected $user;
+
+	/**
+	 * @inheritDoc
+	 */
+	protected function setUp() : void {
+		parent::setUp();
+		$this->user = $this->getTestUser()->getUser();
+	}
+
 	/**
 	 * @param string $moduleClass
 	 * @param string $moduleName
@@ -43,14 +55,15 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	 * @return ApiMain
 	 */
 	protected function getApiModule( $moduleClass, $moduleName, array $params, $needsToken = false ) {
-		global $wgUser,
-			$wgAPIModules;
+		global $wgAPIModules;
 
 		if ( $needsToken ) {
-			$params['token'] = $wgUser->getEditToken();
+			$params['token'] = $this->user->getEditToken();
 		}
 		$request = new FauxRequest( $params, true );
-		$main = new ApiMain( $request, true );
+		$ctx = new \ApiTestContext();
+		$ctx = $ctx->newTestContext( $request, $this->user );
+		$main = new ApiMain( $ctx, true );
 
 		if ( isset( $wgAPIModules[$moduleName]['factory'] )
 			&& $wgAPIModules[$moduleName]['class'] === $moduleClass
@@ -73,30 +86,24 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	}
 
 	protected function storeNewProperty() {
-		global $wgUser;
-
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$property = Property::newFromType( 'string' );
-		$entityRevision = $store->saveEntity( $property, 'testing', $wgUser, EDIT_NEW );
+		$entityRevision = $store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 		$this->lastPropertyId = $entityRevision->getEntity()->getId();
 	}
 
 	protected function storeNewItem() {
-		global $wgUser;
-
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
-		$entityRevision = $store->saveEntity( $item, 'testing', $wgUser, EDIT_NEW );
+		$entityRevision = $store->saveEntity( $item, 'testing', $this->user, EDIT_NEW );
 		$this->lastItemId = $entityRevision->getEntity()->getId();
 
 		return $entityRevision;
 	}
 
 	private function storePresetDataInStatement( EntityRevision $entityRevision, PropertyId $propertyId ) {
-		global $wgUser;
-
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		/** @var Item $item */
@@ -112,7 +119,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 		$item->setAliases( 'pt', [ 'AA', 'BB' ] );
 		$item->setAliases( 'en', [ 'AA-en', 'BB-en' ] );
 
-		$entityRevision = $store->saveEntity( $item, 'testing more!', $wgUser );
+		$entityRevision = $store->saveEntity( $item, 'testing more!', $this->user );
 
 		return $entityRevision;
 	}

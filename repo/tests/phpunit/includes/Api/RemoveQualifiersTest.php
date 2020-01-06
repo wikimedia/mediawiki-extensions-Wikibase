@@ -75,13 +75,13 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		foreach ( $this->statementProvider() as $statement ) {
 			$item = new Item();
 
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 			$guidGenerator = new GuidGenerator();
 			$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 			$item->getStatements()->addStatement( $statement );
 
-			$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+			$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 			$this->assertIsString( $statement->getGuid() );
 
@@ -113,14 +113,14 @@ class RemoveQualifiersTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		$item = new Item();
 
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		$statement = $this->statementProvider()[2];
 		$guidGenerator = new GuidGenerator();
 		$statement->setGuid( $guidGenerator->newGuid( $item->getId() ) );
 		$item->getStatements()->addStatement( $statement );
 
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 		$this->assertIsString( $statement->getGuid() );
 

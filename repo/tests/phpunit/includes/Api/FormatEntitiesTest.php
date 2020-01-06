@@ -26,11 +26,9 @@ use Wikimedia\TestingAccessWrapper;
 class FormatEntitiesTest extends ApiTestCase {
 
 	private function saveEntity( EntityDocument $entity ) {
-		global $wgUser;
-
 		$store = WikibaseRepo::getDefaultInstance()->getStore()->getEntityStore();
 
-		$store->saveEntity( $entity, 'testing', $wgUser, EDIT_NEW );
+		$store->saveEntity( $entity, 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
 	}
 
 	public function testApiRequest() {

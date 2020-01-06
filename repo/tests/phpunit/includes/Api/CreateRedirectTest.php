@@ -182,10 +182,8 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		User $user = null,
 		ItemRedirectCreationInteractor $interactor = null
 	) {
-		global $wgUser;
-
 		if ( !$user ) {
-			$user = $wgUser;
+			$user = $this->getTestUser()->getUser();
 		}
 
 		if ( !isset( $params['token'] ) ) {
@@ -255,8 +253,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function testGivenSourceHasDeletedRevisionsButExists_sourcePageIsUpdatedAsRedirect() {
-		global $wgUser;
-
+		$user = $this->getTestUser()->getUser();
 		$sourceId = new ItemId( 'Q11' );
 		$sourceItem = new Item( $sourceId );
 		$targetId = new ItemId( 'Q12' );
@@ -265,26 +262,25 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$params = [ 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() ];
 
 		$main = new ApiMain( new FauxRequest( $params, true ), true );
-		$main->getContext()->setUser( $wgUser );
+		$main->getContext()->setUser( $user );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $wgUser, $main->getContext() );
+		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $user, $main->getContext() );
 		$store = $wikibaseRepo->getEntityStore();
 
-		$store->saveEntity( $sourceItem, 'Created the source item', $wgUser );
-		$store->deleteEntity( $sourceId, 'test reason', $wgUser );
-		$store->saveEntity( $sourceItem, 'Recreated the source item', $wgUser );
+		$store->saveEntity( $sourceItem, 'Created the source item', $user );
+		$store->deleteEntity( $sourceId, 'test reason', $user );
+		$store->saveEntity( $sourceItem, 'Recreated the source item', $user );
 
-		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
+		$store->saveEntity( $targetItem, 'Created the target item', $user );
 
-		$result = $this->callApiModule( $params, $wgUser, $interactor );
+		$result = $this->callApiModule( $params, $user, $interactor );
 
 		$this->assertSuccess( $result );
 	}
 
 	public function testGivenSourceHasDeletedRevisionsAndDoesNotExist_sourcePageIsCreatedAsRedirect() {
-		global $wgUser;
-
+		$user = $this->getTestUser()->getUser();
 		$sourceId = new ItemId( 'Q11' );
 		$sourceItem = new Item( $sourceId );
 		$targetId = new ItemId( 'Q12' );
@@ -293,18 +289,18 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 		$params = [ 'from' => $sourceId->getSerialization(), 'to' => $targetId->getSerialization() ];
 
 		$main = new ApiMain( new FauxRequest( $params, true ), true );
-		$main->getContext()->setUser( $wgUser );
+		$main->getContext()->setUser( $user );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $wgUser, $main->getContext() );
+		$interactor = $wikibaseRepo->newItemRedirectCreationInteractor( $user, $main->getContext() );
 		$store = $wikibaseRepo->getEntityStore();
 
-		$store->saveEntity( $sourceItem, 'Created the source item', $wgUser );
-		$store->deleteEntity( $sourceId, 'test reason', $wgUser );
+		$store->saveEntity( $sourceItem, 'Created the source item', $user );
+		$store->deleteEntity( $sourceId, 'test reason', $user );
 
-		$store->saveEntity( $targetItem, 'Created the target item', $wgUser );
+		$store->saveEntity( $targetItem, 'Created the target item', $user );
 
-		$result = $this->callApiModule( $params, $wgUser, $interactor );
+		$result = $this->callApiModule( $params, $user, $interactor );
 
 		$this->assertSuccess( $result );
 	}
@@ -319,9 +315,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 	}
 
 	public function testModuleFlags() {
-		global $wgUser;
-
-		$module = $this->newApiModule( [], $wgUser );
+		$module = $this->newApiModule( [], $this->getTestUser()->getUser() );
 
 		$this->assertTrue( $module->mustBePosted(), 'mustBePosted' );
 		$this->assertTrue( $module->isWriteMode(), 'isWriteMode' );

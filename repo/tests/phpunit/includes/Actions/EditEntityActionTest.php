@@ -30,15 +30,6 @@ class EditEntityActionTest extends ActionTestCase {
 	protected function setUp() : void {
 		parent::setUp();
 
-		static $user = null;
-
-		if ( !$user ) {
-			$user = User::newFromId( 0 );
-			$user->setName( '127.0.0.1' );
-		}
-
-		$this->setMwGlobals( 'wgUser', $user );
-
 		// Remove handlers for the "OutputPageParserOutput" hook
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'OutputPageParserOutput' => [] ] );
 
@@ -670,7 +661,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( isset( $params['wpEditToken'] ) && $params['wpEditToken'] === true ) {
-			$params['wpEditToken'] = $this->getEditToken(); //TODO: $user
+			$params['wpEditToken'] = $this->user->getEditToken(); //TODO: $user
 		}
 
 		$out = $this->callAction( $action, $page, $params, $post );
@@ -789,7 +780,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$this->adjustRevisionParam( 'restore', $params, $page );
 
 		if ( !isset( $params['wpEditToken'] ) ) {
-			$params['wpEditToken'] = $this->getEditToken();
+			$params['wpEditToken'] = $this->user->getEditToken();
 		}
 
 		if ( !isset( $params['wpSave'] ) ) {
@@ -862,7 +853,7 @@ class EditEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( $handle );
 
 		$params = [
-			'wpEditToken' => $this->getEditToken(),
+			'wpEditToken' => $this->user->getEditToken(),
 			'wpSave' => 1,
 			'undo' => $page->getLatest(),
 		];
@@ -889,15 +880,13 @@ class EditEntityActionTest extends ActionTestCase {
 	}
 
 	/**
-	 * Changes wgUser and resets any associated state
+	 * Changes $this->user and resets any associated state
 	 *
 	 * @param User $user the desired user
 	 */
 	private function setUser( User $user ) {
-		global $wgUser;
-
-		if ( $user->getName() !== $wgUser->getName() ) {
-			$wgUser = $user;
+		if ( $user->getName() !== $this->user->getName() ) {
+			$this->user = $user;
 			ApiQueryInfo::resetTokenCache();
 		}
 	}
@@ -906,8 +895,7 @@ class EditEntityActionTest extends ActionTestCase {
 	 * @param array[] $permissions
 	 */
 	private function applyPermissions( array $permissions ) {
-		global $wgGroupPermissions,
-			$wgUser;
+		global $wgGroupPermissions;
 
 		if ( $permissions === [] ) {
 			return;
@@ -922,17 +910,7 @@ class EditEntityActionTest extends ActionTestCase {
 		}
 
 		// reset rights cache
-		$wgUser->clearInstanceCache();
+		$this->user->clearInstanceCache();
 		$this->overrideMwServices();
 	}
-
-	/**
-	 * @return string
-	 */
-	private function getEditToken() {
-		global $wgUser;
-
-		return $wgUser->getEditToken();
-	}
-
 }

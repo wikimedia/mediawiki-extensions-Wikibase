@@ -61,7 +61,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 
 			for ( $i = 0; $i < 4; $i++ ) {
 				$property = Property::newFromType( 'string' );
-				$store->saveEntity( $property, '', $GLOBALS['wgUser'], EDIT_NEW );
+				$store->saveEntity( $property, '', $this->user, EDIT_NEW );
 
 				self::$propertyIds[] = $property->getId();
 			}
@@ -85,7 +85,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 		// Create a new empty item
 		$item = new Item();
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $item, '', $this->user, EDIT_NEW );
 
 		$statementGuid = $item->getId()->getSerialization() . '$D8505CDA-25E4-4334-AG93-A3290BCD9C0P';
 
@@ -95,7 +95,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			$references,
 			$statementGuid
 		);
-		$store->saveEntity( $item, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveEntity( $item, '', $this->user, EDIT_UPDATE );
 
 		return $item->getStatements()->getFirstStatementWithGuid( $statementGuid );
 	}

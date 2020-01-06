@@ -370,15 +370,15 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$this->initTestEntities( [ 'StringProp', 'Leipzig', 'Berlin' ] );
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'SetSiteLinkTestGA', $this->user, EDIT_NEW );
 			self::$gaItemId = $badge->getId();
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestFA', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'SetSiteLinkTestFA', $this->user, EDIT_NEW );
 			self::$faItemId = $badge->getId();
 
 			$badge = new Item();
-			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $badge, 'SetSiteLinkTestOther', $this->user, EDIT_NEW );
 			self::$otherItemId = $badge->getId();
 		}
 
@@ -400,7 +400,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	private function exceptionPlaceholder( array $value ) {
 		foreach ( $value as &$site ) {
 			if ( !isset( $site['badges'] ) ) {
-					continue;
+				continue;
 			}
 			foreach ( $site['badges'] as &$dummy ) {
 				if ( $dummy === '{gaItem}' ) {

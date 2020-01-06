@@ -76,7 +76,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	protected function makeProperty( Property $property ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
-		$store->saveEntity( $property, 'testing', $GLOBALS['wgUser'], EDIT_NEW );
+		$store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 		return $property;
 	}
 
@@ -87,7 +87,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 			$newItem = new Item();
-			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_NEW );
+			$store->saveEntity( $newItem, '', $this->user, EDIT_NEW );
 
 			$prop = Property::newFromType( 'string' );
 			$propId = $this->makeProperty( $prop )->getId();
@@ -97,7 +97,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$guid = $guidGenerator->newGuid( $newItem->getId() );
 			$newItem->getStatements()->addNewStatement( $snak, null, null, $guid );
 
-			$store->saveEntity( $newItem, '', $GLOBALS['wgUser'], EDIT_UPDATE );
+			$store->saveEntity( $newItem, '', $this->user, EDIT_UPDATE );
 			$item = $newItem;
 		}
 

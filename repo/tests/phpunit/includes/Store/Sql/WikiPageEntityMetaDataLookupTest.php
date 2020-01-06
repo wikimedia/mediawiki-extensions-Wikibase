@@ -53,7 +53,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		parent::setUp();
 
 		if ( !$this->data ) {
-			global $wgUser;
+			$user = $this->getTestUser()->getUser();
 
 			$this->mergeMwGlobalArrayValue(
 				'wgWBRepoSettings',
@@ -62,18 +62,18 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 			$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 			for ( $i = 0; $i < 3; $i++ ) {
-				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
+				$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $user, EDIT_NEW );
 			}
 
 			/** @var Item $entity */
 			$entity = $this->data[2]->getEntity();
 			$entity->getFingerprint()->setLabel( 'en', 'Updated' );
-			$this->data[2] = $store->saveEntity( $entity, 'WikiPageEntityMetaDataLookupTest', $wgUser );
+			$this->data[2] = $store->saveEntity( $entity, 'WikiPageEntityMetaDataLookupTest', $user );
 
-			$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $wgUser, EDIT_NEW );
+			$this->data[] = $store->saveEntity( new Item(), 'WikiPageEntityMetaDataLookupTest', $user, EDIT_NEW );
 			$this->redirectId = $this->data[3]->getEntity()->getId();
 			$redirect = new EntityRedirect( $this->redirectId, $entity->getId() );
-			$this->data[] = $store->saveRedirect( $redirect, 'WikiPageEntityMetaDataLookupTest', $wgUser );
+			$this->data[] = $store->saveRedirect( $redirect, 'WikiPageEntityMetaDataLookupTest', $user );
 		}
 	}
 

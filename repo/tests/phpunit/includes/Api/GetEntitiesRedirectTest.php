@@ -29,7 +29,7 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		$entity->setLabel( 'en', $label );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$rev = $store->saveEntity( $entity, 'GetEntitiesRedirectTest', $GLOBALS['wgUser'], EDIT_NEW );
+		$rev = $store->saveEntity( $entity, 'GetEntitiesRedirectTest', $this->getTestUser()->getUser(), EDIT_NEW );
 		$id = $rev->getEntity()->getId();
 
 		return $id;
@@ -41,13 +41,13 @@ class GetEntitiesRedirectTest extends ApiTestCase {
 		$redirect = new EntityRedirect( $id, $target );
 
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$store->saveRedirect( $redirect, 'GetEntitiesRedirectTest', $GLOBALS['wgUser'], EDIT_UPDATE );
+		$store->saveRedirect( $redirect, 'GetEntitiesRedirectTest', $this->getTestUser()->getUser(), EDIT_UPDATE );
 
 		return $id;
 	}
 
 	public function testResolveRedirect() {
-		$user = $GLOBALS['wgUser'];
+		$user = $this->getTestUser()->getUser();
 
 		// NOTE: We test all cases in a single test function run, so we only have to
 		//       set up the entities in the database once.

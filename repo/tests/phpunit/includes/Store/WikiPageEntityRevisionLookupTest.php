@@ -51,20 +51,16 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 	 */
 	private static $testEntities = [];
 
-	protected static function storeTestEntity( EntityDocument $entity ) {
-		global $wgUser;
-
+	protected function storeTestEntity( EntityDocument $entity ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$revision = $store->saveEntity( $entity, "storeTestEntity", $wgUser );
+		$revision = $store->saveEntity( $entity, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;
 	}
 
-	protected static function storeTestRedirect( EntityRedirect $redirect ) {
-		global $wgUser;
-
+	protected function storeTestRedirect( EntityRedirect $redirect ) {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $wgUser );
+		$revision = $store->saveRedirect( $redirect, "storeTestEntity", $this->getTestUser()->getUser() );
 
 		return $revision;
 	}
@@ -97,13 +93,13 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			$logicalRev = $entityRev->getRevisionId();
 
 			if ( !isset( self::$testEntities[$logicalRev] ) ) {
-				$rev = self::storeTestEntity( $entityRev->getEntity() );
+				$rev = $this->storeTestEntity( $entityRev->getEntity() );
 				self::$testEntities[$logicalRev] = $rev;
 			}
 		}
 
 		foreach ( $entityRedirects as $entityRedir ) {
-			self::storeTestRedirect( $entityRedir );
+			$this->storeTestRedirect( $entityRedir );
 		}
 
 		return new WikiPageEntityRevisionLookup(
@@ -237,7 +233,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		$redirectsTo = new ItemId( 'Q2' );
 		$entityRedirect = new EntityRedirect( $entityId, $redirectsTo );
 
-		$redirectRevisionId = self::storeTestRedirect( $entityRedirect );
+		$redirectRevisionId = $this->storeTestRedirect( $entityRedirect );
 
 		$lookup = new WikiPageEntityRevisionLookup(
 			$this->getMetaDataLookup(),
