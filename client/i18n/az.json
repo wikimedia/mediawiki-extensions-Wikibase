@@ -28,6 +28,7 @@
 	"wikibase-pageinfo-entity-id": "Elementin {{WBREPONAME}} identifikatoru",
 	"wikibase-pageinfo-entity-usage": "Bu səhifədə istifadə edilən {{WBREPONAME}} vahidləri",
 	"wikibase-otherprojects": "Digər layihələr",
+	"echo-category-title-wikibase-action": "{{WBREPONAME}} ilə {{PLURAL:$1|əlaqələndirmə|əlaqələndirmələr}}",
 	"echo-pref-tooltip-wikibase-action": "Yaratdığım səhifəni kimsə {{WBREPONAME}} elementi ilə əlaqələndirdikdə mənə bildiriş göndər.",
 	"notification-header-page-connection": "<strong>$3</strong> səhifəsi əlaqəli məlumatların toplandığı {{PLURAL:$4|-1={{WBREPONAME}} elementi|$4 nömrəli {{WBREPONAME}} elementi}} ilə {{GENDER:$2|əlaqələndirildi}}."
 }

@@ -2,12 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Anass Sedrati",
-			"SADIQUI"
+			"SADIQUI",
+			"Reda Benkhadra"
 		]
 	},
-	"wikibase-edit": "عدل",
+	"wikibase-edit": "بدل",
 	"wikibase-add": "زيد",
 	"wikibase-description-empty": "ما كاين حتى شي وصف",
 	"wikibase-sitelinks-special": "مواقع أخرى",
-	"wikibase-statementview-rank-normal": "ترتيب طبيعي"
+	"wikibase-statementview-rank-normal": "ترتيب طبيعي",
+	"wikibase-entityselector-more": "كتر"
 }

@@ -420,7 +420,7 @@
 	"wikibase-entity-not-viewable-title": "İçerik türü uyuşmazlığı: İçerik gösterilemiyor",
 	"wikibase-entity-not-viewable": "Verilen \"$1\" içerik türü bir varlık değildir ve Wikibase tarafından görüntülenemez.",
 	"wikibase-pageinfo-subscription": "Bu varlığa abone olan Vikiler",
-	"wikibase-pageinfo-subscription-none": "Yok",
+	"wikibase-pageinfo-subscription-none": "Hiçbiri",
 	"wikibase-pageinfo-wb-claims": "Bu kuruluştaki ifade sayısı",
 	"wikibase-pageinfo-wb-identifiers": "Bu varlıktaki harici tanımlayıcı ifadelerinin sayısı",
 	"wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",

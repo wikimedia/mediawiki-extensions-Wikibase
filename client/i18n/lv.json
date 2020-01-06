@@ -27,6 +27,8 @@
 	"wikibase-linkitem-input-page": "Lapa:",
 	"wikibase-linkitem-confirmitem-button": "Apstiprināt",
 	"wikibase-linkitem-not-loggedin-title": "Jums ir jāpieslēdzas",
+	"wikibase-linkitem-success-link": "Lapas tika sasaistītas. Ierakstu, kas satur saites, vari atrast mūsu [$1 centrālajā datu repozitorijā].",
+	"limitreport-entityaccesscount": "Ielādēto Wikibase ierakstu skaits",
 	"limitreport-entityaccesscount-value": "$1/$2",
 	"wikibase-property-notfound": "$1 īpašība nav atrasta.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

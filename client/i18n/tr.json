@@ -95,7 +95,7 @@
 	"wikibase-entityusage-entity": "Varlık:",
 	"wikibase-entityusage-submit": "Sayfaları göster",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} öge kimliği",
-	"wikibase-pageinfo-entity-id-none": "Yok",
+	"wikibase-pageinfo-entity-id-none": "Hiçbiri",
 	"wikibase-pageinfo-description-local": "Yerel açıklama",
 	"wikibase-pageinfo-description-central": "Merkezî açıklama",
 	"wikibase-pageinfo-entity-usage": "Bu sayfada kullanılan {{WBREPONAME}} varlıkları",

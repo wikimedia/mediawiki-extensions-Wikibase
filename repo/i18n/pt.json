@@ -16,7 +16,8 @@
 			"Imperadeiro90",
 			"Jkb8",
 			"Fúlvio",
-			"Athena in Wonderland"
+			"Athena in Wonderland",
+			"Mansil"
 		]
 	},
 	"wikibase-desc": "Repositório de dados estruturados",
@@ -425,5 +426,6 @@
 	"wikibase-shortcopyrightwarning-heading": "Atribuição da licença",
 	"wikibase-entity-save-error-heading": "Ocorreu um problema",
 	"wikibase-entity-save-error-message": "Não foi possível publicar a sua alteração. Pode tentar clicar novamente o botão de publicar.",
-	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns possíveis problemas"
+	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns possíveis problemas",
+	"wikibase-tainted-ref-popper-help-link-text": "Ajuda"
 }
