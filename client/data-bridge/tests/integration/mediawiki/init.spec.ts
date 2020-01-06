@@ -54,8 +54,8 @@ describe( 'init', () => {
 				return new Promise( ( resolve ) => resolve( require ) );
 			} ),
 			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
-			mwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
-			api = new BatchingApi( new ApiCore( mwApi ) ),
+			repoMwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
+			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),
 			editTags = [ 'a tag' ],
 			usePublish = true,
 			pageTitle = 'Client_page';
@@ -75,7 +75,7 @@ describe( 'init', () => {
 			'http://localhost/wiki/Special:EntityData',
 		) );
 		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
-			mwApi,
+			repoMwApi,
 			'Test User',
 			editTags,
 		) );
@@ -85,15 +85,15 @@ describe( 'init', () => {
 		) );
 		expectedServices.set( 'entityLabelRepository', new ApiEntityLabelRepository(
 			'en',
-			api,
+			repoApi,
 		) );
 		expectedServices.set( 'propertyDatatypeRepository', new ApiPropertyDataTypeRepository(
-			api,
+			repoApi,
 		) );
 		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
 			( window as MwWindow ).mw.message,
 		) );
-		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( api ) );
+		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( repoApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
 			new EventTracker( ( window as MwWindow ).mw.track ),
 		) );
