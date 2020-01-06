@@ -47,7 +47,7 @@ Each key is associated with a map that provides the following fields:
 
 Since for each property data type the associated value type is known, this provides a convenient fallback mechanism  * If a desired callback field isn't defined for a given property data type, we can fall back to using the callback that is defined for the value type. For example, if there is no formatter-factory-callback field associated with the PT:url key, we may use the one defined for VT:string, since the url property data type is based on the string value type.
 
-Extensions that wish to register a data type should use the WikibaseRepoDataTypes resp. WikibaseClientDataTypes hooks to provide additional data type definitions.
+Extensions that wish to register a data type should use the [WikibaseRepoDataTypes] resp. [WikibaseClientDataTypes] hooks to provide additional data type definitions.
 
 ## Programmatic Access
 
@@ -75,3 +75,5 @@ The data type definitions themselves are wrapped by a [DataTypeDefinitions] obje
 [WikibaseClient.datatypes.php]: @ref WikibaseClient.datatypes.php
 [WikibaseClient.php]: @ref client/WikibaseClient.php
 [Wikibase.php]: @ref repo/Wikibase.php
+[WikibaseRepoDataTypes]: @ref WikibaseRepoDataTypes
+[WikibaseClientDataTypes]: @ref WikibaseClientDataTypes

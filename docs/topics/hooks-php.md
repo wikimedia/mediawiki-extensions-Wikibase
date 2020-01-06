@@ -1,102 +1,189 @@
 # Hooks PHP {#topic_hooks-php}
 
-This file describes hooks defined by the Wikibase extensions. See docs/hooks.txt in the MediaWiki installation root for general information on hooks.
+This file describes hooks defined by the Wikibase extensions.
 
-## Repo
+See https://www.mediawiki.org/wiki/Manual:Hooks for general information on hooks.
 
-* 'WikibaseRepoDataTypes'
-  * Called when constructing the top-level WikibaseRepo factory; May be used to define additional data types. See also the WikibaseClientDataTypes hook.
-    * &$dataTypeDefinitions
-      * the array of data type definitions, as defined by WikibaseRepo.datatypes.php.
-  * Hook handlers may add additional definitions. See the datatypes.wiki file for details.
+[TOC]
 
-* 'WikibaseRepoEntityTypes'
-  * Called when constructing the top-level WikibaseRepo factory; May be used to define additional entity types. See also the WikibaseClientEntityTypes hook.
-    * &$entityTypeDefinitions
-      * the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
-  * Hook handlers may add additional definitions. See the entitytypes.wiki file for details.
+Repo
+------------------------------------------------------------
 
-* 'WikibaseTextForSearchIndex'
-  * Called by EntityContent::getTextForSearchIndex() to allow extra text to be passed to the search engine for indexing. If the hook function returns false, no text at all will be passed to the search index.
-    * $entity
-      * EntityContent to be indexed
-    * &$text
-      * The text to pass to the indexed (to be modified).
+#### WikibaseRepoDataTypes {#WikibaseRepoDataTypes}
+Called when constructing the top-level [WikibaseRepo] factory
+May be used to define additional data types.
+See also the [WikibaseClientDataTypes](#WikibaseClientDataTypes) hook.
 
-* 'WikibaseContentModelMapping'
-  * Called by WikibaseRepo::getContentModelMappings() to allow additional mappings between Entity types and content model identifiers to be defined.
-    * &$map
-      * An associative array mapping Entity types to content model ids.
+Hook handlers may add additional definitions.
+See [datatypes documentation] for details.
 
-* 'WikibaseRepoEntityNamespaces'
-  * Called by WikibaseRepo::getEntityNamespaceLookup() to allow additional mappings between Entity types and namespace IDs to be defined.
-    * &$map
-      * An associative array mapping Entity types to namespace ids.
+Parameters:
+* &$dataTypeDefinitions
+  * the array of data type definitions, as defined by WikibaseRepo.datatypes.php.
 
-* 'WikibaseClientEntityNamespaces'
-  * Called by WikibaseClient::getEntityNamespaceLookup() to allow additional mappings between Entity types and namespace IDs to be defined.
-    * &$map
-      * An associative array mapping Entity types to namespace ids.
+#### WikibaseRepoEntityTypes {#WikibaseRepoEntityTypes}
+Called when constructing the top-level [WikibaseRepo] factory
+May be used to define additional entity types.
+See also the [WikibaseClientEntityTypes](#WikibaseClientEntityTypes) hook.
 
-* 'WikibaseRebuildData' (''DEPRECATED'')
-  * Used by rebuildAllData.
-    * $report
-      * A closure that can be called with a string to report that messages.
+Hook handlers may add additional definitions.
+See [entitytypes documentation] for details.
 
-* 'WikibaseDeleteData' (''DEPRECATED'')
-  * Used by deleteAllData.
-    * $report
-      * A closure that can be called with a string to report that messages.
+Parameters:
+* &$entityTypeDefinitions
+  * the array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
 
-* 'WikibaseChangeNotification'
-  * Triggered from ChangeNotifier via a HookChangeTransmitter to notify any listeners of changes to entities.
-    * $change
-      * The Change object representing the change.
-  * For performance reasons, does not include statement, description and alias diffs (see T113468, T163465).
+#### WikibaseTextForSearchIndex {#WikibaseTextForSearchIndex}
+Called by [EntityContent::getTextForSearchIndex()] to allow extra text to be passed to the search engine for indexing.
+If the hook function returns false, no text at all will be passed to the search index.
 
-* 'WikibaseContentLanguages'
-  * Called by WikibaseRepo::getContentLanguages(), which in turn is called by some other getters, to define the content languages per context.
-    * &$map
-      * An associative array mapping contexts ('term', 'monolingualtext', extension-specific…) to ContentLanguage objects.
+Parameters:
+* $entity
+  * EntityContent to be indexed
+* &$text
+  * The text to pass to the indexed (to be modified).
 
-* 'GetEntityContentModelForTitle'
-  * Called by EntityContentFactory to see what is the entity content type of the Title. Extensions can override it so entity content type does not equal page content type.
-    * $title
-      * Title object for the page
-    * &$contentType
-      * Content type for the page. Extensions can override this.
+#### WikibaseContentModelMapping {#WikibaseContentModelMapping}
+Called by [WikibaseRepo::getContentModelMappings()] to allow additional mappings between Entity types and content model identifiers to be defined.
 
-## Client
+Parameters:
+* &$map
+  * An associative array mapping Entity types to content model ids.
 
-* 'WikibaseClientDataTypes'
-  * Called when constructing the top-level WikibaseClient factory; May be used to define additional data types. See also the WikibaseRepoDataTypes hook.
-    * &$dataTypeDefinitions
-      * The array of data type definitions, as defined by WikibaseClient.datatypes.php.
-  * Hook handlers may add additional definitions. See the datatypes.wiki file for details.
+#### WikibaseRepoEntityNamespaces {#WikibaseRepoEntityNamespaces}
+Called by [WikibaseRepo::getEntityNamespaceLookup()] to allow additional mappings between Entity types and namespace IDs to be defined.
 
-* 'WikibaseClientEntityTypes'
-  * Called when constructing the top-level WikibaseClient factory; May be used to define additional entity types. See also the WikibaseRepoEntityTypes hook.
-    * &$entityTypeDefinitions
-      * The array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
-  * Hook handlers may add additional definitions. See the entitytypes.wiki file for details.
+Parameters:
+* &$map
+  * An associative array mapping Entity types to namespace ids.
 
-* 'WikibaseHandleChanges'
-  * Called by ChangeHandler::handleChange() to allow pre-processing of changes.
-    * $changes
-      * A list of Change objects
-    * $rootJobParams
-      * Any relevant root job parameters to be inherited by child jobs.
+#### WikibaseRebuildData (DEPRECATED)
+Parameters:
+* $report
+  * A closure that can be called with a string to report that messages.
 
-* 'WikibaseHandleChange'
-  * Called by ChangeHandler::handleChange() to allow alternative processing of changes.
-    * $change
-      * A Change object
-    * $rootJobParams
-      * Any relevant root job parameters to be inherited by child jobs.
+#### WikibaseDeleteData (DEPRECATED)
+Parameters:
+* $report
+  * A closure that can be called with a string to report that messages.
 
-* 'WikibaseClientOtherProjectsSidebar'
-  * Called by OtherProjectsSidebarGenerator to allow altering the other projects sidebar. Only called in case the page we're on is linked with an item.
-    * $itemId
-      * Id of the item the page is linked with.
-    * &$newSidedbar
-      * Array containing the sidebar definition. The array consists of arrays indexed by site groups containing arrays indexed by site id. These arrays represent the link to the given site. They contain the keys “msg”, “href” and “class” which contain the respective attributes for the link that is going to be created.
+#### WikibaseChangeNotification {#WikibaseChangeNotification}
+Triggered from ChangeNotifier via a [HookChangeTransmitter] to notify any listeners of changes to entities.
+
+For performance reasons, does not include statement, description and alias diffs (see [T113468](https://phabricator.wikimedia.org/T113468), [T163465](https://phabricator.wikimedia.org/T163465)).
+
+Parameters:
+* $change
+  * The Change object representing the change.
+
+#### WikibaseContentLanguages {#WikibaseContentLanguages}
+Called by[ WikibaseRepo::getContentLanguages()], which in turn is called by some other getters, to define the content languages per context.
+
+Parameters:
+* &$map
+  * An associative array mapping contexts ('term', 'monolingualtext', extension-specific…) to ContentLanguage objects.
+
+#### GetEntityContentModelForTitle {#GetEntityContentModelForTitle}
+Called by [EntityContentFactory] to see what is the entity content type of the Title.
+Extensions can override it so entity content type does not equal page content type.
+
+Parameters:
+* $title
+  * Title object for the page
+* &$contentType
+  * Content type for the page. Extensions can override this.
+
+#### WikibaseRepoOnParserOutputUpdaterConstruction {#WikibaseRepoOnParserOutputUpdaterConstruction}
+Allows extensions to register extra EntityParserOutputUpdater implementations.
+
+Parameters:
+* $statementUpdater
+* &$entityUpdaters
+
+#### GetEntityByLinkedTitleLookup {#GetEntityByLinkedTitleLookup}
+Allows extensions to add custom EntityByLinkedTitleLookup services.
+
+Parameters:
+* &$lookup
+
+#### WikibaseSearchEntitiesEngines {#WikibaseSearchEntitiesEngines}
+
+Parameters:
+* $repo
+* &$engines
+
+Client
+------------------------------------------------------------
+
+#### WikibaseClientDataTypes {#WikibaseClientDataTypes}
+Called when constructing the top-level [WikibaseClient] factory
+May be used to define additional data types
+See also the [WikibaseRepoDataTypes](#WikibaseRepoDataTypes) hook.
+
+Hook handlers may add additional definitions.
+See the [datatypes documentation] for details.
+
+Parameters:
+* &$dataTypeDefinitions
+  * The array of data type definitions, as defined by WikibaseClient.datatypes.php.
+
+#### WikibaseClientEntityTypes {#WikibaseClientEntityTypes}
+Called when constructing the top-level [WikibaseClient] factory
+May be used to define additional entity types.
+See also the [WikibaseRepoEntityTypes](#WikibaseRepoEntityTypes) hook.
+
+Hook handlers may add additional definitions.
+See [entitytypes documentation] for details.
+
+Parameters:
+* **&$entityTypeDefinitions**
+  * The array of entity type definitions, as defined by WikibaseLib.entitytypes.php.
+
+#### WikibaseHandleChanges {#WikibaseHandleChanges}
+Called by [ChangeHandler::handleChange()] to allow pre-processing of changes.
+
+Parameters:
+* **$changes**
+  * A list of Change objects
+* **$rootJobParams**
+  * Any relevant root job parameters to be inherited by child jobs.
+
+#### WikibaseHandleChange {#WikibaseHandleChange}
+Called by [ChangeHandler::handleChange()] to allow alternative processing of changes.
+
+Parameters:
+* $change
+  * A Change object
+* $rootJobParams
+  * Any relevant root job parameters to be inherited by child jobs.
+
+#### WikibaseClientOtherProjectsSidebar {#WikibaseClientOtherProjectsSidebar}
+Called by [OtherProjectsSidebarGenerator] to allow altering the other projects sidebar.
+Only called in case the page we're on is linked with an item.
+
+Parameters:
+* $itemId
+  * Id of the item the page is linked with.
+* &$newSidedbar
+  * Array containing the sidebar definition. The array consists of arrays indexed by site groups containing arrays indexed by site id. These arrays represent the link to the given site. They contain the keys “msg”, “href” and “class” which contain the respective attributes for the link that is going to be created.
+
+#### WikibaseClientEntityNamespaces {#WikibaseClientEntityNamespaces}
+Called by [WikibaseClient::getEntityNamespaceLookup()] to allow additional mappings between Entity types and namespace IDs to be defined.
+
+Parameters:
+* &$map
+  * An associative array mapping Entity types to namespace ids.
+
+[WikibaseClient]: @ref Wikibase::Client::WikibaseClient
+[WikibaseClient::getEntityNamespaceLookup()]: @ref Wikibase::Client::WikibaseClient::getEntityNamespaceLookup()
+[WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
+[EntityContent::getTextForSearchIndex()]: @ref Wikibase::Repo::Content::EntityContent::getTextForSearchIndex()
+[WikibaseRepo::getContentLanguages()]: @ref Wikibase::Repo::WikibaseRepo::getContentLanguages()
+[WikibaseRepo::getEntityNamespaceLookup()]: @ref Wikibase::Repo::WikibaseRepo::getEntityNamespaceLookup()
+[WikibaseRepo::getContentModelMappings()]: @ref Wikibase::Repo::WikibaseRepo::getContentModelMappings()
+[EntityContentFactory]: @ref Wikibase::Repo::Content::EntityContentFactory
+[HookChangeTransmitter]: @ref Wikibase::Repo::Notifications::HookChangeTransmitter
+[OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
+[ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
+[entitytypes documentation]: @ref topic_entitytypes
+[datatypes documentation]: @ref topic_datatypes

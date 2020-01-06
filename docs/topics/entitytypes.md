@@ -18,7 +18,7 @@ To support an entity type, additionally to defining the entity itself, the follo
 * Each entity needs a view to provide an HTML representation to the user. Each view has to implement the EntityDocumentView interface from the WikibaseView component.
 * MediaWiki bindings are needed by defining a content class extending EntityContent and a handler class extending EntityHandler. Furthermore, the handler has to be registered in the entity types repository. It is used to create instances of the content class.
 
-Entity types are defined in [WikibaseLib.entitytypes.php] and [WikibaseRepo.entitytypes.php]. They can be amended by extensions using WikibaseRepoEntityTypes hook.
+Entity types are defined in [WikibaseLib.entitytypes.php] and [WikibaseRepo.entitytypes.php]. They can be amended by extensions using [WikibaseRepoEntityTypes] hook.
 
 The entity types repository is an associative array mapping entity type identifiers to a set of callbacks that act as factory methods. The structure of this set is defined as follows, where each string key is associated with a function having the dedicated signature:
 
@@ -67,7 +67,7 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-lookup-callback (client only)
 * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 
-Extensions that wish to register an entity type should use the WikibaseRepoEntityTypes and/or WikibaseClientEntityTypes hooks to provide additional entity type definitions. (See @ref topic_hooks-php)
+Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref topic_hooks-php)
 
 ## Programmatic Access
 
@@ -86,3 +86,5 @@ The entity type definitions themselves are wrapped by the [EntityTypeDefinitions
 [EntityDocumentView]: @ref Wikibase::View::EntityDocumentView
 [WikibaseLib.entitytypes.php]: @ref WikibaseLib.entitytypes.php
 [WikibaseRepo.entitytypes.php]: @ref WikibaseRepo.entitytypes.php
+[WikibaseRepoEntityTypes]: @ref WikibaseRepoEntityTypes
+[WikibaseClientEntityTypes]: @ref WikibaseClientEntityTypes
