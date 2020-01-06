@@ -4,47 +4,26 @@ namespace Wikibase\DataAccess;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\PrefetchingTermLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\StringNormalizer;
 
 /**
  * Interface of the top-level container/factory of data access services.
  *
+ * This is made up of DataAccessServices (which are repo or entity source specific),
+ * and GenericServices (that doesn't currently have it's own interface)
+ *
  * @license GPL-2.0-or-later
  */
-interface WikibaseServices {
-
-	/**
-	 * @return EntityInfoBuilder
-	 */
-	public function getEntityInfoBuilder();
+interface WikibaseServices extends DataAccessServices {
 
 	/**
 	 * @return EntityNamespaceLookup
 	 */
 	public function getEntityNamespaceLookup();
-
-	/**
-	 * @return EntityPrefetcher
-	 */
-	public function getEntityPrefetcher();
-
-	/**
-	 * Note: Instance returned is not guaranteed to be a caching decorator.
-	 * Callers should take care of caching themselves.
-	 *
-	 * @return EntityRevisionLookup
-	 */
-	public function getEntityRevisionLookup();
 
 	/**
 	 * Returns the entity serializer instance that generates the full (expanded) serialization.
@@ -82,14 +61,6 @@ interface WikibaseServices {
 	public function getLanguageFallbackChainFactory();
 
 	/**
-	 * Note: Instance returned is not guaranteed to be a caching decorator.
-	 * Callers should take care of caching themselves.
-	 *
-	 * @return PropertyInfoLookup
-	 */
-	public function getPropertyInfoLookup();
-
-	/**
 	 * @return SerializerFactory A factory with knowledge about items, properties, and the elements
 	 *  they are made of, but no other entity types. Returns serializers that generate the full
 	 *  (expanded) serialization.
@@ -107,16 +78,6 @@ interface WikibaseServices {
 	 * @return StringNormalizer
 	 */
 	public function getStringNormalizer();
-
-	/**
-	 * @return TermBuffer
-	 */
-	public function getTermBuffer();
-
-	/**
-	 * @return TermSearchInteractorFactory
-	 */
-	public function getTermSearchInteractorFactory();
 
 	/**
 	 * @return PrefetchingTermLookup

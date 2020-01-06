@@ -13,7 +13,8 @@ This directory collects some documentation of specific topics:
 * @subpage topic_hooks-php
 * @subpage topic_json
 * @subpage topic_lua
-* @subpage topic_options
+* @subpage topic_globals - PHP globals
+* @subpage topic_options - Wikibase settings & configuration
 * @subpage topic_public-apis
 * @subpage topic_rdf-binding
 * @subpage topic_services

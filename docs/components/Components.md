@@ -8,6 +8,7 @@ The top level Mediawiki extensions are:
   * @subpage components_view (in the [view directory])
 * @subpage components_client (in the [client directory])
 * @subpage components_lib (in the [lib directory])
+* @subpage components_data-access (in the [data-access directory])
 
 The primary development of these extensions takes place in [Wikibase.git] on [Wikimedia Gerrit].
 
@@ -18,5 +19,6 @@ See @subpage libraries
 [client directory]: @ref client
 [lib directory]: @ref lib
 [view directory]: @ref view
+[data-access directory]: @ref data-access
 [Wikimedia Gerrit]: https://gerrit.wikimedia.org/r/
 [Wikibase.git]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase

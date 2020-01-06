@@ -138,7 +138,7 @@ Configuration of each source is an associative array containing the following ke
  - `rdfNodeNamespacePrefix`: A prefix used in RDF turtle node namespaces, e.g. 'wd' would result in namespaces like 'wd' for the entity namespace, and 'wdt' for the direct claim namespace, whereas 'sdc' prefix would result in the namespaces 'sdc' and 'sdct' accordingly.
  - `rdfPredicateNamespacePrefix`: A prefix used in RDF turtle predicate namespaces, e.g. '' would result in namespaces like 'ps' for the simple value claim namespace, whereas 'sdc' prefix would result in the namespace 'sdcps'.
 
-#### useEntitySourceBasedFederation
+#### useEntitySourceBasedFederation {#common_useEntitySourceBasedFederation}
 Temporary flag defining whether the repository-prefix-based or entity-source-based federation mechanism (i.e. use of entities from multiple Wikibase instances) should be used.
 
 Use `true` to use entity-source-based federation.

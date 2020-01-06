@@ -27,7 +27,7 @@ interface DataAccessServices {
 	public function getEntityPrefetcher();
 
 	/**
-	 * Note: Instance returned is not guaranteed to be a caching decorator.
+	 * @note Instance returned is not guaranteed to be a caching decorator.
 	 * Callers should take care of caching themselves.
 	 *
 	 * @return EntityRevisionLookup
@@ -35,7 +35,7 @@ interface DataAccessServices {
 	public function getEntityRevisionLookup();
 
 	/**
-	 * Note: Instance returned is not guaranteed to be a caching decorator.
+	 * @note Instance returned is not guaranteed to be a caching decorator.
 	 * Callers should take care of caching themselves.
 	 *
 	 * @return PropertyInfoLookup
