@@ -327,10 +327,11 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			}
 		}
 		$termInLangRecords = $this->filterUniqueRecords( $termInLangRecords );
+		$fname = __METHOD__;
 
 		$acquiredIds = $termInLangIdsAcquirer->acquireIds(
 			$termInLangRecords,
-			function ( $recordsToInsert ) use ( $idsToRestore ) {
+			function ( $recordsToInsert ) use ( $idsToRestore, $fname ) {
 				if ( count( $idsToRestore ) <= 0 ) {
 					return $recordsToInsert;
 				}
@@ -347,7 +348,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 					$this->logger->warning(
 						'{method}: Restoring record term in lang ids failed: {exception}',
 						[
-							'method' => __METHOD__,
+							'method' => $fname,
 							'exception' => $exception,
 							'idsToRestore' => $idsToRestore,
 							'recordsToInsert' => $recordsToInsert,

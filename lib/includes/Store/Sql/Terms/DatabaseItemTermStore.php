@@ -110,11 +110,12 @@ class DatabaseItemTermStore implements ItemTermStore {
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
 		$termIdsToClean = [];
+		$fname = __METHOD__;
 
 		// Acquire all of the Term Ids needed for the wbt_item_terms table
 		$this->acquirer->acquireTermIds(
 			$termsArray,
-			function ( array $newTermIds ) use ( $itemId, $oldTermIds, &$termIdsToClean ) {
+			function ( array $newTermIds ) use ( $itemId, $oldTermIds, &$termIdsToClean, $fname ) {
 				$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
 				$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
 				$rowsToInsert = [];
@@ -128,7 +129,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 				$this->getDbw()->insert(
 					'wbt_item_terms',
 					$rowsToInsert,
-					__METHOD__
+					$fname
 				);
 			}
 		);

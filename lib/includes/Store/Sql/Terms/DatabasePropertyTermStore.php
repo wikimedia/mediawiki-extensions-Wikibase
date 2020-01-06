@@ -110,11 +110,12 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
 		$termIdsToClean = [];
+		$fname = __METHOD__;
 
 		// Acquire all of the Term Ids needed for the wbt_property_terms table
 		$this->acquirer->acquireTermIds(
 			$termsArray,
-			function ( array $newTermIds ) use ( $propertyId, $oldTermIds, &$termIdsToClean ) {
+			function ( array $newTermIds ) use ( $propertyId, $oldTermIds, &$termIdsToClean, $fname ) {
 				$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
 				$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
 				$rowsToInsert = [];
@@ -128,7 +129,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 				$this->getDbw()->insert(
 					'wbt_property_terms',
 					$rowsToInsert,
-					__METHOD__
+					$fname
 				);
 			}
 		);

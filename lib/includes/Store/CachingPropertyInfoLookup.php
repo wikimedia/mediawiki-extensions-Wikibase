@@ -150,12 +150,13 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	public function getAllPropertyInfo() {
 		if ( !$this->hasClassBackedCache() ) {
 			$cacheHit = true;
+			$fname = __METHOD__;
 			$this->propertyInfo = $this->cache->getWithSetCallback(
 				$this->getFullTableCacheKey(),
 				$this->cacheDuration,
-				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$cacheHit ) {
+				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$cacheHit, $fname ) {
 					$this->logger->debug(
-						'{method}: caching fresh property info table', [ 'method' => __METHOD__ ]
+						'{method}: caching fresh property info table', [ 'method' => $fname ]
 					);
 					$cacheHit = false;
 					return $this->lookup->getAllPropertyInfo();
