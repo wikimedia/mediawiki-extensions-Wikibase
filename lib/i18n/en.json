@@ -103,6 +103,7 @@
 	"wikibase-time-precision-millennium": "$1. millennium",
 	"wikibase-time-precision-century": "$1. century",
 	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-time-precision-BCE": "$1 BCE",
 	"wikibase-time-precision-BCE-Gannum": "$1 billion years BCE",
 	"wikibase-time-precision-BCE-Mannum": "$1 million years BCE",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 year|$1 years}} BCE",

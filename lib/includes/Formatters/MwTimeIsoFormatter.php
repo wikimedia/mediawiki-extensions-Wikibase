@@ -278,8 +278,16 @@ class MwTimeIsoFormatter extends ValueFormatterBase {
 		// can't because not all relevant time parsers unlocalize numbers.
 
 		if ( empty( $msg ) ) {
-			// TODO: This needs a message.
-			return $year . ( $isBCE ? ' BCE' : '' );
+			if ( $isBCE ) {
+				return wfMessage(
+					'wikibase-time-precision-BCE',
+					$year
+				)
+				->inLanguage( $this->language )
+				->text();
+			} else {
+				return $year;
+			}
 		}
 
 		return wfMessage(
