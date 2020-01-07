@@ -1,32 +1,51 @@
 # Federation {#topic_federation}
 
-This file describes the concept of federated Wikibase repositories.
+Federation here means accessing the entities of one Wikibase Repository from another Wikibase Repository.
 
 * “Foreign” is used to mean that something refers to and comes from another Wikibase repository.
 * Foreign EntityIds and mappings are documented in the file docs/foreign-entity-ids.wiki in the wikibase/data-model component.
 
-As of March 2017, in order to enable access to entities from federated repositories both Repo and Client components must be enabled. Also as of March 2017, accessing data of foreign entities relies on the shared database access (databases of federated repositories must be in the same database cluster).
+As of March 2017:
+ - In order to enable access to entities from federated repositories both Repo and Client components must be enabled.
+ - Accessing data of foreign entities relies on the shared database access (databases of federated repositories must be in the same database cluster).
 
-* Local repository is configured as documented in @ref topic_options.
-* Configuration of foreign repositories is done using the ''foreignRepositories'' setting in $wgWBRepoSettings or ''repositories'' in $wgWBClientSettings, as documented in the file docs/options.wiki.
-* In order to correctly link entities from foreign repositories, the local wiki must have MediaWiki interwiki prefixes configured for each foreign repository. As of March 2017, the interwiki prefix must be the same as the name used for the foreign repository. If there is no interwiki prefix configured for the wiki containing the foreign repository, it can be added e.g. by adding a row to the <code>interwiki</code> database table, or by using [[Special:Interwiki]] if the Interwiki extension is enabled on the local wiki.
+In 2019 [EntitySource] and [EntitySourceDefinitions] were introduced for defining the source of an entity type.
+Currently only a single entity source is allowed per entity type on a given repo.
 
-Note that as of March 2017 it is only possible for Wikibase to use entities from a single repository, either local or foreign. For instance, it is not possible to use both local and foreign items in statements.
+2020 will add API (instead of DB) based federation as described above (one entity source per entity type).
 
-## Example
+## Configuration
 
-Below is an excerpt of some configuration of a Wikibase instance providing items, and using properties provided by a foreign repository identified as “prop”. It is assumed that the repository “prop” uses a database identified as “propwiki”, and the “prop:” interwiki prefix has been configured already. There is no repository prefix mapping configured.
+* A Wikibase Repository is configured as documented in @ref topic_options.
+* In order for federation to work:
+  * [useEntitySourceBasedFederation] must be true.
+  * Foreign sources must be configured using the [entitySources] setting.
 
-Note that as only foreign properties from the repository “prop” are to be used, this example configuration only enables local items explicitly.
+### Example
+
+The following basic example roughly shows Wikimedia Commons using entities from Wikidata.org:
 
 ```php
-$wgWBRepoSettings['foreignRepositories'] = [
-	'prop' => [
-		'repoDatabase' => 'propwiki',
-		'entityNamespaces' => [ 'property' => WB_NS_PROPERTY ],
-		'prefixMapping' => [],
-		'baseUri' => 'http://prop.wiki/entity/',
+$entitySources = [
+	'local' => [
+		'repoDatabase' => 'commonswiki',
+		'entityNamespaces' => [ 'mediainfo' => '6/mediainfo' ],
+		'baseUri' => 'https://commons.wikimedia.org/wiki/Special:EntityData/',
+	],
+	'd' => [
+		'repoDatabase' => 'wikidatawiki',
+		'entityNamespaces' => [ 'item' => 0, 'property' => 120 ],
+		'baseUri' => 'http://www.wikidata.org/entity/',
 	],
 ];
-$wgWBRepoSettings['entityNamespaces'] = [ 'item' => WB_NS_ITEM ];
+$wgWBRepoSettings['entitySources'] = $entitySources;
+$wgWBClientSettings['entitySources'] = $entitySources;
 ```
+
+[options documentation]: @ref md_docs_topics_options
+[entitySources]: @ref #common_entitySources
+[useEntitySourceBasedFederation]: @ref #common_useEntitySourceBasedFederation
+[wgWBRepoSettings]: @ref #wgWBRepoSettings
+[wgWBClientSettings]: @ref #wgWBClientSettings
+[EntitySource]: @ref Wikibase::DataAccess::EntitySource
+[EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions

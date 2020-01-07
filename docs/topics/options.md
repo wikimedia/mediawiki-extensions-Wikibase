@@ -50,7 +50,7 @@ If this is `true`, the pruneChanges.php script should run periodically to remove
 
 DEFAULT: ```true```
 
-#### changesDatabase
+#### changesDatabase {#changesDatabase}
 The database that changes are recorded to by a repo for processing by clients.
 
  - This must be set to a symbolic database identifier that MediaWiki's LBFactory class understands; `false` means that the wiki's own database shall be used.
@@ -129,6 +129,12 @@ Useful if you want to experiment with [useTermsTableSearchFields] and don’t wa
 #### entitySources {#common_entitySources}
 An associative array mapping entity source names to settings relevant to the particular source.
 
+DEFAULT: Populated with a local default from existing settings:
+ - [entityNamespaces](#entityNamespaces)
+ - [changesDatabase](#changesDatabase)
+ - [conceptBaseUri](#conceptBaseUri)
+And with foreign repos using [foreignRepositories]{#foreignRepositories}
+
 Configuration of each source is an associative array containing the following keys:
 
  - `entityNamespaces`: A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces (IDs or canonical names) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax ```<namespace>/<slot>``` can be used to define which slot to use.
@@ -191,7 +197,7 @@ DEFAULT: ````null```` (There is no SPARQL endpoint.)
 
 EXAMPLE: ```https://query.wikidata.org/sparql```
 
-#### conceptBaseUri
+#### conceptBaseUri {#conceptBaseUri}
 Base URI for building concept URIs (used in Rdf output).
 
 This has to include the protocol and domain, only an entity identifier will be appended.
@@ -492,7 +498,7 @@ Schemes (protocols) added here will only have any effect if validation is suppor
 
 DEFAULT: is ```['bzr', 'cvs', 'ftp', 'git', 'http', 'https', 'irc', 'mailto', 'ssh', 'svn']```
 
-#### entityNamespaces
+#### entityNamespaces {#entityNamespaces}
 Defines which kind of entity is managed in which namespace.
 
 It is given as an associative array mapping entity types such as `'item'` to namespaces (IDs or canonical names).
@@ -501,7 +507,7 @@ If entities are stored in alternative slots, the syntax <namespace>/<slot> can b
 
 EXAMPLE: ```['item' => 0, 'property' => 120, 'slottedEntity' => '123/slotname']```
 
-#### foreignRepositories
+#### foreignRepositories {#foreignRepositories}
 An associative array mapping foreign repository names to settings relevant to the particular repository.
 Each repository's settings are an associative array containing the following keys:
 
