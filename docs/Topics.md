@@ -12,7 +12,8 @@ This directory collects some documentation of specific topics:
 * @subpage topic_hooks-js
 * @subpage topic_hooks-php
 * @subpage topic_json
-* @subpage topic_lua
+* @subpage topic_inclusion-syntax - Using data from a Repo on a Client (simple / property parser function)
+* @subpage topic_lua - Using data from a Repo on a Client (advanced)
 * @subpage topic_globals - PHP globals
 * @subpage topic_options - Wikibase settings & configuration
 * @subpage topic_public-apis
