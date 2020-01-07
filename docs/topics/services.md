@@ -69,7 +69,7 @@ Wiring for EntitySource based service containers is created from the [EntitySour
  - [WikibaseRepo::getDefaultEntityTypes()]
    - WikibaseLib.entitytypes.php
    - WikibaseRepo.entitytypes.php
- - The WikibaseRepoEntityTypes hook
+ - The [WikibaseRepoEntityTypes] hook
 
 [federation]: @ref md_docs_topics_federation
 [EntitySourceDefinitions]: @ref Wikibase::DataAccess::EntitySourceDefinitions
@@ -90,3 +90,4 @@ Wiring for EntitySource based service containers is created from the [EntitySour
 [WikibaseRepo::getDefaultEntityTypes()]: @ref Wikibase::Repo::WikibaseRepo::getDefaultEntityTypes()
 [WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [WikibaseClient::getWikibaseServices()]: @ref Wikibase::Client::WikibaseClient::getWikibaseServices()
+[WikibaseRepoEntityTypes]: @ref WikibaseRepoEntityTypes
