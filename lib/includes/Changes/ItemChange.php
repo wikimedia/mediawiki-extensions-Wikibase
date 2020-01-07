@@ -3,7 +3,7 @@
 namespace Wikibase;
 
 use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
+use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOpRemove;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
