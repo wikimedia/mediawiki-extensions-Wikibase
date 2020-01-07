@@ -1,11 +1,13 @@
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import Application from '@/store/Application';
 import { mutations } from '@/store/mutations';
 import {
 	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
+	EDITDECISION_SET,
 	EDITFLOW_SET,
 	ORIGINAL_STATEMENT_SET,
 	PROPERTY_TARGET_SET,
@@ -70,5 +72,12 @@ describe( 'root/mutations', () => {
 		const newErrors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
 		mutations[ APPLICATION_ERRORS_ADD ]( store, newErrors );
 		expect( store.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
+	} );
+
+	it( 'sets the edit decision of the store', () => {
+		const store: Application = newApplicationState();
+		const editDecision = EditDecision.REPLACE;
+		mutations[ EDITDECISION_SET ]( store, editDecision );
+		expect( store.editDecision ).toBe( editDecision );
 	} );
 } );

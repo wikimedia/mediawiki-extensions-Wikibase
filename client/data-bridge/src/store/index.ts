@@ -22,6 +22,7 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 		applicationStatus: ValidApplicationStatus.INITIALIZING,
 		applicationErrors: [],
 		wikibaseRepoConfiguration: null,
+		editDecision: null,
 	};
 
 	const storeBundle: StoreOptions<Application> = {

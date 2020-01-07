@@ -10816,6 +10816,7 @@ var BRIDGE_INIT = 'initBridge';
 var BRIDGE_SAVE = 'saveBridge';
 var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
 var BRIDGE_ERROR_ADD = 'addError';
+var BRIDGE_SET_EDIT_DECISION = 'setEditDecision';
 // EXTERNAL MODULE: external {"commonjs":"vue2","commonjs2":"vue2","amd":"vue2","root":"vue2"}
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
@@ -12582,6 +12583,7 @@ var TARGET_LABEL_SET = 'setTargetLabel';
 var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
 var ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
 var APPLICATION_ERRORS_ADD = 'addApplicationErrors';
+var EDITDECISION_SET = 'setEditDecision';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -12767,6 +12769,8 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDa
     });
   }), _defineProperty(_ref3, BRIDGE_ERROR_ADD, function (context, errors) {
     commitErrors(context, errors);
+  }), _defineProperty(_ref3, BRIDGE_SET_EDIT_DECISION, function (context, editDecision) {
+    return context.commit(EDITDECISION_SET, editDecision);
   }), _ref3;
 }
 // EXTERNAL MODULE: ./node_modules/deep-equal/index.js
@@ -12891,6 +12895,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   var _state$applicationErr;
 
   (_state$applicationErr = state.applicationErrors).push.apply(_state$applicationErr, _toConsumableArray(errors));
+}), _defineProperty(_mutations, EDITDECISION_SET, function (state, editDecision) {
+  state.editDecision = editDecision;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -13219,7 +13225,8 @@ function createStore(services) {
     editFlow: '',
     applicationStatus: definitions_ApplicationStatus.INITIALIZING,
     applicationErrors: [],
-    wikibaseRepoConfiguration: null
+    wikibaseRepoConfiguration: null,
+    editDecision: null
   };
   var storeBundle = {
     state: state,

@@ -11,10 +11,12 @@ import {
 	BRIDGE_ERROR_ADD,
 	BRIDGE_INIT,
 	BRIDGE_SAVE,
+	BRIDGE_SET_EDIT_DECISION,
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
+import EditDecision from '@/definitions/EditDecision';
 import {
 	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
@@ -22,6 +24,7 @@ import {
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
 	ORIGINAL_STATEMENT_SET,
+	EDITDECISION_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -191,6 +194,13 @@ export default function actions(
 			errors: ApplicationError[],
 		): void {
 			commitErrors( context, errors );
+		},
+
+		[ BRIDGE_SET_EDIT_DECISION ](
+			context: ActionContext<Application, Application>,
+			editDecision: EditDecision,
+		): void {
+			return context.commit( EDITDECISION_SET, editDecision );
 		},
 	};
 }
