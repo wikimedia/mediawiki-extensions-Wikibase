@@ -19,7 +19,8 @@
 			"Antime",
 			"Claw eg",
 			"Mido",
-			"Azouz.anis"
+			"Azouz.anis",
+			"Eyas"
 		]
 	},
 	"wikibase-lib-desc": "يمسك بالوظيفة المشتركة لامتدادات Wikibase و Wikibase Client",
@@ -120,6 +121,7 @@
 	"wikibase-time-precision-millennium": "الألفية $1",
 	"wikibase-time-precision-century": "القرن $1",
 	"wikibase-time-precision-10annum": "عقد $1",
+	"wikibase-time-precision-BCE": "$1 قبل الميلاد",
 	"wikibase-time-precision-BCE-Gannum": "$1 مليار سنة قبل الميلاد",
 	"wikibase-time-precision-BCE-Mannum": "$1 مليون سنة قبل الميلاد",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 سنة|$1 سنوات}} قبل الميلاد",

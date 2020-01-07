@@ -117,6 +117,7 @@
 	"wikibase-time-precision-millennium": "$1 千年",
 	"wikibase-time-precision-century": "$1 世紀",
 	"wikibase-time-precision-10annum": "$1年代",
+	"wikibase-time-precision-BCE": "公元前 $1",
 	"wikibase-time-precision-BCE-Gannum": "公元前 $1 十億年",
 	"wikibase-time-precision-BCE-Mannum": "$1 百萬年 BCE",
 	"wikibase-time-precision-BCE-annum": "公元前 {{PLURAL:$1|$1 年|$1 年}}",
