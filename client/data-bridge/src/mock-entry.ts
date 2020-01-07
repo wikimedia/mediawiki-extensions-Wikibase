@@ -48,18 +48,17 @@ services.set( 'entityLabelRepository', {
 	},
 } );
 
+const messages = {
+	[ MessageKeys.BRIDGE_DIALOG_TITLE ]: 'bridge dev',
+	[ MessageKeys.SAVE_CHANGES ]: 'save changes',
+	[ MessageKeys.CANCEL ]: 'cancel',
+	[ MessageKeys.REFERENCES_HEADING ]: 'References',
+	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '.&#32;',
+} as { [ key in MessageKeys ]: string };
+
 services.set( 'messagesRepository', {
-	get( messageKey: string ): string {
-		switch ( messageKey ) {
-			case MessageKeys.BRIDGE_DIALOG_TITLE:
-				return 'bridge dev';
-			case MessageKeys.SAVE_CHANGES:
-				return 'save changes';
-			case MessageKeys.CANCEL:
-				return 'cancel';
-			default:
-				return `⧼${messageKey}⧽`;
-		}
+	get( messageKey: MessageKeys ): string {
+		return messages[ messageKey ] || `⧼${messageKey}⧽`;
 	},
 } );
 
