@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Exception;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
@@ -334,6 +335,11 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 				if ( count( $idsToRestore ) <= 0 ) {
 					return $recordsToInsert;
 				}
+
+				// @todo Remove temporary monitoring for T233414 soon
+				MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+					'wikibase.repo.term_store.tmp.ids_needing_to_reinsert'
+				);
 
 				if ( count( $idsToRestore ) !== count( $recordsToInsert ) ) {
 					$exception = new Exception(
