@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -131,11 +130,11 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 	private function getAllChanges() {
 		$changeId = 0;
 
-		$addEn = new MapDiff( [ 'enwiki' => new DiffOpAdd( 'Foo' ) ] );
-		$changeEn = new MapDiff( [ 'enwiki' => new DiffOpChange( 'Foo', 'Bar' ) ] );
+		$addEn = new Diff( [ 'enwiki' => new DiffOpAdd( 'Foo' ) ] );
+		$changeEn = new Diff( [ 'enwiki' => new DiffOpChange( 'Foo', 'Bar' ) ] );
 
-		$addDe = new MapDiff( [ 'dewiki' => new DiffOpAdd( 'Fuh' ) ] );
-		$removeDe = new MapDiff( [ 'dewiki' => new DiffOpRemove( 'Fuh' ) ] );
+		$addDe = new Diff( [ 'dewiki' => new DiffOpAdd( 'Fuh' ) ] );
+		$removeDe = new Diff( [ 'dewiki' => new DiffOpRemove( 'Fuh' ) ] );
 
 		return [
 			// index 0 is ignored, or used as the base change.
