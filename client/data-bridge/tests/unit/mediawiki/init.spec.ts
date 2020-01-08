@@ -24,7 +24,7 @@ jest.mock( '@/mediawiki/Dispatcher', () => {
 describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app` and adds click handler', () => {
 		const require = jest.fn(),
-			using = jest.fn( () => Promise.resolve( require ) );
+			using = jest.fn().mockResolvedValue( require );
 		mockMwEnv( using );
 
 		const link = {
@@ -56,7 +56,7 @@ describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app` and dispatches it on click', () => {
 		const app = {},
 			require = jest.fn().mockReturnValue( app ),
-			using = jest.fn( () => Promise.resolve( require ) ),
+			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
 			editFlow = EditFlow.OVERWRITE,
@@ -96,7 +96,7 @@ describe( 'init', () => {
 	it( 'doesn\'t handle clicks while notorious keys are pressed', async () => {
 		const app = {},
 			require = jest.fn().mockReturnValue( app ),
-			using = jest.fn( () => Promise.resolve( require ) ),
+			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
 			editFlow = EditFlow.OVERWRITE,

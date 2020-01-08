@@ -22,17 +22,17 @@ function mockedStore(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					STATEMENTS_IS_AMBIGUOUS,
-				) ]: jest.fn( () => false ),
+				) ]: jest.fn().mockReturnValue( false ),
 				[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakGetterTypes.snakType,
-				) ]: jest.fn( () => 'value' ),
+				) ]: jest.fn().mockReturnValue( 'value' ),
 				[ getter(
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakGetterTypes.dataValueType,
-				) ]: jest.fn( () => 'string' ),
+				) ]: jest.fn().mockReturnValue( 'string' ),
 			}, ...gettersOverride,
 		},
 	} );
@@ -88,7 +88,7 @@ describe( 'validateBridgeApplicability', () => {
 				NS_ENTITY,
 				NS_STATEMENTS,
 				STATEMENTS_IS_AMBIGUOUS,
-			) ]: jest.fn( () => true ),
+			) ]: jest.fn().mockReturnValue( true ),
 		} );
 
 		expect( validateBridgeApplicability(
@@ -103,7 +103,7 @@ describe( 'validateBridgeApplicability', () => {
 				NS_ENTITY,
 				NS_STATEMENTS,
 				mainSnakGetterTypes.snakType,
-			) ]: jest.fn( () => 'novalue' ),
+			) ]: jest.fn().mockReturnValue( 'novalue' ),
 		} );
 
 		expect( validateBridgeApplicability( context,
@@ -116,7 +116,7 @@ describe( 'validateBridgeApplicability', () => {
 				NS_ENTITY,
 				NS_STATEMENTS,
 				mainSnakGetterTypes.dataValueType,
-			) ]: jest.fn( () => 'noStringType' ),
+			) ]: jest.fn().mockReturnValue( 'noStringType' ),
 		} );
 
 		expect( validateBridgeApplicability(

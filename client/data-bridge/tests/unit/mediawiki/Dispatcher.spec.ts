@@ -7,7 +7,7 @@ import { mockMwConfig } from '../../util/mocks';
 
 const manager = jest.fn();
 const dialog = {
-	getManager: jest.fn( () => manager ),
+	getManager: jest.fn().mockReturnValue( manager ),
 };
 const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => {
 	return dialog;
@@ -67,10 +67,8 @@ describe( 'Dispatcher', () => {
 			const emitter = jest.fn();
 			const mockServices = {};
 			const app = {
-				launch: jest.fn( () => {
-					return emitter;
-				} ),
-				createServices: jest.fn( () => mockServices ),
+				launch: jest.fn().mockReturnValue( emitter ),
+				createServices: jest.fn().mockReturnValue( mockServices ),
 			};
 			const entityId = 'Q4711';
 			const propertyId = 'P815';

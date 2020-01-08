@@ -25,7 +25,7 @@ const manager = {
 	on: jest.fn(),
 };
 const dialog = {
-	getManager: jest.fn( () => manager ),
+	getManager: jest.fn().mockReturnValue( manager ),
 };
 
 const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => dialog );
@@ -50,8 +50,8 @@ function prepareTestEnv( options: {
 	const pageLanguage = options.pageLanguage || 'en';
 
 	const app = { launch, createServices };
-	const require = jest.fn( () => app );
-	const using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
+	const require = jest.fn().mockReturnValue( app );
+	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(
 		using,
@@ -70,7 +70,7 @@ function prepareTestEnv( options: {
 		},
 		uls: {
 			data: {
-				getDir: jest.fn( () => 'ltr' ),
+				getDir: jest.fn().mockReturnValue( 'ltr' ),
 			},
 		},
 	} as any;

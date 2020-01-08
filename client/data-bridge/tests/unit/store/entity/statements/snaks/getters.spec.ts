@@ -30,9 +30,7 @@ describe( 'snaks/Getters', () => {
 
 	describe( 'bounded', () => {
 		let returnSnak: Snak|null;
-		const traveler = jest.fn( () => {
-			return returnSnak;
-		} );
+		const traveler = jest.fn( () => returnSnak );
 
 		const getters: GetterTree<StatmentsState, Application> = bindableGetters( {
 			dataType: 'testDataType',

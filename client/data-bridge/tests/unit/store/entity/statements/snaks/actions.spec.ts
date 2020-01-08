@@ -19,9 +19,7 @@ describe( 'snak/actions', () => {
 
 	describe( 'bounded', () => {
 		let returnSnak: Snak|null;
-		const traveler = jest.fn( () => {
-			return returnSnak;
-		} );
+		const traveler = jest.fn( () => returnSnak );
 
 		const setDataValue = 'setTestDataValue';
 		const setSnakType = 'setTestSnakType';

@@ -57,13 +57,13 @@ describe( 'root/actions', () => {
 		getLabel: jest.fn( () => Promise.resolve() ),
 	};
 	const wikibaseRepoConfigRepository = {
-		getRepoConfiguration: jest.fn( () => Promise.resolve( {
+		getRepoConfiguration: jest.fn().mockResolvedValue( {
 			dataTypeLimits: {
 				string: {
 					maxLength: 200,
 				},
 			},
-		} ) ),
+		} ),
 	};
 	const propertyDatatypeRepository: PropertyDatatypeRepository = {
 		getDataType: jest.fn().mockResolvedValue( 'string' ),
@@ -95,7 +95,7 @@ describe( 'root/actions', () => {
 						NS_ENTITY,
 						NS_STATEMENTS,
 						STATEMENTS_PROPERTY_EXISTS,
-					) ]: jest.fn( () => true ),
+					) ]: jest.fn().mockReturnValue( true ),
 				}, ...gettersOverride },
 			} );
 		}
@@ -210,7 +210,7 @@ describe( 'root/actions', () => {
 				},
 			};
 			const wikibaseRepoConfigRepository = {
-				getRepoConfiguration: jest.fn( () => Promise.resolve( wikibaseRepoConfiguration ) ),
+				getRepoConfiguration: jest.fn().mockResolvedValue( wikibaseRepoConfiguration ),
 			};
 
 			return initAction( { wikibaseRepoConfigRepository } )( context, information ).then( () => {
@@ -284,9 +284,7 @@ describe( 'root/actions', () => {
 					value: propertyId,
 				};
 				const entityLabelRepository = {
-					getLabel: jest.fn( () => {
-						return Promise.resolve( term );
-					} ),
+					getLabel: jest.fn().mockResolvedValue( term ),
 				};
 
 				return initAction( { entityLabelRepository } )( context, information ).then( () => {
@@ -309,9 +307,7 @@ describe( 'root/actions', () => {
 				};
 
 				const entityLabelRepository = {
-					getLabel: jest.fn( () => {
-						return Promise.reject( 'Fehler' );
-					} ),
+					getLabel: jest.fn().mockRejectedValue( 'Fehler' ),
 				};
 
 				return initAction( { entityLabelRepository } )( context, information ).then( () => {
@@ -363,7 +359,7 @@ describe( 'root/actions', () => {
 								NS_ENTITY,
 								NS_STATEMENTS,
 								STATEMENTS_PROPERTY_EXISTS,
-							) ]: jest.fn( () => false ),
+							) ]: jest.fn().mockReturnValue( false ),
 						},
 					);
 
@@ -576,9 +572,7 @@ describe( 'root/actions', () => {
 				state: {
 					applicationStatus: ApplicationStatus.READY,
 				},
-				dispatch: jest.fn( () => {
-					return Promise.resolve();
-				} ),
+				dispatch: jest.fn( () => Promise.resolve() ),
 			} );
 
 			return saveAction()( context ).then( () => {
