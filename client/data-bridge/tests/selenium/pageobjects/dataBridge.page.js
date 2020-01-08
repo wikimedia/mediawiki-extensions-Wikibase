@@ -43,6 +43,14 @@ class DataBridgePage extends Page {
 		return '.wb-db-references__listItem';
 	}
 
+	static get EDIT_DECISION_SECTION() {
+		return '.wb-db-edit-decision';
+	}
+
+	static get EDIT_DECISION_INPUT() {
+		return 'input[name=editDecision]';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -116,6 +124,13 @@ class DataBridgePage extends Page {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}
 				${DataBridgePage.REFERENCES_SECTION} ${DataBridgePage.REFERENCE}:nth-child( ${n} )`
+		);
+	}
+
+	editDecision( value ) {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}
+				${DataBridgePage.EDIT_DECISION_SECTION} ${DataBridgePage.EDIT_DECISION_INPUT}[value=${value}]`
 		);
 	}
 }

@@ -19,6 +19,7 @@ import {
 	enter,
 	space,
 	insert,
+	selectRadioInput,
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
 import { v4 as uuid } from 'uuid';
@@ -247,6 +248,9 @@ describe( 'app', () => {
 			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
 			await insert( input as HTMLTextAreaElement, uuid() );
 
+			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
+			await selectRadioInput( replaceInputDecision as HTMLInputElement );
+
 			const save = select(
 				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
 			);
@@ -380,6 +384,13 @@ describe( 'app', () => {
 
 			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
 			await insert( input as HTMLTextAreaElement, uuid() );
+
+			save!.click();
+			await budge();
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 0 );
+
+			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
+			await selectRadioInput( replaceInputDecision as HTMLInputElement );
 
 			save!.click();
 			await budge();

@@ -46,6 +46,18 @@ function ensureTagExists( bridgeEditTag ) {
 	);
 }
 
+function assertSaveButtonDisabled( untilMessage = '' ) {
+	let isSaveButtonClickable = true;
+	try {
+		DataBridgePage.saveButton.click(); // This should do exactly nothing because the button is disabled
+	} catch ( e ) { // TODO though we catch this error, it still logs a scary message to the console :/
+		isSaveButtonClickable = false;
+	}
+	assert.ok( !isSaveButtonClickable, 'Save button should not be clickable ' + untilMessage );
+	assert.ok( !DataBridgePage.saveButton.isFocused(), 'disabled button should not be focusable' );
+	assert.ok( !DataBridgePage.saveButton.isSelected(), 'disabled button should not be selectable' );
+}
+
 describe( 'App', () => {
 	it( 'can save with tag', () => {
 		const bridgeEditTag = 'Data Bridge';
@@ -79,15 +91,7 @@ describe( 'App', () => {
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 		assert.strictEqual( DataBridgePage.value.getValue(), stringPropertyExampleValue );
 
-		let isSaveButtonClickable = true;
-		try {
-			DataBridgePage.saveButton.click(); // This should do exactly nothing because the button is disabled
-		} catch ( e ) {
-			isSaveButtonClickable = false;
-		}
-		assert.ok( !isSaveButtonClickable, 'Save button should not be clickable unless value was changed' );
-		assert.ok( !DataBridgePage.saveButton.isFocused(), 'disabled button should not be focusable' );
-		assert.ok( !DataBridgePage.saveButton.isSelected(), 'disabled button should not be selectable' );
+		assertSaveButtonDisabled( 'until value was changed' );
 
 		const newValue = 'newValue';
 		browser.waitUntil(
@@ -96,6 +100,10 @@ describe( 'App', () => {
 				return DataBridgePage.value.getValue() === newValue;
 			}
 		);
+
+		assertSaveButtonDisabled( 'until edit decision was made' );
+
+		DataBridgePage.editDecision( 'replace' ).click();
 
 		DataBridgePage.saveButton.click();
 

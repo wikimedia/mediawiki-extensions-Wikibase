@@ -7,7 +7,7 @@
 					type="primaryProgressive"
 					:squary="true"
 					@click="saveAndClose"
-					:disabled="!isTargetStatementModified"
+					:disabled="!canSave"
 				/>
 			</template>
 			<template v-slot:safeAction>
@@ -65,8 +65,8 @@ export default class App extends Vue {
 		return this.applicationStatus === ApplicationStatus.ERROR;
 	}
 
-	@Getter( 'isTargetStatementModified' )
-	public isTargetStatementModified!: boolean;
+	@Getter( 'canSave' )
+	public canSave!: boolean;
 
 	public get publishOrSave(): string {
 		return this.$bridgeConfig.usePublish ?
