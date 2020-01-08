@@ -11,11 +11,11 @@
 		"selenium-test": "npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
 		"selenium-test:bridge": "npm --prefix client/data-bridge run selenium-test",
-		"test": "npm-run-all -p test:*",
-		"test:grunt": "grunt test",
-		"test:bridge": "npm --prefix client/data-bridge test",
-		"test:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
-		"test-unit-coverage:bridge": "npm --prefix client/data-bridge run-script test-unit-coverage",
+		"test": "npm-run-all -p test-fast:*",
+		"test-fast:grunt": "grunt test",
+		"test-fast:bridge": "npm --prefix client/data-bridge test",
+		"test-fast:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref test",
+		"test:unit": "npm --prefix client/data-bridge run-script test-unit-coverage",
 		"fix": "grunt fix"
 	},
 	"devDependencies": {
