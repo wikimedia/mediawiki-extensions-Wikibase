@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\RecentChanges;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\MapDiffer;
+use Diff\Differ\MapDiffer;
 use ExternalUserNames;
 use Language;
 use Wikibase\DataModel\Entity\Item;
