@@ -2,10 +2,10 @@
 
 namespace Wikibase;
 
-use Diff\DiffOpAdd;
+use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOpRemove;
+use Diff\DiffOp\DiffOpRemove;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
