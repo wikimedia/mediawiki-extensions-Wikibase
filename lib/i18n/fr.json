@@ -132,7 +132,7 @@
 	"wikibase-time-precision-millennium": "$1<sup>e{{PLURAL:$1|r|}}</sup> millénaire",
 	"wikibase-time-precision-century": "$1<sup>e{{PLURAL:$1|r|}}</sup> siècle",
 	"wikibase-time-precision-10annum": "années $1",
-	"wikibase-time-precision-BCE": "$1 AC",
+	"wikibase-time-precision-BCE": "$1 AC",
 	"wikibase-time-precision-BCE-Gannum": "$1 milliard{{PLURAL:$1||s}} d’années av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-Mannum": "$1 million{{PLURAL:$1||s}} d’années av. J.⁠-⁠C.",
 	"wikibase-time-precision-BCE-annum": "$1 an{{PLURAL:$1||s}} av. J.⁠-⁠C.",

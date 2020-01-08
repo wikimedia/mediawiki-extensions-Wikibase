@@ -102,6 +102,7 @@
 	"wikibase-time-precision-millennium": "$1º millennio",
 	"wikibase-time-precision-century": "$1º secolo",
 	"wikibase-time-precision-10annum": "anni $1",
+	"wikibase-time-precision-BCE": "$1 a.C.",
 	"wikibase-time-precision-BCE-Gannum": "$1 miliardi di anni a.C.",
 	"wikibase-time-precision-BCE-Mannum": "$1 milioni di anni a.C.",
 	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|anno|anni}} a.C.",
