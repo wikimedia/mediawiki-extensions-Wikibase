@@ -12,6 +12,11 @@ export const getters: GetterTree<Application, Application> = {
 			return state.statementsPopperIsOpen[ guid ];
 		};
 	},
+	editState( state: Application ): Function {
+		return ( guid: string ): boolean => {
+			return state.statementsEditState[ guid ];
+		};
+	},
 	helpLink( state: Application ): string {
 		return state.helpLink;
 	},
