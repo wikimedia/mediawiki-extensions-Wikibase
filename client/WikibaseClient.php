@@ -226,11 +226,11 @@ call_user_func( function() {
 			// message and the PageTerms::getExamplesMessages() method.
 			if ( defined( 'WB_VERSION' ) ) {
 				$repo = WikibaseRepo::getDefaultInstance();
-				$termIndex = $repo->getStore()->getTermIndex();
+				$termIndex = $repo->getStore()->getLegacyEntityTermStoreReader();
 				$entityIdLookup = $repo->getEntityContentFactory();
 			} else {
 				$client = WikibaseClient::getDefaultInstance();
-				$termIndex = $client->getItemTermIndex();
+				$termIndex = $client->getLegacyItemTermStoreReader();
 				$entityIdLookup = $client->getEntityIdLookup();
 			}
 

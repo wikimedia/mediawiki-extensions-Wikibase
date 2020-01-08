@@ -11,6 +11,8 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Utility class for rebuilding the term_search_key field.
  *
+ * @deprecated This will disappear after the wb_terms table removal.
+ *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Jens Ohlig < jens.ohlig@wikimedia.de >

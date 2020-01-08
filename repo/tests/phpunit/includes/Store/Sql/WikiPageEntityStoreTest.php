@@ -328,7 +328,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEmpty( array_diff( [ 'mw-replace' ], $r2tags ) );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 	}
 
@@ -376,7 +376,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 	}
 
@@ -613,7 +613,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
@@ -663,7 +663,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertRedirectPerPage( $q33, $oneId );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
@@ -1303,7 +1303,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
@@ -1346,7 +1346,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
 		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getTermIndex();
+		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
 		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
