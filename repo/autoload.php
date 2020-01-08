@@ -110,6 +110,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Store\\EntityTitleStoreLookup' => __DIR__ . '/includes/Store/EntityTitleStoreLookup.php',
 	'Wikibase\\Repo\\Store\\ItemTermsRebuilder' => __DIR__ . '/includes/Store/ItemTermsRebuilder.php',
 	'Wikibase\\Repo\\Store\\ItemsWithoutSitelinksFinder' => __DIR__ . '/includes/Store/ItemsWithoutSitelinksFinder.php',
+	'Wikibase\\Repo\\Store\\NullTermsCollisionDetector' => __DIR__ . '/includes/Store/NullTermsCollisionDetector.php',
 	'Wikibase\\Repo\\Store\\PropertyTermsRebuilder' => __DIR__ . '/includes/Store/PropertyTermsRebuilder.php',
 	'Wikibase\\Repo\\Store\\SiteLinkConflictLookup' => __DIR__ . '/includes/Store/SiteLinkConflictLookup.php',
 	'Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater' => __DIR__ . '/includes/Store/Sql/ChangesSubscriptionSchemaUpdater.php',

@@ -8,12 +8,13 @@ use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
-use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
+use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
+use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -43,6 +44,11 @@ class SpecialNewItem extends SpecialNewEntity {
 	 */
 	private $termValidatorFactory;
 
+	/**
+	 * @var TermsCollisionDetector
+	 */
+	private $termsCollisionDetector;
+
 	public function __construct(
 		SpecialPageCopyrightView $copyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,
@@ -50,7 +56,8 @@ class SpecialNewItem extends SpecialNewEntity {
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
 		SiteLookup $siteLookup,
-		TermValidatorFactory $termValidatorFactory
+		TermValidatorFactory $termValidatorFactory,
+		TermsCollisionDetector $termsCollisionDetector
 	) {
 		parent::__construct(
 			'NewItem',
@@ -63,6 +70,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		);
 		$this->siteLookup = $siteLookup;
 		$this->termValidatorFactory = $termValidatorFactory;
+		$this->termsCollisionDetector = $termsCollisionDetector;
 	}
 
 	/**
@@ -259,6 +267,20 @@ class SpecialNewItem extends SpecialNewEntity {
 			if ( !$result->isValid() ) {
 				return $this->createStatusFromValidatorError( $result->getErrors()[0] );
 			}
+		}
+
+		$collidingItemId = $this->termsCollisionDetector->detectLabelAndDescriptionCollision(
+			$formData[ self::FIELD_LANG ],
+			$formData[ self::FIELD_LABEL ],
+			$formData[ self::FIELD_DESCRIPTION ]
+		);
+		if ( $collidingItemId !== null ) {
+			return Status::newFatal(
+				'wikibase-validator-label-with-description-conflict',
+				$formData[ self::FIELD_LABEL ],
+				$formData[ self::FIELD_LANG ],
+				$collidingItemId
+			);
 		}
 
 		return Status::newGood();
