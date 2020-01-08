@@ -83,6 +83,25 @@ describe( 'Popper.vue', () => {
 		);
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
+
+	it( 'should use injected title text', () => {
+		const localVue = createLocalVue();
+		const store: Store<Application> = createStore();
+		store.dispatch = jest.fn();
+		const messageToTextFunction = jest.fn();
+		messageToTextFunction.mockImplementation( ( key ) => `(${key})` );
+		localVue.use( Vuex );
+		localVue.use( Message, { messageToTextFunction } );
+		const wrapper = shallowMount( Popper, {
+			store,
+			localVue,
+			propsData: { guid: 'a-guid', title: 'kitten' },
+		} );
+
+		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
+			.toMatch( 'kitten' );
+	} );
+
 	it( 'popper texts are taken from our Vue message plugin', () => {
 		const localVue = createLocalVue();
 		const messageToTextFunction = jest.fn();
@@ -101,8 +120,6 @@ describe( 'Popper.vue', () => {
 		} );
 		expect( wrapper.find( '.wb-tr-popper-text' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-text)' );
-		expect( wrapper.find( '.wb-tr-popper-title' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-title)' );
 		expect( wrapper.find( '.wb-tr-popper-help a' ).element.title )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
 		expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
@@ -114,7 +131,6 @@ describe( 'Popper.vue', () => {
 		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-text)' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-title' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-title' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-text' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-text' );

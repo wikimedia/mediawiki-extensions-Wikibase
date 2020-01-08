@@ -8,7 +8,7 @@
 		<div class="wb-tr-popper-triangle" />
 		<div class="wb-tr-popper-body">
 			<div class="wb-tr-title-wrapper">
-				<span class="wb-tr-popper-title">{{ popperTitle }}</span>
+				<span class="wb-tr-popper-title">{{ title }}</span>
 				<button class="wb-tr-popper-close" @click="closeClick" />
 			</div>
 			<div class="wb-tr-popper-help">
@@ -41,7 +41,10 @@ import Vue from 'vue';
 import { Getter } from 'vuex-class';
 
 @Component( {
-	props: [ 'guid' ],
+	props: {
+		guid: String,
+		title: String,
+	},
 } )
 export default class Popper extends Vue {
 	@Getter( 'helpLink' )
@@ -55,10 +58,6 @@ export default class Popper extends Vue {
 
 	public get popperText(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-text' );
-	}
-
-	public get popperTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-title' );
 	}
 
 	public get popperHelpLinkTitle(): string {

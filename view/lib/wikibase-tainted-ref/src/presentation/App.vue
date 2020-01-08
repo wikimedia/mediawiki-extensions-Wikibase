@@ -4,7 +4,7 @@
 			<span>
 				<TaintedIcon :guid="id" />
 				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
-					<Popper :guid="id" />
+					<Popper :guid="id" :title="popperTitle" />
 				</div>
 			</span>
 		</div>
@@ -39,6 +39,10 @@ export default class App extends Vue {
 
 	public get popperIsOpened(): boolean {
 		return this.popperStateFunction( this.$data.id );
+	}
+
+	public get popperTitle(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-title' );
 	}
 
 }
