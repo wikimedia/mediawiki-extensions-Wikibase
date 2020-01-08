@@ -61,7 +61,7 @@ export const getters: GetterTree<Application, Application> = {
 		return statements.references ? statements.references : [];
 	},
 
-	isTargetStatementModified( state: Application ) {
+	isTargetStatementModified( state: Application ): boolean {
 		if ( state.applicationStatus !== Status.READY ) {
 			return false;
 		}
