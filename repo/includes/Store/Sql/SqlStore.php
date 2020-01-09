@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\CacheAwarePropertyInfoStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -232,7 +233,13 @@ class SqlStore implements Store {
 	/**
 	 * @see Store::getTermIndex
 	 *
-	 * @return TermIndex
+	 * If you need a TermIndex implementation for a EntityHandler, when the entity handler
+	 * doesn't do anything with the TermIndex please use a NulLTermIndex.
+	 *
+	 * @depreacted Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter
+	 * or getLabelConflictFinder directly.
+	 *
+	 * @return TermSqlIndex
 	 */
 	public function getTermIndex() {
 		if ( !$this->termIndex ) {
@@ -243,10 +250,36 @@ class SqlStore implements Store {
 	}
 
 	/**
+	 * @see Store::getLegacyEntityTermStoreReader
+	 *
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An exact alternative MAY NOT be available.
+	 *
+	 * @return LegacyEntityTermStoreReader
+	 */
+	public function getLegacyEntityTermStoreReader() {
+		return $this->getTermIndex();
+	}
+
+	/**
+	 * @see Store::getLegacyEntityTermStoreWriter
+	 *
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An alternative will be available
+	 *
+	 * @return EntityTermStoreWriter
+	 */
+	public function getLegacyEntityTermStoreWriter() {
+		return $this->getTermIndex();
+	}
+
+	/**
 	 * @see Store::getLabelConflictFinder
 	 *
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An alternative will be available
+	 *
 	 * @return LabelConflictFinder
-	 * @suppress PhanTypeMismatchReturn
 	 */
 	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
@@ -441,7 +474,7 @@ class SqlStore implements Store {
 	 */
 	public function getEntityRevisionLookup( $cache = self::LOOKUP_CACHING_ENABLED ) {
 		if ( !$this->entityRevisionLookup ) {
-			list( $this->rawEntityRevisionLookup, $this->entityRevisionLookup ) = $this->newEntityRevisionLookup();
+			[ $this->rawEntityRevisionLookup, $this->entityRevisionLookup ] = $this->newEntityRevisionLookup();
 		}
 
 		if ( $cache === self::LOOKUP_CACHING_DISABLED ) {

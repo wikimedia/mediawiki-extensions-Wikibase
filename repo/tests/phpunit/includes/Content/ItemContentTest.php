@@ -41,6 +41,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\NullEntityTermStoreWriter;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
@@ -284,7 +285,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new ItemHandler(
-			$wikibaseRepo->getStore()->getTermIndex(),
+			new NullEntityTermStoreWriter(),
 			$wikibaseRepo->getEntityContentDataCodec(),
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),

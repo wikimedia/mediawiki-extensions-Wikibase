@@ -18,6 +18,7 @@ use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\LegacyEntityTermStoreReader;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -1616,6 +1617,18 @@ final class WikibaseClient {
 		return $cache;
 	}
 
+	/**
+	 * @deprecated Must switch to using non legacy term storage
+	 * @return LegacyEntityTermStoreReader
+	 */
+	public function getLegacyItemTermStoreReader() {
+		return $this->getItemTermIndex();
+	}
+
+	/**
+	 * @deprecated Must switch to using non legacy term storage
+	 * @return TermSqlIndex|null
+	 */
 	public function getItemTermIndex() {
 		if ( $this->itemTermIndex === null ) {
 			$dataAccessSettings = $this->getDataAccessSettings();

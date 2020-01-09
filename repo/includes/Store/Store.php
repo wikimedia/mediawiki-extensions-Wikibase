@@ -7,6 +7,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityInfoBuilder;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -56,11 +57,44 @@ interface Store {
 	public function rebuild();
 
 	/**
+	 * Use of this method indicates cases that should be migrated away from the expectation
+	 * that all of this functionality is provided by a single class. Or that said thing needs
+	 * to select one of the more specific services mentioned in the deprecated message.
+	 *
+	 * @depreacted Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter
+	 * or getLabelConflictFinder directly.
+	 *
 	 * @return TermIndex
 	 */
 	public function getTermIndex();
 
 	/**
+	 * Use of this method represents cases that still need to be migrated away from
+	 * using the legacy terms storage.
+	 *
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An exact alternative MAY NOT be available.
+	 *
+	 * @return LegacyEntityTermStoreReader
+	 */
+	public function getLegacyEntityTermStoreReader();
+
+	/**
+	 * This method will result in having 0 calls post migration as the service used
+	 * to write to the term store changes in WikibaseRepo::getItemTermStore
+	 * and WikibaseRepo::getPropertyTermStore
+	 *
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An alternative will be available
+	 *
+	 * @return EntityTermStoreWriter
+	 */
+	public function getLegacyEntityTermStoreWriter();
+
+	/**
+	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
+	 * An alternative will be available
+	 *
 	 * @return LabelConflictFinder
 	 */
 	public function getLabelConflictFinder();

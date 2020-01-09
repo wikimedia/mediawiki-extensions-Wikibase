@@ -8,8 +8,8 @@ use ApiResult;
 use InvalidArgumentException;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\LegacyEntityTermStoreReader;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikibase\WikibaseSettings;
 
@@ -27,9 +27,9 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @todo Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
-	 * @var TermIndex
+	 * @var LegacyEntityTermStoreReader
 	 */
-	private $termIndex;
+	private $termIndexReader;
 
 	/**
 	 * @var EntityIdLookup
@@ -37,19 +37,19 @@ class PageTerms extends ApiQueryBase {
 	private $idLookup;
 
 	/**
-	 * @param TermIndex $termIndex
+	 * @param LegacyEntityTermStoreReader $termIndexReader
 	 * @param EntityIdLookup $idLookup
 	 * @param ApiQuery $query
 	 * @param string $moduleName
 	 */
 	public function __construct(
-		TermIndex $termIndex,
+		LegacyEntityTermStoreReader $termIndexReader,
 		EntityIdLookup $idLookup,
 		ApiQuery $query,
 		$moduleName
 	) {
 		parent::__construct( $query, $moduleName, 'wbpt' );
-		$this->termIndex = $termIndex;
+		$this->termIndexReader = $termIndexReader;
 		$this->idLookup = $idLookup;
 	}
 
@@ -109,7 +109,7 @@ class PageTerms extends ApiQueryBase {
 		foreach ( $entityIdGroups as $entityIds ) {
 			$terms = array_merge(
 				$terms,
-				$this->termIndex->getTermsOfEntities( $entityIds, $termTypes, $languageCodes )
+				$this->termIndexReader->getTermsOfEntities( $entityIds, $termTypes, $languageCodes )
 			);
 		}
 

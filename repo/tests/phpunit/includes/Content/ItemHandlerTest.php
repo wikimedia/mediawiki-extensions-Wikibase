@@ -19,6 +19,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\NullEntityTermStoreWriter;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
@@ -221,7 +222,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new ItemHandler(
-			$wikibaseRepo->getStore()->getTermIndex(),
+			new NullEntityTermStoreWriter(),
 			$wikibaseRepo->getEntityContentDataCodec(),
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
