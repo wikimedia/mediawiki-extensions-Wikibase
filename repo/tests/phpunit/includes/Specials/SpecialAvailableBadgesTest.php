@@ -6,7 +6,7 @@ use SpecialPageTestBase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Repo\Specials\SpecialAvailableBadges;
 
 /**

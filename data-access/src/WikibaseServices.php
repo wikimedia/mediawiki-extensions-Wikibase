@@ -7,7 +7,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\StringNormalizer;
 
 /**

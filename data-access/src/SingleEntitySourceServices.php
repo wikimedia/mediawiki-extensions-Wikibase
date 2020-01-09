@@ -23,7 +23,6 @@ use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -31,7 +30,9 @@ use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
@@ -367,35 +368,59 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getPrefetchingTermLookup() {
 		if ( $this->prefetchingTermLookup === null ) {
-			$bufferingLookup = new BufferingTermLookup(
-				$this->getTermIndex(),
-				1000 // TODO: customize buffer sizes
+			$termIndex = $this->getTermIndex();
+
+			$termIndexBackedTermLookup = new BufferingTermLookup(
+				$termIndex, // TODO: customize buffer sizes
+				1000
 			);
 
-			$this->prefetchingTermLookup = $bufferingLookup;
+			$mediaWikiServices = MediaWikiServices::getInstance();
+			$logger = LoggerFactory::getInstance( 'Wikibase' );
 
-			if ( $this->entitySourceProvideTypesWithCustomPrefetchingTermLookups() ) {
-				$this->prefetchingTermLookup = $this->newPrefetchingTermLookupWithCustomLookups( $bufferingLookup );
-			}
+			$repoDbDomain = $this->entitySource->getDatabaseName();
+			$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $repoDbDomain );
+
+			$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+				$loadBalancer,
+				$mediaWikiServices->getMainWANObjectCache(),
+				$repoDbDomain,
+				$logger
+			);
+
+			$termIdsResolver = new DatabaseTermIdsResolver(
+				$databaseTypeIdsStore,
+				$databaseTypeIdsStore,
+				$loadBalancer,
+				$repoDbDomain,
+				$logger
+			);
+
+			$lookups = [];
+
+			$lookups['item'] = new TermStoresDelegatingPrefetchingItemTermLookup(
+				$this->settings,
+				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
+				$termIndexBackedTermLookup
+			);
 
 			if ( $this->settings->useNormalizedPropertyTerms() ) {
-				$propertyTermLookup = $this->newNormalizedPropertyTermLookup();
-				$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
-					[ 'property' => $propertyTermLookup ],
-					$this->prefetchingTermLookup
-				);
+				$lookups['property'] = new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain );
+			} else {
+				$lookups['property'] = $termIndexBackedTermLookup;
 			}
+
+			$lookups = array_merge( $lookups, $this->getCustomPrefetchingTermLookups() );
+
+			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup( $lookups, new NullPrefetchingTermLookup() );
 		}
 		return $this->prefetchingTermLookup;
 	}
 
-	private function entitySourceProvideTypesWithCustomPrefetchingTermLookups() {
-		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
-
-		return array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
-	}
-
-	private function newPrefetchingTermLookupWithCustomLookups( PrefetchingTermLookup $defaultLookup ): PrefetchingTermLookup {
+	/**
+	 * @return PrefetchingItemTermLookup[] indexed by entity type
+	 */
+	private function getCustomPrefetchingTermLookups(): array {
 		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
 
 		$lookupConstructorsByType = array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
@@ -411,37 +436,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 			$customLookups[$type] = $lookup;
 		}
-		return new ByTypeDispatchingPrefetchingTermLookup(
-			$customLookups,
-			$defaultLookup
-		);
-	}
-
-	private function newNormalizedPropertyTermLookup(): PrefetchingPropertyTermLookup {
-		$mediaWikiServices = MediaWikiServices::getInstance();
-		$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-		$repoDbDomain = $this->entitySource->getDatabaseName();
-		$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
-		$loadBalancer = $loadBalancerFactory->getMainLB( $repoDbDomain );
-		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			$mediaWikiServices->getMainWANObjectCache(),
-			$repoDbDomain,
-			$logger
-		);
-
-		return new PrefetchingPropertyTermLookup(
-			$loadBalancer,
-			new DatabaseTermIdsResolver(
-				$databaseTypeIdsStore,
-				$databaseTypeIdsStore,
-				$loadBalancer,
-				$repoDbDomain,
-				$logger
-			),
-			$repoDbDomain
-		);
+		return $customLookups;
 	}
 
 	public function getEntityPrefetcher() {

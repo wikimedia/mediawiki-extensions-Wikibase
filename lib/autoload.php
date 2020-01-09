@@ -104,7 +104,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\LanguageFallbackLabelDescriptionLookupFactory' => __DIR__ . '/includes/Store/LanguageFallbackLabelDescriptionLookupFactory.php',
 	'Wikibase\\Lib\\Store\\LatestRevisionIdResult' => __DIR__ . '/includes/Store/LatestRevisionIdResult.php',
 	'Wikibase\\Lib\\Store\\NullEntityTermStoreWriter' => __DIR__ . '/includes/Store/NullEntityTermStoreWriter.php',
-	'Wikibase\\Lib\\Store\\PrefetchingTermLookup' => __DIR__ . '/includes/Store/PrefetchingTermLookup.php',
 	'Wikibase\\Lib\\Store\\PropertyInfoLookup' => __DIR__ . '/includes/Store/PropertyInfoLookup.php',
 	'Wikibase\\Lib\\Store\\PropertyInfoProvider' => __DIR__ . '/includes/Store/PropertyInfoProvider.php',
 	'Wikibase\\Lib\\Store\\PropertyInfoStore' => __DIR__ . '/includes/Store/PropertyInfoStore.php',

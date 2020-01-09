@@ -4,7 +4,6 @@ namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
 use Wikimedia\Assert\Assert;
 
 /**

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;

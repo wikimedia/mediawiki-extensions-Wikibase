@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 
 /**
