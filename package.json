@@ -3,7 +3,9 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"doc": "jsduck",
+		"doc": "npm-run-all doc:*",
+		"doc:jsduck": "jsduck",
+		"doc:data-bridge-storybook": "npm --prefix client/data-bridge run build-storybook -- -o ../../docs/data-bridge-storybook",
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"postinstall": "npm-run-all -p install:*",
