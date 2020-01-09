@@ -43,3 +43,12 @@ docker-compose run --rm node npm run test:lint
 ```
 docker-compose run --rm node npm run storybook
 ```
+
+### Development Troubleshooting
+#### Build failing because checking dist and built dist don't match
+If you see errors like:
+`Files ./dist/tainted-ref.common.js and /tmp/dist/tainted-ref.common.js differ` in your jenkins builds then you can try:
+* checking you staged all changes for commit. For example, /dist/tainted-ref.common.js is treated as a binary file and hence is ignored
+by `git add -p`
+* rebuilding again following the above Compiles and minifies for production
+* resetting your node-modules to match those checked in with `docker-compose run --rm node npm run ci`
