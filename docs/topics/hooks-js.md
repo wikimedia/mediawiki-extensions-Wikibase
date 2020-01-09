@@ -23,3 +23,6 @@ This file describes JavaScript hooks defined by the Wikibase extensions.
 
 #### wikibase.statement.startEditing (jquery.wikibase.statementview.js)
   * Called when entering the edit mode for an existing statement. Gets the statement's guid passed as parameter.
+
+#### wikibase.statement.stopEditing (jquery.wikibase.statementview.js)
+  * Called when leaving the edit mode for an existing statement. Gets the statement's guid passed as parameter.

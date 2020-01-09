@@ -97,7 +97,8 @@
 				mainSnak: false
 			},
 			helpMessage: mw.msg( 'wikibase-claimview-snak-new-tooltip' ),
-			fireStartEditingHook: mw.hook( 'wikibase.statement.startEditing' ).fire
+			fireStartEditingHook: mw.hook( 'wikibase.statement.startEditing' ).fire,
+			fireStopEditingHook: mw.hook( 'wikibase.statement.stopEditing' ).fire
 		},
 
 		/**
@@ -600,7 +601,7 @@
 			var self = this;
 
 			if ( this.options.value ) {
-				self.options.fireStartEditingHook( this.options.value.getClaim().getGuid() );
+				this.options.fireStartEditingHook( this.options.value.getClaim().getGuid() );
 			}
 			this._qualifierAdder = this.options.getAdder(
 				function () {
@@ -645,9 +646,11 @@
 		},
 
 		_stopEditing: function ( dropValue ) {
-
 			if ( !dropValue ) {
 				this.element.find( '.wikibase-snakview-indicators' ).empty();
+			}
+			if ( this.options.value ) {
+				this.options.fireStopEditingHook( this.options.value.getClaim().getGuid() );
 			}
 
 			// TODO: this should return a promise
