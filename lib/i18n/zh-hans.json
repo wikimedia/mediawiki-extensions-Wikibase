@@ -15,7 +15,8 @@
 			"Hanyanbo98",
 			"Dimension",
 			"夢蝶葬花",
-			"Xiplus"
+			"Xiplus",
+			"沈澄心"
 		]
 	},
 	"wikibase-lib-desc": "储存维基库及其客户端的共同功能",
@@ -108,6 +109,7 @@
 	"wikibase-time-precision-millennium": "$1千年",
 	"wikibase-time-precision-century": "$1世纪",
 	"wikibase-time-precision-10annum": "$1年代",
+	"wikibase-time-precision-BCE": "公元前$1年",
 	"wikibase-time-precision-BCE-Gannum": "公元前$1十亿年",
 	"wikibase-time-precision-BCE-Mannum": "公元前$1百万年",
 	"wikibase-time-precision-BCE-annum": "公元前$1{{PLURAL:$1|年}}",

@@ -55,6 +55,7 @@
 	"wikibase-time-precision-millennium": "$1. bin yıl",
 	"wikibase-time-precision-century": "$1. yüzyıl",
 	"wikibase-time-precision-10annum": "$1ler",
+	"wikibase-time-precision-BCE": "$1 BCE",
 	"wikibase-time-precision-BCE-Gannum": "MÖ $1 milyar yıl",
 	"wikibase-time-precision-BCE-Mannum": "MÖ $1 milyon yıl",
 	"wikibase-time-precision-BCE-annum": "MÖ {{PLURAL:$1|$1 yıl}}",
