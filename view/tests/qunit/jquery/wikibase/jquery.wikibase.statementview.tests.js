@@ -31,7 +31,9 @@
 		options = $.extend( {
 			getAdder: function () {
 				return {
-					destroy: function () {}
+					destroy: function () {},
+					disable: function () {},
+					enable: function () {}
 				};
 			},
 			getReferenceListItemAdapter: function () {
@@ -42,6 +44,8 @@
 							return this.options.value;
 						};
 						this.startEditing = function () {
+						};
+						this.stopEditing = function () {
 						};
 						this.enterNewItem = function () {
 						};
@@ -256,16 +260,45 @@
 		} );
 	} );
 
-	QUnit.test( 'does not fire fireStartEditingHook when creating new statement', function ( assert ) {
+	QUnit.test( 'fires fireStopEditingHook when cancelling the edit', function ( assert ) {
 		var fireSpy = sinon.spy(),
 			$statementview = createStatementview( {
-				value: null,
-				fireStartEditingHook: fireSpy
+				value: new datamodel.Statement(
+					new datamodel.Claim(
+						new datamodel.PropertyNoValueSnak( 'P1' ),
+						null,
+						'guid-123'
+					),
+					new datamodel.ReferenceList( [ new datamodel.Reference() ] )
+				),
+				fireStopEditingHook: fireSpy
 			} ),
 			statementview = $statementview.data( 'statementview' );
 
 		return statementview.startEditing().done( function () {
-			assert.ok( fireSpy.notCalled );
+			statementview.stopEditing().done( function () {
+				assert.strictEqual(
+					fireSpy.getCall( 0 ).args[ 0 ],
+					'guid-123',
+					'Then mw.hook().fire() is called with the guid.'
+				);
+			} );
+		} );
+	} );
+
+	QUnit.test( 'does not fire start/stop editting hooks when creating new statement', function ( assert ) {
+		var fireSpy = sinon.spy(),
+			$statementview = createStatementview( {
+				value: null,
+				fireStartEditingHook: fireSpy,
+				fireStopEditingHook: fireSpy
+			} ),
+			statementview = $statementview.data( 'statementview' );
+
+		return statementview.startEditing().done( function () {
+			statementview.stopEditing().done( function () {
+				assert.ok( fireSpy.notCalled );
+			} );
 		} );
 	} );
 
