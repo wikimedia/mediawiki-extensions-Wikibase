@@ -7,8 +7,9 @@ use ApiQueryBase;
 use ApiResult;
 use InvalidArgumentException;
 use Title;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\LegacyEntityTermStoreReader;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Store\EntityIdLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\WikibaseSettings;
@@ -27,9 +28,9 @@ class PageTerms extends ApiQueryBase {
 
 	/**
 	 * @todo Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
-	 * @var LegacyEntityTermStoreReader
+	 * @var TermBuffer|AliasTermBuffer
 	 */
-	private $termIndexReader;
+	private $termBuffer;
 
 	/**
 	 * @var EntityIdLookup
@@ -37,24 +38,23 @@ class PageTerms extends ApiQueryBase {
 	private $idLookup;
 
 	/**
-	 * @param LegacyEntityTermStoreReader $termIndexReader
+	 * @param TermBuffer $termBuffer
 	 * @param EntityIdLookup $idLookup
 	 * @param ApiQuery $query
 	 * @param string $moduleName
 	 */
 	public function __construct(
-		LegacyEntityTermStoreReader $termIndexReader,
+		TermBuffer $termBuffer,
 		EntityIdLookup $idLookup,
 		ApiQuery $query,
 		$moduleName
 	) {
 		parent::__construct( $query, $moduleName, 'wbpt' );
-		$this->termIndexReader = $termIndexReader;
+		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
 	}
 
 	public function execute() {
-		$languageCode = $this->getLanguage()->getCode();
 		$params = $this->extractRequestParams();
 
 		# Only operate on existing pages
@@ -68,11 +68,12 @@ class PageTerms extends ApiQueryBase {
 		ksort( $titles );
 
 		$continue = $params['continue'];
+		$termTypes = $params['terms'] ?? TermIndexEntry::$validTermTypes;
 
 		$pagesToEntityIds = $this->getEntityIdsForTitles( $titles, $continue );
 		$entityToPageMap = $this->getEntityToPageMap( $pagesToEntityIds );
 
-		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $params['terms'], [ $languageCode ] );
+		$terms = $this->getTermsOfEntities( $pagesToEntityIds, $termTypes, $this->getLanguage()->getCode() );
 
 		$termGroups = $this->groupTermsByPageAndType( $entityToPageMap, $terms );
 
@@ -80,37 +81,41 @@ class PageTerms extends ApiQueryBase {
 	}
 
 	/**
-	 * @param EntityId[] $pagesToEntityIds
-	 *
-	 * @return array[]
-	 */
-	private function splitPageEntityMapByType( array $pagesToEntityIds ) {
-		$groups = [];
-
-		foreach ( $pagesToEntityIds as $pageId => $entityId ) {
-			$type = $entityId->getEntityType();
-			$groups[$type][$pageId] = $entityId;
-		}
-
-		return $groups;
-	}
-
-	/**
 	 * @param EntityId[] $entityIds
-	 * @param string[]|null $termTypes
-	 * @param string[]|null $languageCodes
+	 * @param string[] $termTypes
+	 * @param string $languageCode
 	 *
 	 * @return TermIndexEntry[]
 	 */
-	private function getTermsOfEntities( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
-		$entityIdGroups = $this->splitPageEntityMapByType( $entityIds );
-		$terms = [];
+	private function getTermsOfEntities( array $entityIds, array $termTypes, $languageCode ) {
+		$this->termBuffer->prefetchTerms( $entityIds, $termTypes, [ $languageCode ] );
 
-		foreach ( $entityIdGroups as $entityIds ) {
-			$terms = array_merge(
-				$terms,
-				$this->termIndexReader->getTermsOfEntities( $entityIds, $termTypes, $languageCodes )
-			);
+		$terms = [];
+		foreach ( $entityIds as $entityId ) {
+			foreach ( $termTypes as $termType ) {
+				if ( $termType !== 'alias' ) {
+					$termText = $this->termBuffer->getPrefetchedTerm( $entityId, $termType, $languageCode );
+					if ( $termText !== false && $termText !== null ) {
+						$terms[] = new TermIndexEntry( [
+							TermIndexEntry::FIELD_ENTITY => $entityId,
+							TermIndexEntry::FIELD_TYPE => $termType,
+							TermIndexEntry::FIELD_LANGUAGE => $languageCode,
+							TermIndexEntry::FIELD_TEXT => $termText,
+						] );
+					}
+				} else {
+					$termTexts = $this->termBuffer->getPrefetchedAliases( $entityId, $languageCode );
+					foreach ( $termTexts as $termText ) {
+						$terms[] = new TermIndexEntry( [
+							TermIndexEntry::FIELD_ENTITY => $entityId,
+							TermIndexEntry::FIELD_TYPE => $termType,
+							TermIndexEntry::FIELD_LANGUAGE => $languageCode,
+							TermIndexEntry::FIELD_TEXT => $termText,
+						] );
+					}
+				}
+
+			}
 		}
 
 		return $terms;
@@ -247,12 +252,8 @@ class PageTerms extends ApiQueryBase {
 				self::PARAM_TYPE => 'integer',
 			],
 			'terms' => [
-				// XXX: Ought to get this list from Wikibase\TermIndexEntry, its setType() also hardcodes it.
-				self::PARAM_TYPE => [
-					TermIndexEntry::TYPE_ALIAS,
-					TermIndexEntry::TYPE_DESCRIPTION,
-					TermIndexEntry::TYPE_LABEL
-				],
+				self::PARAM_TYPE => TermIndexEntry::$validTermTypes,
+				self::PARAM_DFLT => implode( '|',  TermIndexEntry::$validTermTypes ),
 				self::PARAM_ISMULTI => true,
 				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
 			],
