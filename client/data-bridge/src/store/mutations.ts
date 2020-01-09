@@ -1,3 +1,4 @@
+import EditDecision from '@/definitions/EditDecision';
 import { MutationTree } from 'vuex';
 import clone from '@/store/clone';
 import Application from '@/store/Application';
@@ -8,6 +9,7 @@ import {
 	TARGET_LABEL_SET,
 	ORIGINAL_STATEMENT_SET,
 	APPLICATION_ERRORS_ADD,
+	EDITDECISION_SET,
 } from '@/store/mutationTypes';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
@@ -37,5 +39,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ APPLICATION_ERRORS_ADD ]( state: Application, errors: ApplicationError[] ): void {
 		state.applicationErrors.push( ...errors );
+	},
+
+	[ EDITDECISION_SET ]( state: Application, editDecision: EditDecision ): void {
+		state.editDecision = editDecision;
 	},
 };

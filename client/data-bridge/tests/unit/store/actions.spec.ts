@@ -2,6 +2,7 @@ import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin';
 import actions from '@/store/actions';
@@ -9,6 +10,7 @@ import {
 	BRIDGE_ERROR_ADD,
 	BRIDGE_INIT,
 	BRIDGE_SAVE,
+	BRIDGE_SET_EDIT_DECISION,
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import {
@@ -20,6 +22,7 @@ import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTyp
 import {
 	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
+	EDITDECISION_SET,
 	EDITFLOW_SET,
 	ORIGINAL_STATEMENT_SET,
 	PROPERTY_TARGET_SET,
@@ -606,6 +609,29 @@ describe( 'root/actions', () => {
 			expect( context.commit ).toHaveBeenCalledWith(
 				APPLICATION_ERRORS_ADD,
 				errors,
+			);
+		} );
+	} );
+
+	describe( BRIDGE_SET_EDIT_DECISION, () => {
+		function setEditDecision( services: {
+			entityLabelRepository?: EntityLabelRepository;
+			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
+		} = {} ): Function {
+			return ( actions as Function )(
+				services.entityLabelRepository || entityLabelRepository,
+				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
+			)[ BRIDGE_SET_EDIT_DECISION ];
+		}
+
+		it( `commits to ${EDITDECISION_SET}`, () => {
+			const context = newMockStore( {} );
+
+			setEditDecision()( context, EditDecision.REPLACE );
+
+			expect( context.commit ).toHaveBeenCalledWith(
+				EDITDECISION_SET,
+				EditDecision.REPLACE,
 			);
 		} );
 	} );

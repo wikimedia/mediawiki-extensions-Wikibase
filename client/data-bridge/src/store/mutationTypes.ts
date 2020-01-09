@@ -5,3 +5,4 @@ export const TARGET_LABEL_SET = 'setTargetLabel';
 export const WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
 export const ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
 export const APPLICATION_ERRORS_ADD = 'addApplicationErrors';
+export const EDITDECISION_SET = 'setEditDecision';

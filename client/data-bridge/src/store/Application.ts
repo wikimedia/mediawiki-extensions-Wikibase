@@ -7,6 +7,7 @@ import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
+import EditDecision from '@/definitions/EditDecision';
 
 interface Application {
 	editFlow: string;
@@ -16,6 +17,7 @@ interface Application {
 	applicationStatus: ValidApplicationStatus;
 	applicationErrors: ApplicationError[];
 	wikibaseRepoConfiguration: WikibaseRepoConfiguration|null;
+	editDecision: EditDecision|null;
 }
 
 export default Application;

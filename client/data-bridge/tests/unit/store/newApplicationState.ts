@@ -10,6 +10,7 @@ export default function ( fields?: any ): Application {
 		applicationStatus: ApplicationStatus.INITIALIZING,
 		applicationErrors: [],
 		wikibaseRepoConfiguration: null,
+		editDecision: null,
 	};
 
 	if ( fields !== null ) {
