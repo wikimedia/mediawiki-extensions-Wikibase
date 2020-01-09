@@ -10,8 +10,8 @@ describe( 'InitTracker', () => {
 		const mwStartupTime = 10;
 		const timeLinkListenersAttached = 13;
 		const performanceMock: any = {
-			now: jest.fn( () => timeLinkListenersAttached ),
-			getEntriesByName: jest.fn( () => [ { startTime: mwStartupTime } ] ),
+			now: jest.fn().mockReturnValue( timeLinkListenersAttached ),
+			getEntriesByName: jest.fn().mockReturnValue( [ { startTime: mwStartupTime } ] ),
 		};
 		const initTracker = new MwInitTracker( tracker, performanceMock );
 

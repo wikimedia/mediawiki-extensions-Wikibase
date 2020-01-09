@@ -4,7 +4,7 @@ import { MwMessage } from '@/@types/mediawiki/MwWindow';
 describe( 'MwMessagesRepository', () => {
 	it( 'get mw.message and the messages keys to build a message collection', () => {
 		const message = 'bar';
-		const translation = jest.fn( () => message );
+		const translation = jest.fn().mockReturnValue( message );
 		const mwMessages = jest.fn( (): MwMessage => {
 			return {
 				text: jest.fn(),

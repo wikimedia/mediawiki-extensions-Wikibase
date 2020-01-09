@@ -18,9 +18,9 @@ import {
 describe( 'CombiningPermissionsRepository', () => {
 
 	it( 'passes through repo and client title to underlying service', async () => {
-		const repoRepository = { getPermissionErrors: jest.fn( () => Promise.resolve( [] ) ) };
+		const repoRepository = { getPermissionErrors: jest.fn().mockResolvedValue( [] ) };
 		const repoTitle = 'Repo title';
-		const clientRepository = { getPermissionErrors: jest.fn( () => Promise.resolve( [] ) ) };
+		const clientRepository = { getPermissionErrors: jest.fn().mockResolvedValue( [] ) };
 		const clientTitle = 'Client title';
 		const repository = new CombiningPermissionsRepository(
 			repoRepository,

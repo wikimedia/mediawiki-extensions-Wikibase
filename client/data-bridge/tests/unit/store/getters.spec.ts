@@ -32,9 +32,7 @@ describe( 'root/getters', () => {
 					NS_ENTITY,
 					NS_STATEMENTS,
 					mainSnakGetterTypes.dataValue,
-				) ]: jest.fn( () => {
-					return dataValue;
-				} ),
+				) ]: jest.fn().mockReturnValue( dataValue ),
 			};
 
 			const applicationState = newApplicationState( {

@@ -228,7 +228,7 @@ describe( 'store/actions', () => {
 	describe( ENTITY_SAVE, () => {
 		it( 'rejects if the request fails', async () => {
 			const rejectError = new Error( 'no' );
-			const resolver = jest.fn( () => Promise.reject( rejectError ) );
+			const resolver = jest.fn().mockRejectedValue( rejectError );
 
 			services.set( 'writingEntityRepository', {
 				saveEntity: resolver as any,
@@ -269,7 +269,7 @@ describe( 'store/actions', () => {
 				},
 			};
 
-			const resolver = jest.fn( () => Promise.resolve( response ) );
+			const resolver = jest.fn().mockResolvedValue( response );
 
 			services.set( 'writingEntityRepository', {
 				saveEntity: resolver as any,
@@ -323,7 +323,7 @@ describe( 'store/actions', () => {
 
 			it( 'rejects and switch to error if the request fails', async () => {
 				const rejectError = new Error( 'no' );
-				const resolver = jest.fn( () => Promise.reject( rejectError ) );
+				const resolver = jest.fn().mockRejectedValue( rejectError );
 
 				services.set( 'writingEntityRepository', {
 					saveEntity: resolver as any,
@@ -363,7 +363,7 @@ describe( 'store/actions', () => {
 					},
 				};
 
-				const resolver = jest.fn( () => Promise.resolve( response ) );
+				const resolver = jest.fn().mockResolvedValue( response );
 
 				services.set( 'writingEntityRepository', {
 					saveEntity: resolver as any,

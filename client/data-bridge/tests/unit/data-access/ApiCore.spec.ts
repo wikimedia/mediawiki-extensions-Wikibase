@@ -25,7 +25,7 @@ describe( 'ApiCore', () => {
 
 	it( 'maps sets to arrays and passes through all other parameter types', async () => {
 		const mwApi: MwApi = {
-			get: jest.fn( () => Promise.resolve( {} ) ),
+			get: jest.fn().mockResolvedValue( {} ),
 		} as unknown as MwApi;
 		const api = new ApiCore( mwApi );
 

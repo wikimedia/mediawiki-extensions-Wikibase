@@ -23,7 +23,7 @@ import { budge } from '../../util/timer';
 
 const manager = jest.fn();
 const dialog = {
-	getManager: jest.fn( () => manager ),
+	getManager: jest.fn().mockReturnValue( manager ),
 };
 
 const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => {
@@ -44,15 +44,11 @@ describe( 'init', () => {
 	it( 'loads `wikibase.client.data-bridge.app` and launches it on click', () => {
 		const emitter = jest.fn(),
 			app = {
-				launch: jest.fn( () => {
-					return emitter;
-				} ),
+				launch: jest.fn().mockReturnValue( emitter ),
 				createServices,
 			},
-			require = jest.fn( () => app ),
-			using = jest.fn( () => {
-				return new Promise( ( resolve ) => resolve( require ) );
-			} ),
+			require = jest.fn().mockReturnValue( app ),
+			using = jest.fn().mockResolvedValue( require ),
 			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
 			repoMwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
 			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),

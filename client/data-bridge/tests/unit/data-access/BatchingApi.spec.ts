@@ -139,7 +139,7 @@ describe( 'BatchingApi', () => {
 		resultingParams: object[],
 	) => {
 		const innerApi: Api = {
-			get: jest.fn( () => Promise.resolve( {} ) ),
+			get: jest.fn().mockResolvedValue( {} ),
 		} as unknown as Api;
 		const api = new BatchingApi( innerApi );
 

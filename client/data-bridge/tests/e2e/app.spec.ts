@@ -31,7 +31,7 @@ const manager = {
 	on,
 };
 const dialog = {
-	getManager: jest.fn( () => manager ),
+	getManager: jest.fn().mockReturnValue( manager ),
 };
 
 const mockPrepareContainer = jest.fn( ( _x?: any, _y?: any, _z?: any ) => dialog );
@@ -54,8 +54,8 @@ function prepareTestEnv( options: {
 	const editFlow = options.editFlow || EditFlow.OVERWRITE;
 
 	const app = { launch, createServices };
-	const require = jest.fn( () => app );
-	const using = jest.fn( () => new Promise( ( resolve ) => resolve( require ) ) );
+	const require = jest.fn().mockReturnValue( app );
+	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(
 		using,
@@ -74,7 +74,7 @@ function prepareTestEnv( options: {
 		},
 		uls: {
 			data: {
-				getDir: jest.fn( () => 'ltr' ),
+				getDir: jest.fn().mockReturnValue( 'ltr' ),
 			},
 		},
 	} as any;
@@ -85,7 +85,7 @@ function prepareTestEnv( options: {
 		};
 	} );
 	( window as MwWindow ).mw.language = {
-		bcp47: jest.fn( () => 'de' ),
+		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
 
 	const testLinkHref = `https://www.wikidata.org/wiki/${entityId}?uselang=en#${propertyId}`;
@@ -191,27 +191,25 @@ describe( 'app', () => {
 			},
 		};
 
-		const postWithEditToken = jest.fn( () => {
-			return Promise.resolve( {
-				entity: {
-					lastrevid: 2183,
-					id: entityId,
-					claims: {
-						[ propertyId ]: [ {
-							mainsnak: {
-								snaktype: 'value',
-								property: propertyId,
-								datavalue: {
-									value: 'String for Wikidata bridge',
-									type: 'string',
-								},
-								datatype: 'string',
+		const postWithEditToken = jest.fn().mockResolvedValue( {
+			entity: {
+				lastrevid: 2183,
+				id: entityId,
+				claims: {
+					[ propertyId ]: [ {
+						mainsnak: {
+							snaktype: 'value',
+							property: propertyId,
+							datavalue: {
+								value: 'String for Wikidata bridge',
+								type: 'string',
 							},
-						} ],
-					},
+							datatype: 'string',
+						},
+					} ],
 				},
-				success: 1,
-			} );
+			},
+			success: 1,
 		} );
 
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {

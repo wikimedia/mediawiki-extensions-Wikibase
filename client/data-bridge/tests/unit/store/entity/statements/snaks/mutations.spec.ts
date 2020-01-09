@@ -20,9 +20,7 @@ describe( 'snaks/Mutations', () => {
 
 	describe( 'bounded', () => {
 		let returnSnak: Snak|null;
-		const traveler = jest.fn( () => {
-			return returnSnak;
-		} );
+		const traveler = jest.fn( () => returnSnak );
 
 		const mutations: MutationTree<StatmentsState> = bindableMutations( {
 			setDataValue: 'setTestDataValue',
