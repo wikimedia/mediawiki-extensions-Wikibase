@@ -1722,6 +1722,13 @@ final class WikibaseClient {
 		return MediaWikiServices::getInstance()->getMainWANObjectCache();
 	}
 
+	/**
+	 * @deprecated Must switch to using non legacy term storage
+	 * Currently used by:
+	 *  - getpropertyLabelResolver - Which already has a compatibility layer in place
+	 *
+	 * @return TermSqlIndex
+	 */
 	private function getPropertyTermIndex() {
 		// TODO: Add special 'optimization' for case item and properties come from the single source to save
 		// an instance? Uses of both seem rather exclusive, though, don't they?

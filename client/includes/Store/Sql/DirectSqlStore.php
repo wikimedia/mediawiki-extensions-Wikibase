@@ -9,7 +9,6 @@ use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\SettingsArray;
-use Wikibase\TermIndex;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -22,7 +21,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
-use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
@@ -110,16 +108,6 @@ class DirectSqlStore implements ClientStore {
 	 * @var WikibaseServices
 	 */
 	private $wikibaseServices = null;
-
-	/**
-	 * @var PropertyLabelResolver|null
-	 */
-	private $propertyLabelResolver = null;
-
-	/**
-	 * @var TermIndex|null
-	 */
-	private $termIndex = null;
 
 	/**
 	 * @var EntityIdLookup
