@@ -133,8 +133,9 @@ class SiteLinkUsageLookup implements UsageLookup {
 	 */
 	private function getPageEntityUsagesFromSiteLinkRows( array $rows ) {
 		$titleFactory = $this->titleFactory;
+		$fname = __METHOD__;
 		$pageEntityUsages = array_map(
-			function ( array $row ) use ( $titleFactory ) {
+			function ( array $row ) use ( $titleFactory, $fname ) {
 				// $row = [ $siteId, $pageName, $numericItemId ];
 				$itemId = ItemId::newFromNumber( $row[2] );
 				$title = $titleFactory->newFromText( $row[1] );
@@ -151,7 +152,7 @@ class SiteLinkUsageLookup implements UsageLookup {
 					$this->logger->debug(
 						'{method}: Article ID for {titleText} is 0.',
 						[
-							'method' => __METHOD__,
+							'method' => $fname,
 							'titleText' => $title->getFullText()
 						]
 					);

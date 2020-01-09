@@ -6,7 +6,6 @@
 		<exclude name="MediaWiki.Usage.NullableType.PHP71NullableStyle" />
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent" />
 		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
-		<exclude name="MediaWiki.Usage.MagicConstantClosure.FoundConstantMethod" />
 		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />
 		<exclude name="Squiz.PHP.NonExecutableCode.ReturnNotRequired" />
 		<exclude name="Squiz.PHP.NonExecutableCode.Unreachable" />
