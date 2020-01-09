@@ -176,6 +176,7 @@ class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
 
 	/**
 	 * @param EntityId $entityId
+	 * @param int $revisionId
 	 * @param string $languageCode
 	 * @param string $termName
 	 * @return string

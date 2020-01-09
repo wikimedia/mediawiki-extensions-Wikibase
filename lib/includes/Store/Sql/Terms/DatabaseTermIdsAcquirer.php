@@ -114,6 +114,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *			[ 'language' => 'term' | [ 'term1', 'term2', ... ] ], ...
 	 *		], ...
 	 *	]
+	 * @param ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
 	 *
 	 * @return array
 	 *	[
@@ -192,6 +193,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *			[ 'language' => [ <textId1>, <textId2>, ... ] ], ...
 	 *		], ...
 	 *	]
+	 * @param ReplicaMasterAwareRecordIdsAcquirer $textInLangIdsAcquirer
 	 *
 	 * @return array
 	 *	[
@@ -270,6 +272,8 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 	 *		'type' => [ <textInLangId1>, <textInLangId2>, ... ],
 	 *		...
 	 *	]
+	 * @param ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer
+	 * @param array $idsToRestore
 	 *
 	 * @return array
 	 *	[

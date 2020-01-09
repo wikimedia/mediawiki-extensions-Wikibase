@@ -28,10 +28,10 @@ class WikibaseStringValueNormalizer implements StringNormalizer {
 
 	/**
 	 * Trims leading and trailing whitespace and performs unicode normalization
-	 * by calling Wikibase\StringNormalizer::trimToNFC().
+	 * by calling \Wikibase\StringNormalizer::trimToNFC().
 	 *
 	 * @see StringNormalizer::normalize()
-	 * @see Wikibase\StringNormalizer::trimToNFC()
+	 * @see \Wikibase\StringNormalizer::trimToNFC()
 	 *
 	 * @param string $value the value to normalize
 	 *

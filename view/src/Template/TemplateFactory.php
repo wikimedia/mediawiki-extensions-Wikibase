@@ -58,6 +58,7 @@ class TemplateFactory {
 	 *
 	 * @param string $key template key
 	 * Varargs: normal template parameters
+	 * @param string|array ...$params
 	 *
 	 * @return string
 	 */

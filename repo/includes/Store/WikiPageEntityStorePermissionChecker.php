@@ -47,6 +47,7 @@ class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 	/**
 	 * @param EntityNamespaceLookup $namespaceLookup
 	 * @param EntityTitleLookup $titleLookup
+	 * @param PermissionManager $permissionManager
 	 * @param string[] $availableRights
 	 */
 	public function __construct(

@@ -97,6 +97,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntitySource $entitySource
+	 * @param DataAccessSettings $dataAccessSettings
 	 * @param string|bool $wikiDb
 	 * @param string $repositoryName
 	 */

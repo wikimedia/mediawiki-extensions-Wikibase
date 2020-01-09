@@ -364,6 +364,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	/**
 	 * @param string $string
 	 * @param mixed $default
+	 * @param array $loggingContext
 	 * @return mixed
 	 * @throws \Exception
 	 *

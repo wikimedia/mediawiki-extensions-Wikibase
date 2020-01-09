@@ -6,7 +6,7 @@ use Html;
 use Wikibase\DataModel\Term\TermFallback;
 
 /**
- * Generates HTML (usually a <sup> element) to make the actual and source languages of terms
+ * Generates HTML (usually a 'sup' element) to make the actual and source languages of terms
  * (typically labels and descriptions) that are the result of a language fallback chain and/or
  * transliteration visible to the user.
  *
