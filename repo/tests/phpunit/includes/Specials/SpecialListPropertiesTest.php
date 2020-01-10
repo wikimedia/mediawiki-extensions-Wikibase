@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
-use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**
@@ -55,10 +55,10 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return BufferingTermLookup
+	 * @return BufferingTermIndexTermLookup
 	 */
 	private function getBufferingTermLookup() {
-		$lookup = $this->getMockBuilder( BufferingTermLookup::class )
+		$lookup = $this->getMockBuilder( BufferingTermIndexTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$lookup->expects( $this->any() )

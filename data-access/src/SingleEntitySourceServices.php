@@ -39,7 +39,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
-use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
@@ -370,7 +370,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->prefetchingTermLookup === null ) {
 			$termIndex = $this->getTermIndex();
 
-			$termIndexBackedTermLookup = new BufferingTermLookup(
+			$termIndexBackedTermLookup = new BufferingTermIndexTermLookup(
 				$termIndex, // TODO: customize buffer sizes
 				1000
 			);
