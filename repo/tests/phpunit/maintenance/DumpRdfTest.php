@@ -35,6 +35,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\DumpRdf;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Rdf\RdfVocabulary;
@@ -174,7 +175,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				[ '' => 'fooUri/' ],
 				[ '' => 'acme/EntityData/' ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
+				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => '' ],
 				[ '' => '' ]

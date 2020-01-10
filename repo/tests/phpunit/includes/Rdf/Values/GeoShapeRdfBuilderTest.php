@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
@@ -39,7 +40,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]
@@ -69,7 +70,7 @@ class GeoShapeRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]

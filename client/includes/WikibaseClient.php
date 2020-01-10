@@ -801,7 +801,7 @@ final class WikibaseClient {
 			),
 			$entityTypeDefinitions,
 			MediaWikiServices::getInstance()->getSiteLookup(),
-			self::getEntitySourceDefinitionsFromSettings( $settings )
+			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
 	}
 
@@ -850,11 +850,11 @@ final class WikibaseClient {
 	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
 	// Having a "entitySources" or so setting might be better, and would also allow unifying
 	// the way these are configured in Repo and in Client parts
-	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 
-			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ) );
+			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $entityTypeDefinitions );
 		}
 
 		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
@@ -918,7 +918,7 @@ final class WikibaseClient {
 			);
 		}
 
-		return new EntitySourceDefinitions( $sources );
+		return new EntitySourceDefinitions( $sources, $entityTypeDefinitions );
 	}
 
 	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {

@@ -10,6 +10,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -39,7 +40,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 
 		return new RepoLinker(
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
 			$conceptBaseUri,
 			$articlePath,

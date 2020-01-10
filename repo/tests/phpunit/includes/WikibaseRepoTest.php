@@ -392,7 +392,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				$settings->getSetting( 'repositories' ),
 				$entityTypeDefinitions
 			),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
@@ -432,12 +432,13 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		$settings->setSetting( 'useEntitySourceBasedFederation', false );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		return new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
-			new RepositoryDefinitions( $repoDefinitions, new EntityTypeDefinitions( [] ) ),
-			new EntitySourceDefinitions( [] )
+			$entityTypeDefinitions,
+			new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions ),
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 	}
 
@@ -471,7 +472,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				),
 				$entityTypeDefinitions
 			),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
@@ -617,15 +618,18 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	private function getEntitySourceDefinitions() {
-		return new EntitySourceDefinitions( [ new EntitySource(
-			'test',
-			false,
-			[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
-			'',
-			'',
-			'',
-			''
-		) ] );
+		return new EntitySourceDefinitions(
+			[ new EntitySource(
+				'test',
+				false,
+				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+				'',
+				'',
+				'',
+				''
+			) ],
+			new EntityTypeDefinitions( [] )
+		);
 	}
 
 	public function testGetApiHelperFactory() {

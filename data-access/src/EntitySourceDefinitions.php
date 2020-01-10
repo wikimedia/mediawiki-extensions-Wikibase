@@ -2,6 +2,7 @@
 
 namespace Wikibase\DataAccess;
 
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -29,12 +30,19 @@ class EntitySourceDefinitions {
 	private $sourceToRdfPredicateNamespacePrefixMap = null;
 
 	/**
-	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
+	 * @var string[] Associative array mapping "sub entity type" name to the name of its "parent" entity type
 	 */
-	public function __construct( array $sources ) {
+	private $subEntityTypeMap;
+
+	/**
+	 * @param EntitySource[] $sources with unique names. An single entity type can not be used in two different sources.
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
+	 */
+	public function __construct( array $sources, EntityTypeDefinitions $entityTypeDefinitions ) {
 		Assert::parameterElementType( EntitySource::class, $sources, '$sources' );
 		$this->assertNoDuplicateSourcesOrEntityTypes( $sources );
 		$this->sources = $sources;
+		$this->subEntityTypeMap = $this->buildSubEntityTypeMap( $entityTypeDefinitions );
 	}
 
 	/**
@@ -66,6 +74,19 @@ class EntitySourceDefinitions {
 		}
 	}
 
+	private function buildSubEntityTypeMap( EntityTypeDefinitions $entityTypeDefinitions ) {
+		$subEntityTypes = $entityTypeDefinitions->getSubEntityTypes();
+
+		$subEntityTypeMap = [];
+		foreach ( $subEntityTypes as $type => $subTypes ) {
+			foreach ( $subTypes as $subType ) {
+				$subEntityTypeMap[$subType] = $type;
+			}
+		}
+
+		return $subEntityTypeMap;
+	}
+
 	public function getSources() {
 		return $this->sources;
 	}
@@ -77,6 +98,10 @@ class EntitySourceDefinitions {
 	public function getSourceForEntityType( $entityType ) {
 		// TODO: when the same entity type can be provided by multiple source (currently forbidden),
 		// this should return all sources
+		if ( array_key_exists( $entityType, $this->subEntityTypeMap ) ) {
+			$entityType = $this->subEntityTypeMap[$entityType];
+		}
+
 		$entityTypeToSourceMapping = $this->getEntityTypeToSourceMapping();
 		if ( array_key_exists( $entityType, $entityTypeToSourceMapping ) ) {
 			return $entityTypeToSourceMapping[$entityType];

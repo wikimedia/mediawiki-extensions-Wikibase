@@ -160,11 +160,13 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$itemServices->method( 'getPrefetchingTermLookup' )
 			->willReturn( $itemLookup );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' )
-			] ),
-			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
+			], $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -180,11 +182,13 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$itemServices->method( 'getPrefetchingTermLookup' )
 			->willReturn( $itemLookup );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' )
-			] ),
-			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
+			], $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -230,11 +234,13 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$itemServices->method( 'getEntityPrefetcher' )
 			->willReturn( $itemPrefetcher );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' )
-			] ),
-			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
+			], $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[ 'items' => $itemServices ]
 		);
 
@@ -262,11 +268,12 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	}
 
 	public function testGivenNoSourceProvidingProperties_getPropertyInfoLookupThrowsException() {
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$services = new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' ),
-			] ),
-			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
+			], $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [], [] ),
 			[]
 		);
 
@@ -328,12 +335,13 @@ class MultipleEntitySourceServicesTest extends TestCase {
 	 * @return MultipleEntitySourceServices
 	 */
 	private function newMultipleEntitySourceServices( array $perSourceServices ) {
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		return new MultipleEntitySourceServices(
 			new EntitySourceDefinitions( [
 				new EntitySource( 'items', 'itemdb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' ),
 				new EntitySource( 'props', 'propb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', 'prop', 'prop', 'props' ),
-			] ),
-			new GenericServices( new EntityTypeDefinitions( [] ), [], [] ),
+			], $entityTypeDefinitions ),
+			new GenericServices( $entityTypeDefinitions, [], [] ),
 			$perSourceServices
 		);
 	}

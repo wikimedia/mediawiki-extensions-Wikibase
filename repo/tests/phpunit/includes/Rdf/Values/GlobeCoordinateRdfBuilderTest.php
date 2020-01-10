@@ -7,6 +7,7 @@ use DataValues\Geo\Values\GlobeCoordinateValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ComplexValueRdfHelper;
@@ -155,7 +156,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]
@@ -201,7 +202,7 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]

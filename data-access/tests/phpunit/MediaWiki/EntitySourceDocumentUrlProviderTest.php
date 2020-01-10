@@ -6,6 +6,7 @@ use MediaWiki\Interwiki\InterwikiLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider
@@ -21,8 +22,8 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 		$this->setContentLang( 'de' );
 		$this->setMwGlobals( 'wgArticlePath', 'http://foo.test/wiki/$1' );
 
-		$sources = new EntitySourceDefinitions( [
-			new EntitySource(
+		$sources = new EntitySourceDefinitions(
+			[ new EntitySource(
 				'local',
 				false,
 				[],
@@ -30,8 +31,9 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 				'',
 				'',
 				''
-			)
-		] );
+			) ],
+			new EntityTypeDefinitions( [] )
+		);
 
 		$urlProvider = new EntitySourceDocumentUrlProvider();
 
@@ -50,8 +52,8 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 		$this->setService( 'InterwikiLookup', $interwikiLookup );
 		$this->setContentLang( 'de' );
 
-		$sources = new EntitySourceDefinitions( [
-			new EntitySource(
+		$sources = new EntitySourceDefinitions(
+			[ new EntitySource(
 				'nonlocal',
 				false,
 				[],
@@ -59,8 +61,8 @@ class EntitySourceDocumentUrlProviderTest extends \MediaWikiTestCase {
 				'',
 				'',
 				'nonlocal'
-			)
-		] );
+			) ],
+		new EntityTypeDefinitions( [] ) );
 
 		$urlProvider = new EntitySourceDocumentUrlProvider();
 

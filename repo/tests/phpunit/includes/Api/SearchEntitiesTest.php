@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -148,7 +149,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
@@ -485,7 +486,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'o',
 					'otherwiki'
 				)
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 
@@ -548,7 +549,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getContentLanguages(),
 			[ 'kitten' ],
 			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 

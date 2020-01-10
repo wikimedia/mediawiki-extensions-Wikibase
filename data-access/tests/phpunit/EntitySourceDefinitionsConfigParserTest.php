@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\DataAccess\EntitySourceDefinitionsConfigParser
@@ -28,7 +29,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
 		$parser = new EntitySourceDefinitionsConfigParser();
 
-		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config );
+		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new EntityTypeDefinitions( [] ) );
 
 		$sources = $sourceDefinitions->getSources();
 
@@ -64,7 +65,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
 		$parser = new EntitySourceDefinitionsConfigParser();
 
-		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config );
+		$sourceDefinitions = $parser->newDefinitionsFromConfigArray( $config, new EntityTypeDefinitions( [] ) );
 
 		$sources = $sourceDefinitions->getSources();
 
@@ -95,7 +96,7 @@ class EntitySourceDefinitionsConfigParserTest extends TestCase {
 
 		$this->expectException( \InvalidArgumentException::class );
 
-		$parser->newDefinitionsFromConfigArray( $config );
+		$parser->newDefinitionsFromConfigArray( $config, new EntityTypeDefinitions( [] ) );
 	}
 
 	public function provideInvalidConfig() {

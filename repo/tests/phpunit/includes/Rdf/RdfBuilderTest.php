@@ -11,6 +11,7 @@ use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
@@ -669,7 +670,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ],
@@ -698,7 +699,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( '', 'somedb', [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ],
@@ -726,7 +727,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ],
@@ -762,7 +763,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ],

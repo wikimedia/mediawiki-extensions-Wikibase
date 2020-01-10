@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfVocabulary;
 
 /**
@@ -32,7 +33,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ 'foo' => '<BASE-foo>' ],
 			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd', 'foo' => 'foo' ],
 			[ '' => '', 'foo' => 'foo' ]
@@ -49,7 +50,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			new EntitySourceDefinitions( [
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
 				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			'local',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
@@ -63,7 +64,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			[ 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd', 'foo' => 'foo' ],
 			[ '' => '', 'foo' => 'foo' ]
@@ -80,7 +81,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			new EntitySourceDefinitions( [
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
 				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			'local',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ]
@@ -92,7 +93,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd', 'foo' => 'foo' ],
 			[ '' => '', 'foo' => 'foo' ],
@@ -127,7 +128,7 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 					'other',
 					''
 				),
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			'localwiki',
 			[ 'localwiki' => 'wd', 'otherwiki' => 'other' ],
 			[ 'localwiki' => '', 'otherwiki' => 'other' ],

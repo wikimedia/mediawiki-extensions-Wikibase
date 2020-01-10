@@ -10,6 +10,7 @@ use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler
@@ -29,7 +30,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$client = WikibaseClient::getDefaultInstance();
 		$repoLinker = new RepoLinker(
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'https://www.wikidata.org',
 			[ '' => 'https://www.wikidata.org/entity' ],
 			'/wiki/$1',

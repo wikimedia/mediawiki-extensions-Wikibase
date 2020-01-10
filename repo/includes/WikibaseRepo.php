@@ -418,7 +418,7 @@ class WikibaseRepo {
 			),
 			$entityTypeDefinitions,
 			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
-			self::getEntitySourceDefinitionsFromSettings( $settings )
+			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
 	}
 
@@ -460,11 +460,11 @@ class WikibaseRepo {
 		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
 	}
 
-	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings ) {
+	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 
-			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ) );
+			return $configParser->newDefinitionsFromConfigArray( $settings->getSetting( 'entitySources' ), $entityTypeDefinitions );
 		}
 
 		$localEntityNamespaces = $settings->getSetting( 'entityNamespaces' );
@@ -518,7 +518,7 @@ class WikibaseRepo {
 			);
 		}
 
-		return new EntitySourceDefinitions( $sources );
+		return new EntitySourceDefinitions( $sources, $entityTypeDefinitions );
 	}
 
 	private static function splitNamespaceAndSlot( $namespaceAndSlot ) {

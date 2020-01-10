@@ -142,12 +142,13 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
+			$entityTypeDefinitions,
 			$this->getSiteLookup(),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -163,12 +164,13 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider getLangLinkSiteGroupProvider
 	 */
 	public function testGetLangLinkSiteGroup( $expected, SettingsArray $settings, SiteLookup $siteLookup ) {
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$client = new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
+			$entityTypeDefinitions,
 			$siteLookup,
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 
 		$this->assertEquals( $expected, $client->getLangLinkSiteGroup() );
@@ -449,15 +451,18 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantPropertySlotName = 'main';
 
-		return new EntitySourceDefinitions( [ new EntitySource(
-			'test',
-			false,
-			[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
-			'',
-			'',
-			'',
-			''
-		) ] );
+		return new EntitySourceDefinitions(
+			[ new EntitySource(
+				'test',
+				false,
+				[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
+				'',
+				'',
+				'',
+				''
+			) ],
+			new EntityTypeDefinitions( [] )
+		);
 	}
 
 }

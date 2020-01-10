@@ -8,6 +8,7 @@ use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\EntityIdRdfBuilder;
@@ -42,7 +43,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]
@@ -75,7 +76,7 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '', '', '' )
-			] ),
+			], new EntityTypeDefinitions( [] ) ),
 			'test',
 			[ 'test' => '' ],
 			[ 'test' => '' ]

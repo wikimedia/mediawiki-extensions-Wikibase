@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
@@ -166,7 +167,7 @@ class RdfBuilderTestData {
 			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
 			[ '' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '', 'foreign' => 'foreign' ],
 			[ '' => '', 'foreign' => 'foreign' ],
@@ -182,26 +183,29 @@ class RdfBuilderTestData {
 			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
 			[ 'wikidata' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'wikidata',
-					'wikidatadb',
-					[ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ],
-					self::URI_BASE,
-					'wd',
-					'',
-					''
-				),
-				new EntitySource(
-					'foreign',
-					'foreigndb',
-					[ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ],
-					self::URI_BASE_FOREIGN,
-					'for',
-					'for',
-					''
-				),
-			] ),
+			new EntitySourceDefinitions(
+				[
+					new EntitySource(
+						'wikidata',
+						'wikidatadb',
+						[ 'item' => [ 'namespaceId' => 700, 'slot' => 'main' ] ],
+						self::URI_BASE,
+						'wd',
+						'',
+						''
+					),
+					new EntitySource(
+						'foreign',
+						'foreigndb',
+						[ 'property' => [ 'namespaceId' => 900, 'slot' => 'main' ] ],
+						self::URI_BASE_FOREIGN,
+						'for',
+						'for',
+						''
+					),
+				],
+				new EntityTypeDefinitions( [] )
+			),
 			'wikidata',
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],
 			[ 'wikidata' => '', 'foreign' => 'foreign' ],

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Closure;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
@@ -42,7 +43,7 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 			[ ''  => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]

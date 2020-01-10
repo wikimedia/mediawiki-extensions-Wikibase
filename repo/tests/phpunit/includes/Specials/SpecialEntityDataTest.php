@@ -19,6 +19,7 @@ use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -103,7 +104,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				[ '' => self::URI_BASE ],
 				[ '' => self::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
+				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => '' ],
 				[ '' => '' ]

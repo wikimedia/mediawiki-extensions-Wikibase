@@ -10,6 +10,7 @@ use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\Client\RepoLinker
@@ -48,7 +49,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$settings['baseUrl'],
 			$settings['conceptBaseUri'],
 			$settings['articlePath'],
@@ -248,26 +249,29 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 		$linker = new RepoLinker(
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'itemwiki',
-					'itemdb',
-					[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
-					'http://www.itemwiki.com/entity',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'propertywiki',
-					'propdb',
-					[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
-					'http://www.itemwiki.com/entity',
-					'',
-					'',
-					''
-				),
-			] ),
+			new EntitySourceDefinitions(
+				[
+					new EntitySource(
+						'itemwiki',
+						'itemdb',
+						[ 'item' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+						'http://www.itemwiki.com/entity',
+						'',
+						'',
+						''
+					),
+					new EntitySource(
+						'propertywiki',
+						'propdb',
+						[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
+						'http://www.itemwiki.com/entity',
+						'',
+						'',
+						''
+					),
+				],
+				new EntityTypeDefinitions( [] )
+			),
 			'BASE_URI',
 			$conceptBaseUris,
 			'ARTICLE_PATH',

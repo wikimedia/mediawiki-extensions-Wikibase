@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
@@ -147,7 +148,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ],
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
