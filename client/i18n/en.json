@@ -136,6 +136,11 @@
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>The block was made by $1. The reason given is <em>$2</em>.</p>\n<ul>\n<li>Start of block: $8</li>\n<li>Expiration of block: $6</li>\n</ul>\n<p><strong>What can I do?</strong></p>\n<p>\nYou can contact $4 or another [[{{int:grouppage-sysop}}|administrator]] to discuss the block.\nYou can use the \"{{int:emailuser}}\" feature if a valid email address is specified in your [[Special:Preferences|preferences]] and you have not been blocked from using it.\nThe block ID is #$5.\nPlease include all above details in any queries you make.\n</p>",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Unknown permission error",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "You cannot edit this value due to unknown reasons",
+	"wikibase-client-data-bridge-edit-decision-heading": "Please select the type of edit that you made:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>I corrected</strong> a wrong value",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "The previous value was not correct and has never been.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>I updated</strong> an outdated value",
+	"wikibase-client-data-bridge-edit-decision-update-description": "The previous value used to be correct but is now outdated.",
 	"wikibase-client-data-bridge-references-heading": "References",
 	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;"
 }

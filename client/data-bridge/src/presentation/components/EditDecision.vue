@@ -1,0 +1,68 @@
+<template>
+	<div class="wb-db-edit-decision">
+		<h2 class="wb-db-edit-decision__heading">
+			{{ $messages.get( $messages.KEYS.EDIT_DECISION_HEADING ) }}
+		</h2>
+		<RadioGroup>
+			<RadioInput name="editDecision" html-value="replace" v-model="editDecision">
+				<template slot="label">
+					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_LABEL )" />
+				</template>
+				<template slot="description">
+					{{ $messages.get( $messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ) }}
+				</template>
+			</RadioInput>
+			<RadioInput name="editDecision" html-value="update" v-model="editDecision">
+				<template slot="label">
+					<span v-html="$messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_LABEL )" />
+				</template>
+				<template slot="description">
+					{{ $messages.get( $messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ) }}
+				</template>
+			</RadioInput>
+		</RadioGroup>
+	</div>
+</template>
+
+<script lang="ts">
+import EditDecisionOption from '@/definitions/EditDecision';
+import RadioGroup from '@/presentation/components/RadioGroup.vue';
+import { BRIDGE_SET_EDIT_DECISION } from '@/store/actionTypes';
+import { RadioInput } from '@wmde/wikibase-vuejs-components';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+@Component( {
+	components: {
+		RadioGroup,
+		RadioInput,
+	},
+} )
+export default class EditDecision extends Vue {
+
+	public get editDecision(): EditDecisionOption {
+		return this.$store.state.editDecision;
+	}
+
+	public set editDecision( value: EditDecisionOption ) {
+		this.$store.dispatch( BRIDGE_SET_EDIT_DECISION, value );
+	}
+
+}
+</script>
+
+<style lang="scss">
+.wb-db-edit-decision {
+	margin-right: 20px;
+	margin-left: $margin-center-column-left;
+
+	&__heading {
+		margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;
+		font-weight: 600;
+		font-size: 1.1em;
+	}
+
+	strong {
+		font-weight: bold;
+	}
+}
+</style>

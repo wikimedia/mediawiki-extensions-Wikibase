@@ -52,6 +52,11 @@ const messages = {
 	[ MessageKeys.BRIDGE_DIALOG_TITLE ]: 'bridge dev',
 	[ MessageKeys.SAVE_CHANGES ]: 'save changes',
 	[ MessageKeys.CANCEL ]: 'cancel',
+	[ MessageKeys.EDIT_DECISION_HEADING ]: 'Please select the type of edit that you made:',
+	[ MessageKeys.EDIT_DECISION_REPLACE_LABEL ]: '<strong>I corrected</strong> a wrong value',
+	[ MessageKeys.EDIT_DECISION_REPLACE_DESCRIPTION ]: 'The previous value was not correct and has never been.',
+	[ MessageKeys.EDIT_DECISION_UPDATE_LABEL ]: '<strong>I updated</strong> an outdated value',
+	[ MessageKeys.EDIT_DECISION_UPDATE_DESCRIPTION ]: 'The previous value used to be correct but is now outdated.',
 	[ MessageKeys.REFERENCES_HEADING ]: 'References',
 	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '.&#32;',
 } as { [ key in MessageKeys ]: string };

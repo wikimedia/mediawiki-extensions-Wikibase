@@ -10,6 +10,7 @@ import Vuex, {
 } from 'vuex';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
+import EditDecision from '@/presentation/components/EditDecision.vue';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
@@ -64,5 +65,14 @@ describe( 'DataBridge', () => {
 		} );
 
 		expect( wrapper.find( ReferenceSection ).exists() ).toBeTruthy();
+	} );
+
+	it( 'mounts EditDecision', () => {
+		const wrapper = shallowMount( DataBridge, {
+			store,
+			localVue,
+		} );
+
+		expect( wrapper.find( EditDecision ).exists() ).toBeTruthy();
 	} );
 } );

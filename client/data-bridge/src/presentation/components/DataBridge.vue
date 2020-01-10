@@ -7,10 +7,12 @@
 			:maxlength="this.$bridgeConfig.stringMaxLength"
 		/>
 		<ReferenceSection />
+		<EditDecision />
 	</section>
 </template>
 
 <script lang="ts">
+import EditDecision from '@/presentation/components/EditDecision.vue';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Action, Getter, State } from 'vuex-class';
@@ -22,6 +24,7 @@ import { BRIDGE_SET_TARGET_VALUE } from '@/store/actionTypes';
 
 @Component( {
 	components: {
+		EditDecision,
 		StringDataValue,
 		ReferenceSection,
 	},
