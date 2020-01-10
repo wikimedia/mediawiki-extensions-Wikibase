@@ -104,7 +104,7 @@ use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
@@ -978,7 +978,7 @@ class WikibaseRepo {
 	/**
 	 * @param string $displayLanguageCode
 	 *
-	 * @return TermIndexSearchInteractor
+	 * @return MatchingTermsLookupSearchInteractor
 	 */
 	public function newTermSearchInteractor( $displayLanguageCode ) {
 		return $this->getWikibaseServices()->getTermSearchInteractorFactory()->newInteractor(

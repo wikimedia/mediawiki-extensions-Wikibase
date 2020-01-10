@@ -7,8 +7,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 
@@ -16,12 +16,12 @@ use Wikimedia\Assert\Assert;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
+class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInteractor {
 
 	/**
-	 * @var TermIndex
+	 * @var MatchingTermsLookup
 	 */
-	private $termIndex;
+	private $matchingTermsLookup;
 
 	/**
 	 * @var LanguageFallbackChainFactory
@@ -49,19 +49,19 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 	private $termSearchOptions;
 
 	/**
-	 * @param TermIndex $termIndex Used to search the terms
+	 * @param MatchingTermsLookup $matchingTermsLookup Used to search the terms
 	 * @param LanguageFallbackChainFactory $fallbackFactory
 	 * @param PrefetchingTermLookup $bufferingTermLookup Provides the displayTerms
 	 * @param string $displayLanguageCode
 	 */
 	public function __construct(
-		TermIndex $termIndex,
+		MatchingTermsLookup $matchingTermsLookup,
 		LanguageFallbackChainFactory $fallbackFactory,
 		PrefetchingTermLookup $bufferingTermLookup,
 		$displayLanguageCode
 	) {
 		Assert::parameterType( 'string', $displayLanguageCode, '$displayLanguageCode' );
-		$this->termIndex = $termIndex;
+		$this->matchingTermsLookup = $matchingTermsLookup;
 		$this->bufferingTermLookup = $bufferingTermLookup;
 		$this->languageFallbackChainFactory = $fallbackFactory;
 		$this->displayLanguageCode = $displayLanguageCode;
@@ -121,7 +121,7 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 	) {
 		$languageCodes = [ $languageCode ];
 
-		$matchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
+		$matchedTermIndexEntries = $this->matchingTermsLookup->getTopMatchingTerms(
 			$this->makeTermIndexSearchCriteria(
 				$text,
 				$languageCodes,
@@ -193,7 +193,7 @@ class TermIndexSearchInteractor implements ConfigurableTermSearchInteractor {
 		$entityType,
 		array $matchedEntityIdSerializations
 	) {
-		$fallbackMatchedTermIndexEntries = $this->termIndex->getTopMatchingTerms(
+		$fallbackMatchedTermIndexEntries = $this->matchingTermsLookup->getTopMatchingTerms(
 			$this->makeTermIndexSearchCriteria(
 				$text,
 				$this->addFallbackLanguageCodes( $languageCodes ),

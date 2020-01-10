@@ -9,22 +9,23 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Store\BufferingTermIndexTermLookup;
+use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 
 /**
- * @covers \Wikibase\Lib\Interactors\TermIndexSearchInteractor
+ * @covers \Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class TermIndexSearchInteractorTest extends \PHPUnit\Framework\TestCase {
+class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getMockTermIndex() {
 		return new MockTermIndex(
@@ -159,14 +160,14 @@ class TermIndexSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	 * @param bool|null $prefixSearch
 	 * @param int|null $limit
 	 *
-	 * @return TermIndexSearchInteractor
+	 * @return MatchingTermsLookupSearchInteractor
 	 */
 	private function newTermSearchInteractor(
 		$caseSensitive = null,
 		$prefixSearch = null,
 		$limit = null
 	) {
-		$interactor = new TermIndexSearchInteractor(
+		$interactor = new MatchingTermsLookupSearchInteractor(
 			$this->getMockTermIndex(),
 			$this->getMockLanguageFallbackChainFactory(),
 			$this->getMockBufferingTermLookup(),
