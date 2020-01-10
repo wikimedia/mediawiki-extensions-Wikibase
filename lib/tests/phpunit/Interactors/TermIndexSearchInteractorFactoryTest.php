@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Interactors;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\TermIndex;
 
 /**

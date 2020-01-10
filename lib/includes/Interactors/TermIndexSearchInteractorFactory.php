@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Interactors;
 
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\TermIndex;
 
 /**

@@ -6,7 +6,7 @@ use InvalidArgumentException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikimedia\Assert\Assert;
 
 /**

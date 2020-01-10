@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Lib\Store;
+namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;

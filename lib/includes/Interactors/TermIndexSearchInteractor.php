@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;

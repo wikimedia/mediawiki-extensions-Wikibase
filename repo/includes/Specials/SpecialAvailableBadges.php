@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 
 /**
  * Page for listing all available badges.

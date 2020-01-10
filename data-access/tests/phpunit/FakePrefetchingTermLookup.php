@@ -3,7 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 
 /**
  * A PrefetchingTermLookup providing dummy TermLookup functionality, i.e. always returning a fake label/description,

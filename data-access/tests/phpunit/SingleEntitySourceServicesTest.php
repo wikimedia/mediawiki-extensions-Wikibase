@@ -17,7 +17,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
 

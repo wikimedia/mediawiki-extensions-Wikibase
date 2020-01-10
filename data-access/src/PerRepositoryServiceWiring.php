@@ -4,6 +4,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataAccess\ByTypeDispatchingEntityInfoBuilder;
 use Wikibase\DataAccess\ByTypeDispatchingPrefetchingTermLookup;
+use Wikibase\DataAccess\NullPrefetchingTermLookup;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\Serializer\ForbiddenSerializer;
 use Wikibase\DataAccess\DataAccessSettings;
@@ -17,7 +18,7 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\PrefetchingTermLookup;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -192,7 +193,7 @@ return [
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
 
-		$fallbackTermLookup = new BufferingTermLookup(
+		$termIndexBackedTermLookup = new BufferingTermLookup(
 			$termIndex, // TODO: customize buffer sizes
 			1000
 		);
@@ -221,15 +222,17 @@ return [
 			'item' => new TermStoresDelegatingPrefetchingItemTermLookup(
 				$settings,
 				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
-				$fallbackTermLookup
+				$termIndexBackedTermLookup
 			)
 		];
 
 		if ( $settings->useNormalizedPropertyTerms() ) {
 			$lookups['property'] = new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain );
+		} else {
+			$lookups['property'] = $termIndexBackedTermLookup;
 		}
 
-		return new ByTypeDispatchingPrefetchingTermLookup( $lookups, $fallbackTermLookup );
+		return new ByTypeDispatchingPrefetchingTermLookup( $lookups, new NullPrefetchingTermLookup() );
 	},
 
 	'PropertyInfoLookup' => function (
