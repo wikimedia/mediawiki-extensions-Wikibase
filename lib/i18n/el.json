@@ -74,6 +74,7 @@
 	"version-wikibase": "Wikibase",
 	"wikibase-time-calendar-gregorian": "Γρηγοριανό ημερολόγιο",
 	"wikibase-time-calendar-julian": "Calendario Juliano",
+	"wikibase-time-precision-BCE": "$1 π.Χ.",
 	"wikibase-entity-summary-wbsetitem": "Δημιουργήστε ένα νέο αντικείμενο.",
 	"wikibase-entity-summary-wbsetreference": "Προσθέστε μια πηγή",
 	"wikibase-entity-summary-wbsetreference-add": "Πρόσθεσε πηγή στο ερώτημα",
