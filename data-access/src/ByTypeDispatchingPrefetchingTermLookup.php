@@ -95,4 +95,13 @@ class ByTypeDispatchingPrefetchingTermLookup extends EntityTermLookupBase implem
 		return array_filter( $terms, 'is_string' );
 	}
 
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$lookup = $this->getLookupForEntityType( $entityId->getEntityType() );
+
+		if ( $lookup !== null ) {
+			return $lookup->getPrefetchedAliases( $entityId, $languageCode );
+		}
+
+		return null;
+	}
 }

@@ -18,7 +18,7 @@ use Wikibase\TermIndexEntry;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class BufferingTermLookupTest extends EntityTermLookupTest {
+class BufferingTermIndexTermLookupTest extends EntityTermLookupTest {
 
 	protected function getEntityTermLookup() {
 		$termIndex = $this->getTermIndex();
@@ -165,6 +165,45 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 		// now.
 		$expected = [ 'de' => 'Wien', 'fr' => 'Vienne' ];
 		$this->assertEquals( $expected, $lookup->getLabels( $q116, [ 'de', 'fr' ] ) );
+	}
+
+	public function testGetPrefetchedAliases() {
+		$termIndex = $this->createMock( TermIndex::class );
+
+		$termIndex->expects( $this->any() )
+			->method( 'getTermsOfEntities' )
+			->will( $this->returnCallback( function(
+				array $ids,
+				array $termTypes = null,
+				array $languageCodes = null
+			) {
+				return [
+					new TermIndexEntry( [
+						'termType' => 'alias',
+						'termLanguage' => 'en',
+						'termText' => 'alias 1',
+						'entityId' => new ItemId('Q123')
+					] ),
+					new TermIndexEntry( [
+						'termType' => 'alias',
+						'termLanguage' => 'en',
+						'termText' => 'alias 2',
+						'entityId' => new ItemId('Q123')
+					] ),
+				];
+			} ) );
+
+
+		$lookup = new BufferingTermIndexTermLookup( $termIndex, 10 );
+		$q116 = new ItemId( 'Q123' );
+
+		$expected = null;
+		$this->assertEquals( $expected, $lookup->getPrefetchedAliases( $q116, 'en' ) );
+
+		$lookup->prefetchTerms( [ $q116 ], [ 'alias' ], [ 'en' ] );
+
+		$expected = [ 'alias 1', 'alias 2' ];
+		$this->assertEquals( $expected, $lookup->getPrefetchedAliases( $q116, 'en' ) );
 	}
 
 }

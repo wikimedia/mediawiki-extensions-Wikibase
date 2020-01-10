@@ -80,4 +80,17 @@ class FakePrefetchingTermLookupTest extends TestCase {
 		);
 	}
 
+	public function testGetPrefetchedAliases() {
+		$lookup = new FakePrefetchingTermLookup();
+
+		$id = new ItemId( 'Q1' );
+
+		$lookup->prefetchTerms( [ $id ], [ 'alias' ], [ 'fr' ] );
+
+		$this->assertEquals(
+			[ 'Q1 fr alias 1', 'Q1 fr alias 2' ],
+			$lookup->getPrefetchedAliases( $id, 'fr' )
+		);
+	}
+
 }
