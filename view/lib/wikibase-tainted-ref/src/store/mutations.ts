@@ -8,6 +8,9 @@ import {
 	SET_UNTAINTED,
 	SET_HELP_LINK,
 	SET_FEEDBACK_LINK,
+	SET_ALL_EDIT_MODE_FALSE,
+	SET_STATEMENT_EDIT_FALSE,
+	SET_STATEMENT_EDIT_TRUE,
 } from '@/store/mutationTypes';
 import Vue from 'vue';
 import Application from '@/store/Application';
@@ -29,6 +32,14 @@ export const mutations: MutationTree<Application> = {
 			Vue.set( state.statementsPopperIsOpen, guid, false );
 		} );
 	},
+	[ SET_ALL_EDIT_MODE_FALSE ](
+		state: Application,
+		payload: string[],
+	): void {
+		payload.forEach( ( guid ) => {
+			Vue.set( state.statementsEditState, guid, false );
+		} );
+	},
 	[ SET_TAINTED ](
 		state: Application,
 		payload: string,
@@ -40,6 +51,18 @@ export const mutations: MutationTree<Application> = {
 		payload: string,
 	): void {
 		state.statementsTaintedState[ payload ] = false;
+	},
+	[ SET_STATEMENT_EDIT_TRUE ](
+		state: Application,
+		payload: string,
+	): void {
+		state.statementsEditState[ payload ] = true;
+	},
+	[ SET_STATEMENT_EDIT_FALSE ](
+		state: Application,
+		payload: string,
+	): void {
+		state.statementsEditState[ payload ] = false;
 	},
 	[ SET_POPPER_HIDDEN ](
 		state: Application,

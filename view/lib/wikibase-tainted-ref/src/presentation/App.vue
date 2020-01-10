@@ -57,6 +57,9 @@ export default class App extends Vue {
 	@Getter( 'popperState' )
 	public popperStateFunction!: Function;
 
+	@Getter( 'statementsEditState' )
+	public editStateFunction!: Function;
+
 	public get isTainted(): boolean {
 		return this.statementsTaintedStateFunction( this.$data.id );
 	}
@@ -65,6 +68,9 @@ export default class App extends Vue {
 		return this.popperStateFunction( this.$data.id );
 	}
 
+	public get editState(): boolean {
+		return this.editStateFunction( this.$data.id );
+	}
 	public get popperTitle(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-title' );
 	}

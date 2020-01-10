@@ -5,3 +5,5 @@ export const POPPER_SHOW = 'showPopper';
 export const POPPER_HIDE = 'hidePopper';
 export const HELP_LINK_SET = 'setHelpLink';
 export const FEEDBACK_LINK_SET = 'setFeedbackLink';
+export const START_EDIT = 'startStatementEdit';
+export const STOP_EDIT = 'stopStatementEdit';

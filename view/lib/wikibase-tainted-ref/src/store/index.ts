@@ -11,6 +11,7 @@ export function createStore(): Store<Application> {
 	const state: Application = {
 		statementsTaintedState: { },
 		statementsPopperIsOpen: { },
+		statementsEditState: { },
 		helpLink: '',
 		feedbackLink: '',
 	};

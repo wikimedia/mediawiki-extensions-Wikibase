@@ -3954,12 +3954,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a7b4a66c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=15759933&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a7b4a66c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=05b95059&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-app"},[(_vm.isTainted)?_c('div',[_c('span',[_c('TaintedIcon',{attrs:{"guid":_vm.id}}),(_vm.popperIsOpened)?_c('div',{staticClass:"wb-tr-float-wrapper"},[_c('Popper',{attrs:{"guid":_vm.id,"title":_vm.popperTitle},scopedSlots:_vm._u([{key:"subheading-area",fn:function(){return [_c('div',{staticClass:"wb-tr-popper-help"},[_c('a',{attrs:{"title":_vm.popperHelpLinkTitle,"href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v(_vm._s(_vm.popperHelpLinkText))])])]},proxy:true},{key:"content",fn:function(){return [_c('p',{staticClass:"wb-tr-popper-text"},[_vm._v("\n\t\t\t\t\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t\t\t\t\t")]),_c('p',{staticClass:"wb-tr-popper-feedback"},[_vm._v("\n\t\t\t\t\t\t\t"+_vm._s(_vm.popperFeedbackText)+"\n\t\t\t\t\t\t\t"),_c('a',{attrs:{"title":_vm.popperFeedbackLinkTitle,"href":_vm.feedbackLink,"target":"_blank"}},[_vm._v(_vm._s(_vm.popperFeedbackLinkText))])])]},proxy:true}],null,false,3448581100)})],1):_vm._e()],1)]):_vm._e()])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=15759933&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=05b95059&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -4432,6 +4432,8 @@ var POPPER_SHOW = 'showPopper';
 var POPPER_HIDE = 'hidePopper';
 var HELP_LINK_SET = 'setHelpLink';
 var FEEDBACK_LINK_SET = 'setFeedbackLink';
+var START_EDIT = 'startStatementEdit';
+var STOP_EDIT = 'stopStatementEdit';
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
 var vuex_esm = __webpack_require__("2f62");
 
@@ -4819,6 +4821,11 @@ function (_Vue) {
       return this.popperStateFunction(this.$data.id);
     }
   }, {
+    key: "editState",
+    get: function get() {
+      return this.editStateFunction(this.$data.id);
+    }
+  }, {
     key: "popperTitle",
     get: function get() {
       return this.$message('wikibase-tainted-ref-popper-title');
@@ -4861,6 +4868,8 @@ function (_Vue) {
 __decorate([Getter('statementsTaintedState')], Appvue_type_script_lang_ts_App.prototype, "statementsTaintedStateFunction", void 0);
 
 __decorate([Getter('popperState')], Appvue_type_script_lang_ts_App.prototype, "popperStateFunction", void 0);
+
+__decorate([Getter('statementsEditState')], Appvue_type_script_lang_ts_App.prototype, "editStateFunction", void 0);
 
 __decorate([Getter('helpLink')], Appvue_type_script_lang_ts_App.prototype, "helpLink", void 0);
 
@@ -4924,6 +4933,9 @@ var SET_POPPER_HIDDEN = 'setPopperHidden';
 var SET_POPPER_VISIBLE = 'setPopperVisible';
 var SET_HELP_LINK = 'setHelpLink';
 var SET_FEEDBACK_LINK = 'setFeedbackLink';
+var SET_ALL_EDIT_MODE_FALSE = 'setAllStatementEditFalse';
+var SET_STATEMENT_EDIT_TRUE = 'setStatementEditTrue';
+var SET_STATEMENT_EDIT_FALSE = 'setStatementEditFalse';
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -4934,11 +4946,17 @@ function actions() {
   return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, payload) {
     context.commit(SET_ALL_UNTAINTED, payload);
     context.commit(SET_ALL_POPPERS_HIDDEN, payload);
+    context.commit(SET_ALL_EDIT_MODE_FALSE, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, payload) {
     context.commit(SET_UNTAINTED, payload);
     context.commit(SET_POPPER_HIDDEN, payload);
   }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, payload) {
     context.commit(SET_TAINTED, payload);
+  }), _defineProperty(_ref, START_EDIT, function (context, payload) {
+    context.commit(SET_STATEMENT_EDIT_TRUE, payload);
+    context.commit(SET_POPPER_HIDDEN, payload);
+  }), _defineProperty(_ref, STOP_EDIT, function (context, payload) {
+    context.commit(SET_STATEMENT_EDIT_FALSE, payload);
   }), _defineProperty(_ref, POPPER_HIDE, function (context, payload) {
     context.commit(SET_POPPER_HIDDEN, payload);
   }), _defineProperty(_ref, POPPER_SHOW, function (context, payload) {
@@ -4965,10 +4983,18 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED,
   payload.forEach(function (guid) {
     external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsPopperIsOpen, guid, false);
   });
+}), _defineProperty(_mutations, SET_ALL_EDIT_MODE_FALSE, function (state, payload) {
+  payload.forEach(function (guid) {
+    external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsEditState, guid, false);
+  });
 }), _defineProperty(_mutations, SET_TAINTED, function (state, payload) {
   state.statementsTaintedState[payload] = true;
 }), _defineProperty(_mutations, SET_UNTAINTED, function (state, payload) {
   state.statementsTaintedState[payload] = false;
+}), _defineProperty(_mutations, SET_STATEMENT_EDIT_TRUE, function (state, payload) {
+  state.statementsEditState[payload] = true;
+}), _defineProperty(_mutations, SET_STATEMENT_EDIT_FALSE, function (state, payload) {
+  state.statementsEditState[payload] = false;
 }), _defineProperty(_mutations, SET_POPPER_HIDDEN, function (state, payload) {
   state.statementsPopperIsOpen[payload] = false;
 }), _defineProperty(_mutations, SET_POPPER_VISIBLE, function (state, payload) {
@@ -4990,6 +5016,11 @@ var getters = {
       return state.statementsPopperIsOpen[guid];
     };
   },
+  editState: function editState(state) {
+    return function (guid) {
+      return state.statementsEditState[guid];
+    };
+  },
   helpLink: function helpLink(state) {
     return state.helpLink;
   },
@@ -5008,6 +5039,7 @@ function createStore() {
   var state = {
     statementsTaintedState: {},
     statementsPopperIsOpen: {},
+    statementsEditState: {},
     helpLink: '',
     feedbackLink: ''
   };
