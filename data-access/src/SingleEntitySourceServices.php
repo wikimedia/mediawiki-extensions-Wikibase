@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
+use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
@@ -334,7 +334,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getTermSearchInteractorFactory() {
 		if ( $this->termSearchInteractorFactory === null ) {
-			$this->termSearchInteractorFactory = new TermIndexSearchInteractorFactory(
+			$this->termSearchInteractorFactory = new MatchingTermsSearchInteractorFactory(
 				$this->getTermIndex(),
 				$this->genericServices->getLanguageFallbackChainFactory(),
 				$this->getPrefetchingTermLookup()

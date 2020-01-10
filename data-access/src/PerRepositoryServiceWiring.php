@@ -13,7 +13,7 @@ use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
+use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
@@ -284,7 +284,7 @@ return [
 		/** @var PrefetchingTermLookup $prefetchingTermLookup */
 		$prefetchingTermLookup = $services->getService( 'PrefetchingTermLookup' );
 
-		return new TermIndexSearchInteractorFactory(
+		return new MatchingTermsSearchInteractorFactory(
 			$termIndex,
 			$genericServices->getLanguageFallbackChainFactory(),
 			$prefetchingTermLookup
