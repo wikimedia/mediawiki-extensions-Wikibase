@@ -18,7 +18,7 @@
  * looking for people                  \\  //    \\  //    \\  //
  * like you to join us in           <>   \/   /\   \/   /\   \/   <>
  * developing it further. Find              <{  }>    <{  }>
- * out more at http://wikiba.se               \/        \/
+ * out more at https://wikiba.se               \/        \/
  * and join the open data revolution.              <>
  */
 

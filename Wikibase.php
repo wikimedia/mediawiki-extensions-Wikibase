@@ -18,7 +18,7 @@
  * looking for people                  \\  //    \\  //    \\  //
  * like you to join us in           <>   \/   /\   \/   /\   \/   <>
  * developing it further. Find              <{  }>    <{  }>
- * out more at http://wikiba.se               \/        \/
+ * out more at https://wikiba.se               \/        \/
  * and join the open data revolution.              <>
  */
 
@@ -26,7 +26,7 @@
  * Testing entry point. Do not use for production setups!
  *
  * @see README.md
- * @see http://wikiba.se
+ * @see https://wikiba.se
  *
  * @license GPL-2.0-or-later
  */
