@@ -5,6 +5,7 @@ import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
+import RepoRouter from '@/data-access/RepoRouter';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
@@ -17,22 +18,24 @@ import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPerm
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
 	const services = new ServiceContainer();
 
-	const repoConfig = mwWindow.mw.config.get( 'wbRepo' ),
-		specialEntityDataUrl = repoConfig.url + repoConfig.articlePath.replace(
-			'$1',
-			'Special:EntityData',
+	const
+		repoConfig = mwWindow.mw.config.get( 'wbRepo' ),
+		repoRouter = new RepoRouter(
+			repoConfig,
+			mwWindow.mw.util.wikiUrlencode,
+			mwWindow.$.param,
 		);
 
 	services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 		mwWindow.$,
-		specialEntityDataUrl,
+		repoRouter.getPageUrl( 'Special:EntityData' ),
 	) );
 
 	if ( mwWindow.mw.ForeignApi === undefined ) {
 		throw new Error( 'mw.ForeignApi was not loaded!' );
 	}
 
-	const repoMwApi = new mwWindow.mw.ForeignApi(
+	const repoMwApi = new mwWindow.mw.ForeignApi( // TODO use repoRouter with a getScript() method maybe
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
 	const repoApi = new BatchingApi( new ApiCore( repoMwApi ) );
@@ -77,6 +80,8 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		new ApiPageEditPermissionErrorsRepository( repoApi ),
 		new ApiPageEditPermissionErrorsRepository( clientApi ),
 	) );
+
+	services.set( 'repoRouter', repoRouter );
 
 	return services;
 }

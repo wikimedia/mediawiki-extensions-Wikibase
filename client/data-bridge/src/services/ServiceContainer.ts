@@ -7,6 +7,7 @@ import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepo
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
+import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 export interface Services {
 	readingEntityRepository: ReadingEntityRepository;
@@ -18,6 +19,7 @@ export interface Services {
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository;
 	tracker: BridgeTracker;
 	editAuthorizationChecker: BridgePermissionsRepository;
+	repoRouter: MediaWikiRouter;
 }
 
 export default class ServiceContainer {

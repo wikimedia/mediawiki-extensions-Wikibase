@@ -5,13 +5,17 @@ import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoReposi
 import MessagesRepository from '@/definitions/data-access/MessagesRepository';
 import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
 import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
+import RepoRouterPlugin from './plugins/RepoRouterPlugin';
+import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 export default function extendVueEnvironment(
 	languageInfoRepo: LanguageInfoRepository,
 	messageRepo: MessagesRepository,
 	bridgeConfigOptions: WikibaseClientConfiguration,
+	repoRouter: MediaWikiRouter,
 ): void {
 	Vue.directive( 'inlanguage', inlanguage( languageInfoRepo ) );
 	Vue.use( MessagesPlugin, messageRepo );
 	Vue.use( BridgeConfig, bridgeConfigOptions );
+	Vue.use( RepoRouterPlugin, repoRouter );
 }

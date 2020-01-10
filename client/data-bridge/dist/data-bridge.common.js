@@ -12278,12 +12278,12 @@ var Initializing_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_Initializing = (Initializing_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a2a46e2c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=aa53c04c&
-var ErrorWrappervue_type_template_id_aa53c04c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-var ErrorWrappervue_type_template_id_aa53c04c_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[_c('h1',[_vm._v("An error occurred")])])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a2a46e2c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=708fafe6&
+var ErrorWrappervue_type_template_id_708fafe6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[_c('h1',[_vm._v("An error occurred")]),_c('p',[_c('a',{attrs:{"href":_vm.$repoRouter.getPageUrl( 'Project:About' )}},[_vm._v("About the repository")]),_vm._v(",\n\t\t"),_c('a',{attrs:{"href":_vm.$repoRouter.getPageUrl( 'Special:Log/protect', { page: 'Item:Q42' } )}},[_vm._v("An interesting protection history")]),_vm._v(".\n\t")])])}
+var ErrorWrappervue_type_template_id_708fafe6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=aa53c04c&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=708fafe6&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
 
@@ -12322,8 +12322,8 @@ ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_compone
 
 var ErrorWrapper_component = normalizeComponent(
   components_ErrorWrappervue_type_script_lang_ts_,
-  ErrorWrappervue_type_template_id_aa53c04c_render,
-  ErrorWrappervue_type_template_id_aa53c04c_staticRenderFns,
+  ErrorWrappervue_type_template_id_708fafe6_render,
+  ErrorWrappervue_type_template_id_708fafe6_staticRenderFns,
   false,
   null,
   null,
@@ -13597,19 +13597,22 @@ function () {
 function MessagesPlugin(Vue, messages) {
   Vue.prototype.$messages = new Messages_Messages(messages);
 }
+// CONCATENATED MODULE: ./src/presentation/plugins/RepoRouterPlugin/index.ts
+function RepoRouterPlugin(Vue, repoRouter) {
+  Vue.prototype.$repoRouter = repoRouter;
+}
 // CONCATENATED MODULE: ./src/presentation/extendVueEnvironment.ts
 
 
 
 
-function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions) {
+
+function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions, repoRouter) {
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(languageInfoRepo));
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(RepoRouterPlugin, repoRouter);
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
 var es6_set = __webpack_require__("4f7f");
 
@@ -14281,6 +14284,9 @@ function () {
 }();
 
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
 // CONCATENATED MODULE: ./src/data-access/SpecialPageReadingEntityRepository.ts
 
 
@@ -14373,6 +14379,51 @@ function () {
   }]);
 
   return MwLanguageInfoRepository;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/RepoRouter.ts
+
+
+
+
+var RepoRouter_RepoRouter =
+/*#__PURE__*/
+function () {
+  function RepoRouter(repoConfig, wikiUrlencode, querySerializer) {
+    _classCallCheck(this, RepoRouter);
+
+    this.repoConfig = repoConfig;
+    this.wikiUrlencode = wikiUrlencode;
+    this.querySerializer = querySerializer;
+  }
+
+  _createClass(RepoRouter, [{
+    key: "getPageUrl",
+    value: function getPageUrl(title, params) {
+      var url, query;
+
+      if (params) {
+        query = this.querySerializer(params);
+      }
+
+      if (query) {
+        url = this.wikiScript() + '?title=' + this.wikiUrlencode(title) + '&' + query;
+      } else {
+        url = this.repoConfig.url + this.repoConfig.articlePath.replace('$1', this.wikiUrlencode(title).replace(/\$/g, '$$$$'));
+      }
+
+      return url;
+    }
+  }, {
+    key: "wikiScript",
+    value: function wikiScript() {
+      var script = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'index.php';
+      return this.repoConfig.url + this.repoConfig.scriptPath + '/' + script;
+    }
+  }]);
+
+  return RepoRouter;
 }();
 
 
@@ -15329,14 +15380,15 @@ function () {
 function createServices(mwWindow, editTags) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
-      specialEntityDataUrl = repoConfig.url + repoConfig.articlePath.replace('$1', 'Special:EntityData');
-  services.set('readingEntityRepository', new SpecialPageReadingEntityRepository_SpecialPageReadingEntityRepository(mwWindow.$, specialEntityDataUrl));
+      repoRouter = new RepoRouter_RepoRouter(repoConfig, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param);
+  services.set('readingEntityRepository', new SpecialPageReadingEntityRepository_SpecialPageReadingEntityRepository(mwWindow.$, repoRouter.getPageUrl('Special:EntityData')));
 
   if (mwWindow.mw.ForeignApi === undefined) {
     throw new Error('mw.ForeignApi was not loaded!');
   }
 
-  var repoMwApi = new mwWindow.mw.ForeignApi("".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
+  var repoMwApi = new mwWindow.mw.ForeignApi( // TODO use repoRouter with a getScript() method maybe
+  "".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
   var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
   services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
   services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), repoApi));
@@ -15352,6 +15404,7 @@ function createServices(mwWindow, editTags) {
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
   var clientApi = new ApiCore_ApiCore(new mwWindow.mw.Api());
   services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
+  services.set('repoRouter', repoRouter);
   return services;
 }
 // CONCATENATED MODULE: ./src/main.ts
@@ -15369,7 +15422,7 @@ function createServices(mwWindow, editTags) {
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client);
+  extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client, services.get('repoRouter'));
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({

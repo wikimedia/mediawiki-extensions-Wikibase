@@ -131,6 +131,9 @@ export function mockMwEnv(
 			bcp47: jest.fn(),
 		},
 		track: jest.fn(),
+		util: {
+			wikiUrlencode: jest.fn( ( title ) => title ),
+		},
 	};
 	( window as MwWindow ).$ = new ( jest.fn() )();
 	( window as MwWindow ).$.uls = {

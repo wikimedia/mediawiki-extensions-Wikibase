@@ -23,6 +23,7 @@ import createServices from '@/services/createServices';
 import { budge } from '../../util/timer';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
+import RepoRouter from '@/data-access/RepoRouter';
 
 const manager = jest.fn();
 const dialog = {
@@ -52,22 +53,28 @@ describe( 'init', () => {
 			},
 			require = jest.fn().mockReturnValue( app ),
 			using = jest.fn().mockResolvedValue( require ),
-			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
-			repoMwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
-			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),
-			MwApiConstructor = mockMwApiConstructor( {} ),
-			clientMwApi = new MwApiConstructor(),
-			clientApi = new ApiCore( clientMwApi ),
 			editTags = [ 'a tag' ],
 			usePublish = true,
-			pageTitle = 'Client_page';
-		mockMwEnv(
-			using,
-			mockMwConfig( {
+			pageTitle = 'Client_page',
+			config = mockMwConfig( {
 				editTags,
 				usePublish,
 				wgPageName: pageTitle,
 			} ),
+			wbRepoConfig = config.get( 'wbRepo' ),
+			foreignApiUrl = wbRepoConfig.url + wbRepoConfig.scriptPath + '/api.php',
+			MwForeignApiConstructor = mockMwForeignApiConstructor( {
+				expectedUrl: foreignApiUrl,
+			} ),
+			repoMwApi = new MwForeignApiConstructor( foreignApiUrl ),
+			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),
+			MwApiConstructor = mockMwApiConstructor( {} ),
+			clientMwApi = new MwApiConstructor(),
+			clientApi = new ApiCore( clientMwApi );
+
+		mockMwEnv(
+			using,
+			config,
 			undefined,
 			MwForeignApiConstructor,
 			MwApiConstructor,
@@ -75,7 +82,10 @@ describe( 'init', () => {
 		const expectedServices = new ServiceContainer();
 		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 			( window as MwWindow ).$,
-			'http://localhost/wiki/Special:EntityData',
+			wbRepoConfig.url + wbRepoConfig.articlePath.replace(
+				'$1',
+				'Special:EntityData',
+			),
 		) );
 		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
 			repoMwApi,
@@ -103,6 +113,11 @@ describe( 'init', () => {
 		expectedServices.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 			new ApiPageEditPermissionErrorsRepository( repoApi ),
 			new ApiPageEditPermissionErrorsRepository( clientApi ),
+		) );
+		expectedServices.set( 'repoRouter', new RepoRouter(
+			wbRepoConfig,
+			( window as MwWindow ).mw.util.wikiUrlencode,
+			$.param,
 		) );
 
 		const entityId = 'Q5';

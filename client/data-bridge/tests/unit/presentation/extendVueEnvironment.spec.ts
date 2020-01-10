@@ -1,3 +1,5 @@
+import RepoRouterPlugin from '@/presentation/plugins/RepoRouterPlugin';
+
 jest.mock( 'vue', () => {
 	return {
 		directive: jest.fn(),
@@ -25,6 +27,7 @@ describe( 'extendVueEnvironment', () => {
 			languageInfoRepo,
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
+			new ( jest.fn() )(),
 		);
 		expect( mockInlanguage ).toHaveBeenCalledWith( languageInfoRepo );
 		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
@@ -36,6 +39,7 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			messageRepo,
 			{} as WikibaseClientConfiguration,
+			new ( jest.fn() )(),
 		);
 		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
 	} );
@@ -46,8 +50,21 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 			config,
+			new ( jest.fn() )(),
 		);
 
 		expect( Vue.use ).toHaveBeenCalledWith( BridgeConfig, config );
+	} );
+
+	it( 'invokes the RepoRouterPlugin plugin', () => {
+		const repoRouter = new ( jest.fn() )();
+		extendVueEnvironment(
+			new ( jest.fn() )(),
+			new ( jest.fn() )(),
+			{} as WikibaseClientConfiguration,
+			repoRouter,
+		);
+
+		expect( Vue.use ).toHaveBeenCalledWith( RepoRouterPlugin, repoRouter );
 	} );
 } );
