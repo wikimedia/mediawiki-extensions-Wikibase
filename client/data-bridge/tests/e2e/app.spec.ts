@@ -5,10 +5,9 @@ import { launch } from '@/main';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import createServices from '@/services/createServices';
 import {
-	addDataBridgeConfigResponse,
 	addPageInfoNoEditRestrictionsResponse,
-	addPropertyLabelResponse,
 	addSiteinfoRestrictionsResponse,
+	getMockFullRepoBatchedQueryResponse,
 	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
@@ -65,18 +64,9 @@ function prepareTestEnv( options: {
 		undefined,
 		undefined,
 		mockMwForeignApiConstructor( {
-			get: jest.fn().mockResolvedValue(
-				addPropertyLabelResponse(
-					{ propertyId },
-					addPageInfoNoEditRestrictionsResponse(
-						entityTitle,
-						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse(
-								{},
-							),
-						),
-					),
-				),
+			get: getMockFullRepoBatchedQueryResponse(
+				{ propertyId },
+				entityTitle,
 			),
 		} ),
 		mockMwApiConstructor( {
@@ -238,18 +228,9 @@ describe( 'app', () => {
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{ propertyId },
-						addPageInfoNoEditRestrictionsResponse(
-							entityTitle,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-								),
-							),
-						),
-					),
+				get: getMockFullRepoBatchedQueryResponse(
+					{ propertyId },
+					entityTitle,
 				),
 				postWithEditToken,
 			} );
@@ -364,18 +345,9 @@ describe( 'app', () => {
 			const testLink = prepareTestEnv( { propertyId } );
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{ propertyId },
-						addPageInfoNoEditRestrictionsResponse(
-							entityTitle,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-								),
-							),
-						),
-					),
+				get: getMockFullRepoBatchedQueryResponse(
+					{ propertyId },
+					entityTitle,
 				),
 				postWithEditToken,
 			} );
@@ -457,18 +429,9 @@ describe( 'app', () => {
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
 		( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
-			get: jest.fn().mockResolvedValue(
-				addPropertyLabelResponse(
-					{ propertyId, propertyLabel: 'something', dataType },
-					addPageInfoNoEditRestrictionsResponse(
-						DEFAULT_ENTITY,
-						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse(
-								{},
-							),
-						),
-					),
-				),
+			get: getMockFullRepoBatchedQueryResponse(
+				{ propertyId, propertyLabel: 'something', dataType },
+				DEFAULT_ENTITY,
 			),
 		} );
 		const mockTracker = jest.fn();

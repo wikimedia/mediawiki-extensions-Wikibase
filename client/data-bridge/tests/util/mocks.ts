@@ -10,6 +10,7 @@ import {
 	ApiQueryInfoTestResponsePage,
 	ApiQueryResponsePage,
 } from '@/definitions/data-access/ApiQuery';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
@@ -139,9 +140,12 @@ export function mockMwEnv(
 	};
 }
 
-export function addDataBridgeConfigResponse( response: { query?: object } ): object {
+export function addDataBridgeConfigResponse(
+	dataBridgeConfig: WikibaseRepoConfiguration|null = null,
+	response: { query?: object },
+): object {
 	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
-	query.wbdatabridgeconfig = {
+	query.wbdatabridgeconfig = dataBridgeConfig || {
 		dataTypeLimits: {
 			string: {
 				maxLength: 200,
@@ -190,6 +194,33 @@ export function addPropertyLabelResponse(
 		'for-language': language,
 	};
 	return response;
+}
+
+export function getMockFullRepoBatchedQueryResponse(
+	propertyLabelResponseInput: {
+		propertyId: string;
+		propertyLabel?: string;
+		language?: string;
+		dataType?: string;
+		fallbackLanguage?: string;
+	},
+	entityTitle: string,
+	dataBridgeConfig?: WikibaseRepoConfiguration,
+): jest.Mock {
+	return jest.fn().mockResolvedValue(
+		addPropertyLabelResponse(
+			propertyLabelResponseInput,
+			addPageInfoNoEditRestrictionsResponse(
+				entityTitle,
+				addSiteinfoRestrictionsResponse(
+					addDataBridgeConfigResponse(
+						dataBridgeConfig,
+						{},
+					),
+				),
+			),
+		),
+	);
 }
 
 export function mockApi( successObject?: unknown, rejectData?: unknown ): Api & MwApi {

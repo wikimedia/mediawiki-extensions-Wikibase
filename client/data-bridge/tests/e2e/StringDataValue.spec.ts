@@ -7,8 +7,8 @@ import createServices from '@/services/createServices';
 import {
 	addDataBridgeConfigResponse,
 	addPageInfoNoEditRestrictionsResponse,
-	addPropertyLabelResponse,
 	addSiteinfoRestrictionsResponse,
+	getMockFullRepoBatchedQueryResponse,
 	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
@@ -62,18 +62,9 @@ function prepareTestEnv( options: {
 		mockMwConfig( { wgPageContentLanguage: pageLanguage, wgPageName: clientPageTitle } ),
 		undefined,
 		mockMwForeignApiConstructor( {
-			get: jest.fn().mockResolvedValue(
-				addPropertyLabelResponse(
-					{ propertyId, language: pageLanguage },
-					addPageInfoNoEditRestrictionsResponse(
-						entityTitle,
-						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse(
-								{},
-							),
-						),
-					),
-				),
+			get: getMockFullRepoBatchedQueryResponse(
+				{ propertyId, language: pageLanguage },
+				entityTitle,
 			),
 		} ),
 		mockMwApiConstructor( {
@@ -142,18 +133,9 @@ describe( 'string data value', () => {
 
 			const testLink = prepareTestEnv( { propertyId } );
 
-			const get = jest.fn().mockResolvedValue(
-				addPropertyLabelResponse(
-					{ propertyId, propertyLabel, language: pageLanguage },
-					addPageInfoNoEditRestrictionsResponse(
-						DEFAULT_ENTITY,
-						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse(
-								{},
-							),
-						),
-					),
-				),
+			const get = getMockFullRepoBatchedQueryResponse(
+				{ propertyId, propertyLabel, language: pageLanguage },
+				DEFAULT_ENTITY,
 			);
 
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
@@ -190,23 +172,14 @@ describe( 'string data value', () => {
 
 			const testLink = prepareTestEnv( { propertyId } );
 
-			const get = jest.fn().mockResolvedValue(
-				addPropertyLabelResponse(
-					{
-						propertyId,
-						propertyLabel,
-						language: pageLanguage,
-						fallbackLanguage: language,
-					},
-					addPageInfoNoEditRestrictionsResponse(
-						DEFAULT_ENTITY,
-						addSiteinfoRestrictionsResponse(
-							addDataBridgeConfigResponse(
-								{},
-							),
-						),
-					),
-				),
+			const get = getMockFullRepoBatchedQueryResponse(
+				{
+					propertyId,
+					propertyLabel,
+					language: pageLanguage,
+					fallbackLanguage: language,
+				},
+				DEFAULT_ENTITY,
 			);
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
@@ -243,7 +216,7 @@ describe( 'string data value', () => {
 				addPageInfoNoEditRestrictionsResponse(
 					DEFAULT_ENTITY,
 					addSiteinfoRestrictionsResponse(
-						addDataBridgeConfigResponse( {
+						addDataBridgeConfigResponse( null, {
 							entities: {
 								[ propertyId ]: {
 									id: propertyId,
@@ -293,23 +266,14 @@ describe( 'string data value', () => {
 
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{
-							propertyId,
-							propertyLabel,
-							language: pageLanguage,
-							fallbackLanguage: language,
-						},
-						addPageInfoNoEditRestrictionsResponse(
-							DEFAULT_ENTITY,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-								),
-							),
-						),
-					),
+				get: getMockFullRepoBatchedQueryResponse(
+					{
+						propertyId,
+						propertyLabel,
+						language: pageLanguage,
+						fallbackLanguage: language,
+					},
+					DEFAULT_ENTITY,
 				),
 			} );
 
@@ -337,23 +301,14 @@ describe( 'string data value', () => {
 
 			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
-				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{
-							propertyId,
-							propertyLabel,
-							language: pageLanguage,
-							fallbackLanguage: language,
-						},
-						addPageInfoNoEditRestrictionsResponse(
-							DEFAULT_ENTITY,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-								),
-							),
-						),
-					),
+				get: getMockFullRepoBatchedQueryResponse(
+					{
+						propertyId,
+						propertyLabel,
+						language: pageLanguage,
+						fallbackLanguage: language,
+					},
+					DEFAULT_ENTITY,
 				),
 			} );
 
@@ -468,31 +423,19 @@ describe( 'string data value', () => {
 
 		it( 'propagates the max length to the input field', async () => {
 			const maxLength = 666;
-			const queryDataBridgeConfigResponse = {
-				query: {
-					wbdatabridgeconfig: {
+			const testLink = prepareTestEnv( {} );
+
+			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+				get: getMockFullRepoBatchedQueryResponse(
+					{ propertyId: DEFAULT_PROPERTY },
+					DEFAULT_ENTITY,
+					{
 						dataTypeLimits: {
 							string: {
 								maxLength,
 							},
 						},
 					},
-				},
-			};
-
-			const testLink = prepareTestEnv( {} );
-
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
-				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{ propertyId: DEFAULT_PROPERTY },
-						addPageInfoNoEditRestrictionsResponse(
-							DEFAULT_ENTITY,
-							addSiteinfoRestrictionsResponse(
-								queryDataBridgeConfigResponse,
-							),
-						),
-					),
 				),
 			} );
 
