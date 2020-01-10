@@ -4,12 +4,12 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**
- * @covers \Wikibase\Store\BufferingTermLookup
+ * @covers \Wikibase\Store\BufferingTermIndexTermLookup
  * @covers \Wikibase\Lib\Store\EntityTermLookupBase
  *
  * @group Wikibase
@@ -22,7 +22,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 	protected function getEntityTermLookup() {
 		$termIndex = $this->getTermIndex();
-		return new BufferingTermLookup( $termIndex, 10 );
+		return new BufferingTermIndexTermLookup( $termIndex, 10 );
 	}
 
 	public function testPrefetchTerms() {
@@ -107,7 +107,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 	public function testGetLabels_prefetch() {
 		$termIndex = $this->getRestrictedTermIndex( 1, 1 );
-		$lookup = new BufferingTermLookup( $termIndex, 10 );
+		$lookup = new BufferingTermIndexTermLookup( $termIndex, 10 );
 
 		// This should trigger a call to getTermsOfEntities
 		$q123 = new ItemId( 'Q123' );
@@ -128,7 +128,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 	public function testGetLabels_onlyPrefetchOnce() {
 		$termIndex = $this->getRestrictedTermIndex( 0, 1 );
-		$lookup = new BufferingTermLookup( $termIndex, 10 );
+		$lookup = new BufferingTermIndexTermLookup( $termIndex, 10 );
 
 		// This should trigger a call to getTermsOfEntities
 		$q123 = new ItemId( 'Q123' );
@@ -144,7 +144,7 @@ class BufferingTermLookupTest extends EntityTermLookupTest {
 
 	public function testGetLabels_buffer() {
 		$termIndex = $this->getRestrictedTermIndex( 2, 0 );
-		$lookup = new BufferingTermLookup( $termIndex, 10 );
+		$lookup = new BufferingTermIndexTermLookup( $termIndex, 10 );
 		$q116 = new ItemId( 'Q123' );
 
 		// This should trigger one call to getTermsOfEntity

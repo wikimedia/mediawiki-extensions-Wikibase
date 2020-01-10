@@ -106,7 +106,7 @@ class DataAccessSettings {
 	 * The new schema is accessed through classes like
 	 * {@link DatabasePropertyTermStore} and {@link PrefetchingPropertyTermLookup},
 	 * the old one through classes like {@link TermSqlIndex}
-	 * and {@link BufferingTermLookup}.
+	 * and {@link BufferingTermIndexTermLookup}.
 	 *
 	 * This is a temporary setting used during the transition period.
 	 * Eventually, the normalized schema will be the only one supported.
@@ -124,7 +124,7 @@ class DataAccessSettings {
 	 * The new schema is accessed through classes like
 	 * {@link DatabaseItemTermStore} and {@link PrefetchingItemTermLookup},
 	 * the old one through classes like {@link TermSqlIndex}
-	 * and {@link BufferingTermLookup}.
+	 * and {@link BufferingTermIndexTermLookup}.
 	 *
 	 * During migraiton of item terms, we have different stages on for different, subsequent ranges
 	 * of item ids. That is why this method takes a numeric entity id.

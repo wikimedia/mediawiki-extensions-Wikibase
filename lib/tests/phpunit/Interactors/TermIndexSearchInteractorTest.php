@@ -12,7 +12,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Store\BufferingTermLookup;
+use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 
@@ -71,10 +71,10 @@ class TermIndexSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
 	 *
-	 * @return BufferingTermLookup
+	 * @return BufferingTermIndexTermLookup
 	 */
 	private function getMockBufferingTermLookup() {
-		$mock = $this->getMockBuilder( BufferingTermLookup::class )
+		$mock = $this->getMockBuilder( BufferingTermIndexTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
