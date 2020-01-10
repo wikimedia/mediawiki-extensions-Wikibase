@@ -13,6 +13,8 @@ $size-dialog-bar--desktop: 40px;
 $font-size-dialog-process-title: 1.1em;
 
 $padding-panel-form: px-to-em( 16px );
+$base-spacing-unit: 8px;
+$binary-input-inter-component-spacing: 2 * $base-spacing-unit;
 
 $size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
