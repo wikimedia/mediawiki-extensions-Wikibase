@@ -768,7 +768,8 @@ call_user_func( function() {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getTermValidatorFactory()
+			$wikibaseRepo->getTermValidatorFactory(),
+			$wikibaseRepo->getItemTermsCollisionDetector()
 		);
 	};
 	$wgSpecialPages['NewProperty'] = function () {
@@ -786,7 +787,8 @@ call_user_func( function() {
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->newEditEntityFactory()
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getPropertyTermsCollisionDetector()
 		);
 	};
 	$wgSpecialPages['ItemByTitle'] = function () {

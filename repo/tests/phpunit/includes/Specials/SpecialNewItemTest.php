@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
+use ContentHandler;
 use FauxRequest;
 use HashSiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -17,6 +18,7 @@ use Wikibase\Repo\WikibaseRepo;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialNewItem
@@ -42,10 +44,46 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 */
 	private $siteStore;
 
-	protected function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 
+		// @todo This list should be stored somewhere, DRY
+		$tables = [
+			'wb_terms',
+			'wbt_type',
+			'wbt_text',
+			'wbt_text_in_lang',
+			'wbt_term_in_lang',
+			'wbt_property_terms',
+			'wbt_item_terms'
+		];
+		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
+
 		$this->siteStore = new HashSiteStore();
+	}
+
+	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
+		return [
+			'scripts' => [
+				__DIR__ . '/../../../../sql/AddNormalizedTermsTablesDDL.sql',
+			],
+			'create' => [
+				'wbt_item_terms',
+				'wbt_property_terms',
+				'wbt_term_in_lang',
+				'wbt_text_in_lang',
+				'wbt_text',
+				'wbt_type',
+			],
+		];
+	}
+
+	public function tearDown() : void {
+		parent::tearDown();
+		// Cleaning ContentHandler cache because RepoHooks instantiate
+		// and cache those prior to changing the migration setting
+		// in testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel
+		ContentHandler::cleanupHandlersCache();
 	}
 
 	protected function newSpecialPage() {
@@ -59,7 +97,8 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
 			$this->siteStore,
-			$this->getTermValidatorFactorMock()
+			$this->getTermValidatorFactorMock(),
+			$wikibaseRepo->getItemTermsCollisionDetector()
 		);
 	}
 
@@ -228,8 +267,29 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 	}
 
-	public function testErrorBeingDisplayed_WhenItemWithTheSameLabelAndDescriptionInThisLanguageAlreadyExists() {
-		if ( $this->db->getType() === 'mysql' ) {
+	public function maxItemTermsMigrationStageProvider() {
+		return [
+			[ MIGRATION_OLD ],
+			[ MIGRATION_WRITE_BOTH ],
+			[ MIGRATION_WRITE_NEW ],
+			[ MIGRATION_NEW ]
+		];
+	}
+
+	/**
+	 * @dataProvider maxItemTermsMigrationStageProvider
+	 */
+	public function testErrorBeingDisplayed_WhenItemWithTheSameLabelAndDescriptionInThisLanguageAlreadyExists(
+		$maxItemTermsMigrationStage
+	) {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$oldConfig = $settings->getSetting( 'tmpItemTermsMigrationStages' );
+		$settings->setSetting(
+			'tmpItemTermsMigrationStages',
+			[ 'max' => $maxItemTermsMigrationStage ]
+		);
+
+		if ( $maxItemTermsMigrationStage < MIGRATION_WRITE_NEW && $this->db->getType() === 'mysql' ) {
 			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
 		}
 
@@ -244,6 +304,8 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, 'already has label' );
+
+		$settings->setSetting( 'tmpItemTermsMigrationStages', $oldConfig );
 	}
 
 	public function testErrorAboutNonExistentPageIsDisplayed_WhenSiteExistsButPageDoesNot() {

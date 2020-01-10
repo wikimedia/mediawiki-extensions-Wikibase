@@ -8,12 +8,13 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataTypeSelector;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
-use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
+use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
+use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
@@ -31,12 +32,18 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
+	/**
+	 * @var TermsCollisionDetector
+	 */
+	private $termsCollisionDetector;
+
 	public function __construct(
 		SpecialPageCopyrightView $specialPageCopyrightView,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
-		MediawikiEditEntityFactory $editEntityFactory
+		MediawikiEditEntityFactory $editEntityFactory,
+		TermsCollisionDetector $termsCollisionDetector
 	) {
 		parent::__construct(
 			'NewProperty',
@@ -47,6 +54,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$entityTitleLookup,
 			$editEntityFactory
 		);
+
+		$this->termsCollisionDetector = $termsCollisionDetector;
 	}
 
 	/**
@@ -194,6 +203,19 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$formData[ self::FIELD_LABEL ] === $formData[ self::FIELD_DESCRIPTION ]
 		) {
 			return Status::newFatal( 'wikibase-newproperty-same-label-and-description' );
+		}
+
+		$collidingPropertyId = $this->termsCollisionDetector->detectLabelCollision(
+			$formData[ self::FIELD_LANG ],
+			$formData[ self::FIELD_LABEL ]
+		);
+		if ( $collidingPropertyId !== null ) {
+			return Status::newFatal(
+				'wikibase-validator-label-conflict',
+				$formData[ self::FIELD_LABEL ],
+				$formData[ self::FIELD_LANG ],
+				$collidingPropertyId
+			);
 		}
 
 		return Status::newGood();

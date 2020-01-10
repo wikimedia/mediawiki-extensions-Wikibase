@@ -187,6 +187,7 @@ use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\Store\NullTermsCollisionDetector;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -1566,6 +1567,21 @@ class WikibaseRepo {
 			$loadBalancer,
 			$typeIdsStore
 		);
+	}
+
+	public function getPropertyTermsCollisionDetector() {
+		if ( $this->getSettings()->getSetting( 'tmpPropertyTermsMigrationStage' ) > MIGRATION_WRITE_BOTH ) {
+			return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
+		}
+
+		return new NullTermsCollisionDetector();
+	}
+
+	public function getItemTermsCollisionDetector() {
+		if ( $this->getSettings()->getSetting( 'tmpItemTermsMigrationStages' )['max'] > MIGRATION_WRITE_BOTH ) {
+			return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
+		}
+		return new NullTermsCollisionDetector();
 	}
 
 	/**
