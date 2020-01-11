@@ -165,7 +165,7 @@ class DumpRdf extends DumpEntities {
 	protected function createDumper( $output ) {
 		$flavor = $this->getOption( 'flavor', 'full-dump' );
 		if ( !in_array( $flavor, [ 'full-dump', 'truthy-dump' ] ) ) {
-			$this->error( 'Invalid flavor: ' . $flavor, 1 );
+			$this->fatalError( 'Invalid flavor: ' . $flavor );
 		}
 
 		$labeler = null;

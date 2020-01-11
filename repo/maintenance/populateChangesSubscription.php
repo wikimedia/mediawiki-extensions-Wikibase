@@ -42,7 +42,7 @@ class PopulateChangesSubscription extends LoggedUpdateMaintenance {
 	 */
 	public function doDBUpdates() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!", 1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!" );
 		}
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

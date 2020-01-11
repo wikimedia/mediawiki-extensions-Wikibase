@@ -67,7 +67,7 @@ class PopulateSitesTable extends Maintenance {
 		$wikiId = $this->getOption( 'wiki' );
 
 		if ( $stripProtocols && is_string( $forceProtocol ) ) {
-			$this->error( "You can't use both strip-protocols and force-protocol", 1 );
+			$this->fatalError( "You can't use both strip-protocols and force-protocol" );
 		}
 
 		$protocol = true;

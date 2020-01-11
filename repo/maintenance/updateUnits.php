@@ -66,8 +66,7 @@ class UpdateUnits extends Maintenance {
 
 	public function execute() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!",
-				1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!" );
 		}
 		$format = $this->getOption( 'format', 'json' );
 		$checkUsage = $this->hasOption( 'check-usage' );
@@ -76,7 +75,7 @@ class UpdateUnits extends Maintenance {
 		$endPoint = $this->getOption( 'sparql',
 			$repo->getSettings()->getSetting( 'sparqlEndpoint' ) );
 		if ( !$endPoint ) {
-			$this->error( 'SPARQL endpoint not defined', 1 );
+			$this->fatalError( 'SPARQL endpoint not defined' );
 		}
 		$this->setBaseUri( $this->getOption( 'base-uri',
 			$repo->getSettings()->getSetting( 'conceptBaseUri' ) ) );
@@ -143,7 +142,7 @@ class UpdateUnits extends Maintenance {
 				echo $this->formatJSON( $convertUnits );
 				break;
 			default:
-				$this->error( 'Invalid format', 1 );
+				$this->fatalError( 'Invalid format' );
 		}
 	}
 

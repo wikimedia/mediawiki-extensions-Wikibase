@@ -39,7 +39,7 @@ class PopulateTermFullEntityId extends LoggedUpdateMaintenance {
 	 */
 	public function doDBUpdates() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!", 1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!" );
 		}
 
 		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB();
@@ -71,8 +71,7 @@ class PopulateTermFullEntityId extends LoggedUpdateMaintenance {
 		if ( $this->termsTableHasTermsForCustomEntityTypes( $dbr ) ) {
 			$this->error(
 				"There are entries for entities other than items and properties in wb_terms which cannot be automatically updated.\n" .
-				"Run rebuildTermSqlIndex (consider --no-deduplication option) maintenance script to have terms of all entities updated.\n",
-				0
+				"Run rebuildTermSqlIndex (consider --no-deduplication option) maintenance script to have terms of all entities updated.\n"
 			);
 		}
 

@@ -32,7 +32,7 @@ class RemoveTermsInLanguage extends Maintenance {
 
 	public function execute() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!\n", 1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n" );
 		}
 
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -48,7 +48,7 @@ class RemoveTermsInLanguage extends Maintenance {
 			try {
 				$entityId = $repo->getEntityIdParser()->parse( $idSerialization );
 			} catch ( InvalidArgumentException $e ) {
-				$this->error( "Invalid property id: " . $idSerialization, 1 );
+				$this->fatalError( "Invalid property id: " . $idSerialization );
 			}
 
 			$entityRevision = $entityRevisionLookup->getEntityRevision(

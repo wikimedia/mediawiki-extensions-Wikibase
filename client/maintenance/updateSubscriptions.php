@@ -51,9 +51,8 @@ class UpdateSubscriptions extends Maintenance {
 	 */
 	public function execute() {
 		if ( !WikibaseSettings::isClientEnabled() ) {
-			$this->error(
-				'You need to have WikibaseClient enabled in order to use this maintenance script!',
-				1
+			$this->fatalError(
+				'You need to have WikibaseClient enabled in order to use this maintenance script!'
 			);
 		}
 

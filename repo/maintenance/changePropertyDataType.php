@@ -40,7 +40,7 @@ class ChangePropertyDataType extends Maintenance {
 
 	public function execute() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->error( "You need to have Wikibase enabled in order to use this maintenance script!\n", 1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this maintenance script!\n" );
 		}
 
 		$repo = WikibaseRepo::getDefaultInstance();
@@ -50,7 +50,7 @@ class ChangePropertyDataType extends Maintenance {
 		try {
 			$propertyId = new PropertyId( $propertyIdSerialization );
 		} catch ( InvalidArgumentException $e ) {
-			$this->error( "Invalid property id: " . $propertyIdSerialization, 1 );
+			$this->fatalError( "Invalid property id: " . $propertyIdSerialization );
 		}
 
 		$propertyDataTypeChanger = new PropertyDataTypeChanger(
@@ -64,7 +64,7 @@ class ChangePropertyDataType extends Maintenance {
 		try {
 			$propertyDataTypeChanger->changeDataType( $propertyId, $user, $newDataType );
 		} catch ( Exception $e ) {
-			$this->error( "An error occurred: " . $e->getMessage(), 1 );
+			$this->fatalError( "An error occurred: " . $e->getMessage() );
 		}
 
 		$this->output( "Successfully updated the property data type to $newDataType.\n" );
