@@ -20,7 +20,7 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'long values', () => ( {
 		data() {
@@ -40,7 +40,7 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'empty', () => ( {
 		data() {
@@ -60,7 +60,7 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'right-to-left', () => ( {
 		data() {
@@ -80,4 +80,4 @@ storiesOf( 'PropertyLabel', module )
 					:htmlFor="htmlFor"
 				/>
 			</div>`,
-	} ), { info: true } );
+	} ) );

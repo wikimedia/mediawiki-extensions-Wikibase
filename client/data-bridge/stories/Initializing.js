@@ -13,4 +13,4 @@ storiesOf( 'Initializing', module )
 			<Initializing :is-initializing="initializing">Content which may be slow</Initializing>
 		</div>`,
 		data: () => ( { initializing: true } ),
-	} ), { info: true } );
+	} ) );

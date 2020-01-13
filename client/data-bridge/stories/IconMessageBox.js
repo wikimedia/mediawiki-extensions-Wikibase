@@ -9,7 +9,7 @@ storiesOf( 'IconMessageBox', module )
 					Just to inform you...
 				</IconMessageBox>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 	.add( 'notice long', () => ( {
 		components: { IconMessageBox },
 		template:
@@ -18,7 +18,7 @@ storiesOf( 'IconMessageBox', module )
 					Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you...Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you...Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you...  Just to inform you...Just to inform you... Just to inform you...Just to inform you...Just to inform you... 
 				</IconMessageBox>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 	.add( 'notice inline', () => ( {
 		components: { IconMessageBox },
 		template:
@@ -27,4 +27,4 @@ storiesOf( 'IconMessageBox', module )
 					Just to inform you...
 				</IconMessageBox>
 			</div>`,
-	} ), { info: true } );
+	} ) );

@@ -1,11 +1,8 @@
-import { configure } from '@storybook/vue';
 import { addDecorator } from '@storybook/vue';
-import { withInfo } from 'storybook-addon-vue-info';
 import { withA11y } from '@storybook/addon-a11y';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import './storybook-global.scss';
 
-addDecorator( withInfo );
 addDecorator( withA11y );
 
 extendVueEnvironment(
@@ -29,13 +26,4 @@ extendVueEnvironment(
 	{
 		usePublish: true,
 	},
-);
-
-const req = require.context( '../stories', true, /\.js$/ );
-
-configure(
-	() => {
-		req.keys().forEach( ( filename ) => req( filename ) );
-	},
-	module,
 );

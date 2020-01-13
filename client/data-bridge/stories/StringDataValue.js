@@ -21,7 +21,7 @@ storiesOf( 'StringDataValue', module )
 					:setDataValue="sampleSetter"
 				/>
 			</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'long values', () => ( {
 		data() {
@@ -44,7 +44,7 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter"/>
 		</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'empty', () => ( {
 		data() {
@@ -61,7 +61,7 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter"/>
 		</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'empty with placeholder', () => ( {
 		data() {
@@ -79,7 +79,7 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :placeholder="placeholder" :setDataValue="sampleSetter"/>
 		</div>`,
-	} ), { info: true } )
+	} ) )
 
 	.add( 'maxlength=15', () => ( {
 		data() {
@@ -96,4 +96,4 @@ storiesOf( 'StringDataValue', module )
 		`<div>
 			<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter" maxlength="15"/>
 		</div>`,
-	} ), { info: true } );
+	} ) );

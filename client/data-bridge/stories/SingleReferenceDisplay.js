@@ -59,7 +59,7 @@ storiesOf( 'SingleReferenceDisplay', module )
 			`<div>
 				<SingleReferenceDisplay :reference="sampleReference" />
 			</div>`,
-	} ), { info: true } )
+	} ) )
 	.add( 'can use different separator reference', () => ( {
 		data() {
 			return {
@@ -97,7 +97,7 @@ storiesOf( 'SingleReferenceDisplay', module )
 		`<div>
 				<SingleReferenceDisplay :reference="sampleReference" :separator="sampleSeparator" />
 			</div>`,
-	} ), { info: true } )
+	} ) )
 	.add( 'item only reference', () => ( {
 		data() {
 			return {
@@ -128,4 +128,4 @@ storiesOf( 'SingleReferenceDisplay', module )
 			`<div>
 				<SingleReferenceDisplay :reference="sampleReference" />
 			</div>`,
-	} ), { info: true } );
+	} ) );

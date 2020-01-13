@@ -6,4 +6,4 @@ storiesOf( 'ErrorWrapper', module )
 	.add( 'base view', () => ( {
 		components: { ErrorWrapper },
 		template: '<ErrorWrapper />',
-	} ), { info: true } );
+	} ) );
