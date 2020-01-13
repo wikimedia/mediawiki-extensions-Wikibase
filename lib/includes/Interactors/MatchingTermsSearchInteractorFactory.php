@@ -11,7 +11,7 @@ use Wikibase\TermIndex;
  *
  * @license GPL-2.0-or-later
  */
-class TermIndexSearchInteractorFactory implements TermSearchInteractorFactory {
+class MatchingTermsSearchInteractorFactory implements TermSearchInteractorFactory {
 
 	/**
 	 * @var TermIndex

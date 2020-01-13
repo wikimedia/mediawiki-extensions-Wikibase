@@ -6,7 +6,7 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * Class creating DispatchingTermIndexSearchInteractor instances configured for the particular display language.
+ * Class creating MatchingTermsSearchInteractorFactory instances configured for the particular display language.
  *
  * @license GPL-2.0-or-later
  */
@@ -18,8 +18,8 @@ class DispatchingTermSearchInteractorFactory implements TermSearchInteractorFact
 	private $interactorFactories = [];
 
 	/**
-	 * @param TermIndexSearchInteractorFactory[] $interactorFactories Associative array mapping
-	 *        entity type names (strings) to TermIndexSearchInteractorFactory instances
+	 * @param MatchingTermsSearchInteractorFactory[] $interactorFactories Associative array mapping
+	 *        entity type names (strings) to MatchingTermsSearchInteractorFactory instances
 	 *        providing the interactor for the given entity type.
 	 *
 	 * @throws ParameterAssertionException
