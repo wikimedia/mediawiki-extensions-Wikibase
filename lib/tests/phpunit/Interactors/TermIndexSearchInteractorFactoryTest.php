@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Interactors;
 
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Interactors\TermIndexSearchInteractor;
+use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermIndexSearchInteractorFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\TermIndex;
@@ -25,7 +25,7 @@ class TermIndexSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCase {
 			$this->createMock( PrefetchingTermLookup::class )
 		);
 
-		$this->assertInstanceOf( TermIndexSearchInteractor::class, $factory->newInteractor( 'en' ) );
+		$this->assertInstanceOf( MatchingTermsLookupSearchInteractor::class, $factory->newInteractor( 'en' ) );
 	}
 
 	public function testNewInteractorReturnsFreshInstanceOnMultipleCalls() {

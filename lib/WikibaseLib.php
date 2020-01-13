@@ -24,6 +24,7 @@
 
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Store\BufferingTermIndexTermLookup;
+use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 
 /**
  * Entry point for the WikibaseLib extension.
@@ -63,3 +64,4 @@ if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
 // Class aliases
 class_alias( PrefetchingTermLookup::class, 'Wikibase\Lib\Store\PrefetchingTermLookup' );
 class_alias( BufferingTermIndexTermLookup::class, 'Wikibase\Store\BufferingTermLookup' );
+class_alias( MatchingTermsLookupSearchInteractor::class, 'Wikibase\Lib\Interactors\TermIndexSearchInteractor' );

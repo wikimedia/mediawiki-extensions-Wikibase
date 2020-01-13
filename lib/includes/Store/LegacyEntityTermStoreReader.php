@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
 
 /**
  * Methods factored out of TermIndex during the migration away from wb_terms.
@@ -46,68 +45,6 @@ interface LegacyEntityTermStoreReader {
 		array $entityIds,
 		array $termTypes = null,
 		array $languageCodes = null
-	);
-
-	/**
-	 * Returns the terms that match the provided conditions.
-	 *
-	 * $terms is an array of Term objects. Terms are joined by OR.
-	 * The fields of the terms are joined by AND.
-	 *
-	 * A default can be provided for termType and entityType via the corresponding
-	 * method parameters.
-	 *
-	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText are all set.
-	 *
-	 * @param TermIndexSearchCriteria[] $criteria
-	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
-	 * @param array $options
-	 *        Accepted options are:
-	 *        - caseSensitive: boolean, default true
-	 *        - prefixSearch: boolean, default false
-	 *        - LIMIT: int, defaults to none
-	 *        - orderByWeight: boolean, default false
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	public function getMatchingTerms(
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
-	);
-
-	/**
-	 * Returns the terms that match the provided conditions ranked with the 'most important' / top first.
-	 * Will only return one TermIndexEntry per Entity
-	 *
-	 * $terms is an array of Term objects. Terms are joined by OR.
-	 * The fields of the terms are joined by AND.
-	 *
-	 * A default can be provided for termType and entityType via the corresponding
-	 * method parameters.
-	 *
-	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText are all set.
-	 *
-	 * @param TermIndexSearchCriteria[] $criteria
-	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
-	 * @param array $options
-	 *        Accepted options are:
-	 *        - caseSensitive: boolean, default true
-	 *        - prefixSearch: boolean, default false
-	 *        - LIMIT: int, defaults to none
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	public function getTopMatchingTerms(
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
 	);
 
 }

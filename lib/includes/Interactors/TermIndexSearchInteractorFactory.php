@@ -41,10 +41,10 @@ class TermIndexSearchInteractorFactory implements TermSearchInteractorFactory {
 	/**
 	 * @param string $displayLanguageCode
 	 *
-	 * @return TermIndexSearchInteractor
+	 * @return MatchingTermsLookupSearchInteractor
 	 */
 	public function newInteractor( $displayLanguageCode ) {
-		return new TermIndexSearchInteractor(
+		return new MatchingTermsLookupSearchInteractor(
 			$this->termIndex,
 			$this->languageFallbackChainFactory,
 			$this->prefetchingTermLookup,
