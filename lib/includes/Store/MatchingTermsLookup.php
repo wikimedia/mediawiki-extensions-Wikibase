@@ -19,9 +19,6 @@ interface MatchingTermsLookup {
 	 * A default can be provided for termType and entityType via the corresponding
 	 * method parameters.
 	 *
-	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText are all set.
-	 *
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -50,9 +47,6 @@ interface MatchingTermsLookup {
 	 *
 	 * A default can be provided for termType and entityType via the corresponding
 	 * method parameters.
-	 *
-	 * The return value is an array of Terms where entityId, entityType,
-	 * termType, termLanguage, termText are all set.
 	 *
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
