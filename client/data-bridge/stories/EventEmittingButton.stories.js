@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 storiesOf( 'EventEmittingButton', module )
+	.addParameters( { component: EventEmittingButton } )
 	.add( 'primaryProgressive', () => ( {
 		components: { EventEmittingButton },
 		template: '<EventEmittingButton type="primaryProgressive" message="primaryProgressive" />',

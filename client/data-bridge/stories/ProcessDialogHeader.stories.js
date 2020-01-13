@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/vue';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader';
 
 storiesOf( 'ProcessDialogHeader', module )
+	.addParameters( { component: ProcessDialogHeader } )
 	.add( 'without buttons', () => ( {
 		components: { ProcessDialogHeader },
 		template: '<ProcessDialogHeader title="ProcessDialogHeader" />',

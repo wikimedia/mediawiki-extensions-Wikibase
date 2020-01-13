@@ -19,16 +19,18 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 
 /**
  * This
- * * shows the default slot if isInitializing is false (= ready)
- * * hides the default slot while isInitializing is true; during that time it
- * ** shows blank until TIME_UNTIL_CONSIDERED_SLOW
- * ** shows the IndeterminateProgressBar from there on until isInitializing is false
- * ** shows the IndeterminateProgressBar for at least MINIMUM_TIME_OF_PROGRESS_ANIMATION[1]
  *
- * [1] This condition is only applied while isInitializing is true
+ * * shows the default slot if `isInitializing` is false (= ready)
+ * * hides the default slot while `isInitializing` is true; during that time it
+ *   * shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
+ *   * shows the `IndeterminateProgressBar` from there on until `isInitializing` is false
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`[1]
+ *
+ * [1] This condition is only applied while `isInitializing` is true
  *
  * Effectively there are three scenarios:
  *
+ * ```
  * Timeline     0s                        1s            1.5s            2s
  * Scenario 1
  *   Loading    |------------------|
@@ -39,6 +41,7 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
  * Scenario 3
  *   Loading    |---------------------------------------------|
  *   Animation                            |-------------------|<- ready
+ * ```
  */
 @Component( {
 	components: {

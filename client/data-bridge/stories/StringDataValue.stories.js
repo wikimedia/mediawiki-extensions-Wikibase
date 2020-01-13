@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 
 storiesOf( 'StringDataValue', module )
+	.addParameters( { component: StringDataValue } )
 	.add( 'basic', () => ( {
 		data() {
 			return {

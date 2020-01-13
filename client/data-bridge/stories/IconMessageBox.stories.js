@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 storiesOf( 'IconMessageBox', module )
+	.addParameters( { component: IconMessageBox } )
 	.add( 'notice', () => ( {
 		components: { IconMessageBox },
 		template:

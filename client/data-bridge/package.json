@@ -36,6 +36,7 @@
     "@storybook/addon-links": "^5.3.3",
     "@storybook/addons": "^5.3.3",
     "@storybook/vue": "^5.3.3",
+    "@storybook/addon-docs": "^5.3.3",
     "@types/deep-equal": "^1.0.1",
     "@types/jest": "^23.1.4",
     "@types/jquery": "^3.3.31",

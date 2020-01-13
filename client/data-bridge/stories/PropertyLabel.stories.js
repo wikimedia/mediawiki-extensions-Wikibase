@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue';
 import PropertyLabel from '@/presentation/components/PropertyLabel';
 
 storiesOf( 'PropertyLabel', module )
+	.addParameters( { component: PropertyLabel } )
 	.add( 'basic', () => ( {
 		data() {
 			return {

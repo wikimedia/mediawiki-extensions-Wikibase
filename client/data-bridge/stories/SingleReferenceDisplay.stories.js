@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue';
 import SingleReferenceDisplay from '@/presentation/components/SingleReferenceDisplay.vue';
 
 storiesOf( 'SingleReferenceDisplay', module )
+	.addParameters( { component: SingleReferenceDisplay } )
 	.add( 'item - extId - time reference', () => ( {
 		data() {
 			return {
