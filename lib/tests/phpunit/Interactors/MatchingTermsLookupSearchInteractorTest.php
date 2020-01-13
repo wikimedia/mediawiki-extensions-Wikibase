@@ -12,10 +12,9 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
 use Wikibase\Store\BufferingTermIndexTermLookup;
-use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\TermIndexEntry;
-use Wikibase\Lib\Tests\Store\MockTermIndex;
 
 /**
  * @covers \Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor
@@ -28,7 +27,7 @@ use Wikibase\Lib\Tests\Store\MockTermIndex;
 class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getMockTermIndex() {
-		return new MockTermIndex(
+		return new MockMatchingTermsLookup(
 			[
 				//Q111 - Has label, description and alias all the same
 				$this->getTermIndexEntry( 'Foo', 'en', TermIndexEntry::TYPE_LABEL, new ItemId( 'Q111' ) ),
