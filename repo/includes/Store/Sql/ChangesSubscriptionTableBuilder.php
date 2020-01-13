@@ -119,6 +119,7 @@ class ChangesSubscriptionTableBuilder {
 
 			if ( $count > 0 ) {
 				$this->progressReporter->reportMessage( 'Populating subscription table: '
+					// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 					. "inserted $count subscriptions, continuing at item #{$continuation[0]}." );
 			} else {
 				break;

@@ -377,10 +377,10 @@ class ChangeDispatcher {
 	 * @param Change[] $changes The list of changes to filter.
 	 * @param int $limit The max number of changes to return
 	 *
-	 * @return array ( Change[] $batch, int $seen ), where $batch is the filtered list of Change
+	 * @return array ( EntityChange[] $batch, int $seen ), where $batch is the filtered list of Change
 	 *  objects, and $seen is the ID of the last change considered for the batch
 	 *         (even if that was filtered out), for use as a continuation marker.
-	 * @phan-return array{0:Change[],1:int}
+	 * @phan-return array{0:EntityChange[],1:int}
 	 */
 	private function filterChanges( $siteID, array $changes, $limit ) {
 		// collect all item IDs mentioned in the changes

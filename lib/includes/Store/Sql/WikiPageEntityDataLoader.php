@@ -38,7 +38,7 @@ class WikiPageEntityDataLoader {
 	 * @param int $revStoreFlags See IDBAccessObject.
 	 *
 	 * @throws StorageException
-	 * @return object[] list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
+	 * @return array list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
 	public function loadEntityDataFromWikiPageRevision( RevisionRecord $revision, string $slotRole, int $revStoreFlags ) {

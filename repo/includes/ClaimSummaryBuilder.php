@@ -110,6 +110,7 @@ class ClaimSummaryBuilder {
 			$snak = $newStatement->getMainSnak();
 			$key = $snak->getPropertyId()->getSerialization();
 
+			// @phan-suppress-next-line PhanImpossibleTypeComparison
 			if ( !array_key_exists( $key, $pairs ) ) {
 				$pairs[$key] = [];
 			}

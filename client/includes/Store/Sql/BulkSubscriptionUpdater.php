@@ -137,6 +137,7 @@ class BulkSubscriptionUpdater {
 
 			if ( $count > 0 ) {
 				$this->progressReporter->reportMessage( 'Updating subscription table: '
+					// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 					. "inserted $count subscriptions, continuing at entity #{$continuation[0]}." );
 			} else {
 				break;
@@ -202,7 +203,6 @@ class BulkSubscriptionUpdater {
 		}
 
 		$res = $dbr->select(
-			// @phan-suppress-next-line PhanAccessClassConstantInternal
 			EntityUsageTable::DEFAULT_TABLE_NAME,
 			[ 'DISTINCT eu_entity_id' ],
 			$continuationCondition,
@@ -256,6 +256,7 @@ class BulkSubscriptionUpdater {
 			$entities[] = $row->$entityIdField;
 		}
 
+		// @phan-suppress-next-line PhanRedundantCondition
 		if ( isset( $row ) ) {
 			$continuation = [ $row->$entityIdField ];
 		}
@@ -280,6 +281,7 @@ class BulkSubscriptionUpdater {
 
 			if ( $count > 0 ) {
 				$this->progressReporter->reportMessage( 'Purging subscription table: '
+					// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 					. "deleted $count subscriptions, continuing at entity #{$continuation[0]}." );
 			} else {
 				break;
