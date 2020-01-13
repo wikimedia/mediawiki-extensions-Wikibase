@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\ItemId;
@@ -76,6 +77,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 	}
 
 	public function storeTerms( ItemId $itemId, Fingerprint $fingerprint ) {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.ItemTermStore_storeTerms'
+		);
 		$this->disallowForeignEntityIds( $itemId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
@@ -151,6 +155,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 	}
 
 	public function deleteTerms( ItemId $itemId ) {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
+		);
 		$this->disallowForeignEntityIds( $itemId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
@@ -210,6 +217,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 	}
 
 	public function getTerms( ItemId $itemId ): Fingerprint {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.ItemTermStore_getTerms'
+		);
 		$this->disallowForeignEntityIds( $itemId );
 
 		$termIds = $this->getDbr()->selectFieldValues(

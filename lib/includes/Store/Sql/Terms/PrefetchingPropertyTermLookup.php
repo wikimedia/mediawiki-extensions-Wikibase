@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
@@ -82,6 +83,9 @@ class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements Pref
 			return;
 		}
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.PrefetchingPropertyTermLookup_prefetchTerms'
+		);
 		$res = $this->getDbr()->select(
 			'wbt_property_terms',
 			[ 'wbpt_property_id', 'wbpt_term_in_lang_id' ],

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use BagOStuff;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
 
@@ -44,6 +45,9 @@ class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResol
 	}
 
 	protected function loadProperties(): array {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.CachedDatabasePropertyLabelResolver_loadProperties'
+		);
 		$termsByPropertyId = $this->dbTermIdsResolver->resolveTermsViaJoin(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
