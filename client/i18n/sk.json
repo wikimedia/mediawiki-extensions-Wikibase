@@ -56,7 +56,7 @@
 	"wikibase-rcfilters-hide-wikibase-description": "Úpravy pochádzajúce z {{GRAMMAR:2sg|{{WBREPONAME}}}}.",
 	"wikibase-replicationnote": "Môže trvať niekoľko minút, než sa zmeny prejavia na všetkých wiki.",
 	"wikibase-watchlist-show-changes-pref": "Zobraziť úpravy Wikiúdajov v sledovaných stránkach",
-	"unconnectedpages": "Stránky bez prepojení",
+	"unconnectedpages": "Stránky neprepojené na položky",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medzijazykový odkaz|medzijazykové odkazy|medzijazykových odkazov}})",
 	"wikibase-unconnectedpages-submit": "Zobraziť stránky",
 	"pageswithbadges": "Články s medailou",

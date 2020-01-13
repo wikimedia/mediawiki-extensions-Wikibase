@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Calak",
-			"Asoxor"
+			"Asoxor",
+			"ئارام بکر"
 		]
 	},
 	"specialpages-group-wikibase": "ویکیبەیس",
-	"wikibase-error-unexpected": "ھەڵەیەکی چاوەڕوان‌نەکراو ڕووی دا.",
+	"wikibase-error-unexpected": "ھەڵە: $1.",
 	"wikibase-error-save-generic": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.",
 	"wikibase-error-remove-generic": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی سڕینەوەدا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت.",
 	"wikibase-error-save-connection": "ھەڵەیەکی چاوەڕوان‌نەکراو لە کاتی پاشەکەوتکردندا ڕووی دا و لەبەر ئەمە، گۆڕانکارییەکانت بە ئەنجام نەگەییشت. تکایە پەیوەندی ئینتەرنێتەکەت تاوتوێ بکە.",
@@ -31,7 +32,7 @@
 	"wikibase-entity-summary-wbsetsitelink-remove": "بەستەری [$2] سڕایەوە",
 	"wikibase-item-summary-wbeditentity": "بەندێکی نوێ دروست کرا",
 	"wikibase-item-summary-wbeditentity-create": "بەندێکی نوێ دروست کرا",
-	"wikibase-item-summary-wbeditentity-update": "بەندێک نوێ کرایەوە",
+	"wikibase-item-summary-wbeditentity-update": "بەندێک گۆڕدرا",
 	"wikibase-property-summary-wbeditentity-create": "تایبەتمەندییەکی نوێ دروست کرا",
 	"wikibase-property-summary-wbeditentity-update": "تایبەتمەندییەک سڕایەوە"
 }
