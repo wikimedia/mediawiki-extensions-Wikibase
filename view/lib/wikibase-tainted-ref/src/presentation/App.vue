@@ -1,6 +1,6 @@
 <template>
 	<div class="wb-tr-app">
-		<div v-if="isTainted">
+		<div v-if="isTainted && !editState ">
 			<span>
 				<TaintedIcon :guid="id" />
 				<div class="wb-tr-float-wrapper" v-if="popperIsOpened">
@@ -57,7 +57,7 @@ export default class App extends Vue {
 	@Getter( 'popperState' )
 	public popperStateFunction!: Function;
 
-	@Getter( 'statementsEditState' )
+	@Getter( 'editState' )
 	public editStateFunction!: Function;
 
 	public get isTainted(): boolean {
