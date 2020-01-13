@@ -42,14 +42,24 @@ class TermStoresDelegatingPrefetchingItemTermLookupTest extends TestCase {
 
 	public function testGetPrefetchedTerm() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getPrefetchedTerm' )->with( $this->normalizedStoreItemId, 'label', 'en' );
+			->method( 'getPrefetchedTerm' )
+			->with( $this->normalizedStoreItemId, 'label', 'en' )
+			->willReturn( 'a' );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getPrefetchedTerm' )->with( $this->wbTermsStoreItemId, 'description', 'de' );
+			->method( 'getPrefetchedTerm' )
+			->with( $this->wbTermsStoreItemId, 'description', 'de' )
+			->willReturn( 'b' );
 
 		$testSubject = $this->newTestSubject();
-		$testSubject->getPrefetchedTerm( $this->normalizedStoreItemId, 'label', 'en' );
-		$testSubject->getPrefetchedTerm( $this->wbTermsStoreItemId, 'description', 'de' );
+		$this->assertEquals(
+			'a',
+			$testSubject->getPrefetchedTerm( $this->normalizedStoreItemId, 'label', 'en' )
+		);
+		$this->assertEquals(
+			'b',
+			$testSubject->getPrefetchedTerm( $this->wbTermsStoreItemId, 'description', 'de' )
+		);
 	}
 
 	public function testPrefetchTerms() {
@@ -71,50 +81,90 @@ class TermStoresDelegatingPrefetchingItemTermLookupTest extends TestCase {
 
 	public function testGetLabel() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getLabel' )->with( $this->normalizedStoreItemId, 'en' );
+			->method( 'getLabel' )
+			->with( $this->normalizedStoreItemId, 'en' )
+			->willReturn( 'a' );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getLabel' )->with( $this->wbTermsStoreItemId, 'de' );
+			->method( 'getLabel' )
+			->with( $this->wbTermsStoreItemId, 'de' )
+			->willReturn( 'b' );
 
 		$testSubject = $this->newTestSubject();
-		$testSubject->getLabel( $this->normalizedStoreItemId, 'en' );
-		$testSubject->getLabel( $this->wbTermsStoreItemId, 'de' );
+		$this->assertEquals(
+			'a',
+			$testSubject->getLabel( $this->normalizedStoreItemId, 'en' )
+		);
+		$this->assertEquals(
+			'b',
+			$testSubject->getLabel( $this->wbTermsStoreItemId, 'de' )
+		);
 	}
 
 	public function testGetDescription() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getDescription' )->with( $this->normalizedStoreItemId, 'en' );
+			->method( 'getDescription' )
+			->with( $this->normalizedStoreItemId, 'en' )
+			->willReturn( 'a' );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getDescription' )->with( $this->wbTermsStoreItemId, 'de' );
+			->method( 'getDescription' )
+			->with( $this->wbTermsStoreItemId, 'de' )
+			->willReturn( 'b' );
 
 		$testSubject = $this->newTestSubject();
-		$testSubject->getDescription( $this->normalizedStoreItemId, 'en' );
-		$testSubject->getDescription( $this->wbTermsStoreItemId, 'de' );
+		$this->assertEquals(
+			'a',
+			$testSubject->getDescription( $this->normalizedStoreItemId, 'en' )
+		);
+		$this->assertEquals(
+			'b',
+			$testSubject->getDescription( $this->wbTermsStoreItemId, 'de' )
+		);
 	}
 
 	public function testGetLabels() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getLabels' )->with( $this->normalizedStoreItemId, [ 'en' ] );
+			->method( 'getLabels' )
+			->with( $this->normalizedStoreItemId, [ 'en' ] )
+			->willReturn( [ 'a', 'b' ] );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getLabels' )->with( $this->wbTermsStoreItemId, [ 'de' ] );
+			->method( 'getLabels' )
+			->with( $this->wbTermsStoreItemId, [ 'de' ] )
+			->willReturn( [ 'c', 'd' ] );
 
 		$testSubject = $this->newTestSubject();
-		$testSubject->getLabels( $this->normalizedStoreItemId, [ 'en' ] );
-		$testSubject->getLabels( $this->wbTermsStoreItemId, [ 'de' ] );
+		$this->assertEquals(
+			[ 'a', 'b' ],
+			$testSubject->getLabels( $this->normalizedStoreItemId, [ 'en' ] )
+		);
+		$this->assertEquals(
+			[ 'c', 'd' ],
+			$testSubject->getLabels( $this->wbTermsStoreItemId, [ 'de' ] )
+		);
 	}
 
 	public function testGetDescriptions() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getDescriptions' )->with( $this->normalizedStoreItemId, [ 'en' ] );
+			->method( 'getDescriptions' )
+			->with( $this->normalizedStoreItemId, [ 'en' ] )
+			->willReturn( [ 'a', 'b' ] );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
-			->method( 'getDescriptions' )->with( $this->wbTermsStoreItemId, [ 'de' ] );
+			->method( 'getDescriptions' )
+			->with( $this->wbTermsStoreItemId, [ 'de' ] )
+			->willReturn( [ 'c', 'd' ] );
 
 		$testSubject = $this->newTestSubject();
-		$testSubject->getDescriptions( $this->normalizedStoreItemId, [ 'en' ] );
-		$testSubject->getDescriptions( $this->wbTermsStoreItemId, [ 'de' ] );
+		$this->assertEquals(
+			[ 'a', 'b' ],
+			$testSubject->getDescriptions( $this->normalizedStoreItemId, [ 'en' ] )
+		);
+		$this->assertEquals(
+			[ 'c', 'd' ],
+			$testSubject->getDescriptions( $this->wbTermsStoreItemId, [ 'de' ] )
+		);
 	}
 
 	private function newTestSubject() {
