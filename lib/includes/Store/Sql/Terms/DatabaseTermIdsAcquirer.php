@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use Exception;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -347,25 +346,18 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 				);
 
 				if ( count( $idsToRestore ) !== count( $recordsToInsert ) ) {
-					$exception = new Exception(
-						'Fail-safe exception. Number of ids to be restored is not equal to'
-						. ' the number of records that are about to be inserted into master.'
-						. ' This should never happen, except for an edge-case that was not'
-						. ' detected during development or due to a race-condition that is'
-						. ' not covered by this implementation.'
-					);
-
-					$this->logger->warning(
-						'{method}: Restoring record term in lang ids failed: {exception}',
+					// This means the ids are not the same, this can happen due to duplicate entries
+					// or a record that exist in another language and as the result doesn't get to be in $recordsToInsert
+					// @todo Make it handle such cases properly
+					$this->logger->info(
+						$fname . ': Restoring record term in lang ids failed',
 						[
-							'method' => $fname,
-							'exception' => $exception,
 							'idsToRestore' => $idsToRestore,
 							'recordsToInsert' => $recordsToInsert,
 						]
-					);
 
-					throw $exception;
+					);
+					return $recordsToInsert;
 				}
 
 				return array_map(
