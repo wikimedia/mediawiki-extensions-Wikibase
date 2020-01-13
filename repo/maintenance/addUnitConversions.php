@@ -109,7 +109,7 @@ class AddUnitConversions extends Maintenance {
 		$newJsonName = $this->getOption( 'config' );
 		$newJson = json_decode( file_get_contents( $newJsonName ), true );
 		if ( !$newJson ) {
-			$this->error( "Cannot load new config", 1 );
+			$this->fatalError( "Cannot load new config" );
 		}
 
 		$oldJsonName = $this->getOption( 'old-config' );
@@ -118,7 +118,7 @@ class AddUnitConversions extends Maintenance {
 		} else {
 			$oldJson = json_decode( file_get_contents( $oldJsonName ), true );
 			if ( !$oldJsonName ) {
-				$this->error( "Cannot load old config", 1 );
+				$this->fatalError( "Cannot load old config" );
 			}
 		}
 
@@ -138,7 +138,7 @@ class AddUnitConversions extends Maintenance {
 		$endPoint = $this->getOption( 'sparql',
 				$wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' ) );
 		if ( !$endPoint ) {
-			$this->error( 'SPARQL endpoint should be supplied in config or parameters', 1 );
+			$this->fatalError( 'SPARQL endpoint should be supplied in config or parameters' );
 		}
 
 		$baseUri = $this->getOption( 'base-uri',
@@ -335,7 +335,7 @@ QUERY;
 		$data = $this->rdfWriter->drain();
 		if ( $this->out ) {
 			if ( fwrite( $this->out, $data ) === false ) {
-				$this->error( "Failed to write to the output, exiting.", 1 );
+				$this->fatalError( "Failed to write to the output, exiting." );
 			}
 		}
 	}

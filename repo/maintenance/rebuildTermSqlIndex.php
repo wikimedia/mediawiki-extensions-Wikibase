@@ -54,8 +54,8 @@ class RebuildTermSqlIndex extends Maintenance {
 
 	public function execute() {
 		if ( !defined( 'WB_VERSION' ) ) {
-			$this->error( "You need to have Wikibase enabled in order to use this "
-				. "maintenance script!\n\n", 1 );
+			$this->fatalError( "You need to have Wikibase enabled in order to use this "
+				. "maintenance script!\n\n" );
 		}
 
 		$builder = $this->getTermIndexBuilder();
@@ -113,7 +113,7 @@ class RebuildTermSqlIndex extends Maintenance {
 		$entityTypes = $localEntityTypes;
 		if ( $entityType !== null ) {
 			if ( !in_array( $entityType, $localEntityTypes ) ) {
-				$this->error( "Unknown entity type: \"$entityType\"\n", 1 );
+				$this->fatalError( "Unknown entity type: \"$entityType\"\n" );
 			}
 			$entityTypes = [ $entityType ];
 		}

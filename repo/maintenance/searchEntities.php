@@ -97,8 +97,7 @@ class SearchEntities extends Maintenance {
 				if ( array_key_exists( $key, $GLOBALS ) ) {
 					$GLOBALS[$key] = $value;
 				} else {
-					$this->error( "\nERROR: $key is not a valid global variable\n" );
-					exit();
+					$this->fatalError( "\nERROR: $key is not a valid global variable\n" );
 				}
 			}
 		}
