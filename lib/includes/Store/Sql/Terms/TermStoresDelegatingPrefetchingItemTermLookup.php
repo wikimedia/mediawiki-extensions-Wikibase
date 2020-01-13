@@ -25,8 +25,7 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 	private $wbTermsStorePrefetchingTermLookup;
 
 	public function __construct(
-		DataAccessSettings $dataAccessSettings,
-		PrefetchingTermLookup $normalizedStorePrefetchingTermLookup,
+		DataAccessSettings $dataAccessSettings, PrefetchingTermLookup $normalizedStorePrefetchingTermLookup,
 		PrefetchingTermLookup $wbTermsStorePrefetchingTermLookup
 	) {
 		$this->dataAccessSettings = $dataAccessSettings;
@@ -38,10 +37,10 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 	 * @param ItemId[] $entityIds
 	 *
 	 * @return array of two arrays:
-	 * 	[
-	 * 		[ entity id to fetch from new store, ... ],
-	 * 		[ entity id to fetch from old store, ... ]
-	 * 	]
+	 *    [
+	 *        [ entity id to fetch from new store, ... ],
+	 *        [ entity id to fetch from old store, ... ]
+	 *    ]
 	 */
 	private function splitIdsPerTargetTermsStore( array $entityIds ): array {
 		$normalizedStoreIds = [];
@@ -130,4 +129,15 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 		return call_user_func_array( [ $targetLookup, $method ], $params );
 	}
 
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		if ( !$entityId instanceof ItemId ) {
+			throw new InvalidArgumentException( '$entityId can only be ItemId' );
+		}
+
+		if ( $this->dataAccessSettings->useNormalizedItemTerms( $entityId->getNumericId() ) ) {
+			return $this->normalizedStorePrefetchingTermLookup->getPrefetchedAliases( $entityId, $languageCode );
+		} else {
+			return $this->wbTermsStorePrefetchingTermLookup->getPrefetchedAliases( $entityId, $languageCode );
+		}
+	}
 }

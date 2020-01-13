@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,12 +12,16 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikimedia\Assert\Assert;
 
 /**
+ * Dispatching based on entity repo.
+ *
+ * @todo Once MultiRepositoryServiceWiring is gone, this will have no uses.
+ *
  * @license GPL-2.0-or-later
  */
 class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingTermLookup {
 
 	/**
-	 * @var TermBuffer[]
+	 * @var TermBuffer[]|AliasTermBuffer[]
 	 */
 	private $termBuffers;
 
@@ -26,7 +31,7 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 	private $logger;
 
 	/**
-	 * @param TermBuffer[] $termBuffers
+	 * @param TermBuffer[]|AliasTermBuffer[] $termBuffers
 	 * @param LoggerInterface $logger
 	 *
 	 * @throws InvalidArgumentException
@@ -138,10 +143,17 @@ class DispatchingTermBuffer extends EntityTermLookupBase implements PrefetchingT
 	/**
 	 * @param string $repository
 	 *
-	 * @return TermBuffer
+	 * @return TermBuffer|AliasTermBuffer
 	 */
 	private function getTermBufferForRepository( $repository ) {
 		return $this->termBuffers[$repository] ?? null;
+	}
+
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$termBuffer = $this->getTermBufferForRepository( $entityId->getRepositoryName() );
+		return $termBuffer !== null && $termBuffer instanceof AliasTermBuffer ?
+			$termBuffer->getPrefetchedAliases( $entityId, $languageCode )
+			: null;
 	}
 
 }

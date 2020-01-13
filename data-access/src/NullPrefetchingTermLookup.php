@@ -57,4 +57,10 @@ class NullPrefetchingTermLookup implements PrefetchingTermLookup {
 		return [];
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		return [];
+	}
 }

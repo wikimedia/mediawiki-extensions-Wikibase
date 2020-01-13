@@ -120,4 +120,15 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		return $this->dbr;
 	}
 
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$serialization = $entityId->getSerialization();
+		if ( !( $entityId instanceof ItemId ) ) {
+			throw new InvalidArgumentException( 'Not an ItemId: ' . $serialization );
+		}
+		if ( !array_key_exists( $serialization, $this->terms ) ) {
+			return null;
+		}
+		return $this->terms[$serialization]['alias'][$languageCode] ?? false;
+	}
+
 }

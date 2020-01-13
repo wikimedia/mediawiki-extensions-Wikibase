@@ -7,8 +7,8 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 
 /**
  * A PrefetchingTermLookup providing dummy TermLookup functionality, i.e. always returning a fake label/description,
- * and also a Spy on TermBuffer, i.e. provides access to "prefetched" terms stored in the buffer after prefetchTerms
- * method is called.
+ * and optional aliases, and also a Spy on TermBuffer
+ * i.e. provides access to "prefetched" terms stored in the buffer after prefetchTerms method is called.
  *
  * @license GPL-2.0-or-later
  */
@@ -16,6 +16,11 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 
 	private $buffer;
 
+	/**
+	 * @param array $entityIds
+	 * @param array|null $termTypes if null, defaults to labels and descriptions only
+	 * @param array|null $languageCodes if null, defaults to de and en
+	 */
 	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
 		if ( $termTypes === null ) {
 			$termTypes = [ 'label', 'description' ];
@@ -23,17 +28,44 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 		if ( $languageCodes === null ) {
 			$languageCodes = [ 'de', 'en' ];
 		}
+		$this->bufferFakeTermsForEntities( $entityIds, $termTypes, $languageCodes );
+	}
+
+	private function bufferFakeTermsForEntities( array $entityIds, array $termTypes, array $languageCodes ) {
 		foreach ( $entityIds as $id ) {
 			foreach ( $termTypes as $type ) {
 				foreach ( $languageCodes as $lang ) {
-					$this->buffer[$id->getSerialization()][$type][$lang] = $this->generateFakeTerm( $id, $type, $lang );
+					if ( $type !== 'alias' ) {
+						$this->bufferNonAliasTerm( $id, $type, $lang );
+					} else {
+						$this->bufferAliasTerms( $id, $type, $lang );
+					}
 				}
 			}
 		}
 	}
 
-	private function generateFakeTerm( EntityId $id, $type, $lang ) {
-		return $id->getSerialization() . ' ' . $lang . ' ' . $type;
+	private function bufferNonAliasTerm( EntityId $id, $type, $lang ) {
+		$this->buffer[$id->getSerialization()][$type][$lang] = $this->generateFakeTerm( $id, $type, $lang );
+	}
+
+	private function bufferAliasTerms( EntityId $id, $type, $lang ) {
+		$this->buffer[$id->getSerialization()][$type][$lang] = [];
+		$this->buffer[$id->getSerialization()][$type][$lang][] = $this->generateFakeTerm( $id, $type, $lang, 1 );
+		$this->buffer[$id->getSerialization()][$type][$lang][] = $this->generateFakeTerm( $id, $type, $lang, 2 );
+	}
+
+	/**
+	 * @param EntityId $id
+	 * @param string $type
+	 * @param string $lang
+	 * @param int $count Used for aliases
+	 * @return string
+	 */
+	private function generateFakeTerm( EntityId $id, $type, $lang, $count = 0 ) {
+		$suffix = $count ? ' ' . $count : '';
+
+		return $id->getSerialization() . ' ' . $lang . ' ' . $type . $suffix;
 	}
 
 	public function getPrefetchedTerms() {
@@ -79,6 +111,19 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 			$descriptions[$lang] = $this->generateFakeTerm( $entityId, 'description', $lang );
 		}
 		return $descriptions;
+	}
+
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$id = $entityId->getSerialization();
+		if ( array_key_exists( $id, $this->buffer ) ) {
+			if ( array_key_exists( 'alias', $this->buffer[$id] ) ) {
+				if ( array_key_exists( $languageCode, $this->buffer[$id]['alias'] ) ) {
+					return $this->buffer[$id]['alias'][$languageCode];
+				}
+			}
+		}
+
+		return [];
 	}
 
 }

@@ -4,6 +4,7 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
+	'Wikibase\\DataAccess\\AliasTermBuffer' => __DIR__ . '/src/AliasTermBuffer.php',
 	'Wikibase\\DataAccess\\ByTypeDispatchingEntityIdLookup' => __DIR__ . '/src/ByTypeDispatchingEntityIdLookup.php',
 	'Wikibase\\DataAccess\\ByTypeDispatchingEntityInfoBuilder' => __DIR__ . '/src/ByTypeDispatchingEntityInfoBuilder.php',
 	'Wikibase\\DataAccess\\ByTypeDispatchingEntityPrefetcher' => __DIR__ . '/src/ByTypeDispatchingEntityPrefetcher.php',

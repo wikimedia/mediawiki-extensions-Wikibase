@@ -116,4 +116,15 @@ class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements Pref
 		return $this->dbr;
 	}
 
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$serialization = $entityId->getSerialization();
+		if ( !( $entityId instanceof PropertyId ) ) {
+			throw new InvalidArgumentException( 'Not a PropertyId: ' . $serialization );
+		}
+		if ( !array_key_exists( $serialization, $this->terms ) ) {
+			return null;
+		}
+		return $this->terms[$serialization]['alias'][$languageCode] ?? false;
+	}
+
 }

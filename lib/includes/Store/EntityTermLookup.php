@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\TermIndex;
+use Wikibase\TermIndexEntry;
 
 /**
  * @license GPL-2.0-or-later
@@ -32,6 +33,19 @@ class EntityTermLookup extends EntityTermLookupBase {
 		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, [ $termType ], $languageCodes );
 
 		return $this->convertTermsToMap( $wikibaseTerms );
+	}
+
+	protected function getAliases( EntityId $entityId, array $languageCodes ) {
+		$wikibaseTerms = $this->termIndex->getTermsOfEntity( $entityId, [ TermIndexEntry::TYPE_ALIAS ], $languageCodes );
+		$aliases = [];
+		foreach ( $languageCodes as $languageCode ) {
+			$aliases[$languageCode] = [];
+		}
+		foreach ( $wikibaseTerms as $term ) {
+			$aliases[$term->getLanguage()][] = $term->getText();
+		}
+
+		return $aliases;
 	}
 
 }

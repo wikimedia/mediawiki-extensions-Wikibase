@@ -90,11 +90,14 @@ abstract class EntityTermLookupBase implements TermLookup {
 	}
 
 	/**
+	 * Gets the text string terms for a given type.
+	 * If aliases are requested here you will only receive a single string.
+	 *
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 * @param string[] $languageCodes The languages to get terms for
 	 *
-	 * @return string[]
+	 * @return string[] Normally indexed by language code
 	 */
 	abstract protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes );
 

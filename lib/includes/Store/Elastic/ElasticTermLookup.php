@@ -273,4 +273,8 @@ class ElasticTermLookup implements PrefetchingTermLookup {
 		return $this->getTerms( 'descriptions', $entityId, $languageCodes );
 	}
 
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		// Not implemented
+		return [];
+	}
 }

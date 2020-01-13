@@ -36,17 +36,12 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		$this->termIndex = $termIndex;
 	}
 
-	/**
-	 * Returns a key for use in the LRU buffer.
-	 *
-	 * @param EntityId $entityId
-	 * @param string $termType
-	 * @param string $languageCode
-	 *
-	 * @return string
-	 */
-	private function getBufferKey( EntityId $entityId, $termType, $languageCode ) {
-		return $entityId->getSerialization() . '|' . $termType . '|' . $languageCode;
+	private function getBufferKey( EntityId $entityId, string $termType, string $languageCode ): string {
+		return $this->getBufferKeyWithEntityIdString( $entityId->getSerialization(), $termType, $languageCode );
+	}
+
+	private function getBufferKeyWithEntityIdString( string $entityIdSerialization, string $termType, string $languageCode ): string {
+		return $entityIdSerialization . '|' . $termType . '|' . $languageCode;
 	}
 
 	/**
@@ -97,6 +92,7 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		}
 
 		$terms = $this->stripUndefinedTerms( $terms );
+
 		return $terms;
 	}
 
@@ -111,18 +107,18 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 * @throws StorageException
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms'
-		);
+		MediaWikiServices::getInstance()
+			->getStatsdDataFactory()
+			->increment( 'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms' );
 
 		$closest2Power = round( log( count( $entityIds ), 2 ) );
 		$low = ceil( pow( 2, $closest2Power - 0.5 ) );
 		$high = floor( pow( 2, $closest2Power + 0.5 ) );
 		$idCount = $low === $high ? $low : "{$low}-{$high}";
 
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.wb_terms.BufferingTermLookup_prefetchTerms.idCount.' . $idCount
-		);
+		MediaWikiServices::getInstance()
+			->getStatsdDataFactory()
+			->increment( 'wikibase.repo.wb_terms.BufferingTermLookup_prefetchTerms.idCount.' . $idCount );
 
 		if ( empty( $entityIds ) ) {
 			return;
@@ -212,7 +208,11 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 *         or null if the term was not yet requested via prefetchTerms().
 	 */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
+		if ( $termType === 'alias' ) {
+			return $this->getPrefetchedAliases( $entityId, $languageCode );
+		}
 		$key = $this->getBufferKey( $entityId, $termType, $languageCode );
+
 		return $this->buffer->get( $key );
 	}
 
@@ -245,21 +245,47 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 * @return string[] The buffer keys to which the terms were assigned.
 	 */
 	private function setBufferedTermObjects( array $terms ) {
-		$keys = [];
-
+		// Iterate through our dumb list to group things.
+		$grouped = [];
 		foreach ( $terms as $term ) {
 			$id = $term->getEntityId();
-
 			if ( $id === null ) {
 				continue;
 			}
 
-			$key = $this->getBufferKey( $id, $term->getTermType(), $term->getLanguage() );
-			$this->buffer->set( $key, $term->getText() );
-			$keys[] = $key;
+			$grouped[$id->getSerialization()][$term->getTermType()][$term->getLanguage()][] = $term;
+		}
+
+		$keys = [];
+		foreach ( $grouped as $idSerialization => $entityTerms ) {
+			foreach ( $entityTerms as $type => $termsOfType ) {
+				foreach ( $termsOfType as $language => $termsOfLanguage ) {
+					$key = $this->getBufferKeyWithEntityIdString( $idSerialization, $type, $language );
+					$this->setBufferedTermObject( $key, $type, $termsOfLanguage );
+					$keys[] = $key;
+				}
+			}
 		}
 
 		return $keys;
+	}
+
+	/**
+	 * @param string $key
+	 * @param string $type
+	 * @param TermIndexEntry[] $termsOfLanguage
+	 */
+	private function setBufferedTermObject( string $key, string $type, array $termsOfLanguage ) {
+		if ( $type !== TermIndexEntry::TYPE_ALIAS ) {
+			$this->buffer->set( $key, $termsOfLanguage[0]->getText() );
+		} else {
+			// For aliases add a json encoded blob with all aliases in a single key
+			$aliasTexts = [];
+			foreach ( $termsOfLanguage as $aliasTerm ) {
+				$aliasTexts[] = $aliasTerm->getText();
+			}
+			$this->buffer->set( $key, json_encode( $aliasTexts ) );
+		}
 	}
 
 	/**
@@ -285,13 +311,16 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	/**
 	 * Remove all non-string entries from an array.
 	 * Useful for getting rid of negative cache entries.
+	 * Still allows arrays to be stored for aliases.
 	 *
 	 * @param string[] $terms
 	 *
 	 * @return string[]
 	 */
 	private function stripUndefinedTerms( array $terms ) {
-		return array_filter( $terms, 'is_string' );
+		return array_filter( $terms, function ( $value ) {
+			return $value !== null && $value !== false;
+		} );
 	}
 
 	/**
@@ -312,4 +341,16 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		return $entityIdsByType;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
+		$key = $this->getBufferKey( $entityId, 'alias', $languageCode );
+		$buffered = $this->buffer->get( $key );
+		if ( $buffered !== null && $buffered !== false ) {
+			return json_decode( $buffered );
+		}
+
+		return null;
+	}
 }
