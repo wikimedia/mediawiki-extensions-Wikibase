@@ -22,7 +22,7 @@
 
 		return $( '<div>' )
 			.addClass( 'test_sitelinkgrouplistview' )
-			.appendTo( $( 'body' ) )
+			.appendTo( document.body )
 			.sitelinkgrouplistview( options );
 	}
 

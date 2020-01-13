@@ -19,7 +19,7 @@
 
 		var $aliasesview = $( '<div>' )
 			.addClass( 'test_aliasesview' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.aliasesview( options );
 
 		$aliasesview.data( 'aliasesview' )._save = function () {

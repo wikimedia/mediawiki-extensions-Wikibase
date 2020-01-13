@@ -26,7 +26,7 @@
 
 		return $( '<div>' )
 			.addClass( 'test_sitelinkview' )
-			.appendTo( $( 'body' ) )
+			.appendTo( document.body )
 			.sitelinkview( options );
 	}
 

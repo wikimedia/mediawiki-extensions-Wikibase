@@ -91,7 +91,7 @@
 			PARENT.prototype._create.call( this );
 
 			if ( !$menu ) {
-				$menu = this._buildMenu().appendTo( 'body' ).hide();
+				$menu = this._buildMenu().appendTo( document.body ).hide();
 
 				$menu.on( 'click.' + this.widgetName, function ( event ) {
 					var $li = $( event.target ).closest( 'li' ),

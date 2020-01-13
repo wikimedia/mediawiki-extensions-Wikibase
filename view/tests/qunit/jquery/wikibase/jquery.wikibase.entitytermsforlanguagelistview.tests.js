@@ -45,7 +45,7 @@
 		}, options || {} );
 
 		return $( '<table>' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.addClass( 'test_entitytermsforlanguagelistview' )
 			.entitytermsforlanguagelistview( options );
 	}

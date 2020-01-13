@@ -310,7 +310,7 @@
 
 		// We need to make sure the snaklistview is visible before startEditing,
 		// because Firefox does not allow setting focus on a hidden element.
-		$node.appendTo( $( 'body' ) );
+		$node.appendTo( document.body );
 
 		snaklistview.startEditing();
 
@@ -398,7 +398,7 @@
 
 		// We need to make sure the snaklistview is visible before startEditing,
 		// because Firefox does not allow setting focus on a hidden element.
-		$node.appendTo( $( 'body' ) );
+		$node.appendTo( document.body );
 
 		// Start with empty snaklistview, set a snak list and stop edit mode:
 		snaklistview.startEditing();
@@ -465,7 +465,7 @@
 
 		// We need to make sure the snaklistview is visible before startEditing,
 		// because Firefox does not allow setting focus on a hidden element.
-		$node.appendTo( $( 'body' ) );
+		$node.appendTo( document.body );
 
 		// Start with empty snaklistview, set a snak list and stop edit mode:
 		snaklistview.startEditing();

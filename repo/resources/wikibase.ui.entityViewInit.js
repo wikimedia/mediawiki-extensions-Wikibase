@@ -287,7 +287,7 @@
 		// to manage the tooltip which will have the 'save' button as element to point to.
 		// The 'save' button can still have its own tooltip though.
 		var $messageAnchor = $( '<span>' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.toolbaritem()
 			.wbtooltip( {
 				content: $message,

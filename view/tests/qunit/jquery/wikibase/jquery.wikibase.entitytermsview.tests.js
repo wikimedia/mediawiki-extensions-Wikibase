@@ -41,7 +41,7 @@
 		}, options || {} );
 
 		return $( '<div>' )
-			.appendTo( 'body' )
+			.appendTo( document.body )
 			.addClass( 'test_entitytermsview' )
 			.entitytermsview( options );
 	}

@@ -14,7 +14,7 @@
 	 * @throws {Error} If the test runs in a non-browser environment or on a unsuitable HTML page.
 	 */
 	function newTestNode() {
-		var $body = $( 'body' );
+		var $body = $( document.body );
 
 		if ( !$body.length ) {
 			throw new Error( 'Can only run this test on a HTML page with "body" tag in the browser.' );

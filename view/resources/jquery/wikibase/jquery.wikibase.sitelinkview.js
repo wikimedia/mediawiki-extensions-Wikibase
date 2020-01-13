@@ -147,7 +147,7 @@
 				value: this.options.value ? this.options.value.getBadges() : [],
 				badges: badges,
 				entityIdPlainFormatter: this.options.entityIdPlainFormatter,
-				isRtl: $( 'body' ).hasClass( 'rtl' ),
+				isRtl: $( document.body ).hasClass( 'rtl' ),
 				messages: {
 					'badge-placeholder-title': mw.msg(
 						'wikibase-badgeselector-badge-placeholder-title'
@@ -199,7 +199,7 @@
 		_drawEditMode: function () {
 			var self = this,
 				pageNameInputOptions = {},
-				dir = $( 'html' ).prop( 'dir' );
+				dir = $( document.documentElement ).prop( 'dir' );
 
 			if ( this.options.value ) {
 				pageNameInputOptions = {

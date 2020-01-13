@@ -144,7 +144,7 @@
 	 * @param {jQuery} $within
 	 */
 	function positionElementInOneLineWithAnother( $element, $target, $within ) {
-		var side = $( 'html' ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
+		var side = $( document.documentElement ).prop( 'dir' ) === 'ltr' ? 'left' : 'right';
 		$element
 		.position( {
 			my: side + ' top',

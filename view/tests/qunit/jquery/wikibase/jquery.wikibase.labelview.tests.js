@@ -17,7 +17,7 @@
 			value: new datamodel.Term( 'en', 'test label' )
 		}, options || {} );
 
-		$node = $node || $( '<div>' ).appendTo( 'body' );
+		$node = $node || $( '<div>' ).appendTo( document.body );
 
 		var $labelview = $node
 			.addClass( 'test_labelview' )

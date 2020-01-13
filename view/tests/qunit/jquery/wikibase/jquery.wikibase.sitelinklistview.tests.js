@@ -34,7 +34,7 @@
 
 		var $sitelinklistview = $( '<table>' )
 			.addClass( 'test_sitelinklistview' )
-			.appendTo( $( 'body' ) )
+			.appendTo( document.body )
 			.sitelinklistview( options );
 
 		var sitelinklistview = $sitelinklistview.data( 'sitelinklistview' );
