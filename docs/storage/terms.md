@@ -7,6 +7,8 @@ The alternative to secondary storage would be loading each of the full entities 
 
 The code for the storage lives in the [Wikibase\Lib\Store\Sql\Terms] namespace.
 
+Writing to the secondary storage happens through a deferred update after each edit on entities. This is to make saving edits faster and more atomic which also means reducing the failure rate of saving edits. As the result, secondary storage might not be always completely in sync with the actual terms stored in the primary storage.
+ 
 Briefly in code:
  - ItemTermStore and PropertyTermStore are the interfaces at the bottom of the term storage tree.
    - These interfaces are provided by the `term-store` [vendor component]
