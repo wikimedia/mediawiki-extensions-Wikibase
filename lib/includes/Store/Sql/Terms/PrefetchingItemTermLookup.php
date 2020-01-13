@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookupBase;
@@ -86,6 +87,9 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 			return;
 		}
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.PrefetchingItemTermLookup_prefetchTerms'
+		);
 		$res = $this->getDbr()->select(
 			'wbt_item_terms',
 			[ 'wbit_item_id', 'wbit_term_in_lang_id' ],

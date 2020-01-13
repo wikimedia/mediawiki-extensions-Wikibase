@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -76,6 +77,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	}
 
 	public function storeTerms( PropertyId $propertyId, Fingerprint $fingerprint ) {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.PropertyTermStore_storeTerms'
+		);
 		$this->disallowForeignEntityIds( $propertyId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
@@ -150,6 +154,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	}
 
 	public function deleteTerms( PropertyId $propertyId ) {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.PropertyTermStore_deleteTerms'
+		);
 		$this->disallowForeignEntityIds( $propertyId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
@@ -209,6 +216,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	}
 
 	public function getTerms( PropertyId $propertyId ): Fingerprint {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.PropertyTermStore_getTerms'
+		);
 		$this->disallowForeignEntityIds( $propertyId );
 
 		$termIds = $this->getDbr()->selectFieldValues(
