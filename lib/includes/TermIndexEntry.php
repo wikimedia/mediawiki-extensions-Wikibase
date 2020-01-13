@@ -23,11 +23,16 @@ class TermIndexEntry {
 	const TYPE_ALIAS = 'alias';
 	const TYPE_DESCRIPTION = 'description';
 
+	const FIELD_ENTITY = 'entityId';
+	const FIELD_TYPE = 'termType';
+	const FIELD_LANGUAGE = 'termLanguage';
+	const FIELD_TEXT = 'termText';
+
 	private static $fieldNames = [
-		'entityId',
-		'termType',
-		'termLanguage',
-		'termText',
+		self::FIELD_ENTITY,
+		self::FIELD_TYPE,
+		self::FIELD_LANGUAGE,
+		self::FIELD_TEXT,
 	];
 
 	/**
@@ -51,35 +56,55 @@ class TermIndexEntry {
 	private $entityId;
 
 	/**
+	 * @var array All of the self::TYPE_* constants
+	 */
+	public static $validTermTypes = [ self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ];
+
+	/**
 	 * @param array $fields Associative array containing fields:
-	 *        'termType' => string, one of self::TYPE_* constants,
-	 *        'termLanguage' => string
-	 *        'termText' => string
-	 *        'entityId' => EntityId
+	 *        self::FIELD_TYPE => string, one of self::TYPE_* constants,
+	 *        self::FIELD_LANGUAGE => string
+	 *        self::FIELD_TEXT => string
+	 *        self::FIELD_ENTITY => EntityId
 	 *
 	 * @throws ParameterAssertionException
 	 */
 	public function __construct( array $fields ) {
+		$this->assertConstructFieldsAreCorrect( $fields );
+		$this->termType = $fields[self::FIELD_TYPE];
+		$this->termLanguage = $fields[self::FIELD_LANGUAGE];
+		$this->termText = $fields[self::FIELD_TEXT];
+		$this->entityId = $fields[self::FIELD_ENTITY];
+	}
+
+	private function assertConstructFieldsAreCorrect( array $fields ) {
 		Assert::parameter(
 			count( $fields ) === count( self::$fieldNames ) &&
-				empty( array_diff( self::$fieldNames, array_keys( $fields ) ) ),
+			empty( array_diff( self::$fieldNames, array_keys( $fields ) ) ),
 			'$fields',
-			'must contain the following keys: termType, termLanguage, termText, entityId'
+			'must contain the following keys: ' . implode( ', ', self::$fieldNames )
 		);
 		Assert::parameter(
-			is_string( $fields['termType'] ) &&
-				in_array( $fields['termType'], [ self::TYPE_ALIAS, self::TYPE_LABEL, self::TYPE_DESCRIPTION ] ),
+			is_string( $fields[self::FIELD_TYPE] ) &&
+			in_array( $fields[self::FIELD_TYPE], self::$validTermTypes ),
 			'$fields["termType"]',
-			'must be self::TYPE_ALIAS, self::TYPE_LABEL, or self::TYPE_DESCRIPTION '
+			'must be in :' . implode( ', ', self::$validTermTypes )
 		);
-		Assert::parameterType( 'string', $fields['termLanguage'], '$fields["termLanguage"]' );
-		Assert::parameterType( 'string', $fields['termText'], '$fields["termText"]' );
-		Assert::parameterType( EntityId::class, $fields['entityId'], '$fields["entityId"]' );
-
-		$this->termType = $fields['termType'];
-		$this->termLanguage = $fields['termLanguage'];
-		$this->termText = $fields['termText'];
-		$this->entityId = $fields['entityId'];
+		Assert::parameterType(
+			'string',
+			$fields[ self::FIELD_LANGUAGE ],
+			'$fields["' . self::FIELD_LANGUAGE . '"]'
+		);
+		Assert::parameterType(
+			'string',
+			$fields[ self::FIELD_TEXT ],
+			'$fields["' . self::FIELD_TEXT . '"]'
+		);
+		Assert::parameterType(
+			EntityId::class,
+			$fields[ self::FIELD_ENTITY ],
+			'$fields["' . self::FIELD_ENTITY . '"]'
+		);
 	}
 
 	/**
@@ -141,10 +166,10 @@ class TermIndexEntry {
 
 	private static function getFieldValuesForCompare( self $entry ) {
 		return [
-			'entityId' => $entry->getEntityId()->getSerialization(),
-			'termType' => $entry->getTermType(),
-			'termLanguage' => $entry->getLanguage(),
-			'termText' => $entry->getText(),
+			self::FIELD_ENTITY => $entry->getEntityId()->getSerialization(),
+			self::FIELD_TYPE => $entry->getTermType(),
+			self::FIELD_LANGUAGE => $entry->getLanguage(),
+			self::FIELD_TEXT => $entry->getText(),
 		];
 	}
 

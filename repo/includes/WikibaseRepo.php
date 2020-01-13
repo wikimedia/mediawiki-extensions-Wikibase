@@ -42,6 +42,7 @@ use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\ByIdDispatchingItemTermStore;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -1276,7 +1277,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return TermBuffer
+	 * @return TermBuffer|AliasTermBuffer
 	 */
 	public function getTermBuffer() {
 		return $this->getPrefetchingTermLookup();

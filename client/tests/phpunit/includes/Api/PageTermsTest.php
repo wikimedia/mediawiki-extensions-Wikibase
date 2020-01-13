@@ -10,12 +10,11 @@ use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
 use Wikibase\Client\Api\PageTerms;
+use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Client\Api\PageTerms
@@ -101,96 +100,6 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		return $entityIds;
 	}
 
-	/**
-	 * @param array[] $terms
-	 *
-	 * @return TermIndex
-	 */
-	private function getTermIndex( array $terms ) {
-		$termObjectsByEntityId = [];
-
-		foreach ( $terms as $pid => $termGroups ) {
-			$entityId = $this->newEntityId( $pid );
-			$key = $entityId->getSerialization();
-			$termObjectsByEntityId[$key] = $this->makeTermsFromGroups( $entityId, $termGroups );
-		}
-
-		$termIndex = $this->createMock( TermIndex::class );
-		$termIndex->expects( $this->any() )
-			->method( 'getTermsOfEntities' )
-			->will( $this->returnCallback(
-				function( array $entityIds, array $termTypes = null, array $languagesCodes = null ) use ( $termObjectsByEntityId ) {
-					return $this->getTermsOfEntities( $termObjectsByEntityId, $entityIds, $termTypes, $languagesCodes );
-				}
-			) );
-
-		return $termIndex;
-	}
-
-	/**
-	 * @note Public only because older PHP versions don't allow it to be called
-	 *       from a closure otherwise.
-	 *
-	 * @param array[] $termObjectsByEntityId
-	 * @param EntityId[] $entityIds
-	 * @param string[]|null $termTypes
-	 * @param string[]|null $languageCodes
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	public function getTermsOfEntities(
-		array $termObjectsByEntityId,
-		array $entityIds,
-		array $termTypes = null,
-		array $languageCodes = null
-	) {
-		$result = [];
-
-		foreach ( $entityIds as $id ) {
-			$key = $id->getSerialization();
-
-			if ( !isset( $termObjectsByEntityId[$key] ) ) {
-				continue;
-			}
-
-			/** @var TermIndexEntry $term */
-			foreach ( $termObjectsByEntityId[$key] as $term ) {
-				if ( ( is_array( $termTypes ) && !in_array( $term->getTermType(), $termTypes ) )
-					|| ( is_array( $languageCodes ) && !in_array( $term->getLanguage(), $languageCodes ) )
-				) {
-					continue;
-				}
-
-				$result[] = $term;
-			}
-		}
-
-		return $result;
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param array[] $termGroups
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	private function makeTermsFromGroups( EntityId $entityId, array $termGroups ) {
-		$terms = [];
-
-		foreach ( $termGroups as $type => $group ) {
-			foreach ( $group as $lang => $text ) {
-				$terms[] = new TermIndexEntry( [
-					'termType' => $type,
-					'termLanguage' => $lang,
-					'termText' => $text,
-					'entityId' => $entityId
-				] );
-			}
-		}
-
-		return $terms;
-	}
-
 	public function newEntityId( $pageId ) {
 		if ( $pageId > 1000 ) {
 			return new PropertyId( "P$pageId" );
@@ -224,7 +133,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$entityIds = $this->makeEntityIds( array_keys( $terms ) );
 
 		$module = new PageTerms(
-			$this->getTermIndex( $terms ),
+			new FakePrefetchingTermLookup(),
 			$this->getEntityIdLookup( $entityIds ),
 			$this->getQueryModule( $params, $titles ),
 			'pageterms'
@@ -245,32 +154,32 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$terms = [
 			11 => [
 				'label' => [
-					'en' => 'Vienna',
-					'de' => 'Wien',
+					'en' => 'Q11 en label',
+					'de' => 'Q11 de label',
 				],
 				'description' => [
-					'en' => 'Capitol city of Austria',
-					'de' => 'Hauptstadt Österreichs',
+					'en' => 'Q11 en description',
+					'de' => 'Q11 de description',
 				],
 			],
 			22 => [
 				'label' => [
-					'en' => 'Moscow',
-					'de' => 'Moskau',
+					'en' => 'Q22 en label',
+					'de' => 'Q22 de label',
 				],
 				'description' => [
-					'en' => 'Capitol city of Russia',
-					'de' => 'Hauptstadt Russlands',
+					'en' => 'Q22 en description',
+					'de' => 'Q22 de description',
 				],
 			],
 			3333 => [
 				'label' => [
-					'en' => 'Population',
-					'de' => 'Einwohnerzahl',
+					'en' => 'P3333 en label',
+					'de' => 'P3333 de label',
 				],
 				'description' => [
-					'en' => 'number of inhabitants',
-					'de' => 'Anzahl der Bewohner',
+					'en' => 'P3333 en description',
+					'de' => 'P3333 de description',
 				],
 			],
 		];
@@ -286,20 +195,23 @@ class PageTermsTest extends MediaWikiLangTestCase {
 				[
 					11 => [
 						'terms' => [
-							'label' => [ 'Vienna' ],
-							'description' => [ 'Capitol city of Austria' ],
+							'label' => [ 'Q11 en label' ],
+							'description' => [ 'Q11 en description' ],
+							'alias' => [ 'Q11 en alias 1', 'Q11 en alias 2' ],
 						]
 					],
 					22 => [
 						'terms' => [
-							'label' => [ 'Moscow' ],
-							'description' => [ 'Capitol city of Russia' ],
+							'label' => [ 'Q22 en label' ],
+							'description' => [ 'Q22 en description' ],
+							'alias' => [ 'Q22 en alias 1', 'Q22 en alias 2' ],
 						]
 					],
 					3333 => [
 						'terms' => [
-							'label' => [ 'Population' ],
-							'description' => [ 'number of inhabitants' ],
+							'label' => [ 'P3333 en label' ],
+							'description' => [ 'P3333 en description' ],
+							'alias' => [ 'P3333 en alias 1', 'P3333 en alias 2' ],
 						]
 					],
 				]
@@ -315,12 +227,12 @@ class PageTermsTest extends MediaWikiLangTestCase {
 				[
 					11 => [
 						'terms' => [
-							'description' => [ 'Capitol city of Austria' ],
+							'description' => [ 'Q11 en description' ],
 						]
 					],
 					22 => [
 						'terms' => [
-							'description' => [ 'Capitol city of Russia' ],
+							'description' => [ 'Q22 en description' ],
 						]
 					],
 				]
@@ -331,19 +243,20 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'query' => 'pageterms',
 					'titles' => 'No11|No22',
 					'uselang' => 'de',
+					'wbptterms' => 'label|description',
 				],
 				$terms,
 				[
 					11 => [
 						'terms' => [
-							'label' => [ 'Wien' ],
-							'description' => [ 'Hauptstadt Österreichs' ],
+							'label' => [ 'Q11 de label' ],
+							'description' => [ 'Q11 de description' ],
 						]
 					],
 					22 => [
 						'terms' => [
-							'label' => [ 'Moskau' ],
-							'description' => [ 'Hauptstadt Russlands' ],
+							'label' => [ 'Q22 de label' ],
+							'description' => [ 'Q22 de description' ],
 						]
 					],
 				]
@@ -353,13 +266,14 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'action' => 'query',
 					'query' => 'pageterms',
 					'titles' => 'No11|SomeTitleWithoutEntity',
+					'wbptterms' => 'label|description',
 				],
 				$terms,
 				[
 					11 => [
 						'terms' => [
-							'label' => [ 'Vienna' ],
-							'description' => [ 'Capitol city of Austria' ],
+							'label' => [ 'Q11 en label' ],
+							'description' => [ 'Q11 en description' ],
 						]
 					],
 				]
@@ -370,13 +284,14 @@ class PageTermsTest extends MediaWikiLangTestCase {
 					'query' => 'pageterms',
 					'titles' => 'No11|No22',
 					'wbptcontinue' => '20',
+					'wbptterms' => 'label|description',
 				],
 				$terms,
 				[
 					22 => [
 						'terms' => [
-							'label' => [ 'Moscow' ],
-							'description' => [ 'Capitol city of Russia' ],
+							'label' => [ 'Q22 en label' ],
+							'description' => [ 'Q22 en description' ],
 						]
 					],
 				]

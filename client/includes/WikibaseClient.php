@@ -9,6 +9,7 @@ use ObjectCache;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
+use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -18,7 +19,6 @@ use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\LegacyEntityTermStoreReader;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
@@ -293,8 +293,6 @@ final class WikibaseClient {
 	 */
 	private $entitySourceDefinitions;
 
-	private $itemTermIndex = null;
-
 	private $descriptionLookup = null;
 
 	private $propertyLabelResolver = null;
@@ -560,7 +558,7 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @return TermBuffer
+	 * @return TermBuffer|AliasTermBuffer
 	 */
 	public function getTermBuffer() {
 		if ( !$this->termBuffer ) {
@@ -1617,43 +1615,6 @@ final class WikibaseClient {
 		return $cache;
 	}
 
-	/**
-	 * @deprecated Must switch to using non legacy term storage
-	 * @return LegacyEntityTermStoreReader
-	 */
-	public function getLegacyItemTermStoreReader() {
-		return $this->getItemTermIndex();
-	}
-
-	/**
-	 * @deprecated Must switch to using non legacy term storage
-	 * @return TermSqlIndex|null
-	 */
-	public function getItemTermIndex() {
-		if ( $this->itemTermIndex === null ) {
-			$dataAccessSettings = $this->getDataAccessSettings();
-			$itemSource = $this->getItemSource( $dataAccessSettings );
-			$itemDatabaseName = $dataAccessSettings->useEntitySourceBasedFederation() ?
-				$itemSource->getDatabaseName() :
-				$this->getRepositoryDefinitions()->getDatabaseNames()[''];
-			$itemRepositoryPrefix = '';
-
-			$this->itemTermIndex = new TermSqlIndex(
-				$this->getStringNormalizer(),
-				$this->getEntityIdComposer(),
-				$this->getEntityIdParser(),
-				$itemSource,
-				$dataAccessSettings,
-				$itemDatabaseName,
-				$itemRepositoryPrefix
-			);
-			$this->itemTermIndex->setUseSearchFields( $this->settings->getSetting( 'useTermsTableSearchFields' ) );
-			$this->itemTermIndex->setForceWriteSearchFields( $this->settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
-		}
-
-		return $this->itemTermIndex;
-	}
-
 	public function getEntityIdLookup() {
 		if ( $this->entityIdLookup === null ) {
 			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
@@ -1667,17 +1628,6 @@ final class WikibaseClient {
 		}
 
 		return $this->entityIdLookup;
-	}
-
-	private function getItemSource( DataAccessSettings $dataAccessSettings ) {
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
-			if ( $itemSource !== null ) {
-				return $itemSource;
-			}
-		}
-
-		return new UnusableEntitySource();
 	}
 
 	/**
