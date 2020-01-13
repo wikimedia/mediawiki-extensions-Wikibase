@@ -116,7 +116,7 @@ use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
-use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
+use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
@@ -1662,7 +1662,7 @@ final class WikibaseClient {
 					$cacheKey
 				);
 			} else {
-				$this->propertyLabelResolver = new TermIndexPropertyLabelResolver(
+				$this->propertyLabelResolver = new MatchingTermsLookupPropertyLabelResolver(
 					$languageCode,
 					$this->getPropertyTermIndex(),
 					ObjectCache::getInstance( $cacheType ),

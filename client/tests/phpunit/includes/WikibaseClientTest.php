@@ -41,7 +41,7 @@ use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\Store\TermIndexPropertyLabelResolver;
+use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
@@ -419,8 +419,8 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 
 	public function getPropertyLabelResolverClassPerMigrationStage() {
 		return [
-			[ MIGRATION_OLD, TermIndexPropertyLabelResolver::class ],
-			[ MIGRATION_WRITE_BOTH, TermIndexPropertyLabelResolver::class ],
+			[ MIGRATION_OLD, MatchingTermsLookupPropertyLabelResolver::class ],
+			[ MIGRATION_WRITE_BOTH, MatchingTermsLookupPropertyLabelResolver::class ],
 			[ MIGRATION_WRITE_NEW, CachedDatabasePropertyLabelResolver::class ],
 			[ MIGRATION_NEW, CachedDatabasePropertyLabelResolver::class ]
 		];
