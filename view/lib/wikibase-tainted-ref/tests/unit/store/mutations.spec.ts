@@ -1,11 +1,14 @@
 import {
 	SET_ALL_UNTAINTED,
 	SET_ALL_POPPERS_HIDDEN,
+	SET_ALL_EDIT_MODE_FALSE,
 	SET_POPPER_HIDDEN,
 	SET_POPPER_VISIBLE,
 	SET_TAINTED,
 	SET_UNTAINTED,
 	SET_HELP_LINK,
+	SET_STATEMENT_EDIT_TRUE,
+	SET_STATEMENT_EDIT_FALSE,
 } from '@/store/mutationTypes';
 import { mutations } from '@/store/mutations';
 
@@ -51,5 +54,23 @@ describe( 'mutations', () => {
 		mutations[ SET_HELP_LINK ]( state as any, 'wikidata/help' );
 		expect( state ).toBeDefined();
 		expect( state.helpLink ).toEqual( 'wikidata/help' );
+	} );
+	it( 'should set all the statementEditState in the store', () => {
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {}, statementsEditState: {} };
+		mutations[ SET_ALL_EDIT_MODE_FALSE ]( state as any, [ 'foo', 'bar' ] );
+		expect( state ).toBeDefined();
+		expect( state.statementsEditState ).toEqual( { foo: false, bar: false } );
+	} );
+	it( 'should set the statementEditState in the store to true', () => {
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {}, statementsEditState: {} };
+		mutations[ SET_STATEMENT_EDIT_TRUE ]( state as any, 'foo' );
+		expect( state ).toBeDefined();
+		expect( state.statementsEditState ).toEqual( { foo: true } );
+	} );
+	it( 'should set the statementEditState in the store to false', () => {
+		const state = { statementsTaintedState: {}, statementsPopperIsOpen: {}, statementsEditState: {} };
+		mutations[ SET_STATEMENT_EDIT_FALSE ]( state as any, 'foo' );
+		expect( state ).toBeDefined();
+		expect( state.statementsEditState ).toEqual( { foo: false } );
 	} );
 } );

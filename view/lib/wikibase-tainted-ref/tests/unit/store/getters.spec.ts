@@ -18,6 +18,27 @@ describe( 'getters', () => {
 			expect( getStatementsTaintedState( 'foo' ) ).toBeFalsy();
 		} );
 	} );
+	describe( 'statementsEditState', () => {
+		it( 'should return a function that returns the edit state for a given guid', () => {
+			const mockState = {
+				statementsTaintedState: {},
+				statementsPopperIsOpen: {},
+				statementsEditState: {
+					foo: false,
+					bar: true,
+				},
+			};
+			const getStatementsEditState = getters.editState(
+				mockState as any,
+				{},
+				mockState as any,
+				{},
+			);
+			expect( getStatementsEditState ).toBeDefined();
+			expect( getStatementsEditState( 'bar' ) ).toBeTruthy();
+			expect( getStatementsEditState( 'foo' ) ).toBeFalsy();
+		} );
+	} );
 	describe( 'popperState ', () => {
 		it( 'should return a function that returns the popper open or closed state', () => {
 			const mockState = { statementsPopperIsOpen: {
