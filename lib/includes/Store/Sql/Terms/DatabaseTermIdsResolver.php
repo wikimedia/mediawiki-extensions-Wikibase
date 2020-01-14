@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
@@ -178,6 +179,9 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		array $types = null,
 		array $languages = null
 	): IResultWrapper {
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.DatabaseTermIdsResolver_selectTermsViaJoin'
+		);
 		if ( $types !== null ) {
 			$conditions['wbtl_type_id'] = $this->lookupTypeIds( $types );
 		}

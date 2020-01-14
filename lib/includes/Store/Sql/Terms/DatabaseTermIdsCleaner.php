@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikimedia\Rdbms\IDatabase;
@@ -91,6 +92,9 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			__METHOD__
 		);
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.DatabaseTermIdsCleaner_cleanTermInLangIds'
+		);
 		$this->dbw->delete(
 			'wbt_term_in_lang',
 			[ 'wbtl_id' => $termInLangIds ],
@@ -203,6 +207,9 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			__METHOD__
 		);
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.DatabaseTermIdsCleaner_cleanTextInLangIds'
+		);
 		$this->dbw->delete(
 			'wbt_text_in_lang',
 			[ 'wbxl_id' => $textInLangIds ],
@@ -281,6 +288,9 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			]
 		);
 
+		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
+			'wikibase.repo.term_store.DatabaseTermIdsCleaner_cleanTextIds'
+		);
 		$this->dbw->delete(
 			'wbt_text',
 			[ 'wbx_id' => $textIds ],
