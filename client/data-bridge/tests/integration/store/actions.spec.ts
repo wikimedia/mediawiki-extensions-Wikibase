@@ -21,6 +21,7 @@ import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -137,6 +138,10 @@ describe( 'store/actions', () => {
 			trackPropertyDatatype: jest.fn(),
 		} );
 
+		services.set( 'editAuthorizationChecker', {
+			canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
+		} );
+
 		info = {
 			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,
@@ -220,6 +225,28 @@ describe( 'store/actions', () => {
 				};
 				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
+				} );
+			} );
+
+			it( 'switch into error state if there are permission errors', () => {
+				services.set( 'editAuthorizationChecker', {
+					canUseBridgeForItemAndPage: () => Promise.resolve( [
+						{
+							type: PageNotEditable.ITEM_SEMI_PROTECTED,
+						},
+					] ),
+				} );
+
+				const permissionProblemStore = createStore( services );
+				const misleadingInfo = {
+					editFlow: EditFlow.OVERWRITE,
+					propertyId: 'P42',
+					entityId: 'Q42',
+					entityTitle: 'Q42',
+					client,
+				};
+				return permissionProblemStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+					expect( permissionProblemStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 		} );

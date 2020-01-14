@@ -1,10 +1,15 @@
 import MwWindow, {
 	MwApi,
+	MwApiConstructor,
 	MwForeignApiConstructor,
 } from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
 import WbRepo from '@/@types/wikibase/WbRepo';
 import Api from '@/definitions/data-access/Api';
+import {
+	ApiQueryInfoTestResponsePage,
+	ApiQueryResponsePage,
+} from '@/definitions/data-access/ApiQuery';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
@@ -59,6 +64,23 @@ class MockApi implements MwApi {
 	public login( ..._args: any[] ): any { return jest.fn(); }
 }
 
+export function mockMwApiConstructor(
+	options: {
+		get?: ( ...args: unknown[] ) => any;
+	},
+): MwApiConstructor {
+	class MockMwApi extends MockApi {
+		public constructor( _options?: any ) {
+			super();
+		}
+	}
+	if ( options.get ) {
+		MockMwApi.prototype.get = options.get;
+	}
+
+	return MockMwApi;
+}
+
 export function mockMwForeignApiConstructor(
 	options: {
 		expectedUrl?: string;
@@ -89,6 +111,7 @@ export function mockMwEnv(
 	config: MwConfig = mockMwConfig(),
 	warn: () => void = jest.fn(),
 	ForeignApi: MwForeignApiConstructor = mockMwForeignApiConstructor( {} ),
+	Api: MwApiConstructor = mockMwApiConstructor( {} ),
 ): void {
 	( window as MwWindow ).mw = {
 		loader: {
@@ -101,7 +124,7 @@ export function mockMwEnv(
 			error: jest.fn(),
 			warn,
 		},
-		Api: jest.fn(),
+		Api,
 		ForeignApi,
 		language: {
 			bcp47: jest.fn(),
@@ -116,63 +139,57 @@ export function mockMwEnv(
 	};
 }
 
-export function mockMwForeignApiGet(
-	getDataBridgeConfig: Promise<object>,
-	foreignApiEntityInfoResponse: Promise<object>,
-) {
-	return ( params: any ) => {
-		if ( params.action === 'query' && (
-			params.meta === 'wbdatabridgeconfig' ||
-				params.meta.includes( 'wbdatabridgeconfig' )
-		) ) {
-			return getDataBridgeConfig;
-		} else if ( params.action === 'wbgetentities' && params.ids ) {
-			return foreignApiEntityInfoResponse;
-		}
-		throw new Error( 'Request did not match mockForeignApiGet abilities!' );
+export function addDataBridgeConfigResponse( response: { query?: object } ): object {
+	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
+	query.wbdatabridgeconfig = {
+		dataTypeLimits: {
+			string: {
+				maxLength: 200,
+			},
+		},
 	};
+	return response;
 }
 
-export function mockDataBridgeConfig(): Promise<object> {
-	return Promise.resolve( {
-		query: {
-			wbdatabridgeconfig: {
-				dataTypeLimits: {
-					string: {
-						maxLength: 200,
-					},
-				},
-			},
-		},
-	} );
+export function addPageInfoNoEditRestrictionsResponse( title: string, response: { query?: object } ): object {
+	const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
+		pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
+		page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] );
+	( page as ApiQueryInfoTestResponsePage ).actions = { edit: [] };
+	return response;
 }
 
-export function mockMwForeignApiEntityInfoResponse(
-	propertyId: string,
-	propertyLabel = 'a property',
-	language = 'en',
-	dataType = 'string',
-	fallbackLanguage?: string,
-): Promise<object> {
-	if ( !fallbackLanguage ) {
-		fallbackLanguage = language;
-	}
-	return Promise.resolve( {
-		success: 1,
-		entities: {
-			[ propertyId ]: {
-				id: propertyId,
-				datatype: dataType,
-				labels: {
-					[ language ]: {
-						value: propertyLabel,
-						language: fallbackLanguage,
-						'for-language': language,
-					},
-				},
-			},
-		},
-	} );
+export function addSiteinfoRestrictionsResponse( response: { query?: object } ): object {
+	const query: { restrictions?: object } = response.query || ( response.query = {} );
+	query.restrictions = { semiprotectedlevels: [ 'autoconfirmed' ] };
+	return response;
+}
+
+export function addPropertyLabelResponse(
+	data: {
+		propertyId: string;
+		propertyLabel?: string;
+		language?: string;
+		dataType?: string;
+		fallbackLanguage?: string;
+	},
+	response: { entities?: { [ id: string ]: object } },
+): object {
+	const propertyId = data.propertyId,
+		propertyLabel = data.propertyLabel || 'a property',
+		language = data.language || 'en',
+		dataType = data.dataType || 'string',
+		fallbackLanguage = data.fallbackLanguage || language;
+	const entities: { [ id: string ]: any } = response.entities || ( response.entities = {} ),
+		entity = entities[ propertyId ] || ( entities[ propertyId ] = { id: propertyId } );
+	entity.datatype = dataType;
+	const labels: { [ language: string ]: object } = entity.labels || ( entity.labels = {} );
+	labels[ language ] = {
+		value: propertyLabel,
+		language: fallbackLanguage,
+		'for-language': language,
+	};
+	return response;
 }
 
 export function mockApi( successObject?: unknown, rejectData?: unknown ): Api & MwApi {

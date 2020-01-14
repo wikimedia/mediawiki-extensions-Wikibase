@@ -11,6 +11,7 @@ import {
 	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
+	mockMwApiConstructor,
 } from '../../util/mocks';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
@@ -20,6 +21,8 @@ import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import createServices from '@/services/createServices';
 import { budge } from '../../util/timer';
+import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
+import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -52,6 +55,9 @@ describe( 'init', () => {
 			MwForeignApiConstructor = mockMwForeignApiConstructor( { expectedUrl: 'http://localhost/w/api.php' } ),
 			repoMwApi = new MwForeignApiConstructor( 'http://localhost/w/api.php' ),
 			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),
+			MwApiConstructor = mockMwApiConstructor( {} ),
+			clientMwApi = new MwApiConstructor(),
+			clientApi = new ApiCore( clientMwApi ),
 			editTags = [ 'a tag' ],
 			usePublish = true,
 			pageTitle = 'Client_page';
@@ -64,6 +70,7 @@ describe( 'init', () => {
 			} ),
 			undefined,
 			MwForeignApiConstructor,
+			MwApiConstructor,
 		);
 		const expectedServices = new ServiceContainer();
 		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
@@ -92,6 +99,10 @@ describe( 'init', () => {
 		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( repoApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
 			new EventTracker( ( window as MwWindow ).mw.track ),
+		) );
+		expectedServices.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
+			new ApiPageEditPermissionErrorsRepository( repoApi ),
+			new ApiPageEditPermissionErrorsRepository( clientApi ),
 		) );
 
 		const entityId = 'Q5';

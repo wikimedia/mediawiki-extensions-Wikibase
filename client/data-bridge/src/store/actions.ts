@@ -44,9 +44,9 @@ import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepo
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
 import MainSnakPath from '@/store/entity/statements/MainSnakPath';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
-import DataType from '@/datamodel/DataType';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
+import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
 
 function validateEntityState(
 	context: ActionContext<Application, Application>,
@@ -72,8 +72,10 @@ export default function actions(
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository,
 	propertyDatatypeRepository: PropertyDatatypeRepository,
 	tracker: BridgeTracker,
+	editAuthorizationChecker: BridgePermissionsRepository,
 ): ActionTree<Application, Application> {
 	return {
+
 		[ BRIDGE_INIT ](
 			context: ActionContext<Application, Application>,
 			information: AppInformation,
@@ -88,18 +90,25 @@ export default function actions(
 				// TODO: handling on failed label loading, which is not a bocking error for now
 				} );
 
-			propertyDatatypeRepository.getDataType( information.propertyId )
-				.then( ( dataType: DataType ) => {
-					tracker.trackPropertyDatatype( dataType );
-				} );
-
 			return Promise.all( [
 				wikibaseRepoConfigRepository.getRepoConfiguration(),
+				editAuthorizationChecker.canUseBridgeForItemAndPage(
+					information.entityTitle,
+					information.pageTitle,
+				),
+				propertyDatatypeRepository.getDataType( information.propertyId ),
 				context.dispatch(
 					action( NS_ENTITY, ENTITY_INIT ),
 					{ entity: information.entityId },
 				),
-			] ).then( ( [ wikibaseRepoConfiguration, _entityInit ] ) => {
+			] ).then( ( [ wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit ] ) => {
+
+				if ( permissionErrors.length ) {
+					commitErrors( context, permissionErrors );
+					return;
+				}
+
+				tracker.trackPropertyDatatype( dataType );
 
 				BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
 				const state = context.state as InitializedApplicationState;

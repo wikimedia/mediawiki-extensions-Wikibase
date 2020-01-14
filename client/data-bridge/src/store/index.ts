@@ -32,6 +32,7 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 			services.get( 'wikibaseRepoConfigRepository' ),
 			services.get( 'propertyDatatypeRepository' ),
 			services.get( 'tracker' ),
+			services.get( 'editAuthorizationChecker' ),
 		),
 		getters,
 		mutations,

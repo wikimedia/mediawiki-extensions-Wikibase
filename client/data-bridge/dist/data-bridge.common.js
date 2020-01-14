@@ -1596,6 +1596,148 @@ module.exports = __webpack_require__("8378").getIteratorMethod = function (it) {
 
 /***/ }),
 
+/***/ "28a5":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isRegExp = __webpack_require__("aae3");
+var anObject = __webpack_require__("cb7c");
+var speciesConstructor = __webpack_require__("ebd6");
+var advanceStringIndex = __webpack_require__("0390");
+var toLength = __webpack_require__("9def");
+var callRegExpExec = __webpack_require__("5f1b");
+var regexpExec = __webpack_require__("520a");
+var fails = __webpack_require__("79e5");
+var $min = Math.min;
+var $push = [].push;
+var $SPLIT = 'split';
+var LENGTH = 'length';
+var LAST_INDEX = 'lastIndex';
+var MAX_UINT32 = 0xffffffff;
+
+// babel-minify transpiles RegExp('x', 'y') -> /x/y and it causes SyntaxError
+var SUPPORTS_Y = !fails(function () { RegExp(MAX_UINT32, 'y'); });
+
+// @@split logic
+__webpack_require__("214f")('split', 2, function (defined, SPLIT, $split, maybeCallNative) {
+  var internalSplit;
+  if (
+    'abbc'[$SPLIT](/(b)*/)[1] == 'c' ||
+    'test'[$SPLIT](/(?:)/, -1)[LENGTH] != 4 ||
+    'ab'[$SPLIT](/(?:ab)*/)[LENGTH] != 2 ||
+    '.'[$SPLIT](/(.?)(.?)/)[LENGTH] != 4 ||
+    '.'[$SPLIT](/()()/)[LENGTH] > 1 ||
+    ''[$SPLIT](/.?/)[LENGTH]
+  ) {
+    // based on es5-shim implementation, need to rework it
+    internalSplit = function (separator, limit) {
+      var string = String(this);
+      if (separator === undefined && limit === 0) return [];
+      // If `separator` is not a regex, use native split
+      if (!isRegExp(separator)) return $split.call(string, separator, limit);
+      var output = [];
+      var flags = (separator.ignoreCase ? 'i' : '') +
+                  (separator.multiline ? 'm' : '') +
+                  (separator.unicode ? 'u' : '') +
+                  (separator.sticky ? 'y' : '');
+      var lastLastIndex = 0;
+      var splitLimit = limit === undefined ? MAX_UINT32 : limit >>> 0;
+      // Make `global` and avoid `lastIndex` issues by working with a copy
+      var separatorCopy = new RegExp(separator.source, flags + 'g');
+      var match, lastIndex, lastLength;
+      while (match = regexpExec.call(separatorCopy, string)) {
+        lastIndex = separatorCopy[LAST_INDEX];
+        if (lastIndex > lastLastIndex) {
+          output.push(string.slice(lastLastIndex, match.index));
+          if (match[LENGTH] > 1 && match.index < string[LENGTH]) $push.apply(output, match.slice(1));
+          lastLength = match[0][LENGTH];
+          lastLastIndex = lastIndex;
+          if (output[LENGTH] >= splitLimit) break;
+        }
+        if (separatorCopy[LAST_INDEX] === match.index) separatorCopy[LAST_INDEX]++; // Avoid an infinite loop
+      }
+      if (lastLastIndex === string[LENGTH]) {
+        if (lastLength || !separatorCopy.test('')) output.push('');
+      } else output.push(string.slice(lastLastIndex));
+      return output[LENGTH] > splitLimit ? output.slice(0, splitLimit) : output;
+    };
+  // Chakra, V8
+  } else if ('0'[$SPLIT](undefined, 0)[LENGTH]) {
+    internalSplit = function (separator, limit) {
+      return separator === undefined && limit === 0 ? [] : $split.call(this, separator, limit);
+    };
+  } else {
+    internalSplit = $split;
+  }
+
+  return [
+    // `String.prototype.split` method
+    // https://tc39.github.io/ecma262/#sec-string.prototype.split
+    function split(separator, limit) {
+      var O = defined(this);
+      var splitter = separator == undefined ? undefined : separator[SPLIT];
+      return splitter !== undefined
+        ? splitter.call(separator, O, limit)
+        : internalSplit.call(String(O), separator, limit);
+    },
+    // `RegExp.prototype[@@split]` method
+    // https://tc39.github.io/ecma262/#sec-regexp.prototype-@@split
+    //
+    // NOTE: This cannot be properly polyfilled in engines that don't support
+    // the 'y' flag.
+    function (regexp, limit) {
+      var res = maybeCallNative(internalSplit, regexp, this, limit, internalSplit !== $split);
+      if (res.done) return res.value;
+
+      var rx = anObject(regexp);
+      var S = String(this);
+      var C = speciesConstructor(rx, RegExp);
+
+      var unicodeMatching = rx.unicode;
+      var flags = (rx.ignoreCase ? 'i' : '') +
+                  (rx.multiline ? 'm' : '') +
+                  (rx.unicode ? 'u' : '') +
+                  (SUPPORTS_Y ? 'y' : 'g');
+
+      // ^(? + rx + ) is needed, in combination with some S slicing, to
+      // simulate the 'y' flag.
+      var splitter = new C(SUPPORTS_Y ? rx : '^(?:' + rx.source + ')', flags);
+      var lim = limit === undefined ? MAX_UINT32 : limit >>> 0;
+      if (lim === 0) return [];
+      if (S.length === 0) return callRegExpExec(splitter, S) === null ? [S] : [];
+      var p = 0;
+      var q = 0;
+      var A = [];
+      while (q < S.length) {
+        splitter.lastIndex = SUPPORTS_Y ? q : 0;
+        var z = callRegExpExec(splitter, SUPPORTS_Y ? S : S.slice(q));
+        var e;
+        if (
+          z === null ||
+          (e = $min(toLength(splitter.lastIndex + (SUPPORTS_Y ? 0 : q)), S.length)) === p
+        ) {
+          q = advanceStringIndex(S, q, unicodeMatching);
+        } else {
+          A.push(S.slice(p, q));
+          if (A.length === lim) return A;
+          for (var i = 1; i <= z.length - 1; i++) {
+            A.push(z[i]);
+            if (A.length === lim) return A;
+          }
+          q = p = e;
+        }
+      }
+      A.push(S.slice(p));
+      return A;
+    }
+  ];
+});
+
+
+/***/ }),
+
 /***/ "294c":
 /***/ (function(module, exports) {
 
@@ -2730,6 +2872,26 @@ var index_esm = {
 
 /***/ }),
 
+/***/ "2fdb":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// 21.1.3.7 String.prototype.includes(searchString, position = 0)
+
+var $export = __webpack_require__("5ca1");
+var context = __webpack_require__("d2c8");
+var INCLUDES = 'includes';
+
+$export($export.P + $export.F * __webpack_require__("5147")(INCLUDES), 'String', {
+  includes: function includes(searchString /* , position = 0 */) {
+    return !!~context(this, searchString, INCLUDES)
+      .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
+
+
+/***/ }),
+
 /***/ "3024":
 /***/ (function(module, exports) {
 
@@ -3566,6 +3728,25 @@ module.exports = function (isEntries) {
 
 module.exports = function (done, value) {
   return { value: value, done: !!done };
+};
+
+
+/***/ }),
+
+/***/ "5147":
+/***/ (function(module, exports, __webpack_require__) {
+
+var MATCH = __webpack_require__("2b4c")('match');
+module.exports = function (KEY) {
+  var re = /./;
+  try {
+    '/./'[KEY](re);
+  } catch (e) {
+    try {
+      re[MATCH] = false;
+      return !'/./'[KEY](re);
+    } catch (f) { /* empty */ }
+  } return true;
 };
 
 
@@ -7717,6 +7898,21 @@ module.exports = exporter;
 
 /***/ }),
 
+/***/ "aae3":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 7.2.8 IsRegExp(argument)
+var isObject = __webpack_require__("d3f4");
+var cof = __webpack_require__("2d95");
+var MATCH = __webpack_require__("2b4c")('match');
+module.exports = function (it) {
+  var isRegExp;
+  return isObject(it) && ((isRegExp = it[MATCH]) !== undefined ? !!isRegExp : cof(it) == 'RegExp');
+};
+
+
+/***/ }),
+
 /***/ "aba2":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7955,6 +8151,34 @@ module.exports = function (bitmap, value) {
     value: value
   };
 };
+
+
+/***/ }),
+
+/***/ "aef6":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// 21.1.3.6 String.prototype.endsWith(searchString [, endPosition])
+
+var $export = __webpack_require__("5ca1");
+var toLength = __webpack_require__("9def");
+var context = __webpack_require__("d2c8");
+var ENDS_WITH = 'endsWith';
+var $endsWith = ''[ENDS_WITH];
+
+$export($export.P + $export.F * __webpack_require__("5147")(ENDS_WITH), 'String', {
+  endsWith: function endsWith(searchString /* , endPosition = @length */) {
+    var that = context(this, searchString, ENDS_WITH);
+    var endPosition = arguments.length > 1 ? arguments[1] : undefined;
+    var len = toLength(that.length);
+    var end = endPosition === undefined ? len : Math.min(toLength(endPosition), len);
+    var search = String(searchString);
+    return $endsWith
+      ? $endsWith.call(that, search, end)
+      : that.slice(end - search.length, end) === search;
+  }
+});
 
 
 /***/ }),
@@ -9442,6 +9666,21 @@ var IndeterminateProgressBar_component = normalizeComponent(
 
 /***/ }),
 
+/***/ "d2c8":
+/***/ (function(module, exports, __webpack_require__) {
+
+// helper for String#{startsWith, endsWith, includes}
+var isRegExp = __webpack_require__("aae3");
+var defined = __webpack_require__("be13");
+
+module.exports = function (that, searchString, NAME) {
+  if (isRegExp(searchString)) throw TypeError('String#' + NAME + " doesn't accept regex!");
+  return String(defined(that));
+};
+
+
+/***/ }),
+
 /***/ "d2d5":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10216,6 +10455,32 @@ module.exports = defineProperties;
 
 __webpack_require__("1af6");
 module.exports = __webpack_require__("584a").Array.isArray;
+
+
+/***/ }),
+
+/***/ "f559":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// 21.1.3.18 String.prototype.startsWith(searchString [, position ])
+
+var $export = __webpack_require__("5ca1");
+var toLength = __webpack_require__("9def");
+var context = __webpack_require__("d2c8");
+var STARTS_WITH = 'startsWith';
+var $startsWith = ''[STARTS_WITH];
+
+$export($export.P + $export.F * __webpack_require__("5147")(STARTS_WITH), 'String', {
+  startsWith: function startsWith(searchString /* , position = 0 */) {
+    var that = context(this, searchString, STARTS_WITH);
+    var index = toLength(Math.min(arguments.length > 1 ? arguments[1] : undefined, that.length));
+    var search = String(searchString);
+    return $startsWith
+      ? $startsWith.call(that, search, index)
+      : that.slice(index, index + search.length) === search;
+  }
+});
 
 
 /***/ }),
@@ -12675,7 +12940,7 @@ function commitErrors(context, errors) {
   context.commit(APPLICATION_ERRORS_ADD, errors);
 }
 
-function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDatatypeRepository, tracker) {
+function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDatatypeRepository, tracker, editAuthorizationChecker) {
   var _ref3;
 
   return _ref3 = {}, _defineProperty(_ref3, BRIDGE_INIT, function (context, information) {
@@ -12685,16 +12950,21 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDa
       context.commit(TARGET_LABEL_SET, label);
     }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
     });
-    propertyDatatypeRepository.getDataType(information.propertyId).then(function (dataType) {
-      tracker.trackPropertyDatatype(dataType);
-    });
-    return Promise.all([wikibaseRepoConfigRepository.getRepoConfiguration(), context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
+    return Promise.all([wikibaseRepoConfigRepository.getRepoConfiguration(), editAuthorizationChecker.canUseBridgeForItemAndPage(information.entityTitle, information.pageTitle), propertyDatatypeRepository.getDataType(information.propertyId), context.dispatch(Object(namespacedStoreMethods["action"])(NS_ENTITY, ENTITY_INIT), {
       entity: information.entityId
     })]).then(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
+      var _ref2 = _slicedToArray(_ref, 4),
           wikibaseRepoConfiguration = _ref2[0],
-          _entityInit = _ref2[1];
+          permissionErrors = _ref2[1],
+          dataType = _ref2[2],
+          _entityInit = _ref2[3];
 
+      if (permissionErrors.length) {
+        commitErrors(context, permissionErrors);
+        return;
+      }
+
+      tracker.trackPropertyDatatype(dataType);
       BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, actions_objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
       var state = context.state;
       var path = {
@@ -13230,7 +13500,7 @@ function createStore(services) {
   };
   var storeBundle = {
     state: state,
-    actions: actions(services.get('entityLabelRepository'), services.get('wikibaseRepoConfigRepository'), services.get('propertyDatatypeRepository'), services.get('tracker')),
+    actions: actions(services.get('entityLabelRepository'), services.get('wikibaseRepoConfigRepository'), services.get('propertyDatatypeRepository'), services.get('tracker'), services.get('editAuthorizationChecker')),
     getters: getters_getters,
     mutations: mutations,
     strict: "production" !== 'production',
@@ -14519,7 +14789,524 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
+var PageNotEditable;
+
+(function (PageNotEditable) {
+  PageNotEditable["BLOCKED_ON_PAGE"] = "blocked_on_client_page";
+  PageNotEditable["BLOCKED_ON_ITEM"] = "blocked_on_repo_item";
+  PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
+  PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
+  PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
+  PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
+  PageNotEditable["UNKNOWN"] = "unknown";
+})(PageNotEditable || (PageNotEditable = {}));
+// CONCATENATED MODULE: ./src/definitions/data-access/PageEditPermissionErrorsRepository.ts
+var PermissionErrorType;
+
+(function (PermissionErrorType) {
+  PermissionErrorType[PermissionErrorType["PROTECTED_PAGE"] = 1] = "PROTECTED_PAGE";
+  PermissionErrorType[PermissionErrorType["CASCADE_PROTECTED_PAGE"] = 2] = "CASCADE_PROTECTED_PAGE";
+  PermissionErrorType[PermissionErrorType["BLOCKED"] = 3] = "BLOCKED";
+  PermissionErrorType[PermissionErrorType["UNKNOWN"] = -1] = "UNKNOWN";
+})(PermissionErrorType || (PermissionErrorType = {}));
+// CONCATENATED MODULE: ./src/data-access/CombiningPermissionsRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var CombiningPermissionsRepository_CombiningPermissionsRepository =
+/*#__PURE__*/
+function () {
+  function CombiningPermissionsRepository(repoRepository, clientRepository) {
+    _classCallCheck(this, CombiningPermissionsRepository);
+
+    this.repoRepository = repoRepository;
+    this.clientRepository = clientRepository;
+  }
+
+  _createClass(CombiningPermissionsRepository, [{
+    key: "canUseBridgeForItemAndPage",
+    value: function () {
+      var _canUseBridgeForItemAndPage = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(repoItemTitle, clientPageTitle) {
+        var _ref, _ref2, repoErrors, clientErrors, errors;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return Promise.all([this.repoRepository.getPermissionErrors(repoItemTitle), this.clientRepository.getPermissionErrors(clientPageTitle)]);
+
+              case 2:
+                _ref = _context.sent;
+                _ref2 = _slicedToArray(_ref, 2);
+                repoErrors = _ref2[0];
+                clientErrors = _ref2[1];
+                errors = [];
+                errors.push.apply(errors, _toConsumableArray(repoErrors.map(this.repoErrorToMissingPermissionsError, this)));
+                errors.push.apply(errors, _toConsumableArray(clientErrors.map(this.clientErrorToMissingPermissionsError, this)));
+                return _context.abrupt("return", errors);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function canUseBridgeForItemAndPage(_x, _x2) {
+        return _canUseBridgeForItemAndPage.apply(this, arguments);
+      }
+
+      return canUseBridgeForItemAndPage;
+    }()
+  }, {
+    key: "repoErrorToMissingPermissionsError",
+    value: function repoErrorToMissingPermissionsError(repoError) {
+      switch (repoError.type) {
+        case PermissionErrorType.PROTECTED_PAGE:
+          return {
+            type: repoError.semiProtected ? PageNotEditable.ITEM_SEMI_PROTECTED : PageNotEditable.ITEM_FULLY_PROTECTED,
+            info: {
+              right: repoError.right
+            }
+          };
+
+        case PermissionErrorType.CASCADE_PROTECTED_PAGE:
+          return {
+            type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+            info: {
+              pages: repoError.pages
+            }
+          };
+
+        case PermissionErrorType.BLOCKED:
+          return {
+            type: PageNotEditable.BLOCKED_ON_ITEM,
+            info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable(repoError.blockinfo)
+          };
+
+        case PermissionErrorType.UNKNOWN:
+          return this.unknownPermissionErrorToMissingPermissionsError(repoError);
+      }
+    }
+  }, {
+    key: "clientErrorToMissingPermissionsError",
+    value: function clientErrorToMissingPermissionsError(clientError) {
+      switch (clientError.type) {
+        case PermissionErrorType.PROTECTED_PAGE:
+          throw new TechnicalProblem_TechnicalProblem('Data Bridge should never have been opened on this protected page!');
+
+        case PermissionErrorType.CASCADE_PROTECTED_PAGE:
+          return {
+            type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+            info: {
+              pages: clientError.pages
+            }
+          };
+
+        case PermissionErrorType.BLOCKED:
+          return {
+            type: PageNotEditable.BLOCKED_ON_PAGE,
+            info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable(clientError.blockinfo)
+          };
+
+        case PermissionErrorType.UNKNOWN:
+          return this.unknownPermissionErrorToMissingPermissionsError(clientError);
+      }
+    }
+  }, {
+    key: "mapBlockInfoFromPermissionErrorTypeToPageNotEditable",
+    value: function mapBlockInfoFromPermissionErrorTypeToPageNotEditable(blockinfo) {
+      return {
+        blockId: blockinfo.blockid,
+        blockedBy: blockinfo.blockedby,
+        blockedTimestamp: blockinfo.blockedtimestamp,
+        blockExpiry: blockinfo.blockexpiry,
+        blockPartial: blockinfo.blockpartial,
+        blockReason: blockinfo.blockreason,
+        blockedById: blockinfo.blockedbyid
+      };
+    }
+  }, {
+    key: "unknownPermissionErrorToMissingPermissionsError",
+    value: function unknownPermissionErrorToMissingPermissionsError(error) {
+      return {
+        type: PageNotEditable.UNKNOWN,
+        info: {
+          code: error.code,
+          messageKey: error.messageKey,
+          messageParams: error.messageParams
+        }
+      };
+    }
+  }]);
+
+  return CombiningPermissionsRepository;
+}();
+
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.ends-with.js
+var es6_string_ends_with = __webpack_require__("aef6");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.starts-with.js
+var es6_string_starts_with = __webpack_require__("f559");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
+var es6_string_includes = __webpack_require__("2fdb");
+
+// CONCATENATED MODULE: ./src/data-access/ApiQuery.ts
+
+
+
+function getApiQueryResponsePage(response, title) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = (response.normalized || [])[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var normalized = _step.value;
+
+      if (normalized.from === title) {
+        title = normalized.to;
+        break;
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = (response.pages || [])[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var page = _step2.value;
+
+      if (page.title === title) {
+        return page;
+      }
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  return null;
+}
+function isInfoTestPage(page) {
+  return 'actions' in page;
+}
+function isRestrictionsBody(body) {
+  return 'restrictions' in body;
+}
+// CONCATENATED MODULE: ./src/data-access/error/TitleInvalid.ts
+
+
+
+
+
+
+var TitleInvalid_TitleInvalid =
+/*#__PURE__*/
+function (_Error) {
+  _inherits(TitleInvalid, _Error);
+
+  function TitleInvalid(title) {
+    var _this;
+
+    _classCallCheck(this, TitleInvalid);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(TitleInvalid).call(this, "The title '".concat(title, "' is invalid.")));
+    _this.title = title;
+    return _this;
+  }
+
+  return TitleInvalid;
+}(wrapNativeSuper_wrapNativeSuper(Error));
+
+
+// CONCATENATED MODULE: ./src/data-access/ApiPageEditPermissionErrorsRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function isApiErrorRawErrorformat(error) {
+  return 'key' in error && 'params' in error;
+}
+
+var ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository =
+/*#__PURE__*/
+function () {
+  function ApiPageEditPermissionErrorsRepository(api) {
+    _classCallCheck(this, ApiPageEditPermissionErrorsRepository);
+
+    this.api = api;
+  }
+
+  _createClass(ApiPageEditPermissionErrorsRepository, [{
+    key: "getPermissionErrors",
+    value: function () {
+      var _getPermissionErrors = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(title) {
+        var _this = this;
+
+        var response, queryBody, page, semiProtectedLevels;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.api.get({
+                  action: 'query',
+                  titles: new Set([title]),
+                  prop: new Set(['info']),
+                  meta: new Set(['siteinfo']),
+                  intestactions: new Set(['edit']),
+                  intestactionsdetail: 'full',
+                  siprop: new Set(['restrictions']),
+                  errorformat: 'raw',
+                  formatversion: 2
+                });
+
+              case 2:
+                response = _context.sent;
+                queryBody = response.query;
+                page = getApiQueryResponsePage(queryBody, title);
+
+                if (!(page === null)) {
+                  _context.next = 7;
+                  break;
+                }
+
+                throw new TechnicalProblem_TechnicalProblem("API did not return information for page '".concat(title, "'."));
+
+              case 7:
+                if (!page.invalid) {
+                  _context.next = 9;
+                  break;
+                }
+
+                throw new TitleInvalid_TitleInvalid(title);
+
+              case 9:
+                if (isInfoTestPage(page)) {
+                  _context.next = 11;
+                  break;
+                }
+
+                throw new TechnicalProblem_TechnicalProblem('API info did not return test actions.');
+
+              case 11:
+                if (isRestrictionsBody(queryBody)) {
+                  _context.next = 13;
+                  break;
+                }
+
+                throw new TechnicalProblem_TechnicalProblem('API siteinfo did not return restrictions.');
+
+              case 13:
+                semiProtectedLevels = queryBody.restrictions.semiprotectedlevels.map(this.rewriteCompatibilityRight);
+                return _context.abrupt("return", page.actions.edit.map(function (error) {
+                  return _this.apiErrorToPermissionError(error, semiProtectedLevels);
+                }));
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function getPermissionErrors(_x) {
+        return _getPermissionErrors.apply(this, arguments);
+      }
+
+      return getPermissionErrors;
+    }()
+  }, {
+    key: "apiErrorToPermissionError",
+    value: function apiErrorToPermissionError(error, semiProtectedLevels) {
+      if (!isApiErrorRawErrorformat(error)) {
+        throw new TechnicalProblem_TechnicalProblem('API returned wrong error format.');
+      }
+
+      switch (error.code) {
+        case 'protectedpage':
+          {
+            var right = error.params[0];
+            var permissionError = {
+              type: PermissionErrorType.PROTECTED_PAGE,
+              right: right,
+              semiProtected: semiProtectedLevels.includes(right)
+            };
+            return permissionError;
+          }
+
+        case 'cascadeprotected':
+          {
+            var pages = this.parseWikitextPagesList(error.params[1]);
+
+            if (pages.length !== error.params[0]) {
+              throw new TechnicalProblem_TechnicalProblem("API reported ".concat(error.params[0], " cascade-protected pages but we parsed ").concat(pages.length, "."));
+            }
+
+            var _permissionError = {
+              type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
+              pages: pages
+            };
+            return _permissionError;
+          }
+
+        case 'blocked':
+          {
+            var _permissionError2 = {
+              type: PermissionErrorType.BLOCKED,
+              blockinfo: error.data.blockinfo
+            };
+            return _permissionError2;
+          }
+
+        default:
+          {
+            var _permissionError3 = {
+              type: PermissionErrorType.UNKNOWN,
+              code: error.code,
+              messageKey: error.key,
+              messageParams: error.params
+            };
+            return _permissionError3;
+          }
+      }
+    }
+    /**
+     * Account for MediaWiki backwards compatibility –
+     * a protection level can be not only a right,
+     * but also the 'sysop' group (rewritten to 'editprotected' right)
+     * or the 'autoconfirmed' group (rewritten to 'editsemiprotected' right).
+     * API errors always use the rewritten right,
+     * but the $wgSemiprotectedRestrictionLevels setting may contain a group.
+     */
+
+  }, {
+    key: "rewriteCompatibilityRight",
+    value: function rewriteCompatibilityRight(rightOrGroup) {
+      switch (rightOrGroup) {
+        case 'sysop':
+          return 'editprotected';
+
+        case 'autoconfirmed':
+          return 'editsemiprotected';
+
+        default:
+          return rightOrGroup;
+      }
+    }
+    /**
+     * Parse a list of pages from (very limited) wikitext.
+     * See PermissionManager::checkCascadingSourcesRestrictions()
+     * for the PHP code generating the list.
+     */
+
+  }, {
+    key: "parseWikitextPagesList",
+    value: function parseWikitextPagesList(wikitext) {
+      var lines = wikitext.split('\n');
+      var trailingLine = lines.pop();
+
+      if (trailingLine !== '') {
+        throw new TechnicalProblem_TechnicalProblem("Wikitext did not end in blank line: ".concat(trailingLine));
+      }
+
+      return lines.map(function (line) {
+        if (!line.startsWith('*')) {
+          throw new TechnicalProblem_TechnicalProblem("Line does not look like a list item: ".concat(line));
+        }
+
+        var listItem = line.slice(1);
+
+        if (listItem.startsWith(' ')) {
+          listItem = listItem.slice(1);
+        }
+
+        if (!listItem.startsWith('[[') || !listItem.endsWith(']]')) {
+          throw new TechnicalProblem_TechnicalProblem("List item does not look like a wikilink: ".concat(listItem));
+        }
+
+        var title = listItem.slice(2, -2);
+
+        if (title.startsWith(':')) {
+          title = title.slice(1);
+        }
+
+        return title;
+      });
+    }
+  }]);
+
+  return ApiPageEditPermissionErrorsRepository;
+}();
+
+
 // CONCATENATED MODULE: ./src/services/createServices.ts
+
+
 
 
 
@@ -14557,6 +15344,8 @@ function createServices(mwWindow, editTags) {
   services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
   services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoApi));
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
+  var clientApi = new ApiCore_ApiCore(new mwWindow.mw.Api());
+  services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
   return services;
 }
 // CONCATENATED MODULE: ./src/main.ts

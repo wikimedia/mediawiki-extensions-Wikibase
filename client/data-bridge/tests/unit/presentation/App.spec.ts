@@ -76,6 +76,9 @@ describe( 'App.vue', () => {
 			'tracker': {
 				trackPropertyDatatype: jest.fn(),
 			},
+			'editAuthorizationChecker': {
+				canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
+			},
 		} ) );
 
 		const information = {

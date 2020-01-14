@@ -40,6 +40,11 @@ import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
+import {
+	BridgePermissionsRepository,
+	MissingPermissionsError,
+	PageNotEditable,
+} from '@/definitions/data-access/BridgePermissionsRepository';
 
 const mockValidateBridgeApplicability = jest.fn().mockReturnValue( true );
 jest.mock( '@/store/validateBridgeApplicability', () => ( {
@@ -75,6 +80,10 @@ describe( 'root/actions', () => {
 		trackPropertyDatatype: jest.fn(),
 	};
 
+	const editAuthorizationChecker: BridgePermissionsRepository = {
+		canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( [] ),
+	};
+
 	describe( BRIDGE_INIT, () => {
 		function mockedStore(
 			entityId?: string,
@@ -108,12 +117,14 @@ describe( 'root/actions', () => {
 			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
 			propertyDatatypeRepository?: PropertyDatatypeRepository;
 			tracker?: BridgeTracker;
+			editAuthorizationChecker?: BridgePermissionsRepository;
 		} = {} ): Function {
 			return ( actions as Function )(
 				services.entityLabelRepository || entityLabelRepository,
 				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
 				services.propertyDatatypeRepository || propertyDatatypeRepository,
 				services.tracker || tracker,
+				services.editAuthorizationChecker || editAuthorizationChecker,
 			)[ BRIDGE_INIT ];
 		}
 
@@ -174,6 +185,39 @@ describe( 'root/actions', () => {
 			} )( mockedStore(), information ).then( () => {
 				expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( information.propertyId );
 				expect( tracker.trackPropertyDatatype ).toHaveBeenCalledWith( dataType );
+			} );
+		} );
+
+		it( 'does not track opening of the bridge on permission error', () => {
+			const dataType = 'string';
+			const getDataTypePromise = Promise.resolve( dataType );
+			const propertyDatatypeRepository: PropertyDatatypeRepository = {
+				getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
+			};
+			const tracker: BridgeTracker = {
+				trackPropertyDatatype: jest.fn(),
+			};
+			const permissionErrors: MissingPermissionsError[] = [
+				{
+					type: PageNotEditable.ITEM_SEMI_PROTECTED,
+				},
+			];
+			const editAuthorizationChecker: BridgePermissionsRepository = {
+				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( permissionErrors ),
+			};
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: defaultPropertyId,
+			};
+
+			return initAction( {
+				propertyDatatypeRepository,
+				tracker,
+				editAuthorizationChecker,
+			} )( mockedStore(), information ).then( () => {
+				expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( information.propertyId );
+				expect( tracker.trackPropertyDatatype ).not.toHaveBeenCalled();
 			} );
 		} );
 
@@ -399,6 +443,37 @@ describe( 'root/actions', () => {
 						);
 					} );
 				} );
+			} );
+		} );
+
+		it( `commits permission errors to ${APPLICATION_ERRORS_ADD} and bails`, () => {
+			const permissionErrors: MissingPermissionsError[] = [
+				{
+					type: PageNotEditable.ITEM_SEMI_PROTECTED,
+				},
+			];
+			const editAuthorizationChecker: BridgePermissionsRepository = {
+				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( permissionErrors ),
+			};
+			const context = {
+				dispatch: jest.fn(),
+				commit: jest.fn(),
+			};
+			const entityTitle = 'Item:Q4711';
+			const pageTitle = 'South_Pole_Telescope';
+			const information = {
+				entityTitle,
+				pageTitle,
+			};
+
+			return initAction( {
+				editAuthorizationChecker,
+			} )( context, information ).then( () => {
+				expect( editAuthorizationChecker.canUseBridgeForItemAndPage )
+					.toHaveBeenCalledWith( entityTitle, pageTitle );
+
+				expect( context.commit ).toHaveBeenCalledWith( APPLICATION_ERRORS_ADD, permissionErrors );
+				expect( mockBridgeConfig ).not.toHaveBeenCalled();
 			} );
 		} );
 	} );
