@@ -210,7 +210,18 @@ abstract class ModifyEntity extends ApiBase {
 				throw new ChangeOpValidationException( $result );
 			}
 
-			return $changeOp->apply( $entity, $summary );
+			$changeOpResult = $changeOp->apply( $entity, $summary );
+
+			// Also validate change op result as it may contain further validation
+			// that is not covered by change op validators
+			$changeOpResultValidationResult = $changeOpResult->validate();
+
+			if ( !$changeOpResultValidationResult->isValid() ) {
+				throw new ChangeOpValidationException( $changeOpResultValidationResult );
+			}
+
+			return $changeOpResult;
+
 		} catch ( ChangeOpException $ex ) {
 			$this->errorReporter->dieException( $ex, 'modification-failed' );
 		}

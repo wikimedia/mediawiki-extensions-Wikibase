@@ -525,7 +525,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	public function testGetOnSaveValidators( $forCreation ) {
 		$handler = $this->getHandler();
 
-		$validators = $handler->getOnSaveValidators( $forCreation );
+		$validators = $handler->getOnSaveValidators( $forCreation, $this->newEntity()->getId() );
 
 		$this->assertIsArray( $validators );
 

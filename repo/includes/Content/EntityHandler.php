@@ -184,9 +184,9 @@ abstract class EntityHandler extends ContentHandler {
 	 *
 	 * @return EntityValidator[]
 	 */
-	public function getOnSaveValidators( $forCreation ) {
+	public function getOnSaveValidators( $forCreation, EntityId $entityId ) {
 		if ( $forCreation ) {
-			$validators = $this->constraintProvider->getCreationValidators( $this->getEntityType() );
+			$validators = $this->constraintProvider->getCreationValidators( $this->getEntityType(), $entityId );
 		} else {
 			$validators = $this->constraintProvider->getUpdateValidators( $this->getEntityType() );
 		}

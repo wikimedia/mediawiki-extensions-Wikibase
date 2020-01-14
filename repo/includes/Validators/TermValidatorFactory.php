@@ -4,8 +4,11 @@ namespace Wikibase\Repo\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LabelDescriptionDuplicateDetector;
@@ -50,7 +53,7 @@ class TermValidatorFactory {
 	private $termLookup;
 
 	/** @var array */
-	private $itemTermsMigrationStage;
+	private $itemTermsMigrationStages;
 
 	/** @var int */
 	private $propertyTermsMigrationStage;
@@ -62,7 +65,7 @@ class TermValidatorFactory {
 	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
 	 * @param TermLookup $termLookup
-	 * @param array $itemTermsMigrationStage
+	 * @param array $itemTermsMigrationStages
 	 * @param int $propertyTermsMigrationStage
 	 *
 	 * @throws InvalidArgumentException
@@ -74,7 +77,7 @@ class TermValidatorFactory {
 		LabelDescriptionDuplicateDetector $duplicateDetector,
 		TermsCollisionDetectorFactory $termsCollisionDetectorFactory,
 		TermLookup $termLookup,
-		array $itemTermsMigrationStage,
+		array $itemTermsMigrationStages,
 		int $propertyTermsMigrationStage
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
@@ -87,10 +90,15 @@ class TermValidatorFactory {
 		$this->duplicateDetector = $duplicateDetector;
 		$this->termsCollisionDetectorFactory = $termsCollisionDetectorFactory;
 		$this->termLookup = $termLookup;
-		$this->itemTermsMigrationStage = $itemTermsMigrationStage;
+		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
 		$this->propertyTermsMigrationStage = $propertyTermsMigrationStage;
 	}
 
+	/**
+	 * Not to be confused with getFingerprintValidator(). This function returns fingerprint
+	 * uniqueness validator that validates uniqueness only in new store. While getFingerprintValidator()
+	 * returns Fingerprint validators to be applied on entire entity, including uniqueness checks in old store.
+	 */
 	public function getFingerprintUniquenessValidator( string $entityType ): ?ValueValidator {
 		if ( in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
 			$fingerprintUniquenessValidator = new FingerprintUniquenessValidator(
@@ -99,7 +107,7 @@ class TermValidatorFactory {
 			);
 
 			return new ByIdFingerprintUniquenessValidator(
-				$this->itemTermsMigrationStage,
+				$this->itemTermsMigrationStages,
 				$this->propertyTermsMigrationStage,
 				$fingerprintUniquenessValidator
 			);
@@ -120,17 +128,43 @@ class TermValidatorFactory {
 	 *
 	 * @return FingerprintValidator
 	 */
-	public function getFingerprintValidator( $entityType ) {
+	public function getFingerprintValidator( $entityType, EntityId $entityId ) {
 		$notEqualValidator = new LabelDescriptionNotEqualValidator();
 
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				return new CompositeFingerprintValidator( [
-					$notEqualValidator,
-					new LabelDescriptionUniquenessValidator( $this->duplicateDetector ),
-				] );
+				$itemValidators = [ $notEqualValidator ];
+
+				if ( !$entityId instanceof ItemId ) {
+					$entityIdClass = get_class( $entityId );
+					throw new InvalidArgumentException( "\$entityId can only be ItemId. {$entityIdClass} given" );
+				}
+
+				// Only validate label and description uniqueness in old store when we are actually still reading from it.
+				// Validation of fingerprint uniqueness in new store are differently done
+				// see ChangeOpFingerprintResult::validate
+				$entityNumericId = $entityId->getNumericId();
+				foreach ( $this->itemTermsMigrationStages as $maxId => $migrationStage ) {
+					if ( $maxId === 'max' ) {
+						$maxId = Int32EntityId::MAX;
+					} elseif ( !is_int( $maxId ) ) {
+						throw new InvalidArgumentException( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
+					}
+
+					if ( $entityNumericId > $maxId ) {
+						continue;
+					}
+
+					if ( $migrationStage < MIGRATION_WRITE_NEW ) {
+						$itemValidators[] = new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
+					}
+
+					break;
+				}
+
+				return new CompositeFingerprintValidator( $itemValidators );
 
 			default:
 				return $notEqualValidator;
