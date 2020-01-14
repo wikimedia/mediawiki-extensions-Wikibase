@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\Dumpers\RdfDumpGenerator;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -213,7 +214,7 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 				[ '' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
 				[ '' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
+				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => 'wd', 'foreign' => 'foreign' ],
 				[ '' => '', 'foreign' => 'foreign' ],

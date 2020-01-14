@@ -10,6 +10,7 @@ use MediaWiki\Sparql\SparqlClient;
 use Title;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Rdf\RdfVocabulary;
@@ -363,7 +364,7 @@ QUERY;
 				DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
 				DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 			),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd' ],
 			[ '' => '' ],

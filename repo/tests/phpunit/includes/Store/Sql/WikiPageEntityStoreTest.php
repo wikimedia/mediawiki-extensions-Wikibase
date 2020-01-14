@@ -32,6 +32,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\IdGenerator;
 use Wikibase\ItemContent;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
@@ -169,7 +170,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 						return $this->newCustomEntityHandler();
 					},
 				],
-				new EntitySourceDefinitions( [ $localSource, $customSource ] ),
+				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
 				$localSource,
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 			),
@@ -250,7 +251,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 						return $this->newCustomEntityHandler();
 					},
 				],
-				new EntitySourceDefinitions( [ $localSource, $customSource ] ),
+				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
 				$localSource,
 				$dataAccessSettings
 			),
@@ -1551,7 +1552,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 						return $wikibaseRepo->newPropertyHandler();
 					},
 				],
-				new EntitySourceDefinitions( [ $itemSource ] ),
+				new EntitySourceDefinitions( [ $itemSource ], new EntityTypeDefinitions( [] ) ),
 				$itemSource,
 				$dataAccessSettings
 			),
@@ -1593,7 +1594,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 						return $this->newCustomEntityHandler();
 					},
 				],
-				new EntitySourceDefinitions( [ $customSource ] ),
+				new EntitySourceDefinitions( [ $customSource ], new EntityTypeDefinitions( [] ) ),
 				$customSource,
 				$dataAccessSettings
 			),

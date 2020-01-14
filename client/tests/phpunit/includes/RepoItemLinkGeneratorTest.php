@@ -9,6 +9,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\Client\RepoItemLinkGenerator
@@ -31,7 +32,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 		return new RepoLinker(
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
 			$conceptBaseUri,
 			$articlePath,

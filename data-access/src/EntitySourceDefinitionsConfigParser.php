@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess;
 
 use InvalidArgumentException;
 use MWNamespace;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -15,9 +16,10 @@ class EntitySourceDefinitionsConfigParser {
 
 	/**
 	 * @param array[] $sourceConfig
+	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @return EntitySourceDefinitions
 	 */
-	public function newDefinitionsFromConfigArray( array $sourceConfig ) {
+	public function newDefinitionsFromConfigArray( array $sourceConfig, EntityTypeDefinitions $entityTypeDefinitions ) {
 		$this->assertConfigArrayWellFormed( $sourceConfig );
 
 		$sources = [];
@@ -44,7 +46,7 @@ class EntitySourceDefinitionsConfigParser {
 			);
 		}
 
-		return new EntitySourceDefinitions( $sources );
+		return new EntitySourceDefinitions( $sources, $entityTypeDefinitions );
 	}
 
 	private function assertConfigArrayWellFormed( array $sourceConfig ) {

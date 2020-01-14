@@ -19,6 +19,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
@@ -123,7 +124,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				[ '' => self::URI_BASE ],
 				[ '' => self::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
+				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => 'wd' ],
 				[ '' => '' ]
@@ -772,7 +773,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 						'pro',
 						'p'
 					),
-				] ),
+				], new EntityTypeDefinitions( [] ) ),
 				'items',
 				[ 'items' => 'wd', 'props' => 'pro', ],
 				[ 'items' => '', 'props' => 'pro', ]

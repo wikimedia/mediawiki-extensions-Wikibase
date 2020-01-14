@@ -17,6 +17,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -43,7 +44,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$factory = new EntityContentFactory(
 			$contentModelIds,
 			$callbacks,
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			new UnusableEntitySource(),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
@@ -82,7 +83,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		new EntityContentFactory(
 			$contentModelIds,
 			$callbacks,
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			new UnusableEntitySource(),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
@@ -133,7 +134,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					return $wikibaseRepo->newPropertyHandler();
 				}
 			],
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ] ),
+			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
 			$itemSource,
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
@@ -294,7 +295,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 					return $wikibaseRepo->newPropertyHandler();
 				}
 			],
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ] ),
+			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
 			$itemSource,
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()

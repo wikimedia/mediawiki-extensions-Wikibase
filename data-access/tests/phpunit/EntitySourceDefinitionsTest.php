@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @covers \Wikibase\DataAccess\EntitySourceDefinitions
@@ -18,7 +19,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 
 	public function testGivenInvalidArguments_constructorThrowsException() {
 		$this->expectException( InvalidArgumentException::class );
-		new EntitySourceDefinitions( [ 'foobar' ] );
+		new EntitySourceDefinitions( [ 'foobar' ], new EntityTypeDefinitions( [] ) );
 	}
 
 	public function testGivenEntityTypeProvidedByMultipleSources_constructorThrowsException() {
@@ -26,7 +27,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSourceTwo = new EntitySource( 'dupe test', 'foodb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
 
 		$this->expectException( InvalidArgumentException::class );
-		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ] );
+		new EntitySourceDefinitions( [ $itemSourceOne, $itemSourceTwo ], new EntityTypeDefinitions( [] ) );
 	}
 
 	public function testTwoSourcesWithSameName_constructorThrowsException() {
@@ -34,22 +35,36 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$sourceTwo = new EntitySource( 'same name', 'bbb', [ 'entityTwo' => [ 'namespaceId' => 101, 'slot' => 'main2' ] ], '', '', '', '' );
 
 		$this->expectException( InvalidArgumentException::class );
-		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ] );
+		new EntitySourceDefinitions( [ $sourceOne, $sourceTwo ], new EntityTypeDefinitions( [] ) );
 	}
 
 	public function testGivenKnownType_getSourceForEntityTypeReturnsTheConfiguredSource() {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( $itemSource, $sourceDefinitions->getSourceForEntityType( 'item' ) );
+	}
+
+	public function testGivenSubEntityOfKnownType_getSourceForEntityTypeReturnsTheRelevantSource() {
+		$itemSource = $this->newItemSource();
+		$propertySource = $this->newPropertySource();
+
+		$subItemType = 'subitem';
+
+		$sourceDefinitions = new EntitySourceDefinitions(
+			[ $itemSource, $propertySource ],
+			new EntityTypeDefinitions( [ 'item' => [ 'sub-entity-types' => [ 'subitem' ] ] ] )
+		);
+
+		$this->assertEquals( $itemSource, $sourceDefinitions->getSourceForEntityType( 'subitem' ) );
 	}
 
 	public function testGivenUnknownType_getSourceForEntityTypeReturnsNull() {
 		$itemSource = $this->newItemSource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertNull( $sourceDefinitions->getSourceForEntityType( 'property' ) );
 	}
@@ -58,7 +73,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( [ 'item' => $itemSource, 'property' => $propertySource ], $sourceDefinitions->getEntityTypeToSourceMapping() );
 	}
@@ -67,7 +82,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( [ 'items' => 'itemsource:', 'properties' => 'propertysource:' ], $sourceDefinitions->getConceptBaseUris() );
 	}
@@ -76,7 +91,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( [ 'items' => 'it', 'properties' => 'pro' ], $sourceDefinitions->getRdfNodeNamespacePrefixes() );
 	}
@@ -85,7 +100,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ] );
+		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
 
 		$this->assertEquals( [ 'items' => '', 'properties' => 'pro' ], $sourceDefinitions->getRdfPredicateNamespacePrefixes() );
 	}

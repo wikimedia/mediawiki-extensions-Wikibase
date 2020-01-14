@@ -37,12 +37,14 @@ class MultiRepositoryServicesIntegrationTest extends \MediaWikiTestCase {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 		$settings->setSetting( 'useEntitySourceBasedFederation', false );
 
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+
 		return new WikibaseClient(
 			$settings,
 			new DataTypeDefinitions( [] ),
-			new EntityTypeDefinitions( [] ),
+			$entityTypeDefinitions,
 			new HashSiteStore(),
-			new EntitySourceDefinitions( [] )
+			new EntitySourceDefinitions( [], $entityTypeDefinitions )
 		);
 	}
 

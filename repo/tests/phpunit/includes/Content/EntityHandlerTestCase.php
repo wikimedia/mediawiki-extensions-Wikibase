@@ -74,15 +74,18 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
 			$this->getRepositoryDefinitions(),
-			new EntitySourceDefinitions( [ new EntitySource(
-				'test',
-				'testdb',
-				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
-				'',
-				'',
-				'',
-				''
-			) ] )
+			new EntitySourceDefinitions(
+				[ new EntitySource(
+					'test',
+					'testdb',
+					[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					''
+				) ],
+				new EntityTypeDefinitions( [] )
+			)
 		);
 	}
 

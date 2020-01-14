@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\Values\ExternalIdentifierRdfBuilder;
@@ -48,7 +49,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>' ],
 			[ '' => '<DATA>' ],
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]
@@ -101,7 +102,7 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ '' => '<BASE>' ],
 			[ '' => '<DATA>' ],
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],
 			[ '' => '' ]

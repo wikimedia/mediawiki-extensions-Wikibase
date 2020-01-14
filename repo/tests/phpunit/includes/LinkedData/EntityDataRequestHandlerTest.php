@@ -20,6 +20,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -118,7 +119,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 				[ '' => EntityDataSerializationServiceTest::URI_BASE ],
 				[ '' => EntityDataSerializationServiceTest::URI_DATA ],
 				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [] ),
+				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => 'wd' ],
 				[ '' => '' ]
