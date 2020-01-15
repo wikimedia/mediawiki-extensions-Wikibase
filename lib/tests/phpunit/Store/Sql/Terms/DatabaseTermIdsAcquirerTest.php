@@ -28,7 +28,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	/**
 	 * @var ILBFactory
 	 */
-	private $loadBalancerFactory;
+	private $lbFactory;
 
 	public function setUp() : void {
 		$this->db = $this->setUpNewDb();
