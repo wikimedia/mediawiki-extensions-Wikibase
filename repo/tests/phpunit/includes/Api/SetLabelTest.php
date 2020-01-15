@@ -76,8 +76,8 @@ class SetLabelTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetLabelExceptions( $params, $expected ) {
-		self::doTestSetTermExceptions( $params, $expected );
+	public function testSetLabelExceptions( $params, $expected, $token = true ) {
+		self::doTestSetTermExceptions( $params, $expected, $token );
 	}
 
 	public function testSetLabelWithTag() {

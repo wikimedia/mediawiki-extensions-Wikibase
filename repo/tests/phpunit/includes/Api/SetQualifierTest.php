@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use DataValues\StringValue;
 use FormatJson;
 use ApiUsageException;
+use PHPUnit\Framework\Constraint\Constraint;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -251,7 +252,11 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			$this->fail( 'Invalid request did not raise an error' );
 		} catch ( ApiUsageException $ex ) {
 			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
-			$this->assertEquals( $error, $msg->getApiCode(), 'Invalid request raised correct error' );
+			$this->assertThat(
+				$msg->getApiCode(),
+				$error instanceof Constraint ? $error : $this->equalTo( $error ),
+				'Invalid request raised correct error'
+			);
 		}
 	}
 
@@ -260,7 +265,10 @@ class SetQualifierTest extends WikibaseApiTestCase {
 			'bad guid 1' => [ 'Berlin', 'xyz', 'StringProp', 'value', 'abc', 'invalid-guid' ],
 			'bad guid 2' => [ 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ],
 			'bad guid 3' => [ 'Berlin', 'i1813$358fa2a0-4345-82b6-12a4-7b0fee494a5f', 'StringProp', 'value', 'abc', 'invalid-guid' ],
-			'bad snak type' => [ 'Berlin', null, 'StringProp', 'alksdjf', 'abc', 'unknown_snaktype' ],
+			'bad snak type' => [ 'Berlin', null, 'StringProp', 'alksdjf', 'abc', $this->logicalOr(
+				$this->equalTo( 'unknown_snaktype' ),
+				$this->equalTo( 'badvalue' )
+			) ],
 			'bad snak value' => [ 'Berlin', null, 'StringProp', 'value', '"   "', 'modification-failed' ],
 		];
 	}

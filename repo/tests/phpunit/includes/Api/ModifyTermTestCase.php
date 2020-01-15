@@ -142,7 +142,10 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'language' => 'xx', 'value' => 'Foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_language'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_language' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ]
 			],
 			[ //1
@@ -156,9 +159,13 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'notoken',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'notoken' ),
+						$this->equalTo( 'missingparam' )
+					),
 					'message' => 'The "token" parameter must be set'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //3
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ],
@@ -166,7 +173,8 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid CSRF token.'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //4
 				'p' => [ 'id' => 'noANid', 'language' => 'fr', 'value' => 'normalValue' ],
@@ -180,7 +188,10 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'value' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_site',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_site' ),
+						$this->equalTo( 'badvalue' )
+					),
 					'message' => 'Unrecognized value for parameter "site"'
 				] ]
 			],
@@ -208,7 +219,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		];
 	}
 
-	public function doTestSetTermExceptions( $params, $expected ) {
+	public function doTestSetTermExceptions( $params, $expected, $token = true ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = self::$testAction;
 		if ( !array_key_exists( 'id', $params )
@@ -217,7 +228,7 @@ abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 		) {
 			$params['id'] = EntityTestHelper::getId( 'Empty' );
 		}
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
+		$this->doTestQueryExceptions( $params, $expected['exception'], null, $token );
 	}
 
 }

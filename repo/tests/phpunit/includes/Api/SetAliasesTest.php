@@ -223,7 +223,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'language' => 'xx', 'add' => 'Foo' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_language'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_language' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ]
 			],
 			[ //1
@@ -237,9 +240,13 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'language' => 'pt', 'remove' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'notoken',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'notoken' ),
+						$this->equalTo( 'missingparam' )
+					),
 					'message' => 'The "token" parameter must be set'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //3
 				'p' => [ 'language' => 'pt', 'value' => 'normalValue', 'token' => '88888888888888888888888888888888+\\' ],
@@ -247,7 +254,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid CSRF token.'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //4
 				'p' => [ 'id' => 'noANid', 'language' => 'fr', 'add' => 'normalValue' ],
@@ -261,7 +269,10 @@ class SetAliasesTest extends ModifyTermTestCase {
 				'p' => [ 'site' => 'qwerty', 'language' => 'pl', 'set' => 'normalValue' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_site',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_site' ),
+						$this->equalTo( 'badvalue' )
+					),
 					'message' => 'Unrecognized value for parameter "site"'
 				] ]
 			],
@@ -292,8 +303,8 @@ class SetAliasesTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetAliasesExceptions( $params, $expected ) {
-		$this->doTestSetTermExceptions( $params, $expected );
+	public function testSetAliasesExceptions( $params, $expected, $token = true ) {
+		$this->doTestSetTermExceptions( $params, $expected, $token );
 	}
 
 	public function testUserCanSetAliasesWhenTheyHaveSufficientPermission() {

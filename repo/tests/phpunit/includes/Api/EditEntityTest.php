@@ -801,19 +801,28 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin', 'clear' => '' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'nodata'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'nodata' ),
+						$this->equalTo( 'missingparam' )
+					)
 				] ] ],
 			'bad site' => [
 				'p' => [ 'site' => 'abcde', 'data' => '{}' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_site'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_site' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ] ],
 			'no data provided' => [
 				'p' => [ 'site' => 'enwiki', 'title' => 'Berlin' ],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'nodata' // see 'no$1' in ApiBase::$messageMap
+					'code' => $this->logicalOr(
+						$this->equalTo( 'nodata' ), // see 'no$1' in ApiBase::$messageMap
+						$this->equalTo( 'missingparam' )
+					)
 				] ]
 			],
 			'malformed json' => [
@@ -1137,7 +1146,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'tags-apply-not-allowed-one',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'tags-apply-not-allowed-one' ),
+						$this->equalTo( 'badtags' )
+					),
 				] ],
 			],
 			'invalid tag (multi)' => [
@@ -1151,7 +1163,10 @@ class EditEntityTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'tags-apply-not-allowed-multi',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'tags-apply-not-allowed-multi' ),
+						$this->equalTo( 'badtags' )
+					),
 				] ],
 			],
 		];

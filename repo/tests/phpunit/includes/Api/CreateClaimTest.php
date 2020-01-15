@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use PHPUnit\Framework\Constraint\Constraint;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
@@ -146,7 +147,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			'property' => '-',
 			'value' => '"Foo.png"',
 		];
-		$argLists[] = [ 'unknown_snaktype', $params ];
+		$argLists[] = [
+			$this->logicalOr(
+				$this->equalTo( 'unknown_snaktype' ),
+				$this->equalTo( 'badvalue' )
+			),
+			$params
+		];
 
 		//5, 6, 7
 		foreach ( [ 'entity', 'snaktype', 'property' ] as $requiredParam ) {
@@ -160,7 +167,13 @@ class CreateClaimTest extends WikibaseApiTestCase {
 
 			unset( $params[$requiredParam] );
 
-			$argLists[] = [ 'no' . $requiredParam, $params ];
+			$argLists[] = [
+				$this->logicalOr(
+					$this->equalTo( 'no' . $requiredParam ),
+					$this->equalTo( 'missingparam' )
+				),
+				$params
+			];
 		}
 
 		//8
@@ -208,7 +221,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 *
-	 * @param string $errorCode
+	 * @param string|Constraint $errorCode
 	 * @param array $params
 	 */
 	public function testInvalidRequest( $errorCode, array $params ) {
@@ -231,9 +244,10 @@ class CreateClaimTest extends WikibaseApiTestCase {
 			$this->fail( 'Invalid request should raise an exception' );
 		} catch ( ApiUsageException $ex ) {
 			$msg = TestingAccessWrapper::newFromObject( $ex )->getApiMessage();
-			$this->assertEquals(
-				$errorCode,
-				$msg->getApiCode(), 'Invalid request raised correct error: ' . $ex->getMessage()
+			$this->assertThat(
+				$msg->getApiCode(),
+				$errorCode instanceof Constraint ? $errorCode : $this->equalTo( $errorCode ),
+				'Invalid request raised correct error: ' . $ex->getMessage()
 			);
 		}
 
