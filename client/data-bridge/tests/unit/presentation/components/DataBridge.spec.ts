@@ -21,15 +21,14 @@ localVue.use( Vuex );
 describe( 'DataBridge', () => {
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( {} ) );
+		Vue.set( store, 'getters', {
+			targetValue: { type: 'string', value: '' },
+			targetLabel: { value: 'P123', language: 'zxx' },
+			targetReferences: [],
+		} );
 	} );
 
 	it( 'mounts StringDataValue', () => {
-		Vue.set( store, 'getters', {
-			targetValue: { type: 'string', value: '' },
-			targetProperty: 'P123',
-			targetLabel: { value: 'P123', language: 'zxx' },
-			stringMaxLength: null,
-		} );
 		const wrapper = shallowMount( DataBridge, {
 			store,
 			localVue,
@@ -40,10 +39,10 @@ describe( 'DataBridge', () => {
 
 	it( 'delegates the necessary props to StringDataValue', () => {
 		const targetValue = { type: 'string', value: 'Töfften' };
-		const targetProperty = 'P123';
 		const targetLabel = { value: 'P123', language: 'zxx' };
 		const stringMaxLength = 200;
-		Vue.set( store, 'getters', { targetValue, targetProperty, targetLabel } );
+		Vue.set( store.getters, 'targetValue', targetValue );
+		Vue.set( store.getters, 'targetLabel', targetLabel );
 
 		const wrapper = shallowMount( DataBridge, {
 			store,
@@ -59,12 +58,6 @@ describe( 'DataBridge', () => {
 	} );
 
 	it( 'mounts ReferenceSection', () => {
-		Vue.set( store, 'getters', {
-			targetValue: { type: 'string', value: '' },
-			targetProperty: 'P123',
-			targetLabel: { value: 'P123', language: 'zxx' },
-			targetReferences: [],
-		} );
 		const wrapper = shallowMount( DataBridge, {
 			store,
 			localVue,
