@@ -229,7 +229,7 @@ class ApiErrorReporter {
 	 * @see ApiBase::dieUsage()
 	 * @deprecated Use dieWithError() instead.
 	 *
-	 * @param string $description An english, plain text description of the errror,
+	 * @param string $description An english, plain text description of the error,
 	 * for use in logs.
 	 * @param string $errorCode A code identifying the error
 	 * @param int $httpRespCode The HTTP error code to send to the client
@@ -491,7 +491,7 @@ class ApiErrorReporter {
 			$name = $messageSpec;
 		} elseif ( is_array( $messageSpec ) ) {
 			if ( isset( $messageSpec[0] ) ) {
-				// it's an indexed array, the first entriy is the message key, the rest are parameters
+				// it's an indexed array, the first entry is the message key, the rest are parameters
 				$name = $messageSpec[0];
 				$params = array_slice( $messageSpec, 1 );
 			} else {
