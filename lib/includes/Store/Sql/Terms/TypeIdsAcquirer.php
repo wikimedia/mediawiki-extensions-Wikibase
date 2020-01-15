@@ -19,7 +19,7 @@ interface TypeIdsAcquirer {
 	 *	associated with their acquired ids.
 	 *	Example:
 	 *		$typeIdsAcquirer->acquireTypeIds ( [ 'label', 'description' ] ) would return:
-	 *		[ 'label' => 100, 'description' => 'b48a96cd-c644-4230-811f-cc152dac8455' ]
+	 *		[ 'label' => 100, 'description' => 121 ]
 	 */
 	public function acquireTypeIds( array $types ): array;
 
