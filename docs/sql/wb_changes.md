@@ -4,6 +4,8 @@ The table structure is as follows:
 
 Part of the \ref topic_change-propagation system on a Repo.
 
+**Fields:**
+
 * change_id
   * An int(10) with an autoincrement id identifying the change.
 * change_type
@@ -52,3 +54,33 @@ Part of the \ref topic_change-propagation system on a Repo.
 | change_info        | mediumblob       | NO   |     | NULL    |                |
 +--------------------+------------------+------+-----+---------+----------------+
 ```
+
+**Implied relations:**
+
+\dot
+digraph models_diagram{
+    graph [rankdir=LR, overlap=false];
+    node [shape=record]
+
+wb_changes [shape=plain label=<
+<table border="0" cellborder="1" cellspacing="0">
+  <tr><td><i>wb_changes</i></td></tr>
+  <tr><td port="1">....</td></tr>
+  <tr><td port="revision">change_revision_id</td></tr>
+  <tr><td port="user">change_user_id</td></tr>
+</table>>];
+
+revision[href="https://www.mediawiki.org/wiki/Manual:Revision_table" fontcolor=blue]
+user[href="https://www.mediawiki.org/wiki/Manual:User_table" fontcolor=blue]
+
+wb_changes:revision -> revision[arrowhead="none"]
+user -> wb_changes:user[arrowhead="crow"]
+}
+\enddot
+
+**Extra Indexes:**
+ - change_type
+ - change_time
+ - change_object_id
+ - change_user_id
+ - change_revision_id

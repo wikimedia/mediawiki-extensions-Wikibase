@@ -6,6 +6,8 @@ This table:
  - Allows storing the knowledge of an integer to term type mapping in the DB (rather than the application).
  - Will likely always be cached in memory by the SQL server.
 
+**Fields:**
+
 ```
 +----------+------------------+------+-----+---------+----------------+
 | Field    | Type             | Null | Key | Default | Extra          |
@@ -14,6 +16,10 @@ This table:
 | wby_name | varbinary(45)    | NO   | UNI | NULL    |                |
 +----------+------------------+------+-----+---------+----------------+
 ```
+
+
+**Extra Indexes:**
+ - UNIQUE wby_name
 
 **Example data:**
 

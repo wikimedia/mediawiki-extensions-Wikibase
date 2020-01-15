@@ -4,6 +4,8 @@ This table is very similar to / identical to [wbt_property_terms], but for items
 
 Part of the \ref md_docs_storage_terms storage system.
 
+**Fields:**
+
 -   wbit_id - an auto increment field
 -   wbit_item_id - numeric value of the item ID. So Q64 # 64
 -   wbit_term_in_lang_id - reference to the [wbt_term_in_lang] table
@@ -20,7 +22,11 @@ Part of the \ref md_docs_storage_terms storage system.
 
 Using an integer to represent the item identifier was a design decision allowing for smaller tables and faster querying.
 
-Example data:
+**Extra Indexes:**
+ - UNIQUE wbit_term_in_lang, wbit_item_id
+ - wbit_item_id
+
+**Example data:**
 
 | wbit_id  | wbit_item_id  | wbit_term_in_lang_id  |
 | -------- | ------------- | --------------------- |

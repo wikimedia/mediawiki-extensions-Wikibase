@@ -1,5 +1,7 @@
 Part of the \ref topic_usagetracking system on a Client.
 
+**Fields:**
+
  - eu_row_id - auto-increment row ID for internal use. Primary key.
  - eu_entity_id - Serialized entity ID for the entity that has usage
  - eu_aspect - Which aspect of the entity is being used. (See @ref topic_usagetracking)
@@ -16,21 +18,27 @@ Part of the \ref topic_usagetracking system on a Client.
 +--------------+----------------+------+-----+---------+----------------+
 ```
 
+**Implied relations:**
+
+\dot
+digraph models_diagram{
+    graph [rankdir=LR, overlap=false];
+    node [shape=record]
+
+wbc_entity_usage [shape=plain label=<
+<table border="0" cellborder="1" cellspacing="0">
+  <tr><td><i>wbc_entity_usage</i></td></tr>
+  <tr><td port="1">....</td></tr>
+  <tr><td port="page">eu_page_id</td></tr>
+</table>>];
+
+page[href="https://www.mediawiki.org/wiki/Manual:Page_table" fontcolor=blue]
+
+page -> wbc_entity_usage:page[arrowhead="crow"]
+}
+\enddot
+
 **Extra Indexes:**
-
-```
-+------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
-| Table            | Non_unique | Key_name     | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
-+------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
-| wbc_entity_usage |          0 | PRIMARY      |            1 | eu_row_id    | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
-| wbc_entity_usage |          0 | eu_entity_id |            1 | eu_entity_id | A         |     3636259 |     NULL | NULL   |      | BTREE      |         |               |
-| wbc_entity_usage |          0 | eu_entity_id |            2 | eu_aspect    | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
-| wbc_entity_usage |          0 | eu_entity_id |            3 | eu_page_id   | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
-| wbc_entity_usage |          1 | eu_page_id   |            1 | eu_page_id   | A         |      404028 |     NULL | NULL   |      | BTREE      |         |               |
-| wbc_entity_usage |          1 | eu_page_id   |            2 | eu_entity_id | A         |     7272518 |     NULL | NULL   |      | BTREE      |         |               |
-+------------------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
-```
-
  - UNIQUE eu_entity_id , eu_aspect, eu_page_id - record one usage per page per aspect of an entity
  - eu_page_id, eu_entity_id - look up (and especially, delete) usage entries by page id
 

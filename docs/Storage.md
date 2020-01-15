@@ -35,3 +35,22 @@
 
 * \ref topic_change-propagation
   * @subpage md_docs_sql_wbc_entity_usage (See also \ref topic_usagetracking)
+
+## Existing table changes
+
+The following changes are done to the default MediaWiki tables:
+* [content_models]
+  * Repo: Add new content models
+    * wikibase-item
+    * wikibase-property
+* [page_props]
+  * Repo: Add some counters:
+    * wb-claims
+    * wb-identifiers
+    * wb-sitelinks
+  * Client:
+    * wb_item
+* ...
+
+[content_models]: https://www.mediawiki.org/wiki/Manual:Content_models_table
+[page_props]: https://www.mediawiki.org/wiki/Manual:Page_props_table

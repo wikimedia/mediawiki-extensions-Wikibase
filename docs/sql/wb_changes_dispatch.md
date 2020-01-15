@@ -2,6 +2,8 @@ This table contains one row per client wiki, with the following information:
 
 Part of the \ref topic_change-propagation system on a Repo.
 
+**Fields:**
+
 * chd_site - the target wiki with its global site ID.
 * chd_db - the logical database name of the client wiki.
 * chd_seen - the last change ID that was sent to this client wiki.
@@ -23,3 +25,7 @@ Part of the \ref topic_change-propagation system on a Repo.
 | chd_disabled | tinyint(3) unsigned | NO   |     | 0              |       |
 +--------------+---------------------+------+-----+----------------+-------+
 ```
+
+**Extra Indexes:**
+ - chd_seen
+ - chd_touched
