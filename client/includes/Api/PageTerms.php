@@ -104,7 +104,7 @@ class PageTerms extends ApiQueryBase {
 						] );
 					}
 				} else {
-					$termTexts = $this->termBuffer->getPrefetchedAliases( $entityId, $languageCode );
+					$termTexts = $this->termBuffer->getPrefetchedAliases( $entityId, $languageCode ) ?: [];
 					foreach ( $termTexts as $termText ) {
 						$terms[] = new TermIndexEntry( [
 							TermIndexEntry::FIELD_ENTITY => $entityId,
