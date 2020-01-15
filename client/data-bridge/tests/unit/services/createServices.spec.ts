@@ -15,6 +15,7 @@ import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
+import RepoRouter from '@/data-access/RepoRouter';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -96,6 +97,13 @@ beforeEach( () => {
 		.mockImplementationOnce( () => mockClientEditPermissionsErrorsRepository );
 } );
 
+const mockRepoRouter = {
+	getPageUrl: jest.fn(),
+};
+jest.mock( '@/data-access/RepoRouter', () => {
+	return jest.fn().mockImplementation( () => mockRepoRouter );
+} );
+
 function mockMwWindow( options: {
 	wbRepo?: WbRepo;
 	wgUserName?: string;
@@ -138,6 +146,7 @@ function mockMwWindow( options: {
 	const language = options.mwLanguage || { bcp47: jest.fn() };
 	const data = options.ulsData || { getDir: jest.fn() };
 	$.uls = { data };
+	$.param = jest.fn();
 	const message = options.message || jest.fn();
 	const track = options.tracker || jest.fn();
 
@@ -151,6 +160,9 @@ function mockMwWindow( options: {
 			language,
 			message,
 			track,
+			util: {
+				wikiUrlencode: jest.fn(),
+			},
 		},
 		$,
 	} as unknown as MwWindow;
@@ -163,6 +175,8 @@ describe( 'createServices', () => {
 			scriptPath: '/w',
 			articlePath: '/wiki/$1',
 		};
+		const specialEntityDataUrl = 'http://localhost/wiki/Special:EntityData';
+		mockRepoRouter.getPageUrl.mockReturnValue( specialEntityDataUrl );
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
@@ -173,8 +187,9 @@ describe( 'createServices', () => {
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledWith(
 			mwWindow.$,
-			'http://localhost/wiki/Special:EntityData',
+			specialEntityDataUrl,
 		);
+		expect( mockRepoRouter.getPageUrl ).toHaveBeenCalledWith( 'Special:EntityData' );
 		expect( services.get( 'readingEntityRepository' ) ).toBe( mockReadingEntityRepository );
 	} );
 
@@ -369,5 +384,22 @@ describe( 'createServices', () => {
 
 		expect( services.get( 'editAuthorizationChecker' ) )
 			.toBe( mockCombiningPermissionsRepository );
+	} );
+
+	it( 'creates RepoRouter', () => {
+		const wbRepo = {
+			scriptPath: '/w',
+			articlePath: '/wiki/$1',
+			url: 'http://localhost',
+		};
+		const mwWindow = mockMwWindow( {
+			wbRepo,
+		} );
+
+		const services = createServices( mwWindow, [] );
+
+		expect( services ).toBeInstanceOf( ServiceContainer );
+		expect( RepoRouter ).toHaveBeenCalledWith( wbRepo, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param );
+		expect( services.get( 'repoRouter' ) ).toBe( mockRepoRouter );
 	} );
 } );

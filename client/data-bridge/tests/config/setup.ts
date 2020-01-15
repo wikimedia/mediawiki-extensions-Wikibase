@@ -1,5 +1,8 @@
 import { config } from '@vue/test-utils';
 import MessageKeys from '@/definitions/MessageKeys';
+import Messages from '@/presentation/plugins/MessagesPlugin/Messages';
+import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
+import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 // Break on unhandled promise rejection (default warning might be overlooked)
 // https://github.com/facebook/jest/issues/3251#issuecomment-299183885
@@ -17,11 +20,22 @@ beforeEach( () => {
 	expect.hasAssertions();
 } );
 
-config.mocks!.$messages = {
-	KEYS: MessageKeys,
-	get: ( key: string ) => `<${key}>`,
-};
-
-config.mocks!.$bridgeConfig = {
-	usePublish: false,
+config.mocks = {
+	...config.mocks,
+	...{
+		$messages: {
+			KEYS: MessageKeys,
+			get: ( key: string ) => `<${key}>`,
+		},
+		$bridgeConfig: {
+			usePublish: false,
+		},
+		$repoRouter: {
+			getPageUrl: ( title, _params? ) => title,
+		},
+	} as {
+		$messages: Messages;
+		$bridgeConfig: BridgeConfig;
+		$repoRouter: MediaWikiRouter;
+	},
 };

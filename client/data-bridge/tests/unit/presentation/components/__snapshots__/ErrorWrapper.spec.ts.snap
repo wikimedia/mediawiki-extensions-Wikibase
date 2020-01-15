@@ -7,5 +7,22 @@ exports[`ErrorWrapper renders correctly 1`] = `
   <h1>
     An error occurred
   </h1>
+   
+  <p>
+    <a
+      href="Project:About"
+    >
+      About the repository
+    </a>
+    ,
+		
+    <a
+      href="Special:Log/protect"
+    >
+      An interesting protection history
+    </a>
+    .
+	
+  </p>
 </section>
 `;

@@ -89,6 +89,9 @@ function prepareTestEnv( options: {
 				getDir: jest.fn().mockReturnValue( 'ltr' ),
 			},
 		},
+		param( params: Record<string, unknown> ) {
+			return new URLSearchParams( params as Record<string, string> ).toString();
+		},
 	} as any;
 	( window as MwWindow ).mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
 		return {

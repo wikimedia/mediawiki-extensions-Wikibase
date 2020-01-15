@@ -88,6 +88,16 @@ services.set( 'editAuthorizationChecker', {
 	canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
 } );
 
+services.set( 'repoRouter', {
+	getPageUrl: ( title, params? ) => {
+		let url = `http://repo/${title}`;
+		if ( params ) {
+			url += '?' + new URLSearchParams( params as Record<string, string> ).toString();
+		}
+		return url;
+	},
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',

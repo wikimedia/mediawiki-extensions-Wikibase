@@ -32,4 +32,13 @@ extendVueEnvironment(
 	{
 		usePublish: true,
 	},
+	{
+		getPageUrl( title, params ) {
+			let url = `http://repo/${title}`;
+			if ( params ) {
+				url += '?' + new URLSearchParams( params ).toString();
+			}
+			return url;
+		},
+	},
 );

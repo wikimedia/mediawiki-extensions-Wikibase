@@ -44,6 +44,8 @@ export interface MwApi {
 
 export type MwTracker = ( topic: string, data?: unknown ) => void;
 
+export type MwUtilWikiUrlencode = ( string: string ) => string;
+
 interface MediaWiki {
 	loader: ResourceLoader;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message */
@@ -59,6 +61,10 @@ interface MediaWiki {
 	language: MwLanguage;
 	/** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw */
 	track: MwTracker;
+	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util */
+	util: {
+		wikiUrlencode: MwUtilWikiUrlencode;
+	};
 }
 
 interface Events {
