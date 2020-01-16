@@ -1,4 +1,4 @@
-# Libraries {#libraries}
+# Libraries
 
 Wikibase makes use of multiple PHP libraries which are installed via [composer](https://getcomposer.org/).
 

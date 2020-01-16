@@ -1,4 +1,4 @@
-# Usagetracking migration {#topic_usagetracking-migration}
+# Usagetracking migration
 
 This document describes the deployment process necessary for migrating from “naive” sitelink based dispatching and purging to the full usage tracking needed to support arbitrary access to entities from wikitext.
 

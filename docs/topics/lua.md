@@ -1,4 +1,4 @@
-# LUA {#topic_lua}
+# LUA
 
 Wikibase Client provides a Lua [Scribunto](https://www.mediawiki.org/wiki/Scribunto) interface that implements functions to access data from the Wikibase repository, if the Wikibase Client configuration enables `allowDataTransclusion`. Lua modules and wiki templates can invoke these functions.
 

@@ -1,6 +1,6 @@
-# Wikibase Lib {#components_lib}
+# Wikibase Lib
 
-The **lib** bundles common code that is used by both the @ref components_client and the @ref components_repo.
+The **lib** bundles common code that is used by both the @ref md_docs_components_client and the @ref md_docs_components_repo.
 
 ### Brief history of this extension
 

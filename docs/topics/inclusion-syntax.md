@@ -1,4 +1,4 @@
-# Inclusion Syntax {#topic_inclusion-syntax}
+# Inclusion Syntax
 
 This page describes the data inclusion syntax for the Wikibase client, by which the properties of data items can be included and rendered on a wiki page using templates.
 
@@ -30,4 +30,4 @@ To access properties of a different item, it has to be specified explicitly by Q
 {{#property:P17|from=Q64}}
 ```
 
-[LUA]: @ref topic_lua
+[LUA]: @ref md_docs_topics_lua

@@ -1,4 +1,4 @@
-# Wikibase Termbox v2 {#components_view_termbox}
+# Wikibase Termbox v2
 
 The Termbox v2 is developed on Wikimedia Gerrit in the [wikibase/termbox] repository.
 

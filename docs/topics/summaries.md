@@ -1,4 +1,4 @@
-# Summaries {#topic_summaries}
+# Summaries
 
 Wikibase uses “magic” edit summaries that can later be parsed and localized for display.
 This is done via the Format-Autocomment hook, handled by Summary::onFormat.

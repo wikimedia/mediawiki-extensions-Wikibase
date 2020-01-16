@@ -1,6 +1,6 @@
 This table contains one row per client wiki, with the following information:
 
-Part of the \ref topic_change-propagation system on a Repo.
+Part of the \ref md_docs_topics_change-propagation system on a Repo.
 
 **Fields:**
 

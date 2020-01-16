@@ -1,4 +1,4 @@
-# Wikibase DataBridge {#components_client_databridge}
+# Wikibase DataBridge
 
 The DataBridge is developed within the Wikibase.git repo.
 You can find the README for the component at @subpage md_client_data-bridge_README

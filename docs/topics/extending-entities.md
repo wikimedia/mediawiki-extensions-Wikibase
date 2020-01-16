@@ -1,4 +1,4 @@
-# Extending entities {#topic_extending-entities}
+# Extending entities
 
 This is a checklist of things that need doing when adding a new field to an existing entity type. For example if you want to add “NewThingy” part to entity type called “Foo”:
 

@@ -1,4 +1,4 @@
-# Entitytypes {#topic_entitytypes}
+# Entitytypes
 
 ## Abstract
 
@@ -67,7 +67,7 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-lookup-callback (client only)
 * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 
-Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref topic_hooks-php)
+Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 
 ## Programmatic Access
 

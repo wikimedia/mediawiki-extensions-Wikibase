@@ -1,4 +1,4 @@
-# Options {#topic_options}
+# Options
 
 This document describes the configuration of the Wikibase components.
 
@@ -40,7 +40,7 @@ EXAMPLE: ```[ 'commons', 'meta', 'wikidata' ]```
 
 ### Change Propagation
 
-See @ref topic_change-propagation
+See @ref md_docs_topics_change-propagation
 
 #### useChangesTable
 Whether to record changes in the database, so they can be pushed to clients.
@@ -312,7 +312,7 @@ DEFAULT: ```10```
 #### localClientDatabases {#client_localClientDatabases}
 An array of locally accessible client databases, for use by the dispatchChanges.php script.
 
-See @ref topic_change-propagation
+See @ref md_docs_topics_change-propagation
 This setting determines to which wikis changes are pushed directly.
 It must be given either as an associative array, mapping global site IDs to logical database names, or, of the database names are the same as the site IDs, as a list of databases.
 
@@ -724,7 +724,7 @@ DEFAULT: Everything in the Wikibase [siteLinkGroups] setting.
 Whether changes on the repository should be injected into this wiki's recent changes table, so they show up on watchlists, etc.
 
 Requires the dispatchChanges.php script to run, and this wiki to be listed in the [localClientDatabases] setting on the repository.
-See @ref topic_change-propagation
+See @ref md_docs_topics_change-propagation
 
 #### showExternalRecentChanges
 Whether changes on the repository should be displayed on Special:RecentChanges, Special:Watchlist, etc on the client wiki.

@@ -1,4 +1,4 @@
-# RDF binding {#topic_rdf-binding}
+# RDF binding
 
 Wikibase allows exporting data in RDF format. See details of the implementation in [RDF Dump Format](https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format)
 

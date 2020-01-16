@@ -1,4 +1,4 @@
-# Hooks PHP {#topic_hooks-php}
+# Hooks PHP
 
 This file describes hooks defined by the Wikibase extensions.
 
@@ -185,5 +185,5 @@ Parameters:
 [HookChangeTransmitter]: @ref Wikibase::Repo::Notifications::HookChangeTransmitter
 [OtherProjectsSidebarGenerator]: @ref Wikibase::Client::Hooks::OtherProjectsSidebarGenerator
 [ChangeHandler::handleChange()]: @ref Wikibase::Client::Changes::ChangeHandler::handleChange()
-[entitytypes documentation]: @ref topic_entitytypes
-[datatypes documentation]: @ref topic_datatypes
+[entitytypes documentation]: @ref md_docs_topics_entitytypes
+[datatypes documentation]: @ref md_docs_topics_datatypes
