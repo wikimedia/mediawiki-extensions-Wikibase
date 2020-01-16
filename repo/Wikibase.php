@@ -981,31 +981,28 @@ call_user_func( function() {
 		);
 	};
 	$wgSpecialPages['MergeItems'] = function() {
-		global $wgUser;
-
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new Wikibase\Repo\Specials\SpecialMergeItems(
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getExceptionLocalizer(),
-			new TokenCheckInteractor( $wgUser ),
+			new TokenCheckInteractor( RequestContext::getMain()->getUser() ),
 			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() ),
 			$wikibaseRepo->getEntityTitleLookup()
 		);
 	};
 	$wgSpecialPages['RedirectEntity'] = function() {
-		global $wgUser;
-
+		$user = RequestContext::getMain()->getUser();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new SpecialRedirectEntity(
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getExceptionLocalizer(),
 			new TokenCheckInteractor(
-				$wgUser
+				$user
 			),
 			$wikibaseRepo->newItemRedirectCreationInteractor(
-				$wgUser,
+				$user,
 				RequestContext::getMain()
 			)
 		);

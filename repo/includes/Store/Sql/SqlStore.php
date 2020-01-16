@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
+use RequestContext;
 use Revision;
 use Hooks;
 use Wikibase\DataAccess\EntitySource;
@@ -336,7 +337,7 @@ class SqlStore implements Store {
 			$page = WikiPage::newFromID( $pageRow->page_id );
 			$revision = Revision::newFromId( $pageRow->page_latest );
 			try {
-				$page->doEditUpdates( $revision, $GLOBALS['wgUser'] );
+				$page->doEditUpdates( $revision, RequestContext::getMain()->getUser() );
 			} catch ( DBQueryError $e ) {
 				wfLogWarning(
 					'editUpdateFailed for ' . $page->getId() . ' on revision ' .
