@@ -507,9 +507,12 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
 		}
 
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', false );
+
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$wikibaseRepo = new WikibaseRepo(
-			WikibaseRepo::getDefaultInstance()->getSettings(),
+			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
 			new RepositoryDefinitions(
@@ -521,6 +524,76 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				$entityTypeDefinitions
 			),
 			new EntitySourceDefinitions( [], $entityTypeDefinitions )
+		);
+
+		$enabled = $wikibaseRepo->getEnabledEntityTypes();
+		$this->assertContains( 'foo', $enabled );
+		$this->assertContains( 'bar', $enabled );
+		$this->assertContains( 'baz', $enabled );
+		$this->assertContains( 'lexeme', $enabled );
+		$this->assertContains( 'form', $enabled );
+	}
+
+	public function testGetEnabledEntityTypes_entitySourceBasedFederation() {
+		if ( !WikibaseSettings::isClientEnabled() ) {
+			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
+		}
+
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$irrelevantRepositoryDefinition = [ '' => [
+			'database' => null,
+			'base-uri' => null,
+			'prefix-mapping' => [ '' => '' ],
+			'entity-namespaces' => [],
+		] ];
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$irrelevantRepositoryDefinition,
+				$entityTypeDefinitions
+			),
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[
+						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
+					],
+					'',
+					'',
+					'',
+					''
+				),
+				new EntitySource(
+					'bazwiki',
+					'bazdb',
+					[
+						'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
+					],
+					'',
+					'baz',
+					'baz',
+					'bazwiki'
+				),
+				new EntitySource(
+					'lexemewiki',
+					'bazdb',
+					[
+						'lexeme' => [ 'namespaceId' => 280, 'slot' => 'main' ],
+					],
+					'',
+					'lex',
+					'lex',
+					'lexwiki'
+				)
+			], $entityTypeDefinitions )
 		);
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
