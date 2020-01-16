@@ -87,7 +87,7 @@ class ValidatorBuilders {
 	/**
 	 * @var array[]
 	 */
-	private $supportedEntityTypes;
+	private $legacyRepoBasedSupportedEntityTypes;
 
 	/**
 	 * @var MediaWikiPageNameNormalizer
@@ -117,7 +117,7 @@ class ValidatorBuilders {
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 * @param DataAccessSettings $dataAccessSettings
-	 * @param array $supportedEntityTypes map of repository names to lists of supported entity types
+	 * @param array $legacyRepoBasedSupportedEntityTypes map of repository names to lists of supported entity types
 	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	 * @param string $geoShapeStorageApiUrl
 	 * @param string $tabularDataStorageApiUrl
@@ -130,7 +130,7 @@ class ValidatorBuilders {
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
 		DataAccessSettings $dataAccessSettings,
-		array $supportedEntityTypes,
+		array $legacyRepoBasedSupportedEntityTypes,
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
 		$geoShapeStorageApiUrl,
 		$tabularDataStorageApiUrl
@@ -142,7 +142,7 @@ class ValidatorBuilders {
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 		$this->dataAccessSettings = $dataAccessSettings;
-		$this->supportedEntityTypes = $supportedEntityTypes;
+		$this->legacyRepoBasedSupportedEntityTypes = $legacyRepoBasedSupportedEntityTypes;
 		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
 		$this->geoShapeStorageApiUrl = $geoShapeStorageApiUrl;
 		$this->tabularDataStorageApiUrl = $tabularDataStorageApiUrl;
@@ -187,7 +187,7 @@ class ValidatorBuilders {
 
 		return [
 			$typeValidator,
-			new ForeignEntityValidator( $this->supportedEntityTypes ),
+			new ForeignEntityValidator( $this->legacyRepoBasedSupportedEntityTypes ),
 			$entityExistsValidator,
 		];
 	}
