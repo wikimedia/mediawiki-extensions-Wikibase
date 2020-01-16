@@ -88,6 +88,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\DispatchingEntityTypeStatementGrouper' => __DIR__ . '/includes/DispatchingEntityTypeStatementGrouper.php',
 	'Wikibase\\Repo\\EntityIdHtmlLinkFormatterFactory' => __DIR__ . '/includes/EntityIdHtmlLinkFormatterFactory.php',
 	'Wikibase\\Repo\\EntityIdLabelFormatterFactory' => __DIR__ . '/includes/EntityIdLabelFormatterFactory.php',
+	'Wikibase\\Repo\\EntitySourceDefinitionsLegacyRepoSettingsParser' => __DIR__ . '/includes/EntitySourceDefinitionsLegacyRepoSettingsParser.php',
 	'Wikibase\\Repo\\FingerprintSearchTextGenerator' => __DIR__ . '/includes/FingerprintSearchTextGenerator.php',
 	'Wikibase\\Repo\\GenericEventDispatcher' => __DIR__ . '/includes/GenericEventDispatcher.php',
 	'Wikibase\\Repo\\ItemSearchTextGenerator' => __DIR__ . '/includes/ItemSearchTextGenerator.php',
