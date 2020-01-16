@@ -14850,8 +14850,8 @@ function () {
 var PageNotEditable;
 
 (function (PageNotEditable) {
-  PageNotEditable["BLOCKED_ON_PAGE"] = "blocked_on_client_page";
-  PageNotEditable["BLOCKED_ON_ITEM"] = "blocked_on_repo_item";
+  PageNotEditable["BLOCKED_ON_CLIENT_PAGE"] = "blocked_on_client_page";
+  PageNotEditable["BLOCKED_ON_REPO_ITEM"] = "blocked_on_repo_item";
   PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
   PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
   PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
@@ -14953,7 +14953,7 @@ function () {
 
         case PermissionErrorType.BLOCKED:
           return {
-            type: PageNotEditable.BLOCKED_ON_ITEM,
+            type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
             info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable(repoError.blockinfo)
           };
 
@@ -14978,7 +14978,7 @@ function () {
 
         case PermissionErrorType.BLOCKED:
           return {
-            type: PageNotEditable.BLOCKED_ON_PAGE,
+            type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
             info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable(clientError.blockinfo)
           };
 
