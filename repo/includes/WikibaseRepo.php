@@ -1234,6 +1234,10 @@ class WikibaseRepo {
 	private function getVocabularyBaseUri() {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			return $this->getLocalEntitySource()->getConceptBaseUri();
+		}
+
 		return $this->settings->getSetting( 'conceptBaseUri' );
 	}
 
