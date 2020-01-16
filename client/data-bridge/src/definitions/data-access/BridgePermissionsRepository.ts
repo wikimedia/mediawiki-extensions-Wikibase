@@ -28,9 +28,18 @@ export interface BlockReason extends ApplicationErrorBase {
 
 export interface ProtectedReason extends ApplicationErrorBase {
 	type: typeof PageNotEditable.ITEM_FULLY_PROTECTED
-	| typeof PageNotEditable.ITEM_SEMI_PROTECTED
-	| typeof PageNotEditable.ITEM_CASCADE_PROTECTED
+	| typeof PageNotEditable.ITEM_SEMI_PROTECTED;
+	info: {
+		right: string;
+	};
+}
+
+export interface CascadeProtectedReason extends ApplicationErrorBase {
+	type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED
 	| typeof PageNotEditable.PAGE_CASCADE_PROTECTED;
+	info: {
+		pages: string[];
+	};
 }
 
 export interface UnknownReason extends ApplicationErrorBase {
@@ -42,7 +51,7 @@ export interface UnknownReason extends ApplicationErrorBase {
 	};
 }
 
-export type MissingPermissionsError = BlockReason | ProtectedReason | UnknownReason;
+export type MissingPermissionsError = BlockReason | ProtectedReason | CascadeProtectedReason | UnknownReason;
 
 /**
  * A repository for determining potential permission errors when using the Data Bridge.
