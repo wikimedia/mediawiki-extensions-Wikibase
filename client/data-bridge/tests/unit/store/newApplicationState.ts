@@ -11,6 +11,7 @@ export default function ( fields?: any ): Application {
 		applicationErrors: [],
 		wikibaseRepoConfiguration: null,
 		editDecision: null,
+		entityTitle: '',
 	};
 
 	if ( fields !== null ) {

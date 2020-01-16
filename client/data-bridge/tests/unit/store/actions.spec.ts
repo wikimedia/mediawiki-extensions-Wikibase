@@ -27,6 +27,7 @@ import {
 	ORIGINAL_STATEMENT_SET,
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
+	ENTITY_TITLE_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -61,6 +62,7 @@ jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
 describe( 'root/actions', () => {
 	const defaultEntityId = 'Q32';
 	const defaultPropertyId = 'P71';
+	const defaultEntityTitle = 'Entity Title';
 	const entityLabelRepository = {
 		getLabel: jest.fn( () => Promise.resolve() ),
 	};
@@ -136,6 +138,7 @@ describe( 'root/actions', () => {
 				editFlow,
 				propertyId: defaultPropertyId,
 				entityId: defaultEntityId,
+				entityTitle: defaultEntityTitle,
 			};
 
 			return initAction()( context, information ).then( () => {
@@ -154,12 +157,32 @@ describe( 'root/actions', () => {
 				editFlow: EditFlow.OVERWRITE,
 				propertyId,
 				entityId: defaultEntityId,
+				entityTitle: defaultEntityTitle,
 			};
 
 			return initAction()( context, information ).then( () => {
 				expect( context.commit ).toHaveBeenCalledWith(
 					PROPERTY_TARGET_SET,
 					propertyId,
+				);
+			} );
+		} );
+
+		it( `commits to ${ENTITY_TITLE_SET}`, () => {
+			const entityTitle = 'Douglas Adams';
+			const context = mockedStore();
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: defaultPropertyId,
+				entityId: defaultEntityId,
+				entityTitle,
+			};
+
+			return initAction()( context, information ).then( () => {
+				expect( context.commit ).toHaveBeenCalledWith(
+					ENTITY_TITLE_SET,
+					entityTitle,
 				);
 			} );
 		} );

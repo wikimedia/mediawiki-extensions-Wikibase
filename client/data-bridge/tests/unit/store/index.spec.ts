@@ -9,5 +9,6 @@ describe( 'store/index', () => {
 		expect( store.state.targetProperty ).toBe( '' );
 		expect( store.state.editFlow ).toBe( '' );
 		expect( store.state.editDecision ).toBeNull();
+		expect( store.state.entityTitle ).toBe( '' );
 	} );
 } );

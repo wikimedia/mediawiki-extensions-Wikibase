@@ -12,6 +12,7 @@ import {
 	ORIGINAL_STATEMENT_SET,
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
+	ENTITY_TITLE_SET,
 } from '@/store/mutationTypes';
 import newApplicationState from './newApplicationState';
 
@@ -79,5 +80,12 @@ describe( 'root/mutations', () => {
 		const editDecision = EditDecision.REPLACE;
 		mutations[ EDITDECISION_SET ]( store, editDecision );
 		expect( store.editDecision ).toBe( editDecision );
+	} );
+
+	it( 'sets the entity title of the store', () => {
+		const store: Application = newApplicationState();
+		const entityTitle = 'Entity title';
+		mutations[ ENTITY_TITLE_SET ]( store, entityTitle );
+		expect( store.entityTitle ).toBe( entityTitle );
 	} );
 } );
