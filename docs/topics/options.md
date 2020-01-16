@@ -443,7 +443,7 @@ $wgWBRepoSettings['statementSections'] = [
 	],
 ];
 ```
-This configuration requires you to define `wikibase-statementsection-identifiers` message, otherwise rendering items will be broken.
+Section configurations other than "statements" and "identifiers" require you to define `wikibase-statementsection-*` messages for section headings to be rendered correctly.
 
 DEFAULT: ```[]```
 

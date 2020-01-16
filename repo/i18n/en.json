@@ -74,6 +74,7 @@
 	"wikibase-label-input-help-message": "Enter the label of this entity in $1.",
 	"wikibase-entitytermsview-input-help-message": "Enter a label of this entity, a short description and aliases per language.",
 	"wikibase-statementsection-statements": "Statements",
+	"wikibase-statementsection-identifiers": "Identifiers",
 	"wikibase-sitelinks": "Sitelinks",
 	"wikibase-sitelinkgroupview-input-help-message": "Add a sitelink by specifying a site and a page of that site, edit or remove existing sitelinks.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entry|entries}}",
