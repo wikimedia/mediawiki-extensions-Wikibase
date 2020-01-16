@@ -25,6 +25,7 @@ import {
 	TARGET_LABEL_SET,
 	ORIGINAL_STATEMENT_SET,
 	EDITDECISION_SET,
+	ENTITY_TITLE_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -82,6 +83,7 @@ export default function actions(
 		): Promise<void> {
 			context.commit( EDITFLOW_SET, information.editFlow );
 			context.commit( PROPERTY_TARGET_SET, information.propertyId );
+			context.commit( ENTITY_TITLE_SET, information.entityTitle );
 
 			entityLabelRepository.getLabel( information.propertyId )
 				.then( ( label: Term ) => {

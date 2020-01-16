@@ -10,6 +10,7 @@ import {
 	ORIGINAL_STATEMENT_SET,
 	APPLICATION_ERRORS_ADD,
 	EDITDECISION_SET,
+	ENTITY_TITLE_SET,
 } from '@/store/mutationTypes';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
@@ -43,5 +44,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ EDITDECISION_SET ]( state: Application, editDecision: EditDecision ): void {
 		state.editDecision = editDecision;
+	},
+
+	[ ENTITY_TITLE_SET ]( state: Application, entityTitle: string ): void {
+		state.entityTitle = entityTitle;
 	},
 };

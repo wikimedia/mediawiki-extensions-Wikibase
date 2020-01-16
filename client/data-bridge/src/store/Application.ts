@@ -18,6 +18,7 @@ interface Application {
 	applicationErrors: ApplicationError[];
 	wikibaseRepoConfiguration: WikibaseRepoConfiguration|null;
 	editDecision: EditDecision|null;
+	entityTitle: string;
 }
 
 export default Application;

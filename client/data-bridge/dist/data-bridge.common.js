@@ -12855,6 +12855,7 @@ var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
 var ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
 var APPLICATION_ERRORS_ADD = 'addApplicationErrors';
 var EDITDECISION_SET = 'setEditDecision';
+var ENTITY_TITLE_SET = 'setEntityTitle';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -12952,6 +12953,7 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDa
   return _ref3 = {}, _defineProperty(_ref3, BRIDGE_INIT, function (context, information) {
     context.commit(EDITFLOW_SET, information.editFlow);
     context.commit(PROPERTY_TARGET_SET, information.propertyId);
+    context.commit(ENTITY_TITLE_SET, information.entityTitle);
     entityLabelRepository.getLabel(information.propertyId).then(function (label) {
       context.commit(TARGET_LABEL_SET, label);
     }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
@@ -13173,6 +13175,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, PROPERTY_TARGET_SE
   (_state$applicationErr = state.applicationErrors).push.apply(_state$applicationErr, _toConsumableArray(errors));
 }), _defineProperty(_mutations, EDITDECISION_SET, function (state, editDecision) {
   state.editDecision = editDecision;
+}), _defineProperty(_mutations, ENTITY_TITLE_SET, function (state, entityTitle) {
+  state.entityTitle = entityTitle;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
 var ENTITY_UPDATE = 'updateEntity';
@@ -13502,7 +13506,8 @@ function createStore(services) {
     applicationStatus: definitions_ApplicationStatus.INITIALIZING,
     applicationErrors: [],
     wikibaseRepoConfiguration: null,
-    editDecision: null
+    editDecision: null,
+    entityTitle: ''
   };
   var storeBundle = {
     state: state,
