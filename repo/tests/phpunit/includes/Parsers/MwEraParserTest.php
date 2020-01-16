@@ -53,7 +53,7 @@ class MwEraParserTest extends StringValueParserTest {
 	}
 
 	private function getLanguage( $code ) {
-		$lang = $this->getMock( Language::class );
+		$lang = $this->createMock( Language::class );
 
 		$lang->method( 'getCode' )
 			->will( $this->returnValue( $code ) );
