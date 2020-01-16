@@ -123,7 +123,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			mockPermissionErrorsRepository(),
 		);
 		const expected: BlockReason = {
-			type: PageNotEditable.BLOCKED_ON_ITEM,
+			type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
 			info: {
 				blockId: 456,
 				blockedBy: 'ServerAdmin',
@@ -224,7 +224,7 @@ describe( 'CombiningPermissionsRepository', () => {
 		);
 
 		const expected: BlockReason = {
-			type: PageNotEditable.BLOCKED_ON_PAGE,
+			type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
 			info: {
 				blockId: 456,
 				blockedBy: 'ServerAdmin',

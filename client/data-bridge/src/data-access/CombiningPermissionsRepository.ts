@@ -62,7 +62,7 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 				};
 			case PermissionErrorType.BLOCKED:
 				return {
-					type: PageNotEditable.BLOCKED_ON_ITEM,
+					type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
 					info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable( repoError.blockinfo ),
 				};
 			case PermissionErrorType.UNKNOWN:
@@ -83,7 +83,7 @@ export default class CombiningPermissionsRepository implements BridgePermissions
 				};
 			case PermissionErrorType.BLOCKED:
 				return {
-					type: PageNotEditable.BLOCKED_ON_PAGE,
+					type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
 					info: this.mapBlockInfoFromPermissionErrorTypeToPageNotEditable( clientError.blockinfo ),
 				};
 			case PermissionErrorType.UNKNOWN:

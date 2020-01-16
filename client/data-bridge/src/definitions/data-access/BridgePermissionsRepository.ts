@@ -1,8 +1,8 @@
 import { ApplicationErrorBase } from '@/definitions/ApplicationError';
 
 export enum PageNotEditable {
-	BLOCKED_ON_PAGE = 'blocked_on_client_page',
-	BLOCKED_ON_ITEM = 'blocked_on_repo_item',
+	BLOCKED_ON_CLIENT_PAGE = 'blocked_on_client_page',
+	BLOCKED_ON_REPO_ITEM = 'blocked_on_repo_item',
 	PAGE_CASCADE_PROTECTED = 'cascadeprotected_on_client_page',
 	ITEM_FULLY_PROTECTED = 'protectedpage',
 	ITEM_SEMI_PROTECTED = 'semiprotectedpage',
@@ -22,7 +22,7 @@ export interface BlockInfo {
 }
 
 export interface BlockReason extends ApplicationErrorBase {
-	type: typeof PageNotEditable.BLOCKED_ON_ITEM | typeof PageNotEditable.BLOCKED_ON_PAGE;
+	type: typeof PageNotEditable.BLOCKED_ON_REPO_ITEM | typeof PageNotEditable.BLOCKED_ON_CLIENT_PAGE;
 	info: BlockInfo;
 }
 
