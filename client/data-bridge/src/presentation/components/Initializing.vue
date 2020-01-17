@@ -18,6 +18,11 @@ import Component from 'vue-class-component';
 import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 
 /**
+ * A component which gets shown to illustrate that an operation is
+ * ongoing which temporarily does not allow user interaction.
+ *
+ * Depending on the run time of the operation an animation is shown.
+ *
  * This
  *
  * * shows the default slot if `isInitializing` is false (= ready)
@@ -58,17 +63,17 @@ export default class Initializing extends Vue {
 	private readonly isInitializing!: boolean;
 
 	/**
-	 * Number of milliseconds before the initializing is considered "slow"
+	 * Number of *milliseconds* before the initializing is considered "slow"
 	 * and is illustrated accordingly.
 	 */
-	@Prop( { default: 1000 } ) // in ms
+	@Prop( { default: 1000 } )
 	private readonly TIME_UNTIL_CONSIDERED_SLOW!: number;
 
 	/**
-	 * Number of milliseconds to show the loading animation at least for,
+	 * Number of *milliseconds* to show the loading animation at least for,
 	 * to avoid the impression "flickering".
 	 */
-	@Prop( { default: 500 } ) // in ms
+	@Prop( { default: 500 } )
 	private readonly MINIMUM_TIME_OF_PROGRESS_ANIMATION!: number;
 
 	@Watch( 'isInitializing', { immediate: true } )

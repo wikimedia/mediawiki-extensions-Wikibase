@@ -26,6 +26,10 @@ import {
 } from 'vue-property-decorator';
 import Component from 'vue-class-component';
 
+/**
+ * A component used to illustrate permission errors which happened when
+ * checking the user's authorization to perform an action.
+ */
 @Component
 export default class ErrorPermissionInfo extends Vue {
 	public infoIsExpanded = false;

@@ -12478,12 +12478,12 @@ var DataBridge_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_DataBridge = (DataBridge_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=4cf4836f&
-var Initializingvue_type_template_id_4cf4836f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[(_vm.ready)?_vm._t("default"):[(_vm.loadingIsSlow)?_c('IndeterminateProgressBar'):_vm._e()]],2)}
-var Initializingvue_type_template_id_4cf4836f_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
+var Initializingvue_type_template_id_5903a292_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[(_vm.ready)?_vm._t("default"):[(_vm.loadingIsSlow)?_c('IndeterminateProgressBar'):_vm._e()]],2)}
+var Initializingvue_type_template_id_5903a292_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=4cf4836f&
+// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
 
@@ -12496,6 +12496,11 @@ var Initializingvue_type_template_id_4cf4836f_staticRenderFns = []
 
 
 /**
+ * A component which gets shown to illustrate that an operation is
+ * ongoing which temporarily does not allow user interaction.
+ *
+ * Depending on the run time of the operation an animation is shown.
+ *
  * This
  *
  * * shows the default slot if `isInitializing` is false (= ready)
@@ -12528,6 +12533,11 @@ function (_Vue) {
   _inherits(Initializing, _Vue);
 
   /**
+   * A component which gets shown to illustrate that an operation is
+   * ongoing which temporarily does not allow user interaction.
+   *
+   * Depending on the run time of the operation an animation is shown.
+   *
    * This
    *
    * * shows the default slot if `isInitializing` is false (= ready)
@@ -12626,13 +12636,11 @@ __decorate([Object(vue_property_decorator["Prop"])({
 
 __decorate([Object(vue_property_decorator["Prop"])({
   default: 1000
-}) // in ms
-], Initializingvue_type_script_lang_ts_Initializing.prototype, "TIME_UNTIL_CONSIDERED_SLOW", void 0);
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "TIME_UNTIL_CONSIDERED_SLOW", void 0);
 
 __decorate([Object(vue_property_decorator["Prop"])({
   default: 500
-}) // in ms
-], Initializingvue_type_script_lang_ts_Initializing.prototype, "MINIMUM_TIME_OF_PROGRESS_ANIMATION", void 0);
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "MINIMUM_TIME_OF_PROGRESS_ANIMATION", void 0);
 
 __decorate([Object(vue_property_decorator["Watch"])('isInitializing', {
   immediate: true
@@ -12656,8 +12664,8 @@ Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_compone
 
 var Initializing_component = normalizeComponent(
   components_Initializingvue_type_script_lang_ts_,
-  Initializingvue_type_template_id_4cf4836f_render,
-  Initializingvue_type_template_id_4cf4836f_staticRenderFns,
+  Initializingvue_type_template_id_5903a292_render,
+  Initializingvue_type_template_id_5903a292_staticRenderFns,
   false,
   null,
   null,
@@ -12760,14 +12768,14 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=46b342b7&
-var ErrorPermissionInfovue_type_template_id_46b342b7_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-permission-info-box"},[_c('div',{staticClass:"wb-ui-permission-info-box__info__icon"},[_c('div',{staticClass:"wb-ui-permission-info-box__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}})]),_c('div',{staticClass:"wb-ui-permission-info-box__body"},[_c('div',{class:[ _vm.infoIsExpanded ?
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=17dc1742&
+var ErrorPermissionInfovue_type_template_id_17dc1742_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-permission-info-box"},[_c('div',{staticClass:"wb-ui-permission-info-box__info__icon"},[_c('div',{staticClass:"wb-ui-permission-info-box__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}})]),_c('div',{staticClass:"wb-ui-permission-info-box__body"},[_c('div',{class:[ _vm.infoIsExpanded ?
 				'wb-ui-permission-info-box__icon--collapsed' :
 				'wb-ui-permission-info-box__icon--expanded' ],on:{"click":_vm.toggleInfo}},[_c('a',{staticClass:"wb-ui-permission-info-box__body__title"},[_vm._v("\n\t\t\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t\t\t")])]),(_vm.infoIsExpanded)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])])}
-var ErrorPermissionInfovue_type_template_id_46b342b7_staticRenderFns = []
+var ErrorPermissionInfovue_type_template_id_17dc1742_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=46b342b7&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=17dc1742&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
 
@@ -12778,12 +12786,20 @@ var ErrorPermissionInfovue_type_template_id_46b342b7_staticRenderFns = []
 
 
 
+/**
+ * A component used to illustrate permission errors which happened when
+ * checking the user's authorization to perform an action.
+ */
 
 var ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo =
 /*#__PURE__*/
 function (_Vue) {
   _inherits(ErrorPermissionInfo, _Vue);
 
+  /**
+   * A component used to illustrate permission errors which happened when
+   * checking the user's authorization to perform an action.
+   */
   function ErrorPermissionInfo() {
     var _this;
 
@@ -12830,8 +12846,8 @@ var ErrorPermissionInfovue_type_style_index_0_lang_scss_ = __webpack_require__("
 
 var ErrorPermissionInfo_component = normalizeComponent(
   components_ErrorPermissionInfovue_type_script_lang_ts_,
-  ErrorPermissionInfovue_type_template_id_46b342b7_render,
-  ErrorPermissionInfovue_type_template_id_46b342b7_staticRenderFns,
+  ErrorPermissionInfovue_type_template_id_17dc1742_render,
+  ErrorPermissionInfovue_type_template_id_17dc1742_staticRenderFns,
   false,
   null,
   null,
@@ -13035,12 +13051,12 @@ var ErrorPermission_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=35f4329a&
-var ErrorUnknownvue_type_template_id_35f4329a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
-var ErrorUnknownvue_type_template_id_35f4329a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
+var ErrorUnknownvue_type_template_id_4b32f9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
+var ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=35f4329a&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
 
@@ -13051,8 +13067,8 @@ var ErrorUnknownvue_type_template_id_35f4329a_staticRenderFns = []
 
 
 /**
- * Component which gets shown if no dedicated handling for the type of error
- * which happened is configured.
+ * A component which gets shown if no dedicated handling for the type of
+ * error which happened is configured.
  */
 
 var ErrorUnknownvue_type_script_lang_ts_ErrorUnknown =
@@ -13083,8 +13099,8 @@ ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_compone
 
 var ErrorUnknown_component = normalizeComponent(
   components_ErrorUnknownvue_type_script_lang_ts_,
-  ErrorUnknownvue_type_template_id_35f4329a_render,
-  ErrorUnknownvue_type_template_id_35f4329a_staticRenderFns,
+  ErrorUnknownvue_type_template_id_4b32f9a4_render,
+  ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns,
   false,
   null,
   null,
@@ -13206,12 +13222,12 @@ var ErrorStatus;
 var ApplicationStatus = _objectSpread({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=0c82f2ee&
-var ProcessDialogHeadervue_type_template_id_0c82f2ee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("primaryAction",[_c('div')])],2)}
-var ProcessDialogHeadervue_type_template_id_0c82f2ee_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
+var ProcessDialogHeadervue_type_template_id_07f39cc0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("primaryAction",[_c('div')])],2)}
+var ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=0c82f2ee&
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
 
@@ -13222,6 +13238,11 @@ var ProcessDialogHeadervue_type_template_id_0c82f2ee_staticRenderFns = []
 
 
 
+/**
+ * A component to be used as header of dialogs in which users make their
+ * way through a process - i.e. there is a primary action "forward" and
+ * an alternative second one.
+ */
 
 var ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader =
 /*#__PURE__*/
@@ -13260,8 +13281,8 @@ var ProcessDialogHeadervue_type_style_index_0_lang_scss_ = __webpack_require__("
 
 var ProcessDialogHeader_component = normalizeComponent(
   components_ProcessDialogHeadervue_type_script_lang_ts_,
-  ProcessDialogHeadervue_type_template_id_0c82f2ee_render,
-  ProcessDialogHeadervue_type_template_id_0c82f2ee_staticRenderFns,
+  ProcessDialogHeadervue_type_template_id_07f39cc0_render,
+  ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns,
   false,
   null,
   null,
