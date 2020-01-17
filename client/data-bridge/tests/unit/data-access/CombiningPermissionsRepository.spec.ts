@@ -10,6 +10,7 @@ import PageEditPermissionErrorsRepository, {
 } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
 import {
 	BlockReason,
+	CascadeProtectedReason,
 	PageNotEditable,
 	ProtectedReason,
 	UnknownReason,
@@ -96,7 +97,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			mockPermissionErrorsRepository(),
 		);
 
-		const expected: ProtectedReason = {
+		const expected: CascadeProtectedReason = {
 			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
 			info: { pages },
 		};
@@ -176,7 +177,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			mockPermissionErrorsRepository( [ error ] ),
 		);
 
-		const expected: ProtectedReason = {
+		const expected: CascadeProtectedReason = {
 			type: PageNotEditable.PAGE_CASCADE_PROTECTED,
 			info: { pages },
 		};
@@ -295,7 +296,7 @@ describe( 'CombiningPermissionsRepository', () => {
 			mockPermissionErrorsRepository( [ clientError1, clientError2 ] ),
 		);
 
-		const expected: [ProtectedReason, ProtectedReason, ProtectedReason, UnknownReason] = [
+		const expected: [ProtectedReason, CascadeProtectedReason, CascadeProtectedReason, UnknownReason] = [
 			{
 				type: PageNotEditable.ITEM_FULLY_PROTECTED,
 				info: { right },

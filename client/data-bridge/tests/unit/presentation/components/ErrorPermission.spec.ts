@@ -6,6 +6,7 @@ import {
 	ProtectedReason,
 	BlockReason,
 	UnknownReason,
+	CascadeProtectedReason,
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
@@ -41,6 +42,9 @@ describe( 'ErrorPermission', () => {
 		} );
 		const error: ProtectedReason = {
 			type: PageNotEditable.ITEM_FULLY_PROTECTED,
+			info: {
+				right: '',
+			},
 		};
 		const permissionErrors: MissingPermissionsError[] = [ error ];
 		const wrapper = shallowMount( ErrorPermission, {
@@ -77,6 +81,9 @@ describe( 'ErrorPermission', () => {
 		} );
 		const errorProtected: ProtectedReason = {
 			type: PageNotEditable.ITEM_FULLY_PROTECTED,
+			info: {
+				right: '',
+			},
 		};
 		const errorBlockedOnRepo: BlockReason = {
 			type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
@@ -214,7 +221,10 @@ describe( 'ErrorPermission', () => {
 		[
 			{
 				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
-			} as ProtectedReason,
+				info: {
+					pages: [],
+				},
+			} as CascadeProtectedReason,
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
 			[ ],
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
@@ -228,7 +238,10 @@ describe( 'ErrorPermission', () => {
 		[
 			{
 				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
-			} as ProtectedReason,
+				info: {
+					pages: [],
+				},
+			} as CascadeProtectedReason,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
 			[ ],
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,

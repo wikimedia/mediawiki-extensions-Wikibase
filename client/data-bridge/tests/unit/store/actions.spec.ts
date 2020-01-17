@@ -223,6 +223,7 @@ describe( 'root/actions', () => {
 			const permissionErrors: MissingPermissionsError[] = [
 				{
 					type: PageNotEditable.ITEM_SEMI_PROTECTED,
+					info: { right: 'editsemiprotected' },
 				},
 			];
 			const editAuthorizationChecker: BridgePermissionsRepository = {
@@ -473,6 +474,7 @@ describe( 'root/actions', () => {
 			const permissionErrors: MissingPermissionsError[] = [
 				{
 					type: PageNotEditable.ITEM_SEMI_PROTECTED,
+					info: { right: 'editsemiprotected' },
 				},
 			];
 			const editAuthorizationChecker: BridgePermissionsRepository = {

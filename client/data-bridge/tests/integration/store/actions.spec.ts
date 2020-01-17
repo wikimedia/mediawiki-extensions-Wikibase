@@ -233,6 +233,7 @@ describe( 'store/actions', () => {
 					canUseBridgeForItemAndPage: () => Promise.resolve( [
 						{
 							type: PageNotEditable.ITEM_SEMI_PROTECTED,
+							info: { right: 'editsemiprotected' },
 						},
 					] ),
 				} );
