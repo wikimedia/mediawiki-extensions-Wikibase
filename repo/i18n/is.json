@@ -65,6 +65,7 @@
 	"wikibase-label-input-help-message": "Sláðu inn merkimiða fyrir þessa einingu á $1.",
 	"wikibase-entitytermsview-input-help-message": "Sláðu inn merkimiða fyrir þessa einingu, stutta lýsingu og samnefni fyrir hvert tungumál.",
 	"wikibase-statementsection-statements": "Staðhæfingar",
+	"wikibase-statementsection-identifiers": "Kennistrengir",
 	"wikibase-sitelinks": "Vefsíðutenglar",
 	"wikibase-sitelinkgroupview-input-help-message": "Bættu vefsvæðis tengli við með því að tilgreina vefsvæði og síðu þess vefsvæðis, breyttu eða fjarlægðu vefsvæðis tenglum sem til eru fyrir.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|færsla|færslur}}",

@@ -74,6 +74,7 @@
 	"wikibase-label-input-help-message": "Въведете етикета на тази единица на $1.",
 	"wikibase-entitytermsview-input-help-message": "Въведете етикет на обекта, кратко описание и псевдоними за съответния език.",
 	"wikibase-statementsection-statements": "Изявления",
+	"wikibase-statementsection-identifiers": "Идентификатори",
 	"wikibase-sitelinks": "Уики връзки",
 	"wikibase-sitelinkgroupview-input-help-message": "Добавете уики връзка, като укажете сайт и страницата от него, редактирате или премахнете съществуващите.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запис|записа}}",

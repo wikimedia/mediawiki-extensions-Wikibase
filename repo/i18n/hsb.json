@@ -56,6 +56,7 @@
 	"wikibase-alias-edit-placeholder": "alias zapodać",
 	"wikibase-label-input-help-message": "Zapodaj mjeno tuteje datoweje sadźby ($1).",
 	"wikibase-statementsection-statements": "Wuprajenja",
+	"wikibase-statementsection-identifiers": "Identifikatory",
 	"wikibase-sitelinks": "Lisćina stronow, kotrež su z tutym elementom zwjazane",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|zapisk|zapiskaj|zapiski|zapiskow}}",
 	"wikibase-sitelinks-empty": "Dotal žadyn wotkaz sydła za tutón element njeje.",

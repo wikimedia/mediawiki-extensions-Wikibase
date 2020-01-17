@@ -78,6 +78,7 @@
 	"wikibase-label-input-help-message": "Introduza o rótulo desta entidade em $1.",
 	"wikibase-entitytermsview-input-help-message": "Insira um rótulo para esta entidade, uma descrição breve e nomes alternativos por língua.",
 	"wikibase-statementsection-statements": "Declarações",
+	"wikibase-statementsection-identifiers": "Identificadores",
 	"wikibase-sitelinks": "Hiperligações intersites",
 	"wikibase-sitelinkgroupview-input-help-message": "Adicionar uma hiperligação intersítios, especificando o sítio e uma página dele, editar ou remover hiperligações intersítios existentes.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entradas}}",

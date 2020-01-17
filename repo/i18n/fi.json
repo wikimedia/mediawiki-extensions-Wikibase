@@ -80,6 +80,7 @@
 	"wikibase-alias-edit-placeholder": "kirjoita alias",
 	"wikibase-label-input-help-message": "Kirjoita tämän aiheen nimi kielellä $1.",
 	"wikibase-statementsection-statements": "Esitykset",
+	"wikibase-statementsection-identifiers": "Tunnisteet",
 	"wikibase-sitelinks": "Sivuston linkit",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|linkki|linkkiä}}",
 	"wikibase-sitelinks-empty": "Tässä kohteessa ei ole sivua linkitettynä.",

@@ -75,6 +75,7 @@
 	"wikibase-label-input-help-message": "נא להזין את התווית של הישות הזאת ב{{GRAMMAR:תחילית|$1}}.",
 	"wikibase-entitytermsview-input-help-message": "נא להזין את התווית של הישות הזאת, תיאור קצר וכינויים לפי שפה.",
 	"wikibase-statementsection-statements": "קביעוֹת",
+	"wikibase-statementsection-identifiers": "מזהים",
 	"wikibase-sitelinks": "קישורי אתר",
 	"wikibase-sitelinkgroupview-input-help-message": "הוספת קישור אתר על־ידי ציון אתר ודף באותו האתר, עריכה או הסרה של קישורי אתר קיימים.",
 	"wikibase-sitelinks-counter": "{{PLURAL:$1|רשומה אחת|$1 רשומות}}",

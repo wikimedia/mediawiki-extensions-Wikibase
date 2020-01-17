@@ -89,6 +89,7 @@
 	"wikibase-label-input-help-message": "Geef het label van deze entiteit op in $1.",
 	"wikibase-entitytermsview-input-help-message": "Een label voor deze entiteit, een korte beschrijving en aliassen per taal invoeren.",
 	"wikibase-statementsection-statements": "Verklaringen",
+	"wikibase-statementsection-identifiers": "Identificatiecodes",
 	"wikibase-sitelinks": "Sitekoppelingen",
 	"wikibase-sitelinkgroupview-input-help-message": "Voeg een sitelink toe door een site en een pagina op die site op te geven, bewerk of verwijder bestaande sitelinks.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|item|items}}",

@@ -69,6 +69,7 @@
 	"wikibase-label-input-help-message": "Унесите ознаку ове ентитета на $1.",
 	"wikibase-entitytermsview-input-help-message": "Унесите ознаку овог ентитета, кратак опис и псеудониме, према језику.",
 	"wikibase-statementsection-statements": "Изјаве",
+	"wikibase-statementsection-identifiers": "Идентификатори",
 	"wikibase-sitelinks": "Везе до сајтова",
 	"wikibase-sitelinkgroupview-input-help-message": "Додајте везу ка сајту навођењем сајта и странице на њему, те измените или уклоните постојеће везе ка сајтовима.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|унос|уноса}}",

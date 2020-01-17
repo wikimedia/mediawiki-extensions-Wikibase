@@ -85,6 +85,7 @@
 	"wikibase-label-input-help-message": "Bu varlığın etiketini $1 dilinde girin.",
 	"wikibase-entitytermsview-input-help-message": "Bu varlığa dilin başına eklenecek kısa bir tanım ve etiket girin.",
 	"wikibase-statementsection-statements": "İfadeler",
+	"wikibase-statementsection-identifiers": "Tanımlayıcılar",
 	"wikibase-sitelinks": "Sitebağlantıları",
 	"wikibase-sitelinkgroupview-input-help-message": "Bir site ve bu sitenin sayfasını belirterek site bağlantısı ekleyin, mevcut site bağlantılarını düzenleyin ya da kaldırın.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|girdi|girdi}}",

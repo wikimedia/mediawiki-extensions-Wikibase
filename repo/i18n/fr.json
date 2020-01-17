@@ -117,6 +117,7 @@
 	"wikibase-label-input-help-message": "Saisissez le libellé de cette entité en $1.",
 	"wikibase-entitytermsview-input-help-message": "Indiquez pour cette entité un libellé, une courte description et des alias par langue.",
 	"wikibase-statementsection-statements": "Déclarations",
+	"wikibase-statementsection-identifiers": "Identifiants",
 	"wikibase-sitelinks": "Liens de site",
 	"wikibase-sitelinkgroupview-input-help-message": "Ajouter un lien de site en spécifiant un site et une page de ce site, modifier ou supprimer des liens de site existants.",
 	"wikibase-sitelinks-counter": "$1 entrée{{PLURAL:$1||s}}",

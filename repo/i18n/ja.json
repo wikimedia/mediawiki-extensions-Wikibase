@@ -84,6 +84,7 @@
 	"wikibase-label-input-help-message": "このエンティティに対するラベルを$1で入力してください。",
 	"wikibase-entitytermsview-input-help-message": "このエンティティのラベルおよび簡潔な説明、別名を言語ごとに入力します。",
 	"wikibase-statementsection-statements": "文",
+	"wikibase-statementsection-identifiers": "識別子",
 	"wikibase-sitelinks": "サイトリンク",
 	"wikibase-sitelinkgroupview-input-help-message": "サイトとそのサイトのページを指定することによりサイトリンクを追加し、既存のサイトへのリンクを編集または除去します。",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|エントリ}}",
@@ -148,6 +149,9 @@
 	"wikibase-validator-label-no-entityid": "ラベルは有効なエンティティIDにしてください。",
 	"wikibase-validator-illegal-file-chars": "ファイル名にコロンやスラッシュなどの文字を含めることはできません",
 	"wikibase-validator-check-file-type": "ファイル拡張子がありません。",
+	"wikibase-validator-illegal-geo-shape-title": "値は、<code>Data:</code>で始まり、<code>.map</code>で終わらなければなりません。加えて、タイトルにはコロン (;)・井桁 (#)・バーティカルバー (|) といった記号を含んではいけません。",
+	"wikibase-validator-illegal-tabular-data-title": "値は、<code>Data:</code>で始まり、<code>.tab</code>で終わらなければなりません。加えて、タイトルにはコロン (;)・井桁 (#)・バーティカルバー (|) といった記号を含んではいけません。",
+	"wikibase-validator-illegal-entity-schema-title": "値は、<code>E</code>から始まり、2文字目以降はすべて数字でなければなりません。",
 	"wikibase-validator-no-such-media": "ファイル「$1」は[https://commons.wikimedia.org/ コモンズ]に存在しません。",
 	"wikibase-validator-no-such-sitelink": "バッジを編集しようとしましたが「$1」へのサイトリンクが見つかりませんでした。",
 	"wikibase-validator-page-not-exists": "ページ「$1」は存在しません。",
@@ -414,5 +418,7 @@
 	"wikibase-search-config-badclass": "不正なクエリビルダーのクラス: $1",
 	"wikibase-refresh-for-missing-datatype": "データ型$1はクライアントのスクリプトで見つかりませんでした。キャッシュされたスクリプトが古くなっている可能性があります。キャッシュをクリアしてブラウザを再読み込みしてください(多くのブラウザでCtrl-Shift-RまたはCmd-Shift-R)。",
 	"wikibase-outdated-client-script": "ページをスーパーリロードしてください",
-	"wikibase-shortcopyrightwarning-heading": "ライセンスの帰属"
+	"wikibase-shortcopyrightwarning-heading": "ライセンスの帰属",
+	"wikibase-entity-save-error-heading": "エラーが発生しました",
+	"wikibase-entity-save-error-message": "あなたの変更は公開されませんでした。もう一度「公開」ボタンをクリックしてみてください。"
 }

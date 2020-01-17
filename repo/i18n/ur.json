@@ -68,6 +68,7 @@
 	"wikibase-label-input-help-message": "$1 میں اس وجود کا لیبل درج کریں۔",
 	"wikibase-entitytermsview-input-help-message": "ہر زبان میں مستعار ناموں، مختصر وصف اور اس وجود کا لیبل درج کریں۔",
 	"wikibase-statementsection-statements": "بیانات",
+	"wikibase-statementsection-identifiers": "شناخت کنندگان",
 	"wikibase-sitelinks": "روابط سائٹس",
 	"wikibase-sitelinkgroupview-input-help-message": "سائٹ اور اُس سائٹ کا صفحہ تحریر کر کے سائٹ ربط درج کریں، نیز موجود روابط سائٹس میں ترمیم یا حذف کریں۔",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|اندراج|اندراجات}}",

@@ -42,6 +42,7 @@
 	"wikibase-alias-edit-placeholder": "Unesite neki pseudonim",
 	"wikibase-label-input-help-message": "Unesite naslov ovog skupa podataka na $1.",
 	"wikibase-statementsection-statements": "Iskazi",
+	"wikibase-statementsection-identifiers": "Naznake",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|unos|unosa}}",
 	"wikibase-sitelinks-empty": "Trenutno još nema sajt-stranica za ovu stavku.",
 	"wikibase-sitelinks-special": "Drugi sajtovi",

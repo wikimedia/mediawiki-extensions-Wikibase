@@ -69,6 +69,7 @@
 	"wikibase-label-input-help-message": "Fyll inn etiketten til denne entiteten på $1.",
 	"wikibase-entitytermsview-input-help-message": "Oppgi en etikett for denne entiteten, en kort beskrivelse og alias per språk.",
 	"wikibase-statementsection-statements": "Utsagn",
+	"wikibase-statementsection-identifiers": "Identifikatorer",
 	"wikibase-sitelinks": "Nettstedlenker",
 	"wikibase-sitelinkgroupview-input-help-message": "Legg til en sidelenke ved å angi nettstedet og en side på det nettstedet, redigere eller fjerne eksisterende sidelenker.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|oppføring|oppføringer}}",

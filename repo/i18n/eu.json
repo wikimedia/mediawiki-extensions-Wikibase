@@ -61,6 +61,7 @@
 	"wikibase-sitelink-page-edit-placeholder": "orrialdea",
 	"wikibase-alias-edit-placeholder": "idatzi goitizen bat",
 	"wikibase-statementsection-statements": "Adierazpenak",
+	"wikibase-statementsection-identifiers": "Identifikatzaileak",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entry|sarrera}}",
 	"wikibase-sitelinks-special": "Beste guneak",
 	"wikibase-remove": "kendu",

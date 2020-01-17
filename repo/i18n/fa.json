@@ -86,6 +86,7 @@
 	"wikibase-label-input-help-message": "برچسب این موجودیت را به $1 وارد کنید.",
 	"wikibase-entitytermsview-input-help-message": "برچسپی برای این موجودیت، یک توضیح کوتاه و نام مستعار برای هر زبان وارد کنید.",
 	"wikibase-statementsection-statements": "اظهارات",
+	"wikibase-statementsection-identifiers": "شناسه‌ها",
 	"wikibase-sitelinks": "پیوند وب‌گاه‌ها",
 	"wikibase-sitelinkgroupview-input-help-message": "پیوندی به مشخص کردن وب‌گاه و صفحهٔ آن وب‌گاه بیافزایید، پیوندهای وب‌گاه‌های موجود را ویرایش یا حذف کنید.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|ورودی|ورودی}}",

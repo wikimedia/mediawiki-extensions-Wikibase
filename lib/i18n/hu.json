@@ -96,6 +96,7 @@
 	"wikibase-time-precision-annum": "i. sz. $1 év",
 	"wikibase-time-precision-millennium": "$1. évezred",
 	"wikibase-time-precision-century": "$1. évszázad",
+	"wikibase-time-precision-BCE": "i.&nbsp;e.&nbsp;$1",
 	"wikibase-time-precision-BCE-Gannum": "i. e. $1 milliárd év",
 	"wikibase-time-precision-BCE-Mannum": "i. e. $1 millió év",
 	"wikibase-time-precision-BCE-annum": "i. e. $1 év",

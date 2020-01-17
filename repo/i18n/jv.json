@@ -63,6 +63,7 @@
 	"wikibase-label-input-help-message": "Lebokaké labèl saka èntitas iki nganggo basa $1.",
 	"wikibase-entitytermsview-input-help-message": "Lebokaké labèl saka èntitas iki, wedharan ringkes lan singlon ing saben basa.",
 	"wikibase-statementsection-statements": "Ukara",
+	"wikibase-statementsection-identifiers": "Panadha",
 	"wikibase-sitelinks": "Pranala situs",
 	"wikibase-sitelinkgroupview-input-help-message": "Wuwuh pranala situs kanthi nglebokaké situsé lan kaca saka situs mau, mbesut utawa mbusak pranala situs kang ana.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|èntri|èntri}}",

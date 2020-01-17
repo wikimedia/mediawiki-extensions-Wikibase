@@ -75,6 +75,7 @@
 	"wikibase-label-input-help-message": "Add meg ennek a entitásnak a címkéjét $1 nyelven.",
 	"wikibase-entitytermsview-input-help-message": "Írj be egy címkét, rövid leírást és más neveket nyelvenként ehhez az elemhez.",
 	"wikibase-statementsection-statements": "Állítások",
+	"wikibase-statementsection-identifiers": "Azonosítók",
 	"wikibase-sitelinks": "Oldalhivatkozások",
 	"wikibase-sitelinkgroupview-input-help-message": "Hozzáadhatsz oldalhivatkozást az oldal és egy ottani lap megadásával, illetve szerkeszthetsz vagy törölhetsz meglévő oldalhivatkozásokat.",
 	"wikibase-sitelinks-counter": "$1 kapcsolat",

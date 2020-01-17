@@ -115,6 +115,7 @@
 	"connected-redirect-category-desc": "Diese Kategorie listet Weiterleitungsseiten auf, die mit einem {{WBREPONAME}}-Objekt verbunden sind.",
 	"wikibase-client-data-bridge-dialog-title": "Eigenschaft bearbeiten",
 	"wikibase-client-data-bridge-permissions-error": "Du hast aus {{PLURAL:$1|dem folgenden Grund|den folgenden Gründen}} keine Berechtigung zum Bearbeiten des Wertes:",
+	"wikibase-client-data-bridge-permissions-error-info": "Weitere Einzelheiten",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Dieser Wert ist gegenwärtig [$1 geschützt] auf {{WBREPONAME}} und kann nur durch [$2 Administratoren] bearbeitet werden.</strong>",
 	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>Warum ist dieser Wert geschützt?</strong></p>\n<ul>\n<li>Einige Vorlage und Objekte (und ihre zugehörigen Werte) sind wegen ihrer hohen Sichtbarkeit dauerhaft [$1 geschützt]. Hin und wieder sind wegen [$2 Streitigkeiten] geschützt. Die meisten Objekte können von jedermann bearbeitet werden.</li>\n<li>Der Grund des Schutzes steht im [$3 Schutz-Logbuch].</li>\n</ul>\n<p><strong>Was kann ich tun?</strong></p>\n<ul><li>[$4 Diskutiere dieses Objekt] mit anderen.</li></ul>",
 	"wikibase-client-data-bridge-semiprotected-on-repo-head": "<strong>Dieser Wert ist gegenwärtig [$1 halbgeschützt] auf {{WBREPONAME}} und kann nur durch [$2 automatisch bestätigte Benutzer] bearbeitet werden.</strong>",
@@ -127,5 +128,7 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>Warum ist diese Seite geschützt?</strong></p>\n<p>Diese Seite ist [[Project:Transclusion|eingebunden]] in die {{PLURAL:$1|folgende Seite, welche [[Project:Cascade|kaskadengeschützt]] ist|folgenden Seiten, welche [[Project:Cascade|kaskadengeschützt]] sind}}</p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Dein Benutzerkonto oder deine IP-Adresse wurden auf diesem Wiki gesperrt.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-body": "Die Sperrung wurde vom Administrator $1 durchgeführt.\nAls Grund wurde ''$2'' angegeben.\n\n* Beginn der Sperre: $8\n* Ende der Sperre: $6\n\nDu kannst $4 oder einen der anderen [[{{int:grouppage-sysop}}|Administratoren]] kontaktieren, um über die Sperre zu diskutieren.\nDu kannst die „{{int:emailuser}}“-Funktion nutzen, wenn eine gültige E-Mail-Adresse in deinen [[Special:Preferences|Benutzerkonto-Einstellungen]] eingetragen ist und diese Funktion für dich nicht gesperrt wurde.\nDie Sperrkennung lautet #$5.\nBitte füge alle Informationen jeder Anfrage hinzu, die du stellst.",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Unbekannter Berechtigungsfehler",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Du kannst diesen Wert aus unbekannten Gründen nicht bearbeiten",
 	"wikibase-client-data-bridge-references-heading": "Quellenangaben"
 }

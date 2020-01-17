@@ -14,7 +14,8 @@
 			"Ladsgroup",
 			"Surfo",
 			"YvesNevelsteen",
-			"Mirin"
+			"Mirin",
+			"Joao Xavier"
 		]
 	},
 	"wikibase-desc": "Deponejo por strukturitaj datumoj",
@@ -68,6 +69,7 @@
 	"wikibase-alias-edit-placeholder": "enigi kromnomon",
 	"wikibase-label-input-help-message": "Enskribu la etikedon por ĉi tiu ero en $1",
 	"wikibase-statementsection-statements": "Deklaroj",
+	"wikibase-statementsection-identifiers": "Identigi",
 	"wikibase-sitelinks": "Retejaj ligiloj",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|ero|eroj}}",
 	"wikibase-sitelinks-empty": "Neniu paĝo estas ligita al ĉi tiu ero.",

@@ -78,6 +78,7 @@
 	"wikibase-label-input-help-message": "Ange etiketten för denna entitet på $1.",
 	"wikibase-entitytermsview-input-help-message": "Ange en etikett för detta objekt, en kort beskrivning och alias per språk.",
 	"wikibase-statementsection-statements": "Uttalanden",
+	"wikibase-statementsection-identifiers": "Identifierare",
 	"wikibase-sitelinks": "Webbplatslänkar",
 	"wikibase-sitelinkgroupview-input-help-message": "Lägg till en webbplatslänk genom att ange en webbplats och en sida på den webbplatsen, redigera eller ta bort existerande webbplatslänkar.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|uppslag}}",

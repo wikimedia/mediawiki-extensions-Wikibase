@@ -72,6 +72,7 @@
 	"wikibase-label-input-help-message": "Masukkan label dari entitas ini ke dalam $1 .",
 	"wikibase-entitytermsview-input-help-message": "Masukkan label dari entitas ini, deskripsi singkat, dan nama lain untuk masing-masing bahasa.",
 	"wikibase-statementsection-statements": "Pernyataan",
+	"wikibase-statementsection-identifiers": "Penanda",
 	"wikibase-sitelinks": "Pranala interwiki",
 	"wikibase-sitelinkgroupview-input-help-message": "Tambah sebuah pranala interwiki dengan menentukan sebuah situs dan sebuah laman dari situs tersebut, sunting atau hapus pranala antarwiki yang ada.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entri|entri}}",

@@ -12,6 +12,7 @@
 	"wikibase-label-empty": "Тамга (исем) күрсәтелмәгән",
 	"wikibase-description-empty": "Тасвирлама тутырылмаган",
 	"wikibase-statementsection-statements": "Шартлар",
+	"wikibase-statementsection-identifiers": "Идентификаторлар",
 	"wikibase-sitelinks-special": "Башка сайтлар",
 	"wikibase-statementview-rank-normal": "Нормаль ранг",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|чыганак}}"

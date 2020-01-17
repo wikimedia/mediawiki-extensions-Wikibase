@@ -66,6 +66,7 @@
 	"wikibase-label-input-help-message": "Внесете го натписот на оваа единица на $1.",
 	"wikibase-entitytermsview-input-help-message": "Внесете го натписот на оваа единица, краток опис и истозначници за секој јазик на кој работите.",
 	"wikibase-statementsection-statements": "Искази",
+	"wikibase-statementsection-identifiers": "Назнаки",
 	"wikibase-sitelinks": "Викиврски",
 	"wikibase-sitelinkgroupview-input-help-message": "Додајте викиврска укажувајќи мрежно место и страницата на него, изменете или отстранете ги постоечките.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|ставка|ставки}}",

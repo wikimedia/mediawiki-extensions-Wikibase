@@ -63,6 +63,7 @@
 	"wikibase-alias-edit-placeholder": "पर्याय जोडा",
 	"wikibase-label-input-help-message": "$1 मध्ये या अस्तित्वाची खूणचिठ्ठी(label of this entity) टाका.",
 	"wikibase-statementsection-statements": "विधाने",
+	"wikibase-statementsection-identifiers": "आयडेंटिफायर्स",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|प्रविष्टी|प्रविष्ट्या}}",
 	"wikibase-sitelinks-empty": "या कलमास कोणतेही पान जोडले नाही.",
 	"wikibase-sitelinks-special": "इतर संकेतस्थळे",

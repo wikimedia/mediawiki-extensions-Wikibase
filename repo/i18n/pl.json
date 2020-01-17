@@ -82,6 +82,7 @@
 	"wikibase-label-input-help-message": "Podaj etykietę tej encji w języku: $1.",
 	"wikibase-entitytermsview-input-help-message": "Wpisz etykietę tej encji, krótki opis i alternatywne nazwy dla każdego języka.",
 	"wikibase-statementsection-statements": "Deklaracje",
+	"wikibase-statementsection-identifiers": "Identyfikatory",
 	"wikibase-sitelinks": "Witryny",
 	"wikibase-sitelinkgroupview-input-help-message": "Dodawaj link do witryny, określając witrynę i stronę na niej, edytuj lub usuwaj istniejące linki.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|wpis|wpisy|wpisów}}",

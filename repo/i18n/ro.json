@@ -63,6 +63,7 @@
 	"wikibase-alias-edit-placeholder": "introduceți un alias",
 	"wikibase-label-input-help-message": "Introduceți eticheta acestei entități în $1.",
 	"wikibase-statementsection-statements": "Declarații",
+	"wikibase-statementsection-identifiers": "Identificatori",
 	"wikibase-sitelinks": "Sitelinkuri",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|intrare|intrări|de intrări}}",
 	"wikibase-sitelinks-empty": "Nicio pagină nu este asociată acestui element încă.",

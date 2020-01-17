@@ -78,6 +78,7 @@
 	"wikibase-label-input-help-message": "Zadejte název této entity v jazyce $1.",
 	"wikibase-entitytermsview-input-help-message": "Zadejte název této entity, stručný popis a aliasy dle jazyka.",
 	"wikibase-statementsection-statements": "Výroky",
+	"wikibase-statementsection-identifiers": "Identifikátory",
 	"wikibase-sitelinks": "Odkazy na stránky",
 	"wikibase-sitelinkgroupview-input-help-message": "Přidejte odkaz na článek zadáním projektu a stránky v projektu, upravte nebo odstraňte existující odkazy na články.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|položka|položky|položek}}",

@@ -70,6 +70,7 @@
 	"wikibase-label-input-help-message": "Εισαγάγετε την ετικέτα για αυτήν την οντότητα στα $1.",
 	"wikibase-entitytermsview-input-help-message": "Εισαγάγετε ετικέτα για αυτήν την οντότητα, σύντομη περιγραφή και αλλώνυμα κατά γλώσσα.",
 	"wikibase-statementsection-statements": "Δηλώσεις",
+	"wikibase-statementsection-identifiers": "Κωδικοί αναφοράς",
 	"wikibase-sitelinks": "Σύνδεσμοι ιστοτόπων",
 	"wikibase-sitelinkgroupview-input-help-message": "Προσθέστε ένα σύνδεσμο ορίζοντας τον ιστότοπο και μια σελίδα σε εκείνο τον ιστότοπο, επεξεργαστείτε ή αφαιρέστε υπάρχοντες συνδέσμους ιστοτόπων.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|καταχώρηση|καταχωρήσεις}}",

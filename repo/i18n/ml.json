@@ -62,6 +62,7 @@
 	"wikibase-alias-edit-placeholder": "ഒരു അപരനാമം നൽകുക",
 	"wikibase-label-input-help-message": "ഈ ഡേറ്റാ ഗണത്തിന്റെ തലക്കെട്ട് $1 ആയി നൽകുക.",
 	"wikibase-statementsection-statements": "പ്രസ്താവനകൾ",
+	"wikibase-statementsection-identifiers": "തിരിച്ചറിയലുപാധികൾ",
 	"wikibase-sitelinks": "ഈ ഇനത്തിലേയ്ക്ക് കണ്ണി ചേർത്തിട്ടുള്ള താളുകളുടെ പട്ടിക",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|ഉൾപ്പെടുത്തൽ|ഉൾപ്പെടുത്തലുകൾ}}",
 	"wikibase-sitelinks-empty": "ഇതുവരെ ഈ ഇനത്തിന് സൈറ്റ്-കണ്ണി നൽകിയിട്ടില്ല.",

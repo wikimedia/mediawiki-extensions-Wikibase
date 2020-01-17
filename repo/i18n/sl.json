@@ -62,6 +62,7 @@
 	"wikibase-label-input-help-message": "Vnesite naslov tega nabora podatkov v jeziku $1.",
 	"wikibase-entitytermsview-input-help-message": "Vnesi oznako tega objekta, kratek opis in druga imena v raznih jezikih.",
 	"wikibase-statementsection-statements": "Izjave",
+	"wikibase-statementsection-identifiers": "Identifikatorji",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|vnos|vnosa|vnosi|vnosov}}",
 	"wikibase-sitelinks-empty": "Na ta predmet se ne povezuje nobena stran.",
 	"wikibase-sitelinks-special": "Druge strani",

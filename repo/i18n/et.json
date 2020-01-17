@@ -66,6 +66,7 @@
 	"wikibase-label-input-help-message": "Sisesta selle üksuse silt järgmises keeles: $1",
 	"wikibase-entitytermsview-input-help-message": "Sisesta erinevates keeltes selle olemi silt, lühikirjeldus ja rööpkujud.",
 	"wikibase-statementsection-statements": "Avaldused",
+	"wikibase-statementsection-identifiers": "Identifikaatorid",
 	"wikibase-sitelinks": "Võrgukohalingid",
 	"wikibase-sitelinkgroupview-input-help-message": "Et võrgukohalink lisada, määra võrgukoht ja lehekülg selles võrgukohas. Saad olemasolevaid linke ka muuta või eemaldada.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|sissekanne|sissekannet}}",

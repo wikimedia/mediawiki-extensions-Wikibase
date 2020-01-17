@@ -101,6 +101,7 @@
 	"wikibase-label-input-help-message": "Escribe la etiqueta de esta entidad en $1.",
 	"wikibase-entitytermsview-input-help-message": "Escribe una etiqueta de esta entidad, una breve descripción y los alias por idioma.",
 	"wikibase-statementsection-statements": "Declaraciones",
+	"wikibase-statementsection-identifiers": "Identificadores",
 	"wikibase-sitelinks": "Enlaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Añadir un enlace de sitio mediante la especificación de un sitio web y una página de ese sitio, editar o eliminar enlaces de sitio existente.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entradas}}",

@@ -10,6 +10,7 @@
 	"wikibase-label-empty": "Geen etiket insteld",
 	"wikibase-description-empty": "Geen beskryving insteld",
 	"wikibase-statementsection-statements": "Verklaoringen",
+	"wikibase-statementsection-identifiers": "Identifikasiekodes",
 	"wikibase-sitelinks-special": "Andere websteaden",
 	"wikibase-statementview-rank-normal": "Normale rang",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|bron|bronnen}}",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Xuacu",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"Enolp"
 		]
 	},
 	"wikibase-desc": "Depósitu de datos estructuraos",
@@ -64,6 +65,7 @@
 	"wikibase-label-input-help-message": "Escriba la etiqueta d'esta entidá en $1.",
 	"wikibase-entitytermsview-input-help-message": "Escribi una etiqueta d'esta entidá, una descripción curtia y alcuños por llingua.",
 	"wikibase-statementsection-statements": "Declaraciones",
+	"wikibase-statementsection-identifiers": "Identificadores",
 	"wikibase-sitelinks": "Enllaces a sitios",
 	"wikibase-sitelinkgroupview-input-help-message": "Amestar un enllaz a un sitiu proporcionando un sitiu web y una páxina d'esi sitiu, editar o desaniciar enllaces esistentes a sitios web.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entraes}}",

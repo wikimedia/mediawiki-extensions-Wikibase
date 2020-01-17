@@ -70,6 +70,7 @@
 	"wikibase-label-input-help-message": "Įveskite šios esybės žymą $1 kalba.",
 	"wikibase-entitytermsview-input-help-message": "Įveskite šios esybės žymą, trumpą aprašymą ir slapyvardžius kiekvienai kalbai.",
 	"wikibase-statementsection-statements": "Faktinė informacija",
+	"wikibase-statementsection-identifiers": "Identifikatoriai",
 	"wikibase-sitelinks": "Svetainių nuorodos",
 	"wikibase-sitelinkgroupview-input-help-message": "Pridėti svetainės nuorodą, nurodant svetainę ir tos svetainės puslapį, redaguoti ar šalinti egsiztuojančias svetainių nuorodas.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|įvestis|įvestys|įvesčių}}",

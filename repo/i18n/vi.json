@@ -70,6 +70,7 @@
 	"wikibase-label-input-help-message": "Nhập nhãn trong $1 của thực thể này.",
 	"wikibase-entitytermsview-input-help-message": "Nhập một nhãn cho thực thể này, một miêu tả ngắn gọn, và các tên gọi khác trong từng ngôn ngữ.",
 	"wikibase-statementsection-statements": "Tuyên bố",
+	"wikibase-statementsection-identifiers": "Định danh",
 	"wikibase-sitelinks": "Liên kết dịch vụ",
 	"wikibase-sitelinkgroupview-input-help-message": "Thêm liên kết dịch vụ bằng cách định rõ một dịch vụ và trang trên dịch vụ đó hoặc sửa đổi hay loại bỏ các liên kết dịch vụ hiện có.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1}}mục",

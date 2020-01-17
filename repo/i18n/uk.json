@@ -82,6 +82,7 @@
 	"wikibase-label-input-help-message": "Введіть назву цієї сутності мовою: $1.",
 	"wikibase-entitytermsview-input-help-message": "Введіть назву для цієї сутності, короткий опис та альтернативні назви для кожної мови.",
 	"wikibase-statementsection-statements": "Твердження",
+	"wikibase-statementsection-identifiers": "Ідентифікатори",
 	"wikibase-sitelinks": "Посилання на сайти",
 	"wikibase-sitelinkgroupview-input-help-message": "Додайте посилання на сайт, вказавши сайт та сторінку на ньому, виправте або вилучіть наявні посилання.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запис|записи|записів}}",

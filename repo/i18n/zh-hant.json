@@ -92,6 +92,7 @@
 	"wikibase-label-input-help-message": "使用 $1 輸入此實體的標籤。",
 	"wikibase-entitytermsview-input-help-message": "輸入此實體的標籤，各種語言的簡短描述與別名。",
 	"wikibase-statementsection-statements": "陳述",
+	"wikibase-statementsection-identifiers": "識別碼",
 	"wikibase-sitelinks": "網站連結",
 	"wikibase-sitelinkgroupview-input-help-message": "加入網站連結透過指定網站與頁面，編輯或移除已存在的網站連結。",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|條目}}",

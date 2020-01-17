@@ -89,6 +89,7 @@
 	"wikibase-label-input-help-message": "أدخل عنوان لمجموعة البيانات الموجودة في $1.",
 	"wikibase-entitytermsview-input-help-message": "أدخل تسمية هذا الكيان، ووصفا قصيرا والأسماء المستعارة لكل لغة.",
 	"wikibase-statementsection-statements": "بيانات",
+	"wikibase-statementsection-identifiers": "معرفات",
 	"wikibase-sitelinks": "وصلات الموقع",
 	"wikibase-sitelinkgroupview-input-help-message": "أضف وصلة موقع عن طريق تحديد موقع وصفحة من ذلك الموقع، عدل أو أزل وصلات الموقع الموجودة.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|لا مدخلات|مدخلة واحدة|مدخلتان|$1 مدخلات|$1 مدخلة}}",

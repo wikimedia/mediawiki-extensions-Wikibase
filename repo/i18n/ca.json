@@ -79,6 +79,7 @@
 	"wikibase-label-input-help-message": "Introduïu l'etiqueta d'aquesta entitat en $1.",
 	"wikibase-entitytermsview-input-help-message": "Introduïu una etiqueta, una descripció breu i els àlies d'aquesta entitat per llengua.",
 	"wikibase-statementsection-statements": "Declaracions",
+	"wikibase-statementsection-identifiers": "Identificadors",
 	"wikibase-sitelinks": "Enllaços de llocs",
 	"wikibase-sitelinkgroupview-input-help-message": "Afegeix un enllaç de lloc en especificar un lloc i una pàgina d'aquest lloc, modifica o esborra enllaços de lloc existents.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entrada|entrades}}",

@@ -132,6 +132,7 @@
 	"connected-redirect-category-desc": "此分類列舉了連接到{{WBREPONAME}}項目的重新導向頁面。",
 	"wikibase-client-data-bridge-dialog-title": "編輯屬性",
 	"wikibase-client-data-bridge-permissions-error": "由於下列{{PLURAL:$1|原因}}，您沒有權限來編輯此值：",
+	"wikibase-client-data-bridge-permissions-error-info": "更多詳細資料",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>此值目前在{{WBREPONAME}}上被[$1 全保護]，並且僅能被[$2 管理員]編輯。</strong>",
 	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>為什麼這個值被保護？</strong></p>\n<ul>\n<li>出於能見度緣故，一些模版與項目（與它們各自的值）被不限期[$1 保護]。有時這些是出自於[$2 編輯戰]而被保護。而多數的項目仍可被任何人編輯。</li>\n<li>保護原因可在[$3 保護日誌]裡查找。</li>\n</ul>\n<p><strong>我可以怎麼做？</strong></p>\n<ul><li>與其他人[$4 討論此項目]。</li></ul>",
 	"wikibase-client-data-bridge-semiprotected-on-repo-head": "<strong>此值目前在{{WBREPONAME}}上被[$1 半保護]，並且僅能被[$2 自動確認使用者]編輯。</strong>",
@@ -144,5 +145,7 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>為什麼此頁面被保護？</strong></p>\n<p>此頁面被[[Project:Transclusion|嵌入]]在以下{{PLURAL:$1|頁面，該頁面|頁面，這些頁面}}以「[[Project:Cascade|連鎖]]」選項來保護：</p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>您的使用者名稱或是 IP 位址已在此 wiki 上被封鎖。</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>由$1做出封鎖。原因為<em>$2</em>。</p>\n<ul>\n<li>封鎖開始時間：$8</li>\n<li>封鎖結束時間：$6</li>\n</ul>\n<p><strong>我可以怎麼做？</strong></p>\n<p>\n您可以聯絡$4或其他的[[{{int:grouppage-sysop}}|管理員]]討論封鎖的相關問題。\n若您在[[Special:Preferences|偏好設定]]有指定有效的電子郵件，並且在沒有被封鎖情況之下，您可以使用「{{int:emailuser}}」功能。\n封鎖的ID為#$5。\n請您在詢問時附註以上詳細訊息。\n</p>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "未知的權限錯誤",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "因為有未知原因，您無法編輯此值",
 	"wikibase-client-data-bridge-references-heading": "參考"
 }

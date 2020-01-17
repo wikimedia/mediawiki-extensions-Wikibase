@@ -100,6 +100,7 @@
 	"wikibase-label-input-help-message": "Введите название для этой сущности на следующем языке: $1.",
 	"wikibase-entitytermsview-input-help-message": "Введите название этой сущности, краткое описание и альтернативные названия для каждого языка.",
 	"wikibase-statementsection-statements": "Утверждения",
+	"wikibase-statementsection-identifiers": "Идентификаторы",
 	"wikibase-sitelinks": "Список ссылок на сайты",
 	"wikibase-sitelinkgroupview-input-help-message": "Добавьте ссылку на внешний сайт, указав адрес сайта и страницы на этом сайте; исправьте или удалите существующие ссылки на сайт.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|запись|записи|записей}}",
