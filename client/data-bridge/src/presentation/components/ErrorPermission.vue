@@ -73,8 +73,6 @@ export default class ErrorPermission extends Vue {
 	private readonly permissionErrors!: MissingPermissionsError[];
 	@State( 'entityTitle' )
 	public entityTitle!: string;
-	@State( 'pagesCausingCascadeProtection' )
-	public pagesCausingCascadeProtection!: string[];
 
 	public getMessageHeader( permissionError: MissingPermissionsError ): string {
 		return this.$messages.get(
@@ -173,14 +171,14 @@ export default class ErrorPermission extends Vue {
 				break;
 			case PageNotEditable.ITEM_CASCADE_PROTECTED:
 				params.push(
-					this.pagesCausingCascadeProtection.length.toString(),
-					...this.pagesCausingCascadeProtection,
+					permissionError.info.pages.length.toString(),
+					...permissionError.info.pages,
 				);
 				break;
 			case PageNotEditable.PAGE_CASCADE_PROTECTED:
 				params.push(
-					this.pagesCausingCascadeProtection.length.toString(),
-					...this.pagesCausingCascadeProtection,
+					permissionError.info.pages.length.toString(),
+					...permissionError.info.pages,
 				);
 				break;
 		}
