@@ -132,31 +132,71 @@ export default class ErrorPermission extends Vue {
 	private messageBodyParameters( permissionError: MissingPermissionsError ): ( string|HTMLElement )[] {
 		const params: ( string|HTMLElement )[] = [];
 		switch ( permissionError.type ) {
-			case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
+			case PageNotEditable.BLOCKED_ON_CLIENT_PAGE: {
+				const {
+					blockedBy,
+					blockedById,
+					blockReason,
+					blockId,
+					blockExpiry,
+					blockedTimestamp,
+				} = permissionError.info;
+				const blockedByText = document.createElement( 'bdi' );
+				blockedByText.textContent = blockedBy;
+				let blockedByLink;
+				if ( blockedById > 0 ) {
+					blockedByLink = document.createElement( 'a' );
+					blockedByLink.appendChild( blockedByText.cloneNode( true ) );
+					blockedByLink.href = this.$clientRouter.getPageUrl( `Special:Redirect/user/${blockedById}` );
+				} else {
+					// not a local user, no link
+					blockedByLink = blockedByText.cloneNode( true ) as HTMLElement;
+				}
 				params.push(
-					permissionError.info.blockedBy, // TODO: Convert to user link
-					permissionError.info.blockReason,
+					blockedByLink,
+					blockReason,
 					'', // reserved for currentIP
-					permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
-					permissionError.info.blockedById.toString(),
-					permissionError.info.blockExpiry,
+					blockedByText,
+					blockId.toString(),
+					blockExpiry,
 					'', // reserved for intended blockee
-					permissionError.info.blockedTimestamp,
+					blockedTimestamp,
 				);
 				break;
-			case PageNotEditable.BLOCKED_ON_REPO_ITEM:
+			}
+			case PageNotEditable.BLOCKED_ON_REPO_ITEM: {
+				const {
+					blockedBy,
+					blockedById,
+					blockReason,
+					blockId,
+					blockExpiry,
+					blockedTimestamp,
+				} = permissionError.info;
+				const blockedByText = document.createElement( 'bdi' );
+				blockedByText.textContent = blockedBy;
+				let blockedByLink;
+				if ( blockedById > 0 ) {
+					blockedByLink = document.createElement( 'a' );
+					blockedByLink.appendChild( blockedByText.cloneNode( true ) );
+					blockedByLink.href = this.$repoRouter.getPageUrl( `Special:Redirect/user/${blockedById}` );
+				} else {
+					// not a local user, no link
+					blockedByLink = blockedByText.cloneNode( true ) as HTMLElement;
+				}
 				params.push(
-					permissionError.info.blockedBy, // TODO: Convert to user link
-					permissionError.info.blockReason,
+					blockedByLink,
+					blockReason,
 					'', // reserved for currentIP
-					permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
-					permissionError.info.blockedById.toString(),
-					permissionError.info.blockExpiry,
+					blockedByText,
+					blockId.toString(),
+					blockExpiry,
 					'', // reserved for intended blockee
-					permissionError.info.blockedTimestamp,
+					blockedTimestamp,
 					this.$repoRouter.getPageUrl( 'Project:Administrators' ),
 				);
 				break;
+			}
 			case PageNotEditable.ITEM_FULLY_PROTECTED:
 				params.push(
 					this.$repoRouter.getPageUrl( 'Project:Page_protection_policy' ),
