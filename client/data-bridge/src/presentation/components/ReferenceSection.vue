@@ -38,20 +38,17 @@ export default class ReferenceSection extends Vue {
 
 <style lang="scss">
 	.wb-db-references {
-		$referenceSectionLeftMargin: 12px;
-		$alignLeft: $margin-center-column-left - $referenceSectionLeftMargin;
+		margin-left: $margin-center-column-left;
 		margin-right: 20px;
-		margin-left: $referenceSectionLeftMargin;
 
 		&__heading {
 			margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;
-			padding-left: $alignLeft;
 			font-weight: 600;
 			font-size: 1.1em;
 		}
 
 		&__listItem {
-			padding: 10px 14px 10px $alignLeft;
+			padding: 10px 14px 10px 0;
 		}
 	}
 </style>
