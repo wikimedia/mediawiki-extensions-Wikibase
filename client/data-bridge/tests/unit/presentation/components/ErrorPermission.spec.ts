@@ -13,11 +13,37 @@ import Application from '@/store/Application';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
+import Mock = jest.Mock;
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
 
 const entityTitle = 'Q42';
+
+/**
+ * Assert that a mock has been called with an `HTMLElement` as the *x*th argument of the *y*th call,
+ * and then replace the argument with its `outerHTML`, to simplify subsequent assertions.
+ *
+ * Usage example:
+ *
+ * ```
+ * const mock = jest.fn();
+ * mock( 'x', 'y', 'z' );
+ * mock( 'a', document.createElement( 'b' ), 'c' );
+ * calledWithHTMLElement( mock, 1, 1 );
+ * expect( mock ).toHaveBeenNthCalledWith( 1, 'x', 'y', 'z' );
+ * expect( mock ).toHaveBeenNthCalledWith( 2, 'a', '<b></b>', 'c' );
+ * ```
+ *
+ * @param mock any mock function
+ * @param callNum 0-indexed
+ * @param argumentNum 0-indexed
+ */
+function calledWithHTMLElement( mock: Mock, callNum: number, argumentNum: number ): void {
+	const call = mock.mock.calls[ callNum ];
+	expect( call[ argumentNum ] ).toBeInstanceOf( HTMLElement );
+	call[ argumentNum ] = call[ argumentNum ].outerHTML;
+}
 
 describe( 'ErrorPermission', () => {
 	const blockId = 1,
@@ -27,7 +53,7 @@ describe( 'ErrorPermission', () => {
 		blockedTimestamp = '2019-12-12T12:12:12',
 		blockExpiry = '2020-01-12T12:12:12',
 		blockPartial = false,
-		pagesCausingCascadeProtection = [ 'Page One', 'Page Two', 'Page Three' ];
+		pagesCausingCascadeProtection = [ 'Page_One', 'Page_Two', 'Page_Three' ];
 
 	it( 'passes properties to ErrorPermissionInfo', () => {
 		const messageGet = jest.fn( ( key ) => key );
@@ -209,36 +235,6 @@ describe( 'ErrorPermission', () => {
 				'http://localhost/wiki/Project:Administrators',
 			],
 		],
-		[
-			{
-				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
-				info: {
-					pages: pagesCausingCascadeProtection,
-				},
-			} as CascadeProtectedReason,
-			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
-			[ ],
-			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
-			[
-				pagesCausingCascadeProtection.length,
-				...pagesCausingCascadeProtection,
-			],
-		],
-		[
-			{
-				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
-				info: {
-					pages: pagesCausingCascadeProtection,
-				},
-			} as CascadeProtectedReason,
-			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
-			[ ],
-			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
-			[
-				pagesCausingCascadeProtection.length,
-				...pagesCausingCascadeProtection,
-			],
-		],
 	] )( '%#: interpolates message with correct key and parameters', ( error: MissingPermissionsError,
 		header,
 		headerParams,
@@ -275,9 +271,11 @@ describe( 'ErrorPermission', () => {
 					break;
 			}
 			return fn;
-
 		};
 		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: repoRouterFactory( error.type ),
+		};
+		const $clientRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterFactory( error.type ),
 		};
 		const store = new Store<Partial<Application>>( {
@@ -297,12 +295,175 @@ describe( 'ErrorPermission', () => {
 					get: messageGet,
 				},
 				$repoRouter,
+				$clientRouter,
 			},
 			store,
 		} );
 
 		expect( messageGet ).toHaveBeenNthCalledWith( 2, header, ...headerParams );
 		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
+	} );
+
+	it.each( [
+		[
+			{
+				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+				info: {
+					pages: pagesCausingCascadeProtection,
+				},
+			} as CascadeProtectedReason,
+			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
+			[ ],
+			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
+			[
+				pagesCausingCascadeProtection.length,
+				// eslint-disable-next-line max-len
+				`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
+			],
+		],
+		[
+			{
+				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+				info: {
+					pages: pagesCausingCascadeProtection,
+				},
+			} as CascadeProtectedReason,
+			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
+			[ ],
+			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
+			[
+				pagesCausingCascadeProtection.length,
+				// eslint-disable-next-line max-len
+				`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
+			],
+		],
+	] )( 'interpolates correct message for page cascade-protected', ( error: MissingPermissionsError,
+		header,
+		headerParams,
+		body,
+		bodyParams ) => {
+		headerParams = headerParams.map( ( param: any ) => param.toString() );
+		bodyParams = bodyParams.map( ( param: any ) => param.toString() );
+		const router = jest.fn()
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_One' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_Two' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Page_Three' );
+		const messageGet = jest.fn( ( key ) => key );
+		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: router,
+		};
+		const $clientRouter: MediaWikiRouter = {
+			getPageUrl: router,
+		};
+
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter,
+				$clientRouter,
+			},
+			store,
+		} );
+
+		calledWithHTMLElement( messageGet, 2, 2 );
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, header, ...headerParams );
+		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
+	} );
+
+	it( 'uses the correct router to build page urls on repo', () => {
+		const messageGet = jest.fn( ( key ) => key );
+		const error: CascadeProtectedReason = {
+			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+			info: {
+				pages: pagesCausingCascadeProtection,
+			},
+		};
+		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: jest.fn(),
+		};
+		const $clientRouter: MediaWikiRouter = {
+			getPageUrl: jest.fn(),
+		};
+
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter,
+				$clientRouter,
+			},
+			store,
+		} );
+		expect( $repoRouter.getPageUrl ).toHaveBeenCalledTimes( 3 );
+		expect( $clientRouter.getPageUrl ).not.toHaveBeenCalled();
+	} );
+
+	it( 'uses the correct router to build page urls on client', () => {
+		const messageGet = jest.fn( ( key ) => key );
+		const error: CascadeProtectedReason = {
+			type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+			info: {
+				pages: pagesCausingCascadeProtection,
+			},
+		};
+		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: jest.fn(),
+		};
+		const $clientRouter: MediaWikiRouter = {
+			getPageUrl: jest.fn(),
+		};
+
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter,
+				$clientRouter,
+			},
+			store,
+		} );
+		expect( $clientRouter.getPageUrl ).toHaveBeenCalledTimes( 3 );
+		expect( $repoRouter.getPageUrl ).not.toHaveBeenCalled();
 	} );
 
 	it( 'builds a talk page name based on the entity title', () => {

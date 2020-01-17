@@ -18,9 +18,11 @@ import {
 import Component from 'vue-class-component';
 import { State } from 'vuex-class';
 import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
+import PageList from '@/presentation/components/PageList.vue';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
+import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 
 interface PermissionTypeRenderer {
 	header: keyof typeof MessageKeys;
@@ -127,8 +129,8 @@ export default class ErrorPermission extends Vue {
 		return params;
 	}
 
-	private messageBodyParameters( permissionError: MissingPermissionsError ): string[] {
-		const params: string[] = [];
+	private messageBodyParameters( permissionError: MissingPermissionsError ): ( string|HTMLElement )[] {
+		const params: ( string|HTMLElement )[] = [];
 		switch ( permissionError.type ) {
 			case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
 				params.push(
@@ -172,17 +174,28 @@ export default class ErrorPermission extends Vue {
 			case PageNotEditable.ITEM_CASCADE_PROTECTED:
 				params.push(
 					permissionError.info.pages.length.toString(),
-					...permissionError.info.pages,
+					this.convertToHtmlList( permissionError.info.pages, this.$repoRouter ),
 				);
 				break;
 			case PageNotEditable.PAGE_CASCADE_PROTECTED:
 				params.push(
 					permissionError.info.pages.length.toString(),
-					...permissionError.info.pages,
+					this.convertToHtmlList( permissionError.info.pages, this.$clientRouter ),
 				);
 				break;
 		}
 		return params;
+	}
+
+	private convertToHtmlList( arr: string[], mwRouter: MediaWikiRouter ): HTMLElement {
+		const pageListInstance = new PageList( {
+			propsData: {
+				pages: arr,
+				router: mwRouter,
+			},
+		} );
+		pageListInstance.$mount();
+		return pageListInstance.$el as HTMLElement;
 	}
 }
 </script>
