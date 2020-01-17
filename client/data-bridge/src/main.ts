@@ -25,6 +25,7 @@ export function launch(
 		services.get( 'messagesRepository' ),
 		information.client,
 		services.get( 'repoRouter' ),
+		services.get( 'clientRouter' ),
 	);
 
 	const store = createStore( services );

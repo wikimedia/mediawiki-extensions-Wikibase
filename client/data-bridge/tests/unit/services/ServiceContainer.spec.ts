@@ -11,6 +11,7 @@ describe( 'ServiceContainer', () => {
 		[ 'wikibaseRepoConfigRepository' ],
 		[ 'tracker' ],
 		[ 'repoRouter' ],
+		[ 'clientRouter' ],
 	] )( '%s', ( name: keyof Services ) => {
 		it( 'throws an error if it is not set', () => {
 			expect( () => ( new ServiceContainer() ).get( name ) ).toThrow();

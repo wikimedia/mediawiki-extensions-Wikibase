@@ -1,6 +1,7 @@
 import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
+import ClientRouter from '@/data-access/ClientRouter';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import MwWindow from '@/@types/mediawiki/MwWindow';
@@ -118,6 +119,9 @@ describe( 'init', () => {
 			wbRepoConfig,
 			( window as MwWindow ).mw.util.wikiUrlencode,
 			$.param,
+		) );
+		expectedServices.set( 'clientRouter', new ClientRouter(
+			( window as MwWindow ).mw.util.getUrl,
 		) );
 
 		const entityId = 'Q5';

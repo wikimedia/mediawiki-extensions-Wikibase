@@ -44,6 +44,8 @@ export interface MwApi {
 
 export type MwTracker = ( topic: string, data?: unknown ) => void;
 
+export type MwUtilGetUrl = ( pageName: string|null, params?: Record<string, unknown> ) => string;
+
 export type MwUtilWikiUrlencode = ( string: string ) => string;
 
 interface MediaWiki {
@@ -63,6 +65,7 @@ interface MediaWiki {
 	track: MwTracker;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.util */
 	util: {
+		getUrl: MwUtilGetUrl;
 		wikiUrlencode: MwUtilWikiUrlencode;
 	};
 }

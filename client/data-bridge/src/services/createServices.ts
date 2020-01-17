@@ -1,6 +1,7 @@
 import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
+import ClientRouter from '@/data-access/ClientRouter';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -82,6 +83,8 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	) );
 
 	services.set( 'repoRouter', repoRouter );
+
+	services.set( 'clientRouter', new ClientRouter( mwWindow.mw.util.getUrl ) );
 
 	return services;
 }
