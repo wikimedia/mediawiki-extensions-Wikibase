@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use MediaWikiTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
-use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner
@@ -23,22 +22,6 @@ class DatabaseTermIdsCleanerTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_text';
 		$this->tablesUsed[] = 'wbt_text_in_lang';
 		$this->tablesUsed[] = 'wbt_term_in_lang';
-	}
-
-	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
-		return [
-			'scripts' => [
-				__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql',
-			],
-			'create' => [
-				'wbt_item_terms',
-				'wbt_property_terms',
-				'wbt_term_in_lang',
-				'wbt_text_in_lang',
-				'wbt_text',
-				'wbt_type',
-			],
-		];
 	}
 
 	private function getCleaner(): DatabaseTermIdsCleaner {

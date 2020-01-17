@@ -29,7 +29,6 @@ use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\PropertyContent;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
-use Wikimedia\Rdbms\IMaintainableDatabase;
 use Wikipage;
 
 /**
@@ -158,22 +157,6 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			'redirect',
 			$redirectColumns,
 			$redirectRows );
-	}
-
-	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
-		return [
-			'scripts' => [
-				__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql',
-			],
-			'create' => [
-				'wbt_item_terms',
-				'wbt_property_terms',
-				'wbt_term_in_lang',
-				'wbt_text_in_lang',
-				'wbt_text',
-				'wbt_type',
-			],
-		];
 	}
 
 	/**

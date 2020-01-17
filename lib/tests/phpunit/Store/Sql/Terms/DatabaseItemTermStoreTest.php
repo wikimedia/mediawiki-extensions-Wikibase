@@ -19,7 +19,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
-use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore
@@ -95,22 +94,6 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			new TermList( [ new Term( 'en', 'description' ) ] )
 		);
 		$this->fingerprintEmpty = new Fingerprint();
-	}
-
-	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
-		return [
-			'scripts' => [
-				__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql',
-			],
-			'create' => [
-				'wbt_item_terms',
-				'wbt_property_terms',
-				'wbt_term_in_lang',
-				'wbt_text_in_lang',
-				'wbt_text',
-				'wbt_type',
-			],
-		];
 	}
 
 	public function testStoreAndGetTerms() {
