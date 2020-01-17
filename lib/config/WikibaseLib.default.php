@@ -34,7 +34,7 @@ return [
 	 * It can be one of these stages:
 	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
 	 */
-	'tmpPropertyTermsMigrationStage' => MIGRATION_OLD,
+	'tmpPropertyTermsMigrationStage' => MIGRATION_WRITE_BOTH,
 
 	/**
 	 * @note This config option is primarily added for Wikidata transition use-case and can be
