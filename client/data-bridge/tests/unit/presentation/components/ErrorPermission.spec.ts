@@ -9,6 +9,7 @@ import {
 	CascadeProtectedReason,
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
+import Application from '@/store/Application';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
@@ -17,7 +18,6 @@ const localVue = createLocalVue();
 localVue.use( Vuex );
 
 const entityTitle = 'Q42';
-const pagesCausingCascadeProtection = [ 'Page One', 'Page Two', 'Page Three' ];
 
 describe( 'ErrorPermission', () => {
 	const blockId = 1,
@@ -26,18 +26,14 @@ describe( 'ErrorPermission', () => {
 		blockReason = 'Bad behavior',
 		blockedTimestamp = '2019-12-12T12:12:12',
 		blockExpiry = '2020-01-12T12:12:12',
-		blockPartial = false;
+		blockPartial = false,
+		pagesCausingCascadeProtection = [ 'Page One', 'Page Two', 'Page Three' ];
 
 	it( 'passes properties to ErrorPermissionInfo', () => {
 		const messageGet = jest.fn( ( key ) => key );
-		type mockState = {
-			entityTitle: string;
-			pagesCausingCascadeProtection: string[];
-		};
-		const store: Store<mockState> = new Store( {
+		const store = new Store<Partial<Application>>( {
 			state: {
 				entityTitle,
-				pagesCausingCascadeProtection,
 			},
 		} );
 		const error: ProtectedReason = {
@@ -69,14 +65,9 @@ describe( 'ErrorPermission', () => {
 
 	it( 'shows a list of all errors', () => {
 		const messageGet = jest.fn( ( key ) => key );
-		type mockState = {
-			entityTitle: string;
-			pagesCausingCascadeProtection: string[];
-		};
-		const store: Store<mockState> = new Store( {
+		const store = new Store<Partial<Application>>( {
 			state: {
 				entityTitle,
-				pagesCausingCascadeProtection,
 			},
 		} );
 		const errorProtected: ProtectedReason = {
@@ -222,34 +213,30 @@ describe( 'ErrorPermission', () => {
 			{
 				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
 				info: {
-					pages: [],
+					pages: pagesCausingCascadeProtection,
 				},
 			} as CascadeProtectedReason,
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
 			[ ],
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
 			[
-				3,
-				'Page One',
-				'Page Two',
-				'Page Three',
+				pagesCausingCascadeProtection.length,
+				...pagesCausingCascadeProtection,
 			],
 		],
 		[
 			{
 				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
 				info: {
-					pages: [],
+					pages: pagesCausingCascadeProtection,
 				},
 			} as CascadeProtectedReason,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
 			[ ],
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
 			[
-				3,
-				'Page One',
-				'Page Two',
-				'Page Three',
+				pagesCausingCascadeProtection.length,
+				...pagesCausingCascadeProtection,
 			],
 		],
 	] )( '%#: interpolates message with correct key and parameters', ( error: MissingPermissionsError,
@@ -258,7 +245,7 @@ describe( 'ErrorPermission', () => {
 		body,
 		bodyParams ) => {
 		// The info object in the interfaces allows for string number or boolean,
-		// but messages get accepts only string values
+		// but $messages.get() accepts only string values
 		// Better solutions are welcome.
 		headerParams = headerParams.map( ( param: any ) => param.toString() );
 		bodyParams = bodyParams.map( ( param: any ) => param.toString() );
@@ -293,14 +280,9 @@ describe( 'ErrorPermission', () => {
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterFactory( error.type ),
 		};
-		type mockState = {
-			entityTitle: string;
-			pagesCausingCascadeProtection: string[];
-		};
-		const store: Store<mockState> = new Store( {
+		const store = new Store<Partial<Application>>( {
 			state: {
 				entityTitle,
-				pagesCausingCascadeProtection,
 			},
 		} );
 
@@ -337,14 +319,9 @@ describe( 'ErrorPermission', () => {
 				.mockReturnValueOnce( logUrl )
 				.mockReturnValueOnce( propertyTalkUrl ),
 		};
-		type mockState = {
-			entityTitle: string;
-			pagesCausingCascadeProtection: string[];
-		};
-		const store: Store<mockState> = new Store( {
+		const store = new Store<Partial<Application>>( {
 			state: {
 				entityTitle,
-				pagesCausingCascadeProtection,
 			},
 		} );
 		const error = {
