@@ -46,6 +46,6 @@ return [
 	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW.
 	 * The final entry should use the key 'max' and applies to all other item IDs.
 	 */
-	'tmpItemTermsMigrationStages' => [ 'max' => MIGRATION_OLD ],
+	'tmpItemTermsMigrationStages' => [ 'max' => MIGRATION_WRITE_BOTH ],
 
 ];
