@@ -70,18 +70,19 @@ class SnakRdfBuilder {
 	 * Adds the given Statement's main Snak to the RDF graph.
 	 *
 	 * @param RdfWriter $writer
+	 * @param string $snakNamespace
 	 * @param Snak $snak
 	 * @param string $propertyNamespace
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addSnak( RdfWriter $writer, Snak $snak, $propertyNamespace ) {
+	public function addSnak( RdfWriter $writer, $snakNamespace, Snak $snak, $propertyNamespace ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value':
 				/** @var PropertyValueSnak $snak */
 				'@phan-var PropertyValueSnak $snak';
-				$this->addSnakValue( $writer, $snak, $propertyNamespace );
+				$this->addSnakValue( $writer, $snakNamespace, $snak, $propertyNamespace );
 				break;
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
@@ -108,11 +109,13 @@ class SnakRdfBuilder {
 	 * Adds the value of the given property to the RDF graph.
 	 *
 	 * @param RdfWriter $writer
+	 * @param string $snakNamespace
 	 * @param PropertyValueSnak $snak
 	 * @param string $propertyNamespace The property namespace for this snak
 	 */
 	private function addSnakValue(
 		RdfWriter $writer,
+		$snakNamespace,
 		PropertyValueSnak $snak,
 		$propertyNamespace
 	) {
@@ -130,7 +133,7 @@ class SnakRdfBuilder {
 		}
 
 		$dataType = $this->propertyTypes[$propertyKey];
-		$this->valueBuilder->addValue( $writer, $propertyNamespace, $propertyValueLName, $dataType, $snak );
+		$this->valueBuilder->addValue( $writer, $propertyNamespace, $propertyValueLName, $dataType, $snakNamespace, $snak );
 	}
 
 }

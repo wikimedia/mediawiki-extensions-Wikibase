@@ -76,6 +76,7 @@ class ComplexValueRdfHelper {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		DataValue $value,
 		$normalized = false
 	) {
@@ -91,7 +92,7 @@ class ComplexValueRdfHelper {
 			return null;
 		}
 
-		$this->valueNodeWriter->about( RdfVocabulary::NS_VALUE, $valueLName )
+		$this->valueNodeWriter->about( $snakNamespace, $valueLName )
 			->a( RdfVocabulary::NS_ONTOLOGY, $this->vocabulary->getValueTypeName( $value ) );
 
 		return $valueLName;

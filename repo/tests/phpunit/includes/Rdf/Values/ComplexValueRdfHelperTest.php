@@ -66,12 +66,26 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 
 		// attach a value node
 		$value = new StringValue( 'http://en.wikipedia.org/wiki/Wikidata' );
-		$lvalue = $helper->attachValueNode( $snakWriter, RdfVocabulary::NSP_CLAIM_STATEMENT, 'testing', 'DUMMY', $value );
+		$lvalue = $helper->attachValueNode(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			'testing',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$value
+		);
 		$this->assertEquals( 'e93b68fef814eb52e813bb72e6867432', $lvalue );
 
 		// do it again, tests dedupe
 		$snakWriter->about( 'www', 'Q2' );
-		$lvalue = $helper->attachValueNode( $snakWriter, RdfVocabulary::NSP_CLAIM_STATEMENT, 'testing', 'DUMMY', $value );
+		$lvalue = $helper->attachValueNode(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			'testing',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$value
+		);
 		$this->assertNull( $lvalue, 'lvalue produced by adding a value a second time should be null' );
 
 		// check the triples written to the snak writer
@@ -121,12 +135,26 @@ class ComplexValueRdfHelperTest extends \PHPUnit\Framework\TestCase {
 
 		// attach a value node
 		$value = new StringValue( 'http://en.wikipedia.org/wiki/Wikidata' );
-		$lvalue = $helper->attachValueNode( $snakWriter, RdfVocabulary::NSP_CLAIM_STATEMENT, 'testing', 'DUMMY', $value );
+		$lvalue = $helper->attachValueNode(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			'testing',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$value
+		);
 		$this->assertEquals( 'e93b68fef814eb52e813bb72e6867432', $lvalue );
 
 		// do it again, tests dedupe
 		$snakWriter->about( 'www', 'Q2' );
-		$lvalue = $helper->attachValueNode( $snakWriter, RdfVocabulary::NSP_CLAIM_STATEMENT, 'testing', 'DUMMY', $value );
+		$lvalue = $helper->attachValueNode(
+			$snakWriter,
+			RdfVocabulary::NSP_CLAIM_STATEMENT,
+			'testing',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$value
+		);
 		$this->assertNull( $lvalue, 'lvalue produced by adding a value a second time should be null' );
 
 		// check the triples written to the snak writer

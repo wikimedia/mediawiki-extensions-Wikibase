@@ -46,6 +46,7 @@ class ExternalIdentifierRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		// @phan-suppress-next-next-line PhanTypeMismatchArgument It doesn't check that it's a StringValue

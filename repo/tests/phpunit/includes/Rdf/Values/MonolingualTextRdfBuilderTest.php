@@ -41,7 +41,7 @@ class MonolingualTextRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer->about( 'www', 'Q1' );
 
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new MonolingualTextValue( 'de', 'Hallo Welt' ) );
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> "Hallo Welt"@de .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );

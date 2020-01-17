@@ -36,6 +36,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
+	 * @param string $snakNamespace
 	 * @param PropertyValueSnak $snak
 	 */
 	public function addValue(
@@ -43,6 +44,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		PropertyValueSnak $snak
 	) {
 		/** @var GlobeCoordinateValue $value */
@@ -66,7 +68,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			->value( $point, RdfVocabulary::NS_GEO, "wktLiteral" );
 
 		if ( $this->complexValueHelper !== null ) {
-			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $value );
+			$this->addValueNode( $writer, $propertyValueNamespace, $propertyValueLName, $dataType, $snakNamespace, $value );
 		}
 	}
 
@@ -77,6 +79,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string $propertyValueNamespace Property value relation namespace
 	 * @param string $propertyValueLName Property value relation name
 	 * @param string $dataType Property data type
+	 * @param string $snakNamespace
 	 * @param GlobeCoordinateValue $value
 	 */
 	private function addValueNode(
@@ -84,6 +87,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 		$propertyValueNamespace,
 		$propertyValueLName,
 		$dataType,
+		$snakNamespace,
 		GlobeCoordinateValue $value
 	) {
 		$valueLName = $this->complexValueHelper->attachValueNode(
@@ -91,6 +95,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			$propertyValueNamespace,
 			$propertyValueLName,
 			$dataType,
+			$snakNamespace,
 			$value
 		);
 

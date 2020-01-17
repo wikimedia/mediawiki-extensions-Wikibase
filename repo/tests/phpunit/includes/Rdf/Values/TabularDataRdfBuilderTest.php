@@ -59,7 +59,7 @@ class TabularDataRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Data:Foo.tab' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.tab> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
@@ -89,7 +89,7 @@ class TabularDataRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Data:Foo.tab' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.tab> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );

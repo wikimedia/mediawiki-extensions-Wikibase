@@ -137,6 +137,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 	private function addStatement( EntityId $entityId, Statement $statement, $isBest ) {
 		$statementLName = $this->vocabulary->getStatementLName( $statement );
 
+		$entityRepository = $this->vocabulary->getEntityRepositoryName( $entityId );
+
 		$this->addMainSnak( $entityId, $statementLName, $statement, $isBest );
 
 		// XXX: separate builder for qualifiers?
@@ -146,6 +148,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 				$propertyRepository = $this->vocabulary->getEntityRepositoryName( $q->getPropertyId() );
 				$this->snakBuilder->addSnak(
 					$this->statementWriter,
+					$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 					$q,
 					$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_QUALIFIER]
 				);
@@ -182,6 +185,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 					$propertyRepository = $this->vocabulary->getEntityRepositoryName( $refSnak->getPropertyId() );
 					$this->snakBuilder->addSnak(
 						$this->referenceWriter,
+						$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 						$refSnak,
 						$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_REFERENCE]
 					);
@@ -239,6 +243,7 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 
 		$this->snakBuilder->addSnak(
 			$this->statementWriter,
+			$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 			$snak,
 			$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM_STATEMENT]
 		);

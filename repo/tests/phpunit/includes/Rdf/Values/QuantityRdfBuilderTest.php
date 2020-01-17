@@ -300,6 +300,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $snak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$snak
 		);
 
@@ -337,6 +338,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $snak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$snak
 		);
 
@@ -465,6 +467,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $unboundedSnak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$unboundedSnak
 		);
 		// And once more
@@ -473,6 +476,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $unboundedSnak2->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$unboundedSnak2
 		);
 
@@ -535,6 +539,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $unboundedSnak->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$unboundedSnak
 		);
 		// And once more
@@ -543,6 +548,7 @@ class QuantityRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			RdfVocabulary::NSP_CLAIM_STATEMENT,
 			$vocab->getEntityLName( $unboundedSnak2->getPropertyId() ),
 			'DUMMY',
+			RdfVocabulary::NS_VALUE,
 			$unboundedSnak2
 		);
 

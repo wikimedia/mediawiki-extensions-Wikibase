@@ -59,7 +59,7 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Bunny.jpg' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
@@ -89,7 +89,7 @@ class CommonsMediaRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'Bunny.jpg' )
 		);
 
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', $snak );
+		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
 
 		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/wiki/Special:FilePath/Bunny.jpg> .';
 		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
