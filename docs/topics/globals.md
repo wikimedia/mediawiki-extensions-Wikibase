@@ -1,4 +1,4 @@
-# Globals {#topic_globals}
+# Globals
 
 PHP globals used by Wikibase.
 

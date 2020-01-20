@@ -1,12 +1,12 @@
-# Wikibase View {#components_view}
+# Wikibase View
 
 **View** is the component responsible for the HTML-based frontend for the Repo.
 
 General @subpage md_view_README.
 
 The extension has multiple sub components:
-  - @subpage components_view_termbox (submodule)
-  - @subpage components_repo_taintedreferences
+  - @subpage md_docs_components_view-termbox (submodule)
+  - @subpage md_docs_components_repo-taintedreferences
   - %DataModel `/lib/wikibase-data-model` (submodule)
   - %DataValues `/lib/wikibase-data-values` (submodule)
   - %DataValues ValueView `/lib/wikibase-data-values-value-view` (submodule)

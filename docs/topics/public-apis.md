@@ -1,4 +1,4 @@
-# Public APIs {#topic_public-apis}
+# Public APIs
 
 The PHP interfaces of this extension may not be used by other extensions. None of the PHP APIs have any stability guarantees. An exception are extensions that fully cover these usages with unit tests which are run by the CI pre-merge and are integrated in the Wikidata build.
 

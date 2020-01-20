@@ -1,4 +1,4 @@
-# Storage {#topic_storage}
+# Storage
 
 ## Topic Areas
 
@@ -12,7 +12,7 @@
 
 **Repo**
 
-* \ref topic_change-propagation
+* \ref md_docs_topics_change-propagation
   * @subpage md_docs_sql_wb_changes
   * @subpage md_docs_sql_wb_changes_dispatch
   * @subpage md_docs_sql_wb_changes_subscription
@@ -33,8 +33,8 @@
 
 **Client**
 
-* \ref topic_change-propagation
-  * @subpage md_docs_sql_wbc_entity_usage (See also \ref topic_usagetracking)
+* \ref md_docs_topics_change-propagation
+  * @subpage md_docs_sql_wbc_entity_usage (See also \ref md_docs_topics_usagetracking)
 
 ## Existing table changes
 

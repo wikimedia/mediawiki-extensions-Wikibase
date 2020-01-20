@@ -1,11 +1,11 @@
-# Usage tracking {#topic_usagetracking}
+# Usage tracking
 
 Tracking happens on two levels:
 
 - The client wiki tracks which pages use (which aspect of) which entity (from which repo).
 - Each repo tracks which client uses which entity.
 
-This is used to optimize change notifications on two levels (see @ref topic_change-propagation):
+This is used to optimize change notifications on two levels (see @ref md_docs_topics_change-propagation):
 
 - The repo sends notifications to the clients that use the modified entity in question.
 - The client compares incoming notifications with it's local tracking table to decide which pages to purge/update.

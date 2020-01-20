@@ -1,4 +1,4 @@
-# Federation {#topic_federation}
+# Federation
 
 Federation here means accessing the entities of one Wikibase Repository from another Wikibase Repository.
 
@@ -16,7 +16,7 @@ Currently only a single entity source is allowed per entity type on a given repo
 
 ## Configuration
 
-* A Wikibase Repository is configured as documented in @ref topic_options.
+* A Wikibase Repository is configured as documented in @ref md_docs_topics_options.
 * In order for federation to work:
   * [useEntitySourceBasedFederation] must be true.
   * Foreign sources must be configured using the [entitySources] setting.

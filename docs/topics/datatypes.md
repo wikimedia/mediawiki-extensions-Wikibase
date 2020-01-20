@@ -1,4 +1,4 @@
-# Datatypes {#topic_datatypes}
+# Datatypes
 
 This document describes the concept of property data types as used by Wikibase.
 

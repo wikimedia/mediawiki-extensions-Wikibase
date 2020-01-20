@@ -1,4 +1,4 @@
-# Hooks JS {#topic_hooks-js}
+# Hooks JS
 
 This file describes JavaScript hooks defined by the Wikibase extensions.
 

@@ -1,4 +1,4 @@
-# Services {#topic_services}
+# Services
 
 ### Top level service factories
 

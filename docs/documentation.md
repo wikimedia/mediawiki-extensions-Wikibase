@@ -1,4 +1,4 @@
-# Documentation {#documentation}
+# Documentation
 
  - Published at: https://doc.wikimedia.org/Wikibase/master/php/
  - Generated with Doxygen ([manual](http://www.doxygen.nl/manual))
@@ -52,4 +52,4 @@ The ones we currently use are listed below:
  - Command docs: http://www.doxygen.nl/manual/commands.html#cmdmsc
  - Spec docs: http://www.mcternan.me.uk/mscgen/
  - Visual tool: https://mscgen.js.org/
- - Example: @ref md_docs_topics_change-propogation
+ - Example: @ref md_docs_topics_change-propagation

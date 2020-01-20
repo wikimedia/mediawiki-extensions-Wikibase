@@ -1,4 +1,4 @@
-# Constraints {#topic_constraints}
+# Constraints
 
 This document describes how, when and where constraints on Wikibase
 Entities are enforced and defined.

@@ -1,4 +1,4 @@
-# Architecture Decision Records {#adr}
+# Architecture Decision Records
 
 This directory collects Architecture Decision Records, as outlined by Michael Nygard in his article: http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions
 
