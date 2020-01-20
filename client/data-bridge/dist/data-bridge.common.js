@@ -821,6 +821,17 @@ module.exports = __webpack_require__("9e1e") ? Object.defineProperties : functio
 
 /***/ }),
 
+/***/ "156b":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorWrapper_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3f08");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorWrapper_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorWrapper_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorWrapper_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "1654":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3144,6 +3155,18 @@ exports.f = __webpack_require__("2b4c");
 
 /***/ }),
 
+/***/ "3846":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 21.2.5.3 get RegExp.prototype.flags()
+if (__webpack_require__("9e1e") && /./g.flags != 'g') __webpack_require__("86cc").f(RegExp.prototype, 'flags', {
+  configurable: true,
+  get: __webpack_require__("0bfb")
+});
+
+
+/***/ }),
+
 /***/ "38fd":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3225,6 +3248,13 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
   );
 } });
 
+
+/***/ }),
+
+/***/ "3f08":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -5648,6 +5678,39 @@ var toString = {}.toString;
 module.exports = function (it) {
   return toString.call(it).slice(8, -1);
 };
+
+
+/***/ }),
+
+/***/ "6b54":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+__webpack_require__("3846");
+var anObject = __webpack_require__("cb7c");
+var $flags = __webpack_require__("0bfb");
+var DESCRIPTORS = __webpack_require__("9e1e");
+var TO_STRING = 'toString';
+var $toString = /./[TO_STRING];
+
+var define = function (fn) {
+  __webpack_require__("2aba")(RegExp.prototype, TO_STRING, fn, true);
+};
+
+// 21.2.5.14 RegExp.prototype.toString()
+if (__webpack_require__("79e5")(function () { return $toString.call({ source: 'a', flags: 'b' }) != '/a/b'; })) {
+  define(function toString() {
+    var R = anObject(this);
+    return '/'.concat(R.source, '/',
+      'flags' in R ? R.flags : !DESCRIPTORS && R instanceof RegExp ? $flags.call(R) : undefined);
+  });
+// FF44- RegExp#toString has a wrong name
+} else if ($toString.name != TO_STRING) {
+  define(function toString() {
+    return $toString.call(this);
+  });
+}
 
 
 /***/ }),
@@ -9861,6 +9924,17 @@ module.exports = __webpack_require__("584a").Array.from;
 
 /***/ }),
 
+/***/ "d2e9":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorPermissionInfo_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("e6bd");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorPermissionInfo_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorPermissionInfo_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorPermissionInfo_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "d3f4":
 /***/ (function(module, exports) {
 
@@ -10335,6 +10409,13 @@ var global = module.exports = typeof window != 'undefined' && window.Math == Mat
   : Function('return this')();
 if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 
+
+/***/ }),
+
+/***/ "e6bd":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -12585,14 +12666,385 @@ var Initializing_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_Initializing = (Initializing_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=708fafe6&
-var ErrorWrappervue_type_template_id_708fafe6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[_c('h1',[_vm._v("An error occurred")]),_c('p',[_c('a',{attrs:{"href":_vm.$repoRouter.getPageUrl( 'Project:About' )}},[_vm._v("About the repository")]),_vm._v(",\n\t\t"),_c('a',{attrs:{"href":_vm.$repoRouter.getPageUrl( 'Special:Log/protect', { page: 'Item:Q42' } )}},[_vm._v("An interesting protection history")]),_vm._v(".\n\t")])])}
-var ErrorWrappervue_type_template_id_708fafe6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=070fc37e&
+var ErrorWrappervue_type_template_id_070fc37e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):_c('h1',[_vm._v("\n\t\tAn error occurred\n\t")])],1)}
+var ErrorWrappervue_type_template_id_070fc37e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=708fafe6&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=070fc37e&
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
+var es7_array_includes = __webpack_require__("6762");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
+var es6_string_includes = __webpack_require__("2fdb");
+
+// CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
+var PageNotEditable;
+
+(function (PageNotEditable) {
+  PageNotEditable["BLOCKED_ON_CLIENT_PAGE"] = "blocked_on_client_page";
+  PageNotEditable["BLOCKED_ON_REPO_ITEM"] = "blocked_on_repo_item";
+  PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
+  PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
+  PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
+  PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
+  PageNotEditable["UNKNOWN"] = "unknown";
+})(PageNotEditable || (PageNotEditable = {}));
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3c934e69&
+var ErrorPermissionvue_type_template_id_3c934e69_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
+var ErrorPermissionvue_type_template_id_3c934e69_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3c934e69&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
+var es6_regexp_to_string = __webpack_require__("6b54");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
+var is_iterable = __webpack_require__("c8bb");
+var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    define_property_default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=46b342b7&
+var ErrorPermissionInfovue_type_template_id_46b342b7_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-permission-info-box"},[_c('div',{staticClass:"wb-ui-permission-info-box__info__icon"},[_c('div',{staticClass:"wb-ui-permission-info-box__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}})]),_c('div',{staticClass:"wb-ui-permission-info-box__body"},[_c('div',{class:[ _vm.infoIsExpanded ?
+				'wb-ui-permission-info-box__icon--collapsed' :
+				'wb-ui-permission-info-box__icon--expanded' ],on:{"click":_vm.toggleInfo}},[_c('a',{staticClass:"wb-ui-permission-info-box__body__title"},[_vm._v("\n\t\t\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t\t\t")])]),(_vm.infoIsExpanded)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])])}
+var ErrorPermissionInfovue_type_template_id_46b342b7_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=46b342b7&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+var ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorPermissionInfo, _Vue);
+
+  function ErrorPermissionInfo() {
+    var _this;
+
+    _classCallCheck(this, ErrorPermissionInfo);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermissionInfo).apply(this, arguments));
+    _this.infoIsExpanded = false;
+    return _this;
+  }
+
+  _createClass(ErrorPermissionInfo, [{
+    key: "toggleInfo",
+    value: function toggleInfo() {
+      this.infoIsExpanded = !this.infoIsExpanded;
+    }
+  }]);
+
+  return ErrorPermissionInfo;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageHeader", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageBody", void 0);
+
+ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo = __decorate([vue_class_component_common_default.a], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
+/* harmony default export */ var ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=style&index=0&lang=scss&
+var ErrorPermissionInfovue_type_style_index_0_lang_scss_ = __webpack_require__("d2e9");
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ErrorPermissionInfo_component = normalizeComponent(
+  components_ErrorPermissionInfovue_type_script_lang_ts_,
+  ErrorPermissionInfovue_type_template_id_46b342b7_render,
+  ErrorPermissionInfovue_type_template_id_46b342b7_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorPermissionInfo = (ErrorPermissionInfo_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+var _permissionTypeRender;
+
+
+
+
+
+
+
+var permissionTypeRenderers = (_permissionTypeRender = {}, _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_FULLY_PROTECTED, {
+  header: 'PERMISSIONS_PROTECTED_HEADING',
+  body: 'PERMISSIONS_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_SEMI_PROTECTED, {
+  header: 'PERMISSIONS_SEMI_PROTECTED_HEADING',
+  body: 'PERMISSIONS_SEMI_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_CASCADE_PROTECTED, {
+  header: 'PERMISSIONS_CASCADE_PROTECTED_HEADING',
+  body: 'PERMISSIONS_CASCADE_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_CLIENT_PAGE, {
+  header: 'PERMISSIONS_BLOCKED_ON_CLIENT_HEADING',
+  body: 'PERMISSIONS_BLOCKED_ON_CLIENT_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_REPO_ITEM, {
+  header: 'PERMISSIONS_BLOCKED_ON_REPO_HEADING',
+  body: 'PERMISSIONS_BLOCKED_ON_REPO_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.PAGE_CASCADE_PROTECTED, {
+  header: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING',
+  body: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.UNKNOWN, {
+  header: 'PERMISSIONS_ERROR_UNKNOWN_HEADING',
+  body: 'PERMISSIONS_ERROR_UNKNOWN_BODY'
+}), _permissionTypeRender);
+
+var ErrorPermissionvue_type_script_lang_ts_ErrorPermission =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorPermission, _Vue);
+
+  function ErrorPermission() {
+    _classCallCheck(this, ErrorPermission);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermission).apply(this, arguments));
+  }
+
+  _createClass(ErrorPermission, [{
+    key: "getMessageHeader",
+    value: function getMessageHeader(permissionError) {
+      var _this$$messages;
+
+      return (_this$$messages = this.$messages).get.apply(_this$$messages, [this.$messages.KEYS[this.messageHeaderKey(permissionError)]].concat(_toConsumableArray(this.messageHeaderParameters(permissionError))));
+    }
+  }, {
+    key: "getMessageBody",
+    value: function getMessageBody(permissionError) {
+      var _this$$messages2;
+
+      return (_this$$messages2 = this.$messages).get.apply(_this$$messages2, [this.$messages.KEYS[this.messageBodyKey(permissionError)]].concat(_toConsumableArray(this.messageBodyParameters(permissionError))));
+    }
+    /** A poor (wo)man's implementation of constructing a correct
+        talk page title due to lack of a redirect functionality.
+        This can be removed once T242346 is resolved.
+    */
+
+  }, {
+    key: "buildTalkPageNamespace",
+    value: function buildTalkPageNamespace() {
+      if (this.entityTitle.includes(':')) {
+        var entityTitleParts = this.entityTitle.split(':', 2);
+        return "".concat(entityTitleParts[0], "_talk:").concat(entityTitleParts[1]);
+      }
+
+      return "Talk:".concat(this.entityTitle);
+    }
+  }, {
+    key: "messageHeaderKey",
+    value: function messageHeaderKey(permissionError) {
+      return permissionTypeRenderers[permissionError.type].header;
+    }
+  }, {
+    key: "messageBodyKey",
+    value: function messageBodyKey(permissionError) {
+      return permissionTypeRenderers[permissionError.type].body;
+    }
+  }, {
+    key: "messageHeaderParameters",
+    value: function messageHeaderParameters(permissionError) {
+      var params = [];
+
+      switch (permissionError.type) {
+        case PageNotEditable.ITEM_FULLY_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Administrators'));
+          break;
+
+        case PageNotEditable.ITEM_SEMI_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Autoconfirmed_users'));
+          break;
+      }
+
+      return params;
+    }
+  }, {
+    key: "messageBodyParameters",
+    value: function messageBodyParameters(permissionError) {
+      var params = [];
+
+      switch (permissionError.type) {
+        case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
+          params.push(permissionError.info.blockedBy, // TODO: Convert to user link
+          permissionError.info.blockReason, '', // reserved for currentIP
+          permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
+          permissionError.info.blockedById.toString(), permissionError.info.blockExpiry, '', // reserved for intended blockee
+          permissionError.info.blockedTimestamp);
+          break;
+
+        case PageNotEditable.BLOCKED_ON_REPO_ITEM:
+          params.push(permissionError.info.blockedBy, // TODO: Convert to user link
+          permissionError.info.blockReason, '', // reserved for currentIP
+          permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
+          permissionError.info.blockedById.toString(), permissionError.info.blockExpiry, '', // reserved for intended blockee
+          permissionError.info.blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
+          break;
+
+        case PageNotEditable.ITEM_FULLY_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Project:Edit_warring'), this.$repoRouter.getPageUrl('Special:Log/protect', {
+            page: this.entityTitle
+          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
+          break;
+
+        case PageNotEditable.ITEM_SEMI_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Special:Log/protect', {
+            page: this.entityTitle
+          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
+          break;
+
+        case PageNotEditable.ITEM_CASCADE_PROTECTED:
+          params.push.apply(params, [permissionError.info.pages.length.toString()].concat(_toConsumableArray(permissionError.info.pages)));
+          break;
+
+        case PageNotEditable.PAGE_CASCADE_PROTECTED:
+          params.push.apply(params, [permissionError.info.pages.length.toString()].concat(_toConsumableArray(permissionError.info.pages)));
+          break;
+      }
+
+      return params;
+    }
+  }]);
+
+  return ErrorPermission;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "permissionErrors", void 0);
+
+__decorate([State('entityTitle')], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "entityTitle", void 0);
+
+ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_component_common_default()({
+  components: {
+    ErrorPermissionInfo: components_ErrorPermissionInfo
+  }
+})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
+/* harmony default export */ var ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue
+
+
+
+
+
+/* normalize component */
+
+var ErrorPermission_component = normalizeComponent(
+  components_ErrorPermissionvue_type_script_lang_ts_,
+  ErrorPermissionvue_type_template_id_3c934e69_render,
+  ErrorPermissionvue_type_template_id_3c934e69_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12612,14 +13064,36 @@ function (_Vue) {
     return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorWrapper).apply(this, arguments));
   }
 
+  _createClass(ErrorWrapper, [{
+    key: "isPermissionError",
+    value: function isPermissionError(error) {
+      return Object.values(PageNotEditable).includes(error.type);
+    }
+  }, {
+    key: "permissionErrors",
+    get: function get() {
+      return this.applicationErrors.filter(this.isPermissionError);
+    }
+  }]);
+
   return ErrorWrapper;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default.a], ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
+__decorate([State('applicationErrors')], ErrorWrappervue_type_script_lang_ts_ErrorWrapper.prototype, "applicationErrors", void 0);
+
+ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default()({
+  components: {
+    ErrorPermission: components_ErrorPermission
+  }
+})], ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
 /* harmony default export */ var ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
 // CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=style&index=0&lang=scss&
+var ErrorWrappervue_type_style_index_0_lang_scss_ = __webpack_require__("156b");
+
 // CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue
+
 
 
 
@@ -12629,8 +13103,8 @@ ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_compone
 
 var ErrorWrapper_component = normalizeComponent(
   components_ErrorWrappervue_type_script_lang_ts_,
-  ErrorWrappervue_type_template_id_708fafe6_render,
-  ErrorWrappervue_type_template_id_708fafe6_staticRenderFns,
+  ErrorWrappervue_type_template_id_070fc37e_render,
+  ErrorWrappervue_type_template_id_070fc37e_staticRenderFns,
   false,
   null,
   null,
@@ -12645,22 +13119,6 @@ var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
 var es6_object_keys = __webpack_require__("456d");
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    define_property_default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 // CONCATENATED MODULE: ./src/definitions/ApplicationStatus.ts
 
 
@@ -12764,9 +13222,6 @@ var EventEmittingButtonvue_type_template_id_32ba6140_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=32ba6140&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
-var es7_array_includes = __webpack_require__("6762");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
 
@@ -13054,10 +13509,6 @@ var App_component = normalizeComponent(
 )
 
 /* harmony default export */ var presentation_App = (App_component.exports);
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
-var is_array = __webpack_require__("a745");
-var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
-
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithHoles.js
 
 function _arrayWithHoles(arr) {
@@ -13066,10 +13517,6 @@ function _arrayWithHoles(arr) {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
 var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
-var is_iterable = __webpack_require__("c8bb");
-var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArrayLimit.js
 
@@ -13425,38 +13872,6 @@ var getters_getters = {
     return state.applicationStatus;
   }
 };
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
 // CONCATENATED MODULE: ./src/store/clone.ts
 function clone(source) {
   return JSON.parse(JSON.stringify(source));
@@ -15212,18 +15627,6 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
-var PageNotEditable;
-
-(function (PageNotEditable) {
-  PageNotEditable["BLOCKED_ON_CLIENT_PAGE"] = "blocked_on_client_page";
-  PageNotEditable["BLOCKED_ON_REPO_ITEM"] = "blocked_on_repo_item";
-  PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
-  PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
-  PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
-  PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
-  PageNotEditable["UNKNOWN"] = "unknown";
-})(PageNotEditable || (PageNotEditable = {}));
 // CONCATENATED MODULE: ./src/definitions/data-access/PageEditPermissionErrorsRepository.ts
 var PermissionErrorType;
 
@@ -15388,12 +15791,6 @@ var es6_string_ends_with = __webpack_require__("aef6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.starts-with.js
 var es6_string_starts_with = __webpack_require__("f559");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
-var es6_string_includes = __webpack_require__("2fdb");
 
 // CONCATENATED MODULE: ./src/data-access/ApiQuery.ts
 
