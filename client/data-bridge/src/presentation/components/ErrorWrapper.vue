@@ -4,9 +4,7 @@
 			v-if="permissionErrors.length"
 			:permission-errors="permissionErrors"
 		/>
-		<h1 v-else>
-			An error occurred
-		</h1>
+		<ErrorUnknown v-else />
 	</section>
 </template>
 
@@ -16,10 +14,11 @@ import Component from 'vue-class-component';
 import { State } from 'vuex-class';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
+import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ApplicationError from '@/definitions/ApplicationError';
 
 @Component( {
-	components: { ErrorPermission },
+	components: { ErrorPermission, ErrorUnknown },
 } )
 export default class ErrorWrapper extends Vue {
 	@State( 'applicationErrors' )

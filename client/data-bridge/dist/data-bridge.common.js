@@ -12666,12 +12666,12 @@ var Initializing_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_Initializing = (Initializing_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=070fc37e&
-var ErrorWrappervue_type_template_id_070fc37e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):_c('h1',[_vm._v("\n\t\tAn error occurred\n\t")])],1)}
-var ErrorWrappervue_type_template_id_070fc37e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=0fe2e9bb&
+var ErrorWrappervue_type_template_id_0fe2e9bb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):_c('ErrorUnknown')],1)}
+var ErrorWrappervue_type_template_id_0fe2e9bb_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=070fc37e&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=0fe2e9bb&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
@@ -13035,7 +13035,66 @@ var ErrorPermission_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=35f4329a&
+var ErrorUnknownvue_type_template_id_35f4329a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
+var ErrorUnknownvue_type_template_id_35f4329a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=35f4329a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+/**
+ * Component which gets shown if no dedicated handling for the type of error
+ * which happened is configured.
+ */
+
+var ErrorUnknownvue_type_script_lang_ts_ErrorUnknown =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorUnknown, _Vue);
+
+  function ErrorUnknown() {
+    _classCallCheck(this, ErrorUnknown);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorUnknown).apply(this, arguments));
+  }
+
+  return ErrorUnknown;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_component_common_default()({})], ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
+/* harmony default export */ var ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue
+
+
+
+
+
+/* normalize component */
+
+var ErrorUnknown_component = normalizeComponent(
+  components_ErrorUnknownvue_type_script_lang_ts_,
+  ErrorUnknownvue_type_template_id_35f4329a_render,
+  ErrorUnknownvue_type_template_id_35f4329a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorUnknown = (ErrorUnknown_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -13083,7 +13142,8 @@ __decorate([State('applicationErrors')], ErrorWrappervue_type_script_lang_ts_Err
 
 ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default()({
   components: {
-    ErrorPermission: components_ErrorPermission
+    ErrorPermission: components_ErrorPermission,
+    ErrorUnknown: components_ErrorUnknown
   }
 })], ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
 /* harmony default export */ var ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
@@ -13103,8 +13163,8 @@ var ErrorWrappervue_type_style_index_0_lang_scss_ = __webpack_require__("156b");
 
 var ErrorWrapper_component = normalizeComponent(
   components_ErrorWrappervue_type_script_lang_ts_,
-  ErrorWrappervue_type_template_id_070fc37e_render,
-  ErrorWrappervue_type_template_id_070fc37e_staticRenderFns,
+  ErrorWrappervue_type_template_id_0fe2e9bb_render,
+  ErrorWrappervue_type_template_id_0fe2e9bb_staticRenderFns,
   false,
   null,
   null,

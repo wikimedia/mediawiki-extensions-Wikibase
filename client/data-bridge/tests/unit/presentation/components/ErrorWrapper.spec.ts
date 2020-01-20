@@ -7,6 +7,7 @@ import {
 	ProtectedReason,
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
+import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import Application from '@/store/Application';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 
@@ -14,18 +15,18 @@ const localVue = createLocalVue();
 localVue.use( Vuex );
 
 describe( 'ErrorWrapper', () => {
-	it( 'shows an (unoffical, hard-coded) generic error text on empty applicationErrors', () => {
+	it( 'mounts ErrorUnknown on empty applicationErrors', () => {
 		const store = new Store<Partial<Application>>( {
 			state: {
 				applicationErrors: [],
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
-		expect( wrapper.html() ).toContain( 'An error occurred' );
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBeTruthy();
 		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
 	} );
 
-	it( 'shows an (unoffical, hard-coded) generic error text for non-permission-related errors', () => {
+	it( 'mounts ErrorUnknown for exclusively non-permission-related errors', () => {
 		const store = new Store<Partial<Application>>( {
 			state: {
 				applicationErrors: [
@@ -36,7 +37,7 @@ describe( 'ErrorWrapper', () => {
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
-		expect( wrapper.html() ).toContain( 'An error occurred' );
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBeTruthy();
 		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
 	} );
 
@@ -59,7 +60,7 @@ describe( 'ErrorWrapper', () => {
 		const permissionErrorComponent = wrapper.find( ErrorPermission );
 		expect( permissionErrorComponent.exists() ).toBeTruthy();
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( applicationErrors );
-		expect( wrapper.html() ).not.toContain( 'An error occurred' );
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
 	} );
 
 	// TODO find an answer to what is actually the desired behavior
@@ -89,6 +90,6 @@ describe( 'ErrorWrapper', () => {
 		const permissionErrorComponent = wrapper.find( ErrorPermission );
 		expect( permissionErrorComponent.exists() ).toBeTruthy();
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( permissionErrors );
-		expect( wrapper.html() ).not.toContain( 'An error occurred' );
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
 	} );
 } );
