@@ -730,6 +730,7 @@ final class WikibaseClient {
 	 * @return Language
 	 */
 	public function getContentLanguage() {
+		// @phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgContLang
 		global $wgContLang;
 
 		// TODO: define a LanguageProvider service instead of using a global directly.

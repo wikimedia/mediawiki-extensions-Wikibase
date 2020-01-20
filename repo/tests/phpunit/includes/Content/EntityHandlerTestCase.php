@@ -11,6 +11,7 @@ use FauxRequest;
 use InvalidArgumentException;
 use Language;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
@@ -207,8 +208,6 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	}
 
 	public function testGetPageLanguage() {
-		global $wgContLang;
-
 		$handler = $this->getHandler();
 		$title = Title::makeTitle( $handler->getEntityNamespace(), "1234567" );
 
@@ -216,19 +215,21 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		//      if the user language is different. It's unclear whether this is actually the desired behavior,
 		//      since Wikibase Entities are inherently multilingual, so they have no actual "page language".
 
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		// test whatever is there
-		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+		$this->assertEquals( $contLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test fr
 		$this->setMwGlobals( 'wgLang', Language::factory( "fr" ) );
 		$handler = $this->getHandler();
-		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+		$this->assertEquals( $contLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
 
 		// test nl
 		$this->setMwGlobals( 'wgLang', Language::factory( "nl" ) );
-		$this->setContentLang( 'fr' );
+		$frCode = 'fr';
+		$this->setMwGlobals( 'wgLanguageCode', $frCode );
 		$handler = $this->getHandler();
-		$this->assertEquals( $wgContLang->getCode(), $handler->getPageLanguage( $title )->getCode() );
+		$this->assertEquals( $frCode, $handler->getPageLanguage( $title )->getCode() );
 	}
 
 	public function testGetPageViewLanguage() {

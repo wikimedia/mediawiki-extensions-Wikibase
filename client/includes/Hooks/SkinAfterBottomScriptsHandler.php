@@ -149,8 +149,7 @@ class SkinAfterBottomScriptsHandler {
 			return '';
 		}
 
-		global $wgContLang;
-		$langCode = $wgContLang->getCode();
+		$langCode = $this->client->getContentLanguage()->getCode();
 		$fingerprint = $entity->getFingerprint();
 		if ( !$fingerprint->hasDescription( $langCode ) ) {
 			return '';

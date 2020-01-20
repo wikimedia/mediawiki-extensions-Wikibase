@@ -14,6 +14,7 @@ use Diff\Patcher\PatcherException;
 use Hooks;
 use Language;
 use LogicException;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use ParserOptions;
 use ParserOutput;
@@ -397,8 +398,6 @@ abstract class EntityContent extends AbstractContent {
 	 * @return string
 	 */
 	public function getTextForSummary( $maxLength = 250 ) {
-		global $wgContLang;
-
 		if ( $this->isRedirect() ) {
 			return $this->getRedirectText();
 		}
@@ -408,7 +407,7 @@ abstract class EntityContent extends AbstractContent {
 		// TODO: This assumes all entities are LabelsProvider. Fix it.
 		if ( $entity instanceof LabelsProvider ) {
 			$labels = $entity->getLabels();
-			$languageCode = $wgContLang->getCode();
+			$languageCode = MediaWikiServices::getInstance()->getContentLanguage()->getCode();
 
 			if ( $labels->hasTermForLanguage( $languageCode ) ) {
 				$label = $labels->getByLanguage( $languageCode )->getText();

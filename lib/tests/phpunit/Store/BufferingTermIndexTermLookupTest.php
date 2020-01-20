@@ -182,17 +182,16 @@ class BufferingTermIndexTermLookupTest extends EntityTermLookupTest {
 						'termType' => 'alias',
 						'termLanguage' => 'en',
 						'termText' => 'alias 1',
-						'entityId' => new ItemId('Q123')
+						'entityId' => new ItemId( 'Q123' )
 					] ),
 					new TermIndexEntry( [
 						'termType' => 'alias',
 						'termLanguage' => 'en',
 						'termText' => 'alias 2',
-						'entityId' => new ItemId('Q123')
+						'entityId' => new ItemId( 'Q123' )
 					] ),
 				];
 			} ) );
-
 
 		$lookup = new BufferingTermIndexTermLookup( $termIndex, 10 );
 		$q116 = new ItemId( 'Q123' );

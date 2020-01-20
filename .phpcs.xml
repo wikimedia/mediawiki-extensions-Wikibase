@@ -2,7 +2,6 @@
 <ruleset>
 	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase">
 		<exclude name="PSR12.Properties.ConstantVisibility.NotFound" />
-		<exclude name="MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgContLang" />
 		<exclude name="MediaWiki.Usage.NullableType.PHP71NullableStyle" />
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent" />
 		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />

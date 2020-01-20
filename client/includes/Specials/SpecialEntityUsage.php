@@ -6,6 +6,7 @@ use HtmlArmor;
 use HTMLForm;
 use Html;
 use Linker;
+use MediaWiki\MediaWikiServices;
 use QueryPage;
 use Skin;
 use Title;
@@ -158,8 +159,6 @@ class SpecialEntityUsage extends QueryPage {
 	 * @return string HTML
 	 */
 	public function formatResult( $skin, $row ) {
-		global $wgContLang;
-
 		$title = Title::makeTitleSafe( $row->namespace, $row->title );
 
 		if ( !$title ) {
@@ -174,7 +173,8 @@ class SpecialEntityUsage extends QueryPage {
 			);
 		}
 
-		$linkText = $wgContLang->convert( htmlspecialchars( $title->getPrefixedText() ) );
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
+		$linkText = $contLang->convert( htmlspecialchars( $title->getPrefixedText() ) );
 		return $this->getLinkRenderer()->makeLink(
 			$title,
 			new HtmlArmor( $linkText )

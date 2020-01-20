@@ -12,6 +12,7 @@ use Html;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use MWException;
 use ParserOutput;
@@ -551,9 +552,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return Language The page's language
 	 */
 	public function getPageLanguage( Title $title, Content $content = null ) {
-		global $wgContLang;
-
-		return $wgContLang;
+		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**
