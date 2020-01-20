@@ -54,7 +54,6 @@ export default class MWHookHandler implements HookHandler {
 
 	private addCancelHook( store: Store<Application> ): void {
 		this.mwHooks( 'wikibase.statement.stopEditing' ).add( ( guid: string ) => {
-			store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, guid );
 			store.dispatch( STOP_EDIT, guid );
 
 		} );
