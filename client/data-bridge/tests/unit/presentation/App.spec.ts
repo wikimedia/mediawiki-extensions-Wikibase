@@ -238,14 +238,28 @@ describe( 'App.vue', () => {
 	} );
 
 	describe( 'component switch', () => {
-		it( 'mounts ErrorWrapper, if a error occurs', () => {
-			store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
-			const wrapper = shallowMount( App, {
-				store,
-				localVue,
+
+		describe( 'if there is an error', () => {
+			it( 'mounts ErrorWrapper', () => {
+				store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+
+				expect( wrapper.find( ErrorWrapper ).exists() ).toBeTruthy();
 			} );
 
-			expect( wrapper.find( ErrorWrapper ).exists() ).toBeTruthy();
+			it( 'doesn\'t show the save button ', () => {
+				store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+					stubs: { ProcessDialogHeader, EventEmittingButton },
+				} );
+
+				expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBeFalsy();
+			} );
 		} );
 
 		describe( 'outside of the error scenario', () => {
