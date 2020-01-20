@@ -21,7 +21,7 @@ use Wikimedia\Assert\Assert;
  *       the caching system (eg. APC, Memcached, ...) as Least Recently Used  as soon as no code
  *       will request it.
  */
-class CachingFallbackLabelDescriptionLookup implements LabelDescriptionLookup {
+class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
 	private const LABEL = 'label';
 	private const DESCRIPTION = 'description';
