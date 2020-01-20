@@ -18,6 +18,7 @@ import { budge } from '../util/timer';
 import {
 	select,
 	insert,
+	selectRadioInput,
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
 
@@ -371,6 +372,9 @@ describe( 'string data value', () => {
 				testLink!.click();
 				await budge();
 
+				const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
+				await selectRadioInput( replaceInputDecision as HTMLInputElement );
+
 				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
 				expect( save ).not.toBeNull();
 
@@ -393,6 +397,9 @@ describe( 'string data value', () => {
 
 				testLink!.click();
 				await budge();
+
+				const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
+				await selectRadioInput( replaceInputDecision as HTMLInputElement );
 
 				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
 				expect( save ).not.toBeNull();

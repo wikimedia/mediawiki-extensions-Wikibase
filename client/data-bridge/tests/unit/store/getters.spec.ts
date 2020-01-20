@@ -1,4 +1,5 @@
 import { ErrorTypes } from '@/definitions/ApplicationError';
+import EditDecision from '@/definitions/EditDecision';
 import { getters } from '@/store/getters';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import {
@@ -193,6 +194,26 @@ describe( 'root/getters', () => {
 				applicationState, null, applicationState, null,
 			) ).toBe( true );
 		} );
+	} );
+
+	describe( 'canSave', () => {
+
+		it.each( [
+			[ false, false, null ],
+			[ false, true, null ],
+			[ false, false, EditDecision.REPLACE ],
+			[ true, true, EditDecision.REPLACE ],
+			[ true, true, EditDecision.UPDATE ],
+		] )(
+			'returns %p with isTargetStatementModified=%p and editDecision=%p',
+			( expected: boolean, isTargetStatementModified: boolean, editDecision: EditDecision ) => {
+				const applicationState = newApplicationState( { editDecision } );
+				expect( getters.canSave(
+					applicationState, { isTargetStatementModified }, applicationState, null,
+				) ).toBe( expected );
+			},
+		);
+
 	} );
 
 	describe( 'targetReferences', () => {

@@ -75,6 +75,16 @@ export const getters: GetterTree<Application, Application> = {
 		);
 	},
 
+	canSave(
+		state: Application,
+		getters: {
+			isTargetStatementModified: boolean;
+		},
+	): boolean {
+		return state.editDecision !== null &&
+			getters.isTargetStatementModified;
+	},
+
 	applicationStatus( state: Application ): ApplicationStatus {
 		if ( state.applicationErrors.length > 0 ) {
 			return ApplicationStatus.ERROR;

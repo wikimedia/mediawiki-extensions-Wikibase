@@ -4,6 +4,11 @@ export async function insert( element: HTMLTextAreaElement, value: string ): Pro
 	element.dispatchEvent( event );
 }
 
+export async function selectRadioInput( element: HTMLInputElement ): Promise<void> {
+	const event = new Event( 'input' );
+	element.dispatchEvent( event );
+}
+
 export function select( selector: string, nth = 0 ): HTMLElement|null {
 	if ( nth === 0 ) {
 		return document.querySelector( selector );
