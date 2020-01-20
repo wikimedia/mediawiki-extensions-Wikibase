@@ -205,7 +205,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			}
 
 			if ( array_key_exists( 'message', $exception ) ) {
-				$this->assertContains( $exception['message'], $e->getMessage() );
+				$this->assertStringContainsString( $exception['message'], $e->getMessage() );
 			}
 
 			if ( array_key_exists( 'message-key', $exception ) ) {

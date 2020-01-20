@@ -68,11 +68,11 @@ class ChangePrunerTest extends MediaWikiTestCase {
 
 		$this->assertEquals( 6, count( $this->messages ), 'pruner has reported 6 messages' );
 
-		$this->assertContains( 'pruning entries older than 2015-01-01T00:00:06Z', $this->messages[0] );
-		$this->assertContains( '1 rows pruned', $this->messages[1] );
-		$this->assertContains( 'pruning entries older than 2015-01-01T00:03:01Z', $this->messages[2] );
-		$this->assertContains( '1 rows pruned', $this->messages[3] );
-		$this->assertContains( '0 rows pruned', $this->messages[5] );
+		$this->assertStringContainsString( 'pruning entries older than 2015-01-01T00:00:06Z', $this->messages[0] );
+		$this->assertStringContainsString( '1 rows pruned', $this->messages[1] );
+		$this->assertStringContainsString( 'pruning entries older than 2015-01-01T00:03:01Z', $this->messages[2] );
+		$this->assertStringContainsString( '1 rows pruned', $this->messages[3] );
+		$this->assertStringContainsString( '0 rows pruned', $this->messages[5] );
 
 		$this->assertEquals( 0, $this->db->selectRowCount( 'wb_changes' ), 'wb_changes table is empty' );
 	}

@@ -199,13 +199,10 @@ class PropertyContentTest extends EntityContentTestCase {
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
 		$actualOptions = $parserOutput->getUsedOptions();
-		$this->assertEquals(
+		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,
 			$actualOptions,
-			'Cache-split flags are not what they should be',
-			0.0,
-			1,
-			true
+			'Cache-split flags are not what they should be'
 		);
 
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );

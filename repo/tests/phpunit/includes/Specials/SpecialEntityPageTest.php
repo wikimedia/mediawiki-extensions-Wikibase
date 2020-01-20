@@ -174,7 +174,7 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 		list( $output, ) = $this->executeSpecialPage( $subPage, $request );
 
-		$this->assertContains( '(wikibase-entitypage-text)', $output );
+		$this->assertStringContainsString( '(wikibase-entitypage-text)', $output );
 	}
 
 }

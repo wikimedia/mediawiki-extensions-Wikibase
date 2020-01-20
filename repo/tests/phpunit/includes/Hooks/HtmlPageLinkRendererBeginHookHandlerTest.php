@@ -111,8 +111,8 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( HtmlArmor::class, $text );
 		$this->assertEquals( $expectedHtml, HtmlArmor::getHtml( $text ) );
 
-		$this->assertContains( self::DUMMY_LABEL, $customAttribs['title'] );
-		$this->assertContains( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_LABEL, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
 
 		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
 	}
@@ -186,11 +186,11 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$specialPageTitle = SpecialPage::getTitleFor( $linkTitle );
 
 		$this->assertFalse( $ret );
-		$this->assertContains(
+		$this->assertStringContainsString(
 			$this->getLinkRenderer()->makeKnownLink( $specialPageTitle ),
 			$html
 		);
-		$this->assertContains( $specialPageTitle->getFullText(), $html );
+		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
 	}
 
 	public function testDoHtmlPageLinkRendererBegin_nonEntityTitleLink() {
