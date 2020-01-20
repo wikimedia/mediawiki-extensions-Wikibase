@@ -6,6 +6,7 @@ use HashBagOStuff;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\WikibaseSettings;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 
@@ -23,6 +24,10 @@ class DatabaseTypeIdsStoreTest extends MediaWikiTestCase {
 	private $typeIdsStore;
 
 	protected function setUp() : void {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
+		}
+
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_type';
 

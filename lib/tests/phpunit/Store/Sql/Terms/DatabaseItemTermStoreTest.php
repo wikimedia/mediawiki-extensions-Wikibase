@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore
@@ -51,6 +52,10 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
+		}
+
 		$this->tablesUsed[] = 'wbt_type';
 		$this->tablesUsed[] = 'wbt_text';
 		$this->tablesUsed[] = 'wbt_text_in_lang';

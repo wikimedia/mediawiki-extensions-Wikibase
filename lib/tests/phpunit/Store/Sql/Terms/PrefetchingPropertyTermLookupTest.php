@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\Sql\Terms\InMemoryTermIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
+use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup
@@ -35,6 +36,10 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 	private $p2;
 
 	protected function setUp() : void {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
+		}
+
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_property_terms';
 		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
