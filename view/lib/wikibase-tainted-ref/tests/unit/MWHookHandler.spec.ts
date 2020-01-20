@@ -1,4 +1,9 @@
-import { START_EDIT, STATEMENT_TAINTED_STATE_TAINT, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
+import {
+	START_EDIT,
+	STOP_EDIT,
+	STATEMENT_TAINTED_STATE_TAINT,
+	STATEMENT_TAINTED_STATE_UNTAINT,
+} from '@/store/actionTypes';
 import MWHookHandler from '@/MWHookHandler';
 import Vuex from 'vuex';
 import Vue from 'vue';
@@ -19,8 +24,12 @@ describe( 'MWHookHandler', () => {
 			return { add: jest.fn() };
 		};
 
-		const mwHookRegistry: HookRegistry = jest.fn( ( _hookName: string ) => {
-			return { add: dummyEditHook };
+		const mwHookRegistry: HookRegistry = jest.fn( ( hookName: string ) => {
+			if ( hookName === 'wikibase.statement.startEditing' ) {
+				return { add: dummyEditHook };
+			} else {
+				return { add: jest.fn() };
+			}
 		} );
 
 		const mockTaintedChecker = { check: () => true };
@@ -31,6 +40,30 @@ describe( 'MWHookHandler', () => {
 		hookHandler.addStore( store );
 		expect( mwHookRegistry ).toHaveBeenCalledWith( 'wikibase.statement.startEditing' );
 		expect( store.dispatch ).toHaveBeenCalledWith( START_EDIT, 'gooGuid' );
+	} );
+
+	it( `should dispatch ${STOP_EDIT} with statement guid on edit stop hook firing`, () => {
+		const dummyEditHook = ( randomFunction: Function ): Hook => {
+			randomFunction( 'gooGuid' );
+			return { add: jest.fn() };
+		};
+
+		const mwHookRegistry: HookRegistry = jest.fn( ( hookName: string ) => {
+			if ( hookName === 'wikibase.statement.stopEditing' ) {
+				return { add: dummyEditHook };
+			} else {
+				return { add: jest.fn() };
+			}
+		} );
+
+		const mockTaintedChecker = { check: () => true };
+
+		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+		const store = new Vuex.Store( { state: { statementsTaintedState: {}, statementsPopperIsOpen: {} } as any } );
+		store.dispatch = jest.fn();
+		hookHandler.addStore( store );
+		expect( mwHookRegistry ).toHaveBeenCalledWith( 'wikibase.statement.stopEditing' );
+		expect( store.dispatch ).toHaveBeenCalledWith( STOP_EDIT, 'gooGuid' );
 	} );
 
 	it( `should dispatch ${STATEMENT_TAINTED_STATE_TAINT} with statement guid` +
