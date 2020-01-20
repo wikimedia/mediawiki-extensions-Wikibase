@@ -357,10 +357,10 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$request = new FauxRequest( [ 'language' => '<sup>' ], true );
 		list( $output, ) = $this->executeSpecialPage( null, $request );
 
-		$this->assertContains( '<p class="error">', $output );
-		$this->assertContains( '&lt;sup&gt;', $output );
-		$this->assertNotContains( '<sup>', $output, 'never unescaped' );
-		$this->assertNotContains( '&amp;lt;', $output, 'no double escaping' );
+		$this->assertStringContainsString( '<p class="error">', $output );
+		$this->assertStringContainsString( '&lt;sup&gt;', $output );
+		$this->assertStringNotContainsString( '<sup>', $output, 'never unescaped' );
+		$this->assertStringNotContainsString( '&amp;lt;', $output, 'no double escaping' );
 	}
 
 	private function assetFingerprintEquals( Fingerprint $expected, Fingerprint $actual ) {

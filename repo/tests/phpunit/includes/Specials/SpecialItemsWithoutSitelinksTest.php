@@ -38,12 +38,12 @@ class SpecialItemsWithoutSitelinksTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '' );
 
 		$this->assertIsString( $output );
-		$this->assertContains( 'wikibase-itemswithoutsitelinks-summary', $output );
-		$this->assertContains( '<div class="mw-spcontent">', $output );
+		$this->assertStringContainsString( 'wikibase-itemswithoutsitelinks-summary', $output );
+		$this->assertStringContainsString( '<div class="mw-spcontent">', $output );
 
 		// There was a bug in SpecialWikibaseQueryPage::showQuery() adding an unnecessary
 		// Html::closeElement( 'div' ) when the results is empty.
-		$this->assertNotContains( '</div></div>', $output );
+		$this->assertStringNotContainsString( '</div></div>', $output );
 	}
 
 }

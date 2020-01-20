@@ -199,7 +199,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'de', 'Label in English', 'en', 'en' )
 		);
-		$this->assertContains( $fallbackMarker, $result );
+		$this->assertStringContainsString( $fallbackMarker, $result );
 	}
 
 	public function testGivenLabelInTransliteratableLanguageExists_ResultContainsFallbackMarker() {
@@ -214,7 +214,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'crh-latn', self::SOME_TRANSLITERATED_TEXT, 'crh-latn', 'crh-cyrl' )
 		);
-		$this->assertContains( $fallbackMarker, $result );
+		$this->assertStringContainsString( $fallbackMarker, $result );
 	}
 
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
@@ -367,7 +367,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'de', 'Label in English', 'en', 'en' )
 		);
-		$this->assertContains( $fallbackMarker, $result );
+		$this->assertStringContainsString( $fallbackMarker, $result );
 	}
 
 	public function testGivenPropertyLabelInTransliteratableLanguageExists_ResultContainsFallbackMarker() {
@@ -382,7 +382,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$fallbackMarker = $languageFallbackIndicator->getHtml(
 			new TermFallback( 'crh-latn', self::SOME_TRANSLITERATED_TEXT, 'crh-latn', 'crh-cyrl' )
 		);
-		$this->assertContains( $fallbackMarker, $result );
+		$this->assertStringContainsString( $fallbackMarker, $result );
 	}
 
 	public function testGivenForeignPropertyId_fullUrlIsUsedInTheOutput() {

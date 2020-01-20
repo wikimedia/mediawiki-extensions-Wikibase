@@ -112,12 +112,12 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$row = (array)$res->current();
 		$this->assertTrue( is_numeric( $row['change_id'] ) );
 
-		$this->assertEquals(
-			// wfTimestamp returns string, assertEquals/$delta requires int
+		$this->assertEqualsWithDelta(
+			// wfTimestamp returns string, assertEqualsWithDelta requires int
 			(int)wfTimestamp( TS_UNIX, $expected['change_time'] ),
 			(int)wfTimestamp( TS_UNIX, $row['change_time'] ),
-			'Change time',
-			60 * 60 // 1 hour
+			60 * 60, // 1 hour
+			'Change time'
 		);
 
 		unset( $row['change_id'] );

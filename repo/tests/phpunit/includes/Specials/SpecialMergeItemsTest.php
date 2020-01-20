@@ -266,14 +266,14 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 	 * @param string $html
 	 */
 	private function assertError( $error, $html ) {
-		$this->assertContains( '<p class="error">(@' . $error . '@)</p>', $html );
+		$this->assertStringContainsString( '<p class="error">(@' . $error . '@)</p>', $html );
 	}
 
 	/**
 	 * @param string $html
 	 */
 	private function assertNoError( $html ) {
-		$this->assertNotContains( 'class="error"', $html );
+		$this->assertStringNotContainsString( 'class="error"', $html );
 	}
 
 	public function mergeRequestProvider() {
@@ -441,7 +441,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 		];
 
 		$html = $this->executeSpecialMergeItems( $params );
-		$this->assertContains( '<p class="error">(wikibase-itemmerge-redirect)</p>', $html );
+		$this->assertStringContainsString( '<p class="error">(wikibase-itemmerge-redirect)</p>', $html );
 	}
 
 	public function testNoSpecialPagePermission() {

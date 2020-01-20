@@ -72,25 +72,25 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 	public function testExecuteWithoutAnyParams() {
 		list( $result, ) = $this->executeSpecialPage( '' );
 
-		$this->assertContains( "<select tabindex='0' aria-disabled='false' name='badge'", $result );
-		$this->assertContains( "<option value='Q123'", $result );
-		$this->assertContains( "<option value='Q456'", $result );
+		$this->assertStringContainsString( "<select tabindex='0' aria-disabled='false' name='badge'", $result );
+		$this->assertStringContainsString( "<option value='Q123'", $result );
+		$this->assertStringContainsString( "<option value='Q456'", $result );
 
-		$this->assertContains( 'Label of Q123', $result );
-		$this->assertContains( 'Label of Q456', $result );
+		$this->assertStringContainsString( 'Label of Q123', $result );
+		$this->assertStringContainsString( 'Label of Q456', $result );
 	}
 
 	public function testExecuteWithValidParam() {
 		list( $result, ) = $this->executeSpecialPage( 'Q456' );
 
-		$this->assertContains( "<option value='Q456' selected='selected'", $result );
+		$this->assertStringContainsString( "<option value='Q456' selected='selected'", $result );
 	}
 
 	public function testExecuteWithInvalidParam() {
 		list( $result, ) = $this->executeSpecialPage( 'FooBar' );
 
-		$this->assertContains( '<p class="error"', $result );
-		$this->assertContains(
+		$this->assertStringContainsString( '<p class="error"', $result );
+		$this->assertStringContainsString(
 			wfMessage( 'wikibase-pageswithbadges-invalid-id', 'FooBar' )->text(),
 			$result
 		);
