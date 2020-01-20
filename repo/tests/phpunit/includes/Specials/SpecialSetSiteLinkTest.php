@@ -267,7 +267,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
-		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
+		$this->assertStringContainsString( self::$itemId, $redirect, "Should redirect to item page" );
 
 		/** @var Item $item */
 		$item = $lookup->getEntity( new ItemId( self::$itemId ) );
@@ -291,7 +291,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		list( , $response ) = $this->executeSpecialPage( '', $request );
 		$redirect = $response instanceof FauxResponse ? $response->getHeader( 'Location' ) : null;
 
-		$this->assertContains( self::$itemId, $redirect, "Should redirect to item page" );
+		$this->assertStringContainsString( self::$itemId, $redirect, "Should redirect to item page" );
 
 		/** @var Item $item */
 		$item = $lookup->getEntity( new ItemId( self::$itemId ) );

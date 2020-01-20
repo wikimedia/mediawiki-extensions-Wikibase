@@ -116,17 +116,17 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 	public function testForm() {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
-		$this->assertContains( '(wikibase-itemdisambiguation-lookup-language)', $html );
-		$this->assertContains( 'name=\'language\'', $html );
-		$this->assertContains( 'id=\'wb-itemdisambiguation-languagename\'', $html );
-		$this->assertContains( 'wb-language-suggester', $html );
+		$this->assertStringContainsString( '(wikibase-itemdisambiguation-lookup-language)', $html );
+		$this->assertStringContainsString( 'name=\'language\'', $html );
+		$this->assertStringContainsString( 'id=\'wb-itemdisambiguation-languagename\'', $html );
+		$this->assertStringContainsString( 'wb-language-suggester', $html );
 
-		$this->assertContains( '(wikibase-itemdisambiguation-lookup-label)', $html );
-		$this->assertContains( 'name=\'label\'', $html );
-		$this->assertContains( 'id=\'labelname\'', $html );
+		$this->assertStringContainsString( '(wikibase-itemdisambiguation-lookup-label)', $html );
+		$this->assertStringContainsString( 'name=\'label\'', $html );
+		$this->assertStringContainsString( 'id=\'labelname\'', $html );
 
-		$this->assertContains( '(wikibase-itemdisambiguation-submit)', $html );
-		$this->assertContains( 'id=\'wb-itembytitle-submit\'', $html );
+		$this->assertStringContainsString( '(wikibase-itemdisambiguation-submit)', $html );
+		$this->assertStringContainsString( 'id=\'wb-itembytitle-submit\'', $html );
 	}
 
 	public function testRequestParameters() {
@@ -136,50 +136,50 @@ class SpecialItemDisambiguationTest extends SpecialPageTestBase {
 		] );
 		list( $html, ) = $this->executeSpecialPage( '', $request );
 
-		$this->assertContains( '&lt;LANGUAGE&gt;', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
-		$this->assertNotContains( '<LANGUAGE>', $html );
-		$this->assertNotContains( '<LABEL>', $html );
-		$this->assertNotContains( '&amp;', $html, 'no double escaping' );
+		$this->assertStringContainsString( '&lt;LANGUAGE&gt;', $html );
+		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
+		$this->assertStringNotContainsString( '<LANGUAGE>', $html );
+		$this->assertStringNotContainsString( '<LABEL>', $html );
+		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
 	public function testSubPageParts() {
 		list( $html, ) = $this->executeSpecialPage( '<LANGUAGE>/<LABEL>' );
 
-		$this->assertContains( '&lt;LANGUAGE&gt;', $html );
-		$this->assertContains( '&lt;LABEL&gt;', $html );
+		$this->assertStringContainsString( '&lt;LANGUAGE&gt;', $html );
+		$this->assertStringContainsString( '&lt;LABEL&gt;', $html );
 	}
 
 	public function testNoLanguage() {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
-		$this->assertNotContains( 'mock-span', $html );
+		$this->assertStringNotContainsString( 'mock-span', $html );
 	}
 
 	public function testInvalidLanguage() {
 		list( $html, ) = $this->executeSpecialPage( 'invalid/Foo', null, 'qqx' );
 
-		$this->assertContains( '(wikibase-itemdisambiguation-invalid-langcode)', $html );
+		$this->assertStringContainsString( '(wikibase-itemdisambiguation-invalid-langcode)', $html );
 	}
 
 	public function testNoLabel() {
 		list( $html, ) = $this->executeSpecialPage( 'fr', null, 'qqx' );
 
-		$this->assertNotContains( 'mock-span', $html );
+		$this->assertStringNotContainsString( 'mock-span', $html );
 	}
 
 	public function testUnknownLabel() {
 		list( $html, ) = $this->executeSpecialPage( 'fr/Unknown', null, 'qqx' );
 
-		$this->assertContains( 'value=\'fr\'', $html );
-		$this->assertContains( 'value=\'Unknown\'', $html );
-		$this->assertContains( '(wikibase-itemdisambiguation-nothing-found)', $html );
+		$this->assertStringContainsString( 'value=\'fr\'', $html );
+		$this->assertStringContainsString( 'value=\'Unknown\'', $html );
+		$this->assertStringContainsString( '(wikibase-itemdisambiguation-nothing-found)', $html );
 	}
 
 	public function testKnownLabel() {
 		list( $html, ) = $this->executeSpecialPage( 'fr/Foo', null, 'qqx' );
 
-		$this->assertContains( '<span class="mock-span" >ItemDisambiguationHTML-2</span>', $html );
+		$this->assertStringContainsString( '<span class="mock-span" >ItemDisambiguationHTML-2</span>', $html );
 	}
 
 }

@@ -155,7 +155,7 @@ class TermSqlIndexSearchFieldsClearerTest extends \MediaWikiTestCase {
 		$clearer->clear();
 
 		foreach ( $rowIds as $rowId ) {
-			$this->assertContains(
+			$this->assertStringContainsString(
 				(string)$rowId,
 				$progress,
 				'each batch should mention row IDs processed'

@@ -131,9 +131,9 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		list( $output, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertIsString( $output );
-		$this->assertContains( 'wikibase-listproperties-summary', $output );
-		$this->assertContains( 'wikibase-listproperties-legend', $output );
-		$this->assertNotContains( 'wikibase-listproperties-invalid-datatype', $output );
+		$this->assertStringContainsString( 'wikibase-listproperties-summary', $output );
+		$this->assertStringContainsString( 'wikibase-listproperties-legend', $output );
+		$this->assertStringNotContainsString( 'wikibase-listproperties-invalid-datatype', $output );
 		$this->assertRegExp( '/P45.*P123.*P789/', $output ); // order is relevant
 	}
 
@@ -141,42 +141,42 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 		$request = new \FauxRequest( [ 'limit' => '1', 'offset' => '1' ] );
 		list( $output, ) = $this->executeSpecialPage( '', $request, 'qqx' );
 
-		$this->assertNotContains( 'P45', $output );
-		$this->assertContains( 'P123', $output );
-		$this->assertNotContains( 'P789', $output );
+		$this->assertStringNotContainsString( 'P45', $output );
+		$this->assertStringContainsString( 'P123', $output );
+		$this->assertStringNotContainsString( 'P789', $output );
 	}
 
 	public function testExecute_empty() {
 		list( $output, ) = $this->executeSpecialPage( 'quantity', null, 'qqx' );
 
-		$this->assertContains( 'specialpage-empty', $output );
+		$this->assertStringContainsString( 'specialpage-empty', $output );
 	}
 
 	public function testExecute_error() {
 		list( $output, ) = $this->executeSpecialPage( 'test<>', null, 'qqx' );
 
-		$this->assertContains( 'wikibase-listproperties-invalid-datatype', $output );
-		$this->assertContains( 'test&lt;&gt;', $output );
+		$this->assertStringContainsString( 'wikibase-listproperties-invalid-datatype', $output );
+		$this->assertStringContainsString( 'test&lt;&gt;', $output );
 	}
 
 	public function testExecute_wikibase_item() {
 		// Use en-gb as language to test language fallback
 		list( $output, ) = $this->executeSpecialPage( 'wikibase-item', null, 'en-gb' );
 
-		$this->assertContains( 'Property with label P45', $output );
-		$this->assertContains( 'Property with label P123', $output );
-		$this->assertNotContains( 'P789', $output );
+		$this->assertStringContainsString( 'Property with label P45', $output );
+		$this->assertStringContainsString( 'Property with label P123', $output );
+		$this->assertStringNotContainsString( 'P789', $output );
 
-		$this->assertContains( 'lang="en"', $output );
-		$this->assertNotContains( 'lang="en-gb"', $output );
+		$this->assertStringContainsString( 'lang="en"', $output );
+		$this->assertStringNotContainsString( 'lang="en-gb"', $output );
 	}
 
 	public function testExecute_string() {
 		list( $output, ) = $this->executeSpecialPage( 'string', null, 'en-gb' );
 
-		$this->assertNotContains( 'P45', $output );
-		$this->assertNotContains( 'P123', $output );
-		$this->assertContains( 'Property with label P789', $output );
+		$this->assertStringNotContainsString( 'P45', $output );
+		$this->assertStringNotContainsString( 'P123', $output );
+		$this->assertStringContainsString( 'Property with label P789', $output );
 	}
 
 	public function testSearchSubpages() {

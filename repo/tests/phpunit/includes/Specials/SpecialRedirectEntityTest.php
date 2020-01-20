@@ -207,14 +207,14 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 	 * @param string $html
 	 */
 	private function assertError( $error, $html ) {
-		$this->assertContains( '<p class="error">(@' . $error . '@)</p>', $html );
+		$this->assertStringContainsString( '<p class="error">(@' . $error . '@)</p>', $html );
 	}
 
 	/**
 	 * @param string $html
 	 */
 	private function assertNoError( $html ) {
-		$this->assertNotContains( 'class="error"', $html );
+		$this->assertStringNotContainsString( 'class="error"', $html );
 	}
 
 	public function testRedirectRequest() {
@@ -235,7 +235,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 		$html = $this->executeSpecialEntityRedirect( $params );
 
 		$this->assertNoError( $html );
-		$this->assertContains( '(wikibase-redirectentity-success: Q1, Q2)', $html,
+		$this->assertStringContainsString( '(wikibase-redirectentity-success: Q1, Q2)', $html,
 			'Expected success message' );
 
 		// -- check the items --------------------------------------------

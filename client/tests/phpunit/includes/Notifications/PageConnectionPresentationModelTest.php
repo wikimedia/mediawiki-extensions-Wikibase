@@ -104,7 +104,7 @@ class PageConnectionPresentationModelTest extends MediaWikiTestCase {
 
 		$msg = $model->getHeaderMessage();
 		$this->assertInstanceOf( Message::class, $msg );
-		$this->assertContains( $title->getPrefixedText(), $msg->text() );
+		$this->assertStringContainsString( $title->getPrefixedText(), $msg->text() );
 
 		$this->assertEquals(
 			[ 'url' => $title->getFullURL(), 'label' => $title->getFullText() ],
