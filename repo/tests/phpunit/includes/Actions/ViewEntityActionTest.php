@@ -54,7 +54,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$page = $this->getTestItemPage( $handle );
 		$output = $this->executeViewAction( $page );
 
-		$this->assertContains( $expected, $output->getHTML() );
+		$this->assertStringContainsString( $expected, $output->getHTML() );
 		$this->assertEditable( $output );
 	}
 
@@ -101,7 +101,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$output = $this->executeViewAction( $page, $params );
 
-		$this->assertContains( 'diff-currentversion-title', $output->getHTML(), 'is diff view' );
+		$this->assertStringContainsString( 'diff-currentversion-title', $output->getHTML(), 'is diff view' );
 		$this->assertNotEditable( $output );
 	}
 
@@ -134,7 +134,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$params = [ 'oldid' => 2147483647 ];
 
 		$output = $this->executeViewAction( $page, $params );
-		$this->assertContains( 'Die Version 2147483647', $output->getHTML() );
+		$this->assertStringContainsString( 'Die Version 2147483647', $output->getHTML() );
 	}
 
 	/**
@@ -168,7 +168,7 @@ class ViewEntityActionTest extends ActionTestCase {
 
 		$action->show();
 		$this->assertEquals( 200, $response->getStatusCode(), "response code" );
-		$this->assertContains( 'noarticletext', $action->getOutput()->getHTML(), "response HTML" );
+		$this->assertStringContainsString( 'noarticletext', $action->getOutput()->getHTML(), "response HTML" );
 
 		// $wgSend404Code enabled -----
 		$this->setMwGlobals( 'wgSend404Code', true );
@@ -192,8 +192,8 @@ class ViewEntityActionTest extends ActionTestCase {
 
 	private function assertNotEditable( OutputPage $output ) {
 		$html = $output->getHTML();
-		$this->assertNotContains( 'wikibase-edittoolbar-container', $html );
-		$this->assertNotContains( 'wikibase-toolbar-button-edit', $html );
+		$this->assertStringNotContainsString( 'wikibase-edittoolbar-container', $html );
+		$this->assertStringNotContainsString( 'wikibase-toolbar-button-edit', $html );
 
 		$jsConfigVars = $output->getJsConfigVars();
 		$this->assertArrayHasKey( 'wbIsEditView', $jsConfigVars );

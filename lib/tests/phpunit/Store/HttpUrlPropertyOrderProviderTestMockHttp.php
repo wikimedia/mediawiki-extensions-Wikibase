@@ -23,8 +23,8 @@ class HttpUrlPropertyOrderProviderTestMockHttp extends Http {
 
 	public static function get( $url, array $options = [], $caller = __METHOD__ ) {
 		Assert::assertSame( 'page-url', $url );
-		Assert::assertInternalType( 'array', $options );
-		Assert::assertInternalType( 'string', $caller );
+		Assert::assertIsArray( $options );
+		Assert::assertIsString( $caller );
 
 		return self::$response;
 	}
