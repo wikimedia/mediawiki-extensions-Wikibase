@@ -200,7 +200,7 @@ class WikibaseLanguageIndependentLuaBindingsTest extends \PHPUnit\Framework\Test
 		$expected,
 		$prefixedEntityId,
 		$languageCode,
-		EntityId $entityId = null,
+		?EntityId $entityId,
 		$hasLabel,
 		$hasLang
 	) {

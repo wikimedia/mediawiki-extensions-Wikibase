@@ -39,7 +39,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		IContextSource $context,
 		array $pageInfo,
 		$enabled,
-		ItemId $itemId = null,
+		?ItemId $itemId,
 		$localDescription,
 		$centralDescription,
 		$message
@@ -173,7 +173,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private function newHookHandler(
 		$enabled,
-		ItemId $itemId = null,
+		?ItemId $itemId,
 		$localDescription,
 		$centralDescription
 	) {

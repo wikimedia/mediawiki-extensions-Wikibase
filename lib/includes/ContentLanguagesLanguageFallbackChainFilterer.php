@@ -12,8 +12,10 @@ use Wikibase\Lib\ContentLanguages;
  */
 class ContentLanguagesLanguageFallbackChainFilterer {
 
-	public function getFallbackChain( ContentLanguages $contentLanguages, LanguageFallbackChain $fallbackChain, Language
-	$backupContentLanguage
+	public function getFallbackChain(
+		ContentLanguages $contentLanguages,
+		LanguageFallbackChain $fallbackChain,
+		Language $backupContentLanguage
 	): LanguageFallbackChain {
 		if ( !$contentLanguages->hasLanguage( $backupContentLanguage->getCode() ) ) {
 			throw new InvalidArgumentException( 'backupContentLanguage was not a valid ContentLanguage' );

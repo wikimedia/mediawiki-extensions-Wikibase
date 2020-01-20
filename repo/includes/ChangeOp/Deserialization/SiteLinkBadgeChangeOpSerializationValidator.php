@@ -52,7 +52,6 @@ class SiteLinkBadgeChangeOpSerializationValidator {
 			} catch ( InvalidArgumentException $ex ) {
 				throw new ChangeOpDeserializationException( 'Badges: could not parse "' . $badgeSerialization
 					. '", the id is invalid', 'invalid-entity-id' );
-				continue;
 			}
 
 			if ( !in_array( $badgeId->getSerialization(), $this->allowedBadgeItemIds ) ) {

@@ -252,7 +252,7 @@ class LabelDescriptionDuplicateDetectorTest extends \PHPUnit\Framework\TestCase 
 		array $world,
 		$entityType,
 		array $labels,
-		array $aliases = null,
+		?array $aliases,
 		$ignore,
 		array $expectedErrors
 	) {

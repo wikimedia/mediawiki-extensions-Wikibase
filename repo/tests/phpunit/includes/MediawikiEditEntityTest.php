@@ -128,7 +128,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 */
 	private function makeEditEntity(
 		MockRepository $mockRepository,
-		EntityId $entityId = null,
+		?EntityId $entityId,
 		EntityTitleStoreLookup $titleLookup,
 		User $user = null,
 		$baseRevId = 0,
@@ -278,7 +278,7 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 	 * @dataProvider provideEditConflict
 	 */
 	public function testEditConflict(
-		array $inputData = null,
+		?array $inputData,
 		$baseRevisionId,
 		$expectedConflict,
 		$expectedFix,

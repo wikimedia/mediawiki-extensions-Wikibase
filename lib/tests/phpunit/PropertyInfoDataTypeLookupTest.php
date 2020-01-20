@@ -97,7 +97,7 @@ class PropertyInfoDataTypeLookupTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetDataTypeForProperty(
 		PropertyInfoLookup $infoLookup,
-		PropertyDataTypeLookup $fallbackLookup = null,
+		?PropertyDataTypeLookup $fallbackLookup,
 		PropertyId $propertyId,
 		$expectedDataType
 	) {

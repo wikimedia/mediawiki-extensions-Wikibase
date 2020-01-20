@@ -391,7 +391,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	public function testGetSerializedData(
 		$format,
 		EntityRevision $entityRev,
-		RedirectRevision $followedRedirect = null,
+		?RedirectRevision $followedRedirect,
 		array $incomingRedirects,
 		$flavor,
 		array $expectedDataExpressions,
@@ -424,7 +424,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 	public function testGetSerializedData_entitySourceBasedFederation(
 		$format,
 		EntityRevision $entityRev,
-		RedirectRevision $followedRedirect = null,
+		?RedirectRevision $followedRedirect,
 		array $incomingRedirects,
 		$flavor,
 		array $expectedDataExpressions,
