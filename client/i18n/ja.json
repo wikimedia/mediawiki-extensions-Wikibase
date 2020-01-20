@@ -16,7 +16,8 @@
 			"Afaz",
 			"Yusuke1109",
 			"Omotecho",
-			"Kkairri"
+			"Kkairri",
+			"Buntschann"
 		]
 	},
 	"wikibase-client-desc": "ウィキベース拡張機能のクライアント",
@@ -98,5 +99,6 @@
 	"notification-link-text-view-item": "項目を{{GENDER:$1|閲覧}}",
 	"notification-subject-page-connection": "あなたが{{SITENAME}}に{{GENDER:$3|作成した}}ページが{{WBREPONAME}}の項目に{{GENDER:$2|結び付けられました}}。",
 	"connected-redirect-category": "{{WBREPONAME}}項目に接続されているリダイレクト",
-	"connected-redirect-category-desc": "このカテゴリでは{{WBREPONAME}}項目に接続されているリダイレクトページを列挙します。"
+	"connected-redirect-category-desc": "このカテゴリでは{{WBREPONAME}}項目に接続されているリダイレクトページを列挙します。",
+	"wikibase-client-data-bridge-permissions-error-info": "詳細"
 }

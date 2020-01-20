@@ -147,5 +147,10 @@
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>由$1做出封鎖。原因為<em>$2</em>。</p>\n<ul>\n<li>封鎖開始時間：$8</li>\n<li>封鎖結束時間：$6</li>\n</ul>\n<p><strong>我可以怎麼做？</strong></p>\n<p>\n您可以聯絡$4或其他的[[{{int:grouppage-sysop}}|管理員]]討論封鎖的相關問題。\n若您在[[Special:Preferences|偏好設定]]有指定有效的電子郵件，並且在沒有被封鎖情況之下，您可以使用「{{int:emailuser}}」功能。\n封鎖的ID為#$5。\n請您在詢問時附註以上詳細訊息。\n</p>",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "未知的權限錯誤",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "因為有未知原因，您無法編輯此值",
+	"wikibase-client-data-bridge-edit-decision-heading": "請選擇您做出的編輯類型：",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>我已更正</strong>一個錯誤值",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "之前的值不正確且從未如此過。",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>我已更新</strong>一個過時值",
+	"wikibase-client-data-bridge-edit-decision-update-description": "之前的值曾是正確的但現已過時。",
 	"wikibase-client-data-bridge-references-heading": "參考"
 }

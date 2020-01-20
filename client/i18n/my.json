@@ -53,5 +53,8 @@
 	"wikibase-pageinfo-entity-usage-T": "ခေါင်းစဉ်",
 	"wikibase-otherprojects": "အခြား ပရောဂျက်များတွင်",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}ဖြင့် {{PLURAL:$1|ချိတ်ဆက်မှု|ချိတ်ဆက်မှုများ}}",
+	"notification-header-page-connection": "စာမျက်နှာ <strong>$3</strong> သည် အကြောင်းအရာစုစည်းနိုင်သော သက်ဆိုင်ရာ {{PLURAL:$4|-1= {{WBREPONAME}} item တစ်ခု| {{WBREPONAME}} item $4}} သို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}} ဖြစ်ပါသည်။",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> နှင့် {{PLURAL:$4|အခြားစာမျက်နှာ|$4 အခြားစာမျက်နှာများ|100=99+ အခြားစာမျက်နှာများ}}တို့သည် အကြောင်းအရာစုစည်းနိုင်သော သက်ဆိုင်ရာ {{WBREPONAME}} item များသို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}} ဖြစ်ပါသည်။",
+	"notification-subject-page-connection": "သင်{{GENDER:$3|ဖန်တီးခဲ့သော}} {{SITENAME}} ပေါ်ရှိ စာမျက်နှာသည် {{WBREPONAME}}သို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}}ဖြစ်ပါသည်",
 	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ"
 }

@@ -6,7 +6,8 @@
 			"SpeedyGonsales",
 			"Ex13",
 			"Fraxinus",
-			"Bugoslav"
+			"Bugoslav",
+			"Neptune, the Mystic"
 		]
 	},
 	"wikibase-client-desc": "Klijent za proširenje Wikibaza",
@@ -87,5 +88,10 @@
 	"notification-header-page-connection": "Stranica <strong>$3</strong> je {{GENDER:$2|povezana}} sa {{PLURAL:$4|-1=a {{WBREPONAME}} item|stavkom na projektu {{WBREPONAME}} $4}}, gdje se mogu prikupiti relevantni podatci o temi.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} stavku",
 	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima",
-	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}"
+	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}",
+	"wikibase-client-data-bridge-permissions-error-info": "Više pojedinosti",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nepoznata pogrješka u dozvolama",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ispravljena je</strong> pogrješna vrijednost",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "Prethodna vrijednost nikad nije bila ispravna.",
+	"wikibase-client-data-bridge-edit-decision-update-description": "Prethodna je vrijednost bila ispravna, no sad je zastarjela."
 }

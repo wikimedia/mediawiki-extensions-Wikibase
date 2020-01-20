@@ -130,5 +130,10 @@
 	"wikibase-client-data-bridge-blocked-on-client-body": "Die Sperrung wurde vom Administrator $1 durchgeführt.\nAls Grund wurde ''$2'' angegeben.\n\n* Beginn der Sperre: $8\n* Ende der Sperre: $6\n\nDu kannst $4 oder einen der anderen [[{{int:grouppage-sysop}}|Administratoren]] kontaktieren, um über die Sperre zu diskutieren.\nDu kannst die „{{int:emailuser}}“-Funktion nutzen, wenn eine gültige E-Mail-Adresse in deinen [[Special:Preferences|Benutzerkonto-Einstellungen]] eingetragen ist und diese Funktion für dich nicht gesperrt wurde.\nDie Sperrkennung lautet #$5.\nBitte füge alle Informationen jeder Anfrage hinzu, die du stellst.",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Unbekannter Berechtigungsfehler",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Du kannst diesen Wert aus unbekannten Gründen nicht bearbeiten",
+	"wikibase-client-data-bridge-edit-decision-heading": "Bitte wähle die Art der Bearbeitung, die du vorgenommen hast:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ich korrigierte</strong> einen falschen Wert",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "Der vorherige Wert war nicht korrekt und war es auch nie.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ich aktualisierte</strong> einen veralteten Wert",
+	"wikibase-client-data-bridge-edit-decision-update-description": "Der vorherige Wert war früher korrekt, ist jetzt aber veraltet.",
 	"wikibase-client-data-bridge-references-heading": "Quellenangaben"
 }

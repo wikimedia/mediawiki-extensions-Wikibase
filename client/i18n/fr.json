@@ -28,7 +28,8 @@
 			"Lofhi",
 			"Verdy p",
 			"Shirayuki",
-			"Pamputt"
+			"Pamputt",
+			"Symsym"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -136,6 +137,7 @@
 	"connected-redirect-category-desc": "Cette catégorie liste les pages de redirection qui sont connectées à un élément de {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Modifier la propriété",
 	"wikibase-client-data-bridge-permissions-error": "Vous n’avez pas le droit de modifier cette valeur, pour {{PLURAL:$1|la raison suivante|les raisons suivantes}} :",
+	"wikibase-client-data-bridge-permissions-error-info": "Plus de détails",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Cette valeur est actuellement [$1 complètement protégée] sur {{WBREPONAME}} et ne peut être modifiée que par les [$2 administrateurs].</strong>",
 	"wikibase-client-data-bridge-protected-on-repo-body": "<p><strong>Pourquoi cette valeur est-elle protégée ?</strong></p>\n<ul>\n<li>Certains modèles et éléments (et leurs valeurs respectives) sont [$1 protégés] de façon permanente en raison de leur visibilité. À l’occasion, ils peuvent être protégés à cause de [$2 disputes de modifications]. La plupart des éléments peuvent être modifiés par n’importe qui.</li>\n<li>Les motifs de protection peuvent être trouvés dans le [$3 journal de protection].</li>\n</ul>\n<p><strong>Que puis-je faire ?</strong></p>\n<ul><li>[$4 Discuter de cet élément] avec les autres.</li></ul>",
 	"wikibase-client-data-bridge-semiprotected-on-repo-head": "<strong>Cette valeur est actuellement [$1 semi-protégée] sur {{WBREPONAME}} et ne peut être modifiée que par des [$2 utilisateurs autoconfirmés].</strong>",
@@ -148,5 +150,12 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>Pourquoi cette page est-elle protégée ?</strong></p>\n<p>Cette page est [[Project:Transclusion|transcluse]] dans {{PLURAL:$1|la page suivante, qui est protégée|les pages suivantes, qui sont protégées}} par l’option de « [[Project:Cascade|cascade]] » :</p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Votre nom d’utilisateur ou votre adresse IP a été bloqué sur ce wiki.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>Le blocage a été effectué par $1. Le motif invoqué est le suivant : <em>$2</em>.</p>\n<ul>\n<li>Début du blocage : $8</li>\n<li>Expiration du blocage : $6</li>\n</ul>\n<p><strong>Que puis-je faire ?</strong></p>\n<p>\nVous pouvez contacter $4 ou un autre [[{{int:grouppage-sysop}}|administrateur]] pour discuter de ce blocage.\nVous pouvez utiliser la fonctionnalité « {{int:emailuser}} » si une adresse courriel valide est spécifiée dans vos [[Special:Preferences|préférences]] et que vous n’avez pas été bloqué contre son utilisation.\nL’identifiant de blocage est le nº $5.\nVeuillez inclure tous les détails ci-dessus dans chacune des requêtes que vous ferez.\n</p>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Erreur de droit inconnue",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Vous ne pouvez pas modifier cette valeur pour des raisons inconnues",
+	"wikibase-client-data-bridge-edit-decision-heading": "Veuillez sélectionner le type de modification que vous avez faite :",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>J’ai corrigé</strong> une valeur fausse",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "La valeur précédente n’était pas correcte et ne l’a jamais été.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>J’ai mis à jour</strong> une valeur désuète.",
+	"wikibase-client-data-bridge-edit-decision-update-description": "La valeur précédente était correcte mais est maintenant désuète.",
 	"wikibase-client-data-bridge-references-heading": "Références"
 }

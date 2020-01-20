@@ -116,6 +116,14 @@
 	"connected-redirect-category": "{{WBREPONAME}} 항목에 연결된 넘겨주기",
 	"connected-redirect-category-desc": "이 분류는 {{WBREPONAME}} 항목에 연결된 넘겨주기 문서들을 나열합니다.",
 	"wikibase-client-data-bridge-permissions-error": "다음의 {{PLURAL:$1|이유}}로 이 값을 편집할 권한이 없습니다:",
+	"wikibase-client-data-bridge-permissions-error-info": "자세한 내용",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>사용자 이름 또는 IP 주소가 이 위키에서 차단된 상태입니다.</strong>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "알 수 없는 권한 오류",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "알 수 없는 이유로 인해 이 값을 편집할 수 없습니다",
+	"wikibase-client-data-bridge-edit-decision-heading": "당신이 한 편집의 유형을 선택해 주십시오:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "저는 잘못된 값을 <strong>수정했습니다</strong>",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "이전 값은 유효하지 않았으며 지금도 그러합니다.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "저는 구식 값을 <strong>갱신했습니다</strong>",
+	"wikibase-client-data-bridge-edit-decision-update-description": "이전 값은 한때 유효했으나 지금은 구식입니다.",
 	"wikibase-client-data-bridge-references-heading": "참고문헌"
 }

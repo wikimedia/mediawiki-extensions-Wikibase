@@ -123,9 +123,17 @@
 	"connected-redirect-category-desc": "Esta categoria lista as páginas de redirecionamento que estão conectadas a um {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Editar propriedade",
 	"wikibase-client-data-bridge-permissions-error": "Você não tem permissão para editar este valor, pelo seguinte {{PLURAL:$1|motivo|motivos}}:",
+	"wikibase-client-data-bridge-permissions-error-info": "Mais detalhes",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Este valor está atualmente [$1 totalmente protegido] em {{WBREPONAME}} e pode ser editado apenas por [$2 administradores].</strong>",
 	"wikibase-client-data-bridge-semiprotected-on-repo-head": "<strong>Este valor está atualmente [$1 semi-protegido] em {{WBREPONAME}} e pode ser editado apenas por [$2 usuários autoconfirmados].</strong>",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>Seu nome de usuário ou endereço IP foi bloqueado em {{WBREPONAME}}.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Seu nome de usuário ou endereço IP foi bloqueado nessa wiki.</strong>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Erro de permissão desconhecido",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Você não pode editar este valor devido a razões desconhecidas",
+	"wikibase-client-data-bridge-edit-decision-heading": "Selecione o tipo de edição que você fez:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Eu corrigi</strong> um valor errado",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "O valor anterior não estava correto e nunca esteve.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Eu atualizei</strong> um valor desatualizado",
+	"wikibase-client-data-bridge-edit-decision-update-description": "O valor anterior costumava estar correto, mas agora está desatualizado.",
 	"wikibase-client-data-bridge-references-heading": "Referências"
 }

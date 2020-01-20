@@ -17,7 +17,8 @@
 			"Hedda",
 			"TmY e12",
 			"ToprakM",
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"SwornToTranslate29"
 		]
 	},
 	"wikibase-client-desc": "Wikibase uzantısı için istemci",
@@ -137,5 +138,12 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>Bu sayfa neden korunuyor?</strong></p>\n<p>Bu sayfa, aşağıdaki {{PLURAL:$1|sayfasında|sayfasında}} \"[[Project:Cascade|basamaklı]]\" seçeneğiyle korunan [[Project:Transclusion|aktarıldı]]:</p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>Bu wikide kullanıcı adınız veya IP adresiniz engellendi.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>Engel $1 tarafından yapıldı. Verilen sebep <em>$2</em>.</p>\n<ul>\n<li>Engel başlangıcı: $8</li>\n<li>Engel bitişi: $6</li>\n</ul>\n<p><strong>Ne yapabilirim?</strong></p>\n<p>\nEngeli tartışmak için $4 veya başka bir [[{{int:grouppage-sysop}}|yönetici]] ile iletişime geçebilirsiniz.\n[[Special:Preferences|Tercihler]] öğenizde geçerli bir e-posta adresi belirtilmişse ve bu adresi kullanmanız engellenmediyse {{int:emailuser}}\" özelliğini kullanabilirsiniz.\nEngel kimliği #$5.\nLütfen yukarıdaki tüm ayrıntıları, yaptığınız sorgulara ekleyin.\n</p>",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Bilinmeyen izin hatası",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Bu değeri bilinmeyen sebeplerden dolayı düzenleyemezsiniz",
+	"wikibase-client-data-bridge-edit-decision-heading": "Lütfen yapmış olduğunuz düzenlemenin türünü seçiniz:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>| corrected</strong> yanlış bir değer",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "Önceki değer hiçbir zaman doğru değildi.",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>| updated</strong> zaman aşımına uğramış bir değer",
+	"wikibase-client-data-bridge-edit-decision-update-description": "Önceki değer doğruydu fakat şimdi geçerliliğini kaybetti.",
 	"wikibase-client-data-bridge-references-heading": "Kaynaklar"
 }

@@ -28,7 +28,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "Bewurkings fan {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Wizigings dy't ôfkomstich binne fan {{WBREPONAME}}.",
 	"wikibase-watchlist-show-changes-pref": "Bewurkings fan {{WBREPONAME}} werjaan yn jo folchlist",
-	"unconnectedpages": "Siden net keppele oan in Wikidata-item",
+	"unconnectedpages": "Siden net keppele oan items",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}-item-ID",
 	"wikibase-pageinfo-entity-id-none": "Gjint",
 	"wikibase-pageinfo-description-central": "Sintrale beskriuwing",
