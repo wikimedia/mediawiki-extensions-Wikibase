@@ -20,6 +20,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
+use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 use Wikimedia\Rdbms\IDatabase;
@@ -96,10 +97,16 @@ class DatabaseSchemaUpdater {
 		if ( $db->tableExists( 'wb_entity_per_page' ) ) {
 			$updater->dropTable( 'wb_entity_per_page' );
 		}
+
 		$updater->addExtensionTable(
 			'wbt_text',
 			$this->getUpdateScriptPath( 'AddNormalizedTermsTablesDDL', $db->getType() )
 		);
+		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
+			$updater->addExtensionUpdate( [
+				[ __CLASS__, 'rebuildPropertyTerms' ]
+			] );
+		}
 	}
 
 	/**
@@ -244,6 +251,34 @@ class DatabaseSchemaUpdater {
 
 		$updater->output( 'Populating ' . $table->getTableName() . "\n" );
 		$builder->rebuildPropertyInfo();
+	}
+
+	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getEntityIdLookup()
+		);
+		$reporter = new ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			function ( $msg ) use ( $updater ) {
+				$updater->output( "..." . $msg . "\n" );
+			}
+		);
+
+		$rebuilder = new PropertyTermsRebuilder(
+			$wikibaseRepo->getNewPropertyTermStore(),
+			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
+			$reporter,
+			$reporter,
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
+			250,
+			2
+		);
+
+		$rebuilder->rebuild();
+		$updater->insertUpdateRow( __CLASS__ . '::rebuildPropertyTerms' );
 	}
 
 	/**
