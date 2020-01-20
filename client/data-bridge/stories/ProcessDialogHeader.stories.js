@@ -25,6 +25,13 @@ storiesOf( 'ProcessDialogHeader', module )
 <template slot="safeAction"><button>safe action</button></template>
 </ProcessDialogHeader>`,
 	} ) )
+	.add( 'with long labels', () => ( {
+		components: { ProcessDialogHeader },
+		template: `<div style="max-width: 500px;"><ProcessDialogHeader title="Edit located in the administrative territorial entity">
+			<template slot="primaryAction"><button style="background-color: cyan;">Publish changes</button></template>
+			<template slot="safeAction"><button>X</button></template>
+		</ProcessDialogHeader></div>`,
+	} ) )
 	.add( 'rtl with mock buttons', () => ( {
 		components: { ProcessDialogHeader },
 		template: `<div dir="rtl"><ProcessDialogHeader title="גשר נתונים">
