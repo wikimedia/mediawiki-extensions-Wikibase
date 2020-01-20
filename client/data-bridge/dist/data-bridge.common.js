@@ -13934,17 +13934,23 @@ function MessagesPlugin(Vue, messages) {
 function RepoRouterPlugin(Vue, repoRouter) {
   Vue.prototype.$repoRouter = repoRouter;
 }
+// CONCATENATED MODULE: ./src/presentation/plugins/ClientRouterPlugin/index.ts
+function ClientRouterPlugin(Vue, clientRouter) {
+  Vue.prototype.$clientRouter = clientRouter;
+}
 // CONCATENATED MODULE: ./src/presentation/extendVueEnvironment.ts
 
 
 
 
 
-function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions, repoRouter) {
+
+function extendVueEnvironment(languageInfoRepo, messageRepo, bridgeConfigOptions, repoRouter, clientRouter) {
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.directive('inlanguage', inlanguage(languageInfoRepo));
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(MessagesPlugin, messageRepo);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(BridgeConfigPlugin, bridgeConfigOptions);
   external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(RepoRouterPlugin, repoRouter);
+  external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(ClientRouterPlugin, clientRouter);
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.set.js
 var es6_set = __webpack_require__("4f7f");
@@ -14581,6 +14587,30 @@ function () {
   }]);
 
   return BatchingApi;
+}();
+
+
+// CONCATENATED MODULE: ./src/data-access/ClientRouter.ts
+
+
+
+var ClientRouter_ClientRouter =
+/*#__PURE__*/
+function () {
+  function ClientRouter(getUrl) {
+    _classCallCheck(this, ClientRouter);
+
+    this.getUrl = getUrl;
+  }
+
+  _createClass(ClientRouter, [{
+    key: "getPageUrl",
+    value: function getPageUrl(title, params) {
+      return this.getUrl(title, params);
+    }
+  }]);
+
+  return ClientRouter;
 }();
 
 
@@ -15710,6 +15740,7 @@ function () {
 
 
 
+
 function createServices(mwWindow, editTags) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
@@ -15738,6 +15769,7 @@ function createServices(mwWindow, editTags) {
   var clientApi = new ApiCore_ApiCore(new mwWindow.mw.Api());
   services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
   services.set('repoRouter', repoRouter);
+  services.set('clientRouter', new ClientRouter_ClientRouter(mwWindow.mw.util.getUrl));
   return services;
 }
 // CONCATENATED MODULE: ./src/main.ts
@@ -15755,7 +15787,7 @@ function createServices(mwWindow, editTags) {
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
-  extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client, services.get('repoRouter'));
+  extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client, services.get('repoRouter'), services.get('clientRouter'));
   var store = createStore(services);
   store.dispatch(BRIDGE_INIT, information);
   var app = new presentation_App({

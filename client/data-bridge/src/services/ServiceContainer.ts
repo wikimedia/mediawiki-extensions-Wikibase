@@ -20,6 +20,7 @@ export interface Services {
 	tracker: BridgeTracker;
 	editAuthorizationChecker: BridgePermissionsRepository;
 	repoRouter: MediaWikiRouter;
+	clientRouter: MediaWikiRouter;
 }
 
 export default class ServiceContainer {

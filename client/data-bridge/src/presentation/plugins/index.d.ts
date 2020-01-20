@@ -9,5 +9,6 @@ declare module 'vue/types/vue' {
 		$messages: Messages;
 		$bridgeConfig: BridgeConfig;
 		$repoRouter: MediaWikiRouter;
+		$clientRouter: MediaWikiRouter;
 	}
 }

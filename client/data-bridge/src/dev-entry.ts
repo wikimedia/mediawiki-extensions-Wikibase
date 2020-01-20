@@ -103,6 +103,16 @@ services.set( 'repoRouter', {
 	},
 } );
 
+services.set( 'clientRouter', {
+	getPageUrl( title: string, params?: Record<string, unknown> ) {
+		let url = `https://client.wiki.example/wiki/${title}`;
+		if ( params ) {
+			url += '?' + new URLSearchParams( params as Record<string, string> ).toString();
+		}
+		return url;
+	},
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',

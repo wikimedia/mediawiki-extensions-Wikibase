@@ -1,3 +1,4 @@
+import ClientRouterPlugin from '@/presentation/plugins/ClientRouterPlugin';
 import RepoRouterPlugin from '@/presentation/plugins/RepoRouterPlugin';
 
 jest.mock( 'vue', () => {
@@ -28,6 +29,7 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
+			new ( jest.fn() )(),
 		);
 		expect( mockInlanguage ).toHaveBeenCalledWith( languageInfoRepo );
 		expect( Vue.directive ).toHaveBeenCalledWith( 'inlanguage', inlanguageDirective );
@@ -40,6 +42,7 @@ describe( 'extendVueEnvironment', () => {
 			messageRepo,
 			{} as WikibaseClientConfiguration,
 			new ( jest.fn() )(),
+			new ( jest.fn() )(),
 		);
 		expect( Vue.use ).toHaveBeenCalledWith( MessagesPlugin, messageRepo );
 	} );
@@ -50,6 +53,7 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 			config,
+			new ( jest.fn() )(),
 			new ( jest.fn() )(),
 		);
 
@@ -63,8 +67,22 @@ describe( 'extendVueEnvironment', () => {
 			new ( jest.fn() )(),
 			{} as WikibaseClientConfiguration,
 			repoRouter,
+			new ( jest.fn() )(),
 		);
 
 		expect( Vue.use ).toHaveBeenCalledWith( RepoRouterPlugin, repoRouter );
+	} );
+
+	it( 'invokes the ClientRouterPlugin plugin', () => {
+		const clientRouter = new ( jest.fn() )();
+		extendVueEnvironment(
+			new ( jest.fn() )(),
+			new ( jest.fn() )(),
+			{} as WikibaseClientConfiguration,
+			new ( jest.fn() )(),
+			clientRouter,
+		);
+
+		expect( Vue.use ).toHaveBeenCalledWith( ClientRouterPlugin, clientRouter );
 	} );
 } );

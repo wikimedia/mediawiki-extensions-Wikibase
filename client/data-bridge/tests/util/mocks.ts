@@ -132,6 +132,7 @@ export function mockMwEnv(
 		},
 		track: jest.fn(),
 		util: {
+			getUrl: jest.fn( ( title, _params ) => `https://wiki.example/wiki/${title}` ),
 			wikiUrlencode: jest.fn( ( title ) => title ),
 		},
 	};

@@ -16,6 +16,7 @@ import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepo
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import RepoRouter from '@/data-access/RepoRouter';
+import ClientRouter from '@/data-access/ClientRouter';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -102,6 +103,13 @@ const mockRepoRouter = {
 };
 jest.mock( '@/data-access/RepoRouter', () => {
 	return jest.fn().mockImplementation( () => mockRepoRouter );
+} );
+
+const mockClientRouter = {
+	getPageUrl: jest.fn(),
+};
+jest.mock( '@/data-access/ClientRouter', () => {
+	return jest.fn().mockImplementation( () => mockClientRouter );
 } );
 
 function mockMwWindow( options: {
@@ -401,5 +409,14 @@ describe( 'createServices', () => {
 		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( RepoRouter ).toHaveBeenCalledWith( wbRepo, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param );
 		expect( services.get( 'repoRouter' ) ).toBe( mockRepoRouter );
+	} );
+
+	it( 'creates ClientRouter', () => {
+		const mwWindow = mockMwWindow();
+		const services = createServices( mwWindow, [] );
+
+		expect( services ).toBeInstanceOf( ServiceContainer );
+		expect( ClientRouter ).toHaveBeenCalledWith( mwWindow.mw.util.getUrl );
+		expect( services.get( 'clientRouter' ) ).toBe( mockClientRouter );
 	} );
 } );
