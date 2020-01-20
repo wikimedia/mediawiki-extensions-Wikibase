@@ -492,7 +492,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 		$foo = $parserOutput->getText();
 
-		$this->assertContains( 'target label', $foo );
+		$this->assertStringContainsString( 'target label', $foo );
 	}
 
 	private function getGeneratorForRedirectTest() {

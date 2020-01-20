@@ -500,9 +500,9 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$html = $parserOutput->getText();
 
-		$this->assertContains( '<div class="redirectMsg">', $html, 'redirect message' );
-		$this->assertContains( '<a href="', $html, 'redirect target link' );
-		$this->assertContains( 'Q123</a>', $html, 'redirect target label' );
+		$this->assertStringContainsString( '<div class="redirectMsg">', $html, 'redirect message' );
+		$this->assertStringContainsString( '<a href="', $html, 'redirect target link' );
+		$this->assertStringContainsString( 'Q123</a>', $html, 'redirect target label' );
 	}
 
 	public function provideGetEntityId() {
@@ -629,13 +629,10 @@ class ItemContentTest extends EntityContentTestCase {
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
 		$actualOptions = $parserOutput->getUsedOptions();
-		$this->assertEquals(
+		$this->assertEqualsCanonicalizing(
 			$expectedUsedOptions,
 			$actualOptions,
-			'Cache-split flags are not what they should be',
-			0.0,
-			1,
-			true
+			'Cache-split flags are not what they should be'
 		);
 
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );

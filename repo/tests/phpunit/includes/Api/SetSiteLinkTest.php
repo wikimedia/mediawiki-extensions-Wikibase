@@ -579,7 +579,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		list( $result, ) = $this->doApiRequestWithToken( $params );
 
 		$warning = $result['warnings']['wbsetsitelink']['warnings'];
-		$this->assertContains( 'Unrecognized value for parameter "badges"', $warning );
+		$this->assertStringContainsString( 'Unrecognized value for parameter "badges"', $warning );
 	}
 
 	public function testUserCanSetSiteLinkWhenTheyHaveSufficientPermission() {

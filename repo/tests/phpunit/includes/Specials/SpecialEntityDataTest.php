@@ -223,7 +223,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$expected = '(wikibase-entitydata-text: json(comma-separator)nt(comma-separator)' .
 			'rdf(comma-separator)html)';
-		$this->assertContains( $expected, $output, "output" );
+		$this->assertStringContainsString( $expected, $output, "output" );
 	}
 
 }

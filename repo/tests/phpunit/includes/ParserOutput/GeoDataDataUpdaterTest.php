@@ -20,6 +20,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ParserOutput\GeoDataDataUpdater;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\GeoDataDataUpdater
@@ -56,12 +57,9 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 			$updater->processStatement( $statement );
 		}
 
-		$this->assertAttributeEquals(
-			$expected,
-			'coordinates',
-			$updater,
-			$message
-		);
+		$updater = TestingAccessWrapper::newFromObject( $updater );
+
+		$this->assertEquals( $expected, $updater->coordinates, $message );
 	}
 
 	public function processStatementProvider() {

@@ -67,13 +67,13 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 		);
 		$html = $this->newInstance()->getHTML( [ $searchResult ] );
 
-		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );
+		$this->assertStringContainsString( '<ul class="wikibase-disambiguation">', $html );
 		$this->assertSame( 1, substr_count( $html, '<li ' ) );
 
-		$this->assertContains( '>Q1</a>', $html );
-		$this->assertContains( '<span class="wb-itemlink-label">&lt;LABEL></span>', $html );
-		$this->assertContains( '<span class="wb-itemlink-description">&lt;DESC></span>', $html );
-		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH>)',
+		$this->assertStringContainsString( '>Q1</a>', $html );
+		$this->assertStringContainsString( '<span class="wb-itemlink-label">&lt;LABEL></span>', $html );
+		$this->assertStringContainsString( '<span class="wb-itemlink-description">&lt;DESC></span>', $html );
+		$this->assertStringContainsString( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH>)',
 			$html
 		);
 	}
@@ -96,18 +96,18 @@ class ItemDisambiguationTest extends MediaWikiTestCase {
 		];
 		$html = $this->newInstance()->getHTML( $searchResults );
 
-		$this->assertContains( '<ul class="wikibase-disambiguation">', $html );
+		$this->assertStringContainsString( '<ul class="wikibase-disambiguation">', $html );
 		$this->assertSame( 2, substr_count( $html, '<li ' ) );
 
-		$this->assertContains( '>Q1</a>', $html );
-		$this->assertContains( '<span class="wb-itemlink-description">&lt;DESC1></span>', $html );
-		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH1>)',
+		$this->assertStringContainsString( '>Q1</a>', $html );
+		$this->assertStringContainsString( '<span class="wb-itemlink-description">&lt;DESC1></span>', $html );
+		$this->assertStringContainsString( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH1>)',
 			$html
 		);
 
-		$this->assertContains( '>Q2</a>', $html );
-		$this->assertContains( '<span class="wb-itemlink-label">&lt;LABEL2></span>', $html );
-		$this->assertContains( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH2>)',
+		$this->assertStringContainsString( '>Q2</a>', $html );
+		$this->assertStringContainsString( '<span class="wb-itemlink-label">&lt;LABEL2></span>', $html );
+		$this->assertStringContainsString( '(wikibase-itemlink-userlang-wrapper: &lt;LANG>, &lt;MATCH2>)',
 			$html
 		);
 	}
