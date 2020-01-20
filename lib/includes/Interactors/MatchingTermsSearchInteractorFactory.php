@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Interactors;
 
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\MatchingTermsLookup;
 
 /**
  * Class creating TermIndexSearchInteractor instances configured for the particular display language.
@@ -14,9 +14,9 @@ use Wikibase\TermIndex;
 class MatchingTermsSearchInteractorFactory implements TermSearchInteractorFactory {
 
 	/**
-	 * @var TermIndex
+	 * @var MatchingTermsLookup
 	 */
-	private $termIndex;
+	private $tmatchingTermsLookup;
 
 	/**
 	 * @var LanguageFallbackChainFactory
@@ -29,11 +29,11 @@ class MatchingTermsSearchInteractorFactory implements TermSearchInteractorFactor
 	private $prefetchingTermLookup;
 
 	public function __construct(
-		TermIndex $termIndex,
+		MatchingTermsLookup $matchingTermsLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		PrefetchingTermLookup $prefetchingTermLookup
 	) {
-		$this->termIndex = $termIndex;
+		$this->tmatchingTermsLookup = $matchingTermsLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->prefetchingTermLookup = $prefetchingTermLookup;
 	}
@@ -45,7 +45,7 @@ class MatchingTermsSearchInteractorFactory implements TermSearchInteractorFactor
 	 */
 	public function newInteractor( $displayLanguageCode ) {
 		return new MatchingTermsLookupSearchInteractor(
-			$this->termIndex,
+			$this->tmatchingTermsLookup,
 			$this->languageFallbackChainFactory,
 			$this->prefetchingTermLookup,
 			$displayLanguageCode

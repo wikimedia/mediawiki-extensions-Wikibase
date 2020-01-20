@@ -48,4 +48,26 @@ return [
 	 */
 	'tmpItemTermsMigrationStages' => [ 'max' => MIGRATION_WRITE_NEW ],
 
+	/**
+	 * @note This config option is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * This setting is intentionally not documented in options.md
+	 *
+	 * It can be one of these stages:
+	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
+	 */
+	'tmpItemSearchMigrationStage' => MIGRATION_OLD,
+
+	/**
+	 * @note This config option is primarily added for Wikidata transition use-case and can be
+	 * considered temporary. It could be removed in the future with no warning.
+	 *
+	 * This setting is intentionally not documented in options.md
+	 *
+	 * It can be one of these stages:
+	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
+	 */
+	'tmpPropertySearchMigrationStage' => MIGRATION_OLD,
+
 ];

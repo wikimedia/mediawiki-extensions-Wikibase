@@ -145,7 +145,8 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		// TODO: Fix case insensitive: T242644
 
 		$conditions = [];
-		$tables = [ 'wbt_text', 'wbt_text_in_lang', 'wbt_term_in_lang' ];
+		// Note: Order of tables is important here for proper joins
+		$tables = [ 'wbt_term_in_lang', 'wbt_text_in_lang', 'wbt_text' ];
 
 		$language = $mask->getLanguage();
 		if ( $language !== null ) {

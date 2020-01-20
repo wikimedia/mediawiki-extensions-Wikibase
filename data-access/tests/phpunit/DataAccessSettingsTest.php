@@ -20,7 +20,9 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			false,
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
+			MIGRATION_OLD,
+			MIGRATION_OLD
 		);
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
@@ -36,7 +38,9 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			$forceWriteSearchFields,
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
+			MIGRATION_OLD,
+			MIGRATION_OLD
 		);
 
 		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
@@ -118,7 +122,9 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			false,
 			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			$itemTermsMigrationStages
+			$itemTermsMigrationStages,
+			MIGRATION_OLD,
+			MIGRATION_OLD
 		);
 
 		$this->assertSame( $expectedReturn, $settings->useNormalizedItemTerms( $numericItemId ) );

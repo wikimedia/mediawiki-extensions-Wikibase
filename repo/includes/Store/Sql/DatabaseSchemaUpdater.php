@@ -6,7 +6,6 @@ use DatabaseUpdater;
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
@@ -216,15 +215,7 @@ class DatabaseSchemaUpdater {
 			}
 		);
 
-		$settings = $wikibaseRepo->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$settings->getSetting( 'tmpItemTermsMigrationStages' )
-		);
+		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
 		$entitySource = new UnusableEntitySource();
 
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );
