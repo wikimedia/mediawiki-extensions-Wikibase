@@ -9,8 +9,8 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 
 /**
- * Component which gets shown if no dedicated handling for the type of error
- * which happened is configured.
+ * A component which gets shown if no dedicated handling for the type of
+ * error which happened is configured.
  */
 @Component( {
 } )

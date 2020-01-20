@@ -19,9 +19,16 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
+/**
+ * A component to be used as header of dialogs in which users make their
+ * way through a process - i.e. there is a primary action "forward" and
+ * an alternative second one.
+ */
 @Component
 export default class ProcessDialogHeader extends Vue {
-
+	/**
+	 * The title to be shown in the center of the header
+	 */
 	@Prop( { required: true, type: String } )
 	public title!: string;
 }
