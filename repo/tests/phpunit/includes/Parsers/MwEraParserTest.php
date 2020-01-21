@@ -20,6 +20,9 @@ use Wikibase\Repo\Parsers\MwEraParser;
 class MwEraParserTest extends StringValueParserTest {
 	use PHPUnit4CompatTrait;
 
+	/** @var LanguageFactory */
+	private $oldLangFactory;
+
 	/**
 	 * @see ValueParserTestBase::getInstance
 	 *
@@ -35,9 +38,10 @@ class MwEraParserTest extends StringValueParserTest {
 	protected function setUp() : void {
 		parent::setUp();
 
-		$stub = $this->createMock( LanguageFactory::class );
-		$stub->method( 'get' )->willReturnCallback( [ $this, 'getLanguage' ] );
 		$services = MediaWikiServices::getInstance();
+		$this->oldLangFactory = $services->getLanguageFactory();
+		$stub = $this->createMock( LanguageFactory::class );
+		$stub->method( 'getLanguage' )->willReturn( $this->getLanguage() );
 		$services->disableService( 'LanguageFactory' );
 		$services->redefineService( 'LanguageFactory',
 			function () use ( $stub ) {
@@ -48,26 +52,36 @@ class MwEraParserTest extends StringValueParserTest {
 
 	protected function tearDown() : void {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
-
+		MediaWikiServices::getInstance()->redefineService(
+			'LanguageFactory',
+			function () {
+				return $this->oldLangFactory;
+			}
+		);
 		parent::tearDown();
 	}
 
-	private function getLanguage( $code ) {
+	private function getLanguage() {
+		$code = 'de';
 		$lang = $this->createMock( Language::class );
 
 		$lang->method( 'getCode' )
-			->will( $this->returnValue( $code ) );
+			->willReturn( $code );
 
 		$lang->method( 'getMessage' )
 			->with( $this->equalTo( MwEraParser::MESSAGE_KEY ) )
-			->will( $this->returnCallback( function () use ( $code ) {
-				return [
-					'en' => '$1 BCE',
-					'de' => '$1 v. Chr.',
-				][$code];
-			} ) );
+			->willReturn( '$1 v. Chr.' );
 
 		return $lang;
+	}
+
+	/**
+	 * @see ValueParserTestBase::requireDataValue
+	 *
+	 * @return bool
+	 */
+	protected function requireDataValue() {
+		return false;
 	}
 
 	/**
@@ -88,7 +102,6 @@ class MwEraParserTest extends StringValueParserTest {
 			[ 'foo BCE', [ '-', 'foo' ] ],
 			[ 'foo v. Chr.', [ '-', 'foo' ] ],
 
-			[ 'fooBCE', [ '+', 'fooBCE' ] ],
 			[ 'foo v.Chr.', [ '+', 'foo v.Chr.' ] ],
 
 			/*

@@ -25,6 +25,9 @@ use Wikibase\Repo\Parsers\MwTimeIsoParser;
 class MwTimeIsoParserTest extends StringValueParserTest {
 	use PHPUnit4CompatTrait;
 
+	/** @var LanguageFactory */
+	private $oldLangFactory;
+
 	/**
 	 * @see ValueParserTestBase::getInstance
 	 *
@@ -40,30 +43,28 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 	protected function setUp() : void {
 		parent::setUp();
 
-		if ( class_exists( LanguageFactory::class ) ) {
-			$stub = $this->createMock( LanguageFactory::class );
-			$stub->method( 'get' )->willReturn( $this->getLanguage() );
-			$services = MediaWikiServices::getInstance();
-			$services->disableService( 'LanguageFactory' );
-			$services->redefineService( 'LanguageFactory',
-				function () use ( $stub ) {
-					return $stub;
-				}
-			);
-		} else {
-			// Back-compat code, remove once LanguageFactory lands
-			Language::$mLangObjCache['es'] = $this->getLanguage();
-		}
+		$services = MediaWikiServices::getInstance();
+		$this->oldLangFactory = $services->getLanguageFactory();
+		$stub = $this->createMock( LanguageFactory::class );
+		$stub->method( 'getLanguage' )->willReturnCallback( function ( $code ) {
+			return $code === 'es' ? $this->getLanguage() : new \LanguageEn();
+		} );
+		$services->disableService( 'LanguageFactory' );
+		$services->redefineService( 'LanguageFactory',
+			function () use ( $stub ) {
+				return $stub;
+			}
+		);
 	}
 
 	protected function tearDown() : void {
-		if ( class_exists( LanguageFactory::class ) ) {
-			MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
-		} else {
-			// Back-compat code, remove once LanguageFactory lands
-			unset( Language::$mLangObjCache['es'] );
-		}
-
+		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
+		MediaWikiServices::getInstance()->redefineService(
+			'LanguageFactory',
+			function () {
+				return $this->oldLangFactory;
+			}
+		);
 		parent::tearDown();
 	}
 
@@ -72,20 +73,20 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 
 		$lang->expects( $this->any() )
 			->method( 'getCode' )
-			->will( $this->returnValue( 'es' ) );
+			->willReturn( 'es' );
 
 		$lang->expects( $this->any() )
 			->method( 'parseFormattedNumber' )
-			->will( $this->returnCallback( function( $number ) {
-				return Language::factory( 'en' )->parseFormattedNumber( $number );
-			} ) );
+			->willReturnCallback( function ( $number ) {
+				return ( new \LanguageEn() )->parseFormattedNumber( $number );
+			} );
 
 		$lang->expects( $this->any() )
 			->method( 'getMessage' )
 			->with( $this->isType( 'string' ) )
-			->will( $this->returnCallback( function( $msg ) {
+			->willReturnCallback( function ( $msg ) {
 				return $this->getMessages()[$msg] ?? 'kitten';
-			} ) );
+			} );
 
 		return $lang;
 	}
