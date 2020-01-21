@@ -13800,34 +13800,43 @@ var mainSnakGetterTypes = {
   dataValueType: 'mainSnakDataValueType',
   snakType: 'mainSnakSnakType'
 };
-// CONCATENATED MODULE: ./src/store/validateBridgeApplicability.ts
-
-
-
-
-function validateBridgeApplicability(context, path) {
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](path.entityId, path.propertyId) === true) {
-    return false;
-  }
-
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
-    return false;
-  }
-
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
-    return false;
-  }
-
-  return true;
-}
 // CONCATENATED MODULE: ./src/definitions/ApplicationError.ts
 var ErrorTypes;
 
 (function (ErrorTypes) {
   ErrorTypes["APPLICATION_LOGIC_ERROR"] = "APPLICATION_LOGIC_ERROR";
   ErrorTypes["INVALID_ENTITY_STATE_ERROR"] = "INVALID_ENTITY_STATE_ERROR";
+  ErrorTypes["UNSUPPORTED_AMBIGUOUS_STATEMENT"] = "UNSUPPORTED_AMBIGUOUS_STATEMENT";
+  ErrorTypes["UNSUPPORTED_SNAK_TYPE"] = "UNSUPPORTED_SNAK_TYPE";
+  ErrorTypes["UNSUPPORTED_DATAVALUE_TYPE"] = "UNSUPPORTED_DATAVALUE_TYPE";
   ErrorTypes["SAVING_FAILED"] = "SAVING_FAILED";
 })(ErrorTypes || (ErrorTypes = {}));
+// CONCATENATED MODULE: ./src/store/validateBridgeApplicability.ts
+
+
+
+
+
+
+function validateBridgeApplicability(context, path) {
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_IS_AMBIGUOUS)](path.entityId, path.propertyId) === true) {
+    context.dispatch(BRIDGE_ERROR_ADD, [{
+      type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
+    }]);
+  }
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.snakType)](path) !== 'value') {
+    context.dispatch(BRIDGE_ERROR_ADD, [{
+      type: ErrorTypes.UNSUPPORTED_SNAK_TYPE
+    }]);
+  }
+
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValueType)](path) !== 'string') {
+    context.dispatch(BRIDGE_ERROR_ADD, [{
+      type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE
+    }]);
+  }
+}
 // CONCATENATED MODULE: ./src/store/actions.ts
 
 
@@ -13855,16 +13864,19 @@ function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i+
 
 
 
-function validateEntityState(context, path) {
-  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](path.entityId, path.propertyId) === false) {
-    return false;
-  }
-
-  return validateBridgeApplicability(context, path);
-}
-
 function commitErrors(context, errors) {
   context.commit(APPLICATION_ERRORS_ADD, errors);
+}
+
+function validateEntityState(context, path) {
+  if (context.getters[Object(namespacedStoreMethods["getter"])(NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS)](path.entityId, path.propertyId) === false) {
+    commitErrors(context, [{
+      type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
+    }]);
+    return;
+  }
+
+  validateBridgeApplicability(context, path);
 }
 
 function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDatatypeRepository, tracker, editAuthorizationChecker) {
@@ -13901,15 +13913,11 @@ function actions(entityLabelRepository, wikibaseRepoConfigRepository, propertyDa
         propertyId: state.targetProperty,
         index: 0
       };
+      validateEntityState(context, path);
 
-      if (validateEntityState(context, path)) {
+      if (context.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
         context.commit(ORIGINAL_STATEMENT_SET, state[NS_ENTITY][NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
         context.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
-      } else {
-        // TODO: somehow store *why* we cannot edit this
-        commitErrors(context, [{
-          type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
-        }]);
       }
     }, function (error) {
       commitErrors(context, [{

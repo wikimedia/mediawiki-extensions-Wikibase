@@ -3,6 +3,9 @@ import { MissingPermissionsError } from '@/definitions/data-access/BridgePermiss
 export enum ErrorTypes {
 	APPLICATION_LOGIC_ERROR = 'APPLICATION_LOGIC_ERROR',
 	INVALID_ENTITY_STATE_ERROR = 'INVALID_ENTITY_STATE_ERROR',
+	UNSUPPORTED_AMBIGUOUS_STATEMENT = 'UNSUPPORTED_AMBIGUOUS_STATEMENT',
+	UNSUPPORTED_SNAK_TYPE = 'UNSUPPORTED_SNAK_TYPE',
+	UNSUPPORTED_DATAVALUE_TYPE = 'UNSUPPORTED_DATAVALUE_TYPE',
 	SAVING_FAILED = 'SAVING_FAILED',
 }
 
@@ -19,7 +22,10 @@ interface ApplicationLogicError extends ApplicationErrorBase {
 }
 
 interface InvalidEntityStateError extends ApplicationErrorBase {
-	type: ErrorTypes.INVALID_ENTITY_STATE_ERROR;
+	type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
+	| ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
+	| ErrorTypes.UNSUPPORTED_SNAK_TYPE
+	| ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE;
 }
 
 interface SavingFailedError extends ApplicationErrorBase {

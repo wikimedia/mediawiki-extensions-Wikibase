@@ -48,10 +48,10 @@ import {
 	PageNotEditable,
 } from '@/definitions/data-access/BridgePermissionsRepository';
 
-const mockValidateBridgeApplicability = jest.fn().mockReturnValue( true );
+const mockValidateBridgeApplicability = jest.fn();
 jest.mock( '@/store/validateBridgeApplicability', () => ( {
 	__esModule: true,
-	default: ( context: any ) => mockValidateBridgeApplicability( context ),
+	default: () => mockValidateBridgeApplicability(),
 } ) );
 
 const mockBridgeConfig = jest.fn();
@@ -470,9 +470,7 @@ describe( 'root/actions', () => {
 					} );
 				} );
 
-				it( `commits to ${APPLICATION_ERRORS_ADD} on lack of bridge support`, () => {
-					mockValidateBridgeApplicability.mockReturnValue( false );
-
+				it( `doesn't commit to ${APPLICATION_STATUS_SET} on lack of bridge support`, () => {
 					const entityId = 'Q42';
 					const targetProperty = 'P23';
 
@@ -481,10 +479,16 @@ describe( 'root/actions', () => {
 						targetProperty,
 					);
 
+					mockValidateBridgeApplicability.mockImplementation(
+						() => {
+							context.getters.applicationStatus = ApplicationStatus.ERROR;
+						},
+					);
+
 					return initAction()( context, information ).then( () => {
-						expect( context.commit ).toHaveBeenCalledWith(
-							APPLICATION_ERRORS_ADD,
-							[ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ],
+						expect( context.commit ).not.toHaveBeenCalledWith(
+							APPLICATION_STATUS_SET,
+							ApplicationStatus.READY,
 						);
 					} );
 				} );
