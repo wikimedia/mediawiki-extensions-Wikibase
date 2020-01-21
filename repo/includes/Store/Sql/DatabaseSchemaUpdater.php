@@ -192,14 +192,21 @@ class DatabaseSchemaUpdater {
 	 * @param DatabaseUpdater $updater
 	 */
 	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$propertySource = $wikibaseRepo
+			->getEntitySourceDefinitions()
+			->getSourceForEntityType( 'property' );
+		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
+			// Foreign properties, skip this part
+			return;
+		}
 		$reporter = new ObservableMessageReporter();
 		$reporter->registerReporterCallback(
 			function ( $msg ) use ( $updater ) {
 				$updater->output( "..." . $msg . "\n" );
 			}
 		);
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$settings = $wikibaseRepo->getSettings();
 		$dataAccessSettings = new DataAccessSettings(
