@@ -12699,12 +12699,12 @@ var PageNotEditable;
   PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
   PageNotEditable["UNKNOWN"] = "unknown";
 })(PageNotEditable || (PageNotEditable = {}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3c934e69&
-var ErrorPermissionvue_type_template_id_3c934e69_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
-var ErrorPermissionvue_type_template_id_3c934e69_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=0fd5e5c9&
+var ErrorPermissionvue_type_template_id_0fd5e5c9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
+var ErrorPermissionvue_type_template_id_0fd5e5c9_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3c934e69&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=0fd5e5c9&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
 var es6_regexp_to_string = __webpack_require__("6b54");
@@ -12856,6 +12856,68 @@ var ErrorPermissionInfo_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorPermissionInfo = (ErrorPermissionInfo_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=template&id=ab51b804&
+var PageListvue_type_template_id_ab51b804_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',_vm._l((_vm.pages),function(page){return _c('li',{key:page},[_c('a',{attrs:{"href":_vm.router.getPageUrl( page )}},[_vm._v(_vm._s(page))])])}),0)}
+var PageListvue_type_template_id_ab51b804_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=template&id=ab51b804&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+var PageListvue_type_script_lang_ts_PageList =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(PageList, _Vue);
+
+  function PageList() {
+    _classCallCheck(this, PageList);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PageList).apply(this, arguments));
+  }
+
+  return PageList;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PageListvue_type_script_lang_ts_PageList.prototype, "pages", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PageListvue_type_script_lang_ts_PageList.prototype, "router", void 0);
+
+PageListvue_type_script_lang_ts_PageList = __decorate([vue_class_component_common_default.a], PageListvue_type_script_lang_ts_PageList);
+/* harmony default export */ var PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_PageList);
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue
+
+
+
+
+
+/* normalize component */
+
+var PageList_component = normalizeComponent(
+  components_PageListvue_type_script_lang_ts_,
+  PageListvue_type_template_id_ab51b804_render,
+  PageListvue_type_template_id_ab51b804_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_PageList = (PageList_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
 
 
@@ -12870,6 +12932,7 @@ var ErrorPermissionInfo_component = normalizeComponent(
 
 
 var _permissionTypeRender;
+
 
 
 
@@ -13002,15 +13065,27 @@ function (_Vue) {
           break;
 
         case PageNotEditable.ITEM_CASCADE_PROTECTED:
-          params.push.apply(params, [permissionError.info.pages.length.toString()].concat(_toConsumableArray(permissionError.info.pages)));
+          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$repoRouter));
           break;
 
         case PageNotEditable.PAGE_CASCADE_PROTECTED:
-          params.push.apply(params, [permissionError.info.pages.length.toString()].concat(_toConsumableArray(permissionError.info.pages)));
+          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$clientRouter));
           break;
       }
 
       return params;
+    }
+  }, {
+    key: "convertToHtmlList",
+    value: function convertToHtmlList(arr, mwRouter) {
+      var pageListInstance = new components_PageList({
+        propsData: {
+          pages: arr,
+          router: mwRouter
+        }
+      });
+      pageListInstance.$mount();
+      return pageListInstance.$el;
     }
   }]);
 
@@ -13041,8 +13116,8 @@ ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_c
 
 var ErrorPermission_component = normalizeComponent(
   components_ErrorPermissionvue_type_script_lang_ts_,
-  ErrorPermissionvue_type_template_id_3c934e69_render,
-  ErrorPermissionvue_type_template_id_3c934e69_staticRenderFns,
+  ErrorPermissionvue_type_template_id_0fd5e5c9_render,
+  ErrorPermissionvue_type_template_id_0fd5e5c9_staticRenderFns,
   false,
   null,
   null,
