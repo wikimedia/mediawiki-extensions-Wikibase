@@ -115,5 +115,10 @@
 	"wikibase-client-data-bridge-permissions-error-info": "Více informací",
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>Zablokování provedl $1. Udaným důvodem bylo <em>$2</em>.</p>\n<ul>\n<li>Začátek blokování: $8</li>\n<li>Zablokování vyprší: $6</li>\n</ul>\n<p><strong>Co mohu dělat?</strong></p>\n<p>\nPokud chcete zablokování prodiskutovat, můžete kontaktovat uživatele $4 či jiného [[{{int:grouppage-sysop}}|správce]].\nPokud máte ve svém [[Special:Preferences|Nastavení]] vyplněnou platnou e-mailovou adresu a nebylo Vám to zakázáno, můžete použít funkci \"{{int:emailuser}}\" .\nIdentifikační číslo bloku je #$5.\nTyto údaje prosím uvádějte ve všech dotazech na správce.\n</p>",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Neznámá chyba povolení",
-	"wikibase-client-data-bridge-permissions-error-unknown-body": "Z neznámých důvodů nemůžete editovat tuto hodnotu"
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Z neznámých důvodů nemůžete editovat tuto hodnotu",
+	"wikibase-client-data-bridge-edit-decision-heading": "Vyberte prosím typ vámi provedené editace:",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Opravil/a</strong> jsem chybnou hodnotu",
+	"wikibase-client-data-bridge-edit-decision-replace-description": "Původní hodnota byla chybná a ani nikdy v minulosti nebyla platná",
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Aktualizoval/a</strong> jsem zastaralou hodnotu",
+	"wikibase-client-data-bridge-edit-decision-update-description": "Původní hodnota bývala správná, ale nyní je zastaralá."
 }
