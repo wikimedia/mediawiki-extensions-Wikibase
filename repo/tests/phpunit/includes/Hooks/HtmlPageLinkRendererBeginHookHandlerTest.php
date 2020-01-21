@@ -248,7 +248,7 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertTrue( $ret );
 		$this->assertInstanceOf( HtmlArmor::class, $text );
 		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );
-		$this->assertContains( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
+		$this->assertStringContainsString( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
 	}
 
 	public function testDoHtmlPageLinkRendererBegin_itemHasNoDescription() {
@@ -302,8 +302,8 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( HtmlArmor::class, $text );
 		$this->assertSame( $expectedHtml, HtmlArmor::getHtml( $text ) );
 
-		$this->assertContains( self::DUMMY_LABEL_FOREIGN_ITEM, $customAttribs['title'] );
-		$this->assertContains( self::DUMMY_DESCRIPTION_FOREIGN_ITEM, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_LABEL_FOREIGN_ITEM, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_DESCRIPTION_FOREIGN_ITEM, $customAttribs['title'] );
 	}
 
 	public function testGivenForeignIdWithoutLabelAndDescription_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
