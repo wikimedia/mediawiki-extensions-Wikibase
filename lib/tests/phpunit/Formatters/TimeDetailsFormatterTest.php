@@ -200,9 +200,9 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = $this->getTimeValue();
 
 		$html = $formatter->format( $value );
-		$this->assertNotContains( '<a>', $html, 'Should not be unescaped' );
-		$this->assertContains( '&lt;', $html, 'Should be escaped' );
-		$this->assertNotContains( '&amp;', $html, 'Should not be double escape' );
+		$this->assertStringNotContainsString( '<a>', $html, 'Should not be unescaped' );
+		$this->assertStringContainsString( '&lt;', $html, 'Should be escaped' );
+		$this->assertStringNotContainsString( '&amp;', $html, 'Should not be double escape' );
 	}
 
 	public function testGivenInvalidTimeValue_formatEchoesTimeValueFields() {

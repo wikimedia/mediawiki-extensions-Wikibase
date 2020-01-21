@@ -95,7 +95,7 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
 		$this->assertSame( 2, substr_count( $html, '<LINK' ) );
-		$this->assertContains( 'mw-collapsible', $html );
+		$this->assertStringContainsString( 'mw-collapsible', $html );
 	}
 
 	public function testBadges() {
@@ -108,11 +108,11 @@ class SiteLinksViewTest extends \PHPUnit\Framework\TestCase {
 		$html = $this->newInstance()->getHtml( $siteLinks, null, [ 'wikipedia' ] );
 
 		$this->assertSame( 3, substr_count( $html, '<BADGE' ) );
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'<BADGE class="Q42 wb-badge-featuredarticle" id="Q42">Featured article</BADGE>',
 			$html
 		);
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'<BADGE class="Q12 wb-badge-goodarticle" id="Q12">Q12</BADGE>',
 			$html
 		);

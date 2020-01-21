@@ -61,8 +61,11 @@ class UnitStorageTest extends MediaWikiTestCase {
 		$this->assertSame( [ 'factor' => '22.234', 'unit' => 'Q1' ],
 			$storage->getConversion( 'Q2' ) );
 		$this->assertSame( [ 'factor' => '1', 'unit' => 'Q3' ], $storage->getConversion( 'Q3' ) );
-		$this->assertArraySubset( [ 'factor' => '0.0000000000000000000243885945', 'unit' => 'Q3' ],
-			$storage->getConversion( 'Q4' ) );
+		$expected = [ 'factor' => '0.0000000000000000000243885945', 'unit' => 'Q3' ];
+		$this->assertEquals(
+			$expected,
+			array_intersect_assoc( $storage->getConversion( 'Q4' ), $expected )
+		);
 		$this->assertNull( $storage->getConversion( 'Q5' ) );
 	}
 
