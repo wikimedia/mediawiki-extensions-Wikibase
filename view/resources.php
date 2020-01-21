@@ -876,6 +876,7 @@ return call_user_func( function() {
 					'wikibase-tainted-ref-popper-feedback-text',
 					'wikibase-tainted-ref-popper-feedback-link-text',
 					'wikibase-tainted-ref-popper-feedback-link-title',
+					'wikibase-tainted-ref-popper-remove-warning',
 					'wikibase-tainted-ref-tainted-icon-title',
 				],
 				'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',

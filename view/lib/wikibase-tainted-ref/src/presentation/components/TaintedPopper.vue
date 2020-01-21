@@ -14,6 +14,9 @@
 			<p class="wb-tr-popper__text wb-tr-popper__text--top">
 				{{ popperText }}
 			</p>
+			<button class="wb-tr-popper-remove-warning" @click="removeWarningClick">
+				{{ removeWarningText }}
+			</button>
 			<p class="wb-tr-popper__text wb-tr-popper-feedback">
 				{{ popperFeedbackText }}
 				<a
@@ -27,6 +30,7 @@
 </template>
 
 <script lang="ts">
+import { STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 import { Getter } from 'vuex-class';
 import {
 	Component,
@@ -67,6 +71,10 @@ export default class TaintedPopper extends Vue {
 		return this.$message( 'wikibase-tainted-ref-popper-text' );
 	}
 
+	public get removeWarningText(): string {
+		return this.$message( 'wikibase-tainted-ref-popper-remove-warning' );
+	}
+
 	public get popperFeedbackText(): string {
 		return this.$message( 'wikibase-tainted-ref-popper-feedback-text' );
 	}
@@ -81,6 +89,10 @@ export default class TaintedPopper extends Vue {
 
 	@Getter( 'feedbackLink' )
 	public feedbackLink!: string;
+
+	public removeWarningClick( _event: MouseEvent ): void {
+		this.$store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, this.$props.guid );
+	}
 }
 </script>
 
@@ -112,5 +124,31 @@ export default class TaintedPopper extends Vue {
 		color: $basic-text-black;
 		margin: 8px 0 8px 0;
 		line-height: 22px;
+	}
+
+	.wb-tr-popper-remove-warning {
+		color: $color-light-grey;
+		font-family: sans-serif;
+		font-size: 14px;
+		font-weight: bold;
+		border: solid 1px $border-color;
+		border-radius: 2px;
+		background: $background-color-light-grey;
+		padding: 4px 16px 4px 16px;
+	}
+
+	.wb-tr-popper-remove-warning:hover {
+		background: $background-color-white;
+	}
+
+	.wb-tr-popper-remove-warning:focus {
+		background: $background-color-white;
+		border-color: $border-color-focus;
+	}
+
+	.wb-tr-popper-remove-warning:active {
+		color: $color-black;
+		background: $background-color-active;
+		border-color: $border-color-active;
 	}
 </style>

@@ -508,5 +508,6 @@
 	"wikibase-tainted-ref-popper-feedback-text": "Text asking for feedback for the tainted references feature (followed by a link).",
 	"wikibase-tainted-ref-popper-feedback-link-text": "Link text for the feedback link of the tainted references feature.",
 	"wikibase-tainted-ref-popper-feedback-link-title": "Title text for the feedback link of the tainted references feature.",
+	"wikibase-tainted-ref-popper-remove-warning": "Label for a button which removes the tainted references warning for a statement.",
 	"wikibase-tainted-ref-tainted-icon-title": "Title for icon that indicates that a statement's references were tainted."
 }
