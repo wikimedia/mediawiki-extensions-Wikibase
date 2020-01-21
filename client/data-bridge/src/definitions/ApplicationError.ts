@@ -12,18 +12,18 @@ export interface ApplicationErrorBase {
 }
 
 interface ApplicationLogicError extends ApplicationErrorBase {
-	type: typeof ErrorTypes.APPLICATION_LOGIC_ERROR;
+	type: ErrorTypes.APPLICATION_LOGIC_ERROR;
 	info: {
 		stack?: string;
 	};
 }
 
 interface InvalidEntityStateError extends ApplicationErrorBase {
-	type: typeof ErrorTypes.INVALID_ENTITY_STATE_ERROR;
+	type: ErrorTypes.INVALID_ENTITY_STATE_ERROR;
 }
 
 interface SavingFailedError extends ApplicationErrorBase {
-	type: typeof ErrorTypes.SAVING_FAILED;
+	type: ErrorTypes.SAVING_FAILED;
 }
 
 type ApplicationError = MissingPermissionsError|ApplicationLogicError|InvalidEntityStateError|SavingFailedError;

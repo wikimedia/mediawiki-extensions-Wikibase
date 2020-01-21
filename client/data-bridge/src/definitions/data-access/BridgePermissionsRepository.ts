@@ -22,28 +22,28 @@ export interface BlockInfo {
 }
 
 export interface BlockReason extends ApplicationErrorBase {
-	type: typeof PageNotEditable.BLOCKED_ON_REPO_ITEM | typeof PageNotEditable.BLOCKED_ON_CLIENT_PAGE;
+	type: PageNotEditable.BLOCKED_ON_REPO_ITEM | PageNotEditable.BLOCKED_ON_CLIENT_PAGE;
 	info: BlockInfo;
 }
 
 export interface ProtectedReason extends ApplicationErrorBase {
-	type: typeof PageNotEditable.ITEM_FULLY_PROTECTED
-	| typeof PageNotEditable.ITEM_SEMI_PROTECTED;
+	type: PageNotEditable.ITEM_FULLY_PROTECTED
+	| PageNotEditable.ITEM_SEMI_PROTECTED;
 	info: {
 		right: string;
 	};
 }
 
 export interface CascadeProtectedReason extends ApplicationErrorBase {
-	type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED
-	| typeof PageNotEditable.PAGE_CASCADE_PROTECTED;
+	type: PageNotEditable.ITEM_CASCADE_PROTECTED
+	| PageNotEditable.PAGE_CASCADE_PROTECTED;
 	info: {
 		pages: string[];
 	};
 }
 
 export interface UnknownReason extends ApplicationErrorBase {
-	type: typeof PageNotEditable.UNKNOWN;
+	type: PageNotEditable.UNKNOWN;
 	info: {
 		code: string;
 		messageKey: string;
