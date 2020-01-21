@@ -96,7 +96,7 @@ export default class TaintedPopper extends Vue {
 		font-size: 14px;
 		color: $basic-text-black;
 		line-height: 22px;
-		margin: 0 16px 8px 16px;
+		margin: 0 0 8px 0;
 	}
 
 	.wb-tr-popper__text--top {
@@ -110,7 +110,7 @@ export default class TaintedPopper extends Vue {
 	.wb-tr-popper-feedback {
 		font-weight: normal;
 		color: $basic-text-black;
-		margin: 8px 16px 8px 16px;
+		margin: 8px 0 8px 0;
 		line-height: 22px;
 	}
 </style>
