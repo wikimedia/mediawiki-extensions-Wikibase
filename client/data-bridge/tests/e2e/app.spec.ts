@@ -12,6 +12,8 @@ import {
 	mockMwConfig,
 	mockMwEnv,
 	mockMwApiConstructor,
+	addPropertyLabelResponse,
+	addDataBridgeConfigResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -23,6 +25,8 @@ import {
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
 import { v4 as uuid } from 'uuid';
+import { ApiQueryInfoTestResponsePage, ApiQueryResponsePage } from '@/definitions/data-access/ApiQuery';
+import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
 
 Vue.config.devtools = false;
 
@@ -470,4 +474,128 @@ describe( 'app', () => {
 		);
 	} );
 
+	describe( 'error state specialized for permission errors', () => {
+		function addPageInfoProtectedpageResponse( title: string, response: { query?: object } ): object {
+			const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
+				pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
+				page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] ),
+				apiError: ApiErrorRawErrorformat = {
+					code: 'protectedpage',
+					key: 'protectedpagetext',
+					params: [
+						'editsemiprotected',
+						'edit',
+					],
+				};
+			( page as ApiQueryInfoTestResponsePage ).actions = { edit: [ apiError ] };
+
+			return response;
+		}
+
+		function addPageInfoCascadeprotectedResponse( title: string, response: { query?: object } ): object {
+			const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
+				pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
+				page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] ),
+				apiError: ApiErrorRawErrorformat = {
+					code: 'cascadeprotected',
+					key: 'cascadeprotected',
+					params: [
+						2,
+						'* [[:Art]]\n* [[:Category:Cat]]\n',
+						'edit',
+					],
+				};
+			( page as ApiQueryInfoTestResponsePage ).actions = { edit: [ apiError ] };
+
+			return response;
+		}
+
+		it( 'shows reason if item semiprotected on repo', async () => {
+			const testLink = prepareTestEnv( {} );
+			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+				get: jest.fn().mockResolvedValue(
+					addPropertyLabelResponse(
+						{
+							propertyId: DEFAULT_PROPERTY,
+						},
+						addPageInfoProtectedpageResponse(
+							DEFAULT_ENTITY,
+							addSiteinfoRestrictionsResponse(
+								addDataBridgeConfigResponse(
+									null,
+									{},
+								),
+							),
+						),
+					),
+				),
+			} );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			expect( select( '.wb-db-app' ) ).not.toBeNull();
+			const errorsWrapper = select( '.wb-db-app .wb-db-error' );
+			expect( errorsWrapper ).not.toBeNull();
+			expect( ( errorsWrapper as HTMLElement ).innerHTML )
+				.toContain( '⧼wikibase-client-data-bridge-permissions-error⧽' );
+			const permissionErrors = document.querySelectorAll(
+				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
+			);
+			expect( permissionErrors.length ).toBe( 1 );
+			expect( permissionErrors[ 0 ].innerHTML )
+				.toContain( '⧼wikibase-client-data-bridge-semiprotected-on-repo-head⧽' );
+		} );
+
+		it( 'enumerates reasons if item semiprotected on repo & article cascadeprotected on client', async () => {
+			const testLink = prepareTestEnv( {} );
+			( window as MwWindow ).mw.Api = mockMwApiConstructor( {
+				get: jest.fn().mockResolvedValue(
+					addPageInfoCascadeprotectedResponse(
+						'Client_page',
+						addSiteinfoRestrictionsResponse(
+							{},
+						),
+					),
+				),
+			} );
+			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+				get: jest.fn().mockResolvedValue(
+					addPropertyLabelResponse(
+						{
+							propertyId: DEFAULT_PROPERTY,
+						},
+						addPageInfoProtectedpageResponse(
+							DEFAULT_ENTITY,
+							addSiteinfoRestrictionsResponse(
+								addDataBridgeConfigResponse(
+									null,
+									{},
+								),
+							),
+						),
+					),
+				),
+			} );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			expect( select( '.wb-db-app' ) ).not.toBeNull();
+			const errorsWrapper = select( '.wb-db-app .wb-db-error' );
+			expect( errorsWrapper ).not.toBeNull();
+			expect( ( errorsWrapper as HTMLElement ).innerHTML )
+				.toContain( '⧼wikibase-client-data-bridge-permissions-error⧽' );
+			const permissionErrors = document.querySelectorAll(
+				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
+			);
+			expect( permissionErrors.length ).toBe( 2 );
+			expect( permissionErrors[ 0 ].innerHTML )
+				.toContain( '⧼wikibase-client-data-bridge-semiprotected-on-repo-head⧽' );
+			expect( permissionErrors[ 1 ].innerHTML )
+				.toContain( '⧼wikibase-client-data-bridge-cascadeprotected-on-client-head⧽' );
+		} );
+	} );
 } );
