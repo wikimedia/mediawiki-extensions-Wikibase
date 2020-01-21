@@ -69,9 +69,22 @@ describe( 'ErrorWrapper', () => {
 		const permissionErrors: MissingPermissionsError[] = [
 			{
 				type: PageNotEditable.ITEM_SEMI_PROTECTED,
-			} as ProtectedReason,
+				info: {
+					right: 'editsemiprotected',
+				},
+			},
+			{
+				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+				info: {
+					pages: [ 'Page' ],
+				},
+			},
 		];
 		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: {},
+			},
 			...permissionErrors,
 			{
 				type: ErrorTypes.INVALID_ENTITY_STATE_ERROR,
