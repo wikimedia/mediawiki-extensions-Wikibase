@@ -63,8 +63,6 @@ describe( 'ErrorWrapper', () => {
 		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
 	} );
 
-	// TODO find an answer to what is actually the desired behavior
-	// dev first needs to come clear which combinations of errors are even possible not to confuse UX
 	it( 'shows only ErrorPermission even if permission errors are mixed with other application errors', () => {
 		const permissionErrors: MissingPermissionsError[] = [
 			{
