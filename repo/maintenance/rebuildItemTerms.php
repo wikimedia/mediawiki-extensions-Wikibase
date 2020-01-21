@@ -118,7 +118,7 @@ class RebuildItemTerms extends Maintenance {
 	private function newItemIdIterator(): \Iterator {
 		$idRange = new RangeTraversable(
 			(int)$this->getOption( 'from-id', 1 ),
-			$this->getToIdOrNull()
+			$this->getToIdOrHighestId()
 		);
 
 		foreach ( $idRange as $integer ) {
@@ -126,8 +126,21 @@ class RebuildItemTerms extends Maintenance {
 		}
 	}
 
-	private function getToIdOrNull() {
-		return $this->hasOption( 'to-id' ) ? (int)$this->getOption( 'to-id' ) : null;
+	private function getToIdOrHighestId(): int {
+		if ( $this->hasOption( 'to-id' ) ) {
+			return (int)$this->getOption( 'to-id' );
+		}
+
+		$highestId = MediaWikiServices::getInstance()
+			->getDBLoadBalancer()
+			->getConnection( DB_REPLICA )
+			->selectRow(
+			'wb_id_counters',
+			'id_value',
+			[ 'id_type' => 'wikibase-item' ],
+			__METHOD__
+		);
+		return (int)$highestId->id_value;
 	}
 
 	private function getReporter(): MessageReporter {
