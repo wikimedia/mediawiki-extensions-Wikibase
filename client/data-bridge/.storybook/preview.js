@@ -25,9 +25,7 @@ extendVueEnvironment(
 		},
 	},
 	{
-		get( messageKey ) {
-			return `<${messageKey}>`;
-		},
+		get: ( key ) => `⧼${key}⧽`,
 	},
 	{
 		usePublish: true,
