@@ -262,6 +262,14 @@ class DatabaseSchemaUpdater {
 
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$propertySource = $wikibaseRepo
+			->getEntitySourceDefinitions()
+			->getSourceForEntityType( 'property' );
+		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
+			// Foreign properties, skip this part
+			return;
+		}
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdLookup()
