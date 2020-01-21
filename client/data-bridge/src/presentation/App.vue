@@ -8,6 +8,7 @@
 					:squary="true"
 					@click="saveAndClose"
 					:disabled="!canSave"
+					v-if="!hasError"
 				/>
 			</template>
 			<template v-slot:safeAction>

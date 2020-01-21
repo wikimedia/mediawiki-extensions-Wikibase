@@ -174,7 +174,7 @@ describe( 'app', () => {
 				select(
 					'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
 				),
-			).not.toBeNull();
+			).toBeNull();
 		} );
 
 	} );
