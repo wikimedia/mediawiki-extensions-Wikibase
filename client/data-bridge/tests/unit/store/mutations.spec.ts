@@ -13,6 +13,7 @@ import {
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
 	ENTITY_TITLE_SET,
+	ORIGINAL_HREF_SET,
 } from '@/store/mutationTypes';
 import newApplicationState from './newApplicationState';
 
@@ -28,6 +29,13 @@ describe( 'root/mutations', () => {
 			editFlow: EditFlow = EditFlow.OVERWRITE;
 		mutations[ EDITFLOW_SET ]( store, editFlow );
 		expect( store.editFlow ).toBe( editFlow );
+	} );
+
+	it( 'changes the originalHref of the store', () => {
+		const store: Application = newApplicationState(),
+			originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
+		mutations[ ORIGINAL_HREF_SET ]( store, originalHref );
+		expect( store.originalHref ).toBe( originalHref );
 	} );
 
 	it( 'changes the applicationStatus of the store', () => {

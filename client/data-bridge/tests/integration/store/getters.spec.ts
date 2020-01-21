@@ -152,6 +152,7 @@ describe( 'store/getters', () => {
 			client: {
 				usePublish: true,
 			},
+			originalHref: 'https://example.com/index.php?title=Item:Q42&uselang=en#P31',
 		};
 
 		store = createStore( services );

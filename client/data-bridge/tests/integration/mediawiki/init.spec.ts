@@ -151,6 +151,7 @@ describe( 'init', () => {
 					entityTitle,
 					editFlow,
 					client: { usePublish },
+					originalHref: testLinkHref,
 				},
 				expectedServices,
 			);

@@ -12,6 +12,7 @@ export default function ( fields?: any ): Application {
 		wikibaseRepoConfiguration: null,
 		editDecision: null,
 		entityTitle: '',
+		originalHref: '',
 	};
 
 	if ( fields !== null ) {

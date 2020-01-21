@@ -126,6 +126,7 @@ launch(
 		client: {
 			usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
 		},
+		originalHref: 'https://example.com/index.php?title=Item:Q47&uselang=en#P20',
 	},
 	services,
 ).on( Events.onSaved, () => {
