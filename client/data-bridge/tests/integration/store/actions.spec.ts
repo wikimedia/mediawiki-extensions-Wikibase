@@ -149,6 +149,7 @@ describe( 'store/actions', () => {
 			entityId: 'Q42',
 			entityTitle: 'Q42',
 			client,
+			originalHref: 'https://example.com/index.php?title=Item:Q42&uselang=en#P31',
 		};
 
 		store = createStore( services );
@@ -166,6 +167,9 @@ describe( 'store/actions', () => {
 				);
 				expect( successStore.state.originalStatement ).toStrictEqual(
 					testSet.entity.statements[ info.propertyId ][ 0 ],
+				);
+				expect( successStore.state.originalHref ).toStrictEqual(
+					info.originalHref,
 				);
 			} );
 		} );

@@ -15,4 +15,6 @@ export default interface AppInformation {
 	editFlow: EditFlow;
 	/** The client configuration of Wikibase */
 	client: WikibaseClientConfiguration;
+	/** The href of the original link that is overloaded by bridge */
+	originalHref: string;
 }

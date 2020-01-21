@@ -51,7 +51,7 @@ describe( 'Dispatcher', () => {
 				{ usePublish: false } as DataBridgeConfig,
 			);
 
-			dispatcher.dispatch( new ( jest.fn() )() );
+			dispatcher.dispatch( { link: { href: '' } } as any );
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( mockPrepareContainer.mock.calls[ 0 ][ 0 ] ).toBe( OO );
@@ -74,6 +74,7 @@ describe( 'Dispatcher', () => {
 			const propertyId = 'P815';
 			const entityTitle = entityId;
 			const editFlow = EditFlow.OVERWRITE;
+			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
 
 			const dispatcher = new Dispatcher(
 				mwWindow as MwWindow,
@@ -82,7 +83,7 @@ describe( 'Dispatcher', () => {
 			);
 
 			dispatcher.dispatch( {
-				link: new ( jest.fn() )(),
+				link: { href: originalHref } as HTMLAnchorElement,
 				entityId,
 				propertyId,
 				entityTitle,
@@ -103,6 +104,7 @@ describe( 'Dispatcher', () => {
 					client: {
 						usePublish,
 					},
+					originalHref,
 				},
 				mockServices,
 			);

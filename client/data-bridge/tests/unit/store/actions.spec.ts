@@ -28,6 +28,7 @@ import {
 	PROPERTY_TARGET_SET,
 	TARGET_LABEL_SET,
 	ENTITY_TITLE_SET,
+	ORIGINAL_HREF_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -164,6 +165,26 @@ describe( 'root/actions', () => {
 				expect( context.commit ).toHaveBeenCalledWith(
 					PROPERTY_TARGET_SET,
 					propertyId,
+				);
+			} );
+		} );
+
+		it( `commits to ${ORIGINAL_HREF_SET}`, () => {
+			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
+			const context = mockedStore();
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: 'P42',
+				entityId: defaultEntityId,
+				entityTitle: defaultEntityTitle,
+				originalHref,
+			};
+
+			return initAction()( context, information ).then( () => {
+				expect( context.commit ).toHaveBeenCalledWith(
+					ORIGINAL_HREF_SET,
+					originalHref,
 				);
 			} );
 		} );

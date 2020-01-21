@@ -19,6 +19,7 @@ interface Application {
 	wikibaseRepoConfiguration: WikibaseRepoConfiguration|null;
 	editDecision: EditDecision|null;
 	entityTitle: string;
+	originalHref: string;
 }
 
 export default Application;

@@ -34,6 +34,7 @@ export default class Dispatcher {
 				client: {
 					usePublish: this.dataBridgeConfig.usePublish,
 				},
+				originalHref: selectedElement.link.href,
 			},
 			this.app.createServices(
 				this.mwWindow,

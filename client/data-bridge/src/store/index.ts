@@ -24,6 +24,7 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 		wikibaseRepoConfiguration: null,
 		editDecision: null,
 		entityTitle: '',
+		originalHref: '',
 	};
 
 	const storeBundle: StoreOptions<Application> = {
