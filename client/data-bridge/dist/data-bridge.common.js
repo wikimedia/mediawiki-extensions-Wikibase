@@ -12699,12 +12699,12 @@ var PageNotEditable;
   PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
   PageNotEditable["UNKNOWN"] = "unknown";
 })(PageNotEditable || (PageNotEditable = {}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=76e672bc&
-var ErrorPermissionvue_type_template_id_76e672bc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
-var ErrorPermissionvue_type_template_id_76e672bc_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=6df88ea8&
+var ErrorPermissionvue_type_template_id_6df88ea8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
+var ErrorPermissionvue_type_template_id_6df88ea8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=76e672bc&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=6df88ea8&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
 var es6_regexp_to_string = __webpack_require__("6b54");
@@ -12927,6 +12927,72 @@ var PageList_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_PageList = (PageList_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=template&id=1eb5d51a&
+var UserLinkvue_type_template_id_1eb5d51a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.userId !== 0)?_c('a',{attrs:{"href":_vm.router.getPageUrl( ("Special:Redirect/user/" + _vm.userId) )}},[_c('bdi',[_vm._v(_vm._s(_vm.userName))])]):_c('bdi',[_vm._v(_vm._s(_vm.userName))])}
+var UserLinkvue_type_template_id_1eb5d51a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=template&id=1eb5d51a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+var UserLinkvue_type_script_lang_ts_UserLink =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(UserLink, _Vue);
+
+  function UserLink() {
+    _classCallCheck(this, UserLink);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(UserLink).apply(this, arguments));
+  }
+
+  return UserLink;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userId", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userName", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "router", void 0);
+
+UserLinkvue_type_script_lang_ts_UserLink = __decorate([vue_class_component_common_default.a], UserLinkvue_type_script_lang_ts_UserLink);
+/* harmony default export */ var UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_UserLink);
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue
+
+
+
+
+
+/* normalize component */
+
+var UserLink_component = normalizeComponent(
+  components_UserLinkvue_type_script_lang_ts_,
+  UserLinkvue_type_template_id_1eb5d51a_render,
+  UserLinkvue_type_template_id_1eb5d51a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_UserLink = (UserLink_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
 
 
@@ -12941,6 +13007,7 @@ var PageList_component = normalizeComponent(
 
 
 var _permissionTypeRender;
+
 
 
 
@@ -13054,19 +13121,14 @@ function (_Vue) {
                 blockId = _permissionError$info.blockId,
                 blockExpiry = _permissionError$info.blockExpiry,
                 blockedTimestamp = _permissionError$info.blockedTimestamp;
-            var blockedByText = document.createElement('bdi');
-            blockedByText.textContent = blockedBy;
-            var blockedByLink;
-
-            if (blockedById > 0) {
-              blockedByLink = document.createElement('a');
-              blockedByLink.appendChild(blockedByText.cloneNode(true));
-              blockedByLink.href = this.$clientRouter.getPageUrl("Special:Redirect/user/".concat(blockedById));
-            } else {
-              // not a local user, no link
-              blockedByLink = blockedByText.cloneNode(true);
-            }
-
+            var blockedByText = this.bdi(blockedBy);
+            var blockedByLink = new components_UserLink({
+              propsData: {
+                userId: blockedById,
+                userName: blockedBy,
+                router: this.$clientRouter
+              }
+            }).$mount().$el;
             params.push(blockedByLink, blockReason, '', // reserved for currentIP
             blockedByText, blockId.toString(), blockExpiry, '', // reserved for intended blockee
             blockedTimestamp);
@@ -13083,23 +13145,15 @@ function (_Vue) {
                 _blockExpiry = _permissionError$info2.blockExpiry,
                 _blockedTimestamp = _permissionError$info2.blockedTimestamp;
 
-            var _blockedByText = document.createElement('bdi');
+            var _blockedByText = this.bdi(_blockedBy);
 
-            _blockedByText.textContent = _blockedBy;
-
-            var _blockedByLink;
-
-            if (_blockedById > 0) {
-              _blockedByLink = document.createElement('a');
-
-              _blockedByLink.appendChild(_blockedByText.cloneNode(true));
-
-              _blockedByLink.href = this.$repoRouter.getPageUrl("Special:Redirect/user/".concat(_blockedById));
-            } else {
-              // not a local user, no link
-              _blockedByLink = _blockedByText.cloneNode(true);
-            }
-
+            var _blockedByLink = new components_UserLink({
+              propsData: {
+                userId: _blockedById,
+                userName: _blockedBy,
+                router: this.$repoRouter
+              }
+            }).$mount().$el;
             params.push(_blockedByLink, _blockReason, '', // reserved for currentIP
             _blockedByText, _blockId.toString(), _blockExpiry, '', // reserved for intended blockee
             _blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
@@ -13128,6 +13182,15 @@ function (_Vue) {
       }
 
       return params;
+    }
+  }, {
+    key: "bdi",
+    value: function bdi(text) {
+      return new vue_property_decorator["Vue"]({
+        render: function render(createElement) {
+          return createElement('bdi', text);
+        }
+      }).$mount().$el;
     }
   }, {
     key: "convertToHtmlList",
@@ -13170,8 +13233,8 @@ ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_c
 
 var ErrorPermission_component = normalizeComponent(
   components_ErrorPermissionvue_type_script_lang_ts_,
-  ErrorPermissionvue_type_template_id_76e672bc_render,
-  ErrorPermissionvue_type_template_id_76e672bc_staticRenderFns,
+  ErrorPermissionvue_type_template_id_6df88ea8_render,
+  ErrorPermissionvue_type_template_id_6df88ea8_staticRenderFns,
   false,
   null,
   null,
