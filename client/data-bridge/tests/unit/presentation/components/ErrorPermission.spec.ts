@@ -20,6 +20,14 @@ localVue.use( Vuex );
 
 const entityTitle = 'Q42';
 
+function unusedRouter( wiki: 'repo'|'client' ): MediaWikiRouter {
+	return {
+		getPageUrl( _title: string, _params?: Record<string, unknown> ): string {
+			throw new Error( `The ${wiki} router should not be used in this test` );
+		},
+	};
+}
+
 /**
  * Assert that a mock has been called with an `HTMLElement` as the *x*th argument of the *y*th call,
  * and then replace the argument with its `outerHTML`, to simplify subsequent assertions.
@@ -46,7 +54,7 @@ function calledWithHTMLElement( mock: Mock, callNum: number, argumentNum: number
 }
 
 describe( 'ErrorPermission', () => {
-	const blockId = 1,
+	const blockId = 10,
 		blockedBy = 'John Doe',
 		blockedById = 1,
 		blockReason = 'Bad behavior',
@@ -106,12 +114,14 @@ describe( 'ErrorPermission', () => {
 			type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
 			info: {
 				blockedById,
+				blockId,
 			} as any,
 		};
 		const errorBlockedOnClient: BlockReason = {
 			type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
 			info: {
 				blockedById,
+				blockId,
 			} as any,
 		};
 		const permissionErrors: MissingPermissionsError[] = [
@@ -129,6 +139,16 @@ describe( 'ErrorPermission', () => {
 					KEYS: MessageKeys,
 					get: messageGet,
 				},
+				$repoRouter: {
+					getPageUrl( title: string, _params?: Record<string, unknown> ) {
+						return `https://repo.wiki.example/wiki/${title}`;
+					},
+				},
+				$clientRouter: {
+					getPageUrl( title: string, _params?: Record<string, unknown> ) {
+						return `https://client.wiki.example/wiki/${title}`;
+					},
+				},
 			},
 			store,
 		} );
@@ -136,147 +156,65 @@ describe( 'ErrorPermission', () => {
 		expect( wrapper.findAll( ErrorPermissionInfo ) ).toHaveLength( permissionErrors.length );
 	} );
 
-	it.each( [
-		[
-			{
-				type: PageNotEditable.UNKNOWN,
-				info: {} as any,
-			} as UnknownReason,
-
-			MessageKeys.PERMISSIONS_ERROR_UNKNOWN_HEADING,
-			[ ],
-			MessageKeys.PERMISSIONS_ERROR_UNKNOWN_BODY,
-			[ ],
-		],
-		[
-			{
-				type: PageNotEditable.ITEM_FULLY_PROTECTED,
-			} as ProtectedReason,
-
-			MessageKeys.PERMISSIONS_PROTECTED_HEADING,
-			[
-				'http://localhost/wiki/Project:Page_protection_policy',
-				'http://localhost/wiki/Project:Administrators',
-			],
-			MessageKeys.PERMISSIONS_PROTECTED_BODY,
-			[
-				'http://localhost/wiki/Project:Page_protection_policy',
-				'http://localhost/wiki/Project:Edit_warring',
-				`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
-				`http://localhost/wiki/Talk:${entityTitle}`,
-			],
-		],
-		[
-			{
-				type: PageNotEditable.ITEM_SEMI_PROTECTED,
-			} as ProtectedReason,
-
-			MessageKeys.PERMISSIONS_SEMI_PROTECTED_HEADING,
-			[
-				'http://localhost/wiki/Project:Page_protection_policy',
-				'http://localhost/wiki/Project:Autoconfirmed_users',
-			],
-			MessageKeys.PERMISSIONS_SEMI_PROTECTED_BODY,
-			[
-				`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
-				`http://localhost/wiki/Talk:${entityTitle}`,
-			],
-		],
-		[
-			{
-				type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
-				info: {
-					blockId,
-					blockedBy,
-					blockedById,
-					blockReason,
-					blockedTimestamp,
-					blockExpiry,
-					blockPartial,
-				},
-			} as BlockReason,
-			MessageKeys.PERMISSIONS_BLOCKED_ON_CLIENT_HEADING,
-			[ ],
-			MessageKeys.PERMISSIONS_BLOCKED_ON_CLIENT_BODY,
-			[ blockedBy,
-				blockReason,
-				'', // reserved for currentIP
-				blockedBy,
-				blockId,
-				blockExpiry,
-				'', // reserved for intended blockee
-				blockedTimestamp,
-			],
-		],
-		[
-			{
-				type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
-				info: {
-					blockId,
-					blockedBy,
-					blockedById,
-					blockReason,
-					blockedTimestamp,
-					blockExpiry,
-					blockPartial,
-				},
-			} as BlockReason,
-			MessageKeys.PERMISSIONS_BLOCKED_ON_REPO_HEADING,
-			[ ],
-			MessageKeys.PERMISSIONS_BLOCKED_ON_REPO_BODY,
-			[ blockedBy,
-				blockReason,
-				'', // reserved for currentIP
-				blockedBy,
-				blockId,
-				blockExpiry,
-				'', // reserved for intended blockee
-				blockedTimestamp,
-				'http://localhost/wiki/Project:Administrators',
-			],
-		],
-	] )( '%#: interpolates message with correct key and parameters', ( error: MissingPermissionsError,
-		header,
-		headerParams,
-		body,
-		bodyParams ) => {
-		// The info object in the interfaces allows for string number or boolean,
-		// but $messages.get() accepts only string values
-		// Better solutions are welcome.
-		headerParams = headerParams.map( ( param: any ) => param.toString() );
-		bodyParams = bodyParams.map( ( param: any ) => param.toString() );
+	it( 'interpolates correct message for unknown error', () => {
+		const error: UnknownReason = {
+			type: PageNotEditable.UNKNOWN,
+			info: {} as any,
+		};
 		const messageGet = jest.fn( ( key ) => key );
-		const repoRouterFactory = function ( errorType: PageNotEditable ): any {
-			const fn = jest.fn();
-			switch ( errorType ) {
-				case PageNotEditable.ITEM_FULLY_PROTECTED:
-					fn
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Administrators' )
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Edit_warring' )
-						.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
-						.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
-					break;
-				case PageNotEditable.ITEM_SEMI_PROTECTED:
-					fn
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Autoconfirmed_users' )
-						.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
-						.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
-					break;
-				case PageNotEditable.BLOCKED_ON_REPO_ITEM:
-					fn
-						.mockReturnValueOnce( 'http://localhost/wiki/Project:Administrators' );
-					break;
-			}
-			return fn;
-		};
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter: unusedRouter( 'repo' ),
+				$clientRouter: unusedRouter( 'client' ),
+			},
+			store,
+		} );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, MessageKeys.PERMISSIONS_ERROR_UNKNOWN_HEADING );
+		expect( messageGet ).toHaveBeenNthCalledWith( 3, MessageKeys.PERMISSIONS_ERROR_UNKNOWN_BODY );
+	} );
+
+	it( 'interpolates correct message for protected item', () => {
+		const error: ProtectedReason = {
+			type: PageNotEditable.ITEM_FULLY_PROTECTED,
+		} as ProtectedReason;
+		const header = MessageKeys.PERMISSIONS_PROTECTED_HEADING;
+		const headerParams = [
+			'http://localhost/wiki/Project:Page_protection_policy',
+			'http://localhost/wiki/Project:Administrators',
+		];
+		const body = MessageKeys.PERMISSIONS_PROTECTED_BODY;
+		const bodyParams = [
+			'http://localhost/wiki/Project:Page_protection_policy',
+			'http://localhost/wiki/Project:Edit_warring',
+			`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
+			`http://localhost/wiki/Talk:${entityTitle}`,
+		];
+		const messageGet = jest.fn( ( key ) => key );
+		const repoRouterGetPageUrl = jest.fn();
+		repoRouterGetPageUrl
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Administrators' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Edit_warring' )
+			.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
+			.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
 		const $repoRouter: MediaWikiRouter = {
-			getPageUrl: repoRouterFactory( error.type ),
-		};
-		const $clientRouter: MediaWikiRouter = {
-			getPageUrl: repoRouterFactory( error.type ),
+			getPageUrl: repoRouterGetPageUrl,
 		};
 		const store = new Store<Partial<Application>>( {
 			state: {
@@ -295,7 +233,7 @@ describe( 'ErrorPermission', () => {
 					get: messageGet,
 				},
 				$repoRouter,
-				$clientRouter,
+				$clientRouter: unusedRouter( 'client' ),
 			},
 			store,
 		} );
@@ -304,56 +242,212 @@ describe( 'ErrorPermission', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
 	} );
 
+	it( 'interpolates correct message for semi-protected item', () => {
+		const error: ProtectedReason = {
+			type: PageNotEditable.ITEM_SEMI_PROTECTED,
+		} as ProtectedReason;
+		const header = MessageKeys.PERMISSIONS_SEMI_PROTECTED_HEADING;
+		const headerParams = [
+			'http://localhost/wiki/Project:Page_protection_policy',
+			'http://localhost/wiki/Project:Autoconfirmed_users',
+		];
+		const body = MessageKeys.PERMISSIONS_SEMI_PROTECTED_BODY;
+		const bodyParams = [
+			`http://localhost/wiki/Special:Log/protect?page=${entityTitle}`,
+			`http://localhost/wiki/Talk:${entityTitle}`,
+		];
+		const messageGet = jest.fn( ( key ) => key );
+		const repoRouterGetPageUrl = jest.fn();
+		repoRouterGetPageUrl
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Page_protection_policy' )
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Autoconfirmed_users' )
+			.mockReturnValueOnce( `http://localhost/wiki/Special:Log/protect?page=${entityTitle}` )
+			.mockReturnValueOnce( `http://localhost/wiki/Talk:${entityTitle}` );
+		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: repoRouterGetPageUrl,
+		};
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter,
+				$clientRouter: unusedRouter( 'client' ),
+			},
+			store,
+		} );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, header, ...headerParams );
+		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
+	} );
+
+	it( 'interpolates correct message for user blocked on client', () => {
+		const error: BlockReason = {
+			type: PageNotEditable.BLOCKED_ON_CLIENT_PAGE,
+			info: {
+				blockId,
+				blockedBy,
+				blockedById,
+				blockReason,
+				blockedTimestamp,
+				blockExpiry,
+				blockPartial,
+			},
+		};
+		const body = MessageKeys.PERMISSIONS_BLOCKED_ON_CLIENT_BODY;
+		const bodyParams = [
+			`<a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a>`,
+			blockReason,
+			'', // reserved for currentIP
+			`<bdi>${blockedBy}</bdi>`,
+			blockId,
+			blockExpiry,
+			'', // reserved for intended blockee
+			blockedTimestamp,
+		].map( ( param: string|number ) => param.toString() );
+		const messageGet = jest.fn( ( key ) => key );
+		const clientRouterGetPageUrl = jest.fn();
+		clientRouterGetPageUrl
+			.mockReturnValueOnce( `http://localhost/wiki/Special:Redirect/user/${blockedById}` );
+		const $clientRouter: MediaWikiRouter = {
+			getPageUrl: clientRouterGetPageUrl,
+		};
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter: unusedRouter( 'repo' ),
+				$clientRouter,
+			},
+			store,
+		} );
+
+		calledWithHTMLElement( messageGet, 2, 1 );
+		calledWithHTMLElement( messageGet, 2, 4 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, MessageKeys.PERMISSIONS_BLOCKED_ON_CLIENT_HEADING );
+		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
+	} );
+
+	it( 'interpolates correct message for user blocked on repo', () => {
+		const error: BlockReason = {
+			type: PageNotEditable.BLOCKED_ON_REPO_ITEM,
+			info: {
+				blockId,
+				blockedBy,
+				blockedById,
+				blockReason,
+				blockedTimestamp,
+				blockExpiry,
+				blockPartial,
+			},
+		};
+		const body = MessageKeys.PERMISSIONS_BLOCKED_ON_REPO_BODY;
+		const bodyParams = [
+			`<a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a>`,
+			blockReason,
+			'', // reserved for currentIP
+			`<bdi>${blockedBy}</bdi>`,
+			blockId,
+			blockExpiry,
+			'', // reserved for intended blockee
+			blockedTimestamp,
+			'http://localhost/wiki/Project:Administrators',
+		].map( ( param: string|number ) => param.toString() );
+		const messageGet = jest.fn( ( key ) => key );
+		const repoRouterGetPageUrl = jest.fn();
+		repoRouterGetPageUrl
+			.mockReturnValueOnce( `http://localhost/wiki/Special:Redirect/user/${blockedById}` )
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Administrators' );
+		const $repoRouter: MediaWikiRouter = {
+			getPageUrl: repoRouterGetPageUrl,
+		};
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+
+		shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors: [ error ],
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+				$repoRouter,
+				$clientRouter: unusedRouter( 'client' ),
+			},
+			store,
+		} );
+
+		calledWithHTMLElement( messageGet, 2, 1 );
+		calledWithHTMLElement( messageGet, 2, 4 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, MessageKeys.PERMISSIONS_BLOCKED_ON_REPO_HEADING );
+		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
+	} );
+
 	it.each( [
 		[
-			{
-				type: PageNotEditable.PAGE_CASCADE_PROTECTED,
-				info: {
-					pages: pagesCausingCascadeProtection,
-				},
-			} as CascadeProtectedReason,
+			'client',
+			PageNotEditable.PAGE_CASCADE_PROTECTED,
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
-			[ ],
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
-			[
-				pagesCausingCascadeProtection.length,
-				// eslint-disable-next-line max-len
-				`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
-			],
 		],
 		[
-			{
-				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
-				info: {
-					pages: pagesCausingCascadeProtection,
-				},
-			} as CascadeProtectedReason,
+			'repo',
+			PageNotEditable.ITEM_CASCADE_PROTECTED,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
-			[ ],
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
-			[
-				pagesCausingCascadeProtection.length,
-				// eslint-disable-next-line max-len
-				`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
-			],
 		],
-	] )( 'interpolates correct message for page cascade-protected', ( error: MissingPermissionsError,
-		header,
-		headerParams,
-		body,
-		bodyParams ) => {
-		headerParams = headerParams.map( ( param: any ) => param.toString() );
-		bodyParams = bodyParams.map( ( param: any ) => param.toString() );
-		const router = jest.fn()
+	] )( 'interpolates correct message for page cascade-protected on %s', (
+		wiki: 'repo'|'client',
+		type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED
+		| typeof PageNotEditable.PAGE_CASCADE_PROTECTED,
+		header: MessageKeys,
+		body: MessageKeys,
+	) => {
+		const error: CascadeProtectedReason = {
+			type,
+			info: {
+				pages: pagesCausingCascadeProtection,
+			},
+		};
+		const messageGet = jest.fn( ( key ) => key );
+		const routerGetPageUrl = jest.fn();
+		routerGetPageUrl
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_One' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_Two' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_Three' );
-		const messageGet = jest.fn( ( key ) => key );
-		const $repoRouter: MediaWikiRouter = {
-			getPageUrl: router,
-		};
-		const $clientRouter: MediaWikiRouter = {
-			getPageUrl: router,
+		const $router: MediaWikiRouter = {
+			getPageUrl: routerGetPageUrl,
 		};
 
 		const store = new Store<Partial<Application>>( {
@@ -373,97 +467,22 @@ describe( 'ErrorPermission', () => {
 					KEYS: MessageKeys,
 					get: messageGet,
 				},
-				$repoRouter,
-				$clientRouter,
+				$repoRouter: wiki === 'repo' ? $router : unusedRouter( 'repo' ),
+				$clientRouter: wiki === 'client' ? $router : unusedRouter( 'client' ),
 			},
 			store,
 		} );
 
 		calledWithHTMLElement( messageGet, 2, 2 );
-		expect( messageGet ).toHaveBeenNthCalledWith( 2, header, ...headerParams );
-		expect( messageGet ).toHaveBeenNthCalledWith( 3, body, ...bodyParams );
-	} );
 
-	it( 'uses the correct router to build page urls on repo', () => {
-		const messageGet = jest.fn( ( key ) => key );
-		const error: CascadeProtectedReason = {
-			type: PageNotEditable.ITEM_CASCADE_PROTECTED,
-			info: {
-				pages: pagesCausingCascadeProtection,
-			},
-		};
-		const $repoRouter: MediaWikiRouter = {
-			getPageUrl: jest.fn(),
-		};
-		const $clientRouter: MediaWikiRouter = {
-			getPageUrl: jest.fn(),
-		};
-
-		const store = new Store<Partial<Application>>( {
-			state: {
-				entityTitle,
-			},
-		} );
-
-		shallowMount( ErrorPermission, {
-			localVue,
-			propsData: {
-				permissionErrors: [ error ],
-			},
-
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-				},
-				$repoRouter,
-				$clientRouter,
-			},
-			store,
-		} );
-		expect( $repoRouter.getPageUrl ).toHaveBeenCalledTimes( 3 );
-		expect( $clientRouter.getPageUrl ).not.toHaveBeenCalled();
-	} );
-
-	it( 'uses the correct router to build page urls on client', () => {
-		const messageGet = jest.fn( ( key ) => key );
-		const error: CascadeProtectedReason = {
-			type: PageNotEditable.PAGE_CASCADE_PROTECTED,
-			info: {
-				pages: pagesCausingCascadeProtection,
-			},
-		};
-		const $repoRouter: MediaWikiRouter = {
-			getPageUrl: jest.fn(),
-		};
-		const $clientRouter: MediaWikiRouter = {
-			getPageUrl: jest.fn(),
-		};
-
-		const store = new Store<Partial<Application>>( {
-			state: {
-				entityTitle,
-			},
-		} );
-
-		shallowMount( ErrorPermission, {
-			localVue,
-			propsData: {
-				permissionErrors: [ error ],
-			},
-
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-				},
-				$repoRouter,
-				$clientRouter,
-			},
-			store,
-		} );
-		expect( $clientRouter.getPageUrl ).toHaveBeenCalledTimes( 3 );
-		expect( $repoRouter.getPageUrl ).not.toHaveBeenCalled();
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, header );
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			3,
+			body,
+			pagesCausingCascadeProtection.length.toString(),
+			// eslint-disable-next-line max-len
+			`<ul><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 0 ]}">${pagesCausingCascadeProtection[ 0 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 1 ]}">${pagesCausingCascadeProtection[ 1 ]}</a></li><li><a href="http://localhost/wiki/${pagesCausingCascadeProtection[ 2 ]}">${pagesCausingCascadeProtection[ 2 ]}</a></li></ul>`,
+		);
 	} );
 
 	it( 'builds a talk page name based on the entity title', () => {

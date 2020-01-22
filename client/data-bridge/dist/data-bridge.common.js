@@ -12699,12 +12699,12 @@ var PageNotEditable;
   PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
   PageNotEditable["UNKNOWN"] = "unknown";
 })(PageNotEditable || (PageNotEditable = {}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=0fd5e5c9&
-var ErrorPermissionvue_type_template_id_0fd5e5c9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
-var ErrorPermissionvue_type_template_id_0fd5e5c9_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=76e672bc&
+var ErrorPermissionvue_type_template_id_76e672bc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('h2',[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING )))]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError )}})})],2)}
+var ErrorPermissionvue_type_template_id_76e672bc_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=0fd5e5c9&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=76e672bc&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
 var es6_regexp_to_string = __webpack_require__("6b54");
@@ -13046,20 +13046,65 @@ function (_Vue) {
 
       switch (permissionError.type) {
         case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
-          params.push(permissionError.info.blockedBy, // TODO: Convert to user link
-          permissionError.info.blockReason, '', // reserved for currentIP
-          permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
-          permissionError.info.blockedById.toString(), permissionError.info.blockExpiry, '', // reserved for intended blockee
-          permissionError.info.blockedTimestamp);
-          break;
+          {
+            var _permissionError$info = permissionError.info,
+                blockedBy = _permissionError$info.blockedBy,
+                blockedById = _permissionError$info.blockedById,
+                blockReason = _permissionError$info.blockReason,
+                blockId = _permissionError$info.blockId,
+                blockExpiry = _permissionError$info.blockExpiry,
+                blockedTimestamp = _permissionError$info.blockedTimestamp;
+            var blockedByText = document.createElement('bdi');
+            blockedByText.textContent = blockedBy;
+            var blockedByLink;
+
+            if (blockedById > 0) {
+              blockedByLink = document.createElement('a');
+              blockedByLink.appendChild(blockedByText.cloneNode(true));
+              blockedByLink.href = this.$clientRouter.getPageUrl("Special:Redirect/user/".concat(blockedById));
+            } else {
+              // not a local user, no link
+              blockedByLink = blockedByText.cloneNode(true);
+            }
+
+            params.push(blockedByLink, blockReason, '', // reserved for currentIP
+            blockedByText, blockId.toString(), blockExpiry, '', // reserved for intended blockee
+            blockedTimestamp);
+            break;
+          }
 
         case PageNotEditable.BLOCKED_ON_REPO_ITEM:
-          params.push(permissionError.info.blockedBy, // TODO: Convert to user link
-          permissionError.info.blockReason, '', // reserved for currentIP
-          permissionError.info.blockedBy, // TODO: Check if this needs to be wrapped in <bdi>
-          permissionError.info.blockedById.toString(), permissionError.info.blockExpiry, '', // reserved for intended blockee
-          permissionError.info.blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
-          break;
+          {
+            var _permissionError$info2 = permissionError.info,
+                _blockedBy = _permissionError$info2.blockedBy,
+                _blockedById = _permissionError$info2.blockedById,
+                _blockReason = _permissionError$info2.blockReason,
+                _blockId = _permissionError$info2.blockId,
+                _blockExpiry = _permissionError$info2.blockExpiry,
+                _blockedTimestamp = _permissionError$info2.blockedTimestamp;
+
+            var _blockedByText = document.createElement('bdi');
+
+            _blockedByText.textContent = _blockedBy;
+
+            var _blockedByLink;
+
+            if (_blockedById > 0) {
+              _blockedByLink = document.createElement('a');
+
+              _blockedByLink.appendChild(_blockedByText.cloneNode(true));
+
+              _blockedByLink.href = this.$repoRouter.getPageUrl("Special:Redirect/user/".concat(_blockedById));
+            } else {
+              // not a local user, no link
+              _blockedByLink = _blockedByText.cloneNode(true);
+            }
+
+            params.push(_blockedByLink, _blockReason, '', // reserved for currentIP
+            _blockedByText, _blockId.toString(), _blockExpiry, '', // reserved for intended blockee
+            _blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
+            break;
+          }
 
         case PageNotEditable.ITEM_FULLY_PROTECTED:
           params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Project:Edit_warring'), this.$repoRouter.getPageUrl('Special:Log/protect', {
@@ -13125,8 +13170,8 @@ ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_c
 
 var ErrorPermission_component = normalizeComponent(
   components_ErrorPermissionvue_type_script_lang_ts_,
-  ErrorPermissionvue_type_template_id_0fd5e5c9_render,
-  ErrorPermissionvue_type_template_id_0fd5e5c9_staticRenderFns,
+  ErrorPermissionvue_type_template_id_76e672bc_render,
+  ErrorPermissionvue_type_template_id_76e672bc_staticRenderFns,
   false,
   null,
   null,
