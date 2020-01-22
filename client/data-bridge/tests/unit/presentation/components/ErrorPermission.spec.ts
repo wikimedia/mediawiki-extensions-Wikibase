@@ -20,10 +20,13 @@ localVue.use( Vuex );
 
 const entityTitle = 'Q42';
 
+/**
+ * A router that should never be called by a test.
+ */
 function unusedRouter( wiki: 'repo'|'client' ): MediaWikiRouter {
 	return {
-		getPageUrl( _title: string, _params?: Record<string, unknown> ): string {
-			throw new Error( `The ${wiki} router should not be used in this test` );
+		getPageUrl(): string {
+			throw new Error( `The ${wiki} router should not be called in this test` );
 		},
 	};
 }
