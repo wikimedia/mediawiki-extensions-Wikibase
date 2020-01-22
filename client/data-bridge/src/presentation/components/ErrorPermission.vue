@@ -11,6 +11,7 @@
 </template>
 
 <script lang="ts">
+import { CreateElement } from 'vue';
 import {
 	Prop,
 	Vue,
@@ -19,6 +20,7 @@ import Component from 'vue-class-component';
 import { State } from 'vuex-class';
 import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
 import PageList from '@/presentation/components/PageList.vue';
+import UserLink from '@/presentation/components/UserLink.vue';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
@@ -141,17 +143,14 @@ export default class ErrorPermission extends Vue {
 					blockExpiry,
 					blockedTimestamp,
 				} = permissionError.info;
-				const blockedByText = document.createElement( 'bdi' );
-				blockedByText.textContent = blockedBy;
-				let blockedByLink;
-				if ( blockedById > 0 ) {
-					blockedByLink = document.createElement( 'a' );
-					blockedByLink.appendChild( blockedByText.cloneNode( true ) );
-					blockedByLink.href = this.$clientRouter.getPageUrl( `Special:Redirect/user/${blockedById}` );
-				} else {
-					// not a local user, no link
-					blockedByLink = blockedByText.cloneNode( true ) as HTMLElement;
-				}
+				const blockedByText = this.bdi( blockedBy );
+				const blockedByLink = new UserLink( {
+					propsData: {
+						userId: blockedById,
+						userName: blockedBy,
+						router: this.$clientRouter,
+					},
+				} ).$mount().$el as HTMLElement;
 				params.push(
 					blockedByLink,
 					blockReason,
@@ -173,17 +172,14 @@ export default class ErrorPermission extends Vue {
 					blockExpiry,
 					blockedTimestamp,
 				} = permissionError.info;
-				const blockedByText = document.createElement( 'bdi' );
-				blockedByText.textContent = blockedBy;
-				let blockedByLink;
-				if ( blockedById > 0 ) {
-					blockedByLink = document.createElement( 'a' );
-					blockedByLink.appendChild( blockedByText.cloneNode( true ) );
-					blockedByLink.href = this.$repoRouter.getPageUrl( `Special:Redirect/user/${blockedById}` );
-				} else {
-					// not a local user, no link
-					blockedByLink = blockedByText.cloneNode( true ) as HTMLElement;
-				}
+				const blockedByText = this.bdi( blockedBy );
+				const blockedByLink = new UserLink( {
+					propsData: {
+						userId: blockedById,
+						userName: blockedBy,
+						router: this.$repoRouter,
+					},
+				} ).$mount().$el as HTMLElement;
 				params.push(
 					blockedByLink,
 					blockReason,
@@ -225,6 +221,14 @@ export default class ErrorPermission extends Vue {
 				break;
 		}
 		return params;
+	}
+
+	private bdi( text: string ): HTMLElement {
+		return new Vue( {
+			render( createElement: CreateElement ) {
+				return createElement( 'bdi', text );
+			},
+		} ).$mount().$el as HTMLElement;
 	}
 
 	private convertToHtmlList( arr: string[], mwRouter: MediaWikiRouter ): HTMLElement {
