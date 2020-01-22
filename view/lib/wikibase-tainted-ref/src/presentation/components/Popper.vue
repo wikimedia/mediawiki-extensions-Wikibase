@@ -113,7 +113,7 @@ export default class Popper extends Vue {
 	font-weight: bold;
 	color: $color-black;
 	line-height: 22px;
-	margin: 8px 0 0 16px;
+	margin: 8px 0 4px 16px;
 }
 
 .wb-tr-title-wrapper {
@@ -150,7 +150,7 @@ export default class Popper extends Vue {
 	font-weight: normal;
 	text-align: right;
 	font-size: 12px;
-	margin: 4px 16px 0 16px;
+	margin: 0 16px 0 16px;
 	color: $link-blue;
 	line-height: 20px;
 	border-top: 1px $border-color-grey solid;
