@@ -33,7 +33,7 @@ describe( 'domBridgeElementSelector', () => {
 		);
 		const actualSelectedElementsWithData = selector.selectElementsToOverload();
 
-		expect( actualSelectedElementsWithData.length ).toBe( 2 );
+		expect( actualSelectedElementsWithData ).toHaveLength( 2 );
 
 		expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( 'Q4115189' );
 		expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( 'P31' );
@@ -111,7 +111,7 @@ describe( 'domBridgeElementSelector', () => {
 			);
 			const actualSelectedElementsWithData = selector.selectElementsToOverload();
 
-			expect( actualSelectedElementsWithData.length ).toBe( 1 );
+			expect( actualSelectedElementsWithData ).toHaveLength( 1 );
 
 			expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( expectedEntityId );
 			expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( expectedPropertyId );
@@ -188,7 +188,7 @@ describe( 'domBridgeElementSelector', () => {
 			);
 			const actualSelectedElementsWithData = selector.selectElementsToOverload();
 
-			expect( actualSelectedElementsWithData.length ).toBe( 0 );
+			expect( actualSelectedElementsWithData ).toHaveLength( 0 );
 		} );
 	} );
 

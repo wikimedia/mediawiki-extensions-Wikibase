@@ -68,7 +68,7 @@ describe( 'EditDecision', () => {
 		} );
 
 		expect( wrapper.find( RadioGroup ).exists() ).toBeTruthy();
-		expect( wrapper.findAll( RadioInput ).length ).toBe( 2 );
+		expect( wrapper.findAll( RadioInput ) ).toHaveLength( 2 );
 	} );
 
 	it( 'passes the same name to all RadioInputs', () => {
