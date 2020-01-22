@@ -199,13 +199,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return Language
 	 */
 	private function getLanguage() {
-		global $wgContLang;
-
 		if ( $this->allowDataAccessInUserLanguage() ) {
 			return $this->getParserOptions()->getUserLangObj();
 		}
 
-		return $wgContLang;
+		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**
@@ -738,11 +736,12 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	 * @return string[]|null[]
 	 */
 	public function resolvePropertyId( $propertyLabelOrId ) {
-		global $wgContLang;
-
 		$this->checkType( 'resolvePropertyId', 1, $propertyLabelOrId, 'string' );
 		try {
-			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId( $propertyLabelOrId, $wgContLang->getCode() );
+			$propertyId = $this->getPropertyIdResolver()->resolvePropertyId(
+				$propertyLabelOrId,
+				MediaWikiServices::getInstance()->getContentLanguage()->getCode()
+			);
 			$ret = [ $propertyId->getSerialization() ];
 			return $ret;
 		} catch ( PropertyLabelNotResolvedException $e ) {

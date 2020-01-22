@@ -92,8 +92,6 @@ final class ClientHooks {
 	 * @param string|null $wikiId The ID of the wiki the comment applies to, if not the local wiki.
 	 */
 	public static function onFormat( &$comment, $pre, $auto, $post, $title, $local, $wikiId = null ) {
-		global $wgContLang;
-
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$repoId = $wikibaseClient->getSettings()->getSetting( 'repoSiteId' );
 
@@ -105,7 +103,10 @@ final class ClientHooks {
 			return;
 		}
 
-		$formatter = new AutoCommentFormatter( $wgContLang, [ 'wikibase-entity' ] );
+		$formatter = new AutoCommentFormatter(
+			MediaWikiServices::getInstance()->getContentLanguage(),
+			[ 'wikibase-entity' ]
+		);
 		$formattedComment = $formatter->formatAutoComment( $auto );
 
 		if ( is_string( $formattedComment ) ) {

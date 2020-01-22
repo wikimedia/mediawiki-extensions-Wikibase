@@ -151,13 +151,11 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 	 * @return Language
 	 */
 	private function getLanguage() {
-		global $wgContLang;
-
 		if ( $this->allowDataAccessInUserLanguage() ) {
 			return $this->getParserOptions()->getUserLangObj();
 		}
 
-		return $wgContLang;
+		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**

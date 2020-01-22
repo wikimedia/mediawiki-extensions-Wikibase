@@ -152,11 +152,10 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		array $texts,
 		ReplicaMasterAwareRecordIdsAcquirer $textIdsAcquirer
 	) {
-		global $wgContLang;
-
 		$truncatedTexts = [];
+		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		foreach ( $texts as $text ) {
-			$truncatedText = $wgContLang->truncateForDatabase( $text, 255, '' );
+			$truncatedText = $contLang->truncateForDatabase( $text, 255, '' );
 			$truncatedTexts[$text] = $truncatedText;
 		}
 
