@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -25,7 +24,8 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 	private $wbTermsStorePrefetchingTermLookup;
 
 	public function __construct(
-		DataAccessSettings $dataAccessSettings, PrefetchingTermLookup $normalizedStorePrefetchingTermLookup,
+		DataAccessSettings $dataAccessSettings,
+		PrefetchingTermLookup $normalizedStorePrefetchingTermLookup,
 		PrefetchingTermLookup $wbTermsStorePrefetchingTermLookup
 	) {
 		$this->dataAccessSettings = $dataAccessSettings;
@@ -89,55 +89,45 @@ class TermStoresDelegatingPrefetchingItemTermLookup implements PrefetchingTermLo
 	 *         or null if the term was not yet requested via prefetchTerms().
 	 */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
-		if ( !$entityId instanceof ItemId ) {
-			throw new InvalidArgumentException( '$entityId can only be ItemId' );
-		}
-
-		if ( $this->dataAccessSettings->useNormalizedItemTerms( $entityId->getNumericId() ) ) {
-			return $this->normalizedStorePrefetchingTermLookup->getPrefetchedTerm( $entityId, $termType, $languageCode );
-		} else {
-			return $this->wbTermsStorePrefetchingTermLookup->getPrefetchedTerm( $entityId, $termType, $languageCode );
-		}
+		return $this->getLookupByMigrationStage( $entityId )
+			->getPrefetchedTerm( $entityId, $termType, $languageCode );
 	}
 
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		return $this->invokeAppropriateStoreMethod( $entityId, 'getLabel', [ $entityId, $languageCode ] );
+		return $this->getLookupByMigrationStage( $entityId )
+			->getLabel( $entityId, $languageCode );
 	}
 
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
-		return $this->invokeAppropriateStoreMethod( $entityId, 'getLabels', [ $entityId, $languageCodes ] );
+		return $this->getLookupByMigrationStage( $entityId )
+			->getLabels( $entityId, $languageCodes );
 	}
 
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		return $this->invokeAppropriateStoreMethod( $entityId, 'getDescription', [ $entityId, $languageCode ] );
+		return $this->getLookupByMigrationStage( $entityId )
+			->getDescription( $entityId, $languageCode );
 	}
 
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
-		return $this->invokeAppropriateStoreMethod( $entityId, 'getDescriptions', [ $entityId, $languageCodes ] );
-	}
-
-	private function invokeAppropriateStoreMethod( EntityId $entityId, $method, $params ) {
-		if ( !$entityId instanceof ItemId ) {
-			throw new InvalidArgumentException( '$entityId can only be ItemId' );
-		}
-
-		$targetLookup = $this->wbTermsStorePrefetchingTermLookup;
-		if ( $this->dataAccessSettings->useNormalizedItemTerms( $entityId->getNumericId() ) ) {
-			$targetLookup = $this->normalizedStorePrefetchingTermLookup;
-		}
-
-		return call_user_func_array( [ $targetLookup, $method ], $params );
+		return $this->getLookupByMigrationStage( $entityId )
+			->getDescriptions( $entityId, $languageCodes );
 	}
 
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
-		if ( !$entityId instanceof ItemId ) {
-			throw new InvalidArgumentException( '$entityId can only be ItemId' );
-		}
 
-		if ( $this->dataAccessSettings->useNormalizedItemTerms( $entityId->getNumericId() ) ) {
-			return $this->normalizedStorePrefetchingTermLookup->getPrefetchedAliases( $entityId, $languageCode );
+		return $this->getLookupByMigrationStage( $entityId )
+			->getPrefetchedAliases( $entityId, $languageCode );
+	}
+
+	private function getLookupByMigrationStage( EntityId $id ): PrefetchingTermLookup {
+		Assert::parameterType( ItemId::class, $id, '$entityId' );
+		'@phan-var ItemId $id';
+		/** @var ItemId $id */
+
+		if ( $this->dataAccessSettings->useNormalizedItemTerms( $id->getNumericId() ) ) {
+			return $this->normalizedStorePrefetchingTermLookup;
 		} else {
-			return $this->wbTermsStorePrefetchingTermLookup->getPrefetchedAliases( $entityId, $languageCode );
+			return $this->wbTermsStorePrefetchingTermLookup;
 		}
 	}
 }
