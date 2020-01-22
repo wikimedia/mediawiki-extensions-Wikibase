@@ -42,7 +42,18 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 		$actual = $handler->createSchema(
 			$title, $revisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
 		);
-		$this->assertArraySubset( $expected, $actual, 'schema' );
+		$this->assertSchemaSubset( $expected, $actual );
+	}
+
+	private function assertSchemaSubset( array $expected, array $actual ) {
+		foreach ( $expected as $key => $val ) {
+			$this->assertArrayHasKey( $key, $actual );
+			if ( is_array( $val ) ) {
+				$this->assertSchemaSubset( $expected[$key], $actual[$key] );
+			} else {
+				$this->assertSame( $val, $actual[$key] );
+			}
+		}
 	}
 
 	public function createSchemaProvider() {
