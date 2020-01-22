@@ -47,13 +47,37 @@ export default class ErrorPermissionInfo extends Vue {
 
 <style lang="scss">
 .wb-ui-permission-info-box {
+	strong {
+		font-weight: bold;
+	}
+
+	em {
+		font-style: italic;
+	}
+
+	ul {
+		list-style-type: disc;
+		list-style-position: inside;
+		padding: 0.5em 0;
+
+		li {
+			padding-left: 1em;
+		}
+	}
+
 	&__header {
 		margin-left: 2em;
 	}
 
-	&__info__icon,
 	&__icon--collapsed,
 	&__icon--expanded {
+		line-height: $size-permissions-icon;
+		box-sizing: border-box;
+		text-align: left;
+		position: relative;
+	}
+
+	&__info__icon {
 		line-height: $size-icon;
 		box-sizing: border-box;
 		text-align: left;
@@ -64,7 +88,8 @@ export default class ErrorPermissionInfo extends Vue {
 		padding-left: 2em;
 
 		&__title {
-			margin-left: 2em;
+			margin-left: 1em;
+			margin-top: px-to-em( 8px );
 		}
 	}
 
@@ -85,9 +110,9 @@ export default class ErrorPermissionInfo extends Vue {
 		background-image: $svg-collapse;
 		background-repeat: no-repeat;
 		background-size: contain;
-		min-width: $min-size-icon;
-		min-height: $min-size-icon;
-		width: $size-icon;
+		min-width: $size-permissions-icon;
+		min-height: $size-permissions-icon;
+		width: $size-permissions-icon;
 		height: 100%;
 		top: 0;
 		position: absolute;
@@ -98,9 +123,9 @@ export default class ErrorPermissionInfo extends Vue {
 		background-image: $svg-expand;
 		background-repeat: no-repeat;
 		background-size: contain;
-		min-width: $min-size-icon;
-		min-height: $min-size-icon;
-		width: $size-icon;
+		min-width: $size-permissions-icon;
+		min-height: $size-permissions-icon;
+		width: $size-permissions-icon;
 		height: 100%;
 		top: 0;
 		position: absolute;
