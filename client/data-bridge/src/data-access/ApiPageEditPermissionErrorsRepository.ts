@@ -15,7 +15,7 @@ import PageEditPermissionErrorsRepository, {
 	PermissionErrorUnknown,
 } from '@/definitions/data-access/PageEditPermissionErrorsRepository';
 
-interface ApiErrorRawErrorformat extends ApiError {
+export interface ApiErrorRawErrorformat extends ApiError {
 	key: string;
 	params: ( string|number )[];
 }
