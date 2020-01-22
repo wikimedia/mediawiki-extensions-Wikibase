@@ -9,6 +9,7 @@ use MWException;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
@@ -20,6 +21,8 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\RebuildTermsSearchKey;
 use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
+use Wikibase\Repo\RangeTraversable;
+use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
@@ -105,6 +108,11 @@ class DatabaseSchemaUpdater {
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
 			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'rebuildPropertyTerms' ]
+			] );
+		}
+		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildItemTerms' ) ) {
+			$updater->addExtensionUpdate( [
+				[ __CLASS__, 'rebuildItemTerms' ]
 			] );
 		}
 	}
@@ -294,6 +302,60 @@ class DatabaseSchemaUpdater {
 
 		$rebuilder->rebuild();
 		$updater->insertUpdateRow( __CLASS__ . '::rebuildPropertyTerms' );
+	}
+
+	public static function rebuildItemTerms( DatabaseUpdater $updater ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$itemSource = $wikibaseRepo
+			->getEntitySourceDefinitions()
+			->getSourceForEntityType( 'item' );
+		if ( $itemSource->getSourceName() !== $localEntitySourceName ) {
+			// Foreign items, skip this part
+			return;
+		}
+		$reporter = new ObservableMessageReporter();
+		$reporter->registerReporterCallback(
+			function ( $msg ) use ( $updater ) {
+				$updater->output( "..." . $msg . "\n" );
+			}
+		);
+
+		$highestId = MediaWikiServices::getInstance()
+			->getDBLoadBalancer()
+			->getConnection( DB_REPLICA )
+			->selectRow(
+				'wb_id_counters',
+				'id_value',
+				[ 'id_type' => 'wikibase-item' ],
+				__METHOD__
+			);
+		$highestId = (int)$highestId->id_value;
+
+		$rebuilder = new ItemTermsRebuilder(
+			$wikibaseRepo->getNewItemTermStore(),
+			self::newItemIdIterator( $highestId ),
+			$reporter,
+			$reporter,
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$wikibaseRepo->getItemLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
+			250,
+			2
+		);
+
+		$rebuilder->rebuild();
+		$updater->insertUpdateRow( __CLASS__ . '::rebuildItemTerms' );
+	}
+
+	private static function newItemIdIterator( int $highestId ): \Iterator {
+		$idRange = new RangeTraversable(
+			1,
+			$highestId
+		);
+
+		foreach ( $idRange as $integer ) {
+			yield ItemId::newFromNumber( $integer );
+		}
 	}
 
 	/**
