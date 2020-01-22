@@ -7,6 +7,7 @@ import {
 	addPageInfoNoEditRestrictionsResponse,
 	addSiteinfoRestrictionsResponse,
 	getMockFullRepoBatchedQueryResponse,
+	getOrCreateApiQueryResponsePage,
 	mockMwForeignApiConstructor,
 	mockMwConfig,
 	mockMwEnv,
@@ -24,7 +25,7 @@ import {
 } from '../util/e2e';
 import Entities from '@/mock-data/data/Q42.data.json';
 import { v4 as uuid } from 'uuid';
-import { ApiQueryInfoTestResponsePage, ApiQueryResponsePage } from '@/definitions/data-access/ApiQuery';
+import { ApiQueryInfoTestResponsePage, ApiQueryResponseBody } from '@/definitions/data-access/ApiQuery';
 import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import { SpecialPageWikibaseEntityResponse } from '@/data-access/SpecialPageReadingEntityRepository';
 
@@ -555,9 +556,8 @@ describe( 'app', () => {
 
 	describe( 'error state specialized for permission errors', () => {
 		function addPageInfoProtectedpageResponse( title: string, response: { query?: object } ): object {
-			const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
-				pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
-				page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] ),
+			const query: ApiQueryResponseBody = response.query || ( response.query = {} ),
+				page = getOrCreateApiQueryResponsePage( query, title ),
 				apiError: ApiErrorRawErrorformat = {
 					code: 'protectedpage',
 					key: 'protectedpagetext',
@@ -572,9 +572,8 @@ describe( 'app', () => {
 		}
 
 		function addPageInfoCascadeprotectedResponse( title: string, response: { query?: object } ): object {
-			const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
-				pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
-				page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] ),
+			const query: ApiQueryResponseBody = response.query || ( response.query = {} ),
+				page = getOrCreateApiQueryResponsePage( query, title ),
 				apiError: ApiErrorRawErrorformat = {
 					code: 'cascadeprotected',
 					key: 'cascadeprotected',

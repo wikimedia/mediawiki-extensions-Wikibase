@@ -5,9 +5,11 @@ import {
 } from '@/@types/mediawiki/MwWindow';
 import MwConfig from '@/@types/mediawiki/MwConfig';
 import WbRepo from '@/@types/wikibase/WbRepo';
+import { getApiQueryResponsePage } from '@/data-access/ApiQuery';
 import Api from '@/definitions/data-access/Api';
 import {
 	ApiQueryInfoTestResponsePage,
+	ApiQueryResponseBody,
 	ApiQueryResponsePage,
 } from '@/definitions/data-access/ApiQuery';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
@@ -144,6 +146,15 @@ export function mockMwEnv(
 	};
 }
 
+export function getOrCreateApiQueryResponsePage( response: ApiQueryResponseBody, title: string ): ApiQueryResponsePage {
+	let page = getApiQueryResponsePage( response, title );
+	if ( page === null ) {
+		page = { title };
+		( response.pages || ( response.pages = [] ) ).push( page );
+	}
+	return page;
+}
+
 export function addDataBridgeConfigResponse(
 	dataBridgeConfig: WikibaseRepoConfiguration|null = null,
 	response: { query?: object },
@@ -160,9 +171,8 @@ export function addDataBridgeConfigResponse(
 }
 
 export function addPageInfoNoEditRestrictionsResponse( title: string, response: { query?: object } ): object {
-	const query: { pages?: ApiQueryResponsePage[] } = response.query || ( response.query = {} ),
-		pages: ApiQueryResponsePage[] = query.pages || ( query.pages = [] ),
-		page: ApiQueryResponsePage = pages[ 0 ] || ( pages.push( { title } ), pages[ 0 ] );
+	const query: ApiQueryResponseBody = response.query || ( response.query = {} ),
+		page = getOrCreateApiQueryResponsePage( query, title );
 	( page as ApiQueryInfoTestResponsePage ).actions = { edit: [] };
 	return response;
 }
