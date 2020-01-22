@@ -12856,12 +12856,12 @@ var ErrorPermissionInfo_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorPermissionInfo = (ErrorPermissionInfo_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=template&id=ab51b804&
-var PageListvue_type_template_id_ab51b804_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',_vm._l((_vm.pages),function(page){return _c('li',{key:page},[_c('a',{attrs:{"href":_vm.router.getPageUrl( page )}},[_vm._v(_vm._s(page))])])}),0)}
-var PageListvue_type_template_id_ab51b804_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
+var PageListvue_type_template_id_19fe2d2f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',_vm._l((_vm.pages),function(page){return _c('li',{key:page},[_c('a',{attrs:{"href":_vm.router.getPageUrl( page )}},[_vm._v(_vm._s(page))])])}),0)}
+var PageListvue_type_template_id_19fe2d2f_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=template&id=ab51b804&
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
 
@@ -12871,6 +12871,15 @@ var PageListvue_type_template_id_ab51b804_staticRenderFns = []
 
 
 
+/**
+ * A component which renders page names into a list, incl. links to them.
+ *
+ * This is an internal component used when communicating permission
+ * violations to the user. This happens for client and repo errors
+ * alike; consequently the router is injectable instead of directly
+ * accessing features from ClientRouterPlugin or RepoRouterPlugin
+ * from here.
+ */
 
 var PageListvue_type_script_lang_ts_PageList =
 /*#__PURE__*/
@@ -12908,8 +12917,8 @@ PageListvue_type_script_lang_ts_PageList = __decorate([vue_class_component_commo
 
 var PageList_component = normalizeComponent(
   components_PageListvue_type_script_lang_ts_,
-  PageListvue_type_template_id_ab51b804_render,
-  PageListvue_type_template_id_ab51b804_staticRenderFns,
+  PageListvue_type_template_id_19fe2d2f_render,
+  PageListvue_type_template_id_19fe2d2f_staticRenderFns,
   false,
   null,
   null,

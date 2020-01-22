@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageList builds a list matching our snapshot 1`] = `
+<ul>
+  <li>
+    <a
+      href="https://wiki/Foo"
+    >
+      Foo
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://wiki/Bar"
+    >
+      Bar
+    </a>
+  </li>
+  <li>
+    <a
+      href="https://wiki/Baz"
+    >
+      Baz
+    </a>
+  </li>
+</ul>
+`;
