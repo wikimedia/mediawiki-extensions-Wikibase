@@ -70,5 +70,16 @@ storiesOf( 'UserLink', module )
 				<dd>
 					{{ userName }}: 1st place.
 				</dd>
+				<!-- undo some reset.css (<component> needed because Vue strips out plain <style>) -->
+				<component is="style">
+				code {
+					font-family: monospace;
+				}
+
+				dd {
+					margin-inline-start: 40px;
+					margin-block-end: 1em;
+				}
+				</component>
 			</dl>`,
 	} ) );
