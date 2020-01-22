@@ -4,6 +4,8 @@ import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTyp
 import validateBridgeApplicability from '@/store/validateBridgeApplicability';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
+import { BRIDGE_ERROR_ADD } from '@/store/actionTypes';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 
 const defaultEntity = 'Q815';
 const defaultProperty = 'P4711';
@@ -40,17 +42,19 @@ function mockedStore(
 
 describe( 'validateBridgeApplicability', () => {
 
-	it( 'returns true if applicable', () => {
+	it( 'doesn\'t commit error if applicable', () => {
 		const context = mockedStore( {}, defaultProperty );
 
-		expect( validateBridgeApplicability(
+		validateBridgeApplicability(
 			context,
 			{
 				entityId: defaultEntity,
 				propertyId: defaultProperty,
 				index: 0,
 			},
-		) ).toBe( true );
+		);
+
+		expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 		expect(
 			context.getters[ getter(
 				NS_ENTITY,
@@ -82,7 +86,7 @@ describe( 'validateBridgeApplicability', () => {
 		} );
 	} );
 
-	it( 'returns false on ambiguous statements', () => {
+	it( 'commits error on ambiguous statements', () => {
 		const context = mockedStore( {
 			[ getter(
 				NS_ENTITY,
@@ -91,13 +95,18 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn().mockReturnValue( true ),
 		} );
 
-		expect( validateBridgeApplicability(
+		validateBridgeApplicability(
 			context,
 			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 },
-		) ).toBe( false );
+		);
+
+		expect( context.dispatch ).toHaveBeenCalledWith(
+			BRIDGE_ERROR_ADD,
+			[ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ],
+		);
 	} );
 
-	it( 'returns false for non-value snak types', () => {
+	it( 'commits error for non-value snak types', () => {
 		const context = mockedStore( {
 			[ getter(
 				NS_ENTITY,
@@ -106,11 +115,18 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn().mockReturnValue( 'novalue' ),
 		} );
 
-		expect( validateBridgeApplicability( context,
-			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 } ) ).toBe( false );
+		validateBridgeApplicability(
+			context,
+			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 },
+		);
+
+		expect( context.dispatch ).toHaveBeenCalledWith(
+			BRIDGE_ERROR_ADD,
+			[ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ],
+		);
 	} );
 
-	it( 'returns false for non-string data types', () => {
+	it( 'commits error for non-string data types', () => {
 		const context = mockedStore( {
 			[ getter(
 				NS_ENTITY,
@@ -119,9 +135,14 @@ describe( 'validateBridgeApplicability', () => {
 			) ]: jest.fn().mockReturnValue( 'noStringType' ),
 		} );
 
-		expect( validateBridgeApplicability(
+		validateBridgeApplicability(
 			context,
 			{ entityId: defaultEntity, propertyId: defaultProperty, index: 0 },
-		) ).toBe( false );
+		);
+
+		expect( context.dispatch ).toHaveBeenCalledWith(
+			BRIDGE_ERROR_ADD,
+			[ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ],
+		);
 	} );
 } );

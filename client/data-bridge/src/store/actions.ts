@@ -50,23 +50,24 @@ import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDataty
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
 
+function commitErrors( context: ActionContext<Application, Application>, errors: ApplicationError[] ): void {
+	context.commit( APPLICATION_ERRORS_ADD, errors );
+}
+
 function validateEntityState(
 	context: ActionContext<Application, Application>,
 	path: MainSnakPath,
-): boolean {
+): void {
 	if (
 		context.getters[
 			getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
 		]( path.entityId, path.propertyId ) === false
 	) {
-		return false;
+		commitErrors( context, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
+		return;
 	}
 
-	return validateBridgeApplicability( context, path );
-}
-
-function commitErrors( context: ActionContext<Application, Application>, errors: ApplicationError[] ): void {
-	context.commit( APPLICATION_ERRORS_ADD, errors );
+	validateBridgeApplicability( context, path );
 }
 
 export default function actions(
@@ -122,7 +123,8 @@ export default function actions(
 					index: 0,
 				};
 
-				if ( validateEntityState( context, path ) ) {
+				validateEntityState( context, path );
+				if ( context.getters.applicationStatus !== ApplicationStatus.ERROR ) {
 					context.commit(
 						ORIGINAL_STATEMENT_SET,
 						state[ NS_ENTITY ][ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
@@ -132,9 +134,6 @@ export default function actions(
 						APPLICATION_STATUS_SET,
 						ApplicationStatus.READY,
 					);
-				} else {
-					// TODO: somehow store *why* we cannot edit this
-					commitErrors( context, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
 				}
 			}, ( error ) => {
 				commitErrors( context, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
