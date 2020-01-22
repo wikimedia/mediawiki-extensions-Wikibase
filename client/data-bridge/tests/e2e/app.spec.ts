@@ -543,7 +543,7 @@ describe( 'app', () => {
 			const permissionErrors = document.querySelectorAll(
 				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
 			);
-			expect( permissionErrors.length ).toBe( 1 );
+			expect( permissionErrors ).toHaveLength( 1 );
 			expect( permissionErrors[ 0 ].innerHTML )
 				.toContain( '⧼wikibase-client-data-bridge-semiprotected-on-repo-head⧽' );
 		} );
@@ -591,7 +591,7 @@ describe( 'app', () => {
 			const permissionErrors = document.querySelectorAll(
 				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
 			);
-			expect( permissionErrors.length ).toBe( 2 );
+			expect( permissionErrors ).toHaveLength( 2 );
 			expect( permissionErrors[ 0 ].innerHTML )
 				.toContain( '⧼wikibase-client-data-bridge-semiprotected-on-repo-head⧽' );
 			expect( permissionErrors[ 1 ].innerHTML )

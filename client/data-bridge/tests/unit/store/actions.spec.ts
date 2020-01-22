@@ -556,7 +556,7 @@ describe( 'root/actions', () => {
 			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 			expect( ( context.commit as jest.Mock ).mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
 			const errors = ( context.commit as jest.Mock ).mock.calls[ 0 ][ 1 ];
-			expect( errors.length ).toBe( 1 );
+			expect( errors ).toHaveLength( 1 );
 			expect( errors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
 			expect( errors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
@@ -662,7 +662,7 @@ describe( 'root/actions', () => {
 			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
 			expect( ( context.commit as jest.Mock ).mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
 			const errors = ( context.commit as jest.Mock ).mock.calls[ 0 ][ 1 ];
-			expect( errors.length ).toBe( 1 );
+			expect( errors ).toHaveLength( 1 );
 			expect( errors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
 			expect( errors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );

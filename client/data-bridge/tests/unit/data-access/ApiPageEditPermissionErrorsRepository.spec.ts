@@ -45,7 +45,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.PROTECTED_PAGE,
@@ -75,7 +75,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.PROTECTED_PAGE,
@@ -105,7 +105,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.PROTECTED_PAGE,
@@ -136,7 +136,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.CASCADE_PROTECTED_PAGE,
@@ -170,7 +170,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 		} } );
 		const repo = new ApiPageEditPermissionErrorsRepository( api );
 		const permissionErrors = await repo.getPermissionErrors( title );
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.BLOCKED,
@@ -206,7 +206,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 1 );
+		expect( permissionErrors ).toHaveLength( 1 );
 		const permissionError = permissionErrors[ 0 ];
 		expect( permissionError ).toStrictEqual( {
 			type: PermissionErrorType.UNKNOWN,
@@ -247,7 +247,7 @@ describe( 'ApiPageEditPermissionErrorsRepository', () => {
 
 		const permissionErrors = await repo.getPermissionErrors( title );
 
-		expect( permissionErrors.length ).toBe( 2 );
+		expect( permissionErrors ).toHaveLength( 2 );
 		const protectedError = permissionErrors[ 0 ];
 		expect( protectedError ).toStrictEqual( {
 			type: PermissionErrorType.PROTECTED_PAGE,

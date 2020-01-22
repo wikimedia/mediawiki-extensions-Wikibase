@@ -107,7 +107,7 @@ describe( 'ErrorPermission', () => {
 			store,
 		} );
 
-		expect( wrapper.findAll( ErrorPermissionInfo ).length ).toBe( permissionErrors.length );
+		expect( wrapper.findAll( ErrorPermissionInfo ) ).toHaveLength( permissionErrors.length );
 	} );
 
 	it.each( [

@@ -66,7 +66,7 @@ describe( 'EventEmittingButton', () => {
 			wrapper.find( 'a' ).trigger( 'click.enter' );
 			const clickEvents = wrapper.emitted( 'click' );
 			expect( clickEvents ).toBeTruthy();
-			expect( clickEvents.length ).toBe( 1 );
+			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
 			expect( originalEvent.defaultPrevented ).toBeTruthy();
@@ -108,7 +108,7 @@ describe( 'EventEmittingButton', () => {
 			wrapper.find( 'a' ).trigger( 'click.enter' );
 			const clickEvents = wrapper.emitted( 'click' );
 			expect( clickEvents ).toBeTruthy();
-			expect( clickEvents.length ).toBe( 1 );
+			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
 			expect( originalEvent.defaultPrevented ).toBeFalsy();
