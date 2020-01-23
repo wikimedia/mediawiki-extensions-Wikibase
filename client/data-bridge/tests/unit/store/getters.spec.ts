@@ -1,16 +1,15 @@
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
-import { getters } from '@/store/getters';
-import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
 import newApplicationState from './newApplicationState';
 import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import clone from '@/store/clone';
-import { InitializedApplicationState } from '@/store/Application';
+import { inject } from 'vuex-smart-module';
+import { RootGetters } from '@/store/getters';
+import { SNAK_DATA_VALUE } from '@/store/statements/snaks/getterTypes';
 
 describe( 'root/getters', () => {
 	const entityId = 'Q42';
@@ -21,46 +20,38 @@ describe( 'root/getters', () => {
 			const applicationState = newApplicationState( {
 				applicationStatus: ApplicationStatus.ERROR,
 			} );
-			expect( getters.targetValue(
-				applicationState, null, applicationState, null,
-			) ).toBeNull();
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+			expect( getters.targetValue ).toBeNull();
 		} );
 
 		it( 'returns the target value', () => {
 			const dataValue = { type: 'string', value: 'a string' };
-			const otherGetters = {
-				[ getter(
-					NS_ENTITY,
-					NS_STATEMENTS,
-					mainSnakGetterTypes.dataValue,
-				) ]: jest.fn().mockReturnValue( dataValue ),
-			};
 
-			const applicationState = newApplicationState( {
-				targetProperty,
-				applicationStatus: ApplicationStatus.READY,
+			const getters = inject( RootGetters, {
+				state: newApplicationState( {
+					applicationStatus: ApplicationStatus.READY,
+					targetProperty,
+					[ NS_ENTITY ]: {
+						id: entityId,
+						baseRevision: 0,
+					},
+					[ NS_STATEMENTS ]: {},
+				} ),
 			} );
 
-			( applicationState as InitializedApplicationState )[ NS_ENTITY ] = {
-				id: entityId,
-				baseRevision: 0,
-				[ NS_STATEMENTS ]: {},
+			const snakGetter = jest.fn().mockReturnValue( dataValue );
+			// @ts-ignore
+			getters.statementModule = {
+			// @ts-ignore
+				getters: {
+					[ SNAK_DATA_VALUE ]: snakGetter,
+				},
 			};
 
-			expect(
-				getters.targetValue( applicationState, otherGetters, applicationState, null ),
-			).toBe( dataValue );
-			expect(
-				otherGetters[ getter(
-					NS_ENTITY,
-					NS_STATEMENTS,
-					mainSnakGetterTypes.dataValue,
-				) ],
-			).toHaveBeenCalledWith( {
-				entityId,
-				propertyId: targetProperty,
-				index: 0,
-			} );
+			expect( getters.targetValue ).toBe( dataValue );
+			expect( snakGetter ).toHaveBeenCalledWith( { entityId, index: 0, 'propertyId': targetProperty } );
 		} );
 	} );
 
@@ -68,19 +59,22 @@ describe( 'root/getters', () => {
 		it( 'returns the targetProperty and no linguistic content' +
 			', if no targetLabel is set.', () => {
 			const applicationState = newApplicationState( { targetProperty } );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
 
-			expect( getters.targetLabel(
-				applicationState, null, applicationState, null,
-			) ).toStrictEqual( { value: targetProperty, language: 'zxx' } );
+			expect( getters.targetLabel ).toStrictEqual( { value: targetProperty, language: 'zxx' } );
 		} );
 
 		it( 'returns the targetLabel term', () => {
 			const targetLabel = { language: 'zh', value: '土豆' };
 			const applicationState = newApplicationState( { targetLabel } );
 
-			expect( getters.targetLabel(
-				applicationState, null, applicationState, null,
-			) ).toBe( targetLabel );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.targetLabel ).toBe( targetLabel );
 		} );
 	} );
 
@@ -110,16 +104,19 @@ describe( 'root/getters', () => {
 				originalStatement,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ actualTargetProperty ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ actualTargetProperty ],
 					},
 				},
 			} );
-			expect( getters.isTargetStatementModified(
-				applicationState, null, applicationState, null,
-			) ).toBe( false );
+
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isTargetStatementModified ).toBe( false );
 		} );
 
 		it( 'returns false if there is no diff', () => {
@@ -145,17 +142,19 @@ describe( 'root/getters', () => {
 				originalStatement,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ actualTargetProperty ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ actualTargetProperty ],
 					},
 				},
 			} );
 
-			expect( getters.isTargetStatementModified(
-				applicationState, null, applicationState, null,
-			) ).toBe( false );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isTargetStatementModified ).toBe( false );
 		} );
 
 		it( 'returns true if there is a diff', () => {
@@ -183,16 +182,19 @@ describe( 'root/getters', () => {
 				originalStatement,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ actualTargetProperty ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ actualTargetProperty ],
 					},
 				},
 			} );
-			expect( getters.isTargetStatementModified(
-				applicationState, null, applicationState, null,
-			) ).toBe( true );
+
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isTargetStatementModified ).toBe( true );
 		} );
 	} );
 
@@ -208,9 +210,16 @@ describe( 'root/getters', () => {
 			'returns %p with isTargetStatementModified=%p and editDecision=%p',
 			( expected: boolean, isTargetStatementModified: boolean, editDecision: EditDecision ) => {
 				const applicationState = newApplicationState( { editDecision } );
-				expect( getters.canSave(
-					applicationState, { isTargetStatementModified }, applicationState, null,
-				) ).toBe( expected );
+
+				// @ts-ignore
+				const getters = inject( RootGetters, {
+					state: applicationState,
+					getters: {
+						isTargetStatementModified,
+					},
+				} );
+
+				expect( getters.canSave ).toBe( expected );
 			},
 		);
 
@@ -243,19 +252,21 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.READY,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ {
-								references: expectedTargetReferences,
-							} ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ {
+							references: expectedTargetReferences,
+						} ],
 					},
 				},
 			} );
 
-			expect(
-				getters.targetReferences( applicationState, null, applicationState, null ),
-			).toBe( expectedTargetReferences );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.targetReferences ).toBe( expectedTargetReferences );
 		} );
 
 		it( 'returns an empty array, if there are no references', () => {
@@ -264,17 +275,19 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.READY,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ {} ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ {} ],
 					},
 				},
 			} );
 
-			expect(
-				getters.targetReferences( applicationState, null, applicationState, null ),
-			).toStrictEqual( [] );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.targetReferences ).toStrictEqual( [] );
 		} );
 
 		it( 'returns an empty array, if the application is not ready', () => {
@@ -283,19 +296,21 @@ describe( 'root/getters', () => {
 				applicationStatus: ApplicationStatus.INITIALIZING,
 				[ NS_ENTITY ]: {
 					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ targetProperty ]: [ {
-								references: expectedTargetReferences,
-							} ],
-						},
+				},
+				[ NS_STATEMENTS ]: {
+					[ entityId ]: {
+						[ targetProperty ]: [ {
+							references: expectedTargetReferences,
+						} ],
 					},
 				},
 			} );
 
-			expect(
-				getters.targetReferences( applicationState, null, applicationState, null ),
-			).toStrictEqual( [] );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.targetReferences ).toStrictEqual( [] );
 		} );
 	} );
 
@@ -307,9 +322,11 @@ describe( 'root/getters', () => {
 					applicationStatus: status,
 				} );
 
-				expect(
-					getters.applicationStatus( applicationState, null, applicationState, null ),
-				).toBe( status );
+				const getters = inject( RootGetters, {
+					state: applicationState,
+				} );
+
+				expect( getters.applicationStatus ).toBe( status );
 			},
 		);
 
@@ -321,9 +338,11 @@ describe( 'root/getters', () => {
 					applicationErrors: [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ],
 				} );
 
-				expect(
-					getters.applicationStatus( applicationState, null, applicationState, null ),
-				).toBe( ApplicationStatus.ERROR );
+				const getters = inject( RootGetters, {
+					state: applicationState,
+				} );
+
+				expect( getters.applicationStatus ).toBe( ApplicationStatus.ERROR );
 			},
 		);
 	} );

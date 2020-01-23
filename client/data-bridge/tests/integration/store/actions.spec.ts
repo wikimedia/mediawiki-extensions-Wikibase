@@ -12,7 +12,6 @@ import {
 	BRIDGE_SET_TARGET_VALUE,
 } from '@/store/actionTypes';
 import { ENTITY_SAVE } from '@/store/entity/actionTypes';
-import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
@@ -22,6 +21,8 @@ import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
+import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
+import { MainSnakPath } from '@/store/statements/MainSnakPath';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -315,7 +316,7 @@ describe( 'store/actions', () => {
 			expect( resolver ).toHaveBeenCalledWith( testSet );
 
 			const state = store.state as InitializedApplicationState;
-			expect( state.entity.statements ).toStrictEqual( { Q42: response.entity.statements } );
+			expect( state.statements ).toEqual( { Q42: response.entity.statements } );
 			expect( state.entity.id ).toBe( response.entity.id );
 			expect( state.entity.baseRevision ).toBe( response.revisionId );
 		} );
@@ -339,7 +340,7 @@ describe( 'store/actions', () => {
 					dataValue,
 				).then( () => {
 					const state = ( store.state as InitializedApplicationState );
-					expect( state.entity.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( dataValue );
+					expect( state.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( dataValue );
 				} );
 			} );
 		} );
@@ -410,7 +411,7 @@ describe( 'store/actions', () => {
 				expect( resolver ).toHaveBeenCalledWith( testSet );
 
 				const state = ( store.state as InitializedApplicationState );
-				expect( state.entity.statements.Q42 ).toBe( response.entity.statements );
+				expect( state.statements.Q42 ).toBe( response.entity.statements );
 				expect( state.entity.id ).toBe( response.entity.id );
 				expect( state.entity.baseRevision ).toBe( response.revisionId );
 				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
@@ -423,13 +424,13 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Entity', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 					{
-						path: {
-							entityId: 'Q3333333',
-							propertyId: 'P23',
-							index: 0,
-						},
+						path: new MainSnakPath(
+							'Q3333333',
+							'P23',
+							0,
+						),
 						value: {
 							type: 'string',
 							value: 'passed teststring',
@@ -441,13 +442,13 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 					{
-						path: {
-							entityId: 'Q42',
-							propertyId: 'P99999',
-							index: 0,
-						},
+						path: new MainSnakPath(
+							'Q42',
+							'P99999',
+							0,
+						),
 						value: {
 							type: 'string',
 							value: 'passed teststring',
@@ -459,13 +460,13 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown index on Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 					{
-						path: {
-							entityId: 'Q42',
-							propertyId: 'P31',
-							index: 42,
-						},
+						path: new MainSnakPath(
+							'Q42',
+							'P31',
+							42,
+						),
 						value: {
 							type: 'string',
 							value: 'passed teststring',
@@ -477,13 +478,13 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string value data types', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 					{
-						path: {
-							entityId: 'Q42',
-							propertyId: 'P42',
-							index: 0,
-						},
+						path: new MainSnakPath(
+							'Q42',
+							'P42',
+							0,
+						),
 						value: {
 							type: 'url',
 							value: 'passed teststring',
@@ -495,13 +496,13 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string data value', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 					{
-						path: {
-							entityId: 'Q42',
-							propertyId: 'P42',
-							index: 0,
-						},
+						path: new MainSnakPath(
+							'Q42',
+							'P42',
+							0,
+						),
 						value: {
 							type: 'string',
 							value: 23,
@@ -519,18 +520,18 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+						action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 						{
-							path: {
-								entityId: 'Q42',
-								propertyId: 'P31',
-								index: 0,
-							},
+							path: new MainSnakPath(
+								'Q42',
+								'P31',
+								0,
+							),
 							value,
 						},
 					).then( () => {
 						const state = store.state as InitializedApplicationState;
-						expect( state.entity.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
+						expect( state.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
 					} );
 				} );
 
@@ -541,18 +542,18 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_ENTITY, NS_STATEMENTS, mainSnakActionTypes.setStringDataValue ),
+						action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
 						{
-							path: {
-								entityId: 'Q42',
-								propertyId: 'P60',
-								index: 0,
-							},
+							path: new MainSnakPath(
+								'Q42',
+								'P60',
+								0,
+							),
 							value,
 						},
 					).then( () => {
 						const state = store.state as InitializedApplicationState;
-						expect( state.entity.statements.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
+						expect( state.statements.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
 					} );
 				} );
 			} );

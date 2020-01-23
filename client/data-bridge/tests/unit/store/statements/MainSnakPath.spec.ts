@@ -1,6 +1,6 @@
-import resolveMainSnak from '@/store/entity/statements/resolveMainSnak';
-import newStatementsState from './newStatementsState';
+import newStatementState from './newStatementState';
 import Snak from '@/datamodel/Snak';
+import { MainSnakPath } from '../../../../src/store/statements/MainSnakPath';
 
 describe( 'resolveMainSnak', () => {
 	it( 'resolve the path to the mainsnak of a statement', () => {
@@ -10,7 +10,7 @@ describe( 'resolveMainSnak', () => {
 			datatype: 'url',
 		};
 
-		const map = newStatementsState( { Q42: {
+		const state = newStatementState( { Q42: {
 			P42: [ {
 				type: 'statement',
 				id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
@@ -19,29 +19,26 @@ describe( 'resolveMainSnak', () => {
 			} ],
 		} } );
 
-		expect(
-			resolveMainSnak( map, { entityId: 'Q42', propertyId: 'P42', index: 0 } ),
-		).toStrictEqual( mainsnak );
+		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );
+
+		expect( mainSnakPath.resolveSnakInStatement( state ) ).toStrictEqual( mainsnak );
 	} );
 
 	it( 'returns null if there is no statement map', () => {
+		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );
 		expect(
-			resolveMainSnak( {}, {
-				entityId: 'Q42',
-				propertyId: 'P23',
-				index: 0,
-			} ),
+			mainSnakPath.resolveSnakInStatement( {} ),
 		).toBeNull();
 	} );
 
-	it( 'returns null if there is entity id', () => {
+	it( 'returns null if the entity id is missing from the state', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',
 			datatype: 'url',
 		};
 
-		const map = newStatementsState( { Q42: {
+		const state = newStatementState( { Q42: {
 			P42: [ {
 				type: 'statement',
 				id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
@@ -50,12 +47,10 @@ describe( 'resolveMainSnak', () => {
 			} ],
 		} } );
 
+		const mainSnakPath = new MainSnakPath( 'Q23', 'P23', 0 );
+
 		expect(
-			resolveMainSnak( map, {
-				entityId: 'Q23',
-				propertyId: 'P23',
-				index: 0,
-			} ),
+			mainSnakPath.resolveSnakInStatement( state ),
 		).toBeNull();
 	} );
 
@@ -66,7 +61,7 @@ describe( 'resolveMainSnak', () => {
 			datatype: 'url',
 		};
 
-		const map = newStatementsState( { Q42: {
+		const state = newStatementState( { Q42: {
 			P42: [ {
 				type: 'statement',
 				id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
@@ -75,8 +70,10 @@ describe( 'resolveMainSnak', () => {
 			} ],
 		} } );
 
+		const mainSnakPath = new MainSnakPath( 'Q42', 'P23', 0 );
+
 		expect(
-			resolveMainSnak( map, { entityId: 'Q42', propertyId: 'P23', index: 0 } ),
+			mainSnakPath.resolveSnakInStatement( state ),
 		).toBeNull();
 	} );
 
@@ -87,7 +84,7 @@ describe( 'resolveMainSnak', () => {
 			datatype: 'url',
 		};
 
-		const map = newStatementsState( { Q42: {
+		const state = newStatementState( { Q42: {
 			P42: [ {
 				type: 'statement',
 				id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
@@ -96,8 +93,10 @@ describe( 'resolveMainSnak', () => {
 			} ],
 		} } );
 
+		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 23 );
+
 		expect(
-			resolveMainSnak( map, { entityId: 'Q42', propertyId: 'P42', index: 23 } ),
+			mainSnakPath.resolveSnakInStatement( state ),
 		).toBeNull();
 	} );
 } );

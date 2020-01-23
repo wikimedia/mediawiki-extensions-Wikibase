@@ -3,7 +3,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import Application from '@/store/Application';
-import { mutations } from '@/store/mutations';
+import { RootMutations } from '@/store/mutations';
 import {
 	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
@@ -17,91 +17,121 @@ import {
 	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
 import newApplicationState from './newApplicationState';
+import { inject } from 'vuex-smart-module';
 
 describe( 'root/mutations', () => {
-	it( 'changes the targetProperty of the store', () => {
-		const store: Application = newApplicationState();
-		mutations[ PROPERTY_TARGET_SET ]( store, 'P42' );
-		expect( store.targetProperty ).toBe( 'P42' );
+	it( 'changes the targetProperty of the state', () => {
+		const state: Application = newApplicationState();
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ PROPERTY_TARGET_SET ]( 'P42' );
+		expect( state.targetProperty ).toBe( 'P42' );
 	} );
 
-	it( 'changes the editFlow of the store', () => {
-		const store: Application = newApplicationState(),
-			editFlow: EditFlow = EditFlow.OVERWRITE;
-		mutations[ EDITFLOW_SET ]( store, editFlow );
-		expect( store.editFlow ).toBe( editFlow );
+	it( 'changes the editFlow of the state', () => {
+		const editFlow: EditFlow = EditFlow.OVERWRITE;
+		const state: Application = newApplicationState();
+
+		const mutations = inject( RootMutations, { state } );
+		mutations[ EDITFLOW_SET ]( editFlow );
+		expect( state.editFlow ).toBe( editFlow );
 	} );
 
-	it( 'changes the originalHref of the store', () => {
-		const store: Application = newApplicationState(),
-			originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
-		mutations[ ORIGINAL_HREF_SET ]( store, originalHref );
-		expect( store.originalHref ).toBe( originalHref );
+	it( 'changes the originalHref of the state', () => {
+		const state: Application = newApplicationState();
+		const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ ORIGINAL_HREF_SET ]( originalHref );
+		expect( state.originalHref ).toBe( originalHref );
 	} );
 
-	it( 'changes the applicationStatus of the store', () => {
-		const store: Application = newApplicationState();
-		mutations[ APPLICATION_STATUS_SET ]( store, ApplicationStatus.READY );
-		expect( store.applicationStatus ).toBe( ApplicationStatus.READY );
+	it( 'changes the applicationStatus of the state', () => {
+		const state: Application = newApplicationState();
+		const mutations = inject( RootMutations, { state } );
+		mutations[ APPLICATION_STATUS_SET ]( ApplicationStatus.READY );
+		expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
 	} );
 
-	it( 'changes the targetLabel of the store', () => {
+	it( 'changes the targetLabel of the state', () => {
 		const targetLabel = { language: 'el', value: 'πατατα' };
-		const store: Application = newApplicationState();
-		mutations[ TARGET_LABEL_SET ]( store, targetLabel );
-		expect( store.targetLabel ).toBe( targetLabel );
+		const state: Application = newApplicationState();
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ TARGET_LABEL_SET ]( targetLabel );
+		expect( state.targetLabel ).toBe( targetLabel );
 	} );
 
-	it( 'changes the originalStatement of the store', () => {
+	it( 'changes the originalStatement of the state', () => {
 		const targetProperty = {
-			type: 'statement',
+			type: 'statement' as any,
 			id: 'opaque statement ID',
-			rank: 'normal',
+			rank: 'normal' as any,
 			mainsnak: {
-				snaktype: 'novalue',
+				snaktype: 'novalue' as any,
 				property: 'P60',
 				datatype: 'string',
 			},
 		};
-		const store: Application = newApplicationState();
-		mutations[ ORIGINAL_STATEMENT_SET ]( store, targetProperty );
-		expect( store.originalStatement ).not.toBe( targetProperty );
-		expect( store.originalStatement ).toStrictEqual( targetProperty );
+		const state: Application = newApplicationState();
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ ORIGINAL_STATEMENT_SET ]( targetProperty );
+		expect( state.originalStatement ).not.toBe( targetProperty );
+		expect( state.originalStatement ).toStrictEqual( targetProperty );
 	} );
 
-	it( 'adds errors to the store', () => {
-		const store: Application = newApplicationState();
+	it( 'adds errors to the state', () => {
+		const state: Application = newApplicationState();
 		const errors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
-		mutations[ APPLICATION_ERRORS_ADD ]( store, errors );
-		expect( store.applicationErrors ).toStrictEqual( errors );
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ APPLICATION_ERRORS_ADD ]( errors );
+		expect( state.applicationErrors ).toStrictEqual( errors );
 	} );
 
-	it( 'does not drop existing errors when adding new ones to the store', () => {
+	it( 'does not drop existing errors when adding new ones to the state', () => {
 		const oldErrors: ApplicationError[] = [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ];
-		const store: Application = newApplicationState( { applicationErrors: oldErrors.slice() } );
+		const state: Application = newApplicationState( { applicationErrors: oldErrors.slice() } );
 		const newErrors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
-		mutations[ APPLICATION_ERRORS_ADD ]( store, newErrors );
-		expect( store.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ APPLICATION_ERRORS_ADD ]( newErrors );
+		expect( state.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
 	} );
 
-	it( 'sets the edit decision of the store', () => {
-		const store: Application = newApplicationState();
+	it( 'sets the edit decision of the state', () => {
+		const state: Application = newApplicationState();
 		const editDecision = EditDecision.REPLACE;
-		mutations[ EDITDECISION_SET ]( store, editDecision );
-		expect( store.editDecision ).toBe( editDecision );
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ EDITDECISION_SET ]( editDecision );
+		expect( state.editDecision ).toBe( editDecision );
 	} );
 
-	it( 'sets the entity title of the store', () => {
-		const store: Application = newApplicationState();
+	it( 'sets the entity title of the state', () => {
+		const state: Application = newApplicationState();
 		const entityTitle = 'Entity title';
-		mutations[ ENTITY_TITLE_SET ]( store, entityTitle );
-		expect( store.entityTitle ).toBe( entityTitle );
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ ENTITY_TITLE_SET ]( entityTitle );
+		expect( state.entityTitle ).toBe( entityTitle );
 	} );
 
 	it( 'sets the page title of the store', () => {
-		const store: Application = newApplicationState();
+		const state: Application = newApplicationState();
 		const pageTitle = 'Page_title';
-		mutations[ PAGE_TITLE_SET ]( store, pageTitle );
-		expect( store.pageTitle ).toBe( pageTitle );
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations[ PAGE_TITLE_SET ]( pageTitle );
+		expect( state.pageTitle ).toBe( pageTitle );
 	} );
 } );

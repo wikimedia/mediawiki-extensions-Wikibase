@@ -1,24 +1,28 @@
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
-import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
-import actions from '@/store/actions';
 import {
 	BRIDGE_ERROR_ADD,
 	BRIDGE_INIT,
+	BRIDGE_INIT_WITH_REMOTE_DATA,
+	BRIDGE_REQUEST_TARGET_LABEL,
 	BRIDGE_SAVE,
 	BRIDGE_SET_EDIT_DECISION,
 	BRIDGE_SET_TARGET_VALUE,
+	BRIDGE_VALIDATE_APPLICABILITY,
+	BRIDGE_VALIDATE_ENTITY_STATE,
 } from '@/store/actionTypes';
 import {
 	ENTITY_INIT,
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
-import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
-import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
+import {
+	STATEMENTS_IS_AMBIGUOUS,
+	STATEMENTS_PROPERTY_EXISTS,
+} from '@/store/statements/getterTypes';
 import {
 	APPLICATION_ERRORS_ADD,
 	APPLICATION_STATUS_SET,
@@ -31,15 +35,6 @@ import {
 	ORIGINAL_HREF_SET,
 	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
-import {
-	NS_ENTITY,
-	NS_STATEMENTS,
-} from '@/store/namespaces';
-import {
-	action,
-	getter,
-} from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
-import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
@@ -47,13 +42,17 @@ import {
 	BridgePermissionsRepository,
 	MissingPermissionsError,
 	PageNotEditable,
+	CascadeProtectedReason,
 } from '@/definitions/data-access/BridgePermissionsRepository';
-
-const mockValidateBridgeApplicability = jest.fn();
-jest.mock( '@/store/validateBridgeApplicability', () => ( {
-	__esModule: true,
-	default: () => mockValidateBridgeApplicability(),
-} ) );
+import { inject } from 'vuex-smart-module';
+import { RootActions } from '@/store/actions';
+import AppInformation from '@/definitions/AppInformation';
+import newMockServiceContainer from '../services/newMockServiceContainer';
+import newApplicationState from './newApplicationState';
+import { MainSnakPath } from '@/store/statements/MainSnakPath';
+import { SNAK_DATAVALUETYPE, SNAK_SNAKTYPE } from '@/store/statements/snaks/getterTypes';
+import DataValue from '@/datamodel/DataValue';
+import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
 
 const mockBridgeConfig = jest.fn();
 jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
@@ -64,257 +63,365 @@ jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
 describe( 'root/actions', () => {
 	const defaultEntityId = 'Q32';
 	const defaultPropertyId = 'P71';
-	const defaultEntityTitle = 'Entity Title';
-	const entityLabelRepository = {
-		getLabel: jest.fn( () => Promise.resolve() ),
-	};
-	const wikibaseRepoConfigRepository = {
-		getRepoConfiguration: jest.fn().mockResolvedValue( {
-			dataTypeLimits: {
-				string: {
-					maxLength: 200,
-				},
-			},
-		} ),
-	};
-	const propertyDatatypeRepository: PropertyDatatypeRepository = {
-		getDataType: jest.fn().mockResolvedValue( 'string' ),
-	};
-	const tracker: BridgeTracker = {
-		trackPropertyDatatype: jest.fn(),
-	};
-
-	const editAuthorizationChecker: BridgePermissionsRepository = {
-		canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( [] ),
-	};
+	function newMockAppInformation( fields: Partial<AppInformation> = {} ): AppInformation {
+		return {
+			editFlow: EditFlow.OVERWRITE,
+			propertyId: defaultPropertyId,
+			entityId: defaultEntityId,
+			entityTitle: 'Entity Title',
+			originalHref: '',
+			pageTitle: '',
+			client: { usePublish: true },
+			...fields,
+		};
+	}
 
 	describe( BRIDGE_INIT, () => {
-		function mockedStore(
-			entityId?: string,
-			targetProperty?: string,
-			gettersOverride?: any,
-		): any {
-			return newMockStore( {
-				state: {
-					targetProperty: targetProperty || defaultPropertyId,
-					[ NS_ENTITY ]: {
-						id: entityId || defaultEntityId,
-						[ NS_STATEMENTS ]: {
-							[ entityId || defaultEntityId ]: {
-								[ targetProperty || defaultPropertyId ]: [ {} ],
-							},
+
+		const wikibaseRepoConfigRepository = {
+			getRepoConfiguration: jest.fn( () => Promise.resolve() ),
+		};
+		const editAuthorizationChecker: BridgePermissionsRepository = {
+			canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( [] ),
+		};
+		const propertyDatatypeRepository: PropertyDatatypeRepository = {
+			getDataType: jest.fn().mockResolvedValue( 'string' ),
+		};
+
+		const listOfCommits = [
+			EDITFLOW_SET,
+			PROPERTY_TARGET_SET,
+			ENTITY_TITLE_SET,
+			ORIGINAL_HREF_SET,
+			PAGE_TITLE_SET,
+		];
+		it(
+			`commits to ${listOfCommits.join( ', ' )}`,
+			async () => {
+				const editFlow = EditFlow.OVERWRITE;
+				const propertyId = 'P42';
+				const entityTitle = 'Douglas Adams';
+				const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
+				const pageTitle = 'Client_page';
+				const information = newMockAppInformation( {
+					editFlow,
+					propertyId,
+					entityTitle,
+					originalHref,
+					pageTitle,
+				} );
+
+				const commit = jest.fn();
+				const actions = inject( RootActions, {
+					commit,
+					dispatch: jest.fn(),
+				} );
+				// @ts-ignore
+				actions.store = {
+					$services: newMockServiceContainer( {
+						wikibaseRepoConfigRepository,
+						editAuthorizationChecker,
+						propertyDatatypeRepository,
+					} ),
+				};
+
+				// @ts-ignore
+				actions.entityModule = {
+					dispatch: jest.fn(),
+				};
+
+				await actions[ BRIDGE_INIT ]( information );
+				expect( commit ).toHaveBeenCalledWith( EDITFLOW_SET, editFlow );
+				expect( commit ).toHaveBeenCalledWith( PROPERTY_TARGET_SET, propertyId );
+				expect( commit ).toHaveBeenCalledWith( ENTITY_TITLE_SET, entityTitle );
+				expect( commit ).toHaveBeenCalledWith( ORIGINAL_HREF_SET, originalHref );
+				expect( commit ).toHaveBeenCalledWith( PAGE_TITLE_SET, pageTitle );
+			},
+		);
+
+		it( `dispatches to ${BRIDGE_REQUEST_TARGET_LABEL}`, async () => {
+			const propertyId = 'P42';
+			const information = newMockAppInformation( {
+				propertyId,
+			} );
+
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				commit: jest.fn(),
+				dispatch,
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					wikibaseRepoConfigRepository,
+					editAuthorizationChecker,
+					propertyDatatypeRepository,
+				} ),
+			};
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: jest.fn(),
+			};
+
+			await actions[ BRIDGE_INIT ]( information );
+			expect( dispatch ).toHaveBeenCalledWith( BRIDGE_REQUEST_TARGET_LABEL, propertyId );
+		} );
+
+		it( `Requests repoConfig, authorization, datatype and dispatches ${ENTITY_INIT} in that order`, async () => {
+			const propertyId = 'P42';
+			const entityTitle = 'Douglas Adams';
+			const pageTitle = 'South_Pole_Telescope';
+			const entityId = 'Q42';
+			const information = newMockAppInformation( {
+				propertyId,
+				entityTitle,
+				pageTitle,
+				entityId,
+			} );
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				commit: jest.fn(),
+				dispatch,
+			} );
+
+			const mockWikibaseRepoConfig = {};
+			const wikibaseRepoConfigRepository = {
+				getRepoConfiguration: jest.fn().mockResolvedValue( mockWikibaseRepoConfig ),
+			};
+			const mockListOfAuthorizationErrors: MissingPermissionsError[] = [];
+			const editAuthorizationChecker = {
+				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( mockListOfAuthorizationErrors ),
+			};
+			const propertyDataType = 'string';
+			const propertyDatatypeRepository: PropertyDatatypeRepository = {
+				getDataType: jest.fn().mockResolvedValue( propertyDataType ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					wikibaseRepoConfigRepository,
+					editAuthorizationChecker,
+					propertyDatatypeRepository,
+				} ),
+			};
+			const ignoredEntityInitResult = {};
+			const entityModuleDispatch = jest.fn().mockResolvedValue( ignoredEntityInitResult );
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+
+			await actions[ BRIDGE_INIT ]( information );
+			expect( wikibaseRepoConfigRepository.getRepoConfiguration ).toHaveBeenCalled();
+			expect( editAuthorizationChecker.canUseBridgeForItemAndPage ).toHaveBeenCalledWith(
+				entityTitle,
+				pageTitle,
+			);
+			expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( propertyId );
+			expect( entityModuleDispatch ).toHaveBeenCalledWith( ENTITY_INIT, { entity: entityId } );
+			expect( dispatch ).toHaveBeenCalledTimes( 2 );
+			expect( dispatch.mock.calls[ 1 ][ 0 ] ).toBe( BRIDGE_INIT_WITH_REMOTE_DATA );
+			expect( dispatch.mock.calls[ 1 ][ 1 ] ).toStrictEqual( {
+				information,
+				results: [
+					mockWikibaseRepoConfig,
+					mockListOfAuthorizationErrors,
+					propertyDataType,
+					ignoredEntityInitResult,
+				],
+			} );
+
+		} );
+
+		it( `Commits to ${APPLICATION_ERRORS_ADD} if there is an error`, async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				dispatch: jest.fn(),
+			} );
+			const error = new Error( 'This should be logged and propagated' );
+			const wikibaseRepoConfigRepository = {
+				getRepoConfiguration: jest.fn().mockRejectedValue( error ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					wikibaseRepoConfigRepository,
+					editAuthorizationChecker,
+					propertyDatatypeRepository,
+				} ),
+			};
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: jest.fn(),
+			};
+			await expect( actions[ BRIDGE_INIT ]( information ) ).rejects.toBe( error );
+			expect( commit ).toHaveBeenCalledWith(
+				APPLICATION_ERRORS_ADD,
+				[ {
+					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+					info: error,
+				} ],
+			);
+		} );
+	} );
+
+	describe( `${BRIDGE_REQUEST_TARGET_LABEL}`, () => {
+
+		it( `commits to ${TARGET_LABEL_SET} if request was successful`, async () => {
+			const propertyId = 'Q42';
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+			const propertyLabel = 'instance of';
+			const entityLabelRepository = {
+				getLabel: jest.fn().mockResolvedValue( propertyLabel ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					entityLabelRepository,
+				} ),
+			};
+
+			await actions[ BRIDGE_REQUEST_TARGET_LABEL ]( propertyId );
+			expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
+			expect( commit ).toHaveBeenCalledWith( TARGET_LABEL_SET, propertyLabel );
+		} );
+
+		it( 'does nothing if there was an error', async () => {
+			const commit = jest.fn();
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				dispatch,
+			} );
+			const error = new Error( 'ignored' );
+			const entityLabelRepository = {
+				getLabel: jest.fn().mockRejectedValue( error ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					entityLabelRepository,
+				} ),
+			};
+
+			await actions[ BRIDGE_REQUEST_TARGET_LABEL ]( 'Q123' );
+			expect( commit ).not.toHaveBeenCalled();
+			expect( dispatch ).not.toHaveBeenCalled();
+		} );
+
+	} );
+
+	describe( `${BRIDGE_INIT_WITH_REMOTE_DATA}`, () => {
+		const tracker: BridgeTracker = {
+			trackPropertyDatatype: jest.fn(),
+		};
+
+		it( `commits to ${APPLICATION_ERRORS_ADD} if there are permission errors`, async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				dispatch: jest.fn(),
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+			const permissionErrors = [ {
+				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
+				info: {
+					pages: [ 'foo' ],
+				},
+			} as CascadeProtectedReason ];
+
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				{} as WikibaseRepoConfiguration,
+				permissionErrors,
+				'string',
+				undefined,
+			] } );
+
+			expect( commit ).toHaveBeenCalledWith( APPLICATION_ERRORS_ADD, permissionErrors );
+		} );
+
+		it( 'tracks the datatype', async () => {
+			const information = newMockAppInformation();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ {} ],
 						},
 					},
-				},
-				getters: { ...{
-					[ getter(
-						NS_ENTITY,
-						NS_STATEMENTS,
-						STATEMENTS_PROPERTY_EXISTS,
-					) ]: jest.fn().mockReturnValue( true ),
-				}, ...gettersOverride },
+				} ),
+				commit: jest.fn(),
+				dispatch: jest.fn(),
+				getters: jest.fn() as any,
 			} );
-		}
-
-		function initAction( services: {
-			entityLabelRepository?: EntityLabelRepository;
-			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
-			propertyDatatypeRepository?: PropertyDatatypeRepository;
-			tracker?: BridgeTracker;
-			editAuthorizationChecker?: BridgePermissionsRepository;
-		} = {} ): Function {
-			return ( actions as Function )(
-				services.entityLabelRepository || entityLabelRepository,
-				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
-				services.propertyDatatypeRepository || propertyDatatypeRepository,
-				services.tracker || tracker,
-				services.editAuthorizationChecker || editAuthorizationChecker,
-			)[ BRIDGE_INIT ];
-		}
-
-		it( `commits to ${EDITFLOW_SET}`, () => {
-			const editFlow = EditFlow.OVERWRITE;
-			const context = mockedStore();
-
-			const information = {
-				editFlow,
-				propertyId: defaultPropertyId,
-				entityId: defaultEntityId,
-				entityTitle: defaultEntityTitle,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					EDITFLOW_SET,
-					editFlow,
-				);
-			} );
-		} );
-
-		it( `commits to ${PROPERTY_TARGET_SET}`, () => {
-			const propertyId = 'P42';
-			const context = mockedStore();
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId,
-				entityId: defaultEntityId,
-				entityTitle: defaultEntityTitle,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					PROPERTY_TARGET_SET,
-					propertyId,
-				);
-			} );
-		} );
-
-		it( `commits to ${ORIGINAL_HREF_SET}`, () => {
-			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
-			const context = mockedStore();
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: 'P42',
-				entityId: defaultEntityId,
-				entityTitle: defaultEntityTitle,
-				originalHref,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					ORIGINAL_HREF_SET,
-					originalHref,
-				);
-			} );
-		} );
-
-		it( `commits to ${ENTITY_TITLE_SET}`, () => {
-			const entityTitle = 'Douglas Adams';
-			const context = mockedStore();
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
-				entityId: defaultEntityId,
-				entityTitle,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					ENTITY_TITLE_SET,
-					entityTitle,
-				);
-			} );
-		} );
-
-		it( `commits to ${PAGE_TITLE_SET}`, () => {
-			const pageTitle = 'Douglas_Adams';
-			const context = mockedStore();
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
-				entityId: defaultEntityId,
-				entityTitle: defaultEntityTitle,
-				pageTitle,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					PAGE_TITLE_SET,
-					pageTitle,
-				);
-			} );
-		} );
-
-		it( 'tracks opening of the bridge with the expected data type', () => {
-			const dataType = 'string';
-			const getDataTypePromise = Promise.resolve( dataType );
-			const propertyDatatypeRepository: PropertyDatatypeRepository = {
-				getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
-			};
+			const propertyDataType = 'string';
 			const tracker: BridgeTracker = {
 				trackPropertyDatatype: jest.fn(),
 			};
 
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
 			};
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				{} as WikibaseRepoConfiguration,
+				[],
+				propertyDataType,
+				undefined,
+			] } );
 
-			return initAction( {
-				propertyDatatypeRepository,
-				tracker,
-			} )( mockedStore(), information ).then( () => {
-				expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( information.propertyId );
-				expect( tracker.trackPropertyDatatype ).toHaveBeenCalledWith( dataType );
-			} );
+			expect( tracker.trackPropertyDatatype ).toHaveBeenCalledWith( propertyDataType );
+
 		} );
 
-		it( 'does not track opening of the bridge on permission error', () => {
-			const dataType = 'string';
-			const getDataTypePromise = Promise.resolve( dataType );
-			const propertyDatatypeRepository: PropertyDatatypeRepository = {
-				getDataType: jest.fn().mockReturnValue( getDataTypePromise ),
-			};
-			const tracker: BridgeTracker = {
-				trackPropertyDatatype: jest.fn(),
-			};
-			const permissionErrors: MissingPermissionsError[] = [
-				{
-					type: PageNotEditable.ITEM_SEMI_PROTECTED,
-					info: { right: 'editsemiprotected' },
-				},
-			];
-			const editAuthorizationChecker: BridgePermissionsRepository = {
-				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( permissionErrors ),
-			};
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
-			};
-
-			return initAction( {
-				propertyDatatypeRepository,
-				tracker,
-				editAuthorizationChecker,
-			} )( mockedStore(), information ).then( () => {
-				expect( propertyDatatypeRepository.getDataType ).toHaveBeenCalledWith( information.propertyId );
-				expect( tracker.trackPropertyDatatype ).not.toHaveBeenCalled();
+		it( 'resets the config plugin', async () => {
+			const information = newMockAppInformation();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ {} ],
+						},
+					},
+				} ),
+				commit: jest.fn(),
+				dispatch: jest.fn(),
+				getters: jest.fn() as any,
 			} );
-		} );
 
-		it( `dispatches to ${action( NS_ENTITY, ENTITY_INIT )}$`, () => {
-			const entityId = 'Q42';
-			const context = mockedStore( entityId );
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
-				entityId,
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
 			};
 
-			return initAction()( context, information ).then( () => {
-				expect( context.dispatch ).toHaveBeenCalledWith(
-					action( NS_ENTITY, ENTITY_INIT ),
-					{ 'entity': entityId },
-				);
-			} );
-		} );
-
-		it( 'resets the BridgeConfigPlugin', () => {
-			const context = mockedStore();
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: defaultPropertyId,
-				entityId: defaultEntityId,
-				client: {
-					usePublish: true,
-				},
-			};
 			const wikibaseRepoConfiguration = {
 				dataTypeLimits: {
 					string: {
@@ -322,463 +429,428 @@ describe( 'root/actions', () => {
 					},
 				},
 			};
-			const wikibaseRepoConfigRepository = {
-				getRepoConfiguration: jest.fn().mockResolvedValue( wikibaseRepoConfiguration ),
-			};
 
-			return initAction( { wikibaseRepoConfigRepository } )( context, information ).then( () => {
-				expect( mockBridgeConfig ).toHaveBeenCalledWith(
-					Vue,
-					{ ...wikibaseRepoConfiguration, ...information.client },
-				);
-			} );
-		} );
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				wikibaseRepoConfiguration,
+				[],
+				'string',
+				undefined,
+			] } );
 
-		it( `commits to ${ORIGINAL_STATEMENT_SET}`, () => {
-			const entityId = 'Q42';
-			const propertyId = 'P23';
-			const context = mockedStore( entityId, propertyId );
-			const shallowProperty = {
-				type: 'statement',
-				id: 'opaque statement ID',
-				rank: 'normal',
-				mainsnak: {
-					snaktype: 'value',
-					property: 'P60',
-					datatype: 'string',
-					datavalue: {
-						type: 'string',
-						value: 'a string value',
-					},
-				},
-			};
-
-			const shallowNestedState = { ...context.state, ...{
-				[ NS_ENTITY ]: {
-					id: entityId,
-					[ NS_STATEMENTS ]: {
-						[ entityId ]: {
-							[ propertyId ]: [ shallowProperty ],
-						},
-					},
-				},
-			} };
-
-			context.state = shallowNestedState;
-
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId,
-				entityId,
-			};
-
-			return initAction()( context, information ).then( () => {
-				expect( context.commit ).toHaveBeenCalledWith(
-					ORIGINAL_STATEMENT_SET,
-					shallowProperty,
-				);
-			} );
-
-		} );
-
-		describe( TARGET_LABEL_SET, () => {
-			it( `commits to ${TARGET_LABEL_SET}, on successful label request`, () => {
-				const propertyId = 'P42';
-				const context = mockedStore();
-
-				const information = {
-					editFlow: EditFlow.OVERWRITE,
-					propertyId,
-					entityId: defaultEntityId,
-				};
-
-				const term = {
-					language: 'zxx',
-					value: propertyId,
-				};
-				const entityLabelRepository = {
-					getLabel: jest.fn().mockResolvedValue( term ),
-				};
-
-				return initAction( { entityLabelRepository } )( context, information ).then( () => {
-					expect( context.commit ).toHaveBeenCalledWith(
-						TARGET_LABEL_SET,
-						term,
-					);
-					expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
-				} );
-			} );
-
-			it( 'does nothing on reject', () => {
-				const propertyId = 'P42';
-				const context = mockedStore();
-
-				const information = {
-					editFlow: EditFlow.OVERWRITE,
-					propertyId,
-					entityId: defaultEntityId,
-				};
-
-				const entityLabelRepository = {
-					getLabel: jest.fn().mockRejectedValue( 'Fehler' ),
-				};
-
-				return initAction( { entityLabelRepository } )( context, information ).then( () => {
-					expect( context.commit ).not.toHaveBeenCalledWith( TARGET_LABEL_SET );
-					expect( entityLabelRepository.getLabel ).toHaveBeenCalledWith( propertyId );
-				} );
-			} );
-		} );
-
-		describe( 'Applicationstatus', () => {
-			const information = {
-				editFlow: EditFlow.OVERWRITE,
-				propertyId: 'P123',
-				entityId: 'Q123',
-			};
-
-			it( `commits to ${APPLICATION_STATUS_SET} on successful entity lookup`, () => {
-				const context = mockedStore();
-
-				return initAction()( context, information ).then( () => {
-					expect( context.commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
-				} );
-			} );
-
-			describe( 'error state', () => {
-				it( `commits to ${APPLICATION_ERRORS_ADD} on fail entity lookup`, () => {
-					const error = { some: 'error' };
-					const context = newMockStore( {
-						dispatch: () => Promise.reject( error ),
-					} );
-
-					return initAction()( context, information ).catch( () => {
-						expect( context.commit ).toHaveBeenCalledWith(
-							APPLICATION_ERRORS_ADD,
-							[ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ],
-						);
-					} );
-				} );
-
-				it( `commits to ${APPLICATION_ERRORS_ADD} on missing statements`, () => {
-					const entityId = 'Q42';
-					const targetProperty = 'P23';
-
-					const context = mockedStore(
-						entityId,
-						targetProperty,
-						{
-							[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								STATEMENTS_PROPERTY_EXISTS,
-							) ]: jest.fn().mockReturnValue( false ),
-						},
-					);
-
-					return initAction()( context, information ).then( () => {
-						expect(
-							context.getters[ getter(
-								NS_ENTITY,
-								NS_STATEMENTS,
-								STATEMENTS_PROPERTY_EXISTS,
-							) ],
-						).toHaveBeenCalledWith( entityId, targetProperty );
-						expect( context.commit ).toHaveBeenCalledWith(
-							APPLICATION_ERRORS_ADD,
-							[ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ],
-						);
-					} );
-				} );
-
-				it( `doesn't commit to ${APPLICATION_STATUS_SET} on lack of bridge support`, () => {
-					const entityId = 'Q42';
-					const targetProperty = 'P23';
-
-					const context = mockedStore(
-						entityId,
-						targetProperty,
-					);
-
-					mockValidateBridgeApplicability.mockImplementation(
-						() => {
-							context.getters.applicationStatus = ApplicationStatus.ERROR;
-						},
-					);
-
-					return initAction()( context, information ).then( () => {
-						expect( context.commit ).not.toHaveBeenCalledWith(
-							APPLICATION_STATUS_SET,
-							ApplicationStatus.READY,
-						);
-					} );
-				} );
-			} );
-		} );
-
-		it( `commits permission errors to ${APPLICATION_ERRORS_ADD} and bails`, () => {
-			const permissionErrors: MissingPermissionsError[] = [
-				{
-					type: PageNotEditable.ITEM_SEMI_PROTECTED,
-					info: { right: 'editsemiprotected' },
-				},
-			];
-			const editAuthorizationChecker: BridgePermissionsRepository = {
-				canUseBridgeForItemAndPage: jest.fn().mockResolvedValue( permissionErrors ),
-			};
-			const context = {
-				dispatch: jest.fn(),
-				commit: jest.fn(),
-			};
-			const entityTitle = 'Item:Q4711';
-			const pageTitle = 'South_Pole_Telescope';
-			const information = {
-				entityTitle,
-				pageTitle,
-			};
-
-			return initAction( {
-				editAuthorizationChecker,
-			} )( context, information ).then( () => {
-				expect( editAuthorizationChecker.canUseBridgeForItemAndPage )
-					.toHaveBeenCalledWith( entityTitle, pageTitle );
-
-				expect( context.commit ).toHaveBeenCalledWith( APPLICATION_ERRORS_ADD, permissionErrors );
-				expect( mockBridgeConfig ).not.toHaveBeenCalled();
-			} );
-		} );
-	} );
-
-	describe( BRIDGE_SET_TARGET_VALUE, () => {
-		function setTargetValueAction( services: {
-			entityLabelRepository?: EntityLabelRepository;
-			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
-		} = {} ): Function {
-			return ( actions as Function )(
-				services.entityLabelRepository || entityLabelRepository,
-				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
-			)[ BRIDGE_SET_TARGET_VALUE ];
-		}
-
-		it( 'rejects if the store is not ready and switch into error state', async () => {
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.INITIALIZING,
-				},
-			} );
-			await expect(
-				setTargetValueAction()(
-					context,
-					{
-						path: null,
-						value: {
-							type: 'string',
-							value: 'a string',
-						},
-					},
-				),
-			).rejects.toBeDefined();
-			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
-			expect( ( context.commit as jest.Mock ).mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
-			const errors = ( context.commit as jest.Mock ).mock.calls[ 0 ][ 1 ];
-			expect( errors ).toHaveLength( 1 );
-			expect( errors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
-			expect( errors[ 0 ].info ).toHaveProperty( 'stack' );
-		} );
-
-		it( 'propagtes errors and switch into error state', async () => {
-			const sampleError = 'sampleError';
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.READY,
-					[ NS_ENTITY ]: {
-						id: defaultEntityId,
-					},
-				},
-				dispatch: jest.fn( () => {
-					return new Promise( () => {
-						throw new Error( sampleError );
-					} );
-				} ),
-			} );
-
-			await expect(
-				setTargetValueAction()(
-					context,
-					{
-						value: {
-							type: 'string',
-							value: 'a string',
-						},
-					},
-				),
-			).rejects.toStrictEqual( Error( sampleError ) );
-			expect( context.commit ).toHaveBeenCalledWith(
-				APPLICATION_ERRORS_ADD,
-				[ {
-					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-					info: Error( sampleError ),
-				} ],
+			expect( mockBridgeConfig ).toHaveBeenCalledWith(
+				Vue,
+				{ ...wikibaseRepoConfiguration, ...information.client },
 			);
 		} );
 
-		it( 'determine the current path and passes down the new data value', () => {
-			const entityId = 'Q42';
-			const targetProperty = 'P23';
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.READY,
-					targetProperty,
-					[ NS_ENTITY ]: {
-						id: entityId,
+		it( `dispatches ${BRIDGE_VALIDATE_ENTITY_STATE}`, async () => {
+			const information = newMockAppInformation();
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ {} ],
+						},
 					},
-				},
+				} ),
+				commit: jest.fn(),
+				dispatch,
+				getters: jest.fn() as any,
 			} );
 
-			const dataValue = {
-				type: 'string',
-				value: 'Töfften',
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+			const mainSnakPath = new MainSnakPath( defaultEntityId, defaultPropertyId, 0 );
+
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				{} as WikibaseRepoConfiguration,
+				[],
+				'string',
+				undefined,
+			] } );
+
+			expect( dispatch ).toHaveBeenCalledWith( BRIDGE_VALIDATE_ENTITY_STATE, mainSnakPath );
+
+		} );
+
+		it( `commits to ${ORIGINAL_STATEMENT_SET} and ${APPLICATION_STATUS_SET} if there are no errors`, async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const statements = {};
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ statements ],
+						},
+					},
+				} ),
+				commit,
+				dispatch: jest.fn(),
+				getters: jest.fn() as any,
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
 			};
 
-			const payload = {
-				path: {
-					entityId,
-					propertyId: targetProperty,
-					index: 0,
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				{} as WikibaseRepoConfiguration,
+				[],
+				'string',
+				undefined,
+			] } );
+
+			expect( commit ).toHaveBeenCalledWith( ORIGINAL_STATEMENT_SET, statements );
+			expect( commit ).toHaveBeenCalledWith( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+		} );
+
+		it( 'doesn\'t commit if there are errors', async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ {} ],
+						},
+					},
+				} ),
+				commit,
+				dispatch: jest.fn(),
+				getters: {
+					applicationStatus: ApplicationStatus.ERROR,
+				} as any,
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			await actions[ BRIDGE_INIT_WITH_REMOTE_DATA ]( { information, results: [
+				{} as WikibaseRepoConfiguration,
+				[],
+				'string',
+				undefined,
+			] } );
+
+			expect( commit ).not.toHaveBeenCalled();
+		} );
+
+	} );
+
+	describe( `${BRIDGE_VALIDATE_ENTITY_STATE}`, () => {
+		it( `commits to ${APPLICATION_ERRORS_ADD} if property is missing on entity`, () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+			const statementPropertyGetter = jest.fn().mockReturnValue( false );
+
+			// @ts-ignore
+			actions.statementModule = {
+				getters: {
+					[ STATEMENTS_PROPERTY_EXISTS ]: statementPropertyGetter,
+				} as any,
+			};
+
+			const entityId = 'Q42';
+			const propertyId = 'P42';
+			const mainSnakPath = new MainSnakPath( entityId, propertyId, 0 );
+			actions[ BRIDGE_VALIDATE_ENTITY_STATE ]( mainSnakPath );
+			expect( statementPropertyGetter ).toHaveBeenCalledWith( entityId, propertyId );
+			expect( commit ).toHaveBeenCalledWith(
+				APPLICATION_ERRORS_ADD,
+				[ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ],
+			);
+		} );
+
+		it( `dispatches ${BRIDGE_VALIDATE_APPLICABILITY} if there are no errors`, () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+			const statementPropertyGetter = jest.fn().mockReturnValue( true );
+
+			// @ts-ignore
+			actions.statementModule = {
+				getters: {
+					[ STATEMENTS_PROPERTY_EXISTS ]: statementPropertyGetter,
+				} as any,
+			};
+			const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );
+			actions[ BRIDGE_VALIDATE_ENTITY_STATE ]( mainSnakPath );
+			expect( dispatch ).toHaveBeenCalledWith( BRIDGE_VALIDATE_APPLICABILITY, mainSnakPath );
+		} );
+	} );
+
+	describe( `${BRIDGE_VALIDATE_APPLICABILITY}`, () => {
+		const statementModule = {
+			getters: {
+				[ STATEMENTS_IS_AMBIGUOUS ]: jest.fn().mockReturnValue( false ),
+				[ SNAK_SNAKTYPE ]: jest.fn().mockReturnValue( 'value' ),
+				[ SNAK_DATAVALUETYPE ]: jest.fn().mockReturnValue( 'string' ),
+			} as any,
+		};
+
+		it( 'doesn\'t dispatch error if applicable', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+
+			const entityId = 'Q42';
+			const propertyId = 'P42';
+			const mainSnakPath = new MainSnakPath( entityId, propertyId, 0 );
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( mainSnakPath );
+			expect( dispatch ).not.toHaveBeenCalled();
+			expect( statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ] ).toHaveBeenCalledWith( entityId, propertyId );
+			expect( statementModule.getters[ SNAK_SNAKTYPE ] ).toHaveBeenCalledWith( mainSnakPath );
+			expect( statementModule.getters[ SNAK_DATAVALUETYPE ] ).toHaveBeenCalledWith( mainSnakPath );
+		} );
+
+		it( 'dispatches error on ambiguous statements', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ].mockReturnValueOnce( true );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ],
+			);
+
+		} );
+
+		it( 'dispatches error for non-value snak types', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ SNAK_SNAKTYPE ].mockReturnValueOnce( 'novalue' );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ],
+			);
+
+		} );
+
+		it( 'dispatches error for non-string data value types', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ SNAK_DATAVALUETYPE ].mockReturnValueOnce( 'number' );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ],
+			);
+		} );
+	} );
+
+	describe( `${BRIDGE_SET_TARGET_VALUE}`, () => {
+		it( `logs an error if the application is not in ${ApplicationStatus.READY} state and rejects`, async () => {
+			const commit = jest.fn();
+			const state = newApplicationState();
+			const actions = inject( RootActions, {
+				commit,
+				state,
+			} );
+
+			await expect( actions[ BRIDGE_SET_TARGET_VALUE ]( {} as DataValue ) ).rejects.toBeNull();
+			expect( commit ).toHaveBeenCalledTimes( 1 );
+			expect( commit.mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
+			const arrayOfActualErrors = commit.mock.calls[ 0 ][ 1 ];
+			expect( arrayOfActualErrors.length ).toBe( 1 );
+			expect( arrayOfActualErrors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
+			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
+		} );
+
+		it( 'dispatches a statement action to store the value in the store', async () => {
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
 				},
+			} );
+			const actions = inject( RootActions, {
+				state,
+			} );
+
+			const statementModuleDispatch = jest.fn().mockResolvedValue( undefined );
+
+			// @ts-ignore
+			actions.statementModule = {
+				dispatch: statementModuleDispatch,
+			};
+
+			const dataValue: DataValue = {
+				type: 'string',
+				value: 'the value',
+			};
+			const payload = {
+				path: new MainSnakPath( entityId, targetPropertyId, 0 ),
 				value: dataValue,
 			};
 
-			return setTargetValueAction()(
-				context,
-				dataValue,
-			).then( () => {
-				expect( context.dispatch ).toHaveBeenCalledWith(
-					action(
-						NS_ENTITY,
-						NS_STATEMENTS,
-						mainSnakActionTypes.setStringDataValue,
-					),
-					payload,
-				);
+			await expect( actions[ BRIDGE_SET_TARGET_VALUE ]( dataValue ) ).resolves.toBe( undefined );
+			expect( statementModuleDispatch ).toHaveBeenCalledWith( SNAK_SET_STRING_DATA_VALUE, payload );
+		} );
+
+		it( 'propagates an error in case it occurs in the statement action', async () => {
+			const commit = jest.fn();
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				entity: {
+					id: 'Q42',
+				},
 			} );
+			const actions = inject( RootActions, {
+				commit,
+				state,
+			} );
+
+			const error = new Error( 'This error should be logged and propagated' );
+			const statementModuleDispatch = jest.fn().mockRejectedValue( error );
+
+			// @ts-ignore
+			actions.statementModule = {
+				dispatch: statementModuleDispatch,
+			};
+
+			await expect( actions[ BRIDGE_SET_TARGET_VALUE ]( {} as DataValue ) ).rejects.toBe( error );
+			expect( commit ).toHaveBeenCalledWith( APPLICATION_ERRORS_ADD, [ {
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: error,
+			} ] );
 		} );
 	} );
 
-	describe( BRIDGE_SAVE, () => {
-		function saveAction( services: {
-			entityLabelRepository?: EntityLabelRepository;
-			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
-		} = {} ): Function {
-			return ( actions as Function )(
-				services.entityLabelRepository || entityLabelRepository,
-				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
-			)[ BRIDGE_SAVE ];
-		}
-
-		it( 'rejects if the store is not ready and switch into error state', async () => {
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.INITIALIZING,
-				},
+	describe( `${BRIDGE_SAVE}`, () => {
+		it( `logs an error if the application is not in ${ApplicationStatus.READY} state and rejects`, async () => {
+			const commit = jest.fn();
+			const state = newApplicationState();
+			const actions = inject( RootActions, {
+				commit,
+				state,
 			} );
 
-			await expect( saveAction()( context ) ).rejects.toBeDefined();
-			expect( context.dispatch ).toHaveBeenCalledTimes( 0 );
-			expect( ( context.commit as jest.Mock ).mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
-			const errors = ( context.commit as jest.Mock ).mock.calls[ 0 ][ 1 ];
-			expect( errors ).toHaveLength( 1 );
-			expect( errors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
-			expect( errors[ 0 ].info ).toHaveProperty( 'stack' );
+			await expect( actions[ BRIDGE_SAVE ]() ).rejects.toBeNull();
+			expect( commit ).toHaveBeenCalledTimes( 1 );
+			expect( commit.mock.calls[ 0 ][ 0 ] ).toBe( APPLICATION_ERRORS_ADD );
+			const arrayOfActualErrors = commit.mock.calls[ 0 ][ 1 ];
+			expect( arrayOfActualErrors.length ).toBe( 1 );
+			expect( arrayOfActualErrors[ 0 ].type ).toBe( ErrorTypes.APPLICATION_LOGIC_ERROR );
+			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
 
-		it( 'propagtes errors and switch into error state', async () => {
-			const sampleError = new Error( 'sampleError' );
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.READY,
-				},
-				dispatch: jest.fn( () => {
-					return new Promise( () => {
-						throw sampleError;
-					} );
-				} ),
+		it( `it dispatches ${ENTITY_SAVE}`, async () => {
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+			} );
+			const actions = inject( RootActions, {
+				state,
 			} );
 
-			await expect( saveAction()( context ) ).rejects.toBe( sampleError );
+			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
-			expect( context.commit ).toHaveBeenCalledWith(
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+			await actions[ BRIDGE_SAVE ]();
+			expect( entityModuleDispatch ).toHaveBeenCalledWith( ENTITY_SAVE, {} );
+		} );
+
+		it( 'logs an error if saving failed and rejects', async () => {
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+			} );
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				state,
+			} );
+
+			const error = new Error( 'This error should be logged and propagated.' );
+			const entityModuleDispatch = jest.fn().mockRejectedValue( error );
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+			await expect( actions[ BRIDGE_SAVE ]() ).rejects.toBe( error );
+			expect( commit ).toHaveBeenCalledWith(
 				APPLICATION_ERRORS_ADD,
-				[ {
-					type: ErrorTypes.SAVING_FAILED,
-					info: sampleError,
-				} ],
-			);
-		} );
-
-		it( `dispatches ${ENTITY_SAVE}`, () => {
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.READY,
-				},
-				dispatch: jest.fn( () => Promise.resolve() ),
-			} );
-
-			return saveAction()( context ).then( () => {
-				expect( context.dispatch ).toHaveBeenCalledWith( action( NS_ENTITY, ENTITY_SAVE ) );
-				expect( context.dispatch ).toHaveBeenCalledTimes( 1 );
-			} );
-		} );
-	} );
-
-	describe( BRIDGE_ERROR_ADD, () => {
-		function errorAddAction( services: {
-			entityLabelRepository?: EntityLabelRepository;
-			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
-		} = {} ): Function {
-			return ( actions as Function )(
-				services.entityLabelRepository || entityLabelRepository,
-				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
-			)[ BRIDGE_ERROR_ADD ];
-		}
-
-		it( `commits to ${APPLICATION_ERRORS_ADD}`, () => {
-			const context = newMockStore( {
-				state: {
-					applicationStatus: ApplicationStatus.READY,
-				},
-			} );
-			const errors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];
-
-			errorAddAction()( context, errors );
-
-			expect( context.commit ).toHaveBeenCalledWith(
-				APPLICATION_ERRORS_ADD,
-				errors,
+				[ { type: ErrorTypes.SAVING_FAILED, info: error } ],
 			);
 		} );
 	} );
 
-	describe( BRIDGE_SET_EDIT_DECISION, () => {
-		function setEditDecision( services: {
-			entityLabelRepository?: EntityLabelRepository;
-			wikibaseRepoConfigRepository?: WikibaseRepoConfigRepository;
-		} = {} ): Function {
-			return ( actions as Function )(
-				services.entityLabelRepository || entityLabelRepository,
-				services.wikibaseRepoConfigRepository || wikibaseRepoConfigRepository,
-			)[ BRIDGE_SET_EDIT_DECISION ];
-		}
+	describe( `${BRIDGE_ERROR_ADD}`, () => {
+		it( 'it commits the provided error', () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+			const errors: ApplicationError[] = [ { type: ErrorTypes.SAVING_FAILED } ];
+			actions[ BRIDGE_ERROR_ADD ]( errors );
+			expect( commit ).toHaveBeenCalledWith( APPLICATION_ERRORS_ADD, errors );
+		} );
+	} );
 
-		it( `commits to ${EDITDECISION_SET}`, () => {
-			const context = newMockStore( {} );
+	describe( `${BRIDGE_SET_EDIT_DECISION}`, () => {
+		it( 'commits the edit decision to the store', () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+			const editDecision = EditDecision.REPLACE;
 
-			setEditDecision()( context, EditDecision.REPLACE );
+			actions[ BRIDGE_SET_EDIT_DECISION ]( editDecision );
 
-			expect( context.commit ).toHaveBeenCalledWith(
-				EDITDECISION_SET,
-				EditDecision.REPLACE,
-			);
+			expect( commit ).toHaveBeenCalledWith( EDITDECISION_SET, editDecision );
 		} );
 	} );
 

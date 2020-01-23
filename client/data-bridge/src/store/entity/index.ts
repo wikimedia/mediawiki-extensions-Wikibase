@@ -1,31 +1,15 @@
-import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
-import { Module } from 'vuex';
-import Application from '@/store/Application';
-import EntityState from '@/store/entity/EntityState';
-import { mutations } from '@/store/entity/mutations';
-import actions from '@/store/entity/actions';
-import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
-import createStatements from '@/store/entity/statements';
-import {
-	NS_STATEMENTS,
-} from '@/store/namespaces';
+import { EntityMutations } from '@/store/entity/mutations';
+import { EntityActions } from '@/store/entity/actions';
+import { Module } from 'vuex-smart-module';
+import EntityId from '@/datamodel/EntityId';
 
-export default function (
-	readingEntityRepository: ReadingEntityRepository,
-	writingEntityRepository: WritingEntityRepository,
-): Module<EntityState, Application> {
-	const state: EntityState = {
-		id: '',
-		baseRevision: 0,
-	};
-
-	return {
-		namespaced: true,
-		state,
-		mutations,
-		actions: actions( readingEntityRepository, writingEntityRepository ),
-		modules: {
-			[ NS_STATEMENTS ]: createStatements(),
-		},
-	};
+export class EntityState implements EntityState {
+	public id: EntityId = '';
+	public baseRevision = 0;
 }
+
+export const entityModule = new Module( {
+	state: EntityState,
+	mutations: EntityMutations,
+	actions: EntityActions,
+} );
