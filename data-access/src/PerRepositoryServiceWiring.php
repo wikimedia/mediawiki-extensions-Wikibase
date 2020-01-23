@@ -24,10 +24,12 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Store\Sql\Terms\TermStoreDelegatingMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
@@ -275,17 +277,47 @@ return [
 		return $index;
 	},
 
+	'MatchingTermsLookup' => function (
+		PerRepositoryServiceContainer $services,
+		GenericServices $genericServices,
+		DataAccessSettings $settings
+	) {
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+		$repoDbDomain = $services->getDatabaseName();
+		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $repoDbDomain );
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$repoDbDomain,
+			$logger
+		);
+		$matchingTermsLookup = new DatabaseMatchingTermsLookup(
+			$loadBalancer,
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$services->getEntityIdComposer(),
+			$logger
+		);
+		return $matchingTermsLookup;
+	},
+
 	'TermSearchInteractorFactory' => function (
 		PerRepositoryServiceContainer $services,
-		GenericServices $genericServices
+		GenericServices $genericServices,
+		DataAccessSettings $settings
 	) {
-		/** @var TermIndex $termIndex */
-		$termIndex = $services->getService( 'TermIndex' );
 		/** @var PrefetchingTermLookup $prefetchingTermLookup */
 		$prefetchingTermLookup = $services->getService( 'PrefetchingTermLookup' );
+		$delegatingMatchingTermsLookup = new TermStoreDelegatingMatchingTermsLookup(
+			$services->getService( 'TermIndex' ),
+			$services->getService( 'MatchingTermsLookup' ),
+			$settings->itemSearchMigrationStage(),
+			$settings->propertySearchMigrationStage()
+		);
 
 		return new MatchingTermsSearchInteractorFactory(
-			$termIndex,
+			$delegatingMatchingTermsLookup,
 			$genericServices->getLanguageFallbackChainFactory(),
 			$prefetchingTermLookup
 		);

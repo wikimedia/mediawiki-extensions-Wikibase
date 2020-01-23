@@ -2498,7 +2498,9 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 				$this->settings->getSetting( 'useEntitySourceBasedFederation' ),
 				$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-				$this->settings->getSetting( 'tmpItemTermsMigrationStages' )
+				$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
+				$this->settings->getSetting( 'tmpItemSearchMigrationStage' ),
+				$this->settings->getSetting( 'tmpPropertySearchMigrationStage' )
 			);
 		}
 		return $this->dataAccessSettings;

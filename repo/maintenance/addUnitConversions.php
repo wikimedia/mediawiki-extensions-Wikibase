@@ -8,7 +8,6 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Sparql\SparqlClient;
 use Title;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Units\JsonUnitStorage;
@@ -356,14 +355,7 @@ QUERY;
 		return new RdfVocabulary(
 			[ '' => $baseUri ],
 			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
-			new DataAccessSettings(
-				$irrelevantValue,
-				false,
-				false,
-				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-				DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-				DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
-			),
+			WikibaseRepo::getDefaultInstance()->getDataAccessSettings(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd' ],

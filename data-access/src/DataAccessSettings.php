@@ -51,12 +51,24 @@ class DataAccessSettings {
 	private $itemTermsMigrationStages;
 
 	/**
+	 * @var int
+	 */
+	private $itemSearchMigrationStage;
+
+	/**
+	 * @var int
+	 */
+	private $propertySearchMigrationStage;
+
+	/**
 	 * @param int $maxSerializedEntitySizeInKiloBytes
 	 * @param bool $useSearchFields
 	 * @param bool $forceWriteSearchFields
 	 * @param bool $useEntitySourceBasedFederation TODO: Temporary. Remove once it is the only federation implementation
 	 * @param bool $useNormalizedPropertyTerms TODO: Temporary until we get rid of wb_terms
 	 * @param array $itemTermsMigrationStages TODO: Temporary until we get rid of wb_terms
+	 * @param int $itemSearchMigrationStage TODO: Temporary until we get rid of wb_terms
+	 * @param int $propertySearchMigrationStage TODO: Temporary until we get rid of wb_terms
 	 */
 	public function __construct(
 		int $maxSerializedEntitySizeInKiloBytes,
@@ -64,7 +76,9 @@ class DataAccessSettings {
 		bool $forceWriteSearchFields,
 		bool $useEntitySourceBasedFederation,
 		bool $useNormalizedPropertyTerms,
-		array $itemTermsMigrationStages
+		array $itemTermsMigrationStages,
+		int $itemSearchMigrationStage = MIGRATION_OLD,
+		int $propertySearchMigrationStage = MIGRATION_OLD
 	) {
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
 		$this->useSearchFields = $useSearchFields;
@@ -72,6 +86,8 @@ class DataAccessSettings {
 		$this->useEntitySourceBasedFederation = $useEntitySourceBasedFederation;
 		$this->useNormalizedPropertyTerms = $useNormalizedPropertyTerms;
 		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
+		$this->itemSearchMigrationStage = $itemSearchMigrationStage;
+		$this->propertySearchMigrationStage = $propertySearchMigrationStage;
 	}
 
 	/**
@@ -152,6 +168,14 @@ class DataAccessSettings {
 	 */
 	public function getItemTermsMigrationStages(): array {
 		return $this->itemTermsMigrationStages;
+	}
+
+	public function itemSearchMigrationStage() {
+		return $this->itemSearchMigrationStage;
+	}
+
+	public function propertySearchMigrationStage() {
+		return $this->propertySearchMigrationStage;
 	}
 
 }

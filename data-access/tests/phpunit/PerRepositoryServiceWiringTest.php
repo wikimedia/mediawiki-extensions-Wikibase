@@ -17,6 +17,7 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\TermIndex;
@@ -68,6 +69,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			[ 'TermIndex', TermIndex::class ],
 			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 			[ 'WikiPageEntityMetaDataAccessor', WikiPageEntityMetaDataAccessor::class ],
+			[ 'MatchingTermsLookup', MatchingTermsLookup::class ]
 		];
 	}
 
@@ -94,6 +96,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 				'PropertyInfoLookup',
 				'TermBuffer',
 				'TermIndex',
+				'MatchingTermsLookup',
 				'TermSearchInteractorFactory',
 				'WikiPageEntityMetaDataAccessor'
 			],
