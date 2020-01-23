@@ -23,6 +23,7 @@
 	"datatypes-type-time": "کات",
 	"datatypes-type-wikibase-item": "بەند",
 	"wikibase-entity-summary-wbsetitem": "بەندێکی نوێ دروست کرا",
+	"wikibase-entity-summary-wbcreateredirect": "ڕەوانە کرا بۆ $4",
 	"wikibase-entity-summary-wbsetlabel-set": "سەرناوی [$2] گۆڕدرا",
 	"wikibase-entity-summary-wbsetlabel-remove": "سەرناوی [$2] سڕایەوە",
 	"wikibase-entity-summary-wbsetdescription-set": "شیکردنەوەی [$2] گۆڕدرا",

@@ -8,7 +8,8 @@
 			"Sarchia",
 			"Lost Whispers",
 			"Ladsgroup",
-			"Épine"
+			"Épine",
+			"ئارام بکر"
 		]
 	},
 	"wikibase-entity-item": "بەند",
@@ -94,6 +95,7 @@
 	"wikibase-dispatchstats-site-id": "پێگە",
 	"wikibase-history-title-with-label": "مێژووی پێداچوونەوەکانی «$2» ($1)",
 	"wikibase-history-title-without-label": "مێژووی پێداچوونەوەکانی ($1)",
+	"wikibase-redirectentity-submit": "ڕەوانەکردن",
 	"wikibase-api-no-external-page": "پێگەی پەیڕەی دەرەکی زانیاریی پەڕەی دابین نەکردووە.",
 	"wikibase-restoreold": "گەڕاندنەوە",
 	"wikibase-entity-summary-restore": "گەڕاندنەوەی پێداچوونەوەی $3 لە لایەن [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
