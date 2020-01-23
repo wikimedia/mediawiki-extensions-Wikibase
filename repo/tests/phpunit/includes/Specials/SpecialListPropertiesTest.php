@@ -119,7 +119,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$labelDescriptionLookup,
 			$entityIdFormatter,
 			$this->getEntityTitleLookup(),
-			$bufferingTermLookup
+			$bufferingTermLookup,
+			$languageFallbackChainFactory
 		);
 
 		return $specialPage;

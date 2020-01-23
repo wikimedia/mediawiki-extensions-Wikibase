@@ -964,7 +964,8 @@ call_user_func( function() {
 			$labelDescriptionLookup,
 			$entityIdFormatter,
 			$wikibaseRepo->getEntityTitleLookup(),
-			$prefetchingTermLookup
+			$prefetchingTermLookup,
+			$wikibaseRepo->getLanguageFallbackChainFactory()
 		);
 	};
 	$wgSpecialPages['DispatchStats'] = SpecialDispatchStats::class;
@@ -1013,6 +1014,7 @@ call_user_func( function() {
 		return new SpecialAvailableBadges(
 			$wikibaseRepo->getPrefetchingTermLookup(),
 			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getSettings()->getSetting( 'badgeItems' )
 		);
 	};

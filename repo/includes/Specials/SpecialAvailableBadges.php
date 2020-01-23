@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 
@@ -32,13 +33,20 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	private $badgeItems;
 
 	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
+
+	/**
 	 * @param PrefetchingTermLookup $prefetchingTermLookup
 	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param string[] $badgeItems
 	 */
 	public function __construct(
 		PrefetchingTermLookup $prefetchingTermLookup,
 		EntityTitleLookup $entityTitleLookup,
+		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		array $badgeItems
 	) {
 		parent::__construct( 'AvailableBadges' );
@@ -46,6 +54,7 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 		$this->prefetchingTermLookup = $prefetchingTermLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->badgeItems = $badgeItems;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -77,11 +86,13 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 			return new ItemId( $idString );
 		}, array_keys( $this->badgeItems ) );
 
-		$this->prefetchingTermLookup->prefetchTerms( $itemIds );
+		$languageCode = $this->getLanguage()->getCode();
+		$languageChain = $this->languageFallbackChainFactory->newFromLanguageCode( $languageCode )->getFetchLanguageCodes();
+		$this->prefetchingTermLookup->prefetchTerms( $itemIds, [ 'description', 'label' ], $languageChain );
 
 		$html = Html::openElement( 'ol' );
 		foreach ( $itemIds as $id ) {
-			$html .= $this->makeBadgeHtml( $id, $this->badgeItems[$id->getSerialization()] );
+			$html .= $this->makeBadgeHtml( $id, $this->badgeItems[$id->getSerialization()], $languageCode );
 		}
 		$html .= Html::closeElement( 'ol' );
 
@@ -94,11 +105,11 @@ class SpecialAvailableBadges extends SpecialWikibasePage {
 	 *
 	 * @return string HTML
 	 */
-	private function makeBadgeHtml( ItemId $badgeId, $badgeClass ) {
+	private function makeBadgeHtml( ItemId $badgeId, string $badgeClass, string $languageCode ) {
 		$title = $this->entityTitleLookup->getTitleForId( $badgeId );
 		$description = $this->prefetchingTermLookup->getDescription(
 			$badgeId,
-			$this->getLanguage()->getCode()
+			$languageCode
 		);
 
 		$html = Html::openElement( 'li' );

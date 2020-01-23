@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Repo\Specials\SpecialAvailableBadges;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialAvailableBadges
@@ -44,6 +45,7 @@ class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 		return new SpecialAvailableBadges(
 			$prefetchingTermLookup,
 			$entityTitleLookup,
+			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory(),
 			$badgeItems
 		);
 	}
