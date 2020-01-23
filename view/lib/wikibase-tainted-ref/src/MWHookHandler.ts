@@ -23,12 +23,12 @@ export default class MWHookHandler implements HookHandler {
 	}
 
 	public addStore( store: Store<Application> ): void {
-		this.addEditHook( store );
+		this.addStartEditingHook( store );
 		this.addSaveHook( store );
-		this.addCancelHook( store );
+		this.addStopEditingHook( store );
 	}
 
-	private addEditHook( store: Store<Application> ): void {
+	private addStartEditingHook( store: Store<Application> ): void {
 		this.mwHooks( 'wikibase.statement.startEditing' ).add( ( guid: string ) => {
 			store.dispatch( START_EDIT, guid );
 		} );
@@ -42,7 +42,6 @@ export default class MWHookHandler implements HookHandler {
 				} else if ( this.taintedChecker.check( oldStatement, newStatement ) ) {
 					store.dispatch( STATEMENT_TAINTED_STATE_TAINT, statementId );
 				}
-				store.dispatch( STOP_EDIT, statementId );
 			},
 		);
 		this.mwHooks( 'wikibase.statement.saved' ).add(
@@ -52,10 +51,9 @@ export default class MWHookHandler implements HookHandler {
 		);
 	}
 
-	private addCancelHook( store: Store<Application> ): void {
+	private addStopEditingHook( store: Store<Application> ): void {
 		this.mwHooks( 'wikibase.statement.stopEditing' ).add( ( guid: string ) => {
 			store.dispatch( STOP_EDIT, guid );
-
 		} );
 	}
 }
