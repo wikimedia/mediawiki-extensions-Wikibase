@@ -51,8 +51,6 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
 
-		$subItemType = 'subitem';
-
 		$sourceDefinitions = new EntitySourceDefinitions(
 			[ $itemSource, $propertySource ],
 			new EntityTypeDefinitions( [ 'item' => [ 'sub-entity-types' => [ 'subitem' ] ] ] )
@@ -72,10 +70,22 @@ class EntitySourceDefinitionsTest extends TestCase {
 	public function testGetEntityTypeToSourceMapping() {
 		$itemSource = $this->newItemSource();
 		$propertySource = $this->newPropertySource();
+		$otherSource = $this->newOtherSource();
 
-		$sourceDefinitions = new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) );
+		$sources = [ $itemSource, $propertySource, $otherSource ];
+		$entityTypeDefinitions = [
+			'other' => [
+				'sub-entity-types' => [ 'otherSub' ],
+			],
+			'otherSub' => [],
+		];
 
-		$this->assertEquals( [ 'item' => $itemSource, 'property' => $propertySource ], $sourceDefinitions->getEntityTypeToSourceMapping() );
+		$sourceDefinitions = new EntitySourceDefinitions( $sources, new EntityTypeDefinitions( $entityTypeDefinitions ) );
+
+		$this->assertEquals(
+			[ 'item' => $itemSource, 'property' => $propertySource, 'other' => $otherSource, 'otherSub' => $otherSource ],
+			$sourceDefinitions->getEntityTypeToSourceMapping()
+		);
 	}
 
 	public function testGetConceptBaseUris() {
@@ -125,6 +135,18 @@ class EntitySourceDefinitionsTest extends TestCase {
 			'propertysource:',
 			'pro',
 			'pro',
+			''
+		);
+	}
+
+	private function newOtherSource() {
+		return new EntitySource(
+			'others',
+			false,
+			[ 'other' => [ 'namespaceId' => 666, 'slot' => 'other' ] ],
+			'othersource:',
+			'ot',
+			'',
 			''
 		);
 	}
