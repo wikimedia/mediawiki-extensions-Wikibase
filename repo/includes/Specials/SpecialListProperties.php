@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\DataTypeFactory;
 use HTMLForm;
 use Html;
@@ -64,13 +65,19 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 	 */
 	private $prefetchingTermLookup;
 
+	/**
+	 * @var LanguageFallbackChainFactory
+	 */
+	private $languageFallbackChainFactory;
+
 	public function __construct(
 		DataTypeFactory $dataTypeFactory,
 		PropertyInfoLookup $propertyInfoLookup,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		EntityIdFormatter $entityIdFormatter,
 		EntityTitleLookup $titleLookup,
-		PrefetchingTermLookup $prefetchingTermLookup
+		PrefetchingTermLookup $prefetchingTermLookup,
+		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		parent::__construct( 'ListProperties' );
 
@@ -80,6 +87,7 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 		$this->entityIdFormatter = $entityIdFormatter;
 		$this->titleLookup = $titleLookup;
 		$this->prefetchingTermLookup = $prefetchingTermLookup;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -211,7 +219,9 @@ class SpecialListProperties extends SpecialWikibaseQueryPage {
 
 		$propertyIds = array_values( $orderedPropertyInfo );
 
-		$this->prefetchingTermLookup->prefetchTerms( $propertyIds );
+		$languageChain = $this->languageFallbackChainFactory->newFromLanguage( $this->getContext()->getLanguage() )
+			->getFetchLanguageCodes();
+		$this->prefetchingTermLookup->prefetchTerms( $propertyIds, [ 'label' ], $languageChain );
 
 		return $propertyIds;
 	}
