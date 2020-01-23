@@ -7,7 +7,6 @@ use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
 use OutOfBoundsException;
-use Traversable;
 
 /**
  * Unordered list of AliasGroup objects.

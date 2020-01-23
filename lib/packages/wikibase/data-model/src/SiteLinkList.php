@@ -35,7 +35,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( /* iterable */ $siteLinks = [] ) {
-		if ( !is_array( $siteLinks ) && !( $siteLinks instanceof \Traversable ) ) {
+		if ( !is_array( $siteLinks ) && !( $siteLinks instanceof Traversable ) ) {
 			throw new InvalidArgumentException( '$siteLinks must be iterable' );
 		}
 
@@ -101,7 +101,7 @@ class SiteLinkList implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @see IteratorAggregate::getIterator
 	 *
-	 * Returns a Traversable of SiteLink in which the keys are the site ids.
+	 * Returns an Iterator of SiteLink in which the keys are the site ids.
 	 *
 	 * @return Iterator|SiteLink[]
 	 */
