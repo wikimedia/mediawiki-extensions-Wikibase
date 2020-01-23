@@ -8,7 +8,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
-use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -59,6 +58,11 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $cacheTtlInSeconds;
 
 	/**
+	 * @var TermCacheKeyBuilder
+	 */
+	private $cacheKeyBuilder;
+
+	/**
 	 * @param CacheInterface $cache
 	 * @param EntityRevisionLookup $revisionLookup
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
@@ -77,6 +81,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
+		$this->cacheKeyBuilder = new TermCacheKeyBuilder();
 	}
 
 	/**
@@ -116,7 +121,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 
 		list( $revisionId, $targetEntityId ) = $resolutionResult;
 
-		$cacheKey = $this->getCacheKey( $targetEntityId, $revisionId,  $languageCode, $termName );
+		$cacheKey = $this->cacheKeyBuilder->buildKey( $targetEntityId, $revisionId, $languageCode, $termName );
 		$result = $this->cache->get( $cacheKey, self::NO_VALUE );
 		if ( $result === self::NO_VALUE ) {
 			$term = $termName === self::LABEL
@@ -172,26 +177,6 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 			$termData[self::FIELD_LANGUAGE],
 			$termData[self::FIELD_SOURCE_LANGUAGE]
 		);
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @param int $revisionId
-	 * @param string $languageCode
-	 * @param string $termName
-	 * @return string
-	 */
-	private function getCacheKey( EntityId $entityId, $revisionId, $languageCode, $termName ) {
-		Assert::parameterType( 'string', $languageCode, '$languageCode' );
-		Assert::parameter( !empty( $languageCode ), '$languageCode', "must not be empty" );
-
-		Assert::parameterType( 'string', $termName, '$termName' );
-		Assert::parameter( !empty( $termName ), '$termName', "must not be empty" );
-
-		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
-		Assert::parameter( $revisionId > 0, '$revisionId', "should be positive" );
-
-		return "{$entityId->getSerialization()}_{$revisionId}_{$languageCode}_{$termName}";
 	}
 
 	/**

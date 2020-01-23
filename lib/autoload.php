@@ -117,6 +117,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\SiteLinkLookup' => __DIR__ . '/includes/Store/SiteLinkLookup.php',
 	'Wikibase\\Lib\\Store\\SiteLinkStore' => __DIR__ . '/includes/Store/SiteLinkStore.php',
 	'Wikibase\\Lib\\Store\\StorageException' => __DIR__ . '/includes/Store/StorageException.php',
+	'Wikibase\\Lib\\Store\\TermCacheKeyBuilder' => __DIR__ . '/includes/Store/TermCacheKeyBuilder.php',
 	'Wikibase\\Lib\\Store\\TermIndexSearchCriteria' => __DIR__ . '/includes/Store/TermIndexSearchCriteria.php',
 	'Wikibase\\Lib\\Store\\TypeDispatchingEntityRevisionLookup' => __DIR__ . '/includes/Store/TypeDispatchingEntityRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\TypeDispatchingEntityStore' => __DIR__ . '/includes/Store/TypeDispatchingEntityStore.php',
