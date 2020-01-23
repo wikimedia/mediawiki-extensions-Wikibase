@@ -20,15 +20,9 @@
 		"Wikibase\\ViewHooks": "view/ViewHooks.php"
 	},
 	"Hooks": {
-		"ResourceLoaderRegisterModules": [
-			"\\Wikibase\\ViewHooks::onResourceLoaderRegisterModules"
-		],
-		"ResourceLoaderTestModules": [
-			"\\Wikibase\\ViewHooks::onResourceLoaderTestModules"
-		],
-		"UnitTestsList": [
-			"\\Wikibase\\ViewHooks::onUnitTestsList"
-		]
+		"ResourceLoaderRegisterModules": "\\Wikibase\\ViewHooks::onResourceLoaderRegisterModules",
+		"ResourceLoaderTestModules": "\\Wikibase\\ViewHooks::onResourceLoaderTestModules",
+		"UnitTestsList": "\\Wikibase\\ViewHooks::onUnitTestsList"
 	},
 	"callback": "\\Wikibase\\ViewHooks::onRegistration",
 	"MessagesDirs": {
