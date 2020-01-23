@@ -40,7 +40,7 @@ export default class BridgeDomElementsSelector {
 			return null;
 		}
 
-		if ( !Object.values( EditFlow ).includes( editFlow ) ) {
+		if ( !( Object.values( EditFlow ) as string[] ).includes( editFlow ) ) {
 			return null;
 		}
 

@@ -146,6 +146,14 @@ interface MWJQueryExtension {
 	uls?: JQUls;
 }
 
+declare global {
+	interface Window {
+		mw: MediaWiki;
+		OO: MwWindowOO;
+		$: JQueryStatic & MWJQueryExtension;
+	}
+}
+
 interface MwWindow extends Window {
 	mw: MediaWiki;
 	OO: MwWindowOO;
