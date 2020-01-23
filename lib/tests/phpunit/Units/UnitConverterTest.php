@@ -109,7 +109,7 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 	 * @param string[]|null $conv Conversion result data
 	 * @param bool $expectNull Should result be null?
 	 */
-	public function testNoConversion( array $conv = null, $expectNull ) {
+	public function testNoConversion( ?array $conv, $expectNull ) {
 		$uc = $this->getConverter( 'Q123', $conv );
 
 		$decimal = new DecimalValue( '+42' );

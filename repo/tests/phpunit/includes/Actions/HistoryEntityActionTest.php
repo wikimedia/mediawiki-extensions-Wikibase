@@ -129,7 +129,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider pageTitleProvider
 	 */
-	public function testGetPageTitle( ItemId $entityId = null, Term $label = null, $expected ) {
+	public function testGetPageTitle( ?ItemId $entityId, ?Term $label, $expected ) {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$entityIdLookup->expects( $this->once() )
 			->method( 'getEntityIdForTitle' )

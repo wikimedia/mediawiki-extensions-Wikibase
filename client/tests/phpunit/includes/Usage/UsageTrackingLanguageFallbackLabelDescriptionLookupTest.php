@@ -134,7 +134,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 	 */
 	private function getUsageTrackingLanguageFallbackLabelDescriptionLookup(
 		UsageAccumulator $usageAccumulator,
-		TermFallback $term = null,
+		?TermFallback $term,
 		$method,
 		array $fetchLanguageCodes,
 		$trackUsagesInAllLanguages

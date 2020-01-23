@@ -264,7 +264,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 	 */
 	public function testExecuteWithExistingItemIdAsSubPage(
 		Fingerprint $inputFingerprint,
-		WebRequest $request = null,
+		?WebRequest $request,
 		Fingerprint $expectedFingerprint
 	) {
 		$inputEntity = new Item();

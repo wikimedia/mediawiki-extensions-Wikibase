@@ -143,7 +143,7 @@ class ApiErrorReporterTest extends \MediaWikiTestCase {
 		$exception,
 		$code,
 		$httpStatusCode,
-		array $extradata = null,
+		?array $extradata,
 		$infoPattern,
 		array $expectedDataFields
 	) {

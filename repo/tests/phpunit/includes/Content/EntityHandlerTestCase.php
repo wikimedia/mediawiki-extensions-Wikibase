@@ -359,7 +359,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		Revision $latestRevision,
 		Revision $newerRevision,
 		Revision $olderRevision,
-		EntityContent $expected = null,
+		?EntityContent $expected,
 		$message
 	) {
 		$handler = $this->getHandler();

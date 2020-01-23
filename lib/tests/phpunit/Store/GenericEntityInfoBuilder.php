@@ -175,7 +175,7 @@ class GenericEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	private function injectTerms(
-		array $types = null,
+		?array $types,
 		array &$entityRecord,
 		EntityDocument $entity,
 		array $languages = null

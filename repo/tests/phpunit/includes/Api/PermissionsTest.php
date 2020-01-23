@@ -69,7 +69,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideReadPermissions
 	 */
-	public function testGetEntities( array $permissions = null, $expectedError ) {
+	public function testGetEntities( ?array $permissions, $expectedError ) {
 		$params = [
 			'ids' => EntityTestHelper::getId( 'Oslo' ),
 		];
@@ -94,7 +94,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideCreateEntityPermissions
 	 */
-	public function testCreateItem( array $permissions = null, $expectedError ) {
+	public function testCreateItem( ?array $permissions, $expectedError ) {
 		$itemData = [
 			'labels' => [ "en" => [ "language" => 'en', "value" => 'Test' ] ],
 		];
@@ -124,7 +124,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideCreatePropertyPermissions
 	 */
-	public function testCreateProperty( array $permissions = null, $expectedError ) {
+	public function testCreateProperty( ?array $permissions, $expectedError ) {
 		$itemData = [
 			'labels' => [ "en" => [ "language" => 'en', "value" => 'Testttttttt' ] ],
 			'datatype' => 'string',
@@ -155,7 +155,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideItemTermPermissions
 	 */
-	public function testSetLabel( array $permissions = null, $expectedError ) {
+	public function testSetLabel( ?array $permissions, $expectedError ) {
 		$params = [
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'de',
@@ -168,7 +168,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideItemTermPermissions
 	 */
-	public function testSetDescription( array $permissions = null, $expectedError ) {
+	public function testSetDescription( ?array $permissions, $expectedError ) {
 		$params = [
 			'id' => EntityTestHelper::getId( 'Oslo' ),
 			'language' => 'en',
@@ -195,7 +195,7 @@ class PermissionsTest extends PermissionsTestCase {
 	/**
 	 * @dataProvider provideMergeItemsPermissions
 	 */
-	public function testMergeItems( array $permissions = null, $expectedError ) {
+	public function testMergeItems( ?array $permissions, $expectedError ) {
 		$params = [
 			'fromid' => EntityTestHelper::getId( 'Oslo' ),
 			'toid' => EntityTestHelper::getId( 'Empty' ),

@@ -146,7 +146,7 @@ class DifferencesSnakVisualizerTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider provideGetPropertyHeader
 	 */
-	public function testGetPropertyHeader( Snak $snak = null, $expected ) {
+	public function testGetPropertyHeader( ?Snak $snak, $expected ) {
 		$snakVisualizer = $this->newDifferencesSnakVisualizer();
 		$result = $snakVisualizer->getPropertyHeader( $snak );
 		$this->assertEquals( $expected, $result );

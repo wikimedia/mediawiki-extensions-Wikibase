@@ -53,7 +53,7 @@ class EntityIdSiteLinkFormatterTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider formatEntityIdProvider
 	 */
-	public function testFormatEntityId( SiteLink $siteLink = null, Term $label = null, $expected ) {
+	public function testFormatEntityId( ?SiteLink $siteLink, ?Term $label, $expected ) {
 		$id = new ItemId( 'Q1' );
 
 		$titleLookup = $this->createMock( EntityTitleLookup::class );

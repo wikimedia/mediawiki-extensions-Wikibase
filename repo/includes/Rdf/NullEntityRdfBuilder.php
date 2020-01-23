@@ -13,11 +13,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 class NullEntityRdfBuilder implements EntityRdfBuilder {
 
 	public function addEntity( EntityDocument $entity ) {
-		return;
 	}
 
 	public function addEntityStub( EntityDocument $entity ) {
-		return;
 	}
 
 }

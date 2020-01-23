@@ -154,8 +154,8 @@ class ClaimDifferTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider diffClaimsProvider
 	 */
 	public function testDiffClaims(
-		Statement $oldStatement = null,
-		Statement $newStatement = null,
+		?Statement $oldStatement,
+		?Statement $newStatement,
 		ClaimDifference $expected
 	) {
 		$differ = new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) );

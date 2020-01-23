@@ -46,7 +46,7 @@ class NotEntityIdValidatorTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @dataProvider provideValidate
 	 */
-	public function testValidate( $value, $code, array $forbiddenTypes = null, $expectedCode ) {
+	public function testValidate( $value, $code, ?array $forbiddenTypes, $expectedCode ) {
 		$idParser = new BasicEntityIdParser();
 		$validator = new NotEntityIdValidator( $idParser, $code, $forbiddenTypes );
 		$result = $validator->validate( $value );
