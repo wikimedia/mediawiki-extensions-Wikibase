@@ -40,6 +40,8 @@ export default class ProcessDialogHeader extends Vue {}
 	&__title {
 		display: inline-flex;
 		align-items: center;
+		margin: 0;
+		padding: 0;
 
 		@include h5();
 	}
