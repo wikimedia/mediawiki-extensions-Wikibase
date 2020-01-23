@@ -5,6 +5,10 @@ import './storybook-global.scss';
 
 addDecorator( withA11y );
 
+addDecorator( () => ( {
+	template: '<div class="wb-db-app"><story/></div>',
+} ) );
+
 addParameters( {
 	docs: {
 		inlineStories: true,
