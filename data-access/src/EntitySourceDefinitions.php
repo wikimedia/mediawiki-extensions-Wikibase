@@ -128,6 +128,12 @@ class EntitySourceDefinitions {
 				$this->entityTypeToSourceMapping[$type] = $source;
 			}
 		}
+		foreach ( $this->subEntityTypeMap as $subEntityType => $mainEntityType ) {
+			// Only add sub entities that are enabled to be mapping
+			if ( array_key_exists( $mainEntityType, $this->entityTypeToSourceMapping ) ) {
+				$this->entityTypeToSourceMapping[$subEntityType] = $this->entityTypeToSourceMapping[$mainEntityType];
+			}
+		}
 		return $this->entityTypeToSourceMapping;
 	}
 
