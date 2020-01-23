@@ -12927,12 +12927,12 @@ var PageList_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_PageList = (PageList_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=template&id=1eb5d51a&
-var UserLinkvue_type_template_id_1eb5d51a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.userId !== 0)?_c('a',{attrs:{"href":_vm.router.getPageUrl( ("Special:Redirect/user/" + _vm.userId) )}},[_c('bdi',[_vm._v(_vm._s(_vm.userName))])]):_c('bdi',[_vm._v(_vm._s(_vm.userName))])}
-var UserLinkvue_type_template_id_1eb5d51a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"ff70e420-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
+var UserLinkvue_type_template_id_03ac8c2a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.userId !== 0)?_c('a',{attrs:{"href":_vm.router.getPageUrl( ("Special:Redirect/user/" + _vm.userId) )}},[_c('bdi',[_vm._v(_vm._s(_vm.userName))])]):_c('bdi',[_vm._v(_vm._s(_vm.userName))])}
+var UserLinkvue_type_template_id_03ac8c2a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=template&id=1eb5d51a&
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
 
@@ -12942,6 +12942,15 @@ var UserLinkvue_type_template_id_1eb5d51a_staticRenderFns = []
 
 
 
+/**
+ * A component which renders a link to a user page on a certain wiki.
+ *
+ * This is an internal component used when communicating permission
+ * violations to the user. This happens for client and repo errors
+ * alike; consequently the router is injectable instead of directly
+ * accessing features from ClientRouterPlugin or RepoRouterPlugin
+ * from here.
+ */
 
 var UserLinkvue_type_script_lang_ts_UserLink =
 /*#__PURE__*/
@@ -12983,8 +12992,8 @@ UserLinkvue_type_script_lang_ts_UserLink = __decorate([vue_class_component_commo
 
 var UserLink_component = normalizeComponent(
   components_UserLinkvue_type_script_lang_ts_,
-  UserLinkvue_type_template_id_1eb5d51a_render,
-  UserLinkvue_type_template_id_1eb5d51a_staticRenderFns,
+  UserLinkvue_type_template_id_03ac8c2a_render,
+  UserLinkvue_type_template_id_03ac8c2a_staticRenderFns,
   false,
   null,
   null,
