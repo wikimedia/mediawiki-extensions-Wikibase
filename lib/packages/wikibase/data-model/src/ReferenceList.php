@@ -298,7 +298,7 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 *
 	 * @since 5.0
 	 *
-	 * @return Traversable
+	 * @return Iterator|Reference[]
 	 */
 	public function getIterator() {
 		return new ArrayIterator( array_values( $this->references ) );

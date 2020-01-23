@@ -52,7 +52,7 @@ class AliasGroupList implements Countable, IteratorAggregate {
 
 	/**
 	 * @see IteratorAggregate::getIterator
-	 * @return Traversable|AliasGroup[]
+	 * @return Iterator|AliasGroup[]
 	 */
 	public function getIterator() {
 		return new ArrayIterator( $this->groups );

@@ -52,7 +52,7 @@ class ItemIdSet implements IteratorAggregate, Countable, Comparable {
 	/**
 	 * @see IteratorAggregate::getIterator
 	 *
-	 * @return Traversable|ItemId[]
+	 * @return Iterator|ItemId[]
 	 */
 	public function getIterator() {
 		return new ArrayIterator( $this->ids );

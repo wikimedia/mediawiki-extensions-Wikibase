@@ -107,7 +107,7 @@ class StatementByGuidMap implements IteratorAggregate, Countable {
 	 * The iterator has the GUIDs of the statements as keys.
 	 *
 	 * @see IteratorAggregate::getIterator
-	 * @return Traversable|Statement[]
+	 * @return Iterator|Statement[]
 	 */
 	public function getIterator() {
 		return new ArrayIterator( $this->statements );
