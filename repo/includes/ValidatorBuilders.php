@@ -62,7 +62,7 @@ class ValidatorBuilders {
 	 * @var string The base URI for the vocabulary to use for units (and in the
 	 * future, globes and calendars).
 	 */
-	private $vocabularyBaseUri;
+	private $itemVocabularyBaseUri;
 
 	/**
 	 * @var string The base URI wikibase concepts, for use with the validators for time and globe
@@ -113,7 +113,7 @@ class ValidatorBuilders {
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
-	 * @param string $vocabularyBaseUri The base URI for vocabulary concepts.
+	 * @param string $itemVocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
 	 * @param DataAccessSettings $dataAccessSettings
@@ -126,7 +126,7 @@ class ValidatorBuilders {
 		EntityLookup $lookup,
 		EntityIdParser $idParser,
 		array $urlSchemes,
-		$vocabularyBaseUri,
+		$itemVocabularyBaseUri,
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
 		DataAccessSettings $dataAccessSettings,
@@ -138,7 +138,7 @@ class ValidatorBuilders {
 		$this->entityLookup = $lookup;
 		$this->entityIdParser = $idParser;
 		$this->urlSchemes = $urlSchemes;
-		$this->vocabularyBaseUri = $vocabularyBaseUri;
+		$this->itemVocabularyBaseUri = $itemVocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
 		$this->dataAccessSettings = $dataAccessSettings;
@@ -492,7 +492,7 @@ class ValidatorBuilders {
 			// since we use it to represent "unitless" quantities. We could also use
 			// http://qudt.org/vocab/unit#Unitless or http://www.wikidata.org/entity/Q199
 			new MembershipValidator( [ '1' ] ),
-			$this->getUrlValidator( [ 'http', 'https' ], $this->vocabularyBaseUri, 255 ),
+			$this->getUrlValidator( [ 'http', 'https' ], $this->itemVocabularyBaseUri, 255 ),
 		] );
 		$validators[] = new DataFieldValidator( 'unit', $unitValidators );
 

@@ -518,7 +518,7 @@ class WikibaseRepo {
 			$this->getEntityLookup(),
 			$this->getEntityIdParser(),
 			$urlSchemes,
-			$this->getVocabularyBaseUri(),
+			$this->getItemVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
 			$this->getCachingCommonsMediaFileNameLookup(),
 			$dataAccessSettings,
@@ -560,7 +560,7 @@ class WikibaseRepo {
 			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
-			$this->getLocalItemUriParser(),
+			$this->getItemUrlParser(),
 			$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 			$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
 			$this->getFormatterCache(),
@@ -1220,23 +1220,27 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return SuffixEntityIdParser
+	 * @deprecated You probably don't actually want a Local ItemUriParser,
+	 * but instead the 1 ItemUrlParser from getItemUrlParser()
 	 */
-	public function getLocalItemUriParser() {
+	public function getLocalItemUriParser(): SuffixEntityIdParser {
+		return $this->getItemUrlParser();
+	}
+
+	public function getItemUrlParser(): SuffixEntityIdParser {
 		return new SuffixEntityIdParser(
-			$this->getVocabularyBaseUri(),
+			$this->getItemVocabularyBaseUri(),
 			new ItemIdParser()
 		);
 	}
 
-	/**
-	 * @return string
-	 */
-	private function getVocabularyBaseUri() {
+	private function getItemVocabularyBaseUri(): string {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			return $this->getLocalEntitySource()->getConceptBaseUri();
+			return $this->getEntitySourceDefinitions()
+				->getSourceForEntityType( Item::ENTITY_TYPE )
+				->getConceptBaseUri();
 		}
 
 		return $this->settings->getSetting( 'conceptBaseUri' );
@@ -2196,7 +2200,7 @@ class WikibaseRepo {
 			$this->getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
 				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
-				new StatementEntityReferenceExtractor( $this->getLocalItemUriParser() )
+				new StatementEntityReferenceExtractor( $this->getItemUrlParser() )
 			),
 			$this->getKartographerEmbeddingHandler(),
 			$services->getStatsdDataFactory(),

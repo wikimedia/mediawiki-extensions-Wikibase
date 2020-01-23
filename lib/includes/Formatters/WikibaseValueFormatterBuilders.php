@@ -55,7 +55,7 @@ class WikibaseValueFormatterBuilders {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $repoItemUriParser;
+	private $itemUriParser;
 
 	/**
 	 * @var string
@@ -133,7 +133,7 @@ class WikibaseValueFormatterBuilders {
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
-	 * @param EntityIdParser $repoItemUriParser
+	 * @param EntityIdParser $itemUriParser
 	 * @param string $geoShapeStorageBaseUrl
 	 * @param string $tabularDataStorageBaseUrl
 	 * @param CacheInterface $formatterCache
@@ -150,7 +150,7 @@ class WikibaseValueFormatterBuilders {
 		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
-		EntityIdParser $repoItemUriParser,
+		EntityIdParser $itemUriParser,
 		$geoShapeStorageBaseUrl,
 		$tabularDataStorageBaseUrl,
 		CacheInterface $formatterCache,
@@ -202,7 +202,7 @@ class WikibaseValueFormatterBuilders {
 		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
-		$this->repoItemUriParser = $repoItemUriParser;
+		$this->itemUriParser = $itemUriParser;
 		$this->geoShapeStorageBaseUrl = $geoShapeStorageBaseUrl;
 		$this->tabularDataStorageBaseUrl = $tabularDataStorageBaseUrl;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -449,7 +449,7 @@ class WikibaseValueFormatterBuilders {
 	 */
 	private function getVocabularyUriFormatter( FormatterOptions $options ) {
 		$labelLookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
-		return new VocabularyUriFormatter( $this->repoItemUriParser, $labelLookup, $this->unitOneUris );
+		return new VocabularyUriFormatter( $this->itemUriParser, $labelLookup, $this->unitOneUris );
 	}
 
 	/**
