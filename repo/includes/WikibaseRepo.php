@@ -1219,14 +1219,6 @@ class WikibaseRepo {
 		return $this->getWikibaseServices()->getTermBuffer();
 	}
 
-	/**
-	 * @deprecated You probably don't actually want a Local ItemUriParser,
-	 * but instead the 1 ItemUrlParser from getItemUrlParser()
-	 */
-	public function getLocalItemUriParser(): SuffixEntityIdParser {
-		return $this->getItemUrlParser();
-	}
-
 	public function getItemUrlParser(): SuffixEntityIdParser {
 		return new SuffixEntityIdParser(
 			$this->getItemVocabularyBaseUri(),
