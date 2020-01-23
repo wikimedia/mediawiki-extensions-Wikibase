@@ -3,10 +3,6 @@ language: php
 matrix:
   fast_finish: true
   include:
-    - env: DM=~7.5
-      php: 7
-    - env: DM=~8.0
-      php: 7.1
     - env: DM=@dev
       php: 7.2
     - env: DM=@dev
@@ -14,7 +10,6 @@ matrix:
     - env: DM=@dev
       php: 7.4snapshot
   allow_failures:
-    - env: DM=@dev
     - php: 7.4snapshot
 
 sudo: false
