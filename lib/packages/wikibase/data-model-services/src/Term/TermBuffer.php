@@ -19,10 +19,10 @@ interface TermBuffer {
 	 * The source from which to fetch would typically be supplied to the buffer's constructor.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string[]|null $termTypes The desired term types; null means all.
-	 * @param string[]|null $languageCodes The desired languages; null means all.
+	 * @param string[] $termTypes The desired term types.
+	 * @param string[] $languageCodes The desired languages.
 	 */
-	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null );
+	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes );
 
 	/**
 	 * Returns a term that was previously loaded by prefetchTerms.
