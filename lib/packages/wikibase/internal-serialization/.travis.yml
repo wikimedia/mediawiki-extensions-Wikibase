@@ -1,28 +1,17 @@
 language: php
 
-matrix:
-  fast_finish: true
-  include:
-    - env: DM=@dev
-      php: 7.2
-    - env: DM=~5.0
-      php: 5.6
-    - env: DM=~6.0
-      php: 7.0
-    - env: DM=~8.0
-      php: 7.1
-  allow_failures:
-    - env: DM=@dev
+php:
+  - '7.2'
+  - '7.3'
 
 sudo: false
 
 install: travis_retry composer require "wikibase/data-model=$DM" --prefer-source
 
-# Hack: Don't run phpmd with HHVM
-script: if $(php --version | grep -q HipHop); then composer test; else composer ci; fi
+script: composer ci
 
 after_success:
-  - if [[ "`phpenv version-name`" != "7.1" ]]; then exit 0; fi
+  - if [[ "`phpenv version-name`" != "7.3" ]]; then exit 0; fi
   - vendor/bin/phpunit --coverage-clover coverage.clover
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
