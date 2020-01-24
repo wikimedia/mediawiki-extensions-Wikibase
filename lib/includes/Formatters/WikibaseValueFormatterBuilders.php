@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -285,7 +286,7 @@ class WikibaseValueFormatterBuilders {
 
 		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache,
-			$this->entityRevisionLookup,
+			new RedirectResolvingLatestRevisionLookup( $this->entityRevisionLookup ),
 			$nonCachingLookup,
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ),
 			$this->cacheTtlInSeconds
