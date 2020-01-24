@@ -32,9 +32,9 @@
 		"wikimedia/assert": "~0.2.2|~0.3.0|~0.4.0"
 	},
 	"require-dev": {
-		"ockcyp/covers-validator": "~0.5.0",
+		"ockcyp/covers-validator": "~1.1",
 		"phpmd/phpmd": "~2.6",
-		"phpunit/phpunit": "~5.7",
+		"phpunit/phpunit": "~8.0",
 		"wikibase/wikibase-codesniffer": "~1.1.0"
 	},
 	"autoload": {
@@ -58,7 +58,7 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"vendor/bin/phpunit",
+			"phpunit",
 			"covers-validator"
 		],
 		"cs": [

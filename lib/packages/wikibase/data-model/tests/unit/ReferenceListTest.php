@@ -146,6 +146,9 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 			$this->assertFalse( $array->hasReference( $element ) );
 			$this->assertSame( --$elementCount, count( $array ) );
 		}
+		if ( $elementCount === 0 ) {
+			$this->assertTrue( true );
+		}
 	}
 
 	public function testRemoveReferenceRemovesIdenticalObjects() {

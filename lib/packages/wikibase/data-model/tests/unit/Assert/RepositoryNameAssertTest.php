@@ -50,6 +50,7 @@ class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenValidValue_assertParameterIsValidRepositoryNamePasses( $value ) {
 		RepositoryNameAssert::assertParameterIsValidRepositoryName( $value, 'test' );
+		$this->assertTrue( true );
 	}
 
 	public function provideInvalidRepositoryNameIndexedArrays() {
@@ -84,6 +85,7 @@ class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGivenValidValue_assertParameterKeysAreValidRepositoryNamesPasses( array $values ) {
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $values, 'test' );
+		$this->assertTrue( true );
 	}
 
 }
