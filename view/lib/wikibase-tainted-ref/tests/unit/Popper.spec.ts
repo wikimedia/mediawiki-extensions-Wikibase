@@ -2,7 +2,6 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex, { Store } from 'vuex';
 import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
-import { createStore } from '@/store';
 import Popper from '@/presentation/components/Popper.vue';
 import { POPPER_HIDE } from '@/store/actionTypes';
 
@@ -12,9 +11,15 @@ localVue.use( Message, { messageToTextFunction: () => {
 	return 'dummy';
 } } );
 
+function createStore(): Store<Partial<Application>> {
+	return new Store<Partial<Application>>( {
+		state: {},
+	} );
+}
+
 describe( 'Popper.vue', () => {
 	it( 'should render the Popper', () => {
-		const store: Store<Application> = createStore();
+		const store = createStore();
 		const wrapper = shallowMount( Popper, {
 			store,
 			localVue,
@@ -22,7 +27,7 @@ describe( 'Popper.vue', () => {
 		expect( wrapper.classes() ).toContain( 'wb-tr-popper-wrapper' );
 	} );
 	it( 'closes the popper when the x is clicked', () => {
-		const store: Store<Application> = createStore();
+		const store = createStore();
 		store.dispatch = jest.fn();
 
 		const wrapper = shallowMount( Popper, {
@@ -34,7 +39,7 @@ describe( 'Popper.vue', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
 	it( 'closes the popper when the focus is lost', () => {
-		const store: Store<Application> = createStore();
+		const store = createStore();
 		store.dispatch = jest.fn();
 
 		const wrapper = shallowMount( Popper, {
@@ -47,7 +52,7 @@ describe( 'Popper.vue', () => {
 	} );
 	it( 'should use injected title text', () => {
 		const localVue = createLocalVue();
-		const store: Store<Application> = createStore();
+		const store = createStore();
 		store.dispatch = jest.fn();
 		const messageToTextFunction = ( key: any ): string => `(${key})`;
 		localVue.use( Vuex );
@@ -63,7 +68,7 @@ describe( 'Popper.vue', () => {
 	} );
 	it( 'should display the injected slots', () => {
 		const localVue = createLocalVue();
-		const store: Store<Application> = createStore();
+		const store = createStore();
 		store.dispatch = jest.fn();
 		const messageToTextFunction = ( key: any ): string => `(${key})`;
 		localVue.use( Vuex );

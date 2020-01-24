@@ -4,10 +4,10 @@ import Vue from 'vue';
 import actions from '@/store/actions';
 import { mutations } from '@/store/mutations';
 import { getters } from '@/store/getters';
-
+import { TrackFunction } from './TrackFunction';
 Vue.use( Vuex );
 
-export function createStore(): Store<Application> {
+export function createStore( metricTracker: TrackFunction ): Store<Application> {
 	const state: Application = {
 		statementsTaintedState: { },
 		statementsPopperIsOpen: { },
@@ -17,7 +17,7 @@ export function createStore(): Store<Application> {
 	};
 	return new Store( {
 		state,
-		actions: actions(),
+		actions: actions( metricTracker ),
 		mutations,
 		getters,
 	} );

@@ -3,9 +3,8 @@ import Vuex, { Store } from 'vuex';
 import Track from '@/vue-plugins/Track';
 import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
-import { createStore } from '@/store';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
-import { POPPER_HIDE, HELP_LINK_SET, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
+import { POPPER_HIDE, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
 const trackingFunction: any = jest.fn();
@@ -15,28 +14,36 @@ localVue.use( Message, { messageToTextFunction: () => {
 } } );
 localVue.use( Track, { trackingFunction } );
 
+function createMockStore( helpLink?: string ): Store<Partial<Application>> {
+	return new Store<Partial<Application>>( {
+		getters: {
+			feedbackLink: jest.fn(),
+			helpLink: helpLink ? () => helpLink : jest.fn(),
+		},
+	} );
+}
+
 describe( 'TaintedPopper.vue', () => {
 	it( 'sets the help link according to the store', () => {
-		const store: Store<Application> = createStore();
+		const helpLinkUrl = 'https://wdtest/Help';
+		const store = createMockStore( helpLinkUrl );
 		const wrapper = mount( TaintedPopper, {
 			store,
 			localVue,
 		} );
-		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
-		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( 'https://wdtest/Help' );
+		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( helpLinkUrl );
 	} );
 	it( 'clicking the help link triggers a tracking event', () => {
-		const store: Store<Application> = createStore();
+		const store = createMockStore();
 		const wrapper = mount( TaintedPopper, {
 			store,
 			localVue,
 		} );
-		store.dispatch( HELP_LINK_SET, 'https://wdtest/Help' );
 		wrapper.find( '.wb-tr-popper-help a' ).trigger( 'click' );
 		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	} );
 	it( 'does not close the popper when the help link is focused', () => {
-		const store: Store<Application> = createStore();
+		const store = createMockStore();
 		store.dispatch = jest.fn();
 
 		const wrapper = mount( TaintedPopper, {
@@ -52,7 +59,7 @@ describe( 'TaintedPopper.vue', () => {
 		expect( store.dispatch ).not.toHaveBeenCalledWith( POPPER_HIDE, 'a-guid' );
 	} );
 	it( 'clicking the remove warning button untaints the statements', () => {
-		const store: Store<Application> = createStore();
+		const store = createMockStore();
 		store.dispatch = jest.fn();
 
 		const wrapper = mount( TaintedPopper, {
@@ -64,7 +71,7 @@ describe( 'TaintedPopper.vue', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, 'a-guid' );
 	} );
 	it( 'clicking the remove warning button triggers a tracking event', () => {
-		const store: Store<Application> = createStore();
+		const store = createMockStore();
 		const wrapper = mount( TaintedPopper, {
 			store,
 			localVue,
@@ -80,7 +87,7 @@ describe( 'TaintedPopper.vue', () => {
 		localVue.use( Vuex );
 		localVue.use( Message, { messageToTextFunction } );
 
-		const store: Store<Application> = createStore();
+		const store = createMockStore();
 		store.dispatch = jest.fn();
 
 		const wrapper = mount( TaintedPopper, {

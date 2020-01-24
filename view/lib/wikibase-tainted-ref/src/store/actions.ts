@@ -21,8 +21,9 @@ import {
 	SET_STATEMENT_EDIT_TRUE,
 	SET_STATEMENT_EDIT_FALSE,
 } from '@/store/mutationTypes';
+import { TrackFunction } from '@/store/TrackFunction';
 
-export default function actions(): ActionTree<Application, Application> {
+export default function actions( _metricTracker: TrackFunction ): ActionTree<Application, Application> {
 	return {
 		[ STORE_INIT ](
 			context: ActionContext<Application, Application>,
