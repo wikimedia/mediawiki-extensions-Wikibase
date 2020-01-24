@@ -1,6 +1,7 @@
 const path = require( 'path' );
 const ForkTsCheckerWebpackPlugin = require( 'fork-ts-checker-webpack-plugin' );
 const ourVueConfig = require( '../vue.config' );
+const ourPostCssConfig = require( '../postcss.config' );
 
 module.exports = async ( { config } ) => {
 	config.resolve.alias[ '@' ] = path.resolve( __dirname, '../src' );
@@ -24,6 +25,16 @@ module.exports = async ( { config } ) => {
 		use: [
 			'vue-style-loader',
 			'css-loader',
+			{
+				loader: 'postcss-loader',
+				options: {
+					ident: 'postcss',
+					plugins: [
+						require( 'autoprefixer' )( ourPostCssConfig.plugins.autoprefixer ),
+						require( 'postcss-prefixwrap' )( ourPostCssConfig.plugins[ 'postcss-prefixwrap' ] ),
+					],
+				},
+			},
 			{
 				loader: 'sass-loader',
 				options: ourVueConfig.css.loaderOptions.sass,

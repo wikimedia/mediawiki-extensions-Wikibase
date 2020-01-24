@@ -1,0 +1,15 @@
+/**
+ * All components' CSS selectors are prefixed by postcss-prefixwrap.
+ * This ensures that we isolate the resets to inside of our application,
+ * but still still can easily (without even thinking about it) overcome
+ * the resulting strong selectors of the reset with the styles inside
+ * of our component.
+ */
+@import '~reset-css/sass/_reset';
+
+ul,
+ol { // overcome very strong selector, e.g. .content ul li
+	li {
+		margin: 0;
+	}
+}
