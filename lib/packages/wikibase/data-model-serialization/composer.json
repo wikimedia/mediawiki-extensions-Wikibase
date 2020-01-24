@@ -21,6 +21,10 @@
 			"name": "Jeroen De Dauw",
 			"email": "jeroendedauw@gmail.com",
 			"homepage": "http://jeroendedauw.com"
+		},
+		{
+			"name": "The Wikidata team",
+			"role": "Developer"
 		}
 	],
 	"support": {
