@@ -16,8 +16,8 @@ abstract class ChangeOpBase implements ChangeOp {
 
 	/**
 	 * @param Summary|null $summary
-	 * @param string $action
-	 * @param string $language
+	 * @param string|null $action
+	 * @param string|null $language
 	 * @param string|array $args
 	 *
 	 * @throws InvalidArgumentException
