@@ -41,7 +41,7 @@ Wikibase DataModel Services 3.x:
 ```js
 {
     "require": {
-        "wikibase/data-model-services": "~3.0"
+        "wikibase/data-model-services": "~5.0"
     }
 }
 ```
