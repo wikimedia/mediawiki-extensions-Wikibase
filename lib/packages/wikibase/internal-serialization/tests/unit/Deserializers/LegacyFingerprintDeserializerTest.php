@@ -73,7 +73,7 @@ class LegacyFingerprintDeserializerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function expectDeserializationException() {
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 	}
 
 	public function testGivenNonArrayDescriptions_exceptionIsThrown() {

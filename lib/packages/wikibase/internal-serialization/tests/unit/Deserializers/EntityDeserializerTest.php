@@ -94,7 +94,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$this->getThrowingDeserializer()
 		);
 
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->expectException( 'Deserializers\Exceptions\DeserializationException' );
 		$deserializer->deserialize( $this->getLegacyItemSerializationWithoutId() );
 	}
 
@@ -110,7 +110,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$this->getStubCurrentDeserializer()
 		);
 
-		$this->setExpectedException( 'Deserializers\Exceptions\DeserializationException' );
+		$this->expectException( 'Deserializers\Exceptions\DeserializationException' );
 		$deserializer->deserialize( $this->getCurrentItemSerializationWithoutId() );
 	}
 
@@ -138,7 +138,7 @@ class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 			$this->getThrowingDeserializer()
 		);
 
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$deserializer->deserialize( $serialization );
 	}
 

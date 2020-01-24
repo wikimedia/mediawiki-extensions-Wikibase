@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use Deserializers\Deserializer;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\InternalSerialization\LegacyDeserializerFactory;
@@ -18,7 +17,7 @@ use Wikibase\InternalSerialization\SerializerFactory;
  */
 class TestFactoryBuilder {
 
-	public static function newLegacyDeserializerFactory( PHPUnit_Framework_TestCase $testCase ) {
+	public static function newLegacyDeserializerFactory( \PHPUnit\Framework\TestCase $testCase ) {
 		return new LegacyDeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()
@@ -26,11 +25,11 @@ class TestFactoryBuilder {
 	}
 
 	/**
-	 * @param PHPUnit_Framework_TestCase $testCase
+	 * @param \PHPUnit\Framework\TestCase $testCase
 	 *
 	 * @return Deserializer
 	 */
-	private static function newFakeDataValueDeserializer( PHPUnit_Framework_TestCase $testCase ) {
+	private static function newFakeDataValueDeserializer( \PHPUnit\Framework\TestCase $testCase ) {
 		$dataValueDeserializer = $testCase->getMockBuilder( Deserializer::class )->getMock();
 
 		$dataValueDeserializer->expects( $testCase->any() )
@@ -41,7 +40,7 @@ class TestFactoryBuilder {
 		return $dataValueDeserializer;
 	}
 
-	public static function newDeserializerFactory( PHPUnit_Framework_TestCase $testCase ) {
+	public static function newDeserializerFactory( \PHPUnit\Framework\TestCase $testCase ) {
 		return new DeserializerFactory(
 			self::newFakeDataValueDeserializer( $testCase ),
 			new BasicEntityIdParser()

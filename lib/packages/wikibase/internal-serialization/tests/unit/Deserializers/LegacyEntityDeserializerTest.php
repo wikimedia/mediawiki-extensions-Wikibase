@@ -50,7 +50,7 @@ class LegacyEntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider invalidSerializationProvider
 	 */
 	public function testGivenInvalidSerialization_exceptionIsThrown( $serialization ) {
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$this->deserializer->deserialize( $serialization );
 	}
 

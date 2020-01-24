@@ -34,7 +34,7 @@
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2.3",
-		"phpunit/phpunit": "~5.7",
+		"phpunit/phpunit": "~8.0",
 		"data-values/common": ">=0.1 <0.5",
 		"data-values/geo": ">=1.0 <4.0",
 		"data-values/number": ">=0.1 <0.10",
