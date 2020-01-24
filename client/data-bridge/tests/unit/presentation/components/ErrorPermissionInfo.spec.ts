@@ -2,8 +2,8 @@ import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.v
 import { shallowMount } from '@vue/test-utils';
 import MessageKeys from '@/definitions/MessageKeys';
 
-const TOGGLE_SELECTOR = '.wb-ui-permission-info-box__body div:nth-child(1)';
-const BODY_SELECTOR = '.wb-ui-permission-info-box__body div:nth-child(2)';
+const TOGGLE_SELECTOR = '.wb-db-error-permission-info__toggle';
+const BODY_SELECTOR = '.wb-db-error-permission-info__body';
 
 describe( 'ErrorPermissionInfo', () => {
 	it( 'matches the snapshot in closed state', () => {
@@ -54,12 +54,12 @@ describe( 'ErrorPermissionInfo', () => {
 			.toBeFalsy();
 		wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
 		expect( wrapper.find( TOGGLE_SELECTOR ).classes() )
-			.toContain( 'wb-ui-permission-info-box__icon--collapsed' );
+			.toContain( 'wb-db-error-permission-info__toggle--open' );
 		expect( wrapper.find( BODY_SELECTOR ).exists() )
 			.toBeTruthy();
 		wrapper.find( TOGGLE_SELECTOR ).trigger( 'click' );
 		expect( wrapper.find( TOGGLE_SELECTOR ).classes() )
-			.toContain( 'wb-ui-permission-info-box__icon--expanded' );
+			.toContain( 'wb-db-error-permission-info__toggle--closed' );
 		expect( wrapper.find( BODY_SELECTOR ).exists() )
 			.toBeFalsy();
 	} );

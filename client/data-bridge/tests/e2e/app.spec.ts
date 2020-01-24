@@ -540,7 +540,7 @@ describe( 'app', () => {
 			expect( ( errorsWrapper as HTMLElement ).innerHTML )
 				.toContain( '⧼wikibase-client-data-bridge-permissions-error⧽' );
 			const permissionErrors = document.querySelectorAll(
-				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
+				'.wb-db-app .wb-db-error .wb-db-error-permission-info',
 			);
 			expect( permissionErrors ).toHaveLength( 1 );
 			expect( permissionErrors[ 0 ].innerHTML )
@@ -588,7 +588,7 @@ describe( 'app', () => {
 			expect( ( errorsWrapper as HTMLElement ).innerHTML )
 				.toContain( '⧼wikibase-client-data-bridge-permissions-error⧽' );
 			const permissionErrors = document.querySelectorAll(
-				'.wb-db-app .wb-db-error .wb-ui-permission-info-box',
+				'.wb-db-app .wb-db-error .wb-db-error-permission-info',
 			);
 			expect( permissionErrors ).toHaveLength( 2 );
 			expect( permissionErrors[ 0 ].innerHTML )

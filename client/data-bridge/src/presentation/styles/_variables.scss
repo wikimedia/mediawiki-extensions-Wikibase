@@ -18,7 +18,6 @@ $margin-center-column-side: 3 * $base-spacing-unit-fixed;
 $binary-input-inter-component-spacing: 2 * $base-spacing-unit-fixed;
 
 $size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
-$size-permissions-icon: px-to-em( 14px );
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;
 

@@ -52,7 +52,7 @@ class DataBridgePage extends Page {
 	}
 
 	static get PERMISSION_ERROR_CONTAINER() {
-		return '.wb-ui-permission-info-box';
+		return '.wb-db-error-permission-info';
 	}
 
 	getDummyTitle() {

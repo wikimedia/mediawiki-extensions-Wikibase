@@ -2,70 +2,48 @@
 
 exports[`ErrorPermissionInfo matches the snapshot in closed state 1`] = `
 <div
-  class="wb-ui-permission-info-box"
+  class="wb-db-error-permission-info"
 >
   <div
-    class="wb-ui-permission-info-box__info__icon"
+    class="wb-db-error-permission-info__header"
   >
-    <div
-      class="wb-ui-permission-info-box__header"
-    >
-      header
-    </div>
+    header
   </div>
    
-  <div
-    class="wb-ui-permission-info-box__body"
+  <a
+    class="wb-db-error-permission-info__toggle wb-db-error-permission-info__toggle--closed"
   >
-    <div
-      class="wb-ui-permission-info-box__icon--expanded"
-    >
-      <a
-        class="wb-ui-permission-info-box__body__title"
-      >
-        
-				⧼wikibase-client-data-bridge-permissions-error-info⧽
-			
-      </a>
-    </div>
-     
-    <!---->
-  </div>
+    
+		⧼wikibase-client-data-bridge-permissions-error-info⧽
+	
+  </a>
+   
+  <!---->
 </div>
 `;
 
 exports[`ErrorPermissionInfo matches the snapshot in opened state 1`] = `
 <div
-  class="wb-ui-permission-info-box"
+  class="wb-db-error-permission-info"
 >
   <div
-    class="wb-ui-permission-info-box__info__icon"
+    class="wb-db-error-permission-info__header"
   >
-    <div
-      class="wb-ui-permission-info-box__header"
-    >
-      header
-    </div>
+    header
   </div>
    
-  <div
-    class="wb-ui-permission-info-box__body"
+  <a
+    class="wb-db-error-permission-info__toggle wb-db-error-permission-info__toggle--open"
   >
-    <div
-      class="wb-ui-permission-info-box__icon--collapsed"
-    >
-      <a
-        class="wb-ui-permission-info-box__body__title"
-      >
-        
-				⧼wikibase-client-data-bridge-permissions-error-info⧽
-			
-      </a>
-    </div>
-     
-    <div>
-      body
-    </div>
+    
+		⧼wikibase-client-data-bridge-permissions-error-info⧽
+	
+  </a>
+   
+  <div
+    class="wb-db-error-permission-info__body"
+  >
+    body
   </div>
 </div>
 `;

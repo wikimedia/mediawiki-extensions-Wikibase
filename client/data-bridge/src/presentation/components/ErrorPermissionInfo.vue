@@ -1,21 +1,21 @@
 <template>
-	<div class="wb-ui-permission-info-box">
-		<div class="wb-ui-permission-info-box__info__icon">
-			<div class="wb-ui-permission-info-box__header" v-html="messageHeader" />
-		</div>
-		<div class="wb-ui-permission-info-box__body">
-			<div
-				:class="[ infoIsExpanded ?
-					'wb-ui-permission-info-box__icon--collapsed' :
-					'wb-ui-permission-info-box__icon--expanded' ]"
-				@click="toggleInfo"
-			>
-				<a class="wb-ui-permission-info-box__body__title">
-					{{ this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ) }}
-				</a>
-			</div>
-			<div v-if="infoIsExpanded" v-html="messageBody" />
-		</div>
+	<div class="wb-db-error-permission-info">
+		<div
+			class="wb-db-error-permission-info__header"
+			v-html="messageHeader"
+		/>
+		<a
+			class="wb-db-error-permission-info__toggle"
+			:class="[ `wb-db-error-permission-info__toggle--${ infoIsExpanded ? 'open' : 'closed' }` ]"
+			@click="toggleInfo"
+		>
+			{{ this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ) }}
+		</a>
+		<div
+			class="wb-db-error-permission-info__body"
+			v-html="messageBody"
+			v-if="infoIsExpanded"
+		/>
 	</div>
 </template>
 
@@ -41,8 +41,19 @@ export default class ErrorPermissionInfo extends Vue {
 	@Prop( { required: false, default: false, type: Boolean } )
 	public expandedByDefault!: boolean;
 
+	/**
+	 * The mark-up to show in the header.
+	 * Careful, this value will not be HTML-escaped for you to allow
+	 * for formatting of the content.
+	 */
 	@Prop( { required: true } )
 	private readonly messageHeader!: string;
+
+	/**
+	 * The mark-up to show in the body.
+	 * Careful, this value will not be HTML-escaped for you to allow
+	 * for formatting of the content.
+	 */
 	@Prop( { required: true } )
 	private readonly messageBody!: string;
 
@@ -57,7 +68,14 @@ export default class ErrorPermissionInfo extends Vue {
 </script>
 
 <style lang="scss">
-.wb-ui-permission-info-box {
+.wb-db-error-permission-info {
+	$line-height: px-to-em( 22px );
+
+	// TODO could use a variant of IconMessageBox
+	padding-left: 2em;
+	background: $svg-info no-repeat top left;
+
+	// &__header has strong in the message, no real hX
 	strong {
 		font-weight: bold;
 	}
@@ -66,81 +84,50 @@ export default class ErrorPermissionInfo extends Vue {
 		font-style: italic;
 	}
 
+	&__header,
+	p,
+	ul {
+		line-height: $line-height;
+		margin-bottom: px-to-em( 8px );
+	}
+
 	ul {
 		list-style-type: disc;
-		list-style-position: inside;
-		padding: 0.5em 0;
+		list-style-position: outside;
+		padding-left: 1.5em;
 
-		li {
-			padding-left: 1em;
+		li:not( :first-child ) {
+			margin-top: px-to-em( 4px );
 		}
 	}
 
-	&__header {
-		margin-left: 2em;
-	}
-
-	&__icon--collapsed,
-	&__icon--expanded {
-		line-height: $size-permissions-icon;
-		box-sizing: border-box;
-		text-align: left;
-		position: relative;
-	}
-
-	&__info__icon {
-		line-height: $size-icon;
-		box-sizing: border-box;
-		text-align: left;
-		position: relative;
-	}
-
-	&__body {
-		padding-left: 2em;
-
-		&__title {
-			margin-left: 1em;
-			margin-top: px-to-em( 8px );
-		}
-	}
-
-	&__info__icon:before {
-		background-image: $svg-info;
+	&__toggle {
+		$background-size: 14px;
+		display: block;
+		margin: px-to-em( 8px ) 0 px-to-em( 16px );
+		padding-left: $background-size + 4px;
+		background-position: top left;
 		background-repeat: no-repeat;
-		background-size: contain;
-		min-width: $min-size-icon;
-		min-height: $min-size-icon;
-		width: $size-icon;
-		height: 100%;
-		top: 0;
-		position: absolute;
-		content: '';
+		background-size: $background-size $background-size;
 	}
 
-	&__icon--collapsed:before {
-		background-image: $svg-collapse;
-		background-repeat: no-repeat;
-		background-size: contain;
-		min-width: $size-permissions-icon;
-		min-height: $size-permissions-icon;
-		width: $size-permissions-icon;
-		height: 100%;
-		top: 0;
-		position: absolute;
-		content: '';
+	a,
+	&__toggle {
+		color: $color-primary;
+		cursor: pointer;
 	}
 
-	&__icon--expanded:before {
+	a:hover,
+	&__toggle:hover {
+		color: $color-primary--hover;
+	}
+
+	&__toggle--closed {
 		background-image: $svg-expand;
-		background-repeat: no-repeat;
-		background-size: contain;
-		min-width: $size-permissions-icon;
-		min-height: $size-permissions-icon;
-		width: $size-permissions-icon;
-		height: 100%;
-		top: 0;
-		position: absolute;
-		content: '';
+	}
+
+	&__toggle--open {
+		background-image: $svg-collapse;
 	}
 }
 </style>

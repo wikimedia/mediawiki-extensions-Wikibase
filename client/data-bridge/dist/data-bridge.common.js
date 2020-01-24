@@ -12755,14 +12755,12 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"83402382-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=5ef4084a&
-var ErrorPermissionInfovue_type_template_id_5ef4084a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-permission-info-box"},[_c('div',{staticClass:"wb-ui-permission-info-box__info__icon"},[_c('div',{staticClass:"wb-ui-permission-info-box__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}})]),_c('div',{staticClass:"wb-ui-permission-info-box__body"},[_c('div',{class:[ _vm.infoIsExpanded ?
-				'wb-ui-permission-info-box__icon--collapsed' :
-				'wb-ui-permission-info-box__icon--expanded' ],on:{"click":_vm.toggleInfo}},[_c('a',{staticClass:"wb-ui-permission-info-box__body__title"},[_vm._v("\n\t\t\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t\t\t")])]),(_vm.infoIsExpanded)?_c('div',{domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])])}
-var ErrorPermissionInfovue_type_template_id_5ef4084a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"83402382-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=a25a5234&
+var ErrorPermissionInfovue_type_template_id_a25a5234_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-error-permission-info"},[_c('div',{staticClass:"wb-db-error-permission-info__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}}),_c('a',{staticClass:"wb-db-error-permission-info__toggle",class:[ ("wb-db-error-permission-info__toggle--" + (_vm.infoIsExpanded ? 'open' : 'closed')) ],on:{"click":_vm.toggleInfo}},[_vm._v("\n\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t")]),(_vm.infoIsExpanded)?_c('div',{staticClass:"wb-db-error-permission-info__body",domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])}
+var ErrorPermissionInfovue_type_template_id_a25a5234_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=5ef4084a&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=a25a5234&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
 
@@ -12840,8 +12838,8 @@ var ErrorPermissionInfovue_type_style_index_0_lang_scss_ = __webpack_require__("
 
 var ErrorPermissionInfo_component = normalizeComponent(
   components_ErrorPermissionInfovue_type_script_lang_ts_,
-  ErrorPermissionInfovue_type_template_id_5ef4084a_render,
-  ErrorPermissionInfovue_type_template_id_5ef4084a_staticRenderFns,
+  ErrorPermissionInfovue_type_template_id_a25a5234_render,
+  ErrorPermissionInfovue_type_template_id_a25a5234_staticRenderFns,
   false,
   null,
   null,
