@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\AliasGroupFallback;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class AliasGroupSerializer implements Serializer {

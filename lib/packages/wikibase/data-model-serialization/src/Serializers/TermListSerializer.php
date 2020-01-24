@@ -10,7 +10,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class TermListSerializer implements Serializer {

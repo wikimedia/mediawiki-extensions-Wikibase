@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 /**
  * @covers Wikibase\DataModel\Deserializers\SnakDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SnakDeserializerTest extends DispatchableDeserializerTest {

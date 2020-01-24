@@ -22,7 +22,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thomas Pellissier Tanon
  */

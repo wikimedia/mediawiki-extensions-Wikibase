@@ -7,6 +7,9 @@
 			<property name="lineLimit" value="107" />
 		</properties>
 	</rule>
+	<rule ref="MediaWiki.Commenting.MissingCovers.MissingCovers">
+		<exclude name="MediaWiki.Commenting.MissingCovers.MissingCovers"/>
+	</rule>
 
 	<file>.</file>
 </ruleset>

@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class StatementListSerializationRoundtripTest extends TestCase {

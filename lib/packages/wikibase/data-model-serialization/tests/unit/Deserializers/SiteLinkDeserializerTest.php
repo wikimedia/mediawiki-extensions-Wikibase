@@ -14,7 +14,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\DataModel\Deserializers\SiteLinkDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkDeserializerTest extends TestCase {

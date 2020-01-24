@@ -12,7 +12,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\SiteLink;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkSerializationRoundtripTest extends TestCase {

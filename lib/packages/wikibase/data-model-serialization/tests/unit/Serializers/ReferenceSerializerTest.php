@@ -13,7 +13,7 @@ use Wikibase\DataModel\Snak\SnakList;
 /**
  * @covers Wikibase\DataModel\Serializers\ReferenceSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class ReferenceSerializerTest extends DispatchableSerializerTest {

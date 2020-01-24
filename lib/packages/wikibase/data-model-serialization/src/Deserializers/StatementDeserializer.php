@@ -17,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class StatementDeserializer implements DispatchableDeserializer {

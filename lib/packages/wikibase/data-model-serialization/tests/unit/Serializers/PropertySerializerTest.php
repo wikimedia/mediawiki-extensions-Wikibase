@@ -15,7 +15,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @covers Wikibase\DataModel\Serializers\PropertySerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

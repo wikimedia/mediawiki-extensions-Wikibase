@@ -12,7 +12,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @covers Wikibase\DataModel\Serializers\StatementListSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class StatementListSerializerTest extends DispatchableSerializerTest {

@@ -12,7 +12,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkDeserializer implements Deserializer {

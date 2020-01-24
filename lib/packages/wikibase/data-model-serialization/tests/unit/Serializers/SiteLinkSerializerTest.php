@@ -9,7 +9,7 @@ use Wikibase\DataModel\SiteLink;
 /**
  * @covers Wikibase\DataModel\Serializers\SiteLinkSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  */
 class SiteLinkSerializerTest extends DispatchableSerializerTest {

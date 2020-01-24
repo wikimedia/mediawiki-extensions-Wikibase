@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @covers Wikibase\DataModel\Serializers\TermListSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class TermListSerializerTest extends TestCase {

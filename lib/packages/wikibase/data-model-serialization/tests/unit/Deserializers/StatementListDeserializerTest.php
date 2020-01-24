@@ -13,7 +13,7 @@ use Wikibase\DataModel\Statement\StatementList;
 /**
  * @covers Wikibase\DataModel\Deserializers\StatementListDeserializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
 class StatementListDeserializerTest extends TestCase {

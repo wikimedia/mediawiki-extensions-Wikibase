@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\SnakList;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Addshore
  */

@@ -7,7 +7,7 @@ use Serializers\DispatchableSerializer;
 use Serializers\Exceptions\UnsupportedObjectException;
 
 /**
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Thiemo Kreuz
  */

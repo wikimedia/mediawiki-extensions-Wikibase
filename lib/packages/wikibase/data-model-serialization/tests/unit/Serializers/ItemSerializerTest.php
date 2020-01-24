@@ -16,7 +16,7 @@ use Wikibase\DataModel\Term\TermList;
 /**
  * @covers Wikibase\DataModel\Serializers\ItemSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Thomas Pellissier Tanon
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  * @author Bene* < benestar.wikimedia@gmail.com >

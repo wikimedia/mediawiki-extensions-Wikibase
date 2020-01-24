@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 /**
  * Package private
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  * @author Bene* < benestar.wikimedia@gmail.com >
  */

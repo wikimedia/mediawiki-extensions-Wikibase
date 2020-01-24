@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\TermFallback;
 /**
  * @covers Wikibase\DataModel\Serializers\TermSerializer
  *
- * @license GPL-2.0+
+ * @license GPL-2.0-or-later
  * @author Addshore
  */
 class TermSerializerTest extends TestCase {
