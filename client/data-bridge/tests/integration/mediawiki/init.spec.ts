@@ -4,7 +4,6 @@ import BatchingApi from '@/data-access/BatchingApi';
 import ClientRouter from '@/data-access/ClientRouter';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
-import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -82,7 +81,7 @@ describe( 'init', () => {
 		);
 		const expectedServices = new ServiceContainer();
 		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
-			( window as MwWindow ).$,
+			window.$,
 			wbRepoConfig.url + wbRepoConfig.articlePath.replace(
 				'$1',
 				'Special:EntityData',
@@ -94,8 +93,8 @@ describe( 'init', () => {
 			editTags,
 		) );
 		expectedServices.set( 'languageInfoRepository', new MwLanguageInfoRepository(
-			( window as MwWindow ).mw.language,
-			( window as MwWindow ).$.uls!.data,
+			window.mw.language,
+			window.$.uls!.data,
 		) );
 		expectedServices.set( 'entityLabelRepository', new ApiEntityLabelRepository(
 			'en',
@@ -105,11 +104,11 @@ describe( 'init', () => {
 			repoApi,
 		) );
 		expectedServices.set( 'messagesRepository', new MwMessagesRepository(
-			( window as MwWindow ).mw.message,
+			window.mw.message,
 		) );
 		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( repoApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
-			new EventTracker( ( window as MwWindow ).mw.track ),
+			new EventTracker( window.mw.track ),
 		) );
 		expectedServices.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 			new ApiPageEditPermissionErrorsRepository( repoApi ),
@@ -117,11 +116,11 @@ describe( 'init', () => {
 		) );
 		expectedServices.set( 'repoRouter', new RepoRouter(
 			wbRepoConfig,
-			( window as MwWindow ).mw.util.wikiUrlencode,
+			window.mw.util.wikiUrlencode,
 			$.param,
 		) );
 		expectedServices.set( 'clientRouter', new ClientRouter(
-			( window as MwWindow ).mw.util.getUrl,
+			window.mw.util.getUrl,
 		) );
 
 		const entityId = 'Q5';

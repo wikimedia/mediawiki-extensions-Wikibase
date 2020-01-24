@@ -48,7 +48,7 @@ export type MwUtilGetUrl = ( pageName: string|null, params?: Record<string, unkn
 
 export type MwUtilWikiUrlencode = ( string: string ) => string;
 
-interface MediaWiki {
+export interface MediaWiki {
 	loader: ResourceLoader;
 	/** @see https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Message */
 	message: MwMessages;
@@ -142,22 +142,11 @@ interface JQUls {
 	data: UlsData;
 }
 
-interface MWJQueryExtension {
+export interface MWJQueryExtension {
 	uls?: JQUls;
 }
 
-declare global {
-	interface Window {
-		mw: MediaWiki;
-		OO: MwWindowOO;
-		$: JQueryStatic & MWJQueryExtension;
-	}
-}
-
 interface MwWindow extends Window {
-	mw: MediaWiki;
-	OO: MwWindowOO;
-	$: JQueryStatic&MWJQueryExtension;
 }
 
 export default MwWindow;

@@ -17,7 +17,7 @@ function stopNativeClickHandling( event: Event ): void {
 }
 
 export default async (): Promise<void> => {
-	const mwWindow = window as MwWindow,
+	const mwWindow: MwWindow = window,
 		dataBridgeConfig = mwWindow.mw.config.get( 'wbDataBridgeConfig' );
 	if ( dataBridgeConfig.hrefRegExp === null ) {
 		mwWindow.mw.log.warn(

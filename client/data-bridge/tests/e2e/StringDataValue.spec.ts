@@ -2,7 +2,6 @@ import Vue from 'vue';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
-import MwWindow from '@/@types/mediawiki/MwWindow';
 import createServices from '@/services/createServices';
 import {
 	addDataBridgeConfigResponse,
@@ -79,7 +78,7 @@ function prepareTestEnv( options: {
 			),
 		} ),
 	);
-	( window as MwWindow ).$ = {
+	window.$ = {
 		get() {
 			return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
 		},
@@ -89,13 +88,13 @@ function prepareTestEnv( options: {
 			},
 		},
 	} as any;
-	( window as MwWindow ).mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
+	window.mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
 		return {
 			text: jest.fn(),
 			parse: () => `⧼${key}⧽`,
 		};
 	} );
-	( window as MwWindow ).mw.language = {
+	window.mw.language = {
 		bcp47: jest.fn( ( x: string ) => x ),
 	};
 
@@ -139,7 +138,7 @@ describe( 'string data value', () => {
 				DEFAULT_ENTITY,
 			);
 
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
 			} );
@@ -182,7 +181,7 @@ describe( 'string data value', () => {
 				},
 				DEFAULT_ENTITY,
 			);
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
 			} );
@@ -230,7 +229,7 @@ describe( 'string data value', () => {
 				),
 			);
 
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get,
 			} );
@@ -265,7 +264,7 @@ describe( 'string data value', () => {
 
 			const testLink = prepareTestEnv( { propertyId } );
 
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getMockFullRepoBatchedQueryResponse(
 					{
@@ -278,7 +277,7 @@ describe( 'string data value', () => {
 				),
 			} );
 
-			( window as MwWindow ).$.uls!.data.getDir = jest.fn( ( x: string ) => {
+			window.$.uls!.data.getDir = jest.fn( ( x: string ) => {
 				return x === 'he' ? 'rtl' : 'ltr';
 			} );
 
@@ -290,7 +289,7 @@ describe( 'string data value', () => {
 
 			expect( label ).not.toBeNull();
 			expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( 'rtl' );
-			expect( ( window as MwWindow ).$.uls!.data.getDir ).toHaveBeenCalledWith( language );
+			expect( window.$.uls!.data.getDir ).toHaveBeenCalledWith( language );
 		} );
 
 		it( 'standardized language code', async () => {
@@ -300,7 +299,7 @@ describe( 'string data value', () => {
 
 			const testLink = prepareTestEnv( { propertyId } );
 
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getMockFullRepoBatchedQueryResponse(
 					{
@@ -313,7 +312,7 @@ describe( 'string data value', () => {
 				),
 			} );
 
-			( window as MwWindow ).mw.language = {
+			window.mw.language = {
 				bcp47: jest.fn( ( x: string ) => {
 					return x === 'de-formal' ? 'de' : 'en';
 				} ),
@@ -328,7 +327,7 @@ describe( 'string data value', () => {
 			expect( label ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
 			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'de' );
-			expect( ( window as MwWindow ).mw.language.bcp47 ).toHaveBeenCalledWith( language );
+			expect( window.mw.language.bcp47 ).toHaveBeenCalledWith( language );
 		} );
 	} );
 
@@ -432,7 +431,7 @@ describe( 'string data value', () => {
 			const maxLength = 666;
 			const testLink = prepareTestEnv( {} );
 
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId: DEFAULT_PROPERTY },
 					DEFAULT_ENTITY,

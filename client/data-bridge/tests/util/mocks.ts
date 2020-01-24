@@ -1,4 +1,4 @@
-import MwWindow, {
+import {
 	MwApi,
 	MwApiConstructor,
 	MwForeignApiConstructor,
@@ -114,7 +114,7 @@ export function mockMwEnv(
 	ForeignApi: MwForeignApiConstructor = mockMwForeignApiConstructor( {} ),
 	Api: MwApiConstructor = mockMwApiConstructor( {} ),
 ): void {
-	( window as MwWindow ).mw = {
+	window.mw = {
 		loader: {
 			using,
 		},
@@ -136,8 +136,8 @@ export function mockMwEnv(
 			wikiUrlencode: jest.fn( ( title ) => title ),
 		},
 	};
-	( window as MwWindow ).$ = new ( jest.fn() )();
-	( window as MwWindow ).$.uls = {
+	window.$ = new ( jest.fn() )();
+	window.$.uls = {
 		data: {
 			getDir: jest.fn(),
 		},

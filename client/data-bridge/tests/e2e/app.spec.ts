@@ -2,7 +2,6 @@ import Vue from 'vue';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
-import MwWindow from '@/@types/mediawiki/MwWindow';
 import createServices from '@/services/createServices';
 import {
 	addPageInfoNoEditRestrictionsResponse,
@@ -85,7 +84,7 @@ function prepareTestEnv( options: {
 			),
 		} ),
 	);
-	( window as MwWindow ).$ = {
+	window.$ = {
 		get() {
 			return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
 		},
@@ -98,13 +97,13 @@ function prepareTestEnv( options: {
 			return new URLSearchParams( params as Record<string, string> ).toString();
 		},
 	} as any;
-	( window as MwWindow ).mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
+	window.mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
 		return {
 			text: jest.fn(),
 			parse: () => `⧼${key}⧽`,
 		};
 	} );
-	( window as MwWindow ).mw.language = {
+	window.mw.language = {
 		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
 
@@ -122,7 +121,7 @@ describe( 'app', () => {
 	describe( 'app states', () => {
 		it( 'shows loading when app is launched', async () => {
 			const testLink = prepareTestEnv( {} );
-			( window as MwWindow ).$.get = function () {
+			window.$.get = function () {
 				return new Promise( () => { /* never resolves */ } );
 			} as any;
 
@@ -234,7 +233,7 @@ describe( 'app', () => {
 		} );
 
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId },
@@ -242,7 +241,7 @@ describe( 'app', () => {
 				),
 				postWithEditToken,
 			} );
-			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
+			window.$.get = () => Promise.resolve( testSet ) as any;
 
 			await init();
 
@@ -270,7 +269,7 @@ describe( 'app', () => {
 
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
-			( window as MwWindow ).mw.config = mockMwConfig( {
+			window.mw.config = mockMwConfig( {
 				wgUserName: assertuser,
 				editTags: tags,
 			} );
@@ -354,7 +353,7 @@ describe( 'app', () => {
 
 		it( 'has the save button initially disabled', async () => {
 			const testLink = prepareTestEnv( { propertyId } );
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId },
@@ -363,7 +362,7 @@ describe( 'app', () => {
 				postWithEditToken,
 			} );
 
-			( window as MwWindow ).$.get = () => Promise.resolve( testSet ) as any;
+			window.$.get = () => Promise.resolve( testSet ) as any;
 
 			await init();
 
@@ -446,14 +445,14 @@ describe( 'app', () => {
 		const propertyId = 'P4711';
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
-		( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+		window.mw.ForeignApi = mockMwForeignApiConstructor( {
 			get: getMockFullRepoBatchedQueryResponse(
 				{ propertyId, propertyLabel: 'something', dataType },
 				DEFAULT_ENTITY,
 			),
 		} );
 		const mockTracker = jest.fn();
-		( window as MwWindow ).mw.track = mockTracker;
+		window.mw.track = mockTracker;
 
 		await init();
 
@@ -512,7 +511,7 @@ describe( 'app', () => {
 
 		it( 'shows reason if item semiprotected on repo', async () => {
 			const testLink = prepareTestEnv( {} );
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				get: jest.fn().mockResolvedValue(
 					addPropertyLabelResponse(
 						{
@@ -550,7 +549,7 @@ describe( 'app', () => {
 
 		it( 'enumerates reasons if item semiprotected on repo & article cascadeprotected on client', async () => {
 			const testLink = prepareTestEnv( {} );
-			( window as MwWindow ).mw.Api = mockMwApiConstructor( {
+			window.mw.Api = mockMwApiConstructor( {
 				get: jest.fn().mockResolvedValue(
 					addPageInfoCascadeprotectedResponse(
 						'Client_page',
@@ -560,7 +559,7 @@ describe( 'app', () => {
 					),
 				),
 			} );
-			( window as MwWindow ).mw.ForeignApi = mockMwForeignApiConstructor( {
+			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				get: jest.fn().mockResolvedValue(
 					addPropertyLabelResponse(
 						{
