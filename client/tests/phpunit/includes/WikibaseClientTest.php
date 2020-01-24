@@ -299,9 +299,46 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	public function testGetRecentChangeFactory() {
 		$wikibaseClient = $this->getWikibaseClient();
 		$settings = $wikibaseClient->getSettings();
+		$settings->setSetting( 'useEntitySourceBasedFederation', false );
 		$settings->setSetting( 'repoDatabase', 'repo' );
 		$settings->setSetting( 'repoConceptBaseUri', '' );
 		$settings->setSetting( 'entityNamespaces', [] );
+
+		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
+		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );
+
+		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
+		$this->assertStringStartsWith(
+			'repointerwiki>',
+			$recentChangeFactory->externalUsernames->addPrefix( 'TestUser' )
+		);
+	}
+
+	public function testGetRecentChangeFactory_entitySourceBasedFederation() {
+		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+		$settings->setSetting( 'localRepoEntitySourceName', 'localrepo' );
+
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$wikibaseClient = new WikibaseClient(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			$this->getSiteLookup(),
+			new EntitySourceDefinitions(
+				[ new EntitySource(
+					'localrepo',
+					'repo',
+					[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					'repo'
+				) ],
+				$entityTypeDefinitions
+			)
+		);
 
 		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
 		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );

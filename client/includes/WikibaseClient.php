@@ -9,6 +9,7 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\Sql\PagePropsEntityIdLookup;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
@@ -1393,7 +1394,7 @@ final class WikibaseClient {
 	 */
 	public function getRecentChangeFactory() {
 		$repoSite = $this->siteLookup->getSite(
-			$this->getRepositoryDefinitions()->getDatabaseNames()['']
+			$this->getDatabaseDomainNameOfLocalRepo()
 		);
 		$interwikiPrefixes = ( $repoSite !== null ) ? $repoSite->getInterwikiIds() : [];
 		$interwikiPrefix = ( $interwikiPrefixes !== [] ) ? $interwikiPrefixes[0] : null;
@@ -1409,6 +1410,33 @@ final class WikibaseClient {
 			( $interwikiPrefix !== null ) ?
 				new ExternalUserNames( $interwikiPrefix, false ) : null
 		);
+	}
+
+	/**
+	 * @return string|false
+	 */
+	private function getDatabaseDomainNameOfLocalRepo() {
+		$dataAccessSettings = $this->getDataAccessSettings();
+
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			return $this->getEntitySourceOfLocalRepo()->getDatabaseName();
+		}
+
+		return $this->getRepositoryDefinitions()->getDatabaseNames()[''];
+	}
+
+	private function getEntitySourceOfLocalRepo(): EntitySource {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$localRepoSourceName = $this->settings->getSetting( 'localRepoEntitySourceName' );
+			$sources = $this->entitySourceDefinitions->getSources();
+			foreach ( $sources as $source ) {
+				if ( $source->getSourceName() === $localRepoSourceName ) {
+					return $source;
+				}
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 	public function getWikibaseContentLanguages() {
