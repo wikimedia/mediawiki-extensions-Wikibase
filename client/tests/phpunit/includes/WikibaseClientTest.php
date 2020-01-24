@@ -148,7 +148,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
 			$this->getSiteLookup(),
-			new EntitySourceDefinitions( [], $entityTypeDefinitions )
+			$this->getEntitySourceDefinitions()
 		);
 
 		$handler = $wikibaseClient->getLangLinkHandler();
@@ -471,6 +471,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	private function getWikibaseClient( SettingsArray $settings = null ) {
 		if ( $settings === null ) {
 			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+			$settings->setSetting( 'localRepoEntitySourceName', 'test' );
 		}
 		return new WikibaseClient(
 			new SettingsArray( $settings->getArrayCopy() ),
