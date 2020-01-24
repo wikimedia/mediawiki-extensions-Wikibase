@@ -27,7 +27,7 @@ export default async (): Promise<void> => {
 			() => {
 				const helpLink = mwWindow.mw.util.getUrl( 'Special:MyLanguage/Help:Sources' );
 				const feedbackLink = mwWindow.mw.util.getUrl( 'Project:Mismatched reference notification input' );
-				app.launch( hookHandler, helpLink, feedbackLink );
+				app.launch( hookHandler, helpLink, feedbackLink, mwWindow.mw.track );
 			},
 		);
 	}

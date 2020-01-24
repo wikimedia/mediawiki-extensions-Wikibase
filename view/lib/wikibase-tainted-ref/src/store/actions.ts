@@ -23,7 +23,7 @@ import {
 } from '@/store/mutationTypes';
 import { TrackFunction } from '@/store/TrackFunction';
 
-export default function actions( _metricTracker: TrackFunction ): ActionTree<Application, Application> {
+export default function actions( metricTracker: TrackFunction ): ActionTree<Application, Application> {
 	return {
 		[ STORE_INIT ](
 			context: ActionContext<Application, Application>,
@@ -52,6 +52,9 @@ export default function actions( _metricTracker: TrackFunction ): ActionTree<App
 		): void {
 			context.commit( SET_STATEMENT_EDIT_TRUE, payload );
 			context.commit( SET_POPPER_HIDDEN, payload );
+			if ( context.getters.statementsTaintedState( payload ) ) {
+				metricTracker( 'counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon', 1 );
+			}
 		},
 		[ STOP_EDIT ](
 			context: ActionContext<Application, Application>,

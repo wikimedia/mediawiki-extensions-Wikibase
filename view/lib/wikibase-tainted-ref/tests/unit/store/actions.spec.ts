@@ -20,6 +20,13 @@ import {
 	START_EDIT, STOP_EDIT,
 } from '@/store/actionTypes';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
+import { ActionTree } from 'vuex';
+import Application from '@/store/Application';
+import { TrackFunction } from '@/store/TrackFunction';
+
+function getActionTree( mockTrackFunction: TrackFunction ): ActionTree<Application, Application> {
+	return ( actions )( mockTrackFunction );
+}
 
 describe( 'actions', () => {
 	it( `commits to ${SET_ALL_UNTAINTED}, ${SET_ALL_POPPERS_HIDDEN} and ${SET_ALL_EDIT_MODE_FALSE}`, async () => {
@@ -42,10 +49,23 @@ describe( 'actions', () => {
 		expect( context.commit ).toBeCalledWith( SET_TAINTED, 'blah' );
 	} );
 	it( `commits to ${SET_STATEMENT_EDIT_TRUE} and ${SET_POPPER_HIDDEN}`, async () => {
-		const context = newMockStore( {} );
-		await ( actions as Function )()[ START_EDIT ]( context, 'blah' );
-		expect( context.commit ).toBeCalledWith( SET_STATEMENT_EDIT_TRUE, 'blah' );
+		const context = newMockStore( {
+			getters: { statementsTaintedState: ()=> ()=> true },
+		} );
+		const mockTrackFunction = jest.fn();
+		await ( getActionTree( mockTrackFunction ) as any )[ START_EDIT ]( context, 'blah' );
 		expect( context.commit ).toBeCalledWith( SET_POPPER_HIDDEN, 'blah' );
+	} );
+	it( 'should track a metric for edits made on tainted statements', async () => {
+		const context = newMockStore( {
+			getters: { statementsTaintedState: ()=> ()=> true },
+		} );
+		const mockTrackFunction = jest.fn();
+		await ( getActionTree( mockTrackFunction ) as any )[ START_EDIT ]( context, 'blah' );
+		expect( mockTrackFunction ).toHaveBeenCalledWith(
+			'counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon',
+			1,
+		);
 	} );
 	it( `commits to ${SET_STATEMENT_EDIT_FALSE}`, async () => {
 		const context = newMockStore( {} );
