@@ -24,7 +24,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": ">=7.0",
+		"php": ">=7.2",
 		"wikibase/data-model": "~9.0|~8.0|~7.0|~6.3",
 		"data-values/data-values": "~2.0|~1.0",
 		"diff/diff": "~3.2",
