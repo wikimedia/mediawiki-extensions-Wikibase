@@ -1,6 +1,6 @@
 # Wikibase InternalSerialization release notes
 
-### 2.10.0 (development)
+### 2.10.0 (2020-01-24)
 
 * `EntityDeserializer` now also implements `DispatchableDeserializer`
 * Raised minimum PHP version to 7.0 (^7.0)
