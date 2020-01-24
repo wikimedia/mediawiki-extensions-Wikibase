@@ -578,6 +578,13 @@ This site's site group (e.g. `'wikipedia'` or `'wikivoyage'`) as used in the sit
 The setting is optional and falls back to site store lookup.
 For performance reasons, it may be desirable to set this explicitly to avoid lookups.
 
+#### localRepoEntitySourceName
+Name of the entity source name of the "local" repo the client uses data from.
+
+Should be the name of the entity source defined in [entitySources] setting.
+
+DEFAULT: ```local```
+
 ### Repository
 
 #### repoSiteId
