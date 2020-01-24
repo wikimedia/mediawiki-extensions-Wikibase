@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 9.3.0 (development)
+
+* Raised minimum PHP version to 7.0 (^7.0)
+
 ## Version 9.2.0 (2020-01-24)
 
 * `TermList` now throws `InvalidArgumentException` when given non-iterable rather than failing silently
