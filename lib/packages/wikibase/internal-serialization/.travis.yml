@@ -6,7 +6,7 @@ php:
 
 sudo: false
 
-install: travis_retry composer require "wikibase/data-model=@dev" --prefer-source
+install: travis_retry composer install
 
 script: composer ci
 
