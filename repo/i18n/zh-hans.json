@@ -34,7 +34,8 @@
 			"神樂坂秀吉",
 			"Viztor",
 			"予弦",
-			"A Retired User"
+			"A Retired User",
+			"VulpesVulpes825"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -425,5 +426,6 @@
 	"wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
 	"wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
 	"wikibase-shortcopyrightwarning-heading": "授权条款",
-	"wikibase-entity-save-error-heading": "出错了"
+	"wikibase-entity-save-error-heading": "出错了",
+	"wikibase-tainted-ref-popper-remove-warning": "移除警告"
 }
