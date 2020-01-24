@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class DispatchingEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class DispatchingEntityIdParserTest extends \PHPUnit\Framework\TestCase {
 
 	private function getBasicParser() {
 		return new DispatchingEntityIdParser( BasicEntityIdParser::getBuilders() );

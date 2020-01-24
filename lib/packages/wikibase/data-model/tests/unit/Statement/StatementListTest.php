@@ -24,7 +24,7 @@ use Wikibase\DataModel\Statement\StatementList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class StatementListTest extends \PHPUnit_Framework_TestCase {
+class StatementListTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param string $propertyId

@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -29,7 +28,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Michał Łazowik
  */
-class ItemTest extends PHPUnit_Framework_TestCase {
+class ItemTest extends \PHPUnit\Framework\TestCase {
 
 	private function getNewEmpty() {
 		return new Item();

@@ -16,7 +16,7 @@ class ReferencedStatementFilter implements StatementFilter {
 	/**
 	 * @since 4.4
 	 */
-	const FILTER_TYPE = 'referenced';
+	public const FILTER_TYPE = 'referenced';
 
 	/**
 	 * @param Statement $statement

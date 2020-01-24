@@ -21,7 +21,7 @@ class StatementGuid implements Comparable {
 	/**
 	 * The separator for the prefix and suffix of the GUID.
 	 */
-	const SEPARATOR = '$';
+	public const SEPARATOR = '$';
 
 	/**
 	 * @var EntityId

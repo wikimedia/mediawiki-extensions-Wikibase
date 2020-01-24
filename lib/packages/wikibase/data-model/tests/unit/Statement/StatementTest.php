@@ -23,7 +23,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementTest extends \PHPUnit_Framework_TestCase {
+class StatementTest extends \PHPUnit\Framework\TestCase {
 
 	public function testMinimalConstructor() {
 		$mainSnak = new PropertyNoValueSnak( 1 );
@@ -36,8 +36,8 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testConstructorWithValidArguments(
 		Snak $mainSnak,
-		SnakList $qualifiers = null,
-		ReferenceList $references = null,
+		?SnakList $qualifiers,
+		?ReferenceList $references,
 		$guid
 	) {
 		$statement = new Statement( $mainSnak, $qualifiers, $references, $guid );
@@ -119,17 +119,17 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidGuidProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidGuid_constructorThrowsException( $guid ) {
+		$this->expectException( InvalidArgumentException::class );
 		new Statement( new PropertyNoValueSnak( 1 ), null, null, $guid );
 	}
 
 	/**
 	 * @dataProvider invalidGuidProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidGuid_setGuidThrowsException( $guid ) {
+		$this->expectException( InvalidArgumentException::class );
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( $guid );
 	}

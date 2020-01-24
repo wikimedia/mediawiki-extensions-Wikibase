@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use InvalidArgumentException;
 
@@ -16,7 +15,7 @@ use InvalidArgumentException;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdTest extends PHPUnit_Framework_TestCase {
+class ItemIdTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider idSerializationProvider

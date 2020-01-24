@@ -6,7 +6,6 @@ use Comparable;
 use DataValues\StringValue;
 use Hashable;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Addshore
  * @author Thiemo Kreuz
  */
-class SnakListTest extends PHPUnit_Framework_TestCase {
+class SnakListTest extends \PHPUnit\Framework\TestCase {
 
 	public function elementInstancesProvider() {
 		$id42 = new PropertyId( 'P42' );
@@ -58,9 +57,9 @@ class SnakListTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $input ) {
+		$this->expectException( InvalidArgumentException::class );
 		new SnakList( $input );
 	}
 

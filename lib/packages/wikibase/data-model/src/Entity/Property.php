@@ -23,10 +23,17 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Property implements StatementListProvidingEntity, FingerprintProvider, StatementListHolder,
-	LabelsProvider, DescriptionsProvider, AliasesProvider, ClearableEntity {
+class Property implements
+	StatementListProvidingEntity,
+	FingerprintProvider,
+	StatementListHolder,
+	LabelsProvider,
+	DescriptionsProvider,
+	AliasesProvider,
+	ClearableEntity
+{
 
-	const ENTITY_TYPE = 'property';
+	public const ENTITY_TYPE = 'property';
 
 	/**
 	 * @var PropertyId|null
@@ -58,8 +65,8 @@ class Property implements StatementListProvidingEntity, FingerprintProvider, Sta
 	 * @param StatementList|null $statements Since 1.1
 	 */
 	public function __construct(
-		PropertyId $id = null,
-		Fingerprint $fingerprint = null,
+		?PropertyId $id,
+		?Fingerprint $fingerprint,
 		$dataTypeId,
 		StatementList $statements = null
 	) {

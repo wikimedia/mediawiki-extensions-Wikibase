@@ -15,7 +15,7 @@ use Wikibase\DataModel\SiteLinkList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SiteLinkListTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkListTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider notSiteLinksProvider

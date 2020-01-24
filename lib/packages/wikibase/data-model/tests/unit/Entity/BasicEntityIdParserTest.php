@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class BasicEntityIdParserTest extends \PHPUnit_Framework_TestCase {
+class BasicEntityIdParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider entityIdProvider

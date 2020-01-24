@@ -6,7 +6,6 @@ use ArrayObject;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use RuntimeException;
@@ -30,7 +29,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-class ByPropertyIdArrayTest extends PHPUnit_Framework_TestCase {
+class ByPropertyIdArrayTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNull_constructorAssumesEmptyArray() {
 		$indexedArray = new ByPropertyIdArray( null );

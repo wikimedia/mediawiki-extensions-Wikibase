@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Tests;
 
 use Hashable;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Reference;
@@ -23,7 +22,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class ReferenceListTest extends PHPUnit_Framework_TestCase {
+class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 
 	public function instanceProvider() {
 		return [
@@ -59,9 +58,9 @@ class ReferenceListTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $input ) {
+		$this->expectException( InvalidArgumentException::class );
 		new ReferenceList( $input );
 	}
 

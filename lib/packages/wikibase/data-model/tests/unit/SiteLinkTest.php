@@ -19,7 +19,7 @@ use Wikibase\DataModel\SiteLink;
  * @author Michał Łazowik
  * @author Thiemo Kreuz
  */
-class SiteLinkTest extends \PHPUnit_Framework_TestCase {
+class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCanConstruct() {
 		new SiteLink( 'enwiki', 'Wikidata' );
@@ -46,9 +46,9 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidStringIdentifierProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithNonStringSiteId( $invalidSiteId ) {
+		$this->expectException( InvalidArgumentException::class );
 		new SiteLink( $invalidSiteId, 'Wikidata' );
 	}
 
@@ -82,9 +82,9 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidStringIdentifierProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithNonStringPageName( $invalidPageName ) {
+		$this->expectException( InvalidArgumentException::class );
 		new SiteLink( 'enwiki', $invalidPageName );
 	}
 
@@ -135,9 +135,9 @@ class SiteLinkTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidBadgesProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testCannotConstructWithInvalidBadges( $invalidBadges ) {
+		$this->expectException( InvalidArgumentException::class );
 		new SiteLink( 'enwiki', 'Wikidata', $invalidBadges );
 	}
 

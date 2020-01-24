@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class StatementGuidTest extends \PHPUnit_Framework_TestCase {
+class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider provideConstructionData

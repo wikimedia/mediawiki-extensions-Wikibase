@@ -14,7 +14,7 @@ class ItemId extends EntityId implements Int32EntityId {
 	/**
 	 * @since 0.5
 	 */
-	const PATTERN = '/^Q[1-9]\d{0,9}\z/i';
+	public const PATTERN = '/^Q[1-9]\d{0,9}\z/i';
 
 	/**
 	 * @param string $idSerialization

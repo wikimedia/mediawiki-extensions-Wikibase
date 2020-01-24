@@ -5,7 +5,6 @@ namespace Wikibase\DataModel\Tests\Snak;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\DerivedPropertyValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -20,7 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
+class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider validConstructorArgumentsProvider
@@ -52,13 +51,13 @@ class DerivedPropertyValueSnakTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException(
 		$propertyId,
 		DataValue $dataValue,
 		array $derivedDataValues
 	) {
+		$this->expectException( InvalidArgumentException::class );
 		new DerivedPropertyValueSnak( $propertyId, $dataValue, $derivedDataValues );
 	}
 

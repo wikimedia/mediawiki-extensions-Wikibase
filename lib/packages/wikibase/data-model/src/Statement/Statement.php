@@ -29,9 +29,9 @@ class Statement implements Hashable, Comparable, PropertyIdProvider {
 	 *
 	 * @since 2.0
 	 */
-	const RANK_PREFERRED = 2;
-	const RANK_NORMAL = 1;
-	const RANK_DEPRECATED = 0;
+	public const RANK_PREFERRED = 2;
+	public const RANK_NORMAL = 1;
+	public const RANK_DEPRECATED = 0;
 
 	/**
 	 * @var string|null

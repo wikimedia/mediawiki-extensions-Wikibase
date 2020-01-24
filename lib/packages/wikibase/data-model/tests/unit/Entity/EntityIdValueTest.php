@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use DataValues\IllegalValueException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Fixtures\CustomEntityId;
  * @author Thiemo Kreuz
  * @author Daniel Kinzler
  */
-class EntityIdValueTest extends PHPUnit_Framework_TestCase {
+class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCanConstruct() {
 		$entityId = new ItemId( 'Q123' );

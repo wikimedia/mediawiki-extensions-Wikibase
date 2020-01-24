@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferenceTest extends \PHPUnit_Framework_TestCase {
+class ReferenceTest extends \PHPUnit\Framework\TestCase {
 
 	public function snakListProvider() {
 		$snakLists = [];
@@ -246,9 +246,9 @@ class ReferenceTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $snaks ) {
+		$this->expectException( InvalidArgumentException::class );
 		new Reference( $snaks );
 	}
 

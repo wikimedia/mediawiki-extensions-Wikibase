@@ -15,7 +15,7 @@ use Wikibase\DataModel\Statement\StatementByGuidMap;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Kai Nissen < kai.nissen@wikimedia.de >
  */
-class StatementByGuidMapTest extends \PHPUnit_Framework_TestCase {
+class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNotPresentGuid_hasStatementWithGuidReturnsFalse() {
 		$statements = new StatementByGuidMap();

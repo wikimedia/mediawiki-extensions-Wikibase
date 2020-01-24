@@ -14,7 +14,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermListTest extends \PHPUnit_Framework_TestCase {
+class TermListTest extends \PHPUnit\Framework\TestCase {
 
 	public function testIsEmpty() {
 		$list = new TermList();

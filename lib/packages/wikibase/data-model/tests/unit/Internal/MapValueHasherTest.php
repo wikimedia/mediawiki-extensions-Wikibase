@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapValueHasherTest extends \PHPUnit_Framework_TestCase {
+class MapValueHasherTest extends \PHPUnit\Framework\TestCase {
 
 	public function testCanConstruct() {
 		new MapValueHasher( true );

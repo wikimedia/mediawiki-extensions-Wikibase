@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemIdSet;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ItemIdSetTest extends \PHPUnit_Framework_TestCase {
+class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetIterator() {
 		$set = new ItemIdSet();

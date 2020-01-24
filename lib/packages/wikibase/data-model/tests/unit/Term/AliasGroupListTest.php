@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Tests\Term;
 
 use InvalidArgumentException;
 use OutOfBoundsException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 
@@ -15,7 +14,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class AliasGroupListTest extends PHPUnit_Framework_TestCase {
+class AliasGroupListTest extends \PHPUnit\Framework\TestCase {
 
 	public function testIsEmpty() {
 		$list = new AliasGroupList();

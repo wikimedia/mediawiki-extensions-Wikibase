@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Entity;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -25,7 +24,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyTest extends PHPUnit_Framework_TestCase {
+class PropertyTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @return Property
@@ -57,10 +56,8 @@ class PropertyTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals( new StatementList(), $property->getStatements() );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testGivenInvalidType_ConstructorThrowsException() {
+		$this->expectException( InvalidArgumentException::class );
 		new Property( null, null, null );
 	}
 

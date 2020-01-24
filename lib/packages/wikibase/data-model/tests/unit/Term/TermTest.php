@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\TermFallback;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class TermTest extends \PHPUnit_Framework_TestCase {
+class TermTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructorSetsFields() {
 		$term = new Term( 'foo', 'bar' );
@@ -22,9 +22,9 @@ class TermTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidLanguageCode_constructorThrowsException( $languageCode ) {
+		$this->expectException( InvalidArgumentException::class );
 		new Term( $languageCode, 'bar' );
 	}
 

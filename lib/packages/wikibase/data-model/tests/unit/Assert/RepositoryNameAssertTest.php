@@ -10,7 +10,7 @@ use Wikimedia\Assert\ParameterAssertionException;
  *
  * @license GPL-2.0-or-later
  */
-class RepositoryNameAssertTest extends \PHPUnit_Framework_TestCase {
+class RepositoryNameAssertTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideInvalidRepositoryNames() {
 		return [

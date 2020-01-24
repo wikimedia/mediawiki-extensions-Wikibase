@@ -16,7 +16,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityRedirectTest extends \PHPUnit_Framework_TestCase {
+class EntityRedirectTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstruction() {
 		$entityId = new ItemId( 'Q123' );

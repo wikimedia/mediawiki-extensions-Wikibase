@@ -26,10 +26,17 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class Item implements StatementListProvidingEntity, FingerprintProvider, StatementListHolder,
-	LabelsProvider, DescriptionsProvider, AliasesProvider, ClearableEntity {
+class Item implements
+	StatementListProvidingEntity,
+	FingerprintProvider,
+	StatementListHolder,
+	LabelsProvider,
+	DescriptionsProvider,
+	AliasesProvider,
+	ClearableEntity
+{
 
-	const ENTITY_TYPE = 'item';
+	public const ENTITY_TYPE = 'item';
 
 	/**
 	 * @var ItemId|null

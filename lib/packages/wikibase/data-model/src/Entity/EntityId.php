@@ -30,7 +30,7 @@ abstract class EntityId implements Comparable, Serializable {
 	 */
 	protected $localPart;
 
-	const PATTERN = '/^:?(\w+:)*[^:]+\z/';
+	public const PATTERN = '/^:?(\w+:)*[^:]+\z/';
 
 	/**
 	 * @since 6.2

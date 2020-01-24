@@ -17,7 +17,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ReferencedStatementFilterTest extends \PHPUnit_Framework_TestCase {
+class ReferencedStatementFilterTest extends \PHPUnit\Framework\TestCase {
 
 	public function testReturnsFalseForMinimalStatement() {
 		$filter = new ReferencedStatementFilter();

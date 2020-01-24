@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\AliasGroupFallback;
  * @license GPL-2.0-or-later
  * @author Jan Zerebecki < jan.wikimedia@zerebecki.de >
  */
-class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
+class AliasGroupFallbackTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructorSetsValues() {
 		$language = 'en-real';
@@ -41,9 +41,9 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidActualLanguageCode_constructorThrowsException( $languageCode ) {
+		$this->expectException( InvalidArgumentException::class );
 		new AliasGroupFallback( 'en-real', [], $languageCode, 'en-source' );
 	}
 
@@ -57,9 +57,9 @@ class AliasGroupFallbackTest extends \PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidSourceLanguageCodeProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidSourceLanguageCode_constructorThrowsException( $languageCode ) {
+		$this->expectException( InvalidArgumentException::class );
 		new AliasGroupFallback( 'en-real', [], 'en-actual', $languageCode );
 	}
 

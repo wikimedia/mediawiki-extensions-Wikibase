@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\PropertyId;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class EntityIdTest extends \PHPUnit_Framework_TestCase {
+class EntityIdTest extends \PHPUnit\Framework\TestCase {
 
 	public function instanceProvider() {
 		$ids = [];

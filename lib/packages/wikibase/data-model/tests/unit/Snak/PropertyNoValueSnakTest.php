@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Tests\Snak;
 
 use InvalidArgumentException;
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -21,7 +20,7 @@ use Wikibase\DataModel\Snak\Snak;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
+class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider validConstructorArgumentsProvider
@@ -41,9 +40,9 @@ class PropertyNoValueSnakTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @dataProvider invalidConstructorArgumentsProvider
-	 * @expectedException InvalidArgumentException
 	 */
 	public function testGivenInvalidConstructorArguments_constructorThrowsException( $propertyId ) {
+		$this->expectException( InvalidArgumentException::class );
 		new PropertyNoValueSnak( $propertyId );
 	}
 

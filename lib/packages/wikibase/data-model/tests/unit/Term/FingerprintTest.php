@@ -21,7 +21,7 @@ use Wikibase\DataModel\Term\TermList;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class FingerprintTest extends \PHPUnit_Framework_TestCase {
+class FingerprintTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var TermList
@@ -43,7 +43,7 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $fingerprint;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->labels = $this->createMock( TermList::class );
 		$this->descriptions = $this->createMock( TermList::class );
 		$this->aliasGroups = $this->createMock( AliasGroupList::class );
@@ -99,10 +99,8 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $labels, $this->fingerprint->getLabels() );
 	}
 
-	/**
-	 * @expectedException OutOfBoundsException
-	 */
 	public function testRemoveLabelMakesGetterThrowException() {
+		$this->expectException( OutOfBoundsException::class );
 		$this->fingerprint->removeLabel( 'en' );
 		$this->fingerprint->getLabel( 'en' );
 	}
@@ -126,10 +124,8 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $descriptions, $this->fingerprint->getDescriptions() );
 	}
 
-	/**
-	 * @expectedException OutOfBoundsException
-	 */
 	public function testRemoveDescriptionMakesGetterThrowException() {
+		$this->expectException( OutOfBoundsException::class );
 		$this->fingerprint->removeDescription( 'en' );
 		$this->fingerprint->getDescription( 'en' );
 	}
@@ -153,10 +149,8 @@ class FingerprintTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals( $aliasGroups, $this->fingerprint->getAliasGroups() );
 	}
 
-	/**
-	 * @expectedException OutOfBoundsException
-	 */
 	public function testRemoveAliasGroupMakesGetterThrowException() {
+		$this->expectException( OutOfBoundsException::class );
 		$this->fingerprint->removeAliasGroup( 'en' );
 		$this->fingerprint->getAliasGroup( 'en' );
 	}

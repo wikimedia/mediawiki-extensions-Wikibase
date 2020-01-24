@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use PHPUnit_Framework_TestCase;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -13,7 +12,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ItemIdParserTest extends PHPUnit_Framework_TestCase {
+class ItemIdParserTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider entityIdProvider

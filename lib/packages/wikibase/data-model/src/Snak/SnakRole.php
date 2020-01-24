@@ -12,8 +12,8 @@ namespace Wikibase\DataModel\Snak;
  */
 class SnakRole {
 
-	const MAIN_SNAK = 0;
-	const QUALIFIER = 1;
+	public const MAIN_SNAK = 0;
+	public const QUALIFIER = 1;
 
 	private function __construct() {
 	}

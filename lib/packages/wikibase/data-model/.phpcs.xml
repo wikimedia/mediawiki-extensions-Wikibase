@@ -18,6 +18,9 @@
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
 		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
 	</rule>
+	<rule ref="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent">
+		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent" />
+	</rule>
 
 	<file>.</file>
 </ruleset>

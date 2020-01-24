@@ -21,7 +21,7 @@ namespace Wikibase\DataModel\Entity;
  */
 interface Int32EntityId {
 
-	const MAX = 2147483647;
+	public const MAX = 2147483647;
 
 	/**
 	 * @since 6.1
