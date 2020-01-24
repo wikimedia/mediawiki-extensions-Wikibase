@@ -14,6 +14,8 @@
 		:role="href ? 'link' : 'button'"
 		:aria-disabled="disabled ? 'true' : null"
 		:title="message"
+		:target="opensInNewTab ? '_blank' : null"
+		:rel="opensInNewTab ? 'noreferrer noopener' : null"
 		@click="click"
 		@keydown.enter="handleEnterPress"
 		@keydown.space="handleSpacePress"
@@ -66,6 +68,14 @@ export default class EventEmittingButton extends Vue {
 	@Prop( { required: false, default: false, type: Boolean } )
 	public squary!: boolean;
 
+	/**
+	 * Whether this link should open in a new tab or not.
+	 * Only effective if `href` is set.
+	 * `preventDefault` should usually be set to `false` as well.
+	 */
+	@Prop( { required: false, default: false, type: Boolean } )
+	public newTab!: boolean;
+
 	public isPressed = false;
 
 	public get isIconOnly(): boolean {
@@ -74,6 +84,10 @@ export default class EventEmittingButton extends Vue {
 
 	public get isFrameless(): boolean {
 		return framelessTypes.includes( this.type );
+	}
+
+	public get opensInNewTab(): boolean {
+		return this.href !== null && this.newTab;
 	}
 
 	public handleSpacePress( event: UIEvent ): void {

@@ -15,6 +15,16 @@ storiesOf( 'EventEmittingButton', module )
 			:preventDefault="false"
 		/>`,
 	} ) )
+	.add( 'primaryProgressive as link opening in new tab', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="primaryProgressive"
+			message="primaryProgressive"
+			href="https://www.mediawiki.org/wiki/Wikidata_Bridge"
+			:newTab="true"
+			:preventDefault="false"
+		/>`,
+	} ) )
 	.add( 'squary primaryProgressive', () => ( {
 		components: { EventEmittingButton },
 		template: `<EventEmittingButton

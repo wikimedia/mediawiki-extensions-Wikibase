@@ -221,6 +221,24 @@ describe( 'EventEmittingButton', () => {
 		} );
 	} );
 
+	describe( 'new tab attributes', () => {
+		it.each( [
+			[ 'not added', undefined, false ],
+			[ 'not added', 'https://example.com/', false ],
+			[ 'not added', undefined, true ],
+			[ 'added', 'https://example.com/', true ],
+		] )( '%s with href %s and newTab %p', ( added, href, newTab ) => {
+			const wrapper = shallowMountWithProps( { type: 'primaryProgressive', href, newTab } );
+			if ( added === 'added' ) {
+				expect( wrapper.find( 'a' ).attributes( 'target' ) ).toBe( '_blank' );
+				expect( wrapper.find( 'a' ).attributes( 'rel' ) ).toBe( 'noreferrer noopener' );
+			} else {
+				expect( wrapper.find( 'a' ).attributes( 'target' ) ).toBeUndefined();
+				expect( wrapper.find( 'a' ).attributes( 'rel' ) ).toBeUndefined();
+			}
+		} );
+	} );
+
 	it( 'throws for unknown type', () => {
 		expect( () => shallowMountWithProps( { type: 'potato' } ) ).toThrow();
 	} );
