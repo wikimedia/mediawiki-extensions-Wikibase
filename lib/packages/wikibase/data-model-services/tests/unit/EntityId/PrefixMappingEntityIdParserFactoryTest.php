@@ -51,13 +51,13 @@ class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 
 	public function testGivenNonStringRepository_exceptionIsThrown() {
 		$factory = new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );
-		$this->setExpectedException( ParameterTypeException::class );
+		$this->expectException( ParameterTypeException::class );
 		$factory->getIdParser( 111 );
 	}
 
 	public function testGivenRepositoryIncludingColon_exceptionIsThrown() {
 		$factory = new PrefixMappingEntityIdParserFactory( new ItemIdParser(), [] );
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		$factory->getIdParser( 'en:' );
 	}
 
@@ -65,7 +65,7 @@ class PrefixMappingEntityIdParserFactoryTest extends TestCase {
 	 * @dataProvider provideInvalidIdPrefixMapping
 	 */
 	public function testGivenInvalidIdPrefixMapping_exceptionIsThrown( array $mapping ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new PrefixMappingEntityIdParserFactory( new ItemIdParser(), $mapping );
 	}
 

@@ -80,7 +80,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 			->method( 'parse' )
 			->will( $this->throwException( new EntityIdParsingException() ) );
 		$parser = new PrefixMappingEntityIdParser( [ '' => 'wikidata' ], $regularParser );
-		$this->setExpectedException( EntityIdParsingException::class );
+		$this->expectException( EntityIdParsingException::class );
 		$parser->parse( 'QQQ' );
 	}
 
@@ -88,7 +88,7 @@ class PrefixMappingEntityIdParserTest extends TestCase {
 	 * @dataProvider provideInvalidPrefixMapping
 	 */
 	public function testGivenInvalidPrefixMapping_exceptionIsThrown( array $prefixMapping ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new PrefixMappingEntityIdParser( $prefixMapping, new ItemIdParser() );
 	}
 

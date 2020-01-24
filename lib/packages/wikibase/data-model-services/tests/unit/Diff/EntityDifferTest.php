@@ -22,14 +22,14 @@ class EntityDifferTest extends TestCase {
 	public function testGivenUnknownEntityType_exceptionIsThrown() {
 		$differ = new EntityDiffer();
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$differ->diffEntities( new EntityOfUnknownType(), new EntityOfUnknownType() );
 	}
 
 	public function testGivenEntitiesWithDifferentTypes_exceptionIsThrown() {
 		$differ = new EntityDiffer();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$differ->diffEntities( new Item(), Property::newFromType( 'string' ) );
 	}
 
@@ -45,14 +45,14 @@ class EntityDifferTest extends TestCase {
 	public function testGivenUnknownEntityType_getConstructionDiffThrowsException() {
 		$differ = new EntityDiffer();
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$differ->getConstructionDiff( new EntityOfUnknownType() );
 	}
 
 	public function testGivenUnknownEntityType_getDestructionDiffThrowsException() {
 		$differ = new EntityDiffer();
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$differ->getDestructionDiff( new EntityOfUnknownType() );
 	}
 

@@ -97,7 +97,7 @@ class RestrictedEntityLookupTest extends TestCase {
 		$lookup->getEntity( new ItemId( 'Q2' ) );
 		$lookup->getEntity( new ItemId( 'Q3' ) );
 
-		$this->setExpectedException( EntityAccessLimitException::class );
+		$this->expectException( EntityAccessLimitException::class );
 		$lookup->getEntity( new ItemId( 'Q4' ) );
 	}
 

@@ -99,7 +99,7 @@ class RedirectResolvingEntityLookupTest extends TestCase {
 
 		$id = new ItemId( 'Q12' ); // Q12 is a double redirect
 
-		$this->setExpectedException( UnresolvedEntityRedirectException::class );
+		$this->expectException( UnresolvedEntityRedirectException::class );
 		$lookup->getEntity( $id );
 	}
 

@@ -36,12 +36,12 @@ class FilteringStatementGrouperTest extends TestCase {
 	}
 
 	public function testConstructorThrowsException() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new FilteringStatementGrouper( [ 'invalid' ] );
 	}
 
 	public function testDoesNotAcceptTwoDefaults() {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new FilteringStatementGrouper( [ 'default1' => null, 'default2' => null ] );
 	}
 

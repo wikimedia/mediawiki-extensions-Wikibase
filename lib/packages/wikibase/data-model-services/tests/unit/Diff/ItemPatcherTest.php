@@ -55,7 +55,7 @@ class ItemPatcherTest extends TestCase {
 	public function testGivenNonItem_exceptionIsThrown() {
 		$patcher = new ItemPatcher();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$patcher->patchEntity( Property::newFromType( 'kittens' ), new ItemDiff() );
 	}
 

@@ -24,7 +24,7 @@ class DispatchingEntityLookupTest extends TestCase {
 	 * @dataProvider provideInvalidForeignLookups
 	 */
 	public function testGivenInvalidForeignLookups_exceptionIsThrown( array $lookups ) {
-		$this->setExpectedException( ParameterAssertionException::class );
+		$this->expectException( ParameterAssertionException::class );
 		new DispatchingEntityLookup( $lookups );
 	}
 
@@ -94,7 +94,7 @@ class DispatchingEntityLookupTest extends TestCase {
 
 		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $lookup ] );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$dispatchingLookup->getEntity( new ItemId( 'Q321' ) );
 	}
 
@@ -131,7 +131,7 @@ class DispatchingEntityLookupTest extends TestCase {
 
 		$dispatchingLookup = new DispatchingEntityLookup( [ '' => $lookup ] );
 
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$dispatchingLookup->hasEntity( new ItemId( 'Q321' ) );
 	}
 

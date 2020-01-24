@@ -44,7 +44,7 @@ class StatementGuidParserTest extends TestCase {
 	 * @dataProvider invalidIdSerializationProvider
 	 */
 	public function testCannotParserInvalidId( $invalidIdSerialization ) {
-		$this->setExpectedException( StatementGuidParsingException::class );
+		$this->expectException( StatementGuidParsingException::class );
 		$this->newParser()->parse( $invalidIdSerialization );
 	}
 

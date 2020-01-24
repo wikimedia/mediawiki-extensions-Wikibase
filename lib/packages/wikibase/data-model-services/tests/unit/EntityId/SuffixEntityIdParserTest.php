@@ -51,7 +51,7 @@ class SuffixEntityIdParserTest extends TestCase {
 	public function testParse_invalid( $prefix, $input ) {
 		$parser = new SuffixEntityIdParser( $prefix, new BasicEntityIdParser() );
 
-		$this->setExpectedException( EntityIdParsingException::class );
+		$this->expectException( EntityIdParsingException::class );
 		$parser->parse( $input );
 	}
 

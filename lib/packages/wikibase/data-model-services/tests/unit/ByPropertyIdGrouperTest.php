@@ -41,7 +41,7 @@ class ByPropertyIdGrouperTest extends TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testConstructorThrowsException( $argument ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new ByPropertyIdGrouper( $argument );
 	}
 

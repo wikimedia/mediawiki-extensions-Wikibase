@@ -44,7 +44,7 @@ class EntityIdComposerTest extends TestCase {
 	 * @dataProvider invalidConstructorArgumentProvider
 	 */
 	public function testGivenInvalidComposer_constructorFails( $composers ) {
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		new EntityIdComposer( $composers );
 	}
 
@@ -54,7 +54,7 @@ class EntityIdComposerTest extends TestCase {
 				return null;
 			},
 		] );
-		$this->setExpectedException( UnexpectedValueException::class );
+		$this->expectException( UnexpectedValueException::class );
 		$composer->composeEntityId( '', 'item', 1 );
 	}
 
@@ -90,7 +90,7 @@ class EntityIdComposerTest extends TestCase {
 	 */
 	public function testGivenInvalidFragment_buildFails( $entityType, $uniquePart ) {
 		$composer = $this->getComposer();
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$composer->composeEntityId( '', $entityType, $uniquePart );
 	}
 

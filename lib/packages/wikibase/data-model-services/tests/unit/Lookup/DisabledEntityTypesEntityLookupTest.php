@@ -69,7 +69,7 @@ class DisabledEntityTypesEntityLookupTest extends TestCase {
 
 	public function testGetEntity_exceptionDisabledEntityType() {
 		$lookup = new DisabledEntityTypesEntityLookup( $this->getEntityLookup(), [ 'item' ] );
-		$this->setExpectedException( EntityLookupException::class );
+		$this->expectException( EntityLookupException::class );
 		$lookup->getEntity( new ItemId( 'Q1' ) );
 	}
 

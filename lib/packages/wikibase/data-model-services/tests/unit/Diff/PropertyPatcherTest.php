@@ -54,7 +54,7 @@ class PropertyPatcherTest extends TestCase {
 	public function testGivenNonItem_exceptionIsThrown() {
 		$patcher = new PropertyPatcher();
 
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$patcher->patchEntity( new Item(), new EntityDiff() );
 	}
 

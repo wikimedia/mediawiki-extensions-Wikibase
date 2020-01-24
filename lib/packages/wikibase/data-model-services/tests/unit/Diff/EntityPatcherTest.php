@@ -46,7 +46,7 @@ class EntityPatcherTest extends TestCase {
 	public function testGivenNonSupportedEntity_exceptionIsThrown() {
 		$patcher = new EntityPatcher();
 
-		$this->setExpectedException( RuntimeException::class );
+		$this->expectException( RuntimeException::class );
 		$patcher->patchEntity( new EntityOfUnknownType(), new EntityDiff() );
 	}
 

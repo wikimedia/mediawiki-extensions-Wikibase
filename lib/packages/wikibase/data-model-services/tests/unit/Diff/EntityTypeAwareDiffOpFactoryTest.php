@@ -27,7 +27,7 @@ class EntityTypeAwareDiffOpFactoryTest extends TestCase {
 
 	public function testGivenInvalidDiffOp_exceptionIsThrown() {
 		$factory = new EntityTypeAwareDiffOpFactory();
-		$this->setExpectedException( InvalidArgumentException::class );
+		$this->expectException( InvalidArgumentException::class );
 		$factory->newFromArray( [ 'wee' ] );
 	}
 

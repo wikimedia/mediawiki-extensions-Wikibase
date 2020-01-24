@@ -18,7 +18,7 @@ class InMemoryDataTypeLookupTest extends TestCase {
 	public function testGetDataTypeForPropertyThatIsNotSet() {
 		$lookup = new InMemoryDataTypeLookup();
 
-		$this->setExpectedException( PropertyDataTypeLookupException::class );
+		$this->expectException( PropertyDataTypeLookupException::class );
 
 		$lookup->getDataTypeIdForProperty( new PropertyId( 'p7201010' ) );
 	}
