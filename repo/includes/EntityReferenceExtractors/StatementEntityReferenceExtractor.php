@@ -29,10 +29,10 @@ class StatementEntityReferenceExtractor implements EntityReferenceExtractor {
 	/**
 	 * @var SuffixEntityIdParser
 	 */
-	private $entityIdUriParser;
+	private $quantityUnitEntityIdUriParser;
 
-	public function __construct( SuffixEntityIdParser $entityIdParser ) {
-		$this->entityIdUriParser = $entityIdParser;
+	public function __construct( SuffixEntityIdParser $quantityUnitEntityIdUriParser ) {
+		$this->quantityUnitEntityIdUriParser = $quantityUnitEntityIdUriParser;
 	}
 
 	/**
@@ -70,16 +70,16 @@ class StatementEntityReferenceExtractor implements EntityReferenceExtractor {
 			$this->entityIds[$entityId->getSerialization()] = $entityId;
 		} elseif ( $dataValue instanceof UnboundedQuantityValue ) {
 			$unitUri = $dataValue->getUnit();
-			$this->processUri( $unitUri );
+			$this->processQuantityUnitUri( $unitUri );
 		}
 
 		// TODO: EntityIds from GlobeCoordinateValue's globe URI (Wikidata, not local item URI!)
 		// TODO: EntityIds from TimeValue's calendar URI (Wikidata, not local item URI!)
 	}
 
-	private function processUri( $uri ) {
+	private function processQuantityUnitUri( $uri ) {
 		try {
-			$entityId = $this->entityIdUriParser->parse( $uri );
+			$entityId = $this->quantityUnitEntityIdUriParser->parse( $uri );
 			$this->entityIds[$entityId->getSerialization()] = $entityId;
 		} catch ( EntityIdParsingException $ex ) {
 			// noop

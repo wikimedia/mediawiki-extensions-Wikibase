@@ -177,7 +177,7 @@ return [
 		'entity-reference-extractor-callback' => function() {
 			return new EntityReferenceExtractorCollection( [
 				new SiteLinkBadgeItemReferenceExtractor(),
-				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getLocalItemUriParser() )
+				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getItemUrlParser() )
 			] );
 		},
 	],
@@ -281,7 +281,7 @@ return [
 			);
 		},
 		'entity-reference-extractor-callback' => function() {
-			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getLocalItemUriParser() );
+			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getItemUrlParser() );
 		},
 	]
 ];

@@ -20,7 +20,7 @@ class VocabularyUriFormatter implements ValueFormatter {
 	/**
 	 * @var EntityIdParser
 	 */
-	private $externalEntityIdParser;
+	private $vocabUriParser;
 
 	/**
 	 * @var LabelDescriptionLookup
@@ -33,18 +33,18 @@ class VocabularyUriFormatter implements ValueFormatter {
 	private $unitlessUnitIds;
 
 	/**
-	 * @param EntityIdParser $externalEntityIdParser
+	 * @param EntityIdParser $vocabUriParser
 	 * @param LabelDescriptionLookup $labelLookup
 	 * @param string[] $unitlessUnitIds A list of IDs that represent the "unitless" unit (one),
 	 *        e.g. "http://www.wikidata.org/entity/Q199". The strings "" and "1" are always
 	 *        treated as "non-units".
 	 */
 	public function __construct(
-		EntityIdParser $externalEntityIdParser,
+		EntityIdParser $vocabUriParser,
 		LabelDescriptionLookup $labelLookup,
 		array $unitlessUnitIds = []
 	) {
-		$this->externalEntityIdParser = $externalEntityIdParser;
+		$this->vocabUriParser = $vocabUriParser;
 		$this->labelLookup = $labelLookup;
 
 		$this->unitlessUnitIds = array_flip( $unitlessUnitIds );
@@ -71,7 +71,7 @@ class VocabularyUriFormatter implements ValueFormatter {
 		}
 
 		try {
-			$entityId = $this->externalEntityIdParser->parse( $conceptUri );
+			$entityId = $this->vocabUriParser->parse( $conceptUri );
 
 			try {
 				// TODO: Ideally we would show unit *symbols*, taking from a config file,
