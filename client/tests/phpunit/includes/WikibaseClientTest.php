@@ -439,6 +439,70 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( SidebarLinkBadgeDisplay::class, $sidebarLinkBadgeDisplay );
 	}
 
+	public function testGetDatabaseDomainNameOfLocalRepo() {
+		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+
+		$settings->setSetting( 'useEntitySourceBasedFederation', false );
+		$settings->setSetting( 'repositories', [
+			'' => [
+				'repoDatabase' => 'repodb',
+				'baseUri' => '',
+				'entityNamespaces' => [],
+				'prefixMapping' => [],
+			],
+			'other' => [
+				'repoDatabase' => 'otherdb',
+				'baseUri' => '',
+				'entityNamespaces' => [],
+				'prefixMapping' => [],
+			],
+		] );
+
+		$wikibaseClient = $this->getWikibaseClient( $settings );
+
+		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
+	}
+
+	public function testGetDatabaseDomainNameOfLocalRepo_entitySourceBasedFederation() {
+		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
+
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+		$settings->setSetting( 'localRepoEntitySourceName', 'localrepo' );
+
+		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$wikibaseClient = new WikibaseClient(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			$this->getSiteLookup(),
+			new EntitySourceDefinitions(
+				[
+					new EntitySource(
+						'localrepo',
+						'repodb',
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						'',
+						'',
+						'',
+						'repo'
+					),
+					new EntitySource(
+						'otherrepo',
+						'otherdb',
+						[ 'property' => [ 'namespaceId' => 321, 'slot' => 'main' ] ],
+						'',
+						'',
+						'',
+						'other'
+					),
+				],
+				$entityTypeDefinitions
+			)
+		);
+
+		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
+	}
+
 	/**
 	 * @dataProvider getPropertyLabelResolverClassPerMigrationStage
 	 */
