@@ -62,7 +62,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	 * @param Snak $snak
 	 */
 	public function testGetType( Snak $snak ) {
-		$this->assertInternalType( 'string', $snak->getType() );
+		$this->assertIsString( $snak->getType() );
 	}
 
 	/**
@@ -79,7 +79,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSerialize( Snak $snak ) {
 		$serialization = serialize( $snak );
-		$this->assertInternalType( 'string', $serialization );
+		$this->assertIsString( $serialization );
 
 		$newInstance = unserialize( $serialization );
 		$this->assertInstanceOf( get_class( $snak ), $newInstance );
@@ -95,7 +95,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetHash( Snak $snak ) {
 		$hash = $snak->getHash();
-		$this->assertInternalType( 'string', $hash );
+		$this->assertIsString( $hash );
 		$this->assertEquals( $hash, $snak->getHash() );
 	}
 

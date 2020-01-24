@@ -348,7 +348,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetValueHashReturnsString( ReferenceList $array ) {
-		$this->assertInternalType( 'string', $array->getValueHash() );
+		$this->assertIsString( $array->getValueHash() );
 	}
 
 	/**

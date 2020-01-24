@@ -445,7 +445,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 	public function testSerialize( Property $entity ) {
 		$string = serialize( $entity );
 
-		$this->assertInternalType( 'string', $string );
+		$this->assertIsString( $string );
 
 		$instance = unserialize( $string );
 

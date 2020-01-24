@@ -233,7 +233,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetRank( Statement $statement ) {
 		$rank = $statement->getRank();
-		$this->assertInternalType( 'integer', $rank );
+		$this->assertIsInt( $rank );
 
 		$ranks = [ Statement::RANK_DEPRECATED, Statement::RANK_NORMAL, Statement::RANK_PREFERRED ];
 		$this->assertTrue( in_array( $rank, $ranks ), true );

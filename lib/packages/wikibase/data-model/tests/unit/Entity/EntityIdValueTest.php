@@ -76,7 +76,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetSortKey( EntityIdValue $id ) {
-		$this->assertInternalType( 'string', $id->getSortKey() );
+		$this->assertIsString( $id->getSortKey() );
 	}
 
 	public function provideGetArrayValue() {

@@ -75,7 +75,7 @@ class PropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function testGetHash() {
 		$snak = new PropertyValueSnak( new PropertyId( 'P1' ), new StringValue( 'a' ) );
 		$hash = $snak->getHash();
-		$this->assertInternalType( 'string', $hash );
+		$this->assertIsString( $hash );
 		$this->assertEquals( 40, strlen( $hash ) );
 	}
 

@@ -355,7 +355,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 		$snakList = new SnakList( [ new PropertyNoValueSnak( 1 ) ] );
 		$hash = $snakList->getHash();
 
-		$this->assertInternalType( 'string', $hash, 'must be a string' );
+		$this->assertIsString( $hash, 'must be a string' );
 		$this->assertNotSame( '', $hash, 'must not be empty' );
 		$this->assertSame( $hash, $snakList->getHash(), 'second call must return the same hash' );
 

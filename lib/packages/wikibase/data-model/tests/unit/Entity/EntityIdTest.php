@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use ReflectionClass;
 use InvalidArgumentException;
+use ReflectionClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -82,7 +82,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testReturnTypeOfToString( EntityId $id ) {
-		$this->assertInternalType( 'string', $id->__toString() );
+		$this->assertIsString( $id->__toString() );
 	}
 
 	public function testIsForeign() {

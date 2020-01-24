@@ -40,7 +40,7 @@ class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenEmptySet_countReturnsZero() {
 		$set = new ItemIdSet();
-		$this->assertEquals( 0, $set->count() );
+		$this->assertSame( 0, $set->count() );
 	}
 
 	public function testGivenSetWithTwoItems_countReturnsTwo() {

@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataModel\Tests\Entity;
 
-use Wikibase\DataModel\Entity\PropertyId;
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * @covers \Wikibase\DataModel\Entity\PropertyId

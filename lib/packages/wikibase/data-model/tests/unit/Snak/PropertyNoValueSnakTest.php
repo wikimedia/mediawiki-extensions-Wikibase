@@ -64,7 +64,7 @@ class PropertyNoValueSnakTest extends \PHPUnit\Framework\TestCase {
 	public function testGetHash() {
 		$snak = new PropertyNoValueSnak( new PropertyId( 'P1' ) );
 		$hash = $snak->getHash();
-		$this->assertInternalType( 'string', $hash );
+		$this->assertIsString( $hash );
 		$this->assertEquals( 40, strlen( $hash ) );
 	}
 

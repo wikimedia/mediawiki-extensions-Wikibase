@@ -3,9 +3,9 @@
 namespace Wikibase\DataModel\Tests\Statement;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Statement\StatementGuid;
 
 /**
  * @covers \Wikibase\DataModel\Statement\StatementGuid

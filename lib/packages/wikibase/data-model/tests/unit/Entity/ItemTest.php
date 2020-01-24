@@ -571,7 +571,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase {
 	public function testSerialize( Item $entity ) {
 		$string = serialize( $entity );
 
-		$this->assertInternalType( 'string', $string );
+		$this->assertIsString( $string );
 
 		$instance = unserialize( $string );
 

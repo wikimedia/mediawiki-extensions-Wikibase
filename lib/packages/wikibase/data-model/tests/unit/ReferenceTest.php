@@ -85,7 +85,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetHashReturnsString( Reference $reference ) {
-		$this->assertInternalType( 'string', $reference->getHash() );
+		$this->assertIsString( $reference->getHash() );
 	}
 
 	/**
