@@ -2,16 +2,20 @@ language: php
 
 dist: trusty
 
-php:
-  - 7.2
-  - 7.3
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+    - php: 7.4
+  allow_failures:
+    - php: 7.4
 
 sudo: false
 
 install: travis_retry composer install
 
-# Hack: Don't run phpmd with HHVM
-script: if $(php --version | grep -q HipHop); then composer test; else composer ci; fi
+script: composer ci
 
 notifications:
   irc:
