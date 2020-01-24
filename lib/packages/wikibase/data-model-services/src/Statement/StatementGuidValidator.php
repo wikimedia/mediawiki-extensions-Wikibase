@@ -33,13 +33,13 @@ class StatementGuidValidator {
 	 * @return boolean
 	 */
 	public function validate( $guid ) {
-		if ( ! $this->validateFormat( $guid ) ) {
+		if ( !$this->validateFormat( $guid ) ) {
 			return false;
 		}
 
 		$guidParts = explode( StatementGuid::SEPARATOR, $guid );
 
-		if ( ! $this->validateStatementGuidPrefix( $guidParts[0] ) || ! $this->validateGuid( $guidParts[1] ) ) {
+		if ( !$this->validateStatementGuidPrefix( $guidParts[0] ) || !$this->validateGuid( $guidParts[1] ) ) {
 			return false;
 		}
 
@@ -56,7 +56,7 @@ class StatementGuidValidator {
 	 * @return boolean
 	 */
 	public function validateFormat( $guid ) {
-		if ( ! is_string( $guid ) ) {
+		if ( !is_string( $guid ) ) {
 			return false;
 		}
 

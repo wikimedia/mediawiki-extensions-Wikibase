@@ -21,7 +21,7 @@ class DataTypeStatementFilter implements StatementFilter {
 	/**
 	 * @since 3.3
 	 */
-	const FILTER_TYPE = 'dataType';
+	public const FILTER_TYPE = 'dataType';
 
 	/**
 	 * @var PropertyDataTypeLookup

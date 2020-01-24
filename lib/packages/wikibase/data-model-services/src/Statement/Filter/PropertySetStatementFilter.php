@@ -19,7 +19,7 @@ class PropertySetStatementFilter implements StatementFilter {
 	/**
 	 * @since 3.3
 	 */
-	const FILTER_TYPE = 'propertySet';
+	public const FILTER_TYPE = 'propertySet';
 
 	/**
 	 * @var string[]

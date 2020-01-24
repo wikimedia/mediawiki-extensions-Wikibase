@@ -20,7 +20,7 @@ class NullStatementFilter implements StatementFilter {
 	/**
 	 * @since 3.3
 	 */
-	const FILTER_TYPE = 'null';
+	public const FILTER_TYPE = 'null';
 
 	/**
 	 * @see StatementFilter::statementMatches

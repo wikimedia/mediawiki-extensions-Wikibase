@@ -47,16 +47,16 @@ class PrefixMappingEntityIdParserFactory {
 				'keys in $idPrefixMapping',
 				'must not contain a colon'
 			);
-			Assert::parameterType( 'array', $mapping, '$idPrefixMapping[' . $repositoryName .']' );
-			Assert::parameterElementType( 'string', $mapping, '$idPrefixMapping[' . $repositoryName .']' );
+			Assert::parameterType( 'array', $mapping, '$idPrefixMapping[' . $repositoryName . ']' );
+			Assert::parameterElementType( 'string', $mapping, '$idPrefixMapping[' . $repositoryName . ']' );
 			Assert::parameterElementType(
 				'string',
 				array_keys( $mapping ),
-				'array_keys( $idPrefixMapping[' . $repositoryName .'] )'
+				'array_keys( $idPrefixMapping[' . $repositoryName . '] )'
 			);
 			Assert::parameter(
 				!array_key_exists( '', $mapping ) || $mapping[''] === $repositoryName,
-				'$idPrefixMapping[' . $repositoryName .'] )',
+				'$idPrefixMapping[' . $repositoryName . '] )',
 				'must either not contain empty-string prefix mapping or it must be equal to repository name'
 			);
 		}

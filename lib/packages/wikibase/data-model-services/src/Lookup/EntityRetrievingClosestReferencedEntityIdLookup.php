@@ -212,11 +212,11 @@ class EntityRetrievingClosestReferencedEntityIdLookup implements ReferencedEntit
 	 * @return EntityId|null Target id the Snak refers to, null if none.
 	 */
 	private function processSnak( Snak $snak, array &$toVisit, array $toIds ) {
-		if ( ! ( $snak instanceof PropertyValueSnak ) ) {
+		if ( !( $snak instanceof PropertyValueSnak ) ) {
 			return null;
 		}
 		$dataValue = $snak->getDataValue();
-		if ( ! ( $dataValue instanceof EntityIdValue ) ) {
+		if ( !( $dataValue instanceof EntityIdValue ) ) {
 			return null;
 		}
 

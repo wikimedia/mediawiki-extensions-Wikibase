@@ -276,7 +276,7 @@ class EntityRetrievingClosestReferencedEntityIdLookupTest extends TestCase {
 	 * @dataProvider provideGetReferencedEntityIdNoError
 	 */
 	public function testGetReferencedEntityIdNoError(
-		EntityId $expectedToId = null,
+		?EntityId $expectedToId,
 		$maxEntityVisits,
 		$maxDepth,
 		EntityLookup $entityLookup,

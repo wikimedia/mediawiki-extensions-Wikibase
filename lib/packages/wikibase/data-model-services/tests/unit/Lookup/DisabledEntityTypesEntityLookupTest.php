@@ -45,10 +45,8 @@ class DisabledEntityTypesEntityLookupTest extends TestCase {
 		);
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testConstructor_exception() {
+		$this->expectException( InvalidArgumentException::class );
 		new DisabledEntityTypesEntityLookup( $this->getEntityLookup(), [ 0 ] );
 	}
 

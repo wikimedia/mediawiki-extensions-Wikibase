@@ -129,11 +129,9 @@ class ByPropertyIdGrouperTest extends TestCase {
 		$this->assertEquals( $expectedValues, $values );
 	}
 
-	/**
-	 * @expectedException OutOfBoundsException
-	 */
 	public function testGetByPropertyIdThrowsException() {
 		$byPropertyIdGrouper = new ByPropertyIdGrouper( $this->getPropertyIdProviders() );
+		$this->expectException( OutOfBoundsException::class );
 		$byPropertyIdGrouper->getByPropertyId( new PropertyId( 'P11' ) );
 	}
 

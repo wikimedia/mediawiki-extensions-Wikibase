@@ -42,10 +42,8 @@ class RestrictedEntityLookupTest extends TestCase {
 		$this->assertInstanceOf( RestrictedEntityLookup::class, $lookup );
 	}
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
 	public function testConstructor_exception() {
+		$this->expectException( InvalidArgumentException::class );
 		new RestrictedEntityLookup( $this->getEntityLookup(), 0 );
 	}
 

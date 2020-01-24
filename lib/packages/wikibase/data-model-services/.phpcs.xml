@@ -17,6 +17,9 @@
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
 		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
 	</rule>
+	<rule ref="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation">
+		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />
+	</rule>
 
 	<file>.</file>
 </ruleset>
