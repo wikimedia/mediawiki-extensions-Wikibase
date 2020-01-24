@@ -3,6 +3,7 @@
 ### 2.10.0 (development)
 
 * `EntityDeserializer` now also implements `DispatchableDeserializer`
+* Raised minimum PHP version to 7.0 (^7.0)
 
 ### 2.9.0 (2018-11-06)
 
