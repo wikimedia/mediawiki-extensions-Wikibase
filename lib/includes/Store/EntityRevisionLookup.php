@@ -47,7 +47,7 @@ interface EntityRevisionLookup {
 	 * Implementations of this method must not silently resolve redirects.
 	 *
 	 * @param EntityId $entityId
-	 * @param int $revisionId The desired revision id, or 0 for the latest revision.
+	 * @param int|null $revisionId The desired revision id, or 0 for the latest revision.
 	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
 	 *        LATEST_FROM_MASTER.
 	 *

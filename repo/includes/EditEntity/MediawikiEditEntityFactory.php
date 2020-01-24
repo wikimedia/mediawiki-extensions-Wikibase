@@ -89,7 +89,7 @@ class MediawikiEditEntityFactory {
 	/**
 	 * @param User $user the user performing the edit
 	 * @param EntityId|null $entityId the id of the entity to edit
-	 * @param bool|int $baseRevId the base revision ID for conflict checking.
+	 * @param bool|int|null $baseRevId the base revision ID for conflict checking.
 	 *        Use 0 to indicate that the current revision should be used as the base revision,
 	 *        effectively disabling conflict detections. true and false will be accepted for
 	 *        backwards compatibility, but both will be treated like 0. Note that the behavior
