@@ -51,6 +51,10 @@ class DataBridgePage extends Page {
 		return 'input[name=editDecision]';
 	}
 
+	static get PERMISSION_ERROR_CONTAINER() {
+		return '.wb-ui-permission-info-box';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -100,6 +104,10 @@ class DataBridgePage extends Page {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.ERROR}`
 		);
+	}
+
+	get permissionErrors() {
+		return this.error.$$( DataBridgePage.PERMISSION_ERROR_CONTAINER );
 	}
 
 	get bridge() {
