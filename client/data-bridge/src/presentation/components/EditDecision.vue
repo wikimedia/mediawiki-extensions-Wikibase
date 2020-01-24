@@ -52,8 +52,7 @@ export default class EditDecision extends Vue {
 
 <style lang="scss">
 .wb-db-edit-decision {
-	margin-right: 20px;
-	margin-left: $margin-center-column-left;
+	margin: 0 $margin-center-column-side;
 
 	&__heading {
 		margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;

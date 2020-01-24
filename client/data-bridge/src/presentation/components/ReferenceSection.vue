@@ -38,8 +38,7 @@ export default class ReferenceSection extends Vue {
 
 <style lang="scss">
 .wb-db-references {
-	margin-left: $margin-center-column-left;
-	margin-right: 20px;
+	margin: 0 $margin-center-column-side;
 
 	&__heading {
 		margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;
