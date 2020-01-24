@@ -23,7 +23,7 @@ version 1.x of this package:
 
     {
         "require": {
-            "wikibase/internal-serialization": "1.*"
+            "wikibase/internal-serialization": "~2.0"
         }
     }
 
