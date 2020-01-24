@@ -11,8 +11,6 @@ matrix:
       php: 7.0
     - env: DM=~8.0
       php: 7.1
-    - env: DM=~7.0
-      php: hhvm
   allow_failures:
     - env: DM=@dev
 
