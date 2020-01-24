@@ -12,9 +12,10 @@ $base-font-size-desired: $base-font-size-browser * $base-font-size-desired-facto
 $size-dialog-bar--desktop: 40px;
 $font-size-dialog-process-title: 1.1em;
 
-$padding-panel-form: px-to-em( 16px );
-$base-spacing-unit: 8px;
-$binary-input-inter-component-spacing: 2 * $base-spacing-unit;
+$base-spacing-unit-fixed: 8px;
+$padding-panel-form: 2 * $base-spacing-unit-fixed;
+$margin-center-column-side: 3 * $base-spacing-unit-fixed;
+$binary-input-inter-component-spacing: 2 * $base-spacing-unit-fixed;
 
 $size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
 $size-permissions-icon: px-to-em( 14px );
@@ -25,8 +26,6 @@ $border-color-base--disabled: $wmui-color-base70;
 
 $padding-vertical-base: px-to-em( 6px );
 $padding-horizontal-base: px-to-em( 12px );
-
-$margin-center-column-left: 26px;
 
 $notice-message-background: $wmui-color-base80;
 $notice-message-border: $wmui-color-base50;
