@@ -13,6 +13,7 @@ export default function ( fields?: any ): Application {
 		editDecision: null,
 		entityTitle: '',
 		originalHref: '',
+		pageTitle: '',
 	};
 
 	if ( fields !== null ) {

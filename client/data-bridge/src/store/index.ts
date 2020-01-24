@@ -25,6 +25,7 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 		editDecision: null,
 		entityTitle: '',
 		originalHref: '',
+		pageTitle: '',
 	};
 
 	const storeBundle: StoreOptions<Application> = {

@@ -14,6 +14,7 @@ import {
 	TARGET_LABEL_SET,
 	ENTITY_TITLE_SET,
 	ORIGINAL_HREF_SET,
+	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
 import newApplicationState from './newApplicationState';
 
@@ -95,5 +96,12 @@ describe( 'root/mutations', () => {
 		const entityTitle = 'Entity title';
 		mutations[ ENTITY_TITLE_SET ]( store, entityTitle );
 		expect( store.entityTitle ).toBe( entityTitle );
+	} );
+
+	it( 'sets the page title of the store', () => {
+		const store: Application = newApplicationState();
+		const pageTitle = 'Page_title';
+		mutations[ PAGE_TITLE_SET ]( store, pageTitle );
+		expect( store.pageTitle ).toBe( pageTitle );
 	} );
 } );

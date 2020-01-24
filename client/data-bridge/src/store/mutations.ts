@@ -12,6 +12,7 @@ import {
 	EDITDECISION_SET,
 	ENTITY_TITLE_SET,
 	ORIGINAL_HREF_SET,
+	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
@@ -53,5 +54,9 @@ export const mutations: MutationTree<Application> = {
 
 	[ ORIGINAL_HREF_SET ]( state: Application, orginalHref: string ): void {
 		state.originalHref = orginalHref;
+	},
+
+	[ PAGE_TITLE_SET ]( state: Application, pageTitle: string ): void {
+		state.pageTitle = pageTitle;
 	},
 };
