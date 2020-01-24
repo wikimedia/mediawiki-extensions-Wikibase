@@ -1,5 +1,9 @@
 # Wikibase InternalSerialization release notes
 
+### 2.10.0 (development)
+
+* `EntityDeserializer` now also implements `DispatchableDeserializer`
+
 ### 2.9.0 (2018-11-06)
 
 * Added compatibility with Wikibase DataModel 9.x
