@@ -14,14 +14,14 @@ use Wikibase\InternalSerialization\DeserializerFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class DeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class DeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var DeserializerFactory
 	 */
 	private $factory;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->factory = TestFactoryBuilder::newDeserializerFactory( $this );
 	}
 

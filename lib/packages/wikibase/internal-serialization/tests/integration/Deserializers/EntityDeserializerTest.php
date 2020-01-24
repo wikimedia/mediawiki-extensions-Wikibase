@@ -14,7 +14,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
+class EntityDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
@@ -26,7 +26,7 @@ class EntityDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $currentSerializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()->newEntityDeserializer();
 		$this->currentSerializer = TestFactoryBuilder::newSerializerFactory()->newEntitySerializer();
 	}

@@ -15,14 +15,14 @@ use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacySiteLinkListDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacySiteLinkListDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
 	 */
 	private $deserializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->deserializer = new LegacySiteLinkListDeserializer();
 	}
 

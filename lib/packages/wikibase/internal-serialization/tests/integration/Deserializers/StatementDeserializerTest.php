@@ -18,7 +18,7 @@ use Wikibase\DataModel\Statement\Statement;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StatementDeserializerTest extends \PHPUnit_Framework_TestCase {
+class StatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
@@ -30,7 +30,7 @@ class StatementDeserializerTest extends \PHPUnit_Framework_TestCase {
 	 */
 	private $currentSerializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->deserializer = TestFactoryBuilder::newDeserializerFactoryWithDataValueSupport()
 			->newStatementDeserializer();
 		$this->currentSerializer = TestFactoryBuilder::newSerializerFactory()->newStatementSerializer();

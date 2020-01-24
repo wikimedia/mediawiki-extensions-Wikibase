@@ -12,14 +12,14 @@ use Wikibase\InternalSerialization\SerializerFactory;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class SerializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class SerializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var SerializerFactory
 	 */
 	private $factory;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->factory = new SerializerFactory( $this->createMock( Serializer::class ) );
 	}
 

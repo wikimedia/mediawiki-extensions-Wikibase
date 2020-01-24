@@ -17,14 +17,14 @@ use Wikibase\InternalSerialization\Deserializers\LegacyPropertyDeserializer;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyPropertyDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyPropertyDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
 	 */
 	private $deserializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->deserializer = new LegacyPropertyDeserializer(
 			new LegacyEntityIdDeserializer( new BasicEntityIdParser() ),
 			new LegacyFingerprintDeserializer()

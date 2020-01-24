@@ -19,14 +19,14 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacySnakDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacySnakDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
 	 */
 	private $deserializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$dataValueDeserializer = $this->createMock( Deserializer::class );
 
 		$dataValueDeserializer->expects( $this->any() )

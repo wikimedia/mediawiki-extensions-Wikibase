@@ -20,14 +20,14 @@ use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class LegacyStatementDeserializerTest extends \PHPUnit_Framework_TestCase {
+class LegacyStatementDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var Deserializer
 	 */
 	private $deserializer;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$snakDeserializer = new LegacySnakDeserializer( $this->createMock( Deserializer::class ) );
 		$qualifiersDeserializer = new LegacySnakListDeserializer( $snakDeserializer );
 

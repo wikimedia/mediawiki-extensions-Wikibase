@@ -13,14 +13,14 @@ use Wikibase\InternalSerialization\LegacyDeserializerFactory;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class LegacyDeserializerFactoryTest extends \PHPUnit_Framework_TestCase {
+class LegacyDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @var LegacyDeserializerFactory
 	 */
 	private $factory;
 
-	protected function setUp() {
+	protected function setUp() : void {
 		$this->factory = TestFactoryBuilder::newLegacyDeserializerFactory( $this );
 	}
 
