@@ -29,7 +29,7 @@ export default class ErrorWrapper extends Vue {
 	}
 
 	private isPermissionError( error: ApplicationError ): error is MissingPermissionsError {
-		return Object.values( PageNotEditable ).includes( error.type );
+		return ( Object.values( PageNotEditable ) as string[] ).includes( error.type );
 	}
 }
 </script>

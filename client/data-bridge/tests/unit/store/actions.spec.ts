@@ -4,7 +4,7 @@ import EntityLabelRepository from '@/definitions/data-access/EntityLabelReposito
 import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
-import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin';
+import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
 import actions from '@/store/actions';
 import {
 	BRIDGE_ERROR_ADD,
