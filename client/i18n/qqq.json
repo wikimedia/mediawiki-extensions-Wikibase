@@ -156,5 +156,9 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "Label of the option that the previous value was correct, but outdated, and should be updated, keeping the old value, but marking the new one as preferred.",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Additional description of the option that the previous value was correct, but outdated, and should be updated, keeping the old value, but marking the new one as preferred.",
 	"wikibase-client-data-bridge-references-heading": "Heading of the references section, see also {{msg-mw|wikibase-statementview-references-counter}}",
-	"wikibase-client-data-bridge-reference-snak-separator": "{{optional}} separates the different pieces of information (e.g. retrieved date, url, author, title, ...) in a concisely displayed reference"
+	"wikibase-client-data-bridge-reference-snak-separator": "{{optional}} separates the different pieces of information (e.g. retrieved date, url, author, title, ...) in a concisely displayed reference",
+	"wikibase-client-data-bridge-bailout-heading": "Heading for a component which presents the user with multiple options when they cannot edit a value directly via the Wikidata Bridge.",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Suggestion for the user when they cannot edit a value directly via the Wikidata Bridge. The button below has the label {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button}}.",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Label of a button sending the user to the Wikibase repository, shown after {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo}}.",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Suggestion for the user when they cannot edit a value directly via the Wikidata Bridge. The button above refers to {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button}."
 }

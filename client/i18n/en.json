@@ -142,5 +142,9 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>I updated</strong> an outdated value",
 	"wikibase-client-data-bridge-edit-decision-update-description": "The previous value used to be correct but is now outdated.",
 	"wikibase-client-data-bridge-references-heading": "References",
-	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;"
+	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;",
+	"wikibase-client-data-bridge-bailout-heading": "Instead you could do the following:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Edit the value on {{WBREPONAME}}. Click the button below to edit the value directly (link opens in a new tab).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Edit the value on {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Depending on the template used, it might be possible to overwrite the value locally using [$1 the article editor]. If at all possible, we recommend that you instead add the value to {{WBREPONAME}} via the button above."
 }

@@ -59,6 +59,10 @@ const messages = {
 	[ MessageKeys.EDIT_DECISION_UPDATE_DESCRIPTION ]: 'The previous value used to be correct but is now outdated.',
 	[ MessageKeys.REFERENCES_HEADING ]: 'References',
 	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '.&#32;',
+	[ MessageKeys.BAILOUT_HEADING ]: 'Instead you could do the following:',
+	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO ]: 'Edit the value on the repo. Click the button below (new tab).',
+	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON ]: 'Edit the value on the repo',
+	[ MessageKeys.BAILOUT_SUGGESTION_EDIT_ARTICLE ]: 'Overwrite using the article editor (not recommended): $1',
 } as { [ key in MessageKeys ]: string };
 
 services.set( 'messagesRepository', {

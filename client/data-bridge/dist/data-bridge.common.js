@@ -14610,6 +14610,10 @@ var MessageKeys;
   MessageKeys["PERMISSIONS_CASCADE_PROTECTED_BODY"] = "wikibase-client-data-bridge-cascadeprotected-on-repo-body";
   MessageKeys["PERMISSIONS_ERROR_UNKNOWN_HEADING"] = "wikibase-client-data-bridge-permissions-error-unknown-head";
   MessageKeys["PERMISSIONS_ERROR_UNKNOWN_BODY"] = "wikibase-client-data-bridge-permissions-error-unknown-body";
+  MessageKeys["BAILOUT_HEADING"] = "wikibase-client-data-bridge-bailout-heading";
+  MessageKeys["BAILOUT_SUGGESTION_GO_TO_REPO"] = "wikibase-client-data-bridge-bailout-suggestion-go-to-repo";
+  MessageKeys["BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON"] = "wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button";
+  MessageKeys["BAILOUT_SUGGESTION_EDIT_ARTICLE"] = "wikibase-client-data-bridge-bailout-suggestion-edit-article";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);

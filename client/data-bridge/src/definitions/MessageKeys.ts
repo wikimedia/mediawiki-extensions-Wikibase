@@ -26,6 +26,10 @@ enum MessageKeys {
 	PERMISSIONS_CASCADE_PROTECTED_BODY = 'wikibase-client-data-bridge-cascadeprotected-on-repo-body',
 	PERMISSIONS_ERROR_UNKNOWN_HEADING = 'wikibase-client-data-bridge-permissions-error-unknown-head',
 	PERMISSIONS_ERROR_UNKNOWN_BODY = 'wikibase-client-data-bridge-permissions-error-unknown-body',
+	BAILOUT_HEADING = 'wikibase-client-data-bridge-bailout-heading',
+	BAILOUT_SUGGESTION_GO_TO_REPO = 'wikibase-client-data-bridge-bailout-suggestion-go-to-repo',
+	BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON = 'wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button',
+	BAILOUT_SUGGESTION_EDIT_ARTICLE = 'wikibase-client-data-bridge-bailout-suggestion-edit-article',
 }
 
 export default MessageKeys;
