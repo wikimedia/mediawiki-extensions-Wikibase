@@ -19,8 +19,8 @@ class V4GuidGeneratorTest extends TestCase {
 		$firstGuid = $guidGen->newGuid();
 		$secondGuid = $guidGen->newGuid();
 
-		$this->assertInternalType( 'string', $firstGuid );
-		$this->assertInternalType( 'string', $secondGuid );
+		$this->assertIsString( $firstGuid );
+		$this->assertIsString( $secondGuid );
 		$this->assertNotSame( $firstGuid, $secondGuid );
 	}
 

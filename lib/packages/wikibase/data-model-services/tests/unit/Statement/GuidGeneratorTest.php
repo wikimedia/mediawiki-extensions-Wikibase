@@ -38,7 +38,7 @@ class GuidGeneratorTest extends TestCase {
 	}
 
 	private function assertIsGuidForId( $guid, EntityId $id ) {
-		$this->assertInternalType( 'string', $guid );
+		$this->assertIsString( $guid );
 		$this->assertStringStartsWith( $id->getSerialization(), $guid );
 	}
 

@@ -2,11 +2,11 @@
 
 namespace Wikibase\DataModel\Services\EntityId;
 
-use Wikimedia\Assert\Assert;
-use Wikimedia\Assert\ParameterAssertionException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikimedia\Assert\Assert;
+use Wikimedia\Assert\ParameterAssertionException;
 
 /**
  * EntityIdParser that maps a prefix of id serialization to a local prefix

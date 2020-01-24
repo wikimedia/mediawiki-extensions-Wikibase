@@ -50,7 +50,7 @@ class EntityIdLabelFormatterTest extends TestCase {
 
 		$formattedValue = $formatter->formatEntityId( $entityId );
 
-		$this->assertInternalType( 'string', $formattedValue );
+		$this->assertIsString( $formattedValue );
 		$this->assertEquals( $expectedString, $formattedValue );
 	}
 

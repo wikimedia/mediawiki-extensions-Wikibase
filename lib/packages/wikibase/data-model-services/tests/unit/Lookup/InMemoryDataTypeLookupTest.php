@@ -34,7 +34,7 @@ class InMemoryDataTypeLookupTest extends TestCase {
 
 		$actual = $lookup->getDataTypeIdForProperty( $propertyId );
 
-		$this->assertInternalType( 'string', $actual );
+		$this->assertIsString( $actual );
 
 		$this->assertEquals( $stringTypeId, $actual );
 

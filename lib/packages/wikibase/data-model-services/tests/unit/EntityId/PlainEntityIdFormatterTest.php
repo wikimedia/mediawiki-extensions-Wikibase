@@ -41,7 +41,7 @@ class PlainEntityIdFormatterTest extends TestCase {
 
 		$formattingResult = $formatter->formatEntityId( $entityId );
 
-		$this->assertInternalType( 'string', $formattingResult );
+		$this->assertIsString( $formattingResult );
 		$this->assertEquals( $expectedString, $formattingResult );
 	}
 
