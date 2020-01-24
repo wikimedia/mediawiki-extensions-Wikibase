@@ -206,7 +206,7 @@ class OutputPageBeforeHTMLHookHandler {
 		$out->addJsConfigVars(
 			'wbUserSpecifiedLanguages',
 			// All user-specified languages, that are valid term languages
-			// Reindex the keys so that javascript still works if an unknown
+			// Reindex the keys so that JavaScript still works if an unknown
 			// language code in the babel box causes an index to miss
 			array_values( array_intersect(
 				$this->userLanguageLookup->getUserSpecifiedLanguages( $out->getUser() ),
