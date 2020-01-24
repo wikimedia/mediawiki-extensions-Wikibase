@@ -1,5 +1,9 @@
 # Wikibase DataModel Serialization release notes
 
+# 2.10.0 (development)
+
+* Require Wikibase DataModel 8.x or 9.x
+
 ## 2.9.1 (2018-12-14)
 
 * Apply ID prefix mapping in `SnakDeserializer`, like `EntityIdValueParser` does.
