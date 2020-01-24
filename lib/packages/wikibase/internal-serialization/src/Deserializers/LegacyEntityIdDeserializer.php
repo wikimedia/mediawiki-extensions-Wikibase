@@ -6,9 +6,9 @@ use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\LegacyIdInterpreter;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\LegacyIdInterpreter;
 
 /**
  * @license GPL-2.0-or-later

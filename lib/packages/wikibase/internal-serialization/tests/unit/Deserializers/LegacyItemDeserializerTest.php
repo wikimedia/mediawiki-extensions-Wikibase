@@ -4,17 +4,17 @@ namespace Tests\Wikibase\InternalSerialization\Deserializers;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyEntityIdDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyFingerprintDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySiteLinkListDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyItemDeserializer

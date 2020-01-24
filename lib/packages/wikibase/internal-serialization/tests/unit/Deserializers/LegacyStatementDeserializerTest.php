@@ -9,9 +9,9 @@ use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakDeserializer;
 use Wikibase\InternalSerialization\Deserializers\LegacySnakListDeserializer;
+use Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer;
 
 /**
  * @covers Wikibase\InternalSerialization\Deserializers\LegacyStatementDeserializer
