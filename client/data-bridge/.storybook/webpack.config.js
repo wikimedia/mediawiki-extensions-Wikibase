@@ -29,10 +29,10 @@ module.exports = async ( { config } ) => {
 				loader: 'postcss-loader',
 				options: {
 					ident: 'postcss',
-					plugins: [
-						require( 'autoprefixer' )( ourPostCssConfig.plugins.autoprefixer ),
-						require( 'postcss-prefixwrap' )( ourPostCssConfig.plugins[ 'postcss-prefixwrap' ] ),
-					],
+					plugins: Object.entries( ourPostCssConfig.plugins )
+						.map( ( [ plugin, config ] ) => {
+							return require( plugin )( config );
+						} ),
 				},
 			},
 			{
