@@ -17,6 +17,10 @@
 			"name": "Jeroen De Dauw",
 			"email": "jeroendedauw@gmail.com",
 			"homepage": "https://www.entropywins.wtf/"
+		},
+		{
+			"name": "The Wikidata team",
+			"role": "Developer"
 		}
 	],
 	"support": {
