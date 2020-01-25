@@ -25,7 +25,7 @@ class AliasGroupListSerializerTest extends TestCase {
 	 * @return AliasGroupListSerializer
 	 */
 	private function buildSerializer( $useObjectsForMaps = false ) {
-		$aliasGroupSerializer = $this->getMock( Serializer::class );
+		$aliasGroupSerializer = $this->getMockBuilder( Serializer::class )->getMock();
 		$aliasGroupSerializer->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroup $aliasGroup ) {
@@ -85,7 +85,7 @@ class AliasGroupListSerializerTest extends TestCase {
 	public function testWithUnsupportedObject() {
 		$serializer = $this->buildSerializer();
 
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new stdClass() );
 	}
 

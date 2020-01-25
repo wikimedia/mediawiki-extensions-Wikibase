@@ -17,7 +17,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class SnakListSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$snakSerializerMock = $this->getMock( Serializer::class );
+		$snakSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )
@@ -79,7 +79,7 @@ class SnakListSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function testSnakListSerializerWithOptionObjectsForMaps() {
-		$snakSerializerMock = $this->getMock( Serializer::class );
+		$snakSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new PropertyNoValueSnak( 42 ) ) )

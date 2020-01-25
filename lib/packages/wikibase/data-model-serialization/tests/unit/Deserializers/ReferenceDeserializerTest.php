@@ -21,7 +21,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 
 	protected function buildDeserializer() {
-		$snaksDeserializerMock = $this->getMock( Deserializer::class );
+		$snaksDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [] ) )
@@ -71,7 +71,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testSnaksOrderDeserialization() {
-		$snaksDeserializerMock = $this->getMock( Deserializer::class );
+		$snaksDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$snaksDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( [
@@ -140,7 +140,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -154,7 +154,7 @@ class ReferenceDeserializerTest extends DispatchableDeserializerTest {
 	}
 
 	public function testGivenInvalidSnaksOrderAttribute_exceptionIsThrown() {
-		$this->setExpectedException( InvalidAttributeException::class );
+		$this->expectException( InvalidAttributeException::class );
 		$this->buildDeserializer()->deserialize( [
 			'hash' => 'foo',
 			'snaks' => [],

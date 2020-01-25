@@ -50,7 +50,7 @@ class TermSerializerTest extends TestCase {
 	public function testWithUnsupportedObject() {
 		$serializer = new TermSerializer();
 
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 

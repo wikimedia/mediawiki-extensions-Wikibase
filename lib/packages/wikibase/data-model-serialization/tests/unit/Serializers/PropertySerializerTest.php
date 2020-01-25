@@ -22,7 +22,7 @@ use Wikibase\DataModel\Term\TermList;
 class PropertySerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$termListSerializerMock = $this->getMock( Serializer::class );
+		$termListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$termListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( TermList $termList ) {
@@ -35,7 +35,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				];
 			} ) );
 
-		$aliasGroupListSerializerMock = $this->getMock( Serializer::class );
+		$aliasGroupListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$aliasGroupListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( AliasGroupList $aliasGroupList ) {
@@ -48,7 +48,7 @@ class PropertySerializerTest extends DispatchableSerializerTest {
 				];
 			} ) );
 
-		$statementListSerializerMock = $this->getMock( Serializer::class );
+		$statementListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$statementListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnCallback( function( StatementList $statementList ) {

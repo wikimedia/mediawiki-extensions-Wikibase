@@ -21,7 +21,7 @@ class TermDeserializerTest extends TestCase {
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = new TermDeserializer();
 
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 

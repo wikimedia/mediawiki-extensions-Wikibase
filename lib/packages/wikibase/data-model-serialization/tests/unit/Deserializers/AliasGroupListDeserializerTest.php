@@ -23,7 +23,7 @@ class AliasGroupListDeserializerTest extends TestCase {
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = new AliasGroupListDeserializer();
 
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 

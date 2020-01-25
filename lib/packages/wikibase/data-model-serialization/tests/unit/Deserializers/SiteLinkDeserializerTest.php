@@ -20,7 +20,7 @@ use Wikibase\DataModel\SiteLink;
 class SiteLinkDeserializerTest extends TestCase {
 
 	private function buildDeserializer() {
-		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
+		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'Q42' ) )
@@ -35,7 +35,7 @@ class SiteLinkDeserializerTest extends TestCase {
 	public function testDeserializeThrowsDeserializationException( $nonDeserializable ) {
 		$deserializer = $this->buildDeserializer();
 
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$deserializer->deserialize( $nonDeserializable );
 	}
 
@@ -95,14 +95,14 @@ class SiteLinkDeserializerTest extends TestCase {
 	}
 
 	public function testDeserializeItemIdFilterPropertyId() {
-		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
+		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$entityIdDeserializerMock->expects( $this->any() )
 			->method( 'deserialize' )
 			->with( $this->equalTo( 'P42' ) )
 			->will( $this->returnValue( new PropertyId( 'P42' ) ) );
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
-		$this->setExpectedException( InvalidAttributeException::class );
+		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',
@@ -111,10 +111,10 @@ class SiteLinkDeserializerTest extends TestCase {
 	}
 
 	public function testAssertBadgesIsArray() {
-		$entityIdDeserializerMock = $this->getMock( Deserializer::class );
+		$entityIdDeserializerMock = $this->getMockBuilder( Deserializer::class )->getMock();
 		$deserializer = new SiteLinkDeserializer( $entityIdDeserializerMock );
 
-		$this->setExpectedException( InvalidAttributeException::class );
+		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'site' => 'frwikisource',
 			'title' => 'Nyan Cat',

@@ -33,29 +33,29 @@ use Wikibase\DataModel\Serializers\TypedSnakSerializer;
  */
 class SerializerFactory {
 
-	const OPTION_DEFAULT = 0;
+	public const OPTION_DEFAULT = 0;
 	/** @since 1.2.0 */
-	const OPTION_OBJECTS_FOR_MAPS = 1;
+	public const OPTION_OBJECTS_FOR_MAPS = 1;
 	/**
 	 * @since 1.7.0
 	 * @deprecated since 2.5 use OPTION_SERIALIZE_SNAKS_WITHOUT_HASH
 	 */
-	const OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH = 2;
+	public const OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH = 2;
 	/**
 	 * @since 1.7.0
 	 * @deprecated since 2.5 use OPTION_SERIALIZE_SNAKS_WITHOUT_HASH
 	 */
-	const OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH = 4;
+	public const OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH = 4;
 	/**
 	 * @since 1.7.0
 	 * @deprecated since 2.5 use OPTION_SERIALIZE_SNAKS_WITHOUT_HASH
 	 */
-	const OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH = 8;
+	public const OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH = 8;
 	/**
 	 * Omit hashes when serializing snaks.
 	 * @since 2.5.0
 	 */
-	const OPTION_SERIALIZE_SNAKS_WITHOUT_HASH = 14; /* =
+	public const OPTION_SERIALIZE_SNAKS_WITHOUT_HASH = 14; /* =
 		self::OPTION_SERIALIZE_MAIN_SNAKS_WITHOUT_HASH |
 		self::OPTION_SERIALIZE_QUALIFIER_SNAKS_WITHOUT_HASH |
 		self::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH; */

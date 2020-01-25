@@ -122,7 +122,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	 * @dataProvider invalidDeserializationProvider
 	 */
 	public function testInvalidSerialization( $serialization ) {
-		$this->setExpectedException( DeserializationException::class );
+		$this->expectException( DeserializationException::class );
 		$this->buildDeserializer()->deserialize( $serialization );
 	}
 
@@ -145,7 +145,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	public function testDeserializePropertyIdFilterItemId() {
 		$deserializer = new SnakDeserializer( new BasicEntityIdParser(), new DataValueDeserializer() );
 
-		$this->setExpectedException( InvalidAttributeException::class );
+		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'snaktype' => 'somevalue',
 			'property' => 'Q42'
@@ -155,7 +155,7 @@ class SnakDeserializerTest extends DispatchableDeserializerTest {
 	public function testDeserializeBadPropertyId() {
 		$deserializer = new SnakDeserializer( new BasicEntityIdParser(), new DataValueDeserializer() );
 
-		$this->setExpectedException( InvalidAttributeException::class );
+		$this->expectException( InvalidAttributeException::class );
 		$deserializer->deserialize( [
 			'snaktype' => 'somevalue',
 			'property' => 'xyz'

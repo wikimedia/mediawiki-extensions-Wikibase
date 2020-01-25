@@ -23,7 +23,7 @@ class AliasGroupSerializerTest extends TestCase {
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
 		$serializer = new AliasGroupSerializer();
 
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( $nonSerializable );
 	}
 

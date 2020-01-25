@@ -45,7 +45,7 @@ abstract class DispatchableSerializerTest extends TestCase {
 	 * @dataProvider nonSerializableProvider
 	 */
 	public function testSerializeThrowsUnsupportedObjectException( $nonSerializable ) {
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$this->buildSerializer()->serialize( $nonSerializable );
 	}
 

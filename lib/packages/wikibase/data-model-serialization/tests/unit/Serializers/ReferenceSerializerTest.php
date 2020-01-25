@@ -19,7 +19,7 @@ use Wikibase\DataModel\Snak\SnakList;
 class ReferenceSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$snakListSerializerMock = $this->getMock( Serializer::class );
+		$snakListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SnakList( [] ) ) )
@@ -69,7 +69,7 @@ class ReferenceSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function testSnaksOrderSerialization() {
-		$snakListSerializerMock = $this->getMock( Serializer::class );
+		$snakListSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakListSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->with( $this->equalTo( new SnakList( [

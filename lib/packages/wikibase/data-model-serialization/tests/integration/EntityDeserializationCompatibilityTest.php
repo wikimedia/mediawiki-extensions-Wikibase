@@ -29,7 +29,7 @@ class EntityDeserializationCompatibilityTest extends TestCase {
 	 */
 	private $deserializer;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		$deserializerFactory = new DeserializerFactory(
 			new DataValueDeserializer( [
 				'string' => StringValue::class,

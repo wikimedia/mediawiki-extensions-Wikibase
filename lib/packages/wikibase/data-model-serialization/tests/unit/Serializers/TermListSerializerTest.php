@@ -69,7 +69,7 @@ class TermListSerializerTest extends TestCase {
 	public function testWithUnsupportedObject() {
 		$serializer = $this->buildSerializer();
 
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$serializer->serialize( new \stdClass() );
 	}
 

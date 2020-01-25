@@ -88,7 +88,7 @@ class SnakSerializerTest extends DispatchableSerializerTest {
 		$serialization = $serializer->serialize( $snak );
 
 		$this->assertArrayHasKey( 'hash', $serialization );
-		$this->assertInternalType( 'string', $serialization['hash'] );
+		$this->assertIsString( $serialization['hash'] );
 		$this->assertNotEmpty( $serialization['hash'] );
 	}
 

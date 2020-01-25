@@ -21,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
 class StatementSerializerTest extends DispatchableSerializerTest {
 
 	protected function buildSerializer() {
-		$snakSerializerFake = $this->getMock( Serializer::class );
+		$snakSerializerFake = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [
@@ -29,7 +29,7 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 				'property' => "P42"
 			] ) );
 
-		$snaksSerializerFake = $this->getMock( Serializer::class );
+		$snaksSerializerFake = $this->getMockBuilder( Serializer::class )->getMock();
 		$snaksSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [
@@ -41,7 +41,7 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 				]
 			] ) );
 
-		$referencesSerializerFake = $this->getMock( Serializer::class );
+		$referencesSerializerFake = $this->getMockBuilder( Serializer::class )->getMock();
 		$referencesSerializerFake->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [
@@ -201,7 +201,7 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 	}
 
 	public function testQualifiersOrderSerialization() {
-		$snakSerializerMock = $this->getMock( Serializer::class );
+		$snakSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snakSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [
@@ -209,12 +209,12 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 				'property' => 'P42'
 			] ) );
 
-		$snaksSerializerMock = $this->getMock( Serializer::class );
+		$snaksSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$snaksSerializerMock->expects( $this->any() )
 			->method( 'serialize' )
 			->will( $this->returnValue( [] ) );
 
-		$referencesSerializerMock = $this->getMock( Serializer::class );
+		$referencesSerializerMock = $this->getMockBuilder( Serializer::class )->getMock();
 		$statementSerializer = new StatementSerializer(
 			$snakSerializerMock,
 			$snaksSerializerMock,

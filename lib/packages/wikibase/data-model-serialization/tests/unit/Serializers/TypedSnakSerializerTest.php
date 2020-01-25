@@ -23,8 +23,8 @@ class TypedSnakSerializerTest extends TestCase {
 	 */
 	private $serializer;
 
-	protected function setUp() {
-		$snakSerializer = $this->getMock( Serializer::class );
+	protected function setUp(): void {
+		$snakSerializer = $this->getMockBuilder( Serializer::class )->getMock();
 
 		$snakSerializer->expects( $this->any() )
 			->method( 'serialize' )
@@ -48,7 +48,7 @@ class TypedSnakSerializerTest extends TestCase {
 	public function serializationProvider() {
 		$argLists = [];
 
-		$mockSnak = $this->getMock( Snak::class );
+		$mockSnak = $this->getMockBuilder( Snak::class )->getMock();
 
 		$argLists[] = [
 			new TypedSnak( $mockSnak, 'string' ),
@@ -72,7 +72,7 @@ class TypedSnakSerializerTest extends TestCase {
 	}
 
 	public function testWithUnsupportedObject() {
-		$this->setExpectedException( UnsupportedObjectException::class );
+		$this->expectException( UnsupportedObjectException::class );
 		$this->serializer->serialize( new PropertyNoValueSnak( 42 ) );
 	}
 
