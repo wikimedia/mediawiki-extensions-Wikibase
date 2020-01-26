@@ -22,16 +22,33 @@ class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescription
 	private $termLookup;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var LanguageFallbackChain|callable
 	 */
 	private $languageFallbackChain;
 
+	/**
+	 * @param TermLookup $termLookup
+	 * @param LanguageFallbackChain|callable $languageFallbackChain
+	 */
 	public function __construct(
 		TermLookup $termLookup,
-		LanguageFallbackChain $languageFallbackChain
+		$languageFallbackChain
 	) {
+		if (
+			!$languageFallbackChain instanceof LanguageFallbackChain &&
+			!is_callable( $languageFallbackChain )
+		) {
+			throw new \InvalidArgumentException( 'Should be callable of LanguageFallbackChain' );
+		}
 		$this->termLookup = $termLookup;
 		$this->languageFallbackChain = $languageFallbackChain;
+	}
+
+	private function getLanguageFallbackChain() {
+		if ( !$this->languageFallbackChain instanceof LanguageFallbackChain ) {
+			$this->languageFallbackChain = call_user_func( $this->languageFallbackChain );
+		}
+		return $this->languageFallbackChain;
 	}
 
 	/**
@@ -41,7 +58,7 @@ class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescription
 	 * @return TermFallback|null
 	 */
 	public function getLabel( EntityId $entityId ) {
-		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
+		$fetchLanguages = $this->getLanguageFallbackChain()->getFetchLanguageCodes();
 
 		try {
 			$labels = $this->termLookup->getLabels( $entityId, $fetchLanguages );
@@ -59,7 +76,7 @@ class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescription
 	 * @return TermFallback|null
 	 */
 	public function getDescription( EntityId $entityId ) {
-		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
+		$fetchLanguages = $this->getLanguageFallbackChain()->getFetchLanguageCodes();
 
 		try {
 			$descriptions = $this->termLookup->getDescriptions( $entityId, $fetchLanguages );
@@ -77,7 +94,7 @@ class LanguageFallbackLabelDescriptionLookup implements FallbackLabelDescription
 	 * @return TermFallback|null
 	 */
 	private function getTermFallback( array $terms, array $fetchLanguages ) {
-		$extractedData = $this->languageFallbackChain->extractPreferredValue( $terms );
+		$extractedData = $this->getLanguageFallbackChain()->extractPreferredValue( $terms );
 
 		if ( $extractedData === null ) {
 			return null;
