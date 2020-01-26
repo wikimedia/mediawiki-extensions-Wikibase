@@ -82,11 +82,13 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::newFromGlobalState
 		$context = RequestContext::getMain();
-		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
+		$lfcClosure = function() use ( $context, $languageFallbackChainFactory ) {
+			return $languageFallbackChainFactory->newFromContext( $context );
+		};
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$wikibaseRepo->getTermLookup(),
-			$languageFallbackChain
+			$lfcClosure
 		);
 		$services = MediaWikiServices::getInstance();
 
