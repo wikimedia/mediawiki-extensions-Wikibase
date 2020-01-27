@@ -40,7 +40,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Modules\\MediaWikiConfigValueProvider' => __DIR__ . '/includes/Modules/MediaWikiConfigValueProvider.php',
 	'Wikibase\\Lib\\Modules\\PropertyValueExpertsModule' => __DIR__ . '/includes/Modules/PropertyValueExpertsModule.php',
 	'Wikibase\\Lib\\Modules\\SettingsValueProvider' => __DIR__ . '/includes/Modules/SettingsValueProvider.php',
-	'Wikibase\\Lib\\ParserFunctions\\CommaSeparatedList' => __DIR__ . '/includes/ParserFunctions/CommaSeparatedList.php',
 	'Wikibase\\Lib\\PropertyInfoDataTypeLookup' => __DIR__ . '/includes/PropertyInfoDataTypeLookup.php',
 	'Wikibase\\Lib\\PropertyInfoSnakUrlExpander' => __DIR__ . '/includes/PropertyInfoSnakUrlExpander.php',
 	'Wikibase\\Lib\\Reporting\\ExceptionHandler' => __DIR__ . '/includes/Reporting/ExceptionHandler.php',
