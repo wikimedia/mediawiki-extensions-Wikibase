@@ -1415,7 +1415,7 @@ final class WikibaseClient {
 	/**
 	 * @return string|false
 	 */
-	private function getDatabaseDomainNameOfLocalRepo() {
+	public function getDatabaseDomainNameOfLocalRepo() {
 		$dataAccessSettings = $this->getDataAccessSettings();
 
 		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
