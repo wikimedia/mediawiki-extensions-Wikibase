@@ -6,6 +6,7 @@
 		"doc": "npm-run-all doc:*",
 		"doc:jsduck": "jsduck",
 		"doc:data-bridge-storybook": "npm --prefix client/data-bridge run build-storybook -- -o ../../docs/data-bridge-storybook",
+		"doc:tainted-ref-storybook": "npm --prefix view/lib/wikibase-tainted-ref run build-storybook -- -o ../../../docs/tainted-ref-storybook",
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"postinstall": "npm-run-all -p install:*",
