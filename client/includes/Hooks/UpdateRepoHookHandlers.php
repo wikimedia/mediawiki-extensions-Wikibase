@@ -71,7 +71,7 @@ class UpdateRepoHookHandlers {
 
 		$namespaceChecker = $wikibaseClient->getNamespaceChecker();
 
-		$repoDB = $wikibaseClient->getRepositoryDefinitions()->getDatabaseNames()[''];
+		$repoDB = $wikibaseClient->getDatabaseDomainNameOfLocalRepo();
 		$jobQueueGroup = JobQueueGroup::singleton( $repoDB );
 
 		if ( !$jobQueueGroup ) {
