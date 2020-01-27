@@ -58,28 +58,6 @@ class FakePrefetchingTermLookupTest extends TestCase {
 		$this->assertNull( $lookup->getPrefetchedTerm( new ItemId( 'Q1' ), 'label', 'en' ) );
 	}
 
-	public function testGivenNoTermTypesGiven_labelAndDescriptionArePrefetched() {
-		$lookup = new FakePrefetchingTermLookup();
-
-		$lookup->prefetchTerms( [ new ItemId( 'Q1' ) ], null, [ 'en' ] );
-
-		$this->assertEquals(
-			[ 'Q1 en label', 'Q1 en description' ],
-			$lookup->getPrefetchedTerms()
-		);
-	}
-
-	public function testGivenNoLanguageCodesGiven_germanAndEnglishArePrefetched() {
-		$lookup = new FakePrefetchingTermLookup();
-
-		$lookup->prefetchTerms( [ new ItemId( 'Q1' ) ], [ 'label' ], null );
-
-		$this->assertEquals(
-			[ 'Q1 de label', 'Q1 en label' ],
-			$lookup->getPrefetchedTerms()
-		);
-	}
-
 	public function testGetPrefetchedAliases() {
 		$lookup = new FakePrefetchingTermLookup();
 

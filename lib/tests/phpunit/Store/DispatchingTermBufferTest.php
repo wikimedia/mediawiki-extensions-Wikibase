@@ -82,7 +82,7 @@ class DispatchingTermBufferTest extends \PHPUnit\Framework\TestCase {
 			[ 'foo' => $fooTermBuffer, '' => $localTermBuffer ],
 			new NullLogger()
 		);
-		$dispatcher->prefetchTerms( $ids );
+		$dispatcher->prefetchTerms( $ids, [], [] );
 	}
 
 	public function entityIdsFromDifferentReposProvider() {

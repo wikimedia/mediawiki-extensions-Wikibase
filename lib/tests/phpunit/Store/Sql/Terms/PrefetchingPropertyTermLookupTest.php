@@ -122,13 +122,13 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testPrefetchTerms_Empty() {
-		$this->lookup->prefetchTerms( [] );
+		$this->lookup->prefetchTerms( [], [], [] );
 		$this->assertTrue( true ); // no error
 	}
 
 	public function testPrefetchTerms_SameTermsTwice() {
-		$this->lookup->prefetchTerms( [ $this->p1 ] );
-		$this->lookup->prefetchTerms( [ $this->p1 ] );
+		$this->lookup->prefetchTerms( [ $this->p1 ], [ 'label', 'description', 'alias' ], [ 'en' ] );
+		$this->lookup->prefetchTerms( [ $this->p1 ], [ 'label', 'description', 'alias' ], [ 'en' ] );
 		$this->assertTrue( true ); // no error
 	}
 

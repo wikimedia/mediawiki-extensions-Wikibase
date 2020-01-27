@@ -79,7 +79,7 @@ class ElasticTermLookupTest extends EntityTermLookupTest {
 		$lookup->prefetchTerms( [
 			new ItemId( 'Q115' ),
 			new ItemId( 'Q116' ),
-		] );
+		], [ $type ], [ $language ] );
 
 		$term = $lookup->getPrefetchedTerm( new ItemId( $entityId ), $type, $language );
 		$this->assertEquals( $result, $term );

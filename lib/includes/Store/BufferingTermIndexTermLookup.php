@@ -100,6 +100,11 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 * Loads a set of terms into the buffer.
 	 * The source from which to fetch would typically be supplied to the buffer's constructor.
 	 *
+	 * @todo $termTypes and $languageCodes can not be null with data-model-service ~5.0
+	 * Code calling this already always passes array here and the defaults should be removed soon
+	 * Leaving the defaults in this method allows us to stay compatible with ~4.0 and ~5.0
+	 * for a short period during migration and updates.
+	 *
 	 * @param EntityId[] $entityIds
 	 * @param string[]|null $termTypes
 	 * @param string[]|null $languageCodes
@@ -107,6 +112,10 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 * @throws StorageException
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes = null, array $languageCodes = null ) {
+		if ( $termTypes === null || $languageCodes === null ) {
+			throw new \InvalidArgumentException( '$termTypes and $languageCodes can not be null' );
+		}
+
 		MediaWikiServices::getInstance()
 			->getStatsdDataFactory()
 			->increment( 'wikibase.repo.wb_terms.select.BufferingTermLookup_prefetchTerms' );
@@ -129,6 +138,7 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		// If they are not/ only partially prefetched or we don't know whether our prefetched data on
 		// them is complete, we just resort to fetching them (again).
 		$entityIdsToFetch = [];
+		// @phan-suppress-next-line PhanImpossibleTypeComparison
 		if ( $termTypes !== null && $languageCodes !== null ) {
 			$entityIdsToFetch = $this->getIncompletelyPrefetchedEntityIds( $entityIds, $termTypes, $languageCodes );
 		} else {
