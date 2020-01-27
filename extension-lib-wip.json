@@ -31,10 +31,12 @@
 		"Wikibase\\Lib\\Sites\\": "lib/includes/Sites/",
 		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
 		"Wikibase\\Lib\\Store\\Sql\\": "lib/includes/Store/Sql/",
-		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParserFunctions/"
+		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParserFunctions/",
+		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"TestAutoloadNamespaces": {
-		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/"
+		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
 	},
 	"manifest_version": 2
 }
