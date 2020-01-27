@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorPermissionInfo matches the snapshot in closed state 1`] = `
+<div
+  class="wb-ui-permission-info-box"
+>
+  <div
+    class="wb-ui-permission-info-box__info__icon"
+  >
+    <div
+      class="wb-ui-permission-info-box__header"
+    >
+      header
+    </div>
+  </div>
+   
+  <div
+    class="wb-ui-permission-info-box__body"
+  >
+    <div
+      class="wb-ui-permission-info-box__icon--expanded"
+    >
+      <a
+        class="wb-ui-permission-info-box__body__title"
+      >
+        
+				⧼wikibase-client-data-bridge-permissions-error-info⧽
+			
+      </a>
+    </div>
+     
+    <!---->
+  </div>
+</div>
+`;
+
+exports[`ErrorPermissionInfo matches the snapshot in opened state 1`] = `
+<div
+  class="wb-ui-permission-info-box"
+>
+  <div
+    class="wb-ui-permission-info-box__info__icon"
+  >
+    <div
+      class="wb-ui-permission-info-box__header"
+    >
+      header
+    </div>
+  </div>
+   
+  <div
+    class="wb-ui-permission-info-box__body"
+  >
+    <div
+      class="wb-ui-permission-info-box__icon--collapsed"
+    >
+      <a
+        class="wb-ui-permission-info-box__body__title"
+      >
+        
+				⧼wikibase-client-data-bridge-permissions-error-info⧽
+			
+      </a>
+    </div>
+     
+    <div>
+      body
+    </div>
+  </div>
+</div>
+`;

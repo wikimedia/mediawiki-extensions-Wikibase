@@ -7,7 +7,7 @@ storiesOf( 'ErrorPermission', module )
 	.addDecorator( useStore( {
 		entityTitle: 'Q42',
 	} ) )
-	.add( 'base view', () => ( {
+	.add( 'two errors', () => ( {
 		components: { ErrorPermission },
 		template: `<ErrorPermission
 				:permissionErrors="[
@@ -24,6 +24,19 @@ storiesOf( 'ErrorPermission', module )
 								'Important Page',
 								'Super Duper Important Page',
 							],
+						},
+					},
+				]"
+				/>`,
+	} ) )
+	.add( 'one error', () => ( {
+		components: { ErrorPermission },
+		template: `<ErrorPermission
+				:permissionErrors="[
+					{
+						type: 'protectedpage',
+						info: {
+							right: 'editprotected',
 						},
 					},
 				]"

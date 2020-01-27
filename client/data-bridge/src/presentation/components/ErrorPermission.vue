@@ -7,6 +7,7 @@
 			:key="index"
 			:message-header="getMessageHeader( permissionError )"
 			:message-body="getMessageBody( permissionError )"
+			:expanded-by-default="permissionErrors.length === 1"
 		/>
 	</section>
 </template>

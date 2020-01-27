@@ -34,10 +34,21 @@ import Component from 'vue-class-component';
 export default class ErrorPermissionInfo extends Vue {
 	public infoIsExpanded = false;
 
+	/**
+	 * Flag to decide if the component is to be shown in an expanded
+	 * state initially.
+	 */
+	@Prop( { required: false, default: false, type: Boolean } )
+	public expandedByDefault!: boolean;
+
 	@Prop( { required: true } )
 	private readonly messageHeader!: string;
 	@Prop( { required: true } )
 	private readonly messageBody!: string;
+
+	public created(): void {
+		this.infoIsExpanded = this.expandedByDefault;
+	}
 
 	private toggleInfo(): void {
 		this.infoIsExpanded = !this.infoIsExpanded;

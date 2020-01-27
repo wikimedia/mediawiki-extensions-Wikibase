@@ -536,4 +536,40 @@ describe( 'ErrorPermission', () => {
 			logUrl,
 			propertyTalkUrl );
 	} );
+
+	it.each( [
+		[ 1, true ],
+		[ 2, false ],
+	] )( 'given %d errors, expandedByDefault is %p', ( errorCount, expandedByDefault ) => {
+		const messageGet = jest.fn( ( key ) => key );
+		const store = new Store<Partial<Application>>( {
+			state: {
+				entityTitle,
+			},
+		} );
+		const error: ProtectedReason = {
+			type: PageNotEditable.ITEM_FULLY_PROTECTED,
+			info: {
+				right: '',
+			},
+		};
+		const permissionErrors: MissingPermissionsError[] = new Array( errorCount ).fill( error );
+		const wrapper = shallowMount( ErrorPermission, {
+			localVue,
+			propsData: {
+				permissionErrors,
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			store,
+		} );
+
+		for ( const errorPermissionInfo of wrapper.findAll( ErrorPermissionInfo ).wrappers ) {
+			expect( errorPermissionInfo.props( 'expandedByDefault' ) ).toBe( expandedByDefault );
+		}
+	} );
 } );
