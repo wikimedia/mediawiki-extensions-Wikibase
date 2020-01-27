@@ -27,7 +27,7 @@
 		"Wikibase\\Lib\\Interactors\\": "lib/includes/Interactors/",
 		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
 		"Wikibase\\Lib\\Store\\Sql\\": "lib/includes/Store/Sql/",
-		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParseFunctions/"
+		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParserFunctions/"
 	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/"
