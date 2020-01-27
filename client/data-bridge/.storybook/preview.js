@@ -43,4 +43,13 @@ extendVueEnvironment(
 			return url;
 		},
 	},
+	{
+		getPageUrl( title, params ) {
+			let url = `https://client.wiki.example/wiki/${title.replace( / /g, '_' )}`;
+			if ( params ) {
+				url += '?' + new URLSearchParams( params ).toString();
+			}
+			return url;
+		},
+	},
 );
