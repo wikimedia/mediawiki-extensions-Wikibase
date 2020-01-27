@@ -973,7 +973,7 @@ call_user_func( function() {
 	$wgSpecialPages['EntityPage'] = function() {
 		return new SpecialEntityPage(
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
-			WikibaseRepo::getDefaultInstance()->getEntityContentFactory()
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
 		);
 	};
 	$wgSpecialPages['MyLanguageFallbackChain'] = function() {
