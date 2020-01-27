@@ -1037,10 +1037,16 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
-		// B/C compatibility, should be removed soon
-		// TODO: Move to check repo that has item entity not the default repo
+		$dataAccessSettings = $this->getDataAccessSettings();
+
+		$itemConceptUriBase = $dataAccessSettings->useEntitySourceBasedFederation() ?
+			$this->getItemSource( $dataAccessSettings )->getConceptBaseUri() :
+			// B/C compatibility, should be removed soon
+			// TODO: Move to check repo that has item entity not the default repo
+			$this->getRepositoryDefinitions()->getConceptBaseUris()[''];
+
 		return new SuffixEntityIdParser(
-			$this->getRepositoryDefinitions()->getConceptBaseUris()[''],
+			$itemConceptUriBase,
 			new ItemIdParser()
 		);
 	}
@@ -1669,6 +1675,17 @@ final class WikibaseClient {
 		$index->setForceWriteSearchFields( $this->settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
 
 		return $index;
+	}
+
+	private function getItemSource( DataAccessSettings $dataAccessSettings ) {
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+			if ( $itemSource !== null ) {
+				return $itemSource;
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 	private function getPropertySource( DataAccessSettings $dataAccessSettings ) {

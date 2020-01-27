@@ -448,6 +448,9 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntitySourceDefinitions
 	 */
 	private function getEntitySourceDefinitions() {
+		$irrelevantItemNamespaceId = 100;
+		$irrelevantItemSlotName = 'main';
+
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantPropertySlotName = 'main';
 
@@ -455,7 +458,10 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			[ new EntitySource(
 				'test',
 				false,
-				[ 'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ] ],
+				[
+					'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => $irrelevantItemSlotName ],
+					'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => $irrelevantPropertySlotName ],
+				],
 				'',
 				'',
 				'',
