@@ -26,16 +26,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 	public function execute() {
 		$this->generateAutoloadForComponent(
-			'data-access',
-			[ 'src' ],
-			[
-				'tests/phpunit/EntityPrefetcherSpy.php',
-				'tests/phpunit/FakePrefetchingTermLookup.php',
-				'tests/phpunit/DataAccessSettingsFactory.php',
-			]
-		);
-
-		$this->generateAutoloadForComponent(
 			'lib',
 			[ 'includes', 'maintenance' ]
 		);
