@@ -1903,8 +1903,21 @@ class WikibaseRepo {
 				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
+			$this->getPropertySource(),
+			$this->getDataAccessSettings(),
 			$this->getLogger()
 		);
+	}
+
+	private function getPropertySource() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+			if ( $propertySource !== null ) {
+				return $propertySource;
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 	public function getItemTermStore(): ItemTermStore {
@@ -1980,8 +1993,21 @@ class WikibaseRepo {
 				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
+			$this->getItemSource(),
+			$this->getDataAccessSettings(),
 			$this->getLogger()
 		);
+	}
+
+	private function getItemSource() {
+		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+			if ( $itemSource !== null ) {
+				return $itemSource;
+			}
+		}
+
+		return new UnusableEntitySource();
 	}
 
 	/**

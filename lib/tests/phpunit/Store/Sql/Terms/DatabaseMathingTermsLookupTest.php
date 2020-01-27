@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -272,8 +274,14 @@ class DatabaseMathingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 				$logger
 			),
 			new StringNormalizer(),
+			$this->getItemSource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$logger
 		);
+	}
+
+	private function getItemSource() {
+		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 10, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 }

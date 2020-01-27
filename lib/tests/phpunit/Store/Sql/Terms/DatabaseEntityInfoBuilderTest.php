@@ -100,6 +100,8 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
+			$this->getItemSource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new NullLogger()
 		);
 
@@ -118,6 +120,8 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
+			$this->getPropertySource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new NullLogger()
 		);
 
@@ -200,6 +204,14 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				[ 'IGNORE' ]
 			);
 		}
+	}
+
+	private function getItemSource() {
+		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 10, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	private function getPropertySource() {
+		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 	/**

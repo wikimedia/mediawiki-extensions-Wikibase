@@ -5,6 +5,9 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use WANObjectCache;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
+use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -31,9 +34,6 @@ use Wikibase\WikibaseSettings;
  */
 class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
-	/** @var DatabaseItemTermStore */
-	private $itemTermStore;
-
 	/** @var ItemId */
 	private $i1;
 
@@ -46,10 +46,6 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
-	private $loadBalancer;
-	private $lbFactory;
-	private $typeIdsStore;
-
 	protected function setUp() : void {
 		parent::setUp();
 		if ( !WikibaseSettings::isRepoEnabled() ) {
@@ -61,33 +57,8 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_text_in_lang';
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_item_terms';
+		$this->tablesUsed[] = 'wbt_property_terms';
 
-		$this->loadBalancer = new FakeLoadBalancer( [
-			'dbr' => $this->db,
-		] );
-		$this->lbFactory = new FakeLBFactory( [
-			'lb' => $this->loadBalancer
-		] );
-		$this->typeIdsStore = new DatabaseTypeIdsStore(
-			$this->loadBalancer,
-			WANObjectCache::newEmpty()
-		);
-		$this->itemTermStore = new DatabaseItemTermStore(
-			$this->loadBalancer,
-			new DatabaseTermIdsAcquirer(
-				$this->lbFactory,
-				$this->typeIdsStore
-			),
-			new DatabaseTermIdsResolver(
-				$this->typeIdsStore,
-				$this->typeIdsStore,
-				$this->loadBalancer
-			),
-			new DatabaseTermIdsCleaner(
-				$this->loadBalancer
-			),
-			new StringNormalizer()
-		);
 		$this->i1 = new ItemId( 'Q1' );
 
 		$this->fingerprint1 = new Fingerprint(
@@ -101,90 +72,286 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$this->fingerprintEmpty = new Fingerprint();
 	}
 
+	private function getItemTermStore() {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			WANObjectCache::newEmpty()
+		);
+
+		return new DatabaseItemTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$lbFactory,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			new StringNormalizer(),
+			new UnusableEntitySource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+		);
+	}
+
+	private function getItemTermStore_entitySourceBasedFederation() {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			WANObjectCache::newEmpty()
+		);
+
+		return new DatabaseItemTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$lbFactory,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			new StringNormalizer(),
+			$this->getItemSource(),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
+		);
+	}
+
+	private function getItemSource() {
+		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
 	public function testStoreAndGetTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	public function testStoreAndGetTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testGetTermsWithoutStore() {
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$store = $this->getItemTermStore();
+
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertTrue( $fingerprint->isEmpty() );
+	}
+
+	public function testGetTermsWithoutStore_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreEmptyAndGetTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertTrue( $fingerprint->isEmpty() );
+	}
+
+	public function testStoreEmptyAndGetTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprintEmpty
+		);
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testDeleteTermsWithoutStore() {
-		$this->itemTermStore->deleteTerms( $this->i1 );
+		$store = $this->getItemTermStore();
+
+		$store->deleteTerms( $this->i1 );
+		$this->assertTrue( true, 'did not throw an error' );
+	}
+
+	public function testDeleteTermsWithoutStore_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->deleteTerms( $this->i1 );
 		$this->assertTrue( true, 'did not throw an error' );
 	}
 
 	public function testStoreSameFingerprintTwiceAndGetTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
-		$this->itemTermStore->storeTerms(
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	public function testStoreSameFingerprintTwiceAndGetTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoreTwoFingerprintsAndGetTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
-		$this->itemTermStore->storeTerms(
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint2
 		);
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertEquals( $this->fingerprint2, $fingerprint );
+	}
+
+	public function testStoreTwoFingerprintsAndGetTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint2
+		);
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint2, $fingerprint );
 	}
 
 	public function testStoreAndDeleteAndGetTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$this->itemTermStore->deleteTerms( $this->i1 );
+		$store->deleteTerms( $this->i1 );
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertTrue( $fingerprint->isEmpty() );
+	}
+
+	public function testStoreAndDeleteAndGetTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+
+		$store->deleteTerms( $this->i1 );
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreTermsCleansUpRemovedTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
 			)
 		);
-		$this->itemTermStore->storeTerms(
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprintEmpty
+		);
+
+		$this->assertSelect(
+			'wbt_text',
+			'wbx_text',
+			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
+			[ /* empty */ ]
+		);
+	}
+
+	public function testStoreTermsCleansUpRemovedTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
+			)
+		);
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
@@ -198,13 +365,34 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteTermsCleansUpRemovedTerms() {
-		$this->itemTermStore->storeTerms(
+		$store = $this->getItemTermStore();
+
+		$store->storeTerms(
 			$this->i1,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
 			)
 		);
-		$this->itemTermStore->deleteTerms( $this->i1 );
+		$store->deleteTerms( $this->i1 );
+
+		$this->assertSelect(
+			'wbt_text',
+			'wbx_text',
+			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
+			[ /* empty */ ]
+		);
+	}
+
+	public function testDeleteTermsCleansUpRemovedTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$store->storeTerms(
+			$this->i1,
+			new Fingerprint(
+				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
+			)
+		);
+		$store->deleteTerms( $this->i1 );
 
 		$this->assertSelect(
 			'wbt_text',
@@ -215,68 +403,212 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testStoreTerms_throwsForForeignItemId() {
+		$store = $this->getItemTermStore();
+
 		$this->expectException( InvalidArgumentException::class );
-		$this->itemTermStore->storeTerms( new ItemId( 'wd:P1' ), $this->fingerprintEmpty );
+		$store->storeTerms( new ItemId( 'wd:Q1' ), $this->fingerprintEmpty );
+	}
+
+	public function testStoreTerms_throwsForNonItemEntitySource_entityBasedFederation() {
+		$store = $this->getTermStoreNotHandlingItems();
+
+		$this->expectException( InvalidArgumentException::class );
+		$store->storeTerms( new ItemId( 'Q1' ), $this->fingerprintEmpty );
 	}
 
 	public function testDeleteTerms_throwsForForeignItemId() {
+		$store = $this->getItemTermStore();
+
 		$this->expectException( InvalidArgumentException::class );
-		$this->itemTermStore->deleteTerms( new ItemId( 'wd:P1' ) );
+		$store->deleteTerms( new ItemId( 'wd:Q1' ) );
+	}
+
+	public function testDeleteTerms_throwsForNonItemEntitySource_entityBasedFederation() {
+		$store = $this->getTermStoreNotHandlingItems();
+
+		$this->expectException( InvalidArgumentException::class );
+		$store->deleteTerms( new ItemId( 'Q1' ) );
 	}
 
 	public function testGetTerms_throwsForForeignItemId() {
+		$store = $this->getItemTermStore();
+
 		$this->expectException( InvalidArgumentException::class );
-		$this->itemTermStore->getTerms( new ItemId( 'wd:P1' ) );
+		$store->getTerms( new ItemId( 'wd:Q1' ) );
+	}
+
+	public function testGetTerms_throwsForNonItemEntitySource_entityBasedFederation() {
+		$store = $this->getTermStoreNotHandlingItems();
+
+		$this->expectException( InvalidArgumentException::class );
+		$store->getTerms( new ItemId( 'Q1' ) );
+	}
+
+	private function getTermStoreNotHandlingItems() {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+		] );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			WANObjectCache::newEmpty()
+		);
+
+		return new DatabaseItemTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				new FakeLBFactory( [
+					'lb' => $loadBalancer
+				] ),
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			new StringNormalizer(),
+			$this->getPropertySource(),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
+		);
 	}
 
 	public function testStoresAndGetsUTF8Text() {
+		$store = $this->getItemTermStore();
+
 		$this->fingerprint1->setDescription(
 			'utf8',
 			'ఒక వ్యక్తి లేదా సంస్థ సాధించిన రికార్డు. ఈ రికార్డును సాధించిన కోల్పోయిన తేదీలను చూపేందుకు క్'
 		);
 
-		$this->itemTermStore->storeTerms(
+		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $this->itemTermStore->getTerms( $this->i1 );
+		$fingerprint = $store->getTerms( $this->i1 );
+
+		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	public function testStoresAndGetsUTF8Text_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$this->fingerprint1->setDescription(
+			'utf8',
+			'ఒక వ్యక్తి లేదా సంస్థ సాధించిన రికార్డు. ఈ రికార్డును సాధించిన కోల్పోయిన తేదీలను చూపేందుకు క్'
+		);
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+
+		$fingerprint = $store->getTerms( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testT237984UnexpectedMissingTextRow() {
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			WANObjectCache::newEmpty()
+		);
+
 		$propertyTermStore = new DatabasePropertyTermStore(
-			$this->loadBalancer,
+			$loadBalancer,
 			new DatabaseTermIdsAcquirer(
-				$this->lbFactory,
-				$this->typeIdsStore
+				$lbFactory,
+				$typeIdsStore
 			),
 			new DatabaseTermIdsResolver(
-				$this->typeIdsStore,
-				$this->typeIdsStore,
-				$this->loadBalancer
+				$typeIdsStore,
+				$typeIdsStore,
+				$loadBalancer
 			),
 			new DatabaseTermIdsCleaner(
-				$this->loadBalancer
+				$loadBalancer
 			),
-			new StringNormalizer()
+			new StringNormalizer(),
+			$this->getPropertySource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
+		$itemStore = $this->getItemTermStore();
 
 		$propertyTermStore->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
 			new TermList( [ new Term( 'nl', 'van' ) ] )
 		) );
-		$this->itemTermStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
+		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
 			new TermList(),
 			new TermList( [ new Term( 'af', 'van' ) ] )
 		) );
 
 		// Store with empty fingerprint (will delete things)
-		$this->itemTermStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
+		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
 
 		$r = $propertyTermStore->getTerms( new PropertyId( 'P12' ) );
 		$this->assertTrue( $r->hasLabel( 'nl' ) );
 		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
+	}
+
+	public function testT237984UnexpectedMissingTextRow_entitySourceBasedFederation() {
+		$itemStore = $this->getItemTermStore_entitySourceBasedFederation();
+
+		$loadBalancer = new FakeLoadBalancer( [
+			'dbr' => $this->db,
+		] );
+		$lbFactory = new FakeLBFactory( [
+			'lb' => $loadBalancer
+		] );
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			WANObjectCache::newEmpty()
+		);
+		$propertyTermStore = new DatabasePropertyTermStore(
+			$loadBalancer,
+			new DatabaseTermIdsAcquirer(
+				$lbFactory,
+				$typeIdsStore
+			),
+			new DatabaseTermIdsResolver(
+				$typeIdsStore,
+				$typeIdsStore,
+				$loadBalancer
+			),
+			new DatabaseTermIdsCleaner(
+				$loadBalancer
+			),
+			new StringNormalizer(),
+			$this->getPropertySource(),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
+		);
+
+		$propertyTermStore->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
+			new TermList( [ new Term( 'nl', 'van' ) ] )
+		) );
+		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
+			new TermList(),
+			new TermList( [ new Term( 'af', 'van' ) ] )
+		) );
+
+		// Store with empty fingerprint (will delete things)
+		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
+
+		$r = $propertyTermStore->getTerms( new PropertyId( 'P12' ) );
+		$this->assertTrue( $r->hasLabel( 'nl' ) );
+		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
+	}
+
+	private function getPropertySource() {
+		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 }

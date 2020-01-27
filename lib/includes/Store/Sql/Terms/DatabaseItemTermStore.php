@@ -2,9 +2,13 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\StringNormalizer;
@@ -46,12 +50,20 @@ class DatabaseItemTermStore implements ItemTermStore {
 	/** @var IDatabase|null */
 	private $dbw = null;
 
+	/** @var EntitySource */
+	private $entitySource;
+
+	/** @var DataAccessSettings */
+	private $dataAccessSettings;
+
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		TermIdsAcquirer $acquirer,
 		TermIdsResolver $resolver,
 		TermIdsCleaner $cleaner,
 		StringNormalizer $stringNormalizer,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
 		LoggerInterface $logger = null
 	) {
 		$this->loadBalancer = $loadBalancer;
@@ -59,6 +71,8 @@ class DatabaseItemTermStore implements ItemTermStore {
 		$this->resolver = $resolver;
 		$this->cleaner = $cleaner;
 		$this->stringNormalizer = $stringNormalizer;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -80,7 +94,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_storeTerms'
 		);
-		$this->disallowForeignEntityIds( $itemId );
+		$this->assertCanHandleItemId( $itemId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
 		if ( $termIdsToClean !== [] ) {
@@ -158,7 +172,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
 		);
-		$this->disallowForeignEntityIds( $itemId );
+		$this->assertCanHandleItemId( $itemId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		if ( $termIdsToClean !== [] ) {
@@ -220,7 +234,7 @@ class DatabaseItemTermStore implements ItemTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_getTerms'
 		);
-		$this->disallowForeignEntityIds( $itemId );
+		$this->assertCanHandleItemId( $itemId );
 
 		$termIds = $this->getDbr()->selectFieldValues(
 			'wbt_item_terms',
@@ -234,4 +248,28 @@ class DatabaseItemTermStore implements ItemTermStore {
 		);
 	}
 
+	private function assertCanHandleItemId( ItemId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertUsingItemSource();
+			return;
+		}
+
+		$this->disallowForeignEntityId( $id );
+	}
+
+	private function disallowForeignEntityId( ItemId $id ) {
+		if ( $id->isForeign() ) {
+			throw new InvalidArgumentException(
+				'This implementation cannot be used with foreign IDs!'
+			);
+		}
+	}
+
+	private function assertUsingItemSource() {
+		if ( !in_array( Item::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
+			throw new InvalidArgumentException(
+				$this->entitySource->getSourceName() . ' does not provided properties'
+			);
+		}
+	}
 }

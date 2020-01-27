@@ -2,8 +2,6 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -20,14 +18,6 @@ use Wikimedia\Rdbms\IDatabase;
  * @license GPL-2.0-or-later
  */
 trait FingerprintableEntityTermStoreTrait {
-
-	private function disallowForeignEntityIds( EntityId $id ) {
-		if ( $id->isForeign() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with foreign IDs!'
-			);
-		}
-	}
 
 	private function termsArrayFromFingerprint( Fingerprint $fingerprint, StringNormalizer $stringNormalizer ): array {
 		$termsArray = [];
