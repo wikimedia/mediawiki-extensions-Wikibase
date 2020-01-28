@@ -91,6 +91,7 @@ export default class TaintedPopper extends Vue {
 	public feedbackLink!: string;
 
 	public removeWarningClick( _event: MouseEvent ): void {
+		this.$track( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
 		this.$store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, this.$props.guid );
 	}
 }

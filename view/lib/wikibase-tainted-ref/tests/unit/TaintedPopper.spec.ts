@@ -8,10 +8,12 @@ import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { POPPER_HIDE, HELP_LINK_SET, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
 
 const localVue = createLocalVue();
+const trackingFunction: any = jest.fn();
 localVue.use( Vuex );
 localVue.use( Message, { messageToTextFunction: () => {
 	return 'dummy';
 } } );
+localVue.use( Track, { trackingFunction } );
 
 describe( 'TaintedPopper.vue', () => {
 	it( 'sets the help link according to the store', () => {
@@ -24,8 +26,6 @@ describe( 'TaintedPopper.vue', () => {
 		expect( wrapper.find( '.wb-tr-popper-help a' ).attributes().href ).toEqual( 'https://wdtest/Help' );
 	} );
 	it( 'clicking the help link triggers a tracking event', () => {
-		const trackingFunction = jest.fn();
-		localVue.use( Track, { trackingFunction } );
 		const store: Store<Application> = createStore();
 		const wrapper = mount( TaintedPopper, {
 			store,
@@ -62,6 +62,15 @@ describe( 'TaintedPopper.vue', () => {
 		} );
 		wrapper.find( '.wb-tr-popper-remove-warning' ).trigger( 'click' );
 		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, 'a-guid' );
+	} );
+	it( 'clicking the remove warning button triggers a tracking event', () => {
+		const store: Store<Application> = createStore();
+		const wrapper = mount( TaintedPopper, {
+			store,
+			localVue,
+		} );
+		wrapper.find( '.wb-tr-popper-remove-warning' ).trigger( 'click' );
+		expect( trackingFunction ).toHaveBeenCalledWith( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
 	} );
 	it( 'popper texts are taken from our Vue message plugin', () => {
 		const localVue = createLocalVue();
