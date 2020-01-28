@@ -146,6 +146,7 @@
 	"wikibase-listdatatypes-wikibase-property-head": "Хусусият",
 	"wikibase-listdatatypes-commonsmedia-head": "Маводи Викианбор",
 	"wikibase-listdatatypes-time-head": "Вақт",
+	"datatypes-type-url": "URL",
 	"content-model-wikibase-item": "Элемент дар Викибаза",
 	"content-model-wikibase-property": "Хусусият дар Викибаза",
 	"content-model-wikibase-query": "Дархост дар Викибаза",

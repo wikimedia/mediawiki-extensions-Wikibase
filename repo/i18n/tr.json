@@ -162,7 +162,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Bu ID ile öge bulunmuyor",
 	"wikibase-wikibaserepopage-not-itemid": "\"$1\" geçerli bir ID değil.",
 	"wikibase-wikibaserepopage-invalid-langcode": "\"$1\" dil kodu bilinmiyor. Lütfen \"tr\" gibi bilinen bir dil kodu kullanın.",
-	"wikibase-wikibaserepopage-pipe-in-alias": "Boru içeren takma adlar yalnızca varlığın sayfasında (javascript etkinken) veya API aracılığıyla düzenlenebilir",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Boru içeren takma adlar yalnızca varlığın sayfasında (JavaScript etkinken) veya API aracılığıyla düzenlenebilir",
 	"wikibase-wikibaserepopage-invalid-id": "\"$1\" ID bilinmeyen bir sisteme ait. Lütfen geçerli bir varlık ID kullanın.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 bir yönlendirmedir",
 	"wikibase-wikibaserepopage-storage-exception": "$1 yüklenirken bir hata oluştu: $2.",

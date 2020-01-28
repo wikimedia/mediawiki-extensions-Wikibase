@@ -194,7 +194,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Aucun élément n’existe avec cet identifiant",
 	"wikibase-wikibaserepopage-not-itemid": "« $1 » n’est pas un identifiant d’élément valide.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Le code de langue « $1 » n’est pas connu. Veuillez utiliser un code de langue connu du système, tel que « fr ».",
-	"wikibase-wikibaserepopage-pipe-in-alias": "Les alias qui contiennent des barres verticales peuvent seulement être modifiés sur la page de l’entité elle-même (avec javascript activé) ou via l’API",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Les alias qui contiennent des barres verticales peuvent seulement être modifiés sur la page de l’entité elle-même (avec JavaScript activé) ou via l’API",
 	"wikibase-wikibaserepopage-invalid-id": "L’identifiant « $1 » est inconnu du système. Veuillez utiliser un identifiant d’entité valide.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 est une redirection.",
 	"wikibase-wikibaserepopage-storage-exception": "Une erreur s’est produite lors de la tentative de chargement de $1 : $2.",
@@ -474,5 +474,6 @@
 	"wikibase-tainted-ref-popper-feedback-text": "Cette nouvelle fonctionnalité est-elle utile ?",
 	"wikibase-tainted-ref-popper-feedback-link-text": "Donner votre avis",
 	"wikibase-tainted-ref-popper-feedback-link-title": "Lien vers la page pour donner son avis",
+	"wikibase-tainted-ref-popper-remove-warning": "Supprimer l’avertissement",
 	"wikibase-tainted-ref-tainted-icon-title": "Cette instruction présente des problèmes potentiels."
 }

@@ -38,6 +38,7 @@
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Labojums {{WBREPONAME}}",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} labojumi",
+	"wikibase-replicationnote": "Lūdzu, ņem vērā, ka var paiet vairākas minūtes, līdz izmaiņas būs redzamas visās vikivietnēs.",
 	"wikibase-watchlist-show-changes-pref": "Rādīt labojumus {{WBREPONAME}} uzraugāmo lapu sarakstā",
 	"wikibase-error-deserialize-error": "Neizdevās deserializēt datus.",
 	"wikibase-error-serialize-error": "Neizdevās serializēt datus.",

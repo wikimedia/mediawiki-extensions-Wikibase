@@ -170,7 +170,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "帶此 ID 的項目不存在",
 	"wikibase-wikibaserepopage-not-itemid": "''$1'' 不是一個有效的項目 ID。",
 	"wikibase-wikibaserepopage-invalid-langcode": "語言代碼 \"$1\" 不明。 請使用系統能夠辨識的語言代碼，如 \"en\"。",
-	"wikibase-wikibaserepopage-pipe-in-alias": "包含豎線的別名僅能在實體本身的頁面上（啟用 javascript）或是透過 API 來編輯",
+	"wikibase-wikibaserepopage-pipe-in-alias": "包含豎線的別名僅能在實體本身的頁面上（啟用 JavaScript）或是透過 API 來編輯",
 	"wikibase-wikibaserepopage-invalid-id": "不明 ID \"$1\"。請使用有效的實體 ID。",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 是一個重新導向。",
 	"wikibase-wikibaserepopage-storage-exception": "嘗試讀取 $1 發生錯誤：$2。",
