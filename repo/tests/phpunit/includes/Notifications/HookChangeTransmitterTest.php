@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Notifications;
 
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
 
 /**

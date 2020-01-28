@@ -18,8 +18,8 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 
 /**

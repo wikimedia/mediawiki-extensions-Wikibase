@@ -12,7 +12,7 @@ use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
 use Wikibase\Client\Store\TitleFactory;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Assert\Assert;

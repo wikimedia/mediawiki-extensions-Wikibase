@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Notifications;
 use JobQueueGroup;
 use JobSpecification;
 use Psr\Log\NullLogger;
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
 
 /**

@@ -8,11 +8,11 @@ use Diff\DiffOp\DiffOpChange;
 use EchoEvent;
 use Title;
 use User;
-use Wikibase\Change;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ItemChange;
 use WikiPage;
 
 /**

@@ -13,13 +13,13 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers \Wikibase\EntityChange
- * @covers \Wikibase\DiffChange
+ * @covers \Wikibase\Lib\Changes\EntityChange
+ * @covers \Wikibase\Lib\Changes\DiffChange
  *
  * @group Database
  * @group Wikibase

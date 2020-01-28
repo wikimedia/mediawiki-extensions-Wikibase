@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Changes;
 
 use Title;
 use Wikibase\Client\Changes\PageUpdater;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * Mock version of the service object for triggering different kinds of page updates

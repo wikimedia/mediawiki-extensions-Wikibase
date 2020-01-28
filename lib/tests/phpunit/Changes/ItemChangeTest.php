@@ -6,13 +6,13 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
 use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\ItemChange;
 
 /**
- * @covers \Wikibase\ItemChange
- * @covers \Wikibase\DiffChange
+ * @covers \Wikibase\Lib\Changes\ItemChange
+ * @covers \Wikibase\Lib\Changes\DiffChange
  *
  * @group Database
  * @group Wikibase

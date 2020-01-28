@@ -1,8 +1,6 @@
 <?php
 
-namespace Wikibase;
-
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+namespace Wikibase\Lib\Changes;
 
 /**
  * Class for changes that can be represented as a Diff.

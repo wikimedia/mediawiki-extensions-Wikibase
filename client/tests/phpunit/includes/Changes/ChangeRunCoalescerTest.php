@@ -3,14 +3,14 @@
 namespace Wikibase\Client\Tests\Changes;
 
 use Psr\Log\NullLogger;
-use Wikibase\Change;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Tests\MockRepository;

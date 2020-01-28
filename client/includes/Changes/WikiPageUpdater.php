@@ -8,7 +8,7 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use Psr\Log\LoggerInterface;
 use RefreshLinksJob;
 use Title;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * Service object for triggering different kinds of page updates

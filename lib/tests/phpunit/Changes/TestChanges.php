@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
-use Wikibase\ChangeRow;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -12,9 +11,10 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\ChangeRow;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Changes\ItemChange;
 
 /**
  * Test change data for ChangeRowTest

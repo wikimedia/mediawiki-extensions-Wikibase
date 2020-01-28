@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;

@@ -1,12 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Changes;
 
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
  * @license GPL-2.0-or-later

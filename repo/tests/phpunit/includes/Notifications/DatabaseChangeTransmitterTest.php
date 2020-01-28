@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Notifications;
 
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Store\ChangeStore;
 

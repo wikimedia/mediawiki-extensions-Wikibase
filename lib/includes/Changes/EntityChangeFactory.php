@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
-use Wikibase\EntityChange;
 use Wikimedia\Assert\Assert;
 
 /**

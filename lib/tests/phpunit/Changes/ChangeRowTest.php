@@ -4,12 +4,12 @@ namespace Wikibase\Lib\Tests\Changes;
 
 use MediaWikiTestCase;
 use MWException;
-use Wikibase\ChangeRow;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\ChangeRow;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
- * @covers \Wikibase\ChangeRow
- * @covers \Wikibase\EntityChange
+ * @covers \Wikibase\Lib\Changes\ChangeRow
+ * @covers \Wikibase\Lib\Changes\EntityChange
  *
  * @group Database
  * @group Wikibase

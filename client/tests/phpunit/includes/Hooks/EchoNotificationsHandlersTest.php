@@ -6,10 +6,10 @@ use ExtensionRegistry;
 use MediaWikiTestCase;
 use Title;
 use User;
-use Wikibase\ChangeRow;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\SettingsArray;
 

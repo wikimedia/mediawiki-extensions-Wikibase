@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
-use Wikibase\Change;
-use Wikibase\ChangeRow;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Repo\Store\ChangeStore;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;

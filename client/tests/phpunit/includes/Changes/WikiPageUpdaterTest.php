@@ -11,7 +11,7 @@ use Psr\Log\NullLogger;
 use RefreshLinksJob;
 use Title;
 use Wikibase\Client\Changes\WikiPageUpdater;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * @covers \Wikibase\Client\Changes\WikiPageUpdater

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 use Wikibase\Repo\Store\ChangeStore;
 
 /**

@@ -6,8 +6,8 @@ use CentralIdLookup;
 use InvalidArgumentException;
 use Revision;
 use User;
-use Wikibase\EntityChange;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikimedia\Assert\Assert;
 

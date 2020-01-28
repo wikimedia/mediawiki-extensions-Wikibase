@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Notifications;
 
 use Hooks;
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 use Wikimedia\Assert\Assert;
 
 /**

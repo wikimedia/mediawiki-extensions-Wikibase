@@ -23,6 +23,7 @@
 		]
 	},
 	"AutoloadNamespaces": {
+		"Wikibase\\Lib\\Changes\\": "lib/includes/Changes/",
 		"Wikibase\\Lib\\DataValue\\": "lib/includes/DataValue/",
 		"Wikibase\\Lib\\Formatters\\": "lib/includes/Formatters/",
 		"Wikibase\\Lib\\Interactors\\": "lib/includes/Interactors/",

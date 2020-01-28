@@ -10,8 +10,8 @@ use TestSites;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
