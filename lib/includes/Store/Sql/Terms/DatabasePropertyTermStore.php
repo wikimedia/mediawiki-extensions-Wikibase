@@ -2,9 +2,13 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
+use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\StringNormalizer;
@@ -46,12 +50,20 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	/** @var IDatabase|null */
 	private $dbw = null;
 
+	/** @var EntitySource */
+	private $entitySource;
+
+	/** @var DataAccessSettings */
+	private $dataAccessSettings;
+
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		TermIdsAcquirer $acquirer,
 		TermIdsResolver $resolver,
 		TermIdsCleaner $cleaner,
 		StringNormalizer $stringNormalizer,
+		EntitySource $entitySource,
+		DataAccessSettings $dataAccessSettings,
 		LoggerInterface $logger = null
 	) {
 		$this->loadBalancer = $loadBalancer;
@@ -59,6 +71,8 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		$this->resolver = $resolver;
 		$this->cleaner = $cleaner;
 		$this->stringNormalizer = $stringNormalizer;
+		$this->entitySource = $entitySource;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -80,7 +94,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_storeTerms'
 		);
-		$this->disallowForeignEntityIds( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
 		if ( $termIdsToClean !== [] ) {
@@ -158,7 +172,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_deleteTerms'
 		);
-		$this->disallowForeignEntityIds( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
 		if ( $termIdsToClean !== [] ) {
@@ -220,7 +234,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_getTerms'
 		);
-		$this->disallowForeignEntityIds( $propertyId );
+		$this->assertCanHandlePropertyId( $propertyId );
 
 		$termIds = $this->getDbr()->selectFieldValues(
 			'wbt_property_terms',
@@ -232,6 +246,31 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		return $this->resolveTermIdsResultToFingerprint(
 			$this->resolver->resolveTermIds( $termIds )
 		);
+	}
+
+	private function assertCanHandlePropertyId( PropertyId $id ) {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertUsingPropertySource();
+			return;
+		}
+
+		$this->disallowForeignEntityId( $id );
+	}
+
+	private function disallowForeignEntityId( PropertyId $id ) {
+		if ( $id->isForeign() ) {
+			throw new InvalidArgumentException(
+				'This implementation cannot be used with foreign IDs!'
+			);
+		}
+	}
+
+	private function assertUsingPropertySource() {
+		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
+			throw new InvalidArgumentException(
+				$this->entitySource->getSourceName() . ' does not provided properties'
+			);
+		}
 	}
 
 }

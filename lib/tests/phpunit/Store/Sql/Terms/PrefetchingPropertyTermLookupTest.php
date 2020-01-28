@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -54,7 +56,9 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore,
 			$termIdsStore,
 			$termIdsStore,
-			new StringNormalizer()
+			new StringNormalizer(),
+			$this->getPropertySource(),
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 		$this->p1 = new PropertyId( 'P1' );
 		$propertyTermStore->storeTerms(
@@ -74,6 +78,10 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 				new AliasGroupList( [ new AliasGroup( 'en', [ 'P2' ] ) ] )
 			)
 		);
+	}
+
+	private function getPropertySource() {
+		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 	public function testGetLabel() {
