@@ -92,12 +92,13 @@ class EntitySourceDefinitions {
 	}
 
 	/**
-	 * @param string $entityType
-	 * @return EntitySource|null
+	 * @todo when the same entity type can be provided by multiple source (currently forbidden),
+	 * this should return all sources
+	 *
+	 * @param string $entityType Entity type or sub type
+	 * @return EntitySource|null EntitySource or null if no EntitySource configured for the type
 	 */
-	public function getSourceForEntityType( $entityType ) {
-		// TODO: when the same entity type can be provided by multiple source (currently forbidden),
-		// this should return all sources
+	public function getSourceForEntityType( string $entityType ) : ?EntitySource {
 		if ( array_key_exists( $entityType, $this->subEntityTypeMap ) ) {
 			$entityType = $this->subEntityTypeMap[$entityType];
 		}

@@ -606,17 +606,25 @@ final class RepoHooks {
 			$slots = $params['slots'] ?? [ SlotRecord::MAIN ];
 
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
-				$wikibaseRepo->getEntityNamespaceLookup()->getEntityType( $namespace )
-			);
+
+			/**
+			 * Don't make Wikibase check if a user can execute when the namespace in question does
+			 * not refer to a namespace used locally for Wikibase entities.
+			 */
+			if ( $wikibaseRepo->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
+				// If the entity type is not from the local source, don't check anything else
+				$localEntitySource = $wikibaseRepo->getLocalEntitySource();
+				if ( !in_array( $namespace, $localEntitySource->getEntityNamespaceIds() ) ) {
+					return true;
+				}
+			} else {
+				if ( !in_array( $namespace, $wikibaseRepo->getLocalEntityNamespaces() ) ) {
+					return true;
+				}
+			}
 
 			$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
 			$entityTypes = $wikibaseRepo->getEnabledEntityTypes();
-
-			// If the entity type is not from the local source, don't check anything else
-			if ( $entitySource !== null && $entitySource->getDatabaseName() !== false ) {
-				return true;
-			}
 
 			foreach ( $entityContentFactory->getEntityContentModels() as $contentModel ) {
 				/** @var EntityHandler $handler */

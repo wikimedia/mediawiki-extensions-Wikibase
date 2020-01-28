@@ -1913,7 +1913,7 @@ class WikibaseRepo {
 		);
 	}
 
-	private function getPropertySource() {
+	private function getPropertySource() : EntitySource {
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
 			$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
 			if ( $propertySource !== null ) {
@@ -2003,7 +2003,7 @@ class WikibaseRepo {
 		);
 	}
 
-	private function getItemSource() {
+	private function getItemSource() : EntitySource {
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
 			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
 			if ( $itemSource !== null ) {

@@ -94,6 +94,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_storeTerms'
 		);
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertItemsAreLocal();
+		}
 		$this->assertCanHandleItemId( $itemId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
@@ -172,6 +175,9 @@ class DatabaseItemTermStore implements ItemTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
 		);
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertItemsAreLocal();
+		}
 		$this->assertCanHandleItemId( $itemId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $itemId );
@@ -246,6 +252,18 @@ class DatabaseItemTermStore implements ItemTermStore {
 		return $this->resolveTermIdsResultToFingerprint(
 			$this->resolver->resolveTermIds( $termIds )
 		);
+	}
+
+	private function shouldWriteToItems() : bool {
+		return $this->entitySource->getDatabaseName() === false;
+	}
+
+	private function assertItemsAreLocal() : void {
+		if ( !$this->shouldWriteToItems() ) {
+			throw new InvalidArgumentException(
+				'This implementation cannot be used with remote entity sources!'
+			);
+		}
 	}
 
 	private function assertCanHandleItemId( ItemId $id ) {

@@ -130,6 +130,9 @@ class EntitySource {
 		);
 	}
 
+	/**
+	 * @return string|false The name of the database to use (use false for the local db)
+	 */
 	public function getDatabaseName() {
 		return $this->databaseName;
 	}

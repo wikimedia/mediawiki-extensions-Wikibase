@@ -99,7 +99,9 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getPropertyTermStore_entitySourceBasedFederation() {
+	private function getPropertyTermStore_entitySourceBasedFederation(
+		?EntitySource $propertySourceOverride = null
+	) : DatabasePropertyTermStore {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -125,13 +127,24 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			$this->getPropertySource(),
+			$propertySourceOverride ?: $this->getPropertySource(),
 			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 	}
 
 	private function getPropertySource() {
 		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	private function getNonLocalPropertySource() {
+		return new EntitySource( 'remote', 'someDb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	public function testStoreTerms_throwsForNonLocalItemSource() {
+		$store = $this->getPropertyTermStore_entitySourceBasedFederation( $this->getNonLocalPropertySource() );
+
+		$this->expectException( InvalidArgumentException::class );
+		$store->storeTerms( new PropertyId( 'P1' ), $this->fingerprintEmpty );
 	}
 
 	public function testStoreAndGetTerms() {
