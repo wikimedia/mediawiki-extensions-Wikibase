@@ -216,9 +216,13 @@ class DatabaseSchemaUpdater {
 		);
 
 		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
-		$entitySource = new UnusableEntitySource();
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
+		} else {
+			$propertySource = new UnusableEntitySource();
+		}
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource, $dataAccessSettings );
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
@@ -230,7 +234,7 @@ class DatabaseSchemaUpdater {
 					$wikibaseRepo->getEntityNamespaceLookup(),
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
-				$entitySource,
+				$propertySource,
 				$dataAccessSettings,
 				false
 			),
