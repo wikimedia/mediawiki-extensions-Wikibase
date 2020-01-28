@@ -32,7 +32,7 @@ use Wikimedia\Rdbms\ILBFactory;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseMathingTermsLookupTest extends \MediaWikiIntegrationTestCase {
+class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @var IDatabase
 	 */
@@ -183,7 +183,7 @@ class DatabaseMathingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 		if ( $options['caseSensitive'] === false ) {
 			$this->markTestSkipped( 'Case insensitive search is not supported yet: T242644' );
 		}
-		$lookup = $this->getMathingTermsLookup();
+		$lookup = $this->getMatchingTermsLookup();
 		$store = $this->getItemTermStore();
 
 		foreach ( $entities as $entitiy ) {
@@ -223,7 +223,7 @@ class DatabaseMathingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 		return $key;
 	}
 
-	private function getMathingTermsLookup() {
+	private function getMatchingTermsLookup() {
 		$store = new DatabaseTypeIdsStore(
 			$this->lbFactory->getMainLB(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache(),
