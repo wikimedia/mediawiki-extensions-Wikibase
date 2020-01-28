@@ -143,7 +143,7 @@ describe( 'store/actions', () => {
 		} );
 
 		info = {
-			pageTitle: 'Client page',
+			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,
 			propertyId: 'P31',
 			entityId: 'Q42',
@@ -171,6 +171,7 @@ describe( 'store/actions', () => {
 				expect( successStore.state.originalHref ).toStrictEqual(
 					info.originalHref,
 				);
+				expect( successStore.state.pageTitle ).toBe( info.pageTitle );
 			} );
 		} );
 

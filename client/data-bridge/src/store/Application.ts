@@ -20,6 +20,7 @@ interface Application {
 	editDecision: EditDecision|null;
 	entityTitle: string;
 	originalHref: string;
+	pageTitle: string;
 }
 
 export default Application;

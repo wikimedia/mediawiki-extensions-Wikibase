@@ -8,3 +8,4 @@ export const APPLICATION_ERRORS_ADD = 'addApplicationErrors';
 export const EDITDECISION_SET = 'setEditDecision';
 export const ENTITY_TITLE_SET = 'setEntityTitle';
 export const ORIGINAL_HREF_SET = 'setOriginalHref';
+export const PAGE_TITLE_SET = 'setPageTitle';

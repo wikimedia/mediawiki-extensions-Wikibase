@@ -27,6 +27,7 @@ import {
 	EDITDECISION_SET,
 	ENTITY_TITLE_SET,
 	ORIGINAL_HREF_SET,
+	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -87,6 +88,7 @@ export default function actions(
 			context.commit( PROPERTY_TARGET_SET, information.propertyId );
 			context.commit( ENTITY_TITLE_SET, information.entityTitle );
 			context.commit( ORIGINAL_HREF_SET, information.originalHref );
+			context.commit( PAGE_TITLE_SET, information.pageTitle );
 
 			entityLabelRepository.getLabel( information.propertyId )
 				.then( ( label: Term ) => {

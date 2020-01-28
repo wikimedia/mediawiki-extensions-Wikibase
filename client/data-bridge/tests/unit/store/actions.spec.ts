@@ -29,6 +29,7 @@ import {
 	TARGET_LABEL_SET,
 	ENTITY_TITLE_SET,
 	ORIGINAL_HREF_SET,
+	PAGE_TITLE_SET,
 } from '@/store/mutationTypes';
 import {
 	NS_ENTITY,
@@ -204,6 +205,26 @@ describe( 'root/actions', () => {
 				expect( context.commit ).toHaveBeenCalledWith(
 					ENTITY_TITLE_SET,
 					entityTitle,
+				);
+			} );
+		} );
+
+		it( `commits to ${PAGE_TITLE_SET}`, () => {
+			const pageTitle = 'Douglas_Adams';
+			const context = mockedStore();
+
+			const information = {
+				editFlow: EditFlow.OVERWRITE,
+				propertyId: defaultPropertyId,
+				entityId: defaultEntityId,
+				entityTitle: defaultEntityTitle,
+				pageTitle,
+			};
+
+			return initAction()( context, information ).then( () => {
+				expect( context.commit ).toHaveBeenCalledWith(
+					PAGE_TITLE_SET,
+					pageTitle,
 				);
 			} );
 		} );
