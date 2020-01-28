@@ -15,4 +15,4 @@ And the lower level generated documentation:
 * @subpage deprecated
 * @subpage todo
 
-If you want to see the documentation for the docs, take a look at @subpage documentation
+If you want to see the documentation for the docs, take a look at @subpage md_docs_documentation
