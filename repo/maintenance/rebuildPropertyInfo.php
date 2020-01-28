@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use LoggedUpdateMaintenance;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -48,18 +47,15 @@ class RebuildPropertyInfo extends LoggedUpdateMaintenance {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$settings->getSetting( 'tmpItemTermsMigrationStages' )
-		);
+		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
+		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
+		} else {
+			$propertySource = new UnusableEntitySource();
+		}
 
 		$builder = new PropertyInfoTableBuilder(
-			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), new UnusableEntitySource(), $dataAccessSettings ),
+			new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource, $dataAccessSettings ),
 			$wikibaseRepo->getPropertyLookup(),
 			$wikibaseRepo->newPropertyInfoBuilder(),
 			$wikibaseRepo->getEntityIdComposer(),

@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use DataValues\StringValue;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -86,17 +85,10 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$settings->getSetting( 'tmpItemTermsMigrationStages' )
-		);
+		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
+		$localEntitySource = $wikibaseRepo->getLocalEntitySource();
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), new UnusableEntitySource(), $dataAccessSettings );
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $localEntitySource, $dataAccessSettings );
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 

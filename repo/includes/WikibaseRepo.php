@@ -43,6 +43,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\ByIdDispatchingItemTermStore;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
@@ -1165,7 +1166,10 @@ class WikibaseRepo {
 		return $this->store;
 	}
 
-	private function getLocalEntitySource() {
+	/**
+	 * @return EntitySource The entity source of the local repository
+	 */
+	public function getLocalEntitySource() : EntitySource {
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
 			$localEntitySourceName = $this->settings->getSetting( 'localEntitySourceName' );
 			$sources = $this->entitySourceDefinitions->getSources();

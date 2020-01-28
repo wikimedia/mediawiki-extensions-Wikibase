@@ -7,6 +7,7 @@ use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -74,13 +75,21 @@ class RebuildTermSqlIndex extends Maintenance {
 		$idParser = $wikibaseRepo->getEntityIdParser();
 		$entityIdComposer = $wikibaseRepo->getEntityIdComposer();
 		$repoSettings = $wikibaseRepo->getSettings();
+		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
+		$localEntitySource = $wikibaseRepo->getLocalEntitySource();
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
 			$wikibaseRepo->getEntityNamespaceLookup(),
 			$wikibaseRepo->getEntityIdLookup()
 		);
 
-		$termIndex = $this->getTermSqlIndex( $entityIdComposer, $idParser, $repoSettings );
+		$termIndex = $this->getTermSqlIndex(
+			$entityIdComposer,
+			$idParser,
+			$repoSettings,
+			$dataAccessSettings,
+			$localEntitySource
+		);
 
 		$builder = new TermSqlIndexBuilder(
 			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
@@ -131,17 +140,10 @@ class RebuildTermSqlIndex extends Maintenance {
 	private function getTermSqlIndex(
 		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
-		SettingsArray $settings
+		SettingsArray $settings,
+		DataAccessSettings $dataAccessSettings,
+		EntitySource $localEntitySource
 	) {
-		$dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$settings->getSetting( 'tmpItemTermsMigrationStages' )
-		);
-
 		$termSqlIndex = new TermSqlIndex(
 			new StringNormalizer(),
 			$entityIdComposer,
