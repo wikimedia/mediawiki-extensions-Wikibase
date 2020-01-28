@@ -317,6 +317,3 @@ class EntityChange extends DiffChange {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EntityChange::class, 'Wikibase\EntityChange' );
