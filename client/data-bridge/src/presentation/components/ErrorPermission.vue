@@ -2,7 +2,7 @@
 	<section>
 		<p>{{ $messages.get( $messages.KEYS.PERMISSIONS_HEADING ) }}</p>
 		<ErrorPermissionInfo
-			class="wb-ui-permission-info"
+			class="wb-db-error-permission__info"
 			v-for="( permissionError, index ) in permissionErrors"
 			:key="index"
 			:message-header="getMessageHeader( permissionError )"
@@ -246,7 +246,9 @@ export default class ErrorPermission extends Vue {
 }
 </script>
 <style lang="scss">
-.wb-ui-permission-info {
-	margin: 12px 0 12px 0;
+.wb-db-error-permission {
+	&__info {
+		margin-top: px-to-em( 24px );
+	}
 }
 </style>
