@@ -9,10 +9,10 @@ use MediaWikiSite;
 use ResourceLoaderContext;
 use Site;
 use Wikibase\SettingsArray;
-use Wikibase\SitesModule;
+use Wikibase\Lib\Modules\SitesModule;
 
 /**
- * @covers \Wikibase\SitesModule
+ * @covers \Wikibase\Lib\Modules\SitesModule
  *
  * @group Wikibase
  *
@@ -126,7 +126,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		$moduleLists = $this->getModulesForVersionHash();
 		$namesByHash = [];
 
-		/** @var SitesModule[] $moduleLists */
+		/** @var SitesModule[][] $moduleLists */
 		foreach ( $moduleLists as $name => $modules ) {
 			$hashes = [];
 			foreach ( $modules as $module ) {
