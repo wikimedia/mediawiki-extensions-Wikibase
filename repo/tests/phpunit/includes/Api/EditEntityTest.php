@@ -1196,6 +1196,33 @@ class EditEntityTest extends WikibaseApiTestCase {
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
+	public function testItemLabelConflictAvoidSelfConflictOnClear() {
+		$params = [
+			'action' => 'wbeditentity',
+			'new' => 'item',
+			'data' => '{
+				"labels": { "de": { "language": "de", "value": "Very German label" } },
+				"descriptions": { "de": { "language": "de", "value": "Very German description" } }
+			}',
+		];
+		list( $result, ) = $this->doApiRequestWithToken( $params );
+
+		$params = [
+			'action' => 'wbeditentity',
+			'id' => $result['entity']['id'],
+			'clear' => 1,
+			'data' => '{
+				"labels": {
+					"de": { "language": "de", "value": "Very German label" },
+					"fa": { "language": "fa", "value": "Very non-German label" }
+				},
+				"descriptions": { "de": { "language": "de", "value": "Very German description" } }
+			}',
+		];
+		list( $result, ) = $this->doApiRequestWithToken( $params );
+		$this->assertSame( 1, $result['success'] );
+	}
+
 	public function testClearFromBadRevId() {
 		$params = [
 			'action' => 'wbeditentity',

@@ -8,6 +8,7 @@ use Title;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
@@ -241,9 +242,6 @@ class EditEntity extends ModifyEntity {
 
 		if ( $preparedParameters[self::PARAM_CLEAR] ) {
 			$this->dieIfNotClearable( $entity );
-			// @phan-suppress-next-line PhanUndeclaredMethod
-			$entity->clear();
-
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.clear' );
 		} else {
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.no-clear' );
@@ -258,7 +256,24 @@ class EditEntity extends ModifyEntity {
 			$this->getStats()->increment( 'wikibase.api.EditEntity.modifyEntity.create' );
 		}
 
-		$changeOpResult = $this->applyChangeOp( $changeOp, $entity );
+		if ( $preparedParameters[self::PARAM_CLEAR] ) {
+			$oldEntity = clone $entity;
+			$entity->clear();
+
+			// Validate it only by applying the changeOp on the current entity
+			// instead of an empty one due avoid issues like T243158.
+			// We are going to save the cleared entity instead,
+			$changeOpResult = $this->applyChangeOp( $changeOp, $oldEntity );
+
+			try {
+				$changeOp->apply( $entity );
+			} catch ( ChangeOpException $ex ) {
+				$this->errorReporter->dieException( $ex, 'modification-failed' );
+			}
+
+		} else {
+			$changeOpResult = $this->applyChangeOp( $changeOp, $entity );
+		}
 
 		$this->buildResult( $entity );
 		return $this->getSummary( $preparedParameters, $entity, $changeOpResult );
