@@ -231,10 +231,7 @@ RootActions
 			return Promise.reject( null );
 		}
 
-		return this.entityModule.dispatch(
-			ENTITY_SAVE,
-			{},
-		)
+		return this.entityModule.dispatch( ENTITY_SAVE )
 			.catch( ( error: Error ) => {
 				this.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;

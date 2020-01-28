@@ -800,7 +800,7 @@ describe( 'root/actions', () => {
 				dispatch: entityModuleDispatch,
 			};
 			await actions[ BRIDGE_SAVE ]();
-			expect( entityModuleDispatch ).toHaveBeenCalledWith( ENTITY_SAVE, {} );
+			expect( entityModuleDispatch ).toHaveBeenCalledWith( ENTITY_SAVE );
 		} );
 
 		it( 'logs an error if saving failed and rejects', async () => {
