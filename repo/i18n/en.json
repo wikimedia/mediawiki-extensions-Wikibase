@@ -466,7 +466,7 @@
 	"wikibase-entity-save-error-heading": "Something went wrong",
 	"wikibase-entity-save-error-message": "Your change could not be published. You can try clicking the publish button again.",
 	"wikibase-tainted-ref-warning-icon-title": "This statement has some potential issues",
-	"wikibase-tainted-ref-popper-text": "The value changed, but the reference remained the same.",
+	"wikibase-tainted-ref-popper-text": "The value of this statement was changed, but the reference remained the same. You may remove this warning in case the reference is still correct.",
 	"wikibase-tainted-ref-popper-title": "Potential reference/value mismatch",
 	"wikibase-tainted-ref-popper-help-link-title": "Help page for this constraint type",
 	"wikibase-tainted-ref-popper-help-link-text": "Help",
