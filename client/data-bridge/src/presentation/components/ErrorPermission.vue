@@ -133,6 +133,18 @@ export default class ErrorPermission extends Vue {
 					this.$repoRouter.getPageUrl( 'Project:Autoconfirmed_users' ),
 				);
 				break;
+			case PageNotEditable.ITEM_CASCADE_PROTECTED:
+				params.push(
+					'', // unused (not reserved for anything in particular)
+					this.$repoRouter.getPageUrl( 'Project:Administrators' ),
+				);
+				break;
+			case PageNotEditable.PAGE_CASCADE_PROTECTED: // temporary; TODO remove once translations no longer use $2
+				params.push(
+					'', // unused (not reserved for anything in particular)
+					this.$clientRouter.getPageUrl( 'Project:Administrators' ),
+				);
+				break;
 		}
 		return params;
 	}
