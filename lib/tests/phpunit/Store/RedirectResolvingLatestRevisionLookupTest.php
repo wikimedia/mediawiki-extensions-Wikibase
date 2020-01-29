@@ -99,6 +99,30 @@ class RedirectResolvingLatestRevisionLookupTest extends TestCase {
 			->lookupLatestRevisionResolvingRedirect( $originalEntityId ) );
 	}
 
+	public function testGivenCalledMultipleTimes_onlyLooksUpOnce() {
+		$id = new ItemId( 'Q123' );
+		$revision = 777;
+
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$revisionLookup->expects( $this->once() )
+			->method( 'getLatestRevisionId' )
+			->with( $id )
+			->willReturn( LatestRevisionIdResult::concreteRevision( $revision ) );
+
+		$revisionRedirectResolver = $this->newRedirectResolvingLatestRevisionLookup( $revisionLookup );
+
+		$this->assertSame(
+			[ $revision, $id ],
+			$revisionRedirectResolver
+				->lookupLatestRevisionResolvingRedirect( $id )
+		);
+		$this->assertSame(
+			[ $revision, $id ],
+			$revisionRedirectResolver
+				->lookupLatestRevisionResolvingRedirect( $id ) // cached internally
+		);
+	}
+
 	private function newRedirectResolvingLatestRevisionLookup(
 		EntityRevisionLookup $revisionLookup
 	): RedirectResolvingLatestRevisionLookup {

@@ -5,8 +5,6 @@ namespace Wikibase\Lib\Store;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
- * TODO build a cache into this thing to avoid multiple lookups of the same entity
- *
  * @license GPL-2.0-or-later
  */
 class RedirectResolvingLatestRevisionLookup {
@@ -15,6 +13,9 @@ class RedirectResolvingLatestRevisionLookup {
 	 * @var EntityRevisionLookup
 	 */
 	private $revisionLookup;
+
+	/** @var array results of previously resolved entities keyed by entity id */
+	private $resolvedEntities = [];
 
 	public function __construct( EntityRevisionLookup $revisionLookup ) {
 		$this->revisionLookup = $revisionLookup;
@@ -28,18 +29,21 @@ class RedirectResolvingLatestRevisionLookup {
 	 * @phan-return array{0:int,1:EntityId}
 	 */
 	public function lookupLatestRevisionResolvingRedirect( EntityId $entityId ) {
+		if ( isset( $this->resolvedEntities[$entityId->getSerialization()] ) ) {
+			return $this->resolvedEntities[$entityId->getSerialization()];
+		}
+
 		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
 		$returnNull = function () {
 			return null;
 		};
 
-		return $revisionIdResult
+		$resolutionResult = $revisionIdResult
 			->onConcreteRevision( function ( $revisionId ) use ( $entityId ) {
 				return [ $revisionId, $entityId ];
 			} )
 			->onNonexistentEntity( $returnNull )
 			->onRedirect( function ( $revisionId, EntityId $redirectsTo ) use ( $returnNull ) {
-
 				return $this->revisionLookup->getLatestRevisionId( $redirectsTo )
 					->onNonexistentEntity( $returnNull )
 					->onRedirect( $returnNull )
@@ -49,6 +53,10 @@ class RedirectResolvingLatestRevisionLookup {
 					->map();
 			} )
 			->map();
+
+		$this->resolvedEntities[$entityId->getSerialization()] = $resolutionResult;
+
+		return $resolutionResult;
 	}
 
 }
