@@ -9,7 +9,12 @@ import { inject } from 'vuex-smart-module';
 import { StatementGetters } from '@/store/statements/getters';
 import newStatementState from './newStatementState';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import { SNAK_DATA_VALUE, SNAK_DATAVALUETYPE, SNAK_SNAKTYPE } from '@/store/statements/snaks/getterTypes';
+import {
+	SNAK_DATA_VALUE,
+	SNAK_DATATYPE,
+	SNAK_DATAVALUETYPE,
+	SNAK_SNAKTYPE,
+} from '@/store/statements/snaks/getterTypes';
 import DataValue from '@/datamodel/DataValue';
 
 describe( 'statements/Getters', () => {
@@ -121,6 +126,42 @@ describe( 'statements/Getters', () => {
 				};
 
 				expect( getters[ SNAK_SNAKTYPE ]( mockSnakPath ) ).toBeNull();
+				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
+			} );
+		} );
+
+		describe( 'datatype', () => {
+			it( 'has a datatype', () => {
+				const returnSnak = {
+					property: 'P42',
+					snaktype: 'somevalue',
+					datatype: 'url',
+				};
+
+				const mockState = newStatementState();
+				const getters = inject( StatementGetters, {
+					state: mockState,
+				} );
+
+				const mockSnakPath: PathToSnak = {
+					resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
+				};
+
+				expect( getters[ SNAK_DATATYPE ]( mockSnakPath ) ).toBe( returnSnak.datatype );
+				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
+			} );
+
+			it( 'returns null if snak was not found', () => {
+				const mockState = newStatementState();
+				const getters = inject( StatementGetters, {
+					state: mockState,
+				} );
+
+				const mockSnakPath: PathToSnak = {
+					resolveSnakInStatement: jest.fn().mockReturnValue( null ),
+				};
+
+				expect( getters[ SNAK_DATATYPE ]( mockSnakPath ) ).toBeNull();
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 		} );

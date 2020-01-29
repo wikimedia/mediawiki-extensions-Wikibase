@@ -1,3 +1,4 @@
+import DataType from '@/datamodel/DataType';
 import { StatementState } from '@/store/statements';
 import { Getters } from 'vuex-smart-module';
 import {
@@ -8,6 +9,7 @@ import {
 import EntityId from '@/datamodel/EntityId';
 import {
 	SNAK_DATA_VALUE,
+	SNAK_DATATYPE,
 	SNAK_DATAVALUETYPE,
 	SNAK_SNAKTYPE,
 } from '@/store/statements/snaks/getterTypes';
@@ -63,6 +65,17 @@ export class StatementGetters extends Getters<StatementState> {
 			}
 
 			return snak.snaktype;
+		};
+	}
+
+	public get [ SNAK_DATATYPE ]() {
+		return ( pathToSnak: PathToSnak ): DataType | null => {
+			const snak = pathToSnak.resolveSnakInStatement( this.state );
+			if ( !snak ) {
+				return null;
+			}
+
+			return snak.datatype;
 		};
 	}
 

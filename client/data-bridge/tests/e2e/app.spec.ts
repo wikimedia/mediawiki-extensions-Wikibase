@@ -47,7 +47,7 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 } ) );
 
 const DEFAULT_ENTITY = 'Q42';
-const DEFAULT_PROPERTY = 'P349';
+const DEFAULT_PROPERTY = 'P373';
 
 function prepareTestEnv( options: {
 	entityId?: string;

@@ -124,7 +124,7 @@ launch(
 	{
 		pageTitle: 'Client_page',
 		entityId: 'Q42',
-		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P349' ) as string,
+		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P373' ) as string,
 		entityTitle: 'Q42',
 		editFlow: EditFlow.OVERWRITE,
 		client: {

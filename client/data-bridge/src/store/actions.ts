@@ -53,7 +53,11 @@ import { RootMutations } from '@/store/mutations';
 import Term from '@/datamodel/Term';
 import { entityModule } from './entity';
 import { statementModule } from '@/store/statements';
-import { SNAK_DATAVALUETYPE, SNAK_SNAKTYPE } from '@/store/statements/snaks/getterTypes';
+import {
+	SNAK_DATATYPE,
+	SNAK_DATAVALUETYPE,
+	SNAK_SNAKTYPE,
+} from '@/store/statements/snaks/getterTypes';
 import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
@@ -182,6 +186,12 @@ RootActions
 			this.statementModule.getters[ SNAK_SNAKTYPE ]( path ) !== 'value'
 		) {
 			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ] );
+		}
+
+		if (
+			this.statementModule.getters[ SNAK_DATATYPE ]( path ) !== 'string'
+		) {
+			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DATATYPE } ] );
 		}
 
 		if (
