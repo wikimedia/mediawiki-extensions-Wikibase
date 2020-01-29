@@ -69,7 +69,6 @@ export default class ErrorPermissionInfo extends Vue {
 
 <style lang="scss">
 .wb-db-error-permission-info {
-	$line-height: px-to-em( 22px );
 
 	// TODO could use a variant of IconMessageBox
 	padding-left: 2em;
@@ -87,7 +86,7 @@ export default class ErrorPermissionInfo extends Vue {
 	&__header,
 	p,
 	ul {
-		line-height: $line-height;
+		line-height: $line-height-text;
 		margin-bottom: px-to-em( 8px );
 	}
 
