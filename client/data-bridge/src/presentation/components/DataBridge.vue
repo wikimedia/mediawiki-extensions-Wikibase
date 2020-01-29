@@ -15,12 +15,14 @@
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Action, Getter, State } from 'vuex-class';
+import { Getter, State } from 'vuex-class';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import { BRIDGE_SET_TARGET_VALUE } from '@/store/actionTypes';
+import { Context } from 'vuex-smart-module';
+import { rootModule } from '@/store';
 
 @Component( {
 	components: {
@@ -39,8 +41,16 @@ export default class DataBridge extends Vue {
 	@Getter( 'targetLabel' )
 	public targetLabel!: Term;
 
-	@Action( BRIDGE_SET_TARGET_VALUE )
-	public setDataValue!: ( dataValue: DataValue ) => void;
+	private rootContext!: Context<typeof rootModule>;
+
+	public created(): void {
+		this.rootContext = rootModule.context( this.$store );
+	}
+
+	public setDataValue( dataValue: DataValue ): void {
+		this.rootContext.dispatch( BRIDGE_SET_TARGET_VALUE, dataValue );
+	}
+
 }
 </script>
 

@@ -31,6 +31,9 @@ import { BRIDGE_SET_EDIT_DECISION } from '@/store/actionTypes';
 import { RadioInput } from '@wmde/wikibase-vuejs-components';
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { rootModule } from '@/store';
+import { Context } from 'vuex-smart-module';
+
 @Component( {
 	components: {
 		RadioGroup,
@@ -39,12 +42,18 @@ import Component from 'vue-class-component';
 } )
 export default class EditDecision extends Vue {
 
+	private rootContext!: Context<typeof rootModule>;
+
+	public created(): void {
+		this.rootContext = rootModule.context( this.$store );
+	}
+
 	public get editDecision(): EditDecisionOption {
 		return this.$store.state.editDecision;
 	}
 
 	public set editDecision( value: EditDecisionOption ) {
-		this.$store.dispatch( BRIDGE_SET_EDIT_DECISION, value );
+		this.rootContext.dispatch( BRIDGE_SET_EDIT_DECISION, value );
 	}
 
 }

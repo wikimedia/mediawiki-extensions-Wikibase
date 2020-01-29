@@ -11670,19 +11670,19 @@ var events;
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=72fb657d&
-var DataBridgevue_type_template_id_72fb657d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
-var DataBridgevue_type_template_id_72fb657d_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=639c89f0&
+var DataBridgevue_type_template_id_639c89f0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
+var DataBridgevue_type_template_id_639c89f0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=72fb657d&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=639c89f0&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=47cf842d&
-var EditDecisionvue_type_template_id_47cf842d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+"\n\t")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+"\n\t\t\t")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+"\n\t\t\t")])],2)],1)],1)}
-var EditDecisionvue_type_template_id_47cf842d_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=95d241a8&
+var EditDecisionvue_type_template_id_95d241a8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+"\n\t")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+"\n\t\t\t")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+"\n\t\t\t")])],2)],1)],1)}
+var EditDecisionvue_type_template_id_95d241a8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=47cf842d&
+// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=95d241a8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
 var RadioGroupvue_type_template_id_09f3b87c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-radio-group"},[_vm._t("default")],2)}
@@ -11844,877 +11844,6 @@ var component = normalizeComponent(
 // EXTERNAL MODULE: ./node_modules/@wmde/wikibase-vuejs-components/dist/wikibase-vuejs-components.common.js
 var wikibase_vuejs_components_common = __webpack_require__("d1ac");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-var EditDecisionvue_type_script_lang_ts_EditDecision =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(EditDecision, _Vue);
-
-  function EditDecision() {
-    _classCallCheck(this, EditDecision);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EditDecision).apply(this, arguments));
-  }
-
-  _createClass(EditDecision, [{
-    key: "editDecision",
-    get: function get() {
-      return this.$store.state.editDecision;
-    },
-    set: function set(value) {
-      this.$store.dispatch(BRIDGE_SET_EDIT_DECISION, value);
-    }
-  }]);
-
-  return EditDecision;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-EditDecisionvue_type_script_lang_ts_EditDecision = __decorate([vue_class_component_common_default()({
-  components: {
-    RadioGroup: components_RadioGroup,
-    RadioInput: wikibase_vuejs_components_common["RadioInput"]
-  }
-})], EditDecisionvue_type_script_lang_ts_EditDecision);
-/* harmony default export */ var EditDecisionvue_type_script_lang_ts_ = (EditDecisionvue_type_script_lang_ts_EditDecision);
-// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_EditDecisionvue_type_script_lang_ts_ = (EditDecisionvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/EditDecision.vue?vue&type=style&index=0&lang=scss&
-var EditDecisionvue_type_style_index_0_lang_scss_ = __webpack_require__("151e");
-
-// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue
-
-
-
-
-
-
-/* normalize component */
-
-var EditDecision_component = normalizeComponent(
-  components_EditDecisionvue_type_script_lang_ts_,
-  EditDecisionvue_type_template_id_47cf842d_render,
-  EditDecisionvue_type_template_id_47cf842d_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_EditDecision = (EditDecision_component.exports);
-// EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
-var vuex_esm = __webpack_require__("2f62");
-
-// CONCATENATED MODULE: ./node_modules/vuex-class/lib/bindings.js
-
-
-var State = createBindingHelper('computed', vuex_esm["f" /* mapState */]);
-var Getter = createBindingHelper('computed', vuex_esm["d" /* mapGetters */]);
-var Action = createBindingHelper('methods', vuex_esm["c" /* mapActions */]);
-var Mutation = createBindingHelper('methods', vuex_esm["e" /* mapMutations */]);
-function bindings_namespace(namespace, helper) {
-    function createNamespacedHelper(helper) {
-        function namespacedHelper(a, b) {
-            if (typeof b === 'string') {
-                var key = b;
-                var proto = a;
-                return helper(key, { namespace: namespace })(proto, key);
-            }
-            var type = a;
-            var options = merge(b || {}, { namespace: namespace });
-            return helper(type, options);
-        }
-        return namespacedHelper;
-    }
-    if (helper) {
-        console.warn('[vuex-class] passing the 2nd argument to `namespace` function is deprecated. pass only namespace string instead.');
-        return createNamespacedHelper(helper);
-    }
-    return {
-        State: createNamespacedHelper(State),
-        Getter: createNamespacedHelper(Getter),
-        Mutation: createNamespacedHelper(Mutation),
-        Action: createNamespacedHelper(Action)
-    };
-}
-function createBindingHelper(bindTo, mapFn) {
-    function makeDecorator(map, namespace) {
-        return Object(vue_class_component_common["createDecorator"])(function (componentOptions, key) {
-            if (!componentOptions[bindTo]) {
-                componentOptions[bindTo] = {};
-            }
-            var mapObject = (_a = {}, _a[key] = map, _a);
-            componentOptions[bindTo][key] = namespace !== undefined
-                ? mapFn(namespace, mapObject)[key]
-                : mapFn(mapObject)[key];
-            var _a;
-        });
-    }
-    function helper(a, b) {
-        if (typeof b === 'string') {
-            var key = b;
-            var proto = a;
-            return makeDecorator(key, undefined)(proto, key);
-        }
-        var namespace = extractNamespace(b);
-        var type = a;
-        return makeDecorator(type, namespace);
-    }
-    return helper;
-}
-function extractNamespace(options) {
-    var n = options && options.namespace;
-    if (typeof n !== 'string') {
-        return undefined;
-    }
-    if (n[n.length - 1] !== '/') {
-        return n + '/';
-    }
-    return n;
-}
-function merge(a, b) {
-    var res = {};
-    [a, b].forEach(function (obj) {
-        Object.keys(obj).forEach(function (key) {
-            res[key] = obj[key];
-        });
-    });
-    return res;
-}
-
-// CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
-
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=60e1ce01&
-var StringDataValuevue_type_template_id_60e1ce01_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('PropertyLabel',{attrs:{"term":_vm.label,"html-for":_vm.id}}),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder,"maxlength":_vm.maxlength},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
-var StringDataValuevue_type_template_id_60e1ce01_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=60e1ce01&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
-var es6_number_constructor = __webpack_require__("c5f6");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
-var PropertyLabelvue_type_template_id_352b5eee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{directives:[{name:"inlanguage",rawName:"v-inlanguage",value:(_vm.term.language),expression:"term.language"}],staticClass:"wb-db-PropertyLabel",attrs:{"for":_vm.htmlFor}},[_vm._v(_vm._s(_vm.term.value))])}
-var PropertyLabelvue_type_template_id_352b5eee_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-var PropertyLabelvue_type_script_lang_ts_PropertyLabel =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(PropertyLabel, _Vue);
-
-  function PropertyLabel() {
-    _classCallCheck(this, PropertyLabel);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PropertyLabel).apply(this, arguments));
-  }
-
-  return PropertyLabel;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "term", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "htmlFor", void 0);
-
-PropertyLabelvue_type_script_lang_ts_PropertyLabel = __decorate([Object(vue_property_decorator["Component"])({})], PropertyLabelvue_type_script_lang_ts_PropertyLabel);
-/* harmony default export */ var PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_PropertyLabel);
-// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=style&index=0&lang=scss&
-var PropertyLabelvue_type_style_index_0_lang_scss_ = __webpack_require__("87a9");
-
-// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue
-
-
-
-
-
-
-/* normalize component */
-
-var PropertyLabel_component = normalizeComponent(
-  components_PropertyLabelvue_type_script_lang_ts_,
-  PropertyLabelvue_type_template_id_352b5eee_render,
-  PropertyLabelvue_type_template_id_352b5eee_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_PropertyLabel = (PropertyLabel_component.exports);
-// EXTERNAL MODULE: ./node_modules/uuid/index.js
-var uuid = __webpack_require__("11c1");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-var StringDataValuevue_type_script_lang_ts_StringDataValue =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(StringDataValue, _Vue);
-
-  function StringDataValue() {
-    var _this;
-
-    _classCallCheck(this, StringDataValue);
-
-    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(StringDataValue).apply(this, arguments));
-    _this.id = Object(uuid["v4"])();
-    return _this;
-  }
-
-  _createClass(StringDataValue, [{
-    key: "value",
-    get: function get() {
-      if (!this.dataValue) {
-        return '';
-      } else {
-        return this.dataValue.value;
-      }
-    },
-    set: function set(value) {
-      this.setDataValue({
-        type: 'string',
-        value: value
-      });
-    }
-  }]);
-
-  return StringDataValue;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "dataValue", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "label", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false
-})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "placeholder", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  type: Number,
-  required: false
-})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "maxlength", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: Function
-})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "setDataValue", void 0);
-
-StringDataValuevue_type_script_lang_ts_StringDataValue = __decorate([Object(vue_property_decorator["Component"])({
-  components: {
-    PropertyLabel: components_PropertyLabel,
-    ResizingTextField: wikibase_vuejs_components_common["ResizingTextField"]
-  }
-})], StringDataValuevue_type_script_lang_ts_StringDataValue);
-/* harmony default export */ var StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_StringDataValue);
-// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=style&index=0&lang=scss&
-var StringDataValuevue_type_style_index_0_lang_scss_ = __webpack_require__("2f88");
-
-// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue
-
-
-
-
-
-
-/* normalize component */
-
-var StringDataValue_component = normalizeComponent(
-  components_StringDataValuevue_type_script_lang_ts_,
-  StringDataValuevue_type_template_id_60e1ce01_render,
-  StringDataValuevue_type_template_id_60e1ce01_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_StringDataValue = (StringDataValue_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=2689f801&
-var ReferenceSectionvue_type_template_id_2689f801_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+"\n\t")]),_c('ul',_vm._l((_vm.targetReferences),function(reference,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem"},[_c('div',[_c('SingleReferenceDisplay',{attrs:{"reference":reference,"separator":_vm.$messages.get( _vm.$messages.KEYS.REFERENCE_SNAK_SEPARATOR )}})],1)])}),0)])}
-var ReferenceSectionvue_type_template_id_2689f801_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=2689f801&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
-var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"wb-db-reference"},_vm._l((_vm.snaks()),function(value,index){return _c('span',{key:index},[(index > 0)?_c('span',[_vm._v(_vm._s(_vm.separator))]):_vm._e(),_c('span',[_vm._v(_vm._s(value))])])}),0)}
-var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
-var es7_symbol_async_iterator = __webpack_require__("ac4d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.symbol.js
-var es6_symbol = __webpack_require__("8a81");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(SingleReferenceDisplay, _Vue);
-
-  function SingleReferenceDisplay() {
-    _classCallCheck(this, SingleReferenceDisplay);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(SingleReferenceDisplay).apply(this, arguments));
-  }
-
-  _createClass(SingleReferenceDisplay, [{
-    key: "snaks",
-    value: function snaks() {
-      var _this = this;
-
-      function flatten(array) {
-        var flatArray = [];
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var elements = _step.value;
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-              for (var _iterator2 = elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var element = _step2.value;
-
-                if (element !== null) {
-                  flatArray.push(element);
-                }
-              }
-            } catch (err) {
-              _didIteratorError2 = true;
-              _iteratorError2 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                  _iterator2.return();
-                }
-              } finally {
-                if (_didIteratorError2) {
-                  throw _iteratorError2;
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        return flatArray;
-      }
-
-      function isValueSnak(snak) {
-        return snak.snaktype === 'value';
-      }
-
-      return flatten(this.reference['snaks-order'].map(function (propertyId) {
-        return _this.reference.snaks[propertyId].map(function (snak) {
-          if (!isValueSnak(snak)) {
-            // TODO: handle novalue and somevalue
-            return null;
-          }
-
-          var datavalueValue = snak.datavalue.value;
-
-          if (typeof_typeof(datavalueValue) === 'object') {
-            return JSON.stringify(datavalueValue);
-          }
-
-          return datavalueValue;
-        });
-      }));
-    }
-  }]);
-
-  return SingleReferenceDisplay;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "reference", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  type: String,
-  default: '. '
-})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "separator", void 0);
-
-SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay = __decorate([vue_class_component_common_default.a], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
-/* harmony default export */ var SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue
-
-
-
-
-
-/* normalize component */
-
-var SingleReferenceDisplay_component = normalizeComponent(
-  components_SingleReferenceDisplayvue_type_script_lang_ts_,
-  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render,
-  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns,
-  false,
-  null,
-  "48caea56",
-  null
-  
-)
-
-/* harmony default export */ var components_SingleReferenceDisplay = (SingleReferenceDisplay_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-var ReferenceSectionvue_type_script_lang_ts_ReferenceSection =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ReferenceSection, _Vue);
-
-  function ReferenceSection() {
-    _classCallCheck(this, ReferenceSection);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ReferenceSection).apply(this, arguments));
-  }
-
-  return ReferenceSection;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Getter('targetReferences')], ReferenceSectionvue_type_script_lang_ts_ReferenceSection.prototype, "targetReferences", void 0);
-
-ReferenceSectionvue_type_script_lang_ts_ReferenceSection = __decorate([vue_class_component_common_default()({
-  components: {
-    SingleReferenceDisplay: components_SingleReferenceDisplay
-  }
-})], ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
-/* harmony default export */ var ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
-// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=style&index=0&lang=scss&
-var ReferenceSectionvue_type_style_index_0_lang_scss_ = __webpack_require__("e839");
-
-// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue
-
-
-
-
-
-
-/* normalize component */
-
-var ReferenceSection_component = normalizeComponent(
-  components_ReferenceSectionvue_type_script_lang_ts_,
-  ReferenceSectionvue_type_template_id_2689f801_render,
-  ReferenceSectionvue_type_template_id_2689f801_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ReferenceSection = (ReferenceSection_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-
-var DataBridgevue_type_script_lang_ts_DataBridge =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(DataBridge, _Vue);
-
-  function DataBridge() {
-    _classCallCheck(this, DataBridge);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(DataBridge).apply(this, arguments));
-  }
-
-  return DataBridge;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetValue", void 0);
-
-__decorate([State('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
-
-__decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
-
-__decorate([Action(BRIDGE_SET_TARGET_VALUE)], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "setDataValue", void 0);
-
-DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
-  components: {
-    EditDecision: components_EditDecision,
-    StringDataValue: components_StringDataValue,
-    ReferenceSection: components_ReferenceSection
-  }
-})], DataBridgevue_type_script_lang_ts_DataBridge);
-/* harmony default export */ var DataBridgevue_type_script_lang_ts_ = (DataBridgevue_type_script_lang_ts_DataBridge);
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_DataBridgevue_type_script_lang_ts_ = (DataBridgevue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/DataBridge.vue?vue&type=style&index=0&lang=scss&
-var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
-
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue
-
-
-
-
-
-
-/* normalize component */
-
-var DataBridge_component = normalizeComponent(
-  components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_72fb657d_render,
-  DataBridgevue_type_template_id_72fb657d_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_DataBridge = (DataBridge_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
-var Initializingvue_type_template_id_5903a292_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[(_vm.ready)?_vm._t("default"):[(_vm.loadingIsSlow)?_c('IndeterminateProgressBar'):_vm._e()]],2)}
-var Initializingvue_type_template_id_5903a292_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-/**
- * A component which gets shown to illustrate that an operation is
- * ongoing which temporarily does not allow user interaction.
- *
- * Depending on the run time of the operation an animation is shown.
- *
- * This
- *
- * * shows the default slot if `isInitializing` is false (= ready)
- * * hides the default slot while `isInitializing` is true; during that time it
- *   * shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
- *   * shows the `IndeterminateProgressBar` from there on until `isInitializing` is false
- *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`[1]
- *
- * [1] This condition is only applied while `isInitializing` is true
- *
- * Effectively there are three scenarios:
- *
- * ```
- * Timeline     0s                        1s            1.5s            2s
- * Scenario 1
- *   Loading    |------------------|
- *   Animation      (no animation)  <- ready
- * Scenario 2
- *   Loading    |----------------------------|
- *   Animation                            |--------------|<- ready
- * Scenario 3
- *   Loading    |---------------------------------------------|
- *   Animation                            |-------------------|<- ready
- * ```
- */
-
-var Initializingvue_type_script_lang_ts_Initializing =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(Initializing, _Vue);
-
-  function Initializing() {
-    var _this;
-
-    _classCallCheck(this, Initializing);
-
-    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(Initializing).apply(this, arguments));
-    _this.ready = false;
-    _this.loadingIsSlow = false;
-    _this.animatedEnough = false;
-    return _this;
-  }
-
-  _createClass(Initializing, [{
-    key: "onStatusChange",
-    value: function onStatusChange(isInitializing, _oldStatus) {
-      if (isInitializing) {
-        this.showLoading();
-      } else {
-        this.tendTowardsReady();
-      }
-    }
-  }, {
-    key: "showLoading",
-    value: function showLoading() {
-      var _this2 = this;
-
-      this.ready = false;
-      this.trackSlowness = setTimeout(function () {
-        _this2.loadingIsSlow = true;
-        _this2.trackAnimation = setTimeout(function () {
-          _this2.animatedEnough = true;
-
-          _this2.tendTowardsReady();
-        }, _this2.MINIMUM_TIME_OF_PROGRESS_ANIMATION);
-      }, this.TIME_UNTIL_CONSIDERED_SLOW);
-    }
-  }, {
-    key: "tendTowardsReady",
-    value: function tendTowardsReady() {
-      if (this.isInitializing || this.loadingIsSlow && !this.animatedEnough) {
-        return;
-      }
-
-      this.ready = true;
-      this.resetSlownessTracking();
-    }
-  }, {
-    key: "resetSlownessTracking",
-    value: function resetSlownessTracking() {
-      this.loadingIsSlow = false;
-      this.animatedEnough = false;
-
-      if (this.trackSlowness) {
-        clearTimeout(this.trackSlowness);
-        this.trackSlowness = undefined;
-      }
-
-      if (this.trackAnimation) {
-        clearTimeout(this.trackAnimation);
-        this.trackAnimation = undefined;
-      }
-    }
-  }]);
-
-  return Initializing;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], Initializingvue_type_script_lang_ts_Initializing.prototype, "isInitializing", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  default: 1000
-})], Initializingvue_type_script_lang_ts_Initializing.prototype, "TIME_UNTIL_CONSIDERED_SLOW", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  default: 500
-})], Initializingvue_type_script_lang_ts_Initializing.prototype, "MINIMUM_TIME_OF_PROGRESS_ANIMATION", void 0);
-
-__decorate([Object(vue_property_decorator["Watch"])('isInitializing', {
-  immediate: true
-})], Initializingvue_type_script_lang_ts_Initializing.prototype, "onStatusChange", null);
-
-Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_component_common_default()({
-  components: {
-    IndeterminateProgressBar: wikibase_vuejs_components_common["IndeterminateProgressBar"]
-  }
-})], Initializingvue_type_script_lang_ts_Initializing);
-/* harmony default export */ var Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_Initializing);
-// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue
-
-
-
-
-
-/* normalize component */
-
-var Initializing_component = normalizeComponent(
-  components_Initializingvue_type_script_lang_ts_,
-  Initializingvue_type_template_id_5903a292_render,
-  Initializingvue_type_template_id_5903a292_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_Initializing = (Initializing_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=1241d786&
-var ErrorWrappervue_type_template_id_1241d786_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):_c('ErrorUnknown')],1)}
-var ErrorWrappervue_type_template_id_1241d786_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=1241d786&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
-var es7_array_includes = __webpack_require__("6762");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
-var es6_string_includes = __webpack_require__("2fdb");
-
-// CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
-var PageNotEditable;
-
-(function (PageNotEditable) {
-  PageNotEditable["BLOCKED_ON_CLIENT_PAGE"] = "blocked_on_client_page";
-  PageNotEditable["BLOCKED_ON_REPO_ITEM"] = "blocked_on_repo_item";
-  PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
-  PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
-  PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
-  PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
-  PageNotEditable["UNKNOWN"] = "unknown";
-})(PageNotEditable || (PageNotEditable = {}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=b7bef936&
-var ErrorPermissionvue_type_template_id_b7bef936_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('p',{staticClass:"wb-db-error-permission__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING ))+"\n\t")]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,staticClass:"wb-db-error-permission__info",attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError ),"expanded-by-default":_vm.permissionErrors.length === 1}})})],2)}
-var ErrorPermissionvue_type_template_id_b7bef936_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=b7bef936&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
-var es6_regexp_to_string = __webpack_require__("6b54");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
-var is_array = __webpack_require__("a745");
-var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
-var is_iterable = __webpack_require__("c8bb");
-var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
 
 function _defineProperty(obj, key, value) {
@@ -12731,637 +11860,9 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=731bff38&
-var ErrorPermissionInfovue_type_template_id_731bff38_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-error-permission-info"},[_c('div',{staticClass:"wb-db-error-permission-info__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}}),_c('a',{staticClass:"wb-db-error-permission-info__toggle",class:[ ("wb-db-error-permission-info__toggle--" + (_vm.infoIsExpanded ? 'open' : 'closed')) ],on:{"click":_vm.toggleInfo}},[_vm._v("\n\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t")]),(_vm.infoIsExpanded)?_c('div',{staticClass:"wb-db-error-permission-info__body",domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])}
-var ErrorPermissionInfovue_type_template_id_731bff38_staticRenderFns = []
+// EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
+var vuex_esm = __webpack_require__("2f62");
 
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=731bff38&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-/**
- * A component used to illustrate permission errors which happened when
- * checking the user's authorization to perform an action.
- */
-
-var ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ErrorPermissionInfo, _Vue);
-
-  function ErrorPermissionInfo() {
-    var _this;
-
-    _classCallCheck(this, ErrorPermissionInfo);
-
-    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermissionInfo).apply(this, arguments));
-    _this.infoIsExpanded = false;
-    return _this;
-  }
-
-  _createClass(ErrorPermissionInfo, [{
-    key: "created",
-    value: function created() {
-      this.infoIsExpanded = this.expandedByDefault;
-    }
-  }, {
-    key: "toggleInfo",
-    value: function toggleInfo() {
-      this.infoIsExpanded = !this.infoIsExpanded;
-    }
-  }]);
-
-  return ErrorPermissionInfo;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "expandedByDefault", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageHeader", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageBody", void 0);
-
-ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo = __decorate([vue_class_component_common_default.a], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
-/* harmony default export */ var ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=style&index=0&lang=scss&
-var ErrorPermissionInfovue_type_style_index_0_lang_scss_ = __webpack_require__("d2e9");
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue
-
-
-
-
-
-
-/* normalize component */
-
-var ErrorPermissionInfo_component = normalizeComponent(
-  components_ErrorPermissionInfovue_type_script_lang_ts_,
-  ErrorPermissionInfovue_type_template_id_731bff38_render,
-  ErrorPermissionInfovue_type_template_id_731bff38_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ErrorPermissionInfo = (ErrorPermissionInfo_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
-var PageListvue_type_template_id_19fe2d2f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',_vm._l((_vm.pages),function(page){return _c('li',{key:page},[_c('a',{attrs:{"href":_vm.router.getPageUrl( page )}},[_vm._v(_vm._s(page))])])}),0)}
-var PageListvue_type_template_id_19fe2d2f_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-/**
- * A component which renders page names into a list, incl. links to them.
- *
- * This is an internal component used when communicating permission
- * violations to the user. This happens for client and repo errors
- * alike; consequently the router is injectable instead of directly
- * accessing features from ClientRouterPlugin or RepoRouterPlugin
- * from here.
- */
-
-var PageListvue_type_script_lang_ts_PageList =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(PageList, _Vue);
-
-  function PageList() {
-    _classCallCheck(this, PageList);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PageList).apply(this, arguments));
-  }
-
-  return PageList;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], PageListvue_type_script_lang_ts_PageList.prototype, "pages", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], PageListvue_type_script_lang_ts_PageList.prototype, "router", void 0);
-
-PageListvue_type_script_lang_ts_PageList = __decorate([vue_class_component_common_default.a], PageListvue_type_script_lang_ts_PageList);
-/* harmony default export */ var PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_PageList);
-// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/PageList.vue
-
-
-
-
-
-/* normalize component */
-
-var PageList_component = normalizeComponent(
-  components_PageListvue_type_script_lang_ts_,
-  PageListvue_type_template_id_19fe2d2f_render,
-  PageListvue_type_template_id_19fe2d2f_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_PageList = (PageList_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
-var UserLinkvue_type_template_id_03ac8c2a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.userId !== 0)?_c('a',{attrs:{"href":_vm.router.getPageUrl( ("Special:Redirect/user/" + _vm.userId) )}},[_c('bdi',[_vm._v(_vm._s(_vm.userName))])]):_c('bdi',[_vm._v(_vm._s(_vm.userName))])}
-var UserLinkvue_type_template_id_03ac8c2a_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-/**
- * A component which renders a link to a user page on a certain wiki.
- *
- * This is an internal component used when communicating permission
- * violations to the user. This happens for client and repo errors
- * alike; consequently the router is injectable instead of directly
- * accessing features from ClientRouterPlugin or RepoRouterPlugin
- * from here.
- */
-
-var UserLinkvue_type_script_lang_ts_UserLink =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(UserLink, _Vue);
-
-  function UserLink() {
-    _classCallCheck(this, UserLink);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(UserLink).apply(this, arguments));
-  }
-
-  return UserLink;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userId", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userName", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "router", void 0);
-
-UserLinkvue_type_script_lang_ts_UserLink = __decorate([vue_class_component_common_default.a], UserLinkvue_type_script_lang_ts_UserLink);
-/* harmony default export */ var UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_UserLink);
-// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue
-
-
-
-
-
-/* normalize component */
-
-var UserLink_component = normalizeComponent(
-  components_UserLinkvue_type_script_lang_ts_,
-  UserLinkvue_type_template_id_03ac8c2a_render,
-  UserLinkvue_type_template_id_03ac8c2a_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_UserLink = (UserLink_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-var _permissionTypeRender;
-
-
-
-
-
-
-
-
-
-var permissionTypeRenderers = (_permissionTypeRender = {}, _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_FULLY_PROTECTED, {
-  header: 'PERMISSIONS_PROTECTED_HEADING',
-  body: 'PERMISSIONS_PROTECTED_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_SEMI_PROTECTED, {
-  header: 'PERMISSIONS_SEMI_PROTECTED_HEADING',
-  body: 'PERMISSIONS_SEMI_PROTECTED_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_CASCADE_PROTECTED, {
-  header: 'PERMISSIONS_CASCADE_PROTECTED_HEADING',
-  body: 'PERMISSIONS_CASCADE_PROTECTED_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_CLIENT_PAGE, {
-  header: 'PERMISSIONS_BLOCKED_ON_CLIENT_HEADING',
-  body: 'PERMISSIONS_BLOCKED_ON_CLIENT_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_REPO_ITEM, {
-  header: 'PERMISSIONS_BLOCKED_ON_REPO_HEADING',
-  body: 'PERMISSIONS_BLOCKED_ON_REPO_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.PAGE_CASCADE_PROTECTED, {
-  header: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING',
-  body: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY'
-}), _defineProperty(_permissionTypeRender, PageNotEditable.UNKNOWN, {
-  header: 'PERMISSIONS_ERROR_UNKNOWN_HEADING',
-  body: 'PERMISSIONS_ERROR_UNKNOWN_BODY'
-}), _permissionTypeRender);
-
-var ErrorPermissionvue_type_script_lang_ts_ErrorPermission =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ErrorPermission, _Vue);
-
-  function ErrorPermission() {
-    _classCallCheck(this, ErrorPermission);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermission).apply(this, arguments));
-  }
-
-  _createClass(ErrorPermission, [{
-    key: "getMessageHeader",
-    value: function getMessageHeader(permissionError) {
-      var _this$$messages;
-
-      return (_this$$messages = this.$messages).get.apply(_this$$messages, [this.$messages.KEYS[this.messageHeaderKey(permissionError)]].concat(_toConsumableArray(this.messageHeaderParameters(permissionError))));
-    }
-  }, {
-    key: "getMessageBody",
-    value: function getMessageBody(permissionError) {
-      var _this$$messages2;
-
-      return (_this$$messages2 = this.$messages).get.apply(_this$$messages2, [this.$messages.KEYS[this.messageBodyKey(permissionError)]].concat(_toConsumableArray(this.messageBodyParameters(permissionError))));
-    }
-    /** A poor (wo)man's implementation of constructing a correct
-        talk page title due to lack of a redirect functionality.
-        This can be removed once T242346 is resolved.
-    */
-
-  }, {
-    key: "buildTalkPageNamespace",
-    value: function buildTalkPageNamespace() {
-      if (this.entityTitle.includes(':')) {
-        var entityTitleParts = this.entityTitle.split(':', 2);
-        return "".concat(entityTitleParts[0], "_talk:").concat(entityTitleParts[1]);
-      }
-
-      return "Talk:".concat(this.entityTitle);
-    }
-  }, {
-    key: "messageHeaderKey",
-    value: function messageHeaderKey(permissionError) {
-      return permissionTypeRenderers[permissionError.type].header;
-    }
-  }, {
-    key: "messageBodyKey",
-    value: function messageBodyKey(permissionError) {
-      return permissionTypeRenderers[permissionError.type].body;
-    }
-  }, {
-    key: "messageHeaderParameters",
-    value: function messageHeaderParameters(permissionError) {
-      var params = [];
-
-      switch (permissionError.type) {
-        case PageNotEditable.ITEM_FULLY_PROTECTED:
-          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Administrators'));
-          break;
-
-        case PageNotEditable.ITEM_SEMI_PROTECTED:
-          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Autoconfirmed_users'));
-          break;
-      }
-
-      return params;
-    }
-  }, {
-    key: "messageBodyParameters",
-    value: function messageBodyParameters(permissionError) {
-      var params = [];
-
-      switch (permissionError.type) {
-        case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
-          {
-            var _permissionError$info = permissionError.info,
-                blockedBy = _permissionError$info.blockedBy,
-                blockedById = _permissionError$info.blockedById,
-                blockReason = _permissionError$info.blockReason,
-                blockId = _permissionError$info.blockId,
-                blockExpiry = _permissionError$info.blockExpiry,
-                blockedTimestamp = _permissionError$info.blockedTimestamp;
-            var blockedByText = this.bdi(blockedBy);
-            var blockedByLink = new components_UserLink({
-              propsData: {
-                userId: blockedById,
-                userName: blockedBy,
-                router: this.$clientRouter
-              }
-            }).$mount().$el;
-            params.push(blockedByLink, blockReason, '', // reserved for currentIP
-            blockedByText, blockId.toString(), blockExpiry, '', // reserved for intended blockee
-            blockedTimestamp);
-            break;
-          }
-
-        case PageNotEditable.BLOCKED_ON_REPO_ITEM:
-          {
-            var _permissionError$info2 = permissionError.info,
-                _blockedBy = _permissionError$info2.blockedBy,
-                _blockedById = _permissionError$info2.blockedById,
-                _blockReason = _permissionError$info2.blockReason,
-                _blockId = _permissionError$info2.blockId,
-                _blockExpiry = _permissionError$info2.blockExpiry,
-                _blockedTimestamp = _permissionError$info2.blockedTimestamp;
-
-            var _blockedByText = this.bdi(_blockedBy);
-
-            var _blockedByLink = new components_UserLink({
-              propsData: {
-                userId: _blockedById,
-                userName: _blockedBy,
-                router: this.$repoRouter
-              }
-            }).$mount().$el;
-            params.push(_blockedByLink, _blockReason, '', // reserved for currentIP
-            _blockedByText, _blockId.toString(), _blockExpiry, '', // reserved for intended blockee
-            _blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
-            break;
-          }
-
-        case PageNotEditable.ITEM_FULLY_PROTECTED:
-          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Project:Edit_warring'), this.$repoRouter.getPageUrl('Special:Log/protect', {
-            page: this.entityTitle
-          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
-          break;
-
-        case PageNotEditable.ITEM_SEMI_PROTECTED:
-          params.push(this.$repoRouter.getPageUrl('Special:Log/protect', {
-            page: this.entityTitle
-          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
-          break;
-
-        case PageNotEditable.ITEM_CASCADE_PROTECTED:
-          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$repoRouter));
-          break;
-
-        case PageNotEditable.PAGE_CASCADE_PROTECTED:
-          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$clientRouter));
-          break;
-      }
-
-      return params;
-    }
-  }, {
-    key: "bdi",
-    value: function bdi(text) {
-      return new vue_property_decorator["Vue"]({
-        render: function render(createElement) {
-          return createElement('bdi', text);
-        }
-      }).$mount().$el;
-    }
-  }, {
-    key: "convertToHtmlList",
-    value: function convertToHtmlList(arr, mwRouter) {
-      var pageListInstance = new components_PageList({
-        propsData: {
-          pages: arr,
-          router: mwRouter
-        }
-      });
-      pageListInstance.$mount();
-      return pageListInstance.$el;
-    }
-  }]);
-
-  return ErrorPermission;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "permissionErrors", void 0);
-
-__decorate([State('entityTitle')], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "entityTitle", void 0);
-
-ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_component_common_default()({
-  components: {
-    ErrorPermissionInfo: components_ErrorPermissionInfo
-  }
-})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
-/* harmony default export */ var ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=style&index=0&lang=scss&
-var ErrorPermissionvue_type_style_index_0_lang_scss_ = __webpack_require__("e24a");
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue
-
-
-
-
-
-
-/* normalize component */
-
-var ErrorPermission_component = normalizeComponent(
-  components_ErrorPermissionvue_type_script_lang_ts_,
-  ErrorPermissionvue_type_template_id_b7bef936_render,
-  ErrorPermissionvue_type_template_id_b7bef936_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
-var ErrorUnknownvue_type_template_id_4b32f9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
-var ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-/**
- * A component which gets shown if no dedicated handling for the type of
- * error which happened is configured.
- */
-
-var ErrorUnknownvue_type_script_lang_ts_ErrorUnknown =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ErrorUnknown, _Vue);
-
-  function ErrorUnknown() {
-    _classCallCheck(this, ErrorUnknown);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorUnknown).apply(this, arguments));
-  }
-
-  return ErrorUnknown;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_component_common_default()({})], ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
-/* harmony default export */ var ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue
-
-
-
-
-
-/* normalize component */
-
-var ErrorUnknown_component = normalizeComponent(
-  components_ErrorUnknownvue_type_script_lang_ts_,
-  ErrorUnknownvue_type_template_id_4b32f9a4_render,
-  ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ErrorUnknown = (ErrorUnknown_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var ErrorWrappervue_type_script_lang_ts_ErrorWrapper =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ErrorWrapper, _Vue);
-
-  function ErrorWrapper() {
-    _classCallCheck(this, ErrorWrapper);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorWrapper).apply(this, arguments));
-  }
-
-  _createClass(ErrorWrapper, [{
-    key: "isPermissionError",
-    value: function isPermissionError(error) {
-      return Object.values(PageNotEditable).includes(error.type);
-    }
-  }, {
-    key: "permissionErrors",
-    get: function get() {
-      return this.applicationErrors.filter(this.isPermissionError);
-    }
-  }]);
-
-  return ErrorWrapper;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([State('applicationErrors')], ErrorWrappervue_type_script_lang_ts_ErrorWrapper.prototype, "applicationErrors", void 0);
-
-ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default()({
-  components: {
-    ErrorPermission: components_ErrorPermission,
-    ErrorUnknown: components_ErrorUnknown
-  }
-})], ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
-/* harmony default export */ var ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=style&index=0&lang=scss&
-var ErrorWrappervue_type_style_index_0_lang_scss_ = __webpack_require__("156b");
-
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue
-
-
-
-
-
-
-/* normalize component */
-
-var ErrorWrapper_component = normalizeComponent(
-  components_ErrorWrappervue_type_script_lang_ts_,
-  ErrorWrappervue_type_template_id_1241d786_render,
-  ErrorWrappervue_type_template_id_1241d786_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ErrorWrapper = (ErrorWrapper_component.exports);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.object.get-own-property-descriptors.js
 var es7_object_get_own_property_descriptors = __webpack_require__("8e6e");
 
@@ -13395,385 +11896,10 @@ var ErrorStatus;
 var ApplicationStatus = _objectSpread({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
-var ProcessDialogHeadervue_type_template_id_07f39cc0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("primaryAction",[_c('div')])],2)}
-var ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns = []
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
 
-
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-/**
- * A component to be used as header of dialogs in which users make their
- * way through a process - i.e. there is a primary action "forward" and
- * an alternative second one.
- */
-
-var ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(ProcessDialogHeader, _Vue);
-
-  function ProcessDialogHeader() {
-    _classCallCheck(this, ProcessDialogHeader);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ProcessDialogHeader).apply(this, arguments));
-  }
-
-  return ProcessDialogHeader;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader.prototype, "title", void 0);
-
-ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader = __decorate([vue_class_component_common_default.a], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
-/* harmony default export */ var ProcessDialogHeadervue_type_script_lang_ts_ = (ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_ProcessDialogHeadervue_type_script_lang_ts_ = (ProcessDialogHeadervue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=style&index=0&lang=scss&
-var ProcessDialogHeadervue_type_style_index_0_lang_scss_ = __webpack_require__("4637");
-
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue
-
-
-
-
-
-
-/* normalize component */
-
-var ProcessDialogHeader_component = normalizeComponent(
-  components_ProcessDialogHeadervue_type_script_lang_ts_,
-  ProcessDialogHeadervue_type_template_id_07f39cc0_render,
-  ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_ProcessDialogHeader = (ProcessDialogHeader_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
-var EventEmittingButtonvue_type_template_id_3a88cf2c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-ui-event-emitting-button",class:[
-		("wb-ui-event-emitting-button--" + (this.type)),
-		{ 'wb-ui-event-emitting-button--squary': _vm.squary },
-		{ 'wb-ui-event-emitting-button--pressed': _vm.isPressed },
-		{ 'wb-ui-event-emitting-button--iconOnly': _vm.isIconOnly },
-		{ 'wb-ui-event-emitting-button--frameless': _vm.isFrameless },
-		{ 'wb-ui-event-emitting-button--disabled': _vm.disabled } ],attrs:{"href":_vm.href,"tabindex":_vm.tabindex,"role":_vm.href ? 'link' : 'button',"aria-disabled":_vm.disabled ? 'true' : null,"title":_vm.message,"target":_vm.opensInNewTab ? '_blank' : null,"rel":_vm.opensInNewTab ? 'noreferrer noopener' : null},on:{"click":_vm.click,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleEnterPress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.handleSpacePress($event)}],"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.unpress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.unpress($event)}]}},[_c('span',{staticClass:"wb-ui-event-emitting-button__text"},[_vm._v(_vm._s(_vm.message))])])}
-var EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-var validTypes = ['primaryProgressive', 'cancel'];
-var framelessTypes = ['cancel'];
-var imageOnlyTypes = ['cancel'];
-
-var EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(EventEmittingButton, _Vue);
-
-  function EventEmittingButton() {
-    var _this;
-
-    _classCallCheck(this, EventEmittingButton);
-
-    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EventEmittingButton).apply(this, arguments));
-    _this.isPressed = false;
-    return _this;
-  }
-
-  _createClass(EventEmittingButton, [{
-    key: "handleSpacePress",
-    value: function handleSpacePress(event) {
-      if (!this.simulateSpaceOnButton()) {
-        return;
-      }
-
-      this.preventScrollingDown(event);
-      this.isPressed = true;
-      this.click(event);
-    }
-  }, {
-    key: "handleEnterPress",
-    value: function handleEnterPress(event) {
-      this.isPressed = true;
-
-      if (this.thereIsNoSeparateClickEvent()) {
-        this.click(event);
-      }
-    }
-  }, {
-    key: "unpress",
-    value: function unpress() {
-      this.isPressed = false;
-    }
-  }, {
-    key: "click",
-    value: function click(event) {
-      if (this.preventDefault) {
-        this.preventOpeningLink(event);
-      }
-
-      if (this.disabled) {
-        return;
-      }
-
-      this.$emit('click', event);
-    }
-  }, {
-    key: "preventOpeningLink",
-    value: function preventOpeningLink(event) {
-      event.preventDefault();
-    }
-  }, {
-    key: "preventScrollingDown",
-    value: function preventScrollingDown(event) {
-      event.preventDefault();
-    }
-  }, {
-    key: "thereIsNoSeparateClickEvent",
-    value: function thereIsNoSeparateClickEvent() {
-      return this.href === null;
-    }
-  }, {
-    key: "simulateSpaceOnButton",
-    value: function simulateSpaceOnButton() {
-      return this.href === null;
-    }
-  }, {
-    key: "isIconOnly",
-    get: function get() {
-      return imageOnlyTypes.includes(this.type);
-    }
-  }, {
-    key: "isFrameless",
-    get: function get() {
-      return framelessTypes.includes(this.type);
-    }
-  }, {
-    key: "opensInNewTab",
-    get: function get() {
-      return this.href !== null && this.newTab;
-    }
-  }, {
-    key: "tabindex",
-    get: function get() {
-      if (this.disabled) {
-        return -1;
-      }
-
-      if (this.href) {
-        return null;
-      }
-
-      return 0;
-    }
-  }]);
-
-  return EventEmittingButton;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  validator: function validator(type) {
-    return validTypes.indexOf(type) !== -1;
-  }
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "type", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "message", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: null,
-  type: String
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "href", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: true,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "preventDefault", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "disabled", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "squary", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "newTab", void 0);
-
-EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton = __decorate([vue_class_component_common_default.a], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
-/* harmony default export */ var EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=style&index=0&lang=scss&
-var EventEmittingButtonvue_type_style_index_0_lang_scss_ = __webpack_require__("2e53");
-
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue
-
-
-
-
-
-
-/* normalize component */
-
-var EventEmittingButton_component = normalizeComponent(
-  components_EventEmittingButtonvue_type_script_lang_ts_,
-  EventEmittingButtonvue_type_template_id_3a88cf2c_render,
-  EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_EventEmittingButton = (EventEmittingButton_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var Appvue_type_script_lang_ts_App =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(App, _Vue);
-
-  function App() {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(App).apply(this, arguments));
-  }
-
-  _createClass(App, [{
-    key: "saveAndClose",
-    value: function saveAndClose() {
-      var _this = this;
-
-      this.save().then(function () {
-        _this.$emit(src_events.onSaved);
-      }).catch(function (_error) {// TODO store already sets application into error state. Do we need to do anything else?
-      });
-    }
-  }, {
-    key: "cancel",
-    value: function cancel() {
-      this.$emit(src_events.onCancel);
-    }
-  }, {
-    key: "isInitializing",
-    get: function get() {
-      return this.applicationStatus === definitions_ApplicationStatus.INITIALIZING;
-    }
-  }, {
-    key: "hasError",
-    get: function get() {
-      return this.applicationStatus === definitions_ApplicationStatus.ERROR;
-    }
-  }, {
-    key: "publishOrSave",
-    get: function get() {
-      return this.$bridgeConfig.usePublish ? this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
-    }
-  }]);
-
-  return App;
-}(vue_property_decorator["Vue"]);
-
-__decorate([Getter('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
-
-__decorate([Getter('canSave')], Appvue_type_script_lang_ts_App.prototype, "canSave", void 0);
-
-__decorate([Action(BRIDGE_SAVE)], Appvue_type_script_lang_ts_App.prototype, "save", void 0);
-
-Appvue_type_script_lang_ts_App = __decorate([Object(vue_property_decorator["Component"])({
-  components: {
-    DataBridge: components_DataBridge,
-    ErrorWrapper: components_ErrorWrapper,
-    Initializing: components_Initializing,
-    EventEmittingButton: components_EventEmittingButton,
-    ProcessDialogHeader: components_ProcessDialogHeader
-  }
-})], Appvue_type_script_lang_ts_App);
-/* harmony default export */ var Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_App);
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=script&lang=ts&
- /* harmony default export */ var presentation_Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/App.vue?vue&type=style&index=0&lang=scss&
-var Appvue_type_style_index_0_lang_scss_ = __webpack_require__("ad4b");
-
-// CONCATENATED MODULE: ./src/presentation/App.vue
-
-
-
-
-
-
-/* normalize component */
-
-var App_component = normalizeComponent(
-  presentation_Appvue_type_script_lang_ts_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var presentation_App = (App_component.exports);
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithHoles.js
 
 function _arrayWithHoles(arr) {
@@ -13782,6 +11908,10 @@ function _arrayWithHoles(arr) {
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
 var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
+var is_iterable = __webpack_require__("c8bb");
+var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArrayLimit.js
 
@@ -15247,6 +13377,38 @@ function (_Getters) {
 
   return RootGetters;
 }(Getters);
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
 // CONCATENATED MODULE: ./src/store/clone.ts
 function clone(source) {
   return JSON.parse(JSON.stringify(source));
@@ -15332,6 +13494,9 @@ function (_Mutations) {
 
 
 
+var _modules;
+
+
 
 
 
@@ -15342,38 +13507,1893 @@ function (_Mutations) {
 
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(vuex_esm["b" /* default */]);
+
+var store_BaseState = function BaseState() {
+  _classCallCheck(this, BaseState);
+
+  this.applicationErrors = [];
+  this.applicationStatus = ValidApplicationStatus.INITIALIZING;
+  this.editDecision = null;
+  this.editFlow = '';
+  this.entityTitle = '';
+  this.originalHref = '';
+  this.originalStatement = null;
+  this.pageTitle = '';
+  this.targetLabel = null;
+  this.targetProperty = '';
+  this.wikibaseRepoConfiguration = null;
+};
+
+var store_rootModule = new Module({
+  state: store_BaseState,
+  getters: getters_RootGetters,
+  mutations: mutations_RootMutations,
+  actions: actions_RootActions,
+  modules: (_modules = {}, _defineProperty(_modules, NS_ENTITY, entityModule), _defineProperty(_modules, NS_STATEMENTS, statementModule), _modules)
+});
 function store_createStore(services) {
-  var _modules;
-
-  var BaseState = function BaseState() {
-    _classCallCheck(this, BaseState);
-
-    this.applicationErrors = [];
-    this.applicationStatus = ValidApplicationStatus.INITIALIZING;
-    this.editDecision = null;
-    this.editFlow = '';
-    this.entityTitle = '';
-    this.originalHref = '';
-    this.originalStatement = null;
-    this.pageTitle = '';
-    this.targetLabel = null;
-    this.targetProperty = '';
-    this.wikibaseRepoConfiguration = null;
-  };
-
-  var rootModule = new Module({
-    state: BaseState,
-    getters: getters_RootGetters,
-    mutations: mutations_RootMutations,
-    actions: actions_RootActions,
-    modules: (_modules = {}, _defineProperty(_modules, NS_ENTITY, entityModule), _defineProperty(_modules, NS_STATEMENTS, statementModule), _modules)
-  });
-  var store = createStore(rootModule, {
+  var store = createStore(store_rootModule, {
     strict: "production" !== 'production'
   });
   store.$services = services;
   return store;
 }
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+
+var EditDecisionvue_type_script_lang_ts_EditDecision =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(EditDecision, _Vue);
+
+  function EditDecision() {
+    _classCallCheck(this, EditDecision);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EditDecision).apply(this, arguments));
+  }
+
+  _createClass(EditDecision, [{
+    key: "created",
+    value: function created() {
+      this.rootContext = store_rootModule.context(this.$store);
+    }
+  }, {
+    key: "editDecision",
+    get: function get() {
+      return this.$store.state.editDecision;
+    },
+    set: function set(value) {
+      this.rootContext.dispatch(BRIDGE_SET_EDIT_DECISION, value);
+    }
+  }]);
+
+  return EditDecision;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+EditDecisionvue_type_script_lang_ts_EditDecision = __decorate([vue_class_component_common_default()({
+  components: {
+    RadioGroup: components_RadioGroup,
+    RadioInput: wikibase_vuejs_components_common["RadioInput"]
+  }
+})], EditDecisionvue_type_script_lang_ts_EditDecision);
+/* harmony default export */ var EditDecisionvue_type_script_lang_ts_ = (EditDecisionvue_type_script_lang_ts_EditDecision);
+// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_EditDecisionvue_type_script_lang_ts_ = (EditDecisionvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/EditDecision.vue?vue&type=style&index=0&lang=scss&
+var EditDecisionvue_type_style_index_0_lang_scss_ = __webpack_require__("151e");
+
+// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue
+
+
+
+
+
+
+/* normalize component */
+
+var EditDecision_component = normalizeComponent(
+  components_EditDecisionvue_type_script_lang_ts_,
+  EditDecisionvue_type_template_id_95d241a8_render,
+  EditDecisionvue_type_template_id_95d241a8_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_EditDecision = (EditDecision_component.exports);
+// CONCATENATED MODULE: ./node_modules/vuex-class/lib/bindings.js
+
+
+var State = createBindingHelper('computed', vuex_esm["f" /* mapState */]);
+var Getter = createBindingHelper('computed', vuex_esm["d" /* mapGetters */]);
+var Action = createBindingHelper('methods', vuex_esm["c" /* mapActions */]);
+var Mutation = createBindingHelper('methods', vuex_esm["e" /* mapMutations */]);
+function bindings_namespace(namespace, helper) {
+    function createNamespacedHelper(helper) {
+        function namespacedHelper(a, b) {
+            if (typeof b === 'string') {
+                var key = b;
+                var proto = a;
+                return helper(key, { namespace: namespace })(proto, key);
+            }
+            var type = a;
+            var options = merge(b || {}, { namespace: namespace });
+            return helper(type, options);
+        }
+        return namespacedHelper;
+    }
+    if (helper) {
+        console.warn('[vuex-class] passing the 2nd argument to `namespace` function is deprecated. pass only namespace string instead.');
+        return createNamespacedHelper(helper);
+    }
+    return {
+        State: createNamespacedHelper(State),
+        Getter: createNamespacedHelper(Getter),
+        Mutation: createNamespacedHelper(Mutation),
+        Action: createNamespacedHelper(Action)
+    };
+}
+function createBindingHelper(bindTo, mapFn) {
+    function makeDecorator(map, namespace) {
+        return Object(vue_class_component_common["createDecorator"])(function (componentOptions, key) {
+            if (!componentOptions[bindTo]) {
+                componentOptions[bindTo] = {};
+            }
+            var mapObject = (_a = {}, _a[key] = map, _a);
+            componentOptions[bindTo][key] = namespace !== undefined
+                ? mapFn(namespace, mapObject)[key]
+                : mapFn(mapObject)[key];
+            var _a;
+        });
+    }
+    function helper(a, b) {
+        if (typeof b === 'string') {
+            var key = b;
+            var proto = a;
+            return makeDecorator(key, undefined)(proto, key);
+        }
+        var namespace = extractNamespace(b);
+        var type = a;
+        return makeDecorator(type, namespace);
+    }
+    return helper;
+}
+function extractNamespace(options) {
+    var n = options && options.namespace;
+    if (typeof n !== 'string') {
+        return undefined;
+    }
+    if (n[n.length - 1] !== '/') {
+        return n + '/';
+    }
+    return n;
+}
+function merge(a, b) {
+    var res = {};
+    [a, b].forEach(function (obj) {
+        Object.keys(obj).forEach(function (key) {
+            res[key] = obj[key];
+        });
+    });
+    return res;
+}
+
+// CONCATENATED MODULE: ./node_modules/vuex-class/lib/index.js
+
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=template&id=60e1ce01&
+var StringDataValuevue_type_template_id_60e1ce01_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-stringValue"},[_c('PropertyLabel',{attrs:{"term":_vm.label,"html-for":_vm.id}}),_c('ResizingTextField',{staticClass:"wb-db-stringValue__input",attrs:{"id":_vm.id,"placeholder":_vm.placeholder,"maxlength":_vm.maxlength},model:{value:(_vm.value),callback:function ($$v) {_vm.value=$$v},expression:"value"}})],1)}
+var StringDataValuevue_type_template_id_60e1ce01_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=template&id=60e1ce01&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
+var es6_number_constructor = __webpack_require__("c5f6");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
+var PropertyLabelvue_type_template_id_352b5eee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{directives:[{name:"inlanguage",rawName:"v-inlanguage",value:(_vm.term.language),expression:"term.language"}],staticClass:"wb-db-PropertyLabel",attrs:{"for":_vm.htmlFor}},[_vm._v(_vm._s(_vm.term.value))])}
+var PropertyLabelvue_type_template_id_352b5eee_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+var PropertyLabelvue_type_script_lang_ts_PropertyLabel =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(PropertyLabel, _Vue);
+
+  function PropertyLabel() {
+    _classCallCheck(this, PropertyLabel);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PropertyLabel).apply(this, arguments));
+  }
+
+  return PropertyLabel;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "term", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "htmlFor", void 0);
+
+PropertyLabelvue_type_script_lang_ts_PropertyLabel = __decorate([Object(vue_property_decorator["Component"])({})], PropertyLabelvue_type_script_lang_ts_PropertyLabel);
+/* harmony default export */ var PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_PropertyLabel);
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=style&index=0&lang=scss&
+var PropertyLabelvue_type_style_index_0_lang_scss_ = __webpack_require__("87a9");
+
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue
+
+
+
+
+
+
+/* normalize component */
+
+var PropertyLabel_component = normalizeComponent(
+  components_PropertyLabelvue_type_script_lang_ts_,
+  PropertyLabelvue_type_template_id_352b5eee_render,
+  PropertyLabelvue_type_template_id_352b5eee_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_PropertyLabel = (PropertyLabel_component.exports);
+// EXTERNAL MODULE: ./node_modules/uuid/index.js
+var uuid = __webpack_require__("11c1");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+var StringDataValuevue_type_script_lang_ts_StringDataValue =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(StringDataValue, _Vue);
+
+  function StringDataValue() {
+    var _this;
+
+    _classCallCheck(this, StringDataValue);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(StringDataValue).apply(this, arguments));
+    _this.id = Object(uuid["v4"])();
+    return _this;
+  }
+
+  _createClass(StringDataValue, [{
+    key: "value",
+    get: function get() {
+      if (!this.dataValue) {
+        return '';
+      } else {
+        return this.dataValue.value;
+      }
+    },
+    set: function set(value) {
+      this.setDataValue({
+        type: 'string',
+        value: value
+      });
+    }
+  }]);
+
+  return StringDataValue;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "dataValue", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "label", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "placeholder", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  type: Number,
+  required: false
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "maxlength", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: Function
+})], StringDataValuevue_type_script_lang_ts_StringDataValue.prototype, "setDataValue", void 0);
+
+StringDataValuevue_type_script_lang_ts_StringDataValue = __decorate([Object(vue_property_decorator["Component"])({
+  components: {
+    PropertyLabel: components_PropertyLabel,
+    ResizingTextField: wikibase_vuejs_components_common["ResizingTextField"]
+  }
+})], StringDataValuevue_type_script_lang_ts_StringDataValue);
+/* harmony default export */ var StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_StringDataValue);
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_StringDataValuevue_type_script_lang_ts_ = (StringDataValuevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/StringDataValue.vue?vue&type=style&index=0&lang=scss&
+var StringDataValuevue_type_style_index_0_lang_scss_ = __webpack_require__("2f88");
+
+// CONCATENATED MODULE: ./src/presentation/components/StringDataValue.vue
+
+
+
+
+
+
+/* normalize component */
+
+var StringDataValue_component = normalizeComponent(
+  components_StringDataValuevue_type_script_lang_ts_,
+  StringDataValuevue_type_template_id_60e1ce01_render,
+  StringDataValuevue_type_template_id_60e1ce01_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_StringDataValue = (StringDataValue_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=2689f801&
+var ReferenceSectionvue_type_template_id_2689f801_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+"\n\t")]),_c('ul',_vm._l((_vm.targetReferences),function(reference,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem"},[_c('div',[_c('SingleReferenceDisplay',{attrs:{"reference":reference,"separator":_vm.$messages.get( _vm.$messages.KEYS.REFERENCE_SNAK_SEPARATOR )}})],1)])}),0)])}
+var ReferenceSectionvue_type_template_id_2689f801_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=2689f801&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
+var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"wb-db-reference"},_vm._l((_vm.snaks()),function(value,index){return _c('span',{key:index},[(index > 0)?_c('span',[_vm._v(_vm._s(_vm.separator))]):_vm._e(),_c('span',[_vm._v(_vm._s(value))])])}),0)}
+var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
+var es7_symbol_async_iterator = __webpack_require__("ac4d");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.symbol.js
+var es6_symbol = __webpack_require__("8a81");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(SingleReferenceDisplay, _Vue);
+
+  function SingleReferenceDisplay() {
+    _classCallCheck(this, SingleReferenceDisplay);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(SingleReferenceDisplay).apply(this, arguments));
+  }
+
+  _createClass(SingleReferenceDisplay, [{
+    key: "snaks",
+    value: function snaks() {
+      var _this = this;
+
+      function flatten(array) {
+        var flatArray = [];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var elements = _step.value;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+              for (var _iterator2 = elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var element = _step2.value;
+
+                if (element !== null) {
+                  flatArray.push(element);
+                }
+              }
+            } catch (err) {
+              _didIteratorError2 = true;
+              _iteratorError2 = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                  _iterator2.return();
+                }
+              } finally {
+                if (_didIteratorError2) {
+                  throw _iteratorError2;
+                }
+              }
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return flatArray;
+      }
+
+      function isValueSnak(snak) {
+        return snak.snaktype === 'value';
+      }
+
+      return flatten(this.reference['snaks-order'].map(function (propertyId) {
+        return _this.reference.snaks[propertyId].map(function (snak) {
+          if (!isValueSnak(snak)) {
+            // TODO: handle novalue and somevalue
+            return null;
+          }
+
+          var datavalueValue = snak.datavalue.value;
+
+          if (typeof_typeof(datavalueValue) === 'object') {
+            return JSON.stringify(datavalueValue);
+          }
+
+          return datavalueValue;
+        });
+      }));
+    }
+  }]);
+
+  return SingleReferenceDisplay;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "reference", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  type: String,
+  default: '. '
+})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "separator", void 0);
+
+SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay = __decorate([vue_class_component_common_default.a], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
+/* harmony default export */ var SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
+// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue
+
+
+
+
+
+/* normalize component */
+
+var SingleReferenceDisplay_component = normalizeComponent(
+  components_SingleReferenceDisplayvue_type_script_lang_ts_,
+  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render,
+  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns,
+  false,
+  null,
+  "48caea56",
+  null
+  
+)
+
+/* harmony default export */ var components_SingleReferenceDisplay = (SingleReferenceDisplay_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+var ReferenceSectionvue_type_script_lang_ts_ReferenceSection =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ReferenceSection, _Vue);
+
+  function ReferenceSection() {
+    _classCallCheck(this, ReferenceSection);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ReferenceSection).apply(this, arguments));
+  }
+
+  return ReferenceSection;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Getter('targetReferences')], ReferenceSectionvue_type_script_lang_ts_ReferenceSection.prototype, "targetReferences", void 0);
+
+ReferenceSectionvue_type_script_lang_ts_ReferenceSection = __decorate([vue_class_component_common_default()({
+  components: {
+    SingleReferenceDisplay: components_SingleReferenceDisplay
+  }
+})], ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
+/* harmony default export */ var ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
+// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=style&index=0&lang=scss&
+var ReferenceSectionvue_type_style_index_0_lang_scss_ = __webpack_require__("e839");
+
+// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ReferenceSection_component = normalizeComponent(
+  components_ReferenceSectionvue_type_script_lang_ts_,
+  ReferenceSectionvue_type_template_id_2689f801_render,
+  ReferenceSectionvue_type_template_id_2689f801_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ReferenceSection = (ReferenceSection_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var DataBridgevue_type_script_lang_ts_DataBridge =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(DataBridge, _Vue);
+
+  function DataBridge() {
+    _classCallCheck(this, DataBridge);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(DataBridge).apply(this, arguments));
+  }
+
+  _createClass(DataBridge, [{
+    key: "created",
+    value: function created() {
+      this.rootContext = store_rootModule.context(this.$store);
+    }
+  }, {
+    key: "setDataValue",
+    value: function setDataValue(dataValue) {
+      this.rootContext.dispatch(BRIDGE_SET_TARGET_VALUE, dataValue);
+    }
+  }]);
+
+  return DataBridge;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetValue", void 0);
+
+__decorate([State('targetProperty')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetProperty", void 0);
+
+__decorate([Getter('targetLabel')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetLabel", void 0);
+
+DataBridgevue_type_script_lang_ts_DataBridge = __decorate([vue_class_component_common_default()({
+  components: {
+    EditDecision: components_EditDecision,
+    StringDataValue: components_StringDataValue,
+    ReferenceSection: components_ReferenceSection
+  }
+})], DataBridgevue_type_script_lang_ts_DataBridge);
+/* harmony default export */ var DataBridgevue_type_script_lang_ts_ = (DataBridgevue_type_script_lang_ts_DataBridge);
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_DataBridgevue_type_script_lang_ts_ = (DataBridgevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/DataBridge.vue?vue&type=style&index=0&lang=scss&
+var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
+
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue
+
+
+
+
+
+
+/* normalize component */
+
+var DataBridge_component = normalizeComponent(
+  components_DataBridgevue_type_script_lang_ts_,
+  DataBridgevue_type_template_id_639c89f0_render,
+  DataBridgevue_type_template_id_639c89f0_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_DataBridge = (DataBridge_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
+var Initializingvue_type_template_id_5903a292_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-init"},[(_vm.ready)?_vm._t("default"):[(_vm.loadingIsSlow)?_c('IndeterminateProgressBar'):_vm._e()]],2)}
+var Initializingvue_type_template_id_5903a292_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=template&id=5903a292&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+/**
+ * A component which gets shown to illustrate that an operation is
+ * ongoing which temporarily does not allow user interaction.
+ *
+ * Depending on the run time of the operation an animation is shown.
+ *
+ * This
+ *
+ * * shows the default slot if `isInitializing` is false (= ready)
+ * * hides the default slot while `isInitializing` is true; during that time it
+ *   * shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
+ *   * shows the `IndeterminateProgressBar` from there on until `isInitializing` is false
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`[1]
+ *
+ * [1] This condition is only applied while `isInitializing` is true
+ *
+ * Effectively there are three scenarios:
+ *
+ * ```
+ * Timeline     0s                        1s            1.5s            2s
+ * Scenario 1
+ *   Loading    |------------------|
+ *   Animation      (no animation)  <- ready
+ * Scenario 2
+ *   Loading    |----------------------------|
+ *   Animation                            |--------------|<- ready
+ * Scenario 3
+ *   Loading    |---------------------------------------------|
+ *   Animation                            |-------------------|<- ready
+ * ```
+ */
+
+var Initializingvue_type_script_lang_ts_Initializing =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(Initializing, _Vue);
+
+  function Initializing() {
+    var _this;
+
+    _classCallCheck(this, Initializing);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(Initializing).apply(this, arguments));
+    _this.ready = false;
+    _this.loadingIsSlow = false;
+    _this.animatedEnough = false;
+    return _this;
+  }
+
+  _createClass(Initializing, [{
+    key: "onStatusChange",
+    value: function onStatusChange(isInitializing, _oldStatus) {
+      if (isInitializing) {
+        this.showLoading();
+      } else {
+        this.tendTowardsReady();
+      }
+    }
+  }, {
+    key: "showLoading",
+    value: function showLoading() {
+      var _this2 = this;
+
+      this.ready = false;
+      this.trackSlowness = setTimeout(function () {
+        _this2.loadingIsSlow = true;
+        _this2.trackAnimation = setTimeout(function () {
+          _this2.animatedEnough = true;
+
+          _this2.tendTowardsReady();
+        }, _this2.MINIMUM_TIME_OF_PROGRESS_ANIMATION);
+      }, this.TIME_UNTIL_CONSIDERED_SLOW);
+    }
+  }, {
+    key: "tendTowardsReady",
+    value: function tendTowardsReady() {
+      if (this.isInitializing || this.loadingIsSlow && !this.animatedEnough) {
+        return;
+      }
+
+      this.ready = true;
+      this.resetSlownessTracking();
+    }
+  }, {
+    key: "resetSlownessTracking",
+    value: function resetSlownessTracking() {
+      this.loadingIsSlow = false;
+      this.animatedEnough = false;
+
+      if (this.trackSlowness) {
+        clearTimeout(this.trackSlowness);
+        this.trackSlowness = undefined;
+      }
+
+      if (this.trackAnimation) {
+        clearTimeout(this.trackAnimation);
+        this.trackAnimation = undefined;
+      }
+    }
+  }]);
+
+  return Initializing;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "isInitializing", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  default: 1000
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "TIME_UNTIL_CONSIDERED_SLOW", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  default: 500
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "MINIMUM_TIME_OF_PROGRESS_ANIMATION", void 0);
+
+__decorate([Object(vue_property_decorator["Watch"])('isInitializing', {
+  immediate: true
+})], Initializingvue_type_script_lang_ts_Initializing.prototype, "onStatusChange", null);
+
+Initializingvue_type_script_lang_ts_Initializing = __decorate([vue_class_component_common_default()({
+  components: {
+    IndeterminateProgressBar: wikibase_vuejs_components_common["IndeterminateProgressBar"]
+  }
+})], Initializingvue_type_script_lang_ts_Initializing);
+/* harmony default export */ var Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_Initializing);
+// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_Initializingvue_type_script_lang_ts_ = (Initializingvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/Initializing.vue
+
+
+
+
+
+/* normalize component */
+
+var Initializing_component = normalizeComponent(
+  components_Initializingvue_type_script_lang_ts_,
+  Initializingvue_type_template_id_5903a292_render,
+  Initializingvue_type_template_id_5903a292_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_Initializing = (Initializing_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=1241d786&
+var ErrorWrappervue_type_template_id_1241d786_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):_c('ErrorUnknown')],1)}
+var ErrorWrappervue_type_template_id_1241d786_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=1241d786&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
+var es7_array_includes = __webpack_require__("6762");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
+var es6_string_includes = __webpack_require__("2fdb");
+
+// CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
+var PageNotEditable;
+
+(function (PageNotEditable) {
+  PageNotEditable["BLOCKED_ON_CLIENT_PAGE"] = "blocked_on_client_page";
+  PageNotEditable["BLOCKED_ON_REPO_ITEM"] = "blocked_on_repo_item";
+  PageNotEditable["PAGE_CASCADE_PROTECTED"] = "cascadeprotected_on_client_page";
+  PageNotEditable["ITEM_FULLY_PROTECTED"] = "protectedpage";
+  PageNotEditable["ITEM_SEMI_PROTECTED"] = "semiprotectedpage";
+  PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
+  PageNotEditable["UNKNOWN"] = "unknown";
+})(PageNotEditable || (PageNotEditable = {}));
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=b7bef936&
+var ErrorPermissionvue_type_template_id_b7bef936_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('p',{staticClass:"wb-db-error-permission__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING ))+"\n\t")]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,staticClass:"wb-db-error-permission__info",attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError ),"expanded-by-default":_vm.permissionErrors.length === 1}})})],2)}
+var ErrorPermissionvue_type_template_id_b7bef936_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=b7bef936&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
+var es6_regexp_to_string = __webpack_require__("6b54");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=731bff38&
+var ErrorPermissionInfovue_type_template_id_731bff38_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-error-permission-info"},[_c('div',{staticClass:"wb-db-error-permission-info__header",domProps:{"innerHTML":_vm._s(_vm.messageHeader)}}),_c('a',{staticClass:"wb-db-error-permission-info__toggle",class:[ ("wb-db-error-permission-info__toggle--" + (_vm.infoIsExpanded ? 'open' : 'closed')) ],on:{"click":_vm.toggleInfo}},[_vm._v("\n\t\t"+_vm._s(this.$messages.get( this.$messages.KEYS.PERMISSIONS_MORE_INFO ))+"\n\t")]),(_vm.infoIsExpanded)?_c('div',{staticClass:"wb-db-error-permission-info__body",domProps:{"innerHTML":_vm._s(_vm.messageBody)}}):_vm._e()])}
+var ErrorPermissionInfovue_type_template_id_731bff38_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=template&id=731bff38&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+/**
+ * A component used to illustrate permission errors which happened when
+ * checking the user's authorization to perform an action.
+ */
+
+var ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorPermissionInfo, _Vue);
+
+  function ErrorPermissionInfo() {
+    var _this;
+
+    _classCallCheck(this, ErrorPermissionInfo);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermissionInfo).apply(this, arguments));
+    _this.infoIsExpanded = false;
+    return _this;
+  }
+
+  _createClass(ErrorPermissionInfo, [{
+    key: "created",
+    value: function created() {
+      this.infoIsExpanded = this.expandedByDefault;
+    }
+  }, {
+    key: "toggleInfo",
+    value: function toggleInfo() {
+      this.infoIsExpanded = !this.infoIsExpanded;
+    }
+  }]);
+
+  return ErrorPermissionInfo;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "expandedByDefault", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageHeader", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo.prototype, "messageBody", void 0);
+
+ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo = __decorate([vue_class_component_common_default.a], ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
+/* harmony default export */ var ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_ErrorPermissionInfo);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorPermissionInfovue_type_script_lang_ts_ = (ErrorPermissionInfovue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorPermissionInfo.vue?vue&type=style&index=0&lang=scss&
+var ErrorPermissionInfovue_type_style_index_0_lang_scss_ = __webpack_require__("d2e9");
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermissionInfo.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ErrorPermissionInfo_component = normalizeComponent(
+  components_ErrorPermissionInfovue_type_script_lang_ts_,
+  ErrorPermissionInfovue_type_template_id_731bff38_render,
+  ErrorPermissionInfovue_type_template_id_731bff38_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorPermissionInfo = (ErrorPermissionInfo_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
+var PageListvue_type_template_id_19fe2d2f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',_vm._l((_vm.pages),function(page){return _c('li',{key:page},[_c('a',{attrs:{"href":_vm.router.getPageUrl( page )}},[_vm._v(_vm._s(page))])])}),0)}
+var PageListvue_type_template_id_19fe2d2f_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=template&id=19fe2d2f&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+/**
+ * A component which renders page names into a list, incl. links to them.
+ *
+ * This is an internal component used when communicating permission
+ * violations to the user. This happens for client and repo errors
+ * alike; consequently the router is injectable instead of directly
+ * accessing features from ClientRouterPlugin or RepoRouterPlugin
+ * from here.
+ */
+
+var PageListvue_type_script_lang_ts_PageList =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(PageList, _Vue);
+
+  function PageList() {
+    _classCallCheck(this, PageList);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(PageList).apply(this, arguments));
+  }
+
+  return PageList;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PageListvue_type_script_lang_ts_PageList.prototype, "pages", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], PageListvue_type_script_lang_ts_PageList.prototype, "router", void 0);
+
+PageListvue_type_script_lang_ts_PageList = __decorate([vue_class_component_common_default.a], PageListvue_type_script_lang_ts_PageList);
+/* harmony default export */ var PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_PageList);
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_PageListvue_type_script_lang_ts_ = (PageListvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/PageList.vue
+
+
+
+
+
+/* normalize component */
+
+var PageList_component = normalizeComponent(
+  components_PageListvue_type_script_lang_ts_,
+  PageListvue_type_template_id_19fe2d2f_render,
+  PageListvue_type_template_id_19fe2d2f_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_PageList = (PageList_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
+var UserLinkvue_type_template_id_03ac8c2a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.userId !== 0)?_c('a',{attrs:{"href":_vm.router.getPageUrl( ("Special:Redirect/user/" + _vm.userId) )}},[_c('bdi',[_vm._v(_vm._s(_vm.userName))])]):_c('bdi',[_vm._v(_vm._s(_vm.userName))])}
+var UserLinkvue_type_template_id_03ac8c2a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=template&id=03ac8c2a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+/**
+ * A component which renders a link to a user page on a certain wiki.
+ *
+ * This is an internal component used when communicating permission
+ * violations to the user. This happens for client and repo errors
+ * alike; consequently the router is injectable instead of directly
+ * accessing features from ClientRouterPlugin or RepoRouterPlugin
+ * from here.
+ */
+
+var UserLinkvue_type_script_lang_ts_UserLink =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(UserLink, _Vue);
+
+  function UserLink() {
+    _classCallCheck(this, UserLink);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(UserLink).apply(this, arguments));
+  }
+
+  return UserLink;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userId", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "userName", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], UserLinkvue_type_script_lang_ts_UserLink.prototype, "router", void 0);
+
+UserLinkvue_type_script_lang_ts_UserLink = __decorate([vue_class_component_common_default.a], UserLinkvue_type_script_lang_ts_UserLink);
+/* harmony default export */ var UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_UserLink);
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_UserLinkvue_type_script_lang_ts_ = (UserLinkvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/UserLink.vue
+
+
+
+
+
+/* normalize component */
+
+var UserLink_component = normalizeComponent(
+  components_UserLinkvue_type_script_lang_ts_,
+  UserLinkvue_type_template_id_03ac8c2a_render,
+  UserLinkvue_type_template_id_03ac8c2a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_UserLink = (UserLink_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+var _permissionTypeRender;
+
+
+
+
+
+
+
+
+
+var permissionTypeRenderers = (_permissionTypeRender = {}, _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_FULLY_PROTECTED, {
+  header: 'PERMISSIONS_PROTECTED_HEADING',
+  body: 'PERMISSIONS_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_SEMI_PROTECTED, {
+  header: 'PERMISSIONS_SEMI_PROTECTED_HEADING',
+  body: 'PERMISSIONS_SEMI_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.ITEM_CASCADE_PROTECTED, {
+  header: 'PERMISSIONS_CASCADE_PROTECTED_HEADING',
+  body: 'PERMISSIONS_CASCADE_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_CLIENT_PAGE, {
+  header: 'PERMISSIONS_BLOCKED_ON_CLIENT_HEADING',
+  body: 'PERMISSIONS_BLOCKED_ON_CLIENT_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.BLOCKED_ON_REPO_ITEM, {
+  header: 'PERMISSIONS_BLOCKED_ON_REPO_HEADING',
+  body: 'PERMISSIONS_BLOCKED_ON_REPO_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.PAGE_CASCADE_PROTECTED, {
+  header: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING',
+  body: 'PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY'
+}), _defineProperty(_permissionTypeRender, PageNotEditable.UNKNOWN, {
+  header: 'PERMISSIONS_ERROR_UNKNOWN_HEADING',
+  body: 'PERMISSIONS_ERROR_UNKNOWN_BODY'
+}), _permissionTypeRender);
+
+var ErrorPermissionvue_type_script_lang_ts_ErrorPermission =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorPermission, _Vue);
+
+  function ErrorPermission() {
+    _classCallCheck(this, ErrorPermission);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorPermission).apply(this, arguments));
+  }
+
+  _createClass(ErrorPermission, [{
+    key: "getMessageHeader",
+    value: function getMessageHeader(permissionError) {
+      var _this$$messages;
+
+      return (_this$$messages = this.$messages).get.apply(_this$$messages, [this.$messages.KEYS[this.messageHeaderKey(permissionError)]].concat(_toConsumableArray(this.messageHeaderParameters(permissionError))));
+    }
+  }, {
+    key: "getMessageBody",
+    value: function getMessageBody(permissionError) {
+      var _this$$messages2;
+
+      return (_this$$messages2 = this.$messages).get.apply(_this$$messages2, [this.$messages.KEYS[this.messageBodyKey(permissionError)]].concat(_toConsumableArray(this.messageBodyParameters(permissionError))));
+    }
+    /** A poor (wo)man's implementation of constructing a correct
+        talk page title due to lack of a redirect functionality.
+        This can be removed once T242346 is resolved.
+    */
+
+  }, {
+    key: "buildTalkPageNamespace",
+    value: function buildTalkPageNamespace() {
+      if (this.entityTitle.includes(':')) {
+        var entityTitleParts = this.entityTitle.split(':', 2);
+        return "".concat(entityTitleParts[0], "_talk:").concat(entityTitleParts[1]);
+      }
+
+      return "Talk:".concat(this.entityTitle);
+    }
+  }, {
+    key: "messageHeaderKey",
+    value: function messageHeaderKey(permissionError) {
+      return permissionTypeRenderers[permissionError.type].header;
+    }
+  }, {
+    key: "messageBodyKey",
+    value: function messageBodyKey(permissionError) {
+      return permissionTypeRenderers[permissionError.type].body;
+    }
+  }, {
+    key: "messageHeaderParameters",
+    value: function messageHeaderParameters(permissionError) {
+      var params = [];
+
+      switch (permissionError.type) {
+        case PageNotEditable.ITEM_FULLY_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Administrators'));
+          break;
+
+        case PageNotEditable.ITEM_SEMI_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Autoconfirmed_users'));
+          break;
+      }
+
+      return params;
+    }
+  }, {
+    key: "messageBodyParameters",
+    value: function messageBodyParameters(permissionError) {
+      var params = [];
+
+      switch (permissionError.type) {
+        case PageNotEditable.BLOCKED_ON_CLIENT_PAGE:
+          {
+            var _permissionError$info = permissionError.info,
+                blockedBy = _permissionError$info.blockedBy,
+                blockedById = _permissionError$info.blockedById,
+                blockReason = _permissionError$info.blockReason,
+                blockId = _permissionError$info.blockId,
+                blockExpiry = _permissionError$info.blockExpiry,
+                blockedTimestamp = _permissionError$info.blockedTimestamp;
+            var blockedByText = this.bdi(blockedBy);
+            var blockedByLink = new components_UserLink({
+              propsData: {
+                userId: blockedById,
+                userName: blockedBy,
+                router: this.$clientRouter
+              }
+            }).$mount().$el;
+            params.push(blockedByLink, blockReason, '', // reserved for currentIP
+            blockedByText, blockId.toString(), blockExpiry, '', // reserved for intended blockee
+            blockedTimestamp);
+            break;
+          }
+
+        case PageNotEditable.BLOCKED_ON_REPO_ITEM:
+          {
+            var _permissionError$info2 = permissionError.info,
+                _blockedBy = _permissionError$info2.blockedBy,
+                _blockedById = _permissionError$info2.blockedById,
+                _blockReason = _permissionError$info2.blockReason,
+                _blockId = _permissionError$info2.blockId,
+                _blockExpiry = _permissionError$info2.blockExpiry,
+                _blockedTimestamp = _permissionError$info2.blockedTimestamp;
+
+            var _blockedByText = this.bdi(_blockedBy);
+
+            var _blockedByLink = new components_UserLink({
+              propsData: {
+                userId: _blockedById,
+                userName: _blockedBy,
+                router: this.$repoRouter
+              }
+            }).$mount().$el;
+            params.push(_blockedByLink, _blockReason, '', // reserved for currentIP
+            _blockedByText, _blockId.toString(), _blockExpiry, '', // reserved for intended blockee
+            _blockedTimestamp, this.$repoRouter.getPageUrl('Project:Administrators'));
+            break;
+          }
+
+        case PageNotEditable.ITEM_FULLY_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Project:Page_protection_policy'), this.$repoRouter.getPageUrl('Project:Project:Edit_warring'), this.$repoRouter.getPageUrl('Special:Log/protect', {
+            page: this.entityTitle
+          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
+          break;
+
+        case PageNotEditable.ITEM_SEMI_PROTECTED:
+          params.push(this.$repoRouter.getPageUrl('Special:Log/protect', {
+            page: this.entityTitle
+          }), this.$repoRouter.getPageUrl(this.buildTalkPageNamespace()));
+          break;
+
+        case PageNotEditable.ITEM_CASCADE_PROTECTED:
+          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$repoRouter));
+          break;
+
+        case PageNotEditable.PAGE_CASCADE_PROTECTED:
+          params.push(permissionError.info.pages.length.toString(), this.convertToHtmlList(permissionError.info.pages, this.$clientRouter));
+          break;
+      }
+
+      return params;
+    }
+  }, {
+    key: "bdi",
+    value: function bdi(text) {
+      return new vue_property_decorator["Vue"]({
+        render: function render(createElement) {
+          return createElement('bdi', text);
+        }
+      }).$mount().$el;
+    }
+  }, {
+    key: "convertToHtmlList",
+    value: function convertToHtmlList(arr, mwRouter) {
+      var pageListInstance = new components_PageList({
+        propsData: {
+          pages: arr,
+          router: mwRouter
+        }
+      });
+      pageListInstance.$mount();
+      return pageListInstance.$el;
+    }
+  }]);
+
+  return ErrorPermission;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "permissionErrors", void 0);
+
+__decorate([State('entityTitle')], ErrorPermissionvue_type_script_lang_ts_ErrorPermission.prototype, "entityTitle", void 0);
+
+ErrorPermissionvue_type_script_lang_ts_ErrorPermission = __decorate([vue_class_component_common_default()({
+  components: {
+    ErrorPermissionInfo: components_ErrorPermissionInfo
+  }
+})], ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
+/* harmony default export */ var ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_ErrorPermission);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorPermissionvue_type_script_lang_ts_ = (ErrorPermissionvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=style&index=0&lang=scss&
+var ErrorPermissionvue_type_style_index_0_lang_scss_ = __webpack_require__("e24a");
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ErrorPermission_component = normalizeComponent(
+  components_ErrorPermissionvue_type_script_lang_ts_,
+  ErrorPermissionvue_type_template_id_b7bef936_render,
+  ErrorPermissionvue_type_template_id_b7bef936_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
+var ErrorUnknownvue_type_template_id_4b32f9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
+var ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+/**
+ * A component which gets shown if no dedicated handling for the type of
+ * error which happened is configured.
+ */
+
+var ErrorUnknownvue_type_script_lang_ts_ErrorUnknown =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorUnknown, _Vue);
+
+  function ErrorUnknown() {
+    _classCallCheck(this, ErrorUnknown);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorUnknown).apply(this, arguments));
+  }
+
+  return ErrorUnknown;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_component_common_default()({})], ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
+/* harmony default export */ var ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue
+
+
+
+
+
+/* normalize component */
+
+var ErrorUnknown_component = normalizeComponent(
+  components_ErrorUnknownvue_type_script_lang_ts_,
+  ErrorUnknownvue_type_template_id_4b32f9a4_render,
+  ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorUnknown = (ErrorUnknown_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ErrorWrappervue_type_script_lang_ts_ErrorWrapper =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ErrorWrapper, _Vue);
+
+  function ErrorWrapper() {
+    _classCallCheck(this, ErrorWrapper);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorWrapper).apply(this, arguments));
+  }
+
+  _createClass(ErrorWrapper, [{
+    key: "isPermissionError",
+    value: function isPermissionError(error) {
+      return Object.values(PageNotEditable).includes(error.type);
+    }
+  }, {
+    key: "permissionErrors",
+    get: function get() {
+      return this.applicationErrors.filter(this.isPermissionError);
+    }
+  }]);
+
+  return ErrorWrapper;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([State('applicationErrors')], ErrorWrappervue_type_script_lang_ts_ErrorWrapper.prototype, "applicationErrors", void 0);
+
+ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default()({
+  components: {
+    ErrorPermission: components_ErrorPermission,
+    ErrorUnknown: components_ErrorUnknown
+  }
+})], ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
+/* harmony default export */ var ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_ErrorWrapper);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorWrappervue_type_script_lang_ts_ = (ErrorWrappervue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=style&index=0&lang=scss&
+var ErrorWrappervue_type_style_index_0_lang_scss_ = __webpack_require__("156b");
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ErrorWrapper_component = normalizeComponent(
+  components_ErrorWrappervue_type_script_lang_ts_,
+  ErrorWrappervue_type_template_id_1241d786_render,
+  ErrorWrappervue_type_template_id_1241d786_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorWrapper = (ErrorWrapper_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
+var ProcessDialogHeadervue_type_template_id_07f39cc0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v("\n\t\t"+_vm._s(_vm.title)+"\n\t")]),_vm._t("primaryAction",[_c('div')])],2)}
+var ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+/**
+ * A component to be used as header of dialogs in which users make their
+ * way through a process - i.e. there is a primary action "forward" and
+ * an alternative second one.
+ */
+
+var ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ProcessDialogHeader, _Vue);
+
+  function ProcessDialogHeader() {
+    _classCallCheck(this, ProcessDialogHeader);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ProcessDialogHeader).apply(this, arguments));
+  }
+
+  return ProcessDialogHeader;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: String
+})], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader.prototype, "title", void 0);
+
+ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader = __decorate([vue_class_component_common_default.a], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
+/* harmony default export */ var ProcessDialogHeadervue_type_script_lang_ts_ = (ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ProcessDialogHeadervue_type_script_lang_ts_ = (ProcessDialogHeadervue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=style&index=0&lang=scss&
+var ProcessDialogHeadervue_type_style_index_0_lang_scss_ = __webpack_require__("4637");
+
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ProcessDialogHeader_component = normalizeComponent(
+  components_ProcessDialogHeadervue_type_script_lang_ts_,
+  ProcessDialogHeadervue_type_template_id_07f39cc0_render,
+  ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ProcessDialogHeader = (ProcessDialogHeader_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"110592e7-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
+var EventEmittingButtonvue_type_template_id_3a88cf2c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-ui-event-emitting-button",class:[
+		("wb-ui-event-emitting-button--" + (this.type)),
+		{ 'wb-ui-event-emitting-button--squary': _vm.squary },
+		{ 'wb-ui-event-emitting-button--pressed': _vm.isPressed },
+		{ 'wb-ui-event-emitting-button--iconOnly': _vm.isIconOnly },
+		{ 'wb-ui-event-emitting-button--frameless': _vm.isFrameless },
+		{ 'wb-ui-event-emitting-button--disabled': _vm.disabled } ],attrs:{"href":_vm.href,"tabindex":_vm.tabindex,"role":_vm.href ? 'link' : 'button',"aria-disabled":_vm.disabled ? 'true' : null,"title":_vm.message,"target":_vm.opensInNewTab ? '_blank' : null,"rel":_vm.opensInNewTab ? 'noreferrer noopener' : null},on:{"click":_vm.click,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleEnterPress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.handleSpacePress($event)}],"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.unpress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.unpress($event)}]}},[_c('span',{staticClass:"wb-ui-event-emitting-button__text"},[_vm._v(_vm._s(_vm.message))])])}
+var EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+var validTypes = ['primaryProgressive', 'cancel'];
+var framelessTypes = ['cancel'];
+var imageOnlyTypes = ['cancel'];
+
+var EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(EventEmittingButton, _Vue);
+
+  function EventEmittingButton() {
+    var _this;
+
+    _classCallCheck(this, EventEmittingButton);
+
+    _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(EventEmittingButton).apply(this, arguments));
+    _this.isPressed = false;
+    return _this;
+  }
+
+  _createClass(EventEmittingButton, [{
+    key: "handleSpacePress",
+    value: function handleSpacePress(event) {
+      if (!this.simulateSpaceOnButton()) {
+        return;
+      }
+
+      this.preventScrollingDown(event);
+      this.isPressed = true;
+      this.click(event);
+    }
+  }, {
+    key: "handleEnterPress",
+    value: function handleEnterPress(event) {
+      this.isPressed = true;
+
+      if (this.thereIsNoSeparateClickEvent()) {
+        this.click(event);
+      }
+    }
+  }, {
+    key: "unpress",
+    value: function unpress() {
+      this.isPressed = false;
+    }
+  }, {
+    key: "click",
+    value: function click(event) {
+      if (this.preventDefault) {
+        this.preventOpeningLink(event);
+      }
+
+      if (this.disabled) {
+        return;
+      }
+
+      this.$emit('click', event);
+    }
+  }, {
+    key: "preventOpeningLink",
+    value: function preventOpeningLink(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "preventScrollingDown",
+    value: function preventScrollingDown(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "thereIsNoSeparateClickEvent",
+    value: function thereIsNoSeparateClickEvent() {
+      return this.href === null;
+    }
+  }, {
+    key: "simulateSpaceOnButton",
+    value: function simulateSpaceOnButton() {
+      return this.href === null;
+    }
+  }, {
+    key: "isIconOnly",
+    get: function get() {
+      return imageOnlyTypes.includes(this.type);
+    }
+  }, {
+    key: "isFrameless",
+    get: function get() {
+      return framelessTypes.includes(this.type);
+    }
+  }, {
+    key: "opensInNewTab",
+    get: function get() {
+      return this.href !== null && this.newTab;
+    }
+  }, {
+    key: "tabindex",
+    get: function get() {
+      if (this.disabled) {
+        return -1;
+      }
+
+      if (this.href) {
+        return null;
+      }
+
+      return 0;
+    }
+  }]);
+
+  return EventEmittingButton;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  validator: function validator(type) {
+    return validTypes.indexOf(type) !== -1;
+  }
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "type", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: String
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "message", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: null,
+  type: String
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "href", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: true,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "preventDefault", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "disabled", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "squary", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "newTab", void 0);
+
+EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton = __decorate([vue_class_component_common_default.a], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
+/* harmony default export */ var EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=style&index=0&lang=scss&
+var EventEmittingButtonvue_type_style_index_0_lang_scss_ = __webpack_require__("2e53");
+
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue
+
+
+
+
+
+
+/* normalize component */
+
+var EventEmittingButton_component = normalizeComponent(
+  components_EventEmittingButtonvue_type_script_lang_ts_,
+  EventEmittingButtonvue_type_template_id_3a88cf2c_render,
+  EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_EventEmittingButton = (EventEmittingButton_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Appvue_type_script_lang_ts_App =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(App, _Vue);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(App).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: "saveAndClose",
+    value: function saveAndClose() {
+      var _this = this;
+
+      this.save().then(function () {
+        _this.$emit(src_events.onSaved);
+      }).catch(function (_error) {// TODO store already sets application into error state. Do we need to do anything else?
+      });
+    }
+  }, {
+    key: "cancel",
+    value: function cancel() {
+      this.$emit(src_events.onCancel);
+    }
+  }, {
+    key: "isInitializing",
+    get: function get() {
+      return this.applicationStatus === definitions_ApplicationStatus.INITIALIZING;
+    }
+  }, {
+    key: "hasError",
+    get: function get() {
+      return this.applicationStatus === definitions_ApplicationStatus.ERROR;
+    }
+  }, {
+    key: "publishOrSave",
+    get: function get() {
+      return this.$bridgeConfig.usePublish ? this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
+    }
+  }]);
+
+  return App;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Getter('applicationStatus')], Appvue_type_script_lang_ts_App.prototype, "applicationStatus", void 0);
+
+__decorate([Getter('canSave')], Appvue_type_script_lang_ts_App.prototype, "canSave", void 0);
+
+__decorate([Action(BRIDGE_SAVE)], Appvue_type_script_lang_ts_App.prototype, "save", void 0);
+
+Appvue_type_script_lang_ts_App = __decorate([Object(vue_property_decorator["Component"])({
+  components: {
+    DataBridge: components_DataBridge,
+    ErrorWrapper: components_ErrorWrapper,
+    Initializing: components_Initializing,
+    EventEmittingButton: components_EventEmittingButton,
+    ProcessDialogHeader: components_ProcessDialogHeader
+  }
+})], Appvue_type_script_lang_ts_App);
+/* harmony default export */ var Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_App);
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var presentation_Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/App.vue?vue&type=style&index=0&lang=scss&
+var Appvue_type_style_index_0_lang_scss_ = __webpack_require__("ad4b");
+
+// CONCATENATED MODULE: ./src/presentation/App.vue
+
+
+
+
+
+
+/* normalize component */
+
+var App_component = normalizeComponent(
+  presentation_Appvue_type_script_lang_ts_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var presentation_App = (App_component.exports);
 // EXTERNAL MODULE: ./node_modules/events/events.js
 var events_events = __webpack_require__("faa1");
 
