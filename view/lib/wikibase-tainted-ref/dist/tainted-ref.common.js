@@ -5045,7 +5045,7 @@ var SET_STATEMENT_EDIT_FALSE = 'setStatementEditFalse';
 
 
 
-function actions() {
+function actions(_metricTracker) {
   var _ref;
 
   return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, payload) {
@@ -5140,7 +5140,7 @@ var getters = {
 
 
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.use(vuex_esm["b" /* default */]);
-function createStore() {
+function createStore(metricTracker) {
   var state = {
     statementsTaintedState: {},
     statementsPopperIsOpen: {},
@@ -5150,7 +5150,7 @@ function createStore() {
   };
   return new vuex_esm["a" /* Store */]({
     state: state,
-    actions: actions(),
+    actions: actions(metricTracker),
     mutations: mutations,
     getters: getters
   });
@@ -5161,7 +5161,10 @@ function createStore() {
 
 
 function launch(hookHandler, helpLink, feedbackLink) {
-  var store = createStore();
+  var mockTrackFunction = function mockTrackFunction() {// TODO: this should be injected
+  };
+
+  var store = createStore(mockTrackFunction);
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
     var id = element.getAttribute('id');
