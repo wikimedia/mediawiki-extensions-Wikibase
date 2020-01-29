@@ -16,9 +16,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -461,20 +461,22 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 			LanguageWithConversion::factory( 'de' ),
 			LanguageWithConversion::factory( 'en' ),
 		] );
+		$languageFallbackChainFactory = $this
+			->createMock( LanguageFallbackChainFactory::class );
 
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$this->getTermLookup(),
-			$languageFallback
-		);
+		$languageFallbackChainFactory->expects( $this->any() )
+			->method( 'newFromContext' )
+			->willReturn( $languageFallback );
 
 		return new HtmlPageLinkRendererBeginHookHandler(
 			$this->getEntityIdLookup(),
 			new ItemIdParser(),
-			$labelDescriptionLookup,
+			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$this->getInterwikiLookup(),
 			$this->getEntityLinkFormatterFactory(),
-			MediaWikiServices::getInstance()->getSpecialPageFactory()
+			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$languageFallbackChainFactory
 		);
 	}
 
