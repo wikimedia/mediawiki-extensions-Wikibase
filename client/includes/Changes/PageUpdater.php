@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Changes;
 
 use Title;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * Service interface for triggering different kinds of page updates

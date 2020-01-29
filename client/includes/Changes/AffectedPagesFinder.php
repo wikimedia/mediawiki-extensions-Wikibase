@@ -8,7 +8,6 @@ use Psr\Log\LoggerInterface;
 use Title;
 use Traversable;
 use UnexpectedValueException;
-use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
@@ -16,8 +15,9 @@ use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\StorageException;
 
 /**

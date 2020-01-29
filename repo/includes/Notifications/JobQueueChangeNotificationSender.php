@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Notifications;
 use Psr\Log\LoggerInterface;
 use JobQueueGroup;
 use JobSpecification;
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 
 /**
  * ChangeNotificationSender based on a JobQueueGroup and ChangeNotificationJob.

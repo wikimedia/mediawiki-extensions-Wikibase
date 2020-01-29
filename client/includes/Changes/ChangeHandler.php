@@ -9,10 +9,10 @@ use LinkBatch;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
-use Wikibase\Change;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\PageEntityUsages;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\EntityChange;
 
 /**
  * Interface for change handling. Whenever a change is detected,

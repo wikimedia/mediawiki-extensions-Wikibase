@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Changes;
 
 use MWException;
 use RecentChange;
@@ -8,7 +8,7 @@ use Revision;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\EntityContent;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -317,3 +317,6 @@ class EntityChange extends DiffChange {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EntityChange::class, 'Wikibase\EntityChange' );

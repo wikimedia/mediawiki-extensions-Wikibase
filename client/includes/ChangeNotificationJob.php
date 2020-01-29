@@ -6,7 +6,7 @@ use Job;
 use Psr\Log\LoggerInterface;
 use Title;
 use Wikibase\Client\Changes\ChangeHandler;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikimedia\Assert\Assert;
 
 /**

@@ -7,11 +7,11 @@ use Diff\DiffOp\DiffOp;
 use Exception;
 use MWException;
 use Psr\Log\LoggerInterface;
-use Wikibase\Change;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**

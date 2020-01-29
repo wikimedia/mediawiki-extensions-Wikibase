@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Store;
 
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 
 /**
  * Service interface for recording changes.

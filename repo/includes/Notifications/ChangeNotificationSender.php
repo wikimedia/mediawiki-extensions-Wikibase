@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Wikibase\Change;
+use Wikibase\Lib\Changes\Change;
 
 /**
  * Channel for sending notifications about changes to a repo's clients.

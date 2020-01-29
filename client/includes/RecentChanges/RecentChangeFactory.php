@@ -9,8 +9,8 @@ use Message;
 use MWException;
 use RecentChange;
 use Title;
-use Wikibase\EntityChange;
-use Wikibase\ItemChange;
+use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikimedia\Assert\Assert;
 
 /**

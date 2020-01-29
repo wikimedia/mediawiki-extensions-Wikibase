@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Changes;
 
 /**
  * Interface for objects representing changes.
@@ -49,3 +49,6 @@ interface Change {
 	public function getObjectId();
 
 }
+
+/** @deprecated */
+class_alias( Change::class, 'Wikibase\Change' );

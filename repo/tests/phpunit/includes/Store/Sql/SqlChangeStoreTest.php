@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use MediaWiki\MediaWikiServices;
 use RecentChange;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\EntityChange;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\WikibaseRepo;
