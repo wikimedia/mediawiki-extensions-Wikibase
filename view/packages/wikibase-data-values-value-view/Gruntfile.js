@@ -96,7 +96,7 @@ module.exports = function ( grunt ) {
 				frameworks: [ 'qunit' ]
 			},
 			all: {
-				browsers: [ 'PhantomJS', 'ChromeHeadless', 'Firefox' ]
+				browsers: [ 'PhantomJS', 'ChromeHeadless', 'FirefoxHeadless' ]
 			}
 		}
 	} );
