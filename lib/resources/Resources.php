@@ -1,9 +1,9 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\RepoAccessModule;
+use Wikibase\Lib\Modules\RepoAccessModule;
+use Wikibase\Lib\Modules\SitesModule;
 use Wikibase\Settings;
-use Wikibase\SitesModule;
 
 /**
  * @license GPL-2.0-or-later

@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Modules;
 
 use ResourceLoaderContext;
-use Wikibase\RepoAccessModule;
+use Wikibase\Lib\Modules\RepoAccessModule;
 
 /**
- * @covers \Wikibase\RepoAccessModule
+ * @covers \Wikibase\Lib\Modules\RepoAccessModule
  *
  * @group Wikibase
  *

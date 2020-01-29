@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Modules;
 
 use BagOStuff;
 use MediaWikiSite;
@@ -10,6 +10,7 @@ use ResourceLoaderModule;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later
