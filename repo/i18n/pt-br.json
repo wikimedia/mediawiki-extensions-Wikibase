@@ -438,7 +438,7 @@
 	"wikibase-entity-save-error-heading": "Algo deu errado",
 	"wikibase-entity-save-error-message": "Sua alteração não pôde ser publicada. Você pode tentar clicar no botão publicar novamente.",
 	"wikibase-tainted-ref-warning-icon-title": "Esta declaração tem alguns problemas em potencial",
-	"wikibase-tainted-ref-popper-text": "O valor mudou, mas a referência permaneceu a mesma",
+	"wikibase-tainted-ref-popper-text": "O valor desta declaração foi alterado, mas a referência permaneceu a mesma. Você pode remover este aviso caso a referência ainda esteja correta.",
 	"wikibase-tainted-ref-popper-title": "Potencial incompatibilidade de referência/valor",
 	"wikibase-tainted-ref-popper-help-link-title": "Página de ajuda para este tipo de restrição",
 	"wikibase-tainted-ref-popper-help-link-text": "Ajuda",

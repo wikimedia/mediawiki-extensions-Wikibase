@@ -135,5 +135,9 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Der vorherige Wert war nicht korrekt und war es auch nie.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ich aktualisierte</strong> einen veralteten Wert",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Der vorherige Wert war früher korrekt, ist jetzt aber veraltet.",
-	"wikibase-client-data-bridge-references-heading": "Quellenangaben"
+	"wikibase-client-data-bridge-references-heading": "Quellenangaben",
+	"wikibase-client-data-bridge-bailout-heading": "Stattdessen könntest Folgendes tun:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Bearbeite den Wert auf {{WBREPONAME}}. Klicke auf die Schaltfläche unten, um den Wert direkt zu bearbeiten (der Link wird in einem neuen Tab geöffnet).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Bearbeite den Wert auf {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Abhängig von der verwendeten Vorlage kann der Wert möglicherweise lokal mit [$1 dem Artikel-Editor] überschrieben werden. Wir empfehlen, den Wert, wenn möglich, stattdessen über die obige Schaltfläche zu {{WBREPONAME}} hinzuzufügen."
 }
