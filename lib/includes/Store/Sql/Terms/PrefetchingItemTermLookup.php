@@ -15,9 +15,6 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * A {@link PrefetchingTermLookup} that only supports items,
  * using the new, normalized schema (starting at wbt_item_ids).
  *
- * @todo This currently loads all the terms in all languages,
- * since the TermIdsResolver interface doesn’t offer any filtering capabilities.
- *
  * @license GPL-2.0-or-later
  */
 class PrefetchingItemTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {
@@ -34,8 +31,13 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/** @var bool|string */
 	private $databaseDomain;
 
-	/** @var array[] serialization -> terms array */
+	/** @var array[] entity id serialization -> terms array */
 	private $terms = [];
+
+	/** @var bool[] entity ID,  term type, language -> true for prefetched terms
+	 * example "Q1|label|en" -> true
+	 */
+	private $termKeys = [];
 
 	/**
 	 * PrefetchingItemTermLookup constructor.
@@ -78,7 +80,15 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 				throw new InvalidArgumentException(
 					'Not an ItemId: ' . $entityId->getSerialization() );
 			}
+			if ( isset( $itemIdsToFetch[$entityId->getNumericId()] ) ) {
+				continue;
+			}
 			if ( !array_key_exists( $entityId->getSerialization(), $this->terms ) ) {
+				$itemIdsToFetch[$entityId->getNumericId()] = $entityId;
+				continue;
+			}
+			$isPrefetched = $this->isPrefetched( $entityId, $termTypes, $languageCodes );
+			if ( !$isPrefetched ) {
 				$itemIdsToFetch[$entityId->getNumericId()] = $entityId;
 			}
 		}
@@ -103,7 +113,9 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 			$groups[$itemId->getSerialization()][] = $row->wbit_term_in_lang_id;
 		}
 
-		$this->terms += $this->termIdsResolver->resolveGroupedTermIds( $groups );
+		$result = $this->termIdsResolver->resolveGroupedTermIds( $groups, $termTypes, $languageCodes );
+		$this->setKeys( $entityIds, $termTypes, $languageCodes );
+		$this->terms = array_merge_recursive( $this->terms, $result );
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
@@ -111,7 +123,8 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		if ( !( $entityId instanceof ItemId ) ) {
 			throw new InvalidArgumentException( 'Not an ItemId: ' . $serialization );
 		}
-		if ( !array_key_exists( $serialization, $this->terms ) ) {
+		$key = $this->getKey( $entityId, $termType, $languageCode );
+		if ( !isset( $this->termKeys[$key] ) ) {
 			return null;
 		}
 		return $this->terms[$serialization][$termType][$languageCode][0] ?? false;
@@ -129,10 +142,54 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		if ( !( $entityId instanceof ItemId ) ) {
 			throw new InvalidArgumentException( 'Not an ItemId: ' . $serialization );
 		}
-		if ( !array_key_exists( $serialization, $this->terms ) ) {
+		$key = $this->getKey( $entityId, 'alias', $languageCode );
+		if ( !isset( $this->termKeys[$key] ) ) {
 			return null;
 		}
 		return $this->terms[$serialization]['alias'][$languageCode] ?? false;
+	}
+
+	private function getKey(
+		ItemId $entityId,
+		string $termType,
+		string $languageCode
+	): string {
+		return $this->getKeyString( $entityId->getSerialization(), $termType, $languageCode );
+	}
+
+	private function getKeyString(
+		string $entityId,
+		string $termType,
+		string $languageCode
+	): string {
+		return $entityId . '|' . $termType . '|' . $languageCode;
+	}
+
+	private function setKeys( array $entityIds, array $termTypes, array $languageCodes ): void {
+		foreach ( $entityIds as $entityId ) {
+			foreach ( $termTypes as $termType ) {
+				foreach ( $languageCodes as $languageCode ) {
+					$key = $this->getKey( $entityId, $termType, $languageCode );
+					$this->termKeys[$key] = true;
+				}
+			}
+		}
+	}
+
+	private function isPrefetched(
+		ItemId $entityId,
+		array $termTypes,
+		array $languageCodes
+	): bool {
+		foreach ( $termTypes as $termType ) {
+			foreach ( $languageCodes as $languageCode ) {
+				$key = $this->getKey( $entityId, $termType, $languageCode );
+				if ( !isset( $this->termKeys[$key] ) ) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 }
