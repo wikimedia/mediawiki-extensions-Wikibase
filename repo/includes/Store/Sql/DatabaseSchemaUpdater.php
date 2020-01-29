@@ -325,6 +325,10 @@ class DatabaseSchemaUpdater {
 				[ 'id_type' => 'wikibase-item' ],
 				__METHOD__
 			);
+		if ( $highestId === false ) {
+			// Fresh instance, no need to rebuild anything
+			return;
+		}
 		$highestId = (int)$highestId->id_value;
 
 		$rebuilder = new ItemTermsRebuilder(
