@@ -49,6 +49,3 @@ interface Change {
 	public function getObjectId();
 
 }
-
-/** @deprecated */
-class_alias( Change::class, 'Wikibase\Change' );
