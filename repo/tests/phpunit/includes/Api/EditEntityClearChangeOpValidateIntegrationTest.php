@@ -17,6 +17,7 @@ use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
@@ -155,7 +156,7 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 		$changeOp->method( 'apply' )
 			->willReturnCallback( function( Item $item ) {
 				if ( $item->getLabels()->isEmpty() ) {
-					throw new \RuntimeException( 'item without labels is really no good' );
+					throw new ChangeOpApplyException( 'item without labels is really no good' );
 				}
 
 				return new ChangeOpResultStub( $item->getId(), true );
