@@ -26,13 +26,11 @@
 
 <script lang="ts">
 import EditDecisionOption from '@/definitions/EditDecision';
+import StateMixin from '@/presentation/StateMixin';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
 import { BRIDGE_SET_EDIT_DECISION } from '@/store/actionTypes';
 import { RadioInput } from '@wmde/wikibase-vuejs-components';
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { rootModule } from '@/store';
-import { Context } from 'vuex-smart-module';
+import Component, { mixins } from 'vue-class-component';
 
 @Component( {
 	components: {
@@ -40,20 +38,14 @@ import { Context } from 'vuex-smart-module';
 		RadioInput,
 	},
 } )
-export default class EditDecision extends Vue {
-
-	private rootContext!: Context<typeof rootModule>;
-
-	public created(): void {
-		this.rootContext = rootModule.context( this.$store );
-	}
+export default class EditDecision extends mixins( StateMixin ) {
 
 	public get editDecision(): EditDecisionOption {
 		return this.$store.state.editDecision;
 	}
 
 	public set editDecision( value: EditDecisionOption ) {
-		this.rootContext.dispatch( BRIDGE_SET_EDIT_DECISION, value );
+		this.rootModule.dispatch( BRIDGE_SET_EDIT_DECISION, value );
 	}
 
 }

@@ -11670,179 +11670,12 @@ var events;
 })(events || (events = {}));
 
 /* harmony default export */ var src_events = (events);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=639c89f0&
-var DataBridgevue_type_template_id_639c89f0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
-var DataBridgevue_type_template_id_639c89f0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=59fde3f7&
+var DataBridgevue_type_template_id_59fde3f7_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
+var DataBridgevue_type_template_id_59fde3f7_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=639c89f0&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=95d241a8&
-var EditDecisionvue_type_template_id_95d241a8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+"\n\t")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+"\n\t\t\t")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+"\n\t\t\t")])],2)],1)],1)}
-var EditDecisionvue_type_template_id_95d241a8_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=95d241a8&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
-var RadioGroupvue_type_template_id_09f3b87c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-radio-group"},[_vm._t("default")],2)}
-var RadioGroupvue_type_template_id_09f3b87c_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
-
-// EXTERNAL MODULE: ./node_modules/vue-class-component/dist/vue-class-component.common.js
-var vue_class_component_common = __webpack_require__("65d9");
-var vue_class_component_common_default = /*#__PURE__*/__webpack_require__.n(vue_class_component_common);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-var RadioGroupvue_type_script_lang_ts_RadioGroup =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(RadioGroup, _Vue);
-
-  function RadioGroup() {
-    _classCallCheck(this, RadioGroup);
-
-    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(RadioGroup).apply(this, arguments));
-  }
-
-  return RadioGroup;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-RadioGroupvue_type_script_lang_ts_RadioGroup = __decorate([vue_class_component_common_default.a], RadioGroupvue_type_script_lang_ts_RadioGroup);
-/* harmony default export */ var RadioGroupvue_type_script_lang_ts_ = (RadioGroupvue_type_script_lang_ts_RadioGroup);
-// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_RadioGroupvue_type_script_lang_ts_ = (RadioGroupvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=style&index=0&lang=scss&
-var RadioGroupvue_type_style_index_0_lang_scss_ = __webpack_require__("4e23");
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue
-
-
-
-
-
-
-/* normalize component */
-
-var component = normalizeComponent(
-  components_RadioGroupvue_type_script_lang_ts_,
-  RadioGroupvue_type_template_id_09f3b87c_render,
-  RadioGroupvue_type_template_id_09f3b87c_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_RadioGroup = (component.exports);
-// EXTERNAL MODULE: ./node_modules/@wmde/wikibase-vuejs-components/dist/wikibase-vuejs-components.common.js
-var wikibase_vuejs_components_common = __webpack_require__("d1ac");
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=59fde3f7&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
 
@@ -13560,8 +13393,225 @@ function store_createStore(services) {
   store.$services = services;
   return store;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
+// EXTERNAL MODULE: ./node_modules/vue-class-component/dist/vue-class-component.common.js
+var vue_class_component_common = __webpack_require__("65d9");
+var vue_class_component_common_default = /*#__PURE__*/__webpack_require__.n(vue_class_component_common);
 
+// CONCATENATED MODULE: ./src/presentation/StateMixin.ts
+
+
+
+
+
+
+/* eslint-disable @typescript-eslint/camelcase */
+
+
+
+
+/**
+ * Mixin for components that access the state.
+ *
+ * Basic usage:
+ *
+ *     class MyComponent extends mixins( StateMixin ) {
+ *         public setValue( value ) {
+ *             this.rootModule.dispatch( SET_VALUE, value );
+ *         }
+ *     }
+ */
+
+var StateMixin_StateMixin =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(StateMixin, _Vue);
+
+  function StateMixin() {
+    _classCallCheck(this, StateMixin);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(StateMixin).apply(this, arguments));
+  }
+
+  _createClass(StateMixin, [{
+    key: "rootModule",
+    get: function get() {
+      if (this.$_StateMixin_rootModule === undefined) {
+        this.$_StateMixin_rootModule = store_rootModule.context(this.$store);
+      }
+
+      return this.$_StateMixin_rootModule;
+    }
+  }]);
+
+  return StateMixin;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+StateMixin_StateMixin = __decorate([vue_class_component_common_default.a], StateMixin_StateMixin);
+/* harmony default export */ var presentation_StateMixin = (StateMixin_StateMixin);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=7d381285&
+var EditDecisionvue_type_template_id_7d381285_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v("\n\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+"\n\t")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+"\n\t\t\t")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v("\n\t\t\t\t"+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+"\n\t\t\t")])],2)],1)],1)}
+var EditDecisionvue_type_template_id_7d381285_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=7d381285&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4769515e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
+var RadioGroupvue_type_template_id_09f3b87c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-radio-group"},[_vm._t("default")],2)}
+var RadioGroupvue_type_template_id_09f3b87c_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+var RadioGroupvue_type_script_lang_ts_RadioGroup =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(RadioGroup, _Vue);
+
+  function RadioGroup() {
+    _classCallCheck(this, RadioGroup);
+
+    return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(RadioGroup).apply(this, arguments));
+  }
+
+  return RadioGroup;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+RadioGroupvue_type_script_lang_ts_RadioGroup = __decorate([vue_class_component_common_default.a], RadioGroupvue_type_script_lang_ts_RadioGroup);
+/* harmony default export */ var RadioGroupvue_type_script_lang_ts_ = (RadioGroupvue_type_script_lang_ts_RadioGroup);
+// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_RadioGroupvue_type_script_lang_ts_ = (RadioGroupvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/RadioGroup.vue?vue&type=style&index=0&lang=scss&
+var RadioGroupvue_type_style_index_0_lang_scss_ = __webpack_require__("4e23");
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./src/presentation/components/RadioGroup.vue
+
+
+
+
+
+
+/* normalize component */
+
+var component = normalizeComponent(
+  components_RadioGroupvue_type_script_lang_ts_,
+  RadioGroupvue_type_template_id_09f3b87c_render,
+  RadioGroupvue_type_template_id_09f3b87c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_RadioGroup = (component.exports);
+// EXTERNAL MODULE: ./node_modules/@wmde/wikibase-vuejs-components/dist/wikibase-vuejs-components.common.js
+var wikibase_vuejs_components_common = __webpack_require__("d1ac");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=script&lang=ts&
 
 
 
@@ -13576,8 +13626,8 @@ function store_createStore(services) {
 
 var EditDecisionvue_type_script_lang_ts_EditDecision =
 /*#__PURE__*/
-function (_Vue) {
-  _inherits(EditDecision, _Vue);
+function (_mixins) {
+  _inherits(EditDecision, _mixins);
 
   function EditDecision() {
     _classCallCheck(this, EditDecision);
@@ -13586,22 +13636,17 @@ function (_Vue) {
   }
 
   _createClass(EditDecision, [{
-    key: "created",
-    value: function created() {
-      this.rootContext = store_rootModule.context(this.$store);
-    }
-  }, {
     key: "editDecision",
     get: function get() {
       return this.$store.state.editDecision;
     },
     set: function set(value) {
-      this.rootContext.dispatch(BRIDGE_SET_EDIT_DECISION, value);
+      this.rootModule.dispatch(BRIDGE_SET_EDIT_DECISION, value);
     }
   }]);
 
   return EditDecision;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+}(Object(vue_class_component_common["mixins"])(presentation_StateMixin));
 
 EditDecisionvue_type_script_lang_ts_EditDecision = __decorate([vue_class_component_common_default()({
   components: {
@@ -13626,8 +13671,8 @@ var EditDecisionvue_type_style_index_0_lang_scss_ = __webpack_require__("151e");
 
 var EditDecision_component = normalizeComponent(
   components_EditDecisionvue_type_script_lang_ts_,
-  EditDecisionvue_type_template_id_95d241a8_render,
-  EditDecisionvue_type_template_id_95d241a8_staticRenderFns,
+  EditDecisionvue_type_template_id_7d381285_render,
+  EditDecisionvue_type_template_id_7d381285_staticRenderFns,
   false,
   null,
   null,
@@ -14136,11 +14181,10 @@ var ReferenceSection_component = normalizeComponent(
 
 
 
-
 var DataBridgevue_type_script_lang_ts_DataBridge =
 /*#__PURE__*/
-function (_Vue) {
-  _inherits(DataBridge, _Vue);
+function (_mixins) {
+  _inherits(DataBridge, _mixins);
 
   function DataBridge() {
     _classCallCheck(this, DataBridge);
@@ -14149,19 +14193,14 @@ function (_Vue) {
   }
 
   _createClass(DataBridge, [{
-    key: "created",
-    value: function created() {
-      this.rootContext = store_rootModule.context(this.$store);
-    }
-  }, {
     key: "setDataValue",
     value: function setDataValue(dataValue) {
-      this.rootContext.dispatch(BRIDGE_SET_TARGET_VALUE, dataValue);
+      this.rootModule.dispatch(BRIDGE_SET_TARGET_VALUE, dataValue);
     }
   }]);
 
   return DataBridge;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+}(Object(vue_class_component_common["mixins"])(presentation_StateMixin));
 
 __decorate([Getter('targetValue')], DataBridgevue_type_script_lang_ts_DataBridge.prototype, "targetValue", void 0);
 
@@ -14193,8 +14232,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_639c89f0_render,
-  DataBridgevue_type_template_id_639c89f0_staticRenderFns,
+  DataBridgevue_type_template_id_59fde3f7_render,
+  DataBridgevue_type_template_id_59fde3f7_staticRenderFns,
   false,
   null,
   null,

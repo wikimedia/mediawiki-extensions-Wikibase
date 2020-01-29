@@ -12,17 +12,15 @@
 </template>
 
 <script lang="ts">
+import StateMixin from '@/presentation/StateMixin';
 import EditDecision from '@/presentation/components/EditDecision.vue';
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 import { Getter, State } from 'vuex-class';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 import { BRIDGE_SET_TARGET_VALUE } from '@/store/actionTypes';
-import { Context } from 'vuex-smart-module';
-import { rootModule } from '@/store';
 
 @Component( {
 	components: {
@@ -31,7 +29,7 @@ import { rootModule } from '@/store';
 		ReferenceSection,
 	},
 } )
-export default class DataBridge extends Vue {
+export default class DataBridge extends mixins( StateMixin ) {
 	@Getter( 'targetValue' )
 	public targetValue!: DataValue;
 
@@ -41,14 +39,8 @@ export default class DataBridge extends Vue {
 	@Getter( 'targetLabel' )
 	public targetLabel!: Term;
 
-	private rootContext!: Context<typeof rootModule>;
-
-	public created(): void {
-		this.rootContext = rootModule.context( this.$store );
-	}
-
 	public setDataValue( dataValue: DataValue ): void {
-		this.rootContext.dispatch( BRIDGE_SET_TARGET_VALUE, dataValue );
+		this.rootModule.dispatch( BRIDGE_SET_TARGET_VALUE, dataValue );
 	}
 
 }
