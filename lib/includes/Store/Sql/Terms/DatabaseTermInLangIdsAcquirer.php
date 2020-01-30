@@ -10,18 +10,18 @@ use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * A {@link TermIdsAcquirer} implementation using the database tables
+ * A {@link TermInLangIdsAcquirer} implementation using the database tables
  * wbt_term_in_lang, wbt_text_in_lang, and wbt_text.
  *
  * Because the wbt_text.wbx_text column can only hold up to 255 bytes,
  * terms longer than that (typically non-Latin descriptions)
  * will be truncated, and different terms that only differ after the first
- * 255 bytes will get the same ID.
+ * 255 bytes will get the same term in lang ID (and thus same other ids too).
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
+class DatabaseTermInLangIdsAcquirer implements TermInLangIdsAcquirer {
 
 	/**
 	 * @var ILBFactory
@@ -51,7 +51,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		$this->logger = $logger ?? new NullLogger();
 	}
 
-	public function acquireTermIds( array $termsArray, $callback = null ): array {
+	public function acquireTermInLangIds( array $termsArray, $callback = null ): array {
 		if ( $termsArray === [] ) {
 			if ( $callback !== null ) {
 				( $callback )( [] );
@@ -59,15 +59,15 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			return [];
 		}
 
-		$termIds = $this->mapTermsArrayToTermIds( $termsArray );
+		$termInLangIds = $this->mapTermsArrayToTermIds( $termsArray );
 
 		if ( $callback !== null ) {
-			( $callback )( $termIds );
+			( $callback )( $termInLangIds );
 		}
 
-		$this->restoreCleanedUpIds( $termsArray, $termIds );
+		$this->restoreCleanedUpIds( $termsArray, $termInLangIds );
 
-		return $termIds;
+		return $termInLangIds;
 	}
 
 	private function getLoadBalancer(): ILoadBalancer {
@@ -299,7 +299,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 			);
 		}
 
-		$termInLangIds = $this->acquireTermInLangIds(
+		$termInLangIds = $this->acquireTermInLangIdsInner(
 			$flattenedTypeTextInLangIds,
 			$termInLangIdsAcquirer,
 			$idsToRestore
@@ -315,7 +315,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $newTermsArray;
 	}
 
-	private function acquireTermInLangIds(
+	private function acquireTermInLangIdsInner(
 		array $typeTextInLangIds,
 		ReplicaMasterAwareRecordIdsAcquirer $termInLangIdsAcquirer,
 		array $idsToRestore = []
@@ -378,14 +378,14 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		return $termInLangIds;
 	}
 
-	private function restoreCleanedUpIds( array $termsArray, array $termIds = [] ) {
-		$uniqueTermIds = array_values( array_unique( $termIds ) );
+	private function restoreCleanedUpIds( array $termsArray, array $termInLangIds = [] ) {
+		$uniqueTermIds = array_values( array_unique( $termInLangIds ) );
 
 		$dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
 		$persistedTermIds = $dbMaster->selectFieldValues(
 			'wbt_term_in_lang',
 			'wbtl_id',
-			[ 'wbtl_id' => $termIds ],
+			[ 'wbtl_id' => $termInLangIds ],
 			__METHOD__
 		);
 
@@ -400,7 +400,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 
 	private function mapTermsArrayToTermIds(
 		array $termsArray,
-		array $termIdsToRestore = [],
+		array $termInLangIdsToRestore = [],
 		$ignoreReplica = false
 	): array {
 		$textIdsAcquirer = new ReplicaMasterAwareRecordIdsAcquirer(
@@ -417,7 +417,7 @@ class DatabaseTermIdsAcquirer implements TermIdsAcquirer {
 		$termsArray = $this->mapToTextInLangIds( $termsArray, $textInLangIdsAcquirer );
 		$termsArray = $this->mapToTypeIds( $termsArray );
 
-		return $this->mapToTermInLangIds( $termsArray, $termInLangIdsAcquirer, $termIdsToRestore );
+		return $this->mapToTermInLangIds( $termsArray, $termInLangIdsAcquirer, $termInLangIdsToRestore );
 	}
 
 	private function calcRecordHash( array $record ) {

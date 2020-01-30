@@ -16,7 +16,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabaseTermIdsCleaner implements TermIdsCleaner {
+class DatabaseTermStoreCleaner implements TermStoreCleaner {
 
 	private $lb;
 
@@ -48,10 +48,10 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	 * On the other hand, this class takes care that wbt_text_in_lang and text rows
 	 * used by other wbt_term_in_lang rows are not removed.
 	 *
-	 * @param int[] $termIds (wbtl_id)
+	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	public function cleanTermIds( array $termIds ) {
-		if ( $termIds === [] ) {
+	public function cleanTermInLangIds( array $termInLangIds ) {
+		if ( $termInLangIds === [] ) {
 			return;
 		}
 
@@ -60,7 +60,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 			$this->dbw = $this->lb->getConnection( ILoadBalancer::DB_MASTER );
 		}
 
-		$this->cleanTermInLangIds( $termIds );
+		$this->cleanTermInLangIdsInner( $termInLangIds );
 	}
 
 	/**
@@ -69,7 +69,7 @@ class DatabaseTermIdsCleaner implements TermIdsCleaner {
 	 *
 	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	private function cleanTermInLangIds( array $termInLangIds ) {
+	private function cleanTermInLangIdsInner( array $termInLangIds ) {
 		$this->logger->debug(
 			'{method}: deleting {count} term_in_lang rows',
 			[

@@ -68,10 +68,10 @@ trait FingerprintableEntityTermStoreTrait {
 	}
 
 	/**
-	 * Of the given term IDs, find those that aren’t used by any other items or properties.
+	 * Of the given term in lang IDs, find those that aren’t used by any other items or properties.
 	 *
-	 * Currently, this does not account for term IDs that may be used anywhere else,
-	 * e.g. by other entity types; anyone who uses term IDs elsewhere runs the risk
+	 * Currently, this does not account for term in lang IDs that may be used anywhere else,
+	 * e.g. by other entity types; anyone who uses term in lang IDs elsewhere runs the risk
 	 * of those terms being deleted at any time. This may be improved in the future.
 	 *
 	 * 1) Iterate through the IDs that we have been given and determine if they
@@ -79,61 +79,61 @@ trait FingerprintableEntityTermStoreTrait {
 	 * 2) Select FOR UPDATE the rows in the wbt_property_terms and wbt_item_terms
 	 * tables so they lock and nothing will happen to them.
 	 *
-	 * An alternative to this would be immediately lock all $termIds, but that would
+	 * An alternative to this would be immediately lock all $termInLangIds, but that would
 	 * lead to deadlocks. see T234948
 	 *
-	 * @param int[] $termIds (wbtl_id)
+	 * @param int[] $termInLangIds (wbtl_id)
 	 * @return int[] wbtl_ids to be cleaned
 	 */
-	private function findActuallyUnusedTermIds( array $termIds, IDatabase $dbw ) {
-		$termIdsUnused = [];
-		foreach ( $termIds as  $termId ) {
+	private function findActuallyUnusedTermInLangIds( array $termInLangIds, IDatabase $dbw ) {
+		$unusedTermInLangIds = [];
+		foreach ( $termInLangIds as $termInLangId ) {
 			// Note: Not batching here is intentional to avoid deadlocks (see method comment)
 			$usedInProperties = $dbw->selectField(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termId ]
+				[ 'wbpt_term_in_lang_id' => $termInLangId ]
 			);
 			$usedInItems = $dbw->selectField(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termId ]
+				[ 'wbit_term_in_lang_id' => $termInLangId ]
 			);
 
 			if ( $usedInProperties === false && $usedInItems === false ) {
-				$termIdsUnused[] = $termId;
+				$unusedTermInLangIds[] = $termInLangId;
 			}
 		}
-		if ( $termIdsUnused === [] ) {
+		if ( $unusedTermInLangIds === [] ) {
 			return [];
 		}
 
-		$termIdsUsedInPropertiesSinceLastLoopRan = $dbw->selectFieldValues(
+		$termInLangIdsUsedInPropertiesSinceLastLoopRan = $dbw->selectFieldValues(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
-			[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
+			[ 'wbpt_term_in_lang_id' => $unusedTermInLangIds ],
 			__METHOD__,
 			[
 				'FOR UPDATE'
 			]
 		);
-		$termIdsUsedInItemsSinceLastLoopRan = $dbw->selectFieldValues(
+		$termInLangIdsUsedInItemsSinceLastLoopRan = $dbw->selectFieldValues(
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
-			[ 'wbit_term_in_lang_id' => $termIdsUnused ],
+			[ 'wbit_term_in_lang_id' => $unusedTermInLangIds ],
 			__METHOD__,
 			[
 				'FOR UPDATE'
 			]
 		);
 
-		$finalUnusedTermIds = array_diff(
-			$termIdsUnused,
-			$termIdsUsedInPropertiesSinceLastLoopRan,
-			$termIdsUsedInItemsSinceLastLoopRan
+		$finalUnusedTermInLangIds = array_diff(
+			$unusedTermInLangIds,
+			$termInLangIdsUsedInPropertiesSinceLastLoopRan,
+			$termInLangIdsUsedInItemsSinceLastLoopRan
 		);
 
-		return $finalUnusedTermIds;
+		return $finalUnusedTermInLangIds;
 	}
 
 }

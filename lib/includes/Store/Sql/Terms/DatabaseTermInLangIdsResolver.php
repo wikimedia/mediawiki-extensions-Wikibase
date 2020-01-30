@@ -12,12 +12,12 @@ use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
- * Term ID resolver using the normalized database schema.
+ * Term in lang ID resolver using the normalized database schema.
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabaseTermIdsResolver implements TermIdsResolver {
+class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;
@@ -61,31 +61,31 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 		$this->logger = $logger ?: new NullLogger();
 	}
 
-	public function resolveTermIds(
-		array $termIds,
+	public function resolveTermInLangIds(
+		array $termInLangIds,
 		array $types = null,
 		array $languages = null
 	): array {
-		return $this->resolveGroupedTermIds( [ '' => $termIds ], $types, $languages )[''];
+		return $this->resolveGroupedTermInLangIds( [ '' => $termInLangIds ], $types, $languages )[''];
 	}
 
-	public function resolveGroupedTermIds(
-		array $groupedTermIds,
+	public function resolveGroupedTermInLangIds(
+		array $groupedTermInLangIds,
 		array $types = null,
 		array $languages = null
 	): array {
 		$groupedTerms = [];
 
-		$groupNamesByTermIds = [];
-		foreach ( $groupedTermIds as $groupName => $termIds ) {
+		$groupNamesByTermInLangIds = [];
+		foreach ( $groupedTermInLangIds as $groupName => $termInLangIds ) {
 			$groupedTerms[$groupName] = [];
-			foreach ( $termIds as $termId ) {
-				$groupNamesByTermIds[$termId][] = $groupName;
+			foreach ( $termInLangIds as $termInLangId ) {
+				$groupNamesByTermInLangIds[$termInLangId][] = $groupName;
 			}
 		}
-		$allTermIds = array_keys( $groupNamesByTermIds );
+		$allTermInLangIds = array_keys( $groupNamesByTermInLangIds );
 
-		if ( $allTermIds === [] || $types === [] || $languages === [] ) {
+		if ( $allTermInLangIds === [] || $types === [] || $languages === [] ) {
 			return $groupedTerms;
 		}
 
@@ -93,16 +93,16 @@ class DatabaseTermIdsResolver implements TermIdsResolver {
 			'{method}: getting {termCount} rows from replica',
 			[
 				'method' => __METHOD__,
-				'termCount' => count( $allTermIds ),
+				'termCount' => count( $allTermInLangIds ),
 			]
 		);
 
 		$result = $this->selectTermsViaJoin(
-			[], [], [ 'wbtl_id' => $allTermIds ], $types, $languages );
+			[], [], [ 'wbtl_id' => $allTermInLangIds ], $types, $languages );
 		$this->preloadTypes( $result );
 
 		foreach ( $result as $row ) {
-			foreach ( $groupNamesByTermIds[$row->wbtl_id] as $groupName ) {
+			foreach ( $groupNamesByTermInLangIds[$row->wbtl_id] as $groupName ) {
 				$this->addResultTerms( $groupedTerms[$groupName], $row );
 			}
 		}

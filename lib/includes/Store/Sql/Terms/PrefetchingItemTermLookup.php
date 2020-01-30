@@ -22,8 +22,8 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/** @var ILoadBalancer */
 	private $loadBalancer;
 
-	/** @var TermIdsResolver */
-	private $termIdsResolver;
+	/** @var TermInLangIdsResolver */
+	private $termInLangIdsResolver;
 
 	/** @var IDatabase|null */
 	private $dbr;
@@ -42,16 +42,16 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/**
 	 * PrefetchingItemTermLookup constructor.
 	 * @param ILoadBalancer $loadBalancer
-	 * @param TermIdsResolver $termIdsResolver
+	 * @param TermInLangIdsResolver $termInlangIdsResolver
 	 * @param bool|string $databaseDomain
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TermIdsResolver $termIdsResolver,
+		TermInLangIdsResolver $termInlangIdsResolver,
 		$databaseDomain = false
 	) {
 		$this->loadBalancer = $loadBalancer;
-		$this->termIdsResolver = $termIdsResolver;
+		$this->termInLangIdsResolver = $termInlangIdsResolver;
 		$this->databaseDomain = $databaseDomain;
 	}
 
@@ -113,7 +113,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 			$groups[$itemId->getSerialization()][] = $row->wbit_term_in_lang_id;
 		}
 
-		$result = $this->termIdsResolver->resolveGroupedTermIds( $groups, $termTypes, $languageCodes );
+		$result = $this->termInLangIdsResolver->resolveGroupedTermInLangIds( $groups, $termTypes, $languageCodes );
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
 		$this->terms = array_merge_recursive( $this->terms, $result );
 	}

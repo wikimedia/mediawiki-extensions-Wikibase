@@ -3,21 +3,21 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 /**
- * A service to turn term IDs into terms,
- * the inverse of {@link TermIdsAcquirer}.
+ * A service to turn term in lang IDs into terms,
+ * the inverse of {@link TermInLangIdsAcquirer}.
  *
  * @see @ref md_docs_storage_terms
  */
-interface TermIdsResolver {
+interface TermInLangIdsResolver {
 
 	/**
-	 * Resolves terms for the given term IDs.
+	 * Resolves terms for the given term in lang IDs.
 	 *
 	 * Note that the information whether the leaf nodes were single strings or arrays of strings
-	 * is lost: while {@link TermIdsAcquirer::acquireTermIds} accepts both, this method always
+	 * is lost: while {@link TermInLangIdsAcquirer::acquireTermInLangIds} accepts both, this method always
 	 * returns arrays of strings.
 	 *
-	 * @param int[] $termIds
+	 * @param int[] $termInLangIds
 	 * @param null|string[] $types If not null, only include results of these types
 	 * @param null|string[] $languages If not null, only include results in these languages
 	 * @return array containing terms per type per language.
@@ -36,30 +36,30 @@ interface TermIdsResolver {
 	 *		...
 	 *  ]
 	 */
-	public function resolveTermIds(
-		array $termIds,
+	public function resolveTermInLangIds(
+		array $termInLangIds,
 		array $types = null,
 		array $languages = null
 	): array;
 
 	/**
-	 * Resolves terms for the given groups of term IDs.
+	 * Resolves terms for the given groups of term in lang IDs.
 	 *
-	 * The input is an array of term ID arrays, with arbitrary keys.
+	 * The input is an array of term in lang ID arrays, with arbitrary keys.
 	 * The return value is an array of terms structures, with the same keys,
-	 * where the values belong to the term IDs corresponding to that key.
+	 * where the values belong to the term in lang IDs corresponding to that key.
 	 * One call to this method is effectively equivalent to multiple calls to
-	 * {@link resolveTermIds} with the individual term ID arrays, but may be
-	 * more efficient than that, e. g. resolving all the term IDs in one batch
+	 * {@link resolveTermInLangIds} with the individual term in lang ID arrays, but may be
+	 * more efficient than that, e. g. resolving all the term in lang IDs in one batch
 	 * and then grouping them correctly afterwards.
 	 *
-	 * @param int[][] $groupedTermIds
+	 * @param int[][] $groupedTermInLangIds
 	 * @param null|string[] $types If not null, only include results of these types
 	 * @param null|string[] $languages If not null, only include results in these languages
 	 * @return array[]
 	 */
-	public function resolveGroupedTermIds(
-		array $groupedTermIds,
+	public function resolveGroupedTermInLangIds(
+		array $groupedTermInLangIds,
 		array $types = null,
 		array $languages = null
 	): array;

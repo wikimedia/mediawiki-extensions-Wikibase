@@ -6,15 +6,15 @@ namespace Wikibase\Lib\Store\Sql\Terms;
  * Consumers acquire ids for stored terms to be used to link
  * entities to these terms.
  */
-interface TermIdsAcquirer {
+interface TermInLangIdsAcquirer {
 
 	/**
 	 * Acquires IDs for the given terms.
 	 *
-	 * The acquirer guarantees that an in-parallel {@link TermIdsCleaner} will
+	 * The acquirer guarantees that an in-parallel {@link TermStoreCleaner} will
 	 * not result in deleting terms that have been acquired by this acquirer,
 	 * should these two in-parallel processes happen to overlap on some
-	 * existing term IDs. The mechanism of achieving this guarantee is complete
+	 * existing term in lang IDs. The mechanism of achieving this guarantee is complete
 	 * under the following two conditions:
 	 * - External linking to acquired IDs (e.g. using them as foreign keys in
 	 *   other tables) must happen inside the $callback.
@@ -38,14 +38,14 @@ interface TermIdsAcquirer {
 	 *		...
 	 *  ]
 	 *
-	 * @param callable|null $callback Called with int[] $termIds right before
+	 * @param callable|null $callback Called with int[] $termInLangIds right before
 	 * attempting to restore any of those acquired IDs that might have been
-	 * deleted by another process before {@link acquireTermIds()} has returned.
+	 * deleted by another process before {@link acquireTermInLangIds()} has returned.
 	 *
 	 * @return int[] List of IDs of acquired terms in the store.
 	 * Due to limitations in the underlying store,
 	 * in rare cases the same ID might be returned for different terms.
 	 */
-	public function acquireTermIds( array $termsArray, $callback = null ): array;
+	public function acquireTermInLangIds( array $termsArray, $callback = null ): array;
 
 }

@@ -15,13 +15,13 @@ use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
 class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResolver {
 
 	/**
-	 * @var DatabaseTermIdsResolver
+	 * @var DatabaseTermInLangIdsResolver
 	 */
-	private $dbTermIdsResolver;
+	private $dbTermInLangIdsResolver;
 
 	/**
 	 * @param string $languageCode The language of the labels to look up (typically, the wiki's content language)
-	 * @param TermIdsResolver $dbTermIdsResolver Must be instance of {@link DatabaseTermIdsResolver}
+	 * @param TermInLangIdsResolver $dbTermInLangIdsResolver Must be instance of {@link DatabaseTermInLangIdsResolver}
 	 * @param BagOStuff $cache      The cache to use for labels (typically from wfGetMainCache())
 	 * @param int $cacheDuration    Number of seconds to keep the cached version for.
 	 *                              Defaults to 3600 seconds = 1 hour.
@@ -31,24 +31,24 @@ class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResol
 	 */
 	public function __construct(
 		$languageCode,
-		TermIdsResolver $dbTermIdsResolver,
+		TermInLangIdsResolver $dbTermInLangIdsResolver,
 		BagOStuff $cache,
 		$cacheDuration,
 		$cacheKey
 	) {
 		// TODO: extract resolveTermsViaJoin into an interface to avoid such check
-		if ( !( $dbTermIdsResolver instanceof DatabaseTermIdsResolver ) ) {
-			throw new InvalidArgumentException( 'This class requires a ' . DatabaseTermIdsResolver::class );
+		if ( !( $dbTermInLangIdsResolver instanceof DatabaseTermInLangIdsResolver ) ) {
+			throw new InvalidArgumentException( 'This class requires a ' . DatabaseTermInLangIdsResolver::class );
 		}
 		parent::__construct( $languageCode, $cache, $cacheDuration, $cacheKey );
-		$this->dbTermIdsResolver = $dbTermIdsResolver;
+		$this->dbTermInLangIdsResolver = $dbTermInLangIdsResolver;
 	}
 
 	protected function loadProperties(): array {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.CachedDatabasePropertyLabelResolver_loadProperties'
 		);
-		$termsByPropertyId = $this->dbTermIdsResolver->resolveTermsViaJoin(
+		$termsByPropertyId = $this->dbTermInLangIdsResolver->resolveTermsViaJoin(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
 			'wbpt_property_id',

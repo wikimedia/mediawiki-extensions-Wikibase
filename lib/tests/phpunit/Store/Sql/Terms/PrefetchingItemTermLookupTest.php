@@ -12,7 +12,7 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
-use Wikibase\Lib\Store\Sql\Terms\InMemoryTermIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\InMemoryTermStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
@@ -45,7 +45,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_item_terms';
 		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 		$this->lookup = new PrefetchingItemTermLookup(
 			$loadBalancer,
 			$termIdsStore

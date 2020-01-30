@@ -12,9 +12,9 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
@@ -26,7 +26,7 @@ use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer
  *
  * @group Wikibase
  *
@@ -257,19 +257,19 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 
 		return new DatabaseItemTermStore(
 			$this->lbFactory->getMainLB(),
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$this->lbFactory,
 				$typeIdsStore,
 				$logger
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$this->lbFactory->getMainLB(),
 				false,
 				$logger
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$this->lbFactory->getMainLB(),
 				$logger
 			),
