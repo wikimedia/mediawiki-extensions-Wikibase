@@ -318,7 +318,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
 		$settings->setSetting( 'useEntitySourceBasedFederation', true );
-		$settings->setSetting( 'localRepoEntitySourceName', 'localrepo' );
+		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
@@ -467,7 +467,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
 		$settings->setSetting( 'useEntitySourceBasedFederation', true );
-		$settings->setSetting( 'localRepoEntitySourceName', 'localrepo' );
+		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
@@ -535,7 +535,7 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 	private function getWikibaseClient( SettingsArray $settings = null ) {
 		if ( $settings === null ) {
 			$settings = WikibaseClient::getDefaultInstance()->getSettings();
-			$settings->setSetting( 'localRepoEntitySourceName', 'test' );
+			$settings->setSetting( 'localEntitySourceName', 'test' );
 		}
 		return new WikibaseClient(
 			new SettingsArray( $settings->getArrayCopy() ),

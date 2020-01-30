@@ -125,7 +125,7 @@ return call_user_func( function() {
 		'trackLuaFunctionCallsPerWiki' => false,
 
 		'useEntitySourceBasedFederation' => false,
-		'localRepoEntitySourceName' => 'local',
+		'localEntitySourceName' => 'local',
 		'entitySources' => [],
 
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified

@@ -1427,7 +1427,7 @@ final class WikibaseClient {
 
 	private function getEntitySourceOfLocalRepo(): EntitySource {
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$localRepoSourceName = $this->settings->getSetting( 'localRepoEntitySourceName' );
+			$localRepoSourceName = $this->settings->getSetting( 'localEntitySourceName' );
 			$sources = $this->entitySourceDefinitions->getSources();
 			foreach ( $sources as $source ) {
 				if ( $source->getSourceName() === $localRepoSourceName ) {
