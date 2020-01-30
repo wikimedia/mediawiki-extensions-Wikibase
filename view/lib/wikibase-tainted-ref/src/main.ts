@@ -4,11 +4,13 @@ import { STORE_INIT, HELP_LINK_SET, FEEDBACK_LINK_SET } from '@/store/actionType
 import { HookHandler } from '@/HookHandler';
 import { TrackFunction } from '@/store/TrackFunction';
 
-export function launch( hookHandler: HookHandler, helpLink: string, feedbackLink: string ): void {
-	const mockTrackFunction: TrackFunction = () => {
-		// TODO: this should be injected
-	};
-	const store = createStore( mockTrackFunction );
+export function launch(
+	hookHandler: HookHandler,
+	helpLink: string,
+	feedbackLink: string,
+	trackFunction: TrackFunction,
+): void {
+	const store = createStore( trackFunction );
 	const guids: string[] = [];
 	document.querySelectorAll( '.wikibase-statementview' ).forEach( ( element ) => {
 		const id = element.getAttribute( 'id' );

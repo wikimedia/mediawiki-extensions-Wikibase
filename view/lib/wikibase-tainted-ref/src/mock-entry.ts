@@ -16,9 +16,13 @@ import CSRHookHandler from '@/CSRHookHandler';
 	Vue.use( Track, { trackingFunction: trackMock } );
 	Vue.use( Message, { messageToTextFunction: messageToTextMock } );
 } )();
-
+function trackMock( topic: string, data?: object|number|string ): void {
+	// eslint-disable-next-line no-console
+	console.debug( `tracked: ${topic}`, data );
+}
 launch(
 	new CSRHookHandler(),
 	'https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sources',
 	'https://www.wikidata.org/wiki/Wikidata:Mismatched_reference_notification_input',
+	trackMock,
 );

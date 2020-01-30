@@ -5045,7 +5045,7 @@ var SET_STATEMENT_EDIT_FALSE = 'setStatementEditFalse';
 
 
 
-function actions(_metricTracker) {
+function actions(metricTracker) {
   var _ref;
 
   return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, payload) {
@@ -5060,6 +5060,10 @@ function actions(_metricTracker) {
   }), _defineProperty(_ref, START_EDIT, function (context, payload) {
     context.commit(SET_STATEMENT_EDIT_TRUE, payload);
     context.commit(SET_POPPER_HIDDEN, payload);
+
+    if (context.getters.statementsTaintedState(payload)) {
+      metricTracker('counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon', 1);
+    }
   }), _defineProperty(_ref, STOP_EDIT, function (context, payload) {
     context.commit(SET_STATEMENT_EDIT_FALSE, payload);
   }), _defineProperty(_ref, POPPER_HIDE, function (context, payload) {
@@ -5160,11 +5164,8 @@ function createStore(metricTracker) {
 
 
 
-function launch(hookHandler, helpLink, feedbackLink) {
-  var mockTrackFunction = function mockTrackFunction() {// TODO: this should be injected
-  };
-
-  var store = createStore(mockTrackFunction);
+function launch(hookHandler, helpLink, feedbackLink, trackFunction) {
+  var store = createStore(trackFunction);
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
     var id = element.getAttribute('id');
