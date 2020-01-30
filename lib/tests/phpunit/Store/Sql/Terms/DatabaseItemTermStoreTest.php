@@ -355,6 +355,78 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testRemovingSharedTermDoesNotGetUndulyDeleted() {
+		$store = $this->getItemTermStore();
+		$sharedFingerprint = new Fingerprint(
+			new TermList( [ new Term( 'en', 'Cat' ) ] )
+		);
+		$item1 = new ItemId( 'Q1' );
+		$item2 = new ItemId( 'Q2' );
+		$store->storeTerms( $item1, $sharedFingerprint );
+		$store->storeTerms( $item2, $sharedFingerprint );
+
+		$store->storeTerms( $item1, $this->fingerprintEmpty );
+
+		$this->assertTrue( $store->getTerms( $item2 )->equals( $sharedFingerprint ) );
+	}
+
+	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms() {
+		$store = $this->getItemTermStore();
+		$sharedTerm = new Term( 'en', 'Cat' );
+		$item1Fingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Dog' ) ] )
+		);
+		$item2Fingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Goat' ) ] )
+		);
+		$item1 = new ItemId( 'Q1' );
+		$item2 = new ItemId( 'Q2' );
+		$store->storeTerms( $item1, $item1Fingerprint );
+		$store->storeTerms( $item2, $item2Fingerprint );
+
+		$store->storeTerms( $item1, $this->fingerprintEmpty );
+
+		$this->assertTrue( $store->getTerms( $item2 )->equals( $item2Fingerprint ) );
+	}
+
+	public function testRemovingSharedTermDoesNotGetUndulyDeleted_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$sharedFingerprint = new Fingerprint(
+			new TermList( [ new Term( 'en', 'Cat' ) ] )
+		);
+		$item1 = new ItemId( 'Q1' );
+		$item2 = new ItemId( 'Q2' );
+		$store->storeTerms( $item1, $sharedFingerprint );
+		$store->storeTerms( $item2, $sharedFingerprint );
+
+		$store->storeTerms( $item1, $this->fingerprintEmpty );
+
+		$this->assertTrue( $store->getTerms( $item2 )->equals( $sharedFingerprint ) );
+	}
+
+	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms_entitySourceBasedFederation() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$sharedTerm = new Term( 'en', 'Cat' );
+		$item1Fingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Dog' ) ] )
+		);
+		$item2Fingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Goat' ) ] )
+		);
+		$item1 = new ItemId( 'Q1' );
+		$item2 = new ItemId( 'Q2' );
+		$store->storeTerms( $item1, $item1Fingerprint );
+		$store->storeTerms( $item2, $item2Fingerprint );
+
+		$store->storeTerms( $item1, $this->fingerprintEmpty );
+
+		$this->assertTrue( $store->getTerms( $item2 )->equals( $item2Fingerprint ) );
+	}
+
 	public function testStoreTermsCleansUpRemovedTerms_entitySourceBasedFederation() {
 		$store = $this->getItemTermStore_entitySourceBasedFederation();
 
