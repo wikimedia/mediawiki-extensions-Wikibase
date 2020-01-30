@@ -15517,6 +15517,8 @@ var MessageKeys;
   MessageKeys["BAILOUT_SUGGESTION_GO_TO_REPO"] = "wikibase-client-data-bridge-bailout-suggestion-go-to-repo";
   MessageKeys["BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON"] = "wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button";
   MessageKeys["BAILOUT_SUGGESTION_EDIT_ARTICLE"] = "wikibase-client-data-bridge-bailout-suggestion-edit-article";
+  MessageKeys["UNSUPPORTED_DATATYPE_ERROR_HEAD"] = "wikibase-client-data-bridge-unsupported-datatype-error-head";
+  MessageKeys["UNSUPPORTED_DATATYPE_ERROR_BODY"] = "wikibase-client-data-bridge-unsupported-datatype-error-body";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);
