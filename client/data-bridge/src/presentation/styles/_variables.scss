@@ -17,6 +17,8 @@ $padding-panel-form: 2 * $base-spacing-unit-fixed;
 $margin-center-column-side: 3 * $base-spacing-unit-fixed;
 $binary-input-inter-component-spacing: 2 * $base-spacing-unit-fixed;
 
+$line-height-text: px-to-em( 22px );
+
 $size-icon: #{ 20px / $base-font-size-desired-factor / $base-font-size-browser }em;
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;

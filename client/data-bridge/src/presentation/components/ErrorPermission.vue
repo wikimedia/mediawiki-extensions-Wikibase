@@ -1,6 +1,10 @@
 <template>
 	<section>
-		<p>{{ $messages.get( $messages.KEYS.PERMISSIONS_HEADING ) }}</p>
+		<p
+			class="wb-db-error-permission__heading"
+		>
+			{{ $messages.get( $messages.KEYS.PERMISSIONS_HEADING ) }}
+		</p>
 		<ErrorPermissionInfo
 			class="wb-db-error-permission__info"
 			v-for="( permissionError, index ) in permissionErrors"
@@ -247,6 +251,10 @@ export default class ErrorPermission extends Vue {
 </script>
 <style lang="scss">
 .wb-db-error-permission {
+	&__heading {
+		line-height: $line-height-text;
+	}
+
 	&__info {
 		margin-top: px-to-em( 24px );
 	}
