@@ -146,5 +146,7 @@
 	"wikibase-client-data-bridge-bailout-heading": "Instead you could do the following:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Edit the value on {{WBREPONAME}}. Click the button below to edit the value directly (link opens in a new tab).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Edit the value on {{WBREPONAME}}",
-	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Depending on the template used, it might be possible to overwrite the value locally using [$1 the article editor]. If at all possible, we recommend that you instead add the value to {{WBREPONAME}} via the button above."
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Depending on the template used, it might be possible to overwrite the value locally using [$1 the article editor]. If at all possible, we recommend that you instead add the value to {{WBREPONAME}} via the button above.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Editing the value for $1 is currently not supported",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 is of the datatype $2 on {{WBREPONAME}}. Editing this datatype is currently not supported."
 }

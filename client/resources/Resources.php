@@ -133,6 +133,8 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-bailout-suggestion-go-to-repo',
 							'wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button',
 							'wikibase-client-data-bridge-bailout-suggestion-edit-article',
+							'wikibase-client-data-bridge-unsupported-datatype-error-head',
+							'wikibase-client-data-bridge-unsupported-datatype-error-body',
 							'savechanges',
 							'publishchanges',
 							'cancel',
