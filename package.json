@@ -10,6 +10,7 @@
 		"install:bridge": "npm --prefix client/data-bridge ci",
 		"install:tainted-ref": "npm --prefix view/lib/wikibase-tainted-ref ci",
 		"postinstall": "npm-run-all -p install:*",
+		"selenium": "killall -0 chromedriver 2>/dev/null || chromedriver --url-base=/wd/hub --port=4444 & npm selenium-test; killall chromedriver",
 		"selenium-daily": "MEDIAWIKI_USER='Selenium user' MW_SERVER=https://wikidata.beta.wmflabs.org:443 MW_SCRIPT_PATH=/w WIKIBASE_PROPERTY_STRING=P443 npm run selenium-test",
 		"selenium-test": "npm-run-all --continue-on-error selenium-test:*",
 		"selenium-test:repo": "wdio repo/tests/selenium/wdio.conf.js",
