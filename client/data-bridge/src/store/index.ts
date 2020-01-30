@@ -18,32 +18,32 @@ import { statementModule } from '@/store/statements';
 
 Vue.use( Vuex );
 
+class BaseState implements Application {
+	public applicationErrors: ApplicationError[] = [];
+	public applicationStatus: ValidApplicationStatus = ValidApplicationStatus.INITIALIZING;
+	public editDecision: EditDecision|null = null;
+	public editFlow = '';
+	public entityTitle = '';
+	public originalHref = '';
+	public originalStatement: Statement|null = null;
+	public pageTitle = '';
+	public targetLabel: Term|null = null;
+	public targetProperty = '';
+	public wikibaseRepoConfiguration: WikibaseRepoConfiguration|null = null;
+}
+
+export const rootModule = new Module( {
+	state: BaseState,
+	getters: RootGetters,
+	mutations: RootMutations,
+	actions: RootActions,
+	modules: {
+		[ NS_ENTITY ]: entityModule,
+		[ NS_STATEMENTS ]: statementModule,
+	},
+} );
+
 export function createStore( services: ServiceContainer ): Store<Application> {
-
-	class BaseState implements Application {
-		public applicationErrors: ApplicationError[] = [];
-		public applicationStatus: ValidApplicationStatus = ValidApplicationStatus.INITIALIZING;
-		public editDecision: EditDecision|null = null;
-		public editFlow = '';
-		public entityTitle = '';
-		public originalHref = '';
-		public originalStatement: Statement|null = null;
-		public pageTitle = '';
-		public targetLabel: Term|null = null;
-		public targetProperty = '';
-		public wikibaseRepoConfiguration: WikibaseRepoConfiguration|null = null;
-	}
-
-	const rootModule = new Module( {
-		state: BaseState,
-		getters: RootGetters,
-		mutations: RootMutations,
-		actions: RootActions,
-		modules: {
-			[ NS_ENTITY ]: entityModule,
-			[ NS_STATEMENTS ]: statementModule,
-		},
-	} );
 
 	const store = smartCreateStore( rootModule, {
 		strict: process.env.NODE_ENV !== 'production',
