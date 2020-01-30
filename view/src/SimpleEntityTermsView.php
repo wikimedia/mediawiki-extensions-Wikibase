@@ -176,6 +176,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 */
 	public function getTitleHtml( EntityId $entityId = null ) {
 		$isEmpty = true;
+		$labelHtml = '';
 		$idInParenthesesHtml = '';
 
 		if ( $entityId !== null ) {

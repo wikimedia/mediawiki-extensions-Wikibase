@@ -117,7 +117,7 @@ class AddUnitConversions extends Maintenance {
 			$oldJson = [];
 		} else {
 			$oldJson = json_decode( file_get_contents( $oldJsonName ), true );
-			if ( !$oldJsonName ) {
+			if ( !$oldJson ) {
 				$this->fatalError( "Cannot load old config" );
 			}
 		}

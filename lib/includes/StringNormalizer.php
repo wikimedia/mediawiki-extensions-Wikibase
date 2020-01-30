@@ -35,7 +35,6 @@ class StringNormalizer {
 					'[\xf0-\xf7][\x80-\xbf]{1,2})$/', $string, $m )
 			) {
 				# We chopped in the middle of a character; remove it
-				// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 				$string = $m[1];
 			}
 		}
