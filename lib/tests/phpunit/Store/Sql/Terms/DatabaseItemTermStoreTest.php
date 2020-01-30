@@ -104,7 +104,9 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getItemTermStore_entitySourceBasedFederation() {
+	private function getItemTermStore_entitySourceBasedFederation(
+		?EntitySource $itemSourceOverride = null
+	) : DatabaseItemTermStore {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -131,13 +133,24 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			$this->getItemSource(),
+			$itemSourceOverride ?: $this->getItemSource(),
 			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 	}
 
 	private function getItemSource() {
 		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	private function getNonLocalItemSource() {
+		return new EntitySource( 'remote', 'someDb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	public function testStoreTerms_throwsForNonLocalItemSource() {
+		$store = $this->getItemTermStore_entitySourceBasedFederation( $this->getNonLocalItemSource() );
+
+		$this->expectException( InvalidArgumentException::class );
+		$store->storeTerms( new ItemId( 'Q1' ), $this->fingerprintEmpty );
 	}
 
 	public function testStoreAndGetTerms() {

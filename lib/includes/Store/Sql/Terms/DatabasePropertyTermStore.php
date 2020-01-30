@@ -94,6 +94,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_storeTerms'
 		);
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertPropertiesAreLocal();
+		}
 		$this->assertCanHandlePropertyId( $propertyId );
 
 		$termIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
@@ -172,6 +175,9 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_deleteTerms'
 		);
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			$this->assertPropertiesAreLocal();
+		}
 		$this->assertCanHandlePropertyId( $propertyId );
 
 		$termIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
@@ -246,6 +252,18 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		return $this->resolveTermIdsResultToFingerprint(
 			$this->resolver->resolveTermIds( $termIds )
 		);
+	}
+
+	private function shouldWriteToProperties() : bool {
+		return $this->entitySource->getDatabaseName() === false;
+	}
+
+	private function assertPropertiesAreLocal() : void {
+		if ( !$this->shouldWriteToProperties() ) {
+			throw new InvalidArgumentException(
+				'This implementation cannot be used with remote entity sources!'
+			);
+		}
 	}
 
 	private function assertCanHandlePropertyId( PropertyId $id ) {
