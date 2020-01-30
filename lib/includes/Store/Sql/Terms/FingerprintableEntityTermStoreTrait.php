@@ -108,7 +108,7 @@ trait FingerprintableEntityTermStoreTrait {
 			return [];
 		}
 
-		$termIdsUsedInProperties = $dbw->selectFieldValues(
+		$termIdsUsedInPropertiesSinceLastLoopRan = $dbw->selectFieldValues(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
 			[ 'wbpt_term_in_lang_id' => $termIdsUnused ],
@@ -117,7 +117,7 @@ trait FingerprintableEntityTermStoreTrait {
 				'FOR UPDATE'
 			]
 		);
-		$termIdsUsedInItems = $dbw->selectFieldValues(
+		$termIdsUsedInItemsSinceLastLoopRan = $dbw->selectFieldValues(
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
 			[ 'wbit_term_in_lang_id' => $termIdsUnused ],
@@ -127,11 +127,13 @@ trait FingerprintableEntityTermStoreTrait {
 			]
 		);
 
-		return array_diff(
-			$termIds,
-			$termIdsUsedInProperties,
-			$termIdsUsedInItems
+		$finalUnusedTermIds = array_diff(
+			$termIdsUnused,
+			$termIdsUsedInPropertiesSinceLastLoopRan,
+			$termIdsUsedInItemsSinceLastLoopRan
 		);
+
+		return $finalUnusedTermIds;
 	}
 
 }
