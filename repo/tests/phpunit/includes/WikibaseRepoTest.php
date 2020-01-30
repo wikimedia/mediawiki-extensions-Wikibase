@@ -743,7 +743,10 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			[ new EntitySource(
 				'test',
 				false,
-				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+				[
+					'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
+					'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+				],
 				'',
 				'',
 				'',
