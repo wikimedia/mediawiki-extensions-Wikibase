@@ -160,5 +160,7 @@
 	"wikibase-client-data-bridge-bailout-heading": "Heading for a component which presents the user with multiple options when they cannot edit a value directly via the Wikidata Bridge.",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Suggestion for the user when they cannot edit a value directly via the Wikidata Bridge. The button below has the label {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button}}.",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Label of a button sending the user to the Wikibase repository, shown after {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo}}.",
-	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Suggestion for the user when they cannot edit a value directly via the Wikidata Bridge. The button above refers to {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button}."
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Suggestion for the user when they cannot edit a value directly via the Wikidata Bridge. The button above refers to {{msg-mw|wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button}.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Heading of a message displayed when the user cannot edit this value via Wikidata Bridge because it is of unsupported data type.\n\nParameters:\n* $1 - the label of the property.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "Body of a message displayed when the user cannot edit this value via Wikidata Bridge because it is of unsupported data type.\n\nParameters:\n* $1 - the label of the property\n* $2 - the name of the datatype."
 }
