@@ -22,6 +22,8 @@ use Wikibase\LanguageFallbackChain;
  */
 class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
+	use TermCacheKeyBuilder;
+
 	private const LABEL = 'label';
 	private const DESCRIPTION = 'description';
 
@@ -58,11 +60,6 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $cacheTtlInSeconds;
 
 	/**
-	 * @var TermCacheKeyBuilder
-	 */
-	private $cacheKeyBuilder;
-
-	/**
 	 * @param CacheInterface $cache
 	 * @param EntityRevisionLookup $revisionLookup
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
@@ -81,7 +78,6 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
-		$this->cacheKeyBuilder = new TermCacheKeyBuilder();
 	}
 
 	/**
@@ -121,7 +117,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 
 		list( $revisionId, $targetEntityId ) = $resolutionResult;
 
-		$cacheKey = $this->cacheKeyBuilder->buildKey( $targetEntityId, $revisionId, $languageCode, $termName );
+		$cacheKey = $this->buildCacheKey( $targetEntityId, $revisionId, $languageCode, $termName );
 		$result = $this->cache->get( $cacheKey, self::NO_VALUE );
 		if ( $result === self::NO_VALUE ) {
 			$term = $termName === self::LABEL

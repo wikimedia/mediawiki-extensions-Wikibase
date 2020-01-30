@@ -16,13 +16,15 @@ use Wikibase\Lib\Store\TermCacheKeyBuilder;
  */
 class TermCacheKeyBuilderTest extends TestCase {
 
+	use TermCacheKeyBuilder;
+
 	/**
 	 * @dataProvider cacheKeyParamsProvider
 	 */
 	public function testBuildCacheKey( $entity, $revision, $language, $termType, $expected ) {
 		$this->assertSame(
 			$expected,
-			( new TermCacheKeyBuilder() )->buildKey( $entity, $revision, $language, $termType )
+			$this->buildCacheKey( $entity, $revision, $language, $termType )
 		);
 	}
 
