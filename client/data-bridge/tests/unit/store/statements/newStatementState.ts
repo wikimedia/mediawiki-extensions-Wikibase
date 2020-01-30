@@ -1,10 +1,10 @@
-import StatementsState from '@/store/entity/statements/StatementsState';
+import { StatementState } from '@/store/statements';
 import StatementMap from '@/datamodel/StatementMap';
 
-export default function newStatementsState(
+export default function newStatementState(
 	statements?: { [ key: string ]: StatementMap },
-): StatementsState {
-	const state: StatementsState = {};
+): StatementState {
+	const state: StatementState = {};
 	if ( statements ) {
 		Object.assign( state, statements );
 	}

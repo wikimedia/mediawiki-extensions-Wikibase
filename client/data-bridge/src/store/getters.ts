@@ -1,4 +1,4 @@
-import { GetterTree } from 'vuex';
+import { Store } from 'vuex';
 import Status from '@/definitions/ApplicationStatus';
 import DataValue from '@/datamodel/DataValue';
 import Application, { InitializedApplicationState } from '@/store/Application';
@@ -6,91 +6,82 @@ import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import MainSnakPath from '@/store/entity/statements/MainSnakPath';
-import { mainSnakGetterTypes } from '@/store/entity/statements/mainSnakGetterTypes';
-import { getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
+import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
 import Reference from '@/datamodel/Reference';
 import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
+import { Context, Getters } from 'vuex-smart-module';
+import { statementModule } from '@/store/statements';
+import { SNAK_DATA_VALUE } from '@/store/statements/snaks/getterTypes';
 
-export const getters: GetterTree<Application, Application> = {
-	targetValue(
-		state: Application,
-		getters: {
-			[ key: string ]: ( path: MainSnakPath ) => DataValue;
-		},
-	): DataValue|null {
-		if ( state.applicationStatus !== Status.READY ) {
+export class RootGetters extends Getters<Application> {
+
+	private statementModule!: Context<typeof statementModule>;
+	public $init( store: Store<Application> ): void {
+		this.statementModule = statementModule.context( store );
+	}
+
+	public get targetValue(): DataValue|null {
+		if ( this.state.applicationStatus !== Status.READY ) {
 			return null;
 		}
 
-		const entityId = ( state as InitializedApplicationState )[ NS_ENTITY ].id;
-		const path = {
-			entityId,
-			propertyId: state.targetProperty,
-			index: 0,
-		};
+		const entityId = ( this.state as InitializedApplicationState )[ NS_ENTITY ].id;
+		const pathToMainSnak = new MainSnakPath( entityId, this.state.targetProperty, 0 );
 
-		return getters[
-			getter( NS_ENTITY, NS_STATEMENTS, mainSnakGetterTypes.dataValue )
-		]( path );
-	},
+		return this.statementModule.getters[ SNAK_DATA_VALUE ]( pathToMainSnak );
+	}
 
-	targetLabel( state: Application ): Term {
-		if ( state.targetLabel === null ) {
+	public get targetLabel(): Term {
+		if ( this.state.targetLabel === null ) {
 			return {
 				language: 'zxx',
-				value: state.targetProperty,
+				value: this.state.targetProperty,
 			};
 		}
 
-		return state.targetLabel;
-	},
+		return this.state.targetLabel;
+	}
 
-	targetReferences( state: Application ): Reference[] {
-		if ( state.applicationStatus !== Status.READY ) {
+	public get targetReferences(): Reference[] {
+		if ( this.state.applicationStatus !== Status.READY ) {
 			return [];
 		}
 
-		const activeState = state as InitializedApplicationState;
+		const activeState = this.state as InitializedApplicationState;
 		const entityId = activeState[ NS_ENTITY ].id;
-		const statements = activeState[ NS_ENTITY ][ NS_STATEMENTS ][ entityId ][ state.targetProperty ][ 0 ];
+		const statements = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
 
 		return statements.references ? statements.references : [];
-	},
+	}
 
-	isTargetStatementModified( state: Application ): boolean {
-		if ( state.applicationStatus !== Status.READY ) {
+	public get isTargetStatementModified(): boolean {
+		if ( this.state.applicationStatus !== Status.READY ) {
 			return false;
 		}
 
-		const initState = state as InitializedApplicationState;
+		const initState = this.state as InitializedApplicationState;
 		const entityId = initState[ NS_ENTITY ].id;
 		return !deepEqual(
-			state.originalStatement as Statement,
-			initState[ NS_ENTITY ][ NS_STATEMENTS ][ entityId ][ state.targetProperty ][ 0 ],
+			this.state.originalStatement as Statement,
+			initState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ],
 			{ strict: true },
 		);
-	},
+	}
 
-	canSave(
-		state: Application,
-		getters: {
-			isTargetStatementModified: boolean;
-		},
-	): boolean {
-		return state.editDecision !== null &&
-			getters.isTargetStatementModified;
-	},
+	public get canSave(): boolean {
+		return this.state.editDecision !== null &&
+			this.getters.isTargetStatementModified;
+	}
 
-	applicationStatus( state: Application ): ApplicationStatus {
-		if ( state.applicationErrors.length > 0 ) {
+	public get applicationStatus(): ApplicationStatus {
+		if ( this.state.applicationErrors.length > 0 ) {
 			return ApplicationStatus.ERROR;
 		}
 
-		return state.applicationStatus;
-	},
+		return this.state.applicationStatus;
+	}
 
-};
+}

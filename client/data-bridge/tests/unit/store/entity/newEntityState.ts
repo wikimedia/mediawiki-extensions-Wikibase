@@ -1,4 +1,4 @@
-import EntityState from '@/store/entity/EntityState';
+import { EntityState } from '@/store/entity';
 
 export default function newEntityState( entity: any = null ): EntityState {
 	let state = {

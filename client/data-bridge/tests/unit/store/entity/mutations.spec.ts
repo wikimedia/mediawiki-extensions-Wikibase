@@ -1,12 +1,13 @@
-import { mutations } from '@/store/entity/mutations';
 import {
 	ENTITY_UPDATE,
 	ENTITY_REVISION_UPDATE,
 } from '@/store/entity/mutationTypes';
-import EntityState from '@/store/entity/EntityState';
+import { EntityState } from '@/store/entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 import newEntityState from './newEntityState';
+import { inject } from 'vuex-smart-module';
+import { EntityMutations } from '@/store/entity/mutations';
 
 describe( 'entity/mutations', () => {
 	describe( ENTITY_UPDATE, () => {
@@ -15,7 +16,9 @@ describe( 'entity/mutations', () => {
 			const state: EntityState = newEntityState();
 			const entityRevision: EntityRevision = newMockableEntityRevision( { id, statements: {}, revisionId: 0 } );
 
-			mutations[ ENTITY_UPDATE ]( state, entityRevision.entity );
+			const mutations = inject( EntityMutations, { state } );
+
+			mutations[ ENTITY_UPDATE ]( entityRevision.entity );
 			expect( state.id ).toBe( entityRevision.entity.id );
 		} );
 	} );
@@ -23,7 +26,10 @@ describe( 'entity/mutations', () => {
 	it( ENTITY_REVISION_UPDATE, () => {
 		const state = newEntityState( { baseRevision: 0 } );
 		const revision = 4711;
-		mutations[ ENTITY_REVISION_UPDATE ]( state, revision );
+
+		const mutations = inject( EntityMutations, { state } );
+
+		mutations[ ENTITY_REVISION_UPDATE ]( revision );
 		expect( state.baseRevision ).toBe( revision );
 	} );
 } );

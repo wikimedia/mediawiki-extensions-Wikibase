@@ -1,18 +1,21 @@
 import Vue from 'vue';
-import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 import {
-	ActionContext,
-	ActionTree,
+	Store,
 } from 'vuex';
+import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
 import Application, {
 	InitializedApplicationState,
 } from '@/store/Application';
 import {
 	BRIDGE_ERROR_ADD,
 	BRIDGE_INIT,
+	BRIDGE_INIT_WITH_REMOTE_DATA,
+	BRIDGE_REQUEST_TARGET_LABEL,
 	BRIDGE_SAVE,
 	BRIDGE_SET_EDIT_DECISION,
 	BRIDGE_SET_TARGET_VALUE,
+	BRIDGE_VALIDATE_APPLICABILITY,
+	BRIDGE_VALIDATE_ENTITY_STATE,
 } from '@/store/actionTypes';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
@@ -33,188 +36,221 @@ import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import { STATEMENTS_PROPERTY_EXISTS } from '@/store/entity/statements/getterTypes';
-import { mainSnakActionTypes } from '@/store/entity/statements/mainSnakActionTypes';
+import {
+	STATEMENTS_IS_AMBIGUOUS,
+	STATEMENTS_PROPERTY_EXISTS,
+} from '@/store/statements/getterTypes';
 import {
 	ENTITY_INIT,
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import DataValue from '@/datamodel/DataValue';
-import { action, getter } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
-import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
-import Term from '@/datamodel/Term';
-import WikibaseRepoConfigRepository from '@/definitions/data-access/WikibaseRepoConfigRepository';
-import validateBridgeApplicability from '@/store/validateBridgeApplicability';
-import MainSnakPath from '@/store/entity/statements/MainSnakPath';
+import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
-import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
-import BridgeTracker from '@/definitions/data-access/BridgeTracker';
-import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
+import { Actions, Context } from 'vuex-smart-module';
+import { RootGetters } from '@/store/getters';
+import { RootMutations } from '@/store/mutations';
+import Term from '@/datamodel/Term';
+import { entityModule } from './entity';
+import { statementModule } from '@/store/statements';
+import { SNAK_DATAVALUETYPE, SNAK_SNAKTYPE } from '@/store/statements/snaks/getterTypes';
+import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
+import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import ServiceContainer from '@/services/ServiceContainer';
 
-function commitErrors( context: ActionContext<Application, Application>, errors: ApplicationError[] ): void {
-	context.commit( APPLICATION_ERRORS_ADD, errors );
-}
-
-function validateEntityState(
-	context: ActionContext<Application, Application>,
-	path: MainSnakPath,
-): void {
-	if (
-		context.getters[
-			getter( NS_ENTITY, NS_STATEMENTS, STATEMENTS_PROPERTY_EXISTS )
-		]( path.entityId, path.propertyId ) === false
-	) {
-		commitErrors( context, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
-		return;
+export class RootActions extends Actions<
+Application,
+RootGetters,
+RootMutations,
+RootActions
+> {
+	private store!: { $services: ServiceContainer };
+	private entityModule!: Context<typeof entityModule>;
+	private statementModule!: Context<typeof statementModule>;
+	public $init( store: Store<Application> ): void {
+		this.store = store;
+		this.entityModule = entityModule.context( store );
+		this.statementModule = statementModule.context( store );
 	}
 
-	validateBridgeApplicability( context, path );
-}
+	public [ BRIDGE_INIT ](
+		information: AppInformation,
+	): Promise<void> {
+		this.commit( EDITFLOW_SET, information.editFlow );
+		this.commit( PROPERTY_TARGET_SET, information.propertyId );
+		this.commit( ENTITY_TITLE_SET, information.entityTitle );
+		this.commit( ORIGINAL_HREF_SET, information.originalHref );
+		this.commit( PAGE_TITLE_SET, information.pageTitle );
 
-export default function actions(
-	entityLabelRepository: EntityLabelRepository,
-	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository,
-	propertyDatatypeRepository: PropertyDatatypeRepository,
-	tracker: BridgeTracker,
-	editAuthorizationChecker: BridgePermissionsRepository,
-): ActionTree<Application, Application> {
-	return {
+		this.dispatch( BRIDGE_REQUEST_TARGET_LABEL, information.propertyId );
 
-		[ BRIDGE_INIT ](
-			context: ActionContext<Application, Application>,
-			information: AppInformation,
-		): Promise<void> {
-			context.commit( EDITFLOW_SET, information.editFlow );
-			context.commit( PROPERTY_TARGET_SET, information.propertyId );
-			context.commit( ENTITY_TITLE_SET, information.entityTitle );
-			context.commit( ORIGINAL_HREF_SET, information.originalHref );
-			context.commit( PAGE_TITLE_SET, information.pageTitle );
+		return Promise.all( [
+			this.store.$services.get( 'wikibaseRepoConfigRepository' ).getRepoConfiguration(),
+			this.store.$services.get( 'editAuthorizationChecker' ).canUseBridgeForItemAndPage(
+				information.entityTitle,
+				information.pageTitle,
+			),
+			this.store.$services.get( 'propertyDatatypeRepository' ).getDataType( information.propertyId ),
+			this.entityModule.dispatch(
+				ENTITY_INIT,
+				{ entity: information.entityId },
+			),
+		] ).then(
+			( results ) => this.dispatch( BRIDGE_INIT_WITH_REMOTE_DATA, { information, results } ),
+			( error ) => {
+				this.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
+				throw error;
+			},
+		);
+	}
 
-			entityLabelRepository.getLabel( information.propertyId )
-				.then( ( label: Term ) => {
-					context.commit( TARGET_LABEL_SET, label );
-				}, ( _error ) => {
+	public [ BRIDGE_INIT_WITH_REMOTE_DATA ]( {
+		information,
+		results: [
+			wikibaseRepoConfiguration,
+			permissionErrors,
+			dataType,
+			_entityInit,
+		],
+	}: {
+		information: AppInformation;
+		results: [ WikibaseRepoConfiguration, MissingPermissionsError[], string, unknown ];
+	} ): void {
+		if ( permissionErrors.length ) {
+			this.commit( APPLICATION_ERRORS_ADD, permissionErrors );
+			return;
+		}
+
+		this.store.$services.get( 'tracker' ).trackPropertyDatatype( dataType );
+
+		BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
+		const state = this.state as InitializedApplicationState;
+
+		const path = new MainSnakPath(
+			state[ NS_ENTITY ].id,
+			state.targetProperty,
+			0,
+		);
+
+		this.dispatch( BRIDGE_VALIDATE_ENTITY_STATE, path );
+		if ( this.getters.applicationStatus !== ApplicationStatus.ERROR ) {
+			this.commit(
+				ORIGINAL_STATEMENT_SET,
+				state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
+			);
+
+			this.commit(
+				APPLICATION_STATUS_SET,
+				ApplicationStatus.READY,
+			);
+		}
+	}
+
+	public [ BRIDGE_REQUEST_TARGET_LABEL ]( propertyId: string ): Promise<unknown> {
+		return this.store.$services.get( 'entityLabelRepository' ).getLabel( propertyId )
+			.then( ( label: Term ) => {
+				this.commit( TARGET_LABEL_SET, label );
+			}, ( _error: Error ) => {
 				// TODO: handling on failed label loading, which is not a bocking error for now
-				} );
+			} );
+	}
 
-			return Promise.all( [
-				wikibaseRepoConfigRepository.getRepoConfiguration(),
-				editAuthorizationChecker.canUseBridgeForItemAndPage(
-					information.entityTitle,
-					information.pageTitle,
-				),
-				propertyDatatypeRepository.getDataType( information.propertyId ),
-				context.dispatch(
-					action( NS_ENTITY, ENTITY_INIT ),
-					{ entity: information.entityId },
-				),
-			] ).then( ( [ wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit ] ) => {
+	public [ BRIDGE_VALIDATE_ENTITY_STATE ](
+		path: MainSnakPath,
+	): void {
+		if (
+			this.statementModule.getters[ STATEMENTS_PROPERTY_EXISTS ]( path.entityId, path.propertyId ) === false
+		) {
+			this.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
+			return;
+		}
 
-				if ( permissionErrors.length ) {
-					commitErrors( context, permissionErrors );
-					return;
-				}
+		this.dispatch( BRIDGE_VALIDATE_APPLICABILITY, path );
+	}
 
-				tracker.trackPropertyDatatype( dataType );
+	public [ BRIDGE_VALIDATE_APPLICABILITY ](
+		path: MainSnakPath,
+	): void {
+		if (
+			this.statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ]( path.entityId, path.propertyId ) === true
+		) {
+			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
+		}
 
-				BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
-				const state = context.state as InitializedApplicationState;
-				const path = {
-					entityId: state[ NS_ENTITY ].id,
-					propertyId: state.targetProperty,
-					index: 0,
-				};
+		if (
+			this.statementModule.getters[ SNAK_SNAKTYPE ]( path ) !== 'value'
+		) {
+			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ] );
+		}
 
-				validateEntityState( context, path );
-				if ( context.getters.applicationStatus !== ApplicationStatus.ERROR ) {
-					context.commit(
-						ORIGINAL_STATEMENT_SET,
-						state[ NS_ENTITY ][ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
-					);
+		if (
+			this.statementModule.getters[ SNAK_DATAVALUETYPE ]( path ) !== 'string'
+		) {
+			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ] );
+		}
+	}
 
-					context.commit(
-						APPLICATION_STATUS_SET,
-						ApplicationStatus.READY,
-					);
-				}
-			}, ( error ) => {
-				commitErrors( context, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
-				// TODO: store information about the error somewhere and show it!
+	public [ BRIDGE_SET_TARGET_VALUE ](
+		dataValue: DataValue,
+	): Promise<void> {
+		if ( this.state.applicationStatus !== ApplicationStatus.READY ) {
+			this.commit( APPLICATION_ERRORS_ADD, [ {
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: { stack: ( new Error() ).stack },
+			} ] );
+			return Promise.reject( null );
+		}
+
+		const state = this.state as InitializedApplicationState;
+		const path = new MainSnakPath(
+			state[ NS_ENTITY ].id,
+			state.targetProperty,
+			0,
+		);
+
+		return this.statementModule.dispatch( SNAK_SET_STRING_DATA_VALUE,
+			{
+				path,
+				value: dataValue,
+			} ).catch( ( error: Error ) => {
+			this.commit( APPLICATION_ERRORS_ADD, [ {
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: error,
+			} ] );
+			throw error;
+		} );
+	}
+
+	public [ BRIDGE_SAVE ](): Promise<void> {
+		if ( this.state.applicationStatus !== ApplicationStatus.READY ) {
+			this.commit( APPLICATION_ERRORS_ADD, [ {
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: { stack: ( new Error() ).stack },
+			} ] );
+			return Promise.reject( null );
+		}
+
+		return this.entityModule.dispatch(
+			ENTITY_SAVE,
+			{},
+		)
+			.catch( ( error: Error ) => {
+				this.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;
 			} );
-		},
+	}
 
-		[ BRIDGE_SET_TARGET_VALUE ](
-			context: ActionContext<Application, Application>,
-			dataValue: DataValue,
-		): Promise<void> {
-			if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
-				commitErrors( context, [ {
-					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-					info: { stack: ( new Error() ).stack },
-				} ] );
-				return Promise.reject( null );
-			}
+	public [ BRIDGE_ERROR_ADD ](
+		errors: ApplicationError[],
+	): void {
+		this.commit( APPLICATION_ERRORS_ADD, errors );
+	}
 
-			const state = context.state as InitializedApplicationState;
-			const path = {
-				entityId: state[ NS_ENTITY ].id,
-				propertyId: state.targetProperty,
-				index: 0,
-			};
+	public [ BRIDGE_SET_EDIT_DECISION ](
+		editDecision: EditDecision,
+	): void {
+		return this.commit( EDITDECISION_SET, editDecision );
+	}
 
-			return context.dispatch(
-				action(
-					NS_ENTITY,
-					NS_STATEMENTS,
-					mainSnakActionTypes.setStringDataValue,
-				), {
-					path,
-					value: dataValue,
-				},
-			).catch( ( error ) => {
-				commitErrors( context, [ {
-					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-					info: error,
-				} ] );
-				// TODO: store information about the error somewhere and show it!
-				throw error;
-			} );
-		},
-
-		[ BRIDGE_SAVE ](
-			context: ActionContext<Application, Application>,
-		): Promise<void> {
-			if ( context.state.applicationStatus !== ApplicationStatus.READY ) {
-				commitErrors( context, [ {
-					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-					info: { stack: ( new Error() ).stack },
-				} ] );
-				return Promise.reject( null );
-			}
-
-			return context.dispatch(
-				action( NS_ENTITY, ENTITY_SAVE ),
-			)
-				.catch( ( error: Error ) => {
-					commitErrors( context, [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
-					// TODO: store information about the error somewhere and show it!
-					throw error;
-				} );
-		},
-
-		[ BRIDGE_ERROR_ADD ](
-			context: ActionContext<Application, Application>,
-			errors: ApplicationError[],
-		): void {
-			commitErrors( context, errors );
-		},
-
-		[ BRIDGE_SET_EDIT_DECISION ](
-			context: ActionContext<Application, Application>,
-			editDecision: EditDecision,
-		): void {
-			return context.commit( EDITDECISION_SET, editDecision );
-		},
-	};
 }

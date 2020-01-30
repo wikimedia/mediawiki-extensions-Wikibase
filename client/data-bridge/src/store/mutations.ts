@@ -1,7 +1,5 @@
 import EditDecision from '@/definitions/EditDecision';
-import { MutationTree } from 'vuex';
 import clone from '@/store/clone';
-import Application from '@/store/Application';
 import {
 	PROPERTY_TARGET_SET,
 	EDITFLOW_SET,
@@ -18,45 +16,48 @@ import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
+import { Mutations } from 'vuex-smart-module';
+import Application from '@/store/Application';
 
-export const mutations: MutationTree<Application> = {
-	[ PROPERTY_TARGET_SET ]( state: Application, targetProperty: string ): void {
-		state.targetProperty = targetProperty;
-	},
+export class RootMutations extends Mutations<Application> {
 
-	[ EDITFLOW_SET ]( state: Application, editFlow: string ): void {
-		state.editFlow = editFlow;
-	},
+	public [ PROPERTY_TARGET_SET ]( targetProperty: string ): void {
+		this.state.targetProperty = targetProperty;
+	}
 
-	[ APPLICATION_STATUS_SET ]( state: Application, status: ValidApplicationStatus ): void {
-		state.applicationStatus = status;
-	},
+	public [ EDITFLOW_SET ]( editFlow: string ): void {
+		this.state.editFlow = editFlow;
+	}
 
-	[ TARGET_LABEL_SET ]( state: Application, label: Term ): void {
-		state.targetLabel = label;
-	},
+	public [ APPLICATION_STATUS_SET ]( status: ValidApplicationStatus ): void {
+		this.state.applicationStatus = status;
+	}
 
-	[ ORIGINAL_STATEMENT_SET ]( state: Application, revision: Statement ): void {
-		state.originalStatement = clone( revision );
-	},
+	public [ TARGET_LABEL_SET ]( label: Term ): void {
+		this.state.targetLabel = label;
+	}
 
-	[ APPLICATION_ERRORS_ADD ]( state: Application, errors: ApplicationError[] ): void {
-		state.applicationErrors.push( ...errors );
-	},
+	public [ ORIGINAL_STATEMENT_SET ]( revision: Statement ): void {
+		this.state.originalStatement = clone( revision );
+	}
 
-	[ EDITDECISION_SET ]( state: Application, editDecision: EditDecision ): void {
-		state.editDecision = editDecision;
-	},
+	public [ APPLICATION_ERRORS_ADD ]( errors: ApplicationError[] ): void {
+		this.state.applicationErrors.push( ...errors );
+	}
 
-	[ ENTITY_TITLE_SET ]( state: Application, entityTitle: string ): void {
-		state.entityTitle = entityTitle;
-	},
+	public [ EDITDECISION_SET ]( editDecision: EditDecision ): void {
+		this.state.editDecision = editDecision;
+	}
 
-	[ ORIGINAL_HREF_SET ]( state: Application, orginalHref: string ): void {
-		state.originalHref = orginalHref;
-	},
+	public [ ENTITY_TITLE_SET ]( entityTitle: string ): void {
+		this.state.entityTitle = entityTitle;
+	}
 
-	[ PAGE_TITLE_SET ]( state: Application, pageTitle: string ): void {
-		state.pageTitle = pageTitle;
-	},
-};
+	public [ PAGE_TITLE_SET ]( pageTitle: string ): void {
+		this.state.pageTitle = pageTitle;
+	}
+
+	public [ ORIGINAL_HREF_SET ]( orginalHref: string ): void {
+		this.state.originalHref = orginalHref;
+	}
+}
