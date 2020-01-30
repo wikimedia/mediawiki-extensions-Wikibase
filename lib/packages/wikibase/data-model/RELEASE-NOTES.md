@@ -3,6 +3,7 @@
 ## Version 9.3.0 (development)
 
 * Raised minimum PHP version to 7.1
+* Added `TermTypes` with term type constants
 
 ## Version 9.2.0 (2020-01-24)
 
