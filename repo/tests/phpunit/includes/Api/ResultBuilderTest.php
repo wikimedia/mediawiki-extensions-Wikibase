@@ -1655,4 +1655,78 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 		$builder->appendValue( $path, $key, $value, $tag );
 	}
 
+	public function provideTestEmptyListsMetaData() {
+		$expected = [
+			'entities' => [
+				'Q123000' => [
+					'pageid' => 123, //mocked
+					'ns' => 456, //mocked
+					'title' => 'MockPrefixedText', //mocked
+					'lastrevid' => 33,
+					'modified' => '2013-11-26T20:29:23Z',
+					'type' => 'item',
+					'id' => 'Q123000',
+					'aliases' => [
+						'_element' => 'language',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id'
+					],
+					'descriptions' => [
+						'_element' => 'description',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true
+					],
+					'labels' => [
+						'_element' => 'label',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'language',
+						'_kvpmerge' => true
+					],
+					'claims' => [
+						'_element' => 'property',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'id'
+					],
+					'sitelinks' => [
+						'_element' => 'sitelink',
+						'_type' => 'kvp',
+						'_kvpkeyname' => 'site',
+						'_kvpmerge' => true
+					],
+				],
+				'_element' => 'entity',
+				'_type' => 'kvp',
+				'_kvpkeyname' => 'id',
+				'_kvpmerge' => true,
+			],
+			'_type' => 'assoc',
+		];
+
+		$expectedNoMetaData = $this->removeMetaData( $expected );
+		// The api always starts with this
+		$expectedNoMetaData['_type'] = 'assoc';
+
+		return [
+			[ false, $expectedNoMetaData ],
+			[ true, $expected ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideTestEmptyLists
+	 */
+	public function testEmptyLists( $addMetaData, array $expected ) {
+		$result = $this->getDefaultResult();
+		$item = new Item( new ItemId( 'Q123000' ) );
+
+		$entityRevision = new EntityRevision( $item, 33, '20131126202923' );
+
+		$resultBuilder = $this->getResultBuilder( $result, $addMetaData );
+		$resultBuilder->addEntityRevision( 'Q123000', $entityRevision );
+
+		$data = $result->getResultData();
+
+		$this->assertEquals( $expected, $data );
+	}
 }
