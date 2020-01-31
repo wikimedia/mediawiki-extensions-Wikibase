@@ -20,12 +20,18 @@ import {
 	START_EDIT, STOP_EDIT,
 } from '@/store/actionTypes';
 import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
-import { ActionTree } from 'vuex';
+import { ActionContext, ActionTree } from 'vuex';
 import Application from '@/store/Application';
 import { TrackFunction } from '@/store/TrackFunction';
 
 function getActionTree( mockTrackFunction: TrackFunction ): ActionTree<Application, Application> {
 	return ( actions )( mockTrackFunction );
+}
+
+function getTaintedMockStore( taintedState = false ): ActionContext<any, any> {
+	return newMockStore( {
+		getters: { statementsTaintedState: () => taintedState },
+	} );
 }
 
 describe( 'actions', () => {
@@ -49,23 +55,25 @@ describe( 'actions', () => {
 		expect( context.commit ).toBeCalledWith( SET_TAINTED, 'blah' );
 	} );
 	it( `commits to ${SET_STATEMENT_EDIT_TRUE} and ${SET_POPPER_HIDDEN}`, async () => {
-		const context = newMockStore( {
-			getters: { statementsTaintedState: ()=> ()=> true },
-		} );
+		const context = getTaintedMockStore( true );
 		const mockTrackFunction = jest.fn();
 		await ( getActionTree( mockTrackFunction ) as any )[ START_EDIT ]( context, 'blah' );
 		expect( context.commit ).toBeCalledWith( SET_POPPER_HIDDEN, 'blah' );
 	} );
 	it( 'should track a metric for edits made on tainted statements', async () => {
-		const context = newMockStore( {
-			getters: { statementsTaintedState: ()=> ()=> true },
-		} );
+		const context = getTaintedMockStore( true );
 		const mockTrackFunction = jest.fn();
 		await ( getActionTree( mockTrackFunction ) as any )[ START_EDIT ]( context, 'blah' );
 		expect( mockTrackFunction ).toHaveBeenCalledWith(
 			'counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon',
 			1,
 		);
+	} );
+	it( 'should not track a metric for edits made on untainted statements', async () => {
+		const context = getTaintedMockStore();
+		const mockTrackFunction = jest.fn();
+		await ( getActionTree( mockTrackFunction ) as any )[ START_EDIT ]( context, 'blah' );
+		expect( mockTrackFunction ).toBeCalledTimes( 0 );
 	} );
 	it( `commits to ${SET_STATEMENT_EDIT_FALSE}`, async () => {
 		const context = newMockStore( {} );
