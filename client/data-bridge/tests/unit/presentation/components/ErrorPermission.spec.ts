@@ -446,6 +446,7 @@ describe( 'ErrorPermission', () => {
 		const messageGet = jest.fn( ( key ) => key );
 		const routerGetPageUrl = jest.fn();
 		routerGetPageUrl
+			.mockReturnValueOnce( 'http://localhost/wiki/Project:Administrators' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_One' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_Two' )
 			.mockReturnValueOnce( 'http://localhost/wiki/Page_Three' );
@@ -478,7 +479,12 @@ describe( 'ErrorPermission', () => {
 
 		calledWithHTMLElement( messageGet, 2, 2 );
 
-		expect( messageGet ).toHaveBeenNthCalledWith( 2, header );
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			2,
+			header,
+			'',
+			'http://localhost/wiki/Project:Administrators',
+		);
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			3,
 			body,
