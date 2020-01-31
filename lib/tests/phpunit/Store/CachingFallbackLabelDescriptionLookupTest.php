@@ -6,13 +6,13 @@ use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\SimpleCache\CacheInterface;
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 
 /**
  * @covers \Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup
@@ -23,9 +23,9 @@ use Wikibase\Lib\Store\LatestRevisionIdResult;
  */
 class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
-	/*private */ const TEST_LABEL = 'tomato';
-	/*private */ const TEST_DESCRIPTION = 'The edible berry of the plant Solanum lycopersicum';
-	/*private */ const TTL = 3600; //Bigger than time than it takes to run the tests
+	private const TEST_LABEL = 'tomato';
+	private const TEST_DESCRIPTION = 'The edible berry of the plant Solanum lycopersicum';
+	private const TTL = 3600; // longer than it takes to run the tests
 
 	/**
 	 * @var ObjectProphecy|CacheInterface
@@ -54,7 +54,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 1 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 1, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -74,7 +74,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -110,7 +110,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -131,7 +131,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -152,7 +152,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -174,7 +174,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 1 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 1, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -194,7 +194,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -230,7 +230,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -251,7 +251,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttl
@@ -272,7 +272,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::concreteRevision( 99 ) ),
+			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			$ttlInSeconds
@@ -284,16 +284,19 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	}
 
 	public function testNoRevisionFoundForTheEntity_ReturnsNull() {
-		$ttlInSeconds = 10;
 		$this->cache->get( 'Q123_99_en_description' )->willReturn( null );
 
 		$itemId = new ItemId( 'Q123' );
 
 		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
 
+		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
+		$revLookup->lookupLatestRevisionResolvingRedirect( Argument::any() )
+			->willReturn( null );
+
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$this->newRevisionLookup( LatestRevisionIdResult::nonexistentEntity() ),
+			$revLookup->reveal(),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			self::TTL
@@ -306,22 +309,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testRevisionFoundIsARedirect_UsesLabelFromTargetEntity() {
 		$itemId = new ItemId( 'Q1' );
 		$redirectsToItemId = new ItemId( 'Q2' );
-
-		$revLookup = $this->prophesize( EntityRevisionLookup::class );
-		$revLookup->getLatestRevisionId( $itemId )->willReturn(
-			LatestRevisionIdResult::redirect( 1, $redirectsToItemId )
-		);
-		$revLookup->getLatestRevisionId( $redirectsToItemId )->willReturn(
-			LatestRevisionIdResult::concreteRevision( 2 )
-		);
-
 		$expectedLabel = $this->someTerm();
 		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
 		$ldLookup->getLabel( $redirectsToItemId )->willReturn( $expectedLabel );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
-			$revLookup->reveal(),
+			$this->newRedirectResolvingLatestRevisionLookup( 2, $redirectsToItemId ),
 			$ldLookup->reveal(),
 			$this->newFallbackChain(),
 			self::TTL
@@ -331,65 +325,10 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$this->assertEquals( $expectedLabel, $gotLabel );
 	}
 
-	/**
-	 * Double redirect - resolving redirect only once, if there is a second - returning null
-	 */
-	public function testRevisionFoundIsARedirectPointingToRedirect_ReturnsNull() {
-		$itemId = new ItemId( 'Q1' );
-		$redirectsToItemId1 = new ItemId( 'Q2' );
-		$redirectsToItemId2 = new ItemId( 'Q3' );
-
-		$revLookup = $this->prophesize( EntityRevisionLookup::class );
-		$revLookup->getLatestRevisionId( $itemId )->willReturn(
-			LatestRevisionIdResult::redirect( 1, $redirectsToItemId1 )
-		);
-		$revLookup->getLatestRevisionId( $redirectsToItemId1 )->willReturn(
-			LatestRevisionIdResult::redirect( 2, $redirectsToItemId2 )
-		);
-
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
-
-		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
-			$revLookup->reveal(),
-			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			self::TTL
-		);
-
-		$gotLabel = $lookup->getLabel( $itemId );
-		$this->assertNull( $gotLabel );
-	}
-
-	public function testRevisionFoundRedirectsToNonexistentEntity_ReturnsNull() {
-		$itemId = new ItemId( 'Q1' );
-		$nonexistentItemId = new ItemId( 'Q2' );
-
-		$revLookup = $this->prophesize( EntityRevisionLookup::class );
-		$revLookup->getLatestRevisionId( $itemId )->willReturn(
-			LatestRevisionIdResult::redirect( 1, $nonexistentItemId )
-		);
-		$revLookup->getLatestRevisionId( $nonexistentItemId )->willReturn(
-			LatestRevisionIdResult::nonexistentEntity()
-		);
-
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
-
-		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
-			$revLookup->reveal(),
-			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			self::TTL
-		);
-
-		$gotLabel = $lookup->getLabel( $itemId );
-		$this->assertNull( $gotLabel );
-	}
-
-	private function newRevisionLookup( LatestRevisionIdResult $revisionIdToReturn ) {
-		$revLookup = $this->prophesize( EntityRevisionLookup::class );
-		$revLookup->getLatestRevisionId( Argument::any() )->willReturn( $revisionIdToReturn );
+	private function newRedirectResolvingLatestRevisionLookup( int $revision, EntityId $entityId ) {
+		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
+		$revLookup->lookupLatestRevisionResolvingRedirect( Argument::any() )
+			->willReturn( [ $revision, $entityId ] );
 
 		return $revLookup->reveal();
 	}

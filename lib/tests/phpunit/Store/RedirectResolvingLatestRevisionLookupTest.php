@@ -1,0 +1,110 @@
+<?php
+
+namespace Wikibase\Lib\Tests\Store;
+
+use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
+
+/**
+ * @covers \Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup
+ *
+ * @group Wikibase
+ *
+ * @license GPL-2.0-or-later
+ */
+class RedirectResolvingLatestRevisionLookupTest extends TestCase {
+
+	public function testLooksUpLatestRevision() {
+		$id = new ItemId( 'Q123' );
+		$revision = 777;
+
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$revisionLookup->expects( $this->once() )
+			->method( 'getLatestRevisionId' )
+			->with( $id )
+			->willReturn( LatestRevisionIdResult::concreteRevision( $revision ) );
+
+		$this->assertSame(
+			[ $revision, $id ],
+			$this->newRedirectResolvingLatestRevisionLookup( $revisionLookup )
+				->lookupLatestRevisionResolvingRedirect( $id )
+		);
+	}
+
+	public function testResolvesRedirect() {
+		$originalEntityId = new ItemId( 'Q321' );
+		$redirectEntityId = new ItemId( 'Q123' );
+		$redirectEntityRevision = 666;
+
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$revisionLookup->expects( $this->any() )
+			->method( 'getLatestRevisionId' )
+			->withConsecutive(
+				[ $originalEntityId ],
+				[ $redirectEntityId ]
+			)
+			->willReturnOnConsecutiveCalls(
+				LatestRevisionIdResult::redirect( 777, $redirectEntityId ),
+				LatestRevisionIdResult::concreteRevision( $redirectEntityRevision )
+			);
+
+		$this->assertEquals(
+			[ $redirectEntityRevision, $redirectEntityId ],
+			$this->newRedirectResolvingLatestRevisionLookup( $revisionLookup )
+				->lookupLatestRevisionResolvingRedirect( $originalEntityId )
+		);
+	}
+
+	public function testGivenDoubleRedirect_returnsNull() {
+		$originalEntityId = new ItemId( 'Q1' );
+		$redirect1 = new ItemId( 'Q2' );
+		$redirect2 = new ItemId( 'Q3' );
+
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$revisionLookup->expects( $this->any() )
+			->method( 'getLatestRevisionId' )
+			->withConsecutive(
+				[ $originalEntityId ],
+				[ $redirect1 ]
+			)
+			->willReturnOnConsecutiveCalls(
+				LatestRevisionIdResult::redirect( 777, $redirect1 ),
+				LatestRevisionIdResult::redirect( 888, $redirect2 )
+			);
+
+		$this->assertNull( $this->newRedirectResolvingLatestRevisionLookup( $revisionLookup )
+			->lookupLatestRevisionResolvingRedirect( $originalEntityId ) );
+	}
+
+	public function testGivenRedirectToNonExistentEntity_returnsNull() {
+		$originalEntityId = new ItemId( 'Q1' );
+		$redirect = new ItemId( 'Q2' );
+
+		$revisionLookup = $this->createMock( EntityRevisionLookup::class );
+		$revisionLookup->expects( $this->any() )
+			->method( 'getLatestRevisionId' )
+			->withConsecutive(
+				[ $originalEntityId ],
+				[ $redirect ]
+			)
+			->willReturnOnConsecutiveCalls(
+				LatestRevisionIdResult::redirect( 777, $redirect ),
+				LatestRevisionIdResult::nonexistentEntity()
+			);
+
+		$this->assertNull( $this->newRedirectResolvingLatestRevisionLookup( $revisionLookup )
+			->lookupLatestRevisionResolvingRedirect( $originalEntityId ) );
+	}
+
+	private function newRedirectResolvingLatestRevisionLookup(
+		EntityRevisionLookup $revisionLookup
+	): RedirectResolvingLatestRevisionLookup {
+		return new RedirectResolvingLatestRevisionLookup(
+			$revisionLookup
+		);
+	}
+
+}

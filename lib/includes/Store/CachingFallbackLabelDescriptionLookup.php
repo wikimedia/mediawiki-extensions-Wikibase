@@ -40,9 +40,9 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $cache;
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var RedirectResolvingLatestRevisionLookup
 	 */
-	private $revisionLookup;
+	private $redirectResolvingRevisionLookup;
 
 	/**
 	 * @var LabelDescriptionLookup
@@ -61,20 +61,20 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 
 	/**
 	 * @param CacheInterface $cache
-	 * @param EntityRevisionLookup $revisionLookup
+	 * @param RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param int $cacheTtlInSeconds
 	 */
 	public function __construct(
 		CacheInterface $cache,
-		EntityRevisionLookup $revisionLookup,
+		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
 		LabelDescriptionLookup $labelDescriptionLookup,
 		LanguageFallbackChain $languageFallbackChain,
 		$cacheTtlInSeconds
 	) {
 		$this->cache = $cache;
-		$this->revisionLookup = $revisionLookup;
+		$this->redirectResolvingRevisionLookup = $redirectResolvingRevisionLookup;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
@@ -110,7 +110,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	}
 
 	private function getTerm( EntityId $entityId, $languageCode, $termName = self::LABEL ) {
-		$resolutionResult = $this->resolveRedirect( $entityId );
+		$resolutionResult = $this->redirectResolvingRevisionLookup->lookupLatestRevisionResolvingRedirect( $entityId );
 		if ( $resolutionResult === null ) {
 			return null;
 		}
@@ -173,39 +173,6 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 			$termData[self::FIELD_LANGUAGE],
 			$termData[self::FIELD_SOURCE_LANGUAGE]
 		);
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 * @return array|null Returns a tuple containing revision ID and target entity ID.
-	 *                              If entity is not present or there is a double redirect null
-	 *                              is returned.
-	 * @phan-return array{0:int,1:EntityId}
-	 * @note Target entity is entity we will take data from. It will differ from the given entity
-	 *       in case of redirect only.
-	 */
-	private function resolveRedirect( EntityId $entityId ) {
-		$revisionIdResult = $this->revisionLookup->getLatestRevisionId( $entityId );
-		$returnNull = function () {
-			return null;
-		};
-
-		return $revisionIdResult
-			->onConcreteRevision( function ( $revisionId ) use ( $entityId ) {
-				return [ $revisionId, $entityId ];
-			} )
-			->onNonexistentEntity( $returnNull )
-			->onRedirect( function ( $revisionId, EntityId $redirectsTo ) use ( $returnNull ) {
-
-				return $this->revisionLookup->getLatestRevisionId( $redirectsTo )
-					->onNonexistentEntity( $returnNull )
-					->onRedirect( $returnNull )
-					->onConcreteRevision( function ( $revisionId ) use ( $redirectsTo ) {
-							return [ $revisionId, $redirectsTo ];
-					} )
-					->map();
-			} )
-			->map();
 	}
 
 }

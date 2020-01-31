@@ -86,6 +86,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\Store\\PropertyInfoStore' => __DIR__ . '/includes/Store/PropertyInfoStore.php',
 	'Wikibase\\Lib\\Store\\PropertyOrderProvider' => __DIR__ . '/includes/Store/PropertyOrderProvider.php',
 	'Wikibase\\Lib\\Store\\PropertyOrderProviderException' => __DIR__ . '/includes/Store/PropertyOrderProviderException.php',
+	'Wikibase\\Lib\\Store\\RedirectResolvingLatestRevisionLookup' => __DIR__ . '/includes/Store/RedirectResolvingLatestRevisionLookup.php',
 	'Wikibase\\Lib\\Store\\RedirectRevision' => __DIR__ . '/includes/Store/RedirectRevision.php',
 	'Wikibase\\Lib\\Store\\RevisionBasedEntityLookup' => __DIR__ . '/includes/Store/RevisionBasedEntityLookup.php',
 	'Wikibase\\Lib\\Store\\RevisionedUnresolvedRedirectException' => __DIR__ . '/includes/Store/RevisionedUnresolvedRedirectException.php',
