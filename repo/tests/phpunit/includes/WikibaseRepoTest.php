@@ -28,7 +28,6 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
@@ -154,28 +153,9 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testNewValidatorBuilders() {
-		$kittenId = $this->getMockBuilder( EntityId::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$kittenId->expects( $this->any() )
-			->method( 'getEntityType' )
-			->will( $this->returnValue( 'kitten' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getSerialization' )
-			->will( $this->returnValue( 'other:K9' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getLocalPart' )
-			->will( $this->returnValue( 'K9' ) );
-		$kittenId->expects( $this->any() )
-			->method( 'getRepositoryName' )
-			->will( $this->returnValue( 'other' ) );
+		$valueToValidate = new EntityIdValue( new ItemId( 'Q123' ) );
 
-		$valueToValidate = new EntityIdValue( $kittenId );
-
-		$repo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'item' => 200, 'property' => 300 ] ] ),
-			$this->getRepositoryDefinition( 'other', [ 'entity-namespaces' => [ 'kitten' => 666 ] ] )
-		) );
+		$repo = $this->getWikibaseRepo();
 
 		$builders = $repo->newValidatorBuilders();
 		$this->assertInstanceOf( ValidatorBuilders::class, $builders );
@@ -413,48 +393,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 	public function testGetLocalEntityTypes() {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting(
-			'entityNamespaces',
-			[
-				'foo' => 100,
-				'bar' => 102,
-				'lexeme' => 104,
-			]
-		);
-		$settings->setSetting(
-			'repositories',
-			[ '' => [
-				'database' => null,
-				'base-uri' => null,
-				'prefix-mapping' => [ '' => '' ],
-				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-			] ]
-		);
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-
-		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$settings->getSetting( 'repositories' ),
-				$entityTypeDefinitions
-			),
-			new EntitySourceDefinitions( [], $entityTypeDefinitions )
-		);
-
-		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
-		$this->assertContains( 'foo', $localEntityTypes );
-		$this->assertContains( 'bar', $localEntityTypes );
-		$this->assertContains( 'lexeme', $localEntityTypes );
-		// Sub entities should appear in the list
-		$this->assertContains( 'form', $localEntityTypes );
-	}
-
-	public function testGetLocalEntityTypes_entitySourceBasedFederation() {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 		$settings->setSetting( 'localEntitySourceName', 'local' );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
@@ -519,25 +457,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		];
 	}
 
-	/**
-	 * @param array $repoDefinitions
-	 *
-	 * @return WikibaseRepo
-	 */
-	private function getWikibaseRepoWithCustomRepositoryDefinitions( array $repoDefinitions ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		return new WikibaseRepo(
-			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
-			new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions ),
-			new EntitySourceDefinitions( [], $entityTypeDefinitions )
-		);
-	}
-
 	private function getEntityTypeDefinitions() {
 		return new EntityTypeDefinitions(
 			[
@@ -556,39 +475,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		}
 
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-
-		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				array_merge(
-					$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 200, 'bar' => 220 ] ] ),
-					$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 250 ] ] ),
-					$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'lexeme' => 280 ] ] )
-				),
-				$entityTypeDefinitions
-			),
-			new EntitySourceDefinitions( [], $entityTypeDefinitions )
-		);
-
-		$enabled = $wikibaseRepo->getEnabledEntityTypes();
-		$this->assertContains( 'foo', $enabled );
-		$this->assertContains( 'bar', $enabled );
-		$this->assertContains( 'baz', $enabled );
-		$this->assertContains( 'lexeme', $enabled );
-		$this->assertContains( 'form', $enabled );
-	}
-
-	public function testGetEnabledEntityTypes_entitySourceBasedFederation() {
-		if ( !WikibaseSettings::isClientEnabled() ) {
-			$this->markTestSkipped( 'WikibaseClient must be enabled to run this test' );
-		}
-
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$irrelevantRepositoryDefinition = [ '' => [
@@ -984,26 +870,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetEntityTypeToRepositoryMapping() {
-		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'entity-namespaces' => [ 'foo' => 100, 'bar' => 200 ] ] ),
-			$this->getRepositoryDefinition( 'repo1', [ 'entity-namespaces' => [ 'baz' => 300 ] ] ),
-			$this->getRepositoryDefinition( 'repo2', [ 'entity-namespaces' => [ 'foobar' => '400/foo' ] ] )
-		) );
-
-		$this->assertEquals(
-			[
-				'foo' => [ [ '', 100, 'main' ] ],
-				'bar' => [ [ '', 200, 'main' ] ],
-				'baz' => [ [ 'repo1', 300, 'main' ] ],
-				'foobar' => [ [ 'repo2', 400, 'foo' ] ],
-			],
-			$wikibaseRepo->getEntityTypeToRepositoryMapping()
-		);
-	}
-
-	public function testGetEntityTypeToRepositoryMapping_entitySourceBasedFederation() {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$irrelevantRepositoryDefinition = [ '' => [
@@ -1060,23 +927,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	}
 
 	public function testGetConceptBaseUris() {
-		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
-			$this->getRepositoryDefinition( '', [ 'base-uri' => 'http://acme.test/concept/' ] ),
-			$this->getRepositoryDefinition( 'other', [ 'base-uri' => 'http://other.wiki/concept/', 'entity-namespaces' => [ 'foo' => 123 ] ] )
-		) );
-
-		$this->assertEquals(
-			[
-				'' => 'http://acme.test/concept/',
-				'other' => 'http://other.wiki/concept/',
-			],
-			$wikibaseRepo->getConceptBaseUris()
-		);
-	}
-
-	public function testGetConceptBaseUris_entitySourceBasedFederation() {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
 		$irrelevantRepositoryDefinition = [ '' => [

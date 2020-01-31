@@ -345,27 +345,8 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetRecentChangeFactory() {
-		$wikibaseClient = $this->getWikibaseClient();
-		$settings = $wikibaseClient->getSettings();
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-		$settings->setSetting( 'repoDatabase', 'repo' );
-		$settings->setSetting( 'repoConceptBaseUri', '' );
-		$settings->setSetting( 'entityNamespaces', [] );
-
-		$recentChangeFactory = $wikibaseClient->getRecentChangeFactory();
-		$this->assertInstanceOf( RecentChangeFactory::class, $recentChangeFactory );
-
-		$recentChangeFactory = TestingAccessWrapper::newFromObject( $recentChangeFactory );
-		$this->assertStringStartsWith(
-			'repointerwiki>',
-			$recentChangeFactory->externalUsernames->addPrefix( 'TestUser' )
-		);
-	}
-
-	public function testGetRecentChangeFactory_entitySourceBasedFederation() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
@@ -490,31 +471,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetDatabaseDomainNameOfLocalRepo() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-		$settings->setSetting( 'repositories', [
-			'' => [
-				'repoDatabase' => 'repodb',
-				'baseUri' => '',
-				'entityNamespaces' => [],
-				'prefixMapping' => [],
-			],
-			'other' => [
-				'repoDatabase' => 'otherdb',
-				'baseUri' => '',
-				'entityNamespaces' => [],
-				'prefixMapping' => [],
-			],
-		] );
-
-		$wikibaseClient = $this->getWikibaseClient( $settings );
-
-		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
-	}
-
-	public function testGetDatabaseDomainNameOfLocalRepo_entitySourceBasedFederation() {
-		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
-
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );

@@ -310,8 +310,6 @@ return [
 
 	'entityTypesWithoutRdfOutput' => [],
 
-	'useEntitySourceBasedFederation' => true,
-
 	'entitySources' => [],
 
 	'localEntitySourceName' => 'local',
