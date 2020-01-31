@@ -152,5 +152,11 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "之前的值不正確且從未如此過。",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>我已更新</strong>一個過時值",
 	"wikibase-client-data-bridge-edit-decision-update-description": "之前的值曾是正確的但現已過時。",
-	"wikibase-client-data-bridge-references-heading": "參考"
+	"wikibase-client-data-bridge-references-heading": "參考",
+	"wikibase-client-data-bridge-bailout-heading": "您可以改成做出以下操作：",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "編輯在{{WBREPONAME}}的值。點擊以下按鈕來直接編輯值（連結會在新分頁開啟）。",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "編輯在{{WBREPONAME}}的值",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "根據所使用的模板，可以使用[$1 條目編輯器]來覆寫本地值。若可能的話，我們建議您改為透過以上按鈕來添加值到{{WBREPONAME}}。",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "目前不支援編輯$1的值",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1在{{WBREPONAME}}為資料類型$2。目前不支援編輯此資料類型。"
 }

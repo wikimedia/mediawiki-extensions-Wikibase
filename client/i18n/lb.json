@@ -87,5 +87,6 @@
 	"connected-redirect-category": "Viruleedungen déi mat engem {{WBREPONAME}}-Element verbonne sinn",
 	"wikibase-client-data-bridge-permissions-error-info": "Méi Detailer",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Onbekannte Berechtigungsfeeler",
+	"wikibase-client-data-bridge-permissions-error-unknown-body": "Dir kënnt dëse Wäert aus onbekannte Grënn dëse Wäert net änneren",
 	"wikibase-client-data-bridge-references-heading": "Referenzen"
 }

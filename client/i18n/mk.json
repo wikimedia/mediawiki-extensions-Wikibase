@@ -131,5 +131,9 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Претходната вредност никогаш не беше, и никогаш била исправна.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Подновив</strong> застарена вредност",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Претходната вредност била исправна, но сега е застарена.",
-	"wikibase-client-data-bridge-references-heading": "Наводи"
+	"wikibase-client-data-bridge-references-heading": "Наводи",
+	"wikibase-client-data-bridge-bailout-heading": "Место тоа, можете да го направите следново:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Уреди ја вредноста на {{WBREPONAME}}. Стиснете на копчето подолу за да ја уредите вредноста непосредно (врската отвора во ново јазиче).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Уреди ја вредноста на {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Зависно од предлошката што се користи, можеби може да се замени вредноста месно користејќи го [$1 уредникот на статии]. Доколку е возможно, препорачуваме место тоа да ја додадете вредноста во {{WBREPONAME}} со копчето погоре."
 }

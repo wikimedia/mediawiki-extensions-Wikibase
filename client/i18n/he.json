@@ -8,7 +8,8 @@
 			"ערן",
 			"Yona b",
 			"IKhitron",
-			"Ghsuvr"
+			"Ghsuvr",
+			"דגש חזק"
 		]
 	},
 	"wikibase-client-desc": "לקוח להרחבה Wikibase",
@@ -137,5 +138,9 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "הערך הקודם לא היה נכון, ומעולם לא היה.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>עדכנתי</strong> ערך מיושן",
 	"wikibase-client-data-bridge-edit-decision-update-description": "הערך הקודם היהי פעם נכון, אבל עכשיו הוא התיישן.",
-	"wikibase-client-data-bridge-references-heading": "מקורות"
+	"wikibase-client-data-bridge-references-heading": "מקורות",
+	"wikibase-client-data-bridge-bailout-heading": "במקום זה אפשר לעשות את הבא:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "ערוך את הערך ב־{{WBREPONAME}}. לחץ על הכפתור שלמטה כדי לערוך את הערך ישירות (הקישור ייפתח בכרטיסייה חדשה).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "לערוף את הערך באתר {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "תלוי באיזו תבנית משמשת פה, יכול להיות אפשרי לדרוס את הערך באופן מקומי באמצעות [$1 עריכת דפים]. אם זה בכלל אפשרי, אנחנו ממליצים להוסיף את הערך ל{{GRAMMAR:תחילית{{WBREPONAME}}}} באמצעות הכפתור למעלה."
 }

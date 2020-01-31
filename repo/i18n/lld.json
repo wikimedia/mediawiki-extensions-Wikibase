@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Asenoner"
+			"Asenoner",
+			"Starladin"
 		]
 	},
 	"wikibase-edit": "muda",
 	"wikibase-add": "jonta",
-	"wikibase-sitelinks-special": "Autra plates"
+	"wikibase-sitelinks-special": "Autra plates",
+	"wikibase-tainted-ref-popper-text": "Le valur de chësta afermaziun é gnü mudé, mo le referimënt é resté anfat. Pos tó demez chësc avis sce le referimënt vel ciamó.",
+	"wikibase-tainted-ref-popper-remove-warning": "Tol demez avis"
 }

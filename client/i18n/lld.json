@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Asenoner"
+			"Asenoner",
+			"Starladin"
 		]
 	},
 	"tooltip-t-wikibase": "Culegamënt cul element culegà de l archive di dac",
@@ -10,5 +11,9 @@
 	"wikibase-editlinks": "Muda i links",
 	"wikibase-editlinkstitle": "Muda i links te autra rujenedes",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Mudazion fata sun {{WBREPONAME}}"
+	"wikibase-rc-wikibase-edit-title": "Mudazion fata sun {{WBREPONAME}}",
+	"wikibase-client-data-bridge-permissions-error-info": "Deplü detais",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "Fal nia conesciü de autorisaziun",
+	"wikibase-client-data-bridge-bailout-heading": "Impede insciö podesses fá:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Müda le valur sön {{WBREPONAME}}"
 }

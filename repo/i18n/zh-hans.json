@@ -35,7 +35,8 @@
 			"Viztor",
 			"予弦",
 			"A Retired User",
-			"VulpesVulpes825"
+			"VulpesVulpes825",
+			"Xiplus"
 		]
 	},
 	"wikibase-desc": "结构化数据存储库",
@@ -409,6 +410,7 @@
 	"content-model-wikibase-item": "维基数据库项",
 	"content-model-wikibase-property": "维基数据库属性",
 	"content-model-wikibase-query": "维基数据库查询",
+	"action-item-term": "更改项术语（标签、说明、别名）",
 	"right-item-term": "更改项术语（标签、说明、别名）",
 	"action-item-merge": "合并项",
 	"right-item-merge": "合并项",

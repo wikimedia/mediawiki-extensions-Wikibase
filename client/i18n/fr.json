@@ -29,7 +29,8 @@
 			"Verdy p",
 			"Shirayuki",
 			"Pamputt",
-			"Symsym"
+			"Symsym",
+			"Derugon"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -157,5 +158,11 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "La valeur précédente n’était pas correcte et ne l’a jamais été.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>J’ai mis à jour</strong> une valeur désuète.",
 	"wikibase-client-data-bridge-edit-decision-update-description": "La valeur précédente était correcte mais est maintenant désuète.",
-	"wikibase-client-data-bridge-references-heading": "Références"
+	"wikibase-client-data-bridge-references-heading": "Références",
+	"wikibase-client-data-bridge-bailout-heading": "À la place, vous pouvez faire ce qui suit :",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Modifier la valeur sur {{WBREPONAME}}. Cliquer sur le bouton ci-dessous pour modifier directement la valeur (le lien s’ouvre dans un nouvel onglet).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifier la valeur sur {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Selon le modèle utilisé, il est possible d’écraser localement la valeur en utilisant [$1 l’éditeur d’article]. Si ce n’est pas du tout possible, nous vous recommandons à la place d’ajouter la valeur à {{WBREPONAME}} via le bouton ci-dessus.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "La modification de la valeur de $1 n’est actuellement pas supportée",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 est du type de données $2 sur {{WBREPONAME}}. La modification de ce type de données n’est actuellement pas supportée."
 }

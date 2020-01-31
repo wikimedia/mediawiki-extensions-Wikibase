@@ -68,5 +68,8 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu",
 	"connected-redirect-category-desc": "Pieprasītie konti",
 	"wikibase-client-data-bridge-dialog-title": "Labot īpašību",
-	"wikibase-client-data-bridge-references-heading": "Atsauces"
+	"wikibase-client-data-bridge-references-heading": "Atsauces",
+	"wikibase-client-data-bridge-bailout-heading": "Tā vietā tu vari:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Labot {{WBREPONAME}} vērtību. Klikšķini uz pogas zemāk, lai labotu vērtību pa tiešo (saite atveras jaunā cilnē).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Labot {{WBREPONAME}} vērtību"
 }

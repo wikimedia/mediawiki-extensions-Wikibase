@@ -8,7 +8,8 @@
 			"Albertas",
 			"Zygimantus",
 			"Eitvys200",
-			"Manvydasz"
+			"Manvydasz",
+			"Tomasdd"
 		]
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",
@@ -44,7 +45,7 @@
 	"wikibase-linkitem-confirmitem-button": "Patvirtinti",
 	"wikibase-linkitem-not-loggedin-title": "Jums reikia būti prisiregistravusiam",
 	"wikibase-linkitem-not-loggedin": "Jums reikia būti prisijungusiam šioje wiki ir [$1 centrinėje duomenų saugykloje], kad galėtumėte naudotis šia funkcija.",
-	"wikibase-linkitem-success-link": "Puslapiai buvo sėkmingai susieti. Jūs galite rasti įrašą, kuriame sukauptos nuorodos, mūsų [$1 centrinėje duomenų saugykloje].",
+	"wikibase-linkitem-success-link": "Puslapiai buvo susieti. Jūs galite rasti įrašą, kuriame sukauptos nuorodos, mūsų [$1 centrinėje duomenų saugykloje].",
 	"limitreport-entityaccesscount": "Užkrautų Wikibase esybių skaičius",
 	"wikibase-property-notfound": "$1 savybė nerasta.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -59,7 +60,7 @@
 	"wikibase-watchlist-show-changes-pref": "Rodyti {{WBREPONAME}} keitimus jūsų stebimųjų puslapių sąraše",
 	"wikibase-error-deserialize-error": "Nepavyko deserializuoti duomenų.",
 	"wikibase-error-serialize-error": "Nepavyko išdėstyti duomenų",
-	"wikibase-error-invalid-entity-id": "Įvestas ID sistemai nežinomas. Prašome įvesti galiojantį esybės ID.",
+	"wikibase-error-invalid-entity-id": "Įvestas ID \"$2\" sistemai nežinomas. Prašome įvesti galiojantį esybės ID.",
 	"wikibase-error-exceeded-entity-access-limit": "Per daug {{WBREPONAME}} esybių pasiekta.",
 	"unconnectedpages": "Puslapiai, nesusieti su įrašais",
 	"unconnectedpages-summary": "Šiame puslapyje pateikiami puslapiai, nesusiję su duomenų įrašais (vardų srityse, palaikančiose susijusius įrašus). Sąrašas surūšiuotas pagal puslapio ID mažėjimo tvarka, taigi naujesni puslapiai pateikiami pirmiau.",
