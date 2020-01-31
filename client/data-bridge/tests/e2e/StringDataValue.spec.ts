@@ -38,7 +38,7 @@ jest.mock( '@/mediawiki/prepareContainer', () => ( {
 } ) );
 
 const DEFAULT_ENTITY = 'Q42';
-const DEFAULT_PROPERTY = 'P349';
+const DEFAULT_PROPERTY = 'P373';
 
 function prepareTestEnv( options: {
 	entityId?: string;
@@ -128,7 +128,7 @@ describe( 'string data value', () => {
 
 	describe( 'property label', () => {
 		it( 'is used to illustrate property', async () => {
-			const propertyId = 'P349';
+			const propertyId = 'P373';
 			const propertyLabel = 'Queen';
 
 			const testLink = prepareTestEnv( { propertyId } );
@@ -166,7 +166,7 @@ describe( 'string data value', () => {
 		} );
 
 		it( 'optionally uses label in fallback language', async () => {
-			const propertyId = 'P349';
+			const propertyId = 'P373';
 			const propertyLabel = 'Jochen';
 			const language = 'de';
 
@@ -209,7 +209,7 @@ describe( 'string data value', () => {
 		} );
 
 		it( 'falls back to the property id, if the api call fails', async () => {
-			const propertyId = 'P349';
+			const propertyId = 'P373';
 			const testLink = prepareTestEnv( { propertyId } );
 
 			const get = jest.fn().mockResolvedValue(
@@ -258,7 +258,7 @@ describe( 'string data value', () => {
 
 	describe( 'language utils', () => {
 		it( 'determines the directionality of the given language', async () => {
-			const propertyId = 'P349';
+			const propertyId = 'P373';
 			const propertyLabel = 'רתֵּסְאֶ';
 			const language = 'he';
 
@@ -293,7 +293,7 @@ describe( 'string data value', () => {
 		} );
 
 		it( 'standardized language code', async () => {
-			const propertyId = 'P349';
+			const propertyId = 'P373';
 			const propertyLabel = 'Jochen';
 			const language = 'de-formal';
 

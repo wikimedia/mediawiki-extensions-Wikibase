@@ -50,7 +50,11 @@ import AppInformation from '@/definitions/AppInformation';
 import newMockServiceContainer from '../services/newMockServiceContainer';
 import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
-import { SNAK_DATAVALUETYPE, SNAK_SNAKTYPE } from '@/store/statements/snaks/getterTypes';
+import {
+	SNAK_DATATYPE,
+	SNAK_DATAVALUETYPE,
+	SNAK_SNAKTYPE,
+} from '@/store/statements/snaks/getterTypes';
 import DataValue from '@/datamodel/DataValue';
 import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
 
@@ -606,6 +610,7 @@ describe( 'root/actions', () => {
 			getters: {
 				[ STATEMENTS_IS_AMBIGUOUS ]: jest.fn().mockReturnValue( false ),
 				[ SNAK_SNAKTYPE ]: jest.fn().mockReturnValue( 'value' ),
+				[ SNAK_DATATYPE ]: jest.fn().mockReturnValue( 'string' ),
 				[ SNAK_DATAVALUETYPE ]: jest.fn().mockReturnValue( 'string' ),
 			} as any,
 		};
@@ -665,6 +670,24 @@ describe( 'root/actions', () => {
 				[ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ],
 			);
 
+		} );
+
+		it( 'dispatches error for non-string data types', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ SNAK_DATATYPE ].mockReturnValueOnce( 'url' );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_DATATYPE } ],
+			);
 		} );
 
 		it( 'dispatches error for non-string data value types', () => {

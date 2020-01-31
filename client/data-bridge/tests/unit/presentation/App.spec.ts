@@ -41,7 +41,7 @@ describe( 'App.vue', () => {
 
 	beforeEach( async () => {
 		entityId = 'Q42';
-		propertyId = 'P349';
+		propertyId = 'P373';
 		editFlow = EditFlow.OVERWRITE;
 		( Entities.entities.Q42 as any ).statements = Entities.entities.Q42.claims;
 

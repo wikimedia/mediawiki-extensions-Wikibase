@@ -12061,6 +12061,7 @@ var ErrorTypes;
   ErrorTypes["INVALID_ENTITY_STATE_ERROR"] = "INVALID_ENTITY_STATE_ERROR";
   ErrorTypes["UNSUPPORTED_AMBIGUOUS_STATEMENT"] = "UNSUPPORTED_AMBIGUOUS_STATEMENT";
   ErrorTypes["UNSUPPORTED_SNAK_TYPE"] = "UNSUPPORTED_SNAK_TYPE";
+  ErrorTypes["UNSUPPORTED_DATATYPE"] = "UNSUPPORTED_DATATYPE";
   ErrorTypes["UNSUPPORTED_DATAVALUE_TYPE"] = "UNSUPPORTED_DATAVALUE_TYPE";
   ErrorTypes["SAVING_FAILED"] = "SAVING_FAILED";
 })(ErrorTypes || (ErrorTypes = {}));
@@ -12948,12 +12949,27 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_DATAVALUETYPE,
+    key: SNAK_DATATYPE,
     get: function get() {
       var _this6 = this;
 
       return function (pathToSnak) {
         var snak = pathToSnak.resolveSnakInStatement(_this6.state);
+
+        if (!snak) {
+          return null;
+        }
+
+        return snak.datatype;
+      };
+    }
+  }, {
+    key: SNAK_DATAVALUETYPE,
+    get: function get() {
+      var _this7 = this;
+
+      return function (pathToSnak) {
+        var snak = pathToSnak.resolveSnakInStatement(_this7.state);
 
         if (!snak || !snak.datavalue) {
           return null;
@@ -13201,6 +13217,12 @@ function (_Actions) {
       if (this.statementModule.getters[SNAK_SNAKTYPE](path) !== 'value') {
         this.dispatch(BRIDGE_ERROR_ADD, [{
           type: ErrorTypes.UNSUPPORTED_SNAK_TYPE
+        }]);
+      }
+
+      if (this.statementModule.getters[SNAK_DATATYPE](path) !== 'string') {
+        this.dispatch(BRIDGE_ERROR_ADD, [{
+          type: ErrorTypes.UNSUPPORTED_DATATYPE
         }]);
       }
 
