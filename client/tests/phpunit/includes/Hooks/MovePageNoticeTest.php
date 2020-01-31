@@ -39,7 +39,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
 			$conceptBaseUri,

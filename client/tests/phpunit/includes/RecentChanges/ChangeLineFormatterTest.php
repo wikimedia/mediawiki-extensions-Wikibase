@@ -50,7 +50,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		] );
 
 		$this->repoLinker = new RepoLinker(
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'http://www.wikidata.org',
 			[ '' => 'https://www.wikidata.org/entity' ],
