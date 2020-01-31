@@ -20,9 +20,11 @@ use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
+use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -39,6 +41,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
@@ -367,6 +370,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	public function getPrefetchingTermLookup() {
+		global $wgSecretKey;
+
 		if ( $this->prefetchingTermLookup === null ) {
 			$termIndex = $this->getTermIndex();
 
@@ -405,7 +410,22 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			);
 
 			if ( $this->settings->useNormalizedPropertyTerms() ) {
-				$lookups['property'] = new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain );
+				$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+				$cache = new SimpleCacheWithBagOStuff(
+					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+					'wikibase.prefetchingPropertyTermLookup.',
+					$cacheSecret
+				);
+				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
+				$lookups['property'] = new CachingPrefetchingTermLookup(
+					$cache,
+					new UncachedTermsPrefetcher(
+						new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
+						$redirectResolvingRevisionLookup
+					),
+					$redirectResolvingRevisionLookup
+				);
 			} else {
 				$lookups['property'] = $termIndexBackedTermLookup;
 			}

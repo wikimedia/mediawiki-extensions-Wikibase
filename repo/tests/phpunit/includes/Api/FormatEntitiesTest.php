@@ -32,6 +32,9 @@ class FormatEntitiesTest extends ApiTestCase {
 	}
 
 	public function testApiRequest() {
+		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for properties
+		$this->setService( 'LocalServerObjectCache', new \HashBagOStuff() );
+
 		$item = NewItem::withLabel( 'en', 'test item' )->build();
 		$this->saveEntity( $item );
 		$itemId = $item->getId()->getSerialization();
