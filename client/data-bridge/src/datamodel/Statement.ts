@@ -2,7 +2,7 @@ import Snak from '@/datamodel/Snak';
 import QualifierMap from '@/datamodel/QualifierMap';
 import Reference from '@/datamodel/Reference';
 
-type Rank = 'preferred'|'normal'|'deprecated';
+export type Rank = 'preferred'|'normal'|'deprecated';
 
 interface Statement {
 	id: string;

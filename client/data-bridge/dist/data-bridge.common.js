@@ -11847,6 +11847,7 @@ var NS_STATEMENTS = 'statements';
 var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
 var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
 var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
+var STATEMENT_RANK = 'rank';
 // CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
 var ENTITY_INIT = 'entityInit';
 var ENTITY_SAVE = 'entitySave';
@@ -11866,8 +11867,8 @@ function () {
   }
 
   _createClass(MainSnakPath, [{
-    key: "resolveSnakInStatement",
-    value: function resolveSnakInStatement(state) {
+    key: "resolveStatement",
+    value: function resolveStatement(state) {
       if (!state[this.entityId]) {
         return null;
       }
@@ -11880,7 +11881,18 @@ function () {
         return null;
       }
 
-      return state[this.entityId][this.propertyId][this.index].mainsnak;
+      return state[this.entityId][this.propertyId][this.index];
+    }
+  }, {
+    key: "resolveSnakInStatement",
+    value: function resolveSnakInStatement(state) {
+      var statement = this.resolveStatement(state);
+
+      if (statement === null) {
+        return null;
+      }
+
+      return statement.mainsnak;
     }
   }]);
 
@@ -11893,6 +11905,7 @@ var ErrorTypes;
   ErrorTypes["APPLICATION_LOGIC_ERROR"] = "APPLICATION_LOGIC_ERROR";
   ErrorTypes["INVALID_ENTITY_STATE_ERROR"] = "INVALID_ENTITY_STATE_ERROR";
   ErrorTypes["UNSUPPORTED_AMBIGUOUS_STATEMENT"] = "UNSUPPORTED_AMBIGUOUS_STATEMENT";
+  ErrorTypes["UNSUPPORTED_DEPRECATED_STATEMENT"] = "UNSUPPORTED_DEPRECATED_STATEMENT";
   ErrorTypes["UNSUPPORTED_SNAK_TYPE"] = "UNSUPPORTED_SNAK_TYPE";
   ErrorTypes["UNSUPPORTED_DATATYPE"] = "UNSUPPORTED_DATATYPE";
   ErrorTypes["UNSUPPORTED_DATAVALUE_TYPE"] = "UNSUPPORTED_DATAVALUE_TYPE";
@@ -12752,12 +12765,27 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_DATA_VALUE,
+    key: STATEMENT_RANK,
     get: function get() {
       var _this4 = this;
 
+      return function (pathToStatement) {
+        var statement = pathToStatement.resolveStatement(_this4.state);
+
+        if (!statement) {
+          return null;
+        }
+
+        return statement.rank;
+      };
+    }
+  }, {
+    key: SNAK_DATA_VALUE,
+    get: function get() {
+      var _this5 = this;
+
       return function (pathToSnak) {
-        var snak = pathToSnak.resolveSnakInStatement(_this4.state);
+        var snak = pathToSnak.resolveSnakInStatement(_this5.state);
 
         if (!snak || !snak.datavalue) {
           return null;
@@ -12769,10 +12797,10 @@ function (_Getters) {
   }, {
     key: SNAK_SNAKTYPE,
     get: function get() {
-      var _this5 = this;
+      var _this6 = this;
 
       return function (pathToSnak) {
-        var snak = pathToSnak.resolveSnakInStatement(_this5.state);
+        var snak = pathToSnak.resolveSnakInStatement(_this6.state);
 
         if (!snak) {
           return null;
@@ -12784,10 +12812,10 @@ function (_Getters) {
   }, {
     key: SNAK_DATATYPE,
     get: function get() {
-      var _this6 = this;
+      var _this7 = this;
 
       return function (pathToSnak) {
-        var snak = pathToSnak.resolveSnakInStatement(_this6.state);
+        var snak = pathToSnak.resolveSnakInStatement(_this7.state);
 
         if (!snak) {
           return null;
@@ -12799,10 +12827,10 @@ function (_Getters) {
   }, {
     key: SNAK_DATAVALUETYPE,
     get: function get() {
-      var _this7 = this;
+      var _this8 = this;
 
       return function (pathToSnak) {
-        var snak = pathToSnak.resolveSnakInStatement(_this7.state);
+        var snak = pathToSnak.resolveSnakInStatement(_this8.state);
 
         if (!snak || !snak.datavalue) {
           return null;
@@ -13044,6 +13072,12 @@ function (_Actions) {
       if (this.statementModule.getters[STATEMENTS_IS_AMBIGUOUS](path.entityId, path.propertyId) === true) {
         this.dispatch(BRIDGE_ERROR_ADD, [{
           type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
+        }]);
+      }
+
+      if (this.statementModule.getters[STATEMENT_RANK](path) === 'deprecated') {
+        this.dispatch(BRIDGE_ERROR_ADD, [{
+          type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT
         }]);
       }
 

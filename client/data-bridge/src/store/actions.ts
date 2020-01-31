@@ -37,6 +37,7 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import {
+	STATEMENT_RANK,
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/statements/getterTypes';
@@ -180,6 +181,12 @@ RootActions
 			this.statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ]( path.entityId, path.propertyId ) === true
 		) {
 			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
+		}
+
+		if (
+			this.statementModule.getters[ STATEMENT_RANK ]( path ) === 'deprecated'
+		) {
+			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT } ] );
 		}
 
 		if (

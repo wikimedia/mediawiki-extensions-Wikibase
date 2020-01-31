@@ -1,7 +1,10 @@
 import DataType from '@/datamodel/DataType';
+import { Rank } from '@/datamodel/Statement';
 import { StatementState } from '@/store/statements';
+import { PathToStatement } from '@/store/statements/PathToStatement';
 import { Getters } from 'vuex-smart-module';
 import {
+	STATEMENT_RANK,
 	STATEMENTS_CONTAINS_ENTITY,
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
@@ -43,6 +46,17 @@ export class StatementGetters extends Getters<StatementState> {
 			return this.state[ entityId ] !== undefined
 				&& this.state[ entityId ][ propertyId ] !== undefined
 				&& this.state[ entityId ][ propertyId ].length > 1;
+		};
+	}
+
+	public get [ STATEMENT_RANK ]() {
+		return ( pathToStatement: PathToStatement ): Rank | null => {
+			const statement = pathToStatement.resolveStatement( this.state );
+			if ( !statement ) {
+				return null;
+			}
+
+			return statement.rank;
 		};
 	}
 
