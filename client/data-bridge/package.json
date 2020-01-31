@@ -91,7 +91,6 @@
     "vue-cli-plugin-typescript": "0.0.1",
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.1.1",
-    "vuex-class": "^0.3.2",
     "wdio-mediawiki": "0.5.0",
     "wdio-wikibase": "^0.3.0",
     "webdriverio": "^5.15.1",

@@ -9,10 +9,10 @@ import {
 	CascadeProtectedReason,
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
-import Application from '@/store/Application';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
+import { createTestStore } from '../../../util/store';
 import Mock = jest.Mock;
 
 const localVue = createLocalVue();
@@ -68,7 +68,7 @@ describe( 'ErrorPermission', () => {
 
 	it( 'passes properties to ErrorPermissionInfo', () => {
 		const messageGet = jest.fn( ( key ) => key );
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -102,7 +102,7 @@ describe( 'ErrorPermission', () => {
 
 	it( 'shows a list of all errors', () => {
 		const messageGet = jest.fn( ( key ) => key );
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -165,7 +165,7 @@ describe( 'ErrorPermission', () => {
 			info: {} as any,
 		};
 		const messageGet = jest.fn( ( key ) => key );
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -219,7 +219,7 @@ describe( 'ErrorPermission', () => {
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterGetPageUrl,
 		};
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -269,7 +269,7 @@ describe( 'ErrorPermission', () => {
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterGetPageUrl,
 		};
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -326,7 +326,7 @@ describe( 'ErrorPermission', () => {
 		const $clientRouter: MediaWikiRouter = {
 			getPageUrl: clientRouterGetPageUrl,
 		};
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -388,7 +388,7 @@ describe( 'ErrorPermission', () => {
 		const $repoRouter: MediaWikiRouter = {
 			getPageUrl: repoRouterGetPageUrl,
 		};
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -454,7 +454,7 @@ describe( 'ErrorPermission', () => {
 			getPageUrl: routerGetPageUrl,
 		};
 
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -508,7 +508,7 @@ describe( 'ErrorPermission', () => {
 				.mockReturnValueOnce( logUrl )
 				.mockReturnValueOnce( propertyTalkUrl ),
 		};
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},
@@ -548,7 +548,7 @@ describe( 'ErrorPermission', () => {
 		[ 2, false ],
 	] )( 'given %d errors, expandedByDefault is %p', ( errorCount, expandedByDefault ) => {
 		const messageGet = jest.fn( ( key ) => key );
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				entityTitle,
 			},

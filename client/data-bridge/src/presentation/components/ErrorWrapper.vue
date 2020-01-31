@@ -9,10 +9,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { State } from 'vuex-class';
+import Component, { mixins } from 'vue-class-component';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
+import StateMixin from '@/presentation/StateMixin';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ApplicationError from '@/definitions/ApplicationError';
@@ -20,12 +19,10 @@ import ApplicationError from '@/definitions/ApplicationError';
 @Component( {
 	components: { ErrorPermission, ErrorUnknown },
 } )
-export default class ErrorWrapper extends Vue {
-	@State( 'applicationErrors' )
-	public applicationErrors!: ApplicationError[];
-
+export default class ErrorWrapper extends mixins( StateMixin ) {
 	public get permissionErrors(): MissingPermissionsError[] {
-		return this.applicationErrors.filter( this.isPermissionError );
+		return this.rootModule.state.applicationErrors
+			.filter( this.isPermissionError );
 	}
 
 	private isPermissionError( error: ApplicationError ): error is MissingPermissionsError {

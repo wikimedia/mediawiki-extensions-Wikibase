@@ -1,6 +1,6 @@
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
 import {
 	MissingPermissionsError,
 	PageNotEditable,
@@ -8,15 +8,15 @@ import {
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
-import Application from '@/store/Application';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
+import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
 
 describe( 'ErrorWrapper', () => {
 	it( 'mounts ErrorUnknown on empty applicationErrors', () => {
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				applicationErrors: [],
 			},
@@ -27,7 +27,7 @@ describe( 'ErrorWrapper', () => {
 	} );
 
 	it( 'mounts ErrorUnknown for exclusively non-permission-related errors', () => {
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				applicationErrors: [
 					{
@@ -47,7 +47,7 @@ describe( 'ErrorWrapper', () => {
 				type: PageNotEditable.ITEM_SEMI_PROTECTED,
 			} as ProtectedReason,
 		];
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				applicationErrors,
 			},
@@ -88,7 +88,7 @@ describe( 'ErrorWrapper', () => {
 				type: ErrorTypes.INVALID_ENTITY_STATE_ERROR,
 			},
 		];
-		const store = new Store<Partial<Application>>( {
+		const store = createTestStore( {
 			state: {
 				applicationErrors,
 			},

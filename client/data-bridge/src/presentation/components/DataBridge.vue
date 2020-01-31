@@ -15,7 +15,6 @@
 import StateMixin from '@/presentation/StateMixin';
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import Component, { mixins } from 'vue-class-component';
-import { Getter, State } from 'vuex-class';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
@@ -30,14 +29,21 @@ import { BRIDGE_SET_TARGET_VALUE } from '@/store/actionTypes';
 	},
 } )
 export default class DataBridge extends mixins( StateMixin ) {
-	@Getter( 'targetValue' )
-	public targetValue!: DataValue;
+	public get targetValue(): DataValue {
+		const targetValue = this.rootModule.getters.targetValue;
+		if ( targetValue === null ) {
+			throw new Error( 'not yet ready!' );
+		}
+		return targetValue;
+	}
 
-	@State( 'targetProperty' )
-	public targetProperty!: string;
+	public get targetProperty(): string {
+		return this.rootModule.state.targetProperty;
+	}
 
-	@Getter( 'targetLabel' )
-	public targetLabel!: Term;
+	public get targetLabel(): Term {
+		return this.rootModule.getters.targetLabel;
+	}
 
 	public setDataValue( dataValue: DataValue ): void {
 		this.rootModule.dispatch( BRIDGE_SET_TARGET_VALUE, dataValue );

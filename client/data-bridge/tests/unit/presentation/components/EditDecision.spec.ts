@@ -11,6 +11,7 @@ import {
 } from '@vue/test-utils';
 import { RadioInput } from '@wmde/wikibase-vuejs-components';
 import Vuex, { Store } from 'vuex';
+import { createTestStore } from '../../../util/store';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 
 const localVue = createLocalVue();
@@ -85,7 +86,7 @@ describe( 'EditDecision', () => {
 
 	it( 'dispatches action when radio button is selected', () => {
 		const setEditDecisionAction = jest.fn();
-		store = new Store<Application>( { actions: { [ BRIDGE_SET_EDIT_DECISION ]: setEditDecisionAction } } );
+		store = createTestStore( { actions: { [ BRIDGE_SET_EDIT_DECISION ]: setEditDecisionAction } } );
 		const wrapper = mount( EditDecision, {
 			store,
 			localVue,
@@ -93,7 +94,7 @@ describe( 'EditDecision', () => {
 		wrapper.find( 'input[value=replace]' ).setChecked( true );
 		wrapper.find( 'input' ).trigger( 'input' );
 		expect( setEditDecisionAction ).toHaveBeenCalledTimes( 1 );
-		expect( setEditDecisionAction.mock.calls[ 0 ][ 1 ] ).toBe( 'replace' );
+		expect( setEditDecisionAction.mock.calls[ 0 ][ 0 ] ).toBe( 'replace' );
 	} );
 
 } );
