@@ -124,7 +124,7 @@ return call_user_func( function() {
 		'trackLuaFunctionCallsPerSiteGroup' => false,
 		'trackLuaFunctionCallsPerWiki' => false,
 
-		'useEntitySourceBasedFederation' => false,
+		'useEntitySourceBasedFederation' => true,
 		'localEntitySourceName' => 'local',
 		'entitySources' => [],
 

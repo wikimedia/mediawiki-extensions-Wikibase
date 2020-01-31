@@ -310,7 +310,7 @@ return [
 
 	'entityTypesWithoutRdfOutput' => [],
 
-	'useEntitySourceBasedFederation' => false,
+	'useEntitySourceBasedFederation' => true,
 
 	'entitySources' => [],
 
