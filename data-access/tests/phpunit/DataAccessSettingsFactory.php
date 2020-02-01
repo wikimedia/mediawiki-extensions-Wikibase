@@ -11,7 +11,7 @@ use Wikibase\DataAccess\DataAccessSettings;
 class DataAccessSettingsFactory {
 
 	public static function anySettings(): DataAccessSettings {
-		return self::repositoryPrefixBasedFederation();
+		return self::entitySourceBasedFederation();
 	}
 
 	public static function repositoryPrefixBasedFederation(): DataAccessSettings {
