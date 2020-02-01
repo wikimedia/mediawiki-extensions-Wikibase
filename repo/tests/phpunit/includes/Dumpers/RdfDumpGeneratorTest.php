@@ -8,6 +8,7 @@ use MWException;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -224,6 +225,82 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		);
 	}
 
+	/**
+	 * @param string $flavor
+	 * @param EntityDocument[] $entityRevisions
+	 * @param EntityId[] $redirects
+	 *
+	 * @return RdfDumpGenerator
+	 * @throws MWException
+	 */
+	private function newDumpGeneratorForEntitySourceBasedAccess(
+		string $flavor,
+		array $entityRevisions = [],
+		array $redirects = []
+	) : RdfDumpGenerator {
+		$out = fopen( 'php://output', 'w' );
+
+		$entityRevisionLookup = $this->createMock( EntityRevisionLookup::class );
+
+		$dataTypeLookup = $this->getTestData()->getMockRepository();
+
+		$entityRevisionLookup->expects( $this->any() )
+			->method( 'getEntityRevision' )
+			->will( $this->returnCallback( function( EntityId $id ) use ( $entityRevisions, $redirects ) {
+				$key = $id->getSerialization();
+
+				if ( isset( $redirects[$key] ) ) {
+					throw new RevisionedUnresolvedRedirectException( $id, $redirects[$key] );
+				}
+
+				return $entityRevisions[$key] ?? null;
+			} ) );
+
+		$siteLookup = $this->getSiteLookup();
+
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		// Note: we test against the actual RDF bindings here, so we get actual RDF.
+		$rdfBuilderFactory = $wikibaseRepo->getValueSnakRdfBuilderFactory();
+		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
+
+		return RdfDumpGenerator::createDumpGenerator(
+			'ntriples',
+			$out,
+			$flavor,
+			$siteLookup->getSites(),
+			$entityRevisionLookup,
+			$dataTypeLookup,
+			$rdfBuilderFactory,
+			$entityRdfBuilderFactory,
+			new NullEntityPrefetcher(),
+			new RdfVocabulary(
+				[ 'test' => self::URI_BASE, 'foreign' => 'http://foreign.test/', ],
+				[ 'test' => self::URI_DATA, 'foreign' => 'http://data.foreign.test/' ],
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
+				new EntitySourceDefinitions( [
+					new EntitySource(
+						'test',
+						'testdb',
+						[
+							'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ],
+							'property' => [ 'namespaceId' => 30000, 'slot' => 'main' ],
+						],
+						self::URI_BASE,
+						'wd',
+						'',
+						''
+					)
+				], new EntityTypeDefinitions( [] ) ),
+				'test',
+				[ 'test' => 'wd', 'foreign' => 'foreign' ],
+				[ 'test' => '', 'foreign' => 'foreign' ],
+				[ 'test' => 'en-x-test' ]
+			),
+			$this->getEntityTitleLookup()
+		);
+	}
+
 	public function idProvider() {
 		$p10 = new PropertyId( 'P10' );
 		$q30 = new ItemId( 'Q30' );
@@ -248,6 +325,26 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$entityRevisions = $jsonTest->makeEntityRevisions( $ids );
 		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
 		$dumper = $this->newDumpGenerator( $flavor, $entityRevisions, $redirects );
+		$dumper->setTimestamp( 1000000 );
+		$jsonTest = new JsonDumpGeneratorTest();
+		$pager = $jsonTest->makeIdPager( $ids );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$actual = ob_get_clean();
+		$expected = $this->getTestData()->getNTriples( $flavor . '-' . $dumpname );
+
+		$this->helper->assertNTriplesEquals( $expected, $actual );
+	}
+
+	/**
+	 * @dataProvider idProvider
+	 */
+	public function testGenerateDump_entitySourceBasedFederation( array $ids, $flavor, $dumpname ) {
+		$jsonTest = new JsonDumpGeneratorTest();
+		$entityRevisions = $jsonTest->makeEntityRevisions( $ids );
+		$redirects = [ 'Q4242' => new ItemId( 'Q42' ) ];
+		$dumper = $this->newDumpGeneratorForEntitySourceBasedAccess( $flavor, $entityRevisions, $redirects );
 		$dumper->setTimestamp( 1000000 );
 		$jsonTest = new JsonDumpGeneratorTest();
 		$pager = $jsonTest->makeIdPager( $ids );
@@ -292,6 +389,31 @@ class RdfDumpGeneratorTest extends MediaWikiTestCase {
 		$dumper->generateDump( $pager );
 		$actual = ob_get_clean();
 		$this->helper->assertNTriplesEqualsDataset( $dumpname, $actual );
+	}
+
+	public function testReferenceDedup_entitySourceBasedFederation() {
+		$entityRevisions = [];
+
+		$entityRevisions['Q7'] = new EntityRevision(
+			$this->getTestData()->getEntity( 'Q7_no_prefixed_ids' ),
+			12,
+			'19700112134640'
+		);
+		$entityRevisions['Q9'] = new EntityRevision(
+			$this->getTestData()->getEntity( 'Q9_no_prefixed_ids' ),
+			12,
+			'19700112134640'
+		);
+
+		$dumper = $this->newDumpGeneratorForEntitySourceBasedAccess( 'full-dump', $entityRevisions );
+		$dumper->setTimestamp( 1000000 );
+		$jsonTest = new JsonDumpGeneratorTest();
+		$pager = $jsonTest->makeIdPager( [ new ItemId( 'Q7' ), new ItemId( 'Q9' ) ] );
+
+		ob_start();
+		$dumper->generateDump( $pager );
+		$actual = ob_get_clean();
+		$this->helper->assertNTriplesEqualsDataset( 'refs_no_prefixed_ids', $actual );
 	}
 
 }
