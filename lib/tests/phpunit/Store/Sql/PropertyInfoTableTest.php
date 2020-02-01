@@ -423,6 +423,18 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
 	}
 
+	public function testGivenPropertyIdAndNotLocalSource_setPropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTableForNonLocalOnlySource();
+		$this->expectException( InvalidArgumentException::class );
+		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
+	}
+
+	public function testGivenPropertyIdAndNotLocalSource_removePropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTableForNonLocalOnlySource();
+		$this->expectException( InvalidArgumentException::class );
+		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
+	}
+
 	private function newPropertyInfoTableForItemOnlySource() {
 		$irrelevantItemNamespaceId = 100;
 
@@ -432,6 +444,24 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 				'testsource',
 				false,
 				[ 'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ],
+				'',
+				'',
+				'',
+				''
+			),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
+		);
+	}
+
+	private function newPropertyInfoTableForNonLocalOnlySource() {
+		$irrelevantItemNamespaceId = 100;
+
+		return new PropertyInfoTable(
+			$this->getEntityComposer(),
+			new EntitySource(
+				'testsource',
+				'nonlocaldb',
+				[ 'property' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ],
 				'',
 				'',
 				'',
