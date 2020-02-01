@@ -11,8 +11,8 @@ use MediaWiki\Storage\SlotRecord;
 use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -73,8 +73,19 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				$nsLookup,
 				MediaWikiServices::getInstance()->getSlotRoleStore()
 			),
-			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			new EntitySource(
+				'test',
+				false,
+				[
+					'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ],
+					'property' => [ 'namespaceId' => 1210, 'slot' => 'main' ],
+				],
+				'',
+				'',
+				'',
+				''
+			),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 	}
 

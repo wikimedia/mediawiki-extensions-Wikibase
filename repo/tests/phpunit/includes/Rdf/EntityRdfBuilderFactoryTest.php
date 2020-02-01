@@ -42,7 +42,7 @@ class EntityRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],

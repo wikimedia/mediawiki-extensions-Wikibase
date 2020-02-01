@@ -58,7 +58,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore,
 			new StringNormalizer(),
 			$this->getItemSource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 		$this->i1 = new ItemId( 'Q1' );
 		$itemTermStore->storeTerms(
