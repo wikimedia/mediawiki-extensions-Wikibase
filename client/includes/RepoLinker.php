@@ -176,8 +176,7 @@ class RepoLinker {
 		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
 			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
 			if ( $source !== null ) {
-				// TODO: info on concept base uri is in EntitySourceDefinitions, shouldn't be duplicated in the array
-				$uri = $this->conceptBaseUris[$source->getSourceName()];
+				$uri = $source->getConceptBaseUri();
 			}
 		} else {
 			$uri = $this->conceptBaseUris[$entityId->getRepositoryName()];
