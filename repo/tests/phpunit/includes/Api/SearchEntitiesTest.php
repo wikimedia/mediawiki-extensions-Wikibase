@@ -481,7 +481,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'foreign',
 					'otherdb',
 					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
-					'http://acme.test/concept/',
+					'http://foreign.wiki/concept/',
 					'o',
 					'o',
 					'otherwiki'
