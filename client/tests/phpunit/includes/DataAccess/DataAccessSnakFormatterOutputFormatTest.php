@@ -238,25 +238,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	 */
 	public function testRichWikitextOutput( $expected, $snak ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-
-		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'en' ),
-			$this->createMock( UsageAccumulator::class ),
-			'rich-wikitext'
-		);
-
-		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
-	}
-
-	/**
-	 * @dataProvider richWikitextSnakProvider
-	 */
-	public function testRichWikitextOutput_entitySourceBasedFederation( $expected, $snak ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
@@ -332,24 +313,6 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	 */
 	public function testEscapedPlainTextOutput( $expected, $snak ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'useEntitySourceBasedFederation', false );
-
-		// This is an integration test, use the global factory
-		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
-		$formatter = $factory->newWikitextSnakFormatter(
-			Language::factory( 'en' ),
-			$this->createMock( UsageAccumulator::class )
-		);
-
-		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );
-	}
-
-	/**
-	 * @dataProvider escapedPlainTextSnakProvider
-	 */
-	public function testEscapedPlainTextOutput_entitySourceBasedFederation( $expected, $snak ) {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'useEntitySourceBasedFederation', true );
 
 		// This is an integration test, use the global factory
 		$factory = WikibaseClient::getDefaultInstance()->getDataAccessSnakFormatterFactory();
