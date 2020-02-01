@@ -497,13 +497,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			throw new \LogicException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does no provide properties' );
 		}
 		if ( $this->propertyInfoLookup === null ) {
-			$irrelevantRepositoryName = '';
 			$this->propertyInfoLookup = new PropertyInfoTable(
 				$this->entityIdComposer,
-				$this->entitySource,
-				$this->settings,
-				$this->entitySource->getDatabaseName(),
-				$irrelevantRepositoryName
+				$this->entitySource
 			);
 		}
 		return $this->propertyInfoLookup;

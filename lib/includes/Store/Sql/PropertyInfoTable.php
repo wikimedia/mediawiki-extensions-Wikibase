@@ -4,15 +4,12 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -40,45 +37,16 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 */
 	private $entitySource;
 
-	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
-	/**
-	 * @var string
-	 */
-	private $repositoryName;
-
-	/**
-	 * @param EntityIdComposer $entityIdComposer
-	 * @param EntitySource $entitySource
-	 * @param DataAccessSettings $dataAccessSettings
-	 * @param string|bool $wiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
-	 * @param string $repositoryName
-	 *
-	 */
 	public function __construct(
 		EntityIdComposer $entityIdComposer,
-		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
-		$wiki = false,
-		$repositoryName = ''
+		EntitySource $entitySource
 	) {
-		if ( !is_string( $wiki ) && $wiki !== false ) {
-			throw new InvalidArgumentException( '$wiki must be a string or false.' );
-		}
-		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-
-		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wiki;
+		$databaseName = $entitySource->getDatabaseName();
 
 		parent::__construct( $databaseName );
 		$this->tableName = 'wb_property_info';
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
-		$this->repositoryName = $repositoryName;
 	}
 
 	/**
@@ -123,7 +91,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 			}
 
 			$id = $this->entityIdComposer->composeEntityId(
-				$this->repositoryName,
+				'',
 				Property::ENTITY_TYPE,
 				$row->pi_property_id
 			);
@@ -281,12 +249,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	}
 
 	private function assertCanHandlePropertyId( PropertyId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertEntitySourceProvidesProperties();
-			return;
-		}
-
-		$this->assertPropertyIdFromCorrectRepository( $id );
+		$this->assertEntitySourceProvidesProperties();
 	}
 
 	private function assertEntitySourceProvidesProperties() {
@@ -295,23 +258,11 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 		}
 	}
 
-	private function assertPropertyIdFromCorrectRepository( PropertyId $id ) {
-		$repository = $id->getRepositoryName();
-
-		Assert::parameter(
-			$repository === $this->repositoryName,
-			'$propertyId',
-			"The property id's repository name ($repository) must match the PropertyInfoTable's ($this->repositoryName)"
-		);
-	}
-
 	private function assertCanWritePropertyInfo() : void {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			if ( $this->entitySource->getDatabaseName() !== false ) {
-				throw new InvalidArgumentException(
-					'This implementation cannot be used to write data to non-local database'
-				);
-			}
+		if ( $this->entitySource->getDatabaseName() !== false ) {
+			throw new InvalidArgumentException(
+				'This implementation cannot be used to write data to non-local database'
+			);
 		}
 	}
 

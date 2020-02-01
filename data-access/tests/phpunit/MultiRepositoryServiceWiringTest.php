@@ -18,7 +18,6 @@ use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 
 /**
  * @group Wikibase
@@ -87,7 +86,6 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			[ 'EntityInfoBuilder', EntityInfoBuilder::class ],
 			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
-			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermBuffer', TermBuffer::class ],
 			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
 		];
