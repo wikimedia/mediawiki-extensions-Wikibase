@@ -20,7 +20,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -275,7 +274,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$entityTitleLookup,
 			new SqlEntityInfoBuilder(
 				$entityIdParser,
-				new EntityIdComposer( [] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new EntitySource(
@@ -522,11 +520,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$entityTitleLookup,
 			new SqlEntityInfoBuilder(
 				$entityIdParser,
-				new EntityIdComposer( [
-					'item' => function( $ignore, $idPart ) {
-						return new ItemId( 'Q' . $idPart );
-					}
-				] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
 				new EntitySource(

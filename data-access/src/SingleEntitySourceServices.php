@@ -286,7 +286,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 			$oldEntityInfoBuilder = new SqlEntityInfoBuilder(
 				$this->entityIdParser,
-				$this->entityIdComposer,
 				$entityNamespaceLookup,
 				$logger,
 				$this->entitySource,
