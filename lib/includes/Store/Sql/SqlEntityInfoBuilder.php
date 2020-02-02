@@ -7,9 +7,7 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -130,23 +128,12 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $entitySource;
 
 	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-	/**
-	 * @var string
-	 */
-	private $repositoryName;
-
-	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LoggerInterface $logger
 	 * @param EntitySource $entitySource
-	 * @param string|bool $wiki The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
-	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
+	 * @param CacheInterface $termCache
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
@@ -154,17 +141,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LoggerInterface $logger,
 		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
-		CacheInterface $termCache,
-		$wiki = false,
-		$repositoryName = ''
+		CacheInterface $termCache
 	) {
-		if ( !is_string( $wiki ) && $wiki !== false ) {
-			throw new InvalidArgumentException( '$wiki must be a string or false.' );
-		}
-		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-
-		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wiki;
+		$databaseName = $entitySource->getDatabaseName();
 
 		parent::__construct( $databaseName );
 
@@ -172,11 +151,9 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 		$this->idParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->logger = $logger;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 		$this->termCache = $termCache;
 	}
 
@@ -188,30 +165,7 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 * @return EntityId[]
 	 */
 	private function filterIrrelevantEntityIds( array $ids ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			return $this->filterEntitiesFromOtherSource( $ids );
-		}
-
-		return $this->filterForeignEntityIds( $ids );
-	}
-
-	/**
-	 * Returns a list of EntityId objects belonging to the repository configured in the constructor.
-	 * In other words, this filters out foreign entity IDs, so the builder only processes relevant
-	 * EntityIds.
-	 *
-	 * @param EntityId[] $ids
-	 * @return EntityId[]
-	 */
-	private function filterForeignEntityIds( array $ids ) {
-		$repositoryName = $this->repositoryName;
-
-		return array_filter(
-			$ids,
-			function( EntityId $id ) use ( $repositoryName ) {
-				return $id->getRepositoryName() === $repositoryName;
-			}
-		);
+		return $this->filterEntitiesFromOtherSource( $ids );
 	}
 
 	/**

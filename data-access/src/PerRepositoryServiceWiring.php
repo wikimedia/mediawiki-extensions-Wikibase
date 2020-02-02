@@ -100,10 +100,7 @@ return [
 			$entityNamespaceLookup,
 			$logger,
 			new UnusableEntitySource(),
-			$settings,
-			$cache,
-			$databaseName,
-			$repositoryName
+			$cache
 		);
 
 		$newEntityInfoBuilder = new DatabaseEntityInfoBuilder(

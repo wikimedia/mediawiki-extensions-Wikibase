@@ -290,10 +290,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$entityNamespaceLookup,
 				$logger,
 				$this->entitySource,
-				$this->settings,
-				$cache,
-				$databaseName,
-				$repositoryName
+				$cache
 			);
 
 			$newEntityInfoBuilder = new DatabaseEntityInfoBuilder(
