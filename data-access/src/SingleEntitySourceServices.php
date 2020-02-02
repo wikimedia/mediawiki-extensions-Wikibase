@@ -343,16 +343,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private function getTermIndex() {
 		if ( $this->termIndex === null ) {
-			$repositoryName = '';
-
 			$this->termIndex = new TermSqlIndex(
 				$this->genericServices->getStringNormalizer(),
 				$this->entityIdComposer,
 				$this->entityIdParser,
-				$this->entitySource,
-				$this->settings,
-				$this->entitySource->getDatabaseName(),
-				$repositoryName
+				$this->entitySource
 			);
 
 			$this->termIndex->setUseSearchFields( $this->settings->useSearchFields() );

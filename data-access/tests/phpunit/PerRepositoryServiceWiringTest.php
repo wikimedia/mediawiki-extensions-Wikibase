@@ -13,7 +13,6 @@ use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @group Wikibase
@@ -53,7 +52,6 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideServices() {
 		return [
-			[ 'TermIndex', TermIndex::class ],
 			[ 'MatchingTermsLookup', MatchingTermsLookup::class ]
 		];
 	}

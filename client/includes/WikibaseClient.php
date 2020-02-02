@@ -1691,16 +1691,12 @@ final class WikibaseClient {
 
 		$dataAccessSettings = $this->getDataAccessSettings();
 		$propertySource = $this->getPropertySource( $dataAccessSettings );
-		$propertyRepositoryName = '';
 
 		$index = new TermSqlIndex(
 			$this->getStringNormalizer(),
 			$this->getEntityIdComposer(),
 			$this->getEntityIdParser(),
-			$propertySource,
-			$dataAccessSettings,
-			$this->getDatabaseDomainForPropertySource(),
-			$propertyRepositoryName
+			$propertySource
 		);
 
 		// TODO: Are these important? Copied blindly over from DirectSqlStore::getTermIndex
