@@ -10,6 +10,9 @@
 	"wikibase-after-page-move": "သင်၏ ရွှေ့ပြောင်းမှုသည် ယခုဆိုလျှင် [$1 {{WBREPONAME}} item ထဲတွင် ရောင်ပြန်ဟပ်သင့်ပြီ]ဖြစ်သည်။ ဤကိစ္စဖြစ်ပွားခဲ့သည်ကို စစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-after-page-delete": "ဤစာမျက်နှာသို့ ချိတ်ဆက်ထားသောလင့်ခ်ကို [$1 ဆက်နွယ်သည့် {{WBREPONAME}} item] မှ ဖယ်ရှားခဲ့သင့်သည်။ ဤကိစ္စ ဖြစ်ပွားခဲ့သည်ကိုစစ်ဆေးရန် ကျွန်ုပ်တို့ တောင်းဆိုပါသည်။",
 	"wikibase-comment-update": "{{WBREPONAME}} item ပြောင်းလဲခဲ့သည်",
+	"wikibase-comment-sitelink-add": "ဘာသာစကားလင့်ခ် ပေါင်းထည့်ခဲ့သည်: $1",
+	"wikibase-comment-sitelink-change": "ဘာသာစကားလင့်ခ် $1 မှ $2 သို့ ပြောင်းလဲခဲ့သည်",
+	"wikibase-comment-sitelink-remove": "ဘာသာစကားလင့်ခ် ဖယ်ရှားခဲ့သည်: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|ပြောင်းလဲမှု|ပြောင်းလဲမှုများ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
 	"wikibase-editlinks": "လင့်ခ်များကို တည်းဖြတ်ရန်",
@@ -56,5 +59,10 @@
 	"notification-header-page-connection": "စာမျက်နှာ <strong>$3</strong> သည် အကြောင်းအရာစုစည်းနိုင်သော သက်ဆိုင်ရာ {{PLURAL:$4|-1= {{WBREPONAME}} item တစ်ခု| {{WBREPONAME}} item $4}} သို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}} ဖြစ်ပါသည်။",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> နှင့် {{PLURAL:$4|အခြားစာမျက်နှာ|$4 အခြားစာမျက်နှာများ|100=99+ အခြားစာမျက်နှာများ}}တို့သည် အကြောင်းအရာစုစည်းနိုင်သော သက်ဆိုင်ရာ {{WBREPONAME}} item များသို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}} ဖြစ်ပါသည်။",
 	"notification-subject-page-connection": "သင်{{GENDER:$3|ဖန်တီးခဲ့သော}} {{SITENAME}} ပေါ်ရှိ စာမျက်နှာသည် {{WBREPONAME}}သို့ {{GENDER:$2|ချိတ်ဆက်ထားပြီး}}ဖြစ်ပါသည်",
-	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ"
+	"connected-redirect-category": "{{WBREPONAME}} item တစ်ခုသို့ ချိတ်ဆက်ထားသော ပြန်ညွှန်းများ",
+	"wikibase-client-data-bridge-permissions-error-info": "နောက်ထပ် အသေးစိပ်များ",
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "အမည်မသိ ခွင့်ပြုချက်အမှား",
+	"wikibase-client-data-bridge-references-heading": "ရည်ညွှန်း",
+	"wikibase-client-data-bridge-bailout-heading": "ယင်းအစား အောက်ပါတို့ကို လုပ်ဆောင်နိုင်ပါသည်-",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}} တွင် တန်ဖိုးကိုပြင်ဆင်ရန်"
 }

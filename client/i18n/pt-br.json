@@ -139,5 +139,6 @@
 	"wikibase-client-data-bridge-bailout-heading": "Em vez disso, você pode fazer o seguinte:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Editar o valor em {{WBREPONAME}}. Clique no botão abaixo para editar o valor diretamente (o link é aberto em uma nova guia).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Editar o valor em {{WBREPONAME}}",
-	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Dependendo da predefinição usada, pode ser possível substituir o valor localmente usando [$1 o editor do artigo]. Se possível, recomendamos que você adicione o valor do {{WBREPONAME}} através do botão acima."
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Dependendo da predefinição usada, pode ser possível substituir o valor localmente usando [$1 o editor do artigo]. Se possível, recomendamos que você adicione o valor do {{WBREPONAME}} através do botão acima.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "A edição do valor de $1 atualmente não é suportada"
 }

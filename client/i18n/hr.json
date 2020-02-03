@@ -93,5 +93,6 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nepoznata pogrješka u dozvolama",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ispravljena je</strong> pogrješna vrijednost",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Prethodna vrijednost nikad nije bila ispravna.",
-	"wikibase-client-data-bridge-edit-decision-update-description": "Prethodna je vrijednost bila ispravna, no sad je zastarjela."
+	"wikibase-client-data-bridge-edit-decision-update-description": "Prethodna je vrijednost bila ispravna, no sad je zastarjela.",
+	"wikibase-client-data-bridge-bailout-heading": "Umjesto toga možete napraviti sljedeće:"
 }

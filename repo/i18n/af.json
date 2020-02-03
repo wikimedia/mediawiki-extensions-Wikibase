@@ -4,7 +4,8 @@
 			"Naudefj",
 			"Macofe",
 			"Fwolff",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Joris Darlington Quarshie"
 		]
 	},
 	"wikibase-desc": "Databank vir gestruktureerde data",
@@ -56,6 +57,7 @@
 	"wikibase-shortcopyrightwarning": "Deur op \"$1\" te kliek stem u tot die [[$2|voorwaardes]] in en gee u onherroeplik toestemming om die bydrae onder die \"$3\" te publiseer.",
 	"wikibase-copyrighttooltip-acknowledge": "Ek aanvaar die voorwaardes vir al my toekomstige wysigings. Moenie die boodskap weer wys nie.",
 	"wikibase-entityselector-more": "meer",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Aliasse wat pype bevat, kan slegs op die bladsy van die entiteit self (met JavaScript geaktiveer) of via die API geredigeer word",
 	"special-itembytitle": "Item volgens naam",
 	"wikibase-itembytitle-lookup-fieldset": "Items soek volgens webwerf en bladsynaam",
 	"wikibase-itembytitle-lookup-site": "Webwerf:",
@@ -123,5 +125,7 @@
 	"content-model-wikibase-property": "Wikibase-eienskap",
 	"content-model-wikibase-query": "Wikibase-soekopdrag",
 	"action-property-create": "skep eienskappe",
-	"right-property-create": "Skep eienskappe"
+	"right-property-create": "Skep eienskappe",
+	"wikibase-tainted-ref-popper-text": "Die waarde van hierdie stelling is verander, maar die verwysing het dieselfde gebly. U mag hierdie waarskuwing verwyder indien die verwysing nog steeds korrek is.",
+	"wikibase-tainted-ref-popper-remove-warning": "Verwyder die waarskuwing"
 }

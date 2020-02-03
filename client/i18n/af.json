@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Naudefj",
-			"Arnobarnard"
+			"Arnobarnard",
+			"Joris Darlington Quarshie"
 		]
 	},
 	"wikibase-client-desc": "Kliënt vir die Wikibase-uitbreiding",
@@ -64,5 +65,12 @@
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsdata",
 	"wikibase-otherprojects": "Ander projekte",
-	"notification-link-text-view-item": "{{GENDER:$1|Wys}} item"
+	"notification-link-text-view-item": "{{GENDER:$1|Wys}} item",
+	"wikibase-client-data-bridge-cascadeprotected-on-client-head": "<strong> Hierdie bladsy is tans [[Project:Cascade|cascade protected]] op hierdie wiki en kan slegs geredigeer word deur [[Project:Administrators|administrators]].</strong>",
+	"wikibase-client-data-bridge-bailout-heading": "In plaas daarvan sou u die volgende kon doen:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Wysig die waarde op {{WBREPONAME}}. Klik op die knoppie hieronder om die waarde direk te wysig (skakel word oop in 'n nuwe oortjie).",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Wysig die waarde op {{WBREPONAME}}",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Afhangend van die gebruikte sjabloon, is dit moontlik om die waarde plaaslik oor te skryf deur [$1 die artikelredakteur] te gebruik. As dit enigsins moontlik is, beveel ons aan dat u eerder die waarde by {{WBREPONAME}} voeg via die knoppie hierbo.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Die wysiging van die waarde vir $1 word tans nie ondersteun nie",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 is van die datatipe $2 op {{WBREPONAME}}. Die redigering van hierdie datatipe word tans nie ondersteun nie."
 }

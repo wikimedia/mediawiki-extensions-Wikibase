@@ -435,12 +435,13 @@
 	"wikibase-entity-save-error-heading": "Bir şeyler yanlış gitti",
 	"wikibase-entity-save-error-message": "Yaptığınız değişiklik yayınlanamadı. Yayınla düğmesini tekrar tıklamayı deneyebilirsiniz.",
 	"wikibase-tainted-ref-warning-icon-title": "Bu ifadede bazı potansiyel sorunlar var",
-	"wikibase-tainted-ref-popper-text": "Değer değişti, ancak referans aynı kaldı.",
+	"wikibase-tainted-ref-popper-text": "Bu ifadenin değeri değiştirildi, ancak referans aynı kaldı. Referansın hala doğru olması durumunda bu uyarıyı kaldırabilirsiniz.",
 	"wikibase-tainted-ref-popper-title": "Potansiyel referans/değer uyuşmazlığı",
 	"wikibase-tainted-ref-popper-help-link-title": "Bu kısıtlama türü için yardım sayfası",
 	"wikibase-tainted-ref-popper-help-link-text": "Yardım",
 	"wikibase-tainted-ref-popper-feedback-text": "Bu yeni özellik faydalı mı?",
 	"wikibase-tainted-ref-popper-feedback-link-text": "Geri bildiriminizi bırakın",
 	"wikibase-tainted-ref-popper-feedback-link-title": "Geri bildirim sayfası bağlantısı",
+	"wikibase-tainted-ref-popper-remove-warning": "Uyarıyı kaldır",
 	"wikibase-tainted-ref-tainted-icon-title": "Bu ifadenin bazı potansiyel sorunları var."
 }

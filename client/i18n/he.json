@@ -127,7 +127,7 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-repo-body": "<p><strong>למה הערך הזה מוגן?</strong></p>\n<p>הערך הזה מוכלל {{PLURAL:$1|בדף הבא, שמוגן|בדפים הבאים, שמוגנים}} בהגנה מדורגת:<p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>שם המשתמש שלך או כתובת ה־IP שלך נחסמו באתר {{WBREPONAME}}.</strong>",
 	"wikibase-client-data-bridge-blocked-on-repo-body": "<p>החסימה בוצעה על־ידי $1. הסיבה שניתנה לכך היא <em>$2</em>.</p>\n<ul>\n<li>תחילת החסימה: $8</li>\n<li>פקיעת החסימה: $6</li>\n</ul>\n<p><strong>מה ביכולתי לעשות?</strong></p>\n<p>\nבאפשרותך ליצור קשר עם $4 או עם [$9 מפעיל] אחר כדי לדון בחסימה.\nבאפשרותך להשתמש בתכונת \"{{int:emailuser}}\", אם ציינת כתובת דוא\"ל תקינה ב[[Special:Preferences|העדפות המשתמש שלך]] ולא נחסמת מהשימוש בה.\nמספר החסימה שלך הוא #$5.\nיש לציין את כל הפרטים הללו בכל פנייה לבירור החסימה.\n</p>",
-	"wikibase-client-data-bridge-cascadeprotected-on-client-head": "<strong>הדף הזה כרגע [[Project:Cascade|מוגן בהגנה מדורגת]] בוויקי הזה ורק [$2 מפעילים] יכולים לערוך אותו.</strong>",
+	"wikibase-client-data-bridge-cascadeprotected-on-client-head": "<strong>הדף הזה כרגע [[Project:Cascade|מוגן בהגנה מדורגת]] בוויקי הזה ורק [[Project:Administrators|מפעילים]] יכולים לערוך אותו.</strong>",
 	"wikibase-client-data-bridge-cascadeprotected-on-client-body": "<p><strong>למה הדף הזה מוגן?</strong></p>\n<p>הדף הזה [[Project:Transclusion||מוכלל]] {{PLURAL:$1|בדף הבא, שמוגן|בדפים הבאים, שמוגנים}} ב[[Project:Cascade|הגנה מדורגת]]:<p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-client-head": "<strong>שם המשתמש שלך או כתובת ה־IP שלך נחחסמו בוויקי הזה.</strong>",
 	"wikibase-client-data-bridge-blocked-on-client-body": "<p>החסימה בוצעה על־ידי $1. הסיבה שניתנה לכך היא <em>$2</em>.</p>\n<ul>\n<li>תחילת החסימה: $8</li>\n<li>פקיעת החסימה: $6</li>\n</ul>\n<p><strong>מה ביכולתי לעשות?</strong></p>\n<p>\nבאפשרותך ליצור קשר עם $4 או עם [[{{int:grouppage-sysop}}|מפעיל]] אחר כדי לדון בחסימה.\nבאפשרותך להשתמש בתכונת \"{{int:emailuser}}\", אם ציינת כתובת דוא\"ל תקינה ב[[Special:Preferences|העדפות המשתמש שלך]] ולא נחסמת מהשימוש בה.\nמספר החסימה שלך הוא #$5.\nיש לציין את כל הפרטים הללו בכל פנייה לבירור החסימה.\n</p>",
@@ -142,5 +142,7 @@
 	"wikibase-client-data-bridge-bailout-heading": "במקום זה אפשר לעשות את הבא:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "ערוך את הערך ב־{{WBREPONAME}}. לחץ על הכפתור שלמטה כדי לערוך את הערך ישירות (הקישור ייפתח בכרטיסייה חדשה).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "לערוף את הערך באתר {{WBREPONAME}}",
-	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "תלוי באיזו תבנית משמשת פה, יכול להיות אפשרי לדרוס את הערך באופן מקומי באמצעות [$1 עריכת דפים]. אם זה בכלל אפשרי, אנחנו ממליצים להוסיף את הערך ל{{GRAMMAR:תחילית{{WBREPONAME}}}} באמצעות הכפתור למעלה."
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "תלוי באיזו תבנית משמשת פה, יכול להיות אפשרי לדרוס את הערך באופן מקומי באמצעות [$1 עריכת דפים]. אם זה בכלל אפשרי, אנחנו ממליצים להוסיף את הערך ל{{GRAMMAR:תחילית{{WBREPONAME}}}} באמצעות הכפתור למעלה.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "עריכת הערך של $1 לא נתמכת עכשיו",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "המאפיין $1  הוא מסוג נתונים $2 ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}. עריכה של סוג הנתונים הזה אינה נתמכת עכשיו."
 }

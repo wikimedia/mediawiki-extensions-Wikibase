@@ -189,6 +189,7 @@
 	"wikibase-validator-no-such-sitelink": "Impossible de trouver un lien de site vers « $1 » en essayant de modifier les badges.",
 	"wikibase-validator-page-not-exists": "La page « $1 » n’existe pas.",
 	"wikibase-validator-not-a-language": "« $1 » n’est pas un code de langue connu.",
+	"wikibase-itemlink-userlang-wrapper": "&nbsp;($1 : $2)",
 	"wikibase-item-reference-edit-placeholder": "Saisir l’identifiant de l’élément, par ex. Q10",
 	"wikibase-item-reference-edit-invalid-format": "L’identifiant d’élément saisi a un format incorrect",
 	"wikibase-item-reference-edit-nonexistent-item": "Aucun élément n’existe avec cet identifiant",

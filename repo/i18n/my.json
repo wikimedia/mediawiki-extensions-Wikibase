@@ -76,5 +76,6 @@
 	"wikibase-dispatchstats-pos": "အနေအထား",
 	"wikibase-dispatchstats-lag-num": "ဆိုင်းငံ့နေသည်",
 	"wikibase-listproperties-submit": "ရှာပါ",
-	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်"
+	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] မှ ပြင်ဆင်မှု $3 ကို မူလအခြေအနေသို့ ပြန်လည်ရောက်ရှိစေခဲ့သည်",
+	"wikibase-tainted-ref-popper-remove-warning": "သတိပေးချက်ကို ဖယ်ရှားရန်"
 }

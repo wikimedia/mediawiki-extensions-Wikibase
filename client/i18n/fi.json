@@ -10,7 +10,8 @@
 			"Pxos",
 			"Pyscowicz",
 			"Zache",
-			"Valtlait"
+			"Valtlait",
+			"FinlandMan"
 		]
 	},
 	"wikibase-client-desc": "Wikibase-laajennuksen asiakasohjelma",
@@ -90,5 +91,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ja {{PLURAL:$4|yksi muu sivu|$4 muuta sivua|100=99+ muuta sivua}} {{GENDER:$2|yhdistettiin}} {{WBREPONAME}}-kohteisiin.",
 	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
 	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
-	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen"
+	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen",
+	"wikibase-client-data-bridge-bailout-heading": "Sen sijaan voisit tehdä seuraavasti:"
 }
