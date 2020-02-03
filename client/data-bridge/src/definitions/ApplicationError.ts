@@ -32,7 +32,7 @@ interface InvalidEntityStateError extends ApplicationErrorBase {
 	| ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE;
 }
 
-interface UnsupportedDatatypeError extends ApplicationErrorBase {
+export interface UnsupportedDatatypeError extends ApplicationErrorBase {
 	type: ErrorTypes.UNSUPPORTED_DATATYPE;
 	info: {
 		unsupportedDatatype: DataType;
