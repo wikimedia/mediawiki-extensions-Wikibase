@@ -5,6 +5,8 @@ namespace Wikibase\Lib\Store;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
+ * TODO build a cache into this thing to avoid multiple lookups of the same entity
+ *
  * @license GPL-2.0-or-later
  */
 class RedirectResolvingLatestRevisionLookup {
