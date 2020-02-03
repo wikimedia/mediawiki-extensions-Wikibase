@@ -29,13 +29,13 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 	public [ ENTITY_INIT ](
 		payload: { entity: string; revision?: number },
-	): Promise<unknown> {
+	): Promise<void> {
 		return this.store.$services.get( 'readingEntityRepository' )
 			.getEntity( payload.entity, payload.revision )
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( ENTITY_WRITE, entityRevision ) );
 	}
 
-	public [ ENTITY_SAVE ](): Promise<unknown> {
+	public [ ENTITY_SAVE ](): Promise<void> {
 		const entityRevision = new EntityRevision(
 			{
 				id: this.state.id,
@@ -51,7 +51,7 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 	public [ ENTITY_WRITE ](
 		entityRevision: EntityRevision,
-	): Promise<unknown> {
+	): Promise<void> {
 		this.commit( ENTITY_REVISION_UPDATE, entityRevision.revisionId );
 		this.commit( ENTITY_UPDATE, entityRevision.entity );
 

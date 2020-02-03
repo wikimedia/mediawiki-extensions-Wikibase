@@ -11759,6 +11759,51 @@ function _nonIterableRest() {
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
 }
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
+var promise = __webpack_require__("795b");
+var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    promise_default.a.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new promise_default.a(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
 var es6_promise = __webpack_require__("551c");
 
@@ -12658,6 +12703,7 @@ function (_Actions) {
         entityId: payload.entityId,
         statements: payload.statements
       });
+      return Promise.resolve();
     }
   }, {
     key: SNAK_SET_STRING_DATA_VALUE,
@@ -12923,6 +12969,8 @@ var entityModule = new Module({
 
 
 
+
+
 function actions_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { actions_ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { actions_ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -12989,30 +13037,54 @@ function (_Actions) {
     }
   }, {
     key: BRIDGE_INIT_WITH_REMOTE_DATA,
-    value: function value(_ref) {
-      var information = _ref.information,
-          _ref$results = _slicedToArray(_ref.results, 4),
-          wikibaseRepoConfiguration = _ref$results[0],
-          permissionErrors = _ref$results[1],
-          dataType = _ref$results[2],
-          _entityInit = _ref$results[3];
+    value: function () {
+      var _value = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(_ref) {
+        var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit, state, path;
 
-      if (permissionErrors.length) {
-        this.commit(APPLICATION_ERRORS_ADD, permissionErrors);
-        return;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                information = _ref.information, _ref$results = _slicedToArray(_ref.results, 4), wikibaseRepoConfiguration = _ref$results[0], permissionErrors = _ref$results[1], dataType = _ref$results[2], _entityInit = _ref$results[3];
+
+                if (!permissionErrors.length) {
+                  _context.next = 4;
+                  break;
+                }
+
+                this.commit(APPLICATION_ERRORS_ADD, permissionErrors);
+                return _context.abrupt("return");
+
+              case 4:
+                this.store.$services.get('tracker').trackPropertyDatatype(dataType);
+                BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, actions_objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
+                state = this.state;
+                path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
+                _context.next = 10;
+                return this.dispatch(BRIDGE_VALIDATE_ENTITY_STATE, path);
+
+              case 10:
+                if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
+                  this.commit(ORIGINAL_STATEMENT_SET, state[NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
+                  this.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+                }
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function value(_x) {
+        return _value.apply(this, arguments);
       }
 
-      this.store.$services.get('tracker').trackPropertyDatatype(dataType);
-      BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, actions_objectSpread({}, wikibaseRepoConfiguration, {}, information.client));
-      var state = this.state;
-      var path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
-      this.dispatch(BRIDGE_VALIDATE_ENTITY_STATE, path);
-
-      if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
-        this.commit(ORIGINAL_STATEMENT_SET, state[NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
-        this.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
-      }
-    }
+      return value;
+    }()
   }, {
     key: BRIDGE_REQUEST_TARGET_LABEL,
     value: function value(propertyId) {
@@ -13030,10 +13102,10 @@ function (_Actions) {
         this.commit(APPLICATION_ERRORS_ADD, [{
           type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
         }]);
-        return;
+        return Promise.resolve();
       }
 
-      this.dispatch(BRIDGE_VALIDATE_APPLICABILITY, path);
+      return this.dispatch(BRIDGE_VALIDATE_APPLICABILITY, path);
     }
   }, {
     key: BRIDGE_VALIDATE_APPLICABILITY,
@@ -13132,11 +13204,13 @@ function (_Actions) {
     key: BRIDGE_ERROR_ADD,
     value: function value(errors) {
       this.commit(APPLICATION_ERRORS_ADD, errors);
+      return Promise.resolve();
     }
   }, {
     key: BRIDGE_SET_EDIT_DECISION,
     value: function value(editDecision) {
-      return this.commit(EDITDECISION_SET, editDecision);
+      this.commit(EDITDECISION_SET, editDecision);
+      return Promise.resolve();
     }
   }]);
 
@@ -16418,51 +16492,6 @@ function () {
 }();
 
 
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
-var promise = __webpack_require__("795b");
-var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    promise_default.a.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new promise_default.a(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
 // CONCATENATED MODULE: ./src/data-access/ApiRepoConfigRepository.ts
 
 

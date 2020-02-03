@@ -23,11 +23,12 @@ StatementActions
 			entityId: EntityId;
 			statements: StatementMap;
 		},
-	): void {
+	): Promise<void> {
 		this.commit( STATEMENTS_SET, {
 			entityId: payload.entityId,
 			statements: payload.statements,
 		} );
+		return Promise.resolve();
 	}
 
 	public [ SNAK_SET_STRING_DATA_VALUE ](
