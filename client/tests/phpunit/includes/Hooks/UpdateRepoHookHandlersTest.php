@@ -129,7 +129,13 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 	 * @return Title
 	 */
 	private function getTitle() {
-		$title = $this->createMock( Title::class );
+		// get a Title mock with all methods mocked except the magics __get and __set to
+		// allow the DeprecationHelper trait methods to work and handle non-existing class variables
+		// correctly, see UpdateRepoHookHandlers.php:doArticleDeleteComplete
+		$title = $this->createPartialMock(
+			Title::class,
+			array_diff( get_class_methods( Title::class ), [ '__get', '__set' ] )
+		);
 		$title->expects( $this->any() )
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'UpdateRepoHookHandlersTest' ) );
