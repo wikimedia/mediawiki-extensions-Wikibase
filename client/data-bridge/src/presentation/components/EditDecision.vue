@@ -40,11 +40,14 @@ import Component, { mixins } from 'vue-class-component';
 } )
 export default class EditDecision extends mixins( StateMixin ) {
 
-	public get editDecision(): EditDecisionOption {
-		return this.$store.state.editDecision;
+	public get editDecision(): EditDecisionOption|null {
+		return this.rootModule.state.editDecision;
 	}
 
-	public set editDecision( value: EditDecisionOption ) {
+	public set editDecision( value: EditDecisionOption|null ) {
+		if ( value === null ) {
+			throw new Error( 'Cannot set editDecision back to null!' );
+		}
 		this.rootModule.dispatch( BRIDGE_SET_EDIT_DECISION, value );
 	}
 

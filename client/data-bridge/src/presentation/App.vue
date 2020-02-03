@@ -31,16 +31,14 @@
 </template>
 
 <script lang="ts">
-import {
-	Component,
-	Vue,
-} from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import { Component } from 'vue-property-decorator';
 import Events from '@/events';
+import StateMixin from '@/presentation/StateMixin';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import Initializing from '@/presentation/components/Initializing.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import { Action, Getter } from 'vuex-class';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import { BRIDGE_SAVE } from '@/store/actionTypes';
@@ -54,31 +52,26 @@ import { BRIDGE_SAVE } from '@/store/actionTypes';
 		ProcessDialogHeader,
 	},
 } )
-export default class App extends Vue {
-	@Getter( 'applicationStatus' )
-	public applicationStatus!: ApplicationStatus;
-
+export default class App extends mixins( StateMixin ) {
 	public get isInitializing(): boolean {
-		return this.applicationStatus === ApplicationStatus.INITIALIZING;
+		return this.rootModule.getters.applicationStatus === ApplicationStatus.INITIALIZING;
 	}
 
 	public get hasError(): boolean {
-		return this.applicationStatus === ApplicationStatus.ERROR;
+		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
 	}
 
-	@Getter( 'canSave' )
-	public canSave!: boolean;
+	public get canSave(): boolean {
+		return this.rootModule.getters.canSave;
+	}
 
 	public get publishOrSave(): string {
 		return this.$bridgeConfig.usePublish ?
 			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
-	@Action( BRIDGE_SAVE )
-	public save!: () => Promise<void>;
-
 	public saveAndClose(): void {
-		this.save()
+		this.rootModule.dispatch( BRIDGE_SAVE )
 			.then( () => {
 				this.$emit( Events.onSaved );
 			} )

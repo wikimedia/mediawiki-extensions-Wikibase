@@ -22,8 +22,8 @@ import {
 	Prop,
 	Vue,
 } from 'vue-property-decorator';
-import Component from 'vue-class-component';
-import { State } from 'vuex-class';
+import Component, { mixins } from 'vue-class-component';
+import StateMixin from '@/presentation/StateMixin';
 import ErrorPermissionInfo from '@/presentation/components/ErrorPermissionInfo.vue';
 import PageList from '@/presentation/components/PageList.vue';
 import UserLink from '@/presentation/components/UserLink.vue';
@@ -78,11 +78,13 @@ const permissionTypeRenderers: PermissionTypeMessageRenderers = {
 	},
 } )
 
-export default class ErrorPermission extends Vue {
+export default class ErrorPermission extends mixins( StateMixin ) {
 	@Prop( { required: true } )
 	private readonly permissionErrors!: MissingPermissionsError[];
-	@State( 'entityTitle' )
-	public entityTitle!: string;
+
+	public get entityTitle(): string {
+		return this.rootModule.state.entityTitle;
+	}
 
 	public getMessageHeader( permissionError: MissingPermissionsError ): string {
 		return this.$messages.get(

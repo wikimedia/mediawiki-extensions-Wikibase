@@ -21,18 +21,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
+import StateMixin from '@/presentation/StateMixin';
 import SingleReferenceDisplay from '@/presentation/components/SingleReferenceDisplay.vue';
 import Reference from '@/datamodel/Reference';
-import { Getter } from 'vuex-class';
 
 @Component( {
 	components: { SingleReferenceDisplay },
 } )
-export default class ReferenceSection extends Vue {
-	@Getter( 'targetReferences' )
-	public targetReferences!: Reference[];
+export default class ReferenceSection extends mixins( StateMixin ) {
+	public get targetReferences(): Reference[] {
+		return this.rootModule.getters.targetReferences;
+	}
 }
 </script>
 
