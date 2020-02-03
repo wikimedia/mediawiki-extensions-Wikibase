@@ -175,17 +175,17 @@ RootActions
 
 	public [ BRIDGE_VALIDATE_APPLICABILITY ](
 		path: MainSnakPath,
-	): void {
+	): Promise<void> {
 		if (
 			this.statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ]( path.entityId, path.propertyId ) === true
 		) {
-			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
+			return this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
 		}
 
 		if (
 			this.statementModule.getters[ SNAK_SNAKTYPE ]( path ) !== 'value'
 		) {
-			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ] );
+			return this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ] );
 		}
 
 		const datatype = this.statementModule.getters[ SNAK_DATATYPE ]( path );
@@ -200,14 +200,16 @@ RootActions
 					supportedDatatypes: [ 'string' ],
 				},
 			};
-			this.dispatch( BRIDGE_ERROR_ADD, [ error ] );
+			return this.dispatch( BRIDGE_ERROR_ADD, [ error ] );
 		}
 
 		if (
 			this.statementModule.getters[ SNAK_DATAVALUETYPE ]( path ) !== 'string'
 		) {
-			this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ] );
+			return this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ] );
 		}
+
+		return Promise.resolve();
 	}
 
 	public [ BRIDGE_SET_TARGET_VALUE ](

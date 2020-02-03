@@ -713,6 +713,28 @@ describe( 'root/actions', () => {
 				[ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ],
 			);
 		} );
+
+		it( 'dispatches single error for multiple problems', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ STATEMENTS_IS_AMBIGUOUS ].mockReturnValueOnce( true );
+			statementModule.getters[ SNAK_SNAKTYPE ].mockReturnValueOnce( 'novalue' );
+			statementModule.getters[ SNAK_DATATYPE ].mockReturnValueOnce( 'url' );
+			statementModule.getters[ SNAK_DATAVALUETYPE ].mockReturnValueOnce( 'number' );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledTimes( 1 );
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ],
+			);
+		} );
 	} );
 
 	describe( `${BRIDGE_SET_TARGET_VALUE}`, () => {
