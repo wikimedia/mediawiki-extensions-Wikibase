@@ -406,9 +406,6 @@ class EntityDataSerializationService {
 		// function gets called multiple times during testing, etc.
 		$res->reset();
 
-		// Translating $this->serializeEmptyListsAsObjects to addMetadata
-		// This is a hack to put hidden elements into containers to let json serializer know it's an associative array
-		// so it would output {} instead of [] in case of empty containers
 		$resultBuilder = new ResultBuilder(
 			$res,
 			$this->entityTitleLookup,
@@ -416,6 +413,8 @@ class EntityDataSerializationService {
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->propertyLookup,
+			// add metadata if this is true, to let ApiResult know it's an associative array, so
+			// that the json serializer will output {} instead of [] in case of empty containers
 			$this->serializeEmptyListsAsObjects
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision );
