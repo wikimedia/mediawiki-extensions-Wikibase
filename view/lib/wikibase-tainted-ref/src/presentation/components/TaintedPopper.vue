@@ -135,7 +135,8 @@ export default class TaintedPopper extends Vue {
 		border: solid 1px $border-color;
 		border-radius: 2px;
 		background: $background-color-light-grey;
-		padding: 4px 16px 4px 16px;
+		padding: 4px 12px 4px 12px;
+		line-height: 22px;
 	}
 
 	.wb-tr-popper-remove-warning:hover {
