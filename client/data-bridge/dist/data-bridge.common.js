@@ -13050,10 +13050,21 @@ function (_Actions) {
         }]);
       }
 
-      if (this.statementModule.getters[SNAK_DATATYPE](path) !== 'string') {
-        this.dispatch(BRIDGE_ERROR_ADD, [{
-          type: ErrorTypes.UNSUPPORTED_DATATYPE
-        }]);
+      var datatype = this.statementModule.getters[SNAK_DATATYPE](path);
+
+      if (datatype === null) {
+        throw new Error('If snak is missing, there should have been an error earlier');
+      }
+
+      if (datatype !== 'string') {
+        var error = {
+          type: ErrorTypes.UNSUPPORTED_DATATYPE,
+          info: {
+            unsupportedDatatype: datatype,
+            supportedDatatypes: ['string']
+          }
+        };
+        this.dispatch(BRIDGE_ERROR_ADD, [error]);
       }
 
       if (this.statementModule.getters[SNAK_DATAVALUETYPE](path) !== 'string') {

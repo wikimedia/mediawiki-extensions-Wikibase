@@ -1,3 +1,4 @@
+import DataType from '@/datamodel/DataType';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 
 export enum ErrorTypes {
@@ -26,14 +27,25 @@ interface InvalidEntityStateError extends ApplicationErrorBase {
 	type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
 	| ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
 	| ErrorTypes.UNSUPPORTED_SNAK_TYPE
-	| ErrorTypes.UNSUPPORTED_DATATYPE
 	| ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE;
+}
+
+interface UnsupportedDatatypeError extends ApplicationErrorBase {
+	type: ErrorTypes.UNSUPPORTED_DATATYPE;
+	info: {
+		unsupportedDatatype: DataType;
+		supportedDatatypes: DataType[];
+	};
 }
 
 interface SavingFailedError extends ApplicationErrorBase {
 	type: ErrorTypes.SAVING_FAILED;
 }
 
-type ApplicationError = MissingPermissionsError|ApplicationLogicError|InvalidEntityStateError|SavingFailedError;
+type ApplicationError = MissingPermissionsError
+| ApplicationLogicError
+| InvalidEntityStateError
+| UnsupportedDatatypeError
+| SavingFailedError;
 
 export default ApplicationError;

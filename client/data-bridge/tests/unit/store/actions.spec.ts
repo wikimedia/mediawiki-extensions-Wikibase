@@ -686,7 +686,13 @@ describe( 'root/actions', () => {
 
 			expect( dispatch ).toHaveBeenCalledWith(
 				BRIDGE_ERROR_ADD,
-				[ { type: ErrorTypes.UNSUPPORTED_DATATYPE } ],
+				[ {
+					type: ErrorTypes.UNSUPPORTED_DATATYPE,
+					info: {
+						unsupportedDatatype: 'url',
+						supportedDatatypes: [ 'string' ],
+					},
+				} ],
 			);
 		} );
 
