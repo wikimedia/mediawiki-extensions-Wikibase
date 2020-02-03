@@ -30,6 +30,8 @@ enum MessageKeys {
 	BAILOUT_SUGGESTION_GO_TO_REPO = 'wikibase-client-data-bridge-bailout-suggestion-go-to-repo',
 	BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON = 'wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button',
 	BAILOUT_SUGGESTION_EDIT_ARTICLE = 'wikibase-client-data-bridge-bailout-suggestion-edit-article',
+	UNSUPPORTED_DATATYPE_ERROR_HEAD = 'wikibase-client-data-bridge-unsupported-datatype-error-head',
+	UNSUPPORTED_DATATYPE_ERROR_BODY = 'wikibase-client-data-bridge-unsupported-datatype-error-body',
 }
 
 export default MessageKeys;
