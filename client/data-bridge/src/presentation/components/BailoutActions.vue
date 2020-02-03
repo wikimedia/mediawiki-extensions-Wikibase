@@ -15,9 +15,10 @@
 					:prevent-default="false"
 				/>
 			</li>
-			<li class="wb-db-bailout-actions__suggestion">
-				{{ $messages.get( $messages.KEYS.BAILOUT_SUGGESTION_EDIT_ARTICLE, editArticleUrl ) }}
-			</li>
+			<li
+				class="wb-db-bailout-actions__suggestion"
+				v-html="$messages.get( $messages.KEYS.BAILOUT_SUGGESTION_EDIT_ARTICLE, editArticleUrl )"
+			/>
 		</ul>
 	</div>
 </template>
