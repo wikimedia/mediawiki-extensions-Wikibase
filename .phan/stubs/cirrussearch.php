@@ -24,7 +24,7 @@ namespace Elastica {
 		public function search($query = '', $options = null) {
 		}
 	}
-	class Param implements ArrayableInterface, \Countable {
+	class Param implements ArrayableInterface {
 		/**
 		 * @param string $key
 		 * @param mixed $value
@@ -75,6 +75,34 @@ namespace Elastica\Query {
 
 	abstract class AbstractQuery extends Param {
 	}
+
+	class BoolQuery extends AbstractQuery {
+		/**
+		 * @param AbstractQuery|array $args Must query
+		 *
+		 * @returns self
+		 */
+		public function addMust($args) {
+		}
+
+		/**
+		 * @param AbstractQuery $args Filter object
+		 *
+		 * @returns self
+		 */
+		public function addFilter($filter) {
+		}
+	}
+
+	class Exists extends AbstractQuery {
+		public function __construct($field) {
+		}
+	}
+
+	class Terms extends AbstractQuery {
+		public function __construct(string  $key = '', array  $terms = array()) {
+		}
+	}
 }
 
 namespace Elastica\Exception {
@@ -83,6 +111,8 @@ namespace Elastica\Exception {
 	}
 	class InvalidException extends \InvalidArgumentException implements ExceptionInterface {
 
+	}
+	class NotFoundException extends \RuntimeException implements ExceptionInterface {
 	}
 }
 
