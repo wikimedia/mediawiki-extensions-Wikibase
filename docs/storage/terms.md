@@ -8,7 +8,7 @@ The alternative to secondary storage would be loading each of the full entities 
 The code for the storage lives in the [Wikibase\Lib\Store\Sql\Terms] namespace.
 
 Writing to the secondary storage happens through a deferred update after each edit on entities. This is to make saving edits faster and more atomic which also means reducing the failure rate of saving edits. As the result, secondary storage might not be always completely in sync with the actual terms stored in the primary storage.
- 
+
 Briefly in code:
  - ItemTermStore and PropertyTermStore are the interfaces at the bottom of the term storage tree.
    - These interfaces are provided by the `term-store` [vendor component]
@@ -16,7 +16,7 @@ Briefly in code:
  - [EntityTermStoreWriter] joins these stores in an interface that can generically save either Item or Property terms.
  - [EntityHandler] takes a [EntityTermStoreWriter] which is used in a few data updates relating to saving and deleting entities.
 
-The storage system is currently decided using the `tmpItemTermsMigrationStages` and `tmpPropertyTermsMigrationStages` repo settings.
+The storage system is currently decided using the `tmpItemTermsMigrationStages` and `tmpPropertyTermsMigrationStage` repo settings.
 
 ### Legacy Secondary Storage
 
@@ -60,10 +60,10 @@ See sections below for more details on how Reading and Updating work.
 
 #### Read queries
 
-* Lookup of the terms of an entity can be achieved by starting with the [wbt_item_terms] or [wbt_property_terms] tables where you will find integer representations of Item and Property identifiers.
-* Lookup of entities from a term string can be achieved by starting with the [wbt_text] table which contains the text for all terms or all types for both Items and Properties.
+**Lookup terms of an entity**
 
-Checking data for these tables involves lots of joins.
+Lookup of the terms of an entity can be achieved by starting with the [wbt_item_terms] or [wbt_property_terms] tables where you will find integer representations of Item and Property identifiers.
+
 The below query selects all terms in the tables for item Q123 and can be used as a starting point for data exploration:
 
 ```sql
@@ -80,14 +80,65 @@ LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
 WHERE wbit_item_id = 123;
 ```
 
-In order to query properties change:
- - wbit_item_id -> wbpt_property_id (in 2 places)
- - wbt_item_terms -> wbt_property_terms
+For properties you can do something like:
+
+```sql
+SELECT
+  wbpt_property_id as id,
+  wby_name as type,
+  wbxl_language as language,
+  wbx_text as text
+FROM wbt_property_terms
+LEFT JOIN wbt_term_in_lang ON wbpt_term_in_lang_id = wbtl_id
+LEFT JOIN wbt_type ON wbtl_type_id = wby_id
+LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
+LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
+WHERE wbpt_property_id = 10;
+```
+
+**Lookup all entities that use a certain term**
+
+Lookup of entities from a term string can be achieved by starting with the [wbt_text] table which contains the text for all terms or all types for both Items and Properties.
+
+```sql
+SELECT
+  wbit_item_id as id,
+  wby_name as type,
+  wbxl_language as language,
+  wbx_text as text
+FROM wbt_item_terms
+LEFT JOIN wbt_term_in_lang ON wbit_term_in_lang_id = wbtl_id
+LEFT JOIN wbt_type ON wbtl_type_id = wby_id
+LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
+LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
+WHERE wby_name = 'label'
+AND wbxl_language = 'en'
+AND wbx_text = 'Berlin';
+```
+
+For properties you can do something like:
+
+```sql
+SELECT
+  wbpt_property_id as id,
+  wby_name as type,
+  wbxl_language as language,
+  wbx_text as text
+FROM wbt_property_terms
+LEFT JOIN wbt_term_in_lang ON wbpt_term_in_lang_id = wbtl_id
+LEFT JOIN wbt_type ON wbtl_type_id = wby_id
+LEFT JOIN wbt_text_in_lang ON wbtl_text_in_lang_id = wbxl_id
+LEFT JOIN wbt_text ON wbxl_text_id = wbx_id
+WHERE wby_name = 'label'
+AND wbxl_language = 'en'
+AND wbx_text = 'instance of';
+```
 
 #### Updating
 
 Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_property_terms` tables is done in [DatabaseItemTermStore] and [DatabasePropertyTermStore].
 
+ - Term secondary storage is currently written to after edits are saved in MediaWiki's "Secondary data updates". See [EntityHandler::getEntityModificationUpdates()] and implementations.
  - When term changes happen a series of ID acquisitions occur in [DatabaseTermIdsAcquirer]. (Finding IDs that already exist in the storage that will be needed for future inserts)
  - When new terms are being introduced rows that do not appear in the acquisition will be inserted.
  - When term changes result in some terms no longer being used across the whole store they will be deleted throughout the normalized tables via [DatabaseTermIdsCleaner]
@@ -101,6 +152,7 @@ Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_prop
 [wbt_text]: @ref md_docs_sql_wbt_text
 [wbt_type]: @ref md_docs_sql_wbt_type
 [EntityHandler]: @ref Wikibase::Repo::Content::EntityHandler
+[EntityHandler::getEntityModificationUpdates()]: @ref Wikibase::Repo::Content::EntityHandler::getEntityModificationUpdates()
 [EntityTermStoreWriter]: @ref Wikibase::Lib::Store::EntityTermStoreWriter
 [DatabaseItemTermStore]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseItemTermStore
 [DatabasePropertyTermStore]: @ref Wikibase::Lib::Store::Sql::Terms::DatabasePropertyTermStore
