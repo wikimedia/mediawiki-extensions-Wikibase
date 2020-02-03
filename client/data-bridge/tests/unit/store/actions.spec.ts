@@ -20,6 +20,7 @@ import {
 	ENTITY_SAVE,
 } from '@/store/entity/actionTypes';
 import {
+	STATEMENT_RANK,
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/statements/getterTypes';
@@ -609,6 +610,7 @@ describe( 'root/actions', () => {
 		const statementModule = {
 			getters: {
 				[ STATEMENTS_IS_AMBIGUOUS ]: jest.fn().mockReturnValue( false ),
+				[ STATEMENT_RANK ]: jest.fn().mockReturnValue( 'normal' ),
 				[ SNAK_SNAKTYPE ]: jest.fn().mockReturnValue( 'value' ),
 				[ SNAK_DATATYPE ]: jest.fn().mockReturnValue( 'string' ),
 				[ SNAK_DATAVALUETYPE ]: jest.fn().mockReturnValue( 'string' ),
@@ -651,6 +653,24 @@ describe( 'root/actions', () => {
 				[ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ],
 			);
 
+		} );
+
+		it( 'dispatches error on deprecated statement', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				dispatch,
+			} );
+
+			statementModule.getters[ STATEMENT_RANK ].mockReturnValueOnce( 'deprecated' );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+			actions[ BRIDGE_VALIDATE_APPLICABILITY ]( new MainSnakPath( 'Q42', 'P42', 0 ) );
+
+			expect( dispatch ).toHaveBeenCalledWith(
+				BRIDGE_ERROR_ADD,
+				[ { type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT } ],
+			);
 		} );
 
 		it( 'dispatches error for non-value snak types', () => {

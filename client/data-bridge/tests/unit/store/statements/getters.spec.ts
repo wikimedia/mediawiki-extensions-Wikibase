@@ -1,10 +1,12 @@
 import StatementMap from '@/datamodel/StatementMap';
 import Snak from '@/datamodel/Snak';
 import {
+	STATEMENT_RANK,
 	STATEMENTS_CONTAINS_ENTITY,
 	STATEMENTS_IS_AMBIGUOUS,
 	STATEMENTS_PROPERTY_EXISTS,
 } from '@/store/statements/getterTypes';
+import { PathToStatement } from '@/store/statements/PathToStatement';
 import { inject } from 'vuex-smart-module';
 import { StatementGetters } from '@/store/statements/getters';
 import newStatementState from './newStatementState';
@@ -91,6 +93,42 @@ describe( 'statements/Getters', () => {
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( entityId, 'P42' ) ).toBe( false );
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( entityId, 'P21' ) ).toBe( false );
 		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( `${entityId}0`, 'P23' ) ).toBe( false );
+	} );
+
+	describe( 'getters for statements', () => {
+		describe( 'rank', () => {
+			it( 'has a rank', () => {
+				const returnStatement = {
+					rank: 'normal',
+				};
+
+				const mockState = newStatementState();
+				const getters = inject( StatementGetters, {
+					state: mockState,
+				} );
+
+				const mockStatementPath: PathToStatement = {
+					resolveStatement: jest.fn().mockReturnValue( returnStatement ),
+				};
+
+				expect( getters[ STATEMENT_RANK ]( mockStatementPath ) ).toBe( returnStatement.rank );
+				expect( mockStatementPath.resolveStatement ).toHaveBeenCalledWith( mockState );
+			} );
+
+			it( 'returns null if statement was not found', () => {
+				const mockState = newStatementState();
+				const getters = inject( StatementGetters, {
+					state: mockState,
+				} );
+
+				const mockStatementPath: PathToStatement = {
+					resolveStatement: jest.fn().mockReturnValue( null ),
+				};
+
+				expect( getters[ STATEMENT_RANK ]( mockStatementPath ) ).toBeNull();
+				expect( mockStatementPath.resolveStatement ).toHaveBeenCalledWith( mockState );
+			} );
+		} );
 	} );
 
 	describe( 'getters for snaks', () => {
