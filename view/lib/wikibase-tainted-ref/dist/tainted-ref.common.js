@@ -5048,32 +5048,32 @@ var SET_STATEMENT_EDIT_FALSE = 'setStatementEditFalse';
 function actions(metricTracker) {
   var _ref;
 
-  return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, payload) {
-    context.commit(SET_ALL_UNTAINTED, payload);
-    context.commit(SET_ALL_POPPERS_HIDDEN, payload);
-    context.commit(SET_ALL_EDIT_MODE_FALSE, payload);
-  }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, payload) {
-    context.commit(SET_UNTAINTED, payload);
-    context.commit(SET_POPPER_HIDDEN, payload);
-  }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, payload) {
-    context.commit(SET_TAINTED, payload);
-  }), _defineProperty(_ref, START_EDIT, function (context, payload) {
-    context.commit(SET_STATEMENT_EDIT_TRUE, payload);
-    context.commit(SET_POPPER_HIDDEN, payload);
+  return _ref = {}, _defineProperty(_ref, STORE_INIT, function (context, guids) {
+    context.commit(SET_ALL_UNTAINTED, guids);
+    context.commit(SET_ALL_POPPERS_HIDDEN, guids);
+    context.commit(SET_ALL_EDIT_MODE_FALSE, guids);
+  }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_UNTAINT, function (context, guid) {
+    context.commit(SET_UNTAINTED, guid);
+    context.commit(SET_POPPER_HIDDEN, guid);
+  }), _defineProperty(_ref, STATEMENT_TAINTED_STATE_TAINT, function (context, guid) {
+    context.commit(SET_TAINTED, guid);
+  }), _defineProperty(_ref, START_EDIT, function (context, guid) {
+    context.commit(SET_STATEMENT_EDIT_TRUE, guid);
+    context.commit(SET_POPPER_HIDDEN, guid);
 
-    if (context.getters.statementsTaintedState(payload)) {
+    if (context.getters.statementsTaintedState(guid)) {
       metricTracker('counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon', 1);
     }
-  }), _defineProperty(_ref, STOP_EDIT, function (context, payload) {
-    context.commit(SET_STATEMENT_EDIT_FALSE, payload);
-  }), _defineProperty(_ref, POPPER_HIDE, function (context, payload) {
-    context.commit(SET_POPPER_HIDDEN, payload);
-  }), _defineProperty(_ref, POPPER_SHOW, function (context, payload) {
-    context.commit(SET_POPPER_VISIBLE, payload);
-  }), _defineProperty(_ref, HELP_LINK_SET, function (context, payload) {
-    context.commit(SET_HELP_LINK, payload);
-  }), _defineProperty(_ref, FEEDBACK_LINK_SET, function (context, payload) {
-    context.commit(SET_FEEDBACK_LINK, payload);
+  }), _defineProperty(_ref, STOP_EDIT, function (context, guid) {
+    context.commit(SET_STATEMENT_EDIT_FALSE, guid);
+  }), _defineProperty(_ref, POPPER_HIDE, function (context, guid) {
+    context.commit(SET_POPPER_HIDDEN, guid);
+  }), _defineProperty(_ref, POPPER_SHOW, function (context, guid) {
+    context.commit(SET_POPPER_VISIBLE, guid);
+  }), _defineProperty(_ref, HELP_LINK_SET, function (context, url) {
+    context.commit(SET_HELP_LINK, url);
+  }), _defineProperty(_ref, FEEDBACK_LINK_SET, function (context, url) {
+    context.commit(SET_FEEDBACK_LINK, url);
   }), _ref;
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -5084,34 +5084,34 @@ var _mutations;
 
 
 
-var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED, function (state, payload) {
-  payload.forEach(function (guid) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED, function (state, guids) {
+  guids.forEach(function (guid) {
     external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsTaintedState, guid, false);
   });
-}), _defineProperty(_mutations, SET_ALL_POPPERS_HIDDEN, function (state, payload) {
-  payload.forEach(function (guid) {
+}), _defineProperty(_mutations, SET_ALL_POPPERS_HIDDEN, function (state, guids) {
+  guids.forEach(function (guid) {
     external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsPopperIsOpen, guid, false);
   });
-}), _defineProperty(_mutations, SET_ALL_EDIT_MODE_FALSE, function (state, payload) {
-  payload.forEach(function (guid) {
+}), _defineProperty(_mutations, SET_ALL_EDIT_MODE_FALSE, function (state, guids) {
+  guids.forEach(function (guid) {
     external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(state.statementsEditState, guid, false);
   });
-}), _defineProperty(_mutations, SET_TAINTED, function (state, payload) {
-  state.statementsTaintedState[payload] = true;
-}), _defineProperty(_mutations, SET_UNTAINTED, function (state, payload) {
-  state.statementsTaintedState[payload] = false;
-}), _defineProperty(_mutations, SET_STATEMENT_EDIT_TRUE, function (state, payload) {
-  state.statementsEditState[payload] = true;
-}), _defineProperty(_mutations, SET_STATEMENT_EDIT_FALSE, function (state, payload) {
-  state.statementsEditState[payload] = false;
-}), _defineProperty(_mutations, SET_POPPER_HIDDEN, function (state, payload) {
-  state.statementsPopperIsOpen[payload] = false;
-}), _defineProperty(_mutations, SET_POPPER_VISIBLE, function (state, payload) {
-  state.statementsPopperIsOpen[payload] = true;
-}), _defineProperty(_mutations, SET_HELP_LINK, function (state, payload) {
-  state.helpLink = payload;
-}), _defineProperty(_mutations, SET_FEEDBACK_LINK, function (state, payload) {
-  state.feedbackLink = payload;
+}), _defineProperty(_mutations, SET_TAINTED, function (state, guid) {
+  state.statementsTaintedState[guid] = true;
+}), _defineProperty(_mutations, SET_UNTAINTED, function (state, guid) {
+  state.statementsTaintedState[guid] = false;
+}), _defineProperty(_mutations, SET_STATEMENT_EDIT_TRUE, function (state, guid) {
+  state.statementsEditState[guid] = true;
+}), _defineProperty(_mutations, SET_STATEMENT_EDIT_FALSE, function (state, guid) {
+  state.statementsEditState[guid] = false;
+}), _defineProperty(_mutations, SET_POPPER_HIDDEN, function (state, guid) {
+  state.statementsPopperIsOpen[guid] = false;
+}), _defineProperty(_mutations, SET_POPPER_VISIBLE, function (state, guid) {
+  state.statementsPopperIsOpen[guid] = true;
+}), _defineProperty(_mutations, SET_HELP_LINK, function (state, url) {
+  state.helpLink = url;
+}), _defineProperty(_mutations, SET_FEEDBACK_LINK, function (state, url) {
+  state.feedbackLink = url;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/getters.ts
 var getters = {

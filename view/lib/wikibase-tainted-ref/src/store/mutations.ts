@@ -18,74 +18,74 @@ import Application from '@/store/Application';
 export const mutations: MutationTree<Application> = {
 	[ SET_ALL_UNTAINTED ](
 		state: Application,
-		payload: string[],
+		guids: string[],
 	): void {
-		payload.forEach( ( guid ) => {
+		guids.forEach( ( guid ) => {
 			Vue.set( state.statementsTaintedState, guid, false );
 		} );
 	},
 	[ SET_ALL_POPPERS_HIDDEN ](
 		state: Application,
-		payload: string[],
+		guids: string[],
 	): void {
-		payload.forEach( ( guid ) => {
+		guids.forEach( ( guid ) => {
 			Vue.set( state.statementsPopperIsOpen, guid, false );
 		} );
 	},
 	[ SET_ALL_EDIT_MODE_FALSE ](
 		state: Application,
-		payload: string[],
+		guids: string[],
 	): void {
-		payload.forEach( ( guid ) => {
+		guids.forEach( ( guid ) => {
 			Vue.set( state.statementsEditState, guid, false );
 		} );
 	},
 	[ SET_TAINTED ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsTaintedState[ payload ] = true;
+		state.statementsTaintedState[ guid ] = true;
 	},
 	[ SET_UNTAINTED ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsTaintedState[ payload ] = false;
+		state.statementsTaintedState[ guid ] = false;
 	},
 	[ SET_STATEMENT_EDIT_TRUE ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsEditState[ payload ] = true;
+		state.statementsEditState[ guid ] = true;
 	},
 	[ SET_STATEMENT_EDIT_FALSE ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsEditState[ payload ] = false;
+		state.statementsEditState[ guid ] = false;
 	},
 	[ SET_POPPER_HIDDEN ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsPopperIsOpen[ payload ] = false;
+		state.statementsPopperIsOpen[ guid ] = false;
 	},
 	[ SET_POPPER_VISIBLE ](
 		state: Application,
-		payload: string,
+		guid: string,
 	): void {
-		state.statementsPopperIsOpen[ payload ] = true;
+		state.statementsPopperIsOpen[ guid ] = true;
 	},
 	[ SET_HELP_LINK ](
 		state: Application,
-		payload: string,
+		url: string,
 	): void {
-		state.helpLink = payload;
+		state.helpLink = url;
 	},
 	[ SET_FEEDBACK_LINK ](
 		state: Application,
-		payload: string,
+		url: string,
 	): void {
-		state.feedbackLink = payload;
+		state.feedbackLink = url;
 	},
 };

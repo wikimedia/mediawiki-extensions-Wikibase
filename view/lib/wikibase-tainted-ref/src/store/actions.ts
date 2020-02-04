@@ -27,64 +27,64 @@ export default function actions( metricTracker: TrackFunction ): ActionTree<Appl
 	return {
 		[ STORE_INIT ](
 			context: ActionContext<Application, Application>,
-			payload: string[],
+			guids: string[],
 		): void {
-			context.commit( SET_ALL_UNTAINTED, payload );
-			context.commit( SET_ALL_POPPERS_HIDDEN, payload );
-			context.commit( SET_ALL_EDIT_MODE_FALSE, payload );
+			context.commit( SET_ALL_UNTAINTED, guids );
+			context.commit( SET_ALL_POPPERS_HIDDEN, guids );
+			context.commit( SET_ALL_EDIT_MODE_FALSE, guids );
 		},
 		[ STATEMENT_TAINTED_STATE_UNTAINT ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_UNTAINTED, payload );
-			context.commit( SET_POPPER_HIDDEN, payload );
+			context.commit( SET_UNTAINTED, guid );
+			context.commit( SET_POPPER_HIDDEN, guid );
 		},
 		[ STATEMENT_TAINTED_STATE_TAINT ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_TAINTED, payload );
+			context.commit( SET_TAINTED, guid );
 		},
 		[ START_EDIT ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_STATEMENT_EDIT_TRUE, payload );
-			context.commit( SET_POPPER_HIDDEN, payload );
-			if ( context.getters.statementsTaintedState( payload ) ) {
+			context.commit( SET_STATEMENT_EDIT_TRUE, guid );
+			context.commit( SET_POPPER_HIDDEN, guid );
+			if ( context.getters.statementsTaintedState( guid ) ) {
 				metricTracker( 'counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon', 1 );
 			}
 		},
 		[ STOP_EDIT ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_STATEMENT_EDIT_FALSE, payload );
+			context.commit( SET_STATEMENT_EDIT_FALSE, guid );
 		},
 		[ POPPER_HIDE ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_POPPER_HIDDEN, payload );
+			context.commit( SET_POPPER_HIDDEN, guid );
 		},
 		[ POPPER_SHOW ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			guid: string,
 		): void {
-			context.commit( SET_POPPER_VISIBLE, payload );
+			context.commit( SET_POPPER_VISIBLE, guid );
 		},
 		[ HELP_LINK_SET ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			url: string,
 		): void {
-			context.commit( SET_HELP_LINK, payload );
+			context.commit( SET_HELP_LINK, url );
 		},
 		[ FEEDBACK_LINK_SET ](
 			context: ActionContext<Application, Application>,
-			payload: string,
+			url: string,
 		): void {
-			context.commit( SET_FEEDBACK_LINK, payload );
+			context.commit( SET_FEEDBACK_LINK, url );
 		},
 
 	};
