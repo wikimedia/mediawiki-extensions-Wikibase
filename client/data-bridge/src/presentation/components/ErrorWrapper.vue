@@ -4,6 +4,10 @@
 			v-if="permissionErrors.length"
 			:permission-errors="permissionErrors"
 		/>
+		<ErrorUnsupportedDatatype
+			v-else-if="unsupportedDatatypeError !== null"
+			:data-type="unsupportedDatatypeError.info.unsupportedDatatype"
+		/>
 		<ErrorUnknown v-else />
 	</section>
 </template>
@@ -14,19 +18,39 @@ import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-acc
 import StateMixin from '@/presentation/StateMixin';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
-import ApplicationError from '@/definitions/ApplicationError';
+import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
+import ApplicationError, {
+	ErrorTypes,
+	UnsupportedDatatypeError,
+} from '@/definitions/ApplicationError';
 
 @Component( {
-	components: { ErrorPermission, ErrorUnknown },
+	components: {
+		ErrorPermission,
+		ErrorUnknown,
+		ErrorUnsupportedDatatype,
+	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
+	public get applicationErrors(): ApplicationError[] {
+		return this.rootModule.state.applicationErrors;
+	}
+
 	public get permissionErrors(): MissingPermissionsError[] {
-		return this.rootModule.state.applicationErrors
-			.filter( this.isPermissionError );
+		return this.applicationErrors.filter( this.isPermissionError );
 	}
 
 	private isPermissionError( error: ApplicationError ): error is MissingPermissionsError {
 		return ( Object.values( PageNotEditable ) as string[] ).includes( error.type );
+	}
+
+	public get unsupportedDatatypeError(): UnsupportedDatatypeError|null {
+		for ( const applicationError of this.applicationErrors ) {
+			if ( applicationError.type === ErrorTypes.UNSUPPORTED_DATATYPE ) {
+				return applicationError;
+			}
+		}
+		return null;
 	}
 }
 </script>

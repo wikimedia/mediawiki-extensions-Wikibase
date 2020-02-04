@@ -8,7 +8,8 @@ import {
 } from '@/definitions/data-access/BridgePermissionsRepository';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
-import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
+import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
+import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
@@ -26,7 +27,7 @@ describe( 'ErrorWrapper', () => {
 		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
 	} );
 
-	it( 'mounts ErrorUnknown for exclusively non-permission-related errors', () => {
+	it( 'mounts ErrorUnknown for exclusively non-permission-related or data type related errors', () => {
 		const store = createTestStore( {
 			state: {
 				applicationErrors: [
@@ -87,6 +88,12 @@ describe( 'ErrorWrapper', () => {
 			{
 				type: ErrorTypes.INVALID_ENTITY_STATE_ERROR,
 			},
+			{
+				type: ErrorTypes.UNSUPPORTED_DATATYPE,
+				info: {
+					unsupportedDatatype: 'time',
+				},
+			} as UnsupportedDatatypeError,
 		];
 		const store = createTestStore( {
 			state: {
@@ -102,5 +109,23 @@ describe( 'ErrorWrapper', () => {
 		expect( permissionErrorComponent.exists() ).toBeTruthy();
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( permissionErrors );
 		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
+	} );
+	// eslint-disable-next-line max-len
+	it( 'mounts ErrorUnsupportedDatatype when an unsupported data type error is present in the application errors', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.UNSUPPORTED_DATATYPE,
+				info: {
+					unsupportedDatatype: 'time',
+				},
+			} as UnsupportedDatatypeError,
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		expect( wrapper.find( ErrorUnsupportedDatatype ).exists() ).toBeTruthy();
 	} );
 } );
