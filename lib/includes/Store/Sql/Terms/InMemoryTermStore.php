@@ -5,12 +5,12 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 /**
  * @license GPL-2.0-or-later
  */
-class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsCleaner {
+class InMemoryTermStore implements TermInLangIdsAcquirer, TermInLangIdsResolver, TermStoreCleaner {
 
 	private $terms = [];
 	private $lastId = 0;
 
-	public function acquireTermIds( array $termsArray, $callback = null ): array {
+	public function acquireTermInLangIds( array $termsArray, $callback = null ): array {
 		$ids = [];
 
 		foreach ( $termsArray as $type => $termsOfType ) {
@@ -34,12 +34,12 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 		return $ids;
 	}
 
-	public function resolveTermIds(
-		array $termIds,
+	public function resolveTermInLangIds(
+		array $termInLangIds,
 		array $types = null,
 		array $languages = null
 	): array {
-		if ( $termIds === [] || $types === [] || $languages === [] ) {
+		if ( $termInLangIds === [] || $types === [] || $languages === [] ) {
 			return [];
 		}
 
@@ -56,7 +56,7 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 				}
 
 				foreach ( $termsOfLang as $term => $id ) {
-					if ( in_array( $id, $termIds ) ) {
+					if ( in_array( $id, $termInLangIds ) ) {
 						$terms[$type][$lang][] = $term;
 					}
 				}
@@ -65,25 +65,25 @@ class InMemoryTermIdsStore implements TermIdsAcquirer, TermIdsResolver, TermIdsC
 		return $terms;
 	}
 
-	public function resolveGroupedTermIds(
-		array $groupedTermIds,
+	public function resolveGroupedTermInLangIds(
+		array $groupedTermInLangIds,
 		array $types = null,
 		array $languages = null
 	): array {
 		return array_map(
-			function ( $termIdGroup ) use ( $types, $languages ) {
-				return $this->resolveTermIds( $termIdGroup, $types, $languages );
+			function ( $termInLangIdGroup ) use ( $types, $languages ) {
+				return $this->resolveTermInLangIds( $termInLangIdGroup, $types, $languages );
 			},
-			$groupedTermIds
+			$groupedTermInLangIds
 		);
 	}
 
-	public function cleanTermIds( array $termIds ) {
-		$termIdsAsKeys = array_flip( $termIds );
+	public function cleanTermInLangIds( array $termInLangIds ) {
+		$termInLangIdsAsKeys = array_flip( $termInLangIds );
 		foreach ( $this->terms as $type => &$termsOfType ) {
 			foreach ( $termsOfType as $lang => &$termsOfLang ) {
 				foreach ( $termsOfLang as $term => $id ) {
-					if ( array_key_exists( $id, $termIdsAsKeys ) ) {
+					if ( array_key_exists( $id, $termInLangIdsAsKeys ) ) {
 						unset( $termsOfLang[$term] );
 					}
 				}

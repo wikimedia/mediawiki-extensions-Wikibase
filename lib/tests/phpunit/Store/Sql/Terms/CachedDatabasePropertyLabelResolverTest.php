@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\TermIndexEntry;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver
@@ -148,7 +148,7 @@ class CachedDatabasePropertyLabelResolverTest extends \MediaWikiTestCase {
 	}
 
 	private function getMockedDatabaseTermIdsResolver( $termsArrayPerPropertyId ) {
-		$dbTermIdsResolver = $this->getMockBuilder( DatabaseTermIdsResolver::class )
+		$dbTermIdsResolver = $this->getMockBuilder( DatabaseTermInLangIdsResolver::class )
 						   ->disableOriginalConstructor()
 						   ->setMethods( [
 							   'resolveTermIds',

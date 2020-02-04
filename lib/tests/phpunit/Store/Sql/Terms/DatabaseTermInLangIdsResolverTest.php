@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsResolver;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -11,13 +11,13 @@ use Wikimedia\Rdbms\DatabaseSqlite;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseTermIdsResolverTest extends TestCase {
+class DatabaseTermInLangIdsResolverTest extends TestCase {
 
 	const TYPE_LABEL = 1;
 	const TYPE_DESCRIPTION = 2;
@@ -66,14 +66,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveTermIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
+		$terms = $resolver->resolveTermInLangIds( [ $termInLang1Id, $termInLang2Id, $termInLang3Id ] );
 
 		$this->assertSame( [
 			'label' => [
@@ -187,14 +187,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
 		$termInLangIds[] = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveTermIds(
+		$terms = $resolver->resolveTermInLangIds(
 			$termInLangIds,
 			$types,
 			$languages
@@ -204,13 +204,13 @@ class DatabaseTermIdsResolverTest extends TestCase {
 	}
 
 	public function testCanResolveEmptyList() {
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
 		);
 
-		$this->assertEmpty( $resolver->resolveTermIds( [] ) );
+		$this->assertEmpty( $resolver->resolveTermInLangIds( [] ) );
 	}
 
 	public function testGrouped() {
@@ -236,14 +236,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveGroupedTermIds( [
+		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
 			'Q2' => [ $termInLang3Id ],
 		] );
@@ -264,17 +264,17 @@ class DatabaseTermIdsResolverTest extends TestCase {
 	}
 
 	public function testGrouped_CanResolveEmptyList() {
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
 		);
 
-		$this->assertEmpty( $resolver->resolveGroupedTermIds( [] ) );
+		$this->assertEmpty( $resolver->resolveGroupedTermInLangIds( [] ) );
 	}
 
 	public function testGrouped_CanResolveListOfEmptyLists() {
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
@@ -282,7 +282,7 @@ class DatabaseTermIdsResolverTest extends TestCase {
 
 		$this->assertSame(
 			[ 'x' => [], 'y' => [] ],
-			$resolver->resolveGroupedTermIds( [ 'x' => [], 'y' => [] ] )
+			$resolver->resolveGroupedTermInLangIds( [ 'x' => [], 'y' => [] ] )
 		);
 	}
 
@@ -309,14 +309,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveGroupedTermIds( [
+		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id ],
 			'Q2' => [ $termInLang3Id ],
 			'Q3' => [],
@@ -361,14 +361,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_LABEL, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang3Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveGroupedTermIds( [
+		$terms = $resolver->resolveGroupedTermInLangIds( [
 			'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
 			'Q2' => [ $termInLang1Id, $termInLang2Id ],
 			'Q3' => [ $termInLang1Id, $termInLang3Id ],
@@ -442,7 +442,7 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			'wbpt_term_in_lang_id' => $termInLang3Id
 		] );
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
@@ -497,14 +497,14 @@ class DatabaseTermIdsResolverTest extends TestCase {
 			[ 'wbtl_type_id' => self::TYPE_ALIAS, 'wbtl_text_in_lang_id' => $textInLang3Id ] );
 		$termInLang4Id = $this->db->insertId();
 
-		$resolver = new DatabaseTermIdsResolver(
+		$resolver = new DatabaseTermInLangIdsResolver(
 			$this->typeIdsResolver,
 			$this->typeIdsResolver,
 			new FakeLoadBalancer( [
 				'dbr' => $this->db,
 			] )
 		);
-		$terms = $resolver->resolveGroupedTermIds(
+		$terms = $resolver->resolveGroupedTermInLangIds(
 			[
 				'Q1' => [ $termInLang1Id, $termInLang2Id, $termInLang3Id ],
 				'Q2' => [ $termInLang1Id, $termInLang2Id ],

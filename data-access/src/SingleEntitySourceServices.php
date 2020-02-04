@@ -28,7 +28,7 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
@@ -272,7 +272,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$databaseName,
 				$logger
 			);
-			$termIdsResolver = new DatabaseTermIdsResolver(
+			$termIdsResolver = new DatabaseTermInLangIdsResolver(
 				$databaseTypeIdsStore,
 				$databaseTypeIdsStore,
 				$loadBalancer,
@@ -388,7 +388,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$logger
 			);
 
-			$termIdsResolver = new DatabaseTermIdsResolver(
+			$termIdsResolver = new DatabaseTermInLangIdsResolver(
 				$databaseTypeIdsStore,
 				$databaseTypeIdsStore,
 				$loadBalancer,

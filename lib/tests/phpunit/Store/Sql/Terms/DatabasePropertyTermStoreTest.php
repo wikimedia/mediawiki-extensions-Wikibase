@@ -13,9 +13,9 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -81,16 +81,16 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 		);
 		return new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -114,16 +114,16 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 		);
 		return new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -464,18 +464,18 @@ class DatabasePropertyTermStoreTest extends MediaWikiTestCase {
 
 		return new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				new FakeLBFactory( [
 					'lb' => $loadBalancer
 				] ),
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),

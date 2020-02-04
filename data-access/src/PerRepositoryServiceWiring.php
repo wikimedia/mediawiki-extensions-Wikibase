@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
@@ -82,7 +82,7 @@ return [
 			$databaseName,
 			$logger
 		);
-		$termIdsResolver = new DatabaseTermIdsResolver(
+		$termIdsResolver = new DatabaseTermInLangIdsResolver(
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$loadBalancer,
@@ -212,7 +212,7 @@ return [
 			$logger
 		);
 
-		$termIdsResolver = new DatabaseTermIdsResolver(
+		$termIdsResolver = new DatabaseTermInLangIdsResolver(
 			$databaseTypeIdsStore,
 			$databaseTypeIdsStore,
 			$loadBalancer,

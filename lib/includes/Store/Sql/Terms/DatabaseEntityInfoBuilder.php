@@ -139,9 +139,9 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	private $loadBalancer;
 
 	/**
-	 * @var DatabaseTermIdsResolver
+	 * @var DatabaseTermInLangIdsResolver
 	 */
-	private $dbTermIdsResolver;
+	private $dbTermInLangIdsResolver;
 
 	/**
 	 * @var string|bool
@@ -157,7 +157,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	 * @param DataAccessSettings $dataAccessSettings
 	 * @param CacheInterface $termCache
 	 * @param ILoadBalancer $loadBalancer
-	 * @param DatabaseTermIdsResolver $databaseTermIdsResolver
+	 * @param DatabaseTermInLangIdsResolver $databaseTermIdsResolver
 	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
 	 * @param string|bool $databaseName The wiki's database to connect to.
 	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
@@ -171,7 +171,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 		DataAccessSettings $dataAccessSettings,
 		CacheInterface $termCache,
 		ILoadBalancer $loadBalancer,
-		DatabaseTermIdsResolver $databaseTermIdsResolver,
+		DatabaseTermInLangIdsResolver $databaseTermIdsResolver,
 		$repositoryName = '',
 		$databaseName = false
 	) {
@@ -186,7 +186,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->termCache = $termCache;
 		$this->loadBalancer = $loadBalancer;
-		$this->dbTermIdsResolver = $databaseTermIdsResolver;
+		$this->dbTermInLangIdsResolver = $databaseTermIdsResolver;
 		$this->databaseName = $databaseName;
 	}
 
@@ -447,7 +447,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 		}
 
 		if ( $entityType === 'property' ) {
-			$groupedTerms = $this->dbTermIdsResolver->resolveTermsViaJoin(
+			$groupedTerms = $this->dbTermInLangIdsResolver->resolveTermsViaJoin(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
 				'wbpt_property_id',
@@ -459,7 +459,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 			$this->injectTermsWTF( $groupedTerms, $entityType );
 
 		} elseif ( $entityType === 'item' ) {
-			$groupedTerms = $this->dbTermIdsResolver->resolveTermsViaJoin(
+			$groupedTerms = $this->dbTermInLangIdsResolver->resolveTermsViaJoin(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
 				'wbit_item_id',

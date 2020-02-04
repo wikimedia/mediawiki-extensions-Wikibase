@@ -21,9 +21,9 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\PropertyContent;
@@ -87,16 +87,16 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 		$itemTermStore = new DatabaseItemTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$loadBalancerFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -107,16 +107,16 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 		$propertyTermStore = new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$loadBalancerFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -239,7 +239,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$this->getCache(),
 			$loadBalancer,
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
@@ -312,7 +312,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$this->getCache(),
 			$loadBalancer,
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
@@ -338,7 +338,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$this->getCache(),
 			$loadBalancer,
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
@@ -367,7 +367,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			$this->getCache(),
 			$loadBalancer,
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
@@ -490,7 +490,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			$this->getCache(),
 			$loadBalancer,
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer

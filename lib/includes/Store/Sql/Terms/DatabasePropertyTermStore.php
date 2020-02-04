@@ -29,14 +29,14 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	/** @var ILoadBalancer */
 	private $loadBalancer;
 
-	/** @var TermIdsAcquirer */
-	private $acquirer;
+	/** @var TermInLangIdsAcquirer */
+	private $termInLangIdsAcquirer;
 
-	/** @var TermIdsResolver */
-	private $resolver;
+	/** @var TermInLangIdsResolver */
+	private $termInLangIdsResolver;
 
-	/** @var TermIdsCleaner */
-	private $cleaner;
+	/** @var TermStoreCleaner */
+	private $termInLangIdsCleaner;
 
 	/** @var StringNormalizer */
 	private $stringNormalizer;
@@ -58,18 +58,18 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TermIdsAcquirer $acquirer,
-		TermIdsResolver $resolver,
-		TermIdsCleaner $cleaner,
+		TermInLangIdsAcquirer $termInLangIdsAcquirer,
+		TermInLangIdsResolver $termInLangIdsResolver,
+		TermStoreCleaner $termInLangIdsCleaner,
 		StringNormalizer $stringNormalizer,
 		EntitySource $entitySource,
 		DataAccessSettings $dataAccessSettings,
 		LoggerInterface $logger = null
 	) {
 		$this->loadBalancer = $loadBalancer;
-		$this->acquirer = $acquirer;
-		$this->resolver = $resolver;
-		$this->cleaner = $cleaner;
+		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
+		$this->termInLangIdsResolver = $termInLangIdsResolver;
+		$this->termInLangIdsCleaner = $termInLangIdsCleaner;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
@@ -99,29 +99,29 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		}
 		$this->assertCanHandlePropertyId( $propertyId );
 
-		$termIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
-		if ( $termIdsToClean !== [] ) {
-			$this->cleanTermsIfUnused( $termIdsToClean );
+		$termInLangIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
+		if ( $termInLangIdsToClean !== [] ) {
+			$this->cleanTermsIfUnused( $termInLangIdsToClean );
 		}
 	}
 
 	/**
-	 * Acquire term IDs for the given Fingerprint,
+	 * Acquire term in lang IDs for the given Fingerprint,
 	 * store them in wbt_property_terms for the given property ID,
-	 * and return term IDs that are no longer referenced
+	 * and return term in lang IDs that are no longer referenced
 	 * and might now need to be cleaned up.
 	 *
 	 * @param PropertyId $propertyId
 	 * @param Fingerprint $fingerprint
 	 *
 	 * @return int[] wbpt_term_in_lang_ids to that are no longer used by $propertyId
-	 * The returned term IDs might still be used in wbt_property_terms rows
+	 * The returned term in lang IDs might still be used in wbt_property_terms rows
 	 * for other property IDs or elsewhere, and this should be checked just before cleanup.
 	 * However, that may happen in a different transaction than this call.
 	 */
 	private function acquireAndInsertTerms( PropertyId $propertyId, Fingerprint $fingerprint ): array {
 		// Find term entries that already exist for the property
-		$oldTermIds = $this->getDbw()->selectFieldValues(
+		$oldTermInLangIds = $this->getDbw()->selectFieldValues(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
 			[ 'wbpt_property_id' => $propertyId->getNumericId() ],
@@ -130,20 +130,20 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		);
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
-		$termIdsToClean = [];
+		$termInLangIdsToClean = [];
 		$fname = __METHOD__;
 
-		// Acquire all of the Term Ids needed for the wbt_property_terms table
-		$this->acquirer->acquireTermIds(
+		// Acquire all of the Term in lang Ids needed for the wbt_property_terms table
+		$this->termInLangIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
-			function ( array $newTermIds ) use ( $propertyId, $oldTermIds, &$termIdsToClean, $fname ) {
-				$termIdsToInsert = array_diff( $newTermIds, $oldTermIds );
-				$termIdsToClean = array_diff( $oldTermIds, $newTermIds );
+			function ( array $newTermInLangIds ) use ( $propertyId, $oldTermInLangIds, &$termInLangIdsToClean, $fname ) {
+				$termInLangIdsToInsert = array_diff( $newTermInLangIds, $oldTermInLangIds );
+				$termInLangIdsToClean = array_diff( $oldTermInLangIds, $newTermInLangIds );
 				$rowsToInsert = [];
-				foreach ( $termIdsToInsert as $termIdToInsert ) {
+				foreach ( $termInLangIdsToInsert as $termInLangIdToInsert ) {
 					$rowsToInsert[] = [
 						'wbpt_property_id' => $propertyId->getNumericId(),
-						'wbpt_term_in_lang_id' => $termIdToInsert,
+						'wbpt_term_in_lang_id' => $termInLangIdToInsert,
 					];
 				}
 
@@ -155,20 +155,20 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 			}
 		);
 
-		if ( $termIdsToClean !== [] ) {
+		if ( $termInLangIdsToClean !== [] ) {
 			// Delete entries in wbt_property_terms that are no longer needed
 			// Further cleanup should then done by the caller of this method
 			$this->getDbw()->delete(
 				'wbt_property_terms',
 				[
 					'wbpt_property_id' => $propertyId->getNumericId(),
-					'wbpt_term_in_lang_id' => $termIdsToClean,
+					'wbpt_term_in_lang_id' => $termInLangIdsToClean,
 				],
 				__METHOD__
 			);
 		}
 
-		return $termIdsToClean;
+		return $termInLangIdsToClean;
 	}
 
 	public function deleteTerms( PropertyId $propertyId ) {
@@ -180,18 +180,18 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		}
 		$this->assertCanHandlePropertyId( $propertyId );
 
-		$termIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
-		if ( $termIdsToClean !== [] ) {
-			$this->cleanTermsIfUnused( $termIdsToClean );
+		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
+		if ( $termInLangIdsToClean !== [] ) {
+			$this->cleanTermsIfUnused( $termInLangIdsToClean );
 		}
 	}
 
 	/**
 	 * Delete wbt_property_terms rows for the given property ID,
-	 * and return term IDs that are no longer referenced
+	 * and return term in lang IDs that are no longer referenced
 	 * and might now need to be cleaned up.
 	 *
-	 * (The returned term IDs might still be used in wbt_property_terms rows
+	 * (The returned term in lang IDs might still be used in wbt_property_terms rows
 	 * for other property IDs, and this should be checked just before cleanup.
 	 * However, that may happen in a different transaction than this call.)
 	 *
@@ -208,10 +208,10 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		);
 
 		$rowIdsToDelete = [];
-		$termIdsToCleanUp = [];
+		$termInLangIdsToCleanUp = [];
 		foreach ( $res as $row ) {
 			$rowIdsToDelete[] = $row->wbpt_id;
-			$termIdsToCleanUp[] = $row->wbpt_term_in_lang_id;
+			$termInLangIdsToCleanUp[] = $row->wbpt_term_in_lang_id;
 		}
 
 		if ( $rowIdsToDelete !== [] ) {
@@ -222,17 +222,17 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 			);
 		}
 
-		return array_values( array_unique( $termIdsToCleanUp ) );
+		return array_values( array_unique( $termInLangIdsToCleanUp ) );
 	}
 
 	/**
-	 * Of the given term IDs, delete those that aren’t used by any other items or properties.TermIdsResolver
+	 * Of the given term in lang IDs, delete those that aren’t used by any other items or properties.TermIdsResolver
 	 *
-	 * @param int[] $termIds (wbtl_id)
+	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	private function cleanTermsIfUnused( array $termIds ) {
-		$this->cleaner->cleanTermIds(
-			$this->findActuallyUnusedTermIds( $termIds, $this->getDbw() )
+	private function cleanTermsIfUnused( array $termInLangIds ) {
+		$this->termInLangIdsCleaner->cleanTermInLangIds(
+			$this->findActuallyUnusedTermInLangIds( $termInLangIds, $this->getDbw() )
 		);
 	}
 
@@ -242,7 +242,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		);
 		$this->assertCanHandlePropertyId( $propertyId );
 
-		$termIds = $this->getDbr()->selectFieldValues(
+		$termInLangIds = $this->getDbr()->selectFieldValues(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
 			[ 'wbpt_property_id' => $propertyId->getNumericId() ],
@@ -250,7 +250,7 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		);
 
 		return $this->resolveTermIdsResultToFingerprint(
-			$this->resolver->resolveTermIds( $termIds )
+			$this->termInLangIdsResolver->resolveTermInLangIds( $termInLangIds )
 		);
 	}
 

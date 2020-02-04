@@ -111,7 +111,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
@@ -1639,7 +1639,7 @@ final class WikibaseClient {
 			$wanObjectCache,
 			$this->getDatabaseDomainForPropertySource()
 		);
-		$databaseTermIdsResolver = new DatabaseTermIdsResolver(
+		$databaseTermIdsResolver = new DatabaseTermInLangIdsResolver(
 			$typeIdsStore,
 			$typeIdsStore,
 			$loadBalancer,

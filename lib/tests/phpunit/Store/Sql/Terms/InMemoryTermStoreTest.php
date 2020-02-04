@@ -3,21 +3,21 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\Store\Sql\Terms\InMemoryTermIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\InMemoryTermStore;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\InMemoryTermIdsStore
+ * @covers \Wikibase\Lib\Store\Sql\Terms\InMemoryTermStore
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class InMemoryTermIdsStoreTest extends TestCase {
+class InMemoryTermStoreTest extends TestCase {
 
 	public function testAcquiresUniqueIdsForNonExistingTerms() {
-		$termsIdsAcquirer = new InMemoryTermIdsStore();
+		$termsIdsAcquirer = new InMemoryTermStore();
 
-		$ids = $termsIdsAcquirer->acquireTermIds( [
+		$ids = $termsIdsAcquirer->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
@@ -32,9 +32,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testReusesIdsOfExistingTerms() {
-		$termsIdsAcquirer = new InMemoryTermIdsStore();
+		$termsIdsAcquirer = new InMemoryTermStore();
 
-		$previouslyAcquiredIds = $termsIdsAcquirer->acquireTermIds( [
+		$previouslyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
@@ -45,7 +45,7 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			]
 		] );
 
-		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermIds( [
+		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
@@ -63,16 +63,16 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testAcquiresAndReusesIdsForNewAndExistingTerms() {
-		$termsIdsAcquirer = new InMemoryTermIdsStore();
+		$termsIdsAcquirer = new InMemoryTermStore();
 
-		$previouslyAcquiredIds = $termsIdsAcquirer->acquireTermIds( [
+		$previouslyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
 			]
 		] );
 
-		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermIds( [
+		$newlyAcquiredIds = $termsIdsAcquirer->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'another label',
@@ -99,15 +99,15 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveTermIds_returnsAcquiredTerms_butNotAllTerms() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds1 = $termIdsStore->acquireTermIds( [
+		$termIds1 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
 			],
 		] );
-		$termIds2 = $termIdsStore->acquireTermIds( [
+		$termIds2 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'de' => 'eine Beschriftung',
 			],
@@ -116,8 +116,8 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 		] );
 
-		$terms1 = $termIdsStore->resolveTermIds( $termIds1 );
-		$terms2 = $termIdsStore->resolveTermIds( $termIds2 );
+		$terms1 = $termIdsStore->resolveTermInLangIds( $termIds1 );
+		$terms2 = $termIdsStore->resolveTermInLangIds( $termIds2 );
 
 		$this->assertSame( [
 			'label' => [
@@ -136,16 +136,16 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveTermIds_filterLanguages() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds = $termIdsStore->acquireTermIds( [
+		$termIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
 			],
 		] );
 
-		$terms = $termIdsStore->resolveTermIds( $termIds, null, [ 'en' ] );
+		$terms = $termIdsStore->resolveTermInLangIds( $termIds, null, [ 'en' ] );
 
 		$this->assertSame( [
 			'label' => [
@@ -155,9 +155,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveTermIds_filterGroups() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds = $termIdsStore->acquireTermIds( [
+		$termIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
@@ -167,7 +167,7 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 		] );
 
-		$terms = $termIdsStore->resolveTermIds( $termIds, [ 'alias' ] );
+		$terms = $termIdsStore->resolveTermInLangIds( $termIds, [ 'alias' ] );
 
 		$this->assertSame( [
 			'alias' => [
@@ -177,9 +177,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveTermIds_filterGroupsAndLanguages() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds = $termIdsStore->acquireTermIds( [
+		$termIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
@@ -193,7 +193,7 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 		] );
 
-		$terms = $termIdsStore->resolveTermIds( $termIds, [ 'label', 'alias' ], [ 'en', 'es' ] );
+		$terms = $termIdsStore->resolveTermInLangIds( $termIds, [ 'label', 'alias' ], [ 'en', 'es' ] );
 
 		$this->assertSame( [
 			'label' => [
@@ -206,15 +206,15 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveGroupedTermIds_returnsCorrectGroups() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds1 = $termIdsStore->acquireTermIds( [
+		$termIds1 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
 			],
 		] );
-		$termIds2 = $termIdsStore->acquireTermIds( [
+		$termIds2 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'de' => 'eine Beschriftung',
 			],
@@ -223,7 +223,7 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 		] );
 
-		$terms = $termIdsStore->resolveGroupedTermIds( [
+		$terms = $termIdsStore->resolveGroupedTermInLangIds( [
 			'terms1' => $termIds1,
 			'terms2' => $termIds2,
 		] );
@@ -245,15 +245,15 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testResolveGroupedTermIds_filterGroupsAndLanguages() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$termIds1 = $termIdsStore->acquireTermIds( [
+		$termIds1 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'some label',
 				'de' => 'eine Beschriftung',
 			],
 		] );
-		$termIds2 = $termIdsStore->acquireTermIds( [
+		$termIds2 = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'de' => 'eine Beschriftung',
 			],
@@ -262,7 +262,7 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			],
 		] );
 
-		$terms = $termIdsStore->resolveGroupedTermIds( [
+		$terms = $termIdsStore->resolveGroupedTermInLangIds( [
 			'terms1' => $termIds1,
 			'terms2' => $termIds2,
 		], [ 'label' ], [ 'de' ] );
@@ -280,9 +280,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testCleanTermIds_doesNotReuseIds() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$originalIds = $termIdsStore->acquireTermIds( [
+		$originalIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'the label',
 				'de' => 'die Bezeichnung',
@@ -293,9 +293,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			'description' => [ 'en' => 'the description' ],
 		] );
 
-		$termIdsStore->cleanTermIds( $originalIds );
+		$termIdsStore->cleanTermInLangIds( $originalIds );
 
-		$newIds = $termIdsStore->acquireTermIds( [
+		$newIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [ 'en' => 'the label' ],
 			'description' => [ 'en' => 'the description' ],
 		] );
@@ -305,9 +305,9 @@ class InMemoryTermIdsStoreTest extends TestCase {
 	}
 
 	public function testCleanTermIds_keepsOtherIds() {
-		$termIdsStore = new InMemoryTermIdsStore();
+		$termIdsStore = new InMemoryTermStore();
 
-		$acquiredIds = $termIdsStore->acquireTermIds( [
+		$acquiredIds = $termIdsStore->acquireTermInLangIds( [
 			'label' => [
 				'en' => 'id 1',
 				'de' => 'id 2',
@@ -318,11 +318,11 @@ class InMemoryTermIdsStoreTest extends TestCase {
 			'description' => [ 'en' => 'id 4' ],
 		] );
 
-		$termIdsStore->cleanTermIds( [ $acquiredIds[1], $acquiredIds[2] ] );
+		$termIdsStore->cleanTermInLangIds( [ $acquiredIds[1], $acquiredIds[2] ] );
 
 		$this->assertSame(
 			[ $acquiredIds[0], $acquiredIds[3] ],
-			$termIdsStore->acquireTermIds( [
+			$termIdsStore->acquireTermInLangIds( [
 				'label' => [ 'en' => 'id 1' ],
 				'description' => [ 'en' => 'id 4' ],
 			] )

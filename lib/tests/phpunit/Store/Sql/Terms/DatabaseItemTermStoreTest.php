@@ -15,9 +15,9 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -86,16 +86,16 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		return new DatabaseItemTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -120,16 +120,16 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		return new DatabaseItemTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -468,18 +468,18 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		return new DatabaseItemTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				new FakeLBFactory( [
 					'lb' => $loadBalancer
 				] ),
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -538,16 +538,16 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$propertyTermStore = new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
@@ -587,16 +587,16 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		);
 		$propertyTermStore = new DatabasePropertyTermStore(
 			$loadBalancer,
-			new DatabaseTermIdsAcquirer(
+			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermIdsResolver(
+			new DatabaseTermInLangIdsResolver(
 				$typeIdsStore,
 				$typeIdsStore,
 				$loadBalancer
 			),
-			new DatabaseTermIdsCleaner(
+			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),

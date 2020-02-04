@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -12,13 +12,13 @@ use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermIdsAcquirer
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseTermIdsAcquirerTest extends TestCase {
+class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 	/**
 	 * @var IDatabase
@@ -51,7 +51,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsReturnsArrayOfIdsForAllTerms() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
@@ -67,7 +67,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertIsArray( $acquiredTermIds );
 		$this->assertCount( 7, $acquiredTermIds );
@@ -79,7 +79,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			[ 'label', 'description', 'alias' ]
 		);
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
@@ -95,7 +95,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertTermsArrayExistInDb( $termsArray, $alreadyAcquiredTypeIds );
 	}
@@ -103,7 +103,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsStoresOnlyUniqueTexts() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
@@ -119,7 +119,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertSame(
 			3,
@@ -130,7 +130,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsStoresOnlyUniqueTextInLang() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
@@ -146,7 +146,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertSame(
 			4,
@@ -157,7 +157,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	public function testAcquireTermIdsStoresOnlyUniqueTermInLang() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
@@ -173,7 +173,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertSame(
 			6,
@@ -229,12 +229,12 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 		);
 		$aliasEnSameTermInLangId = (string)$this->db->insertId();
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 
 		$this->assertCount( 7, $acquiredTermIds );
 
@@ -279,12 +279,12 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds(
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
 			function ( $acquiredIds ) {
 				// This callback will delete first 3 acquired ids to mimic the case
@@ -313,13 +313,13 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	}
 
 	public function testCallsCallbackEvenWhenAcquiringNoTerms() {
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
 		$called = false;
 
-		$dbTermIdsAcquirer->acquireTermIds(
+		$dbTermIdsAcquirer->acquireTermInLangIds(
 			[],
 			function ( $termIds ) use ( &$called ) {
 				$called = true;
@@ -353,12 +353,12 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$lbFactory,
 			$typeIdsAcquirer
 		);
 
-		$dbTermIdsAcquirer->acquireTermIds(
+		$dbTermIdsAcquirer->acquireTermInLangIds(
 			$termsArray, function ( $acquiredIds ) use ( $dbMaster ) {
 				// This is going to:
 				// 1. insert into replica all records that exist in master
@@ -416,7 +416,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	}
 
 	public function testWithLongTexts() {
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
@@ -438,7 +438,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			]
 		];
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 		$textIdsCount = $this->db->selectRowCount( 'wbt_text' );
 
 		$this->assertCount(
@@ -456,7 +456,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 	}
 
 	public function testWithLongTexts_doesNotSplitUtf8Bytes() {
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			new InMemoryTypeIdsStore()
 		);
@@ -467,7 +467,7 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 			],
 		];
 
-		$dbTermIdsAcquirer->acquireTermIds( $termsArray );
+		$dbTermIdsAcquirer->acquireTermInLangIds( $termsArray );
 		$text = $this->db->selectField( 'wbt_text', 'wbx_text' );
 
 		$this->assertSame( str_repeat( 'a', 254 ), $text );
@@ -519,12 +519,12 @@ class DatabaseTermIdsAcquirerTest extends TestCase {
 
 	public function testAcquireTermIdsWithEmptyInput() {
 		$typeIdsAcquirer = new InMemoryTypeIdsStore();
-		$dbTermIdsAcquirer = new DatabaseTermIdsAcquirer(
+		$dbTermIdsAcquirer = new DatabaseTermInLangIdsAcquirer(
 			$this->lbFactory,
 			$typeIdsAcquirer
 		);
 
-		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermIds( [] );
+		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( [] );
 
 		$this->assertEmpty( $acquiredTermIds );
 	}
