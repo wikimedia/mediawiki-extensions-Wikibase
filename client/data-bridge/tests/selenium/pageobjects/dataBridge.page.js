@@ -55,6 +55,15 @@ class DataBridgePage extends Page {
 		return '.wb-db-error-permission-info';
 	}
 
+	static get BAILOUT_ACTIONS() {
+		return {
+			CONTAINER: '.wb-db-bailout-actions',
+			HEADING: '.wb-db-bailout-actions__heading',
+			SUGGESTION_GO_TO_REPO: '.wb-db-bailout-actions__suggestion:nth-child(1)',
+			SUGGESTION_EDIT_ARTICLE: '.wb-db-bailout-actions__suggestion:nth-child(2)',
+		};
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -108,6 +117,18 @@ class DataBridgePage extends Page {
 
 	get permissionErrors() {
 		return this.error.$$( DataBridgePage.PERMISSION_ERROR_CONTAINER );
+	}
+
+	get bailoutActions() {
+		return this.error.$( DataBridgePage.BAILOUT_ACTIONS.CONTAINER );
+	}
+
+	get bailoutSuggestionGoToRepo() {
+		return this.bailoutActions.$( DataBridgePage.BAILOUT_ACTIONS.SUGGESTION_GO_TO_REPO );
+	}
+
+	get bailoutSuggestionEditArticle() {
+		return this.bailoutActions.$( DataBridgePage.BAILOUT_ACTIONS.SUGGESTION_EDIT_ARTICLE );
 	}
 
 	get bridge() {
