@@ -135,6 +135,8 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-bailout-suggestion-edit-article',
 							'wikibase-client-data-bridge-unsupported-datatype-error-head',
 							'wikibase-client-data-bridge-unsupported-datatype-error-body',
+							'wikibase-client-data-bridge-deprecated-statement-error-head',
+							'wikibase-client-data-bridge-deprecated-statement-error-body',
 							'savechanges',
 							'publishchanges',
 							'cancel',
