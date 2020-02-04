@@ -15959,6 +15959,8 @@ var MessageKeys;
   MessageKeys["BAILOUT_SUGGESTION_EDIT_ARTICLE"] = "wikibase-client-data-bridge-bailout-suggestion-edit-article";
   MessageKeys["UNSUPPORTED_DATATYPE_ERROR_HEAD"] = "wikibase-client-data-bridge-unsupported-datatype-error-head";
   MessageKeys["UNSUPPORTED_DATATYPE_ERROR_BODY"] = "wikibase-client-data-bridge-unsupported-datatype-error-body";
+  MessageKeys["DEPRECATED_STATEMENT_ERROR_HEAD"] = "wikibase-client-data-bridge-deprecated-statement-error-head";
+  MessageKeys["DEPRECATED_STATEMENT_ERROR_BODY"] = "wikibase-client-data-bridge-deprecated-statement-error-body";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);

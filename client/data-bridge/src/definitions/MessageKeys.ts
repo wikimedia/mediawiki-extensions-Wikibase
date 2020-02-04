@@ -32,6 +32,8 @@ enum MessageKeys {
 	BAILOUT_SUGGESTION_EDIT_ARTICLE = 'wikibase-client-data-bridge-bailout-suggestion-edit-article',
 	UNSUPPORTED_DATATYPE_ERROR_HEAD = 'wikibase-client-data-bridge-unsupported-datatype-error-head',
 	UNSUPPORTED_DATATYPE_ERROR_BODY = 'wikibase-client-data-bridge-unsupported-datatype-error-body',
+	DEPRECATED_STATEMENT_ERROR_HEAD = 'wikibase-client-data-bridge-deprecated-statement-error-head',
+	DEPRECATED_STATEMENT_ERROR_BODY = 'wikibase-client-data-bridge-deprecated-statement-error-body',
 }
 
 export default MessageKeys;
