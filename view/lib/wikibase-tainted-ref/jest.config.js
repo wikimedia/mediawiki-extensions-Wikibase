@@ -34,4 +34,7 @@ module.exports = {
 		'!src/@types/**',
 		'!src/mock-entry.ts',
 	],
+	setupFiles: [
+		'./jest.overrides.js',
+	],
 };
