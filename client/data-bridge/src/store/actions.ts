@@ -204,7 +204,6 @@ RootActions
 				type: ErrorTypes.UNSUPPORTED_DATATYPE,
 				info: {
 					unsupportedDatatype: datatype,
-					supportedDatatypes: [ 'string' ],
 				},
 			};
 			this.dispatch( BRIDGE_ERROR_ADD, [ error ] );

@@ -36,7 +36,6 @@ export interface UnsupportedDatatypeError extends ApplicationErrorBase {
 	type: ErrorTypes.UNSUPPORTED_DATATYPE;
 	info: {
 		unsupportedDatatype: DataType;
-		supportedDatatypes: DataType[];
 	};
 }
 

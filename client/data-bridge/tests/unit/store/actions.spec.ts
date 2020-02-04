@@ -710,7 +710,6 @@ describe( 'root/actions', () => {
 					type: ErrorTypes.UNSUPPORTED_DATATYPE,
 					info: {
 						unsupportedDatatype: 'url',
-						supportedDatatypes: [ 'string' ],
 					},
 				} ],
 			);
