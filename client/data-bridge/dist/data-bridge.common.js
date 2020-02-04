@@ -13148,8 +13148,7 @@ function (_Actions) {
         var error = {
           type: ErrorTypes.UNSUPPORTED_DATATYPE,
           info: {
-            unsupportedDatatype: datatype,
-            supportedDatatypes: ['string']
+            unsupportedDatatype: datatype
           }
         };
         this.dispatch(BRIDGE_ERROR_ADD, [error]);
