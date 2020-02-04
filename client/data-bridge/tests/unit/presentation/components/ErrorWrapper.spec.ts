@@ -9,6 +9,7 @@ import {
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
+import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -27,7 +28,7 @@ describe( 'ErrorWrapper', () => {
 		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
 	} );
 
-	it( 'mounts ErrorUnknown for exclusively non-permission-related or data type related errors', () => {
+	it( 'mounts ErrorUnknown for unknown errors', () => {
 		const store = createTestStore( {
 			state: {
 				applicationErrors: [
@@ -94,6 +95,9 @@ describe( 'ErrorWrapper', () => {
 					unsupportedDatatype: 'time',
 				},
 			} as UnsupportedDatatypeError,
+			{
+				type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+			},
 		];
 		const store = createTestStore( {
 			state: {
@@ -127,5 +131,20 @@ describe( 'ErrorWrapper', () => {
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 		expect( wrapper.find( ErrorUnsupportedDatatype ).exists() ).toBeTruthy();
+	} );
+	// eslint-disable-next-line max-len
+	it( 'mounts ErrorDeprecatedStatement when a deprecated statement error is present in the application errors', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		expect( wrapper.find( ErrorDeprecatedStatement ).exists() ).toBeTruthy();
 	} );
 } );

@@ -8,6 +8,9 @@
 			v-else-if="unsupportedDatatypeError !== null"
 			:data-type="unsupportedDatatypeError.info.unsupportedDatatype"
 		/>
+		<ErrorDeprecatedStatement
+			v-else-if="statementValueIsDeprecated"
+		/>
 		<ErrorUnknown v-else />
 	</section>
 </template>
@@ -19,6 +22,7 @@ import StateMixin from '@/presentation/StateMixin';
 import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
+import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
@@ -29,6 +33,7 @@ import ApplicationError, {
 		ErrorPermission,
 		ErrorUnknown,
 		ErrorUnsupportedDatatype,
+		ErrorDeprecatedStatement,
 	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
@@ -51,6 +56,12 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 			}
 		}
 		return null;
+	}
+
+	public get statementValueIsDeprecated(): boolean {
+		return this.applicationErrors.some(
+			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+		);
 	}
 }
 </script>
