@@ -110,6 +110,7 @@
 	"wikibase-time-precision-millennium": "$1. tisíciletí",
 	"wikibase-time-precision-century": "$1. století",
 	"wikibase-time-precision-10annum": "desetiletí od $1",
+	"wikibase-time-precision-BCE": "$1 př. n. l.",
 	"wikibase-time-precision-BCE-Gannum": "$1 {{PLURAL:$1|miliarda|miliardy|miliard}} let př. n. l.",
 	"wikibase-time-precision-BCE-Mannum": "$1 {{PLURAL:$1|milion|miliony|milionů}} let př. n. l.",
 	"wikibase-time-precision-BCE-annum": "$1 {{PLURAL:$1|rok|roky|let}} př. n. l.",

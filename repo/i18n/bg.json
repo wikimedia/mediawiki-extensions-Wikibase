@@ -62,6 +62,7 @@
 	"wikibase-diffview-rank-preferred": "Предпочитан ранг",
 	"wikibase-diffview-rank-normal": "Нормален ранг",
 	"wikibase-diffview-rank-deprecated": "Непрепоръчителен ранг",
+	"wikibase-diffview-qualifier": "квалификатор",
 	"wikibase-diffview-label": "етикет",
 	"wikibase-diffview-alias": "псевдоними",
 	"wikibase-diffview-description": "Описание",

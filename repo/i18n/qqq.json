@@ -46,7 +46,8 @@
 			"Obsuser",
 			"Ans",
 			"Hamilton Abreu",
-			"Abián"
+			"Abián",
+			"BaRaN6161 TURK"
 		]
 	},
 	"wikibase-desc": "{{desc|name=Wikibase|url=https://www.mediawiki.org/wiki/Extension:Wikibase}}\nSee also [[d:Wikidata:Glossary#Wikidata|Wikidata]] in the Wikidata glossary.\n\n\"Structured\" refers to \"data\", not to \"repository\".",
@@ -498,7 +499,7 @@
 	"wikibase-refresh-for-missing-datatype": "Error message displayed when a value data type could not be retrieved from client-side loaded datatypes and the reason may be an outdated cached script",
 	"wikibase-outdated-client-script": "Generic title used for error messages where refreshing the page might solve the original error",
 	"wikibase-shortcopyrightwarning-heading": "Heading of the license agreement warning.\nSee also:\n* {{msg-mw|wikibase-shortcopyrightwarning}}",
-	"wikibase-entity-save-error-heading": "Heading of an error message shown when a change to an entity could not be published for an unknown reason",
+	"wikibase-entity-save-error-heading": "Heading of an error message shown when a change to an entity could not be published for an unknown reason.\n{{Identical|Something went wrong}}",
 	"wikibase-entity-save-error-message": "Text of an error message shown when a change to an entity could not be published for an unknown reason",
 	"wikibase-tainted-ref-warning-icon-title": "Title/hover text shown on tainted reference icons",
 	"wikibase-tainted-ref-popper-text": "Text shown inside the dialog explaining why a statement's references were tainted.",
