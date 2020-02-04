@@ -245,9 +245,13 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'notoken',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'notoken' ),
+						$this->equalTo( 'missingparam' )
+					),
 					'message' => 'The "token" parameter must be set'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //1
 				'p' => [
@@ -261,7 +265,8 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid CSRF token.'
-				] ]
+				] ],
+				'token' => false
 			],
 			[ //2 testSetSiteLinkWithNoId
 				'p' => [
@@ -544,7 +549,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetSiteLinkExceptions( array $params, array $expected ) {
+	public function testSetSiteLinkExceptions( array $params, array $expected, $token = true ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wbsetsitelink';
 
@@ -557,7 +562,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			);
 		}
 
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
+		$this->doTestQueryExceptions( $params, $expected['exception'], null, $token );
 	}
 
 	/**

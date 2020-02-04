@@ -80,8 +80,8 @@ class SetDescriptionTest extends ModifyTermTestCase {
 	/**
 	 * @dataProvider provideExceptionData
 	 */
-	public function testSetDescriptionExceptions( $params, $expected ) {
-		self::doTestSetTermExceptions( $params, $expected );
+	public function testSetDescriptionExceptions( $params, $expected, $token = true ) {
+		self::doTestSetTermExceptions( $params, $expected, $token );
 	}
 
 	public function testUserCanSetDescriptionWhenTheyHaveSufficientPermission() {

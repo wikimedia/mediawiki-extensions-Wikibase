@@ -96,9 +96,13 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'notoken',
+					'code' => $this->logicalOr(
+						$this->equalTo( 'notoken' ),
+						$this->equalTo( 'missingparam' )
+					),
 					'message' => 'The "token" parameter must be set'
-				] ]
+				] ],
+				'token' => false
 			],
 			'badtoken' => [
 				'p' => [
@@ -112,7 +116,8 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 					'type' => ApiUsageException::class,
 					'code' => 'badtoken',
 					'message' => 'Invalid CSRF token.'
-				] ]
+				] ],
+				'token' => false
 			],
 			'add two links already exist together' => [
 				'p' => [
@@ -159,7 +164,10 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'nototitle'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'nototitle' ),
+						$this->equalTo( 'missingparam' )
+					)
 				] ]
 			],
 			'bad tosite' => [
@@ -171,7 +179,10 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_tosite'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_tosite' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ]
 			],
 			'bad fromsite' => [
@@ -183,7 +194,10 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_fromsite'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_fromsite' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ]
 			],
 			'missing site' => [
@@ -195,7 +209,10 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 				],
 				'e' => [ 'exception' => [
 					'type' => ApiUsageException::class,
-					'code' => 'unknown_fromsite'
+					'code' => $this->logicalOr(
+						$this->equalTo( 'unknown_fromsite' ),
+						$this->equalTo( 'badvalue' )
+					)
 				] ]
 			],
 		];
@@ -204,10 +221,10 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideLinkTitleExceptions
 	 */
-	public function testLinkTitlesExceptions( $params, $expected ) {
+	public function testLinkTitlesExceptions( $params, $expected, $token = true ) {
 		// -- set any defaults ------------------------------------
 		$params['action'] = 'wblinktitles';
-		$this->doTestQueryExceptions( $params, $expected['exception'] );
+		$this->doTestQueryExceptions( $params, $expected['exception'], null, $token );
 	}
 
 }

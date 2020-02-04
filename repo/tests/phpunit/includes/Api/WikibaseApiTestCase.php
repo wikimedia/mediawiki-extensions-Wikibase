@@ -6,6 +6,7 @@ use ApiTestCase;
 use ChangeTags;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
+use PHPUnit\Framework\Constraint\Constraint;
 use Revision;
 use TestSites;
 use TestUser;
@@ -181,16 +182,20 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 *
 	 * @param array $params Array of params for the API query.
 	 * @param array $exception Details of the exception to expect (type, code, message, message-key).
-	 * @param User $user
+	 * @param User|null $user
+	 * @param bool $token Whether to include a CSRF token
 	 */
-	protected function doTestQueryExceptions( array $params, array $exception, User $user = null ) {
+	protected function doTestQueryExceptions(
+		array $params,
+		array $exception,
+		User $user = null,
+		$token = true
+	) {
 		try {
-			if ( array_key_exists( 'code', $exception )
-				&& preg_match( '/^(no|bad)token$/', $exception['code'] )
-			) {
-				$this->doApiRequest( $params, null, false, $user );
-			} else {
+			if ( $token ) {
 				$this->doApiRequestWithToken( $params, null, $user );
+			} else {
+				$this->doApiRequest( $params, null, false, $user );
 			}
 
 			$this->fail( 'Failed to throw ApiUsageException' );
@@ -201,7 +206,12 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 			if ( array_key_exists( 'code', $exception ) ) {
 				$msg = TestingAccessWrapper::newFromObject( $e )->getApiMessage();
-				$this->assertEquals( $exception['code'], $msg->getApiCode() );
+				$this->assertThat(
+					$msg->getApiCode(),
+					$exception['code'] instanceof Constraint
+						? $exception['code']
+						: $this->equalTo( $exception['code'] )
+				);
 			}
 
 			if ( array_key_exists( 'message', $exception ) ) {
