@@ -71,8 +71,12 @@ export default class ErrorUnsupportedDatatype extends mixins( StateMixin ) {
 
 	&__head {
 		font-weight: bold;
-		line-height: px-to-em( 24px );
+		line-height: px-to-em( 22px );
 		margin-bottom: px-to-em( 8px );
+	}
+
+	&__body {
+		line-height: px-to-em( 22px );
 	}
 }
 </style>
