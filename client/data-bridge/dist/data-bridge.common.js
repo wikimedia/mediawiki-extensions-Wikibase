@@ -15051,28 +15051,28 @@ var ErrorUnknown_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorUnknown = (ErrorUnknown_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=4926eae8&
-var ErrorUnsupportedDatatypevue_type_template_id_4926eae8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-datatype"},[_c('IconMessageBox',{attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-datatype__head"},[_vm._v("\n\t\t\t"+_vm._s(_vm.$messages.get(
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5b523c5e&
+var ErrorUnsupportedDatatypevue_type_template_id_5b523c5e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-datatype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-datatype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-datatype__head"},[_vm._v("\n\t\t\t"+_vm._s(_vm.$messages.get(
 				_vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD,
 				_vm.targetProperty
 			))+"\n\t\t")]),_c('p',{staticClass:"wb-db-unsupported-datatype__body"},[_vm._v("\n\t\t\t"+_vm._s(_vm.$messages.get(
 				_vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_BODY,
 				_vm.targetProperty,
 				_vm.dataType
-			))+"\n\t\t")])]),_c('BailoutActions',{attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
-var ErrorUnsupportedDatatypevue_type_template_id_4926eae8_staticRenderFns = []
+			))+"\n\t\t")])]),_c('BailoutActions',{staticClass:"wb-db-unsupported-datatype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorUnsupportedDatatypevue_type_template_id_5b523c5e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=4926eae8&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5b523c5e&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=template&id=3751b289&
-var IconMessageBoxvue_type_template_id_3751b289_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-icon-message-box",class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
+var IconMessageBoxvue_type_template_id_59ef5d90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-icon-message-box",class:[
 		("wb-ui-icon-message-box--" + _vm.type),
 		!_vm.inline ? 'wb-ui-icon-message-box--block' : '' ]},[_c('div',{staticClass:"wb-ui-icon-message-box__content"},[_vm._t("default")],2)])}
-var IconMessageBoxvue_type_template_id_3751b289_staticRenderFns = []
+var IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=template&id=3751b289&
+// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=script&lang=ts&
 
@@ -15132,8 +15132,8 @@ var IconMessageBoxvue_type_style_index_0_lang_scss_ = __webpack_require__("15ae"
 
 var IconMessageBox_component = normalizeComponent(
   components_IconMessageBoxvue_type_script_lang_ts_,
-  IconMessageBoxvue_type_template_id_3751b289_render,
-  IconMessageBoxvue_type_template_id_3751b289_staticRenderFns,
+  IconMessageBoxvue_type_template_id_59ef5d90_render,
+  IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns,
   false,
   null,
   null,
@@ -15514,8 +15514,8 @@ var ErrorUnsupportedDatatypevue_type_style_index_0_lang_scss_ = __webpack_requir
 
 var ErrorUnsupportedDatatype_component = normalizeComponent(
   components_ErrorUnsupportedDatatypevue_type_script_lang_ts_,
-  ErrorUnsupportedDatatypevue_type_template_id_4926eae8_render,
-  ErrorUnsupportedDatatypevue_type_template_id_4926eae8_staticRenderFns,
+  ErrorUnsupportedDatatypevue_type_template_id_5b523c5e_render,
+  ErrorUnsupportedDatatypevue_type_template_id_5b523c5e_staticRenderFns,
   false,
   null,
   null,
