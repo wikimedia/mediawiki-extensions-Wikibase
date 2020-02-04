@@ -44,6 +44,16 @@ docker-compose run --rm node npm run test:lint
 docker-compose run --rm node npm run storybook
 ```
 
+### Entry point
+The application entry point is, `src/main.ts`.
+
+### Hooks
+Hooks are defined in `src/MWHookHandler.ts`
+
+* `addSaveHook`: Sets the tainted state and track edits made on statement.
+* `addStartEditHook`: Set the edit state to true when edit button is clicked.
+* `addStopEditHook`: set the edit state to false after each edit (could be a saved or canceled edit).
+
 ### Development Troubleshooting
 #### Build failing because checking dist and built dist don't match
 If you see errors like:
