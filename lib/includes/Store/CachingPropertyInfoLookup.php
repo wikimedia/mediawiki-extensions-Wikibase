@@ -48,9 +48,14 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	/**
 	 * Maps properties to info arrays
 	 *
-	 * @var array[]|null
+	 * @var array[]
 	 */
-	protected $propertyInfo = null;
+	protected $propertyInfo = [];
+
+	/**
+	 * @var bool Is the propertyInfo fully populated?
+	 */
+	protected $propertyInfoFullyPopulated = false;
 
 	/**
 	 * @param PropertyInfoLookup $lookup The info lookup to call back to.
@@ -88,17 +93,23 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	public function getPropertyInfo( PropertyId $propertyId ) {
 		$id = $propertyId->getSerialization();
 
-		// If we have a populated local class cache, use that, else fallback.
-		// If we call getPropertyInfoFromWANCache already, the getWithSetCallback there will use the class
-		// cache anyway when it calls $this->getAllPropertyInfo
-		if ( $this->hasClassBackedCache() && isset( $this->propertyInfo[$id] ) ) {
+		if ( isset( $this->propertyInfo[$id] ) ) {
 			$this->logger->debug(
 				'{method}: using in class cached property info table', [ 'method' => __METHOD__ ]
 			);
 			return $this->propertyInfo[$id];
 		}
 
-		return $this->getPropertyInfoFromWANCache( $propertyId );
+		if ( $this->propertyInfoFullyPopulated ) {
+			$this->logger->debug(
+				'{method}: using in class cached property info table', [ 'method' => __METHOD__ ]
+			);
+			return null;
+		}
+
+		$info = $this->getPropertyInfoFromWANCache( $propertyId );
+		$this->propertyInfo[$id] = $info;
+		return $info;
 	}
 
 	/**
@@ -148,33 +159,29 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 * @return array[] Array containing serialized property IDs as keys and info arrays as values
 	 */
 	public function getAllPropertyInfo() {
-		if ( !$this->hasClassBackedCache() ) {
-			$cacheHit = true;
+		if ( !$this->propertyInfoFullyPopulated ) {
+			$wanCacheHit = true;
 			$fname = __METHOD__;
 			$this->propertyInfo = $this->cache->getWithSetCallback(
 				$this->getFullTableCacheKey(),
 				$this->cacheDuration,
-				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$cacheHit, $fname ) {
+				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$wanCacheHit, $fname ) {
 					$this->logger->debug(
 						'{method}: caching fresh property info table', [ 'method' => $fname ]
 					);
-					$cacheHit = false;
+					$wanCacheHit = false;
 					return $this->lookup->getAllPropertyInfo();
 				}
 			);
-
-			if ( $cacheHit ) {
+			if ( !$wanCacheHit ) {
 				$this->logger->debug(
-					'{method}: using cached property info table', [ 'method' => __METHOD__ ]
+					'{method}: Repopulating property info table in WAN cache', [ 'method' => __METHOD__ ]
 				);
 			}
+			$this->propertyInfoFullyPopulated = true;
 		}
 
 		return $this->propertyInfo;
-	}
-
-	private function hasClassBackedCache() {
-		return $this->propertyInfo !== null;
 	}
 
 	private function getFullTableCacheKey() {
