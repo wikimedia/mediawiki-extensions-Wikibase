@@ -310,7 +310,8 @@ describe( 'ErrorPermission', () => {
 		};
 		const body = MessageKeys.PERMISSIONS_BLOCKED_ON_CLIENT_BODY;
 		const bodyParams = [
-			`<a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a>`,
+			// eslint-disable-next-line max-len
+			`<span><a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a></span>`,
 			blockReason,
 			'', // reserved for currentIP
 			`<bdi>${blockedBy}</bdi>`,
@@ -370,7 +371,8 @@ describe( 'ErrorPermission', () => {
 		};
 		const body = MessageKeys.PERMISSIONS_BLOCKED_ON_REPO_BODY;
 		const bodyParams = [
-			`<a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a>`,
+			// eslint-disable-next-line max-len
+			`<span><a href="http://localhost/wiki/Special:Redirect/user/${blockedById}"><bdi>${blockedBy}</bdi></a></span>`,
 			blockReason,
 			'', // reserved for currentIP
 			`<bdi>${blockedBy}</bdi>`,

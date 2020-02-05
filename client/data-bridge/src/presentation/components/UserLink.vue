@@ -1,11 +1,14 @@
 <template>
-	<a
-		v-if="userId !== 0"
-		:href="router.getPageUrl( `Special:Redirect/user/${userId}` )"
-	>
-		<bdi>{{ userName }}</bdi>
-	</a>
-	<bdi v-else>{{ userName }}</bdi>
+	<!-- span added to ensure there is a single root and eslint is happy -->
+	<span>
+		<a
+			v-if="userId !== 0"
+			:href="router.getPageUrl( `Special:Redirect/user/${userId}` )"
+		>
+			<bdi>{{ userName }}</bdi>
+		</a>
+		<bdi v-else>{{ userName }}</bdi>
+	</span>
 </template>
 
 <script lang="ts">
