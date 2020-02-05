@@ -150,5 +150,7 @@
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Editing the value for $1 is currently not supported",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 is of the datatype $2 on {{WBREPONAME}}. Editing this datatype is currently not supported.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "Editing the value for $1 is currently not supported",
-	"wikibase-client-data-bridge-deprecated-statement-error-body": "The value for $1 is <em>deprecated</em> on {{WBREPONAME}}. Editing <em>deprecated</em> values is currently not supported."
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "The value for $1 is <em>deprecated</em> on {{WBREPONAME}}. Editing <em>deprecated</em> values is currently not supported.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Editing multiple values is currently not supported",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "At the moment $1 cannot be edited because it contains more than one value."
 }
