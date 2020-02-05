@@ -11,12 +11,10 @@
 					targetProperty,
 				) }}
 			</p>
-			<p class="wb-db-deprecated-statement__body">
-				{{ $messages.get(
-					$messages.KEYS.DEPRECATED_STATEMENT_ERROR_BODY,
-					targetProperty,
-				) }}
-			</p>
+			<p
+				class="wb-db-deprecated-statement__body"
+				v-html="$messages.get( $messages.KEYS.DEPRECATED_STATEMENT_ERROR_BODY, targetProperty )"
+			/>
 		</IconMessageBox>
 		<BailoutActions
 			class="wb-db-deprecated-statement__bailout"
@@ -59,6 +57,10 @@ export default class ErrorDeprecatedStatement extends mixins( StateMixin ) {
 
 <style lang="scss">
 .wb-db-deprecated-statement {
+	em {
+		font-style: italic;
+	}
+
 	@include errorBailout();
 }
 </style>
