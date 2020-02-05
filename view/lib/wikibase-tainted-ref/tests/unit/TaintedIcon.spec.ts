@@ -5,6 +5,7 @@ import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { POPPER_SHOW } from '@/store/actionTypes';
 import Track from '@/vue-plugins/Track';
 import Message from '@/vue-plugins/Message';
+import { GET_POPPER_STATE } from '@/store/getterTypes';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -19,7 +20,7 @@ function createStore( popperOpenState = false ): Store<Partial<Application>> {
 	return new Store<Partial<Application>>( {
 		state: {},
 		getters: {
-			popperState: () => () => popperOpenState,
+			[ GET_POPPER_STATE ]: () => () => popperOpenState,
 		},
 		actions: {
 			showPopper: jest.fn(),

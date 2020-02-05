@@ -37,6 +37,7 @@ import {
 	Vue,
 } from 'vue-property-decorator';
 import Popper from '@/presentation/components/Popper.vue';
+import { GET_FEEDBACK_LINK, GET_HELP_LINK } from '@/store/getterTypes';
 
 @Component( {
 	props: {
@@ -64,7 +65,7 @@ export default class TaintedPopper extends Vue {
 		this.$track( 'counter.wikibase.view.tainted-ref.helpLinkClick', 1 );
 	}
 
-	@Getter( 'helpLink' )
+	@Getter( GET_HELP_LINK )
 	public helpLink!: string;
 
 	public get popperText(): string {
@@ -87,7 +88,7 @@ export default class TaintedPopper extends Vue {
 		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-title' );
 	}
 
-	@Getter( 'feedbackLink' )
+	@Getter( GET_FEEDBACK_LINK )
 	public feedbackLink!: string;
 
 	public removeWarningClick( _event: MouseEvent ): void {

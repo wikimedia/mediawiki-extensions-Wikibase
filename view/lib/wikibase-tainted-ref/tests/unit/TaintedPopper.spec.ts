@@ -5,6 +5,7 @@ import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { POPPER_HIDE, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
+import { GET_FEEDBACK_LINK, GET_HELP_LINK } from '@/store/getterTypes';
 
 const localVue = createLocalVue();
 const trackingFunction: any = jest.fn();
@@ -20,8 +21,8 @@ function createMockStore( helpLink?: string ): Store<Partial<Application>> {
 			untaintTaintedState: jest.fn(),
 		},
 		getters: {
-			feedbackLink: jest.fn(),
-			helpLink: helpLink ? () => helpLink : jest.fn(),
+			[ GET_FEEDBACK_LINK ]: jest.fn(),
+			[ GET_HELP_LINK ]: helpLink ? () => helpLink : jest.fn(),
 		},
 	} );
 }

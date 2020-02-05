@@ -15,12 +15,13 @@ import { POPPER_SHOW } from '@/store/actionTypes';
 import Component from 'vue-class-component';
 import { Getter } from 'vuex-class';
 import Vue from 'vue';
+import { GET_POPPER_STATE } from '@/store/getterTypes';
 
 @Component( {
 	props: [ 'guid' ],
 } )
 export default class TaintedIcon extends Vue {
-	@Getter( 'popperState' )
+	@Getter( GET_POPPER_STATE )
 	public popperStateFunction!: Function;
 
 	public get iconTitle(): string {

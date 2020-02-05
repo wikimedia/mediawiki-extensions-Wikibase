@@ -1,26 +1,33 @@
 import { GetterTree } from 'vuex';
 import Application from '@/store/Application';
+import {
+	GET_EDIT_STATE,
+	GET_FEEDBACK_LINK,
+	GET_HELP_LINK,
+	GET_POPPER_STATE,
+	GET_STATEMENT_TAINTED_STATE,
+} from '@/store/getterTypes';
 
 export const getters: GetterTree<Application, Application> = {
-	statementsTaintedState( state: Application ): Function {
+	[ GET_STATEMENT_TAINTED_STATE ]( state: Application ): Function {
 		return ( guid: string ): boolean => {
 			return state.statementsTaintedState[ guid ];
 		};
 	},
-	popperState( state: Application ): Function {
+	[ GET_POPPER_STATE ]( state: Application ): Function {
 		return ( guid: string ): boolean => {
 			return state.statementsPopperIsOpen[ guid ];
 		};
 	},
-	editState( state: Application ): Function {
+	[ GET_EDIT_STATE ]( state: Application ): Function {
 		return ( guid: string ): boolean => {
 			return state.statementsEditState[ guid ];
 		};
 	},
-	helpLink( state: Application ): string {
+	[ GET_HELP_LINK ]( state: Application ): string {
 		return state.helpLink;
 	},
-	feedbackLink( state: Application ): string {
+	[ GET_FEEDBACK_LINK ]( state: Application ): string {
 		return state.feedbackLink;
 	},
 };

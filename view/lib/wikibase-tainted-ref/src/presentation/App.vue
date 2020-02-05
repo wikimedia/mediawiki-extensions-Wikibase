@@ -19,6 +19,7 @@ import {
 import TaintedIcon from '@/presentation/components/TaintedIcon.vue';
 import { Getter } from 'vuex-class';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
+import { GET_EDIT_STATE, GET_POPPER_STATE, GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
 
 @Component( {
 	components: {
@@ -27,13 +28,13 @@ import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 	},
 } )
 export default class App extends Vue {
-	@Getter( 'statementsTaintedState' )
+	@Getter( GET_STATEMENT_TAINTED_STATE )
 	public statementsTaintedStateFunction!: Function;
 
-	@Getter( 'popperState' )
+	@Getter( GET_POPPER_STATE )
 	public popperStateFunction!: Function;
 
-	@Getter( 'editState' )
+	@Getter( GET_EDIT_STATE )
 	public editStateFunction!: Function;
 
 	public get isTainted(): boolean {

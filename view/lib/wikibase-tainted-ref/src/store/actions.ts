@@ -22,6 +22,7 @@ import {
 	SET_STATEMENT_EDIT_FALSE,
 } from '@/store/mutationTypes';
 import { TrackFunction } from '@/store/TrackFunction';
+import { GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
 
 export default function actions( metricTracker: TrackFunction ): ActionTree<Application, Application> {
 	return {
@@ -52,7 +53,7 @@ export default function actions( metricTracker: TrackFunction ): ActionTree<Appl
 		): void {
 			context.commit( SET_STATEMENT_EDIT_TRUE, guid );
 			context.commit( SET_POPPER_HIDDEN, guid );
-			if ( context.getters.statementsTaintedState( guid ) ) {
+			if ( context.getters[ GET_STATEMENT_TAINTED_STATE ]( guid ) ) {
 				metricTracker( 'counter.wikibase.view.tainted-ref.startedEditWithTaintedIcon', 1 );
 			}
 		},
