@@ -137,6 +137,8 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-unsupported-datatype-error-body',
 							'wikibase-client-data-bridge-deprecated-statement-error-head',
 							'wikibase-client-data-bridge-deprecated-statement-error-body',
+							'wikibase-client-data-bridge-ambiguous-statement-error-head',
+							'wikibase-client-data-bridge-ambiguous-statement-error-body',
 							'savechanges',
 							'publishchanges',
 							'cancel',
