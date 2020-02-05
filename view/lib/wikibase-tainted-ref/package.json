@@ -9,6 +9,7 @@
     "build:app": "rm -rf node_modules/.cache && NODE_ENV=production vue-cli-service build --no-clean --target lib --formats commonjs src/main.ts",
     "build:init": "rm -rf node_modules/.cache && NODE_ENV=production vue-cli-service build --no-clean",
     "fix": "vue-cli-service lint --max-warnings 0 .",
+    "watch": "vue-cli-service test:unit -c ./jest.config.js --watch",
     "test": "npm-run-all test:*",
     "test:unit": "vue-cli-service test:unit -c ./jest.config.js",
     "test:lint": "vue-cli-service lint --max-warnings 0 --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
