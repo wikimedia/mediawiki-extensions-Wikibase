@@ -110,7 +110,7 @@ RootActions
 		);
 	}
 
-	public [ BRIDGE_INIT_WITH_REMOTE_DATA ]( {
+	public async [ BRIDGE_INIT_WITH_REMOTE_DATA ]( {
 		information,
 		results: [
 			wikibaseRepoConfiguration,
@@ -121,7 +121,7 @@ RootActions
 	}: {
 		information: AppInformation;
 		results: [ WikibaseRepoConfiguration, MissingPermissionsError[], string, unknown ];
-	} ): void {
+	} ): Promise<void> {
 		if ( permissionErrors.length ) {
 			this.commit( APPLICATION_ERRORS_ADD, permissionErrors );
 			return;
@@ -138,7 +138,7 @@ RootActions
 			0,
 		);
 
-		this.dispatch( BRIDGE_VALIDATE_ENTITY_STATE, path );
+		await this.dispatch( BRIDGE_VALIDATE_ENTITY_STATE, path );
 		if ( this.getters.applicationStatus !== ApplicationStatus.ERROR ) {
 			this.commit(
 				ORIGINAL_STATEMENT_SET,
@@ -152,7 +152,7 @@ RootActions
 		}
 	}
 
-	public [ BRIDGE_REQUEST_TARGET_LABEL ]( propertyId: string ): Promise<unknown> {
+	public [ BRIDGE_REQUEST_TARGET_LABEL ]( propertyId: string ): Promise<void> {
 		return this.store.$services.get( 'entityLabelRepository' ).getLabel( propertyId )
 			.then( ( label: Term ) => {
 				this.commit( TARGET_LABEL_SET, label );
@@ -163,15 +163,15 @@ RootActions
 
 	public [ BRIDGE_VALIDATE_ENTITY_STATE ](
 		path: MainSnakPath,
-	): void {
+	): Promise<void> {
 		if (
 			this.statementModule.getters[ STATEMENTS_PROPERTY_EXISTS ]( path.entityId, path.propertyId ) === false
 		) {
 			this.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
-			return;
+			return Promise.resolve();
 		}
 
-		this.dispatch( BRIDGE_VALIDATE_APPLICABILITY, path );
+		return this.dispatch( BRIDGE_VALIDATE_APPLICABILITY, path );
 	}
 
 	public [ BRIDGE_VALIDATE_APPLICABILITY ](
@@ -267,14 +267,16 @@ RootActions
 
 	public [ BRIDGE_ERROR_ADD ](
 		errors: ApplicationError[],
-	): void {
+	): Promise<void> {
 		this.commit( APPLICATION_ERRORS_ADD, errors );
+		return Promise.resolve();
 	}
 
 	public [ BRIDGE_SET_EDIT_DECISION ](
 		editDecision: EditDecision,
-	): void {
-		return this.commit( EDITDECISION_SET, editDecision );
+	): Promise<void> {
+		this.commit( EDITDECISION_SET, editDecision );
+		return Promise.resolve();
 	}
 
 }
