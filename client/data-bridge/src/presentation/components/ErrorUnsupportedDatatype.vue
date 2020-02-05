@@ -1,6 +1,10 @@
 <template>
 	<div class="wb-db-unsupported-datatype">
-		<IconMessageBox type="notice" :inline="true">
+		<IconMessageBox
+			class="wb-db-unsupported-datatype__message"
+			type="notice"
+			:inline="true"
+		>
 			<p class="wb-db-unsupported-datatype__head">
 				{{ $messages.get(
 					$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD,
@@ -15,7 +19,11 @@
 				) }}
 			</p>
 		</IconMessageBox>
-		<BailoutActions :original-href="originalHref" :page-title="pageTitle" />
+		<BailoutActions
+			class="wb-db-unsupported-datatype__bailout"
+			:original-href="originalHref"
+			:page-title="pageTitle"
+		/>
 	</div>
 </template>
 
@@ -57,6 +65,10 @@ export default class ErrorUnsupportedDatatype extends mixins( StateMixin ) {
 
 <style lang="scss">
 .wb-db-unsupported-datatype {
+	&__message {
+		margin: 0 $margin-center-column-side;
+	}
+
 	&__head {
 		font-weight: bold;
 		line-height: px-to-em( 24px );

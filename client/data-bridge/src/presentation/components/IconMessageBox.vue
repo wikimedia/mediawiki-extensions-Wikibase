@@ -40,7 +40,6 @@ export default class IconMessageBox extends Vue {
 	line-height: $size-icon;
 	box-sizing: border-box;
 	text-align: left;
-	padding-left: 24px;
 	position: relative;
 
 	&__content {
