@@ -23,6 +23,7 @@ import newMockStore from '@wmde/vuex-helpers/dist/newMockStore';
 import { ActionContext, ActionTree } from 'vuex';
 import Application from '@/store/Application';
 import { TrackFunction } from '@/store/TrackFunction';
+import { GET_STATEMENT_TAINTED_STATE } from '@/store/getterTypes';
 
 function getActionTree( mockTrackFunction: TrackFunction ): ActionTree<Application, Application> {
 	return ( actions )( mockTrackFunction );
@@ -30,7 +31,7 @@ function getActionTree( mockTrackFunction: TrackFunction ): ActionTree<Applicati
 
 function getTaintedMockStore( taintedState = false ): ActionContext<any, any> {
 	return newMockStore( {
-		getters: { statementsTaintedState: () => taintedState },
+		getters: { [ GET_STATEMENT_TAINTED_STATE ]: () => taintedState },
 	} );
 }
 
