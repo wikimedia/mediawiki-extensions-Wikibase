@@ -23,7 +23,7 @@ function createStore( popperOpenState = false ): Store<Partial<Application>> {
 			[ GET_POPPER_STATE ]: () => () => popperOpenState,
 		},
 		actions: {
-			showPopper: jest.fn(),
+			[ POPPER_SHOW ]: jest.fn(),
 		},
 	} );
 }
