@@ -5,12 +5,13 @@ import {
 	STATEMENT_TAINTED_STATE_UNTAINT,
 } from '@/store/actionTypes';
 import MWHookHandler from '@/MWHookHandler';
-import Vuex from 'vuex';
+import Vuex, { Store } from 'vuex';
 import Vue from 'vue';
 import { Hook, HookRegistry } from '@/@types/mediawiki/MwWindow';
 import getMockStatement from './getMockStatement';
 import StatementTracker from '@/StatementTracker';
 import { Statement } from '@/definitions/wikibase-js-datamodel/Statement';
+import { HookHandler } from '@/HookHandler';
 
 Vue.use( Vuex );
 
@@ -52,128 +53,130 @@ function getEmptyInitialisedStore(): any {
 }
 
 describe( 'MWHookHandler', () => {
-	it( `should dispatch ${START_EDIT} with statement guid on edit hook firing`, () => {
-		const dummyEditHook = getDummyEditHook( fakeGuid );
-		const startEditingHookName = 'wikibase.statement.startEditing';
-		const mwHookRegistry = getMockHookRegistry( startEditingHookName, dummyEditHook );
+	describe( 'on start edit hook firing', () => {
+		it( `should dispatch ${START_EDIT} with statement guid`, () => {
+			const dummyEditHook = getDummyEditHook( fakeGuid );
+			const startEditingHookName = 'wikibase.statement.startEditing';
+			const mwHookRegistry = getMockHookRegistry( startEditingHookName, dummyEditHook );
+			const mockTaintedChecker = { check: () => true };
+			const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+			const store = getEmptyInitialisedStore();
+			store.dispatch = jest.fn();
 
-		const mockTaintedChecker = { check: () => true };
+			hookHandler.addStore( store );
 
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		hookHandler.addStore( store );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( startEditingHookName );
-		expect( store.dispatch ).toHaveBeenCalledWith( START_EDIT, fakeGuid );
-	} );
-
-	it( `should dispatch ${STOP_EDIT} with statement guid on edit stop hook firing`, () => {
-		const dummyEditHook = getDummyEditHook( fakeGuid );
-
-		const stopEditingHookName = 'wikibase.statement.stopEditing';
-		const mwHookRegistry = getMockHookRegistry( stopEditingHookName, dummyEditHook );
-
-		const mockTaintedChecker = { check: () => true };
-
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		hookHandler.addStore( store );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( stopEditingHookName );
-		expect( store.dispatch ).toHaveBeenCalledWith( STOP_EDIT, fakeGuid );
-	} );
-
-	it( `should dispatch ${STATEMENT_TAINTED_STATE_TAINT} with statement guid` +
-		'on save hook firing and checker is true', () => {
-		const dummySaveHook = getDummySaveHook( 'Q1', fakeGuid );
-		const saveHookName = 'wikibase.statement.saved';
-
-		const mwHookRegistry = getMockHookRegistry( saveHookName, dummySaveHook );
-
-		const mockTaintedChecker = { check: () => true };
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		hookHandler.addStore( store );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( saveHookName );
-		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_TAINT, fakeGuid );
-	} );
-
-	it( 'should not dispatch ${STATEMENT_TAINTED_STATE_TAINT} ' +
-		'on save hook firing when checker is false', () => {
-		const s1 = getMockStatement( false );
-		const s2 = getMockStatement( false );
-		const entityId = 'Q1';
-		const saveHookName = 'wikibase.statement.saved';
-
-		const dummySaveHook = getDummySaveHook( entityId, fakeGuid, s1, s2 );
-
-		const mwHookRegistry = getMockHookRegistry( saveHookName, dummySaveHook );
-		const mockTaintedChecker = { check: jest.fn() };
-
-		mockTaintedChecker.check.mockReturnValue( false );
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		hookHandler.addStore( store );
-		expect( mockTaintedChecker.check ).toHaveBeenCalledWith( s1, s2 );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( saveHookName );
-		expect( store.dispatch ).not.toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_TAINT, fakeGuid );
-	} );
-
-	it( `should dispatch ${STATEMENT_TAINTED_STATE_UNTAINT} with statement guid ` +
-		'on save hook firing, if statement was tainted', () => {
-		const dummySaveHook = getDummySaveHook( 'Q1', fakeGuid );
-		const saveHookName = 'wikibase.statement.saved';
-
-		const mwHookRegistry = getMockHookRegistry( saveHookName, dummySaveHook );
-
-		const mockTaintedChecker = { check: () => true };
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
-		const store = new Vuex.Store( {
-			state: {
-				statementsTaintedState: { [ fakeGuid ]: true },
-				statementsPopperIsOpen: {},
-			} as any,
+			expect( mwHookRegistry ).toHaveBeenCalledWith( startEditingHookName );
+			expect( store.dispatch ).toHaveBeenCalledWith( START_EDIT, fakeGuid );
 		} );
-		store.dispatch = jest.fn();
-		hookHandler.addStore( store );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( saveHookName );
-		expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, fakeGuid );
 	} );
 
-	it( 'should call the statementTracker on save hook firing', () => {
-		const s1 = getMockStatement( false );
-		const s2 = getMockStatement( false );
-		const entityId = 'Q1';
-		const dummySaveHook = getDummySaveHook( entityId, fakeGuid, s1, s2 );
+	describe( 'on stop edit hook firing', () => {
+		it( `should dispatch ${STOP_EDIT} with statement guid`, () => {
+			const dummyEditHook = getDummyEditHook( fakeGuid );
+			const stopEditingHookName = 'wikibase.statement.stopEditing';
+			const mwHookRegistry = getMockHookRegistry( stopEditingHookName, dummyEditHook );
+			const mockTaintedChecker = { check: () => true };
+			const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+			const store = getEmptyInitialisedStore();
+			store.dispatch = jest.fn();
 
-		const mwHookRegistry = getMockHookRegistry( 'wikibase.statement.saved', dummySaveHook );
+			hookHandler.addStore( store );
 
-		const mockTaintedChecker = { check: () => true };
-
-		const trackChanges = jest.fn();
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, { trackChanges } as any );
-		hookHandler.addStore( store );
-		expect( trackChanges ).toHaveBeenCalledWith( s1, s2 );
+			expect( mwHookRegistry ).toHaveBeenCalledWith( stopEditingHookName );
+			expect( store.dispatch ).toHaveBeenCalledWith( STOP_EDIT, fakeGuid );
+		} );
 	} );
 
-	it( `should dispatch ${START_EDIT} with statement guid on start edit hook firing`, () => {
-		const dummyStartEditHook = getDummyEditHook( fakeGuid );
-		const startEditingHookName = 'wikibase.statement.startEditing';
+	describe( 'on save hook firing', () => {
+		function getStoreWithPreTaintedStatement(): Store<any> {
+			const store = new Vuex.Store( {
+				state: {
+					statementsTaintedState: { [ fakeGuid ]: true },
+					statementsPopperIsOpen: {},
+				} as any,
+			} );
+			return store;
+		}
 
-		const mwHookRegistry = getMockHookRegistry( startEditingHookName, dummyStartEditHook );
+		function getSavingHookHandler( taintedCheck: boolean ): HookHandler {
+			const dummySaveHook = getDummySaveHook( 'Q1', fakeGuid );
+			const saveHookName = 'wikibase.statement.saved';
+			const mwHookRegistry = getMockHookRegistry( saveHookName, dummySaveHook );
+			const mockTaintedChecker = { check: () => taintedCheck };
+			const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+			return hookHandler;
+		}
 
-		const mockTaintedChecker = { check: () => true };
+		it( `should dispatch ${STATEMENT_TAINTED_STATE_TAINT} with statement guid ` +
+			'when taintedChecker is true and statement is untainted', () => {
+			const hookHandler = getSavingHookHandler( true );
+			const store = getEmptyInitialisedStore();
+			store.dispatch = jest.fn();
 
-		const store = getEmptyInitialisedStore();
-		store.dispatch = jest.fn();
-		const trackChanges = jest.fn();
-		const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, { trackChanges } as any );
-		hookHandler.addStore( store );
-		expect( mwHookRegistry ).toHaveBeenCalledWith( startEditingHookName );
-		expect( store.dispatch ).toHaveBeenCalledWith( START_EDIT, fakeGuid );
+			hookHandler.addStore( store );
+
+			expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_TAINT, fakeGuid );
+		} );
+
+		it( `should not dispatch ${STATEMENT_TAINTED_STATE_TAINT} ` +
+			'when taintedChecker is false', () => {
+			const s1 = getMockStatement( false );
+			const s2 = getMockStatement( false );
+			const entityId = 'Q1';
+			const saveHookName = 'wikibase.statement.saved';
+			const dummySaveHook = getDummySaveHook( entityId, fakeGuid, s1, s2 );
+			const mwHookRegistry = getMockHookRegistry( saveHookName, dummySaveHook );
+			const mockTaintedChecker = { check: jest.fn() };
+			mockTaintedChecker.check.mockReturnValue( false );
+			const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+			const store = getEmptyInitialisedStore();
+			store.dispatch = jest.fn();
+
+			hookHandler.addStore( store );
+
+			expect( mockTaintedChecker.check ).toHaveBeenCalledWith( s1, s2 );
+			expect( mwHookRegistry ).toHaveBeenCalledWith( saveHookName );
+			expect( store.dispatch ).not.toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_TAINT, fakeGuid );
+		} );
+
+		it( `should dispatch ${STATEMENT_TAINTED_STATE_UNTAINT} with statement guid ` +
+			'if statement was already tainted and taintedChecker is true', () => {
+			const hookHandler = getSavingHookHandler( true );
+			const store = getStoreWithPreTaintedStatement();
+			store.dispatch = jest.fn();
+
+			hookHandler.addStore( store );
+
+			expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, fakeGuid );
+		} );
+
+		it( `should dispatch ${STATEMENT_TAINTED_STATE_UNTAINT} with statement guid ` +
+			'if statement was already tainted and taintedChecker is false', () => {
+			const hookHandler = getSavingHookHandler( false );
+			const store = getStoreWithPreTaintedStatement();
+			store.dispatch = jest.fn();
+
+			hookHandler.addStore( store );
+
+			expect( store.dispatch ).toHaveBeenCalledWith( STATEMENT_TAINTED_STATE_UNTAINT, fakeGuid );
+		} );
+
+		it( 'should call the statementTracker', () => {
+			const s1 = getMockStatement( false );
+			const s2 = getMockStatement( false );
+			const entityId = 'Q1';
+			const dummySaveHook = getDummySaveHook( entityId, fakeGuid, s1, s2 );
+			const mwHookRegistry = getMockHookRegistry( 'wikibase.statement.saved', dummySaveHook );
+			const mockTaintedChecker = { check: () => true };
+			const trackChanges = jest.fn();
+			const store = getEmptyInitialisedStore();
+			store.dispatch = jest.fn();
+			const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, { trackChanges } as any );
+
+			hookHandler.addStore( store );
+
+			expect( trackChanges ).toHaveBeenCalledWith( s1, s2 );
+		} );
 	} );
+
 } );
