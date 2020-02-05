@@ -13217,7 +13217,7 @@ function (_Actions) {
       }
 
       if (this.statementModule.getters[STATEMENT_RANK](path) === 'deprecated') {
-        this.dispatch(BRIDGE_ERROR_ADD, [{
+        return this.dispatch(BRIDGE_ERROR_ADD, [{
           type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT
         }]);
       }
