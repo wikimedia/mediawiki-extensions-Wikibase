@@ -11,6 +11,9 @@
 		<ErrorDeprecatedStatement
 			v-else-if="statementValueIsDeprecated"
 		/>
+		<ErrorAmbiguousStatement
+			v-else-if="statementIsAmbiguous"
+		/>
 		<ErrorUnknown v-else />
 	</section>
 </template>
@@ -23,6 +26,7 @@ import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
+import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
@@ -34,6 +38,7 @@ import ApplicationError, {
 		ErrorUnknown,
 		ErrorUnsupportedDatatype,
 		ErrorDeprecatedStatement,
+		ErrorAmbiguousStatement,
 	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
@@ -61,6 +66,12 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 	public get statementValueIsDeprecated(): boolean {
 		return this.applicationErrors.some(
 			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
+		);
+	}
+
+	public get statementIsAmbiguous(): boolean {
+		return this.applicationErrors.some(
+			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
 		);
 	}
 }

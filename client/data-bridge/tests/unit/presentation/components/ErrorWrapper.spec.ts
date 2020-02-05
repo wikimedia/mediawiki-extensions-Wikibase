@@ -10,6 +10,7 @@ import ErrorPermission from '@/presentation/components/ErrorPermission.vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
+import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -98,6 +99,9 @@ describe( 'ErrorWrapper', () => {
 			{
 				type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT,
 			},
+			{
+				type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
+			},
 		];
 		const store = createTestStore( {
 			state: {
@@ -114,6 +118,7 @@ describe( 'ErrorWrapper', () => {
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( permissionErrors );
 		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
 	} );
+
 	// eslint-disable-next-line max-len
 	it( 'mounts ErrorUnsupportedDatatype when an unsupported data type error is present in the application errors', () => {
 		const applicationErrors: ApplicationError[] = [
@@ -132,6 +137,7 @@ describe( 'ErrorWrapper', () => {
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 		expect( wrapper.find( ErrorUnsupportedDatatype ).exists() ).toBeTruthy();
 	} );
+
 	// eslint-disable-next-line max-len
 	it( 'mounts ErrorDeprecatedStatement when a deprecated statement error is present in the application errors', () => {
 		const applicationErrors: ApplicationError[] = [
@@ -145,6 +151,25 @@ describe( 'ErrorWrapper', () => {
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+
 		expect( wrapper.find( ErrorDeprecatedStatement ).exists() ).toBeTruthy();
 	} );
+
+	// eslint-disable-next-line max-len
+	it( 'mounts ErrorAmbiguousStatement when an ambiguous statement error is present in the application errors', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+
+		expect( wrapper.find( ErrorAmbiguousStatement ).exists() ).toBeTruthy();
+	} );
+
 } );
