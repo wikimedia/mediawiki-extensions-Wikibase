@@ -48,10 +48,10 @@ jest.mock( '@/events/repeater', () => ( {
 	default: ( app: any, emitter: any, events: any ) => mockRepeater( app, emitter, events ),
 } ) );
 
-const extendVueEnvironment = jest.fn();
+const mockExtendVueEnvironment = jest.fn();
 jest.mock( '@/presentation/extendVueEnvironment', () => ( {
 	__esModule: true,
-	default: ( ...args: any[] ) => extendVueEnvironment( ...args ),
+	default: ( ...args: any[] ) => mockExtendVueEnvironment( ...args ),
 } ) );
 
 const messagesRepository = {};
@@ -77,10 +77,10 @@ describe( 'launch', () => {
 
 		launch( appConfiguration, appInformation as any, services as any );
 
-		expect( extendVueEnvironment ).toHaveBeenCalledTimes( 1 );
-		expect( extendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageInfoRepository );
-		expect( extendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
-		expect( extendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( appInformation.client );
+		expect( mockExtendVueEnvironment ).toHaveBeenCalledTimes( 1 );
+		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 0 ] ).toBe( languageInfoRepository );
+		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 1 ] ).toBe( messagesRepository );
+		expect( mockExtendVueEnvironment.mock.calls[ 0 ][ 2 ] ).toBe( appInformation.client );
 		expect( Vue.config.productionTip ).toBe( false );
 	} );
 
