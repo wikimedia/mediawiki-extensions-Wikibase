@@ -76,6 +76,10 @@ export default class BailoutActions extends Vue {
 		margin-bottom: px-to-em( 24px );
 		margin-left: px-to-em( 16px );
 		line-height: px-to-em( 22px );
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	&__button {
