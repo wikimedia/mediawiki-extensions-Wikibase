@@ -152,5 +152,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}} üzerindeki değeri düzenleyin",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Kullanılan şablona bağlı olarak, [$1 makale editörü] kullanılarak değerin üzerine yerel olarak yazmak mümkün olabilir. Mümkünse, yukarıdaki düğmeyi kullanarak değeri {{WBREPONAME}} ürününe eklemenizi öneririz.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "$1 değerinin düzenlenmesi şu anda desteklenmiyor",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1, {{WBREPONAME}} üzerindeki $2 veri türünden. Bu veri türünün düzenlenmesi şu anda desteklenmemektedir."
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1, {{WBREPONAME}} üzerindeki $2 veri türünden. Bu veri türünün düzenlenmesi şu anda desteklenmemektedir.",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "$1 değerinin düzenlenmesi şu anda desteklenmiyor",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "{{WBREPONAME}} üzerinde $1 değeri <em>kullanımdan kaldırıldı</em>. <em>Kullanımdan kaldırıldı</em> değerlerinin düzenlenmesi şu anda desteklenmemektedir."
 }

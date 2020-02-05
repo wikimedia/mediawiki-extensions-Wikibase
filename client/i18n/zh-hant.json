@@ -158,5 +158,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "編輯在{{WBREPONAME}}的值",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "根據所使用的模板，可以使用[$1 條目編輯器]來覆寫本地值。若可能的話，我們建議您改為透過以上按鈕來添加值到{{WBREPONAME}}。",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "目前不支援編輯$1的值",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1在{{WBREPONAME}}為資料類型$2。目前不支援編輯此資料類型。"
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1在{{WBREPONAME}}為資料類型$2。目前不支援編輯此資料類型。",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "目前不支援編輯$1的值",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "在{{WBREPONAME}}上用於$1的值<em>已棄用</em>。編輯<em>已棄用</em>的值目前不支援。"
 }

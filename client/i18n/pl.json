@@ -16,7 +16,8 @@
 			"Woytecr",
 			"Sp5uhe",
 			"Openbk",
-			"Rail"
+			"Rail",
+			"Matma Rex"
 		]
 	},
 	"wikibase-client-desc": "Klient rozszerzenia Wikibase",
@@ -61,8 +62,8 @@
 	"wikibase-rc-show-wikidata-pref": "Pokazuj edycje w Wikidanych w ostatnich zmianach",
 	"wikibase-rc-wikibase-edit-letter": "d",
 	"wikibase-rc-wikibase-edit-title": "Edycja w Wikidanych",
-	"wikibase-rcfilters-hide-wikibase-label": "Edycje w Wikidanych",
-	"wikibase-rcfilters-hide-wikibase-description": "Edycje pochodzące z {{WBREPONAME}}.",
+	"wikibase-rcfilters-hide-wikibase-label": "Edycje w {{GRAMMAR:MS.lp|{{WBREPONAME}}}}",
+	"wikibase-rcfilters-hide-wikibase-description": "Edycje pochodzące z {{GRAMMAR:D.lp|{{WBREPONAME}}}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Ten filtr koliduje z jednym lub kilkoma filtrami Jakości edycji lub Intencji użytkowników. Ocena jakości i edycji nie jest dostępna dla edycji z Wikidanych.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Filtr \"Edycje w Wikidanych\" koliduje z jednym lub kilkoma filtrami Jakości edycji lub intencji użytkowników. Ocena jakości i intencji nie jest dostępna dla edycji z Wikidanych. Kolidujące filtry zostały odpowiednio oznaczone na pasku Aktywnych filtrów.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Ocena jakości edycji nie działa dla niektórych rodzajów zmian, więc występuje konflikt między tym filtrem, a {{PLURAL:$2|filtrem|filtrami}} rodzaju zmian: $1",

@@ -120,5 +120,7 @@
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Opravil/a</strong> jsem chybnou hodnotu",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Původní hodnota byla chybná a ani nikdy v minulosti nebyla platná",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Aktualizoval/a</strong> jsem zastaralou hodnotu",
-	"wikibase-client-data-bridge-edit-decision-update-description": "Původní hodnota bývala správná, ale nyní je zastaralá."
+	"wikibase-client-data-bridge-edit-decision-update-description": "Původní hodnota bývala správná, ale nyní je zastaralá.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Editovat hodnotu vlastnosti $1 není momentálně umožněno.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 má na {{WBREPONAME}} datový typ $2. Editace tohoto datového typu není v současnosti podporována."
 }

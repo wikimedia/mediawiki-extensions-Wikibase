@@ -137,5 +137,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Уреди ја вредноста на {{WBREPONAME}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Зависно од предлошката што се користи, можеби може да се замени вредноста месно користејќи го [$1 уредникот на статии]. Доколку е возможно, препорачуваме место тоа да ја додадете вредноста во {{WBREPONAME}} со копчето погоре.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "Уредувањето на вредноста за $1 тековно не е поддржано.",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 е од податочниот тип $2 на {{WBREPONAME}}. Уредувањето на тој податочен тип засега не е поддржано."
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 е од податочниот тип $2 на {{WBREPONAME}}. Уредувањето на тој податочен тип засега не е поддржано.",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "Уредувањето на вредноста за $1 тековно не е поддржано",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "Вредноста за $1 е <em>застарена</em> на {{WBREPONAME}}. Уредувањето на <em>застарени</em> вредности тековно не е поддржано."
 }
