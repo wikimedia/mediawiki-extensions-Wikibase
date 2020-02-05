@@ -79,8 +79,9 @@ export default class BailoutActions extends Vue {
 	}
 
 	&__button {
-		margin-top: px-to-em( 16px );
-		font-size: px-to-em( 16px );
+		$font-size: 16px;
+		font-size: px-to-em( $font-size );
+		margin-top: px-to-em( 8px * ( $base-font-size-desired / $font-size ) ); // actually 8px
 	}
 }
 </style>
