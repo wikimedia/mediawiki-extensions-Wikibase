@@ -7,6 +7,7 @@
 @import './mixins/_inputFieldBase';
 @import './mixins/_inputFieldStandalone';
 @import './mixins/_inputFieldLabel';
+@import './mixins/_errorBailout';
 @import '~bootstrap/scss/mixins/_screen-reader';
 @import '~bootstrap/scss/mixins/_breakpoints';
 @import '~@wmde/wikibase-vuejs-components/dist/wikibase-vuejs-components.css';

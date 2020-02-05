@@ -59,18 +59,6 @@ export default class ErrorDeprecatedStatement extends mixins( StateMixin ) {
 
 <style lang="scss">
 .wb-db-deprecated-statement {
-	&__message {
-		margin: 0 $margin-center-column-side;
-	}
-
-	&__head {
-		font-weight: bold;
-		line-height: px-to-em( 22px );
-		margin-bottom: px-to-em( 8px );
-	}
-
-	&__body {
-		line-height: px-to-em( 22px );
-	}
+	@include errorBailout();
 }
 </style>
