@@ -687,7 +687,7 @@ describe( 'root/actions', () => {
 
 			expect( dispatch ).toHaveBeenCalledWith(
 				BRIDGE_ERROR_ADD,
-				[ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ],
+				[ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE, info: { snakType: 'novalue' } } ],
 			);
 
 		} );

@@ -11,6 +11,7 @@ import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
+import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -172,4 +173,21 @@ describe( 'ErrorWrapper', () => {
 		expect( wrapper.find( ErrorAmbiguousStatement ).exists() ).toBeTruthy();
 	} );
 
+	it( 'mounts ErrorUnsupportedSnakType on unsupported snak type application error', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.UNSUPPORTED_SNAK_TYPE,
+				info: {
+					snakType: 'somevalue',
+				},
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		expect( wrapper.find( ErrorUnsupportedSnakType ).exists() ).toBe( true );
+	} );
 } );

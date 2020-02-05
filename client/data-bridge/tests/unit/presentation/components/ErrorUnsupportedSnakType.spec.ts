@@ -1,0 +1,107 @@
+import { SnakType } from '@/datamodel/Snak';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
+import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
+import BailoutActions from '@/presentation/components/BailoutActions.vue';
+import MessageKeys from '@/definitions/MessageKeys';
+import Vuex from 'vuex';
+import { createTestStore } from '../../../util/store';
+
+const localVue = createLocalVue();
+localVue.use( Vuex );
+
+describe( 'ErrorUnsupportedSnakType', () => {
+	const targetProperty = 'P569',
+		pageTitle = 'Marie_Curie',
+		originalHref = 'https://www.wikidata.org/wiki/Q7186',
+		messageGet = jest.fn( ( key ) => key ),
+		store = createTestStore( {
+			state: {
+				targetProperty,
+				pageTitle,
+				originalHref,
+			},
+		} );
+
+	it( 'uses IconMessageBox to display the error message', () => {
+		const wrapper = shallowMount( ErrorUnsupportedSnakType, {
+			localVue,
+			propsData: {
+				snakType: 'somevalue',
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			store,
+		} );
+		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
+	} );
+
+	it.each( [
+		[ 'somevalue', MessageKeys.SOMEVALUE_ERROR_HEAD ],
+		[ 'novalue', MessageKeys.NOVALUE_ERROR_HEAD ],
+	] )( 'shows the message header for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
+		shallowMount( ErrorUnsupportedSnakType, {
+			localVue,
+			propsData: {
+				snakType,
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			store,
+		} );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 1, messageKey, targetProperty );
+	} );
+
+	it.each( [
+		[ 'somevalue', MessageKeys.SOMEVALUE_ERROR_BODY ],
+		[ 'novalue', MessageKeys.NOVALUE_ERROR_BODY ],
+	] )( 'shows the message body for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
+		shallowMount( ErrorUnsupportedSnakType, {
+			localVue,
+			propsData: {
+				snakType,
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			store,
+		} );
+
+		expect( messageGet ).toHaveBeenNthCalledWith( 2, messageKey, targetProperty );
+	} );
+
+	it( 'uses BailoutActions to provide a bail out path for unsupported snak type', () => {
+		const wrapper = shallowMount( ErrorUnsupportedSnakType, {
+			localVue,
+			propsData: {
+				snakType: 'somevalue',
+			},
+			mocks: {
+				$messages: {
+					KEYS: MessageKeys,
+					get: messageGet,
+				},
+			},
+			store,
+		} );
+
+		expect( wrapper.find( BailoutActions ).exists() ).toBe( true );
+		expect( wrapper.find( BailoutActions ).props() ).toStrictEqual( {
+			originalHref,
+			pageTitle,
+		} );
+	} );
+
+} );

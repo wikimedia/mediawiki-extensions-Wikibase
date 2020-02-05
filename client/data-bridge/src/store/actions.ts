@@ -189,10 +189,16 @@ RootActions
 			return this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT } ] );
 		}
 
-		if (
-			this.statementModule.getters[ SNAK_SNAKTYPE ]( path ) !== 'value'
-		) {
-			return this.dispatch( BRIDGE_ERROR_ADD, [ { type: ErrorTypes.UNSUPPORTED_SNAK_TYPE } ] );
+		const snakType = this.statementModule.getters[ SNAK_SNAKTYPE ]( path );
+		if ( snakType === null ) {
+			throw new Error( 'If snak type is missing, there should have been an error earlier' );
+		}
+		if ( snakType !== 'value' ) {
+			const error: ApplicationError = {
+				type: ErrorTypes.UNSUPPORTED_SNAK_TYPE,
+				info: { snakType },
+			};
+			return this.dispatch( BRIDGE_ERROR_ADD, [ error ] );
 		}
 
 		const datatype = this.statementModule.getters[ SNAK_DATATYPE ]( path );
