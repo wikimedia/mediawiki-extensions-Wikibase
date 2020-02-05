@@ -113,17 +113,17 @@ use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
-use Wikibase\Lib\Store\DelegatingEntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTermStoreWriter;
+use Wikibase\Lib\Store\ItemTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Lib\Store\PropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
@@ -1829,7 +1829,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
-			$this->newEntityTermStoreWriter(),
+			$this->getItemTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -1843,9 +1843,14 @@ class WikibaseRepo {
 		);
 	}
 
-	private function newEntityTermStoreWriter(): EntityTermStoreWriter {
-		return new DelegatingEntityTermStoreWriter(
-			$this->getPropertyTermStore(),
+	private function getPropertyTermStoreWriter() {
+		return new PropertyTermStoreWriter(
+			$this->getPropertyTermStore()
+		);
+	}
+
+	private function getItemTermStoreWriter() {
+		return new ItemTermStoreWriter(
 			$this->getItemTermStore()
 		);
 	}
@@ -1876,10 +1881,16 @@ class WikibaseRepo {
 		}
 	}
 
+	/**
+	 * @return PropertyTermStore for the OLD term storage schema (wb_terms)
+	 */
 	private function getOldPropertyTermStore(): PropertyTermStore {
 		return new TermIndexPropertyTermStore( $this->getStore()->getTermIndex() );
 	}
 
+	/**
+	 * @return PropertyTermStore for the NEW term storage schema
+	 */
 	public function getNewPropertyTermStore(): PropertyTermStore {
 		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$loadBalancer = $loadBalancerFactory->getMainLB();
@@ -1966,10 +1977,16 @@ class WikibaseRepo {
 		return new ByIdDispatchingItemTermStore( $itemTermStores );
 	}
 
+	/**
+	 * @return ItemTermStore for the OLD term storage schema (wb_terms)
+	 */
 	private function getOldItemTermStore(): ItemTermStore {
 		return new TermIndexItemTermStore( $this->getStore()->getTermIndex() );
 	}
 
+	/**
+	 * @return ItemTermStore for the NEW term storage schema
+	 */
 	public function getNewItemTermStore(): ItemTermStore {
 		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 		$loadBalancer = $loadBalancerFactory->getMainLB();
@@ -2037,7 +2054,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
-			$this->newEntityTermStoreWriter(),
+			$this->getPropertyTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
