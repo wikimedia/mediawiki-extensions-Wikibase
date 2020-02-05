@@ -37,13 +37,13 @@ export default class IconMessageBox extends Vue {
 
 <style lang="scss">
 .wb-ui-icon-message-box {
-	line-height: $size-icon;
 	box-sizing: border-box;
 	text-align: left;
 	position: relative;
 
 	&__content {
-		margin-left: 2em;
+		margin-left: 3.5 * $base-spacing-unit;
+		font-size: $font-size-body;
 	}
 
 	&--block {

@@ -5,11 +5,11 @@
 
 	&__head {
 		font-weight: bold;
-		line-height: px-to-em( 22px );
-		margin-bottom: px-to-em( 8px );
+		line-height: $line-height-text;
+		margin-bottom: $base-spacing-unit;
 	}
 
 	&__body {
-		line-height: px-to-em( 22px );
+		line-height: $line-height-text;
 	}
 }

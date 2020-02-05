@@ -87,7 +87,7 @@ export default class ErrorPermissionInfo extends Vue {
 	p,
 	ul {
 		line-height: $line-height-text;
-		margin-bottom: px-to-em( 8px );
+		margin-bottom: $base-spacing-unit;
 	}
 
 	ul {
@@ -96,14 +96,14 @@ export default class ErrorPermissionInfo extends Vue {
 		padding-left: 1.5em;
 
 		li:not( :first-child ) {
-			margin-top: px-to-em( 4px );
+			margin-top: $margin-top-li;
 		}
 	}
 
 	&__toggle {
 		$background-size: 14px;
 		display: block;
-		margin: px-to-em( 8px ) 0 px-to-em( 16px );
+		margin: $base-spacing-unit 0 2*$base-spacing-unit;
 		padding-left: $background-size + 4px;
 		background-position: top left;
 		background-repeat: no-repeat;

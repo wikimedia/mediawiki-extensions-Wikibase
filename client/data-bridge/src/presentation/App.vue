@@ -108,6 +108,9 @@ export default class App extends mixins( StateMixin ) {
 	color: #2c3e50;
 	overflow: hidden;
 
+	// ensure we are not affected by any font-size changes of the OOUI dialog cause by the skin
+	font-size: 1rem;
+
 	&__header {
 		height: $size-dialog-bar--desktop;
 		overflow: hidden;

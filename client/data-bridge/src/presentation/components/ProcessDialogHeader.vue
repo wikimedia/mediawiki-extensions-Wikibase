@@ -40,7 +40,6 @@ export default class ProcessDialogHeader extends Vue {}
 	&__title {
 		display: inline-flex;
 		align-items: center;
-		font-size: $font-size-dialog-process-title;
 		font-weight: bold;
 	}
 }

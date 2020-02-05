@@ -41,13 +41,13 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 	margin: 0 $margin-center-column-side;
 
 	&__heading {
-		margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;
+		margin: $references-heading-margin-top 0 $references-heading-margin-bottom 0;
 		font-weight: 600;
-		font-size: 1.1em;
 	}
 
 	&__listItem {
 		padding: 10px 14px 10px 0;
+		font-size: $font-size-body;
 	}
 }
 </style>

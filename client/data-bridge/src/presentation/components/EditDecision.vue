@@ -58,9 +58,8 @@ export default class EditDecision extends mixins( StateMixin ) {
 	margin: 0 $margin-center-column-side;
 
 	&__heading {
-		margin: px-to-em( 18px ) 0 px-to-em( 10px ) 0;
+		margin: $heading-margin-top 0 $heading-margin-bottom 0;
 		font-weight: 600;
-		font-size: 1.1em;
 	}
 
 	strong {

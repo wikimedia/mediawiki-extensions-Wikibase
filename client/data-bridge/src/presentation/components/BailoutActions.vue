@@ -66,18 +66,16 @@ export default class BailoutActions extends Vue {
 	margin: 0 $margin-center-column-side;
 
 	&__heading {
-		$font-size: 16px;
-		margin-top: px-to-em( 24px * ( $base-font-size-desired / $font-size ) ); // actually 24px
-		margin-bottom: px-to-em( 16px * ( $base-font-size-desired / $font-size ) ); // actually 16px
-		font-size: px-to-em( $font-size );
+		margin: $heading-margin-top 0 $heading-margin-bottom 0;
 		font-weight: bold;
 	}
 
 	&__suggestion {
 		list-style: disc outside;
-		margin-bottom: px-to-em( 24px );
-		margin-left: px-to-em( 16px );
-		line-height: px-to-em( 22px );
+		margin-bottom: 3 * $base-spacing-unit;
+		margin-left: 2 * $base-spacing-unit-fixed;
+		line-height: $line-height-text;
+		font-size: $font-size-body;
 
 		&:last-child {
 			margin-bottom: 0;
@@ -85,9 +83,8 @@ export default class BailoutActions extends Vue {
 	}
 
 	&__button {
-		$font-size: 16px;
-		font-size: px-to-em( $font-size );
-		margin-top: px-to-em( 8px * ( $base-font-size-desired / $font-size ) ); // actually 8px
+		margin-top: $base-spacing-unit;
+		font-size: $font-size-normal;
 	}
 }
 </style>

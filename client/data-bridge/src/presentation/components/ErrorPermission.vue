@@ -270,7 +270,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 	}
 
 	&__info {
-		margin-top: px-to-em( 24px );
+		margin-top: 3*$base-spacing-unit;
 	}
 }
 </style>
