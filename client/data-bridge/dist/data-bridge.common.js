@@ -16081,6 +16081,8 @@ var MessageKeys;
   MessageKeys["UNSUPPORTED_DATATYPE_ERROR_BODY"] = "wikibase-client-data-bridge-unsupported-datatype-error-body";
   MessageKeys["DEPRECATED_STATEMENT_ERROR_HEAD"] = "wikibase-client-data-bridge-deprecated-statement-error-head";
   MessageKeys["DEPRECATED_STATEMENT_ERROR_BODY"] = "wikibase-client-data-bridge-deprecated-statement-error-body";
+  MessageKeys["AMBIGUOUS_STATEMENT_ERROR_HEAD"] = "wikibase-client-data-bridge-ambiguous-statement-error-head";
+  MessageKeys["AMBIGUOUS_STATEMENT_ERROR_BODY"] = "wikibase-client-data-bridge-ambiguous-statement-error-body";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);

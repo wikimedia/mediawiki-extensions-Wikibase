@@ -34,6 +34,8 @@ enum MessageKeys {
 	UNSUPPORTED_DATATYPE_ERROR_BODY = 'wikibase-client-data-bridge-unsupported-datatype-error-body',
 	DEPRECATED_STATEMENT_ERROR_HEAD = 'wikibase-client-data-bridge-deprecated-statement-error-head',
 	DEPRECATED_STATEMENT_ERROR_BODY = 'wikibase-client-data-bridge-deprecated-statement-error-body',
+	AMBIGUOUS_STATEMENT_ERROR_HEAD = 'wikibase-client-data-bridge-ambiguous-statement-error-head',
+	AMBIGUOUS_STATEMENT_ERROR_BODY = 'wikibase-client-data-bridge-ambiguous-statement-error-body',
 }
 
 export default MessageKeys;
