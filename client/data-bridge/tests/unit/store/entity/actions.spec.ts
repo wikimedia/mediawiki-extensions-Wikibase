@@ -1,17 +1,5 @@
 import EntityRevision from '@/datamodel/EntityRevision';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
-import {
-	ENTITY_INIT,
-	ENTITY_SAVE,
-	ENTITY_WRITE,
-} from '@/store/entity/actionTypes';
-import {
-	ENTITY_UPDATE,
-	ENTITY_REVISION_UPDATE,
-} from '@/store/entity/mutationTypes';
-import {
-	STATEMENTS_INIT,
-} from '@/store/statements/actionTypes';
 import newMockableEntityRevision from '../newMockableEntityRevision';
 import { EntityActions } from '@/store/entity/actions';
 import { inject } from 'vuex-smart-module';
@@ -27,8 +15,8 @@ describe( 'entity/actions', () => {
 		} ),
 	};
 
-	describe( ENTITY_INIT, () => {
-		it( `dispatches to ${ENTITY_WRITE} on successful Entity lookup`, async () => {
+	describe( 'entityInit', () => {
+		it( 'dispatches to entityWrite on successful Entity lookup', async () => {
 			const id = 'Q42';
 			const revisionId = 4711;
 			const entity = newMockableEntityRevision( { id, revisionId } );
@@ -53,12 +41,12 @@ describe( 'entity/actions', () => {
 				} ),
 			};
 
-			await actions[ ENTITY_INIT ]( {
+			await actions.entityInit( {
 				entity: id,
 				revision: revisionId,
 			} );
 
-			expect( dispatch ).toHaveBeenCalledWith( ENTITY_WRITE, entity );
+			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', entity );
 		} );
 
 		it( 'propagates error on failed lookup', async () => {
@@ -82,7 +70,7 @@ describe( 'entity/actions', () => {
 				} ),
 			};
 
-			await expect( actions[ ENTITY_INIT ]( {
+			await expect( actions.entityInit( {
 				entity: id,
 				revision: revisionId,
 			} ) ).rejects.toBe( error );
@@ -92,7 +80,7 @@ describe( 'entity/actions', () => {
 
 	} );
 
-	describe( ENTITY_SAVE, () => {
+	describe( 'entitySave', () => {
 		it( 'updates entity and statements on successful save', async () => {
 			const entityId = 'Q42',
 				statements = {},
@@ -124,12 +112,12 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions[ ENTITY_SAVE ]() ).resolves.toBe( resolvedValue );
+			await expect( actions.entitySave() ).resolves.toBe( resolvedValue );
 			expect( revidIncrementingWritingEntityRepository.saveEntity ).toHaveBeenCalledWith( {
 				entity,
 				revisionId: revision,
 			} );
-			expect( dispatch ).toHaveBeenCalledWith( ENTITY_WRITE, {
+			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', {
 				entity,
 				revisionId: revision + 1,
 			} );
@@ -163,14 +151,14 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions[ ENTITY_SAVE ]() ).rejects.toBe( error );
+			await expect( actions.entitySave() ).rejects.toBe( error );
 			expect( dispatch ).not.toHaveBeenCalled();
 		} );
 	} );
 
-	describe( ENTITY_WRITE, () => {
+	describe( 'entityWrite', () => {
 		it(
-			`commits to ${ENTITY_UPDATE} and ${ENTITY_REVISION_UPDATE} and dispatches ${STATEMENTS_INIT}`,
+			'commits to updateEntity and updateRevision and dispatches initStatements',
 			async () => {
 				const commit = jest.fn();
 				const resolvedValue = {};
@@ -188,13 +176,13 @@ describe( 'entity/actions', () => {
 				const statements = {};
 				const entity = newMockableEntityRevision( { id: entityId, revisionId, statements } );
 
-				await expect( actions[ ENTITY_WRITE ]( entity ) ).resolves.toBe( resolvedValue );
+				await expect( actions.entityWrite( entity ) ).resolves.toBe( resolvedValue );
 
 				expect( commit ).toHaveBeenCalledTimes( 2 );
-				expect( commit ).toHaveBeenCalledWith( ENTITY_UPDATE, entity.entity );
-				expect( commit ).toHaveBeenCalledWith( ENTITY_REVISION_UPDATE, revisionId );
+				expect( commit ).toHaveBeenCalledWith( 'updateEntity', entity.entity );
+				expect( commit ).toHaveBeenCalledWith( 'updateRevision', revisionId );
 				expect( statementsDispatch ).toHaveBeenCalledWith(
-					STATEMENTS_INIT,
+					'initStatements',
 					{ entityId, statements },
 				);
 			},
@@ -209,7 +197,7 @@ describe( 'entity/actions', () => {
 				dispatch: statementsDispatch,
 			};
 			const entity = newMockableEntityRevision();
-			return expect( actions[ ENTITY_WRITE ]( entity ) ).rejects.toBe( rejectedError );
+			return expect( actions.entityWrite( entity ) ).rejects.toBe( rejectedError );
 		} );
 	} );
 } );

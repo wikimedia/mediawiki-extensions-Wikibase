@@ -3,32 +3,20 @@ import { Rank } from '@/datamodel/Statement';
 import { StatementState } from '@/store/statements';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { Getters } from 'vuex-smart-module';
-import {
-	STATEMENT_RANK,
-	STATEMENTS_CONTAINS_ENTITY,
-	STATEMENTS_IS_AMBIGUOUS,
-	STATEMENTS_PROPERTY_EXISTS,
-} from '@/store/statements/getterTypes';
 import EntityId from '@/datamodel/EntityId';
-import {
-	SNAK_DATA_VALUE,
-	SNAK_DATATYPE,
-	SNAK_DATAVALUETYPE,
-	SNAK_SNAKTYPE,
-} from '@/store/statements/snaks/getterTypes';
 import DataValue from '@/datamodel/DataValue';
 import { SnakType } from '@/datamodel/Snak';
 import DataValueType from '@/datamodel/DataValueType';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 
 export class StatementGetters extends Getters<StatementState> {
-	public get [ STATEMENTS_CONTAINS_ENTITY ]() {
+	public get containsEntity() {
 		return ( entityId: EntityId ): boolean => {
 			return this.state[ entityId ] !== undefined;
 		};
 	}
 
-	public get [ STATEMENTS_PROPERTY_EXISTS ]() {
+	public get propertyExists() {
 		return (
 			entityId: EntityId,
 			propertyId: EntityId,
@@ -38,7 +26,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ STATEMENTS_IS_AMBIGUOUS ]() {
+	public get isAmbiguous() {
 		return (
 			entityId: EntityId,
 			propertyId: EntityId,
@@ -49,7 +37,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ STATEMENT_RANK ]() {
+	public get rank() {
 		return ( pathToStatement: PathToStatement ): Rank | null => {
 			const statement = pathToStatement.resolveStatement( this.state );
 			if ( !statement ) {
@@ -60,7 +48,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ SNAK_DATA_VALUE ]() {
+	public get dataValue() {
 		return ( pathToSnak: PathToSnak ): DataValue | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
 			if ( !snak || !snak.datavalue ) {
@@ -71,7 +59,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ SNAK_SNAKTYPE ]() {
+	public get snakType() {
 		return ( pathToSnak: PathToSnak ): SnakType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
 			if ( !snak ) {
@@ -82,7 +70,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ SNAK_DATATYPE ]() {
+	public get dataType() {
 		return ( pathToSnak: PathToSnak ): DataType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
 			if ( !snak ) {
@@ -93,7 +81,7 @@ export class StatementGetters extends Getters<StatementState> {
 		};
 	}
 
-	public get [ SNAK_DATAVALUETYPE ]() {
+	public get dataValueType() {
 		return ( pathToSnak: PathToSnak ): DataValueType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
 			if ( !snak || !snak.datavalue ) {

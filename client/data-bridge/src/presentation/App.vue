@@ -41,7 +41,6 @@ import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
-import { BRIDGE_SAVE } from '@/store/actionTypes';
 
 @Component( {
 	components: {
@@ -71,7 +70,7 @@ export default class App extends mixins( StateMixin ) {
 	}
 
 	public saveAndClose(): void {
-		this.rootModule.dispatch( BRIDGE_SAVE )
+		this.rootModule.dispatch( 'saveBridge' )
 			.then( () => {
 				this.$emit( Events.onSaved );
 			} )

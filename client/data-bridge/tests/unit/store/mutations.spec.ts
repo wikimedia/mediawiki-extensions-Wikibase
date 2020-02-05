@@ -4,18 +4,6 @@ import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import Application from '@/store/Application';
 import { RootMutations } from '@/store/mutations';
-import {
-	APPLICATION_ERRORS_ADD,
-	APPLICATION_STATUS_SET,
-	EDITDECISION_SET,
-	EDITFLOW_SET,
-	ORIGINAL_STATEMENT_SET,
-	PROPERTY_TARGET_SET,
-	TARGET_LABEL_SET,
-	ENTITY_TITLE_SET,
-	ORIGINAL_HREF_SET,
-	PAGE_TITLE_SET,
-} from '@/store/mutationTypes';
 import newApplicationState from './newApplicationState';
 import { inject } from 'vuex-smart-module';
 
@@ -25,7 +13,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ PROPERTY_TARGET_SET ]( 'P42' );
+		mutations.setPropertyPointer( 'P42' );
 		expect( state.targetProperty ).toBe( 'P42' );
 	} );
 
@@ -34,7 +22,7 @@ describe( 'root/mutations', () => {
 		const state: Application = newApplicationState();
 
 		const mutations = inject( RootMutations, { state } );
-		mutations[ EDITFLOW_SET ]( editFlow );
+		mutations.setEditFlow( editFlow );
 		expect( state.editFlow ).toBe( editFlow );
 	} );
 
@@ -44,14 +32,14 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ ORIGINAL_HREF_SET ]( originalHref );
+		mutations.setOriginalHref( originalHref );
 		expect( state.originalHref ).toBe( originalHref );
 	} );
 
 	it( 'changes the applicationStatus of the state', () => {
 		const state: Application = newApplicationState();
 		const mutations = inject( RootMutations, { state } );
-		mutations[ APPLICATION_STATUS_SET ]( ApplicationStatus.READY );
+		mutations.setApplicationStatus( ApplicationStatus.READY );
 		expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
 	} );
 
@@ -60,7 +48,7 @@ describe( 'root/mutations', () => {
 		const state: Application = newApplicationState();
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ TARGET_LABEL_SET ]( targetLabel );
+		mutations.setTargetLabel( targetLabel );
 		expect( state.targetLabel ).toBe( targetLabel );
 	} );
 
@@ -79,7 +67,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ ORIGINAL_STATEMENT_SET ]( targetProperty );
+		mutations.setOriginalStatement( targetProperty );
 		expect( state.originalStatement ).not.toBe( targetProperty );
 		expect( state.originalStatement ).toStrictEqual( targetProperty );
 	} );
@@ -90,7 +78,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ APPLICATION_ERRORS_ADD ]( errors );
+		mutations.addApplicationErrors( errors );
 		expect( state.applicationErrors ).toStrictEqual( errors );
 	} );
 
@@ -101,7 +89,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ APPLICATION_ERRORS_ADD ]( newErrors );
+		mutations.addApplicationErrors( newErrors );
 		expect( state.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
 	} );
 
@@ -111,7 +99,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ EDITDECISION_SET ]( editDecision );
+		mutations.setEditDecision( editDecision );
 		expect( state.editDecision ).toBe( editDecision );
 	} );
 
@@ -121,7 +109,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ ENTITY_TITLE_SET ]( entityTitle );
+		mutations.setEntityTitle( entityTitle );
 		expect( state.entityTitle ).toBe( entityTitle );
 	} );
 
@@ -131,7 +119,7 @@ describe( 'root/mutations', () => {
 
 		const mutations = inject( RootMutations, { state } );
 
-		mutations[ PAGE_TITLE_SET ]( pageTitle );
+		mutations.setPageTitle( pageTitle );
 		expect( state.pageTitle ).toBe( pageTitle );
 	} );
 } );

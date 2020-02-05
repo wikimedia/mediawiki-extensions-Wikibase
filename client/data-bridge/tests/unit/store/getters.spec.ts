@@ -9,7 +9,6 @@ import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/Applica
 import clone from '@/store/clone';
 import { inject } from 'vuex-smart-module';
 import { RootGetters } from '@/store/getters';
-import { SNAK_DATA_VALUE } from '@/store/statements/snaks/getterTypes';
 
 describe( 'root/getters', () => {
 	const entityId = 'Q42';
@@ -46,7 +45,7 @@ describe( 'root/getters', () => {
 			getters.statementModule = {
 			// @ts-ignore
 				getters: {
-					[ SNAK_DATA_VALUE ]: snakGetter,
+					dataValue: snakGetter,
 				},
 			};
 

@@ -2,7 +2,6 @@ import MessageKeys from '@/definitions/MessageKeys';
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
 import { createStore } from '@/store';
-import { BRIDGE_SET_EDIT_DECISION } from '@/store/actionTypes';
 import Application from '@/store/Application';
 import {
 	createLocalVue,
@@ -86,7 +85,7 @@ describe( 'EditDecision', () => {
 
 	it( 'dispatches action when radio button is selected', () => {
 		const setEditDecisionAction = jest.fn();
-		store = createTestStore( { actions: { [ BRIDGE_SET_EDIT_DECISION ]: setEditDecisionAction } } );
+		store = createTestStore( { actions: { 'setEditDecision': setEditDecisionAction } } );
 		const wrapper = mount( EditDecision, {
 			store,
 			localVue,

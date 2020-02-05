@@ -1,22 +1,14 @@
 import { StatementActions } from '@/store/statements/actions';
-import {
-	STATEMENTS_INIT,
-} from '@/store/statements/actionTypes';
-import {
-	STATEMENTS_SET,
-} from '@/store/statements/mutationTypes';
 import StatementMap from '@/datamodel/StatementMap';
 import { inject } from 'vuex-smart-module';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import newStatementState from './newStatementState';
 import DataValueType from '@/datamodel/DataValueType';
-import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
-import { SNAK_SET_DATA_VALUE, SNAK_SET_SNAKTYPE } from '@/store/statements/snaks/mutationTypes';
 
 describe( 'statement actions', () => {
-	describe( STATEMENTS_INIT, () => {
-		it( `commits to ${STATEMENTS_SET}`, () => {
+	describe( 'initStatements', () => {
+		it( 'commits to setStatements', () => {
 			const payload = {
 				entityId: 'Q42',
 				statements: {
@@ -45,10 +37,10 @@ describe( 'statement actions', () => {
 				commit,
 			} );
 
-			actions[ STATEMENTS_INIT ]( payload );
+			actions.initStatements( payload );
 
 			expect( commit ).toHaveBeenCalledWith(
-				STATEMENTS_SET,
+				'setStatements',
 				payload,
 			);
 		} );
@@ -74,7 +66,7 @@ describe( 'statement actions', () => {
 					},
 				};
 
-				expect( actions[ SNAK_SET_STRING_DATA_VALUE ]( payload ) )
+				expect( actions.setStringDataValue( payload ) )
 					.rejects.toStrictEqual( new Error( SnakActionErrors.NO_SNAK_FOUND ) );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
@@ -102,7 +94,7 @@ describe( 'statement actions', () => {
 					},
 				};
 
-				expect( actions[ SNAK_SET_STRING_DATA_VALUE ]( payload ) )
+				expect( actions.setStringDataValue( payload ) )
 					.rejects.toStrictEqual( new Error( SnakActionErrors.WRONG_PAYLOAD_TYPE ) );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
@@ -130,12 +122,12 @@ describe( 'statement actions', () => {
 					},
 				};
 
-				expect( actions[ SNAK_SET_STRING_DATA_VALUE ]( payload ) )
+				expect( actions.setStringDataValue( payload ) )
 					.rejects.toStrictEqual( new Error( SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE ) );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 
-			it( `commits to ${SNAK_SET_SNAKTYPE} and ${SNAK_SET_DATA_VALUE}`, async () => {
+			it( 'commits to setSnakType and setDataValue', async () => {
 				const commit = jest.fn();
 				const mockState = newStatementState();
 				const actions = inject( StatementActions, {
@@ -158,11 +150,11 @@ describe( 'statement actions', () => {
 					},
 				};
 
-				await expect( actions[ SNAK_SET_STRING_DATA_VALUE ]( payload ) ).resolves;
+				await expect( actions.setStringDataValue( payload ) ).resolves;
 				expect( commit ).toHaveBeenCalledTimes( 2 );
-				expect( commit.mock.calls[ 0 ][ 0 ] ).toBe( SNAK_SET_SNAKTYPE );
+				expect( commit.mock.calls[ 0 ][ 0 ] ).toBe( 'setSnakType' );
 				expect( commit.mock.calls[ 0 ][ 1 ] ).toStrictEqual( { path: mockSnakPath, value: 'value' } );
-				expect( commit.mock.calls[ 1 ][ 0 ] ).toBe( SNAK_SET_DATA_VALUE );
+				expect( commit.mock.calls[ 1 ][ 0 ] ).toBe( 'setDataValue' );
 				expect( commit.mock.calls[ 1 ][ 1 ] ).toBe( payload );
 			} );
 		} );

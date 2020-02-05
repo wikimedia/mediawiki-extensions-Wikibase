@@ -9,14 +9,6 @@ import {
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
-import {
-	BRIDGE_INIT,
-	BRIDGE_SAVE,
-} from '@/store/actionTypes';
-import {
-	APPLICATION_ERRORS_ADD,
-	APPLICATION_STATUS_SET,
-} from '@/store/mutationTypes';
 import Events from '@/events';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
@@ -90,7 +82,7 @@ describe( 'App.vue', () => {
 			},
 		};
 
-		await store.dispatch( BRIDGE_INIT, information );
+		await store.dispatch( 'initBridge', information );
 	} );
 
 	it( 'renders the mountable root element', () => {
@@ -187,10 +179,10 @@ describe( 'App.vue', () => {
 		const bridgeSave = jest.fn();
 		const localStore = hotUpdateDeep( store, {
 			actions: {
-				[ BRIDGE_SAVE ]: bridgeSave,
+				saveBridge: bridgeSave,
 			},
 		} );
-		localStore.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+		localStore.commit( 'setApplicationStatus', ApplicationStatus.READY );
 		const wrapper = shallowMount( App, {
 			store: localStore,
 			localVue,
@@ -241,7 +233,7 @@ describe( 'App.vue', () => {
 
 		describe( 'if there is an error', () => {
 			it( 'mounts ErrorWrapper', () => {
-				store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
+				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
@@ -251,7 +243,7 @@ describe( 'App.vue', () => {
 			} );
 
 			it( 'doesn\'t show the save button ', () => {
-				store.commit( APPLICATION_ERRORS_ADD, [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
+				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
@@ -264,7 +256,7 @@ describe( 'App.vue', () => {
 
 		describe( 'outside of the error scenario', () => {
 			it( 'mounts Initializing & passes DataBridge to it', () => {
-				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
@@ -275,7 +267,7 @@ describe( 'App.vue', () => {
 			} );
 
 			it( 'instructs Initializing accordingly if the store is not ready', () => {
-				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.INITIALIZING );
+				store.commit( 'setApplicationStatus', ApplicationStatus.INITIALIZING );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
@@ -285,7 +277,7 @@ describe( 'App.vue', () => {
 			} );
 
 			it( 'instructs Initializing accordingly if the store is ready', () => {
-				store.commit( APPLICATION_STATUS_SET, ApplicationStatus.READY );
+				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,

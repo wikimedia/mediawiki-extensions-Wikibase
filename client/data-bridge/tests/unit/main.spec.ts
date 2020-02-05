@@ -1,6 +1,3 @@
-import {
-	BRIDGE_INIT,
-} from '@/store/actionTypes';
 import { launch } from '@/main';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
@@ -91,7 +88,7 @@ describe( 'launch', () => {
 
 		expect( emitter ).toBe( mockEmitter );
 		expect( mockCreateStore ).toHaveBeenCalledWith( services );
-		expect( store.dispatch ).toHaveBeenCalledWith( BRIDGE_INIT, appInformation );
+		expect( store.dispatch ).toHaveBeenCalledWith( 'initBridge', appInformation );
 		expect( App ).toHaveBeenCalledWith( { store } );
 		expect( mockApp.$mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
 		expect( mockRepeater ).toHaveBeenCalledWith(

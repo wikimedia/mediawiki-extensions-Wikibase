@@ -10327,26 +10327,16 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
 
-// CONCATENATED MODULE: ./src/store/actionTypes.ts
-var BRIDGE_INIT = 'initBridge';
-var BRIDGE_INIT_WITH_REMOTE_DATA = 'initBridgeWithRemoteData';
-var BRIDGE_REQUEST_TARGET_LABEL = 'requestAndSetTargetLabel';
-var BRIDGE_SAVE = 'saveBridge';
-var BRIDGE_SET_TARGET_VALUE = 'setTargetValue';
-var BRIDGE_ERROR_ADD = 'addError';
-var BRIDGE_SET_EDIT_DECISION = 'setEditDecision';
-var BRIDGE_VALIDATE_ENTITY_STATE = 'validateEntityState';
-var BRIDGE_VALIDATE_APPLICABILITY = 'validateBridgeApplicability';
 // EXTERNAL MODULE: external {"commonjs":"vue2","commonjs2":"vue2","amd":"vue2","root":"vue2"}
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=ce0f06e4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=51cd8538&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [(!_vm.hasError)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.canSave},on:{"click":_vm.saveAndClose}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Initializing',{attrs:{"is-initializing":_vm.isInitializing}},[_c('DataBridge')],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=ce0f06e4&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=51cd8538&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -10887,30 +10877,9 @@ var ErrorStatus;
 var ApplicationStatus = _objectSpread({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./src/store/mutationTypes.ts
-var PROPERTY_TARGET_SET = 'setPropertyPointer';
-var EDITFLOW_SET = 'setEditFlow';
-var APPLICATION_STATUS_SET = 'setApplicationStatus';
-var TARGET_LABEL_SET = 'setTargetLabel';
-var WIKIBASE_REPO_CONFIGURATION_SET = 'setWikibaseRepoConfiguration';
-var ORIGINAL_STATEMENT_SET = 'setOriginalStatement';
-var APPLICATION_ERRORS_ADD = 'addApplicationErrors';
-var EDITDECISION_SET = 'setEditDecision';
-var ENTITY_TITLE_SET = 'setEntityTitle';
-var ORIGINAL_HREF_SET = 'setOriginalHref';
-var PAGE_TITLE_SET = 'setPageTitle';
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
-// CONCATENATED MODULE: ./src/store/statements/getterTypes.ts
-var STATEMENTS_CONTAINS_ENTITY = 'containsEntity';
-var STATEMENTS_IS_AMBIGUOUS = 'isAmbiguous';
-var STATEMENTS_PROPERTY_EXISTS = 'propertyExists';
-var STATEMENT_RANK = 'rank';
-// CONCATENATED MODULE: ./src/store/entity/actionTypes.ts
-var ENTITY_INIT = 'entityInit';
-var ENTITY_SAVE = 'entitySave';
-var ENTITY_WRITE = 'entityWrite';
 // CONCATENATED MODULE: ./src/store/statements/MainSnakPath.ts
 
 
@@ -11593,11 +11562,7 @@ function createStore(rootModule, options) {
 
 
 
-// CONCATENATED MODULE: ./src/store/entity/mutationTypes.ts
-var ENTITY_UPDATE = 'updateEntity';
-var ENTITY_REVISION_UPDATE = 'updateRevision';
 // CONCATENATED MODULE: ./src/store/entity/mutations.ts
-
 
 
 
@@ -11616,13 +11581,13 @@ function (_Mutations) {
   }
 
   _createClass(EntityMutations, [{
-    key: ENTITY_UPDATE,
-    value: function value(entity) {
+    key: "updateEntity",
+    value: function updateEntity(entity) {
       this.state.id = entity.id;
     }
   }, {
-    key: ENTITY_REVISION_UPDATE,
-    value: function value(revision) {
+    key: "updateRevision",
+    value: function updateRevision(revision) {
       this.state.baseRevision = revision;
     }
   }]);
@@ -11640,17 +11605,7 @@ var EntityRevision_EntityRevision = function EntityRevision(entity, revisionId) 
 };
 
 
-// CONCATENATED MODULE: ./src/store/statements/actionTypes.ts
-var STATEMENTS_INIT = 'initStatements';
-var MAIN_SNAK_SET_STRING_DATA_VALUE = 'setMainSnakStringDataValue';
-// CONCATENATED MODULE: ./src/store/statements/mutationTypes.ts
-var STATEMENTS_SET = 'setStatements';
-// CONCATENATED MODULE: ./src/store/statements/snaks/mutationTypes.ts
-var SNAK_SET_DATA_VALUE = 'setDataValue';
-var SNAK_SET_SNAKTYPE = 'setSnakType';
 // CONCATENATED MODULE: ./src/store/statements/mutations.ts
-
-
 
 
 
@@ -11670,19 +11625,19 @@ function (_Mutations) {
   }
 
   _createClass(StatementMutations, [{
-    key: STATEMENTS_SET,
-    value: function value(payload) {
+    key: "setStatements",
+    value: function setStatements(payload) {
       external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(this.state, payload.entityId, payload.statements);
     }
   }, {
-    key: SNAK_SET_DATA_VALUE,
-    value: function value(payload) {
+    key: "setDataValue",
+    value: function setDataValue(payload) {
       var snak = payload.path.resolveSnakInStatement(this.state);
       external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(snak, 'datavalue', payload.value);
     }
   }, {
-    key: SNAK_SET_SNAKTYPE,
-    value: function value(payload) {
+    key: "setSnakType",
+    value: function setSnakType(payload) {
       var snak = payload.path.resolveSnakInStatement(this.state);
       snak.snaktype = payload.value;
     }
@@ -11700,13 +11655,7 @@ var SnakActionErrors;
 })(SnakActionErrors || (SnakActionErrors = {}));
 
 /* harmony default export */ var storeActionErrors_SnakActionErrors = (SnakActionErrors);
-// CONCATENATED MODULE: ./src/store/statements/snaks/actionTypes.ts
-var SNAK_SET_STRING_DATA_VALUE = 'setStringDataValue';
 // CONCATENATED MODULE: ./src/store/statements/actions.ts
-
-
-
-
 
 
 
@@ -11728,17 +11677,17 @@ function (_Actions) {
   }
 
   _createClass(StatementActions, [{
-    key: STATEMENTS_INIT,
-    value: function value(payload) {
-      this.commit(STATEMENTS_SET, {
+    key: "initStatements",
+    value: function initStatements(payload) {
+      this.commit('setStatements', {
         entityId: payload.entityId,
         statements: payload.statements
       });
       return Promise.resolve();
     }
   }, {
-    key: SNAK_SET_STRING_DATA_VALUE,
-    value: function value(payloadDataValue) {
+    key: "setStringDataValue",
+    value: function setStringDataValue(payloadDataValue) {
       var _this = this;
 
       return new Promise(function (resolve) {
@@ -11762,9 +11711,9 @@ function (_Actions) {
           value: 'value'
         };
 
-        _this.commit(SNAK_SET_SNAKTYPE, payloadSnakType);
+        _this.commit('setSnakType', payloadSnakType);
 
-        _this.commit(SNAK_SET_DATA_VALUE, payloadDataValue);
+        _this.commit('setDataValue', payloadDataValue);
 
         resolve();
       });
@@ -11773,14 +11722,7 @@ function (_Actions) {
 
   return StatementActions;
 }(Actions);
-// CONCATENATED MODULE: ./src/store/statements/snaks/getterTypes.ts
-var SNAK_DATATYPE = 'dataType';
-var SNAK_DATA_VALUE = 'dataValue';
-var SNAK_DATAVALUETYPE = 'dataValueType';
-var SNAK_SNAKTYPE = 'snakType';
 // CONCATENATED MODULE: ./src/store/statements/getters.ts
-
-
 
 
 
@@ -11799,7 +11741,7 @@ function (_Getters) {
   }
 
   _createClass(StatementGetters, [{
-    key: STATEMENTS_CONTAINS_ENTITY,
+    key: "containsEntity",
     get: function get() {
       var _this = this;
 
@@ -11808,7 +11750,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: STATEMENTS_PROPERTY_EXISTS,
+    key: "propertyExists",
     get: function get() {
       var _this2 = this;
 
@@ -11817,7 +11759,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: STATEMENTS_IS_AMBIGUOUS,
+    key: "isAmbiguous",
     get: function get() {
       var _this3 = this;
 
@@ -11826,7 +11768,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: STATEMENT_RANK,
+    key: "rank",
     get: function get() {
       var _this4 = this;
 
@@ -11841,7 +11783,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_DATA_VALUE,
+    key: "dataValue",
     get: function get() {
       var _this5 = this;
 
@@ -11856,7 +11798,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_SNAKTYPE,
+    key: "snakType",
     get: function get() {
       var _this6 = this;
 
@@ -11871,7 +11813,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_DATATYPE,
+    key: "dataType",
     get: function get() {
       var _this7 = this;
 
@@ -11886,7 +11828,7 @@ function (_Getters) {
       };
     }
   }, {
-    key: SNAK_DATAVALUETYPE,
+    key: "dataValueType",
     get: function get() {
       var _this8 = this;
 
@@ -11928,9 +11870,6 @@ var statementModule = new Module({
 
 
 
-
-
-
 var actions_EntityActions =
 /*#__PURE__*/
 function (_Actions) {
@@ -11949,17 +11888,17 @@ function (_Actions) {
       this.statementsModule = statementModule.context(store);
     }
   }, {
-    key: ENTITY_INIT,
-    value: function value(payload) {
+    key: "entityInit",
+    value: function entityInit(payload) {
       var _this = this;
 
       return this.store.$services.get('readingEntityRepository').getEntity(payload.entity, payload.revision).then(function (entityRevision) {
-        return _this.dispatch(ENTITY_WRITE, entityRevision);
+        return _this.dispatch('entityWrite', entityRevision);
       });
     }
   }, {
-    key: ENTITY_SAVE,
-    value: function value() {
+    key: "entitySave",
+    value: function entitySave() {
       var _this2 = this;
 
       var entityRevision = new EntityRevision_EntityRevision({
@@ -11967,15 +11906,15 @@ function (_Actions) {
         statements: this.statementsModule.state[this.state.id]
       }, this.state.baseRevision);
       return this.store.$services.get('writingEntityRepository').saveEntity(entityRevision).then(function (entityRevision) {
-        return _this2.dispatch(ENTITY_WRITE, entityRevision);
+        return _this2.dispatch('entityWrite', entityRevision);
       });
     }
   }, {
-    key: ENTITY_WRITE,
-    value: function value(entityRevision) {
-      this.commit(ENTITY_REVISION_UPDATE, entityRevision.revisionId);
-      this.commit(ENTITY_UPDATE, entityRevision.entity);
-      return this.statementsModule.dispatch(STATEMENTS_INIT, {
+    key: "entityWrite",
+    value: function entityWrite(entityRevision) {
+      this.commit('updateRevision', entityRevision.revisionId);
+      this.commit('updateEntity', entityRevision.entity);
+      return this.statementsModule.dispatch('initStatements', {
         entityId: entityRevision.entity.id,
         statements: entityRevision.entity.statements
       });
@@ -12036,12 +11975,6 @@ function actions_objectSpread(target) { for (var i = 1; i < arguments.length; i+
 
 
 
-
-
-
-
-
-
 var actions_RootActions =
 /*#__PURE__*/
 function (_Actions) {
@@ -12061,25 +11994,25 @@ function (_Actions) {
       this.statementModule = statementModule.context(store);
     }
   }, {
-    key: BRIDGE_INIT,
-    value: function value(information) {
+    key: "initBridge",
+    value: function initBridge(information) {
       var _this = this;
 
-      this.commit(EDITFLOW_SET, information.editFlow);
-      this.commit(PROPERTY_TARGET_SET, information.propertyId);
-      this.commit(ENTITY_TITLE_SET, information.entityTitle);
-      this.commit(ORIGINAL_HREF_SET, information.originalHref);
-      this.commit(PAGE_TITLE_SET, information.pageTitle);
-      this.dispatch(BRIDGE_REQUEST_TARGET_LABEL, information.propertyId);
-      return Promise.all([this.store.$services.get('wikibaseRepoConfigRepository').getRepoConfiguration(), this.store.$services.get('editAuthorizationChecker').canUseBridgeForItemAndPage(information.entityTitle, information.pageTitle), this.store.$services.get('propertyDatatypeRepository').getDataType(information.propertyId), this.entityModule.dispatch(ENTITY_INIT, {
+      this.commit('setEditFlow', information.editFlow);
+      this.commit('setPropertyPointer', information.propertyId);
+      this.commit('setEntityTitle', information.entityTitle);
+      this.commit('setOriginalHref', information.originalHref);
+      this.commit('setPageTitle', information.pageTitle);
+      this.dispatch('requestAndSetTargetLabel', information.propertyId);
+      return Promise.all([this.store.$services.get('wikibaseRepoConfigRepository').getRepoConfiguration(), this.store.$services.get('editAuthorizationChecker').canUseBridgeForItemAndPage(information.entityTitle, information.pageTitle), this.store.$services.get('propertyDatatypeRepository').getDataType(information.propertyId), this.entityModule.dispatch('entityInit', {
         entity: information.entityId
       })]).then(function (results) {
-        return _this.dispatch(BRIDGE_INIT_WITH_REMOTE_DATA, {
+        return _this.dispatch('initBridgeWithRemoteData', {
           information: information,
           results: results
         });
       }, function (error) {
-        _this.commit(APPLICATION_ERRORS_ADD, [{
+        _this.commit('addApplicationErrors', [{
           type: ErrorTypes.APPLICATION_LOGIC_ERROR,
           info: error
         }]);
@@ -12088,9 +12021,9 @@ function (_Actions) {
       });
     }
   }, {
-    key: BRIDGE_INIT_WITH_REMOTE_DATA,
+    key: "initBridgeWithRemoteData",
     value: function () {
-      var _value = _asyncToGenerator(
+      var _initBridgeWithRemoteData = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(_ref) {
         var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit, state, path;
@@ -12106,7 +12039,7 @@ function (_Actions) {
                   break;
                 }
 
-                this.commit(APPLICATION_ERRORS_ADD, permissionErrors);
+                this.commit('addApplicationErrors', permissionErrors);
                 return _context.abrupt("return");
 
               case 4:
@@ -12115,12 +12048,12 @@ function (_Actions) {
                 state = this.state;
                 path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
                 _context.next = 10;
-                return this.dispatch(BRIDGE_VALIDATE_ENTITY_STATE, path);
+                return this.dispatch('validateEntityState', path);
 
               case 10:
                 if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
-                  this.commit(ORIGINAL_STATEMENT_SET, state[NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
-                  this.commit(APPLICATION_STATUS_SET, definitions_ApplicationStatus.READY);
+                  this.commit('setOriginalStatement', state[NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
+                  this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
                 }
 
               case 11:
@@ -12131,50 +12064,50 @@ function (_Actions) {
         }, _callee, this);
       }));
 
-      function value(_x) {
-        return _value.apply(this, arguments);
+      function initBridgeWithRemoteData(_x) {
+        return _initBridgeWithRemoteData.apply(this, arguments);
       }
 
-      return value;
+      return initBridgeWithRemoteData;
     }()
   }, {
-    key: BRIDGE_REQUEST_TARGET_LABEL,
-    value: function value(propertyId) {
+    key: "requestAndSetTargetLabel",
+    value: function requestAndSetTargetLabel(propertyId) {
       var _this2 = this;
 
       return this.store.$services.get('entityLabelRepository').getLabel(propertyId).then(function (label) {
-        _this2.commit(TARGET_LABEL_SET, label);
+        _this2.commit('setTargetLabel', label);
       }, function (_error) {// TODO: handling on failed label loading, which is not a bocking error for now
       });
     }
   }, {
-    key: BRIDGE_VALIDATE_ENTITY_STATE,
-    value: function value(path) {
-      if (this.statementModule.getters[STATEMENTS_PROPERTY_EXISTS](path.entityId, path.propertyId) === false) {
-        this.commit(APPLICATION_ERRORS_ADD, [{
+    key: "validateEntityState",
+    value: function validateEntityState(path) {
+      if (this.statementModule.getters.propertyExists(path.entityId, path.propertyId) === false) {
+        this.commit('addApplicationErrors', [{
           type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
         }]);
         return Promise.resolve();
       }
 
-      return this.dispatch(BRIDGE_VALIDATE_APPLICABILITY, path);
+      return this.dispatch('validateBridgeApplicability', path);
     }
   }, {
-    key: BRIDGE_VALIDATE_APPLICABILITY,
-    value: function value(path) {
-      if (this.statementModule.getters[STATEMENTS_IS_AMBIGUOUS](path.entityId, path.propertyId) === true) {
-        return this.dispatch(BRIDGE_ERROR_ADD, [{
+    key: "validateBridgeApplicability",
+    value: function validateBridgeApplicability(path) {
+      if (this.statementModule.getters.isAmbiguous(path.entityId, path.propertyId) === true) {
+        return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
         }]);
       }
 
-      if (this.statementModule.getters[STATEMENT_RANK](path) === 'deprecated') {
-        return this.dispatch(BRIDGE_ERROR_ADD, [{
+      if (this.statementModule.getters.rank(path) === 'deprecated') {
+        return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT
         }]);
       }
 
-      var snakType = this.statementModule.getters[SNAK_SNAKTYPE](path);
+      var snakType = this.statementModule.getters.snakType(path);
 
       if (snakType === null) {
         throw new Error('If snak type is missing, there should have been an error earlier');
@@ -12187,10 +12120,10 @@ function (_Actions) {
             snakType: snakType
           }
         };
-        return this.dispatch(BRIDGE_ERROR_ADD, [error]);
+        return this.dispatch('addError', [error]);
       }
 
-      var datatype = this.statementModule.getters[SNAK_DATATYPE](path);
+      var datatype = this.statementModule.getters.dataType(path);
 
       if (datatype === null) {
         throw new Error('If snak is missing, there should have been an error earlier');
@@ -12203,11 +12136,11 @@ function (_Actions) {
             unsupportedDatatype: datatype
           }
         };
-        return this.dispatch(BRIDGE_ERROR_ADD, [_error2]);
+        return this.dispatch('addError', [_error2]);
       }
 
-      if (this.statementModule.getters[SNAK_DATAVALUETYPE](path) !== 'string') {
-        return this.dispatch(BRIDGE_ERROR_ADD, [{
+      if (this.statementModule.getters.dataValueType(path) !== 'string') {
+        return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE
         }]);
       }
@@ -12215,12 +12148,12 @@ function (_Actions) {
       return Promise.resolve();
     }
   }, {
-    key: BRIDGE_SET_TARGET_VALUE,
-    value: function value(dataValue) {
+    key: "setTargetValue",
+    value: function setTargetValue(dataValue) {
       var _this3 = this;
 
       if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-        this.commit(APPLICATION_ERRORS_ADD, [{
+        this.commit('addApplicationErrors', [{
           type: ErrorTypes.APPLICATION_LOGIC_ERROR,
           info: {
             stack: new Error().stack
@@ -12231,11 +12164,11 @@ function (_Actions) {
 
       var state = this.state;
       var path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
-      return this.statementModule.dispatch(SNAK_SET_STRING_DATA_VALUE, {
+      return this.statementModule.dispatch('setStringDataValue', {
         path: path,
         value: dataValue
       }).catch(function (error) {
-        _this3.commit(APPLICATION_ERRORS_ADD, [{
+        _this3.commit('addApplicationErrors', [{
           type: ErrorTypes.APPLICATION_LOGIC_ERROR,
           info: error
         }]);
@@ -12244,12 +12177,12 @@ function (_Actions) {
       });
     }
   }, {
-    key: BRIDGE_SAVE,
-    value: function value() {
+    key: "saveBridge",
+    value: function saveBridge() {
       var _this4 = this;
 
       if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-        this.commit(APPLICATION_ERRORS_ADD, [{
+        this.commit('addApplicationErrors', [{
           type: ErrorTypes.APPLICATION_LOGIC_ERROR,
           info: {
             stack: new Error().stack
@@ -12258,8 +12191,8 @@ function (_Actions) {
         return Promise.reject(null);
       }
 
-      return this.entityModule.dispatch(ENTITY_SAVE).catch(function (error) {
-        _this4.commit(APPLICATION_ERRORS_ADD, [{
+      return this.entityModule.dispatch('entitySave').catch(function (error) {
+        _this4.commit('addApplicationErrors', [{
           type: ErrorTypes.SAVING_FAILED,
           info: error
         }]);
@@ -12268,15 +12201,15 @@ function (_Actions) {
       });
     }
   }, {
-    key: BRIDGE_ERROR_ADD,
-    value: function value(errors) {
-      this.commit(APPLICATION_ERRORS_ADD, errors);
+    key: "addError",
+    value: function addError(errors) {
+      this.commit('addApplicationErrors', errors);
       return Promise.resolve();
     }
   }, {
-    key: BRIDGE_SET_EDIT_DECISION,
-    value: function value(editDecision) {
-      this.commit(EDITDECISION_SET, editDecision);
+    key: "setEditDecision",
+    value: function setEditDecision(editDecision) {
+      this.commit('setEditDecision', editDecision);
       return Promise.resolve();
     }
   }]);
@@ -12288,7 +12221,6 @@ var deep_equal = __webpack_require__("7fae");
 var deep_equal_default = /*#__PURE__*/__webpack_require__.n(deep_equal);
 
 // CONCATENATED MODULE: ./src/store/getters.ts
-
 
 
 
@@ -12326,7 +12258,7 @@ function (_Getters) {
 
       var entityId = this.state[NS_ENTITY].id;
       var pathToMainSnak = new MainSnakPath_MainSnakPath(entityId, this.state.targetProperty, 0);
-      return this.statementModule.getters[SNAK_DATA_VALUE](pathToMainSnak);
+      return this.statementModule.getters.dataValue(pathToMainSnak);
     }
   }, {
     key: "targetLabel",
@@ -12433,7 +12365,6 @@ function clone(source) {
 
 
 
-
 var mutations_RootMutations =
 /*#__PURE__*/
 function (_Mutations) {
@@ -12446,55 +12377,55 @@ function (_Mutations) {
   }
 
   _createClass(RootMutations, [{
-    key: PROPERTY_TARGET_SET,
-    value: function value(targetProperty) {
+    key: "setPropertyPointer",
+    value: function setPropertyPointer(targetProperty) {
       this.state.targetProperty = targetProperty;
     }
   }, {
-    key: EDITFLOW_SET,
-    value: function value(editFlow) {
+    key: "setEditFlow",
+    value: function setEditFlow(editFlow) {
       this.state.editFlow = editFlow;
     }
   }, {
-    key: APPLICATION_STATUS_SET,
-    value: function value(status) {
+    key: "setApplicationStatus",
+    value: function setApplicationStatus(status) {
       this.state.applicationStatus = status;
     }
   }, {
-    key: TARGET_LABEL_SET,
-    value: function value(label) {
+    key: "setTargetLabel",
+    value: function setTargetLabel(label) {
       this.state.targetLabel = label;
     }
   }, {
-    key: ORIGINAL_STATEMENT_SET,
-    value: function value(revision) {
+    key: "setOriginalStatement",
+    value: function setOriginalStatement(revision) {
       this.state.originalStatement = clone(revision);
     }
   }, {
-    key: APPLICATION_ERRORS_ADD,
-    value: function value(errors) {
+    key: "addApplicationErrors",
+    value: function addApplicationErrors(errors) {
       var _this$state$applicati;
 
       (_this$state$applicati = this.state.applicationErrors).push.apply(_this$state$applicati, _toConsumableArray(errors));
     }
   }, {
-    key: EDITDECISION_SET,
-    value: function value(editDecision) {
+    key: "setEditDecision",
+    value: function setEditDecision(editDecision) {
       this.state.editDecision = editDecision;
     }
   }, {
-    key: ENTITY_TITLE_SET,
-    value: function value(entityTitle) {
+    key: "setEntityTitle",
+    value: function setEntityTitle(entityTitle) {
       this.state.entityTitle = entityTitle;
     }
   }, {
-    key: PAGE_TITLE_SET,
-    value: function value(pageTitle) {
+    key: "setPageTitle",
+    value: function setPageTitle(pageTitle) {
       this.state.pageTitle = pageTitle;
     }
   }, {
-    key: ORIGINAL_HREF_SET,
-    value: function value(orginalHref) {
+    key: "setOriginalHref",
+    value: function setOriginalHref(orginalHref) {
       this.state.originalHref = orginalHref;
     }
   }]);
@@ -12600,19 +12531,19 @@ function (_Vue) {
 
 StateMixin_StateMixin = __decorate([vue_class_component_common_default.a], StateMixin_StateMixin);
 /* harmony default export */ var presentation_StateMixin = (StateMixin_StateMixin);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=7ee462d8&
-var DataBridgevue_type_template_id_7ee462d8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
-var DataBridgevue_type_template_id_7ee462d8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=14c7fe98&
+var DataBridgevue_type_template_id_14c7fe98_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection'),_c('EditDecision')],1)}
+var DataBridgevue_type_template_id_14c7fe98_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=7ee462d8&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=14c7fe98&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=3fbe9c45&
-var EditDecisionvue_type_template_id_3fbe9c45_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+" ")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+" ")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+" ")])],2)],1)],1)}
-var EditDecisionvue_type_template_id_3fbe9c45_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=152200a5&
+var EditDecisionvue_type_template_id_152200a5_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+" ")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+" ")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+" ")])],2)],1)],1)}
+var EditDecisionvue_type_template_id_152200a5_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=3fbe9c45&
+// CONCATENATED MODULE: ./src/presentation/components/EditDecision.vue?vue&type=template&id=152200a5&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/RadioGroup.vue?vue&type=template&id=09f3b87c&
 var RadioGroupvue_type_template_id_09f3b87c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-radio-group"},[_vm._t("default")],2)}
@@ -12782,7 +12713,6 @@ var wikibase_vuejs_components_common = __webpack_require__("d1ac");
 
 
 
-
 var EditDecisionvue_type_script_lang_ts_EditDecision =
 /*#__PURE__*/
 function (_mixins) {
@@ -12804,7 +12734,7 @@ function (_mixins) {
         throw new Error('Cannot set editDecision back to null!');
       }
 
-      this.rootModule.dispatch(BRIDGE_SET_EDIT_DECISION, value);
+      this.rootModule.dispatch('setEditDecision', value);
     }
   }]);
 
@@ -12834,8 +12764,8 @@ var EditDecisionvue_type_style_index_0_lang_scss_ = __webpack_require__("151e");
 
 var EditDecision_component = normalizeComponent(
   components_EditDecisionvue_type_script_lang_ts_,
-  EditDecisionvue_type_template_id_3fbe9c45_render,
-  EditDecisionvue_type_template_id_3fbe9c45_staticRenderFns,
+  EditDecisionvue_type_template_id_152200a5_render,
+  EditDecisionvue_type_template_id_152200a5_staticRenderFns,
   false,
   null,
   null,
@@ -13269,7 +13199,6 @@ var ReferenceSection_component = normalizeComponent(
 
 
 
-
 var DataBridgevue_type_script_lang_ts_DataBridge =
 /*#__PURE__*/
 function (_mixins) {
@@ -13284,7 +13213,7 @@ function (_mixins) {
   _createClass(DataBridge, [{
     key: "setDataValue",
     value: function setDataValue(dataValue) {
-      this.rootModule.dispatch(BRIDGE_SET_TARGET_VALUE, dataValue);
+      this.rootModule.dispatch('setTargetValue', dataValue);
     }
   }, {
     key: "targetValue",
@@ -13336,8 +13265,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_7ee462d8_render,
-  DataBridgevue_type_template_id_7ee462d8_staticRenderFns,
+  DataBridgevue_type_template_id_14c7fe98_render,
+  DataBridgevue_type_template_id_14c7fe98_staticRenderFns,
   false,
   null,
   null,
@@ -15158,7 +15087,6 @@ var ProcessDialogHeader_component = normalizeComponent(
 
 
 
-
 var Appvue_type_script_lang_ts_App =
 /*#__PURE__*/
 function (_mixins) {
@@ -15175,7 +15103,7 @@ function (_mixins) {
     value: function saveAndClose() {
       var _this = this;
 
-      this.rootModule.dispatch(BRIDGE_SAVE).then(function () {
+      this.rootModule.dispatch('saveBridge').then(function () {
         _this.$emit(src_events.onSaved);
       }).catch(function (_error) {// TODO store already sets application into error state. Do we need to do anything else?
       });
@@ -17191,12 +17119,11 @@ function createServices(mwWindow, editTags) {
 
 
 
-
 external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.config.productionTip = false;
 function launch(config, information, services) {
   extendVueEnvironment(services.get('languageInfoRepository'), services.get('messagesRepository'), information.client, services.get('repoRouter'), services.get('clientRouter'));
   var store = store_createStore(services);
-  store.dispatch(BRIDGE_INIT, information);
+  store.dispatch('initBridge', information);
   var app = new presentation_App({
     store: store
   }).$mount(config.containerSelector);

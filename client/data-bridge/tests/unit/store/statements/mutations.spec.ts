@@ -1,6 +1,3 @@
-import {
-	STATEMENTS_SET,
-} from '@/store/statements/mutationTypes';
 import { StatementMutations } from '@/store/statements/mutations';
 import newStatementState from './newStatementState';
 import StatementMap from '@/datamodel/StatementMap';
@@ -8,13 +5,12 @@ import Snak, { SnakType } from '@/datamodel/Snak';
 import { inject } from 'vuex-smart-module';
 import DataValueType from '@/datamodel/DataValueType';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import { SNAK_SET_DATA_VALUE, SNAK_SET_SNAKTYPE } from '@/store/statements/snaks/mutationTypes';
 
 describe( 'statements/Mutations', () => {
 
 	describe( 'general mutations on a statement', () => {
 
-		describe( STATEMENTS_SET, () => {
+		describe( 'setStatements', () => {
 			it( 'sets a new statement', () => {
 				const state = newStatementState();
 
@@ -29,7 +25,7 @@ describe( 'statements/Mutations', () => {
 
 				const mutations = inject( StatementMutations, { state } );
 
-				mutations[ STATEMENTS_SET ]( { entityId: 'Q42', statements } );
+				mutations.setStatements( { entityId: 'Q42', statements } );
 				expect( state ).toStrictEqual( { Q42: statements } );
 			} );
 		} );
@@ -70,7 +66,7 @@ describe( 'statements/Mutations', () => {
 				};
 
 				const mutations = inject( StatementMutations, { state } );
-				mutations[ SNAK_SET_DATA_VALUE ]( payload );
+				mutations.setDataValue( payload );
 
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( state );
 				expect( state.Q42.P42[ 0 ].mainsnak.datavalue ).toStrictEqual( value );
@@ -111,7 +107,7 @@ describe( 'statements/Mutations', () => {
 				};
 
 				const mutations = inject( StatementMutations, { state } );
-				mutations[ SNAK_SET_DATA_VALUE ]( payload );
+				mutations.setDataValue( payload );
 
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( state );
 				expect( state.Q42.P42[ 0 ].mainsnak.datavalue ).toStrictEqual( value );
@@ -146,7 +142,7 @@ describe( 'statements/Mutations', () => {
 				};
 
 				const mutations = inject( StatementMutations, { state } );
-				mutations[ SNAK_SET_SNAKTYPE ]( payload );
+				mutations.setSnakType( payload );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( state );
 				expect( state.Q42.P42[ 0 ].mainsnak.snaktype ).toStrictEqual( value );
 			} );

@@ -28,7 +28,6 @@
 import EditDecisionOption from '@/definitions/EditDecision';
 import StateMixin from '@/presentation/StateMixin';
 import RadioGroup from '@/presentation/components/RadioGroup.vue';
-import { BRIDGE_SET_EDIT_DECISION } from '@/store/actionTypes';
 import { RadioInput } from '@wmde/wikibase-vuejs-components';
 import Component, { mixins } from 'vue-class-component';
 
@@ -48,7 +47,7 @@ export default class EditDecision extends mixins( StateMixin ) {
 		if ( value === null ) {
 			throw new Error( 'Cannot set editDecision back to null!' );
 		}
-		this.rootModule.dispatch( BRIDGE_SET_EDIT_DECISION, value );
+		this.rootModule.dispatch( 'setEditDecision', value );
 	}
 
 }

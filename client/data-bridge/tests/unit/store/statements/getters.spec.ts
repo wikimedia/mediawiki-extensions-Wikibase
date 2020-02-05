@@ -1,22 +1,10 @@
 import StatementMap from '@/datamodel/StatementMap';
 import Snak from '@/datamodel/Snak';
-import {
-	STATEMENT_RANK,
-	STATEMENTS_CONTAINS_ENTITY,
-	STATEMENTS_IS_AMBIGUOUS,
-	STATEMENTS_PROPERTY_EXISTS,
-} from '@/store/statements/getterTypes';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { inject } from 'vuex-smart-module';
 import { StatementGetters } from '@/store/statements/getters';
 import newStatementState from './newStatementState';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import {
-	SNAK_DATA_VALUE,
-	SNAK_DATATYPE,
-	SNAK_DATAVALUETYPE,
-	SNAK_SNAKTYPE,
-} from '@/store/statements/snaks/getterTypes';
 import DataValue from '@/datamodel/DataValue';
 
 describe( 'statements/Getters', () => {
@@ -36,9 +24,9 @@ describe( 'statements/Getters', () => {
 			state: statements,
 		} );
 
-		expect( getters[ STATEMENTS_CONTAINS_ENTITY ]( entityId ) ).toBe( true );
+		expect( getters.containsEntity( entityId ) ).toBe( true );
 
-		expect( getters[ STATEMENTS_CONTAINS_ENTITY ]( 'Q23' ) ).toBe( false );
+		expect( getters.containsEntity( 'Q23' ) ).toBe( false );
 
 	} );
 
@@ -57,9 +45,9 @@ describe( 'statements/Getters', () => {
 			state: statements,
 		} );
 
-		expect( getters[ STATEMENTS_PROPERTY_EXISTS ]( entityId, 'P23' ) ).toBe( true );
-		expect( getters[ STATEMENTS_PROPERTY_EXISTS ]( entityId, 'P42' ) ).toBe( false );
-		expect( getters[ STATEMENTS_PROPERTY_EXISTS ]( `${entityId}0`, 'P23' ) ).toBe( false );
+		expect( getters.propertyExists( entityId, 'P23' ) ).toBe( true );
+		expect( getters.propertyExists( entityId, 'P42' ) ).toBe( false );
+		expect( getters.propertyExists( `${entityId}0`, 'P23' ) ).toBe( false );
 	} );
 
 	it( 'determines if a statement on property is ambiguous', () => {
@@ -89,10 +77,10 @@ describe( 'statements/Getters', () => {
 			state: statements,
 		} );
 
-		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( entityId, 'P23' ) ).toBe( true );
-		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( entityId, 'P42' ) ).toBe( false );
-		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( entityId, 'P21' ) ).toBe( false );
-		expect( getters[ STATEMENTS_IS_AMBIGUOUS ]( `${entityId}0`, 'P23' ) ).toBe( false );
+		expect( getters.isAmbiguous( entityId, 'P23' ) ).toBe( true );
+		expect( getters.isAmbiguous( entityId, 'P42' ) ).toBe( false );
+		expect( getters.isAmbiguous( entityId, 'P21' ) ).toBe( false );
+		expect( getters.isAmbiguous( `${entityId}0`, 'P23' ) ).toBe( false );
 	} );
 
 	describe( 'getters for statements', () => {
@@ -111,7 +99,7 @@ describe( 'statements/Getters', () => {
 					resolveStatement: jest.fn().mockReturnValue( returnStatement ),
 				};
 
-				expect( getters[ STATEMENT_RANK ]( mockStatementPath ) ).toBe( returnStatement.rank );
+				expect( getters.rank( mockStatementPath ) ).toBe( returnStatement.rank );
 				expect( mockStatementPath.resolveStatement ).toHaveBeenCalledWith( mockState );
 			} );
 
@@ -125,7 +113,7 @@ describe( 'statements/Getters', () => {
 					resolveStatement: jest.fn().mockReturnValue( null ),
 				};
 
-				expect( getters[ STATEMENT_RANK ]( mockStatementPath ) ).toBeNull();
+				expect( getters.rank( mockStatementPath ) ).toBeNull();
 				expect( mockStatementPath.resolveStatement ).toHaveBeenCalledWith( mockState );
 			} );
 		} );
@@ -149,7 +137,7 @@ describe( 'statements/Getters', () => {
 					resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
 				};
 
-				expect( getters[ SNAK_SNAKTYPE ]( mockSnakPath ) ).toBe( returnSnak.snaktype );
+				expect( getters.snakType( mockSnakPath ) ).toBe( returnSnak.snaktype );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 
@@ -163,7 +151,7 @@ describe( 'statements/Getters', () => {
 					resolveSnakInStatement: jest.fn().mockReturnValue( null ),
 				};
 
-				expect( getters[ SNAK_SNAKTYPE ]( mockSnakPath ) ).toBeNull();
+				expect( getters.snakType( mockSnakPath ) ).toBeNull();
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 		} );
@@ -185,7 +173,7 @@ describe( 'statements/Getters', () => {
 					resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
 				};
 
-				expect( getters[ SNAK_DATATYPE ]( mockSnakPath ) ).toBe( returnSnak.datatype );
+				expect( getters.dataType( mockSnakPath ) ).toBe( returnSnak.datatype );
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 
@@ -199,7 +187,7 @@ describe( 'statements/Getters', () => {
 					resolveSnakInStatement: jest.fn().mockReturnValue( null ),
 				};
 
-				expect( getters[ SNAK_DATATYPE ]( mockSnakPath ) ).toBeNull();
+				expect( getters.dataType( mockSnakPath ) ).toBeNull();
 				expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 			} );
 		} );
@@ -228,7 +216,7 @@ describe( 'statements/Getters', () => {
 						resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
 					};
 
-					expect( getters[ SNAK_DATAVALUETYPE ]( mockSnakPath ) ).toStrictEqual( datavalue.type );
+					expect( getters.dataValueType( mockSnakPath ) ).toStrictEqual( datavalue.type );
 					expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 				} );
 
@@ -242,7 +230,7 @@ describe( 'statements/Getters', () => {
 						resolveSnakInStatement: jest.fn().mockReturnValue( null ),
 					};
 
-					expect( getters[ SNAK_DATAVALUETYPE ]( mockSnakPath ) ).toBeNull();
+					expect( getters.dataValueType( mockSnakPath ) ).toBeNull();
 					expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 				} );
 			} );
@@ -270,7 +258,7 @@ describe( 'statements/Getters', () => {
 						resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
 					};
 
-					expect( getters[ SNAK_DATA_VALUE ]( mockSnakPath ) ).toStrictEqual( datavalue );
+					expect( getters.dataValue( mockSnakPath ) ).toStrictEqual( datavalue );
 					expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 				} );
 
@@ -290,7 +278,7 @@ describe( 'statements/Getters', () => {
 						resolveSnakInStatement: jest.fn().mockReturnValue( returnSnak ),
 					};
 
-					expect( getters[ SNAK_DATA_VALUE ]( mockSnakPath ) ).toBeNull();
+					expect( getters.dataValue( mockSnakPath ) ).toBeNull();
 					expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 				} );
 
@@ -304,7 +292,7 @@ describe( 'statements/Getters', () => {
 						resolveSnakInStatement: jest.fn().mockReturnValue( null ),
 					};
 
-					expect( getters[ SNAK_DATA_VALUE ]( mockSnakPath ) ).toBeNull();
+					expect( getters.dataValue( mockSnakPath ) ).toBeNull();
 					expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 				} );
 			} );
