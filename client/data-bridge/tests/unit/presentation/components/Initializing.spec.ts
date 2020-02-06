@@ -13,7 +13,7 @@ describe( 'Initializing', () => {
 				isInitializing: false,
 			},
 		} );
-		expect( wrapper.isVueInstance() ).toBeTruthy();
+		expect( wrapper.isVueInstance() ).toBe( true );
 	} );
 
 	it( 'renders default slot if constructed as not initializing', () => {
@@ -50,7 +50,7 @@ describe( 'Initializing', () => {
 
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + 1 );
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBeTruthy();
+			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		// Scenario 3 (one half)
@@ -68,7 +68,7 @@ describe( 'Initializing', () => {
 			// way after minimum animation time
 			jest.advanceTimersByTime( TIME_UNTIL_CONSIDERED_SLOW + MINIMUM_TIME_OF_PROGRESS_ANIMATION * 2 );
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBeTruthy();
+			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 	} );
 
@@ -109,7 +109,7 @@ describe( 'Initializing', () => {
 			wrapper.setProps( { isInitializing: false } );
 			jest.advanceTimersByTime( MINIMUM_TIME_OF_PROGRESS_ANIMATION - 1 ); // just before animation end
 
-			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBeTruthy();
+			expect( wrapper.find( IndeterminateProgressBar ).isVisible() ).toBe( true );
 		} );
 
 		// Scenario 2
