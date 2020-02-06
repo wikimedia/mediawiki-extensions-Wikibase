@@ -116,7 +116,7 @@ describe( 'App.vue', () => {
 			},
 		} );
 
-		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBeTruthy();
+		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBe( true );
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.BRIDGE_DIALOG_TITLE );
 		expect( wrapper.find( ProcessDialogHeader ).props( 'title' ) ).toBe( titleMessage );
 	} );
@@ -247,7 +247,7 @@ describe( 'App.vue', () => {
 					localVue,
 				} );
 
-				expect( wrapper.find( ErrorWrapper ).exists() ).toBeTruthy();
+				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( true );
 			} );
 
 			it( 'doesn\'t show the save button ', () => {
@@ -258,7 +258,7 @@ describe( 'App.vue', () => {
 					stubs: { ProcessDialogHeader, EventEmittingButton },
 				} );
 
-				expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBeFalsy();
+				expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 			} );
 		} );
 
@@ -270,8 +270,8 @@ describe( 'App.vue', () => {
 					localVue,
 				} );
 
-				expect( wrapper.find( Initializing ).exists() ).toBeTruthy();
-				expect( wrapper.find( Initializing ).find( DataBridge ).exists() ).toBeTruthy();
+				expect( wrapper.find( Initializing ).exists() ).toBe( true );
+				expect( wrapper.find( Initializing ).find( DataBridge ).exists() ).toBe( true );
 			} );
 
 			it( 'instructs Initializing accordingly if the store is not ready', () => {

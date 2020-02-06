@@ -68,7 +68,7 @@ describe( 'EditDecision', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( RadioGroup ).exists() ).toBeTruthy();
+		expect( wrapper.find( RadioGroup ).exists() ).toBe( true );
 		expect( wrapper.findAll( RadioInput ) ).toHaveLength( 2 );
 	} );
 

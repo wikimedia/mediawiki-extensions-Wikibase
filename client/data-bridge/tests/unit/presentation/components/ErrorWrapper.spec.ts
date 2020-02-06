@@ -25,8 +25,8 @@ describe( 'ErrorWrapper', () => {
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
-		expect( wrapper.find( ErrorUnknown ).exists() ).toBeTruthy();
-		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBe( true );
+		expect( wrapper.find( ErrorPermission ).exists() ).toBe( false );
 	} );
 
 	it( 'mounts ErrorUnknown for unknown errors', () => {
@@ -40,8 +40,8 @@ describe( 'ErrorWrapper', () => {
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
-		expect( wrapper.find( ErrorUnknown ).exists() ).toBeTruthy();
-		expect( wrapper.find( ErrorPermission ).exists() ).toBeFalsy();
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBe( true );
+		expect( wrapper.find( ErrorPermission ).exists() ).toBe( false );
 	} );
 
 	it( 'shows ErrorPermission if a permission error is contained in the application errors', () => {
@@ -61,9 +61,9 @@ describe( 'ErrorWrapper', () => {
 		} );
 
 		const permissionErrorComponent = wrapper.find( ErrorPermission );
-		expect( permissionErrorComponent.exists() ).toBeTruthy();
+		expect( permissionErrorComponent.exists() ).toBe( true );
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( applicationErrors );
-		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBe( false );
 	} );
 
 	it( 'shows only ErrorPermission even if permission errors are mixed with other application errors', () => {
@@ -114,9 +114,9 @@ describe( 'ErrorWrapper', () => {
 		} );
 
 		const permissionErrorComponent = wrapper.find( ErrorPermission );
-		expect( permissionErrorComponent.exists() ).toBeTruthy();
+		expect( permissionErrorComponent.exists() ).toBe( true );
 		expect( permissionErrorComponent.props( 'permissionErrors' ) ).toEqual( permissionErrors );
-		expect( wrapper.find( ErrorUnknown ).exists() ).toBeFalsy();
+		expect( wrapper.find( ErrorUnknown ).exists() ).toBe( false );
 	} );
 
 	// eslint-disable-next-line max-len
@@ -135,7 +135,7 @@ describe( 'ErrorWrapper', () => {
 			},
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
-		expect( wrapper.find( ErrorUnsupportedDatatype ).exists() ).toBeTruthy();
+		expect( wrapper.find( ErrorUnsupportedDatatype ).exists() ).toBe( true );
 	} );
 
 	// eslint-disable-next-line max-len
@@ -152,7 +152,7 @@ describe( 'ErrorWrapper', () => {
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 
-		expect( wrapper.find( ErrorDeprecatedStatement ).exists() ).toBeTruthy();
+		expect( wrapper.find( ErrorDeprecatedStatement ).exists() ).toBe( true );
 	} );
 
 	// eslint-disable-next-line max-len

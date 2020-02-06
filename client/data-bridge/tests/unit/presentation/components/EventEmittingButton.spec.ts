@@ -26,9 +26,9 @@ describe( 'EventEmittingButton', () => {
 			wrapper.find( 'a' ).trigger( 'keydown.enter' );
 			const clickEvent = wrapper.emitted( 'click' );
 			expect( clickEvent ).toBeTruthy();
-			expect( wrapper.find( pressedClass ).exists() ).toBeTruthy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.enter' );
-			expect( wrapper.find( pressedClass ).exists() ).toBeFalsy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
 		} );
 
 		it( 'emits an event on space and does not scroll down', () => {
@@ -39,9 +39,9 @@ describe( 'EventEmittingButton', () => {
 			const originalEvent: UIEvent = clickEvent[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
 			expect( originalEvent.defaultPrevented ).toBeTruthy();
-			expect( wrapper.find( pressedClass ).exists() ).toBeTruthy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.space' );
-			expect( wrapper.find( pressedClass ).exists() ).toBeFalsy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
 		} );
 	} );
 
@@ -70,9 +70,9 @@ describe( 'EventEmittingButton', () => {
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
 			expect( originalEvent.defaultPrevented ).toBeTruthy();
-			expect( wrapper.find( pressedClass ).exists() ).toBeTruthy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.enter' );
-			expect( wrapper.find( pressedClass ).exists() ).toBeFalsy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
 		} );
 
 		it( 'does nothing on space', () => {
@@ -81,7 +81,7 @@ describe( 'EventEmittingButton', () => {
 			} );
 			wrapper.find( 'a' ).trigger( 'keydown.space' );
 			expect( wrapper.emitted( 'click' ) ).toBeFalsy();
-			expect( wrapper.find( pressedClass ).exists() ).toBeFalsy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
 		} );
 	} );
 
@@ -121,7 +121,7 @@ describe( 'EventEmittingButton', () => {
 			} );
 			wrapper.find( 'a' ).trigger( 'keydown.space' );
 			expect( wrapper.emitted( 'click' ) ).toBeFalsy();
-			expect( wrapper.find( pressedClass ).exists() ).toBeFalsy();
+			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
 		} );
 	} );
 

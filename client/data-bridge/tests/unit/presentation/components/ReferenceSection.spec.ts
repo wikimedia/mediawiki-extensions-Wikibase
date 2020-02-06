@@ -76,7 +76,7 @@ describe( 'ReferenceSection', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBeTruthy();
+		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBe( true );
 	} );
 
 	it( 'does not mount SingleReferenceDisplay if there are no references', () => {
@@ -88,7 +88,7 @@ describe( 'ReferenceSection', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBeFalsy();
+		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBe( false );
 	} );
 
 	it( 'delegates the necessary props to SingleReferenceDisplay', () => {

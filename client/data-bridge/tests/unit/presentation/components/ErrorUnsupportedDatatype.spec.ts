@@ -37,7 +37,7 @@ describe( 'ErrorUnsupportedDatatype', () => {
 			},
 			store,
 		} );
-		expect( wrapper.find( IconMessageBox ).exists() ).toBeTruthy();
+		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
 	} );
 
 	it( 'passes a slot to IconMessageBox which contains the header message', () => {
@@ -96,7 +96,7 @@ describe( 'ErrorUnsupportedDatatype', () => {
 			store,
 		} );
 
-		expect( wrapper.find( BailoutActions ).exists() ).toBeTruthy();
+		expect( wrapper.find( BailoutActions ).exists() ).toBe( true );
 		expect( wrapper.find( BailoutActions ).props() ).toStrictEqual( {
 			originalHref,
 			pageTitle,

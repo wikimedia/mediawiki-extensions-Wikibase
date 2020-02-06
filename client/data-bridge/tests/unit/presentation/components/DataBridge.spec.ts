@@ -35,7 +35,7 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( StringDataValue ).exists() ).toBeTruthy();
+		expect( wrapper.find( StringDataValue ).exists() ).toBe( true );
 	} );
 
 	it( 'delegates the necessary props to StringDataValue', () => {
@@ -64,7 +64,7 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( ReferenceSection ).exists() ).toBeTruthy();
+		expect( wrapper.find( ReferenceSection ).exists() ).toBe( true );
 	} );
 
 	it( 'mounts EditDecision', () => {
@@ -73,6 +73,6 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( EditDecision ).exists() ).toBeTruthy();
+		expect( wrapper.find( EditDecision ).exists() ).toBe( true );
 	} );
 } );
