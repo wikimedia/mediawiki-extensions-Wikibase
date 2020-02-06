@@ -45,14 +45,39 @@ docker-compose run --rm node npm run storybook
 ```
 
 ### Entry point
-The application entry point is, `src/main.ts`.
+The application entry point is `src/main.ts`. This is the common first point of the application both as it is run in
+dev mode (the hot refreshing setup for quick development) and as part of a Wikibase entity page.
+
+The code resulting from main.ts is build into `dist/tainted-ref.common.js`
+
+The code in `src/main.ts` is executed by `src/mock-entry.ts` when in dev mode.
+
+It is executed by `src/init.ts` when part of a Wikibase page.
+
+`src/init.ts` contains code that is bound to the window environment present in Mediawiki/Wikibase. It uses [ResourceLoader](https://www.mediawiki.org/wiki/ResourceLoader)
+to load the rest of the application.
+
+`src/tainted-ref.init.ts` is built into `dist/tainted-ref.init.js` and runs the exported function of init.ts after page load.
+
 
 ### Hooks
-Hooks are defined in `src/MWHookHandler.ts`
+This application listens to hooks fired by the Mediawiki UI and then proceeds to handle them. e.g. by dispatching vuex actions
+or running other code.
+
+How hooks are handled is defined in `src/MWHookHandler.ts`
 
 * `addSaveHook`: Sets the tainted state and track edits made on statement.
 * `addStartEditHook`: Set the edit state to true when edit button is clicked.
 * `addStopEditHook`: set the edit state to false after each edit (could be a saved or canceled edit).
+
+You can read about the Wikibase specific hooks at: extensions/Wikibase/docs/topics/hooks-js.md
+
+Some of these hooks send payloads containing object built from the Javascript Wikibase Datamodel. See Below.
+
+### Wikibase Datamodel
+This application uses the payload of hooks fired by the Wikibase ui. These objects are defined by the [Javascript Wikibase Datamodel](https://github.com/wmde/WikibaseDataModelJavaScript)
+We depend on this for some functionality but due to the way the library is written we don't import it via npm and instead rely on it at run-time.
+For tests it is mocked.
 
 ### Development Troubleshooting
 #### Build failing because checking dist and built dist don't match
