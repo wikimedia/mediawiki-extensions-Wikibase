@@ -17,8 +17,10 @@ use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
+use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -36,6 +38,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\TermIndex;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
@@ -192,6 +195,8 @@ return [
 		GenericServices $genericServices,
 		DataAccessSettings $settings
 	) {
+		global $wgSecretKey;
+
 		/** @var TermIndex $termIndex */
 		$termIndex = $services->getService( 'TermIndex' );
 
@@ -229,7 +234,24 @@ return [
 		];
 
 		if ( $settings->useNormalizedPropertyTerms() ) {
-			$lookups['property'] = new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain );
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+			$cache = new SimpleCacheWithBagOStuff(
+				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+				'wikibase.prefetchingPropertyTermLookup.',
+				$cacheSecret
+			);
+			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
+				$services->getService( 'EntityRevisionLookup' )
+			);
+			$lookups['property'] = new CachingPrefetchingTermLookup(
+				$cache,
+				new UncachedTermsPrefetcher(
+					new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
+					$redirectResolvingRevisionLookup
+				),
+				$redirectResolvingRevisionLookup
+			);
 		} else {
 			$lookups['property'] = $termIndexBackedTermLookup;
 		}
