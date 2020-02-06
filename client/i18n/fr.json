@@ -164,5 +164,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifier la valeur sur {{WBREPONAME}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Selon le modèle utilisé, il est possible d’écraser localement la valeur en utilisant [$1 l’éditeur d’article]. Si ce n’est pas du tout possible, nous vous recommandons à la place d’ajouter la valeur à {{WBREPONAME}} via le bouton ci-dessus.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "La modification de la valeur de $1 n’est actuellement pas supportée",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 est du type de données $2 sur {{WBREPONAME}}. La modification de ce type de données n’est actuellement pas supportée."
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 est du type de données $2 sur {{WBREPONAME}}. La modification de ce type de données n’est actuellement pas supportée.",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "La modification de la valeur pour $1 n’est actuellement pas supportée",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "La valeur pour $1 est <em>obsolète</em> sur {{WBREPONAME}}. Modifier des valeurs <em>obsolètes</em> n’est actuellement pas supporté."
 }

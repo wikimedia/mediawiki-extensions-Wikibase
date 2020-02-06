@@ -24,7 +24,8 @@
 			"神樂坂秀吉",
 			"予弦",
 			"Xiplus",
-			"A Retired User"
+			"A Retired User",
+			"铁桶"
 		]
 	},
 	"wikibase-client-desc": "维基数据库扩展程序的客户端",
@@ -129,5 +130,6 @@
 	"unresolved-property-category": "有未解决属性的页面",
 	"unresolved-property-category-desc": "此分类列举引用了无法通过属性ID或标签找到的{{WBREPONAME}}属性的页面。",
 	"connected-redirect-category": "连接到{{WBREPONAME}}项的重定向",
-	"connected-redirect-category-desc": "此分类列举了连接到{{WBREPONAME}}项的重定向页面。"
+	"connected-redirect-category-desc": "此分类列举了连接到{{WBREPONAME}}项的重定向页面。",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "当前不支持编辑$1的值"
 }

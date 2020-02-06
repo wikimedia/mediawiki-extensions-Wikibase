@@ -12,7 +12,8 @@
 			"Srdjan m",
 			"Ladsgroup",
 			"Bugoslav",
-			"Astrind"
+			"Astrind",
+			"Hmxhmx"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -117,7 +118,7 @@
 	"wikibase-newproperty-fieldset": "Stvori novo svojstvo",
 	"wikibase-newproperty-datatype": "Vrsta podataka:",
 	"special-newitem": "Stvori novu stavku",
-	"wikibase-newitem-summary": "Svakako provjerite da li [[Special:Search|takva stavka već postoji]]!<br/>Ako ste se uključili u projekt nedavno, onda pročitajte Najčešća pitanja po [[Special:MyLanguage/Help:Label|nazivu]] i [[Special:MyLanguage/Help:Description|opisu]].",
+	"wikibase-newitem-summary": "Svakako [[Special:Search|provjerite postoji li već ta stavka]]!<br />Trebali biste stvoriti [[{{int:Wikibase-label-helppage}}|naziv]] i [[{{int:Wikibase-description-helppage}}|opis]] za sve nove stavke.",
 	"wikibase-newitem-fieldset": "Stvori novu stavku",
 	"wikibase-newitem-site": "Mrežno mjesto prve povezane stranice",
 	"wikibase-newitem-page": "Ime prve povezane stranice",

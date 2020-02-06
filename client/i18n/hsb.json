@@ -51,5 +51,6 @@
 	"wikibase-unconnectedpages-submit": "Wotesłać",
 	"wikibase-pageinfo-entity-id": "ID elementa {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Žadyn",
+	"wikibase-pageinfo-entity-usage": "Na tutej stronje wužiwane {{WBREPONAME}}-objekty",
 	"wikibase-otherprojects": "W druhich projektach"
 }
