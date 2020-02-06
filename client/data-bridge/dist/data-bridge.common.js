@@ -15105,14 +15105,15 @@ var ErrorPermission_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorPermission = (ErrorPermission_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
-var ErrorUnknownvue_type_template_id_4b32f9a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('h1',[_vm._v("\n\tAn error occurred\n")])}
-var ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2d05ed7a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=13ac6221&
+var ErrorUnknownvue_type_template_id_13ac6221_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('h1',[_vm._v("\n\t\tAn error occurred\n\t")]),_c('pre',[_vm._v(_vm._s(_vm.applicationErrorsString))])])}
+var ErrorUnknownvue_type_template_id_13ac6221_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=4b32f9a4&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnknown.vue?vue&type=template&id=13ac6221&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnknown.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -15127,8 +15128,8 @@ var ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns = []
 
 var ErrorUnknownvue_type_script_lang_ts_ErrorUnknown =
 /*#__PURE__*/
-function (_Vue) {
-  _inherits(ErrorUnknown, _Vue);
+function (_mixins) {
+  _inherits(ErrorUnknown, _mixins);
 
   function ErrorUnknown() {
     _classCallCheck(this, ErrorUnknown);
@@ -15136,8 +15137,15 @@ function (_Vue) {
     return _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(ErrorUnknown).apply(this, arguments));
   }
 
+  _createClass(ErrorUnknown, [{
+    key: "applicationErrorsString",
+    get: function get() {
+      return JSON.stringify(this.rootModule.state.applicationErrors, null, 4);
+    }
+  }]);
+
   return ErrorUnknown;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+}(Object(vue_class_component_common["mixins"])(presentation_StateMixin));
 
 ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_component_common_default()({})], ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
 /* harmony default export */ var ErrorUnknownvue_type_script_lang_ts_ = (ErrorUnknownvue_type_script_lang_ts_ErrorUnknown);
@@ -15153,8 +15161,8 @@ ErrorUnknownvue_type_script_lang_ts_ErrorUnknown = __decorate([vue_class_compone
 
 var ErrorUnknown_component = normalizeComponent(
   components_ErrorUnknownvue_type_script_lang_ts_,
-  ErrorUnknownvue_type_template_id_4b32f9a4_render,
-  ErrorUnknownvue_type_template_id_4b32f9a4_staticRenderFns,
+  ErrorUnknownvue_type_template_id_13ac6221_render,
+  ErrorUnknownvue_type_template_id_13ac6221_staticRenderFns,
   false,
   null,
   null,
