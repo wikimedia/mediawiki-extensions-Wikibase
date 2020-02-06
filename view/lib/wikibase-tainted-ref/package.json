@@ -13,7 +13,7 @@
     "test": "npm-run-all test:*",
     "test:unit": "vue-cli-service test:unit -c ./jest.config.js",
     "test:lint": "vue-cli-service lint --max-warnings 0 --no-fix . && stylelint --syntax scss 'src/**/*.(vue|scss)'",
-    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && diff -q ./dist/tainted-ref.common.js /tmp/dist/tainted-ref.common.js",
+    "test:distnodiff": "npm run build:app -- --dest /tmp/dist && npm run build:init -- --dest /tmp/dist && diff -q ./dist/tainted-ref.common.js /tmp/dist/tainted-ref.common.js && diff -q ./dist/tainted-ref.init.js /tmp/dist/tainted-ref.init.js && diff -q ./dist/tainted-ref.app.css /tmp/dist/tainted-ref.app.css && diff -q ./dist/img /tmp/dist/img",
     "selenium-test": "wdio tests/selenium/wdio.conf.js",
     "storybook": "start-storybook",
     "build-storybook": "build-storybook"
