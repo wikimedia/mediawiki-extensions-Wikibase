@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Content;
 
-use DataUpdate;
+use Content;
 use IContextSource;
+use MediaWiki\Revision\SlotRenderingProvider;
 use Page;
 use Title;
 use Wikibase\Content\EntityHolder;
@@ -17,7 +18,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EditEntityAction;
-use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -62,6 +62,11 @@ class ItemHandler extends EntityHandler {
 	private $dataTypeLookup;
 
 	/**
+	 * @var EntityTermStoreWriter
+	 */
+	private $termStoreWriter;
+
+	/**
 	 * @param EntityTermStoreWriter $termStoreWriter
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
@@ -89,7 +94,7 @@ class ItemHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_ITEM,
-			$termStoreWriter,
+			null,
 			$contentCodec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -102,6 +107,7 @@ class ItemHandler extends EntityHandler {
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
 		$this->dataTypeLookup = $dataTypeLookup;
+		$this->termStoreWriter = $termStoreWriter;
 	}
 
 	/**
@@ -141,60 +147,62 @@ class ItemHandler extends EntityHandler {
 		return Item::ENTITY_TYPE;
 	}
 
-	/**
-	 * Returns deletion updates for the given EntityContent.
-	 *
-	 * @see EntityHandler::getEntityDeletionUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
+	public function getSecondaryDataUpdates(
+		Title $title,
+		Content $content,
+		$role,
+		SlotRenderingProvider $slotOutput
+	) {
+		$updates = parent::getSecondaryDataUpdates( $title, $content, $role, $slotOutput );
 
-		$updates[] = new DataUpdateAdapter(
-			[ $this->siteLinkStore, 'deleteLinksOfItem' ],
-			$content->getEntityId()
-		);
-
-		return array_merge(
-			parent::getEntityDeletionUpdates( $content, $title ),
-			$updates
-		);
-	}
-
-	/**
-	 * Returns modification updates for the given EntityContent.
-	 *
-	 * @see EntityHandler::getEntityModificationUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
+		/** @var ItemContent $content */
+		'@phan-var ItemContent $content';
+		$id = $content->getEntityId();
 
 		if ( $content->isRedirect() ) {
 			$updates[] = new DataUpdateAdapter(
 				[ $this->siteLinkStore, 'deleteLinksOfItem' ],
-				$content->getEntityId()
+				$id
+			);
+			$updates[] = new DataUpdateAdapter(
+				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+				$id
 			);
 		} else {
+			/** @var ItemContent $content */
+			'@phan-var ItemContent $content';
+			$item = $content->getItem();
+
+			$updates[] = new DataUpdateAdapter(
+				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
+				$item
+			);
 			$updates[] = new DataUpdateAdapter(
 				[ $this->siteLinkStore, 'saveLinksOfItem' ],
-				$content->getEntity()
+				$item
 			);
 		}
 
-		return array_merge(
-			$updates,
-			parent::getEntityModificationUpdates( $content, $title ),
-			parent::getTermIndexEntityModificationUpdates( $content )
+		return $updates;
+	}
+
+	public function getDeletionUpdates( Title $title, $role ) {
+		$updates = parent::getDeletionUpdates( $title, $role );
+
+		$id = $this->getIdForTitle( $title );
+
+		// Unregister the entity from the terms table.
+		$updates[] = new DataUpdateAdapter(
+			[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+			$id
 		);
+
+		$updates[] = new DataUpdateAdapter(
+			[ $this->siteLinkStore, 'deleteLinksOfItem' ],
+			$id
+		);
+
+		return $updates;
 	}
 
 	/**
