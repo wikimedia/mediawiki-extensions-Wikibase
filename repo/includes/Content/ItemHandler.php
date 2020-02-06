@@ -62,12 +62,12 @@ class ItemHandler extends EntityHandler {
 	private $dataTypeLookup;
 
 	/**
-	 * @var EntityTermStoreWriter
+	 * @var EntityTermStoreWriter[]
 	 */
-	private $termStoreWriter;
+	private $entityTermStoreWriters;
 
 	/**
-	 * @param EntityTermStoreWriter $termStoreWriter
+	 * @param EntityTermStoreWriter[] $entityTermStoreWriters
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -80,7 +80,7 @@ class ItemHandler extends EntityHandler {
 	 * @param callable|null $legacyExportFormatDetector
 	 */
 	public function __construct(
-		EntityTermStoreWriter $termStoreWriter,
+		array $entityTermStoreWriters,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -107,7 +107,7 @@ class ItemHandler extends EntityHandler {
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->siteLinkStore = $siteLinkStore;
 		$this->dataTypeLookup = $dataTypeLookup;
-		$this->termStoreWriter = $termStoreWriter;
+		$this->entityTermStoreWriters = $entityTermStoreWriters;
 	}
 
 	/**
@@ -164,19 +164,24 @@ class ItemHandler extends EntityHandler {
 				[ $this->siteLinkStore, 'deleteLinksOfItem' ],
 				$id
 			);
-			$updates[] = new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
-				$id
-			);
+			foreach ( $this->entityTermStoreWriters as $termStoreWriter ) {
+				$updates[] = new DataUpdateAdapter(
+					[ $termStoreWriter, 'deleteTermsOfEntity' ],
+					$id
+				);
+			}
 		} else {
 			/** @var ItemContent $content */
 			'@phan-var ItemContent $content';
 			$item = $content->getItem();
 
-			$updates[] = new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
-				$item
-			);
+			foreach ( $this->entityTermStoreWriters as $termStoreWriter ) {
+				$updates[] = new DataUpdateAdapter(
+					[ $termStoreWriter, 'saveTermsOfEntity' ],
+					$item
+				);
+			}
+
 			$updates[] = new DataUpdateAdapter(
 				[ $this->siteLinkStore, 'saveLinksOfItem' ],
 				$item
@@ -192,10 +197,12 @@ class ItemHandler extends EntityHandler {
 		$id = $this->getIdForTitle( $title );
 
 		// Unregister the entity from the terms table.
-		$updates[] = new DataUpdateAdapter(
-			[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
-			$id
-		);
+		foreach ( $this->entityTermStoreWriters as $termStoreWriter ) {
+			$updates[] = new DataUpdateAdapter(
+				[ $termStoreWriter, 'deleteTermsOfEntity' ],
+				$id
+			);
+		}
 
 		$updates[] = new DataUpdateAdapter(
 			[ $this->siteLinkStore, 'deleteLinksOfItem' ],

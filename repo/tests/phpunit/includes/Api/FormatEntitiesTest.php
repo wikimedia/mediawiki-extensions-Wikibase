@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
 use ApiUsageException;
+use HashBagOStuff;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -33,7 +34,7 @@ class FormatEntitiesTest extends ApiTestCase {
 
 	public function testApiRequest() {
 		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for properties
-		$this->setService( 'LocalServerObjectCache', new \HashBagOStuff() );
+		$this->setService( 'LocalServerObjectCache', new HashBagOStuff() );
 
 		$item = NewItem::withLabel( 'en', 'test item' )->build();
 		$this->saveEntity( $item );

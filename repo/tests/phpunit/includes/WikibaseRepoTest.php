@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\DataValueFactory;
@@ -786,10 +787,10 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getEntitySourceDefinitions() {
+	private function getEntitySourceDefinitions( string $sourceName = 'test' ) {
 		return new EntitySourceDefinitions(
 			[ new EntitySource(
-				'test',
+				$sourceName,
 				false,
 				[
 					'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
@@ -1140,6 +1141,144 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				$publicMethod->invoke( $wbRepo );
 			}
 		}
+	}
+
+	private function getWikibaseRepoWithCustomSettings( SettingsArray $settings ) {
+		return new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			$this->getRepositoryDefinitions(),
+			$this->getEntitySourceDefinitions( 'local' )
+		);
+	}
+
+	private function getSettingsCopyWithSettingSet( $settingName, $settingValue ) {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( $settingName, $settingValue );
+		return $settings;
+	}
+
+	public function provideTestGetPropertyTermStoreWriters() {
+		yield [ $this->getSettingsCopyWithSettingSet( 'tmpPropertyTermsMigrationStage', MIGRATION_OLD ), 1, 0 ];
+		yield [ $this->getSettingsCopyWithSettingSet( 'tmpPropertyTermsMigrationStage', MIGRATION_WRITE_BOTH ), 1, 1 ];
+		yield [ $this->getSettingsCopyWithSettingSet( 'tmpPropertyTermsMigrationStage', MIGRATION_WRITE_NEW ), 1, 1 ];
+		yield [ $this->getSettingsCopyWithSettingSet( 'tmpPropertyTermsMigrationStage', MIGRATION_NEW ), 0, 1 ];
+	}
+
+	/**
+	 * @dataProvider provideTestGetPropertyTermStoreWriters
+	 */
+	public function testGetPropertyTermStoreWriters( $settings, $oldCount, $newCount ) {
+		$repo = $this->getWikibaseRepoWithCustomSettings( $settings );
+
+		$writers = $repo->getPropertyTermStoreWriters();
+
+		$this->assertCount( $oldCount + $newCount, $writers );
+		$this->assertEquals( $oldCount, array_key_exists( 'old', $writers ) );
+		$this->assertEquals( $newCount, array_key_exists( 'new', $writers ) );
+	}
+
+	public function provideTestGetItemTermStoreWriters() {
+		yield 'Everything Old' => [ $this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [ 'max' => MIGRATION_OLD ] ), 1, 0 ];
+		yield 'Everything New' => [ $this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [ 'max' => MIGRATION_NEW ] ), 0, 1 ];
+		yield 'New and Old 1' => [
+			$this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [
+				'100' => MIGRATION_NEW,
+				'max' => MIGRATION_OLD,
+			] ),
+			1,
+			1,
+		];
+		yield 'New and Old 2' => [
+			$this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [
+				'100' => MIGRATION_NEW,
+				'max' => MIGRATION_WRITE_BOTH,
+			] ),
+			1,
+			1,
+		];
+		yield 'New and Old 3' => [
+			$this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [
+				'100' => MIGRATION_NEW,
+				'max' => MIGRATION_WRITE_NEW,
+			] ),
+			1,
+			1,
+		];
+		yield 'New and Old 4' => [
+			$this->getSettingsCopyWithSettingSet( 'tmpItemTermsMigrationStages', [
+				'100' => MIGRATION_WRITE_BOTH,
+				'max' => MIGRATION_WRITE_NEW,
+			] ),
+			1,
+			1,
+		];
+	}
+
+	/**
+	 * This test doesnt check the per item configuration and due to the wrapped services doing that would be a bit evil.
+	 * This only tests that we get the correct resulting writer objects.
+	 * For testing of the other logic see testGetItemTermStoreArrayForWriters
+	 *
+	 * @dataProvider provideTestGetItemTermStoreWriters
+	 */
+	public function testGetItemTermStoreWriters( $settings, $oldCount, $newCount ) {
+			$repo = $this->getWikibaseRepoWithCustomSettings( $settings );
+
+			$writers = $repo->getItemTermStoreWriters();
+
+			$this->assertCount( $oldCount + $newCount, $writers );
+			$this->assertEquals( $oldCount, array_key_exists( 'old', $writers ) );
+			$this->assertEquals( $newCount, array_key_exists( 'new', $writers ) );
+	}
+
+	public function provideTestGetItemTermStoreArrayForWriters() {
+		yield 'Everything Old' => [
+			[ 'max' => MIGRATION_OLD ],
+			[ 'old' => [ Int32EntityId::MAX => 'old' ], 'new' => [] ]
+		];
+		yield 'Everything New' => [
+			[ 'max' => MIGRATION_NEW ],
+			[ 'old' => [], 'new' => [ Int32EntityId::MAX => 'new' ] ]
+		];
+		yield 'Two stages' => [
+			[
+			'100' => MIGRATION_NEW,
+			'max' => MIGRATION_OLD,
+			],
+			[ 'old' => [ Int32EntityId::MAX => 'old' ], 'new' => [ '100' => 'new' ] ]
+		];
+		yield 'Four stages' => [
+			[
+			'100' => MIGRATION_NEW,
+			'1000' => MIGRATION_WRITE_NEW,
+			'10000' => MIGRATION_WRITE_BOTH,
+			'max' => MIGRATION_OLD,
+			],
+			[
+				'old' => [ '1000' => 'old', '10000' => 'old', Int32EntityId::MAX => 'old' ],
+				'new' => [ '100' => 'new', '1000' => 'new', '10000' => 'new' ]
+			]
+		];
+	}
+
+	/**
+	 * This test doesnt check the per item configuration and due to the wrapped services doing that would be a bit evil.
+	 * This only tests that we get the correct resulting writer objects.
+	 * For testing of the other logic see testGetItemTermStoreArrayForWriters
+	 *
+	 * @group Addshore
+	 *
+	 * @dataProvider provideTestGetItemTermStoreArrayForWriters
+	 */
+	public function testGetItemTermStoreArrayForWriters( $stages, $expected ) {
+		$currentSettings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$repo = $this->getWikibaseRepoWithCustomSettings( $currentSettings );
+
+		$array = $repo->getItemTermStoreArrayForWriters( $stages, 'old', 'new' );
+
+		$this->assertEquals( $expected, $array );
 	}
 
 }

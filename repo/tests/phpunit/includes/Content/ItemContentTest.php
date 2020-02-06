@@ -286,6 +286,7 @@ class ItemContentTest extends EntityContentTestCase {
 
 		return new ItemHandler(
 			new NullEntityTermStoreWriter(),
+			new NullEntityTermStoreWriter(),
 			$wikibaseRepo->getEntityContentDataCodec(),
 			$wikibaseRepo->getEntityConstraintProvider(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),

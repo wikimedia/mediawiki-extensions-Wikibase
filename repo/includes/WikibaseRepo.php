@@ -124,7 +124,6 @@ use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\Store\ByIdDispatchingItemTermStoreWriter;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\MultiItemTermStoreWriter;
-use Wikibase\Lib\Store\MultiPropertyTermStoreWriter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
@@ -1828,7 +1827,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
-			$this->getItemEntityTermStoreWriter(),
+			$this->getItemTermStoreWriters(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -1842,42 +1841,89 @@ class WikibaseRepo {
 		);
 	}
 
-	private function getPropertyEntityTermStoreWriter() {
-		return new PropertyTermStoreWriterAdapter(
-			$this->getPropertyTermStoreWriter()
-		);
-	}
-
-	private function getItemEntityTermStoreWriter() {
-		return new ItemTermStoreWriterAdapter(
-			$this->getItemTermStoreWriter()
-		);
-	}
-
-	public function getPropertyTermStoreWriter(): PropertyTermStoreWriter {
+	/**
+	 * @return PropertyTermStoreWriterAdapter[]
+	 */
+	public function getPropertyTermStoreWriters() {
 		$propertyTermsMigrationStage = $this->settings->getSetting(
 			'tmpPropertyTermsMigrationStage' );
 
+		$old = new PropertyTermStoreWriterAdapter( $this->getOldPropertyTermStoreWriter() );
+		$new = new PropertyTermStoreWriterAdapter( $this->getNewPropertyTermStoreWriter() );
+
 		switch ( $propertyTermsMigrationStage ) {
 			case MIGRATION_OLD:
-				return $this->getOldPropertyTermStoreWriter();
-			case MIGRATION_WRITE_BOTH:
-				return new MultiPropertyTermStoreWriter( [
-					$this->getOldPropertyTermStoreWriter(),
-					$this->getNewPropertyTermStoreWriter(),
-				] );
+				return [ 'old' => $old ];
 			case MIGRATION_WRITE_NEW:
-				return new MultiPropertyTermStoreWriter( [
-					$this->getNewPropertyTermStoreWriter(),
-					$this->getOldPropertyTermStoreWriter(),
-				] );
+			case MIGRATION_WRITE_BOTH:
+				return [ 'new' => $new, 'old' => $old ];
 			case MIGRATION_NEW:
-				return $this->getNewPropertyTermStoreWriter();
+				return [ 'new' => $new ];
 			default:
 				throw new UnexpectedValueException(
 					'Unknown migration stage: ' . $propertyTermsMigrationStage
 				);
 		}
+	}
+
+	public function getItemTermStoreWriters(): array {
+		$itemTermsMigrationStages = $this->settings->getSetting( 'tmpItemTermsMigrationStages' );
+		$oldItemTermStore = $this->getOldItemTermStoreWriter();
+		$newItemTermStore = $this->getNewItemTermStoreWriter();
+
+		$arrayForWriters = $this->getItemTermStoreArrayForWriters( $itemTermsMigrationStages, $oldItemTermStore, $newItemTermStore );
+
+		$writers = [];
+		if ( $arrayForWriters['old'] !== [] ) {
+			$writers[ 'old' ] = new ItemTermStoreWriterAdapter(
+				new ByIdDispatchingItemTermStoreWriter( $arrayForWriters['old'], false )
+			);
+		}
+		if ( $arrayForWriters['new'] !== [] ) {
+			$writers[ 'new' ] = new ItemTermStoreWriterAdapter(
+				new ByIdDispatchingItemTermStoreWriter( $arrayForWriters['new'], false )
+			);
+		}
+
+		return $writers;
+	}
+
+	/**
+	 * @param array $itemTermsMigrationStages
+	 * @param mixed|ItemTermStoreWriter $oldItemTermStore
+	 * @param mixed|ItemTermStoreWriter $newItemTermStore
+	 * @return array
+	 */
+	public function getItemTermStoreArrayForWriters( $itemTermsMigrationStages, $oldItemTermStore, $newItemTermStore ): array {
+		$oldStores = [];
+		$newStores = [];
+
+		foreach ( $itemTermsMigrationStages as $maxId => $migrationStage ) {
+			if ( $maxId === 'max' ) {
+				$maxId = Int32EntityId::MAX;
+			} elseif ( !is_int( $maxId ) ) {
+				throw new Exception( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
+			}
+			switch ( $migrationStage ) {
+				case MIGRATION_OLD:
+					$oldStores[ $maxId ] = $oldItemTermStore;
+					break;
+				case MIGRATION_WRITE_NEW:
+				case MIGRATION_WRITE_BOTH:
+					$oldStores[ $maxId ] = $oldItemTermStore;
+					$newStores[ $maxId ] = $newItemTermStore;
+					break;
+				case MIGRATION_NEW:
+					$newStores[ $maxId ] = $newItemTermStore;
+					break;
+				default:
+					throw new UnexpectedValueException(
+						'Unknown migration stage: ' . $migrationStage
+					);
+			}
+		}
+
+		return [ 'old' => $oldStores, 'new' => $newStores ];
 	}
 
 	/**
@@ -2037,7 +2083,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
-			$this->getPropertyEntityTermStoreWriter(),
+			$this->getPropertyTermStoreWriters(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
