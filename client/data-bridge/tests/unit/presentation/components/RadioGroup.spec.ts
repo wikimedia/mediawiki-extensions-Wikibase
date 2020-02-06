@@ -6,7 +6,7 @@ describe( 'RadioGroup', () => {
 		const wrapper = shallowMount( RadioGroup, {
 			propsData: { title: 'title' },
 		} );
-		expect( wrapper.isVueInstance() ).toBeTruthy();
+		expect( wrapper.isVueInstance() ).toBe( true );
 	} );
 
 	it( 'gets its content through the default slot', () => {

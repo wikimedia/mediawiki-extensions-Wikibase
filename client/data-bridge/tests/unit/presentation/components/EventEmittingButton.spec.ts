@@ -38,7 +38,7 @@ describe( 'EventEmittingButton', () => {
 			expect( clickEvent ).toBeTruthy();
 			const originalEvent: UIEvent = clickEvent[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
-			expect( originalEvent.defaultPrevented ).toBeTruthy();
+			expect( originalEvent.defaultPrevented ).toBe( true );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.space' );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
@@ -55,7 +55,7 @@ describe( 'EventEmittingButton', () => {
 			expect( clickEvent ).toBeTruthy();
 			const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( MouseEvent );
-			expect( originalEvent.defaultPrevented ).toBeTruthy();
+			expect( originalEvent.defaultPrevented ).toBe( true );
 		} );
 
 		it( 'emits an event on enter and prevents the default', () => {
@@ -69,7 +69,7 @@ describe( 'EventEmittingButton', () => {
 			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
-			expect( originalEvent.defaultPrevented ).toBeTruthy();
+			expect( originalEvent.defaultPrevented ).toBe( true );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.enter' );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
@@ -96,7 +96,7 @@ describe( 'EventEmittingButton', () => {
 			expect( clickEvent ).toBeTruthy();
 			const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( MouseEvent );
-			expect( originalEvent.defaultPrevented ).toBeFalsy();
+			expect( originalEvent.defaultPrevented ).toBe( false );
 		} );
 
 		it( 'opens the link on enter', () => {
@@ -111,7 +111,7 @@ describe( 'EventEmittingButton', () => {
 			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
-			expect( originalEvent.defaultPrevented ).toBeFalsy();
+			expect( originalEvent.defaultPrevented ).toBe( false );
 		} );
 
 		it( 'does nothing on space', () => {
@@ -166,7 +166,7 @@ describe( 'EventEmittingButton', () => {
 		expect( clickEvent ).toBeTruthy();
 		const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
 		expect( originalEvent ).toBeInstanceOf( MouseEvent );
-		expect( originalEvent.defaultPrevented ).toBeFalsy();
+		expect( originalEvent.defaultPrevented ).toBe( false );
 	} );
 
 	it( 'can have a link target', () => {

@@ -170,7 +170,7 @@ describe( 'ErrorWrapper', () => {
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 
-		expect( wrapper.find( ErrorAmbiguousStatement ).exists() ).toBeTruthy();
+		expect( wrapper.find( ErrorAmbiguousStatement ).exists() ).toBe( true );
 	} );
 
 	it( 'mounts ErrorUnsupportedSnakType on unsupported snak type application error', () => {

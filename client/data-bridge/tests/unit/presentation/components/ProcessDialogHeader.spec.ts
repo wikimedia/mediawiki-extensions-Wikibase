@@ -6,7 +6,7 @@ describe( 'ProcessDialogHeader', () => {
 		const wrapper = shallowMount( ProcessDialogHeader, {
 			propsData: { title: 'title' },
 		} );
-		expect( wrapper.isVueInstance() ).toBeTruthy();
+		expect( wrapper.isVueInstance() ).toBe( true );
 	} );
 
 	it( 'renders correctly without slots filled', () => {
