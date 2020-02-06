@@ -32,8 +32,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 
 		parent::setUp();
 
-		static $isSetup = false;
-
 		$this->setupUser();
 
 		$this->setupSiteLinkGroups();
@@ -41,11 +39,6 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		$siteStore = new \HashSiteStore( TestSites::getSites() );
 		$this->setService( 'SiteStore', $siteStore );
 		$this->setService( 'SiteLookup', $siteStore );
-
-		if ( !$isSetup ) {
-			$this->doLogin( 'wbeditor' );
-			$isSetup = true;
-		}
 	}
 
 	protected function createTestUser() {

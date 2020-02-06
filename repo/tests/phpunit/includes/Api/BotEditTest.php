@@ -110,8 +110,6 @@ class BotEditTest extends WikibaseApiTestCase {
 	 * @dataProvider provideData
 	 */
 	public function testBotEdits( $params, $expected ) {
-		$this->doLogin( 'wbbot' );
-
 		// -- do the request --------------------------------------------------
 		if ( array_key_exists( 'handle', $params ) ) {
 			$params['id'] = EntityTestHelper::getId( $params['handle'] );
