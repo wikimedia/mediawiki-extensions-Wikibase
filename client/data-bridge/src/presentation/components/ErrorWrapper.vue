@@ -14,11 +14,16 @@
 		<ErrorAmbiguousStatement
 			v-else-if="statementIsAmbiguous"
 		/>
+		<ErrorUnsupportedSnakType
+			v-else-if="unsupportedSnakTypeError !== null"
+			:snak-type="unsupportedSnakTypeError.info.snakType"
+		/>
 		<ErrorUnknown v-else />
 	</section>
 </template>
 
 <script lang="ts">
+import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import Component, { mixins } from 'vue-class-component';
 import { MissingPermissionsError, PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import StateMixin from '@/presentation/StateMixin';
@@ -30,10 +35,12 @@ import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousSta
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
+	UnsupportedSnakTypeError,
 } from '@/definitions/ApplicationError';
 
 @Component( {
 	components: {
+		ErrorUnsupportedSnakType,
 		ErrorPermission,
 		ErrorUnknown,
 		ErrorUnsupportedDatatype,
@@ -73,6 +80,15 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 		return this.applicationErrors.some(
 			( applicationError ) => applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT,
 		);
+	}
+
+	public get unsupportedSnakTypeError(): UnsupportedSnakTypeError|null {
+		for ( const applicationError of this.applicationErrors ) {
+			if ( applicationError.type === ErrorTypes.UNSUPPORTED_SNAK_TYPE ) {
+				return applicationError;
+			}
+		}
+		return null;
 	}
 }
 </script>

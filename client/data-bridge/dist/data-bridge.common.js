@@ -837,6 +837,17 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "1d9d":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorUnsupportedSnakType_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8055");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorUnsupportedSnakType_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorUnsupportedSnakType_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorUnsupportedSnakType_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "1dde":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4989,6 +5000,13 @@ function objEquiv(a, b, opts) {
 
 module.exports = deepEqual;
 
+
+/***/ }),
+
+/***/ "8055":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -12156,10 +12174,20 @@ function (_Actions) {
         }]);
       }
 
-      if (this.statementModule.getters[SNAK_SNAKTYPE](path) !== 'value') {
-        return this.dispatch(BRIDGE_ERROR_ADD, [{
-          type: ErrorTypes.UNSUPPORTED_SNAK_TYPE
-        }]);
+      var snakType = this.statementModule.getters[SNAK_SNAKTYPE](path);
+
+      if (snakType === null) {
+        throw new Error('If snak type is missing, there should have been an error earlier');
+      }
+
+      if (snakType !== 'value') {
+        var error = {
+          type: ErrorTypes.UNSUPPORTED_SNAK_TYPE,
+          info: {
+            snakType: snakType
+          }
+        };
+        return this.dispatch(BRIDGE_ERROR_ADD, [error]);
       }
 
       var datatype = this.statementModule.getters[SNAK_DATATYPE](path);
@@ -12169,13 +12197,13 @@ function (_Actions) {
       }
 
       if (datatype !== 'string') {
-        var error = {
+        var _error2 = {
           type: ErrorTypes.UNSUPPORTED_DATATYPE,
           info: {
             unsupportedDatatype: datatype
           }
         };
-        return this.dispatch(BRIDGE_ERROR_ADD, [error]);
+        return this.dispatch(BRIDGE_ERROR_ADD, [_error2]);
       }
 
       if (this.statementModule.getters[SNAK_DATAVALUETYPE](path) !== 'string') {
@@ -13483,12 +13511,12 @@ var Initializing_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_Initializing = (Initializing_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=22219530&
-var ErrorWrappervue_type_template_id_22219530_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):(_vm.unsupportedDatatypeError !== null)?_c('ErrorUnsupportedDatatype',{attrs:{"data-type":_vm.unsupportedDatatypeError.info.unsupportedDatatype}}):(_vm.statementValueIsDeprecated)?_c('ErrorDeprecatedStatement'):(_vm.statementIsAmbiguous)?_c('ErrorAmbiguousStatement'):_c('ErrorUnknown')],1)}
-var ErrorWrappervue_type_template_id_22219530_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=5426d03f&
+var ErrorWrappervue_type_template_id_5426d03f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error"},[(_vm.permissionErrors.length)?_c('ErrorPermission',{attrs:{"permission-errors":_vm.permissionErrors}}):(_vm.unsupportedDatatypeError !== null)?_c('ErrorUnsupportedDatatype',{attrs:{"data-type":_vm.unsupportedDatatypeError.info.unsupportedDatatype}}):(_vm.statementValueIsDeprecated)?_c('ErrorDeprecatedStatement'):(_vm.statementIsAmbiguous)?_c('ErrorAmbiguousStatement'):(_vm.unsupportedSnakTypeError !== null)?_c('ErrorUnsupportedSnakType',{attrs:{"snak-type":_vm.unsupportedSnakTypeError.info.snakType}}):_c('ErrorUnknown')],1)}
+var ErrorWrappervue_type_template_id_5426d03f_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=22219530&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorWrapper.vue?vue&type=template&id=5426d03f&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
 var es_array_includes = __webpack_require__("caad");
@@ -13499,6 +13527,504 @@ var es_array_some = __webpack_require__("45fc");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
 var es_string_includes = __webpack_require__("2532");
 
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=e85860ce&
+var ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-snaktype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-snaktype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-snaktype__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.messageHeaderKey, _vm.targetProperty ))+" ")]),_c('p',{staticClass:"wb-db-unsupported-snaktype__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.messageBodyKey, _vm.targetProperty ))}})]),_c('BailoutActions',{staticClass:"wb-db-unsupported-snaktype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=e85860ce&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
+var IconMessageBoxvue_type_template_id_59ef5d90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-icon-message-box",class:[
+		("wb-ui-icon-message-box--" + _vm.type),
+		!_vm.inline ? 'wb-ui-icon-message-box--block' : '' ]},[_c('div',{staticClass:"wb-ui-icon-message-box__content"},[_vm._t("default")],2)])}
+var IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+var validTypes = ['notice'];
+
+var IconMessageBoxvue_type_script_lang_ts_IconMessageBox =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(IconMessageBox, _Vue);
+
+  function IconMessageBox() {
+    _classCallCheck(this, IconMessageBox);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(IconMessageBox).apply(this, arguments));
+  }
+
+  return IconMessageBox;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  type: String,
+  required: true,
+  validator: function validator(type) {
+    return validTypes.includes(type);
+  }
+})], IconMessageBoxvue_type_script_lang_ts_IconMessageBox.prototype, "type", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  type: Boolean,
+  required: false,
+  default: false
+})], IconMessageBoxvue_type_script_lang_ts_IconMessageBox.prototype, "inline", void 0);
+
+IconMessageBoxvue_type_script_lang_ts_IconMessageBox = __decorate([vue_class_component_common_default.a], IconMessageBoxvue_type_script_lang_ts_IconMessageBox);
+/* harmony default export */ var IconMessageBoxvue_type_script_lang_ts_ = (IconMessageBoxvue_type_script_lang_ts_IconMessageBox);
+// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_IconMessageBoxvue_type_script_lang_ts_ = (IconMessageBoxvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=style&index=0&lang=scss&
+var IconMessageBoxvue_type_style_index_0_lang_scss_ = __webpack_require__("15ae");
+
+// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue
+
+
+
+
+
+
+/* normalize component */
+
+var IconMessageBox_component = normalizeComponent(
+  components_IconMessageBoxvue_type_script_lang_ts_,
+  IconMessageBoxvue_type_template_id_59ef5d90_render,
+  IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_IconMessageBox = (IconMessageBox_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/BailoutActions.vue?vue&type=template&id=0dc006d0&
+var BailoutActionsvue_type_template_id_0dc006d0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-bailout-actions"},[_c('h2',{staticClass:"wb-db-bailout-actions__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_HEADING ))+" ")]),_c('ul',[_c('li',{staticClass:"wb-db-bailout-actions__suggestion"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO ))),_c('br'),_c('EventEmittingButton',{staticClass:"wb-db-bailout-actions__button",attrs:{"type":"primaryProgressive","message":_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON ),"href":_vm.originalHref,"new-tab":true,"prevent-default":false}})],1),_c('li',{staticClass:"wb-db-bailout-actions__suggestion",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_EDIT_ARTICLE, _vm.editArticleUrl ))}})])])}
+var BailoutActionsvue_type_template_id_0dc006d0_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=template&id=0dc006d0&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
+var EventEmittingButtonvue_type_template_id_3a88cf2c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-ui-event-emitting-button",class:[
+		("wb-ui-event-emitting-button--" + (this.type)),
+		{ 'wb-ui-event-emitting-button--squary': _vm.squary },
+		{ 'wb-ui-event-emitting-button--pressed': _vm.isPressed },
+		{ 'wb-ui-event-emitting-button--iconOnly': _vm.isIconOnly },
+		{ 'wb-ui-event-emitting-button--frameless': _vm.isFrameless },
+		{ 'wb-ui-event-emitting-button--disabled': _vm.disabled } ],attrs:{"href":_vm.href,"tabindex":_vm.tabindex,"role":_vm.href ? 'link' : 'button',"aria-disabled":_vm.disabled ? 'true' : null,"title":_vm.message,"target":_vm.opensInNewTab ? '_blank' : null,"rel":_vm.opensInNewTab ? 'noreferrer noopener' : null},on:{"click":_vm.click,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleEnterPress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.handleSpacePress($event)}],"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.unpress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.unpress($event)}]}},[_c('span',{staticClass:"wb-ui-event-emitting-button__text"},[_vm._v(_vm._s(_vm.message))])])}
+var EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
+var es_array_index_of = __webpack_require__("c975");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+var EventEmittingButtonvue_type_script_lang_ts_validTypes = ['primaryProgressive', 'cancel'];
+var framelessTypes = ['cancel'];
+var imageOnlyTypes = ['cancel'];
+
+var EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(EventEmittingButton, _Vue);
+
+  function EventEmittingButton() {
+    var _this;
+
+    _classCallCheck(this, EventEmittingButton);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EventEmittingButton).apply(this, arguments));
+    _this.isPressed = false;
+    return _this;
+  }
+
+  _createClass(EventEmittingButton, [{
+    key: "handleSpacePress",
+    value: function handleSpacePress(event) {
+      if (!this.simulateSpaceOnButton()) {
+        return;
+      }
+
+      this.preventScrollingDown(event);
+      this.isPressed = true;
+      this.click(event);
+    }
+  }, {
+    key: "handleEnterPress",
+    value: function handleEnterPress(event) {
+      this.isPressed = true;
+
+      if (this.thereIsNoSeparateClickEvent()) {
+        this.click(event);
+      }
+    }
+  }, {
+    key: "unpress",
+    value: function unpress() {
+      this.isPressed = false;
+    }
+  }, {
+    key: "click",
+    value: function click(event) {
+      if (this.preventDefault) {
+        this.preventOpeningLink(event);
+      }
+
+      if (this.disabled) {
+        return;
+      }
+
+      this.$emit('click', event);
+    }
+  }, {
+    key: "preventOpeningLink",
+    value: function preventOpeningLink(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "preventScrollingDown",
+    value: function preventScrollingDown(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "thereIsNoSeparateClickEvent",
+    value: function thereIsNoSeparateClickEvent() {
+      return this.href === null;
+    }
+  }, {
+    key: "simulateSpaceOnButton",
+    value: function simulateSpaceOnButton() {
+      return this.href === null;
+    }
+  }, {
+    key: "isIconOnly",
+    get: function get() {
+      return imageOnlyTypes.includes(this.type);
+    }
+  }, {
+    key: "isFrameless",
+    get: function get() {
+      return framelessTypes.includes(this.type);
+    }
+  }, {
+    key: "opensInNewTab",
+    get: function get() {
+      return this.href !== null && this.newTab;
+    }
+  }, {
+    key: "tabindex",
+    get: function get() {
+      if (this.disabled) {
+        return -1;
+      }
+
+      if (this.href) {
+        return null;
+      }
+
+      return 0;
+    }
+  }]);
+
+  return EventEmittingButton;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  validator: function validator(type) {
+    return EventEmittingButtonvue_type_script_lang_ts_validTypes.indexOf(type) !== -1;
+  }
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "type", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: String
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "message", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: null,
+  type: String
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "href", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: true,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "preventDefault", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "disabled", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "squary", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: false,
+  default: false,
+  type: Boolean
+})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "newTab", void 0);
+
+EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton = __decorate([vue_class_component_common_default.a], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
+/* harmony default export */ var EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=style&index=0&lang=scss&
+var EventEmittingButtonvue_type_style_index_0_lang_scss_ = __webpack_require__("2e53");
+
+// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue
+
+
+
+
+
+
+/* normalize component */
+
+var EventEmittingButton_component = normalizeComponent(
+  components_EventEmittingButtonvue_type_script_lang_ts_,
+  EventEmittingButtonvue_type_template_id_3a88cf2c_render,
+  EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_EventEmittingButton = (EventEmittingButton_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/BailoutActions.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+/**
+ * A component to present the user with alternative suggestions
+ * if they cannot use the Data Bridge to edit a value for some reason.
+ * (That reason is typically displayed above this component in an IconMessageBox.)
+ */
+
+var BailoutActionsvue_type_script_lang_ts_BailoutActions =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(BailoutActions, _Vue);
+
+  function BailoutActions() {
+    _classCallCheck(this, BailoutActions);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(BailoutActions).apply(this, arguments));
+  }
+
+  _createClass(BailoutActions, [{
+    key: "editArticleUrl",
+
+    /**
+     * The full URL of the “article editor” link.
+     */
+    get: function get() {
+      return this.$clientRouter.getPageUrl(this.pageTitle, {
+        action: 'edit'
+      });
+    }
+  }]);
+
+  return BailoutActions;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: String
+})], BailoutActionsvue_type_script_lang_ts_BailoutActions.prototype, "originalHref", void 0);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true,
+  type: String
+})], BailoutActionsvue_type_script_lang_ts_BailoutActions.prototype, "pageTitle", void 0);
+
+BailoutActionsvue_type_script_lang_ts_BailoutActions = __decorate([vue_class_component_common_default()({
+  components: {
+    EventEmittingButton: components_EventEmittingButton
+  }
+})], BailoutActionsvue_type_script_lang_ts_BailoutActions);
+/* harmony default export */ var BailoutActionsvue_type_script_lang_ts_ = (BailoutActionsvue_type_script_lang_ts_BailoutActions);
+// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_BailoutActionsvue_type_script_lang_ts_ = (BailoutActionsvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=style&index=0&lang=scss&
+var BailoutActionsvue_type_style_index_0_lang_scss_ = __webpack_require__("ceb6");
+
+// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue
+
+
+
+
+
+
+/* normalize component */
+
+var BailoutActions_component = normalizeComponent(
+  components_BailoutActionsvue_type_script_lang_ts_,
+  BailoutActionsvue_type_template_id_0dc006d0_render,
+  BailoutActionsvue_type_template_id_0dc006d0_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_BailoutActions = (BailoutActions_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * A component used to illustrate an error which happened when the user tried
+ * to edit a statement with a snak type not supported by Bridge yet.
+ */
+
+var ErrorUnsupportedSnakTypevue_type_script_lang_ts_ErrorUnsupportedSnakType =
+/*#__PURE__*/
+function (_mixins) {
+  _inherits(ErrorUnsupportedSnakType, _mixins);
+
+  function ErrorUnsupportedSnakType() {
+    _classCallCheck(this, ErrorUnsupportedSnakType);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ErrorUnsupportedSnakType).apply(this, arguments));
+  }
+
+  _createClass(ErrorUnsupportedSnakType, [{
+    key: "targetProperty",
+    get: function get() {
+      return this.rootModule.state.targetProperty;
+    }
+  }, {
+    key: "pageTitle",
+    get: function get() {
+      return this.rootModule.state.pageTitle;
+    }
+  }, {
+    key: "originalHref",
+    get: function get() {
+      return this.rootModule.state.originalHref;
+    }
+  }, {
+    key: "messageHeaderKey",
+    get: function get() {
+      switch (this.snakType) {
+        case 'somevalue':
+          return this.$messages.KEYS.SOMEVALUE_ERROR_HEAD;
+
+        case 'novalue':
+          return this.$messages.KEYS.NOVALUE_ERROR_HEAD;
+
+        default:
+          throw new Error("No message for unsupported snak type ".concat(this.snakType));
+      }
+    }
+  }, {
+    key: "messageBodyKey",
+    get: function get() {
+      switch (this.snakType) {
+        case 'somevalue':
+          return this.$messages.KEYS.SOMEVALUE_ERROR_BODY;
+
+        case 'novalue':
+          return this.$messages.KEYS.NOVALUE_ERROR_BODY;
+
+        default:
+          throw new Error("No message for unsupported snak type ".concat(this.snakType));
+      }
+    }
+  }]);
+
+  return ErrorUnsupportedSnakType;
+}(Object(vue_class_component_common["mixins"])(presentation_StateMixin));
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ErrorUnsupportedSnakTypevue_type_script_lang_ts_ErrorUnsupportedSnakType.prototype, "snakType", void 0);
+
+ErrorUnsupportedSnakTypevue_type_script_lang_ts_ErrorUnsupportedSnakType = __decorate([vue_class_component_common_default()({
+  components: {
+    IconMessageBox: components_IconMessageBox,
+    BailoutActions: components_BailoutActions
+  }
+})], ErrorUnsupportedSnakTypevue_type_script_lang_ts_ErrorUnsupportedSnakType);
+/* harmony default export */ var ErrorUnsupportedSnakTypevue_type_script_lang_ts_ = (ErrorUnsupportedSnakTypevue_type_script_lang_ts_ErrorUnsupportedSnakType);
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ErrorUnsupportedSnakTypevue_type_script_lang_ts_ = (ErrorUnsupportedSnakTypevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=style&index=0&lang=scss&
+var ErrorUnsupportedSnakTypevue_type_style_index_0_lang_scss_ = __webpack_require__("1d9d");
+
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ErrorUnsupportedSnakType_component = normalizeComponent(
+  components_ErrorUnsupportedSnakTypevue_type_script_lang_ts_,
+  ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_render,
+  ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ErrorUnsupportedSnakType = (ErrorUnsupportedSnakType_component.exports);
 // CONCATENATED MODULE: ./src/definitions/data-access/BridgePermissionsRepository.ts
 var PageNotEditable;
 
@@ -14110,384 +14636,6 @@ var ErrorUnsupportedDatatypevue_type_template_id_5bda1d3c_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5bda1d3c&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
-var IconMessageBoxvue_type_template_id_59ef5d90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-icon-message-box",class:[
-		("wb-ui-icon-message-box--" + _vm.type),
-		!_vm.inline ? 'wb-ui-icon-message-box--block' : '' ]},[_c('div',{staticClass:"wb-ui-icon-message-box__content"},[_vm._t("default")],2)])}
-var IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-var validTypes = ['notice'];
-
-var IconMessageBoxvue_type_script_lang_ts_IconMessageBox =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(IconMessageBox, _Vue);
-
-  function IconMessageBox() {
-    _classCallCheck(this, IconMessageBox);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(IconMessageBox).apply(this, arguments));
-  }
-
-  return IconMessageBox;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  type: String,
-  required: true,
-  validator: function validator(type) {
-    return validTypes.includes(type);
-  }
-})], IconMessageBoxvue_type_script_lang_ts_IconMessageBox.prototype, "type", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  type: Boolean,
-  required: false,
-  default: false
-})], IconMessageBoxvue_type_script_lang_ts_IconMessageBox.prototype, "inline", void 0);
-
-IconMessageBoxvue_type_script_lang_ts_IconMessageBox = __decorate([vue_class_component_common_default.a], IconMessageBoxvue_type_script_lang_ts_IconMessageBox);
-/* harmony default export */ var IconMessageBoxvue_type_script_lang_ts_ = (IconMessageBoxvue_type_script_lang_ts_IconMessageBox);
-// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_IconMessageBoxvue_type_script_lang_ts_ = (IconMessageBoxvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/IconMessageBox.vue?vue&type=style&index=0&lang=scss&
-var IconMessageBoxvue_type_style_index_0_lang_scss_ = __webpack_require__("15ae");
-
-// CONCATENATED MODULE: ./src/presentation/components/IconMessageBox.vue
-
-
-
-
-
-
-/* normalize component */
-
-var IconMessageBox_component = normalizeComponent(
-  components_IconMessageBoxvue_type_script_lang_ts_,
-  IconMessageBoxvue_type_template_id_59ef5d90_render,
-  IconMessageBoxvue_type_template_id_59ef5d90_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_IconMessageBox = (IconMessageBox_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/BailoutActions.vue?vue&type=template&id=0dc006d0&
-var BailoutActionsvue_type_template_id_0dc006d0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-bailout-actions"},[_c('h2',{staticClass:"wb-db-bailout-actions__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_HEADING ))+" ")]),_c('ul',[_c('li',{staticClass:"wb-db-bailout-actions__suggestion"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO ))),_c('br'),_c('EventEmittingButton',{staticClass:"wb-db-bailout-actions__button",attrs:{"type":"primaryProgressive","message":_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON ),"href":_vm.originalHref,"new-tab":true,"prevent-default":false}})],1),_c('li',{staticClass:"wb-db-bailout-actions__suggestion",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.BAILOUT_SUGGESTION_EDIT_ARTICLE, _vm.editArticleUrl ))}})])])}
-var BailoutActionsvue_type_template_id_0dc006d0_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=template&id=0dc006d0&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
-var EventEmittingButtonvue_type_template_id_3a88cf2c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('a',{staticClass:"wb-ui-event-emitting-button",class:[
-		("wb-ui-event-emitting-button--" + (this.type)),
-		{ 'wb-ui-event-emitting-button--squary': _vm.squary },
-		{ 'wb-ui-event-emitting-button--pressed': _vm.isPressed },
-		{ 'wb-ui-event-emitting-button--iconOnly': _vm.isIconOnly },
-		{ 'wb-ui-event-emitting-button--frameless': _vm.isFrameless },
-		{ 'wb-ui-event-emitting-button--disabled': _vm.disabled } ],attrs:{"href":_vm.href,"tabindex":_vm.tabindex,"role":_vm.href ? 'link' : 'button',"aria-disabled":_vm.disabled ? 'true' : null,"title":_vm.message,"target":_vm.opensInNewTab ? '_blank' : null,"rel":_vm.opensInNewTab ? 'noreferrer noopener' : null},on:{"click":_vm.click,"keydown":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.handleEnterPress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.handleSpacePress($event)}],"keyup":[function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"enter",13,$event.key,"Enter")){ return null; }return _vm.unpress($event)},function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.unpress($event)}]}},[_c('span',{staticClass:"wb-ui-event-emitting-button__text"},[_vm._v(_vm._s(_vm.message))])])}
-var EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=template&id=3a88cf2c&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
-var es_array_index_of = __webpack_require__("c975");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-var EventEmittingButtonvue_type_script_lang_ts_validTypes = ['primaryProgressive', 'cancel'];
-var framelessTypes = ['cancel'];
-var imageOnlyTypes = ['cancel'];
-
-var EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(EventEmittingButton, _Vue);
-
-  function EventEmittingButton() {
-    var _this;
-
-    _classCallCheck(this, EventEmittingButton);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(EventEmittingButton).apply(this, arguments));
-    _this.isPressed = false;
-    return _this;
-  }
-
-  _createClass(EventEmittingButton, [{
-    key: "handleSpacePress",
-    value: function handleSpacePress(event) {
-      if (!this.simulateSpaceOnButton()) {
-        return;
-      }
-
-      this.preventScrollingDown(event);
-      this.isPressed = true;
-      this.click(event);
-    }
-  }, {
-    key: "handleEnterPress",
-    value: function handleEnterPress(event) {
-      this.isPressed = true;
-
-      if (this.thereIsNoSeparateClickEvent()) {
-        this.click(event);
-      }
-    }
-  }, {
-    key: "unpress",
-    value: function unpress() {
-      this.isPressed = false;
-    }
-  }, {
-    key: "click",
-    value: function click(event) {
-      if (this.preventDefault) {
-        this.preventOpeningLink(event);
-      }
-
-      if (this.disabled) {
-        return;
-      }
-
-      this.$emit('click', event);
-    }
-  }, {
-    key: "preventOpeningLink",
-    value: function preventOpeningLink(event) {
-      event.preventDefault();
-    }
-  }, {
-    key: "preventScrollingDown",
-    value: function preventScrollingDown(event) {
-      event.preventDefault();
-    }
-  }, {
-    key: "thereIsNoSeparateClickEvent",
-    value: function thereIsNoSeparateClickEvent() {
-      return this.href === null;
-    }
-  }, {
-    key: "simulateSpaceOnButton",
-    value: function simulateSpaceOnButton() {
-      return this.href === null;
-    }
-  }, {
-    key: "isIconOnly",
-    get: function get() {
-      return imageOnlyTypes.includes(this.type);
-    }
-  }, {
-    key: "isFrameless",
-    get: function get() {
-      return framelessTypes.includes(this.type);
-    }
-  }, {
-    key: "opensInNewTab",
-    get: function get() {
-      return this.href !== null && this.newTab;
-    }
-  }, {
-    key: "tabindex",
-    get: function get() {
-      if (this.disabled) {
-        return -1;
-      }
-
-      if (this.href) {
-        return null;
-      }
-
-      return 0;
-    }
-  }]);
-
-  return EventEmittingButton;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  validator: function validator(type) {
-    return EventEmittingButtonvue_type_script_lang_ts_validTypes.indexOf(type) !== -1;
-  }
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "type", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "message", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: null,
-  type: String
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "href", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: true,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "preventDefault", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "disabled", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "squary", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  default: false,
-  type: Boolean
-})], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton.prototype, "newTab", void 0);
-
-EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton = __decorate([vue_class_component_common_default.a], EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
-/* harmony default export */ var EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_EventEmittingButton);
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_EventEmittingButtonvue_type_script_lang_ts_ = (EventEmittingButtonvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/EventEmittingButton.vue?vue&type=style&index=0&lang=scss&
-var EventEmittingButtonvue_type_style_index_0_lang_scss_ = __webpack_require__("2e53");
-
-// CONCATENATED MODULE: ./src/presentation/components/EventEmittingButton.vue
-
-
-
-
-
-
-/* normalize component */
-
-var EventEmittingButton_component = normalizeComponent(
-  components_EventEmittingButtonvue_type_script_lang_ts_,
-  EventEmittingButtonvue_type_template_id_3a88cf2c_render,
-  EventEmittingButtonvue_type_template_id_3a88cf2c_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_EventEmittingButton = (EventEmittingButton_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/BailoutActions.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-/**
- * A component to present the user with alternative suggestions
- * if they cannot use the Data Bridge to edit a value for some reason.
- * (That reason is typically displayed above this component in an IconMessageBox.)
- */
-
-var BailoutActionsvue_type_script_lang_ts_BailoutActions =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(BailoutActions, _Vue);
-
-  function BailoutActions() {
-    _classCallCheck(this, BailoutActions);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(BailoutActions).apply(this, arguments));
-  }
-
-  _createClass(BailoutActions, [{
-    key: "editArticleUrl",
-
-    /**
-     * The full URL of the “article editor” link.
-     */
-    get: function get() {
-      return this.$clientRouter.getPageUrl(this.pageTitle, {
-        action: 'edit'
-      });
-    }
-  }]);
-
-  return BailoutActions;
-}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], BailoutActionsvue_type_script_lang_ts_BailoutActions.prototype, "originalHref", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], BailoutActionsvue_type_script_lang_ts_BailoutActions.prototype, "pageTitle", void 0);
-
-BailoutActionsvue_type_script_lang_ts_BailoutActions = __decorate([vue_class_component_common_default()({
-  components: {
-    EventEmittingButton: components_EventEmittingButton
-  }
-})], BailoutActionsvue_type_script_lang_ts_BailoutActions);
-/* harmony default export */ var BailoutActionsvue_type_script_lang_ts_ = (BailoutActionsvue_type_script_lang_ts_BailoutActions);
-// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_BailoutActionsvue_type_script_lang_ts_ = (BailoutActionsvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/presentation/components/BailoutActions.vue?vue&type=style&index=0&lang=scss&
-var BailoutActionsvue_type_style_index_0_lang_scss_ = __webpack_require__("ceb6");
-
-// CONCATENATED MODULE: ./src/presentation/components/BailoutActions.vue
-
-
-
-
-
-
-/* normalize component */
-
-var BailoutActions_component = normalizeComponent(
-  components_BailoutActionsvue_type_script_lang_ts_,
-  BailoutActionsvue_type_template_id_0dc006d0_render,
-  BailoutActionsvue_type_template_id_0dc006d0_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_BailoutActions = (BailoutActions_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=script&lang=ts&
 
 
@@ -14776,6 +14924,7 @@ var ErrorAmbiguousStatement_component = normalizeComponent(
 
 
 
+
 var ErrorWrappervue_type_script_lang_ts_ErrorWrapper =
 /*#__PURE__*/
 function (_mixins) {
@@ -14848,6 +14997,38 @@ function (_mixins) {
         return applicationError.type === ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT;
       });
     }
+  }, {
+    key: "unsupportedSnakTypeError",
+    get: function get() {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.applicationErrors[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var applicationError = _step2.value;
+
+          if (applicationError.type === ErrorTypes.UNSUPPORTED_SNAK_TYPE) {
+            return applicationError;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      return null;
+    }
   }]);
 
   return ErrorWrapper;
@@ -14855,6 +15036,7 @@ function (_mixins) {
 
 ErrorWrappervue_type_script_lang_ts_ErrorWrapper = __decorate([vue_class_component_common_default()({
   components: {
+    ErrorUnsupportedSnakType: components_ErrorUnsupportedSnakType,
     ErrorPermission: components_ErrorPermission,
     ErrorUnknown: components_ErrorUnknown,
     ErrorUnsupportedDatatype: components_ErrorUnsupportedDatatype,
@@ -14879,8 +15061,8 @@ var ErrorWrappervue_type_style_index_0_lang_scss_ = __webpack_require__("156b");
 
 var ErrorWrapper_component = normalizeComponent(
   components_ErrorWrappervue_type_script_lang_ts_,
-  ErrorWrappervue_type_template_id_22219530_render,
-  ErrorWrappervue_type_template_id_22219530_staticRenderFns,
+  ErrorWrappervue_type_template_id_5426d03f_render,
+  ErrorWrappervue_type_template_id_5426d03f_staticRenderFns,
   false,
   null,
   null,
@@ -15135,6 +15317,10 @@ var MessageKeys;
   MessageKeys["DEPRECATED_STATEMENT_ERROR_BODY"] = "wikibase-client-data-bridge-deprecated-statement-error-body";
   MessageKeys["AMBIGUOUS_STATEMENT_ERROR_HEAD"] = "wikibase-client-data-bridge-ambiguous-statement-error-head";
   MessageKeys["AMBIGUOUS_STATEMENT_ERROR_BODY"] = "wikibase-client-data-bridge-ambiguous-statement-error-body";
+  MessageKeys["SOMEVALUE_ERROR_HEAD"] = "wikibase-client-data-bridge-somevalue-error-head";
+  MessageKeys["SOMEVALUE_ERROR_BODY"] = "wikibase-client-data-bridge-somevalue-error-body";
+  MessageKeys["NOVALUE_ERROR_HEAD"] = "wikibase-client-data-bridge-novalue-error-head";
+  MessageKeys["NOVALUE_ERROR_BODY"] = "wikibase-client-data-bridge-novalue-error-body";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);

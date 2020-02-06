@@ -36,6 +36,10 @@ enum MessageKeys {
 	DEPRECATED_STATEMENT_ERROR_BODY = 'wikibase-client-data-bridge-deprecated-statement-error-body',
 	AMBIGUOUS_STATEMENT_ERROR_HEAD = 'wikibase-client-data-bridge-ambiguous-statement-error-head',
 	AMBIGUOUS_STATEMENT_ERROR_BODY = 'wikibase-client-data-bridge-ambiguous-statement-error-body',
+	SOMEVALUE_ERROR_HEAD = 'wikibase-client-data-bridge-somevalue-error-head',
+	SOMEVALUE_ERROR_BODY = 'wikibase-client-data-bridge-somevalue-error-body',
+	NOVALUE_ERROR_HEAD = 'wikibase-client-data-bridge-novalue-error-head',
+	NOVALUE_ERROR_BODY = 'wikibase-client-data-bridge-novalue-error-body',
 }
 
 export default MessageKeys;
