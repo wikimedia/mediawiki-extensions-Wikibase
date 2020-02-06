@@ -22,8 +22,9 @@ export function createTestStore( { state, actions, getters }: {
 	getters?: Partial<RootGetters>;
 } = {} ): Store<any> {
 	if ( state !== undefined ) {
-		rootModule.options.state = class implements Partial<Application> {
+		rootModule.options.state = class extends BaseState {
 			public constructor() {
+				super();
 				Object.assign( this, state );
 			}
 		} as new() => Application;

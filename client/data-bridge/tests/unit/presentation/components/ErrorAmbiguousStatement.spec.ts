@@ -4,6 +4,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
 import Vuex from 'vuex';
+import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
@@ -34,6 +35,8 @@ describe( 'ErrorAmbiguousStatement', () => {
 			store,
 		} );
 
+		calledWithHTMLElement( messageGet, 1, 1 );
+
 		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
@@ -42,7 +45,7 @@ describe( 'ErrorAmbiguousStatement', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.AMBIGUOUS_STATEMENT_ERROR_BODY,
-			targetProperty,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 
 	} );

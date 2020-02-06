@@ -6,8 +6,12 @@ storiesOf( 'ErrorUnsupportedSnakType', module )
 	.addParameters( { component: ErrorUnsupportedSnakType } )
 	.addDecorator( useStore( {
 		entityTitle: 'Q7186',
-		pageTitle: 'Marie_Curie',
-		originalHref: 'https://repo.wiki.example/wiki/Item:Q7186?uselang=en',
+		pageTitle: 'Elizabeth_I_of_England',
+		originalHref: 'https://repo.wiki.example/wiki/Item:Q7207#P26?uselang=en',
+		targetLabel: {
+			language: 'en',
+			value: 'spouse',
+		},
 	} ) )
 	.add( 'unknown value', () => ( {
 		components: { ErrorUnsupportedSnakType },

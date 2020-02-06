@@ -4,6 +4,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
 import Vuex from 'vuex';
+import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
@@ -34,12 +35,19 @@ describe( 'ErrorDeprecatedStatement', () => {
 			store,
 		} );
 
+		calledWithHTMLElement( messageGet, 0, 1 );
+		calledWithHTMLElement( messageGet, 1, 1 );
+
 		expect( wrapper.find( IconMessageBox ).exists() ).toBe( true );
-		expect( messageGet ).toHaveBeenNthCalledWith( 1, MessageKeys.DEPRECATED_STATEMENT_ERROR_HEAD, targetProperty );
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			1,
+			MessageKeys.DEPRECATED_STATEMENT_ERROR_HEAD,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+		);
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.DEPRECATED_STATEMENT_ERROR_BODY,
-			targetProperty,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 

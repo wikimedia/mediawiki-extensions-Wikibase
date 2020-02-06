@@ -2,11 +2,11 @@
 	<label
 		class="wb-db-PropertyLabel"
 		:for="htmlFor"
-		v-inlanguage="term.language"
-	>{{ term.value }}</label>
+	><TermLabel :term="term" /></label>
 </template>
 
 <script lang="ts">
+import TermLabel from '@/presentation/components/TermLabel.vue';
 import {
 	Component,
 	Prop,
@@ -14,7 +14,9 @@ import {
 } from 'vue-property-decorator';
 import Term from '@/datamodel/Term';
 
-@Component( {} )
+@Component( {
+	components: { TermLabel },
+} )
 export default class PropertyLabel extends Vue {
 
 	@Prop( { required: true } )
@@ -28,6 +30,5 @@ export default class PropertyLabel extends Vue {
 <style lang="scss">
 .wb-db-PropertyLabel {
 	@include inputFieldLabel();
-	@include hyphens();
 }
 </style>

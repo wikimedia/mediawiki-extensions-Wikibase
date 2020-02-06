@@ -393,6 +393,17 @@ module.exports = function isDateObject(value) {
 
 /***/ }),
 
+/***/ "0ea2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TermLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6bb8");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TermLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TermLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TermLabel_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "0f7c":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4363,6 +4374,13 @@ module.exports = {
   getterFor: getterFor
 };
 
+
+/***/ }),
+
+/***/ "6bb8":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -12854,14 +12872,81 @@ var StringDataValuevue_type_template_id_60e1ce01_staticRenderFns = []
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
-var PropertyLabelvue_type_template_id_352b5eee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{directives:[{name:"inlanguage",rawName:"v-inlanguage",value:(_vm.term.language),expression:"term.language"}],staticClass:"wb-db-PropertyLabel",attrs:{"for":_vm.htmlFor}},[_vm._v(_vm._s(_vm.term.value))])}
-var PropertyLabelvue_type_template_id_352b5eee_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=template&id=939e55e2&
+var PropertyLabelvue_type_template_id_939e55e2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('label',{staticClass:"wb-db-PropertyLabel",attrs:{"for":_vm.htmlFor}},[_c('TermLabel',{attrs:{"term":_vm.term}})],1)}
+var PropertyLabelvue_type_template_id_939e55e2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=template&id=352b5eee&
+// CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=template&id=939e55e2&
 
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TermLabel.vue?vue&type=template&id=f45e3d5a&
+var TermLabelvue_type_template_id_f45e3d5a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{directives:[{name:"inlanguage",rawName:"v-inlanguage",value:(_vm.term.language),expression:"term.language"}],staticClass:"wb-db-TermLabel"},[_vm._v(_vm._s(_vm.term.value))])}
+var TermLabelvue_type_template_id_f45e3d5a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/TermLabel.vue?vue&type=template&id=f45e3d5a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TermLabel.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+/**
+ * A label for a Term in a certain language.
+ */
+
+var TermLabelvue_type_script_lang_ts_TermLabel =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(TermLabel, _Vue);
+
+  function TermLabel() {
+    _classCallCheck(this, TermLabel);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TermLabel).apply(this, arguments));
+  }
+
+  return TermLabel;
+}(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], TermLabelvue_type_script_lang_ts_TermLabel.prototype, "term", void 0);
+
+TermLabelvue_type_script_lang_ts_TermLabel = __decorate([vue_class_component_common_default.a], TermLabelvue_type_script_lang_ts_TermLabel);
+/* harmony default export */ var TermLabelvue_type_script_lang_ts_ = (TermLabelvue_type_script_lang_ts_TermLabel);
+// CONCATENATED MODULE: ./src/presentation/components/TermLabel.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_TermLabelvue_type_script_lang_ts_ = (TermLabelvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/TermLabel.vue?vue&type=style&index=0&lang=scss&
+var TermLabelvue_type_style_index_0_lang_scss_ = __webpack_require__("0ea2");
+
+// CONCATENATED MODULE: ./src/presentation/components/TermLabel.vue
+
+
+
+
+
+
+/* normalize component */
+
+var TermLabel_component = normalizeComponent(
+  components_TermLabelvue_type_script_lang_ts_,
+  TermLabelvue_type_template_id_f45e3d5a_render,
+  TermLabelvue_type_template_id_f45e3d5a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_TermLabel = (TermLabel_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -12891,7 +12976,11 @@ __decorate([Object(vue_property_decorator["Prop"])({
   required: true
 })], PropertyLabelvue_type_script_lang_ts_PropertyLabel.prototype, "htmlFor", void 0);
 
-PropertyLabelvue_type_script_lang_ts_PropertyLabel = __decorate([Object(vue_property_decorator["Component"])({})], PropertyLabelvue_type_script_lang_ts_PropertyLabel);
+PropertyLabelvue_type_script_lang_ts_PropertyLabel = __decorate([Object(vue_property_decorator["Component"])({
+  components: {
+    TermLabel: components_TermLabel
+  }
+})], PropertyLabelvue_type_script_lang_ts_PropertyLabel);
 /* harmony default export */ var PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_PropertyLabel);
 // CONCATENATED MODULE: ./src/presentation/components/PropertyLabel.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_PropertyLabelvue_type_script_lang_ts_ = (PropertyLabelvue_type_script_lang_ts_); 
@@ -12909,8 +12998,8 @@ var PropertyLabelvue_type_style_index_0_lang_scss_ = __webpack_require__("87a9")
 
 var PropertyLabel_component = normalizeComponent(
   components_PropertyLabelvue_type_script_lang_ts_,
-  PropertyLabelvue_type_template_id_352b5eee_render,
-  PropertyLabelvue_type_template_id_352b5eee_staticRenderFns,
+  PropertyLabelvue_type_template_id_939e55e2_render,
+  PropertyLabelvue_type_template_id_939e55e2_staticRenderFns,
   false,
   null,
   null,
@@ -13527,12 +13616,12 @@ var es_array_some = __webpack_require__("45fc");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
 var es_string_includes = __webpack_require__("2532");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=e85860ce&
-var ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-snaktype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-snaktype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-snaktype__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.messageHeaderKey, _vm.targetProperty ))+" ")]),_c('p',{staticClass:"wb-db-unsupported-snaktype__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.messageBodyKey, _vm.targetProperty ))}})]),_c('BailoutActions',{staticClass:"wb-db-unsupported-snaktype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
-var ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=9cb372d2&
+var ErrorUnsupportedSnakTypevue_type_template_id_9cb372d2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-snaktype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-snaktype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-snaktype__head",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.messageHeaderKey, _vm.propertyLabel ))}}),_c('p',{staticClass:"wb-db-unsupported-snaktype__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.messageBodyKey, _vm.propertyLabel ))}})]),_c('BailoutActions',{staticClass:"wb-db-unsupported-snaktype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorUnsupportedSnakTypevue_type_template_id_9cb372d2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=e85860ce&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedSnakType.vue?vue&type=template&id=9cb372d2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/IconMessageBox.vue?vue&type=template&id=59ef5d90&
 var IconMessageBoxvue_type_template_id_59ef5d90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-icon-message-box",class:[
@@ -13924,6 +14013,7 @@ var BailoutActions_component = normalizeComponent(
 
 
 
+
 /**
  * A component used to illustrate an error which happened when the user tried
  * to edit a statement with a snak type not supported by Bridge yet.
@@ -13941,9 +14031,13 @@ function (_mixins) {
   }
 
   _createClass(ErrorUnsupportedSnakType, [{
-    key: "targetProperty",
+    key: "propertyLabel",
     get: function get() {
-      return this.rootModule.state.targetProperty;
+      return new components_TermLabel({
+        propsData: {
+          term: this.rootModule.getters.targetLabel
+        }
+      }).$mount().$el;
     }
   }, {
     key: "pageTitle",
@@ -14015,8 +14109,8 @@ var ErrorUnsupportedSnakTypevue_type_style_index_0_lang_scss_ = __webpack_requir
 
 var ErrorUnsupportedSnakType_component = normalizeComponent(
   components_ErrorUnsupportedSnakTypevue_type_script_lang_ts_,
-  ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_render,
-  ErrorUnsupportedSnakTypevue_type_template_id_e85860ce_staticRenderFns,
+  ErrorUnsupportedSnakTypevue_type_template_id_9cb372d2_render,
+  ErrorUnsupportedSnakTypevue_type_template_id_9cb372d2_staticRenderFns,
   false,
   null,
   null,
@@ -14629,14 +14723,15 @@ var ErrorUnknown_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorUnknown = (ErrorUnknown_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5bda1d3c&
-var ErrorUnsupportedDatatypevue_type_template_id_5bda1d3c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-datatype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-datatype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-datatype__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD, _vm.targetProperty ))+" ")]),_c('p',{staticClass:"wb-db-unsupported-datatype__body"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_BODY, _vm.targetProperty, _vm.dataType ))+" ")])]),_c('BailoutActions',{staticClass:"wb-db-unsupported-datatype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
-var ErrorUnsupportedDatatypevue_type_template_id_5bda1d3c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5dc5073c&
+var ErrorUnsupportedDatatypevue_type_template_id_5dc5073c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-unsupported-datatype"},[_c('IconMessageBox',{staticClass:"wb-db-unsupported-datatype__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-unsupported-datatype__head",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD, _vm.propertyLabel ))}}),_c('p',{staticClass:"wb-db-unsupported-datatype__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_BODY, _vm.propertyLabel, _vm.dataType ))}})]),_c('BailoutActions',{staticClass:"wb-db-unsupported-datatype__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorUnsupportedDatatypevue_type_template_id_5dc5073c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5bda1d3c&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=template&id=5dc5073c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorUnsupportedDatatype.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -14665,9 +14760,13 @@ function (_mixins) {
   }
 
   _createClass(ErrorUnsupportedDatatype, [{
-    key: "targetProperty",
+    key: "propertyLabel",
     get: function get() {
-      return this.rootModule.state.targetProperty;
+      return new components_TermLabel({
+        propsData: {
+          term: this.rootModule.getters.targetLabel
+        }
+      }).$mount().$el;
     }
   }, {
     key: "pageTitle",
@@ -14711,8 +14810,8 @@ var ErrorUnsupportedDatatypevue_type_style_index_0_lang_scss_ = __webpack_requir
 
 var ErrorUnsupportedDatatype_component = normalizeComponent(
   components_ErrorUnsupportedDatatypevue_type_script_lang_ts_,
-  ErrorUnsupportedDatatypevue_type_template_id_5bda1d3c_render,
-  ErrorUnsupportedDatatypevue_type_template_id_5bda1d3c_staticRenderFns,
+  ErrorUnsupportedDatatypevue_type_template_id_5dc5073c_render,
+  ErrorUnsupportedDatatypevue_type_template_id_5dc5073c_staticRenderFns,
   false,
   null,
   null,
@@ -14721,14 +14820,15 @@ var ErrorUnsupportedDatatype_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorUnsupportedDatatype = (ErrorUnsupportedDatatype_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorDeprecatedStatement.vue?vue&type=template&id=1197879e&
-var ErrorDeprecatedStatementvue_type_template_id_1197879e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-deprecated-statement"},[_c('IconMessageBox',{staticClass:"wb-db-deprecated-statement__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-deprecated-statement__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.DEPRECATED_STATEMENT_ERROR_HEAD, _vm.targetProperty ))+" ")]),_c('p',{staticClass:"wb-db-deprecated-statement__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.DEPRECATED_STATEMENT_ERROR_BODY, _vm.targetProperty ))}})]),_c('BailoutActions',{staticClass:"wb-db-deprecated-statement__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
-var ErrorDeprecatedStatementvue_type_template_id_1197879e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorDeprecatedStatement.vue?vue&type=template&id=48d66377&
+var ErrorDeprecatedStatementvue_type_template_id_48d66377_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-deprecated-statement"},[_c('IconMessageBox',{staticClass:"wb-db-deprecated-statement__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-deprecated-statement__head",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.DEPRECATED_STATEMENT_ERROR_HEAD, _vm.propertyLabel ))}}),_c('p',{staticClass:"wb-db-deprecated-statement__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.DEPRECATED_STATEMENT_ERROR_BODY, _vm.propertyLabel ))}})]),_c('BailoutActions',{staticClass:"wb-db-deprecated-statement__bailout",attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorDeprecatedStatementvue_type_template_id_48d66377_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorDeprecatedStatement.vue?vue&type=template&id=1197879e&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorDeprecatedStatement.vue?vue&type=template&id=48d66377&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorDeprecatedStatement.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -14756,9 +14856,13 @@ function (_mixins) {
   }
 
   _createClass(ErrorDeprecatedStatement, [{
-    key: "targetProperty",
+    key: "propertyLabel",
     get: function get() {
-      return this.rootModule.state.targetProperty;
+      return new components_TermLabel({
+        propsData: {
+          term: this.rootModule.getters.targetLabel
+        }
+      }).$mount().$el;
     }
   }, {
     key: "pageTitle",
@@ -14798,8 +14902,8 @@ var ErrorDeprecatedStatementvue_type_style_index_0_lang_scss_ = __webpack_requir
 
 var ErrorDeprecatedStatement_component = normalizeComponent(
   components_ErrorDeprecatedStatementvue_type_script_lang_ts_,
-  ErrorDeprecatedStatementvue_type_template_id_1197879e_render,
-  ErrorDeprecatedStatementvue_type_template_id_1197879e_staticRenderFns,
+  ErrorDeprecatedStatementvue_type_template_id_48d66377_render,
+  ErrorDeprecatedStatementvue_type_template_id_48d66377_staticRenderFns,
   false,
   null,
   null,
@@ -14808,14 +14912,15 @@ var ErrorDeprecatedStatement_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorDeprecatedStatement = (ErrorDeprecatedStatement_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorAmbiguousStatement.vue?vue&type=template&id=0885a0ba&
-var ErrorAmbiguousStatementvue_type_template_id_0885a0ba_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-ambiguous-statement"},[_c('IconMessageBox',{staticClass:"wb-db-ambiguous-statement__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-ambiguous-statement__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.AMBIGUOUS_STATEMENT_ERROR_HEAD ))+" ")]),_c('p',{staticClass:"wb-db-ambiguous-statement__body"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.AMBIGUOUS_STATEMENT_ERROR_BODY, _vm.targetProperty ))+" ")])]),_c('BailoutActions',{attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
-var ErrorAmbiguousStatementvue_type_template_id_0885a0ba_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorAmbiguousStatement.vue?vue&type=template&id=7cd4bf18&
+var ErrorAmbiguousStatementvue_type_template_id_7cd4bf18_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-ambiguous-statement"},[_c('IconMessageBox',{staticClass:"wb-db-ambiguous-statement__message",attrs:{"type":"notice","inline":true}},[_c('p',{staticClass:"wb-db-ambiguous-statement__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.AMBIGUOUS_STATEMENT_ERROR_HEAD ))+" ")]),_c('p',{staticClass:"wb-db-ambiguous-statement__body",domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.AMBIGUOUS_STATEMENT_ERROR_BODY, _vm.propertyLabel ))}})]),_c('BailoutActions',{attrs:{"original-href":_vm.originalHref,"page-title":_vm.pageTitle}})],1)}
+var ErrorAmbiguousStatementvue_type_template_id_7cd4bf18_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorAmbiguousStatement.vue?vue&type=template&id=0885a0ba&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorAmbiguousStatement.vue?vue&type=template&id=7cd4bf18&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorAmbiguousStatement.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -14843,9 +14948,13 @@ function (_mixins) {
   }
 
   _createClass(ErrorAmbiguousStatement, [{
-    key: "targetProperty",
+    key: "propertyLabel",
     get: function get() {
-      return this.rootModule.state.targetProperty;
+      return new components_TermLabel({
+        propsData: {
+          term: this.rootModule.getters.targetLabel
+        }
+      }).$mount().$el;
     }
   }, {
     key: "pageTitle",
@@ -14885,8 +14994,8 @@ var ErrorAmbiguousStatementvue_type_style_index_0_lang_scss_ = __webpack_require
 
 var ErrorAmbiguousStatement_component = normalizeComponent(
   components_ErrorAmbiguousStatementvue_type_script_lang_ts_,
-  ErrorAmbiguousStatementvue_type_template_id_0885a0ba_render,
-  ErrorAmbiguousStatementvue_type_template_id_0885a0ba_staticRenderFns,
+  ErrorAmbiguousStatementvue_type_template_id_7cd4bf18_render,
+  ErrorAmbiguousStatementvue_type_template_id_7cd4bf18_staticRenderFns,
   false,
   null,
   null,

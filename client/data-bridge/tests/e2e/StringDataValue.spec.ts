@@ -150,11 +150,13 @@ describe( 'string data value', () => {
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
 
 			expect( label ).not.toBeNull();
+			expect( text ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( pageLanguage );
-			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
+			expect( ( text as HTMLElement ).getAttribute( 'lang' ) ).toBe( pageLanguage );
+			expect( ( text as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
@@ -193,11 +195,13 @@ describe( 'string data value', () => {
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
 
 			expect( label ).not.toBeNull();
+			expect( text ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
-			expect( ( label as HTMLElement ).textContent ).toBe( propertyLabel );
+			expect( ( text as HTMLElement ).getAttribute( 'lang' ) ).toBe( language );
+			expect( ( text as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
@@ -241,10 +245,13 @@ describe( 'string data value', () => {
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+
 			expect( label ).not.toBeNull();
+			expect( text ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-			expect( ( label as HTMLElement ).textContent ).toBe( propertyId );
-			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'zxx' );
+			expect( ( text as HTMLElement ).textContent ).toBe( propertyId );
+			expect( ( text as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'zxx' );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
 				ids: [ propertyId ],
@@ -286,9 +293,11 @@ describe( 'string data value', () => {
 			await budge();
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
 
 			expect( label ).not.toBeNull();
-			expect( ( label as HTMLElement ).getAttribute( 'dir' ) ).toBe( 'rtl' );
+			expect( text ).not.toBeNull();
+			expect( ( text as HTMLElement ).getAttribute( 'dir' ) ).toBe( 'rtl' );
 			expect( window.$.uls!.data.getDir ).toHaveBeenCalledWith( language );
 		} );
 
@@ -323,10 +332,12 @@ describe( 'string data value', () => {
 			await budge();
 
 			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
+			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
 
 			expect( label ).not.toBeNull();
+			expect( text ).not.toBeNull();
 			expect( ( label as HTMLElement ).tagName.toLowerCase() ).toBe( 'label' );
-			expect( ( label as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'de' );
+			expect( ( text as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'de' );
 			expect( window.mw.language.bcp47 ).toHaveBeenCalledWith( language );
 		} );
 	} );

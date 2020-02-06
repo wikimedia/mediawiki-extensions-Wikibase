@@ -13,3 +13,5 @@ module.exports.collectCoverageFrom = [
 	'!src/mock-entry.ts',
 ];
 module.exports.coverageReporters = [ 'lcov' ];
+
+module.exports.setupFiles = [ '<rootDir>/tests/config/globalSetup.ts' ];

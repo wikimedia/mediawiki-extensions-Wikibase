@@ -7,7 +7,11 @@ storiesOf( 'ErrorAmbiguousStatement', module )
 	.addDecorator( useStore( {
 		entityTitle: 'Q7186',
 		pageTitle: 'Marie_Curie',
-		originalHref: 'https://repo.wiki.example/wiki/Item:Q7186?uselang=en',
+		originalHref: 'https://repo.wiki.example/wiki/Item:Q7186#P166?uselang=en',
+		targetLabel: {
+			language: 'en',
+			value: 'award received',
+		},
 	} ) )
 	.add( 'default', () => ( {
 		components: { ErrorAmbiguousStatement },
