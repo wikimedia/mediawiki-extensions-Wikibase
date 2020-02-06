@@ -34,7 +34,7 @@ describe( 'ErrorDeprecatedStatement', () => {
 			store,
 		} );
 
-		expect( wrapper.find( IconMessageBox ) ).toBeTruthy();
+		expect( wrapper.find( IconMessageBox ).exists() ).toBeTruthy();
 		expect( messageGet ).toHaveBeenNthCalledWith( 1, MessageKeys.DEPRECATED_STATEMENT_ERROR_HEAD, targetProperty );
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
@@ -55,7 +55,7 @@ describe( 'ErrorDeprecatedStatement', () => {
 			store,
 		} );
 
-		expect( wrapper.find( BailoutActions ) ).toBeTruthy();
+		expect( wrapper.find( BailoutActions ).exists() ).toBeTruthy();
 		expect( wrapper.find( BailoutActions ).props() ).toStrictEqual( {
 			originalHref,
 			pageTitle,
