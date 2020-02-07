@@ -48,8 +48,21 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
+			new EntitySourceDefinitions(
+				[
+					new EntitySource(
+						'test',
+						'testdb',
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						$settings['conceptBaseUri'][''] ?? '',
+						'',
+						'',
+						''
+					)
+				],
+				new EntityTypeDefinitions( [] )
+			),
 			$settings['baseUrl'],
 			$settings['conceptBaseUri'],
 			$settings['articlePath'],
@@ -236,16 +249,22 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGetEntityConceptUri_entityFromOtherRepository() {
-		$settings = $this->getRepoSettings()[0];
-		$settings['conceptBaseUri'] = [ '' => 'http://www.example.com/entity', 'foo' => 'http://www.foreign.com/entity' ];
+		$conceptBaseUris = [ '' => 'http://www.example.com/entity', 'foo' => 'http://www.foreign.com/entity' ];
 
-		$linker = $this->getRepoLinkerForSettings( $settings );
+		$linker = new RepoLinker(
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			'some.url',
+			$conceptBaseUris,
+			'some.path',
+			'some.path'
+		);
 
 		$this->assertEquals( 'http://www.foreign.com/entity/Q111', $linker->getEntityConceptUri( new ItemId( 'foo:Q111' ) ) );
 	}
 
 	public function testGivenEntitySourceDefinitions_getEntityConceptUriUsesBasedFromRightSource() {
-		$conceptBaseUris = [ 'itemwiki' => 'http://www.itemwiki.com/entity', 'propertywiki' => 'http://www.propertywiki.com/entity' ];
+		$irrelevantConceptBaseUris = [];
 
 		$linker = new RepoLinker(
 			DataAccessSettingsFactory::entitySourceBasedFederation(),
@@ -264,7 +283,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 						'propertywiki',
 						'propdb',
 						[ 'property' => [ 'namespaceId' => 111, 'slot' => 'main' ] ],
-						'http://www.itemwiki.com/entity',
+						'http://www.propertywiki.com/entity',
 						'',
 						'',
 						''
@@ -273,7 +292,7 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				new EntityTypeDefinitions( [] )
 			),
 			'BASE_URI',
-			$conceptBaseUris,
+			$irrelevantConceptBaseUris,
 			'ARTICLE_PATH',
 			'SCRIPT_PATH'
 		);
