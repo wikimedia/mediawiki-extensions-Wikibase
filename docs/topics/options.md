@@ -144,6 +144,13 @@ Configuration of each source is an associative array containing the following ke
  - `rdfNodeNamespacePrefix`: A prefix used in RDF turtle node namespaces, e.g. 'wd' would result in namespaces like 'wd' for the entity namespace, and 'wdt' for the direct claim namespace, whereas 'sdc' prefix would result in the namespaces 'sdc' and 'sdct' accordingly.
  - `rdfPredicateNamespacePrefix`: A prefix used in RDF turtle predicate namespaces, e.g. '' would result in namespaces like 'ps' for the simple value claim namespace, whereas 'sdc' prefix would result in the namespace 'sdcps'.
 
+#### localEntitySourceName
+Name of the entity source name of the "local" repo, i.e. the repo of / on the local wiki.
+
+Should be the name of the entity source defined in [entitySources] setting.
+
+DEFAULT: ```local```
+
 #### useEntitySourceBasedFederation {#common_useEntitySourceBasedFederation}
 Temporary flag defining whether the repository-prefix-based or entity-source-based federation mechanism (i.e. use of entities from multiple Wikibase instances) should be used.
 
@@ -516,13 +523,6 @@ Each repository's settings are an associative array containing the following key
  - 'baseUri' - A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
  - 'prefixMapping' - A prefix mapping array, see also docs/foreign-entity-ids.wiki in the DataModel component.
 
-#### localEntitySourceName
-Name of the entity source name of the "local" repo, i.e. the repo of the local wiki.
-
-Should be the name of the entity source defined in [entitySources] setting.
-
-DEFAULT: ```local```
-
 #### unitStorage
 Definition for unit conversion storage.
 
@@ -577,13 +577,6 @@ This site's site group (e.g. `'wikipedia'` or `'wikivoyage'`) as used in the sit
 
 The setting is optional and falls back to site store lookup.
 For performance reasons, it may be desirable to set this explicitly to avoid lookups.
-
-#### localRepoEntitySourceName
-Name of the entity source name of the "local" repo the client uses data from.
-
-Should be the name of the entity source defined in [entitySources] setting.
-
-DEFAULT: ```local```
 
 ### Repository
 
