@@ -124,9 +124,7 @@ RootActions
 	public validateEntityState(
 		path: MainSnakPath,
 	): Promise<void> {
-		if (
-			this.statementModule.getters.propertyExists( path.entityId, path.propertyId ) === false
-		) {
+		if ( !this.statementModule.getters.propertyExists( path.entityId, path.propertyId ) ) {
 			this.commit( 'addApplicationErrors', [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
 			return Promise.resolve();
 		}
@@ -137,15 +135,11 @@ RootActions
 	public validateBridgeApplicability(
 		path: MainSnakPath,
 	): Promise<void> {
-		if (
-			this.statementModule.getters.isAmbiguous( path.entityId, path.propertyId ) === true
-		) {
+		if ( this.statementModule.getters.isAmbiguous( path.entityId, path.propertyId ) ) {
 			return this.dispatch( 'addError', [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
 		}
 
-		if (
-			this.statementModule.getters.rank( path ) === 'deprecated'
-		) {
+		if ( this.statementModule.getters.rank( path ) === 'deprecated' ) {
 			return this.dispatch( 'addError', [ { type: ErrorTypes.UNSUPPORTED_DEPRECATED_STATEMENT } ] );
 		}
 
@@ -175,9 +169,7 @@ RootActions
 			return this.dispatch( 'addError', [ error ] );
 		}
 
-		if (
-			this.statementModule.getters.dataValueType( path ) !== 'string'
-		) {
+		if ( this.statementModule.getters.dataValueType( path ) !== 'string' ) {
 			return this.dispatch( 'addError', [ { type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE } ] );
 		}
 

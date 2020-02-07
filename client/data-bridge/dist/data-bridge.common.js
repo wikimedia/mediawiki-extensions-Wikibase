@@ -12083,7 +12083,7 @@ function (_Actions) {
   }, {
     key: "validateEntityState",
     value: function validateEntityState(path) {
-      if (this.statementModule.getters.propertyExists(path.entityId, path.propertyId) === false) {
+      if (!this.statementModule.getters.propertyExists(path.entityId, path.propertyId)) {
         this.commit('addApplicationErrors', [{
           type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
         }]);
@@ -12095,7 +12095,7 @@ function (_Actions) {
   }, {
     key: "validateBridgeApplicability",
     value: function validateBridgeApplicability(path) {
-      if (this.statementModule.getters.isAmbiguous(path.entityId, path.propertyId) === true) {
+      if (this.statementModule.getters.isAmbiguous(path.entityId, path.propertyId)) {
         return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
         }]);
