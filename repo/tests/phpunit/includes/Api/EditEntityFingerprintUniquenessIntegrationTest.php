@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiUsageException;
 use ContentHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -39,10 +40,45 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		ContentHandler::cleanupHandlersCache();
 	}
 
+	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
+		return [
+			'scripts' => [ $this->getSqlFileAbsolutePath() ],
+			'create' => [
+				'wbt_item_terms',
+				'wbt_property_terms',
+				'wbt_term_in_lang',
+				'wbt_text_in_lang',
+				'wbt_text',
+				'wbt_type',
+			],
+		];
+	}
+
+	private function getSqlFileAbsolutePath() {
+		return __DIR__ . '/../../../../sql/AddNormalizedTermsTablesDDL.sql';
+	}
+
 	public function propertyLabelConflictTestProvider() {
 		return [
-			[ MIGRATION_WRITE_NEW, 'modification-failed' ],
-			[ MIGRATION_NEW, 'modification-failed' ]
+			[
+				'migrationStage' => MIGRATION_OLD,
+				'expectedFailureCode' => 'failed-save'
+			],
+
+			[
+				'migrationStage' => MIGRATION_WRITE_BOTH,
+				'expectedFailureCode' => 'failed-save'
+			],
+
+			[
+				'migrationStage' => MIGRATION_WRITE_NEW,
+				'expectedFailureCode' => 'modification-failed'
+			],
+
+			[
+				'migrationStage' => MIGRATION_NEW,
+				'expectedFailureCode' => 'modification-failed'
+			]
 		];
 	}
 
@@ -120,8 +156,21 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 
 	public function itemLabelWithoutDescriptionNotConflictingTestProvider() {
 		return [
-			[ [ 'max' => MIGRATION_WRITE_NEW ], ],
-			[ [ 'max' => MIGRATION_NEW ], ]
+			[
+				'migrationStage' => [ 'max' => MIGRATION_OLD ],
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_WRITE_BOTH ],
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_WRITE_NEW ],
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_NEW ],
+			]
 		];
 	}
 
@@ -150,8 +199,25 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 
 	public function itemLabelDescriptionConflictTestProvider() {
 		return [
-			[ [ 'max' => MIGRATION_WRITE_NEW ], 'modification-failed' ],
-			[ [ 'max' => MIGRATION_NEW ], 'modification-failed' ]
+			[
+				'migrationStage' => [ 'max' => MIGRATION_OLD ],
+				'expectedFailureCode' => 'modification-failed'
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_WRITE_BOTH ],
+				'expectedFailureCode' => 'modification-failed'
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_WRITE_NEW ],
+				'expectedFailureCode' => 'modification-failed'
+			],
+
+			[
+				'migrationStage' => [ 'max' => MIGRATION_NEW ],
+				'expectedFailureCode' => 'modification-failed'
+			]
 		];
 	}
 
@@ -159,6 +225,16 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 	 * @dataProvider itemLabelDescriptionConflictTestProvider
 	 */
 	public function testNewItemLabelDescriptionConflict( $migrationStage, $expectedFailureCode ) {
+		// When $migrationStage < MIGRATION_WRITE_NEW old store uniqueness validation
+		// will be executed, it relies on self-joining wb_terms which is not supported
+		// by mysql on temporary tables
+		if ( $migrationStage['max'] < MIGRATION_WRITE_NEW
+			&& $this->usesTemporaryTables()
+			&& $this->db->getType() === 'mysql'
+		) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
+
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
 			'tmpItemTermsMigrationStages',
 			$migrationStage
@@ -186,6 +262,16 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 	 * @dataProvider itemLabelDescriptionConflictTestProvider
 	 */
 	public function testExistingItemLabelDescriptionConflict( $migrationStage, $expectedFailureCode ) {
+		// When $migrationStage < MIGRATION_WRITE_NEW old store uniqueness validation
+		// will be executed, it relies  on self-jopining wb_terms which is not supported
+		// by mysql on temporary tables
+		if ( $migrationStage['max'] < MIGRATION_WRITE_NEW
+			&& $this->usesTemporaryTables()
+			&& $this->db->getType() === 'mysql'
+		) {
+			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
+		}
+
 		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
 			'tmpItemTermsMigrationStages',
 			$migrationStage
