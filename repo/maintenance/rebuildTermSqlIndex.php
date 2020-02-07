@@ -148,7 +148,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			new StringNormalizer(),
 			$entityIdComposer,
 			$entityIdParser,
-			new UnusableEntitySource(),
+			$dataAccessSettings->useEntitySourceBasedFederation() ? $localEntitySource : new UnusableEntitySource(),
 			$dataAccessSettings,
 			false,
 			''
