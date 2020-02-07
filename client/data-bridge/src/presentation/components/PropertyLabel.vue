@@ -1,6 +1,6 @@
 <template>
 	<label
-		class="wb-db-PropertyLabel"
+		class="wb-db-property-label"
 		:for="htmlFor"
 	><TermLabel :term="term" /></label>
 </template>
@@ -28,7 +28,7 @@ export default class PropertyLabel extends Vue {
 </script>
 
 <style lang="scss">
-.wb-db-PropertyLabel {
+.wb-db-property-label {
 	@include inputFieldLabel();
 }
 </style>

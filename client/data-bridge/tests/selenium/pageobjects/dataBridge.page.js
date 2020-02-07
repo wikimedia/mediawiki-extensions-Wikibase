@@ -28,11 +28,11 @@ class DataBridgePage extends Page {
 	}
 
 	static get STRING_VALUE() {
-		return '.wb-db-stringValue .wb-db-stringValue__input';
+		return '.wb-db-string-value .wb-db-string-value__input';
 	}
 
 	static get PROPERTY_LABEL() {
-		return '.wb-db-PropertyLabel';
+		return '.wb-db-property-label';
 	}
 
 	static get REFERENCES_SECTION() {

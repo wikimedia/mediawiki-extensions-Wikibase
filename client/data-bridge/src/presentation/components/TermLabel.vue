@@ -1,6 +1,6 @@
 <template>
 	<span
-		class="wb-db-TermLabel"
+		class="wb-db-term-label"
 		v-inlanguage="term.language"
 	>{{ term.value }}</span>
 </template>
@@ -22,7 +22,7 @@ export default class TermLabel extends Vue {
 </script>
 
 <style lang="scss">
-.wb-db-TermLabel {
+.wb-db-term-label {
 	@include hyphens();
 }
 </style>

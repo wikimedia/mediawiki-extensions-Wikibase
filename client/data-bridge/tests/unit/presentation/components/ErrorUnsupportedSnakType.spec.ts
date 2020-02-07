@@ -64,7 +64,7 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
 			messageKey,
-			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 
@@ -91,7 +91,7 @@ describe( 'ErrorUnsupportedSnakType', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			messageKey,
-			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 
