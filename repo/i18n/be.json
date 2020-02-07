@@ -6,7 +6,8 @@
 			"Macofe",
 			"Mechanizatar",
 			"Ladsgroup",
-			"Artsiom91"
+			"Artsiom91",
+			"Maksim L."
 		]
 	},
 	"wikibase-desc": "Сховішча структураваных дадзеных",
@@ -82,7 +83,7 @@
 	"wikibase-empty-undo": "Няма чаго адмяняць.",
 	"wikibase-undo-revision-error": "Адмяніць не атрымалася",
 	"wikibase-undo-samerev": "Адмена немагчыма, з прычыны таго, што ў якасці зыходнай і мэтавай версій указаны версіі з ідэнтычным зместам.",
-	"wikibase-undo-badpage": "Некарэктна ўказана версія: Версія $2 не адносіцца да старонкі [[:$1]].",
+	"wikibase-undo-badpage": "Благая версія: Версія $2 не тычыцца старонкі [[:$1]].",
 	"wikibase-undo-firstrev": "Стварэнне старонкі адмяніць немагчыма",
 	"wikibase-summary-generated": "Кароткае апісанне (будзе дададзена да аўтаматычна згенераванага апісання):",
 	"wikibase-disambiguation-title": "Значэнні для «$1»",

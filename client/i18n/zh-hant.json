@@ -160,5 +160,11 @@
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "目前不支援編輯$1的值",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1在{{WBREPONAME}}為資料類型$2。目前不支援編輯此資料類型。",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "目前不支援編輯$1的值",
-	"wikibase-client-data-bridge-deprecated-statement-error-body": "在{{WBREPONAME}}上用於$1的值<em>已棄用</em>。編輯<em>已棄用</em>的值目前不支援。"
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "在{{WBREPONAME}}上用於$1的值<em>已棄用</em>。編輯<em>已棄用</em>的值目前不支援。",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "目前不支援編輯多個值",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "$1現在無法編輯，因為包含一個以上的值。",
+	"wikibase-client-data-bridge-somevalue-error-head": "目前不支援編輯$1的值",
+	"wikibase-client-data-bridge-somevalue-error-body": "$1在{{WBREPONAME}}被標記有<i>未知值</i>。目前不能編輯被標記為<i>未知值</i>的值。",
+	"wikibase-client-data-bridge-novalue-error-head": "目前不支援編輯$1的值",
+	"wikibase-client-data-bridge-novalue-error-body": "$1在{{WBREPONAME}}被標記為<i>無值</i>。目前不能編輯被標記為<i>無值</i>的值。"
 }

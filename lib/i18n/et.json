@@ -170,10 +170,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Loodud uus üksus",
 	"wikibase-item-summary-wbeditentity-create-item": "Loodud uus üksus",
 	"wikibase-item-summary-wbeditentity-update": "Üksus muudetud",
-	"wikibase-item-summary-wbeditentity-update-languages": "Muudetud silt, kirjeldus ja/või rööpkujud {{PLURAL:$3|ühes|$3}} keeles",
-	"wikibase-item-summary-wbeditentity-update-languages-short": "Muudetud silt, kirjeldus ja/või rööpkujud mitmes keeles ({{#commaseparatedlist: $3}})",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Muudetud silt, kirjeldus ja/või rööpkujud {{PLURAL:$3|ühes|$3}} keeles ning muud osad",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Muudetud silt, kirjeldus ja/või rööpkujud mitmes keeles ({{#commaseparatedlist: $3}}) ja teisi osi",
 	"wikibase-item-summary-wbeditentity-override": "Üksus tühjendatud",
 	"wikibase-item-summary-wblinktitles-create": "Üksus loodud, et ühendada lehekülgi",
 	"wikibase-item-summary-wblinktitles-connect": "Keelelink lisatud, et ühendada lehekülgi",
@@ -181,8 +177,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Loodud uus omadus",
 	"wikibase-property-summary-wbeditentity-create-property": "Loodud uus omadus",
 	"wikibase-property-summary-wbeditentity-update": "Omadus muudetud",
-	"wikibase-property-summary-wbeditentity-update-languages": "Muudetud silt, kirjeldus ja/või rööpkujud {{PLURAL:$3|ühes keeles|$3 keeles}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Muudetud silt, kirjeldus ja/või rööpkujud {{PLURAL:$3|ühes|$3}} keeles ning muud osad",
 	"wikibase-property-summary-wbeditentity-override": "Omadus tühjendatud",
 	"wikibase-property-summary-special-create-property": "Loodud {{PLURAL:$1|väärtusega|väärtustega}} omadus [$2]"
 }

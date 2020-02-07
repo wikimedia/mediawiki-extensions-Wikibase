@@ -178,8 +178,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Vytvořena nová položka",
 	"wikibase-item-summary-wbeditentity-create-item": "Vytvořena nová položka",
 	"wikibase-item-summary-wbeditentity-update": "Položka byla změněna",
-	"wikibase-item-summary-wbeditentity-update-languages": "Změněn štítek, popis a/nebo aliasy {{PLURAL:$3|v jednom jazyce|ve $3 jazycích|v $3 jazycích}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Změněn štítek, popis a/nebo aliasy {{PLURAL:$3|v jednom jazyce|ve $3 jazycích|v $3 jazycích}} a jiné údaje",
 	"wikibase-item-summary-wbeditentity-override": "Položka byla přepsána",
 	"wikibase-item-summary-wblinktitles-create": "Položka založena k propojení stránek",
 	"wikibase-item-summary-wblinktitles-connect": "Přidán jazykový odkaz k propojení stránek",
@@ -187,8 +185,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Vytvořena nová vlastnost",
 	"wikibase-property-summary-wbeditentity-create-property": "Vytvořena nová vlastnost",
 	"wikibase-property-summary-wbeditentity-update": "Změněna vlastnost",
-	"wikibase-property-summary-wbeditentity-update-languages": "Změněn štítek, popis a/nebo aliasy {{PLURAL:$3|v jednom jazyce|ve $3 jazycích|v $3 jazycích}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Změněn štítek, popis a/nebo aliasy {{PLURAL:$3|v jednom jazyce|ve $3 jazycích|v $3 jazycích}} a jiné údaje",
 	"wikibase-property-summary-wbeditentity-override": "Vymazána vlastnost",
 	"wikibase-property-summary-special-create-property": "Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}"
 }

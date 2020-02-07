@@ -175,10 +175,6 @@
 	"wikibase-item-summary-wbeditentity-create": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity-create-item": "נוצר פריט חדש",
 	"wikibase-item-summary-wbeditentity-update": "פריט שוּנה",
-	"wikibase-item-summary-wbeditentity-update-languages": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}",
-	"wikibase-item-summary-wbeditentity-update-languages-short": "שונתה תווית, תיאור, או כינויים בפריטים {{#commaseparatedlist: $3}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "{{WBREPONAME}} נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}, וחלקים אחרים",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "שונתה תווית, תיאור, או כינויים בפריטים {{#commaseparatedlist: $3}}, וחלקים אחרים",
 	"wikibase-item-summary-wbeditentity-override": "פריט נדרס",
 	"wikibase-item-summary-wblinktitles-create": "נוצר הפריט הזה כדי לקשר בין דפים",
 	"wikibase-item-summary-wblinktitles-connect": "נוסף קישור לשוני כדי לקשר בין דפים",
@@ -186,10 +182,6 @@
 	"wikibase-property-summary-wbeditentity-create": "נוצר מאפיין חדש",
 	"wikibase-property-summary-wbeditentity-create-property": "נוצר מאפיין חדש",
 	"wikibase-property-summary-wbeditentity-update": "מאפיין שוּנה",
-	"wikibase-property-summary-wbeditentity-update-languages": "נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}",
-	"wikibase-property-summary-wbeditentity-update-languages-short": "שונתה תווית, תיאור, או כינויים בפריטים {{#commaseparatedlist: $3}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "נעשה שינוי בתווית, תיאור, או כינויים {{PLURAL:$3|בשפה אחת|ב־$3 שפות}}, ובחלקים אחרים",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "שונתה תווית, תיאור, או כינויים בפריטים {{#commaseparatedlist: $3}}, וחלקים אחרים",
 	"wikibase-property-summary-wbeditentity-override": "נוקה מאפיין",
 	"wikibase-property-summary-special-create-property": "נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}"
 }

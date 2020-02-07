@@ -95,6 +95,7 @@
 	"wikibase-propertypage-bad-datatype": "Невядомы тып зьвестак: $1",
 	"wikibase-claimview-snak-tooltip": "Увядзіце значэньне, якое адпавядае ўласьцівасьці «$1». Калі ўласьцівасьць ня мае азначанага значэньня або сапраўднае значэньне невядома, вы можаце выбраць альтэрнатыўны тып зьвестак, калі націсьніце на іконку перад полем уводу.",
 	"wikibase-claimview-snak-new-tooltip": "Пасьля ўвядзеньня ўласьцівасьці вы можаце дадаць адпаведнае значэньне. Калі ўласьцівасьць ня мае значэньня або сапраўднае значэньне невядомае, вы можаце выбраць альтэрнатыўны тып значэньня, калі націсьніце на іконку перад полем уводу.",
+	"wikibase-referenceview-tabs-manual": "Уручную",
 	"wikibase-statementview-rank-preferred": "Прыярытэтны ранг",
 	"wikibase-statementview-rank-tooltip-preferred": "Слушнае і актуальнае значэньне",
 	"wikibase-statementview-rank-normal": "Звычайны ранг",
@@ -364,6 +365,8 @@
 	"wikibase-listdatatypes-url-body": "Поле сымбальных зьвестак для URL-адрасоў. URL-адрасы абмежаваныя пратаколамі, якія падтрымліваюцца для вонкавых спасылак у вікітэксьце.",
 	"wikibase-listdatatypes-external-id-head": "Вонкавы ідэнтыфікатар",
 	"wikibase-listdatatypes-external-id-body": "Поле сымбальных зьвестак для вонкавага ідэнтыфікатару. Вонкавыя ідэнтыфікатары могуць быць аўтаматычна злучаныя з аўтарытэтным рэсурсам для паказу.",
+	"wikibase-listdatavaluetypes-name-time": "час",
+	"wikibase-listdatavaluetypes-name-wikibase-entityid": "ідэнтыфікатар існасьці Вікібазы",
 	"wikibase-concept-uri": "URI канцэпту",
 	"wikibase-concept-uri-tooltip": "URI, які ідэнтыфікуе канцэпт, апісаны гэтым элемэнтам",
 	"wikibase-pageimage-helptext": "Гэтая выява ўзятая зь сьцьверджаньняў гэтага элемэнту. Вы можаце наладзіць выяву празь зьмену сьцьверджаньня.",
@@ -391,5 +394,13 @@
 	"wikibase-search-config-notfound": "Канфігурацыя паўнатэкставага пошуку ня знойдзеная: $1",
 	"wikibase-search-config-badclass": "Кепская кляса пабудовы запыту: $1",
 	"wikibase-refresh-for-missing-datatype": "Тып зьвестак $1 ня знойдзены ў скрыпце лякальнага кліенту. Гэта можа быць вынікам кэшаваньня састарэлага скрыпту. Паспрабуйце абнавіць ваш браўзэр з абыходам кэшу (Ctrl-Shift-R ці Cmd-Shift-R у бальшыні браўзэраў), каб разьвязаць праблему.",
-	"wikibase-outdated-client-script": "У-о, патрабуецца абнаўленьне старонкі!"
+	"wikibase-outdated-client-script": "У-о, патрабуецца абнаўленьне старонкі!",
+	"wikibase-tainted-ref-warning-icon-title": "Гэтае сьцьверджаньне мае пэўныя магчымыя праблемы",
+	"wikibase-tainted-ref-popper-text": "Значэньне гэтага сьцьверджаньня зьмянілася, аднак крыніца засталася той самай. Можаце выдаліць гэтае папярэджаньне, калі крыніца сапраўды слушная.",
+	"wikibase-tainted-ref-popper-help-link-text": "Дапамога",
+	"wikibase-tainted-ref-popper-feedback-text": "Ці карысная гэтая новая функцыя?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Пакіньце водгук",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Спасылка на старонку водгукаў",
+	"wikibase-tainted-ref-popper-remove-warning": "Зьняць папярэджаньне",
+	"wikibase-tainted-ref-tainted-icon-title": "Гэтае сьцьверджаньне мае пэўныя магчымыя праблемы."
 }

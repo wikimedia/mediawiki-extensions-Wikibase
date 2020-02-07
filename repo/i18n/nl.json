@@ -381,5 +381,9 @@
 	"wikibase-pageinfo-subscription": "Wiki's geabonneerd op deze entiteit",
 	"wikibase-pageinfo-subscription-none": "Geen",
 	"wikibase-tainted-ref-warning-icon-title": "Deze verklaring heeft mogelijke problemen",
+	"wikibase-tainted-ref-popper-text": "De waarde van deze verklaring is gewijzigd, maar de referentie is hetzelfde gebleven. Je kunt deze waarschuwing verwijderen als de referentie nog steeds correct is.",
+	"wikibase-tainted-ref-popper-title": "Referentie/waarde komt mogelijk niet overeen",
+	"wikibase-tainted-ref-popper-feedback-text": "Is deze nieuwe functie nuttig?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Laat je feedback achter",
 	"wikibase-tainted-ref-popper-remove-warning": "Waarschuwing verwijderen"
 }

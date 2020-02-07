@@ -181,10 +181,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-create-item": "Створено новий елемент",
 	"wikibase-item-summary-wbeditentity-update": "Елемент змінено",
-	"wikibase-item-summary-wbeditentity-update-languages": "Змінені назви, описи та\\або синоніми {{PLURAL:$3|однією мовою|$3 мовами}}",
-	"wikibase-item-summary-wbeditentity-update-languages-short": "Змінено мітку, опис та/або альтернативні назви у {{#commaseparatedlist: $3}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Змінені назви, описи, синоніми та\\або інші частини {{PLURAL:$3|однією мовою|$3 мовами}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Змінено мітку, опис та/або альтернативні назви у $3 {{#commaseparatedlist: $3}} та інших частинах",
 	"wikibase-item-summary-wbeditentity-override": "Перезаписано елемент.",
 	"wikibase-item-summary-wblinktitles-create": "Цей об'єкт створено для зв'язку сторінок",
 	"wikibase-item-summary-wblinktitles-connect": "Додано мовні посилання для зв'язку сторінок",
@@ -192,8 +188,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Створено нову властивість",
 	"wikibase-property-summary-wbeditentity-create-property": "Створено нову властивість",
 	"wikibase-property-summary-wbeditentity-update": "Властивість змінено",
-	"wikibase-property-summary-wbeditentity-update-languages": "Змінено мітку, опис та/або альтернативні назви $3 {{PLURAL:$3|мовою|мовами}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Змінено мітку, опис та/або альтернативні назви $3 {{PLURAL:$3|мовою|мовами}} та інших частинах",
 	"wikibase-property-summary-wbeditentity-override": "Очищено властивість",
 	"wikibase-property-summary-special-create-property": "Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}"
 }

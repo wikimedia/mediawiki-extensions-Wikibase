@@ -187,8 +187,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Criou um objeto novo",
 	"wikibase-item-summary-wbeditentity-create-item": "Criou um objeto novo",
 	"wikibase-item-summary-wbeditentity-update": "Alterou um objeto",
-	"wikibase-item-summary-wbeditentity-update-languages": "Etiqueta, descrição e/ou nomes alternativos alterados {{PLURAL:$3|numa língua|em $3 línguas}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Etiqueta, descrição e/ou nomes alternativos alterados {{PLURAL:$3|numa língua|em $3 línguas}}, e outras partes",
 	"wikibase-item-summary-wbeditentity-override": "Limpou um objeto",
 	"wikibase-item-summary-wblinktitles-create": "Criou este objeto para ligar páginas",
 	"wikibase-item-summary-wblinktitles-connect": "Adicionou uma hiperligação interlínguas para ligar páginas",

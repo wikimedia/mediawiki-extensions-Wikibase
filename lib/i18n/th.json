@@ -132,8 +132,6 @@
 	"wikibase-property-summary-wbcreate-new": "สร้างคุณลักษณะรายการใหม่",
 	"wikibase-property-summary-wbeditentity-create": "สร้างคุณลักษณะรายการใหม่",
 	"wikibase-property-summary-wbeditentity-update": "เปลี่ยนแปลงข้อมูลในคุณลักษณะหนึ่ง",
-	"wikibase-property-summary-wbeditentity-update-languages": "เปลี่ยนแปลงป้ายชื่อ, คำอธิบาย และ/หรือ ชื่ออื่นใน $3 {{PLURAL:$3|ภาษา}}",
-	"wikibase-property-summary-wbeditentity-update-languages-short": "เปลี่ยนแปลงป้ายชื่อ, คำอธิบาย และ/หรือ ชื่ออื่นใน {{#commaseparatedlist: $3}}",
 	"wikibase-property-summary-wbeditentity-override": "ล้างข้อมูลในคุณลักษณะหนึ่ง",
 	"wikibase-property-summary-special-create-property": "สร้างคุณลักษณะหนึ่ง [$2] พร้อมด้วย{{PLURAL:$1|ค่าๆ หนึ่ง|ค่าต่างๆ}}"
 }

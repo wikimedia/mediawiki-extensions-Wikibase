@@ -178,8 +178,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Новый элемент создан",
 	"wikibase-item-summary-wbeditentity-create-item": "Создан новый элемент",
 	"wikibase-item-summary-wbeditentity-update": "Элемент изменён",
-	"wikibase-item-summary-wbeditentity-update-languages": "Изменены метка, описание и/или псевдонимы в $3 {{PLURAL:$3|языке|языках}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Изменены метка, описание и/или псевдонимы в $3 {{PLURAL:$3|языке|языках}}, и других частях",
 	"wikibase-item-summary-wbeditentity-override": "Элемент переопределён",
 	"wikibase-item-summary-wblinktitles-create": "Этот элемент создан для связи страниц",
 	"wikibase-item-summary-wblinktitles-connect": "Добавлены языковые ссылки на связанные страницы",
