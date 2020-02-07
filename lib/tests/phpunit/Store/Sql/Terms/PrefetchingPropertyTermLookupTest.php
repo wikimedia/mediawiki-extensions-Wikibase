@@ -58,7 +58,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore,
 			new StringNormalizer(),
 			$this->getPropertySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 		$this->p1 = new PropertyId( 'P1' );
 		$propertyTermStore->storeTerms(

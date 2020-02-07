@@ -10,8 +10,8 @@ use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -279,8 +279,16 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				new EntityIdComposer( [] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
-				new UnusableEntitySource(),
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+				new EntitySource(
+					'test',
+					false,
+					[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					''
+				),
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				$cache
 			),
 			$this->newLanguageFallbackChain(),
@@ -523,8 +531,16 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 				] ),
 				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
 				new NullLogger(),
-				new UnusableEntitySource(),
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+				new EntitySource(
+					'test',
+					false,
+					[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					''
+				),
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				$cache
 			),
 			$this->newLanguageFallbackChain(),

@@ -13,6 +13,7 @@ use Psr\Log\NullLogger;
 use RequestContext;
 use SiteList;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -116,13 +117,23 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
 			new RdfVocabulary(
-				[ '' => EntityDataSerializationServiceTest::URI_BASE ],
-				[ '' => EntityDataSerializationServiceTest::URI_DATA ],
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-				'',
-				[ '' => 'wd' ],
-				[ '' => '' ]
+				[ 'test' => EntityDataSerializationServiceTest::URI_BASE ],
+				[ 'test' => EntityDataSerializationServiceTest::URI_DATA ],
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
+				new EntitySourceDefinitions( [
+					new EntitySource(
+						'test',
+						'testdb',
+						[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
+						EntityDataSerializationServiceTest::URI_BASE,
+						'wd',
+						'',
+						''
+					)
+				], new EntityTypeDefinitions( [] ) ),
+				'test',
+				[ 'test' => 'wd' ],
+				[ 'test' => '' ]
 			),
 			true
 		);

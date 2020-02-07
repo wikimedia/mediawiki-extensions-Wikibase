@@ -14,6 +14,7 @@ use SiteList;
 use SpecialPage;
 use SpecialPageTestBase;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
@@ -101,13 +102,23 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),
 			new RdfVocabulary(
-				[ '' => self::URI_BASE ],
-				[ '' => self::URI_DATA ],
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-				'',
-				[ '' => '' ],
-				[ '' => '' ]
+				[ 'test' => self::URI_BASE ],
+				[ 'test' => self::URI_DATA ],
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
+				new EntitySourceDefinitions( [
+					new EntitySource(
+						'test',
+						'testdb',
+						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
+						self::URI_BASE,
+						'',
+						'',
+						''
+					)
+				], new EntityTypeDefinitions( [] ) ),
+				'test',
+				[ 'test' => '' ],
+				[ 'test' => '' ]
 			),
 			true
 		);

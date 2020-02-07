@@ -174,7 +174,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			new RdfVocabulary(
 				[ '' => 'fooUri/' ],
 				[ '' => 'acme/EntityData/' ],
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => '' ],
