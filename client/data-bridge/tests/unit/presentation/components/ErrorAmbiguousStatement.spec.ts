@@ -45,7 +45,7 @@ describe( 'ErrorAmbiguousStatement', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.AMBIGUOUS_STATEMENT_ERROR_BODY,
-			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 
 	} );

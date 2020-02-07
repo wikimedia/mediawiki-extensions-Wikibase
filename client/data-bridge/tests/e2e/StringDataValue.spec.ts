@@ -119,7 +119,7 @@ describe( 'string data value', () => {
 
 		expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 		expect( select( '.wb-db-app' ) ).not.toBeNull();
-		expect( select( '.wb-db-app .wb-db-bridge .wb-db-stringValue' ) ).not.toBeNull();
+		expect( select( '.wb-db-app .wb-db-bridge .wb-db-string-value' ) ).not.toBeNull();
 		expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
 		expect(
 			select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive' ),
@@ -149,8 +149,8 @@ describe( 'string data value', () => {
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
-			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
-			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+			const label = select( '.wb-db-app .wb-db-string-value .wb-db-property-label' );
+			const text = select( '.wb-db-app .wb-db-string-value .wb-db-property-label .wb-db-term-label' );
 
 			expect( label ).not.toBeNull();
 			expect( text ).not.toBeNull();
@@ -194,8 +194,8 @@ describe( 'string data value', () => {
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
-			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
-			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+			const label = select( '.wb-db-app .wb-db-string-value .wb-db-property-label' );
+			const text = select( '.wb-db-app .wb-db-string-value .wb-db-property-label .wb-db-term-label' );
 
 			expect( label ).not.toBeNull();
 			expect( text ).not.toBeNull();
@@ -244,8 +244,8 @@ describe( 'string data value', () => {
 
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 
-			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
-			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+			const label = select( '.wb-db-app .wb-db-string-value .wb-db-property-label' );
+			const text = select( '.wb-db-app .wb-db-string-value .wb-db-property-label .wb-db-term-label' );
 
 			expect( label ).not.toBeNull();
 			expect( text ).not.toBeNull();
@@ -292,8 +292,8 @@ describe( 'string data value', () => {
 			testLink!.click();
 			await budge();
 
-			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
-			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+			const label = select( '.wb-db-app .wb-db-string-value .wb-db-property-label' );
+			const text = select( '.wb-db-app .wb-db-string-value .wb-db-property-label .wb-db-term-label' );
 
 			expect( label ).not.toBeNull();
 			expect( text ).not.toBeNull();
@@ -331,8 +331,8 @@ describe( 'string data value', () => {
 			testLink!.click();
 			await budge();
 
-			const label = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel' );
-			const text = select( '.wb-db-app .wb-db-stringValue .wb-db-PropertyLabel .wb-db-TermLabel' );
+			const label = select( '.wb-db-app .wb-db-string-value .wb-db-property-label' );
+			const text = select( '.wb-db-app .wb-db-string-value .wb-db-property-label .wb-db-term-label' );
 
 			expect( label ).not.toBeNull();
 			expect( text ).not.toBeNull();
@@ -350,7 +350,7 @@ describe( 'string data value', () => {
 			testLink!.click();
 			await budge();
 
-			const input = select( '.wb-db-app .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-string-value__input' );
 
 			expect( input ).not.toBeNull();
 			expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
@@ -364,7 +364,7 @@ describe( 'string data value', () => {
 			testLink!.click();
 			await budge();
 
-			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 
 			expect( input ).not.toBeNull();
 			expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
@@ -388,7 +388,7 @@ describe( 'string data value', () => {
 				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
 				expect( save ).not.toBeNull();
 
-				const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+				const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 
 				expect( input ).not.toBeNull();
 				expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
@@ -414,7 +414,7 @@ describe( 'string data value', () => {
 				let save = select( '.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--disabled' );
 				expect( save ).not.toBeNull();
 
-				const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+				const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 
 				expect( input ).not.toBeNull();
 				expect( ( input as HTMLElement ).tagName.toLowerCase() ).toBe( 'textarea' );
@@ -460,7 +460,7 @@ describe( 'string data value', () => {
 			testLink!.click();
 			await budge();
 
-			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 
 			expect( input ).not.toBeNull();
 			expect( ( input as HTMLTextAreaElement ).maxLength ).toBe( maxLength );

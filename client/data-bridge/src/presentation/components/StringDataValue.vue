@@ -1,12 +1,12 @@
 <template>
-	<div class="wb-db-stringValue">
+	<div class="wb-db-string-value">
 		<PropertyLabel
 			:term="label"
 			:html-for="id"
 		/>
 		<ResizingTextField
 			:id="id"
-			class="wb-db-stringValue__input"
+			class="wb-db-string-value__input"
 			:placeholder="placeholder"
 			:maxlength="maxlength"
 			v-model="value"
@@ -65,7 +65,7 @@ export default class StringDataValue extends Vue {
 }
 </script>
 <style lang="scss">
-.wb-db-stringValue {
+.wb-db-string-value {
 	@include marginInputComponent();
 
 	&__input {

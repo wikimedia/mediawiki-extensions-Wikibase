@@ -248,7 +248,7 @@ describe( 'app', () => {
 			testLink!.click();
 			await budge();
 
-			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 			await insert( input as HTMLTextAreaElement, uuid() );
 
 			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
@@ -385,7 +385,7 @@ describe( 'app', () => {
 			await budge();
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 0 );
 
-			const input = select( '.wb-db-app .wb-db-stringValue .wb-db-stringValue__input' );
+			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
 			await insert( input as HTMLTextAreaElement, uuid() );
 
 			save!.click();

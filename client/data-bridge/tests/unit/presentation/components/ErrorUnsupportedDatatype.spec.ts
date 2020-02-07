@@ -61,7 +61,7 @@ describe( 'ErrorUnsupportedDatatype', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			1,
 			MessageKeys.UNSUPPORTED_DATATYPE_ERROR_HEAD,
-			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 		);
 	} );
 
@@ -85,7 +85,7 @@ describe( 'ErrorUnsupportedDatatype', () => {
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.UNSUPPORTED_DATATYPE_ERROR_BODY,
-			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${targetProperty}</span>`,
 			dataType,
 		);
 	} );
