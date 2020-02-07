@@ -1,6 +1,9 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
-		<ProcessDialogHeader class="wb-db-app__header" :title="$messages.get( $messages.KEYS.BRIDGE_DIALOG_TITLE )">
+		<ProcessDialogHeader class="wb-db-app__header">
+			<template v-slot:title>
+				<span v-html="title" />
+			</template>
 			<template v-slot:primaryAction>
 				<EventEmittingButton
 					:message="$messages.get( publishOrSave )"
@@ -41,6 +44,7 @@ import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
+import TermLabel from '@/presentation/components/TermLabel.vue';
 
 @Component( {
 	components: {
@@ -52,6 +56,17 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 	},
 } )
 export default class App extends mixins( StateMixin ) {
+	public get title(): string {
+		return this.$messages.get(
+			this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
+			new TermLabel( {
+				propsData: {
+					term: this.rootModule.getters.targetLabel,
+				},
+			} ).$mount().$el as HTMLElement,
+		);
+	}
+
 	public get isInitializing(): boolean {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.INITIALIZING;
 	}
