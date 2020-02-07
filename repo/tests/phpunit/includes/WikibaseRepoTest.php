@@ -948,6 +948,64 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testGetEntityTypeToRepositoryMapping_entitySourceBasedFederation() {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$irrelevantRepositoryDefinition = [ '' => [
+			'database' => null,
+			'base-uri' => null,
+			'prefix-mapping' => [ '' => '' ],
+			'entity-namespaces' => [],
+		] ];
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$irrelevantRepositoryDefinition,
+				$entityTypeDefinitions
+			),
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[
+						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
+					],
+					'',
+					'',
+					'',
+					''
+				),
+				new EntitySource(
+					'lexemewiki',
+					'bazdb',
+					[
+						'lexeme' => [ 'namespaceId' => 280, 'slot' => 'main' ],
+					],
+					'',
+					'lex',
+					'lex',
+					'lexwiki'
+				)
+			], $entityTypeDefinitions )
+		);
+
+		$this->assertEquals(
+			[
+				'foo' => [ '' ],
+				'bar' => [ '' ],
+				'lexeme' => [ '' ],
+				'form' => [ '' ],
+			],
+			$wikibaseRepo->getEntityTypeToRepositoryMapping()
+		);
+	}
+
 	public function testGetConceptBaseUris() {
 		$wikibaseRepo = $this->getWikibaseRepoWithCustomRepositoryDefinitions( array_merge(
 			$this->getRepositoryDefinition( '', [ 'base-uri' => 'http://acme.test/concept/' ] ),
@@ -963,4 +1021,56 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testGetConceptBaseUris_entitySourceBasedFederation() {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'useEntitySourceBasedFederation', true );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$irrelevantRepositoryDefinition = [ '' => [
+			'database' => null,
+			'base-uri' => null,
+			'prefix-mapping' => [ '' => '' ],
+			'entity-namespaces' => [],
+		] ];
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$irrelevantRepositoryDefinition,
+				$entityTypeDefinitions
+			),
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[
+						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
+					],
+					'http://local.wiki/entity/',
+					'',
+					'',
+					''
+				),
+				new EntitySource(
+					'bazwiki',
+					'bazdb',
+					[
+						'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
+					],
+					'http://baz.wiki/entity/',
+					'baz',
+					'baz',
+					'bazwiki'
+				)
+			], $entityTypeDefinitions )
+		);
+
+		$this->assertEquals(
+			[ 'local' => 'http://local.wiki/entity/', 'bazwiki' => 'http://baz.wiki/entity/' ],
+			$wikibaseRepo->getConceptBaseUris()
+		);
+	}
 }
