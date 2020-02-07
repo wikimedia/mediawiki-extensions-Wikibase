@@ -11,6 +11,7 @@ use MediaWiki\MediaWikiServices;
 use RequestContext;
 use SpecialPage;
 use Title;
+use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -117,6 +118,33 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
 	}
 
+	/**
+	 * @dataProvider validContextProvider
+	 */
+	public function testDoHtmlPageLinkRendererBegin_validContext_entitySourceFederation( RequestContext $context ) {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = $this->newTitle( self::ITEM_WITH_LABEL );
+		$text = $title->getFullText();
+		$customAttribs = [];
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expectedHtml = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_WITH_LABEL . ')</span></span>';
+
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertEquals( $expectedHtml, HtmlArmor::getHtml( $text ) );
+
+		$this->assertStringContainsString( self::DUMMY_LABEL, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
+
+		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
+	}
+
 	public function invalidContextProvider() {
 		$deleteContext = $this->newContext( 'Foo' );
 		$deleteContext->getRequest()->setVal( 'action', 'delete' );
@@ -137,6 +165,25 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 	 */
 	public function testDoHtmlPageLinkRendererBegin_invalidContext( RequestContext $context ) {
 		$handler = $this->newInstance();
+
+		$title = $this->newTitle( self::ITEM_WITH_LABEL );
+		$titleText = $title->getFullText();
+		$text = $titleText;
+		$customAttribs = [];
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertEquals( $titleText, $text );
+		$this->assertEquals( [], $customAttribs );
+	}
+
+	/**
+	 * @dataProvider invalidContextProvider
+	 */
+	public function testDoHtmlPageLinkRendererBegin_invalidContext_entitySourceFederation( RequestContext $context ) {
+		$handler = $this->newInstanceForEntitySourceFederation();
 
 		$title = $this->newTitle( self::ITEM_WITH_LABEL );
 		$titleText = $title->getFullText();
@@ -193,6 +240,32 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
 	}
 
+	/**
+	 * @dataProvider overrideSpecialNewEntityLinkProvider
+	 * @param string $linkTitle
+	 */
+	public function testDoHtmlPageLinkRendererBegin_overrideSpecialNewEntityLink_entitySourceFederation( $linkTitle ) {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = Title::makeTitle( NS_MAIN, $linkTitle );
+		$text = $title->getFullText();
+		$context = $this->newContext();
+		$attribs = [];
+		$html = null;
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $attribs, $context, $html );
+
+		$specialPageTitle = SpecialPage::getTitleFor( $linkTitle );
+
+		$this->assertFalse( $ret );
+		$this->assertStringContainsString(
+			$this->getLinkRenderer()->makeKnownLink( $specialPageTitle ),
+			$html
+		);
+		$this->assertStringContainsString( $specialPageTitle->getFullText(), $html );
+	}
+
 	public function testDoHtmlPageLinkRendererBegin_nonEntityTitleLink() {
 		$handler = $this->newInstance();
 
@@ -213,8 +286,45 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertEquals( [], $customAttribs );
 	}
 
+	public function testDoHtmlPageLinkRendererBegin_nonEntityTitleLink_entitySourceFederation() {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = Title::newMainPage();
+		$title->resetArticleID( 1 );
+		$this->assertTrue( $title->exists() ); // sanity check
+
+		$titleText = $title->getFullText();
+		$text = $titleText;
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertEquals( $titleText, $text );
+		$this->assertEquals( [], $customAttribs );
+	}
+
 	public function testDoHtmlPageLinkRendererBegin_unknownEntityTitle() {
 		$handler = $this->newInstance();
+
+		$title = $this->newTitle( self::ITEM_DELETED, false );
+		$titleText = $title->getFullText();
+		$text = $titleText;
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertEquals( $titleText, $text );
+		$this->assertEquals( [], $customAttribs );
+	}
+
+	public function testDoHtmlPageLinkRendererBegin_unknownEntityTitle_entitySourceFederation() {
+		$handler = $this->newInstanceForEntitySourceFederation();
 
 		$title = $this->newTitle( self::ITEM_DELETED, false );
 		$titleText = $title->getFullText();
@@ -251,8 +361,54 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertStringContainsString( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
 	}
 
+	public function testDoHtmlPageLinkRendererBegin_itemHasNoLabel_entitySourceFederation() {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = $this->newTitle( self::ITEM_WITHOUT_LABEL );
+		$text = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expected = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_WITHOUT_LABEL . ')</span></span>';
+
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );
+		$this->assertStringContainsString( self::ITEM_WITHOUT_LABEL, $customAttribs['title'] );
+	}
+
 	public function testDoHtmlPageLinkRendererBegin_itemHasNoDescription() {
 		$handler = $this->newInstance();
+
+		$title = $this->newTitle( self::ITEM_LABEL_NO_DESCRIPTION );
+		$text = $title->getFullText();
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expected = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL . '</span> '
+			. '<span class="wb-itemlink-id">(' . self::ITEM_LABEL_NO_DESCRIPTION . ')</span></span>';
+
+		$lang = Language::factory( 'en' );
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertEquals( $expected, HtmlArmor::getHtml( $text ) );
+		$this->assertEquals(
+			$lang->getDirMark() . 'linkbegin-label' . $lang->getDirMark(),
+			$customAttribs['title']
+		);
+	}
+
+	public function testDoHtmlPageLinkRendererBegin_itemHasNoDescription_entitySourceFederation() {
+		$handler = $this->newInstanceForEntitySourceFederation();
 
 		$title = $this->newTitle( self::ITEM_LABEL_NO_DESCRIPTION );
 		$text = $title->getFullText();
@@ -306,6 +462,36 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertStringContainsString( self::DUMMY_DESCRIPTION_FOREIGN_ITEM, $customAttribs['title'] );
 	}
 
+	public function testGivenIdFromOtherSourcecWithLabelAndDesc_labelAndIdAreUsedAsLinkTextAndLabelAndDescAreUsedInLinkTitle() {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
+			'',
+			self::FOREIGN_REPO_PREFIX
+		);
+		$text = $title->getFullText();
+		$customAttribs = [];
+		$context = $this->newContext();
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expectedHtml = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr">' . self::DUMMY_LABEL_FOREIGN_ITEM . '</span> '
+			. '<span class="wb-itemlink-id">('
+			. self::ITEM_FOREIGN_NO_PREFIX
+			. ')</span></span>';
+
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertSame( $expectedHtml, HtmlArmor::getHtml( $text ) );
+
+		$this->assertStringContainsString( self::DUMMY_LABEL_FOREIGN_ITEM, $customAttribs['title'] );
+		$this->assertStringContainsString( self::DUMMY_DESCRIPTION_FOREIGN_ITEM, $customAttribs['title'] );
+	}
+
 	public function testGivenForeignIdWithoutLabelAndDescription_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
 		$handler = $this->newInstance();
 
@@ -338,8 +524,65 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		);
 	}
 
+	public function testGivenIdFromOtherSourceWithoutLabelAndDesc_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
+		$handler = $this->newInstanceForEntitySourceFederation();
+
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
+			'',
+			self::FOREIGN_REPO_PREFIX
+		);
+		$text = $title->getFullText();
+		$customAttribs = [];
+		$context = $this->newContext();
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$expectedHtml = '<span class="wb-itemlink">'
+			. '<span class="wb-itemlink-label" lang="en" dir="ltr"></span> '
+			. '<span class="wb-itemlink-id">('
+			. self::ITEM_FOREIGN_NO_DATA_NO_PREFIX
+			. ')</span></span>';
+
+		$this->assertTrue( $ret );
+		$this->assertInstanceOf( HtmlArmor::class, $text );
+		$this->assertSame( $expectedHtml, HtmlArmor::getHtml( $text ) );
+
+		$this->assertSame(
+			self::FOREIGN_REPO_PREFIX . ':Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
+			$customAttribs['title']
+		);
+	}
+
 	public function testGivenEntityPageOnUnknownForeignRepo_entityPageIsUsedAsLinkTextAndThereIsNoLinkTitle() {
 		$handler = $this->newInstance();
+
+		$title = Title::makeTitle(
+			NS_MAIN,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
+			'',
+			self::UNKNOWN_FOREIGN_REPO
+		);
+		$text = $title->getFullText();
+		$customAttribs = [];
+		$context = $this->newContext();
+
+		$ret = $handler->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertSame(
+			self::UNKNOWN_FOREIGN_REPO . ':Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
+			$text
+		);
+
+		$this->assertArrayNotHasKey( 'title', $customAttribs );
+	}
+
+	public function testGivenEntityPageOnUnknownEntitySource_entityPageIsUsedAsLinkTextAndThereIsNoLinkTitle() {
+		$handler = $this->newInstanceForEntitySourceFederation();
 
 		$title = Title::makeTitle(
 			NS_MAIN,
@@ -427,6 +670,51 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		return $termLookup;
 	}
 
+	/**
+	 * @return TermLookup
+	 */
+	private function getTermLookupForEntitySourceFederation() {
+		$termLookup = $this->createMock( TermLookup::class );
+
+		$termLookup->expects( $this->any() )
+			->method( 'getLabels' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				switch ( $id->getSerialization() ) {
+					case self::ITEM_WITH_LABEL:
+					case self::ITEM_LABEL_NO_DESCRIPTION:
+						return [ 'en' => self::DUMMY_LABEL ];
+					case self::ITEM_WITHOUT_LABEL:
+						return [];
+					case self::ITEM_FOREIGN_NO_PREFIX:
+						return [ 'en' => self::DUMMY_LABEL_FOREIGN_ITEM ];
+					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
+						return [];
+					default:
+						throw new StorageException( "Unexpected entity id $id" );
+				}
+			} ) );
+
+		$termLookup->expects( $this->any() )
+			->method( 'getDescriptions' )
+			->will( $this->returnCallback( function ( EntityId $id ) {
+				switch ( $id->getSerialization() ) {
+					case self::ITEM_WITH_LABEL:
+						return [ 'en' => self::DUMMY_DESCRIPTION ];
+					case self::ITEM_WITHOUT_LABEL:
+					case self::ITEM_LABEL_NO_DESCRIPTION:
+						return [];
+					case self::ITEM_FOREIGN_NO_PREFIX:
+						return [ 'en' => self::DUMMY_DESCRIPTION_FOREIGN_ITEM ];
+					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
+						return [];
+					default:
+						throw new StorageException( "Unexpected entity id $id" );
+				}
+			} ) );
+
+		return $termLookup;
+	}
+
 	private function getEntityNamespaceLookup() {
 		$entityNamespaces = [
 			'item' => 0,
@@ -476,7 +764,34 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 			$this->getInterwikiLookup(),
 			$this->getEntityLinkFormatterFactory(),
 			MediaWikiServices::getInstance()->getSpecialPageFactory(),
-			$languageFallbackChainFactory
+			$languageFallbackChainFactory,
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+		);
+	}
+
+	private function newInstanceForEntitySourceFederation() {
+		$languageFallback = new LanguageFallbackChain( [
+			LanguageWithConversion::factory( 'de-ch' ),
+			LanguageWithConversion::factory( 'de' ),
+			LanguageWithConversion::factory( 'en' ),
+		] );
+		$languageFallbackChainFactory = $this
+			->createMock( LanguageFallbackChainFactory::class );
+
+		$languageFallbackChainFactory->expects( $this->any() )
+			->method( 'newFromContext' )
+			->willReturn( $languageFallback );
+
+		return new HtmlPageLinkRendererBeginHookHandler(
+			$this->getEntityIdLookup(),
+			new ItemIdParser(),
+			$this->getTermLookupForEntitySourceFederation(),
+			$this->getEntityNamespaceLookup(),
+			$this->getInterwikiLookup(),
+			$this->getEntityLinkFormatterFactory(),
+			MediaWikiServices::getInstance()->getSpecialPageFactory(),
+			$languageFallbackChainFactory,
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 	}
 
