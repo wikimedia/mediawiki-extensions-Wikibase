@@ -31,7 +31,7 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
 			$conceptBaseUri,
