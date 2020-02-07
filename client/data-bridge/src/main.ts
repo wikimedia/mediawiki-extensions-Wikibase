@@ -1,6 +1,3 @@
-import {
-	BRIDGE_INIT,
-} from '@/store/actionTypes';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
 import AppInformation from '@/definitions/AppInformation';
@@ -29,7 +26,7 @@ export function launch(
 	);
 
 	const store = createStore( services );
-	store.dispatch( BRIDGE_INIT, information );
+	store.dispatch( 'initBridge', information );
 
 	const app = new App( {
 		store,

@@ -1,7 +1,3 @@
-import {
-	ENTITY_UPDATE,
-	ENTITY_REVISION_UPDATE,
-} from '@/store/entity/mutationTypes';
 import { EntityState } from '@/store/entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import newMockableEntityRevision from '../newMockableEntityRevision';
@@ -10,7 +6,7 @@ import { inject } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 
 describe( 'entity/mutations', () => {
-	describe( ENTITY_UPDATE, () => {
+	describe( 'updateEntity', () => {
 		it( 'contains entity data incl baseRevisionFingerprint after initialization', () => {
 			const id = 'Q23';
 			const state: EntityState = newEntityState();
@@ -18,18 +14,18 @@ describe( 'entity/mutations', () => {
 
 			const mutations = inject( EntityMutations, { state } );
 
-			mutations[ ENTITY_UPDATE ]( entityRevision.entity );
+			mutations.updateEntity( entityRevision.entity );
 			expect( state.id ).toBe( entityRevision.entity.id );
 		} );
 	} );
 
-	it( ENTITY_REVISION_UPDATE, () => {
+	it( 'updateRevision', () => {
 		const state = newEntityState( { baseRevision: 0 } );
 		const revision = 4711;
 
 		const mutations = inject( EntityMutations, { state } );
 
-		mutations[ ENTITY_REVISION_UPDATE ]( revision );
+		mutations.updateRevision( revision );
 		expect( state.baseRevision ).toBe( revision );
 	} );
 } );

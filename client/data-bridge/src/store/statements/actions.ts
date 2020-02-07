@@ -1,15 +1,11 @@
 import { Actions } from 'vuex-smart-module';
-import { STATEMENTS_INIT } from '@/store/statements/actionTypes';
 import { StatementState } from '@/store/statements';
 import EntityId from '@/datamodel/EntityId';
 import StatementMap from '@/datamodel/StatementMap';
-import { STATEMENTS_SET } from '@/store/statements/mutationTypes';
 import { PayloadSnakDataValue, PayloadSnakType } from '@/store/statements/snaks/Payloads';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import { StatementMutations } from '@/store/statements/mutations';
 import { StatementGetters } from '@/store/statements/getters';
-import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
-import { SNAK_SET_DATA_VALUE, SNAK_SET_SNAKTYPE } from '@/store/statements/snaks/mutationTypes';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 
 export class StatementActions extends Actions<
@@ -18,20 +14,20 @@ StatementGetters,
 StatementMutations,
 StatementActions
 > {
-	public [ STATEMENTS_INIT ](
+	public initStatements(
 		payload: {
 			entityId: EntityId;
 			statements: StatementMap;
 		},
 	): Promise<void> {
-		this.commit( STATEMENTS_SET, {
+		this.commit( 'setStatements', {
 			entityId: payload.entityId,
 			statements: payload.statements,
 		} );
 		return Promise.resolve();
 	}
 
-	public [ SNAK_SET_STRING_DATA_VALUE ](
+	public setStringDataValue(
 		payloadDataValue: PayloadSnakDataValue<PathToSnak>,
 	): Promise<void> {
 		return new Promise( ( resolve ) => {
@@ -54,8 +50,8 @@ StatementActions
 				value: 'value',
 			};
 
-			this.commit( SNAK_SET_SNAKTYPE, payloadSnakType );
-			this.commit( SNAK_SET_DATA_VALUE, payloadDataValue );
+			this.commit( 'setSnakType', payloadSnakType );
+			this.commit( 'setDataValue', payloadDataValue );
 			resolve();
 		} );
 	}

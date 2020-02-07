@@ -2,18 +2,6 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import { Store } from 'vuex';
 import Application from '@/store/Application';
 import { EntityState } from '@/store/entity';
-import {
-	ENTITY_INIT,
-	ENTITY_SAVE,
-	ENTITY_WRITE,
-} from '@/store/entity/actionTypes';
-import {
-	ENTITY_UPDATE,
-	ENTITY_REVISION_UPDATE,
-} from '@/store/entity/mutationTypes';
-import {
-	STATEMENTS_INIT,
-} from '@/store/statements/actionTypes';
 import { Actions, Context, Getters } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 import { statementModule } from '@/store/statements';
@@ -27,15 +15,15 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 		this.statementsModule = statementModule.context( store );
 	}
 
-	public [ ENTITY_INIT ](
+	public entityInit(
 		payload: { entity: string; revision?: number },
 	): Promise<void> {
 		return this.store.$services.get( 'readingEntityRepository' )
 			.getEntity( payload.entity, payload.revision )
-			.then( ( entityRevision: EntityRevision ) => this.dispatch( ENTITY_WRITE, entityRevision ) );
+			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 
-	public [ ENTITY_SAVE ](): Promise<void> {
+	public entitySave(): Promise<void> {
 		const entityRevision = new EntityRevision(
 			{
 				id: this.state.id,
@@ -46,16 +34,16 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 
 		return this.store.$services.get( 'writingEntityRepository' )
 			.saveEntity( entityRevision )
-			.then( ( entityRevision: EntityRevision ) => this.dispatch( ENTITY_WRITE, entityRevision ) );
+			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 
-	public [ ENTITY_WRITE ](
+	public entityWrite(
 		entityRevision: EntityRevision,
 	): Promise<void> {
-		this.commit( ENTITY_REVISION_UPDATE, entityRevision.revisionId );
-		this.commit( ENTITY_UPDATE, entityRevision.entity );
+		this.commit( 'updateRevision', entityRevision.revisionId );
+		this.commit( 'updateEntity', entityRevision.entity );
 
-		return this.statementsModule.dispatch( STATEMENTS_INIT, {
+		return this.statementsModule.dispatch( 'initStatements', {
 			entityId: entityRevision.entity.id,
 			statements: entityRevision.entity.statements,
 		} );

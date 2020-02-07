@@ -14,7 +14,6 @@ import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';
 import { statementModule } from '@/store/statements';
-import { SNAK_DATA_VALUE } from '@/store/statements/snaks/getterTypes';
 
 export class RootGetters extends Getters<Application> {
 
@@ -31,7 +30,7 @@ export class RootGetters extends Getters<Application> {
 		const entityId = ( this.state as InitializedApplicationState )[ NS_ENTITY ].id;
 		const pathToMainSnak = new MainSnakPath( entityId, this.state.targetProperty, 0 );
 
-		return this.statementModule.getters[ SNAK_DATA_VALUE ]( pathToMainSnak );
+		return this.statementModule.getters.dataValue( pathToMainSnak );
 	}
 
 	public get targetLabel(): Term {

@@ -7,12 +7,6 @@ import AppInformation from '@/definitions/AppInformation';
 import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
 import {
-	BRIDGE_INIT,
-	BRIDGE_SAVE,
-	BRIDGE_SET_TARGET_VALUE,
-} from '@/store/actionTypes';
-import { ENTITY_SAVE } from '@/store/entity/actionTypes';
-import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
@@ -21,7 +15,6 @@ import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
-import { SNAK_SET_STRING_DATA_VALUE } from '@/store/statements/snaks/actionTypes';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 
 describe( 'store/actions', () => {
@@ -154,13 +147,13 @@ describe( 'store/actions', () => {
 		};
 
 		store = createStore( services );
-		await store.dispatch( BRIDGE_INIT, info );
+		await store.dispatch( 'initBridge', info );
 	} );
 
 	describe( 'application initiation', () => {
 		it( 'successfully initiate on valid input data', () => {
 			const successStore = createStore( services );
-			return successStore.dispatch( BRIDGE_INIT, info ).then( () => {
+			return successStore.dispatch( 'initBridge', info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
 				expect( successStore.state.targetLabel ).toBe( labelTerm );
 				expect( successStore.state.originalStatement ).not.toBe(
@@ -187,7 +180,7 @@ describe( 'store/actions', () => {
 					client,
 				};
 
-				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+				return errorStore.dispatch( 'initBridge', misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
@@ -201,7 +194,7 @@ describe( 'store/actions', () => {
 					entityTitle: 'Q42',
 					client,
 				};
-				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+				return errorStore.dispatch( 'initBridge', misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
@@ -215,7 +208,7 @@ describe( 'store/actions', () => {
 					entityTitle: 'Q42',
 					client,
 				};
-				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+				return errorStore.dispatch( 'initBridge', misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
@@ -229,7 +222,7 @@ describe( 'store/actions', () => {
 					entityTitle: 'Q42',
 					client,
 				};
-				return errorStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+				return errorStore.dispatch( 'initBridge', misleadingInfo ).then( () => {
 					expect( errorStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
@@ -252,14 +245,14 @@ describe( 'store/actions', () => {
 					entityTitle: 'Q42',
 					client,
 				};
-				return permissionProblemStore.dispatch( BRIDGE_INIT, misleadingInfo ).then( () => {
+				return permissionProblemStore.dispatch( 'initBridge', misleadingInfo ).then( () => {
 					expect( permissionProblemStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				} );
 			} );
 		} );
 	} );
 
-	describe( ENTITY_SAVE, () => {
+	describe( 'entitySave', () => {
 		it( 'rejects if the request fails', async () => {
 			const rejectError = new Error( 'no' );
 			const resolver = jest.fn().mockRejectedValue( rejectError );
@@ -269,10 +262,10 @@ describe( 'store/actions', () => {
 			} );
 
 			store = createStore( services );
-			await store.dispatch( BRIDGE_INIT, info );
+			await store.dispatch( 'initBridge', info );
 			await expect(
 				store.dispatch(
-					action( NS_ENTITY, ENTITY_SAVE ),
+					action( NS_ENTITY, 'entitySave' ),
 				),
 			).rejects.toBe( rejectError );
 
@@ -310,8 +303,8 @@ describe( 'store/actions', () => {
 			} );
 
 			store = createStore( services );
-			await store.dispatch( BRIDGE_INIT, info );
-			await store.dispatch( action( NS_ENTITY, ENTITY_SAVE ) );
+			await store.dispatch( 'initBridge', info );
+			await store.dispatch( action( NS_ENTITY, 'entitySave' ) );
 
 			expect( resolver ).toHaveBeenCalledWith( testSet );
 
@@ -323,11 +316,11 @@ describe( 'store/actions', () => {
 	} );
 
 	describe( 'alias actions', () => {
-		describe( BRIDGE_SET_TARGET_VALUE, () => {
+		describe( 'setTargetValue', () => {
 			it( 'rejects if the store is not ready and switches to error state', async () => {
 				const notReadyStore = createStore( services );
 				await expect( notReadyStore.dispatch(
-					BRIDGE_SET_TARGET_VALUE,
+					'setTargetValue',
 					{ type: 'string', dataValue: 'passing string' },
 				) ).rejects.toBeDefined();
 				expect( notReadyStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
@@ -336,7 +329,7 @@ describe( 'store/actions', () => {
 			it( 'sets the new data value', () => {
 				const dataValue = { type: 'string', value: 'Töften as passing string' };
 				return store.dispatch(
-					BRIDGE_SET_TARGET_VALUE,
+					'setTargetValue',
 					dataValue,
 				).then( () => {
 					const state = ( store.state as InitializedApplicationState );
@@ -345,11 +338,11 @@ describe( 'store/actions', () => {
 			} );
 		} );
 
-		describe( BRIDGE_SAVE, () => {
+		describe( 'saveBridge', () => {
 			it( 'rejects if the store is not ready and switches to error state', async () => {
 				const notReadyStore = createStore( services );
 				await expect( notReadyStore.dispatch(
-					BRIDGE_SAVE,
+					'saveBridge',
 					{ type: 'string', dataValue: 'passing string' },
 				) ).rejects.toBeDefined();
 				expect( notReadyStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
@@ -364,9 +357,9 @@ describe( 'store/actions', () => {
 				} );
 
 				store = createStore( services );
-				await store.dispatch( BRIDGE_INIT, info );
+				await store.dispatch( 'initBridge', info );
 				await expect(
-					store.dispatch( BRIDGE_SAVE ),
+					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
 				expect( resolver ).toHaveBeenCalledWith( testSet );
@@ -405,8 +398,8 @@ describe( 'store/actions', () => {
 
 				store = createStore( services );
 
-				await store.dispatch( BRIDGE_INIT, info );
-				await store.dispatch( BRIDGE_SAVE );
+				await store.dispatch( 'initBridge', info );
+				await store.dispatch( 'saveBridge' );
 
 				expect( resolver ).toHaveBeenCalledWith( testSet );
 
@@ -424,7 +417,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Entity', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+					action( NS_STATEMENTS, 'setStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q3333333',
@@ -442,7 +435,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+					action( NS_STATEMENTS, 'setStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -460,7 +453,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown index on Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+					action( NS_STATEMENTS, 'setStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -478,7 +471,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string value data types', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+					action( NS_STATEMENTS, 'setStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -496,7 +489,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string data value', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+					action( NS_STATEMENTS, 'setStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -520,7 +513,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+						action( NS_STATEMENTS, 'setStringDataValue' ),
 						{
 							path: new MainSnakPath(
 								'Q42',
@@ -542,7 +535,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_STATEMENTS, SNAK_SET_STRING_DATA_VALUE ),
+						action( NS_STATEMENTS, 'setStringDataValue' ),
 						{
 							path: new MainSnakPath(
 								'Q42',
