@@ -66,8 +66,10 @@ export default class BailoutActions extends Vue {
 	margin: 0 $margin-center-column-side;
 
 	&__heading {
-		margin: px-to-em( 24px ) 0 px-to-em( 16px ) 0;
-		font-size: px-to-em( 16px );
+		$font-size: 16px;
+		margin-top: px-to-em( 24px * ( $base-font-size-desired / $font-size ) ); // actually 24px
+		margin-bottom: px-to-em( 16px * ( $base-font-size-desired / $font-size ) ); // actually 16px
+		font-size: px-to-em( $font-size );
 		font-weight: bold;
 	}
 
