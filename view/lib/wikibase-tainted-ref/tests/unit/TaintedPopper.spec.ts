@@ -18,7 +18,7 @@ localVue.use( Track, { trackingFunction } );
 function createMockStore( helpLink?: string ): Store<Partial<Application>> {
 	return new Store<Partial<Application>>( {
 		actions: {
-			untaintTaintedState: jest.fn(),
+			[ STATEMENT_TAINTED_STATE_UNTAINT ]: jest.fn(),
 		},
 		getters: {
 			[ GET_FEEDBACK_LINK ]: jest.fn(),
