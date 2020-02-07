@@ -454,7 +454,7 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = $this->settings->getSetting( 'useEntitySourceBasedFederation' ) ?
+			$this->wikibaseServices = $this->getDataAccessSettings()->useEntitySourceBasedFederation() ?
 				$this->newEntitySourceWikibaseServices() :
 				$this->newMultipleRepositoryAwareWikibaseServices();
 		}
