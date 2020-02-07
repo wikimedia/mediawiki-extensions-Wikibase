@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use DataValues\DataValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
@@ -57,7 +56,7 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			[
 				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
 				'foo' => [ Item::ENTITY_TYPE ]
@@ -450,24 +449,24 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 		$cases = [
 			//wikibase-item
-			'Expected item, string supplied' => [ 'wikibase-item', 'q8', false ],
-			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( 'q8' ), false ],
-			'Existing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q8' ) ), true ],
-			'Missing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( 'q3' ) ), false ],
-			'Not an item' => [ 'wikibase-item', new EntityIdValue( new PropertyId( 'p8' ) ), false ],
+			'Expected item, string supplied' => [ 'wikibase-item', self::EXISTING_ITEM_ID, false ],
+			'Expected item, StringValue supplied' => [ 'wikibase-item', new StringValue( self::EXISTING_ITEM_ID ), false ],
+			'Existing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), true ],
+			'Missing item' => [ 'wikibase-item', new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ), false ],
+			'Not an item' => [ 'wikibase-item', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), false ],
 
 			// wikibase-property
-			'Existing entity' => [ 'wikibase-property', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
-			'Not a property' => [ 'wikibase-property', new EntityIdValue( new ItemId( 'q8' ) ), false ],
+			'Existing property' => [ 'wikibase-property', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
+			'Missing property' => [ 'wikibase-property', new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ), false ],
+			'Not a property' => [ 'wikibase-property', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), false ],
+			'Expected property, string supplied' => [ 'wikibase-item', self::EXISTING_PROPERTY_ID, false ],
 
 			// generic wikibase entity
-			'Existing property' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'p8' ) ), true ],
-			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q8' ) ), true ],
-			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'q3' ) ), false ],
-			'Unknown repository' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'bar:Q123' ) ), false ],
-			'Foreign entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( 'foo:Q123' ) ), true ],
-			'Unsupported foreign entity type' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( 'foo:P42' ) ), false ],
-			'Expected EntityId, StringValue supplied' => [ 'wikibase-entity', new StringValue( 'q8' ), false ],
+			'Existing property entity' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
+			'Missing property entity' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ), false ],
+			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), true ],
+			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ), false ],
+			'Expected EntityId, StringValue supplied' => [ 'wikibase-entity', new StringValue( self::EXISTING_ITEM_ID ), false ],
 
 			//commonsMedia
 			'Commons expects StringValue, got string' => [ 'commonsMedia', 'Foo.jpg', false ],
@@ -548,90 +547,53 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function testBuildItemValidators_entitySourceBasedFederation() {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+	/**
+	 * @dataProvider provideDataTypeValidation
+	 */
+	public function testDataTypeValidation_repositoryPrefixBasedFederation( string $typeId, $value, bool $expected ) {
+		$builders = $this->newValidatorBuildersForForeignRepositoryFederation();
 
-		$validators = $builders->buildItemValidators();
+		$validatorMap = [
+			'commonsMedia'      => [ $builders, 'buildMediaValidators' ],
+			'geo-shape'         => [ $builders, 'buildGeoShapeValidators' ],
+			'globe-coordinate'  => [ $builders, 'buildCoordinateValidators' ],
+			'monolingualtext'   => [ $builders, 'buildMonolingualTextValidators' ],
+			'quantity'          => [ $builders, 'buildQuantityValidators' ],
+			'string'            => [ $builders, 'buildStringValidators' ],
+			'tabular-data'      => [ $builders, 'buildTabularDataValidators' ],
+			'time'              => [ $builders, 'buildTimeValidators' ],
+			'url'               => [ $builders, 'buildUrlValidators' ],
+			'wikibase-entity'   => [ $builders, 'buildEntityValidators' ],
+			'wikibase-item'     => [ $builders, 'buildItemValidators' ],
+			'wikibase-property' => [ $builders, 'buildPropertyValidators' ],
+		];
 
-		$this->assertValidation( true, $validators, new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) );
+		$validators = call_user_func( $validatorMap[$typeId] );
+
+		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function provideInvalidValueForItemValidators() {
-		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
-		yield 'not an item ID' => [ new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) ];
-		yield 'not existing item ID' => [ new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ) ];
+	public function provideForeignEntityIdValues() {
+		yield 'Unknown repository' => [ new EntityIdValue( new ItemId( 'bar:Q123' ) ), false ];
+		yield 'Foreign entity' => [ new EntityIdValue( new ItemId( 'foo:Q123' ) ), true ];
+		yield 'Unsupported foreign entity type' => [ new EntityIdValue( new PropertyId( 'foo:P42' ) ), false ];
 	}
 
 	/**
-	 * @dataProvider provideInvalidValueForItemValidators
+	 * @dataProvider provideForeignEntityIdValues
 	 */
-	public function testBuildItemValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
+	public function testForeignEntityIdValueValidation_repositoryPrefixFederation(
+		EntityIdValue $value,
+		bool $expected
+	) {
+		$validatorBuilders = $this->newValidatorBuildersForForeignRepositoryFederation();
 
-		$validators = $builders->buildItemValidators();
+		$validators = $validatorBuilders->buildEntityValidators();
 
-		$this->assertValidation( false, $validators, $value );
+		$this->assertValidation( $expected, $validators, $value );
 	}
 
-	public function testBuildPropertyValidators_entitySourceBasedFederation() {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
-
-		$validators = $builders->buildPropertyValidators();
-
-		$this->assertValidation( true, $validators, new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) );
-	}
-
-	public function provideInvalidValueForPropertyValidators() {
-		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
-		yield 'not a property ID' => [ new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) ];
-		yield 'not existing property ID' => [ new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ) ];
-	}
-
-	/**
-	 * @dataProvider provideInvalidValueForPropertyValidators
-	 */
-	public function testBuildPropertyValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
-
-		$validators = $builders->buildPropertyValidators();
-
-		$this->assertValidation( false, $validators, $value );
-	}
-
-	public function provideValidValuesForEntityValidators() {
-		yield 'existing item ID' => [ new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ) ];
-		yield 'existing property ID' => [ new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ) ];
-	}
-
-	/**
-	 * @dataProvider provideValidValuesForEntityValidators
-	 */
-	public function testBuildEntityValidators_entitySourceBasedFederation( DataValue $value ) {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
-
-		$validators = $builders->buildEntityValidators();
-
-		$this->assertValidation( true, $validators, $value );
-	}
-
-	public function provideInvalidValueForEntityValidators() {
-		yield 'not an EntityIdValue' => [ new StringValue( 'FOOBAR' ) ];
-		yield 'not existing item ID' => [ new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ) ];
-		yield 'not existing property ID' => [ new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ) ];
-	}
-
-	/**
-	 * @dataProvider provideInvalidValueForEntityValidators
-	 */
-	public function testBuildEntityValidators_invalidValues_entitySourceBasedFederation( DataValue $value ) {
-		$builders = $this->newValidatorBuildersForEntitySourceBasedFederation();
-
-		$validators = $builders->buildEntityValidators();
-
-		$this->assertValidation( false, $validators, $value );
-	}
-
-	private function newValidatorBuildersForEntitySourceBasedFederation() {
+	private function newValidatorBuildersForForeignRepositoryFederation() {
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
 			new ItemIdParser(),
@@ -639,8 +601,11 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			[],
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			[
+				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
+				'foo' => [ Item::ENTITY_TYPE ]
+			],
 			$this->getMediaWikiPageNameNormalizer(),
 			self::GEO_SHAPE_STORAGE_API_URL,
 			self::TABULAR_DATA_STORAGE_API_URL
