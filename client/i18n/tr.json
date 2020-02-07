@@ -154,5 +154,7 @@
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "$1 değerinin düzenlenmesi şu anda desteklenmiyor",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1, {{WBREPONAME}} üzerindeki $2 veri türünden. Bu veri türünün düzenlenmesi şu anda desteklenmemektedir.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "$1 değerinin düzenlenmesi şu anda desteklenmiyor",
-	"wikibase-client-data-bridge-deprecated-statement-error-body": "{{WBREPONAME}} üzerinde $1 değeri <em>kullanımdan kaldırıldı</em>. <em>Kullanımdan kaldırıldı</em> değerlerinin düzenlenmesi şu anda desteklenmemektedir."
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "{{WBREPONAME}} üzerinde $1 değeri <em>kullanımdan kaldırıldı</em>. <em>Kullanımdan kaldırıldı</em> değerlerinin düzenlenmesi şu anda desteklenmemektedir.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Birden çok değeri düzenlemek şu anda desteklenmiyor",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Şu anda birden fazla değer içerdiği için $1 düzenlenemiyor."
 }

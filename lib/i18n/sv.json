@@ -166,8 +166,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Skapade ett nytt objekt",
 	"wikibase-item-summary-wbeditentity-create-item": "Skapade ett nytt objekt",
 	"wikibase-item-summary-wbeditentity-update": "Ändrade ett objekt",
-	"wikibase-item-summary-wbeditentity-update-languages": "Ändrade etikett, beskrivning och/eller alias på $3 {{PLURAL:$3|språk}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Ändrade etikett, beskrivning och/eller alias på $3 {{PLURAL:$3|språk}} samt andra delar",
 	"wikibase-item-summary-wbeditentity-override": "Rensade ett objekt",
 	"wikibase-item-summary-wblinktitles-create": "Skapade detta objekt för att ansluta sidorna",
 	"wikibase-item-summary-wblinktitles-connect": "Lade till en språklänk för att ansluta sidorna",
@@ -175,8 +173,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Skapade en ny egenskap",
 	"wikibase-property-summary-wbeditentity-create-property": "Skapade en ny egenskap",
 	"wikibase-property-summary-wbeditentity-update": "Ändrade en egenskap",
-	"wikibase-property-summary-wbeditentity-update-languages": "Ändrade etikett, beskrivning och/eller alias på $3 {{PLURAL:$3|språk}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Ändrade etikett, beskrivning och/eller alias på $3 {{PLURAL:$3|språk}} samt andra delar",
 	"wikibase-property-summary-wbeditentity-override": "Rensade en egenskap",
 	"wikibase-property-summary-special-create-property": "Skapade en egenskap för [$2] med {{PLURAL:$1|värde|värden}}"
 }

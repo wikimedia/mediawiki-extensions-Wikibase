@@ -171,10 +171,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Creó un elementu nuevu",
 	"wikibase-item-summary-wbeditentity-create-item": "Creó un elementu nuevu",
 	"wikibase-item-summary-wbeditentity-update": "Cambió un elementu",
-	"wikibase-item-summary-wbeditentity-update-languages": "Cambióse la etiqueta, descripción y/o alcuños en $3 {{PLURAL:$3|llingua|llingües}}",
-	"wikibase-item-summary-wbeditentity-update-languages-short": "Cambióse la etiqueta, descripción y/o alcuños en {{#commaseparatedlist: $3}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Cambióse la etiqueta, descripción y/o alcuños en $3 {{PLURAL:$3|llingua|llingües}}, y n'otros llugares",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Cambióse la etiqueta, descripción y/o alcuños en {{#commaseparatedlist: $3}}, y n'otros llugares",
 	"wikibase-item-summary-wbeditentity-override": "Sobreescribió un elementu",
 	"wikibase-item-summary-wblinktitles-create": "Creáu esti elementu pa coneutar les páxines",
 	"wikibase-item-summary-wblinktitles-connect": "Amestáu un enllaz d'idioma pa coneutar les páxines",
@@ -182,10 +178,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Creada una propiedá nueva",
 	"wikibase-property-summary-wbeditentity-create-property": "Creó una propiedá nueva",
 	"wikibase-property-summary-wbeditentity-update": "Cambió una propiedá",
-	"wikibase-property-summary-wbeditentity-update-languages": "Cambióse la etiqueta, descripción y/o alcuños en $3 {{PLURAL:$3|llingua|llingües}}",
-	"wikibase-property-summary-wbeditentity-update-languages-short": "Cambióse la etiqueta, descripción y/o alcuños en {{#commaseparatedlist: $3}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Cambióse la etiqueta, descripción y/o alcuños en $3 {{PLURAL:$3|llingua|llingües}}, y n'otros llugares",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "Cambióse la etiqueta, descripción y/o alcuños en {{#commaseparatedlist: $3}}, y n'otros llugares",
 	"wikibase-property-summary-wbeditentity-override": "Llimpiada una propiedá",
 	"wikibase-property-summary-special-create-property": "Creada una propiedá con {{PLURAL:$1|un valor|valores}} en [$2]"
 }

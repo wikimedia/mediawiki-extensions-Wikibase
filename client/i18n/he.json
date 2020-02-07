@@ -144,5 +144,8 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "לערוף את הערך באתר {{WBREPONAME}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "תלוי באיזו תבנית משמשת פה, יכול להיות אפשרי לדרוס את הערך באופן מקומי באמצעות [$1 עריכת דפים]. אם זה בכלל אפשרי, אנחנו ממליצים להוסיף את הערך ל{{GRAMMAR:תחילית{{WBREPONAME}}}} באמצעות הכפתור למעלה.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "עריכת הערך של $1 לא נתמכת עכשיו",
-	"wikibase-client-data-bridge-unsupported-datatype-error-body": "המאפיין $1  הוא מסוג נתונים $2 ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}. עריכה של סוג הנתונים הזה אינה נתמכת עכשיו."
+	"wikibase-client-data-bridge-unsupported-datatype-error-body": "המאפיין $1  הוא מסוג נתונים $2 ב{{GRAMMAR:תחילית|{{WBREPONAME}}}}. עריכה של סוג הנתונים הזה אינה נתמכת עכשיו.",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "עריכת הערך של $1 אינה נתמכת כעת",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "הערך של $1 <em>מוכרז כמיושן</em> (deprecated) באתר {{WBREPONAME}}. עריכת ערכים ש<em>מוכרזים כמיושנים</em> אינה נתמכת כעת.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "עריכת ערכים מרובים אינה נתמכת כעת"
 }

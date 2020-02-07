@@ -141,5 +141,7 @@
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Editar o valor em {{WBREPONAME}}",
 	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Dependendo da predefinição usada, pode ser possível substituir o valor localmente usando [$1 o editor do artigo]. Se possível, recomendamos que você adicione o valor do {{WBREPONAME}} através do botão acima.",
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "A edição do valor de $1 atualmente não é suportada",
-	"wikibase-client-data-bridge-deprecated-statement-error-head": "A edição do valor de $1 atualmente não é suportada"
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "A edição do valor de $1 atualmente não é suportada",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Atualmente, a edição de vários valores não é suportada",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "No momento, $1 não pode ser editado porque contém mais de um valor."
 }

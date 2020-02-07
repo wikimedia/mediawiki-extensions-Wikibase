@@ -172,10 +172,6 @@
 	"wikibase-item-summary-wbeditentity-create": "Ccrejate 'na vôscia nove",
 	"wikibase-item-summary-wbeditentity-create-item": "Ccrejate 'na vôscia nove",
 	"wikibase-item-summary-wbeditentity-update": "Cangiate 'n'elemende",
-	"wikibase-item-summary-wbeditentity-update-languages": "Cangiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}",
-	"wikibase-item-summary-wbeditentity-update-languages-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other": "Cangiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}, e otre vanne",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}, e otre vanne",
 	"wikibase-item-summary-wbeditentity-override": "Sdevacate 'na vôsce",
 	"wikibase-item-summary-wblinktitles-create": "Ccrejate sta vôsce pe collegà le pàggene",
 	"wikibase-item-summary-wblinktitles-connect": "Aggiunde 'nu collegamende a 'na lènghe pe collegà le pàggene",
@@ -183,10 +179,6 @@
 	"wikibase-property-summary-wbeditentity-create": "Ccrejate 'na probbietà nove",
 	"wikibase-property-summary-wbeditentity-create-property": "Ccrejate 'na probbietà nove",
 	"wikibase-property-summary-wbeditentity-update": "Cangiate 'na probbietà",
-	"wikibase-property-summary-wbeditentity-update-languages": "Cnagiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}",
-	"wikibase-property-summary-wbeditentity-update-languages-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other": "Cnagiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}, e otre vanne",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}, e otre vanne",
 	"wikibase-property-summary-wbeditentity-override": "Sdevacate 'na probbietà",
 	"wikibase-property-summary-special-create-property": "Ccrejate 'na probbietà [$2] cu {{PLURAL:$1|'nu valore|valore}}"
 }

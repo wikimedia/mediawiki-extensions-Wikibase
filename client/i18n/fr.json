@@ -30,7 +30,8 @@
 			"Shirayuki",
 			"Pamputt",
 			"Symsym",
-			"Derugon"
+			"Derugon",
+			"Choodyam"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -166,5 +167,11 @@
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "La modification de la valeur de $1 n’est actuellement pas supportée",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 est du type de données $2 sur {{WBREPONAME}}. La modification de ce type de données n’est actuellement pas supportée.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "La modification de la valeur pour $1 n’est actuellement pas supportée",
-	"wikibase-client-data-bridge-deprecated-statement-error-body": "La valeur pour $1 est <em>obsolète</em> sur {{WBREPONAME}}. Modifier des valeurs <em>obsolètes</em> n’est actuellement pas supporté."
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "La valeur pour $1 est <em>obsolète</em> sur {{WBREPONAME}}. Modifier des valeurs <em>obsolètes</em> n’est actuellement pas supporté.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "La modification de plusieurs valeurs n’est actuellement pas supportée",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Pour le moment, $1 ne peut pas être modifié parce qu’il contient plus d’une valeur.",
+	"wikibase-client-data-bridge-somevalue-error-head": "La modification de la valeur associée à $1 n'est présentement pas gérée",
+	"wikibase-client-data-bridge-somevalue-error-body": "$1 est marqué(e) comme ayant une <i>valeur inconnue</i> sur {{WBREPONAME}}. Il est présentement impossible de modifier des valeurs marquées comme ayant une <i>valeur inconnue</i>.",
+	"wikibase-client-data-bridge-novalue-error-head": "La modification de la valeur associée à $1 n'est présentement pas gérée",
+	"wikibase-client-data-bridge-novalue-error-body": "$1 est marqué(e) comme n'ayant <i>aucune valeur</i> sur {{WBREPONAME}}. Il est présentement impossible de modifier des valeurs marquées comme n'ayant <i>aucune valeur</i>."
 }

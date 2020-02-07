@@ -47,8 +47,5 @@
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Тасдиқ|Тасдиқҳо}} эҷод {{PLURAL:$3|шуд|шуданд}}",
 	"wikibase-entity-summary-wbmergeitems-to": "Элементи муттаҳидшуда дар $3",
 	"wikibase-item-summary-wbeditentity-create": "Элементи нав сохта шуд",
-	"wikibase-item-summary-wbeditentity-update": "Элемент тағйир дода шуд",
-	"wikibase-item-summary-wbeditentity-update-languages-and-other-short": "Унвон (ном), тавзеҳот ва номҳои иловагии {{#commaseparatedlist: $3}}, боз дигар қисматҳо тағйир дода шуданд.",
-	"wikibase-property-summary-wbeditentity-update-languages-short": "Унвон (ном), тавзеҳот ва номҳои иловагии {{#commaseparatedlist: $3}} тағйир дода шуд.",
-	"wikibase-property-summary-wbeditentity-update-languages-and-other-short": "Унвон (ном), тавзеҳот ва номҳои иловагии {{#commaseparatedlist: $3}}, ва дигар қисматҳо тағйир дода шуданд."
+	"wikibase-item-summary-wbeditentity-update": "Элемент тағйир дода шуд"
 }
