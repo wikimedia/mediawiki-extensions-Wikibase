@@ -232,6 +232,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 		}
 
 		$this->assertCanHandlePropertyId( $propertyId );
+		$this->assertCanWritePropertyInfo();
 
 		$type = $info[ PropertyInfoLookup::KEY_DATA_TYPE ];
 		$json = json_encode( $info );
@@ -263,6 +264,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
 		$this->assertCanHandlePropertyId( $propertyId );
+		$this->assertCanWritePropertyInfo();
 
 		$dbw = $this->getConnection( DB_MASTER );
 
@@ -301,6 +303,16 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 			'$propertyId',
 			"The property id's repository name ($repository) must match the PropertyInfoTable's ($this->repositoryName)"
 		);
+	}
+
+	private function assertCanWritePropertyInfo() : void {
+		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
+			if ( $this->entitySource->getDatabaseName() !== false ) {
+				throw new InvalidArgumentException(
+					'This implementation cannot be used to write data to non-local database'
+				);
+			}
+		}
 	}
 
 	/**
