@@ -5,19 +5,14 @@
 			type="notice"
 			:inline="true"
 		>
-			<p class="wb-db-unsupported-datatype__head">
-				{{ $messages.get(
-					$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD,
-					targetProperty,
-				) }}
-			</p>
-			<p class="wb-db-unsupported-datatype__body">
-				{{ $messages.get(
-					$messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_BODY,
-					targetProperty,
-					dataType
-				) }}
-			</p>
+			<p
+				class="wb-db-unsupported-datatype__head"
+				v-html="$messages.get( $messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_HEAD, propertyLabel )"
+			/>
+			<p
+				class="wb-db-unsupported-datatype__body"
+				v-html="$messages.get( $messages.KEYS.UNSUPPORTED_DATATYPE_ERROR_BODY, propertyLabel, dataType )"
+			/>
 		</IconMessageBox>
 		<BailoutActions
 			class="wb-db-unsupported-datatype__bailout"
@@ -34,6 +29,7 @@ import StateMixin from '@/presentation/StateMixin';
 import DataType from '@/datamodel/DataType';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
+import TermLabel from '@/presentation/components/TermLabel.vue';
 
 /**
  * A component used to illustrate a datatype error which happened when
@@ -46,8 +42,12 @@ import BailoutActions from '@/presentation/components/BailoutActions.vue';
 	},
 } )
 export default class ErrorUnsupportedDatatype extends mixins( StateMixin ) {
-	public get targetProperty(): string {
-		return this.rootModule.state.targetProperty;
+	public get propertyLabel(): HTMLElement {
+		return new TermLabel( {
+			propsData: {
+				term: this.rootModule.getters.targetLabel,
+			},
+		} ).$mount().$el as HTMLElement;
 	}
 
 	public get pageTitle(): string {

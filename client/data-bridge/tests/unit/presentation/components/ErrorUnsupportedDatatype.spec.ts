@@ -4,6 +4,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
 import Vuex from 'vuex';
+import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
@@ -55,7 +56,13 @@ describe( 'ErrorUnsupportedDatatype', () => {
 			store,
 		} );
 
-		expect( messageGet ).toHaveBeenNthCalledWith( 1, MessageKeys.UNSUPPORTED_DATATYPE_ERROR_HEAD, targetProperty );
+		calledWithHTMLElement( messageGet, 0, 1 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			1,
+			MessageKeys.UNSUPPORTED_DATATYPE_ERROR_HEAD,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+		);
 	} );
 
 	it( 'shows the message body', () => {
@@ -73,10 +80,12 @@ describe( 'ErrorUnsupportedDatatype', () => {
 			store,
 		} );
 
+		calledWithHTMLElement( messageGet, 1, 1 );
+
 		expect( messageGet ).toHaveBeenNthCalledWith(
 			2,
 			MessageKeys.UNSUPPORTED_DATATYPE_ERROR_BODY,
-			targetProperty,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
 			dataType,
 		);
 	} );

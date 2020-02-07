@@ -5,6 +5,7 @@ import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import MessageKeys from '@/definitions/MessageKeys';
 import Vuex from 'vuex';
+import { calledWithHTMLElement } from '../../../util/assertions';
 import { createTestStore } from '../../../util/store';
 
 const localVue = createLocalVue();
@@ -58,7 +59,13 @@ describe( 'ErrorUnsupportedSnakType', () => {
 			store,
 		} );
 
-		expect( messageGet ).toHaveBeenNthCalledWith( 1, messageKey, targetProperty );
+		calledWithHTMLElement( messageGet, 0, 1 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			1,
+			messageKey,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+		);
 	} );
 
 	it.each( [
@@ -79,7 +86,13 @@ describe( 'ErrorUnsupportedSnakType', () => {
 			store,
 		} );
 
-		expect( messageGet ).toHaveBeenNthCalledWith( 2, messageKey, targetProperty );
+		calledWithHTMLElement( messageGet, 1, 1 );
+
+		expect( messageGet ).toHaveBeenNthCalledWith(
+			2,
+			messageKey,
+			`<span class="wb-db-TermLabel" lang="zxx" dir="auto">${targetProperty}</span>`,
+		);
 	} );
 
 	it( 'uses BailoutActions to provide a bail out path for unsupported snak type', () => {

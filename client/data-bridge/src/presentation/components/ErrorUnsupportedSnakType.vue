@@ -5,15 +5,13 @@
 			type="notice"
 			:inline="true"
 		>
-			<p class="wb-db-unsupported-snaktype__head">
-				{{ $messages.get(
-					messageHeaderKey,
-					targetProperty,
-				) }}
-			</p>
+			<p
+				class="wb-db-unsupported-snaktype__head"
+				v-html="$messages.get( messageHeaderKey, propertyLabel )"
+			/>
 			<p
 				class="wb-db-unsupported-snaktype__body"
-				v-html="$messages.get( messageBodyKey, targetProperty )"
+				v-html="$messages.get( messageBodyKey, propertyLabel )"
 			/>
 		</IconMessageBox>
 		<BailoutActions
@@ -31,6 +29,7 @@ import StateMixin from '@/presentation/StateMixin';
 import { SnakType } from '@/datamodel/Snak';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
+import TermLabel from '@/presentation/components/TermLabel.vue';
 
 /**
  * A component used to illustrate an error which happened when the user tried
@@ -43,8 +42,12 @@ import BailoutActions from '@/presentation/components/BailoutActions.vue';
 	},
 } )
 export default class ErrorUnsupportedSnakType extends mixins( StateMixin ) {
-	public get targetProperty(): string {
-		return this.rootModule.state.targetProperty;
+	public get propertyLabel(): HTMLElement {
+		return new TermLabel( {
+			propsData: {
+				term: this.rootModule.getters.targetLabel,
+			},
+		} ).$mount().$el as HTMLElement;
 	}
 
 	public get pageTitle(): string {
