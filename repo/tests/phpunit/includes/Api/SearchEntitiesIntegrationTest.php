@@ -7,6 +7,7 @@ use FauxRequest;
 use MediaWikiTestCase;
 use RequestContext;
 use Title;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -148,8 +149,21 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'test',
+					'testdb',
+					[
+						'item' => [ 'namespaceId' => 123, 'slot' => 'main' ],
+						'property' => [ 'namespaceId' => 321, 'slot' => 'main' ],
+					],
+					'conceptBaseUri:',
+					'',
+					'',
+					''
+				)
+			], new EntityTypeDefinitions( [] ) ),
+			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 
 		$apiModule->execute();

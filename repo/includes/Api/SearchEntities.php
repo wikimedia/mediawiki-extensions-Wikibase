@@ -49,7 +49,7 @@ class SearchEntities extends ApiBase {
 	/**
 	 * @var string[]
 	 */
-	private $conceptBaseUris;
+	private $legacyConceptBaseUris;
 
 	/**
 	 * @var EntitySourceDefinitions
@@ -72,7 +72,7 @@ class SearchEntities extends ApiBase {
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param string[] $entityTypes
-	 * @param string[] $conceptBaseUris Associative array mapping repository names to base URIs of concept URIs
+	 * @param string[] $legacyConceptBaseUris Associative array mapping repository names to base URIs of concept URIs
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param DataAccessSettings $dataAccessSettings
 	 * @see ApiBase::__construct
@@ -85,7 +85,7 @@ class SearchEntities extends ApiBase {
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ContentLanguages $termLanguages,
 		array $entityTypes,
-		array $conceptBaseUris,
+		array $legacyConceptBaseUris,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		DataAccessSettings $dataAccessSettings
 	) {
@@ -96,7 +96,7 @@ class SearchEntities extends ApiBase {
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->termsLanguages = $termLanguages;
 		$this->entityTypes = $entityTypes;
-		$this->conceptBaseUris = $conceptBaseUris;
+		$this->legacyConceptBaseUris = $legacyConceptBaseUris;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->dataAccessSettings = $dataAccessSettings;
 	}
@@ -225,22 +225,22 @@ class SearchEntities extends ApiBase {
 	private function getConceptBaseUri( EntityId $entityId ) {
 		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
 			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
-			if ( !isset( $this->conceptBaseUris[$source->getSourceName()] ) ) {
+			if ( $source === null ) {
 				throw new LogicException(
-					'No base URI for for concept URI for source: ' . $source->getSourceName()
+					'No source defined for entity of type: ' . $entityId->getEntityType()
 				);
 			}
 
-			return $this->conceptBaseUris[$source->getSourceName()];
+			return $source->getConceptBaseUri();
 		}
 
-		if ( !isset( $this->conceptBaseUris[$entityId->getRepositoryName()] ) ) {
+		if ( !isset( $this->legacyConceptBaseUris[$entityId->getRepositoryName()] ) ) {
 			throw new LogicException(
 				'No base URI for for concept URI for repository: ' . $entityId->getRepositoryName()
 			);
 		}
 
-		return $this->conceptBaseUris[$entityId->getRepositoryName()];
+		return $this->legacyConceptBaseUris[$entityId->getRepositoryName()];
 	}
 
 	/**
