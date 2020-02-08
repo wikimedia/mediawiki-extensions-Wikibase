@@ -14,9 +14,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
@@ -71,13 +71,12 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
 			$loadBalancer,
+			( new MockJobQueueFactory( $this ) )->getMockJobQueue(),
 			new DatabaseTermInLangIdsAcquirer(
 				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
 				$typeIdsStore
 			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
+			$termIdsStore,
 			new StringNormalizer(),
 			$this->getPropertySource()
 		);

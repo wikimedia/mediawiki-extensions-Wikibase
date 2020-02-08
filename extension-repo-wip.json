@@ -11,6 +11,7 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"JobClasses": {
+		"CleanTermsIfUnused": "Wikibase\\Lib\\Store\\Sql\\Terms\\CleanTermsIfUnusedJob::getJobSpecification",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
 	},

@@ -6,7 +6,6 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * Cleans up the normalized term store after some terms are no longer needed.
@@ -16,25 +15,20 @@ use Wikimedia\Rdbms\ILoadBalancer;
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabaseTermStoreCleaner implements TermStoreCleaner {
+class DatabaseInnerTermStoreCleaner {
 
-	private $lb;
-
-	/** @var IDatabase a connection to DB_REPLICA */
+	/** @var IDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds*/
 	private $dbr = null;
 
-	/** @var IDatabase a connection to DB_MASTER */
+	/** @var IDatabase a connection to DB_MASTER. Note only set on cleanTermInLangIds */
 	private $dbw = null;
 
 	/** @var LoggerInterface */
 	private $logger;
 
 	public function __construct(
-		ILoadBalancer $lb,
 		LoggerInterface $logger = null
 	) {
-		$this->lb = $lb;
-		// $this->dbr and $this->dbw are lazily initialized in cleanTerms()
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -48,18 +42,17 @@ class DatabaseTermStoreCleaner implements TermStoreCleaner {
 	 * On the other hand, this class takes care that wbt_text_in_lang and text rows
 	 * used by other wbt_term_in_lang rows are not removed.
 	 *
+	 * @param IDatabase $dbw
+	 * @param IDatabase $dbr
 	 * @param int[] $termInLangIds (wbtl_id)
 	 */
-	public function cleanTermInLangIds( array $termInLangIds ) {
+	public function cleanTermInLangIds( IDatabase $dbw, IDatabase $dbr, array $termInLangIds ) {
 		if ( $termInLangIds === [] ) {
 			return;
 		}
 
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA );
-			$this->dbw = $this->lb->getConnection( ILoadBalancer::DB_MASTER );
-		}
-
+		$this->dbw = $dbw;
+		$this->dbr = $dbr;
 		$this->cleanTermInLangIdsInner( $termInLangIds );
 	}
 

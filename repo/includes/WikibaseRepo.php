@@ -22,6 +22,7 @@ use HashBagOStuff;
 use Hooks;
 use IContextSource;
 use InvalidArgumentException;
+use JobQueueGroup;
 use Language;
 use LogicException;
 use MWException;
@@ -130,7 +131,7 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -1845,15 +1846,9 @@ class WikibaseRepo {
 
 		return new DatabasePropertyTermStoreWriter(
 			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$loadBalancerFactory,
-				$typeIdsStore,
-				$this->getLogger()
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer,
-				$this->getLogger()
-			),
+			JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore, $this->getLogger() ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer, false, $this->getLogger() ),
 			$this->getStringNormalizer(),
 			$this->getPropertySource()
 		);
@@ -1931,15 +1926,9 @@ class WikibaseRepo {
 
 		return new DatabaseItemTermStoreWriter(
 			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$loadBalancerFactory,
-				$typeIdsStore,
-				$this->getLogger()
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer,
-				$this->getLogger()
-			),
+			JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore, $this->getLogger() ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer, false, $this->getLogger() ),
 			$this->getStringNormalizer(),
 			$this->getItemSource()
 		);

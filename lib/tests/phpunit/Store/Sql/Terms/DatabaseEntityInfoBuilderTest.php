@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
@@ -20,7 +21,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
@@ -83,29 +83,15 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$loadBalancerFactory,
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
+		$itemTermStoreWriter = new DatabaseItemTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
 			$this->getItemSource()
 		);
 
-		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$loadBalancerFactory,
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
 			$this->getPropertySource()
 		);
 

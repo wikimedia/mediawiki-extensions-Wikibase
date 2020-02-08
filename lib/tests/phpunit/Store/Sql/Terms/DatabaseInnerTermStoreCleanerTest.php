@@ -3,19 +3,18 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner
  *
  * @group Wikibase
  * @group Database
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
+class DatabaseInnerTermStoreCleanerTest extends MediaWikiTestCase {
 
 	protected function setUp() : void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
@@ -29,10 +28,8 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 	}
 
-	private function getCleaner(): DatabaseTermStoreCleaner {
-		return new DatabaseTermStoreCleaner( new FakeLoadBalancer( [
-			'dbr' => $this->db,
-		] ) );
+	private function getCleaner(): DatabaseInnerTermStoreCleaner {
+		return new DatabaseInnerTermStoreCleaner();
 	}
 
 	public function testCleanupEverything() {
@@ -58,7 +55,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang2Id = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLang1Id, $termInLang2Id ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id, $termInLang2Id ] );
 
 		$this->assertSelect( 'wbt_text', 'wbx_id', '*', [] );
 		$this->assertSelect( 'wbt_text_in_lang', 'wbxl_id', '*', [] );
@@ -98,7 +95,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $type2Id, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang4Id = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLang1Id, $termInLang4Id ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id, $termInLang4Id ] );
 
 		$this->assertSelect(
 			'wbt_text',
@@ -152,7 +149,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang3Id ] );
 		$termInLang3Id = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLang1Id ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $textInLang1Id and $termInLang1Id gone,
 		// but $text1Id still there because referenced by $termInLang3Id
@@ -202,7 +199,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
 		$termInLang2Id = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLang1Id ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $textId1, $textInLang1Id and $termInLang1Id gone
 		$this->assertSelect(
@@ -245,7 +242,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
 		$termInLang1Id = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLang1Id ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $text2Id and $textInLang2Id are not used by any term_in_lang,
 		// but we should not attempt to clean them up
@@ -299,7 +296,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeIdDescription, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
 		$termInLangIdToRemain = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3 ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3 ] );
 
 		$this->assertSelect(
 			'wbt_term_in_lang',
@@ -349,7 +346,7 @@ class DatabaseTermInLangIdsCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToRemain3 ] );
 		$termInLangIdToRemain3 = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( [ $termInLangIdToDelete1, $termInLangIdToDelete2 ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLangIdToDelete1, $termInLangIdToDelete2 ] );
 
 		$this->assertSelect(
 			'wbt_term_in_lang',

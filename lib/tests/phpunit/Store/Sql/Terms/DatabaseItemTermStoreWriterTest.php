@@ -3,7 +3,8 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use JobQueueGroup;
+use MediaWikiIntegrationTestCase;
 use WANObjectCache;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,10 +15,11 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
@@ -29,7 +31,7 @@ use Wikibase\WikibaseSettings;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
+class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	use DatabaseTermStoreWriterTestGetTermsTrait;
 
@@ -44,6 +46,11 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
+
+	private $jobQueueMock;
+
+	/** * @var MockJobQueueFactory */
+	private $mockJobQueueFactory;
 
 	protected function setUp() : void {
 		parent::setUp();
@@ -69,6 +76,9 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			new TermList( [ new Term( 'en', 'description' ) ] )
 		);
 		$this->fingerprintEmpty = new Fingerprint();
+
+		$this->mockJobQueueFactory = new MockJobQueueFactory( $this );
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds();
 	}
 
 	private function getItemTermStoreWriter(
@@ -85,17 +95,10 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$lbFactory,
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
-			$itemSourceOverride ?: $this->getItemSource()
+		return new DatabaseItemTermStoreWriter( $loadBalancer, $this->jobQueueMock,
+			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+			new StringNormalizer(), $itemSourceOverride ?: $this->getItemSource()
 		);
 	}
 
@@ -181,36 +184,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 		$this->assertEquals( $this->fingerprint2, $fingerprint );
 	}
 
-	public function testStoreAndDeleteAndGetTerms() {
-		$store = $this->getItemTermStoreWriter();
-
-		$store->storeTerms(
-			$this->i1,
-			$this->fingerprint1
-		);
-
-		$store->deleteTerms( $this->i1 );
-
-		$fingerprint = $this->getTermsForItem( $this->i1 );
-
-		$this->assertTrue( $fingerprint->isEmpty() );
-	}
-
-	public function testRemovingSharedTermDoesNotGetUndulyDeleted() {
-		$store = $this->getItemTermStoreWriter();
-		$sharedFingerprint = new Fingerprint(
-			new TermList( [ new Term( 'en', 'Cat' ) ] )
-		);
-		$item1 = new ItemId( 'Q1' );
-		$item2 = new ItemId( 'Q2' );
-		$store->storeTerms( $item1, $sharedFingerprint );
-		$store->storeTerms( $item2, $sharedFingerprint );
-
-		$store->storeTerms( $item1, $this->fingerprintEmpty );
-
-		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $sharedFingerprint ) );
-	}
-
 	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms() {
 		$store = $this->getItemTermStoreWriter();
 		$sharedTerm = new Term( 'en', 'Cat' );
@@ -232,44 +205,74 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $item2Fingerprint ) );
 	}
 
-	public function testStoreTermsCleansUpRemovedTerms() {
+	public function testStoreTermsTriggersCleanUpRemovedTermsJobOnlyForThisItem() {
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+		$termInLangId3 = 456738923;
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId1 );
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId2 );
+		$itemidTwo = 2;
+		$this->insertItemTermRow( $itemidTwo, $termInLangId3 );
+
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
 		$store = $this->getItemTermStoreWriter();
 
-		$store->storeTerms(
-			$this->i1,
-			new Fingerprint(
-				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
-			)
-		);
 		$store->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
-
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_text',
-			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
-			[ /* empty */ ]
-		);
 	}
 
-	public function testDeleteTermsCleansUpRemovedTerms() {
+	public function testStoreTermsTriggersCleanUpRemovedTermsJobOnlyForRemovedTerms() {
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
 		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
-			new Fingerprint(
-				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
-			)
+			$this->fingerprint1
 		);
-		$store->deleteTerms( $this->i1 );
 
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_text',
-			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
-			[ /* empty */ ]
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId1 );
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId2 );
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprint1
+		);
+	}
+
+	public function testDeleteTermsTriggersUpRemovedTermsJob() {
+		// check multiple
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+		$termInLangId3 = 456738923;
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId1 );
+		$this->insertItemTermRow( $this->i1->getNumericId(), $termInLangId2 );
+		$itemidTwo = 2;
+		$this->insertItemTermRow( $itemidTwo, $termInLangId3 );
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
+		$store = $this->getItemTermStoreWriter();
+
+		$store->deleteTerms( $this->i1 );
+	}
+
+	public function testDeleteTermsDoesNotTriggerIfNoDeletesHappen() {
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueMockExpectingNoCalls();
+		$store = $this->getItemTermStoreWriter();
+
+		$store->deleteTerms( $this->i1 );
+	}
+
+	public function testStoreTermsDoesNotTriggerIfNonDestructive() {
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueMockExpectingNoCalls();
+		$store = $this->getItemTermStoreWriter();
+
+		$store->storeTerms(
+			$this->i1,
+			$this->fingerprintEmpty
 		);
 	}
 
@@ -296,19 +299,12 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				new FakeLBFactory( [
-					'lb' => $loadBalancer
-				] ),
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
-			$this->getPropertySource()
+		return new DatabaseItemTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( new FakeLBFactory( [
+				'lb' => $loadBalancer
+			] ), $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+			new StringNormalizer(), $this->getPropertySource()
 		);
 	}
 
@@ -343,16 +339,9 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			$loadBalancer,
 			WANObjectCache::newEmpty()
 		);
-		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$lbFactory,
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
 			$this->getPropertySource()
 		);
 
@@ -374,6 +363,10 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 
 	private function getPropertySource() {
 		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
+	}
+
+	private function insertItemTermRow( int $itemid, int $termInLangId ): void {
+		$this->db->insert( 'wbt_item_terms', [ 'wbit_item_id' => $itemid, 'wbit_term_in_lang_id' => $termInLangId ] );
 	}
 
 }

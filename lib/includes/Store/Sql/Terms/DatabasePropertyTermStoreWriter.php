@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
+use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
@@ -29,8 +30,8 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	/** @var TermInLangIdsAcquirer */
 	private $termInLangIdsAcquirer;
 
-	/** @var TermStoreCleaner */
-	private $termInLangIdsCleaner;
+	/** @var TermInLangIdsResolver */
+	private $termInLangIdsResolver;
 
 	/** @var StringNormalizer */
 	private $stringNormalizer;
@@ -38,19 +39,20 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	/** @var IDatabase|null */
 	private $dbw = null;
 
+	/** @var JobQueueGroup */
+	private $jobQueueGroup;
+
 	/** @var EntitySource */
 	private $entitySource;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
-		TermInLangIdsAcquirer $termInLangIdsAcquirer,
-		TermStoreCleaner $termInLangIdsCleaner,
-		StringNormalizer $stringNormalizer,
-		EntitySource $entitySource
+		ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
+		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer, EntitySource $entitySource
 	) {
 		$this->loadBalancer = $loadBalancer;
+		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
-		$this->termInLangIdsCleaner = $termInLangIdsCleaner;
+		$this->termInLangIdsResolver = $termInLangIdsResolver;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entitySource = $entitySource;
 	}
@@ -69,9 +71,18 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
-		if ( $termInLangIdsToClean !== [] ) {
-			$this->cleanTermsIfUnused( $termInLangIdsToClean );
+		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
+	}
+
+	private function submitJobToCleanTermStorageRowsIfUnused( array $termInLangIdsToClean ): void {
+		if ( $termInLangIdsToClean === [] ) {
+			return;
 		}
+		$jobParams = [ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => $termInLangIdsToClean ];
+		$job = CleanTermsIfUnusedJob::getJobSpecificationNoTitle( $jobParams );
+		$this->getDbw()->onTransactionCommitOrIdle( function() use ( $job ) {
+			$this->jobQueueGroup->push( $job );
+		} );
 	}
 
 	/**
@@ -147,9 +158,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
-		if ( $termInLangIdsToClean !== [] ) {
-			$this->cleanTermsIfUnused( $termInLangIdsToClean );
-		}
+		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
 	}
 
 	/**
@@ -189,17 +198,6 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		}
 
 		return array_values( array_unique( $termInLangIdsToCleanUp ) );
-	}
-
-	/**
-	 * Of the given term in lang IDs, delete those that aren’t used by any other items or properties.TermIdsResolver
-	 *
-	 * @param int[] $termInLangIds (wbtl_id)
-	 */
-	private function cleanTermsIfUnused( array $termInLangIds ) {
-		$this->termInLangIdsCleaner->cleanTermInLangIds(
-			$this->findActuallyUnusedTermInLangIds( $termInLangIds, $this->getDbw() )
-		);
 	}
 
 	private function shouldWriteToProperties() : bool {

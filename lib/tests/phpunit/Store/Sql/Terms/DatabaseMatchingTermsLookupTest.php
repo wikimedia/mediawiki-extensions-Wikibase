@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\EntitySource;
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
@@ -253,18 +254,11 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		return new DatabaseItemTermStoreWriter(
-			$this->lbFactory->getMainLB(),
-			new DatabaseTermInLangIdsAcquirer(
-				$this->lbFactory,
-				$typeIdsStore,
-				$logger
-			),
-			new DatabaseTermStoreCleaner(
-				$this->lbFactory->getMainLB(),
-				$logger
-			),
-			new StringNormalizer(),
+		return new DatabaseItemTermStoreWriter( $this->lbFactory->getMainLB(),
+			JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( $this->lbFactory, $typeIdsStore, $logger ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
+				$this->lbFactory->getMainLB(), false, $logger ), new StringNormalizer(),
 			$this->getItemSource()
 		);
 	}

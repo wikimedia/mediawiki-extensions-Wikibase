@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use InvalidArgumentException;
+use JobQueueGroup;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\DataAccess\EntitySource;
@@ -12,10 +13,11 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
+use Wikibase\Lib\Tests\Store\Sql\Terms\Util\MockJobQueueFactory;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
@@ -43,6 +45,10 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 	/** @var Fingerprint */
 	private $fingerprintEmpty;
 
+	private $mockJobQueueFactory;
+
+	private $jobQueueMock;
+
 	protected function setUp() : void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
@@ -65,11 +71,13 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 			new TermList( [ new Term( 'en', 'description' ) ] )
 		);
 		$this->fingerprintEmpty = new Fingerprint();
+		$this->mockJobQueueFactory = new MockJobQueueFactory( $this );
+		$this->jobQueueMock = $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds();
 	}
 
 	private function getPropertyTermStoreWriter(
 		?EntitySource $propertySourceOverride = null
-	) : DatabasePropertyTermStoreWriter {
+	) {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -80,17 +88,10 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 			$loadBalancer,
 			WANObjectCache::newEmpty()
 		);
-		return new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				$lbFactory,
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
-			$propertySourceOverride ?: $this->getPropertySource()
+		return new DatabasePropertyTermStoreWriter( $loadBalancer, $this->jobQueueMock,
+			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+			new StringNormalizer(), $propertySourceOverride ?: $this->getPropertySource()
 		);
 	}
 
@@ -191,44 +192,99 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
-	public function testStoreTermsCleansUpRemovedTerms() {
+	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms() {
+		$store = $this->getPropertyTermStoreWriter();
+		$sharedTerm = new Term( 'en', 'Cat' );
+		$propertyFingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Dog' ) ] )
+		);
+		$property2Fingerprint = new Fingerprint(
+			new TermList( [ $sharedTerm ] ),
+			new TermList( [ new Term( 'en', 'Goat' ) ] )
+		);
+		$property1 = new PropertyId( 'P1' );
+		$property2 = new PropertyId( 'P2' );
+		$store->storeTerms( $property1, $propertyFingerprint );
+		$store->storeTerms( $property2, $property2Fingerprint );
+
+		$store->storeTerms( $property1, $this->fingerprintEmpty );
+
+		$this->assertTrue( $this->getTermsForProperty( $property2 )->equals( $property2Fingerprint ) );
+	}
+
+	public function testStoreTermsTriggersCleanUpRemovedTermsJobOnlyForThisItem() {
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+		$termInLangId3 = 456738923;
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId1 );
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId2 );
+		$itemidTwo = 2;
+		$this->insertPropertyTermRow( $itemidTwo, $termInLangId3 );
+
+		$this->jobQueueMock = $this->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
 		$store = $this->getPropertyTermStoreWriter();
 
-		$store->storeTerms(
-			$this->p1,
-			new Fingerprint(
-				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
-			)
-		);
 		$store->storeTerms(
 			$this->p1,
 			$this->fingerprintEmpty
 		);
-
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_text',
-			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
-			[ /* empty */ ]
-		);
 	}
 
-	public function testDeleteTermsCleansUpRemovedTerms() {
+	private function insertPropertyTermRow( int $itemid, int $termInLangId ): void {
+		$this->db->insert( 'wbt_property_terms', [ 'wbpt_property_id' => $itemid, 'wbpt_term_in_lang_id' => $termInLangId ] );
+	}
+
+	public function testStoreTermsTriggersCleanUpRemovedTermsJobOnlyForRemovedTerms() {
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+
+		$this->jobQueueMock = $this->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
 		$store = $this->getPropertyTermStoreWriter();
 
 		$store->storeTerms(
 			$this->p1,
-			new Fingerprint(
-				new TermList( [ new Term( 'en', 'The real name of UserName is John Doe' ) ] )
-			)
+			$this->fingerprint1
 		);
-		$store->deleteTerms( $this->p1 );
 
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_text',
-			[ 'wbx_text' => 'The real name of UserName is John Doe' ],
-			[ /* empty */ ]
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId1 );
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId2 );
+
+		$store->storeTerms(
+			$this->p1,
+			$this->fingerprint1
+		);
+	}
+
+	public function testDeleteTermsTriggersUpRemovedTermsJob() {
+		// check multiple
+		$termInLangId1 = 456738929;
+		$termInLangId2 = 456738925;
+		$termInLangId3 = 456738923;
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId1 );
+		$this->insertPropertyTermRow( $this->p1->getNumericId(), $termInLangId2 );
+		$propertyidTwo = 2;
+		$this->insertPropertyTermRow( $propertyidTwo, $termInLangId3 );
+		$this->jobQueueMock = $this->getJobQueueGroupMockExpectingTermInLangsIds( [ $termInLangId1, $termInLangId2 ] );
+		$store = $this->getPropertyTermStoreWriter();
+
+		$store->deleteTerms( $this->p1 );
+	}
+
+	public function testDeleteTermsDoesNotTriggerIfNoDeletesHappen() {
+		$this->jobQueueMock = $this->getJobQueueMockExpectingNoCalls();
+		$store = $this->getPropertyTermStoreWriter();
+
+		$store->deleteTerms( $this->p1 );
+	}
+
+	public function testStoreTermsDoesNotTriggerIfNonDestructive() {
+		$this->jobQueueMock = $this->getJobQueueMockExpectingNoCalls();
+		$store = $this->getPropertyTermStoreWriter();
+
+		$store->storeTerms(
+			$this->p1,
+			$this->fingerprintEmpty
 		);
 	}
 
@@ -256,19 +312,13 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
-			new DatabaseTermInLangIdsAcquirer(
-				new FakeLBFactory( [
-					'lb' => $loadBalancer
-				] ),
-				$typeIdsStore
-			),
-			new DatabaseTermStoreCleaner(
-				$loadBalancer
-			),
-			new StringNormalizer(),
-			new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
+		return new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
+			new DatabaseTermInLangIdsAcquirer( new FakeLBFactory( [
+				'lb' => $loadBalancer
+			] ), $typeIdsStore ),
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
+			new StringNormalizer(), new EntitySource( 'test', false,
+				[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
 		);
 	}
 
@@ -288,6 +338,14 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 		$fingerprint = $this->getTermsForProperty( $this->p1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	private function getJobQueueGroupMockExpectingTermInLangsIds( array $termInLangIds ) {
+		return $this->mockJobQueueFactory->getJobQueueGroupMockExpectingTermInLangsIds( $termInLangIds );
+	}
+
+	private function getJobQueueMockExpectingNoCalls() {
+		return $this->mockJobQueueFactory->getJobQueueMockExpectingNoCalls();
 	}
 
 }
