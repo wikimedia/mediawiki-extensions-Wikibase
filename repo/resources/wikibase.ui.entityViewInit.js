@@ -61,7 +61,7 @@
 			repoConfig = mw.config.get( 'wbRepo' ),
 			repoApiUrl = repoConfig.url + repoConfig.scriptPath + '/api.php',
 			mwApi = wb.api.getLocationAgnosticMwApi( repoApiUrl ),
-			repoApi = new wb.api.RepoApi( mwApi ),
+			repoApi = new wb.api.RepoApi( mwApi, mw.config.get( 'wgUserLanguage' ) ),
 			userLanguages = wb.getUserLanguages(),
 			entityStore = buildEntityStore( repoApi, userLanguages[ 0 ] ),
 			contentLanguages = new wikibase.WikibaseContentLanguages(),
