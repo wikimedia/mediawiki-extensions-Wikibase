@@ -53,7 +53,7 @@
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "stránka",
 	"wikibase-alias-edit-placeholder": "zadaj alias",
-	"wikibase-label-input-help-message": "Zadajte názov tejto položky v jazyku $1.",
+	"wikibase-label-input-help-message": "Zadajte štítok tejto entity v jazyku $1.",
 	"wikibase-statementsection-statements": "Výroky",
 	"wikibase-sitelinks": "Odkazy na stránky",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|položka|položky|položiek}}",

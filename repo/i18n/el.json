@@ -236,5 +236,8 @@
 	"right-item-redirect": "Δημιουργία ανακατευθύνσεων αντικειμένων",
 	"right-property-term": "Αλλαγή όρων ιδιοτήτων (ετικέτες, περιγραφές, ψευδώνυμα)",
 	"action-property-create": "δημιουργία ιδιοτήτων",
-	"right-property-create": "Δημιουργία ιδιοτήτων"
+	"right-property-create": "Δημιουργία ιδιοτήτων",
+	"wikibase-tainted-ref-popper-text": "Η τιμή αυτής της δήλωσης έχει αλλάξει, αλλά η παραπομπή παρέμεινε η ίδια. Μπορείτε να αφαιρέσετε αυτήν την προειδοποίηση σε περίπτωση που η παραπομπή εξακολουθεί να είναι σωστή.",
+	"wikibase-tainted-ref-popper-title": "Πιθανή αναντιστοιχία παραπομπές/τιμής",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Αφήστε τα σχόλιά σας"
 }

@@ -149,5 +149,6 @@
 	"wikibase-client-data-bridge-edit-decision-replace-description": "القيمة السابقة لم تكن صحيحة ولم تكن كذلك أبدا.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>أنا حدثت</strong> قيمة قديمة",
 	"wikibase-client-data-bridge-edit-decision-update-description": "القيمة السابقة كانت صحيحة في وقت سابق لكنها الآن قديمة.",
-	"wikibase-client-data-bridge-references-heading": "مراجع"
+	"wikibase-client-data-bridge-references-heading": "مراجع",
+	"wikibase-client-data-bridge-novalue-error-head": "تعديل قيمة $1 غير مدعوم حاليًّا"
 }

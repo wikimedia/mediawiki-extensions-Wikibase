@@ -106,5 +106,11 @@
 	"notification-subject-page-connection": "{{GENDER:$2|Корисник|Корисница|Корисник}} $2 је страницу <strong>$3</strong> коју сте Ви {{GENDER:$3|направили}} на пројекту {{SITENAME}} {{GENDER:$2|повезао|повезала|повезао}} на ставку на Википодацима",
 	"connected-redirect-category": "Преусмерења која су повезана на Википодацима",
 	"connected-redirect-category-desc": "Ова категорија приказује списак преусмерења која су повезана на Википодацима.",
-	"wikibase-client-data-bridge-references-heading": "Референце"
+	"wikibase-client-data-bridge-references-heading": "Референце",
+	"wikibase-client-data-bridge-bailout-heading": "Уместо тога, урадите следеће:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Уреди вредност на пројекту {{WBREPONAME}}",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "Уређивање вредности својства $1 тренутно није подржано",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Тренутно није подржано уређивање више вредности",
+	"wikibase-client-data-bridge-somevalue-error-head": "Уређивање вредности својства $1 тренутно није подржано",
+	"wikibase-client-data-bridge-novalue-error-head": "Уређивање вредности својства $1 тренутно није подржано"
 }
