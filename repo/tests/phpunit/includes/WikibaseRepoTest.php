@@ -20,6 +20,8 @@ use MediaWikiTestCase;
 use RequestContext;
 use Serializers\Serializer;
 use User;
+use ReflectionClass;
+use ReflectionMethod;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -57,6 +59,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\PropertyInfoBuilder;
+use Wikibase\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ApiHelperFactory;
@@ -84,6 +87,8 @@ use Wikibase\Store;
 use Wikibase\StringNormalizer;
 use Wikibase\SummaryFormatter;
 use Wikibase\WikibaseSettings;
+use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * @covers \Wikibase\Repo\WikibaseRepo
@@ -96,6 +101,49 @@ use Wikibase\WikibaseSettings;
  * @author Daniel Kinzler
  */
 class WikibaseRepoTest extends MediaWikiTestCase {
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		// WikibaseRepo service getters should never access the database or do http requests
+		// https://phabricator.wikimedia.org/T243729
+		$this->disallowDBAccess();
+		$this->disallowHttpAccess();
+	}
+
+	private function disallowDBAccess() {
+		$this->setService(
+			'DBLoadBalancerFactory',
+			function() {
+				$lb = $this->createMock( ILoadBalancer::class );
+				$lb->expects( $this->never() )
+					->method( 'getConnection' );
+				$lb->expects( $this->never() )
+					->method( 'getConnectionRef' );
+				$lb->expects( $this->never() )
+					->method( 'getMaintenanceConnectionRef' );
+				$lb->expects( $this->any() )
+					->method( 'getLocalDomainID' )
+					->willReturn( 'banana' );
+
+				$lbFactory = $this->createMock( LBFactory::class );
+				$lbFactory->expects( $this->any() )
+					->method( 'getMainLB' )
+					->willReturn( $lb );
+
+				return $lbFactory;
+			}
+		);
+	}
+
+	private function disallowHttpAccess() {
+		$this->setService(
+			'HttpRequestFactory',
+			function() {
+				$this->fail( 'Service getters must not access HttpRequestFactory.' );
+			}
+		);
+	}
 
 	public function testGetDefaultValidatorBuilders() {
 		$first = WikibaseRepo::getDefaultValidatorBuilders();
@@ -855,6 +903,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertInstanceOf( RdfVocabulary::class, $factory );
 	}
 
+	public function testGetEntityRdfBuilderFactory() {
+		$provider = $this->getWikibaseRepo()->getEntityRdfBuilderFactory();
+		$this->assertInstanceOf( EntityRdfBuilderFactory::class, $provider );
+	}
+
 	/**
 	 * @return DataValueFactory
 	 */
@@ -1073,4 +1126,20 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$wikibaseRepo->getConceptBaseUris()
 		);
 	}
+
+	public function testParameterLessFunctionCalls() {
+		// Make sure (as good as we can) that all functions can be called without
+		// exceptions/ fatals and nothing accesses the database or does http requests.
+		$wbRepo = $this->getWikibaseRepo();
+
+		$reflectionClass = new ReflectionClass( $wbRepo );
+		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
+
+		foreach ( $publicMethods as $publicMethod ) {
+			if ( $publicMethod->getNumberOfRequiredParameters() === 0 ) {
+				$publicMethod->invoke( $wbRepo );
+			}
+		}
+	}
+
 }

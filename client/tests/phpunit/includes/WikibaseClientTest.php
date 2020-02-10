@@ -9,9 +9,12 @@ use Wikibase\Lib\DataTypeFactory;
 use Deserializers\Deserializer;
 use HashSiteStore;
 use Language;
+use MediaWikiIntegrationTestCase;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
+use ReflectionClass;
+use ReflectionMethod;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
@@ -46,6 +49,8 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
 use Wikibase\StringNormalizer;
+use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -57,7 +62,50 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
+class WikibaseClientTest extends MediaWikiIntegrationTestCase {
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		// WikibaseClient service getters should never access the database or do http requests
+		// https://phabricator.wikimedia.org/T243729
+		$this->disallowDBAccess();
+		$this->disallowHttpAccess();
+	}
+
+	private function disallowDBAccess() {
+		$this->setService(
+			'DBLoadBalancerFactory',
+			function() {
+				$lb = $this->createMock( ILoadBalancer::class );
+				$lb->expects( $this->never() )
+					->method( 'getConnection' );
+				$lb->expects( $this->never() )
+					->method( 'getConnectionRef' );
+				$lb->expects( $this->never() )
+					->method( 'getMaintenanceConnectionRef' );
+				$lb->expects( $this->any() )
+					->method( 'getLocalDomainID' )
+					->willReturn( 'banana' );
+
+				$lbFactory = $this->createMock( LBFactory::class );
+				$lbFactory->expects( $this->any() )
+					->method( 'getMainLB' )
+					->willReturn( $lb );
+
+				return $lbFactory;
+			}
+		);
+	}
+
+	private function disallowHttpAccess() {
+		$this->setService(
+			'HttpRequestFactory',
+			function() {
+				$this->fail( 'Service getters must not access HttpRequestFactory.' );
+			}
+		);
+	}
 
 	public function testGetDefaultValueFormatterBuilders() {
 		$first = WikibaseClient::getDefaultValueFormatterBuilders();
@@ -571,6 +619,21 @@ class WikibaseClientTest extends \PHPUnit\Framework\TestCase {
 			) ],
 			new EntityTypeDefinitions( [] )
 		);
+	}
+
+	public function testParameterLessFunctionCalls() {
+		// Make sure (as good as we can) that all functions can be called without
+		// exceptions/ fatals and nothing accesses the database or does http requests.
+		$wbClient = $this->getWikibaseClient();
+
+		$reflectionClass = new ReflectionClass( $wbClient );
+		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
+
+		foreach ( $publicMethods as $publicMethod ) {
+			if ( $publicMethod->getNumberOfRequiredParameters() === 0 ) {
+				$publicMethod->invoke( $wbClient );
+			}
+		}
 	}
 
 }
