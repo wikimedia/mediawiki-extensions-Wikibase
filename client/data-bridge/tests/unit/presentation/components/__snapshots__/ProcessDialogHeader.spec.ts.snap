@@ -11,9 +11,9 @@ exports[`ProcessDialogHeader renders correctly with all props and slots filled 1
   <h1
     class="wb-ui-processdialog-header__title"
   >
-    
-		title
-	
+    <span>
+      title
+    </span>
   </h1>
    
   <button>
@@ -31,9 +31,7 @@ exports[`ProcessDialogHeader renders correctly without slots filled 1`] = `
   <h1
     class="wb-ui-processdialog-header__title"
   >
-    
-		title
-	
+    <span />
   </h1>
    
   <div />

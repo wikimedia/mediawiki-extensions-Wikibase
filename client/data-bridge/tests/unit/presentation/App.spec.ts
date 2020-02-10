@@ -20,6 +20,7 @@ import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.v
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
 import MessageKeys from '@/definitions/MessageKeys';
 import EntityId from '@/datamodel/EntityId';
+import { calledWithHTMLElement } from '../../util/assertions';
 import newMockServiceContainer from '../services/newMockServiceContainer';
 
 const localVue = createLocalVue();
@@ -106,11 +107,17 @@ describe( 'App.vue', () => {
 					get: messageGet,
 				},
 			},
+			stubs: { ProcessDialogHeader },
 		} );
 
+		calledWithHTMLElement( messageGet, 1, 1 );
+
 		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBe( true );
-		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.BRIDGE_DIALOG_TITLE );
-		expect( wrapper.find( ProcessDialogHeader ).props( 'title' ) ).toBe( titleMessage );
+		expect( messageGet ).toHaveBeenCalledWith(
+			MessageKeys.BRIDGE_DIALOG_TITLE,
+			`<span class="wb-db-term-label" lang="zxx" dir="auto">${propertyId}</span>`,
+		);
+		expect( wrapper.find( 'h1' ).text() ).toBe( titleMessage );
 	} );
 
 	describe( 'save button rendering', () => {

@@ -10349,12 +10349,12 @@ var es_object_values = __webpack_require__("07ac");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_ = __webpack_require__("8bbf");
 var external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=51cd8538&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",attrs:{"title":_vm.$messages.get( _vm.$messages.KEYS.BRIDGE_DIALOG_TITLE )},scopedSlots:_vm._u([{key:"primaryAction",fn:function(){return [(!_vm.hasError)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.canSave},on:{"click":_vm.saveAndClose}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Initializing',{attrs:{"is-initializing":_vm.isInitializing}},[_c('DataBridge')],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=a9f5fe7c&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","squary":true,"disabled":!_vm.canSave},on:{"click":_vm.saveAndClose}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","squary":true},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Initializing',{attrs:{"is-initializing":_vm.isInitializing}},[_c('DataBridge')],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=51cd8538&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=a9f5fe7c&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -15109,15 +15109,14 @@ var ErrorWrapper_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ErrorWrapper = (ErrorWrapper_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
-var ProcessDialogHeadervue_type_template_id_07f39cc0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._v(" "+_vm._s(_vm.title)+" ")]),_vm._t("primaryAction",[_c('div')])],2)}
-var ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=41fa9c1c&
+var ProcessDialogHeadervue_type_template_id_41fa9c1c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-ui-processdialog-header"},[_vm._t("safeAction",[_c('div')]),_c('h1',{staticClass:"wb-ui-processdialog-header__title"},[_vm._t("title",[_c('span')])],2),_vm._t("primaryAction",[_c('div')])],2)}
+var ProcessDialogHeadervue_type_template_id_41fa9c1c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=07f39cc0&
+// CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=template&id=41fa9c1c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
-
 
 
 
@@ -15145,11 +15144,6 @@ function (_Vue) {
   return ProcessDialogHeader;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true,
-  type: String
-})], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader.prototype, "title", void 0);
-
 ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader = __decorate([vue_class_component_common_default.a], ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
 /* harmony default export */ var ProcessDialogHeadervue_type_script_lang_ts_ = (ProcessDialogHeadervue_type_script_lang_ts_ProcessDialogHeader);
 // CONCATENATED MODULE: ./src/presentation/components/ProcessDialogHeader.vue?vue&type=script&lang=ts&
@@ -15168,8 +15162,8 @@ var ProcessDialogHeadervue_type_style_index_0_lang_scss_ = __webpack_require__("
 
 var ProcessDialogHeader_component = normalizeComponent(
   components_ProcessDialogHeadervue_type_script_lang_ts_,
-  ProcessDialogHeadervue_type_template_id_07f39cc0_render,
-  ProcessDialogHeadervue_type_template_id_07f39cc0_staticRenderFns,
+  ProcessDialogHeadervue_type_template_id_41fa9c1c_render,
+  ProcessDialogHeadervue_type_template_id_41fa9c1c_staticRenderFns,
   false,
   null,
   null,
@@ -15179,6 +15173,7 @@ var ProcessDialogHeader_component = normalizeComponent(
 
 /* harmony default export */ var components_ProcessDialogHeader = (ProcessDialogHeader_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -15221,6 +15216,15 @@ function (_mixins) {
     key: "cancel",
     value: function cancel() {
       this.$emit(src_events.onCancel);
+    }
+  }, {
+    key: "title",
+    get: function get() {
+      return this.$messages.get(this.$messages.KEYS.BRIDGE_DIALOG_TITLE, new components_TermLabel({
+        propsData: {
+          term: this.rootModule.getters.targetLabel
+        }
+      }).$mount().$el);
     }
   }, {
     key: "isInitializing",

@@ -5,7 +5,10 @@
 			<div />
 		</slot>
 		<h1 class="wb-ui-processdialog-header__title">
-			{{ title }}
+			<!-- @slot This slot should be filled with the title of the dialog -->
+			<slot name="title">
+				<span />
+			</slot>
 		</h1>
 		<!-- @slot This slot should be filled with the primary action, e.g. publish -->
 		<slot name="primaryAction">
@@ -17,7 +20,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Prop } from 'vue-property-decorator';
 
 /**
  * A component to be used as header of dialogs in which users make their
@@ -25,13 +27,7 @@ import { Prop } from 'vue-property-decorator';
  * an alternative second one.
  */
 @Component
-export default class ProcessDialogHeader extends Vue {
-	/**
-	 * The title to be shown in the center of the header
-	 */
-	@Prop( { required: true, type: String } )
-	public title!: string;
-}
+export default class ProcessDialogHeader extends Vue {}
 </script>
 
 <style lang="scss">
