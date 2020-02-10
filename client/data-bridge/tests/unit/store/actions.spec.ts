@@ -335,7 +335,7 @@ describe( 'root/actions', () => {
 					targetProperty: defaultPropertyId,
 					statements: {
 						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ {} ],
+							[ defaultPropertyId ]: [ { mainsnak: { datavalue: {} } } ],
 						},
 					},
 				} ),
@@ -373,7 +373,7 @@ describe( 'root/actions', () => {
 					targetProperty: defaultPropertyId,
 					statements: {
 						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ {} ],
+							[ defaultPropertyId ]: [ { mainsnak: { datavalue: {} } } ],
 						},
 					},
 				} ),
@@ -419,7 +419,7 @@ describe( 'root/actions', () => {
 					targetProperty: defaultPropertyId,
 					statements: {
 						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ {} ],
+							[ defaultPropertyId ]: [ { mainsnak: { datavalue: {} } } ],
 						},
 					},
 				} ),
@@ -450,14 +450,15 @@ describe( 'root/actions', () => {
 		it( 'commits to setOriginalStatement and setApplicationStatus if there are no errors', async () => {
 			const information = newMockAppInformation();
 			const commit = jest.fn();
-			const statements = {};
+			const dataValue: DataValue = { type: 'string', value: 'a string value' };
+			const statement = { mainsnak: { datavalue: dataValue } };
 			const actions = inject( RootActions, {
 				state: newApplicationState( {
 					entity: { id: defaultEntityId },
 					targetProperty: defaultPropertyId,
 					statements: {
 						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ statements ],
+							[ defaultPropertyId ]: [ statement ],
 						},
 					},
 				} ),
@@ -480,7 +481,8 @@ describe( 'root/actions', () => {
 				undefined,
 			] } );
 
-			expect( commit ).toHaveBeenCalledWith( 'setOriginalStatement', statements );
+			expect( commit ).toHaveBeenCalledWith( 'setOriginalStatement', statement );
+			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
 			expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 		} );
 
@@ -736,9 +738,10 @@ describe( 'root/actions', () => {
 			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
 
-		it( 'dispatches a statement action to store the value in the store', async () => {
+		it( 'commits value and dispatches statement action to store value in store', async () => {
 			const entityId = 'Q42';
 			const targetPropertyId = 'P42';
+			const rootModuleCommit = jest.fn();
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
 				targetProperty: targetPropertyId,
@@ -747,6 +750,7 @@ describe( 'root/actions', () => {
 				},
 			} );
 			const actions = inject( RootActions, {
+				commit: rootModuleCommit,
 				state,
 			} );
 
@@ -767,6 +771,7 @@ describe( 'root/actions', () => {
 			};
 
 			await expect( actions.setTargetValue( dataValue ) ).resolves.toBe( undefined );
+			expect( rootModuleCommit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
 			expect( statementModuleDispatch ).toHaveBeenCalledWith( 'setStringDataValue', payload );
 		} );
 

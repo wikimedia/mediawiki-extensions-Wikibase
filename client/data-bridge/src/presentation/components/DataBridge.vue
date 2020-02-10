@@ -32,7 +32,7 @@ import ReferenceSection from '@/presentation/components/ReferenceSection.vue';
 } )
 export default class DataBridge extends mixins( StateMixin ) {
 	public get targetValue(): DataValue {
-		const targetValue = this.rootModule.getters.targetValue;
+		const targetValue = this.rootModule.state.targetValue;
 		if ( targetValue === null ) {
 			throw new Error( 'not yet ready!' );
 		}

@@ -1,12 +1,10 @@
 import { Store } from 'vuex';
 import Status from '@/definitions/ApplicationStatus';
-import DataValue from '@/datamodel/DataValue';
 import Application, { InitializedApplicationState } from '@/store/Application';
 import {
 	NS_ENTITY,
 	NS_STATEMENTS,
 } from '@/store/namespaces';
-import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
 import Reference from '@/datamodel/Reference';
@@ -20,17 +18,6 @@ export class RootGetters extends Getters<Application> {
 	private statementModule!: Context<typeof statementModule>;
 	public $init( store: Store<Application> ): void {
 		this.statementModule = statementModule.context( store );
-	}
-
-	public get targetValue(): DataValue|null {
-		if ( this.state.applicationStatus !== Status.READY ) {
-			return null;
-		}
-
-		const entityId = ( this.state as InitializedApplicationState )[ NS_ENTITY ].id;
-		const pathToMainSnak = new MainSnakPath( entityId, this.state.targetProperty, 0 );
-
-		return this.statementModule.getters.dataValue( pathToMainSnak );
 	}
 
 	public get targetLabel(): Term {

@@ -1,3 +1,4 @@
+import DataValue from '@/datamodel/DataValue';
 import Statement from '@/datamodel/Statement';
 import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
@@ -10,6 +11,7 @@ export class BaseState implements Application {
 	public applicationErrors: ApplicationError[] = [];
 	public applicationStatus: ValidApplicationStatus = ValidApplicationStatus.INITIALIZING;
 	public editDecision: EditDecision|null = null;
+	public targetValue: DataValue|null = null;
 	public editFlow = '';
 	public entityTitle = '';
 	public originalHref = '';

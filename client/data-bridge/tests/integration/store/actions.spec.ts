@@ -162,6 +162,12 @@ describe( 'store/actions', () => {
 				expect( successStore.state.originalStatement ).toStrictEqual(
 					testSet.entity.statements[ info.propertyId ][ 0 ],
 				);
+				expect( successStore.state.targetValue ).not.toBe(
+					testSet.entity.statements[ info.propertyId ][ 0 ].mainsnak.datavalue,
+				);
+				expect( successStore.state.targetValue ).toStrictEqual(
+					testSet.entity.statements[ info.propertyId ][ 0 ].mainsnak.datavalue!,
+				);
 				expect( successStore.state.originalHref ).toStrictEqual(
 					info.originalHref,
 				);
