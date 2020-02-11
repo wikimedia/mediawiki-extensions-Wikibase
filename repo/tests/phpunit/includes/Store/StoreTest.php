@@ -10,6 +10,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Repo\Store\ChangeStore;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
@@ -17,7 +18,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 
 /**
  * @covers \Wikibase\SqlStore

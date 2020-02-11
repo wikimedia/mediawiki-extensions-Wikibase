@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\TermIndexEntry;
 
 /**
  * Methods factored out of TermIndex during the migration away from wb_terms.

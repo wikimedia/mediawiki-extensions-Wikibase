@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use LogicException;
 use Wikibase\DataModel\Entity\Item;
@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\TermIndexEntry;
 use Wikibase\TermStore\ItemTermStore;
 
 /**

@@ -6,7 +6,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @covers \Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory

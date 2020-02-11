@@ -10,11 +10,11 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\MultiPropertyTermStore;
+use Wikibase\Lib\Store\MultiPropertyTermStore;
 use Wikibase\TermStore\PropertyTermStore;
 
 /**
- * @covers \Wikibase\MultiPropertyTermStore
+ * @covers \Wikibase\Lib\Store\MultiPropertyTermStore
  *
  * @group Wikibase
  *

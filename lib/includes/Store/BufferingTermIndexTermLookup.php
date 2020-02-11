@@ -9,7 +9,7 @@ use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @license GPL-2.0-or-later

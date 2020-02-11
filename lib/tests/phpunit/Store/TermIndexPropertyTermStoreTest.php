@@ -10,12 +10,12 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
+use Wikibase\Lib\Store\TermIndexPropertyTermStore;
 use Wikibase\TermIndexEntry;
-use Wikibase\TermIndexPropertyTermStore;
 
 /**
- * @covers \Wikibase\TermIndexPropertyTermStore
+ * @covers \Wikibase\Lib\Store\TermIndexPropertyTermStore
  *
  * @group Wikibase
  *

@@ -1,6 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
+
+use Wikibase\SettingsArray;
 
 /**
  * @deprecated Each component should manage its own settings,

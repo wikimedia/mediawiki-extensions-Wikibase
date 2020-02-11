@@ -20,7 +20,7 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @group Wikibase

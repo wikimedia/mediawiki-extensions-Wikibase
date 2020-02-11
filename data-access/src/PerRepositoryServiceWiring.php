@@ -40,7 +40,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Store\BufferingTermIndexTermLookup;
-use Wikibase\TermIndex;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;

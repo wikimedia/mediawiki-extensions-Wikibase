@@ -7,8 +7,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndex;
 use Wikibase\TermIndexEntry;
 
 /**

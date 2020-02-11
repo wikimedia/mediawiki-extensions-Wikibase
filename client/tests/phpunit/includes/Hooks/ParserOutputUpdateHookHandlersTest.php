@@ -34,7 +34,6 @@ use Wikibase\Client\LangLinkHandler;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\Settings;
 use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -144,7 +143,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @return Settings
+	 * @return SettingsArray
 	 */
 	private function newSettings() {
 		$defaults = [

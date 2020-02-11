@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\TermIndex;
 
 /**
  * TermIndex implementation that does nothing.

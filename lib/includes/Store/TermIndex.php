@@ -1,9 +1,6 @@
 <?php
 
-namespace Wikibase;
-
-use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\MatchingTermsLookup;
+namespace Wikibase\Lib\Store;
 
 /**
  * Interface to a cache for terms with both write and lookup methods.

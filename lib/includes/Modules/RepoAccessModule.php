@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Modules;
 use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use Wikibase\Settings;
+use Wikibase\Lib\Settings;
 
 /**
  * JavaScript variables needed to access the repo independent from the current

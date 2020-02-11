@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use AssertionError;
 use Wikibase\DataModel\Entity\ItemId;

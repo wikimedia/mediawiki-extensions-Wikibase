@@ -3,14 +3,14 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
-use Wikibase\ByIdDispatchingItemTermStore;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\Store\ByIdDispatchingItemTermStore;
 use Wikibase\TermStore\ItemTermStore;
 
 /**
- * @covers \Wikibase\ByIdDispatchingItemTermStore
+ * @covers \Wikibase\Lib\Store\ByIdDispatchingItemTermStore
  *
  * @group Wikibase
  *

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use Exception;
 use Wikibase\DataModel\Entity\ItemId;

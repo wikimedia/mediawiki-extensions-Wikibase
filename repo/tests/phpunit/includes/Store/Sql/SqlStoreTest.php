@@ -24,12 +24,12 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
-use Wikibase\TermIndex;
 
 /**
  * @covers \Wikibase\SqlStore
