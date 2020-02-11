@@ -42,7 +42,8 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 
 	&__heading {
 		margin: $references-heading-margin-top 0 $references-heading-margin-bottom 0;
-		font-weight: 600;
+
+		@include h5();
 	}
 
 	&__listItem {

@@ -59,7 +59,8 @@ export default class EditDecision extends mixins( StateMixin ) {
 
 	&__heading {
 		margin: $heading-margin-top 0 $heading-margin-bottom 0;
-		font-weight: 600;
+
+		@include h5();
 	}
 
 	strong {

@@ -1,0 +1,7 @@
+@mixin h5() {
+	// this is named after the style in the wmf style guide, it is not restricted to <h5></h5> elements
+
+	font-weight: 600;
+	line-height: 1.25;
+	font-size: 1rem;
+}
