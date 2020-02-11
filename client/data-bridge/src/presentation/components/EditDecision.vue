@@ -62,7 +62,7 @@ export default class EditDecision extends mixins( StateMixin ) {
 	}
 
 	&__heading {
-		margin: $heading-margin-top 0 $heading-margin-bottom 0;
+		margin-bottom: $heading-margin-bottom;
 
 		@include h5();
 	}
