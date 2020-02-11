@@ -5,7 +5,6 @@ global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
 	'DataValues\\DataValueFactory' => __DIR__ . '/includes/DataValueFactory.php',
-	'Wikibase\\ContentLanguagesLanguageFallbackChainFilterer' => __DIR__ . '/includes/ContentLanguagesLanguageFallbackChainFilterer.php',
 	'Wikibase\\EntityFactory' => __DIR__ . '/includes/EntityFactory.php',
 	'Wikibase\\InconsistentRedirectException' => __DIR__ . '/includes/Store/InconsistentRedirectException.php',
 	'Wikibase\\LanguageFallbackChain' => __DIR__ . '/includes/LanguageFallbackChain.php',
