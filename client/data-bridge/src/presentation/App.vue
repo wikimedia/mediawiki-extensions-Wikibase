@@ -105,7 +105,7 @@ export default class App extends mixins( StateMixin ) {
 	font-family: $font-family-system-sans;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #2c3e50;
+	color: $wmui-color-base10;
 	overflow: hidden;
 
 	// ensure we are not affected by any font-size changes of the OOUI dialog cause by the skin
