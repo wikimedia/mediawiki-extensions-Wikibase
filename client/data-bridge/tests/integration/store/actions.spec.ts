@@ -6,16 +6,16 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
 import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
-import {
-	NS_ENTITY,
-	NS_STATEMENTS,
-} from '@/store/namespaces';
-import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
+import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
 import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
+import DataValue from '@/datamodel/DataValue';
+import clone from '@/store/clone';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
+import { StatementState } from '@/store/statements';
+import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -150,18 +150,22 @@ describe( 'store/actions', () => {
 		await store.dispatch( 'initBridge', info );
 	} );
 
+	function getStatementModuleDataValue(
+		state: InitializedApplicationState,
+		entityId = info.entityId,
+		propertyId = info.propertyId,
+	): DataValue|undefined {
+		return state
+			.statements[ entityId ][ propertyId ][ 0 ]
+			.mainsnak.datavalue;
+	}
+
 	describe( 'application initiation', () => {
 		it( 'successfully initiate on valid input data', () => {
 			const successStore = createStore( services );
 			return successStore.dispatch( 'initBridge', info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );
 				expect( successStore.state.targetLabel ).toBe( labelTerm );
-				expect( successStore.state.originalStatement ).not.toBe(
-					testSet.entity.statements[ info.propertyId ][ 0 ],
-				);
-				expect( successStore.state.originalStatement ).toStrictEqual(
-					testSet.entity.statements[ info.propertyId ][ 0 ],
-				);
 				expect( successStore.state.targetValue ).not.toBe(
 					testSet.entity.statements[ info.propertyId ][ 0 ].mainsnak.datavalue,
 				);
@@ -272,6 +276,7 @@ describe( 'store/actions', () => {
 			await expect(
 				store.dispatch(
 					action( NS_ENTITY, 'entitySave' ),
+					testSet.entity.statements,
 				),
 			).rejects.toBe( rejectError );
 
@@ -310,7 +315,8 @@ describe( 'store/actions', () => {
 
 			store = createStore( services );
 			await store.dispatch( 'initBridge', info );
-			await store.dispatch( action( NS_ENTITY, 'entitySave' ) );
+
+			await store.dispatch( action( NS_ENTITY, 'entitySave' ), testSet.entity.statements );
 
 			expect( resolver ).toHaveBeenCalledWith( testSet );
 
@@ -339,7 +345,7 @@ describe( 'store/actions', () => {
 					dataValue,
 				).then( () => {
 					const state = ( store.state as InitializedApplicationState );
-					expect( state.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( dataValue );
+					expect( state.targetValue ).toStrictEqual( dataValue );
 				} );
 			} );
 		} );
@@ -354,7 +360,7 @@ describe( 'store/actions', () => {
 				expect( notReadyStore.state.applicationErrors.length ).toBeGreaterThan( 0 );
 			} );
 
-			it( 'rejects and switch to error if the request fails', async () => {
+			it( 'rejects, switches to error, keeps statements unchanged if the request fails', async () => {
 				const rejectError = new Error( 'no' );
 				const resolver = jest.fn().mockRejectedValue( rejectError );
 
@@ -364,16 +370,22 @@ describe( 'store/actions', () => {
 
 				store = createStore( services );
 				await store.dispatch( 'initBridge', info );
+
+				const state = store.state as InitializedApplicationState;
+				const statementAfterInit = clone( getStatementModuleDataValue( state )! );
+
 				await expect(
 					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
 				expect( resolver ).toHaveBeenCalledWith( testSet );
 				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
+				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
 
 			it( 'stores the responded entity, if the request succeeded', async () => {
-				const response = {
+				const newStringValue = 'new value';
+				const saveResponse = {
 					revisionId: 1,
 					entity: {
 						id: 'Q42',
@@ -388,7 +400,7 @@ describe( 'store/actions', () => {
 									datatype: 'string',
 									datavalue: {
 										type: 'string',
-										value: 'a string value',
+										value: newStringValue,
 									},
 								},
 							} ],
@@ -396,7 +408,7 @@ describe( 'store/actions', () => {
 					},
 				};
 
-				const resolver = jest.fn().mockResolvedValue( response );
+				const resolver = jest.fn().mockResolvedValue( saveResponse );
 
 				services.set( 'writingEntityRepository', {
 					saveEntity: resolver as any,
@@ -405,25 +417,37 @@ describe( 'store/actions', () => {
 				store = createStore( services );
 
 				await store.dispatch( 'initBridge', info );
+
+				await store.dispatch( 'setTargetValue', {
+					type: 'string',
+					value: newStringValue,
+				} );
+
 				await store.dispatch( 'saveBridge' );
 
-				expect( resolver ).toHaveBeenCalledWith( testSet );
+				const testSetChangedByUserInteraction = clone( testSet );
+				testSetChangedByUserInteraction
+					.entity
+					.statements.P31[ 0 ]
+					.mainsnak.datavalue!.value = newStringValue;
+
+				expect( resolver ).toHaveBeenCalledWith( testSetChangedByUserInteraction );
 
 				const state = ( store.state as InitializedApplicationState );
-				expect( state.statements.Q42 ).toEqual( response.entity.statements );
-				expect( state.entity.id ).toBe( response.entity.id );
-				expect( state.entity.baseRevision ).toBe( response.revisionId );
+				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
+				expect( state.entity.id ).toBe( saveResponse.entity.id );
+				expect( state.entity.baseRevision ).toBe( saveResponse.revisionId );
 				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
 			} );
 		} );
 	} );
 
 	describe( 'composed actions', () => {
-		describe( 'setStringDataValue', () => {
+		describe( 'applyStringDataValue', () => {
 			it( 'rejects on unknown Entity', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'setStringDataValue' ),
+					action( NS_STATEMENTS, 'applyStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q3333333',
@@ -441,7 +465,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'setStringDataValue' ),
+					action( NS_STATEMENTS, 'applyStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -459,7 +483,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on unknown index on Property', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'setStringDataValue' ),
+					action( NS_STATEMENTS, 'applyStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -477,7 +501,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string value data types', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'setStringDataValue' ),
+					action( NS_STATEMENTS, 'applyStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -495,7 +519,7 @@ describe( 'store/actions', () => {
 			it( 'rejects on non string data value', async () => {
 				expect.assertions( 1 );
 				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'setStringDataValue' ),
+					action( NS_STATEMENTS, 'applyStringDataValue' ),
 					{
 						path: new MainSnakPath(
 							'Q42',
@@ -519,7 +543,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_STATEMENTS, 'setStringDataValue' ),
+						action( NS_STATEMENTS, 'applyStringDataValue' ),
 						{
 							path: new MainSnakPath(
 								'Q42',
@@ -528,9 +552,8 @@ describe( 'store/actions', () => {
 							),
 							value,
 						},
-					).then( () => {
-						const state = store.state as InitializedApplicationState;
-						expect( state.statements.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
+					).then( ( state: StatementState ) => {
+						expect( state.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
 					} );
 				} );
 
@@ -541,7 +564,7 @@ describe( 'store/actions', () => {
 					};
 
 					return store.dispatch(
-						action( NS_STATEMENTS, 'setStringDataValue' ),
+						action( NS_STATEMENTS, 'applyStringDataValue' ),
 						{
 							path: new MainSnakPath(
 								'Q42',
@@ -550,12 +573,12 @@ describe( 'store/actions', () => {
 							),
 							value,
 						},
-					).then( () => {
-						const state = store.state as InitializedApplicationState;
-						expect( state.statements.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
+					).then( ( state: StatementState ) => {
+						expect( state.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
 					} );
 				} );
 			} );
 		} );
 	} );
+
 } );

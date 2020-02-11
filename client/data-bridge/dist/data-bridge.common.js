@@ -13544,18 +13544,6 @@ function (_Mutations) {
     value: function setStatements(payload) {
       external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(this.state, payload.entityId, clone(payload.statements));
     }
-  }, {
-    key: "setDataValue",
-    value: function setDataValue(payload) {
-      var snak = payload.path.resolveSnakInStatement(this.state);
-      external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(snak, 'datavalue', payload.value);
-    }
-  }, {
-    key: "setSnakType",
-    value: function setSnakType(payload) {
-      var snak = payload.path.resolveSnakInStatement(this.state);
-      snak.snaktype = payload.value;
-    }
   }]);
 
   return StatementMutations;
@@ -13571,6 +13559,7 @@ var SnakActionErrors;
 
 /* harmony default export */ var storeActionErrors_SnakActionErrors = (SnakActionErrors);
 // CONCATENATED MODULE: ./src/store/statements/actions.ts
+
 
 
 
@@ -13601,12 +13590,13 @@ function (_Actions) {
       return Promise.resolve();
     }
   }, {
-    key: "setStringDataValue",
-    value: function setStringDataValue(payloadDataValue) {
+    key: "applyStringDataValue",
+    value: function applyStringDataValue(payloadDataValue) {
       var _this = this;
 
       return new Promise(function (resolve) {
-        var snak = payloadDataValue.path.resolveSnakInStatement(_this.state);
+        var state = clone(_this.state);
+        var snak = payloadDataValue.path.resolveSnakInStatement(state);
 
         if (snak === null) {
           throw new Error(storeActionErrors_SnakActionErrors.NO_SNAK_FOUND);
@@ -13618,19 +13608,11 @@ function (_Actions) {
 
         if (typeof payloadDataValue.value.value !== 'string') {
           throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE);
-        } // TODO put more validation here
+        }
 
-
-        var payloadSnakType = {
-          path: payloadDataValue.path,
-          value: 'value'
-        };
-
-        _this.commit('setSnakType', payloadSnakType);
-
-        _this.commit('setDataValue', payloadDataValue);
-
-        resolve();
+        snak.snaktype = 'value';
+        snak.datavalue = payloadDataValue.value;
+        resolve(state);
       });
     }
   }]);
@@ -13813,12 +13795,12 @@ function (_Actions) {
     }
   }, {
     key: "entitySave",
-    value: function entitySave() {
+    value: function entitySave(statements) {
       var _this2 = this;
 
       var entityRevision = new EntityRevision_EntityRevision({
         id: this.state.id,
-        statements: this.statementsModule.state[this.state.id]
+        statements: statements
       }, this.state.baseRevision);
       return this.store.$services.get('writingEntityRepository').saveEntity(entityRevision).then(function (entityRevision) {
         return _this2.dispatch('entityWrite', entityRevision);
@@ -13970,7 +13952,7 @@ function (_Actions) {
       var _postEntityLoad = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2() {
-        var state, path, originalStatement;
+        var state, path;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -13982,10 +13964,9 @@ function (_Actions) {
 
               case 4:
                 if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
-                  originalStatement = state[NS_STATEMENTS][path.entityId][path.propertyId][path.index];
-                  this.commit('setOriginalStatement', originalStatement);
                   this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  originalStatement.mainsnak.datavalue);
+                  state[NS_STATEMENTS][path.entityId][path.propertyId][path.index] // TODO use getter
+                  .mainsnak.datavalue);
                   this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
                 }
 
@@ -14083,8 +14064,6 @@ function (_Actions) {
   }, {
     key: "setTargetValue",
     value: function setTargetValue(dataValue) {
-      var _this3 = this;
-
       if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
         this.commit('addApplicationErrors', [{
           type: ErrorTypes.APPLICATION_LOGIC_ERROR,
@@ -14096,46 +14075,85 @@ function (_Actions) {
       }
 
       this.commit('setTargetValue', dataValue);
-      var state = this.state;
-      var path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
-      return this.statementModule.dispatch('setStringDataValue', {
-        path: path,
-        value: dataValue
-      }).catch(function (error) {
-        _this3.commit('addApplicationErrors', [{
-          type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-          info: error
-        }]);
-
-        throw error;
-      });
+      return Promise.resolve();
     }
   }, {
     key: "saveBridge",
-    value: function saveBridge() {
-      var _this4 = this;
+    value: function () {
+      var _saveBridge = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3() {
+        var _this3 = this;
 
-      if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-        this.commit('addApplicationErrors', [{
-          type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-          info: {
-            stack: new Error().stack
+        var state, entityId, path, statements;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(this.state.applicationStatus !== definitions_ApplicationStatus.READY)) {
+                  _context3.next = 3;
+                  break;
+                }
+
+                this.commit('addApplicationErrors', [{
+                  type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+                  info: {
+                    stack: new Error().stack
+                  }
+                }]);
+                return _context3.abrupt("return", Promise.reject(null));
+
+              case 3:
+                state = this.state;
+                entityId = state[NS_ENTITY].id;
+                path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
+                _context3.prev = 6;
+                _context3.next = 9;
+                return this.statementModule.dispatch('applyStringDataValue', {
+                  path: path,
+                  value: state.targetValue
+                });
+
+              case 9:
+                statements = _context3.sent;
+                _context3.next = 16;
+                break;
+
+              case 12:
+                _context3.prev = 12;
+                _context3.t0 = _context3["catch"](6);
+                this.commit('addApplicationErrors', [{
+                  type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+                  info: _context3.t0
+                }]);
+                throw _context3.t0;
+
+              case 16:
+                return _context3.abrupt("return", this.entityModule.dispatch('entitySave', statements[entityId]).catch(function (error) {
+                  _this3.commit('addApplicationErrors', [{
+                    type: ErrorTypes.SAVING_FAILED,
+                    info: error
+                  }]);
+
+                  throw error;
+                }).then(function () {
+                  return _this3.dispatch('postEntityLoad');
+                }));
+
+              case 17:
+              case "end":
+                return _context3.stop();
+            }
           }
-        }]);
-        return Promise.reject(null);
+        }, _callee3, this, [[6, 12]]);
+      }));
+
+      function saveBridge() {
+        return _saveBridge.apply(this, arguments);
       }
 
-      return this.entityModule.dispatch('entitySave').catch(function (error) {
-        _this4.commit('addApplicationErrors', [{
-          type: ErrorTypes.SAVING_FAILED,
-          info: error
-        }]);
-
-        throw error;
-      }).then(function () {
-        return _this4.dispatch('postEntityLoad');
-      });
-    }
+      return saveBridge;
+    }()
   }, {
     key: "addError",
     value: function addError(errors) {
@@ -14209,7 +14227,7 @@ function (_Getters) {
       return statements.references ? statements.references : [];
     }
   }, {
-    key: "isTargetStatementModified",
+    key: "isTargetValueModified",
     get: function get() {
       if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
         return false;
@@ -14217,14 +14235,14 @@ function (_Getters) {
 
       var initState = this.state;
       var entityId = initState[NS_ENTITY].id;
-      return !deep_equal_default()(this.state.originalStatement, initState[NS_STATEMENTS][entityId][this.state.targetProperty][0], {
+      return !deep_equal_default()(this.state.targetValue, initState[NS_STATEMENTS][entityId][this.state.targetProperty][0].mainsnak.datavalue, {
         strict: true
       });
     }
   }, {
     key: "canSave",
     get: function get() {
-      return this.state.editDecision !== null && this.getters.isTargetStatementModified;
+      return this.state.editDecision !== null && this.getters.isTargetValueModified;
     }
   }, {
     key: "applicationStatus",
@@ -14317,11 +14335,6 @@ function (_Mutations) {
       this.state.targetLabel = label;
     }
   }, {
-    key: "setOriginalStatement",
-    value: function setOriginalStatement(revision) {
-      this.state.originalStatement = clone(revision);
-    }
-  }, {
     key: "addApplicationErrors",
     value: function addApplicationErrors(errors) {
       var _this$state$applicati;
@@ -14370,7 +14383,6 @@ var state_BaseState = function BaseState() {
   this.editFlow = '';
   this.entityTitle = '';
   this.originalHref = '';
-  this.originalStatement = null;
   this.pageTitle = '';
   this.targetLabel = null;
   this.targetProperty = '';

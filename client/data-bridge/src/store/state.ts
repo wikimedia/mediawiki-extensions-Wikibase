@@ -1,5 +1,4 @@
 import DataValue from '@/datamodel/DataValue';
-import Statement from '@/datamodel/Statement';
 import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
@@ -15,7 +14,6 @@ export class BaseState implements Application {
 	public editFlow = '';
 	public entityTitle = '';
 	public originalHref = '';
-	public originalStatement: Statement|null = null;
 	public pageTitle = '';
 	public targetLabel: Term|null = null;
 	public targetProperty = '';

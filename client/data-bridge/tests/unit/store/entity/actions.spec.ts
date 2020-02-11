@@ -112,7 +112,7 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions.entitySave() ).resolves.toBe( resolvedValue );
+			await expect( actions.entitySave( statements ) ).resolves.toBe( resolvedValue );
 			expect( revidIncrementingWritingEntityRepository.saveEntity ).toHaveBeenCalledWith( {
 				entity,
 				revisionId: revision,
@@ -151,7 +151,7 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions.entitySave() ).rejects.toBe( error );
+			await expect( actions.entitySave( statements ) ).rejects.toBe( error );
 			expect( dispatch ).not.toHaveBeenCalled();
 		} );
 	} );

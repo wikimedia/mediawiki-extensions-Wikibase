@@ -20,6 +20,8 @@ import newMockServiceContainer from '../services/newMockServiceContainer';
 import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import DataValue from '@/datamodel/DataValue';
+import { StatementState } from '@/store/statements';
+import Statement from '@/datamodel/Statement';
 
 const mockBridgeConfig = jest.fn();
 jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
@@ -316,7 +318,7 @@ describe( 'root/actions', () => {
 			expect( dispatch ).toHaveBeenCalledWith( 'validateEntityState', mainSnakPath );
 		} );
 
-		it( 'commits to setOriginalStatement and setApplicationStatus if there are no errors', async () => {
+		it( 'commits targetValue & setApplicationStatus if there are no errors', async () => {
 			const commit = jest.fn();
 			const dataValue: DataValue = { type: 'string', value: 'a string value' };
 			const statement = { mainsnak: { datavalue: dataValue } };
@@ -337,7 +339,6 @@ describe( 'root/actions', () => {
 
 			await actions.postEntityLoad();
 
-			expect( commit ).toHaveBeenCalledWith( 'setOriginalStatement', statement );
 			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
 			expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 		} );
@@ -738,73 +739,34 @@ describe( 'root/actions', () => {
 			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
 
-		it( 'commits value and dispatches statement action to store value in store', async () => {
-			const entityId = 'Q42';
-			const targetPropertyId = 'P42';
+		it( 'commits targetValue', async () => {
 			const rootModuleCommit = jest.fn();
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
-				targetProperty: targetPropertyId,
-				entity: {
-					id: entityId,
-				},
 			} );
 			const actions = inject( RootActions, {
 				commit: rootModuleCommit,
 				state,
 			} );
 
-			const statementModuleDispatch = jest.fn().mockResolvedValue( undefined );
-
-			// @ts-ignore
-			actions.statementModule = {
-				dispatch: statementModuleDispatch,
-			};
-
 			const dataValue: DataValue = {
 				type: 'string',
 				value: 'the value',
 			};
-			const payload = {
-				path: new MainSnakPath( entityId, targetPropertyId, 0 ),
-				value: dataValue,
-			};
 
 			await expect( actions.setTargetValue( dataValue ) ).resolves.toBe( undefined );
 			expect( rootModuleCommit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
-			expect( statementModuleDispatch ).toHaveBeenCalledWith( 'setStringDataValue', payload );
-		} );
-
-		it( 'propagates an error in case it occurs in the statement action', async () => {
-			const commit = jest.fn();
-			const state = newApplicationState( {
-				applicationStatus: ApplicationStatus.READY,
-				entity: {
-					id: 'Q42',
-				},
-			} );
-			const actions = inject( RootActions, {
-				commit,
-				state,
-			} );
-
-			const error = new Error( 'This error should be logged and propagated' );
-			const statementModuleDispatch = jest.fn().mockRejectedValue( error );
-
-			// @ts-ignore
-			actions.statementModule = {
-				dispatch: statementModuleDispatch,
-			};
-
-			await expect( actions.setTargetValue( {} as DataValue ) ).rejects.toBe( error );
-			expect( commit ).toHaveBeenCalledWith( 'addApplicationErrors', [ {
-				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-				info: error,
-			} ] );
 		} );
 	} );
 
 	describe( 'saveBridge', () => {
+		let statementModule: any;
+		beforeEach( () => {
+			statementModule = {
+				dispatch: jest.fn().mockResolvedValue( Promise.resolve() ),
+			};
+		} );
+
 		it( `logs an error if the application is not in ${ApplicationStatus.READY} state and rejects`, async () => {
 			const commit = jest.fn();
 			const state = newApplicationState();
@@ -812,6 +774,9 @@ describe( 'root/actions', () => {
 				commit,
 				state,
 			} );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
 
 			await expect( actions.saveBridge() ).rejects.toBeNull();
 			expect( commit ).toHaveBeenCalledTimes( 1 );
@@ -824,9 +789,27 @@ describe( 'root/actions', () => {
 
 		it( 'it dispatches entitySave & postEntityLoad', async () => {
 			const rootModuleDispatch = jest.fn();
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const targetValue: DataValue = {
+				type: 'string',
+				value: 'a new value',
+			};
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
 			} );
+			const statementsState: StatementState = {
+				[ entityId ]: {
+					[ targetPropertyId ]: [
+						{} as Statement,
+					],
+				},
+			};
 			const actions = inject( RootActions, {
 				state,
 				dispatch: rootModuleDispatch,
@@ -834,25 +817,90 @@ describe( 'root/actions', () => {
 
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
+			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
+			// @ts-ignore
+			actions.statementModule = statementModule;
+
 			// @ts-ignore
 			actions.entityModule = {
 				dispatch: entityModuleDispatch,
 			};
 			await actions.saveBridge();
 
-			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave' );
+			expect( statementModule.dispatch )
+				.toHaveBeenCalledWith( 'applyStringDataValue', {
+					path: new MainSnakPath( entityId, targetPropertyId, 0 ),
+					value: targetValue,
+				} );
+			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave', statementsState[ entityId ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
-		it( 'logs an error if saving failed and rejects', async () => {
+		it( 'logs an error if applyStringDataValue fails', async () => {
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const targetValue: DataValue = {
+				type: 'string',
+				value: 'a new value',
+			};
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
 			} );
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				state,
+				commit,
+			} );
+
+			const error = new Error( 'This error should be logged and propagated.' );
+			statementModule.dispatch = jest.fn().mockRejectedValue( error );
+			// @ts-ignore
+			actions.statementModule = statementModule;
+
+			await expect( actions.saveBridge() ).rejects.toBe( error );
+			expect( commit ).toHaveBeenCalledWith(
+				'addApplicationErrors',
+				[ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ],
+			);
+		} );
+
+		it( 'logs an error if saving failed and rejects', async () => {
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const dataValue: DataValue = {
+				type: 'string',
+				value: 'the value',
+			};
+
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue: dataValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+			} );
+			const statementsState: StatementState = {
+				[ entityId ]: {
+					[ targetPropertyId ]: [
+						{} as Statement,
+					],
+				},
+			};
 			const commit = jest.fn();
 			const actions = inject( RootActions, {
 				commit,
 				state,
 			} );
+
+			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
+			// @ts-ignore
+			actions.statementModule = statementModule;
 
 			const error = new Error( 'This error should be logged and propagated.' );
 			const entityModuleDispatch = jest.fn().mockRejectedValue( error );
@@ -867,6 +915,7 @@ describe( 'root/actions', () => {
 				[ { type: ErrorTypes.SAVING_FAILED, info: error } ],
 			);
 		} );
+
 	} );
 
 	describe( 'addError', () => {
@@ -894,5 +943,4 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenCalledWith( 'setEditDecision', editDecision );
 		} );
 	} );
-
 } );
