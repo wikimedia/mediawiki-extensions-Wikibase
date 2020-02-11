@@ -14,7 +14,7 @@ $size-icon: px-to-rem( 20px );
 
 $size-dialog-bar--desktop: 40px;
 $heading-margin-top: 3 * $base-spacing-unit;
-$heading-margin-bottom: 2 * $base-spacing-unit;
+$heading-margin-bottom: $base-spacing-unit-fixed;
 
 // TODO: Double check these values with UX - why not general heading margins as above?
 $references-heading-margin-top: px-to-rem( 18px );
@@ -22,7 +22,7 @@ $references-heading-margin-bottom: px-to-rem( 10px );
 
 $padding-panel-form: 2 * $base-spacing-unit-fixed;
 $margin-center-column-side: 3 * $base-spacing-unit-fixed;
-$binary-input-inter-component-spacing: 2 * $base-spacing-unit-fixed;
+$binary-input-inter-component-spacing: $base-spacing-unit-fixed;
 
 // TODO taken from: https://gerrit.wikimedia.org/r/plugins/gitiles/wikibase/termbox/+/master/src/styles/_variables.scss
 $color-placeholder: $wmui-color-base30;

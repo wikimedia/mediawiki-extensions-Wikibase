@@ -7,7 +7,7 @@
 	background-color: transparent;
 	font-size: $font-size-body;
 	margin: 0;
-	margin-top: 0.75rem;
+	margin-top: 0.5 * $base-spacing-unit-fixed;
 
 	&::placeholder {
 		font-style: italic;
