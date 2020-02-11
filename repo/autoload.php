@@ -146,7 +146,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\SqlStore' => __DIR__ . '/includes/Store/Sql/SqlStore.php',
 	'Wikibase\\StatementRankSerializer' => __DIR__ . '/includes/StatementRankSerializer.php',
 	'Wikibase\\Store' => __DIR__ . '/includes/Store/Store.php',
-	'Wikibase\\StoreFactory' => __DIR__ . '/includes/Store/StoreFactory.php',
 	'Wikibase\\Store\\ChangeDispatchCoordinator' => __DIR__ . '/includes/Store/ChangeDispatchCoordinator.php',
 	'Wikibase\\Store\\SubscriptionLookup' => __DIR__ . '/includes/Store/SubscriptionLookup.php',
 	'Wikibase\\SubmitEntityAction' => __DIR__ . '/includes/Actions/SubmitEntityAction.php',
