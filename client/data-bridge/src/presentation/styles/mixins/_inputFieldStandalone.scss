@@ -1,7 +1,7 @@
 @mixin inputFieldStandalone() {
 	border: 1px solid $border-color-base;
 	border-radius: 2px;
-	padding: 7px;
+	padding: 5px $base-spacing-unit-fixed 4px $base-spacing-unit-fixed;
 	line-height: $line-height-text;
 
 	&:focus,
