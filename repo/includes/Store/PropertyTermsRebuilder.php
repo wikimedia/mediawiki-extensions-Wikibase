@@ -7,7 +7,7 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
-use Wikibase\TermStore\PropertyTermStore;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -15,8 +15,8 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class PropertyTermsRebuilder {
 
-	/** @var PropertyTermStore */
-	private $propertyTermStore;
+	/** @var PropertyTermStoreWriter */
+	private $propertyTermStoreWriter;
 	/** @var SeekableEntityIdPager */
 	private $idPager;
 	/** @var MessageReporter */
@@ -33,7 +33,7 @@ class PropertyTermsRebuilder {
 	private $batchSpacingInSeconds;
 
 	/**
-	 * @param PropertyTermStore $propertyTermStore
+	 * @param PropertyTermStoreWriter $propertyTermStoreWriter
 	 * @param SeekableEntityIdPager $idPager
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
@@ -43,7 +43,7 @@ class PropertyTermsRebuilder {
 	 * @param int $batchSpacingInSeconds
 	 */
 	public function __construct(
-		PropertyTermStore $propertyTermStore,
+		PropertyTermStoreWriter $propertyTermStoreWriter,
 		SeekableEntityIdPager $idPager,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
@@ -52,7 +52,7 @@ class PropertyTermsRebuilder {
 		$batchSize,
 		$batchSpacingInSeconds
 	) {
-		$this->propertyTermStore = $propertyTermStore;
+		$this->propertyTermStoreWriter = $propertyTermStoreWriter;
 		$this->idPager = $idPager;
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
@@ -104,7 +104,7 @@ class PropertyTermsRebuilder {
 
 	private function saveTerms( Property $property ) {
 		try {
-			$this->propertyTermStore->storeTerms( $property->getId(), $property->getFingerprint() );
+			$this->propertyTermStoreWriter->storeTerms( $property->getId(), $property->getFingerprint() );
 		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(

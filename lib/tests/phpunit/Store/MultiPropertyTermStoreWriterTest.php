@@ -5,22 +5,22 @@ namespace Wikibase\Lib\Tests\Store;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\MultiPropertyTermStore;
-use Wikibase\TermStore\PropertyTermStore;
+use Wikibase\Lib\Store\MultiPropertyTermStoreWriter;
 
 /**
- * @covers \Wikibase\Lib\Store\MultiPropertyTermStore
+ * @covers \Wikibase\Lib\Store\MultiPropertyTermStoreWriter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class MultiPropertyTermStoreTest extends TestCase {
+class MultiPropertyTermStoreWriterTest extends TestCase {
 
 	/** @var PropertyId */
 	private $propertyId;
@@ -41,46 +41,46 @@ class MultiPropertyTermStoreTest extends TestCase {
 	}
 
 	public function testStoreTerms_success() {
-		$propertyTermStores = [];
+		$propertyTermStoreWriters = [];
 		for ( $i = 0; $i < 5; $i++ ) {
-			$propertyTermStore = $this->createMock( PropertyTermStore::class );
-			$propertyTermStore->expects( $this->once() )
+			$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
+			$propertyTermStoreWriter->expects( $this->once() )
 				->method( 'storeTerms' )
 				->with( $this->propertyId, $this->fingerprint );
-			$propertyTermStores[] = $propertyTermStore;
+			$propertyTermStoreWriters[] = $propertyTermStoreWriter;
 		}
 
-		( new MultiPropertyTermStore( $propertyTermStores ) )
+		( new MultiPropertyTermStoreWriter( $propertyTermStoreWriters ) )
 			->storeTerms( $this->propertyId, $this->fingerprint );
 	}
 
 	public function testStoreTerms_oneException() {
 		$exception = new Exception( __METHOD__ . ' exception' );
-		$store1 = $this->createMock( PropertyTermStore::class );
+		$store1 = $this->createMock( PropertyTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->propertyId, $this->fingerprint )
 			->willThrowException( $exception );
-		$store2 = $this->createMock( PropertyTermStore::class );
+		$store2 = $this->createMock( PropertyTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->propertyId, $this->fingerprint );
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception->getMessage() );
-		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
+		( new MultiPropertyTermStoreWriter( [ $store1, $store2 ] ) )
 			->storeTerms( $this->propertyId, $this->fingerprint );
 	}
 
 	public function testStoreTerms_allExceptions() {
 		$exception1 = new Exception( __METHOD__ . ' exception 1' );
-		$store1 = $this->createMock( PropertyTermStore::class );
+		$store1 = $this->createMock( PropertyTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->propertyId, $this->fingerprint )
 			->willThrowException( $exception1 );
 		$exception2 = new Exception( __METHOD__ . ' exception 2' );
-		$store2 = $this->createMock( PropertyTermStore::class );
+		$store2 = $this->createMock( PropertyTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->propertyId, $this->fingerprint )
@@ -88,51 +88,51 @@ class MultiPropertyTermStoreTest extends TestCase {
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception1->getMessage() );
-		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
+		( new MultiPropertyTermStoreWriter( [ $store1, $store2 ] ) )
 			->storeTerms( $this->propertyId, $this->fingerprint );
 	}
 
 	public function testDeleteTerms_success() {
-		$propertyTermStores = [];
+		$propertyTermStoreWriters = [];
 		for ( $i = 0; $i < 5; $i++ ) {
-			$propertyTermStore = $this->createMock( PropertyTermStore::class );
-			$propertyTermStore->expects( $this->once() )
+			$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
+			$propertyTermStoreWriter->expects( $this->once() )
 				->method( 'deleteTerms' )
 				->with( $this->propertyId );
-			$propertyTermStores[] = $propertyTermStore;
+			$propertyTermStoreWriters[] = $propertyTermStoreWriter;
 		}
 
-		( new MultiPropertyTermStore( $propertyTermStores ) )
+		( new MultiPropertyTermStoreWriter( $propertyTermStoreWriters ) )
 			->deleteTerms( $this->propertyId );
 	}
 
 	public function testDeleteTerms_oneException() {
 		$exception = new Exception( __METHOD__ . ' exception' );
-		$store1 = $this->createMock( PropertyTermStore::class );
+		$store1 = $this->createMock( PropertyTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->propertyId )
 			->willThrowException( $exception );
-		$store2 = $this->createMock( PropertyTermStore::class );
+		$store2 = $this->createMock( PropertyTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->propertyId );
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception->getMessage() );
-		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
+		( new MultiPropertyTermStoreWriter( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->propertyId );
 	}
 
 	public function testDeleteTerms_allExceptions() {
 		$exception1 = new Exception( __METHOD__ . ' exception 1' );
-		$store1 = $this->createMock( PropertyTermStore::class );
+		$store1 = $this->createMock( PropertyTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->propertyId )
 			->willThrowException( $exception1 );
 		$exception2 = new Exception( __METHOD__ . ' exception 2' );
-		$store2 = $this->createMock( PropertyTermStore::class );
+		$store2 = $this->createMock( PropertyTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->propertyId )
@@ -140,42 +140,8 @@ class MultiPropertyTermStoreTest extends TestCase {
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception1->getMessage() );
-		( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
+		( new MultiPropertyTermStoreWriter( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->propertyId );
-	}
-
-	public function testGetTerms_success() {
-		$store1 = $this->createMock( PropertyTermStore::class );
-		$store1->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->propertyId )
-			->willReturn( $this->fingerprint );
-		$store2 = $this->createMock( PropertyTermStore::class );
-		$store2->expects( $this->never() )
-			->method( 'getTerms' );
-
-		$fingerprint = ( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
-			->getTerms( $this->propertyId );
-
-		$this->assertSame( $this->fingerprint, $fingerprint );
-	}
-
-	public function testGetTerms_fallback() {
-		$store1 = $this->createMock( PropertyTermStore::class );
-		$store1->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->propertyId )
-			->willReturn( new Fingerprint( /* empty */ ) );
-		$store2 = $this->createMock( PropertyTermStore::class );
-		$store2->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->propertyId )
-			->willReturn( $this->fingerprint );
-
-		$fingerprint = ( new MultiPropertyTermStore( [ $store1, $store2 ] ) )
-			->getTerms( $this->propertyId );
-
-		$this->assertSame( $this->fingerprint, $fingerprint );
 	}
 
 }

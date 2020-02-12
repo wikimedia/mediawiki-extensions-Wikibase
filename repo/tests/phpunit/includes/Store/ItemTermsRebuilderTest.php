@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
@@ -9,6 +10,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
+use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
+use Wikibase\DataModel\Services\Term\TermStoreException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -16,8 +19,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
-use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
 
 /**
  * @covers \Wikibase\Repo\Store\ItemTermsRebuilder
@@ -29,9 +30,9 @@ use Wikibase\TermStore\Implementations\ThrowingItemTermStore;
 class ItemTermsRebuilderTest extends MediaWikiTestCase {
 
 	/**
-	 * @var InMemoryItemTermStore
+	 * @var ItemTermStoreWriter
 	 */
-	private $itemTermStore;
+	private $itemTermStoreWriter;
 
 	/**
 	 * @var SpyMessageReporter
@@ -48,7 +49,7 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 	public function setUp() : void {
 		parent::setUp();
 
-		$this->itemTermStore = new InMemoryItemTermStore();
+		$this->itemTermStoreWriter = $this->newItemTermStoreWriter();
 		$this->errorReporter = new SpyMessageReporter();
 		$this->progressReporter = new SpyMessageReporter();
 
@@ -67,7 +68,7 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 
 	private function newRebuilder(): ItemTermsRebuilder {
 		return new ItemTermsRebuilder(
-			$this->itemTermStore,
+			$this->itemTermStoreWriter,
 			$this->itemIds,
 			$this->progressReporter,
 			$this->errorReporter,
@@ -78,17 +79,35 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function newItemTermStoreWriter() {
+		return new class implements ItemTermStoreWriter {
+			private $fingerprints = [];
+
+			public function storeTerms( ItemId $itemId, Fingerprint $terms ) {
+				$this->fingerprints[$itemId->getNumericId()] = $terms;
+			}
+
+			public function deleteTerms( ItemId $itemId ) {
+				throw new LogicException( 'Unimplemented' );
+			}
+
+			public function getTerms( ItemId $itemId ) {
+				return $this->fingerprints[$itemId->getNumericId()];
+			}
+		};
+	}
+
 	public function assertQ1IsStored() {
 		$this->assertEquals(
 			$this->newQ1()->getFingerprint(),
-			$this->itemTermStore->getTerms( new ItemId( 'Q1' ) )
+			$this->itemTermStoreWriter->getTerms( new ItemId( 'Q1' ) )
 		);
 	}
 
 	private function assertQ2IsStored() {
 		$this->assertEquals(
 			$this->newQ2()->getFingerprint(),
-			$this->itemTermStore->getTerms( new ItemId( 'Q2' ) )
+			$this->itemTermStoreWriter->getTerms( new ItemId( 'Q2' ) )
 		);
 	}
 
@@ -139,7 +158,11 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 	}
 
 	public function testErrorsAreReported() {
-		$this->itemTermStore = new ThrowingItemTermStore();
+		$itemTermStoreWriter = $this->createMock( ItemTermStoreWriter::class );
+		$itemTermStoreWriter->expects( $this->exactly( 2 ) )
+			->method( 'storeTerms' )
+			->will( $this->throwException( new TermStoreException() ) );
+		$this->itemTermStoreWriter = $itemTermStoreWriter;
 
 		$this->newRebuilder()->rebuild();
 

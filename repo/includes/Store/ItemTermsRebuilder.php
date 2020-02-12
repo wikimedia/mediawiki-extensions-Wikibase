@@ -7,8 +7,8 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookupException;
+use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -16,8 +16,8 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class ItemTermsRebuilder {
 
-	/** @var ItemTermStore */
-	private $itemTermStore;
+	/** @var ItemTermStoreWriter */
+	private $itemTermStoreWriter;
 	/* @var iterable */
 	private $itemIds;
 	/** @var MessageReporter */
@@ -34,7 +34,7 @@ class ItemTermsRebuilder {
 	private $batchSpacingInSeconds;
 
 	/**
-	 * @param ItemTermStore $itemTermStore
+	 * @param ItemTermStoreWriter $itemTermStoreWriter
 	 * @param $itemIdIterable
 	 * @param MessageReporter $progressReporter
 	 * @param MessageReporter $errorReporter
@@ -44,7 +44,7 @@ class ItemTermsRebuilder {
 	 * @param int $batchSpacingInSeconds
 	 */
 	public function __construct(
-		ItemTermStore $itemTermStore,
+		ItemTermStoreWriter $itemTermStoreWriter,
 		$itemIdIterable,
 		MessageReporter $progressReporter,
 		MessageReporter $errorReporter,
@@ -53,7 +53,7 @@ class ItemTermsRebuilder {
 		$batchSize,
 		$batchSpacingInSeconds
 	) {
-		$this->itemTermStore = $itemTermStore;
+		$this->itemTermStoreWriter = $itemTermStoreWriter;
 		$this->itemIds = $itemIdIterable;
 		$this->progressReporter = $progressReporter;
 		$this->errorReporter = $errorReporter;
@@ -124,7 +124,7 @@ class ItemTermsRebuilder {
 
 	private function saveTerms( Item $item ) {
 		try {
-			$this->itemTermStore->storeTerms( $item->getId(), $item->getFingerprint() );
+			$this->itemTermStoreWriter->storeTerms( $item->getId(), $item->getFingerprint() );
 		} catch ( Exception $ex ) {
 			$this->loadBalancerFactory->rollbackMasterChanges( __METHOD__ );
 			$this->errorReporter->reportMessage(

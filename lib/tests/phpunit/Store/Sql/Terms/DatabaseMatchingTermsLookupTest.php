@@ -10,7 +10,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
@@ -184,7 +184,7 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 			$this->markTestSkipped( 'Case insensitive search is not supported yet: T242644' );
 		}
 		$lookup = $this->getMatchingTermsLookup();
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		foreach ( $entities as $entitiy ) {
 			/** @var Item $entitiy */
@@ -248,14 +248,14 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getItemTermStore() {
+	private function getItemTermStoreWriter() {
 		$logger = new NullLogger();
 		$typeIdsStore = new DatabaseTypeIdsStore(
 			$this->lbFactory->getMainLB(),
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		return new DatabaseItemTermStore(
+		return new DatabaseItemTermStoreWriter(
 			$this->lbFactory->getMainLB(),
 			new DatabaseTermInLangIdsAcquirer(
 				$this->lbFactory,

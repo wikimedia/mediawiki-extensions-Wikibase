@@ -83,8 +83,8 @@ interface Store {
 
 	/**
 	 * This method will result in having 0 calls post migration as the service used
-	 * to write to the term store changes in WikibaseRepo::getItemTermStore
-	 * and WikibaseRepo::getPropertyTermStore
+	 * to write to the term store changes in WikibaseRepo::getItemTermStoreWriter
+	 * and WikibaseRepo::getPropertyTermStoreWriter
 	 *
 	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
 	 * An alternative will be available

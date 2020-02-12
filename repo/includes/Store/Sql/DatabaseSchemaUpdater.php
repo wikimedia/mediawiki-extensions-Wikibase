@@ -285,7 +285,7 @@ class DatabaseSchemaUpdater {
 		);
 
 		$rebuilder = new PropertyTermsRebuilder(
-			$wikibaseRepo->getNewPropertyTermStore(),
+			$wikibaseRepo->getNewPropertyTermStoreWriter(),
 			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
 			$reporter,
 			$reporter,
@@ -332,7 +332,7 @@ class DatabaseSchemaUpdater {
 		$highestId = (int)$highestId->id_value;
 
 		$rebuilder = new ItemTermsRebuilder(
-			$wikibaseRepo->getNewItemTermStore(),
+			$wikibaseRepo->getNewItemTermStoreWriter(),
 			self::newItemIdIterator( $highestId ),
 			$reporter,
 			$reporter,

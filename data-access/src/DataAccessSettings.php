@@ -120,7 +120,7 @@ class DataAccessSettings {
 	 * rather than from the old wb_terms table.
 	 *
 	 * The new schema is accessed through classes like
-	 * {@link DatabasePropertyTermStore} and {@link PrefetchingPropertyTermLookup},
+	 * {@link DatabasePropertyTermStoreWriter} and {@link PrefetchingPropertyTermLookup},
 	 * the old one through classes like {@link TermSqlIndex}
 	 * and {@link BufferingTermIndexTermLookup}.
 	 *
@@ -138,7 +138,7 @@ class DataAccessSettings {
 	 * rather than from the old wb_terms table.
 	 *
 	 * The new schema is accessed through classes like
-	 * {@link DatabaseItemTermStore} and {@link PrefetchingItemTermLookup},
+	 * {@link DatabaseItemTermStoreWriter} and {@link PrefetchingItemTermLookup},
 	 * the old one through classes like {@link TermSqlIndex}
 	 * and {@link BufferingTermIndexTermLookup}.
 	 *

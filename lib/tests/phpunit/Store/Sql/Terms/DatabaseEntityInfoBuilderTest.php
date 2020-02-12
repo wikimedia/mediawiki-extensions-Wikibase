@@ -19,8 +19,8 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
-use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
+use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -85,7 +85,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			MediaWikiServices::getInstance()->getMainWANObjectCache()
 		);
 
-		$itemTermStore = new DatabaseItemTermStore(
+		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$loadBalancerFactory,
@@ -105,7 +105,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			new NullLogger()
 		);
 
-		$propertyTermStore = new DatabasePropertyTermStore(
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$loadBalancerFactory,
@@ -129,14 +129,14 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->createPage( $entity );
 
 			if ( $entity instanceof Property ) {
-				$propertyTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
+				$propertyTermStoreWriter->storeTerms( $entity->getId(), $entity->getFingerprint() );
 				$infoRows[] = [
 					$entity->getId()->getNumericId(),
 					$entity->getDataTypeId(),
 					'{"type":"' . $entity->getDataTypeId() . '"}'
 				];
 			} elseif ( $entity instanceof Item ) {
-				$itemTermStore->storeTerms( $entity->getId(), $entity->getFingerprint() );
+				$itemTermStoreWriter->storeTerms( $entity->getId(), $entity->getFingerprint() );
 			}
 		}
 

@@ -10,19 +10,19 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\StringNormalizer;
-use Wikibase\TermStore\ItemTermStore;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * ItemTermStore implementation for the 2019 SQL based secondary item term storage
+ * ItemTermStoreWriter implementation for the 2019 SQL based secondary item term storage
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabaseItemTermStore implements ItemTermStore {
+class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 
 	use FingerprintableEntityTermStoreTrait;
 
@@ -74,13 +74,6 @@ class DatabaseItemTermStore implements ItemTermStore {
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->logger = $logger ?: new NullLogger();
-	}
-
-	private function getDbr(): IDatabase {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
-		}
-		return $this->dbr;
 	}
 
 	private function getDbw(): IDatabase {
@@ -233,24 +226,6 @@ class DatabaseItemTermStore implements ItemTermStore {
 	private function cleanTermsIfUnused( array $termInLangIds ) {
 		$this->termInLangIdsCleaner->cleanTermInLangIds(
 			$this->findActuallyUnusedTermInLangIds( $termInLangIds, $this->getDbw() )
-		);
-	}
-
-	public function getTerms( ItemId $itemId ): Fingerprint {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.ItemTermStore_getTerms'
-		);
-		$this->assertCanHandleItemId( $itemId );
-
-		$termInLangIds = $this->getDbr()->selectFieldValues(
-			'wbt_item_terms',
-			'wbit_term_in_lang_id',
-			[ 'wbit_item_id' => $itemId->getNumericId() ],
-			__METHOD__
-		);
-
-		return $this->resolveTermIdsResultToFingerprint(
-			$this->termInLangIdsResolver->resolveTermInLangIds( $termInLangIds )
 		);
 	}
 

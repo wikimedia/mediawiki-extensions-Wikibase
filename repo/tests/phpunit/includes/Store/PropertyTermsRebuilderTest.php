@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
@@ -10,14 +11,14 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\DataModel\Services\Term\TermStoreException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
-use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
-use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 
 /**
  * @covers \Wikibase\Repo\Store\PropertyTermsRebuilder
@@ -29,9 +30,9 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 
 	/**
-	 * @var InMemoryPropertyTermStore
+	 * @var PropertyTermStoreWriter
 	 */
-	private $propertyTermStore;
+	private $propertyTermStoreWriter;
 
 	/**
 	 * @var SpyMessageReporter
@@ -46,7 +47,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	public function setUp() : void {
 		parent::setUp();
 
-		$this->propertyTermStore = new InMemoryPropertyTermStore();
+		$this->propertyTermStoreWriter = $this->newPropertyTermStoreWriter();
 		$this->errorReporter = new SpyMessageReporter();
 		$this->progressReporter = new SpyMessageReporter();
 	}
@@ -60,7 +61,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 
 	private function newRebuilder(): PropertyTermsRebuilder {
 		return new PropertyTermsRebuilder(
-			$this->propertyTermStore,
+			$this->propertyTermStoreWriter,
 			$this->newIdPager(),
 			$this->progressReporter,
 			$this->errorReporter,
@@ -71,17 +72,35 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 		);
 	}
 
+	private function newPropertyTermStoreWriter() {
+		return new class implements PropertyTermStoreWriter {
+			private $fingerprints = [];
+
+			public function storeTerms( PropertyId $propertyId, Fingerprint $terms ) {
+				$this->fingerprints[$propertyId->getNumericId()] = $terms;
+			}
+
+			public function deleteTerms( PropertyId $propertyId ) {
+				throw new LogicException( 'Unimplemented' );
+			}
+
+			public function getTerms( PropertyId $propertyId ) {
+				return $this->fingerprints[$propertyId->getNumericId()];
+			}
+		};
+	}
+
 	public function assertP1IsStored() {
 		$this->assertEquals(
 			$this->newP1()->getFingerprint(),
-			$this->propertyTermStore->getTerms( new PropertyId( 'P1' ) )
+			$this->propertyTermStoreWriter->getTerms( new PropertyId( 'P1' ) )
 		);
 	}
 
 	private function assertP2IsStored() {
 		$this->assertEquals(
 			$this->newP2()->getFingerprint(),
-			$this->propertyTermStore->getTerms( new PropertyId( 'P2' ) )
+			$this->propertyTermStoreWriter->getTerms( new PropertyId( 'P2' ) )
 		);
 	}
 
@@ -138,7 +157,11 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	}
 
 	public function testErrorsAreReported() {
-		$this->propertyTermStore = new ThrowingPropertyTermStore();
+		$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
+		$propertyTermStoreWriter->expects( $this->exactly( 2 ) )
+			->method( 'storeTerms' )
+			->will( $this->throwException( new TermStoreException() ) );
+		$this->propertyTermStoreWriter = $propertyTermStoreWriter;
 
 		$this->newRebuilder()->rebuild();
 

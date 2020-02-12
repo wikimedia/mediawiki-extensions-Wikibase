@@ -7,13 +7,13 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 
 /**
  * @covers \Wikibase\Lib\Store\ItemTermStoreWriterAdapter
@@ -25,12 +25,12 @@ use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 class ItemTermStoreWriterAdapterTest extends TestCase {
 
 	/**
-	 * @var InMemoryItemTermStore
+	 * @var ItemTermStoreWriter
 	 */
-	private $itemTermStore;
+	private $itemTermStoreWriter;
 
 	public function setUp() : void {
-		$this->itemTermStore = new InMemoryItemTermStore();
+		$this->itemTermStoreWriter = $this->newItemTermStoreWriter();
 	}
 
 	public function testSaveTermsThrowsExceptionWhenGivenUnsupportedEntityType() {
@@ -42,12 +42,34 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 
 	private function newTermStoreWriter() {
 		return new ItemTermStoreWriterAdapter(
-			$this->itemTermStore
+			$this->itemTermStoreWriter
 		);
 	}
 
 	private function newUnsupportedEntity() {
 		return $this->createMock( EntityDocument::class );
+	}
+
+	private function newItemTermStoreWriter(): ItemTermStoreWriter {
+		return new class implements ItemTermStoreWriter {
+			private $fingerprints = [];
+
+			public function storeTerms( ItemId $itemId, Fingerprint $terms ) {
+				$this->fingerprints[$itemId->getNumericId()] = $terms;
+			}
+
+			public function deleteTerms( ItemId $itemId ) {
+				unset( $this->fingerprints[$itemId->getNumericId()] );
+			}
+
+			public function getTerms( ItemId $itemId ) {
+				if ( isset( $this->fingerprints[$itemId->getNumericId()] ) ) {
+					return $this->fingerprints[$itemId->getNumericId()];
+				} else {
+					return new Fingerprint();
+				}
+			}
+		};
 	}
 
 	public function testDeleteTermsThrowsExceptionWhenGivenUnsupportedEntityId() {
@@ -92,7 +114,7 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 
 		$this->assertEquals(
 			$item->getFingerprint(),
-			$this->itemTermStore->getTerms( $item->getId() )
+			$this->itemTermStoreWriter->getTerms( $item->getId() )
 		);
 	}
 
@@ -106,7 +128,7 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 	public function testDeletesTermsDeletesItemTerms() {
 		$item = $this->newItemWithTerms();
 
-		$this->itemTermStore->storeTerms(
+		$this->itemTermStoreWriter->storeTerms(
 			$item->getId(),
 			$item->getFingerprint()
 		);
@@ -115,7 +137,7 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 
 		$this->assertEquals(
 			new Fingerprint(),
-			$this->itemTermStore->getTerms( $item->getId() )
+			$this->itemTermStoreWriter->getTerms( $item->getId() )
 		);
 	}
 

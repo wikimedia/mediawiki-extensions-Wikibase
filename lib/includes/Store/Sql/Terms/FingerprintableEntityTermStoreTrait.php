@@ -2,16 +2,12 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use Wikibase\DataModel\Term\AliasGroup;
-use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\Term;
-use Wikibase\DataModel\Term\TermList;
 use Wikibase\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
 
 /**
- * Trait for code reuse between DatabaseItemTermStore and DatabasePropertyTermStore
+ * Trait for code reuse between DatabaseItemTermStoreWriter and DatabasePropertyTermStoreWriter
  *
  * @author Addshore
  * @see @ref md_docs_storage_terms
@@ -34,37 +30,6 @@ trait FingerprintableEntityTermStoreTrait {
 			$termsArray['alias'][$language] = $aliases;
 		}
 		return $termsArray;
-	}
-
-	/**
-	 * @param array $result Result from TermIdsResolver::resolveTermIds
-	 * @return Fingerprint
-	 */
-	private function resolveTermIdsResultToFingerprint( array $result ) {
-		$labels = $result['label'] ?? [];
-		$descriptions = $result['description'] ?? [];
-		$aliases = $result['alias'] ?? [];
-
-		return new Fingerprint(
-			new TermList( array_map(
-				function ( $language, $labels ) {
-					return new Term( $language, $labels[0] );
-				},
-				array_keys( $labels ), $labels
-			) ),
-			new TermList( array_map(
-				function ( $language, $descriptions ) {
-					return new Term( $language, $descriptions[0] );
-				},
-				array_keys( $descriptions ), $descriptions
-			) ),
-			new AliasGroupList( array_map(
-				function ( $language, $aliases ) {
-					return new AliasGroup( $language, $aliases );
-				},
-				array_keys( $aliases ), $aliases
-			) )
-		);
 	}
 
 	/**
