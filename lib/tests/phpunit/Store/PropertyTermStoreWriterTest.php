@@ -5,8 +5,6 @@ namespace Wikibase\Lib\Tests\Store;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
@@ -14,33 +12,26 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\DelegatingEntityTermStoreWriter;
-use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
+use Wikibase\Lib\Store\PropertyTermStoreWriter;
 use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
 use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 
 /**
- * @covers \Wikibase\Lib\Store\DelegatingEntityTermStoreWriter
+ * @covers \Wikibase\Lib\Store\PropertyTermStoreWriter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DelegatingEntityTermStoreWriterTest extends TestCase {
+class PropertyTermStoreWriterTest extends TestCase {
 
 	/**
 	 * @var InMemoryPropertyTermStore
 	 */
 	private $propertyTermStore;
 
-	/**
-	 * @var InMemoryItemTermStore
-	 */
-	private $itemTermStore;
-
 	public function setUp() : void {
 		$this->propertyTermStore = new InMemoryPropertyTermStore();
-		$this->itemTermStore = new InMemoryItemTermStore();
 	}
 
 	public function testSaveTermsThrowsExceptionWhenGivenUnsupportedEntityType() {
@@ -51,9 +42,8 @@ class DelegatingEntityTermStoreWriterTest extends TestCase {
 	}
 
 	private function newTermStoreWriter() {
-		return new DelegatingEntityTermStoreWriter(
-			$this->propertyTermStore,
-			$this->itemTermStore
+		return new PropertyTermStoreWriter(
+			$this->propertyTermStore
 		);
 	}
 
@@ -156,40 +146,6 @@ class DelegatingEntityTermStoreWriterTest extends TestCase {
 		$this->assertEquals(
 			new Fingerprint(),
 			$this->propertyTermStore->getTerms( $property->getId() )
-		);
-	}
-
-	public function testSaveTermsSavesItems() {
-		$item = $this->newItemWithTerms();
-
-		$this->newTermStoreWriter()->saveTermsOfEntity( $item );
-
-		$this->assertEquals(
-			$item->getFingerprint(),
-			$this->itemTermStore->getTerms( $item->getId() )
-		);
-	}
-
-	private function newItemWithTerms(): Item {
-		return new Item(
-			new ItemId( 'Q42' ),
-			$this->newFingerprint()
-		);
-	}
-
-	public function testDeletesTermsDeletesItemTerms() {
-		$item = $this->newItemWithTerms();
-
-		$this->itemTermStore->storeTerms(
-			$item->getId(),
-			$item->getFingerprint()
-		);
-
-		$this->newTermStoreWriter()->deleteTermsOfEntity( $item->getId() );
-
-		$this->assertEquals(
-			new Fingerprint(),
-			$this->itemTermStore->getTerms( $item->getId() )
 		);
 	}
 
