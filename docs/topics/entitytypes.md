@@ -56,6 +56,12 @@ The entity types repository is an associative array mapping entity type identifi
   * List on pairs [ns,local] specifying predicates for RDF export of labels for this entity.
 * entity-search-callback (repo only)
   * A callable that returns [EntitySearchHelper] instance. Takes WebRequest as an argument. This defines how the completion search (wbsearchentities) for the entity type works.
+* link-formatter-callback
+  * A callable that returns [EntityLinkFormatter] instance. Takes a Language object as argument.
+* entity-id-html-link-formatter-callback
+  * A callable that returns [EntityIdFormatter] instance. Takes a Language object as argument.
+* entity-reference-extractor-callback
+  * A callable that builds and returns [EntityReferenceExtractors] instance which extract ids of referenced entities from an entity. Can be used to determine which other entities an entity links to (e.g. in "What links here").
 * sub-entity-types (optional) (repo and client)
   * An array of strings listing the sub entity types that this entity type contains.
 * fulltext-search-context (repo only)
@@ -65,7 +71,7 @@ The entity types repository is an associative array mapping entity type identifi
 * lua-entity-module (optional) (client only)
   * The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function* mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
 * entity-id-lookup-callback (client only)
-* A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
+  * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 
 Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 
@@ -88,3 +94,6 @@ The entity type definitions themselves are wrapped by the [EntityTypeDefinitions
 [WikibaseRepo.entitytypes.php]: @ref WikibaseRepo.entitytypes.php
 [WikibaseRepoEntityTypes]: @ref WikibaseRepoEntityTypes
 [WikibaseClientEntityTypes]: @ref WikibaseClientEntityTypes
+[EntityLinkFormatter]: @ref Wikibase::Repo::Hooks::Formatters::EntityLinkFormatter
+[EntityIdFormatter]: @ref Wikibase::DataModel::Services::EntityId::EntityIdFormatter
+[EntityReferenceExtractors]: @ref Wikibase::Repo::EntityReferenceExtractors::EntityReferenceExtractor
