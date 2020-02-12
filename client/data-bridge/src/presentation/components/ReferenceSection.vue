@@ -40,6 +40,10 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 .wb-db-references {
 	margin: 0 $margin-center-column-side;
 
+	@media ( max-width: $breakpoint ) {
+		margin: 0;
+	}
+
 	&__heading {
 		margin: $references-heading-margin-top 0 $references-heading-margin-bottom 0;
 

@@ -57,6 +57,10 @@ export default class EditDecision extends mixins( StateMixin ) {
 .wb-db-edit-decision {
 	margin: 0 $margin-center-column-side;
 
+	@media ( max-width: $breakpoint ) {
+		margin: 0;
+	}
+
 	&__heading {
 		margin: $heading-margin-top 0 $heading-margin-bottom 0;
 
