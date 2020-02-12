@@ -67,7 +67,7 @@
 	"notification-header-page-connection": "Lapa <strong>$3</strong> tika {{GENDER:$2|pievienota}} {{PLURAL:$4|-1=repozitorija \"{{WBREPONAME}}\" ierakstam|repozitorija \"{{WBREPONAME}}\" ierakstam $4}}, kur var apkopot ar tematu saistītos datus.",
 	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu",
 	"connected-redirect-category-desc": "Pieprasītie konti",
-	"wikibase-client-data-bridge-dialog-title": "Labot īpašību",
+	"wikibase-client-data-bridge-dialog-title": "Labot $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Vairāk informācijas",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nezināma atļauju kļūda",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Es salaboju</strong> nepareizu vērtību",

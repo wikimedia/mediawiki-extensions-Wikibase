@@ -137,7 +137,7 @@
 	"unresolved-property-category-desc": "Cette catégorie répertorie les pages qui utilisent des propriétés de {{WBREPONAME}} que l’on ne peut trouver ni par l’identifiant de propriété (ID), ni par le libellé.",
 	"connected-redirect-category": "Redirections connectées à un élément {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Cette catégorie liste les pages de redirection qui sont connectées à un élément de {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Modifier la propriété",
+	"wikibase-client-data-bridge-dialog-title": "Modifier $1",
 	"wikibase-client-data-bridge-permissions-error": "Vous n’avez pas le droit de modifier cette valeur, pour {{PLURAL:$1|la raison suivante|les raisons suivantes}} :",
 	"wikibase-client-data-bridge-permissions-error-info": "Plus de détails",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Cette valeur est actuellement [$1 complètement protégée] sur {{WBREPONAME}} et ne peut être modifiée que par les [$2 administrateurs].</strong>",

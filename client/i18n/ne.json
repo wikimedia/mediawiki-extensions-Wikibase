@@ -3,7 +3,8 @@
 		"authors": [
 			"बिप्लब आनन्द",
 			"राम प्रसाद जोशी",
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"पर्वत सुबेदी"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
@@ -51,5 +52,6 @@
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} आइटम आइडी",
 	"wikibase-pageinfo-entity-id-none": "कुनै पनि होइन",
 	"wikibase-otherprojects": "अन्य परियोजनाहरू",
-	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार"
+	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार",
+	"wikibase-client-data-bridge-dialog-title": "सम्पादन गर्ने $1"
 }

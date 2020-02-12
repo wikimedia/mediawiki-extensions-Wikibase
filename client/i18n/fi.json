@@ -92,5 +92,8 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Näytä}} kohde",
 	"unresolved-property-category": "Sivut, joissa on ratkaisemattomia ominaisuuksia",
 	"connected-redirect-category": "Ohjaukset, jotka on liitetty {{WBREPONAME}}-kohteeseen",
-	"wikibase-client-data-bridge-bailout-heading": "Sen sijaan voisit tehdä seuraavasti:"
+	"wikibase-client-data-bridge-bailout-heading": "Sen sijaan voisit tehdä seuraavasti:",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Useiden arvojen muokkaamista ei tällä hetkellä tueta.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Tällä hetkellä $1 ei ole muokattavissa, sillä se sisältää useamman kuin yhden arvon.",
+	"wikibase-client-data-bridge-novalue-error-head": "Kohteen $1 muokkaamista ei tällä hetkellä tueta"
 }
