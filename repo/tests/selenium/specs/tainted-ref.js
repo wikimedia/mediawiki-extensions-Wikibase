@@ -57,6 +57,13 @@ describe( 'the Tainted icon', () => {
 			ItemPage.taintedRefIcon.waitForExist( 500, true ),
 			'Tainted Icon should not be visible on entering edit mode'
 		);
+
+		ItemPage.clickCancelOnStatement( 0, propertyId );
+
+		assert(
+			ItemPage.taintedRefIcon.waitForExist(),
+			'Tainted Icon is visible after canceling edit on a tainted statement '
+		);
 	} );
 
 } );
