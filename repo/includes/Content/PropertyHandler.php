@@ -2,8 +2,9 @@
 
 namespace Wikibase\Repo\Content;
 
-use DataUpdate;
+use Content;
 use IContextSource;
+use MediaWiki\Revision\SlotRenderingProvider;
 use Page;
 use Title;
 use Wikibase\Content\EntityHolder;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EditEntityAction;
-use Wikibase\EntityContent;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -57,6 +57,11 @@ class PropertyHandler extends EntityHandler {
 	private $labelLookupFactory;
 
 	/**
+	 * @var EntityTermStoreWriter
+	 */
+	private $termStoreWriter;
+
+	/**
 	 * @param EntityTermStoreWriter $termStoreWriter
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
@@ -84,7 +89,7 @@ class PropertyHandler extends EntityHandler {
 	) {
 		parent::__construct(
 			CONTENT_MODEL_WIKIBASE_PROPERTY,
-			$termStoreWriter,
+			null,
 			$contentCodec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -97,6 +102,7 @@ class PropertyHandler extends EntityHandler {
 		$this->labelLookupFactory = $labelLookupFactory;
 		$this->infoStore = $infoStore;
 		$this->propertyInfoBuilder = $propertyInfoBuilder;
+		$this->termStoreWriter = $termStoreWriter;
 	}
 
 	/**
@@ -136,59 +142,57 @@ class PropertyHandler extends EntityHandler {
 		return Property::ENTITY_TYPE;
 	}
 
-	/**
-	 * Returns deletion updates for the given EntityContent.
-	 *
-	 * @see EntityHandler::getEntityDeletionUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
-
-		$updates[] = new DataUpdateAdapter(
-			[ $this->infoStore, 'removePropertyInfo' ],
-			$content->getEntity()->getId()
-		);
-
-		return array_merge(
-			parent::getEntityDeletionUpdates( $content, $title ),
-			$updates
-		);
-	}
-
-	/**
-	 * Returns modification updates for the given EntityContent.
-	 *
-	 * @see EntityHandler::getEntityModificationUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
+	public function getSecondaryDataUpdates(
+		Title $title,
+		Content $content,
+		$role,
+		SlotRenderingProvider $slotOutput
+	) {
+		$updates = parent::getSecondaryDataUpdates( $title, $content, $role, $slotOutput );
 
 		/** @var PropertyContent $content */
 		'@phan-var PropertyContent $content';
+		$id = $content->getEntityId();
 		$property = $content->getProperty();
-		$info = $this->propertyInfoBuilder->buildPropertyInfo( $property );
 
 		$updates[] = new DataUpdateAdapter(
 			[ $this->infoStore, 'setPropertyInfo' ],
-			$property->getId(),
-			$info
+			$id,
+			$this->propertyInfoBuilder->buildPropertyInfo( $property )
 		);
 
-		return array_merge(
-			$updates,
-			parent::getEntityModificationUpdates( $content, $title ),
-			parent::getTermIndexEntityModificationUpdates( $content )
+		if ( $content->isRedirect() ) {
+			$updates[] = new DataUpdateAdapter(
+				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+				$id
+			);
+		} else {
+			$updates[] = new DataUpdateAdapter(
+				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
+				$property
+			);
+		}
+
+		return $updates;
+	}
+
+	public function getDeletionUpdates( Title $title, $role ) {
+		$updates = parent::getDeletionUpdates( $title, $role );
+
+		$id = $this->getIdForTitle( $title );
+
+		$updates[] = new DataUpdateAdapter(
+			[ $this->infoStore, 'removePropertyInfo' ],
+			$id
 		);
+
+		// Unregister the entity from the terms table.
+		$updates[] = new DataUpdateAdapter(
+			[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
+			$id
+		);
+
+		return $updates;
 	}
 
 	/**

@@ -4,10 +4,7 @@ namespace Wikibase\Repo\Content;
 
 use Content;
 use ContentHandler;
-use DataUpdate;
-use DeferrableUpdate;
 use Diff\Patcher\PatcherException;
-use Hooks;
 use Html;
 use IContextSource;
 use InvalidArgumentException;
@@ -28,7 +25,6 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
-use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
@@ -60,11 +56,6 @@ abstract class EntityHandler extends ContentHandler {
 	protected $fieldDefinitions;
 
 	/**
-	 * @var EntityTermStoreWriter
-	 */
-	private $termStoreWriter;
-
-	/**
 	 * @var EntityContentDataCodec
 	 */
 	protected $contentCodec;
@@ -92,7 +83,7 @@ abstract class EntityHandler extends ContentHandler {
 
 	/**
 	 * @param string $modelId
-	 * @param EntityTermStoreWriter $termStoreWriter
+	 * @param mixed $unused @todo Get rid of me
 	 * @param EntityContentDataCodec $contentCodec
 	 * @param EntityConstraintProvider $constraintProvider
 	 * @param ValidatorErrorLocalizer $errorLocalizer
@@ -106,7 +97,7 @@ abstract class EntityHandler extends ContentHandler {
 	 */
 	public function __construct(
 		$modelId,
-		EntityTermStoreWriter $termStoreWriter,
+		$unused,
 		EntityContentDataCodec $contentCodec,
 		EntityConstraintProvider $constraintProvider,
 		ValidatorErrorLocalizer $errorLocalizer,
@@ -122,7 +113,6 @@ abstract class EntityHandler extends ContentHandler {
 			throw new InvalidArgumentException( '$legacyExportFormatDetector must be a callable (or null)' );
 		}
 
-		$this->termStoreWriter = $termStoreWriter;
 		$this->contentCodec = $contentCodec;
 		$this->constraintProvider = $constraintProvider;
 		$this->errorLocalizer = $errorLocalizer;
@@ -623,89 +613,6 @@ abstract class EntityHandler extends ContentHandler {
 	 * @return string
 	 */
 	abstract public function getEntityType();
-
-	/**
-	 * Returns deletion updates for the given EntityContent.
-	 *
-	 * @see Content::getDeletionUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DeferrableUpdate[]
-	 */
-	public function getEntityDeletionUpdates( EntityContent $content, Title $title ) {
-		$updates = [];
-
-		$entityId = $content->getEntityId();
-
-		// Call the WikibaseEntityDeletionUpdate hook.
-		// Do this before doing any well-known updates.
-		$updates[] = new DataUpdateAdapter(
-			[ Hooks::class, 'run' ],
-			'WikibaseEntityDeletionUpdate',
-			[ $content, $title ]
-		);
-
-		// Unregister the entity from the terms table.
-		$updates[] = new DataUpdateAdapter(
-			[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
-			$entityId
-		);
-
-		return $updates;
-	}
-
-	/**
-	 * Returns modification updates for the given EntityContent.
-	 *
-	 * @see Content::getSecondaryDataUpdates
-	 *
-	 * @param EntityContent $content
-	 * @param Title $title
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getEntityModificationUpdates( EntityContent $content, Title $title ) {
-		// Call the WikibaseEntityModificationUpdate hook.
-		// Do this after doing all well-known updates.
-		return [ new DataUpdateAdapter(
-			[ Hooks::class, 'run' ],
-			'WikibaseEntityModificationUpdate',
-			[ $content, $title ]
-		) ];
-	}
-
-	/**
-	 * @param EntityContent $content
-	 * @return DataUpdate[]
-	 * @throws MWException
-	 */
-	protected function getTermIndexEntityModificationUpdates( EntityContent $content ) {
-		if ( $content->isRedirect() ) {
-			return $this->getDeleteTermUpdates( $content->getEntityId() );
-		}
-
-		return $this->getSaveTermUpdates( $content->getEntity() );
-	}
-
-	private function getDeleteTermUpdates( EntityId $entityId ) {
-		return [
-			new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'deleteTermsOfEntity' ],
-				$entityId
-			)
-		];
-	}
-
-	private function getSaveTermUpdates( EntityDocument $entity ) {
-		return [
-			new DataUpdateAdapter(
-				[ $this->termStoreWriter, 'saveTermsOfEntity' ],
-				$entity
-			)
-		];
-	}
 
 	/**
 	 * Whether IDs can automatically be assigned to entities

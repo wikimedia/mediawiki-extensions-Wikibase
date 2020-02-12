@@ -5,8 +5,6 @@ namespace Wikibase;
 use AbstractContent;
 use Article;
 use Content;
-use DataUpdate;
-use DeferrableUpdate;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\Patcher\MapPatcher;
@@ -149,51 +147,6 @@ abstract class EntityContent extends AbstractContent {
 		}
 
 		throw new RuntimeException( 'EntityContent was constructed without an EntityId!' );
-	}
-
-	/**
-	 * @see Content::getDeletionUpdates
-	 * @see EntityHandler::getEntityDeletionUpdates
-	 *
-	 * @param WikiPage $page
-	 * @param ParserOutput|null $parserOutput
-	 *
-	 * @return DeferrableUpdate[]
-	 */
-	public function getDeletionUpdates( WikiPage $page, ParserOutput $parserOutput = null ) {
-		$handler = $this->getContentHandler();
-		$updates = $handler->getEntityDeletionUpdates( $this, $page->getTitle() );
-
-		return array_merge(
-			parent::getDeletionUpdates( $page, $parserOutput ),
-			$updates
-		);
-	}
-
-	/**
-	 * @see Content::getSecondaryDataUpdates
-	 * @see EntityHandler::getEntityModificationUpdates
-	 *
-	 * @param Title $title
-	 * @param Content|null $oldContent
-	 * @param bool $recursive
-	 * @param ParserOutput|null $parserOutput
-	 *
-	 * @return DataUpdate[]
-	 */
-	public function getSecondaryDataUpdates(
-		Title $title,
-		Content $oldContent = null,
-		$recursive = false,
-		ParserOutput $parserOutput = null
-	) {
-		$handler = $this->getContentHandler();
-		$updates = $handler->getEntityModificationUpdates( $this, $title );
-
-		return array_merge(
-			parent::getSecondaryDataUpdates( $title, $oldContent, $recursive, $parserOutput ),
-			$updates
-		);
 	}
 
 	/**
