@@ -5,8 +5,11 @@
 			:data-value="targetValue"
 			:set-data-value="setDataValue"
 			:maxlength="this.$bridgeConfig.stringMaxLength"
+			class="wb-db-bridge__target-value"
 		/>
-		<ReferenceSection />
+		<ReferenceSection
+			class="wb-db-bridge__reference-section"
+		/>
 		<EditDecision />
 	</section>
 </template>
@@ -54,5 +57,13 @@ export default class DataBridge extends mixins( StateMixin ) {
 <style lang="scss">
 .wb-db-bridge {
 	padding: $padding-panel-form;
+
+	.wb-db-bridge__target-value {
+		margin-bottom: 2 * $base-spacing-unit-fixed;
+	}
+
+	.wb-db-bridge__reference-section {
+		margin-bottom: 3 * $base-spacing-unit-fixed;
+	}
 }
 </style>
