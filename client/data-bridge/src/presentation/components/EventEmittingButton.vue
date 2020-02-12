@@ -245,6 +245,11 @@ export default class EventEmittingButton extends Vue {
 		@include sr-only();
 	}
 
+	&--iconOnly#{&}--disabled#{&}--frameless {
+		opacity: $opacity-base--disabled;
+	}
+	// no styles for non-frameless disabled icon button yet (currently no such type)
+
 	&--primaryProgressive#{&}--pressed {
 		background-color: $color-primary--active;
 	}
