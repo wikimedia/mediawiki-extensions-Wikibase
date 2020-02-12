@@ -42,8 +42,8 @@ describe( 'ErrorUnsupportedSnakType', () => {
 	} );
 
 	it.each( [
-		[ 'somevalue', MessageKeys.SOMEVALUE_ERROR_HEAD ],
-		[ 'novalue', MessageKeys.NOVALUE_ERROR_HEAD ],
+		[ 'somevalue' as SnakType, MessageKeys.SOMEVALUE_ERROR_HEAD ],
+		[ 'novalue' as SnakType, MessageKeys.NOVALUE_ERROR_HEAD ],
 	] )( 'shows the message header for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
 		shallowMount( ErrorUnsupportedSnakType, {
 			localVue,
@@ -69,8 +69,8 @@ describe( 'ErrorUnsupportedSnakType', () => {
 	} );
 
 	it.each( [
-		[ 'somevalue', MessageKeys.SOMEVALUE_ERROR_BODY ],
-		[ 'novalue', MessageKeys.NOVALUE_ERROR_BODY ],
+		[ 'somevalue' as SnakType, MessageKeys.SOMEVALUE_ERROR_BODY ],
+		[ 'novalue' as SnakType, MessageKeys.NOVALUE_ERROR_BODY ],
 	] )( 'shows the message body for %s', ( snakType: SnakType, messageKey: MessageKeys ) => {
 		shallowMount( ErrorUnsupportedSnakType, {
 			localVue,
