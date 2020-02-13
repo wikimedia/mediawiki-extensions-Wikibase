@@ -6,12 +6,13 @@ import Vue from 'vue';
 import { PayloadSnakDataValue, PayloadSnakType } from '@/store/statements/snaks/Payloads';
 import Snak from '@/datamodel/Snak';
 import { PathToSnak } from '@/store/statements/PathToSnak';
+import clone from '@/store/clone';
 
 export class StatementMutations extends Mutations<StatementState> {
 	public setStatements(
 		payload: { entityId: EntityId; statements: StatementMap },
 	): void {
-		Vue.set( this.state, payload.entityId, payload.statements );
+		Vue.set( this.state, payload.entityId, clone( payload.statements ) );
 	}
 
 	public setDataValue( payload: PayloadSnakDataValue<PathToSnak> ): void {

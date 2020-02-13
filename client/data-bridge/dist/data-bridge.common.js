@@ -13515,7 +13515,12 @@ var EntityRevision_EntityRevision = function EntityRevision(entity, revisionId) 
 };
 
 
+// CONCATENATED MODULE: ./src/store/clone.ts
+function clone(source) {
+  return JSON.parse(JSON.stringify(source));
+}
 // CONCATENATED MODULE: ./src/store/statements/mutations.ts
+
 
 
 
@@ -13537,7 +13542,7 @@ function (_Mutations) {
   _createClass(StatementMutations, [{
     key: "setStatements",
     value: function setStatements(payload) {
-      external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(this.state, payload.entityId, payload.statements);
+      external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a.set(this.state, payload.entityId, clone(payload.statements));
     }
   }, {
     key: "setDataValue",
@@ -14241,10 +14246,6 @@ function _nonIterableSpread() {
 
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-// CONCATENATED MODULE: ./src/store/clone.ts
-function clone(source) {
-  return JSON.parse(JSON.stringify(source));
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
 
