@@ -12044,7 +12044,7 @@ function (_Actions) {
       var _initBridgeWithRemoteData = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(_ref) {
-        var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit, state, path;
+        var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit, state, path, originalStatement;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -12070,7 +12070,10 @@ function (_Actions) {
 
               case 10:
                 if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
-                  this.commit('setOriginalStatement', state[NS_STATEMENTS][path.entityId][path.propertyId][path.index]);
+                  originalStatement = state[NS_STATEMENTS][path.entityId][path.propertyId][path.index];
+                  this.commit('setOriginalStatement', originalStatement);
+                  this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  originalStatement.mainsnak.datavalue);
                   this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
                 }
 
@@ -12180,6 +12183,7 @@ function (_Actions) {
         return Promise.reject(null);
       }
 
+      this.commit('setTargetValue', dataValue);
       var state = this.state;
       var path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
       return this.statementModule.dispatch('setStringDataValue', {
@@ -12250,7 +12254,6 @@ var deep_equal_default = /*#__PURE__*/__webpack_require__.n(deep_equal);
 
 
 
-
 var getters_RootGetters =
 /*#__PURE__*/
 function (_Getters) {
@@ -12266,17 +12269,6 @@ function (_Getters) {
     key: "$init",
     value: function $init(store) {
       this.statementModule = statementModule.context(store);
-    }
-  }, {
-    key: "targetValue",
-    get: function get() {
-      if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
-        return null;
-      }
-
-      var entityId = this.state[NS_ENTITY].id;
-      var pathToMainSnak = new MainSnakPath_MainSnakPath(entityId, this.state.targetProperty, 0);
-      return this.statementModule.getters.dataValue(pathToMainSnak);
     }
   }, {
     key: "targetLabel",
@@ -12432,6 +12424,11 @@ function (_Mutations) {
       this.state.editDecision = editDecision;
     }
   }, {
+    key: "setTargetValue",
+    value: function setTargetValue(dataValue) {
+      this.state.targetValue = clone(dataValue);
+    }
+  }, {
     key: "setEntityTitle",
     value: function setEntityTitle(entityTitle) {
       this.state.entityTitle = entityTitle;
@@ -12459,6 +12456,7 @@ var state_BaseState = function BaseState() {
   this.applicationErrors = [];
   this.applicationStatus = ValidApplicationStatus.INITIALIZING;
   this.editDecision = null;
+  this.targetValue = null;
   this.editFlow = '';
   this.entityTitle = '';
   this.originalHref = '';
@@ -12549,12 +12547,12 @@ function (_Vue) {
 
 StateMixin_StateMixin = __decorate([vue_class_component_common_default.a], StateMixin_StateMixin);
 /* harmony default export */ var presentation_StateMixin = (StateMixin_StateMixin);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=9da0d546&
-var DataBridgevue_type_template_id_9da0d546_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{staticClass:"wb-db-bridge__target-value",attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection',{staticClass:"wb-db-bridge__reference-section"}),_c('EditDecision')],1)}
-var DataBridgevue_type_template_id_9da0d546_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/DataBridge.vue?vue&type=template&id=da7708b4&
+var DataBridgevue_type_template_id_da7708b4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-bridge"},[_c('StringDataValue',{staticClass:"wb-db-bridge__target-value",attrs:{"label":_vm.targetLabel,"data-value":_vm.targetValue,"set-data-value":_vm.setDataValue,"maxlength":this.$bridgeConfig.stringMaxLength}}),_c('ReferenceSection',{staticClass:"wb-db-bridge__reference-section"}),_c('EditDecision')],1)}
+var DataBridgevue_type_template_id_da7708b4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=9da0d546&
+// CONCATENATED MODULE: ./src/presentation/components/DataBridge.vue?vue&type=template&id=da7708b4&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"42133e48-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/EditDecision.vue?vue&type=template&id=0cbdf5f8&
 var EditDecisionvue_type_template_id_0cbdf5f8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-edit-decision"},[_c('h2',{staticClass:"wb-db-edit-decision__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_HEADING ))+" ")]),_c('RadioGroup',[_c('RadioInput',{attrs:{"name":"editDecision","html-value":"replace"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_REPLACE_DESCRIPTION ))+" ")])],2),_c('RadioInput',{attrs:{"name":"editDecision","html-value":"update"},model:{value:(_vm.editDecision),callback:function ($$v) {_vm.editDecision=$$v},expression:"editDecision"}},[_c('template',{slot:"label"},[_c('span',{domProps:{"innerHTML":_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_LABEL ))}})]),_c('template',{slot:"description"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.EDIT_DECISION_UPDATE_DESCRIPTION ))+" ")])],2)],1)],1)}
@@ -13307,7 +13305,7 @@ function (_mixins) {
   }, {
     key: "targetValue",
     get: function get() {
-      var targetValue = this.rootModule.getters.targetValue;
+      var targetValue = this.rootModule.state.targetValue;
 
       if (targetValue === null) {
         throw new Error('not yet ready!');
@@ -13354,8 +13352,8 @@ var DataBridgevue_type_style_index_0_lang_scss_ = __webpack_require__("436e");
 
 var DataBridge_component = normalizeComponent(
   components_DataBridgevue_type_script_lang_ts_,
-  DataBridgevue_type_template_id_9da0d546_render,
-  DataBridgevue_type_template_id_9da0d546_staticRenderFns,
+  DataBridgevue_type_template_id_da7708b4_render,
+  DataBridgevue_type_template_id_da7708b4_staticRenderFns,
   false,
   null,
   null,

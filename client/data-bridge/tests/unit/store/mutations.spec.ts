@@ -1,3 +1,4 @@
+import DataValue from '@/datamodel/DataValue';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditDecision from '@/definitions/EditDecision';
@@ -101,6 +102,17 @@ describe( 'root/mutations', () => {
 
 		mutations.setEditDecision( editDecision );
 		expect( state.editDecision ).toBe( editDecision );
+	} );
+
+	it( 'sets the target value of the state', () => {
+		const state: Application = newApplicationState();
+		const targetValue: DataValue = { type: 'string', value: 'a string' };
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.setTargetValue( targetValue );
+		expect( state.targetValue ).not.toBe( targetValue );
+		expect( state.targetValue ).toStrictEqual( targetValue );
 	} );
 
 	it( 'sets the entity title of the state', () => {

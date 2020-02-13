@@ -14,46 +14,6 @@ describe( 'root/getters', () => {
 	const entityId = 'Q42';
 	const targetProperty = 'P23';
 
-	describe( 'targetValue', () => {
-		it( 'returns null if the application is in error state', () => {
-			const applicationState = newApplicationState( {
-				applicationStatus: ApplicationStatus.ERROR,
-			} );
-			const getters = inject( RootGetters, {
-				state: applicationState,
-			} );
-			expect( getters.targetValue ).toBeNull();
-		} );
-
-		it( 'returns the target value', () => {
-			const dataValue = { type: 'string', value: 'a string' };
-
-			const getters = inject( RootGetters, {
-				state: newApplicationState( {
-					applicationStatus: ApplicationStatus.READY,
-					targetProperty,
-					[ NS_ENTITY ]: {
-						id: entityId,
-						baseRevision: 0,
-					},
-					[ NS_STATEMENTS ]: {},
-				} ),
-			} );
-
-			const snakGetter = jest.fn().mockReturnValue( dataValue );
-			// @ts-ignore
-			getters.statementModule = {
-			// @ts-ignore
-				getters: {
-					dataValue: snakGetter,
-				},
-			};
-
-			expect( getters.targetValue ).toBe( dataValue );
-			expect( snakGetter ).toHaveBeenCalledWith( { entityId, index: 0, 'propertyId': targetProperty } );
-		} );
-	} );
-
 	describe( 'targetLabel', () => {
 		it( 'returns the targetProperty and no linguistic content' +
 			', if no targetLabel is set.', () => {

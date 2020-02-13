@@ -100,9 +100,15 @@ RootActions
 
 		await this.dispatch( 'validateEntityState', path );
 		if ( this.getters.applicationStatus !== ApplicationStatus.ERROR ) {
+			const originalStatement = state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ];
 			this.commit(
 				'setOriginalStatement',
-				state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ],
+				originalStatement,
+			);
+			this.commit(
+				'setTargetValue',
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+				originalStatement.mainsnak.datavalue!,
 			);
 
 			this.commit(
@@ -186,6 +192,8 @@ RootActions
 			} ] );
 			return Promise.reject( null );
 		}
+
+		this.commit( 'setTargetValue', dataValue );
 
 		const state = this.state as InitializedApplicationState;
 		const path = new MainSnakPath(

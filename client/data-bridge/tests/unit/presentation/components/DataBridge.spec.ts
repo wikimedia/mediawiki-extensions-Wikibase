@@ -22,8 +22,8 @@ localVue.use( Vuex );
 describe( 'DataBridge', () => {
 	beforeEach( () => {
 		store = createStore( newMockServiceContainer( {} ) );
+		store.commit( 'setTargetValue', { type: 'string', value: '' } );
 		Vue.set( store, 'getters', {
-			targetValue: { type: 'string', value: '' },
 			targetLabel: { value: 'P123', language: 'zxx' },
 			targetReferences: [],
 		} );
@@ -42,7 +42,7 @@ describe( 'DataBridge', () => {
 		const targetValue = { type: 'string', value: 'Töfften' };
 		const targetLabel = { value: 'P123', language: 'zxx' };
 		const stringMaxLength = 200;
-		Vue.set( store.getters, 'targetValue', targetValue );
+		store.commit( 'setTargetValue', targetValue );
 		Vue.set( store.getters, 'targetLabel', targetLabel );
 
 		const wrapper = shallowMount( DataBridge, {
@@ -53,7 +53,7 @@ describe( 'DataBridge', () => {
 			localVue,
 		} );
 
-		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toBe( targetValue );
+		expect( wrapper.find( StringDataValue ).props( 'dataValue' ) ).toStrictEqual( targetValue );
 		expect( wrapper.find( StringDataValue ).props( 'label' ) ).toBe( targetLabel );
 		expect( wrapper.find( StringDataValue ).props( 'maxlength' ) ).toBe( stringMaxLength );
 	} );

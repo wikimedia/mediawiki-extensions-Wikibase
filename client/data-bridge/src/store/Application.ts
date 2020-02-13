@@ -5,6 +5,7 @@ import { EntityState } from '@/store/entity';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import DataValue from '@/datamodel/DataValue';
 import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
@@ -14,6 +15,7 @@ interface Application {
 	applicationErrors: ApplicationError[];
 	applicationStatus: ValidApplicationStatus;
 	editDecision: EditDecision|null;
+	targetValue: DataValue|null;
 	editFlow: string;
 	entityTitle: string;
 	originalHref: string;

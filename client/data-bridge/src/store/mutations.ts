@@ -1,6 +1,7 @@
 import EditDecision from '@/definitions/EditDecision';
 import clone from '@/store/clone';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
+import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
@@ -35,6 +36,10 @@ export class RootMutations extends Mutations<Application> {
 
 	public setEditDecision( editDecision: EditDecision ): void {
 		this.state.editDecision = editDecision;
+	}
+
+	public setTargetValue( dataValue: DataValue ): void {
+		this.state.targetValue = clone( dataValue );
 	}
 
 	public setEntityTitle( entityTitle: string ): void {
