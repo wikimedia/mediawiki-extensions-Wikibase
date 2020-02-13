@@ -14,8 +14,8 @@ describe( 'WikibaseReferenceOnProtectedPage', function () {
 		browser.call( () => WikibaseApi.protectEntity( itemId ) );
 		ItemPage.open( itemId );
 
-		browser.waitForVisible( '.wikibase-statementview-references-container .wikibase-statementview-references-heading a.ui-toggler' );
-		if ( browser.isExisting( '.wikibase-addtoolbar' ) ) {
+		$( '.wikibase-statementview-references-container .wikibase-statementview-references-heading a.ui-toggler' ).waitForDisplayed();
+		if ( $( '.wikibase-addtoolbar' ).isExisting() ) {
 			throw new Error( 'This shouldn\'t exist on a protected page!' );
 		}
 	} );

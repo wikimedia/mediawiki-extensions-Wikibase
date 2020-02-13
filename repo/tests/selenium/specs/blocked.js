@@ -3,27 +3,37 @@ const assert = require( 'assert' ),
 	Page = require( 'wdio-mediawiki/Page' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
+/**
+ * TODO use LoginPage.loginAdmin() compatible w/ wdio 5 from wdio-mediawiki v1.0.0+
+ */
+function loginAdmin() {
+	LoginPage.open();
+	$( '#wpName1' ).setValue( browser.config.username );
+	$( '#wpPassword1' ).setValue( browser.config.password );
+	$( '#wpLoginAttempt' ).click(); // eslint-disable-line no-jquery/no-event-shorthand
+}
+
 describe( 'blocked user cannot use', function () {
 
 	const bot = new MWBot( {
-		apiUrl: browser.options.baseUrl + '/api.php'
+		apiUrl: browser.config.baseUrl + '/api.php'
 	} );
 
 	before( function setupBot() {
 		return bot.loginGetEditToken( {
-			username: browser.options.username,
-			password: browser.options.password
+			username: browser.config.username,
+			password: browser.config.password
 		} );
 	} );
 
 	before( function loginUser() {
-		return LoginPage.loginAdmin();
+		loginAdmin();
 	} );
 
 	beforeEach( function blockUser() {
 		return bot.request( {
 			action: 'block',
-			user: browser.options.username,
+			user: browser.config.username,
 			expiry: '1 minute',
 			reason: 'Wikibase browser test (T211120)',
 			token: bot.editToken
@@ -33,22 +43,16 @@ describe( 'blocked user cannot use', function () {
 	afterEach( function unblockUser() {
 		return bot.request( {
 			action: 'unblock',
-			user: browser.options.username,
+			user: browser.config.username,
 			reason: 'Wikibase browser test done (T211120)',
 			token: bot.editToken
 		} );
 	} );
 
 	function assertIsUserBlockedError() {
-		$( '#mw-returnto' ).waitForVisible();
+		$( '#mw-returnto' ).waitForDisplayed();
 
 		assert.strictEqual( $( '#firstHeading' ).getText(), 'User is blocked' );
-	}
-
-	function assertDoesNotExist( selector ) {
-		const element = $( selector );
-		assert.strictEqual( typeof element, 'object', `$( '${selector}' ) should have returned a NoSuchElement error` );
-		assert.strictEqual( element.type, 'NoSuchElement', `$( '${selector}' ) should have returned a NoSuchElement error` );
 	}
 
 	const tests = [
@@ -72,7 +76,10 @@ describe( 'blocked user cannot use', function () {
 
 			for ( const id of test.ids ) {
 				const selector = `#${id}`;
-				assertDoesNotExist( selector );
+				assert(
+					!$( selector ).isExisting(),
+					`element "${selector}" should not exist`
+				);
 			}
 		} );
 	}
