@@ -26,8 +26,8 @@
     "events": "^3.1.0",
     "uuid": "^3.4.0",
     "vue": "^2.6.11",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.0",
     "vuex-smart-module": "^0.3.4"
   },
   "devDependencies": {
