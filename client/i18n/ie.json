@@ -2,15 +2,18 @@
 	"@metadata": {
 		"authors": [
 			"Stavanger7",
-			"Fanjiayi"
+			"Fanjiayi",
+			"OIS"
 		]
 	},
 	"wikibase-dataitem": "Element {{WBREPONAME}}",
-	"wikibase-editlinks": "Redacter catenunes",
-	"wikibase-editlinkstitle": "Redacter interlingue catenunes",
+	"wikibase-editlinks": "Redacter ligamentes",
+	"wikibase-editlinkstitle": "Redacter interlingual ligamentes",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ocultar",
 	"wikibase-rc-hide-wikidata-show": "Monstrar",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} redacter",
-	"wikibase-otherprojects": "In altri projectes"
+	"wikibase-otherprojects": "In altri projectes",
+	"wikibase-client-data-bridge-dialog-title": "Redacter $1"
 }

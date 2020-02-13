@@ -36,5 +36,10 @@
 	"wikibase-pageinfo-entity-usage-S": "Websteekeppeling",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Lebel: $1",
 	"wikibase-otherprojects": "Yn oare projekten",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Oansluting|Oanslutings}} op {{WBREPONAME}}"
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Oansluting|Oanslutings}} op {{WBREPONAME}}",
+	"echo-pref-tooltip-wikibase-action": "Meld my wannear't immen in troch {{GENDER:|my oanmakke}} side oanslút op in {{WBREPONAME}}-item.",
+	"notification-header-page-connection": "De side <strong>$3</strong> is {{GENDER:$2|oansletten}} op {{PLURAL:$4|-1=in {{WBREPONAME}}-item|it {{WBREPONAME}}-item $4}}, dêr't relevante gegevens foar it ûnderwerp ophelle wurde kinne.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> en {{PLURAL:$4|ien oare side|$4 oare siden|100=99+ oare siden}} binne {{GENDER:$2|oansletten}} op {{WBREPONAME}}-items, dêr't relevante gegevens foar de ûnderwerpen ophelle wurde kinne.",
+	"notification-link-text-view-item": "Item {{GENDER:$1|besjen}}",
+	"notification-subject-page-connection": "In troch jo {{GENDER:$3|oanmakke}} side op {{GRAMMAR:l|{{SITENAME}}}} is {{GENDER:$2|oansletten}} op in {{WBREPONAME}}-item"
 }

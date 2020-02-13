@@ -85,6 +85,7 @@
 	"notification-header-page-connection": "D'Säit <strong>$3</strong> gouf {{GENDER:$2|mat}} {{PLURAL:$4|-1=engem {{WBREPONAME}}-Objet|dem {{WBREPONAME}}-Objet $4}} verbonnen, wou Donnéeën a Relatioun mam Sujet gesammelt kënne ginn.",
 	"notification-link-text-view-item": "Element {{GENDER:$1|weisen}}",
 	"connected-redirect-category": "Viruleedungen déi mat engem {{WBREPONAME}}-Element verbonne sinn",
+	"wikibase-client-data-bridge-dialog-title": "$1 änneren",
 	"wikibase-client-data-bridge-permissions-error-info": "Méi Detailer",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Onbekannte Berechtigungsfeeler",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Dir kënnt dëse Wäert aus onbekannte Grënn dëse Wäert net änneren",

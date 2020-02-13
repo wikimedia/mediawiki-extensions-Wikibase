@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Stavanger7"
+			"Stavanger7",
+			"OIS"
 		]
 	},
 	"wikibase-edit": "redacter",
-	"wikibase-add": "adjunter"
+	"wikibase-add": "adjunter",
+	"wikibase-sitelinks-special": "Altri sites",
+	"wikibase-statementview-rank-normal": "Normal rang"
 }
