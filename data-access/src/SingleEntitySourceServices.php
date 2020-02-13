@@ -417,6 +417,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 					'wikibase.prefetchingPropertyTermLookup.',
 					$cacheSecret
 				);
+				$cache = new StatsdMissRecordingSimpleCache(
+					$cache,
+					MediaWikiServices::getInstance()->getStatsdDataFactory(),
+					'wikibase.prefetchingPropertyTermLookupCache.miss'
+				);
 				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
 				$lookups['property'] = new CachingPrefetchingTermLookup(
 					$cache,

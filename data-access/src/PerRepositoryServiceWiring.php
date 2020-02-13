@@ -241,6 +241,11 @@ return [
 				'wikibase.prefetchingPropertyTermLookup.',
 				$cacheSecret
 			);
+			$cache = new StatsdMissRecordingSimpleCache(
+				$cache,
+				MediaWikiServices::getInstance()->getStatsdDataFactory(),
+				'wikibase.prefetchingPropertyTermLookupCache.miss'
+			);
 			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
 				$services->getService( 'EntityRevisionLookup' )
 			);
