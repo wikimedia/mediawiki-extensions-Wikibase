@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="wb-db-error-permission">
 		<p
 			class="wb-db-error-permission__heading"
 		>
@@ -265,6 +265,8 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 </script>
 <style lang="scss">
 .wb-db-error-permission {
+	margin: 0 $margin-center-column-side;
+
 	&__heading {
 		@include body-S();
 	}

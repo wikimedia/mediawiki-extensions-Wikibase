@@ -15938,12 +15938,12 @@ var PageNotEditable;
   PageNotEditable["ITEM_CASCADE_PROTECTED"] = "cascadeprotected";
   PageNotEditable["UNKNOWN"] = "unknown";
 })(PageNotEditable || (PageNotEditable = {}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"255d44af-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=430b9ee6&
-var ErrorPermissionvue_type_template_id_430b9ee6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',[_c('p',{staticClass:"wb-db-error-permission__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING ))+" ")]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,staticClass:"wb-db-error-permission__info",attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError ),"expanded-by-default":_vm.permissionErrors.length === 1}})})],2)}
-var ErrorPermissionvue_type_template_id_430b9ee6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"255d44af-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3f8d1f3f&
+var ErrorPermissionvue_type_template_id_3f8d1f3f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"wb-db-error-permission"},[_c('p',{staticClass:"wb-db-error-permission__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.PERMISSIONS_HEADING ))+" ")]),_vm._l((_vm.permissionErrors),function(permissionError,index){return _c('ErrorPermissionInfo',{key:index,staticClass:"wb-db-error-permission__info",attrs:{"message-header":_vm.getMessageHeader( permissionError ),"message-body":_vm.getMessageBody( permissionError ),"expanded-by-default":_vm.permissionErrors.length === 1}})})],2)}
+var ErrorPermissionvue_type_template_id_3f8d1f3f_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=430b9ee6&
+// CONCATENATED MODULE: ./src/presentation/components/ErrorPermission.vue?vue&type=template&id=3f8d1f3f&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -16454,8 +16454,8 @@ var ErrorPermissionvue_type_style_index_0_lang_scss_ = __webpack_require__("e24a
 
 var ErrorPermission_component = normalizeComponent(
   components_ErrorPermissionvue_type_script_lang_ts_,
-  ErrorPermissionvue_type_template_id_430b9ee6_render,
-  ErrorPermissionvue_type_template_id_430b9ee6_staticRenderFns,
+  ErrorPermissionvue_type_template_id_3f8d1f3f_render,
+  ErrorPermissionvue_type_template_id_3f8d1f3f_staticRenderFns,
   false,
   null,
   null,
