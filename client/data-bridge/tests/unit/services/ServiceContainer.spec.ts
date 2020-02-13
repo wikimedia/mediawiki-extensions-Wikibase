@@ -1,20 +1,19 @@
 import ServiceContainer, { Services } from '@/services/ServiceContainer';
 
 describe( 'ServiceContainer', () => {
-	describe.each( [
-		[ 'readingEntityRepository' ],
-		[ 'writingEntityRepository' ],
-		[ 'languageInfoRepository' ],
-		[ 'entityLabelRepository' ],
-		[ 'propertyDatatypeRepository' ],
-		[ 'messagesRepository' ],
-		[ 'wikibaseRepoConfigRepository' ],
-		[ 'tracker' ],
-		[ 'repoRouter' ],
-		[ 'clientRouter' ],
-		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-		// @ts-ignore
-	] )( '%s', ( name: keyof Services ) => {
+	const serviceNames: ( keyof Services )[] = [
+		'readingEntityRepository',
+		'writingEntityRepository',
+		'languageInfoRepository',
+		'entityLabelRepository',
+		'propertyDatatypeRepository',
+		'messagesRepository',
+		'wikibaseRepoConfigRepository',
+		'tracker',
+		'repoRouter',
+		'clientRouter',
+	];
+	describe.each( serviceNames )( '%s', ( name: keyof Services ) => {
 		it( 'throws an error if it is not set', () => {
 			expect( () => ( new ServiceContainer() ).get( name ) ).toThrow();
 		} );
