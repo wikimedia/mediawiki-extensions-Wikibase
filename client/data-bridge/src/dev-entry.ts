@@ -48,6 +48,7 @@ services.set( 'entityLabelRepository', {
 	},
 } );
 
+/* eslint-disable max-len */
 const messages = {
 	[ MessageKeys.BRIDGE_DIALOG_TITLE ]: 'bridge dev',
 	[ MessageKeys.SAVE_CHANGES ]: 'save changes',
@@ -60,10 +61,13 @@ const messages = {
 	[ MessageKeys.REFERENCES_HEADING ]: 'References',
 	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '.&#32;',
 	[ MessageKeys.BAILOUT_HEADING ]: 'Instead you could do the following:',
-	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO ]: 'Edit the value on the repo. Click the button below (new tab).',
+	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO ]: 'Edit the value on repo. Click the button below to edit the value directly (link opens in a new tab).',
 	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON ]: 'Edit the value on the repo',
-	[ MessageKeys.BAILOUT_SUGGESTION_EDIT_ARTICLE ]: 'Overwrite using the article editor (not recommended): $1',
+	[ MessageKeys.BAILOUT_SUGGESTION_EDIT_ARTICLE ]: 'Depending on the template used, it might be possible to overwrite the value locally using <a href="https://example.com">the article editor</a>. If at all possible, we recommend that you instead add the value to repo via the button above.',
+	[ MessageKeys.UNSUPPORTED_DATATYPE_ERROR_HEAD ]: 'Editing the value for $1 is currently not supported',
+	[ MessageKeys.UNSUPPORTED_DATATYPE_ERROR_BODY ]: '$1 is of the datatype $2 on repo. Editing this datatype is currently not supported.',
 } as { [ key in MessageKeys ]: string };
+/* eslint-enable max-len */
 
 services.set( 'messagesRepository', {
 	get( messageKey: MessageKeys ): string {

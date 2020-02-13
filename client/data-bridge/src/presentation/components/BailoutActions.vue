@@ -63,17 +63,19 @@ export default class BailoutActions extends Vue {
 
 <style lang="scss">
 .wb-db-bailout-actions {
-	margin: 0 $margin-center-column-side;
+	$margin-to-error-message: 2 * $base-spacing-unit-fixed;
+	$margin-between-suggestions: 2 * $base-spacing-unit-fixed;
+	margin: $margin-to-error-message $margin-center-column-side 0;
 
 	&__heading {
-		margin: $heading-margin-top 0 $heading-margin-bottom 0;
+		margin-bottom: $heading-margin-bottom;
 
 		@include body-S-bold();
 	}
 
 	&__suggestion {
 		list-style: disc outside;
-		margin-bottom: 3 * $base-spacing-unit;
+		margin-bottom: $margin-between-suggestions;
 		margin-left: 2 * $base-spacing-unit-fixed;
 
 		@include body-S();
