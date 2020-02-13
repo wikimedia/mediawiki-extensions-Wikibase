@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 5.1.0 (2020-02-13)
+* Added the `ItemTermStoreWriter` and `PropertyTermStoreWriter` interfaces.
+
 ## Version 5.0.0 (2020-01-24)
 * Stopped accepting null for term type or language in TermBuffer::prefetchTerms()
 
