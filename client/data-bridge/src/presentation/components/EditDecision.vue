@@ -68,7 +68,7 @@ export default class EditDecision extends mixins( StateMixin ) {
 	}
 
 	strong {
-		font-weight: bold;
+		font-weight: $bold-font-weight;
 	}
 }
 </style>
