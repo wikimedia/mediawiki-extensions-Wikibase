@@ -5,7 +5,7 @@ const assert = require( 'assert' ),
 
 function createTag( tagname, reason ) {
 	let bot;
-	return Api.bot( browser.config.username, browser.config.password )
+	return Api.bot()
 		.then( ( mwBot ) => {
 			bot = mwBot;
 			return bot.getEditToken();
@@ -21,7 +21,7 @@ function createTag( tagname, reason ) {
 }
 
 function getLatestRevisionTags( title ) {
-	return Api.bot( browser.config.username, browser.config.password ).then( ( bot ) => {
+	return Api.bot().then( ( bot ) => {
 		return bot.request( {
 			titles: title,
 			action: 'query',
@@ -83,7 +83,7 @@ describe( 'App', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openBridgeOnPage( title );
 

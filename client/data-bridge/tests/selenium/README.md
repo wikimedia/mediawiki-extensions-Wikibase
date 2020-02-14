@@ -23,9 +23,6 @@ that user must also have the permissions necessary to create new properties;
 similarly, if the “Data Bridge” does not exist,
 that user must also have the permissions necessary to create new tags.
 
-Data Bridge is already using the current version 5 of webdriverio,
-while Mediawiki core and Wikibase repo still need migration to that version.
-
 A complete test command run from the data-bridge directory could be:
 
     MW_SERVER=http://localhost MW_SCRIPT_PATH=/wiki/ MEDIAWIKI_USER='...' MEDIAWIKI_PASSWORD='...' npm run selenium-test
