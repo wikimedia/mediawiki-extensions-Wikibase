@@ -14,7 +14,6 @@ use Status;
 use Title;
 use User;
 use WatchAction;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -68,8 +67,6 @@ class WikiPageEntityStore implements EntityStore {
 
 	private $entitySource;
 
-	private $dataAccessSettings;
-
 	/**
 	 * @var PermissionManager
 	 */
@@ -81,7 +78,6 @@ class WikiPageEntityStore implements EntityStore {
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param RevisionStore $revisionStore A RevisionStore for the local database.
 	 * @param EntitySource $entitySource
-	 * @param DataAccessSettings $dataAccessSettings
 	 * @param PermissionManager $permissionManager
 	 */
 	public function __construct(
@@ -90,7 +86,6 @@ class WikiPageEntityStore implements EntityStore {
 		EntityIdComposer $entityIdComposer,
 		RevisionStore $revisionStore,
 		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
 		PermissionManager $permissionManager
 	) {
 		$this->contentFactory = $contentFactory;
@@ -102,29 +97,12 @@ class WikiPageEntityStore implements EntityStore {
 		$this->revisionStore = $revisionStore;
 
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 
 		$this->permissionManager = $permissionManager;
 	}
 
 	private function assertCanStoreEntity( EntityId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertEntityIdFromKnownSource( $id );
-			return;
-		}
-
-		$this->assertLocalEntityId( $id );
-	}
-
-	/**
-	 * @param EntityId $id
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	private function assertLocalEntityId( EntityId $id ) {
-		if ( $id->isForeign() ) {
-			throw new InvalidArgumentException( 'The entity must not be foreign' );
-		}
+		$this->assertEntityIdFromKnownSource( $id );
 	}
 
 	private function assertEntityIdFromKnownSource( EntityId $id ) {
@@ -172,11 +150,7 @@ class WikiPageEntityStore implements EntityStore {
 	 * @return bool
 	 */
 	public function canCreateWithCustomId( EntityId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			if ( !$this->entityIdFromKnownSource( $id ) ) {
-				return false;
-			}
-		} elseif ( $id->isForeign() ) {
+		if ( !$this->entityIdFromKnownSource( $id ) ) {
 			return false;
 		}
 
