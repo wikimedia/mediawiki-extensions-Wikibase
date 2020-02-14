@@ -80,7 +80,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 
 	private function reportFailureOfRequest( $message, Exception $exception = null ) {
 		$context = [
-			'message' => $message,
+			'errormessage' => $message,
 			'class' => __CLASS__
 		];
 		if ( $exception !== null ) {

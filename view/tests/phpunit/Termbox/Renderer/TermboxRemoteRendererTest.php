@@ -118,7 +118,7 @@ class TermboxRemoteRendererTest extends TestCase {
 				'{class}: Problem requesting from the remote server',
 				[
 					'class' => TermboxRemoteRenderer::class,
-					'message' => $upstreamException->getMessage(),
+					'errormessage' => $upstreamException->getMessage(),
 					'exception' => $upstreamException,
 				]
 			);
@@ -248,7 +248,7 @@ class TermboxRemoteRendererTest extends TestCase {
 				'{class}: Problem requesting from the remote server',
 				[
 					'class' => TermboxRemoteRenderer::class,
-					'message' => 'Request failed with status 0. Usually this means network failure or timeout',
+					'errormessage' => 'Request failed with status 0. Usually this means network failure or timeout',
 				]
 			);
 		$this->stats->expects( $this->once() )
