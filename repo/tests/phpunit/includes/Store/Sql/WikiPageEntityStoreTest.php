@@ -118,21 +118,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
 
-		$lookup = new WikiPageEntityRevisionLookup(
-			new WikiPageEntityMetaDataLookup(
-				$nsLookup,
-				new EntityIdLocalPartPageTableEntityQuery(
-					$nsLookup,
-					MediaWikiServices::getInstance()->getSlotRoleStore()
-				),
-				new UnusableEntitySource(),
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
-			),
-			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
-		);
-
 		$localSource = new EntitySource(
 			'local',
 			false,
@@ -150,6 +135,20 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'cus',
 			'cus',
 			''
+		);
+
+		$lookup = new WikiPageEntityRevisionLookup(
+			new WikiPageEntityMetaDataLookup(
+				$nsLookup,
+				new EntityIdLocalPartPageTableEntityQuery(
+					$nsLookup,
+					MediaWikiServices::getInstance()->getSlotRoleStore()
+				),
+				$localSource
+			),
+			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
+			MediaWikiServices::getInstance()->getRevisionStore(),
+			false
 		);
 
 		$store = new WikiPageEntityStore(
@@ -225,8 +224,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					$nsLookup,
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
-				$localSource,
-				$dataAccessSettings
+				$localSource
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore(),

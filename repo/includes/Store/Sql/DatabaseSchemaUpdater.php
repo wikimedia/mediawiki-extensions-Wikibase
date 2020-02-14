@@ -234,9 +234,7 @@ class DatabaseSchemaUpdater {
 					$wikibaseRepo->getEntityNamespaceLookup(),
 					MediaWikiServices::getInstance()->getSlotRoleStore()
 				),
-				$propertySource,
-				$dataAccessSettings,
-				false
+				$propertySource
 			),
 			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
 			MediaWikiServices::getInstance()->getRevisionStore(),

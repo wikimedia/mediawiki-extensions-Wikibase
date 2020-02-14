@@ -12,7 +12,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -84,8 +83,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 				'',
 				'',
 				''
-			),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			)
 		);
 	}
 

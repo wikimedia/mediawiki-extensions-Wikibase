@@ -832,10 +832,7 @@ class WikibaseRepo {
 						$entityNamespaceLookup,
 						MediaWikiServices::getInstance()->getSlotRoleStore()
 					),
-					$this->getLocalEntitySource(),
-					$this->getDataAccessSettings(),
-					$dbName,
-					$repoName
+					$this->getLocalEntitySource()
 				),
 				$dbName,
 				$repoName

@@ -8,14 +8,9 @@ use MediaWiki\Storage\NameTableStore;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\TermIndex;
@@ -58,13 +53,7 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideServices() {
 		return [
-			[ 'EntityPrefetcher', EntityPrefetcher::class ],
-			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
-			[ 'PrefetchingTermLookup', PrefetchingTermLookup::class ],
-			[ 'TermBuffer', TermBuffer::class ],
 			[ 'TermIndex', TermIndex::class ],
-			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
-			[ 'WikiPageEntityMetaDataAccessor', WikiPageEntityMetaDataAccessor::class ],
 			[ 'MatchingTermsLookup', MatchingTermsLookup::class ]
 		];
 	}
