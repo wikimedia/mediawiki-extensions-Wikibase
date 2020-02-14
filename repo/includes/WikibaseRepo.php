@@ -118,14 +118,14 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\ItemTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\MultiItemTermStore;
 use Wikibase\Lib\Store\MultiPropertyTermStore;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\Lib\Store\PropertyTermStoreWriter;
+use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
@@ -1844,13 +1844,13 @@ class WikibaseRepo {
 	}
 
 	private function getPropertyTermStoreWriter() {
-		return new PropertyTermStoreWriter(
+		return new PropertyTermStoreWriterAdapter(
 			$this->getPropertyTermStore()
 		);
 	}
 
 	private function getItemTermStoreWriter() {
-		return new ItemTermStoreWriter(
+		return new ItemTermStoreWriterAdapter(
 			$this->getItemTermStore()
 		);
 	}

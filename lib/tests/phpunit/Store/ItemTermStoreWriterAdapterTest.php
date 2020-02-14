@@ -12,17 +12,17 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\ItemTermStoreWriter;
+use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\TermStore\Implementations\InMemoryItemTermStore;
 
 /**
- * @covers \Wikibase\Lib\Store\ItemTermStoreWriter
+ * @covers \Wikibase\Lib\Store\ItemTermStoreWriterAdapter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ItemTermStoreWriterTest extends TestCase {
+class ItemTermStoreWriterAdapterTest extends TestCase {
 
 	/**
 	 * @var InMemoryItemTermStore
@@ -41,7 +41,7 @@ class ItemTermStoreWriterTest extends TestCase {
 	}
 
 	private function newTermStoreWriter() {
-		return new ItemTermStoreWriter(
+		return new ItemTermStoreWriterAdapter(
 			$this->itemTermStore
 		);
 	}

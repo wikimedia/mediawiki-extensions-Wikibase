@@ -12,18 +12,18 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\PropertyTermStoreWriter;
+use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
 use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 
 /**
- * @covers \Wikibase\Lib\Store\PropertyTermStoreWriter
+ * @covers \Wikibase\Lib\Store\PropertyTermStoreWriterAdapter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class PropertyTermStoreWriterTest extends TestCase {
+class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	/**
 	 * @var InMemoryPropertyTermStore
@@ -42,7 +42,7 @@ class PropertyTermStoreWriterTest extends TestCase {
 	}
 
 	private function newTermStoreWriter() {
-		return new PropertyTermStoreWriter(
+		return new PropertyTermStoreWriterAdapter(
 			$this->propertyTermStore
 		);
 	}

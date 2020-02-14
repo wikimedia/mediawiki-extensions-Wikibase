@@ -4,26 +4,26 @@ namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\TermStore\ItemTermStore;
+use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\TermStore\PropertyTermStore;
 use Wikibase\TermStore\TermStoreException;
 
 /**
- * Adapter turning an ItemTermStore into an EntityTermStoreWriter.
+ * Adapter turning a PropertyTermStore into an EntityTermStoreWriter.
  *
  * @license GPL-2.0-or-later
  */
-class ItemTermStoreWriter implements EntityTermStoreWriter {
+class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 
 	private $store;
 
-	public function __construct( ItemTermStore $store ) {
+	public function __construct( PropertyTermStore $store ) {
 		$this->store = $store;
 	}
 
 	public function saveTermsOfEntity( EntityDocument $entity ) {
-		if ( $entity instanceof Item ) {
+		if ( $entity instanceof Property ) {
 			try {
 				$this->store->storeTerms( $entity->getId(), $entity->getFingerprint() );
 				return true;
@@ -36,7 +36,7 @@ class ItemTermStoreWriter implements EntityTermStoreWriter {
 	}
 
 	public function deleteTermsOfEntity( EntityId $entityId ) {
-		if ( $entityId instanceof ItemId ) {
+		if ( $entityId instanceof PropertyId ) {
 			try {
 				$this->store->deleteTerms( $entityId );
 				return true;
