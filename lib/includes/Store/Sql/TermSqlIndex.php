@@ -14,7 +14,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
@@ -44,11 +43,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	 * @var StringNormalizer
 	 */
 	private $stringNormalizer;
-
-	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
 
 	/**
 	 * @var EntityIdParser
@@ -82,13 +76,11 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 
 	/**
 	 * @param StringNormalizer $stringNormalizer
-	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntitySource $entitySource
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
-		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
 		EntitySource $entitySource
 	) {
@@ -97,7 +89,6 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		parent::__construct( $databaseName );
 
 		$this->stringNormalizer = $stringNormalizer;
-		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
 		$this->entitySource = $entitySource;
 		$this->tableName = 'wb_terms';

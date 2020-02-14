@@ -345,7 +345,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->termIndex === null ) {
 			$this->termIndex = new TermSqlIndex(
 				$this->genericServices->getStringNormalizer(),
-				$this->entityIdComposer,
 				$this->entityIdParser,
 				$this->entitySource
 			);
