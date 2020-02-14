@@ -8,10 +8,10 @@
 	/**
 	 * @return {jQuery}
 	 */
-	var newTestSuggester = function() {
+	var newTestSuggester = function( mockSearchResult ) {
 		var options = {
 			ajax: function( options ) {
-				var response = { query: { search: [] } };
+				var response = { query: { search: mockSearchResult || [] } };
 
 				// This uses the search results array as a spy, and appends _requestTerm
 				response.query.search._requestTerm = options.data.srsearch;
@@ -107,6 +107,24 @@
 			assert.strictEqual( suggestions._requestTerm, 'Bar' );
 			assert.strictEqual( term, input );
 
+			done();
+		} );
+	} );
+
+	QUnit.test( 'put matching file name on top of result list', function( assert ) {
+		var $suggester = newTestSuggester( [
+				{ title: 'File:mockResult_a.jpg' },
+				{ title: 'File:mockResult_b.jpg' },
+				{ title: 'File:mockResult_c.jpg' }
+			] ),
+			suggester = $suggester.data( 'commonssuggester' ),
+			input = 'mockResult_b.jpg',
+			done = assert.async();
+
+		$suggester.val( input );
+		suggester.search().done( function( suggestions, term ) {
+			assert.strictEqual( suggestions[0].title, 'File:mockResult_b.jpg' );
+			assert.strictEqual( suggestions[2].title, 'File:mockResult_c.jpg' );
 			done();
 		} );
 	} );
