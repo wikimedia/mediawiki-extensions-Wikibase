@@ -2319,7 +2319,7 @@ class WikibaseRepo {
 	}
 
 	private function getMonolingualTextLanguages() {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( 'monolingualtext' );
+		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
 	}
 
 	/**
@@ -2328,7 +2328,7 @@ class WikibaseRepo {
 	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( 'term' );
+		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	}
 
 	/**
