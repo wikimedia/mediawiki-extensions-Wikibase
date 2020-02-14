@@ -11,7 +11,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Special\SpecialPageFactory;
 use RequestContext;
 use Title;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -88,11 +87,6 @@ class HtmlPageLinkRendererBeginHookHandler {
 	private $labelDescriptionLookup;
 
 	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
-	/**
 	 * @return self
 	 */
 	private static function newFromGlobalState() {
@@ -109,8 +103,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 			$services->getInterwikiLookup(),
 			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() ),
 			$services->getSpecialPageFactory(),
-			$wikibaseRepo->getLanguageFallbackChainFactory(),
-			$wikibaseRepo->getDataAccessSettings()
+			$wikibaseRepo->getLanguageFallbackChainFactory()
 		);
 	}
 
@@ -162,8 +155,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 		InterwikiLookup $interwikiLookup,
 		EntityLinkFormatterFactory $linkFormatterFactory,
 		SpecialPageFactory $specialPageFactory,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		DataAccessSettings $dataAccessSettings
+		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
 		$this->entityIdParser = $entityIdParser;
@@ -173,7 +165,6 @@ class HtmlPageLinkRendererBeginHookHandler {
 		$this->linkFormatterFactory = $linkFormatterFactory;
 		$this->specialPageFactory = $specialPageFactory;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->dataAccessSettings = $dataAccessSettings;
 	}
 
 	/**
@@ -305,7 +296,7 @@ class HtmlPageLinkRendererBeginHookHandler {
 
 		$idPart = $this->extractForeignIdString( $target->getText() );
 
-		$idPrefix = $this->dataAccessSettings->useEntitySourceBasedFederation() ? '' : $interwiki;
+		$idPrefix = '';
 
 		if ( $idPart !== null ) {
 			try {
