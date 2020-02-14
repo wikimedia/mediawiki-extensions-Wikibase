@@ -233,10 +233,10 @@ export default class EventEmittingButton extends Vue {
 
 	&--iconOnly {
 		background-position: center;
-		background-size: 26px;
+		background-size: $button-icon-size;
 		background-repeat: no-repeat;
-		width: 46px;
-		height: 40px;
+		width: $header-content-size;
+		height: $header-content-size;
 		cursor: pointer;
 		display: block;
 	}

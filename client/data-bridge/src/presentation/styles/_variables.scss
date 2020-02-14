@@ -12,7 +12,9 @@ $font-size-bodyS: px-to-rem( 14px );
 $font-size-normal: px-to-rem( 16px );
 $size-icon: px-to-rem( 20px );
 
-$size-dialog-bar--desktop: 40px;
+$header-border-width: 1px;
+$header-content-size: 40px;
+$size-dialog-bar--desktop: $header-content-size + $header-border-width;
 $heading-margin-top: 3 * $base-spacing-unit;
 $heading-margin-bottom: $base-spacing-unit-fixed;
 
@@ -28,6 +30,7 @@ $border-color-base--disabled: $wmui-color-base70;
 
 $padding-vertical-base: px-to-rem( 6px );
 $padding-horizontal-base: px-to-rem( 12px );
+$button-icon-size: px-to-rem( 20px );
 
 $notice-message-background: $wmui-color-base80;
 $notice-message-border: $wmui-color-base50;

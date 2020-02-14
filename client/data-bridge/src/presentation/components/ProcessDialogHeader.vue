@@ -35,7 +35,7 @@ export default class ProcessDialogHeader extends Vue {}
 	display: flex;
 	justify-content: space-between;
 	box-sizing: border-box;
-	border-bottom: 1px solid $wmui-color-base70;
+	border-bottom: $header-border-width solid $wmui-color-base70;
 
 	&__title {
 		display: inline-flex;
