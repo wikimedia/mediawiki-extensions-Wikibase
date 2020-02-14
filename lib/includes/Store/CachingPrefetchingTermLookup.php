@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\ContentLanguages;
 
 /**
  * @license GPL-2.0-or-later
@@ -28,18 +29,30 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	 */
 	private $redirectResolvingRevisionLookup;
 
+	/**
+	 * @var ContentLanguages
+	 */
+	private $termLanguages;
+
 	public function __construct(
 		CacheInterface $cache,
 		UncachedTermsPrefetcher $termsPrefetcher,
-		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
+		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
+		ContentLanguages $termLanguages
 	) {
 		$this->cache = $cache;
 		$this->termsPrefetcher = $termsPrefetcher;
 		$this->redirectResolvingRevisionLookup = $redirectResolvingRevisionLookup;
+		$this->termLanguages = $termLanguages;
 	}
 
 	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ) {
-		$this->termsPrefetcher->prefetchUncached( $this->cache, $entityIds, $termTypes, $languageCodes );
+		$this->termsPrefetcher->prefetchUncached(
+			$this->cache,
+			$entityIds,
+			$termTypes,
+			$this->filterValidTermLanguages( $languageCodes )
+		);
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
@@ -77,6 +90,9 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	private function getCacheEntry( EntityId $entityId, string $termType, string $languageCode ) {
+		if ( !$this->termLanguages->hasLanguage( $languageCode ) ) {
+			return null;
+		}
 		$cacheKey = $this->getCacheKey( $entityId, $languageCode, $termType );
 		return $cacheKey === null ? null : $this->cache->get( $cacheKey );
 	}
@@ -84,7 +100,7 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	private function getMultipleTermsByLanguage( EntityId $entityId, string $termType, array $languages ) {
 		$languagesToCacheKeys = [];
 
-		foreach ( $languages as $language ) {
+		foreach ( $this->filterValidTermLanguages( $languages ) as $language ) {
 			$cacheKey = $this->getCacheKey( $entityId, $language, $termType );
 			if ( $cacheKey ) {
 				$languagesToCacheKeys[$language] = $cacheKey;
@@ -100,6 +116,15 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 		}
 
 		return $terms;
+	}
+
+	private function filterValidTermLanguages( array $languageCodes ): array {
+		return array_filter(
+			$languageCodes,
+			function ( $languageCode ) {
+				return $this->termLanguages->hasLanguage( $languageCode );
+			}
+		);
 	}
 
 }
