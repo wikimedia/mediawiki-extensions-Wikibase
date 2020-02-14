@@ -156,7 +156,6 @@ describe( 'ErrorWrapper', () => {
 		expect( wrapper.find( ErrorDeprecatedStatement ).exists() ).toBe( true );
 	} );
 
-	// eslint-disable-next-line max-len
 	it( 'mounts ErrorAmbiguousStatement when an ambiguous statement error is present in the application errors', () => {
 		const applicationErrors: ApplicationError[] = [
 			{
