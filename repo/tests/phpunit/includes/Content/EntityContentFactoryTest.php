@@ -9,8 +9,6 @@ use OutOfBoundsException;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -45,8 +43,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$contentModelIds,
 			$callbacks,
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			$this->getItemSource()
 		);
 
 		$this->assertEquals(
@@ -84,8 +81,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			$contentModelIds,
 			$callbacks,
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			$this->getItemSource()
 		);
 	}
 
@@ -99,9 +95,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertFalse( $factory->isEntityContentModel( 'this-does-not-exist' ) );
 	}
 
-	protected function newFactory() {
-		$itemSource = new EntitySource(
-			'items',
+	private function getItemSource() {
+		return new EntitySource(
+			'itemwiki',
 			'itemdb',
 			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
 			'',
@@ -109,14 +105,18 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			'',
 			''
 		);
+	}
+
+	protected function newFactory() {
+		$itemSource = $this->getItemSource();
 		$propertySource = new EntitySource(
-			'properties',
+			'propertywiki',
 			'propertydb',
 			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
 			'',
-			'',
-			'',
-			''
+			'p',
+			'p',
+			'propertywiki'
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -136,7 +136,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			],
 			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
 			$itemSource,
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
@@ -153,36 +152,13 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedNs, $title->getNamespace() );
 	}
 
-	public function testGetTitleForId_foreign() {
+	public function testGetTitleForId_nonLocalEntity() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
 			->will( $this->returnValue( true ) );
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$factory = $this->newFactory();
-		$title = $factory->getTitleForId( new ItemId( 'foo:Q42' ) );
-		$this->assertSame( 'foo:Special:EntityPage/Q42', $title->getFullText() );
-	}
-
-	public function testGetTitleForId_entitySourceBasedFederation() {
-		$factory = $this->newFactoryForSourceBasedFederation();
-
-		$id = new PropertyId( 'P42' );
-		$title = $factory->getTitleForId( $id );
-
-		$this->assertEquals( 'P42', $title->getText() );
-
-		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
-		$this->assertEquals( $expectedNs, $title->getNamespace() );
-	}
-
-	public function testGetTitleForId_foreign_entitySourceBasedFederation() {
-		$lookup = $this->createMock( InterwikiLookup::class );
-		$lookup->method( 'isValidInterwiki' )
-			->will( $this->returnValue( true ) );
-		$this->setService( 'InterwikiLookup', $lookup );
-
-		$factory = $this->newFactoryForSourceBasedFederation();
 		$title = $factory->getTitleForId( new PropertyId( 'P42' ) );
 		$this->assertSame( 'propertywiki:Special:EntityPage/P42', $title->getFullText() );
 	}
@@ -199,30 +175,18 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedNs, $titles['P42']->getNamespace() );
 	}
 
-	public function testGetTitlesForIds_foreign() {
+	public function testGetTitlesForIds_nonLocalEntity() {
 		$lookup = $this->createMock( InterwikiLookup::class );
 		$lookup->method( 'isValidInterwiki' )
 			->will( $this->returnValue( true ) );
 		$this->setService( 'InterwikiLookup', $lookup );
 
 		$factory = $this->newFactory();
-		$titles = $factory->getTitlesForIds( [ new ItemId( 'foo:Q42' ) ] );
+		$titles = $factory->getTitlesForIds( [ new PropertyId( 'P42' ) ] );
 		$this->assertSame(
-			'foo:Special:EntityPage/Q42',
-			$titles['foo:Q42']->getFullText()
+			'propertywiki:Special:EntityPage/P42',
+			$titles['P42']->getFullText()
 		);
-	}
-
-	public function testGetTitlesForIds_entitySourceBasedFederation() {
-		$factory = $this->newFactoryForSourceBasedFederation();
-
-		$id = new PropertyId( 'P42' );
-		$titles = $factory->getTitlesForIds( [ $id ] );
-
-		$this->assertEquals( 'P42', $titles['P42']->getText() );
-
-		$expectedNs = $factory->getNamespaceForType( $id->getEntityType() );
-		$this->assertEquals( $expectedNs, $titles['P42']->getNamespace() );
 	}
 
 	public function testGetTitlesForIds_multipleIdenticalIds() {
@@ -258,48 +222,6 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$titles = $factory->getTitlesForIds( [] );
 
 		$this->assertEquals( 0, count( $titles ) );
-	}
-
-	protected function newFactoryForSourceBasedFederation() {
-		$itemSource = new EntitySource(
-			'itemwiki',
-			'itemdb',
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ] ],
-			'',
-			'',
-			'',
-			''
-		);
-		$propertySource = new EntitySource(
-			'propertywiki',
-			'propertydb',
-			[ 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
-			'',
-			'p',
-			'p',
-			'propertywiki'
-		);
-
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		return new EntityContentFactory(
-			[
-				'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-				'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
-			],
-			[
-				'item' => function() use ( $wikibaseRepo ) {
-					return $wikibaseRepo->newItemHandler();
-				},
-				'property' => function() use ( $wikibaseRepo ) {
-					return $wikibaseRepo->newPropertyHandler();
-				}
-			],
-			new EntitySourceDefinitions( [ $itemSource, $propertySource ], new EntityTypeDefinitions( [] ) ),
-			$itemSource,
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			MediaWikiServices::getInstance()->getInterwikiLookup()
-		);
 	}
 
 	public function testGetEntityIdForTitle() {
