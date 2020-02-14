@@ -400,15 +400,13 @@ describe( 'ErrorPermission', () => {
 			PageNotEditable.PAGE_CASCADE_PROTECTED,
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_HEADING,
 			MessageKeys.PERMISSIONS_PAGE_CASCADE_PROTECTED_BODY,
-		],
+		] as const,
 		[
 			'repo',
 			PageNotEditable.ITEM_CASCADE_PROTECTED,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
-		],
-		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-		// @ts-ignore
+		] as const,
 	] )( 'interpolates correct message for page cascade-protected on %s', (
 		wiki: 'repo'|'client',
 		type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED
