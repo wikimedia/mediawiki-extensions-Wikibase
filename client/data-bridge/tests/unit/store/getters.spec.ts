@@ -167,7 +167,7 @@ describe( 'root/getters', () => {
 			[ true, true, EditDecision.UPDATE ],
 		] )(
 			'returns %p with isTargetStatementModified=%p and editDecision=%p',
-			( expected: boolean, isTargetStatementModified: boolean, editDecision: EditDecision ) => {
+			( expected: boolean, isTargetStatementModified: boolean, editDecision: EditDecision|null ) => {
 				const applicationState = newApplicationState( { editDecision } );
 
 				// @ts-ignore

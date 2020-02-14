@@ -407,6 +407,8 @@ describe( 'ErrorPermission', () => {
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING,
 			MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY,
 		],
+		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+		// @ts-ignore
 	] )( 'interpolates correct message for page cascade-protected on %s', (
 		wiki: 'repo'|'client',
 		type: typeof PageNotEditable.ITEM_CASCADE_PROTECTED

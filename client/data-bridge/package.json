@@ -39,7 +39,7 @@
     "@storybook/addons": "^5.3.12",
     "@storybook/vue": "^5.3.12",
     "@types/deep-equal": "^1.0.1",
-    "@types/jest": "^23.1.4",
+    "@types/jest": "^24.9.1",
     "@types/jquery": "^3.3.32",
     "@types/node": "^12.12.26",
     "@types/uuid": "^3.4.7",
