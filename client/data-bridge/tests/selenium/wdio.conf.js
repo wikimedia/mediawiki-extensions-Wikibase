@@ -2,14 +2,14 @@
  * See also: http://webdriver.io/guide/testrunner/configurationfile.html
  */
 const fs = require( 'fs' ),
-	saveScreenshot = require( './ForwardCompatUtil' ).saveScreenshot,
+	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot,
 	videoUtil = require( './VideoUtil' );
 
 exports.config = {
 
 	// Wiki admin
-	username: process.env.MEDIAWIKI_USER || 'Admin',
-	password: process.env.MEDIAWIKI_PASSWORD || 'vagrant',
+	mwUser: process.env.MEDIAWIKI_USER || 'Admin',
+	mwPwd: process.env.MEDIAWIKI_PASSWORD || 'vagrant',
 	//
 	// Set a base URL in order to shorten url command calls. If your `url` parameter starts
 	// with `/`, the base url gets prepended, not including the path portion of your baseUrl.

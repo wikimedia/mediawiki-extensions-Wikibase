@@ -9,11 +9,7 @@ const assert = require( 'assert' ),
  * we can't just hard-code how to get an entityTitle from an entity id either
  */
 function protectEntity( entityId ) {
-	browser.call( () => Api.bot(
-		browser.config.username,
-		browser.config.password,
-		browser.options.baseUrl
-	).then( ( bot ) => {
+	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
 			action: 'wbgetentities',
 			format: 'json',
@@ -26,7 +22,7 @@ function protectEntity( entityId ) {
 				action: 'protect',
 				title: entityTitle,
 				token: bot.editToken,
-				user: browser.config.username,
+				user: browser.config.mwUser,
 				protections: 'edit=autoconfirmed',
 			} );
 		} );
@@ -34,14 +30,10 @@ function protectEntity( entityId ) {
 }
 
 function blockUser( username, expiry ) {
-	browser.call( () => Api.bot(
-		browser.config.username,
-		browser.config.password,
-		browser.options.baseUrl
-	).then( ( bot ) => {
+	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
 			action: 'block',
-			user: username || browser.config.username,
+			user: username || browser.config.mwUser,
 			reason: 'browser test',
 			token: bot.editToken,
 			expiry,
@@ -50,14 +42,10 @@ function blockUser( username, expiry ) {
 }
 
 function unblockUser( username ) {
-	browser.call( () => Api.bot(
-		browser.config.username,
-		browser.config.password,
-		browser.options.baseUrl
-	).then( ( bot ) => {
+	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
 			action: 'unblock',
-			user: username || browser.config.username,
+			user: username || browser.config.mwUser,
 			reason: 'browser test done',
 			token: bot.editToken,
 		} );
@@ -69,8 +57,8 @@ function unblockUser( username ) {
  */
 function loginAdmin() {
 	LoginPage.open();
-	$( '#wpName1' ).setValue( browser.config.username );
-	$( '#wpPassword1' ).setValue( browser.config.password );
+	$( '#wpName1' ).setValue( browser.config.mwUser );
+	$( '#wpPassword1' ).setValue( browser.config.mwPwd );
 	$( '#wpLoginAttempt' ).click();
 }
 
@@ -97,7 +85,7 @@ describe( 'permission checks', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 	} );
 
 	describe( 'if the client page is editable for the user', () => {
@@ -111,17 +99,13 @@ describe( 'permission checks', () => {
 		it( 'hide the editlink', () => {
 			// Protect the page
 			browser.call(
-				() => Api.bot(
-					browser.config.username,
-					browser.config.password,
-					browser.options.baseUrl
-				).then( ( bot ) => {
+				() => Api.bot().then( ( bot ) => {
 					return bot.request( {
 						action: 'protect',
 						title,
 						token: bot.editToken,
 						reason: 'browser test',
-						user: browser.config.username,
+						user: browser.config.mwUser,
 						protections: 'edit=sysop|move=sysop',
 					} );
 				} )

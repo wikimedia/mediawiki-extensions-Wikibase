@@ -90,8 +90,8 @@
     "vue-eslint-parser": "^7.0.0",
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.1.2",
-    "wdio-mediawiki": "0.5.0",
-    "wdio-wikibase": "^0.3.0",
+    "wdio-mediawiki": "1.0.0",
+    "wdio-wikibase": "^2.3.1",
     "wikimedia-ui-base": "^0.14.0"
   }
 }

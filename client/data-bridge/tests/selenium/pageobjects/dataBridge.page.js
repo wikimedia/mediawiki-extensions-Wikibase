@@ -1,6 +1,5 @@
 const Page = require( 'wdio-mediawiki/Page' ),
-	Util = require( 'wdio-mediawiki/Util' ),
-	ForwardCompatUtil = require( '../ForwardCompatUtil' );
+	Util = require( 'wdio-mediawiki/Util' );
 
 class DataBridgePage extends Page {
 	static get OOUI() {
@@ -70,7 +69,7 @@ class DataBridgePage extends Page {
 
 	open( title ) {
 		super.openTitle( title );
-		ForwardCompatUtil.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
+		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
 	}
 
 	openBridgeOnPage( title ) {

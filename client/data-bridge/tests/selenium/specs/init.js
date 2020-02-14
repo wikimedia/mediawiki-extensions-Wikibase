@@ -28,7 +28,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-		browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openBridgeOnPage( title );
 
@@ -50,7 +50,7 @@ describe( 'init', () => {
 | {{#statements:${propertyId}|from=${nonExistantEntityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${nonExistantEntityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
 
-			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openBridgeOnPage( title );
 
@@ -79,7 +79,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openBridgeOnPage( title );
 
@@ -145,7 +145,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${stringPropertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${stringPropertyId} Edit this on Wikidata]</span>
 |}`;
-			browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
@@ -190,7 +190,7 @@ describe( 'init', () => {
 | official website
 | {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
 |}`;
-				browser.call( () => Api.edit( title, content, browser.config.username, browser.config.password ) );
+				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 				DataBridgePage.open( title );
 				browser.execute(
