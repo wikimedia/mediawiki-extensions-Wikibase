@@ -42,6 +42,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
@@ -424,7 +425,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 						new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
 						$redirectResolvingRevisionLookup
 					),
-					$redirectResolvingRevisionLookup
+					$redirectResolvingRevisionLookup,
+					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( 'term' )
 				);
 			} else {
 				$lookups['property'] = $termIndexBackedTermLookup;

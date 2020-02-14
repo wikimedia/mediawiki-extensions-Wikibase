@@ -13,6 +13,7 @@ use Wikibase\DataAccess\PerRepositoryServiceContainer;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdMissRecordingSimpleCache;
@@ -250,7 +251,8 @@ return [
 					new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
 					$redirectResolvingRevisionLookup
 				),
-				$redirectResolvingRevisionLookup
+				$redirectResolvingRevisionLookup,
+				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( 'term' )
 			);
 		} else {
 			$lookups['property'] = $termIndexBackedTermLookup;
