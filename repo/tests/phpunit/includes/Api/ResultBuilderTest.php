@@ -1714,7 +1714,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider provideTestEmptyLists
+	 * @dataProvider provideTestEmptyListsMetaData
 	 */
 	public function testEmptyLists( $addMetaData, array $expected ) {
 		$result = $this->getDefaultResult();
