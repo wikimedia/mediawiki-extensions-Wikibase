@@ -46,7 +46,7 @@ class MetaContentLanguagesTest extends TestCase {
 	public function testExecute_warnsAboutUnknownLanguageNames() {
 		$query = $this->getQuery( [ 'wbclprop' => 'name' ] );
 		$api = new MetaContentLanguages(
-			new WikibaseContentLanguages( [ 'term' => new StaticContentLanguages( [ 'unknown' ] ) ] ),
+			new WikibaseContentLanguages( [ WikibaseContentLanguages::CONTEXT_TERM => new StaticContentLanguages( [ 'unknown' ] ) ] ),
 			true,
 			$query,
 			'wbcontentlanguages'

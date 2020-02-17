@@ -431,7 +431,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 						$redirectResolvingRevisionLookup
 					),
 					$redirectResolvingRevisionLookup,
-					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( 'term' )
+					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
 				);
 			} else {
 				$lookups['property'] = $termIndexBackedTermLookup;

@@ -40,8 +40,8 @@ class WikibaseContentLanguagesTest extends MediaWikiTestCase {
 	public function testGetDefaultInstance_defaultContexts() {
 		$wcl = WikibaseContentLanguages::getDefaultInstance();
 
-		$termLanguages = $wcl->getContentLanguages( 'term' );
-		$monolingualTextLanguages = $wcl->getContentLanguages( 'monolingualtext' );
+		$termLanguages = $wcl->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+		$monolingualTextLanguages = $wcl->getContentLanguages( WikibaseContentLanguages::CONTEXT_MONOLINGUAL_TEXT );
 
 		$this->assertInstanceOf( ContentLanguages::class, $termLanguages );
 		$this->assertInstanceOf( ContentLanguages::class, $monolingualTextLanguages );

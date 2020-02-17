@@ -12,6 +12,9 @@ use OutOfRangeException;
  */
 class WikibaseContentLanguages {
 
+	public const CONTEXT_TERM = 'term';
+	public const CONTEXT_MONOLINGUAL_TEXT = 'monolingualtext';
+
 	/**
 	 * @var ContentLanguages[]
 	 */
@@ -45,8 +48,8 @@ class WikibaseContentLanguages {
 
 	public static function getDefaultInstance() {
 		$contentLanguages = [];
-		$contentLanguages['term'] = self::getDefaultTermsLanguages();
-		$contentLanguages['monolingualtext'] = self::getDefaultMonolingualTextLanguages();
+		$contentLanguages[self::CONTEXT_TERM] = self::getDefaultTermsLanguages();
+		$contentLanguages[self::CONTEXT_MONOLINGUAL_TEXT] = self::getDefaultMonolingualTextLanguages();
 
 		Hooks::runWithoutAbort( 'WikibaseContentLanguages', [ &$contentLanguages ] );
 

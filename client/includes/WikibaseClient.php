@@ -1453,7 +1453,7 @@ final class WikibaseClient {
 	 * @return ContentLanguages
 	 */
 	public function getTermsLanguages() {
-		return $this->getWikibaseContentLanguages()->getContentLanguages( 'term' );
+		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	}
 
 	/**
