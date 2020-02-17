@@ -21,6 +21,7 @@
 	"wikibase-addlinkstitle": "Pievienot starpvalodu saites",
 	"wikibase-linkitem-addlinks": "Pievienot saites",
 	"wikibase-linkitem-close": "Aizvērt dialoga logu un pārlādēt lapu",
+	"wikibase-linkitem-failure": "Mēģinot piesaistīt norādīto lapu notika nezināma kļūda.",
 	"wikibase-linkitem-title": "Sasaistīt ar lapu",
 	"wikibase-linkitem-linkpage": "Sasaistīt ar lapu",
 	"wikibase-linkitem-input-site": "Valoda:",
@@ -62,12 +63,14 @@
 	"wikibase-pageinfo-entity-usage-C": "Daži apgalvojumi",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Apgalvojums: $1",
 	"wikibase-pageinfo-entity-usage-O": "Citi (apgalvojumi)",
+	"wikibase-property-render-error": "Neizdevās attēlot īpašību $1: $2",
 	"wikibase-otherprojects": "Citos projektos",
 	"echo-pref-tooltip-wikibase-action": "Paziņot man, kad kāds savieno {{GENDER:|manis izveidotu lapu}} ar Vikidatiem.",
 	"notification-header-page-connection": "Lapa <strong>$3</strong> tika {{GENDER:$2|pievienota}} {{PLURAL:$4|-1=repozitorija \"{{WBREPONAME}}\" ierakstam|repozitorija \"{{WBREPONAME}}\" ierakstam $4}}, kur var apkopot ar tematu saistītos datus.",
 	"notification-link-text-view-item": "{{GENDER:$1|Skatīt}} vienumu",
 	"connected-redirect-category-desc": "Pieprasītie konti",
 	"wikibase-client-data-bridge-dialog-title": "Labot $1",
+	"wikibase-client-data-bridge-permissions-error": "Tev nav atļauts labot šo vērtību {{PLURAL:$1|šādu iemeslu|šāda iemesla|šādu iemeslu}} dēļ:",
 	"wikibase-client-data-bridge-permissions-error-info": "Vairāk informācijas",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nezināma atļauju kļūda",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Es salaboju</strong> nepareizu vērtību",
@@ -77,5 +80,6 @@
 	"wikibase-client-data-bridge-references-heading": "Atsauces",
 	"wikibase-client-data-bridge-bailout-heading": "Tā vietā tu vari:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Labot {{WBREPONAME}} vērtību. Klikšķini uz pogas zemāk, lai labotu vērtību pa tiešo (saite atveras jaunā cilnē).",
-	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Labot {{WBREPONAME}} vērtību"
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Labot {{WBREPONAME}} vērtību",
+	"wikibase-client-data-bridge-somevalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta"
 }

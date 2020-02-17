@@ -137,7 +137,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Gelecekteki diğer düzenlemelerim için bu şartları kabul ediyorum. Bu mesajı bir daha gösterme.",
 	"wikibase-entityselector-more": "daha fazla",
 	"wikibase-entityselector-notfound": "Eşleşme bulunamadı",
-	"wikibase-anonymouseditwarning": "Uyarı: Giriş yapmadınız. Herhangi bir düzenleme yaparsanız [https://tr.wikipedia.org/wiki/IP_adresi IP adresiniz] herkes tarafından görülebilir. <strong>[[Special:UserLogin|Giriş yapın]]</strong> veya <strong>[[Special:CreateAccount|bir hesap oluşturma]]</strong> kullanıyorsanız, düzenlemeleriniz arasında bir kullanıcı adına atfedilir diğer yararlar",
+	"wikibase-anonymouseditwarning": "Uyarı: Giriş yapmadınız. Herhangi bir düzenleme yaparsanız [https://tr.wikipedia.org/wiki/IP_adresi IP adresiniz] herkes tarafından görülebilir. <strong>[[Special:UserLogin|Giriş yapın]]</strong> veya <strong>[[Special:CreateAccount|bir hesap oluşturma]]</strong> kullanıyorsanız, düzenlemeleriniz diğer avantajların yanı sıra bir kullanıcı adıyla ilişkilendirilir",
 	"wikibase-anonymouseditwarning-heading": "Giriş yapmadınız",
 	"wikibase-anonymouseditwarning-message": "Şu anda herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. Giriş yaparsanız veya bir hesap oluşturursanız, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Giriş yapmadığım zamanlarda beni uyar.",

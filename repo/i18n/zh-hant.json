@@ -102,7 +102,7 @@
 	"wikibase-remove": "移除",
 	"wikibase-move-up": "向上移動",
 	"wikibase-move-down": "向下移動",
-	"wikibase-undo-title": "還原 \"$1\" 的編輯",
+	"wikibase-undo-title": "還原「$1」的編輯",
 	"wikibase-restore-title": "還原為 \"$1\" 的舊修訂",
 	"wikibase-partial-undo": "編輯可以部份還原。",
 	"wikibase-omitted-undo-ops": "因{{PLURAL:$1|數值}}已改變，$1 次{{PLURAL:$1|變更}}無法還原。",

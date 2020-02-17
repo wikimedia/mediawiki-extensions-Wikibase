@@ -16,7 +16,7 @@
 	"wikibase-comment-sitelink-add": "भाषा लिङ्क जुडल: $1",
 	"wikibase-comment-sitelink-change": "भाषा लिङ्क $1 सँ $2 मे बदलल गेल",
 	"wikibase-comment-sitelink-remove": "भाषा लिंक हटाओल गेल: $1",
-	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्त्तन|परिवर्त्तन सभ}}",
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|परिवर्तन|परिवर्तनसभ}}",
 	"wikibase-dataitem": "{{WBREPONAME}} बिषय",
 	"wikibase-editlinks": "लिङ्क सम्पादित करी",
 	"wikibase-editlinkstitle": "अन्तरभाषा लिङ्क सम्पादित करी",

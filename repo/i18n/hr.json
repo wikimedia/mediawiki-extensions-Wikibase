@@ -13,7 +13,8 @@
 			"Ladsgroup",
 			"Bugoslav",
 			"Astrind",
-			"Hmxhmx"
+			"Hmxhmx",
+			"Neptune, the Mystic"
 		]
 	},
 	"wikibase-desc": "Repozitorij strukturiranih podataka",
@@ -163,5 +164,6 @@
 	"wikibase-listdatatypes-wikibase-item-head": "Stavka",
 	"wikibase-listdatatypes-time-head": "Vrijeme",
 	"wikibase-concept-uri": "URI koncepta",
-	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom"
+	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom",
+	"wikibase-tainted-ref-popper-remove-warning": "Ukloni upozorenje"
 }
