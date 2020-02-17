@@ -26,6 +26,7 @@ import Entities from '@/mock-data/data/Q42.data.json';
 import { v4 as uuid } from 'uuid';
 import { ApiQueryInfoTestResponsePage, ApiQueryResponsePage } from '@/definitions/data-access/ApiQuery';
 import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
+import { SpecialPageWikibaseEntityResponse } from '@/data-access/SpecialPageReadingEntityRepository';
 
 Vue.config.devtools = false;
 
@@ -183,53 +184,64 @@ describe( 'app', () => {
 	} );
 
 	describe( 'api call and ooui trigger on save', () => {
-		const propertyId = 'P31';
-		const entityId = 'Q42';
-		const entityTitle = entityId;
-		const testSet = {
-			entities: {
-				[ entityId ]: {
+		let propertyId: string;
+		let entityId: string;
+		let entityTitle: string;
+		let testSet: SpecialPageWikibaseEntityResponse;
+		let postWithEditToken: jest.Mock;
+		let newStringDataValue: string;
+
+		beforeEach( () => {
+			propertyId = 'P31';
+			entityId = 'Q42';
+			entityTitle = entityId;
+			testSet = {
+				entities: {
+					[ entityId ]: {
+						id: entityId,
+						lastrevid: 0,
+						claims: {
+							[ propertyId ]: [ {
+								type: 'statement',
+								id: 'opaque statement ID',
+								rank: 'normal',
+								mainsnak: {
+									snaktype: 'value',
+									property: propertyId,
+									datatype: 'string',
+									datavalue: {
+										type: 'string',
+										value: 'a string value',
+									},
+								},
+							} ],
+						},
+					},
+				},
+			};
+
+			postWithEditToken = jest.fn().mockResolvedValue( {
+				entity: {
+					lastrevid: 2183,
 					id: entityId,
-					lastrevid: 0,
 					claims: {
 						[ propertyId ]: [ {
-							type: 'statement',
-							id: 'opaque statement ID',
-							rank: 'normal',
 							mainsnak: {
 								snaktype: 'value',
 								property: propertyId,
-								datatype: 'string',
 								datavalue: {
+									value: 'String for Wikidata bridge',
 									type: 'string',
-									value: 'a string value',
 								},
+								datatype: 'string',
 							},
 						} ],
 					},
 				},
-			},
-		};
+				success: 1,
+			} );
 
-		const postWithEditToken = jest.fn().mockResolvedValue( {
-			entity: {
-				lastrevid: 2183,
-				id: entityId,
-				claims: {
-					[ propertyId ]: [ {
-						mainsnak: {
-							snaktype: 'value',
-							property: propertyId,
-							datavalue: {
-								value: 'String for Wikidata bridge',
-								type: 'string',
-							},
-							datatype: 'string',
-						},
-					} ],
-				},
-			},
-			success: 1,
+			newStringDataValue = uuid();
 		} );
 
 		async function getEnabledSaveButton( testLink: HTMLElement ): Promise<HTMLElement> {
@@ -249,7 +261,7 @@ describe( 'app', () => {
 			await budge();
 
 			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
-			await insert( input as HTMLTextAreaElement, uuid() );
+			await insert( input as HTMLTextAreaElement, newStringDataValue );
 
 			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
 			await selectRadioInput( replaceInputDecision as HTMLInputElement );
@@ -279,12 +291,15 @@ describe( 'app', () => {
 			save!.click();
 			await budge();
 
+			const sentData = { claims: testSet.entities[ entityId ].claims };
+			sentData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
+
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
 				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
+				data: JSON.stringify( sentData ),
 				assertuser,
 				tags,
 			} );
@@ -299,12 +314,15 @@ describe( 'app', () => {
 			save!.click();
 			await budge();
 
+			const sentData = { claims: testSet.entities[ entityId ].claims };
+			sentData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
+
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
 				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
+				data: JSON.stringify( sentData ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );
@@ -319,12 +337,15 @@ describe( 'app', () => {
 			enter( save! );
 			await budge();
 
+			const sentData = { claims: testSet.entities[ entityId ].claims };
+			sentData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
+
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
 				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
+				data: JSON.stringify( sentData ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );
@@ -339,12 +360,15 @@ describe( 'app', () => {
 			space( save! );
 			await budge();
 
+			const sentData = { claims: testSet.entities[ entityId ].claims };
+			sentData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
+
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {
 				action: 'wbeditentity',
 				id: entityId,
 				baserevid: 0,
-				data: JSON.stringify( { claims: testSet.entities[ entityId ].claims } ),
+				data: JSON.stringify( sentData ),
 				assertuser: 'Test User',
 				tags: undefined,
 			} );

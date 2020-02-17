@@ -8,10 +8,12 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import jqXHR = JQuery.jqXHR;
 import StatementMap from '@/datamodel/StatementMap';
+import EntityId from '@/datamodel/EntityId';
 
-interface SpecialPageApiResponse {
+export interface SpecialPageWikibaseEntityResponse {
 	entities: {
 		[x: string]: {
+			id: EntityId;
 			claims: StatementMap;
 			lastrevid: number;
 		};
@@ -50,7 +52,7 @@ export default class SpecialPageReadingEntityRepository implements ReadingEntity
 
 	}
 
-	private isWellFormedResponse( data: unknown ): data is SpecialPageApiResponse {
+	private isWellFormedResponse( data: unknown ): data is SpecialPageWikibaseEntityResponse {
 		return typeof data === 'object' && data !== null && 'entities' in data;
 	}
 
