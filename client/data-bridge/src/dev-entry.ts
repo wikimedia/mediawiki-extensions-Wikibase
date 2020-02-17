@@ -66,6 +66,9 @@ const messages = {
 	[ MessageKeys.BAILOUT_SUGGESTION_EDIT_ARTICLE ]: 'Depending on the template used, it might be possible to overwrite the value locally using <a href="https://example.com">the article editor</a>. If at all possible, we recommend that you instead add the value to repo via the button above.',
 	[ MessageKeys.UNSUPPORTED_DATATYPE_ERROR_HEAD ]: 'Editing the value for $1 is currently not supported',
 	[ MessageKeys.UNSUPPORTED_DATATYPE_ERROR_BODY ]: '$1 is of the datatype $2 on repo. Editing this datatype is currently not supported.',
+	[ MessageKeys.PERMISSIONS_HEADING ]: 'You do not have permission to edit this value, for the following reason:',
+	[ MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING ]: '<strong>This value is currently cascade protected on repo and can be edited only by <a href="https://example.com">administrators</a>.</strong>',
+	[ MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY ]: '<p><strong>Why is this value protected?</strong></p>\n<p>This value is transcluded in the following pages, which are protected with the "cascading" option:</p>\n$2',
 } as { [ key in MessageKeys ]: string };
 /* eslint-enable max-len */
 
