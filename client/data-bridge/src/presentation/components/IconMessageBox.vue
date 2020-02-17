@@ -43,7 +43,8 @@ export default class IconMessageBox extends Vue {
 
 	&__content {
 		margin-left: 3.5 * $base-spacing-unit;
-		font-size: $font-size-body;
+
+		@include body-S();
 	}
 
 	&--block {

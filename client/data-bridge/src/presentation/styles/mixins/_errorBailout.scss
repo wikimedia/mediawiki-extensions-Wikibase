@@ -4,12 +4,12 @@
 	}
 
 	&__head {
-		font-weight: bold;
-		line-height: $line-height-text;
 		margin-bottom: $base-spacing-unit;
+
+		@include body-S-bold();
 	}
 
 	&__body {
-		line-height: $line-height-text;
+		@include body-S();
 	}
 }

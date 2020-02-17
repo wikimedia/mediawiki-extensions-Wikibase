@@ -67,15 +67,16 @@ export default class BailoutActions extends Vue {
 
 	&__heading {
 		margin: $heading-margin-top 0 $heading-margin-bottom 0;
-		font-weight: bold;
+
+		@include body-S-bold();
 	}
 
 	&__suggestion {
 		list-style: disc outside;
 		margin-bottom: 3 * $base-spacing-unit;
 		margin-left: 2 * $base-spacing-unit-fixed;
-		line-height: $line-height-text;
-		font-size: $font-size-body;
+
+		@include body-S();
 
 		&:last-child {
 			margin-bottom: 0;

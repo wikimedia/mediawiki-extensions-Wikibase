@@ -74,9 +74,11 @@ export default class ErrorPermissionInfo extends Vue {
 	padding-left: 2em;
 	background: $svg-info no-repeat top left;
 
+	@include body-S();
+
 	// &__header has strong in the message, no real hX
 	strong {
-		font-weight: bold;
+		font-weight: $bold-font-weight;
 	}
 
 	em {
@@ -86,7 +88,6 @@ export default class ErrorPermissionInfo extends Vue {
 	&__header,
 	p,
 	ul {
-		line-height: $line-height-text;
 		margin-bottom: $base-spacing-unit;
 	}
 

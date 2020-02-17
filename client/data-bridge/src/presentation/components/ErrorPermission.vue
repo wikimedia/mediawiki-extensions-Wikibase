@@ -266,7 +266,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 <style lang="scss">
 .wb-db-error-permission {
 	&__heading {
-		line-height: $line-height-text;
+		@include body-S();
 	}
 
 	&__info {
