@@ -88,9 +88,5 @@ export default class ErrorUnsupportedSnakType extends mixins( StateMixin ) {
 <style lang="scss">
 .wb-db-unsupported-snaktype {
 	@include errorBailout();
-
-	&__body i { // <i>some value</i> or <i>no value</i> in message
-		font-style: italic;
-	}
 }
 </style>

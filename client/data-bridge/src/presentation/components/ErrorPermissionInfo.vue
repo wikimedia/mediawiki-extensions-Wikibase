@@ -76,15 +76,6 @@ export default class ErrorPermissionInfo extends Vue {
 
 	@include body-S();
 
-	// &__header has strong in the message, no real hX
-	strong {
-		font-weight: $bold-font-weight;
-	}
-
-	em {
-		font-style: italic;
-	}
-
 	&__header,
 	p,
 	ul {

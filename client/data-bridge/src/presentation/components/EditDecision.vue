@@ -66,9 +66,5 @@ export default class EditDecision extends mixins( StateMixin ) {
 
 		@include h5();
 	}
-
-	strong {
-		font-weight: $bold-font-weight;
-	}
 }
 </style>

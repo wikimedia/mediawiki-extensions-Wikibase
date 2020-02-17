@@ -60,10 +60,6 @@ export default class ErrorDeprecatedStatement extends mixins( StateMixin ) {
 
 <style lang="scss">
 .wb-db-deprecated-statement {
-	em {
-		font-style: italic;
-	}
-
 	@include errorBailout();
 }
 </style>
