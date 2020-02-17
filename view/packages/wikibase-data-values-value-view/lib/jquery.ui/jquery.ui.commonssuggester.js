@@ -50,7 +50,7 @@
 		},
 
 		/**
-		 * Initializes the default source pointing the "opensearch" API module on Wikimedia Commons.
+		 * Initializes the default source pointing to the "query" API module on Wikimedia Commons.
 		 * @protected
 		 *
 		 * @return {Function}
@@ -75,7 +75,9 @@
 					timeout: 8000
 				} )
 				.done( function( response ) {
-					deferred.resolve( response.query.search, term );
+					var sorted = self._prioritiseMatchingFilename( response.query.search, term );
+
+					deferred.resolve( sorted, term );
 				} )
 				.fail( function( jqXHR, textStatus ) {
 					// Since this is a JSONP request, this will always fail with a timeout...
@@ -84,6 +86,28 @@
 
 				return deferred.promise();
 			};
+		},
+
+		/**
+		 * Be smart on the commons search results and put an exactly matching file name on top
+		 * @private
+		 *
+		 * @param {Array} resultList Results from the search API response
+		 * @param {string} term The user's search term
+		 *
+		 * @return {Array}
+		 */
+		_prioritiseMatchingFilename: function( resultList, term ) {
+			return resultList.sort( function( a, b ) {
+				// use indexOf() in favour of startsWith() for browser compatibility
+				if ( a.title.indexOf( 'File:' + term ) === 0 ) {
+					return -1;
+				} else if ( b.title.indexOf( 'File:' + term ) === 0 ) {
+					return 1;
+				} else {
+					return 0;
+				}
+			} );
 		},
 
 		/**
