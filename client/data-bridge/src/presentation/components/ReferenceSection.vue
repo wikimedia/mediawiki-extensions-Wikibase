@@ -3,7 +3,7 @@
 		<h2 class="wb-db-references__heading">
 			{{ $messages.get( $messages.KEYS.REFERENCES_HEADING ) }}
 		</h2>
-		<ul>
+		<ul class="wb-db-references__list">
 			<li
 				class="wb-db-references__listItem"
 				v-for="(reference, index) in targetReferences"
@@ -48,6 +48,11 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 		margin-bottom: $heading-margin-bottom;
 
 		@include h5();
+	}
+
+	&__list {
+		padding: 0;
+		list-style: none;
 	}
 
 	&__listItem {

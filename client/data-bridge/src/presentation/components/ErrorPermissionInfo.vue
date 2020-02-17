@@ -91,14 +91,8 @@ export default class ErrorPermissionInfo extends Vue {
 		margin-bottom: $base-spacing-unit;
 	}
 
-	ul {
-		list-style-type: disc;
-		list-style-position: outside;
-		padding-left: 1.5em;
-
-		li:not( :first-child ) {
-			margin-top: $margin-top-li;
-		}
+	li:not( :first-child ) {
+		margin-top: $margin-top-li;
 	}
 
 	&__toggle {
