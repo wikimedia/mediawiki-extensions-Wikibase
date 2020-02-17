@@ -11,7 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\InMemoryTermStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -51,7 +51,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore
 		);
 
-		$itemTermStore = new DatabaseItemTermStore(
+		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$loadBalancer,
 			$termIdsStore,
 			$termIdsStore,
@@ -61,7 +61,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 		$this->i1 = new ItemId( 'Q1' );
-		$itemTermStore->storeTerms(
+		$itemTermStoreWriter->storeTerms(
 			$this->i1,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'property one' ) ] ),
@@ -70,7 +70,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			)
 		);
 		$this->i2 = new ItemId( 'Q2' );
-		$itemTermStore->storeTerms(
+		$itemTermStoreWriter->storeTerms(
 			$this->i2,
 			new Fingerprint(
 				new TermList( [ new Term( 'en', 'property two' ) ] ),

@@ -7,14 +7,14 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\DataModel\Services\Term\TermStoreException;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
-use Wikibase\TermStore\Implementations\InMemoryPropertyTermStore;
-use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 
 /**
  * @covers \Wikibase\Lib\Store\PropertyTermStoreWriterAdapter
@@ -26,12 +26,12 @@ use Wikibase\TermStore\Implementations\ThrowingPropertyTermStore;
 class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 	/**
-	 * @var InMemoryPropertyTermStore
+	 * @var PropertyTermStoreWriter
 	 */
-	private $propertyTermStore;
+	private $propertyTermStoreWriter;
 
 	public function setUp() : void {
-		$this->propertyTermStore = new InMemoryPropertyTermStore();
+		$this->propertyTermStoreWriter = $this->newPropertyTermStoreWriter();
 	}
 
 	public function testSaveTermsThrowsExceptionWhenGivenUnsupportedEntityType() {
@@ -41,14 +41,36 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 		$writer->saveTermsOfEntity( $this->newUnsupportedEntity() );
 	}
 
-	private function newTermStoreWriter() {
+	private function newTermStoreWriter(): PropertyTermStoreWriterAdapter {
 		return new PropertyTermStoreWriterAdapter(
-			$this->propertyTermStore
+			$this->propertyTermStoreWriter
 		);
 	}
 
 	private function newUnsupportedEntity() {
 		return $this->createMock( EntityDocument::class );
+	}
+
+	private function newPropertyTermStoreWriter(): PropertyTermStoreWriter {
+		return new class implements PropertyTermStoreWriter {
+			private $fingerprints = [];
+
+			public function storeTerms( PropertyId $propertyId, Fingerprint $terms ) {
+				$this->fingerprints[$propertyId->getNumericId()] = $terms;
+			}
+
+			public function deleteTerms( PropertyId $propertyId ) {
+				unset( $this->fingerprints[$propertyId->getNumericId()] );
+			}
+
+			public function getTerms( PropertyId $propertyId ) {
+				if ( isset( $this->fingerprints[$propertyId->getNumericId()] ) ) {
+					return $this->fingerprints[$propertyId->getNumericId()];
+				} else {
+					return new Fingerprint();
+				}
+			}
+		};
 	}
 
 	public function testDeleteTermsThrowsExceptionWhenGivenUnsupportedEntityId() {
@@ -69,7 +91,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 		$this->assertEquals(
 			$property->getFingerprint(),
-			$this->propertyTermStore->getTerms( $property->getId() )
+			$this->propertyTermStoreWriter->getTerms( $property->getId() )
 		);
 	}
 
@@ -111,8 +133,20 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 		);
 	}
 
+	private function newThrowingPropertyTermStoreWriter() {
+		$propertyTermStoreWriter = $this->createMock( PropertyTermStoreWriter::class );
+		$propertyTermStoreWriter->expects( $this->any() )
+			->method( 'storeTerms' )
+			->will( $this->throwException( new TermStoreException() ) );
+		$propertyTermStoreWriter->expects( $this->any() )
+			->method( 'deleteTerms' )
+			->will( $this->throwException( new TermStoreException() ) );
+
+		return $propertyTermStoreWriter;
+	}
+
 	public function testSaveTermsReturnsFalseOnFailure() {
-		$this->propertyTermStore = new ThrowingPropertyTermStore();
+		$this->propertyTermStoreWriter = $this->newThrowingPropertyTermStoreWriter();
 
 		$this->assertFalse(
 			$this->newTermStoreWriter()->saveTermsOfEntity( $this->newPropertyWithTerms() )
@@ -126,7 +160,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 	}
 
 	public function testDeleteTermsReturnsFalseOnFailure() {
-		$this->propertyTermStore = new ThrowingPropertyTermStore();
+		$this->propertyTermStoreWriter = $this->newThrowingPropertyTermStoreWriter();
 
 		$this->assertFalse(
 			$this->newTermStoreWriter()->deleteTermsOfEntity( new PropertyId( 'P1' ) )
@@ -136,7 +170,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 	public function testDeletesTermsDeletesPropertyTerms() {
 		$property = $this->newPropertyWithTerms();
 
-		$this->propertyTermStore->storeTerms(
+		$this->propertyTermStoreWriter->storeTerms(
 			$property->getId(),
 			$property->getFingerprint()
 		);
@@ -145,7 +179,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 
 		$this->assertEquals(
 			new Fingerprint(),
-			$this->propertyTermStore->getTerms( $property->getId() )
+			$this->propertyTermStoreWriter->getTerms( $property->getId() )
 		);
 	}
 

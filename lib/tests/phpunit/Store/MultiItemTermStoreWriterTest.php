@@ -5,22 +5,22 @@ namespace Wikibase\Lib\Tests\Store;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\MultiItemTermStore;
-use Wikibase\TermStore\ItemTermStore;
+use Wikibase\Lib\Store\MultiItemTermStoreWriter;
 
 /**
- * @covers \Wikibase\Lib\Store\MultiItemTermStore
+ * @covers \Wikibase\Lib\Store\MultiItemTermStoreWriter
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class MultiItemTermStoreTest extends TestCase {
+class MultiItemTermStoreWriterTest extends TestCase {
 
 	/** @var ItemId */
 	private $itemId;
@@ -43,44 +43,44 @@ class MultiItemTermStoreTest extends TestCase {
 	public function testStoreTerms_success() {
 		$itemTermStores = [];
 		for ( $i = 0; $i < 5; $i++ ) {
-			$itemTermStore = $this->createMock( ItemTermStore::class );
-			$itemTermStore->expects( $this->once() )
+			$itemTermStoreWriter = $this->createMock( ItemTermStoreWriter::class );
+			$itemTermStoreWriter->expects( $this->once() )
 				->method( 'storeTerms' )
 				->with( $this->itemId, $this->fingerprint );
-			$itemTermStores[] = $itemTermStore;
+			$itemTermStoreWriters[] = $itemTermStoreWriter;
 		}
 
-		( new MultiItemTermStore( $itemTermStores ) )
+		( new MultiItemTermStoreWriter( $itemTermStoreWriters ) )
 			->storeTerms( $this->itemId, $this->fingerprint );
 	}
 
 	public function testStoreTerms_oneException() {
 		$exception = new Exception( __METHOD__ . ' exception' );
-		$store1 = $this->createMock( ItemTermStore::class );
+		$store1 = $this->createMock( ItemTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->itemId, $this->fingerprint )
 			->willThrowException( $exception );
-		$store2 = $this->createMock( ItemTermStore::class );
+		$store2 = $this->createMock( ItemTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->itemId, $this->fingerprint );
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception->getMessage() );
-		( new MultiItemTermStore( [ $store1, $store2 ] ) )
+		( new MultiItemTermStoreWriter( [ $store1, $store2 ] ) )
 			->storeTerms( $this->itemId, $this->fingerprint );
 	}
 
 	public function testStoreTerms_allExceptions() {
 		$exception1 = new Exception( __METHOD__ . ' exception 1' );
-		$store1 = $this->createMock( ItemTermStore::class );
+		$store1 = $this->createMock( ItemTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->itemId, $this->fingerprint )
 			->willThrowException( $exception1 );
 		$exception2 = new Exception( __METHOD__ . ' exception 2' );
-		$store2 = $this->createMock( ItemTermStore::class );
+		$store2 = $this->createMock( ItemTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'storeTerms' )
 			->with( $this->itemId, $this->fingerprint )
@@ -88,51 +88,51 @@ class MultiItemTermStoreTest extends TestCase {
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception1->getMessage() );
-		( new MultiItemTermStore( [ $store1, $store2 ] ) )
+		( new MultiItemTermStoreWriter( [ $store1, $store2 ] ) )
 			->storeTerms( $this->itemId, $this->fingerprint );
 	}
 
 	public function testDeleteTerms_success() {
-		$itemTermStores = [];
+		$itemTermStoreWriters = [];
 		for ( $i = 0; $i < 5; $i++ ) {
-			$itemTermStore = $this->createMock( ItemTermStore::class );
-			$itemTermStore->expects( $this->once() )
+			$itemTermStoreWriter = $this->createMock( ItemTermStoreWriter::class );
+			$itemTermStoreWriter->expects( $this->once() )
 				->method( 'deleteTerms' )
 				->with( $this->itemId );
-			$itemTermStores[] = $itemTermStore;
+			$itemTermStoreWriters[] = $itemTermStoreWriter;
 		}
 
-		( new MultiItemTermStore( $itemTermStores ) )
+		( new MultiItemTermStoreWriter( $itemTermStoreWriters ) )
 			->deleteTerms( $this->itemId );
 	}
 
 	public function testDeleteTerms_oneException() {
 		$exception = new Exception( __METHOD__ . ' exception' );
-		$store1 = $this->createMock( ItemTermStore::class );
+		$store1 = $this->createMock( ItemTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->itemId )
 			->willThrowException( $exception );
-		$store2 = $this->createMock( ItemTermStore::class );
+		$store2 = $this->createMock( ItemTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->itemId );
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception->getMessage() );
-		( new MultiItemTermStore( [ $store1, $store2 ] ) )
+		( new MultiItemTermStoreWriter( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->itemId );
 	}
 
 	public function testDeleteTerms_allExceptions() {
 		$exception1 = new Exception( __METHOD__ . ' exception 1' );
-		$store1 = $this->createMock( ItemTermStore::class );
+		$store1 = $this->createMock( ItemTermStoreWriter::class );
 		$store1->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->itemId )
 			->willThrowException( $exception1 );
 		$exception2 = new Exception( __METHOD__ . ' exception 2' );
-		$store2 = $this->createMock( ItemTermStore::class );
+		$store2 = $this->createMock( ItemTermStoreWriter::class );
 		$store2->expects( $this->once() )
 			->method( 'deleteTerms' )
 			->with( $this->itemId )
@@ -140,42 +140,8 @@ class MultiItemTermStoreTest extends TestCase {
 
 		$this->expectException( Exception::class );
 		$this->expectExceptionMessage( $exception1->getMessage() );
-		( new MultiItemTermStore( [ $store1, $store2 ] ) )
+		( new MultiItemTermStoreWriter( [ $store1, $store2 ] ) )
 			->deleteTerms( $this->itemId );
-	}
-
-	public function testGetTerms_success() {
-		$store1 = $this->createMock( ItemTermStore::class );
-		$store1->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->itemId )
-			->willReturn( $this->fingerprint );
-		$store2 = $this->createMock( ItemTermStore::class );
-		$store2->expects( $this->never() )
-			->method( 'getTerms' );
-
-		$fingerprint = ( new MultiItemTermStore( [ $store1, $store2 ] ) )
-			->getTerms( $this->itemId );
-
-		$this->assertSame( $this->fingerprint, $fingerprint );
-	}
-
-	public function testGetTerms_fallback() {
-		$store1 = $this->createMock( ItemTermStore::class );
-		$store1->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->itemId )
-			->willReturn( new Fingerprint( /* empty */ ) );
-		$store2 = $this->createMock( ItemTermStore::class );
-		$store2->expects( $this->once() )
-			->method( 'getTerms' )
-			->with( $this->itemId )
-			->willReturn( $this->fingerprint );
-
-		$fingerprint = ( new MultiItemTermStore( [ $store1, $store2 ] ) )
-			->getTerms( $this->itemId );
-
-		$this->assertSame( $this->fingerprint, $fingerprint );
 	}
 
 }

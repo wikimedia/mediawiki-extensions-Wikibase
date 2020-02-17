@@ -10,11 +10,10 @@ The code for the storage lives in the [Wikibase\Lib\Store\Sql\Terms] namespace.
 Writing to the secondary storage happens through a deferred update after each edit on entities. This is to make saving edits faster and more atomic which also means reducing the failure rate of saving edits. As the result, secondary storage might not be always completely in sync with the actual terms stored in the primary storage.
 
 Briefly in code:
- - ItemTermStore and PropertyTermStore are the interfaces at the bottom of the term storage tree.
-   - These interfaces are provided by the `term-store` [vendor component]
-   - Implementations exist to write to the new and legacy storage as well as other implementations allowing mixed reading and writing.
+ - ItemTermStoreWriter and PropertyTermStoreWriter are the interfaces at the bottom of the term storage tree.
+   - These interfaces are provided by the `data-model-services` [vendor component]
+   - Implementations exist to write to the new and legacy storage as well as other implementations allowing mixed writing.
  - [EntityTermStoreWriter] joins these stores in an interface that can generically save either Item or Property terms.
- - [EntityHandler] takes a [EntityTermStoreWriter] which is used in a few data updates relating to saving and deleting entities.
 
 The storage system is currently decided using the `tmpItemTermsMigrationStages` and `tmpPropertyTermsMigrationStage` repo settings.
 
@@ -136,7 +135,7 @@ AND wbx_text = 'instance of';
 
 #### Updating
 
-Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_property_terms` tables is done in [DatabaseItemTermStore] and [DatabasePropertyTermStore].
+Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_property_terms` tables is done in [DatabaseItemTermStoreWriter] and [DatabasePropertyTermStoreWriter].
 
  - Term secondary storage is currently written to after edits are saved in MediaWiki's "Secondary data updates". See [EntityHandler::getEntityModificationUpdates()] and implementations.
  - When term changes happen a series of ID acquisitions occur in [DatabaseTermIdsAcquirer]. (Finding IDs that already exist in the storage that will be needed for future inserts)
@@ -154,8 +153,8 @@ Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_prop
 [EntityHandler]: @ref Wikibase::Repo::Content::EntityHandler
 [EntityHandler::getEntityModificationUpdates()]: @ref Wikibase::Repo::Content::EntityHandler::getEntityModificationUpdates()
 [EntityTermStoreWriter]: @ref Wikibase::Lib::Store::EntityTermStoreWriter
-[DatabaseItemTermStore]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseItemTermStore
-[DatabasePropertyTermStore]: @ref Wikibase::Lib::Store::Sql::Terms::DatabasePropertyTermStore
+[DatabaseItemTermStoreWriter]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseItemTermStoreWriter
+[DatabasePropertyTermStoreWriter]: @ref Wikibase::Lib::Store::Sql::Terms::DatabasePropertyTermStoreWriter
 [DatabaseTermIdsCleaner]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermIdsCleaner
 [DatabaseTermIdsAcquirer]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermIdsAcquirer
 [Wikibase\Lib\Store\Sql\Terms]: @ref Wikibase::Lib::Store::Sql::Terms

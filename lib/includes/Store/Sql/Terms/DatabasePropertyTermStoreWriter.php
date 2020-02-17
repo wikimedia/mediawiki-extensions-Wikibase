@@ -10,19 +10,19 @@ use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\StringNormalizer;
-use Wikibase\TermStore\PropertyTermStore;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * PropertyTermStore implementation for the 2019 SQL based secondary property term storage
+ * PropertyTermStoreWriter implementation for the 2019 SQL based secondary property term storage
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
  */
-class DatabasePropertyTermStore implements PropertyTermStore {
+class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 
 	use FingerprintableEntityTermStoreTrait;
 
@@ -74,13 +74,6 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
 		$this->logger = $logger ?: new NullLogger();
-	}
-
-	private function getDbr(): IDatabase {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
-		}
-		return $this->dbr;
 	}
 
 	private function getDbw(): IDatabase {
@@ -233,24 +226,6 @@ class DatabasePropertyTermStore implements PropertyTermStore {
 	private function cleanTermsIfUnused( array $termInLangIds ) {
 		$this->termInLangIdsCleaner->cleanTermInLangIds(
 			$this->findActuallyUnusedTermInLangIds( $termInLangIds, $this->getDbw() )
-		);
-	}
-
-	public function getTerms( PropertyId $propertyId ): Fingerprint {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.PropertyTermStore_getTerms'
-		);
-		$this->assertCanHandlePropertyId( $propertyId );
-
-		$termInLangIds = $this->getDbr()->selectFieldValues(
-			'wbt_property_terms',
-			'wbpt_term_in_lang_id',
-			[ 'wbpt_property_id' => $propertyId->getNumericId() ],
-			__METHOD__
-		);
-
-		return $this->resolveTermIdsResultToFingerprint(
-			$this->termInLangIdsResolver->resolveTermInLangIds( $termInLangIds )
 		);
 	}
 

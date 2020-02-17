@@ -2,15 +2,16 @@
 
 namespace Wikibase\Lib\Store;
 
+use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\TermStore\PropertyTermStore;
-use Wikibase\TermStore\TermStoreException;
+use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
+use Wikibase\DataModel\Services\Term\TermStoreException;
 
 /**
- * Adapter turning a PropertyTermStore into an EntityTermStoreWriter.
+ * Adapter turning a PropertyTermStoreWriter into an EntityTermStoreWriter.
  *
  * @license GPL-2.0-or-later
  */
@@ -18,7 +19,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 
 	private $store;
 
-	public function __construct( PropertyTermStore $store ) {
+	public function __construct( PropertyTermStoreWriter $store ) {
 		$this->store = $store;
 	}
 
@@ -32,7 +33,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 			}
 		}
 
-		throw new \InvalidArgumentException( 'Unsupported entity type' );
+		throw new InvalidArgumentException( 'Unsupported entity type' );
 	}
 
 	public function deleteTermsOfEntity( EntityId $entityId ) {
@@ -45,7 +46,7 @@ class PropertyTermStoreWriterAdapter implements EntityTermStoreWriter {
 			}
 		}
 
-		throw new \InvalidArgumentException( 'Unsupported entity type' );
+		throw new InvalidArgumentException( 'Unsupported entity type' );
 	}
 
 }

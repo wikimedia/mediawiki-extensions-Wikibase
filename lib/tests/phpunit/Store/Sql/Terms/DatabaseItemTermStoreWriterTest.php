@@ -13,8 +13,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore;
-use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
+use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -25,14 +25,16 @@ use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
 /**
- * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStore
+ * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter
  *
  * @group Database
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseItemTermStoreTest extends MediaWikiTestCase {
+class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
+
+	use DatabaseTermStoreWriterTestGetTermsTrait;
 
 	/** @var ItemId */
 	private $i1;
@@ -72,7 +74,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$this->fingerprintEmpty = new Fingerprint();
 	}
 
-	private function getItemTermStore() {
+	private function getItemTermStoreWriter() {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -84,7 +86,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStore(
+		return new DatabaseItemTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
@@ -104,9 +106,9 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function getItemTermStore_entitySourceBasedFederation(
+	private function getItemTermStoreWriter_entitySourceBasedFederation(
 		?EntitySource $itemSourceOverride = null
-	) : DatabaseItemTermStore {
+	) : DatabaseItemTermStoreWriter {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -118,7 +120,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStore(
+		return new DatabaseItemTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
@@ -147,96 +149,80 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testStoreTerms_throwsForNonLocalItemSource() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation( $this->getNonLocalItemSource() );
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation( $this->getNonLocalItemSource() );
 
 		$this->expectException( InvalidArgumentException::class );
 		$store->storeTerms( new ItemId( 'Q1' ), $this->fingerprintEmpty );
 	}
 
 	public function testStoreAndGetTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoreAndGetTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
-	public function testGetTermsWithoutStore() {
-		$store = $this->getItemTermStore();
-
-		$fingerprint = $store->getTerms( $this->i1 );
-
-		$this->assertTrue( $fingerprint->isEmpty() );
-	}
-
-	public function testGetTermsWithoutStore_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
-
-		$fingerprint = $store->getTerms( $this->i1 );
-
-		$this->assertTrue( $fingerprint->isEmpty() );
-	}
-
 	public function testStoreEmptyAndGetTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreEmptyAndGetTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
 			$this->fingerprintEmpty
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testDeleteTermsWithoutStore() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->deleteTerms( $this->i1 );
 		$this->assertTrue( true, 'did not throw an error' );
 	}
 
 	public function testDeleteTermsWithoutStore_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->deleteTerms( $this->i1 );
 		$this->assertTrue( true, 'did not throw an error' );
 	}
 
 	public function testStoreSameFingerprintTwiceAndGetTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
@@ -247,13 +233,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoreSameFingerprintTwiceAndGetTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
@@ -264,13 +250,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoreTwoFingerprintsAndGetTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
@@ -281,13 +267,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint2
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint2, $fingerprint );
 	}
 
 	public function testStoreTwoFingerprintsAndGetTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
@@ -298,13 +284,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint2
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint2, $fingerprint );
 	}
 
 	public function testStoreAndDeleteAndGetTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
@@ -313,13 +299,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->deleteTerms( $this->i1 );
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreAndDeleteAndGetTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
@@ -328,13 +314,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->deleteTerms( $this->i1 );
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertTrue( $fingerprint->isEmpty() );
 	}
 
 	public function testStoreTermsCleansUpRemovedTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
@@ -356,7 +342,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testRemovingSharedTermDoesNotGetUndulyDeleted() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 		$sharedFingerprint = new Fingerprint(
 			new TermList( [ new Term( 'en', 'Cat' ) ] )
 		);
@@ -367,11 +353,11 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->storeTerms( $item1, $this->fingerprintEmpty );
 
-		$this->assertTrue( $store->getTerms( $item2 )->equals( $sharedFingerprint ) );
+		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $sharedFingerprint ) );
 	}
 
 	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 		$sharedTerm = new Term( 'en', 'Cat' );
 		$item1Fingerprint = new Fingerprint(
 			new TermList( [ $sharedTerm ] ),
@@ -388,11 +374,11 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->storeTerms( $item1, $this->fingerprintEmpty );
 
-		$this->assertTrue( $store->getTerms( $item2 )->equals( $item2Fingerprint ) );
+		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $item2Fingerprint ) );
 	}
 
 	public function testRemovingSharedTermDoesNotGetUndulyDeleted_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 		$sharedFingerprint = new Fingerprint(
 			new TermList( [ new Term( 'en', 'Cat' ) ] )
 		);
@@ -403,11 +389,11 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->storeTerms( $item1, $this->fingerprintEmpty );
 
-		$this->assertTrue( $store->getTerms( $item2 )->equals( $sharedFingerprint ) );
+		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $sharedFingerprint ) );
 	}
 
 	public function testRemovingSharedAndUnsharedTermDoesntRemoveUsedTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 		$sharedTerm = new Term( 'en', 'Cat' );
 		$item1Fingerprint = new Fingerprint(
 			new TermList( [ $sharedTerm ] ),
@@ -424,11 +410,11 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 
 		$store->storeTerms( $item1, $this->fingerprintEmpty );
 
-		$this->assertTrue( $store->getTerms( $item2 )->equals( $item2Fingerprint ) );
+		$this->assertTrue( $this->getTermsForItem( $item2 )->equals( $item2Fingerprint ) );
 	}
 
 	public function testStoreTermsCleansUpRemovedTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
@@ -450,7 +436,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteTermsCleansUpRemovedTerms() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$store->storeTerms(
 			$this->i1,
@@ -469,7 +455,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteTermsCleansUpRemovedTerms_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$store->storeTerms(
 			$this->i1,
@@ -488,7 +474,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testStoreTerms_throwsForForeignItemId() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$this->expectException( InvalidArgumentException::class );
 		$store->storeTerms( new ItemId( 'wd:Q1' ), $this->fingerprintEmpty );
@@ -502,7 +488,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testDeleteTerms_throwsForForeignItemId() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$this->expectException( InvalidArgumentException::class );
 		$store->deleteTerms( new ItemId( 'wd:Q1' ) );
@@ -515,20 +501,6 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 		$store->deleteTerms( new ItemId( 'Q1' ) );
 	}
 
-	public function testGetTerms_throwsForForeignItemId() {
-		$store = $this->getItemTermStore();
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->getTerms( new ItemId( 'wd:Q1' ) );
-	}
-
-	public function testGetTerms_throwsForNonItemEntitySource_entityBasedFederation() {
-		$store = $this->getTermStoreNotHandlingItems();
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->getTerms( new ItemId( 'Q1' ) );
-	}
-
 	private function getTermStoreNotHandlingItems() {
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
@@ -538,7 +510,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		return new DatabaseItemTermStore(
+		return new DatabaseItemTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				new FakeLBFactory( [
@@ -561,7 +533,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 	}
 
 	public function testStoresAndGetsUTF8Text() {
-		$store = $this->getItemTermStore();
+		$store = $this->getItemTermStoreWriter();
 
 		$this->fingerprint1->setDescription(
 			'utf8',
@@ -573,13 +545,13 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
 
 	public function testStoresAndGetsUTF8Text_entitySourceBasedFederation() {
-		$store = $this->getItemTermStore_entitySourceBasedFederation();
+		$store = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$this->fingerprint1->setDescription(
 			'utf8',
@@ -591,7 +563,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->fingerprint1
 		);
 
-		$fingerprint = $store->getTerms( $this->i1 );
+		$fingerprint = $this->getTermsForItem( $this->i1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
 	}
@@ -608,7 +580,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			WANObjectCache::newEmpty()
 		);
 
-		$propertyTermStore = new DatabasePropertyTermStore(
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
@@ -626,26 +598,26 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$this->getPropertySource(),
 			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
-		$itemStore = $this->getItemTermStore();
+		$itemStoreWriter = $this->getItemTermStoreWriter();
 
-		$propertyTermStore->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
+		$propertyTermStoreWriter->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
 			new TermList( [ new Term( 'nl', 'van' ) ] )
 		) );
-		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
+		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
 			new TermList(),
 			new TermList( [ new Term( 'af', 'van' ) ] )
 		) );
 
 		// Store with empty fingerprint (will delete things)
-		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
+		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
 
-		$r = $propertyTermStore->getTerms( new PropertyId( 'P12' ) );
+		$r = $this->getTermsForProperty( new PropertyId( 'P12' ) );
 		$this->assertTrue( $r->hasLabel( 'nl' ) );
 		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
 	}
 
 	public function testT237984UnexpectedMissingTextRow_entitySourceBasedFederation() {
-		$itemStore = $this->getItemTermStore_entitySourceBasedFederation();
+		$itemStoreWriter = $this->getItemTermStoreWriter_entitySourceBasedFederation();
 
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
@@ -657,7 +629,7 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			$loadBalancer,
 			WANObjectCache::newEmpty()
 		);
-		$propertyTermStore = new DatabasePropertyTermStore(
+		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
 			$loadBalancer,
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
@@ -676,18 +648,18 @@ class DatabaseItemTermStoreTest extends MediaWikiTestCase {
 			DataAccessSettingsFactory::entitySourceBasedFederation()
 		);
 
-		$propertyTermStore->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
+		$propertyTermStoreWriter->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
 			new TermList( [ new Term( 'nl', 'van' ) ] )
 		) );
-		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
+		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint(
 			new TermList(),
 			new TermList( [ new Term( 'af', 'van' ) ] )
 		) );
 
 		// Store with empty fingerprint (will delete things)
-		$itemStore->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
+		$itemStoreWriter->storeTerms( new ItemId( 'Q99' ), new Fingerprint() );
 
-		$r = $propertyTermStore->getTerms( new PropertyId( 'P12' ) );
+		$r = $this->getTermsForProperty( new PropertyId( 'P12' ) );
 		$this->assertTrue( $r->hasLabel( 'nl' ) );
 		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
 	}
