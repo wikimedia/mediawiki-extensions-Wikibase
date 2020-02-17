@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use Parser;
 use ParserOptions;
 use Title;
@@ -330,7 +331,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 			$disableTitleConversion
 		);
 
-		$parser = new Parser( [ 'class' => 'Parser' ] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 
 		$parser->setTitle( Title::newFromText( 'Cat' ) );
 		$parser->startExternalParse( null, $parserOptions, $outputType );

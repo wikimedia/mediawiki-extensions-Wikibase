@@ -40,7 +40,6 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
-use Parser;
 use Serializers\Serializer;
 use Site;
 use SiteLookup;
@@ -325,7 +324,9 @@ final class WikibaseClient {
 
 			$kartographerEmbeddingHandler = null;
 			if ( $this->useKartographerGlobeCoordinateFormatter() ) {
-				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+				$kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler(
+					MediaWikiServices::getInstance()->getParserFactory()->create()
+				);
 			}
 
 			$this->valueFormatterBuilders = new WikibaseValueFormatterBuilders(

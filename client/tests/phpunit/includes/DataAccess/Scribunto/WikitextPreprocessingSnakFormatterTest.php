@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\Scribunto;
 
 use DataValues\StringValue;
+use MediaWiki\MediaWikiServices;
 use InvalidArgumentException;
 use MediaWikiTestCase;
 use Parser;
@@ -55,12 +56,12 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 		$this->expectException( InvalidArgumentException::class );
 		new WikitextPreprocessingSnakFormatter(
 			$mockFormatter,
-			new Parser( [] )
+			MediaWikiServices::getInstance()->getParserFactory()->create()
 		);
 	}
 
 	public function testFormatSnak() {
-		$parser = new Parser( [] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->setHook(
 			'stripme',
 			function() {
@@ -93,7 +94,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 
 	public function testFormatSnak_onlyPreprocessed() {
 		$wikitext = '[[A|B]][[Image:A.jpg]]<thistagdoesnotexist>C</thistagdoesnotexist>';
-		$parser = new Parser( [] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse(
 			null,
 			new ParserOptions(),
@@ -119,7 +120,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 	public function testGetFormat() {
 		$formatter = new WikitextPreprocessingSnakFormatter(
 			$this->newMockSnakFormatter(),
-			new Parser( [] )
+			MediaWikiServices::getInstance()->getParserFactory()->create()
 		);
 
 		$this->assertEquals(

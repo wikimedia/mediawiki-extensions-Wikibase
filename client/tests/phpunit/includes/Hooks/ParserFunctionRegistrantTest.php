@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Hooks;
 
-use Parser;
+use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 
 /**
@@ -59,7 +59,7 @@ class ParserFunctionRegistrantTest extends \PHPUnit\Framework\TestCase {
 		$constructorArgs,
 		array $expected
 	) {
-		$parser = new Parser( [ 'class' => 'Parser' ] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 
 		list( $allowDataTransclusion, $allowLocalShortDesc ) = array_values( $constructorArgs );
 		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion, $allowLocalShortDesc );

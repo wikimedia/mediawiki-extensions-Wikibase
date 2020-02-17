@@ -28,7 +28,6 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use ObjectCache;
-use Parser;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use RequestContext;
@@ -581,7 +580,9 @@ class WikibaseRepo {
 	 */
 	public function getKartographerEmbeddingHandler() {
 		if ( $this->kartographerEmbeddingHandler === null && $this->useKartographerGlobeCoordinateFormatter() ) {
-			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler( new Parser() );
+			$this->kartographerEmbeddingHandler = new CachingKartographerEmbeddingHandler(
+				MediaWikiServices::getInstance()->getParserFactory()->create()
+			);
 		}
 
 		return $this->kartographerEmbeddingHandler;
