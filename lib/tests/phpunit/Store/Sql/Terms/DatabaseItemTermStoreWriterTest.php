@@ -17,7 +17,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
@@ -92,11 +91,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
-			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
@@ -125,11 +119,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
-			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
 			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
@@ -518,11 +507,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 				] ),
 				$typeIdsStore
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
-			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
@@ -586,11 +570,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 				$lbFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
-			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
@@ -634,11 +613,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiTestCase {
 			new DatabaseTermInLangIdsAcquirer(
 				$lbFactory,
 				$typeIdsStore
-			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
 			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer

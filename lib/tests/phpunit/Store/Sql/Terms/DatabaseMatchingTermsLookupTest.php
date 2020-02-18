@@ -14,7 +14,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
@@ -262,21 +261,13 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 				$typeIdsStore,
 				$logger
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$this->lbFactory->getMainLB(),
-				false,
-				$logger
-			),
 			new DatabaseTermStoreCleaner(
 				$this->lbFactory->getMainLB(),
 				$logger
 			),
 			new StringNormalizer(),
 			$this->getItemSource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			$logger
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 	}
 
