@@ -55,7 +55,6 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			$loadBalancer,
 			$termIdsStore,
 			$termIdsStore,
-			$termIdsStore,
 			new StringNormalizer(),
 			$this->getItemSource(),
 			DataAccessSettingsFactory::entitySourceBasedFederation()

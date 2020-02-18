@@ -4,8 +4,6 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Item;
@@ -32,20 +30,11 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	/** @var TermInLangIdsAcquirer */
 	private $termInLangIdsAcquirer;
 
-	/** @var TermInLangIdsResolver */
-	private $termInLangIdsResolver;
-
 	/** @var TermStoreCleaner */
 	private $termInLangIdsCleaner;
 
 	/** @var StringNormalizer */
 	private $stringNormalizer;
-
-	/** @var LoggerInterface */
-	private $logger;
-
-	/** @var IDatabase|null */
-	private $dbr = null;
 
 	/** @var IDatabase|null */
 	private $dbw = null;
@@ -59,21 +48,17 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		TermInLangIdsAcquirer $termInLangIdsAcquirer,
-		TermInLangIdsResolver $termInLangIdsResolver,
 		TermStoreCleaner $termInLangIdsCleaner,
 		StringNormalizer $stringNormalizer,
 		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
-		LoggerInterface $logger = null
+		DataAccessSettings $dataAccessSettings
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
-		$this->termInLangIdsResolver = $termInLangIdsResolver;
 		$this->termInLangIdsCleaner = $termInLangIdsCleaner;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entitySource = $entitySource;
 		$this->dataAccessSettings = $dataAccessSettings;
-		$this->logger = $logger ?: new NullLogger();
 	}
 
 	private function getDbw(): IDatabase {

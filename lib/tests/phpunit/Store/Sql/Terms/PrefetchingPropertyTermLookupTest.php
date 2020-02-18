@@ -55,7 +55,6 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 			$loadBalancer,
 			$termIdsStore,
 			$termIdsStore,
-			$termIdsStore,
 			new StringNormalizer(),
 			$this->getPropertySource(),
 			DataAccessSettingsFactory::entitySourceBasedFederation()

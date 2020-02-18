@@ -91,18 +91,12 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancerFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
-			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
 			$this->getItemSource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new NullLogger()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
@@ -111,18 +105,12 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancerFactory,
 				$typeIdsStore
 			),
-			new DatabaseTermInLangIdsResolver(
-				$typeIdsStore,
-				$typeIdsStore,
-				$loadBalancer
-			),
 			new DatabaseTermStoreCleaner(
 				$loadBalancer
 			),
 			new StringNormalizer(),
 			$this->getPropertySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new NullLogger()
+			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
 		);
 
 		foreach ( $this->getKnownEntities() as $entity ) {
