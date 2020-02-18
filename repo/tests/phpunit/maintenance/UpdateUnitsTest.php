@@ -2,6 +2,7 @@
 
 namespace Wikibase\Tests;
 
+use DataValues\DecimalMath;
 use MediaWikiLangTestCase;
 use Wikibase\UpdateUnits;
 
@@ -151,6 +152,15 @@ class UpdateUnitsTest extends MediaWikiLangTestCase {
 		$reconverted = reset( $reconvert );
 
 		$convertedUnit = $this->script->convertDerivedUnit( $reconverted, $converted );
+
+		if ( !( new DecimalMath() )->getUseBC() ) {
+			// Don't compare the string values without bcmath as PHPs built-in
+			// precision is too low.
+			$this->assertEquals( floatval( $expected['factor'] ), floatval( $convertedUnit['factor'] ) );
+			unset( $expected['factor'] );
+			unset( $convertedUnit['factor'] );
+		}
+
 		$this->assertEquals( $expected, $convertedUnit );
 	}
 
