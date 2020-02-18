@@ -8,7 +8,6 @@ use RequestContext;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -148,9 +147,26 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'item', 'property' ],
-			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'items',
+					false,
+					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
+					'http://items.wiki/concept/',
+					'',
+					'',
+					''
+				),
+				new EntitySource(
+					'props',
+					'otherdb',
+					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
+					'http://property.wiki/concept/',
+					'o',
+					'o',
+					'otherwiki'
+				)
+			], new EntityTypeDefinitions( [] ) )
 		);
 
 		$module->execute();
@@ -214,9 +230,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$q111Result = [
-			'repository' => '',
+			'repository' => 'items',
 			'id' => 'Q111',
-			'concepturi' => 'http://acme.test/concept/Q111',
+			'concepturi' => 'http://items.wiki/concept/Q111',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -230,9 +246,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$q222Result = [
-			'repository' => '',
+			'repository' => 'items',
 			'id' => 'Q222',
-			'concepturi' => 'http://acme.test/concept/Q222',
+			'concepturi' => 'http://items.wiki/concept/Q222',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -247,9 +263,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$q333Result = [
-			'repository' => '',
+			'repository' => 'items',
 			'id' => 'Q333',
-			'concepturi' => 'http://acme.test/concept/Q333',
+			'concepturi' => 'http://items.wiki/concept/Q333',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -262,25 +278,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 
-		$foreignItemResult = [
-			'repository' => 'foreign',
-			'id' => 'foreign:Q333',
-			'concepturi' => 'http://foreign.wiki/concept/Q333',
-			'url' => 'http://fullTitleUrl',
-			'title' => 'Prefixed:Title',
-			'pageid' => 42,
-			'label' => 'SomeText',
-			'match' => [
-				'type' => 'label',
-				'language' => 'de',
-				'text' => 'SomeText',
-			],
-		];
-
 		$propertyResult = [
-			'repository' => '',
+			'repository' => 'props',
 			'id' => 'P123',
-			'concepturi' => 'http://acme.test/concept/P123',
+			'concepturi' => 'http://property.wiki/concept/P123',
 			'url' => 'http://fullTitleUrl',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
@@ -294,9 +295,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$q333ResultWithoutUrl = [
-			'repository' => '',
+			'repository' => 'items',
 			'id' => 'Q333',
-			'concepturi' => 'http://acme.test/concept/Q333',
+			'concepturi' => 'http://items.wiki/concept/Q333',
 			'title' => 'Prefixed:Title',
 			'pageid' => 42,
 			'label' => 'ADisplayLabel',
@@ -334,11 +335,6 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 				[ $q222Match, $q333Match ],
 				[ $q333Result ],
 			],
-			'Foreign entity matched' => [
-				[ 'search' => 'SomeText' ],
-				[ $foreignItemMatch ],
-				[ $foreignItemResult ],
-			],
 			'Property has datatype' => [
 				[ 'search' => 'PropertyLabel', 'type' => 'property' ],
 				[ $propertyMatch ],
@@ -369,135 +365,6 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertResultLooksGood( $result );
 		$this->assertEquals( $expected, $result['search'] );
-	}
-
-	public function provideTestSearchEntities_entitySourceBasedFederation() {
-		$itemMatch = new TermSearchResult(
-			new Term( 'qid', 'Q111' ),
-			'entityId',
-			new ItemId( 'Q111' ),
-			new Term( 'pt', 'ptLabel' ),
-			new Term( 'pt', 'ptDescription' )
-		);
-
-		$propertyMatch = new TermSearchResult(
-			new Term( 'en', 'PropertyLabel' ),
-			'label',
-			new PropertyId( 'P123' ),
-			new Term( 'en', 'PropertyLabel' )
-		);
-
-		$itemExpectedResult = [
-			'repository' => 'local',
-			'id' => 'Q111',
-			'concepturi' => 'http://acme.test/concept/Q111',
-			'url' => 'http://fullTitleUrl',
-			'title' => 'Prefixed:Title',
-			'pageid' => 42,
-			'label' => 'ptLabel',
-			'description' => 'ptDescription',
-			'aliases' => [ 'Q111' ],
-			'match' => [
-				'type' => 'entityId',
-				'text' => 'Q111',
-			],
-		];
-
-		yield 'Exact EntityId match' => [
-			[ 'search' => 'Q111' ],
-			[ $itemMatch ],
-			[ $itemExpectedResult ],
-		];
-
-		$propertyResult = [
-			'repository' => 'foreign',
-			'id' => 'P123',
-			'concepturi' => 'http://foreign.wiki/concept/P123',
-			'url' => 'http://fullTitleUrl',
-			'title' => 'Prefixed:Title',
-			'pageid' => 42,
-			'datatype' => 'PropertyDataType',
-			'label' => 'PropertyLabel',
-			'match' => [
-				'type' => 'label',
-				'language' => 'en',
-				'text' => 'PropertyLabel',
-			],
-		];
-
-		yield 'Property from other source matched' => [
-			[ 'search' => 'SomeText' ],
-			[ $propertyMatch ],
-			[ $propertyResult ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideTestSearchEntities_entitySourceBasedFederation
-	 */
-	public function testSearchEntities_entitySourceBasedFederation( array $overrideParams, array $interactorReturn, array $expected ) {
-		$params = array_merge( [
-			'action' => 'wbsearchentities',
-			'search' => 'Foo',
-			'type' => 'item',
-			'language' => 'en'
-		], $overrideParams );
-
-		$entitySearchHelper = $this->getMockEntitySearchHelper( $params, $interactorReturn );
-
-		$result = $this->callApiModuleForSourceBasedFederation( $params, $entitySearchHelper );
-
-		$this->assertResultLooksGood( $result );
-		$this->assertEquals( $expected, $result['search'] );
-	}
-
-	/**
-	 * @param array $params
-	 * @param EntitySearchHelper|null $entitySearchHelper
-	 *
-	 * @return array[]
-	 */
-	private function callApiModuleForSourceBasedFederation( array $params, EntitySearchHelper $entitySearchHelper = null ) {
-		$module = new SearchEntities(
-			$this->getApiMain( $params ),
-			'wbsearchentities',
-			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
-			$this->getMockTitleLookup(),
-			$this->getMockPropertyDataTypeLookup(),
-			$this->getContentLanguages(),
-			[ 'item', 'property' ],
-			[ 'local' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'local',
-					false,
-					[ 'item' => [ 'namespaceId' => 10000, 'slot' => 'main' ] ],
-					'http://acme.test/concept/',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'foreign',
-					'otherdb',
-					[ 'property' => [ 'namespaceId' => 50000, 'slot' => 'main' ] ],
-					'http://foreign.wiki/concept/',
-					'o',
-					'o',
-					'otherwiki'
-				)
-			], new EntityTypeDefinitions( [] ) ),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
-		);
-
-		$module->execute();
-
-		$result = $module->getResult();
-		return $result->getResultData( null, [
-			'BC' => [],
-			'Types' => [],
-			'Strip' => 'all',
-		] );
 	}
 
 	private function assertResultLooksGood( $result ) {
@@ -548,9 +415,20 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
 			[ 'kitten' ],
-			[ '' => 'http://acme.test/concept/', 'foreign' => 'http://foreign.wiki/concept/' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			new EntitySourceDefinitions(
+				[
+					new EntitySource(
+						'test',
+						'kittendb',
+						[ 'kitten' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ],
+						'http://acme.test/concept/',
+						'',
+						'',
+						''
+					)
+				],
+				new EntityTypeDefinitions( [] )
+			)
 		);
 
 		$module->execute();
