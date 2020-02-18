@@ -11,14 +11,12 @@ use Wikibase\Client\Changes\AffectedPagesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
-use Wikibase\Client\Usage\SiteLinkUsageLookup;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
@@ -537,22 +535,15 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$this->assertCount( 0, $usages );
 	}
 
-	private function getSiteLinkUsageLookup( $pageTitle ) {
-		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
+	private function getSiteLinkUsageLookup() {
+		$pageEntityUsages = [ new PageEntityUsages( 1, [] ) ];
+		$mock = $this->createMock( UsageLookup::class );
 
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getItemIdForLink' )
-			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
+		$mock->expects( $this->any() )
+			->method( 'getPagesUsing' )
+			->will( $this->returnValue( new ArrayIterator( $pageEntityUsages ) ) );
 
-		$siteLinkLookup->expects( $this->any() )
-			->method( 'getLinks' )
-			->will( $this->returnValue( [
-				[ 'enwiki', $pageTitle, 1 ]
-			] ) );
-
-		$titleFactory = new TitleFactory();
-
-		return new SiteLinkUsageLookup( 'enwiki', $siteLinkLookup, $titleFactory );
+		return $mock;
 	}
 
 	/**
