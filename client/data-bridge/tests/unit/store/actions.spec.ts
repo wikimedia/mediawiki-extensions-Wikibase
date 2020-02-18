@@ -291,6 +291,82 @@ describe( 'root/actions', () => {
 
 	} );
 
+	describe( 'postEntityLoad', () => {
+		it( 'dispatches validateEntityState', async () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ { mainsnak: { datavalue: {} } } ],
+						},
+					},
+				} ),
+				commit: jest.fn(),
+				dispatch,
+				getters: jest.fn() as any,
+			} );
+
+			const mainSnakPath = new MainSnakPath( defaultEntityId, defaultPropertyId, 0 );
+
+			await actions.postEntityLoad();
+
+			expect( dispatch ).toHaveBeenCalledWith( 'validateEntityState', mainSnakPath );
+		} );
+
+		it( 'commits to setOriginalStatement and setApplicationStatus if there are no errors', async () => {
+			const commit = jest.fn();
+			const dataValue: DataValue = { type: 'string', value: 'a string value' };
+			const statement = { mainsnak: { datavalue: dataValue } };
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ statement ],
+						},
+					},
+				} ),
+				commit,
+				dispatch: jest.fn(),
+				getters: jest.fn() as any,
+			} );
+
+			await actions.postEntityLoad();
+
+			expect( commit ).toHaveBeenCalledWith( 'setOriginalStatement', statement );
+			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
+			expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
+		} );
+
+		it( 'doesn\'t commit if there are errors', async () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ {} ],
+						},
+					},
+				} ),
+				commit,
+				dispatch: jest.fn(),
+				getters: {
+					applicationStatus: ApplicationStatus.ERROR,
+				} as any,
+			} );
+
+			await actions.postEntityLoad();
+
+			expect( commit ).not.toHaveBeenCalled();
+		} );
+	} );
+
 	describe( 'initBridgeWithRemoteData', () => {
 		const tracker: BridgeTracker = {
 			trackPropertyDatatype: jest.fn(),
@@ -410,48 +486,12 @@ describe( 'root/actions', () => {
 			);
 		} );
 
-		it( 'dispatches validateEntityState', async () => {
-			const information = newMockAppInformation();
-			const dispatch = jest.fn();
-			const actions = inject( RootActions, {
-				state: newApplicationState( {
-					entity: { id: defaultEntityId },
-					targetProperty: defaultPropertyId,
-					statements: {
-						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ { mainsnak: { datavalue: {} } } ],
-						},
-					},
-				} ),
-				commit: jest.fn(),
-				dispatch,
-				getters: jest.fn() as any,
-			} );
-
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					tracker,
-				} ),
-			};
-			const mainSnakPath = new MainSnakPath( defaultEntityId, defaultPropertyId, 0 );
-
-			await actions.initBridgeWithRemoteData( { information, results: [
-				{} as WikibaseRepoConfiguration,
-				[],
-				'string',
-				undefined,
-			] } );
-
-			expect( dispatch ).toHaveBeenCalledWith( 'validateEntityState', mainSnakPath );
-
-		} );
-
-		it( 'commits to setOriginalStatement and setApplicationStatus if there are no errors', async () => {
+		it( 'dispatches postEntityLoad', async () => {
 			const information = newMockAppInformation();
 			const commit = jest.fn();
 			const dataValue: DataValue = { type: 'string', value: 'a string value' };
 			const statement = { mainsnak: { datavalue: dataValue } };
+			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
 				state: newApplicationState( {
 					entity: { id: defaultEntityId },
@@ -463,7 +503,7 @@ describe( 'root/actions', () => {
 					},
 				} ),
 				commit,
-				dispatch: jest.fn(),
+				dispatch,
 				getters: jest.fn() as any,
 			} );
 
@@ -481,48 +521,8 @@ describe( 'root/actions', () => {
 				undefined,
 			] } );
 
-			expect( commit ).toHaveBeenCalledWith( 'setOriginalStatement', statement );
-			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
-			expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
+			expect( dispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
-
-		it( 'doesn\'t commit if there are errors', async () => {
-			const information = newMockAppInformation();
-			const commit = jest.fn();
-			const actions = inject( RootActions, {
-				state: newApplicationState( {
-					entity: { id: defaultEntityId },
-					targetProperty: defaultPropertyId,
-					statements: {
-						[ defaultEntityId ]: {
-							[ defaultPropertyId ]: [ {} ],
-						},
-					},
-				} ),
-				commit,
-				dispatch: jest.fn(),
-				getters: {
-					applicationStatus: ApplicationStatus.ERROR,
-				} as any,
-			} );
-
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					tracker,
-				} ),
-			};
-
-			await actions.initBridgeWithRemoteData( { information, results: [
-				{} as WikibaseRepoConfiguration,
-				[],
-				'string',
-				undefined,
-			] } );
-
-			expect( commit ).not.toHaveBeenCalled();
-		} );
-
 	} );
 
 	describe( 'validateEntityState', () => {
@@ -822,12 +822,14 @@ describe( 'root/actions', () => {
 			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
 
-		it( 'it dispatches entitySave', async () => {
+		it( 'it dispatches entitySave & postEntityLoad', async () => {
+			const rootModuleDispatch = jest.fn();
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
 			} );
 			const actions = inject( RootActions, {
 				state,
+				dispatch: rootModuleDispatch,
 			} );
 
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
@@ -837,7 +839,9 @@ describe( 'root/actions', () => {
 				dispatch: entityModuleDispatch,
 			};
 			await actions.saveBridge();
+
 			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave' );
+			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
 		it( 'logs an error if saving failed and rejects', async () => {

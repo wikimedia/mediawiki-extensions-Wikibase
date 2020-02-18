@@ -90,6 +90,11 @@ RootActions
 		this.store.$services.get( 'tracker' ).trackPropertyDatatype( dataType );
 
 		BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
+
+		return this.dispatch( 'postEntityLoad' );
+	}
+
+	public async postEntityLoad(): Promise<void> {
 		const state = this.state as InitializedApplicationState;
 
 		const path = new MainSnakPath(
@@ -101,6 +106,7 @@ RootActions
 		await this.dispatch( 'validateEntityState', path );
 		if ( this.getters.applicationStatus !== ApplicationStatus.ERROR ) {
 			const originalStatement = state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ];
+
 			this.commit(
 				'setOriginalStatement',
 				originalStatement,
@@ -228,6 +234,9 @@ RootActions
 			.catch( ( error: Error ) => {
 				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;
+			} )
+			.then( () => {
+				return this.dispatch( 'postEntityLoad' );
 			} );
 	}
 
