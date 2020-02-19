@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\Sql;
 
 use RuntimeException;
+use Wikibase\IdGenerator;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 

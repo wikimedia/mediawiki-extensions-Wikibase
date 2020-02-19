@@ -6,8 +6,8 @@ use Wikibase\IdGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
+ * @covers \Wikibase\Repo\Store\Sql\SqlIdGenerator
  * @covers \Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator
- * @covers \Wikibase\SqlIdGenerator
  *
  * @group Wikibase
  * @group WikibaseStore

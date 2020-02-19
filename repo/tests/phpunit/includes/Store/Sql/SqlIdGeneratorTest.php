@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\SqlIdGenerator;
+use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 
 /**
- * @covers \Wikibase\SqlIdGenerator
+ * @covers \Wikibase\Repo\Store\Sql\SqlIdGenerator
  *
  * @group Wikibase
  * @group WikibaseStore

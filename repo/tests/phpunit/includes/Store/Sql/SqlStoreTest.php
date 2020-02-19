@@ -27,12 +27,12 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
-use Wikibase\SqlStore;
+use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
 
 /**
- * @covers \Wikibase\SqlStore
+ * @covers \Wikibase\Repo\Store\Sql\SqlStore
  *
  * @group Wikibase
  * @group WikibaseStore

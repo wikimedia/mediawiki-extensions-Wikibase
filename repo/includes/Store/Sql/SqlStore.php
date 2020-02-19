@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store\Sql;
 
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
@@ -15,6 +15,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
+use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\CacheRetrievingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
@@ -46,13 +47,10 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikibase\Repo\Store\Sql\SqlChangeStore;
-use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
-use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
-use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
-use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikibase\Store\EntityIdLookup;
+use Wikibase\StringNormalizer;
 use Wikimedia\Rdbms\DBQueryError;
 use WikiPage;
 
