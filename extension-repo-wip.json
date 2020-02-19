@@ -32,7 +32,7 @@
 		"Wikibase\\Repo\\Parsers\\": "repo/includes/Parsers/",
 		"Wikibase\\Repo\\Search\\": "repo/includes/Search/",
 		"Wikibase\\Repo\\Specials\\": "repo/includes/Specials/",
-		"Wikibase\\Repo\\Store\\Sql\\Terms\\": "repo/includes/Store/Sql/Terms/",
+		"Wikibase\\Repo\\Store\\Sql\\": "repo/includes/Store/Sql/",
 		"Wikibase\\Repo\\UpdateRepo\\": "repo/includes/UpdateRepo/",
 		"Wikibase\\Repo\\Validators\\": "repo/includes/Validators/",
 		"Wikibase\\Repo\\View\\": "repo/includes/View/"
