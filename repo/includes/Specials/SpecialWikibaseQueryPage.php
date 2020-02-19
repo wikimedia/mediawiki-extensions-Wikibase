@@ -105,7 +105,8 @@ abstract class SpecialWikibaseQueryPage extends SpecialWikibasePage {
 		$out = $this->getOutput();
 
 		if ( $this->limit == 0 && $this->offset == 0 ) {
-			list( $this->limit, $this->offset ) = $this->getRequest()->getLimitOffset();
+			list( $this->limit, $this->offset ) = $this->getRequest()
+				->getLimitOffsetForUser( $this->getUser() );
 		}
 
 		$entityIds = $this->getResult( $this->offset, $this->limit + 1 );
