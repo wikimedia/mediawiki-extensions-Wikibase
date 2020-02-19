@@ -404,15 +404,37 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 			$lookups = [];
 
-			$lookups['item'] = new TermStoresDelegatingPrefetchingItemTermLookup(
+			$uncachedItemTermsLookup = new TermStoresDelegatingPrefetchingItemTermLookup(
 				$this->settings,
 				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
 				$termIndexBackedTermLookup
 			);
 
-			if ( $this->settings->useNormalizedPropertyTerms() ) {
-				$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
 
+			$cache = new SimpleCacheWithBagOStuff(
+				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+				'wikibase.prefetchingItemTermLookup.',
+				$cacheSecret
+			);
+			$cache = new StatsdMissRecordingSimpleCache(
+				$cache,
+				MediaWikiServices::getInstance()->getStatsdDataFactory(),
+				'wikibase.prefetchingItemTermLookupCache.miss'
+			);
+			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
+			$contentLanguages = WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+			$lookups['item'] = new CachingPrefetchingTermLookup(
+				$cache,
+				new UncachedTermsPrefetcher(
+					$uncachedItemTermsLookup,
+					$redirectResolvingRevisionLookup
+				),
+				$redirectResolvingRevisionLookup,
+				$contentLanguages
+			);
+
+			if ( $this->settings->useNormalizedPropertyTerms() ) {
 				$cache = new SimpleCacheWithBagOStuff(
 					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 					'wikibase.prefetchingPropertyTermLookup.',
@@ -423,7 +445,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 					MediaWikiServices::getInstance()->getStatsdDataFactory(),
 					'wikibase.prefetchingPropertyTermLookupCache.miss'
 				);
-				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
 				$lookups['property'] = new CachingPrefetchingTermLookup(
 					$cache,
 					new UncachedTermsPrefetcher(
@@ -431,7 +452,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 						$redirectResolvingRevisionLookup
 					),
 					$redirectResolvingRevisionLookup,
-					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+					$contentLanguages
 				);
 			} else {
 				$lookups['property'] = $termIndexBackedTermLookup;
