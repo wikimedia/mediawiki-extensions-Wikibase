@@ -428,7 +428,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 					$cache,
 					new UncachedTermsPrefetcher(
 						new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
-						$redirectResolvingRevisionLookup
+						$redirectResolvingRevisionLookup,
+						60 // 1 minute ttl
 					),
 					$redirectResolvingRevisionLookup,
 					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
