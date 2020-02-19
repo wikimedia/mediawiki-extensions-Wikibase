@@ -410,7 +410,7 @@ describe( 'store/actions', () => {
 				expect( resolver ).toHaveBeenCalledWith( testSet );
 
 				const state = ( store.state as InitializedApplicationState );
-				expect( state.statements.Q42 ).toBe( response.entity.statements );
+				expect( state.statements.Q42 ).toEqual( response.entity.statements );
 				expect( state.entity.id ).toBe( response.entity.id );
 				expect( state.entity.baseRevision ).toBe( response.revisionId );
 				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
