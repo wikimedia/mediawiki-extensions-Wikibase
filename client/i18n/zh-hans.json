@@ -124,12 +124,16 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|连接}}到{{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "当有人将我{{GENDER:|创建}}的页面连接到{{WBREPONAME}}项时通知我。",
 	"notification-header-page-connection": "页面<strong>$3</strong>已{{GENDER:$2|连接}}到{{PLURAL:$4|-1=一个{{WBREPONAME}}项|{{WBREPONAME}}项$4}}中，在那可收集与主题相关的数据。",
-	"notification-bundle-header-page-connection": "<strong>$3</strong>和{{PLURAL:$4|$4个|100=超过99个}}其他页面已{{GENDER:$2|连接}}到{{WBREPONAME}}项中。",
+	"notification-bundle-header-page-connection": "<strong>$3</strong>和{{PLURAL:$4|$4个|100=超过99个}}其他页面已{{GENDER:$2|连接}}到{{WBREPONAME}}项中，可收集相关主题的数据。",
 	"notification-link-text-view-item": "{{GENDER:$1|查看}}项",
 	"notification-subject-page-connection": "您在{{SITENAME}}上{{GENDER:$3|创建}}的一个页面已{{GENDER:$2|连接}}至{{WBREPONAME}}项中",
 	"unresolved-property-category": "有未解决属性的页面",
 	"unresolved-property-category-desc": "此分类列举引用了无法通过属性ID或标签找到的{{WBREPONAME}}属性的页面。",
 	"connected-redirect-category": "连接到{{WBREPONAME}}项的重定向",
 	"connected-redirect-category-desc": "此分类列举了连接到{{WBREPONAME}}项的重定向页面。",
+	"wikibase-client-data-bridge-dialog-title": "编辑$1",
+	"wikibase-client-data-bridge-permissions-error": "因为以下{{PLURAL:$1|原因}}，您没有权限来编辑此值：",
+	"wikibase-client-data-bridge-permissions-error-info": "更多详情",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>此值当前在{{WBREPONAME}}上被[$1 全保护]，并且仅能被[$2 管理员]编辑。</strong>",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "当前不支持编辑$1的值"
 }

@@ -54,5 +54,5 @@
 	"wikibase-property-render-error": "Non ha potite generar le proprietate $1: $2",
 	"wikibase-otherprojects": "In altere projectos",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|un altere pagina|$4 altere paginas|100=99+ altere paginas}} ha essite {{GENDER:$2|connectite}} a {{WBREPONAME}} objectos, ubi se pote colliger datos relevante al topicos.",
-	"wikibase-client-data-bridge-dialog-title": "Modificar proprietate"
+	"wikibase-client-data-bridge-dialog-title": "Modificar $1"
 }

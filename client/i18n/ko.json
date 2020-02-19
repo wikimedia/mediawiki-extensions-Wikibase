@@ -127,5 +127,12 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "저는 구식 값을 <strong>갱신했습니다</strong>",
 	"wikibase-client-data-bridge-edit-decision-update-description": "이전 값은 한때 유효했으나 지금은 구식입니다.",
 	"wikibase-client-data-bridge-references-heading": "참고문헌",
+	"wikibase-client-data-bridge-bailout-heading": "그 대신에 다음을 할 수 있습니다:",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "{{WBREPONAME}}에서 값을 편집합니다. 값을 직접 편집하려면 아래의 버튼을 클릭하십시오. (새 탭에서 링크가 열립니다)",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}}에서 값 편집",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "복수의 값 편집은 현재 지원되지 않습니다",
+	"wikibase-client-data-bridge-somevalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
 	"wikibase-client-data-bridge-novalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다"
 }
