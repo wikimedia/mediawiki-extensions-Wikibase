@@ -497,7 +497,7 @@ class MediawikiEditEntity implements EditEntity {
 
 		if ( !$this->status->isOK() ) {
 			$this->errorType |= EditEntity::PERMISSION_ERROR;
-			$this->status->fatal( 'no-permission' );
+			$this->status->fatal( 'permissionserrors' );
 		}
 	}
 
