@@ -80,6 +80,9 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 
 		$languageCodes = array_diff( $languageCodes, array_keys( $terms ) );
 		if ( !empty( $languageCodes ) ) {
+			MediaWikiServices::getInstance()
+				->getStatsdDataFactory()
+				->increment( 'wikibase.repo.wb_terms.select.BufferingTermLookup_getTermsOfType' );
 			$bufferedKeys = $this->getBufferKeys( [ $entityId ], [ $termType ], array_keys( $terms ) );
 
 			$fetchedTerms = $this->termIndex->getTermsOfEntity( $entityId, [ $termType ], $languageCodes );
