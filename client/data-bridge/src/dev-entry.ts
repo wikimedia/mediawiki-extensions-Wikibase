@@ -31,7 +31,11 @@ services.set( 'writingEntityRepository', {
 			entity: clone( entityRevision.entity ),
 			revisionId: entityRevision.revisionId + 1,
 		};
-		return Promise.resolve( result );
+		return new Promise( ( resolve ) => {
+			setTimeout( () => {
+				resolve( result );
+			}, 2000 );
+		} );
 	},
 } );
 
