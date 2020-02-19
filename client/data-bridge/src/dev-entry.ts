@@ -59,7 +59,7 @@ const messages = {
 	[ MessageKeys.EDIT_DECISION_UPDATE_LABEL ]: '<strong>I updated</strong> an outdated value',
 	[ MessageKeys.EDIT_DECISION_UPDATE_DESCRIPTION ]: 'The previous value used to be correct but is now outdated.',
 	[ MessageKeys.REFERENCES_HEADING ]: 'References',
-	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '.&#32;',
+	[ MessageKeys.REFERENCE_SNAK_SEPARATOR ]: '. ',
 	[ MessageKeys.BAILOUT_HEADING ]: 'Instead you could do the following:',
 	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO ]: 'Edit the value on repo. Click the button below to edit the value directly (link opens in a new tab).',
 	[ MessageKeys.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON ]: 'Edit the value on the repo',
