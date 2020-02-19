@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Store;
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
@@ -25,11 +24,6 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string|null
 	 */
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		$baseClassName = $this->getBaseClassNameForLogging();
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			"wikibase.repo.wb_terms.select.{$baseClassName}_getLabel"
-		);
-
 		$labels = $this->getLabels( $entityId, [ $languageCode ] );
 		return $labels[$languageCode] ?? null;
 	}
@@ -44,11 +38,6 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string[]
 	 */
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
-		$baseClassName = $this->getBaseClassNameForLogging();
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			"wikibase.repo.wb_terms.select.{$baseClassName}_getLabels"
-		);
-
 		return $this->getTermsOfType( $entityId, 'label', $languageCodes );
 	}
 
@@ -62,11 +51,6 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string|null
 	 */
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		$baseClassName = $this->getBaseClassNameForLogging();
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			"wikibase.repo.wb_terms.select.{$baseClassName}_getDescription"
-		);
-
 		$descriptions = $this->getDescriptions( $entityId, [ $languageCode ] );
 		return $descriptions[$languageCode] ?? null;
 	}
@@ -81,11 +65,6 @@ abstract class EntityTermLookupBase implements TermLookup {
 	 * @return string[]
 	 */
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
-		$baseClassName = $this->getBaseClassNameForLogging();
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			"wikibase.repo.wb_terms.select.{$baseClassName}_getDescriptions"
-		);
-
 		return $this->getTermsOfType( $entityId, 'description', $languageCodes );
 	}
 
@@ -115,14 +94,6 @@ abstract class EntityTermLookupBase implements TermLookup {
 		}
 
 		return $terms;
-	}
-
-	/**
-	 * @return string
-	 */
-	private function getBaseClassNameForLogging() {
-		$classNameParts = explode( '\\', get_class( $this ) );
-		return array_pop( $classNameParts );
 	}
 
 }
