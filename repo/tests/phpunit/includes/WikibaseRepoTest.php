@@ -1281,4 +1281,53 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertEquals( $expected, $array );
 	}
 
+	public function entitySourceBasedFederationProvider() {
+		return [
+			[ true ],
+			[ false ],
+		];
+	}
+
+	/**
+	 * @dataProvider entitySourceBasedFederationProvider
+	 */
+	public function testWikibaseServicesParameterLessFunctionCalls( $entitySourceBasedFederation ) {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting(
+			'repositories',
+			[ '' => [
+				'database' => 'dummy',
+				'base-uri' => null,
+				'prefix-mapping' => [ '' => '' ],
+				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+			] ]
+		);
+		$settings->setSetting( 'useEntitySourceBasedFederation', $entitySourceBasedFederation );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new RepositoryDefinitions(
+				$settings->getSetting( 'repositories' ),
+				$entityTypeDefinitions
+			),
+			$this->getEntitySourceDefinitions()
+		);
+
+		// Make sure (as good as we can) that all functions can be called without
+		// exceptions/ fatals and nothing accesses the database or does http requests.
+		$wbRepoServices = $wikibaseRepo->getWikibaseServices();
+
+		$reflectionClass = new ReflectionClass( $wbRepoServices );
+		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
+
+		foreach ( $publicMethods as $publicMethod ) {
+			if ( $publicMethod->getNumberOfRequiredParameters() === 0 ) {
+				$publicMethod->invoke( $wbRepoServices );
+			}
+		}
+	}
+
 }
