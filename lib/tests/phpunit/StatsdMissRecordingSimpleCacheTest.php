@@ -20,7 +20,7 @@ class StatsdMissRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 		// Stats expects to be incremented once
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
 		$stats->expects( $this->once() )
-			->method( 'increment' )
+			->method( 'updateCount' )
 			->with( 'statsKey', 1 );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
@@ -41,7 +41,7 @@ class StatsdMissRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 		// Stats expects to be incremented once
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
 		$stats->expects( $this->once() )
-			->method( 'increment' )
+			->method( 'updateCount' )
 			->with( 'statsKey', 2 );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
@@ -61,7 +61,7 @@ class StatsdMissRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 	public function testGetDoesNotIncrementsMetricOnHit() {
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
 		$stats->expects( $this->never() )
-			->method( 'increment' );
+			->method( 'updateCount' );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
 		$innerCache = $this->getMockForAbstractClass( CacheInterface::class );
@@ -79,7 +79,7 @@ class StatsdMissRecordingSimpleCacheTest extends \PHPUnit\Framework\TestCase {
 		// Stats expects to be incremented once
 		$stats = $this->getMockForAbstractClass( StatsdDataFactoryInterface::class );
 		$stats->expects( $this->once() )
-			->method( 'increment' )
+			->method( 'updateCount' )
 			->with( 'statsKey', 1 );
 
 		// Inner cache that returns the default that has been passed to the get method (cache miss)
