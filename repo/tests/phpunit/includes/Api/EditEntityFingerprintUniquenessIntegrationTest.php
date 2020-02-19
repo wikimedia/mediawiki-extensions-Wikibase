@@ -29,6 +29,9 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 		$this->tablesUsed[] = 'wbt_property_terms';
 		$this->tablesUsed[] = 'wbt_item_terms';
+
+		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for items
+		$this->setService( 'LocalServerObjectCache', new \HashBagOStuff() );
 	}
 
 	public function tearDown() : void {
