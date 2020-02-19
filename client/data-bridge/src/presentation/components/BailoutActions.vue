@@ -74,9 +74,7 @@ export default class BailoutActions extends Vue {
 	}
 
 	&__suggestion {
-		list-style: disc outside;
 		margin-bottom: $margin-between-suggestions;
-		margin-left: 2 * $base-spacing-unit-fixed;
 
 		@include body-S();
 
