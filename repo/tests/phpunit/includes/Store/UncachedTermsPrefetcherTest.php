@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -32,11 +33,15 @@ class UncachedTermsPrefetcherTest extends TestCase {
 	/** @var RedirectResolvingLatestRevisionLookup|MockObject */
 	private $redirectResolvingRevisionLookup;
 
+	/** @var int|null */
+	private $ttl;
+
 	protected function setUp(): void {
 		parent::setUp();
 
 		$this->prefetchingLookup = $this->createMock( PrefetchingTermLookup::class );
 		$this->redirectResolvingRevisionLookup = $this->newStubRedirectResolvingRevisionLookup();
+		$this->ttl = null;
 	}
 
 	public function testGivenAllTermsAreCached_doesNotPrefetch() {
@@ -115,10 +120,33 @@ class UncachedTermsPrefetcherTest extends TestCase {
 			->prefetchUncached( $cache, [ $cachedItemId, $uncachedItemId ], $termTypes, $languages );
 	}
 
+	public function testGivenTTL_setsEntriesWithTTL() {
+		$this->ttl = 123;
+
+		$cache = $this->createMock( CacheInterface::class );
+		$cache->expects( $this->once() )
+			->method( 'setMultiple' )
+			->with( $this->anything(), 123 );
+
+		$this->newTermsPrefetcher()
+			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ 'label' ], [ 'en' ] );
+	}
+
+	public function testGivenNoTTL_usesOneMinuteTTL() {
+		$cache = $this->createMock( CacheInterface::class );
+		$cache->expects( $this->once() )
+			->method( 'setMultiple' )
+			->with( $this->anything(), 60 );
+
+		$this->newTermsPrefetcher()
+			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ 'label' ], [ 'en' ] );
+	}
+
 	private function newTermsPrefetcher() {
 		return new UncachedTermsPrefetcher(
 			$this->prefetchingLookup,
-			$this->redirectResolvingRevisionLookup
+			$this->redirectResolvingRevisionLookup,
+			$this->ttl
 		);
 	}
 

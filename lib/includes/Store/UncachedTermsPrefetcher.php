@@ -15,6 +15,8 @@ class UncachedTermsPrefetcher {
 
 	use TermCacheKeyBuilder;
 
+	private const DEFAULT_TTL = 60;
+
 	/**
 	 * @var PrefetchingTermLookup
 	 */
@@ -25,12 +27,19 @@ class UncachedTermsPrefetcher {
 	 */
 	private $redirectResolvingRevisionLookup;
 
+	/**
+	 * @var int
+	 */
+	private $cacheEntryTTL;
+
 	public function __construct(
 		PrefetchingTermLookup $lookup,
-		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
+		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
+		?int $ttl = null
 	) {
 		$this->lookup = $lookup;
 		$this->redirectResolvingRevisionLookup = $redirectResolvingRevisionLookup;
+		$this->cacheEntryTTL = $ttl ?? self::DEFAULT_TTL;
 	}
 
 	public function prefetchUncached( CacheInterface $cache, array $entityIds, array $termTypes, array $languageCodes ) {
@@ -53,7 +62,7 @@ class UncachedTermsPrefetcher {
 				$entitiesToPrefetch,
 				$languagesToPrefetch,
 				$termTypes
-			) );
+			), $this->cacheEntryTTL );
 		}
 	}
 
