@@ -226,17 +226,40 @@ return [
 			$logger
 		);
 
-		$lookups = [
-			'item' => new TermStoresDelegatingPrefetchingItemTermLookup(
-				$settings,
-				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
-				$termIndexBackedTermLookup
-			)
-		];
+		$cacheSecret = hash( 'sha256', $wgSecretKey );
+
+		$cache = new SimpleCacheWithBagOStuff(
+			MediaWikiServices::getInstance()->getLocalServerObjectCache(),
+			'wikibase.prefetchingItemTermLookup.',
+			$cacheSecret
+		);
+		$cache = new StatsdMissRecordingSimpleCache(
+			$cache,
+			MediaWikiServices::getInstance()->getStatsdDataFactory(),
+			'wikibase.prefetchingItemTermLookupCache.miss'
+		);
+		$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
+			$services->getService( 'EntityRevisionLookup' )
+		);
+
+		$itemLookup = new TermStoresDelegatingPrefetchingItemTermLookup(
+			$settings,
+			new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
+			$termIndexBackedTermLookup
+		);
+		$lookups = [];
+		$contentLanguages = WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+		$lookups['item'] = new CachingPrefetchingTermLookup(
+			$cache,
+			new UncachedTermsPrefetcher(
+				$itemLookup,
+				$redirectResolvingRevisionLookup
+			),
+			$redirectResolvingRevisionLookup,
+			$contentLanguages
+		);
 
 		if ( $settings->useNormalizedPropertyTerms() ) {
-			$cacheSecret = hash( 'sha256', $wgSecretKey );
-
 			$cache = new SimpleCacheWithBagOStuff(
 				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 				'wikibase.prefetchingPropertyTermLookup.',
@@ -247,9 +270,6 @@ return [
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				'wikibase.prefetchingPropertyTermLookupCache.miss'
 			);
-			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
-				$services->getService( 'EntityRevisionLookup' )
-			);
 			$lookups['property'] = new CachingPrefetchingTermLookup(
 				$cache,
 				new UncachedTermsPrefetcher(
@@ -258,7 +278,7 @@ return [
 					60 // 1 minute ttl
 				),
 				$redirectResolvingRevisionLookup,
-				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+				$contentLanguages
 			);
 		} else {
 			$lookups['property'] = $termIndexBackedTermLookup;
