@@ -139,7 +139,7 @@ class EntityDiffChangedAspectsFactory {
 		$changedStatements = [];
 
 		foreach ( $claimsDiff as $pid => $diffOp ) {
-			/* @var $statement Statement */
+			/** @var Statement $statement */
 			if ( $diffOp instanceof DiffOpAdd ) {
 				$statement = $diffOp->getNewValue();
 			} elseif ( $diffOp instanceof DiffOpRemove ) {
@@ -152,8 +152,10 @@ class EntityDiffChangedAspectsFactory {
 				$changedStatements[] = $newStatement->getPropertyId()->getSerialization();
 			} else {
 				wfLogWarning( 'Unknown DiffOp type ' . get_class( $diffOp ) );
+				continue;
 			}
 
+			'@phan-var Statement $statement';
 			$changedStatements[] = $statement->getPropertyId()->getSerialization();
 		}
 

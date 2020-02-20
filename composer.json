@@ -42,10 +42,10 @@
 	},
 	"require-dev": {
 		"jakub-onderka/php-parallel-lint": "1.0.0",
-		"jakub-onderka/php-console-highlighter": "0.3.2",
-		"mediawiki/minus-x": "0.3.2",
+		"jakub-onderka/php-console-highlighter": "0.4.0",
+		"mediawiki/minus-x": "1.0.0",
 		"cache/integration-tests": "dev-master#ba6fcfd823d623ba73c2faba5a208067281c4c38",
-		"mediawiki/mediawiki-phan-config": "0.9.0",
+		"mediawiki/mediawiki-phan-config": "0.9.2",
 		"wikibase/wikibase-codesniffer": "1.0.0"
 	},
 	"suggest": {

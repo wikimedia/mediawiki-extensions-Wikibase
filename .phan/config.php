@@ -60,6 +60,7 @@ $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
 		// Both local and global vendor directories have to be analysed
+		"PhanRedefinedClassReference",
 		"PhanRedefinedExtendedClass",
 		"PhanRedefinedInheritedInterface",
 		"PhanRedefinedUsedTrait",
