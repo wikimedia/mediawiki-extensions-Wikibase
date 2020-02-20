@@ -355,7 +355,7 @@
 			this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
 			this._pageConnector = new wb.PageConnector(
-				new wb.api.RepoApi( this.options.mwApiForRepo ),
+				new wb.api.RepoApi( this.options.mwApiForRepo, mw.config.get( 'wgUserLanguage' ) ),
 				this.options.globalSiteId,
 				this.options.pageTitle,
 				this.targetSite,
