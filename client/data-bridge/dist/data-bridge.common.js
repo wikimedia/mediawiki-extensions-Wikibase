@@ -13929,7 +13929,7 @@ function (_Actions) {
       var _initBridgeWithRemoteData = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(_ref) {
-        var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit, state, path, originalStatement;
+        var information, _ref$results, wikibaseRepoConfiguration, permissionErrors, dataType, _entityInit;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -13948,21 +13948,9 @@ function (_Actions) {
               case 4:
                 this.store.$services.get('tracker').trackPropertyDatatype(dataType);
                 BridgeConfigPlugin(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a, _objectSpread2({}, wikibaseRepoConfiguration, {}, information.client));
-                state = this.state;
-                path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
-                _context.next = 10;
-                return this.dispatch('validateEntityState', path);
+                return _context.abrupt("return", this.dispatch('postEntityLoad'));
 
-              case 10:
-                if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
-                  originalStatement = state[NS_STATEMENTS][path.entityId][path.propertyId][path.index];
-                  this.commit('setOriginalStatement', originalStatement);
-                  this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  originalStatement.mainsnak.datavalue);
-                  this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
-                }
-
-              case 11:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -13975,6 +13963,45 @@ function (_Actions) {
       }
 
       return initBridgeWithRemoteData;
+    }()
+  }, {
+    key: "postEntityLoad",
+    value: function () {
+      var _postEntityLoad = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
+        var state, path, originalStatement;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                state = this.state;
+                path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
+                _context2.next = 4;
+                return this.dispatch('validateEntityState', path);
+
+              case 4:
+                if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
+                  originalStatement = state[NS_STATEMENTS][path.entityId][path.propertyId][path.index];
+                  this.commit('setOriginalStatement', originalStatement);
+                  this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  originalStatement.mainsnak.datavalue);
+                  this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
+                }
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function postEntityLoad() {
+        return _postEntityLoad.apply(this, arguments);
+      }
+
+      return postEntityLoad;
     }()
   }, {
     key: "requestAndSetTargetLabel",
@@ -14105,6 +14132,8 @@ function (_Actions) {
         }]);
 
         throw error;
+      }).then(function () {
+        return _this4.dispatch('postEntityLoad');
       });
     }
   }, {

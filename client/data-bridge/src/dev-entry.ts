@@ -8,6 +8,7 @@ import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Events from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
+import clone from '@/store/clone';
 
 const services = new ServiceContainer();
 
@@ -23,9 +24,13 @@ services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 ) );
 
 services.set( 'writingEntityRepository', {
-	saveEntity( entity: EntityRevision ): Promise<EntityRevision> {
-		console.log( 'save', entity ); // eslint-disable-line no-console
-		return Promise.reject();
+	saveEntity( entityRevision: EntityRevision ): Promise<EntityRevision> {
+		console.log( 'save', entityRevision ); // eslint-disable-line no-console
+		const result: EntityRevision = {
+			entity: clone( entityRevision.entity ),
+			revisionId: entityRevision.revisionId + 1,
+		};
+		return Promise.resolve( result );
 	},
 } );
 
