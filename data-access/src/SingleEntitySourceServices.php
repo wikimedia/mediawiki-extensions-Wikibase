@@ -18,7 +18,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -259,10 +259,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				'wikibase.sqlEntityInfoBuilder.',
 				$cacheSecret
 			);
-			$cache = new StatsdMissRecordingSimpleCache(
+			$cache = new StatsdRecordingSimpleCache(
 				$cache,
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				'wikibase.sqlEntityInfoBuilder.miss'
+				[
+					'miss' => 'wikibase.sqlEntityInfoBuilder.miss',
+					'hit' => 'wikibase.sqlEntityInfoBuilder.hit'
+				]
 			);
 
 			$mediaWikiServices = MediaWikiServices::getInstance();
@@ -418,10 +421,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 					'wikibase.prefetchingPropertyTermLookup.',
 					$cacheSecret
 				);
-				$cache = new StatsdMissRecordingSimpleCache(
+				$cache = new StatsdRecordingSimpleCache(
 					$cache,
 					MediaWikiServices::getInstance()->getStatsdDataFactory(),
-					'wikibase.prefetchingPropertyTermLookupCache.miss'
+					[
+						'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
+						'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+					]
 				);
 				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
 				$lookups['property'] = new CachingPrefetchingTermLookup(
