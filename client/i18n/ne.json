@@ -4,7 +4,8 @@
 			"बिप्लब आनन्द",
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल",
-			"पर्वत सुबेदी"
+			"पर्वत सुबेदी",
+			"हिमाल सुबेदी"
 		]
 	},
 	"wikibase-client-desc": "विकिबेस वृद्दिको लागि क्लाइन्ट",
@@ -51,6 +52,8 @@
 	"wikibase-unconnectedpages-submit": "जाउ",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} आइटम आइडी",
 	"wikibase-pageinfo-entity-id-none": "कुनै पनि होइन",
+	"wikibase-pageinfo-entity-usage": "{{WBREPONAME}} यस पृष्ठमा प्रयाेग गरिएका इकाईहरू",
+	"wikibase-pageinfo-entity-usage-S": "साइट सूत्र",
 	"wikibase-otherprojects": "अन्य परियोजनाहरू",
 	"wikibase-otherprojects-beta-message": "अन्य प्रोजेक्ट साइडबार",
 	"wikibase-client-data-bridge-dialog-title": "सम्पादन गर्ने $1",

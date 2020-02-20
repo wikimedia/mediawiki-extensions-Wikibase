@@ -7,7 +7,8 @@
 			"राम प्रसाद जोशी",
 			"सरोज कुमार ढकाल",
 			"Nirajan pant",
-			"पर्वत सुबेदी"
+			"पर्वत सुबेदी",
+			"हिमाल सुबेदी"
 		]
 	},
 	"wikibase-entity": "एकाइ",
@@ -59,6 +60,7 @@
 	"wikibase-snakformat-invalid-value": "अमान्य मान।",
 	"wikibase-entityselector-more": "थप",
 	"wikibase-entityselector-notfound": "कुनै पनि मिल्दोजुल्दो सामग्री फेला परेन",
+	"wikibase-anonymouseditwarning-message": "यदि तपाईले कुनै सम्पादन गर्नुभयो भने तपाईको आइपी ठेगाना सार्वजनिक रुपमा देखिनेछ। यदि तपाई प्रवेश गर्नुहुन्छ वा खाता सृजना गर्नुहुन्छ भने, अन्य फाइदाहरूका बीच तपाईका सम्पादनहरूले तपाईको प्रयोगकर्तानामलाई श्रेय दिनेछ।",
 	"wikibase-itembytitle-lookup-site": "स्थान :",
 	"wikibase-itembytitle-lookup-page": "पृष्ठ:",
 	"wikibase-itembytitle-submit": "खोज्ने",
@@ -77,6 +79,9 @@
 	"wikibase-setdescription-submit": "वर्णन देखाउने",
 	"wikibase-setlabeldescriptionaliases-label-label": "नामपत्र",
 	"wikibase-setlabeldescriptionaliases-description-label": "विवरण:",
+	"special-setsitelink": "सामग्री साइट सूत्र राख्नुहाेस्",
+	"wikibase-setsitelink-label": "साइटसूत्र:",
+	"wikibase-setsitelink-submit": "साइट सूत्र राख्नुहाेस्",
 	"wikibase-modifyentity-id": "आडी",
 	"wikibase-modifyterm-language": "भाषा कोड:",
 	"special-mergeitems": "दुई वस्तुहरू जोड्नुहोस्",

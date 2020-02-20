@@ -112,7 +112,7 @@
 	"notification-link-text-view-item": "Item {{GENDER:$1|bekijken}}",
 	"unresolved-property-category": "Pagina's met onopgeloste eigenschappen",
 	"connected-redirect-category": "Doorverwijzingen verbonden met een {{WBREPONAME}}-item",
-	"wikibase-client-data-bridge-dialog-title": "Eigenschap bewerken",
+	"wikibase-client-data-bridge-dialog-title": "$1 bewerken",
 	"wikibase-client-data-bridge-permissions-error-info": "Meer weergeven",
 	"wikibase-client-data-bridge-edit-decision-heading": "Kies de soort gemaakte bewerking:",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ik heb</strong> een verouderde waarde <strong>bijgewerkt</strong>"

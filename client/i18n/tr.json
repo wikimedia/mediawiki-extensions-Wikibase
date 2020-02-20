@@ -124,7 +124,7 @@
 	"unresolved-property-category-desc": "Bu kategori, özellik kimliği veya etiketi ile bulunamayan {{WBREPONAME}} özelliklerine başvuran sayfaları listeler.",
 	"connected-redirect-category": "Bir {{WBREPONAME}} öğesine bağlı olan yönlendirmeler",
 	"connected-redirect-category-desc": "Bu kategori, bir {{WBREPONAME}} öğesine bağlı olan yönlendirme sayfalarını listeler.",
-	"wikibase-client-data-bridge-dialog-title": "Mülkü Düzenle",
+	"wikibase-client-data-bridge-dialog-title": "$1 düzenle",
 	"wikibase-client-data-bridge-permissions-error": "Aşağıdaki {{PLURAL:$1|sebepten|sebepten}} nedeniyle bu değeri düzenleme izniniz yok:",
 	"wikibase-client-data-bridge-permissions-error-info": "Daha fazla detay",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Bu değer şu anda {{WBREPONAME}} üzerinde [$1 tam korumalı] ve yalnızca [$2 yönetici] tarafından düzenlenebilir.</strong>",
