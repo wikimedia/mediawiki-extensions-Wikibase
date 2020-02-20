@@ -16,7 +16,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -70,10 +70,13 @@ return [
 			'wikibase.sqlEntityInfoBuilder.',
 			$cacheSecret
 		);
-		$cache = new StatsdMissRecordingSimpleCache(
+		$cache = new StatsdRecordingSimpleCache(
 			$cache,
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
-			'wikibase.sqlEntityInfoBuilder.miss'
+			[
+				'miss' => 'wikibase.sqlEntityInfoBuilder.miss',
+				'hit' => 'wikibase.sqlEntityInfoBuilder.hit'
+			]
 		);
 
 		$mediaWikiServices = MediaWikiServices::getInstance();
@@ -233,10 +236,13 @@ return [
 			'wikibase.prefetchingItemTermLookup.',
 			$cacheSecret
 		);
-		$cache = new StatsdMissRecordingSimpleCache(
+		$cache = new StatsdRecordingSimpleCache(
 			$cache,
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
-			'wikibase.prefetchingItemTermLookupCache.miss'
+			[
+				'miss' => 'wikibase.prefetchingItemTermLookupCache.miss',
+				'hit' => 'wikibase.prefetchingItemTermLookupCache.hit'
+			]
 		);
 		$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
 			$services->getService( 'EntityRevisionLookup' )
@@ -265,10 +271,13 @@ return [
 				'wikibase.prefetchingPropertyTermLookup.',
 				$cacheSecret
 			);
-			$cache = new StatsdMissRecordingSimpleCache(
+			$cache = new StatsdRecordingSimpleCache(
 				$cache,
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				'wikibase.prefetchingPropertyTermLookupCache.miss'
+				[
+					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
+					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+				]
 			);
 			$lookups['property'] = new CachingPrefetchingTermLookup(
 				$cache,
