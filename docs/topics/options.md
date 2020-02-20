@@ -151,13 +151,6 @@ Should be the name of the entity source defined in [entitySources] setting.
 
 DEFAULT: ```local```
 
-#### useEntitySourceBasedFederation {#common_useEntitySourceBasedFederation}
-Temporary flag defining whether the repository-prefix-based or entity-source-based federation mechanism (i.e. use of entities from multiple Wikibase instances) should be used.
-
-Use `true` to use entity-source-based federation.
-
-DEFAULT: ```false```
-
 #### disabledDataTypes
 Array listing of disabled data types on a wiki.
 

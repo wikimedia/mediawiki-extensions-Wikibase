@@ -17,9 +17,7 @@ Currently only a single entity source is allowed per entity type on a given repo
 ## Configuration
 
 * A Wikibase Repository is configured as documented in @ref md_docs_topics_options.
-* In order for federation to work:
-  * [useEntitySourceBasedFederation] must be true.
-  * Foreign sources must be configured using the [entitySources] setting.
+* In order for federation to work foreign sources must be configured using the [entitySources] setting.
 
 ### Example
 
@@ -44,7 +42,6 @@ $wgWBClientSettings['entitySources'] = $entitySources;
 
 [options documentation]: @ref md_docs_topics_options
 [entitySources]: @ref #common_entitySources
-[useEntitySourceBasedFederation]: @ref #common_useEntitySourceBasedFederation
 [wgWBRepoSettings]: @ref #wgWBRepoSettings
 [wgWBClientSettings]: @ref #wgWBClientSettings
 [EntitySource]: @ref Wikibase::DataAccess::EntitySource
