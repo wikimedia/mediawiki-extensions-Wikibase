@@ -15,15 +15,15 @@ describe( 'item', function () {
 		EntityPage.open( itemId );
 
 		// begin adding statement (using the mouse)
-		ItemPage.addStatementLink.waitForVisible();
+		ItemPage.addStatementLink.waitForDisplayed();
 		ItemPage.addStatementLink.click();
 		// enter the main value
-		ItemPage.propertyInputField.waitForVisible();
+		ItemPage.propertyInputField.waitForDisplayed();
 		// property field should be automatically focused
 		browser.keys( propertyId );
 		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
 
-		ItemPage.valueInputField.waitForVisible();
+		ItemPage.valueInputField.waitForDisplayed();
 		// focus auto moved after selection
 		browser.keys( 'main value' );
 
@@ -32,7 +32,7 @@ describe( 'item', function () {
 		browser.keys( [ 'Enter' ] );
 		// property input automatically focused
 		let statement = ItemPage.statements[ 0 ];
-		ItemPage.getNthQualifierPropertyInput( statement, 0 ).waitForVisible();
+		ItemPage.getNthQualifierPropertyInput( statement, 0 ).waitForDisplayed();
 		// property field should be automatically focused
 		browser.keys( propertyId );
 		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
@@ -46,7 +46,7 @@ describe( 'item', function () {
 		browser.keys( [ 'Tab', 'Tab', 'Tab' ] );
 		browser.keys( [ 'Enter' ] ); // this should also not save the statement (T154869)
 		// property input automatically focused
-		ItemPage.getNthReferencePropertyInput( statement, 0 ).waitForVisible();
+		ItemPage.getNthReferencePropertyInput( statement, 0 ).waitForDisplayed();
 		// property field should be automatically focused
 		browser.keys( propertyId );
 		ItemPage.selectFirstSuggestedEntityOnEntitySelector();
