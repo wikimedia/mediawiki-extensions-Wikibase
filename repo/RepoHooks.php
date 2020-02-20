@@ -185,37 +185,26 @@ final class RepoHooks {
 		// providing different and more appropriate EntityNamespaceLookup instance
 		// However looking at the current use of EntityNamespaceLookup, it seems to be used
 		// for different kinds of things, which calls for more systematic audit and changes.
-		if ( $wikibaseRepo->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			if ( !$namespaceLookup->isEntityNamespace( $namespace ) ) {
-				return false;
-			}
-
-			$entityType = $namespaceLookup->getEntityType( $namespace );
-
-			if ( $entityType === null ) {
-				return false;
-			}
-
-			$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
-				$entityType
-			);
-			if ( $entitySource === null ) {
-				return false;
-			}
-
-			$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
-			if ( $entitySource->getSourceName() === $localEntitySourceName ) {
-				return true;
-			}
-
+		if ( !$namespaceLookup->isEntityNamespace( $namespace ) ) {
 			return false;
 		}
 
-		if ( $namespaceLookup->isEntityNamespace( $namespace ) ) {
-			$localNamespaces = $wikibaseRepo->getLocalEntityNamespaces();
-			if ( in_array( $namespace, $localNamespaces ) ) {
-				return true;
-			}
+		$entityType = $namespaceLookup->getEntityType( $namespace );
+
+		if ( $entityType === null ) {
+			return false;
+		}
+
+		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
+			$entityType
+		);
+		if ( $entitySource === null ) {
+			return false;
+		}
+
+		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		if ( $entitySource->getSourceName() === $localEntitySourceName ) {
+			return true;
 		}
 
 		return false;
@@ -611,16 +600,9 @@ final class RepoHooks {
 			 * Don't make Wikibase check if a user can execute when the namespace in question does
 			 * not refer to a namespace used locally for Wikibase entities.
 			 */
-			if ( $wikibaseRepo->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-				// If the entity type is not from the local source, don't check anything else
-				$localEntitySource = $wikibaseRepo->getLocalEntitySource();
-				if ( !in_array( $namespace, $localEntitySource->getEntityNamespaceIds() ) ) {
+			$localEntitySource = $wikibaseRepo->getLocalEntitySource();
+			if ( !in_array( $namespace, $localEntitySource->getEntityNamespaceIds() ) ) {
 					return true;
-				}
-			} else {
-				if ( !in_array( $namespace, $wikibaseRepo->getLocalEntityNamespaces() ) ) {
-					return true;
-				}
 			}
 
 			$entityContentFactory = $wikibaseRepo->getEntityContentFactory();
