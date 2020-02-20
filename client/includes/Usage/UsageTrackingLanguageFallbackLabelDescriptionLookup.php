@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\LanguageFallbackChain;
 
 /**
@@ -21,7 +20,7 @@ use Wikibase\LanguageFallbackChain;
 class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
 	/**
-	 * @var LanguageFallbackLabelDescriptionLookup
+	 * @var FallbackLabelDescriptionLookup
 	 */
 	private $labelDescriptionLookup;
 
@@ -41,13 +40,13 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 	private $trackUsagesInAllLanguages;
 
 	/**
-	 * @param LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup
+	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param bool $trackUsagesInAllLanguages
 	 */
 	public function __construct(
-		LanguageFallbackLabelDescriptionLookup $labelDescriptionLookup,
+		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
 		LanguageFallbackChain $languageFallbackChain,
 		$trackUsagesInAllLanguages
