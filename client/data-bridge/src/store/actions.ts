@@ -207,7 +207,10 @@ RootActions
 			} ] );
 			return Promise.reject( null );
 		}
-
+		this.commit(
+			'setApplicationStatus',
+			ApplicationStatus.SAVING,
+		);
 		const state = this.state as InitializedApplicationState;
 		const entityId = state[ NS_ENTITY ].id;
 		const path = new MainSnakPath(
@@ -236,6 +239,10 @@ RootActions
 				throw error;
 			} )
 			.then( () => {
+				this.commit(
+					'setApplicationStatus',
+					ApplicationStatus.READY,
+				);
 				return this.dispatch( 'postEntityLoad' );
 			} );
 	}

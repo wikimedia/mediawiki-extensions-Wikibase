@@ -12776,6 +12776,7 @@ var ValidApplicationStatus;
 (function (ValidApplicationStatus) {
   ValidApplicationStatus["INITIALIZING"] = "initializing";
   ValidApplicationStatus["READY"] = "ready";
+  ValidApplicationStatus["SAVING"] = "saving";
 })(ValidApplicationStatus || (ValidApplicationStatus = {}));
 
 var ErrorStatus;
@@ -14104,31 +14105,32 @@ function (_Actions) {
                 return _context3.abrupt("return", Promise.reject(null));
 
               case 3:
+                this.commit('setApplicationStatus', definitions_ApplicationStatus.SAVING);
                 state = this.state;
                 entityId = state[NS_ENTITY].id;
                 path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
-                _context3.prev = 6;
-                _context3.next = 9;
+                _context3.prev = 7;
+                _context3.next = 10;
                 return this.statementModule.dispatch('applyStringDataValue', {
                   path: path,
                   value: state.targetValue
                 });
 
-              case 9:
+              case 10:
                 statements = _context3.sent;
-                _context3.next = 16;
+                _context3.next = 17;
                 break;
 
-              case 12:
-                _context3.prev = 12;
-                _context3.t0 = _context3["catch"](6);
+              case 13:
+                _context3.prev = 13;
+                _context3.t0 = _context3["catch"](7);
                 this.commit('addApplicationErrors', [{
                   type: ErrorTypes.APPLICATION_LOGIC_ERROR,
                   info: _context3.t0
                 }]);
                 throw _context3.t0;
 
-              case 16:
+              case 17:
                 return _context3.abrupt("return", this.entityModule.dispatch('entitySave', statements[entityId]).catch(function (error) {
                   _this3.commit('addApplicationErrors', [{
                     type: ErrorTypes.SAVING_FAILED,
@@ -14137,15 +14139,17 @@ function (_Actions) {
 
                   throw error;
                 }).then(function () {
+                  _this3.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
+
                   return _this3.dispatch('postEntityLoad');
                 }));
 
-              case 17:
+              case 18:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[6, 12]]);
+        }, _callee3, this, [[7, 13]]);
       }));
 
       function saveBridge() {
