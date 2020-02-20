@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "WEBPACK_TARGET=dev vue-cli-service serve src/dev-entry.ts",
+    "serve": "WEBPACK_TARGET=dev vue-cli-service serve src/dev-entry.ts --skip-plugins eslint",
     "prepare": "node build/wikimedia-ui-base.js",
     "build": "npm-run-all build:*",
     "build:app": "NODE_ENV=production vue-cli-service build --no-clean --skip-plugins eslint --target lib --formats commonjs src/main.ts",
