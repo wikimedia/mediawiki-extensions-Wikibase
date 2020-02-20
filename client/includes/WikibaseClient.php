@@ -1537,7 +1537,7 @@ final class WikibaseClient {
 	 * @fixme this is duplicated in WikibaseRepo...
 	 * @return CacheInterface
 	 */
-	private function getFormatterCache() {
+	public function getFormatterCache() {
 		global $wgSecretKey;
 
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
@@ -1549,9 +1549,10 @@ final class WikibaseClient {
 			$bagOStuff = new CachedBagOStuff( $bagOStuff );
 		}
 
+		// XXX: 'wikibase.repo.formatter.' is used intentionally so that this cache is actually shared between repo and client.
 		$cache = new SimpleCacheWithBagOStuff(
 			$bagOStuff,
-			'wikibase.client.formatter.',
+			'wikibase.repo.formatter.',
 			$cacheSecret
 		);
 
