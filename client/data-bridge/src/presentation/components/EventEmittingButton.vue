@@ -3,6 +3,7 @@
 		class="wb-ui-event-emitting-button"
 		:class="[
 			`wb-ui-event-emitting-button--${this.type}`,
+			`wb-ui-event-emitting-button--size-${this.size}`,
 			{ 'wb-ui-event-emitting-button--squary': squary },
 			{ 'wb-ui-event-emitting-button--pressed': isPressed },
 			{ 'wb-ui-event-emitting-button--iconOnly': isIconOnly },
@@ -45,6 +46,11 @@ const imageOnlyTypes = [
 	'cancel',
 ];
 
+const validSizes = [
+	'M',
+	'L',
+];
+
 @Component
 export default class EventEmittingButton extends Vue {
 	@Prop( {
@@ -52,6 +58,12 @@ export default class EventEmittingButton extends Vue {
 		validator: ( type ) => validTypes.indexOf( type ) !== -1,
 	} )
 	public type!: string;
+
+	@Prop( {
+		required: true,
+		validator: ( size ) => validSizes.includes( size ),
+	} )
+	public size!: string;
 
 	@Prop( { required: true, type: String } )
 	public message!: string;
@@ -156,6 +168,7 @@ export default class EventEmittingButton extends Vue {
 	white-space: nowrap;
 	text-decoration: none;
 	font-weight: bold;
+	line-height: $line-height-text;
 	align-items: center;
 	display: inline-flex;
 	border-width: 1px;
@@ -163,8 +176,17 @@ export default class EventEmittingButton extends Vue {
 	border-style: solid;
 	box-sizing: border-box;
 	outline: 0;
-	padding: $padding-vertical-base $padding-horizontal-base;
 	transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms, filter 100ms;
+
+	&--size-L {
+		font-size: $font-size-normal;
+		padding: px-to-rem( 7px ) px-to-rem( 16px );
+	}
+
+	&--size-M {
+		font-size: $font-size-bodyS;
+		padding: px-to-rem( 4px ) px-to-rem( 12px ) px-to-rem( 5px );
+	}
 
 	&--primaryProgressive {
 		background-color: $color-primary;
