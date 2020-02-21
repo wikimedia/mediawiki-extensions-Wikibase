@@ -13,6 +13,9 @@
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/"
 	},
+	"AutoloadClasses": {
+		"Wikibase\\ClientHooks": "client/ClientHooks.php"
+	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes/"
 	},

@@ -38,11 +38,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 			]
 		);
 
-		$this->generateAutoloadForComponent(
-			'client',
-			[ 'includes', 'maintenance' ]
-		);
-
 		echo "Done.\n\n";
 	}
 
