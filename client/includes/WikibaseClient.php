@@ -15,7 +15,6 @@ use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\ContentLanguages;
@@ -64,7 +63,6 @@ use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Usage\EntityUsageFactory;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -455,25 +453,10 @@ final class WikibaseClient {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = $this->getDataAccessSettings()->useEntitySourceBasedFederation() ?
-				$this->newEntitySourceWikibaseServices() :
-				$this->newMultipleRepositoryAwareWikibaseServices();
+			$this->wikibaseServices = $this->newEntitySourceWikibaseServices();
 		}
 
 		return $this->wikibaseServices;
-	}
-
-	private function newMultipleRepositoryAwareWikibaseServices() {
-		return new MultipleRepositoryAwareWikibaseServices(
-			$this->getEntityIdParser(),
-			$this->getEntityIdComposer(),
-			$this->getRepositoryDefinitions(),
-			$this->entityTypeDefinitions,
-			$this->getDataAccessSettings(),
-			$this->getMultiRepositoryServiceWiring(),
-			$this->getPerRepositoryServiceWiring(),
-			MediaWikiServices::getInstance()->getNameTableStoreFactory()
-		);
 	}
 
 	private function newEntitySourceWikibaseServices() {
@@ -525,32 +508,6 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'tmpItemSearchMigrationStage' ),
 			$this->settings->getSetting( 'tmpPropertySearchMigrationStage' )
 		);
-	}
-
-	private function getMultiRepositoryServiceWiring() {
-		global $wgWikibaseMultiRepositoryServiceWiringFiles;
-
-		$wiring = [];
-		foreach ( $wgWikibaseMultiRepositoryServiceWiringFiles as $file ) {
-			$wiring = array_merge(
-				$wiring,
-				require $file
-			);
-		}
-		return $wiring;
-	}
-
-	private function getPerRepositoryServiceWiring() {
-		global $wgWikibasePerRepositoryServiceWiringFiles;
-
-		$wiring = [];
-		foreach ( $wgWikibasePerRepositoryServiceWiringFiles as $file ) {
-			$wiring = array_merge(
-				$wiring,
-				require $file
-			);
-		}
-		return $wiring;
 	}
 
 	/**
@@ -1033,13 +990,7 @@ final class WikibaseClient {
 	 * @return EntityIdParser
 	 */
 	private function getRepoItemUriParser() {
-		$dataAccessSettings = $this->getDataAccessSettings();
-
-		$itemConceptUriBase = $dataAccessSettings->useEntitySourceBasedFederation() ?
-			$this->getItemSource( $dataAccessSettings )->getConceptBaseUri() :
-			// B/C compatibility, should be removed soon
-			// TODO: Move to check repo that has item entity not the default repo
-			$this->getRepositoryDefinitions()->getConceptBaseUris()[''];
+		$itemConceptUriBase = $this->getItemSource()->getConceptBaseUri();
 
 		return new SuffixEntityIdParser(
 			$itemConceptUriBase,
@@ -1411,27 +1362,19 @@ final class WikibaseClient {
 	 * @return string|false
 	 */
 	public function getDatabaseDomainNameOfLocalRepo() {
-		$dataAccessSettings = $this->getDataAccessSettings();
-
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			return $this->getEntitySourceOfLocalRepo()->getDatabaseName();
-		}
-
-		return $this->getRepositoryDefinitions()->getDatabaseNames()[''];
+		return $this->getEntitySourceOfLocalRepo()->getDatabaseName();
 	}
 
 	private function getEntitySourceOfLocalRepo(): EntitySource {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$localRepoSourceName = $this->settings->getSetting( 'localEntitySourceName' );
-			$sources = $this->entitySourceDefinitions->getSources();
-			foreach ( $sources as $source ) {
-				if ( $source->getSourceName() === $localRepoSourceName ) {
-					return $source;
-				}
+		$localRepoSourceName = $this->settings->getSetting( 'localEntitySourceName' );
+		$sources = $this->entitySourceDefinitions->getSources();
+		foreach ( $sources as $source ) {
+			if ( $source->getSourceName() === $localRepoSourceName ) {
+				return $source;
 			}
 		}
 
-		return new UnusableEntitySource();
+		throw new LogicException( 'No source configured: ' . $localRepoSourceName );
 	}
 
 	public function getWikibaseContentLanguages() {
@@ -1660,12 +1603,9 @@ final class WikibaseClient {
 	}
 
 	private function getDatabaseDomainForPropertySource() {
-		$dataAccessSettings = $this->getDataAccessSettings();
-		$propertySource = $this->getPropertySource( $dataAccessSettings );
+		$propertySource = $this->getPropertySource();
 
-		return $dataAccessSettings->useEntitySourceBasedFederation() ?
-			$propertySource->getDatabaseName() :
-			$this->getRepositoryDefinitions()->getDatabaseNames()[''];
+		return $propertySource->getDatabaseName();
 	}
 
 	private function getWANObjectCache() {
@@ -1683,8 +1623,7 @@ final class WikibaseClient {
 		// TODO: Add special 'optimization' for case item and properties come from the single source to save
 		// an instance? Uses of both seem rather exclusive, though, don't they?
 
-		$dataAccessSettings = $this->getDataAccessSettings();
-		$propertySource = $this->getPropertySource( $dataAccessSettings );
+		$propertySource = $this->getPropertySource();
 
 		$index = new TermSqlIndex(
 			$this->getStringNormalizer(),
@@ -1699,26 +1638,24 @@ final class WikibaseClient {
 		return $index;
 	}
 
-	private function getItemSource( DataAccessSettings $dataAccessSettings ) {
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
-			if ( $itemSource !== null ) {
-				return $itemSource;
-			}
+	private function getItemSource() {
+		$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+
+		if ( $itemSource === null ) {
+			throw new LogicException( 'No source providing Items configured!' );
 		}
 
-		return new UnusableEntitySource();
+		return $itemSource;
 	}
 
-	private function getPropertySource( DataAccessSettings $dataAccessSettings ) {
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
-			if ( $propertySource !== null ) {
-				return $propertySource;
-			}
+	private function getPropertySource() {
+		$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+
+		if ( $propertySource === null ) {
+			throw new LogicException( 'No source providing Properties configured!' );
 		}
 
-		return new UnusableEntitySource();
+		return $propertySource;
 	}
 
 }
