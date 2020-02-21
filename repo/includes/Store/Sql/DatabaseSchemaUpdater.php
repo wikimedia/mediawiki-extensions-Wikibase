@@ -6,7 +6,6 @@ use DatabaseUpdater;
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LegacyAdapterPropertyLookup;
@@ -215,12 +214,7 @@ class DatabaseSchemaUpdater {
 			}
 		);
 
-		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
-		} else {
-			$propertySource = new UnusableEntitySource();
-		}
+		$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
 
 		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource );
 
