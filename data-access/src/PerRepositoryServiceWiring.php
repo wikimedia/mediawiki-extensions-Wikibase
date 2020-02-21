@@ -314,7 +314,6 @@ return [
 	) {
 		$index = new TermSqlIndex(
 			$genericServices->getStringNormalizer(),
-			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
 			new UnusableEntitySource()
 		);

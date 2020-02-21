@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -53,14 +52,6 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		return new TermSqlIndex(
 			new StringNormalizer(),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-				'property' => function( $repositoryName, $uniquePart ) {
-					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
 			new BasicEntityIdParser(),
 			new EntitySource(
 				'testsource',
@@ -1310,14 +1301,6 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 
 		return new TermSqlIndex(
 			new StringNormalizer(),
-			new EntityIdComposer( [
-				'item' => function ( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-				'property' => function ( $repositoryName, $uniquePart ) {
-					return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
 			new BasicEntityIdParser(),
 			new EntitySource(
 				'testsource',

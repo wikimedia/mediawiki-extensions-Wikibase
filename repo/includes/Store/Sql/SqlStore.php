@@ -296,7 +296,6 @@ class SqlStore implements Store {
 		$stringNormalizer = new StringNormalizer();
 		$termSqlIndex = new TermSqlIndex(
 			$stringNormalizer,
-			$this->entityIdComposer,
 			$this->entityIdParser,
 			$this->entitySource
 		);

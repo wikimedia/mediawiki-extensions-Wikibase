@@ -1688,7 +1688,6 @@ final class WikibaseClient {
 
 		$index = new TermSqlIndex(
 			$this->getStringNormalizer(),
-			$this->getEntityIdComposer(),
 			$this->getEntityIdParser(),
 			$propertySource
 		);
