@@ -37,10 +37,10 @@ describe( 'root/getters', () => {
 		} );
 	} );
 
-	describe( 'isTargetPropertyModified', () => {
+	describe( 'isTargetValueModified', () => {
 
 		it( 'returns false if the application is not ready', () => {
-			const actualTargetProperty = {
+			const actualTargetStatement = {
 				type: 'statement',
 				id: 'opaque statement ID',
 				rank: 'normal',
@@ -55,18 +55,18 @@ describe( 'root/getters', () => {
 				},
 			};
 
-			const originalStatement = JSON.stringify( actualTargetProperty );
-			actualTargetProperty.mainsnak.datavalue.value = 'modified teststring';
+			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
+			actualTargetStatement.mainsnak.datavalue.value = 'modified teststring';
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.INITIALIZING,
-				originalStatement,
+				targetValue,
 				[ NS_ENTITY ]: {
 					id: entityId,
 				},
 				[ NS_STATEMENTS ]: {
 					[ entityId ]: {
-						[ targetProperty ]: [ actualTargetProperty ],
+						[ targetProperty ]: [ actualTargetStatement ],
 					},
 				},
 			} );
@@ -75,11 +75,11 @@ describe( 'root/getters', () => {
 				state: applicationState,
 			} );
 
-			expect( getters.isTargetStatementModified ).toBe( false );
+			expect( getters.isTargetValueModified ).toBe( false );
 		} );
 
 		it( 'returns false if there is no diff', () => {
-			const actualTargetProperty = {
+			const actualTargetStatement = {
 				type: 'statement',
 				id: 'opaque statement ID',
 				rank: 'normal',
@@ -94,17 +94,17 @@ describe( 'root/getters', () => {
 				},
 			};
 
-			const originalStatement = clone( actualTargetProperty );
+			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.READY,
-				originalStatement,
+				targetValue,
 				[ NS_ENTITY ]: {
 					id: entityId,
 				},
 				[ NS_STATEMENTS ]: {
 					[ entityId ]: {
-						[ targetProperty ]: [ actualTargetProperty ],
+						[ targetProperty ]: [ actualTargetStatement ],
 					},
 				},
 			} );
@@ -113,11 +113,11 @@ describe( 'root/getters', () => {
 				state: applicationState,
 			} );
 
-			expect( getters.isTargetStatementModified ).toBe( false );
+			expect( getters.isTargetValueModified ).toBe( false );
 		} );
 
 		it( 'returns true if there is a diff', () => {
-			const actualTargetProperty = {
+			const actualTargetStatement = {
 				type: 'statement',
 				id: 'opaque statement ID',
 				rank: 'normal',
@@ -132,19 +132,19 @@ describe( 'root/getters', () => {
 				},
 			};
 
-			const originalStatement = clone( actualTargetProperty );
-			actualTargetProperty.mainsnak.datavalue.value = 'modified teststring';
+			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
+			actualTargetStatement.mainsnak.datavalue.value = 'modified teststring';
 
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.READY,
-				originalStatement,
+				targetValue,
 				[ NS_ENTITY ]: {
 					id: entityId,
 				},
 				[ NS_STATEMENTS ]: {
 					[ entityId ]: {
-						[ targetProperty ]: [ actualTargetProperty ],
+						[ targetProperty ]: [ actualTargetStatement ],
 					},
 				},
 			} );
@@ -153,7 +153,7 @@ describe( 'root/getters', () => {
 				state: applicationState,
 			} );
 
-			expect( getters.isTargetStatementModified ).toBe( true );
+			expect( getters.isTargetValueModified ).toBe( true );
 		} );
 	} );
 
@@ -166,15 +166,15 @@ describe( 'root/getters', () => {
 			[ true, true, EditDecision.REPLACE ],
 			[ true, true, EditDecision.UPDATE ],
 		] )(
-			'returns %p with isTargetStatementModified=%p and editDecision=%p',
-			( expected: boolean, isTargetStatementModified: boolean, editDecision: EditDecision|null ) => {
+			'returns %p with isTargetValueModified=%p and editDecision=%p',
+			( expected: boolean, isTargetValueModified: boolean, editDecision: EditDecision|null ) => {
 				const applicationState = newApplicationState( { editDecision } );
 
 				// @ts-ignore
 				const getters = inject( RootGetters, {
 					state: applicationState,
 					getters: {
-						isTargetStatementModified,
+						isTargetValueModified,
 					},
 				} );
 

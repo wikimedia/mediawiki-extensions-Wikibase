@@ -5,6 +5,7 @@ import { EntityState } from '@/store/entity';
 import { Actions, Context, Getters } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 import { statementModule } from '@/store/statements';
+import StatementMap from '@/datamodel/StatementMap';
 
 export class EntityActions extends Actions<EntityState, Getters<EntityState>, EntityMutations, EntityActions> {
 	private store!: Store<Application>;
@@ -23,11 +24,13 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 
-	public entitySave(): Promise<void> {
+	public entitySave(
+		statements: StatementMap,
+	): Promise<void> {
 		const entityRevision = new EntityRevision(
 			{
 				id: this.state.id,
-				statements: this.statementsModule.state[ this.state.id ],
+				statements,
 			},
 			this.state.baseRevision,
 		);

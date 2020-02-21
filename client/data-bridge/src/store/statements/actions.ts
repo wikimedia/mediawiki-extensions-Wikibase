@@ -2,11 +2,12 @@ import { Actions } from 'vuex-smart-module';
 import { StatementState } from '@/store/statements';
 import EntityId from '@/datamodel/EntityId';
 import StatementMap from '@/datamodel/StatementMap';
-import { PayloadSnakDataValue, PayloadSnakType } from '@/store/statements/snaks/Payloads';
+import { PayloadSnakDataValue } from '@/store/statements/snaks/Payloads';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import { StatementMutations } from '@/store/statements/mutations';
 import { StatementGetters } from '@/store/statements/getters';
 import { PathToSnak } from '@/store/statements/PathToSnak';
+import clone from '@/store/clone';
 
 export class StatementActions extends Actions<
 StatementState,
@@ -27,11 +28,13 @@ StatementActions
 		return Promise.resolve();
 	}
 
-	public setStringDataValue(
+	public applyStringDataValue(
 		payloadDataValue: PayloadSnakDataValue<PathToSnak>,
-	): Promise<void> {
+	): Promise<StatementState> {
 		return new Promise( ( resolve ) => {
-			const snak = payloadDataValue.path.resolveSnakInStatement( this.state );
+			const state = clone( this.state );
+
+			const snak = payloadDataValue.path.resolveSnakInStatement( state );
 			if ( snak === null ) {
 				throw new Error( SnakActionErrors.NO_SNAK_FOUND );
 			}
@@ -44,15 +47,11 @@ StatementActions
 				throw new Error( SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE );
 			}
 
-			// TODO put more validation here
-			const payloadSnakType: PayloadSnakType<PathToSnak> = {
-				path: payloadDataValue.path,
-				value: 'value',
-			};
+			snak.snaktype = 'value';
 
-			this.commit( 'setSnakType', payloadSnakType );
-			this.commit( 'setDataValue', payloadDataValue );
-			resolve();
+			snak.datavalue = payloadDataValue.value;
+
+			resolve( state );
 		} );
 	}
 }

@@ -3,7 +3,6 @@ import clone from '@/store/clone';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
-import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
 import { Mutations } from 'vuex-smart-module';
 import Application from '@/store/Application';
@@ -24,10 +23,6 @@ export class RootMutations extends Mutations<Application> {
 
 	public setTargetLabel( label: Term ): void {
 		this.state.targetLabel = label;
-	}
-
-	public setOriginalStatement( revision: Statement ): void {
-		this.state.originalStatement = clone( revision );
 	}
 
 	public addApplicationErrors( errors: ApplicationError[] ): void {

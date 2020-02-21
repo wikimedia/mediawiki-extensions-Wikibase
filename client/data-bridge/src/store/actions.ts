@@ -105,16 +105,11 @@ RootActions
 
 		await this.dispatch( 'validateEntityState', path );
 		if ( this.getters.applicationStatus !== ApplicationStatus.ERROR ) {
-			const originalStatement = state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ];
-
-			this.commit(
-				'setOriginalStatement',
-				originalStatement,
-			);
 			this.commit(
 				'setTargetValue',
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				originalStatement.mainsnak.datavalue!,
+				state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ] // TODO use getter
+					.mainsnak.datavalue!,
 			);
 
 			this.commit(
@@ -201,27 +196,10 @@ RootActions
 
 		this.commit( 'setTargetValue', dataValue );
 
-		const state = this.state as InitializedApplicationState;
-		const path = new MainSnakPath(
-			state[ NS_ENTITY ].id,
-			state.targetProperty,
-			0,
-		);
-
-		return this.statementModule.dispatch( 'setStringDataValue',
-			{
-				path,
-				value: dataValue,
-			} ).catch( ( error: Error ) => {
-			this.commit( 'addApplicationErrors', [ {
-				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-				info: error,
-			} ] );
-			throw error;
-		} );
+		return Promise.resolve();
 	}
 
-	public saveBridge(): Promise<void> {
+	public async saveBridge(): Promise<void> {
 		if ( this.state.applicationStatus !== ApplicationStatus.READY ) {
 			this.commit( 'addApplicationErrors', [ {
 				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
@@ -230,7 +208,29 @@ RootActions
 			return Promise.reject( null );
 		}
 
-		return this.entityModule.dispatch( 'entitySave' )
+		const state = this.state as InitializedApplicationState;
+		const entityId = state[ NS_ENTITY ].id;
+		const path = new MainSnakPath(
+			entityId,
+			state.targetProperty,
+			0,
+		);
+
+		let statements;
+		try {
+			statements = await this.statementModule.dispatch( 'applyStringDataValue', {
+				path,
+				value: state.targetValue!, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+			} );
+		} catch ( error ) {
+			this.commit( 'addApplicationErrors', [ {
+				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+				info: error,
+			} ] );
+			throw error;
+		}
+
+		return this.entityModule.dispatch( 'entitySave', statements[ entityId ] )
 			.catch( ( error: Error ) => {
 				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;

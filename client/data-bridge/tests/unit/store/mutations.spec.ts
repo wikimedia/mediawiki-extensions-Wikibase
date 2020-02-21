@@ -53,26 +53,6 @@ describe( 'root/mutations', () => {
 		expect( state.targetLabel ).toBe( targetLabel );
 	} );
 
-	it( 'changes the originalStatement of the state', () => {
-		const targetProperty = {
-			type: 'statement' as any,
-			id: 'opaque statement ID',
-			rank: 'normal' as any,
-			mainsnak: {
-				snaktype: 'novalue' as any,
-				property: 'P60',
-				datatype: 'string',
-			},
-		};
-		const state: Application = newApplicationState();
-
-		const mutations = inject( RootMutations, { state } );
-
-		mutations.setOriginalStatement( targetProperty );
-		expect( state.originalStatement ).not.toBe( targetProperty );
-		expect( state.originalStatement ).toStrictEqual( targetProperty );
-	} );
-
 	it( 'adds errors to the state', () => {
 		const state: Application = newApplicationState();
 		const errors: ApplicationError[] = [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ];

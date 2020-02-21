@@ -5,7 +5,6 @@ export default function ( fields?: any ): Application {
 	let AppState: Application = {
 		targetProperty: '',
 		targetLabel: null,
-		originalStatement: null,
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
 		applicationErrors: [],

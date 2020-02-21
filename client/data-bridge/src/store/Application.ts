@@ -6,7 +6,6 @@ import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import DataValue from '@/datamodel/DataValue';
-import Statement from '@/datamodel/Statement';
 import ApplicationError from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
 import { StatementState } from '@/store/statements';
@@ -19,7 +18,6 @@ interface Application {
 	editFlow: string;
 	entityTitle: string;
 	originalHref: string;
-	originalStatement: Statement|null;
 	pageTitle: string;
 	targetLabel: Term|null;
 	targetProperty: string;

@@ -43,7 +43,7 @@ export class RootGetters extends Getters<Application> {
 		return statements.references ? statements.references : [];
 	}
 
-	public get isTargetStatementModified(): boolean {
+	public get isTargetValueModified(): boolean {
 		if ( this.state.applicationStatus !== Status.READY ) {
 			return false;
 		}
@@ -51,15 +51,17 @@ export class RootGetters extends Getters<Application> {
 		const initState = this.state as InitializedApplicationState;
 		const entityId = initState[ NS_ENTITY ].id;
 		return !deepEqual(
-			this.state.originalStatement as Statement,
-			initState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ],
+			this.state.targetValue,
+			( initState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ] as Statement )
+				.mainsnak
+				.datavalue,
 			{ strict: true },
 		);
 	}
 
 	public get canSave(): boolean {
 		return this.state.editDecision !== null &&
-			this.getters.isTargetStatementModified;
+			this.getters.isTargetValueModified;
 	}
 
 	public get applicationStatus(): ApplicationStatus {
