@@ -16,11 +16,8 @@ use Revision;
 use Serializers\Serializer;
 use Status;
 use User;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -132,90 +129,11 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			'customdb',
 			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
 			'',
-			'cus',
-			'cus',
-			''
-		);
-
-		$lookup = new WikiPageEntityRevisionLookup(
-			new WikiPageEntityMetaDataLookup(
-				$nsLookup,
-				new EntityIdLocalPartPageTableEntityQuery(
-					$nsLookup,
-					MediaWikiServices::getInstance()->getSlotRoleStore()
-				),
-				$localSource
-			),
-			new WikiPageEntityDataLoader( $contentCodec, MediaWikiServices::getInstance()->getBlobStore() ),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			false
-		);
-
-		$store = new WikiPageEntityStore(
-			new EntityContentFactory(
-				[
-					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
-					'custom-type' => 'wikibase-custom-type',
-				],
-				[
-					'item' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newItemHandler();
-					},
-					'property' => function() use ( $wikibaseRepo ) {
-						return $wikibaseRepo->newPropertyHandler();
-					},
-					'custom-type' => function() use ( $wikibaseRepo ) {
-						return $this->newCustomEntityHandler();
-					},
-				],
-				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
-				$localSource
-			),
-			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
-			$wikibaseRepo->getEntityIdComposer(),
-			MediaWikiServices::getInstance()->getRevisionStore(),
-			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			MediaWikiServices::getInstance()->getPermissionManager()
-		);
-
-		return [ $store, $lookup ];
-	}
-
-	/**
-	 * @return array [ EntityStore, EntityLookup ]
-	 */
-	private function createStoreAndLookupForEntitySourceBasedFederation() {
-		// make sure the term index is empty to avoid conflicts.
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$wikibaseRepo->getStore()->getTermIndex()->clear();
-
-		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
-		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
-
-		$nsLookup = $wikibaseRepo->getEntityNamespaceLookup();
-
-		$localSource = new EntitySource(
-			'local',
-			false,
-			[ 'item' => [ 'namespaceId' => 5000, 'slot' => 'main' ], 'property' => [ 'namespaceId' => 6000, 'slot' => 'main' ] ],
-			'',
-			'',
-			'',
-			''
-		);
-		$customSource = new EntitySource(
-			'custom',
-			'customdb',
-			[ 'custom-type' => [ 'namespaceId' => 666, 'slot' => 'main' ] ],
-			'',
 			'c',
 			'c',
 			''
 		);
 
-		$dataAccessSettings = DataAccessSettingsFactory::entitySourceBasedFederation();
 		$lookup = new WikiPageEntityRevisionLookup(
 			new WikiPageEntityMetaDataLookup(
 				$nsLookup,
@@ -255,7 +173,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$localSource,
-			$dataAccessSettings,
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
@@ -329,57 +246,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
 	}
 
-	/**
-	 * @dataProvider simpleEntityParameterProvider()
-	 */
-	public function testSaveEntity_entitySourceBasedFederation( EntityDocument $entity, EntityDocument $empty ) {
-		/**
-		 * @var WikiPageEntityStore $store
-		 * @var EntityRevisionLookup $lookup
-		 */
-		list( $store, $lookup ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $this->getTestUser()->getUser();
-
-		// register mock watcher
-		$watcher = $this->createMock( EntityStoreWatcher::class );
-		$watcher->expects( $this->exactly( 2 ) )
-			->method( 'entityUpdated' );
-		$watcher->expects( $this->never() )
-			->method( 'redirectUpdated' );
-
-		$store->registerWatcher( $watcher );
-
-		// save entity
-		$r1 = $store->saveEntity( $entity, 'create one', $user, EDIT_NEW );
-		$entityId = $r1->getEntity()->getId();
-
-		$r1actual = $lookup->getEntityRevision( $entityId );
-		$this->assertEquals( $r1->getRevisionId(), $r1actual->getRevisionId(), 'revid' );
-		$this->assertEquals( $r1->getTimestamp(), $r1actual->getTimestamp(), 'timestamp' );
-		$this->assertEquals( $r1->getEntity()->getId(), $r1actual->getEntity()->getId(), 'entity id' );
-
-		// TODO: check notifications in wb_changes table!
-
-		// update entity
-		$empty->setId( $entityId );
-		$empty->getFingerprint()->setLabel( 'en', 'UPDATED' );
-
-		$r2 = $store->saveEntity( $empty, 'update one', $user, EDIT_UPDATE );
-		$this->assertNotEquals( $r1->getRevisionId(), $r2->getRevisionId(), 'expected new revision id' );
-
-		$r2actual = $lookup->getEntityRevision( $entityId );
-		$this->assertEquals( $r2->getRevisionId(), $r2actual->getRevisionId(), 'revid' );
-		$this->assertEquals( $r2->getTimestamp(), $r2actual->getTimestamp(), 'timestamp' );
-		$this->assertEquals( $r2->getEntity()->getId(), $r2actual->getEntity()->getId(), 'entity id' );
-
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
-	}
-
 	public function testSaveEntity_invalidContent() {
 		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
+		list( $store, ) = $this->createStoreAndLookup();
 		$store = TestingAccessWrapper::newFromObject( $store );
 
 		$user = $this->getTestUser()->getUser();
@@ -452,35 +321,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveEntityError( EntityDocument $entity, $flags, $baseRevId, $error ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-		$user = $this->getTestUser()->getUser();
-
-		// setup target item
-		$one = new Item();
-		$one->setLabel( 'en', 'one' );
-		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
-
-		// inject ids
-		if ( is_int( $baseRevId ) ) {
-			// use target item's revision as an offset
-			$baseRevId += $r1->getRevisionId();
-		}
-
-		if ( $entity->getId() === null ) {
-			// use target item's id
-			$entity->setId( $r1->getEntity()->getId() );
-		}
-
-		// check for error
-		$this->expectException( $error );
-		$store->saveEntity( $entity, '', $user, $flags, $baseRevId );
-	}
-
-	/**
-	 * @dataProvider provideSaveEntityError
-	 */
-	public function testSaveEntityError_entitySourceBasedFederation( EntityDocument $entity, $flags, $baseRevId, $error ) {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
 		$user = $this->getTestUser()->getUser();
 
 		// setup target item
@@ -623,56 +463,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
 	}
 
-	public function testSaveRedirect_entitySourceBasedFederation() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $this->getTestUser()->getUser();
-
-		// register mock watcher
-		$watcher = $this->createMock( EntityStoreWatcher::class );
-		$watcher->expects( $this->exactly( 1 ) )
-			->method( 'redirectUpdated' );
-		$watcher->expects( $this->never() )
-			->method( 'entityDeleted' );
-
-		$store->registerWatcher( $watcher );
-
-		// create one
-		$one = new Item();
-		$one->setLabel( 'en', 'one' );
-
-		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
-		$oneId = $r1->getEntity()->getId();
-
-		// redirect one to Q33
-		$q33 = new ItemId( 'Q33' );
-		$redirect = new EntityRedirect( $oneId, $q33 );
-
-		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
-
-		// FIXME: use the $lookup to check this, once EntityLookup supports redirects.
-		$revision = Revision::newFromId( $redirectRevId );
-
-		$this->assertTrue( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
-		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
-		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
-
-		$this->assertRedirectPerPage( $q33, $oneId );
-
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
-
-		// TODO: check notifications in wb_changes table!
-
-		// Revert to original content
-		$r1 = $store->saveEntity( $one, 'restore one', $user, EDIT_UPDATE );
-		$revision = Revision::newFromId( $r1->getRevisionId() );
-
-		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
-		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
-	}
-
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
 		$entityRedirectLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityRedirectLookup();
 
@@ -696,18 +486,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testSaveRedirectFailure( EntityRedirect $redirect ) {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-		$user = $this->getTestUser()->getUser();
-
-		$this->expectException( StorageException::class );
-		$store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
-	}
-
-	/**
-	 * @dataProvider unsupportedRedirectProvider
-	 */
-	public function testSaveRedirectFailure_entitySourceBasedFederation( EntityRedirect $redirect ) {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
 		$user = $this->getTestUser()->getUser();
 
 		$this->expectException( StorageException::class );
@@ -782,99 +560,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertFalse( $res );
 	}
 
-	public function testUserWasLastToEdit_entitySourceBasedFederation() {
-		/**
-		 * @var WikiPageEntityStore $store
-		 * @var EntityRevisionLookup $lookup
-		 */
-		list( $store, $lookup ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-
-		$anonUser = User::newFromId( 0 );
-		$anonUser->setName( '127.0.0.1' );
-		$user = $this->getTestUser()->getUser();
-		$item = new Item();
-
-		// check for default values, last revision by anon --------------------
-		$item->setLabel( 'en', "Test Anon default" );
-		$store->saveEntity( $item, 'testing', $anonUser, EDIT_NEW );
-		$itemId = $item->getId();
-
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by sysop --------------------
-		$item->setLabel( 'en', "Test SysOp default" );
-		$store->saveEntity( $item, 'Test SysOp default', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by anon --------------------
-		$item->setLabel( 'en', "Test Anon with user" );
-		$store->saveEntity( $item, 'Test Anon with user', $anonUser, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, false );
-		$this->assertFalse( $res );
-
-		// check for default values, last revision by sysop --------------------
-		$item->setLabel( 'en', "Test SysOp with user" );
-		$store->saveEntity( $item, 'Test SysOp with user', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $user, $itemId, false );
-		$this->assertFalse( $res );
-
-		// create an edit and check if the anon user is last to edit --------------------
-		$lastRevIdResult = $lookup->getLatestRevisionId(
-			$itemId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
-		);
-		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
-		$item->setLabel( 'en', "Test Anon" );
-		$store->saveEntity( $item, 'Test Anon', $anonUser, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
-		$this->assertTrue( $res );
-		// also check that there is a failure if we use the sysop user
-		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
-		$this->assertFalse( $res );
-
-		// create an edit and check if the sysop user is last to edit --------------------
-		$lastRevIdResult = $lookup->getLatestRevisionId(
-			$itemId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
-		);
-		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
-		$item->setLabel( 'en', "Test SysOp" );
-		$store->saveEntity( $item, 'Test SysOp', $user, EDIT_UPDATE );
-		$res = $store->userWasLastToEdit( $user, $itemId, $lastRevId );
-		$this->assertTrue( $res );
-
-		// also check that there is a failure if we use the anon user
-		$res = $store->userWasLastToEdit( $anonUser, $itemId, $lastRevId );
-		$this->assertFalse( $res );
-	}
-
 	public function testUpdateWatchlist() {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-
-		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
-
-		if ( $user->getId() === 0 ) {
-			$user->addToDatabase();
-		}
-
-		$item = new Item();
-		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
-
-		$itemId = $item->getId();
-
-		$store->updateWatchlist( $user, $itemId, true );
-		$this->assertTrue( $store->isWatching( $user, $itemId ) );
-
-		$store->updateWatchlist( $user, $itemId, false );
-		$this->assertFalse( $store->isWatching( $user, $itemId ) );
-	}
-
-	public function testUpdateWatchlist_entitySourceBasedFederation() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
 
 		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
 
@@ -1014,69 +702,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testSaveFlags_entitySourceBasedFederation() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-
-		$entity = $this->newEntity();
-		$prefix = get_class( $this ) . '/';
-
-		// try to create without flags
-		$entity->setLabel( 'en', $prefix . 'one' );
-		$status = $this->saveEntity( $store, $entity, 'create item' );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-gone-missing' ),
-			'try to create without flags, edit gone missing'
-		);
-
-		// try to create with EDIT_UPDATE flag
-		$entity->setLabel( 'en', $prefix . 'two' );
-		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_UPDATE );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-gone-missing' ),
-			'edit gone missing, try to create with EDIT_UPDATE'
-		);
-
-		// try to create with EDIT_NEW flag
-		$entity->setLabel( 'en', $prefix . 'three' );
-		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
-		$this->assertTrue(
-			$status->isOK(),
-			'create with EDIT_NEW flag for ' . $entity->getId() .
-			$this->getStatusLine( $status )
-		);
-		$this->assertNotNull( $entity->getId(), 'getEntityId() after save' );
-
-		// ok, the item exists now in the database.
-
-		// try to save with EDIT_NEW flag
-		$entity->setLabel( 'en', $prefix . 'four' );
-		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
-		$this->assertFalse( $status->isOK(), "save should have failed" );
-		$this->assertTrue(
-			$status->hasMessage( 'edit-already-exists' ),
-			'try to save with EDIT_NEW flag, edit already exists'
-		);
-
-		// try to save with EDIT_UPDATE flag
-		$entity->setLabel( 'en', $prefix . 'five' );
-		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_UPDATE );
-		$this->assertTrue(
-			$status->isOK(),
-			'try to save with EDIT_UPDATE flag, save failed' . $this->getStatusLine( $status )
-		);
-
-		// try to save without flags
-		$entity->setLabel( 'en', $prefix . 'six' );
-		$status = $this->saveEntity( $store, $entity, 'create item' );
-		$this->assertTrue(
-			$status->isOK(),
-			'try to save without flags, save failed' . $this->getStatusLine( $status )
-		);
-	}
-
 	/**
 	 * @param array $hasSlotCalls Key of slot names mapped to their return value.
 	 * @return RevisionRecord
@@ -1149,8 +774,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$this->prophesize( IdGenerator::class )->reveal(),
 			$this->prophesize( EntityIdComposer::class )->reveal(),
 			$this->prophesize( RevisionStore::class )->reveal(),
-			new UnusableEntitySource(),
-			$this->prophesize( DataAccessSettings::class )->reveal(),
+			new EntitySource( 'test', 'testdb', [], '', '', '', '' ),
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 		$store = TestingAccessWrapper::newFromObject( $store );
@@ -1168,55 +792,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	public function testRepeatedSave() {
 		/** @var WikiPageEntityStore $store */
 		list( $store, ) = $this->createStoreAndLookup();
-
-		$entity = $this->newEntity();
-		$prefix = get_class( $this ) . '/';
-
-		// create
-		$entity->setLabel( 'en', $prefix . "First" );
-		$status = $this->saveEntity( $store, $entity, 'create item', null, EDIT_NEW );
-		$this->assertTrue(
-			$status->isOK(),
-			'create, save failed, status ok' . $this->getStatusLine( $status )
-		);
-		$this->assertTrue( $status->isGood(), 'create, status is good' . $this->getStatusLine( $status ) );
-
-		// change
-		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$entity->setLabel( 'en', $prefix . "Second" );
-		$status = $this->saveEntity( $store, $entity, 'modify item', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change, status ok' . $this->getStatusLine( $status ) );
-		$this->assertTrue( $status->isGood(), 'change, status good' . $this->getStatusLine( $status ) );
-
-		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$this->assertNotEquals( $prev_id, $rev_id, "revision ID should change on edit" );
-
-		// change again
-		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$entity->setLabel( 'en', $prefix . "Third" );
-		$status = $this->saveEntity( $store, $entity, 'modify item again', null, EDIT_UPDATE );
-		$this->assertTrue( $status->isOK(), 'change again, status ok' . $this->getStatusLine( $status ) );
-		$this->assertTrue( $status->isGood(), 'change again, status good' );
-
-		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$this->assertNotEquals( $prev_id, $rev_id, "revision ID should change on edit" );
-
-		// save unchanged
-		$prev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$status = $this->saveEntity( $store, $entity, 'save unmodified', null, EDIT_UPDATE );
-		$this->assertTrue(
-			$status->isOK(),
-			'save unchanged, save failed, status ok'
-			. $this->getStatusLine( $status )
-		);
-
-		$rev_id = $store->getWikiPageForEntity( $entity->getId() )->getLatest();
-		$this->assertEquals( $prev_id, $rev_id, "revision ID should stay the same if no change was made" );
-	}
-
-	public function testRepeatedSave_entitySourceBasedFederation() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
 
 		$entity = $this->newEntity();
 		$prefix = get_class( $this ) . '/';
@@ -1306,49 +881,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// TODO: check notifications in wb_changes table!
 	}
 
-	/**
-	 * @dataProvider simpleEntityParameterProvider
-	 */
-	public function testDeleteEntity_entitySourceBasedFederation( EntityDocument $entity ) {
-		/**
-		 * @var WikiPageEntityStore $store
-		 * @var EntityRevisionLookup $lookup
-		 */
-		list( $store, $lookup ) = $this->createStoreAndLookupForEntitySourceBasedFederation();
-		$user = $this->getTestUser()->getUser();
-
-		// register mock watcher
-		$watcher = $this->createMock( EntityStoreWatcher::class );
-		$watcher->expects( $this->exactly( 1 ) )
-			->method( 'entityDeleted' );
-
-		$store->registerWatcher( $watcher );
-
-		// save entity
-		$r1 = $store->saveEntity( $entity, 'create one', $user, EDIT_NEW );
-		$entityId = $r1->getEntity()->getId();
-
-		// sanity check
-		$this->assertNotNull( $lookup->getEntityRevision( $entityId ) );
-
-		// delete entity
-		$store->deleteEntity( $entityId, 'testing', $user );
-
-		// check that it's gone
-		$latestRevisionIdResult = $lookup->getLatestRevisionId(
-			$entityId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
-		);
-		$this->assertNonexistentRevision( $latestRevisionIdResult );
-		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
-
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
-
-		// TODO: check notifications in wb_changes table!
-	}
-
 	public function provideCanCreateWithCustomId() {
 		return [
 			'no custom id allowed' => [ new ItemId( 'Q7' ), false ],
@@ -1361,17 +893,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
 	 */
 	public function testCanCreateWithCustomId( EntityId $id, $expected ) {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-
-		$this->assertSame( $expected, $store->canCreateWithCustomId( $id ), $id->getSerialization() );
-	}
-
-	/**
-	 * @dataProvider provideCanCreateWithCustomId
-	 * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityStore::canCreateWithCustomId
-	 */
-	public function testCanCreateWithCustomId_entitySourceBasedFederation( EntityId $id, $expected ) {
 		/** @var WikiPageEntityStore $store */
 		$store = $this->createStoreForCustomEntitySource();
 
@@ -1389,76 +910,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = $this->createStoreForItemsOnly();
 
 		$this->assertFalse( $store->canCreateWithCustomId( $this->newCustomEntityId( 'F7' ) ) );
-	}
-
-	public function testGetWikiPageForEntityFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->getWikiPageForEntity( new ItemId( 'foo:Q42' ) );
-	}
-
-	public function testSaveEntityFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->saveEntity( new Item( new ItemId( 'foo:Q123' ) ), 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
-	}
-
-	public function testDeleteEntityFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->deleteEntity( new ItemId( 'foo:Q123' ), 'testing', $this->getTestUser()->getUser() );
-	}
-
-	public function testUserWasLastToEditFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->userWasLastToEdit( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ), false );
-	}
-
-	/**
-	 * @dataProvider foreignRedirectServiceProvider
-	 */
-	public function testSaveRedirectFails_GivenForeignEntityId( EntityId $source, EntityId $target ) {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->saveRedirect(
-			new EntityRedirect( $source, $target ),
-			'testing',
-			$this->getTestUser()->getUser()
-		);
-	}
-
-	public function foreignRedirectServiceProvider() {
-		return [
-			[ new ItemId( 'foo:Q123' ), new ItemId( 'Q42' ) ],
-			[ new ItemId( 'Q42' ), new ItemId( 'foo:Q123' ) ],
-		];
-	}
-
-	public function testUpdateWatchListFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->updateWatchlist( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ), false );
-	}
-
-	public function testIsWatchingFails_GivenForeignEntityId() {
-		/** @var WikiPageEntityStore $store */
-		list( $store, ) = $this->createStoreAndLookup();
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->isWatching( $this->getTestUser()->getUser(), new ItemId( 'foo:Q123' ) );
 	}
 
 	public function testGetWikiPageForEntityFails_GivenEntityIdFromOtherSource() {
@@ -1532,8 +983,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			''
 		);
 
-		$dataAccessSettings = DataAccessSettingsFactory::entitySourceBasedFederation();
-
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
 				[
@@ -1555,7 +1004,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$itemSource,
-			$dataAccessSettings,
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
@@ -1577,8 +1025,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			''
 		);
 
-		$dataAccessSettings = DataAccessSettingsFactory::entitySourceBasedFederation();
-
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
 				[
@@ -1596,7 +1042,6 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$wikibaseRepo->getEntityIdComposer(),
 			MediaWikiServices::getInstance()->getRevisionStore(),
 			$customSource,
-			$dataAccessSettings,
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
 
