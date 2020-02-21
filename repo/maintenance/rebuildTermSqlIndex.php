@@ -6,9 +6,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Onoi\MessageReporter\MessageReporter;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
@@ -73,7 +71,6 @@ class RebuildTermSqlIndex extends Maintenance {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$idParser = $wikibaseRepo->getEntityIdParser();
 		$repoSettings = $wikibaseRepo->getSettings();
-		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
 		$localEntitySource = $wikibaseRepo->getLocalEntitySource();
 
 		$sqlEntityIdPagerFactory = new SqlEntityIdPagerFactory(
@@ -84,7 +81,6 @@ class RebuildTermSqlIndex extends Maintenance {
 		$termIndex = $this->getTermSqlIndex(
 			$idParser,
 			$repoSettings,
-			$dataAccessSettings,
 			$localEntitySource
 		);
 
@@ -130,13 +126,12 @@ class RebuildTermSqlIndex extends Maintenance {
 	private function getTermSqlIndex(
 		EntityIdParser $entityIdParser,
 		SettingsArray $settings,
-		DataAccessSettings $dataAccessSettings,
 		EntitySource $localEntitySource
 	) {
 		$termSqlIndex = new TermSqlIndex(
 			new StringNormalizer(),
 			$entityIdParser,
-			$dataAccessSettings->useEntitySourceBasedFederation() ? $localEntitySource : new UnusableEntitySource()
+			$localEntitySource
 		);
 		$termSqlIndex->setUseSearchFields( $settings->getSetting( 'useTermsTableSearchFields' ) );
 		$termSqlIndex->setForceWriteSearchFields( $settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
