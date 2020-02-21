@@ -84,7 +84,7 @@ class ViewEntityActionTest extends ActionTestCase {
 			[ 'og:title', 'testTitle' ],
 			[ 'description', 'testDescription' ],
 			[ 'og:description', 'testDescription' ],
-			[ 'twitter:card', 'summary' ],
+			[ 'og:type', 'summary' ],
 		], $metaTags );
 	}
 
