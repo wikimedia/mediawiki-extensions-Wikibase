@@ -7,7 +7,6 @@ use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 use Title;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -94,8 +93,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			$this->getItemSource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			$this->getItemSource()
 		);
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter(
@@ -108,8 +106,7 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			$this->getPropertySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			$this->getPropertySource()
 		);
 
 		foreach ( $this->getKnownEntities() as $entity ) {

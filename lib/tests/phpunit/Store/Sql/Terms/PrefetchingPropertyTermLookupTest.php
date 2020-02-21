@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -56,8 +55,7 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore,
 			$termIdsStore,
 			new StringNormalizer(),
-			$this->getPropertySource(),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			$this->getPropertySource()
 		);
 		$this->p1 = new PropertyId( 'P1' );
 		$propertyTermStoreWriter->storeTerms(

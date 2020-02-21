@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -56,8 +55,7 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 			$termIdsStore,
 			$termIdsStore,
 			new StringNormalizer(),
-			$this->getItemSource(),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			$this->getItemSource()
 		);
 		$this->i1 = new ItemId( 'Q1' );
 		$itemTermStoreWriter->storeTerms(

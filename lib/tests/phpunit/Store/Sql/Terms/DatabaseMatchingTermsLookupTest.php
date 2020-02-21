@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -266,8 +265,7 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 				$logger
 			),
 			new StringNormalizer(),
-			$this->getItemSource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+			$this->getItemSource()
 		);
 	}
 
