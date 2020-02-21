@@ -62,6 +62,3 @@ class NullTermIndex implements TermIndex {
 		return false;
 	}
 }
-
-/** @deprecated */
-class_alias( NullTermIndex::class, 'Wikibase\NullTermIndex' );
