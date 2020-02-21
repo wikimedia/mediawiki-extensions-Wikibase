@@ -760,13 +760,6 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( 'saveBridge', () => {
-		let statementModule: any;
-		beforeEach( () => {
-			statementModule = {
-				dispatch: jest.fn().mockResolvedValue( Promise.resolve() ),
-			};
-		} );
-
 		it( `logs an error if the application is not in ${ApplicationStatus.READY} state and rejects`, async () => {
 			const commit = jest.fn();
 			const state = newApplicationState();
@@ -774,9 +767,6 @@ describe( 'root/actions', () => {
 				commit,
 				state,
 			} );
-
-			// @ts-ignore
-			actions.statementModule = statementModule;
 
 			await expect( actions.saveBridge() ).rejects.toBeNull();
 			expect( commit ).toHaveBeenCalledTimes( 1 );
@@ -797,14 +787,6 @@ describe( 'root/actions', () => {
 				type: 'string',
 				value: 'a new value',
 			};
-			const state = newApplicationState( {
-				applicationStatus: ApplicationStatus.READY,
-				targetValue,
-				targetProperty: targetPropertyId,
-				entity: {
-					id: entityId,
-				},
-			} );
 			const statementsState: StatementState = {
 				[ entityId ]: {
 					[ targetPropertyId ]: [
@@ -812,6 +794,15 @@ describe( 'root/actions', () => {
 					],
 				},
 			};
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+				statements: statementsState,
+			} );
 			const actions = inject( RootActions, {
 				state,
 				commit,
@@ -819,10 +810,11 @@ describe( 'root/actions', () => {
 			} );
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
-			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
-
+			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
 			// @ts-ignore
-			actions.statementModule = statementModule;
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
 
 			// @ts-ignore
 			actions.entityModule = {
@@ -844,14 +836,6 @@ describe( 'root/actions', () => {
 				type: 'string',
 				value: 'a new value',
 			};
-			const state = newApplicationState( {
-				applicationStatus: ApplicationStatus.READY,
-				targetValue,
-				targetProperty: targetPropertyId,
-				entity: {
-					id: entityId,
-				},
-			} );
 			const statementsState: StatementState = {
 				[ entityId ]: {
 					[ targetPropertyId ]: [
@@ -859,6 +843,16 @@ describe( 'root/actions', () => {
 					],
 				},
 			};
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+				statements: statementsState,
+			} );
+
 			const actions = inject( RootActions, {
 				state,
 				commit,
@@ -867,9 +861,11 @@ describe( 'root/actions', () => {
 
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
-			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
+			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
 			// @ts-ignore
-			actions.statementModule = statementModule;
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
 
 			// @ts-ignore
 			actions.entityModule = {
@@ -877,16 +873,19 @@ describe( 'root/actions', () => {
 			};
 			await actions.saveBridge();
 
-			expect( statementModule.dispatch )
-				.toHaveBeenCalledWith( 'applyStringDataValue', {
-					path: new MainSnakPath( entityId, targetPropertyId, 0 ),
-					value: targetValue,
-				} );
+			expect( statementMutationStrategy )
+				.toHaveBeenCalledWith(
+					targetValue,
+					new MainSnakPath( entityId, targetPropertyId, 0 ),
+					statementsState,
+				);
+			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).toStrictEqual( statementsState );
+			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).not.toBe( statementsState );
 			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave', statementsState[ entityId ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
-		it( 'logs an error if applyStringDataValue fails', async () => {
+		it( 'logs an error if statement mutation strategy fails', async () => {
 			const entityId = 'Q42';
 			const targetPropertyId = 'P42';
 			const targetValue: DataValue = {
@@ -900,6 +899,7 @@ describe( 'root/actions', () => {
 				entity: {
 					id: entityId,
 				},
+				statements: {},
 			} );
 			const commit = jest.fn();
 			const actions = inject( RootActions, {
@@ -908,9 +908,12 @@ describe( 'root/actions', () => {
 			} );
 
 			const error = new Error( 'This error should be logged and propagated.' );
-			statementModule.dispatch = jest.fn().mockRejectedValue( error );
 			// @ts-ignore
-			actions.statementModule = statementModule;
+			actions.statementMutationFactory = ( () => ( {
+				apply: jest.fn( () => {
+					throw error;
+				} ),
+			} ) );
 
 			await expect( actions.saveBridge() ).rejects.toBe( error );
 			expect( commit ).toHaveBeenCalledWith(
@@ -926,15 +929,6 @@ describe( 'root/actions', () => {
 				type: 'string',
 				value: 'the value',
 			};
-
-			const state = newApplicationState( {
-				applicationStatus: ApplicationStatus.READY,
-				targetValue: dataValue,
-				targetProperty: targetPropertyId,
-				entity: {
-					id: entityId,
-				},
-			} );
 			const statementsState: StatementState = {
 				[ entityId ]: {
 					[ targetPropertyId ]: [
@@ -942,15 +936,21 @@ describe( 'root/actions', () => {
 					],
 				},
 			};
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue: dataValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+				statements: statementsState,
+			} );
+
 			const commit = jest.fn();
 			const actions = inject( RootActions, {
 				commit,
 				state,
 			} );
-
-			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
-			// @ts-ignore
-			actions.statementModule = statementModule;
 
 			const error = new Error( 'This error should be logged and propagated.' );
 			const entityModuleDispatch = jest.fn().mockRejectedValue( error );
@@ -959,6 +959,12 @@ describe( 'root/actions', () => {
 			actions.entityModule = {
 				dispatch: entityModuleDispatch,
 			};
+
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: jest.fn().mockReturnValue( statementsState ),
+			} ) );
+
 			await expect( actions.saveBridge() ).rejects.toBe( error );
 			expect( commit ).toHaveBeenCalledWith(
 				'addApplicationErrors',

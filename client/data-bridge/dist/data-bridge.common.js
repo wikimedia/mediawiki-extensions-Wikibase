@@ -12788,6 +12788,23 @@ var ErrorStatus;
 var ApplicationStatus = _objectSpread2({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
+// CONCATENATED MODULE: ./src/definitions/EditDecision.ts
+/**
+ * A decision of which type of edit to make, chosen by the user.
+ * Not to be confused with the EditFlow,
+ * which is determined by the page when creating the edit link.
+ */
+var EditDecision_EditDecision;
+
+(function (EditDecision) {
+  /** The previous value was incorrect. Replace it. */
+  EditDecision["REPLACE"] = "replace";
+  /** The previous value was correct but is now outdated. Keep it as non-best rank. */
+
+  EditDecision["UPDATE"] = "update";
+})(EditDecision_EditDecision || (EditDecision_EditDecision = {}));
+
+/* harmony default export */ var definitions_EditDecision = (EditDecision_EditDecision); // "export default enum" not supported, see microsoft/Typescript#3792
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -13535,19 +13552,7 @@ function (_Mutations) {
 
   return StatementMutations;
 }(Mutations);
-// CONCATENATED MODULE: ./src/definitions/storeActionErrors/SnakActionErrors.ts
-var SnakActionErrors;
-
-(function (SnakActionErrors) {
-  SnakActionErrors["NO_SNAK_FOUND"] = "property not found";
-  SnakActionErrors["WRONG_PAYLOAD_TYPE"] = "payload type does not match";
-  SnakActionErrors["WRONG_PAYLOAD_VALUE_TYPE"] = "payload value is not a string";
-})(SnakActionErrors || (SnakActionErrors = {}));
-
-/* harmony default export */ var storeActionErrors_SnakActionErrors = (SnakActionErrors);
 // CONCATENATED MODULE: ./src/store/statements/actions.ts
-
-
 
 
 
@@ -13575,32 +13580,6 @@ function (_Actions) {
         statements: payload.statements
       });
       return Promise.resolve();
-    }
-  }, {
-    key: "applyStringDataValue",
-    value: function applyStringDataValue(payloadDataValue) {
-      var _this = this;
-
-      return new Promise(function (resolve) {
-        var state = clone(_this.state);
-        var snak = payloadDataValue.path.resolveSnakInStatement(state);
-
-        if (snak === null) {
-          throw new Error(storeActionErrors_SnakActionErrors.NO_SNAK_FOUND);
-        }
-
-        if (payloadDataValue.value.type !== 'string') {
-          throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_TYPE);
-        }
-
-        if (typeof payloadDataValue.value.value !== 'string') {
-          throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE);
-        }
-
-        snak.snaktype = 'value';
-        snak.datavalue = payloadDataValue.value;
-        resolve(state);
-      });
     }
   }]);
 
@@ -13823,7 +13802,72 @@ var entityModule = new Module({
   mutations: mutations_EntityMutations,
   actions: actions_EntityActions
 });
+// CONCATENATED MODULE: ./src/definitions/storeActionErrors/SnakActionErrors.ts
+var SnakActionErrors;
+
+(function (SnakActionErrors) {
+  SnakActionErrors["NO_SNAK_FOUND"] = "property not found";
+  SnakActionErrors["WRONG_PAYLOAD_TYPE"] = "payload type does not match";
+  SnakActionErrors["WRONG_PAYLOAD_VALUE_TYPE"] = "payload value is not a string";
+})(SnakActionErrors || (SnakActionErrors = {}));
+
+/* harmony default export */ var storeActionErrors_SnakActionErrors = (SnakActionErrors);
+// CONCATENATED MODULE: ./src/change-op/statement-mutation/strategies/ReplaceMutationStrategy.ts
+
+
+
+
+var ReplaceMutationStrategy_ReplaceMutationStrategy =
+/*#__PURE__*/
+function () {
+  function ReplaceMutationStrategy() {
+    _classCallCheck(this, ReplaceMutationStrategy);
+  }
+
+  _createClass(ReplaceMutationStrategy, [{
+    key: "apply",
+    value: function apply(targetValue, path, state) {
+      // TODO other strategies may have similar needs, may move into a shared method (e.g. base class)
+      var snak = path.resolveSnakInStatement(state);
+
+      if (snak === null) {
+        throw new Error(storeActionErrors_SnakActionErrors.NO_SNAK_FOUND);
+      }
+
+      if (targetValue.type !== 'string') {
+        throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_TYPE);
+      }
+
+      if (typeof targetValue.value !== 'string') {
+        throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE);
+      }
+
+      snak.snaktype = 'value';
+      snak.datavalue = targetValue;
+      return state;
+    }
+  }]);
+
+  return ReplaceMutationStrategy;
+}();
+
+
+// CONCATENATED MODULE: ./src/change-op/statement-mutation/statementMutationFactory.ts
+
+
+function statementMutationFactory(strategy) {
+  switch (strategy) {
+    case definitions_EditDecision.REPLACE:
+      return new ReplaceMutationStrategy_ReplaceMutationStrategy();
+
+    default:
+      throw new Error('There is no implementation for the selected mutation strategy: ' + strategy);
+  }
+}
 // CONCATENATED MODULE: ./src/store/actions.ts
+
+
+
 
 
 
@@ -13864,6 +13908,7 @@ function (_Actions) {
       this.store = store;
       this.entityModule = entityModule.context(store);
       this.statementModule = statementModule.context(store);
+      this.statementMutationFactory = statementMutationFactory;
     }
   }, {
     key: "initBridge",
@@ -14096,19 +14141,14 @@ function (_Actions) {
                 entityId = state[NS_ENTITY].id;
                 path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
                 _context3.prev = 7;
-                _context3.next = 10;
-                return this.statementModule.dispatch('applyStringDataValue', {
-                  path: path,
-                  value: state.targetValue
-                });
-
-              case 10:
-                statements = _context3.sent;
-                _context3.next = 17;
+                statements = this.statementMutationFactory(definitions_EditDecision.REPLACE) // TODO use editDecision
+                .apply(state.targetValue, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+                path, clone(state[NS_STATEMENTS]));
+                _context3.next = 15;
                 break;
 
-              case 13:
-                _context3.prev = 13;
+              case 11:
+                _context3.prev = 11;
                 _context3.t0 = _context3["catch"](7);
                 this.commit('addApplicationErrors', [{
                   type: ErrorTypes.APPLICATION_LOGIC_ERROR,
@@ -14116,7 +14156,7 @@ function (_Actions) {
                 }]);
                 throw _context3.t0;
 
-              case 17:
+              case 15:
                 return _context3.abrupt("return", this.entityModule.dispatch('entitySave', statements[entityId]).catch(function (error) {
                   _this3.commit('addApplicationErrors', [{
                     type: ErrorTypes.SAVING_FAILED,
@@ -14130,12 +14170,12 @@ function (_Actions) {
                   return _this3.dispatch('postEntityLoad');
                 }));
 
-              case 18:
+              case 16:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, this, [[7, 13]]);
+        }, _callee3, this, [[7, 11]]);
       }));
 
       function saveBridge() {

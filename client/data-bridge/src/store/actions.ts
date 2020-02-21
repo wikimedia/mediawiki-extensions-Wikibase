@@ -1,16 +1,11 @@
 import Vue from 'vue';
 import { Store } from 'vuex';
 import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
-import Application, {
-	InitializedApplicationState,
-} from '@/store/Application';
+import Application, { InitializedApplicationState } from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
 import EditDecision from '@/definitions/EditDecision';
-import {
-	NS_ENTITY,
-	NS_STATEMENTS,
-} from '@/store/namespaces';
+import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
 import DataValue from '@/datamodel/DataValue';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
@@ -23,6 +18,9 @@ import { statementModule } from '@/store/statements';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import ServiceContainer from '@/services/ServiceContainer';
+import statementMutationFactory from '@/change-op/statement-mutation/statementMutationFactory';
+import clone from '@/store/clone';
+import StatementMutationStrategy from '@/change-op/statement-mutation/strategies/StatementMutationStrategy';
 
 export class RootActions extends Actions<
 Application,
@@ -33,10 +31,13 @@ RootActions
 	private store!: { $services: ServiceContainer };
 	private entityModule!: Context<typeof entityModule>;
 	private statementModule!: Context<typeof statementModule>;
+	private statementMutationFactory!: ( editDecision: EditDecision ) => StatementMutationStrategy;
+
 	public $init( store: Store<Application> ): void {
 		this.store = store;
 		this.entityModule = entityModule.context( store );
 		this.statementModule = statementModule.context( store );
+		this.statementMutationFactory = statementMutationFactory;
 	}
 
 	public initBridge(
@@ -221,10 +222,12 @@ RootActions
 
 		let statements;
 		try {
-			statements = await this.statementModule.dispatch( 'applyStringDataValue', {
-				path,
-				value: state.targetValue!, // eslint-disable-line @typescript-eslint/no-non-null-assertion
-			} );
+			statements = this.statementMutationFactory( EditDecision.REPLACE ) // TODO use editDecision
+				.apply(
+					state.targetValue!, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+					path,
+					clone( state[ NS_STATEMENTS ] ),
+				);
 		} catch ( error ) {
 			this.commit( 'addApplicationErrors', [ {
 				type: ErrorTypes.APPLICATION_LOGIC_ERROR,
