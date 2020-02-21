@@ -48,7 +48,6 @@ use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -397,21 +396,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$settings->setSetting( 'localEntitySourceName', 'local' );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$irrelevantRepositoryDefinition = [ '' => [
-			'database' => null,
-			'base-uri' => null,
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => [],
-		] ];
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$irrelevantRepositoryDefinition,
-				$entityTypeDefinitions
-			),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'local',
@@ -438,26 +427,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertContains( 'form', $localEntityTypes );
 	}
 
-	/**
-	 * @param string $repositoryName
-	 * @param array $customSettings
-	 *
-	 * @return array[]
-	 */
-	private function getRepositoryDefinition( $repositoryName, array $customSettings = [] ) {
-		return [
-			$repositoryName => array_merge(
-				[
-					'database' => '',
-					'base-uri' => 'http://acme.test/concept/',
-					'entity-namespaces' => [ 'item' => 200, 'property' => 300 ],
-					'prefix-mapping' => [],
-				],
-				$customSettings
-			)
-		];
-	}
-
 	private function getEntityTypeDefinitions() {
 		return new EntityTypeDefinitions(
 			[
@@ -478,21 +447,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$irrelevantRepositoryDefinition = [ '' => [
-			'database' => null,
-			'base-uri' => null,
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => [],
-		] ];
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$irrelevantRepositoryDefinition,
-				$entityTypeDefinitions
-			),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'local',
@@ -658,18 +617,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
-			$this->getRepositoryDefinitions(),
 			$this->getEntitySourceDefinitions()
-		);
-	}
-
-	/**
-	 * @return RepositoryDefinitions
-	 */
-	private function getRepositoryDefinitions() {
-		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
-			new EntityTypeDefinitions( [] )
 		);
 	}
 
@@ -874,21 +822,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$irrelevantRepositoryDefinition = [ '' => [
-			'database' => null,
-			'base-uri' => null,
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => [],
-		] ];
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$irrelevantRepositoryDefinition,
-				$entityTypeDefinitions
-			),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'local',
@@ -931,21 +869,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 
 		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
-		$irrelevantRepositoryDefinition = [ '' => [
-			'database' => null,
-			'base-uri' => null,
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => [],
-		] ];
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$irrelevantRepositoryDefinition,
-				$entityTypeDefinitions
-			),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'local',
@@ -999,7 +927,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( [] ),
-			$this->getRepositoryDefinitions(),
 			$this->getEntitySourceDefinitions( 'local' )
 		);
 	}
@@ -1160,10 +1087,6 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$settings,
 			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
-			new RepositoryDefinitions(
-				$settings->getSetting( 'repositories' ),
-				$entityTypeDefinitions
-			),
 			$this->getEntitySourceDefinitions()
 		);
 

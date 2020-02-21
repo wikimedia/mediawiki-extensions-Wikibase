@@ -106,7 +106,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -306,11 +305,6 @@ class WikibaseRepo {
 	private $entityTypeDefinitions;
 
 	/**
-	 * @var RepositoryDefinitions
-	 */
-	private $repositoryDefinitions;
-
-	/**
 	 * @var ValueSnakRdfBuilderFactory
 	 */
 	private $valueSnakRdfBuilderFactory;
@@ -413,47 +407,8 @@ class WikibaseRepo {
 				$settings->getSetting( 'disabledDataTypes' )
 			),
 			$entityTypeDefinitions,
-			self::getRepositoryDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
 			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
-	}
-
-	/**
-	 * @param SettingsArray $settings
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 *
-	 * @return RepositoryDefinitions
-	 */
-	private static function getRepositoryDefinitionsFromSettings(
-		SettingsArray $settings,
-		EntityTypeDefinitions $entityTypeDefinitions
-	) {
-		// FIXME: It might no longer be needed to check different settings (e.g. changesDatabase vs foreignRepositories)
-		// once repository-related settings are unified, see: T153767.
-		$repoDefinitions = [ '' => [
-			'database' => $settings->getSetting( 'changesDatabase' ),
-			'base-uri' => $settings->getSetting( 'conceptBaseUri' ),
-			'prefix-mapping' => [ '' => '' ],
-			'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-		] ];
-
-		$foreignRepositories = $settings->getSetting( 'foreignRepositories' );
-
-		if ( isset( $foreignRepositories[''] ) ) {
-			throw new MWException( 'A WikibaseRepo cannot have a foreign repo configured with '
-				. 'the empty prefix, since the empty prefix always refers to the local repo.' );
-		}
-
-		foreach ( $foreignRepositories as $repository => $repositorySettings ) {
-			$repoDefinitions[$repository] = [
-				'database' => $repositorySettings['repoDatabase'],
-				'base-uri' => $repositorySettings['baseUri'],
-				'entity-namespaces' => $repositorySettings['entityNamespaces'],
-				'prefix-mapping' => $repositorySettings['prefixMapping'],
-			];
-		}
-
-		return new RepositoryDefinitions( $repoDefinitions, $entityTypeDefinitions );
 	}
 
 	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
@@ -637,13 +592,11 @@ class WikibaseRepo {
 		SettingsArray $settings,
 		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
-		RepositoryDefinitions $repositoryDefinitions,
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
 		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		$this->repositoryDefinitions = $repositoryDefinitions;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
