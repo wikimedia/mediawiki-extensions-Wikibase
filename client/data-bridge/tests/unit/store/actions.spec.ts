@@ -787,8 +787,10 @@ describe( 'root/actions', () => {
 			expect( arrayOfActualErrors[ 0 ].info ).toHaveProperty( 'stack' );
 		} );
 
-		it( 'it dispatches entitySave & postEntityLoad', async () => {
+		// eslint-disable-next-line max-len
+		it( `sets the application state to ${ApplicationStatus.SAVING} if there are no errors and sets it back to ${ApplicationStatus.READY} if saving was successful`, async () => {
 			const rootModuleDispatch = jest.fn();
+			const commit = jest.fn();
 			const entityId = 'Q42';
 			const targetPropertyId = 'P42';
 			const targetValue: DataValue = {
@@ -812,6 +814,54 @@ describe( 'root/actions', () => {
 			};
 			const actions = inject( RootActions, {
 				state,
+				commit,
+				dispatch: rootModuleDispatch,
+			} );
+			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
+
+			statementModule.dispatch = jest.fn().mockResolvedValue( statementsState );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+			await actions.saveBridge();
+
+			expect( commit ).toHaveBeenCalledTimes( 2 );
+			expect( commit ).toHaveBeenNthCalledWith( 1, 'setApplicationStatus', ApplicationStatus.SAVING );
+			expect( commit ).toHaveBeenNthCalledWith( 2, 'setApplicationStatus', ApplicationStatus.READY );
+		} );
+
+		it( 'it dispatches entitySave & postEntityLoad', async () => {
+			const rootModuleDispatch = jest.fn();
+			const commit = jest.fn();
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const targetValue: DataValue = {
+				type: 'string',
+				value: 'a new value',
+			};
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+			} );
+			const statementsState: StatementState = {
+				[ entityId ]: {
+					[ targetPropertyId ]: [
+						{} as Statement,
+					],
+				},
+			};
+			const actions = inject( RootActions, {
+				state,
+				commit,
 				dispatch: rootModuleDispatch,
 			} );
 
