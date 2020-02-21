@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use DataValues\StringValue;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -85,48 +84,6 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
 	public function testRebuildPropertyInfo() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
-		$localEntitySource = $wikibaseRepo->getLocalEntitySource();
-
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $localEntitySource );
-		$this->resetPropertyInfoTable( $table );
-		$properties = $this->initProperties();
-
-		// NOTE: We use the EntityStore from WikibaseRepo in initProperties,
-		//       so we should also use the EntityLookup from WikibaseRepo.
-		$propertyLookup = $wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_DISABLED );
-
-		$propertyInfoBuilder = new PropertyInfoBuilder( [
-			PropertyInfoLookup::KEY_FORMATTER_URL => new PropertyId( 'P1630' ),
-			PropertyInfoStore::KEY_CANONICAL_URI => new PropertyId( 'P1640' )
-		] );
-		$builder = new PropertyInfoTableBuilder(
-			$table,
-			$propertyLookup,
-			$propertyInfoBuilder,
-			$wikibaseRepo->getEntityIdComposer(),
-			$wikibaseRepo->getEntityNamespaceLookup()
-		);
-		$builder->setBatchSize( 3 );
-
-		$builder->setRebuildAll( true );
-
-		$builder->rebuildPropertyInfo();
-
-		$this->assertTableHasProperties( $properties, $table );
-	}
-
-	public function testRebuildPropertyInfo_entitySourceBasedFederation() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
-		$dataAccessSettings = new DataAccessSettings(
-			$settings->getSetting( 'maxSerializedEntitySize' ),
-			$settings->getSetting( 'useTermsTableSearchFields' ),
-			$settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
-			$settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$settings->getSetting( 'tmpItemTermsMigrationStages' )
-		);
 		$irrelevantPropertyNamespaceId = 200;
 		$irrelevantPropertySlotName = 'main';
 		$entitySource = new EntitySource(
