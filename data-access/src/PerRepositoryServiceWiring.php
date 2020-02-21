@@ -387,10 +387,7 @@ return [
 						$entityNamespaceLookup,
 						$services->getSlotRoleStore()
 					),
-					new UnusableEntitySource(),
-					$settings,
-					$services->getDatabaseName(),
-					$services->getRepositoryName()
+					new UnusableEntitySource()
 				),
 				$services->getDatabaseName(),
 				$services->getRepositoryName()

@@ -225,10 +225,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 							$entityNamespaceLookup,
 							$this->slotRoleStore
 						),
-						$this->entitySource,
-						$this->settings,
-						$databaseName,
-						$repositoryName
+						$this->entitySource
 					),
 					$databaseName,
 					$repositoryName

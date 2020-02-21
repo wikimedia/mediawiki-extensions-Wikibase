@@ -8,15 +8,11 @@ use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MultiRepositoryServices;
 use Wikibase\DataAccess\PerRepositoryServiceContainerFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParserFactory;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Serialization\RepositorySpecificDataValueDeserializerFactory;
-use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 
 /**
  * @group Wikibase
@@ -78,26 +74,6 @@ class MultiRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 
 		$services->loadWiringFiles( [ __DIR__ . '/../../src/MultiRepositoryServiceWiring.php' ] );
 		return $services;
-	}
-
-	public function provideServices() {
-		return [
-			[ 'EntityPrefetcher', EntityPrefetcher::class ],
-			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
-			[ 'TermBuffer', TermBuffer::class ],
-			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideServices
-	 */
-	public function testGetService( $serviceName, $expectedClass ) {
-		$services = $this->getMultiRepositoryServices();
-
-		$service = $services->getService( $serviceName );
-
-		$this->assertInstanceOf( $expectedClass, $service );
 	}
 
 	public function testGetServiceNames() {
