@@ -1946,8 +1946,7 @@ class WikibaseRepo {
 				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
-			$this->getPropertySource(),
-			$this->getDataAccessSettings()
+			$this->getPropertySource()
 		);
 	}
 
@@ -2034,8 +2033,7 @@ class WikibaseRepo {
 				$this->getLogger()
 			),
 			$this->getStringNormalizer(),
-			$this->getItemSource(),
-			$this->getDataAccessSettings()
+			$this->getItemSource()
 		);
 	}
 

@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -42,23 +41,18 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	/** @var EntitySource */
 	private $entitySource;
 
-	/** @var DataAccessSettings */
-	private $dataAccessSettings;
-
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		TermInLangIdsAcquirer $termInLangIdsAcquirer,
 		TermStoreCleaner $termInLangIdsCleaner,
 		StringNormalizer $stringNormalizer,
-		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings
+		EntitySource $entitySource
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsCleaner = $termInLangIdsCleaner;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 	}
 
 	private function getDbw(): IDatabase {
@@ -72,10 +66,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_storeTerms'
 		);
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertPropertiesAreLocal();
-		}
-		$this->assertCanHandlePropertyId( $propertyId );
+		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
 		if ( $termInLangIdsToClean !== [] ) {
@@ -153,10 +144,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_deleteTerms'
 		);
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertPropertiesAreLocal();
-		}
-		$this->assertCanHandlePropertyId( $propertyId );
+		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
 		if ( $termInLangIdsToClean !== [] ) {
@@ -226,21 +214,9 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		}
 	}
 
-	private function assertCanHandlePropertyId( PropertyId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertUsingPropertySource();
-			return;
-		}
-
-		$this->disallowForeignEntityId( $id );
-	}
-
-	private function disallowForeignEntityId( PropertyId $id ) {
-		if ( $id->isForeign() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with foreign IDs!'
-			);
-		}
+	private function assertCanWritePropertyTerms() {
+		$this->assertUsingPropertySource();
+		$this->assertPropertiesAreLocal();
 	}
 
 	private function assertUsingPropertySource() {

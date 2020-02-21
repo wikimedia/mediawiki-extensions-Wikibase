@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -91,8 +90,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			$propertySourceOverride ?: $this->getPropertySource(),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			$propertySourceOverride ?: $this->getPropertySource()
 		);
 	}
 
@@ -270,8 +268,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 				$loadBalancer
 			),
 			new StringNormalizer(),
-			new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' ),
-			DataAccessSettingsFactory::entitySourceBasedFederation()
+			new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
 		);
 	}
 

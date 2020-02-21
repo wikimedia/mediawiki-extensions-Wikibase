@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -42,23 +41,18 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	/** @var EntitySource */
 	private $entitySource;
 
-	/** @var DataAccessSettings */
-	private $dataAccessSettings;
-
 	public function __construct(
 		ILoadBalancer $loadBalancer,
 		TermInLangIdsAcquirer $termInLangIdsAcquirer,
 		TermStoreCleaner $termInLangIdsCleaner,
 		StringNormalizer $stringNormalizer,
-		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings
+		EntitySource $entitySource
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsCleaner = $termInLangIdsCleaner;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 	}
 
 	private function getDbw(): IDatabase {
@@ -72,10 +66,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_storeTerms'
 		);
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertItemsAreLocal();
-		}
-		$this->assertCanHandleItemId( $itemId );
+		$this->assertCanWriteItemTerms();
 
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
 		if ( $termInLangIdsToClean !== [] ) {
@@ -153,10 +144,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
 		);
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertItemsAreLocal();
-		}
-		$this->assertCanHandleItemId( $itemId );
+		$this->assertCanWriteItemTerms();
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		if ( $termInLangIdsToClean !== [] ) {
@@ -226,21 +214,9 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		}
 	}
 
-	private function assertCanHandleItemId( ItemId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertUsingItemSource();
-			return;
-		}
-
-		$this->disallowForeignEntityId( $id );
-	}
-
-	private function disallowForeignEntityId( ItemId $id ) {
-		if ( $id->isForeign() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with foreign IDs!'
-			);
-		}
+	private function assertCanWriteItemTerms() {
+		$this->assertItemsAreLocal();
+		$this->assertUsingItemSource();
 	}
 
 	private function assertUsingItemSource() {
