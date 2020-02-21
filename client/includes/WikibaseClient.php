@@ -640,15 +640,9 @@ final class WikibaseClient {
 	 * @return RepoLinker
 	 */
 	public function newRepoLinker() {
-		$dataAccessSettings = $this->getDataAccessSettings();
-
 		return new RepoLinker(
-			$dataAccessSettings,
 			$this->entitySourceDefinitions,
 			$this->settings->getSetting( 'repoUrl' ),
-			$dataAccessSettings->useEntitySourceBasedFederation() ?
-				$this->entitySourceDefinitions->getConceptBaseUris() :
-				$this->getRepositoryDefinitions()->getConceptBaseUris(),
 			$this->settings->getSetting( 'repoArticlePath' ),
 			$this->settings->getSetting( 'repoScriptPath' )
 		);

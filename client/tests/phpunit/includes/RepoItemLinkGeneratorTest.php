@@ -6,7 +6,6 @@ use Title;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -26,15 +25,12 @@ class RepoItemLinkGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
-		$conceptBaseUri = [ '' => 'https://www.wikidata.org/entity' ];
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
-			$conceptBaseUri,
 			$articlePath,
 			$scriptPath
 		);
