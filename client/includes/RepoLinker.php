@@ -5,7 +5,6 @@ namespace Wikibase\Client;
 use Html;
 use InvalidArgumentException;
 use LogicException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 
@@ -17,36 +16,26 @@ class RepoLinker {
 
 	private $baseUrl;
 
-	private $conceptBaseUris;
-
 	private $articlePath;
 
 	private $scriptPath;
 
-	private $dataAccessSettings;
-
 	private $entitySourceDefinitions;
 
 	/**
-	 * @param DataAccessSettings $dataAccessSettings
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param string $baseUrl
-	 * @param array $conceptBaseUris
 	 * @param string $articlePath
 	 * @param string $scriptPath
 	 */
 	public function __construct(
-		DataAccessSettings $dataAccessSettings,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		$baseUrl,
-		array $conceptBaseUris,
 		$articlePath,
 		$scriptPath
 	) {
-		$this->dataAccessSettings = $dataAccessSettings;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 		$this->baseUrl = $baseUrl;
-		$this->conceptBaseUris = $conceptBaseUris;
 		$this->articlePath = $articlePath;
 		$this->scriptPath = $scriptPath;
 	}
@@ -173,13 +162,9 @@ class RepoLinker {
 	 */
 	private function getConceptBaseUri( EntityId $entityId ) {
 		$uri = null;
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
-			if ( $source !== null ) {
-				$uri = $source->getConceptBaseUri();
-			}
-		} else {
-			$uri = $this->conceptBaseUris[$entityId->getRepositoryName()];
+		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
+		if ( $source !== null ) {
+			$uri = $source->getConceptBaseUri();
 		}
 
 		if ( !isset( $uri ) ) {

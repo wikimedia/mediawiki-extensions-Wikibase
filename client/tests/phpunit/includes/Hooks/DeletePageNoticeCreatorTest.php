@@ -6,7 +6,6 @@ use Title;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -31,15 +30,12 @@ class DeletePageNoticeCreatorTest extends \MediaWikiTestCase {
 
 	protected function getRepoLinker() {
 		$baseUrl = 'http://www.example.com';
-		$conceptBaseUri = [ '' => 'https://www.wikidata.org/entity' ];
 		$articlePath = '/wiki/$1';
 		$scriptPath = '';
 
 		return new RepoLinker(
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			$baseUrl,
-			$conceptBaseUri,
 			$articlePath,
 			$scriptPath
 		);

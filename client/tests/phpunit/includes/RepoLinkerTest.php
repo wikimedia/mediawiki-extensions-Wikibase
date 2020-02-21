@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -27,19 +26,19 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[
 				'baseUrl' => '//www.example.com',
-				'conceptBaseUri' => [ '' => 'http://www.example.com/entity' ],
+				'conceptBaseUri' => 'http://www.example.com/entity',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => '//example.com/',
-				'conceptBaseUri' => [ '' => 'http://example.com/entity' ],
+				'conceptBaseUri' => 'http://example.com/entity',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '',
 			],
 			[
 				'baseUrl' => 'http://www.example.com',
-				'conceptBaseUri' => [],
+				'conceptBaseUri' => '',
 				'articlePath' => '/wiki/$1',
 				'scriptPath' => '/w',
 			]
@@ -48,14 +47,13 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getRepoLinkerForSettings( array $settings ) {
 		return new RepoLinker(
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions(
 				[
 					new EntitySource(
 						'test',
 						'testdb',
 						[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ],
-						$settings['conceptBaseUri'][''] ?? '',
+						$settings['conceptBaseUri'],
 						'',
 						'',
 						''
@@ -64,7 +62,6 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				new EntityTypeDefinitions( [] )
 			),
 			$settings['baseUrl'],
-			$settings['conceptBaseUri'],
 			$settings['articlePath'],
 			$settings['scriptPath']
 		);
@@ -248,26 +245,8 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	public function testGetEntityConceptUri_entityFromOtherRepository() {
-		$conceptBaseUris = [ '' => 'http://www.example.com/entity', 'foo' => 'http://www.foreign.com/entity' ];
-
-		$linker = new RepoLinker(
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'some.url',
-			$conceptBaseUris,
-			'some.path',
-			'some.path'
-		);
-
-		$this->assertEquals( 'http://www.foreign.com/entity/Q111', $linker->getEntityConceptUri( new ItemId( 'foo:Q111' ) ) );
-	}
-
 	public function testGivenEntitySourceDefinitions_getEntityConceptUriUsesBasedFromRightSource() {
-		$irrelevantConceptBaseUris = [];
-
 		$linker = new RepoLinker(
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions(
 				[
 					new EntitySource(
@@ -292,7 +271,6 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				new EntityTypeDefinitions( [] )
 			),
 			'BASE_URI',
-			$irrelevantConceptBaseUris,
 			'ARTICLE_PATH',
 			'SCRIPT_PATH'
 		);
