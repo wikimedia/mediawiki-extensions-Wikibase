@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -124,16 +122,6 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	private $entitySource;
 
 	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
-	/**
-	 * @var string
-	 */
-	private $repositoryName;
-
-	/**
 	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
@@ -148,80 +136,35 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	 */
 	private $databaseName;
 
-	/**
-	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdComposer $entityIdComposer
-	 * @param EntityNamespaceLookup $entityNamespaceLookup
-	 * @param LoggerInterface $logger
-	 * @param EntitySource $entitySource
-	 * @param DataAccessSettings $dataAccessSettings
-	 * @param CacheInterface $termCache
-	 * @param ILoadBalancer $loadBalancer
-	 * @param DatabaseTermInLangIdsResolver $databaseTermIdsResolver
-	 * @param string $repositoryName The name of the repository (use an empty string for the local repository)
-	 * @param string|bool $databaseName The wiki's database to connect to.
-	 *        Must be a value LBFactory understands. Defaults to false, which is the local wiki.
-	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
 		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LoggerInterface $logger,
 		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
 		CacheInterface $termCache,
 		ILoadBalancer $loadBalancer,
-		DatabaseTermInLangIdsResolver $databaseTermIdsResolver,
-		$repositoryName = '',
-		$databaseName = false
+		DatabaseTermInLangIdsResolver $databaseTermIdsResolver
 	) {
-		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-
 		$this->idParser = $entityIdParser;
 		$this->entityIdComposer = $entityIdComposer;
-		$this->repositoryName = $repositoryName;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->logger = $logger;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 		$this->termCache = $termCache;
 		$this->loadBalancer = $loadBalancer;
 		$this->dbTermInLangIdsResolver = $databaseTermIdsResolver;
-		$this->databaseName = $databaseName;
+		$this->databaseName = $entitySource->getDatabaseName();
 	}
 
 	/**
-	 * Filters out entity IDs irrelevant for the builder (belonging to another repository
-	 * or entity source).
+	 * Filters out entity IDs irrelevant for the builder (belonging to another entity source).
 	 *
 	 * @param EntityId[] $ids
 	 * @return EntityId[]
 	 */
 	private function filterIrrelevantEntityIds( array $ids ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			return $this->filterEntitiesFromOtherSource( $ids );
-		}
-
-		return $this->filterForeignEntityIds( $ids );
-	}
-
-	/**
-	 * Returns a list of EntityId objects belonging to the repository configured in the constructor.
-	 * In other words, this filters out foreign entity IDs, so the builder only processes relevant
-	 * EntityIds.
-	 *
-	 * @param EntityId[] $ids
-	 * @return EntityId[]
-	 */
-	private function filterForeignEntityIds( array $ids ) {
-		$repositoryName = $this->repositoryName;
-
-		return array_filter(
-			$ids,
-			function( EntityId $id ) use ( $repositoryName ) {
-				return $id->getRepositoryName() === $repositoryName;
-			}
-		);
+		return $this->filterEntitiesFromOtherSource( $ids );
 	}
 
 	/**
@@ -520,7 +463,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	 */
 	private function injectTermsWTF( array $groupedTerms, string $entityType ) {
 		foreach ( $groupedTerms as $entityId => $terms ) {
-			$entityIdf = $this->entityIdComposer->composeEntityId( $this->repositoryName, $entityType, $entityId );
+			$entityIdf = $this->entityIdComposer->composeEntityId( '', $entityType, $entityId );
 			if ( $entityIdf === null ) {
 				continue;
 			}
