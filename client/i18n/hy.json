@@ -5,7 +5,8 @@
 			"Xelgen",
 			"Դավիթ Սարոյան",
 			"Irus",
-			"GeoO"
+			"GeoO",
+			"Kareyac"
 		]
 	},
 	"tooltip-t-wikibase": "Հղում Վիքիտվյալի համապատասխան էջին",
@@ -31,5 +32,6 @@
 	"wikibase-rc-show-wikidata-pref": "Վերջին փոփոխություններում ցույց տալ {{grammar:genitive|{{WBREPONAME}}}} խմբագրումները",
 	"wikibase-rc-wikibase-edit-letter": "Դ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
-	"wikibase-otherprojects": "Այլ նախագծերում"
+	"wikibase-otherprojects": "Այլ նախագծերում",
+	"wikibase-client-data-bridge-dialog-title": "Խմբագրել $1"
 }

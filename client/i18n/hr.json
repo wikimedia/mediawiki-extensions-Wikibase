@@ -89,6 +89,7 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} stavku",
 	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima",
 	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}",
+	"wikibase-client-data-bridge-dialog-title": "Uredi $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Više pojedinosti",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Nepoznata pogrješka u dozvolama",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ispravljena je</strong> pogrješna vrijednost",
