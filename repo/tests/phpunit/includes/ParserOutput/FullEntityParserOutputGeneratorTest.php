@@ -11,7 +11,6 @@ use RepoGroup;
 use SpecialPage;
 use Title;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -288,7 +287,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					'',
 					''
 				),
-				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				$cache
 			),
 			$this->newLanguageFallbackChain(),
@@ -540,7 +538,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 					'',
 					''
 				),
-				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				$cache
 			),
 			$this->newLanguageFallbackChain(),

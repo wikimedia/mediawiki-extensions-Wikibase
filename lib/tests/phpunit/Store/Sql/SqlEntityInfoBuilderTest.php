@@ -2,13 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use InvalidArgumentException;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 use Title;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,14 +14,12 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\DataModel\Services\EntityId\PrefixMappingEntityIdParser;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\PropertyContent;
 use Wikibase\WikibaseSettings;
-use Wikimedia\TestingAccessWrapper;
 use Wikipage;
 
 /**
@@ -39,9 +34,6 @@ use Wikipage;
  * @author Daniel Kinzler
  */
 class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
-
-	const REPOSITORY_PREFIX_BASED_FEDERATION = false;
-	const ENTITY_SOURCE_BASED_FEDERATION = true;
 
 	const ITEM_NAMESPACE_ID = 120;
 	const PROPERTY_NAMESPACE_ID = 122;
@@ -203,8 +195,18 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '', '', '' ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
+			new EntitySource(
+				'testsource',
+				false,
+				[
+					'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ],
+					'property' => [ 'namespaceId' => self::PROPERTY_NAMESPACE_ID, 'slot' => 'main' ],
+				],
+				'',
+				'',
+				'',
+				''
+			),
 			$this->getCache()
 		);
 	}
@@ -236,57 +238,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 		return new EntityNamespaceLookup( [ 'item' => self::ITEM_NAMESPACE_ID, 'property' => self::PROPERTY_NAMESPACE_ID ] );
 	}
 
-	public function provideInvalidConstructorArguments() {
-		return [
-			'neither string nor false as database name (int)' => [ 100, '' ],
-			'neither string nor false as database name (null)' => [ null, '' ],
-			'neither string nor false as database name (true)' => [ true, '' ],
-			'not a string as a repository name' => [ false, 1000 ],
-			'string containing colon as a repository name' => [ false, 'foo:oo' ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideInvalidConstructorArguments
-	 */
-	public function testGivenInvalidArguments_constructorThrowsException( $databaseName, $repositoryName ) {
-		$this->expectException( InvalidArgumentException::class );
-
-		new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
-			$this->getIdComposer(),
-			$this->getEntityNamespaceLookup(),
-			new NullLogger(),
-			new UnusableEntitySource(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			$this->getCache(),
-			$databaseName,
-			$repositoryName
-		);
-	}
-
-	public function testIgnoresEntityIdsFromOtherRepositories() {
-		$itemId = new ItemId( 'Q1' );
-		$propertyId = new PropertyId( 'foo:P1' );
-
-		$builder = new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
-			$this->getIdComposer(),
-			$this->getEntityNamespaceLookup(),
-			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '', '', '' ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			$this->getCache(),
-			false,
-			''
-		);
-
-		$entityInfo = $builder->collectEntityInfo( [ $itemId, $propertyId ], [] );
-
-		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
-		$this->assertFalse( $entityInfo->hasEntityInfo( $propertyId ) );
-	}
-
 	public function testIgnoresEntityIdsFromOtherEntitySources() {
 		$itemId = new ItemId( 'Q1' );
 		$propertyId = new PropertyId( 'P2' );
@@ -297,7 +248,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			$this->getCache()
 		);
 
@@ -305,192 +255,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 		$this->assertTrue( $entityInfo->hasEntityInfo( $itemId ) );
 		$this->assertFalse( $entityInfo->hasEntityInfo( $propertyId ) );
-	}
-
-	private function saveFakeForeignItemTermUsingFullItemId( ItemId $itemId, $termType, $termLanguage, $termText ) {
-		// Insert any existing data for the item ID (might collide because of insert done in setUp
-		$db = wfGetDB( DB_MASTER );
-		$db->delete(
-			'wb_terms',
-			[
-				'term_full_entity_id' => $itemId->getLocalPart(),
-				'term_type' => $termType,
-				'term_language' => $termLanguage
-			]
-		);
-
-		// Inserting a dummy label for item with numeric ID part equal to 1.
-		// In this test local database is used to pretend to be a databse of
-		// repository "foo". Terms fetched from the database should be
-		// matched to entity IDs using correct repository prefixes (this
-		// builder's responsibility as this information is not stored in wb_terms table).
-		$this->insertRows(
-			'wb_terms',
-			[
-				'term_entity_type',
-				'term_entity_id',
-				'term_full_entity_id',
-				'term_type',
-				'term_language',
-				'term_text',
-				'term_search_key'
-			],
-			[
-				[
-					$itemId->getEntityType(),
-					$itemId->getNumericId(),
-					$itemId->getLocalPart(),
-					$termType,
-					$termLanguage,
-					$termText,
-					$termText
-				]
-			]
-		);
-	}
-
-	public function testEntityIdsArePrefixedWithRepositoryName() {
-		$itemId = new ItemId( 'foo:Q1' );
-
-		$label = 'dummy label';
-		$languageCode = 'en';
-
-		$this->saveFakeForeignItemTermUsingFullItemId( $itemId, 'label', $languageCode, $label );
-
-		$builder = new SqlEntityInfoBuilder(
-			new PrefixMappingEntityIdParser( [ '' => 'foo' ], new BasicEntityIdParser() ),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
-				},
-			] ),
-			$this->getEntityNamespaceLookup(),
-			new NullLogger(),
-			new EntitySource( 'source', false, [], '', '', '', '' ),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			$this->getCache(),
-			false,
-			'foo'
-		);
-
-		$entityInfo = TestingAccessWrapper::newFromObject( $builder->collectEntityInfo(
-			[ $itemId ],
-			[ $languageCode ]
-		) )->getEntityInfo( $itemId );
-
-		$this->assertSame( $label, $entityInfo['labels'][$languageCode]['value'] );
-	}
-
-	public function testGivenEmptyIdList_returnsEmptyEntityInfo_entitySourceBasedAccess() {
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
-	}
-
-	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult_entitySourceBasedAccess() {
-		$id = new ItemId( 'Q1' );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $id, $id ], [] )->asArray();
-
-		$this->assertCount( 1, array_keys( $info ) );
-		$this->assertArrayHasKey( 'Q1', $info );
-	}
-
-	public function testGivenEmptyLanguageCodeList_returnsNoLabelsAndDescriptionsInEntityInfo_entitySourceBasedAccess() {
-		$id = new ItemId( 'Q1' );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
-
-		$this->assertEmpty( $info['Q1']['labels'] );
-		$this->assertEmpty( $info['Q1']['descriptions'] );
-	}
-
-	public function testGivenLanguageCode_returnsOnlyTermsInTheLanguage_entitySourceBasedAccess() {
-		$id = new ItemId( 'Q1' );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $id ], [ 'de' ] )->asArray();
-
-		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q1/de' ] ), $info['Q1']['labels'] );
-		$this->assertEquals(
-			$this->makeLanguageValueRecords( [ 'de' => 'description:Q1/de' ] ),
-			$info['Q1']['descriptions']
-		);
-	}
-
-	public function testGivenMultipleLanguageCodes_returnsTermsInTheLanguagesGiven_entitySourceBasedAccess() {
-		$id = new ItemId( 'Q1' );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $id ], [ 'en', 'de' ] )->asArray();
-
-		$this->assertEquals(
-			$this->makeLanguageValueRecords(
-				[ 'en' => 'label:Q1/en', 'de' => 'label:Q1/de' ]
-			),
-			$info['Q1']['labels']
-		);
-		$this->assertEquals(
-			$this->makeLanguageValueRecords(
-				[ 'en' => 'description:Q1/en', 'de' => 'description:Q1/de' ]
-			),
-			$info['Q1']['descriptions']
-		);
-	}
-
-	public function testGivenRedirectId_returnsTermsOfTheTarget_entitySourceBasedAccess() {
-		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $redirectId ], [ 'de' ] )->asArray();
-
-		$this->assertEquals( $this->makeLanguageValueRecords( [ 'de' => 'label:Q2/de' ] ), $info[self::REDIRECT_SOURCE_ID]['labels'] );
-	}
-
-	public function testGivenRedirect_entityInfoUsesRedirectSourceAsKey_entitySourceBasedAccess() {
-		$redirectId = new ItemId( self::REDIRECT_SOURCE_ID );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $redirectId ], [] )->asArray();
-
-		$this->assertArrayHasKey( self::REDIRECT_SOURCE_ID, $info );
-		$this->assertArrayNotHasKey( self::REDIRECT_TARGET_ID, $info );
-	}
-
-	public function testGivenNonExistingIds_nonExistingIdsSkippedInResult_entitySourceBasedAccess() {
-		$existingId = new ItemId( 'Q1' );
-		$nonExistingId = new ItemId( 'Q1000' );
-
-		$builder = $this->newEntityInfoBuilderForSourceBasedAccess();
-
-		$info = $builder->collectEntityInfo( [ $existingId, $nonExistingId ], [] )->asArray();
-
-		$this->assertArrayHasKey( 'Q1', $info );
-		$this->assertArrayNotHasKey( 'Q1000', $info );
-	}
-
-	protected function newEntityInfoBuilderForSourceBasedAccess() {
-		return new SqlEntityInfoBuilder(
-			new BasicEntityIdParser(),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
-				},
-			] ),
-			$this->getEntityNamespaceLookup(),
-			new NullLogger(),
-			new EntitySource( 'testsource', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			$this->getCache()
-		);
 	}
 
 }
