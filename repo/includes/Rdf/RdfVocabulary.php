@@ -4,7 +4,6 @@ namespace Wikibase\Rdf;
 
 use DataValues\DataValue;
 use OutOfBoundsException;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -131,14 +130,11 @@ class RdfVocabulary {
 
 	private $licenseUrl;
 
-	private $dataAccessSettings;
-
 	private $sourceNameByEntityType;
 
 	/**
 	 * @param string[] $conceptUris Associative array mapping repository names to base URIs for entity concept URIs.
 	 * @param string[] $dataUris Associative array mapping source/repository names to base URIs for entity description URIs.
-	 * @param DataAccessSettings $dataAccessSettings
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @param string $localEntitySourceName
 	 * @param string[] $rdfTurtleNodePrefixes
@@ -153,7 +149,6 @@ class RdfVocabulary {
 	public function __construct(
 		array $conceptUris,
 		array $dataUris,
-		DataAccessSettings $dataAccessSettings,
 		EntitySourceDefinitions $entitySourceDefinitions,
 		$localEntitySourceName,
 		array $rdfTurtleNodePrefixes,
@@ -163,37 +158,20 @@ class RdfVocabulary {
 		array $pagePropertyDefs = [],
 		$licenseUrl = 'http://creativecommons.org/publicdomain/zero/1.0/'
 	) {
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			Assert::parameter(
-				array_key_exists( $localEntitySourceName, $conceptUris ),
-				'$conceptUris',
-				'must contain entry for the local repository, ie. ' . $localEntitySourceName
-			);
-		} else {
-			Assert::parameter(
-				array_key_exists( '', $conceptUris ),
-				'$conceptUris',
-				'must contain entry for the local repository, ie. empty-string key'
-			);
-		}
+		Assert::parameter(
+			array_key_exists( $localEntitySourceName, $conceptUris ),
+			'$conceptUris',
+			'must contain entry for the local repository, ie. ' . $localEntitySourceName
+		);
 		Assert::parameterElementType( 'string', $conceptUris, '$conceptUris' );
 		RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $conceptUris, '$conceptUris' );
 
 		Assert::parameterElementType( 'string', $dataUris, '$dataUris' );
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			Assert::parameter(
-				array_key_exists( $localEntitySourceName, $dataUris ),
-				'$dataUris',
-				'must contain entry for the local entity source, ie. ' . $localEntitySourceName
-			);
-		} else {
-			Assert::parameter(
-				array_key_exists( '', $dataUris ),
-				'$dataUris',
-				'must contain entry for the local repository, ie. empty-string key'
-			);
-			RepositoryNameAssert::assertParameterKeysAreValidRepositoryNames( $dataUris, '$dataUris' );
-		}
+		Assert::parameter(
+			array_key_exists( $localEntitySourceName, $dataUris ),
+			'$dataUris',
+			'must contain entry for the local entity source, ie. ' . $localEntitySourceName
+		);
 
 		Assert::parameter(
 			array_keys( $conceptUris ) === array_keys( $dataUris ),
@@ -201,15 +179,9 @@ class RdfVocabulary {
 			'must have values defined for all keys that $conceptUris'
 		);
 
-		$this->dataAccessSettings = $dataAccessSettings;
-
 		$this->canonicalLanguageCodes = $canonicalLanguageCodes;
 		$this->dataTypeUris = $dataTypeUris;
 		$this->pagePropertyDefs = $pagePropertyDefs;
-
-		if ( !$dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$localEntitySourceName = '';
-		}
 
 		$this->namespaces = [
 			'rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
@@ -415,9 +387,7 @@ class RdfVocabulary {
 	 * @return string
 	 */
 	public function getEntityRepositoryName( EntityId $entityId ) {
-		return $this->dataAccessSettings->useEntitySourceBasedFederation() ?
-			$this->sourceNameByEntityType[$entityId->getEntityType()] :
-			$entityId->getRepositoryName();
+		return $this->sourceNameByEntityType[$entityId->getEntityType()];
 	}
 
 	/**

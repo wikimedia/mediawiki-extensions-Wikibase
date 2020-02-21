@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\HashDedupeBag;
@@ -155,54 +154,6 @@ class GlobeCoordinateRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://acme.com/item/' ],
 			[ '' => 'http://acme.com/data/' ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => '' ],
-			[ '' => '' ]
-		);
-
-		$snakWriter = new NTriplesRdfWriter();
-		$snakWriter->prefix( 'www', "http://www/" );
-		$snakWriter->prefix( 'acme', "http://acme/" );
-		$snakWriter->prefix( RdfVocabulary::NSP_CLAIM_VALUE, "http://acme/statement/value/" );
-		$snakWriter->prefix( RdfVocabulary::NSP_CLAIM_STATEMENT, "http://acme/statement/" );
-		$snakWriter->prefix( RdfVocabulary::NS_VALUE, "http://acme/value/" );
-		$snakWriter->prefix( RdfVocabulary::NS_ONTOLOGY, "http://acme/onto/" );
-		$snakWriter->prefix( RdfVocabulary::NS_GEO, "http://acme/geo/" );
-
-		if ( $complex ) {
-			$valueWriter = $snakWriter->sub();
-			$helper = new ComplexValueRdfHelper( $vocab, $valueWriter, new HashDedupeBag() );
-		} else {
-			$helper = null;
-		}
-
-		$builder = new GlobeCoordinateRdfBuilder( $helper );
-
-		$snakWriter->start();
-		$snakWriter->about( 'www', 'Q1' );
-
-		$builder->addValue(
-			$snakWriter,
-			RdfVocabulary::NSP_CLAIM_STATEMENT,
-			$vocab->getEntityLName( $snak->getPropertyId() ),
-			'DUMMY',
-			RdfVocabulary::NS_VALUE,
-			$snak
-		);
-
-		$this->helper->assertNTriplesEquals( $expected, $snakWriter->drain() );
-	}
-
-	/**
-	 * @dataProvider provideAddValue
-	 */
-	public function testAddValue_entitySourceBasedFederation( PropertyValueSnak $snak, $complex, array $expected ) {
-		$vocab = new RdfVocabulary(
-			[ '' => 'http://acme.com/item/' ],
-			[ '' => 'http://acme.com/data/' ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],

@@ -6,7 +6,6 @@ use DataValues\StringValue;
 use OutOfBoundsException;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -26,27 +25,12 @@ use Wikibase\Rdf\RdfVocabulary;
  */
 class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
-	public function testGivenConceptBaseUriNotDefinedForDefaultRepository_constructorThrowsException() {
-		$this->expectException( \InvalidArgumentException::class );
-
-		new RdfVocabulary(
-			[ 'foo' => '<BASE-foo>' ],
-			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => 'wd', 'foo' => 'foo' ],
-			[ '' => '', 'foo' => 'foo' ]
-		);
-	}
-
 	public function testGivenNoConceptBaseUriDefinedForLocalEntitySource_constructorThrowsException() {
 		$this->expectException( \InvalidArgumentException::class );
 
 		new RdfVocabulary(
 			[ 'foo' => '<BASE-foo>' ],
 			[ 'local' => '<DATA>', 'foo' => '<DATA-foo>' ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
 				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
@@ -57,27 +41,12 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testGivenNoDocumentBaseUriNotDefinedForDefaultRepository_constructorThrowsException() {
-		$this->expectException( \InvalidArgumentException::class );
-
-		new RdfVocabulary(
-			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
-			[ 'foo' => '<DATA-foo>' ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => 'wd', 'foo' => 'foo' ],
-			[ '' => '', 'foo' => 'foo' ]
-		);
-	}
-
 	public function testGivenNoDocumentBaseUriDefinedForLocalEntitySource_constructorThrowsException() {
 		$this->expectException( \InvalidArgumentException::class );
 
 		new RdfVocabulary(
 			[ 'local' => '<BASE>', 'foo' => '<BASE-foo>' ],
 			[ 'foo' => '<DATA-foo>' ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource( 'local', 'localdb', [ 'item' => [ 'namespaceId' => 1234, 'slot' => 'main' ] ], '<BASE>', 'wd', '', '' ),
 				new EntitySource( 'foo', 'otherbd', [ 'property' => [ 'namespaceId' => 4321, 'slot' => 'main' ] ], '<BASE-foo>', 'other', 'other', '' ),
@@ -90,25 +59,8 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	private function newInstance() {
 		return new RdfVocabulary(
-			[ '' => '<BASE>', 'foo' => '<BASE-foo>' ],
-			[ '' => '<DATA>', 'foo' => '<DATA-foo>' ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => 'wd', 'foo' => 'foo' ],
-			[ '' => '', 'foo' => 'foo' ],
-			[ 'German' => 'de' ],
-			[ 'acme' => 'http://acme.test/vocab/ACME' ],
-			[],
-			'http://cc0.test/'
-		);
-	}
-
-	private function newInstanceForEntitySourceBasedFederation() {
-		return new RdfVocabulary(
 			[ 'localwiki' => '<BASE>', 'otherwiki' => '<BASE-other>' ],
 			[ 'localwiki' => '<DATA>', 'otherwiki' => '<DATA-other>' ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'localwiki',
@@ -175,33 +127,15 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( 'P1', $actual );
 	}
 
-	public function testGetEntityLName_foreignEntity() {
-		$entityId = new PropertyId( 'foo:P1' );
-		$actual = $this->newInstance()->getEntityLName( $entityId );
-		$this->assertSame( 'P1', $actual );
-	}
-
-	public function testGetEntityLName_foreignEntityMultiplePrefixes() {
-		$entityId = new PropertyId( 'foo:bar:P1' );
-		$actual = $this->newInstance()->getEntityLName( $entityId );
-		$this->assertSame( 'bar.P1', $actual );
-	}
-
-	public function testGetEntityLName_entitySourceBasedFederation() {
-		$entityId = new PropertyId( 'P1' );
-		$actual = $this->newInstanceForEntitySourceBasedFederation()->getEntityLName( $entityId );
-		$this->assertSame( 'P1', $actual );
-	}
-
-	public function testGetRepositoryName_entityFromLocalSource_entitySourceBasedFederation() {
+	public function testGetRepositoryName_entityFromLocalSource() {
 		$id = new ItemId( 'Q1' );
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
+		$vocabulary = $this->newInstance();
 		$this->assertSame( 'localwiki', $vocabulary->getEntityRepositoryName( $id ) );
 	}
 
-	public function testGetRepositoryName_entityFromNonLocalSource_entitySourceBasedFederation() {
+	public function testGetRepositoryName_entityFromNonLocalSource() {
 		$id = new PropertyId( 'P1' );
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
+		$vocabulary = $this->newInstance();
 		$this->assertSame( 'otherwiki', $vocabulary->getEntityRepositoryName( $id ) );
 	}
 
@@ -216,35 +150,11 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 		$this->assertContainsOnly( 'string', $actual );
 		$this->assertContains( '<BASE>', $actual );
 		$this->assertContains( '<DATA>', $actual );
-		$this->assertContains( '<BASE-foo>', $actual );
-	}
-
-	public function testGetNamespaces_entitySourceBasedFederation() {
-		$actual = $this->newInstanceForEntitySourceBasedFederation()->getNamespaces();
-		$this->assertIsArray( $actual );
-		$this->assertContainsOnly( 'string', $actual );
-		$this->assertContains( '<BASE>', $actual );
-		$this->assertContains( '<DATA>', $actual );
 		$this->assertContains( '<BASE-other>', $actual );
 	}
 
 	public function testGetNamespaceURI() {
 		$vocab = $this->newInstance();
-		$all = $vocab->getNamespaces();
-
-		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( $vocab->dataNamespaceNames[''] ) );
-		$this->assertEquals( '<BASE>', $vocab->getNamespaceURI( $vocab->entityNamespaceNames[''] ) );
-
-		foreach ( $all as $ns => $uri ) {
-			$this->assertEquals( $uri, $vocab->getNamespaceURI( $ns ) );
-		}
-
-		$this->expectException( OutOfBoundsException::class );
-		$vocab->getNamespaceURI( 'NonExistingNamespaceForGetNamespaceUriTest' );
-	}
-
-	public function testGetNamespaceURI_entitySourceBasedFederation() {
-		$vocab = $this->newInstanceForEntitySourceBasedFederation();
 		$all = $vocab->getNamespaces();
 
 		$this->assertEquals( '<DATA>', $vocab->getNamespaceURI( $vocab->dataNamespaceNames['localwiki'] ) );
@@ -261,69 +171,17 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 	public function testEntityNamespaceNames() {
 		$vocabulary = $this->newInstance();
 
-		$this->assertEquals( [ '' => 'wd', 'foo' => 'foo' ], $vocabulary->entityNamespaceNames );
-	}
-
-	public function testEntityNamespaceNames_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
-
 		$this->assertEquals( [ 'localwiki' => 'wd', 'otherwiki' => 'other' ], $vocabulary->entityNamespaceNames );
 	}
 
 	public function testDataNamespaceNames() {
 		$vocabulary = $this->newInstance();
 
-		$this->assertEquals( [ '' => 'data', 'foo' => 'foodata' ], $vocabulary->dataNamespaceNames );
-	}
-
-	public function testDataNamespaceNames_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
-
 		$this->assertEquals( [ 'localwiki' => 'data', 'otherwiki' => 'otherdata' ], $vocabulary->dataNamespaceNames );
 	}
 
 	public function testPropertyNamespaceNames() {
 		$vocabulary = $this->newInstance();
-
-		$this->assertEquals(
-			[
-				'' => [
-					't' => 'wdt',
-					'p' => 'p',
-					'ps' => 'ps',
-					'psv' => 'psv',
-					'psn' => 'psn',
-					'pq' => 'pq',
-					'pqv' => 'pqv',
-					'pqn' => 'pqn',
-					'pr' => 'pr',
-					'prv' => 'prv',
-					'prn' => 'prn',
-					'no' => 'wdno',
-					'tn' => 'wdtn',
-				],
-				'foo' => [
-					't' => 'foot',
-					'p' => 'foop',
-					'ps' => 'foops',
-					'psv' => 'foopsv',
-					'psn' => 'foopsn',
-					'pq' => 'foopq',
-					'pqv' => 'foopqv',
-					'pqn' => 'foopqn',
-					'pr' => 'foopr',
-					'prv' => 'fooprv',
-					'prn' => 'fooprn',
-					'no' => 'foono',
-					'tn' => 'footn',
-				],
-			],
-			$vocabulary->propertyNamespaceNames
-		);
-	}
-
-	public function testPropertyNamespaceNames_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
 
 		$this->assertEquals(
 			[
@@ -370,22 +228,6 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psv',
 				'pq' => 'pqv',
 				'pr' => 'prv',
-				'foops' => 'foopsv',
-				'foopq' => 'foopqv',
-				'foopr' => 'fooprv',
-			],
-			$vocabulary->claimToValue
-		);
-	}
-
-	public function testClaimToValue_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
-
-		$this->assertEquals(
-			[
-				'ps' => 'psv',
-				'pq' => 'pqv',
-				'pr' => 'prv',
 				'otherps' => 'otherpsv',
 				'otherpq' => 'otherpqv',
 				'otherpr' => 'otherprv',
@@ -402,22 +244,6 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 				'ps' => 'psn',
 				'pq' => 'pqn',
 				'pr' => 'prn',
-				'foops' => 'foopsn',
-				'foopq' => 'foopqn',
-				'foopr' => 'fooprn',
-			],
-			$vocabulary->claimToValueNormalized
-		);
-	}
-
-	public function testClaimToValueNormalized_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
-
-		$this->assertEquals(
-			[
-				'ps' => 'psn',
-				'pq' => 'pqn',
-				'pr' => 'prn',
 				'otherps' => 'otherpsn',
 				'otherpq' => 'otherpqn',
 				'otherpr' => 'otherprn',
@@ -428,24 +254,6 @@ class RdfVocabularyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNormalizedPropertyValueNamespace() {
 		$vocabulary = $this->newInstance();
-
-		$this->assertEquals(
-			[
-				'wdt' => 'wdtn',
-				'ps' => 'psn',
-				'pq' => 'pqn',
-				'pr' => 'prn',
-				'foot' => 'footn',
-				'foops' => 'foopsn',
-				'foopq' => 'foopqn',
-				'foopr' => 'fooprn',
-			],
-			$vocabulary->normalizedPropertyValueNamespace
-		);
-	}
-
-	public function testNormalizedPropertyValueNamespace_entitySourceBasedFederation() {
-		$vocabulary = $this->newInstanceForEntitySourceBasedFederation();
 
 		$this->assertEquals(
 			[

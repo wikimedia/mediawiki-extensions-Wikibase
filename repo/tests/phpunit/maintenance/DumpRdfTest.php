@@ -8,7 +8,6 @@ use MediaWikiLangTestCase;
 use TestSites;
 use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -174,7 +173,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 			new RdfVocabulary(
 				[ '' => 'fooUri/' ],
 				[ '' => 'acme/EntityData/' ],
-				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 				'',
 				[ '' => '' ],

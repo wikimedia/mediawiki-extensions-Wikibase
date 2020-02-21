@@ -15,7 +15,6 @@ use SiteList;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SerializerFactory;
@@ -119,7 +118,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new RdfVocabulary(
 				[ 'test' => EntityDataSerializationServiceTest::URI_BASE ],
 				[ 'test' => EntityDataSerializationServiceTest::URI_DATA ],
-				DataAccessSettingsFactory::entitySourceBasedFederation(),
 				new EntitySourceDefinitions( [
 					new EntitySource(
 						'test',

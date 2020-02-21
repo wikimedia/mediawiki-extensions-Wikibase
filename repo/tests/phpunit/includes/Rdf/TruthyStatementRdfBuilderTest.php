@@ -77,87 +77,25 @@ class TruthyStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	/**
-	 * @param RdfWriter $writer
-	 *
-	 * @return TruthyStatementRdfBuilder
-	 */
-	private function newBuilderForEntitySourceBasedFederation( RdfWriter $writer ) {
-		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
-
-		// Note: using the actual factory here makes this an integration test!
-		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
-
-		$valueBuilder = $valueBuilderFactory->getValueSnakRdfBuilder(
-			RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_FULL_VALUES,
-			$vocabulary,
-			$writer,
-			new NullEntityMentionListener(),
-			new NullDedupeBag()
-		);
-
-		$snakBuilder = new SnakRdfBuilder(
-			$vocabulary,
-			$valueBuilder,
-			$this->getTestData()->getMockRepository()
-		);
-
-		return new TruthyStatementRdfBuilder(
-			$vocabulary,
-			$writer,
-			$snakBuilder
-		);
-	}
-
 	private function assertOrCreateNTriples( $dataSetName, RdfWriter $writer ) {
 		$actual = $writer->drain();
 		$this->helper->assertNTriplesEqualsDataset( $dataSetName, $actual );
 	}
 
-	public function provideAddEntity() {
-		return [
-			[ 'Q4', [ 'Q4_direct' ] ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideAddEntity
-	 */
-	public function testAddEntity( $entityName, $dataSetName ) {
-		$entity = $this->getTestData()->getEntity( $entityName );
+	public function testAddEntity() {
+		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer )->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $writer );
-	}
-
-	/**
-	 * @dataProvider provideAddEntity
-	 */
-	public function testAddStatements( $entityName, $dataSetName ) {
-		$entity = $this->getTestData()->getEntity( $entityName );
-
-		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilder( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
-
-		$this->assertOrCreateNTriples( $dataSetName, $writer );
-	}
-
-	public function testAddEntity_entitySourceBasedFederation() {
-		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
-
-		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilderForEntitySourceBasedFederation( $writer )->addEntity( $entity );
-
 		$this->assertOrCreateNTriples( [ 'Q4_direct_foreignsource_properties' ], $writer );
 	}
 
-	public function testAddStatements_entitySourceBasedFederation() {
+	public function testAddStatements() {
 		$entity = $this->getTestData()->getEntity( 'Q4_no_prefixed_ids' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilderForEntitySourceBasedFederation( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
+		$this->newBuilder( $writer )->addStatements( $entity->getId(), $entity->getStatements() );
 
 		$this->assertOrCreateNTriples( [ 'Q4_direct_foreignsource_properties' ], $writer );
 	}
