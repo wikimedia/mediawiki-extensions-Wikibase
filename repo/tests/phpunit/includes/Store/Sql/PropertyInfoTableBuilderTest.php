@@ -88,7 +88,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 		$dataAccessSettings = $wikibaseRepo->getDataAccessSettings();
 		$localEntitySource = $wikibaseRepo->getLocalEntitySource();
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $localEntitySource, $dataAccessSettings );
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $localEntitySource );
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 
@@ -139,7 +139,7 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			''
 		);
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource, $dataAccessSettings );
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource );
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 

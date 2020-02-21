@@ -222,7 +222,7 @@ class DatabaseSchemaUpdater {
 			$propertySource = new UnusableEntitySource();
 		}
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource, $dataAccessSettings );
+		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource );
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();

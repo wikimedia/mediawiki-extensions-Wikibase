@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\MatchingTermsLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\TermIndex;
 
@@ -64,7 +63,6 @@ class PerRepositoryServiceWiringTest extends \PHPUnit\Framework\TestCase {
 			[ 'EntityPrefetcher', EntityPrefetcher::class ],
 			[ 'EntityRevisionLookup', EntityRevisionLookup::class ],
 			[ 'PrefetchingTermLookup', PrefetchingTermLookup::class ],
-			[ 'PropertyInfoLookup', PropertyInfoLookup::class ],
 			[ 'TermBuffer', TermBuffer::class ],
 			[ 'TermIndex', TermIndex::class ],
 			[ 'TermSearchInteractorFactory', TermSearchInteractorFactory::class ],

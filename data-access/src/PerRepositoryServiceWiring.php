@@ -303,10 +303,7 @@ return [
 	) {
 		return new PropertyInfoTable(
 			$services->getEntityIdComposer(),
-			new UnusableEntitySource(),
-			$settings,
-			$services->getDatabaseName(),
-			$services->getRepositoryName()
+			new UnusableEntitySource()
 		);
 	},
 
