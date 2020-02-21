@@ -28,6 +28,3 @@ class InconsistentRedirectException extends BadRevisionException {
 	}
 
 }
-
-/** @deprecated */
-class_alias( InconsistentRedirectException::class, 'Wikibase\InconsistentRedirectException' );

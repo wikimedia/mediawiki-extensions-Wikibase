@@ -348,6 +348,3 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		return null;
 	}
 }
-
-/** @deprecated */
-class_alias( BufferingTermIndexTermLookup::class, 'Wikibase\Store\BufferingTermIndexTermLookup' );

@@ -43,6 +43,3 @@ interface EntityIdLookup {
 	public function getEntityIdForTitle( Title $title );
 
 }
-
-/** @deprecated */
-class_alias( EntityIdLookup::class, 'Wikibase\Store\EntityIdLookup' );
