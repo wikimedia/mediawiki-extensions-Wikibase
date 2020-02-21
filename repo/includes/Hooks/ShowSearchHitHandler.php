@@ -21,12 +21,12 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
 use Wikibase\Repo\Search\ExtendedResult;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handler to format entities in the search results

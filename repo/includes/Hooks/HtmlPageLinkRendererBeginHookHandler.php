@@ -20,11 +20,11 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handler for the HtmlPageLinkRendererBegin hook, used to change the default link text of links to

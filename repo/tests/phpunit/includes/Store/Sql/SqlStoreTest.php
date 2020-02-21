@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -29,7 +30,6 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Store;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlStore

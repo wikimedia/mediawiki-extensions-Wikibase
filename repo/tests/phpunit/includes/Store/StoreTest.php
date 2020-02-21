@@ -6,6 +6,7 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\LabelConflictFinder;
@@ -17,7 +18,6 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlStore

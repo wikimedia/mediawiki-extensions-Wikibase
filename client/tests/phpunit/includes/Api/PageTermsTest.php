@@ -14,7 +14,7 @@ use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Client\Api\PageTerms

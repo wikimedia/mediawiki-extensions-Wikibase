@@ -16,12 +16,12 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\WikibaseSettings;
 
 /**

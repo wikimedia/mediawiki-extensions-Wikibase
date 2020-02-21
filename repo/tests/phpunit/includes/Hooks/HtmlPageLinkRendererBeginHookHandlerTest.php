@@ -19,13 +19,13 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler

@@ -103,6 +103,7 @@ use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
@@ -120,7 +121,6 @@ use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\SettingsArray;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 

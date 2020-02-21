@@ -10,12 +10,12 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Specials\SpecialListProperties;
-use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**

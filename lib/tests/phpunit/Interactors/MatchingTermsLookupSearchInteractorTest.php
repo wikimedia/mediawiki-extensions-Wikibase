@@ -12,8 +12,8 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
-use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\TermIndexEntry;
 
 /**

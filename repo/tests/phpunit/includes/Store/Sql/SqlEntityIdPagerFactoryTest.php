@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory

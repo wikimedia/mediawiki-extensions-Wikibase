@@ -18,10 +18,10 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
-use Wikibase\Store\EntityIdLookup;
 use Wikimedia\TestingAccessWrapper;
 
 /**

@@ -19,6 +19,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -43,7 +44,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\Store\BufferingTermIndexTermLookup;
 use Wikibase\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 

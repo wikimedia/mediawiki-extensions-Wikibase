@@ -5,7 +5,7 @@ namespace Wikibase\DataAccess;
 use Hooks;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
 /**

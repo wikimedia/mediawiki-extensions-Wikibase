@@ -1,15 +1,12 @@
 <?php
 
-namespace Wikibase\Store;
+namespace Wikibase\Lib\Store;
 
 use MapCacheLRU;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\TermIndexEntry;
-use Wikibase\Lib\Store\TermIndex;
 
 /**
  * @license GPL-2.0-or-later
@@ -351,3 +348,6 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 		return null;
 	}
 }
+
+/** @deprecated */
+class_alias( BufferingTermIndexTermLookup::class, 'Wikibase\Store\BufferingTermIndexTermLookup' );

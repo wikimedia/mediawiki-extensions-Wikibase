@@ -7,8 +7,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**

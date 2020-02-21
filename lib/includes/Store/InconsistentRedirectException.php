@@ -1,9 +1,8 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib\Store;
 
 use Exception;
-use Wikibase\Lib\Store\BadRevisionException;
 
 /**
  * @license GPL-2.0-or-later
@@ -29,3 +28,6 @@ class InconsistentRedirectException extends BadRevisionException {
 	}
 
 }
+
+/** @deprecated */
+class_alias( InconsistentRedirectException::class, 'Wikibase\InconsistentRedirectException' );
