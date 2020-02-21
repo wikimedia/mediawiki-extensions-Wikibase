@@ -110,7 +110,7 @@ use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdMissRecordingSimpleCache;
+use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -2641,10 +2641,13 @@ class WikibaseRepo {
 
 		$cache->setLogger( $this->getLogger() );
 
-		$cache = new StatsdMissRecordingSimpleCache(
+		$cache = new StatsdRecordingSimpleCache(
 			$cache,
 			MediaWikiServices::getInstance()->getStatsdDataFactory(),
-			'wikibase.repo.formatterCache.miss'
+			[
+				"miss" => 'wikibase.repo.formatterCache.miss',
+				"hit" => 'wikibase.repo.formatterCache.hit'
+			]
 		);
 
 		return $cache;

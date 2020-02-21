@@ -10,38 +10,49 @@ use Wikimedia\Assert\Assert;
  * Simple CacheInterface that increments a statsd metric based on the number
  * of cache misses that occur.
  *
- * It might make sense to have this also record cache hits at some point, but
- * that was not needed for the usecase of the initial introduction.
  *
  * @license GPL-2.0-or-later
  */
-class StatsdMissRecordingSimpleCache implements CacheInterface {
+class StatsdRecordingSimpleCache implements CacheInterface {
 
 	/* private */const DEFAULT_VALUE = __CLASS__ . '-default';
 
 	private $inner;
 	private $stats;
-	/** @var string */
-	private $statsKey;
+	/** @var array */
+	private $statsKeys;
 
 	/**
 	 * @param CacheInterface $innner
 	 * @param StatsdDataFactoryInterface $stats
-	 * @param string $statsKey
+	 * @param string[] $statsKeys
 	 */
 	public function __construct(
 		CacheInterface $innner,
 		StatsdDataFactoryInterface $stats,
-		$statsKey
+		array $statsKeys
 	) {
-		Assert::parameterType( 'string', $statsKey, '$statsKey' );
+		Assert::parameter(
+			array_key_exists( 'miss', $statsKeys ),
+			'$statsKeys',
+			'$statsKeys needs to have a \'miss\' value'
+		);
+		Assert::parameter(
+			array_key_exists( 'hit', $statsKeys ),
+			'$statsKeys',
+			'$statsKeys needs to have a \'hit\' value'
+		);
 		$this->inner = $innner;
 		$this->stats = $stats;
-		$this->statsKey = $statsKey;
+		$this->statsKeys = $statsKeys;
 	}
 
 	private function recordMisses( $count ) {
-		$this->stats->updateCount( $this->statsKey, $count );
+		$this->stats->updateCount( $this->statsKeys['miss'], $count );
+	}
+
+	private function recordHits( $count ) {
+		$this->stats->updateCount( $this->statsKeys['hit'], $count );
 	}
 
 	public function get( $key, $default = null ) {
@@ -50,6 +61,8 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 			$this->recordMisses( 1 );
 			return $default;
 		}
+
+		$this->recordHits( 1 );
 		return $value;
 	}
 
@@ -68,6 +81,7 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 	public function getMultiple( $keys, $default = null ) {
 		$values = $this->inner->getMultiple( $keys, self::DEFAULT_VALUE );
 		$misses = 0;
+		$hits = 0;
 
 		// This is using a reference because $values is just iterable
 		// and might not be an array we can assign $values[$key] on.
@@ -75,11 +89,18 @@ class StatsdMissRecordingSimpleCache implements CacheInterface {
 			if ( $value === self::DEFAULT_VALUE ) {
 				$misses++;
 				$value = $default;
+			} else {
+				$hits++;
 			}
 		}
 		unset( $value );
 
-		$this->recordMisses( $misses );
+		if ( $misses !== 0 ) {
+			$this->recordMisses( $misses );
+		}
+		if ( $hits !== 0 ) {
+			$this->recordHits( $hits );
+		}
 		return $values;
 	}
 
