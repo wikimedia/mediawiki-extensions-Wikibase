@@ -6,7 +6,6 @@ use DataValues\DataValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use ValueValidators\ValueValidator;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -19,7 +18,6 @@ use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataFieldValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
-use Wikibase\Repo\Validators\ForeignEntityValidator;
 use Wikibase\Repo\Validators\MembershipValidator;
 use Wikibase\Repo\Validators\NumberRangeValidator;
 use Wikibase\Repo\Validators\NumberValidator;
@@ -85,11 +83,6 @@ class ValidatorBuilders {
 	private $mediaFileNameLookup;
 
 	/**
-	 * @var array[]
-	 */
-	private $legacyRepoBasedSupportedEntityTypes;
-
-	/**
 	 * @var MediaWikiPageNameNormalizer
 	 */
 	private $mediaWikiPageNameNormalizer;
@@ -105,19 +98,12 @@ class ValidatorBuilders {
 	private $tabularDataStorageApiUrl;
 
 	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
-	/**
 	 * @param EntityLookup $lookup
 	 * @param EntityIdParser $idParser
 	 * @param string[] $urlSchemes
 	 * @param string $itemVocabularyBaseUri The base URI for vocabulary concepts.
 	 * @param ContentLanguages $contentLanguages
 	 * @param CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup
-	 * @param DataAccessSettings $dataAccessSettings
-	 * @param array $legacyRepoBasedSupportedEntityTypes map of repository names to lists of supported entity types
 	 * @param MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer
 	 * @param string $geoShapeStorageApiUrl
 	 * @param string $tabularDataStorageApiUrl
@@ -129,8 +115,6 @@ class ValidatorBuilders {
 		$itemVocabularyBaseUri,
 		ContentLanguages $contentLanguages,
 		CachingCommonsMediaFileNameLookup $cachingCommonsMediaFileNameLookup,
-		DataAccessSettings $dataAccessSettings,
-		array $legacyRepoBasedSupportedEntityTypes,
 		MediaWikiPageNameNormalizer $mediaWikiPageNameNormalizer,
 		$geoShapeStorageApiUrl,
 		$tabularDataStorageApiUrl
@@ -141,8 +125,6 @@ class ValidatorBuilders {
 		$this->itemVocabularyBaseUri = $itemVocabularyBaseUri;
 		$this->contentLanguages = $contentLanguages;
 		$this->mediaFileNameLookup = $cachingCommonsMediaFileNameLookup;
-		$this->dataAccessSettings = $dataAccessSettings;
-		$this->legacyRepoBasedSupportedEntityTypes = $legacyRepoBasedSupportedEntityTypes;
 		$this->mediaWikiPageNameNormalizer = $mediaWikiPageNameNormalizer;
 		$this->geoShapeStorageApiUrl = $geoShapeStorageApiUrl;
 		$this->tabularDataStorageApiUrl = $tabularDataStorageApiUrl;
@@ -178,16 +160,8 @@ class ValidatorBuilders {
 		$typeValidator = new TypeValidator( EntityIdValue::class );
 		$entityExistsValidator = new EntityExistsValidator( $this->entityLookup, $entityType );
 
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			return [
-				$typeValidator,
-				$entityExistsValidator,
-			];
-		}
-
 		return [
 			$typeValidator,
-			new ForeignEntityValidator( $this->legacyRepoBasedSupportedEntityTypes ),
 			$entityExistsValidator,
 		];
 	}

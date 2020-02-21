@@ -12,7 +12,6 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
@@ -56,11 +55,6 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 			'http://qudt.org/vocab/',
 			new StaticContentLanguages( [ 'contentlanguage' ] ),
 			$this->getCachingCommonsMediaFileNameLookup(),
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
-			[
-				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
-				'foo' => [ Item::ENTITY_TYPE ]
-			],
 			$this->getMediaWikiPageNameNormalizer(),
 			self::GEO_SHAPE_STORAGE_API_URL,
 			self::TABULAR_DATA_STORAGE_API_URL
@@ -545,71 +539,6 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 		$validators = call_user_func( $validatorMap[$typeId] );
 
 		$this->assertValidation( $expected, $validators, $value );
-	}
-
-	/**
-	 * @dataProvider provideDataTypeValidation
-	 */
-	public function testDataTypeValidation_repositoryPrefixBasedFederation( string $typeId, $value, bool $expected ) {
-		$builders = $this->newValidatorBuildersForForeignRepositoryFederation();
-
-		$validatorMap = [
-			'commonsMedia'      => [ $builders, 'buildMediaValidators' ],
-			'geo-shape'         => [ $builders, 'buildGeoShapeValidators' ],
-			'globe-coordinate'  => [ $builders, 'buildCoordinateValidators' ],
-			'monolingualtext'   => [ $builders, 'buildMonolingualTextValidators' ],
-			'quantity'          => [ $builders, 'buildQuantityValidators' ],
-			'string'            => [ $builders, 'buildStringValidators' ],
-			'tabular-data'      => [ $builders, 'buildTabularDataValidators' ],
-			'time'              => [ $builders, 'buildTimeValidators' ],
-			'url'               => [ $builders, 'buildUrlValidators' ],
-			'wikibase-entity'   => [ $builders, 'buildEntityValidators' ],
-			'wikibase-item'     => [ $builders, 'buildItemValidators' ],
-			'wikibase-property' => [ $builders, 'buildPropertyValidators' ],
-		];
-
-		$validators = call_user_func( $validatorMap[$typeId] );
-
-		$this->assertValidation( $expected, $validators, $value );
-	}
-
-	public function provideForeignEntityIdValues() {
-		yield 'Unknown repository' => [ new EntityIdValue( new ItemId( 'bar:Q123' ) ), false ];
-		yield 'Foreign entity' => [ new EntityIdValue( new ItemId( 'foo:Q123' ) ), true ];
-		yield 'Unsupported foreign entity type' => [ new EntityIdValue( new PropertyId( 'foo:P42' ) ), false ];
-	}
-
-	/**
-	 * @dataProvider provideForeignEntityIdValues
-	 */
-	public function testForeignEntityIdValueValidation_repositoryPrefixFederation(
-		EntityIdValue $value,
-		bool $expected
-	) {
-		$validatorBuilders = $this->newValidatorBuildersForForeignRepositoryFederation();
-
-		$validators = $validatorBuilders->buildEntityValidators();
-
-		$this->assertValidation( $expected, $validators, $value );
-	}
-
-	private function newValidatorBuildersForForeignRepositoryFederation() {
-		return new ValidatorBuilders(
-			$this->getEntityLookup(),
-			new ItemIdParser(),
-			[ 'http', 'https', 'ftp', 'mailto' ],
-			'http://qudt.org/vocab/',
-			new StaticContentLanguages( [ 'contentlanguage' ] ),
-			$this->getCachingCommonsMediaFileNameLookup(),
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			[
-				'' => [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ],
-				'foo' => [ Item::ENTITY_TYPE ]
-			],
-			$this->getMediaWikiPageNameNormalizer(),
-			self::GEO_SHAPE_STORAGE_API_URL,
-			self::TABULAR_DATA_STORAGE_API_URL
-		);
 	}
 
 	/**
