@@ -301,12 +301,9 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$entityNamespaceLookup,
 				$logger,
 				$this->entitySource,
-				$this->settings,
 				$cache,
 				$loadBalancer,
-				$termIdsResolver,
-				$repositoryName,
-				$databaseName
+				$termIdsResolver
 			);
 
 			$typeDispatchingMapping = [];

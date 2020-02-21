@@ -111,12 +111,9 @@ return [
 			$entityNamespaceLookup,
 			$logger,
 			new UnusableEntitySource(),
-			$settings,
 			$cache,
 			$loadBalancer,
-			$termIdsResolver,
-			$repositoryName,
-			$databaseName
+			$termIdsResolver
 		);
 
 		$typeDispatchingMapping = [];
