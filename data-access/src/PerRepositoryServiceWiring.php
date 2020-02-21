@@ -99,7 +99,6 @@ return [
 
 		$oldEntityInfoBuilder = new SqlEntityInfoBuilder(
 			$services->getEntityIdParser(),
-			$services->getEntityIdComposer(),
 			$entityNamespaceLookup,
 			$logger,
 			new UnusableEntitySource(),

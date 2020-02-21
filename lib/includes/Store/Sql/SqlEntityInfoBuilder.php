@@ -11,7 +11,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -103,11 +102,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	private $idParser;
 
 	/**
-	 * @var EntityIdComposer
-	 */
-	private $entityIdComposer;
-
-	/**
 	 * @var EntityNamespaceLookup
 	 */
 	private $entityNamespaceLookup;
@@ -129,7 +123,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 
 	/**
 	 * @param EntityIdParser $entityIdParser
-	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 * @param LoggerInterface $logger
 	 * @param EntitySource $entitySource
@@ -137,7 +130,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 	 */
 	public function __construct(
 		EntityIdParser $entityIdParser,
-		EntityIdComposer $entityIdComposer,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		LoggerInterface $logger,
 		EntitySource $entitySource,
@@ -150,7 +142,6 @@ class SqlEntityInfoBuilder extends DBAccessBase implements EntityInfoBuilder {
 		$this->termTable = 'wb_terms';
 
 		$this->idParser = $entityIdParser;
-		$this->entityIdComposer = $entityIdComposer;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->logger = $logger;
 		$this->entitySource = $entitySource;

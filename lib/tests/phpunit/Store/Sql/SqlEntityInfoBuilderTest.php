@@ -13,7 +13,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
@@ -185,14 +184,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	protected function newEntityInfoBuilder() {
 		return new SqlEntityInfoBuilder(
 			new BasicEntityIdParser(),
-			new EntityIdComposer( [
-				'item' => function( $repositoryName, $uniquePart ) {
-					return new ItemId( 'Q' . $uniquePart );
-				},
-				'property' => function( $repositoryName, $uniquePart ) {
-					return new PropertyId( 'P' . $uniquePart );
-				},
-			] ),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource(
@@ -209,15 +200,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 			),
 			$this->getCache()
 		);
-	}
-
-	/**
-	 * @return EntityIdComposer
-	 */
-	private function getIdComposer() {
-		return $this->getMockBuilder( EntityIdComposer::class )
-			->disableOriginalConstructor()
-			->getMock();
 	}
 
 	/**
@@ -244,7 +226,6 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 		$builder = new SqlEntityInfoBuilder(
 			new BasicEntityIdParser(),
-			$this->getIdComposer(),
 			$this->getEntityNamespaceLookup(),
 			new NullLogger(),
 			new EntitySource( 'source', false, [ 'item' => [ 'namespaceId' => self::ITEM_NAMESPACE_ID, 'slot' => 'main' ] ], '', '', '', '' ),
