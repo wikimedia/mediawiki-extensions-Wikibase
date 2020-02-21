@@ -298,10 +298,7 @@ class SqlStore implements Store {
 			$stringNormalizer,
 			$this->entityIdComposer,
 			$this->entityIdParser,
-			$this->entitySource,
-			$this->dataAccessSettings,
-			false,
-			''
+			$this->entitySource
 		);
 		$termSqlIndex->setUseSearchFields( $this->useSearchFields );
 		$termSqlIndex->setForceWriteSearchFields( $this->forceWriteSearchFields );

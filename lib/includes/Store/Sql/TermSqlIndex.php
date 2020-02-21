@@ -9,9 +9,7 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use Psr\Log\LoggerInterface;
 use Traversable;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Assert\RepositoryNameAssert;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -36,11 +34,6 @@ use Wikimedia\Rdbms\IDatabase;
  * @license GPL-2.0-or-later
  */
 class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
-
-	/**
-	 * @var string
-	 */
-	private $repositoryName;
 
 	/**
 	 * @var string
@@ -88,40 +81,25 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	private $entitySource;
 
 	/**
-	 * @var DataAccessSettings
-	 */
-	private $dataAccessSettings;
-
-	/**
 	 * @param StringNormalizer $stringNormalizer
 	 * @param EntityIdComposer $entityIdComposer
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntitySource $entitySource
-	 * @param DataAccessSettings $dataAccessSettings
-	 * @param string|bool $wikiDb
-	 * @param string $repositoryName
 	 */
 	public function __construct(
 		StringNormalizer $stringNormalizer,
 		EntityIdComposer $entityIdComposer,
 		EntityIdParser $entityIdParser,
-		EntitySource $entitySource,
-		DataAccessSettings $dataAccessSettings,
-		$wikiDb = false,
-		$repositoryName = ''
+		EntitySource $entitySource
 	) {
-		RepositoryNameAssert::assertParameterIsValidRepositoryName( $repositoryName, '$repositoryName' );
-
-		$databaseName = $dataAccessSettings->useEntitySourceBasedFederation() ? $entitySource->getDatabaseName() : $wikiDb;
+		$databaseName = $entitySource->getDatabaseName();
 
 		parent::__construct( $databaseName );
 
-		$this->repositoryName = $repositoryName;
 		$this->stringNormalizer = $stringNormalizer;
 		$this->entityIdComposer = $entityIdComposer;
 		$this->entityIdParser = $entityIdParser;
 		$this->entitySource = $entitySource;
-		$this->dataAccessSettings = $dataAccessSettings;
 		$this->tableName = 'wb_terms';
 		// TODO: Inject
 		$this->logger = LoggerFactory::getInstance( 'Wikibase' );
@@ -229,25 +207,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	}
 
 	private function assertCanHandleEntityId( EntityId $id ) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertEntityIdFromKnownSource( $id );
-			return;
-		}
-
-		$this->assertEntityIdFromRightRepository( $id );
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws MWException
-	 */
-	private function assertEntityIdFromRightRepository( EntityId $entityId ) {
-		if ( $entityId->getRepositoryName() !== $this->repositoryName ) {
-			throw new MWException(
-				'Entity ID: ' . $entityId->getSerialization() . ' does not belong to repository: ' . $this->repositoryName
-			);
-		}
+		$this->assertEntityIdFromKnownSource( $id );
 	}
 
 	private function assertEntityIdFromKnownSource( EntityId $id ) {
@@ -1015,9 +975,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 	public function getLabelConflicts( $entityType, array $labels, array $aliases = null ) {
 		Assert::parameterType( 'string', $entityType, '$entityType' );
 
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertEntityTypeKnown( $entityType );
-		}
+		$this->assertEntityTypeKnown( $entityType );
 
 		if ( empty( $labels ) && empty( $aliases ) ) {
 			return [];
@@ -1064,9 +1022,7 @@ class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinde
 		array $labels,
 		array $descriptions
 	) {
-		if ( $this->dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$this->assertEntityTypeKnown( $entityType );
-		}
+		$this->assertEntityTypeKnown( $entityType );
 
 		$labels = array_intersect_key( $labels, $descriptions );
 		$descriptions = array_intersect_key( $descriptions, $labels );

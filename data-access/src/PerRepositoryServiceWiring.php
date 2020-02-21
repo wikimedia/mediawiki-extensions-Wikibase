@@ -316,10 +316,7 @@ return [
 			$genericServices->getStringNormalizer(),
 			$services->getEntityIdComposer(),
 			$services->getEntityIdParser(),
-			new UnusableEntitySource(),
-			$settings,
-			$services->getDatabaseName(),
-			$services->getRepositoryName()
+			new UnusableEntitySource()
 		);
 		$index->setUseSearchFields( $settings->useSearchFields() );
 		$index->setForceWriteSearchFields( $settings->forceWriteSearchFields() );

@@ -148,10 +148,7 @@ class RebuildTermSqlIndex extends Maintenance {
 			new StringNormalizer(),
 			$entityIdComposer,
 			$entityIdParser,
-			$dataAccessSettings->useEntitySourceBasedFederation() ? $localEntitySource : new UnusableEntitySource(),
-			$dataAccessSettings,
-			false,
-			''
+			$dataAccessSettings->useEntitySourceBasedFederation() ? $localEntitySource : new UnusableEntitySource()
 		);
 		$termSqlIndex->setUseSearchFields( $settings->getSetting( 'useTermsTableSearchFields' ) );
 		$termSqlIndex->setForceWriteSearchFields( $settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
