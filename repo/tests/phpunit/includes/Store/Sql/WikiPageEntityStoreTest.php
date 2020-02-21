@@ -170,8 +170,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				],
 				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
-				$localSource,
-				DataAccessSettingsFactory::repositoryPrefixBasedFederation()
+				$localSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
@@ -250,8 +249,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				],
 				new EntitySourceDefinitions( [ $localSource, $customSource ], new EntityTypeDefinitions( [] ) ),
-				$localSource,
-				$dataAccessSettings
+				$localSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
@@ -1551,8 +1549,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				],
 				new EntitySourceDefinitions( [ $itemSource ], new EntityTypeDefinitions( [] ) ),
-				$itemSource,
-				$dataAccessSettings
+				$itemSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),
@@ -1593,8 +1590,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 					},
 				],
 				new EntitySourceDefinitions( [ $customSource ], new EntityTypeDefinitions( [] ) ),
-				$customSource,
-				$dataAccessSettings
+				$customSource
 			),
 			new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() ),
 			$wikibaseRepo->getEntityIdComposer(),

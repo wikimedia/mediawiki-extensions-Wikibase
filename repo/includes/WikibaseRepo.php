@@ -751,7 +751,6 @@ class WikibaseRepo {
 			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks(),
 			$this->entitySourceDefinitions,
 			$this->getLocalEntitySource(),
-			$this->getDataAccessSettings(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
 		);
 	}
