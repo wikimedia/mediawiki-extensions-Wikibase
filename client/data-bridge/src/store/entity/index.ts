@@ -3,7 +3,7 @@ import { EntityActions } from '@/store/entity/actions';
 import { Module } from 'vuex-smart-module';
 import EntityId from '@/datamodel/EntityId';
 
-export class EntityState implements EntityState {
+export class EntityState {
 	public id: EntityId = '';
 	public baseRevision = 0;
 }
