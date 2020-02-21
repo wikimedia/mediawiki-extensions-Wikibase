@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Parser;
+use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use PPFrame;
 use PPNode;
@@ -281,7 +282,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$title = Title::newFromText( 'Cat' );
 		$popt = new ParserOptions();
 
-		$parser = new Parser( [ 'class' => 'Parser' ] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse( $title, $popt, Parser::OT_HTML );
 
 		return $parser;

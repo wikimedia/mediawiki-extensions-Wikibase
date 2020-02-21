@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
@@ -54,7 +55,7 @@ class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
 
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 
-		$parser = new Parser( [ 'class' => 'Parser' ] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->parse( '{{#property:P1234|from=Q1}}', $title, $popt, Parser::OT_HTML );
 
 		$this->assertSame( 1, $restrictedEntityLookup->getEntityAccessCount() );

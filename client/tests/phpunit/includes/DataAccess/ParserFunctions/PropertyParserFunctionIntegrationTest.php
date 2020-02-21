@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\DataAccess\ParserFunctions;
 
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;
@@ -199,7 +200,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
-		$parser = new Parser( [ 'class' => 'Parser' ] );
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		return $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
 	}
 

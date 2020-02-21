@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Hooks;
 
 use Parser;
+use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
@@ -59,7 +60,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testDoHandle() {
 		$handler = new NoLangLinkHandler( new NamespaceChecker( [] ) );
-		$parser = new Parser();
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 
 		$handler->doHandle( $parser, [ 'en', 'fr' ] );
@@ -72,7 +73,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testHandle() {
-		$parser = new Parser();
+		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
 
 		NoLangLinkHandler::handle( $parser, '*' );
