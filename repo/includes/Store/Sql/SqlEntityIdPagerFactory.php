@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use LinkCache;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * Factory for SqlEntityIdPager objects.

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Title;
 use Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\DataAccess\ByTypeDispatchingEntityIdLookup

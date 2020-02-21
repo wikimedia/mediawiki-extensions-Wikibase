@@ -16,9 +16,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\EntityContent;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
 /**

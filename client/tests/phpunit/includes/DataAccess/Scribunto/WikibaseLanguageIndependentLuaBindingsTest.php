@@ -20,10 +20,10 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\MaxReferencedEntityVisitsExhaustedException;
 use Wikibase\DataModel\Services\Lookup\MaxReferenceDepthExhaustedException;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\SettingsArray;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageIndependentLuaBindings

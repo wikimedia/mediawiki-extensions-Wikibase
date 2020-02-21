@@ -11,7 +11,7 @@ use Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikimedia\ScopedCallback;
 
 /**

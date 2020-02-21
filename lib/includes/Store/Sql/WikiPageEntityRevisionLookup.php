@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\InconsistentRedirectException;
+use Wikibase\Lib\Store\InconsistentRedirectException;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityRevisionLookup;

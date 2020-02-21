@@ -9,12 +9,12 @@ use Wikibase\Client\Usage\NullUsageTracker;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * (Incomplete) ClientStore mock

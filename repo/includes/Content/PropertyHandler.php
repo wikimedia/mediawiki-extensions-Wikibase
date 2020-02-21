@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\EditEntityAction;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\PropertyContent;
@@ -23,7 +24,6 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\Store\EntityIdLookup;
 use Wikibase\SubmitEntityAction;
 use Wikibase\ViewEntityAction;
 

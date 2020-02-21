@@ -7,8 +7,8 @@ use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\EntityId\SeekableEntityIdPager;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IResultWrapper;
 
