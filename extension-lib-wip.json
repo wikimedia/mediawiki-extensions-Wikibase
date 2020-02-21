@@ -32,7 +32,7 @@
 		"Wikibase\\Lib\\Serialization\\": "lib/includes/Serialization/",
 		"Wikibase\\Lib\\Sites\\": "lib/includes/Sites/",
 		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
-		"Wikibase\\Lib\\Store\\Sql\\": "lib/includes/Store/Sql/",
+		"Wikibase\\Lib\\Store\\": "lib/includes/Store/",
 		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParserFunctions/",
 		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
