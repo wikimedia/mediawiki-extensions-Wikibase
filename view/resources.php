@@ -103,9 +103,6 @@ return call_user_func( function() {
 		'wikibase.templates' => $moduleTemplate + [
 			'class' => TemplateModule::class,
 			'scripts' => 'wikibase/templates.js',
-			'dependencies' => [
-				'jquery.getAttrs'
-			],
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
