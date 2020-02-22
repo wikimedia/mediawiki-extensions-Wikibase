@@ -92,9 +92,6 @@ call_user_func( function() {
 		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
 	}
 
-	$wgWikibaseMultiRepositoryServiceWiringFiles = [ __DIR__ . '/../data-access/src/MultiRepositoryServiceWiring.php' ];
-	$wgWikibasePerRepositoryServiceWiringFiles = [ __DIR__ . '/../data-access/src/PerRepositoryServiceWiring.php' ];
-
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
