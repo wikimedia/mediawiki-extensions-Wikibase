@@ -23,7 +23,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\MessageException' => __DIR__ . '/includes/MessageException.php',
 	'Wikibase\\Lib\\PropertyInfoDataTypeLookup' => __DIR__ . '/includes/PropertyInfoDataTypeLookup.php',
 	'Wikibase\\Lib\\PropertyInfoSnakUrlExpander' => __DIR__ . '/includes/PropertyInfoSnakUrlExpander.php',
-	'Wikibase\\Lib\\RepositoryDefinitions' => __DIR__ . '/includes/RepositoryDefinitions.php',
 	'Wikibase\\Lib\\Settings' => __DIR__ . '/includes/Settings.php',
 	'Wikibase\\Lib\\SimpleCacheWithBagOStuff' => __DIR__ . '/includes/SimpleCacheWithBagOStuff.php',
 	'Wikibase\\Lib\\SnakUrlExpander' => __DIR__ . '/includes/SnakUrlExpander.php',
