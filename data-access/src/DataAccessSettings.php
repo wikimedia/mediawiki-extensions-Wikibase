@@ -111,10 +111,6 @@ class DataAccessSettings {
 		return $this->forceWriteSearchFields;
 	}
 
-	public function useEntitySourceBasedFederation() {
-		return $this->useEntitySourceBasedFederation;
-	}
-
 	/**
 	 * Whether to read property terms from the new, normalized schema,
 	 * rather than from the old wb_terms table.
