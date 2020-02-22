@@ -97,7 +97,6 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
@@ -242,11 +241,6 @@ final class WikibaseClient {
 	 * @var EntityTypeDefinitions
 	 */
 	private $entityTypeDefinitions;
-
-	/**
-	 * @var RepositoryDefinitions|null
-	 */
-	private $repositoryDefinitions;
 
 	/**
 	 * @var TermLookup|null
@@ -761,48 +755,6 @@ final class WikibaseClient {
 			MediaWikiServices::getInstance()->getSiteLookup(),
 			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
-	}
-
-	/**
-	 * @return RepositoryDefinitions
-	 */
-	private function getRepositoryDefinitionsFromSettings() {
-		$settings = $this->settings;
-		$entityTypeDefinitions = $this->entityTypeDefinitions;
-		$definitions = [];
-
-		// Backwards compatibility: if the old "foreignRepositories" settings is there,
-		// use its values.
-		$repoSettingsArray = $settings->hasSetting( 'foreignRepositories' )
-			? $settings->getSetting( 'foreignRepositories' )
-			: $settings->getSetting( 'repositories' );
-
-		// Backwards compatibility: if settings of the "local" repository
-		// are not defined in the "repositories" settings but with individual settings,
-		// fallback to old single-repo settings
-		if ( $settings->hasSetting( 'repoDatabase' )
-			&& $settings->hasSetting( 'entityNamespaces' )
-			&& $settings->hasSetting( 'repoConceptBaseUri' )
-		) {
-			$definitions = [ '' => [
-				'database' => $settings->getSetting( 'repoDatabase' ),
-				'base-uri' => $settings->getSetting( 'repoConceptBaseUri' ),
-				'prefix-mapping' => [ '' => '' ],
-				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
-			] ];
-			unset( $repoSettingsArray[''] );
-		}
-
-		foreach ( $repoSettingsArray as $repository => $repositorySettings ) {
-			$definitions[$repository] = [
-				'database' => $repositorySettings['repoDatabase'],
-				'base-uri' => $repositorySettings['baseUri'],
-				'entity-namespaces' => $repositorySettings['entityNamespaces'],
-				'prefix-mapping' => $repositorySettings['prefixMapping'],
-			];
-		}
-
-		return new RepositoryDefinitions( $definitions, $entityTypeDefinitions );
 	}
 
 	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
@@ -1456,17 +1408,6 @@ final class WikibaseClient {
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
 		);
-	}
-
-	/**
-	 * @return RepositoryDefinitions
-	 */
-	public function getRepositoryDefinitions() {
-		if ( !$this->repositoryDefinitions ) {
-			$this->repositoryDefinitions = $this->getRepositoryDefinitionsFromSettings();
-		}
-
-		return $this->repositoryDefinitions;
 	}
 
 	/**

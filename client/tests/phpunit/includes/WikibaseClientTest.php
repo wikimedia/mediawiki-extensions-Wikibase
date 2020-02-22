@@ -40,7 +40,6 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
@@ -434,33 +433,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetDataAccessSnakFormatterFactory() {
 		$instance = $this->getWikibaseClient()->getDataAccessSnakFormatterFactory();
 		$this->assertInstanceOf( DataAccessSnakFormatterFactory::class, $instance );
-	}
-
-	public function testGetRepositoryDefinitions() {
-		$wikibaseClient = $this->getWikibaseClient();
-		$settings = $wikibaseClient->getSettings();
-
-		$settings->setSetting( 'foreignRepositories', [] );
-		$settings->setSetting( 'repositories', [] );
-		$settings->setSetting( 'repoDatabase', 'repo' );
-		$settings->setSetting( 'repoConceptBaseUri', '' );
-		$settings->setSetting( 'entityNamespaces', [] );
-
-		$expected = new RepositoryDefinitions(
-			[ '' =>
-				[
-					'database' => 'repo',
-					'base-uri' => '',
-					'entity-namespaces' => [],
-					'prefix-mapping' => [ '' => '' ]
-				]
-			],
-			new EntityTypeDefinitions( [] )
-		);
-
-		$repositoryDefinitions = $wikibaseClient->getRepositoryDefinitions();
-		$this->assertInstanceOf( RepositoryDefinitions::class, $repositoryDefinitions );
-		$this->assertEquals( $expected, $repositoryDefinitions );
 	}
 
 	public function testGetSidebarLinkBadgeDisplay() {
