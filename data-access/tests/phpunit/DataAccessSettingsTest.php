@@ -18,7 +18,6 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			1,
 			true,
 			false,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
 			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
 			MIGRATION_OLD,
@@ -36,7 +35,6 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			1,
 			$useSearchFields,
 			$forceWriteSearchFields,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
 			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
 			MIGRATION_OLD,
@@ -64,7 +62,6 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			1,
 			true,
 			false,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			$useNormalizedPropertyTerms,
 			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
@@ -120,7 +117,6 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			1,
 			true,
 			false,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
 			$itemTermsMigrationStages,
 			MIGRATION_OLD,
