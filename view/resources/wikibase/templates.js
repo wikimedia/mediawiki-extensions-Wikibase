@@ -254,13 +254,13 @@
 			throw new Error( 'Can not apply a template with more or less than one root node.' );
 		}
 
-		var attributes = $template.getAttrs();
+		var attribs = $template[ 0 ].attributes;
 
-		for ( var name in attributes ) {
-			if ( name === 'class' ) {
-				this.addClass( attributes[ name ] );
-			} else if ( Object.prototype.hasOwnProperty.call( attributes, name ) ) {
-				this.attr( name, attributes[ name ] );
+		for ( var i = 0; i < attribs.length; i++ ) {
+			if ( attribs[ i ].name === 'class' ) {
+				this.addClass( attribs[ i ].value );
+			} else {
+				this.attr( attribs[ i ].name, attribs[ i ].value );
 			}
 		}
 
