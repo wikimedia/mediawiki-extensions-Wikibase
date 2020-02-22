@@ -14,6 +14,7 @@ use Title;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Tests\MockClientStore;
+use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
@@ -25,6 +26,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * Regression tests for the output produced by data access functionality.
@@ -119,14 +121,29 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	}
 
 	/**
+	 * Given formatting values depends on the global config
+	 * of data types ("default" WikibaseClient instance is called all over the place
+	 * there), test input using URLs of units needs to use the correct URI base.
+	 * In order to get to there right values, this method mimics (private)
+	 * WikibaseClient::getRepoItemUriParser and WikibaseClient::getItemSource.
+	 */
+	private function getGlobalConceptBaseUriForUnits() : string {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
+
+		/** @var EntitySource $itemSource */
+		$itemSource = $wikibaseClient->getItemSource();
+		return $itemSource->getConceptBaseUri();
+	}
+
+	/**
 	 * Snaks which are formatted the same in the wikitext escaped plain text
 	 * and in the rich wikitext formatting.
 	 *
 	 * @return array[]
 	 */
 	private function getGenericSnaks() {
-		$repositories = WikibaseClient::getDefaultInstance()->getRepositoryDefinitions();
-		$repoConceptBaseUri = $repositories->getConceptBaseUris()[''];
+		$conceptBaseUriForUnits = $this->getGlobalConceptBaseUriForUnits();
 
 		$p4 = new PropertyId( 'P4' );
 		$sampleUrl = 'https://www.wikidata.org/w/index.php?title=Q2013&action=history';
@@ -157,7 +174,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 					$p4,
 					new QuantityValue(
 						new DecimalValue( 42 ),
-						$repoConceptBaseUri . 'Q12',
+						$conceptBaseUriForUnits . 'Q12',
 						new DecimalValue( 42 ),
 						new DecimalValue( 42 )
 					)
