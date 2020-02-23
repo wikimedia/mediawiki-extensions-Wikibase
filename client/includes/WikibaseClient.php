@@ -728,20 +728,18 @@ final class WikibaseClient {
 	 * @return Language
 	 */
 	public function getContentLanguage() {
-		// @phpcs:ignore MediaWiki.Usage.DeprecatedGlobalVariables.Deprecated$wgContLang
-		global $wgContLang;
-
-		// TODO: define a LanguageProvider service instead of using a global directly.
-		// NOTE: we cannot inject $wgContLang in the constructor, because it may still be null
-		// when WikibaseClient is initialized. In particular, the language object may not yet
-		// be there when the SetupAfterCache hook is run during bootstrapping.
-
-		if ( !$wgContLang ) {
-			throw new MWException( 'Premature access: $wgContLang is not yet initialized!' );
+		/**
+		 * Before this constant is defined, custom config may not have been taken into account.
+		 * So try not to allow code to use a language before that point.
+		 * This code was explicitly mentioning the SetupAfterCache hook.
+		 * With services, that hook won't be a problem anymore.
+		 * So this check may well be unnecessary (but better safe than sorry).
+		 */
+		if ( !defined( 'MW_SERVICE_BOOTSTRAP_COMPLETE' ) ) {
+			throw new MWException( 'Premature access to MediaWiki ContentLanguage!' );
 		}
 
-		StubObject::unstub( $wgContLang );
-		return $wgContLang;
+		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**
