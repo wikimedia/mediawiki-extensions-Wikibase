@@ -57,7 +57,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 		$settings = $wikibaseClient->getSettings();
 		$this->oldAllowDataTransclusion = $settings->getSetting( 'allowDataTransclusion' );
-		$this->oldEntityNamespaces = $wikibaseClient->getRepositoryDefinitions()->getEntityNamespaces();
+		$this->oldEntityNamespaces = $wikibaseClient->getEntityNamespaceLookup()->getEntityNamespaces();
 		$settings->setSetting( 'allowDataTransclusion', true );
 		$settings->setSetting( 'entityNamespaces', [ 'item' => 0 ] );
 
