@@ -150,14 +150,6 @@ exports.config = {
 			const filePath = saveScreenshot( test.title );
 			/* eslint-disable-next-line no-console */
 			console.log( `\n\tScreenshot: ${filePath}\n` );
-
-			if ( browser && browser.getLogs ) {
-				/* eslint-disable-next-line no-console */
-				console.log(
-					'browser logs',
-					browser.getLogs( 'browser' )
-				);
-			}
 		}
 	},
 };
