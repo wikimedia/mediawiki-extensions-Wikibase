@@ -4,7 +4,7 @@ import { StatementMutations } from '@/store/statements/mutations';
 import { StatementActions } from '@/store/statements/actions';
 import { StatementGetters } from '@/store/statements/getters';
 
-export class StatementState implements StatementState {
+export class StatementState {
 	[ entityId: string ]: StatementMap;
 }
 
