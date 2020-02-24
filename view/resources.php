@@ -258,7 +258,6 @@ return call_user_func( function() {
 				'mediawiki.cookie',
 				'mediawiki.jqueryMsg', // for {{plural}} and {{gender}} support in messages
 				'mediawiki.language',
-				'mediawiki.legacy.shared', // For snakview
 				'mediawiki.user',
 				'mediawiki.util',
 				'mw.config.values.wbRefTabsEnabled',
