@@ -33,7 +33,6 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\EntityContent;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\RepositoryDefinitions;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
@@ -74,7 +73,6 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 			new SettingsArray( $repoSettings ),
 			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
-			$this->getRepositoryDefinitions(),
 			new EntitySourceDefinitions(
 				[ new EntitySource(
 					'test',
@@ -99,16 +97,6 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 				require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php',
 				require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php'
 			)
-		);
-	}
-
-	/**
-	 * @return RepositoryDefinitions
-	 */
-	private function getRepositoryDefinitions() {
-		return new RepositoryDefinitions(
-			[ '' => [ 'database' => '', 'base-uri' => '', 'entity-namespaces' => [], 'prefix-mapping' => [] ] ],
-			new EntityTypeDefinitions( [] )
 		);
 	}
 
