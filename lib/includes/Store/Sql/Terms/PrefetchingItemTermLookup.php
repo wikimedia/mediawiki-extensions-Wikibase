@@ -22,7 +22,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/** @var ILoadBalancer */
 	private $loadBalancer;
 
-	/** @var TermInLangIdsResolver */
+	/** @var DatabaseTermInLangIdsResolver */
 	private $termInLangIdsResolver;
 
 	/** @var IDatabase|null */
@@ -31,7 +31,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/** @var bool|string */
 	private $databaseDomain;
 
-	/** @var array[] entity id serialization -> terms array */
+	/** @var array[] entity numeric id -> terms array */
 	private $terms = [];
 
 	/** @var bool[] entity ID,  term type, language -> true for prefetched terms
@@ -42,12 +42,12 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	/**
 	 * PrefetchingItemTermLookup constructor.
 	 * @param ILoadBalancer $loadBalancer
-	 * @param TermInLangIdsResolver $termInlangIdsResolver
+	 * @param DatabaseTermInLangIdsResolver $termInlangIdsResolver
 	 * @param bool|string $databaseDomain
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		TermInLangIdsResolver $termInlangIdsResolver,
+		DatabaseTermInLangIdsResolver $termInlangIdsResolver,
 		$databaseDomain = false
 	) {
 		$this->loadBalancer = $loadBalancer;
@@ -83,7 +83,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 			if ( isset( $itemIdsToFetch[$entityId->getNumericId()] ) ) {
 				continue;
 			}
-			if ( !array_key_exists( $entityId->getSerialization(), $this->terms ) ) {
+			if ( !array_key_exists( $entityId->getNumericId(), $this->terms ) ) {
 				$itemIdsToFetch[$entityId->getNumericId()] = $entityId;
 				continue;
 			}
@@ -100,22 +100,16 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PrefetchingItemTermLookup_prefetchTerms'
 		);
-		$res = $this->getDbr()->select(
+		$result = $this->termInLangIdsResolver->resolveTermsViaJoin(
 			'wbt_item_terms',
-			[ 'wbit_item_id', 'wbit_term_in_lang_id' ],
+			'wbit_term_in_lang_id',
+			'wbit_item_id',
 			[ 'wbit_item_id' => array_keys( $itemIdsToFetch ) ],
-			__METHOD__
+			$termTypes,
+			$languageCodes
 		);
-		/** @var int[] serialization -> term IDs */
-		$groups = [];
-		foreach ( $res as $row ) {
-			$itemId = $itemIdsToFetch[$row->wbit_item_id];
-			$groups[$itemId->getSerialization()][] = $row->wbit_term_in_lang_id;
-		}
-
-		$result = $this->termInLangIdsResolver->resolveGroupedTermInLangIds( $groups, $termTypes, $languageCodes );
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
-		$this->terms = array_merge_recursive( $this->terms, $result );
+		$this->terms = array_replace_recursive( $this->terms, $result );
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
@@ -127,14 +121,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		if ( !isset( $this->termKeys[$key] ) ) {
 			return null;
 		}
-		return $this->terms[$serialization][$termType][$languageCode][0] ?? false;
-	}
-
-	private function getDbr(): IDatabase {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
-		}
-		return $this->dbr;
+		return $this->terms[$entityId->getNumericId()][$termType][$languageCode][0] ?? false;
 	}
 
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
@@ -146,7 +133,7 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		if ( !isset( $this->termKeys[$key] ) ) {
 			return null;
 		}
-		return $this->terms[$serialization]['alias'][$languageCode] ?? false;
+		return $this->terms[$entityId->getNumericId()]['alias'][$languageCode] ?? false;
 	}
 
 	private function getKey(
