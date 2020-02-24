@@ -45,6 +45,7 @@ describe( 'App', () => {
 	} );
 
 	it( 'closes on clicking the cancel button', () => {
+		browser.waitUntil( () => DataBridgePage.cancelButton.isClickable() );
 		DataBridgePage.cancelButton.click();
 
 		DataBridgePage.app.waitForExist( 5000, true, 'App still exists in the DOM after clicking the cancel button' );
