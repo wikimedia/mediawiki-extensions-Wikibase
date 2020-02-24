@@ -133,7 +133,7 @@ describe( 'permission checks', () => {
 			unblockUser();
 		} );
 
-		it.only( 'show a permission error when opening bridge', () => {
+		it( 'show a permission error when opening bridge', () => {
 			LoginPage.loginAdmin();
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
