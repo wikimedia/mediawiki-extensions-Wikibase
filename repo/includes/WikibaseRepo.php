@@ -1292,11 +1292,8 @@ class WikibaseRepo {
 			}
 
 			$this->rdfVocabulary = new RdfVocabulary(
-				$dataAccessSettings->useEntitySourceBasedFederation() ?
-					$this->entitySourceDefinitions->getConceptBaseUris() :
-					$this->repositoryDefinitions->getConceptBaseUris(),
+				$this->entitySourceDefinitions->getConceptBaseUris(),
 				$this->getCanonicalDocumentUrls(),
-				$dataAccessSettings,
 				$this->entitySourceDefinitions,
 				$localEntitySourceName,
 				$nodeNamespacePrefixes,

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use Closure;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
@@ -42,7 +41,6 @@ class ValueSnakRdfBuilderFactoryTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ ''  => RdfBuilderTestData::URI_BASE ],
 			[ '' => RdfBuilderTestData::URI_DATA ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],

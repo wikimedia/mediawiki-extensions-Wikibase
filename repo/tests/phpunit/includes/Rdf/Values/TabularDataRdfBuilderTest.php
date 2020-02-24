@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfVocabulary;
@@ -39,37 +38,6 @@ class TabularDataRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$vocab = new RdfVocabulary(
 			[ '' => 'http://test/item/' ],
 			[ '' => 'http://test/data/' ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => '' ],
-			[ '' => '' ]
-		);
-		$builder = new TabularDataRdfBuilder( $vocab );
-
-		$writer = new NTriplesRdfWriter();
-		$writer->prefix( 'www', "http://www/" );
-		$writer->prefix( 'acme', "http://acme/" );
-
-		$writer->start();
-		$writer->about( 'www', 'Q1' );
-
-		$snak = new PropertyValueSnak(
-			new PropertyId( 'P1' ),
-			new StringValue( 'Data:Foo.tab' )
-		);
-
-		$builder->addValue( $writer, 'acme', 'testing', 'DUMMY', '', $snak );
-
-		$expected = '<http://www/Q1> <http://acme/testing> <http://commons.wikimedia.org/data/main/Data:Foo.tab> .';
-		$this->helper->assertNTriplesEquals( $expected, $writer->drain() );
-	}
-
-	public function testAddValue_entitySourceBasedFederation() {
-		$vocab = new RdfVocabulary(
-			[ '' => 'http://test/item/' ],
-			[ '' => 'http://test/data/' ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => '' ],

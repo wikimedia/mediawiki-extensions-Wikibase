@@ -355,7 +355,6 @@ QUERY;
 		return new RdfVocabulary(
 			[ '' => $baseUri ],
 			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
-			WikibaseRepo::getDefaultInstance()->getDataAccessSettings(),
 			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			'',
 			[ '' => 'wd' ],

@@ -75,72 +75,22 @@ class PropertyRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->helper->assertNTriplesEquals( $expected, $actual, "Data set $dataSetName" );
 	}
 
-	public function provideAddEntity() {
-		return [
-			[ 'P2', 'P2_all' ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideAddEntity
-	 */
-	public function testAddEntity( $entityName, $dataSetName ) {
-		$entity = $this->getTestData()->getEntity( $entityName );
+	public function testAddEntity() {
+		$entity = $this->getTestData()->getEntity( 'P2' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer )->addEntity( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $writer );
+		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
 	}
 
-	public function provideAddEntityStub() {
-		return [
-			[ 'P2', 'P2_all' ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideAddEntityStub
-	 */
-	public function testAddEntityStub( $entityName, $dataSetName ) {
-		$entity = $this->getTestData()->getEntity( $entityName );
+	public function testAddEntityStub() {
+		$entity = $this->getTestData()->getEntity( 'P2' );
 
 		$writer = $this->getTestData()->getNTriplesWriter();
 		$this->newBuilder( $writer )->addEntityStub( $entity );
 
-		$this->assertOrCreateNTriples( $dataSetName, $writer );
-	}
-
-	public function testAddEntity_entitySourceBasedFederation() {
-		$entity = $this->getTestData()->getEntity( 'P2' );
-
-		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilderForEntitySourceBasedFederation( $writer )->addEntity( $entity );
-
 		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
-	}
-
-	public function testAddEntityStub_entitySourceBasedFederation() {
-		$entity = $this->getTestData()->getEntity( 'P2' );
-
-		$writer = $this->getTestData()->getNTriplesWriter();
-		$this->newBuilderForEntitySourceBasedFederation( $writer )->addEntityStub( $entity );
-
-		$this->assertOrCreateNTriples( 'P2_all_foreignsource', $writer );
-	}
-
-	/**
-	 * @param RdfWriter $writer
-	 *
-	 * @return PropertyRdfBuilder
-	 */
-	private function newBuilderForEntitySourceBasedFederation( RdfWriter $writer ) {
-		$vocabulary = $this->getTestData()->getVocabularyForEntitySourceBasedFederation();
-
-		return new PropertyRdfBuilder(
-			$vocabulary,
-			$writer
-		);
 	}
 
 }

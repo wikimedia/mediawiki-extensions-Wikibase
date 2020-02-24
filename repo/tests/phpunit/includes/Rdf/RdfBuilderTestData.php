@@ -8,7 +8,6 @@ use Site;
 use SiteLookup;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataAccess\Tests\DataAccessSettingsFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -164,25 +163,8 @@ class RdfBuilderTestData {
 	 */
 	public function getVocabulary() {
 		return new RdfVocabulary(
-			[ '' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
-			[ '' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
-			DataAccessSettingsFactory::repositoryPrefixBasedFederation(),
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
-			'',
-			[ '' => '', 'foreign' => 'foreign' ],
-			[ '' => '', 'foreign' => 'foreign' ],
-			[],
-			[],
-			[],
-			'http://creativecommons.org/publicdomain/zero/1.0/'
-		);
-	}
-
-	public function getVocabularyForEntitySourceBasedFederation() {
-		return new RdfVocabulary(
 			[ 'wikidata' => self::URI_BASE, 'foreign' => self::URI_BASE_FOREIGN ],
 			[ 'wikidata' => self::URI_DATA, 'foreign' => self::URI_DATA_FOREIGN ],
-			DataAccessSettingsFactory::entitySourceBasedFederation(),
 			new EntitySourceDefinitions(
 				[
 					new EntitySource(
