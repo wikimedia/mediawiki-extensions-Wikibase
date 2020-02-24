@@ -52,16 +52,6 @@ function unblockUser( username ) {
 	} ) );
 }
 
-/**
- * TODO use LoginPage.loginAdmin() compatible w/ wdio 5 from wdio-mediawiki v1.0.0+
- */
-function loginAdmin() {
-	LoginPage.open();
-	$( '#wpName1' ).setValue( browser.config.mwUser );
-	$( '#wpPassword1' ).setValue( browser.config.mwPwd );
-	$( '#wpLoginAttempt' ).click();
-}
-
 describe( 'permission checks', () => {
 	let title, propertyId, entityId, content;
 
@@ -144,7 +134,7 @@ describe( 'permission checks', () => {
 		} );
 
 		it.only( 'show a permission error when opening bridge', () => {
-			loginAdmin();
+			LoginPage.loginAdmin();
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
 			DataBridgePage.error.waitForDisplayed( 5000 );
