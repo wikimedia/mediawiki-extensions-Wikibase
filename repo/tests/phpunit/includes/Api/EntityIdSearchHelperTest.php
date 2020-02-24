@@ -82,14 +82,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
 		);
 
-		$existingForeignItemResult = new TermSearchResult(
-			new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
-			'entityId',
-			new ItemId( self::EXISTING_FOREIGN_ITEM ),
-			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
-			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
-		);
-
 		$defaultLimit = 10;
 
 		return [
@@ -102,11 +94,6 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				self::EXISTING_LOCAL_ITEM,
 				$defaultLimit,
 				[ self::EXISTING_LOCAL_ITEM => $existingLocalItemResult ],
-			],
-			'Exact EntityId match in foreign repository' => [
-				self::EXISTING_FOREIGN_ITEM,
-				$defaultLimit,
-				[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
 			],
 			'EntityID plus term matches' => [
 				self::EXISTING_LOCAL_ITEM,
@@ -150,10 +137,28 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider provideTestGetRankedSearchResults
 	 */
 	public function testGetRankedSearchResults( $search, $limit, array $expected ) {
-		$entitySearchHelper = $this->newEntitySearchHelper();
+		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ '' ] ] );
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
 		$this->assertEquals( $expected, $results );
+	}
+
+	public function testGetRankedSearchResults_foreignItem() {
+		$existingForeignItemResult = new TermSearchResult(
+			new Term( 'qid', self::EXISTING_FOREIGN_ITEM ),
+			'entityId',
+			new ItemId( self::EXISTING_FOREIGN_ITEM ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_LABEL ),
+			new Term( self::DEFAULT_LANGUAGE, self::DEFAULT_DESCRIPTION )
+		);
+
+		$entitySearchHelper = $this->newEntitySearchHelper( [ 'item' => [ self::FOREIGN_REPO_PREFIX ] ] );
+
+		$results = $entitySearchHelper->getRankedSearchResults( self::EXISTING_FOREIGN_ITEM, 'en', 'item', 10, false );
+		$this->assertEquals(
+			[ self::EXISTING_FOREIGN_ITEM => $existingForeignItemResult ],
+			$results
+		);
 	}
 
 	public function testGivenEntityIdWithoutRepositoryPrefix_entityIsFound() {
@@ -168,7 +173,7 @@ class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		];
 
 		$entitySearchHelper = $this->newEntitySearchHelper(
-			[ 'item' => [ [ 'foreign', 123 ] ] ]
+			[ 'item' => [ 'foreign' ] ]
 		);
 
 		$this->assertEquals(
