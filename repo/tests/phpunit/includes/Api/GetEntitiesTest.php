@@ -623,7 +623,8 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 	}
 
 	public function testGivenEntityIdFromUnknownRepository_getEntitiesMarksEntityAsMissing() {
-		$id = 'FOOOOO:Q123';
+		// Use an entity id that exists locally, but pretend it's on another repo.
+		$id = 'FOOOOO:' . EntityTestHelper::getId( 'Oslo' );
 		$result = $this->doApiRequest( [ 'action' => 'wbgetentities', 'ids' => $id ] );
 
 		$this->assertEquals(
