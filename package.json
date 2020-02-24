@@ -39,7 +39,7 @@
 		"stylelint-config-wikimedia": "0.8.0",
 		"vue": "^2.6.11",
 		"wdio-mediawiki": "^1.0.0",
-		"wdio-wikibase": "^3.0.0",
+		"wdio-wikibase": "^3.0.1",
 		"webdriverio": "^5.18.6"
 	},
 	"eslintIgnore": [
