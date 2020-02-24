@@ -91,7 +91,7 @@
     "vue-template-compiler": "^2.6.11",
     "vuex": "^3.1.2",
     "wdio-mediawiki": "1.0.0",
-    "wdio-wikibase": "^2.3.1",
+    "wdio-wikibase": "^3.0.0",
     "wikimedia-ui-base": "^0.14.0"
   }
 }
