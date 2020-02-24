@@ -110,6 +110,7 @@
 	"wikibase-time-precision-millennium": "mil·leni $1",
 	"wikibase-time-precision-century": "segle $1",
 	"wikibase-time-precision-10annum": "$1s",
+	"wikibase-time-precision-BCE": "$1 aC",
 	"wikibase-time-precision-BCE-Gannum": "$1 miliards d'anys aC",
 	"wikibase-time-precision-BCE-Mannum": "$1 milions d'anys aC",
 	"wikibase-time-precision-BCE-annum": "{{PLURAL:$1|$1 any|$1 anys}} aC",
@@ -159,7 +160,7 @@
 	"wikibase-entity-summary-wbremoveclaims-update": "S'{{PLURAL:$1|ha suprimit l'afirmació|han suprimit les afirmacions}}",
 	"wikibase-entity-summary-special-create-item": "Element [$2] creat amb {{PLURAL:$1|valor|valors}}",
 	"wikibase-entity-summary-wbcreateclaim-create": "S'ha creat la declaració",
-	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Afirmació modificada|Afirmacions modificades}}",
+	"wikibase-entity-summary-wbsetclaim-update": "{{PLURAL:$3|Afirmació canviada|Afirmacions canviades}}",
 	"wikibase-entity-summary-wbsetclaim-create": "{{PLURAL:$3|Declaració creada|Declaracions creades}}",
 	"wikibase-entity-summary-wbsetclaim-update-qualifiers": "{{PLURAL:$4|Un qualificador|$4 qualificadors}} d’{{PLURAL:$3|afirmació|afirmacions}} {{PLURAL:$4|modificat|modificats}}",
 	"wikibase-entity-summary-wbsetclaim-update-references": "S'{{PLURAL:$4|ha canviat una referència|han canviat $4 referències}} de {{PLURAL:$3|l'afirmació|les afirmacions}}",
@@ -183,7 +184,7 @@
 	"wikibase-property-summary-wbcreate-new": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-create": "S’ha creat una propietat nova",
 	"wikibase-property-summary-wbeditentity-create-property": "S'ha creat una nova propietat",
-	"wikibase-property-summary-wbeditentity-update": "S’ha modificat una propietat",
+	"wikibase-property-summary-wbeditentity-update": "S’ha canviat una propietat",
 	"wikibase-property-summary-wbeditentity-override": "S'ha eliminat una propietat",
 	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}"
 }
