@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import Entities from '@/mock-data/data/Q42.data.json';
@@ -25,7 +26,7 @@ services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 
 services.set( 'writingEntityRepository', {
 	saveEntity( entityRevision: EntityRevision ): Promise<EntityRevision> {
-		console.log( 'save', entityRevision ); // eslint-disable-line no-console
+		console.log( 'save', entityRevision );
 		const result: EntityRevision = {
 			entity: clone( entityRevision.entity ),
 			revisionId: entityRevision.revisionId + 1,
@@ -101,7 +102,7 @@ services.set( 'propertyDatatypeRepository', {
 
 services.set( 'tracker', {
 	trackPropertyDatatype( datatype: string ) {
-		console.info( `Tracking datatype: '${datatype}'` ); // eslint-disable-line no-console
+		console.info( `Tracking datatype: '${datatype}'` );
 	},
 } );
 
@@ -146,7 +147,7 @@ launch(
 	},
 	services,
 ).on( Events.onSaved, () => {
-	console.info( 'saved' ); // eslint-disable-line no-console
+	console.info( 'saved' );
 } ).on( Events.onCancel, () => {
-	console.info( 'canceled' ); // eslint-disable-line no-console
+	console.info( 'canceled' );
 } );
