@@ -926,40 +926,6 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Called in SkinTemplate::buildNavUrls(), allows us to set up navigation URLs to later be used
-	 * in the toolbox.
-	 *
-	 * @param SkinTemplate $skinTemplate
-	 * @param array[] &$navigationUrls
-	 */
-	public static function onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink(
-		SkinTemplate $skinTemplate,
-		array &$navigationUrls
-	) {
-		$title = $skinTemplate->getTitle();
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
-
-		if ( !$title || !$namespaceLookup->isNamespaceWithEntities( $title->getNamespace() ) ) {
-			return;
-		}
-
-		$entityIdLookup = WikibaseRepo::getDefaultInstance()->getEntityIdLookup();
-		$entityLookup = WikibaseRepo::getDefaultInstance()->getEntityLookup();
-
-		$entityId = $entityIdLookup->getEntityIdForTitle( $title );
-		if ( $entityId === null || !$entityLookup->hasEntity( $entityId ) ) {
-			return;
-		}
-
-		$baseUri = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'conceptBaseUri' );
-		$navigationUrls['wb-concept-uri'] = [
-			'text' => $skinTemplate->msg( 'wikibase-concept-uri' ),
-			'href' => $baseUri . $entityId->getSerialization(),
-			'title' => $skinTemplate->msg( 'wikibase-concept-uri-tooltip' )
-		];
-	}
-
-	/**
 	 * Called in BaseTemplate::getToolbox(), allows us to add navigation URLs to the toolbox.
 	 *
 	 * @param BaseTemplate $baseTemplate
