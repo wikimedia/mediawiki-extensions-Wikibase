@@ -23,6 +23,7 @@ use Hooks;
 use IContextSource;
 use InvalidArgumentException;
 use Language;
+use LogicException;
 use MWException;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -47,9 +48,7 @@ use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\MediaWiki\EntitySourceDocumentUrlProvider;
 use Wikibase\DataAccess\MultipleEntitySourceServices;
-use Wikibase\DataAccess\MultipleRepositoryAwareWikibaseServices;
 use Wikibase\DataAccess\SingleEntitySourceServices;
-use Wikibase\DataAccess\UnusableEntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
@@ -1156,17 +1155,15 @@ class WikibaseRepo {
 	 * @return EntitySource The entity source of the local repository
 	 */
 	public function getLocalEntitySource() : EntitySource {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$localEntitySourceName = $this->settings->getSetting( 'localEntitySourceName' );
-			$sources = $this->entitySourceDefinitions->getSources();
-			foreach ( $sources as $source ) {
-				if ( $source->getSourceName() === $localEntitySourceName ) {
-					return $source;
-				}
+		$localEntitySourceName = $this->settings->getSetting( 'localEntitySourceName' );
+		$sources = $this->entitySourceDefinitions->getSources();
+		foreach ( $sources as $source ) {
+			if ( $source->getSourceName() === $localEntitySourceName ) {
+				return $source;
 			}
 		}
 
-		return new UnusableEntitySource();
+		throw new LogicException( 'No source configured: ' . $localEntitySourceName );
 	}
 
 	/**
@@ -1219,13 +1216,9 @@ class WikibaseRepo {
 	private function getItemVocabularyBaseUri(): string {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			return $this->getEntitySourceDefinitions()
-				->getSourceForEntityType( Item::ENTITY_TYPE )
-				->getConceptBaseUri();
-		}
-
-		return $this->settings->getSetting( 'conceptBaseUri' );
+		return $this->getEntitySourceDefinitions()
+			->getSourceForEntityType( Item::ENTITY_TYPE )
+			->getConceptBaseUri();
 	}
 
 	/**
@@ -1278,18 +1271,9 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'canonicalLanguageCodes' )
 			);
 
-			$dataAccessSettings = $this->getDataAccessSettings();
-			$localEntitySourceName = $dataAccessSettings->useEntitySourceBasedFederation() ? $this->getLocalEntitySource()->getSourceName() : '';
-			$nodeNamespacePrefixes = [];
-			$predicateNamespacePrefixes = [];
-			if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-				$nodeNamespacePrefixes = $this->entitySourceDefinitions->getRdfNodeNamespacePrefixes();
-				$predicateNamespacePrefixes = $this->entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
-			} else {
-				// TODO: hard-coded, should be configurable
-				$nodeNamespacePrefixes[$localEntitySourceName] = 'wd';
-				$predicateNamespacePrefixes[$localEntitySourceName] = '';
-			}
+			$localEntitySourceName = $this->getLocalEntitySource()->getSourceName();
+			$nodeNamespacePrefixes = $this->entitySourceDefinitions->getRdfNodeNamespacePrefixes();
+			$predicateNamespacePrefixes = $this->entitySourceDefinitions->getRdfPredicateNamespacePrefixes();
 
 			$this->rdfVocabulary = new RdfVocabulary(
 				$this->entitySourceDefinitions->getConceptBaseUris(),
@@ -1309,23 +1293,9 @@ class WikibaseRepo {
 	}
 
 	private function getCanonicalDocumentUrls() {
-		$dataAccessSettings = $this->getDataAccessSettings();
-		if ( $dataAccessSettings->useEntitySourceBasedFederation() ) {
-			$urlProvider = new EntitySourceDocumentUrlProvider();
+		$urlProvider = new EntitySourceDocumentUrlProvider();
 
-			return $urlProvider->getCanonicalDocumentsUrls( $this->entitySourceDefinitions );
-		}
-
-		$documentUrls = [];
-
-		// TODO: This is backwards-compatability branch. Probably not worth improving until the deprecated
-		// configuration is removed.
-		foreach ( $this->repositoryDefinitions->getRepositoryNames() as $repository ) {
-			$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData', '', $repository );
-			$documentUrls[$repository] = $entityDataTitle->getCanonicalURL() . '/';
-		}
-
-		return $documentUrls;
+		return $urlProvider->getCanonicalDocumentsUrls( $this->entitySourceDefinitions );
 	}
 
 	/**
@@ -1595,24 +1565,20 @@ class WikibaseRepo {
 	 *  Optionally the list also contains entity types from the configured foreign repositories.
 	 */
 	public function getEnabledEntityTypes() {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$types = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
-			$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+		$types = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
+		$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
 
-			return array_reduce(
-				$types,
-				function ( $carry, $x ) use ( $subEntityTypes ) {
-					$carry[] = $x;
-					if ( array_key_exists( $x, $subEntityTypes ) ) {
-						$carry = array_merge( $carry, $subEntityTypes[$x] );
-					}
-					return $carry;
-				},
-				[]
-			);
-		}
-
-		return $this->repositoryDefinitions->getAllEntityTypes();
+		return array_reduce(
+			$types,
+			function ( $carry, $x ) use ( $subEntityTypes ) {
+				$carry[] = $x;
+				if ( array_key_exists( $x, $subEntityTypes ) ) {
+					$carry = array_merge( $carry, $subEntityTypes[$x] );
+				}
+				return $carry;
+			},
+			[]
+		);
 	}
 
 	/**
@@ -1622,26 +1588,21 @@ class WikibaseRepo {
 	 *  This list will also include any sub entity types of entity types defined in $wgWBRepoSettings['entityNamespaces'].
 	 */
 	public function getLocalEntityTypes() {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$localSource = $this->getLocalEntitySource();
-			$types = $localSource->getEntityTypes();
-			$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+		$localSource = $this->getLocalEntitySource();
+		$types = $localSource->getEntityTypes();
+		$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
 
-			return array_reduce(
-				$types,
-				function ( $carry, $x ) use ( $subEntityTypes ) {
-					$carry[] = $x;
-					if ( array_key_exists( $x, $subEntityTypes ) ) {
-						$carry = array_merge( $carry, $subEntityTypes[$x] );
-					}
-					return $carry;
-				},
-				[]
-			);
-		}
-
-		// A blank string represents the local repo
-		return $this->repositoryDefinitions->getEntityTypesPerRepository()[''];
+		return array_reduce(
+			$types,
+			function ( $carry, $x ) use ( $subEntityTypes ) {
+				$carry[] = $x;
+				if ( array_key_exists( $x, $subEntityTypes ) ) {
+					$carry = array_merge( $carry, $subEntityTypes[$x] );
+				}
+				return $carry;
+			},
+			[]
+		);
 	}
 
 	/**
@@ -1946,14 +1907,13 @@ class WikibaseRepo {
 	}
 
 	private function getPropertySource() : EntitySource {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
-			if ( $propertySource !== null ) {
-				return $propertySource;
-			}
+		$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
+
+		if ( $propertySource === null ) {
+			throw new LogicException( 'No source providing Properties configured!' );
 		}
 
-		return new UnusableEntitySource();
+		return $propertySource;
 	}
 
 	public function getItemTermStoreWriter(): ItemTermStoreWriter {
@@ -2033,14 +1993,13 @@ class WikibaseRepo {
 	}
 
 	private function getItemSource() : EntitySource {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
-			if ( $itemSource !== null ) {
-				return $itemSource;
-			}
+		$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
+
+		if ( $itemSource === null ) {
+			throw new LogicException( 'No source providing Items configured!' );
 		}
 
-		return new UnusableEntitySource();
+		return $itemSource;
 	}
 
 	/**
@@ -2454,29 +2413,23 @@ class WikibaseRepo {
 	/**
 	 * @return array[] Associative array mapping names of known entity types (strings) to lists of names of
 	 *         repositories providing entities of those types.
-	 *         Note: Currently entities of a given type are only provided by single repository. This
+	 *         Note: Currently entities of a given type are only provided by single source. This
 	 *         assumption can be changed in the future.
 	 */
 	public function getEntityTypeToRepositoryMapping() {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			// Map all entity types to unprefixed repository.
-			// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no
-			// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
-			// of getting this map passed from Repo
-			$entityTypes = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
-			return array_fill_keys( $entityTypes, [ '' ] );
-		}
-		return $this->repositoryDefinitions->getEntityTypeToRepositoryMapping();
+		// Map all entity types to unprefixed repository.
+		// TODO: This is a bit of a hack but does the job for EntityIdSearchHelper as long as there are no
+		// prefixed IDs in the entity source realm. Probably EntityIdSearchHelper should be changed instead
+		// of getting this map passed from Repo
+		$entityTypes = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
+		return array_fill_keys( $entityTypes, [ '' ] );
 	}
 
 	/**
 	 * @return string[] Associative array mapping repository or entity source names to base URIs of concept URIs.
 	 */
 	public function getConceptBaseUris() {
-		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
-			return $this->entitySourceDefinitions->getConceptBaseUris();
-		}
-		return $this->repositoryDefinitions->getConceptBaseUris();
+		return $this->entitySourceDefinitions->getConceptBaseUris();
 	}
 
 	public function getPropertyValueExpertsModule() {
@@ -2488,25 +2441,10 @@ class WikibaseRepo {
 	 */
 	public function getWikibaseServices() {
 		if ( $this->wikibaseServices === null ) {
-			$this->wikibaseServices = $this->getDataAccessSettings()->useEntitySourceBasedFederation() ?
-				$this->newEntitySourceWikibaseServices() :
-				$this->newMultipleRepositoryAwareWikibaseServices();
+			$this->wikibaseServices = $this->newEntitySourceWikibaseServices();
 		}
 
 		return $this->wikibaseServices;
-	}
-
-	private function newMultipleRepositoryAwareWikibaseServices() {
-		return new MultipleRepositoryAwareWikibaseServices(
-			$this->getEntityIdParser(),
-			$this->getEntityIdComposer(),
-			$this->repositoryDefinitions,
-			$this->entityTypeDefinitions,
-			$this->getDataAccessSettings(),
-			$this->getMultiRepositoryServiceWiring(),
-			$this->getPerRepositoryServiceWiring(),
-			MediaWikiServices::getInstance()->getNameTableStoreFactory()
-		);
 	}
 
 	private function newEntitySourceWikibaseServices() {
@@ -2563,14 +2501,6 @@ class WikibaseRepo {
 
 	public function getEntitySourceDefinitions() {
 		return $this->entitySourceDefinitions;
-	}
-
-	private function getMultiRepositoryServiceWiring() {
-		return require __DIR__ . '/../../data-access/src/MultiRepositoryServiceWiring.php';
-	}
-
-	private function getPerRepositoryServiceWiring() {
-		return require __DIR__ . '/../../data-access/src/PerRepositoryServiceWiring.php';
 	}
 
 	/**
