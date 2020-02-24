@@ -1,15 +1,16 @@
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import DataValue from '@/datamodel/DataValue';
-import { StatementState } from '@/store/statements';
+import EntityId from '@/datamodel/EntityId';
+import StatementMap from '@/datamodel/StatementMap';
 import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 import StatementMutationStrategy from './StatementMutationStrategy';
 
 export default class ReplaceMutationStrategy implements StatementMutationStrategy {
-	public apply(
+	public apply<T extends Record<EntityId, StatementMap>>(
 		targetValue: DataValue,
 		path: PathToSnak,
-		state: StatementState,
-	): StatementState {
+		state: T,
+	): T {
 		// TODO other strategies may have similar needs, may move into a shared method (e.g. base class)
 		const snak = path.resolveSnakInStatement( state );
 		if ( snak === null ) {

@@ -1,6 +1,7 @@
+import EntityId from '@/datamodel/EntityId';
 import Statement from '@/datamodel/Statement';
-import { StatementState } from '@/store/statements/index';
+import StatementMap from '@/datamodel/StatementMap';
 
 export interface PathToStatement {
-	resolveStatement( state: StatementState ): Statement | null;
+	resolveStatement( state: Record<EntityId, StatementMap> ): Statement | null;
 }

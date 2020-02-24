@@ -1,11 +1,12 @@
 import DataValue from '@/datamodel/DataValue';
-import { StatementState } from '@/store/statements';
+import EntityId from '@/datamodel/EntityId';
+import StatementMap from '@/datamodel/StatementMap';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 
 export default interface StatementMutationStrategy {
-	apply(
+	apply<T extends Record<EntityId, StatementMap>>(
 		targetValue: DataValue,
 		path: MainSnakPath,
-		statementState: StatementState,
-	): StatementState;
+		state: T,
+	): T;
 }

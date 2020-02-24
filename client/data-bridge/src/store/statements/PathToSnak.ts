@@ -1,6 +1,7 @@
-import { StatementState } from '@/store/statements';
+import EntityId from '@/datamodel/EntityId';
 import Snak from '@/datamodel/Snak';
+import StatementMap from '@/datamodel/StatementMap';
 
 export interface PathToSnak {
-	resolveSnakInStatement( state: StatementState ): Snak | null;
+	resolveSnakInStatement( state: Record<EntityId, StatementMap> ): Snak | null;
 }
