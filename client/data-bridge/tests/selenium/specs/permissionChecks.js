@@ -4,31 +4,6 @@ const assert = require( 'assert' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
-/**
- * ATM WikibaseApi.protectEntity() does not know how to access the wdio5 user and
- * we can't just hard-code how to get an entityTitle from an entity id either
- */
-function protectEntity( entityId ) {
-	browser.call( () => Api.bot().then( ( bot ) => {
-		return bot.request( {
-			action: 'wbgetentities',
-			format: 'json',
-			ids: entityId,
-			props: 'info',
-		} ).then( ( getEntitiesResponse ) => {
-			return getEntitiesResponse.entities[ entityId ].title;
-		} ).then( ( entityTitle ) => {
-			return bot.request( {
-				action: 'protect',
-				title: entityTitle,
-				token: bot.editToken,
-				user: browser.config.mwUser,
-				protections: 'edit=autoconfirmed',
-			} );
-		} );
-	} ) );
-}
-
 function blockUser( username, expiry ) {
 	browser.call( () => Api.bot().then( ( bot ) => {
 		return bot.request( {
@@ -109,9 +84,9 @@ describe( 'permission checks', () => {
 		} );
 	} );
 
-	describe( 'if the item is semi-protected on the repo', () => {
+	describe( 'if the item is protected on the repo', () => {
 		it( 'show a permission error when opening bridge', () => {
-			protectEntity( entityId );
+			WikibaseApi.protectEntity( entityId );
 			// logout
 			browser.deleteCookies();
 
