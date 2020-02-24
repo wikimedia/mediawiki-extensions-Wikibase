@@ -22,27 +22,10 @@ export class MainSnakPath implements PathToStatement, PathToSnak {
 	}
 
 	public resolveStatement( state: StatementState ): Statement | null {
-		if ( !state[ this.entityId ] ) {
-			return null;
-		}
-
-		if ( !state[ this.entityId ][ this.propertyId ] ) {
-			return null;
-		}
-
-		if ( !state[ this.entityId ][ this.propertyId ][ this.index ] ) {
-			return null;
-		}
-
-		return state[ this.entityId ][ this.propertyId ][ this.index ];
+		return state?.[ this.entityId ]?.[ this.propertyId ]?.[ this.index ] ?? null;
 	}
 
 	public resolveSnakInStatement( state: StatementState ): Snak|null {
-		const statement = this.resolveStatement( state );
-		if ( statement === null ) {
-			return null;
-		}
-
-		return statement.mainsnak;
+		return this.resolveStatement( state )?.mainsnak ?? null;
 	}
 }

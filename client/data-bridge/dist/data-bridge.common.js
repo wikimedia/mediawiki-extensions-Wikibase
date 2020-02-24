@@ -12808,30 +12808,16 @@ function () {
   _createClass(MainSnakPath, [{
     key: "resolveStatement",
     value: function resolveStatement(state) {
-      if (!state[this.entityId]) {
-        return null;
-      }
+      var _ref, _state$this$entityId, _state$this$entityId$;
 
-      if (!state[this.entityId][this.propertyId]) {
-        return null;
-      }
-
-      if (!state[this.entityId][this.propertyId][this.index]) {
-        return null;
-      }
-
-      return state[this.entityId][this.propertyId][this.index];
+      return (_ref = state === null || state === void 0 ? void 0 : (_state$this$entityId = state[this.entityId]) === null || _state$this$entityId === void 0 ? void 0 : (_state$this$entityId$ = _state$this$entityId[this.propertyId]) === null || _state$this$entityId$ === void 0 ? void 0 : _state$this$entityId$[this.index]) !== null && _ref !== void 0 ? _ref : null;
     }
   }, {
     key: "resolveSnakInStatement",
     value: function resolveSnakInStatement(state) {
-      var statement = this.resolveStatement(state);
+      var _ref2, _this$resolveStatemen;
 
-      if (statement === null) {
-        return null;
-      }
-
-      return statement.mainsnak;
+      return (_ref2 = (_this$resolveStatemen = this.resolveStatement(state)) === null || _this$resolveStatemen === void 0 ? void 0 : _this$resolveStatemen.mainsnak) !== null && _ref2 !== void 0 ? _ref2 : null;
     }
   }]);
 
