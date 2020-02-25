@@ -21,6 +21,7 @@
 					type="cancel"
 					size="L"
 					:squary="true"
+					:disabled="isSaving"
 					@click="cancel"
 				/>
 			</template>

@@ -248,6 +248,20 @@ describe( 'App.vue', () => {
 		expect( wrapper.emitted( Events.onCancel ) ).toBeTruthy();
 	} );
 
+	it( 'disables cancel while in saving state', async () => {
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		await wrapper.find( '.wb-ui-event-emitting-button--cancel' ).trigger( 'click' );
+		await localVue.nextTick();
+
+		expect( wrapper.emitted( Events.onCancel ) ).toBeFalsy();
+	} );
+
 	describe( 'component switch', () => {
 
 		describe( 'if there is an error', () => {
