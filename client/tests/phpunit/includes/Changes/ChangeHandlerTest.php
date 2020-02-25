@@ -615,7 +615,9 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 
 		foreach ( $expectedRootJobParams as $k => $exp ) {
 			$act = $actualRootJobParams[$k];
-			$this->assertEquals( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
+			if ( $k !== 'scheduleRefreshLinks' ) {
+				$this->assertEquals( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
+			}
 			$this->assertEquals( $exp['rootJobSignature'], $act['rootJobSignature'], "$k/rootJobSignature" );
 		}
 	}
