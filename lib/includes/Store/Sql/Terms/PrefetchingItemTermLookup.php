@@ -100,16 +100,26 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PrefetchingItemTermLookup_prefetchTerms'
 		);
-		$result = $this->termInLangIdsResolver->resolveTermsViaJoin(
-			'wbt_item_terms',
-			'wbit_term_in_lang_id',
-			'wbit_item_id',
-			[ 'wbit_item_id' => array_keys( $itemIdsToFetch ) ],
-			$termTypes,
-			$languageCodes
-		);
+
+		// Fetch up to 20 (as suggested by the DBA) entities each time:
+		// https://phabricator.wikimedia.org/T246159#5919892
+		// Also deduplicating to reduce the network and sorting to utilize indexes
+		ksort( $itemIdsToFetch );
+		$itemIdBatches = array_chunk( array_unique( array_keys( $itemIdsToFetch ) ), 20 );
+
+		foreach ( $itemIdBatches as $itemIdBatch ) {
+			$result = $this->termInLangIdsResolver->resolveTermsViaJoin(
+				'wbt_item_terms',
+				'wbit_term_in_lang_id',
+				'wbit_item_id',
+				[ 'wbit_item_id' => $itemIdBatch ],
+				$termTypes,
+				$languageCodes
+			);
+			$this->terms = array_replace_recursive( $this->terms, $result );
+		}
+
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
-		$this->terms = array_replace_recursive( $this->terms, $result );
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
