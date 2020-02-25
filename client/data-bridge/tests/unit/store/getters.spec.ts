@@ -274,7 +274,11 @@ describe( 'root/getters', () => {
 	} );
 
 	describe( 'applicationStatus', () => {
-		it.each( [ ValidApplicationStatus.INITIALIZING, ValidApplicationStatus.READY ] )(
+		it.each( [
+			ValidApplicationStatus.INITIALIZING,
+			ValidApplicationStatus.READY,
+			ValidApplicationStatus.SAVING,
+		] )(
 			'returns underlying valid application status (%s) if there are no errors',
 			( status: ValidApplicationStatus ) => {
 				const applicationState = newApplicationState( {
@@ -289,7 +293,11 @@ describe( 'root/getters', () => {
 			},
 		);
 
-		it.each( [ ValidApplicationStatus.INITIALIZING, ValidApplicationStatus.READY ] )(
+		it.each( [
+			ValidApplicationStatus.INITIALIZING,
+			ValidApplicationStatus.READY,
+			ValidApplicationStatus.SAVING,
+		] )(
 			'returns error application status instead of "%s" if there are errors',
 			( status: ValidApplicationStatus ) => {
 				const applicationState = newApplicationState( {
