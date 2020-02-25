@@ -101,8 +101,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
-		// non-EmptyBagOStuff cache needed for the CachingPrefetchingTermLookup for items
-		$this->setService( 'LocalServerObjectCache', new \HashBagOStuff() );
 
 		if ( !self::$badgeId ) {
 			self::$matchers = self::createMatchers();
