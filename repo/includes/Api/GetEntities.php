@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
@@ -12,6 +11,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -278,8 +278,8 @@ class GetEntities extends ApiBase {
 				$entityId = $ex->getRedirectTargetId();
 				$entityRevision = $this->getEntityRevision( $entityId, false );
 			}
-		} catch ( InvalidArgumentException $ex ) {
-			// InvalidArgumentException is thrown when the repository $entityId is from other
+		} catch ( DivergingEntityIdException $ex ) {
+			// DivergingEntityIdException is thrown when the repository $entityId is from other
 			// repository than the entityRevisionLookup was configured to read from.
 			// Such cases are input errors (e.g. specifying non-existent repository prefix)
 			// and should be ignored and treated as non-existing entities.
