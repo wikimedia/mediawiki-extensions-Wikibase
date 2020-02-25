@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\ItemId;
@@ -11,9 +12,11 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
-use Wikibase\Lib\Store\Sql\Terms\InMemoryTermStore;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTermStoreCleaner;
+use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
-use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\StringNormalizer;
 use Wikibase\WikibaseSettings;
 
@@ -27,7 +30,7 @@ use Wikibase\WikibaseSettings;
  */
 class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 
-	/** @var PrefetchingPropertyTermLookup */
+	/** @var PrefetchingItemTermLookup */
 	private $lookup;
 
 	/** @var ItemId */
@@ -42,9 +45,26 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 		}
 
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_item_terms';
-		$loadBalancer = new FakeLoadBalancer( [ 'dbr' => $this->db ] );
-		$termIdsStore = new InMemoryTermStore();
+		$tables = [
+			'wbt_item_terms',
+			'wbt_term_in_lang',
+			'wbt_text_in_lang',
+			'wbt_text',
+			'wbt_type'
+		];
+
+		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
+
+		$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$typeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			MediaWikiServices::getInstance()->getMainWANObjectCache()
+		);
+		$termIdsStore = new DatabaseTermInLangIdsResolver(
+			$typeIdsStore,
+			$typeIdsStore,
+			$loadBalancer
+		);
 		$this->lookup = new PrefetchingItemTermLookup(
 			$loadBalancer,
 			$termIdsStore
@@ -52,8 +72,13 @@ class PrefetchingItemTermLookupTest extends MediaWikiTestCase {
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter(
 			$loadBalancer,
-			$termIdsStore,
-			$termIdsStore,
+			new DatabaseTermInLangIdsAcquirer(
+				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+				$typeIdsStore
+			),
+			new DatabaseTermStoreCleaner(
+				$loadBalancer
+			),
 			new StringNormalizer(),
 			$this->getItemSource()
 		);
