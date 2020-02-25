@@ -364,7 +364,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 			$entityType,
 			$termTypes
 		);
-		$this->injectTerms( $cachedResults );
+		$this->injectTermsFromCache( $cachedResults );
 		if ( $uncachedLanguages === [] ) {
 			return;
 		}
@@ -399,7 +399,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 					'wbxl_language' => $uncachedLanguages
 				]
 			);
-			$this->injectTermsWTF( $groupedTerms, $entityType );
+			$this->injectTermsFromDatabaseResult( $groupedTerms, $entityType );
 
 		} elseif ( $entityType === 'item' ) {
 			$groupedTerms = $this->dbTermInLangIdsResolver->resolveTermsViaJoin(
@@ -411,7 +411,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 					'wbxl_language' => $uncachedLanguages
 				]
 			);
-			$this->injectTermsWTF( $groupedTerms, $entityType );
+			$this->injectTermsFromDatabaseResult( $groupedTerms, $entityType );
 		}
 	}
 
@@ -441,19 +441,19 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	}
 
 	/**
-	 * Injects terms from a DB result into the $entityInfo structure.
+	 * Injects terms from a cache result into the $entityInfo structure.
 	 *
 	 * @note Keep in sync with EntitySerializer!
 	 *
-	 * @param array $dbResult
+	 * @param array $result
 	 */
-	private function injectTerms( array $dbResult ) {
-		foreach ( $dbResult as $row ) {
-			if ( $row === null ) {
+	private function injectTermsFromCache( array $result ) {
+		foreach ( $result as $cacheCase ) {
+			if ( $cacheCase === null ) {
 				continue;
 			}
-			$this->injectRow( $row );
-			$this->cacheRow( $row );
+			$this->injectRow( $cacheCase );
+			$this->cacheRow( $cacheCase );
 
 		}
 	}
@@ -461,7 +461,7 @@ class DatabaseEntityInfoBuilder implements EntityInfoBuilder {
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	private function injectTermsWTF( array $groupedTerms, string $entityType ) {
+	private function injectTermsFromDatabaseResult( array $groupedTerms, string $entityType ) {
 		foreach ( $groupedTerms as $entityId => $terms ) {
 			$entityIdf = $this->entityIdComposer->composeEntityId( '', $entityType, $entityId );
 			if ( $entityIdf === null ) {
