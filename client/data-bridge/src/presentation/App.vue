@@ -8,6 +8,7 @@
 				<EventEmittingButton
 					:message="$messages.get( publishOrSave )"
 					type="primaryProgressive"
+					size="L"
 					:squary="true"
 					@click="saveAndClose"
 					:disabled="!canSave"
@@ -18,6 +19,7 @@
 				<EventEmittingButton
 					:message="$messages.get( $messages.KEYS.CANCEL )"
 					type="cancel"
+					size="L"
 					:squary="true"
 					@click="cancel"
 				/>

@@ -5,6 +5,7 @@ function shallowMountWithProps( props = {} ): any {
 	return shallowMount( EventEmittingButton, {
 		propsData: {
 			type: 'primaryProgressive',
+			size: 'L',
 			message: 'click me',
 			...props,
 		},

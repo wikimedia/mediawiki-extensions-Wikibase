@@ -9,6 +9,7 @@
 				<EventEmittingButton
 					class="wb-db-bailout-actions__button"
 					type="primaryProgressive"
+					size="M"
 					:message="$messages.get( $messages.KEYS.BAILOUT_SUGGESTION_GO_TO_REPO_BUTTON )"
 					:href="originalHref"
 					:new-tab="true"
@@ -85,7 +86,6 @@ export default class BailoutActions extends Vue {
 
 	&__button {
 		margin-top: $base-spacing-unit;
-		font-size: $font-size-normal;
 	}
 }
 </style>
