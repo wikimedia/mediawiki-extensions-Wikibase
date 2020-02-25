@@ -60,6 +60,24 @@
 		);
 	} );
 
+	QUnit.test( 'Test request parameters that must be sent to the API', function ( assert ) {
+		var mockTerm = 'someTerm',
+			mockLanguage = 'someLanguage',
+			$entitySelector = newTestEntitySelector( { language: mockLanguage } ),
+			entitySelector = $entitySelector.data( 'entityselector' ),
+			expectedParameters = {
+				action: 'wbsearchentities',
+				search: mockTerm,
+				format: 'json',
+				language: mockLanguage,
+				uselang: mockLanguage,
+				type: 'item',
+				errorformat: 'plaintext'
+			};
+
+		assert.deepEqual( entitySelector._getSearchApiParameters( mockTerm ), expectedParameters );
+	} );
+
 	QUnit.test( 'Indicate unrecognized input', function ( assert ) {
 		var $entitySelector = newTestEntitySelector();
 		$entitySelector.data( 'entityselector' );
