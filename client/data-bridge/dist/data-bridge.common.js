@@ -14207,7 +14207,7 @@ function (_Getters) {
   }, {
     key: "targetReferences",
     get: function get() {
-      if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      if (this.state.applicationStatus === definitions_ApplicationStatus.INITIALIZING) {
         return [];
       }
 
@@ -14219,7 +14219,7 @@ function (_Getters) {
   }, {
     key: "isTargetValueModified",
     get: function get() {
-      if (this.state.applicationStatus !== definitions_ApplicationStatus.READY) {
+      if (this.state.applicationStatus === definitions_ApplicationStatus.INITIALIZING) {
         return false;
       }
 
