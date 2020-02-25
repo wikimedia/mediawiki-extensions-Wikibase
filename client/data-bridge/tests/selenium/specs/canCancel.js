@@ -33,17 +33,6 @@ describe( 'App', () => {
 		DataBridgePage.openBridgeOnPage( title );
 	} );
 
-	it( 'closes on Escape-key event', () => {
-		browser.waitUntil(
-			() => {
-				browser.keys( 'Escape' );
-				return !DataBridgePage.app.isExisting();
-			},
-			undefined,
-			'App didn\'t close after push ESC key'
-		);
-	} );
-
 	it( 'closes on clicking the cancel button', () => {
 		browser.waitUntil( () => DataBridgePage.cancelButton.isClickable() );
 		DataBridgePage.cancelButton.click();

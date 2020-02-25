@@ -80,6 +80,9 @@ describe( 'prepareContainer', () => {
 
 		const myDialog = prepareContainer( OO, $, APP_DOM_CONTAINER_ID );
 
+		expect( ( myDialog.constructor as any ).static.name ).toBe( 'data-bridge' );
+		expect( ( myDialog.constructor as any ).static.escapable ).toBeFalsy();
+
 		expect( panelLayoutConstructor )
 			.toHaveBeenCalledWith( { padded: false, expanded: false } );
 		expect( panelLayout.$element.append )
