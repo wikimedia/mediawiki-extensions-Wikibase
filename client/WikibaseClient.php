@@ -56,11 +56,6 @@ define( 'WBC_VERSION', '0.5 alpha' );
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client-wip.json' );
 
-// Needs to be 1.31c because version_compare() works in confusing ways.
-if ( version_compare( $GLOBALS['wgVersion'], '1.31c', '<' ) ) {
-	die( "<b>Error:</b> Wikibase requires MediaWiki 1.31 or above.\n" );
-}
-
 // Sub-extensions needed by WikibaseClient
 require_once __DIR__ . '/../lib/WikibaseLib.php';
 
