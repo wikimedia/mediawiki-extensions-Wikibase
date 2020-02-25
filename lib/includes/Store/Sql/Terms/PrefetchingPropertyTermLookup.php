@@ -96,16 +96,25 @@ class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements Pref
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PrefetchingPropertyTermLookup_prefetchTerms'
 		);
-		$result = $this->termInLangIdsResolver->resolveTermsViaJoin(
-			'wbt_property_terms',
-			'wbpt_term_in_lang_id',
-			'wbpt_property_id',
-			[ 'wbpt_property_id' => array_keys( $propertyIdsToFetch ) ],
-			$termTypes,
-			$languageCodes
-		);
+
+		// Fetch up to 20 (as suggested by the DBA) entities each time:
+		// https://phabricator.wikimedia.org/T246159#5919892
+		// Also deduplicating to reduce the network and sorting to utilize indexes
+		ksort( $propertyIdsToFetch );
+		$propertyIdBatches = array_chunk( array_unique( array_keys( $propertyIdsToFetch ) ), 20 );
+
+		foreach ( $propertyIdBatches as $propertyIdBatch ) {
+			$result = $this->termInLangIdsResolver->resolveTermsViaJoin(
+				'wbt_property_terms',
+				'wbpt_term_in_lang_id',
+				'wbpt_property_id',
+				[ 'wbpt_property_id' => $propertyIdBatch ],
+				$termTypes,
+				$languageCodes
+			);
+			$this->terms = array_replace_recursive( $this->terms, $result );
+		}
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
-		$this->terms = array_replace_recursive( $this->terms, $result );
 	}
 
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
