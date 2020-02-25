@@ -246,6 +246,7 @@
 				action: 'wbsearchentities',
 				search: term,
 				format: 'json',
+				errorformat: 'plaintext',
 				language: this.options.language,
 				uselang: this.options.language,
 				type: this.options.type
