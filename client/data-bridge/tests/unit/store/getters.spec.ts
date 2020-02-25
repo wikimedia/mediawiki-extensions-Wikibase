@@ -39,7 +39,7 @@ describe( 'root/getters', () => {
 
 	describe( 'isTargetValueModified', () => {
 
-		it( 'returns false if the application is not ready', () => {
+		it( 'returns false if the application is still initializing', () => {
 			const actualTargetStatement = {
 				type: 'statement',
 				id: 'opaque statement ID',
@@ -249,7 +249,7 @@ describe( 'root/getters', () => {
 			expect( getters.targetReferences ).toStrictEqual( [] );
 		} );
 
-		it( 'returns an empty array, if the application is not ready', () => {
+		it( 'returns an empty array, if the application is still initializing', () => {
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.INITIALIZING,

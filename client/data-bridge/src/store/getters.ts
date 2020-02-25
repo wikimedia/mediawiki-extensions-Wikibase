@@ -32,7 +32,7 @@ export class RootGetters extends Getters<Application> {
 	}
 
 	public get targetReferences(): Reference[] {
-		if ( this.state.applicationStatus !== Status.READY ) {
+		if ( this.state.applicationStatus === Status.INITIALIZING ) {
 			return [];
 		}
 
@@ -44,7 +44,7 @@ export class RootGetters extends Getters<Application> {
 	}
 
 	public get isTargetValueModified(): boolean {
-		if ( this.state.applicationStatus !== Status.READY ) {
+		if ( this.state.applicationStatus === Status.INITIALIZING ) {
 			return false;
 		}
 
