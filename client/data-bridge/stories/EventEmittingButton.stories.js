@@ -55,4 +55,12 @@ storiesOf( 'EventEmittingButton', module )
 			message="disabled primaryProgressive"
 			:disabled="true"
 		/>`,
+	} ) )
+	.add( 'cancel disabled', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="cancel"
+			message="disabled cancel"
+			:disabled="true"
+		/>`,
 	} ) );
