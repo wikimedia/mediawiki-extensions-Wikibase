@@ -8,13 +8,14 @@ A summary is provided below, you can always find the list of libraries in the [c
 
 These libraries are developed outside the Wikibase.git repo so that they can easily be consumed by other projects.
 
-* data-values - All libs have their source in the [DataValues Github org](https://github.com/DataValues) (expect one)
+* data-values - All libs have their source in the [DataValues Github org](https://github.com/DataValues) (except two)
   * [data-values](https://packagist.org/packages/data-values/data-values)
   * [common](https://packagist.org/packages/data-values/common)
-  * [geo](https://packagist.org/packages/data-values/geo)
   * [interfaces](https://packagist.org/packages/data-values/interfaces)
-  * [time](https://packagist.org/packages/data-values/time) (source is in [wmde Github org](https://github.com/wmde))
   * [serialization](https://packagist.org/packages/data-values/serialization)
+  * [geo](https://packagist.org/packages/data-values/geo)
+  * [time](https://packagist.org/packages/data-values/time) (source is in [wmde Github org](https://github.com/wmde))
+  * [number](https://packagist.org/packages/data-values/number) (source is in [wmde Github org](https://github.com/wmde))
 * wikibase - All libs have their source in the wmde Github org
   * [data-model](https://github.com/wmde/WikibaseDataModel)
   * [data-serialization](https://github.com/wmde/WikibaseDataModelSerialization)
