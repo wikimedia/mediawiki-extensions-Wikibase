@@ -20,7 +20,6 @@ These libraries are developed outside the Wikibase.git repo so that they can eas
   * [data-serialization](https://github.com/wmde/WikibaseDataModelSerialization)
   * [internal-serialization](https://github.com/wmde/WikibaseInternalSerialization)
   * [data-model-services](https://github.com/wmde/WikibaseDataModelServices)
-  * [term-store](https://github.com/wmde/wikibase-term-store)
 * [diff/diff](https://github.com/wmde/Diff) - WMDE Github org
 * [wikimedia/purtle](https://github.com/wikimedia/purtle) - Wikimedia Github org
 
