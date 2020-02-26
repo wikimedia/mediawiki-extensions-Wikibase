@@ -121,7 +121,6 @@ use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\Store\ByIdDispatchingItemTermStoreWriter;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
-use Wikibase\Lib\Store\MultiItemTermStoreWriter;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
@@ -1867,48 +1866,6 @@ class WikibaseRepo {
 		}
 
 		return $propertySource;
-	}
-
-	public function getItemTermStoreWriter(): ItemTermStoreWriter {
-		$itemTermsMigrationStages = $this->settings->getSetting(
-			'tmpItemTermsMigrationStages' );
-
-		$itemTermStores = [];
-		foreach ( $itemTermsMigrationStages as $maxId => $migrationStage ) {
-			switch ( $migrationStage ) {
-				case MIGRATION_OLD:
-					$itemTermStore = $this->getOldItemTermStoreWriter();
-					break;
-				case MIGRATION_WRITE_BOTH:
-					$itemTermStore = new MultiItemTermStoreWriter( [
-						$this->getOldItemTermStoreWriter(),
-						$this->getNewItemTermStoreWriter(),
-					] );
-					break;
-				case MIGRATION_WRITE_NEW:
-					$itemTermStore = new MultiItemTermStoreWriter( [
-						$this->getNewItemTermStoreWriter(),
-						$this->getOldItemTermStoreWriter(),
-					] );
-					break;
-				case MIGRATION_NEW:
-					$itemTermStore = $this->getNewItemTermStoreWriter();
-					break;
-				default:
-					throw new UnexpectedValueException(
-						'Unknown migration stage: ' . $migrationStage
-					);
-			}
-
-			if ( $maxId === 'max' ) {
-				$maxId = Int32EntityId::MAX;
-			} elseif ( !is_int( $maxId ) ) {
-				throw new Exception( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
-			}
-			$itemTermStores[$maxId] = $itemTermStore;
-		}
-
-		return new ByIdDispatchingItemTermStoreWriter( $itemTermStores );
 	}
 
 	/**
