@@ -7,7 +7,6 @@ This directory collects some documentation of specific topics:
 * @subpage md_docs_topics_constraints
 * @subpage md_docs_topics_datatypes
 * @subpage md_docs_topics_entitytypes
-* @subpage md_docs_topics_extending-entities
 * @subpage md_docs_topics_federation
 * @subpage md_docs_topics_hooks-js
 * @subpage md_docs_topics_hooks-php
