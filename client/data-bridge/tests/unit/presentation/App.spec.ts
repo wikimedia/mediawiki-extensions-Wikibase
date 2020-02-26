@@ -215,6 +215,20 @@ describe( 'App.vue', () => {
 		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
+	it( 'disables the save button while saving', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
+		await localVue.nextTick();
+
+		expect( wrapper.emitted( Events.onSaved ) ).toBeFalsy();
+	} );
+
 	it( 'renders the cancel button using the CANCEL message', () => {
 		const cancelMessage = 'cancel that';
 		const messageGet = jest.fn().mockReturnValue( cancelMessage );
