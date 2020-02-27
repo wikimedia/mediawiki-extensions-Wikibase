@@ -2430,7 +2430,8 @@ class WikibaseRepo {
 				$source,
 				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
 				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
-				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks()
+				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks(),
+				$this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks()
 			);
 		}
 		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );

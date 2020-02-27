@@ -75,6 +75,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ 'strval' ],
 			[],
+			[],
 			[]
 		);
 
@@ -94,6 +95,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[ null ],
 			[],
+			[],
 			[]
 		);
 	}
@@ -110,6 +112,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[],
 			[ null ],
+			[],
 			[]
 		);
 	}
@@ -126,7 +129,8 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			new EntitySource( 'source', 'sourcedb', [], '', '', '', '' ),
 			[],
 			[],
-			[ null ]
+			[ null ],
+			[]
 		);
 	}
 
@@ -157,7 +161,8 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			),
 			[],
 			[],
-			[ 'item' => $customItemLookupCallback ]
+			[ 'item' => $customItemLookupCallback ],
+			[]
 		);
 
 		$lookup = $services->getPrefetchingTermLookup();
@@ -174,6 +179,7 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockNameTableStore(),
 			DataAccessSettingsFactory::anySettings(),
 			new EntitySource( 'source', 'sourcedb', [ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ], '', '', '', '' ),
+			[],
 			[],
 			[],
 			[]
