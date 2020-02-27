@@ -71,13 +71,13 @@ export default class BailoutActions extends Vue {
 	&__heading {
 		margin-bottom: $heading-margin-bottom;
 
-		@include body-S-bold();
+		@include body-responsive-bold();
 	}
 
 	&__suggestion {
 		margin-bottom: $margin-between-suggestions;
 
-		@include body-S();
+		@include body-responsive();
 
 		&:last-child {
 			margin-bottom: 0;

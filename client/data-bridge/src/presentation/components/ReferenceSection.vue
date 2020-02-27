@@ -58,7 +58,7 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 	&__listItem {
 		padding: 10px 14px 10px 0;
 
-		@include body-S();
+		@include body-responsive();
 	}
 }
 </style>

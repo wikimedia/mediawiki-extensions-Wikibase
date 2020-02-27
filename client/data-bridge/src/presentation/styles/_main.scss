@@ -3,8 +3,10 @@
 @import './mixins/_hyphens';
 @import './mixins/_transitions';
 @import './mixins/_h5';
-@import './mixins/bodyS';
-@import './mixins/bodySbold';
+@import './mixins/_bodyS';
+@import './mixins/_bodyM';
+@import './mixins/_bodyResponsive';
+@import './mixins/_bodyResponsiveBold';
 @import './mixins/_marginInputComponent';
 @import './mixins/_inputFieldBase';
 @import './mixins/_inputFieldStandalone';

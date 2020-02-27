@@ -268,7 +268,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 	margin: 0 $margin-center-column-side;
 
 	&__heading {
-		@include body-S();
+		@include body-responsive();
 	}
 
 	&__info {

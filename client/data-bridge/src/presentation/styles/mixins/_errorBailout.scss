@@ -6,10 +6,10 @@
 	&__head {
 		margin-bottom: $base-spacing-unit;
 
-		@include body-S-bold();
+		@include body-responsive-bold();
 	}
 
 	&__body {
-		@include body-S();
+		@include body-responsive();
 	}
 }

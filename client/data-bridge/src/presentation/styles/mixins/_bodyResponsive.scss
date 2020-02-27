@@ -1,0 +1,7 @@
+@mixin body-responsive() {
+	@include body-S();
+
+	@media ( max-width: $breakpoint ) {
+		@include body-M();
+	}
+}

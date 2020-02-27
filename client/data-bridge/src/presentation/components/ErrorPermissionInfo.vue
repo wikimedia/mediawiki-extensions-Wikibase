@@ -74,7 +74,7 @@ export default class ErrorPermissionInfo extends Vue {
 	padding-left: 2em;
 	background: $svg-info no-repeat top left;
 
-	@include body-S();
+	@include body-responsive();
 
 	&__header,
 	p,
