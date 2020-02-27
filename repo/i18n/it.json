@@ -22,7 +22,8 @@
 			"Anto",
 			"Ontsed",
 			"S4b1nuz E.656",
-			"Sarah Bernabei"
+			"Sarah Bernabei",
+			"Albe Albe460"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -83,7 +84,7 @@
 	"wikibase-label-input-help-message": "Inserisci l'etichetta di questa entità in $1.",
 	"wikibase-entitytermsview-input-help-message": "Inserisci l'etichetta di questa entità, una breve descrizione e gli alias nelle varie lingue.",
 	"wikibase-statementsection-statements": "Dichiarazioni",
-	"wikibase-statementsection-identifiers": "Identificativi",
+	"wikibase-statementsection-identifiers": "Identificatori",
 	"wikibase-sitelinks": "Collegamenti al sito",
 	"wikibase-sitelinkgroupview-input-help-message": "Aggiungi un collegamento al sito specificando un sito ed una pagina del sito, modifica o rimuovi i collegamenti ai siti esistenti.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|sito|siti}}",
