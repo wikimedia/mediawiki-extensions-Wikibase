@@ -11,7 +11,7 @@
 					size="L"
 					:squary="true"
 					@click="saveAndClose"
-					:disabled="!canSave"
+					:disabled="!canStartSaving"
 					v-if="!hasError"
 				/>
 			</template>
@@ -88,8 +88,8 @@ export default class App extends mixins( StateMixin ) {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
 	}
 
-	public get canSave(): boolean {
-		return this.rootModule.getters.canSave;
+	public get canStartSaving(): boolean {
+		return this.rootModule.getters.canStartSaving;
 	}
 
 	public get publishOrSave(): string {

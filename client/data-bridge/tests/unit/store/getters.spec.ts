@@ -157,17 +157,20 @@ describe( 'root/getters', () => {
 		} );
 	} );
 
-	describe( 'canSave', () => {
+	describe( 'canStartSaving', () => {
 
 		it.each( [
-			[ false, false, null ],
-			[ false, true, null ],
-			[ false, false, EditDecision.REPLACE ],
-			[ true, true, EditDecision.REPLACE ],
-			[ true, true, EditDecision.UPDATE ],
+			[ false, false, null, ApplicationStatus.READY ],
+			[ false, true, null, ApplicationStatus.READY ],
+			[ false, false, EditDecision.REPLACE, ApplicationStatus.READY ],
+			[ true, true, EditDecision.REPLACE, ApplicationStatus.READY ],
+			[ false, true, EditDecision.UPDATE, ApplicationStatus.SAVING ],
 		] )(
 			'returns %p with isTargetValueModified=%p and editDecision=%p',
-			( expected: boolean, isTargetValueModified: boolean, editDecision: EditDecision|null ) => {
+			( expected: boolean,
+				isTargetValueModified: boolean,
+				editDecision: EditDecision|null,
+				applicationStatus: ApplicationStatus ) => {
 				const applicationState = newApplicationState( { editDecision } );
 
 				// @ts-ignore
@@ -175,10 +178,11 @@ describe( 'root/getters', () => {
 					state: applicationState,
 					getters: {
 						isTargetValueModified,
+						applicationStatus,
 					},
 				} );
 
-				expect( getters.canSave ).toBe( expected );
+				expect( getters.canStartSaving ).toBe( expected );
 			},
 		);
 

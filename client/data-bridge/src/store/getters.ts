@@ -59,9 +59,10 @@ export class RootGetters extends Getters<Application> {
 		);
 	}
 
-	public get canSave(): boolean {
+	public get canStartSaving(): boolean {
 		return this.state.editDecision !== null &&
-			this.getters.isTargetValueModified;
+			this.getters.isTargetValueModified &&
+			this.getters.applicationStatus === ApplicationStatus.READY;
 	}
 
 	public get applicationStatus(): ApplicationStatus {
