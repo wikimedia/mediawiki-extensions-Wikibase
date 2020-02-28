@@ -44,17 +44,6 @@ This service container then started being used in Wikibase by the data-access co
 NOTE: In recent work it was realized that perhaps some services provided by [GenericServices] are not that generic
 and should also be provided PerRepository. This is yet to be investigated fully in https://phabricator.wikimedia.org/T205268
 
-Per-repository and multi-repository services are defined using wiring files.
-They are specified using the following global variables (each being an array of file paths).
-Extensions can register their custom services by adding their files to those globals in their [extension.json file].
-
- - [wgWikibaseMultiRepositoryServiceWiringFiles]
- - [wgWikibasePerRepositoryServiceWiringFiles]
-
-The defaults are:
- - MultiRepositoryServiceWiring.php
- - PerRepositoryServiceWiring.php
-
 ### SingleEntitySource & MultipleEntitySource Services (2019) {#services_section_entitysource}
 
 In 2019 to implement database based [federation] for Wikimedia Commons more service containers were introduced with the plan of removing the previous set.
@@ -81,8 +70,6 @@ Wiring for EntitySource based service containers is created from the [EntitySour
 [PerRepositoryServiceContainerFactory]: @ref Wikibase::DataAccess::PerRepositoryServiceContainerFactory
 [MultipleEntitySourceServices]: @ref Wikibase::DataAccess::MultipleEntitySourceServices
 [SingleEntitySourceServices]: @ref Wikibase::DataAccess::SingleEntitySourceServices
-[wgWikibaseMultiRepositoryServiceWiringFiles]: @ref wgWikibaseMultiRepositoryServiceWiringFiles
-[wgWikibasePerRepositoryServiceWiringFiles]: @ref wgWikibasePerRepositoryServiceWiringFiles
 [extension.json file]: https://www.mediawiki.org/wiki/Manual:Extension_registration
 [useEntitySourceBasedFederation]: @ref common_useEntitySourceBasedFederation
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo

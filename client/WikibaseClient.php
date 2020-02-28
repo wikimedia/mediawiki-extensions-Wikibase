@@ -73,8 +73,6 @@ call_user_func( function() {
 		$wgSpecialPages,
 		$wgTrackingCategories,
 		$wgWBClientDataTypes,
-		$wgWikibaseMultiRepositoryServiceWiringFiles,
-		$wgWikibasePerRepositoryServiceWiringFiles,
 		$wgWBClientSettings;
 
 	// Registry and definition of data types

@@ -23,13 +23,3 @@ Definition of data types for use with Wikibase Repo, defined by Wikibase itself 
 #### wgWBClientDataTypes
 
 Definition of data types for use with Wikibase Client.
-
-#### wgWikibaseMultiRepositoryServiceWiringFiles {#wgWikibaseMultiRepositoryServiceWiringFiles}
-
- - Array of file paths containing definitions of multi-repository services.
- - By default MultiRepositoryServiceWiring.php is used.
-
-#### wgWikibasePerRepositoryServiceWiringFiles {#wgWikibasePerRepositoryServiceWiringFiles}
-
- - Array of file paths containing definitions of per-repository services.
- - By default PerRepositoryServiceWiring.php is used.
