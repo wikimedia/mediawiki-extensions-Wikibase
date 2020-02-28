@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Usage;
 
-use JobRunner;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
@@ -97,9 +97,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	}
 
 	private function runJobs() {
-		$runner = new JobRunner();
-
-		$runner->run( [
+		MediaWikiServices::getInstance()->getJobRunner()->run( [
 			'type'     => 'refreshLinks',
 			'maxJobs'  => false,
 			'maxTime'  => false,
