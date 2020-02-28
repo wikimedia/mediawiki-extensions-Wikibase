@@ -3,16 +3,6 @@ const assert = require( 'assert' ),
 	Page = require( 'wdio-mediawiki/Page' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
-/**
- * TODO use LoginPage.loginAdmin() compatible w/ wdio 5 from wdio-mediawiki v1.0.0+
- */
-function loginAdmin() {
-	LoginPage.open();
-	$( '#wpName1' ).setValue( browser.config.mwUser );
-	$( '#wpPassword1' ).setValue( browser.config.mwPwd );
-	$( '#wpLoginAttempt' ).click(); // eslint-disable-line no-jquery/no-event-shorthand
-}
-
 describe( 'blocked user cannot use', function () {
 
 	const bot = new MWBot( {
@@ -27,7 +17,7 @@ describe( 'blocked user cannot use', function () {
 	} );
 
 	before( function loginUser() {
-		loginAdmin();
+		LoginPage.loginAdmin();
 	} );
 
 	beforeEach( function blockUser() {
