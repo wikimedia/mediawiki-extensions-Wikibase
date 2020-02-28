@@ -11,6 +11,7 @@
 	"wikibase-deletedentity-property": "Deleted Property",
 	"wikibase-deletedentity-query": "Deleted query",
 	"wikibase-error-unexpected": "Error: $1.",
+	"wikibase-error-unknown": "An error has occured.",
 	"wikibase-error-save-generic": "Could not save due to an error.",
 	"wikibase-error-remove-generic": "Could not remove due to an error.",
 	"wikibase-error-save-connection": "Could not save due to a connection error. Please check your Internet connection.",

@@ -216,6 +216,7 @@ return call_user_func( function() {
 				'wikibase-linkitem-not-loggedin-title',
 				'wikibase-linkitem-not-loggedin',
 				'wikibase-linkitem-failure',
+				'wikibase-linkitem-failed-modify',
 				'wikibase-replicationnote',
 				'wikibase-sitelinks-sitename-columnheading',
 				'wikibase-sitelinks-link-columnheading'

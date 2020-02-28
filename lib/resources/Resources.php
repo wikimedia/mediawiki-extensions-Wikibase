@@ -90,6 +90,7 @@ return call_user_func( function() {
 			],
 			'messages' => [
 				'wikibase-error-unexpected',
+				'wikibase-error-unknown',
 				'wikibase-error-save-generic',
 				'wikibase-error-remove-generic',
 				'wikibase-error-save-timeout',
