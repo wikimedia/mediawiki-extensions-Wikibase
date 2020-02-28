@@ -68,6 +68,10 @@ export default class BailoutActions extends Vue {
 	$margin-between-suggestions: 2 * $base-spacing-unit-fixed;
 	margin: $margin-to-error-message $margin-center-column-side 0;
 
+	@media ( max-width: $breakpoint ) {
+		margin: $margin-to-error-message 0 0;
+	}
+
 	&__heading {
 		margin-bottom: $heading-margin-bottom;
 

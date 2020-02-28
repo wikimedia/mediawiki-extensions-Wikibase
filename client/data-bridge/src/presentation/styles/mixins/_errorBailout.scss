@@ -1,6 +1,10 @@
 @mixin errorBailout() {
 	&__message {
 		margin: 0 $margin-center-column-side;
+
+		@media ( max-width: $breakpoint ) {
+			margin: 0;
+		}
 	}
 
 	&__head {
