@@ -13802,16 +13802,16 @@ var entityModule = new Module({
   mutations: mutations_EntityMutations,
   actions: actions_EntityActions
 });
-// CONCATENATED MODULE: ./src/definitions/storeActionErrors/SnakActionErrors.ts
-var SnakActionErrors;
+// CONCATENATED MODULE: ./src/change-op/statement-mutation/StatementMutationError.ts
+var StatementMutationError;
 
-(function (SnakActionErrors) {
-  SnakActionErrors["NO_SNAK_FOUND"] = "property not found";
-  SnakActionErrors["WRONG_PAYLOAD_TYPE"] = "payload type does not match";
-  SnakActionErrors["WRONG_PAYLOAD_VALUE_TYPE"] = "payload value is not a string";
-})(SnakActionErrors || (SnakActionErrors = {}));
+(function (StatementMutationError) {
+  StatementMutationError["NO_SNAK_FOUND"] = "snak not found";
+  StatementMutationError["WRONG_PAYLOAD_TYPE"] = "payload type does not match";
+  StatementMutationError["WRONG_PAYLOAD_VALUE_TYPE"] = "payload value is not a string";
+})(StatementMutationError || (StatementMutationError = {}));
 
-/* harmony default export */ var storeActionErrors_SnakActionErrors = (SnakActionErrors);
+/* harmony default export */ var statement_mutation_StatementMutationError = (StatementMutationError);
 // CONCATENATED MODULE: ./src/change-op/statement-mutation/strategies/ReplaceMutationStrategy.ts
 
 
@@ -13831,15 +13831,15 @@ function () {
       var snak = path.resolveSnakInStatement(state);
 
       if (snak === null) {
-        throw new Error(storeActionErrors_SnakActionErrors.NO_SNAK_FOUND);
+        throw new Error(statement_mutation_StatementMutationError.NO_SNAK_FOUND);
       }
 
       if (targetValue.type !== 'string') {
-        throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_TYPE);
+        throw new Error(statement_mutation_StatementMutationError.WRONG_PAYLOAD_TYPE);
       }
 
       if (typeof targetValue.value !== 'string') {
-        throw new Error(storeActionErrors_SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE);
+        throw new Error(statement_mutation_StatementMutationError.WRONG_PAYLOAD_VALUE_TYPE);
       }
 
       snak.snaktype = 'value';

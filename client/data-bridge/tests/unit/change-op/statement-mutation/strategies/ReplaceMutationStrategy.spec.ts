@@ -1,5 +1,5 @@
 import ReplaceMutationStrategy from '@/change-op/statement-mutation/strategies/ReplaceMutationStrategy';
-import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
+import StatementMutationError from '@/change-op/statement-mutation/StatementMutationError';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import DataValue from '@/datamodel/DataValue';
 import DataValueType from '@/datamodel/DataValueType';
@@ -21,7 +21,7 @@ describe( 'ReplaceMutationStrategy', () => {
 		const strategy = new ReplaceMutationStrategy();
 		expect( () => {
 			strategy.apply( targetValue, mockSnakPath, mockState );
-		} ).toThrowError( SnakActionErrors.NO_SNAK_FOUND );
+		} ).toThrowError( StatementMutationError.NO_SNAK_FOUND );
 		expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 	} );
 
@@ -43,7 +43,7 @@ describe( 'ReplaceMutationStrategy', () => {
 		const strategy = new ReplaceMutationStrategy();
 		expect( () => {
 			strategy.apply( targetValue, mockSnakPath, mockState );
-		} ).toThrowError( SnakActionErrors.WRONG_PAYLOAD_TYPE );
+		} ).toThrowError( StatementMutationError.WRONG_PAYLOAD_TYPE );
 		expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 	} );
 
@@ -65,7 +65,7 @@ describe( 'ReplaceMutationStrategy', () => {
 		const strategy = new ReplaceMutationStrategy();
 		expect( () => {
 			strategy.apply( targetValue, mockSnakPath, mockState );
-		} ).toThrowError( SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE );
+		} ).toThrowError( StatementMutationError.WRONG_PAYLOAD_VALUE_TYPE );
 	} );
 
 	it( 'sets the snaktype and datavalue', () => {
