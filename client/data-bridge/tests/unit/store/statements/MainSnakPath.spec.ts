@@ -4,6 +4,27 @@ import Snak from '@/datamodel/Snak';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 
 describe( 'resolveMainSnak', () => {
+	it( 'resolves the path to the statement group', () => {
+		const statements: Statement[] = [ {
+			type: 'statement',
+			id: 'Q60$6f832804-4c3f-6185-38bd-ca00b8517765',
+			rank: 'normal',
+			mainsnak: {
+				property: 'P42',
+				snaktype: 'somevalue',
+				datatype: 'url',
+			},
+		} ];
+
+		const state = newStatementState( { Q42: {
+			P42: statements,
+		} } );
+
+		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );
+
+		expect( mainSnakPath.resolveStatementGroup( state ) ).toStrictEqual( statements );
+	} );
+
 	it( 'resolve the path to the mainsnak of a statement', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
@@ -46,8 +67,8 @@ describe( 'resolveMainSnak', () => {
 		expect( mainSnakPath.resolveStatement( state ) ).toStrictEqual( statement );
 	} );
 
-	const methods: Method[] = [ 'resolveStatement', 'resolveSnakInStatement' ];
-	type Method = 'resolveStatement'|'resolveSnakInStatement';
+	const methods: Method[] = [ 'resolveStatement', 'resolveSnakInStatement', 'resolveStatementGroup' ];
+	type Method = 'resolveStatement'|'resolveSnakInStatement'|'resolveStatementGroup';
 
 	it.each( methods )( '%s returns null if there is no statement map', ( method: Method ) => {
 		const mainSnakPath = new MainSnakPath( 'Q42', 'P42', 0 );
@@ -102,7 +123,9 @@ describe( 'resolveMainSnak', () => {
 		).toBeNull();
 	} );
 
-	it.each( methods )( '%s returns null if there is no property with the given index', ( method: Method ) => {
+	it.each(
+		[ 'resolveStatement', 'resolveSnakInStatement' ] as Method[],
+	)( '%s returns null if there is no property with the given index', ( method ) => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',

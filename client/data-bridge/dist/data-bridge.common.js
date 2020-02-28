@@ -12841,18 +12841,25 @@ function () {
   }
 
   _createClass(MainSnakPath, [{
+    key: "resolveStatementGroup",
+    value: function resolveStatementGroup(state) {
+      var _ref, _state$this$entityId;
+
+      return (_ref = state === null || state === void 0 ? void 0 : (_state$this$entityId = state[this.entityId]) === null || _state$this$entityId === void 0 ? void 0 : _state$this$entityId[this.propertyId]) !== null && _ref !== void 0 ? _ref : null;
+    }
+  }, {
     key: "resolveStatement",
     value: function resolveStatement(state) {
-      var _ref, _state$this$entityId, _state$this$entityId$;
+      var _ref2, _this$resolveStatemen;
 
-      return (_ref = state === null || state === void 0 ? void 0 : (_state$this$entityId = state[this.entityId]) === null || _state$this$entityId === void 0 ? void 0 : (_state$this$entityId$ = _state$this$entityId[this.propertyId]) === null || _state$this$entityId$ === void 0 ? void 0 : _state$this$entityId$[this.index]) !== null && _ref !== void 0 ? _ref : null;
+      return (_ref2 = (_this$resolveStatemen = this.resolveStatementGroup(state)) === null || _this$resolveStatemen === void 0 ? void 0 : _this$resolveStatemen[this.index]) !== null && _ref2 !== void 0 ? _ref2 : null;
     }
   }, {
     key: "resolveSnakInStatement",
     value: function resolveSnakInStatement(state) {
-      var _ref2, _this$resolveStatemen;
+      var _ref3, _this$resolveStatemen2;
 
-      return (_ref2 = (_this$resolveStatemen = this.resolveStatement(state)) === null || _this$resolveStatemen === void 0 ? void 0 : _this$resolveStatemen.mainsnak) !== null && _ref2 !== void 0 ? _ref2 : null;
+      return (_ref3 = (_this$resolveStatemen2 = this.resolveStatement(state)) === null || _this$resolveStatemen2 === void 0 ? void 0 : _this$resolveStatemen2.mainsnak) !== null && _ref3 !== void 0 ? _ref3 : null;
     }
   }]);
 
@@ -13635,17 +13642,18 @@ function (_Getters) {
     get: function get() {
       var _this2 = this;
 
-      return function (entityId, propertyId) {
-        return _this2.state[entityId] !== undefined && _this2.state[entityId][propertyId] !== undefined;
+      return function (pathToStatementGroup) {
+        return pathToStatementGroup.resolveStatementGroup(_this2.state) !== null;
       };
     }
   }, {
-    key: "isAmbiguous",
+    key: "isStatementGroupAmbiguous",
     get: function get() {
       var _this3 = this;
 
-      return function (entityId, propertyId) {
-        return _this3.state[entityId] !== undefined && _this3.state[entityId][propertyId] !== undefined && _this3.state[entityId][propertyId].length > 1;
+      return function (pathToStatementGroup) {
+        var statementGroup = pathToStatementGroup.resolveStatementGroup(_this3.state);
+        return statementGroup !== null && statementGroup.length > 1;
       };
     }
   }, {
@@ -14015,8 +14023,7 @@ function (_Actions) {
               case 4:
                 if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
                   this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  state[NS_STATEMENTS][path.entityId][path.propertyId][path.index] // TODO use getter
-                  .mainsnak.datavalue);
+                  path.resolveSnakInStatement(state[NS_STATEMENTS]).datavalue);
                   this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
                 }
 
@@ -14047,7 +14054,7 @@ function (_Actions) {
   }, {
     key: "validateEntityState",
     value: function validateEntityState(path) {
-      if (!this.statementModule.getters.propertyExists(path.entityId, path.propertyId)) {
+      if (!this.statementModule.getters.propertyExists(path)) {
         this.commit('addApplicationErrors', [{
           type: ErrorTypes.INVALID_ENTITY_STATE_ERROR
         }]);
@@ -14059,7 +14066,7 @@ function (_Actions) {
   }, {
     key: "validateBridgeApplicability",
     value: function validateBridgeApplicability(path) {
-      if (this.statementModule.getters.isAmbiguous(path.entityId, path.propertyId)) {
+      if (this.statementModule.getters.isStatementGroupAmbiguous(path)) {
         return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
         }]);

@@ -8,6 +8,7 @@ import DataValue from '@/datamodel/DataValue';
 import { SnakType } from '@/datamodel/Snak';
 import DataValueType from '@/datamodel/DataValueType';
 import { PathToSnak } from '@/store/statements/PathToSnak';
+import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';
 
 export class StatementGetters extends Getters<StatementState> {
 	public get containsEntity() {
@@ -18,22 +19,18 @@ export class StatementGetters extends Getters<StatementState> {
 
 	public get propertyExists() {
 		return (
-			entityId: EntityId,
-			propertyId: EntityId,
+			pathToStatementGroup: PathToStatementGroup,
 		): boolean => {
-			return this.state[ entityId ] !== undefined
-				&& this.state[ entityId ][ propertyId ] !== undefined;
+			return pathToStatementGroup.resolveStatementGroup( this.state ) !== null;
 		};
 	}
 
-	public get isAmbiguous() {
+	public get isStatementGroupAmbiguous() {
 		return (
-			entityId: EntityId,
-			propertyId: EntityId,
+			pathToStatementGroup: PathToStatementGroup,
 		): boolean => {
-			return this.state[ entityId ] !== undefined
-				&& this.state[ entityId ][ propertyId ] !== undefined
-				&& this.state[ entityId ][ propertyId ].length > 1;
+			const statementGroup = pathToStatementGroup.resolveStatementGroup( this.state );
+			return statementGroup !== null && statementGroup.length > 1;
 		};
 	}
 

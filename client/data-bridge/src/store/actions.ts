@@ -109,8 +109,7 @@ RootActions
 			this.commit(
 				'setTargetValue',
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				state[ NS_STATEMENTS ][ path.entityId ][ path.propertyId ][ path.index ] // TODO use getter
-					.mainsnak.datavalue!,
+				path.resolveSnakInStatement( state[ NS_STATEMENTS ] )!.datavalue!,
 			);
 
 			this.commit(
@@ -132,7 +131,7 @@ RootActions
 	public validateEntityState(
 		path: MainSnakPath,
 	): Promise<void> {
-		if ( !this.statementModule.getters.propertyExists( path.entityId, path.propertyId ) ) {
+		if ( !this.statementModule.getters.propertyExists( path ) ) {
 			this.commit( 'addApplicationErrors', [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ] );
 			return Promise.resolve();
 		}
@@ -143,7 +142,7 @@ RootActions
 	public validateBridgeApplicability(
 		path: MainSnakPath,
 	): Promise<void> {
-		if ( this.statementModule.getters.isAmbiguous( path.entityId, path.propertyId ) ) {
+		if ( this.statementModule.getters.isStatementGroupAmbiguous( path ) ) {
 			return this.dispatch( 'addError', [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
 		}
 
