@@ -420,5 +420,7 @@
 	"wikibase-outdated-client-script": "ページをスーパーリロードしてください",
 	"wikibase-shortcopyrightwarning-heading": "ライセンスの帰属",
 	"wikibase-entity-save-error-heading": "エラーが発生しました",
-	"wikibase-entity-save-error-message": "あなたの変更は公開されませんでした。もう一度「公開」ボタンをクリックしてみてください。"
+	"wikibase-entity-save-error-message": "あなたの変更は公開されませんでした。もう一度「公開」ボタンをクリックしてみてください。",
+	"wikibase-tainted-ref-popper-help-link-title": "この制約のヘルプページ",
+	"wikibase-tainted-ref-popper-help-link-text": "ヘルプ"
 }
