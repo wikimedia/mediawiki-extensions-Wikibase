@@ -6,16 +6,13 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import AppInformation from '@/definitions/AppInformation';
 import ServiceContainer from '@/services/ServiceContainer';
 import { createStore } from '@/store';
-import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
+import { NS_ENTITY } from '@/store/namespaces';
 import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import DataValue from '@/datamodel/DataValue';
 import clone from '@/store/clone';
-import { MainSnakPath } from '@/store/statements/MainSnakPath';
-import { StatementState } from '@/store/statements';
-import SnakActionErrors from '@/definitions/storeActionErrors/SnakActionErrors';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -441,144 +438,4 @@ describe( 'store/actions', () => {
 			} );
 		} );
 	} );
-
-	describe( 'composed actions', () => {
-		describe( 'applyStringDataValue', () => {
-			it( 'rejects on unknown Entity', async () => {
-				expect.assertions( 1 );
-				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'applyStringDataValue' ),
-					{
-						path: new MainSnakPath(
-							'Q3333333',
-							'P23',
-							0,
-						),
-						value: {
-							type: 'string',
-							value: 'passed teststring',
-						},
-					},
-				) ).rejects.toStrictEqual( Error( SnakActionErrors.NO_SNAK_FOUND ) );
-			} );
-
-			it( 'rejects on unknown Property', async () => {
-				expect.assertions( 1 );
-				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'applyStringDataValue' ),
-					{
-						path: new MainSnakPath(
-							'Q42',
-							'P99999',
-							0,
-						),
-						value: {
-							type: 'string',
-							value: 'passed teststring',
-						},
-					},
-				) ).rejects.toStrictEqual( Error( SnakActionErrors.NO_SNAK_FOUND ) );
-			} );
-
-			it( 'rejects on unknown index on Property', async () => {
-				expect.assertions( 1 );
-				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'applyStringDataValue' ),
-					{
-						path: new MainSnakPath(
-							'Q42',
-							'P31',
-							42,
-						),
-						value: {
-							type: 'string',
-							value: 'passed teststring',
-						},
-					},
-				) ).rejects.toStrictEqual( Error( SnakActionErrors.NO_SNAK_FOUND ) );
-			} );
-
-			it( 'rejects on non string value data types', async () => {
-				expect.assertions( 1 );
-				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'applyStringDataValue' ),
-					{
-						path: new MainSnakPath(
-							'Q42',
-							'P42',
-							0,
-						),
-						value: {
-							type: 'url',
-							value: 'passed teststring',
-						},
-					},
-				) ).rejects.toStrictEqual( Error( SnakActionErrors.WRONG_PAYLOAD_TYPE ) );
-			} );
-
-			it( 'rejects on non string data value', async () => {
-				expect.assertions( 1 );
-				await expect( store.dispatch(
-					action( NS_STATEMENTS, 'applyStringDataValue' ),
-					{
-						path: new MainSnakPath(
-							'Q42',
-							'P42',
-							0,
-						),
-						value: {
-							type: 'string',
-							value: 23,
-						},
-					},
-				) ).rejects.toStrictEqual( Error( SnakActionErrors.WRONG_PAYLOAD_VALUE_TYPE ) );
-			} );
-
-			describe( 'resolves on valid string data values', () => {
-
-				it( 'sets the new data value', () => {
-					const value = {
-						type: 'string',
-						value: 'passed teststring',
-					};
-
-					return store.dispatch(
-						action( NS_STATEMENTS, 'applyStringDataValue' ),
-						{
-							path: new MainSnakPath(
-								'Q42',
-								'P31',
-								0,
-							),
-							value,
-						},
-					).then( ( state: StatementState ) => {
-						expect( state.Q42.P31[ 0 ].mainsnak.datavalue ).toBe( value );
-					} );
-				} );
-
-				it( 'sets the snak type to value', () => {
-					const value = {
-						type: 'string',
-						value: 'passed teststring',
-					};
-
-					return store.dispatch(
-						action( NS_STATEMENTS, 'applyStringDataValue' ),
-						{
-							path: new MainSnakPath(
-								'Q42',
-								'P60',
-								0,
-							),
-							value,
-						},
-					).then( ( state: StatementState ) => {
-						expect( state.Q42.P60[ 0 ].mainsnak.snaktype ).toBe( 'value' );
-					} );
-				} );
-			} );
-		} );
-	} );
-
 } );
