@@ -13833,6 +13833,7 @@ var StatementMutationError;
 
 (function (StatementMutationError) {
   StatementMutationError["NO_SNAK_FOUND"] = "snak not found";
+  StatementMutationError["NO_STATEMENT_GROUP_FOUND"] = "statement group not found";
   StatementMutationError["INCONSISTENT_PAYLOAD_TYPE"] = "targetvalue's datavalue type is different from the snak's datavalue type in the state";
 })(StatementMutationError || (StatementMutationError = {}));
 
@@ -13873,7 +13874,65 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/change-op/statement-mutation/strategies/UpdateMutationStrategy.ts
+
+
+
+
+var UpdateMutationStrategy_UpdateMutationStrategy =
+/*#__PURE__*/
+function () {
+  function UpdateMutationStrategy() {
+    _classCallCheck(this, UpdateMutationStrategy);
+  }
+
+  _createClass(UpdateMutationStrategy, [{
+    key: "apply",
+    value: function apply(targetValue, path, state) {
+      var statementGroup = path.resolveStatementGroup(state);
+      var oldStatement = path.resolveStatement(state);
+
+      if (statementGroup === null) {
+        throw new Error(statement_mutation_StatementMutationError.NO_STATEMENT_GROUP_FOUND);
+      }
+
+      if (oldStatement === null) {
+        throw new Error(statement_mutation_StatementMutationError.NO_SNAK_FOUND);
+      }
+
+      var oldSnak = oldStatement.mainsnak;
+
+      if (oldSnak.datavalue !== undefined && targetValue.type !== oldSnak.datavalue.type) {
+        throw new Error(statement_mutation_StatementMutationError.INCONSISTENT_PAYLOAD_TYPE);
+      }
+
+      oldStatement.rank = 'normal';
+      var newStatement = this.buildNewPreferredStatement(oldSnak, targetValue);
+      statementGroup.push(newStatement);
+      return state;
+    }
+  }, {
+    key: "buildNewPreferredStatement",
+    value: function buildNewPreferredStatement(oldSnak, newDataValue) {
+      return {
+        rank: 'preferred',
+        type: 'statement',
+        mainsnak: {
+          snaktype: 'value',
+          property: oldSnak.property,
+          datatype: oldSnak.datatype,
+          datavalue: newDataValue
+        }
+      };
+    }
+  }]);
+
+  return UpdateMutationStrategy;
+}();
+
+
 // CONCATENATED MODULE: ./src/change-op/statement-mutation/statementMutationFactory.ts
+
 
 
 function statementMutationFactory(strategy) {
@@ -13881,8 +13940,8 @@ function statementMutationFactory(strategy) {
     case definitions_EditDecision.REPLACE:
       return new ReplaceMutationStrategy_ReplaceMutationStrategy();
 
-    default:
-      throw new Error('There is no implementation for the selected mutation strategy: ' + strategy);
+    case definitions_EditDecision.UPDATE:
+      return new UpdateMutationStrategy_UpdateMutationStrategy();
   }
 }
 // CONCATENATED MODULE: ./src/store/actions.ts
