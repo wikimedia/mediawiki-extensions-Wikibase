@@ -20,7 +20,7 @@ class DataBridgePage extends Page {
 
 	static get ROOT_SWITCH() {
 		return {
-			INIT: '.wb-db-init',
+			LOAD: '.wb-db-load',
 			ERROR: '.wb-db-error',
 			BRIDGE: '.wb-db-bridge',
 		};
@@ -104,7 +104,7 @@ class DataBridgePage extends Page {
 
 	get int() {
 		return $(
-			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.INIT}`
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.LOAD}`
 		);
 	}
 

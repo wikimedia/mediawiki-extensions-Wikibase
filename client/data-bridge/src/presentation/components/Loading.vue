@@ -1,10 +1,10 @@
 <template>
-	<div class="wb-db-init">
-		<!-- @slot The content which is being initialized and needs to be hidden until that is complete. -->
+	<div class="wb-db-load">
+		<!-- @slot The content which is being initialized and needs to be hidden until that is complete,
+		or the content which is being saved and needs to be unchangable until the saving is complete -->
 		<slot v-if="ready" />
-		<template v-else>
-			<IndeterminateProgressBar v-if="loadingIsSlow" />
-		</template>
+
+		<IndeterminateProgressBar class="wb-db-load__visibility" v-if="loadingIsSlow" />
 	</div>
 </template>
 
@@ -53,7 +53,7 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 		IndeterminateProgressBar,
 	},
 } )
-export default class Initializing extends Vue {
+export default class Loading extends Vue {
 	/**
 	 * The state (still initializing or "done"). The using component should
 	 * influence this based on the progress of loading what is needed to
@@ -63,7 +63,14 @@ export default class Initializing extends Vue {
 	private readonly isInitializing!: boolean;
 
 	/**
-	 * Number of *milliseconds* before the initializing is considered "slow"
+	 * The state of saving, activated after the "Save changes" button has been clicked.
+	 * The using component should influence this based on the progress of saving.
+	 */
+	@Prop( { required: true } )
+	private readonly isSaving!: boolean;
+
+	/**
+	 * Number of *milliseconds* before the initializing or saving is considered "slow"
 	 * and is illustrated accordingly.
 	 */
 	@Prop( { default: 1000 } )
@@ -77,7 +84,7 @@ export default class Initializing extends Vue {
 	private readonly MINIMUM_TIME_OF_PROGRESS_ANIMATION!: number;
 
 	@Watch( 'isInitializing', { immediate: true } )
-	private onStatusChange( isInitializing: boolean, _oldStatus: boolean ): void {
+	private onInitStatusChange( isInitializing: boolean, _oldStatus: boolean ): void {
 		if ( isInitializing ) {
 			this.showLoading();
 		} else {
@@ -85,7 +92,22 @@ export default class Initializing extends Vue {
 		}
 	}
 
-	public ready = false;
+	@Watch( 'isSaving', { immediate: true } )
+	private onSavingStatusChange( isSaving: boolean, _oldStatus: boolean ): void {
+		if ( isSaving ) {
+			this.showLoading();
+		} else {
+			this.tendTowardsReady();
+		}
+	}
+
+	/**
+	 * This flag, which determines the rendering of the default slot,
+	 * plays a role only in the case of Initializing, where we do not
+	 * have the content which needs to be rendered.
+	 * In the case of Saving we want the content to be visible, just not clickable.
+	 */
+	public ready = !this.isInitializing;
 	public loadingIsSlow = false;
 
 	private trackSlowness?: ReturnType<typeof setTimeout>;
@@ -93,7 +115,7 @@ export default class Initializing extends Vue {
 	private animatedEnough = false;
 
 	private showLoading(): void {
-		this.ready = false;
+		this.ready = !this.isInitializing;
 
 		this.trackSlowness = setTimeout( () => {
 			this.loadingIsSlow = true;
@@ -105,7 +127,7 @@ export default class Initializing extends Vue {
 	}
 
 	private tendTowardsReady(): void {
-		if ( this.isInitializing || this.loadingIsSlow && !this.animatedEnough ) {
+		if ( ( this.isInitializing || this.isSaving ) || this.loadingIsSlow && !this.animatedEnough ) {
 			return;
 		}
 
@@ -127,3 +149,10 @@ export default class Initializing extends Vue {
 	}
 }
 </script>
+<style lang="scss">
+.wb-db-load {
+	&__visibility {
+		z-index: $default-visibility + 1;
+	}
+}
+</style>

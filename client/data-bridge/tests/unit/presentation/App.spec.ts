@@ -14,7 +14,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
-import Initializing from '@/presentation/components/Initializing.vue';
+import Loading from '@/presentation/components/Loading.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
@@ -203,6 +203,18 @@ describe( 'App.vue', () => {
 		expect( wrapper.emitted( Events.onSaved ) ).toBeTruthy();
 	} );
 
+	it( 'adds an overlay over DataBridge during save state', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+
+		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
+	} );
+
 	it( 'renders the cancel button using the CANCEL message', () => {
 		const cancelMessage = 'cancel that';
 		const messageGet = jest.fn().mockReturnValue( cancelMessage );
@@ -262,35 +274,46 @@ describe( 'App.vue', () => {
 		} );
 
 		describe( 'outside of the error scenario', () => {
-			it( 'mounts Initializing & passes DataBridge to it', () => {
+			it( 'mounts Loading & passes DataBridge to it', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
 				} );
 
-				expect( wrapper.find( Initializing ).exists() ).toBe( true );
-				expect( wrapper.find( Initializing ).find( DataBridge ).exists() ).toBe( true );
+				expect( wrapper.find( Loading ).exists() ).toBe( true );
+				expect( wrapper.find( Loading ).find( DataBridge ).exists() ).toBe( true );
 			} );
 
-			it( 'instructs Initializing accordingly if the store is not ready', () => {
+			it( 'instructs Loading accordingly if the store is not ready', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.INITIALIZING );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
 				} );
 
-				expect( wrapper.find( Initializing ).props( 'isInitializing' ) ).toBe( true );
+				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( true );
 			} );
 
-			it( 'instructs Initializing accordingly if the store is ready', () => {
+			it( 'instructs Loading accordingly if the store is attempting saving', () => {
+				store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+
+				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( true );
+			} );
+
+			it( 'instructs Loading accordingly if the store is ready', () => {
 				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
 				const wrapper = shallowMount( App, {
 					store,
 					localVue,
 				} );
 
-				expect( wrapper.find( Initializing ).props( 'isInitializing' ) ).toBe( false );
+				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( false );
+				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( false );
 			} );
 		} );
 

@@ -134,7 +134,7 @@ describe( 'app', () => {
 			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
 			expect( on ).toHaveBeenCalledTimes( 1 );
 			expect( select( '.wb-db-app' ) ).not.toBeNull();
-			expect( select( '.wb-db-app .wb-db-init' ) ).not.toBeNull();
+			expect( select( '.wb-db-app .wb-db-load' ) ).not.toBeNull();
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
 			expect(
 				select(

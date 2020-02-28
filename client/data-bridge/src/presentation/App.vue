@@ -28,9 +28,15 @@
 
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" />
-			<Initializing v-else :is-initializing="isInitializing">
-				<DataBridge />
-			</Initializing>
+			<Loading
+				v-else
+				:is-initializing="isInitializing"
+				:is-saving="isSaving"
+			>
+				<DataBridge
+					:class="[ 'wb-db-app__data-bridge', isSaving ? 'wb-db-app__data-bridge--overlayed' : '' ]"
+				/>
+			</Loading>
 		</div>
 	</div>
 </template>
@@ -41,7 +47,7 @@ import { Component } from 'vue-property-decorator';
 import Events from '@/events';
 import StateMixin from '@/presentation/StateMixin';
 import DataBridge from '@/presentation/components/DataBridge.vue';
-import Initializing from '@/presentation/components/Initializing.vue';
+import Loading from '@/presentation/components/Loading.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
@@ -52,7 +58,7 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
 	components: {
 		DataBridge,
 		ErrorWrapper,
-		Initializing,
+		Loading,
 		EventEmittingButton,
 		ProcessDialogHeader,
 	},
@@ -67,6 +73,10 @@ export default class App extends mixins( StateMixin ) {
 				},
 			} ).$mount().$el as HTMLElement,
 		);
+	}
+
+	public get isSaving(): boolean {
+		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVING;
 	}
 
 	public get isInitializing(): boolean {
@@ -126,6 +136,21 @@ export default class App extends mixins( StateMixin ) {
 		bottom: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
+	}
+
+	&__data-bridge--overlayed {
+		position: relative;
+
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			z-index: $default-visibility;
+			background: rgba( 255, 255, 255, 0.5 );
+		}
 	}
 }
 </style>
