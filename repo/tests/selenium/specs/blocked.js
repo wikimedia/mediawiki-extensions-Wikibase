@@ -8,8 +8,8 @@ const assert = require( 'assert' ),
  */
 function loginAdmin() {
 	LoginPage.open();
-	$( '#wpName1' ).setValue( browser.config.username );
-	$( '#wpPassword1' ).setValue( browser.config.password );
+	$( '#wpName1' ).setValue( browser.config.mwUser );
+	$( '#wpPassword1' ).setValue( browser.config.mwPwd );
 	$( '#wpLoginAttempt' ).click(); // eslint-disable-line no-jquery/no-event-shorthand
 }
 
@@ -21,8 +21,8 @@ describe( 'blocked user cannot use', function () {
 
 	before( function setupBot() {
 		return bot.loginGetEditToken( {
-			username: browser.config.username,
-			password: browser.config.password
+			username: browser.config.mwUser,
+			password: browser.config.mwPwd
 		} );
 	} );
 
@@ -33,7 +33,7 @@ describe( 'blocked user cannot use', function () {
 	beforeEach( function blockUser() {
 		return bot.request( {
 			action: 'block',
-			user: browser.config.username,
+			user: browser.config.mwUser,
 			expiry: '1 minute',
 			reason: 'Wikibase browser test (T211120)',
 			token: bot.editToken
@@ -43,7 +43,7 @@ describe( 'blocked user cannot use', function () {
 	afterEach( function unblockUser() {
 		return bot.request( {
 			action: 'unblock',
-			user: browser.config.username,
+			user: browser.config.mwUser,
 			reason: 'Wikibase browser test done (T211120)',
 			token: bot.editToken
 		} );

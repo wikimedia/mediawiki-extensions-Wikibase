@@ -12,8 +12,8 @@ exports.config = {
 	// Defaults are for convenience with MediaWiki-Vagrant
 
 	// Wiki admin
-	username: process.env.MEDIAWIKI_USER || 'Admin',
-	password: process.env.MEDIAWIKI_PASSWORD || 'vagrant',
+	mwUser: process.env.MEDIAWIKI_USER || 'Admin',
+	mwPwd: process.env.MEDIAWIKI_PASSWORD || 'vagrant',
 
 	// Base for browser.url() and Page#openTitle()
 	baseUrl: ( process.env.MW_SERVER || 'http://127.0.0.1:8080' ) + (
