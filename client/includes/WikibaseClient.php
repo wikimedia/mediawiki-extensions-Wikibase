@@ -490,7 +490,8 @@ final class WikibaseClient {
 				$source,
 				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
 				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
-				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks()
+				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks(),
+				$this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks()
 			);
 		}
 

@@ -9,7 +9,7 @@ use Wikibase\Lib\StatsdRecordingSimpleCache;
 /**
  * @covers \Wikibase\Lib\StatsdRecordingSimpleCache
  *
- * @todo: This test needs to be rewritten to use a better way to assert stastd updateCount.
+ * @todo This test needs to be rewritten to use a better way to assert stastd updateCount.
  *
  * @group Wikibase
  *

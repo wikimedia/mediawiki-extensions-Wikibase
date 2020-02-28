@@ -42,6 +42,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
+use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\WikibaseSettings;
@@ -107,6 +108,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private $propertyInfoLookup = null;
 
+	private $entityRevisionLookupFactoryCallbacks;
+
 	public function __construct(
 		GenericServices $genericServices,
 		EntityIdParser $entityIdParser,
@@ -117,9 +120,15 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		EntitySource $entitySource,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
-		array $prefetchingTermLookupCallbacks
+		array $prefetchingTermLookupCallbacks,
+		array $entityRevisionFactoryLookupCallbacks
 	) {
-		$this->assertCallbackArrayTypes( $deserializerFactoryCallbacks, $entityMetaDataAccessorCallbacks, $prefetchingTermLookupCallbacks );
+		$this->assertCallbackArrayTypes(
+			$deserializerFactoryCallbacks,
+			$entityMetaDataAccessorCallbacks,
+			$prefetchingTermLookupCallbacks,
+			$entityRevisionFactoryLookupCallbacks
+		);
 
 		$this->genericServices = $genericServices;
 		$this->entityIdParser = $entityIdParser;
@@ -131,12 +140,14 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
 		$this->prefetchingTermLookupCallbacks = $prefetchingTermLookupCallbacks;
+		$this->entityRevisionLookupFactoryCallbacks = $entityRevisionFactoryLookupCallbacks;
 	}
 
 	private function assertCallbackArrayTypes(
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
-		array $prefetchingTermLookupCallbacks
+		array $prefetchingTermLookupCallbacks,
+		array $entityRevisionFactoryLookupCallbacks
 	) {
 		Assert::parameterElementType(
 			'callable',
@@ -152,6 +163,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			'callable',
 			$prefetchingTermLookupCallbacks,
 			'$prefetchingTermLookupCallbacks'
+		);
+		Assert::parameterElementType(
+			'callable',
+			$entityRevisionFactoryLookupCallbacks,
+			'$entityRevisionFactoryLookupCallbacks'
 		);
 	}
 
@@ -178,11 +194,20 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$blobStoreFactory = MediaWikiServices::getInstance()->getBlobStoreFactory();
 
 			$databaseName = $this->entitySource->getDatabaseName();
-			$this->entityRevisionLookup = new WikiPageEntityRevisionLookup(
+
+			// TODO: This wikiPageEntityRevisionStoreLookup should probably instead be built by a factory
+			// that is returned by a a method somewhere in data-access and then instead of being used here
+			// as a default it should go in the wiring files for each entity type. See: T246451
+			$wikiPageEntityRevisionStoreLookup = new WikiPageEntityRevisionLookup(
 				$metaDataAccessor,
 				new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $databaseName ) ),
 				$revisionStoreFactory->getRevisionStore( $databaseName ),
 				$databaseName
+			);
+
+			$this->entityRevisionLookup = new TypeDispatchingEntityRevisionLookup(
+				$this->entityRevisionLookupFactoryCallbacks,
+				$wikiPageEntityRevisionStoreLookup
 			);
 		}
 
