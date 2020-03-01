@@ -12,7 +12,7 @@ Writing to the secondary storage happens through a deferred update after each ed
 Briefly in code:
  - ItemTermStoreWriter and PropertyTermStoreWriter are the interfaces at the bottom of the term storage tree.
    - These interfaces are provided by the `data-model-services` [vendor component]
-   - Implementations exist to write to the new and legacy storage as well as other implementations allowing mixed writing.
+   - Implementations exist to write to the new and legacy storage.
  - [EntityTermStoreWriter] joins these stores in an interface that can generically save either Item or Property terms.
 
 The storage system is currently decided using the `tmpItemTermsMigrationStages` and `tmpPropertyTermsMigrationStage` repo settings.
@@ -29,7 +29,7 @@ The "Epic" task for this was https://phabricator.wikimedia.org/T208425 - *[EPIC]
 
 ### New Secondary Storage
 
-The storage is made up of multiple normalized tables, all prefixed with "wbt_".DatabaseTermIdsAcquirer
+The storage is made up of multiple normalized tables, all prefixed with "wbt_".DatabaseTermInLangIdsAcquirer
 The tables were created by [AddNormalizedTermsTablesDDL.sql] which includes some documentation.
 
 * [wbt_item_terms]
@@ -135,14 +135,19 @@ AND wbx_text = 'instance of';
 
 #### Updating
 
-Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_property_terms` tables is done in [DatabaseItemTermStoreWriter] and [DatabasePropertyTermStoreWriter].
+**Process outline**
 
- - Term secondary storage is currently written to after edits are saved in MediaWiki's "Secondary data updates". See [EntityHandler::getEntityModificationUpdates()] and implementations.
- - When term changes happen a series of ID acquisitions occur in [DatabaseTermIdsAcquirer]. (Finding IDs that already exist in the storage that will be needed for future inserts)
+ - Term secondary storage is currently written to after edits are saved in MediaWiki's "Secondary data updates". See [ItemHandler::getSecondaryDataUpdates()] and [PropertyHandler::getSecondaryDataUpdates()] implementations.
+ - When term changes happen a series of ID acquisitions occur in [DatabaseTermInLangIdsAcquirer]. (Finding IDs that already exist in the storage that will be needed for future inserts)
  - When new terms are being introduced rows that do not appear in the acquisition will be inserted.
- - When term changes result in some terms no longer being used across the whole store they will be deleted throughout the normalized tables via [DatabaseTermIdsCleaner]
+ - Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_property_terms` tables is done in [DatabaseItemTermStoreWriter] and [DatabasePropertyTermStoreWriter].
+ - When term changes result in some terms potentially being no longer being used across the whole store a [CleanTermsIfUnusedJob] job will be scheduled to remove the rows.
+ - The job removes data from other tables using a [DatabaseInnerTermStoreCleaner].
 
-[DatabaseTermIdsCleaner] is needed to ensure that no data that was intended to be deleted is still publicly accessible (as the wbt_ tables are a public index).
+**Keeping the store clean**
+
+The tables in the store are cleaned up so that data that is totally removed from entities is also totally removed from the store.
+This is important for cases such as Wikidata that has publicly accessible database replicas of this information.
 
 [wbt_item_terms]: @ref md_docs_sql_wbt_item_terms
 [wbt_property_terms]: @ref md_docs_sql_wbt_property_terms
@@ -150,13 +155,14 @@ Actual insertion and deletion of the terms in the `wbt_item_terms` and `wbt_prop
 [wbt_text_in_lang]: @ref md_docs_sql_wbt_text_in_lang
 [wbt_text]: @ref md_docs_sql_wbt_text
 [wbt_type]: @ref md_docs_sql_wbt_type
-[EntityHandler]: @ref Wikibase::Repo::Content::EntityHandler
-[EntityHandler::getEntityModificationUpdates()]: @ref Wikibase::Repo::Content::EntityHandler::getEntityModificationUpdates()
+[ItemHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::ItemHandler::getSecondaryDataUpdates()
+[PropertyHandler::getSecondaryDataUpdates()]: @ref Wikibase::Repo::Content::PropertyHandler::getSecondaryDataUpdates()
 [EntityTermStoreWriter]: @ref Wikibase::Lib::Store::EntityTermStoreWriter
 [DatabaseItemTermStoreWriter]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseItemTermStoreWriter
 [DatabasePropertyTermStoreWriter]: @ref Wikibase::Lib::Store::Sql::Terms::DatabasePropertyTermStoreWriter
-[DatabaseTermIdsCleaner]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermIdsCleaner
-[DatabaseTermIdsAcquirer]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermIdsAcquirer
+[DatabaseInnerTermStoreCleaner]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseInnerTermStoreCleaner
+[CleanTermsIfUnusedJob]: @ref Wikibase::Lib::Store::Sql::Terms::CleanTermsIfUnusedJob
+[DatabaseTermInLangIdsAcquirer]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermInLangIdsAcquirer
 [Wikibase\Lib\Store\Sql\Terms]: @ref Wikibase::Lib::Store::Sql::Terms
 [vendor component]: @ref libraries
 [AddNormalizedTermsTablesDDL.sql]: @ref AddNormalizedTermsTablesDDL.sql
