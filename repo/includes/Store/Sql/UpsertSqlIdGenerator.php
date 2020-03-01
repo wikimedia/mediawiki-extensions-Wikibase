@@ -142,7 +142,7 @@ class UpsertSqlIdGenerator implements IdGenerator {
 				'id_type' => $type,
 				'id_value' => 1,
 			],
-			[ 'id_value' ],
+			[ 'id_type' ],
 			[ 'id_value = LAST_INSERT_ID(id_value + 1)' ],
 			__METHOD__
 		);
