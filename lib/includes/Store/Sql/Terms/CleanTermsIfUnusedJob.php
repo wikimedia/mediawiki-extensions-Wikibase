@@ -22,6 +22,7 @@ class CleanTermsIfUnusedJob extends Job {
 	/** @var TermStoreCleaner */
 	private $termInLangIdsCleaner;
 
+	const JOB_NAME = 'CleanTermsIfUnused';
 	const TERM_IN_LANG_IDS = 'termInLangIds';
 
 	/**
@@ -42,7 +43,7 @@ class CleanTermsIfUnusedJob extends Job {
 	}
 
 	public function __construct( TermStoreCleaner $cleaner, $params ) {
-		parent::__construct( 'CleanTermsIfUnused', $params );
+		parent::__construct( self::JOB_NAME, $params );
 		$this->termInLangIdsCleaner = $cleaner;
 	}
 

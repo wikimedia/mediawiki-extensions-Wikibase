@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -76,8 +77,15 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 	}
 
 	private function getPropertyTermStoreWriter(
-		?EntitySource $propertySourceOverride = null
+		?EntitySource $propertySourceOverride = null,
+		$jobQueueMockOverride = null
 	) {
+		if ( $jobQueueMockOverride === null ) {
+			$jobQueue = $this->jobQueueMock;
+		} else {
+			$jobQueue = JobQueueGroup::singleton();
+		}
+
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db,
 		] );
@@ -88,7 +96,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 			$loadBalancer,
 			WANObjectCache::newEmpty()
 		);
-		return new DatabasePropertyTermStoreWriter( $loadBalancer, $this->jobQueueMock,
+		return new DatabasePropertyTermStoreWriter( $loadBalancer, $jobQueue,
 			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
 			new StringNormalizer(), $propertySourceOverride ?: $this->getPropertySource()
@@ -338,6 +346,25 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 		$fingerprint = $this->getTermsForProperty( $this->p1 );
 
 		$this->assertEquals( $this->fingerprint1, $fingerprint );
+	}
+
+	public function testCleanupJobWorks() {
+		$store = $this->getPropertyTermStoreWriter( null, JobQueueGroup::singleton() );
+		$fingerprint1 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa1' ) ] ) );
+		$fingerprint2 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa2' ) ] ) );
+
+		// Make sure there are not already any cleanup jobs
+		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->delete();
+
+		// Schedule a job by causing a term text to be removed and need cleaning up
+		$store->storeTerms( $this->p1, $fingerprint1 );
+		$store->storeTerms( $this->p1, $fingerprint2 );
+
+		// A job should now be scheduled cleaning up "p--aaaaaaaaaaaaaa1", which we can run
+		JobQueueGroup::singleton()->get( CleanTermsIfUnusedJob::JOB_NAME )->pop()->run();
+
+		// Make sure the cleanup happened
+		$this->assertEquals( 0, $this->db->selectRowCount( 'wbt_text', '*', [ 'wbx_text' => 'a--aaaaaaaaaaaaaa1' ] ) );
 	}
 
 	private function getJobQueueGroupMockExpectingTermInLangsIds( array $termInLangIds ) {
