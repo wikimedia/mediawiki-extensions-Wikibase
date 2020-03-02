@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import UserLink from '../src/presentation/components/UserLink';
+import UserLink from '@/presentation/components/UserLink';
 
 const router = {
 	getPageUrl( title ) {
@@ -10,13 +10,11 @@ const router = {
 storiesOf( 'UserLink', module )
 	.addParameters( { component: UserLink } )
 	.add( 'with link to user page', () => ( {
-		data() {
-			return {
-				userId: 2799899,
-				userName: 'MediaWiki default',
-				router,
-			};
-		},
+		data: () => ( {
+			userId: 2799899,
+			userName: 'MediaWiki default',
+			router,
+		} ),
 		components: { UserLink },
 		template:
 			`<p>This action was performed by
@@ -24,18 +22,16 @@ storiesOf( 'UserLink', module )
 					:userId="userId"
 					:userName="userName"
 					:router="router"
-				/>.</p>
-			`,
+				/>.
+			</p>`,
 	} ) )
 
 	.add( 'without link to user page', () => ( {
-		data() {
-			return {
-				userId: 0,
-				userName: 'Meta-Wiki Welcome',
-				router,
-			};
-		},
+		data: () => ( {
+			userId: 0,
+			userName: 'Meta-Wiki Welcome',
+			router,
+		} ),
 		components: { UserLink },
 		template:
 			`<p>This action was performed by
@@ -43,18 +39,16 @@ storiesOf( 'UserLink', module )
 					:userId="userId"
 					:userName="userName"
 					:router="router"
-				/>.</p>
-			`,
+				/>.
+			</p>`,
 	} ) )
 
 	.add( 'bidirectionality behavior', () => ( {
-		data() {
-			return {
-				userId: 1536453,
-				userName: 'علاء',
-				router,
-			};
-		},
+		data: () => ( {
+			userId: 1536453,
+			userName: 'علاء',
+			router,
+		} ),
 		components: { UserLink },
 		template:
 			`<dl>

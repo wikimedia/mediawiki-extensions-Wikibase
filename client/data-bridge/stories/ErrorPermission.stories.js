@@ -9,36 +9,38 @@ storiesOf( 'ErrorPermission', module )
 	} ) )
 	.add( 'two errors', () => ( {
 		components: { ErrorPermission },
-		template: `<ErrorPermission
-				:permissionErrors="[
-					{
-						type: 'protectedpage',
-						info: {
-							right: 'editprotected',
-						},
+		data: () => ( {
+			permissionErrors: [
+				{
+					type: 'protectedpage',
+					info: {
+						right: 'editprotected',
 					},
-					{
-						type: 'cascadeprotected',
-						info: {
-							pages: [
-								'Important Page',
-								'Super Duper Important Page',
-							],
-						},
+				},
+				{
+					type: 'cascadeprotected',
+					info: {
+						pages: [
+							'Important Page',
+							'Super Duper Important Page',
+						],
 					},
-				]"
-				/>`,
+				},
+			],
+		} ),
+		template: '<ErrorPermission :permissionErrors="permissionErrors" />',
 	} ) )
 	.add( 'one error', () => ( {
 		components: { ErrorPermission },
-		template: `<ErrorPermission
-				:permissionErrors="[
-					{
-						type: 'protectedpage',
-						info: {
-							right: 'editprotected',
-						},
+		data: () => ( {
+			permissionErrors: [
+				{
+					type: 'protectedpage',
+					info: {
+						right: 'editprotected',
 					},
-				]"
-				/>`,
+				},
+			],
+		} ),
+		template: '<ErrorPermission :permissionErrors="permissionErrors" />',
 	} ) );

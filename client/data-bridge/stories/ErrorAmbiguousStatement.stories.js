@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import ErrorAmbiguousStatement from '../src/presentation/components/ErrorAmbiguousStatement';
+import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement';
 import useStore from './useStore';
 
 storiesOf( 'ErrorAmbiguousStatement', module )
