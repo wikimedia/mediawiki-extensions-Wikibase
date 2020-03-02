@@ -4,12 +4,13 @@ import StatementMap from '@/datamodel/StatementMap';
 import Snak from '@/datamodel/Snak';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import { PathToStatement } from '@/store/statements/PathToStatement';
+import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';
 
-export class MainSnakPath implements PathToStatement, PathToSnak {
+export class MainSnakPath implements PathToStatement, PathToSnak, PathToStatementGroup {
 
-	public readonly entityId: EntityId;
-	public readonly propertyId: EntityId;
-	public readonly index: number;
+	private readonly entityId: EntityId;
+	private readonly propertyId: EntityId;
+	private readonly index: number;
 
 	public constructor(
 		entityId: EntityId,
@@ -21,8 +22,12 @@ export class MainSnakPath implements PathToStatement, PathToSnak {
 		this.index = index;
 	}
 
+	public resolveStatementGroup( state: Record<EntityId, StatementMap> ): Statement[] | null {
+		return state?.[ this.entityId ]?.[ this.propertyId ] ?? null;
+	}
+
 	public resolveStatement( state: Record<EntityId, StatementMap> ): Statement | null {
-		return state?.[ this.entityId ]?.[ this.propertyId ]?.[ this.index ] ?? null;
+		return this.resolveStatementGroup( state )?.[ this.index ] ?? null;
 	}
 
 	public resolveSnakInStatement( state: Record<EntityId, StatementMap> ): Snak|null {

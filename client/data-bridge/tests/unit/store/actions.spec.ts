@@ -545,7 +545,7 @@ describe( 'root/actions', () => {
 			const propertyId = 'P42';
 			const mainSnakPath = new MainSnakPath( entityId, propertyId, 0 );
 			actions.validateEntityState( mainSnakPath );
-			expect( statementPropertyGetter ).toHaveBeenCalledWith( entityId, propertyId );
+			expect( statementPropertyGetter ).toHaveBeenCalledWith( mainSnakPath );
 			expect( commit ).toHaveBeenCalledWith(
 				'addApplicationErrors',
 				[ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ],
@@ -574,7 +574,7 @@ describe( 'root/actions', () => {
 	describe( 'validateBridgeApplicability', () => {
 		const statementModule = {
 			getters: {
-				isAmbiguous: jest.fn().mockReturnValue( false ),
+				isStatementGroupAmbiguous: jest.fn().mockReturnValue( false ),
 				rank: jest.fn().mockReturnValue( 'normal' ),
 				snakType: jest.fn().mockReturnValue( 'value' ),
 				dataType: jest.fn().mockReturnValue( 'string' ),
@@ -596,7 +596,7 @@ describe( 'root/actions', () => {
 			const mainSnakPath = new MainSnakPath( entityId, propertyId, 0 );
 			actions.validateBridgeApplicability( mainSnakPath );
 			expect( dispatch ).not.toHaveBeenCalled();
-			expect( statementModule.getters.isAmbiguous ).toHaveBeenCalledWith( entityId, propertyId );
+			expect( statementModule.getters.isStatementGroupAmbiguous ).toHaveBeenCalledWith( mainSnakPath );
 			expect( statementModule.getters.snakType ).toHaveBeenCalledWith( mainSnakPath );
 			expect( statementModule.getters.dataValueType ).toHaveBeenCalledWith( mainSnakPath );
 		} );
@@ -607,7 +607,7 @@ describe( 'root/actions', () => {
 				dispatch,
 			} );
 
-			statementModule.getters.isAmbiguous.mockReturnValueOnce( true );
+			statementModule.getters.isStatementGroupAmbiguous.mockReturnValueOnce( true );
 
 			// @ts-ignore
 			actions.statementModule = statementModule;
@@ -704,7 +704,7 @@ describe( 'root/actions', () => {
 				dispatch,
 			} );
 
-			statementModule.getters.isAmbiguous.mockReturnValueOnce( true );
+			statementModule.getters.isStatementGroupAmbiguous.mockReturnValueOnce( true );
 			statementModule.getters.snakType.mockReturnValueOnce( 'novalue' );
 			statementModule.getters.dataType.mockReturnValueOnce( 'url' );
 			statementModule.getters.dataValueType.mockReturnValueOnce( 'number' );
