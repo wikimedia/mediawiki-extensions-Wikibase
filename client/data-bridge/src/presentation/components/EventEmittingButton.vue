@@ -49,6 +49,7 @@ const imageOnlyTypes = [
 const validSizes = [
 	'M',
 	'L',
+	'XL',
 ];
 
 @Component
@@ -188,6 +189,11 @@ export default class EventEmittingButton extends Vue {
 		padding: px-to-rem( 7px ) px-to-rem( 16px );
 	}
 
+	@mixin size-XL {
+		font-size: $font-size-normal;
+		padding: px-to-rem( 11px ) px-to-rem( 16px );
+	}
+
 	&--size-M {
 		@include size-M;
 	}
@@ -196,9 +202,17 @@ export default class EventEmittingButton extends Vue {
 		@include size-L;
 	}
 
+	&--size-XL {
+		@include size-XL;
+	}
+
 	@media ( max-width: $breakpoint ) {
 		&--size-M {
 			@include size-L;
+		}
+
+		&--size-L {
+			@include size-XL;
 		}
 	}
 
