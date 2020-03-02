@@ -12806,23 +12806,6 @@ var ErrorStatus;
 var ApplicationStatus = _objectSpread2({}, ValidApplicationStatus, {}, ErrorStatus);
 
 /* harmony default export */ var definitions_ApplicationStatus = (ApplicationStatus);
-// CONCATENATED MODULE: ./src/definitions/EditDecision.ts
-/**
- * A decision of which type of edit to make, chosen by the user.
- * Not to be confused with the EditFlow,
- * which is determined by the page when creating the edit link.
- */
-var EditDecision_EditDecision;
-
-(function (EditDecision) {
-  /** The previous value was incorrect. Replace it. */
-  EditDecision["REPLACE"] = "replace";
-  /** The previous value was correct but is now outdated. Keep it as non-best rank. */
-
-  EditDecision["UPDATE"] = "update";
-})(EditDecision_EditDecision || (EditDecision_EditDecision = {}));
-
-/* harmony default export */ var definitions_EditDecision = (EditDecision_EditDecision); // "export default enum" not supported, see microsoft/Typescript#3792
 // CONCATENATED MODULE: ./src/store/namespaces.ts
 var NS_ENTITY = 'entity';
 var NS_STATEMENTS = 'statements';
@@ -13828,6 +13811,23 @@ var entityModule = new Module({
   mutations: mutations_EntityMutations,
   actions: actions_EntityActions
 });
+// CONCATENATED MODULE: ./src/definitions/EditDecision.ts
+/**
+ * A decision of which type of edit to make, chosen by the user.
+ * Not to be confused with the EditFlow,
+ * which is determined by the page when creating the edit link.
+ */
+var EditDecision_EditDecision;
+
+(function (EditDecision) {
+  /** The previous value was incorrect. Replace it. */
+  EditDecision["REPLACE"] = "replace";
+  /** The previous value was correct but is now outdated. Keep it as non-best rank. */
+
+  EditDecision["UPDATE"] = "update";
+})(EditDecision_EditDecision || (EditDecision_EditDecision = {}));
+
+/* harmony default export */ var definitions_EditDecision = (EditDecision_EditDecision); // "export default enum" not supported, see microsoft/Typescript#3792
 // CONCATENATED MODULE: ./src/change-op/statement-mutation/StatementMutationError.ts
 var StatementMutationError;
 
@@ -13945,7 +13945,6 @@ function statementMutationFactory(strategy) {
   }
 }
 // CONCATENATED MODULE: ./src/store/actions.ts
-
 
 
 
@@ -14220,8 +14219,8 @@ function (_Actions) {
                 entityId = state[NS_ENTITY].id;
                 path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
                 _context3.prev = 7;
-                statements = this.statementMutationFactory(definitions_EditDecision.REPLACE) // TODO use editDecision
-                .apply(state.targetValue, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                statements = this.statementMutationFactory(state.editDecision).apply(state.targetValue, // eslint-disable-line @typescript-eslint/no-non-null-assertion
                 path, clone(state[NS_STATEMENTS]));
                 _context3.next = 15;
                 break;

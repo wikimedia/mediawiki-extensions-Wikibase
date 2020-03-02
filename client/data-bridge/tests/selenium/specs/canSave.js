@@ -125,4 +125,79 @@ describe( 'App', () => {
 		);
 		assert.ok( actualTags.includes( bridgeEditTag ), `${JSON.stringify( actualTags )} doesn't include tag "${bridgeEditTag}"!` );
 	} );
+
+	it( 'saves an updated value', () => {
+		const title = DataBridgePage.getDummyTitle();
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+
+		const originalStatements = [ {
+			'mainsnak': {
+				snaktype: 'value',
+				property: propertyId,
+				datavalue: { value: 'initialValue', type: 'string' },
+				datatype: 'string',
+			},
+			'type': 'statement',
+			'rank': 'normal',
+		} ];
+
+		const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+			'claims': originalStatements,
+		} ) );
+		const editFlow = 'overwrite';
+		const content = `{|class="wikitable"
+|-
+| official website
+| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
+|}`;
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+		DataBridgePage.openBridgeOnPage( title );
+
+		DataBridgePage.bridge.waitForDisplayed( 5000 );
+		assert.ok( DataBridgePage.bridge.isDisplayed() );
+
+		const newValue = 'newValue';
+		browser.waitUntil(
+			() => {
+				DataBridgePage.value.setValue( newValue );
+				return DataBridgePage.value.getValue() === newValue;
+			}
+		);
+
+		DataBridgePage.editDecision( 'update' ).click();
+
+		DataBridgePage.saveButton.click();
+
+		DataBridgePage.app.waitForDisplayed(
+			5000,
+			true,
+			'App is still being displayed after clicking the save button'
+		);
+
+		const entity = browser.call( () => WikibaseApi.getEntity( entityId ) );
+		const actualValuesAtServer = entity.claims[ propertyId ];
+
+		// remove server generated properties that we don't care about
+		delete actualValuesAtServer[ 0 ].id;
+		delete actualValuesAtServer[ 0 ].mainsnak.hash;
+		delete actualValuesAtServer[ 1 ].id;
+		delete actualValuesAtServer[ 1 ].mainsnak.hash;
+
+		const expectedStatements = [
+			...originalStatements,
+			{
+				type: 'statement',
+				rank: 'preferred',
+				mainsnak: {
+					snaktype: 'value',
+					property: propertyId,
+					datavalue: { value: newValue, type: 'string' },
+					datatype: 'string',
+				},
+			},
+		];
+		assert.deepStrictEqual( actualValuesAtServer, expectedStatements );
+	} );
+
 } );

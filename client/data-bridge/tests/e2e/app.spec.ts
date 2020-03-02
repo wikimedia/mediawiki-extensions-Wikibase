@@ -376,6 +376,43 @@ describe( 'app', () => {
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 
+		it( 'creates a new statement with the user\'s value if update is chosen', async () => {
+			const testLink = prepareTestEnv( { propertyId, entityId } );
+
+			const save = await getEnabledSaveButton( testLink );
+
+			const updateInputDecision = select( '.wb-db-app input[name=editDecision][value=update]' );
+			await selectRadioInput( updateInputDecision as HTMLInputElement );
+
+			save!.click();
+			await budge();
+
+			const sentData = { claims: testSet.entities[ entityId ].claims };
+			sentData.claims[ propertyId ].push( {
+				rank: 'preferred',
+				type: 'statement',
+				mainsnak: {
+					snaktype: 'value',
+					property: propertyId,
+					datatype: 'string',
+					datavalue: {
+						type: 'string',
+						value: newStringDataValue,
+					},
+				},
+			} );
+
+			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
+			expect( postWithEditToken ).toHaveBeenCalledWith( {
+				action: 'wbeditentity',
+				id: entityId,
+				baserevid: 0,
+				data: JSON.stringify( sentData ),
+				assertuser: 'Test User',
+				tags: undefined,
+			} );
+		} );
+
 		it( 'has the save button initially disabled', async () => {
 			const testLink = prepareTestEnv( { propertyId } );
 			window.mw.ForeignApi = mockMwForeignApiConstructor( {

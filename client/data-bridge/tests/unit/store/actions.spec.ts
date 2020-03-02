@@ -1,5 +1,5 @@
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
-import ApplicationStatus from '@/definitions/ApplicationStatus';
+import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
@@ -883,6 +883,37 @@ describe( 'root/actions', () => {
 			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).not.toBe( statementsState );
 			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave', statementsState[ entityId ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+		} );
+
+		it( 'chooses the strategy based on the edit decision', async () => {
+			const editDecision = EditDecision.UPDATE;
+			const state = newApplicationState( {
+				editDecision,
+				applicationStatus: ValidApplicationStatus.READY,
+				entity: {
+					id: 'Q123',
+				},
+				statements: {},
+			} );
+			const actions = inject( RootActions, {
+				state,
+				commit: jest.fn(),
+				dispatch: jest.fn(),
+			} );
+
+			const statementMutationFactory = jest.fn( ( () => ( {
+				apply: jest.fn().mockReturnValue( {} ),
+			} ) ) );
+			// @ts-ignore
+			actions.statementMutationFactory = statementMutationFactory;
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: jest.fn( () => Promise.resolve() ),
+			};
+
+			await actions.saveBridge();
+			expect( statementMutationFactory ).toHaveBeenCalledWith( editDecision );
 		} );
 
 		it( 'logs an error if statement mutation strategy fails', async () => {

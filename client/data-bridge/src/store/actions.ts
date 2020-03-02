@@ -221,7 +221,8 @@ RootActions
 
 		let statements;
 		try {
-			statements = this.statementMutationFactory( EditDecision.REPLACE ) // TODO use editDecision
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			statements = this.statementMutationFactory( state.editDecision! )
 				.apply(
 					state.targetValue!, // eslint-disable-line @typescript-eslint/no-non-null-assertion
 					path,

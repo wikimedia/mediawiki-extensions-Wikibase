@@ -13,6 +13,7 @@ import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRep
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import DataValue from '@/datamodel/DataValue';
 import clone from '@/store/clone';
+import EditDecision from '@/definitions/EditDecision';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -367,6 +368,7 @@ describe( 'store/actions', () => {
 
 				store = createStore( services );
 				await store.dispatch( 'initBridge', info );
+				await store.dispatch( 'setEditDecision', EditDecision.REPLACE );
 
 				const state = store.state as InitializedApplicationState;
 				const statementAfterInit = clone( getStatementModuleDataValue( state )! );
@@ -419,6 +421,7 @@ describe( 'store/actions', () => {
 					type: 'string',
 					value: newStringValue,
 				} );
+				await store.dispatch( 'setEditDecision', EditDecision.REPLACE );
 
 				await store.dispatch( 'saveBridge' );
 
