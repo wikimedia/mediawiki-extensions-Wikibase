@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import ErrorUnsupportedSnakType from '../src/presentation/components/ErrorUnsupportedSnakType';
+import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType';
 import useStore from './useStore';
 
 storiesOf( 'ErrorUnsupportedSnakType', module )

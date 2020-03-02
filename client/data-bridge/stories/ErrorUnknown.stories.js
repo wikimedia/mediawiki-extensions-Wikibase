@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import ErrorUnknown from '@/presentation/components/ErrorUnknown';
 import useStore from './useStore';
-import { ErrorTypes } from '../src/definitions/ApplicationError';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 
 storiesOf( 'ErrorUnknown', module )
 	.addParameters( { component: ErrorUnknown } )

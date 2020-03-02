@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { rootModule } from '../src/store';
+import { rootModule } from '@/store';
 import { createStore as smartCreateStore } from 'vuex-smart-module';
 
 export default function useStore( state ) {

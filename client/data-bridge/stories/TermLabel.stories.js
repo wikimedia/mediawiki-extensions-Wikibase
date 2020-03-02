@@ -4,12 +4,12 @@ import TermLabel from '@/presentation/components/TermLabel';
 storiesOf( 'TermLabel', module )
 	.addParameters( { component: TermLabel } )
 	.add( 'English term in English paragraph', () => ( {
-		data() {
-			return { term: {
+		data: () => ( {
+			term: {
 				language: 'en',
 				value: 'example (exemplary)',
-			} };
-		},
+			},
+		} ),
 		components: { TermLabel },
 		template:
 			`<p lang="en" dir="ltr">
@@ -20,12 +20,12 @@ storiesOf( 'TermLabel', module )
 			</p>`,
 	} ) )
 	.add( 'Hebrew term in English paragraph', () => ( {
-		data() {
-			return { term: {
+		data: () => ( {
+			term: {
 				language: 'he',
 				value: 'דֻּגְמָה',
-			} };
-		},
+			},
+		} ),
 		components: { TermLabel },
 		template:
 			`<p lang="en" dir="ltr">
@@ -35,12 +35,12 @@ storiesOf( 'TermLabel', module )
 			</p>`,
 	} ) )
 	.add( 'English term in Arabic paragraph', () => ( {
-		data() {
-			return { term: {
+		data: () => ( {
+			term: {
 				language: 'en',
 				value: 'example (exemplary)',
-			} };
-		},
+			},
+		} ),
 		components: { TermLabel },
 		template:
 			`<p lang="ar" dir="rtl">
@@ -50,12 +50,12 @@ storiesOf( 'TermLabel', module )
 			</p>`,
 	} ) )
 	.add( 'Persian name next to neutral characters', () => ( {
-		data() {
-			return { term: {
+		data: () => ( {
+			term: {
 				language: 'fa',
 				value: 'محمد بن موسی خوارزمی',
-			} };
-		},
+			},
+		} ),
 		components: { TermLabel },
 		template:
 			`<dl lang="en" dir="ltr">

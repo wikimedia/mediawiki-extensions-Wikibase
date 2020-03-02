@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import ErrorUnsupportedDatatype from '../src/presentation/components/ErrorUnsupportedDatatype';
+import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype';
 import useStore from './useStore';
 
 storiesOf( 'ErrorUnsupportedDatatype', module )

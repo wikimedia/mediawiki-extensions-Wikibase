@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import ErrorDeprecatedStatement from '../src/presentation/components/ErrorDeprecatedStatement';
+import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement';
 import useStore from './useStore';
 
 storiesOf( 'ErrorDeprecatedStatement', module )
