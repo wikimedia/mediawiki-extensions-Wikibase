@@ -39,9 +39,6 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	/** @var EntityIdComposer */
 	private $entityIdComposer;
 
-	/** @var IDatabase */
-	private $dbr = null;
-
 	public function __construct(
 		ILoadBalancer $lb,
 		TypeIdsAcquirer $typeIdsAcquirer,
@@ -87,7 +84,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param IDatabase $dbr Used for query construction and selects
 	 * @param TermIndexSearchCriteria[] $criteria
 	 * @param string|string[]|null $termType
 	 * @param string|string[]|null $entityType
@@ -96,7 +93,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	 * @return IResultWrapper[]
 	 */
 	private function criteriaToQueryResults(
-		IDatabase $db,
+		IDatabase $dbr,
 		array $criteria,
 		$termType = null,
 		$entityType = null,
@@ -106,14 +103,14 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 		foreach ( $criteria as $mask ) {
 			if ( $entityType === null ) {
-				$termQueries[] = $this->getTermMatchQueries( $db, $mask, 'item', $termType, $options );
-				$termQueries[] = $this->getTermMatchQueries( $db, $mask, 'property', $termType, $options );
+				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'item', $termType, $options );
+				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, 'property', $termType, $options );
 			} elseif ( is_array( $entityType ) === true ) {
 				foreach ( $entityType as $entityTypeCase ) {
-					$termQueries[] = $this->getTermMatchQueries( $db, $mask, $entityTypeCase, $termType, $options );
+					$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, $entityTypeCase, $termType, $options );
 				}
 			} else {
-				$termQueries[] = $this->getTermMatchQueries( $db, $mask, $entityType, $termType, $options );
+				$termQueries[] = $this->getTermMatchQueries( $dbr, $mask, $entityType, $termType, $options );
 			}
 		}
 
@@ -121,7 +118,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * @param IDatabase $db
+	 * @param IDatabase $dbr Used for query construction and selects
 	 * @param TermIndexSearchCriteria $mask
 	 * @param string $entityType
 	 * @param string|string[]|null $termType
@@ -129,7 +126,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	 * @return IResultWrapper
 	 */
 	private function getTermMatchQueries(
-		IDatabase $db,
+		IDatabase $dbr,
 		TermIndexSearchCriteria $mask,
 		string $entityType,
 		$termType = null,
@@ -156,7 +153,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 		$text = $mask->getText();
 		if ( $text !== null ) {
 			if ( $options['prefixSearch'] ) {
-				$conditions[] = 'wbx_text' . $db->buildLike( $text, $db->anyString() );
+				$conditions[] = 'wbx_text' . $dbr->buildLike( $text, $dbr->anyString() );
 			} else {
 				$conditions['wbx_text'] = $text;
 			}
@@ -192,7 +189,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 			$queryOptions['LIMIT'] = $options['LIMIT'];
 		}
 
-		return $this->getDbr()->select(
+		return $dbr->select(
 			$tables,
 			$fields,
 			$conditions,
@@ -268,10 +265,6 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	private function getDbr() {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
-		}
-
-		return $this->dbr;
+		return $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
 	}
 }
