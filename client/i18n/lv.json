@@ -24,6 +24,7 @@
 	"wikibase-linkitem-failure": "Mēģinot piesaistīt norādīto lapu notika nezināma kļūda.",
 	"wikibase-linkitem-title": "Sasaistīt ar lapu",
 	"wikibase-linkitem-linkpage": "Sasaistīt ar lapu",
+	"wikibase-linkitem-selectlink": "Lūdzu, izvēlies vietni un lapu, ko vēlies sasaistīt ar šo lapu.",
 	"wikibase-linkitem-input-site": "Valoda:",
 	"wikibase-linkitem-input-page": "Lapa:",
 	"wikibase-linkitem-confirmitem-button": "Apstiprināt",

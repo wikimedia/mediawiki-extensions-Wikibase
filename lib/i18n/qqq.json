@@ -24,7 +24,7 @@
 	"wikibase-deletedentity-property": "Message displayed instead of a Property's label if the Property has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-property}}\n* {{msg-mw|Wikibase-deletedentity-item}}\n* {{msg-mw|Wikibase-deletedentity-query}}",
 	"wikibase-deletedentity-query": "Message displayed instead of a Query's label if the Query has been deleted (see [[d:Wikidata:Glossary]]).\n\nSee also:\n* {{msg-mw|Wikibase-entity-query}}\n* {{msg-mw|Wikibase-deletedentity-item}}\n* {{msg-mw|Wikibase-deletedentity-property}}",
 	"wikibase-error-unexpected": "Generic error messaged used for reporting unknown exception.\n\nParameters:\n* $1 - the raw, unlocalized error message\n{{Identical|Error}}",
-  	"wikibase-error-unknown": "Generic error shown when no parameters have been passed alongside an unknown error",
+	"wikibase-error-unknown": "Generic error shown when no parameters have been passed alongside an unknown error",
 	"wikibase-error-save-generic": "Generic error message for an error happening during a save operation.",
 	"wikibase-error-remove-generic": "Generic error message for an error happening during a remove operation",
 	"wikibase-error-save-connection": "Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.",

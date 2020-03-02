@@ -33,6 +33,7 @@
 	"wikibase-linkitem-alreadylinked": "Die Seite, die du verlinken willst, ist bereits einem [$1 Objekt] in unserem zentralen Datenrepositorium zugeordnet, das auf [[$2]] auf dieser Website verlinkt. Es kann nur eine Seite pro Website einem Objekt zugeordnet werden. Bitte wähle eine andere Seite, die verlinkt werden soll.",
 	"wikibase-linkitem-close": "Dialog schließen und Seite neu laden",
 	"wikibase-linkitem-failure": "Beim Verlinken der angegebenen Seite ist ein unbekannter Fehler aufgetreten.",
+	"wikibase-linkitem-failed-modify": "Seiten konnten nicht verbunden werden: Fehler beim Zusammenführen der Einträge auf {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Mit Seite verlinken",
 	"wikibase-linkitem-linkpage": "Mit Seite verlinken",
 	"wikibase-linkitem-selectlink": "Bitte wähle eine Website und eine Seite aus, die du mit dieser Seite verlinken willst.",

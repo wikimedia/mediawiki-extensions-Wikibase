@@ -86,6 +86,7 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s projektom {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Obavijesti me kad netko poveže stranicu koju sam {{GENDER:|stvorio|stvorila}} sa stavkom na projektu {{WBREPONAME}}.",
 	"notification-header-page-connection": "Stranica <strong>$3</strong> je {{GENDER:$2|povezana}} sa {{PLURAL:$4|-1=a {{WBREPONAME}} item|stavkom na projektu {{WBREPONAME}} $4}}, gdje se mogu prikupiti relevantni podatci o temi.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> i {{PLURAL:$4|jedna druga stranica {{GENDER:$2|povezana je}}|$4 druge stranice {{GENDER:$2|povezane su}}|$4 drugih stranica {{GENDER:$2|povezano je}}}} sa stavkom na Wikipodatcima.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} stavku",
 	"unresolved-property-category": "Stranice s nerazjašnjenim stavkama na wikipodatcima",
 	"connected-redirect-category": "Preusmjeravanja povezana sa stavkom na projektu {{WBREPONAME}}",

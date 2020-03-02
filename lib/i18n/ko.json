@@ -20,6 +20,7 @@
 	"wikibase-deletedentity-property": "삭제된 속성",
 	"wikibase-deletedentity-query": "삭제된 쿼리",
 	"wikibase-error-unexpected": "오류: $1.",
+	"wikibase-error-unknown": "오류가 발생했습니다.",
 	"wikibase-error-save-generic": "오류로 인해 저장하지 못했습니다.",
 	"wikibase-error-remove-generic": "오류로 인해 제거하지 못했습니다.",
 	"wikibase-error-save-connection": "연결 오류로 인해 저장하지 못했습니다. 인터넷 연결을 확인해 주십시오.",

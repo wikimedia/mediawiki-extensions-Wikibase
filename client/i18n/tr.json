@@ -45,6 +45,7 @@
 	"wikibase-linkitem-alreadylinked": "Bağlantı kurmak istediğiniz sayfa, bu sitedeki [[$2]] sayfasına bağlanan bir [$1 ögeye] zaten eklenmiş. Ögeler, site başına yalnızca bir sayfaya eklenebilir. Lütfen bağlanılacak farklı bir sayfa seçin.",
 	"wikibase-linkitem-close": "Diyaloğu kapatıp sayfayı yeniden yükle",
 	"wikibase-linkitem-failure": "Verilen sayfayı bağlamaya çalışırken bilinmeyen bir hata oluştu.",
+	"wikibase-linkitem-failed-modify": "Sayfalar bağlanamadı: {{WBREPONAME}} üzerindeki ilgili öğeler birleştirilemedi.",
 	"wikibase-linkitem-title": "Sayfaya bağlantı",
 	"wikibase-linkitem-linkpage": "Sayfaya bağlantı",
 	"wikibase-linkitem-selectlink": "Lütfen, bu sayfaya bağlamak istediğiniz bir site ve sayfa seçin.",

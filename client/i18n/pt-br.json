@@ -42,6 +42,7 @@
 	"wikibase-linkitem-alreadylinked": "A página que você queria vincular já está anexada a um [$1 item] no repositório central de dados que vincula a [[$2]] neste site. Itens só podem possuir uma página por site anexado. Por favor, escolha uma página diferente para vincular.",
 	"wikibase-linkitem-close": "Recarregar a página",
 	"wikibase-linkitem-failure": "Ocorreu um erro desconhecido ao tentar vincular a determinada página.",
+	"wikibase-linkitem-failed-modify": "Não foi possível vincular as páginas: falha ao mesclar os itens correspondentes no {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Link com a página",
 	"wikibase-linkitem-linkpage": "Link com a página",
 	"wikibase-linkitem-selectlink": "Por favor, selecione um site e uma página que você deseja vincular a esta página.",

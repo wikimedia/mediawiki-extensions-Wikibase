@@ -25,6 +25,7 @@
 	"wikibase-deletedentity-property": "Propiedad borrada",
 	"wikibase-deletedentity-query": "Consulta borrada",
 	"wikibase-error-unexpected": "Error: $1.",
+	"wikibase-error-unknown": "Ha ocurrido un error.",
 	"wikibase-error-save-generic": "No se pudo guardar debido a un error.",
 	"wikibase-error-remove-generic": "No se pudo eliminar debido a un error.",
 	"wikibase-error-save-connection": "No se pudo guardar debido a un error de conexión. Comprueba tu conexión a Internet.",

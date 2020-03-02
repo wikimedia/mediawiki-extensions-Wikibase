@@ -19,7 +19,8 @@
 			"Putnik",
 			"Nk88",
 			"Diralik",
-			"Katunchik"
+			"Katunchik",
+			"Alexander Yukal"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",
@@ -28,6 +29,7 @@
 	"wikibase-deletedentity-property": "Удалённое свойство",
 	"wikibase-deletedentity-query": "Удалённый запрос",
 	"wikibase-error-unexpected": "Ошибка: $1.",
+	"wikibase-error-unknown": "Произошла ошибка.",
 	"wikibase-error-save-generic": "Не удалось сохранить из-за возникшей ошибки.",
 	"wikibase-error-remove-generic": "Не удалось удалить из-за возникшей ошибки.",
 	"wikibase-error-save-connection": "Невозможно сохранить из-за ошибки подключения. Пожалуйста, проверьте своё подключение к интернету.",

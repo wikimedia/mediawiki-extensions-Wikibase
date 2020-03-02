@@ -31,7 +31,8 @@
 			"Pamputt",
 			"Symsym",
 			"Derugon",
-			"Choodyam"
+			"Choodyam",
+			"Eneelk"
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
@@ -58,6 +59,7 @@
 	"wikibase-linkitem-alreadylinked": "La page à laquelle vous voulez lier est déjà attachée à un [$1 élément] du dépôt de données central qui se lie à [[$2]] sur ce site. Les éléments ne peuvent avoir qu’une page attachée par site. Veuillez choisir une autre page pour la lier avec.",
 	"wikibase-linkitem-close": "Fermer la boîte de dialogue et recharger la page",
 	"wikibase-linkitem-failure": "Une erreur inconnue est survenue en essayant de lier la page fournie.",
+	"wikibase-linkitem-failed-modify": "Impossible de lier les pages : échec de la fusion des items correspondants dans {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Lien avec la page",
 	"wikibase-linkitem-linkpage": "Lien avec la page",
 	"wikibase-linkitem-selectlink": "Veuillez sélectionner un site et une page que vous voulez lier vers cette page.",

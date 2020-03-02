@@ -18,6 +18,7 @@
 	"wikibase-deletedentity-property": "S’ha suprimit la propietat",
 	"wikibase-deletedentity-query": "S’ha suprimit la consulta",
 	"wikibase-error-unexpected": "Error: $1.",
+	"wikibase-error-unknown": "S’ha produït un error.",
 	"wikibase-error-save-generic": "No s'ha pogut desar per un error.",
 	"wikibase-error-remove-generic": "No s'ha pogut suprimir per un error.",
 	"wikibase-error-save-connection": "No s'ha pogut desar per un error de connexió. Comproveu la vostra connexió a Internet.",

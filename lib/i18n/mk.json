@@ -12,6 +12,7 @@
 	"wikibase-deletedentity-property": "Избришано својство",
 	"wikibase-deletedentity-query": "Избришано барање",
 	"wikibase-error-unexpected": "Грешка: $1",
+	"wikibase-error-unknown": "Се појави грешка.",
 	"wikibase-error-save-generic": "Не можев да зачувам поради грешка.",
 	"wikibase-error-remove-generic": "Не можев да отстранам поради грешка.",
 	"wikibase-error-save-connection": "Не можев да отстранам поради грешка. Проверете си ја семрежната врска.",

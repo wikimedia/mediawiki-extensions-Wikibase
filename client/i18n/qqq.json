@@ -48,7 +48,7 @@
 	"wikibase-linkitem-alreadylinked": "Tells that the page which the user wanted to link with the current one is already attached to an item on the central data repository. That item already links to an article on this site while items can only have one page per site attached.\n\nParameters:\n* $1 - a link to the item\n* $2 - the name of the page in the current wiki the item already links to",
 	"wikibase-linkitem-close": "Button text asking to close the current dialog and to reload the page.",
 	"wikibase-linkitem-failure": "Shown in case an error occurred which is not an API error (like a linking conflict)",
-  	"wikibase-linkitem-failed-modify": "Shown in case of a merge / modification error of items",
+	"wikibase-linkitem-failed-modify": "Shown in case of a merge / modification error of items",
 	"wikibase-linkitem-title": "Title for the dialog which allows linking the current page with a page on another site.",
 	"wikibase-linkitem-linkpage": "Button in the dialog which allows linking the current page with a page on another site. Usable after the user inserted a site and a page to link.",
 	"wikibase-linkitem-selectlink": "Explaining the user that he can choose a site and a page that should be linked with the one he's currently on.",

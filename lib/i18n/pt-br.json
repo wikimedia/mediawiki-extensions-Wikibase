@@ -22,6 +22,7 @@
 	"wikibase-deletedentity-property": "Propriedade excluída",
 	"wikibase-deletedentity-query": "Consulta excluída",
 	"wikibase-error-unexpected": "Erro: $1.",
+	"wikibase-error-unknown": "Ocorreu um erro.",
 	"wikibase-error-save-generic": "Não foi possível salvar devido a um erro.",
 	"wikibase-error-remove-generic": "Não foi possível remover devido a um erro.",
 	"wikibase-error-save-connection": "Não foi possível salvar devido a um erro de conexão. Verifique sua conexão com a Internet.",

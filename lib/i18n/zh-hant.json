@@ -25,6 +25,7 @@
 	"wikibase-deletedentity-property": "已刪除屬性",
 	"wikibase-deletedentity-query": "已刪除查詢",
 	"wikibase-error-unexpected": "錯誤：$1。",
+	"wikibase-error-unknown": "發生錯誤。",
 	"wikibase-error-save-generic": "由於發生錯誤不能儲存。",
 	"wikibase-error-remove-generic": "由於發生錯誤不能刪除。",
 	"wikibase-error-save-connection": "由於發生連結錯誤不能儲存。請檢查您的網際網路連線。",

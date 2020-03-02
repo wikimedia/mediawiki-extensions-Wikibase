@@ -6,7 +6,8 @@
 			"Sarchia",
 			"Lost Whispers",
 			"Épine",
-			"ئارام بکر"
+			"ئارام بکر",
+			"Arya sarhan"
 		]
 	},
 	"tooltip-t-wikibase": "بەستەر بۆ بەندی خەزێنەی دراوەی پەیوەندیدار",
@@ -57,7 +58,7 @@
 	"wikibase-pageswithbadges-submit": "پەڕەکان نیشان بدە",
 	"wikibase-entityusage-submit": "پەڕەکان نیشان بدە",
 	"wikibase-pageinfo-entity-id": "پێناسەی بەندی {{WBREPONAME}}",
-	"wikibase-pageinfo-entity-id-none": "ھیچ",
+	"wikibase-pageinfo-entity-id-none": "ھیچیان",
 	"wikibase-pageinfo-entity-usage-T": "ناونیشان",
 	"wikibase-otherprojects": "لە پڕۆژەکانی تر",
 	"echo-category-title-wikibase-action": "بەستنەوەکان بە {{WBREPONAME}}ەوە",

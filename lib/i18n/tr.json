@@ -19,6 +19,7 @@
 	"wikibase-deletedentity-property": "Silinmiş Mülk",
 	"wikibase-deletedentity-query": "Silinen sorgu",
 	"wikibase-error-unexpected": "Hata: $1.",
+	"wikibase-error-unknown": "Bir hata oluştu.",
 	"wikibase-error-save-generic": "Bir hata nedeniyle kaydedilemedi.",
 	"wikibase-error-remove-generic": "Bir hata nedeniyle kaldırılamadı.",
 	"wikibase-error-save-connection": "Bir bağlantı hatası nedeniyle kaydedilemedi. Lütfen İnternet bağlantınızı kontrol edin.",

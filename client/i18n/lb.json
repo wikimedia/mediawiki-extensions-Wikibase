@@ -28,6 +28,7 @@
 	"wikibase-linkitem-alreadylinked": "D'Säit, déi Dir verlinke wëllt, ass scho mat engem [$1 Objet] an eiser zentraler Datebank verbonnen, dat op [[$2]] op dësen Internesite verlinkt ass. Et ka just eng Säit pro Internetsite mat engem Objet verbonne sinn. Sicht wgl. eng aner Säit, déi verlinkt gi soll.",
 	"wikibase-linkitem-close": "Maacht den Dialog zou a luet d'Säit nei",
 	"wikibase-linkitem-failure": "En onbekannte Feeler ass beim Versuch fir déi Säit déi Dir uginn hutt ze verlinken.",
+	"wikibase-linkitem-failed-modify": "Säite konnten net verbonne ginn; Feeler beim Fusionéieren vun de respektiven Elementer op {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Mat der Säit verlinken",
 	"wikibase-linkitem-linkpage": "Mat der Säit verlinken",
 	"wikibase-linkitem-selectlink": "Sicht wgl. e Site an eng Säit eraus déi Dir mat dëser Säit verlinke wëllt.",

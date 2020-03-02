@@ -51,6 +51,7 @@
 	"wikibase-linkitem-alreadylinked": "您欲連結的頁面已與於中央資料儲存庫的 [$1 項目] 關聯，於本站的連結為 [[$2]]。 \n每個項目僅可以關聯網站的一個頁面，請選擇其他要連結頁面。",
 	"wikibase-linkitem-close": "關閉對話方塊並重新整理頁面",
 	"wikibase-linkitem-failure": "嘗試連結指定的頁面時發生不明錯誤。",
+	"wikibase-linkitem-failed-modify": "無法連結頁面：合併在{{WBREPONAME}}對應的項目失敗。",
 	"wikibase-linkitem-title": "連結頁面",
 	"wikibase-linkitem-linkpage": "連結頁面",
 	"wikibase-linkitem-selectlink": "請選擇網站與您想要連結到此頁面的頁面。",

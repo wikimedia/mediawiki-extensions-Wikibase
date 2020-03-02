@@ -159,7 +159,7 @@
 	"wikibase-item-reference-edit-nonexistent-item": "Елемент із цим ідентифікатором не існує",
 	"wikibase-wikibaserepopage-not-itemid": "«$1» не є допустимим ідентифікатором елемента.",
 	"wikibase-wikibaserepopage-invalid-langcode": "Код мови «$1» невідомий. Будь ласка, використовуйте код мови, відомий системі, наприклад, «uk».",
-	"wikibase-wikibaserepopage-pipe-in-alias": "Альтернативні назви, що містять вертикальні риски, можна редагувати лише на сторінці самої сутності (з увімкненим javascript) або через API",
+	"wikibase-wikibaserepopage-pipe-in-alias": "Альтернативні назви, що містять вертикальні риски, можна редагувати лише на сторінці самої сутності (з увімкненим JavaScript) або через API",
 	"wikibase-wikibaserepopage-invalid-id": "Ідентифікатор «$1» невідомий системі. Будь ласка, використовуйте дійсний ідентифікатор сутності.",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 є перенаправленням.",
 	"wikibase-wikibaserepopage-storage-exception": "Сталася помилка при спробі завантажити $1: $2.",
@@ -431,5 +431,14 @@
 	"wikibase-shortcopyrightwarning-heading": "Атрибуція ліцензія",
 	"wikibase-entity-save-error-heading": "Щось пішло не так",
 	"wikibase-entity-save-error-message": "Вашу зміну не вдалося опублікувати. Ви можете спробувати натиснути кнопку публікації ще раз.",
-	"wikibase-tainted-ref-warning-icon-title": "Це твердження має певні потенційні проблеми."
+	"wikibase-tainted-ref-warning-icon-title": "Це твердження має певні потенційні проблеми.",
+	"wikibase-tainted-ref-popper-text": "Значення цього твердження змінилося, але посилання на джерело залишилося те саме. Можете вилучити це застереження, якщо посилання на джерело все ще є правильним.",
+	"wikibase-tainted-ref-popper-title": "Потенційна невідповідність значення і посилання на джерело",
+	"wikibase-tainted-ref-popper-help-link-title": "Сторінка довідки для цього типу обмеження",
+	"wikibase-tainted-ref-popper-help-link-text": "Довідка",
+	"wikibase-tainted-ref-popper-feedback-text": "Чи є ця нова функція корисною?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Залиште свій відгук",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Посилання на сторінку для відгуків",
+	"wikibase-tainted-ref-popper-remove-warning": "Вилучити застереження",
+	"wikibase-tainted-ref-tainted-icon-title": "Це твердження має певні потенційні проблеми."
 }

@@ -3,10 +3,12 @@
 		"authors": [
 			"बिप्लब आनन्द",
 			"NehalDaveND",
-			"सरोज कुमार ढकाल"
+			"सरोज कुमार ढकाल",
+			"पर्वत सुबेदी"
 		]
 	},
 	"wikibase-error-unexpected": "त्रुटि: $1",
+	"wikibase-error-unknown": "केही त्रुटी भयाे",
 	"wikibase-quantitydetails-amount": "राशि",
 	"wikibase-timedetails-time": "समय",
 	"wikibase-timedetails-isotime": "समयछाप",
