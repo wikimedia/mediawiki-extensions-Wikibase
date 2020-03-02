@@ -88,6 +88,7 @@ storiesOf( 'EventEmittingButton', module )
 		template:
 			`<EventEmittingButton
 				type="cancel"
+				size="L"
 				message="disabled cancel"
 				:disabled="true"
 			/>`,
