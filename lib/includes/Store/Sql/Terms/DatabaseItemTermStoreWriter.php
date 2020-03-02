@@ -36,9 +36,6 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	/** @var StringNormalizer */
 	private $stringNormalizer;
 
-	/** @var IDatabase|null */
-	private $dbw = null;
-
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
 
@@ -58,10 +55,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	}
 
 	private function getDbw(): IDatabase {
-		if ( $this->dbw === null ) {
-			$this->dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
-		}
-		return $this->dbw;
+		return $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
 	}
 
 	public function storeTerms( ItemId $itemId, Fingerprint $fingerprint ) {
@@ -100,8 +94,10 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	 * However, that may happen in a different transaction than this call.
 	 */
 	private function acquireAndInsertTerms( ItemId $itemId, Fingerprint $fingerprint ): array {
+		$dbw = $this->getDbw();
+
 		// Find term entries that already exist for the item
-		$oldTermInLangIds = $this->getDbw()->selectFieldValues(
+		$oldTermInLangIds = $dbw->selectFieldValues(
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
 			[ 'wbit_item_id' => $itemId->getNumericId() ],
@@ -116,7 +112,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		// Acquire all of the Term in lang Ids needed for the wbt_item_terms table
 		$this->termInLangIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
-			function ( array $newTermInLangIds ) use ( $itemId, $oldTermInLangIds, &$termInLangIdsToClean, $fname ) {
+			function ( array $newTermInLangIds ) use ( $itemId, $oldTermInLangIds, &$termInLangIdsToClean, $fname, $dbw ) {
 				$termInLangIdsToInsert = array_diff( $newTermInLangIds, $oldTermInLangIds );
 				$termInLangIdsToClean = array_diff( $oldTermInLangIds, $newTermInLangIds );
 				$rowsToInsert = [];
@@ -127,7 +123,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 					];
 				}
 
-				$this->getDbw()->insert(
+				$dbw->insert(
 					'wbt_item_terms',
 					$rowsToInsert,
 					$fname
@@ -138,7 +134,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		if ( $termInLangIdsToClean !== [] ) {
 			// Delete entries in wbt_item_terms that are no longer needed
 			// Further cleanup should then done by the caller of this method
-			$this->getDbw()->delete(
+			$dbw->delete(
 				'wbt_item_terms',
 				[
 					'wbit_item_id' => $itemId->getNumericId(),
@@ -174,7 +170,9 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	 * @return int[]
 	 */
 	private function deleteTermsWithoutClean( ItemId $itemId ): array {
-		$res = $this->getDbw()->select(
+		$dbw = $this->getDbw();
+
+		$res = $dbw->select(
 			'wbt_item_terms',
 			[ 'wbit_id', 'wbit_term_in_lang_id' ],
 			[ 'wbit_item_id' => $itemId->getNumericId() ],
@@ -190,7 +188,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		}
 
 		if ( $itemTermRowIdsToDelete !== [] ) {
-			$this->getDbw()->delete(
+			$dbw->delete(
 				'wbt_item_terms',
 				[ 'wbit_id' => $itemTermRowIdsToDelete ],
 				__METHOD__

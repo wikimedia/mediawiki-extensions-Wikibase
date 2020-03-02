@@ -34,16 +34,6 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	private $lbFactory;
 
 	/**
-	 * @var IDatabase master database to insert non-existing records into
-	 */
-	private $dbMaster = null;
-
-	/**
-	 * @var IDatabase replica database to initially query existing records in
-	 */
-	private $dbReplica = null;
-
-	/**
 	 * @var string
 	 */
 	private $table;
@@ -231,8 +221,10 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	private function fetchExistingRecordsFromReplica( array $neededRecords ): array {
+		$dbr = $this->getDbReplica();
+
 		// Fetching existing records from replica
-		$existingRecords = $this->findExistingRecords( $this->getDbReplica(), $neededRecords );
+		$existingRecords = $this->findExistingRecords( $dbr, $neededRecords );
 		$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
 
 		// If not all needed records exist in replica,
@@ -244,7 +236,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 			$existingRecords = array_merge(
 				$existingRecords,
-				$this->findExistingRecords( $this->getDbReplica(), $neededRecords )
+				$this->findExistingRecords( $dbr, $neededRecords )
 			);
 
 			$neededRecords = $this->filterNonExistingRecords( $neededRecords, $existingRecords );
@@ -254,21 +246,18 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	}
 
 	private function getDbReplica() {
-		if ( $this->dbReplica === null ) {
-			$this->dbReplica = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_REPLICA );
-		}
-
-		return $this->dbReplica;
+		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_REPLICA );
 	}
 
 	private function getDbMaster() {
-		if ( $this->dbMaster === null ) {
-			$this->dbMaster = $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
-		}
-
-		return $this->dbMaster;
+		return $this->getLoadBalancer()->getConnection( ILoadBalancer::DB_MASTER );
 	}
 
+	/**
+	 * @param IDatabase $db Caller can choose for this to be the Master or Replica
+	 * @param array $neededRecords
+	 * @return array
+	 */
 	private function findExistingRecords( IDatabase $db, array $neededRecords ): array {
 		$recordsSelectConditions = array_map( function ( $record ) use ( $db ) {
 			return $db->makeList( $record, IDatabase::LIST_AND );

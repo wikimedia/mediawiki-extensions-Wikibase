@@ -36,9 +36,6 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	/** @var StringNormalizer */
 	private $stringNormalizer;
 
-	/** @var IDatabase|null */
-	private $dbw = null;
-
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
 
@@ -58,10 +55,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	}
 
 	private function getDbw(): IDatabase {
-		if ( $this->dbw === null ) {
-			$this->dbw = $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
-		}
-		return $this->dbw;
+		return $this->loadBalancer->getConnection( ILoadBalancer::DB_MASTER );
 	}
 
 	public function storeTerms( PropertyId $propertyId, Fingerprint $fingerprint ) {
@@ -100,8 +94,10 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	 * However, that may happen in a different transaction than this call.
 	 */
 	private function acquireAndInsertTerms( PropertyId $propertyId, Fingerprint $fingerprint ): array {
+		$dbw = $this->getDbw();
+
 		// Find term entries that already exist for the property
-		$oldTermInLangIds = $this->getDbw()->selectFieldValues(
+		$oldTermInLangIds = $dbw->selectFieldValues(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
 			[ 'wbpt_property_id' => $propertyId->getNumericId() ],
@@ -116,7 +112,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		// Acquire all of the Term in lang Ids needed for the wbt_property_terms table
 		$this->termInLangIdsAcquirer->acquireTermInLangIds(
 			$termsArray,
-			function ( array $newTermInLangIds ) use ( $propertyId, $oldTermInLangIds, &$termInLangIdsToClean, $fname ) {
+			function ( array $newTermInLangIds ) use ( $propertyId, $oldTermInLangIds, &$termInLangIdsToClean, $fname, $dbw ) {
 				$termInLangIdsToInsert = array_diff( $newTermInLangIds, $oldTermInLangIds );
 				$termInLangIdsToClean = array_diff( $oldTermInLangIds, $newTermInLangIds );
 				$rowsToInsert = [];
@@ -127,7 +123,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 					];
 				}
 
-				$this->getDbw()->insert(
+				$dbw->insert(
 					'wbt_property_terms',
 					$rowsToInsert,
 					$fname
@@ -138,7 +134,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		if ( $termInLangIdsToClean !== [] ) {
 			// Delete entries in wbt_property_terms that are no longer needed
 			// Further cleanup should then done by the caller of this method
-			$this->getDbw()->delete(
+			$dbw->delete(
 				'wbt_property_terms',
 				[
 					'wbpt_property_id' => $propertyId->getNumericId(),
@@ -174,7 +170,9 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	 * @return int[]
 	 */
 	private function deleteTermsWithoutClean( PropertyId $propertyId ): array {
-		$res = $this->getDbw()->select(
+		$dbw = $this->getDbw();
+
+		$res = $dbw->select(
 			'wbt_property_terms',
 			[ 'wbpt_id', 'wbpt_term_in_lang_id' ],
 			[ 'wbpt_property_id' => $propertyId->getNumericId() ],
@@ -190,7 +188,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		}
 
 		if ( $rowIdsToDelete !== [] ) {
-			$this->getDbw()->delete(
+			$dbw->delete(
 				'wbt_property_terms',
 				[ 'wbpt_id' => $rowIdsToDelete ],
 				__METHOD__

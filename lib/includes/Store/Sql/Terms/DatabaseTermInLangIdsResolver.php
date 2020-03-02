@@ -7,7 +7,6 @@ use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -33,9 +32,6 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 
 	/** @var LoggerInterface */
 	private $logger;
-
-	/** @var IDatabase */
-	private $dbr = null;
 
 	/** @var string[] stash of data returned from the {@link TypeIdsResolver} */
 	private $typeNames = [];
@@ -232,11 +228,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 	}
 
 	private function getDbr() {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
-		}
-
-		return $this->dbr;
+		return $this->lb->getConnection( ILoadBalancer::DB_REPLICA, [], $this->databaseDomain );
 	}
 
 }

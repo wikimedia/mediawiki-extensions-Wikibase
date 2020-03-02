@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\Sql\Terms\TypeIdsLookup;
 use Wikibase\Repo\Store\TermsCollisionDetector;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
@@ -28,9 +27,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 	/** @var TypeIdsLookup */
 	private $typeIdsLookup;
-
-	/** @var IDatabase */
-	private $dbr;
 
 	/** @var DatabaseEntityTermsTableProvider */
 	private $databaseEntityTermsTableProvider;
@@ -155,9 +151,11 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 			$conditions[ $entityIdColumn ] = $filterOnEntityIds;
 		}
 
+		$dbr = $this->getDbr();
+
 		if ( $firstMatchOnly === true ) {
 
-			$match = $this->getDbr()->selectField(
+			$match = $dbr->selectField(
 				$table,
 				$entityIdColumn,
 				$conditions,
@@ -170,7 +168,7 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 
 		} else {
 
-			return $this->getDbr()->selectFieldValues(
+			return $dbr->selectFieldValues(
 				$table,
 				$entityIdColumn,
 				$conditions,
@@ -199,10 +197,6 @@ class DatabaseTermsCollisionDetector implements TermsCollisionDetector {
 	}
 
 	private function getDbr() {
-		if ( $this->dbr === null ) {
-			$this->dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, [] );
-		}
-
-		return $this->dbr;
+		return $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA, [] );
 	}
 }
