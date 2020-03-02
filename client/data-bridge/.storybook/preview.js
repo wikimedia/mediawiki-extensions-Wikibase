@@ -1,9 +1,12 @@
 import { addDecorator, addParameters } from '@storybook/vue';
 import { withA11y } from '@storybook/addon-a11y';
+import { withKnobs } from '@storybook/addon-knobs';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import './storybook-global.scss';
 
 addDecorator( withA11y );
+
+addDecorator( withKnobs );
 
 addDecorator( () => ( {
 	template: '<div class="wb-db-app"><story/></div>',
