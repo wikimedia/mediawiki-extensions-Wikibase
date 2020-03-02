@@ -163,9 +163,14 @@ class ChangeHandler {
 			$change->getAction(),
 			$change->hasField( 'user_id' ) ? 'uid:' . $change->getUserId() : 'uid:?'
 		);
+
+		// Removing root job timestamp to make it work: T233520
+		$refreshLinksRootParams = $rootJobParams;
+		unset( $refreshLinksRootParams['rootJobTimestamp'] );
+
 		$this->updater->scheduleRefreshLinks(
 			$titlesToUpdate,
-			$rootJobParams,
+			$refreshLinksRootParams,
 			$change->getAction(),
 			'uid:' . ( $change->getUserId() ?: '?' )
 		);
