@@ -13833,8 +13833,7 @@ var StatementMutationError;
 
 (function (StatementMutationError) {
   StatementMutationError["NO_SNAK_FOUND"] = "snak not found";
-  StatementMutationError["WRONG_PAYLOAD_TYPE"] = "payload type does not match";
-  StatementMutationError["WRONG_PAYLOAD_VALUE_TYPE"] = "payload value is not a string";
+  StatementMutationError["INCONSISTENT_PAYLOAD_TYPE"] = "targetvalue's datavalue type is different from the snak's datavalue type in the state";
 })(StatementMutationError || (StatementMutationError = {}));
 
 /* harmony default export */ var statement_mutation_StatementMutationError = (StatementMutationError);
@@ -13860,12 +13859,8 @@ function () {
         throw new Error(statement_mutation_StatementMutationError.NO_SNAK_FOUND);
       }
 
-      if (targetValue.type !== 'string') {
-        throw new Error(statement_mutation_StatementMutationError.WRONG_PAYLOAD_TYPE);
-      }
-
-      if (typeof targetValue.value !== 'string') {
-        throw new Error(statement_mutation_StatementMutationError.WRONG_PAYLOAD_VALUE_TYPE);
+      if (snak.datavalue !== undefined && targetValue.type !== snak.datavalue.type) {
+        throw new Error(statement_mutation_StatementMutationError.INCONSISTENT_PAYLOAD_TYPE);
       }
 
       snak.snaktype = 'value';

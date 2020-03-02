@@ -17,12 +17,8 @@ export default class ReplaceMutationStrategy implements StatementMutationStrateg
 			throw new Error( StatementMutationError.NO_SNAK_FOUND );
 		}
 
-		if ( targetValue.type !== 'string' ) {
-			throw new Error( StatementMutationError.WRONG_PAYLOAD_TYPE );
-		}
-
-		if ( typeof targetValue.value !== 'string' ) {
-			throw new Error( StatementMutationError.WRONG_PAYLOAD_VALUE_TYPE );
+		if ( snak.datavalue !== undefined && targetValue.type !== snak.datavalue.type ) {
+			throw new Error( StatementMutationError.INCONSISTENT_PAYLOAD_TYPE );
 		}
 
 		snak.snaktype = 'value';

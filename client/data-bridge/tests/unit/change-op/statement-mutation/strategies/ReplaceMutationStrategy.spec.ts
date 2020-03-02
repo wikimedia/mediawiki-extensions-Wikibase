@@ -25,7 +25,7 @@ describe( 'ReplaceMutationStrategy', () => {
 		expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
 	} );
 
-	it( 'rejects if the data value type if the input is not string', () => {
+	it( 'rejects if the data value type is not the same in targetvalue and state', () => {
 		const targetValue: DataValue = {
 			type: 'url' as DataValueType,
 			value: 'use',
@@ -43,29 +43,8 @@ describe( 'ReplaceMutationStrategy', () => {
 		const strategy = new ReplaceMutationStrategy();
 		expect( () => {
 			strategy.apply( targetValue, mockSnakPath, mockState );
-		} ).toThrowError( StatementMutationError.WRONG_PAYLOAD_TYPE );
+		} ).toThrowError( StatementMutationError.INCONSISTENT_PAYLOAD_TYPE );
 		expect( mockSnakPath.resolveSnakInStatement ).toHaveBeenCalledWith( mockState );
-	} );
-
-	it( 'rejects if the data value of the input is not string', () => {
-		const targetValue: DataValue = {
-			type: 'string' as DataValueType,
-			value: 42 as any,
-		};
-		const mockSnakPath: PathToSnak = {
-			resolveSnakInStatement: jest.fn().mockReturnValue( {
-				property: 'P42',
-				snaktype: 'value',
-				datatype: 'string',
-				datavalue: {},
-			} ),
-		};
-		const mockState = {};
-
-		const strategy = new ReplaceMutationStrategy();
-		expect( () => {
-			strategy.apply( targetValue, mockSnakPath, mockState );
-		} ).toThrowError( StatementMutationError.WRONG_PAYLOAD_VALUE_TYPE );
 	} );
 
 	it( 'sets the snaktype and datavalue', () => {

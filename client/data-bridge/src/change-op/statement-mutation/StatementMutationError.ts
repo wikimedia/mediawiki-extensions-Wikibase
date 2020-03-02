@@ -1,7 +1,7 @@
 enum StatementMutationError {
 	NO_SNAK_FOUND = 'snak not found',
-	WRONG_PAYLOAD_TYPE = 'payload type does not match',
-	WRONG_PAYLOAD_VALUE_TYPE = 'payload value is not a string',
+	INCONSISTENT_PAYLOAD_TYPE =
+	'targetvalue\'s datavalue type is different from the snak\'s datavalue type in the state',
 }
 
 export default StatementMutationError;
