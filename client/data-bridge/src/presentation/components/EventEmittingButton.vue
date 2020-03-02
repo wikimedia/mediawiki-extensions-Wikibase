@@ -178,22 +178,22 @@ export default class EventEmittingButton extends Vue {
 	outline: 0;
 	transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms, filter 100ms;
 
-	@mixin size-L {
-		font-size: $font-size-normal;
-		padding: px-to-rem( 7px ) px-to-rem( 16px );
-	}
-
 	@mixin size-M {
 		font-size: $font-size-bodyS;
 		padding: px-to-rem( 4px ) px-to-rem( 12px ) px-to-rem( 5px );
 	}
 
-	&--size-L {
-		@include size-L;
+	@mixin size-L {
+		font-size: $font-size-normal;
+		padding: px-to-rem( 7px ) px-to-rem( 16px );
 	}
 
 	&--size-M {
 		@include size-M;
+	}
+
+	&--size-L {
+		@include size-L;
 	}
 
 	@media ( max-width: $breakpoint ) {
