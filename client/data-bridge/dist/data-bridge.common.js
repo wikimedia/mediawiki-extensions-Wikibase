@@ -15393,12 +15393,12 @@ var DataBridge_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_DataBridge = (DataBridge_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"681ee0ae-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Loading.vue?vue&type=template&id=be64abac&
-var Loadingvue_type_template_id_be64abac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-load"},[(_vm.ready)?_vm._t("default"):_vm._e(),(_vm.loadingIsSlow)?_c('IndeterminateProgressBar',{staticClass:"wb-db-load__visibility"}):_vm._e()],2)}
-var Loadingvue_type_template_id_be64abac_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"681ee0ae-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Loading.vue?vue&type=template&id=2dda0e6e&
+var Loadingvue_type_template_id_2dda0e6e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-load"},[(_vm.ready)?_vm._t("default"):_vm._e(),(_vm.loadingIsSlow)?_c('IndeterminateProgressBar',{staticClass:"wb-db-load__visibility"}):_vm._e()],2)}
+var Loadingvue_type_template_id_2dda0e6e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/Loading.vue?vue&type=template&id=be64abac&
+// CONCATENATED MODULE: ./src/presentation/components/Loading.vue?vue&type=template&id=2dda0e6e&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Loading.vue?vue&type=script&lang=ts&
 
@@ -15416,29 +15416,34 @@ var Loadingvue_type_template_id_be64abac_staticRenderFns = []
  *
  * Depending on the run time of the operation an animation is shown.
  *
+ * `isInitializing` and `isSaving` are provided to the component to inform it about the
+ * state of the application. They should not both be true simultaneously.
+ *
  * This
  *
- * * shows the default slot if `isInitializing` is false (= ready)
- * * hides the default slot while `isInitializing` is true; during that time it
- *   * shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
+ * * shows the default slot if `isInitializing` and `isSaving` are false (= ready)
+ * * while `isInitializing` is true it
+ *   * hides the default slot, i.e. shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
  *   * shows the `IndeterminateProgressBar` from there on until `isInitializing` is false
- *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`[1]
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`
+ * * while `isSaving` is true it
+ *   * shows the default slot
+ *   * overlays it with the `IndeterminateProgressBar` from `TIME_UNTIL_CONSIDERED_SLOW` until `isSaving` is false
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`
  *
- * [1] This condition is only applied while `isInitializing` is true
- *
- * Effectively there are three scenarios:
+ * Effectively there are three scenarios transitioning to a "ready" state:
  *
  * ```
- * Timeline     0s                        1s            1.5s            2s
+ * Timeline                 0s                        1s            1.5s            2s
  * Scenario 1
- *   Loading    |------------------|
- *   Animation      (no animation)  <- ready
+ *   Initializing/Saving    |------------------|
+ *   Animation                  (no animation)  <- ready
  * Scenario 2
- *   Loading    |----------------------------|
- *   Animation                            |--------------|<- ready
+ *   Initializing/Saving    |----------------------------|
+ *   Animation                                        |--------------|<- ready
  * Scenario 3
- *   Loading    |---------------------------------------------|
- *   Animation                            |-------------------|<- ready
+ *   Initializing/Saving    |---------------------------------------------|
+ *   Animation                                        |-------------------|<- ready
  * ```
  */
 
@@ -15576,8 +15581,8 @@ var Loadingvue_type_style_index_0_lang_scss_ = __webpack_require__("6929");
 
 var Loading_component = normalizeComponent(
   components_Loadingvue_type_script_lang_ts_,
-  Loadingvue_type_template_id_be64abac_render,
-  Loadingvue_type_template_id_be64abac_staticRenderFns,
+  Loadingvue_type_template_id_2dda0e6e_render,
+  Loadingvue_type_template_id_2dda0e6e_staticRenderFns,
   false,
   null,
   null,
