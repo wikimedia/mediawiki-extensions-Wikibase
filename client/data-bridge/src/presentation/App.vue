@@ -139,6 +139,16 @@ export default class App extends mixins( StateMixin ) {
 		overflow-y: auto;
 	}
 
+	@media ( max-width: $breakpoint ) {
+		&__header {
+			height: $size-dialog-bar--mobile;
+		}
+
+		&__body {
+			top: $size-dialog-bar--mobile;
+		}
+	}
+
 	&__data-bridge--overlayed {
 		position: relative;
 
