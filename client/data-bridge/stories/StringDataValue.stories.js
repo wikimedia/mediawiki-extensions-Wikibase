@@ -85,6 +85,6 @@ storiesOf( 'StringDataValue', module )
 		components: { StringDataValue },
 		template:
 			`<div>
-				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter" maxlength="15"/>
+				<StringDataValue :label="sampleLabel" :dataValue="sampleValue" :setDataValue="sampleSetter" :maxlength="15"/>
 			</div>`,
 	} ) );
