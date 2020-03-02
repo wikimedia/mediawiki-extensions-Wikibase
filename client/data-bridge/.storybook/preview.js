@@ -3,6 +3,11 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
 import './storybook-global.scss';
+import Vue from 'vue';
+
+Vue.config.warnHandler = ( err, _vm, trace ) => {
+	throw new Error( err + trace );
+};
 
 addDecorator( withA11y );
 
