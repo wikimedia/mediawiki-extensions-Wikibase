@@ -13,4 +13,8 @@
 		font-style: italic;
 		color: $color-placeholder;
 	}
+
+	@media ( max-width: $breakpoint ) {
+		font-size: $font-size-bodyM;
+	}
 }

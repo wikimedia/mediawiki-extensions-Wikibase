@@ -11,4 +11,8 @@
 		border-color: $color-primary--focus;
 		box-shadow: inset 0 0 0 1px $color-primary--focus;
 	}
+
+	@media ( max-width: $breakpoint ) {
+		padding: 7px $base-spacing-unit-fixed;
+	}
 }
