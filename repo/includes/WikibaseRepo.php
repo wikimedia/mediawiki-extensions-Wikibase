@@ -2310,7 +2310,7 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return array[] Associative array mapping names of known entity types (strings) to lists of names of
+	 * @return string[][] Associative array mapping names of known entity types (strings) to lists of names of
 	 *         repositories providing entities of those types.
 	 *         Note: Currently entities of a given type are only provided by single source. This
 	 *         assumption can be changed in the future.

@@ -34,7 +34,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	private $entityLookup;
 
 	/**
-	 * @var string[][][] Associative array mapping entity type names (strings) to names of
+	 * @var string[][] Associative array mapping entity type names (strings) to names of
 	 *   repositories providing entities of this type.
 	 */
 	private $entityTypeToRepositoryMapping;
@@ -43,7 +43,7 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityIdParser $idParser
 	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 * @param string[][][] $entityTypeToRepositoryMapping Associative array (string => string[][])
+	 * @param string[][] $entityTypeToRepositoryMapping Associative array (string => string[][])
 	 *   mapping entity types to a list of repository names which provide entities of the given type.
 	 */
 	public function __construct(
@@ -81,18 +81,20 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 		$allSearchResults = [];
 
 		// If $text is the ID of an existing item (with repository prefix or without), include it in the result.
-		$entityIds = $this->getEntityIdsMatchingSearchTerm( $text, $entityType );
-		foreach ( $entityIds as $entityId ) {
-			// This is nothing to do with terms, but make it look a normal result so everything is easier
-			$displayTerms = $this->getDisplayTerms( $entityId );
-			$allSearchResults[$entityId->getSerialization()] = new TermSearchResult(
-				new Term( 'qid', $entityId->getSerialization() ),
-				'entityId',
-				$entityId,
-				$displayTerms['label'],
-				$displayTerms['description']
-			);
+		$entityId = $this->getEntityIdMatchingSearchTerm( $text, $entityType );
+		if ( !$entityId ) {
+			return $allSearchResults;
 		}
+
+		// This is nothing to do with terms, but make it look a normal result so everything is easier
+		$displayTerms = $this->getDisplayTerms( $entityId );
+		$allSearchResults[$entityId->getSerialization()] = new TermSearchResult(
+			new Term( 'qid', $entityId->getSerialization() ),
+			'entityId',
+			$entityId,
+			$displayTerms['label'],
+			$displayTerms['description']
+		);
 
 		return $allSearchResults;
 	}
@@ -107,9 +109,9 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 * @param string $term
 	 * @param string $entityType
 	 *
-	 * @return EntityId[]
+	 * @return EntityId|null
 	 */
-	private function getEntityIdsMatchingSearchTerm( $term, $entityType ) {
+	private function getEntityIdMatchingSearchTerm( $term, $entityType ) {
 		$entityId = null;
 		foreach ( $this->getEntityIdCandidatesForSearchTerm( $term ) as $candidate ) {
 			try {
@@ -121,14 +123,14 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 		}
 
 		if ( $entityId === null ) {
-			return [];
+			return null;
 		}
 
 		if ( $entityId->getEntityType() !== $entityType ) {
-			return [];
+			return null;
 		}
 
-		return $this->getMatchingIdsIncludingPrefixes( $entityId );
+		return $this->getMatchingId( $entityId );
 	}
 
 	/**
@@ -164,26 +166,32 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 	 *
 	 * @param EntityId $entityId
 	 *
-	 * @return EntityId[]
+	 * @return EntityId|null
 	 */
-	private function getMatchingIdsIncludingPrefixes( EntityId $entityId ) {
-		$entityIds = [];
-
-		if ( $this->entityLookup->hasEntity( $entityId ) ) {
-			$entityIds[] = $entityId;
-		}
-
-		// Entity ID without repository prefix, let's try prepending known prefixes
+	private function getMatchingId( EntityId $entityId ) {
 		$entityType = $entityId->getEntityType();
-		$unprefixedIdPart = $entityId->getLocalPart();
-
 		if ( !array_key_exists( $entityType, $this->entityTypeToRepositoryMapping ) ) {
-			return $entityIds;
+			// Unknown entity type, nothing we can do here.
+			return null;
 		}
 
 		// NOTE: this assumes entities of the particular type are only provided by a single repository
 		// This assumption is currently valid but might change in the future.
-		list( $repositoryPrefix, ) = $this->entityTypeToRepositoryMapping[$entityType][0];
+		$repositoryPrefix = $this->entityTypeToRepositoryMapping[$entityType][0];
+
+		if ( $entityId->getRepositoryName() !== '' && $repositoryPrefix !== $entityId->getRepositoryName() ) {
+			// If a repository is explicitly specified and it is not the one (and only) we know about abort.
+			return null;
+		}
+
+		// Note: EntityLookup::hasEntity may return true even if the getRepositoryName of the entity id is
+		// unknown, as the lookup doesn't about its entity source setting.
+		if ( $this->entityLookup->hasEntity( $entityId ) ) {
+			return $entityId;
+		}
+
+		// Entity ID without repository prefix, let's try prepending known prefixes
+		$unprefixedIdPart = $entityId->getLocalPart();
 
 		try {
 			$id = $this->idParser->parse( EntityId::joinSerialization( [
@@ -192,14 +200,14 @@ class EntityIdSearchHelper implements EntitySearchHelper {
 				$unprefixedIdPart
 			] ) );
 		} catch ( EntityIdParsingException $ex ) {
-			return [];
+			return null;
 		}
 
 		if ( $this->entityLookup->hasEntity( $id ) ) {
-			$entityIds[] = $id;
+			return $id;
 		}
 
-		return $entityIds;
+		return null;
 	}
 
 	/**
