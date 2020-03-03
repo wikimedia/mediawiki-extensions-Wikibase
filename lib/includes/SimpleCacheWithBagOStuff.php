@@ -1,16 +1,14 @@
 <?php
-/**
- * @file
- * @internal
- * @phan-file-suppress PhanTypeInvalidThrowsIsInterface
- */
 
 namespace Wikibase\Lib;
 
+use BagOStuff;
+use DateInterval;
+use DateTime;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
-use Psr\SimpleCache\InvalidArgumentException;
+use Traversable;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,7 +20,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	const KEY_REGEX = '/^[a-zA-Z0-9_\-.]+\z/';
 
 	/**
-	 * @var \BagOStuff
+	 * @var BagOStuff
 	 */
 	private $inner;
 
@@ -37,13 +35,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private $secret;
 
 	/**
-	 * @param \BagOStuff $inner
+	 * @param BagOStuff $inner
 	 * @param string $prefix While setting and getting all keys will be prefixed with this string
 	 * @param string $secret Will be used to create a signature for stored values
 	 *
 	 * @throws \InvalidArgumentException If prefix has wrong format or secret is not a string or empty
 	 */
-	public function __construct( \BagOStuff $inner, $prefix, $secret ) {
+	public function __construct( BagOStuff $inner, $prefix, $secret ) {
 		$this->assertKeyIsValid( $prefix );
 
 		if ( !is_string( $secret ) || empty( $secret ) ) {
@@ -64,7 +62,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return mixed The value of the item from the cache, or $default in case of cache miss.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function get( $key, $default = null ) {
@@ -83,13 +81,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @param string $key The key of the item to store.
 	 * @param mixed $value The value of the item to store, must be serializable.
-	 * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
+	 * @param null|int|DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
 	 *                                      the driver supports TTL then the library may set a default value
 	 *                                      for it or let the driver take care of that.
 	 *
 	 * @return bool True on success and false on failure.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function set( $key, $value, $ttl = null ) {
@@ -108,7 +106,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return bool True if the item was successfully removed. False if there was an error.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function delete( $key ) {
@@ -135,7 +133,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as value.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if $keys is neither an array nor a Traversable,
 	 *   or if any of the $keys are not a legal value.
 	 */
@@ -171,13 +169,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * Persists a set of key => value pairs in the cache, with an optional TTL.
 	 *
 	 * @param iterable $values A list of key => value pairs for a multiple-set operation.
-	 * @param null|int|\DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
+	 * @param null|int|DateInterval $ttl Optional. The TTL value of this item. If no value is sent and
 	 *                                       the driver supports TTL then the library may set a default value
 	 *                                       for it or let the driver take care of that.
 	 *
 	 * @return bool True on success and false on failure.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if $values is neither an array nor a Traversable,
 	 *   or if any of the $values are not a legal value.
 	 */
@@ -200,7 +198,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return bool True if the items were successfully removed. False if there was an error.
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if $keys is neither an array nor a Traversable,
 	 *   or if any of the $keys are not a legal value.
 	 */
@@ -226,7 +224,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @return bool
 	 *
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function has( $key ) {
@@ -246,7 +244,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @param bool $allowIntegers Due to the fact that in PHP array indices are automatically casted
 	 * 								to integers if possible, e.g. `['0' => ''] === [0 => '']`, we have to
 	 * 								allow integers to be present as keys in $values in `setMultiple()`
-	 * @throws InvalidArgumentException|\InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 */
 	private function assertKeyIsValid( $key, $allowIntegers = false ) {
 		if ( $allowIntegers && is_int( $key ) ) {
@@ -255,36 +253,30 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 		if ( !is_string( $key ) ) {
 			$type = gettype( $key );
-			throw $this->invalidArgument( "Cache key should be string or integer, `{$type}` is given" );
+			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
 		}
 
 		if ( $key === '' ) {
-			throw $this->invalidArgument( "Cache key cannot be an empty string" );
+			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
 		}
 
 		if ( !preg_match( self::KEY_REGEX, $key ) ) {
-			throw $this->invalidArgument( "Cache key contains characters that are not allowed: `{$key}`" );
+			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
 
-	private function invalidArgument( $message ) {
-		return new class( $message ) extends \InvalidArgumentException
-			implements InvalidArgumentException {
-		};
-	}
-
 	/**
-	 * @param $var
+	 * @param mixed $var the object to turn to array
 	 * @return array
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 */
 	private function toArray( $var ) {
 		if ( !$this->isIterable( $var ) ) {
 			$type = gettype( $var );
-			throw $this->invalidArgument( "Expected iterable, `{$type}` given" );
+			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
-		if ( $var instanceof \Traversable ) {
+		if ( $var instanceof Traversable ) {
 			$result = [];
 			foreach ( $var as $value ) {
 				$result[] = $value;
@@ -297,17 +289,17 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	}
 
 	/**
-	 * @param $var
+	 * @param mixed $var the object to turn to associative array
 	 * @return array
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 */
 	private function toAssociativeArray( $var ) {
 		if ( !$this->isIterable( $var ) ) {
 			$type = gettype( $var );
-			throw $this->invalidArgument( "Expected iterable, `{$type}` given" );
+			throw new CacheInvalidArgumentException( "Expected iterable, `{$type}` given" );
 		}
 
-		if ( $var instanceof \Traversable ) {
+		if ( $var instanceof Traversable ) {
 			$result = [];
 			foreach ( $var as $key => $value ) {
 				$this->assertKeyIsValid( $key, true );
@@ -321,24 +313,24 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	}
 
 	private function isIterable( $var ) {
-		return is_array( $var ) || ( is_object( $var ) && ( $var instanceof \Traversable ) );
+		return is_array( $var ) || ( is_object( $var ) && ( $var instanceof Traversable ) );
 	}
 
 	/**
-	 * @param null|int|\DateInterval $ttl The TTL value of this item. If no value is sent and
+	 * @param null|int|DateInterval $ttl The TTL value of this item. If no value is sent and
 	 *                                    the driver supports TTL then the library may set a default value
 	 *                                    for it or let the driver take care of that.
 	 *
 	 * @return int UNIX timestamp when the item should expire or \BagOStuff::TTL_INDEFINITE
-	 * @throws InvalidArgumentException
+	 * @throws CacheInvalidArgumentException
 	 */
 	private function normalizeTtl( $ttl ) {
 		// Addition of `1` to timestamp is required to avoid the issue when we read timestamp in
 		// the very end of the pending second (lets say 57.999) so that effective TTL becomes
 		// very small (in former example it will be 0.001). This issue makes tests flaky.
 		// @see https://phabricator.wikimedia.org/T201453
-		if ( $ttl instanceof \DateInterval ) {
-			$date = new \DateTime();
+		if ( $ttl instanceof DateInterval ) {
+			$date = new DateTime();
 			$date->add( $ttl );
 			return $date->getTimestamp() + 1;
 		} elseif ( $ttl === 0 ) {
@@ -346,10 +338,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		} elseif ( is_int( $ttl ) ) {
 			return $ttl + time() + 1;
 		} elseif ( $ttl === null ) {
-			return \BagOStuff::TTL_INDEFINITE;
+			return BagOStuff::TTL_INDEFINITE;
 		} else {
 			$type = gettype( $ttl );
-			throw $this->invalidArgument( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
+			throw new CacheInvalidArgumentException( "Invalid TTL: `null|int|\DateInterval` expected, `$type` given" );
 		}
 	}
 

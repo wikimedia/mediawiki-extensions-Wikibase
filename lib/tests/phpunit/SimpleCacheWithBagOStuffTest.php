@@ -12,7 +12,6 @@ use Wikibase\Lib\SimpleCacheWithBagOStuff;
 /**
  * FIXME: disabled because it's incompatible with PHPUnit 8 (T237164)
  * @group Wikibase
- * @group Broken
  *
  * @license GPL-2.0-or-later
  */
