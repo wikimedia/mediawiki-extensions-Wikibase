@@ -2,31 +2,13 @@ import { storiesOf } from '@storybook/vue';
 import { boolean, number } from '@storybook/addon-knobs';
 import Loading from '@/presentation/components/Loading';
 
-function getLoadingProps( options = {} ) {
+function getLoadingProps() {
 	return {
-		isInitializing: {
-			default: boolean(
-				'Is Initializing',
-				options.isInitializing === undefined ? true : options.isInitializing,
-			),
-		},
-		isSaving: {
-			default: boolean(
-				'Is Saving',
-				options.isSaving === undefined ? false : options.isSaving,
-			),
-		},
 		TIME_UNTIL_CONSIDERED_SLOW: {
-			default: number(
-				'TIME_UNTIL_CONSIDERED_SLOW (ms)',
-				options.TIME_UNTIL_CONSIDERED_SLOW || 1000,
-			),
+			default: number( 'time until considered slow (ms)', 1000 ),
 		},
 		MINIMUM_TIME_OF_PROGRESS_ANIMATION: {
-			default: number(
-				'MINIMUM_TIME_OF_PROGRESS_ANIMATION (ms)',
-				options.MINIMUM_TIME_OF_PROGRESS_ANIMATION || 500,
-			),
+			default: number( 'minimum time of progress animation (ms)', 500 ),
 		},
 	};
 }
@@ -35,21 +17,31 @@ storiesOf( 'Loading', module )
 	.addParameters( { component: Loading } )
 	.add( 'initializing', () => ( {
 		components: { Loading },
-		props: getLoadingProps( { isInitializing: true, isSaving: false } ),
+		props: {
+			isInitializing: {
+				default: boolean( 'Initializing', true ),
+			},
+			...getLoadingProps(),
+		},
 		template:
 			`<Loading
 				:is-initializing="isInitializing"
-				:is-saving="isSaving"
+				:is-saving="false"
 				:TIME_UNTIL_CONSIDERED_SLOW="TIME_UNTIL_CONSIDERED_SLOW"
 				:MINIMUM_TIME_OF_PROGRESS_ANIMATION="MINIMUM_TIME_OF_PROGRESS_ANIMATION"
 			>Content which may be slow</Loading>`,
 	} ) )
 	.add( 'saving', () => ( {
 		components: { Loading },
-		props: getLoadingProps( { isInitializing: false, isSaving: true } ),
+		props: {
+			isSaving: {
+				default: boolean( 'Saving', true ),
+			},
+			...getLoadingProps(),
+		},
 		template:
 			`<Loading
-				:is-initializing="isInitializing"
+				:is-initializing="false"
 				:is-saving="isSaving"
 				:TIME_UNTIL_CONSIDERED_SLOW="TIME_UNTIL_CONSIDERED_SLOW"
 				:MINIMUM_TIME_OF_PROGRESS_ANIMATION="MINIMUM_TIME_OF_PROGRESS_ANIMATION"
