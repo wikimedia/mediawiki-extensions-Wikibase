@@ -247,5 +247,8 @@ export function mockApi( successObject?: unknown, rejectData?: unknown ): Api & 
 				return Promise.reject( rejectData );
 			}
 		},
+		post(): any {
+			return Promise.resolve();
+		},
 	} as any;
 }
