@@ -8,4 +8,5 @@ export default interface Snak {
 	property: string; // https://github.com/Microsoft/TypeScript/issues/6579 is accepted
 	datatype: DataType;
 	datavalue?: DataValue;
+	hash?: string;
 }
