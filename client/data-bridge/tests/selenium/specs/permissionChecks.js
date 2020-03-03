@@ -28,7 +28,7 @@ function unblockUser( username ) {
 }
 
 describe( 'permission checks', () => {
-	let title, propertyId, entityId, content;
+	let title, propertyId, entityId;
 
 	beforeEach( () => {
 		browser.deleteCookies();
@@ -45,11 +45,12 @@ describe( 'permission checks', () => {
 				'rank': 'normal',
 			} ],
 		} ) );
-		content = `{|class="wikitable"
-|-
-| official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
-|}`;
+		const content = DataBridgePage.createInfoboxWikitext( [ {
+			label: 'official website',
+			entityId,
+			propertyId,
+			editFlow: 'overwrite',
+		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 	} );
 

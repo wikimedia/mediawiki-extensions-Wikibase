@@ -2,6 +2,10 @@ const Page = require( 'wdio-mediawiki/Page' ),
 	Util = require( 'wdio-mediawiki/Util' );
 
 class DataBridgePage extends Page {
+	static get EDIT_LINK_ANCHOR() {
+		return 'Edit this on Wikidata';
+	}
+
 	static get OOUI() {
 		return '.oo-ui-dialog';
 	}
@@ -67,6 +71,19 @@ class DataBridgePage extends Page {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
 
+	/**
+	 * @param {Array.<{label: String, entityId: String, propertyId: String, editFlow: String}>} rows
+	 * @return {string} wikitext
+	 */
+	createInfoboxWikitext( rows ) {
+		return '{|class="wikitable"' +
+			rows.map( ( row ) => `
+|-
+| ${row.label}
+| {{#statements:${row.propertyId}|from=${row.entityId}}}&nbsp;<span data-bridge-edit-flow="${row.editFlow}">[https://example.org/wiki/Item:${row.entityId}?uselang=en#${row.propertyId} ${DataBridgePage.EDIT_LINK_ANCHOR}]</span>` ).join( '' ) +
+			'\n|}';
+	}
+
 	open( title ) {
 		super.openTitle( title );
 		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
@@ -79,7 +96,7 @@ class DataBridgePage extends Page {
 	}
 
 	get overloadedLink() {
-		return $( 'a=Edit this on Wikidata' );
+		return $( `a=${DataBridgePage.EDIT_LINK_ANCHOR}` );
 	}
 
 	get dialog() {

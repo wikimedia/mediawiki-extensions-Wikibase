@@ -23,11 +23,12 @@ describe( 'init', () => {
 				'rank': 'normal',
 			} ],
 		} ) );
-		const content = `{|class="wikitable"
-|-
-| official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="overwrite">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
-|}`;
+		const content = DataBridgePage.createInfoboxWikitext( [ {
+			label: 'official website',
+			entityId,
+			propertyId,
+			editFlow: 'overwrite',
+		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 		DataBridgePage.openBridgeOnPage( title );
@@ -43,12 +44,12 @@ describe( 'init', () => {
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 			const nonExistantEntityId = 'Q999999999';
-			const editFlow = 'overwrite';
-			const content = `{|class="wikitable"
-|-
-| shows the occurence of errors
-| {{#statements:${propertyId}|from=${nonExistantEntityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${nonExistantEntityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
-|}`;
+			const content = DataBridgePage.createInfoboxWikitext( [ {
+				label: 'shows the occurence of errors',
+				entityId: nonExistantEntityId,
+				propertyId,
+				editFlow: 'overwrite',
+			} ] );
 
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
@@ -73,12 +74,12 @@ describe( 'init', () => {
 					'rank': 'normal',
 				} ],
 			} ) );
-			const editFlow = 'overwrite';
-			const content = `{|class="wikitable"
-|-
-| official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
-|}`;
+			const content = DataBridgePage.createInfoboxWikitext( [ {
+				label: 'official website',
+				entityId,
+				propertyId,
+				editFlow: 'overwrite',
+			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.openBridgeOnPage( title );
@@ -139,12 +140,12 @@ describe( 'init', () => {
 					],
 				} ] },
 			} ) );
-			const editFlow = 'overwrite';
-			const content = `{|class="wikitable"
-|-
-| official website
-| {{#statements:${stringPropertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${stringPropertyId} Edit this on Wikidata]</span>
-|}`;
+			const content = DataBridgePage.createInfoboxWikitext( [ {
+				label: 'official website',
+				entityId,
+				propertyId: stringPropertyId,
+				editFlow: 'overwrite',
+			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 			DataBridgePage.open( title );
@@ -184,12 +185,12 @@ describe( 'init', () => {
 						'rank': 'normal',
 					} ],
 				} ) );
-				const editFlow = 'overwrite';
-				const content = `{|class="wikitable"
-|-
-| official website
-| {{#statements:${propertyId}|from=${entityId}}}&nbsp;<span data-bridge-edit-flow="${editFlow}">[https://example.org/wiki/Item:${entityId}?uselang=en#${propertyId} Edit this on Wikidata]</span>
-|}`;
+				const content = DataBridgePage.createInfoboxWikitext( [ {
+					label: 'official website',
+					entityId,
+					propertyId,
+					editFlow: 'overwrite',
+				} ] );
 				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
 				DataBridgePage.open( title );
