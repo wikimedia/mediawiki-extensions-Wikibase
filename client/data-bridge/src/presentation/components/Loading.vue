@@ -1,7 +1,7 @@
 <template>
 	<div class="wb-db-load">
 		<!-- @slot The content which is being initialized and needs to be hidden until that is complete,
-		or the content which is being saved and needs to be unchangable until the saving is complete -->
+		or the content which is being saved and needs to be unchangeable until the saving is complete -->
 		<slot v-if="ready" />
 
 		<IndeterminateProgressBar class="wb-db-load__visibility" v-if="loadingIsSlow" />
@@ -23,29 +23,34 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
  *
  * Depending on the run time of the operation an animation is shown.
  *
+ * `isInitializing` and `isSaving` are provided to the component to inform it about the
+ * state of the application. They should not both be true simultaneously.
+ *
  * This
  *
- * * shows the default slot if `isInitializing` is false (= ready)
- * * hides the default slot while `isInitializing` is true; during that time it
- *   * shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
+ * * shows the default slot if `isInitializing` and `isSaving` are false (= ready)
+ * * while `isInitializing` is true it
+ *   * hides the default slot, i.e. shows blank until `TIME_UNTIL_CONSIDERED_SLOW`
  *   * shows the `IndeterminateProgressBar` from there on until `isInitializing` is false
- *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`[1]
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`
+ * * while `isSaving` is true it
+ *   * shows the default slot
+ *   * overlays it with the `IndeterminateProgressBar` from `TIME_UNTIL_CONSIDERED_SLOW` until `isSaving` is false
+ *   * shows the `IndeterminateProgressBar` for at least `MINIMUM_TIME_OF_PROGRESS_ANIMATION`
  *
- * [1] This condition is only applied while `isInitializing` is true
- *
- * Effectively there are three scenarios:
+ * Effectively there are three scenarios transitioning to a "ready" state:
  *
  * ```
- * Timeline     0s                        1s            1.5s            2s
+ * Timeline                 0s                        1s            1.5s            2s
  * Scenario 1
- *   Loading    |------------------|
- *   Animation      (no animation)  <- ready
+ *   Initializing/Saving    |------------------|
+ *   Animation                  (no animation)  <- ready
  * Scenario 2
- *   Loading    |----------------------------|
- *   Animation                            |--------------|<- ready
+ *   Initializing/Saving    |----------------------------|
+ *   Animation                                        |--------------|<- ready
  * Scenario 3
- *   Loading    |---------------------------------------------|
- *   Animation                            |-------------------|<- ready
+ *   Initializing/Saving    |---------------------------------------------|
+ *   Animation                                        |-------------------|<- ready
  * ```
  */
 @Component( {
@@ -55,9 +60,8 @@ import { IndeterminateProgressBar } from '@wmde/wikibase-vuejs-components';
 } )
 export default class Loading extends Vue {
 	/**
-	 * The state (still initializing or "done"). The using component should
-	 * influence this based on the progress of loading what is needed to
-	 * show the contents of the default slot.
+	 * The state of initializing.
+	 * The using component should influence this based on the progress of loading.
 	 */
 	@Prop( { required: true } )
 	private readonly isInitializing!: boolean;
@@ -78,7 +82,7 @@ export default class Loading extends Vue {
 
 	/**
 	 * Number of *milliseconds* to show the loading animation at least for,
-	 * to avoid the impression "flickering".
+	 * to avoid the impression of "flickering".
 	 */
 	@Prop( { default: 500 } )
 	private readonly MINIMUM_TIME_OF_PROGRESS_ANIMATION!: number;
