@@ -20,7 +20,7 @@ interface UsageTracker {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of entity usages.
 	 *
-	 * See docs/usagetracking.wiki for details.
+	 * @see @ref md_docs_topics_usagetracking for details.
 	 *
 	 * @throws UsageTrackerException
 	 */
@@ -33,7 +33,7 @@ interface UsageTracker {
 	 * @param int $pageId The ID of the page the entities are used on.
 	 * @param EntityUsage[] $usages A list of entity usages.
 	 *
-	 * See docs/usagetracking.wiki for details.
+	 * @see @ref md_docs_topics_usagetracking for details.
 	 *
 	 * @throws UsageTrackerException
 	 * @return EntityUsage[] Usages that have been removed

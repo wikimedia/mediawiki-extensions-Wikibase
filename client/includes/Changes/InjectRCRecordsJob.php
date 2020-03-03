@@ -21,7 +21,7 @@ use Wikimedia\Rdbms\ILBFactory;
 /**
  * Job for injecting RecentChange records representing changes on the Wikibase repository.
  *
- * @see docs/change-propagation.wiki for an overview of the change propagation mechanism.
+ * @see @ref md_docs_topics_change-propagation for an overview of the change propagation mechanism.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

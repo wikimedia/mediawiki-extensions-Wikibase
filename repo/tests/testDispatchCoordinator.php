@@ -41,7 +41,7 @@ class TestDispatchCoordinator extends Maintenance {
 
 		$this->addDescription(
 			"Test maintenance script that runs two dispatching and checks if they conflict.\n" .
-			"See docs/change-propagation.wiki for an overview of the change propagation mechanism."
+			"See docs/topics/change-propagation.md for an overview of the change propagation mechanism."
 		);
 		$this->addOption( 'lock', 'Name of the lock manager to test', false, true, 'l' );
 		$this->addOption( 'number', 'Number of tries for a lock manager', false, true, 'n' );
