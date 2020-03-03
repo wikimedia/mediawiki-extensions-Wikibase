@@ -9,6 +9,8 @@ import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/Applica
 import clone from '@/store/clone';
 import { inject } from 'vuex-smart-module';
 import { RootGetters } from '@/store/getters';
+import Statement from '@/datamodel/Statement';
+import Reference from '@/datamodel/Reference';
 
 describe( 'root/getters', () => {
 	const entityId = 'Q42';
@@ -53,10 +55,10 @@ describe( 'root/getters', () => {
 						value: 'a string value',
 					},
 				},
-			};
+			} as Statement;
 
 			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
-			actualTargetStatement.mainsnak.datavalue.value = 'modified teststring';
+			actualTargetStatement.mainsnak.datavalue!.value = 'modified teststring';
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.INITIALIZING,
@@ -92,7 +94,7 @@ describe( 'root/getters', () => {
 						value: 'a string value',
 					},
 				},
-			};
+			} as Statement;
 
 			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
 			const applicationState = newApplicationState( {
@@ -130,10 +132,10 @@ describe( 'root/getters', () => {
 						value: 'a string value',
 					},
 				},
-			};
+			} as Statement;
 
 			const targetValue = clone( actualTargetStatement.mainsnak.datavalue );
-			actualTargetStatement.mainsnak.datavalue.value = 'modified teststring';
+			actualTargetStatement.mainsnak.datavalue!.value = 'modified teststring';
 
 			const applicationState = newApplicationState( {
 				targetProperty,
@@ -206,7 +208,7 @@ describe( 'root/getters', () => {
 					],
 				},
 				'snaks-order': [ 'P268' ],
-			},
+			} as Partial<Reference>,
 		];
 
 		it( 'returns the references datablob', () => {

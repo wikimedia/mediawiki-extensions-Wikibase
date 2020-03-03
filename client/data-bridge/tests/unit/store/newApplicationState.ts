@@ -1,8 +1,12 @@
-import Application from '@/store/Application';
+import Application, { InitializedApplicationState } from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 
-export default function ( fields?: any ): Application {
-	let AppState: Application = {
+type RecursivePartial<T> = {
+	[P in keyof T]?: RecursivePartial<T[P]>;
+};
+
+export default function ( fields?: RecursivePartial<InitializedApplicationState> ): Application {
+	let AppState: any = {
 		targetProperty: '',
 		targetLabel: null,
 		editFlow: '',
