@@ -166,6 +166,7 @@ use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
+use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -2467,6 +2468,28 @@ class WikibaseRepo {
 
 	public function getLogger(): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
+	}
+
+	/**
+	 * Gaurd against Federated properties services being constructed in wiring when feature is disabled.
+	 */
+	private function throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured() {
+		if (
+			!$this->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ||
+			!$this->getSettings()->hasSetting( 'federatedPropertiesSourceScriptUrl' )
+		) {
+			throw new LogicException(
+				'Federated Property services should not be constructed when federatedProperties feature is not enabled.'
+			);
+		}
+	}
+
+	public function newFederatedPropertiesApiClient() {
+		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
+		return new GenericActionApiClient(
+			MediaWikiServices::getInstance()->getHttpRequestFactory(),
+			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+		);
 	}
 
 }

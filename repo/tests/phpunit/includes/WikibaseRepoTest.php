@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -615,20 +616,33 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
+	private function getWikibaseRepo() {
+		return new WikibaseRepo(
+			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			$this->getEntitySourceDefinitions()
+		);
+	}
+
 	/**
 	 * @param array[] $entityTypeDefinitions
 	 *
 	 * @return WikibaseRepo
 	 */
-	private function getWikibaseRepo( $entityTypeDefinitions = [] ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'localEntitySourceName', 'test' );
+	private function getWikibaseRepoWithCustomEntityTypeDefinitions( $entityTypeDefinitions = [] ) {
 		return new WikibaseRepo(
-			$settings,
+			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
 			new DataTypeDefinitions( [] ),
 			new EntityTypeDefinitions( $entityTypeDefinitions ),
 			$this->getEntitySourceDefinitions()
 		);
+	}
+
+	private function getTestSettings( $settingsArray ) {
+		$settings = new SettingsArray( $settingsArray );
+		$settings->setSetting( 'localEntitySourceName', 'test' );
+		return $settings;
 	}
 
 	private function getEntitySourceDefinitions( string $sourceName = 'test' ) {
@@ -757,7 +771,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 * @return DataValueFactory
 	 */
 	private function getDataValueFactory() {
-		return $this->getWikibaseRepo( [
+		return $this->getWikibaseRepoWithCustomEntityTypeDefinitions( [
 			'item' => [
 				'entity-id-pattern' => ItemId::PATTERN,
 				'entity-id-builder' => function ( $serialization ) {
@@ -924,11 +938,60 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 
 		$reflectionClass = new ReflectionClass( $wbRepo );
 		$publicMethods = $reflectionClass->getMethods( ReflectionMethod::IS_PUBLIC );
+		$federatedPropertyMethods = $this->getFederatedPropertyMethodNames();
 
 		foreach ( $publicMethods as $publicMethod ) {
-			if ( $publicMethod->getNumberOfRequiredParameters() === 0 ) {
-				$publicMethod->invoke( $wbRepo );
+			if ( in_array( $publicMethod->name, $federatedPropertyMethods ) ) {
+				// These methods always throw an exception if the feature is disabled
+				// These methods are checked in testParameterLessFunctionCallsForFederatedProperties
+				continue;
 			}
+			$this->invokeMethodIfNoRequiredParameters( $wbRepo, $publicMethod );
+		}
+	}
+
+	public function testParameterLessFunctionCallsForFederatedPropertiesDontFatal() {
+		// Make sure (as good as we can) that all functions can be called without
+		// exceptions/ fatals and nothing accesses the database or does http requests.
+		$settings = $this->getSettingsCopyWithSettingSet( 'federatedPropertiesEnabled', true );
+		$wbRepo = $this->getWikibaseRepoWithCustomSettings( $settings );
+
+		$reflectionClass = new ReflectionClass( $wbRepo );
+		$federatedPropertyMethods = $this->getFederatedPropertyMethodNames();
+
+		foreach ( $federatedPropertyMethods as $methodName ) {
+			$this->invokeMethodIfNoRequiredParameters( $wbRepo, $reflectionClass->getMethod( $methodName ) );
+		}
+	}
+
+	public function provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled() {
+		$methods = $this->getFederatedPropertyMethodNames();
+		return array_map(
+			function( $a ) {
+				return [ $a ];
+			},
+			$methods
+		);
+	}
+
+	/**
+	 * @dataProvider provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled
+	 */
+	public function testParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled( $methodName ) {
+		// Make sure (as good as we can) that all functions can be called without
+		// exceptions/ fatals and nothing accesses the database or does http requests.
+		$settings = $this->getSettingsCopyWithSettingSet( 'federatedPropertiesEnabled', false );
+		$wbRepo = $this->getWikibaseRepoWithCustomSettings( $settings );
+
+		$reflectionClass = new ReflectionClass( $wbRepo );
+
+		$this->expectException( LogicException::class );
+		$this->invokeMethodIfNoRequiredParameters( $wbRepo, $reflectionClass->getMethod( $methodName ) );
+	}
+
+	private function invokeMethodIfNoRequiredParameters( $wbRepo, $method ) {
+		if ( $method->getNumberOfRequiredParameters() === 0 ) {
+			$method->invoke( $wbRepo );
 		}
 	}
 
@@ -1112,6 +1175,16 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				$publicMethod->invoke( $wbRepoServices );
 			}
 		}
+	}
+
+	/**
+	 * These methods should throw a Runtime exception when called without enabling the feature.
+	 * @return string[]
+	 */
+	private function getFederatedPropertyMethodNames() {
+		return [
+			'newFederatedPropertiesApiClient'
+		];
 	}
 
 }
