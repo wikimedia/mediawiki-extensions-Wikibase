@@ -14,6 +14,7 @@
 	"wikibase-deletedentity-property": "Proprietà cancellata",
 	"wikibase-deletedentity-query": "Interrogazione cancellata",
 	"wikibase-error-unexpected": "Errore: $1.",
+	"wikibase-error-unknown": "Si è verificato un errore.",
 	"wikibase-error-save-generic": "Non è possibile salvare a causa di un errore.",
 	"wikibase-error-remove-generic": "Non è possibile rimuovere a causa di un errore.",
 	"wikibase-error-save-connection": "Non è possibile salvare a causa di un errore di connessione. Per favore, controlla la tua connessione ad internet.",
