@@ -21,6 +21,9 @@ addParameters( {
 	docs: {
 		inlineStories: true,
 	},
+	knobs: {
+		disableDebounce: true,
+	},
 } );
 
 extendVueEnvironment(
