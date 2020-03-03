@@ -17707,17 +17707,26 @@ function () {
   _createClass(ApiCore, [{
     key: "get",
     value: function get(params) {
+      return Promise.resolve( // turn jQuery promise into native one
+      this.api.get(this.mapParameters(params)).catch(this.mwApiRejectionToError));
+    }
+  }, {
+    key: "mapParameters",
+    value: function mapParameters(params) {
+      var parameters = {};
+
       for (var _i = 0, _Object$keys = Object.keys(params); _i < _Object$keys.length; _i++) {
         var name = _Object$keys[_i];
         var param = params[name];
 
         if (param instanceof Set) {
-          params[name] = _toConsumableArray(param);
+          parameters[name] = _toConsumableArray(param);
+        } else {
+          parameters[name] = param;
         }
       }
 
-      return Promise.resolve( // turn jQuery promise into native one
-      this.api.get(params).catch(this.mwApiRejectionToError));
+      return parameters;
     }
     /**
      * Translate a rejection from mw.Api into a single error.
