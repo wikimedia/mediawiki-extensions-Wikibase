@@ -31,3 +31,9 @@ export interface InitializedApplicationState extends Application {
 	[ NS_STATEMENTS ]: StatementState;
 	wikibaseRepoConfiguration: WikibaseRepoConfiguration;
 }
+
+export interface SavingState extends InitializedApplicationState {
+	editDecision: EditDecision;
+	targetValue: DataValue;
+	applicationStatus: ValidApplicationStatus.SAVING;
+}

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { Store } from 'vuex';
 import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
-import Application, { InitializedApplicationState } from '@/store/Application';
+import Application, { InitializedApplicationState, SavingState } from '@/store/Application';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
 import EditDecision from '@/definitions/EditDecision';
@@ -211,7 +211,7 @@ RootActions
 			'setApplicationStatus',
 			ApplicationStatus.SAVING,
 		);
-		const state = this.state as InitializedApplicationState;
+		const state = this.state as SavingState;
 		const entityId = state[ NS_ENTITY ].id;
 		const path = new MainSnakPath(
 			entityId,
@@ -221,10 +221,9 @@ RootActions
 
 		let statements;
 		try {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			statements = this.statementMutationFactory( state.editDecision! )
+			statements = this.statementMutationFactory( state.editDecision )
 				.apply(
-					state.targetValue!, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+					state.targetValue,
 					path,
 					clone( state[ NS_STATEMENTS ] ),
 				);
