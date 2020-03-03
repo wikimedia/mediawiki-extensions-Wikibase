@@ -89,7 +89,6 @@ describe( 'init', () => {
 		) );
 		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
 			repoMwApi,
-			'Test User',
 			editTags,
 		) );
 		expectedServices.set( 'languageInfoRepository', new MwLanguageInfoRepository(

@@ -3,6 +3,7 @@ import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import { launch } from '@/main';
 import createServices from '@/services/createServices';
+import clone from '@/store/clone';
 import {
 	addPageInfoNoEditRestrictionsResponse,
 	addSiteinfoRestrictionsResponse,
@@ -190,6 +191,7 @@ describe( 'app', () => {
 		let entityTitle: string;
 		let testSet: SpecialPageWikibaseEntityResponse;
 		let postWithEditToken: jest.Mock;
+		let assertCurrentUser: jest.Mock;
 		let newStringDataValue: string;
 
 		beforeEach( () => {
@@ -242,6 +244,8 @@ describe( 'app', () => {
 				success: 1,
 			} );
 
+			assertCurrentUser = jest.fn( ( params ) => params );
+
 			newStringDataValue = uuid();
 		} );
 
@@ -253,6 +257,7 @@ describe( 'app', () => {
 					entityTitle,
 				),
 				postWithEditToken,
+				assertCurrentUser,
 			} );
 			window.$.get = () => Promise.resolve( testSet ) as any;
 
@@ -276,34 +281,39 @@ describe( 'app', () => {
 			return save as HTMLElement;
 		}
 
-		it( 'asserts username and tags, if given', async () => {
-			const assertuser = 'assertUsername';
+		it( 'asserts current user and tags, if given', async () => {
 			const tags = [ 'abc' ];
 
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			window.mw.config = mockMwConfig( {
-				wgUserName: assertuser,
 				editTags: tags,
 			} );
+
+			const expectedData = { claims: clone( testSet.entities[ entityId ].claims ) };
+			expectedData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
+			const expectedParams = {
+				action: 'wbeditentity',
+				id: entityId,
+				baserevid: 0,
+				data: JSON.stringify( expectedData ),
+				tags,
+			};
+			const expectedAssertingParams = {
+				assertuser: 'assertUsername',
+				...expectedParams,
+			};
+			assertCurrentUser.mockReturnValue( expectedAssertingParams );
 
 			const save = await getEnabledSaveButton( testLink );
 
 			save!.click();
 			await budge();
 
-			const sentData = { claims: testSet.entities[ entityId ].claims };
-			sentData.claims[ propertyId ][ 0 ].mainsnak.datavalue!.value = newStringDataValue;
-
+			expect( assertCurrentUser ).toHaveBeenCalledTimes( 1 );
+			expect( assertCurrentUser ).toHaveBeenCalledWith( expectedParams );
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
-			expect( postWithEditToken ).toHaveBeenCalledWith( {
-				action: 'wbeditentity',
-				id: entityId,
-				baserevid: 0,
-				data: JSON.stringify( sentData ),
-				assertuser,
-				tags,
-			} );
+			expect( postWithEditToken ).toHaveBeenCalledWith( expectedAssertingParams );
 
 		} );
 
@@ -324,7 +334,6 @@ describe( 'app', () => {
 				id: entityId,
 				baserevid: 0,
 				data: JSON.stringify( sentData ),
-				assertuser: 'Test User',
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
@@ -347,7 +356,6 @@ describe( 'app', () => {
 				id: entityId,
 				baserevid: 0,
 				data: JSON.stringify( sentData ),
-				assertuser: 'Test User',
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
@@ -370,7 +378,6 @@ describe( 'app', () => {
 				id: entityId,
 				baserevid: 0,
 				data: JSON.stringify( sentData ),
-				assertuser: 'Test User',
 				tags: undefined,
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
@@ -408,7 +415,6 @@ describe( 'app', () => {
 				id: entityId,
 				baserevid: 0,
 				data: JSON.stringify( sentData ),
-				assertuser: 'Test User',
 				tags: undefined,
 			} );
 		} );

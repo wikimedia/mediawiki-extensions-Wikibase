@@ -114,7 +114,6 @@ jest.mock( '@/data-access/ClientRouter', () => {
 
 function mockMwWindow( options: {
 	wbRepo?: WbRepo;
-	wgUserName?: string;
 	ulsData?: {
 		getDir(): string;
 	};
@@ -137,8 +136,6 @@ function mockMwWindow( options: {
 					},
 					...options.wbRepo,
 				};
-			case 'wgUserName':
-				return options.wgUserName || null;
 			case 'wgPageContentLanguage':
 				return options.wgPageContentLanguage || 'en';
 			case 'wbDataBridgeConfig':
@@ -177,7 +174,7 @@ function mockMwWindow( options: {
 }
 
 describe( 'createServices', () => {
-	it( 'pulls wbRepo and wgUserName from mw.config, ', () => {
+	it( 'pulls wbRepo from mw.config, ', () => {
 		const wbRepo = {
 			url: 'http://localhost',
 			scriptPath: '/w',
@@ -203,7 +200,6 @@ describe( 'createServices', () => {
 
 	describe( 'WritingEntityRepository', () => {
 		it( 'creates WritingEntityRepository with it', () => {
-			const wgUserName = 'TestUser';
 			const wbRepo = {
 				url: 'http://localhost',
 				scriptPath: '/w',
@@ -212,7 +208,6 @@ describe( 'createServices', () => {
 			const editTags = [ 'a' ];
 			const mwWindow = mockMwWindow( {
 				wbRepo,
-				wgUserName,
 			} );
 			const services = createServices( mwWindow, editTags );
 
@@ -221,14 +216,11 @@ describe( 'createServices', () => {
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 				.toBeInstanceOf( mwWindow.mw.ForeignApi );
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
-				.toBe( wgUserName );
-			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
 				.toBe( editTags );
 			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );
 
 		it( 'add undefinded to tags, if they are a empty list', () => {
-			const wgUserName = 'TestUser';
 			const wbRepo = {
 				url: 'http://localhost',
 				scriptPath: '/w',
@@ -237,12 +229,11 @@ describe( 'createServices', () => {
 			const editTags: string[] = [];
 			const mwWindow = mockMwWindow( {
 				wbRepo,
-				wgUserName,
 			} );
 			const services = createServices( mwWindow, editTags );
 
 			expect( services ).toBeInstanceOf( ServiceContainer );
-			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 2 ] )
+			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBeUndefined();
 			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
 		} );

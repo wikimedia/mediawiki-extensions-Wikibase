@@ -40,6 +40,7 @@ export interface MwApi {
 	postWithEditToken( parameters: any, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	postWithToken( tokenType: string, parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	login( username: string, password: string ): JQuery.Promise<any>;
+	assertCurrentUser( parameters: object ): object;
 }
 
 export type MwTracker = ( topic: string, data?: unknown ) => void;

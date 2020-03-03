@@ -17819,27 +17819,25 @@ var http_status_codes_default = /*#__PURE__*/__webpack_require__.n(http_status_c
 var ApiWritingRepository_ApiWritingRepository =
 /*#__PURE__*/
 function () {
-  function ApiWritingRepository(api, username, tags) {
+  function ApiWritingRepository(api, tags) {
     _classCallCheck(this, ApiWritingRepository);
 
     this.api = api;
-    this.username = username || undefined;
     this.tags = tags || undefined;
   }
 
   _createClass(ApiWritingRepository, [{
     key: "saveEntity",
     value: function saveEntity(revision) {
-      return Promise.resolve(this.api.postWithEditToken({
+      return Promise.resolve(this.api.postWithEditToken(this.api.assertCurrentUser({
         action: 'wbeditentity',
         id: revision.entity.id,
         baserevid: revision.revisionId,
         data: JSON.stringify({
           claims: revision.entity.statements
         }),
-        assertuser: this.username,
         tags: this.tags
-      })).then(function (response) {
+      }))).then(function (response) {
         if (_typeof(response) !== 'object') {
           throw new TechnicalProblem_TechnicalProblem('unknown response type.');
         }
@@ -19279,7 +19277,7 @@ function createServices(mwWindow, editTags) {
   var repoMwApi = new mwWindow.mw.ForeignApi( // TODO use repoRouter with a getScript() method maybe
   "".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
   var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
-  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, mwWindow.mw.config.get('wgUserName'), editTags.length === 0 ? undefined : editTags));
+  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, editTags.length === 0 ? undefined : editTags));
   services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), repoApi));
   services.set('propertyDatatypeRepository', new ApiPropertyDataTypeRepository_ApiPropertyDataTypeRepository(repoApi));
 
