@@ -19255,7 +19255,45 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/data-access/ApiPurge.ts
+
+
+
+
+
+
+var ApiPurge_ApiPurge =
+/*#__PURE__*/
+function () {
+  function ApiPurge(api) {
+    _classCallCheck(this, ApiPurge);
+
+    this.TITLES_LIMIT = 50;
+    this.api = api;
+  }
+
+  _createClass(ApiPurge, [{
+    key: "purge",
+    value: function purge(titles) {
+      if (titles.length > this.TITLES_LIMIT) {
+        throw new TechnicalProblem_TechnicalProblem("You cannot purge more than ".concat(this.TITLES_LIMIT, " titles"));
+      }
+
+      return Promise.resolve(this.api.post({
+        forcelinkupdate: true,
+        formatversion: 2,
+        action: 'purge',
+        titles: titles
+      }));
+    }
+  }]);
+
+  return ApiPurge;
+}();
+
+
 // CONCATENATED MODULE: ./src/services/createServices.ts
+
 
 
 
@@ -19277,6 +19315,7 @@ function createServices(mwWindow, editTags) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
       repoRouter = new RepoRouter_RepoRouter(repoConfig, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param);
+  var clientMwApi = new mwWindow.mw.Api();
   services.set('readingEntityRepository', new SpecialPageReadingEntityRepository_SpecialPageReadingEntityRepository(mwWindow.$, repoRouter.getPageUrl('Special:EntityData')));
 
   if (mwWindow.mw.ForeignApi === undefined) {
@@ -19298,10 +19337,12 @@ function createServices(mwWindow, editTags) {
   services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
   services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoApi));
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
-  var clientApi = new ApiCore_ApiCore(new mwWindow.mw.Api());
+  var clientApi = new ApiCore_ApiCore(clientMwApi);
   services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
   services.set('repoRouter', repoRouter);
   services.set('clientRouter', new ClientRouter_ClientRouter(mwWindow.mw.util.getUrl));
+  var purge = new ApiPurge_ApiPurge(clientMwApi);
+  services.set('purgeTitles', purge);
   return services;
 }
 // CONCATENATED MODULE: ./src/main.ts

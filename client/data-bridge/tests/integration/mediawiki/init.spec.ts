@@ -24,6 +24,7 @@ import { budge } from '../../util/timer';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import RepoRouter from '@/data-access/RepoRouter';
+import ApiPurge from '@/data-access/ApiPurge';
 
 const manager = jest.fn();
 const dialog = {
@@ -121,6 +122,8 @@ describe( 'init', () => {
 		expectedServices.set( 'clientRouter', new ClientRouter(
 			window.mw.util.getUrl,
 		) );
+
+		expectedServices.set( 'purgeTitles', new ApiPurge( clientMwApi ) );
 
 		const entityId = 'Q5';
 		const propertyId = 'P4711';

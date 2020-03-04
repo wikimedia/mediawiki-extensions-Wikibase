@@ -15,6 +15,7 @@ import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepo
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
+import ApiPurge from '@/data-access/ApiPurge';
 
 export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
 	const services = new ServiceContainer();
@@ -26,6 +27,8 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 			mwWindow.mw.util.wikiUrlencode,
 			mwWindow.$.param,
 		);
+
+	const clientMwApi = new mwWindow.mw.Api();
 
 	services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 		mwWindow.$,
@@ -74,7 +77,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		new EventTracker( mwWindow.mw.track ),
 	) );
 
-	const clientApi = new ApiCore( new mwWindow.mw.Api() );
+	const clientApi = new ApiCore( clientMwApi );
 
 	services.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 		new ApiPageEditPermissionErrorsRepository( repoApi ),
@@ -84,6 +87,9 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 	services.set( 'repoRouter', repoRouter );
 
 	services.set( 'clientRouter', new ClientRouter( mwWindow.mw.util.getUrl ) );
+
+	const purge = new ApiPurge( clientMwApi );
+	services.set( 'purgeTitles', purge );
 
 	return services;
 }

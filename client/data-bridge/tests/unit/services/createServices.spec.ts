@@ -17,6 +17,7 @@ import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPerm
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import RepoRouter from '@/data-access/RepoRouter';
 import ClientRouter from '@/data-access/ClientRouter';
+import ApiPurge from '@/data-access/ApiPurge';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -87,6 +88,11 @@ const mockRepoEditPermissionsErrorsRepository = {};
 const mockClientEditPermissionsErrorsRepository = {};
 jest.mock( '@/data-access/ApiPageEditPermissionErrorsRepository', () => {
 	return jest.fn().mockImplementation( () => {} );
+} );
+
+const mockPurgeTitlesService = {};
+jest.mock( '@/data-access/ApiPurge', () => {
+	return jest.fn().mockImplementation( () => mockPurgeTitlesService );
 } );
 
 beforeEach( () => {
@@ -409,5 +415,14 @@ describe( 'createServices', () => {
 		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( ClientRouter ).toHaveBeenCalledWith( mwWindow.mw.util.getUrl );
 		expect( services.get( 'clientRouter' ) ).toBe( mockClientRouter );
+	} );
+
+	it( 'creates ApiPurge', () => {
+		const mwWindow = mockMwWindow();
+		const services = createServices( mwWindow, [] );
+		const mwApi = new mwWindow.mw.Api();
+		expect( services ).toBeInstanceOf( ServiceContainer );
+		expect( ApiPurge ).toHaveBeenCalledWith( mwApi );
+		expect( services.get( 'purgeTitles' ) ).toBe( mockPurgeTitlesService );
 	} );
 } );

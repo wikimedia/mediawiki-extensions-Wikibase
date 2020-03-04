@@ -3,8 +3,8 @@ import { MwApi } from '@/@types/mediawiki/MwWindow';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 
 export default class ApiPurge implements MediaWikiPurge {
-	private api: MwApi;
-	private TITLES_LIMIT = 50;
+	private readonly api: MwApi;
+	private readonly TITLES_LIMIT = 50;
 
 	public constructor( api: MwApi ) {
 		this.api = api;
