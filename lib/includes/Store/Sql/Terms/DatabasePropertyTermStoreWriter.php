@@ -72,10 +72,15 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		if ( $termInLangIdsToClean === [] ) {
 			return;
 		}
-		$jobParams = [ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => $termInLangIdsToClean ];
-		$job = CleanTermsIfUnusedJob::getJobSpecificationNoTitle( $jobParams );
-		$this->getDbw()->onTransactionCommitOrIdle( function() use ( $job ) {
-			$this->jobQueueGroup->push( $job );
+
+		$this->getDbw()->onTransactionCommitOrIdle( function() use ( $termInLangIdsToClean ) {
+			foreach ( $termInLangIdsToClean as $termInLangId ) {
+				$this->jobQueueGroup->push(
+					CleanTermsIfUnusedJob::getJobSpecificationNoTitle(
+						[ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => [ $termInLangId ] ]
+					)
+				);
+			}
 		} );
 	}
 

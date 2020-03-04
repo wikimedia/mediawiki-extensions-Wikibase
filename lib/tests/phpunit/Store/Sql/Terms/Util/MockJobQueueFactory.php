@@ -24,15 +24,17 @@ class MockJobQueueFactory {
 		$jobQueueGroupMock = $this->getMockJobQueue();
 
 		if ( $expectedTermInLangIdsToClean != null ) {
-			$jobQueueGroupMock->expects( $this->test->once() )->method( 'push' )->will( $this->test->returnCallback( function (
-				IJobSpecification $jobSpec
-			) use ( $expectedTermInLangIdsToClean ) {
-				$this->test->assertInstanceOf( CleanTermsIfUnusedJob::class, $jobSpec );
-				$this->test->assertEquals(
-					array_values( $expectedTermInLangIdsToClean ),
-					array_values( $jobSpec->getParams()[ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS ] )
-				);
-			} ) );
+			foreach ( $expectedTermInLangIdsToClean as $index => $termInLangId ) {
+				$jobQueueGroupMock->expects( $this->test->at( $index ) )->method( 'push' )->will( $this->test->returnCallback( function (
+					IJobSpecification $jobSpec
+				) use ( $termInLangId ) {
+					$this->test->assertInstanceOf( CleanTermsIfUnusedJob::class, $jobSpec );
+					$this->test->assertEquals(
+						[ $termInLangId ],
+						$jobSpec->getParams()[ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS ]
+					);
+				} ) );
+			}
 		}
 
 		return $jobQueueGroupMock;
