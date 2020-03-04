@@ -180,6 +180,12 @@ function mockMwWindow( options: {
 }
 
 describe( 'createServices', () => {
+	it( 'returns a ServiceContainer', () => {
+		const mwWindow = mockMwWindow();
+		const services = createServices( mwWindow, [] );
+		expect( services ).toBeInstanceOf( ServiceContainer );
+	} );
+
 	it( 'pulls wbRepo from mw.config, ', () => {
 		const wbRepo = {
 			url: 'http://localhost',
@@ -193,7 +199,6 @@ describe( 'createServices', () => {
 		} );
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledWith(
@@ -238,7 +243,6 @@ describe( 'createServices', () => {
 			} );
 			const services = createServices( mwWindow, editTags );
 
-			expect( services ).toBeInstanceOf( ServiceContainer );
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBeUndefined();
 			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
@@ -261,7 +265,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledWith( mwLanguage, ulsData );
 		expect( services.get( 'languageInfoRepository' ) ).toBe( mockMwLanguageInfoRepository );
@@ -276,7 +279,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
@@ -301,8 +303,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
-
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
 		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
@@ -321,7 +321,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwMessagesRepository ).toHaveBeenCalledWith( message );
 		expect( services.get( 'messagesRepository' ) ).toBe( mockMessagesRepository );
@@ -356,7 +355,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( EventTracker ).toHaveBeenCalledWith( tracker );
 		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( mockEventTracker );
 		expect( services.get( 'tracker' ) ).toBe( mockDataBridgeTrackerService );
@@ -403,7 +401,6 @@ describe( 'createServices', () => {
 
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( RepoRouter ).toHaveBeenCalledWith( wbRepo, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param );
 		expect( services.get( 'repoRouter' ) ).toBe( mockRepoRouter );
 	} );
@@ -412,7 +409,6 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow();
 		const services = createServices( mwWindow, [] );
 
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( ClientRouter ).toHaveBeenCalledWith( mwWindow.mw.util.getUrl );
 		expect( services.get( 'clientRouter' ) ).toBe( mockClientRouter );
 	} );
@@ -421,7 +417,6 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow();
 		const services = createServices( mwWindow, [] );
 		const mwApi = new mwWindow.mw.Api();
-		expect( services ).toBeInstanceOf( ServiceContainer );
 		expect( ApiPurge ).toHaveBeenCalledWith( mwApi );
 		expect( services.get( 'purgeTitles' ) ).toBe( mockPurgeTitlesService );
 	} );
