@@ -265,11 +265,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 </script>
 <style lang="scss">
 .wb-db-error-permission {
-	margin: 0 $margin-center-column-side;
-
-	@media ( max-width: $breakpoint ) {
-		margin: 0;
-	}
+	@include marginForCenterColumn();
 
 	&__heading {
 		@include body-responsive();

@@ -66,7 +66,7 @@ export default class StringDataValue extends Vue {
 </script>
 <style lang="scss">
 .wb-db-string-value {
-	@include marginInputComponent();
+	@include marginForCenterColumn();
 
 	&__input {
 		@include transitions();

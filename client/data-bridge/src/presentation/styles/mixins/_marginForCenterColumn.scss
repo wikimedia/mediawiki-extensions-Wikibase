@@ -1,0 +1,31 @@
+/// Margins for a component in the center column.
+///
+/// The top and bottom margin are as defined in the parameters
+/// (by default the same, and both 0);
+/// the side margin is $margin-center-column-side on desktop, 0 on mobile.
+///
+/// This is effectively equivalent to the following:
+///
+/// ```
+/// margin: $margin-top $margin-center-column-side $margin-bottom;
+///
+/// @media ( max-width: $breakpoint ) {
+/// 	margin: $margin-top 0 $margin-bottom;
+/// }
+/// ```
+///
+/// However, the mixin optimizes the emitted margin property
+/// to avoid duplication where possible.
+@mixin marginForCenterColumn( $margin-top: 0, $margin-bottom: $margin-top ) {
+	$margin-bottom-if-different: if( $margin-bottom != $margin-top, $margin-bottom, #{''} );
+	margin: $margin-top $margin-center-column-side $margin-bottom-if-different;
+
+	@media ( max-width: $breakpoint ) {
+		@if $margin-top == 0 and $margin-bottom == 0 {
+			margin: 0;
+		}
+		@else {
+			margin: $margin-top 0 $margin-bottom-if-different;
+		}
+	}
+}

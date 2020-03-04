@@ -38,11 +38,7 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 
 <style lang="scss">
 .wb-db-references {
-	margin: 0 $margin-center-column-side;
-
-	@media ( max-width: $breakpoint ) {
-		margin: 0;
-	}
+	@include marginForCenterColumn();
 
 	&__heading {
 		margin-bottom: $heading-margin-bottom;
