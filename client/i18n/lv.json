@@ -82,5 +82,6 @@
 	"wikibase-client-data-bridge-bailout-heading": "Tā vietā tu vari:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Labot {{WBREPONAME}} vērtību. Klikšķini uz pogas zemāk, lai labotu vērtību pa tiešo (saite atveras jaunā cilnē).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Labot {{WBREPONAME}} vērtību",
-	"wikibase-client-data-bridge-somevalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta"
+	"wikibase-client-data-bridge-somevalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta",
+	"wikibase-client-data-bridge-novalue-error-head": "$1 vērtības labošana šobrīd nav atbalstīta"
 }
