@@ -28,19 +28,24 @@ interface ApiOptions {
 	useUse: boolean;
 }
 
+type MwApiParameterPrimitive = string | number | boolean | undefined;
+export type MwApiParameter = MwApiParameterPrimitive | MwApiParameterPrimitive[];
+export type MwApiParameters = Record<string, MwApiParameter>;
+export type MwApiParametersWithout<K extends string> = MwApiParameters & { [ k in K ]?: never };
+
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.ForeignApi */
 export type MwForeignApiConstructor = new( url: string, options?: ApiOptions ) => MwApi;
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api */
 export type MwApiConstructor = new( options?: ApiOptions ) => MwApi;
 export interface MwApi {
-	get( parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
+	get( parameters: MwApiParameters, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	getEditToken(): JQuery.Promise<any>;
 	getToken( type: string, assert?: string ): JQuery.Promise<any>;
-	post( parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
-	postWithEditToken( parameters: any, ajaxOptions?: unknown ): JQuery.Promise<any>;
-	postWithToken( tokenType: string, parameters: unknown, ajaxOptions?: unknown ): JQuery.Promise<any>;
+	post( parameters: MwApiParameters, ajaxOptions?: unknown ): JQuery.Promise<any>;
+	postWithEditToken( parameters: MwApiParameters, ajaxOptions?: unknown ): JQuery.Promise<any>;
+	postWithToken( tokenType: string, parameters: MwApiParameters, ajaxOptions?: unknown ): JQuery.Promise<any>;
 	login( username: string, password: string ): JQuery.Promise<any>;
-	assertCurrentUser( parameters: object ): object;
+	assertCurrentUser( parameters: MwApiParametersWithout<'assert'|'assertuser'> ): MwApiParameters;
 }
 
 export type MwTracker = ( topic: string, data?: unknown ) => void;

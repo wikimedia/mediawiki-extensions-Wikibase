@@ -1,4 +1,7 @@
-import { MwApi } from '@/@types/mediawiki/MwWindow';
+import {
+	MwApi,
+	MwApiParameters,
+} from '@/@types/mediawiki/MwWindow';
 import ApiErrors from '@/data-access/error/ApiErrors';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import Api, {
@@ -26,16 +29,23 @@ export default class ApiCore implements Api {
 	}
 
 	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[action]> {
+		return Promise.resolve( // turn jQuery promise into native one
+			this.api.get( this.mapParameters( params ) )
+				.catch( this.mwApiRejectionToError ),
+		);
+	}
+
+	private mapParameters( params: ApiParams<ApiAction> ): MwApiParameters {
+		const parameters: MwApiParameters = {};
 		for ( const name of Object.keys( params ) ) {
 			const param = params[ name ];
 			if ( param instanceof Set ) {
-				params[ name ] = [ ...param ];
+				parameters[ name ] = [ ...param ];
+			} else {
+				parameters[ name ] = param;
 			}
 		}
-		return Promise.resolve( // turn jQuery promise into native one
-			this.api.get( params )
-				.catch( this.mwApiRejectionToError ),
-		);
+		return parameters;
 	}
 
 	/**
