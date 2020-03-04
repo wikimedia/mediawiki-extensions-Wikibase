@@ -8,6 +8,7 @@ import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
+import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 
 export interface Services {
 	readingEntityRepository: ReadingEntityRepository;
@@ -21,6 +22,7 @@ export interface Services {
 	editAuthorizationChecker: BridgePermissionsRepository;
 	repoRouter: MediaWikiRouter;
 	clientRouter: MediaWikiRouter;
+	purgeTitles: MediaWikiPurge;
 }
 
 export default class ServiceContainer {
