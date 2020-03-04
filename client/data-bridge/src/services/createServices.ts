@@ -43,7 +43,6 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 
 	services.set( 'writingEntityRepository', new ApiWritingRepository(
 		repoMwApi,
-		mwWindow.mw.config.get( 'wgUserName' ),
 		editTags.length === 0 ? undefined : editTags,
 	) );
 

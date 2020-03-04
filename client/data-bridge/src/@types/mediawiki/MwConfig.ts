@@ -4,7 +4,6 @@ import WbRepo from '@/@types/wikibase/WbRepo';
 interface MwConfigValues {
 	wbDataBridgeConfig: DataBridgeConfig;
 	wbRepo: WbRepo;
-	wgUserName: string;
 	wgPageContentLanguage: string;
 	wgPageName: string;
 }

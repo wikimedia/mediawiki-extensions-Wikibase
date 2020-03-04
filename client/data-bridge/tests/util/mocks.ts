@@ -20,7 +20,6 @@ export function mockMwConfig( values: {
 	usePublish?: boolean;
 	wbRepo?: WbRepo;
 	wgPageContentLanguage?: string;
-	wgUserName?: string;
 	wgPageName?: string;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
@@ -41,8 +40,6 @@ export function mockMwConfig( values: {
 						scriptPath: '/w',
 						articlePath: '/wiki/$1',
 					};
-				case 'wgUserName':
-					return values.wgUserName || 'Test User';
 				case 'wgPageContentLanguage':
 					return values.wgPageContentLanguage || 'en';
 				case 'wgPageName':
@@ -65,6 +62,8 @@ class MockApi implements MwApi {
 
 	public postWithToken( ..._args: any[] ): any { return jest.fn(); }
 	public login( ..._args: any[] ): any { return jest.fn(); }
+
+	public assertCurrentUser( ..._args: any[] ): any { return jest.fn(); }
 }
 
 export function mockMwApiConstructor(
@@ -89,6 +88,7 @@ export function mockMwForeignApiConstructor(
 		expectedUrl?: string;
 		get?: ( ...args: unknown[] ) => any;
 		postWithEditToken?: ( ...args: unknown[] ) => any;
+		assertCurrentUser?: ( ...args: unknown[] ) => any;
 	},
 ): MwForeignApiConstructor {
 	class MockForeignApi extends MockApi {
@@ -104,6 +104,9 @@ export function mockMwForeignApiConstructor(
 	}
 	if ( options.postWithEditToken ) {
 		MockForeignApi.prototype.postWithEditToken = options.postWithEditToken;
+	}
+	if ( options.assertCurrentUser ) {
+		MockForeignApi.prototype.assertCurrentUser = options.assertCurrentUser;
 	}
 
 	return MockForeignApi;

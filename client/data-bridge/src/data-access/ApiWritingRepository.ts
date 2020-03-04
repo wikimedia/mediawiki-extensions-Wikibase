@@ -27,12 +27,10 @@ type Response = ResponseError|ResponseSuccess;
 
 export default class ApiWritingRepository implements WritingEntityRepository {
 	private api: MwApi;
-	private username?: string;
 	private tags?: string[];
 
-	public constructor( api: MwApi, username: string|null, tags?: string[] ) {
+	public constructor( api: MwApi, tags?: string[] ) {
 		this.api = api;
-		this.username = username || undefined;
 		this.tags = tags || undefined;
 	}
 
@@ -42,16 +40,15 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 
 	public saveEntity( revision: EntityRevision ): Promise<EntityRevision> {
 		return Promise.resolve(
-			this.api.postWithEditToken( {
+			this.api.postWithEditToken( this.api.assertCurrentUser( {
 				action: 'wbeditentity',
 				id: revision.entity.id,
 				baserevid: revision.revisionId,
 				data: JSON.stringify( {
 					claims: revision.entity.statements,
 				} ),
-				assertuser: this.username,
 				tags: this.tags,
-			} ),
+			} ) ),
 		).then( ( response: Response ): EntityRevision => {
 			if ( typeof response !== 'object' ) {
 				throw new TechnicalProblem( 'unknown response type.' );

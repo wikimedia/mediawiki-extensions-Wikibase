@@ -26,6 +26,9 @@ function mockMwApi( successObject?: unknown, rejectData?: unknown ): MwApi {
 				},
 			} );
 		},
+		assertCurrentUser( params: object ): object {
+			return params;
+		},
 	} as any;
 }
 
@@ -62,7 +65,7 @@ describe( 'ApiWritingRepository', () => {
 
 		const api = mockMwApi( response );
 
-		const entityWriter = new ApiWritingRepository( api, 'user' );
+		const entityWriter = new ApiWritingRepository( api );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -86,6 +89,7 @@ describe( 'ApiWritingRepository', () => {
 	it( 'delagates the change to the api', () => {
 		const api = mockMwApi();
 		jest.spyOn( api, 'postWithEditToken' );
+		jest.spyOn( api, 'assertCurrentUser' );
 		const toBeWrittenEntity = {
 			revisionId: 123,
 			entity: {
@@ -108,66 +112,28 @@ describe( 'ApiWritingRepository', () => {
 				} as any,
 			},
 		};
-
-		const assertuser = 'sampleUser';
-		const entityWriter = new ApiWritingRepository( api, assertuser );
-
-		return entityWriter.saveEntity( toBeWrittenEntity )
-			.then( () => {
-				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
-				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
-					action: 'wbeditentity',
-					assertuser,
-					baserevid: toBeWrittenEntity.revisionId,
-					id: toBeWrittenEntity.entity.id,
-					data: JSON.stringify( {
-						claims: toBeWrittenEntity.entity.statements,
-					} ),
-				} );
-			} );
-	} );
-
-	it( 'delegates anonymous user to the api', () => {
-		const api = mockMwApi();
-		jest.spyOn( api, 'postWithEditToken' );
-		const toBeWrittenEntity = {
-			revisionId: 123,
-			entity: {
-				id: 'Q123',
-				statements: {
-					P20: [ {
-						mainsnak: {
-							snaktype: 'value',
-							property: 'P20',
-							datavalue: {
-								value: 'String for Wikidata bridge',
-								type: 'string',
-							},
-							datatype: 'string',
-						},
-						type: 'statement',
-						id: 'Q123$36ae6854-4e74-d74c-d583-701bc130166f',
-						rank: 'normal',
-					} ],
-				} as any,
-			},
+		const expectedParams = {
+			action: 'wbeditentity',
+			baserevid: toBeWrittenEntity.revisionId,
+			id: toBeWrittenEntity.entity.id,
+			data: JSON.stringify( {
+				claims: toBeWrittenEntity.entity.statements,
+			} ),
 		};
+		const expectedAssertingParams = {
+			assertuser: 'sampleUser',
+			...expectedParams,
+		};
+		( api.assertCurrentUser as jest.Mock ).mockReturnValue( expectedAssertingParams );
 
-		const assertuser = null;
-		const entityWriter = new ApiWritingRepository( api, assertuser );
+		const entityWriter = new ApiWritingRepository( api );
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
+				expect( api.assertCurrentUser ).toHaveBeenCalledTimes( 1 );
+				expect( api.assertCurrentUser ).toHaveBeenCalledWith( expectedParams );
 				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
-				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
-					action: 'wbeditentity',
-					assertuser: undefined,
-					baserevid: toBeWrittenEntity.revisionId,
-					id: toBeWrittenEntity.entity.id,
-					data: JSON.stringify( {
-						claims: toBeWrittenEntity.entity.statements,
-					} ),
-				} );
+				expect( api.postWithEditToken ).toHaveBeenCalledWith( expectedAssertingParams );
 			} );
 	} );
 
@@ -197,16 +163,14 @@ describe( 'ApiWritingRepository', () => {
 			},
 		};
 
-		const assertuser = 'sampleUser';
 		const tags = [ 'tag1', 'tag2', 'tag3' ];
-		const entityWriter = new ApiWritingRepository( api, assertuser, tags );
+		const entityWriter = new ApiWritingRepository( api, tags );
 
 		return entityWriter.saveEntity( toBeWrittenEntity )
 			.then( () => {
 				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
 				expect( api.postWithEditToken ).toHaveBeenCalledWith( {
 					action: 'wbeditentity',
-					assertuser,
 					baserevid: toBeWrittenEntity.revisionId,
 					id: toBeWrittenEntity.entity.id,
 					tags,
@@ -230,7 +194,7 @@ describe( 'ApiWritingRepository', () => {
 		it( 'rejects on result that does not contain an object', () => {
 			const mock = mockMwApi( 'noObject' );
 
-			const entityWriter = new ApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'unknown response type.' ) );
@@ -245,7 +209,7 @@ describe( 'ApiWritingRepository', () => {
 
 			const mock = mockMwApi( error );
 
-			const entityWriter = new ApiWritingRepository( mock, 'nuterin' );
+			const entityWriter = new ApiWritingRepository( mock );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( error.error.code ) );
@@ -254,7 +218,7 @@ describe( 'ApiWritingRepository', () => {
 		it( 'rejects on result indicating relevant entity as missing', () => {
 			const mock = mockMwApi( null, { status: 404 } );
 
-			const entityWriter = new ApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'The given api page does not exist.' ) );
@@ -263,7 +227,7 @@ describe( 'ApiWritingRepository', () => {
 		it( 'rejects if there was a serverside problem with the API', () => {
 			const mock = mockMwApi( null, { status: 500 } );
 
-			const entityWriter = new ApiWritingRepository( mock, 'user' );
+			const entityWriter = new ApiWritingRepository( mock );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );
