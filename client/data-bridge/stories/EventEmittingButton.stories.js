@@ -54,6 +54,14 @@ storiesOf( 'EventEmittingButton', module )
 				message="primaryProgressive M"
 			/>`,
 	} ) )
+	.add( 'primaryProgressive XL', () => ( {
+		components: { EventEmittingButton },
+		template: `<EventEmittingButton
+			type="primaryProgressive"
+			size="XL"
+			message="primaryProgressive XL"
+		/>`,
+	} ) )
 	.add( 'cancel', () => ( {
 		components: { EventEmittingButton },
 		template:
