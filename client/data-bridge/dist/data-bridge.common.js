@@ -14219,9 +14219,7 @@ function (_Actions) {
                 entityId = state[NS_ENTITY].id;
                 path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
                 _context3.prev = 7;
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                statements = this.statementMutationFactory(state.editDecision).apply(state.targetValue, // eslint-disable-line @typescript-eslint/no-non-null-assertion
-                path, clone(state[NS_STATEMENTS]));
+                statements = this.statementMutationFactory(state.editDecision).apply(state.targetValue, path, clone(state[NS_STATEMENTS]));
                 _context3.next = 15;
                 break;
 
