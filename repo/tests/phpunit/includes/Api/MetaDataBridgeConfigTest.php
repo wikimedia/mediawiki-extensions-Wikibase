@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use ApiQuery;
 use FauxRequest;
-use PHPUnit\Framework\TestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
@@ -19,7 +19,21 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
  *
  * @license GPL-2.0-or-later
  */
-class MetaDataBridgeConfigTest extends TestCase {
+class MetaDataBridgeConfigTest extends MediaWikiIntegrationTestCase {
+
+	private $titleCallbackCalls = [];
+
+	protected function setUp() : void {
+		parent::setUp();
+
+		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
+	}
+
+	protected function tearDown(): void {
+		parent::tearDown();
+
+		$this->titleCallbackCalls = [];
+	}
 
 	private function getCustomConfigApiResults( array $fields = [] ): array {
 		return $this->getApiResultsWithSettings( new SettingsArray( array_replace( [
@@ -28,6 +42,8 @@ class MetaDataBridgeConfigTest extends TestCase {
 						'length' => 12345,
 					],
 				],
+				'dataRightsText' => 'Creative Commons CC0 License',
+				'dataRightsUrl' => 'https://creativecommons.org/publicdomain/zero/1.0/',
 			], $fields ) )
 		);
 	}
@@ -44,7 +60,11 @@ class MetaDataBridgeConfigTest extends TestCase {
 		$api = new MetaDataBridgeConfig(
 			$repoSettings,
 			$this->getQuery(),
-			'wbdatabridgeconfig'
+			'wbdatabridgeconfig',
+			function ( $pagename ) {
+				$this->titleCallbackCalls[] = $pagename;
+				return 'https://example.com';
+			}
 		);
 
 		$api->execute();
@@ -72,6 +92,30 @@ class MetaDataBridgeConfigTest extends TestCase {
 		$stringLimits = $dataTypeLimits['string'];
 		$this->assertArrayHasKey( 'maxLength', $stringLimits );
 		$this->assertSame( 400, $stringLimits['maxLength'] );
+	}
+
+	public function testExecute_LicenseInfo_defaultConfig() {
+		$results = $this->getDefaultConfigApiResults();
+
+		$this->assertArrayHasKey( 'dataRightsUrl', $results );
+		$this->assertArrayHasKey( 'dataRightsText', $results );
+		$this->assertArrayHasKey( 'termsOfUseUrl', $results );
+		$this->assertSame( '(copyrightpage)', $this->titleCallbackCalls[0] );
+		$this->assertStringContainsString( 'https://example.com', $results['termsOfUseUrl'] );
+	}
+
+	public function testExecute_LicenseInfo_customConfig() {
+		$licenseText = 'Example license';
+		$licenseUrl = 'https://example.com';
+		$results = $this->getCustomConfigApiResults( [
+			'dataRightsText' => $licenseText,
+			'dataRightsUrl' => $licenseUrl,
+		] );
+
+		$this->assertArrayHasKey( 'dataRightsUrl', $results );
+		$this->assertSame( $licenseUrl, $results['dataRightsUrl'] );
+		$this->assertArrayHasKey( 'dataRightsText', $results );
+		$this->assertSame( $licenseText, $results['dataRightsText'] );
 	}
 
 	private function getQuery(): ApiQuery {
