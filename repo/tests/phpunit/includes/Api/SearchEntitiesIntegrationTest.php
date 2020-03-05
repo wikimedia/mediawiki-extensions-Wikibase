@@ -12,9 +12,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
@@ -135,16 +133,12 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			'search' => $query,
 		] ) );
 
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P1' ), '' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), '' );
-
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
 			$entitySearchTermIndex,
 			$this->newEntityTitleLookup(),
-			$dataTypeLookup,
+			null,
 			new StaticContentLanguages( [ 'en' ] ),
 			null,
 			new EntitySourceDefinitions( [

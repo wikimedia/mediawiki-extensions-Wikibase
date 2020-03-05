@@ -258,7 +258,7 @@ call_user_func( function() {
 				$moduleName,
 				$entitySearchHelper,
 				$repo->getEntityTitleLookup(),
-				$repo->getPropertyDataTypeLookup(),
+				null,
 				$repo->getTermsLanguages(),
 				null,
 				$repo->getEntitySourceDefinitions()

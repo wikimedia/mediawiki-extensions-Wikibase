@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Interactors;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
-use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -38,6 +37,11 @@ class TermSearchResult {
 	private $displayDescription;
 
 	/**
+	 * @var array
+	 */
+	private $metaData;
+
+	/**
 	 * @param Term $matchedTerm
 	 * @param string $matchedTermType
 	 * @param EntityId $entityId
@@ -46,17 +50,18 @@ class TermSearchResult {
 	 */
 	public function __construct(
 		Term $matchedTerm,
-		$matchedTermType,
+		string $matchedTermType,
 		EntityId $entityId,
 		Term $displayLabel = null,
-		Term $displayDescription = null
+		Term $displayDescription = null,
+		array $metaData = []
 	) {
-		Assert::parameterType( 'string', $matchedTermType, '$matchedTermType' );
 		$this->matchedTerm = $matchedTerm;
 		$this->matchedTermType = $matchedTermType;
 		$this->entityId = $entityId;
 		$this->displayLabel = $displayLabel;
 		$this->displayDescription = $displayDescription;
+		$this->metaData = $metaData;
 	}
 
 	/**
@@ -99,6 +104,13 @@ class TermSearchResult {
 	 */
 	public function getDisplayDescription() {
 		return $this->displayDescription;
+	}
+
+	/**
+	 * @return array [ key => value ] map of meta data about the returned search result or its associated entity
+	 */
+	public function getMetaData(): array {
+		return $this->metaData;
 	}
 
 }

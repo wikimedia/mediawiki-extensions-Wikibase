@@ -11,7 +11,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -19,6 +18,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
 
 /**
@@ -121,18 +121,6 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	private function getMockPropertyDataTypeLookup() {
-		$mock = $this->createMock( PropertyDataTypeLookup::class );
-		$mock->expects( $this->any() )
-			->method( 'getDataTypeIdForProperty' )
-			->willReturn( 'PropertyDataType' );
-
-		return $mock;
-	}
-
-	/**
 	 * @param array $params
 	 * @param EntitySearchHelper|null $entitySearchHelper
 	 *
@@ -144,7 +132,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'wbsearchentities',
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
 			$this->getMockTitleLookup(),
-			$this->getMockPropertyDataTypeLookup(),
+			null,
 			$this->getContentLanguages(),
 			null,
 			new EntitySourceDefinitions( [
@@ -226,7 +214,9 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			new Term( 'en', 'PropertyLabel' ),
 			'label',
 			new PropertyId( 'P123' ),
-			new Term( 'en', 'PropertyLabel' )
+			new Term( 'en', 'PropertyLabel' ),
+			null,
+			[ PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => 'PropertyDataType' ]
 		);
 
 		$q111Result = [
@@ -412,7 +402,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'wbsearchentities',
 			$searchHelper,
 			$this->getMockTitleLookup(),
-			$this->getMockPropertyDataTypeLookup(),
+			null,
 			$this->getContentLanguages(),
 			null,
 			new EntitySourceDefinitions(

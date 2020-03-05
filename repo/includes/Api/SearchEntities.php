@@ -7,8 +7,6 @@ use ApiMain;
 use LogicException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -31,11 +29,6 @@ class SearchEntities extends ApiBase {
 	private $titleLookup;
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
-
-	/**
 	 * @var ContentLanguages
 	 */
 	private $termsLanguages;
@@ -50,7 +43,6 @@ class SearchEntities extends ApiBase {
 	 * @param string $moduleName
 	 * @param EntitySearchHelper $entitySearchHelper
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ContentLanguages $termLanguages
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @see ApiBase::__construct
@@ -60,16 +52,15 @@ class SearchEntities extends ApiBase {
 		$moduleName,
 		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $entityTitleLookup,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		ContentLanguages $termLanguages,
 		$unused, // kept for backwards compat across repos, removed in a later patch
+		ContentLanguages $termLanguages,
+		$unused2, // kept for backwards compat across repos, removed in a later patch
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->titleLookup = $entityTitleLookup;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
@@ -124,9 +115,8 @@ class SearchEntities extends ApiBase {
 		if ( $props !== null && in_array( 'url', $props ) ) {
 			$entry['url'] = $title->getFullURL();
 		}
-		if ( $entityId instanceof PropertyId ) {
-			$entry['datatype'] = $this->propertyDataTypeLookup
-				->getDataTypeIdForProperty( $entityId );
+		foreach ( $match->getMetaData() as $metaKey => $metaValue ) {
+			$entry[$metaKey] = $metaValue;
 		}
 
 		$displayLabel = $match->getDisplayLabel();
