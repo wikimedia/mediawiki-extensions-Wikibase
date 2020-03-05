@@ -99,6 +99,7 @@
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Goitizenak:",
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Hizkuntza kodea:",
+	"wikibase-mergeitems-fromid": "Zein IDtik batu nahi duzu",
 	"wikibase-api-illegal-entity-remove": "Entitateak ezin dira ezabatu goi-maila <var>remove</var> giltza eskeintzen.",
 	"wikibase-api-illegal-id-or-site-page-selector": "Hautako bat eman behar duzu: <var>id</var>, edo <var>site</var> eta <var>page</var> konbinazioa, baina ez biak.",
 	"wikibase-api-no-such-entity": "Ezin izan da identifikazio \"$1\"ko entitatea aurkitu.",
