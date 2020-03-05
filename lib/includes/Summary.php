@@ -178,6 +178,3 @@ class Summary implements FormatableSummary {
 	}
 
 }
-
-/** @deprecated */
-class_alias( Summary::class, 'Wikibase\Summary' );

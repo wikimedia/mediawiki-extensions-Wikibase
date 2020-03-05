@@ -7,9 +7,6 @@ use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Summary;
 
-// TEMPORARY: ensure that Summary, including its class alias, is autoloaded
-class_exists( Summary::class );
-
 /**
  * A ChangeOp represents a modification of an entity. It is responsible for
  * the actual modifications, as well as providing associated services such as

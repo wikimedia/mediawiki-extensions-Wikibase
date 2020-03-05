@@ -330,6 +330,3 @@ class LanguageFallbackChainFactory {
 	}
 
 }
-
-/** @deprecated */
-class_alias( LanguageFallbackChainFactory::class, 'Wikibase\LanguageFallbackChainFactory' );

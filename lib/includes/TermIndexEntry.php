@@ -181,6 +181,3 @@ class TermIndexEntry {
 	}
 
 }
-
-/** @deprecated */
-class_alias( TermIndexEntry::class, 'Wikibase\TermIndexEntry' );

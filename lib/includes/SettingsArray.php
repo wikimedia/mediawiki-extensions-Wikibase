@@ -113,6 +113,3 @@ class SettingsArray extends ArrayObject {
 	}
 
 }
-
-/** @deprecated */
-class_alias( SettingsArray::class, 'Wikibase\SettingsArray' );

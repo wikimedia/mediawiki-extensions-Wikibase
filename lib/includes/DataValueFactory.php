@@ -76,6 +76,3 @@ class DataValueFactory {
 	}
 
 }
-
-/** @deprecated */
-class_alias( DataValueFactory::class, 'DataValues\DataValueFactory' );
