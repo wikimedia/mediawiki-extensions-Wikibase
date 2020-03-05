@@ -152,7 +152,7 @@ launch(
 	},
 	services,
 ).on( Events.onSaved, () => {
-	console.info( 'saved' );
+	console.info( 'Application event: saved' );
 } ).on( Events.onCancel, () => {
-	console.info( 'canceled' );
+	console.info( 'Application event: canceled' );
 } );
