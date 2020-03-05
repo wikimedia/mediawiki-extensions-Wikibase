@@ -12,9 +12,6 @@ use Wikibase\DataModel\Entity\Int32EntityId;
  */
 class DataAccessSettings {
 
-	const USE_ENTITY_SOURCE_BASED_FEDERATION = true;
-	const USE_REPOSITORY_PREFIX_BASED_FEDERATION = false;
-
 	const PROPERTY_TERMS_NORMALIZED = true;
 	const PROPERTY_TERMS_UNNORMALIZED = false;
 
@@ -34,11 +31,6 @@ class DataAccessSettings {
 	 * @var bool
 	 */
 	private $forceWriteSearchFields;
-
-	/**
-	 * @var bool
-	 */
-	private $useEntitySourceBasedFederation;
 
 	/**
 	 * @var bool
@@ -64,7 +56,6 @@ class DataAccessSettings {
 	 * @param int $maxSerializedEntitySizeInKiloBytes
 	 * @param bool $useSearchFields
 	 * @param bool $forceWriteSearchFields
-	 * @param bool $useEntitySourceBasedFederation TODO: Temporary. Remove once it is the only federation implementation
 	 * @param bool $useNormalizedPropertyTerms TODO: Temporary until we get rid of wb_terms
 	 * @param array $itemTermsMigrationStages TODO: Temporary until we get rid of wb_terms
 	 * @param int $itemSearchMigrationStage TODO: Temporary until we get rid of wb_terms
@@ -74,7 +65,6 @@ class DataAccessSettings {
 		int $maxSerializedEntitySizeInKiloBytes,
 		bool $useSearchFields,
 		bool $forceWriteSearchFields,
-		bool $useEntitySourceBasedFederation,
 		bool $useNormalizedPropertyTerms,
 		array $itemTermsMigrationStages,
 		int $itemSearchMigrationStage = MIGRATION_OLD,
@@ -83,7 +73,6 @@ class DataAccessSettings {
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
 		$this->useSearchFields = $useSearchFields;
 		$this->forceWriteSearchFields = $forceWriteSearchFields;
-		$this->useEntitySourceBasedFederation = $useEntitySourceBasedFederation;
 		$this->useNormalizedPropertyTerms = $useNormalizedPropertyTerms;
 		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
 		$this->itemSearchMigrationStage = $itemSearchMigrationStage;

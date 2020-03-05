@@ -11,29 +11,10 @@ use Wikibase\DataAccess\DataAccessSettings;
 class DataAccessSettingsFactory {
 
 	public static function anySettings(): DataAccessSettings {
-		return self::entitySourceBasedFederation();
-	}
-
-	public static function repositoryPrefixBasedFederation(): DataAccessSettings {
 		return new DataAccessSettings(
 			100,
 			true,
 			false,
-			DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
-			MIGRATION_OLD,
-			MIGRATION_OLD
-
-		);
-	}
-
-	public static function entitySourceBasedFederation(): DataAccessSettings {
-		return new DataAccessSettings(
-			100,
-			true,
-			false,
-			DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
 			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
 			MIGRATION_OLD,
