@@ -26,13 +26,14 @@ services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 
 services.set( 'writingEntityRepository', {
 	saveEntity( entityRevision: EntityRevision ): Promise<EntityRevision> {
-		console.info( 'save', entityRevision );
+		console.info( 'saving', entityRevision );
 		const result: EntityRevision = {
 			entity: clone( entityRevision.entity ),
 			revisionId: entityRevision.revisionId + 1,
 		};
 		return new Promise( ( resolve ) => {
 			setTimeout( () => {
+				console.info( 'saved' );
 				resolve( result );
 			}, 2000 );
 		} );
