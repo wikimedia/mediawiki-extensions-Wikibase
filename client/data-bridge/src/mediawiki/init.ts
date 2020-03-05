@@ -8,6 +8,7 @@ import MwInitTracker from '@/mediawiki/MwInitTracker';
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
 const FOREIGNAPI_MODULE = 'mediawiki.ForeignApi';
+const API_MODULE = 'mediawiki.api';
 const ULS_MODULE = 'jquery.uls.data';
 const MWLANGUAGE_MODULE = 'mediawiki.language';
 
@@ -32,6 +33,7 @@ export default async (): Promise<void> => {
 			APP_MODULE,
 			WBREPO_MODULE,
 			FOREIGNAPI_MODULE,
+			API_MODULE,
 			ULS_MODULE,
 			MWLANGUAGE_MODULE,
 		] ).then( ( require ) => {

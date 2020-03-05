@@ -41,6 +41,7 @@ describe( 'init', () => {
 				'wikibase.client.data-bridge.app',
 				'mw.config.values.wbRepo',
 				'mediawiki.ForeignApi',
+				'mediawiki.api',
 				'jquery.uls.data',
 				'mediawiki.language',
 			] );
