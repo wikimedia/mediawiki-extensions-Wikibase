@@ -26,7 +26,7 @@ services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 
 services.set( 'writingEntityRepository', {
 	saveEntity( entityRevision: EntityRevision ): Promise<EntityRevision> {
-		console.log( 'save', entityRevision );
+		console.info( 'save', entityRevision );
 		const result: EntityRevision = {
 			entity: clone( entityRevision.entity ),
 			revisionId: entityRevision.revisionId + 1,
