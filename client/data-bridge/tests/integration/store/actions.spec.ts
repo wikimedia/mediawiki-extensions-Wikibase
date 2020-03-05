@@ -382,7 +382,7 @@ describe( 'store/actions', () => {
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
 
-			it( 'stores the responded entity, if the request succeeded', async () => {
+			it( 'stores the responded entity & purges the page, if the request succeeded', async () => {
 				const newStringValue = 'new value';
 				const saveResponse = {
 					revisionId: 1,
@@ -413,6 +413,11 @@ describe( 'store/actions', () => {
 					saveEntity,
 				} );
 
+				const purge = jest.fn().mockReturnValue( Promise.resolve() );
+				services.set( 'purgeTitles', {
+					purge,
+				} );
+
 				store = createStore( services );
 
 				await store.dispatch( 'initBridge', info );
@@ -437,6 +442,9 @@ describe( 'store/actions', () => {
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
 				expect( state.entity.id ).toBe( saveResponse.entity.id );
 				expect( state.entity.baseRevision ).toBe( saveResponse.revisionId );
+
+				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
+
 				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
 			} );
 		} );

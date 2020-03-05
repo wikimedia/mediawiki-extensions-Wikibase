@@ -14241,6 +14241,10 @@ function (_Actions) {
 
                   throw error;
                 }).then(function () {
+                  return _this3.store.$services.get('purgeTitles').purge([_this3.state.pageTitle]).catch(function () {// we don't want to stop normal operation in that case but
+                    // TODO consider adding some logging
+                  });
+                }).then(function () {
                   _this3.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
 
                   return _this3.dispatch('postEntityLoad');

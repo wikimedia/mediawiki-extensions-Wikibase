@@ -22,6 +22,7 @@ import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import DataValue from '@/datamodel/DataValue';
 import { StatementState } from '@/store/statements';
 import Statement from '@/datamodel/Statement';
+import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 
 const mockBridgeConfig = jest.fn();
 jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
@@ -810,6 +811,15 @@ describe( 'root/actions', () => {
 			} );
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles: {
+						purge: jest.fn().mockReturnValue( Promise.resolve() ),
+					},
+				} ),
+			};
+
 			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
 			// @ts-ignore
 			actions.statementMutationFactory = ( () => ( {
@@ -827,7 +837,7 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenNthCalledWith( 2, 'setApplicationStatus', ApplicationStatus.READY );
 		} );
 
-		it( 'it dispatches entitySave & postEntityLoad', async () => {
+		it( 'dispatches entitySave, purges the page & dispatches postEntityLoad', async () => {
 			const rootModuleDispatch = jest.fn();
 			const commit = jest.fn();
 			const entityId = 'Q42';
@@ -843,6 +853,7 @@ describe( 'root/actions', () => {
 					],
 				},
 			};
+			const pageTitle = 'South_Pole_Telescope';
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
 				targetValue,
@@ -851,13 +862,23 @@ describe( 'root/actions', () => {
 					id: entityId,
 				},
 				statements: statementsState,
+				pageTitle,
 			} );
+			const purgeTitles: MediaWikiPurge = {
+				purge: jest.fn().mockReturnValue( Promise.resolve() ),
+			};
 
 			const actions = inject( RootActions, {
 				state,
 				commit,
 				dispatch: rootModuleDispatch,
 			} );
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles,
+				} ),
+			};
 
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
@@ -882,7 +903,67 @@ describe( 'root/actions', () => {
 			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).toStrictEqual( statementsState );
 			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).not.toBe( statementsState );
 			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave', statementsState[ entityId ] );
+			expect( purgeTitles.purge ).toHaveBeenCalledWith( [ pageTitle ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+		} );
+
+		it( 'gracefully ignores problems while purging the page', async () => {
+			const rootModuleDispatch = jest.fn();
+			const commit = jest.fn();
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const targetValue: DataValue = {
+				type: 'string',
+				value: 'a new value',
+			};
+			const statementsState: StatementState = {
+				[ entityId ]: {
+					[ targetPropertyId ]: [
+						{} as Statement,
+					],
+				},
+			};
+			const pageTitle = 'South_Pole_Telescope';
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+				statements: statementsState,
+				pageTitle,
+			} );
+			const purgeTitles: MediaWikiPurge = {
+				purge: jest.fn().mockReturnValue( Promise.reject() ),
+			};
+
+			const actions = inject( RootActions, {
+				state,
+				commit,
+				dispatch: rootModuleDispatch,
+			} );
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles,
+				} ),
+			};
+
+			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
+
+			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+
+			await expect( actions.saveBridge() ).resolves.toBeUndefined();
 		} );
 
 		it( 'chooses the strategy based on the edit decision', async () => {
@@ -900,6 +981,15 @@ describe( 'root/actions', () => {
 				commit: jest.fn(),
 				dispatch: jest.fn(),
 			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles: {
+						purge: jest.fn().mockReturnValue( Promise.resolve() ),
+					},
+				} ),
+			};
 
 			const statementMutationFactory = jest.fn( ( () => ( {
 				apply: jest.fn().mockReturnValue( {} ),
