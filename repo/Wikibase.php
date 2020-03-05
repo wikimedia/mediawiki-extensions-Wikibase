@@ -260,7 +260,7 @@ call_user_func( function() {
 				$repo->getEntityTitleLookup(),
 				$repo->getPropertyDataTypeLookup(),
 				$repo->getTermsLanguages(),
-				$repo->getEnabledEntityTypes(),
+				null,
 				$repo->getEntitySourceDefinitions()
 			);
 		},

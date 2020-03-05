@@ -41,25 +41,17 @@ class SearchEntities extends ApiBase {
 	private $termsLanguages;
 
 	/**
-	 * @var string[]
-	 */
-	private $entityTypes;
-
-	/**
 	 * @var EntitySourceDefinitions
 	 */
 	private $entitySourceDefinitions;
 
 	/**
-	 * TODO: $entityTypes could be replaced by EntitySourceDefinitions as are actually redundant
-	 *
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
 	 * @param EntitySearchHelper $entitySearchHelper
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ContentLanguages $termLanguages
-	 * @param string[] $entityTypes
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
 	 * @see ApiBase::__construct
 	 */
@@ -70,7 +62,7 @@ class SearchEntities extends ApiBase {
 		EntityTitleLookup $entityTitleLookup,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		ContentLanguages $termLanguages,
-		array $entityTypes,
+		$unused, // kept for backwards compat across repos, removed in a later patch
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
@@ -79,7 +71,6 @@ class SearchEntities extends ApiBase {
 		$this->titleLookup = $entityTitleLookup;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->termsLanguages = $termLanguages;
-		$this->entityTypes = $entityTypes;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
@@ -288,7 +279,7 @@ class SearchEntities extends ApiBase {
 				self::PARAM_DFLT => false
 			],
 			'type' => [
-				self::PARAM_TYPE => $this->entityTypes,
+				self::PARAM_TYPE => array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() ),
 				self::PARAM_DFLT => 'item',
 			],
 			'limit' => [
