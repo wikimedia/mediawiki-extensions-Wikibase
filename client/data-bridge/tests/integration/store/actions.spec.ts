@@ -263,10 +263,10 @@ describe( 'store/actions', () => {
 	describe( 'entitySave', () => {
 		it( 'rejects if the request fails', async () => {
 			const rejectError = new Error( 'no' );
-			const resolver = jest.fn().mockRejectedValue( rejectError );
+			const saveEntity = jest.fn().mockRejectedValue( rejectError );
 
 			services.set( 'writingEntityRepository', {
-				saveEntity: resolver as any,
+				saveEntity,
 			} );
 
 			store = createStore( services );
@@ -278,7 +278,7 @@ describe( 'store/actions', () => {
 				),
 			).rejects.toBe( rejectError );
 
-			expect( resolver ).toHaveBeenCalledWith( testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet );
 		} );
 
 		it( 'stores the responded entity, if the request succeeded', async () => {
@@ -305,10 +305,10 @@ describe( 'store/actions', () => {
 				},
 			};
 
-			const resolver = jest.fn().mockResolvedValue( response );
+			const saveEntity = jest.fn().mockResolvedValue( response );
 
 			services.set( 'writingEntityRepository', {
-				saveEntity: resolver as any,
+				saveEntity,
 			} );
 
 			store = createStore( services );
@@ -316,7 +316,7 @@ describe( 'store/actions', () => {
 
 			await store.dispatch( action( NS_ENTITY, 'entitySave' ), testSet.entity.statements );
 
-			expect( resolver ).toHaveBeenCalledWith( testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet );
 
 			const state = store.state as InitializedApplicationState;
 			expect( state.statements ).toEqual( { Q42: response.entity.statements } );
@@ -360,10 +360,10 @@ describe( 'store/actions', () => {
 
 			it( 'rejects, switches to error, keeps statements unchanged if the request fails', async () => {
 				const rejectError = new Error( 'no' );
-				const resolver = jest.fn().mockRejectedValue( rejectError );
+				const saveEntity = jest.fn().mockRejectedValue( rejectError );
 
 				services.set( 'writingEntityRepository', {
-					saveEntity: resolver as any,
+					saveEntity,
 				} );
 
 				store = createStore( services );
@@ -377,7 +377,7 @@ describe( 'store/actions', () => {
 					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
-				expect( resolver ).toHaveBeenCalledWith( testSet );
+				expect( saveEntity ).toHaveBeenCalledWith( testSet );
 				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
@@ -407,10 +407,10 @@ describe( 'store/actions', () => {
 					},
 				};
 
-				const resolver = jest.fn().mockResolvedValue( saveResponse );
+				const saveEntity = jest.fn().mockResolvedValue( saveResponse );
 
 				services.set( 'writingEntityRepository', {
-					saveEntity: resolver as any,
+					saveEntity,
 				} );
 
 				store = createStore( services );
@@ -431,7 +431,7 @@ describe( 'store/actions', () => {
 					.statements.P31[ 0 ]
 					.mainsnak.datavalue!.value = newStringValue;
 
-				expect( resolver ).toHaveBeenCalledWith( testSetChangedByUserInteraction );
+				expect( saveEntity ).toHaveBeenCalledWith( testSetChangedByUserInteraction );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
