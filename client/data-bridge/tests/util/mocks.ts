@@ -69,6 +69,7 @@ class MockApi implements MwApi {
 export function mockMwApiConstructor(
 	options: {
 		get?: ( ...args: unknown[] ) => any;
+		post?: ( ...args: unknown[] ) => any;
 	},
 ): MwApiConstructor {
 	class MockMwApi extends MockApi {
@@ -78,6 +79,9 @@ export function mockMwApiConstructor(
 	}
 	if ( options.get ) {
 		MockMwApi.prototype.get = options.get;
+	}
+	if ( options.post ) {
+		MockMwApi.prototype.post = options.post;
 	}
 
 	return MockMwApi;
