@@ -42,6 +42,6 @@ export default class Dispatcher {
 			), // should be made caching when used repeatedly
 		);
 
-		subscribeToEvents( emitter, dialog.getManager() );
+		subscribeToEvents( emitter, dialog.getManager(), this.mwWindow );
 	}
 }

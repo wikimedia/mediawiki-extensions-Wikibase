@@ -109,6 +109,7 @@ function prepareTestEnv( options: {
 	window.mw.language = {
 		bcp47: jest.fn().mockReturnValue( 'de' ),
 	};
+	window.location.reload = jest.fn();
 
 	const testLinkHref = `https://www.wikidata.org/wiki/${entityTitle}?uselang=en#${propertyId}`;
 	document.body.innerHTML = `
@@ -317,7 +318,7 @@ describe( 'app', () => {
 
 		} );
 
-		it( 'saves on click', async () => {
+		it( 'saves and reloads on click', async () => {
 			const pageTitle = 'Client_page';
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 			const clientApiPost = jest.fn().mockResolvedValue( {
@@ -364,10 +365,10 @@ describe( 'app', () => {
 				formatversion: 2,
 				titles: [ pageTitle ],
 			} );
-			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'saves on enter', async () => {
+		it( 'saves and reloads on enter', async () => {
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			const save = await getEnabledSaveButton( testLink );
@@ -386,10 +387,10 @@ describe( 'app', () => {
 				data: JSON.stringify( sentData ),
 				tags: undefined,
 			} );
-			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'saves on space', async () => {
+		it( 'saves and reloads on space', async () => {
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			const save = await getEnabledSaveButton( testLink );
@@ -408,7 +409,7 @@ describe( 'app', () => {
 				data: JSON.stringify( sentData ),
 				tags: undefined,
 			} );
-			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
+			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'creates a new statement with the user\'s value if update is chosen', async () => {
