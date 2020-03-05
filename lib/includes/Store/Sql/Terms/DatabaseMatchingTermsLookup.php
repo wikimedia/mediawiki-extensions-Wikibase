@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;

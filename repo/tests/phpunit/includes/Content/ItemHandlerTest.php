@@ -19,11 +19,11 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\NullEntityTermStoreWriter;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\Content\ItemHandler

@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\ChangeOpSiteLink

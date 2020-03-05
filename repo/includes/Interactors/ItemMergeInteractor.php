@@ -13,14 +13,14 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\EntityContent;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Summary;
-use Wikibase\Lib\FormatableSummary;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\SummaryFormatter;
 
 /**

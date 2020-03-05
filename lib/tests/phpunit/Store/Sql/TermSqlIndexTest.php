@@ -15,10 +15,10 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\StringNormalizer;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
 
 /**

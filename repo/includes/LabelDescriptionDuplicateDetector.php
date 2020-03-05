@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Validators\UniquenessViolation;
 
 /**

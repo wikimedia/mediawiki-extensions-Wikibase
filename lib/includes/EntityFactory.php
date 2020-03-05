@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -51,3 +51,6 @@ class EntityFactory {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EntityFactory::class, 'Wikibase\EntityFactory' );

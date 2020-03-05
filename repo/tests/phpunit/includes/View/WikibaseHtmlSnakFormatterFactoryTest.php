@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Tests\View;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
 
 /**

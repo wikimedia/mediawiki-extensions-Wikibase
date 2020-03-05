@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageWithConversion;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageWithConversion;
 
 /**
  * @covers \Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory

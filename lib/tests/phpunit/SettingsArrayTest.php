@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests;
 
 use OutOfBoundsException;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
- * @covers \Wikibase\SettingsArray
+ * @covers \Wikibase\Lib\SettingsArray
  *
  * @group Wikibase
  *

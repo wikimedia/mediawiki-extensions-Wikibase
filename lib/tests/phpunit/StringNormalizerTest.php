@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
- * @covers \Wikibase\StringNormalizer
+ * @covers \Wikibase\Lib\StringNormalizer
  *
  * @group Wikibase
  *

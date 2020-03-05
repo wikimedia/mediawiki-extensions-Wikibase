@@ -18,7 +18,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityIdLookup;

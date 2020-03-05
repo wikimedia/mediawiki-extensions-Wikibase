@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use UtfNormal\Validator;
 
@@ -119,3 +119,6 @@ class StringNormalizer {
 	}
 
 }
+
+/** @deprecated */
+class_alias( StringNormalizer::class, 'Wikibase\StringNormalizer' );

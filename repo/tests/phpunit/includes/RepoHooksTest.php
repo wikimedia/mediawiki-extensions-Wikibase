@@ -17,10 +17,10 @@ use SkinTemplate;
 use stdClass;
 use Title;
 use TitleValue;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
-use Wikibase\SettingsArray;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use WikiImporter;
 

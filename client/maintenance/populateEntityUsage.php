@@ -8,6 +8,7 @@ use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Usage\Sql\EntityUsageTableBuilder;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )

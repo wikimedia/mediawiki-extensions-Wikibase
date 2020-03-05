@@ -10,7 +10,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Client\Serializer\ClientEntitySerializer

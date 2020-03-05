@@ -12,6 +12,7 @@ use Revision;
 use Status;
 use Title;
 use WatchAction;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 

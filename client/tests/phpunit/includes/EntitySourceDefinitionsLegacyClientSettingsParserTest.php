@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\EntitySourceDefinitionsLegacyClientSettingsParser

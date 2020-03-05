@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

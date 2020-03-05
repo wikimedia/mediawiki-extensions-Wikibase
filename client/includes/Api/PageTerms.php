@@ -11,8 +11,8 @@ use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\TermIndexEntry;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.

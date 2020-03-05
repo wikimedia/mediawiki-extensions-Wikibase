@@ -4,6 +4,7 @@ namespace Wikibase;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**

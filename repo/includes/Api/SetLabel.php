@@ -9,8 +9,8 @@ use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * API module to set the label for a Wikibase entity.

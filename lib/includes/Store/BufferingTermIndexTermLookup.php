@@ -6,7 +6,7 @@ use MapCacheLRU;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * @license GPL-2.0-or-later

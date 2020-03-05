@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use Language;
 use MWException;
@@ -265,3 +265,6 @@ class LanguageWithConversion {
 	}
 
 }
+
+/** @deprecated */
+class_alias( LanguageWithConversion::class, 'Wikibase\LanguageWithConversion' );

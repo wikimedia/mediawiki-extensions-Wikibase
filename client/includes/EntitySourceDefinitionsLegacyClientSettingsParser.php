@@ -7,7 +7,7 @@ use MWNamespace;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * TODO: alternatively, the logic could go to the "static constructor" of EntitySourceDefinitions class?

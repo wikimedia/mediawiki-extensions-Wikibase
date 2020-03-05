@@ -10,9 +10,9 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Summary;
 
 /**
  * Class for label change operation

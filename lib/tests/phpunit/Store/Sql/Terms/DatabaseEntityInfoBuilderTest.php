@@ -23,10 +23,10 @@ use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\PropertyContent;
-use Wikibase\StringNormalizer;
-use Wikibase\WikibaseSettings;
 use Wikipage;
 
 /**

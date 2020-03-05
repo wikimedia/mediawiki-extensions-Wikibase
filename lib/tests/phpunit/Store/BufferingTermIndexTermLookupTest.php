@@ -6,7 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\TermIndex;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Lib\Store\BufferingTermIndexTermLookup

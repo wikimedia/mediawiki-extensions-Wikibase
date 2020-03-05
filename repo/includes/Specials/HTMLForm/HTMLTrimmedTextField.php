@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Specials\HTMLForm;
 
 use HTMLTextField;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * A variant of an HTMLTextField that forcefully applies trimming.

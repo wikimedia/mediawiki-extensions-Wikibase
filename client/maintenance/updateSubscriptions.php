@@ -6,10 +6,11 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\CallbackMessageReporter;
 use Wikibase\Client\Store\Sql\BulkSubscriptionUpdater;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )

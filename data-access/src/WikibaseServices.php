@@ -4,10 +4,10 @@ namespace Wikibase\DataAccess;
 
 use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * Interface of the top-level container/factory of data access services.

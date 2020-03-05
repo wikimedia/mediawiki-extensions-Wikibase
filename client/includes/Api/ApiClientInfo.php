@@ -4,7 +4,7 @@ namespace Wikibase\Client\Api;
 
 use ApiQuery;
 use ApiQueryBase;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Provides url and path information for the associated Wikibase repo

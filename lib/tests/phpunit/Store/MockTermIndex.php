@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * Mock implementation of TermIndex.

@@ -3,12 +3,12 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageWithConversion;
 
 /**
- * @covers \Wikibase\LanguageFallbackChain
+ * @covers \Wikibase\Lib\LanguageFallbackChain
  *
  * @group Wikibase
  *

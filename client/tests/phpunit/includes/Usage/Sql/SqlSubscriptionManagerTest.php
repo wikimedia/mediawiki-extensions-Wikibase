@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Tests\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\WikibaseSettings;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\SqlSubscriptionManager

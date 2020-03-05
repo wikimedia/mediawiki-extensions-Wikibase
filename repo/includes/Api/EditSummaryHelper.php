@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Api;
 
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Summary;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;

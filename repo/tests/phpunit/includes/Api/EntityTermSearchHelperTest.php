@@ -8,8 +8,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Api\EntityTermSearchHelper;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Repo\Api\EntityTermSearchHelper

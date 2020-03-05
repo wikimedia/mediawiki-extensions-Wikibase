@@ -6,11 +6,11 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\WikibaseSettings;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 

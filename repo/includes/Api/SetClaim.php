@@ -20,8 +20,8 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Summary;
 
 /**
  * API module for creating or updating an entire Claim.

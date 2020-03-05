@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Interactors;
 
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 
 /**

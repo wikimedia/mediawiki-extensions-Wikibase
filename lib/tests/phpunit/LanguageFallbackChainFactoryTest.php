@@ -7,11 +7,11 @@ use MediaWikiTestCase;
 use MWException;
 use RequestContext;
 use User;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**
- * @covers \Wikibase\LanguageFallbackChainFactory
+ * @covers \Wikibase\Lib\LanguageFallbackChainFactory
  *
  * @group Wikibase
  *

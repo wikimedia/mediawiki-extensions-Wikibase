@@ -9,7 +9,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 use Wikimedia\Assert\Assert;
 
 /**

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;

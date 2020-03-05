@@ -5,8 +5,8 @@ namespace Wikibase\Client\Hooks;
 use SiteLookup;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

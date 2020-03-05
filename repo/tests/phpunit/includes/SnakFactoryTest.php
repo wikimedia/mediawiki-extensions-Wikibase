@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Wikibase\Lib\DataTypeFactory;
-use DataValues\DataValueFactory;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\StringValue;
 use InvalidArgumentException;
@@ -13,6 +11,8 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\DataValueFactory;
 use Wikibase\Repo\SnakFactory;
 
 /**

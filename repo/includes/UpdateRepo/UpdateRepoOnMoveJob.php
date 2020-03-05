@@ -12,9 +12,9 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**

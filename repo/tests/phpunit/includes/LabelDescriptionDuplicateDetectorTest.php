@@ -8,9 +8,9 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockTermIndex;
 use Wikibase\Repo\Validators\UniquenessViolation;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\LabelDescriptionDuplicateDetector

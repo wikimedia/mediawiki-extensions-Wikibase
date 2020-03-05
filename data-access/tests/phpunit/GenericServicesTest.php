@@ -5,10 +5,10 @@ namespace Wikibase\DataAccess\Tests;
 use Serializers\Serializer;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataModel\SerializerFactory;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * @covers \Wikibase\DataAccess\GenericServices

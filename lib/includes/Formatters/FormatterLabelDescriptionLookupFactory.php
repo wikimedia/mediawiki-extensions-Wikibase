@@ -8,7 +8,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**

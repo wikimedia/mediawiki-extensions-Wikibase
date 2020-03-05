@@ -9,8 +9,8 @@ use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\DescriptionsProvider;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * API module for the language attributes for a Wikibase entity.

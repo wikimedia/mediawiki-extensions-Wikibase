@@ -14,7 +14,7 @@ interface TermSearchInteractor {
 	 * @param string $text Term text to search for
 	 * @param string $languageCode Language code to search in
 	 * @param string $entityType Type of Entity to return
-	 * @param string[] $termTypes Types of Term to return, array of Wikibase\TermIndexEntry::TYPE_*
+	 * @param string[] $termTypes Types of Term to return, array of Wikibase\Lib\TermIndexEntry::TYPE_*
 	 *
 	 * @return TermSearchResult[]
 	 */

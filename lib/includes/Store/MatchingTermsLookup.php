@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase\Lib\Store;
 
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * Methods helping search interactors from a term store.

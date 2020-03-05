@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
-use Wikibase\StringNormalizer;
 
 /**
  * Constructs ChangeOps for description change requests

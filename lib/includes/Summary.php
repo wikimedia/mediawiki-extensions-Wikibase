@@ -1,8 +1,6 @@
 <?php
 
-namespace Wikibase;
-
-use Wikibase\Lib\FormatableSummary;
+namespace Wikibase\Lib;
 
 /**
  * A Summary object can be used to build complex, translatable summaries.
@@ -180,3 +178,6 @@ class Summary implements FormatableSummary {
 	}
 
 }
+
+/** @deprecated */
+class_alias( Summary::class, 'Wikibase\Summary' );

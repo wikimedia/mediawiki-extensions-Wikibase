@@ -8,8 +8,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Validators\SnakValidator;
-use Wikibase\Summary;
 
 /**
  * Class for qualifier change operation

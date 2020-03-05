@@ -11,9 +11,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * Set of test methods that can be reused in ClaimsChangeOpDeserializerTest and tests for

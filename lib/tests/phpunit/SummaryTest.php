@@ -4,10 +4,10 @@ namespace Wikibase\Lib\Tests;
 
 use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 
 /**
- * @covers \Wikibase\Summary
+ * @covers \Wikibase\Lib\Summary
  *
  * @group Wikibase
  *

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * Helper class to search for entities.

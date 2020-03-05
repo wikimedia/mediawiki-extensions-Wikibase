@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

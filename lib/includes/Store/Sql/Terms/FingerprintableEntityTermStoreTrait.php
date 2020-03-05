@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
 
 /**

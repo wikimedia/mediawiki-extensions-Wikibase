@@ -7,7 +7,7 @@ use Language;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;

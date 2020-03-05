@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use Wikimedia\Assert\Assert;
 use Wikibase\DataModel\Entity\EntityId;
@@ -181,3 +181,6 @@ class TermIndexEntry {
 	}
 
 }
+
+/** @deprecated */
+class_alias( TermIndexEntry::class, 'Wikibase\TermIndexEntry' );

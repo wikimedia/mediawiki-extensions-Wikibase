@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Modules;
 
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

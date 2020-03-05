@@ -4,12 +4,12 @@ namespace Wikibase\Lib\Interactors;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 
 /**

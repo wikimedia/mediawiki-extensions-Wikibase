@@ -8,8 +8,8 @@ use HashSiteStore;
 use MediaWikiSite;
 use ResourceLoaderContext;
 use Site;
-use Wikibase\SettingsArray;
 use Wikibase\Lib\Modules\SitesModule;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Lib\Modules\SitesModule

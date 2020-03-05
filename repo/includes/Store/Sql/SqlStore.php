@@ -45,12 +45,12 @@ use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\StringNormalizer;
 use Wikimedia\Rdbms\DBQueryError;
 use WikiPage;
 

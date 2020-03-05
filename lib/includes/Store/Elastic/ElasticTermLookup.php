@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\DataAccess\PrefetchingTermLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * Term lookup using ElasticSearch.

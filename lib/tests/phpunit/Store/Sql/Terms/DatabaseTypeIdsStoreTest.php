@@ -6,7 +6,7 @@ use HashBagOStuff;
 use MediaWikiTestCase;
 use WANObjectCache;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 

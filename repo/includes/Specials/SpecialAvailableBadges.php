@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 

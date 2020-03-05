@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiQuery;
 use ApiQueryBase;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

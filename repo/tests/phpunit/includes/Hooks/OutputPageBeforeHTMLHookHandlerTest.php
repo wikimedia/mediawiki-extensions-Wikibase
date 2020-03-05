@@ -12,7 +12,7 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityFactory;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;

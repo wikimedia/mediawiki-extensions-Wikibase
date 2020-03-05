@@ -13,7 +13,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\TestingAccessWrapper;
 
 /**

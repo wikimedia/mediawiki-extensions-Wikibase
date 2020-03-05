@@ -6,6 +6,7 @@ use Exception;
 use InvalidArgumentException;
 use Maintenance;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\PropertyDataTypeChanger;
 use Wikibase\Repo\WikibaseRepo;
 use User;

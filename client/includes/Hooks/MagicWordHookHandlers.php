@@ -6,8 +6,8 @@ use Language;
 use Message;
 use Parser;
 use ResourceLoaderContext;
-use Wikibase\SettingsArray;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * File defining hooks related to magic words

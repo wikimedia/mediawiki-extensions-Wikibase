@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;

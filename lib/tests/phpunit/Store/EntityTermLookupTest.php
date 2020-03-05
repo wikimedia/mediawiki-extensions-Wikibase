@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityTermLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Lib\Store\EntityTermLookup

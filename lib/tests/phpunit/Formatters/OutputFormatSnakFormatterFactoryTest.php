@@ -14,12 +14,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Formatters\DispatchingSnakFormatter;
 use Wikibase\Lib\Formatters\ErrorHandlingSnakFormatter;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**
  * @covers \Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory

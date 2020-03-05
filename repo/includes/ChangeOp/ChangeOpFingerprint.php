@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Validators\TermValidatorFactory;
-use Wikibase\Summary;
 
 /**
  * Decorator on ChangeOps for collecting and distinguishing a collection

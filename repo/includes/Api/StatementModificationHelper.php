@@ -20,8 +20,8 @@ use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\SnakFactory;
-use Wikibase\Summary;
 
 /**
  * Helper class for modifying an entities statements.

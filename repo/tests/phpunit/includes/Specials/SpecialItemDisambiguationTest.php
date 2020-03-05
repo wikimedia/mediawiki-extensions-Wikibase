@@ -10,9 +10,9 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Specials\SpecialItemDisambiguation;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialItemDisambiguation

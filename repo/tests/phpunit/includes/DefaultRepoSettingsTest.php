@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @group Wikibase

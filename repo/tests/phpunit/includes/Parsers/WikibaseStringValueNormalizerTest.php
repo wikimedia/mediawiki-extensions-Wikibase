@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Parsers;
 
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
-use Wikibase\StringNormalizer;
 
 /**
  * @covers \Wikibase\Repo\Parsers\WikibaseStringValueNormalizer

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use DataValues\DataValue;
-use DataValues\DataValueFactory;
+use Wikibase\Lib\DataValueFactory;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use InvalidArgumentException;

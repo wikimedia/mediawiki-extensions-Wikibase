@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests;
 
 use MWException;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
- * @covers \Wikibase\WikibaseSettings
+ * @covers \Wikibase\Lib\WikibaseSettings
  *
  * @group Wikibase
  *

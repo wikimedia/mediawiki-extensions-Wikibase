@@ -7,7 +7,7 @@ use Language;
 use LogicException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EntityDocumentView;

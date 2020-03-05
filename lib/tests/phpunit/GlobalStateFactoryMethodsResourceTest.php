@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests;
 
 use MediaWikiTestCase;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 

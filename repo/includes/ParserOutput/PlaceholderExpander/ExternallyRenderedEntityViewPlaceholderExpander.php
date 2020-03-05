@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use OutputPage;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;

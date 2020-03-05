@@ -16,14 +16,14 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikimedia\TestingAccessWrapper;
-use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Repo\EditEntity\MediawikiEditEntity

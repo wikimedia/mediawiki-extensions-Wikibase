@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * API module to associate two pages on two different sites with a Wikibase item.

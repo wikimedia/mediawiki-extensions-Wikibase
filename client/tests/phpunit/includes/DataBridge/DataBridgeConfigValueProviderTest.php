@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\DataBridge;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\DataBridge\DataBridgeConfigValueProvider;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\DataBridge\DataBridgeConfigValueProvider

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
 use MediaWiki\MediaWikiServices;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\IDatabase;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

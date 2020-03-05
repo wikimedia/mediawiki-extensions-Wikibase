@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 
 /**
  * Class for reference removal change operation

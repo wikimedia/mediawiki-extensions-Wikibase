@@ -8,8 +8,8 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
-use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup

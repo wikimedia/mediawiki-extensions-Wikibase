@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use ExtensionRegistry;
 use MobileContext;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\TermboxFlag

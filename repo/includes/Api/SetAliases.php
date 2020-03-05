@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiMain;
 use ApiUsageException;
 use MediaWiki\MediaWikiServices;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
