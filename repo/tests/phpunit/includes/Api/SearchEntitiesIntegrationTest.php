@@ -139,9 +139,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			'',
 			$entitySearchTermIndex,
 			$this->newEntityTitleLookup(),
-			null,
 			new StaticContentLanguages( [ 'en' ] ),
-			null,
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'test',

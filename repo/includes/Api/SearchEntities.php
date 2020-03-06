@@ -53,9 +53,7 @@ class SearchEntities extends ApiBase {
 		$moduleName,
 		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $entityTitleLookup,
-		$unused, // kept for backwards compat across repos, removed in a later patch
 		ContentLanguages $termLanguages,
-		$unused2, // kept for backwards compat across repos, removed in a later patch
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );

@@ -139,9 +139,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'wbsearchentities',
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
 			$this->getMockTitleLookup(),
-			null,
 			$this->getContentLanguages(),
-			null,
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'items',
@@ -409,9 +407,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			'wbsearchentities',
 			$searchHelper,
 			$this->getMockTitleLookup(),
-			null,
 			$this->getContentLanguages(),
-			null,
 			new EntitySourceDefinitions(
 				[
 					new EntitySource(

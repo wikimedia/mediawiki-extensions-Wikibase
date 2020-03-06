@@ -258,9 +258,7 @@ call_user_func( function() {
 				$moduleName,
 				$entitySearchHelper,
 				$repo->getEntityTitleLookup(),
-				null,
 				$repo->getTermsLanguages(),
-				null,
 				$repo->getEntitySourceDefinitions()
 			);
 		},
