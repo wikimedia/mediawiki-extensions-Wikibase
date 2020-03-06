@@ -2,6 +2,12 @@ const Page = require( 'wdio-mediawiki/Page' ),
 	Util = require( 'wdio-mediawiki/Util' );
 
 class DataBridgePage extends Page {
+	static get ARTICLE_ELEMENTS() {
+		return {
+			INFOBOX: '.mw-body-content .infobox',
+		};
+	}
+
 	static get EDIT_LINK_ANCHOR() {
 		return 'Edit this on Wikidata';
 	}
@@ -76,7 +82,7 @@ class DataBridgePage extends Page {
 	 * @return {string} wikitext
 	 */
 	createInfoboxWikitext( rows ) {
-		return '{|class="wikitable"' +
+		return '{|class="wikitable infobox"' +
 			rows.map( ( row ) => `
 |-
 | ${row.label}
@@ -156,6 +162,16 @@ class DataBridgePage extends Page {
 	get value() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE} ${DataBridgePage.STRING_VALUE}`
+		);
+	}
+
+	/**
+	 * @param {number} n Row of the infobox to retrieve the value from
+	 * @returns {jQuery|HTMLElement}
+	 */
+	nthInfoboxValue( n ) {
+		return $(
+			`${DataBridgePage.ARTICLE_ELEMENTS.INFOBOX} tr:nth-child( ${n} ) td:nth-child( 2 ) span:nth-child( 1 )`
 		);
 	}
 

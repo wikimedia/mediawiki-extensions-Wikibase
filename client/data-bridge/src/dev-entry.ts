@@ -135,6 +135,18 @@ services.set( 'clientRouter', {
 	},
 } );
 
+services.set( 'purgeTitles', {
+	purge( titles: string[] ): Promise<void> {
+		console.info( 'purging', titles );
+		return new Promise( ( resolve ) => {
+			setTimeout( () => {
+				console.info( 'purged' );
+				resolve();
+			}, 1337 );
+		} );
+	},
+} );
+
 launch(
 	{
 		containerSelector: '#data-bridge-container',

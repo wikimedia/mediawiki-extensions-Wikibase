@@ -318,7 +318,28 @@ describe( 'app', () => {
 		} );
 
 		it( 'saves on click', async () => {
+			const pageTitle = 'Client_page';
 			const testLink = prepareTestEnv( { propertyId, entityId } );
+			const clientApiPost = jest.fn().mockResolvedValue( {
+				batchcomplete: true,
+				purge: [ {
+					ns: 1,
+					title: pageTitle,
+					purged: true,
+					linkupdate: true,
+				} ],
+			} );
+			window.mw.Api = mockMwApiConstructor( {
+				get: jest.fn().mockResolvedValue(
+					addPageInfoNoEditRestrictionsResponse(
+						pageTitle,
+						addSiteinfoRestrictionsResponse(
+							{},
+						),
+					),
+				),
+				post: clientApiPost,
+			} );
 
 			const save = await getEnabledSaveButton( testLink );
 
@@ -335,6 +356,13 @@ describe( 'app', () => {
 				baserevid: 0,
 				data: JSON.stringify( sentData ),
 				tags: undefined,
+			} );
+			expect( clientApiPost ).toHaveBeenCalledTimes( 1 );
+			expect( clientApiPost ).toHaveBeenCalledWith( {
+				action: 'purge',
+				forcelinkupdate: true,
+				formatversion: 2,
+				titles: [ pageTitle ],
 			} );
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
