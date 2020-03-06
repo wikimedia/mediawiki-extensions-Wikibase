@@ -10,7 +10,7 @@
 					type="primaryProgressive"
 					size="L"
 					:squary="true"
-					@click="saveAndClose"
+					@click="save"
 					:disabled="!canStartSaving"
 					v-if="!hasError"
 				/>
@@ -97,7 +97,7 @@ export default class App extends mixins( StateMixin ) {
 			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
-	public saveAndClose(): void {
+	public save(): void {
 		this.rootModule.dispatch( 'saveBridge' )
 			.then( () => {
 				this.$emit( Events.onSaved );

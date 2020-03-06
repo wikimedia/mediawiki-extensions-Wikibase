@@ -1,13 +1,15 @@
-import {
+import MwWindow, {
 	OOUIWindow,
 	WindowManager,
 } from '@/@types/mediawiki/MwWindow';
 import Events from '@/events';
 import { EventEmitter } from 'events';
 
-export default function subscribeToEvents( emitter: EventEmitter, windowManager: WindowManager ): void {
+export default function subscribeToEvents( emitter: EventEmitter,
+	windowManager: WindowManager,
+	mwWindow: MwWindow ): void {
 	emitter.on( Events.onSaved, () => {
-		windowManager.clearWindows().catch( () => { /* do nothing */ } );
+		mwWindow.location.reload();
 	} );
 	emitter.on( Events.onCancel, () => {
 		windowManager.clearWindows().catch( () => { /* do nothing */ } );

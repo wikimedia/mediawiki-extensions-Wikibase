@@ -125,7 +125,6 @@ describe( 'App', () => {
 		);
 		assert.ok( actualTags.includes( bridgeEditTag ), `${JSON.stringify( actualTags )} doesn't include tag "${bridgeEditTag}"!` );
 
-		DataBridgePage.open( title ); // bridge init will trigger this once T246219 is done
 		assert.strictEqual( DataBridgePage.nthInfoboxValue( 1 ).getText(), newValue );
 	} );
 
@@ -202,7 +201,6 @@ describe( 'App', () => {
 		];
 		assert.deepStrictEqual( actualValuesAtServer, expectedStatements );
 
-		DataBridgePage.open( title ); // bridge init will trigger this once T246219 is done
 		assert.strictEqual( DataBridgePage.nthInfoboxValue( 1 ).getText(), newValue );
 	} );
 
