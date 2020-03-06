@@ -14,8 +14,12 @@ $font-size-normal: px-to-rem( 16px );
 $size-icon: px-to-rem( 20px );
 
 $header-border-width: 1px;
-$header-content-size: 40px;
-$size-dialog-bar--desktop: $header-content-size + $header-border-width;
+$header-content-size--desktop: calc( #{ px-to-rem( 38px ) } + 2px ); // <EventEmittingButton size="L"> height
+$header-content-size--mobile: calc( #{ px-to-rem( 46px ) } + 2px ); // <EventEmittingButton size="XL"> height
+// $size-dialog-bar--* = $header-content-size--* + $header-border-width, but IE doesn’t support nested calc()
+$size-dialog-bar--desktop: calc( #{ px-to-rem( 38px ) } + 2px + #{$header-border-width} );
+$size-dialog-bar--mobile: calc( #{ px-to-rem( 46px ) } + 2px + #{$header-border-width} );
+
 $heading-margin-top: 3 * $base-spacing-unit;
 $heading-margin-bottom: $base-spacing-unit-fixed;
 

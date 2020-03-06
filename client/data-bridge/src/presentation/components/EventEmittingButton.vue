@@ -281,14 +281,38 @@ export default class EventEmittingButton extends Vue {
 		}
 	}
 
+	@mixin iconOnly-size-L {
+		width: $header-content-size--desktop;
+		height: $header-content-size--desktop;
+	}
+
+	@mixin iconOnly-size-XL {
+		width: $header-content-size--mobile;
+		height: $header-content-size--mobile;
+	}
+
 	&--iconOnly {
 		background-position: center;
 		background-size: $button-icon-size;
 		background-repeat: no-repeat;
-		width: $header-content-size;
-		height: $header-content-size;
 		cursor: pointer;
 		display: block;
+	}
+
+	// no styles for icon-only size-M yet
+
+	&--iconOnly#{&}--size-L {
+		@include iconOnly-size-L;
+	}
+
+	&--iconOnly#{&}--size-XL {
+		@include iconOnly-size-XL;
+	}
+
+	@media ( max-width: $breakpoint ) {
+		&--iconOnly#{&}--size-L {
+			@include iconOnly-size-XL;
+		}
 	}
 
 	&--iconOnly > #{&}__text {
