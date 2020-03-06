@@ -75,13 +75,22 @@ class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 	 * @inheritDoc
 	 */
 	public function getTitlesForIds( array $ids ) {
+		$byType = $this->getIdsByType( $ids );
+
 		$result = [];
-		/** @var EntityId $id */
-		foreach ( $ids as $id ) {
-			$result[$id->getSerialization()] = $this->getTitleForId( $id );
+		foreach ( $byType as $type => $idsForType ) {
+			$result = array_merge( $result, $this->getLookup( $type )->getTitlesForIds( $idsForType ) );
 		}
 
 		return $result;
+	}
+
+	private function getIdsByType( array $ids ) {
+		$byType = [];
+		foreach ( $ids as $id ) {
+			$byType[$id->getEntityType()][] = $id;
+		}
+		return $byType;
 	}
 
 }

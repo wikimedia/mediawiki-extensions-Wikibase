@@ -55,8 +55,15 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 	private function getMockTitleLookup() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );
 		$titleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnValue( $this->getMockTitle() ) );
+			->method( 'getTitlesForIds' )
+			->will( $this->returnCallback( function ( $ids ) {
+				$titles = [];
+				/** @var EntityId $id */
+				foreach ( $ids as $id ) {
+					$titles[ $id->getSerialization() ] = $this->getMockTitle();
+				}
+				return $titles;
+			} ) );
 
 		return $titleLookup;
 	}

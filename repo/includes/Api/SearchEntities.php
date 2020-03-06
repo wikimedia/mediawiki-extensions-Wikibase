@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use LogicException;
+use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
@@ -84,25 +85,37 @@ class SearchEntities extends ApiBase {
 			$params['strictlanguage']
 		);
 
+		$titles = $this->getTitlesForTermSearchResults( $searchResults );
 		$entries = [];
-
 		foreach ( $searchResults as $match ) {
-			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
+			$entries[] = $this->buildTermSearchMatchEntry( $match, $titles, $params['props'] );
 		}
 
 		return $entries;
 	}
 
+	private function getTitlesForTermSearchResults( array $termSearchResults ) {
+		return $this->titleLookup->getTitlesForIds( $this->getEntityIdsForTermSearchResults( $termSearchResults ) );
+	}
+
+	private function getEntityIdsForTermSearchResults( array $termSearchResults ) {
+		return array_map( function ( TermSearchResult $result ) {
+			return $result->getEntityId();
+		},
+			$termSearchResults );
+	}
+
 	/**
 	 * @param TermSearchResult $match
+	 * @param Title[] $titles
 	 * @param string[]|null $props
 	 *
 	 * @return array
 	 */
-	private function buildTermSearchMatchEntry( TermSearchResult $match, array $props = null ) {
+	private function buildTermSearchMatchEntry( TermSearchResult $match, array $titles, array $props = null ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$entityId = $match->getEntityId();
-		$title = $this->titleLookup->getTitleForId( $entityId );
+		$title = $titles[$entityId->getSerialization()];
 
 		$entry = [
 			'repository' => $this->getRepositoryOrEntitySourceName( $entityId ),
