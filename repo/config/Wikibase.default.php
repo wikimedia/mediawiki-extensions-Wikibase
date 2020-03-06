@@ -12,6 +12,12 @@
 global $wgCdnMaxAge;
 
 return [
+	// feature flag for federated properties
+	'federatedPropertiesEnabled' => false,
+
+	// url for federated properties source location
+	'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
+
 	// feature flag for tainted references
 	'taintedReferencesEnabled' => false,
 

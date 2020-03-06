@@ -538,6 +538,18 @@ Enable/Disable the tainted reference feature.
 
 DEFAULT: ```false```
 
+#### federatedPropertiesEnabled {#repo_federatedPropertiesEnabled}
+Enable the federated properties feature. **Note that** once this feature is enable (set true), it most not be disabled (set false) again.
+The behaviour is unpredicted if it is disaled after it was enabled.
+
+DEFAULT: ```false```
+
+### federatedPropertiesSourceScriptUrl {#repo_federatedPropertiesSourceScriptUrl}
+A url path for the location of the source wikibase instance.
+The set url path should allow access to both `index.php` and `api.php`
+
+DEFAULT: ```https://www.wikidata.org/w/```
+
 Client Settings
 ----------------------------------------------------------------------------------------
 
