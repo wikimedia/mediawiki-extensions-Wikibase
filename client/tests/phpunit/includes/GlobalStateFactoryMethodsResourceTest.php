@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests;
 
 use ChangesList;
+use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiTestCase;
 use RequestContext;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
@@ -164,7 +165,16 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->setService(
 			'HttpRequestFactory',
 			function() {
-				$this->fail( 'Service getters must not access HttpRequestFactory.' );
+				$factory = $this->createMock( HttpRequestFactory::class );
+				$factory->expects( $this->never() )
+					->method( 'create' );
+				$factory->expects( $this->never() )
+					->method( 'request' );
+				$factory->expects( $this->never() )
+					->method( 'get' );
+				$factory->expects( $this->never() )
+					->method( 'post' );
+				return $factory;
 			}
 		);
 	}
