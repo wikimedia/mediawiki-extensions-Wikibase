@@ -281,6 +281,11 @@ export default class EventEmittingButton extends Vue {
 		}
 	}
 
+	@mixin iconOnly-size-M {
+		width: calc( #{ px-to-rem( 30px ) } + 2px );
+		height: calc( #{ px-to-rem( 30px ) } + 2px );
+	}
+
 	@mixin iconOnly-size-L {
 		width: $header-content-size--desktop;
 		height: $header-content-size--desktop;
@@ -299,7 +304,9 @@ export default class EventEmittingButton extends Vue {
 		display: block;
 	}
 
-	// no styles for icon-only size-M yet
+	&--iconOnly#{&}--size-M {
+		@include iconOnly-size-M;
+	}
 
 	&--iconOnly#{&}--size-L {
 		@include iconOnly-size-L;
@@ -310,6 +317,10 @@ export default class EventEmittingButton extends Vue {
 	}
 
 	@media ( max-width: $breakpoint ) {
+		&--iconOnly#{&}--size-M {
+			@include iconOnly-size-L;
+		}
+
 		&--iconOnly#{&}--size-L {
 			@include iconOnly-size-XL;
 		}
