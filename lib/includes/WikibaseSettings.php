@@ -148,6 +148,3 @@ class WikibaseSettings {
 	}
 
 }
-
-/** @deprecated */
-class_alias( WikibaseSettings::class, 'Wikibase\WikibaseSettings' );

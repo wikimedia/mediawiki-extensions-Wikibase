@@ -4,11 +4,6 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
-	'DataValues\\DataValueFactory' => __DIR__ . '/includes/DataValueFactory.php',
-	'Wikibase\\EntityFactory' => __DIR__ . '/includes/EntityFactory.php',
-	'Wikibase\\LanguageFallbackChain' => __DIR__ . '/includes/LanguageFallbackChain.php',
-	'Wikibase\\LanguageFallbackChainFactory' => __DIR__ . '/includes/LanguageFallbackChainFactory.php',
-	'Wikibase\\LanguageWithConversion' => __DIR__ . '/includes/LanguageWithConversion.php',
 	'Wikibase\\LibHooks' => __DIR__ . '/LibHooks.php',
 	'Wikibase\\Lib\\ContentLanguages' => __DIR__ . '/includes/ContentLanguages.php',
 	'Wikibase\\Lib\\DataType' => __DIR__ . '/includes/DataType.php',
@@ -43,9 +38,4 @@ $wgAutoloadClasses += [
 	'Wikibase\\Lib\\WikibaseContentLanguages' => __DIR__ . '/includes/WikibaseContentLanguages.php',
 	'Wikibase\\Lib\\WikibaseSettings' => __DIR__ . '/includes/WikibaseSettings.php',
 	'Wikibase\\PopulateSitesTable' => __DIR__ . '/maintenance/populateSitesTable.php',
-	'Wikibase\\SettingsArray' => __DIR__ . '/includes/SettingsArray.php',
-	'Wikibase\\StringNormalizer' => __DIR__ . '/includes/StringNormalizer.php',
-	'Wikibase\\Summary' => __DIR__ . '/includes/Summary.php',
-	'Wikibase\\TermIndexEntry' => __DIR__ . '/includes/TermIndexEntry.php',
-	'Wikibase\\WikibaseSettings' => __DIR__ . '/includes/WikibaseSettings.php',
 ];

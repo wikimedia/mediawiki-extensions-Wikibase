@@ -119,6 +119,3 @@ class StringNormalizer {
 	}
 
 }
-
-/** @deprecated */
-class_alias( StringNormalizer::class, 'Wikibase\StringNormalizer' );

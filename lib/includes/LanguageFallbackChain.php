@@ -142,6 +142,3 @@ class LanguageFallbackChain {
 	}
 
 }
-
-/** @deprecated */
-class_alias( LanguageFallbackChain::class, 'Wikibase\LanguageFallbackChain' );

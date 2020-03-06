@@ -265,6 +265,3 @@ class LanguageWithConversion {
 	}
 
 }
-
-/** @deprecated */
-class_alias( LanguageWithConversion::class, 'Wikibase\LanguageWithConversion' );

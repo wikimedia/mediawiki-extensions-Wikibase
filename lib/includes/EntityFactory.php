@@ -51,6 +51,3 @@ class EntityFactory {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EntityFactory::class, 'Wikibase\EntityFactory' );
