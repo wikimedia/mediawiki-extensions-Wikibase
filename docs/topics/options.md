@@ -539,7 +539,7 @@ Enable/Disable the tainted reference feature.
 DEFAULT: ```false```
 
 #### federatedPropertiesEnabled {#repo_federatedPropertiesEnabled}
-Enable the federated properties feature. **Note that** once this feature is enable (set true), it most not be disabled (set false) again.
+Enable the federated properties feature. **Note that** once this feature is enable (set true), it must not be disabled (set false) again.
 The behaviour is unpredicted if it is disaled after it was enabled.
 
 DEFAULT: ```false```
