@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Api;
 use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Lib\SettingsArray;
+use ApiResult;
 
 /**
  * @license GPL-2.0-or-later
@@ -33,6 +34,11 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 			$this->getQuery()->getModuleName(),
 			$this->getModuleName(),
 		];
+
+		$this->addStringMaxLengthToResult( $result, $path );
+	}
+
+	private function addStringMaxLengthToResult( ApiResult $result, $path ) {
 		$dataTypeLimitsPath = array_merge( $path, [ 'dataTypeLimits' ] );
 
 		// adapted from WikibaseRepo.datatypes.php > VT:string > validator-factory-callback

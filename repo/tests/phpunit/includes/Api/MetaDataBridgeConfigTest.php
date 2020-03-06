@@ -21,14 +21,26 @@ use Wikibase\Repo\Api\MetaDataBridgeConfig;
  */
 class MetaDataBridgeConfigTest extends TestCase {
 
-	public function testExecute_customConfig() {
-		$repoSettings = new SettingsArray( [
-			'string-limits' => [
-				'VT:string' => [
-					'length' => 12345,
+	private function getCustomConfigApiResults( array $fields = [] ): array {
+		return $this->getApiResultsWithSettings( new SettingsArray( array_replace( [
+				'string-limits' => [
+					'VT:string' => [
+						'length' => 12345,
+					],
 				],
-			],
-		] );
+			], $fields ) )
+		);
+	}
+
+	private function getDefaultConfigApiResults(): array {
+		return $this->getApiResultsWithSettings(
+			new SettingsArray(
+				require __DIR__ . '/../../../../config/Wikibase.default.php'
+			)
+		);
+	}
+
+	private function getApiResultsWithSettings( SettingsArray $repoSettings ): array {
 		$api = new MetaDataBridgeConfig(
 			$repoSettings,
 			$this->getQuery(),
@@ -37,7 +49,11 @@ class MetaDataBridgeConfigTest extends TestCase {
 
 		$api->execute();
 		$apiResult = $api->getResult();
-		$results = $apiResult->getResultData()['query']['wbdatabridgeconfig'];
+		return $apiResult->getResultData()['query']['wbdatabridgeconfig'];
+	}
+
+	public function testExecute_StringMaxLength_customConfig() {
+		$results = $this->getCustomConfigApiResults();
 
 		$this->assertArrayHasKey( 'dataTypeLimits', $results );
 		$dataTypeLimits = $results['dataTypeLimits'];
@@ -47,19 +63,8 @@ class MetaDataBridgeConfigTest extends TestCase {
 		$this->assertSame( 12345, $stringLimits['maxLength'] );
 	}
 
-	public function testExecute_defaultConfig() {
-		$repoSettings = new SettingsArray(
-			require __DIR__ . '/../../../../config/Wikibase.default.php'
-		);
-		$api = new MetaDataBridgeConfig(
-			$repoSettings,
-			$this->getQuery(),
-			'wbdatabridgeconfig'
-		);
-
-		$api->execute();
-		$apiResult = $api->getResult();
-		$results = $apiResult->getResultData()['query']['wbdatabridgeconfig'];
+	public function testExecute_StringMaxLength_defaultConfig() {
+		$results = $this->getDefaultConfigApiResults();
 
 		$this->assertArrayHasKey( 'dataTypeLimits', $results );
 		$dataTypeLimits = $results['dataTypeLimits'];
