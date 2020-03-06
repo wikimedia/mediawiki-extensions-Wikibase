@@ -1,10 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Abshirdheere"
+			"Abshirdheere",
+			"Abdullahi"
 		]
 	},
-	"wikibase-dataitem": "Qaybta caddeynaha",
+	"tooltip-t-wikibase": "kula xiriiri shayga kaydka xogta ku xiran",
+	"wikibase-comment-update": "{{WBREPONAME}} shay ayaa la badalay",
+	"wikibase-dataitem": "shay",
 	"wikibase-editlinks": "Bedel linkiga",
-	"wikibase-linkitem-addlinks": "Ku dar linkiyada"
+	"wikibase-editlinkstitle": "wax ka bedel xiriiriyaasha luqadaha",
+	"wikibase-linkitem-addlinks": "Ku dar linkiyada",
+	"wikibase-rc-hide-wikidata-show": "i tus",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} tafatir"
 }

@@ -20,6 +20,7 @@
 	"wikibase-deletedentity-property": "Slettet egenskab",
 	"wikibase-deletedentity-query": "Slettet forespørgsel",
 	"wikibase-error-unexpected": "Fejl: $1.",
+	"wikibase-error-unknown": "Der opstod en fejl.",
 	"wikibase-error-save-generic": "Der opstod en fejl under forsøget på at gemme og derfor kan ændringerne ikke gennemføres.",
 	"wikibase-error-remove-generic": "Der opstod en fejl under forsøget på at fjerne og derfor kan ændringerne ikke gennemføres.",
 	"wikibase-error-save-connection": "En forbindelsesfejl opstod under forsøget på at gemme og derfor kunne dine ændringer ikke gennemføres. Kontroller forbindelsen til internettet.",

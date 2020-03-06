@@ -123,5 +123,6 @@
 	"unresolved-property-category-desc": "В эту категорию попадают страницы, которые ссылаются на свойства {{WBREPONAME}}, которые не могут быть найдены ни по ID свойства, ни по имени.",
 	"connected-redirect-category": "Перенаправления, связанные с элементом {{grammar:genitive|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
-	"wikibase-client-data-bridge-dialog-title": "Редактировать свойство"
+	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
+	"wikibase-client-data-bridge-references-heading": "Примечания"
 }
