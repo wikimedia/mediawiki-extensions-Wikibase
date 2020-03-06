@@ -8,7 +8,7 @@
 namespace Wikibase\Repo\Specials\HTMLForm;
 
 use HTMLTextField;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * Class representing generic alias field

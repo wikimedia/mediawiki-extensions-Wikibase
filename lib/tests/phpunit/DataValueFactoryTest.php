@@ -2,14 +2,14 @@
 
 namespace Wikibase\Lib\Tests;
 
-use DataValues\DataValueFactory;
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
+use Wikibase\Lib\DataValueFactory;
 
 /**
- * @covers DataValues\DataValueFactory
+ * @covers Wikibase\Lib\DataValueFactory
  *
  * @group Wikibase
  *

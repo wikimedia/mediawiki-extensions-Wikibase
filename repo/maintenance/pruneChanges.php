@@ -6,6 +6,7 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangePruner;
 use Wikibase\Repo\PidLock;
 

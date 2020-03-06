@@ -10,7 +10,7 @@ use Wikibase\Lib\Interactors\DispatchingTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**

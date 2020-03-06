@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\FormatableSummary;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * Formatter for Summary objects

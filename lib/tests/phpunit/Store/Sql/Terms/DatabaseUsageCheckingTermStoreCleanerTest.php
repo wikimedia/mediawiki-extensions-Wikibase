@@ -6,7 +6,7 @@ use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseUsageCheckingTermStoreCleaner;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner

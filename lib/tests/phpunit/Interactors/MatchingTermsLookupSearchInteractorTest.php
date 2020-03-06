@@ -7,14 +7,14 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor

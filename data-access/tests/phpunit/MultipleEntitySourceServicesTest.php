@@ -23,8 +23,8 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\DataAccess\MultipleEntitySourceServices

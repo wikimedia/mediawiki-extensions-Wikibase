@@ -2,9 +2,7 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
-use DataValues\DataValueFactory;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -14,6 +12,8 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\DataValueFactory;
 
 /**
  * Factory for creating new snaks.

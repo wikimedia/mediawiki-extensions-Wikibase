@@ -6,7 +6,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermStoreDelegatingMatchingTermsLookup;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\TermStoreDelegatingMatchingTermsLookup

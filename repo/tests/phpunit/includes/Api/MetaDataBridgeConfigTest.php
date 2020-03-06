@@ -7,8 +7,8 @@ use ApiQuery;
 use FauxRequest;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\Api\MetaDataBridgeConfig

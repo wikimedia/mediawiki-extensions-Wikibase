@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use ArrayObject;
 use Closure;
@@ -113,3 +113,6 @@ class SettingsArray extends ArrayObject {
 	}
 
 }
+
+/** @deprecated */
+class_alias( SettingsArray::class, 'Wikibase\SettingsArray' );

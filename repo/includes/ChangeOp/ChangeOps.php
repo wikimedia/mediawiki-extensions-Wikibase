@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 
 /**
  * Class for holding a batch of change operations

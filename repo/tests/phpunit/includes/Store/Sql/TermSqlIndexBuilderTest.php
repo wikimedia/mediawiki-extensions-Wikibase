@@ -8,12 +8,12 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Sql\TermSqlIndexBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\StringNormalizer;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\TermSqlIndexBuilder

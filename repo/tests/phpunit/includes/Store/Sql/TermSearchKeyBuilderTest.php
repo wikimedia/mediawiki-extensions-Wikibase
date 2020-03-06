@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
-use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\Lib\Store\TermIndexSearchCriteria;
+use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\TermSearchKeyBuilder

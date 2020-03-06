@@ -3,7 +3,7 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later

@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Changes\EntityChange

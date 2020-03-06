@@ -7,8 +7,8 @@ use Html;
 use IContextSource;
 use Language;
 use SpecialPage;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**
  * Page for displaying the current language fallback chain for debugging.

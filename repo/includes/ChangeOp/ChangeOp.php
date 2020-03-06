@@ -5,7 +5,10 @@ namespace Wikibase\Repo\ChangeOp;
 use InvalidArgumentException;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
+
+// TEMPORARY: ensure that Summary, including its class alias, is autoloaded
+class_exists( Summary::class );
 
 /**
  * A ChangeOp represents a modification of an entity. It is responsible for

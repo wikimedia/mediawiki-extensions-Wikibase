@@ -13,8 +13,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**

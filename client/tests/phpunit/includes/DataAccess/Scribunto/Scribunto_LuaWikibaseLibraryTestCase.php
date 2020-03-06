@@ -10,7 +10,7 @@ use Wikibase\Client\Tests\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
 	/**

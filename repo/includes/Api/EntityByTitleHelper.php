@@ -9,7 +9,7 @@ use SiteLookup;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * Helper class for api modules to resolve page+title pairs into entities.

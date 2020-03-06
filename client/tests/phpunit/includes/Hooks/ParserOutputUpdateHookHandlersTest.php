@@ -32,10 +32,10 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Client\LangLinkHandler;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\NamespaceChecker;
-use Wikibase\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers

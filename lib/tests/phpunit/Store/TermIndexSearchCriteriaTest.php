@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**

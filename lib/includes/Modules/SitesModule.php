@@ -10,7 +10,7 @@ use ResourceLoaderModule;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

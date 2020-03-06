@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Modules;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Wikibase\Lib\Modules\SettingsValueProvider;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Lib\Modules\SettingsValueProvider

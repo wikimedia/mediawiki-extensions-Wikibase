@@ -11,11 +11,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\StringNormalizer;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer

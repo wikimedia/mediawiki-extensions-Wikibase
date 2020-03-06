@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Api;
 
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 
 /**
  * API module to set the terms for a Wikibase entity.

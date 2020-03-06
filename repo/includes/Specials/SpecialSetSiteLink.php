@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**

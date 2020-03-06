@@ -4,10 +4,10 @@ namespace Wikibase\Lib\Tests;
 
 use Language;
 use MWException;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\LanguageWithConversion;
 
 /**
- * @covers \Wikibase\LanguageWithConversion
+ * @covers \Wikibase\Lib\LanguageWithConversion
  *
  * @group Wikibase
  *

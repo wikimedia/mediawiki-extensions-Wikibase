@@ -11,8 +11,8 @@ use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory

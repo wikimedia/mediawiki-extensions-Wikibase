@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Summary;
 
 /**
  * Base class for change operations.

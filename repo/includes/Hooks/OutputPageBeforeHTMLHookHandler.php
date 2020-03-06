@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\EntityFactory;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;

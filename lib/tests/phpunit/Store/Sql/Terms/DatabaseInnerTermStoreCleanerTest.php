@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner
@@ -296,7 +296,11 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiTestCase {
 			[ 'wbtl_type_id' => $typeIdDescription, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
 		$termInLangIdToRemain = $this->db->insertId();
 
-		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3 ] );
+		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [
+			$termInLangIdToDelete1,
+			$termInLangIdToDelete2,
+			$termInLangIdToDelete3,
+		] );
 
 		$this->assertSelect(
 			'wbt_term_in_lang',

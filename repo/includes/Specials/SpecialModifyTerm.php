@@ -13,9 +13,9 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 use Wikibase\Lib\UserInputException;
 

@@ -3,8 +3,8 @@
 namespace Wikibase\Tests;
 
 use MWNamespace;
-use Wikibase\SettingsArray;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @group Wikibase

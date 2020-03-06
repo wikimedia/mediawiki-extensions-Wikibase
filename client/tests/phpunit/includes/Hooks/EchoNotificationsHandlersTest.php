@@ -10,8 +10,8 @@ use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Lib\Changes\ChangeRow;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Changes\TestChanges;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\Hooks\EchoNotificationsHandlers

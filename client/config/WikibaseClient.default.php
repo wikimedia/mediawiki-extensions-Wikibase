@@ -3,8 +3,8 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\SettingsArray;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\SettingsArray;
+use Wikibase\Lib\WikibaseSettings;
 
 // manually load EntityUsage so we can use its constants below –
 // extension.json AutoloadNamespaces has not been processed yet

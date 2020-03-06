@@ -14,13 +14,13 @@ use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
-use Wikibase\StringNormalizer;
-use Wikibase\Summary;
 
 /**
  * Base class for API modules modifying a single entity identified based on id xor a combination of site and page title.

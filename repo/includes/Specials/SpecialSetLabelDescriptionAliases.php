@@ -17,8 +17,8 @@ use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 use MediaWiki\Logger\LoggerFactory;
 

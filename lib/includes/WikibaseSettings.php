@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use Hooks;
 use MWException;
@@ -148,3 +148,6 @@ class WikibaseSettings {
 	}
 
 }
+
+/** @deprecated */
+class_alias( WikibaseSettings::class, 'Wikibase\WikibaseSettings' );

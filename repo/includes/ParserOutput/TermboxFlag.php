@@ -4,8 +4,8 @@ namespace Wikibase\Repo\ParserOutput;
 
 use ExtensionRegistry;
 use MobileContext;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

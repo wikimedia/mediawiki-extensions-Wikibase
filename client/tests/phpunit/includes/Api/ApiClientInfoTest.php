@@ -8,7 +8,7 @@ use ApiTestContext;
 use FauxRequest;
 use User;
 use Wikibase\Client\Api\ApiClientInfo;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Client\Api\ApiClientInfo

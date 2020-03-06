@@ -22,8 +22,8 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\StringNormalizer;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 

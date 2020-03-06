@@ -5,6 +5,7 @@ namespace Wikibase;
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

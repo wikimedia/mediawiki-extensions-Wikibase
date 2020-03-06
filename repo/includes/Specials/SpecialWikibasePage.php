@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use SpecialPage;
 use UserBlockedError;
-use Wikibase\StringNormalizer;
+use Wikibase\Lib\StringNormalizer;
 
 /**
  * Base for special pages of the Wikibase extension,

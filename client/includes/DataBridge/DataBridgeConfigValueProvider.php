@@ -3,7 +3,7 @@
 namespace Wikibase\Client\DataBridge;
 
 use Wikibase\Lib\Modules\MediaWikiConfigValueProvider;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @license GPL-2.0-or-later

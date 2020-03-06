@@ -10,9 +10,9 @@ use MWException;
 use Psr\Log\NullLogger;
 use RuntimeException;
 use WANObjectCache;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SettingsArray;
 use Wikibase\Store\ChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 

@@ -9,8 +9,8 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
-use Wikibase\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\EntityChangeLookup

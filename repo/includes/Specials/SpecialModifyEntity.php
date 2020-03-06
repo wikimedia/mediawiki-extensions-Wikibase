@@ -16,8 +16,8 @@ use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
-use Wikibase\Summary;
 use Wikibase\SummaryFormatter;
 
 /**

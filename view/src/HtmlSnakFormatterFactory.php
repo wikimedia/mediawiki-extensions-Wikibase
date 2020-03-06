@@ -3,8 +3,8 @@
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * A factory constructing SnakFormatters that output HTML.

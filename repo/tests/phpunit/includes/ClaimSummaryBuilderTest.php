@@ -13,8 +13,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\Summary;
 use Wikibase\Repo\Diff\ClaimDiffer;
-use Wikibase\Summary;
 
 /**
  * @covers \Wikibase\ClaimSummaryBuilder

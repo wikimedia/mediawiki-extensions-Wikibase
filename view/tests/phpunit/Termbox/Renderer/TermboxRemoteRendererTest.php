@@ -13,8 +13,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 

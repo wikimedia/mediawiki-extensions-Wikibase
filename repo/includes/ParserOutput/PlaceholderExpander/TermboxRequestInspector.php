@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use IContextSource;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 
 /**
  * Determines whether the entity page was requested with non-default settings,

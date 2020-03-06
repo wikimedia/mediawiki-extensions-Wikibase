@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use Wikibase\Lib\Store\MatchingTermsLookup;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 
 /**
  * Mock implementation of MatchingTermsLookup.

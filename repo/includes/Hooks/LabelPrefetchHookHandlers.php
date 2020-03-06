@@ -8,9 +8,9 @@ use Title;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\TermIndexEntry;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**

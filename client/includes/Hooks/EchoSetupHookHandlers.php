@@ -5,7 +5,7 @@ namespace Wikibase\Client\Hooks;
 use EchoAttributeManager;
 use EchoUserLocator;
 use Wikibase\Client\Notifications\PageConnectionPresentationModel;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * Handlers for hooks (e.g. BeforeCreateEchoEvent) called when Echo extension

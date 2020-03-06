@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Tests;
 use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\EntityFactory;
+use Wikibase\Lib\EntityFactory;
 
 /**
- * @covers \Wikibase\EntityFactory
+ * @covers \Wikibase\Lib\EntityFactory
  *
  * @group Wikibase
  *

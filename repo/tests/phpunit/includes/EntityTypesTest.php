@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EntityDocumentView;

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\ParserOutput;
 use Language;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\View\EntityDocumentView;
 use Wikimedia\Assert\Assert;

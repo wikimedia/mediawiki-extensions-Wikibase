@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use Babel;
 use ExtensionRegistry;
@@ -330,3 +330,6 @@ class LanguageFallbackChainFactory {
 	}
 
 }
+
+/** @deprecated */
+class_alias( LanguageFallbackChainFactory::class, 'Wikibase\LanguageFallbackChainFactory' );

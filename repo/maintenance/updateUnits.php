@@ -7,6 +7,7 @@ use DataValues\DecimalValue;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Sparql\SparqlClient;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
 
 $basePath =

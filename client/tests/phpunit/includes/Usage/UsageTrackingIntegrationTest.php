@@ -10,7 +10,7 @@ use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use WikiPage;
 use WikitextContent;
 

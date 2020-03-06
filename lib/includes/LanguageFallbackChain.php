@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use InvalidArgumentException;
 use Language;
@@ -142,3 +142,6 @@ class LanguageFallbackChain {
 	}
 
 }
+
+/** @deprecated */
+class_alias( LanguageFallbackChain::class, 'Wikibase\LanguageFallbackChain' );

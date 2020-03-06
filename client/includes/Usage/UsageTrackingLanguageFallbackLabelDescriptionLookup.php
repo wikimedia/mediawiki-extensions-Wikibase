@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
-use Wikibase\LanguageFallbackChain;
 
 /**
  * LanguageFallbackLabelDescriptionLookup decorator that records label usage in an UsageAccumulator.

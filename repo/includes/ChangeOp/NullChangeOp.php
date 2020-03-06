@@ -4,7 +4,7 @@ namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 
 /**
  * @license GPL-2.0-or-later

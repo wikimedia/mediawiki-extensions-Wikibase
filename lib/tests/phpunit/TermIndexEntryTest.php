@@ -6,11 +6,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\TermIndexEntry;
+use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * @covers \Wikibase\TermIndexEntry
+ * @covers \Wikibase\Lib\TermIndexEntry
  *
  * @group Wikibase
  *

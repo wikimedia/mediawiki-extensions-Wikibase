@@ -17,8 +17,8 @@ use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
+use Wikibase\Lib\WikibaseSettings;
 use Wikibase\PropertyContent;
-use Wikibase\WikibaseSettings;
 use Wikipage;
 
 /**

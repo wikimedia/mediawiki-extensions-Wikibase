@@ -8,7 +8,7 @@ use MediaWikiTestCase;
 use Parser;
 use ParserOutput;
 use Title;
-use Wikibase\SettingsArray;
+use Wikibase\Lib\SettingsArray;
 use Wikimedia\TestingAccessWrapper;
 
 /**

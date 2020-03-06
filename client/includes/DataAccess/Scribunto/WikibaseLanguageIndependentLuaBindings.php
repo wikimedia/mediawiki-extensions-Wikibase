@@ -20,9 +20,9 @@ use Wikibase\DataModel\Services\Lookup\ReferencedEntityIdLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\SettingsArray;
 
 /**
  * Actual implementations of various functions to access Wikibase functionality

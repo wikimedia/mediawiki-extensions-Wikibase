@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser

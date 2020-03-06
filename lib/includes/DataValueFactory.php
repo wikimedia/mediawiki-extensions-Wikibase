@@ -1,7 +1,9 @@
 <?php
 
-namespace DataValues;
+namespace Wikibase\Lib;
 
+use DataValues\DataValue;
+use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;
 use InvalidArgumentException;
@@ -74,3 +76,6 @@ class DataValueFactory {
 	}
 
 }
+
+/** @deprecated */
+class_alias( DataValueFactory::class, 'DataValues\DataValueFactory' );

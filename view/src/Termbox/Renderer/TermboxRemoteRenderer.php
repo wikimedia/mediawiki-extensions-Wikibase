@@ -7,8 +7,8 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\LanguageFallbackChain;
-use Wikibase\LanguageWithConversion;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageWithConversion;
 
 /**
  * @license GPL-2.0-or-later

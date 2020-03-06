@@ -11,9 +11,9 @@ use Title;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
+use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\Api\EntityByTitleHelper;
 use Wikibase\Repo\Api\ResultBuilder;
-use Wikibase\StringNormalizer;
 
 /**
  * @covers \Wikibase\Repo\Api\ItemByTitleHelper

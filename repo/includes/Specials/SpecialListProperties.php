@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Specials;
 
-use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\DataTypeFactory;
 use HTMLForm;
 use Html;
 use Wikibase\DataModel\Entity\EntityId;
@@ -11,6 +9,8 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataTypeSelector;
+use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataAccess\PrefetchingTermLookup;

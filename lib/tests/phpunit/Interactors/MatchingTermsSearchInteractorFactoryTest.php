@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
-use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\TermIndex;
 
 /**

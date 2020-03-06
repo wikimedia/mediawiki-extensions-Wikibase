@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Summary;
+use Wikibase\Lib\Summary;
 use Wikibase\SummaryFormatter;
 
 /**

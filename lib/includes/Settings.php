@@ -2,8 +2,6 @@
 
 namespace Wikibase\Lib;
 
-use Wikibase\SettingsArray;
-
 /**
  * @deprecated Each component should manage its own settings,
  *  and such settings should be defined in their own configuration.

@@ -45,7 +45,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Lib\WikibaseContentLanguages;
-use Wikibase\WikibaseSettings;
+use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
 /**
