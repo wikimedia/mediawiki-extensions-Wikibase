@@ -18,6 +18,7 @@ Current ADRs include:
 * @subpage adr_0005
 * @subpage adr_0006
 * @subpage adr_0007
+* @subpage adr_0008
 
 Including one that needs to be cleaned up and included:
 
