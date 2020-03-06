@@ -23,17 +23,7 @@
 		]
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Lib\\Changes\\": "lib/includes/Changes/",
-		"Wikibase\\Lib\\DataValue\\": "lib/includes/DataValue/",
-		"Wikibase\\Lib\\Formatters\\": "lib/includes/Formatters/",
-		"Wikibase\\Lib\\Interactors\\": "lib/includes/Interactors/",
-		"Wikibase\\Lib\\Modules\\": "lib/includes/Modules/",
-		"Wikibase\\Lib\\Reporting\\": "lib/includes/Reporting/",
-		"Wikibase\\Lib\\Serialization\\": "lib/includes/Serialization/",
-		"Wikibase\\Lib\\Sites\\": "lib/includes/Sites/",
-		"Wikibase\\Lib\\Units\\": "lib/includes/Units/",
-		"Wikibase\\Lib\\Store\\": "lib/includes/Store/",
-		"Wikibase\\Lib\\ParserFunctions\\": "lib/includes/ParserFunctions/",
+		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"TestAutoloadNamespaces": {
