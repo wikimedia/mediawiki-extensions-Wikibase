@@ -50,7 +50,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->willReturn( new FauxResponse );
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setRequest( $request );
-		$context->setTitle( new Title() );
+		$context->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
 		yield 'diff page' => [ new OutputPage( $context ) ];
 
 		$out = $this->newOutputPage();
@@ -185,7 +185,7 @@ class OutputPageEditabilityTest extends TestCase {
 	 */
 	private function newOutputPage() {
 		$outputPage = new OutputPage( new DerivativeContext( RequestContext::getMain() ) );
-		$outputPage->setTitle( new Title() );
+		$outputPage->setTitle( Title::makeTitle( NS_MAIN, __METHOD__ ) );
 
 		return $outputPage;
 	}
