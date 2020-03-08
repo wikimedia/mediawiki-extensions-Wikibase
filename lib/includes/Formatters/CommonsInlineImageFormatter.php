@@ -8,6 +8,7 @@ use Html;
 use InvalidArgumentException;
 use Language;
 use Linker;
+use MediaWiki\MediaWikiServices;
 use ParserOptions;
 use RepoGroup;
 use Title;
@@ -63,7 +64,7 @@ class CommonsInlineImageFormatter extends ValueFormatterBase {
 
 		$languageCode = $this->getOption( ValueFormatter::OPT_LANG );
 		$this->language = Language::factory( $languageCode );
-		$this->repoGroup = $repoGroup ?: RepoGroup::singleton();
+		$this->repoGroup = $repoGroup ?: MediaWikiServices::getInstance()->getRepoGroup();
 		$this->parserOptions = $parserOptions;
 		$this->thumbLimits = $thumbLimits;
 	}
