@@ -163,16 +163,17 @@ export function getOrCreateApiQueryResponsePage( response: ApiQueryResponseBody,
 }
 
 export function addDataBridgeConfigResponse(
-	dataBridgeConfig: WikibaseRepoConfiguration|null = null,
+	dataBridgeConfig: Partial<WikibaseRepoConfiguration> | null = null,
 	response: { query?: object },
 ): object {
 	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
-	query.wbdatabridgeconfig = dataBridgeConfig || {
+	query.wbdatabridgeconfig = {
 		dataTypeLimits: {
 			string: {
 				maxLength: 200,
 			},
 		},
+		...( dataBridgeConfig ?? {} ),
 	};
 	return response;
 }
@@ -226,7 +227,7 @@ export function getMockFullRepoBatchedQueryResponse(
 		fallbackLanguage?: string;
 	},
 	entityTitle: string,
-	dataBridgeConfig?: WikibaseRepoConfiguration,
+	dataBridgeConfig?: Partial<WikibaseRepoConfiguration>,
 ): jest.Mock {
 	return jest.fn().mockResolvedValue(
 		addPropertyLabelResponse(
