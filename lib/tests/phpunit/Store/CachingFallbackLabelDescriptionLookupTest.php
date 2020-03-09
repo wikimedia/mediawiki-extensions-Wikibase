@@ -8,10 +8,10 @@ use Psr\SimpleCache\CacheInterface;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 
 /**
@@ -46,7 +46,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGivenNoLabelInCache_getLabelPassesRequestToInnerLookup() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getLabel( $itemId )
 			->willReturn( new TermFallback( 'en', self::TEST_LABEL, 'en', 'en' ) );
 
@@ -66,7 +66,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGetLabelWritesLabelToCache() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getLabel( $itemId )
 			->willReturn( new TermFallback( 'en', self::TEST_LABEL, 'en', 'en' ) );
 
@@ -104,7 +104,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$ttlInSeconds = 10;
 
@@ -124,7 +124,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGivenNoLabelFound_nullEntryWrittenToCache() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getLabel( Argument::any() )->willReturn( null );
 
 		$ttlInSeconds = 10;
@@ -148,7 +148,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
@@ -166,7 +166,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGivenNoDescriptionInCache_getDescriptionPassesRequestToInnerLookup() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getDescription( $itemId )
 			->willReturn( new TermFallback( 'en', self::TEST_DESCRIPTION, 'en', 'en' ) );
 
@@ -186,7 +186,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGetDescriptionWritesDescriptionToCache() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getDescription( $itemId )
 			->willReturn( new TermFallback( 'en', self::TEST_DESCRIPTION, 'en', 'en' ) );
 
@@ -224,7 +224,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$ttlInSeconds = 10;
 
@@ -244,7 +244,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	public function testGivenNoDescriptionFound_nullEntryWrittenToCache() {
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getDescription( Argument::any() )->willReturn( null );
 
 		$ttl = 10;
@@ -268,7 +268,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
 			$this->cache->reveal(),
@@ -288,7 +288,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 
 		$itemId = new ItemId( 'Q123' );
 
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
 		$revLookup->lookupLatestRevisionResolvingRedirect( Argument::any() )
@@ -310,7 +310,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$itemId = new ItemId( 'Q1' );
 		$redirectsToItemId = new ItemId( 'Q2' );
 		$expectedLabel = $this->someTerm();
-		$ldLookup = $this->prophesize( LabelDescriptionLookup::class );
+		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 		$ldLookup->getLabel( $redirectsToItemId )->willReturn( $expectedLabel );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
