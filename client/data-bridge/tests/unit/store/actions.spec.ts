@@ -895,7 +895,7 @@ describe( 'root/actions', () => {
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
-		it( 'gracefully ignores problems while purging the page', async () => {
+		it( 'gracefully ignores but tracks problems while purging the page', async () => {
 			const rootModuleDispatch = jest.fn();
 			const commit = jest.fn();
 			const entityId = 'Q42';
@@ -925,6 +925,7 @@ describe( 'root/actions', () => {
 			const purgeTitles: MediaWikiPurge = {
 				purge: jest.fn().mockReturnValue( Promise.reject() ),
 			};
+			const trackTitlePurgeError = jest.fn();
 
 			const actions = inject( RootActions, {
 				state,
@@ -935,6 +936,9 @@ describe( 'root/actions', () => {
 			actions.store = {
 				$services: newMockServiceContainer( {
 					purgeTitles,
+					tracker: newMockTracker( {
+						trackTitlePurgeError,
+					} ),
 				} ),
 			};
 
@@ -952,6 +956,7 @@ describe( 'root/actions', () => {
 			};
 
 			await expect( actions.saveBridge() ).resolves.toBeUndefined();
+			expect( trackTitlePurgeError ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'chooses the strategy based on the edit decision', async () => {

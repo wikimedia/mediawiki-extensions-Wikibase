@@ -109,6 +109,9 @@ services.set( 'tracker', {
 	trackPropertyDatatype( datatype: string ) {
 		console.info( `Tracking datatype: '${datatype}'` );
 	},
+	trackTitlePurgeError() {
+		console.info( 'Tracking purge error' );
+	},
 } );
 
 services.set( 'editAuthorizationChecker', {
