@@ -13374,23 +13374,12 @@ function _asyncToGenerator(fn) {
 
 
 var BridgeConfig_BridgeConfig = function BridgeConfig(config) {
+  var _config$dataTypeLimit;
+
   _classCallCheck(this, BridgeConfig);
 
-  if (typeof config.usePublish !== 'boolean') {
-    throw new Error('No valid usePublish option provided.');
-  }
-
   this.usePublish = config.usePublish;
-
-  if (config.dataTypeLimits) {
-    if (typeof config.dataTypeLimits.string.maxLength !== 'number') {
-      throw new Error('No valid stringMaxLength option provided.');
-    }
-
-    this.stringMaxLength = config.dataTypeLimits.string.maxLength;
-  } else {
-    this.stringMaxLength = null;
-  }
+  this.stringMaxLength = ((_config$dataTypeLimit = config.dataTypeLimits) === null || _config$dataTypeLimit === void 0 ? void 0 : _config$dataTypeLimit.string.maxLength) || null;
 };
 
 

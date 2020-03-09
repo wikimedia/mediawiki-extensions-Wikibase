@@ -1,27 +1,14 @@
 import WikibaseClientConfiguration from '@/definitions/WikibaseClientConfiguration';
-import Configuration from '@/definitions/Configuration';
+import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 
-export type BridgeConfigOptions = WikibaseClientConfiguration | Configuration;
+export type BridgeConfigOptions = WikibaseClientConfiguration & Partial<WikibaseRepoConfiguration>;
 
 export default class BridgeConfig {
 	public readonly usePublish: boolean;
-	public readonly stringMaxLength: number|null;
+	public readonly stringMaxLength: number | null;
 
 	public constructor( config: BridgeConfigOptions ) {
-		if ( typeof config.usePublish !== 'boolean' ) {
-			throw new Error( 'No valid usePublish option provided.' );
-		}
-
 		this.usePublish = config.usePublish;
-
-		if ( ( config as Configuration ).dataTypeLimits ) {
-			if ( typeof ( config as Configuration ).dataTypeLimits.string.maxLength !== 'number' ) {
-				throw new Error( 'No valid stringMaxLength option provided.' );
-			}
-
-			this.stringMaxLength = ( config as Configuration ).dataTypeLimits.string.maxLength;
-		} else {
-			this.stringMaxLength = null;
-		}
+		this.stringMaxLength = config.dataTypeLimits?.string.maxLength || null;
 	}
 }
