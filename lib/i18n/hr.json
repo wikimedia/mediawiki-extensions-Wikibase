@@ -3,7 +3,8 @@
 		"authors": [
 			"MaGa",
 			"Roberta F.",
-			"Bugoslav"
+			"Bugoslav",
+			"Neptune, the Mystic"
 		]
 	},
 	"wikibase-lib-desc": "Sadržava objedinjenu funkcionalnost za Wikibazu i proširenja za klijentski program Wikibaze.",
@@ -12,6 +13,7 @@
 	"wikibase-deletedentity-property": "Izbrisano svojstvo",
 	"wikibase-deletedentity-query": "Izbrisani upit",
 	"wikibase-error-unexpected": "Greška: $1",
+	"wikibase-error-unknown": "Došlo je do pogreške.",
 	"wikibase-error-save-generic": "Spremanje nije bilo moguće zbog pogrješke.",
 	"wikibase-error-remove-generic": "Uklanjanje nije moguće zbog pogrješke.",
 	"wikibase-error-save-connection": "Spremanje nije moguće zbog pogrješke u povezanosti s mrežom. Molimo Vas, provjerite internetsku vezu.",
