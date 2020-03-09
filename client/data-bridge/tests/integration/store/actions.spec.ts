@@ -14,6 +14,7 @@ import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepo
 import DataValue from '@/datamodel/DataValue';
 import clone from '@/store/clone';
 import EditDecision from '@/definitions/EditDecision';
+import newMockTracker from '../../util/newMockTracker';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -126,9 +127,7 @@ describe( 'store/actions', () => {
 			getDataType: jest.fn().mockResolvedValue( 'string' ),
 		} );
 
-		services.set( 'tracker', {
-			trackPropertyDatatype: jest.fn(),
-		} );
+		services.set( 'tracker', newMockTracker() );
 
 		services.set( 'editAuthorizationChecker', {
 			canUseBridgeForItemAndPage: () => Promise.resolve( [] ),

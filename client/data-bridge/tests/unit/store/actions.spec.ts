@@ -6,7 +6,6 @@ import EditFlow from '@/definitions/EditFlow';
 import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
 import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
-import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import {
 	BridgePermissionsRepository,
 	MissingPermissionsError,
@@ -17,6 +16,7 @@ import { inject } from 'vuex-smart-module';
 import { RootActions } from '@/store/actions';
 import AppInformation from '@/definitions/AppInformation';
 import newMockServiceContainer from '../services/newMockServiceContainer';
+import newMockTracker from '../../util/newMockTracker';
 import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import DataValue from '@/datamodel/DataValue';
@@ -370,10 +370,6 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( 'initBridgeWithRemoteData', () => {
-		const tracker: BridgeTracker = {
-			trackPropertyDatatype: jest.fn(),
-		};
-
 		it( 'commits to addApplicationErrors if there are permission errors', async () => {
 			const information = newMockAppInformation();
 			const commit = jest.fn();
@@ -382,12 +378,6 @@ describe( 'root/actions', () => {
 				dispatch: jest.fn(),
 			} );
 
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					tracker,
-				} ),
-			};
 			const permissionErrors = [ {
 				type: PageNotEditable.ITEM_CASCADE_PROTECTED,
 				info: {
@@ -422,9 +412,7 @@ describe( 'root/actions', () => {
 				getters: jest.fn() as any,
 			} );
 			const propertyDataType = 'string';
-			const tracker: BridgeTracker = {
-				trackPropertyDatatype: jest.fn(),
-			};
+			const tracker = newMockTracker();
 
 			// @ts-ignore
 			actions.store = {
@@ -463,7 +451,7 @@ describe( 'root/actions', () => {
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
-					tracker,
+					tracker: newMockTracker(),
 				} ),
 			};
 
@@ -512,7 +500,7 @@ describe( 'root/actions', () => {
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
-					tracker,
+					tracker: newMockTracker(),
 				} ),
 			};
 
