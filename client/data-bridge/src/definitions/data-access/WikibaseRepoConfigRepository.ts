@@ -4,6 +4,9 @@ export interface WikibaseRepoConfiguration {
 			maxLength: number;
 		};
 	};
+	dataRightsUrl: string;
+	dataRightsText: string;
+	termsOfUseUrl: string;
 }
 
 /**

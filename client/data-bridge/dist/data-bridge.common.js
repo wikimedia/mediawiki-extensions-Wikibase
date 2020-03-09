@@ -13374,12 +13374,15 @@ function _asyncToGenerator(fn) {
 
 
 var BridgeConfig_BridgeConfig = function BridgeConfig(config) {
-  var _config$dataTypeLimit;
+  var _ref, _config$dataTypeLimit, _config$dataRightsTex, _config$dataRightsUrl, _config$termsOfUseUrl;
 
   _classCallCheck(this, BridgeConfig);
 
   this.usePublish = config.usePublish;
-  this.stringMaxLength = ((_config$dataTypeLimit = config.dataTypeLimits) === null || _config$dataTypeLimit === void 0 ? void 0 : _config$dataTypeLimit.string.maxLength) || null;
+  this.stringMaxLength = (_ref = (_config$dataTypeLimit = config.dataTypeLimits) === null || _config$dataTypeLimit === void 0 ? void 0 : _config$dataTypeLimit.string.maxLength) !== null && _ref !== void 0 ? _ref : null;
+  this.dataRightsText = (_config$dataRightsTex = config.dataRightsText) !== null && _config$dataRightsTex !== void 0 ? _config$dataRightsTex : null;
+  this.dataRightsUrl = (_config$dataRightsUrl = config.dataRightsUrl) !== null && _config$dataRightsUrl !== void 0 ? _config$dataRightsUrl : null;
+  this.termsOfUseUrl = (_config$termsOfUseUrl = config.termsOfUseUrl) !== null && _config$termsOfUseUrl !== void 0 ? _config$termsOfUseUrl : null;
 };
 
 
@@ -19015,6 +19018,7 @@ function () {
 
 
 
+
 var ApiRepoConfigRepository_ApiRepoConfigRepository =
 /*#__PURE__*/
 function () {
@@ -19089,11 +19093,31 @@ function () {
   }, {
     key: "isWellFormedResponse",
     value: function isWellFormedResponse(response) {
-      try {
-        return typeof response.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
-      } catch (e) {
+      var _responseToAssert$wbd, _responseToAssert$wbd2;
+
+      var responseToAssert = response;
+
+      if (_typeof(responseToAssert.wbdatabridgeconfig) !== 'object') {
         return false;
       }
+
+      if (typeof responseToAssert.wbdatabridgeconfig.dataRightsUrl !== 'string') {
+        return false;
+      }
+
+      if (typeof responseToAssert.wbdatabridgeconfig.dataRightsText !== 'string') {
+        return false;
+      }
+
+      if (typeof responseToAssert.wbdatabridgeconfig.termsOfUseUrl !== 'string') {
+        return false;
+      }
+
+      if (typeof ((_responseToAssert$wbd = responseToAssert.wbdatabridgeconfig.dataTypeLimits) === null || _responseToAssert$wbd === void 0 ? void 0 : (_responseToAssert$wbd2 = _responseToAssert$wbd.string) === null || _responseToAssert$wbd2 === void 0 ? void 0 : _responseToAssert$wbd2.maxLength) !== 'number') {
+        return false;
+      }
+
+      return true;
     }
   }]);
 

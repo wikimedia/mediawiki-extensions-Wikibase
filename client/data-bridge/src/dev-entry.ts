@@ -97,6 +97,9 @@ services.set( 'wikibaseRepoConfigRepository', {
 					maxLength: 200,
 				},
 			},
+			dataRightsUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+			dataRightsText: 'Creative Commons CC0',
+			termsOfUseUrl: 'https://foundation.wikimedia.org/wiki/Terms_of_Use',
 		};
 	},
 } );

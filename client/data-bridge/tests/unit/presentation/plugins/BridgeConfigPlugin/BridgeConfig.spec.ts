@@ -30,5 +30,33 @@ describe( 'BridgeConfig', () => {
 			} );
 
 		} );
+
+		describe( 'options related to the license', () => {
+			it( 'mirrors null if no value is provided', () => {
+				const config = new BridgeConfig( { usePublish: false } );
+				expect( config.dataRightsText ).toBeNull();
+				expect( config.dataRightsUrl ).toBeNull();
+				expect( config.termsOfUseUrl ).toBeNull();
+			} );
+
+			it( 'mirrors the given options related to the license', () => {
+				const dataRightsText = 'some license';
+				const dataRightsUrl = 'https://example.com/some_license';
+				const termsOfUseUrl = 'https://example.com/terms_of_use';
+
+				const config = new BridgeConfig( {
+					usePublish: false,
+					...getMockBridgeRepoConfig( {
+						dataRightsText,
+						dataRightsUrl,
+						termsOfUseUrl,
+					} ),
+				} );
+
+				expect( config.dataRightsText ).toBe( dataRightsText );
+				expect( config.dataRightsUrl ).toBe( dataRightsUrl );
+				expect( config.termsOfUseUrl ).toBe( termsOfUseUrl );
+			} );
+		} );
 	} );
 } );
