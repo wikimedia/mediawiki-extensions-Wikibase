@@ -60,7 +60,7 @@
     "@wdio/sync": "^5.18.6",
     "@wmde/eslint-config-wikimedia-typescript": "^0.1.1",
     "@wmde/vuex-helpers": "^0.1.2",
-    "@wmde/wikibase-vuejs-components": "^0.1.6",
+    "@wmde/wikibase-vuejs-components": "^0.1.7",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
