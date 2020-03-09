@@ -4,7 +4,6 @@ import {
 import { EntityState } from '@/store/entity';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import Term from '@/datamodel/Term';
-import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import DataValue from '@/datamodel/DataValue';
 import ApplicationError from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
@@ -21,7 +20,6 @@ interface Application {
 	pageTitle: string;
 	targetLabel: Term|null;
 	targetProperty: string;
-	wikibaseRepoConfiguration: WikibaseRepoConfiguration|null;
 }
 
 export default Application;
@@ -29,7 +27,6 @@ export default Application;
 export interface InitializedApplicationState extends Application {
 	[ NS_ENTITY ]: EntityState;
 	[ NS_STATEMENTS ]: StatementState;
-	wikibaseRepoConfiguration: WikibaseRepoConfiguration;
 }
 
 export interface SavingState extends InitializedApplicationState {

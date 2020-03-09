@@ -2,7 +2,6 @@ import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
-import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import EditDecision from '@/definitions/EditDecision';
 import Application from '@/store/Application';
 
@@ -17,5 +16,4 @@ export class BaseState implements Application {
 	public pageTitle = '';
 	public targetLabel: Term|null = null;
 	public targetProperty = '';
-	public wikibaseRepoConfiguration: WikibaseRepoConfiguration|null = null;
 }
