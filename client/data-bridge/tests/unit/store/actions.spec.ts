@@ -23,6 +23,7 @@ import DataValue from '@/datamodel/DataValue';
 import { StatementState } from '@/store/statements';
 import Statement from '@/datamodel/Statement';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
+import { getMockBridgeRepoConfig } from '../../util/mocks';
 
 const mockBridgeConfig = jest.fn();
 jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
@@ -455,13 +456,7 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			const wikibaseRepoConfiguration = {
-				dataTypeLimits: {
-					string: {
-						maxLength: 12345,
-					},
-				},
-			};
+			const wikibaseRepoConfiguration = getMockBridgeRepoConfig();
 
 			await actions.initBridgeWithRemoteData( { information, results: [
 				wikibaseRepoConfiguration,

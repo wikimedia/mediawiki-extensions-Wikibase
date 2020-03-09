@@ -1,4 +1,5 @@
 import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
+import { getMockBridgeRepoConfig } from '../../../../util/mocks';
 
 describe( 'BridgeConfig', () => {
 	it( 'fails if invalid options have been provided', () => {
@@ -21,12 +22,13 @@ describe( 'BridgeConfig', () => {
 				const maxLength = 12345;
 				const config = new BridgeConfig( {
 					usePublish: false,
-					dataTypeLimits: {
+					...getMockBridgeRepoConfig( { dataTypeLimits: {
 						string: { maxLength },
-					},
+					} } ),
 				} );
 				expect( config.stringMaxLength ).toBe( maxLength );
 			} );
+
 		} );
 	} );
 } );

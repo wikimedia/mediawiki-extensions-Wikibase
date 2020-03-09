@@ -2,18 +2,12 @@ import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import { mockApi } from '../../util/mocks';
+import { getMockBridgeRepoConfig, mockApi } from '../../util/mocks';
 import jqXHR = JQuery.jqXHR;
 
 describe( 'ApiRepoConfigRepository', () => {
 
-	const wbdatabridgeconfig = {
-		dataTypeLimits: {
-			string: {
-				maxLength: 400,
-			},
-		},
-	};
+	const wbdatabridgeconfig = getMockBridgeRepoConfig();
 	const api = mockApi( {
 		query: {
 			wbdatabridgeconfig,

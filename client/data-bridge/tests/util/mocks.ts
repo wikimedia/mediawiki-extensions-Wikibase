@@ -162,19 +162,23 @@ export function getOrCreateApiQueryResponsePage( response: ApiQueryResponseBody,
 	return page;
 }
 
+export function getMockBridgeRepoConfig(
+	dataBridgeConfig: Partial<WikibaseRepoConfiguration> = {},
+): WikibaseRepoConfiguration {
+	return {
+		dataTypeLimits: {
+			string: { maxLength: 123 },
+		},
+		...dataBridgeConfig,
+	};
+}
+
 export function addDataBridgeConfigResponse(
 	dataBridgeConfig: Partial<WikibaseRepoConfiguration> | null = null,
 	response: { query?: object },
 ): object {
 	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
-	query.wbdatabridgeconfig = {
-		dataTypeLimits: {
-			string: {
-				maxLength: 200,
-			},
-		},
-		...( dataBridgeConfig ?? {} ),
-	};
+	query.wbdatabridgeconfig = getMockBridgeRepoConfig( dataBridgeConfig ?? {} );
 	return response;
 }
 
