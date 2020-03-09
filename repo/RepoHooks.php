@@ -1138,7 +1138,15 @@ final class RepoHooks {
 					'factory' => function( ApiQuery $apiQuery, $moduleName ) {
 						$repo = WikibaseRepo::getDefaultInstance();
 
-						return new MetaDataBridgeConfig( $repo->getSettings(), $apiQuery, $moduleName );
+						return new MetaDataBridgeConfig(
+							$repo->getSettings(),
+							$apiQuery,
+							$moduleName,
+							function ( string $pagename ): ?string {
+								$pageTitle = Title::newFromText( $pagename );
+								return $pageTitle ? $pageTitle->getFullURL() : null;
+							}
+						);
 					},
 				]
 			);
