@@ -33,7 +33,6 @@ use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
-use Wikibase\Lib\Store\UncachedTermsPrefetcher;
 use Wikibase\Lib\WikibaseContentLanguages;
 
 return [
@@ -125,11 +124,7 @@ return [
 
 			return new CachingPrefetchingTermLookup(
 				$cache,
-				new UncachedTermsPrefetcher(
-					$prefetchingPropertyTermLookup,
-					$redirectResolvingRevisionLookup,
-					60 // 1 minute ttl
-				),
+				$prefetchingPropertyTermLookup,
 				$redirectResolvingRevisionLookup,
 				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
 			);
