@@ -25,7 +25,8 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new ItemId( 'Q1234' ),
 				new Term( 'pt', 'ImaLabel' ),
 				new Term( 'en', 'ImaDescription' ),
-				''
+				'',
+				[]
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -33,7 +34,8 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new PropertyId( 'P777' ),
 				null,
 				null,
-				''
+				'',
+				[ 'datatype' => 'some datatype' ]
 			],
 			[
 				new Term( 'en-gb', 'FooText' ),
@@ -41,7 +43,8 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 				new PropertyId( 'foo:P777' ),
 				null,
 				null,
-				'foo'
+				'foo',
+				[ 'datatype' => 'some datatype' ]
 			],
 		];
 	}
@@ -55,14 +58,16 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 		$entityId,
 		$displayLabel,
 		$displayDescription,
-		$expectedRepositoryName
+		$expectedRepositoryName,
+		$metaData
 	) {
 		$result = new TermSearchResult(
 			$matchedTerm,
 			$matchedTermType,
 			$entityId,
 			$displayLabel,
-			$displayDescription
+			$displayDescription,
+			$metaData
 		);
 
 		$this->assertEquals( $matchedTerm, $result->getMatchedTerm() );
@@ -71,6 +76,17 @@ class TermSearchResultTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( $expectedRepositoryName, $result->getRepositoryName() );
 		$this->assertEquals( $displayLabel, $result->getDisplayLabel() );
 		$this->assertEquals( $displayDescription, $result->getDisplayDescription() );
+		$this->assertEquals( $metaData, $result->getMetaData() );
+	}
+
+	public function testGetMetaDataReturnsEmptyArrayByDefault() {
+		$termSearchResult = new TermSearchResult(
+			new Term( 'en', 'potato' ),
+			'label',
+			new ItemId( 'Q10998' )
+		);
+
+		$this->assertEquals( [], $termSearchResult->getMetaData() );
 	}
 
 }

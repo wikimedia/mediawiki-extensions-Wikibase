@@ -250,7 +250,8 @@ return [
 				);
 			}
 
-			return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
+				new Wikibase\Repo\Api\CombinedEntitySearchHelper(
 					[
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
 							$repo->getEntityLookup(),
@@ -265,6 +266,8 @@ return [
 							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
 						)
 					]
+				),
+				$repo->getPropertyDataTypeLookup()
 			);
 		},
 		'link-formatter-callback' => function( Language $language ) {
