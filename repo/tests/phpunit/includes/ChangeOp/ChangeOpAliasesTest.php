@@ -148,6 +148,28 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 					true
 				)
 			],
+			'remove only one existing alias' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', [ 'en-existingAlias1' ], 'set', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					[ 'en-existingAlias1' ],
+					true
+				)
+			],
+			'remove non existing alias' => [
+				$item->copy(),
+				new ChangeOpAliases( 'en', [ 'en-NonExistingAlias1' ], 'remove', $validatorFactory ),
+				new ChangeOpAliasesResult(
+					$item->getId(),
+					'en',
+					$existingEnAliases,
+					$existingEnAliases,
+					false
+				)
+			],
 			'set to no aliases' => [
 				$item->copy(),
 				new ChangeOpAliases( 'en', [], 'set', $validatorFactory ),
