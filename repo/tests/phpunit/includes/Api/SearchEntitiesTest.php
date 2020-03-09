@@ -146,7 +146,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockTitleLookup(),
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
-			[ 'item', 'property' ],
+			null,
 			new EntitySourceDefinitions( [
 				new EntitySource(
 					'items',
@@ -414,7 +414,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getMockTitleLookup(),
 			$this->getMockPropertyDataTypeLookup(),
 			$this->getContentLanguages(),
-			[ 'kitten' ],
+			null,
 			new EntitySourceDefinitions(
 				[
 					new EntitySource(
