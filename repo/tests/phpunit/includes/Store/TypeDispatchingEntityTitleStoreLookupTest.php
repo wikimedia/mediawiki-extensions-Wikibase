@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Store;
 
 use MediaWikiCoversValidator;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup;
@@ -87,6 +88,17 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 		}
 
 		return $defaultService;
+	}
+
+	public function testDispatchingLookupBatchCallContinuesToBatch() {
+		$defaultService = $this->createMock( EntityTitleStoreLookup::class );
+		$defaultService->expects( $this->once() )
+			->method( 'getTitlesForIds' )->willReturn( [] );
+		$lookup = new TypeDispatchingEntityTitleStoreLookup(
+			[],
+			$defaultService
+		);
+		$lookup->getTitlesForIds( [ new ItemId( 'Q3214' ) ] );
 	}
 
 }

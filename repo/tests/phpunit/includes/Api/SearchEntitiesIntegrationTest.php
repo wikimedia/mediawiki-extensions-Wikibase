@@ -10,6 +10,7 @@ use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -196,10 +197,19 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup() {
-		$lookup = $this->createMock( EntityTitleLookup::class );
-		$lookup->method( 'getTitleForId' )->willReturn( $this->createMock( Title::class ) );
+		$titleLookup = $this->createMock( EntityTitleLookup::class );
+		$titleLookup->expects( $this->any() )
+			->method( 'getTitlesForIds' )
+			->will( $this->returnCallback( function ( $ids ) {
+				$titles = [];
+				/** @var EntityId $id */
+				foreach ( $ids as $id ) {
+					$titles[ $id->getSerialization() ] = $this->createMock( Title::class );
+				}
+				return $titles;
+			} ) );
 
-		return $lookup;
+		return $titleLookup;
 	}
 
 	/**
