@@ -40,7 +40,15 @@ extendVueEnvironment(
 		},
 	},
 	{
-		get: ( key ) => `⧼${key}⧽`,
+		get: ( key ) => {
+			switch ( key ) {
+				case 'wikibase-client-data-bridge-license-body':
+					// eslint-disable-next-line max-len
+					return '<p>Changing this value will also change it on repo and possibly on wikis in other languages.</p>\n<p>By clicking "save changes", you agree to the <a href="https://foundation.wikimedia.org/wiki/Terms_of_Use">terms of use</a>, and you irrevocably agree to release your contribution under <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0</a>.</p>';
+				default:
+					return `⧼${key}⧽`;
+			}
+		},
 	},
 	{
 		usePublish: true,

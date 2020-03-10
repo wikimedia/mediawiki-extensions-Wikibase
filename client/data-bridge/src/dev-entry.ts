@@ -80,6 +80,8 @@ const messages = {
 	[ MessageKeys.PERMISSIONS_HEADING ]: 'You do not have permission to edit this value, for the following reason:',
 	[ MessageKeys.PERMISSIONS_CASCADE_PROTECTED_HEADING ]: '<strong>This value is currently cascade protected on repo and can be edited only by <a href="https://example.com">administrators</a>.</strong>',
 	[ MessageKeys.PERMISSIONS_CASCADE_PROTECTED_BODY ]: '<p><strong>Why is this value protected?</strong></p>\n<p>This value is transcluded in the following pages, which are protected with the "cascading" option:</p>\n$2',
+	[ MessageKeys.LICENSE_HEADING ]: 'Usage and license',
+	[ MessageKeys.LICENSE_BODY ]: '<p>Changing this value will also change it on repo and possibly on wikis in other languages.</p>\n<p>By clicking "save changes", you agree to the <a href="https://foundation.wikimedia.org/wiki/Terms_of_Use">terms of use</a>, and you irrevocably agree to release your contribution under <a href="https://creativecommons.org/publicdomain/zero/1.0/">Creative Commons CC0</a>.</p>',
 } as { [ key in MessageKeys ]: string };
 /* eslint-enable max-len */
 

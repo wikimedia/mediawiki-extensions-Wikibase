@@ -18047,6 +18047,8 @@ var MessageKeys;
   MessageKeys["SOMEVALUE_ERROR_BODY"] = "wikibase-client-data-bridge-somevalue-error-body";
   MessageKeys["NOVALUE_ERROR_HEAD"] = "wikibase-client-data-bridge-novalue-error-head";
   MessageKeys["NOVALUE_ERROR_BODY"] = "wikibase-client-data-bridge-novalue-error-body";
+  MessageKeys["LICENSE_HEADING"] = "wikibase-client-data-bridge-license-heading";
+  MessageKeys["LICENSE_BODY"] = "wikibase-client-data-bridge-license-body";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);
