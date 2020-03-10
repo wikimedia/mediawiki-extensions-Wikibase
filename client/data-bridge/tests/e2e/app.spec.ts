@@ -672,7 +672,7 @@ describe( 'app', () => {
 							DEFAULT_ENTITY,
 							addSiteinfoRestrictionsResponse(
 								addDataBridgeConfigResponse(
-									null,
+									{},
 									{},
 								),
 							),
@@ -720,7 +720,7 @@ describe( 'app', () => {
 							DEFAULT_ENTITY,
 							addSiteinfoRestrictionsResponse(
 								addDataBridgeConfigResponse(
-									null,
+									{},
 									{},
 								),
 							),

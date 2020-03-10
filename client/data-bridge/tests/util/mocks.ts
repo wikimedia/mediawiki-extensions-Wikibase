@@ -177,11 +177,11 @@ export function getMockBridgeRepoConfig(
 }
 
 export function addDataBridgeConfigResponse(
-	dataBridgeConfig: Partial<WikibaseRepoConfiguration> | null = null,
+	dataBridgeConfig: Partial<WikibaseRepoConfiguration>,
 	response: { query?: object },
 ): object {
 	const query: { wbdatabridgeconfig?: object } = response.query || ( response.query = {} );
-	query.wbdatabridgeconfig = getMockBridgeRepoConfig( dataBridgeConfig ?? {} );
+	query.wbdatabridgeconfig = getMockBridgeRepoConfig( dataBridgeConfig );
 	return response;
 }
 
@@ -234,7 +234,7 @@ export function getMockFullRepoBatchedQueryResponse(
 		fallbackLanguage?: string;
 	},
 	entityTitle: string,
-	dataBridgeConfig?: Partial<WikibaseRepoConfiguration>,
+	dataBridgeConfig: Partial<WikibaseRepoConfiguration> = {},
 ): jest.Mock {
 	return jest.fn().mockResolvedValue(
 		addPropertyLabelResponse(
