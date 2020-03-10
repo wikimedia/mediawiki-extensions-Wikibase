@@ -70,7 +70,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 		);
 		$parser->startExternalParse(
 			null,
-			new ParserOptions(),
+			ParserOptions::newFromAnon(),
 			Parser::OT_HTML,
 			true
 		);
@@ -97,7 +97,7 @@ class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse(
 			null,
-			new ParserOptions(),
+			ParserOptions::newFromAnon(),
 			Parser::OT_HTML,
 			true
 		);

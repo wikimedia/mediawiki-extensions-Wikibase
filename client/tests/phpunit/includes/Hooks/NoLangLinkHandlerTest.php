@@ -61,7 +61,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 	public function testDoHandle() {
 		$handler = new NoLangLinkHandler( new NamespaceChecker( [] ) );
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
+		$parser->startExternalParse( null, ParserOptions::newFromAnon(), Parser::OT_HTML );
 
 		$handler->doHandle( $parser, [ 'en', 'fr' ] );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );
@@ -74,7 +74,7 @@ class NoLangLinkHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testHandle() {
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-		$parser->startExternalParse( null, new ParserOptions(), Parser::OT_HTML );
+		$parser->startExternalParse( null, ParserOptions::newFromAnon(), Parser::OT_HTML );
 
 		NoLangLinkHandler::handle( $parser, '*' );
 		$actual = NoLangLinkHandler::getNoExternalLangLinks( $parser->getOutput() );

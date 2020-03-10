@@ -280,7 +280,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 	private function getParser() {
 		$title = Title::newFromText( 'Cat' );
-		$popt = new ParserOptions();
+		$popt = ParserOptions::newFromAnon();
 
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 		$parser->startExternalParse( $title, $popt, Parser::OT_HTML );

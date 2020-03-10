@@ -100,7 +100,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
-		$parserOptions = new ParserOptions();
+		$parserOptions = ParserOptions::newFromAnon();
 		$parserOptions->setThumbSize( $thumbSize );
 
 		return new CommonsInlineImageFormatter(

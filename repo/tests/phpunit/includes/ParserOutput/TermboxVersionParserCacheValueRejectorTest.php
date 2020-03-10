@@ -62,7 +62,7 @@ class TermboxVersionParserCacheValueRejectorTest extends TestCase {
 	}
 
 	private function getMockRequestParserOptionsWithTermboxVersionOption() {
-		$pOpts = new ParserOptions();
+		$pOpts = ParserOptions::newFromAnon();
 		$pOpts->setOption( 'termboxVersion', 3 );
 		return $pOpts;
 	}
@@ -70,7 +70,7 @@ class TermboxVersionParserCacheValueRejectorTest extends TestCase {
 	public function allParserOutputAOptionsCombinationsProvider() {
 		return [
 			[
-				new ParserOptions(),
+				ParserOptions::newFromAnon(),
 				new ParserOutput(),
 			],
 			[
@@ -78,7 +78,7 @@ class TermboxVersionParserCacheValueRejectorTest extends TestCase {
 				new ParserOutput(),
 			],
 			[
-				new ParserOptions(),
+				ParserOptions::newFromAnon(),
 				$this->getMockParserOutputWithTermboxVersionOption(),
 			],
 			[
