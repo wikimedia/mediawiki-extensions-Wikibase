@@ -14,7 +14,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Storage\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
-use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use Revision;
 use RuntimeException;
@@ -606,12 +605,46 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 
 	abstract protected function getTestContent();
 
+	protected function getTitle(
+		EntityHandler $handler,
+		string $titleString = 'dummy title string'
+	): Title {
+		return Title::makeTitle(
+			$handler->getEntityNamespace(),
+			$titleString
+		);
+	}
+
 	/**
 	 * @param EntityHandler $handler
-	 * @return MockObject|WikiPage
+	 * @return Article
 	 */
-	protected function getMockWikiPage( EntityHandler $handler ) {
-		$title = Title::makeTitle( $handler->getEntityNamespace(), "Asdflogjkasdefgo" );
+	protected function getMockArticle(
+		EntityHandler $handler
+	): Article {
+		$wikiPage = $this->getMockWikiPage( $handler );
+
+		$article = $this->getMockBuilder( Article::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$article->method( 'getTitle' )
+			->willReturn( $wikiPage->getTitle() );
+		$article->method( 'getPage' )
+			->willReturn( $wikiPage );
+		$article->method( 'getContext' )
+			->willReturn( $this->getContext( $wikiPage->getTitle() ) );
+
+		return $article;
+	}
+
+	/**
+	 * @param EntityHandler $handler
+	 * @return WikiPage
+	 */
+	protected function getMockWikiPage(
+		EntityHandler $handler
+	): WikiPage {
+		$title = $this->getTitle( $handler );
 
 		$page = $this->getMockBuilder( WikiPage::class )
 			->setConstructorArgs( [ Title::newFromText( 'Q1' ) ] )
@@ -647,19 +680,8 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 					'Override for ' . $name . ' must be an action class, found ' . $classOrCallback
 				);
 			} elseif ( is_callable( $classOrCallback ) ) {
-				// NOTE: for now, the callback must work with a WikiPage as well as an Article
-				// object. Once I0335100b2 is merged, this is no longer needed.
-				$wikiPage = $this->getMockWikiPage( $handler );
-				$context = $this->getContext( $wikiPage->getTitle() );
-
-				$action = $classOrCallback( $wikiPage, $context );
-				$this->assertTrue(
-					is_subclass_of( $action, Action::class ),
-					'Callback for action ' . $name . ' must return an Action instance!'
-				);
-
-				$article = Article::newFromWikiPage( $wikiPage, $context );
-				$action = $classOrCallback( $article, $context );
+				$article = $this->getMockArticle( $handler );
+				$action = $classOrCallback( $article, $article->getContext() );
 				$this->assertTrue(
 					is_subclass_of( $action, Action::class ),
 					'Callback for action ' . $name . ' must return an Action instance!'

@@ -6,7 +6,6 @@ use Article;
 use HashConfig;
 use IContextSource;
 use Language;
-use MWContentSerializationException;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use Title;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityIdLookup;
+use WikiPage;
 
 /**
  * @covers \Wikibase\HistoryEntityAction
@@ -35,20 +35,33 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	const DUMMY_LANGUAGE = 'qqx';
 
 	/**
-	 * @return \Page
+	 * @param Title $title
+	 * @return WikiPage
 	 */
-	private function getPage() {
-		$page = $this->getMockBuilder( Article::class )
+	private function getWikiPage( Title $title ): WikiPage {
+		$wikiPage = $this->getMockBuilder( WikiPage::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$page->method( 'getTitle' )
-			->willReturn( Title::newFromText( 'Page title' ) );
-		$page->expects( $this->never() )
-			->method( 'getPage' )
-			// Deserializing the full entity may fail, see https://gerrit.wikimedia.org/r/262881
-			->willThrowException( new MWContentSerializationException() );
+		$wikiPage->method( 'getTitle' )
+			->willReturn( $title );
 
-		return $page;
+		return $wikiPage;
+	}
+
+	/**
+	 * @return Article
+	 */
+	private function getArticle(): Article {
+		$title = Title::newFromText( 'Page title' );
+		$article = $this->getMockBuilder( Article::class )
+			->disableOriginalConstructor()
+			->getMock();
+		$article->method( 'getTitle' )
+			->willReturn( $title );
+		$article->method( 'getPage' )
+			->willReturn( $this->getWikiPage( $title ) );
+
+		return $article;
 	}
 
 	/**
@@ -93,7 +106,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( Language::factory( self::DUMMY_LANGUAGE ) );
 
 		$context->method( 'getTitle' )
-			->willReturn( $this->getPage()->getTitle() );
+			->willReturn( $this->getArticle()->getTitle() );
 
 		$output->expects( $this->once() )
 			->method( 'getContext' )
@@ -141,7 +154,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 			->with( $expected );
 
 		$action = new HistoryEntityAction(
-			$this->getPage(),
+			$this->getArticle(),
 			$this->getContext( $output ),
 			$entityIdLookup,
 			$labelLookup
