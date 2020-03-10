@@ -14857,8 +14857,9 @@ function (_Actions) {
 
                   throw error;
                 }).then(function () {
-                  return _this3.store.$services.get('purgeTitles').purge([_this3.state.pageTitle]).catch(function () {// we don't want to stop normal operation in that case but
-                    // TODO consider adding some logging
+                  return _this3.store.$services.get('purgeTitles').purge([_this3.state.pageTitle]).catch(function () {
+                    // we don't want to stop normal operation in that case
+                    _this3.store.$services.get('tracker').trackTitlePurgeError();
                   });
                 }).then(function () {
                   _this3.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
@@ -19115,19 +19116,26 @@ function () {
 
 
 
+
 var DataBridgeTrackerService_DataBridgeTrackerService =
 /*#__PURE__*/
 function () {
   function DataBridgeTrackerService(tracker) {
     _classCallCheck(this, DataBridgeTrackerService);
 
+    this.BRIDGE_TOPIC_PREFIX = 'MediaWiki.wikibase.client.databridge';
     this.tracker = tracker;
   }
 
   _createClass(DataBridgeTrackerService, [{
     key: "trackPropertyDatatype",
     value: function trackPropertyDatatype(datatype) {
-      this.tracker.increment("MediaWiki.wikibase.client.databridge.datatype.".concat(datatype));
+      this.tracker.increment("".concat(this.BRIDGE_TOPIC_PREFIX, ".datatype.").concat(datatype));
+    }
+  }, {
+    key: "trackTitlePurgeError",
+    value: function trackTitlePurgeError() {
+      this.tracker.increment("".concat(this.BRIDGE_TOPIC_PREFIX, ".error.purge"));
     }
   }]);
 

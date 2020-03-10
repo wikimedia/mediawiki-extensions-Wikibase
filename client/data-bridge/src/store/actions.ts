@@ -244,8 +244,8 @@ RootActions
 				return this.store.$services.get( 'purgeTitles' )
 					.purge( [ this.state.pageTitle ] )
 					.catch( () => {
-						// we don't want to stop normal operation in that case but
-						// TODO consider adding some logging
+						// we don't want to stop normal operation in that case
+						this.store.$services.get( 'tracker' ).trackTitlePurgeError();
 					} );
 			} )
 			.then( () => {
