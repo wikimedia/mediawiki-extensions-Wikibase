@@ -52,3 +52,14 @@ docker-compose run --rm node npm run test:lint
 ```
 docker-compose run --rm node npm run storybook
 ```
+
+## Debugging
+
+Bridge augments MediaWiki pages and uses some of its modules to do its work.
+It uses [`mw.track`](https://www.mediawiki.org/wiki/ResourceLoader/Core_modules#mw.track) to publish analytics events (under the `MediaWiki.wikibase.client.databridge` topic) which can be collected as [statistics](https://www.mediawiki.org/wiki/Manual:How_to_debug/en#Statistics).
+
+For debugging of a specific scenario you can also subscribe to those events locally in your browser via e.g.
+
+```javascript
+mediaWiki.trackSubscribe( '', console.log );
+```
