@@ -1,5 +1,8 @@
 # Wikibase DataModel Services release notes
 
+## Version 5.2.0 (2020-03-10)
+* Allow installing with wikimedia/assert 0.5.0
+
 ## Version 5.1.0 (2020-02-13)
 * Added the `ItemTermStoreWriter` and `PropertyTermStoreWriter` interfaces.
 
