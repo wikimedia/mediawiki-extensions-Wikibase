@@ -99,7 +99,11 @@ class EntityContentDiffView extends DifferenceEngine {
 		$header = $linkRenderer->makeKnownLink( $title, $headerMsg->text(), [],
 			[ 'oldid' => $rev->getId() ] );
 
-		if ( $rev->userCan( RevisionRecord::DELETED_TEXT, $user ) ) {
+		if ( RevisionRecord::userCanBitfield(
+			$rev->getVisibility(),
+			RevisionRecord::DELETED_TEXT,
+			$user
+		) ) {
 			if ( MediaWikiServices::getInstance()->getPermissionManager()
 					->quickUserCan( 'edit', $user, $title ) && !$rev->isCurrent()
 			) {
