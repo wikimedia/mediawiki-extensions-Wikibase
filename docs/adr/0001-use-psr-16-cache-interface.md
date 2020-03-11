@@ -1,4 +1,4 @@
-# 1. Use PSR-16 PHP Cache Interface in Wikibase {#adr_0001}
+# 1) Use PSR-16 PHP Cache Interface in Wikibase {#adr_0001}
 
 Date: 2018-07-19
 

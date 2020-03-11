@@ -1,4 +1,4 @@
-# 3. Termbox ParserCache Integration  {#adr_0003}
+# 3) Termbox ParserCache Integration  {#adr_0003}
 
 Date: 2019-01-29
 

@@ -1,4 +1,4 @@
-# 9. Refactor hooks for testability {#adr_0009}
+# 9) Refactor hooks for testability {#adr_0009}
 
 Date: 2020-03-04
 

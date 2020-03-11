@@ -1,4 +1,4 @@
-# 5. Invalidate ParserCache on backwards incompatible frontend changes  {#adr_0005}
+# 5) Invalidate ParserCache on backwards incompatible frontend changes  {#adr_0005}
 
 Date: 2019-08-14
 

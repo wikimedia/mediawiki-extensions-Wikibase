@@ -1,4 +1,4 @@
-# 7. Use vuex-smart-modules in Data Bridge {#adr_0007}
+# 7) Use vuex-smart-modules in Data Bridge {#adr_0007}
 
 Date: 2020-02-06
 

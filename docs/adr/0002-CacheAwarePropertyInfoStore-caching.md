@@ -1,4 +1,4 @@
-# 2. [CacheAwarePropertyInfoStore] caching method  {#adr_0002}
+# 2) [CacheAwarePropertyInfoStore] caching method  {#adr_0002}
 
 Date: 2018-12-19
 
