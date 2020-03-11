@@ -97,7 +97,7 @@ which has been taken for presentation work over the last years in Wikibase Repos
 The decision here happens for Wikibase Client, obeying by the nature of the tech stack there.
 Very similar rendering already exists, implemented in PHP and run on the server,
 since it’s needed during normal page rendering
-(see [Data transclusion]: `{{#statements:}}`/`{{#property:}}`, `mw.wikibase.formatValue()`/`renderSnaks()`/`formatValues()`),
+(see [Data transclusion][]: `{{#statements:}}`/`{{#property:}}`, `mw.wikibase.formatValue()`/`renderSnaks()`/`formatValues()`),
 and we anticipate the need to make our new rendering available in the data transclusion (Lua) as well,
 and consequently want to maximize synergies with – and follow similar paradigms like – it.
 
