@@ -7,9 +7,25 @@ import {
 import EditFlow from '@/definitions/EditFlow';
 import Dispatcher from '@/mediawiki/Dispatcher';
 import { budge } from '../../util/timer';
+import MwInitTracker from '@/mediawiki/MwInitTracker';
+import EventTracker from '@/mediawiki/facades/EventTracker';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 	return jest.fn().mockImplementation( () => {} );
+} );
+
+const mockEventTracker = {};
+jest.mock( '@/mediawiki/facades/EventTracker', () => {
+	return jest.fn().mockImplementation( () => mockEventTracker );
+} );
+
+const mwInitTrackerClickDelayCallback = jest.fn();
+const mockMwInitTracker: Partial<MwInitTracker> = {
+	recordTimeToLinkListenersAttached: jest.fn(),
+	startClickDelayTracker: jest.fn().mockReturnValue( mwInitTrackerClickDelayCallback ),
+};
+jest.mock( '@/mediawiki/MwInitTracker', () => {
+	return jest.fn().mockImplementation( () => mockMwInitTracker );
 } );
 
 const mockDispatcher = {
@@ -85,10 +101,22 @@ describe( 'init', () => {
 			selectElementsToOverload: () => [ selectedElement ],
 		} ) );
 
-		return init().then( async () => {
+		const initPromise = init();
+
+		expect( EventTracker ).toHaveBeenCalledWith( window.mw.track );
+		expect( MwInitTracker ).toHaveBeenCalledWith( mockEventTracker, window.performance );
+		expect( mockMwInitTracker.recordTimeToLinkListenersAttached ).toHaveBeenCalled();
+
+		return initPromise.then( async () => {
+			// simulate the actual 'click' normally done by the user
 			await selectedElement.link.addEventListener.mock.calls[ 0 ][ 1 ]( event );
+
 			expect( event.preventDefault ).toHaveBeenCalled();
 			expect( event.stopPropagation ).toHaveBeenCalled();
+
+			expect( mockMwInitTracker.startClickDelayTracker ).toHaveBeenCalled();
+			expect( mwInitTrackerClickDelayCallback ).toHaveBeenCalled();
+
 			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
 			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
