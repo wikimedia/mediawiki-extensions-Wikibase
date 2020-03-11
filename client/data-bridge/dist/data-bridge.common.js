@@ -15105,7 +15105,6 @@ var state_BaseState = function BaseState() {
   this.pageTitle = '';
   this.targetLabel = null;
   this.targetProperty = '';
-  this.wikibaseRepoConfiguration = null;
 };
 // CONCATENATED MODULE: ./src/store/index.ts
 
