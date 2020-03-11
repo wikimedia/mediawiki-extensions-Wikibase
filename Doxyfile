@@ -26,6 +26,7 @@ EXCLUDE_PATTERNS       = */node_modules/* \
                          */view/lib/wikibase-termbox/*.md \
                          */tests/* \
                          */jmeter/*
+EXCLUDE                = docs/adr/NNNN-adr-template.md
 
 FILE_PATTERNS          = *.php \
                          *.sql \
