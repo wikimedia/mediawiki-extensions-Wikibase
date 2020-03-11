@@ -169,6 +169,9 @@ export function getMockBridgeRepoConfig(
 		dataTypeLimits: {
 			string: { maxLength: 123 },
 		},
+		dataRightsUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+		dataRightsText: 'Creative Commons CC0',
+		termsOfUseUrl: 'https://foundation.wikimedia.org/wiki/Terms_of_Use',
 		...dataBridgeConfig,
 	};
 }

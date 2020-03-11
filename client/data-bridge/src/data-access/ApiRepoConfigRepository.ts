@@ -43,12 +43,30 @@ export default class ApiRepoConfigRepository implements WikibaseRepoConfigReposi
 	}
 
 	private isWellFormedResponse( response: ApiQueryResponseBody ): response is ApiQueryDataBridgeConfigBody {
-		try {
-			return typeof ( response as ApiQueryDataBridgeConfigBody )
-				.wbdatabridgeconfig.dataTypeLimits.string.maxLength === 'number';
-		} catch ( e ) {
+
+		const responseToAssert = response as ApiQueryDataBridgeConfigBody;
+
+		if ( typeof responseToAssert.wbdatabridgeconfig !== 'object' ) {
 			return false;
 		}
+
+		if ( typeof responseToAssert.wbdatabridgeconfig.dataRightsUrl !== 'string' ) {
+			return false;
+		}
+
+		if ( typeof responseToAssert.wbdatabridgeconfig.dataRightsText !== 'string' ) {
+			return false;
+		}
+
+		if ( typeof responseToAssert.wbdatabridgeconfig.termsOfUseUrl !== 'string' ) {
+			return false;
+		}
+
+		if ( typeof responseToAssert.wbdatabridgeconfig.dataTypeLimits?.string?.maxLength !== 'number' ) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

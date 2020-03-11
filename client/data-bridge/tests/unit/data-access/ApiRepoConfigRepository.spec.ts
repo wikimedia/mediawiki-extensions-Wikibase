@@ -4,6 +4,7 @@ import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import { getMockBridgeRepoConfig, mockApi } from '../../util/mocks';
 import jqXHR = JQuery.jqXHR;
+import clone from '@/store/clone';
 
 describe( 'ApiRepoConfigRepository', () => {
 
@@ -38,23 +39,41 @@ describe( 'ApiRepoConfigRepository', () => {
 		} );
 	} );
 
-	it( 'rejects if the response does not match the agreed-upon format', () => {
-		const api = mockApi( {
-			query: {
-				wbdatabridgeconfig: {
-					foobar: 'yes',
+	describe( 'if the response does not match the agreed-upon format', () => {
+		it( 'rejects if the response does not contain the wbdatabridgeconfig in the expected format ', () => {
+			const api = mockApi( {
+				query: {
+					wbdatabridgeconfig: 'some unexpected content',
 				},
-			},
+			} );
+
+			const configurationRepository = new ApiRepoConfigRepository( api );
+
+			return expect( configurationRepository.getRepoConfiguration() )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
 		} );
 
-		const configurationRepository = new ApiRepoConfigRepository( api );
+		it.each(
+			[ 'dataRightsUrl', 'dataRightsText', 'termsOfUseUrl', 'dataTypeLimits' ] as const,
+		)( 'it rejects if the %s is missing', ( configKey: keyof WikibaseRepoConfiguration ) => {
+			const localWbdatabridgeconfig = clone( wbdatabridgeconfig );
+			delete localWbdatabridgeconfig[ configKey ];
+			const api = mockApi( {
+				query: {
+					wbdatabridgeconfig: localWbdatabridgeconfig,
+				},
+			} );
 
-		return expect( configurationRepository.getRepoConfiguration() )
-			.rejects
-			.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
+			const configurationRepository = new ApiRepoConfigRepository( api );
+
+			return expect( configurationRepository.getRepoConfiguration() )
+				.rejects
+				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
+		} );
 	} );
 
-	it( 'rejects if the response indicates revelant API endpoint is disabled in repo', () => {
+	it( 'rejects if the response indicates relevant API endpoint is disabled in repo', () => {
 		const api = mockApi( {
 			warnings: [
 				{
