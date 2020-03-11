@@ -15,6 +15,7 @@ import DataValue from '@/datamodel/DataValue';
 import clone from '@/store/clone';
 import EditDecision from '@/definitions/EditDecision';
 import newMockTracker from '../../util/newMockTracker';
+import { getMockBridgeRepoConfig } from '../../util/mocks';
 
 describe( 'store/actions', () => {
 	let store: Store<Application>;
@@ -113,13 +114,7 @@ describe( 'store/actions', () => {
 
 		services.set( 'wikibaseRepoConfigRepository', {
 			async getRepoConfiguration(): Promise<WikibaseRepoConfiguration> {
-				return {
-					dataTypeLimits: {
-						string: {
-							maxLength: 200,
-						},
-					},
-				};
+				return getMockBridgeRepoConfig();
 			},
 		} );
 
