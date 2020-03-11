@@ -71,6 +71,7 @@ $wgAutoloadClasses += [
 	'Wikibase\\RebuildTermSqlIndex' => __DIR__ . '/maintenance/rebuildTermSqlIndex.php',
 	'Wikibase\\RebuildTermsSearchKey' => __DIR__ . '/maintenance/rebuildTermsSearchKey.php',
 	'Wikibase\\RepoHooks' => __DIR__ . '/RepoHooks.php',
+	'Wikibase\\Repo\\FederatedProperties\\ApiEntitySearchHelper' => __DIR__ . '/includes/FederatedProperties/ApiEntitySearchHelper.php',
 	'Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId' => __DIR__ . '/maintenance/populateTermFullEntityId.php',
 	'Wikibase\\Repo\\Maintenance\\RebuildItemsPerSite' => __DIR__ . '/maintenance/rebuildItemsPerSite.php',
 	'Wikibase\\Repo\\Maintenance\\RemoveTermsInLanguage' => __DIR__ . '/maintenance/removeTermsInLanguage.php',
