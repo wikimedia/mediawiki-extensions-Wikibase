@@ -37,6 +37,12 @@ export default class ProcessDialogHeader extends Vue {}
 	box-sizing: border-box;
 	border-bottom: $header-border-width solid $wmui-color-base70;
 
+	@media ( max-width: $breakpoint ) {
+		// on mobile, surrounding OOUI window border is gone,
+		// so add our own border-top
+		border-top: $header-border-width solid $wmui-color-base70;
+	}
+
 	&__title {
 		display: inline-flex;
 		align-items: center;
