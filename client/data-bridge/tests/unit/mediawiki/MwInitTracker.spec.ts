@@ -1,6 +1,6 @@
 import MwInitTracker from '@/mediawiki/MwInitTracker';
 
-describe( 'InitTracker', () => {
+describe( 'MwInitTracker', () => {
 
 	it( 'tracks a given propertyDataType', () => {
 		const tracker = {
