@@ -25,6 +25,7 @@ import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRe
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import RepoRouter from '@/data-access/RepoRouter';
 import ApiPurge from '@/data-access/ApiPurge';
+import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 const manager = jest.fn();
 const dialog = {
@@ -108,7 +109,10 @@ describe( 'init', () => {
 		) );
 		expectedServices.set( 'wikibaseRepoConfigRepository', new ApiRepoConfigRepository( repoApi ) );
 		expectedServices.set( 'tracker', new DataBridgeTrackerService(
-			new EventTracker( window.mw.track ),
+			new PrefixingEventTracker(
+				new EventTracker( window.mw.track ),
+				'MediaWiki.wikibase.client.databridge',
+			),
 		) );
 		expectedServices.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 			new ApiPageEditPermissionErrorsRepository( repoApi ),

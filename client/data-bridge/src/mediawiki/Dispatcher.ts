@@ -4,6 +4,7 @@ import AppBridge from '@/definitions/AppBridge';
 import prepareContainer from '@/mediawiki/prepareContainer';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 import subscribeToEvents from '@/mediawiki/subscribeToEvents';
+import Tracker from '@/definitions/Tracker';
 
 export default class Dispatcher {
 	public static readonly APP_DOM_CONTAINER_ID = 'data-bridge-container';
@@ -11,11 +12,18 @@ export default class Dispatcher {
 	private readonly mwWindow: MwWindow;
 	private readonly app: AppBridge;
 	private readonly dataBridgeConfig: DataBridgeConfig;
+	private readonly eventTracker: Tracker;
 
-	public constructor( mwWindow: MwWindow, app: AppBridge, dataBridgeConfig: DataBridgeConfig ) {
+	public constructor(
+		mwWindow: MwWindow,
+		app: AppBridge,
+		dataBridgeConfig: DataBridgeConfig,
+		eventTracker: Tracker,
+	) {
 		this.mwWindow = mwWindow;
 		this.app = app;
 		this.dataBridgeConfig = dataBridgeConfig;
+		this.eventTracker = eventTracker;
 	}
 
 	public dispatch( selectedElement: SelectedElement ): void {
@@ -39,6 +47,7 @@ export default class Dispatcher {
 			this.app.createServices(
 				this.mwWindow,
 				this.dataBridgeConfig.editTags,
+				this.eventTracker,
 			), // should be made caching when used repeatedly
 		);
 

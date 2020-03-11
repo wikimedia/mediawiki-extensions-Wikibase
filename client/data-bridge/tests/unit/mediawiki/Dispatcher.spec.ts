@@ -4,6 +4,7 @@ import AppBridge from '@/definitions/AppBridge';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
 import { mockMwConfig } from '../../util/mocks';
+import Tracker from '@/definitions/Tracker';
 
 const manager = jest.fn();
 const dialog = {
@@ -29,6 +30,7 @@ describe( 'Dispatcher', () => {
 			{} as MwWindow,
 			{} as AppBridge,
 			{} as DataBridgeConfig,
+			{} as Tracker,
 		);
 		expect( dispatcher ).toBeInstanceOf( Dispatcher );
 	} );
@@ -49,6 +51,7 @@ describe( 'Dispatcher', () => {
 					createServices: jest.fn(),
 				},
 				{ usePublish: false } as DataBridgeConfig,
+				{} as Tracker,
 			);
 
 			dispatcher.dispatch( { link: { href: '' } } as any );
@@ -75,11 +78,13 @@ describe( 'Dispatcher', () => {
 			const entityTitle = entityId;
 			const editFlow = EditFlow.OVERWRITE;
 			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
+			const tracker = {} as Tracker;
 
 			const dispatcher = new Dispatcher(
 				mwWindow as MwWindow,
 				app as any,
 				{ usePublish, editTags } as DataBridgeConfig,
+				tracker,
 			);
 
 			dispatcher.dispatch( {
@@ -90,7 +95,7 @@ describe( 'Dispatcher', () => {
 				editFlow,
 			} );
 
-			expect( app.createServices ).toHaveBeenCalledWith( mwWindow, editTags );
+			expect( app.createServices ).toHaveBeenCalledWith( mwWindow, editTags, tracker );
 			expect( app.launch ).toHaveBeenCalledWith(
 				{
 					containerSelector: `#${Dispatcher.APP_DOM_CONTAINER_ID}`,

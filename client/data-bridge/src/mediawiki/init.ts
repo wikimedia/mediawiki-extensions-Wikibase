@@ -4,6 +4,7 @@ import { SelectedElement } from '@/mediawiki/SelectedElement';
 import Dispatcher from '@/mediawiki/Dispatcher';
 import EventTracker from '@/mediawiki/facades/EventTracker';
 import MwInitTracker from '@/mediawiki/MwInitTracker';
+import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 const APP_MODULE = 'wikibase.client.data-bridge.app';
 const WBREPO_MODULE = 'mw.config.values.wbRepo';
@@ -29,6 +30,10 @@ export default async (): Promise<void> => {
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
 	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
 	if ( linksToOverload.length > 0 ) {
+		const eventTracker = new PrefixingEventTracker(
+			new EventTracker( mwWindow.mw.track ),
+			'MediaWiki.wikibase.client.databridge',
+		);
 		const dispatcherPromise = mwWindow.mw.loader.using( [
 			APP_MODULE,
 			WBREPO_MODULE,
@@ -38,9 +43,9 @@ export default async (): Promise<void> => {
 			MWLANGUAGE_MODULE,
 		] ).then( ( require ) => {
 			const app = require( APP_MODULE );
-			return new Dispatcher( mwWindow, app, dataBridgeConfig );
+			return new Dispatcher( mwWindow, app, dataBridgeConfig, eventTracker );
 		} );
-		const initTracker = new MwInitTracker( new EventTracker( mwWindow.mw.track ), window.performance );
+		const initTracker = new MwInitTracker( eventTracker, window.performance );
 
 		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
 			let isOpening = false;

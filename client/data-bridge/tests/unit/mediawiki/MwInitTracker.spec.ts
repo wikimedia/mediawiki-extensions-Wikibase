@@ -19,7 +19,7 @@ describe( 'MwInitTracker', () => {
 
 		expect( performanceMock.getEntriesByName ).toHaveBeenCalledWith( 'mwStartup' );
 		expect( tracker.recordTiming ).toHaveBeenCalledWith(
-			'MediaWiki.wikibase.client.databridge.timeToLinkListenersAttached',
+			'timeToLinkListenersAttached',
 			timeLinkListenersAttached - mwStartupTime,
 		);
 	} );
@@ -44,7 +44,7 @@ describe( 'MwInitTracker', () => {
 		finishTracker();
 		expect( performanceMock.now ).toHaveBeenCalledTimes( 2 );
 		expect( tracker.recordTiming ).toHaveBeenCalledWith(
-			'MediaWiki.wikibase.client.databridge.clickDelay',
+			'clickDelay',
 			timeAtBridgeOpening - timeAtClick,
 		);
 	} );

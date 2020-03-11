@@ -15,9 +15,7 @@ describe( 'DataBridgeTrackerService', () => {
 
 		service.trackPropertyDatatype( 'string' );
 
-		expect( tracker.increment ).toHaveBeenCalledWith(
-			'MediaWiki.wikibase.client.databridge.datatype.string',
-		);
+		expect( tracker.increment ).toHaveBeenCalledWith( 'datatype.string' );
 	} );
 
 	it( 'tracks a title purge error', () => {
@@ -26,8 +24,6 @@ describe( 'DataBridgeTrackerService', () => {
 
 		service.trackTitlePurgeError();
 
-		expect( tracker.increment ).toHaveBeenCalledWith(
-			'MediaWiki.wikibase.client.databridge.error.purge',
-		);
+		expect( tracker.increment ).toHaveBeenCalledWith( 'error.purge' );
 	} );
 } );

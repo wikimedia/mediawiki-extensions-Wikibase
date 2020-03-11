@@ -10,14 +10,18 @@ import RepoRouter from '@/data-access/RepoRouter';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
-import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import ApiPurge from '@/data-access/ApiPurge';
+import Tracker from '@/definitions/Tracker';
 
-export default function createServices( mwWindow: MwWindow, editTags: string[] ): ServiceContainer {
+export default function createServices(
+	mwWindow: MwWindow,
+	editTags: string[],
+	eventTracker: Tracker,
+): ServiceContainer {
 	const services = new ServiceContainer();
 
 	const
@@ -73,9 +77,7 @@ export default function createServices( mwWindow: MwWindow, editTags: string[] )
 		repoApi,
 	) );
 
-	services.set( 'tracker', new DataBridgeTrackerService(
-		new EventTracker( mwWindow.mw.track ),
-	) );
+	services.set( 'tracker', new DataBridgeTrackerService( eventTracker ) );
 
 	const clientApi = new ApiCore( clientMwApi );
 

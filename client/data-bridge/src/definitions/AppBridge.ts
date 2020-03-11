@@ -3,6 +3,7 @@ import AppConfiguration from '@/definitions/AppConfiguration';
 import AppInformation from '@/definitions/AppInformation';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
+import Tracker from '@/definitions/Tracker';
 
 export default interface AppBridge {
 	launch(
@@ -10,8 +11,10 @@ export default interface AppBridge {
 		info: AppInformation,
 		services: ServiceContainer
 	): EventEmitter;
+
 	createServices(
 		mwWindow: MwWindow,
 		editTags: string[],
+		eventTracker: Tracker,
 	): ServiceContainer;
 }

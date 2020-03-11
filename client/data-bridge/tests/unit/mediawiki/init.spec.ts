@@ -9,6 +9,8 @@ import Dispatcher from '@/mediawiki/Dispatcher';
 import { budge } from '../../util/timer';
 import MwInitTracker from '@/mediawiki/MwInitTracker';
 import EventTracker from '@/mediawiki/facades/EventTracker';
+import Tracker from '@/definitions/Tracker';
+import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 	return jest.fn().mockImplementation( () => {} );
@@ -17,6 +19,11 @@ jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {
 const mockEventTracker = {};
 jest.mock( '@/mediawiki/facades/EventTracker', () => {
 	return jest.fn().mockImplementation( () => mockEventTracker );
+} );
+
+const mockPrefixingEventTracker = {};
+jest.mock( '@/tracking/PrefixingEventTracker', function () {
+	return jest.fn().mockImplementation( () => mockPrefixingEventTracker );
 } );
 
 const mwInitTrackerClickDelayCallback = jest.fn();
@@ -104,7 +111,14 @@ describe( 'init', () => {
 		const initPromise = init();
 
 		expect( EventTracker ).toHaveBeenCalledWith( window.mw.track );
-		expect( MwInitTracker ).toHaveBeenCalledWith( mockEventTracker, window.performance );
+		expect( PrefixingEventTracker ).toHaveBeenCalledWith(
+			mockEventTracker,
+			'MediaWiki.wikibase.client.databridge',
+		);
+		expect( MwInitTracker ).toHaveBeenCalledWith(
+			mockPrefixingEventTracker,
+			window.performance,
+		);
 		expect( mockMwInitTracker.recordTimeToLinkListenersAttached ).toHaveBeenCalled();
 
 		return initPromise.then( async () => {
@@ -117,7 +131,7 @@ describe( 'init', () => {
 			expect( mockMwInitTracker.startClickDelayTracker ).toHaveBeenCalled();
 			expect( mwInitTrackerClickDelayCallback ).toHaveBeenCalled();
 
-			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
+			expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig, mockPrefixingEventTracker );
 			expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		} );
 	} );
@@ -186,7 +200,8 @@ describe( 'init', () => {
 				hrefRegExp: '',
 				editTags: [],
 				usePublish: false,
-			};
+			},
+			tracker = {} as Tracker;
 		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
 
 		const selectedElement = {
@@ -222,7 +237,7 @@ describe( 'init', () => {
 		expect( event.stopPropagation ).toHaveBeenCalled();
 		resolveUsing!( require );
 		await budge();
-		expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig );
+		expect( Dispatcher ).toHaveBeenCalledWith( window, app, dataBridgeConfig, tracker );
 		expect( Dispatcher ).toHaveBeenCalledTimes( 1 );
 		expect( mockDispatcher.dispatch ).toHaveBeenCalledWith( selectedElement );
 		expect( mockDispatcher.dispatch ).toHaveBeenCalledTimes( 1 );
