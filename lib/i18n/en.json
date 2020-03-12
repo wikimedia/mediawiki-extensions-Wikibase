@@ -186,5 +186,8 @@
 	"wikibase-property-summary-wbeditentity-update": "Changed a Property",
 	"wikibase-property-summary-wbeditentity-override": "Cleared a Property",
 	"wikibase-property-summary-special-create-property": "Created a [$2] Property with {{PLURAL:$1|value|values}}",
+	"wikibase-reference-formatter-snak-separator": ".&#32;",
+	"wikibase-reference-formatter-snak-terminator": ".",
+	"wikibase-reference-formatter-snak-retrieved": "Retrieved $1",
 	"wikibase-SortedProperties": ""
 }
