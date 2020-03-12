@@ -2,18 +2,14 @@ const filePrefix = 'data-bridge.';
 const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
 
 /**
- * In production vue is provided by ResourceLoader,
- * in dev it is still webpack's job to make it available
+ * In production libraries may be provided by ResourceLoader
+ * to allow their caching across applications,
+ * in dev it is still webpack's job to make them available
  */
-function vueExternal() {
-	return DEV_MODE ? {} : {
-		vue: {
-			commonjs: 'vue2',
-			commonjs2: 'vue2',
-			amd: 'vue2',
-			root: 'vue2',
-		},
-	};
+function externals() {
+	return DEV_MODE ? [] : [
+		'vue',
+	];
 }
 
 module.exports = {
@@ -25,7 +21,7 @@ module.exports = {
 			app: './src/main.ts',
 			init: './src/mediawiki/data-bridge.init.ts',
 		},
-		externals: [ vueExternal() ],
+		externals: externals(),
 	} ),
 	chainWebpack: ( config ) => {
 		config.optimization.delete( 'splitChunks' );
