@@ -145,7 +145,7 @@ abstract class PageTableEntityQueryBase implements PageTableEntityQuery {
 	abstract protected function getConditionForEntityId( EntityId $entityId );
 
 	/**
-	 * @param object $row
+	 * @param stdClass $row
 	 * @return string serialization of an entity ID for example Q123
 	 */
 	abstract protected function getEntityIdStringFromRow( stdClass $row );

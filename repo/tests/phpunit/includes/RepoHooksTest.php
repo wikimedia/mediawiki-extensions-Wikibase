@@ -14,7 +14,6 @@ use ParserOptions;
 use ParserOutput;
 use RequestContext;
 use SkinTemplate;
-use stdClass;
 use Title;
 use TitleValue;
 use Wikibase\Lib\SettingsArray;
@@ -193,7 +192,7 @@ class RepoHooksTest extends MediaWikiTestCase {
 		$expectedException = null
 	) {
 		//NOTE: class is unclear, see Bug T66657. But we don't use that object anyway.
-		$importer = new stdClass();
+		$importer = (object)[];
 
 		$this->getSettings()->setSetting( 'allowEntityImport', $allowEntityImport );
 

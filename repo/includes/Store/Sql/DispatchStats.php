@@ -13,17 +13,17 @@ namespace Wikibase\Repo\Store\Sql;
 class DispatchStats {
 
 	/**
-	 * @var object[]|null
+	 * @var \stdClass[]|null
 	 */
 	private $clientStates = null;
 
 	/**
-	 * @var object|null
+	 * @var \stdClass|null
 	 */
 	private $changeStats = null;
 
 	/**
-	 * @var object|null
+	 * @var \stdClass|null
 	 */
 	private $average = null;
 
@@ -77,10 +77,11 @@ class DispatchStats {
 			]
 		);
 
-		$this->average = new \stdClass();
-		$this->average->chd_untouched = 0;
-		$this->average->chd_pending = 0;
-		$this->average->chd_lag = 0;
+		$this->average = (object)[
+			'chd_untouched' => 0,
+			'chd_pending' => 0,
+			'chd_lag' => 0,
+		];
 
 		$this->clientStates = [];
 
@@ -153,7 +154,7 @@ class DispatchStats {
 	 *            determined, but the lag is large.
 	 * * chd_lock: the name of the lock currently in effect for that wiki
 	 *
-	 * @return object[]|null A list of objects representing the dispatch state
+	 * @return \stdClass[]|null A list of objects representing the dispatch state
 	 *         for each client wiki.
 	 */
 	public function getClientStates() {
@@ -175,7 +176,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return object|null
+	 * @return \stdClass|null
 	 */
 	public function getFreshest() {
 		return $this->clientStates ? end( $this->clientStates ) : null;
@@ -187,7 +188,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return object|null
+	 * @return \stdClass|null
 	 */
 	public function getStalest() {
 		return $this->clientStates ? reset( $this->clientStates ) : null;
@@ -199,7 +200,7 @@ class DispatchStats {
 	 *
 	 * See getClientStates() for the structure of the status object.
 	 *
-	 * @return object|null
+	 * @return \stdClass|null
 	 */
 	public function getMedian() {
 		if ( empty( $this->clientStates ) ) {
@@ -221,7 +222,7 @@ class DispatchStats {
 	 *            have already been pruned. This indicates that the average could not be
 	 *            determined, but the lag is large.
 	 *
-	 * @return object
+	 * @return \stdClass
 	 */
 	public function getAverage() {
 		return $this->average;

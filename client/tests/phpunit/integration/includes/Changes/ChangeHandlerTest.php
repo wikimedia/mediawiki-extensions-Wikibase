@@ -156,9 +156,10 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 	 * @dataProvider provideHandleChanges
 	 */
 	public function testHandleChanges( ...$changes ) {
-		$spy = new \stdClass();
-		$spy->handleChangeCallCount = 0;
-		$spy->handleChangesCallCount = 0;
+		$spy = (object)[
+			'handleChangeCallCount' => 0,
+			'handleChangesCallCount' => 0,
+		];
 
 		$testHooks = [
 			'WikibaseHandleChange' => [ function( Change $change ) use ( $spy ) {

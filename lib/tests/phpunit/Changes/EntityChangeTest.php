@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Changes;
 use MWException;
 use RecentChange;
 use Revision;
-use stdClass;
 use Title;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikimedia\TestingAccessWrapper;
@@ -136,20 +135,21 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testSetMetadataFromRC() {
 		$timestamp = '20140523' . '174422';
 
-		$row = new stdClass();
-		$row->rc_last_oldid = 3;
-		$row->rc_this_oldid = 5;
-		$row->rc_user = 7;
-		$row->rc_user_text = 'Mr. Kittens';
-		$row->rc_timestamp = $timestamp;
-		$row->rc_cur_id = 6;
-		$row->rc_bot = 1;
-		$row->rc_deleted = 0;
-		// The faked-up RecentChange row needs to have the proper fields for
-		// MediaWiki core change Ic3a434c0.
-		$row->rc_comment = 'Test!';
-		$row->rc_comment_text = 'Test!';
-		$row->rc_comment_data = null;
+		$row = (object)[
+			'rc_last_oldid' => 3,
+			'rc_this_oldid' => 5,
+			'rc_user' => 7,
+			'rc_user_text' => 'Mr. Kittens',
+			'rc_timestamp' => $timestamp,
+			'rc_cur_id' => 6,
+			'rc_bot' => 1,
+			'rc_deleted' => 0,
+			// The faked-up RecentChange row needs to have the proper fields for
+			// MediaWiki core change Ic3a434c0.
+			'rc_comment' => 'Test!',
+			'rc_comment_text' => 'Test!',
+			'rc_comment_data' => null,
+		];
 
 		$rc = RecentChange::newFromRow( $row );
 
@@ -337,7 +337,7 @@ class EntityChangeTest extends ChangeRowTest {
 	}
 
 	public function testDoesNotSerializeObjects() {
-		$info = [ 'array' => [ 'object' => new stdClass() ] ];
+		$info = [ 'array' => [ 'object' => (object)[] ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
 		$this->expectException( MWException::class );
 		$change->getSerializedInfo();
