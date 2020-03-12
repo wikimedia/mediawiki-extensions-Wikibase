@@ -117,6 +117,8 @@ class WikibaseContentLanguages {
 					'moe', // T151129
 					'non', // T137115
 					'nr', // T155430
+					'nrf-gg', // T165648
+					'nrf-je', // T165648
 					'nxm', // T167745
 					'ood', // T155423
 					'otk', // T137809
