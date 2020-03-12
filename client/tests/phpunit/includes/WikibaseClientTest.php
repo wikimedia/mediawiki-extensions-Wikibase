@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests;
 
+use MediaWiki\Http\HttpRequestFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -101,7 +102,16 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->setService(
 			'HttpRequestFactory',
 			function() {
-				$this->fail( 'Service getters must not access HttpRequestFactory.' );
+				$factory = $this->createMock( HttpRequestFactory::class );
+				$factory->expects( $this->never() )
+					->method( 'create' );
+				$factory->expects( $this->never() )
+					->method( 'request' );
+				$factory->expects( $this->never() )
+					->method( 'get' );
+				$factory->expects( $this->never() )
+					->method( 'post' );
+				return $factory;
 			}
 		);
 	}
