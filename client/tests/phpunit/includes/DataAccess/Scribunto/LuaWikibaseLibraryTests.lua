@@ -267,6 +267,10 @@ local tests = {
 	  args = { 'Q32487', 'blahblahblah' },
 	  expect = { nil }
 	},
+	{ name = 'mw.wikibase.getLabelByLang (invalid lang)', func = mw.wikibase.getLabelByLang, type='ToString',
+	  args = { 'Q32487', ':!/<>' },
+	  expect = { nil }
+	},
 	{ name = 'mw.wikibase.getLabelByLang (no label)', func = mw.wikibase.getLabelByLang, type='ToString',
 	  args = { 'Q32488', 'de' },
 	  expect = { nil }
