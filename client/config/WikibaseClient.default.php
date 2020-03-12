@@ -130,6 +130,18 @@ return call_user_func( function() {
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified
 		# 'dataBridgeHrefRegExp' => '^http://localhost/index\.php/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$',
 
+		// IDs of some well-known properties used to format references
+		'wellKnownReferencePropertyIds' => [
+			// (note: keys are not arbitrary, the software knows exactly these and no others)
+			'referenceUrl' => null,
+			'title' => null,
+			'statedIn' => null,
+			'author' => null,
+			'publisher' => null,
+			'publicationDate' => null,
+			'retrievedDate' => null,
+		],
+
 		/**
 		 * @note This config option is primarily added for Wikidata transition use-case and can be
 		 * considered temporary. It could be removed in the future with no warning.

@@ -844,6 +844,17 @@ Batch size for adding entity usage records.
 
 DEFAULT: ```500```
 
+#### wellKnownReferencePropertyIds
+Associative array mapping certain well-known property roles to the IDs of the properties fulfilling those roles.
+
+When formatting references (currently, only for Data Bridge), a few properties are treated specially.
+In this setting, those can be specified:
+the keys `referenceUrl`, `title`, `statedIn`, `author`, `publisher`, `publicationDate` and `retrievedDate`
+correspond to the Wikidata properties [reference URL], [title], [stated in], [author], [publisher], [publication date] and [retrieved] respectively.
+Each property is optional.
+
+DEFAULT: array mapping each well-known name to `null`.
+
 [$wgDBname]: https://www.mediawiki.org/wiki/Manual:$wgDBname
 [$wgMainCacheType]: https://www.mediawiki.org/wiki/Manual:$wgMainCacheType
 [$wgMaxArticleSize]: https://www.mediawiki.org/wiki/Manual:$wgMaxArticleSize
@@ -879,3 +890,10 @@ DEFAULT: ```500```
 [siteGlobalID]: #client_siteGlobalID
 [wb_terms]: @ref md_docs_sql_wb_terms
 [wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
+[reference URL]: https://www.wikidata.org/wiki/Property:P854
+[title]: https://www.wikidata.org/wiki/Property:P1476
+[stated in]: https://www.wikidata.org/wiki/Property:P248
+[author]: https://www.wikidata.org/wiki/Property:P50
+[publisher]: https://www.wikidata.org/wiki/Property:P123
+[publication date]: https://www.wikidata.org/wiki/Property:P577
+[retrieved]: https://www.wikidata.org/wiki/Property:P813
