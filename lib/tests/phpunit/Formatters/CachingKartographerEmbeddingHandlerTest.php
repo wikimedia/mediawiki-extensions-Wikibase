@@ -122,7 +122,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$this->assertNotFalse( $out->getProperty( 'kartographer' ) );
 		$this->assertNotFalse( $out->getProperty( 'kartographer_frames' ) );
 
-		$this->assertCount( 2, (array)$out->getJsConfigVars()['wgKartographerLiveData'] );
+		$this->assertCount( 2, $out->getJsConfigVars()['wgKartographerLiveData'] );
 		$this->assertNotEmpty( $out->getModules() );
 	}
 

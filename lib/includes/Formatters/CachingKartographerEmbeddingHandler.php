@@ -85,7 +85,7 @@ class CachingKartographerEmbeddingHandler {
 		$html .= $this->getMapframeInitJS(
 			$containerDivId,
 			$out->getModules(),
-			(array)$out->getJsConfigVars()['wgKartographerLiveData']
+			(array)( $out->getJsConfigVars()['wgKartographerLiveData'] ?? [] )
 		);
 
 		return $html;
