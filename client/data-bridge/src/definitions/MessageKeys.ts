@@ -40,6 +40,8 @@ enum MessageKeys {
 	SOMEVALUE_ERROR_BODY = 'wikibase-client-data-bridge-somevalue-error-body',
 	NOVALUE_ERROR_HEAD = 'wikibase-client-data-bridge-novalue-error-head',
 	NOVALUE_ERROR_BODY = 'wikibase-client-data-bridge-novalue-error-body',
+	LICENSE_HEADING = 'wikibase-client-data-bridge-license-heading',
+	LICENSE_BODY = 'wikibase-client-data-bridge-license-body',
 }
 
 export default MessageKeys;
