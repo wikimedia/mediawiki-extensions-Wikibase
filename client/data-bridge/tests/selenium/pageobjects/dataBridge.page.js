@@ -44,6 +44,14 @@ class DataBridgePage extends Page {
 		return '.wb-db-property-label';
 	}
 
+	static get LICENSE_POPUP() {
+		return '.wb-db-license';
+	}
+
+	static get LICENSE_CANCEL_BUTTON() {
+		return `${DataBridgePage.LICENSE_POPUP} .wb-db-license__button a`;
+	}
+
 	static get REFERENCES_SECTION() {
 		return '.wb-db-references';
 	}
@@ -116,6 +124,18 @@ class DataBridgePage extends Page {
 	get saveButton() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.SAVE}`
+		);
+	}
+
+	get licensePopup() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.LICENSE_POPUP}`
+		);
+	}
+
+	get licenseCancelButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.LICENSE_CANCEL_BUTTON}`
 		);
 	}
 

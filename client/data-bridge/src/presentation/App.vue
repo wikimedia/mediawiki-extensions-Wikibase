@@ -34,8 +34,13 @@
 				:is-initializing="isInitializing"
 				:is-saving="isSaving"
 			>
+				<div class="wb-db-app__license" v-if="licenseIsVisible">
+					<License
+						@cancel="dismissLicense"
+					/>
+				</div>
 				<DataBridge
-					:class="[ 'wb-db-app__data-bridge', isSaving ? 'wb-db-app__data-bridge--overlayed' : '' ]"
+					:class="[ 'wb-db-app__data-bridge', isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]"
 				/>
 			</Loading>
 		</div>
@@ -54,9 +59,11 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';
+import License from '@/presentation/components/License.vue';
 
 @Component( {
 	components: {
+		License,
 		DataBridge,
 		ErrorWrapper,
 		Loading,
@@ -65,6 +72,8 @@ import TermLabel from '@/presentation/components/TermLabel.vue';
 	},
 } )
 export default class App extends mixins( StateMixin ) {
+	public licenseIsVisible = false;
+
 	public get title(): string {
 		return this.$messages.get(
 			this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
@@ -74,6 +83,10 @@ export default class App extends mixins( StateMixin ) {
 				},
 			} ).$mount().$el as HTMLElement,
 		);
+	}
+
+	public get isOverlayed(): boolean {
+		return this.isSaving || this.licenseIsVisible;
 	}
 
 	public get isSaving(): boolean {
@@ -97,7 +110,18 @@ export default class App extends mixins( StateMixin ) {
 			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
+	public dismissLicense(): void {
+		this.licenseIsVisible = false;
+	}
+
 	public save(): void {
+		if ( !this.licenseIsVisible ) {
+			this.licenseIsVisible = true;
+			return;
+		}
+
+		this.licenseIsVisible = false;
+
 		this.rootModule.dispatch( 'saveBridge' )
 			.then( () => {
 				this.$emit( Events.onSaved );
@@ -137,6 +161,14 @@ export default class App extends mixins( StateMixin ) {
 		bottom: 0;
 		overflow-x: hidden;
 		overflow-y: auto;
+	}
+
+	&__license {
+		position: absolute;
+		width: 100%;
+		background: #fff;
+		box-shadow: $box-shadow-dialog;
+		z-index: $stacking-height-license;
 	}
 
 	@media ( max-width: $breakpoint ) {

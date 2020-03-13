@@ -279,6 +279,10 @@ describe( 'app', () => {
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
 			expect( save ).not.toBeNull();
 
+			// showing the license
+			save!.click();
+			await budge();
+
 			return save as HTMLElement;
 		}
 
@@ -492,6 +496,11 @@ describe( 'app', () => {
 			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
 			await selectRadioInput( replaceInputDecision as HTMLInputElement );
 
+			// showing the license
+			save!.click();
+			await budge();
+
+			// actually triggering save
 			save!.click();
 			await budge();
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
@@ -545,8 +554,13 @@ describe( 'app', () => {
 			const save = select(
 				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
 			);
-			save!.click();
 
+			// showing the license
+			save!.click();
+			await budge();
+
+			// actually triggering save
+			save!.click();
 			await budge();
 
 			const inputAfterSave = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );

@@ -105,6 +105,12 @@ describe( 'App', () => {
 
 		DataBridgePage.editDecision( 'replace' ).click();
 
+		// show License
+		DataBridgePage.saveButton.click();
+
+		DataBridgePage.licensePopup.waitForDisplayed();
+
+		// actually trigger save
 		DataBridgePage.saveButton.click();
 
 		DataBridgePage.app.waitForDisplayed(
@@ -169,6 +175,18 @@ describe( 'App', () => {
 
 		DataBridgePage.editDecision( 'update' ).click();
 
+		// show License
+		DataBridgePage.saveButton.click();
+		DataBridgePage.licensePopup.waitForDisplayed();
+
+		DataBridgePage.licenseCancelButton.click();
+		DataBridgePage.licensePopup.waitForDisplayed( null, true, 'License still visible after being dismissed' );
+
+		// show License again
+		DataBridgePage.saveButton.click();
+		DataBridgePage.licensePopup.waitForDisplayed();
+
+		// actually trigger save
 		DataBridgePage.saveButton.click();
 
 		DataBridgePage.app.waitForDisplayed(
