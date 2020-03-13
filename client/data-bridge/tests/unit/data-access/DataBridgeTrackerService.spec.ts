@@ -1,5 +1,5 @@
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 function getMockTracker(): Tracker {
 	return {

@@ -9,7 +9,7 @@ import Dispatcher from '@/mediawiki/Dispatcher';
 import { budge } from '../../util/timer';
 import MwInitTracker from '@/mediawiki/MwInitTracker';
 import EventTracker from '@/mediawiki/facades/EventTracker';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 jest.mock( '@/mediawiki/BridgeDomElementsSelector', function () {

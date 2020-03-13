@@ -1,4 +1,4 @@
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 
 export default class DataBridgeTrackerService implements BridgeTracker {

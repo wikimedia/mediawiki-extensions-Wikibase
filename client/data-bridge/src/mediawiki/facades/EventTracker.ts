@@ -1,5 +1,5 @@
 import { MwTracker } from '@/@types/mediawiki/MwWindow';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 export default class EventTracker implements Tracker {
 	private readonly tracker: MwTracker;

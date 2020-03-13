@@ -1,4 +1,4 @@
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
 
 function newMockTracker(): Tracker {

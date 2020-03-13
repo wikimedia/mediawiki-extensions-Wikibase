@@ -4,7 +4,7 @@ import AppBridge from '@/definitions/AppBridge';
 import prepareContainer from '@/mediawiki/prepareContainer';
 import { SelectedElement } from '@/mediawiki/SelectedElement';
 import subscribeToEvents from '@/mediawiki/subscribeToEvents';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 export default class Dispatcher {
 	public static readonly APP_DOM_CONTAINER_ID = 'data-bridge-container';

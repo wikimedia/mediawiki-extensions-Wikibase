@@ -1,4 +1,4 @@
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 export default class MwInitTracker {
 	private readonly tracker: Tracker;

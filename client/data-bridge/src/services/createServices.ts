@@ -15,7 +15,7 @@ import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import ApiPurge from '@/data-access/ApiPurge';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 export default function createServices(
 	mwWindow: MwWindow,

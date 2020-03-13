@@ -1,4 +1,4 @@
-import Tracker from '@/definitions/Tracker';
+import Tracker from './Tracker';
 
 export default class PrefixingEventTracker implements Tracker {
 	private readonly tracker: Tracker;

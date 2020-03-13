@@ -17,7 +17,7 @@ import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRe
 import RepoRouter from '@/data-access/RepoRouter';
 import ClientRouter from '@/data-access/ClientRouter';
 import ApiPurge from '@/data-access/ApiPurge';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {

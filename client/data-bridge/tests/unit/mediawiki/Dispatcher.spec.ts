@@ -4,7 +4,7 @@ import AppBridge from '@/definitions/AppBridge';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridgeConfig from '@/@types/wikibase/DataBridgeConfig';
 import { mockMwConfig } from '../../util/mocks';
-import Tracker from '@/definitions/Tracker';
+import Tracker from '@/tracking/Tracker';
 
 const manager = jest.fn();
 const dialog = {
