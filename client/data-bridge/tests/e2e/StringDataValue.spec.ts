@@ -220,7 +220,7 @@ describe( 'string data value', () => {
 				addPageInfoNoEditRestrictionsResponse(
 					DEFAULT_ENTITY,
 					addSiteinfoRestrictionsResponse(
-						addDataBridgeConfigResponse( null, {
+						addDataBridgeConfigResponse( {}, {
 							entities: {
 								[ propertyId ]: {
 									id: propertyId,
