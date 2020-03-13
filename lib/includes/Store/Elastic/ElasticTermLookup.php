@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\TermIndexEntry;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 
 /**
@@ -144,10 +144,10 @@ class ElasticTermLookup implements PrefetchingTermLookup {
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
 		try {
 			switch ( $termType ) {
-				case TermIndexEntry::TYPE_LABEL:
+				case TermTypes::TYPE_LABEL:
 					$result = $this->getTerms( 'labels', $entityId, [ $languageCode ], true );
 					break;
-				case TermIndexEntry::TYPE_DESCRIPTION:
+				case TermTypes::TYPE_DESCRIPTION:
 					$result = $this->getTerms( 'descriptions', $entityId, [ $languageCode ], true );
 					break;
 				default:

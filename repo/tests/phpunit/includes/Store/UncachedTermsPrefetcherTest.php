@@ -8,6 +8,7 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\TermCacheKeyBuilder;
 use Wikibase\Lib\Store\UncachedTermsPrefetcher;
@@ -46,16 +47,16 @@ class UncachedTermsPrefetcherTest extends TestCase {
 
 	public function testGivenAllTermsAreCached_doesNotPrefetch() {
 		$cache = new FakeCache();
-		$cache->set( $this->buildTestCacheKey( 'Q123', 'label' ), 'some label' );
+		$cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL ), 'some label' );
 		$this->prefetchingLookup->expects( $this->never() )->method( $this->anything() );
 
 		$this->newTermsPrefetcher()
-			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ 'label' ], [ 'en' ] );
+			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 	}
 
 	public function testGivenNothingCached_prefetchesAndCaches() {
 		$cache = new FakeCache();
-		$termTypes = [ 'label', 'description' ];
+		$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 		$languages = [ 'en' ];
 		$q123 = new ItemId( 'Q123' );
 		$q123Label = 'meow';
@@ -70,10 +71,10 @@ class UncachedTermsPrefetcherTest extends TestCase {
 		$this->prefetchingLookup->expects( $this->any() )
 			->method( 'getPrefetchedTerm' )
 			->withConsecutive(
-				[ $q123, 'label', $languages[0] ],
-				[ $q123, 'description', $languages[0] ],
-				[ $q321, 'label', $languages[0] ],
-				[ $q321, 'description', $languages[0] ]
+				[ $q123, TermTypes::TYPE_LABEL, $languages[0] ],
+				[ $q123, TermTypes::TYPE_DESCRIPTION, $languages[0] ],
+				[ $q321, TermTypes::TYPE_LABEL, $languages[0] ],
+				[ $q321, TermTypes::TYPE_DESCRIPTION, $languages[0] ]
 			)
 			->willReturnOnConsecutiveCalls(
 				$q123Label,
@@ -87,19 +88,19 @@ class UncachedTermsPrefetcherTest extends TestCase {
 
 		$this->assertSame(
 			$q123Label,
-			$cache->get( $this->buildTestCacheKey( 'Q123', 'label' ) )
+			$cache->get( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL ) )
 		);
 		$this->assertSame(
 			$q123Description,
-			$cache->get( $this->buildTestCacheKey( 'Q123', 'description' ) )
+			$cache->get( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_DESCRIPTION ) )
 		);
 		$this->assertSame(
 			$q321Label,
-			$cache->get( $this->buildTestCacheKey( 'Q321', 'label' ) )
+			$cache->get( $this->buildTestCacheKey( 'Q321', TermTypes::TYPE_LABEL ) )
 		);
 		$this->assertSame(
 			$q321Description,
-			$cache->get( $this->buildTestCacheKey( 'Q321', 'description' ) )
+			$cache->get( $this->buildTestCacheKey( 'Q321', TermTypes::TYPE_DESCRIPTION ) )
 		);
 	}
 
@@ -108,9 +109,9 @@ class UncachedTermsPrefetcherTest extends TestCase {
 		$cachedItemId = new ItemId( 'Q123' );
 		$uncachedItemId = new ItemId( 'Q321' );
 		$languages = [ 'en' ];
-		$termTypes = [ 'label' ];
+		$termTypes = [ TermTypes::TYPE_LABEL ];
 
-		$cache->set( $this->buildTestCacheKey( 'Q123', 'label' ), 'whatever' );
+		$cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL ), 'whatever' );
 
 		$this->prefetchingLookup->expects( $this->once() )
 			->method( 'prefetchTerms' )
@@ -129,7 +130,7 @@ class UncachedTermsPrefetcherTest extends TestCase {
 			->with( $this->anything(), 123 );
 
 		$this->newTermsPrefetcher()
-			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ 'label' ], [ 'en' ] );
+			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 	}
 
 	public function testGivenNoTTL_usesOneMinuteTTL() {
@@ -139,7 +140,7 @@ class UncachedTermsPrefetcherTest extends TestCase {
 			->with( $this->anything(), 60 );
 
 		$this->newTermsPrefetcher()
-			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ 'label' ], [ 'en' ] );
+			->prefetchUncached( $cache, [ new ItemId( 'Q123' ) ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 	}
 
 	private function newTermsPrefetcher() {

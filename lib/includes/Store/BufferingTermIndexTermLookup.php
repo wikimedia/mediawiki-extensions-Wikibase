@@ -6,6 +6,7 @@ use MapCacheLRU;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\TermIndexEntry;
 
 /**
@@ -202,7 +203,7 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 *         or null if the term was not yet requested via prefetchTerms().
 	 */
 	public function getPrefetchedTerm( EntityId $entityId, $termType, $languageCode ) {
-		if ( $termType === 'alias' ) {
+		if ( $termType === TermTypes::TYPE_ALIAS ) {
 			return $this->getPrefetchedAliases( $entityId, $languageCode );
 		}
 		$key = $this->getBufferKey( $entityId, $termType, $languageCode );
@@ -339,7 +340,7 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	 * @inheritDoc
 	 */
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
-		$key = $this->getBufferKey( $entityId, 'alias', $languageCode );
+		$key = $this->getBufferKey( $entityId, TermTypes::TYPE_ALIAS, $languageCode );
 		$buffered = $this->buffer->get( $key );
 		if ( $buffered !== null && $buffered !== false ) {
 			return json_decode( $buffered );

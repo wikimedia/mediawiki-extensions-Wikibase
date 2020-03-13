@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTermLookupBase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikimedia\Rdbms\IDatabase;
@@ -134,11 +135,11 @@ class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements Pref
 		if ( !( $entityId instanceof PropertyId ) ) {
 			throw new InvalidArgumentException( 'Not a PropertyId: ' . $serialization );
 		}
-		$key = $this->getKey( $entityId, 'alias', $languageCode );
+		$key = $this->getKey( $entityId, TermTypes::TYPE_ALIAS, $languageCode );
 		if ( !isset( $this->termKeys[$key] ) ) {
 			return null;
 		}
-		return $this->terms[$entityId->getNumericId()]['alias'][$languageCode] ?? false;
+		return $this->terms[$entityId->getNumericId()][TermTypes::TYPE_ALIAS][$languageCode] ?? false;
 	}
 
 	private function getKey(

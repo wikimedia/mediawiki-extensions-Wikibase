@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
 
 /**
@@ -61,23 +62,23 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		return $this->getCacheEntry( $entityId, 'label', $languageCode );
+		return $this->getCacheEntry( $entityId, TermTypes::TYPE_LABEL, $languageCode );
 	}
 
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
-		return $this->getMultipleTermsByLanguage( $entityId, 'label', $languageCodes );
+		return $this->getMultipleTermsByLanguage( $entityId, TermTypes::TYPE_LABEL, $languageCodes );
 	}
 
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		return $this->getCacheEntry( $entityId, 'description', $languageCode );
+		return $this->getCacheEntry( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
 	}
 
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
-		return $this->getMultipleTermsByLanguage( $entityId, 'description', $languageCodes );
+		return $this->getMultipleTermsByLanguage( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCodes );
 	}
 
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
-		return $this->getCacheEntry( $entityId, 'alias', $languageCode );
+		return $this->getCacheEntry( $entityId, TermTypes::TYPE_ALIAS, $languageCode );
 	}
 
 	private function getCacheKey( EntityId $id, string $language, string $termType ) {

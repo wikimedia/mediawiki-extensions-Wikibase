@@ -7,6 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
@@ -49,7 +50,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testPrefetchTerms() {
 		$entities = [ new ItemId( 'Q123' ), new ItemId( 'Q321' ) ];
-		$termTypes = [ 'label', 'description', 'alias' ];
+		$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ];
 		$languages = [ 'en', 'de' ];
 
 		$this->termsPrefetcher->expects( $this->once() )
@@ -62,7 +63,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testPrefetchTermsOnlyPrefetchesValidTermLanguages() {
 		$entities = [ new ItemId( 'Q123' ), new ItemId( 'Q321' ) ];
-		$termTypes = [ 'label', 'description', 'alias' ];
+		$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ];
 		$allLanguages = [ 'en', 'de', 'catlang' ];
 		$validTermLanguages = [ 'en', 'de' ];
 
@@ -78,34 +79,34 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetPrefetchedLabel() {
 		$label = 'meow';
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'label' ), $label );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL ), $label );
 
 		$this->assertSame(
 			$label,
 			$this->newPrefetchingTermLookup()
-				->getPrefetchedTerm( new ItemId( 'Q123' ), 'label', 'en' )
+				->getPrefetchedTerm( new ItemId( 'Q123' ), TermTypes::TYPE_LABEL, 'en' )
 		);
 	}
 
 	public function testGetPrefetchedDescription() {
 		$description = 'some description';
-		$this->cache->set( $this->buildTestCacheKey( 'Q789', 'description' ), $description );
+		$this->cache->set( $this->buildTestCacheKey( 'Q789', TermTypes::TYPE_DESCRIPTION ), $description );
 
 		$this->assertSame(
 			$description,
 			$this->newPrefetchingTermLookup()
-				->getPrefetchedTerm( new ItemId( 'Q789' ), 'description', 'en' )
+				->getPrefetchedTerm( new ItemId( 'Q789' ), TermTypes::TYPE_DESCRIPTION, 'en' )
 		);
 	}
 
 	public function testGetPrefetchedAlias() {
 		$aliases = [ 'foo', 'bar', 'baz' ];
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'alias' ), $aliases );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_ALIAS ), $aliases );
 
 		$this->assertSame(
 			$aliases[0],
 			$this->newPrefetchingTermLookup()
-				->getPrefetchedTerm( new ItemId( 'Q123' ), 'alias', 'en' )
+				->getPrefetchedTerm( new ItemId( 'Q123' ), TermTypes::TYPE_ALIAS, 'en' )
 		);
 	}
 
@@ -113,12 +114,12 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$this->cache = $this->newNeverCalledCache();
 
 		$this->assertNull( $this->newPrefetchingTermLookup()
-				->getPrefetchedTerm( new ItemId( 'Q123' ), 'label', 'language-that-doesnt-exist' ) );
+				->getPrefetchedTerm( new ItemId( 'Q123' ), TermTypes::TYPE_LABEL, 'language-that-doesnt-exist' ) );
 	}
 
 	public function testGetLabel() {
 		$label = 'meow';
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'label' ), $label );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL ), $label );
 
 		$this->assertSame(
 			$label,
@@ -137,7 +138,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetDescription() {
 		$description = 'some description';
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'description' ), $description );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_DESCRIPTION ), $description );
 
 		$this->assertSame(
 			$description,
@@ -156,7 +157,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetPrefetchedAliases() {
 		$aliases = [ 'foo', 'bar', 'baz' ];
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'alias' ), $aliases );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_ALIAS ), $aliases );
 
 		$this->assertSame(
 			$aliases,
@@ -174,8 +175,8 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 	}
 
 	public function testGetLabels() {
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'label', 'en' ), 'meow' );
-		$this->cache->set( $this->buildTestCacheKey( 'Q123', 'label', 'de' ), 'miau' );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL, 'en' ), 'meow' );
+		$this->cache->set( $this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL, 'de' ), 'miau' );
 
 		$this->assertEquals(
 			[ 'en' => 'meow', 'de' => 'miau' ],
@@ -187,7 +188,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$requestedLanguages = [ 'en', 'language-that-doesnt-exist' ];
 
 		$this->cache = $this->newMockCacheExpectingKey(
-			$this->buildTestCacheKey( 'Q123', 'label', 'en' )
+			$this->buildTestCacheKey( 'Q123', TermTypes::TYPE_LABEL, 'en' )
 		);
 		$this->termLanguages = new StaticContentLanguages( [ 'en', 'de', 'fr' ] );
 
@@ -197,11 +198,11 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetDescriptions() {
 		$this->cache->set(
-			$this->buildTestCacheKey( 'Q123', 'description', 'en' ),
+			$this->buildTestCacheKey( 'Q123', TermTypes::TYPE_DESCRIPTION, 'en' ),
 			'cat sound'
 		);
 		$this->cache->set(
-			$this->buildTestCacheKey( 'Q123', 'description', 'de' ),
+			$this->buildTestCacheKey( 'Q123', TermTypes::TYPE_DESCRIPTION, 'de' ),
 			'Katzengeräusch'
 		);
 
@@ -215,7 +216,7 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 		$requestedLanguages = [ 'en', 'language-that-doesnt-exist' ];
 
 		$this->cache = $this->newMockCacheExpectingKey(
-			$this->buildTestCacheKey( 'Q123', 'description', 'en' )
+			$this->buildTestCacheKey( 'Q123', TermTypes::TYPE_DESCRIPTION, 'en' )
 		);
 		$this->termLanguages = new StaticContentLanguages( [ 'en', 'de', 'fr' ] );
 
