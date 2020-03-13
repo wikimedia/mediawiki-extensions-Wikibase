@@ -17,7 +17,7 @@ export default class MwInitTracker {
 
 		return () => {
 			const clickDelay = this.performance.now() - clickStarted;
-			this.tracker.recordTiming( 'MediaWiki.wikibase.client.databridge.clickDelay', clickDelay );
+			this.tracker.recordTiming( 'clickDelay', clickDelay );
 		};
 	}
 
@@ -29,7 +29,7 @@ export default class MwInitTracker {
 		}
 		const mwStartupMark = this.performance.getEntriesByName( 'mwStartup' )[ 0 ];
 		this.tracker.recordTiming(
-			'MediaWiki.wikibase.client.databridge.timeToLinkListenersAttached',
+			'timeToLinkListenersAttached',
 			now - mwStartupMark.startTime,
 		);
 	}

@@ -11,13 +11,13 @@ import ApiCore from '@/data-access/ApiCore';
 import BatchingApi from '@/data-access/BatchingApi';
 import ApiRepoConfigRepository from '@/data-access/ApiRepoConfigRepository';
 import DataBridgeTrackerService from '@/data-access/DataBridgeTrackerService';
-import EventTracker from '@/mediawiki/facades/EventTracker';
 import ApiPropertyDataTypeRepository from '@/data-access/ApiPropertyDataTypeRepository';
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRepository';
 import RepoRouter from '@/data-access/RepoRouter';
 import ClientRouter from '@/data-access/ClientRouter';
 import ApiPurge from '@/data-access/ApiPurge';
+import Tracker from '@/definitions/Tracker';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -72,11 +72,6 @@ jest.mock( '@/data-access/ApiRepoConfigRepository', () => {
 const mockDataBridgeTrackerService = {};
 jest.mock( '@/data-access/DataBridgeTrackerService', () => {
 	return jest.fn().mockImplementation( () => mockDataBridgeTrackerService );
-} );
-
-const mockEventTracker = {};
-jest.mock( '@/mediawiki/facades/EventTracker', () => {
-	return jest.fn().mockImplementation( () => mockEventTracker );
 } );
 
 const mockCombiningPermissionsRepository = {};
@@ -182,7 +177,7 @@ function mockMwWindow( options: {
 describe( 'createServices', () => {
 	it( 'returns a ServiceContainer', () => {
 		const mwWindow = mockMwWindow();
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 		expect( services ).toBeInstanceOf( ServiceContainer );
 	} );
 
@@ -197,7 +192,7 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
 		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
@@ -220,7 +215,7 @@ describe( 'createServices', () => {
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 			} );
-			const services = createServices( mwWindow, editTags );
+			const services = createServices( mwWindow, editTags, {} as Tracker );
 
 			expect( mwWindow.mw.ForeignApi )
 				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -241,7 +236,7 @@ describe( 'createServices', () => {
 			const mwWindow = mockMwWindow( {
 				wbRepo,
 			} );
-			const services = createServices( mwWindow, editTags );
+			const services = createServices( mwWindow, editTags, {} as Tracker );
 
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBeUndefined();
@@ -263,7 +258,7 @@ describe( 'createServices', () => {
 			mwLanguage,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwLanguageInfoRepository ).toHaveBeenCalledWith( mwLanguage, ulsData );
@@ -277,7 +272,7 @@ describe( 'createServices', () => {
 			wgPageContentLanguage,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -301,7 +296,7 @@ describe( 'createServices', () => {
 			wgPageContentLanguage,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -319,7 +314,7 @@ describe( 'createServices', () => {
 		const message = jest.fn();
 		const mwWindow = mockMwWindow( { message } );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( MwMessagesRepository ).toHaveBeenCalledTimes( 1 );
 		expect( MwMessagesRepository ).toHaveBeenCalledWith( message );
@@ -335,7 +330,7 @@ describe( 'createServices', () => {
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -350,19 +345,18 @@ describe( 'createServices', () => {
 	} );
 
 	it( 'creates DataBridgeTrackerService', () => {
-		const tracker = jest.fn();
-		const mwWindow = mockMwWindow( { tracker } );
+		const tracker = {} as Tracker;
+		const mwWindow = mockMwWindow();
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], tracker );
 
-		expect( EventTracker ).toHaveBeenCalledWith( tracker );
-		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( mockEventTracker );
+		expect( DataBridgeTrackerService ).toHaveBeenCalledWith( tracker );
 		expect( services.get( 'tracker' ) ).toBe( mockDataBridgeTrackerService );
 	} );
 
 	it( 'creates CombiningPermissionsRepository', () => {
 		const mwWindow = mockMwWindow();
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( mwWindow.mw.ForeignApi )
 			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
@@ -399,7 +393,7 @@ describe( 'createServices', () => {
 			wbRepo,
 		} );
 
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( RepoRouter ).toHaveBeenCalledWith( wbRepo, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param );
 		expect( services.get( 'repoRouter' ) ).toBe( mockRepoRouter );
@@ -407,7 +401,7 @@ describe( 'createServices', () => {
 
 	it( 'creates ClientRouter', () => {
 		const mwWindow = mockMwWindow();
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 
 		expect( ClientRouter ).toHaveBeenCalledWith( mwWindow.mw.util.getUrl );
 		expect( services.get( 'clientRouter' ) ).toBe( mockClientRouter );
@@ -415,7 +409,7 @@ describe( 'createServices', () => {
 
 	it( 'creates ApiPurge', () => {
 		const mwWindow = mockMwWindow();
-		const services = createServices( mwWindow, [] );
+		const services = createServices( mwWindow, [], {} as Tracker );
 		const mwApi = new mwWindow.mw.Api();
 		expect( ApiPurge ).toHaveBeenCalledWith( mwApi );
 		expect( services.get( 'purgeTitles' ) ).toBe( mockPurgeTitlesService );

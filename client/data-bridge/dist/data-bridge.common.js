@@ -19128,59 +19128,28 @@ function () {
 
 
 
-
 var DataBridgeTrackerService_DataBridgeTrackerService =
 /*#__PURE__*/
 function () {
   function DataBridgeTrackerService(tracker) {
     _classCallCheck(this, DataBridgeTrackerService);
 
-    this.BRIDGE_TOPIC_PREFIX = 'MediaWiki.wikibase.client.databridge';
     this.tracker = tracker;
   }
 
   _createClass(DataBridgeTrackerService, [{
     key: "trackPropertyDatatype",
     value: function trackPropertyDatatype(datatype) {
-      this.tracker.increment("".concat(this.BRIDGE_TOPIC_PREFIX, ".datatype.").concat(datatype));
+      this.tracker.increment("datatype.".concat(datatype));
     }
   }, {
     key: "trackTitlePurgeError",
     value: function trackTitlePurgeError() {
-      this.tracker.increment("".concat(this.BRIDGE_TOPIC_PREFIX, ".error.purge"));
+      this.tracker.increment('error.purge');
     }
   }]);
 
   return DataBridgeTrackerService;
-}();
-
-
-// CONCATENATED MODULE: ./src/mediawiki/facades/EventTracker.ts
-
-
-
-var EventTracker_EventTracker =
-/*#__PURE__*/
-function () {
-  function EventTracker(tracker) {
-    _classCallCheck(this, EventTracker);
-
-    this.tracker = tracker;
-  }
-
-  _createClass(EventTracker, [{
-    key: "increment",
-    value: function increment(topic) {
-      this.tracker("counter.".concat(topic), 1);
-    }
-  }, {
-    key: "recordTiming",
-    value: function recordTiming(topic, timeInMS) {
-      this.tracker("timing.".concat(topic), timeInMS);
-    }
-  }]);
-
-  return EventTracker;
 }();
 
 
@@ -19948,8 +19917,7 @@ function () {
 
 
 
-
-function createServices(mwWindow, editTags) {
+function createServices(mwWindow, editTags, eventTracker) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
       repoRouter = new RepoRouter_RepoRouter(repoConfig, mwWindow.mw.util.wikiUrlencode, mwWindow.$.param);
@@ -19974,7 +19942,7 @@ function createServices(mwWindow, editTags) {
   services.set('languageInfoRepository', new MwLanguageInfoRepository_MwLanguageInfoRepository(mwWindow.mw.language, mwWindow.$.uls.data));
   services.set('messagesRepository', new MwMessagesRepository_MwMessagesRepository(mwWindow.mw.message));
   services.set('wikibaseRepoConfigRepository', new ApiRepoConfigRepository_ApiRepoConfigRepository(repoApi));
-  services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(new EventTracker_EventTracker(mwWindow.mw.track)));
+  services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(eventTracker));
   var clientApi = new ApiCore_ApiCore(clientMwApi);
   services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
   services.set('repoRouter', repoRouter);
