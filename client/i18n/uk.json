@@ -148,6 +148,8 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Було оновлено</strong> застаріле значення",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Попереднє значення колись було правильним, але тепер є застарілим.",
 	"wikibase-client-data-bridge-references-heading": "Примітки",
+	"wikibase-client-data-bridge-license-heading": "Використання і ліцензія",
+	"wikibase-client-data-bridge-license-body": "<p>Зміна цього значення змінить його також і на сайті {{WBREPONAME}}, а також, можливо, і в іншомовних вікі.</p>\n<p>Натискаючи «{{int:$1}}», ви погоджуєтесь із [$2 умовами користування], а також даєте невідкличну згоду на публікацію вашого внеску на умовах [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Натомість можете зробити таке:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Відредагуйте значення на сайті {{WBREPONAME}}. Клацніть кнопку нижче, щоб відредагувати значення безпосередньо (посилання відкриється в новій вкладці).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Відредагувати значення на сайті {{WBREPONAME}}",

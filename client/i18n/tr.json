@@ -148,6 +148,8 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>| updated</strong> zaman aşımına uğramış bir değer",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Önceki değer doğruydu fakat şimdi geçerliliğini kaybetti.",
 	"wikibase-client-data-bridge-references-heading": "Kaynaklar",
+	"wikibase-client-data-bridge-license-heading": "Kullanım ve lisans",
+	"wikibase-client-data-bridge-license-body": "<p>Bu değerin değiştirilmesi, {{WBREPONAME}} ve muhtemelen diğer dillerde wikiler üzerinde de değiştirecektir.</p>\n<p>\"{{int:$1}}\" düğmesini tıklayarak, [$2 kullanım şartlarını] kabul etmiş olursunuz ve [$3 $4] altındaki katkınızı geri dönülmez şekilde bırakmayı kabul edersiniz.</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Bunun yerine aşağıdakileri yapabilirsiniz:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "{{WBREPONAME}} üzerindeki değeri düzenleyin. Değeri doğrudan düzenlemek için aşağıdaki düğmeyi tıklayın (bağlantı yeni bir sekmede açılır).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}} üzerindeki değeri düzenleyin",

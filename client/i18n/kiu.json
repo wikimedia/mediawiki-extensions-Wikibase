@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mirzali"
+			"Mirzali",
+			"Orbot707"
 		]
 	},
+	"tooltip-t-wikibase": "Gola data de eleqeyın çirs gre",
+	"wikibase-dataitem": "Unsurê {{WBREPONAME}}",
+	"wikibase-editlinks": "Gıreyan bıvurne",
+	"wikibase-editlinkstitle": "Gıreyanê zıwanmiyanan bıvurne",
 	"wikibase-linkitem-input-page": "Pele:"
 }

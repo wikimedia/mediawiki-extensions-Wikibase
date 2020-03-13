@@ -137,6 +137,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Eu atualizei</strong> um valor desatualizado",
 	"wikibase-client-data-bridge-edit-decision-update-description": "O valor anterior costumava estar correto, mas agora está desatualizado.",
 	"wikibase-client-data-bridge-references-heading": "Referências",
+	"wikibase-client-data-bridge-license-heading": "Uso e licença",
 	"wikibase-client-data-bridge-bailout-heading": "Em vez disso, você pode fazer o seguinte:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Editar o valor em {{WBREPONAME}}. Clique no botão abaixo para editar o valor diretamente (o link é aberto em uma nova guia).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Editar o valor em {{WBREPONAME}}",
