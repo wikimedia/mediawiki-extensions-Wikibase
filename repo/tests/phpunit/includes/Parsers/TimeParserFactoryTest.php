@@ -209,7 +209,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ '-0111-11-01T00:00:00Z', TimeValue::PRECISION_DAY, $julian ],
 
 			/**
-			 * @see Wikibase\Lib\Tests\Formatters\MwTimeIsoFormatterTest
+			 * @see \Wikibase\Lib\Tests\Formatters\MwTimeIsoFormatterTest
 			 */
 			'16 laMonth8 2013' =>
 				[ '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'la' ],

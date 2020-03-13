@@ -37,24 +37,19 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 	 *
 	 * @return array[]
 	 */
-	private function getUsageRows( $pageId, array $usages ) {
+	private function getUsageRows( int $pageId, array $usages ) {
 		$rows = [];
 
 		foreach ( $usages as $key => $usage ) {
-			$row = [
-				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
-				'eu_aspect' => $usage->getAspectKey()
-			];
-
-			if ( $pageId > 0 ) {
-				$row['eu_page_id'] = $pageId;
-			}
-
 			if ( is_int( $key ) ) {
 				$key = $usage->getEntityId()->getSerialization() . '#' . $usage->getAspectKey();
 			}
 
-			$rows[$key] = $row;
+			$rows[$key] = [
+				'eu_page_id' => $pageId,
+				'eu_entity_id' => $usage->getEntityId()->getSerialization(),
+				'eu_aspect' => $usage->getAspectKey(),
+			];
 		}
 
 		return $rows;
