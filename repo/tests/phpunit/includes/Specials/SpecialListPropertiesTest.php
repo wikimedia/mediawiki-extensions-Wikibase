@@ -182,7 +182,8 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 
 	public function testSearchSubpages() {
 		$specialPage = $this->newSpecialPage();
-		$this->assertEmpty(
+		$this->assertSame(
+			[],
 			$specialPage->prefixSearchSubpages( 'g', 10, 0 )
 		);
 		$this->assertEquals(

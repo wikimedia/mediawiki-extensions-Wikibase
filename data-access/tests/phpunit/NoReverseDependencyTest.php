@@ -14,11 +14,11 @@ use SplFileInfo;
 class NoReverseDependencyTest extends \PHPUnit\Framework\TestCase {
 
 	public function testNoClientDependency() {
-		$this->assertEmpty( $this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' ) );
+		$this->assertSame( [], $this->getFilesContainingString( 'Wikibase\\Client\\', __DIR__ . '/../../src/' ) );
 	}
 
 	public function testNoRepoDependency() {
-		$this->assertEmpty( $this->getFilesContainingString( 'Wikibase\\Repo\\', __DIR__ . '/../../src/' ) );
+		$this->assertSame( [], $this->getFilesContainingString( 'Wikibase\\Repo\\', __DIR__ . '/../../src/' ) );
 	}
 
 	/**

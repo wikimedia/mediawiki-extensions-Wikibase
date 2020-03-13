@@ -170,7 +170,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		// check links of unknown id
-		$this->assertEmpty( $siteLinkStore->getSiteLinksForItem( new ItemId( 'Q123' ) ) );
+		$this->assertSame( [], $siteLinkStore->getSiteLinksForItem( new ItemId( 'Q123' ) ) );
 	}
 
 	public function testGetItemIdForSiteLink() {
@@ -200,7 +200,8 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 
 		$siteLinkStore->deleteLinksOfItem( $itemId );
 
-		$this->assertEmpty(
+		$this->assertSame(
+			[],
 			$siteLinkStore->getSiteLinksForItem( $itemId ),
 			'get by item id'
 		);

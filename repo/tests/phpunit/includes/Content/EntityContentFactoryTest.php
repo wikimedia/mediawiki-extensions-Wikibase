@@ -195,7 +195,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 		$id = new PropertyId( 'P42' );
 		$titles = $factory->getTitlesForIds( [ $id, $id ] );
 
-		$this->assertEquals( 1, count( $titles ) );
+		$this->assertCount( 1, $titles );
 		$this->assertEquals( 'P42', $titles['P42']->getText() );
 	}
 
@@ -209,7 +209,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 			new ItemId( 'Q43' )
 		] );
 
-		$this->assertEquals( 4, count( $titles ) );
+		$this->assertCount( 4, $titles );
 		$this->assertEquals( 'P42', $titles['P42']->getText() );
 		$this->assertEquals( 'P43', $titles['P43']->getText() );
 		$this->assertEquals( 'Q42', $titles['Q42']->getText() );
@@ -221,7 +221,7 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		$titles = $factory->getTitlesForIds( [] );
 
-		$this->assertEquals( 0, count( $titles ) );
+		$this->assertSame( [], $titles );
 	}
 
 	public function testGetEntityIdForTitle() {

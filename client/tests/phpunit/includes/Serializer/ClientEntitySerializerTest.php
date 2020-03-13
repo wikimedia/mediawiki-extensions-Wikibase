@@ -100,7 +100,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 
 		$serialization = $instance->serialize( new Item() );
 
-		$this->assertEmpty( $serialization );
+		$this->assertSame( [], $serialization );
 	}
 
 }

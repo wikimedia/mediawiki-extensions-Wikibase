@@ -173,7 +173,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		// -- check the result --------------------------------------------------------
 		$this->assertArrayHasKey( 'success', $result, "Missing 'success' marker in response." );
 		$this->assertArrayHasKey( 'entities', $result, "Missing 'entities' section in response." );
-		$this->assertEquals( $expected['count'], count( $result['entities'] ),
+		$this->assertCount( $expected['count'], $result['entities'],
 			"Request returned incorrect number of entities" );
 
 		foreach ( $result['entities'] as $entity ) {

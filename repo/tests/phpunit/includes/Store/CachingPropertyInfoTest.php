@@ -180,13 +180,13 @@ class CachingPropertyInfoTest extends \MediaWikiTestCase {
 		$store->removePropertyInfo( $p1 );
 
 		// The table should now have the property that we stored
-		$this->assertCount( 0, $table->getAllPropertyInfo() );
+		$this->assertSame( [], $table->getAllPropertyInfo() );
 		$this->assertNull( $table->getPropertyInfo( $p1 ) );
 		$this->assertEquals( [], $table->getAllPropertyInfo() );
 		$this->assertEquals( [], $table->getPropertyInfoForDataType( $p1Type ) );
 
 		// Using the caching store should not return the property info
-		$this->assertCount( 0, $lookup->getAllPropertyInfo() );
+		$this->assertSame( [], $lookup->getAllPropertyInfo() );
 		$this->assertNull( $lookup->getPropertyInfo( $p1 ) );
 		$this->assertEquals( [], $lookup->getAllPropertyInfo() );
 		$this->assertEquals( [], $lookup->getPropertyInfoForDataType( $p1Type ) );
@@ -239,7 +239,7 @@ class CachingPropertyInfoTest extends \MediaWikiTestCase {
 
 		// Remove the value directly on the table & check
 		$table->removePropertyInfo( $p1 );
-		$this->assertCount( 0, $table->getAllPropertyInfo() );
+		$this->assertSame( [], $table->getAllPropertyInfo() );
 
 		// Everything should be cached, so the lookup returns the same stuff
 		$this->assertCount( 1, $lookup->getAllPropertyInfo() );

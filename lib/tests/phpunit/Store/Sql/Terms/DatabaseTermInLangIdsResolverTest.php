@@ -210,7 +210,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
 		);
 
-		$this->assertEmpty( $resolver->resolveTermInLangIds( [] ) );
+		$this->assertSame( [], $resolver->resolveTermInLangIds( [] ) );
 	}
 
 	public function testGrouped() {
@@ -270,7 +270,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 			new FakeLoadBalancer( [ 'dbr' => $this->db ] )
 		);
 
-		$this->assertEmpty( $resolver->resolveGroupedTermInLangIds( [] ) );
+		$this->assertSame( [], $resolver->resolveGroupedTermInLangIds( [] ) );
 	}
 
 	public function testGrouped_CanResolveListOfEmptyLists() {

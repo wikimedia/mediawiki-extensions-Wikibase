@@ -147,7 +147,7 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 		);
 
 		$this->assertEquals( [ 'recentChangesFlags' => [ 'wikibase-edit' => false ] ], $data );
-		$this->assertEmpty( $classes );
+		$this->assertSame( [], $classes );
 	}
 
 	public function nonWikibaseChangeProvider() {
@@ -185,7 +185,7 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 			$classes
 		);
 		$this->assertEquals( 'Formatted line', $line );
-		$this->assertEmpty( $classes );
+		$this->assertSame( [], $classes );
 	}
 
 	public function testEnhancedChangesListModifyBlockLineData() {

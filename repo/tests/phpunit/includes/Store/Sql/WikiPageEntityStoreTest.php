@@ -239,7 +239,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// check that the tags were applied
 		$r2tags = ChangeTags::getTags( $this->db, null, $r2->getRevisionId() );
-		$this->assertEmpty( array_diff( [ 'mw-replace' ], $r2tags ) );
+		$this->assertSame( [], array_diff( [ 'mw-replace' ], $r2tags ) );
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
@@ -451,7 +451,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertEmpty( $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+		$this->assertSame( [], $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
 
@@ -876,7 +876,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// check that the term index got updated (via a DataUpdate).
 		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
+		$this->assertSame( [], $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
 
 		// TODO: check notifications in wb_changes table!
 	}

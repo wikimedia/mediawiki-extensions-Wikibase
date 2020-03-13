@@ -60,7 +60,7 @@ class UsageLookupContractTester {
 
 		$this->putUsages( 23, $usages );
 
-		Assert::assertEmpty( $this->lookup->getUsagesForPage( 24 ) );
+		Assert::assertSame( [], $this->lookup->getUsagesForPage( 24 ) );
 
 		$actualUsage = $this->lookup->getUsagesForPage( 23 );
 		Assert::assertCount( 3, $actualUsage );
@@ -86,7 +86,7 @@ class UsageLookupContractTester {
 		$this->putUsages( 42, [ $u4l, $u4t ] );
 
 		$pages = $this->lookup->getPagesUsing( [ $q6 ] );
-		Assert::assertEmpty( iterator_to_array( $pages ) );
+		Assert::assertSame( [], iterator_to_array( $pages ) );
 
 		$pages = $this->lookup->getPagesUsing( [ $q3 ] );
 		$this->assertSamePageEntityUsages(
@@ -109,10 +109,10 @@ class UsageLookupContractTester {
 		);
 
 		$pages = $this->lookup->getPagesUsing( [ $q3 ], [ EntityUsage::ALL_USAGE ] );
-		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "all" on Q3' );
+		Assert::assertSame( [], iterator_to_array( $pages ), 'Pages using "all" on Q3' );
 
 		$pages = $this->lookup->getPagesUsing( [ $q4 ], [ EntityUsage::SITELINK_USAGE ] );
-		Assert::assertEmpty( iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
+		Assert::assertSame( [], iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
 
 		$pages = $this->lookup->getPagesUsing(
 			[ $q3, $q4 ],
@@ -153,7 +153,7 @@ class UsageLookupContractTester {
 			);
 		}
 
-		Assert::assertEmpty( array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
+		Assert::assertSame( [], array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
 	}
 
 	public function testGetUnusedEntities() {
@@ -169,7 +169,7 @@ class UsageLookupContractTester {
 
 		$this->putUsages( 23, $usages );
 
-		Assert::assertEmpty( $this->lookup->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
+		Assert::assertSame( [], $this->lookup->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
 		$entityIds = [ $q4, $q6 ];
 		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {

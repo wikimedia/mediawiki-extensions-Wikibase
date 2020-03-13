@@ -323,7 +323,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 			[],
 			function ( $termIds ) use ( &$called ) {
 				$called = true;
-				$this->assertEmpty( $termIds );
+				$this->assertSame( [], $termIds );
 			}
 		);
 
@@ -526,7 +526,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 
 		$acquiredTermIds = $dbTermIdsAcquirer->acquireTermInLangIds( [] );
 
-		$this->assertEmpty( $acquiredTermIds );
+		$this->assertSame( [], $acquiredTermIds );
 	}
 
 }

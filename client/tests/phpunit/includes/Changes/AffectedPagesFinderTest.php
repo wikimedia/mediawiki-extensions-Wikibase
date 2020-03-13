@@ -532,7 +532,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 
 		$usages = $affectedPagesFinder->getAffectedUsagesByPage( $change );
 
-		$this->assertCount( 0, $usages );
+		$this->assertSame( [], $usages );
 	}
 
 	private function getSiteLinkUsageLookup() {

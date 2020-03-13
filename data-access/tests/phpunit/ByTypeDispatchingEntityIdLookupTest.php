@@ -172,7 +172,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		$this->assertEquals( null, $result );
 
 		$results = $lookup->getEntityIds( [ $title ] );
-		$this->assertCount( 0, $results );
+		$this->assertSame( [], $results );
 	}
 
 	public function testGivenNonExistingTitle_getEntityIdReturnsNull() {
@@ -192,7 +192,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 		$this->assertEquals( null, $result );
 
 		$results = $lookup->getEntityIds( [ Title::newFromDBkey( 'P99' ) ] );
-		$this->assertCount( 0, $results );
+		$this->assertSame( [], $results );
 	}
 
 }

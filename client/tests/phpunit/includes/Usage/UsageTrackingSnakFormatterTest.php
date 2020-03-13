@@ -146,7 +146,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$formatter->formatSnak( $novalueSnak );
-		$this->assertEmpty( $acc->getUsages(), 'novalue' );
+		$this->assertSame( [], $acc->getUsages(), 'novalue' );
 	}
 
 	public function testFormatSnak_string() {
@@ -163,7 +163,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$formatter->formatSnak( $stringSnak );
-		$this->assertEmpty( $acc->getUsages(), 'string value' );
+		$this->assertSame( [], $acc->getUsages(), 'string value' );
 	}
 
 	public function testGetFormat() {
@@ -179,7 +179,7 @@ class UsageTrackingSnakFormatterTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		$this->assertEquals( 'TEST', $formatter->getFormat(), 'getFormat' );
-		$this->assertCount( 0, $acc->getUsages() );
+		$this->assertSame( [], $acc->getUsages() );
 	}
 
 }

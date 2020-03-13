@@ -39,7 +39,7 @@ class StatementsMergerTest extends TestCase {
 			$afterMergeTargetStatements,
 			$target->getStatements()->toArray()
 		);
-		$this->assertEmpty( $source->getStatements() );
+		$this->assertTrue( $source->getStatements()->isEmpty() );
 	}
 
 	/**

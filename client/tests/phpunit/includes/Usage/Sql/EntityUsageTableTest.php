@@ -248,7 +248,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$usageTable->addUsages( 42, [ $u4l, $u4t ] );
 
 		$pages = $usageTable->getPagesUsing( [ $q6 ] );
-		$this->assertEmpty( iterator_to_array( $pages ) );
+		$this->assertSame( [], iterator_to_array( $pages ) );
 
 		$pages = $usageTable->getPagesUsing( [ $q3 ] );
 		$this->assertSamePageEntityUsages(
@@ -268,10 +268,10 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		);
 
 		$pages = $usageTable->getPagesUsing( [ $q3 ], [ EntityUsage::ALL_USAGE ] );
-		$this->assertEmpty( iterator_to_array( $pages ), 'Pages using "all" on Q3' );
+		$this->assertSame( [], iterator_to_array( $pages ), 'Pages using "all" on Q3' );
 
 		$pages = $usageTable->getPagesUsing( [ $q4 ], [ EntityUsage::SITELINK_USAGE ] );
-		$this->assertEmpty( iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
+		$this->assertSame( [], iterator_to_array( $pages ), 'Pages using "sitelinks" on Q4' );
 
 		$pages = $usageTable->getPagesUsing(
 			[ $q3, $q4 ],
@@ -309,7 +309,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 			);
 		}
 
-		$this->assertEmpty( array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
+		$this->assertSame( [], array_slice( $actual, count( $expected ) ), $message . 'Extra entries found!' );
 	}
 
 	public function testGetUnusedEntities() {
@@ -327,7 +327,7 @@ class EntityUsageTableTest extends \MediaWikiTestCase {
 		$usageTable = $this->getEntityUsageTable( 2 );
 		$usageTable->addUsages( 23, $usages );
 
-		$this->assertEmpty( $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
+		$this->assertSame( [], $usageTable->getUnusedEntities( [ $q4 ] ), 'Q4 should not be unused' );
 
 		if ( wfGetDB( DB_REPLICA )->getType() === 'mysql' ) {
 			// On MySQL we use UNIONs on the table… as the table is temporary that

@@ -461,7 +461,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		$linkSite = $params['linksite'];
 		$siteLinks = $result['entity']['sitelinks'];
 
-		$this->assertEquals( 1, count( $siteLinks ),
+		$this->assertCount( 1, $siteLinks,
 			"Entity return contained more than a single site"
 		);
 

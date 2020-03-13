@@ -100,7 +100,8 @@ class ByTypeDispatchingEntityPrefetcherTest extends TestCase {
 
 		$prefetcher->purgeAll();
 
-		$this->assertEmpty( array_merge( $itemPrefetcher->getPrefetchedEntities(), $propertyPrefetcher->getPrefetchedEntities() ) );
+		$this->assertSame( [], $itemPrefetcher->getPrefetchedEntities() );
+		$this->assertSame( [], $propertyPrefetcher->getPrefetchedEntities() );
 	}
 
 }

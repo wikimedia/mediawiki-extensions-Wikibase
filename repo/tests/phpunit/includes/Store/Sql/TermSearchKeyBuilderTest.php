@@ -69,7 +69,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		$obtainedTerms = $termCache->getMatchingTerms( [ $criteria ], TermIndexEntry::TYPE_LABEL, Item::ENTITY_TYPE, $options );
 
-		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
+		$this->assertCount( $matches ? 1 : 0, $obtainedTerms );
 
 		if ( $matches ) {
 			$obtainedTerm = array_shift( $obtainedTerms );

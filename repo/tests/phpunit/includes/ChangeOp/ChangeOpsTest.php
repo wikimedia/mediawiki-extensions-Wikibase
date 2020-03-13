@@ -35,7 +35,7 @@ class ChangeOpsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testEmptyChangeOps() {
 		$changeOps = new ChangeOps();
-		$this->assertEmpty( $changeOps->getChangeOps() );
+		$this->assertSame( [], $changeOps->getChangeOps() );
 	}
 
 	private function getTermValidatorFactory() {
