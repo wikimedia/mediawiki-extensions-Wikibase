@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Store;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Term\TermTypes;
 
 /**
  * Determines which requested terms are not cached, then fetches and caches them.
@@ -123,7 +124,7 @@ class UncachedTermsPrefetcher {
 	}
 
 	private function getTermFromLookup( EntityId $entity, string $termType, string $language ) {
-		if ( $termType === 'label' || $termType === 'description' ) {
+		if ( $termType === TermTypes::TYPE_LABEL || $termType === TermTypes::TYPE_DESCRIPTION ) {
 			return $this->lookup->getPrefetchedTerm( $entity, $termType, $language );
 		}
 

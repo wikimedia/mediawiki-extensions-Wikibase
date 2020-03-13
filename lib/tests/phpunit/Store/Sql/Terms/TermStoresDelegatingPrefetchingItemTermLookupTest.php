@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 
 /**
@@ -43,27 +44,27 @@ class TermStoresDelegatingPrefetchingItemTermLookupTest extends TestCase {
 	public function testGetPrefetchedTerm() {
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )
 			->method( 'getPrefetchedTerm' )
-			->with( $this->normalizedStoreItemId, 'label', 'en' )
+			->with( $this->normalizedStoreItemId, TermTypes::TYPE_LABEL, 'en' )
 			->willReturn( 'a' );
 
 		$this->wbTermsStorePrefetchingTermLookup->expects( $this->once() )
 			->method( 'getPrefetchedTerm' )
-			->with( $this->wbTermsStoreItemId, 'description', 'de' )
+			->with( $this->wbTermsStoreItemId, TermTypes::TYPE_DESCRIPTION, 'de' )
 			->willReturn( 'b' );
 
 		$testSubject = $this->newTestSubject();
 		$this->assertEquals(
 			'a',
-			$testSubject->getPrefetchedTerm( $this->normalizedStoreItemId, 'label', 'en' )
+			$testSubject->getPrefetchedTerm( $this->normalizedStoreItemId, TermTypes::TYPE_LABEL, 'en' )
 		);
 		$this->assertEquals(
 			'b',
-			$testSubject->getPrefetchedTerm( $this->wbTermsStoreItemId, 'description', 'de' )
+			$testSubject->getPrefetchedTerm( $this->wbTermsStoreItemId, TermTypes::TYPE_DESCRIPTION, 'de' )
 		);
 	}
 
 	public function testPrefetchTerms() {
-		$termTypes = [ 'label', 'description' ];
+		$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 		$langCodes = [ 'en', 'de' ];
 
 		$this->normalizedStorePrefetchingTermLookup->expects( $this->once() )

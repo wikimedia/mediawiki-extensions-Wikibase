@@ -11,6 +11,7 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
@@ -123,30 +124,30 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 	public function testPrefetchTermsAndGetPrefetchedTerm() {
 		$this->lookup->prefetchTerms(
 			[ $this->p1, $this->p2 ],
-			[ 'label', 'description', 'alias' ],
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ],
 			[ 'en' ]
 		);
 
-		$label1 = $this->lookup->getPrefetchedTerm( $this->p1, 'label', 'en' );
+		$label1 = $this->lookup->getPrefetchedTerm( $this->p1, TermTypes::TYPE_LABEL, 'en' );
 		$this->assertSame( 'property one', $label1 );
-		$description2 = $this->lookup->getPrefetchedTerm( $this->p2, 'description', 'en' );
+		$description2 = $this->lookup->getPrefetchedTerm( $this->p2, TermTypes::TYPE_DESCRIPTION, 'en' );
 		$this->assertSame( 'the second property', $description2 );
-		$alias1 = $this->lookup->getPrefetchedTerm( $this->p1, 'alias', 'en' );
+		$alias1 = $this->lookup->getPrefetchedTerm( $this->p1, TermTypes::TYPE_ALIAS, 'en' );
 		$this->assertSame( 'P1', $alias1 );
 	}
 
 	public function testGetPrefetchedTerm_notPrefetched() {
-		$this->assertNull( $this->lookup->getPrefetchedTerm( $this->p1, 'label', 'en' ) );
+		$this->assertNull( $this->lookup->getPrefetchedTerm( $this->p1, TermTypes::TYPE_LABEL, 'en' ) );
 	}
 
 	public function testGetPrefetchedTerm_doesNotExist() {
 		$this->lookup->prefetchTerms(
 			[ $this->p1, $this->p2 ],
-			[ 'label' ],
+			[ TermTypes::TYPE_LABEL ],
 			[ 'en', 'de' ]
 		);
 
-		$this->assertFalse( $this->lookup->getPrefetchedTerm( $this->p1, 'label', 'de' ) );
+		$this->assertFalse( $this->lookup->getPrefetchedTerm( $this->p1, TermTypes::TYPE_LABEL, 'de' ) );
 	}
 
 	public function testPrefetchTerms_Empty() {
@@ -155,8 +156,8 @@ class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
 	}
 
 	public function testPrefetchTerms_SameTermsTwice() {
-		$this->lookup->prefetchTerms( [ $this->p1 ], [ 'label', 'description', 'alias' ], [ 'en' ] );
-		$this->lookup->prefetchTerms( [ $this->p1 ], [ 'label', 'description', 'alias' ], [ 'en' ] );
+		$this->lookup->prefetchTerms( [ $this->p1 ], [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ], [ 'en' ] );
+		$this->lookup->prefetchTerms( [ $this->p1 ], [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ], [ 'en' ] );
 		$this->assertTrue( true ); // no error
 	}
 

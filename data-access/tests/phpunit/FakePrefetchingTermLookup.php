@@ -4,6 +4,7 @@ namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Term\TermTypes;
 
 /**
  * A PrefetchingTermLookup providing dummy TermLookup functionality, i.e. always returning a fake label/description,
@@ -23,7 +24,7 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ) {
 		if ( $termTypes === null ) {
-			$termTypes = [ 'label', 'description' ];
+			$termTypes = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
 		}
 		if ( $languageCodes === null ) {
 			$languageCodes = [ 'de', 'en' ];
@@ -35,7 +36,7 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 		foreach ( $entityIds as $id ) {
 			foreach ( $termTypes as $type ) {
 				foreach ( $languageCodes as $lang ) {
-					if ( $type !== 'alias' ) {
+					if ( $type !== TermTypes::TYPE_ALIAS ) {
 						$this->bufferNonAliasTerm( $id, $type, $lang );
 					} else {
 						$this->bufferAliasTerms( $id, $type, $lang );
@@ -88,27 +89,27 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 	}
 
 	public function getLabel( EntityId $entityId, $languageCode ) {
-		return $this->generateFakeTerm( $entityId, 'label', $languageCode );
+		return $this->generateFakeTerm( $entityId, TermTypes::TYPE_LABEL, $languageCode );
 	}
 
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
 		$labels = [];
 
 		foreach ( $languageCodes as $lang ) {
-			$labels[$lang] = $this->generateFakeTerm( $entityId, 'label', $lang );
+			$labels[$lang] = $this->generateFakeTerm( $entityId, TermTypes::TYPE_LABEL, $lang );
 		}
 		return $labels;
 	}
 
 	public function getDescription( EntityId $entityId, $languageCode ) {
-		return $this->generateFakeTerm( $entityId, 'description', $languageCode );
+		return $this->generateFakeTerm( $entityId, TermTypes::TYPE_DESCRIPTION, $languageCode );
 	}
 
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
 		$descriptions = [];
 
 		foreach ( $languageCodes as $lang ) {
-			$descriptions[$lang] = $this->generateFakeTerm( $entityId, 'description', $lang );
+			$descriptions[$lang] = $this->generateFakeTerm( $entityId, TermTypes::TYPE_DESCRIPTION, $lang );
 		}
 		return $descriptions;
 	}
@@ -116,9 +117,9 @@ class FakePrefetchingTermLookup implements PrefetchingTermLookup {
 	public function getPrefetchedAliases( EntityId $entityId, $languageCode ) {
 		$id = $entityId->getSerialization();
 		if ( array_key_exists( $id, $this->buffer ) ) {
-			if ( array_key_exists( 'alias', $this->buffer[$id] ) ) {
-				if ( array_key_exists( $languageCode, $this->buffer[$id]['alias'] ) ) {
-					return $this->buffer[$id]['alias'][$languageCode];
+			if ( array_key_exists( TermTypes::TYPE_ALIAS, $this->buffer[$id] ) ) {
+				if ( array_key_exists( $languageCode, $this->buffer[$id][TermTypes::TYPE_ALIAS] ) ) {
+					return $this->buffer[$id][TermTypes::TYPE_ALIAS][$languageCode];
 				}
 			}
 		}
