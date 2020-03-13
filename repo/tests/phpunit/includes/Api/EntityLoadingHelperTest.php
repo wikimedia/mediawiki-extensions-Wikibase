@@ -148,16 +148,16 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 	 */
 	protected function newEntityLoadingHelper( array $config ) {
 		return new EntityLoadingHelper(
-			$this->getMockApiBase( isset( $config['params'] ) ? $config['params'] : [] ),
+			$this->getMockApiBase( $config['params'] ?? [] ),
 			new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
-				isset( $config['entityId'] ) ? $config['entityId'] : null,
-				isset( $config['revision'] ) ? $config['revision'] : null,
-				isset( $config['exception'] ) ? $config['exception'] : null
+				$config['entityId'] ?? null,
+				$config['revision'] ?? null,
+				$config['exception'] ?? null
 			),
 			$this->getMockErrorReporter(
-				isset( $config['dieExceptionCode'] ) ? $config['dieExceptionCode'] : null,
-				isset( $config['dieErrorCode'] ) ? $config['dieErrorCode'] : null
+				$config['dieExceptionCode'] ?? null,
+				$config['dieErrorCode'] ?? null
 			)
 		);
 	}

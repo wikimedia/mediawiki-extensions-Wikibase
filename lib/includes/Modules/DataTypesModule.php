@@ -70,9 +70,7 @@ class DataTypesModule extends ResourceLoaderModule {
 	public static function extractDataTypesConfigVarNameFromResourceDefinition(
 		array $resourceDefinition
 	) {
-		$dataTypesConfigVarName = array_key_exists( 'datatypesconfigvarname', $resourceDefinition )
-			? $resourceDefinition['datatypesconfigvarname']
-			: null;
+		$dataTypesConfigVarName = $resourceDefinition['datatypesconfigvarname'] ?? null;
 
 		if ( !is_string( $dataTypesConfigVarName ) || $dataTypesConfigVarName === '' ) {
 			throw new Exception(
@@ -95,9 +93,7 @@ class DataTypesModule extends ResourceLoaderModule {
 	public static function extractDataTypeFactoryFromResourceDefinition(
 		array $resourceDefinition
 	) {
-		$dataTypeFactory = array_key_exists( 'datatypefactory', $resourceDefinition )
-			? $resourceDefinition['datatypefactory']
-			: null;
+		$dataTypeFactory = $resourceDefinition['datatypefactory'] ?? null;
 
 		if ( is_callable( $dataTypeFactory ) ) {
 			$dataTypeFactory = call_user_func( $dataTypeFactory );

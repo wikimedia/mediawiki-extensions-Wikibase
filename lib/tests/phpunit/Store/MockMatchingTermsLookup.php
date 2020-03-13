@@ -57,7 +57,7 @@ class MockMatchingTermsLookup implements MatchingTermsLookup {
 			}
 		}
 
-		$limit = isset( $options['LIMIT'] ) ? $options['LIMIT'] : 0;
+		$limit = $options['LIMIT'] ?? 0;
 
 		if ( $limit > 0 ) {
 			$matchingTerms = array_slice( $matchingTerms, 0, $limit );

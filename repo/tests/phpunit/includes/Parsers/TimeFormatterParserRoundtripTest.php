@@ -222,7 +222,7 @@ class TimeFormatterParserRoundtripTest extends \PHPUnit\Framework\TestCase {
 		foreach ( $tests as $args ) {
 			$timestamp = $args[0];
 			$formatted = $args[1];
-			$languageCode = isset( $args[2] ) ? $args[2] : 'en';
+			$languageCode = $args[2] ?? 'en';
 
 			$cases[] = [
 				new TimeValue( $timestamp, 0, 0, 0, TimeValue::PRECISION_DAY, $gregorian ),

@@ -398,7 +398,7 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			$expectedLinks = array_merge( $expectedLinks, $langLinks );
 
 			if ( !in_array( '*', $case[2] ) ) {
-				$expectedBadges = isset( $badges[ $case[0] ] ) ? $badges[ $case[0] ] : [];
+				$expectedBadges = $badges[ $case[0] ] ?? [];
 
 				// no badges for languages mentioned in $noExternalLangLinks
 				$expectedBadges = array_diff_key( $expectedBadges, array_flip( $case[2] ) );

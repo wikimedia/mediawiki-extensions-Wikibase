@@ -260,7 +260,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
 			$precision = $expected[1];
-			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
+			$calendarModel = $expected[2] ?? $gregorian;
 
 			$argLists[] = [
 				(string)$value,

@@ -148,8 +148,8 @@ class DateFormatParserTest extends StringValueParserTest {
 			$digitTransformTable = $args[2];
 			$monthNames = $args[3];
 			$timestamp = $args[4];
-			$precision = isset( $args[5] ) ? $args[5] : TimeValue::PRECISION_DAY;
-			$calendarModel = isset( $args[6] ) ? $args[6] : TimeValue::CALENDAR_GREGORIAN;
+			$precision = $args[5] ?? TimeValue::PRECISION_DAY;
+			$calendarModel = $args[6] ?? TimeValue::CALENDAR_GREGORIAN;
 
 			$cases[$key] = [
 				$dateString,

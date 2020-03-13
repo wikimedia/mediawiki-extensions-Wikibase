@@ -60,7 +60,7 @@ class SimpleEntityTermsViewTest extends \PHPUnit\Framework\TestCase {
 					'Q111' => new Term( 'language', '<LABEL>' ),
 					'Q666' => new Term( 'language', '<a href="#">evil html</a>' ),
 				];
-				return isset( $terms[ $entityId->getSerialization() ] ) ? $terms[ $entityId->getSerialization() ] : null;
+				return $terms[$entityId->getSerialization()] ?? null;
 			} ) );
 		$labelDescriptionLookup->method( 'getDescription' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
