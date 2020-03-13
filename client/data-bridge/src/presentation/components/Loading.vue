@@ -156,7 +156,7 @@ export default class Loading extends Vue {
 <style lang="scss">
 .wb-db-load {
 	&__visibility {
-		z-index: $default-visibility + 1;
+		z-index: $stacking-height-loading-bar;
 	}
 }
 </style>

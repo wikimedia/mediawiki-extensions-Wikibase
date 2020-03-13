@@ -159,7 +159,7 @@ export default class App extends mixins( StateMixin ) {
 			right: 0;
 			top: 0;
 			bottom: 0;
-			z-index: $default-visibility;
+			z-index: $stacking-height-overlay;
 			background: rgba( 255, 255, 255, 0.5 );
 		}
 	}
