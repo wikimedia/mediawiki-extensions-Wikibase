@@ -85,12 +85,12 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandlers( $settings ) );
 
 		$cache = [];
-		$word = 'wbreponame';
 		call_user_func_array(
 			[ $handler, 'doParserGetVariableValueSwitch' ],
-			[ &$parser, &$cache, &$word, &$ret ]
+			[ $parser, &$cache, 'wbreponame', &$ret ]
 		);
 
+		$this->assertArrayHasKey( 'wbreponame', $cache );
 		$this->assertEquals(
 			'Client for the Wikibase extension',
 			$ret
@@ -114,14 +114,13 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 
 		$ret = null;
 		$cache = [];
-		$word = 'noexternallanglinks';
 		call_user_func_array(
 			[ $handler, 'doParserGetVariableValueSwitch' ],
-			[ &$parser, &$cache, &$word, &$ret ]
+			[ $parser, &$cache, 'noexternallanglinks', &$ret ]
 		);
 
+		$this->assertArrayHasKey( 'noexternallanglinks', $cache );
 		$this->assertIsString(
-
 			$out->getProperty( 'noexternallanglinks' )
 		);
 	}

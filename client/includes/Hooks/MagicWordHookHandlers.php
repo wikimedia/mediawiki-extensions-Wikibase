@@ -73,11 +73,11 @@ class MagicWordHookHandlers {
 	 * Static handler for the ParserGetVariableValueSwitch hook
 	 *
 	 * @param Parser $parser
-	 * @param array &$cache
+	 * @param string[] &$cache
 	 * @param string $magicWordId
-	 * @param string &$ret
+	 * @param ?string &$ret
 	 */
-	public static function onParserGetVariableValueSwitch( Parser $parser, &$cache, $magicWordId, &$ret ) {
+	public static function onParserGetVariableValueSwitch( Parser $parser, array &$cache, $magicWordId, &$ret ) {
 		$handler = self::newFromGlobalState();
 		$handler->doParserGetVariableValueSwitch( $parser, $cache, $magicWordId, $ret );
 	}
@@ -86,13 +86,11 @@ class MagicWordHookHandlers {
 	 * Apply the magic word.
 	 *
 	 * @param Parser $parser
-	 * @param array &$cache
+	 * @param string[] &$cache
 	 * @param string $magicWordId
-	 * @param string &$ret
-	 *
-	 * @return bool
+	 * @param ?string &$ret
 	 */
-	protected function doParserGetVariableValueSwitch( Parser $parser, &$cache, $magicWordId, &$ret ) {
+	protected function doParserGetVariableValueSwitch( Parser $parser, array &$cache, $magicWordId, &$ret ) {
 		if ( $magicWordId === 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
 			$ret = $cache[$magicWordId] = '';
@@ -100,8 +98,6 @@ class MagicWordHookHandlers {
 			$lang = $parser->getTargetLanguage();
 			$ret = $cache[$magicWordId] = $this->getRepoName( $lang );
 		}
-
-		return true;
 	}
 
 	/**
