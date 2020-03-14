@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use ParserOptions;
 use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
@@ -62,7 +63,9 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 	 * @dataProvider commonsInlineImageFormatterProvider
 	 */
 	public function testFormat( StringValue $value, $pattern, $shouldContain = true ) {
-		if ( $shouldContain && !wfFindFile( 'Example.jpg' ) ) {
+		if ( $shouldContain &&
+			!MediaWikiServices::getInstance()->getRepoGroup()->findFile( 'Example.jpg' )
+		) {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
@@ -96,7 +99,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 		$thumbSize = 0,
 		$thumbLimits = [ 120 ]
 	): CommonsInLineImageFormatter {
-		if ( !wfFindFile( 'Example.jpg' ) ) {
+		if ( !MediaWikiServices::getInstance()->getRepoGroup()->findFile( 'Example.jpg' ) ) {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}
 
