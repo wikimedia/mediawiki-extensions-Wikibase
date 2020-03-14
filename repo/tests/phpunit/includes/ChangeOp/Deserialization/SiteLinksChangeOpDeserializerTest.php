@@ -36,11 +36,7 @@ class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	 * @return SiteLinkBadgeChangeOpSerializationValidator
 	 */
 	private function newBadgeSerializationValidator() {
-		$lookup = $this->getMockBuilder( SiteLinkBadgeChangeOpSerializationValidator::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $lookup;
+		return $this->createMock( SiteLinkBadgeChangeOpSerializationValidator::class );
 	}
 
 	private function newSiteLinkTargetProvider() {

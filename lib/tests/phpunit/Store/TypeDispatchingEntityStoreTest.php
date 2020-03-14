@@ -359,10 +359,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 	 * @return User
 	 */
 	private function newUser() {
-		$mock = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
+		return $this->createMock( User::class );
 	}
 
 }

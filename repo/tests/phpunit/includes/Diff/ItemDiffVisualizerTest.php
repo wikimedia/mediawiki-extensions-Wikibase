@@ -99,20 +99,14 @@ class ItemDiffVisualizerTest extends MediaWikiTestCase {
 	 * @return ClaimDiffer
 	 */
 	private function getMockClaimDiffer() {
-		$mock = $this->getMockBuilder( ClaimDiffer::class )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
+		return $this->createMock( ClaimDiffer::class );
 	}
 
 	/**
 	 * @return ClaimDifferenceVisualizer
 	 */
 	private function getMockClaimDiffVisualizer() {
-		$mock = $this->getMockBuilder( ClaimDifferenceVisualizer::class )
-			->disableOriginalConstructor()
-			->getMock();
-		return $mock;
+		return $this->createMock( ClaimDifferenceVisualizer::class );
 	}
 
 	/**

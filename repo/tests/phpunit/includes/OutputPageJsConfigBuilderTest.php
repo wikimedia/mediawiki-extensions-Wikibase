@@ -87,22 +87,14 @@ class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
 	 * @return User
 	 */
 	public function getUser() {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $user;
+		return $this->createMock( User::class );
 	}
 
 	/**
 	 * @return Title
 	 */
 	private function getTitle() {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $title;
+		return $this->createMock( Title::class );
 	}
 
 	/**
