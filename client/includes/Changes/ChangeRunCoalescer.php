@@ -219,7 +219,7 @@ class ChangeRunCoalescer {
 	 * @return bool
 	 */
 	private function isBadgesOnlyChange( DiffOp $siteLinkDiffOp ) {
-		return $siteLinkDiffOp instanceof Diff && !array_key_exists( 'name', $siteLinkDiffOp );
+		return $siteLinkDiffOp instanceof Diff && !$siteLinkDiffOp->offsetExists( 'name' );
 	}
 
 	/**

@@ -116,6 +116,9 @@ class ApiPropsEntityUsageTest extends MediaWikiLangTestCase {
 			->setConstructorArgs( [ $main ] )
 			->getMock();
 
+		$pageSet
+			->method( 'extractRequestParams' )
+			->willReturn( [ 'redirects' => false, 'converttitles' => false ] );
 		$pageSet->expects( $this->any() )
 			->method( 'getGoodTitles' )
 			->will( $this->returnValue( $titles ) );
