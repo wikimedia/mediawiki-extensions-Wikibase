@@ -33,8 +33,8 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenUnknownRepository_getPropertyInfoReturnsNull() {
 		$lookup = new DispatchingPropertyInfoLookup( [
-			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
-			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
+			'' => new MockPropertyInfoLookup( $this->localPropertyInfo ),
+			'foo' => new MockPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
 
 		$this->assertNull( $lookup->getPropertyInfo( new PropertyId( 'bar:P123' ) ) );
@@ -42,8 +42,8 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenDifferentPropertyIds_getPropertyInfoDispatchesAccordingToRepository() {
 		$lookup = new DispatchingPropertyInfoLookup( [
-			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
-			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
+			'' => new MockPropertyInfoLookup( $this->localPropertyInfo ),
+			'foo' => new MockPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
 
 		$this->assertSame(
@@ -58,8 +58,8 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenMultiplePropertyInfoLookups_getAllPropertyInfoCombinesResults() {
 		$lookup = new DispatchingPropertyInfoLookup( [
-			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
-			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
+			'' => new MockPropertyInfoLookup( $this->localPropertyInfo ),
+			'foo' => new MockPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
 
 		$this->assertSame(
@@ -70,8 +70,8 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenMultiplePropertyInfoLookups_getPropertyInfoForDataTypeCombinesResults() {
 		$lookup = new DispatchingPropertyInfoLookup( [
-			'' => $this->getPropertyInfoLookup( $this->localPropertyInfo ),
-			'foo' => $this->getPropertyInfoLookup( $this->fooPropertyInfo ),
+			'' => new MockPropertyInfoLookup( $this->localPropertyInfo ),
+			'foo' => new MockPropertyInfoLookup( $this->fooPropertyInfo ),
 		] );
 
 		$this->assertSame(
@@ -82,10 +82,6 @@ class DispatchingPropertyInfoLookupTest extends \PHPUnit\Framework\TestCase {
 			[ 'P42' => $this->localPropertyInfo['P42'], 'foo:P42' => $this->fooPropertyInfo['foo:P42'] ],
 			$lookup->getPropertyInfoForDataType( 'commonsMedia' )
 		);
-	}
-
-	private function getPropertyInfoLookup( array $infos ) {
-		return new MockPropertyInfoLookup( $infos );
 	}
 
 	/**

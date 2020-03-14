@@ -54,10 +54,6 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		return $mock;
 	}
 
-	private function newEntitySearchHelper( ConfigurableTermSearchInteractor $searchInteractor ) {
-		return new EntityTermSearchHelper( $searchInteractor );
-	}
-
 	public function provideStrictLanguageValues() {
 		return [
 			[ true ],
@@ -78,7 +74,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 				}
 			) );
 
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+		$entitySearchHelper = new EntityTermSearchHelper( $searchInteractor );
 		$entitySearchHelper->getRankedSearchResults( 'Foo', 'de-ch', 'item', 10, $strictLanguage );
 	}
 
@@ -134,7 +130,7 @@ class EntityTermSearchHelperTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetRankedSearchResults( $search, $limit, array $interactorReturn, array $expected ) {
 		$searchInteractor = $this->getMockSearchInteractor( $search, 'en', 'item', $interactorReturn );
-		$entitySearchHelper = $this->newEntitySearchHelper( $searchInteractor );
+		$entitySearchHelper = new EntityTermSearchHelper( $searchInteractor );
 
 		$results = $entitySearchHelper->getRankedSearchResults( $search, 'en', 'item', $limit, false );
 		$this->assertEquals( $expected, $results );
