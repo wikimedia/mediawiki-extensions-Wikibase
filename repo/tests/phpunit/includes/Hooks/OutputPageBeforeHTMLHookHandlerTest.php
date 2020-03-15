@@ -96,7 +96,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$mockContext->method( 'getRequest' )->willReturn( new FauxRequest() );
 		$mockContext->method( 'getConfig' )->willReturn( RequestContext::getMain()->getConfig() );
 		$outputPage = new OutputPage( $mockContext );
-		$outputPage->setTitle( new Title() );
+		$outputPage->setTitle( $this->createMock( Title::class ) );
 		$outputPage->setArticleFlag( true );
 
 		return $outputPage;
