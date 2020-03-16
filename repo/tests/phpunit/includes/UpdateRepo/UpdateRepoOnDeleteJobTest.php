@@ -107,10 +107,7 @@ class UpdateRepoOnDeleteJobTest extends \MediaWikiTestCase {
 	 * @return SummaryFormatter
 	 */
 	private function getSummaryFormatter() {
-		$summaryFormatter = $this->getMockBuilder( SummaryFormatter::class )
-				->disableOriginalConstructor()->getMock();
-
-		return $summaryFormatter;
+		return $this->createMock( SummaryFormatter::class );
 	}
 
 	/**

@@ -55,11 +55,7 @@ class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 	 * @return MockObject
 	 */
 	private function getOutput() {
-		$output = $this->getMockBuilder( OutputPage::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $output;
+		return $this->createMock( OutputPage::class );
 	}
 
 	/**
