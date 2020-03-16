@@ -58,12 +58,7 @@ class ByPropertyIdGrouper {
 
 	private function addPropertyIdProvider( PropertyIdProvider $propertyIdProvider ) {
 		$idSerialization = $propertyIdProvider->getPropertyId()->getSerialization();
-
-		if ( isset( $this->byPropertyId[$idSerialization] ) ) {
-			$this->byPropertyId[$idSerialization][] = $propertyIdProvider;
-		} else {
-			$this->byPropertyId[$idSerialization] = [ $propertyIdProvider ];
-		}
+		$this->byPropertyId[$idSerialization][] = $propertyIdProvider;
 	}
 
 	/**
