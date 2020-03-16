@@ -9,7 +9,6 @@ use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
@@ -105,7 +104,6 @@ class MediawikiEditEntityFactory {
 		$baseRevId = false,
 		$allowMasterConnection = true
 	) {
-		$repoSettings = WikibaseSettings::getRepoSettings();
 		$statsTimingPrefix = "wikibase.repo.EditEntity.timing";
 		return new StatsdSaveTimeRecordingEditEntity(
 			new MediawikiEditEntity( $this->titleLookup,
