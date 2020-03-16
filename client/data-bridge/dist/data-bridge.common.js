@@ -3310,6 +3310,13 @@ module.exports = DESCRIPTORS ? Object.defineProperties : function defineProperti
 
 /***/ }),
 
+/***/ "3b82":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "3bbe":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5975,6 +5982,17 @@ module.exports = function (it) {
   } return it;
 };
 
+
+/***/ }),
+
+/***/ "827c":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_License_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3b82");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_License_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_License_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_License_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -12845,12 +12863,12 @@ var es_object_values = __webpack_require__("07ac");
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=3fe2ac8a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","size":"L","squary":true,"disabled":!_vm.canStartSaving},on:{"click":_vm.save}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","size":"L","squary":true,"disabled":_vm.isSaving},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Loading',{attrs:{"is-initializing":_vm.isInitializing,"is-saving":_vm.isSaving}},[_c('DataBridge',{class:[ 'wb-db-app__data-bridge', _vm.isSaving ? 'wb-db-app__data-bridge--overlayed' : '' ]})],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=2a6c2dc0&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","size":"L","squary":true,"disabled":!_vm.canStartSaving},on:{"click":_vm.save}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"cancel","size":"L","squary":true,"disabled":_vm.isSaving},on:{"click":_vm.cancel}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):_c('Loading',{attrs:{"is-initializing":_vm.isInitializing,"is-saving":_vm.isSaving}},[(_vm.licenseIsVisible)?_c('div',{staticClass:"wb-db-app__license"},[_c('License',{on:{"cancel":_vm.dismissLicense}})],1):_vm._e(),_c('DataBridge',{class:[ 'wb-db-app__data-bridge', _vm.isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]})],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=3fe2ac8a&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=2a6c2dc0&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -17852,7 +17870,91 @@ var ProcessDialogHeader_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ProcessDialogHeader = (ProcessDialogHeader_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/License.vue?vue&type=template&id=5a6efd2b&
+var Licensevue_type_template_id_5a6efd2b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-license"},[_c('span',{staticClass:"wb-db-license__button"},[_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"size":"M","type":"cancel"},on:{"click":_vm.handleCancelButtonClick}})],1),_c('div',{staticClass:"wb-db-license__text"},[_c('h2',{staticClass:"wb-db-license__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.LICENSE_HEADING ))+" ")]),_c('div',{staticClass:"wb-db-license__body",domProps:{"innerHTML":_vm._s(_vm.getBodyMessage)}})])])}
+var Licensevue_type_template_id_5a6efd2b_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/License.vue?vue&type=template&id=5a6efd2b&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/License.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+
+var Licensevue_type_script_lang_ts_License =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(License, _Vue);
+
+  function License() {
+    _classCallCheck(this, License);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(License).apply(this, arguments));
+  }
+
+  _createClass(License, [{
+    key: "handleCancelButtonClick",
+    value: function handleCancelButtonClick(event) {
+      this.$emit('cancel', event);
+    }
+  }, {
+    key: "publishOrSave",
+    get: function get() {
+      return this.$bridgeConfig.usePublish ? this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
+    }
+  }, {
+    key: "getBodyMessage",
+    get: function get() {
+      var _this$$bridgeConfig$t, _this$$bridgeConfig$d, _this$$bridgeConfig$d2;
+
+      return this.$messages.get(this.$messages.KEYS.LICENSE_BODY, this.publishOrSave, (_this$$bridgeConfig$t = this.$bridgeConfig.termsOfUseUrl) !== null && _this$$bridgeConfig$t !== void 0 ? _this$$bridgeConfig$t : '', (_this$$bridgeConfig$d = this.$bridgeConfig.dataRightsUrl) !== null && _this$$bridgeConfig$d !== void 0 ? _this$$bridgeConfig$d : '', (_this$$bridgeConfig$d2 = this.$bridgeConfig.dataRightsText) !== null && _this$$bridgeConfig$d2 !== void 0 ? _this$$bridgeConfig$d2 : '');
+    }
+  }]);
+
+  return License;
+}(external_vue_default.a);
+
+Licensevue_type_script_lang_ts_License = __decorate([Object(vue_class_component_esm["default"])({
+  components: {
+    EventEmittingButton: components_EventEmittingButton
+  }
+})], Licensevue_type_script_lang_ts_License);
+/* harmony default export */ var Licensevue_type_script_lang_ts_ = (Licensevue_type_script_lang_ts_License);
+// CONCATENATED MODULE: ./src/presentation/components/License.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_Licensevue_type_script_lang_ts_ = (Licensevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/License.vue?vue&type=style&index=0&lang=scss&
+var Licensevue_type_style_index_0_lang_scss_ = __webpack_require__("827c");
+
+// CONCATENATED MODULE: ./src/presentation/components/License.vue
+
+
+
+
+
+
+/* normalize component */
+
+var License_component = normalizeComponent(
+  components_Licensevue_type_script_lang_ts_,
+  Licensevue_type_template_id_5a6efd2b_render,
+  Licensevue_type_template_id_5a6efd2b_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_License = (License_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -17877,18 +17979,33 @@ function (_mixins) {
   _inherits(App, _mixins);
 
   function App() {
+    var _this;
+
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
+    _this.licenseIsVisible = false;
+    return _this;
   }
 
   _createClass(App, [{
+    key: "dismissLicense",
+    value: function dismissLicense() {
+      this.licenseIsVisible = false;
+    }
+  }, {
     key: "save",
     value: function save() {
-      var _this = this;
+      var _this2 = this;
 
+      if (!this.licenseIsVisible) {
+        this.licenseIsVisible = true;
+        return;
+      }
+
+      this.licenseIsVisible = false;
       this.rootModule.dispatch('saveBridge').then(function () {
-        _this.$emit(src_events.onSaved);
+        _this2.$emit(src_events.onSaved);
       }).catch(function (_error) {// TODO store already sets application into error state. Do we need to do anything else?
       });
     }
@@ -17905,6 +18022,11 @@ function (_mixins) {
           term: this.rootModule.getters.targetLabel
         }
       }).$mount().$el);
+    }
+  }, {
+    key: "isOverlayed",
+    get: function get() {
+      return this.isSaving || this.licenseIsVisible;
     }
   }, {
     key: "isSaving",
@@ -17938,6 +18060,7 @@ function (_mixins) {
 
 Appvue_type_script_lang_ts_App = __decorate([Object(vue_property_decorator["Component"])({
   components: {
+    License: components_License,
     DataBridge: components_DataBridge,
     ErrorWrapper: components_ErrorWrapper,
     Loading: components_Loading,

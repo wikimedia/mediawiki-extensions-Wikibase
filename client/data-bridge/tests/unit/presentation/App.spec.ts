@@ -22,6 +22,7 @@ import MessageKeys from '@/definitions/MessageKeys';
 import EntityId from '@/datamodel/EntityId';
 import { calledWithHTMLElement } from '../../util/assertions';
 import newMockServiceContainer from '../services/newMockServiceContainer';
+import License from '@/presentation/components/License.vue';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -182,7 +183,7 @@ describe( 'App.vue', () => {
 		} );
 	} );
 
-	it( 'saves on save button click', async () => {
+	it( 'shows License on first save button click and saves on second save button click', async () => {
 		const bridgeSave = jest.fn();
 		const localStore = hotUpdateDeep( store, {
 			actions: {
@@ -198,9 +199,57 @@ describe( 'App.vue', () => {
 
 		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
 		await localVue.nextTick();
+		expect( bridgeSave ).not.toHaveBeenCalled();
+		expect( wrapper.find( License ).exists() ).toBe( true );
 
+		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( Events.onSaved ) ).toBeTruthy();
+	} );
+
+	it(
+		'dismisses License on License\'s cancel button click and shows it again on next save button click',
+		async () => {
+			const bridgeSave = jest.fn();
+			const localStore = hotUpdateDeep( store, {
+				actions: {
+					saveBridge: bridgeSave,
+				},
+			} );
+			localStore.commit( 'setApplicationStatus', ApplicationStatus.READY );
+			const wrapper = shallowMount( App, {
+				store: localStore,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+			await localVue.nextTick();
+			expect( wrapper.find( License ).exists() ).toBe( true );
+
+			await wrapper.find( License ).vm.$emit( 'cancel' );
+			await localVue.nextTick();
+			expect( wrapper.find( License ).exists() ).toBe( false );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+			await localVue.nextTick();
+			expect( bridgeSave ).not.toHaveBeenCalled();
+			expect( wrapper.find( License ).exists() ).toBe( true );
+		},
+	);
+
+	it( 'adds an overlay over DataBridge while showing the License', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await localVue.nextTick();
+
+		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
 	it( 'adds an overlay over DataBridge during save state', async () => {
