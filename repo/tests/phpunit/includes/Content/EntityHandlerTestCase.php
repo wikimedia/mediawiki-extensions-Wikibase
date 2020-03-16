@@ -7,7 +7,6 @@ use Article;
 use ContentHandler;
 use DataValues\Serializers\DataValueSerializer;
 use DummySearchIndexFieldDefinition;
-use FauxRequest;
 use InvalidArgumentException;
 use Language;
 use LogicException;
@@ -537,7 +536,7 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 	 * @throws MWException
 	 */
 	protected function getContext( Title $title ) {
-		$context = new RequestContext( new FauxRequest() );
+		$context = new RequestContext();
 		$context->setLanguage( 'qqx' );
 		$context->setTitle( $title );
 
