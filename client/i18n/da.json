@@ -84,5 +84,6 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Forbindelse|Forbindelser}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Giv mig besked, når nogen forbinder en side som {{GENDER:|jeg oprettede}} til et {{WBREPONAME}}-emne.",
 	"wikibase-client-data-bridge-permissions-error-info": "Flere detaljer",
-	"wikibase-client-data-bridge-references-heading": "Referencer"
+	"wikibase-client-data-bridge-references-heading": "Referencer",
+	"wikibase-client-data-bridge-license-heading": "Benyttelse og licens"
 }

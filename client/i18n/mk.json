@@ -133,6 +133,8 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Подновив</strong> застарена вредност",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Претходната вредност била исправна, но сега е застарена.",
 	"wikibase-client-data-bridge-references-heading": "Наводи",
+	"wikibase-client-data-bridge-license-heading": "Употреба и лиценца",
+	"wikibase-client-data-bridge-license-body": "<p>Менувајќи ја оваа вредност, воедно ќе ја смените и на {{WBREPONAME}} и можеби на други јазични изданија.</p>\n<p>Стискајќи на „{{int:$1}}“ се согласувате со [$2 условите на употреба] и неотповикливо се согласувате дека ги објавувате вашите придонеси под [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Место тоа, можете да го направите следново:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Уреди ја вредноста на {{WBREPONAME}}. Стиснете на копчето подолу за да ја уредите вредноста непосредно (врската отвора во ново јазиче).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Уреди ја вредноста на {{WBREPONAME}}",

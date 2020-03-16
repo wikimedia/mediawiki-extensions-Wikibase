@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Candalua",
-			"Frigotoni"
+			"Frigotoni",
+			"Fierodelveneto"
 		]
 	},
 	"wikibase-client-desc": "Client par l'estension Wikibase",
@@ -18,7 +19,7 @@
 	"wikibase-comment-sitelink-remove": "Cavà colegamento lenguìstego: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|canbiamento|canbiamenti}}",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
-	"wikibase-editlinks": "Canbia link",
+	"wikibase-editlinks": "Canbia lingambo",
 	"wikibase-editlinkstitle": "Canbia colegamenti interlenguìsteghi",
 	"wikibase-linkitem-addlinks": "Zonta link",
 	"wikibase-linkitem-alreadylinked": "La pagina che te vol colegar la xe zà asocià a n'altro [$1 elemento] in te l'archivio sentrale dei dati che ponta su [[$2]] in sto sito. I elementi i se pol colegar a na pagina sola par sito. Siegli na pagina difarente a cui colegarla.",
@@ -40,7 +41,7 @@
 	"wikibase-rc-hide-wikidata-show": "Mostra",
 	"wikibase-rc-show-wikidata-pref": "Mostra le modifiche de Wikidata tra i ultimi canbiamenti",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "Modifica su {{WBREPONAME}}",
+	"wikibase-rc-wikibase-edit-title": "Modifega so {{WBREPONAME}}",
 	"wikibase-replicationnote": "Podarìa volerghe calche minuto prima che i canbiamenti i se veda su tute le wiki.",
 	"wikibase-watchlist-show-changes-pref": "Mostra le modifiche de Wikidata sui osservati speciali",
 	"wikibase-error-invalid-entity-id": "L'ID specificà el xe sconossùo al sistema. Dòpara un ID de entità valido.",

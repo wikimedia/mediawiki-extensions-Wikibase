@@ -124,5 +124,6 @@
 	"connected-redirect-category": "Перенаправления, связанные с элементом {{grammar:genitive|{{WBREPONAME}}}}",
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
-	"wikibase-client-data-bridge-references-heading": "Примечания"
+	"wikibase-client-data-bridge-references-heading": "Примечания",
+	"wikibase-client-data-bridge-license-heading": "Использование и лицензия"
 }

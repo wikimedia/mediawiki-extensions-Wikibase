@@ -140,6 +140,8 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>עדכנתי</strong> ערך מיושן",
 	"wikibase-client-data-bridge-edit-decision-update-description": "הערך הקודם היהי פעם נכון, אבל עכשיו הוא התיישן.",
 	"wikibase-client-data-bridge-references-heading": "מקורות",
+	"wikibase-client-data-bridge-license-heading": "שימוש ורישיון",
+	"wikibase-client-data-bridge-license-body": "<p>שינוי הערך הזה ישנה אותו גם באתר {{WBREPONAME}} ואולי גם באתרי ויקי בשפות אחרות.</p>\n<p>לחיצה על \"{{int:$1}}\" מהווה את הסכמתך ל[$2 תנאי השימוש], ואת הסכמתך הבלתי־חוזרת לשחרר את התרומה שלך לפי תנאי [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "במקום זה אפשר לעשות את הבא:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "ערוך את הערך ב־{{WBREPONAME}}. לחץ על הכפתור שלמטה כדי לערוך את הערך ישירות (הקישור ייפתח בכרטיסייה חדשה).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "לערוף את הערך באתר {{WBREPONAME}}",

@@ -13,7 +13,8 @@
 			"Dars",
 			"Avatar6",
 			"Vlad5250",
-			"Movses"
+			"Movses",
+			"Andriy.v"
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",
@@ -113,7 +114,7 @@
 	"wikibase-time-precision-Mannum": "$1 мільйон{{PLURAL:$1||ів|и}} років н.е.",
 	"wikibase-time-precision-annum": "$1 {{PLURAL:$1|рік|років|роки}} н.е.",
 	"wikibase-time-precision-millennium": "$1. тисячоліття",
-	"wikibase-time-precision-century": "$1. століття",
+	"wikibase-time-precision-century": "$1 століття",
 	"wikibase-time-precision-10annum": "$1 десятиріччя",
 	"wikibase-time-precision-BCE": "$1 до н. е.",
 	"wikibase-time-precision-BCE-Gannum": "$1 мільярд{{PLURAL:$1||ів|и}} років до н.е.",

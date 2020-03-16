@@ -21,7 +21,8 @@
 			"Mido",
 			"ديفيد",
 			"Azouz.anis",
-			"Guycn2"
+			"Guycn2",
+			"NEHAOUA"
 		]
 	},
 	"wikibase-client-desc": "عميل امتداد Wikibase",
@@ -150,5 +151,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>أنا حدثت</strong> قيمة قديمة",
 	"wikibase-client-data-bridge-edit-decision-update-description": "القيمة السابقة كانت صحيحة في وقت سابق لكنها الآن قديمة.",
 	"wikibase-client-data-bridge-references-heading": "مراجع",
+	"wikibase-client-data-bridge-license-heading": "الاستخدام والترخيص",
+	"wikibase-client-data-bridge-license-body": "<p>سيؤدي تغيير هذه القيمة إلى تغييرها أيضًا في {{WBREPONAME}} وربما على الويكي بلغات أخرى.</p>\n<p> بالنقر على \"{{int:$1}}\", أنت توافق على [$2 تعليمات الاستخدام], وأنت توافق بشكل لا رجعة فيه على التخلي عن مساهمتك بموجب [$3 $4].</p>",
 	"wikibase-client-data-bridge-novalue-error-head": "تعديل قيمة $1 غير مدعوم حاليًّا"
 }

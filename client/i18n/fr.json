@@ -162,6 +162,8 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>J’ai mis à jour</strong> une valeur désuète.",
 	"wikibase-client-data-bridge-edit-decision-update-description": "La valeur précédente était correcte mais est maintenant désuète.",
 	"wikibase-client-data-bridge-references-heading": "Références",
+	"wikibase-client-data-bridge-license-heading": "Utilisation et licence",
+	"wikibase-client-data-bridge-license-body": "<p>Modifier cette valeur la modifiera aussi sur {{WBREPONAME}} et éventuellement sur les autres wikis dans d’autres langues.</p>\n<p>En cliquant sur « {{int:$1}} », vous acceptez les [$2 conditions d’utilisation], et vous acceptez de façon irrévocable de mettre votre contribution sous [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "À la place, vous pouvez faire ce qui suit :",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Modifier la valeur sur {{WBREPONAME}}. Cliquer sur le bouton ci-dessous pour modifier directement la valeur (le lien s’ouvre dans un nouvel onglet).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifier la valeur sur {{WBREPONAME}}",
