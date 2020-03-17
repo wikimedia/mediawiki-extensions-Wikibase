@@ -47,7 +47,7 @@ class DispatchingTermSearchInteractorTest extends \PHPUnit\Framework\TestCase {
 			->method( 'searchForEntities' )
 			->will( $this->returnCallback(
 				function ( $text, $language, $entityType ) use ( $resultsByEntityType ) {
-					return isset( $resultsByEntityType[$entityType] ) ? $resultsByEntityType[$entityType] : [];
+					return $resultsByEntityType[$entityType] ?? [];
 				}
 			) );
 		return $interactor;

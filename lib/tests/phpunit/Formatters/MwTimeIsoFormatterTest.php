@@ -530,8 +530,8 @@ class MwTimeIsoFormatterTest extends MediaWikiTestCase {
 		foreach ( $tests as $args ) {
 			$timestamp = $args[0];
 			$precision = $args[1];
-			$expected = isset( $args[2] ) ? $args[2] : $timestamp;
-			$languageCode = isset( $args[3] ) ? $args[3] : 'en';
+			$expected = $args[2] ?? $timestamp;
+			$languageCode = $args[3] ?? 'en';
 
 			$argLists[] = [
 				$expected,

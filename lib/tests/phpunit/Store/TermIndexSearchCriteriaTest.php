@@ -48,9 +48,9 @@ class TermIndexSearchCriteriaTest extends \PHPUnit\Framework\TestCase {
 	public function testConstructor( array $fields ) {
 		$mask = new TermIndexSearchCriteria( $fields );
 
-		$this->assertEquals( isset( $fields['termType'] ) ? $fields['termType'] : null, $mask->getTermType() );
-		$this->assertEquals( isset( $fields['termLanguage'] ) ? $fields['termLanguage'] : null, $mask->getLanguage() );
-		$this->assertEquals( isset( $fields['termText'] ) ? $fields['termText'] : null, $mask->getText() );
+		$this->assertSame( $fields['termType'] ?? null, $mask->getTermType() );
+		$this->assertSame( $fields['termLanguage'] ?? null, $mask->getLanguage() );
+		$this->assertSame( $fields['termText'] ?? null, $mask->getText() );
 	}
 
 	public function testGivenInvalidField_constructorThrowsException() {

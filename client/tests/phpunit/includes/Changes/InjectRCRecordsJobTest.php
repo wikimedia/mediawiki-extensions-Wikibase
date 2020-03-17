@@ -154,7 +154,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	 * @return MockObject|EntityChange
 	 */
 	private function getEntityChangeMock( $id = 77, array $fields = [] ) {
-		$info = isset( $fields['info'] ) ? $fields['info'] : [];
+		$info = $fields['info'] ?? [];
 
 		$change = $this->getMockBuilder( EntityChange::class )
 			->disableOriginalConstructor()

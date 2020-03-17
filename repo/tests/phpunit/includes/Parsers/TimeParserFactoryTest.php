@@ -225,9 +225,9 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
-			$precision = isset( $expected[1] ) ? $expected[1] : TimeValue::PRECISION_DAY;
-			$calendarModel = isset( $expected[2] ) ? $expected[2] : $gregorian;
-			$languageCode = isset( $expected[3] ) ? $expected[3] : 'en';
+			$precision = $expected[1] ?? TimeValue::PRECISION_DAY;
+			$calendarModel = $expected[2] ?? $gregorian;
+			$languageCode = $expected[3] ?? 'en';
 
 			$argLists[] = [
 				(string)$value,
@@ -359,7 +359,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			$options = $args[0];
 			$timestamp = $args[1];
 			$precision = $args[2];
-			$calendarModel = isset( $args[3] ) ? $args[3] : TimeValue::CALENDAR_GREGORIAN;
+			$calendarModel = $args[3] ?? TimeValue::CALENDAR_GREGORIAN;
 
 			$cases[] = [
 				(string)$value,
