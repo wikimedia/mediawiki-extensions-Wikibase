@@ -17870,12 +17870,12 @@ var ProcessDialogHeader_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_ProcessDialogHeader = (ProcessDialogHeader_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/License.vue?vue&type=template&id=5a6efd2b&
-var Licensevue_type_template_id_5a6efd2b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-license"},[_c('span',{staticClass:"wb-db-license__button"},[_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"size":"M","type":"cancel"},on:{"click":_vm.handleCancelButtonClick}})],1),_c('div',{staticClass:"wb-db-license__text"},[_c('h2',{staticClass:"wb-db-license__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.LICENSE_HEADING ))+" ")]),_c('div',{staticClass:"wb-db-license__body",domProps:{"innerHTML":_vm._s(_vm.getBodyMessage)}})])])}
-var Licensevue_type_template_id_5a6efd2b_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/License.vue?vue&type=template&id=95093fca&
+var Licensevue_type_template_id_95093fca_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-license"},[_c('span',{staticClass:"wb-db-license__button"},[_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"size":"M","type":"cancel"},on:{"click":_vm.handleCancelButtonClick}})],1),_c('div',{staticClass:"wb-db-license__text"},[_c('h2',{staticClass:"wb-db-license__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.LICENSE_HEADING ))+" ")]),_c('div',{staticClass:"wb-db-license__body",domProps:{"innerHTML":_vm._s(_vm.getBodyMessage)}})])])}
+var Licensevue_type_template_id_95093fca_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/License.vue?vue&type=template&id=5a6efd2b&
+// CONCATENATED MODULE: ./src/presentation/components/License.vue?vue&type=template&id=95093fca&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/License.vue?vue&type=script&lang=ts&
 
@@ -17943,8 +17943,8 @@ var Licensevue_type_style_index_0_lang_scss_ = __webpack_require__("827c");
 
 var License_component = normalizeComponent(
   components_Licensevue_type_script_lang_ts_,
-  Licensevue_type_template_id_5a6efd2b_render,
-  Licensevue_type_template_id_5a6efd2b_staticRenderFns,
+  Licensevue_type_template_id_95093fca_render,
+  Licensevue_type_template_id_95093fca_staticRenderFns,
   false,
   null,
   null,
