@@ -106,9 +106,19 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 			'wbt_item_terms',
 			'wbit_term_in_lang_id',
 			[ 'wbit_item_id' => $itemId->getNumericId() ],
-			__METHOD__,
-			[ 'FOR UPDATE' ]
+			__METHOD__
 		);
+
+		if ( $oldTermInLangIds !== [] ) {
+			// Lock them
+			$oldTermInLangIds = $dbw->selectFieldValues(
+				'wbt_item_terms',
+				'wbit_term_in_lang_id',
+				[ 'wbit_item_id' => $itemId->getNumericId() ],
+				__METHOD__,
+				[ 'FOR UPDATE' ]
+			);
+		}
 
 		$termsArray = $this->termsArrayFromFingerprint( $fingerprint, $this->stringNormalizer );
 		$termInLangIdsToClean = [];
