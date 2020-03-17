@@ -41,7 +41,6 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	private $termKeys = [];
 
 	/**
-	 * PrefetchingItemTermLookup constructor.
 	 * @param ILoadBalancer $loadBalancer
 	 * @param DatabaseTermInLangIdsResolver $termInlangIdsResolver
 	 * @param bool|string $databaseDomain

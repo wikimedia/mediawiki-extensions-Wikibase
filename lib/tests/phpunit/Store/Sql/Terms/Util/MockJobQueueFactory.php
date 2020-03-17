@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use IJobSpecification;

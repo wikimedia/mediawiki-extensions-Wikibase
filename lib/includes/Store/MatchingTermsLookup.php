@@ -1,4 +1,5 @@
 <?php
+
 namespace Wikibase\Lib\Store;
 
 use Wikibase\Lib\TermIndexEntry;

@@ -19,8 +19,6 @@ class MetaDataBridgeConfig extends ApiQueryBase {
 	private $resolveTitleStringToUrl;
 
 	/**
-	 * MetaDataBridgeConfig constructor.
-	 *
 	 * @param SettingsArray $repoSettings
 	 * @param ApiQuery $queryModule
 	 * @param string $moduleName

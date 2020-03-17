@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Lib\Store;
 
 use MWContentSerializationException;
