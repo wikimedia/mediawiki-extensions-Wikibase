@@ -2430,7 +2430,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 *
 	 * @fixme this is duplicated in WikibaseClient...
 	 * @return CacheInterface
 	 */

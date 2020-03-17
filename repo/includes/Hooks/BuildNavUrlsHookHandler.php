@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\Hooks;
 
 use Psr\Log\LoggerInterface;

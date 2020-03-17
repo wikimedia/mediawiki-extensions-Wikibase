@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Tests;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\DataModel\Entity\ItemId;
