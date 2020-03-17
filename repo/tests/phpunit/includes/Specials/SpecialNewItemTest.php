@@ -46,6 +46,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function setUp(): void {
 		parent::setUp();
+		$this->setUserLang( 'qqx' );
 
 		// @todo This list should be stored somewhere, DRY
 		$tables = [
@@ -224,7 +225,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
-				'language code was not recognized',
+				'(wikibase-content-language-edit-not-recognized-language)',
 			],
 			'unknown site identifier' => [
 				[
@@ -235,7 +236,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_SITE => 'unknown',
 					SpecialNewItem::FIELD_PAGE => 'some page'
 				],
-				'site identifier was not recognized',
+				'(wikibase-newitem-not-recognized-siteid)',
 			],
 			'all fields are empty' => [
 				[
@@ -244,7 +245,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
-				'you need to fill'
+				'(wikibase-newitem-insufficient-data)'
 			],
 			'empty label and description, aliases contain only spaces and pipe symbols' => [
 				[
@@ -253,7 +254,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => '',
 					SpecialNewItem::FIELD_ALIASES => ' | || | ',
 				],
-				'you need to fill'
+				'(wikibase-newitem-insufficient-data)'
 			],
 			'label and description are identical' => [
 				[
@@ -262,7 +263,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 					SpecialNewItem::FIELD_DESCRIPTION => 'something',
 					SpecialNewItem::FIELD_ALIASES => '',
 				],
-				'label and description can not have the same value'
+				'(wikibase-newitem-same-label-and-description)'
 			],
 		];
 	}
@@ -303,7 +304,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		$this->assertHtmlContainsErrorMessage( $html, 'already has label' );
+		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-with-description-conflict: label1, en, ' );
 
 		$settings->setSetting( 'tmpItemTermsMigrationStages', $oldConfig );
 	}
@@ -322,7 +323,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		$this->assertHtmlContainsErrorMessage( $html, 'could not be found on' );
+		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-newitem-no-external-page: existing-site, nonexistent-page)' );
 	}
 
 	public function testWhenLabelIsInvalid_ThenHtmlContainsErrorMessage() {
@@ -360,7 +361,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	private function assertHtmlContainsErrorTooLongMessage( $formData ) {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
-		$this->assertHtmlContainsErrorMessage( $html, 'Must be no more than' );
+		$this->assertHtmlContainsErrorMessage( $html, '(htmlform-invalid-input)' );
 	}
 
 	/**
