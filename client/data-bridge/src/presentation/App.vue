@@ -164,7 +164,7 @@ export default class App extends mixins( StateMixin ) {
 	}
 
 	&__license {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		background: #fff;
 		box-shadow: $box-shadow-dialog;
