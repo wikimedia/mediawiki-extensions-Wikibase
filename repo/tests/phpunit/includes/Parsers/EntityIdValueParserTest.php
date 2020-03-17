@@ -33,7 +33,7 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	}
 
 	/**
-	 * @see ValueParserTestBase::parseProvider
+	 * @inheritDoc
 	 */
 	public function validInputProvider() {
 		$argLists = [];

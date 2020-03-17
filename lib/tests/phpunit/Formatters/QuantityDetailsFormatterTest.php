@@ -120,7 +120,7 @@ class QuantityDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testFormatError() {
-		$formatter = $formatter = $this->newFormatter();
+		$formatter = $this->newFormatter();
 		$value = new NumberValue( 23 );
 
 		$this->expectException( InvalidArgumentException::class );

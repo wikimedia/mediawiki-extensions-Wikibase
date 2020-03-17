@@ -394,7 +394,6 @@ class DirectSqlStore implements ClientStore {
 	 * Does nothing.
 	 */
 	public function rebuild() {
-		$this->clear();
 	}
 
 	/**
