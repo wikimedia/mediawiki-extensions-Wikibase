@@ -128,11 +128,14 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 					];
 				}
 
-				$dbw->insert(
-					'wbt_item_terms',
-					$rowsToInsert,
-					$fname
-				);
+				$dbw->onTransactionPreCommitOrIdle( function () use ( $dbw, $rowsToInsert, $fname ) {
+					$dbw->insert(
+						'wbt_item_terms',
+						$rowsToInsert,
+						$fname,
+						[ 'IGNORE' ]
+					);
+				} );
 			}
 		);
 
