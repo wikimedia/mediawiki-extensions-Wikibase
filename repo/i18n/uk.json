@@ -414,7 +414,7 @@
 	"action-property-term": "змінювання термінів властивостей (мітки, описи, альтернативні назви)",
 	"right-property-term": "змінювання термінів властивостей (мітки, описи, альтернативні назви)",
 	"action-property-create": "створення властивостей",
-	"right-property-create": "створення властивостей",
+	"right-property-create": "Створення властивостей",
 	"wikibase-entity-not-viewable-title": "Вміст невідповідного типу: неможливо відобразити вміст",
 	"wikibase-entity-not-viewable": "Заданий вміст типу \"$1\" не є \"сутністю\" і Wikibase не може відобразити його.",
 	"wikibase-pageinfo-subscription": "Вікі, підписані на цю сутність",
