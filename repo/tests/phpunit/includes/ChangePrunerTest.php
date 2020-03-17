@@ -66,7 +66,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 		$pruner->setMessageReporter( $this->newMessageReporter() );
 		$pruner->prune();
 
-		$this->assertEquals( 6, count( $this->messages ), 'pruner has reported 6 messages' );
+		$this->assertCount( 6, $this->messages, 'pruner has reported 6 messages' );
 
 		$this->assertStringContainsString( 'pruning entries older than 2015-01-01T00:00:06Z', $this->messages[0] );
 		$this->assertStringContainsString( '1 rows pruned', $this->messages[1] );

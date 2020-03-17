@@ -60,7 +60,7 @@ class EntityPrefetcherSpyTest extends TestCase {
 		$prefetcher->prefetch( [ $idOne, $idTwo ] );
 		$prefetcher->purgeAll();
 
-		$this->assertEmpty( $prefetcher->getPrefetchedEntities() );
+		$this->assertSame( [], $prefetcher->getPrefetchedEntities() );
 	}
 
 }

@@ -168,9 +168,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->siteLinkTable->deleteLinksOfItem( $item->getId() ) !== false
 		);
 
-		$this->assertEmpty(
-			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
-		);
+		$this->assertSame( [], $this->siteLinkTable->getSiteLinksForItem( $item->getId() ) );
 	}
 
 	/**
@@ -182,9 +180,7 @@ class SiteLinkTableTest extends \MediaWikiTestCase {
 			$this->siteLinkTable->clear() !== false
 		);
 
-		$this->assertEmpty(
-			$this->siteLinkTable->getSiteLinksForItem( $item->getId() )
-		);
+		$this->assertSame( [], $this->siteLinkTable->getSiteLinksForItem( $item->getId() ) );
 	}
 
 }

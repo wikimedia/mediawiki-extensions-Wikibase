@@ -65,7 +65,7 @@ class LinkTitlesTest extends WikibaseApiTestCase {
 		$this->assertArrayHasKey( 'entity', $result, "Missing 'entity' section in response." );
 		$this->assertArrayHasKey( 'lastrevid', $result['entity'], 'entity should contain lastrevid key' );
 
-		$this->assertEquals( $expected['inresult'], count( $result['entity']['sitelinks'] ), "Result has wrong number of sitelinks" );
+		$this->assertCount( $expected['inresult'], $result['entity']['sitelinks'], "Result has wrong number of sitelinks" );
 		foreach ( $result['entity']['sitelinks'] as $link ) {
 			$this->assertTrue( $params['fromsite'] === $link['site'] || $params['tosite'] === $link['site'] );
 			$this->assertTrue( $params['fromtitle'] === $link['title'] || $params['totitle'] === $link['title'] );

@@ -576,7 +576,7 @@ class JsonDumpGeneratorTest extends \PHPUnit\Framework\TestCase {
 		$dumper->generateDump( $pager );
 		$json = trim( ob_get_clean() );
 
-		$this->assertSame( 9, count( json_decode( $json ) ), 'Redirected Item Q9 not in dump' );
+		$this->assertCount( 9, json_decode( $json ), 'Redirected Item Q9 not in dump' );
 	}
 
 }

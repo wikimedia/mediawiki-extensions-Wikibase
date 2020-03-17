@@ -376,7 +376,7 @@ class MockRepositoryTest extends TestCase {
 		);
 
 		// check links of unknown id
-		$this->assertEmpty( $this->repo->getSiteLinksForItem( new ItemId( 'q123' ) ) );
+		$this->assertSame( [], $this->repo->getSiteLinksForItem( new ItemId( 'q123' ) ) );
 	}
 
 	public function provideSaveEntity() {
@@ -654,7 +654,7 @@ class MockRepositoryTest extends TestCase {
 		$mock->putRedirect( new EntityRedirect( $q55, $q5 ) );
 		$mock->putRedirect( new EntityRedirect( $q555, $q5 ) );
 
-		$this->assertEmpty( $mock->getRedirectIds( $q55 ), 'no redirects to redirect' );
+		$this->assertSame( [], $mock->getRedirectIds( $q55 ), 'no redirects to redirect' );
 		$this->assertEquals( [ $q55, $q555 ], $mock->getRedirectIds( $q5 ), 'two redirects' );
 	}
 

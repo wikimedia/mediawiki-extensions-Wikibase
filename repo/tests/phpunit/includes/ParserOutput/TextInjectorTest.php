@@ -16,7 +16,7 @@ class TextInjectorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConstructor() {
 		$injector = new TextInjector();
-		$this->assertEmpty( $injector->getMarkers() );
+		$this->assertSame( [], $injector->getMarkers() );
 
 		$injector = new TextInjector( [ 'test' => [ 'foo', 'bar' ] ] );
 		$this->assertArrayHasKey( 'test', $injector->getMarkers() );

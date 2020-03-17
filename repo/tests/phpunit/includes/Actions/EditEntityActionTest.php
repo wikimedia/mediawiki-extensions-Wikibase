@@ -676,9 +676,9 @@ class EditEntityActionTest extends ActionTestCase {
 				$act = call_user_func( [ $out, $func ] );
 
 				if ( $pattern === true ) {
-					$this->assertNotEmpty( $act, $p );
+					$this->assertNotSame( '', $act, $p );
 				} elseif ( $pattern === false ) {
-					$this->assertEmpty( $act, $p );
+					$this->assertSame( '', $act, $p );
 				} else {
 					$this->assertRegExp( $pattern, $act, $p );
 				}
@@ -863,7 +863,7 @@ class EditEntityActionTest extends ActionTestCase {
 		if ( $error ) {
 			$this->assertRegExp( $error, $out->getHTML() );
 
-			$this->assertEmpty( $out->getRedirect(), 'operation should not trigger a redirect' );
+			$this->assertSame( '', $out->getRedirect(), 'operation should not trigger a redirect' );
 		} else {
 			$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
 		}

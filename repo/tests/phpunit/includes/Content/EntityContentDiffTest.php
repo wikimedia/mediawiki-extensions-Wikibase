@@ -65,7 +65,7 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 			$entityDiff->getOperations(),
 			$diff->getEntityDiff()->getOperations()
 		);
-		$this->assertEmpty( array_diff(
+		$this->assertSame( [], array_diff(
 			array_keys( $entityDiff->getOperations() ),
 			array_keys( $diff->getEntityDiff()->getOperations() )
 		) );
@@ -74,7 +74,7 @@ class EntityContentDiffTest extends \MediaWikiTestCase {
 			$redirectDiff->getOperations(),
 			$diff->getRedirectDiff()->getOperations()
 		);
-		$this->assertEmpty( array_diff(
+		$this->assertSame( [], array_diff(
 			array_keys( $redirectDiff->getOperations() ),
 			array_keys( $diff->getRedirectDiff()->getOperations() )
 		) );

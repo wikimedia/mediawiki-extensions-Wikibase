@@ -752,22 +752,22 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$this->assertTrue( $lookup->saveTermsOfEntity( $item ) );
 
 		$labelTerms = $lookup->getTermsOfEntity( $item->getId(), [ 'label' ] );
-		$this->assertEquals( 3, count( $labelTerms ), "expected 3 labels" );
+		$this->assertCount( 3, $labelTerms, "expected 3 labels" );
 
 		$englishTerms = $lookup->getTermsOfEntity( $item->getId(), null, [ 'en' ] );
-		$this->assertEquals( 2, count( $englishTerms ), "expected 2 English terms" );
+		$this->assertCount( 2, $englishTerms, "expected 2 English terms" );
 
 		$germanLabelTerms = $lookup->getTermsOfEntity( $item->getId(), [ 'label' ], [ 'de' ] );
-		$this->assertEquals( 1, count( $germanLabelTerms ), "expected 1 German label" );
+		$this->assertCount( 1, $germanLabelTerms, "expected 1 German label" );
 
 		$noTerms = $lookup->getTermsOfEntity( $item->getId(), [ 'label' ], [] );
-		$this->assertEmpty( $noTerms, "expected no labels" );
+		$this->assertSame( [], $noTerms, "expected no labels" );
 
 		$noTerms = $lookup->getTermsOfEntity( $item->getId(), [], [ 'de' ] );
-		$this->assertEmpty( $noTerms, "expected no labels" );
+		$this->assertSame( [], $noTerms, "expected no labels" );
 
 		$terms = $lookup->getTermsOfEntity( $item->getId() );
-		$this->assertEquals( 7, count( $terms ), "expected 7 terms for item" );
+		$this->assertCount( 7, $terms, "expected 7 terms for item" );
 
 		// make list of strings for easy checking
 		$term_keys = [];
@@ -813,25 +813,25 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 		$itemIds = [ $item1->getId(), $item2->getId() ];
 
 		$labelTerms = $lookup->getTermsOfEntities( $itemIds, [ TermIndexEntry::TYPE_LABEL ] );
-		$this->assertEquals( 6, count( $labelTerms ), "expected 3 labels" );
+		$this->assertCount( 6, $labelTerms, "expected 3 labels" );
 
 		$englishTerms = $lookup->getTermsOfEntities( $itemIds, null, [ 'en' ] );
-		$this->assertEquals( 4, count( $englishTerms ), "expected 2 English terms" );
+		$this->assertCount( 4, $englishTerms, "expected 2 English terms" );
 
 		$englishTerms = $lookup->getTermsOfEntities( [ $item1->getId() ], null, [ 'en' ] );
-		$this->assertEquals( 2, count( $englishTerms ), "expected 2 English terms" );
+		$this->assertCount( 2, $englishTerms, "expected 2 English terms" );
 
 		$germanLabelTerms = $lookup->getTermsOfEntities( $itemIds, [ TermIndexEntry::TYPE_LABEL ], [ 'de' ] );
-		$this->assertEquals( 2, count( $germanLabelTerms ), "expected 1 German label" );
+		$this->assertCount( 2, $germanLabelTerms, "expected 1 German label" );
 
 		$noTerms = $lookup->getTermsOfEntities( $itemIds, [ TermIndexEntry::TYPE_LABEL ], [] );
-		$this->assertEmpty( $noTerms, "expected no labels" );
+		$this->assertSame( [], $noTerms, "expected no labels" );
 
 		$noTerms = $lookup->getTermsOfEntities( $itemIds, [], [ 'de' ] );
-		$this->assertEmpty( $noTerms, "expected no labels" );
+		$this->assertSame( [], $noTerms, "expected no labels" );
 
 		$terms = $lookup->getTermsOfEntities( $itemIds );
-		$this->assertEquals( 14, count( $terms ), "expected 7 terms for item" );
+		$this->assertCount( 14, $terms, "expected 7 terms for item" );
 
 		// make list of strings for easy checking
 		$term_keys = [];
@@ -946,7 +946,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			[ 'caseSensitive' => false ]
 		);
 
-		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
+		$this->assertCount( $matches ? 1 : 0, $obtainedTerms );
 
 		if ( $matches ) {
 			$obtainedTerm = array_shift( $obtainedTerms );
@@ -984,7 +984,7 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 			[ 'caseSensitive' => false ]
 		);
 
-		$this->assertEquals( $matches ? 1 : 0, count( $obtainedTerms ) );
+		$this->assertCount( $matches ? 1 : 0, $obtainedTerms );
 
 		if ( $matches ) {
 			$obtainedTerm = array_shift( $obtainedTerms );

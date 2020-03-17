@@ -350,11 +350,11 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
 
-		$this->assertEmpty( $parserOutput->getLanguageLinks() );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+		$this->assertSame( [], $parserOutput->getLanguageLinks() );
+		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertSame( [], $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
 	public function testDoContentAlterParserOutput_sitelinkInNotWikibaseEnabledNamespace() {
@@ -367,11 +367,11 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$this->assertFalse( $parserOutput->getProperty( 'wikibase_item' ) );
 
-		$this->assertEmpty( $parserOutput->getLanguageLinks() );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
+		$this->assertSame( [], $parserOutput->getLanguageLinks() );
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-otherprojects-sidebar' ) );
 
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
-		$this->assertEmpty( $parserOutput->getExtensionData( 'wikibase_badges' ) );
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
+		$this->assertNull( $parserOutput->getExtensionData( 'wikibase_badges' ) );
 	}
 
 	public function testGivenSitelinkHasStatementWithUnknownEntityType_linkDataIsAddedNormally() {

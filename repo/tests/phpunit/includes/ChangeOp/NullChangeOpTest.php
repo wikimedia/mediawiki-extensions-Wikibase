@@ -45,7 +45,7 @@ class NullChangeOpTest extends \PHPUnit\Framework\TestCase {
 	public function testGetActions() {
 		$changeOp = new NullChangeOp();
 
-		$this->assertEmpty( $changeOp->getActions() );
+		$this->assertSame( [], $changeOp->getActions() );
 	}
 
 }

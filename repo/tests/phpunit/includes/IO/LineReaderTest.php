@@ -32,7 +32,7 @@ class LineReaderTest extends \PHPUnit\Framework\TestCase {
 		$actual = iterator_to_array( $reader );
 		$reader->dispose();
 
-		$this->assertEmpty( array_diff( $expected, $actual ), "Different Lines" );
+		$this->assertSame( [], array_diff( $expected, $actual ), "Different Lines" );
 	}
 
 }

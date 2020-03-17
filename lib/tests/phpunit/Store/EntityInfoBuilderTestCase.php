@@ -70,7 +70,7 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 	public function testGivenEmptyIdList_returnsEmptyEntityInfo() {
 		$builder = $this->newEntityInfoBuilder();
 
-		$this->assertEmpty( $builder->collectEntityInfo( [], [] )->asArray() );
+		$this->assertSame( [], $builder->collectEntityInfo( [], [] )->asArray() );
 	}
 
 	public function testGivenDuplicateIds_eachIdsOnlyIncludedOnceInResult() {
@@ -91,8 +91,8 @@ abstract class EntityInfoBuilderTestCase extends \MediaWikiTestCase {
 
 		$info = $builder->collectEntityInfo( [ $id ], [] )->asArray();
 
-		$this->assertEmpty( $info['Q1']['labels'] );
-		$this->assertEmpty( $info['Q1']['descriptions'] );
+		$this->assertSame( [], $info['Q1']['labels'] );
+		$this->assertSame( [], $info['Q1']['descriptions'] );
 	}
 
 	public function testGivenLanguageCode_returnsOnlyTermsInTheLanguage() {

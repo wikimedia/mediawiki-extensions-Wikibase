@@ -69,7 +69,7 @@ class MediaWikiConfigModuleTest extends \PHPUnit\Framework\TestCase {
 			},
 			'targets' => [],
 		] );
-		$this->assertEmpty( $module->getTargets() );
+		$this->assertSame( [], $module->getTargets() );
 	}
 
 }
