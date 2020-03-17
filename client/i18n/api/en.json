@@ -50,5 +50,13 @@
 	"apihelp-query+wikibase-description": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-summary": "Get information about the Wikibase client and the associated Wikibase repository.",
 	"apihelp-query+wikibase-example": "Get URL path and other information about Wikibase client and repository.",
-	"apihelp-query+wikibase-param-prop": "Which properties to get:\n;<kbd>url</kbd>: Base URL, script path and article path of the Wikibase repository.\n;<kbd>siteid</kbd>: The siteid of this site."
+	"apihelp-query+wikibase-param-prop": "Which properties to get:\n;<kbd>url</kbd>: Base URL, script path and article path of the Wikibase repository.\n;<kbd>siteid</kbd>: The siteid of this site.",
+	"apihelp-wbformatreference-summary": "Formats a reference for display to users.",
+	"apihelp-wbformatreference-example-1": "Format an empty reference using the Data Bridge style into HTML.",
+	"apihelp-wbformatreference-example-2": "Format a reference containing one string using the Data Bridge style into HTML.",
+	"apihelp-wbformatreference-param-reference": "The reference as a JSON object.",
+	"apihelp-wbformatreference-param-style": "The style in which to format the reference.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "The style used by [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Not intended for general use.",
+	"apihelp-wbformatreference-param-outputformat": "The format in which the result should be returned.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML markup."
 }

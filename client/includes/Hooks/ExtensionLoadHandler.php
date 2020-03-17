@@ -2,7 +2,11 @@
 
 namespace Wikibase\Client\Hooks;
 
+use ApiMain;
 use ExtensionRegistry;
+use Parser;
+use Wikibase\Client\Api\ApiFormatReference;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Do special hook registrations. These are affected by ordering issues and/or
@@ -33,11 +37,16 @@ class ExtensionLoadHandler {
 	}
 
 	public static function onExtensionLoad() {
-		global $wgHooks;
+		global $wgHooks, $wgWBClientSettings, $wgAPIModules;
 
 		$handler = self::newFromGlobalState();
 
 		$wgHooks = array_merge_recursive( $wgHooks, $handler->getHooks() );
+
+		$apiFormatReferenceSpec = $handler->getApiFormatReferenceSpec( $wgWBClientSettings );
+		if ( $apiFormatReferenceSpec !== null ) {
+			$wgAPIModules['wbformatreference'] = $apiFormatReferenceSpec;
+		}
 	}
 
 	public function getHooks(): array {
@@ -59,6 +68,31 @@ class ExtensionLoadHandler {
 			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
 
 		return $hooks;
+	}
+
+	public function getApiFormatReferenceSpec( array $clientSettings ): ?array {
+		// This API module is (for now) only enabled conditionally
+		if ( !( $clientSettings['dataBridgeEnabled'] ?? false ) ) {
+			return null;
+		}
+
+		return [
+			'class' => ApiFormatReference::class,
+			'services' => [
+				'Parser',
+			],
+			'factory' => function ( ApiMain $apiMain, string $moduleName, Parser $parser ) {
+				$client = WikibaseClient::getDefaultInstance();
+
+				return new ApiFormatReference(
+					$apiMain,
+					$moduleName,
+					$parser,
+					$client->getReferenceFormatterFactory(),
+					$client->getBaseDataModelDeserializerFactory()->newReferenceDeserializer()
+				);
+			},
+		];
 	}
 
 }
