@@ -68,6 +68,10 @@ export default class License extends Vue {
 
 		p {
 			margin: $base-spacing-unit-fixed 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 
