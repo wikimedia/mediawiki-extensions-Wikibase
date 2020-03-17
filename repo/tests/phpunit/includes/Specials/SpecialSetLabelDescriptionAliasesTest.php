@@ -4,8 +4,6 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use FauxRequest;
 use FauxResponse;
-use Language;
-use Message;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;
@@ -45,17 +43,13 @@ use Wikibase\Repo\Validators\UniquenessViolation;
  * @license GPL-2.0-or-later
  */
 class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestBase {
-
 	use HtmlAssertionHelpers;
 
 	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
-	const USER_LANGUAGE = 'en';
-
 	protected function setUp() : void {
 		parent::setUp();
-
-		$this->setUserLang( self::USER_LANGUAGE );
+		$this->setUserLang( 'qqx' );
 	}
 
 	/**
@@ -290,7 +284,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		list( $output ) = $this->executeSpecialPage( '' );
 
 		$this->assertHtmlContainsInputWithName( $output, 'id' );
-		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', self::USER_LANGUAGE );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', 'qqx' );
 		$this->assertHtmlContainsSubmitControl( $output );
 	}
 
@@ -303,7 +297,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			tagMatchingOutline( "<input name='id' type='hidden' value='{$item->getId()->getSerialization()}'/>" )
 		) ) ) );
-		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', self::USER_LANGUAGE );
+		$this->assertHtmlContainsInputWithNameAndValue( $output, 'language', 'qqx' );
 		$this->assertHtmlContainsInputWithName( $output, 'label' );
 		$this->assertHtmlContainsInputWithName( $output, 'description' );
 		$this->assertHtmlContainsInputWithName( $output, 'aliases' );
@@ -382,7 +376,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
-				->andAlso( havingTextContents( new Message( 'permissionserrors', [], Language::factory( self::USER_LANGUAGE ) ) ) )
+				->andAlso( havingTextContents( '(permissionserrors)' ) )
 		) ) ) );
 	}
 
@@ -427,7 +421,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 		$this->assertThatHamcrest( $output, is( htmlPiece( havingChild(
 			both( tagMatchingOutline( "<p class='error'/>" ) )
 				->andAlso( havingTextContents(
-					new Message( 'wikibase-wikibaserepopage-pipe-in-alias', [], Language::factory( self::USER_LANGUAGE ) )
+					'(wikibase-wikibaserepopage-pipe-in-alias)'
 					) )
 		) ) ) );
 	}

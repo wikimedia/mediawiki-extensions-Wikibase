@@ -32,6 +32,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 	public function setUp(): void {
 		parent::setUp();
+		$this->setUserLang( 'qqx' );
 		$tables = [
 			'wb_terms',
 			'wbt_type',
@@ -151,7 +152,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
 		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
-		$this->assertHtmlContainsErrorMessage( $html, "already has label" );
+		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
 
 		$settings->setSetting( 'tmpPropertyTermsMigrationStage', $oldConfig );
 	}
@@ -241,7 +242,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
-				'language code was not recognized',
+				'(wikibase-content-language-edit-not-recognized-language)',
 			],
 			'unknown datatype' => [
 				[
@@ -251,7 +252,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'unknown-datatype',
 				],
-				'Invalid data type specified',
+				'(wikibase-newproperty-invalid-datatype)',
 			],
 			'all fingerprint fields are empty' => [
 				[
@@ -261,7 +262,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
-				'you need to fill'
+				'(wikibase-newproperty-insufficient-data)'
 			],
 			'empty label and description, aliases contain only spaces and pipe symbols' => [
 				[
@@ -271,7 +272,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => ' | || | ',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
-				'you need to fill',
+				'(wikibase-newproperty-insufficient-data)',
 			],
 			'empty datatype' => [
 				[
@@ -281,7 +282,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => 'a1|a2',
 					SpecialNewProperty::FIELD_DATATYPE => '',
 				],
-				'Invalid data type specified',
+				'(wikibase-newproperty-invalid-datatype)',
 			],
 			'label and description are identical' => [
 				[
@@ -291,7 +292,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 					SpecialNewProperty::FIELD_ALIASES => '',
 					SpecialNewProperty::FIELD_DATATYPE => 'string',
 				],
-				'label and description can not have the same value',
+				'(wikibase-newproperty-same-label-and-description)',
 			],
 		];
 	}

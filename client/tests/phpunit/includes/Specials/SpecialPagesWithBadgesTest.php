@@ -23,6 +23,11 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  */
 class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 
+	protected function setUp() : void {
+		parent::setUp();
+		$this->setUserLang( 'qqx' );
+	}
+
 	/**
 	 * @return LabelDescriptionLookup
 	 */
@@ -91,7 +96,7 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 
 		$this->assertStringContainsString( '<p class="error"', $result );
 		$this->assertStringContainsString(
-			wfMessage( 'wikibase-pageswithbadges-invalid-id', 'FooBar' )->text(),
+			'(wikibase-pageswithbadges-invalid-id: FooBar)',
 			$result
 		);
 	}
