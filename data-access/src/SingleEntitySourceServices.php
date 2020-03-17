@@ -196,7 +196,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$databaseName = $this->entitySource->getDatabaseName();
 
 			// TODO: This wikiPageEntityRevisionStoreLookup should probably instead be built by a factory
-			// that is returned by a a method somewhere in data-access and then instead of being used here
+			// that is returned by a method somewhere in data-access and then instead of being used here
 			// as a default it should go in the wiring files for each entity type. See: T246451
 			$wikiPageEntityRevisionStoreLookup = new WikiPageEntityRevisionLookup(
 				$metaDataAccessor,
