@@ -14,7 +14,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
-use Wikibase\Store\SubscriptionLookup;
+use Wikibase\Repo\Store\SubscriptionLookup;
 
 /**
  * @covers \Wikibase\Repo\Hooks\InfoActionHookHandler

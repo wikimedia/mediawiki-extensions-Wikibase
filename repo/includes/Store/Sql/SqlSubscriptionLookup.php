@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Store\SubscriptionLookup;
+use Wikibase\Repo\Store\SubscriptionLookup;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 

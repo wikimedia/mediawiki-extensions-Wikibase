@@ -13,7 +13,7 @@ use WANObjectCache;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\ChangeDispatchCoordinator;
+use Wikibase\Repo\Store\ChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';

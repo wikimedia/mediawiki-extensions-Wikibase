@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use RuntimeException;
-use Wikibase\IdGenerator;
+use Wikibase\Repo\Store\IdGenerator;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
