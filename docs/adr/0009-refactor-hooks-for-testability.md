@@ -35,7 +35,7 @@ hooks, rather than a one time big change.
 ## Decision
 
 It was decided to adopt an existing pattern in Wikibase repo where each hook handler gets its own singleton class and
-provides a constructor and at least four methods:
+provides at least four methods:
 
 - A constructor to make dependency injection easier.
 - A public static method to bootstrap an instance from global settings. For consistency, this would typically be named
