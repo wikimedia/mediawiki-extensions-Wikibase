@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use Wikibase\Lib\DataValueFactory;
 
 /**
- * @covers Wikibase\Lib\DataValueFactory
+ * @covers \Wikibase\Lib\DataValueFactory
  *
  * @group Wikibase
  *

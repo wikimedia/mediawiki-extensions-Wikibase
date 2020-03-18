@@ -8,7 +8,7 @@ use DataValues\Geo\Values\LatLongValue;
 use Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter;
 
 /**
- * @covers Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter
+ * @covers \Wikibase\Lib\Formatters\GlobeCoordinateInlineWikitextKartographerFormatter
  *
  * @group Wikibase
  *
