@@ -6,7 +6,6 @@ use Action;
 use BaseTemplate;
 use ContentHandler;
 use EditPage;
-use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Parser;
@@ -21,9 +20,7 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
-use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\MoreLikeWikibase;
@@ -309,31 +306,6 @@ final class ClientHooks {
 		}
 
 		return true;
-	}
-
-	/**
-	 * Do special hook registrations.  These are affected by ordering issues and/or
-	 * conditional on another extension being registered.
-	 *
-	 * @see https://www.mediawiki.org/wiki/Special:MyLanguage/Manual:$wgExtensionFunctions
-	 */
-	public static function onExtensionLoad() {
-		global $wgHooks;
-
-		// These hooks should only be run if we use the Echo extension
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'Echo' ) ) {
-			$wgHooks['LocalUserCreated'][] = EchoNotificationsHandlers::class . '::onLocalUserCreated';
-			$wgHooks['WikibaseHandleChange'][] = EchoNotificationsHandlers::class . '::onWikibaseHandleChange';
-		}
-
-		// This is in onExtensionLoad to ensure we register our
-		// ChangesListSpecialPageStructuredFilters after ORES's.
-		//
-		// However, ORES is not required.
-		//
-		// recent changes / watchlist hooks
-		$wgHooks['ChangesListSpecialPageStructuredFilters'][] =
-			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
 	}
 
 	/**
