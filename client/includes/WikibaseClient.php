@@ -1514,12 +1514,14 @@ final class WikibaseClient {
 
 	public function getReferenceFormatterFactory(): ReferenceFormatterFactory {
 		if ( $this->referenceFormatterFactory === null ) {
+			$logger = $this->getLogger();
 			$this->referenceFormatterFactory = new ReferenceFormatterFactory(
 				$this->getDataAccessSnakFormatterFactory(),
 				WellKnownReferenceProperties::newFromArray(
 					$this->getSettings()->getSetting( 'wellKnownReferencePropertyIds' ),
-					$this->getLogger()
-				)
+					$logger
+				),
+				$logger
 			);
 		}
 

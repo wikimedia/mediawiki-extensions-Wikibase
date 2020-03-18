@@ -54,6 +54,20 @@ class WellKnownReferenceProperties {
 	}
 
 	/**
+	 * Convenience function to determine
+	 * whether the properties are completely empty (unconfigured).
+	 */
+	public function isEmpty(): bool {
+		return $this->referenceUrlPropertyId === null &&
+			$this->titlePropertyId === null &&
+			$this->statedInPropertyId === null &&
+			$this->authorPropertyId === null &&
+			$this->publisherPropertyId === null &&
+			$this->publicationDatePropertyId === null &&
+			$this->retrievedDatePropertyId === null;
+	}
+
+	/**
 	 * Parse well-known reference properties from an array containing their serializations under the following keys:
 	 * - referenceUrl
 	 * - title

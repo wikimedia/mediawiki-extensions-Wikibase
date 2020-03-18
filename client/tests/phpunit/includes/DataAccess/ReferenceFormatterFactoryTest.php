@@ -5,6 +5,8 @@ namespace Wikibase\Client\Tests\DataAccess;
 use Language;
 use MessageLocalizer;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LogLevel;
+use TestLogger;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\Usage\UsageAccumulator;
@@ -52,6 +54,40 @@ class ReferenceFormatterFactoryTest extends TestCase {
 		$this->assertSame( $snakFormatter, $wrapper->snakFormatter );
 		$this->assertSame( $properties, $wrapper->properties );
 		$this->assertSame( $messageLocalizer, $wrapper->messageLocalizer );
+	}
+
+	public function testLogIfPropertiesEmpty_logsForEmptyProperties() {
+		$snakFormatterFactory = $this->createMock( DataAccessSnakFormatterFactory::class );
+		$properties = WellKnownReferenceProperties::newFromArray( [] );
+		$logger = new TestLogger( true );
+		$referenceFormatterFactory = new ReferenceFormatterFactory(
+			$snakFormatterFactory,
+			$properties,
+			$logger
+		);
+
+		TestingAccessWrapper::newFromObject( $referenceFormatterFactory )->logIfPropertiesEmpty();
+
+		$buffer = $logger->getBuffer();
+		$this->assertCount( 1, $buffer );
+		$this->assertSame( LogLevel::INFO, $buffer[0][0] );
+	}
+
+	public function testLogIfPropertiesEmpty_doesNotLogForPartialProperties() {
+		$snakFormatterFactory = $this->createMock( DataAccessSnakFormatterFactory::class );
+		$properties = WellKnownReferenceProperties::newFromArray( [
+			'referenceUrl' => 'P1',
+		] );
+		$logger = new TestLogger( true );
+		$referenceFormatterFactory = new ReferenceFormatterFactory(
+			$snakFormatterFactory,
+			$properties,
+			$logger
+		);
+
+		TestingAccessWrapper::newFromObject( $referenceFormatterFactory )->logIfPropertiesEmpty();
+
+		$this->assertSame( [], $logger->getBuffer() );
 	}
 
 }
