@@ -46,7 +46,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	public function setUp(): void {
 		parent::setUp();
-		$this->setUserLang( 'qqx' );
 
 		// @todo This list should be stored somewhere, DRY
 		$tables = [

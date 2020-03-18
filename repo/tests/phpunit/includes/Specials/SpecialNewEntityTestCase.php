@@ -21,7 +21,6 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
-
 	use HtmlAssertionHelpers;
 
 	/**
@@ -31,8 +30,7 @@ abstract class SpecialNewEntityTestCase extends SpecialPageTestBase {
 
 	protected function setUp() : void {
 		parent::setUp();
-
-		$this->setUserLang( 'en' );
+		$this->setUserLang( 'qqx' );
 
 		$this->copyrightView = $this->getMockBuilder( SpecialPageCopyrightView::class )
 			->disableOriginalConstructor()
