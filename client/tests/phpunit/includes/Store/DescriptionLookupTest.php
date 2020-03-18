@@ -15,7 +15,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikimedia\ScopedCallback;
 
 /**
- * @covers DescriptionLookup
+ * @covers \Wikibase\Client\Store\DescriptionLookup
  *
  * @group Wikibase
  * @group WikibaseClient
