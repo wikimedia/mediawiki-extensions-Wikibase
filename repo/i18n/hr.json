@@ -97,6 +97,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Pristajem na ove uvjete u mojim budućim uređivanjima. Ne prikazuj mi više ovu poruku.",
 	"wikibase-entityselector-more": "više",
 	"wikibase-entityselector-notfound": "Podudarnost nije pronađena",
+	"wikibase-anonymouseditwarning": "Upozorenje: niste prijavljeni. Vaša [https://hr.wikipedia.org/wiki/IP_broj IP-adresa] bit će javno vidljiva, ako načinite i jedno uređivanje. Ako ste <strong>[[Special:UserLogin|prijavljeni]]</strong> ili <strong>[[Special:CreateAccount|stvorite račun]]</strong>, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu uz druge koristi.",
 	"special-availablebadges": "Dostupne značke",
 	"wikibase-availablebadges-emptylist": "Nema značaka konfiguriranih na ovome wikiju.",
 	"special-itembytitle": "Stavka prema naslovu",
