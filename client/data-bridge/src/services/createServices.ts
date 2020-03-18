@@ -16,6 +16,7 @@ import CombiningPermissionsRepository from '@/data-access/CombiningPermissionsRe
 import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import ApiPurge from '@/data-access/ApiPurge';
 import Tracker from '@/tracking/Tracker';
+import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
 
 export default function createServices(
 	mwWindow: MwWindow,
@@ -53,8 +54,9 @@ export default function createServices(
 		editTags.length === 0 ? undefined : editTags,
 	) );
 
+	const pageContentLanguage = mwWindow.mw.config.get( 'wgPageContentLanguage' );
 	services.set( 'entityLabelRepository', new ApiEntityLabelRepository(
-		mwWindow.mw.config.get( 'wgPageContentLanguage' ),
+		pageContentLanguage,
 		repoApi,
 	) );
 
@@ -84,6 +86,11 @@ export default function createServices(
 	services.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 		new ApiPageEditPermissionErrorsRepository( repoApi ),
 		new ApiPageEditPermissionErrorsRepository( clientApi ),
+	) );
+
+	services.set( 'referencesRenderingRepository', new ApiRenderReferencesRepository(
+		clientApi,
+		pageContentLanguage,
 	) );
 
 	services.set( 'repoRouter', repoRouter );

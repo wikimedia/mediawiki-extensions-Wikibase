@@ -15,6 +15,7 @@ import {
 	mockMwApiConstructor,
 	addPropertyLabelResponse,
 	addDataBridgeConfigResponse,
+	addReferenceRenderingResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -29,6 +30,7 @@ import { v4 as uuid } from 'uuid';
 import { ApiQueryInfoTestResponsePage, ApiQueryResponseBody } from '@/definitions/data-access/ApiQuery';
 import { ApiErrorRawErrorformat } from '@/data-access/ApiPageEditPermissionErrorsRepository';
 import { SpecialPageWikibaseEntityResponse } from '@/data-access/SpecialPageReadingEntityRepository';
+import MwConfig from '@/@types/mediawiki/MwConfig';
 
 Vue.config.devtools = false;
 
@@ -56,6 +58,7 @@ function prepareTestEnv( options: {
 	entityId?: string;
 	propertyId?: string;
 	editFlow?: string;
+	mwConfig?: MwConfig;
 } ): HTMLElement {
 	const entityId = options.entityId || DEFAULT_ENTITY;
 	const entityTitle = entityId;
@@ -68,7 +71,7 @@ function prepareTestEnv( options: {
 
 	mockMwEnv(
 		using,
-		undefined,
+		options.mwConfig,
 		undefined,
 		mockMwForeignApiConstructor( {
 			get: getMockFullRepoBatchedQueryResponse(
@@ -81,7 +84,7 @@ function prepareTestEnv( options: {
 				addPageInfoNoEditRestrictionsResponse(
 					'Client_page',
 					addSiteinfoRestrictionsResponse(
-						{},
+						addReferenceRenderingResponse( {} ),
 					),
 				),
 			),
@@ -699,6 +702,42 @@ describe( 'app', () => {
 			`counter.MediaWiki.wikibase.client.databridge.datatype.${dataType}`,
 			1,
 		);
+	} );
+
+	it( 'formats references using the API during initializing', async () => {
+		const contentLanguage = 'fr';
+		const testLink = prepareTestEnv( {
+			mwConfig: mockMwConfig( {
+				wgPageContentLanguage: contentLanguage,
+			} ),
+		} );
+		const clientApiGet = jest.fn().mockResolvedValue(
+			addPageInfoNoEditRestrictionsResponse(
+				'Client_page',
+				addSiteinfoRestrictionsResponse(
+					addReferenceRenderingResponse( {} ),
+				),
+			),
+		);
+		window.mw.Api = mockMwApiConstructor( {
+			get: clientApiGet,
+		} );
+
+		await init();
+
+		testLink!.click();
+		await budge();
+
+		Entities.entities[ DEFAULT_ENTITY ].claims[ DEFAULT_PROPERTY ][ 0 ].references.forEach( ( reference ) => {
+			expect( clientApiGet ).toHaveBeenCalledWith( {
+				action: 'wbformatreference',
+				reference: JSON.stringify( reference ),
+				style: 'internal-data-bridge',
+				outputformat: 'html',
+				formatversion: 2,
+				uselang: contentLanguage,
+			} );
+		} );
 	} );
 
 	describe( 'error state specialized for permission errors', () => {

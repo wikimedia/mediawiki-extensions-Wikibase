@@ -7,6 +7,7 @@ describe( 'store/index', () => {
 		expect( store ).toBeDefined();
 		expect( store.state ).toBeDefined();
 		expect( store.state.targetProperty ).toBe( '' );
+		expect( store.state.renderedTargetReferences ).toStrictEqual( [] );
 		expect( store.state.editFlow ).toBe( '' );
 		expect( store.state.editDecision ).toBeNull();
 		expect( store.state.entityTitle ).toBe( '' );

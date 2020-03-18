@@ -64,6 +64,9 @@ describe( 'App.vue', () => {
 					},
 				} ),
 			},
+			'referencesRenderingRepository': {
+				getRenderedReferences: () => Promise.resolve( [] ),
+			},
 			'propertyDatatypeRepository': {
 				getDataType: jest.fn().mockResolvedValue( 'string' ),
 			},

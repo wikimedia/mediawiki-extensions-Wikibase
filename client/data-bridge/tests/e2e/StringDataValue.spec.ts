@@ -6,6 +6,7 @@ import createServices from '@/services/createServices';
 import {
 	addDataBridgeConfigResponse,
 	addPageInfoNoEditRestrictionsResponse,
+	addReferenceRenderingResponse,
 	addSiteinfoRestrictionsResponse,
 	getMockFullRepoBatchedQueryResponse,
 	mockMwForeignApiConstructor,
@@ -72,7 +73,7 @@ function prepareTestEnv( options: {
 				addPageInfoNoEditRestrictionsResponse(
 					clientPageTitle,
 					addSiteinfoRestrictionsResponse(
-						{},
+						addReferenceRenderingResponse( {} ),
 					),
 				),
 			),

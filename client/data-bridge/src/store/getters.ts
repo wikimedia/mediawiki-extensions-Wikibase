@@ -32,15 +32,15 @@ export class RootGetters extends Getters<Application> {
 	}
 
 	public get targetReferences(): Reference[] {
-		if ( this.state.applicationStatus === Status.INITIALIZING ) {
+		try {
+			const activeState = this.state as InitializedApplicationState;
+			const entityId = activeState[ NS_ENTITY ].id;
+			const statements = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
+
+			return statements.references ? statements.references : [];
+		} catch ( _ignored ) {
 			return [];
 		}
-
-		const activeState = this.state as InitializedApplicationState;
-		const entityId = activeState[ NS_ENTITY ].id;
-		const statements = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
-
-		return statements.references ? statements.references : [];
 	}
 
 	public get isTargetValueModified(): boolean {

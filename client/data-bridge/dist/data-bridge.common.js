@@ -14666,10 +14666,14 @@ function (_Actions) {
 
               case 4:
                 this.store.$services.get('tracker').trackPropertyDatatype(dataType);
+                _context.next = 7;
+                return this.dispatch('renderReferences');
+
+              case 7:
                 BridgeConfigPlugin(external_vue_default.a, _objectSpread2({}, wikibaseRepoConfiguration, {}, information.client));
                 return _context.abrupt("return", this.dispatch('postEntityLoad'));
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -14684,19 +14688,51 @@ function (_Actions) {
       return initBridgeWithRemoteData;
     }()
   }, {
-    key: "postEntityLoad",
+    key: "renderReferences",
     value: function () {
-      var _postEntityLoad = _asyncToGenerator(
+      var _renderReferences = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2() {
-        var state, path;
+        var renderedReferences;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                _context2.next = 2;
+                return this.store.$services.get('referencesRenderingRepository').getRenderedReferences(this.getters.targetReferences);
+
+              case 2:
+                renderedReferences = _context2.sent;
+                this.commit('setRenderedTargetReferences', renderedReferences);
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function renderReferences() {
+        return _renderReferences.apply(this, arguments);
+      }
+
+      return renderReferences;
+    }()
+  }, {
+    key: "postEntityLoad",
+    value: function () {
+      var _postEntityLoad = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3() {
+        var state, path;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
                 state = this.state;
                 path = new MainSnakPath_MainSnakPath(state[NS_ENTITY].id, state.targetProperty, 0);
-                _context2.next = 4;
+                _context3.next = 4;
                 return this.dispatch('validateEntityState', path);
 
               case 4:
@@ -14708,10 +14744,10 @@ function (_Actions) {
 
               case 5:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function postEntityLoad() {
@@ -14818,16 +14854,16 @@ function (_Actions) {
     value: function () {
       var _saveBridge = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3() {
+      regeneratorRuntime.mark(function _callee4() {
         var _this3 = this;
 
         var state, entityId, path, statements;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 if (!(this.state.applicationStatus !== definitions_ApplicationStatus.READY)) {
-                  _context3.next = 3;
+                  _context4.next = 3;
                   break;
                 }
 
@@ -14837,29 +14873,29 @@ function (_Actions) {
                     stack: new Error().stack
                   }
                 }]);
-                return _context3.abrupt("return", Promise.reject(null));
+                return _context4.abrupt("return", Promise.reject(null));
 
               case 3:
                 this.commit('setApplicationStatus', definitions_ApplicationStatus.SAVING);
                 state = this.state;
                 entityId = state[NS_ENTITY].id;
                 path = new MainSnakPath_MainSnakPath(entityId, state.targetProperty, 0);
-                _context3.prev = 7;
+                _context4.prev = 7;
                 statements = this.statementMutationFactory(state.editDecision).apply(state.targetValue, path, clone(state[NS_STATEMENTS]));
-                _context3.next = 15;
+                _context4.next = 15;
                 break;
 
               case 11:
-                _context3.prev = 11;
-                _context3.t0 = _context3["catch"](7);
+                _context4.prev = 11;
+                _context4.t0 = _context4["catch"](7);
                 this.commit('addApplicationErrors', [{
                   type: ErrorTypes.APPLICATION_LOGIC_ERROR,
-                  info: _context3.t0
+                  info: _context4.t0
                 }]);
-                throw _context3.t0;
+                throw _context4.t0;
 
               case 15:
-                return _context3.abrupt("return", this.entityModule.dispatch('entitySave', statements[entityId]).catch(function (error) {
+                return _context4.abrupt("return", this.entityModule.dispatch('entitySave', statements[entityId]).catch(function (error) {
                   _this3.commit('addApplicationErrors', [{
                     type: ErrorTypes.SAVING_FAILED,
                     info: error
@@ -14879,10 +14915,10 @@ function (_Actions) {
 
               case 16:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this, [[7, 11]]);
+        }, _callee4, this, [[7, 11]]);
       }));
 
       function saveBridge() {
@@ -14954,14 +14990,14 @@ function (_Getters) {
   }, {
     key: "targetReferences",
     get: function get() {
-      if (this.state.applicationStatus === definitions_ApplicationStatus.INITIALIZING) {
+      try {
+        var activeState = this.state;
+        var entityId = activeState[NS_ENTITY].id;
+        var statements = activeState[NS_STATEMENTS][entityId][this.state.targetProperty][0];
+        return statements.references ? statements.references : [];
+      } catch (_ignored) {
         return [];
       }
-
-      var activeState = this.state;
-      var entityId = activeState[NS_ENTITY].id;
-      var statements = activeState[NS_STATEMENTS][entityId][this.state.targetProperty][0];
-      return statements.references ? statements.references : [];
     }
   }, {
     key: "isTargetValueModified",
@@ -15072,6 +15108,11 @@ function (_Mutations) {
       this.state.targetLabel = label;
     }
   }, {
+    key: "setRenderedTargetReferences",
+    value: function setRenderedTargetReferences(referencesHtml) {
+      this.state.renderedTargetReferences = referencesHtml;
+    }
+  }, {
     key: "addApplicationErrors",
     value: function addApplicationErrors(errors) {
       var _this$state$applicati;
@@ -15117,6 +15158,7 @@ var state_BaseState = function BaseState() {
   this.applicationStatus = ValidApplicationStatus.INITIALIZING;
   this.editDecision = null;
   this.targetValue = null;
+  this.renderedTargetReferences = [];
   this.editFlow = '';
   this.entityTitle = '';
   this.originalHref = '';
@@ -20024,7 +20066,101 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/data-access/ApiRenderReferencesRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+
+var ApiRenderReferencesRepository_ApiRenderReferencesRepository =
+/*#__PURE__*/
+function () {
+  function ApiRenderReferencesRepository(api, language) {
+    _classCallCheck(this, ApiRenderReferencesRepository);
+
+    this.api = api;
+    this.language = language;
+  }
+
+  _createClass(ApiRenderReferencesRepository, [{
+    key: "getRenderedReferences",
+    value: function getRenderedReferences(references) {
+      var _this = this;
+
+      return Promise.all(references.map(function (reference) {
+        return _this.renderSingleReference(reference);
+      }));
+    }
+  }, {
+    key: "renderSingleReference",
+    value: function () {
+      var _renderSingleReference = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(reference) {
+        var response;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.api.get({
+                  action: 'wbformatreference',
+                  reference: JSON.stringify(reference),
+                  style: 'internal-data-bridge',
+                  outputformat: 'html',
+                  formatversion: 2,
+                  uselang: this.language
+                });
+
+              case 2:
+                response = _context.sent;
+
+                if (this.isWellFormedFormatReferenceResponse(response)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                throw new TechnicalProblem_TechnicalProblem('Reference formatting server response not well formed.');
+
+              case 5:
+                return _context.abrupt("return", response.wbformatreference.html);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function renderSingleReference(_x) {
+        return _renderSingleReference.apply(this, arguments);
+      }
+
+      return renderSingleReference;
+    }()
+  }, {
+    key: "isWellFormedFormatReferenceResponse",
+    value: function isWellFormedFormatReferenceResponse(response) {
+      var _response$wbformatref;
+
+      return typeof (response === null || response === void 0 ? void 0 : (_response$wbformatref = response.wbformatreference) === null || _response$wbformatref === void 0 ? void 0 : _response$wbformatref.html) === 'string';
+    }
+  }]);
+
+  return ApiRenderReferencesRepository;
+}();
+
+
 // CONCATENATED MODULE: ./src/services/createServices.ts
+
 
 
 
@@ -20057,7 +20193,8 @@ function createServices(mwWindow, editTags, eventTracker) {
   "".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
   var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
   services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, editTags.length === 0 ? undefined : editTags));
-  services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(mwWindow.mw.config.get('wgPageContentLanguage'), repoApi));
+  var pageContentLanguage = mwWindow.mw.config.get('wgPageContentLanguage');
+  services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(pageContentLanguage, repoApi));
   services.set('propertyDatatypeRepository', new ApiPropertyDataTypeRepository_ApiPropertyDataTypeRepository(repoApi));
 
   if (mwWindow.$.uls === undefined) {
@@ -20070,6 +20207,7 @@ function createServices(mwWindow, editTags, eventTracker) {
   services.set('tracker', new DataBridgeTrackerService_DataBridgeTrackerService(eventTracker));
   var clientApi = new ApiCore_ApiCore(clientMwApi);
   services.set('editAuthorizationChecker', new CombiningPermissionsRepository_CombiningPermissionsRepository(new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(repoApi), new ApiPageEditPermissionErrorsRepository_ApiPageEditPermissionErrorsRepository(clientApi)));
+  services.set('referencesRenderingRepository', new ApiRenderReferencesRepository_ApiRenderReferencesRepository(clientApi, pageContentLanguage));
   services.set('repoRouter', repoRouter);
   services.set('clientRouter', new ClientRouter_ClientRouter(mwWindow.mw.util.getUrl));
   var purge = new ApiPurge_ApiPurge(clientMwApi);

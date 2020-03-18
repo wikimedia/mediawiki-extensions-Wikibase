@@ -11,6 +11,7 @@ import Events from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
 import messages from '@/mock-data/messages';
+import Reference from '@/datamodel/Reference';
 
 const services = new ServiceContainer();
 
@@ -115,6 +116,14 @@ services.set( 'clientRouter', {
 			url += '?' + new URLSearchParams( params as Record<string, string> ).toString();
 		}
 		return url;
+	},
+} );
+
+services.set( 'referencesRenderingRepository', {
+	getRenderedReferences( references: Reference[] ): Promise<string[]> {
+		return Promise.resolve( references.map( ( reference ) => {
+			return `<span>${JSON.stringify( reference.snaks )}</span>`;
+		} ) );
 	},
 } );
 

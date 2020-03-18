@@ -18,6 +18,7 @@ import RepoRouter from '@/data-access/RepoRouter';
 import ClientRouter from '@/data-access/ClientRouter';
 import ApiPurge from '@/data-access/ApiPurge';
 import Tracker from '@/tracking/Tracker';
+import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
 
 const mockReadingEntityRepository = {};
 jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
@@ -34,6 +35,11 @@ jest.mock( '@/data-access/ApiWritingRepository', () => {
 const mockEntityLabelRepository = {};
 jest.mock( '@/data-access/ApiEntityLabelRepository', () => {
 	return jest.fn().mockImplementation( () => mockEntityLabelRepository );
+} );
+
+const mockReferencesRenderingRepository = {};
+jest.mock( '@/data-access/ApiRenderReferencesRepository', () => {
+	return jest.fn().mockImplementation( () => mockReferencesRenderingRepository );
 } );
 
 const mockPropertyDataTypeRepository = {};
@@ -287,6 +293,15 @@ describe( 'createServices', () => {
 		expect( ( ApiEntityLabelRepository as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 			.toBe( mockBatchingApi );
 		expect( services.get( 'entityLabelRepository' ) ).toBe( mockEntityLabelRepository );
+	} );
+
+	it( 'creates ApiRenderReferencesRepository', () => {
+		const services = createServices( mockMwWindow(), [], {} as Tracker );
+
+		expect(
+			( ApiRenderReferencesRepository as jest.Mock ).mock.calls[ 0 ][ 0 ],
+		).toBe( mockClientApiCore );
+		expect( services.get( 'referencesRenderingRepository' ) ).toBe( mockReferencesRenderingRepository );
 	} );
 
 	it( 'creates ApiPropertyDataTypeRepository', () => {

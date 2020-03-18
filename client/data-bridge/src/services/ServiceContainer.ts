@@ -9,12 +9,14 @@ import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDataty
 import { BridgePermissionsRepository } from '@/definitions/data-access/BridgePermissionsRepository';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
+import ReferencesRenderingRepository from '@/definitions/data-access/ReferencesRenderingRepository';
 
 export interface Services {
 	readingEntityRepository: ReadingEntityRepository;
 	writingEntityRepository: WritingEntityRepository;
 	languageInfoRepository: LanguageInfoRepository;
 	entityLabelRepository: EntityLabelRepository;
+	referencesRenderingRepository: ReferencesRenderingRepository;
 	propertyDatatypeRepository: PropertyDatatypeRepository;
 	messagesRepository: MessagesRepository;
 	wikibaseRepoConfigRepository: WikibaseRepoConfigRepository;

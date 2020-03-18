@@ -9,6 +9,7 @@ export default function ( fields?: RecursivePartial<InitializedApplicationState>
 	let AppState: any = {
 		targetProperty: '',
 		targetLabel: null,
+		renderedTargetReferences: [],
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
 		applicationErrors: [],

@@ -14,6 +14,7 @@ interface Application {
 	applicationStatus: ValidApplicationStatus;
 	editDecision: EditDecision|null;
 	targetValue: DataValue|null;
+	renderedTargetReferences: string[];
 	editFlow: string;
 	entityTitle: string;
 	originalHref: string;
