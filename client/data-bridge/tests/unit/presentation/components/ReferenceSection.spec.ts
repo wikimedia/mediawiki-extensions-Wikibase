@@ -8,7 +8,6 @@ import { createStore } from '@/store';
 import Vuex, {
 	Store,
 } from 'vuex';
-import SingleReferenceDisplay from '@/presentation/components/SingleReferenceDisplay.vue';
 import Application from '@/store/Application';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 import MessageKeys from '@/definitions/MessageKeys';
@@ -16,6 +15,8 @@ import MessageKeys from '@/definitions/MessageKeys';
 const localVue = createLocalVue();
 
 localVue.use( Vuex );
+
+const REFERENCE_ITEM_SELECTOR = '.wb-db-references__listItem';
 
 describe( 'ReferenceSection', () => {
 	let store: Store<Application>;
@@ -52,72 +53,33 @@ describe( 'ReferenceSection', () => {
 		expect( get ).toHaveBeenCalledWith( MessageKeys.REFERENCES_HEADING );
 	} );
 
-	it( 'mounts SingleReferenceDisplay if there are references', () => {
-		Vue.set( store, 'getters', {
-			targetReferences: [ {
-				snaks: {
-					P214: [ {
-						snaktype: 'value',
-						property: 'P214',
-						datavalue: {
-							value: 'example reference',
-							type: 'string',
-						},
-						datatype: 'external-id',
-					} ],
-				},
-				'snaks-order': [
-					'P214',
-				],
-			} ],
-		} );
+	it( 'shows each renderedTargetReferences HTML if there are any', () => {
+		const renderedTargetReferences = [
+			'<span>foo</span>',
+			'<span>bar</span>',
+		];
+		store.commit( 'setRenderedTargetReferences', renderedTargetReferences );
 		const wrapper = shallowMount( ReferenceSection, {
 			store,
 			localVue,
 		} );
 
-		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBe( true );
+		const references = wrapper.findAll( REFERENCE_ITEM_SELECTOR );
+		expect( references ).toHaveLength( renderedTargetReferences.length );
+		renderedTargetReferences.forEach( ( referenceHTML, index ) => {
+			expect( references.at( index ).element.innerHTML ).toBe( referenceHTML );
+		} );
 	} );
 
-	it( 'does not mount SingleReferenceDisplay if there are no references', () => {
-		Vue.set( store, 'getters', {
-			targetReferences: [],
-		} );
+	it( 'does not show renderedTargetReferences HTML if there are none', () => {
+		const renderedTargetReferences: string[] = [];
+		store.commit( 'setRenderedTargetReferences', renderedTargetReferences );
 		const wrapper = shallowMount( ReferenceSection, {
 			store,
 			localVue,
 		} );
 
-		expect( wrapper.find( SingleReferenceDisplay ).exists() ).toBe( false );
+		expect( wrapper.find( REFERENCE_ITEM_SELECTOR ).exists() ).toBe( false );
 	} );
 
-	it( 'delegates the necessary props to SingleReferenceDisplay', () => {
-		const snakSeparator = 'TBD';
-		const get = jest.fn(
-			( key: string ) => {
-				if ( key === MessageKeys.REFERENCE_SNAK_SEPARATOR ) {
-					return snakSeparator;
-				}
-
-				return '';
-			},
-		);
-		const targetReference = {};
-		Vue.set( store, 'getters', { targetReferences: [ targetReference ] } );
-
-		const wrapper = shallowMount( ReferenceSection, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get,
-				},
-			},
-		} );
-
-		expect( wrapper.find( SingleReferenceDisplay ).props( 'reference' ) ).toBe( targetReference );
-		expect( wrapper.find( SingleReferenceDisplay ).props( 'separator' ) ).toBe( snakSeparator );
-		expect( get ).toHaveBeenCalledWith( MessageKeys.REFERENCE_SNAK_SEPARATOR );
-	} );
 } );

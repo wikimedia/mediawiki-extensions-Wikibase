@@ -704,21 +704,28 @@ describe( 'app', () => {
 		);
 	} );
 
-	it( 'formats references using the API during initializing', async () => {
+	it( 'formats the relevant references using the API', async () => {
 		const contentLanguage = 'fr';
 		const testLink = prepareTestEnv( {
 			mwConfig: mockMwConfig( {
 				wgPageContentLanguage: contentLanguage,
 			} ),
 		} );
-		const clientApiGet = jest.fn().mockResolvedValue(
-			addPageInfoNoEditRestrictionsResponse(
+		const referenceHtml = [ '<span>ref1</span>', '<span>ref2</span>' ];
+		let mockReferenceId = 0;
+		const clientApiGet = jest.fn( ( query ) => {
+			if ( query.action === 'wbformatreference' ) {
+				return Promise.resolve( {
+					wbformatreference: {
+						html: referenceHtml[ mockReferenceId++ ] || fail(),
+					},
+				} );
+			}
+			return Promise.resolve( addPageInfoNoEditRestrictionsResponse(
 				'Client_page',
-				addSiteinfoRestrictionsResponse(
-					addReferenceRenderingResponse( {} ),
-				),
-			),
-		);
+				addSiteinfoRestrictionsResponse( {} ),
+			) );
+		} );
 		window.mw.Api = mockMwApiConstructor( {
 			get: clientApiGet,
 		} );
@@ -738,6 +745,12 @@ describe( 'app', () => {
 				uselang: contentLanguage,
 			} );
 		} );
+
+		const references = document.querySelectorAll(
+			'.wb-db-app .wb-db-references .wb-db-references__listItem',
+		);
+		expect( references[ 0 ].innerHTML ).toBe( referenceHtml[ 0 ] );
+		expect( references[ 1 ].innerHTML ).toBe( referenceHtml[ 1 ] );
 	} );
 
 	describe( 'error state specialized for permission errors', () => {

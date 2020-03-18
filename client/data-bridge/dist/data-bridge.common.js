@@ -15742,173 +15742,13 @@ var StringDataValue_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_StringDataValue = (StringDataValue_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=4d859a11&
-var ReferenceSectionvue_type_template_id_4d859a11_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+" ")]),_c('ul',{staticClass:"wb-db-references__list"},_vm._l((_vm.targetReferences),function(reference,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem"},[_c('div',[_c('SingleReferenceDisplay',{attrs:{"reference":reference,"separator":_vm.$messages.get( _vm.$messages.KEYS.REFERENCE_SNAK_SEPARATOR )}})],1)])}),0)])}
-var ReferenceSectionvue_type_template_id_4d859a11_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=05d196e4&
+var ReferenceSectionvue_type_template_id_05d196e4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+" ")]),_c('ul',{staticClass:"wb-db-references__list"},_vm._l((_vm.renderedTargetReferences),function(referenceHTML,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem",domProps:{"innerHTML":_vm._s(referenceHTML)}})}),0)])}
+var ReferenceSectionvue_type_template_id_05d196e4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=4d859a11&
+// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=05d196e4&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
-var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"wb-db-reference"},_vm._l((_vm.snaks()),function(value,index){return _c('span',{key:index},[(index > 0)?_c('span',[_vm._v(_vm._s(_vm.separator))]):_vm._e(),_c('span',[_vm._v(_vm._s(value))])])}),0)}
-var SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=template&id=48caea56&scoped=true&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__("d81d");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay =
-/*#__PURE__*/
-function (_Vue) {
-  _inherits(SingleReferenceDisplay, _Vue);
-
-  function SingleReferenceDisplay() {
-    _classCallCheck(this, SingleReferenceDisplay);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(SingleReferenceDisplay).apply(this, arguments));
-  }
-
-  _createClass(SingleReferenceDisplay, [{
-    key: "snaks",
-    value: function snaks() {
-      var _this = this;
-
-      function flatten(array) {
-        var flatArray = [];
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = array[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var elements = _step.value;
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
-
-            try {
-              for (var _iterator2 = elements[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var element = _step2.value;
-
-                if (element !== null) {
-                  flatArray.push(element);
-                }
-              }
-            } catch (err) {
-              _didIteratorError2 = true;
-              _iteratorError2 = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                  _iterator2.return();
-                }
-              } finally {
-                if (_didIteratorError2) {
-                  throw _iteratorError2;
-                }
-              }
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        return flatArray;
-      }
-
-      function isValueSnak(snak) {
-        return snak.snaktype === 'value';
-      }
-
-      return flatten(this.reference['snaks-order'].map(function (propertyId) {
-        return _this.reference.snaks[propertyId].map(function (snak) {
-          if (!isValueSnak(snak)) {
-            // TODO: handle novalue and somevalue
-            return null;
-          }
-
-          var datavalueValue = snak.datavalue.value;
-
-          if (_typeof(datavalueValue) === 'object') {
-            return JSON.stringify(datavalueValue);
-          }
-
-          return datavalueValue;
-        });
-      }));
-    }
-  }]);
-
-  return SingleReferenceDisplay;
-}(external_vue_default.a);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: true
-})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "reference", void 0);
-
-__decorate([Object(vue_property_decorator["Prop"])({
-  required: false,
-  type: String,
-  default: '. '
-})], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay.prototype, "separator", void 0);
-
-SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay = __decorate([vue_class_component_esm["default"]], SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
-/* harmony default export */ var SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_SingleReferenceDisplay);
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_SingleReferenceDisplayvue_type_script_lang_ts_ = (SingleReferenceDisplayvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/presentation/components/SingleReferenceDisplay.vue
-
-
-
-
-
-/* normalize component */
-
-var SingleReferenceDisplay_component = normalizeComponent(
-  components_SingleReferenceDisplayvue_type_script_lang_ts_,
-  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_render,
-  SingleReferenceDisplayvue_type_template_id_48caea56_scoped_true_staticRenderFns,
-  false,
-  null,
-  "48caea56",
-  null
-  
-)
-
-/* harmony default export */ var components_SingleReferenceDisplay = (SingleReferenceDisplay_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
 
 
@@ -15918,7 +15758,11 @@ var SingleReferenceDisplay_component = normalizeComponent(
 
 
 
-
+/**
+ * List the references of a statement.
+ * Individual references are rendered in the backend via the API and the
+ * resulting mark-up is presented in a list here.
+ */
 
 var ReferenceSectionvue_type_script_lang_ts_ReferenceSection =
 /*#__PURE__*/
@@ -15932,20 +15776,16 @@ function (_mixins) {
   }
 
   _createClass(ReferenceSection, [{
-    key: "targetReferences",
+    key: "renderedTargetReferences",
     get: function get() {
-      return this.rootModule.getters.targetReferences;
+      return this.rootModule.state.renderedTargetReferences;
     }
   }]);
 
   return ReferenceSection;
 }(Object(vue_class_component_esm["mixins"])(presentation_StateMixin));
 
-ReferenceSectionvue_type_script_lang_ts_ReferenceSection = __decorate([Object(vue_class_component_esm["default"])({
-  components: {
-    SingleReferenceDisplay: components_SingleReferenceDisplay
-  }
-})], ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
+ReferenceSectionvue_type_script_lang_ts_ReferenceSection = __decorate([Object(vue_class_component_esm["default"])({})], ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
 /* harmony default export */ var ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_ReferenceSection);
 // CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_ReferenceSectionvue_type_script_lang_ts_ = (ReferenceSectionvue_type_script_lang_ts_); 
@@ -15963,8 +15803,8 @@ var ReferenceSectionvue_type_style_index_0_lang_scss_ = __webpack_require__("e83
 
 var ReferenceSection_component = normalizeComponent(
   components_ReferenceSectionvue_type_script_lang_ts_,
-  ReferenceSectionvue_type_template_id_4d859a11_render,
-  ReferenceSectionvue_type_template_id_4d859a11_staticRenderFns,
+  ReferenceSectionvue_type_template_id_05d196e4_render,
+  ReferenceSectionvue_type_template_id_05d196e4_staticRenderFns,
   false,
   null,
   null,
@@ -18181,7 +18021,6 @@ var MessageKeys;
   MessageKeys["EDIT_DECISION_UPDATE_LABEL"] = "wikibase-client-data-bridge-edit-decision-update-label";
   MessageKeys["EDIT_DECISION_UPDATE_DESCRIPTION"] = "wikibase-client-data-bridge-edit-decision-update-description";
   MessageKeys["REFERENCES_HEADING"] = "wikibase-client-data-bridge-references-heading";
-  MessageKeys["REFERENCE_SNAK_SEPARATOR"] = "wikibase-client-data-bridge-reference-snak-separator";
   MessageKeys["PERMISSIONS_HEADING"] = "wikibase-client-data-bridge-permissions-error";
   MessageKeys["PERMISSIONS_MORE_INFO"] = "wikibase-client-data-bridge-permissions-error-info";
   MessageKeys["PERMISSIONS_BLOCKED_ON_CLIENT_HEADING"] = "wikibase-client-data-bridge-blocked-on-client-head";
@@ -19517,6 +19356,9 @@ function () {
   return ApiEntityLabelRepository;
 }();
 
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
+var es_array_map = __webpack_require__("d81d");
 
 // CONCATENATED MODULE: ./src/definitions/data-access/PageEditPermissionErrorsRepository.ts
 var PermissionErrorType;
