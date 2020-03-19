@@ -4,6 +4,7 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 
 use Parser;
 use PPFrame;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
@@ -76,7 +77,7 @@ class Runner {
 	 * @param Parser $parser
 	 * @param PPFrame $frame
 	 * @param array $args
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return array Wikitext in element 0, flags in named elements
 	 */
@@ -84,7 +85,7 @@ class Runner {
 		Parser $parser,
 		PPFrame $frame,
 		array $args,
-		$type = 'escaped-plaintext'
+		$type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
 	) {
 		$propertyLabelOrId = $frame->expand( $args[0] );
 		unset( $args[0] );
@@ -184,7 +185,7 @@ class Runner {
 	 */
 	public static function renderRichWikitext( Parser $parser, PPFrame $frame, array $args ) {
 		$runner = WikibaseClient::getDefaultInstance()->getPropertyParserFunctionRunner();
-		return $runner->runPropertyParserFunction( $parser, $frame, $args, 'rich-wikitext' );
+		return $runner->runPropertyParserFunction( $parser, $frame, $args, DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT );
 	}
 
 }

@@ -33,7 +33,7 @@ class ReferenceFormatterFactoryTest extends TestCase {
 			->with(
 				$this->identicalTo( $language ),
 				$this->identicalTo( $usageAccumulator ),
-				$this->identicalTo( 'rich-wikitext' )
+				$this->identicalTo( DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT )
 			)
 			->willReturn( $snakFormatter );
 		$properties = $this->createMock( WellKnownReferenceProperties::class );

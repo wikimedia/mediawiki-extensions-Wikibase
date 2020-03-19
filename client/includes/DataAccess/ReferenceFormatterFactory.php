@@ -39,7 +39,7 @@ class ReferenceFormatterFactory {
 			$this->snakFormatterFactory->newWikitextSnakFormatter(
 				$language,
 				$usageAccumulator,
-				'rich-wikitext'
+				DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 			),
 			$this->properties,
 			$messageLocalizer

@@ -9,6 +9,7 @@ use MediaWiki\MediaWikiServices;
 use Scribunto_LuaError;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\Client\RepoLinker;
@@ -129,7 +130,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return SnakSerializationRenderer
 	 */
@@ -256,7 +257,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return SnakSerializationRenderer
 	 */
@@ -269,7 +270,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$this->getUsageAccumulator(),
 			$type
 		);
-		if ( $type === 'rich-wikitext' ) {
+		if ( $type === DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ) {
 			// As Scribunto doesn't strip parser tags (like <mapframe>) itself,
 			// we need to take care of that.
 			$snakFormatter = new WikitextPreprocessingSnakFormatter(
@@ -674,8 +675,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'renderSnak', 1, $snakSerialization, 'table' );
 
 		try {
-			$ret = [ $this->getSnakSerializationRenderer( 'escaped-plaintext' )->renderSnak( $snakSerialization ) ];
-			return $ret;
+			return [
+				$this->getSnakSerializationRenderer(
+					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
+				)->renderSnak( $snakSerialization )
+			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
@@ -693,8 +697,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatValue', 1, $snakSerialization, 'table' );
 
 		try {
-			$ret = [ $this->getSnakSerializationRenderer( 'rich-wikitext' )->renderSnak( $snakSerialization ) ];
-			return $ret;
+			return [
+				$this->getSnakSerializationRenderer(
+					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
+				)->renderSnak( $snakSerialization )
+			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
@@ -712,8 +719,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'renderSnaks', 1, $snaksSerialization, 'table' );
 
 		try {
-			$ret = [ $this->getSnakSerializationRenderer( 'escaped-plaintext' )->renderSnaks( $snaksSerialization ) ];
-			return $ret;
+			return [
+				$this->getSnakSerializationRenderer(
+					DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT
+				)->renderSnaks( $snaksSerialization )
+			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}
@@ -731,8 +741,11 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
 
 		try {
-			$ret = [ $this->getSnakSerializationRenderer( 'rich-wikitext' )->renderSnaks( $snaksSerialization ) ];
-			return $ret;
+			return [
+				$this->getSnakSerializationRenderer(
+					DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
+				)->renderSnaks( $snaksSerialization )
+			];
 		} catch ( DeserializationException $e ) {
 			throw new ScribuntoException( 'wikibase-error-deserialize-error' );
 		}

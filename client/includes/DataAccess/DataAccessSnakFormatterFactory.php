@@ -28,6 +28,9 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  */
 class DataAccessSnakFormatterFactory {
 
+	public const TYPE_ESCAPED_PLAINTEXT = 'escaped-plaintext';
+	public const TYPE_RICH_WIKITEXT = 'rich-wikitext';
+
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
@@ -84,14 +87,14 @@ class DataAccessSnakFormatterFactory {
 	 *
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return SnakFormatter
 	 */
 	public function newWikitextSnakFormatter(
 		Language $language,
 		UsageAccumulator $usageAccumulator,
-		$type = 'escaped-plaintext'
+		$type = self::TYPE_ESCAPED_PLAINTEXT
 	) {
 		$fallbackChain = $this->languageFallbackChainFactory->newFromLanguage(
 			$language,
@@ -103,7 +106,7 @@ class DataAccessSnakFormatterFactory {
 			SnakFormatter::OPT_LANG => $language->getCode(),
 		] );
 
-		if ( $type === 'rich-wikitext' ) {
+		if ( $type === self::TYPE_RICH_WIKITEXT ) {
 			$snakFormatter = $this->getRichWikitextSnakFormatterForOptions( $options );
 		} else {
 			$snakFormatter = $this->getPlainTextSnakFormatterForOptions( $options );

@@ -127,7 +127,7 @@ class DataAccessSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 		$snakFormatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'fr' ),
 			$this->createMock( UsageAccumulator::class ),
-			'rich-wikitext'
+			DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 		);
 
 		$this->assertSame( $expected, $snakFormatter->formatSnak( $snak ) );
