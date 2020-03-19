@@ -12,6 +12,7 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
+use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -340,6 +341,10 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			// Items
 			$itemEntityInfoBuilderMapping = [];
 			foreach ( $this->settings->getItemTermsMigrationStages() as $maxId => $stage ) {
+				if ( $maxId === 'max' ) {
+					$maxId = Int32EntityId::MAX;
+				}
+
 				if ( $stage >= MIGRATION_WRITE_NEW ) {
 					$itemEntityInfoBuilderMapping[$maxId] = $newEntityInfoBuilder;
 				} else {
