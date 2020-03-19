@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use FauxRequest;
 use RequestContext;
-use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
@@ -16,7 +15,9 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
@@ -47,45 +48,6 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		$context->setRequest( new FauxRequest( $params, true ) );
 		$main = new ApiMain( $context );
 		return $main;
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getMockTitleLookup() {
-		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
-			->method( 'getTitlesForIds' )
-			->will( $this->returnCallback( function ( $ids ) {
-				$titles = [];
-				/** @var EntityId $id */
-				foreach ( $ids as $id ) {
-					$titles[ $id->getSerialization() ] = $this->getMockTitle();
-				}
-				return $titles;
-			} ) );
-
-		return $titleLookup;
-	}
-
-	/**
-	 * @return Title
-	 */
-	public function getMockTitle() {
-		$mock = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getFullURL' )
-			->will( $this->returnValue( 'http://fullTitleUrl' ) );
-		$mock->expects( $this->any() )
-			->method( 'getPrefixedText' )
-			->will( $this->returnValue( 'Prefixed:Title' ) );
-		$mock->expects( $this->any() )
-			->method( 'getArticleID' )
-			->will( $this->returnValue( 42 ) );
-
-		return $mock;
 	}
 
 	/**
@@ -138,7 +100,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$entitySearchHelper ?: $this->getMockEntitySearchHelper( $params ),
-			$this->getMockTitleLookup(),
+			null,
 			$this->getContentLanguages(),
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -159,7 +121,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					'o',
 					'otherwiki'
 				)
-			], new EntityTypeDefinitions( [] ) )
+			], new EntityTypeDefinitions( [] ) ),
+			$this->newMockTitleTextLookup(),
+			$this->newMockUrlLookup(),
+			$this->newMockArticleIdLookup()
 		);
 
 		$module->execute();
@@ -406,7 +371,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			$this->getApiMain( $params ),
 			'wbsearchentities',
 			$searchHelper,
-			$this->getMockTitleLookup(),
+			null,
 			$this->getContentLanguages(),
 			new EntitySourceDefinitions(
 				[
@@ -421,7 +386,10 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 					)
 				],
 				new EntityTypeDefinitions( [] )
-			)
+			),
+			$this->newMockTitleTextLookup(),
+			$this->newMockUrlLookup(),
+			$this->newMockArticleIdLookup()
 		);
 
 		$module->execute();
@@ -433,6 +401,33 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 		] );
 
 		$this->assertEquals( 'http://acme.test/concept/%5B,,_,,%5D;3', $result['search'][0]['concepturi'] );
+	}
+
+	private function newMockTitleTextLookup(): EntityTitleTextLookup {
+		$titleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+		$titleTextLookup->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->willReturn( 'Prefixed:Title' );
+
+		return $titleTextLookup;
+	}
+
+	private function newMockUrlLookup(): EntityUrlLookup {
+		$urlLookup = $this->createMock( EntityUrlLookup::class );
+		$urlLookup->expects( $this->any() )
+			->method( 'getFullUrl' )
+			->willReturn( 'http://fullTitleUrl' );
+
+		return $urlLookup;
+	}
+
+	private function newMockArticleIdLookup(): EntityArticleIdLookup {
+		$articleIdLookup = $this->createMock( EntityArticleIdLookup::class );
+		$articleIdLookup->expects( $this->any() )
+			->method( 'getArticleID' )
+			->willReturn( 42 );
+
+		return $articleIdLookup;
 	}
 
 }
