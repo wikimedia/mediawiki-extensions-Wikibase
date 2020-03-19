@@ -19,8 +19,6 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\ConfigurableTermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
@@ -208,25 +206,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			} ) );
 
 		return $titleLookup;
-	}
-
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	private function newLanguageFallbackChainFactory() {
-		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
-			->setConstructorArgs( [ [] ] )
-			->setMethods( [ 'getFetchLanguageCodes' ] )
-			->getMock();
-		$fallbackChain->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
-			->will( $this->returnValue( [ 'phpunit_lang' ] ) );
-
-		$factory = $this->createMock( LanguageFallbackChainFactory::class );
-		$factory->method( 'newFromLanguage' )->willReturn( $fallbackChain );
-		$factory->method( 'newFromLanguageCode' )->willReturn( $fallbackChain );
-
-		return $factory;
 	}
 
 }
