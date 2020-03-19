@@ -167,7 +167,7 @@ class ClientParserOutputDataUpdaterTest extends \PHPUnit\Framework\TestCase {
 		$usage = $usageAcc->getUsages();
 		$expected = new EntityUsage( $id, $aspect );
 
-		$this->assertContains( $expected, $usage, '', false, false );
+		$this->assertContainsEquals( $expected, $usage );
 	}
 
 	public function testUpdateItemIdPropertyForUnconnectedPage() {
