@@ -138,7 +138,7 @@ call_user_func( function() {
 	$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
 
 	// conditionally register the remaining two handlers which would otherwise fail
-	$wgExtensionFunctions[] = '\Wikibase\ClientHooks::onExtensionLoad';
+	$wgExtensionFunctions[] = '\Wikibase\Client\Hooks\ExtensionLoadHandler::onExtensionLoad';
 
 	// tracking local edits
 	if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
