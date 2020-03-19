@@ -196,5 +196,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Criada uma nova propriedade",
 	"wikibase-property-summary-wbeditentity-update": "Mudou uma propriedade",
 	"wikibase-property-summary-wbeditentity-override": "Limpou uma propriedade",
-	"wikibase-property-summary-special-create-property": "Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}"
+	"wikibase-property-summary-special-create-property": "Criou uma propriedade com {{PLURAL:$1|um valor [$2]|valores [$2]}}",
+	"wikibase-reference-formatter-snak-retrieved": "Recuperado $1"
 }

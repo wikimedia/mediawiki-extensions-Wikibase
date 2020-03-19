@@ -186,5 +186,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Создадено ново својство",
 	"wikibase-property-summary-wbeditentity-update": "Изменето својство",
 	"wikibase-property-summary-wbeditentity-override": "Презапишано својство",
-	"wikibase-property-summary-special-create-property": "Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}"
+	"wikibase-property-summary-special-create-property": "Создадено својство за [$2] со {{PLURAL:$1|вредноста|вредностите}}",
+	"wikibase-reference-formatter-snak-retrieved": "Проверено на $1"
 }

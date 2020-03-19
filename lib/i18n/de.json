@@ -192,5 +192,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Neue Eigenschaft erstellt",
 	"wikibase-property-summary-wbeditentity-update": "Eine Eigenschaft geändert",
 	"wikibase-property-summary-wbeditentity-override": "Eine Eigenschaft geleert",
-	"wikibase-property-summary-special-create-property": "Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}} erstellt"
+	"wikibase-property-summary-special-create-property": "Eigenschaft für [$2] mit {{PLURAL:$1|Wert|Werten}} erstellt",
+	"wikibase-reference-formatter-snak-retrieved": "Abgerufen $1"
 }

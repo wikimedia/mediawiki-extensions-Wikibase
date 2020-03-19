@@ -196,5 +196,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Створено нову властивість",
 	"wikibase-property-summary-wbeditentity-update": "Властивість змінено",
 	"wikibase-property-summary-wbeditentity-override": "Очищено властивість",
-	"wikibase-property-summary-special-create-property": "Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}"
+	"wikibase-property-summary-special-create-property": "Створено властивість для [$2] із {{PLURAL:$1|1=значенням|значеннями}}",
+	"wikibase-reference-formatter-snak-retrieved": "Отримано $1"
 }

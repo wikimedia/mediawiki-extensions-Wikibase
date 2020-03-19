@@ -198,5 +198,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "已建立新屬性",
 	"wikibase-property-summary-wbeditentity-update": "屬性已變更",
 	"wikibase-property-summary-wbeditentity-override": "已清空屬性",
-	"wikibase-property-summary-special-create-property": "已建立含{{PLURAL:$1|數值}}的 [$2] 屬性"
+	"wikibase-property-summary-special-create-property": "已建立含{{PLURAL:$1|數值}}的 [$2] 屬性",
+	"wikibase-reference-formatter-snak-retrieved": "$1 已檢索"
 }
