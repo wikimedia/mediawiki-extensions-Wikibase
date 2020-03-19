@@ -52,6 +52,7 @@ use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ClientSiteLinkTitleLookup;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
+use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
@@ -90,6 +91,7 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
+use Wikibase\Lib\Formatters\Reference\WellKnownReferenceProperties;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -285,6 +287,9 @@ final class WikibaseClient {
 	private $descriptionLookup = null;
 
 	private $propertyLabelResolver = null;
+
+	/** @var ReferenceFormatterFactory|null */
+	private $referenceFormatterFactory = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1505,6 +1510,20 @@ final class WikibaseClient {
 		}
 
 		return $this->propertyLabelResolver;
+	}
+
+	public function getReferenceFormatterFactory(): ReferenceFormatterFactory {
+		if ( $this->referenceFormatterFactory === null ) {
+			$this->referenceFormatterFactory = new ReferenceFormatterFactory(
+				$this->getDataAccessSnakFormatterFactory(),
+				WellKnownReferenceProperties::newFromArray(
+					$this->getSettings()->getSetting( 'wellKnownReferencePropertyIds' ),
+					$this->getLogger()
+				)
+			);
+		}
+
+		return $this->referenceFormatterFactory;
 	}
 
 	private function getCachedDatabasePropertyLabelResolver(
