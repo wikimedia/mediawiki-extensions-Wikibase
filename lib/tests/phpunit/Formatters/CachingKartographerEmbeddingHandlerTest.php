@@ -37,9 +37,10 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$language = Language::factory( 'qqx' );
 		$result = $handler->getHtml( $this->newSampleCoordinate(), $language );
 
-		$this->assertContains( 'mw-kartographer-map', $result );
-		$this->assertContains( 'data-lat="50', $result );
-		$this->assertContains( 'data-lon="11', $result );
+		$this->assertStringContainsString( 'mw-kartographer-map', $result );
+		$this->assertStringContainsString( 'data-lat="50"', $result );
+		// FIXME: This looks somewhat bogus, do we need to fix this as well?
+		$this->assertStringContainsString( 'data-lon="1.0E-5"', $result );
 		$this->assertStringStartsWith( '<div', $result );
 		$this->assertStringEndsWith( '</div>', $result );
 	}
@@ -63,7 +64,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		);
 
 		$result = $handler->getHtml( $this->newSampleCoordinate(), $language );
-		$this->assertContains( 'mw-kartographer-map', $result );
+		$this->assertStringContainsString( 'mw-kartographer-map', $result );
 	}
 
 	public function testGetHtml_marsCoordinate() {
@@ -85,10 +86,10 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$result = $handler->getPreviewHtml( $value, $language );
 
 		// Preview HTML should contain the regular html
-		$this->assertContains( $plainHtml, $result );
+		$this->assertStringContainsString( $plainHtml, $result );
 		$this->assertStringStartsWith( '<div id="wb-globeCoordinateValue-preview-', $result );
-		$this->assertContains( 'wgKartographerLiveData', $result );
-		$this->assertContains( 'initMapframeFromElement', $result );
+		$this->assertStringContainsString( 'wgKartographerLiveData', $result );
+		$this->assertStringContainsString( 'initMapframeFromElement', $result );
 	}
 
 	public function testGetPreviewHtml_marsCoordinate() {
@@ -122,6 +123,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$this->assertNotFalse( $out->getExtensionData( 'kartographer' ) );
 		$this->assertNotFalse( $out->getProperty( 'kartographer_frames' ) );
 
+		// This is sometimes an object, see \Kartographer\Tag\TagHandler::finalParseStep()
 		$this->assertCount( 2, (array)$out->getJsConfigVars()['wgKartographerLiveData'] );
 		$this->assertNotEmpty( $out->getModules() );
 	}
@@ -144,6 +146,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 
 	public function testGetMapframeInitJS() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		/** @var CachingKartographerEmbeddingHandler $handler */
 		$handler = TestingAccessWrapper::newFromObject( $handler );
 
 		$html = $handler->getMapframeInitJS(
@@ -154,16 +157,17 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 
 		$this->assertStringStartsWith( '<script>', $html );
 		$this->assertStringEndsWith( '</script>', $html );
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'mw.config.get( \'wgKartographerLiveData\' )["maps"] = "awesome"',
 			$html
 		);
-		$this->assertContains( '["rl-module-1","another-rl-module","ext.kartographer.frame"]', $html );
-		$this->assertContains( '( "#foo" )', $html );
+		$this->assertStringContainsString( '["rl-module-1","another-rl-module","ext.kartographer.frame"]', $html );
+		$this->assertStringContainsString( '( "#foo" )', $html );
 	}
 
 	public function testGetMapframeInitJS_escaping() {
 		$handler = new CachingKartographerEmbeddingHandler( MediaWikiServices::getInstance()->getParserFactory()->create() );
+		/** @var CachingKartographerEmbeddingHandler $handler */
 		$handler = TestingAccessWrapper::newFromObject( $handler );
 
 		$html = $handler->getMapframeInitJS(
@@ -178,23 +182,23 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$stringsToEscape = [ '#f"o"o', 'rl-"mo"dule', 'm"a"ps', 'awe"s"ome' ];
 
 		foreach ( $stringsToEscape as $str ) {
-			$this->assertNotContains( $str, $html );
-			$this->assertContains( Xml::encodeJsVar( $str ), $html );
+			$this->assertStringNotContainsString( $str, $html );
+			$this->assertStringContainsString( Xml::encodeJsVar( $str ), $html );
 		}
 	}
 
 	private function newSampleCoordinate() {
 		return new GlobeCoordinateValue(
-			new LatLongValue( 50, 11 ),
-			1,
+			new LatLongValue( 50, 1.1E-5 ),
+			5,
 			GlobeCoordinateValue::GLOBE_EARTH
 		);
 	}
 
 	private function newSampleMarsCoordinate() {
 		return new GlobeCoordinateValue(
-			new LatLongValue( 50, 11 ),
-			1,
+			new LatLongValue( 50, 1.1E-5 ),
+			5,
 			'http://www.wikidata.org/entity/Q111'
 		);
 	}
