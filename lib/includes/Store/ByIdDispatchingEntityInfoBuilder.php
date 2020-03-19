@@ -35,6 +35,11 @@ class ByIdDispatchingEntityInfoBuilder implements EntityInfoBuilder {
 			$entityInfoBuilders,
 			'$entityInfoBuilders'
 		);
+		Assert::parameterKeyType(
+			'integer',
+			$entityInfoBuilders,
+			'$entityInfoBuilders'
+		);
 		$this->entityInfoBuilders = $entityInfoBuilders;
 		ksort( $this->entityInfoBuilders );
 	}
