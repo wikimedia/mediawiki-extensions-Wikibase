@@ -1058,6 +1058,8 @@ call_user_func( function() {
 	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\RepoHooks::onRejectParserCacheValue';
 	$wgHooks['ApiQuery::moduleManager'][] = '\Wikibase\RepoHooks::onApiQueryModuleManager';
 	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\RepoHooks::onParserFirstCallInit';
+	$wgHooks['WikibaseRepoEntityTypes'][] =
+		'Wikibase\Repo\Hooks\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
