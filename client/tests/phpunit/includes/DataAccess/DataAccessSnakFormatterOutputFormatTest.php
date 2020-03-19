@@ -11,6 +11,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use Title;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Tests\MockClientStore;
@@ -261,7 +262,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$formatter = $factory->newWikitextSnakFormatter(
 			Language::factory( 'en' ),
 			$this->createMock( UsageAccumulator::class ),
-			'rich-wikitext'
+			DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 		);
 
 		$this->assertSame( $expected, $formatter->formatSnak( $snak ) );

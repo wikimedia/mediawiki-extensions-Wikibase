@@ -8,6 +8,7 @@ use ParserOptions;
 use PPFrame;
 use PPNode;
 use Title;
+use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
@@ -62,8 +63,8 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 
 	public function wikitextTypeProvider() {
 		return [
-			[ 'escaped-plaintext' ],
-			[ 'rich-wikitext' ],
+			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ],
+			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ],
 		];
 	}
 
@@ -71,7 +72,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$itemId = new ItemId( 'Q42' );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),
@@ -106,7 +107,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$restrictedEntityLookup->getEntity( $itemId );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$restrictedEntityLookup,
@@ -130,7 +131,7 @@ class RunnerTest extends \PHPUnit\Framework\TestCase {
 		$itemId = new ItemId( 'Q42' );
 
 		$runner = new Runner(
-			$this->getStatementGroupRendererFactory( $itemId, 'Cat', 'escaped-plaintext' ),
+			$this->getStatementGroupRendererFactory( $itemId, 'Cat', DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ),
 			$this->createMock( SiteLinkLookup::class ),
 			new ItemIdParser(),
 			$this->getRestrictedEntityLookup(),

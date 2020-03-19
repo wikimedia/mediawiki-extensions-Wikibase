@@ -61,8 +61,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function wikitextTypeProvider() {
 		return [
-			[ 'escaped-plaintext' ],
-			[ 'rich-wikitext' ],
+			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ],
+			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT ],
 		];
 	}
 
@@ -153,8 +153,8 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideWikitextTypes() {
 		return [
-			[ 'escaped-plaintext', 'Kittens!', false ],
-			[ 'rich-wikitext', '<span><span>Kittens!</span></span>', true ],
+			[ DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT, 'Kittens!', false ],
+			[ DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT, '<span><span>Kittens!</span></span>', true ],
 		];
 	}
 
@@ -165,7 +165,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 		$parser = $this->getParser( 'en', 'es', true );
 
 		$rendererFactory = $this->getStatementGroupRendererFactory( $allowDataAccessInUserLanguage );
-		$renderer = $rendererFactory->newRendererFromParser( $parser, 'rich-wikitext' );
+		$renderer = $rendererFactory->newRendererFromParser( $parser, DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT );
 
 		$usageAccumulator = new ParserOutputUsageAccumulator(
 			$parser->getOutput(),

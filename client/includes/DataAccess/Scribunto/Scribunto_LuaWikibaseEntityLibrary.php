@@ -105,7 +105,7 @@ class Scribunto_LuaWikibaseEntityLibrary extends Scribunto_LuaLibraryBase {
 		$innerFormatter = $snakFormatterFactory->newWikitextSnakFormatter(
 			$lang,
 			$this->getUsageAccumulator(),
-			'rich-wikitext'
+			DataAccessSnakFormatterFactory::TYPE_RICH_WIKITEXT
 		);
 
 		// As Scribunto doesn't strip parser tags (like <mapframe>) itself,

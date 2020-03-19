@@ -84,11 +84,11 @@ class StatementGroupRendererFactory {
 
 	/**
 	 * @param Parser $parser
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 *
 	 * @return StatementGroupRenderer
 	 */
-	public function newRendererFromParser( Parser $parser, $type = 'escaped-plaintext' ) {
+	public function newRendererFromParser( Parser $parser, $type = DataAccessSnakFormatterFactory::TYPE_ESCAPED_PLAINTEXT ) {
 		$usageAccumulator = new ParserOutputUsageAccumulator( $parser->getOutput(), $this->entityUsageFactory );
 
 		if ( $this->allowDataAccessInUserLanguage ) {
@@ -124,7 +124,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 * @param Language $language
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
@@ -169,7 +169,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 * @param string $languageCode
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
@@ -198,7 +198,7 @@ class StatementGroupRendererFactory {
 	}
 
 	/**
-	 * @param string $type Either "escaped-plaintext" or "rich-wikitext".
+	 * @param string $type One of DataAccessSnakFormatterFactory::TYPE_*
 	 * @param string[] $variants
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param ParserOutput $parserOutput
