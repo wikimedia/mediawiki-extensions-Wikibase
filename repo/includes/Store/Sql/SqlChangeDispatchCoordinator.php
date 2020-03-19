@@ -10,7 +10,7 @@ use MWException;
 use Psr\Log\LoggerInterface;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
-use Wikibase\Store\ChangeDispatchCoordinator;
+use Wikibase\Repo\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;

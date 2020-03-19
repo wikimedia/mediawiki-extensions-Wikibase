@@ -21,12 +21,12 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\IdGenerator;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\GenericEventDispatcher;
+use Wikibase\Repo\Store\IdGenerator;
 use WikiPage;
 
 /**

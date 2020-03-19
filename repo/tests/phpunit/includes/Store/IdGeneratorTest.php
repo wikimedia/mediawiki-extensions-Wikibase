@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
-use Wikibase\IdGenerator;
+use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

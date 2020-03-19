@@ -14,8 +14,8 @@ use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
-use Wikibase\Store\ChangeDispatchCoordinator;
-use Wikibase\Store\SubscriptionLookup;
+use Wikibase\Repo\Store\ChangeDispatchCoordinator;
+use Wikibase\Repo\Store\SubscriptionLookup;
 
 /**
  * Interactor class for dispatching change notifications to client wikis via the job queue.

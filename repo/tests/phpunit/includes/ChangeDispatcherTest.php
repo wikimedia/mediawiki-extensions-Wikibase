@@ -20,8 +20,8 @@ use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\ChangeNotificationSender;
-use Wikibase\Store\ChangeDispatchCoordinator;
-use Wikibase\Store\SubscriptionLookup;
+use Wikibase\Repo\Store\ChangeDispatchCoordinator;
+use Wikibase\Repo\Store\SubscriptionLookup;
 
 /**
  * @covers \Wikibase\Repo\ChangeDispatcher
