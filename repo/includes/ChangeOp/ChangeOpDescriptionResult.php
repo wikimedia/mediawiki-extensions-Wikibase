@@ -14,7 +14,7 @@ class ChangeOpDescriptionResult extends GenericChangeOpResult implements Languag
 
 	/**
 	 * @param EntityId|null $entityId
-	 * @param String $languageCode
+	 * @param string $languageCode
 	 * @param $oldDescription
 	 * @param $newDescription
 	 * @param bool $isEntityChanged
