@@ -13,5 +13,9 @@
  * @license GPL-2.0-or-later
  */
 return [
-	'property' => []
+	'property' => [
+		'article-id-lookup-callback' => function () {
+			return new \Wikibase\Lib\Store\EntityArticleIdNullLookup();
+		},
+	]
 ];
