@@ -2487,7 +2487,7 @@ class WikibaseRepo {
 		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
 		return new GenericActionApiClient(
 			MediaWikiServices::getInstance()->getHttpRequestFactory(),
-			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ) . 'api.php'
 		);
 	}
 
