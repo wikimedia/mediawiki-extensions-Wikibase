@@ -186,38 +186,46 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			$records = $this->filterNonExistingRecords( $records, $insertedRecords );
 
 			if ( count( $records ) === $recordsCount ) {
-				// This is a fail-safe capture in order to avoid an infinite loop when insertion
-				// fails due to duplication, but selection in the next loop iteration still
-				// cannot detect those existing records for any reason.
-				// This has one caveat that failures due to other reasons other than duplication
-				// constraint violation will also result in a failure to this function entirely.
-				$exception = new Exception(
-					'Fail-safe exception. Avoiding infinite loop due to possibily undetectable'
-					. " existing records in master.\n"
-					. ' It may be due to encoding incompatibility'
-					. ' between database values and values passed in $neededRecords parameter.'
+				// Edge case. When it couldn't find the row but it couldn't insert it either.
+				// This can happen when this code tries to read the id and can't find it then another thread inserts data at the same time so
+				// this code can't insert it either but then it tries to read it again and given the lock mode of REPEATABLE_READ,
+				// which is the default for MySQL, the code end up not being be able to read the id again and gets stuck in an infinite loop.
+				// To avoid this, we read it with CONN_TRX_AUTOCOMMIT
+				// Surprisingly it's not too rare not to happen in production: T247553
+
+				$dbw = $this->getLoadBalancer()->getConnection(
+					ILoadBalancer::DB_MASTER,
+					[],
+					false,
+					ILoadBalancer::CONN_TRX_AUTOCOMMIT
 				);
 
-				$this->logger->warning(
-					'{method}: Acquiring record ids failed: {exception}',
-					[
-						'method' => __METHOD__,
-						'exception' => $exception,
-						'table' => $this->table,
-						'records' => $records,
-						'insertedRecords' => $insertedRecords,
-					]
+				$insertedRecords = array_merge(
+					$insertedRecords,
+					$this->fetchExistingRecordsFromMaster( $records, $dbw )
 				);
 
-				throw $exception;
+				$records = $this->filterNonExistingRecords( $records, $insertedRecords );
+
+				if ( count( $records ) === $recordsCount ) {
+					// Logic error, this should never happen.
+					$exception = new Exception(
+						'Fail-safe exception. Avoiding infinite loop due to possibily undetectable'
+						. " existing records in master.\n"
+						. ' It may be due to encoding incompatibility'
+						. ' between database values and values passed in $neededRecords parameter.'
+					);
+					throw $exception;
+				}
 			}
 		}
 
 		return $insertedRecords;
 	}
 
-	private function fetchExistingRecordsFromMaster( array $neededRecords ): array {
-		return $this->findExistingRecords( $this->getDbMaster(), $neededRecords );
+	private function fetchExistingRecordsFromMaster( array $neededRecords, IDatabase $dbw = null ): array {
+		$dbw = $dbw ?? $this->getDbMaster();
+		return $this->findExistingRecords( $dbw, $neededRecords );
 	}
 
 	private function fetchExistingRecordsFromReplica( array $neededRecords ): array {
