@@ -41,8 +41,8 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 		$dataUpdater->updateParserOutput( $parserOutput );
 
 		$this->assertSame(
-			$expected->getProperty( 'kartographer' ),
-			$parserOutput->getProperty( 'kartographer' )
+			$expected->getExtensionData( 'kartographer' ),
+			$parserOutput->getExtensionData( 'kartographer' )
 		);
 		$this->assertSame(
 			$expected->getProperty( 'kartographer_links' ),
@@ -114,7 +114,7 @@ class GlobeCoordinateKartographerDataUpdaterTest extends \PHPUnit\Framework\Test
 	private function getKartographerParserOutput() {
 		$parserOutput = new ParserOutput();
 		$parserOutput->addModules( [ 'kartographer-rl-module1', 'javascript-stuffs' ] );
-		$parserOutput->setProperty( 'kartographer', [ [ 'whatever' ] ] );
+		$parserOutput->getExtensionData( 'kartographer', [ [ 'whatever' ] ] );
 		$parserOutput->setProperty( 'kartographer_links', [ [ 34 ] ] );
 		$parserOutput->setProperty( 'kartographer_frames', [ [ 'blah' ] ] );
 		$parserOutput->addJsConfigVars( 'wgKartographerMapServer', 'https://maps.wikimedia.org' );
