@@ -56,5 +56,13 @@
 	"apihelp-query+wikibase-description": "{{doc-apihelp-description|query+wikibase}}",
 	"apihelp-query+wikibase-summary": "{{doc-apihelp-summary|query+wikibase}}",
 	"apihelp-query+wikibase-example": "{{doc-apihelp-example|query+wikibase}}",
-	"apihelp-query+wikibase-param-prop": "{{doc-apihelp-param|query+wikibase|prop}}"
+	"apihelp-query+wikibase-param-prop": "{{doc-apihelp-param|query+wikibase|prop}}",
+	"apihelp-wbformatreference-summary": "{{doc-apihelp-summary|wbformatreference}}",
+	"apihelp-wbformatreference-example-1": "{{doc-apihelp-example|wbformatreference}}",
+	"apihelp-wbformatreference-example-2": "{{doc-apihelp-example|wbformatreference}}",
+	"apihelp-wbformatreference-param-reference": "{{doc-apihelpp-param|wbformatreference|reference}}",
+	"apihelp-wbformatreference-param-style": "{{doc-apihelp-param|wbformatreference|style}}",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "{{doc-apihelp-paramvalue|wbformatreference|style|internal-data-bridge}}",
+	"apihelp-wbformatreference-param-outputformat": "{{doc-apihelp-param|wbformatreference|outputformat}}",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "{{doc-apihelp-paramvalue|wbformatreference|outputformat|html}}"
 }
