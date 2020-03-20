@@ -188,5 +188,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "נוצר מאפיין חדש",
 	"wikibase-property-summary-wbeditentity-update": "מאפיין שוּנה",
 	"wikibase-property-summary-wbeditentity-override": "נוקה מאפיין",
-	"wikibase-property-summary-special-create-property": "נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}"
+	"wikibase-property-summary-special-create-property": "נוצר מאפיין בשפה [$2] עם {{PLURAL:$1|ערך|ערכים}}",
+	"wikibase-reference-formatter-snak-retrieved": "אוחזר ב־$1"
 }

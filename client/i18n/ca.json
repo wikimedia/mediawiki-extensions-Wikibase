@@ -137,5 +137,6 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>He actualitzat</strong> un valor obsolet",
 	"wikibase-client-data-bridge-edit-decision-update-description": "El valor anterior abans era correcte però ara és obsolet.",
 	"wikibase-client-data-bridge-references-heading": "Referències",
+	"wikibase-client-data-bridge-license-heading": "Ús i llicència",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifica el valor a {{WBREPONAME}}"
 }

@@ -188,5 +188,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Создано новое свойство",
 	"wikibase-property-summary-wbeditentity-update": "Изменено свойство",
 	"wikibase-property-summary-wbeditentity-override": "Очищено значение свойства",
-	"wikibase-property-summary-special-create-property": "Создано свойство [$2] со {{PLURAL:$1|1=значением|значениями}}"
+	"wikibase-property-summary-special-create-property": "Создано свойство [$2] со {{PLURAL:$1|1=значением|значениями}}",
+	"wikibase-reference-formatter-snak-retrieved": "Получено $1"
 }
