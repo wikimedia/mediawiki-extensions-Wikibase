@@ -37,7 +37,10 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'rdf-builder-factory-callback' => 'new-rdf-builder-factory-callback',
 				'entity-diff-visualizer-callback' => 'new-entity-diff-visualizer-callback',
 				'entity-search-callback' => 'foo-search',
-				'prefetching-term-lookup-callback' => 'foo-prefetching-term-lookup-instantiator'
+				'prefetching-term-lookup-callback' => 'foo-prefetching-term-lookup-instantiator',
+				'article-id-lookup-callback' => 'foo-article-id-lookup',
+				'title-text-lookup-callback' => 'foo-title-text-lookup',
+				'url-lookup-callback' => 'foo-url-lookup',
 			],
 			'bar' => [
 				'serializer-factory-callback' => 'bar-serializer',
@@ -47,6 +50,9 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 				'content-handler-factory-callback' => 'bar-handler',
 				'entity-factory-callback' => 'new-bar',
 				'entity-search-callback' => 'bar-search',
+				'article-id-lookup-callback' => 'bar-article-id-lookup',
+				'title-text-lookup-callback' => 'bar-title-text-lookup',
+				'url-lookup-callback' => 'bar-url-lookup',
 			],
 			'baz' => []
 		];
@@ -235,6 +241,33 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame(
 			[ 'foo' => 'foo-prefetching-term-lookup-instantiator' ],
 			$definitions->getPrefetchingTermLookupCallbacks()
+		);
+	}
+
+	public function testGetEntityArticleIdLookupCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-article-id-lookup', 'bar' => 'bar-article-id-lookup' ],
+			$definitions->getEntityArticleIdLookupCallbacks()
+		);
+	}
+
+	public function testGetEntityTitleTextLookupCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-title-text-lookup', 'bar' => 'bar-title-text-lookup' ],
+			$definitions->getEntityTitleTextLookupCallbacks()
+		);
+	}
+
+	public function testGetEntityUrlLookupCallbacks() {
+		$definitions = new EntityTypeDefinitions( $this->getDefinitions() );
+
+		$this->assertSame(
+			[ 'foo' => 'foo-url-lookup', 'bar' => 'bar-url-lookup' ],
+			$definitions->getEntityUrlLookupCallbacks()
 		);
 	}
 

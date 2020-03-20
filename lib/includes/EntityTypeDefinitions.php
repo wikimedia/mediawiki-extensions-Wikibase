@@ -320,4 +320,16 @@ class EntityTypeDefinitions {
 		return $this->getMapForDefinitionField( 'entity-id-lookup-callback' );
 	}
 
+	public function getEntityArticleIdLookupCallbacks() {
+		return $this->getMapForDefinitionField( 'article-id-lookup-callback' );
+	}
+
+	public function getEntityTitleTextLookupCallbacks() {
+		return $this->getMapForDefinitionField( 'title-text-lookup-callback' );
+	}
+
+	public function getEntityUrlLookupCallbacks() {
+		return $this->getMapForDefinitionField( 'url-lookup-callback' );
+	}
+
 }

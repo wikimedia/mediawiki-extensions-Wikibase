@@ -252,7 +252,6 @@ call_user_func( function() {
 				$repo->getEntitySearchHelperCallbacks(),
 				$mainModule->getRequest()
 			);
-			$entityTitleLookup = $repo->getEntityTitleLookup();
 
 			return new SearchEntities(
 				$mainModule,
@@ -261,9 +260,9 @@ call_user_func( function() {
 				null,
 				$repo->getTermsLanguages(),
 				$repo->getEntitySourceDefinitions(),
-				new \Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
-				new \Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
-				new \Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup( $entityTitleLookup )
+				$repo->getEntityTitleTextLookup(),
+				$repo->getEntityUrlLookup(),
+				$repo->getEntityArticleIdLookup()
 			);
 		},
 	];

@@ -110,12 +110,15 @@ use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
+use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
@@ -137,6 +140,12 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\TermIndexItemTermStoreWriter;
 use Wikibase\Lib\Store\TermIndexPropertyTermStoreWriter;
+use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
+use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
+use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
+use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Units\UnitConverter;
@@ -752,6 +761,27 @@ class WikibaseRepo {
 		return new TypeDispatchingEntityTitleStoreLookup(
 			$this->entityTypeDefinitions->getEntityTitleStoreLookupFactoryCallbacks(),
 			$this->getEntityContentFactory()
+		);
+	}
+
+	public function getEntityTitleTextLookup(): EntityTitleTextLookup {
+		return new TypeDispatchingTitleTextLookup(
+			$this->entityTypeDefinitions->getEntityTitleTextLookupCallbacks(),
+			new TitleLookupBasedEntityTitleTextLookup( $this->getEntityTitleLookup() )
+		);
+	}
+
+	public function getEntityUrlLookup(): EntityUrlLookup {
+		return new TypeDispatchingUrlLookup(
+			$this->entityTypeDefinitions->getEntityUrlLookupCallbacks(),
+			new TitleLookupBasedEntityUrlLookup( $this->getEntityTitleLookup() )
+		);
+	}
+
+	public function getEntityArticleIdLookup(): EntityArticleIdLookup {
+		return new TypeDispatchingArticleIdLookup(
+			$this->entityTypeDefinitions->getEntityArticleIdLookupCallbacks(),
+			new TitleLookupBasedEntityArticleIdLookup( $this->getEntityTitleLookup() )
 		);
 	}
 

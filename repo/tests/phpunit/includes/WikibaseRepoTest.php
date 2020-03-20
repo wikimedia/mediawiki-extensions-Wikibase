@@ -24,6 +24,9 @@ use User;
 use ReflectionClass;
 use ReflectionMethod;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
@@ -265,6 +268,21 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetEntityTitleLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityTitleLookup();
 		$this->assertInstanceOf( EntityTitleLookup::class, $returnValue );
+	}
+
+	public function testGetEntityTitleTextLookupReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityTitleTextLookup();
+		$this->assertInstanceOf( EntityTitleTextLookup::class, $returnValue );
+	}
+
+	public function testGetEntityUrlLookupReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityUrlLookup();
+		$this->assertInstanceOf( EntityUrlLookup::class, $returnValue );
+	}
+
+	public function testGetEntityArticleIdLookupReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityArticleIdLookup();
+		$this->assertInstanceOf( EntityArticleIdLookup::class, $returnValue );
 	}
 
 	public function testGetEntityIdLookupReturnType() {
