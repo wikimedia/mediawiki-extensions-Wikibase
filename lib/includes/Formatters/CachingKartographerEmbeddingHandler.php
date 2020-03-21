@@ -192,11 +192,14 @@ class CachingKartographerEmbeddingHandler {
 	 * @return string wikitext
 	 */
 	private function getWikiText( GlobeCoordinateValue $value ) {
+		$long = $this->formatNumber( $value->getLongitude() );
+		$lat = $this->formatNumber( $value->getLatitude() );
+
 		return '<mapframe width="310" height="180" zoom="13" latitude="' .
-			$value->getLatitude() . '" longitude="' . $value->getLongitude() . '" frameless align="left">
+			$lat . '" longitude="' . $long . '" frameless align="left">
 			{
 			"type": "Feature",
-			"geometry": { "type": "Point", "coordinates": [' . $value->getLongitude() . ', ' . $value->getLatitude() . '] },
+			"geometry": { "type": "Point", "coordinates": [' . $long . ', ' . $lat . '] },
 			"properties": {
 			  "marker-symbol": "marker",
 			  "marker-size": "large",
@@ -204,6 +207,15 @@ class CachingKartographerEmbeddingHandler {
 			}
 		  }
 		  </mapframe>';
+	}
+
+	/**
+	 * @param float $number
+	 * @return string
+	 */
+	private function formatNumber( float $number ) {
+		// 12 decimal places are equivalent to <0.01 mm, more than enough for everything
+		return rtrim( rtrim( number_format( $number, 12, '.', '' ), '0' ), '.' );
 	}
 
 }
