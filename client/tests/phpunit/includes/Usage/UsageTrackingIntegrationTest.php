@@ -107,7 +107,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 
 	private function deletePage( Title $title ) {
 		$page = WikiPage::factory( $title );
-		$page->doDeleteArticle( 'TEST' );
+		$page->doDeleteArticleReal( 'TEST', $this->getTestSysop()->getUser() );
 
 		$this->runJobs();
 

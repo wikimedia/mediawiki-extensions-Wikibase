@@ -111,12 +111,13 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 */
 	protected function initTestEntities( array $handles, array $idMap = [] ) {
 		$activeHandles = EntityTestHelper::getActiveHandles();
+		$user = $this->getTestSysop()->getUser();
 
 		foreach ( $activeHandles as $handle => $id ) {
 			$title = $this->getTestEntityTitle( $handle );
 
 			$page = WikiPage::factory( $title );
-			$page->doDeleteArticle( 'Test reset' );
+			$page->doDeleteArticleReal( 'Test reset', $user );
 			EntityTestHelper::unRegisterEntity( $handle );
 		}
 

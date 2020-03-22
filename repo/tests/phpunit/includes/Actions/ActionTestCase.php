@@ -310,7 +310,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 			}
 
 			// delete current data
-			$page->doDeleteArticle( "Testing" );
+			$page->doDeleteArticleReal( "Testing", $this->getTestSysop()->getUser() );
 		}
 
 		// re-create item
