@@ -5,12 +5,13 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use LogicException;
-use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityArticleIdLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 
 /**
  * API module to search for Wikibase entities.
@@ -25,11 +26,6 @@ class SearchEntities extends ApiBase {
 	private $entitySearchHelper;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
-
-	/**
 	 * @var ContentLanguages
 	 */
 	private $termsLanguages;
@@ -40,28 +36,42 @@ class SearchEntities extends ApiBase {
 	private $entitySourceDefinitions;
 
 	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param EntitySearchHelper $entitySearchHelper
-	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param ContentLanguages $termLanguages
-	 * @param EntitySourceDefinitions $entitySourceDefinitions
+	 * @var EntityTitleTextLookup
+	 */
+	private $entityTitleTextLookup;
+
+	/**
+	 * @var EntityUrlLookup
+	 */
+	private $entityUrlLookup;
+
+	/**
+	 * @var EntityArticleIdLookup
+	 */
+	private $entityArticleIdLookup;
+
+	/**
 	 * @see ApiBase::__construct
 	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		EntitySearchHelper $entitySearchHelper,
-		EntityTitleLookup $entityTitleLookup,
+		$unused, // backwards compat, removed later
 		ContentLanguages $termLanguages,
-		EntitySourceDefinitions $entitySourceDefinitions
+		EntitySourceDefinitions $entitySourceDefinitions,
+		EntityTitleTextLookup $entityTitleTextLookup,
+		EntityUrlLookup $entityUrlLookup,
+		EntityArticleIdLookup $entityArticleIdLookup
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
 		$this->entitySearchHelper = $entitySearchHelper;
-		$this->titleLookup = $entityTitleLookup;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
+		$this->entityTitleTextLookup = $entityTitleTextLookup;
+		$this->entityUrlLookup = $entityUrlLookup;
+		$this->entityArticleIdLookup = $entityArticleIdLookup;
 	}
 
 	/**
@@ -83,17 +93,12 @@ class SearchEntities extends ApiBase {
 			$params['strictlanguage']
 		);
 
-		$titles = $this->getTitlesForTermSearchResults( $searchResults );
 		$entries = [];
 		foreach ( $searchResults as $match ) {
-			$entries[] = $this->buildTermSearchMatchEntry( $match, $titles, $params['props'] );
+			$entries[] = $this->buildTermSearchMatchEntry( $match, $params['props'] );
 		}
 
 		return $entries;
-	}
-
-	private function getTitlesForTermSearchResults( array $termSearchResults ) {
-		return $this->titleLookup->getTitlesForIds( $this->getEntityIdsForTermSearchResults( $termSearchResults ) );
 	}
 
 	private function getEntityIdsForTermSearchResults( array $termSearchResults ) {
@@ -105,26 +110,24 @@ class SearchEntities extends ApiBase {
 
 	/**
 	 * @param TermSearchResult $match
-	 * @param Title[] $titles
 	 * @param string[]|null $props
 	 *
 	 * @return array
 	 */
-	private function buildTermSearchMatchEntry( TermSearchResult $match, array $titles, array $props = null ) {
+	private function buildTermSearchMatchEntry( TermSearchResult $match, array $props = null ) {
 		// TODO: use EntityInfoBuilder, EntityInfoTermLookup
 		$entityId = $match->getEntityId();
-		$title = $titles[$entityId->getSerialization()];
 
 		$entry = [
 			'repository' => $this->getRepositoryOrEntitySourceName( $entityId ),
 			'id' => $entityId->getSerialization(),
 			'concepturi' => $this->getConceptUri( $entityId ),
-			'title' => $title->getPrefixedText(),
-			'pageid' => $title->getArticleID()
+			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
+			'pageid' => $this->entityArticleIdLookup->getArticleId( $entityId )
 		];
 
 		if ( $props !== null && in_array( 'url', $props ) ) {
-			$entry['url'] = $title->getFullURL();
+			$entry['url'] = $this->entityUrlLookup->getFullUrl( $entityId );
 		}
 		foreach ( $match->getMetaData() as $metaKey => $metaValue ) {
 			$entry[$metaKey] = $metaValue;

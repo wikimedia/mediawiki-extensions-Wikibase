@@ -252,14 +252,18 @@ call_user_func( function() {
 				$repo->getEntitySearchHelperCallbacks(),
 				$mainModule->getRequest()
 			);
+			$entityTitleLookup = $repo->getEntityTitleLookup();
 
 			return new SearchEntities(
 				$mainModule,
 				$moduleName,
 				$entitySearchHelper,
-				$repo->getEntityTitleLookup(),
+				null,
 				$repo->getTermsLanguages(),
-				$repo->getEntitySourceDefinitions()
+				$repo->getEntitySourceDefinitions(),
+				new \Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
+				new \Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
+				new \Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup( $entityTitleLookup )
 			);
 		},
 	];
