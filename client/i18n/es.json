@@ -123,5 +123,5 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Error de permiso desconocido",
 	"wikibase-client-data-bridge-references-heading": "Referencias",
 	"wikibase-client-data-bridge-license-heading": "Utilización y licencia",
-	"wikibase-client-data-bridge-license-body": "<p>Cambiar este valor también lo cambiará en {{WBREPONAME}} y posiblemente en wikis en otras lenguas.</p>\n<p>Por hacer clic en \"{{int:$1}}\", usted acepta el [$2 terms of use], y irrevocablemente acuerda soltar su contribución bajo [$3 $4].</p>"
+	"wikibase-client-data-bridge-license-body": "<p>Cambiar este valor también lo modificará en {{WBREPONAME}} y, a su vez, en wikis en otras lenguas.</p>\n<p>Al pulsar en «{{int:$1}}», aceptas acatar los [$2 términos de uso] y liberas tu contribución en virtud de [$3 $4].</p>"
 }

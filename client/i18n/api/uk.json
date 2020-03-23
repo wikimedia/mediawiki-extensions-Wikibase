@@ -40,5 +40,13 @@
 	"apihelp-query+wikibase-description": "Отримати інформацію про клієнт Wikibase і пов'язаний репозиторій Wikibase.",
 	"apihelp-query+wikibase-summary": "Отримати інформацію про клієнта Вікібази та пов'язаний репозиторій Вікібази.",
 	"apihelp-query+wikibase-example": "Отримати URL-адресу та іншу інформацію про клієнт і репозиторій Wikibase.",
-	"apihelp-query+wikibase-param-prop": "кі властивості отримати:\n;<kbd>url</kbd>: Базовий URL, шлях скрипту і шлях статті для репозиторія Wikibase.\n;<kbd>siteid</kbd>: siteid цього сайту."
+	"apihelp-query+wikibase-param-prop": "кі властивості отримати:\n;<kbd>url</kbd>: Базовий URL, шлях скрипту і шлях статті для репозиторія Wikibase.\n;<kbd>siteid</kbd>: siteid цього сайту.",
+	"apihelp-wbformatreference-summary": "Форматує посилання на джерело для його показу користувачам.",
+	"apihelp-wbformatreference-example-1": "Форматувати порожнє посилання на джерело в HTML за допомогою стилю Data Bridge.",
+	"apihelp-wbformatreference-example-2": "Форматувати посилання на джерело, що містить один рядок, в HTML за допомогою стилю Data Bridge.",
+	"apihelp-wbformatreference-param-reference": "Посилання на джерело як об'єкт JSON.",
+	"apihelp-wbformatreference-param-style": "Стиль, у якому слід форматувати посилання на джерело.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Стиль, що використовується [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Не розраховано для загального використання.",
+	"apihelp-wbformatreference-param-outputformat": "Формат, у якому має бути повернуто результат",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-розмітка."
 }

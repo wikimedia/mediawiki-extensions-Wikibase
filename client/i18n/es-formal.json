@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fitoschido"
+		]
+	},
+	"wikibase-client-data-bridge-license-body": "<p>Cambiar este valor también lo modificará en {{WBREPONAME}} y, a su vez, en wikis en otras lenguas.</p>\n<p>Al pulsar en «{{int:$1}}», acepta acatar los [$2 términos de uso] y libera su contribución en virtud de [$3 $4].</p>"
+}

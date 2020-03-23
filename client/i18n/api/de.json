@@ -31,6 +31,7 @@
 	"apihelp-query+pageterms-example-item": "Ruft Bezeichnungen und Aliasse des Objektes Q84 auf.",
 	"apihelp-query+pageterms-param-terms": "Die Arten der Begriffe, die abgerufen werden sollen, z.&nbsp;B. „Beschreibung“, jede wird als eine Anordnung von Zeichenfolgen zurückgegeben, die nach ihrem Typ kodiert sind, z.&nbsp;B. {\"Beschreibung\": [\"foo\"]}. Falls nicht angegeben, werden alle Typen zurückgegeben.",
 	"apihelp-query+description-summary": "Ruft eine Kurzbeschreibung a.k.a. einen Untertitel ab, der erklärt, über was die Zielseite handelt.",
+	"apihelp-query+description-extended-description": "Die Beschreibung ist einfacher Text, auf einer einzigen Zeile, aber ansonsten beliebig (möglicherweise einschließlich roher HTML-Tags, die ebenfalls als einfacher Text interpretiert werden sollten). Sie darf in HTML nicht unmaskiert verwendet werden!",
 	"apihelp-query+description-param-prefersource": "Welche Beschreibungsquelle bevorzugt werden soll, falls vorhanden:",
 	"apihelp-query+description-paramvalue-prefersource-local": "Lokale Beschreibungen über die Parserfunktion <code><nowiki>{{SHORTDESC:…}}</nowiki></code> im Wikitext der Seite.",
 	"apihelp-query+description-paramvalue-prefersource-central": "Zentrale Beschreibungen von dem verknüpften {{WBREPONAME}}-Datenobjekt.",
@@ -39,5 +40,13 @@
 	"apihelp-query+wikibase-description": "Bezieht Informationen über den Wikibase-Client und das verknüpfte Wikibase-Repositorium.",
 	"apihelp-query+wikibase-summary": "Ruft Informationen über den Wikibase-Client und das verknüpfte Wikibase-Repositorium ab.",
 	"apihelp-query+wikibase-example": "Bezieht den URL-Pfad und weitere Informationen über den Wikibase-Client und das Repositorium.",
-	"apihelp-query+wikibase-param-prop": "Zurückzugebende Eigenschaften:\n;<kbd>url</kbd>: Basis-URL, Skript- und Artikelpfad des Wikibase-Repositoriums.\n;<kbd>siteid</kbd>: Die Website-Kennung dieser Website."
+	"apihelp-query+wikibase-param-prop": "Zurückzugebende Eigenschaften:\n;<kbd>url</kbd>: Basis-URL, Skript- und Artikelpfad des Wikibase-Repositoriums.\n;<kbd>siteid</kbd>: Die Website-Kennung dieser Website.",
+	"apihelp-wbformatreference-summary": "Formatiert einen Einzelnachweis zur Anzeige für Benutzer.",
+	"apihelp-wbformatreference-example-1": "Formatiert einen leeren Einzelnachweis unter Verwendung des Data-Bridge-Stil in HTML.",
+	"apihelp-wbformatreference-example-2": "Formatiert einen Einzelnachweis, der eine Zeichenfolge enthält, mit dem Data-Bridge-Stil in HTML.",
+	"apihelp-wbformatreference-param-reference": "Der Einzelnachweis als ein JSON-Objekt.",
+	"apihelp-wbformatreference-param-style": "Der Stil, in dem der Einzelnachweis zu formatieren ist.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Der von [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] verwendete Stil. Nicht für den allgemeinen Gebrauch bestimmt.",
+	"apihelp-wbformatreference-param-outputformat": "Das Format, in dem das Ergebnis zurückgegeben werden soll.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-Auszeichnung."
 }

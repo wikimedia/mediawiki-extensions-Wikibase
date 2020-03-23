@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Verman1"
+		]
+	},
+	"apihelp-wbformatreference-summary": "İstifadəçilərə göstərmək üçün istinadın formatlanması.",
+	"apihelp-wbformatreference-param-reference": "JSON obyekti kimi istinad",
+	"apihelp-wbformatreference-param-style": "İstinadın formatlanması bu stildə olmalıdır.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Bu stil [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] tərəfindən istifadə olunub. Ümumi istifadə üçün nəzərdə tutulmayıb.",
+	"apihelp-wbformatreference-param-outputformat": "Nəticə bu formatda verilməlidir.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML markup"
+}

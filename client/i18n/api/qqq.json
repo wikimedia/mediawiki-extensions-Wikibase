@@ -19,7 +19,8 @@
 			"Umherirrender",
 			"Matěj Suchánek",
 			"Ans",
-			"Mar(c)"
+			"Mar(c)",
+			"BaRaN6161 TURK"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "{{doc-apihelp-description|query+wbentityusage}}",
@@ -60,7 +61,7 @@
 	"apihelp-wbformatreference-summary": "{{doc-apihelp-summary|wbformatreference}}",
 	"apihelp-wbformatreference-example-1": "{{doc-apihelp-example|wbformatreference}}",
 	"apihelp-wbformatreference-example-2": "{{doc-apihelp-example|wbformatreference}}",
-	"apihelp-wbformatreference-param-reference": "{{doc-apihelpp-param|wbformatreference|reference}}",
+	"apihelp-wbformatreference-param-reference": "{{doc-apihelp-param|wbformatreference|reference}}",
 	"apihelp-wbformatreference-param-style": "{{doc-apihelp-param|wbformatreference|style}}",
 	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "{{doc-apihelp-paramvalue|wbformatreference|style|internal-data-bridge}}",
 	"apihelp-wbformatreference-param-outputformat": "{{doc-apihelp-param|wbformatreference|outputformat}}",

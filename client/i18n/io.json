@@ -48,6 +48,7 @@
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-pageinfo-entity-usage-S": "Ligilo a retsituo",
 	"wikibase-otherprojects": "En altra projeti",
+	"notification-header-page-connection": "La pagino <strong>$3</strong> {{GENDER:$2|konektesis}} a {{PLURAL:$4|-1=-1 ula elemento {{WBREPONAME}}|la listo {{WBREPONAME}} # $4}}, qua kontenas dati relativa a ca temo.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> ed {{PLURAL:$4|altra pagino|$4 altra pagini|100=plu kam 99 altra pagini}} {{GENDER:$2|ligesis}} ad artikli de {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidar}} detalo"
 }

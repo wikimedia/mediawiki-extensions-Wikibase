@@ -38,5 +38,13 @@
 	"apihelp-query+wikibase-description": "取得有關 Wikibase 客戶端以及關聯 Wikibase 儲存庫的資訊。",
 	"apihelp-query+wikibase-summary": "取得有關 Wikibase 客戶端以及關聯 Wikibase 儲存庫的資訊。",
 	"apihelp-query+wikibase-example": "取得有關 Wikibase 客戶端以及儲存庫的 URL 路徑以及其它資訊。",
-	"apihelp-query+wikibase-param-prop": "要取得的屬性：\n;<kbd>url</kbd>：基本 URL、Wikibase 儲存庫的腳本路徑、以及條目路徑。\n;<kbd>siteid</kbd>： 此網站的站台 id。"
+	"apihelp-query+wikibase-param-prop": "要取得的屬性：\n;<kbd>url</kbd>：基本 URL、Wikibase 儲存庫的腳本路徑、以及條目路徑。\n;<kbd>siteid</kbd>： 此網站的站台 id。",
+	"apihelp-wbformatreference-summary": "格式化參考以顯示給使用者。",
+	"apihelp-wbformatreference-example-1": "使用 Data Bridge 樣式將空參考給格式化成 HTML。",
+	"apihelp-wbformatreference-example-2": "使用 Data Bridge 樣式將包含單一字串的參考給格式化成 HTML。",
+	"apihelp-wbformatreference-param-reference": "作為 JSON 物件的參考。",
+	"apihelp-wbformatreference-param-style": "格式化參考的樣式。",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "由 [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]] 所使用的樣式。不適用於一般用途。",
+	"apihelp-wbformatreference-param-outputformat": "應回傳的結果格式。",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML 標記。"
 }

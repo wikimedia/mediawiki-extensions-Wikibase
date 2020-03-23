@@ -3,11 +3,13 @@
 		"authors": [
 			"Anass Sedrati",
 			"SADIQUI",
-			"Reda Benkhadra"
+			"Reda Benkhadra",
+			"Abdeaitali"
 		]
 	},
 	"wikibase-edit": "بدل",
 	"wikibase-add": "زيد",
+	"wikibase-label-empty": "ما تعرفاتش أي تسمية",
 	"wikibase-description-empty": "ما كاين حتى شي وصف",
 	"wikibase-sitelinks-special": "مواقع أخرى",
 	"wikibase-statementview-rank-normal": "ترتيب طبيعي",
