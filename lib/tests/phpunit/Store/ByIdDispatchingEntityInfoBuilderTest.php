@@ -64,4 +64,18 @@ class ByIdDispatchingEntityInfoBuilderTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( new EntityInfo( [ 'Q1234567' ] ), $returnValue4 );
 	}
 
+	public function testGivenNonIntegerIndexedArray_constructorThrowsException() {
+		$dummyBuilder = $this->createMock( EntityInfoBuilder::class );
+
+		$this->expectException( \InvalidArgumentException::class );
+
+		new ByIdDispatchingEntityInfoBuilder( [ 'max' => $dummyBuilder ] );
+	}
+
+	public function testGivenArrayOfNonBuilders_constructorThrowsException() {
+		$this->expectException( \InvalidArgumentException::class );
+
+		new ByIdDispatchingEntityInfoBuilder( [ 0 => 'NOT ENTITY INFO BUILDER' ] );
+	}
+
 }
