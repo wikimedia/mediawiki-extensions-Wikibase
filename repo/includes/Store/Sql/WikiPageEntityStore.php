@@ -454,9 +454,10 @@ class WikiPageEntityStore implements EntityStore {
 	public function deleteEntity( EntityId $entityId, $reason, User $user ) {
 		$this->assertCanStoreEntity( $entityId );
 		$page = $this->getWikiPageForEntity( $entityId );
-		$ok = $page->doDeleteArticle( $reason, false, 0, true, $error, $user );
+		$error = '';
+		$status = $page->doDeleteArticleReal( $reason, $user, false, null, $error );
 
-		if ( !$ok ) {
+		if ( !$status->isOk() ) {
 			throw new StorageException(
 				'Failed to delete ' . $entityId->getSerialization() . ': ' . $error
 			);
