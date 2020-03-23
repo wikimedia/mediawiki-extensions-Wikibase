@@ -58,10 +58,12 @@ describe( 'init', () => {
 			editTags = [ 'a tag' ],
 			usePublish = true,
 			pageTitle = 'Client_page',
+			contentLanguage = 'fr',
 			config = mockMwConfig( {
 				editTags,
 				usePublish,
 				wgPageName: pageTitle,
+				wgPageContentLanguage: contentLanguage,
 			} ),
 			wbRepoConfig = config.get( 'wbRepo' ),
 			foreignApiUrl = wbRepoConfig.url + wbRepoConfig.scriptPath + '/api.php',
@@ -98,7 +100,7 @@ describe( 'init', () => {
 			window.$.uls!.data,
 		) );
 		expectedServices.set( 'entityLabelRepository', new ApiEntityLabelRepository(
-			'en',
+			contentLanguage,
 			repoApi,
 		) );
 		expectedServices.set( 'propertyDatatypeRepository', new ApiPropertyDataTypeRepository(
