@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
+use Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup;
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityUrlLookup;
 
 /**
@@ -19,9 +19,8 @@ class ApiBasedEntityUrlLookupTest extends TestCase {
 
 	public function provideTestGetFullUrl() {
 		return [
-			[ '', new ItemId( 'Q123' ), 'pretend.url/w/index.php?title=Q123' ],
-			[ 'Item', new ItemId( 'Q456' ), 'pretend.url/w/index.php?title=Item%3AQ456' ],
-			[ 'Property', new PropertyId( 'P789' ), 'pretend.url/w/index.php?title=Property%3AP789' ],
+			[ 'Q123', new ItemId( 'Q123' ), 'pretend.url/w/index.php?title=Q123' ],
+			[ 'Item:Q456', new ItemId( 'Q456' ), 'pretend.url/w/index.php?title=Item%3AQ456' ],
 			[ null, new PropertyId( 'P666' ), null ],
 		];
 	}
@@ -29,19 +28,19 @@ class ApiBasedEntityUrlLookupTest extends TestCase {
 	/**
 	 * @dataProvider provideTestGetFullUrl
 	 */
-	public function testGetFullUrl( $namespaceName, $entityId, $expected ) {
+	public function testGetFullUrl( $prefixedText, $entityId, $expected ) {
 		$lookup = new ApiBasedEntityUrlLookup(
-			$this->getApiBasedEntityNamespaceInfoLookup( $namespaceName ),
+			$this->getApiBasedEntityTitleTextLookup( $prefixedText ),
 			'pretend.url/w/'
 		);
 		$this->assertSame( $expected, $lookup->getFullUrl( $entityId ) );
 	}
 
-	private function getApiBasedEntityNamespaceInfoLookup( $namespaceName ) {
-		$mock = $this->createMock( ApiBasedEntityNamespaceInfoLookup::class );
+	private function getApiBasedEntityTitleTextLookup( $prefixedText ) {
+		$mock = $this->createMock( ApiBasedEntityTitleTextLookup::class );
 		$mock->expects( $this->any() )
-			->method( 'getNamespaceNameForEntityType' )
-			->willReturn( $namespaceName );
+			->method( 'getPrefixedText' )
+			->willReturn( $prefixedText );
 		return $mock;
 	}
 }

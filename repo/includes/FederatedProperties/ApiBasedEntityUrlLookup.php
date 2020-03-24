@@ -11,37 +11,30 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 class ApiBasedEntityUrlLookup implements EntityUrlLookup {
 
 	/**
-	 * @var ApiBasedEntityNamespaceInfoLookup
+	 * @var ApiBasedEntityTitleTextLookup
 	 */
-	private $namespaceLookup;
+	private $titleTextLookup;
 
 	/**
 	 * @var string
 	 */
 	private $sourceWikibaseUrl;
 
-	public function __construct( ApiBasedEntityNamespaceInfoLookup $namespaceLookup, string $sourceWikibaseUrl ) {
-		$this->namespaceLookup = $namespaceLookup;
+	public function __construct( ApiBasedEntityTitleTextLookup $titleTextLookup, string $sourceWikibaseUrl ) {
+		$this->titleTextLookup = $titleTextLookup;
 		$this->sourceWikibaseUrl = $sourceWikibaseUrl;
 	}
 
 	public function getFullUrl( EntityId $id ): ?string {
-		$namespaceName = $this->namespaceLookup->getNamespaceNameForEntityType( $id->getEntityType() );
+		$titleText = $this->titleTextLookup->getPrefixedText( $id );
 
-		if ( $namespaceName === null ) {
+		if ( $titleText === null ) {
 			return null;
 		}
 
 		return $this->sourceWikibaseUrl . 'index.php?' . http_build_query( [
-				'title' => $this->getTitleString( $namespaceName, $id ),
+				'title' => $titleText,
 			] );
-	}
-
-	private function getTitleString( $namespaceName, EntityId $id ) {
-		if ( $namespaceName === '' ) {
-			return $id->getSerialization();
-		}
-		return $namespaceName . ':' . $id->getSerialization();
 	}
 
 }

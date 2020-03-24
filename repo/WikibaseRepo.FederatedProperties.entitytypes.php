@@ -14,6 +14,7 @@
  */
 
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
+use Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup;
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityUrlLookup;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -26,12 +27,24 @@ return [
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 			return new ApiBasedEntityUrlLookup(
-				new ApiBasedEntityNamespaceInfoLookup(
-					$wikibaseRepo->newFederatedPropertiesApiClient(),
-					$wikibaseRepo->getContentModelMappings()
+				new ApiBasedEntityTitleTextLookup(
+					new ApiBasedEntityNamespaceInfoLookup(
+						$wikibaseRepo->newFederatedPropertiesApiClient(),
+						$wikibaseRepo->getContentModelMappings()
+					)
 				),
 				$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
 			);
-		}
+		},
+		'title-text-lookup-callback' => function () {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+			return new ApiBasedEntityTitleTextLookup(
+				new ApiBasedEntityNamespaceInfoLookup(
+					$wikibaseRepo->newFederatedPropertiesApiClient(),
+					$wikibaseRepo->getContentModelMappings()
+				)
+			);
+		},
 	]
 ];
