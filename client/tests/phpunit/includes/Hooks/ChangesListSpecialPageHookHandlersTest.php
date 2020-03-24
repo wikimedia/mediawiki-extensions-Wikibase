@@ -73,7 +73,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( [] ),
+			new FauxRequest(),
 			$this->getUser( [] ),
 			$this->getDatabase(),
 			'Recentchanges',
@@ -145,7 +145,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 		$hookHandlerMock = $this->getMockBuilder( ChangesListSpecialPageHookHandlers::class )
 			->setConstructorArgs(
 				[
-					$this->getRequest( [] ),
+					new FauxRequest(),
 					$this->getUser( [] ),
 					$this->getDatabase(),
 					'Recentchanges',
@@ -195,7 +195,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	public function testGetOptionName( $expected, $pageName ) {
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( [] ),
+			new FauxRequest(),
 			$this->getUser( [] ),
 			$this->getDatabase(),
 			$pageName,
@@ -229,7 +229,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddWikibaseConditions() {
 		$hookHandler = new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( [] ),
+			new FauxRequest(),
 			$this->getUser( [] ),
 			$this->getDatabase(),
 			'Watchlist',
@@ -258,7 +258,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	) {
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
+			new FauxRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getDatabase(),
 			$pageName,
@@ -325,7 +325,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	) {
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
+			new FauxRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getDatabase(),
 			$specialPageName,
@@ -397,7 +397,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	) {
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( $requestParams ),
+			new FauxRequest( $requestParams ),
 			$this->getUser( $userOptions ),
 			$this->getDatabase(),
 			$specialPageName,
@@ -456,7 +456,7 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 	public function testHasWikibaseChangesEnabledWhenExternalRecentChangesDisabled( $specialPageName ) {
 		/** @var ChangesListSpecialPageHookHandlers $hookHandler */
 		$hookHandler = TestingAccessWrapper::newFromObject( new ChangesListSpecialPageHookHandlers(
-			$this->getRequest( [] ),
+			new FauxRequest(),
 			$this->getUser( [ 'usenewrc' => 0 ] ),
 			$this->getDatabase(),
 			$specialPageName,
@@ -475,10 +475,6 @@ class ChangesListSpecialPageHookHandlersTest extends \PHPUnit\Framework\TestCase
 			[ 'Recentchanges' ],
 			[ 'Recentchangeslinked' ]
 		];
-	}
-
-	private function getRequest( array $requestParams ) {
-		return new FauxRequest( $requestParams );
 	}
 
 	/**

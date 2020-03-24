@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -29,18 +28,9 @@ class EntityInstanceHolderTest extends \PHPUnit\Framework\TestCase {
 		return $item;
 	}
 
-	/**
-	 * @param EntityDocument $entity
-	 *
-	 * @return EntityHolder
-	 */
-	private function newHolder( EntityDocument $entity ) {
-		return new EntityInstanceHolder( $entity );
-	}
-
 	public function testGetEntity() {
 		$entity = $this->newEntity();
-		$holder = $this->newHolder( $entity );
+		$holder = new EntityInstanceHolder( $entity );
 
 		$actual = $holder->getEntity();
 		$this->assertSame( $entity, $actual );
@@ -48,7 +38,7 @@ class EntityInstanceHolderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetEntityType() {
 		$entity = $this->newEntity();
-		$holder = $this->newHolder( $entity );
+		$holder = new EntityInstanceHolder( $entity );
 
 		$actual = $holder->getEntityType();
 		$this->assertEquals( $entity->getType(), $actual );
@@ -56,7 +46,7 @@ class EntityInstanceHolderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetEntityId() {
 		$entity = $this->newEntity();
-		$holder = $this->newHolder( $entity );
+		$holder = new EntityInstanceHolder( $entity );
 
 		$actual = $holder->getEntityId();
 		$this->assertEquals( $entity->getId(), $actual );
