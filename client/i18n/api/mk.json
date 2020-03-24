@@ -39,5 +39,13 @@
 	"apihelp-query+wikibase-description": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата",
 	"apihelp-query+wikibase-summary": "Дај информации за клиентот на Викибазата и за поврзаното складиште на Викибазата.",
 	"apihelp-query+wikibase-example": "Дај URL-патека и други информации за складиштето на Викибазата.",
-	"apihelp-query+wikibase-param-prop": "Кои својства да се дадат:\n;<kbd>url</kbd>: URL на базата, патека на скриптата и патека на статијата на складиштето на Викибазата.\n;<kbd>siteid</kbd>: Назнаката на ова мрежно место."
+	"apihelp-query+wikibase-param-prop": "Кои својства да се дадат:\n;<kbd>url</kbd>: URL на базата, патека на скриптата и патека на статијата на складиштето на Викибазата.\n;<kbd>siteid</kbd>: Назнаката на ова мрежно место.",
+	"apihelp-wbformatreference-summary": "Форматира навод за приказ на корисници.",
+	"apihelp-wbformatreference-example-1": "Форматирање на празен навод во HTML користејќи го стилот Data Bridge.",
+	"apihelp-wbformatreference-example-2": "Форматирање на навод во HTML користејќи го стилот Data Bridge.",
+	"apihelp-wbformatreference-param-reference": "Наводот како JSON-објект.",
+	"apihelp-wbformatreference-param-style": "Во кој стил да се форматира наводот.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Стилот што се користи од [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Не е предвиден за општа употреба.",
+	"apihelp-wbformatreference-param-outputformat": "Во кој формат да се даде исходот.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-означување."
 }
