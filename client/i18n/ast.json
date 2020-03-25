@@ -110,6 +110,7 @@
 	"unresolved-property-category-desc": "Esta categoría amuesa páxines que referencien propiedaes {{WBREPONAME}} que nun pueden alcontrase nin pol identificador de propiedá nin pola etiqueta.",
 	"connected-redirect-category": "Redireiciones coneutaes con un elementu de {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Esta categoría llista les páxines de redireición que tán conectaes con un elementu de {{WBREPONAME}}.",
-	"wikibase-client-data-bridge-dialog-title": "Editar Propiedá",
+	"wikibase-client-data-bridge-dialog-title": "Editar $1",
+	"wikibase-client-data-bridge-permissions-error-info": "Más detalles",
 	"wikibase-client-data-bridge-references-heading": "Referencies"
 }
