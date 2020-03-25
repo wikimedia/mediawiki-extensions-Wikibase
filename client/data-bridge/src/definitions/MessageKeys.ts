@@ -42,6 +42,9 @@ enum MessageKeys {
 	LICENSE_HEADING = 'wikibase-client-data-bridge-license-heading',
 	LICENSE_BODY = 'wikibase-client-data-bridge-license-body',
 	REFERENCE_NOTE = 'wikibase-client-data-bridge-reference-note',
+	THANK_YOU_HEAD = 'wikibase-client-data-bridge-thank-you-head',
+	THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY = 'wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body',
+	THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON = 'wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button',
 }
 
 export default MessageKeys;

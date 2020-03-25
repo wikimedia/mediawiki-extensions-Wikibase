@@ -173,5 +173,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "Body of a message displayed when the user cannot edit this value via Wikidata Bridge because it is not a known value, but an indicator for some unknown value.\n\nParameters:\n* $1 - the label of the property.\n\n''unknown value'' is the same message as {{msg-mw|wikibase-snakview-snaktypeselector-somevalue}}.\n\n{{Doc-jqueryMsg}}",
 	"wikibase-client-data-bridge-novalue-error-head": "Heading of a message displayed when the user cannot edit this value via Wikidata Bridge because it is not a known value, but an indicator for the absence of a value.\n\nParameters:\n* $1 - the label of the property.",
 	"wikibase-client-data-bridge-novalue-error-body": "Body of a message displayed when the user cannot edit this value via Wikidata Bridge because it is not a known value, but an indicator for the absence of a value.\n\nParameters:\n* $1 - the label of the property.\n\n''no value'' is the same message as {{msg-mw|wikibase-snakview-snaktypeselector-novalue}}.\n\n{{Doc-jqueryMsg}}",
-	"wikibase-client-data-bridge-reference-note": "Message assuring the user they will be able to edit references after saving"
+	"wikibase-client-data-bridge-reference-note": "Message assuring the user they will be able to edit references after saving",
+	"wikibase-client-data-bridge-thank-you-head": "Heading of a message displayed when the user has successfully saved a change via Wikidata Bridge.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Suggestion for the user that they could edit references directly on Wikidata next. The button below has the label {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button}}.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Label of a button sending the user to the Wikibase repository to edit references, shown after {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body}}."
 }

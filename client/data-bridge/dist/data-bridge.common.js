@@ -18063,6 +18063,9 @@ var MessageKeys;
   MessageKeys["LICENSE_HEADING"] = "wikibase-client-data-bridge-license-heading";
   MessageKeys["LICENSE_BODY"] = "wikibase-client-data-bridge-license-body";
   MessageKeys["REFERENCE_NOTE"] = "wikibase-client-data-bridge-reference-note";
+  MessageKeys["THANK_YOU_HEAD"] = "wikibase-client-data-bridge-thank-you-head";
+  MessageKeys["THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY"] = "wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body";
+  MessageKeys["THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON"] = "wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);
