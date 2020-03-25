@@ -11,6 +11,8 @@ use Wikibase\DataModel\Term\Term;
  */
 class TermSearchResult {
 
+	public const CONCEPTURI_META_DATA_KEY = 'concepturi';
+
 	/**
 	 * @var Term
 	 */

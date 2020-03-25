@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use LogicException;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
@@ -67,6 +66,12 @@ class SearchEntities extends ApiBase {
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
+		// Always try to add a conceptUri to results if not already set
+		$entitySearchHelper = new ConceptUriSearchHelper(
+			$entitySearchHelper,
+			$entitySourceDefinitions
+		);
+
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->termsLanguages = $termLanguages;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
@@ -114,7 +119,6 @@ class SearchEntities extends ApiBase {
 
 		$entry = [
 			'id' => $entityId->getSerialization(),
-			'concepturi' => $this->getConceptUri( $entityId ),
 			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
 			'pageid' => $this->entityArticleIdLookup->getArticleId( $entityId )
 		];
@@ -179,34 +183,6 @@ class SearchEntities extends ApiBase {
 			return '';
 		}
 		return $source->getSourceName();
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return string
-	 */
-	private function getConceptUri( EntityId $entityId ) {
-		$baseUri = $this->getConceptBaseUri( $entityId );
-		return $baseUri . wfUrlencode( $entityId->getLocalPart() );
-	}
-
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @throws LogicException when there is no base URI for the repository $entityId belongs to
-	 *
-	 * @return string
-	 */
-	private function getConceptBaseUri( EntityId $entityId ) {
-		$source = $this->entitySourceDefinitions->getSourceForEntityType( $entityId->getEntityType() );
-		if ( $source === null ) {
-			throw new LogicException(
-				'No source defined for entity of type: ' . $entityId->getEntityType()
-			);
-		}
-
-		return $source->getConceptBaseUri();
 	}
 
 	/**
