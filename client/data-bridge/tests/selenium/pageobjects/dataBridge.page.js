@@ -186,7 +186,7 @@ class DataBridgePage extends Page {
 	}
 
 	/**
-	 * @param {number} n Row of the infobox to retrieve the value from
+	 * @param {number} n Row of the infobox to retrieve the value from (1-indexed)
 	 * @returns {jQuery|HTMLElement}
 	 */
 	nthInfoboxValue( n ) {
@@ -201,6 +201,9 @@ class DataBridgePage extends Page {
 		);
 	}
 
+	/**
+	 * @param {number} n Reference number (1-indexed)
+	 */
 	nthReference( n ) {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}
