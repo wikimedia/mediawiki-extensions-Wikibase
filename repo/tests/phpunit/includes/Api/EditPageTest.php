@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use MWException;
 use ApiUsageException;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -58,8 +57,6 @@ class EditPageTest extends WikibaseApiTestCase {
 	 * @group API
 	 */
 	public function testEditTextInItemNamespace() {
-		global $wgContentHandlerUseDB;
-
 		$id = new ItemId( "Q1234567" );
 		$title = WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()->getTitleForId( $id );
 		$page = new WikiPage( $title );
@@ -80,12 +77,6 @@ class EditPageTest extends WikibaseApiTestCase {
 			$this->fail( "Saving wikitext to the item namespace should not be possible." );
 		} catch ( ApiUsageException $ex ) {
 			$this->assertTrue( true );
-		} catch ( MWException $ex ) {
-			if ( !$wgContentHandlerUseDB ) {
-				$this->markTestSkipped( 'With $wgContentHandlerUseDB, attempts to use a non-default content modfel will always fail.' );
-			} else {
-				throw $ex;
-			}
 		}
 	}
 
