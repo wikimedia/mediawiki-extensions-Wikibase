@@ -6,16 +6,10 @@
 		<ul class="wb-db-references__list">
 			<li
 				class="wb-db-references__listItem"
-				v-for="(reference, index) in targetReferences"
+				v-for="(referenceHTML, index) in renderedTargetReferences"
 				:key="index"
-			>
-				<div>
-					<SingleReferenceDisplay
-						:reference="reference"
-						:separator="$messages.get( $messages.KEYS.REFERENCE_SNAK_SEPARATOR )"
-					/>
-				</div>
-			</li>
+				v-html="referenceHTML"
+			/>
 		</ul>
 	</div>
 </template>
@@ -23,15 +17,17 @@
 <script lang="ts">
 import Component, { mixins } from 'vue-class-component';
 import StateMixin from '@/presentation/StateMixin';
-import SingleReferenceDisplay from '@/presentation/components/SingleReferenceDisplay.vue';
-import Reference from '@/datamodel/Reference';
 
+/**
+ * List the references of a statement.
+ * Individual references are rendered in the backend via the API and the
+ * resulting mark-up is presented in a list here.
+ */
 @Component( {
-	components: { SingleReferenceDisplay },
 } )
 export default class ReferenceSection extends mixins( StateMixin ) {
-	public get targetReferences(): Reference[] {
-		return this.rootModule.getters.targetReferences;
+	public get renderedTargetReferences(): string[] {
+		return this.rootModule.state.renderedTargetReferences;
 	}
 }
 </script>

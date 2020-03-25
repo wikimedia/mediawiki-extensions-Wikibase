@@ -9,7 +9,6 @@ enum MessageKeys {
 	EDIT_DECISION_UPDATE_LABEL = 'wikibase-client-data-bridge-edit-decision-update-label',
 	EDIT_DECISION_UPDATE_DESCRIPTION = 'wikibase-client-data-bridge-edit-decision-update-description',
 	REFERENCES_HEADING = 'wikibase-client-data-bridge-references-heading',
-	REFERENCE_SNAK_SEPARATOR = 'wikibase-client-data-bridge-reference-snak-separator',
 	PERMISSIONS_HEADING = 'wikibase-client-data-bridge-permissions-error',
 	PERMISSIONS_MORE_INFO = 'wikibase-client-data-bridge-permissions-error-info',
 	PERMISSIONS_BLOCKED_ON_CLIENT_HEADING = 'wikibase-client-data-bridge-blocked-on-client-head',

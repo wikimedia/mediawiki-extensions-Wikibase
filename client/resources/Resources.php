@@ -128,7 +128,6 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-edit-decision-update-label',
 							'wikibase-client-data-bridge-edit-decision-update-description',
 							'wikibase-client-data-bridge-references-heading',
-							'wikibase-client-data-bridge-reference-snak-separator',
 							'wikibase-client-data-bridge-license-heading',
 							'wikibase-client-data-bridge-license-body',
 							'wikibase-client-data-bridge-bailout-heading',

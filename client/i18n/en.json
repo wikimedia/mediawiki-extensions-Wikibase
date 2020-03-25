@@ -143,7 +143,6 @@
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>I updated</strong> an outdated value",
 	"wikibase-client-data-bridge-edit-decision-update-description": "The previous value used to be correct but is now outdated.",
 	"wikibase-client-data-bridge-references-heading": "References",
-	"wikibase-client-data-bridge-reference-snak-separator": ".&#32;",
 	"wikibase-client-data-bridge-license-heading": "Usage and license",
 	"wikibase-client-data-bridge-license-body": "<p>Changing this value will also change it on {{WBREPONAME}} and possibly on wikis in other languages.</p>\n<p>By clicking \"{{int:$1}}\", you agree to the [$2 terms of use], and you irrevocably agree to release your contribution under [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Instead you could do the following:",
