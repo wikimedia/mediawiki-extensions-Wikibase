@@ -12,7 +12,6 @@ export default function ( fields?: RecursivePartial<InitializedApplicationState>
 		editFlow: '',
 		applicationStatus: ApplicationStatus.INITIALIZING,
 		applicationErrors: [],
-		wikibaseRepoConfiguration: null,
 		editDecision: null,
 		targetValue: null,
 		entityTitle: '',
