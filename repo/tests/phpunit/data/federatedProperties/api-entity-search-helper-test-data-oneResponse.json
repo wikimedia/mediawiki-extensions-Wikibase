@@ -1,0 +1,24 @@
+{
+  "searchinfo": {
+	"search": "Publikationsdatum"
+  },
+  "search": [
+	{
+	  "repository": "local",
+	  "id": "P14",
+	  "concepturi": "https://wikidata.beta.wmflabs.org/entity/P14",
+	  "title": "Property:P14",
+	  "pageid": 6426,
+	  "url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+	  "datatype": "string",
+	  "label": "Publikationsdatum",
+	  "description": "Beschreibung deutsch",
+	  "match": {
+		"type": "label",
+		"language": "de",
+		"text": "Publikationsdatum"
+	  }
+	}
+  ],
+  "success": 1
+}
