@@ -128,6 +128,10 @@ describe( 'store/actions', () => {
 			canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
 		} );
 
+		services.set( 'referencesRenderingRepository', {
+			getRenderedReferences: () => Promise.resolve( [] ),
+		} );
+
 		info = {
 			pageTitle: 'Client_page',
 			editFlow: EditFlow.OVERWRITE,

@@ -255,7 +255,7 @@ describe( 'root/getters', () => {
 			expect( getters.targetReferences ).toStrictEqual( [] );
 		} );
 
-		it( 'returns an empty array, if the application is still initializing', () => {
+		it( 'returns the references blob without considering the ApplicationStatus', () => {
 			const applicationState = newApplicationState( {
 				targetProperty,
 				applicationStatus: ApplicationStatus.INITIALIZING,
@@ -273,6 +273,14 @@ describe( 'root/getters', () => {
 
 			const getters = inject( RootGetters, {
 				state: applicationState,
+			} );
+
+			expect( getters.targetReferences ).toStrictEqual( expectedTargetReferences );
+		} );
+
+		it( 'returns an empty array, if the entity is not yet available', () => {
+			const getters = inject( RootGetters, {
+				state: newApplicationState(),
 			} );
 
 			expect( getters.targetReferences ).toStrictEqual( [] );

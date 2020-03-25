@@ -74,6 +74,19 @@ describe( 'root/mutations', () => {
 		expect( state.applicationErrors ).toStrictEqual( [ ...oldErrors, ...newErrors ] );
 	} );
 
+	it( 'sets the rendered references', () => {
+		const renderedReferences = [
+			'<span>Ref1</span>',
+			'<span>Ref2</span>',
+		];
+		const state: Application = newApplicationState();
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.setRenderedTargetReferences( renderedReferences );
+
+		expect( state.renderedTargetReferences ).toBe( renderedReferences );
+	} );
+
 	it( 'sets the edit decision of the state', () => {
 		const state: Application = newApplicationState();
 		const editDecision = EditDecision.REPLACE;

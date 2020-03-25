@@ -10,6 +10,7 @@ export class BaseState implements Application {
 	public applicationStatus: ValidApplicationStatus = ValidApplicationStatus.INITIALIZING;
 	public editDecision: EditDecision|null = null;
 	public targetValue: DataValue|null = null;
+	public renderedTargetReferences: string[] = [];
 	public editFlow = '';
 	public entityTitle = '';
 	public originalHref = '';

@@ -26,6 +26,7 @@ import ApiPageEditPermissionErrorsRepository from '@/data-access/ApiPageEditPerm
 import RepoRouter from '@/data-access/RepoRouter';
 import ApiPurge from '@/data-access/ApiPurge';
 import PrefixingEventTracker from '@/tracking/PrefixingEventTracker';
+import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
 
 const manager = jest.fn();
 const dialog = {
@@ -119,6 +120,10 @@ describe( 'init', () => {
 		expectedServices.set( 'editAuthorizationChecker', new CombiningPermissionsRepository(
 			new ApiPageEditPermissionErrorsRepository( repoApi ),
 			new ApiPageEditPermissionErrorsRepository( clientApi ),
+		) );
+		expectedServices.set( 'referencesRenderingRepository', new ApiRenderReferencesRepository(
+			clientApi,
+			contentLanguage,
 		) );
 		expectedServices.set( 'repoRouter', new RepoRouter(
 			wbRepoConfig,

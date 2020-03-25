@@ -24,6 +24,8 @@ import { StatementState } from '@/store/statements';
 import Statement from '@/datamodel/Statement';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 import { getMockBridgeRepoConfig } from '../../util/mocks';
+import Reference from '@/datamodel/Reference';
+import { budge } from '../../util/timer';
 
 const mockBridgeConfig = jest.fn();
 jest.mock( '@/presentation/plugins/BridgeConfigPlugin', () => ( {
@@ -432,6 +434,44 @@ describe( 'root/actions', () => {
 
 		} );
 
+		it( 'dispatches the reference rendering', async () => {
+			let referenceRenderingResolve;
+			const dispatch = jest.fn().mockReturnValue( new Promise( ( resolve ) => {
+				referenceRenderingResolve = resolve;
+			} ) );
+			const actions = inject( RootActions, {
+				state: newApplicationState(),
+				dispatch,
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker: newMockTracker(),
+				} ),
+			};
+
+			actions.initBridgeWithRemoteData( {
+				information: newMockAppInformation(),
+				results: [
+					{} as WikibaseRepoConfiguration,
+					[],
+					'string',
+					undefined,
+				],
+			} );
+
+			expect( dispatch ).toHaveBeenCalledTimes( 1 );
+			expect( dispatch ).toHaveBeenCalledWith( 'renderReferences' );
+
+			// @ts-ignore
+			referenceRenderingResolve();
+			await budge();
+			expect( dispatch ).toHaveBeenCalledTimes( 2 );
+			expect( dispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+
+		} );
+
 		it( 'resets the config plugin', async () => {
 			const information = newMockAppInformation();
 			const actions = inject( RootActions, {
@@ -507,6 +547,42 @@ describe( 'root/actions', () => {
 			] } );
 
 			expect( dispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+		} );
+	} );
+
+	describe( 'renderReferences', () => {
+		it( 'gets the rendered references and stores them in the store', async () => {
+			const commit = jest.fn();
+			const mockReferences: Reference[] = [
+				{} as Reference,
+				{} as Reference,
+			];
+			const actions = inject( RootActions, {
+				commit,
+				getters: {
+					targetReferences: mockReferences,
+				} as any,
+			} );
+			const mockRenderedReferences = [
+				'<span>ref1</span>',
+				'<span>ref2</span>',
+			];
+			const getRenderedReferences = jest.fn().mockResolvedValue( mockRenderedReferences );
+			const referencesRenderingRepository = {
+				getRenderedReferences,
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					referencesRenderingRepository,
+				} ),
+			};
+
+			await expect( actions.renderReferences() ).resolves.toBeUndefined();
+
+			expect( getRenderedReferences ).toHaveBeenCalledWith( mockReferences );
+			expect( commit ).toHaveBeenCalledWith( 'setRenderedTargetReferences', mockRenderedReferences );
 		} );
 	} );
 

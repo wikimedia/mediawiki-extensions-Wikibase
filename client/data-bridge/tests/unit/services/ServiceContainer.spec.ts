@@ -6,6 +6,7 @@ describe( 'ServiceContainer', () => {
 		'writingEntityRepository',
 		'languageInfoRepository',
 		'entityLabelRepository',
+		'referencesRenderingRepository',
 		'propertyDatatypeRepository',
 		'messagesRepository',
 		'wikibaseRepoConfigRepository',

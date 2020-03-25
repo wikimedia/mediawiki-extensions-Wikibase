@@ -198,6 +198,13 @@ export function addSiteinfoRestrictionsResponse( response: { query?: object } ):
 	return response;
 }
 
+export function addReferenceRenderingResponse( response: Record<string, object> ): object {
+	response.wbformatreference = {
+		html: '<span>ref1</span>',
+	};
+	return response;
+}
+
 export function addPropertyLabelResponse(
 	data: {
 		propertyId: string;

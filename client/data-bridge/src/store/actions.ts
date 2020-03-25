@@ -90,9 +90,17 @@ RootActions
 
 		this.store.$services.get( 'tracker' ).trackPropertyDatatype( dataType );
 
+		await this.dispatch( 'renderReferences' );
+
 		BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
 
 		return this.dispatch( 'postEntityLoad' );
+	}
+
+	public async renderReferences(): Promise<void> {
+		const renderedReferences = await this.store.$services.get( 'referencesRenderingRepository' )
+			.getRenderedReferences( this.getters.targetReferences );
+		this.commit( 'setRenderedTargetReferences', renderedReferences );
 	}
 
 	public async postEntityLoad(): Promise<void> {
