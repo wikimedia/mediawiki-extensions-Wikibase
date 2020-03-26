@@ -3,6 +3,7 @@
 		<h2 class="wb-db-references__heading">
 			{{ $messages.get( $messages.KEYS.REFERENCES_HEADING ) }}
 		</h2>
+		<span class="wb-db-references__note">{{ $messages.get( $messages.KEYS.REFERENCE_NOTE ) }}</span>
 		<ul class="wb-db-references__list">
 			<li
 				class="wb-db-references__listItem"
@@ -49,6 +50,13 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 
 	&__listItem {
 		padding: 10px 14px 10px 0;
+
+		@include body-responsive();
+	}
+
+	&__note {
+		color: $wmui-color-base30;
+		font-style: italic;
 
 		@include body-responsive();
 	}

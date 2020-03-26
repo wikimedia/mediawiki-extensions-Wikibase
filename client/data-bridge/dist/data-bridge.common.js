@@ -15742,12 +15742,12 @@ var StringDataValue_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_StringDataValue = (StringDataValue_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=05d196e4&
-var ReferenceSectionvue_type_template_id_05d196e4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+" ")]),_c('ul',{staticClass:"wb-db-references__list"},_vm._l((_vm.renderedTargetReferences),function(referenceHTML,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem",domProps:{"innerHTML":_vm._s(referenceHTML)}})}),0)])}
-var ReferenceSectionvue_type_template_id_05d196e4_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=template&id=88f7ab90&
+var ReferenceSectionvue_type_template_id_88f7ab90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-references"},[_c('h2',{staticClass:"wb-db-references__heading"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCES_HEADING ))+" ")]),_c('span',{staticClass:"wb-db-references__note"},[_vm._v(_vm._s(_vm.$messages.get( _vm.$messages.KEYS.REFERENCE_NOTE )))]),_c('ul',{staticClass:"wb-db-references__list"},_vm._l((_vm.renderedTargetReferences),function(referenceHTML,index){return _c('li',{key:index,staticClass:"wb-db-references__listItem",domProps:{"innerHTML":_vm._s(referenceHTML)}})}),0)])}
+var ReferenceSectionvue_type_template_id_88f7ab90_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=05d196e4&
+// CONCATENATED MODULE: ./src/presentation/components/ReferenceSection.vue?vue&type=template&id=88f7ab90&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ReferenceSection.vue?vue&type=script&lang=ts&
 
@@ -15803,8 +15803,8 @@ var ReferenceSectionvue_type_style_index_0_lang_scss_ = __webpack_require__("e83
 
 var ReferenceSection_component = normalizeComponent(
   components_ReferenceSectionvue_type_script_lang_ts_,
-  ReferenceSectionvue_type_template_id_05d196e4_render,
-  ReferenceSectionvue_type_template_id_05d196e4_staticRenderFns,
+  ReferenceSectionvue_type_template_id_88f7ab90_render,
+  ReferenceSectionvue_type_template_id_88f7ab90_staticRenderFns,
   false,
   null,
   null,
@@ -18053,6 +18053,7 @@ var MessageKeys;
   MessageKeys["NOVALUE_ERROR_BODY"] = "wikibase-client-data-bridge-novalue-error-body";
   MessageKeys["LICENSE_HEADING"] = "wikibase-client-data-bridge-license-heading";
   MessageKeys["LICENSE_BODY"] = "wikibase-client-data-bridge-license-body";
+  MessageKeys["REFERENCE_NOTE"] = "wikibase-client-data-bridge-reference-note";
 })(MessageKeys || (MessageKeys = {}));
 
 /* harmony default export */ var definitions_MessageKeys = (MessageKeys);

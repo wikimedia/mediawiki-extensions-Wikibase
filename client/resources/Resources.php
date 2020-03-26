@@ -144,6 +144,7 @@ return call_user_func( function() {
 							'wikibase-client-data-bridge-somevalue-error-body',
 							'wikibase-client-data-bridge-novalue-error-head',
 							'wikibase-client-data-bridge-novalue-error-body',
+							'wikibase-client-data-bridge-reference-note',
 							'savechanges',
 							'publishchanges',
 							'cancel',
