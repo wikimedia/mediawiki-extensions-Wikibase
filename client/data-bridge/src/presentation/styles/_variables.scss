@@ -7,7 +7,7 @@
 
 $base-spacing-unit: px-to-rem( 8px );
 $base-spacing-unit-fixed: 8px;
-$line-height-text: 1.5;
+$line-height-text: 1.5; // wikimedia-ui-base has $line-height-base but its value (1.6) is "a bug"
 $font-size-bodyS: px-to-rem( 14px );
 $font-size-bodyM: px-to-rem( 16px );
 $font-size-normal: px-to-rem( 16px );
