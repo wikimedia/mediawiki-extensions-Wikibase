@@ -26,6 +26,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 		'api-entity-search-helper-test-data-emptyResponse.json',
 		'api-entity-search-helper-test-data-oneResponse.json',
 		'api-entity-search-helper-test-data-twoResponse.json',
+		'api-entity-search-helper-test-data-entityIdResponse.json',
+		'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
 		'api-entity-search-helper-test-data-errorResponse.json',
 		'api-entity-search-helper-test-data-unexpectedResponse.json'
 	];
@@ -79,14 +81,40 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$resultToTest = $results[ $resultId ];
 
 			$this->assertTrue( $resultToTest instanceof TermSearchResult );
+
+			if ( $expectedResult[ 'match' ][ 'type' ] === 'entityId' ) {
+
+				$this->assertEquals(
+					new Term(
+						'qid', $expectedResult[ 'match' ][ 'text' ] ),
+						$resultToTest->getMatchedTerm()
+					);
+			} else {
+
+				$this->assertEquals(
+					new Term(
+						$expectedResult[ 'match' ][ 'language' ],
+						$expectedResult[ 'match' ][ 'text' ]
+					),
+					$resultToTest->getMatchedTerm()
+				);
+			}
 			$this->assertEquals(
-				new Term( $expectedResult[ 'match' ][ 'language' ], $expectedResult[ 'match' ][ 'text' ] ),
-				$resultToTest->getMatchedTerm()
+				$expectedResult[ 'match' ][ 'type' ],
+				$resultToTest->getMatchedTermType()
 			);
-			$this->assertEquals( $expectedResult[ 'match' ][ 'type' ], $resultToTest->getMatchedTermType() );
-			$this->assertEquals( new PropertyId( $expectedResult[ 'id' ] ), $resultToTest->getEntityId() );
-			$this->assertEquals( new Term( $langCode, $expectedResult[ 'label' ] ), $resultToTest->getDisplayLabel() );
-			$this->assertEquals( new Term( $langCode, $expectedResult[ 'description' ] ), $resultToTest->getDisplayDescription() );
+			$this->assertEquals(
+				new PropertyId( $expectedResult[ 'id' ] ),
+				$resultToTest->getEntityId()
+			);
+			$this->assertEquals(
+				new Term( $langCode, $expectedResult[ 'label' ] ),
+				$resultToTest->getDisplayLabel()
+			);
+			$this->assertEquals(
+				new Term( $langCode, $expectedResult[ 'description' ] ),
+				$resultToTest->getDisplayDescription()
+			);
 			$this->assertEquals(
 				$expectedResult['datatype'],
 				$resultToTest->getMetaData()[PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY]
@@ -219,6 +247,30 @@ class ApiEntitySearchHelperTest extends TestCase {
 				],
 				'api-entity-search-helper-test-data-oneResponse.json',
 				[ 'P14' ],
+			],
+			'entityIdResponse' => [
+				'de',
+				[
+					'action' => 'wbsearchentities',
+					'search' => 'P31',
+					'type' => 'property',
+					'limit' => 10,
+					'strictlanguage' => false
+				],
+				'api-entity-search-helper-test-data-entityIdResponse.json',
+				[ 'P31' ],
+			],
+			'mixedEntityIdResponse' => [
+				'de',
+				[
+					'action' => 'wbsearchentities',
+					'search' => 'P147',
+					'type' => 'property',
+					'limit' => 10,
+					'strictlanguage' => false
+				],
+				'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
+				[ 'P147', 'P160020' ]
 			]
 		];
 	}

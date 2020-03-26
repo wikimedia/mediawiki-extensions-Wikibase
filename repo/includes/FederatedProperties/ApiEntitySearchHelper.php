@@ -69,8 +69,9 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		}
 
 		foreach ( $jsonResult->search as $result ) {
+
 			$termSearchResult = new TermSearchResult(
-				new Term( $result->match->language, $result->match->text ),
+				$this->getMatchedTerm( $result ),
 				$result->match->type,
 				new PropertyId( $result->id ),
 				new Term( $languageCode, $result->label ),
@@ -85,4 +86,11 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		return $allResults;
 	}
 
+	private function getMatchedTerm( $result ) {
+
+		if ( $result->match->type === 'entityId' ) {
+			return new Term( 'qid', $result->match->text );
+		}
+		return new Term( $result->match->language, $result->match->text );
+	}
 }

@@ -1,0 +1,26 @@
+{
+	"searchinfo": {
+		"search": "P31"
+	},
+	"search": [
+		{
+			"repository": "local",
+			"id": "P31",
+			"concepturi": "http://www.wikidata.org/entity/P31",
+			"title": "Property:P31",
+			"pageid": 3918489,
+			"url": "//www.wikidata.org/wiki/Property:P31",
+			"datatype": "wikibase-item",
+			"label": "instance of",
+			"description": "that class of which this subject is a particular example and member",
+			"match": {
+				"type": "entityId",
+				"text": "P31"
+			},
+			"aliases": [
+				"P31"
+			]
+		}
+	],
+	"success": 1
+}
