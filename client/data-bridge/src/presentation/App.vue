@@ -29,6 +29,11 @@
 
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" />
+			<div
+				v-else-if="isSaved"
+			>
+				saved
+			</div>
 			<Loading
 				v-else
 				:is-initializing="isInitializing"
@@ -95,6 +100,10 @@ export default class App extends mixins( StateMixin ) {
 
 	public get isInitializing(): boolean {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.INITIALIZING;
+	}
+
+	public get isSaved(): boolean {
+		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
 	}
 
 	public get hasError(): boolean {

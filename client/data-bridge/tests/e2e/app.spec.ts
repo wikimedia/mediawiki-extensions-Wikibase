@@ -569,67 +569,6 @@ describe( 'app', () => {
 			await budge();
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 		} );
-
-		it( 'updates store and interface with API response after successful saving', async () => {
-			const value = 'updated in the repo in the mean time';
-			postWithEditToken = jest.fn().mockResolvedValue( {
-				entity: {
-					lastrevid: 2183,
-					id: entityId,
-					claims: {
-						[ propertyId ]: [ {
-							mainsnak: {
-								snaktype: 'value',
-								property: propertyId,
-								datavalue: {
-									value,
-									type: 'string',
-								},
-								datatype: 'string',
-							},
-						} ],
-					},
-				},
-				success: 1,
-			} );
-			const testLink = prepareTestEnv( { propertyId } );
-			window.mw.ForeignApi = mockMwForeignApiConstructor( {
-				expectedUrl: 'http://localhost/w/api.php',
-				get: getMockFullRepoBatchedQueryResponse(
-					{ propertyId },
-					entityTitle,
-				),
-				postWithEditToken,
-			} );
-
-			window.$.get = () => Promise.resolve( testSet ) as any;
-
-			await init();
-
-			testLink!.click();
-			await budge();
-
-			const input = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
-			await insert( input as HTMLTextAreaElement, uuid() );
-
-			const replaceInputDecision = select( '.wb-db-app input[name=editDecision][value=replace]' );
-			await selectRadioInput( replaceInputDecision as HTMLInputElement );
-
-			const save = select(
-				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
-			);
-
-			// showing the license
-			save!.click();
-			await budge();
-
-			// actually triggering save
-			save!.click();
-			await budge();
-
-			const inputAfterSave = select( '.wb-db-app .wb-db-string-value .wb-db-string-value__input' );
-			expect( ( inputAfterSave as HTMLTextAreaElement ).value ).toBe( value );
-		} );
 	} );
 
 	describe( 'cancel', () => {
