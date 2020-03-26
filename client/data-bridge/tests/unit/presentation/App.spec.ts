@@ -208,7 +208,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
-		expect( wrapper.emitted( Events.onSaved ) ).toBeTruthy();
+		expect( wrapper.emitted( Events.onSaved ) ).toHaveLength( 1 );
 	} );
 
 	it(
@@ -322,7 +322,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 
-		expect( wrapper.emitted( Events.onCancel ) ).toBeTruthy();
+		expect( wrapper.emitted( Events.onCancel ) ).toHaveLength( 1 );
 	} );
 
 	it( 'disables close while in saving state', async () => {

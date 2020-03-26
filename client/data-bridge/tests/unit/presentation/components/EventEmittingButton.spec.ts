@@ -18,15 +18,13 @@ describe( 'EventEmittingButton', () => {
 		it( 'emits an event on click', () => {
 			const wrapper = shallowMountWithProps();
 			wrapper.find( 'a' ).trigger( 'click' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeTruthy();
+			expect( wrapper.emitted( 'click' ) ).toHaveLength( 1 );
 		} );
 
 		it( 'emits an event on enter', () => {
 			const wrapper = shallowMountWithProps();
 			wrapper.find( 'a' ).trigger( 'keydown.enter' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeTruthy();
+			expect( wrapper.emitted( 'click' ) ).toHaveLength( 1 );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
 			wrapper.find( 'a' ).trigger( 'keyup.enter' );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( false );
@@ -35,9 +33,9 @@ describe( 'EventEmittingButton', () => {
 		it( 'emits an event on space and does not scroll down', () => {
 			const wrapper = shallowMountWithProps();
 			wrapper.find( 'a' ).trigger( 'keydown.space' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeTruthy();
-			const originalEvent: UIEvent = clickEvent[ 0 ][ 0 ];
+			const clickEvents = wrapper.emitted( 'click' );
+			expect( clickEvents ).toHaveLength( 1 );
+			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
 			expect( originalEvent.defaultPrevented ).toBe( true );
 			expect( wrapper.find( pressedClass ).exists() ).toBe( true );
@@ -52,9 +50,9 @@ describe( 'EventEmittingButton', () => {
 				href: 'https://example.com',
 			} );
 			wrapper.find( 'a' ).trigger( 'click' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeTruthy();
-			const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
+			const clickEvents = wrapper.emitted( 'click' );
+			expect( clickEvents ).toHaveLength( 1 );
+			const originalEvent: MouseEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( MouseEvent );
 			expect( originalEvent.defaultPrevented ).toBe( true );
 		} );
@@ -66,7 +64,6 @@ describe( 'EventEmittingButton', () => {
 			wrapper.find( 'a' ).trigger( 'keydown.enter' );
 			wrapper.find( 'a' ).trigger( 'click.enter' );
 			const clickEvents = wrapper.emitted( 'click' );
-			expect( clickEvents ).toBeTruthy();
 			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
@@ -93,9 +90,9 @@ describe( 'EventEmittingButton', () => {
 				preventDefault: false,
 			} );
 			wrapper.find( 'a' ).trigger( 'click' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeTruthy();
-			const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
+			const clickEvents = wrapper.emitted( 'click' );
+			expect( clickEvents ).toHaveLength( 1 );
+			const originalEvent: MouseEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( MouseEvent );
 			expect( originalEvent.defaultPrevented ).toBe( false );
 		} );
@@ -108,7 +105,6 @@ describe( 'EventEmittingButton', () => {
 			wrapper.find( 'a' ).trigger( 'keydown.enter' );
 			wrapper.find( 'a' ).trigger( 'click.enter' );
 			const clickEvents = wrapper.emitted( 'click' );
-			expect( clickEvents ).toBeTruthy();
 			expect( clickEvents ).toHaveLength( 1 );
 			const originalEvent: UIEvent = clickEvents[ 0 ][ 0 ];
 			expect( originalEvent ).toBeInstanceOf( UIEvent );
@@ -138,8 +134,7 @@ describe( 'EventEmittingButton', () => {
 				disabled: true,
 			} );
 			wrapper.find( 'a' ).trigger( 'click' );
-			const clickEvent = wrapper.emitted( 'click' );
-			expect( clickEvent ).toBeFalsy();
+			expect( wrapper.emitted( 'click' ) ).toBeFalsy();
 		} );
 
 		it( 'cannot be reached via keyboard without a href', () => {
@@ -163,9 +158,9 @@ describe( 'EventEmittingButton', () => {
 			preventDefault: false,
 		} );
 		wrapper.find( 'a' ).trigger( 'click' );
-		const clickEvent = wrapper.emitted( 'click' );
-		expect( clickEvent ).toBeTruthy();
-		const originalEvent: MouseEvent = clickEvent[ 0 ][ 0 ];
+		const clickEvents = wrapper.emitted( 'click' );
+		expect( clickEvents ).toHaveLength( 1 );
+		const originalEvent: MouseEvent = clickEvents[ 0 ][ 0 ];
 		expect( originalEvent ).toBeInstanceOf( MouseEvent );
 		expect( originalEvent.defaultPrevented ).toBe( false );
 	} );

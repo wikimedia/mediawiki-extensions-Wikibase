@@ -32,6 +32,6 @@ describe( 'ThankYou', () => {
 		} );
 		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
 
-		expect( wrapper.emitted( 'opened-reference-edit-on-repo' ) ).toBeTruthy();
+		expect( wrapper.emitted( 'opened-reference-edit-on-repo' ) ).toHaveLength( 1 );
 	} );
 } );

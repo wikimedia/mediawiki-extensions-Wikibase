@@ -13,8 +13,7 @@ describe( 'License component', () => {
 	it( 'bubbles the button\'s click event as close event', () => {
 		const wrapper = shallowMount( License );
 		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
-		const closeEvent = wrapper.emitted( 'close' );
-		expect( closeEvent ).toBeTruthy();
+		expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
 	} );
 
 	it( 'mounts a button with the correct props', () => {
