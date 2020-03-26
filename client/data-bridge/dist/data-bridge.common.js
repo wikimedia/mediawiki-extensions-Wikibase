@@ -13421,6 +13421,7 @@ var ValidApplicationStatus;
   ValidApplicationStatus["INITIALIZING"] = "initializing";
   ValidApplicationStatus["READY"] = "ready";
   ValidApplicationStatus["SAVING"] = "saving";
+  ValidApplicationStatus["SAVED"] = "saved";
 })(ValidApplicationStatus || (ValidApplicationStatus = {}));
 
 var ErrorStatus;
@@ -14739,7 +14740,10 @@ function (_Actions) {
                 if (this.getters.applicationStatus !== definitions_ApplicationStatus.ERROR) {
                   this.commit('setTargetValue', // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                   path.resolveSnakInStatement(state[NS_STATEMENTS]).datavalue);
-                  this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
+
+                  if (this.getters.applicationStatus === definitions_ApplicationStatus.INITIALIZING) {
+                    this.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
+                  }
                 }
 
               case 5:
@@ -14908,7 +14912,7 @@ function (_Actions) {
                     _this3.store.$services.get('tracker').trackTitlePurgeError();
                   });
                 }).then(function () {
-                  _this3.commit('setApplicationStatus', definitions_ApplicationStatus.READY);
+                  _this3.commit('setApplicationStatus', definitions_ApplicationStatus.SAVED);
 
                   return _this3.dispatch('postEntityLoad');
                 }));

@@ -443,7 +443,7 @@ describe( 'store/actions', () => {
 
 				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
 
-				expect( state.applicationStatus ).toBe( ApplicationStatus.READY );
+				expect( state.applicationStatus ).toBe( ApplicationStatus.SAVED );
 			} );
 		} );
 	} );

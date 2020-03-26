@@ -2,6 +2,7 @@ export enum ValidApplicationStatus {
 	INITIALIZING = 'initializing',
 	READY = 'ready',
 	SAVING = 'saving',
+	SAVED = 'saved',
 }
 
 enum ErrorStatus {

@@ -120,10 +120,12 @@ RootActions
 				path.resolveSnakInStatement( state[ NS_STATEMENTS ] )!.datavalue!,
 			);
 
-			this.commit(
-				'setApplicationStatus',
-				ApplicationStatus.READY,
-			);
+			if ( this.getters.applicationStatus === ApplicationStatus.INITIALIZING ) {
+				this.commit(
+					'setApplicationStatus',
+					ApplicationStatus.READY,
+				);
+			}
 		}
 	}
 
@@ -259,7 +261,7 @@ RootActions
 			.then( () => {
 				this.commit(
 					'setApplicationStatus',
-					ApplicationStatus.READY,
+					ApplicationStatus.SAVED,
 				);
 				return this.dispatch( 'postEntityLoad' );
 			} );
