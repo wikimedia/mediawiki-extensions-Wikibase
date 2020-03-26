@@ -81,10 +81,8 @@ class ApiFormatReference extends ApiBase {
 		switch ( $this->getParameter( 'outputformat' ) ) {
 			case 'html':
 				$parserOptions = ParserOptions::newFromContext( $this );
-				$parserOptions->setWrapOutputClass( '' );
 				$this->parser->parse( $wikitext, Title::makeTitle( 0, 'API' ), $parserOptions );
 				$html = $this->parser->getOutput()->getText();
-				$html = Parser::stripOuterParagraph( $html );
 				$this->getResult()->addValue( $this->getModulePath(), 'html', $html );
 				break;
 			default:
