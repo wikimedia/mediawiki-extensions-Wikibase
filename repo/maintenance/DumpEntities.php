@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
+use ExtensionRegistry;
 use Maintenance;
-use MediaWiki\MediaWikiServices;
 use MWException;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Dumpers\DumpGenerator;
@@ -234,19 +234,33 @@ abstract class DumpEntities extends Maintenance {
 	 * @inheritDoc
 	 */
 	public function finalSetup() {
-		global $wgDBDefaultGroup;
-
-		// Don't use WikibaseRepo here as this is run very early on, thus
-		// the bootstrapping code is not ready yet (T202452).
-		$settings = WikibaseSettings::getRepoSettings();
-		$dumpDBDefaultGroup = $settings->getSetting( 'dumpDBDefaultGroup' );
-
-		if ( $dumpDBDefaultGroup !== null ) {
-			$wgDBDefaultGroup = $dumpDBDefaultGroup;
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->destroy();
-		}
+		global $wgHooks;
 
 		parent::finalSetup();
+
+		if ( $this->hasOption( 'dbgroupdefault' ) ) {
+			// A group was set via cli, so no need to set the default here
+			return;
+		}
+
+		$wgHooks['MediaWikiServices'][] = function() {
+			global $wgDBDefaultGroup;
+			if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
+				// Something instantiates the MediaWikiServices before Wikibase
+				// is loaded, nothing we can do here.
+				wfWarn( self::class . ': Can not change default DB group.' );
+				return;
+			}
+
+			// Don't use WikibaseRepo here as this is run very early on, thus
+			// the bootstrapping code is not ready yet (T202452).
+			$settings = WikibaseSettings::getRepoSettings();
+			$dumpDBDefaultGroup = $settings->getSetting( 'dumpDBDefaultGroup' );
+
+			if ( $dumpDBDefaultGroup !== null ) {
+				$wgDBDefaultGroup = $dumpDBDefaultGroup;
+			}
+		};
 	}
 
 	private function getEntityTypes() {
