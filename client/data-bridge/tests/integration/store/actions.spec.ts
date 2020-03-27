@@ -1,3 +1,4 @@
+import Entity from '@/datamodel/Entity';
 import { Store } from 'vuex';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Application, { InitializedApplicationState } from '@/store/Application';
@@ -101,7 +102,7 @@ describe( 'store/actions', () => {
 		} );
 
 		services.set( 'writingEntityRepository', {
-			async saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+			async saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
 			},
 		} );
@@ -276,7 +277,7 @@ describe( 'store/actions', () => {
 				),
 			).rejects.toBe( rejectError );
 
-			expect( saveEntity ).toHaveBeenCalledWith( testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
 		} );
 
 		it( 'stores the responded entity, if the request succeeded', async () => {
@@ -314,7 +315,7 @@ describe( 'store/actions', () => {
 
 			await store.dispatch( action( NS_ENTITY, 'entitySave' ), testSet.entity.statements );
 
-			expect( saveEntity ).toHaveBeenCalledWith( testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
 
 			const state = store.state as InitializedApplicationState;
 			expect( state.statements ).toEqual( { Q42: response.entity.statements } );
@@ -375,7 +376,7 @@ describe( 'store/actions', () => {
 					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
-				expect( saveEntity ).toHaveBeenCalledWith( testSet );
+				expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
 				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
@@ -428,13 +429,12 @@ describe( 'store/actions', () => {
 
 				await store.dispatch( 'saveBridge' );
 
-				const testSetChangedByUserInteraction = clone( testSet );
-				testSetChangedByUserInteraction
-					.entity
+				const entityChangedByUserInteraction = clone( testSet ).entity;
+				entityChangedByUserInteraction
 					.statements.P31[ 0 ]
 					.mainsnak.datavalue!.value = newStringValue;
 
-				expect( saveEntity ).toHaveBeenCalledWith( testSetChangedByUserInteraction );
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );

@@ -38,14 +38,14 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 		return !!( ( response as ResponseError ).error );
 	}
 
-	public saveEntity( revision: EntityRevision ): Promise<EntityRevision> {
+	public saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
 		return Promise.resolve(
 			this.api.postWithEditToken( this.api.assertCurrentUser( {
 				action: 'wbeditentity',
-				id: revision.entity.id,
-				baserevid: revision.revisionId,
+				id: entity.id,
+				baserevid: base?.revisionId,
 				data: JSON.stringify( {
-					claims: revision.entity.statements,
+					claims: entity.statements,
 				} ),
 				tags: this.tags,
 			} ) ),

@@ -1,6 +1,7 @@
 /* eslint no-console: "off" */
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
+import Entity from '@/datamodel/Entity';
 import Entities from '@/mock-data/data/Q42.data.json';
 import EditFlow from '@/definitions/EditFlow';
 import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
@@ -27,11 +28,11 @@ services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
 ) );
 
 services.set( 'writingEntityRepository', {
-	saveEntity( entityRevision: EntityRevision ): Promise<EntityRevision> {
-		console.info( 'saving', entityRevision );
+	saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
+		console.info( 'saving', entity );
 		const result: EntityRevision = {
-			entity: clone( entityRevision.entity ),
-			revisionId: entityRevision.revisionId + 1,
+			entity: clone( entity ),
+			revisionId: ( base?.revisionId || 0 ) + 1,
 		};
 		return new Promise( ( resolve ) => {
 			setTimeout( () => {
