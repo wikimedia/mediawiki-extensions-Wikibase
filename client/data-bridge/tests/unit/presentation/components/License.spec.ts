@@ -10,18 +10,18 @@ describe( 'License component', () => {
 		get: jest.fn( ( key: string ) => `⧼${key}⧽` ),
 	};
 
-	it( 'bubbles the button\'s click event as cancel event', () => {
+	it( 'bubbles the button\'s click event as close event', () => {
 		const wrapper = shallowMount( License );
 		wrapper.find( EventEmittingButton ).vm.$emit( 'click' );
-		const cancelEvent = wrapper.emitted( 'cancel' );
-		expect( cancelEvent ).toBeTruthy();
+		const closeEvent = wrapper.emitted( 'close' );
+		expect( closeEvent ).toBeTruthy();
 	} );
 
 	it( 'mounts a button with the correct props', () => {
 		const wrapper = shallowMount( License );
 
 		expect( wrapper.find( EventEmittingButton ).props( 'size' ) ).toBe( 'M' );
-		expect( wrapper.find( EventEmittingButton ).props( 'type' ) ).toBe( 'cancel' );
+		expect( wrapper.find( EventEmittingButton ).props( 'type' ) ).toBe( 'close' );
 	} );
 
 	it( 'calls license body with correct parameters', () => {

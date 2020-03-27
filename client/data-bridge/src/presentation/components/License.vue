@@ -4,8 +4,8 @@
 			<EventEmittingButton
 				:message="$messages.get( $messages.KEYS.CANCEL )"
 				size="M"
-				type="cancel"
-				@click="handleCancelButtonClick"
+				type="close"
+				@click="handleCloseButtonClick"
 			/>
 		</span>
 		<div class="wb-db-license__text">
@@ -44,8 +44,8 @@ export default class License extends Vue {
 		);
 	}
 
-	public handleCancelButtonClick( event: UIEvent ): void {
-		this.$emit( 'cancel', event );
+	public handleCloseButtonClick( event: UIEvent ): void {
+		this.$emit( 'close', event );
 	}
 }
 </script>

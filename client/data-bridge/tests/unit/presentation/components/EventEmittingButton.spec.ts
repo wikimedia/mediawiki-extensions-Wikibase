@@ -205,7 +205,7 @@ describe( 'EventEmittingButton', () => {
 		} );
 
 		it( 'is added if in part of frameless types', () => {
-			const wrapper = shallowMountWithProps( { type: 'cancel' } );
+			const wrapper = shallowMountWithProps( { type: 'close' } );
 			expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--iconOnly' );
 		} );
 	} );
@@ -217,7 +217,7 @@ describe( 'EventEmittingButton', () => {
 		} );
 
 		it( 'is added if in part of frameless types', () => {
-			const wrapper = shallowMountWithProps( { type: 'cancel' } );
+			const wrapper = shallowMountWithProps( { type: 'close' } );
 			expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--frameless' );
 		} );
 	} );
@@ -244,9 +244,9 @@ describe( 'EventEmittingButton', () => {
 		expect( () => shallowMountWithProps( { type: 'potato' } ) ).toThrow();
 	} );
 
-	it( 'supports the cancel type', () => {
-		const wrapper = shallowMountWithProps( { type: 'cancel', squary: true } );
-		expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--cancel' );
+	it( 'supports the close type', () => {
+		const wrapper = shallowMountWithProps( { type: 'close', squary: true } );
+		expect( wrapper.classes() ).toContain( 'wb-ui-event-emitting-button--close' );
 	} );
 
 	it( 'shows a message in its title attribute and text content', () => {

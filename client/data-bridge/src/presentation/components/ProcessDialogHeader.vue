@@ -1,6 +1,6 @@
 <template>
 	<div class="wb-ui-processdialog-header">
-		<!-- @slot This slot should be filled with a "safe" action, e.g. cancel -->
+		<!-- @slot This slot should be filled with a "safe" action, e.g. close -->
 		<slot name="safeAction">
 			<div />
 		</slot>

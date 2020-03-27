@@ -179,7 +179,7 @@ describe( 'App', () => {
 		DataBridgePage.saveButton.click();
 		DataBridgePage.licensePopup.waitForDisplayed();
 
-		DataBridgePage.licenseCancelButton.click();
+		DataBridgePage.licenseCloseButton.click();
 		DataBridgePage.licensePopup.waitForDisplayed( null, true, 'License still visible after being dismissed' );
 
 		// show License again

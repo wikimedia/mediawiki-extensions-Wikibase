@@ -33,14 +33,14 @@ describe( 'App', () => {
 		DataBridgePage.openBridgeOnPage( title );
 	} );
 
-	it( 'closes on clicking the cancel button', () => {
-		browser.waitUntil( () => DataBridgePage.cancelButton.isClickable() );
-		DataBridgePage.cancelButton.click();
+	it( 'closes on clicking the close button', () => {
+		browser.waitUntil( () => DataBridgePage.closeButton.isClickable() );
+		DataBridgePage.closeButton.click();
 
 		DataBridgePage.app.waitForExist(
 			undefined,
 			true,
-			'App still exists in the DOM after clicking the cancel button'
+			'App still exists in the DOM after clicking the close button'
 		);
 	} );
 } );

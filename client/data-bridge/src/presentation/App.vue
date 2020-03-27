@@ -18,11 +18,11 @@
 			<template v-slot:safeAction>
 				<EventEmittingButton
 					:message="$messages.get( $messages.KEYS.CANCEL )"
-					type="cancel"
+					type="close"
 					size="L"
 					:squary="true"
 					:disabled="isSaving"
-					@click="cancel"
+					@click="close"
 				/>
 			</template>
 		</ProcessDialogHeader>
@@ -41,7 +41,7 @@
 			>
 				<div class="wb-db-app__license" v-if="licenseIsVisible">
 					<License
-						@cancel="dismissLicense"
+						@close="dismissLicense"
 					/>
 				</div>
 				<DataBridge
@@ -140,7 +140,7 @@ export default class App extends mixins( StateMixin ) {
 			} );
 	}
 
-	public cancel(): void {
+	public close(): void {
 		this.$emit( Events.onCancel );
 	}
 }
