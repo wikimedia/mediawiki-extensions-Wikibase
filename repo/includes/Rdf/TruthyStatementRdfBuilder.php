@@ -90,7 +90,8 @@ class TruthyStatementRdfBuilder implements EntityRdfBuilder {
 			$this->writer,
 			$snakNamespace,
 			$snak,
-			$this->vocabulary->propertyNamespaceNames[$propertyRepoName][RdfVocabulary::NSP_DIRECT_CLAIM]
+			$this->vocabulary->propertyNamespaceNames[$propertyRepoName][RdfVocabulary::NSP_DIRECT_CLAIM],
+			$this->vocabulary->getStatementLName( $statement )
 		);
 	}
 

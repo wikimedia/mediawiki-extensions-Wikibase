@@ -134,7 +134,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		// assertions are done by the mocks
-		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );
 	}
 
 	public function testAddSnakValue_novalue() {
@@ -154,7 +154,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			'<http://acme.test/Q11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://foreign.test/prop/novalue/P2> .',
 		];
 
-		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );
 
 		$this->helper->assertNTriplesEquals( $expectedTriples, $writer->drain() );
 	}
@@ -176,7 +176,7 @@ class SnakRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			$mentioned
 		);
 
-		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM );
+		$builder->addSnak( $writer, RdfVocabulary::NS_VALUE, $snak, RdfVocabulary::NSP_DIRECT_CLAIM, 'statement-ID' );
 		$this->assertEquals( [ 'P2' ], array_keys( $mentioned ) );
 	}
 

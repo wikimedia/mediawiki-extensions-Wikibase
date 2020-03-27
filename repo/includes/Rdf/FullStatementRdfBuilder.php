@@ -150,7 +150,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 					$this->statementWriter,
 					$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 					$q,
-					$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_QUALIFIER]
+					$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_QUALIFIER],
+					$statementLName
 				);
 			}
 		}
@@ -187,7 +188,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 						$this->referenceWriter,
 						$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 						$refSnak,
-						$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_REFERENCE]
+						$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_REFERENCE],
+						$refLName
 					);
 				}
 			}
@@ -245,7 +247,8 @@ class FullStatementRdfBuilder implements EntityRdfBuilder {
 			$this->statementWriter,
 			$this->vocabulary->statementNamespaceNames[$entityRepository][RdfVocabulary::NS_VALUE],
 			$snak,
-			$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM_STATEMENT]
+			$this->vocabulary->propertyNamespaceNames[$propertyRepository][RdfVocabulary::NSP_CLAIM_STATEMENT],
+			$statementLName
 		);
 	}
 

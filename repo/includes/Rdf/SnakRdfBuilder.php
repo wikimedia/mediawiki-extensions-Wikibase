@@ -73,10 +73,11 @@ class SnakRdfBuilder {
 	 * @param string $snakNamespace
 	 * @param Snak $snak
 	 * @param string $propertyNamespace
+	 * @param string $parentLName the subject owning the Snak (a statement or reference)
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addSnak( RdfWriter $writer, $snakNamespace, Snak $snak, $propertyNamespace ) {
+	public function addSnak( RdfWriter $writer, $snakNamespace, Snak $snak, $propertyNamespace, string $parentLName ) {
 		$propertyId = $snak->getPropertyId();
 		switch ( $snak->getType() ) {
 			case 'value':
@@ -87,7 +88,8 @@ class SnakRdfBuilder {
 			case 'somevalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );
 
-				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank() );
+				$stableBNodeLabel = md5( implode( '-', [ $parentLName, $propertyNamespace, $snakNamespace, $snak->getHash() ] ) );
+				$writer->say( $propertyNamespace, $propertyValueLName )->is( '_', $writer->blank( $stableBNodeLabel ) );
 				break;
 			case 'novalue':
 				$propertyValueLName = $this->vocabulary->getEntityLName( $propertyId );

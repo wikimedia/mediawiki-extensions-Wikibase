@@ -204,7 +204,7 @@ class RdfBuilderTestData {
 	 * @return NTriplesRdfWriter
 	 */
 	public function getNTriplesWriter( $start = true ) {
-		$writer = new NTriplesRdfWriter();
+		$writer = new NTriplesRdfWriter( NTriplesRdfWriter::DOCUMENT_ROLE, new NoopBNodeLabeler() );
 
 		foreach ( $this->getVocabulary()->getNamespaces() as $ns => $uri ) {
 			$writer->prefix( $ns, $uri );

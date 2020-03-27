@@ -41,7 +41,7 @@ class FullStatementRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			)
 		);
 
-		$this->helper->setAllBlanksEqual( true );
+		$this->helper->setAllBlanksEqual( false );
 	}
 
 	/**
