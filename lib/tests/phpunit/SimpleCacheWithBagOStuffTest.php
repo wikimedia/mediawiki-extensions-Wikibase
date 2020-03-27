@@ -31,25 +31,27 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 	public function testUsesPrefixWhenSetting() {
 		$inner = new HashBagOStuff();
 
-		$prefix = 'somePrefix_';
+		$prefix = 'somePrefix';
 		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
 
 		$simpleCache->set( 'test', 'value' );
-		$this->assertNotFalse( $inner->get( 'somePrefix_test' ) );
+		$key = $inner->makeKey( $prefix, 'test' );
+		$this->assertNotFalse( $inner->get( $key ) );
 	}
 
 	public function testUsesPrefixWhenSettingMultiple() {
 		$inner = new HashBagOStuff();
 
-		$prefix = 'somePrefix_';
+		$prefix = 'somePrefix';
 		$simpleCache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
 
 		$simpleCache->setMultiple( [ 'test' => 'value' ] );
-		$this->assertNotFalse( $inner->get( 'somePrefix_test' ) );
+		$key = $inner->makeKey( $prefix, 'test' );
+		$this->assertNotFalse( $inner->get( $key ) );
 	}
 
 	public function testGivenPrefixContainsForbiddenCharacters_ConstructorThrowsException() {
-		$prefix = '@somePrefix_';
+		$prefix = '@somePrefix';
 		$inner = new HashBagOStuff();
 
 		$this->expectException( \InvalidArgumentException::class );
@@ -86,9 +88,10 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 	public function testGet_GivenSignatureIsWrong_ReturnsDefaultValue() {
 		$inner = new HashBagOStuff();
 
-		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'some secret' );
 		$cache->set( 'key', 'some_string' );
-		$this->spoilTheSignature( $inner, 'prefix_key' );
+		$key = $inner->makeKey( 'prefix', 'key' );
+		$this->spoilTheSignature( $inner, $key );
 
 		$got = $cache->get( 'key', 'some default value' );
 		$this->assertEquals( 'some default value', $got );
@@ -97,9 +100,10 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 	public function testGetMultiple_GivenSignatureIsWrong_ReturnsDefaultValue() {
 		$inner = new HashBagOStuff();
 
-		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'some secret' );
 		$cache->set( 'key', 'some_string' );
-		$this->spoilTheSignature( $inner, 'prefix_key' );
+		$key = $inner->makeKey( 'prefix', 'key' );
+		$this->spoilTheSignature( $inner, $key );
 
 		$got = $cache->getMultiple( [ 'key' ], 'some default value' );
 		$this->assertEquals( [ 'key' => 'some default value' ], $got );
@@ -110,12 +114,13 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 
 		$inner = new HashBagOStuff();
 
-		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'some secret' );
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'some secret' );
 		$cache->setLogger( $logger->reveal() );
 		$cache->set( 'key', 'some_string' );
-		$value = $inner->get( 'prefix_key' );
+		$key = $inner->makeKey( 'prefix', 'key' );
+		$value = $inner->get( $key );
 		list( $signature, $data ) = json_decode( $value );
-		$inner->set( 'prefix_key', json_encode( [ 'wrong signature', $data ] ) );
+		$inner->set( $key, json_encode( [ 'wrong signature', $data ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
 
@@ -128,9 +133,10 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 
 		$correctSignature = hash_hmac( 'sha256', $brokenData, 'secret' );
 
-		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix_', 'secret' );
+		$cache = new SimpleCacheWithBagOStuff( $inner, 'prefix', 'secret' );
 		$cache->set( 'key', 'some_string' );
-		$inner->set( 'prefix_key', json_encode( [ $correctSignature, $brokenData ] ) );
+		$key = $inner->makeKey( 'prefix', 'key' );
+		$inner->set( $key, json_encode( [ $correctSignature, $brokenData ] ) );
 
 		$got = $cache->get( 'key', 'some default value' );
 		$this->assertEquals( 'some default value', $got );
@@ -140,7 +146,7 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 		$inner = new HashBagOStuff();
 
 		$this->expectException( \Exception::class );
-		new SimpleCacheWithBagOStuff( $inner, 'prefix_', '' );
+		new SimpleCacheWithBagOStuff( $inner, 'prefix', '' );
 	}
 
 	/**
@@ -158,7 +164,7 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 		$now = microtime( true );
 		$inner->setMockTime( $now );
 
-		$prefix = 'somePrefix_';
+		$prefix = 'someprefix';
 		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
 
 		$result = $cache->set( 'key1', 'value', 1 );
@@ -173,7 +179,7 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 		$now = microtime( true );
 		$inner->setMockTime( $now );
 
-		$prefix = 'somePrefix_';
+		$prefix = 'someprefix';
 		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
 
 		$cache->setMultiple( [ 'key2' => 'value2', 'key3' => 'value3' ], 1 );

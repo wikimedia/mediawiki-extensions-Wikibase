@@ -17,7 +17,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	use LoggerAwareTrait;
 
-	const KEY_REGEX = '/^[a-zA-Z0-9_\-.]+\z/';
+	const KEY_REGEX = '/^[a-zA-Z0-9_\-.\:]+\z/';
 
 	/**
 	 * @var BagOStuff
@@ -66,9 +66,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function get( $key, $default = null ) {
+		$key = $this->inner->makeKey( $this->prefix, $key );
 		$this->assertKeyIsValid( $key );
 
-		$result = $this->inner->get( $this->prefix . $key );
+		$result = $this->inner->get( $key );
 		if ( $result === false ) {
 			return $default;
 		}
@@ -91,12 +92,13 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function set( $key, $value, $ttl = null ) {
+		$key = $this->inner->makeKey( $this->prefix, $key );
 		$this->assertKeyIsValid( $key );
 		$ttl = $this->normalizeTtl( $ttl );
 
 		$value = $this->serialize( $value );
 
-		return $this->inner->set( $this->prefix . $key, $value, $ttl );
+		return $this->inner->set( $key, $value, $ttl );
 	}
 
 	/**
@@ -110,9 +112,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function delete( $key ) {
+		$key = $this->inner->makeKey( $this->prefix, $key );
 		$this->assertKeyIsValid( $key );
 
-		return $this->inner->delete( $this->prefix . $key );
+		return $this->inner->delete( $key );
 	}
 
 	/**
@@ -139,23 +142,23 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function getMultiple( $keys, $default = null ) {
 		$keys = $this->toArray( $keys );
-		$this->assertKeysAreValid( $keys );
-
 		$prefixedKeys = array_map(
 			function ( $k ) {
-				return $this->prefix . $k;
+				return $this->inner->makeKey( $this->prefix, $k );
 			},
 			$keys
 		);
+		$this->assertKeysAreValid( $keys );
 
 		$innerResult = $this->inner->getMulti( $prefixedKeys );
 		$result = [];
 		foreach ( $keys as $key ) {
-			if ( !array_key_exists( $this->prefix . $key, $innerResult ) ) {
+			$prefixedKey = $this->inner->makeKey( $this->prefix, $key );
+			if ( !array_key_exists( $prefixedKey, $innerResult ) ) {
 				$result[ $key ] = $default;
 			} else {
 				$result[ $key ] = $this->unserialize(
-					$innerResult[ $this->prefix . $key ],
+					$innerResult[ $prefixedKey ],
 					$default,
 					[ 'key' => $key, 'prefix' => $this->prefix ]
 				);
@@ -185,7 +188,8 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$ttl = $this->normalizeTtl( $ttl );
 
 		foreach ( $values as $key => $value ) {
-			$values[ $this->prefix . $key ] = $this->serialize( $value );
+			$key = $this->inner->makeKey( $this->prefix, $key );
+			$values[ $key ] = $this->serialize( $value );
 		}
 
 		return $this->inner->setMulti( $values, $ttl ?: 0 );
@@ -228,8 +232,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function has( $key ) {
+		$key = $this->inner->makeKey( $this->prefix, $key );
 		$this->assertKeyIsValid( $key );
-		$result = $this->inner->get( $this->prefix . $key );
+		$result = $this->inner->get( $key );
 		return $result !== false;
 	}
 
