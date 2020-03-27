@@ -4,6 +4,7 @@ import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRep
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
+import Application from '@/store/Application';
 import { RootGetters } from '@/store/getters';
 import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
@@ -662,6 +663,7 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( 'validateBridgeApplicability', () => {
+		const state = { applicationStatus: ApplicationStatus.INITIALIZING } as Application;
 		const statementModule = {
 			getters: {
 				isStatementGroupAmbiguous: jest.fn().mockReturnValue( false ),
@@ -675,6 +677,7 @@ describe( 'root/actions', () => {
 		it( 'doesn\'t dispatch error if applicable', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -691,9 +694,30 @@ describe( 'root/actions', () => {
 			expect( statementModule.getters.dataValueType ).toHaveBeenCalledWith( mainSnakPath );
 		} );
 
+		it( 'doesn\'t dispatch error if saved', () => {
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				state: { applicationStatus: ApplicationStatus.SAVED } as Application,
+				dispatch,
+			} );
+
+			// @ts-ignore
+			actions.statementModule = statementModule;
+
+			const entityId = 'Q42';
+			const propertyId = 'P42';
+			const mainSnakPath = new MainSnakPath( entityId, propertyId, 0 );
+			actions.validateBridgeApplicability( mainSnakPath );
+			expect( dispatch ).not.toHaveBeenCalled();
+			expect( statementModule.getters.isStatementGroupAmbiguous ).not.toHaveBeenCalled();
+			expect( statementModule.getters.snakType ).not.toHaveBeenCalled();
+			expect( statementModule.getters.dataValueType ).not.toHaveBeenCalled();
+		} );
+
 		it( 'dispatches error on ambiguous statements', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -713,6 +737,7 @@ describe( 'root/actions', () => {
 		it( 'dispatches error on deprecated statement', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -731,6 +756,7 @@ describe( 'root/actions', () => {
 		it( 'dispatches error for non-value snak types', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -750,6 +776,7 @@ describe( 'root/actions', () => {
 		it( 'dispatches error for non-string data types', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -773,6 +800,7 @@ describe( 'root/actions', () => {
 		it( 'dispatches error for non-string data value types', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 
@@ -791,6 +819,7 @@ describe( 'root/actions', () => {
 		it( 'dispatches single error for multiple problems', () => {
 			const dispatch = jest.fn();
 			const actions = inject( RootActions, {
+				state,
 				dispatch,
 			} );
 

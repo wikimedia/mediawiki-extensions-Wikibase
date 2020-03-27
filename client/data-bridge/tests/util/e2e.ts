@@ -56,6 +56,9 @@ export async function keyup( element: HTMLElement, key: string ): Promise<void> 
 export async function enter( element: HTMLElement ): Promise<void> {
 	await keydown( element, 'Enter' );
 	await keypressed( element, 'Enter' );
+	if ( element instanceof HTMLAnchorElement && element.href ) {
+		await element.click(); // links emit 'click' on Enter
+	}
 	await keyup( element, 'enter' );
 }
 

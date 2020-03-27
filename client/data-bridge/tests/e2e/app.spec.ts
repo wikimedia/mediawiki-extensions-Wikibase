@@ -325,7 +325,7 @@ describe( 'app', () => {
 
 		} );
 
-		it( 'saves and reloads on click', async () => {
+		it( 'saves on click and reloads on second click', async () => {
 			const pageTitle = 'Client_page';
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 			const clientApiPost = jest.fn().mockResolvedValue( {
@@ -372,10 +372,16 @@ describe( 'app', () => {
 				formatversion: 2,
 				titles: [ pageTitle ],
 			} );
+
+			const editReferences = select(
+				'.wb-db-app .wb-db-thankyou a.wb-ui-event-emitting-button--primaryProgressive',
+			);
+			editReferences!.click();
+			await budge();
 			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'saves and reloads on enter', async () => {
+		it( 'saves on enter and reloads on second enter', async () => {
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			const save = await getEnabledSaveButton( testLink );
@@ -394,10 +400,16 @@ describe( 'app', () => {
 				data: JSON.stringify( sentData ),
 				tags: undefined,
 			} );
+
+			const editReferences = select(
+				'.wb-db-app .wb-db-thankyou a.wb-ui-event-emitting-button--primaryProgressive',
+			);
+			enter( editReferences! );
+			await budge();
 			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 
-		it( 'saves and reloads on space', async () => {
+		it( 'saves on space and reloads on enter', async () => {
 			const testLink = prepareTestEnv( { propertyId, entityId } );
 
 			const save = await getEnabledSaveButton( testLink );
@@ -416,6 +428,12 @@ describe( 'app', () => {
 				data: JSON.stringify( sentData ),
 				tags: undefined,
 			} );
+
+			const editReferences = select(
+				'.wb-db-app .wb-db-thankyou a.wb-ui-event-emitting-button--primaryProgressive',
+			);
+			enter( editReferences! ); // this cannot be a space, space does not activate link buttons
+			await budge();
 			expect( location.reload ).toHaveBeenCalledTimes( 1 );
 		} );
 

@@ -152,6 +152,11 @@ RootActions
 	public validateBridgeApplicability(
 		path: MainSnakPath,
 	): Promise<void> {
+		if ( this.state.applicationStatus === ApplicationStatus.SAVED ) {
+			// saving edits can transition us from applicable to inapplicable states, but that should not be an error
+			return Promise.resolve();
+		}
+
 		if ( this.statementModule.getters.isStatementGroupAmbiguous( path ) ) {
 			return this.dispatch( 'addError', [ { type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT } ] );
 		}

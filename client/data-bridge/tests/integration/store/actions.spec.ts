@@ -381,7 +381,7 @@ describe( 'store/actions', () => {
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
 
-			it( 'stores the responded entity & purges the page, if the request succeeded', async () => {
+			it( 'with REPLACE, stores the responded entity & purges the page', async () => {
 				const newStringValue = 'new value';
 				const saveResponse = {
 					revisionId: 1,
@@ -444,6 +444,86 @@ describe( 'store/actions', () => {
 				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
 
 				expect( state.applicationStatus ).toBe( ApplicationStatus.SAVED );
+				expect( state.applicationErrors ).toStrictEqual( [] );
+			} );
+
+			it( 'with UPDATE, stores the responded entity & purges the page', async () => {
+				const newStringValue = 'new value';
+				const saveResponse = {
+					revisionId: 1,
+					entity: {
+						id: 'Q42',
+						statements: {
+							P31: [
+								testSet.entity.statements.P31[ 0 ],
+								{
+									type: 'statement',
+									id: 'opaque statement ID 2',
+									rank: 'normal',
+									mainsnak: {
+										snaktype: 'value',
+										property: 'P31',
+										datatype: 'string',
+										datavalue: {
+											type: 'string',
+											value: newStringValue,
+										},
+									},
+								},
+							],
+						},
+					},
+				};
+
+				const saveEntity = jest.fn().mockResolvedValue( saveResponse );
+
+				services.set( 'writingEntityRepository', {
+					saveEntity,
+				} );
+
+				const purge = jest.fn().mockReturnValue( Promise.resolve() );
+				services.set( 'purgeTitles', {
+					purge,
+				} );
+
+				store = createStore( services );
+
+				await store.dispatch( 'initBridge', info );
+
+				await store.dispatch( 'setTargetValue', {
+					type: 'string',
+					value: newStringValue,
+				} );
+				await store.dispatch( 'setEditDecision', EditDecision.UPDATE );
+
+				await store.dispatch( 'saveBridge' );
+
+				const entityChangedByUserInteraction = clone( testSet ).entity;
+				entityChangedByUserInteraction.statements.P31.push( {
+					type: 'statement',
+					rank: 'preferred',
+					mainsnak: {
+						snaktype: 'value',
+						property: 'P31',
+						datatype: 'string',
+						datavalue: {
+							type: 'string',
+							value: newStringValue,
+						},
+					},
+				} );
+
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet );
+
+				const state = ( store.state as InitializedApplicationState );
+				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
+				expect( state.entity.id ).toBe( saveResponse.entity.id );
+				expect( state.entity.baseRevision ).toBe( saveResponse.revisionId );
+
+				expect( purge ).toHaveBeenCalledWith( [ info.pageTitle ] );
+
+				expect( state.applicationStatus ).toBe( ApplicationStatus.SAVED );
+				expect( state.applicationErrors ).toStrictEqual( [] );
 			} );
 		} );
 	} );

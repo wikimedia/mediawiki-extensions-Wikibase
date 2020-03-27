@@ -1801,6 +1801,17 @@ module.exports = version && +version;
 
 /***/ }),
 
+/***/ "2e3c":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThankYou_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d12a");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThankYou_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThankYou_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ThankYou_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "2e53":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -8974,6 +8985,13 @@ module.exports = function (namespace, method) {
 
 /***/ }),
 
+/***/ "d12a":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "d1ac":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12863,12 +12881,12 @@ var es_object_values = __webpack_require__("07ac");
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=5147d574&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError && !_vm.isSaved)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","size":"L","squary":true,"disabled":!_vm.canStartSaving},on:{"click":_vm.save}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"close","size":"L","squary":true,"disabled":_vm.isSaving},on:{"click":_vm.close}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):(_vm.isSaved)?_c('div',[_vm._v(" saved ")]):_c('Loading',{attrs:{"is-initializing":_vm.isInitializing,"is-saving":_vm.isSaving}},[(_vm.licenseIsVisible)?_c('div',{staticClass:"wb-db-app__license"},[_c('License',{on:{"close":_vm.dismissLicense}})],1):_vm._e(),_c('DataBridge',{class:[ 'wb-db-app__data-bridge', _vm.isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]})],1)],1)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=fcb6e596&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError && !_vm.isSaved)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","size":"L","squary":true,"disabled":!_vm.canStartSaving},on:{"click":_vm.save}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"close","size":"L","squary":true,"disabled":_vm.isSaving},on:{"click":_vm.close}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):(_vm.isSaved)?_c('ThankYou',{attrs:{"repo-link":_vm.repoLink},on:{"opened-reference-edit-on-repo":_vm.openedReferenceEditOnRepo}}):_c('Loading',{attrs:{"is-initializing":_vm.isInitializing,"is-saving":_vm.isSaving}},[(_vm.licenseIsVisible)?_c('div',{staticClass:"wb-db-app__license"},[_c('License',{on:{"close":_vm.dismissLicense}})],1):_vm._e(),_c('DataBridge',{class:[ 'wb-db-app__data-bridge', _vm.isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]})],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=5147d574&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=fcb6e596&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -14796,6 +14814,11 @@ function (_Actions) {
   }, {
     key: "validateBridgeApplicability",
     value: function validateBridgeApplicability(path) {
+      if (this.state.applicationStatus === definitions_ApplicationStatus.SAVED) {
+        // saving edits can transition us from applicable to inapplicable states, but that should not be an error
+        return Promise.resolve();
+      }
+
       if (this.statementModule.getters.isStatementGroupAmbiguous(path)) {
         return this.dispatch('addError', [{
           type: ErrorTypes.UNSUPPORTED_AMBIGUOUS_STATEMENT
@@ -17850,7 +17873,91 @@ var License_component = normalizeComponent(
 )
 
 /* harmony default export */ var components_License = (License_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ThankYou.vue?vue&type=template&id=3651b2a4&
+var ThankYouvue_type_template_id_3651b2a4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-thankyou"},[_c('h2',{staticClass:"wb-db-thankyou__head"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.THANK_YOU_HEAD ))+" ")]),_c('p',{staticClass:"wb-db-thankyou__body"},[_vm._v(" "+_vm._s(_vm.$messages.get( _vm.$messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY ))+" ")]),_c('div',{staticClass:"wb-db-thankyou__button"},[_c('EventEmittingButton',{attrs:{"type":"primaryProgressive","size":"M","message":_vm.$messages.get( _vm.$messages.KEYS.THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON ),"href":_vm.repoLink,"new-tab":true,"prevent-default":false},on:{"click":_vm.click}})],1)])}
+var ThankYouvue_type_template_id_3651b2a4_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/presentation/components/ThankYou.vue?vue&type=template&id=3651b2a4&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/ThankYou.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+
+/**
+ * A component to thank the user for their edit and present them with
+ * the option to continue editing (e.g. references) on the repository.
+ */
+
+var ThankYouvue_type_script_lang_ts_ThankYou =
+/*#__PURE__*/
+function (_Vue) {
+  _inherits(ThankYou, _Vue);
+
+  function ThankYou() {
+    _classCallCheck(this, ThankYou);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(ThankYou).apply(this, arguments));
+  }
+
+  _createClass(ThankYou, [{
+    key: "click",
+    value: function click() {
+      /**
+       * An event fired when the user clicks the CTA to edit references on the repository
+       * @type {Event}
+       */
+      this.$emit('opened-reference-edit-on-repo');
+    }
+  }]);
+
+  return ThankYou;
+}(vue_property_decorator["Vue"]);
+
+__decorate([Object(vue_property_decorator["Prop"])({
+  required: true
+})], ThankYouvue_type_script_lang_ts_ThankYou.prototype, "repoLink", void 0);
+
+ThankYouvue_type_script_lang_ts_ThankYou = __decorate([Object(vue_class_component_esm["default"])({
+  components: {
+    EventEmittingButton: components_EventEmittingButton
+  }
+})], ThankYouvue_type_script_lang_ts_ThankYou);
+/* harmony default export */ var ThankYouvue_type_script_lang_ts_ = (ThankYouvue_type_script_lang_ts_ThankYou);
+// CONCATENATED MODULE: ./src/presentation/components/ThankYou.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_ThankYouvue_type_script_lang_ts_ = (ThankYouvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/presentation/components/ThankYou.vue?vue&type=style&index=0&lang=scss&
+var ThankYouvue_type_style_index_0_lang_scss_ = __webpack_require__("2e3c");
+
+// CONCATENATED MODULE: ./src/presentation/components/ThankYou.vue
+
+
+
+
+
+
+/* normalize component */
+
+var ThankYou_component = normalizeComponent(
+  components_ThankYouvue_type_script_lang_ts_,
+  ThankYouvue_type_template_id_3651b2a4_render,
+  ThankYouvue_type_template_id_3651b2a4_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_ThankYou = (ThankYou_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -17893,18 +18000,18 @@ function (_mixins) {
   }, {
     key: "save",
     value: function save() {
-      var _this2 = this;
-
       if (!this.licenseIsVisible) {
         this.licenseIsVisible = true;
         return;
       }
 
       this.licenseIsVisible = false;
-      this.rootModule.dispatch('saveBridge').then(function () {
-        _this2.$emit(src_events.onSaved);
-      }).catch(function (_error) {// TODO store already sets application into error state. Do we need to do anything else?
-      });
+      this.rootModule.dispatch('saveBridge');
+    }
+  }, {
+    key: "openedReferenceEditOnRepo",
+    value: function openedReferenceEditOnRepo() {
+      this.$emit(src_events.onSaved);
     }
   }, {
     key: "close",
@@ -17955,6 +18062,11 @@ function (_mixins) {
     get: function get() {
       return this.$bridgeConfig.usePublish ? this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
     }
+  }, {
+    key: "repoLink",
+    get: function get() {
+      return this.rootModule.state.originalHref;
+    }
   }]);
 
   return App;
@@ -17967,7 +18079,8 @@ Appvue_type_script_lang_ts_App = __decorate([Object(vue_property_decorator["Comp
     ErrorWrapper: components_ErrorWrapper,
     Loading: components_Loading,
     EventEmittingButton: components_EventEmittingButton,
-    ProcessDialogHeader: components_ProcessDialogHeader
+    ProcessDialogHeader: components_ProcessDialogHeader,
+    ThankYou: components_ThankYou
   }
 })], Appvue_type_script_lang_ts_App);
 /* harmony default export */ var Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_App);

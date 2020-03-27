@@ -1,5 +1,6 @@
 import EntityRevision from '@/datamodel/EntityRevision';
 import { ErrorTypes } from '@/definitions/ApplicationError';
+import ThankYou from '@/presentation/components/ThankYou.vue';
 import Vuex, { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
 import {
@@ -186,7 +187,7 @@ describe( 'App.vue', () => {
 		} );
 	} );
 
-	it( 'shows License on first save button click and saves on second save button click', async () => {
+	it( 'shows License on 1st save click, saves on 2nd save click, emits on refs click', async () => {
 		const bridgeSave = jest.fn();
 		const localStore = hotUpdateDeep( store, {
 			actions: {
@@ -208,6 +209,12 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
+		expect( wrapper.emitted( Events.onSaved ) ).toBeFalsy();
+
+		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+		expect( wrapper.find( ThankYou ).exists() ).toBe( true );
+		await wrapper.find( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
+		await localVue.nextTick();
 		expect( wrapper.emitted( Events.onSaved ) ).toHaveLength( 1 );
 	} );
 

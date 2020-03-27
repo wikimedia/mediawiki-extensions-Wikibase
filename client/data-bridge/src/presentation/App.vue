@@ -29,11 +29,11 @@
 
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" />
-			<div
+			<ThankYou
 				v-else-if="isSaved"
-			>
-				saved
-			</div>
+				:repo-link="repoLink"
+				@opened-reference-edit-on-repo="openedReferenceEditOnRepo"
+			/>
 			<Loading
 				v-else
 				:is-initializing="isInitializing"
@@ -65,6 +65,7 @@ import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.v
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';
 import License from '@/presentation/components/License.vue';
+import ThankYou from '@/presentation/components/ThankYou.vue';
 
 @Component( {
 	components: {
@@ -74,6 +75,7 @@ import License from '@/presentation/components/License.vue';
 		Loading,
 		EventEmittingButton,
 		ProcessDialogHeader,
+		ThankYou,
 	},
 } )
 export default class App extends mixins( StateMixin ) {
@@ -119,6 +121,10 @@ export default class App extends mixins( StateMixin ) {
 			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
+	public get repoLink(): string {
+		return this.rootModule.state.originalHref;
+	}
+
 	public dismissLicense(): void {
 		this.licenseIsVisible = false;
 	}
@@ -131,13 +137,11 @@ export default class App extends mixins( StateMixin ) {
 
 		this.licenseIsVisible = false;
 
-		this.rootModule.dispatch( 'saveBridge' )
-			.then( () => {
-				this.$emit( Events.onSaved );
-			} )
-			.catch( ( _error ) => {
-				// TODO store already sets application into error state. Do we need to do anything else?
-			} );
+		this.rootModule.dispatch( 'saveBridge' );
+	}
+
+	public openedReferenceEditOnRepo(): void {
+		this.$emit( Events.onSaved );
 	}
 
 	public close(): void {

@@ -33,6 +33,7 @@ class DataBridgePage extends Page {
 			LOAD: '.wb-db-load',
 			ERROR: '.wb-db-error',
 			BRIDGE: '.wb-db-bridge',
+			THANKYOU: '.wb-db-thankyou',
 		};
 	}
 
@@ -79,6 +80,10 @@ class DataBridgePage extends Page {
 			SUGGESTION_GO_TO_REPO: '.wb-db-bailout-actions__suggestion:nth-child(1)',
 			SUGGESTION_EDIT_ARTICLE: '.wb-db-bailout-actions__suggestion:nth-child(2)',
 		};
+	}
+
+	static get THANKYOU_BUTTON() {
+		return '.wb-db-thankyou__button';
 	}
 
 	getDummyTitle() {
@@ -216,6 +221,16 @@ class DataBridgePage extends Page {
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.BRIDGE}
 				${DataBridgePage.EDIT_DECISION_SECTION} ${DataBridgePage.EDIT_DECISION_INPUT}[value=${value}]`
 		);
+	}
+
+	get thankYouScreen() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.THANKYOU}`
+		);
+	}
+
+	get thankYouButton() {
+		return this.thankYouScreen.$( DataBridgePage.THANKYOU_BUTTON );
 	}
 }
 

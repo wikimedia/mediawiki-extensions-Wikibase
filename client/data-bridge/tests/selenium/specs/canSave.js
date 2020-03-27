@@ -113,6 +113,11 @@ describe( 'App', () => {
 		// actually trigger save
 		DataBridgePage.saveButton.click();
 
+		// click “edit reference on repo” button to trigger reload
+		DataBridgePage.thankYouScreen.waitForDisplayed();
+		DataBridgePage.thankYouButton.click();
+		browser.switchWindow( title );
+
 		DataBridgePage.app.waitForDisplayed(
 			5000,
 			true,
@@ -188,6 +193,11 @@ describe( 'App', () => {
 
 		// actually trigger save
 		DataBridgePage.saveButton.click();
+
+		// click “edit reference on repo” button to trigger reload
+		DataBridgePage.thankYouScreen.waitForDisplayed();
+		DataBridgePage.thankYouButton.click();
+		browser.switchWindow( title );
 
 		DataBridgePage.app.waitForDisplayed(
 			5000,
