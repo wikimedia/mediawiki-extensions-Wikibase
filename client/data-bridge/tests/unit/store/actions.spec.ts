@@ -4,6 +4,7 @@ import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRep
 import EditDecision from '@/definitions/EditDecision';
 import EditFlow from '@/definitions/EditFlow';
 import { BridgeConfigOptions } from '@/presentation/plugins/BridgeConfigPlugin/BridgeConfig';
+import { RootGetters } from '@/store/getters';
 import Vue, { VueConstructor } from 'vue';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 import {
@@ -338,7 +339,9 @@ describe( 'root/actions', () => {
 				} ),
 				commit,
 				dispatch: jest.fn(),
-				getters: jest.fn() as any,
+				getters: {
+					applicationStatus: ApplicationStatus.INITIALIZING,
+				} as RootGetters,
 			} );
 
 			await actions.postEntityLoad();
@@ -363,12 +366,39 @@ describe( 'root/actions', () => {
 				dispatch: jest.fn(),
 				getters: {
 					applicationStatus: ApplicationStatus.ERROR,
-				} as any,
+				} as RootGetters,
 			} );
 
 			await actions.postEntityLoad();
 
 			expect( commit ).not.toHaveBeenCalled();
+		} );
+
+		it( 'doesn\'t commit setApplicationStatus if not initializing', async () => {
+			const commit = jest.fn();
+			const dataValue: DataValue = { type: 'string', value: 'a string value' };
+			const statement = { mainsnak: { datavalue: dataValue } };
+			const actions = inject( RootActions, {
+				state: newApplicationState( {
+					entity: { id: defaultEntityId },
+					targetProperty: defaultPropertyId,
+					statements: {
+						[ defaultEntityId ]: {
+							[ defaultPropertyId ]: [ statement ],
+						},
+					},
+				} ),
+				commit,
+				dispatch: jest.fn(),
+				getters: {
+					applicationStatus: ApplicationStatus.SAVED,
+				} as RootGetters,
+			} );
+
+			await actions.postEntityLoad();
+
+			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
+			expect( commit ).not.toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 		} );
 	} );
 
@@ -838,7 +868,7 @@ describe( 'root/actions', () => {
 		} );
 
 		// eslint-disable-next-line max-len
-		it( `sets the application state to ${ApplicationStatus.SAVING} if there are no errors and sets it back to ${ApplicationStatus.READY} if saving was successful`, async () => {
+		it( `sets the application state to ${ApplicationStatus.SAVING} if there are no errors and sets it to ${ApplicationStatus.SAVED} if saving was successful`, async () => {
 			const rootModuleDispatch = jest.fn();
 			const commit = jest.fn();
 			const entityId = 'Q42';
@@ -893,7 +923,7 @@ describe( 'root/actions', () => {
 
 			expect( commit ).toHaveBeenCalledTimes( 2 );
 			expect( commit ).toHaveBeenNthCalledWith( 1, 'setApplicationStatus', ApplicationStatus.SAVING );
-			expect( commit ).toHaveBeenNthCalledWith( 2, 'setApplicationStatus', ApplicationStatus.READY );
+			expect( commit ).toHaveBeenNthCalledWith( 2, 'setApplicationStatus', ApplicationStatus.SAVED );
 		} );
 
 		it( 'dispatches entitySave, purges the page & dispatches postEntityLoad', async () => {
