@@ -55,7 +55,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Llengua",
 	"wikibase-sitelinks-link-columnheading": "Pàgina enllaçada",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor desconegut",
-	"wikibase-snakview-snaktypeselector-novalue": "sense valor",
+	"wikibase-snakview-snaktypeselector-novalue": "cap valor",
 	"wikibase-tooltip-error-details": "Detalls",
 	"wikibase-undeserializable-value": "El valor no és vàlid i no es pot mostrar.",
 	"wikibase-validator-invalid": "Valor no vàlid",

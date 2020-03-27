@@ -31,7 +31,8 @@
 			"神樂坂秀吉",
 			"予弦",
 			"Xiplus",
-			"A Retired User"
+			"A Retired User",
+			"Winston Sung"
 		]
 	},
 	"wikibase-desc": "結構化資料儲存庫",
@@ -399,7 +400,7 @@
 	"wikibase-listdatatypes-time-head": "時間",
 	"wikibase-listdatatypes-time-body": "時間點的原始資料欄位。給出一個含精度及邊界的日期與時間。時間儲存於指定日曆模組內部。\n*時間 – 時間點的明確值，類似 ISO8601 形式的時間戳記，如：+2013-01-01T00:00:00Z。年份是填充為 4 至 16 位數標示出。\n*時區 – 明確有符號的整數。時區信息是以分為單位以國際標準時間 (UTC) 為基準的一個偏移量。\n*之前 – 表示它發生時可能晚於給定時間多少單位。單位由精度給定。\n*之後 – 表示它發生時可能早於給定時間多少單位。單位由精度給定。\n*精度 – 編碼為短整數的明確值。這些數值有以下意義：0-十億年、1-億年、…、6-千年、7-世紀、8-十年、9-年、10-月、11-日、12-時、13-分、14-秒。\n*日曆模組 – 由一個 URI 給定的明確值。它可以確定時間戳記的日曆模組。",
 	"wikibase-listdatatypes-url-head": "URL",
-	"wikibase-listdatatypes-url-body": "一個 URL 的文字字元。URL 被限制於外部連結的方式寫於維基文字中。",
+	"wikibase-listdatatypes-url-body": "一個URL的文字字元。URL被限制於外部連結的方式寫於wiki語法中。",
 	"wikibase-listdatatypes-external-id-head": "外部識別碼",
 	"wikibase-listdatatypes-external-id-body": "用於外部識別碼的原義資料欄位。外部識別碼可能會自動連結至以權威資源來展示出。",
 	"wikibase-listdatavaluetypes-name-string": "字串",

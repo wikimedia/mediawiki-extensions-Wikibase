@@ -6,7 +6,8 @@
 			"Salpusnis",
 			"Albertas",
 			"Zygimantus",
-			"Manvydasz"
+			"Manvydasz",
+			"Tomasdd"
 		]
 	},
 	"wikibase-lib-desc": "Apima bendrą Wikibase ir Wikibase kliento išplėtimų funkcionalumą.",
@@ -78,7 +79,7 @@
 	"datatypes-type-monolingualtext": "Vienkalbis tekstas",
 	"datatypes-type-multilingualtext": "Daugiakalbis tekstas",
 	"datatypes-type-number": "Numeris",
-	"datatypes-type-mediawiki-title": "MediaWiki pavadinimas",
+	"datatypes-type-mediawiki-title": "Medijaviki pavadinimas",
 	"datatypes-type-unknown": "Nenurodyta",
 	"datatypes-type-globe-coordinate": "Geografinės koordinatės",
 	"datatypes-type-time": "Laikas",
