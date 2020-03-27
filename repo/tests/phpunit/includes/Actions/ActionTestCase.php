@@ -123,25 +123,18 @@ class ActionTestCase extends \MediaWikiTestCase {
 			$params = [];
 		}
 
-		if ( !( $page instanceof Article ) ) {
-			$article = new Article( $page->getTitle() );
-		} else {
-			$article = $page;
-		}
-
 		$context = new RequestContext();
 		$context->setRequest( new FauxRequest( $params, $wasPosted ) );
 		$context->setUser( $this->user );     // determined by setUser()
 		$context->setLanguage( $wgLang ); // qqx as per setUp()
-		$context->setTitle( $article->getTitle() );
+		$context->setWikiPage( $page );
+		$article = Article::newFromWikiPage( $page, $context );
 
 		// Must be set separately, similar to what MediaWiki::performRequest() does.
 		// Currently used in ViewEntityActionTest.
 		if ( !empty( $params['printable'] ) ) {
 			$context->getOutput()->setPrintable();
 		}
-
-		$article->setContext( $context );
 
 		if ( preg_match( '/^[a-z]+$/', $action ) ) {
 			$action = Action::factory( $action, $article, $context );
