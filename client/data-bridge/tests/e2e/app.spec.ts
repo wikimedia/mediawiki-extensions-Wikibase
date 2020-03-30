@@ -430,8 +430,7 @@ describe( 'app', () => {
 			save!.click();
 			await budge();
 
-			const sentData = { claims: testSet.entities[ entityId ].claims };
-			sentData.claims[ propertyId ].push( {
+			const sentData = { claims: { [ propertyId ]: [ {
 				rank: 'preferred',
 				type: 'statement',
 				mainsnak: {
@@ -443,7 +442,7 @@ describe( 'app', () => {
 						value: newStringDataValue,
 					},
 				},
-			} );
+			} ] } };
 
 			expect( postWithEditToken ).toHaveBeenCalledTimes( 1 );
 			expect( postWithEditToken ).toHaveBeenCalledWith( {

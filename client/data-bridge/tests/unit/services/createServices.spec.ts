@@ -6,6 +6,7 @@ import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwMessagesRepository from '@/data-access/MwMessagesRepository';
+import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import WbRepo from '@/@types/wikibase/WbRepo';
 import ApiCore from '@/data-access/ApiCore';
 import BatchingApi from '@/data-access/BatchingApi';
@@ -27,9 +28,14 @@ jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
 	} );
 } );
 
-const mockWritingEntityRepository = {};
+const mockApiWritingRepository = {};
 jest.mock( '@/data-access/ApiWritingRepository', () => {
-	return jest.fn().mockImplementation( () => mockWritingEntityRepository );
+	return jest.fn().mockImplementation( () => mockApiWritingRepository );
+} );
+
+const mockTrimmingWritingRepository = {};
+jest.mock( '@/data-access/TrimmingWritingRepository', () => {
+	return jest.fn().mockImplementation( () => mockTrimmingWritingRepository );
 } );
 
 const mockEntityLabelRepository = {};
@@ -229,7 +235,9 @@ describe( 'createServices', () => {
 				.toBeInstanceOf( mwWindow.mw.ForeignApi );
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBe( editTags );
-			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
+			expect( TrimmingWritingRepository as unknown as jest.Mock )
+				.toHaveBeenCalledWith( mockApiWritingRepository );
+			expect( services.get( 'writingEntityRepository' ) ).toBe( mockTrimmingWritingRepository );
 		} );
 
 		it( 'add undefinded to tags, if they are a empty list', () => {
@@ -246,7 +254,9 @@ describe( 'createServices', () => {
 
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBeUndefined();
-			expect( services.get( 'writingEntityRepository' ) ).toBe( mockWritingEntityRepository );
+			expect( TrimmingWritingRepository as unknown as jest.Mock )
+				.toHaveBeenCalledWith( mockApiWritingRepository );
+			expect( services.get( 'writingEntityRepository' ) ).toBe( mockTrimmingWritingRepository );
 		} );
 	} );
 

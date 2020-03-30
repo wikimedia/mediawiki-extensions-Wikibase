@@ -2,6 +2,7 @@ import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
 import ClientRouter from '@/data-access/ClientRouter';
+import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import ServiceContainer from '@/services/ServiceContainer';
 import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -49,10 +50,10 @@ export default function createServices(
 	);
 	const repoApi = new BatchingApi( new ApiCore( repoMwApi ) );
 
-	services.set( 'writingEntityRepository', new ApiWritingRepository(
+	services.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
 		repoMwApi,
 		editTags.length === 0 ? undefined : editTags,
-	) );
+	) ) );
 
 	const pageContentLanguage = mwWindow.mw.config.get( 'wgPageContentLanguage' );
 	services.set( 'entityLabelRepository', new ApiEntityLabelRepository(
