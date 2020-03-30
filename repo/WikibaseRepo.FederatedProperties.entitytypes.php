@@ -13,15 +13,17 @@
  * @license GPL-2.0-or-later
  */
 
+use Wikibase\Lib\Store\EntityArticleIdNullLookup;
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup;
 use Wikibase\Repo\FederatedProperties\ApiBasedEntityUrlLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
 return [
 	'property' => [
 		'article-id-lookup-callback' => function () {
-			return new \Wikibase\Lib\Store\EntityArticleIdNullLookup();
+			return new EntityArticleIdNullLookup();
 		},
 		'url-lookup-callback' => function () {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -44,6 +46,13 @@ return [
 					$wikibaseRepo->newFederatedPropertiesApiClient(),
 					$wikibaseRepo->getContentModelMappings()
 				)
+			);
+		},
+		'entity-search-callback' => function() {
+			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+			return new ApiEntitySearchHelper(
+				$wikibaseRepo->newFederatedPropertiesApiClient()
 			);
 		},
 	]

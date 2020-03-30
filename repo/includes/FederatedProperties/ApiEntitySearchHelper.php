@@ -56,10 +56,11 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 			'type' => $entityType,
 			'limit' => $limit,
 			'strictlanguage' => $strictLanguage,
-			'uselang' => $languageCode
+			'uselang' => $languageCode,
+			'format' => 'json',
 		];
 		$response = $this->api->get( $params );
-		$jsonResult = $this->getJson( $response->getBody() );
+		$jsonResult = json_decode( $response->getBody()->getContents() );
 
 		if ( $response->getStatusCode() !== 200 ) {
 
@@ -78,7 +79,4 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		return $allResults;
 	}
 
-	private function getJson( $response ) {
-		return json_decode( $response );
-	}
 }

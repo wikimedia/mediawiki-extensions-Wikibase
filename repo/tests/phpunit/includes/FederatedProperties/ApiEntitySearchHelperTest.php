@@ -10,6 +10,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
+use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @covers \Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper
@@ -29,7 +30,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 */
 	public function testGetRankedSearchResults( $langCode, $params, $responseData, $expectedResultsEntityIds ) {
 
-		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode ] );
+		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
 
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
@@ -76,7 +77,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 			->willReturn( $statusCode );
 		$mwResponse->expects( $this->any() )
 			->method( 'getBody' )
-			->willReturn( json_encode( $responseData ) );
+			->willReturn( stream_for( json_encode( $responseData ) ) );
 		return $mwResponse;
 	}
 
@@ -99,7 +100,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 */
 	public function testGetRankedSearchResultsThrowsExceptionForFailureApiResponses( $langCode, $params, $responseData, $statusCode ) {
 
-		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode ] );
+		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
 			->method( 'get' )
