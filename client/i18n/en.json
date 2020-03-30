@@ -159,5 +159,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 is marked as having <i>unknown value</i> on {{WBREPONAME}}. Editing values marked as <i>unknown value</i> is currently not possible.",
 	"wikibase-client-data-bridge-novalue-error-head": "Editing the value for $1 is currently not supported",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 is marked as having <i>no value</i> on {{WBREPONAME}}. Editing values marked as <i>no value</i> is currently not possible.",
-	"wikibase-client-data-bridge-reference-note": "Editing references will be possible on {{WBREPONAME}} after saving"
+	"wikibase-client-data-bridge-reference-note": "Editing references will be possible on {{WBREPONAME}} after saving",
+	"wikibase-client-data-bridge-thank-you-head": "Thank you for your edit!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "You can edit references for this property on {{WBREPONAME}} by clicking the button below.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Edit reference on {{WBREPONAME}}"
 }

@@ -1,0 +1,7 @@
+@mixin h3() {
+	// this is named after the style in the wmf style guide, it is not restricted to <h3></h3> elements
+
+	font-weight: $bold-font-weight;
+	line-height: $line-height-heading;
+	font-size: px-to-rem( 20px );
+}
