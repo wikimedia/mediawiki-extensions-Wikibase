@@ -281,6 +281,17 @@ describe( 'App.vue', () => {
 		expect( wrapper.emitted( Events.onSaved ) ).toBeFalsy();
 	} );
 
+	it( 'hides the save button after changes are saved', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+		expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
+	} );
+
 	it( 'renders the cancel button using the CANCEL message', () => {
 		const cancelMessage = 'cancel that';
 		const messageGet = jest.fn().mockReturnValue( cancelMessage );

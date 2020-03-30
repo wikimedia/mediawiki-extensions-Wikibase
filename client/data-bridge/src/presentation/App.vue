@@ -12,7 +12,7 @@
 					:squary="true"
 					@click="save"
 					:disabled="!canStartSaving"
-					v-if="!hasError"
+					v-if="!hasError && !isSaved"
 				/>
 			</template>
 			<template v-slot:safeAction>
