@@ -53,6 +53,11 @@ export default class ReferenceSection extends mixins( StateMixin ) {
 		display: block;
 
 		@include body-responsive();
+
+		// undo some styles of parser-formatted reference
+		.mw-parser-output p {
+			margin: 0;
+		}
 	}
 
 	&__note {
