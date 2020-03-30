@@ -541,13 +541,13 @@ describe( 'app', () => {
 			save!.click();
 			await budge();
 
-			const getLicenseCancelButton = function (): HTMLElement | null {
+			const getLicenseCloseButton = function (): HTMLElement | null {
 				return select(
-					'.wb-db-app .wb-db-license a.wb-ui-event-emitting-button--cancel',
+					'.wb-db-app .wb-db-license a.wb-ui-event-emitting-button--close',
 				);
 			};
-			let licenseCancelButton = getLicenseCancelButton();
-			licenseCancelButton!.click();
+			let licenseCloseButton = getLicenseCloseButton();
+			licenseCloseButton!.click();
 			await budge();
 
 			// showing the license again
@@ -555,8 +555,8 @@ describe( 'app', () => {
 			await budge();
 			expect( postWithEditToken ).not.toHaveBeenCalled();
 
-			licenseCancelButton = getLicenseCancelButton();
-			licenseCancelButton!.click();
+			licenseCloseButton = getLicenseCloseButton();
+			licenseCloseButton!.click();
 			await budge();
 
 			// showing the license again
@@ -571,8 +571,8 @@ describe( 'app', () => {
 		} );
 	} );
 
-	describe( 'cancel', () => {
-		let cancel: HTMLElement|null;
+	describe( 'close', () => {
+		let close: HTMLElement|null;
 
 		beforeEach( async () => {
 			const testLink = prepareTestEnv( {} );
@@ -581,30 +581,30 @@ describe( 'app', () => {
 			testLink!.click();
 			await budge();
 
-			cancel = select(
-				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--cancel',
+			close = select(
+				'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--close',
 			);
 
 			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
-			expect( cancel ).not.toBeNull();
+			expect( close ).not.toBeNull();
 		} );
 
 		it( 'closes on click', async () => {
-			cancel!.click();
+			close!.click();
 			await budge();
 
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'closes on enter', async () => {
-			enter( cancel! );
+			enter( close! );
 			await budge();
 
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );
 		} );
 
 		it( 'closes on space', async () => {
-			space( cancel! );
+			space( close! );
 			await budge();
 
 			expect( clearWindows ).toHaveBeenCalledTimes( 1 );

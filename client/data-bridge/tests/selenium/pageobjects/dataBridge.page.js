@@ -24,7 +24,7 @@ class DataBridgePage extends Page {
 		const headerClass = '.wb-ui-processdialog-header';
 		return {
 			SAVE: `${headerClass} .wb-ui-event-emitting-button--primaryProgressive`,
-			CANCEL: `${headerClass} .wb-ui-event-emitting-button--cancel`,
+			CLOSE: `${headerClass} .wb-ui-event-emitting-button--close`,
 		};
 	}
 
@@ -48,7 +48,7 @@ class DataBridgePage extends Page {
 		return '.wb-db-license';
 	}
 
-	static get LICENSE_CANCEL_BUTTON() {
+	static get LICENSE_CLOSE_BUTTON() {
 		return `${DataBridgePage.LICENSE_POPUP} .wb-db-license__button a`;
 	}
 
@@ -133,15 +133,15 @@ class DataBridgePage extends Page {
 		);
 	}
 
-	get licenseCancelButton() {
+	get licenseCloseButton() {
 		return $(
-			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.LICENSE_CANCEL_BUTTON}`
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.LICENSE_CLOSE_BUTTON}`
 		);
 	}
 
-	get cancelButton() {
+	get closeButton() {
 		return $(
-			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.CANCEL}`
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.CLOSE}`
 		);
 	}
 

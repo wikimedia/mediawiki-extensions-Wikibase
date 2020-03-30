@@ -212,7 +212,7 @@ describe( 'App.vue', () => {
 	} );
 
 	it(
-		'dismisses License on License\'s cancel button click and shows it again on next save button click',
+		'dismisses License on License\'s close button click and shows it again on next save button click',
 		async () => {
 			const bridgeSave = jest.fn();
 			const localStore = hotUpdateDeep( store, {
@@ -231,7 +231,7 @@ describe( 'App.vue', () => {
 			await localVue.nextTick();
 			expect( wrapper.find( License ).exists() ).toBe( true );
 
-			await wrapper.find( License ).vm.$emit( 'cancel' );
+			await wrapper.find( License ).vm.$emit( 'close' );
 			await localVue.nextTick();
 			expect( wrapper.find( License ).exists() ).toBe( false );
 
@@ -292,7 +292,7 @@ describe( 'App.vue', () => {
 		expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 	} );
 
-	it( 'renders the cancel button using the CANCEL message', () => {
+	it( 'renders the close button using the CANCEL message', () => {
 		const cancelMessage = 'cancel that';
 		const messageGet = jest.fn().mockReturnValue( cancelMessage );
 		const wrapper = shallowMount( App, {
@@ -308,24 +308,24 @@ describe( 'App.vue', () => {
 		} );
 
 		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
-		const button = wrapper.find( '.wb-ui-event-emitting-button--cancel' );
+		const button = wrapper.find( '.wb-ui-event-emitting-button--close' );
 		expect( button.props( 'message' ) ).toBe( cancelMessage );
 	} );
 
-	it( 'cancels on cancel button click', async () => {
+	it( 'cancels on close button click', async () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
 			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--cancel' ).vm.$emit( 'click' );
+		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 
 		expect( wrapper.emitted( Events.onCancel ) ).toBeTruthy();
 	} );
 
-	it( 'disables cancel while in saving state', async () => {
+	it( 'disables close while in saving state', async () => {
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
 		const wrapper = shallowMount( App, {
 			store,
@@ -333,7 +333,7 @@ describe( 'App.vue', () => {
 			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--cancel' ).trigger( 'click' );
+		await wrapper.find( '.wb-ui-event-emitting-button--close' ).trigger( 'click' );
 		await localVue.nextTick();
 
 		expect( wrapper.emitted( Events.onCancel ) ).toBeFalsy();

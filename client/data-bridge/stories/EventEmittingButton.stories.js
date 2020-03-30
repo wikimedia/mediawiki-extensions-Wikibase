@@ -62,41 +62,41 @@ storiesOf( 'EventEmittingButton', module )
 			message="primaryProgressive XL"
 		/>`,
 	} ) )
-	.add( 'cancel M', () => ( {
+	.add( 'close M', () => ( {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
-				type="cancel"
+				type="close"
 				size="M"
-				message="cancel"
+				message="close"
 			/>`,
 	} ) )
-	.add( 'cancel L', () => ( {
+	.add( 'close L', () => ( {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
-				type="cancel"
+				type="close"
 				size="L"
-				message="cancel"
+				message="close"
 			/>`,
 	} ) )
-	.add( 'cancel XL', () => ( {
+	.add( 'close XL', () => ( {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
-				type="cancel"
+				type="close"
 				size="XL"
-				message="cancel"
+				message="close"
 			/>`,
 	} ) )
-	.add( 'cancel squary', () => ( {
+	.add( 'close squary', () => ( {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
-				type="cancel"
+				type="close"
 				size="L"
 				:squary="true"
-				message="cancel"
+				message="close"
 			/>`,
 	} ) )
 	.add( 'primaryProgressive disabled', () => ( {
@@ -109,13 +109,13 @@ storiesOf( 'EventEmittingButton', module )
 				:disabled="true"
 			/>`,
 	} ) )
-	.add( 'cancel disabled', () => ( {
+	.add( 'close disabled', () => ( {
 		components: { EventEmittingButton },
 		template:
 			`<EventEmittingButton
-				type="cancel"
+				type="close"
 				size="L"
-				message="disabled cancel"
+				message="disabled close"
 				:disabled="true"
 			/>`,
 	} ) );

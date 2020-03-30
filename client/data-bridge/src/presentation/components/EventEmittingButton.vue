@@ -35,15 +35,15 @@ import { Prop } from 'vue-property-decorator';
 
 const validTypes = [
 	'primaryProgressive',
-	'cancel',
+	'close',
 ];
 
 const framelessTypes = [
-	'cancel',
+	'close',
 ];
 
 const imageOnlyTypes = [
-	'cancel',
+	'close',
 ];
 
 const validSizes = [
@@ -248,8 +248,8 @@ export default class EventEmittingButton extends Vue {
 		border-color: $border-color-base--disabled;
 	}
 
-	&--cancel {
-		background-image: $svg-cancel;
+	&--close {
+		background-image: $svg-close;
 	}
 
 	&--frameless {
