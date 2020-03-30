@@ -9,6 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface EntityUrlLookup {
 
-	public function getFullUrl( EntityId $id ): string;
+	public function getFullUrl( EntityId $id ): ?string;
 
 }

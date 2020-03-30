@@ -1,0 +1,175 @@
+{
+	"batchcomplete": "",
+	"query": {
+		"namespaces": {
+			"0": {
+				"id": 0,
+				"case": "first-letter",
+				"content": "",
+				"*": ""
+			},
+			"1": {
+				"id": 1,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Talk",
+				"*": "Talk"
+			},
+			"2": {
+				"id": 2,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "User",
+				"*": "User"
+			},
+			"3": {
+				"id": 3,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "User talk",
+				"*": "User talk"
+			},
+			"4": {
+				"id": 4,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Project",
+				"*": "Project"
+			},
+			"5": {
+				"id": 5,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Project talk",
+				"*": "Project talk"
+			},
+			"6": {
+				"id": 6,
+				"case": "first-letter",
+				"canonical": "File",
+				"*": "File"
+			},
+			"7": {
+				"id": 7,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "File talk",
+				"*": "File talk"
+			},
+			"8": {
+				"id": 8,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "MediaWiki",
+				"namespaceprotection": "editinterface",
+				"*": "MediaWiki"
+			},
+			"9": {
+				"id": 9,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "MediaWiki talk",
+				"*": "MediaWiki talk"
+			},
+			"10": {
+				"id": 10,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Template",
+				"*": "Template"
+			},
+			"11": {
+				"id": 11,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Template talk",
+				"*": "Template talk"
+			},
+			"12": {
+				"id": 12,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Help",
+				"*": "Help"
+			},
+			"13": {
+				"id": 13,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Help talk",
+				"*": "Help talk"
+			},
+			"14": {
+				"id": 14,
+				"case": "first-letter",
+				"canonical": "Category",
+				"*": "Category"
+			},
+			"15": {
+				"id": 15,
+				"case": "first-letter",
+				"subpages": "",
+				"canonical": "Category talk",
+				"*": "Category talk"
+			},
+			"120": {
+				"id": 120,
+				"case": "first-letter",
+				"canonical": "Item",
+				"defaultcontentmodel": "wikibase-item",
+				"*": "Item"
+			},
+			"121": {
+				"id": 121,
+				"case": "first-letter",
+				"canonical": "Item talk",
+				"*": "Item talk"
+			},
+			"122": {
+				"id": 122,
+				"case": "first-letter",
+				"canonical": "Property",
+				"defaultcontentmodel": "wikibase-property",
+				"*": "Property"
+			},
+			"123": {
+				"id": 123,
+				"case": "first-letter",
+				"canonical": "Property talk",
+				"*": "Property talk"
+			},
+			"146": {
+				"id": 146,
+				"case": "first-letter",
+				"canonical": "Lexeme",
+				"defaultcontentmodel": "wikibase-lexeme",
+				"*": "Lexeme"
+			},
+			"147": {
+				"id": 147,
+				"case": "first-letter",
+				"canonical": "Lexeme talk",
+				"*": "Lexeme talk"
+			},
+			"2600": {
+				"id": 2600,
+				"case": "first-letter",
+				"canonical": "Topic",
+				"defaultcontentmodel": "flow-board",
+				"*": "Topic"
+			},
+			"-2": {
+				"id": -2,
+				"case": "first-letter",
+				"canonical": "Media",
+				"*": "Media"
+			},
+			"-1": {
+				"id": -1,
+				"case": "first-letter",
+				"canonical": "Special",
+				"*": "Special"
+			}
+		}
+	}
+}
