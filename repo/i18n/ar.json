@@ -439,7 +439,7 @@
 	"wikibase-entity-save-error-heading": "حدث خطأ ما",
 	"wikibase-entity-save-error-message": "لا يمكن نشر تغييرك، يمكنك محاولة النقر فوق زر النشر مرة أخرى.",
 	"wikibase-tainted-ref-warning-icon-title": "يحتوي هذا البيان على بعض القضايا المحتملة",
-	"wikibase-tainted-ref-popper-text": "تغيرت القيمة، لكن المرجع ظل كما هو.",
+	"wikibase-tainted-ref-popper-text": "قيمة هذا البيان تغيرت، لكن المرجع ظل كما هو. يمكنك إزالة هذا التحذير في حالة ما إذا كان المرجع مازال صحيحا.",
 	"wikibase-tainted-ref-popper-title": "المرجع/عدم تطابق القيمة المحتمل",
 	"wikibase-tainted-ref-popper-help-link-title": "صفحة المساعدة لهذا النوع من القيود",
 	"wikibase-tainted-ref-popper-help-link-text": "مساعدة",

@@ -163,5 +163,6 @@
 	"wikibase-client-data-bridge-somevalue-error-head": "Редагування значення для $1 наразі не підтримується",
 	"wikibase-client-data-bridge-somevalue-error-body": "Властивість $1 на сайті {{WBREPONAME}} позначено як таку, що має <i>невідоме значення</i>. Редагування значень, позначених як <i>невідоме значення</i>, наразі неможливе.",
 	"wikibase-client-data-bridge-novalue-error-head": "Редагування значення для $1 наразі не підтримується",
-	"wikibase-client-data-bridge-novalue-error-body": "Властивість $1 на сайті {{WBREPONAME}} позначено як таку, що <i>не має значення</i>. Редагування значень, позначених як такі, що <i>не мають значення</i>, наразі неможливе."
+	"wikibase-client-data-bridge-novalue-error-body": "Властивість $1 на сайті {{WBREPONAME}} позначено як таку, що <i>не має значення</i>. Редагування значень, позначених як такі, що <i>не мають значення</i>, наразі неможливе.",
+	"wikibase-client-data-bridge-reference-note": "Редагування посилань на джерела стане можливим на сайті {{WBREPONAME}} після збереження"
 }

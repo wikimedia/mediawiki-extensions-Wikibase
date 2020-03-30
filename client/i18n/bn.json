@@ -98,5 +98,6 @@
 	"unresolved-property-category": "অমীমাংসিত বৈশিষ্ট্যসহ পাতা",
 	"connected-redirect-category": "একটি {{WBREPONAME}} আইটেমে সংযুক্ত পুনর্নির্দেশ",
 	"connected-redirect-category-desc": "এই বিষয়শ্রেণী পুনর্নির্দেশ পৃষ্ঠাগুলি তালিকাভুক্ত যা একটি {{WBREPONAME}} আইটেমে সংযুক্ত।",
-	"wikibase-client-data-bridge-permissions-error-unknown-head": "অজানা অনুমতি ত্রুটি"
+	"wikibase-client-data-bridge-permissions-error-unknown-head": "অজানা অনুমতি ত্রুটি",
+	"wikibase-client-data-bridge-reference-note": "সংরক্ষণের পর {{WBREPONAME}}-এ তথ্যসূত্রগুলি সম্পাদনা করা সম্ভব হবে"
 }

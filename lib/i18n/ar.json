@@ -29,6 +29,7 @@
 	"wikibase-deletedentity-property": "خاصية محذوفة",
 	"wikibase-deletedentity-query": "طلب محذوف",
 	"wikibase-error-unexpected": "خطأ: $1.",
+	"wikibase-error-unknown": "حدث خطأ.",
 	"wikibase-error-save-generic": "وقع خطأ عند الحفظ فلم تحفظ تعديلاتك.",
 	"wikibase-error-remove-generic": "وقع خطأ عند الإزالة ولم تحفظ تعديلاتك.",
 	"wikibase-error-save-connection": "وقع خطأ في الاتصال عند الحفظ فلم تحفظ تعديلاتك. تحقق من الاتصال بالإنترنت.",
@@ -138,6 +139,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "أنشأ كيانا جديدا",
 	"wikibase-entity-summary-wbeditentity-update": "غير كيانا",
 	"wikibase-entity-summary-wbeditentity-override": "أفرغ كيانا",
+	"wikibase-entity-summary-wbeditentity-update-languages": "غير العلامة، الوصف و/أو الأسماء المستعارة في $3 {{PLURAL:$3|لغة|لغات}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "غير العلامة، الوصف و/أو الأسماء المستعارة في {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "غير العلامة الوصف و/أو الأسماء المستعارة في $3 {{PLURAL:$3|لغة|لغات}}، والأجزاء الأخرى",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "غير العلامة، الوصف و/أو الأسماء المستعارة في {{#commaseparatedlist: $3}}، وأجزاء أخرى",
 	"wikibase-entity-summary-wbsetreference": "تحديد مرجع",
 	"wikibase-entity-summary-wbsetreference-add": "إضافة مرجع إلى ادعاء",
 	"wikibase-entity-summary-wbsetreference-set": "تعديل مرجع الادعاء",
@@ -197,5 +202,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "إنشاء خاصية جديدة",
 	"wikibase-property-summary-wbeditentity-update": "تعديل خاصية",
 	"wikibase-property-summary-wbeditentity-override": "إفراغ خاصية",
-	"wikibase-property-summary-special-create-property": "إنشاء خاصية بـ[$2] ذات {{PLURAL:$1|ذات قيمة واحدة|ذات قيمتين|ذات $1 قيم|ذات $1 قيمة|0=بلا قيم}}"
+	"wikibase-property-summary-special-create-property": "إنشاء خاصية بـ[$2] ذات {{PLURAL:$1|ذات قيمة واحدة|ذات قيمتين|ذات $1 قيم|ذات $1 قيمة|0=بلا قيم}}",
+	"wikibase-reference-formatter-snak-retrieved": "استرجع $1"
 }

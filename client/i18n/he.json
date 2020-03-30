@@ -155,5 +155,6 @@
 	"wikibase-client-data-bridge-somevalue-error-head": "עריכת הערך של $1 אינה נתמכת כעת",
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 מסומן בתור בעל <i>ערך בלתי־יודע</i> (unknown) באתר {{WBREPONAME}}. עריכת ערכים שמסומנים בתור <i>ערך בלתי־יודע</i> אינה אפשרית כעת.",
 	"wikibase-client-data-bridge-novalue-error-head": "עריכת הערך של $1 אינה נתמכת כעת",
-	"wikibase-client-data-bridge-novalue-error-body": "$1 מסומן בתור בעל <i>ערך חסר</i> (no value) באתר {{WBREPONAME}}. עריכת ערכים שמסומנים בתור <i>ערך חסר</i> אינה אפשרית כעת."
+	"wikibase-client-data-bridge-novalue-error-body": "$1 מסומן בתור בעל <i>ערך חסר</i> (no value) באתר {{WBREPONAME}}. עריכת ערכים שמסומנים בתור <i>ערך חסר</i> אינה אפשרית כעת.",
+	"wikibase-client-data-bridge-reference-note": "עריכת מקורות תהיה אפשרית באתר {{WBREPONAME}} אחרי שמירה"
 }

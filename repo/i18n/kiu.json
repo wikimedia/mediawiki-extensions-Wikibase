@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mirzali"
+			"Mirzali",
+			"Orbot707"
 		]
 	},
+	"wikibase-edit": "bıvurne",
 	"wikibase-cancel": "bıtexelne",
 	"wikibase-sitelink-page-edit-placeholder": "pele",
 	"wikibase-itembytitle-lookup-page": "Pele:"

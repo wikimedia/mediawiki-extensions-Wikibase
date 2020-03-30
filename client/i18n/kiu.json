@@ -6,8 +6,11 @@
 		]
 	},
 	"tooltip-t-wikibase": "Gola data de eleqeyın çirs gre",
+	"wikibase-comment-update": "{{WBREPONAME}} made vuriya",
 	"wikibase-dataitem": "Unsurê {{WBREPONAME}}",
 	"wikibase-editlinks": "Gıreyan bıvurne",
 	"wikibase-editlinkstitle": "Gıreyanê zıwanmiyanan bıvurne",
-	"wikibase-linkitem-input-page": "Pele:"
+	"wikibase-linkitem-input-page": "Pele:",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Vurnayışê {{WBREPONAME}}"
 }

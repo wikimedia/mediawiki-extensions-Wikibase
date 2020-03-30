@@ -370,7 +370,7 @@
 	"wikibase-listdatatypes-tabular-data-head": "表形式データ",
 	"wikibase-listdatatypes-tabular-data-body": "ウィキメディア・コモンズで保管されている表形式データへのリンク。詳細は\"https://www.mediawiki.org/wiki/Help:Tabular_Data\"を参照。",
 	"wikibase-listdatatypes-quantity-head": "数量",
-	"wikibase-listdatatypes-quantity-body": "何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。\n* amount – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)\n* unit – デフォルトが\"1\"な、文字列の非明示部分 (標準化団体への対応付けは不明瞭です)\n* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値\n* upperbound - 量の上限\n* lowerbound - 量の下限",
+	"wikibase-listdatatypes-quantity-body": "何らかの明確に定義された単位に結びついた量を表すリテラルデータ。実際の単位は入力されたデータ値に含まれています。\n* amount – 文字列の非明示部分 (単位接頭辞の対応付けは不明瞭です)\n* unit – 既定値が\"1\"である、文字列の非明示部分 (標準化団体への対応付けは不明瞭です)\n* accuracy (省略可能) – value と同じ単位を持つ、明示のデータ値\n* upperbound - 量の上限\n* lowerbound - 量の下限",
 	"wikibase-listdatatypes-monolingualtext-head": "単一言語テキスト",
 	"wikibase-listdatatypes-monolingualtext-body": "他の言語に翻訳されない文字列のリテラルデータ。この型の文字列は一度定義されるとすべての言語で利用されます。典型的な用途としては、地元の言語で表記した地名、何らかの識別子、化学式、ラテン語の学名などがあります。\n* language - テキスト (text) 部分の言語を識別するための明示の値\n* value - 言語を特定した文字列、明示の値",
 	"wikibase-listdatatypes-multilingualtext-head": "多言語テキスト",
