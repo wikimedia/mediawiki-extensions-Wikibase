@@ -43,7 +43,7 @@ export default class ThankYou extends Vue {
 
 	private click(): void {
 		/**
-		 * How many times the user clicked the CTA to edit references on the repository
+		 * An event fired when the user clicks the CTA to edit references on the repository
 		 * @type {Event}
 		 */
 		this.$emit( 'opened-reference-edit-on-repo' );
