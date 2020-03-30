@@ -12881,12 +12881,12 @@ var es_object_values = __webpack_require__("07ac");
 var external_vue_ = __webpack_require__("8bbf");
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=fcb6e596&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"14c1fa46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/App.vue?vue&type=template&id=38816aef&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-db-app",attrs:{"id":"data-bridge-app"}},[_c('ProcessDialogHeader',{staticClass:"wb-db-app__header",scopedSlots:_vm._u([{key:"title",fn:function(){return [_c('span',{domProps:{"innerHTML":_vm._s(_vm.title)}})]},proxy:true},{key:"primaryAction",fn:function(){return [(!_vm.hasError && !_vm.isSaved)?_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.publishOrSave ),"type":"primaryProgressive","size":"L","squary":true,"disabled":!_vm.canStartSaving},on:{"click":_vm.save}}):_vm._e()]},proxy:true},{key:"safeAction",fn:function(){return [_c('EventEmittingButton',{attrs:{"message":_vm.$messages.get( _vm.$messages.KEYS.CANCEL ),"type":"close","size":"L","squary":true,"disabled":_vm.isSaving},on:{"click":_vm.close}})]},proxy:true}])}),_c('div',{staticClass:"wb-db-app__body"},[(_vm.hasError)?_c('ErrorWrapper'):(_vm.isSaved)?_c('ThankYou',{attrs:{"repo-link":_vm.repoLink},on:{"opened-reference-edit-on-repo":_vm.openedReferenceEditOnRepo}}):_c('Loading',{attrs:{"is-initializing":_vm.isInitializing,"is-saving":_vm.isSaving}},[(_vm.licenseIsVisible)?_c('div',{staticClass:"wb-db-app__license"},[_c('License',{on:{"close":_vm.dismissLicense}})],1):_vm._e(),_c('DataBridge',{class:[ 'wb-db-app__data-bridge', _vm.isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]})],1)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=fcb6e596&
+// CONCATENATED MODULE: ./src/presentation/App.vue?vue&type=template&id=38816aef&
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -17993,6 +17993,15 @@ function (_mixins) {
   }
 
   _createClass(App, [{
+    key: "close",
+    value: function close() {
+      if (this.isSaved) {
+        this.$emit(src_events.onSaved);
+      } else {
+        this.$emit(src_events.onCancel);
+      }
+    }
+  }, {
     key: "dismissLicense",
     value: function dismissLicense() {
       this.licenseIsVisible = false;
@@ -18012,11 +18021,6 @@ function (_mixins) {
     key: "openedReferenceEditOnRepo",
     value: function openedReferenceEditOnRepo() {
       this.$emit(src_events.onSaved);
-    }
-  }, {
-    key: "close",
-    value: function close() {
-      this.$emit(src_events.onCancel);
     }
   }, {
     key: "title",

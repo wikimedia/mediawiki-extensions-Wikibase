@@ -299,6 +299,21 @@ describe( 'App.vue', () => {
 		expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 	} );
 
+	it( 'emits saved event on close button click after saving is done', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+			stubs: { ProcessDialogHeader, EventEmittingButton },
+		} );
+
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+
+		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
+		await localVue.nextTick();
+
+		expect( wrapper.emitted( Events.onSaved ) ).toHaveLength( 1 );
+	} );
+
 	it( 'renders the close button using the CANCEL message', () => {
 		const cancelMessage = 'cancel that';
 		const messageGet = jest.fn().mockReturnValue( cancelMessage );

@@ -125,6 +125,14 @@ export default class App extends mixins( StateMixin ) {
 		return this.rootModule.state.originalHref;
 	}
 
+	public close(): void {
+		if ( this.isSaved ) {
+			this.$emit( Events.onSaved );
+		} else {
+			this.$emit( Events.onCancel );
+		}
+	}
+
 	public dismissLicense(): void {
 		this.licenseIsVisible = false;
 	}
@@ -142,10 +150,6 @@ export default class App extends mixins( StateMixin ) {
 
 	public openedReferenceEditOnRepo(): void {
 		this.$emit( Events.onSaved );
-	}
-
-	public close(): void {
-		this.$emit( Events.onCancel );
 	}
 }
 </script>
