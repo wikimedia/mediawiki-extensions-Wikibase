@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests;
 
-use LockManagerGroup;
 use LogicException;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
@@ -91,7 +90,8 @@ class TestDispatchCoordinator extends Maintenance {
 			$settings->getSetting( 'dispatchingLockManager' )
 		);
 		if ( !is_null( $lockManagerName ) ) {
-			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+			$lockManager = MediaWikiServices::getInstance()->getLockManagerGroupFactory()
+				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),

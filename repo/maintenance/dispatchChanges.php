@@ -3,7 +3,6 @@
 namespace Wikibase;
 
 use Exception;
-use LockManagerGroup;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -352,11 +351,13 @@ class DispatchChanges extends Maintenance {
 	 * @return SqlChangeDispatchCoordinator
 	 */
 	private function getCoordinator( SettingsArray $settings, LoggerInterface $logger ) {
+		$services = MediaWikiServices::getInstance();
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
-		$LBFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$LBFactory = $services->getDBLoadBalancerFactory();
 		if ( !is_null( $lockManagerName ) ) {
-			$lockManager = LockManagerGroup::singleton( wfWikiID() )->get( $lockManagerName );
+			$lockManager = $services->getLockManagerGroupFactory()
+				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
 			return new LockManagerSqlChangeDispatchCoordinator(
 				$lockManager,
 				$LBFactory,
