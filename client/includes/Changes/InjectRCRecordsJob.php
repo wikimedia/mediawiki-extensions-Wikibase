@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -49,7 +49,7 @@ class InjectRCRecordsJob extends Job {
 	private $rcFactory;
 
 	/**
-	 * @var RecentChangesDuplicateDetector|null
+	 * @var RecentChangesFinder|null
 	 */
 	private $rcDuplicateDetector = null;
 
@@ -159,7 +159,7 @@ class InjectRCRecordsJob extends Job {
 		$this->logger = new NullLogger();
 	}
 
-	public function setRecentChangesDuplicateDetector( RecentChangesDuplicateDetector $rcDuplicateDetector ) {
+	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ) {
 		$this->rcDuplicateDetector = $rcDuplicateDetector;
 	}
 
@@ -253,7 +253,7 @@ class InjectRCRecordsJob extends Job {
 			$rc = $this->rcFactory->newRecentChange( $change, $title, $rcAttribs );
 
 			if ( $this->rcDuplicateDetector
-				&& $this->rcDuplicateDetector->changeExists( $rc )
+				&& $this->rcDuplicateDetector->getRecentChangeId( $rc ) !== null
 			) {
 				$this->logger->debug( __FUNCTION__ . ": skipping duplicate RC entry for " . $title->getFullText() );
 			} else {

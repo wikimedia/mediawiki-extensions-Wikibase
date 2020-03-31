@@ -5,11 +5,11 @@ namespace Wikibase\Client\Tests\RecentChanges;
 use MediaWiki\MediaWikiServices;
 use RecentChange;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
- * @covers \Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector
+ * @covers \Wikibase\Client\RecentChanges\RecentChangesFinder
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -18,7 +18,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
+class RecentChangesFinderTest extends \MediaWikiTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
@@ -26,10 +26,10 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 		$this->tablesUsed[] = 'recentchanges';
 	}
 
-	public function provideChangeExists() {
+	public function provideGetRecentChangeId() {
 		return [
 			'same' => [ true, [
-				'rc_id' => 17,
+				'rc_id' => 4353,
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
 				'rc_user_text' => 'Test',
@@ -48,7 +48,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 				],
 			] ],
 			'irrelevant differences' => [ true, [
-				'rc_id' => 1117, // ignored
+				'rc_id' => 1117,
 				'rc_timestamp' => '20111111111111',
 				'rc_user' => 23,
 				'rc_user_text' => 'Test',
@@ -146,19 +146,23 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @dataProvider provideChangeExists
+	 * @dataProvider provideGetRecentChangeId
 	 */
-	public function testChangeExists( $expected, array $changeData ) {
+	public function testGetRecentChangeId( $expected, array $changeData ) {
 		$connectionManager = new SessionConsistentConnectionManager(
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
-		$detector = new RecentChangesDuplicateDetector( $connectionManager );
+		$detector = new RecentChangesFinder( $connectionManager );
 
-		$this->initRecentChanges();
+		$relevantId = $this->initRecentChanges();
 
 		$change = $this->newChange( $changeData );
 
-		$this->assertEquals( $expected, $detector->changeExists( $change ), 'changeExists()' );
+		if ( $expected ) {
+			$this->assertSame( $relevantId, $detector->getRecentChangeId( $change ) );
+		} else {
+			$this->assertNull( $detector->getRecentChangeId( $change ) );
+		}
 	}
 
 	private function newChange( array $changeData ) {
@@ -213,7 +217,6 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 
 	private function initRecentChanges() {
 		$change = $this->newChange( [
-			'rc_id' => 17,
 			'rc_timestamp' => '20111111111111',
 			'rc_user' => 23,
 			'rc_user_text' => 'Test',
@@ -234,7 +237,26 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 		$change->save();
 
 		$change = $this->newChange( [
-			'rc_id' => 18,
+			'rc_timestamp' => '20121212121212',
+			'rc_user' => 23,
+			'rc_user_text' => 'Test',
+			'rc_namespace' => 0,
+			'rc_title' => 'Test',
+			'rc_comment' => 'Testing',
+			'rc_type' => RC_EXTERNAL,
+			'rc_source' => 'foo', // different source
+			'rc_last_oldid' => 11,
+			'rc_this_oldid' => 12,
+			'rc_params' => [
+				'wikibase-repo-change' => [
+					'parent_id' => 11,
+					'rev_id' => 12,
+				]
+			]
+		] );
+		$change->save();
+
+		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
 			'rc_user' => 23,
 			'rc_user_text' => 'Test',
@@ -254,26 +276,7 @@ class RecentChangesDuplicateDetectorTest extends \MediaWikiTestCase {
 		] );
 		$change->save();
 
-		$change = $this->newChange( [
-			'rc_id' => 19,
-			'rc_timestamp' => '20121212121212',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
-			'rc_namespace' => 0,
-			'rc_title' => 'Test',
-			'rc_comment' => 'Testing',
-			'rc_type' => RC_EXTERNAL,
-			'rc_source' => 'foo', // different source
-			'rc_last_oldid' => 11,
-			'rc_this_oldid' => 12,
-			'rc_params' => [
-				'wikibase-repo-change' => [
-					'parent_id' => 11,
-					'rev_id' => 12,
-				]
-			]
-		] );
-		$change->save();
+		return $change->getAttribute( 'rc_id' );
 	}
 
 }

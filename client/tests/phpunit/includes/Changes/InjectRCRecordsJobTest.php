@@ -7,7 +7,7 @@ use RecentChange;
 use Title;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\TitleFactory;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
@@ -87,10 +87,10 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * @return RecentChangesDuplicateDetector|MockObject
+	 * @return RecentChangesFinder|MockObject
 	 */
 	private function getRCDupeDetectorMock() {
-		$rcDupeDetector = $this->getMockBuilder( RecentChangesDuplicateDetector::class )
+		$rcDupeDetector = $this->getMockBuilder( RecentChangesFinder::class )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -443,7 +443,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		$rcDupeDetector = $this->getRCDupeDetectorMock();
 
 		$rcDupeDetector->expects( $this->once() )
-			->method( 'changeExists' )
+			->method( 'getRecentChangeId' )
 			->with( $rc );
 
 		$params = [
@@ -462,7 +462,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 		);
 
 		$job->setTitleFactory( $this->getTitleFactoryMock() );
-		$job->setRecentChangesDuplicateDetector( $rcDupeDetector );
+		$job->setRecentChangesFinder( $rcDupeDetector );
 
 		$job->run();
 	}

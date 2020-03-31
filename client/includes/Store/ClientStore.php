@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Store;
 
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -24,9 +24,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 interface ClientStore {
 
 	/**
-	 * @return RecentChangesDuplicateDetector|null
+	 * @return RecentChangesFinder|null
 	 */
-	public function getRecentChangesDuplicateDetector();
+	public function getRecentChangesFinder();
 
 	/**
 	 * @return SiteLinkLookup

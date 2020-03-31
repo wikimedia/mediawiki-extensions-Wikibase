@@ -182,7 +182,7 @@ call_user_func( function() {
 			$params
 		);
 
-		$job->setRecentChangesDuplicateDetector( $wbServices->getStore()->getRecentChangesDuplicateDetector() );
+		$job->setRecentChangesFinder( $wbServices->getStore()->getRecentChangesFinder() );
 
 		$job->setLogger( $wbServices->getLogger() );
 		$job->setStats( $mwServices->getStatsdDataFactory() );

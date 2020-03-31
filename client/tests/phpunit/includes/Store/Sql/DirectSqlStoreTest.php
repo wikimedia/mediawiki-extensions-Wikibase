@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Store\Sql;
 
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -88,7 +88,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			[ 'getEntityIdLookup', EntityIdLookup::class ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class ],
 			[ 'getEntityChangeLookup', EntityChangeLookup::class ],
-			[ 'getRecentChangesDuplicateDetector', RecentChangesDuplicateDetector::class ],
+			[ 'getRecentChangesFinder', RecentChangesFinder::class ],
 		];
 	}
 

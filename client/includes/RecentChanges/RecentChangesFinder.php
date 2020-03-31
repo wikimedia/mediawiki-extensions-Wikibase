@@ -11,7 +11,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class RecentChangesDuplicateDetector {
+class RecentChangesFinder {
 
 	/**
 	 * @var SessionConsistentConnectionManager
@@ -23,14 +23,14 @@ class RecentChangesDuplicateDetector {
 	}
 
 	/**
-	 * Checks if a recent change entry already exists in the recentchanges table
+	 * Checks if a recent change entry already exists in the recentchanges table and returns its id.
 	 *
 	 * @param RecentChange $change
 	 *
 	 * @throws MWException
-	 * @return bool
+	 * @return int|null
 	 */
-	public function changeExists( RecentChange $change ) {
+	public function getRecentChangeId( RecentChange $change ) {
 		$attribs = $change->getAttributes();
 
 		//XXX: need to check master?
@@ -49,7 +49,7 @@ class RecentChangesDuplicateDetector {
 		);
 
 		if ( $res->numRows() === 0 ) {
-			return false;
+			return null;
 		}
 
 		$changeMetadata = $this->getMetadata( $attribs['rc_params'] );
@@ -65,11 +65,11 @@ class RecentChangesDuplicateDetector {
 
 			if ( $rev_id === $changeRevId
 				&& $parent_id === $changeParentId ) {
-				return true;
+				return (int) $rc->rc_id;
 			}
 		}
 
-		return false;
+		return null;
 	}
 
 	/**

@@ -4,7 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
-use Wikibase\Client\RecentChanges\RecentChangesDuplicateDetector;
+use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
@@ -255,10 +255,10 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @return RecentChangesDuplicateDetector
+	 * @return RecentChangesFinder
 	 */
-	public function getRecentChangesDuplicateDetector() {
-		return new RecentChangesDuplicateDetector(
+	public function getRecentChangesFinder() {
+		return new RecentChangesFinder(
 			$this->getLocalConnectionManager()
 		);
 	}
