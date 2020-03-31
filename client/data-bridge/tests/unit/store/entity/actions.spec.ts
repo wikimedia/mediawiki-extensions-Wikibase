@@ -1,3 +1,4 @@
+import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import newMockableEntityRevision from '../newMockableEntityRevision';
@@ -8,9 +9,9 @@ import newEntityState from './newEntityState';
 
 describe( 'entity/actions', () => {
 	const revidIncrementingWritingEntityRepository: WritingEntityRepository = {
-		saveEntity: jest.fn( ( entity: EntityRevision ) => {
+		saveEntity: jest.fn( ( entity: Entity, base?: EntityRevision ) => {
 			return Promise.resolve(
-				new EntityRevision( entity.entity, entity.revisionId + 1 ),
+				new EntityRevision( entity, ( base?.revisionId || 0 ) + 1 ),
 			);
 		} ),
 	};
@@ -83,8 +84,10 @@ describe( 'entity/actions', () => {
 	describe( 'entitySave', () => {
 		it( 'updates entity and statements on successful save', async () => {
 			const entityId = 'Q42',
-				statements = {},
-				entity = { id: entityId, statements },
+				oldStatements = { 'P123': [] },
+				newStatements = { 'P456': [] },
+				oldEntity = { id: entityId, statements: oldStatements },
+				newEntity = { id: entityId, statements: newStatements },
 				revision = 1234;
 
 			const entityState = newEntityState( {
@@ -108,17 +111,17 @@ describe( 'entity/actions', () => {
 			// @ts-ignore
 			actions.statementsModule = {
 				state: {
-					[ entityId ]: statements,
+					[ entityId ]: oldStatements,
 				},
 			};
 
-			await expect( actions.entitySave( statements ) ).resolves.toBe( resolvedValue );
-			expect( revidIncrementingWritingEntityRepository.saveEntity ).toHaveBeenCalledWith( {
-				entity,
-				revisionId: revision,
-			} );
+			await expect( actions.entitySave( newStatements ) ).resolves.toBe( resolvedValue );
+			expect( revidIncrementingWritingEntityRepository.saveEntity ).toHaveBeenCalledWith(
+				newEntity,
+				{ entity: oldEntity, revisionId: revision },
+			);
 			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', {
-				entity,
+				entity: newEntity,
 				revisionId: revision + 1,
 			} );
 		} );
@@ -128,7 +131,7 @@ describe( 'entity/actions', () => {
 				statements = {},
 				error = new Error( 'this should be propagated' ),
 				writingEntityRepository = {
-					saveEntity( _entity: EntityRevision ): Promise<EntityRevision> {
+					saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
 						return Promise.reject( error );
 					},
 				},

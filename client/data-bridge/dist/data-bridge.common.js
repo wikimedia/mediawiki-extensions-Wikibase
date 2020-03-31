@@ -14143,6 +14143,17 @@ function (_Mutations) {
 
   return EntityMutations;
 }(Mutations);
+// CONCATENATED MODULE: ./src/datamodel/Entity.ts
+
+
+var Entity_Entity = function Entity(id, statements) {
+  _classCallCheck(this, Entity);
+
+  this.id = id;
+  this.statements = statements;
+};
+
+
 // CONCATENATED MODULE: ./src/datamodel/EntityRevision.ts
 
 
@@ -14369,6 +14380,7 @@ var statementModule = new Module({
 
 
 
+
 var actions_EntityActions =
 /*#__PURE__*/
 function (_Actions) {
@@ -14400,11 +14412,10 @@ function (_Actions) {
     value: function entitySave(statements) {
       var _this2 = this;
 
-      var entityRevision = new EntityRevision_EntityRevision({
-        id: this.state.id,
-        statements: statements
-      }, this.state.baseRevision);
-      return this.store.$services.get('writingEntityRepository').saveEntity(entityRevision).then(function (entityRevision) {
+      var entityId = this.state.id;
+      var entity = new Entity_Entity(entityId, statements);
+      var base = new EntityRevision_EntityRevision(new Entity_Entity(entityId, this.statementsModule.state[entityId]), this.state.baseRevision);
+      return this.store.$services.get('writingEntityRepository').saveEntity(entity, base).then(function (entityRevision) {
         return _this2.dispatch('entityWrite', entityRevision);
       });
     }
@@ -18404,17 +18415,6 @@ function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/datamodel/Entity.ts
-
-
-var Entity_Entity = function Entity(id, statements) {
-  _classCallCheck(this, Entity);
-
-  this.id = id;
-  this.statements = statements;
-};
-
-
 // CONCATENATED MODULE: ./src/data-access/error/EntityNotFound.ts
 
 
@@ -18466,13 +18466,13 @@ function () {
 
   _createClass(ApiWritingRepository, [{
     key: "saveEntity",
-    value: function saveEntity(revision) {
+    value: function saveEntity(entity, base) {
       return Promise.resolve(this.api.postWithEditToken(this.api.assertCurrentUser({
         action: 'wbeditentity',
-        id: revision.entity.id,
-        baserevid: revision.revisionId,
+        id: entity.id,
+        baserevid: base === null || base === void 0 ? void 0 : base.revisionId,
         data: JSON.stringify({
-          claims: revision.entity.statements
+          claims: entity.statements
         }),
         tags: this.tags
       }))).then(function (response) {

@@ -1,3 +1,4 @@
+import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import { Store } from 'vuex';
 import Application from '@/store/Application';
@@ -27,16 +28,15 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 	public entitySave(
 		statements: StatementMap,
 	): Promise<void> {
-		const entityRevision = new EntityRevision(
-			{
-				id: this.state.id,
-				statements,
-			},
+		const entityId = this.state.id;
+		const entity = new Entity( entityId, statements );
+		const base = new EntityRevision(
+			new Entity( entityId, this.statementsModule.state[ entityId ] ),
 			this.state.baseRevision,
 		);
 
 		return this.store.$services.get( 'writingEntityRepository' )
-			.saveEntity( entityRevision )
+			.saveEntity( entity, base )
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 
