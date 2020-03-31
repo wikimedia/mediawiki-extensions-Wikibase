@@ -1,0 +1,40 @@
+{
+	"searchinfo": {
+	  "search": "publication date"
+	},
+	"search": [
+	  {
+		"repository": "local",
+		"id": "P577",
+		"concepturi": "http://www.wikidata.org/entity/P577",
+		"title": "Property:P577",
+		"pageid": 15087952,
+		"url": "//www.wikidata.org/wiki/Property:P577",
+		"datatype": "time",
+		"label": "publication date",
+		"description": "date or point in time when a work was first published or released",
+		"match": {
+		  "type": "label",
+		  "language": "en",
+		  "text": "publication date"
+		}
+	  },
+	  {
+		"repository": "local",
+		"id": "P14",
+		"concepturi": "https://wikidata.beta.wmflabs.org/entity/P14",
+		"title": "Property:P14",
+		"pageid": 6426,
+		"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+		"datatype": "string",
+		"label": "publication date",
+		"description": "eVrebfchLUnnzaCGDytx test",
+		"match": {
+		  "type": "label",
+		  "language": "en",
+		  "text": "publication date"
+		}
+	  }
+	],
+	"success": 1
+}

@@ -21,14 +21,34 @@ use function GuzzleHttp\Psr7\stream_for;
  */
 class ApiEntitySearchHelperTest extends TestCase {
 
+	private $responseDataFiles = [
+		'api-entity-search-helper-test-data-emptyResponse.json',
+		'api-entity-search-helper-test-data-oneResponse.json',
+		'api-entity-search-helper-test-data-twoResponse.json',
+		'api-entity-search-helper-test-data-errorResponse.json',
+		'api-entity-search-helper-test-data-unexpectedResponse.json'
+	];
+
+	private $data = [];
+
+	protected function setUp() : void {
+
+		parent::setUp();
+		// Load data files once at the start of tests rather than for each test case
+		foreach ( $this->responseDataFiles as $file ) {
+			$content = file_get_contents( __DIR__ . '/../../data/federatedProperties/' . $file );
+			$this->data[$file] = json_decode( $content );
+		}
+	}
+
 	/**
 	 * @dataProvider paramsAndExpectedResponseProvider
-	 * @param string $responseData
+	 * @param string $responseDataFile
 	 * @param int $expectedResultCount
 	 * @param array $expectedResultsEntityId
 	 * @throws ApiRequestException
 	 */
-	public function testGetRankedSearchResults( $langCode, $params, $responseData, $expectedResultsEntityIds ) {
+	public function testGetRankedSearchResults( $langCode, $params, $responseDataFile, $expectedResultsEntityIds ) {
 
 		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
 
@@ -36,10 +56,10 @@ class ApiEntitySearchHelperTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( $params )
-			->willReturn( $this->newMockResponse( $responseData, 200 ) );
+			->willReturn( $this->newMockResponse( $responseDataFile, 200 ) );
 
 		$apiEntitySearchHelper = new ApiEntitySearchHelper( $api );
-
+		$responseData = $this->data[ $responseDataFile ];
 		$results = $apiEntitySearchHelper->getRankedSearchResults(
 			$params[ 'search' ],
 			$langCode,
@@ -54,7 +74,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 		foreach ( $expectedResultsEntityIds as $resultId ) {
 
-			$expectedResult = $this->getResponseDataForId( $responseData[ 'search' ], $resultId );
+			$expectedResult = $this->getResponseDataForId( $responseData->search, $resultId );
 			$resultToTest = $results[ $resultId ];
 
 			$this->assertTrue( $resultToTest instanceof TermSearchResult );
@@ -69,23 +89,25 @@ class ApiEntitySearchHelperTest extends TestCase {
 		}
 	}
 
-	private function newMockResponse( $responseData, $statusCode ) {
-
+	private function newMockResponse( $responseDataFile, $statusCode ) {
 		$mwResponse = $this->createMock( ResponseInterface::class );
 		$mwResponse->expects( $this->any() )
 			->method( 'getStatusCode' )
 			->willReturn( $statusCode );
 		$mwResponse->expects( $this->any() )
 			->method( 'getBody' )
-			->willReturn( stream_for( json_encode( $responseData ) ) );
+			->willReturn( stream_for( json_encode( $this->data[ $responseDataFile ] ) ) );
 		return $mwResponse;
 	}
 
 	private function getResponseDataForId( $searchResponses, $resultId ) {
 
+		//convert $searchResponse to array
+		$searchResponses = \GuzzleHttp\json_decode( \GuzzleHttp\json_encode( $searchResponses ), true );
 		foreach ( $searchResponses as $response ) {
-			if ( $response[ 'id' ] === $resultId ) {
+			if ( $response['id'] === $resultId ) {
 				return $response;
+
 			}
 		}
 
@@ -94,18 +116,18 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 	/**
 	 * @dataProvider invalidParamsAndUnexpectedResponseProvider
-	 * @param string $responseData
+	 * @param string $responseDataFile
 	 * @param int $expectedResultCount
 	 * @param array $expectedResultsEntityId
 	 */
-	public function testGetRankedSearchResultsThrowsExceptionForFailureApiResponses( $langCode, $params, $responseData, $statusCode ) {
+	public function testApiResponseStructureIsValid( $langCode, $params, $responseDataFile, $statusCode ) {
 
 		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( $params )
-			->willReturn( $this->newMockResponse( $responseData, $statusCode ) );
+			->willReturn( $this->newMockResponse( $responseDataFile, $statusCode ) );
 		$apiEntitySearchHelper = new ApiEntitySearchHelper( $api );
 
 		try {
@@ -123,7 +145,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 	}
 
 	/**
-	 * @return array [ searchlang, searchParams[], responseData[], responseStatusCode ]
+	 * @return array [ searchlang, searchParams[], responseDataFile, responseStatusCode ]
 	 */
 	public function invalidParamsAndUnexpectedResponseProvider() {
 		return [
@@ -136,17 +158,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'limit' => 10,
 					'strictlanguage' => false
 				],
-				[
-					'error' =>
-						[
-							'code' => 'badvalue',
-							'info' => 'Unrecognized value for parameter "language": xyz.',
-							'*' => 'See https://wikidata.beta.wmflabs.org/w/api.php for API usage. Subscribe to the mediawiki-api-announce
-							mailing list at &lt;https://lists.wikimedia.org/mailman/listinfo/mediawiki-api-announce&gt;
-							for notice of API deprecations and breaking changes.',
-						],
-					'servedby' => 'deployment-mediawiki-07',
-				],
+				'api-entity-search-helper-test-data-errorResponse.json',
 				400
 			],
 			'unexpectedResponse' => [
@@ -158,14 +170,14 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'limit' => 10,
 					'strictlanguage' => false
 				],
-				[ 'response' => 'unexpectedStructure' ],
+				'api-entity-search-helper-test-data-unexpectedResponse.json',
 				null
 			]
 		];
 	}
 
 	/**
-	 * @return array [ searchlang, searchParams[], responseData[], expectedResultEntityIds[] ]
+	 * @return array [ searchlang, searchParams[], responseDataFile, expectedResultEntityIds[] ]
 	 */
 	public function paramsAndExpectedResponseProvider() {
 		return [
@@ -178,12 +190,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'limit' => 10,
 					'strictlanguage' => false
 				],
-				[
-					'searchinfo' =>
-						[ 'search' => 'nonExistingProperty' ],
-					'search' => [],
-					'success' => 1
-				],
+				'api-entity-search-helper-test-data-emptyResponse.json',
 				[],
 			],
 			'twoResponse' => [
@@ -195,53 +202,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'limit' => 10,
 					'strictlanguage' => false
 				],
-				[
-					'searchinfo' =>
-						[ 'search' => 'publication date' ],
-					'search' =>
-						[
-							0 =>
-								[
-									'repository' => 'local',
-									'id' => 'P766',
-									'concepturi' => 'https://wikidata.beta.wmflabs.org/entity/P766',
-									'title' => 'Property:P766',
-									'pageid' => 16633,
-									'url' => 'https://wikidata.beta.wmflabs.org/wiki/Property:P766',
-									'datatype' => 'time',
-									'label' => 'date of publication',
-									'description' => 'date when this work was published',
-									'match' =>
-										[
-											'type' => 'alias',
-											'language' => 'en',
-											'text' => 'publication date',
-										],
-									'aliases' =>
-										[ 0 => 'publication date' ],
-								],
-							1 =>
-								[
-									'repository' => 'local',
-									'id' => 'P14',
-									'concepturi' => 'https://wikidata.beta.wmflabs.org/entity/P14',
-									'title' => 'Property:P14',
-									'pageid' => 6426,
-									'url' => 'https://wikidata.beta.wmflabs.org/wiki/Property:P14',
-									'datatype' => 'string',
-									'label' => 'publication date',
-									'description' => 'eVrebfchLUnnzaCGDytx test',
-									'match' =>
-										[
-											'type' => 'label',
-											'language' => 'en',
-											'text' => 'publication date',
-										],
-								],
-						],
-					'success' => 1,
-				],
-				[ 'P766', 'P14' ],
+				'api-entity-search-helper-test-data-twoResponse.json',
+				[ 'P577', 'P14' ],
 			],
 			'oneReponse' => [
 				'de',
@@ -252,32 +214,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 					'limit' => 10,
 					'strictlanguage' => false
 				],
-				[
-					'searchinfo' =>
-						[ 'search' => 'Publikationsdatum' ],
-					'search' =>
-						[
-							0 =>
-								[
-									'repository' => 'local',
-									'id' => 'P14',
-									'concepturi' => 'https://wikidata.beta.wmflabs.org/entity/P14',
-									'title' => 'Property:P14',
-									'pageid' => 6426,
-									'url' => 'https://wikidata.beta.wmflabs.org/wiki/Property:P14',
-									'datatype' => 'string',
-									'label' => 'Publikationsdatum',
-									'description' => 'Beschreibung deutsch',
-									'match' =>
-										[
-											'type' => 'label',
-											'language' => 'de',
-											'text' => 'Publikationsdatum',
-										],
-								],
-						],
-					'success' => 1,
-				],
+				'api-entity-search-helper-test-data-oneResponse.json',
 				[ 'P14' ],
 			]
 		];
