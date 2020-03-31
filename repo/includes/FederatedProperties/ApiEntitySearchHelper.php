@@ -68,13 +68,17 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 		}
 
 		foreach ( $jsonResult->search as $result ) {
-			$allResults[ $result->id ] = new TermSearchResult(
+			$termSearchResult = new TermSearchResult(
 				new Term( $result->match->language, $result->match->text ),
 				$result->match->type,
 				new PropertyId( $result->id ),
 				new Term( $languageCode, $result->label ),
-				new Term( $languageCode, $result->description )
+				new Term( $languageCode, $result->description ),
+				[
+					TermSearchResult::CONCEPTURI_META_DATA_KEY => $result->concepturi,
+				]
 			);
+			$allResults[ $result->id ] = $termSearchResult;
 		}
 		return $allResults;
 	}
