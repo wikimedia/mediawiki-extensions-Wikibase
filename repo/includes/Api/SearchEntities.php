@@ -12,6 +12,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to search for Wikibase entities.
@@ -112,12 +113,21 @@ class SearchEntities extends ApiBase {
 		$entityId = $match->getEntityId();
 
 		$entry = [
-			'repository' => $this->getRepositoryOrEntitySourceName( $entityId ),
 			'id' => $entityId->getSerialization(),
 			'concepturi' => $this->getConceptUri( $entityId ),
 			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
 			'pageid' => $this->entityArticleIdLookup->getArticleId( $entityId )
 		];
+
+		/**
+		 * The repository key should be deprecated and removed, for now avoid adding it when using federatedProperties to avoid confusion
+		 * in the new feature and avoid the need to "fix" it..
+		 * This is deliberately not tested and thus not injected as for federated properties we "don't care much" and for default Wikibase
+		 * this is already covered by the SearchEntitiesTest.
+		 */
+		if ( !WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$entry['repository'] = $this->getRepositoryOrEntitySourceName( $entityId );
+		}
 
 		if ( $props !== null && in_array( 'url', $props ) ) {
 			$entry['url'] = $this->entityUrlLookup->getFullUrl( $entityId );

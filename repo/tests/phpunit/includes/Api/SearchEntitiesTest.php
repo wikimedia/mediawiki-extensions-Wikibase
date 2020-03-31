@@ -21,6 +21,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\SearchEntities
@@ -36,6 +37,12 @@ use Wikibase\Repo\Api\SearchEntities;
  * @author Daniel Kinzler
  */
 class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
+
+	public function setUp(): void {
+		parent::setUp();
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'federatedPropertiesEnabled', false );
+	}
 
 	/**
 	 * @param array $params
