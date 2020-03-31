@@ -157,8 +157,8 @@ describe( 'store/actions', () => {
 			.mainsnak.datavalue;
 	}
 
-	describe( 'application initiation', () => {
-		it( 'successfully initiate on valid input data', () => {
+	describe( 'application initialization', () => {
+		it( 'successfully initializes on valid input data', () => {
 			const successStore = createStore( services );
 			return successStore.dispatch( 'initBridge', info ).then( () => {
 				expect( successStore.state.applicationStatus ).toBe( ApplicationStatus.READY );

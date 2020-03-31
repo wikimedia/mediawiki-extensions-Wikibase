@@ -68,7 +68,12 @@ RootActions
 				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
 				throw error;
 			},
-		);
+		).then( () => {
+			this.commit(
+				'setApplicationStatus',
+				ApplicationStatus.READY,
+			);
+		} );
 	}
 
 	public async initBridgeWithRemoteData( {
@@ -119,13 +124,6 @@ RootActions
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				path.resolveSnakInStatement( state[ NS_STATEMENTS ] )!.datavalue!,
 			);
-
-			if ( this.getters.applicationStatus === ApplicationStatus.INITIALIZING ) {
-				this.commit(
-					'setApplicationStatus',
-					ApplicationStatus.READY,
-				);
-			}
 		}
 	}
 

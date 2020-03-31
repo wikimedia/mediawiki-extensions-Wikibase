@@ -111,6 +111,7 @@ describe( 'root/actions', () => {
 				expect( commit ).toHaveBeenCalledWith( 'setEntityTitle', entityTitle );
 				expect( commit ).toHaveBeenCalledWith( 'setOriginalHref', originalHref );
 				expect( commit ).toHaveBeenCalledWith( 'setPageTitle', pageTitle );
+				expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 			},
 		);
 
@@ -348,7 +349,6 @@ describe( 'root/actions', () => {
 			await actions.postEntityLoad();
 
 			expect( commit ).toHaveBeenCalledWith( 'setTargetValue', dataValue );
-			expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 		} );
 
 		it( 'doesn\'t commit if there are errors', async () => {
