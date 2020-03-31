@@ -78,5 +78,12 @@ return call_user_func( function() {
 				'wikibase.EntityInitializer'
 			],
 		],
+
+		'wikibase.PropertyDataTypeStore.tests' => $packageFilesModuleBase + [
+			'packageFiles' => [
+				'tests/qunit/wikibase.PropertyDataTypeStore.tests.js',
+				'resources/wikibase.PropertyDataTypeStore.js',
+			],
+		],
 	];
 } );

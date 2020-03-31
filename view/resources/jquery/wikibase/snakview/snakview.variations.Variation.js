@@ -21,8 +21,7 @@
 	 * @param {jQuery} $viewPort A DOM node which serves as drawing surface for the `Variation`'s
 	 *        output. This is where the `Variation` instance expresses its current state and/or
 	 *        displays input elements for user interaction.
-	 * @param {wikibase.store.EntityStore} entityStore Enables the `Variation` to retrieve `Entity`
-	 *        information.
+	 * @param {PropertyDataTypeStore} propertyDataTypeStore
 	 * @param {wikibase.ValueViewBuilder} valueViewBuilder Enables the `Variation` to have
 	 *        `jQuery.valueview` instances created according to particular `wikibase.dataTypes.DataType` /
 	 *        `dataValues.DataValue` objects.
@@ -34,7 +33,7 @@
 	var SELF = function WbSnakviewVariationsVariation(
 		viewState,
 		$viewPort,
-		entityStore,
+		propertyDataTypeStore,
 		valueViewBuilder,
 		dataTypeStore
 	) {
@@ -45,10 +44,10 @@
 			throw new Error( 'No sufficient DOM node provided for the snakview variation' );
 		}
 
-		this._entityStore = entityStore;
 		this._valueViewBuilder = valueViewBuilder;
 		this._viewState = viewState;
 		this._dataTypeStore = dataTypeStore;
+		this._propertyDataTypeStore = propertyDataTypeStore;
 
 		this.$viewPort = $viewPort;
 		this.$viewPort.addClass( this.variationBaseClass );
@@ -87,9 +86,9 @@
 		$viewPort: null,
 
 		/**
-		 * @property {wikibase.store.EntityStore}
+		 * @property {PropertyDataTypeStore}
 		 */
-		_entityStore: null,
+		_propertyDataTypeStore: null,
 
 		/**
 		 * @property {wikibase.ValueViewBuilder}

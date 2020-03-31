@@ -21,6 +21,7 @@
 		CachingEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/CachingEntityIdPlainFormatter.js' ),
 		DataValueBasedEntityIdPlainFormatter = require( '../../view/resources/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.js' ),
 		ToolbarFactory = require( '../../view/resources/wikibase/view/ToolbarFactory.js' ),
+		PropertyDataTypeStore = require( './wikibase.PropertyDataTypeStore.js' ),
 		config = require( './config.json' ),
 		datamodel = require( 'wikibase.datamodel' ),
 		serialization = require( 'wikibase.serialization' );
@@ -114,7 +115,7 @@
 			new CachingEntityIdPlainFormatter(
 				new DataValueBasedEntityIdPlainFormatter( entityIdParser, plaintextDataValueEntityIdFormatter )
 			),
-			entityStore,
+			new PropertyDataTypeStore( mw.hook( 'wikibase.entityPage.entityLoaded' ), entityStore ),
 			getExpertsStore( dataTypeStore ),
 			formatterFactory,
 			{

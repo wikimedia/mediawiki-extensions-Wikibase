@@ -110,16 +110,10 @@
 			/**
 			 * @private
 			 *
-			 * @param {datamodel.Property|undefined|null} property
+			 * @param {string|null} dataTypeId
 			 * @return {wikibase.dataTypes.DataType|null}
 			 */
-			function _getDataType( property ) {
-				// If the set property is not there, we have to display a warning. This can happen
-				// if a property got deleted but the Snaks using it didn't change the property.
-				var dataTypeId = property
-					? property.getDataTypeId()
-					: false;
-
+			function _getDataType( dataTypeId ) {
 				if ( dataTypeId ) {
 					return self._dataTypeStore.getDataType( dataTypeId );
 				}
@@ -174,9 +168,10 @@
 			// directly (also by user interaction) are always rendered immediately
 			if ( newValue !== false ) { // newValue could also be null for empty value
 				this.__currentNewValue = newValue;
-				this._entityStore
-				.get( this._viewState.propertyId() )
-				.done( function ( fetchedProperty ) {
+				var propertyId = this._viewState.propertyId();
+				this._propertyDataTypeStore
+				.getDataTypeForProperty( propertyId )
+				.done( function ( dataTypeId ) {
 					if ( self.isDestroyed() ) {
 						return;
 					}
@@ -186,10 +181,9 @@
 						return;
 					}
 
-					var dataType = _getDataType( fetchedProperty ),
-						propertyId = fetchedProperty ? fetchedProperty.getId() : null;
+					var dataType = _getDataType( dataTypeId );
 
-					if ( fetchedProperty && !dataType ) {
+					if ( !dataType ) {
 						// Note: Could not find a link between the caching problem and localStorage
 						// and this issue (T216728), meaning the following clear doesn't seem to be
 						// necessary in most cases.
@@ -201,7 +195,7 @@
 						mw.notify(
 							mw.msg(
 								'wikibase-refresh-for-missing-datatype',
-								fetchedProperty.getDataTypeId()
+								dataTypeId
 							),
 							{
 								autoHide: false,
@@ -212,8 +206,8 @@
 						);
 
 						mw.log.warn(
-							'Found property ' + fetchedProperty.getId() + ' in entityStore but couldn\'t find ' +
-							'the datatype "' + fetchedProperty.getDataTypeId() + '" in dataTypeStore. ' +
+							'Found property ' + propertyId + ' in entityStore but couldn\'t find ' +
+							'the datatype "' + dataTypeId + '" in dataTypeStore. ' +
 							'This is a bug or a configuration issue.'
 						);
 						return;

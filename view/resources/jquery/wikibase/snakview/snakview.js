@@ -42,8 +42,8 @@
 	 *        Required for dynamically rendering links to `Entity`s.
 	 * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} options.entityIdPlainFormatter
 	 *        Required for dynamically rendering plain text references to `Entity`s.
-	 * @param {wikibase.store.EntityStore} options.entityStore
-	 *        Required for dynamically gathering `Entity`/`Property` information.
+	 * @param {PropertyDataTypeStore} options.propertyDataTypeStore
+	 *        Required for looking up the Snak's property's data type.
 	 * @param {wikibase.ValueViewBuilder} options.valueViewBuilder
 	 *        Required to interfacing a `snakview` "value" `Variation` to `jQuery.valueview`.
 	 * @param {wikibase.dataTypes.DataTypeStore} options.dataTypeStore
@@ -91,11 +91,11 @@
 			autoStartEditing: true,
 			entityIdPlainFormatter: null,
 			entityIdHtmlFormatter: null,
-			entityStore: null,
 			valueViewBuilder: null,
 			dataTypeStore: null,
 			drawProperty: true,
-			getSnakRemover: null
+			getSnakRemover: null,
+			propertyDataTypeStore: null
 		},
 
 		/**
@@ -431,8 +431,8 @@
 			if ( this.options.locked.property && serialization.property !== undefined ) {
 				value.property = serialization.property;
 			} else if ( !this.options.locked.property ) {
-				var propertySelector = this._getPropertySelector(),
-					propertyStub = propertySelector && propertySelector.selectedEntity();
+				var propertyStub = this._getSelectedProperty();
+
 				if ( propertyStub && propertyStub.id !== undefined ) {
 					value.property = propertyStub.id;
 				}
@@ -562,6 +562,8 @@
 				snakType = value ? value.snaktype : null,
 				VariationConstructor = snakType ? variations.getVariation( snakType ) : null;
 
+			this._setDataTypeForSelectedProperty();
+
 			if ( this._variation
 				&& ( !propertyId || this._variation.constructor !== VariationConstructor )
 			) {
@@ -588,7 +590,7 @@
 				this._variation = new VariationConstructor(
 					new ViewState( this ),
 					this.$snakValue,
-					this.options.entityStore,
+					this.options.propertyDataTypeStore,
 					this.options.valueViewBuilder,
 					this.options.dataTypeStore
 				);
@@ -856,8 +858,21 @@
 
 		showPropertyLabel: function () {
 			this.$property.show();
-		}
+		},
 
+		_getSelectedProperty: function () {
+			var propertySelector = this._getPropertySelector();
+
+			return propertySelector && propertySelector.selectedEntity();
+		},
+
+		_setDataTypeForSelectedProperty: function () {
+			var property = this._getSelectedProperty();
+
+			if ( property && property.datatype ) {
+				this.options.propertyDataTypeStore.setDataTypeForProperty( property.id, property.datatype );
+			}
+		}
 	} );
 
 	$.extend( $.wikibase.snakview, existingSnakview );

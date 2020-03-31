@@ -44,8 +44,8 @@
 					return $.Deferred().resolve( entityId ).promise();
 				}
 			},
-			entityStore: {
-				get: function ( entityId ) {
+			propertyDataTypeStore: {
+				getDataTypeForProperty: function ( entityId ) {
 					return $.Deferred().resolve().promise();
 				}
 			},
