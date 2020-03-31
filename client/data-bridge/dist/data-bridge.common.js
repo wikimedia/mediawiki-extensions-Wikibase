@@ -18814,6 +18814,230 @@ function () {
 }();
 
 
+// CONCATENATED MODULE: ./src/data-access/TrimmingWritingRepository.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function statementListById(statementList) {
+  var statementsById = {};
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = statementList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var statement = _step.value;
+
+      if (statement.id) {
+        statementsById[statement.id] = statement;
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return statementsById;
+}
+/**
+ * A {@link WritingEntityRepository} that compares the old and new entity data
+ * and sends only parts that changed to an underlying {@link ApiWritingRepository}.
+ */
+
+
+var TrimmingWritingRepository_TrimmingWritingRepository =
+/*#__PURE__*/
+function () {
+  function TrimmingWritingRepository(apiWritingRepository) {
+    _classCallCheck(this, TrimmingWritingRepository);
+
+    this.apiWritingRepository = apiWritingRepository;
+  }
+
+  _createClass(TrimmingWritingRepository, [{
+    key: "saveEntity",
+    value: function () {
+      var _saveEntity = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(entity, base) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (base) {
+                  entity = this.trimEntity(entity, base.entity);
+                }
+
+                return _context.abrupt("return", this.apiWritingRepository.saveEntity(entity, base));
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function saveEntity(_x, _x2) {
+        return _saveEntity.apply(this, arguments);
+      }
+
+      return saveEntity;
+    }()
+  }, {
+    key: "trimEntity",
+    value: function trimEntity(newEntity, baseEntity) {
+      if (newEntity.id !== baseEntity.id) {
+        throw new TechnicalProblem_TechnicalProblem('Entity ID mismatch');
+      }
+
+      var trimmedStatementMap = this.trimStatementMap(newEntity.statements, baseEntity.statements);
+      return new Entity_Entity(newEntity.id, trimmedStatementMap);
+    }
+  }, {
+    key: "trimStatementMap",
+    value: function trimStatementMap(newStatementMap, baseStatementMap) {
+      var trimmedStatementMap = {};
+      var propertyIds = new Set([].concat(_toConsumableArray(Object.keys(newStatementMap)), _toConsumableArray(Object.keys(baseStatementMap))));
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = propertyIds[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var propertyId = _step2.value;
+
+          if (propertyId in baseStatementMap) {
+            var baseStatementGroup = baseStatementMap[propertyId];
+
+            if (propertyId in newStatementMap) {
+              var newStatementGroup = newStatementMap[propertyId];
+              var trimmedStatementGroup = this.trimStatementGroup(newStatementGroup, baseStatementGroup);
+
+              if (trimmedStatementGroup !== null) {
+                trimmedStatementMap[propertyId] = trimmedStatementGroup;
+              }
+            } else {
+              throw new TechnicalProblem_TechnicalProblem('Cannot remove statement group');
+            }
+          } else {
+            // newStatementGroup must exist or else we wouldn’t be in this loop
+            trimmedStatementMap[propertyId] = newStatementMap[propertyId];
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      return trimmedStatementMap;
+    }
+  }, {
+    key: "trimStatementGroup",
+    value: function trimStatementGroup(newStatements, baseStatements) {
+      var baseStatementsById = statementListById(baseStatements);
+      var trimmedStatementsGroup = [];
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = newStatements[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var newStatement = _step3.value;
+
+          if (!newStatement.id) {
+            trimmedStatementsGroup.push(newStatement);
+            continue;
+          }
+
+          var baseStatement = baseStatementsById[newStatement.id];
+          delete baseStatementsById[newStatement.id];
+
+          if (baseStatement) {
+            var trimmedStatement = this.trimStatement(newStatement, baseStatement);
+
+            if (trimmedStatement !== null) {
+              trimmedStatementsGroup.push(trimmedStatement);
+            }
+          } else {
+            trimmedStatementsGroup.push(newStatement);
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+
+      var unusedBaseStatementIds = Object.keys(baseStatementsById);
+
+      if (unusedBaseStatementIds.length) {
+        throw new TechnicalProblem_TechnicalProblem('Cannot remove statement');
+      }
+
+      return trimmedStatementsGroup.length ? trimmedStatementsGroup : null;
+    }
+  }, {
+    key: "trimStatement",
+    value: function trimStatement(newStatement, baseStatement) {
+      // statement parts cannot be omitted, so there’s no need to go into any more detail here
+      if (deep_equal_default()(newStatement, baseStatement)) {
+        return null;
+      } else {
+        return newStatement;
+      }
+    }
+  }]);
+
+  return TrimmingWritingRepository;
+}();
+
+
 // CONCATENATED MODULE: ./src/services/ServiceContainer.ts
 
 
@@ -20033,6 +20257,7 @@ function () {
 
 
 
+
 function createServices(mwWindow, editTags, eventTracker) {
   var services = new ServiceContainer_ServiceContainer();
   var repoConfig = mwWindow.mw.config.get('wbRepo'),
@@ -20047,7 +20272,7 @@ function createServices(mwWindow, editTags, eventTracker) {
   var repoMwApi = new mwWindow.mw.ForeignApi( // TODO use repoRouter with a getScript() method maybe
   "".concat(repoConfig.url).concat(repoConfig.scriptPath, "/api.php"));
   var repoApi = new BatchingApi_BatchingApi(new ApiCore_ApiCore(repoMwApi));
-  services.set('writingEntityRepository', new ApiWritingRepository_ApiWritingRepository(repoMwApi, editTags.length === 0 ? undefined : editTags));
+  services.set('writingEntityRepository', new TrimmingWritingRepository_TrimmingWritingRepository(new ApiWritingRepository_ApiWritingRepository(repoMwApi, editTags.length === 0 ? undefined : editTags)));
   var pageContentLanguage = mwWindow.mw.config.get('wgPageContentLanguage');
   services.set('entityLabelRepository', new ApiEntityLabelRepository_ApiEntityLabelRepository(pageContentLanguage, repoApi));
   services.set('propertyDatatypeRepository', new ApiPropertyDataTypeRepository_ApiPropertyDataTypeRepository(repoApi));

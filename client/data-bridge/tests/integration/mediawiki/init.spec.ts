@@ -2,6 +2,7 @@ import ApiCore from '@/data-access/ApiCore';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
 import ClientRouter from '@/data-access/ClientRouter';
+import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import ServiceContainer from '@/services/ServiceContainer';
@@ -92,10 +93,10 @@ describe( 'init', () => {
 				'Special:EntityData',
 			),
 		) );
-		expectedServices.set( 'writingEntityRepository', new ApiWritingRepository(
+		expectedServices.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
 			repoMwApi,
 			editTags,
-		) );
+		) ) );
 		expectedServices.set( 'languageInfoRepository', new MwLanguageInfoRepository(
 			window.mw.language,
 			window.$.uls!.data,
