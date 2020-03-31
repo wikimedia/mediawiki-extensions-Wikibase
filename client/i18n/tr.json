@@ -164,5 +164,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1, {{WBREPONAME}} üzerinde <i>bilinmeyen değere</i> sahip olarak işaretlendi. <i>Bilinmeyen değer</i> olarak işaretlenmiş değerleri düzenlemek şu anda mümkün değil.",
 	"wikibase-client-data-bridge-novalue-error-head": "$1 değerinin düzenlenmesi şu anda desteklenmiyor",
 	"wikibase-client-data-bridge-novalue-error-body": "$1, {{WBREPONAME}} üzerinde <i>değersiz</i> olarak işaretlendi. <i>Değer yok</i> olarak işaretlenmiş değerleri düzenlemek şu anda mümkün değil.",
-	"wikibase-client-data-bridge-reference-note": "Kaynakçayı kaydettikten sonra {{WBREPONAME}} üzerinde düzenleme yapmak mümkün olacak"
+	"wikibase-client-data-bridge-reference-note": "Kaynakçayı kaydettikten sonra {{WBREPONAME}} üzerinde düzenleme yapmak mümkün olacak",
+	"wikibase-client-data-bridge-thank-you-head": "Düzenlemeniz için teşekkür ederiz!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Bu düğmeye ilişkin referansları aşağıdaki düğmeyi tıklayarak {{WBREPONAME}} adresinde düzenleyebilirsiniz.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "{{WBREPONAME}} üzerinde kaynak düzenleyin"
 }

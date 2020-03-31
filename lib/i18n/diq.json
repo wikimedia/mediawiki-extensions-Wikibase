@@ -9,6 +9,7 @@
 			"1917 Ekim Devrimi"
 		]
 	},
+	"wikibase-error-unexpected": "Xeta: $1.",
 	"wikibase-quantitydetails-amount": "Miqdar",
 	"wikibase-quantitydetails-unit": "Lete",
 	"wikibase-timedetails-time": "Wext",

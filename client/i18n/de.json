@@ -153,5 +153,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 ist als mit <i>unbekannter Wert</i> auf {{WBREPONAME}} markiert. Die Bearbeitung von Werten, die als <i>unbekannter Wert</i> markiert sind, ist derzeit nicht möglich.",
 	"wikibase-client-data-bridge-novalue-error-head": "Die Bearbeitung des Wertes für $1 wird derzeit nicht unterstützt.",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 ist als mit <i>kein Wert</i> auf {{WBREPONAME}} markiert. Die Bearbeitung von Werten, die als <i>kein Wert</i> markiert sind, ist derzeit nicht möglich.",
-	"wikibase-client-data-bridge-reference-note": "Die Bearbeitung von Einzelnachweisen wird nach dem Speichern auf {{WBREPONAME}} möglich sein"
+	"wikibase-client-data-bridge-reference-note": "Die Bearbeitung von Einzelnachweisen wird nach dem Speichern auf {{WBREPONAME}} möglich sein",
+	"wikibase-client-data-bridge-thank-you-head": "Vielen Dank für deine Bearbeitung!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Du kannst den Einzelnachweis für diese Eigenschaft auf {{WBREPONAME}} durch Klick auf die Schaltfläche bearbeiten.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Bearbeite den Einzelnachweis auf {{WBREPONAME}}"
 }

@@ -170,5 +170,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1在{{WBREPONAME}}被標記有<i>未知值</i>。目前不能編輯被標記為<i>未知值</i>的值。",
 	"wikibase-client-data-bridge-novalue-error-head": "目前不支援編輯$1的值",
 	"wikibase-client-data-bridge-novalue-error-body": "$1在{{WBREPONAME}}被標記為<i>無值</i>。目前不能編輯被標記為<i>無值</i>的值。",
-	"wikibase-client-data-bridge-reference-note": "儲存後可以編輯在{{WBREPONAME}}的參考"
+	"wikibase-client-data-bridge-reference-note": "儲存後可以編輯在{{WBREPONAME}}的參考",
+	"wikibase-client-data-bridge-thank-you-head": "感謝您的編輯！",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "您可以透過點擊下方按鈕來編輯在{{WBREPONAME}}的此項屬性參考。",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "編輯在{{WBREPONAME}}的參考"
 }
