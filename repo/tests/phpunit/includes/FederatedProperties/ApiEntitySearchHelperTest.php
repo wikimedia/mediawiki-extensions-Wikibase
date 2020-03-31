@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
@@ -86,6 +87,10 @@ class ApiEntitySearchHelperTest extends TestCase {
 			$this->assertEquals( new PropertyId( $expectedResult[ 'id' ] ), $resultToTest->getEntityId() );
 			$this->assertEquals( new Term( $langCode, $expectedResult[ 'label' ] ), $resultToTest->getDisplayLabel() );
 			$this->assertEquals( new Term( $langCode, $expectedResult[ 'description' ] ), $resultToTest->getDisplayDescription() );
+			$this->assertEquals(
+				$expectedResult['datatype'],
+				$resultToTest->getMetaData()[PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY]
+			);
 		}
 	}
 
@@ -101,7 +106,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 	}
 
 	private function getResponseDataForId( $searchResponses, $resultId ) {
-
 		//convert $searchResponse to array
 		$searchResponses = \GuzzleHttp\json_decode( \GuzzleHttp\json_encode( $searchResponses ), true );
 		foreach ( $searchResponses as $response ) {
@@ -121,7 +125,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 * @param array $expectedResultsEntityId
 	 */
 	public function testApiResponseStructureIsValid( $langCode, $params, $responseDataFile, $statusCode ) {
-
 		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )

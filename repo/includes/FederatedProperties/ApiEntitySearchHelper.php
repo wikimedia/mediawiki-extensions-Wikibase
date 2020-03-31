@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 
 /**
  * Helper class to search for entities via an api from another wikibase instance
@@ -76,6 +77,7 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 				new Term( $languageCode, $result->description ),
 				[
 					TermSearchResult::CONCEPTURI_META_DATA_KEY => $result->concepturi,
+					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result->datatype,
 				]
 			);
 			$allResults[ $result->id ] = $termSearchResult;
