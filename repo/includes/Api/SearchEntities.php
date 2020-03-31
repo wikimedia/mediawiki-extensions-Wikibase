@@ -101,13 +101,6 @@ class SearchEntities extends ApiBase {
 		return $entries;
 	}
 
-	private function getEntityIdsForTermSearchResults( array $termSearchResults ) {
-		return array_map( function ( TermSearchResult $result ) {
-			return $result->getEntityId();
-		},
-			$termSearchResults );
-	}
-
 	/**
 	 * @param TermSearchResult $match
 	 * @param string[]|null $props
