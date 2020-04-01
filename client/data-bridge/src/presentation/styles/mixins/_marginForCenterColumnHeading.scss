@@ -1,0 +1,12 @@
+/// Margins for a main/top heading in the center column.
+///
+/// The heading has $heading-margin-top on desktop
+/// but no top margin on mobile.
+/// A bottom margin is not defined.
+@mixin marginForCenterColumnHeading() {
+	@include marginForCenterColumn( $heading-margin-top, 0 );
+
+	@media ( max-width: $breakpoint ) {
+		margin-top: 0;
+	}
+}

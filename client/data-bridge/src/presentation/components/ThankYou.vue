@@ -61,11 +61,7 @@ export default class ThankYou extends Vue {
 
 	&__head {
 		@include h3();
-		@include marginForCenterColumn( $heading-margin-top, 0 );
-
-		@media ( max-width: $breakpoint ) {
-			margin-top: 0;
-		}
+		@include marginForCenterColumnHeading();
 	}
 
 	&__body {
