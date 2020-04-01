@@ -442,6 +442,7 @@
 	"wikibase-entity-save-error-message": "Deine Änderung konnte nicht veröffentlicht werden. Du kannst erneut versuchen, auf die Schaltfläche \"Veröffentlichen\" zu klicken.",
 	"wikibase-tainted-ref-warning-icon-title": "Diese Aussage hat einige potenzielle Probleme",
 	"wikibase-tainted-ref-popper-text": "Der Wert dieser Aussage wurde geändert, aber der Beleg blieb gleich. Du kannst diese Warnung entfernen, falls der Beleg noch korrekt ist.",
+	"wikibase-tainted-ref-popper-title": "Möglicherweise Diskrepanz zwischen Einzelnachweis und Wert",
 	"wikibase-tainted-ref-popper-help-link-title": "Hilfeseite für diesen Beschränkungstyp",
 	"wikibase-tainted-ref-popper-help-link-text": "Hilfe",
 	"wikibase-tainted-ref-popper-feedback-text": "Ist diese neue Funktion nützlich?",

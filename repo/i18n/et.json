@@ -365,5 +365,15 @@
 	"action-property-create": "omadusi luua",
 	"right-property-create": "Luua omadusi",
 	"wikibase-entity-not-viewable-title": "Lahknev sisutüüp: sisu ei saa kuvada",
-	"wikibase-entity-not-viewable": "Antud sisutüüp \"$1\" pole olem ja Vikibaas ei saa seda kuvada."
+	"wikibase-entity-not-viewable": "Antud sisutüüp \"$1\" pole olem ja Vikibaas ei saa seda kuvada.",
+	"wikibase-tainted-ref-warning-icon-title": "Sel avaldusel on võimalikke probleeme",
+	"wikibase-tainted-ref-popper-text": "Selle avalduse väärtust muudeti, aga viide jäi samaks. Võid selle hoiatuse eemaldada, kui viide on jätkuvalt õige.",
+	"wikibase-tainted-ref-popper-title": "Võimalik viite ja väärtuse kokkusobimatus",
+	"wikibase-tainted-ref-popper-help-link-title": "Selle kitsenduse tüübi abileht",
+	"wikibase-tainted-ref-popper-help-link-text": "Abi",
+	"wikibase-tainted-ref-popper-feedback-text": "Kas see funktsioon on kasulik?",
+	"wikibase-tainted-ref-popper-feedback-link-text": "Jäta tagasisidet",
+	"wikibase-tainted-ref-popper-feedback-link-title": "Tagasiside lehekülje link",
+	"wikibase-tainted-ref-popper-remove-warning": "Eemalda hoiatus",
+	"wikibase-tainted-ref-tainted-icon-title": "Sel avaldusel on võimalikke probleeme."
 }

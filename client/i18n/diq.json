@@ -34,7 +34,7 @@
 	"wikibase-linkitem-confirmitem-text": "Pera kı şıma weçinaya Wikidata sero yew  [$1 objeya] alaqe biya. Cêr ra  {{PLURAL:$2|na per|nê peran}} rê definaye {{PLURAL:$2|per esta| Peri estê}} se tesdiq kerê.",
 	"wikibase-linkitem-confirmitem-button": "Tesdiq kerê",
 	"wikibase-linkitem-not-loggedin-title": "Ronıştış icab keno",
-	"wikibase-linkitem-success-link": "Perrê gre vırazi ya. Şıma şenê [$1 ra merkezê malumati]  zerrekê greyan bıvinê.",
+	"wikibase-linkitem-success-link": "Pela rê gıre vıraya. Şıma şenê [$1 ra merkezê malumati] zerrekê gıreyi bıvinê.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bınımne",
 	"wikibase-rc-hide-wikidata-show": "Bımocne",

@@ -23,7 +23,8 @@
 			"Ontsed",
 			"S4b1nuz E.656",
 			"Sarah Bernabei",
-			"Albe Albe460"
+			"Albe Albe460",
+			"Sakretsu"
 		]
 	},
 	"wikibase-desc": "Archivio di dati strutturati",
@@ -384,5 +385,6 @@
 	"wikibase-pageinfo-wb-claims": "Numero di dichiarazioni in questa entità",
 	"wikibase-pageinfo-wb-identifiers": "Numero di dichiarazioni per identificativi esterni in questa entità",
 	"wikibase-entity-save-error-heading": "Qualcosa è andato storto",
-	"wikibase-tainted-ref-warning-icon-title": "Questa dichiarazione ha alcuni potenziali problemi"
+	"wikibase-tainted-ref-warning-icon-title": "Questa dichiarazione ha alcuni potenziali problemi",
+	"wikibase-tainted-ref-popper-help-link-title": "Pagina di aiuto per questo tipo di vincolo"
 }
