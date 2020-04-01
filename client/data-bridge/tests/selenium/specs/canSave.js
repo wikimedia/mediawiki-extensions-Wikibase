@@ -194,10 +194,9 @@ describe( 'App', () => {
 		// actually trigger save
 		DataBridgePage.saveButton.click();
 
-		// click “edit reference on repo” button to trigger reload
+		// click “close” button once “thank you” screen is shown to trigger reload
 		DataBridgePage.thankYouScreen.waitForDisplayed();
-		DataBridgePage.thankYouButton.click();
-		browser.switchWindow( title );
+		DataBridgePage.closeButton.click();
 
 		DataBridgePage.app.waitForDisplayed(
 			5000,
