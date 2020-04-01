@@ -26,7 +26,7 @@ class StatementGuidTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertSame( $expected, $statementGuid->getSerialization() );
 		$this->assertEquals( $entityId, $statementGuid->getEntityId() );
-		$this->assertEquals( $guid, $statementGuid->getGuid() );
+		$this->assertEquals( $guid, $statementGuid->getGuidPart() );
 	}
 
 	public function provideConstructionData() {
