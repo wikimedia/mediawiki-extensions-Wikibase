@@ -16,7 +16,12 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-const validTypes = [ 'notice' ];
+
+const validTypes = [
+	'error',
+	'notice',
+];
+
 @Component
 export default class IconMessageBox extends Vue {
 	@Prop( {
@@ -69,8 +74,17 @@ export default class IconMessageBox extends Vue {
 		content: '';
 	}
 
+	&--error:before {
+		background-image: $svg-error;
+	}
+
 	&--notice:before {
 		background-image: $svg-notice;
+	}
+
+	&--block#{&}--error {
+		border-color: $error-message-border;
+		background-color: $error-message-background;
 	}
 
 	&--block#{&}--notice {

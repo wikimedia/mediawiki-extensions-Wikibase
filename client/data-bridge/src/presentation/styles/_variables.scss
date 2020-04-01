@@ -37,6 +37,8 @@ $padding-vertical-base: px-to-rem( 6px );
 $padding-horizontal-base: px-to-rem( 12px );
 $button-icon-size: px-to-rem( 20px );
 
+$error-message-background: $wmui-color-red90;
+$error-message-border: $wmui-color-red50;
 $notice-message-background: $wmui-color-base80;
 $notice-message-border: $wmui-color-base50;
 
@@ -51,6 +53,7 @@ $stacking-height-license: 20;
 $stacking-height-loading-bar: 20;
 
 $svg-close: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/close.svg );
+$svg-error: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/error-error.svg );
 $svg-notice: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/notice.svg );
 $svg-info: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/infoFilled.svg );
 $svg-collapse: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/collapse-progressive.svg );
