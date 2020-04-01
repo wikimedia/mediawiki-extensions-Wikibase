@@ -1,6 +1,9 @@
 language: php
 
-dist: trusty
+dist: bionic
+
+services:
+  - mysql
 
 matrix:
   fast_finish: true
