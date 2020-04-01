@@ -85,6 +85,7 @@
     "stylelint-config-wikimedia": "^0.8.0",
     "stylelint-processor-html": "^1.0.0",
     "stylelint-scss": "^3.14.2",
+    "terser-webpack-plugin": "^2.3.5",
     "typescript": "^3.7.5",
     "url-search-params-polyfill": "^8.0.0",
     "vue-cli-plugin-typescript": "0.0.1",

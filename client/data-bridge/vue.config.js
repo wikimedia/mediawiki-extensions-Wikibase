@@ -1,3 +1,5 @@
+const TerserPlugin = require( 'terser-webpack-plugin' );
+
 const filePrefix = 'data-bridge.';
 const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
 
@@ -22,6 +24,14 @@ module.exports = {
 			init: './src/mediawiki/data-bridge.init.ts',
 		},
 		externals: externals(),
+		optimization: {
+			minimize: true,
+			minimizer: [ new TerserPlugin( {
+				include: /\.common\.js$/,
+				sourceMap: true,
+				extractComments: false,
+			} ) ],
+		},
 	} ),
 	chainWebpack: ( config ) => {
 		config.optimization.delete( 'splitChunks' );
