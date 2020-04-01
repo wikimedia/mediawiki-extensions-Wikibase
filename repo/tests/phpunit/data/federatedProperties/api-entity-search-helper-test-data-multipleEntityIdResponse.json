@@ -1,0 +1,45 @@
+{
+  "searchinfo": {
+  	"search": "P147"
+  },
+  "search": [
+	{
+	  "repository": "wikidata",
+	  "id": "P147",
+	  "concepturi": "https://wikidata.beta.wmflabs.org/entity/P147",
+	  "title": "Property:P147",
+	  "pageid": 9721,
+	  "url": "https://wikidata.beta.wmflabs.org/wiki/Property:P147",
+	  "datatype": "string",
+	  "label": "FpznjfxN",
+	  "description": "RqPBMCLjaaqtCUSfLxWU",
+	  "match": {
+	  "type": "entityId",
+	  "text": "P147"
+	  },
+	  "aliases": [
+	  	"P147"
+	  ]
+	},
+	{
+	  "repository": "wikidata",
+	  "id": "P160020",
+	  "concepturi": "https://wikidata.beta.wmflabs.org/entity/P160020",
+	  "title": "Property:P160020",
+	  "pageid": 511394,
+	  "url": "https://wikidata.beta.wmflabs.org/wiki/Property:P160020",
+	  "datatype": "monolingualtext",
+	  "label": "title",
+	  "description": "+++ Used for testing data bridge reference rendering +++ published title of a work, such as a newspaper article, a literary work, a website, or a performance work.",
+	  "match": {
+	  "type": "alias",
+	  "language": "en",
+	  "text": "P1476"
+	  },
+	  "aliases": [
+	  	"P1476"
+	  ]
+	}
+  ],
+  "success": 1
+}
