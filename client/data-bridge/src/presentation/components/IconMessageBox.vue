@@ -47,7 +47,7 @@ export default class IconMessageBox extends Vue {
 	position: relative;
 
 	&__content {
-		margin-left: 3.5 * $base-spacing-unit;
+		margin-left: $size-icon + $base-spacing-unit;
 
 		@include body-responsive();
 	}
@@ -55,11 +55,11 @@ export default class IconMessageBox extends Vue {
 	&--block {
 		border-width: 1px;
 		border-style: solid;
-		padding: 16px 24px 16px 24px;
+		padding: $message-padding-vertical $message-padding-horizontal;
 	}
 
 	&--block:before {
-		background-position: 0 16px;
+		background-position: 0 $message-padding-vertical;
 	}
 
 	&:before {

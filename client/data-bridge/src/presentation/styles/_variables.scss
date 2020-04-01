@@ -37,6 +37,8 @@ $padding-vertical-base: px-to-rem( 6px );
 $padding-horizontal-base: px-to-rem( 12px );
 $button-icon-size: px-to-rem( 20px );
 
+$message-padding-vertical: 1.5 * $base-spacing-unit;
+$message-padding-horizontal: 3 * $base-spacing-unit;
 $error-message-background: $wmui-color-red90;
 $error-message-border: $wmui-color-red50;
 $notice-message-background: $wmui-color-base80;
