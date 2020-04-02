@@ -247,7 +247,7 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenCalledWith(
 				'addApplicationErrors',
 				[ {
-					type: ErrorTypes.APPLICATION_LOGIC_ERROR,
+					type: ErrorTypes.INITIALIZATION_ERROR,
 					info: error,
 				} ],
 			);

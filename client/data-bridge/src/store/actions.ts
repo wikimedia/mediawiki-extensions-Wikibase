@@ -66,7 +66,7 @@ RootActions
 		] ).then(
 			( results ) => this.dispatch( 'initBridgeWithRemoteData', { information, results } ),
 			( error ) => {
-				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: error } ] );
+				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.INITIALIZATION_ERROR, info: error } ] );
 				throw error;
 			},
 		).then( () => {
