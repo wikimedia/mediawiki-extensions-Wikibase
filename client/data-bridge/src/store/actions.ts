@@ -40,6 +40,14 @@ RootActions
 		this.statementMutationFactory = statementMutationFactory;
 	}
 
+	public relaunchBridge( information: AppInformation ): Promise<void> {
+		this.commit( 'reset' );
+		this.entityModule.commit( 'reset' );
+		this.statementModule.commit( 'reset' );
+
+		return this.dispatch( 'initBridge', information );
+	}
+
 	public initBridge(
 		information: AppInformation,
 	): Promise<void> {

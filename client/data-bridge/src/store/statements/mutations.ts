@@ -11,4 +11,10 @@ export class StatementMutations extends Mutations<StatementState> {
 	): void {
 		Vue.set( this.state, payload.entityId, clone( payload.statements ) );
 	}
+
+	public reset(): void {
+		for ( const propertyId of Object.getOwnPropertyNames( this.state ) ) {
+			Vue.delete( this.state, propertyId );
+		}
+	}
 }

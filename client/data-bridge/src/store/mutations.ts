@@ -4,6 +4,7 @@ import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
+import { BaseState } from '@/store/state';
 import { Mutations } from 'vuex-smart-module';
 import Application from '@/store/Application';
 
@@ -55,5 +56,10 @@ export class RootMutations extends Mutations<Application> {
 
 	public setPageUrl( pageUrl: string ): void {
 		this.state.pageUrl = pageUrl;
+	}
+
+	public reset(): void {
+		// this.state already has all the properties, and Object.assign() invokes setters, so this is reactive
+		Object.assign( this.state, new BaseState() );
 	}
 }

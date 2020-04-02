@@ -8,7 +8,7 @@ import getOrEnforceUrlParameter from '@/mock-data/getOrEnforceUrlParameter';
 import ServiceContainer from '@/services/ServiceContainer';
 import { launch } from '@/main';
 import EntityRevision from '@/datamodel/EntityRevision';
-import Events from '@/events';
+import { initEvents } from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
 import messages from '@/mock-data/messages';
@@ -158,8 +158,8 @@ launch(
 		pageUrl: 'https://client.example/wiki/Client_page',
 	},
 	services,
-).on( Events.onSaved, () => {
+).on( initEvents.onSaved, () => {
 	console.info( 'Application event: saved' );
-} ).on( Events.onCancel, () => {
+} ).on( initEvents.onCancel, () => {
 	console.info( 'Application event: canceled' );
 } );
