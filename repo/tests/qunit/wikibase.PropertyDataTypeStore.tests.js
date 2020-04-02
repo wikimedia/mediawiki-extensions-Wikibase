@@ -10,7 +10,7 @@
 
 		return new PropertyDataTypeStore(
 			services.entityLoadedHook || { add: sinon.stub().yields( { claims: {} } ) },
-			services.entityStore || sinon.stub()
+			services.entityStore || { get: sinon.stub().returns( $.Deferred().resolve( null ) ) }
 		);
 	}
 
@@ -26,23 +26,82 @@
 		} );
 	} );
 
-	QUnit.test( 'Given data type not set, checks existing statements for the requested property', function ( assert ) {
-		var done = assert.async(),
-			expectedType = 'time',
-			entityJson = {
-				// id, labels, etc not relevant for these tests
-				claims: {
-					P123: [ {
-						mainsnak: { datatype: expectedType }
-					} ]
+	QUnit.test( 'Checks existing statements for the requested property\'s data type', function ( assert ) {
+		var testData = [
+				{
+					message: 'getting the data type from a main snak',
+					expected: 'time',
+					property: 'P123',
+					entity: {
+						// id, labels, etc not relevant for these tests
+						claims: {
+							P123: [ {
+								mainsnak: { datatype: 'time' }
+							} ]
+						}
+					}
+				},
+				{
+					message: 'getting the data type from a qualifier',
+					expected: 'string',
+					property: 'P666',
+					entity: {
+						claims: {
+							P123: [ {
+								qualifiers: {
+									P666: [
+										{
+											datatype: 'string'
+										}
+									]
+								}
+							} ]
+						}
+					}
+				},
+				{
+					// This is a contrived example because at the time of writing the lexeme json is missing the data
+					// type on statements on sub entities for some reason -> T249206.
+					message: 'getting the data type from a statement on a sub entity',
+					expected: 'quantity',
+					property: 'P789',
+					entity: {
+						senses: [ {
+							claims: {
+								P789: [ {
+									mainsnak: { datatype: 'quantity' }
+								} ]
+							}
+						} ]
+					}
+				},
+				{
+					message: 'returns null if a statement exists for the property but without data type',
+					expected: null,
+					property: 'P321',
+					entity: {
+						senses: [ {
+							claims: {
+								P321: [ {
+									mainsnak: {
+										// datatype: 'missing :('
+									}
+								} ]
+							}
+						} ]
+					}
 				}
-			},
-			entityLoadedHook = { add: sinon.stub().yields( entityJson ) },
-			dataTypeStore = newPropertyDataTypeStore( { entityLoadedHook: entityLoadedHook } );
+			],
+			done = assert.async( testData.length );
 
-		dataTypeStore.getDataTypeForProperty( 'P123' ).done( function ( dataType ) {
-			assert.strictEqual( dataType, expectedType );
-			done();
+		testData.forEach( function ( test ) {
+			var entityLoadedHook = { add: sinon.stub().yields( test.entity ) },
+				dataTypeStore = newPropertyDataTypeStore( { entityLoadedHook: entityLoadedHook } );
+
+			dataTypeStore.getDataTypeForProperty( test.property ).done( function ( dataType ) {
+				assert.strictEqual( dataType, test.expected, test.message );
+				done();
+			} );
 		} );
 	} );
 

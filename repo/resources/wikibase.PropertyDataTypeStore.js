@@ -43,10 +43,11 @@
 		},
 
 		_getDataTypeFromExistingStatements: function ( propertyId ) {
-			var dataTypePromise = $.Deferred();
+			var dataTypePromise = $.Deferred(),
+				self = this;
 
 			this._entityLoadedHook.add( function ( entity ) {
-				var dataType = entity.claims[ propertyId ] && entity.claims[ propertyId ][ 0 ].mainsnak.datatype;
+				var dataType = self._findDataTypeInEntity( entity, propertyId );
 				if ( dataType ) {
 					dataTypePromise.resolve( dataType );
 				} else {
@@ -55,6 +56,42 @@
 			} );
 
 			return dataTypePromise;
+		},
+
+		/**
+		 * Recursively traverses (pieces of) entity JSON and returns a property's data type if there is a statement for
+		 * it on the entity.
+		 *
+		 * @param {Object} node
+		 * @param {string} propertyId
+		 *
+		 * @returns {null|string}
+		 */
+		_findDataTypeInEntity: function ( node, propertyId ) {
+			if ( !node || typeof node !== 'object' ) {
+				return null;
+			}
+
+			for ( var i in node ) {
+				if ( i === propertyId ) {
+					var dataTypeFromSnak = this._getDataTypeFromSnak( node[ i ][ 0 ] ); // may not exist (T249206)
+					if ( dataTypeFromSnak ) {
+						return dataTypeFromSnak;
+					}
+				}
+
+				var dataType = this._findDataTypeInEntity( node[ i ], propertyId );
+				if ( dataType ) {
+					return dataType;
+				}
+			}
+
+			return null;
+		},
+
+		_getDataTypeFromSnak: function ( snak ) {
+			return snak && snak.datatype || // if it's a qualifier/reference, the data type is at the top level
+				snak.mainsnak && snak.mainsnak.datatype; // main snak
 		},
 
 		_getDataTypeFromEntityStore: function ( propertyId ) {
