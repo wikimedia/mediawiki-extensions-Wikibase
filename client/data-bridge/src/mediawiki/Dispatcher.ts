@@ -41,6 +41,7 @@ export default class Dispatcher {
 				editFlow: selectedElement.editFlow,
 				client: {
 					usePublish: this.dataBridgeConfig.usePublish,
+					issueReportingLink: this.dataBridgeConfig.issueReportingLink,
 				},
 				originalHref: selectedElement.link.href,
 			},

@@ -781,6 +781,13 @@ A list of tags for tracking edits through the Data Bridge.
 Optional if [client dataBridgeEnabled] is set to `true`, with a default value of ```[]```.
 Please note: you also have to create those tags in the target repository via Special:Tags.
 
+#### dataBridgeIssueReportingLink
+The URL for link to where the users can report errors with the Data Bridge.
+
+It may have a `<body>` placeholder which will be replaced with some text containing more information about the error.
+
+DEFAULT: `https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?title=Wikidata+Bridge+error&description=${body}&tags=Wikidata-Bridge`
+
 ### Miscellaneous
 
 #### repositories

@@ -129,6 +129,8 @@ return call_user_func( function() {
 
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified
 		# 'dataBridgeHrefRegExp' => '^http://localhost/index\.php/(Item:(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$',
+		'dataBridgeIssueReportingLink' =>
+		'https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?title=Wikidata+Bridge+error&description=<body>&tags=Wikidata-Bridge',
 
 		// IDs of some well-known properties used to format references
 		'wellKnownReferencePropertyIds' => [

@@ -46,7 +46,7 @@ describe( 'root/actions', () => {
 			entityTitle: 'Entity Title',
 			originalHref: '',
 			pageTitle: '',
-			client: { usePublish: true },
+			client: { usePublish: true, issueReportingLink: '' },
 			...fields,
 		};
 	}

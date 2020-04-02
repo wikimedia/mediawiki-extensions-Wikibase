@@ -48,7 +48,7 @@ describe( 'extendVueEnvironment', () => {
 	} );
 
 	it( 'invokes the BridgeConfig plugin', () => {
-		const config = { usePublish: true };
+		const config = { usePublish: true, issueReportingLink: '' };
 		extendVueEnvironment(
 			new ( jest.fn() )(),
 			new ( jest.fn() )(),

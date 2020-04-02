@@ -152,6 +152,7 @@ launch(
 		editFlow: EditFlow.OVERWRITE,
 		client: {
 			usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
+			issueReportingLink: 'https://http.cat/404',
 		},
 		originalHref: 'https://example.com/index.php?title=Item:Q47&uselang=en#P20',
 	},

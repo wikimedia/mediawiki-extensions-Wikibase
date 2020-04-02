@@ -23,7 +23,7 @@ describe( 'store/actions', () => {
 	let testSet: EntityRevision;
 	let labelTerm: Term;
 	const services = new ServiceContainer();
-	const client = { usePublish: false };
+	const client = { usePublish: false, issueReportingLink: '' };
 	let info: AppInformation;
 	// fill repository
 	beforeEach( async () => {

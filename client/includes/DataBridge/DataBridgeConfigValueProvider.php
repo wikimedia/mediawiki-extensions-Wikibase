@@ -44,6 +44,7 @@ class DataBridgeConfigValueProvider implements MediaWikiConfigValueProvider {
 			'hrefRegExp' => $hrefRegExp,
 			'editTags' => $editTags,
 			'usePublish' => $this->usePublish,
+			'issueReportingLink' => $this->settings->getSetting( 'dataBridgeIssueReportingLink' ),
 		];
 	}
 

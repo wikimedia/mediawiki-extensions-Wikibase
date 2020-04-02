@@ -8,13 +8,19 @@ describe( 'BridgeConfig', () => {
 
 	describe( 'mirroring of given values', () => {
 		it( 'mirrors usePublish', () => {
-			const config = new BridgeConfig( { usePublish: true } );
+			const config = new BridgeConfig( { usePublish: true, issueReportingLink: '' } );
 			expect( config.usePublish ).toBe( true );
+		} );
+
+		it( 'mirrors the issueReportingLink', () => {
+			const issueReportingLink = 'https://example.com';
+			const config = new BridgeConfig( { usePublish: true, issueReportingLink } );
+			expect( config.issueReportingLink ).toBe( issueReportingLink );
 		} );
 
 		describe( 'stringMaxLength', () => {
 			it( 'mirrors null if no value is provided', () => {
-				const config = new BridgeConfig( { usePublish: false } );
+				const config = new BridgeConfig( { usePublish: false, issueReportingLink: '' } );
 				expect( config.stringMaxLength ).toBeNull();
 			} );
 
@@ -22,6 +28,7 @@ describe( 'BridgeConfig', () => {
 				const maxLength = 12345;
 				const config = new BridgeConfig( {
 					usePublish: false,
+					issueReportingLink: '',
 					...getMockBridgeRepoConfig( { dataTypeLimits: {
 						string: { maxLength },
 					} } ),
@@ -33,7 +40,7 @@ describe( 'BridgeConfig', () => {
 
 		describe( 'options related to the license', () => {
 			it( 'mirrors null if no value is provided', () => {
-				const config = new BridgeConfig( { usePublish: false } );
+				const config = new BridgeConfig( { usePublish: false, issueReportingLink: '' } );
 				expect( config.dataRightsText ).toBeNull();
 				expect( config.dataRightsUrl ).toBeNull();
 				expect( config.termsOfUseUrl ).toBeNull();
@@ -46,6 +53,7 @@ describe( 'BridgeConfig', () => {
 
 				const config = new BridgeConfig( {
 					usePublish: false,
+					issueReportingLink: '',
 					...getMockBridgeRepoConfig( {
 						dataRightsText,
 						dataRightsUrl,

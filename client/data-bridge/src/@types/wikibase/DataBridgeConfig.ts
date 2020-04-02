@@ -5,6 +5,8 @@ interface DataBridgeConfig {
 	editTags: string[];
 	/** bool for switch between publish and save on the button label */
 	usePublish: boolean;
+	/** URL where the user can report a problem with the Data Bridge. May include placeholder for body: `<body>`. */
+	issueReportingLink: string;
 }
 
 export default DataBridgeConfig;
