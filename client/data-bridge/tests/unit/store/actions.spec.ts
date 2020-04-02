@@ -1277,4 +1277,54 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenCalledWith( 'setEditDecision', editDecision );
 		} );
 	} );
+
+	describe( 'trackApplicationErrorsAsUnknown', () => {
+		it( 'sends application errors to tracker', async () => {
+			const state = newApplicationState( {
+				applicationErrors: [
+					{ type: 'type_1' } as unknown as ApplicationError,
+					{ type: 'type_2' } as unknown as ApplicationError,
+				],
+			} );
+			const actions = inject( RootActions, { state } );
+			const tracker = newMockTracker();
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			await actions.trackApplicationErrorsAsUnknown();
+
+			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_1' );
+			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_2' );
+		} );
+
+		it.each( [
+			[ 'lower_snake_case', 'lower_snake_case' ],
+			[ 'UPPER_SNAKE_CASE', 'upper_snake_case' ],
+			[ 'lower-kebab-case', 'lower_kebab_case' ],
+			[ 'UPPER-KEBAB-CASE', 'upper_kebab_case' ],
+			[ '*consecutive* non-letters', 'consecutive_non_letters' ],
+			[ '!!!extra important!!!', 'extra_important' ],
+			[ 'error 502', 'error_502' ],
+		] )( 'maps type %s to %s', async ( type: string, expectedType: string ) => {
+			const state = newApplicationState( {
+				applicationErrors: [ { type } as ApplicationError ],
+			} );
+			const actions = inject( RootActions, { state } );
+			const tracker = newMockTracker();
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			await actions.trackApplicationErrorsAsUnknown();
+
+			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( expectedType );
+		} );
+	} );
 } );

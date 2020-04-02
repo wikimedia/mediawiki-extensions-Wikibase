@@ -293,4 +293,14 @@ RootActions
 		return Promise.resolve();
 	}
 
+	public async trackApplicationErrorsAsUnknown(): Promise<void> {
+		for ( const error of this.state.applicationErrors ) {
+			const type = ( error.type || 'error-type-undefined' )
+				.toLowerCase()
+				.replace( /[^a-z0-9_]+/g, '_' )
+				.replace( /^[^a-z0-9]|[^a-z0-9]$/g, '' );
+			this.store.$services.get( 'tracker' ).trackUnknownError( type );
+		}
+	}
+
 }

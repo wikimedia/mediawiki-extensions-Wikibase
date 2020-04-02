@@ -26,4 +26,13 @@ describe( 'DataBridgeTrackerService', () => {
 
 		expect( tracker.increment ).toHaveBeenCalledWith( 'error.purge' );
 	} );
+
+	it( 'tracks a given unknown error type', () => {
+		const tracker = getMockTracker();
+		const service = new DataBridgeTrackerService( tracker );
+
+		service.trackUnknownError( 'some_type' );
+
+		expect( tracker.increment ).toHaveBeenCalledWith( 'error.unknown.some_type' );
+	} );
 } );

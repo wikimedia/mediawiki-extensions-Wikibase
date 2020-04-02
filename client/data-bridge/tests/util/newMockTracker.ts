@@ -5,6 +5,7 @@ export default function ( methods?: Partial<BridgeTracker> ): BridgeTracker {
 		...{
 			trackPropertyDatatype: jest.fn(),
 			trackTitlePurgeError: jest.fn(),
+			trackUnknownError: jest.fn(),
 		},
 		...methods,
 	};

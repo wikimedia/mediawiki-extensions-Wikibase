@@ -15,4 +15,8 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 	public trackTitlePurgeError(): void {
 		this.tracker.increment( 'error.purge' );
 	}
+
+	public trackUnknownError( type: string ): void {
+		this.tracker.increment( `error.unknown.${type}` );
+	}
 }
