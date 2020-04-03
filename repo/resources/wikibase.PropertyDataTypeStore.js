@@ -34,12 +34,17 @@
 		},
 
 		getDataTypeForProperty: function ( id ) {
+			var self = this;
+
 			if ( this._propertyDataTypeMapping[ id ] ) {
 				return $.Deferred().resolve( this._propertyDataTypeMapping[ id ] );
 			}
 
 			return this._getDataTypeFromExistingStatements( id )
-				.catch( this._getDataTypeFromEntityStore.bind( this, id ) );
+				.catch( this._getDataTypeFromEntityStore.bind( this, id ) )
+				.always( function ( dataType ) {
+					self.setDataTypeForProperty( id, dataType );
+				} );
 		},
 
 		_getDataTypeFromExistingStatements: function ( propertyId ) {
