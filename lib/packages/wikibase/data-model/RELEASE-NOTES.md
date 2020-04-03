@@ -1,6 +1,6 @@
 # Wikibase DataModel release notes
 
-## Version 9.4.0 (development)
+## Version 9.4.0 (2020-04-03)
 
 * Added `getGuidPart` to `StatementGuid`
 
