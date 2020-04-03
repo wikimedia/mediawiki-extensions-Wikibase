@@ -58,4 +58,10 @@ class ApiServiceFactory {
 		);
 	}
 
+	public function newApiPropertyDataTypeLookup(): ApiPropertyDataTypeLookup {
+		return new ApiPropertyDataTypeLookup(
+			$this->newFederatedPropertiesApiClient()
+		);
+	}
+
 }

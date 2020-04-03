@@ -1,0 +1,10 @@
+{
+	"entities": {
+		"P666": {
+			"type": "property",
+			"datatype": "secretEvilDataType",
+			"id": "P666"
+		}
+	},
+	"success": 1
+}
