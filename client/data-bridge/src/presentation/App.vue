@@ -161,6 +161,11 @@ export default class App extends mixins( StateMixin ) {
 	-moz-osx-font-smoothing: grayscale;
 	color: $wmui-color-base10;
 	overflow: hidden;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 
 	// ensure we are not affected by any font-size changes of the OOUI dialog cause by the skin
 	font-size: 1rem;
@@ -171,17 +176,13 @@ export default class App extends mixins( StateMixin ) {
 	}
 
 	&__body {
-		position: absolute;
-		top: $size-dialog-bar--desktop;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		flex: 1;
 		overflow-x: hidden;
 		overflow-y: auto;
 	}
 
 	&__license {
-		position: fixed;
+		position: absolute;
 		width: 100%;
 		background: #fff;
 		box-shadow: $box-shadow-dialog;
@@ -191,10 +192,6 @@ export default class App extends mixins( StateMixin ) {
 	@media ( max-width: $breakpoint ) {
 		&__header {
 			height: $size-dialog-bar--mobile;
-		}
-
-		&__body {
-			top: $size-dialog-bar--mobile;
 		}
 	}
 
