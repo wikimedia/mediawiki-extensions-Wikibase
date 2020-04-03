@@ -1,0 +1,22 @@
+test_systems:
+  hosts:
+    wikidata-federated-properties.wikidata-dev.eqiad.wmflabs:
+      PROTOCOL: "https"
+      SERVER_NAME: "wikidata-federated-properties.wmflabs.org"
+      PORT: ""
+    federated-properties.vm:
+      PROTOCOL: "http"
+      SERVER_NAME: "federated-properties.vm"
+      PORT: ":8080"
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
+    PROJECT_NAME: "federatedProperties"
+    PROJECT_DIR: "/opt/{{ PROJECT_NAME }}"
+    SCRIPTS_DIR: "{{ PROJECT_DIR }}/scripts"
+    LOG_DIR: "{{ PROJECT_DIR }}/log"
+    MW_PATH: "{{ PROJECT_DIR }}/mediawiki"
+    MW_SCRIPT_PATH: "/w"
+    SOURCE_REPO_URL: "https://wikidata.beta.wmflabs.org/w/"
+
+
+

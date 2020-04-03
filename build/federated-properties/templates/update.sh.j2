@@ -1,0 +1,40 @@
+#!/bin/sh
+MW_PATH={{ MW_PATH }}
+UPDATE_LOG={{ LOG_DIR }}/update.log
+GIT_LOG={{ LOG_DIR }}/git.log
+COMPOSER_LOG={{ LOG_DIR }}/composer.log
+MAINT_LOG={{ LOG_DIR }}/maintenance.log
+ERROR_LOG={{ LOG_DIR }}/error.log
+
+log () {
+  echo $1 | tee -a  $2
+}
+
+log_all () {
+  echo $1 | tee -a  ${UPDATE_LOG} ${GIT_LOG} ${COMPOSER_LOG} ${MAINT_LOG} ${ERROR_LOG}
+}
+
+# start
+log_all "########### $(date) ###########"
+
+for i in \
+     skins/Vector \
+     extensions/UniversalLanguageSelector \
+     extensions/cldr \
+     extensions/Wikibase \
+     . ; do
+  log "## updating ${MW_PATH}/$i" "${UPDATE_LOG} ${GIT_LOG}"
+  cd ${MW_PATH}/$i
+  git pull origin master 2>> $ERROR_LOG | tee -a ${GIT_LOG}
+  git submodule update --init 2>> $ERROR_LOG | tee -a ${GIT_LOG}
+done
+
+log "## running composer update" ${UPDATE_LOG}
+cd {{ MW_PATH }}
+/usr/bin/composer update 2>&1 | tee -a ${COMPOSER_LOG}
+
+log "## running maintenance/update.php" ${UPDATE_LOG}
+docker exec wikibase php maintenance/update.php --quick 2>> $ERROR_LOG  | tee -a ${MAINT_LOG}
+
+# done
+log_all "########### $(date) ###########"

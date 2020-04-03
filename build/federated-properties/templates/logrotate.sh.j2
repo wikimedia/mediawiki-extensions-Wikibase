@@ -1,0 +1,10 @@
+#!/bin/sh
+UPDATE_LOG={{ LOG_DIR }}/update.log
+GIT_LOG={{ LOG_DIR }}/git.log
+COMPOSER_LOG={{ LOG_DIR }}/composer.log
+MAINT_LOG={{ LOG_DIR }}/maintenance.log
+ERROR_LOG={{ LOG_DIR }}/error.log
+
+for i in ${UPDATE_LOG} ${GIT_LOG} ${COMPOSER_LOG} ${MAINT_LOG} ${ERROR_LOG} ; do
+  mv ${i} ${i}.1 ; touch ${i}
+done
