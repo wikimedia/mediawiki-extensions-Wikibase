@@ -59,11 +59,13 @@ describe( 'init', () => {
 			using = jest.fn().mockResolvedValue( require ),
 			editTags = [ 'a tag' ],
 			usePublish = true,
+			issueReportingLink = 'https://bugs.example/new?body=<body>',
 			pageTitle = 'Client_page',
 			contentLanguage = 'fr',
 			config = mockMwConfig( {
 				editTags,
 				usePublish,
+				issueReportingLink,
 				wgPageName: pageTitle,
 				wgPageContentLanguage: contentLanguage,
 			} ),
@@ -163,7 +165,7 @@ describe( 'init', () => {
 					propertyId,
 					entityTitle,
 					editFlow,
-					client: { usePublish },
+					client: { usePublish, issueReportingLink },
 					originalHref: testLinkHref,
 					pageUrl: 'https://data-bridge.test/jest', // configured in jest.config.js
 				},
