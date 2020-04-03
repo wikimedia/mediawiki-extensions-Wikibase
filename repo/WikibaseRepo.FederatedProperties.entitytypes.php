@@ -8,16 +8,12 @@
  * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
  * objects or loading classes here!
  *
- * @see docs/entiytypes.wiki
+ * @see docs/entiytypes.md
  *
  * @license GPL-2.0-or-later
  */
 
 use Wikibase\Lib\Store\EntityArticleIdNullLookup;
-use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
-use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
-use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
-use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
 return [
@@ -26,34 +22,13 @@ return [
 			return new EntityArticleIdNullLookup();
 		},
 		'url-lookup-callback' => function () {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-			return new ApiEntityUrlLookup(
-				new ApiEntityTitleTextLookup(
-					new ApiEntityNamespaceInfoLookup(
-						$wikibaseRepo->newFederatedPropertiesApiClient(),
-						$wikibaseRepo->getContentModelMappings()
-					)
-				),
-				$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
-			);
+			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityUrlLookup();
 		},
 		'title-text-lookup-callback' => function () {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-			return new ApiEntityTitleTextLookup(
-				new ApiEntityNamespaceInfoLookup(
-					$wikibaseRepo->newFederatedPropertiesApiClient(),
-					$wikibaseRepo->getContentModelMappings()
-				)
-			);
+			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityTitleTextLookup();
 		},
 		'entity-search-callback' => function() {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-			return new ApiEntitySearchHelper(
-				$wikibaseRepo->newFederatedPropertiesApiClient()
-			);
+			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
 		},
 	]
 ];
