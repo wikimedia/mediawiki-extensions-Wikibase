@@ -3,7 +3,7 @@
 		class="wb-ui-icon-message-box"
 		:class="[
 			`wb-ui-icon-message-box--${ type }`,
-			!inline ? 'wb-ui-icon-message-box--block' : '',
+			{ 'wb-ui-icon-message-box--block': !inline },
 		]"
 	>
 		<div class="wb-ui-icon-message-box__content">

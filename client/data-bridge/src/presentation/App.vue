@@ -45,7 +45,7 @@
 					/>
 				</div>
 				<DataBridge
-					:class="[ 'wb-db-app__data-bridge', isOverlayed ? 'wb-db-app__data-bridge--overlayed' : '' ]"
+					:class="[ 'wb-db-app__data-bridge', { 'wb-db-app__data-bridge--overlayed': isOverlayed } ]"
 				/>
 			</Loading>
 		</div>
