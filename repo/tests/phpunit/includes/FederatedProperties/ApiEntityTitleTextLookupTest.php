@@ -5,17 +5,17 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
 
 /**
- * @covers \Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup
+ * @covers \Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ApiBasedEntityTitleTextLookupTest extends TestCase {
+class ApiEntityTitleTextLookupTest extends TestCase {
 
 	public function provideTestGetFullUrl() {
 		return [
@@ -30,14 +30,14 @@ class ApiBasedEntityTitleTextLookupTest extends TestCase {
 	 * @dataProvider provideTestGetFullUrl
 	 */
 	public function testGetFullUrl( $namespaceName, $entityId, $expected ) {
-		$lookup = new ApiBasedEntityTitleTextLookup(
-			$this->getApiBasedEntityNamespaceInfoLookup( $namespaceName )
+		$lookup = new ApiEntityTitleTextLookup(
+			$this->getApiEntityNamespaceInfoLookup( $namespaceName )
 		);
 		$this->assertSame( $expected, $lookup->getPrefixedText( $entityId ) );
 	}
 
-	private function getApiBasedEntityNamespaceInfoLookup( $namespaceName ) {
-		$mock = $this->createMock( ApiBasedEntityNamespaceInfoLookup::class );
+	private function getApiEntityNamespaceInfoLookup( $namespaceName ) {
+		$mock = $this->createMock( ApiEntityNamespaceInfoLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getNamespaceNameForEntityType' )
 			->willReturn( $namespaceName );

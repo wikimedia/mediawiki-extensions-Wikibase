@@ -8,10 +8,10 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 /**
  * @license GPL-2.0-or-later
  */
-class ApiBasedEntityUrlLookup implements EntityUrlLookup {
+class ApiEntityUrlLookup implements EntityUrlLookup {
 
 	/**
-	 * @var ApiBasedEntityTitleTextLookup
+	 * @var ApiEntityTitleTextLookup
 	 */
 	private $titleTextLookup;
 
@@ -20,7 +20,7 @@ class ApiBasedEntityUrlLookup implements EntityUrlLookup {
 	 */
 	private $sourceWikibaseUrl;
 
-	public function __construct( ApiBasedEntityTitleTextLookup $titleTextLookup, string $sourceWikibaseUrl ) {
+	public function __construct( ApiEntityTitleTextLookup $titleTextLookup, string $sourceWikibaseUrl ) {
 		$this->titleTextLookup = $titleTextLookup;
 		$this->sourceWikibaseUrl = $sourceWikibaseUrl;
 	}
