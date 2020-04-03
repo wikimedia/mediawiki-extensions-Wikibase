@@ -6,18 +6,18 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup
+ * @covers \Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class ApiBasedEntityNamespaceInfoLookupTest extends TestCase {
+class ApiEntityNamespaceInfoLookupTest extends TestCase {
 
 	private $dataFiles = [
 		'query-siteinfo-namespaces-wikidata.json',
@@ -58,7 +58,7 @@ class ApiBasedEntityNamespaceInfoLookupTest extends TestCase {
 	 * @dataProvider provideTestGetNamespaceNameForEntityType
 	 */
 	public function testGetNamespaceNameForEntityType( $dataFile, $entityType, $expected ) {
-		$lookup = new ApiBasedEntityNamespaceInfoLookup(
+		$lookup = new ApiEntityNamespaceInfoLookup(
 			$this->getApiClient( $dataFile ),
 			$this->getContentModelMappings()
 		);

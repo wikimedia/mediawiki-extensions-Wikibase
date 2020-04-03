@@ -5,7 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 /**
  * @license GPL-2.0-or-later
  */
-class ApiBasedEntityNamespaceInfoLookup {
+class ApiEntityNamespaceInfoLookup {
 
 	/**
 	 * @var array[]

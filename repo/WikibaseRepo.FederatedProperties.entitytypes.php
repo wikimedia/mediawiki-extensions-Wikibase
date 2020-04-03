@@ -14,9 +14,9 @@
  */
 
 use Wikibase\Lib\Store\EntityArticleIdNullLookup;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityNamespaceInfoLookup;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityTitleTextLookup;
-use Wikibase\Repo\FederatedProperties\ApiBasedEntityUrlLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityNamespaceInfoLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
+use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -28,9 +28,9 @@ return [
 		'url-lookup-callback' => function () {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-			return new ApiBasedEntityUrlLookup(
-				new ApiBasedEntityTitleTextLookup(
-					new ApiBasedEntityNamespaceInfoLookup(
+			return new ApiEntityUrlLookup(
+				new ApiEntityTitleTextLookup(
+					new ApiEntityNamespaceInfoLookup(
 						$wikibaseRepo->newFederatedPropertiesApiClient(),
 						$wikibaseRepo->getContentModelMappings()
 					)
@@ -41,8 +41,8 @@ return [
 		'title-text-lookup-callback' => function () {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-			return new ApiBasedEntityTitleTextLookup(
-				new ApiBasedEntityNamespaceInfoLookup(
+			return new ApiEntityTitleTextLookup(
+				new ApiEntityNamespaceInfoLookup(
 					$wikibaseRepo->newFederatedPropertiesApiClient(),
 					$wikibaseRepo->getContentModelMappings()
 				)

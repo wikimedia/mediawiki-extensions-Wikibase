@@ -8,14 +8,14 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 /**
  * @license GPL-2.0-or-later
  */
-class ApiBasedEntityTitleTextLookup implements EntityTitleTextLookup {
+class ApiEntityTitleTextLookup implements EntityTitleTextLookup {
 
 	/**
-	 * @var ApiBasedEntityNamespaceInfoLookup
+	 * @var ApiEntityNamespaceInfoLookup
 	 */
 	private $namespaceLookup;
 
-	public function __construct( ApiBasedEntityNamespaceInfoLookup $namespaceLookup ) {
+	public function __construct( ApiEntityNamespaceInfoLookup $namespaceLookup ) {
 		$this->namespaceLookup = $namespaceLookup;
 	}
 
