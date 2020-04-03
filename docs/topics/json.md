@@ -8,9 +8,7 @@ For a specification of the semantics of the data structures described here, see 
 
 Changes to the JSON format are subject to [Stable Interface Policy].
 
-**NOTE: The canonical copy of this document if in Wikibase.git. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].**
-
-[TOC]
+**NOTE: The canonical copy of this document is in Wikibase.git. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].**
 
 ## JSON Flavor {#json_flavour}
 
@@ -19,17 +17,35 @@ When encoding the Wikibase data structure as JSON, several choices have been mad
 
 * Keys in JSON objects are unique, their order is not significant.
 * Strings are encoded in one of two ways:
-** using either Unicode escape sequences (like \u0645) resulting in a UTF16 representation when decoded.
-** ...or using native UTF8 encoding.
+  * using either Unicode escape sequences (like \u0645) resulting in a UTF16 representation when decoded.
+  * ...or using native UTF8 encoding.
 * Numbers may be given in two ways:
-** integers from -(2^31) to 2^31-1 may be represented as number literals.
-** all numbers may be represented as decimal strings. In particular, quantity values are represented as arbitrary precision decimal strings.
+  * integers from -(2^31) to 2^31-1 may be represented as number literals.
+  * all numbers may be represented as decimal strings. In particular, quantity values are represented as arbitrary precision decimal strings.
 * Entity IDs are given as upper-case strings, e.g. “P29” or “Q623289”.
 * In JSON dumps, each entity is encoded in as a single line. This allows consumers to process the dump line by line, decoding each entity separately.
 
 Clients should be ready to process any of the forms given above.
 
+## In Code
+
+The wikibase/data-model-serialization library provides the majority of the serialization of core entities.
+
+For public consumption [ResultBuilder] is used to modify the standard storage serialization.
+
+This includes modifications such as:
+ - Adding the MediaWiki page information
+ - Filtering entity output by component (don't output labels)
+ - Adding URLs to sitelink output
+ - Adding property datatypes to snaks
+ - Adding Term fallback chain info
+ - Supplementing entity json to show removed values after an edit
+
 ## Top Level Structure {#json_structure}
+
+Different entities have different top level structures and are made up of different components.
+
+The example below is for an Item. Properties will not include sitelinks. Custom entity types may have an entirely different structure.
 
 ```json
 {
@@ -41,7 +57,7 @@ Clients should be ready to process any of the forms given above.
   "claims": {},
   "sitelinks": {},
   "lastrevid": 195301613,
-  "modified": "2015-02-10T12:42:02Z"
+  "modified": "2020-02-10T12:42:02Z"
 }
 ```
 
@@ -52,28 +68,29 @@ The JSON representation consists of the following fields in the top level struct
 * type
   * The entity type identifier. “item” for data items, and “property” for properties.
 * labels
-  * Contains the labels in different languages, see @ref #json_fingerprint below.
+  * Contains the labels in different languages, see @ref #json_fingerprint.
 * descriptions
-  * Contains the descriptions in different languages, see @ref #json_fingerprint below.
+  * Contains the descriptions in different languages, see @ref #json_fingerprint.
 * aliases
-  * Contains aliases in different languages, see @ref #json_fingerprint below.
+  * Contains aliases in different languages, see @ref #json_fingerprint.
 * claims
-  * Contains any number of statements, groups by property. See @ref #json_statements below.
+  * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See @ref #json_statements.
 * sitelinks
-  * Contains site links to pages on different sites describing the item, see @ref #json_sitelinks below.
-* lastrevid
-  * The JSON document's version (this is a MediaWiki revision ID).
-* modified
-  * The JSON document's publication date (this is a MediaWiki revision timestamp).
+  * Contains sitelinks to pages on different sites describing the item, see @ref #json_sitelinks.
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
 ```json
 {
   "lastrevid": 195301613,
-  "modified": "2015-02-10T12:42:02Z"
+  "modified": "2020-02-10T12:42:02Z"
 }
 ```
+
+* lastrevid
+  * The JSON document's version (this is a MediaWiki revision ID).
+* modified
+  * The JSON document's publication date (this is a MediaWiki revision timestamp).
 
 API modules also often return extra information related to the entity and the wiki:
 
@@ -86,11 +103,11 @@ API modules also often return extra information related to the entity and the wi
 ```
 
 * title
-  * The title of the page the entity is stored on (this could also include namespace such as 'Item:Q60')
+  * The title of the page the entity is stored in (this could also include namespace such as 'Item:Q60')
 * pageid
-  * The page id the entity is stored on
+  * The page id the entity is stored in
 * ns
-  * The namespace id the entity is stored in
+  * The namespace id of the page the entity is stored in
 
 ## Labels, Descriptions and Aliases {#json_fingerprint}
 
@@ -120,10 +137,6 @@ API modules also often return extra information related to the entity and the wi
 "en": [
   {
 	"language": "en",
-	"value": "NYC"
-  },
-  {
-	"language": "en",
 	"value": "New York"
   },
 ],
@@ -139,10 +152,6 @@ API modules also often return extra information related to the entity and the wi
   {
 	"language": "fr",
 	"value": "The City"
-  },
-  {
-	"language": "fr",
-	"value": "City of New York"
   },
   {
 	"language": "fr",
@@ -163,55 +172,6 @@ For each language, there is a record using the following fields:
 
 In the case of aliases, each language is associated with a list of such records,
 while for labels and descriptions the record is associated directly with the language.
-
-## Site Links {#json_sitelinks}
-
-```json
-{
-  "sitelinks": {
-	"afwiki": {
-	  "site": "afwiki",
-	  "title": "New York Stad",
-	  "badges": []
-	},
-	"frwiki": {
-	  "site": "frwiki",
-	  "title": "New York City",
-	  "badges": []
-	},
-	"nlwiki": {
-	  "site": "nlwiki",
-	  "title": "New York City",
-	  "badges": [
-		"Q17437796"
-	  ]
-	},
-	"enwiki": {
-	  "site": "enwiki",
-	  "title": "New York City",
-	  "badges": []
-	},
-	"dewiki": {
-	  "site": "dewiki",
-	  "title": "New York City",
-	  "badges": [
-		"Q17437798"
-	  ]
-	}
-  }
-}
-```
-
-Site links are given as records for each site identifier. Each such record contains the following fields:
-
-* site
-  * The site ID.
-* title
-  * The page title.
-* ''badges''
-  * Any “badges” associated with the page (such as “featured article”). Badges are given as a list of item IDs.
-* ''url''
-  * Optionally, the full URL of the page may be included.
 
 ## Statements {#json_statements}
 
@@ -580,6 +540,55 @@ Each reference is a set of Snaks structured in a similar way to how qualifiers a
 Snaks about the same property are grouped together in a list and made accessible by putting all these lists into a map,
 using the property IDs as keys. By ''snaks-order'' the order of those snaks is shown by their property IDs.
 
+## Sitelinks {#json_sitelinks}
+
+```json
+{
+  "sitelinks": {
+	"afwiki": {
+	  "site": "afwiki",
+	  "title": "New York Stad",
+	  "badges": []
+	},
+	"frwiki": {
+	  "site": "frwiki",
+	  "title": "New York City",
+	  "badges": []
+	},
+	"nlwiki": {
+	  "site": "nlwiki",
+	  "title": "New York City",
+	  "badges": [
+		"Q17437796"
+	  ]
+	},
+	"enwiki": {
+	  "site": "enwiki",
+	  "title": "New York City",
+	  "badges": []
+	},
+	"dewiki": {
+	  "site": "dewiki",
+	  "title": "New York City",
+	  "badges": [
+		"Q17437798"
+	  ]
+	}
+  }
+}
+```
+
+Sitelinks are given as records for each site identifier. Each such record contains the following fields:
+
+* site
+  * The site ID.
+* title
+  * The page title.
+* ''badges''
+  * Any “badges” associated with the page (such as “featured article”). Badges are given as a list of item IDs.
+* ''url''
+  * Optionally, the full URL of the page may be included.
+
 ## Example {#json_example}
 
 Below is an example of an extract of a complete entity represented in JSON.
@@ -590,7 +599,7 @@ Below is an example of an extract of a complete entity represented in JSON.
   "ns": 0,
   "title": "Q60",
   "lastrevid": 199780882,
-  "modified": "2015-02-27T14:37:20Z",
+  "modified": "2020-02-27T14:37:20Z",
   "id": "Q60",
   "type": "item",
   "aliases": {
@@ -988,6 +997,7 @@ Below is an example of an extract of a complete entity represented in JSON.
 [Glossary]: https://www.wikidata.org/wiki/Wikidata:Glossary
 [Stable Interface Policy]: https://www.wikidata.org/wiki/Wikidata:Stable_Interface_Policy
 [Wikibase Data Model]: https://www.mediawiki.org/wiki/Wikibase/DataModel
+[ResultBuilder]: @ref Wikibase::Repo::Api::ResultBuilder
 [Wikibase/DataModel#Dates and times]: https://www.mediawiki.org/wiki/Wikibase/DataModel#Dates_and_times
 [RDF mapping]: https://www.mediawiki.org/wiki/Wikibase/Indexing/RDF_Dump_Format
 [proleptic Gregorian calendar]: https://en.wikipedia.org/wiki/Proleptic_Gregorian_calendar
