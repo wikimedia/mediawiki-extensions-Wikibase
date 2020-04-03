@@ -893,21 +893,30 @@ class WikibaseRepo {
 		return $this->entityTypeDefinitions->getEntityStoreFactoryCallbacks();
 	}
 
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	public function getPropertyDataTypeLookup() {
+	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		if ( $this->propertyDataTypeLookup === null ) {
-			$infoLookup = $this->getStore()->getPropertyInfoLookup();
-			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
-			$this->propertyDataTypeLookup = new PropertyInfoDataTypeLookup(
-				$infoLookup,
-				LoggerFactory::getInstance( 'Wikibase' ),
-				$retrievingLookup
-			);
+			$this->propertyDataTypeLookup = $this->newPropertyDataTypeLookup();
 		}
 
 		return $this->propertyDataTypeLookup;
+	}
+
+	public function newPropertyDataTypeLookup(): PropertyDataTypeLookup {
+		if ( $this->inFederatedPropertyMode() ) {
+			return $this->newFederatedPropertiesServiceFactory()->newApiPropertyDataTypeLookup();
+		}
+
+		return $this->newPropertyDataTypeLookupForLocalProperties();
+	}
+
+	private function newPropertyDataTypeLookupForLocalProperties(): PropertyDataTypeLookup {
+		$infoLookup = $this->getStore()->getPropertyInfoLookup();
+		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
+		return new PropertyInfoDataTypeLookup(
+			$infoLookup,
+			LoggerFactory::getInstance( 'Wikibase' ),
+			$retrievingLookup
+		);
 	}
 
 	/**
@@ -2502,18 +2511,22 @@ class WikibaseRepo {
 	/**
 	 * Gaurd against Federated properties services being constructed in wiring when feature is disabled.
 	 */
-	private function throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured() {
+	private function throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured(): void {
 		if (
-			!$this->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ||
+			!$this->inFederatedPropertyMode() ||
 			!$this->getSettings()->hasSetting( 'federatedPropertiesSourceScriptUrl' )
 		) {
 			throw new LogicException(
-				'Federated Property services should not be constructed when federatedProperties feature is not enabled.'
+				'Federated Property services should not be constructed when federatedProperties feature is not enabled or configured.'
 			);
 		}
 	}
 
-	public function newFederatedPropertiesServiceFactory() {
+	private function inFederatedPropertyMode(): bool {
+		return $this->getSettings()->getSetting( 'federatedPropertiesEnabled' );
+	}
+
+	public function newFederatedPropertiesServiceFactory(): ApiServiceFactory {
 		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
 		return new ApiServiceFactory(
 			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
