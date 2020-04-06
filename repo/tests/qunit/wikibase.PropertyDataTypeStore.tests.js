@@ -139,4 +139,55 @@
 		} );
 	} );
 
+	QUnit.test( 'Given previous successful entity JSON lookup, it remembers the result', function ( assert ) {
+		var done = assert.async(),
+			expectedType = 'string',
+			propertyId = 'P123',
+			entity = {
+				claims: {
+					P123: [ {
+						mainsnak: { datatype: expectedType }
+					} ]
+				}
+			},
+			entityLoadedHook = { add: sinon.stub().yields( entity ) },
+			dataTypeStore = newPropertyDataTypeStore( { entityLoadedHook: entityLoadedHook } );
+
+		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+			assert.strictEqual( dataType, expectedType );
+
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+				assert.strictEqual( dataType, expectedType );
+				sinon.assert.calledOnce( entityLoadedHook.add );
+
+				done();
+			} );
+		} );
+	} );
+
+	QUnit.test( 'Given previous successful entity entityStore lookup, it remembers the result', function ( assert ) {
+		var done = assert.async(),
+			expectedType = 'quantity',
+			propertyId = 'P666',
+			entityStore = {
+				get: sinon.stub().returns( $.Deferred().resolve( {
+					getDataTypeId: function () {
+						return expectedType;
+					}
+				} ) )
+			},
+			dataTypeStore = newPropertyDataTypeStore( { entityStore: entityStore } );
+
+		dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+			assert.strictEqual( dataType, expectedType );
+
+			dataTypeStore.getDataTypeForProperty( propertyId ).then( function ( dataType ) {
+				assert.strictEqual( dataType, expectedType );
+				sinon.assert.calledOnce( entityStore.get );
+
+				done();
+			} );
+		} );
+	} );
+
 }( sinon ) );
