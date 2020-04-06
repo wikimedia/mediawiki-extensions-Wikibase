@@ -12,10 +12,12 @@ import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';
 import { statementModule } from '@/store/statements';
+import errorPropertyNameReplacer from '@/utils/errorPropertyNameReplacer';
 
 export class RootGetters extends Getters<Application> {
 
 	private statementModule!: Context<typeof statementModule>;
+
 	public $init( store: Store<Application> ): void {
 		this.statementModule = statementModule.context( store );
 	}
@@ -71,6 +73,23 @@ export class RootGetters extends Getters<Application> {
 		}
 
 		return this.state.applicationStatus;
+	}
+
+	public get reportIssueTemplateBody(): string {
+		const pageUrl = this.state.pageUrl;
+		const stackTrace = JSON.stringify( this.state.applicationErrors, errorPropertyNameReplacer, 4 );
+		const activeState = this.state as InitializedApplicationState;
+		const entityId = activeState[ NS_ENTITY ].id;
+
+		return [ `The error happened on: ${pageUrl}`,
+			`Item: ${entityId}`,
+			`Property: ${this.state.targetProperty}`,
+			`Error message: ${this.state.applicationErrors[ 0 ].type}`,
+			'Debug information:',
+			'```',
+			stackTrace,
+			'```',
+		].join( '\n' );
 	}
 
 }
