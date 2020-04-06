@@ -3,7 +3,8 @@
 		"authors": [
 			"Candalua",
 			"Macofe",
-			"Ladsgroup"
+			"Ladsgroup",
+			"Fierodelveneto"
 		]
 	},
 	"wikibase-desc": "Archivio de dati struturati",
@@ -12,7 +13,7 @@
 	"wikibase-entity-query": "richiesta",
 	"wikibase-edit": "modìfega",
 	"wikibase-save": "salva",
-	"wikibase-cancel": "assa star",
+	"wikibase-cancel": "Descançełare",
 	"wikibase-add": "zonta",
 	"wikibase-addqualifier": "zonta qualificador",
 	"wikibase-addreference": "zonta na fonte",

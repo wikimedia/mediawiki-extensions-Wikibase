@@ -49,6 +49,7 @@
 	"wikibase-setdescription-label": "Deskripto:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Deskripto:",
 	"wikibase-setsitelink-label": "Ligilo a retsituo:",
+	"wikibase-modifyentity-id": "Identifiko-nombro (ID):",
 	"wikibase-modifyterm-language": "Linguala kodexo:",
 	"special-redirectentity": "Ridirektar ento",
 	"wikibase-entity-summary-undo": "Desfacar revizo $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|skribar mesajo]])",

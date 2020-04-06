@@ -135,5 +135,6 @@
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "복수의 값 편집은 현재 지원되지 않습니다",
 	"wikibase-client-data-bridge-somevalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
-	"wikibase-client-data-bridge-novalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다"
+	"wikibase-client-data-bridge-novalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
+	"wikibase-client-data-bridge-thank-you-head": "편집에 감사드립니다!"
 }

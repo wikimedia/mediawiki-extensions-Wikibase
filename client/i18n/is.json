@@ -97,11 +97,15 @@
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tenging|Tengingar}} við {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Láta mig vita þegar einhver tengir síðu sem {{GENDER:|ég bjó til}} við {{WBREPONAME}} hlut.",
 	"notification-header-page-connection": "Síðan <strong>$3</strong> {{GENDER:$2|tengdist}} við {{PLURAL:$4|-1=a {{WBREPONAME}} atriði|{{WBREPONAME}} atriðið $4}}, sem inniheldur gögnin varðandi viðfangsefnið.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|$4 önnur síða|$4 aðrar síður|100=99+ aðrar síður}} voru {{GENDER:$2|tengdar}} við {{WBREPONAME}} hluti.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> og {{PLURAL:$4|$4 önnur síða|$4 aðrar síður|100=99+ aðrar síður}} voru {{GENDER:$2|tengdar}} við {{WBREPONAME}} hluti, þar sem hægt er að safna upplýsingum um viðfangsefnið.",
 	"notification-link-text-view-item": "{{GENDER:$1|Skoða}} hlut",
 	"notification-subject-page-connection": "Síða á {{SITENAME}} sem þú {{GENDER:$3|bjóst til}} var {{GENDER:$2|tengd}} við {{WBREPONAME}} hlut",
 	"unresolved-property-category": "Síður með óleystum eiginleikum",
 	"unresolved-property-category-desc": "Þessi flokkur listar síður sem vísa í {{WBREPONAME}} eiginleika sem finnast ekki annaðhvort út frá auðkenni eiginleikans eða merkimiða.",
 	"connected-redirect-category": "Tilvísanir sem tengjast {{WBREPONAME}} hlut",
-	"connected-redirect-category-desc": "Þessi flokkur listar tilvísanir sem eru tengd {{WBREPONAME}} hlut."
+	"connected-redirect-category-desc": "Þessi flokkur listar tilvísanir sem eru tengd {{WBREPONAME}} hlut.",
+	"wikibase-client-data-bridge-dialog-title": "Breyta $1",
+	"wikibase-client-data-bridge-permissions-error": "Þú hefur ekki leyfi til að breyta þessu gildi, af eftirfarandi ástæðum {{PLURAL:$1|ástæðu|ástæðum}}:",
+	"wikibase-client-data-bridge-permissions-error-info": "Frekari upplýsingar",
+	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>Þetta gildi er í augnablikinu [$1 full verndað] á {{WBREPONAME}} og er eingöngu hægt að breyta af [$2 stjórnendum].</strong>"
 }
