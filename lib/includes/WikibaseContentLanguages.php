@@ -132,6 +132,12 @@ class WikibaseContentLanguages {
 					'quc', // T155376
 					'qya', // T185194
 					'rar', // T155427
+					'rm-puter', // T222426
+					'rm-rumgr', // T222426
+					'rm-surmiran', // T222426
+					'rm-sursilv', // T222426
+					'rm-sutsilv', // T222426
+					'rm-vallader', // T222426
 					'rmf', // T226701
 					'sa-sidd', // T230881
 					'shy', // T184783
