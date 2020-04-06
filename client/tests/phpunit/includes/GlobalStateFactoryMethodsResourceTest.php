@@ -83,6 +83,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	public function testMovePageNotice(): void {
 		TestingAccessWrapper::newFromClass( MovePageNotice::class )
 			->newFromGlobalState();
+		$this->assertTrue( true );
 	}
 
 	public function testNoLangLinkHandler(): void {
