@@ -165,6 +165,7 @@ describe( 'init', () => {
 					editFlow,
 					client: { usePublish },
 					originalHref: testLinkHref,
+					pageUrl: 'https://data-bridge.test/jest', // configured in jest.config.js
 				},
 				expectedServices,
 			);

@@ -52,4 +52,8 @@ export class RootMutations extends Mutations<Application> {
 	public setOriginalHref( orginalHref: string ): void {
 		this.state.originalHref = orginalHref;
 	}
+
+	public setPageUrl( pageUrl: string ): void {
+		this.state.pageUrl = pageUrl;
+	}
 }

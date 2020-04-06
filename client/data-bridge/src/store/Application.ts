@@ -21,6 +21,7 @@ interface Application {
 	pageTitle: string;
 	targetLabel: Term|null;
 	targetProperty: string;
+	pageUrl: string;
 }
 
 export default Application;

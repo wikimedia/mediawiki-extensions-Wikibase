@@ -45,6 +45,7 @@ describe( 'Dispatcher', () => {
 					OO,
 					$,
 					mw: { config: mockMwConfig() },
+					location: { href: '' },
 				} as MwWindow,
 				{
 					launch: jest.fn(),
@@ -66,7 +67,11 @@ describe( 'Dispatcher', () => {
 			const usePublish = true;
 			const editTags = [ 'my tag' ];
 			const pageTitle = 'Client_page';
-			const mwWindow = { mw: { config: mockMwConfig( { wgPageName: pageTitle } ) } };
+			const pageUrl = 'https://client.example/wiki/Client_page';
+			const mwWindow = {
+				mw: { config: mockMwConfig( { wgPageName: pageTitle } ) },
+				location: { href: pageUrl },
+			};
 			const emitter = jest.fn();
 			const mockServices = {};
 			const app = {
@@ -110,6 +115,7 @@ describe( 'Dispatcher', () => {
 						usePublish,
 					},
 					originalHref,
+					pageUrl,
 				},
 				mockServices,
 			);

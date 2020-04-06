@@ -17,4 +17,6 @@ export default interface AppInformation {
 	client: WikibaseClientConfiguration;
 	/** The href of the original link that is overloaded by bridge */
 	originalHref: string;
+	/** The exact URL of the client page on which the Bridge was opened. */
+	pageUrl: string;
 }

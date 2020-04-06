@@ -141,6 +141,7 @@ describe( 'store/actions', () => {
 			entityTitle: 'Q42',
 			client,
 			originalHref: 'https://example.com/index.php?title=Item:Q42&uselang=en#P31',
+			pageUrl: 'https://client.example/wiki/Client_page',
 		};
 
 		store = createStore( services );
@@ -173,6 +174,7 @@ describe( 'store/actions', () => {
 					info.originalHref,
 				);
 				expect( successStore.state.pageTitle ).toBe( info.pageTitle );
+				expect( successStore.state.pageUrl ).toBe( info.pageUrl );
 			} );
 		} );
 

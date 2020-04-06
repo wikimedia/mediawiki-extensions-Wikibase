@@ -44,6 +44,7 @@ export default class Dispatcher {
 					issueReportingLink: this.dataBridgeConfig.issueReportingLink,
 				},
 				originalHref: selectedElement.link.href,
+				pageUrl: this.mwWindow.location.href,
 			},
 			this.app.createServices(
 				this.mwWindow,

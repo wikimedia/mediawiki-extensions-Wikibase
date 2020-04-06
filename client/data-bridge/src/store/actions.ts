@@ -48,6 +48,7 @@ RootActions
 		this.commit( 'setEntityTitle', information.entityTitle );
 		this.commit( 'setOriginalHref', information.originalHref );
 		this.commit( 'setPageTitle', information.pageTitle );
+		this.commit( 'setPageUrl', information.pageUrl );
 
 		this.dispatch( 'requestAndSetTargetLabel', information.propertyId );
 

@@ -17,4 +17,5 @@ export class BaseState implements Application {
 	public pageTitle = '';
 	public targetLabel: Term|null = null;
 	public targetProperty = '';
+	public pageUrl = '';
 }

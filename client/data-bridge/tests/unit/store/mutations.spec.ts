@@ -127,4 +127,14 @@ describe( 'root/mutations', () => {
 		mutations.setPageTitle( pageTitle );
 		expect( state.pageTitle ).toBe( pageTitle );
 	} );
+
+	it( 'sets the page URL of the store', () => {
+		const state: Application = newApplicationState();
+		const pageUrl = 'https://client.example/wiki/Page_title';
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.setPageUrl( pageUrl );
+		expect( state.pageUrl ).toBe( pageUrl );
+	} );
 } );

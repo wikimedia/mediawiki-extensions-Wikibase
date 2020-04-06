@@ -155,6 +155,7 @@ launch(
 			issueReportingLink: 'https://http.cat/404',
 		},
 		originalHref: 'https://example.com/index.php?title=Item:Q47&uselang=en#P20',
+		pageUrl: 'https://client.example/wiki/Client_page',
 	},
 	services,
 ).on( Events.onSaved, () => {

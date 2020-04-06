@@ -47,6 +47,7 @@ describe( 'root/actions', () => {
 			originalHref: '',
 			pageTitle: '',
 			client: { usePublish: true, issueReportingLink: '' },
+			pageUrl: '',
 			...fields,
 		};
 	}
@@ -69,6 +70,7 @@ describe( 'root/actions', () => {
 			'setEntityTitle',
 			'setOriginalHref',
 			'setPageTitle',
+			'setPageUrl',
 		];
 		it(
 			`commits to ${listOfCommits.join( ', ' )}`,
@@ -78,12 +80,14 @@ describe( 'root/actions', () => {
 				const entityTitle = 'Douglas Adams';
 				const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
 				const pageTitle = 'Client_page';
+				const pageUrl = 'https://client.example/wiki/Douglas_Adams';
 				const information = newMockAppInformation( {
 					editFlow,
 					propertyId,
 					entityTitle,
 					originalHref,
 					pageTitle,
+					pageUrl,
 				} );
 
 				const commit = jest.fn();
@@ -111,6 +115,7 @@ describe( 'root/actions', () => {
 				expect( commit ).toHaveBeenCalledWith( 'setEntityTitle', entityTitle );
 				expect( commit ).toHaveBeenCalledWith( 'setOriginalHref', originalHref );
 				expect( commit ).toHaveBeenCalledWith( 'setPageTitle', pageTitle );
+				expect( commit ).toHaveBeenCalledWith( 'setPageUrl', pageUrl );
 				expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
 			},
 		);
