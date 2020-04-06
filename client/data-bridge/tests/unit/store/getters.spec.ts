@@ -329,7 +329,7 @@ describe( 'root/getters', () => {
 	} );
 
 	describe( 'reportIssueTemplateBody', () => {
-		it( 'returns a string containing article URL, item ID, property ID, error message and debug info ', () => {
+		it( 'builds a string matching the snapshot', () => {
 			const pageUrl = 'https://bg.client.example.com/wiki/Дъглас_Адамс';
 			const applicationState = newApplicationState( {
 				[ NS_ENTITY ]: {
@@ -342,16 +342,8 @@ describe( 'root/getters', () => {
 			const getters = inject( RootGetters, {
 				state: applicationState,
 			} );
-			const debugInfo = JSON.stringify(
-				[ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: { stack: 'test' } } ],
-				null,
-				4,
-			);
-			expect( getters.reportIssueTemplateBody ).toContain( pageUrl );
-			expect( getters.reportIssueTemplateBody ).toContain( entityId );
-			expect( getters.reportIssueTemplateBody ).toContain( targetProperty );
-			expect( getters.reportIssueTemplateBody ).toContain( ErrorTypes.APPLICATION_LOGIC_ERROR );
-			expect( getters.reportIssueTemplateBody ).toContain( debugInfo );
+
+			expect( getters.reportIssueTemplateBody ).toMatchSnapshot();
 		} );
 	} );
 
