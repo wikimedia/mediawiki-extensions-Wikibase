@@ -186,6 +186,7 @@ return call_user_func( function() {
 				'view/resources/jquery/wikibase/toolbar/jquery.wikibase.removetoolbar.js',
 				'view/resources/wikibase/view/ToolbarFactory.js',
 				'view/resources/wikibase/wikibase.ValueFormatterFactory.js',
+				'repo/resources/wikibase.PropertyDataTypeStore.js',
 				[
 					"name" => "repo/resources/config.json",
 					"callback" => function () {

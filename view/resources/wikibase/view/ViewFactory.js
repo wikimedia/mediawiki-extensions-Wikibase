@@ -67,7 +67,7 @@
 	 *        Required by several views for rendering links to entities.
 	 * @param {wikibase.entityIdFormatter.EntityIdPlainFormatter} entityIdPlainFormatter
 	 *        Required by several views for rendering plain text references to entities.
-	 * @param {wikibase.store.EntityStore} entityStore
+	 * @param {PropertyDataTypeStore} propertyDataTypeStore
 	 *        Required for dynamically gathering `Entity`/`Property` information.
 	 * @param {jQuery.valueview.ExpertStore} expertStore
 	 *        Required by the `ValueView` for constructing `expert`s for different value types.
@@ -89,7 +89,7 @@
 		dataTypeStore,
 		entityIdHtmlFormatter,
 		entityIdPlainFormatter,
-		entityStore,
+		propertyDataTypeStore,
 		expertStore,
 		formatterFactory,
 		messageProvider,
@@ -112,7 +112,6 @@
 		this._dataTypeStore = dataTypeStore;
 		this._entityIdHtmlFormatter = entityIdHtmlFormatter;
 		this._entityIdPlainFormatter = entityIdPlainFormatter;
-		this._entityStore = entityStore;
 		this._expertStore = expertStore;
 		this._formatterFactory = formatterFactory;
 		this._messageProvider = messageProvider;
@@ -122,6 +121,7 @@
 		this._vocabularyLookupApiUrl = vocabularyLookupApiUrl || null;
 		this._eventSingletonManager = new EventSingletonManager();
 		this._commonsApiUrl = commonsApiUrl;
+		this._propertyDataTypeStore = propertyDataTypeStore;
 	};
 
 	/**
@@ -155,10 +155,10 @@
 	SELF.prototype._entityIdPlainFormatter = null;
 
 	/**
-	 * @property {wikibase.store.EntityStore}
+	 * @property {PropertyDataTypeStore}
 	 * @private
 	 */
-	SELF.prototype._entityStore = null;
+	SELF.prototype._propertyDataTypeStore = null;
 
 	/**
 	 * @property {jQuery.util.EventSingletonManager}
@@ -661,7 +661,7 @@
 				dataTypeStore: this._dataTypeStore,
 				entityIdHtmlFormatter: this._entityIdHtmlFormatter,
 				entityIdPlainFormatter: this._entityIdPlainFormatter,
-				entityStore: this._entityStore,
+				propertyDataTypeStore: this._propertyDataTypeStore,
 				valueViewBuilder: this._getValueViewBuilder(),
 				drawProperty: drawProperty,
 				getSnakRemover: removeCallback ? function ( $dom ) {
