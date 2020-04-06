@@ -26,7 +26,14 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;
 
 /**
- * Builder for Api Results
+ * Builder of MediaWiki ApiResult objects with various convenience functions for adding Wikibase concepts
+ * and result parts to results in a uniform way.
+ *
+ * This class was introduced when Wikibase was reduced from 2 sets of serializers (lib & data-model) to one.
+ * This class makes various modifications to the 1 standard serialization of Wikibase concepts for public exposure.
+ * The resulting format can be seen as the public serialization of Wikibase concepts.
+ *
+ * Many concepts such as "tag name" relate to concepts explained within ApiResult.
  *
  * @license GPL-2.0-or-later
  * @author Addshore
@@ -115,6 +122,10 @@ class ResultBuilder {
 	}
 
 	/**
+	 * Mark the ApiResult as successful.
+	 *
+	 * { "success": 1 }
+	 *
 	 * @param bool|int|null $success
 	 */
 	public function markSuccess( $success = true ) {
@@ -247,7 +258,8 @@ class ResultBuilder {
 	}
 
 	/**
-	 * Get serialized entity for the EntityRevision and add it to the result
+	 * Get serialized entity for the EntityRevision and add it to the result alongside other needed properties.
+	 *
 	 *
 	 * @param string|null $sourceEntityIdSerialization EntityId used to retrieve $entityRevision
 	 *        Used as the key for the entity in the 'entities' structure and for adding redirect
@@ -276,29 +288,20 @@ class ResultBuilder {
 
 		$record = [];
 
-		//if there are no props defined only return type and id..
+		// If there are no props defined only return type and id..
 		// @phan-suppress-next-line PhanTypeComparisonToArray
 		if ( $props === [] ) {
-			$record['id'] = $entityId->getSerialization();
-			$record['type'] = $entityId->getEntityType();
+			$record = $this->addEntityInfoToRecord( $record, $entityId );
 		} else {
 			// @phan-suppress-next-line PhanTypeMismatchArgumentInternal False positive
 			if ( $props == 'all' || in_array( 'info', $props ) ) {
-				$title = $this->entityTitleLookup->getTitleForId( $entityId );
-				$record['pageid'] = $title->getArticleID();
-				$record['ns'] = $title->getNamespace();
-				$record['title'] = $title->getPrefixedText();
-				$record['lastrevid'] = $entityRevision->getRevisionId();
-				$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
+				$record = $this->addPageInfoToRecord( $record, $entityRevision );
 			}
 			if ( $sourceEntityIdSerialization !== $entityId->getSerialization() ) {
-				$record['redirects'] = [
-					'from' => $sourceEntityIdSerialization,
-					'to' => $entityId->getSerialization()
-				];
+				$record = $this->addEntityRedirectInfoToRecord( $record, $sourceEntityIdSerialization, $entityId );
 			}
 
-			$entitySerialization = $this->getEntityArray(
+			$entitySerialization = $this->getModifiedEntityArray(
 				$entity,
 				$props,
 				$filterSiteIds,
@@ -321,7 +324,37 @@ class ResultBuilder {
 		}
 	}
 
+	private function addEntityInfoToRecord( array $record, EntityId $entityId ): array {
+		$record['id'] = $entityId->getSerialization();
+		$record['type'] = $entityId->getEntityType();
+		return $record;
+	}
+
+	private function addPageInfoToRecord( array $record, EntityRevision $entityRevision ): array {
+		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
+		$record['pageid'] = $title->getArticleID();
+		$record['ns'] = $title->getNamespace();
+		$record['title'] = $title->getPrefixedText();
+		$record['lastrevid'] = $entityRevision->getRevisionId();
+		$record['modified'] = wfTimestamp( TS_ISO_8601, $entityRevision->getTimestamp() );
+		return $record;
+	}
+
+	private function addEntityRedirectInfoToRecord( array $record, $sourceEntityIdSerialization, EntityId $entityId ): array {
+		$record['redirects'] = [
+			'from' => $sourceEntityIdSerialization,
+			'to' => $entityId->getSerialization()
+		];
+		return $record;
+	}
+
 	/**
+	 * Gets the standard serialization of an EntityDocument and modifies it in a standard way.
+	 *
+	 * This code was created for Items and Properties and since new entity types have been introduced
+	 * it may not work in the desired way.
+	 * @see https://phabricator.wikimedia.org/T249206
+	 *
 	 * @see ResultBuilder::addEntityRevision
 	 *
 	 * @param EntityDocument $entity
@@ -332,7 +365,7 @@ class ResultBuilder {
 	 *
 	 * @return array
 	 */
-	private function getEntityArray(
+	private function getModifiedEntityArray(
 		EntityDocument $entity,
 		$props,
 		?array $filterSiteIds,
