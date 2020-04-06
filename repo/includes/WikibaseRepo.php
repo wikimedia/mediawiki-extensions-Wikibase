@@ -174,7 +174,7 @@ use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
-use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
+use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -2513,11 +2513,10 @@ class WikibaseRepo {
 		}
 	}
 
-	public function newFederatedPropertiesApiClient() {
+	public function newFederatedPropertiesServiceFactory() {
 		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
-		return new GenericActionApiClient(
-			MediaWikiServices::getInstance()->getHttpRequestFactory(),
-			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ) . 'api.php'
+		return new ApiServiceFactory(
+			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
 		);
 	}
 

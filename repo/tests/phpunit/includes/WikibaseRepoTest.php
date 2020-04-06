@@ -968,18 +968,14 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		}
 	}
 
-	public function testParameterLessFunctionCallsForFederatedPropertiesDontFatal() {
+	public function testNewFederatedPropertiesServiceFactoryDoesntFatal() {
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
 		$settings = $this->getSettingsCopyWithSettingSet( 'federatedPropertiesEnabled', true );
 		$wbRepo = $this->getWikibaseRepoWithCustomSettings( $settings );
 
-		$reflectionClass = new ReflectionClass( $wbRepo );
-		$federatedPropertyMethods = $this->getFederatedPropertyMethodNames();
-
-		foreach ( $federatedPropertyMethods as $methodName ) {
-			$this->invokeMethodIfNoRequiredParameters( $wbRepo, $reflectionClass->getMethod( $methodName ) );
-		}
+		$wbRepo->newFederatedPropertiesServiceFactory();
+		$this->addToAssertionCount( 1 );
 	}
 
 	public function provideParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled() {
@@ -1201,7 +1197,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	 */
 	private function getFederatedPropertyMethodNames() {
 		return [
-			'newFederatedPropertiesApiClient'
+			'newFederatedPropertiesServiceFactory'
 		];
 	}
 
