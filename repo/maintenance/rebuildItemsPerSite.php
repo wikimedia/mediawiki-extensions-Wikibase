@@ -5,6 +5,8 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
@@ -30,6 +32,13 @@ class RebuildItemsPerSite extends Maintenance {
 		$this->addDescription( 'Rebuild the items_per_site table' );
 
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
+
+		$this->addOption(
+			'file',
+			'File path for loading a list of item numeric ids, one numeric id per line. ',
+			false,
+			true
+		);
 	}
 
 	/**
@@ -63,11 +72,18 @@ class RebuildItemsPerSite extends Maintenance {
 		$builder->setReporter( $reporter );
 		$builder->setBatchSize( $batchSize );
 
-		$stream = new SqlEntityIdPager(
-			$wikibaseRepo->getEntityNamespaceLookup(),
-			$wikibaseRepo->getEntityIdLookup(),
-			[ 'item' ]
-		);
+		$file = $this->getOption( 'file' );
+		if ( $file !== null ) {
+			$itemIdsIterator = $this->newItemIdIteratorFromFile( $file );
+			$itemIds = iterator_to_array( $itemIdsIterator );
+			$stream = new InMemoryEntityIdPager( ...$itemIds );
+		} else {
+			$stream = new SqlEntityIdPager(
+				$wikibaseRepo->getEntityNamespaceLookup(),
+				$wikibaseRepo->getEntityIdLookup(),
+				[ 'item' ]
+			);
+		}
 
 		// Now <s>kill</s> fix the table
 		$builder->rebuild( $stream );
@@ -80,6 +96,19 @@ class RebuildItemsPerSite extends Maintenance {
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );
+	}
+
+	private function newItemIdIteratorFromFile( $file ): \Iterator {
+		$itemIds = file_get_contents( $file );
+		$itemIds = explode( "\n", $itemIds );
+
+		foreach ( $itemIds as $itemId ) {
+			// Ignore empty lines
+			if ( !$itemId ) {
+				continue;
+			}
+			yield new ItemId( $itemId );
+		}
 	}
 
 }
