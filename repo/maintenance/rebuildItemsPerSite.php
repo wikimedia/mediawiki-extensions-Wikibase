@@ -5,10 +5,12 @@ namespace Wikibase\Repo\Maintenance;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\EntityId\InMemoryEntityIdPager;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\IO\EntityIdReader;
+use Wikibase\Repo\IO\LineReader;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
 use Wikibase\Repo\WikibaseRepo;
@@ -74,9 +76,11 @@ class RebuildItemsPerSite extends Maintenance {
 
 		$file = $this->getOption( 'file' );
 		if ( $file !== null ) {
-			$itemIdsIterator = $this->newItemIdIteratorFromFile( $file );
-			$itemIds = iterator_to_array( $itemIdsIterator );
-			$stream = new InMemoryEntityIdPager( ...$itemIds );
+			$stream = new EntityIdReader(
+				new LineReader( fopen( $file, 'r' ) ),
+				new ItemIdParser()
+			);
+			$stream->setExceptionHandler( new ReportingExceptionHandler( $reporter ) );
 		} else {
 			$stream = new SqlEntityIdPager(
 				$wikibaseRepo->getEntityNamespaceLookup(),
@@ -96,19 +100,6 @@ class RebuildItemsPerSite extends Maintenance {
 	 */
 	public function report( $msg ) {
 		$this->output( "$msg\n" );
-	}
-
-	private function newItemIdIteratorFromFile( $file ): \Iterator {
-		$itemIds = file_get_contents( $file );
-		$itemIds = explode( "\n", $itemIds );
-
-		foreach ( $itemIds as $itemId ) {
-			// Ignore empty lines
-			if ( !$itemId ) {
-				continue;
-			}
-			yield new ItemId( $itemId );
-		}
 	}
 
 }
