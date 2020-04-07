@@ -76,8 +76,6 @@ class DatabaseSchemaUpdater {
 
 		// Update from 0.1.
 		if ( !$db->tableExists( 'wb_terms' ) ) {
-			// T208425 T249565 Temporarily not dropping
-			// $updater->dropTable( 'wb_items_per_site' );
 			$updater->dropTable( 'wb_items' );
 			$updater->dropTable( 'wb_aliases' );
 			$updater->dropTable( 'wb_texts_per_lang' );
