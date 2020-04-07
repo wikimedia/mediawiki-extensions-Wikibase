@@ -76,13 +76,13 @@ class DatabaseSchemaUpdater {
 
 		if ( $db->tableExists( 'wb_aliases' ) ) {
 			// Update from 0.1.
-			$updater->dropTable( 'wb_items_per_site' );
-			$updater->dropTable( 'wb_items' );
-			$updater->dropTable( 'wb_aliases' );
-			$updater->dropTable( 'wb_texts_per_lang' );
+			$updater->dropExtensionTable( 'wb_items_per_site' );
+			$updater->dropExtensionTable( 'wb_items' );
+			$updater->dropExtensionTable( 'wb_aliases' );
+			$updater->dropExtensionTable( 'wb_texts_per_lang' );
 
 			$updater->addExtensionTable(
-				'wb_terms',
+				'wb_items_per_site',
 				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
 			);
 
@@ -90,7 +90,7 @@ class DatabaseSchemaUpdater {
 		} elseif ( !$db->tableExists( 'wb_items_per_site' ) ) {
 			// Clean installation
 			$updater->addExtensionTable(
-				'wb_terms',
+				'wb_items_per_site',
 				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
 			);
 
