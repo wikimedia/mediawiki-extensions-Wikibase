@@ -4,8 +4,8 @@
 			"Ainali",
 			"Jopparn",
 			"Lokal Profil",
-			"WikiPhoenix",
-			"Macofe"
+			"Macofe",
+			"WikiPhoenix"
 		]
 	},
 	"wikibase-lib-desc": "Håller gemensamma funktioner för Wikibase- och Wikibase Client-tilläggen.",

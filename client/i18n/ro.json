@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"ANDROBETA",
+			"Andrei Stroe",
+			"Metalhead64",
 			"Minisarm",
 			"Stelistcristi",
-			"Metalhead64",
-			"XXN",
-			"ANDROBETA",
 			"Strainu",
-			"Andrei Stroe"
+			"XXN"
 		]
 	},
 	"wikibase-client-desc": "Client pentru extensia Wikibase",

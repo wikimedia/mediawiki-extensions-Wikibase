@@ -1,23 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fryed-peach",
-			"Shirayuki",
-			"Penn Station",
-			"Otokoume",
-			"Sujiniku",
 			"2nd-player",
-			"Ridmevo",
-			"Marine-Blue",
-			"にょきにょき",
-			"Mirinano",
-			"Iwai.masaharu",
-			"Hinaloe",
 			"Afaz",
-			"Yusuke1109",
-			"Omotecho",
+			"Buntschann",
+			"Fryed-peach",
+			"Hinaloe",
+			"Iwai.masaharu",
 			"Kkairri",
-			"Buntschann"
+			"Marine-Blue",
+			"Mirinano",
+			"Omotecho",
+			"Otokoume",
+			"Penn Station",
+			"Ridmevo",
+			"Shirayuki",
+			"Sujiniku",
+			"Yusuke1109",
+			"にょきにょき"
 		]
 	},
 	"wikibase-client-desc": "ウィキベース拡張機能のクライアント",

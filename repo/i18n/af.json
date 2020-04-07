@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Naudefj",
-			"Macofe",
 			"Fwolff",
+			"Joris Darlington Quarshie",
 			"Ladsgroup",
-			"Joris Darlington Quarshie"
+			"Macofe",
+			"Naudefj"
 		]
 	},
 	"wikibase-desc": "Databank vir gestruktureerde data",

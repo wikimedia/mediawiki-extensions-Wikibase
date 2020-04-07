@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Stavanger7",
 			"Fanjiayi",
-			"OIS"
+			"OIS",
+			"Stavanger7"
 		]
 	},
 	"wikibase-dataitem": "Element {{WBREPONAME}}",

@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Garam",
+			"Hwangjy9",
 			"Hym411",
 			"Kwj2772",
-			"Priviet",
-			"관인생략",
-			"아라",
 			"Namoroka",
-			"Revi",
-			"Hwangjy9",
-			"Ykhwong",
 			"Nuevo Paso",
-			"Garam"
+			"Priviet",
+			"Revi",
+			"Ykhwong",
+			"관인생략",
+			"아라"
 		]
 	},
 	"wikibase-lib-desc": "위키베이스와 위키베이스 클라이언트 확장 기능을 위한 공통 기능을 얻습니다",

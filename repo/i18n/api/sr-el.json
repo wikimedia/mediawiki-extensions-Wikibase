@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"apihelp-wbeditentity-example-12": "Uklanja oznaku",
 	"apihelp-wbgetentities-example-1": "Prikaži entitete sa identifikatorom <samp>Q42</samp> sa svim dostupnim atributima na svim dostupnim jezicima",
 	"apihelp-wbgetentities-example-4": "Prikaži entitete sa identifikatorom <samp>Q42</samp> sa svim dostupnim atributima na engleskom jeziku",

@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Cocu",
 			"Danmichaelo",
 			"Event",
 			"Jeblad",
-			"Macofe",
-			"Cocu",
 			"Jon Harald Søby",
-			"Ranveig",
-			"Kjetil r"
+			"Kjetil r",
+			"Macofe",
+			"Ranveig"
 		]
 	},
 	"wikibase-lib-desc": "Felles funksjonalitet for Wikibase, det strukturerte datalageret",

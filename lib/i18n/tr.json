@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Incelemeelemani",
-			"Rapsar",
-			"Violetanka",
-			"Fitoschido",
 			"Arystanbek",
-			"Meelo",
+			"BaRaN6161 TURK",
+			"Fitoschido",
+			"Incelemeelemani",
 			"McAang",
-			"Stultiwikia",
+			"Meelo",
+			"Rapsar",
 			"Sayginer",
-			"BaRaN6161 TURK"
+			"Stultiwikia",
+			"Violetanka"
 		]
 	},
 	"wikibase-lib-desc": "Wikibase ve Wikibase İstemci uzantıları için ortak işlevler içerir",

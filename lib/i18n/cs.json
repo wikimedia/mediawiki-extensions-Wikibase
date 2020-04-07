@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Cvanca",
 			"Danny B.",
+			"DobyvatelCZ",
+			"Ilimanaq29",
 			"JAn Dudík",
 			"Littledogboy",
-			"Mormegil",
-			"Vks",
-			"Matěj Suchánek",
-			"DobyvatelCZ",
 			"Macofe",
-			"Cvanca",
-			"Ilimanaq29"
+			"Matěj Suchánek",
+			"Mormegil",
+			"Vks"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje společné funkce pro rozšíření Wikibase a Wikibase Client",

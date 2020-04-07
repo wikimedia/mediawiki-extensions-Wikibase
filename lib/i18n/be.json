@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Чаховіч Уладзіслаў",
-			"Дзяніс Тутэйшы",
+			"Artsiom91",
 			"Mechanizatar",
-			"Artsiom91"
+			"Дзяніс Тутэйшы",
+			"Чаховіч Уладзіслаў"
 		]
 	},
 	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэнняў Wikibase і Wikibase Client.",

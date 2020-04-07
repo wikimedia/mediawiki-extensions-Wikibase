@@ -3,15 +3,15 @@
 		"authors": [
 			"Byrial",
 			"Christian List",
+			"Fitoschido",
 			"Hede2000",
 			"HenrikKbh",
-			"Poul G",
-			"Steenth",
-			"Fitoschido",
+			"Kranix",
 			"Peter Alberti",
-			"Sarrus",
+			"Poul G",
 			"Saederup92",
-			"Kranix"
+			"Sarrus",
+			"Steenth"
 		]
 	},
 	"wikibase-lib-desc": "Fælles funktionalitet for Wikibase og Wikibase-klientudvidelser",

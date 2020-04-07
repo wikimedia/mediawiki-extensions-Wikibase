@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"ArnoLagrange",
 			"KuboF",
-			"Amire80",
-			"Tlustulimu",
+			"Mirin",
 			"Robin van der Vliet",
+			"Tlustulimu",
 			"Yekrats",
-			"YvesNevelsteen",
-			"Mirin"
+			"YvesNevelsteen"
 		]
 	},
 	"wikibase-lib-desc": "Enhavas komunajn funckiojn por Vikidatumaj kaj por la Vikidatuma klienta etendaĵo",

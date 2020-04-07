@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Inkowik",
 			"Kghbln",
+			"Lucas Werkmeister",
 			"Metalhead64",
 			"Purodha",
-			"Inkowik",
-			"Tiin",
-			"Lucas Werkmeister"
+			"Tiin"
 		]
 	},
 	"wikibase-client-desc": "Stellt einen Client für die Erweiterung Wikibase bereit",

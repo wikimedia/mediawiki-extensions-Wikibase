@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Acamicamacaraca",
+			"BadDog",
 			"Milicevic01",
 			"Nikola Smolenski",
-			"Rancher",
-			"Милан Јелисавчић",
-			"Srdjan m",
-			"Сербијана",
 			"Obsuser",
 			"Prevodim",
-			"Acamicamacaraca",
+			"Rancher",
+			"Srdjan m",
 			"Zoranzoki21",
-			"BadDog"
+			"Милан Јелисавчић",
+			"Сербијана"
 		]
 	},
 	"wikibase-client-desc": "Клијент за додатак Wikibase",

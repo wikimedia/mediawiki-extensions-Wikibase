@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Умар",
 			"Gazimagomedov",
-			"Аль-Гимравий"
+			"Аль-Гимравий",
+			"Умар"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}} элемент",

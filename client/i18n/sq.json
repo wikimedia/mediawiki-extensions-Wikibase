@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liridon",
-			"Olsi",
 			"Arianit",
-			"Bjakupi",
 			"Besnik b",
-			"Matěj Suchánek"
+			"Bjakupi",
+			"Liridon",
+			"Matěj Suchánek",
+			"Olsi"
 		]
 	},
 	"wikibase-client-desc": "Klient për zgjerimin Wikibase",

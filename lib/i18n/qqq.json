@@ -2,20 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"Ans",
 			"Jeblad",
+			"Liuxinyu970226",
 			"Lloffiwr",
 			"Metalhead64",
+			"Mormegil",
 			"Nemo bis",
 			"Nnemo",
 			"Raymond",
 			"Shirayuki",
 			"Siebrand",
-			"Waldir",
-			"Liuxinyu970226",
 			"Umherirrender",
-			"Ans",
-			"Mormegil",
-			"Verdy p"
+			"Verdy p",
+			"Waldir"
 		]
 	},
 	"wikibase-lib-desc": "{{desc|name=Wikibase Lib|url=https://www.mediawiki.org/wiki/Extension:WikibaseLib}}",

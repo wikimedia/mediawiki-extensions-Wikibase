@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"1917 Ekim Devrimi",
 			"Erdemaslancan",
+			"Kumkumuk",
 			"Marmase",
 			"Mirzali",
-			"Kumkumuk",
-			"Orbot707",
-			"1917 Ekim Devrimi"
+			"Orbot707"
 		]
 	},
 	"wikibase-error-unexpected": "Xeta: $1.",

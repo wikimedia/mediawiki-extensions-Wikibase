@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"MaGa",
-			"Roberta F.",
 			"Bugoslav",
-			"Neptune, the Mystic"
+			"MaGa",
+			"Neptune, the Mystic",
+			"Roberta F."
 		]
 	},
 	"wikibase-lib-desc": "Sadržava objedinjenu funkcionalnost za Wikibazu i proširenja za klijentski program Wikibaze.",

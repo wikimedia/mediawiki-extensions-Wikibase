@@ -1,18 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
+			"01miki10",
 			"Crt",
 			"Harriv",
+			"Macofe",
 			"Nedergard",
 			"Nike",
-			"Stryn",
-			"VezonThunder",
 			"Pxos",
-			"Macofe",
 			"Pyscowicz",
-			"01miki10",
 			"Silvonen",
-			"Valtlait"
+			"Stryn",
+			"Valtlait",
+			"VezonThunder"
 		]
 	},
 	"wikibase-lib-desc": "Sisältää Wikibase- ja Wikibase Client -laajennuksille yhteistä toiminnallisuutta",

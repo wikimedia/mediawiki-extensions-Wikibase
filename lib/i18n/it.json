@@ -2,10 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Beta16",
-			"Raoli",
-			"Macofe",
 			"FRacco",
-			"Horcrux92"
+			"Horcrux92",
+			"Macofe",
+			"Raoli"
 		]
 	},
 	"wikibase-lib-desc": "Contiene le funzionalità comuni per le estensioni Wikibase e Wikibase Client.",

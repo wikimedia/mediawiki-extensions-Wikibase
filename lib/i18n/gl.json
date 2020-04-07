@@ -1,13 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño",
-			"Chairego apc",
-			"Macofe",
-			"Elisardojm",
 			"Banjo",
-			"Navhy",
-			"Iváns"
+			"Chairego apc",
+			"Elisardojm",
+			"Iváns",
+			"Macofe",
+			"Toliño"
 		]
 	},
 	"wikibase-lib-desc": "Contén funcionalidades comúns para as extensións Wikibase e Wikibase Client",

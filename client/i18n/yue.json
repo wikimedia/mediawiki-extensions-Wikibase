@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Waihorace",
-			"Yueman",
 			"CRCHF",
-			"Hello903hello"
+			"Hello903hello",
+			"Waihorace",
+			"Yueman"
 		]
 	},
 	"wikibase-client-desc": "Wikibase擴展客戶端",

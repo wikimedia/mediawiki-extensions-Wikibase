@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Teslaton",
-			"KuboF",
-			"Sudo77(new)",
 			"Fitoschido",
+			"KuboF",
+			"Luky001",
 			"Patriccck",
-			"Luky001"
+			"Sudo77(new)",
+			"Teslaton"
 		]
 	},
 	"wikibase-lib-desc": "Obsahuje spoločné funkcie pre rozšírenia Wikibase a Wikibase Client",

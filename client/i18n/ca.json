@@ -1,23 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abella",
 			"Arnaugir",
 			"Edinwiki",
 			"Fitoschido",
 			"Grondin",
+			"Jaumeortola",
+			"Joan manel",
+			"Macofe",
 			"McDutchie",
 			"Papapep",
 			"Paucabot",
 			"Qllach",
-			"Toniher",
-			"Vriullop",
-			"Àlex",
-			"Macofe",
-			"Joan manel",
-			"Jaumeortola",
 			"Ssola",
-			"Abella",
-			"Townie"
+			"Toniher",
+			"Townie",
+			"Vriullop",
+			"Àlex"
 		]
 	},
 	"wikibase-client-desc": "Client per l'extensió Wikibase",

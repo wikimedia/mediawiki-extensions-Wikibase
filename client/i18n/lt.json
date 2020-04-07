@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
+			"Albertas",
+			"Eitvys200",
 			"Garas",
 			"Hugo.arg",
+			"Manvydasz",
 			"Reedy",
 			"Salpusnis",
-			"Albertas",
-			"Zygimantus",
-			"Eitvys200",
-			"Manvydasz",
-			"Tomasdd"
+			"Tomasdd",
+			"Zygimantus"
 		]
 	},
 	"wikibase-client-desc": "Wikibase išplėtimo klientas",

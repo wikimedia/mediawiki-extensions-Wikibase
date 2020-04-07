@@ -3,15 +3,15 @@
 		"authors": [
 			"Ainali",
 			"Jopparn",
-			"Lokal Profil",
-			"Skalman",
-			"Stryn",
-			"WikiPhoenix",
-			"Rockyfelle",
 			"Josve05a",
 			"Lejonel",
+			"Lokal Profil",
 			"Pyscowicz",
-			"Tölvuforritari"
+			"Rockyfelle",
+			"Skalman",
+			"Stryn",
+			"Tölvuforritari",
+			"WikiPhoenix"
 		]
 	},
 	"wikibase-client-desc": "Klient för tillägget Wikibase",

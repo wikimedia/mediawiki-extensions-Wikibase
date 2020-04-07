@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Michawiki",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"Michawiki"
 		]
 	},
 	"wikibase-lib-desc": "Steji powšitkownu funkcionalnosć za rozšěrjeni Wikibase a Wikibase Client k dispoziciji",

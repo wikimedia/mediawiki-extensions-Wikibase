@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"StephDC",
 			"Davidzdh",
-			"飞舞回堂前",
+			"Itsmine",
 			"SolidBlock",
-			"Itsmine"
+			"StephDC",
+			"飞舞回堂前"
 		]
 	},
 	"wikibase-after-page-move": "斯頁自有相繫者，在於{{WBREPONAME}}。君既改其題，亦宜改其[$1 相繫之頁]。然後諸語之間，方能不斷連結。",

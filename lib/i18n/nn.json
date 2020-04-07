@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jeblad",
-			"Njardarlogar",
-			"Roarjo",
 			"Fitoschido",
+			"Jeblad",
 			"Macofe",
-			"Ranveig"
+			"Njardarlogar",
+			"Ranveig",
+			"Roarjo"
 		]
 	},
 	"wikibase-lib-desc": "Har felles funksjonalitet for Wikibase- og Wikibase Client-utvidingane",

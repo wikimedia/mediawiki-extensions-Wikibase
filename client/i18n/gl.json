@@ -1,11 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Toliño",
 			"Banjo",
 			"Elisardojm",
-			"Navhy",
-			"Iváns"
+			"Iváns",
+			"Toliño"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensión Wikibase",

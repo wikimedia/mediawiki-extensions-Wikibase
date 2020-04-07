@@ -1,24 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alpkant",
+			"BaRaN6161 TURK",
+			"Diyapazon",
 			"Emperyan",
+			"HakanIST",
+			"Hedda",
+			"Incelemeelemani",
+			"KorkmazO",
+			"Mavrikant",
 			"Rapsar",
 			"Sadrettin",
 			"Sayginer",
-			"Ömer Berkay",
 			"Stultiwikia",
-			"Mavrikant",
-			"KorkmazO",
-			"HakanIST",
-			"Alpkant",
-			"Incelemeelemani",
-			"Vito Genovese",
-			"Diyapazon",
-			"Hedda",
+			"SwornToTranslate29",
 			"TmY e12",
 			"ToprakM",
-			"BaRaN6161 TURK",
-			"SwornToTranslate29"
+			"Vito Genovese",
+			"Ömer Berkay"
 		]
 	},
 	"wikibase-client-desc": "Wikibase uzantısı için istemci",
