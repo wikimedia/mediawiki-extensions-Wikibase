@@ -74,12 +74,21 @@ class DatabaseSchemaUpdater {
 
 		$this->addChangesTable( $updater, $type );
 
-		// Update from 0.1.
-		if ( !$db->tableExists( 'wb_terms' ) ) {
+		if ( $db->tableExists( 'wb_aliases' ) ) {
+			// Update from 0.1.
+			$updater->dropTable( 'wb_items_per_site' );
 			$updater->dropTable( 'wb_items' );
 			$updater->dropTable( 'wb_aliases' );
 			$updater->dropTable( 'wb_texts_per_lang' );
 
+			$updater->addExtensionTable(
+				'wb_terms',
+				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
+			);
+
+			$this->store->rebuild();
+		} elseif ( !$db->tableExists( 'wb_items_per_site' ) ) {
+			// Clean installation
 			$updater->addExtensionTable(
 				'wb_terms',
 				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
