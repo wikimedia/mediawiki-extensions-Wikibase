@@ -2,12 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"KuboF",
-			"Sudo77(new)",
-			"Macofe",
-			"TomášPolonec",
-			"Lexected",
 			"Ladsgroup",
-			"Luky001"
+			"Lexected",
+			"Luky001",
+			"Macofe",
+			"Sudo77(new)",
+			"TomášPolonec"
 		]
 	},
 	"wikibase-desc": "Štruktúrované úložisko dát",

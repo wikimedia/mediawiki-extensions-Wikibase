@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Edinwiki",
-			"Xuacu",
 			"Crucifunked",
-			"Guycn2"
+			"Edinwiki",
+			"Guycn2",
+			"Xuacu"
 		]
 	},
 	"wikibase-client-desc": "Cliente pa la estensión Wikibase",

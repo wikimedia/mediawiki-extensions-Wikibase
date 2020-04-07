@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Beeyan",
 			"Farras",
 			"Iwan Novirion",
-			"පසිඳු කාවින්ද",
-			"Beeyan",
 			"Rachmat04",
-			"Taylor"
+			"Taylor",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikibase-lib-desc": "Menangani fungsi umum untuk Wikibase dan ekstensi klien Wikibase",

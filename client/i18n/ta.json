@@ -1,15 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shanmugamp7",
-			"மதனாஹரன்",
-			"Jayarathina",
-			"கலைவாணன்",
 			"AntanO",
-			"Rakeshonwiki",
-			"ElangoRamanujam",
 			"Aswn",
-			"Balajijagadesh"
+			"Balajijagadesh",
+			"ElangoRamanujam",
+			"Jayarathina",
+			"Rakeshonwiki",
+			"Shanmugamp7",
+			"கலைவாணன்",
+			"மதனாஹரன்"
 		]
 	},
 	"wikibase-dataitem": "{{WBREPONAME}}உருப்படி",

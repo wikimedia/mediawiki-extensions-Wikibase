@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"BRUTE",
 			"David1010",
-			"Tokoko",
 			"MIKHEIL",
-			"BRUTE"
+			"Tokoko"
 		]
 	},
 	"wikibase-lib-desc": "ვიკიბაზისა და ვიკიბაზის კლიენტის გაფართოებების საერთო ფუნქციები",

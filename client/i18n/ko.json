@@ -1,22 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChongDae",
-			"Hym411",
-			"Kwj2772",
-			"아라",
-			"Revi",
-			"IRTC1015",
-			"관인생략",
-			"Hwangjy9",
 			"Bluemersen",
-			"HDNua",
-			"Ykhwong",
-			"Tursetic",
-			"Nuevo Paso",
+			"ChongDae",
 			"Garam",
+			"HDNua",
+			"Hwangjy9",
+			"Hym411",
+			"IRTC1015",
+			"Kwj2772",
+			"Nuevo Paso",
+			"Revi",
+			"Tursetic",
+			"Ykhwong",
+			"관인생략",
 			"렌즈",
-			"밝은소년"
+			"밝은소년",
+			"아라"
 		]
 	},
 	"wikibase-client-desc": "위키베이스 확장 기능을 위한 클라이언트",

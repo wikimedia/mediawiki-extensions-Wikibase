@@ -2,20 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Cainamarques",
+			"Dianakc",
+			"Eduardo Addad de Oliveira",
+			"Felipe L. Ewald",
 			"Giro720",
+			"Guycn2",
+			"He7d3r",
 			"Helder.wiki",
 			"Jaideraf",
+			"Luk3",
 			"OTAVIO1981",
 			"Opraco",
-			"TheGabrielZaum",
-			"Tuliouel",
-			"Dianakc",
-			"He7d3r",
-			"Luk3",
-			"Felipe L. Ewald",
-			"Eduardo Addad de Oliveira",
 			"TheEduGobi",
-			"Guycn2"
+			"TheGabrielZaum",
+			"Tuliouel"
 		]
 	},
 	"wikibase-client-desc": "Cliente para a extensão Wikibase",

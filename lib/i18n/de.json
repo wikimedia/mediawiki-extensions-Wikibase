@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Flow",
 			"G.Hagedorn",
 			"Inkowik",
 			"Kghbln",
+			"Lydia Pintscher (WMDE)",
 			"Metalhead64",
 			"Se4598",
-			"TMg",
 			"Sebastian Wallroth",
-			"Flow",
-			"Yellowcard",
-			"Lydia Pintscher (WMDE)"
+			"TMg",
+			"Yellowcard"
 		]
 	},
 	"wikibase-lib-desc": "Stellt dem Repositorium strukturierter Daten gemeinsam nutzbare Funktionen bereit",

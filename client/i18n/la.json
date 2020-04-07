@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Autokrator",
-			"UV",
-			"Lesgles",
-			"Laurentianus",
 			"Amahoney",
-			"Andrew Dalby"
+			"Andrew Dalby",
+			"Autokrator",
+			"Laurentianus",
+			"Lesgles",
+			"UV"
 		]
 	},
 	"tooltip-t-wikibase": "Nexus ad rem repositorii Vicibasis",

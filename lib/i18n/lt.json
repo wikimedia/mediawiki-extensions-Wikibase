@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Albertas",
 			"Eitvys200",
 			"Hugo.arg",
-			"Salpusnis",
-			"Albertas",
-			"Zygimantus",
 			"Manvydasz",
-			"Tomasdd"
+			"Salpusnis",
+			"Tomasdd",
+			"Zygimantus"
 		]
 	},
 	"wikibase-lib-desc": "Apima bendrą Wikibase ir Wikibase kliento išplėtimų funkcionalumą.",

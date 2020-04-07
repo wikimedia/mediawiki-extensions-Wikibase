@@ -3,20 +3,20 @@
 		"authors": [
 			"BeginaFelicysym",
 			"Chrumps",
+			"Debeet",
+			"Devwebtel",
 			"Kpjas",
 			"Lazowik",
-			"Maćko",
-			"Rzuwig",
-			"WTM",
-			"Debeet",
 			"Macofe",
-			"Devwebtel",
-			"Sethakill",
 			"Mateon1",
-			"Woytecr",
+			"Maćko",
 			"Openbk",
+			"Rail",
 			"Railfail536",
-			"Rail"
+			"Rzuwig",
+			"Sethakill",
+			"WTM",
+			"Woytecr"
 		]
 	},
 	"wikibase-lib-desc": "Zawiera wspólne funkcje dla rozszerzeń Wikibase i Wikibase Client",

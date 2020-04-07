@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Wizardist",
-			"Zedlik",
 			"Red Winged Duck",
-			"Renessaince"
+			"Renessaince",
+			"Wizardist",
+			"Zedlik"
 		]
 	},
 	"wikibase-client-desc": "Кліент для пашырэньня Wikibase",

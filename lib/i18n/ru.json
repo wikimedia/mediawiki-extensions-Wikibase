@@ -1,26 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alexander Yukal",
 			"Amire80",
+			"Diralik",
+			"Irus",
 			"Kaganer",
+			"Kareyac",
+			"Katunchik",
 			"Lockal",
-			"Okras",
-			"Ole Yves",
-			"ShinePhantom",
-			"Александр Сигачёв",
 			"Macofe",
 			"Mailman",
-			"Irus",
-			"Kareyac",
 			"MaxBioHazard",
+			"Nk88",
+			"Okras",
+			"Ole Yves",
+			"Putnik",
+			"ShinePhantom",
 			"Smigles",
 			"Stjn",
 			"Vlad5250",
-			"Putnik",
-			"Nk88",
-			"Diralik",
-			"Katunchik",
-			"Alexander Yukal"
+			"Александр Сигачёв"
 		]
 	},
 	"wikibase-lib-desc": "Общие функции расширений Wikibase и Wikibase Client",

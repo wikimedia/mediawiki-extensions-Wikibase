@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"KartikMistry",
-			"NehalDaveND",
 			"Ashok modhvadia",
-			"Dsvyas"
+			"Dsvyas",
+			"KartikMistry",
+			"NehalDaveND"
 		]
 	},
 	"wikibase-error-unexpected": "ક્ષતિ: $1",

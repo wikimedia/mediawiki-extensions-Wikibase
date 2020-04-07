@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"GretaDoci",
-			"Liridon",
 			"Arianit",
-			"Besnik b"
+			"Besnik b",
+			"GretaDoci",
+			"Liridon"
 		]
 	},
 	"wikibase-lib-desc": "Përmban funksione të rëndomtë për Wikibase dhe zgjerime Klienti Wikibase",

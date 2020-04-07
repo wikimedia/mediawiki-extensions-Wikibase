@@ -1,10 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rul1902",
 			"Jaeminlovetaejoon",
-			"SawJaemin",
-			"Khing"
+			"Khing",
+			"Rul1902",
+			"SawJaemin"
 		]
 	},
 	"tooltip-t-wikibase": "Link to connected data repository item",

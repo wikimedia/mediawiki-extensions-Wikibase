@@ -1,19 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"!Silent",
 			"Cainamarques",
+			"Dianakc",
+			"Eduardo Addad de Oliveira",
+			"Fasouzafreitas",
+			"Felipe L. Ewald",
 			"Jaideraf",
 			"Luckas",
-			"555",
 			"Macofe",
-			"Fasouzafreitas",
-			"TheEduGobi",
-			"Dianakc",
-			"Felipe L. Ewald",
-			"!Silent",
 			"O andarilho",
-			"Eduardo Addad de Oliveira",
-			"Opraco"
+			"Opraco",
+			"TheEduGobi",
+			555
 		]
 	},
 	"wikibase-lib-desc": "Mantém a funcionalidade comum para as extensões Wikibase e Wikibase Client",

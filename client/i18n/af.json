@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Naudefj",
 			"Arnobarnard",
-			"Joris Darlington Quarshie"
+			"Joris Darlington Quarshie",
+			"Naudefj"
 		]
 	},
 	"wikibase-client-desc": "Kliënt vir die Wikibase-uitbreiding",

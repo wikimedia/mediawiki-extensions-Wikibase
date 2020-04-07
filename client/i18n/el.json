@@ -3,10 +3,10 @@
 		"authors": [
 			"FocalPoint",
 			"Geraki",
-			"Nikosguard",
 			"Glavkos",
-			"Protnet",
-			"Nikosgranturismogt"
+			"Nikosgranturismogt",
+			"Nikosguard",
+			"Protnet"
 		]
 	},
 	"wikibase-client-desc": "Πελάτης για την επέκταση Wikibase",

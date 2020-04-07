@@ -2,8 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Avjoska",
-			"Pikne",
-			"Metsavend"
+			"Metsavend",
+			"Pikne"
 		]
 	},
 	"wikibase-lib-desc": "Sisaldab tarkvaralisade Wikibase ja Wikibase Client ühiseid funktsioone.",

@@ -3,9 +3,9 @@
 		"authors": [
 			"Cheers!",
 			"Minh Nguyen",
-			"පසිඳු කාවින්ද",
 			"Trần Nguyễn Minh Huy",
-			"Vinhtantran"
+			"Vinhtantran",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikibase-lib-desc": "Các chức năng chung của các phần mở rộng Wikibase và Trình khách Wikibase",

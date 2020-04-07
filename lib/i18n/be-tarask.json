@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Wizardist",
-			"Zedlik",
 			"Fitoschido",
+			"Red Winged Duck",
 			"Renessaince",
-			"Red Winged Duck"
+			"Wizardist",
+			"Zedlik"
 		]
 	},
 	"wikibase-lib-desc": "Утрымлівае агульны функцыянал пашырэньняў Wikibase і Wikibase Client.",

@@ -2,19 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"AS",
+			"Andriy.v",
 			"Andriykopanytsia",
+			"Avatar6",
 			"Base",
+			"Dars",
+			"Macofe",
+			"Movses",
+			"Piramidion",
 			"RLuts",
 			"Steve.rusyn",
 			"SteveR",
-			"Ата",
-			"Piramidion",
-			"Macofe",
-			"Dars",
-			"Avatar6",
 			"Vlad5250",
-			"Movses",
-			"Andriy.v"
+			"Ата"
 		]
 	},
 	"wikibase-lib-desc": "Загальні функції розширень Wikibase і Wikibase Client",

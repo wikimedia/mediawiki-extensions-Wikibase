@@ -2,20 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Basvb",
+			"Bdijkstra",
+			"Hex",
+			"Macofe",
+			"Mainframe98",
+			"Mar(c)",
+			"MrLeopold",
+			"Robin van der Vliet",
+			"Robin0van0der0vliet",
 			"SPQRobin",
 			"Saruman",
 			"Siebrand",
-			"Southparkfan",
 			"Sjoerddebruin",
-			"Macofe",
-			"Robin0van0der0vliet",
-			"Robin van der Vliet",
-			"MrLeopold",
-			"Hex",
-			"Mainframe98",
-			"Wiki13",
-			"Mar(c)",
-			"Bdijkstra"
+			"Southparkfan",
+			"Wiki13"
 		]
 	},
 	"wikibase-lib-desc": "Bevat gemeenschappelijke functies voor de uitbreidingen Wikibase en Wikibase Client",

@@ -1,4 +1,6 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"wikibase-sitelinks-wikipedia": "Wikipedia"
 }

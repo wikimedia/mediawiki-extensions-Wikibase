@@ -1,14 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Afaz",
 			"Fryed-peach",
+			"Omotecho",
+			"Otokoume",
 			"Shirayuki",
 			"Sujiniku",
-			"Otokoume",
-			"Afaz",
-			"ネイ",
 			"Yusuke1109",
-			"Omotecho"
+			"ネイ"
 		]
 	},
 	"wikibase-lib-desc": "ウィキベースとウィキベースクライアント拡張機能の共通の機能を保持",

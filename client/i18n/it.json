@@ -1,26 +1,26 @@
 {
 	"@metadata": {
 		"authors": [
+			"Anto",
 			"Beta16",
 			"Candalua",
-			"Gianfranco",
-			"Gloria sah",
-			"Maria victoria",
-			"Raoli",
-			"Sannita",
-			"Nemo bis",
+			"Dansita",
 			"FRacco",
 			"Federico Mugnaini",
 			"Fringio",
-			"Ricordisamoa",
-			"Macofe",
-			"Lucas2",
+			"Gianfranco",
+			"Gloria sah",
 			"Horcrux92",
-			"Anto",
-			"Una giornata uggiosa '94",
+			"Lucas2",
+			"Macofe",
+			"Maria victoria",
+			"Nemo bis",
+			"Raoli",
+			"Ricordisamoa",
 			"Sakretsu",
+			"Sannita",
 			"Titore",
-			"Dansita"
+			"Una giornata uggiosa '94"
 		]
 	},
 	"wikibase-client-desc": "Client per l'estensione Wikibase",

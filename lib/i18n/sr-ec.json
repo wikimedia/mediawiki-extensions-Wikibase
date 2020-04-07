@@ -1,16 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Milicevic01",
-			"TheStefan12345",
-			"Милан Јелисавчић",
-			"Rancher",
-			"Сербијана",
-			"Obsuser",
-			"Srdjan m",
 			"Acamicamacaraca",
 			"BadDog",
-			"Zoranzoki21"
+			"Milicevic01",
+			"Obsuser",
+			"Rancher",
+			"Srdjan m",
+			"TheStefan12345",
+			"Zoranzoki21",
+			"Милан Јелисавчић",
+			"Сербијана"
 		]
 	},
 	"wikibase-lib-desc": "Садржи заједничке функционалности за Викибазу и проширења за клијента Викибазе",

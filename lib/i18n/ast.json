@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Xuacu",
 			"Fitoschido",
-			"Macofe"
+			"Macofe",
+			"Xuacu"
 		]
 	},
 	"wikibase-lib-desc": "Contien les funciones comunes pa les estensiones Wikibase y Wikibase Client.",

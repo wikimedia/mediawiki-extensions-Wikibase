@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Movses",
 			"Piramidion",
-			"Ата",
-			"Movses"
+			"Ата"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Виводить ідентифікатори сутностей, що використовуються на заданих сторінках.",

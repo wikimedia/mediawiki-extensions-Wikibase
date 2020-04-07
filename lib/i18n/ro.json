@@ -1,13 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Minisarm",
-			"Stelistcristi",
-			"Rsocol",
-			"Macofe",
-			"Strainu",
+			"Andrei Stroe",
 			"Firilacroco",
-			"Andrei Stroe"
+			"Macofe",
+			"Minisarm",
+			"Rsocol",
+			"Stelistcristi",
+			"Strainu"
 		]
 	},
 	"wikibase-lib-desc": "Grupează funcționalități comune pentru extensiile Wikibase și Client Wikibase",

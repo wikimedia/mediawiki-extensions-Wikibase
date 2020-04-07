@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bencemac",
 			"Bináris",
 			"BáthoryPéter",
-			"Tgr",
-			"JulesWinnfield-hu",
-			"Tacsipacsi",
 			"Csega",
 			"Dorgan",
+			"Einstein2",
 			"Grin",
-			"Urbalazs",
-			"Bencemac",
-			"Einstein2"
+			"JulesWinnfield-hu",
+			"Tacsipacsi",
+			"Tgr",
+			"Urbalazs"
 		]
 	},
 	"wikibase-client-desc": "Kliens a Wikibase kiterjesztéshez",
