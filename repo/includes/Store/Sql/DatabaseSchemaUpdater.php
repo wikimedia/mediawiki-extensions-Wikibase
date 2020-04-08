@@ -104,7 +104,7 @@ class DatabaseSchemaUpdater {
 		$this->registerPropertyInfoTableUpdates( $updater );
 
 		if ( $db->tableExists( 'wb_entity_per_page' ) ) {
-			$updater->dropTable( 'wb_entity_per_page' );
+			$updater->dropExtensionTable( 'wb_entity_per_page' );
 		}
 
 		$updater->addExtensionTable(
