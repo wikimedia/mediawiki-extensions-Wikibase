@@ -6,3 +6,8 @@ export enum initEvents {
 export enum appEvents {
 	onRelaunch = 'relaunch',
 }
+
+export default {
+	...initEvents,
+	...appEvents,
+};

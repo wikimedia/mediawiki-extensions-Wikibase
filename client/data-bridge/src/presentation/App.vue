@@ -28,7 +28,7 @@
 		</ProcessDialogHeader>
 
 		<div class="wb-db-app__body">
-			<ErrorWrapper v-if="hasError" @reload="$emit( appEvents.onRelaunch )" />
+			<ErrorWrapper v-if="hasError" @reload="$emit( Events.onRelaunch )" />
 			<ThankYou
 				v-else-if="isSaved"
 				:repo-link="repoLink"
@@ -55,8 +55,7 @@
 <script lang="ts">
 import { mixins } from 'vue-class-component';
 import { Component } from 'vue-property-decorator';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { initEvents, appEvents } from '@/events'; // appEvents is used in <template>
+import Events from '@/events';
 import StateMixin from '@/presentation/StateMixin';
 import DataBridge from '@/presentation/components/DataBridge.vue';
 import Loading from '@/presentation/components/Loading.vue';
@@ -128,9 +127,9 @@ export default class App extends mixins( StateMixin ) {
 
 	public close(): void {
 		if ( this.isSaved ) {
-			this.$emit( initEvents.onSaved );
+			this.$emit( Events.onSaved );
 		} else {
-			this.$emit( initEvents.onCancel );
+			this.$emit( Events.onCancel );
 		}
 	}
 
@@ -150,7 +149,7 @@ export default class App extends mixins( StateMixin ) {
 	}
 
 	public openedReferenceEditOnRepo(): void {
-		this.$emit( initEvents.onSaved );
+		this.$emit( Events.onSaved );
 	}
 }
 </script>
