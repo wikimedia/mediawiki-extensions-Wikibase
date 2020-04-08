@@ -52,6 +52,35 @@ describe( 'root/actions', () => {
 		};
 	}
 
+	describe( 'relaunchBridge', () => {
+		it( 'commits three resets and then dispatches init', async () => {
+			const information = newMockAppInformation();
+			const commit = jest.fn();
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+				dispatch,
+			} );
+			const entityModuleCommit = jest.fn();
+			// @ts-ignore
+			actions.entityModule = {
+				commit: entityModuleCommit,
+			};
+			const statementModuleCommit = jest.fn();
+			// @ts-ignore
+			actions.statementModule = {
+				commit: statementModuleCommit,
+			};
+
+			await actions.relaunchBridge( information );
+
+			expect( commit ).toHaveBeenCalledWith( 'reset' );
+			expect( entityModuleCommit ).toHaveBeenCalledWith( 'reset' );
+			expect( statementModuleCommit ).toHaveBeenCalledWith( 'reset' );
+			expect( dispatch ).toHaveBeenCalledWith( 'initBridge', information );
+		} );
+	} );
+
 	describe( 'initBridge', () => {
 
 		const wikibaseRepoConfigRepository = {

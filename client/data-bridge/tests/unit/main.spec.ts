@@ -2,11 +2,12 @@ import { launch } from '@/main';
 import Vue from 'vue';
 import App from '@/presentation/App.vue';
 import { EventEmitter } from 'events';
-import Events from '@/events';
+import { initEvents, appEvents } from '@/events';
 import newMockServiceContainer from './services/newMockServiceContainer';
 
 const mockApp = {
 	$mount: jest.fn(),
+	$on: jest.fn(),
 };
 mockApp.$mount.mockImplementation( () => mockApp );
 jest.mock( '@/presentation/App.vue', () => {
@@ -91,10 +92,12 @@ describe( 'launch', () => {
 		expect( store.dispatch ).toHaveBeenCalledWith( 'initBridge', appInformation );
 		expect( App ).toHaveBeenCalledWith( { store } );
 		expect( mockApp.$mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
+		expect( mockApp.$on ).toHaveBeenCalledTimes( 1 );
+		expect( mockApp.$on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.onRelaunch );
 		expect( mockRepeater ).toHaveBeenCalledWith(
 			mockApp,
 			mockEmitter,
-			Object.values( Events ),
+			Object.values( initEvents ),
 		);
 	} );
 

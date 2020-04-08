@@ -4,7 +4,7 @@ import AppInformation from '@/definitions/AppInformation';
 import AppConfiguration from '@/definitions/AppConfiguration';
 import { createStore } from '@/store';
 import ServiceContainer from '@/services/ServiceContainer';
-import Events from '@/events';
+import { initEvents, appEvents } from '@/events';
 import { EventEmitter } from 'events';
 import repeater from '@/events/repeater';
 import extendVueEnvironment from '@/presentation/extendVueEnvironment';
@@ -30,10 +30,14 @@ export function launch(
 
 	const app = new App( {
 		store,
-	} ).$mount( config.containerSelector );
+	} );
+	app.$mount( config.containerSelector );
+	app.$on( appEvents.onRelaunch, () => {
+		store.dispatch( 'relaunchBridge', information );
+	} );
 
 	const emitter = new EventEmitter();
-	repeater( app, emitter, Object.values( Events ) );
+	repeater( app, emitter, Object.values( initEvents ) );
 
 	return emitter;
 }

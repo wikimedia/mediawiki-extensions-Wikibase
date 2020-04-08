@@ -137,4 +137,19 @@ describe( 'root/mutations', () => {
 		mutations.setPageUrl( pageUrl );
 		expect( state.pageUrl ).toBe( pageUrl );
 	} );
+
+	it( 'resets the root module of the store', () => {
+		const state: Application = newApplicationState( {
+			applicationStatus: ApplicationStatus.SAVING,
+			applicationErrors: [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ],
+			targetLabel: { language: 'en', value: 'a label' },
+		} );
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.reset();
+
+		expect( state.applicationStatus ).toBe( ApplicationStatus.INITIALIZING );
+		expect( state.applicationErrors ).toStrictEqual( [] );
+		expect( state.targetLabel ).toBe( null );
+	} );
 } );

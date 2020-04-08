@@ -1,6 +1,8 @@
-enum events {
+export enum initEvents {
 	onSaved = 'saved',
 	onCancel = 'cancel',
 }
 
-export default events;
+export enum appEvents {
+	onRelaunch = 'relaunch',
+}

@@ -28,4 +28,16 @@ describe( 'entity/mutations', () => {
 		mutations.updateRevision( revision );
 		expect( state.baseRevision ).toBe( revision );
 	} );
+
+	describe( 'reset', () => {
+		it( 'removes all entity data', () => {
+			const state = newEntityState( { id: 'Q1', baseRevision: 123 } );
+			const mutations = inject( EntityMutations, { state } );
+
+			mutations.reset();
+
+			expect( state.id ).toBe( '' );
+			expect( state.baseRevision ).toBe( 0 );
+		} );
+	} );
 } );

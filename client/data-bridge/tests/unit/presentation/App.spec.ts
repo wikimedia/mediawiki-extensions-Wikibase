@@ -10,7 +10,7 @@ import {
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
-import Events from '@/events';
+import { initEvents } from '@/events';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
@@ -209,13 +209,13 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
-		expect( wrapper.emitted( Events.onSaved ) ).toBeFalsy();
+		expect( wrapper.emitted( initEvents.onSaved ) ).toBeFalsy();
 
 		localStore.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 		expect( wrapper.find( ThankYou ).exists() ).toBe( true );
 		await wrapper.find( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
 		await localVue.nextTick();
-		expect( wrapper.emitted( Events.onSaved ) ).toHaveLength( 1 );
+		expect( wrapper.emitted( initEvents.onSaved ) ).toHaveLength( 1 );
 	} );
 
 	it(
@@ -285,7 +285,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
 		await localVue.nextTick();
 
-		expect( wrapper.emitted( Events.onSaved ) ).toBeFalsy();
+		expect( wrapper.emitted( initEvents.onSaved ) ).toBeFalsy();
 	} );
 
 	it( 'hides the save button after changes are saved', async () => {
@@ -311,7 +311,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 
-		expect( wrapper.emitted( Events.onSaved ) ).toHaveLength( 1 );
+		expect( wrapper.emitted( initEvents.onSaved ) ).toHaveLength( 1 );
 	} );
 
 	it( 'renders the close button using the CANCEL message', () => {
@@ -344,7 +344,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
 		await localVue.nextTick();
 
-		expect( wrapper.emitted( Events.onCancel ) ).toHaveLength( 1 );
+		expect( wrapper.emitted( initEvents.onCancel ) ).toHaveLength( 1 );
 	} );
 
 	it( 'disables close while in saving state', async () => {
@@ -358,7 +358,7 @@ describe( 'App.vue', () => {
 		await wrapper.find( '.wb-ui-event-emitting-button--close' ).trigger( 'click' );
 		await localVue.nextTick();
 
-		expect( wrapper.emitted( Events.onCancel ) ).toBeFalsy();
+		expect( wrapper.emitted( initEvents.onCancel ) ).toBeFalsy();
 	} );
 
 	describe( 'component switch', () => {
