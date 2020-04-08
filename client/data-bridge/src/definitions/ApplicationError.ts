@@ -3,6 +3,7 @@ import { SnakType } from '@/datamodel/Snak';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 
 export enum ErrorTypes {
+	INITIALIZATION_ERROR = 'INITIALIZATION_ERROR',
 	APPLICATION_LOGIC_ERROR = 'APPLICATION_LOGIC_ERROR',
 	INVALID_ENTITY_STATE_ERROR = 'INVALID_ENTITY_STATE_ERROR',
 	UNSUPPORTED_AMBIGUOUS_STATEMENT = 'UNSUPPORTED_AMBIGUOUS_STATEMENT',
@@ -16,6 +17,11 @@ export enum ErrorTypes {
 export interface ApplicationErrorBase {
 	type: string;
 	info?: object;
+}
+
+interface InitializationError extends ApplicationErrorBase {
+	type: ErrorTypes.INITIALIZATION_ERROR;
+	info: object;
 }
 
 interface ApplicationLogicError extends ApplicationErrorBase {
@@ -51,6 +57,7 @@ interface SavingFailedError extends ApplicationErrorBase {
 }
 
 type ApplicationError = MissingPermissionsError
+| InitializationError
 | ApplicationLogicError
 | InvalidEntityStateError
 | UnsupportedDatatypeError
