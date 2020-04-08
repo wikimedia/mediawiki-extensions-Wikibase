@@ -17,6 +17,9 @@
 		"Wikibase\\ClientHooks": "client/ClientHooks.php"
 	},
 	"TestAutoloadNamespaces": {
+		"Wikibase\\Client\\Tests\\Integration\\": "client/tests/phpunit/integration/includes/",
+		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
+		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/",
 		"Wikibase\\Client\\Tests\\": "client/tests/phpunit/includes/"
 	},
 	"manifest_version": 2
