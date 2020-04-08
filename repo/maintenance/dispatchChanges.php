@@ -47,7 +47,7 @@ class DispatchChanges extends Maintenance {
 		$this->addDescription(
 			"Maintenance script that polls for Wikibase changes in the shared wb_changes table\n" .
 			"and dispatches them to any client wikis using their job queue.\n" .
-			"See docs/change-propagation.wiki for an overview of the change propagation mechanism."
+			"See docs/topics/change-propagation.md for an overview of the change propagation mechanism."
 		);
 
 		$this->addOption( 'verbose', "Report activity." );

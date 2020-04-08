@@ -15,7 +15,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
 /**
  * Deserializer for site link change requests.
  *
- * @see docs/change-op-serialization.wiki for documentation on site link change request format.
+ * @see @ref md_docs_topics_changeop-serializations for documentation on site link change request format.
  *
  * @license GPL-2.0-or-later
  */

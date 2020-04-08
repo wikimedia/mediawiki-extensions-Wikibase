@@ -18,7 +18,7 @@
  *
  * @see ValidatorsBuilders
  * @see WikibaseValueFormatterBuilders
- * @see docs/datatypes.wiki Documentation on how to add new data type
+ * @see @ref md_docs_topics_datatypes Documentation on how to add new data type
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
