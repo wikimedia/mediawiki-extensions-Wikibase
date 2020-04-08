@@ -540,7 +540,7 @@ DEFAULT: ```false```
 
 #### federatedPropertiesEnabled {#repo_federatedPropertiesEnabled}
 Enable the federated properties feature. **Note that** once this feature is enable (set true), it must not be disabled (set false) again.
-The behaviour is unpredicted if it is disaled after it was enabled.
+The behaviour is unpredicted if it is disabled after it was enabled.
 
 DEFAULT: ```false```
 
