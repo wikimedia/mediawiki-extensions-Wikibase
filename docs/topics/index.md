@@ -13,6 +13,7 @@ This directory collects some documentation of specific topics:
 * @subpage md_docs_topics_json
 * @subpage md_docs_topics_inclusion-syntax - Using data from a Repo on a Client (simple / property parser function)
 * @subpage md_docs_topics_lua - Using data from a Repo on a Client (advanced)
+* @subpage md_docs_topics_mediawiki - MediaWiki integration, decisions and notable points
 * @subpage md_docs_topics_globals - PHP globals
 * @subpage md_docs_topics_options - Wikibase settings & configuration
 * @subpage md_docs_topics_public-apis
