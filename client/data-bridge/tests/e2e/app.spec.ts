@@ -628,7 +628,7 @@ describe( 'app', () => {
 		} );
 	} );
 
-	it( 'tracks opening of bridge with opening performance and data type', async () => {
+	it( 'tracks opening of bridge with opening performance, data type, and error', async () => {
 		const propertyId = 'P4711';
 		const dataType = 'peculiar-type';
 		const testLink = prepareTestEnv( { propertyId } );
@@ -646,7 +646,7 @@ describe( 'app', () => {
 		testLink!.click();
 		await budge();
 
-		expect( mockTracker ).toHaveBeenCalledTimes( 2 );
+		expect( mockTracker ).toHaveBeenCalledTimes( 3 );
 
 		expect( mockTracker.mock.calls[ 0 ][ 0 ] ).toBe(
 			'timing.MediaWiki.wikibase.client.databridge.clickDelay',
@@ -656,6 +656,12 @@ describe( 'app', () => {
 		expect( mockTracker ).toHaveBeenNthCalledWith(
 			2,
 			`counter.MediaWiki.wikibase.client.databridge.datatype.${dataType}`,
+			1,
+		);
+
+		expect( mockTracker ).toHaveBeenNthCalledWith(
+			3,
+			'counter.MediaWiki.wikibase.client.databridge.error.unknown.invalid_entity_state_error',
 			1,
 		);
 	} );

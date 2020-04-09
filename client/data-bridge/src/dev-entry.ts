@@ -94,6 +94,9 @@ services.set( 'tracker', {
 	trackTitlePurgeError() {
 		console.info( 'Tracking purge error' );
 	},
+	trackUnknownError( type: string ): void {
+		console.info( `Tracking unknown error: '${type}'` );
+	},
 } );
 
 services.set( 'editAuthorizationChecker', {

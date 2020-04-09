@@ -42,6 +42,9 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
 	},
 } )
 export default class ErrorUnknown extends mixins( StateMixin ) {
+	public mounted(): void {
+		this.rootModule.dispatch( 'trackApplicationErrorsAsUnknown' );
+	}
 }
 </script>
 
