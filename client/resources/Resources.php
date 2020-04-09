@@ -179,8 +179,7 @@ return call_user_func( function() {
 				'unknown-error'
 			],
 			'dependencies' => [
-				'jquery.spinner',
-				'mediawiki.notify'
+				'jquery.spinner'
 			],
 		],
 
