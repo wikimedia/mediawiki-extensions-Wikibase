@@ -40,7 +40,7 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 		$this->assertStringContainsString( 'mw-kartographer-map', $result );
 		$this->assertStringContainsString( 'data-lat="50"', $result );
 		// FIXME: This looks somewhat bogus, do we need to fix this as well?
-		$this->assertStringContainsString( 'data-lon="1.0E-5"', $result );
+		$this->assertStringContainsString( 'data-lon="1.1E-5"', $result );
 		$this->assertStringStartsWith( '<div', $result );
 		$this->assertStringEndsWith( '</div>', $result );
 	}
