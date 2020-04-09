@@ -163,7 +163,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "La valeur précédente était correcte mais est maintenant désuète.",
 	"wikibase-client-data-bridge-references-heading": "Références",
 	"wikibase-client-data-bridge-license-heading": "Utilisation et licence",
-	"wikibase-client-data-bridge-license-body": "<p>Modifier cette valeur la modifiera aussi sur {{WBREPONAME}} et éventuellement sur les autres wikis dans d’autres langues.</p>\n<p>En cliquant sur « {{int:$1}} », vous acceptez les [$2 conditions d’utilisation], et vous acceptez de façon irrévocable de mettre votre contribution sous [$3 $4].</p>",
+	"wikibase-client-data-bridge-license-body": "<p>Modifier cette valeur la modifiera aussi sur {{WBREPONAME}} et éventuellement sur les autres wikis dans d’autres langues.</p>\n<p>En cliquant sur « {{int:$1}} », vous acceptez les [$2 conditions d’utilisation], et vous acceptez de façon irrévocable de mettre votre contribution sous [$3 $4].</p>",
 	"wikibase-client-data-bridge-bailout-heading": "À la place, vous pouvez faire ce qui suit :",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Modifier la valeur sur {{WBREPONAME}}. Cliquer sur le bouton ci-dessous pour modifier directement la valeur (le lien s’ouvre dans un nouvel onglet).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Modifier la valeur sur {{WBREPONAME}}",
@@ -179,7 +179,7 @@
 	"wikibase-client-data-bridge-novalue-error-head": "La modification de la valeur associée à $1 n’est pas prise en charge actuellement",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 est marqué(e) comme n’ayant <i>aucune valeur</i> sur {{WBREPONAME}}. Il est présentement impossible de modifier des valeurs marquées comme n’ayant <i>aucune valeur</i>.",
 	"wikibase-client-data-bridge-reference-note": "Modifier les préférences sera possible sur {{WBREPONAME}} après enregistrement",
-	"wikibase-client-data-bridge-thank-you-head": "Merci pour votre modification !",
+	"wikibase-client-data-bridge-thank-you-head": "Merci pour votre modification !",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Vous pouvez modifier les références pour cette propriété sur {{WBREPONAME}} en cliquant sur le bouton ci-dessous.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Modifier la référence sur {{WBREPONAME}}"
 }
