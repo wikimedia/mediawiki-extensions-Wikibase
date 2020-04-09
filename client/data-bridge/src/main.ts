@@ -32,7 +32,7 @@ export function launch(
 		store,
 	} );
 	app.$mount( config.containerSelector );
-	app.$on( appEvents.onRelaunch, () => {
+	app.$on( appEvents.relaunch, () => {
 		store.dispatch( 'relaunchBridge', information );
 	} );
 

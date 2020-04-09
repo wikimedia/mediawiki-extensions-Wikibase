@@ -161,8 +161,8 @@ launch(
 		pageUrl: 'https://client.example/wiki/Client_page',
 	},
 	services,
-).on( initEvents.onSaved, () => {
+).on( initEvents.saved, () => {
 	console.info( 'Application event: saved' );
-} ).on( initEvents.onCancel, () => {
+} ).on( initEvents.cancel, () => {
 	console.info( 'Application event: canceled' );
 } );

@@ -1,10 +1,10 @@
 export enum initEvents {
-	onSaved = 'saved',
-	onCancel = 'cancel',
+	saved = 'saved',
+	cancel = 'cancel',
 }
 
 export enum appEvents {
-	onRelaunch = 'relaunch',
+	relaunch = 'relaunch',
 }
 
 export default {

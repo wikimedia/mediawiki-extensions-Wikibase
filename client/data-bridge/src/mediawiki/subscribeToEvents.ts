@@ -8,10 +8,10 @@ import { EventEmitter } from 'events';
 export default function subscribeToEvents( emitter: EventEmitter,
 	windowManager: WindowManager,
 	mwWindow: MwWindow ): void {
-	emitter.on( initEvents.onSaved, () => {
+	emitter.on( initEvents.saved, () => {
 		mwWindow.location.reload();
 	} );
-	emitter.on( initEvents.onCancel, () => {
+	emitter.on( initEvents.cancel, () => {
 		windowManager.clearWindows().catch( () => { /* do nothing */ } );
 	} );
 

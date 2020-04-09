@@ -28,7 +28,7 @@
 		</ProcessDialogHeader>
 
 		<div class="wb-db-app__body">
-			<ErrorWrapper v-if="hasError" @reload="$emit( Events.onRelaunch )" />
+			<ErrorWrapper v-if="hasError" @reload="$emit( Events.relaunch )" />
 			<ThankYou
 				v-else-if="isSaved"
 				:repo-link="repoLink"
@@ -127,9 +127,9 @@ export default class App extends mixins( StateMixin ) {
 
 	public close(): void {
 		if ( this.isSaved ) {
-			this.$emit( Events.onSaved );
+			this.$emit( Events.saved );
 		} else {
-			this.$emit( Events.onCancel );
+			this.$emit( Events.cancel );
 		}
 	}
 
@@ -149,7 +149,7 @@ export default class App extends mixins( StateMixin ) {
 	}
 
 	public openedReferenceEditOnRepo(): void {
-		this.$emit( Events.onSaved );
+		this.$emit( Events.saved );
 	}
 }
 </script>

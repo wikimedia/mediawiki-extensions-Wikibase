@@ -2,18 +2,18 @@ import subscribeToEvents from '@/mediawiki/subscribeToEvents';
 import { initEvents } from '@/events';
 
 describe( 'subscribeToEvents', () => {
-	describe( initEvents.onSaved, () => {
+	describe( initEvents.saved, () => {
 		const emitter = { on: jest.fn() };
 		const mwWindow = { reload: jest.fn() };
 
 		it( 'subscribes EventEmitter on saved', () => {
 			subscribeToEvents( emitter as any, { on: jest.fn() } as any, mwWindow as any );
-			expect( emitter.on.mock.calls[ 0 ][ 0 ] ).toBe( initEvents.onSaved );
+			expect( emitter.on.mock.calls[ 0 ][ 0 ] ).toBe( initEvents.saved );
 		} );
 
 		it( 'subscribes EventEmitter on cancel', () => {
 			subscribeToEvents( emitter as any, { on: jest.fn() } as any, mwWindow as any );
-			expect( emitter.on.mock.calls[ 1 ][ 0 ] ).toBe( initEvents.onCancel );
+			expect( emitter.on.mock.calls[ 1 ][ 0 ] ).toBe( initEvents.cancel );
 		} );
 
 		it( 'subcribes WindowManger on closing', () => {

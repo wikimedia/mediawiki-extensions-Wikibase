@@ -93,7 +93,7 @@ describe( 'launch', () => {
 		expect( App ).toHaveBeenCalledWith( { store } );
 		expect( mockApp.$mount ).toHaveBeenCalledWith( appConfiguration.containerSelector );
 		expect( mockApp.$on ).toHaveBeenCalledTimes( 1 );
-		expect( mockApp.$on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.onRelaunch );
+		expect( mockApp.$on.mock.calls[ 0 ][ 0 ] ).toBe( appEvents.relaunch );
 		expect( mockRepeater ).toHaveBeenCalledWith(
 			mockApp,
 			mockEmitter,
