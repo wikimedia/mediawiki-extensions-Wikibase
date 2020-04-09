@@ -88,6 +88,7 @@ describe( 'init', () => {
 				hrefRegExp: '',
 				editTags: [],
 				usePublish: false,
+				issueReportingLink: 'https://bugs.example/new?body=<body>',
 			};
 		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
 
@@ -142,13 +143,8 @@ describe( 'init', () => {
 			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
-			editFlow = EditFlow.OVERWRITE,
-			dataBridgeConfig = {
-				hrefRegExp: '',
-				editTags: [],
-				usePublish: false,
-			};
-		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );
+			editFlow = EditFlow.OVERWRITE;
+		mockMwEnv( using );
 
 		const selectedElement = {
 			link: {
@@ -200,6 +196,7 @@ describe( 'init', () => {
 				hrefRegExp: '',
 				editTags: [],
 				usePublish: false,
+				issueReportingLink: 'https://bugs.example/new?body=<body>',
 			},
 			tracker = {} as Tracker;
 		mockMwEnv( using, mockMwConfig( dataBridgeConfig ) );

@@ -18,6 +18,7 @@ export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
 	editTags?: string[];
 	usePublish?: boolean;
+	issueReportingLink?: string;
 	wbRepo?: WbRepo;
 	wgPageContentLanguage?: string;
 	wgPageName?: string;
@@ -33,6 +34,7 @@ export function mockMwConfig( values: {
 						hrefRegExp: values.hrefRegExp,
 						editTags: values.editTags || [],
 						usePublish: values.usePublish || false,
+						issueReportingLink: values.issueReportingLink || 'https://bugs.example/new?body=<body>',
 					};
 				case 'wbRepo':
 					return values.wbRepo || {
