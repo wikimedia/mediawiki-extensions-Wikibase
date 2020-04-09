@@ -204,7 +204,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.cookie',
-				'mediawiki.notify',
 				'mediawiki.page.watch.ajax',
 				'mediawiki.Uri',
 				'mediawiki.user',
