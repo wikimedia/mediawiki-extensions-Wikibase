@@ -109,14 +109,14 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Creates an action and supplies it with a fake web request.
 	 *
-	 * @param string|Action $action The action to call, may be an action name or class name.
+	 * @param string $actionName The action to call, may be an action name or class name.
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool $wasPosted
 	 *
 	 * @return Action
 	 */
-	protected function createAction( $action, WikiPage $page, array $params = null, $wasPosted = false ) {
+	protected function createAction( string $actionName, WikiPage $page, array $params = null, $wasPosted = false ) {
 		global $wgLang;
 
 		if ( $params == null ) {
@@ -136,10 +136,10 @@ class ActionTestCase extends \MediaWikiTestCase {
 			$context->getOutput()->setPrintable();
 		}
 
-		if ( preg_match( '/^[a-z]+$/', $action ) ) {
-			$action = Action::factory( $action, $article, $context );
+		if ( preg_match( '/^[a-z]+$/', $actionName ) ) {
+			$action = Action::factory( $actionName, $article, $context );
 		} else {
-			$action = new $action( $article, $context );
+			$action = new $actionName( $article, $context );
 		}
 
 		return $action;
