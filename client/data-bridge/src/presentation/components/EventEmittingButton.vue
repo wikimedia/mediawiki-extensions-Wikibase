@@ -36,6 +36,7 @@ import { Prop } from 'vue-property-decorator';
 const validTypes = [
 	'primaryProgressive',
 	'close',
+	'neutral',
 ];
 
 const framelessTypes = [
@@ -237,6 +238,27 @@ export default class EventEmittingButton extends Vue {
 
 		&:active:focus {
 			box-shadow: none;
+		}
+	}
+
+	&--neutral {
+		background-color: $background-color-framed;
+		color: $color-base;
+		border-color: $border-color-base;
+
+		&:hover {
+			background-color: $background-color-base;
+		}
+
+		&:active {
+			background-color: $background-color-framed--active;
+			color: $color-base--active;
+			border-color: $border-color-base--active;
+		}
+
+		&:focus {
+			background-color: $background-color-base;
+			border-color: $color-primary--focus;
 		}
 	}
 

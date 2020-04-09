@@ -118,4 +118,13 @@ storiesOf( 'EventEmittingButton', module )
 				message="disabled close"
 				:disabled="true"
 			/>`,
+	} ) )
+	.add( 'neutral M', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<EventEmittingButton
+				type="neutral"
+				size="M"
+				message="Go back"
+			/>`,
 	} ) );
