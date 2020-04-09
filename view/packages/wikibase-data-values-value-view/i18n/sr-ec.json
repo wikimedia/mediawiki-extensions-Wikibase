@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Milicevic01",
-			"Милан Јелисавчић",
-			"Obsuser",
 			"Acamicamacaraca",
-			"BadDog"
+			"BadDog",
+			"Milicevic01",
+			"Obsuser",
+			"Милан Јелисавчић"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Управљање вредностима „$1” још увек није подржано.",

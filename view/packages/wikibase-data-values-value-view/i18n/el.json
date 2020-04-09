@@ -1,11 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nikosguard",
 			"Geraki",
+			"Nikosgranturismogt",
+			"Nikosguard",
 			"Protnet",
-			"Xaris333",
-			"Nikosgranturismogt"
+			"Xaris333"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Χειρισμός τιμών \"$1\" δεν υποστηρίζεται ακόμα.",

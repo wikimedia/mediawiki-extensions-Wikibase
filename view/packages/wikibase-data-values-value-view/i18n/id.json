@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kenrick95",
 			"Rachmat.Wahidi",
-			"Rachmat04",
-			"Kenrick95"
+			"Rachmat04"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan nilai data \"$1\" belum didukung.",

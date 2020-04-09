@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mormegil",
-			"Matěj Suchánek"
+			"Matěj Suchánek",
+			"Mormegil"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Zpracování hodnot „$1“ není dosud podporováno.",

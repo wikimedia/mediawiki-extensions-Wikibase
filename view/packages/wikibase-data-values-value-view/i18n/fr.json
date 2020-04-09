@@ -1,17 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alno",
 			"Ayack",
 			"Gomoko",
+			"Hashar",
 			"Hello71",
 			"Metroitendo",
 			"Peter17",
 			"Urhixidur",
 			"Verdy p",
 			"Wladek92",
-			"Yasten",
-			"Hashar",
-			"Alno"
+			"Yasten"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La manipulation des valeurs de données « $1 » n’est pas encore prise en charge.",

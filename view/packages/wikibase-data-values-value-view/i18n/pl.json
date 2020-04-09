@@ -2,10 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Chrumps",
+			"CiaPan",
 			"Ty221",
 			"WTM",
-			"XnIcRaM",
-			"CiaPan"
+			"XnIcRaM"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Wartości typu \"$1\" nie są jeszcze obsługiwane.",

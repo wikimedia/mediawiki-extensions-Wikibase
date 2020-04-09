@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mainframe98",
 			"Siebrand",
-			"Sjoerddebruin",
-			"Mainframe98"
+			"Sjoerddebruin"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Het verwerken van waarden van het type \"$1\" wordt nog niet ondersteund.",
