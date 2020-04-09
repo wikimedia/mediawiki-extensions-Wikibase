@@ -5,7 +5,7 @@
 			@close="close"
 		/>
 		<div class="wb-db-app__body">
-			<ErrorWrapper v-if="hasError" @reload="$emit( Events.relaunch )" />
+			<ErrorWrapper v-if="hasError" @relaunch="relaunch" />
 			<ThankYou
 				v-else-if="isSaved"
 				:repo-link="repoLink"
@@ -104,6 +104,14 @@ export default class App extends mixins( StateMixin ) {
 
 	public openedReferenceEditOnRepo(): void {
 		this.$emit( Events.saved );
+	}
+
+	private relaunch(): void {
+		/**
+		 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
+		 * @type {Event}
+		 */
+		this.$emit( Events.relaunch );
 	}
 }
 </script>

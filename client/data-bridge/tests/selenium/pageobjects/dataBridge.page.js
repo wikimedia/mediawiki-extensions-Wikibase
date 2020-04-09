@@ -93,6 +93,10 @@ class DataBridgePage extends Page {
 		return '.wb-db-thankyou__button';
 	}
 
+	static get ERROR_UNKNOWN_BUTTON_RELAUNCH() {
+		return '.wb-db-error-unknown__relaunch';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -246,6 +250,12 @@ class DataBridgePage extends Page {
 
 	get thankYouButton() {
 		return this.thankYouScreen.$( DataBridgePage.THANKYOU_BUTTON );
+	}
+
+	get errorUnknownRelaunch() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ERROR_TYPES.UNKNOWN} ${DataBridgePage.ERROR_UNKNOWN_BUTTON_RELAUNCH}`
+		);
 	}
 }
 

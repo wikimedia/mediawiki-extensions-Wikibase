@@ -15,10 +15,11 @@
 			class="wb-db-error-unknown__report"
 		/>
 		<EventEmittingButton
-			class="wb-db-error-unknown__reload"
+			class="wb-db-error-unknown__relaunch"
 			type="primaryProgressive"
 			size="M"
 			:message="$messages.get( $messages.KEYS.ERROR_RELOAD_BRIDGE )"
+			@click="relaunch"
 		/>
 	</div>
 </template>
@@ -45,6 +46,14 @@ export default class ErrorUnknown extends mixins( StateMixin ) {
 	public mounted(): void {
 		this.rootModule.dispatch( 'trackApplicationErrorsAsUnknown' );
 	}
+
+	private relaunch(): void {
+		/**
+		 * An event fired when the user clicks the CTA to relaunch the bridge
+		 * @type {Event}
+		 */
+		this.$emit( 'relaunch' );
+	}
 }
 </script>
 
@@ -64,7 +73,7 @@ export default class ErrorUnknown extends mixins( StateMixin ) {
 		@include marginForCenterColumn( 3 * $base-spacing-unit );
 	}
 
-	&__reload {
+	&__relaunch {
 		@include marginForCenterColumn( $margin-top: 4 * $base-spacing-unit, $margin-bottom: 3 * $base-spacing-unit );
 	}
 }

@@ -189,4 +189,19 @@ describe( 'ErrorWrapper', () => {
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 		expect( wrapper.find( ErrorUnsupportedSnakType ).exists() ).toBe( true );
 	} );
+
+	it( 'repeats ErrorUnknown\'s "relaunch" event', () => {
+		const store = createTestStore( {
+			state: {
+				applicationErrors: [
+					{
+						type: ErrorTypes.INVALID_ENTITY_STATE_ERROR,
+					},
+				],
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { store, localVue } );
+		wrapper.find( ErrorUnknown ).vm.$emit( 'relaunch' );
+		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
+	} );
 } );

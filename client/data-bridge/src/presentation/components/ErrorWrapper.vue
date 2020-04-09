@@ -18,7 +18,10 @@
 			v-else-if="unsupportedSnakTypeError !== null"
 			:snak-type="unsupportedSnakTypeError.info.snakType"
 		/>
-		<ErrorUnknown v-else />
+		<ErrorUnknown
+			v-else
+			@relaunch="relaunch"
+		/>
 	</section>
 </template>
 
@@ -89,6 +92,14 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 			}
 		}
 		return null;
+	}
+
+	private relaunch(): void {
+		/**
+		 * An event fired when it is time to relaunch the bridge (usually bubbled from a child component)
+		 * @type {Event}
+		 */
+		this.$emit( 'relaunch' );
 	}
 }
 </script>
