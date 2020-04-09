@@ -127,4 +127,23 @@ storiesOf( 'EventEmittingButton', module )
 				size="M"
 				message="Go back"
 			/>`,
+	} ) )
+	.add( 'back L', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<EventEmittingButton
+				type="back"
+				size="L"
+				message="back"
+			/>`,
+	} ) )
+	.add( 'back RTL', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<EventEmittingButton
+				style="transform: scaleX( -1 );"
+				type="back"
+				size="L"
+				message="back"
+			/>`,
 	} ) );

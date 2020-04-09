@@ -37,14 +37,17 @@ const validTypes = [
 	'primaryProgressive',
 	'close',
 	'neutral',
+	'back',
 ];
 
 const framelessTypes = [
 	'close',
+	'back',
 ];
 
 const imageOnlyTypes = [
 	'close',
+	'back',
 ];
 
 const validSizes = [
@@ -272,6 +275,14 @@ export default class EventEmittingButton extends Vue {
 
 	&--close {
 		background-image: $svg-close;
+	}
+
+	&--back {
+		background-image: $svg-back;
+
+		@at-root html[ dir='rtl' ] & { // references dir attribute of the App component
+			transform: scaleX( -1 );
+		}
 	}
 
 	&--frameless {
