@@ -109,7 +109,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/**
 	 * Creates an action and supplies it with a fake web request.
 	 *
-	 * @param string $actionName The action to call, may be an action name or class name.
+	 * @param string $actionName The name of the action to call
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool $wasPosted
@@ -136,20 +136,14 @@ class ActionTestCase extends \MediaWikiTestCase {
 			$context->getOutput()->setPrintable();
 		}
 
-		if ( preg_match( '/^[a-z]+$/', $actionName ) ) {
-			$action = Action::factory( $actionName, $article, $context );
-		} else {
-			$action = new $actionName( $article, $context );
-		}
-
-		return $action;
+		return Action::factory( $actionName, $article, $context );
 	}
 
 	/**
 	 * Calls the desired action using a fake web request.
 	 * This calls the show() method on the target action.
 	 *
-	 * @param string|Action $action The action to call; may be an action name or class name
+	 * @param string|Action $action The action to call; may be an action name or existing instance
 	 * @param WikiPage  $page the wiki page to call the action on
 	 * @param array|null $params request parameters
 	 * @param bool $wasPosted
