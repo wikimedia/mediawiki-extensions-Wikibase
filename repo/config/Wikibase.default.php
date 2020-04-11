@@ -338,4 +338,8 @@ return [
 	'entitySchemaNamespace' => 640,
 
 	'dataBridgeEnabled' => false,
+
+	'propagateChangeVisibility' => false,
+	'changeVisibilityNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
+	'changeVisibilityNotificationJobBatchSize' => 3,
 ];

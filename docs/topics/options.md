@@ -550,6 +550,22 @@ The set url path should allow access to both `index.php` and `api.php`
 
 DEFAULT: ```https://www.wikidata.org/w/```
 
+### propagateChangeVisibility {#repo_propagateChangeVisibility}
+Whether to propagate changes in revision visibility to client wikis.
+
+DEFAULT: ```false```.
+
+### changeVisibilityNotificationClientRCMaxAge {#repo_changeVisibilityNotificationClientRCMaxAge}
+Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
+
+DEFAULT: [$wgRCMaxAge].
+
+
+### changeVisibilityNotificationJobBatchSize {#repo_changeVisibilityNotificationJobBatchSize}
+Batch size (how many revisions per job) to use when pushing `ChangeVisibilityNotification` jobs to clients.
+
+DEFAULT: ```3```.
+
 Client Settings
 ----------------------------------------------------------------------------------------
 
@@ -875,6 +891,7 @@ DEFAULT: array mapping each well-known name to `null`.
 [$wgUpdateRowsPerJob]: https://www.mediawiki.org/wiki/Manual:$wgUpdateRowsPerJob
 [$wgCdnMaxAge]: https://www.mediawiki.org/wiki/Manual:$wgCdnMaxAge
 [$wgExtensionAssetsPath]: https://www.mediawiki.org/wiki/Manual:$wgExtensionAssetsPath
+[$wgRCMaxAge]: https://www.mediawiki.org/wiki/Manual:$wgRCMaxAge
 [$wgScriptPath]: https://www.mediawiki.org/wiki/Manual:$wgScriptPath
 [$wgArticlePath]: https://www.mediawiki.org/wiki/Manual:$wgArticlePath
 [GeoData]: https://www.mediawiki.org/wiki/Extension:GeoData

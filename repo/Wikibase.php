@@ -1057,6 +1057,7 @@ call_user_func( function() {
 	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\RepoHooks::onParserFirstCallInit';
 	$wgHooks['WikibaseRepoEntityTypes'][] =
 		'Wikibase\Repo\Hooks\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes';
+	$wgHooks['ArticleRevisionVisibilitySet'][] = 'Wikibase\Repo\Hooks\ArticleRevisionVisibilitySetHookHandler::onArticleRevisionVisibilitySet';
 
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
