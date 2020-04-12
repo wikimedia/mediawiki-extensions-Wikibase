@@ -101,6 +101,7 @@ describe( 'root/actions', () => {
 			'setPageTitle',
 			'setPageUrl',
 		];
+
 		it(
 			`commits to ${listOfCommits.join( ', ' )}`,
 			async () => {

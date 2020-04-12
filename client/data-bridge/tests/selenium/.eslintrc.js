@@ -24,5 +24,8 @@ module.exports = {
 				ignoreTemplateLiterals: true,
 			},
 		],
+
+		'jest-formatting/padding-around-describe-blocks': 'off',
+		'jest-formatting/padding-around-test-blocks': 'off',
 	},
 };
