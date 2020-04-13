@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Candalua",
+			"Conky77",
 			"Fierodelveneto",
 			"Frigotoni"
 		]
@@ -14,18 +15,18 @@
 	"wikibase-comment-unlink": "Sta pagina la xe stà destacà da l'elemento de Wikidata. I colegamenti interlenguìsteghi i xe stà cavà.",
 	"wikibase-comment-restore": "L'elemento de Wikidata asocià el xe stà recuperà. I colegamenti interlenguìsteghi i xe stà ripristinà.",
 	"wikibase-comment-update": "Elemento {{WBREPONAME}} modificà",
-	"wikibase-comment-sitelink-add": "Zontà colegamento lenguìstego: $1",
-	"wikibase-comment-sitelink-change": "Colegamento lenguìstego canbià da $1 a $2",
-	"wikibase-comment-sitelink-remove": "Cavà colegamento lenguìstego: $1",
+	"wikibase-comment-sitelink-add": "Xontà cołigamento lenguistego: $1",
+	"wikibase-comment-sitelink-change": "Cołigamento lenguistego canbià da $1 a $2",
+	"wikibase-comment-sitelink-remove": "Cavà cołigamento lenguistego: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|canbiamento|canbiamenti}}",
 	"wikibase-dataitem": "Elemento {{WBREPONAME}}",
 	"wikibase-editlinks": "Canbia lingambo",
 	"wikibase-editlinkstitle": "Canbia colegamenti interlenguìsteghi",
 	"wikibase-linkitem-addlinks": "Xonta lingambo",
-	"wikibase-linkitem-alreadylinked": "La pajina che se vołe cołigar, xà ła xé cołigada co n'altro [$1 ełemento] in tel archivio çentrałe dei dati che'l lingamba so [[$2]] in sto sito. I ełementi i se połe cołigar a na pajina soła par sito. Ełexi na pajina difarenti a ła cual cołigarla e controłaghine ła coretesa.",
+	"wikibase-linkitem-alreadylinked": "La pajina che se vołe cołigar, xà ła xé cołigada co n'altro [$1 ełemento] in tel archivio çentrałe dei dati che'l lingamba so [[$2]] in sto sito. I ełementi i se połe cołigar a na pàjina soła par sito. Ełexi na pàjina difarenti a ła cual cołigarla e controłaghine ła coretesa.",
 	"wikibase-linkitem-close": "Sèra la finestra de dialogo e ricarga la pagina",
 	"wikibase-linkitem-failure": "Xe capità un eror sconossùo sercando de colegar la pagina indicà.",
-	"wikibase-linkitem-title": "Lingamba co n'altra pajina",
+	"wikibase-linkitem-title": "Lingamba co n'altra pàjina",
 	"wikibase-linkitem-linkpage": "Colega co la pagina",
 	"wikibase-linkitem-selectlink": "Selesiona un sito e na pagina che te vol colegar co sta qua.",
 	"wikibase-linkitem-input-site": "Lengua:",

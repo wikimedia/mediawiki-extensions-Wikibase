@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Candalua"
+			"Candalua",
+			"Fierodelveneto"
 		]
 	},
 	"wikibase-lib-desc": "Contien le funsionalità comuni par le estension Wikibase e Wikibase Client.",
@@ -58,7 +59,7 @@
 	"wikibase-item-summary-wbeditentity-update": "Ajornà un elemento",
 	"wikibase-item-summary-wbeditentity-override": "Sorascrito un elemento",
 	"wikibase-item-summary-wblinktitles-create": "Creà sto elemento par colegar pagine",
-	"wikibase-item-summary-wblinktitles-connect": "Zontà un colegamento lenguìstego par colegar pagine",
+	"wikibase-item-summary-wblinktitles-connect": "Xontà on cołigamento lenguistego par cołigar pajine",
 	"wikibase-property-summary-wbcreate-new": "Creà na proprietà nova",
 	"wikibase-property-summary-wbeditentity-create": "Creà na proprietà nova",
 	"wikibase-property-summary-wbeditentity-update": "Ajornà na proprietà",

@@ -3,6 +3,7 @@
 		"authors": [
 			"An13sa",
 			"Iñaki LL",
+			"Joseba",
 			"Sator",
 			"Subi",
 			"Theklan",
@@ -42,5 +43,9 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiketa:$1",
 	"wikibase-pageinfo-entity-usage-T": "Izenburua",
 	"wikibase-otherprojects": "Beste proiektuetan",
-	"notification-link-text-view-item": "{{GENDER:$1|Ikus}} elementua"
+	"notification-link-text-view-item": "{{GENDER:$1|Ikus}} elementua",
+	"wikibase-client-data-bridge-unknown-error-message": "Errore bat gertatu da eta aukeraturiko balioa ezin daiteke editatu orain. Mesedez saiatu birkargatzen",
+	"wikibase-client-data-bridge-error-report": "<p>errorea matentzen bada, mesedez  [$1 arazo honen berri eman] honako informazio hau gehituz:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Errorearen kodea: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-reference-note": "Erreferentziak editatzeko aukera izango duzu hemen {{WBREPONAME}} gorde eta gero",
+	"wikibase-client-data-bridge-thank-you-head": "Eskerrik asko zure argitapenagatik!"
 }

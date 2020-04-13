@@ -8,6 +8,7 @@
 			"Calak",
 			"Dejavu",
 			"Ebraminio",
+			"FarsiNevis",
 			"Huji",
 			"Ladsgroup",
 			"Mahdy Saffar",
@@ -110,5 +111,7 @@
 	"notification-subject-page-connection": "صفحه‌ای در {{SITENAME}} که شما {{GENDER:$3|ایجاد کردید}} به آیتم {{WBREPONAME}} {{GENDER:$2|متصل بود}}",
 	"unresolved-property-category": "صفحات با خصوصیات نامشخص",
 	"connected-redirect-category": "تغییرمسیرهای متصل شده به یک آیتم {{WBREPONAME}}",
-	"connected-redirect-category-desc": "این رده فهرست صفحات تغییرمسیری است که به یک آیتم {{WBREPONAME}} متصل شده‌اند."
+	"connected-redirect-category-desc": "این رده فهرست صفحات تغییرمسیری است که به یک آیتم {{WBREPONAME}} متصل شده‌اند.",
+	"wikibase-client-data-bridge-unknown-error-heading": "مشکلی وجود دارد",
+	"wikibase-client-data-bridge-error-reload-bridge": "بارگیری دوباره"
 }

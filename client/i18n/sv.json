@@ -117,5 +117,7 @@
 	"wikibase-client-data-bridge-bailout-heading": "Istället kan du göra följande:",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo": "Redigera värdet på {{WBREPONAME}}. Klicka på knappen nedan för att redigera värdet direkt (länken öppnas i en ny flik).",
 	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "Redigera värdet på {{WBREPONAME}}",
-	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Beroende på mallen som används är det möjligt att skriva över värdet lokalt med [$1 artikelredigeraren]. Om det går rekommenderar vi att du istället lägger till värdet i {{WBREPONAME}} via knappen nedan."
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "Beroende på mallen som används är det möjligt att skriva över värdet lokalt med [$1 artikelredigeraren]. Om det går rekommenderar vi att du istället lägger till värdet i {{WBREPONAME}} via knappen nedan.",
+	"wikibase-client-data-bridge-unknown-error-heading": "Någonting gick fel",
+	"wikibase-client-data-bridge-error-reload-bridge": "Ladda om"
 }
