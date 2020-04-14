@@ -6,6 +6,7 @@ use Content;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use Page;
 use Revision;
@@ -123,9 +124,17 @@ class SubmitEntityAction extends EditEntityAction {
 			$summary = $request->getText( 'wpSummary' );
 
 			if ( $request->getCheck( 'restore' ) ) {
-				$summary = $this->makeSummary( 'restore', $olderRevision, $summary );
+				$summary = $this->makeSummary(
+					'restore',
+					$olderRevision->getRevisionRecord(),
+					$summary
+				);
 			} else {
-				$summary = $this->makeSummary( 'undo', $newerRevision, $summary );
+				$summary = $this->makeSummary(
+					'undo',
+					$newerRevision->getRevisionRecord(),
+					$summary
+				);
 			}
 
 			$editToken = $request->getText( 'wpEditToken' );
@@ -168,15 +177,18 @@ class SubmitEntityAction extends EditEntityAction {
 
 	/**
 	 * @param string $actionName
-	 * @param Revision $revision
+	 * @param RevisionRecord $revision
 	 * @param string $userSummary
 	 *
 	 * @return string
 	 */
-	private function makeSummary( $actionName, Revision $revision, $userSummary ) {
+	private function makeSummary( $actionName, RevisionRecord $revision, $userSummary ) {
+		$revUser = $revision->getUser();
+		$revUserText = $revUser ? $revUser->getName() : '';
+
 		$summary = new Summary();
 		$summary->setAction( $actionName );
-		$summary->addAutoCommentArgs( $revision->getId(), $revision->getUserText() );
+		$summary->addAutoCommentArgs( $revision->getId(), $revUserText );
 		$summary->setUserSummary( $userSummary );
 
 		return $this->summaryFormatter->formatSummary( $summary );
