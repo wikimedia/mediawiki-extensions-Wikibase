@@ -5,6 +5,7 @@ The **Wikidata Bridge** (formerly known as “client editing”) is a project ai
 # ensure the node user uses your user id, so you own generated files
 docker-compose build --build-arg UID=$(id -u) --build-arg GID=$(id -g) node
 docker-compose run --rm node npm install
+docker-compose run --rm node npm run prepare
 ```
 
 ### Compiles and hot-reloads for development
