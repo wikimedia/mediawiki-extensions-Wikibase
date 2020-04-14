@@ -12,7 +12,6 @@ use Exception;
 use InvalidArgumentException;
 use Language;
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use Message;
 use MessageSpecifier;
 use StatusValue;
@@ -133,9 +132,6 @@ class ApiErrorReporter {
 		$this->addStatusToResult( $status, $extraData );
 		$msg->setApiData( $extraData );
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$stats->increment( 'wikibase.repo.api.errors.total' );
-
 		$this->apiModule->dieStatus( $status );
 	}
 
@@ -214,7 +210,7 @@ class ApiErrorReporter {
 
 		$this->addMessageToResult( $msg, $extraData );
 
-		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
+		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
@@ -244,7 +240,7 @@ class ApiErrorReporter {
 		$this->addMessageToResult( $msg, $extraData );
 		$msg->setApiData( $extraData );
 
-		$this->trackAndDieWithError( $msg, $errorCode, $extraData, $httpRespCode );
+		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
 
 		throw new LogicException( 'ApiUsageException not thrown' );
 	}
@@ -269,27 +265,6 @@ class ApiErrorReporter {
 		}
 
 		return ApiMessage::create( $msg, $errorCode, $extraData );
-	}
-
-	/**
-	 * @see ApiBase::dieWithError()
-	 *
-	 * @param MessageSpecifier $msg
-	 * @param string $errorCode A code identifying the error.
-	 * @param array|null $extraData Any extra data to include in the error report
-	 * @param int $httpRespCode The HTTP error code to send to the client
-	 *
-	 * @throws ApiUsageException always
-	 * @throws LogicException
-	 */
-	private function trackAndDieWithError( MessageSpecifier $msg, $errorCode, ?array $extraData, $httpRespCode ) {
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$stats->increment( 'wikibase.repo.api.errors.total' );
-
-		// @phan-suppress-next-line PhanTypeMismatchArgument
-		$this->apiModule->getMain()->dieWithError( $msg, $errorCode, $extraData, $httpRespCode );
-
-		throw new LogicException( 'ApiUsageException not thrown' );
 	}
 
 	/**
