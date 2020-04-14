@@ -91,6 +91,8 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Onbekannte Berechtigungsfeeler",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Dir kënnt dëse Wäert aus onbekannte Grënn dëse Wäert net änneren",
 	"wikibase-client-data-bridge-references-heading": "Referenzen",
+	"wikibase-client-data-bridge-unknown-error-heading": "Et ass eppes schif gaangen",
+	"wikibase-client-data-bridge-error-reload-bridge": "Nei lueden",
 	"wikibase-client-data-bridge-thank-you-head": "Merci fir Är Ännerung!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Referenz op {{WBREPONAME}} änneren"
 }

@@ -18,5 +18,6 @@
 	"wikibase-pageinfo-entity-usage-D": "کُجھ وضاحتاں",
 	"wikibase-pageinfo-entity-usage-C": "کجھ بیانات",
 	"wikibase-otherprojects": "ٻنھاں منصوبیاں وچ",
-	"wikibase-client-data-bridge-references-heading": "حوالے"
+	"wikibase-client-data-bridge-references-heading": "حوالے",
+	"wikibase-client-data-bridge-error-reload-bridge": "ولدا لوڈ کرو"
 }

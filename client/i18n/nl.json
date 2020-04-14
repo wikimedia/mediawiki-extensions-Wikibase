@@ -13,6 +13,7 @@
 			"Multichill",
 			"Patio",
 			"PiefPafPier",
+			"PonkoSasuke",
 			"Robin van der Vliet",
 			"Robin0van0der0vliet",
 			"Romaine",
@@ -115,5 +116,9 @@
 	"wikibase-client-data-bridge-dialog-title": "$1 bewerken",
 	"wikibase-client-data-bridge-permissions-error-info": "Meer weergeven",
 	"wikibase-client-data-bridge-edit-decision-heading": "Kies de soort gemaakte bewerking:",
-	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ik heb</strong> een verouderde waarde <strong>bijgewerkt</strong>"
+	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ik heb</strong> een verouderde waarde <strong>bijgewerkt</strong>",
+	"wikibase-client-data-bridge-unknown-error-heading": "Er is iets misgegaan",
+	"wikibase-client-data-bridge-unknown-error-message": "Er is een fout opgetreden en de geselecteerde waarde kan nu niet aangepast worden. Probeer te herladen.",
+	"wikibase-client-data-bridge-error-report": "<p>Als de fout aanhoudt, [$1 rapporteer dit probleem] inclusief de volgende informatie:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Error code: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-reload-bridge": "Herladen"
 }
