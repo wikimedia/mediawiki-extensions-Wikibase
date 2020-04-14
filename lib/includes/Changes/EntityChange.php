@@ -2,9 +2,10 @@
 
 namespace Wikibase\Lib\Changes;
 
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MWException;
 use RecentChange;
-use Revision;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -214,11 +215,11 @@ class EntityChange extends DiffChange {
 	}
 
 	/**
-	 * @param Revision $revision Revision to populate EntityChange from
+	 * @param RevisionRecord $revision Revision to populate EntityChange from
 	 * @param int $centralUserId Central user ID, or 0 if unknown or not applicable
 	 *   (see docs/change-propagation.wiki)
 	 */
-	public function setRevisionInfo( Revision $revision, $centralUserId ) {
+	public function setRevisionInfo( RevisionRecord $revision, $centralUserId ) {
 		$this->setFields( [
 			'revision_id' => $revision->getId(),
 			'time' => $revision->getTimestamp(),
@@ -226,7 +227,7 @@ class EntityChange extends DiffChange {
 
 		if ( !$this->hasField( 'object_id' ) ) {
 			/** @var EntityContent $content */
-			$content = $revision->getContent(); // potentially expensive!
+			$content = $revision->getContent( SlotRecord::MAIN ); // potentially expensive!
 			'@phan-var EntityContent $content';
 			$entityId = $content->getEntityId();
 
@@ -235,16 +236,18 @@ class EntityChange extends DiffChange {
 			] );
 		}
 
+		$comment = $revision->getComment();
 		$this->setMetadata( [
-			'page_id' => $revision->getPage(),
+			'page_id' => $revision->getPageId(),
 			'parent_id' => $revision->getParentId(),
-			'comment' => $revision->getComment(),
+			'comment' => $comment ? $comment->text : null,
 			'rev_id' => $revision->getId(),
 		] );
 
+		$user = $revision->getUser();
 		$this->addUserMetadata(
-			$revision->getUser(),
-			$revision->getUserText(),
+			$user ? $user->getId() : 0,
+			$user ? $user->getName() : '',
 			$centralUserId
 		);
 	}

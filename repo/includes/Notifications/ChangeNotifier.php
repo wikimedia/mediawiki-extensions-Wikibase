@@ -109,7 +109,7 @@ class ChangeNotifier {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
 
 		$change->setRevisionInfo(
-			$revision,
+			$revision->getRevisionRecord(),
 			/* Will get set below in setMetadataFromUser */ 0
 		);
 
@@ -151,7 +151,7 @@ class ChangeNotifier {
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
 		$change->setRevisionInfo(
-			$revision,
+			$revision->getRevisionRecord(),
 			$this->getCentralUserId( User::newFromId( $revision->getUser() ) )
 		);
 
@@ -185,7 +185,7 @@ class ChangeNotifier {
 		}
 
 		$change->setRevisionInfo(
-			$current,
+			$current->getRevisionRecord(),
 			$this->getCentralUserId( User::newFromId( $current->getUser() ) )
 		);
 

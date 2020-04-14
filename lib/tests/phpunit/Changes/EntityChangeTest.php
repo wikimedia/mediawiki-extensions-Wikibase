@@ -2,9 +2,13 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use CommentStoreComment;
+use MediaWiki\Revision\MutableRevisionRecord;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\UserIdentityValue;
 use MWException;
 use RecentChange;
-use Revision;
 use Title;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikimedia\TestingAccessWrapper;
@@ -263,18 +267,16 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$timestamp = '20140523' . '174422';
 
-		$revision = new Revision( [
-			'id' => 5,
-			'page' => 6,
-			'user' => 7,
-			'parent_id' => 3,
-			'user_text' => 'Mr. Kittens',
-			'timestamp' => $timestamp,
-			'content' => ItemContent::newFromItem( $item ),
-			'comment' => 'Test!',
-		], 0, Title::newFromText( 'Required workaround' ) );
+		$revRecord = new MutableRevisionRecord( Title::newFromText( 'Required workaround' ) );
+		$revRecord->setParentId( 3 );
+		$revRecord->setContent( SlotRecord::MAIN, ItemContent::newFromItem( $item ) );
+		$revRecord->setComment( CommentStoreComment::newUnsavedComment( 'Test!' ) );
+		$revRecord->setTimestamp( $timestamp );
+		$revRecord->setId( 5 );
+		$revRecord->setUser( new UserIdentityValue( 7, 'Mr. Kittens', 1 ) );
+		$revRecord->setPageId( 6 );
 
-		$entityChange->setRevisionInfo( $revision, 8 );
+		$entityChange->setRevisionInfo( $revRecord, 8 );
 
 		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
 		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
@@ -298,7 +300,7 @@ class EntityChangeTest extends ChangeRowTest {
 			->method( 'getEntityId' )
 			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
 
-		$revision = $this->getMockBuilder( Revision::class )
+		$revision = $this->getMockBuilder( RevisionRecord::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$revision->expects( $this->once() )
