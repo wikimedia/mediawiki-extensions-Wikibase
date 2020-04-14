@@ -28,7 +28,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
 			[
 				'property' => function ( EntityTitleStoreLookup $defaultService ) {
-					return new \stdClass();
+					return (object)[];
 				},
 			],
 			$this->newDefaultService()

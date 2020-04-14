@@ -36,7 +36,7 @@ class HashSiteLinkStoreTest extends \PHPUnit\Framework\TestCase {
 	public function testGetEntityIdForLinkedTitle_doesNotAcceptObjects() {
 		$this->expectException( InvalidArgumentException::class );
 		$lookup = new HashSiteLinkStore();
-		$lookup->getEntityIdForLinkedTitle( 'enwiki', new \stdClass() );
+		$lookup->getEntityIdForLinkedTitle( 'enwiki', (object)[] );
 	}
 
 	public function testGetEntityIdForLinkedTitle() {

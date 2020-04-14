@@ -27,7 +27,7 @@ class TypeDispatchingEntityRevisionLookupTest extends \PHPUnit\Framework\TestCas
 		$lookup = new TypeDispatchingEntityRevisionLookup(
 			[
 				'property' => function ( EntityRevisionLookup $defaultService ) {
-					return new \stdClass();
+					return (object)[];
 				},
 			],
 			$this->newDefaultService( 'getEntityRevision' )

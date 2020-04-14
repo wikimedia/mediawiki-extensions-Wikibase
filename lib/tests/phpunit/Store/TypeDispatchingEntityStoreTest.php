@@ -60,7 +60,7 @@ class TypeDispatchingEntityStoreTest extends \PHPUnit\Framework\TestCase {
 		$store = new TypeDispatchingEntityStore(
 			[
 				'property' => function ( EntityStore $defaultService ) {
-					return new \stdClass();
+					return (object)[];
 				},
 			],
 			$this->newDefaultService( 'saveEntity' ),

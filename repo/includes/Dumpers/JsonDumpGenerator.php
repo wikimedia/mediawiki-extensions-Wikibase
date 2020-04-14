@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use MWContentSerializationException;
 use MWException;
 use Serializers\Serializer;
-use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -147,7 +146,7 @@ class JsonDumpGenerator extends DumpGenerator {
 		// HACK: replace empty arrays with objects at the first level of the array
 		foreach ( $data as &$element ) {
 			if ( empty( $element ) ) {
-				$element = new stdClass();
+				$element = (object)[];
 			}
 		}
 
