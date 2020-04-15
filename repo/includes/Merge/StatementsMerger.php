@@ -28,6 +28,11 @@ class StatementsMerger {
 		$this->changeOpFactory = $changeOpFactory;
 	}
 
+	/**
+	 * @param StatementsListProvider|EntityDocument $source
+	 * @param StatementsListProvider|EntityDocument $target
+	 * @suppress PhanTypeMismatchArgument,PhanTypeMismatchDeclaredParam False positives with intersection types
+	 */
 	public function merge( StatementListProvider $source, StatementListProvider $target ) {
 		Assert::parameterType( EntityDocument::class, $source, '$source' );
 		Assert::parameterType( EntityDocument::class, $target, '$target' );
