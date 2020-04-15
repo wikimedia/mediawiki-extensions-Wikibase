@@ -45,6 +45,7 @@
 		"operator-linebreak": "off",
 		"valid-jsdoc": "off",
 		"vars-on-top": "off",
+		"mediawiki/class-doc": "off",
 		"no-jquery/no-class-state": "off",
 		"no-jquery/no-global-selector": "off"
 	},
