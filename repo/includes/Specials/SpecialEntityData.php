@@ -121,6 +121,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		return new EntityDataRequestHandler(
 			$uriManager,
+			$wikibaseRepo->getHtmlCacheUpdater(),
 			$titleLookup,
 			$entityIdParser,
 			$entityRevisionLookup,

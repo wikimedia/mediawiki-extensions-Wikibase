@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\LinkedData;
 
+use HtmlCacheUpdater;
 use HttpError;
 use OutputPage;
-use CdnCacheUpdate;
 use Psr\Log\LoggerInterface;
 use WebRequest;
 use WebResponse;
@@ -79,6 +79,11 @@ class EntityDataRequestHandler {
 	private $entityDataFormatProvider;
 
 	/**
+	 * @var HtmlCacheUpdater
+	 */
+	private $htmlCacheUpdater;
+
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -110,6 +115,7 @@ class EntityDataRequestHandler {
 
 	/**
 	 * @param EntityDataUriManager $uriManager
+	 * @param HtmlCacheUpdater $htmlCacheUpdater
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
@@ -125,6 +131,7 @@ class EntityDataRequestHandler {
 	 */
 	public function __construct(
 		EntityDataUriManager $uriManager,
+		HtmlCacheUpdater $htmlCacheUpdater,
 		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -139,6 +146,7 @@ class EntityDataRequestHandler {
 		$frameOptionsHeader
 	) {
 		$this->uriManager = $uriManager;
+		$this->htmlCacheUpdater = $htmlCacheUpdater;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
@@ -304,10 +312,7 @@ class EntityDataRequestHandler {
 	 */
 	public function purgeWebCache( EntityId $id ) {
 		$urls = $this->uriManager->getCacheableUrls( $id );
-
-		//TODO: use a factory or service, so we can mock & test this
-		$update = new CdnCacheUpdate( $urls );
-		$update->doUpdate();
+		$this->htmlCacheUpdater->purgeUrls( $urls );
 	}
 
 	/**

@@ -7,6 +7,7 @@ use FauxRequest;
 use FauxResponse;
 use Language;
 use HashSiteStore;
+use HtmlCacheUpdater;
 use HttpError;
 use OutputPage;
 use Psr\Log\NullLogger;
@@ -134,6 +135,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$supportedExtensions,
 			$titleLookup
 		);
+		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
 		$useCdn = false;
 		$apiFrameOptions = 'DENY';
@@ -142,6 +144,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		return new EntityDataRequestHandler(
 			$uriManager,
+			$mockHtmlCacheUpdater,
 			$titleLookup,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
