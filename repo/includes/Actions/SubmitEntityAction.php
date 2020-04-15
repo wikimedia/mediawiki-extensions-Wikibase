@@ -7,9 +7,9 @@ use IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MWException;
 use Page;
-use Revision;
 use Status;
 use Title;
 use WatchAction;
@@ -109,13 +109,13 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		/**
-		 * @var Revision $olderRevision
-		 * @var Revision $newerRevision
-		 * @var Revision $latestRevision
+		 * @var RevisionRecord $olderRevision
+		 * @var RevisionRecord $newerRevision
+		 * @var RevisionRecord $latestRevision
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 		$patchedContent = $this->getPatchContent( $olderRevision, $newerRevision, $latestRevision );
-		$latestContent = $latestRevision->getContent();
+		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 
 		if ( $patchedContent->equals( $latestContent ) ) {
 			$status = Status::newGood();
@@ -126,13 +126,13 @@ class SubmitEntityAction extends EditEntityAction {
 			if ( $request->getCheck( 'restore' ) ) {
 				$summary = $this->makeSummary(
 					'restore',
-					$olderRevision->getRevisionRecord(),
+					$olderRevision,
 					$summary
 				);
 			} else {
 				$summary = $this->makeSummary(
 					'undo',
-					$newerRevision->getRevisionRecord(),
+					$newerRevision,
 					$summary
 				);
 			}
@@ -149,25 +149,25 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 	/**
-	 * @param Revision $olderRevision
-	 * @param Revision $newerRevision
-	 * @param Revision $latestRevision
+	 * @param RevisionRecord $olderRevision
+	 * @param RevisionRecord $newerRevision
+	 * @param RevisionRecord $latestRevision
 	 *
 	 * @return EntityContent
 	 */
 	private function getPatchContent(
-		Revision $olderRevision,
-		Revision $newerRevision,
-		Revision $latestRevision
+		RevisionRecord $olderRevision,
+		RevisionRecord $newerRevision,
+		RevisionRecord $latestRevision
 	) {
 		/**
 		 * @var EntityContent $olderContent
 		 * @var EntityContent $newerContent
 		 * @var EntityContent $latestContent
 		 */
-		$olderContent = $olderRevision->getContent();
-		$newerContent = $newerRevision->getContent();
-		$latestContent = $latestRevision->getContent();
+		$olderContent = $olderRevision->getContent( SlotRecord::MAIN );
+		$newerContent = $newerRevision->getContent( SlotRecord::MAIN );
+		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 		'@phan-var EntityContent $olderContent';
 		'@phan-var EntityContent $newerContent';
 		'@phan-var EntityContent $latestContent';

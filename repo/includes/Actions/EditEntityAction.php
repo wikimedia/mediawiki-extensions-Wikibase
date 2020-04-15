@@ -6,6 +6,8 @@ use Html;
 use IContextSource;
 use Linker;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use MWException;
 use OOUI\ButtonInputWidget;
 use OOUI\ButtonWidget;
@@ -13,7 +15,6 @@ use OOUI\FieldLayout;
 use OOUI\HtmlSnippet;
 use OOUI\TextInputWidget;
 use Page;
-use Revision;
 use Status;
 use WebRequest;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -87,8 +88,8 @@ class EditEntityAction extends ViewEntityAction {
 	 * Loads the revisions specified by the web request and returns them as a three element array
 	 * wrapped in a Status object. If any error arises, it will be reported using the status object.
 	 *
-	 * @return Status A Status object containing an array with three revisions, array(
-	 * $olderRevision, $newerRevision, $latestRevision ).
+	 * @return Status A Status object containing an array with three revision record objects,
+	 *   [ $olderRevision, $newerRevision, $latestRevision ].
 	 * @throws MWException if the page's latest revision cannot be loaded
 	 */
 	protected function loadRevisions() {
@@ -99,7 +100,9 @@ class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'missing-article', $this->getTitle()->getPrefixedText(), '' );
 		}
 
-		$latestRevision = Revision::newFromId( $latestRevId );
+		$latestRevision = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getRevisionById( $latestRevId );
 
 		if ( !$latestRevId ) {
 			throw new MWException( "latest revision not found: $latestRevId" );
@@ -110,13 +113,14 @@ class EditEntityAction extends ViewEntityAction {
 
 	/**
 	 * @param WebRequest $req
-	 * @param Revision $latestRevision
+	 * @param RevisionRecord $latestRevision
 	 *
 	 * @return Status
 	 */
-	private function getStatus( WebRequest $req, Revision $latestRevision ) {
+	private function getStatus( WebRequest $req, RevisionRecord $latestRevision ) {
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		if ( $req->getCheck( 'restore' ) ) { // nearly the same as undoafter without undo
-			$olderRevision = Revision::newFromId( $req->getInt( 'restore' ) );
+			$olderRevision = $revLookup->getRevisionById( $req->getInt( 'restore' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'restore' ) );
@@ -125,27 +129,27 @@ class EditEntityAction extends ViewEntityAction {
 			// ignore undo, even if set
 			$newerRevision = $latestRevision;
 		} elseif ( $req->getCheck( 'undo' ) ) {
-			$newerRevision = Revision::newFromId( $req->getInt( 'undo' ) );
+			$newerRevision = $revLookup->getRevisionById( $req->getInt( 'undo' ) );
 
 			if ( !$newerRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
 			}
 
 			if ( $req->getCheck( 'undoafter' ) ) {
-				$olderRevision = Revision::newFromId( $req->getInt( 'undoafter' ) );
+				$olderRevision = $revLookup->getRevisionById( $req->getInt( 'undoafter' ) );
 
 				if ( !$olderRevision ) {
 					return Status::newFatal( 'undo-norev', $req->getInt( 'undoafter' ) );
 				}
 			} else {
-				$olderRevision = $newerRevision->getPrevious();
+				$olderRevision = $revLookup->getPreviousRevision( $newerRevision );
 
 				if ( !$olderRevision ) {
 					return Status::newFatal( 'wikibase-undo-firstrev' );
 				}
 			}
 		} elseif ( $req->getCheck( 'undoafter' ) ) {
-			$olderRevision = Revision::newFromId( $req->getInt( 'undoafter' ) );
+			$olderRevision = $revLookup->getRevisionById( $req->getInt( 'undoafter' ) );
 
 			if ( !$olderRevision ) {
 				return Status::newFatal( 'undo-norev', $req->getInt( 'undo' ) );
@@ -161,23 +165,23 @@ class EditEntityAction extends ViewEntityAction {
 			return Status::newFatal( 'wikibase-undo-samerev', $this->getTitle() );
 		}
 
-		if ( $newerRevision->getPage() != $latestRevision->getPage() ) {
+		if ( $newerRevision->getPageId() != $latestRevision->getPageId() ) {
 			return Status::newFatal( 'wikibase-undo-badpage', $this->getTitle(), $newerRevision->getId() );
 		}
 
-		if ( $olderRevision->getPage() != $latestRevision->getPage() ) {
+		if ( $olderRevision->getPageId() != $latestRevision->getPageId() ) {
 			return Status::newFatal( 'wikibase-undo-badpage', $this->getTitle(), $olderRevision->getId() );
 		}
 
-		if ( $olderRevision->getContent() === null ) {
+		if ( $olderRevision->getContent( SlotRecord::MAIN ) === null ) {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $olderRevision->getId() );
 		}
 
-		if ( $newerRevision->getContent() === null ) {
+		if ( $newerRevision->getContent( SlotRecord::MAIN ) === null ) {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $newerRevision->getId() );
 		}
 
-		if ( $latestRevision->getContent() === null ) {
+		if ( $latestRevision->getContent( SlotRecord::MAIN ) === null ) {
 			return Status::newFatal( 'wikibase-undo-nocontent', $this->getTitle(), $latestRevision->getId() );
 		}
 
@@ -230,9 +234,9 @@ class EditEntityAction extends ViewEntityAction {
 		}
 
 		/**
-		 * @var Revision $olderRevision
-		 * @var Revision $newerRevision
-		 * @var Revision $latestRevision
+		 * @var RevisionRecord $olderRevision
+		 * @var RevisionRecord $newerRevision
+		 * @var RevisionRecord $latestRevision
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 
@@ -241,9 +245,9 @@ class EditEntityAction extends ViewEntityAction {
 		 * @var EntityContent $newerContent
 		 * @var EntityContent $latestContent
 		 */
-		$olderContent = $olderRevision->getContent();
-		$newerContent = $newerRevision->getContent();
-		$latestContent = $latestRevision->getContent();
+		$olderContent = $olderRevision->getContent( SlotRecord::MAIN );
+		$newerContent = $newerRevision->getContent( SlotRecord::MAIN );
+		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 
 		$restore = $req->getCheck( 'restore' );
 
