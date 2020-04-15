@@ -17,6 +17,7 @@
 			"OsamaK",
 			"Peadara",
 			"Shbib Al-Subaie",
+			"Tala Ali",
 			"Tarawneh",
 			"بدارين",
 			"ديفيد",
@@ -168,5 +169,8 @@
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 معلم عليه ك<i>unknown value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>unknown value</i> حاليا غير ممكن.",
 	"wikibase-client-data-bridge-novalue-error-head": "تعديل قيمة $1 غير مدعوم حاليًّا",
 	"wikibase-client-data-bridge-novalue-error-body": "$1 معلم عليه ك<i>no value</i> في {{WBREPONAME}}. تعديل القيم المعلم عليها ك<i>no value</i> حاليا غير ممكن.",
+	"wikibase-client-data-bridge-unknown-error-heading": "حدث خطأ ما",
+	"wikibase-client-data-bridge-unknown-error-message": " حدث خطأ ولا يمكن تحرير القيمة المحددة حالياً",
+	"wikibase-client-data-bridge-error-reload-bridge": "إعادة التحميل",
 	"wikibase-client-data-bridge-reference-note": "تعديل المراجع سيكون ممكنا في {{WBREPONAME}} بعد الحفظ"
 }
