@@ -149,6 +149,8 @@
 	"wikibase-client-data-bridge-ambiguous-statement-error-body": "No momento, $1 não pode ser editado porque contém mais de um valor.",
 	"wikibase-client-data-bridge-somevalue-error-head": "A edição do valor de $1 atualmente não é suportada",
 	"wikibase-client-data-bridge-novalue-error-head": "A edição do valor de $1 atualmente não é suportada",
+	"wikibase-client-data-bridge-unknown-error-message": "Ocorreu um erro e o valor selecionado não pode ser editado no momento. Tente recarregar.",
+	"wikibase-client-data-bridge-error-reload-bridge": "Recarregar",
 	"wikibase-client-data-bridge-reference-note": "A edição de referências será possível em {{WBREPONAME}} depois de salvar",
 	"wikibase-client-data-bridge-thank-you-head": "Obrigado pela sua edição!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Você pode editar as referências para esta propriedade em {{WBREPONAME}} clicando no botão abaixo.",
