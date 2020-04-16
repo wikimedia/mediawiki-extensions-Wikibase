@@ -47,7 +47,11 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 
 	public function testGetHtml_cached() {
 		$parser = $this->getMockBuilder( Parser::class )
+			->disableOriginalConstructor()
 			->enableProxyingToOriginalMethods()
+			->setProxyTarget(
+				MediaWikiServices::getInstance()->getParserFactory()->create()
+			)
 			->getMock();
 
 		$parser->expects( $this->once() )
