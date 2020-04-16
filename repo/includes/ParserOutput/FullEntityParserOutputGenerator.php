@@ -251,6 +251,9 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 			'jquery.wikibase.toolbar.styles',
 		] );
 
+		// fire the entityLoaded hook which got configured through $this->configBuilder
+		$parserOutput->addModules( 'wikibase.entityPage.entityLoaded' );
+
 		// make sure required client-side resources will be loaded
 		// FIXME: Separate the JavaScript that is also needed in read-only mode from
 		// the JavaScript that is only necessary for editing.

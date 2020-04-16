@@ -179,6 +179,10 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$parserOutput->getExtensionData( 'wikibase-alternate-links' ),
 			'alternate links (extension data)'
 		);
+
+		$resourceLoaderModules = $parserOutput->getModules();
+		$this->assertContains( 'wikibase.entityPage.entityLoaded', $resourceLoaderModules );
+		$this->assertContains( 'wikibase.ui.entityViewInit', $resourceLoaderModules );
 	}
 
 	public function testGetParserOutput_dontGenerateHtml() {
