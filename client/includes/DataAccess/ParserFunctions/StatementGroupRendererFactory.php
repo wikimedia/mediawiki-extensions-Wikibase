@@ -238,7 +238,7 @@ class StatementGroupRendererFactory {
 	private function isParserUsingVariants( Parser $parser ) {
 		$parserOptions = $parser->getOptions();
 
-		return $parser->OutputType() === Parser::OT_HTML
+		return $parser->getOutputType() === Parser::OT_HTML
 			&& !$parserOptions->getInterfaceMessage()
 			&& !$parserOptions->getDisableContentConversion();
 	}
