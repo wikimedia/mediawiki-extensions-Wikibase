@@ -209,7 +209,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 
 		$dbw->replace(
 			$this->tableName,
-			[ 'pi_property_id' ],
+			'pi_property_id',
 			[
 				'pi_property_id' => $propertyId->getNumericId(),
 				'pi_info' => $json,
