@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Actions;
 
 use ApiQueryInfo;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use Title;
 use User;
@@ -60,14 +61,15 @@ class EditEntityActionTest extends ActionTestCase {
 			$ofs = (int)$params[$key];
 		}
 
-		$rev = $page->getRevision();
+		$rev = $page->getRevisionRecord();
 
 		if ( !$rev ) {
 			return;
 		}
 
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		for ( $i = abs( $ofs ); $i > 0; $i -= 1 ) {
-			$rev = $rev->getPrevious();
+			$rev = $revLookup->getPreviousRevision( $rev );
 			if ( !$rev ) {
 				throw new MWException( 'Page ' . $page->getTitle()->getPrefixedDBkey()
 					. ' does not have ' . ( abs( $ofs ) + 1 ) . ' revisions' );
