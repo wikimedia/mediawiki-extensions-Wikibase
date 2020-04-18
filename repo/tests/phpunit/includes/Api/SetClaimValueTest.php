@@ -151,7 +151,9 @@ class SetClaimValueTest extends WikibaseApiTestCase {
 		$obtainedEntity = $entityLookup->getEntity( $entityId );
 
 		$page = new WikiPage( $wikibaseRepo->getEntityTitleLookup()->getTitleForId( $entityId ) );
-		$generatedSummary = $page->getRevision()->getComment( RevisionRecord::RAW );
+
+		$comment = $page->getRevisionRecord()->getComment( RevisionRecord::RAW );
+		$generatedSummary = $comment ? $comment->text : null;
 		$this->assertEquals( $expectedSummary, $generatedSummary, 'Summary mismatch' );
 
 		$statements = $obtainedEntity->getStatements();

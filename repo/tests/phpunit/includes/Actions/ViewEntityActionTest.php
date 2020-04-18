@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Actions;
 
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\WikibaseRepo;
@@ -91,8 +92,10 @@ class ViewEntityActionTest extends ActionTestCase {
 	public function testShowDiff() {
 		$page = $this->getTestItemPage( 'Berlin' );
 
-		$latest = $page->getRevision();
-		$previous = $latest->getPrevious();
+		$latest = $page->getRevisionRecord();
+		$previous = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getPreviousRevision( $latest );
 
 		$params = [
 			'diff' => $latest->getId(),
@@ -108,8 +111,10 @@ class ViewEntityActionTest extends ActionTestCase {
 	public function testShowOldRevision_hasNoEditLinks() {
 		$page = $this->getTestItemPage( 'Berlin' );
 
-		$latest = $page->getRevision();
-		$previous = $latest->getPrevious();
+		$latest = $page->getRevisionRecord();
+		$previous = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getPreviousRevision( $latest );
 
 		$params = [
 			'oldid' => $previous->getId()

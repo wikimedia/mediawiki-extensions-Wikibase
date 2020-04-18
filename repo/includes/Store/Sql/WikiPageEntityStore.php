@@ -333,16 +333,16 @@ class WikiPageEntityStore implements EntityStore {
 
 		if (
 			( $flags & EDIT_NEW ) === 0 &&
-			$page->getRevision() &&
-			$page->getRevision()->getRevisionRecord()->hasSlot( $slotRole ) &&
-			$entityContent->equals( $page->getRevision()->getRevisionRecord()->getContent( $slotRole ) )
+			$page->getRevisionRecord() &&
+			$page->getRevisionRecord()->hasSlot( $slotRole ) &&
+			$entityContent->equals( $page->getRevisionRecord()->getContent( $slotRole ) )
 		) {
 			// The size and the sha1 of entity content revisions is not always stable given they
 			// depend on PHP serialization (size) and JSON serialization (sha1). These differences
 			// will make MediaWiki not detect the null-edit.
 			// Generally content equivalence is not strong enough for MediaWiki, but for us it should
 			// be sufficent.
-			return $page->getRevision()->getRevisionRecord();
+			return $page->getRevisionRecord();
 		}
 
 		/**
@@ -387,7 +387,7 @@ class WikiPageEntityStore implements EntityStore {
 			// NOTE: No new revision was created (content didn't change). Report the old one.
 			// There *might* be a race condition here, but since $page already loaded the
 			// latest revision, it should still be cached, and should always be the correct one.
-			return $page->getRevision()->getRevisionRecord();
+			return $page->getRevisionRecord();
 		}
 	}
 
