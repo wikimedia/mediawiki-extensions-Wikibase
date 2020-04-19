@@ -23,7 +23,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Kadagiti adu pay a pagsasao",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Isaad",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Ipakita dagiti etiketa, dagiti parbo a nagan ken dagiti deskripsion iti amin a pagsasaok iti panagikarga ti panid",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Dagiti personal a pagsasao a maipatinayon iti interface ti pagsasao ti agar-aramat ket mabalin nga isaad babaen ti panagusar ti sintaksis ti [[mw:Extension:Babel|pagpaatiddog ti Babel]] iti panid ti agar-aramat.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Dagiti personal a pagsasao a maipatinayon iti interface ti pagsasao ti agar-aramat ket mabalin nga isaad babaen ti panagusar ti sintaksis ti [[mw:Special:MyLanguage/Extension:Babel|pagpaatiddog ti Babel]] iti panid ti agar-aramat.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Ammo pay a kas",
 	"wikibase-entitytermsforlanguagelistview-description": "Deskripsion",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiketa",

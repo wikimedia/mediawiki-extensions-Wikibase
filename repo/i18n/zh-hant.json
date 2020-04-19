@@ -57,7 +57,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "更多其他語言",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "設定",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "在頁面讀取時以我所有的語言顯示標籤、別名與描述",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "使用者介面語言以外的個人語言可使用 [[mw:Extension:Babel|Babel extension]] 語法在使用者頁面設定。",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "使用者介面語言以外的個人語言可使用 [[mw:Special:MyLanguage/Extension:Babel|Babel extension]] 語法在使用者頁面設定。",
 	"wikibase-entitytermsforlanguagelistview-aliases": "亦稱為",
 	"wikibase-entitytermsforlanguagelistview-description": "描述",
 	"wikibase-entitytermsforlanguagelistview-label": "標籤",

@@ -49,7 +49,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In altre lingue",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configura",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mostra etichette, alias e descrizioni in tutte le mie lingue al caricamento della pagina",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Altre lingue personali oltre alla lingua dell'interfaccia utente possono essere definite nella pagina utente tramite la sintassi dell'[[mw:Extension:Babel|estensione Babel]].",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Altre lingue personali oltre alla lingua dell'interfaccia utente possono essere definite nella pagina utente tramite la sintassi dell'[[mw:Special:MyLanguage/Extension:Babel|estensione Babel]].",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Anche conosciuto come",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrizione",
 	"wikibase-entitytermsforlanguagelistview-label": "Etichetta",

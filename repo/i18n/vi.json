@@ -34,7 +34,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Ngôn ngữ khác",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Thiết lập",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Hiển thị các nhãn, tên khác, và miêu tả trong tất cả các ngôn ngữ của tôi khi trang tải xong",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Có thể đặt các ngôn ngữ cá nhân bên cạnh ngôn ngữ giao diện dùng cú pháp [[mw:Extension:Babel|phần mở rộng Babel]] trong trang thành viên.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Có thể đặt các ngôn ngữ cá nhân bên cạnh ngôn ngữ giao diện dùng cú pháp [[mw:Special:MyLanguage/Extension:Babel|phần mở rộng Babel]] trong trang thành viên.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Còn được gọi",
 	"wikibase-entitytermsforlanguagelistview-description": "Miêu tả",
 	"wikibase-entitytermsforlanguagelistview-label": "Nhãn",

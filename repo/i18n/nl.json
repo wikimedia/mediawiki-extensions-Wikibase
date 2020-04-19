@@ -54,7 +54,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "In meer talen",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Instellen",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Labels, aliassen en beschrijvingen in al mijn talen weergeven bij het laden van de pagina",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Persoonlijke talen naast de taal van de gebruikersinterface kunnen worden ingesteld met de [[mw:Extension:Babel|Babel-extensie]]-syntaxis op de gebruikerspagina.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Persoonlijke talen naast de taal van de gebruikersinterface kunnen worden ingesteld met de [[mw:Special:MyLanguage/Extension:Babel|Babel-extensie]]-syntaxis op de gebruikerspagina.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Ook bekend als",
 	"wikibase-entitytermsforlanguagelistview-description": "Beschrijving",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",

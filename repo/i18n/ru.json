@@ -64,7 +64,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На других языках",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Настроить",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показывать названия, псевдонимы и описания сразу на всех моих языках",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "По умолчанию используется язык интерфейса, дополнительные языки можно задать с помощью [[mw:Extension:Babel|расширения «Babel»]] на своей персональной странице участника.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "По умолчанию используется язык интерфейса, дополнительные языки можно задать с помощью [[mw:Special:MyLanguage/Extension:Babel|расширения «Babel»]] на своей персональной странице участника.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Также известно как",
 	"wikibase-entitytermsforlanguagelistview-description": "Описание",
 	"wikibase-entitytermsforlanguagelistview-label": "Название",

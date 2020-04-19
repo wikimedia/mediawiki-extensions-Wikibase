@@ -81,7 +81,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Plus de langues",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configurer",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Afficher les libellés, alias et descriptions dans toutes mes langues au chargement des pages",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Des langues personnelles additionnelles pour l’interface peuvent être définies en utilisant la syntaxe de l’[[mw:Extension:Babel|extension Babel]] sur la page utilisateur.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Des langues personnelles additionnelles pour l’interface peuvent être définies en utilisant la syntaxe de l’[[mw:Special:MyLanguage/Extension:Babel|extension Babel]] sur la page utilisateur.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Également connu comme",
 	"wikibase-entitytermsforlanguagelistview-description": "Description",
 	"wikibase-entitytermsforlanguagelistview-label": "Libellé",

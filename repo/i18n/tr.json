@@ -49,7 +49,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Daha fazla dilde",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Yapılandır",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Sayfa yüklenirken tüm dillerimdeki açıklamaları ve etiketlerin takma adlarını göster",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Kullanıcı arayüzü diline ek olarak kullanılan diller [[mw:Extension:Babel|Babel uzantısı]] sözdizimi kullanılarak kullanıcı sayfasında gösterilebilir.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Kullanıcı arayüzü diline ek olarak kullanılan diller [[mw:Special:MyLanguage/Extension:Babel|Babel uzantısı]] sözdizimi kullanılarak kullanıcı sayfasında gösterilebilir.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Olarak da bilinir",
 	"wikibase-entitytermsforlanguagelistview-description": "Açıklama",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiket",

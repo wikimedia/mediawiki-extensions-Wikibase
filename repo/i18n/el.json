@@ -38,7 +38,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Σε περισσότερες γλώσσες",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Ρυθμίστε",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Εμφάνιση ετικετών, αλλωνύμων και περιγραφών σε όλες τις γλώσσες μου κατά τη φόρτωση της σελίδας",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Προσωπικές γλώσσες πρόσθετες προς τη γλώσσα περιβάλλοντος του χρήστη μπορούν να οριστούν μέσω της σύνταξης [[mw:Extension:Babel|Babel]] στη σελίδα χρήστη.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Προσωπικές γλώσσες πρόσθετες προς τη γλώσσα περιβάλλοντος του χρήστη μπορούν να οριστούν μέσω της σύνταξης [[mw:Special:MyLanguage/Extension:Babel|Babel]] στη σελίδα χρήστη.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Επίσης γνωστό ως",
 	"wikibase-entitytermsforlanguagelistview-description": "Περιγραφή",
 	"wikibase-entitytermsforlanguagelistview-label": "Ετικέτα",

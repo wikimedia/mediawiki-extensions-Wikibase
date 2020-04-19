@@ -45,7 +45,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Muilla kielillä",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Määritä",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Näytä nimet, aliakset ja kuvaukset kaikilla kielilläni sivun latautuessa",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Henkilökohtaiset kielet voidaan asettaa käyttöliittymän kielen lisäksi käyttämällä [[mw:Extension:Babel|Babel-laajennuksen]] syntaksia käyttäjäsivulla.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Henkilökohtaiset kielet voidaan asettaa käyttöliittymän kielen lisäksi käyttämällä [[mw:Special:MyLanguage/Extension:Babel|Babel-laajennuksen]] syntaksia käyttäjäsivulla.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Tunnetaan myös nimellä",
 	"wikibase-entitytermsforlanguagelistview-description": "Kuvaus",
 	"wikibase-entitytermsforlanguagelistview-label": "Nimi",

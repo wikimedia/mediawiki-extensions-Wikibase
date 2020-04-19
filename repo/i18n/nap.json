@@ -25,7 +25,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Ati llengue",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configura",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mmusta etichette, aliasse  descriziune 'n tutt' 'e lengue a carrecà paggena",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Ati llengue perzunale ati c' 'a lengua interfaccia utente se ponno definì dint' 'a paggena utente pe' bbìa d' 'a sintassi 'e ll'[[mw:Extension:Babel|estensione Babel]].",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Ati llengue perzunale ati c' 'a lengua interfaccia utente se ponno definì dint' 'a paggena utente pe' bbìa d' 'a sintassi 'e ll'[[mw:Special:MyLanguage/Extension:Babel|estensione Babel]].",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Pure canusciuto comme",
 	"wikibase-entitytermsforlanguagelistview-description": "Descrizzione",
 	"wikibase-entitytermsforlanguagelistview-label": "Etichetta",
