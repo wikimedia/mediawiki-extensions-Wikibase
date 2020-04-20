@@ -4,7 +4,8 @@ namespace Wikibase\Repo\Notifications;
 
 use CentralIdLookup;
 use InvalidArgumentException;
-use Revision;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\Revision\SlotRecord;
 use User;
 use Wikibase\EntityContent;
 use Wikibase\Lib\Changes\EntityChange;
@@ -92,13 +93,13 @@ class ChangeNotifier {
 	 * This method constructs and sends the appropriate notifications (if any)
 	 * when a wiki page containing an EntityContent was undeleted.
 	 *
-	 * @param Revision $revision
+	 * @param RevisionRecord $revisionRecord
 	 *
 	 * @return EntityChange|null
 	 */
-	public function notifyOnPageUndeleted( Revision $revision ) {
+	public function notifyOnPageUndeleted( RevisionRecord $revisionRecord ) {
 		/** @var EntityContent $content */
-		$content = $revision->getContent();
+		$content = $revisionRecord->getContent( SlotRecord::MAIN );
 		'@phan-var EntityContent $content';
 
 		if ( $content->isRedirect() ) {
@@ -109,7 +110,7 @@ class ChangeNotifier {
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
 
 		$change->setRevisionInfo(
-			$revision->getRevisionRecord(),
+			$revisionRecord,
 			/* Will get set below in setMetadataFromUser */ 0
 		);
 
@@ -117,7 +118,7 @@ class ChangeNotifier {
 		// the timestamp of the original change.
 		$change->setTimestamp( wfTimestampNow() );
 
-		$user = User::newFromId( $revision->getUser() );
+		$user = User::newFromIdentity( $revisionRecord->getUser() );
 		$change->setMetadataFromUser(
 			$user,
 			$this->getCentralUserId( $user )
@@ -132,15 +133,15 @@ class ChangeNotifier {
 	 * This method constructs and sends the appropriate notifications (if any)
 	 * when a wiki page containing an EntityContent was created.
 	 *
-	 * @param Revision $revision
+	 * @param RevisionRecord $revisionRecord
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 * @return EntityChange|null
 	 */
-	public function notifyOnPageCreated( Revision $revision ) {
+	public function notifyOnPageCreated( RevisionRecord $revisionRecord ) {
 		/** @var EntityContent $content */
-		$content = $revision->getContent();
+		$content = $revisionRecord->getContent( SlotRecord::MAIN );
 		'@phan-var EntityContent $content';
 
 		if ( $content->isRedirect() ) {
@@ -151,8 +152,8 @@ class ChangeNotifier {
 
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
 		$change->setRevisionInfo(
-			$revision->getRevisionRecord(),
-			$this->getCentralUserId( User::newFromId( $revision->getUser() ) )
+			$revisionRecord,
+			$this->getCentralUserId( User::newFromIdentity( $revisionRecord->getUser() ) )
 		);
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!
@@ -165,19 +166,22 @@ class ChangeNotifier {
 	 * This method constructs and sends the appropriate notifications (if any)
 	 * when a wiki page containing an EntityContent was modified.
 	 *
-	 * @param Revision $current
-	 * @param Revision $parent
+	 * @param RevisionRecord $current
+	 * @param RevisionRecord $parent
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ChangeTransmitterException
 	 * @return EntityChange|null
 	 */
-	public function notifyOnPageModified( Revision $current, Revision $parent ) {
+	public function notifyOnPageModified( RevisionRecord $current, RevisionRecord $parent ) {
 		if ( $current->getParentId() !== $parent->getId() ) {
 			throw new InvalidArgumentException( '$parent->getId() must be the same as $current->getParentId()!' );
 		}
 
-		$change = $this->getChangeForModification( $parent->getContent(), $current->getContent() );
+		$change = $this->getChangeForModification(
+			$parent->getContent( SlotRecord::MAIN ),
+			$current->getContent( SlotRecord::MAIN )
+		);
 
 		if ( !$change ) {
 			// nothing to do
@@ -185,8 +189,8 @@ class ChangeNotifier {
 		}
 
 		$change->setRevisionInfo(
-			$current->getRevisionRecord(),
-			$this->getCentralUserId( User::newFromId( $current->getUser() ) )
+			$current,
+			$this->getCentralUserId( User::newFromIdentity( $current->getUser() ) )
 		);
 
 		// FIXME: RepoHooks::onRecentChangeSave currently adds to the change later!

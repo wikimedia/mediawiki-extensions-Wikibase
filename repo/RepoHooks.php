@@ -228,19 +228,24 @@ final class RepoHooks {
 	) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
+		// TODO replace hook with one that doesn't use Revision objects - T250338
+		$revisionRecord = $revision->getRevisionRecord();
+
 		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
 			self::notifyEntityStoreWatcherOnUpdate(
-				$revision->getContent(),
-				$revision->getRevisionRecord()
+				$revisionRecord->getContent( SlotRecord::MAIN ),
+				$revisionRecord
 			);
 
 			$notifier = WikibaseRepo::getDefaultInstance()->getChangeNotifier();
-			$parentId = $revision->getParentId();
+			$parentId = $revisionRecord->getParentId();
 
 			if ( !$parentId ) {
-				$notifier->notifyOnPageCreated( $revision );
+				$notifier->notifyOnPageCreated( $revisionRecord );
 			} else {
-				$parent = Revision::newFromId( $parentId );
+				$parent = MediaWikiServices::getInstance()
+					->getRevisionLookup()
+					->getRevisionById( $parentId );
 
 				if ( !$parent ) {
 					wfLogWarning(
@@ -248,7 +253,7 @@ final class RepoHooks {
 						. 'failed to load parent revision with ID ' . $parentId
 					);
 				} else {
-					$notifier->notifyOnPageModified( $revision, $parent );
+					$notifier->notifyOnPageModified( $revisionRecord, $parent );
 				}
 			}
 		}
@@ -333,15 +338,17 @@ final class RepoHooks {
 		}
 
 		$revisionId = $title->getLatestRevID();
-		$revision = Revision::newFromId( $revisionId );
-		$content = $revision ? $revision->getContent() : null;
+		$revisionRecord = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getRevisionById( $revisionId );
+		$content = $revisionRecord ? $revisionRecord->getContent( SlotRecord::MAIN ) : null;
 
 		if ( !( $content instanceof EntityContent ) ) {
 			return;
 		}
 
 		$notifier = $wikibaseRepo->getChangeNotifier();
-		$notifier->notifyOnPageUndeleted( $revision );
+		$notifier->notifyOnPageUndeleted( $revisionRecord );
 	}
 
 	/**

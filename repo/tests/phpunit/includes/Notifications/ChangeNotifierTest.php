@@ -66,6 +66,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @todo return RevisionRecord instead
 	 * @param Content $content
 	 * @param User $user
 	 * @param int $revisionId
@@ -148,7 +149,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
 		$notifier = $this->getChangeNotifier();
-		$change = $notifier->notifyOnPageUndeleted( $revision );
+		$change = $notifier->notifyOnPageUndeleted( $revision->getRevisionRecord() );
 		$metadata = $change->getMetadata();
 
 		$this->assertSame( 'Q12', $change->getObjectId() );
@@ -175,7 +176,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
 		$notifier = $this->getChangeNotifier( 0 );
-		$change = $notifier->notifyOnPageUndeleted( $revision );
+		$change = $notifier->notifyOnPageUndeleted( $revision->getRevisionRecord() );
 
 		$this->assertNull( $change );
 	}
@@ -189,7 +190,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
 		$notifier = $this->getChangeNotifier();
-		$change = $notifier->notifyOnPageCreated( $revision );
+		$change = $notifier->notifyOnPageCreated( $revision->getRevisionRecord() );
 
 		$this->assertSame( 'Q12', $change->getObjectId() );
 		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
@@ -207,7 +208,7 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp );
 
 		$notifier = $this->getChangeNotifier( 0 );
-		$change = $notifier->notifyOnPageCreated( $revision );
+		$change = $notifier->notifyOnPageCreated( $revision->getRevisionRecord() );
 
 		$this->assertNull( $change );
 	}
@@ -228,7 +229,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
-		$change = $notifier->notifyOnPageModified( $revision, $parent );
+		$change = $notifier->notifyOnPageModified(
+			$revision->getRevisionRecord(),
+			$parent->getRevisionRecord()
+		);
 
 		$this->assertSame( 'Q12', $change->getObjectId() );
 		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
@@ -250,7 +254,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier( 0 );
-		$change = $notifier->notifyOnPageModified( $revision, $parent );
+		$change = $notifier->notifyOnPageModified(
+			$revision->getRevisionRecord(),
+			$parent->getRevisionRecord()
+		);
 
 		$this->assertNull( $change );
 	}
@@ -268,7 +275,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
-		$change = $notifier->notifyOnPageModified( $revision, $parent );
+		$change = $notifier->notifyOnPageModified(
+			$revision->getRevisionRecord(),
+			$parent->getRevisionRecord()
+		);
 
 		$this->assertSame( 'Q12', $change->getObjectId() );
 		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
@@ -290,7 +300,10 @@ class ChangeNotifierTest extends \MediaWikiTestCase {
 		$revision = $this->makeRevision( $content, $user, $revisionId, $timestamp, $revisionId - 1 );
 
 		$notifier = $this->getChangeNotifier();
-		$change = $notifier->notifyOnPageModified( $revision, $parent );
+		$change = $notifier->notifyOnPageModified(
+			$revision->getRevisionRecord(),
+			$parent->getRevisionRecord()
+		);
 
 		$this->assertSame( 'Q12', $change->getObjectId() );
 		$this->assertSame( $user->getId(), $change->getField( 'user_id' ) );
