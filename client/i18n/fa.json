@@ -112,6 +112,11 @@
 	"unresolved-property-category": "صفحات با خصوصیات نامشخص",
 	"connected-redirect-category": "تغییرمسیرهای متصل شده به یک آیتم {{WBREPONAME}}",
 	"connected-redirect-category-desc": "این رده فهرست صفحات تغییرمسیری است که به یک آیتم {{WBREPONAME}} متصل شده‌اند.",
+	"wikibase-client-data-bridge-dialog-title": "ویرایش $1",
+	"wikibase-client-data-bridge-permissions-error": "شما به {{PLURAL:$1|دلیل|دلایل}} زیر، اجازهٔ ویرایش این مقدار را ندارید:",
+	"wikibase-client-data-bridge-permissions-error-info": "جزئیات بیشتر",
+	"wikibase-client-data-bridge-references-heading": "مرجع‌ها",
 	"wikibase-client-data-bridge-unknown-error-heading": "مشکلی وجود دارد",
-	"wikibase-client-data-bridge-error-reload-bridge": "بارگیری دوباره"
+	"wikibase-client-data-bridge-error-reload-bridge": "بارگیری دوباره",
+	"wikibase-client-data-bridge-thank-you-head": "سپاس از شما بابت ویرایش‌تان!"
 }

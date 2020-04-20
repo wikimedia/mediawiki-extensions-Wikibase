@@ -361,6 +361,7 @@
 	"wikibase-listdatatypes-external-id-head": "شناسهٔ خارجی",
 	"wikibase-listdatatypes-external-id-body": "فیلد داده‌های حروفی برای یک شناسه خارجی. شناسه های خارجی را می‌توان به صورت خودکار به منابع مستقل پیوند داد.",
 	"wikibase-listdatavaluetypes-name-string": "رشته",
+	"wikibase-listdatavaluetypes-name-quantity": "کمّیت",
 	"wikibase-listdatavaluetypes-name-time": "زمان",
 	"wikibase-concept-uri": "نشانی مفهوم",
 	"wikibase-concept-uri-tooltip": "نشانی شناسهٔ مفهوم توصیف‌شده توسط این آیتم است",
@@ -379,5 +380,7 @@
 	"wikibase-entity-not-viewable": "نوع محتوای «$1» از نوع جوهره نیست، از این رو ویکی‌بیس قادر به نشان دادن آن نیست.",
 	"wikibase-pageinfo-subscription": "ویکی‌هایی که به این صفحه مشترک هستند",
 	"wikibase-pageinfo-subscription-none": "هیچ کدام",
-	"wikibase-search-bad-entity-type": "نوع موجود بد: $1"
+	"wikibase-search-bad-entity-type": "نوع موجود بد: $1",
+	"wikibase-entity-save-error-heading": "مشکلی وجود دارد",
+	"wikibase-tainted-ref-popper-help-link-text": "راهنما"
 }
