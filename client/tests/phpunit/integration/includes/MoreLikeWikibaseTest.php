@@ -7,6 +7,7 @@ use CirrusSearch\HashSearchConfig;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchAll;
+use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
@@ -23,17 +24,22 @@ use Wikibase\Client\MoreLikeWikibase;
 class MoreLikeWikibaseTest extends MediaWikiTestCase {
 
 	public static function setUpBeforeClass() : void {
-		if ( !class_exists( CirrusSearch::class ) ||
-			!class_exists( BoolQuery::class ) ) {
+		if (
+			!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' )
+			|| !class_exists( BoolQuery::class )
+		) {
 			self::markTestSkipped( "CirrusSearch needs to be enabled to run this test" );
 		}
 	}
 
 	public function applyProvider() {
-		if ( !class_exists( CirrusSearch::class ) ||
-			!class_exists( BoolQuery::class ) ) {
+		if (
+			!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' )
+			|| !class_exists( BoolQuery::class )
+		) {
 			return [];
 		}
+
 		return [
 			'single page morelike w/wikibase' => [
 				'morelikewithwikibase:Some page',
