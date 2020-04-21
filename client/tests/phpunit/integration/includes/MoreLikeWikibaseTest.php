@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
 use CirrusSearch\HashSearchConfig;
 use CirrusSearch\Search\SearchContext;
 use MediaWiki\MediaWikiServices;
