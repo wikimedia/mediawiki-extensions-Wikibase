@@ -20,13 +20,10 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
-use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
-use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -35,8 +32,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
-use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
-use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
@@ -44,8 +39,6 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
-use Wikibase\Lib\Store\UncachedTermsPrefetcher;
-use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Assert\Assert;
 
@@ -388,87 +381,20 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	public function getPrefetchingTermLookup() {
-		global $wgSecretKey;
-
 		if ( $this->prefetchingTermLookup === null ) {
-			$termIndex = $this->getTermIndex();
-
-			$termIndexBackedTermLookup = new BufferingTermIndexTermLookup(
-				$termIndex, // TODO: customize buffer sizes
-				1000
+			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup(
+				$this->getPrefetchingTermLookups(),
+				new NullPrefetchingTermLookup()
 			);
-
-			$mediaWikiServices = MediaWikiServices::getInstance();
-			$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-			$repoDbDomain = $this->entitySource->getDatabaseName();
-			$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $repoDbDomain );
-
-			$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-				$loadBalancer,
-				$mediaWikiServices->getMainWANObjectCache(),
-				$repoDbDomain,
-				$logger
-			);
-
-			$termIdsResolver = new DatabaseTermInLangIdsResolver(
-				$databaseTypeIdsStore,
-				$databaseTypeIdsStore,
-				$loadBalancer,
-				$repoDbDomain,
-				$logger
-			);
-
-			$lookups = [];
-
-			$lookups['item'] = new TermStoresDelegatingPrefetchingItemTermLookup(
-				$this->settings,
-				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
-				$termIndexBackedTermLookup
-			);
-
-			if ( $this->settings->useNormalizedPropertyTerms() ) {
-				$cacheSecret = hash( 'sha256', $wgSecretKey );
-
-				$cache = new SimpleCacheWithBagOStuff(
-					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-					'wikibase.prefetchingPropertyTermLookup.',
-					$cacheSecret
-				);
-				$cache = new StatsdRecordingSimpleCache(
-					$cache,
-					MediaWikiServices::getInstance()->getStatsdDataFactory(),
-					[
-						'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
-						'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
-					]
-				);
-				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $this->getEntityRevisionLookup() );
-				$lookups['property'] = new CachingPrefetchingTermLookup(
-					$cache,
-					new UncachedTermsPrefetcher(
-						new PrefetchingPropertyTermLookup( $loadBalancer, $termIdsResolver, $repoDbDomain ),
-						$redirectResolvingRevisionLookup,
-						60 // 1 minute ttl
-					),
-					$redirectResolvingRevisionLookup,
-					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
-				);
-			} else {
-				$lookups['property'] = $termIndexBackedTermLookup;
-			}
-
-			$lookups = array_merge( $lookups, $this->getCustomPrefetchingTermLookups() );
-
-			$this->prefetchingTermLookup = new ByTypeDispatchingPrefetchingTermLookup( $lookups, new NullPrefetchingTermLookup() );
 		}
+
 		return $this->prefetchingTermLookup;
 	}
 
 	/**
 	 * @return PrefetchingItemTermLookup[] indexed by entity type
 	 */
-	private function getCustomPrefetchingTermLookups(): array {
+	private function getPrefetchingTermLookups(): array {
 		$typesWithCustomLookups = array_keys( $this->prefetchingTermLookupCallbacks );
 
 		$lookupConstructorsByType = array_intersect( $typesWithCustomLookups, $this->entitySource->getEntityTypes() );
