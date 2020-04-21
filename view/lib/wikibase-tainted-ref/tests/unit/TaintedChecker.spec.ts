@@ -31,4 +31,10 @@ describe( 'TaintedChecker', () => {
 		const newStatement = getMockStatement( false, false );
 		expect( taintedChecker.check( oldStatement, newStatement ) ).toBeFalsy();
 	} );
+
+	it( 'should return false if there is no old statement', () => {
+		const oldStatement = null;
+		const newStatement = getMockStatement( true );
+		expect( taintedChecker.check( oldStatement, newStatement ) ).toBeFalsy();
+	} );
 } );

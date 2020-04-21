@@ -29,7 +29,7 @@ function getDummyEditHook( guid: string ): Hook {
 	return dummyEditHook as any as Hook;
 }
 
-function getDummySaveHook( entityId: string, fakeGuid: string, s1?: Statement, s2?: Statement ): Hook {
+function getDummySaveHook( entityId: string, fakeGuid: string, s1?: Statement|null, s2?: Statement ): Hook {
 	const dummySaveHook = ( randomFunction: Function ): Hook => {
 		randomFunction( entityId, fakeGuid, s1, s2 );
 		return { add: jest.fn() };
@@ -176,6 +176,37 @@ describe( 'MWHookHandler', () => {
 			hookHandler.addStore( store );
 
 			expect( trackChanges ).toHaveBeenCalledWith( s1, s2 );
+		} );
+
+		describe( 'when there is no old statement', () => {
+			it( 'should not dispatch anything', () => {
+				const s = getMockStatement( false );
+				const entityId = 'Q1';
+				const dummySaveHook = getDummySaveHook( entityId, fakeGuid, null, s );
+				const mwHookRegistry = getMockHookRegistry( 'wikibase.statement.saved', dummySaveHook );
+				const mockTaintedChecker = { check: () => false };
+				const store = getEmptyInitialisedStore();
+				store.dispatch = jest.fn();
+				const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, getMockStatementTracker() );
+
+				hookHandler.addStore( store );
+
+				expect( store.dispatch ).not.toHaveBeenCalled();
+			} );
+
+			it( 'should call the statementTracker', () => {
+				const s = getMockStatement( false );
+				const entityId = 'Q1';
+				const dummySaveHook = getDummySaveHook( entityId, fakeGuid, null, s );
+				const mwHookRegistry = getMockHookRegistry( 'wikibase.statement.saved', dummySaveHook );
+				const mockTaintedChecker = { check: () => false };
+				const trackChanges = jest.fn();
+				const hookHandler = new MWHookHandler( mwHookRegistry, mockTaintedChecker, { trackChanges } as any );
+
+				hookHandler.addStore( getEmptyInitialisedStore() );
+
+				expect( trackChanges ).toHaveBeenCalledWith( null, s );
+			} );
 		} );
 	} );
 

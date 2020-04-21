@@ -126,4 +126,15 @@ describe( 'StatementTracker', () => {
 		} );
 	} );
 
+	describe( 'when there is no old statement', () => {
+		it( 'should not track anything', () => {
+			trackerFn = jest.fn();
+
+			const newStatement = getOldAndNewStatement( 0, true, false )[ 1 ];
+			statementTracker.trackChanges( null, newStatement );
+
+			expect( trackerFn ).not.toHaveBeenCalled();
+		} );
+	} );
+
 } );

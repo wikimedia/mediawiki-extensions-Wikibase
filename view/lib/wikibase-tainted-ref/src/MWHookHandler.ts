@@ -36,7 +36,7 @@ export default class MWHookHandler implements HookHandler {
 
 	private addSaveHook( store: Store<Application> ): void {
 		this.mwHooks( 'wikibase.statement.saved' ).add(
-			( _entityId: string, statementId: string, oldStatement: Statement, newStatement: Statement ) => {
+			( _entityId: string, statementId: string, oldStatement: Statement|null, newStatement: Statement ) => {
 				if ( store.state.statementsTaintedState[ statementId ] ) {
 					store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, statementId );
 				} else if ( this.taintedChecker.check( oldStatement, newStatement ) ) {
@@ -45,7 +45,7 @@ export default class MWHookHandler implements HookHandler {
 			},
 		);
 		this.mwHooks( 'wikibase.statement.saved' ).add(
-			( _entityId: string, _statementId: string, oldStatement: Statement, newStatement: Statement ) => {
+			( _entityId: string, _statementId: string, oldStatement: Statement|null, newStatement: Statement ) => {
 				this.statementTracker.trackChanges( oldStatement, newStatement );
 			},
 		);

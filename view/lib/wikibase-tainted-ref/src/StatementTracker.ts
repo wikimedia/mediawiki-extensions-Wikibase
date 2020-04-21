@@ -14,7 +14,11 @@ export default class StatementTracker {
 		this.refChangeCounter = refChangeCounter;
 	}
 
-	public trackChanges( oldStatement: Statement, newStatement: Statement ): void {
+	public trackChanges( oldStatement: Statement|null, newStatement: Statement ): void {
+		if ( oldStatement === null ) {
+			// newly created statement
+			return;
+		}
 		const referenceChangeCount = this.refChangeCounter.countOldReferencesRemovedOrChanged(
 			oldStatement.getReferences(),
 			newStatement.getReferences(),
