@@ -102,6 +102,7 @@ return call_user_func( function() {
 						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 						'dependencies' => [
 							'vue',
+							'vuex',
 							'mediawiki.jqueryMsg',
 						],
 						'messages' => [
