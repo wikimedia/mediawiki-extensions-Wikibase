@@ -19,11 +19,10 @@ import Loading from '@/presentation/components/Loading.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
 import hotUpdateDeep from '@wmde/vuex-helpers/dist/hotUpdateDeep';
-import MessageKeys from '@/definitions/MessageKeys';
 import EntityId from '@/datamodel/EntityId';
-import { calledWithHTMLElement } from '../../util/assertions';
 import newMockServiceContainer from '../services/newMockServiceContainer';
 import License from '@/presentation/components/License.vue';
+import AppHeader from '@/presentation/components/AppHeader.vue';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -100,93 +99,6 @@ describe( 'App.vue', () => {
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
 	} );
 
-	it( 'shows the header with title', () => {
-		const titleMessage = 'he ho';
-		const messageGet = jest.fn().mockReturnValue( titleMessage );
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-				},
-			},
-			stubs: { ProcessDialogHeader },
-		} );
-
-		calledWithHTMLElement( messageGet, 1, 1 );
-
-		expect( wrapper.find( ProcessDialogHeader ).exists() ).toBe( true );
-		expect( messageGet ).toHaveBeenCalledWith(
-			MessageKeys.BRIDGE_DIALOG_TITLE,
-			`<span class="wb-db-term-label" lang="zxx" dir="auto">${propertyId}</span>`,
-		);
-		expect( wrapper.find( 'h1' ).text() ).toBe( titleMessage );
-	} );
-
-	describe( 'save button rendering', () => {
-		it( 'renders the save button using the SAVE_CHANGES message', () => {
-			const saveMessage = 'go go go';
-			const messageGet = jest.fn(
-				( key: string ) => {
-					if ( key === MessageKeys.SAVE_CHANGES ) {
-						return saveMessage;
-					}
-
-					return '';
-				},
-			);
-
-			const wrapper = shallowMount( App, {
-				store,
-				localVue,
-				mocks: {
-					$bridgeConfig: { usePublish: false },
-					$messages: {
-						KEYS: MessageKeys,
-						get: messageGet,
-					},
-				},
-				stubs: { ProcessDialogHeader, EventEmittingButton },
-			} );
-
-			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.SAVE_CHANGES );
-			const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
-			expect( button.props( 'message' ) ).toBe( saveMessage );
-		} );
-
-		it( 'renders the save button using the PUBLISH_CHANGES message', () => {
-			const publishMessage = 'run run run';
-			const messageGet = jest.fn(
-				( key: string ) => {
-					if ( key === MessageKeys.PUBLISH_CHANGES ) {
-						return publishMessage;
-					}
-
-					return '';
-				},
-			);
-
-			const wrapper = shallowMount( App, {
-				store,
-				localVue,
-				mocks: {
-					$bridgeConfig: { usePublish: true },
-					$messages: {
-						KEYS: MessageKeys,
-						get: messageGet,
-					},
-				},
-				stubs: { ProcessDialogHeader, EventEmittingButton },
-			} );
-
-			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.PUBLISH_CHANGES );
-			const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
-			expect( button.props( 'message' ) ).toBe( publishMessage );
-		} );
-	} );
-
 	it( 'shows License on 1st save click, saves on 2nd save click, emits on refs click', async () => {
 		const bridgeSave = jest.fn();
 		const localStore = hotUpdateDeep( store, {
@@ -198,15 +110,15 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store: localStore,
 			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
+			stubs: { EventEmittingButton },
 		} );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await wrapper.find( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 		expect( bridgeSave ).not.toHaveBeenCalled();
 		expect( wrapper.find( License ).exists() ).toBe( true );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await wrapper.find( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
@@ -231,10 +143,9 @@ describe( 'App.vue', () => {
 			const wrapper = shallowMount( App, {
 				store: localStore,
 				localVue,
-				stubs: { ProcessDialogHeader, EventEmittingButton },
 			} );
 
-			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+			await wrapper.find( AppHeader ).vm.$emit( 'save' );
 			await localVue.nextTick();
 			expect( wrapper.find( License ).exists() ).toBe( true );
 
@@ -242,7 +153,7 @@ describe( 'App.vue', () => {
 			await localVue.nextTick();
 			expect( wrapper.find( License ).exists() ).toBe( false );
 
-			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+			await wrapper.find( AppHeader ).vm.$emit( 'save' );
 			await localVue.nextTick();
 			expect( bridgeSave ).not.toHaveBeenCalled();
 			expect( wrapper.find( License ).exists() ).toBe( true );
@@ -253,10 +164,9 @@ describe( 'App.vue', () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+		await wrapper.find( AppHeader ).vm.$emit( 'save' );
 		await localVue.nextTick();
 
 		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
@@ -274,91 +184,30 @@ describe( 'App.vue', () => {
 		expect( wrapper.find( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
 
-	it( 'disables the save button while saving', async () => {
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
-	} );
-
-	it( 'hides the save button after changes are saved', async () => {
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
-		expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
-	} );
-
 	it( 'emits saved event on close button click after saving is done', async () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
+		await wrapper.find( AppHeader ).vm.$emit( 'close' );
 		await localVue.nextTick();
 
 		expect( wrapper.emitted( initEvents.saved ) ).toHaveLength( 1 );
-	} );
-
-	it( 'renders the close button using the CANCEL message', () => {
-		const cancelMessage = 'cancel that';
-		const messageGet = jest.fn().mockReturnValue( cancelMessage );
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-				},
-			},
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
-		const button = wrapper.find( '.wb-ui-event-emitting-button--close' );
-		expect( button.props( 'message' ) ).toBe( cancelMessage );
 	} );
 
 	it( 'cancels on close button click', async () => {
 		const wrapper = shallowMount( App, {
 			store,
 			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
 		} );
 
-		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
+		await wrapper.find( AppHeader ).vm.$emit( 'close' );
 		await localVue.nextTick();
 
 		expect( wrapper.emitted( initEvents.cancel ) ).toHaveLength( 1 );
-	} );
-
-	it( 'disables close while in saving state', async () => {
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
-		const wrapper = shallowMount( App, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		await wrapper.find( '.wb-ui-event-emitting-button--close' ).trigger( 'click' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( initEvents.cancel ) ).toBeFalsy();
 	} );
 
 	describe( 'component switch', () => {
@@ -372,17 +221,6 @@ describe( 'App.vue', () => {
 				} );
 
 				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( true );
-			} );
-
-			it( 'doesn\'t show the save button ', () => {
-				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
-				const wrapper = shallowMount( App, {
-					store,
-					localVue,
-					stubs: { ProcessDialogHeader, EventEmittingButton },
-				} );
-
-				expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 			} );
 		} );
 

@@ -1,32 +1,9 @@
 <template>
 	<div id="data-bridge-app" class="wb-db-app">
-		<ProcessDialogHeader class="wb-db-app__header">
-			<template v-slot:title>
-				<span v-html="title" />
-			</template>
-			<template v-slot:primaryAction>
-				<EventEmittingButton
-					:message="$messages.get( publishOrSave )"
-					type="primaryProgressive"
-					size="L"
-					:squary="true"
-					@click="save"
-					:disabled="!canStartSaving"
-					v-if="!hasError && !isSaved"
-				/>
-			</template>
-			<template v-slot:safeAction>
-				<EventEmittingButton
-					:message="$messages.get( $messages.KEYS.CANCEL )"
-					type="close"
-					size="L"
-					:squary="true"
-					:disabled="isSaving"
-					@click="close"
-				/>
-			</template>
-		</ProcessDialogHeader>
-
+		<AppHeader
+			@save="save"
+			@close="close"
+		/>
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" @reload="$emit( Events.relaunch )" />
 			<ThankYou
@@ -61,36 +38,22 @@ import DataBridge from '@/presentation/components/DataBridge.vue';
 import Loading from '@/presentation/components/Loading.vue';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
-import ProcessDialogHeader from '@/presentation/components/ProcessDialogHeader.vue';
-import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
-import TermLabel from '@/presentation/components/TermLabel.vue';
 import License from '@/presentation/components/License.vue';
 import ThankYou from '@/presentation/components/ThankYou.vue';
+import AppHeader from '@/presentation/components/AppHeader.vue';
 
 @Component( {
 	components: {
+		AppHeader,
 		License,
 		DataBridge,
 		ErrorWrapper,
 		Loading,
-		EventEmittingButton,
-		ProcessDialogHeader,
 		ThankYou,
 	},
 } )
 export default class App extends mixins( StateMixin ) {
 	public licenseIsVisible = false;
-
-	public get title(): string {
-		return this.$messages.get(
-			this.$messages.KEYS.BRIDGE_DIALOG_TITLE,
-			new TermLabel( {
-				propsData: {
-					term: this.rootModule.getters.targetLabel,
-				},
-			} ).$mount().$el as HTMLElement,
-		);
-	}
 
 	public get isOverlayed(): boolean {
 		return this.isSaving || this.licenseIsVisible;
@@ -110,15 +73,6 @@ export default class App extends mixins( StateMixin ) {
 
 	public get hasError(): boolean {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
-	}
-
-	public get canStartSaving(): boolean {
-		return this.rootModule.getters.canStartSaving;
-	}
-
-	public get publishOrSave(): string {
-		return this.$bridgeConfig.usePublish ?
-			this.$messages.KEYS.PUBLISH_CHANGES : this.$messages.KEYS.SAVE_CHANGES;
 	}
 
 	public get repoLink(): string {
