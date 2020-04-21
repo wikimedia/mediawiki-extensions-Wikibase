@@ -11,11 +11,9 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Storage\PageIdentityValue;
 use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use RequestContext;
-use Revision;
 use RuntimeException;
 use SearchEngine;
 use Serializers\Serializer;
@@ -250,36 +248,6 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$this->assertNotEquals( $this->getModelId(), $name, "localization of model name" );
 	}
 
-	protected function fakeRevision( EntityContent $content, $id = 0 ) {
-		$title = $this->getMockBuilder( Title::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$title->method( 'exists' )
-			->will( $this->returnValue( true ) );
-
-		$title->method( 'getArticleID' )
-			->will( $this->returnValue( $id ) );
-
-		$title->method( 'getLatestRevID' )
-			->will( $this->returnValue( $id ) );
-
-		// TODO: remove conditional as soon as Title::getPageIdentity() is in core.
-		if ( method_exists( Title::class, 'getPageIdentity' ) ) {
-			$page = PageIdentityValue::newFromDBKey( $id, NS_MAIN, __CLASS__ );
-			$title->method( 'getPageIdentity' )
-				->will( $this->returnValue( $page ) );
-		}
-
-		$revision = new Revision( [
-			'id' => $id,
-			'title' => $title,
-			'content' => $content,
-		] );
-
-		return $revision;
-	}
-
 	public function provideGetUndoContent() {
 		/** @var LabelsProvider $e2 */
 		/** @var LabelsProvider $e3 */
@@ -293,28 +261,28 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		}
 
 		$e1 = $this->newEntity();
-		$r1 = $this->fakeRevision( $this->newEntityContent( $e1 ), 1 );
+		$c1 = $this->newEntityContent( $e1 );
 
 		$e2 = $this->newEntity();
 		$e2->getLabels()->setTextForLanguage( 'en', 'Foo' );
-		$r2 = $this->fakeRevision( $this->newEntityContent( $e2 ), 2 );
+		$c2 = $this->newEntityContent( $e2 );
 
 		$e3 = $this->newEntity();
 		$e3->getLabels()->setTextForLanguage( 'en', 'Foo' );
 		$e3->getLabels()->setTextForLanguage( 'de', 'Fuh' );
-		$r3 = $this->fakeRevision( $this->newEntityContent( $e3 ), 3 );
+		$c3 = $this->newEntityContent( $e3 );
 
 		$e4 = $this->newEntity();
 		$e4->getLabels()->setTextForLanguage( 'en', 'Foo' );
 		$e4->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 		$e4->getLabels()->setTextForLanguage( 'fr', 'Fu' );
-		$r4 = $this->fakeRevision( $this->newEntityContent( $e4 ), 4 );
+		$c4 = $this->newEntityContent( $e4 );
 
 		$e5 = $this->newEntity();
 		$e5->getLabels()->setTextForLanguage( 'en', 'F00' );
 		$e5->getLabels()->setTextForLanguage( 'de', 'Fuh' );
 		$e5->getLabels()->setTextForLanguage( 'fr', 'Fu' );
-		$r5 = $this->fakeRevision( $this->newEntityContent( $e5 ), 5 );
+		$c5 = $this->newEntityContent( $e5 );
 
 		$e5u4 = $this->newEntity();
 		$e5u4->getLabels()->setTextForLanguage( 'en', 'F00' );
@@ -324,35 +292,40 @@ abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
 		$e5u4u3->getLabels()->setTextForLanguage( 'en', 'F00' );
 
 		return [
-			[ $r5, $r5, $r4, $this->newEntityContent( $e4 ), "undo last edit" ],
-			[ $r5, $r4, $r3, $this->newEntityContent( $e5u4 ), "undo previous edit" ],
+			[ $c5, $c5, $c4, $this->newEntityContent( $e4 ), "undo last edit" ],
+			[ $c5, $c4, $c3, $this->newEntityContent( $e5u4 ), "undo previous edit" ],
 
-			[ $r5, $r5, $r3, $this->newEntityContent( $e3 ), "undo last two edits" ],
-			[ $r5, $r4, $r2, $this->newEntityContent( $e5u4u3 ), "undo past two edits" ],
+			[ $c5, $c5, $c3, $this->newEntityContent( $e3 ), "undo last two edits" ],
+			[ $c5, $c4, $c2, $this->newEntityContent( $e5u4u3 ), "undo past two edits" ],
 
-			[ $r5, $r2, $r1, null, "undo conflicting edit" ],
-			[ $r5, $r3, $r1, null, "undo two edits with conflict" ],
+			[ $c5, $c2, $c1, null, "undo conflicting edit" ],
+			[ $c5, $c3, $c1, null, "undo two edits with conflict" ],
 		];
 	}
 
 	/**
 	 * @dataProvider provideGetUndoContent
 	 *
-	 * @param Revision $latestRevision
-	 * @param Revision $newerRevision
-	 * @param Revision $olderRevision
+	 * @param EntityContent $latestContent
+	 * @param EntityContent $newerContent
+	 * @param EntityContent $olderContent
 	 * @param EntityContent|null $expected
 	 * @param string $message
 	 */
 	public function testGetUndoContent(
-		Revision $latestRevision,
-		Revision $newerRevision,
-		Revision $olderRevision,
+		EntityContent $latestContent,
+		EntityContent $newerContent,
+		EntityContent $olderContent,
 		?EntityContent $expected,
 		$message
 	) {
 		$handler = $this->getHandler();
-		$undo = $handler->getUndoContent( $latestRevision, $newerRevision, $olderRevision );
+		$undo = $handler->getUndoContent(
+			$latestContent,
+			$newerContent,
+			$olderContent,
+			$latestContent->equals( $newerContent )
+		);
 
 		if ( $expected ) {
 			$this->assertInstanceOf( EntityContent::class, $undo, $message );

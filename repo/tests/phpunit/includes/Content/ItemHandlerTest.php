@@ -87,15 +87,15 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$itemContent1 = $this->newRedirectItemContent( $item1->getId(), new ItemId( 'Q112' ) );
 		$itemContent2 = $this->newRedirectItemContent( $item1->getId(), new ItemId( 'Q113' ) );
 
-		$rev1 = $this->fakeRevision( $this->newEntityContent( $item1 ), 11 );
-		$rev2 = $this->fakeRevision( $itemContent1, 12 );
-		$rev3 = $this->fakeRevision( $itemContent2, 13 );
-		$rev4 = $this->fakeRevision( $this->newEntityContent( $item2 ), 14 );
+		$content1 = $this->newEntityContent( $item1 );
+		$content2 = $itemContent1;
+		$content3 = $itemContent2;
+		$content4 = $this->newEntityContent( $item2 );
 
-		$cases[] = [ $rev2, $rev2, $rev1, $this->newEntityContent( $item1 ), "undo redirect" ];
-		$cases[] = [ $rev3, $rev3, $rev2, $itemContent1, "undo redirect change" ];
-		$cases[] = [ $rev3, $rev2, $rev1, null, "undo redirect conflict" ];
-		$cases[] = [ $rev4, $rev4, $rev3, $itemContent2, "redo redirect" ];
+		$cases[] = [ $content2, $content2, $content1, $this->newEntityContent( $item1 ), "undo redirect" ];
+		$cases[] = [ $content3, $content3, $content2, $itemContent1, "undo redirect change" ];
+		$cases[] = [ $content3, $content2, $content1, null, "undo redirect conflict" ];
+		$cases[] = [ $content4, $content4, $content3, $itemContent2, "redo redirect" ];
 
 		return $cases;
 	}
