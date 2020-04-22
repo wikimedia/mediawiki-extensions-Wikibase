@@ -5,6 +5,7 @@ namespace Wikibase\Client\Hooks;
 use ExtensionRegistry;
 use File;
 use Html;
+use PageImages\PageImages;
 use Title;
 
 use Wikibase\Client\RepoLinker;
@@ -136,7 +137,7 @@ class SkinAfterBottomScriptsHandler {
 			return null;
 		}
 
-		return \PageImages::getPageImage( $title ) ?: null;
+		return PageImages::getPageImage( $title ) ?: null;
 	}
 
 	/**

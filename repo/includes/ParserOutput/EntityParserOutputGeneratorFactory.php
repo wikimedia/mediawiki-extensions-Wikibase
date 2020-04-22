@@ -6,7 +6,7 @@ use ExtensionRegistry;
 use Hooks;
 use Language;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
-use PageImages;
+use PageImages\PageImages;
 use RepoGroup;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
