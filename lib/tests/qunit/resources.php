@@ -20,7 +20,6 @@ return call_user_func( function() {
 		'wikibase.tests.qunit.testrunner' => $moduleBase + [
 			'scripts' => 'data/testrunner.js',
 			'dependencies' => [
-				'test.mediawiki.qunit.testrunner',
 				'wikibase',
 			],
 		],
