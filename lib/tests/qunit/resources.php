@@ -17,13 +17,6 @@ return call_user_func( function() {
 	];
 
 	$modules = [
-		'wikibase.tests.qunit.testrunner' => $moduleBase + [
-			'scripts' => 'data/testrunner.js',
-			'dependencies' => [
-				'wikibase',
-			],
-		],
-
 		'wikibase.Site.tests' => $moduleBase + [
 			'scripts' => [
 				'wikibase.Site.tests.js',
@@ -41,7 +34,6 @@ return call_user_func( function() {
 				'wikibase',
 				'wikibase.Site',
 				'wikibase.sites',
-				'wikibase.tests.qunit.testrunner',
 			],
 		],
 

@@ -91,7 +91,6 @@ return [
 			'wikibase.getLanguageNameByCode',
 			'wikibase.serialization',
 			'wikibase.templates',
-			'wikibase.tests.qunit.testrunner',
 			'wikibase.tests',
 			'wikibase.utilities.ClaimGuidGenerator',
 			'wikibase.ui.entityViewInit',
