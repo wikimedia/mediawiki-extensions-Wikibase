@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { rootModule } from '@/store';
-import { entityModule } from '@/store/entity';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Context } from 'vuex-smart-module';
@@ -19,19 +18,11 @@ import { Context } from 'vuex-smart-module';
 @Component
 export default class StateMixin extends Vue {
 	private $_StateMixin_rootModule?: Context<typeof rootModule>;
-	private $_StateMixin_entityModule?: Context<typeof entityModule>;
 
 	protected get rootModule(): Context<typeof rootModule> {
 		if ( this.$_StateMixin_rootModule === undefined ) {
 			this.$_StateMixin_rootModule = rootModule.context( this.$store );
 		}
 		return this.$_StateMixin_rootModule;
-	}
-
-	protected get entityModule(): Context<typeof entityModule> {
-		if ( this.$_StateMixin_entityModule === undefined ) {
-			this.$_StateMixin_entityModule = entityModule.context( this.$store );
-		}
-		return this.$_StateMixin_entityModule;
 	}
 }

@@ -40,13 +40,13 @@ describe( 'init', () => {
 		// TODO testing the loading behaviour actually fails,
 		// because the tests running are to slow to see the loading components
 
-		it( 'shows the occurence of errors', () => {
+		it( 'shows the occurrence of errors', () => {
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
-			const nonExistantEntityId = 'Q999999999';
+			const nonExistentEntityId = 'Q999999999';
 			const content = DataBridgePage.createInfoboxWikitext( [ {
-				label: 'shows the occurence of errors',
-				entityId: nonExistantEntityId,
+				label: 'shows the occurrence of errors',
+				entityId: nonExistentEntityId,
 				propertyId,
 				editFlow: 'overwrite',
 			} ] );
@@ -57,6 +57,9 @@ describe( 'init', () => {
 
 			DataBridgePage.error.waitForDisplayed( 5000 );
 			assert.ok( DataBridgePage.error.isDisplayed() );
+			const errorText = DataBridgePage.error.getText();
+			assert.ok( errorText.match( new RegExp( propertyId ) ) );
+			assert.ok( errorText.match( new RegExp( nonExistentEntityId ) ) );
 		} );
 
 		it( 'shows the current targetValue', () => {

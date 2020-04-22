@@ -20,7 +20,7 @@ export default class ReportIssue extends mixins( StateMixin ) {
 			),
 			this.rootModule.state.pageUrl,
 			this.rootModule.state.targetProperty,
-			this.entityModule.state.id,
+			this.rootModule.state.entityTitle,
 			this.rootModule.state.applicationErrors[ 0 ].type,
 		);
 	}
