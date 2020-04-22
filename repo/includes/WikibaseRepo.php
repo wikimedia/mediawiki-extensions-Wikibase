@@ -19,6 +19,7 @@ use Exception;
 use ExtensionRegistry;
 use HashBagOStuff;
 use Hooks;
+use HtmlCacheUpdater;
 use IContextSource;
 use InvalidArgumentException;
 use JobQueueGroup;
@@ -2502,6 +2503,10 @@ class WikibaseRepo {
 		);
 
 		return $cache;
+	}
+
+	public function getHtmlCacheUpdater(): HtmlCacheUpdater {
+		return MediaWikiServices::getInstance()->getHtmlCacheUpdater();
 	}
 
 	public function getLogger(): LoggerInterface {

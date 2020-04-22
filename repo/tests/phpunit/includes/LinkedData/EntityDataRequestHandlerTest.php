@@ -7,6 +7,7 @@ use DerivativeContext;
 use FauxRequest;
 use FauxResponse;
 use HashSiteStore;
+use HtmlCacheUpdater;
 use HttpError;
 use OutputPage;
 use Psr\Log\NullLogger;
@@ -169,11 +170,13 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$extensions,
 			$titleLookup
 		);
+		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
 		$entityTypesWithoutRdfOutput = [ 'property' ];
 
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
+			$mockHtmlCacheUpdater,
 			$titleLookup,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
