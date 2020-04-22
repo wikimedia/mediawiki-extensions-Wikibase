@@ -36,31 +36,9 @@ describe( 'init', () => {
 		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
 
-	describe( 'Errors-Init-Value-Switch', () => {
+	describe( 'once app is launched', () => {
 		// TODO testing the loading behaviour actually fails,
-		// because the tests running are to slow to see the loading components
-
-		it( 'shows the occurrence of errors', () => {
-			const title = DataBridgePage.getDummyTitle();
-			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
-			const nonExistentEntityId = 'Q999999999';
-			const content = DataBridgePage.createInfoboxWikitext( [ {
-				label: 'shows the occurrence of errors',
-				entityId: nonExistentEntityId,
-				propertyId,
-				editFlow: 'overwrite',
-			} ] );
-
-			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
-
-			DataBridgePage.openBridgeOnPage( title );
-
-			DataBridgePage.error.waitForDisplayed( 5000 );
-			assert.ok( DataBridgePage.error.isDisplayed() );
-			const errorText = DataBridgePage.error.getText();
-			assert.ok( errorText.match( new RegExp( propertyId ) ) );
-			assert.ok( errorText.match( new RegExp( nonExistentEntityId ) ) );
-		} );
+		// because the tests running are too slow to see the loading components
 
 		it( 'shows the current targetValue', () => {
 			const title = DataBridgePage.getDummyTitle();
