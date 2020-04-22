@@ -347,4 +347,90 @@ describe( 'root/getters', () => {
 		} );
 	} );
 
+	describe( 'isGenericSavingError', () => {
+		it( 'is false if there is no error', () => {
+			const applicationState = newApplicationState();
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isGenericSavingError ).toBe( false );
+		} );
+
+		it( 'is false if there are only non-saving errors', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: { stack: 'test' } },
+					{ type: ErrorTypes.UNSUPPORTED_DATATYPE },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isGenericSavingError ).toBe( false );
+		} );
+
+		it( 'is false if there is at least one error other than a saving error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: { stack: 'test' } },
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isGenericSavingError ).toBe( false );
+		} );
+
+		it( 'is true if there are only saving errors', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test2' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isGenericSavingError ).toBe( true );
+		} );
+	} );
+
+	describe( 'canGoToPreviousState', () => {
+
+		it( 'is true if isGenericSavingError is true', () => {
+			const applicationState = newApplicationState();
+			const isSavingError = true;
+
+			// @ts-ignore
+			const getters = inject( RootGetters, {
+				state: applicationState,
+				getters: {
+					isGenericSavingError: isSavingError,
+				},
+			} );
+
+			expect( getters.canGoToPreviousState ).toBe( true );
+		} );
+
+		it( 'is false if isGenericSavingError is false', () => {
+			const applicationState = newApplicationState();
+			const isSavingError = false;
+
+			// @ts-ignore
+			const getters = inject( RootGetters, {
+				state: applicationState,
+				getters: {
+					isGenericSavingError: isSavingError,
+				},
+			} );
+
+			expect( getters.canGoToPreviousState ).toBe( false );
+		} );
+	} );
+
 } );

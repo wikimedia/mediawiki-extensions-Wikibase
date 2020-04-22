@@ -13,6 +13,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';
 import { statementModule } from '@/store/statements';
 import errorPropertyNameReplacer from '@/utils/errorPropertyNameReplacer';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 
 export class RootGetters extends Getters<Application> {
 
@@ -65,6 +66,18 @@ export class RootGetters extends Getters<Application> {
 		return this.state.editDecision !== null &&
 			this.getters.isTargetValueModified &&
 			this.getters.applicationStatus === ApplicationStatus.READY;
+	}
+
+	public get isGenericSavingError(): boolean {
+		return this.state.applicationErrors.length > 0 && this.state.applicationErrors.every(
+			( error ) => {
+				return error.type === ErrorTypes.SAVING_FAILED;
+			},
+		);
+	}
+
+	public get canGoToPreviousState(): boolean {
+		return this.getters.isGenericSavingError;
 	}
 
 	public get applicationStatus(): ApplicationStatus {
