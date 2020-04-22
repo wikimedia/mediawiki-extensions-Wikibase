@@ -280,7 +280,7 @@ export default class EventEmittingButton extends Vue {
 	&--back {
 		background-image: $svg-back;
 
-		@at-root html[ dir='rtl' ] & { // references dir attribute of the App component
+		@at-root :root[ dir='rtl' ] & { // references dir attribute of the <html> tag
 			transform: scaleX( -1 );
 		}
 	}

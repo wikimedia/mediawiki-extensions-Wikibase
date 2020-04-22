@@ -166,3 +166,8 @@ launch(
 } ).on( initEvents.cancel, () => {
 	console.info( 'Application event: canceled' );
 } );
+
+// The EventEmittingButton uses the `dir` attribute set at the root level of the page
+// to determine the style of some buttons (e.g. back button)
+const direction = getOrEnforceUrlParameter( 'dir', 'ltr' ) as string;
+( document.querySelector( 'html' ) as HTMLElement ).setAttribute( 'dir', direction );
