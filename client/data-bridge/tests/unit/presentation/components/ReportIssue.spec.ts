@@ -8,19 +8,17 @@ describe( 'ReportIssue', () => {
 	it( 'shows a message with the right parameters', () => {
 		const pageUrl = 'https://client.example/wiki/Client_page';
 		const targetProperty = 'P1';
-		const entityId = 'Q1';
+		const entityTitle = 'Q1';
 		const errorCode = ErrorTypes.APPLICATION_LOGIC_ERROR;
 		const store = createTestStore( {
 			state: {
 				pageUrl,
 				targetProperty,
+				entityTitle,
 				applicationErrors: [
 					{ type: errorCode, info: {} },
 					{ type: ErrorTypes.UNSUPPORTED_DATAVALUE_TYPE }, // should be ignored, only first error is shown
 				],
-			},
-			entityState: {
-				id: entityId,
 			},
 		} );
 		const $messages = {
@@ -37,7 +35,7 @@ describe( 'ReportIssue', () => {
 			$bridgeConfig.issueReportingLink,
 			pageUrl,
 			targetProperty,
-			entityId,
+			entityTitle,
 			errorCode,
 		);
 		expect( wrapper.find( 'p' ).html() ).toContain( 'Some <abbr>HTML</abbr>.' );
