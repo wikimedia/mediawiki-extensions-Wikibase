@@ -279,6 +279,11 @@ RootActions
 			} );
 	}
 
+	public retrySave(): Promise<void> {
+		this.commit( 'clearApplicationErrors' );
+		return this.dispatch( 'saveBridge' );
+	}
+
 	public addError(
 		errors: ApplicationError[],
 	): Promise<void> {

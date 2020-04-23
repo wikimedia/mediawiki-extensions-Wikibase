@@ -63,6 +63,19 @@ describe( 'root/mutations', () => {
 		expect( state.applicationErrors ).toStrictEqual( errors );
 	} );
 
+	it( 'clears all errors from the state', () => {
+		const state: Application = newApplicationState();
+		state.applicationErrors.push(
+			{ type: ErrorTypes.SAVING_FAILED, info: {} },
+			{ type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} },
+		);
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.clearApplicationErrors();
+		expect( state.applicationErrors ).toStrictEqual( [] );
+	} );
+
 	it( 'does not drop existing errors when adding new ones to the state', () => {
 		const oldErrors: ApplicationError[] = [ { type: ErrorTypes.INVALID_ENTITY_STATE_ERROR } ];
 		const state: Application = newApplicationState( { applicationErrors: oldErrors.slice() } );

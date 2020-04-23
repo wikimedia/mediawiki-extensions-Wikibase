@@ -1253,6 +1253,71 @@ describe( 'root/actions', () => {
 
 	} );
 
+	describe( 'retrySave', () => {
+		it( 'commits clearApplicationErrors and dispatches saveBridge', async () => {
+			const rootModuleDispatch = jest.fn();
+			const entityId = 'Q42';
+			const targetPropertyId = 'P42';
+			const targetValue: DataValue = {
+				type: 'string',
+				value: 'a new value',
+			};
+			const statementsState: StatementState = {
+				[ entityId ]: {
+					[ targetPropertyId ]: [
+						{} as Statement,
+					],
+				},
+			};
+			const pageTitle = 'South_Pole_Telescope';
+			const state = newApplicationState( {
+				applicationErrors: [ { type: ErrorTypes.SAVING_FAILED } ],
+				applicationStatus: ApplicationStatus.READY,
+				targetValue,
+				targetProperty: targetPropertyId,
+				entity: {
+					id: entityId,
+				},
+				statements: statementsState,
+				pageTitle,
+			} );
+
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				state,
+				commit,
+				dispatch: rootModuleDispatch,
+			} );
+
+			const purgeTitles: MediaWikiPurge = {
+				purge: jest.fn().mockReturnValue( Promise.resolve() ),
+			};
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles,
+				} ),
+			};
+
+			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
+
+			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
+
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+			await actions.retrySave();
+
+			expect( commit ).toHaveBeenCalledWith( 'clearApplicationErrors' );
+			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'saveBridge' );
+		} );
+	} );
+
 	describe( 'addError', () => {
 		it( 'it commits the provided error', () => {
 			const commit = jest.fn();
