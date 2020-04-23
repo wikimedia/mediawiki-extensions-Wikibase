@@ -440,7 +440,7 @@ final class WikibaseClient {
 	public function getEntityIdComposer() {
 		if ( $this->entityIdComposer === null ) {
 			$this->entityIdComposer = new EntityIdComposer(
-				$this->entityTypeDefinitions->getEntityIdComposers()
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 			);
 		}
 
@@ -487,10 +487,10 @@ final class WikibaseClient {
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
 				$source,
-				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
-				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks(),
-				$this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks()
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
 			);
 		}
 
@@ -1086,14 +1086,14 @@ final class WikibaseClient {
 	 * @return callable[]
 	 */
 	public function getEntityDeserializerFactoryCallbacks() {
-		return $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return string[]
 	 */
 	public function getLuaEntityModules() {
-		return $this->entityTypeDefinitions->getLuaEntityModules();
+		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::LUA_ENTITY_MODULE );
 	}
 
 	/**
@@ -1170,7 +1170,7 @@ final class WikibaseClient {
 	 */
 	private function getEntityDiffer() {
 		$entityDiffer = new EntityDiffer();
-		foreach ( $this->entityTypeDefinitions->getEntityDifferStrategyBuilders() as $builder ) {
+		foreach ( $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
@@ -1455,8 +1455,8 @@ final class WikibaseClient {
 	public function getEntityIdLookup() {
 		if ( $this->entityIdLookup === null ) {
 			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
-				$this->entityTypeDefinitions->getContentModelIds(),
-				$this->entityTypeDefinitions->getEntityIdLookupCallbacks(),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_LOOKUP_CALLBACK ),
 				new PagePropsEntityIdLookup(
 					MediaWikiServices::getInstance()->getDBLoadBalancer(),
 					$this->getEntityIdParser()

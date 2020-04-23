@@ -97,7 +97,7 @@ class GenericServices {
 	 */
 	public function getFullEntitySerializer() {
 		if ( !isset( $this->entitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
 			$serializers = [];
 
@@ -116,7 +116,7 @@ class GenericServices {
 	 */
 	public function getCompactEntitySerializer() {
 		if ( !isset( $this->compactEntitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getSerializerFactoryCallbacks();
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK );
 			$baseSerializerFactory = $this->getCompactBaseDataModelSerializerFactory();
 			$serializers = [];
 
@@ -137,7 +137,7 @@ class GenericServices {
 	 */
 	public function getStorageEntitySerializer() {
 		if ( !isset( $this->storageEntitySerializer ) ) {
-			$serializerFactoryCallbacks = $this->entityTypeDefinitions->getStorageSerializerFactoryCallbacks();
+			$serializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::STORAGE_SERIALIZER_FACTORY_CALLBACK );
 			$baseSerializerFactory = $this->getBaseDataModelSerializerFactory();
 			$serializers = [];
 
