@@ -30,37 +30,42 @@
 			.sitelinkview( options );
 	}
 
-	QUnit.module( 'jquery.wikibase.sitelinkview', QUnit.newWbEnvironment( {
-		config: {
-			wbSiteDetails: {
-				aawiki: {
-					apiUrl: 'http://aa.wikipedia.org/w/api.php',
-					name: 'Qafár af',
-					pageUrl: 'http://aa.wikipedia.org/wiki/$1',
-					shortName: 'Qafár af',
-					languageCode: 'aa',
-					id: 'aawiki',
-					group: 'wikipedia'
-				},
-				enwiki: {
-					apiUrl: 'http://en.wikipedia.org/w/api.php',
-					name: 'English Wikipedia',
-					pageUrl: 'http://en.wikipedia.org/wiki/$1',
-					shortName: 'English',
-					languageCode: 'en',
-					id: 'enwiki',
-					group: 'wikipedia'
-				},
-				dewiki: {
-					apiUrl: 'http://de.wikipedia.org/w/api.php',
-					name: 'Deutsche Wikipedia',
-					pageUrl: 'http://de.wikipedia.org/wiki/$1',
-					shortName: 'Deutsch',
-					languageCode: 'de',
-					id: 'dewiki',
-					group: 'wikipedia'
+	QUnit.module( 'jquery.wikibase.sitelinkview', QUnit.newMwEnvironment( {
+		setup: function () {
+			// empty cache of wikibases site details
+			wb.sites._siteList = null;
+
+			mw.config.set( {
+				wbSiteDetails: {
+					aawiki: {
+						apiUrl: 'http://aa.wikipedia.org/w/api.php',
+						name: 'Qafár af',
+						pageUrl: 'http://aa.wikipedia.org/wiki/$1',
+						shortName: 'Qafár af',
+						languageCode: 'aa',
+						id: 'aawiki',
+						group: 'wikipedia'
+					},
+					enwiki: {
+						apiUrl: 'http://en.wikipedia.org/w/api.php',
+						name: 'English Wikipedia',
+						pageUrl: 'http://en.wikipedia.org/wiki/$1',
+						shortName: 'English',
+						languageCode: 'en',
+						id: 'enwiki',
+						group: 'wikipedia'
+					},
+					dewiki: {
+						apiUrl: 'http://de.wikipedia.org/w/api.php',
+						name: 'Deutsche Wikipedia',
+						pageUrl: 'http://de.wikipedia.org/wiki/$1',
+						shortName: 'Deutsch',
+						languageCode: 'de',
+						id: 'dewiki',
+						group: 'wikipedia'
+					}
 				}
-			}
+			} );
 		},
 		teardown: function () {
 			$( '.test_sitelinkview' ).each( function () {
