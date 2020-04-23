@@ -23,47 +23,48 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\Services\Diff\ItemPatcher;
 use Wikibase\DataModel\Services\Diff\PropertyDiffer;
 use Wikibase\DataModel\Services\Diff\PropertyPatcher;
+use Wikibase\Lib\EntityTypeDefinitions as Def;
 
 return [
 	'item' => [
-		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+		Def::SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newItemSerializer();
 		},
-		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
+		Def::DESERIALIZER_FACTORY_CALLBACK => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newItemDeserializer();
 		},
-		'entity-id-pattern' => ItemId::PATTERN,
-		'entity-id-builder' => function( $serialization ) {
+		Def::ENTITY_ID_PATTERN => ItemId::PATTERN,
+		Def::ENTITY_ID_BUILDER => function( $serialization ) {
 			return new ItemId( $serialization );
 		},
-		'entity-id-composer-callback' => function( $repositoryName, $uniquePart ) {
+		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $repositoryName, $uniquePart ) {
 			return ItemId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 		},
-		'entity-differ-strategy-builder' => function() {
+		Def::ENTITY_DIFFER_STRATEGY_BUILDER => function() {
 			return new ItemDiffer();
 		},
-		'entity-patcher-strategy-builder' => function() {
+		Def::ENTITY_PATCHER_STRATEGY_BUILDER => function() {
 			return new ItemPatcher();
 		},
 	],
 	'property' => [
-		'serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+		Def::SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newPropertySerializer();
 		},
-		'deserializer-factory-callback' => function( DeserializerFactory $deserializerFactory ) {
+		Def::DESERIALIZER_FACTORY_CALLBACK => function( DeserializerFactory $deserializerFactory ) {
 			return $deserializerFactory->newPropertyDeserializer();
 		},
-		'entity-id-pattern' => PropertyId::PATTERN,
-		'entity-id-builder' => function( $serialization ) {
+		Def::ENTITY_ID_PATTERN => PropertyId::PATTERN,
+		Def::ENTITY_ID_BUILDER => function( $serialization ) {
 			return new PropertyId( $serialization );
 		},
-		'entity-id-composer-callback' => function( $repositoryName, $uniquePart ) {
+		Def::ENTITY_ID_COMPOSER_CALLBACK => function( $repositoryName, $uniquePart ) {
 			return PropertyId::newFromRepositoryAndNumber( $repositoryName, $uniquePart );
 		},
-		'entity-differ-strategy-builder' => function() {
+		Def::ENTITY_DIFFER_STRATEGY_BUILDER => function() {
 			return new PropertyDiffer();
 		},
-		'entity-patcher-strategy-builder' => function() {
+		Def::ENTITY_PATCHER_STRATEGY_BUILDER => function() {
 			return new PropertyPatcher();
 		},
 	]

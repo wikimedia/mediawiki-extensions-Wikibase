@@ -6,6 +6,7 @@ use Deserializers\Deserializer;
 use Serializers\Serializer;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\SerializerFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
  * @group Wikibase
@@ -77,9 +78,9 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$serializerFactory = $this->getSerializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );
-		$this->assertArrayHasKey( 'serializer-factory-callback', $registry[$entityType] );
+		$this->assertArrayHasKey( EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK, $registry[$entityType] );
 
-		$callback = $registry[$entityType]['serializer-factory-callback'];
+		$callback = $registry[$entityType][EntityTypeDefinitions::SERIALIZER_FACTORY_CALLBACK];
 
 		$this->assertIsCallable( $callback );
 
@@ -97,9 +98,9 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$deserializerFactory = $this->getDeserializerFactory( $entityType );
 
 		$this->assertArrayHasKey( $entityType, $registry );
-		$this->assertArrayHasKey( 'deserializer-factory-callback', $registry[$entityType] );
+		$this->assertArrayHasKey( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK, $registry[$entityType] );
 
-		$callback = $registry[$entityType]['deserializer-factory-callback'];
+		$callback = $registry[$entityType][EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK];
 
 		$this->assertIsCallable( $callback );
 

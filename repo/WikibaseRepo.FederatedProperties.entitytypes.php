@@ -13,21 +13,22 @@
  * @license GPL-2.0-or-later
  */
 
+use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Store\EntityArticleIdNullLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 return [
 	'property' => [
-		'article-id-lookup-callback' => function () {
+		Def::ARTICLE_ID_LOOKUP_CALLBACK => function () {
 			return new EntityArticleIdNullLookup();
 		},
-		'url-lookup-callback' => function () {
+		Def::URL_LOOKUP_CALLBACK => function () {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityUrlLookup();
 		},
-		'title-text-lookup-callback' => function () {
+		Def::TITLE_TEXT_LOOKUP_CALLBACK => function () {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityTitleTextLookup();
 		},
-		'entity-search-callback' => function() {
+		Def::ENTITY_SEARCH_CALLBACK => function() {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
 		},
 	]
