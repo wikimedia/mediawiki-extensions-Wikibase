@@ -21,7 +21,7 @@ $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) 
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Maintenance script for rebuilding the items_per_site table.
+ * Maintenance script for rebuilding the wb_items_per_site table.
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
@@ -31,7 +31,10 @@ class RebuildItemsPerSite extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Rebuild the items_per_site table' );
+		$this->addDescription(
+			'Rebuild the wb_items_per_site table for all existing items. ' .
+			'This doesn\'t prune rows belonging to deleted Items, run pruneItemsPerSite.php first for that.'
+		);
 
 		$this->addOption( 'batch-size', "Number of rows to update per batch (100 by default)", false, true );
 
