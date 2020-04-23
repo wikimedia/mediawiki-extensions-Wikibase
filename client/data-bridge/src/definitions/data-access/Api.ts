@@ -31,6 +31,7 @@ import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetenti
  * - An Array of strings or integers, which will never be merged with other requests.
  *   This is mainly useful for parameters that allow duplicate values,
  *   or where the order is significant.
+ * - `undefined`, which is completely omitted (just like `false`).
  *
  * Callers should specify all the parameters that they rely on,
  * even where this means specifying the default value, so that
@@ -48,7 +49,7 @@ export default interface Api {
 
 export interface ApiParams<action extends ApiAction> {
 	action: action;
-	[ name: string ]: string | number | boolean | ( string|number )[] | Set<string|number>;
+	[ name: string ]: string | number | boolean | undefined | ( string|number )[] | Set<string|number>;
 }
 
 export type ApiResponse = {

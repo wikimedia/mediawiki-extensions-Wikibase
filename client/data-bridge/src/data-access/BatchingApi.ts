@@ -26,8 +26,9 @@ import Api, {
  * ```
  *
  * Whether two requests are compatible depends on their parameters.
- * Parameters that only occur in one of two requests have no effect
- * on compatibility and are always added to the resulting request.
+ * Parameters that only occur in one of two requests,
+ * being either missing or set to `undefined` in the other,
+ * have no effect on compatibility and are always added to the resulting request.
  * If the same parameter name occurs in both requests,
  * the result depends on the type of the value:
  *
@@ -42,6 +43,8 @@ import Api, {
  * - If the values on both sides are booleans,
  *   the requests are incompatible if the values are different.
  *   Otherwise, they are sent unmodified to the underlying API.
+ * - If the values on both sides are `undefined`,
+ *   they are sent unmodified to the underlying API.
  * - Otherwise, the values on both sides are converted to strings.
  *   If the resulting strings are different, the requests are incompatible;
  *   otherwise, they are added to the resulting request.
@@ -124,9 +127,9 @@ export default class BatchingApi implements Api {
 		] );
 		const mergedParams: ApiParams<action1&action2> = {} as ApiParams<action1&action2>;
 		for ( const paramName of paramNames ) {
-			const inParams1 = Object.prototype.hasOwnProperty.call( params1, paramName ),
-				inParams2 = Object.prototype.hasOwnProperty.call( params2, paramName );
-			if ( inParams1 !== inParams2 ) {
+			const inParams1 = params1[ paramName ] !== undefined,
+				inParams2 = params2[ paramName ] !== undefined;
+			if ( !( inParams1 && inParams2 ) ) {
 				mergedParams[ paramName ] = ( inParams1 ? params1 : params2 )[ paramName ];
 				continue;
 			}

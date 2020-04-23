@@ -10,21 +10,29 @@ describe( 'BatchingApi', () => {
 		// name, [ originalParams... ], [ resultingParams... ]
 		[ 'merge two empty params', [ {}, {} ], [ {} ] ],
 		[ 'merge five empty params', [ {}, {}, {}, {}, {} ], [ {} ] ],
-		[ 'merge param on left side', [ { a: 'a' }, {} ], [ { a: 'a' } ] ],
-		[ 'merge param on right side', [ {}, { a: 'a' } ], [ { a: 'a' } ] ],
+		[ 'merge param on left side (right side missing)', [ { a: 'a' }, {} ], [ { a: 'a' } ] ],
+		[ 'merge param on left side (right side undefined)', [ { a: 'a' }, { a: undefined } ], [ { a: 'a' } ] ],
+		[ 'merge param on right side (left side missing)', [ {}, { a: 'a' } ], [ { a: 'a' } ] ],
+		[ 'merge param on right side (left side undefined)', [ { a: undefined }, { a: 'a' } ], [ { a: 'a' } ] ],
 		[
 			'merge different params',
-			[ { a: 'a' }, { b: 'b' }, { c: 'c' } ],
-			[ { a: 'a', b: 'b', c: 'c' } ] ],
+			[ { a: 'a' }, { b: 'b' }, { c: 'c' }, { d: undefined } ],
+			[ { a: 'a', b: 'b', c: 'c', d: undefined } ],
+		],
 		[
 			'merge multiple different params',
-			[ { a: 'a', A: 'A' }, { b: 'b', B: 'B' }, { c: 'c', C: 'C' } ],
-			[ { a: 'a', A: 'A', b: 'b', B: 'B', c: 'c', C: 'C' } ],
+			[ { a: 'a', A: 'A' }, { b: 'b', B: 'B' }, { c: 'c', C: 'C' }, { d: undefined, D: undefined } ],
+			[ { a: 'a', A: 'A', b: 'b', B: 'B', c: 'c', C: 'C', d: undefined, D: undefined } ],
 		],
 		[
 			'merge same param',
 			[ { a: 'a' }, { a: 'a' }, { a: 'a' } ],
 			[ { a: 'a' } ],
+		],
+		[
+			'merge same param (undefined)',
+			[ { a: undefined }, { a: undefined } ],
+			[ { a: undefined } ],
 		],
 		[
 			'merge compatible param, int and string',
