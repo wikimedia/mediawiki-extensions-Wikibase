@@ -38,7 +38,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Na više jezika",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Postavi",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Prilikom učitavanja stranica prikaži oznake, sinonime i opise na svim jezicima koje rabim",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Dodatni jezici koje poznajete mogu se postaviti na suradničkoj stranici rabeći sintaksu [[mw:Extension:Babel|proširenja Babilon]].",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Dodatni jezici koje poznajete mogu se postaviti na suradničkoj stranici rabeći sintaksu [[mw:Special:MyLanguage/Extension:Babel|proširenja Babilon]].",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Poznato i kao",
 	"wikibase-entitytermsforlanguagelistview-description": "Opis",
 	"wikibase-entitytermsforlanguagelistview-label": "Oznaka",

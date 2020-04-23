@@ -30,7 +30,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На уште јазици",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Нагоди поставки",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Прикажувај натписи, истозначници и описи на сите мои јазици при вчитувањето на страницата",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Можете да зададете лични јазици покрај оној на корисничкиот посредник, користејќи синтакса за  додатокот „[[mw:Extension:Babel|Вавилон]]“ на корисничката страница.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Можете да зададете лични јазици покрај оној на корисничкиот посредник, користејќи синтакса за  додатокот „[[mw:Special:MyLanguage/Extension:Babel|Вавилон]]“ на корисничката страница.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Познато и како",
 	"wikibase-entitytermsforlanguagelistview-description": "Опис",
 	"wikibase-entitytermsforlanguagelistview-label": "Натпис",

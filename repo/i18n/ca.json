@@ -43,7 +43,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "En més idiomes",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Configura",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Mostra etiquetes, àlies i descripcions de totes les meves llengües en la càrrega de pàgina",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Es poden definir llengües addicionals a la llengua de la interfície de l'usuari utilitzant la sintaxi de l'[[mw:Extension:Babel|extensió Babel]] en la pàgina d'usuari.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Es poden definir llengües addicionals a la llengua de la interfície de l'usuari utilitzant la sintaxi de l'[[mw:Special:MyLanguage/Extension:Babel|extensió Babel]] en la pàgina d'usuari.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "També conegut com a",
 	"wikibase-entitytermsforlanguagelistview-description": "Descripció",
 	"wikibase-entitytermsforlanguagelistview-label": "Etiqueta",

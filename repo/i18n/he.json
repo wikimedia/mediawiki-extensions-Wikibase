@@ -39,7 +39,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "בשפות נוספות",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "הגדרות",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "הצגת תוויות, כינויים ותיאורים בכל השפות שלי בעת טעינת הדף",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "שפות אישיות בנוסף לשפת הממשק יכולות להיות מוגדרות באמצעות [[mw:Extension:Babel|תיבת בבל]] בדף המשתמש שלך.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "שפות אישיות בנוסף לשפת הממשק יכולות להיות מוגדרות באמצעות [[mw:Special:MyLanguage/Extension:Babel|תיבת בבל]] בדף המשתמש שלך.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "ידוע גם בשם",
 	"wikibase-entitytermsforlanguagelistview-description": "תיאור",
 	"wikibase-entitytermsforlanguagelistview-label": "תווית",

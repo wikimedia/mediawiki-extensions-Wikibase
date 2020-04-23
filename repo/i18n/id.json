@@ -39,7 +39,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Dalam bahasa lainnya",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Pengaturan",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Tunjukkan label, nama lain, dan deskripsi dalam semua bahasa yang saya pilih saat laman dimuat",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Penambahan bahasa lain untuk antarmuka pengguna pribadi dapat diatur dengan memasukkan sintaks [[mw:Extension:Babel|ekstensi Babel]] pada laman pengguna.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Penambahan bahasa lain untuk antarmuka pengguna pribadi dapat diatur dengan memasukkan sintaks [[mw:Special:MyLanguage/Extension:Babel|ekstensi Babel]] pada laman pengguna.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Juga dikenal dengan",
 	"wikibase-entitytermsforlanguagelistview-description": "Deskripsi",
 	"wikibase-entitytermsforlanguagelistview-label": "Label",

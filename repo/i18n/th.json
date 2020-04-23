@@ -30,7 +30,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ในภาษาอื่น",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "กำหนดค่า",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "แสดงป้ายชื่อ ชื่ออื่นๆ และคำอธิบายในภาษาทั้งหมดที่ฉันใช้เมื่อโหลดหน้า",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "สามารถตั้งค่าภาษาส่วนตัวนอกเหนือจากภาษาส่วนติดต่อผู้ใช้ได้โดยใช้ไวยากรณ์ของ[[mw:Extension:Babel|ส่วนขยายบาเบล]]ที่อยู่บนหน้าผู้ใช้",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "สามารถตั้งค่าภาษาส่วนตัวนอกเหนือจากภาษาส่วนติดต่อผู้ใช้ได้โดยใช้ไวยากรณ์ของ[[mw:Special:MyLanguage/Extension:Babel|ส่วนขยายบาเบล]]ที่อยู่บนหน้าผู้ใช้",
 	"wikibase-entitytermsforlanguagelistview-aliases": "ในชื่ออื่น",
 	"wikibase-entitytermsforlanguagelistview-description": "คำอธิบาย",
 	"wikibase-entitytermsforlanguagelistview-label": "ป้ายชื่อ",

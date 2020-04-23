@@ -32,7 +32,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На іншых мовах",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Наладзіць",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Паказваць меткі, псеўданімы і апісанні адразу на ўсіх маіх мовах",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Па змоўчанні выкарыстоўваецца мова інтэрфейсу, дадатковыя мовы можна задаць з дапамогай [[mw:Extension:Babel|Babel extension]] на асабістай старонцы.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Па змоўчанні выкарыстоўваецца мова інтэрфейсу, дадатковыя мовы можна задаць з дапамогай [[mw:Special:MyLanguage/Extension:Babel|Babel extension]] на асабістай старонцы.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Таксама вядома як",
 	"wikibase-entitytermsforlanguagelistview-description": "Апісанне",
 	"wikibase-entitytermsforlanguagelistview-label": "Метка",

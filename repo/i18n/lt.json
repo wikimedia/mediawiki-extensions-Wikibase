@@ -36,7 +36,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Kitomis kalbomis",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Konfigūruoti",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Kraunantis puslapiui rodyti žymas, slapyvardžius ir paaiškinimus visomis mano kalbomis",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Greta naudotojo sąsajos kalbos gali būti nustatomos papildomos asmeninės kalbos naudojantis [[mw:Extension:Babel|Babel extension]] sintakse naudotojo puslapyje.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Greta naudotojo sąsajos kalbos gali būti nustatomos papildomos asmeninės kalbos naudojantis [[mw:Special:MyLanguage/Extension:Babel|Babel extension]] sintakse naudotojo puslapyje.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Taip pat žinomas kaip",
 	"wikibase-entitytermsforlanguagelistview-description": "Aprašymas",
 	"wikibase-entitytermsforlanguagelistview-label": "Žymė",

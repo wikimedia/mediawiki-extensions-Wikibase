@@ -34,7 +34,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "مزید زبانوں میں",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "تشکیل",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "میری لوڈ کردہ تمام زبانوں میں وضاحتیں، مستعار ناموں اور لیبلز دکھائیں",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "صارف کی ذاتی زبان کی ترجیحات اس کی اپنی زبان کے علاوہ [[mw:Extension:Babel|بابل]] کو استعمال کرتے ہوئے دیگر زبانوں میں بھی کی جا سکتی ہے",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "صارف کی ذاتی زبان کی ترجیحات اس کی اپنی زبان کے علاوہ [[mw:Special:MyLanguage/Extension:Babel|بابل]] کو استعمال کرتے ہوئے دیگر زبانوں میں بھی کی جا سکتی ہے",
 	"wikibase-entitytermsforlanguagelistview-aliases": "معروف بنام",
 	"wikibase-entitytermsforlanguagelistview-description": "وصف",
 	"wikibase-entitytermsforlanguagelistview-label": "لیبل",

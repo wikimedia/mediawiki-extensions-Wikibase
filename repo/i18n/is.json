@@ -29,7 +29,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Á fleiri tungumálum",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Stilla",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Sýna merkimiða, samnefni og lýsingar á öllum tungumálunum mínum við hlöðun síðunnar",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Persónuleg tungumál til viðbótar við tungumál viðmótsins er hægt að bæta við með [[mw:Extension:Babel|Babel viðbótar]] kóða á notendasíðu.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Persónuleg tungumál til viðbótar við tungumál viðmótsins er hægt að bæta við með [[mw:Special:MyLanguage/Extension:Babel|Babel viðbótar]] kóða á notendasíðu.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Einnig þekkt sem",
 	"wikibase-entitytermsforlanguagelistview-description": "Lýsing",
 	"wikibase-entitytermsforlanguagelistview-label": "Merkimiði",

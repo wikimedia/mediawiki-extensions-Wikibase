@@ -39,7 +39,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "На други езици",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Конфигуриране",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показване на етикети, псевдоними и описания на всички мои езици при зареждането на страницата",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Можете да зададете лични езици освен онзи на потребителския интерфейс, ползвайки синтаксиса на разширение „[[mw:Extension:Babel|Вавилон]]“ на потребителската страница.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "Можете да зададете лични езици освен онзи на потребителския интерфейс, ползвайки синтаксиса на разширение „[[mw:Special:MyLanguage/Extension:Babel|Вавилон]]“ на потребителската страница.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Среща се и като",
 	"wikibase-entitytermsforlanguagelistview-description": "Описание",
 	"wikibase-entitytermsforlanguagelistview-label": "Етикет",

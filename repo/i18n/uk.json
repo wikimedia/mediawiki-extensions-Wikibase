@@ -46,7 +46,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "Іншими мовами",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "Налаштування",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "Показати назви, альтернативні назви та описи всіма моїми мовами при завантаженні сторінки",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "На додачу до мови інтерфейсу, персональні мови можна задати, використавши на своїй сторінці користувача синтаксис [[mw:Extension:Babel|розширення Babel]].",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "На додачу до мови інтерфейсу, персональні мови можна задати, використавши на своїй сторінці користувача синтаксис [[mw:Special:MyLanguage/Extension:Babel|розширення Babel]].",
 	"wikibase-entitytermsforlanguagelistview-aliases": "Інші назви",
 	"wikibase-entitytermsforlanguagelistview-description": "Опис",
 	"wikibase-entitytermsforlanguagelistview-label": "Назва",

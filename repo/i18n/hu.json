@@ -349,7 +349,7 @@
 	"wikibase-listdatatypes-commonsmedia-body": "Link a Wikimédia Commonsban tárolt fájlra. Amikor egy értéket beírsz, a fájlnévtérben ''(File)'' fog keresni a szoftver egyező fájlneveket.",
 	"wikibase-listdatatypes-globe-coordinate-head": "Földrajzi koordináta",
 	"wikibase-listdatatypes-geo-shape-head": "Földrajzi forma",
-	"wikibase-listdatatypes-geo-shape-body": "Hivatkozás a Wikimédia Commonsban (vagy más beállított wikiben) tárolt földrajziforma-adatokra. Lásd a „https://www.mediawiki.org/wiki/Help:Map_Data” lapot további információkért.",
+	"wikibase-listdatatypes-geo-shape-body": "Hivatkozás a Wikimédia Commonsban (vagy más beállított wikiben) tárolt földrajziforma-adatokra. Lásd a „https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Map_Data” lapot további információkért.",
 	"wikibase-listdatatypes-tabular-data-head": "Táblázatos adat",
 	"wikibase-listdatatypes-quantity-head": "Mennyiség",
 	"wikibase-listdatatypes-monolingualtext-head": "Egynyelvű szöveg",

@@ -23,7 +23,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ؤة زوونةل فرةتر/ویشتر",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "پیکربندی",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "نمایش برچسب‌ها، نام‌های مستعار و توضیحات‌ها به تمام زبان‌هایی که بلدم",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "اگر در صفحه کاربری‌تان از [[mw:Extension:Babel|بابل]] استفاده کنید، از زبان‌های دیگری جدای از زبان رابط کاربری نیز می‌توانید استفاده کنید.",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "اگر در صفحه کاربری‌تان از [[mw:Special:MyLanguage/Extension:Babel|بابل]] استفاده کنید، از زبان‌های دیگری جدای از زبان رابط کاربری نیز می‌توانید استفاده کنید.",
 	"wikibase-entitytermsforlanguagelistview-aliases": "همچنین شناخته می‌شود با",
 	"wikibase-entitytermsforlanguagelistview-description": "توضیحةل",
 	"wikibase-entitytermsforlanguagelistview-label": "برچسب",
