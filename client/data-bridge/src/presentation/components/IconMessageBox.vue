@@ -43,7 +43,6 @@ export default class IconMessageBox extends Vue {
 <style lang="scss">
 .wb-ui-icon-message-box {
 	box-sizing: border-box;
-	text-align: left;
 	position: relative;
 
 	&__content {
