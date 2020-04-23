@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 
-use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\Deserialization\AliasesChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\TermChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 
 /**

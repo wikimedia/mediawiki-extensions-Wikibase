@@ -132,7 +132,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertInstanceOf( EntityRevision::class, $itemRev, 'Entity ' . $itemId );
 		$this->assertInstanceOf( Item::class, $itemRev->getEntity(), 'Entity ' . $itemId );
 		$this->assertEquals( 23, $itemRev->getRevisionId() );
-		$this->assertEquals( '20130101000000', $itemRev->getTimestamp() );
+		$this->assertSame( '20130101000000', $itemRev->getTimestamp() );
 
 		// test latest prop
 		$propRev = $this->repo->getEntityRevision( $propId );
@@ -566,7 +566,7 @@ class MockRepositoryTest extends TestCase {
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
 			$this->assertEquals( 'Q1', $ex->getRedirectTargetId()->getSerialization() );
 			$this->assertEquals( 117, $ex->getRevisionId() );
-			$this->assertEquals( '20150505000000', $ex->getRevisionTimestamp() );
+			$this->assertSame( '20150505000000', $ex->getRevisionTimestamp() );
 		}
 	}
 

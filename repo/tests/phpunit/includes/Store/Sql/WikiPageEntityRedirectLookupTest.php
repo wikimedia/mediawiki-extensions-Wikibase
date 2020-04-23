@@ -6,18 +6,18 @@ use ContentHandler;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
-use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
-use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
-use WikiPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
+use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
+use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\WikiPageEntityRedirectLookup

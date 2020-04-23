@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Repo\ChangeOp\ChangeOpAliases;
-use Wikibase\Repo\ChangeOp\ChangeOpAliasesResult;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\ItemContent;
+use Wikibase\Repo\ChangeOp\ChangeOpAliases;
+use Wikibase\Repo\ChangeOp\ChangeOpAliasesResult;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**

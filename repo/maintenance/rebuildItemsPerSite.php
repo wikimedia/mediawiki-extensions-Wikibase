@@ -11,8 +11,8 @@ use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\IO\EntityIdReader;
 use Wikibase\Repo\IO\LineReader;
-use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
+use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 

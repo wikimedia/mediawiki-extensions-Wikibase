@@ -68,7 +68,7 @@ class ItemContent extends EntityContent {
 			throw new InvalidArgumentException( '$itemHolder must contain a Item entity!' );
 		}
 
-		if ( is_null( $entityRedirect ) !== is_null( $redirectTitle ) ) {
+		if ( ( $entityRedirect === null ) !== ( $redirectTitle === null ) ) {
 			throw new InvalidArgumentException(
 				'$entityRedirect and $redirectTitle must both be provided or both be empty.' );
 		}

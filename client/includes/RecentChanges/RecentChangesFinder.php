@@ -65,7 +65,7 @@ class RecentChangesFinder {
 
 			if ( $rev_id === $changeRevId
 				&& $parent_id === $changeParentId ) {
-				return (int) $rc->rc_id;
+				return (int)$rc->rc_id;
 			}
 		}
 

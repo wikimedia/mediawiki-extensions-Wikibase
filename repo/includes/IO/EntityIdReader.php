@@ -5,9 +5,9 @@ namespace Wikibase\Repo\IO;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
-use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 
 /**
  * EntityIdReader reads entity IDs from a file, one per line.

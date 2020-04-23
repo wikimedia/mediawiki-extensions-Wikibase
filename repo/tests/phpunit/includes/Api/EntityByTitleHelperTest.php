@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
+use ApiUsageException;
 use HashSiteStore;
 use MediaWikiSite;
 use Site;
 use SiteLookup;
 use Title;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\StringNormalizer;

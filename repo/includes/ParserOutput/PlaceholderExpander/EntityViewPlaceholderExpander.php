@@ -14,8 +14,8 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
-use Wikibase\View\TermsListView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\TermsListView;
 
 /**
  * Utility for expanding placeholders left in the HTML

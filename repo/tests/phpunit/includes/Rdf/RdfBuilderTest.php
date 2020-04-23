@@ -487,7 +487,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
 		$data = $builder->getRDF();
-		$this->assertEquals( "", $data, "Should return empty string" );
+		$this->assertSame( "", $data, "Should return empty string" );
 
 		// Props disabled by config of vocabulary
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL );
@@ -496,7 +496,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 
 		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
 		$data = $builder->getRDF();
-		$this->assertEquals( "", $data, "Should return empty string" );
+		$this->assertSame( "", $data, "Should return empty string" );
 	}
 
 }

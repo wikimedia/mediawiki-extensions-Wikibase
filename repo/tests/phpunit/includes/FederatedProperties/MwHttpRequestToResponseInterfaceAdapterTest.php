@@ -95,7 +95,7 @@ class MwHttpRequestToResponseInterfaceAdapterTest extends \PHPUnit\Framework\Tes
 			'some-header' => [ 'some', 'such' ],
 		] );
 		$response = new MwHttpRequestToResponseInterfaceAdapter( $mwHttpReq );
-		$this->assertEquals( '', $response->getHeaderLine( 'foo' ) );
+		$this->assertSame( '', $response->getHeaderLine( 'foo' ) );
 	}
 
 	public function testGetProtocolVersionIsNotImplemented() {

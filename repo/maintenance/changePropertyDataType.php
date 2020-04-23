@@ -5,11 +5,11 @@ namespace Wikibase;
 use Exception;
 use InvalidArgumentException;
 use Maintenance;
+use User;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\PropertyDataTypeChanger;
 use Wikibase\Repo\WikibaseRepo;
-use User;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 require_once $basePath . '/maintenance/Maintenance.php';

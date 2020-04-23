@@ -5,15 +5,15 @@ namespace Wikibase\Client\Hooks;
 use Html;
 use IContextSource;
 use Title;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\UsageLookup;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\WikibaseClient;
 
 /**
  * @license GPL-2.0-or-later

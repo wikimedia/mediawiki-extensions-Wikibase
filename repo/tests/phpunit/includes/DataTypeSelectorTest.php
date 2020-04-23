@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Wikibase\Lib\DataType;
 use MWException;
 use Wikibase\DataTypeSelector;
+use Wikibase\Lib\DataType;
 
 /**
  * @covers \Wikibase\DataTypeSelector

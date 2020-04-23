@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
-use Wikibase\Client\WikibaseClient;
 use MediaWiki\MediaWikiServices;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Integration test for statsd tracking.

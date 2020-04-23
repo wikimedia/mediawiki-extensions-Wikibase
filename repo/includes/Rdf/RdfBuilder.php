@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

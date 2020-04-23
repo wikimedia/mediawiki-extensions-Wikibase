@@ -10,8 +10,8 @@ use MediaWiki\Permissions\PermissionManager;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationException;
 
 /**
  * API module for creating entity redirects.

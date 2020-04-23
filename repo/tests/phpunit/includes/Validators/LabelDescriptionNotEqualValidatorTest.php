@@ -7,8 +7,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Repo\Validators\NotEqualViolation;
 use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
+use Wikibase\Repo\Validators\NotEqualViolation;
 
 /**
  * @covers \Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator

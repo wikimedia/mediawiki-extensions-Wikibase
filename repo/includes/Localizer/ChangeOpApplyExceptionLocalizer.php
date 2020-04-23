@@ -42,7 +42,7 @@ class ChangeOpApplyExceptionLocalizer implements ExceptionLocalizer {
 			throw new InvalidArgumentException( '$exception cannot be localized.' );
 		}
 
-		/** @var ChangeOpApplyException $exception  */
+		/** @var ChangeOpApplyException $exception */
 		'@phan-var ChangeOpApplyException $exception';
 		return $this->getMessage( $exception );
 	}

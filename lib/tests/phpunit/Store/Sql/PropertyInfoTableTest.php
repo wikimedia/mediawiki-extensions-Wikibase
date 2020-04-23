@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql;
 
-use MediaWikiTestCase;
 use InvalidArgumentException;
+use MediaWikiTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;

@@ -395,7 +395,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		if ( $redirect ) {
 			$this->assertEquals( 1, $result['redirected'] );
 		} else {
-			$this->assertEquals( 0, $result['redirected'] );
+			$this->assertSame( 0, $result['redirected'] );
 		}
 	}
 

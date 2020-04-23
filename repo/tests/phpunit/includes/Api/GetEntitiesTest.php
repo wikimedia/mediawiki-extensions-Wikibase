@@ -190,7 +190,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 
 		//Our missing counter should now be at 0, if it is not we have seen too many or not enough missing entities
 		if ( array_key_exists( 'missing', $expected ) ) {
-			$this->assertEquals( 0, $expected['missing'] );
+			$this->assertSame( 0, $expected['missing'] );
 		}
 
 		if ( array_key_exists( 'normalized', $expected ) && $expected['normalized'] === true ) {

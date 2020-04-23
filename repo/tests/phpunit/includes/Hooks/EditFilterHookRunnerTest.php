@@ -17,9 +17,9 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\Repo\Content\EntityContentFactory;
 
 /**
  * @covers \Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner

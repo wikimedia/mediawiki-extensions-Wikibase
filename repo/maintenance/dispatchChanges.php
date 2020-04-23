@@ -7,8 +7,8 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use MWExceptionHandler;
-use Psr\Log\LoggerInterface;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\ChunkCache;
@@ -16,10 +16,10 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ChangeDispatcher;
 use Wikibase\Repo\Notifications\JobQueueChangeNotificationSender;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
@@ -355,7 +355,7 @@ class DispatchChanges extends Maintenance {
 		$repoID = wfWikiID();
 		$lockManagerName = $settings->getSetting( 'dispatchingLockManager' );
 		$LBFactory = $services->getDBLoadBalancerFactory();
-		if ( !is_null( $lockManagerName ) ) {
+		if ( $lockManagerName !== null ) {
 			$lockManager = $services->getLockManagerGroupFactory()
 				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
 			return new LockManagerSqlChangeDispatchCoordinator(

@@ -10,10 +10,10 @@ use Psr\Log\NullLogger;
 use RuntimeException;
 use WANObjectCache;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Store\ChangeDispatchCoordinator;
+use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
 use Wikibase\Repo\Store\Sql\SqlChangeDispatchCoordinator;
+use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -89,7 +89,7 @@ class TestDispatchCoordinator extends Maintenance {
 			'lock',
 			$settings->getSetting( 'dispatchingLockManager' )
 		);
-		if ( !is_null( $lockManagerName ) ) {
+		if ( $lockManagerName !== null ) {
 			$lockManager = MediaWikiServices::getInstance()->getLockManagerGroupFactory()
 				->getLockManagerGroup( wfWikiID() )->get( $lockManagerName );
 			$coordinator = new LockManagerSqlChangeDispatchCoordinator(
@@ -130,7 +130,7 @@ class TestDispatchCoordinator extends Maintenance {
 				$this->log( "Could not get a lock on any client wiki. Sleep and retry." );
 				sleep( 1 );
 			}
-		};
+		}
 
 		$this->writeTestValue( $clientId, 0 );
 

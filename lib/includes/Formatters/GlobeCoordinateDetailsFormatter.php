@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Formatters;
 
-use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
+use DataValues\Geo\Formatters\LatLongFormatter;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use Html;
 use InvalidArgumentException;

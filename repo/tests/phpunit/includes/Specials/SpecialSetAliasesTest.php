@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\CopyrightMessageBuilder;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetAliases;
 use Wikibase\Repo\WikibaseRepo;

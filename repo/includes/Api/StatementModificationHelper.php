@@ -3,13 +3,10 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiUsageException;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
-use ApiUsageException;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -21,6 +18,9 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\SnakFactory;
 
 /**

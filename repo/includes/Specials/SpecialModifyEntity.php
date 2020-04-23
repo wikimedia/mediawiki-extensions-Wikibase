@@ -2,22 +2,22 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Status;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\SummaryFormatter;
 
 /**

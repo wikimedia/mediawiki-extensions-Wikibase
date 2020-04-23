@@ -3,8 +3,8 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\DataValue;
-use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use DataValues\MonolingualTextValue;
 use DataValues\QuantityValue;
 use DataValues\StringValue;

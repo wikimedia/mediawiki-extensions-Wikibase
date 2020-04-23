@@ -11,9 +11,9 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\SnakHtmlGenerator;
+use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 
 /**

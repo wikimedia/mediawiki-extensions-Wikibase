@@ -10,15 +10,15 @@ use MediaWiki\User\UserIdentityValue;
 use MWException;
 use RecentChange;
 use Title;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikimedia\TestingAccessWrapper;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\WikibaseSettings;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Lib\Changes\EntityChange

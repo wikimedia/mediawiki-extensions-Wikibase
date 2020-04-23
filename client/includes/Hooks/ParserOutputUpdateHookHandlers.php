@@ -6,10 +6,10 @@ use Content;
 use ParserOutput;
 use StubUserLang;
 use Title;
-use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\LangLinkHandler;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @license GPL-2.0-or-later

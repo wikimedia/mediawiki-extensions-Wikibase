@@ -3,19 +3,19 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
-use Exception;
 use ApiUsageException;
+use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 

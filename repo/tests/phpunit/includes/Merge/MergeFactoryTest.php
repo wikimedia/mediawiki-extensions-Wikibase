@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\Merge;
 
 use HashSiteStore;
 use TestSites;
-use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
-use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
+use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Merge\StatementsMerger;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\EntityConstraintProvider;

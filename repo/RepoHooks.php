@@ -32,11 +32,11 @@ use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
-use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
+use Wikibase\Lib\Formatters\AutoCommentFormatter;
+use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
@@ -44,10 +44,10 @@ use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
-use Wikibase\Repo\Store\Sql\DispatchStats;
-use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\Repo\Store\Sql\DispatchStats;
+use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**

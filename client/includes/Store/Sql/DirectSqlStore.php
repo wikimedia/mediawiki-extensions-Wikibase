@@ -6,10 +6,6 @@ use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
-use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\CachingPropertyInfoLookup;
-use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
@@ -22,17 +18,21 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\CachingEntityRevisionLookup;
+use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\CachingSiteLinkLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityRevisionCache;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
+use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * Implementation of the client store interface using direct access to the repository's

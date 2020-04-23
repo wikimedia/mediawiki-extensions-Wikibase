@@ -3,9 +3,9 @@
 namespace Wikibase;
 
 use Hooks;
+use Maintenance;
 use MWException;
 use OrderedStreamingForkController;
-use Maintenance;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\WikibaseRepo;

@@ -3,22 +3,22 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiUsageException;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Permissions\PermissionManager;
 use OutOfBoundsException;
 use Status;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\FormatableSummary;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -168,7 +168,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		}
 
 		$new = $params['new'] ?? null;
-		if ( is_null( $entityRevision ) ) {
+		if ( $entityRevision === null ) {
 			if ( $baseRev > 0 ) {
 				$this->errorReporter->dieError(
 					'Could not find revision ' . $baseRev,

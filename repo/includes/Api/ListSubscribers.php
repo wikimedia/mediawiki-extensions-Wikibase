@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
-use ApiQueryBase;
 use ApiQuery;
+use ApiQueryBase;
 use ApiResult;
 use SiteLookup;
 use stdClass;
@@ -99,7 +99,7 @@ class ListSubscribers extends ApiQueryBase {
 
 		$this->addWhereFld( 'cs_entity_id', $idStrings );
 
-		if ( !is_null( $continue ) ) {
+		if ( $continue !== null ) {
 			$this->addContinue( $continue );
 		}
 

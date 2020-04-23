@@ -6,11 +6,11 @@ use ChangesList;
 use RequestContext;
 use Title;
 use Wikibase\Client\Store\TitleFactory;
+use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**

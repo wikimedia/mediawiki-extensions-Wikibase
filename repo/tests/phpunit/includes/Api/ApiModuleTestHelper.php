@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiUsageException;
 use Exception;
 use FauxRequest;
-use ApiUsageException;
 use PHPUnit\Framework\Assert;
 use User;
 use Wikimedia\TestingAccessWrapper;

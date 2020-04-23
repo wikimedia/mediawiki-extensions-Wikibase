@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 use DataValues\StringValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\TabularDataRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
  * @covers \Wikibase\Repo\Rdf\Values\TabularDataRdfBuilder

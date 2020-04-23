@@ -102,7 +102,7 @@ class ShortDescHandler {
 	 */
 	private function parseNoReplace( $parser, $controlArg ) {
 		static $magicWord = null;
-		if ( is_null( $magicWord ) ) {
+		if ( $magicWord === null ) {
 			$magicWord = $parser->getMagicWordFactory()->get( 'shortdesc_noreplace' );
 		}
 		return $magicWord->matchStartToEnd( $controlArg );

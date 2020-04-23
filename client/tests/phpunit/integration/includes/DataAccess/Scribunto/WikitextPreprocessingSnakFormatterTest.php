@@ -3,8 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
 use DataValues\StringValue;
-use MediaWiki\MediaWikiServices;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Parser;
 use ParserOptions;

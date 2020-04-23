@@ -37,7 +37,7 @@ class RevisionDataTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetTimestamp() {
 		$revisionData = $this->newRevisionData();
-		$this->assertEquals( '20130819111741', $revisionData->getTimestamp() );
+		$this->assertSame( '20130819111741', $revisionData->getTimestamp() );
 	}
 
 	public function testGetComment() {

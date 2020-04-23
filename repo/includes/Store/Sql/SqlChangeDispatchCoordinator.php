@@ -7,13 +7,13 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\MediaWikiServices;
 use Monolog\Processor\PsrLogMessageProcessor;
 use MWException;
-use Psr\Log\LoggerInterface;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
+use Psr\Log\LoggerInterface;
 use Wikibase\Repo\Store\ChangeDispatchCoordinator;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DBUnexpectedError;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 

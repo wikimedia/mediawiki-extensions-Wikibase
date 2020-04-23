@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
-use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**

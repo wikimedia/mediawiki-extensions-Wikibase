@@ -12,10 +12,10 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\ChangeTransmitter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 
 /**
  * @covers \Wikibase\Repo\Notifications\ChangeNotifier

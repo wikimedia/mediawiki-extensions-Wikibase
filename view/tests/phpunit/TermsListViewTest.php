@@ -6,11 +6,11 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\View\LanguageDirectionalityLookup;
-use Wikibase\View\TermsListView;
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\TermsListView;
 
 /**
  * @covers \Wikibase\View\TermsListView

@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Tests\Unit;
 
 use Title;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Client\NamespaceChecker;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**

@@ -7,11 +7,11 @@ namespace Wikibase\Lib\Units;
  * Storage format:
  * Json map, each element is 'Qsource': [ <factor>, 'QstandardUnit' ]
  * Example:
-{
-"Q103510": [ "100000", "Q44395" ],
-"Q130964": [ "4.19", "Q25269" ],
-"Q182429": [ "1", "Q182429" ]
-}
+ * {
+ * "Q103510": [ "100000", "Q44395" ],
+ * "Q130964": [ "4.19", "Q25269" ],
+ * "Q182429": [ "1", "Q182429" ]
+ * }
  * Q182429 here is a primary unit since source and standard are the same.
  * Primary units must have factor of 1.
  * Another acceptable format is:

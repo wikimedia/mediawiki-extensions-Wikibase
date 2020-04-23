@@ -12,8 +12,8 @@ use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\HtmlTermRenderer;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SimpleEntityTermsView;
-use Wikibase\View\TermsListView;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\TermsListView;
 
 /**
  * An EntityTermsView that returns placeholders for some parts of the HTML

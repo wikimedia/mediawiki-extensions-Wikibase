@@ -5,13 +5,13 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use Deserializers\Exceptions\DeserializationException;
-use Wikibase\Repo\ChangeOp\ChangeOpReference;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\ChangeOp\ChangeOpReference;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 
 /**
  * API module for creating a reference or setting the value of an existing one.

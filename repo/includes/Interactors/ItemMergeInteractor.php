@@ -5,9 +5,6 @@ namespace Wikibase\Repo\Interactors;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\PermissionManager;
 use User;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
-use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -19,6 +16,9 @@ use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpsMerge;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\SummaryFormatter;
@@ -62,8 +62,8 @@ class ItemMergeInteractor {
 	private $user;
 
 	/**
-	* @var ItemRedirectCreationInteractor
-	*/
+	 * @var ItemRedirectCreationInteractor
+	 */
 	private $interactorRedirect;
 
 	/**

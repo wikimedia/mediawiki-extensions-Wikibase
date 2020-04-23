@@ -3,9 +3,9 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikimedia\Assert\Assert;
 
 /**

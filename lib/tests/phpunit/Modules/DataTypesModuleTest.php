@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Modules;
 
-use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use ResourceLoaderContext;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Modules\DataTypesModule;
 
 /**

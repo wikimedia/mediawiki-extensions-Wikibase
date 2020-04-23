@@ -4,15 +4,15 @@ namespace Wikibase\Dumpers;
 
 use InvalidArgumentException;
 use LogicException;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\Lib\Reporting\ExceptionHandler;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
+use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\RethrowingExceptionHandler;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 
 /**

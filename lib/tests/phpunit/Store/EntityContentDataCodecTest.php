@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
 use MediaWikiTestCase;
 use MWContentSerializationException;
-use Wikibase\Lib\Store\EntityContentTooBigException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -18,6 +17,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\InternalSerialization\DeserializerFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityContentTooBigException;
 
 /**
  * @covers \Wikibase\Lib\Store\EntityContentDataCodec

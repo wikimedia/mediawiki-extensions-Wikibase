@@ -14,14 +14,14 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\Interactors\RedirectCreationException;
-use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
-use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationException;
+use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Interactors\ItemRedirectCreationInteractor

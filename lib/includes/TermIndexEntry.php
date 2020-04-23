@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib;
 
-use Wikimedia\Assert\Assert;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
+use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**

@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
 use Language;
-use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikimedia\Assert\ParameterElementTypeException;
 use Wikimedia\Assert\ParameterTypeException;
 

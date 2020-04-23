@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
+use Wikibase\Repo\ChangeOp\ChangeOps;
 
 /**
  * Constructs ChangeOps for item change requests

@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use Onoi\MessageReporter\MessageReporter;
 use PHPUnit\Framework\MockObject\Matcher\Invocation;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Onoi\MessageReporter\MessageReporter;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 

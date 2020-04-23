@@ -8,13 +8,13 @@ use MediaWiki\MediaWikiServices;
 use Scribunto_LuaLibraryBase;
 use ScribuntoException;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
-use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\DataAccess\PropertyIdResolver;
 use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
+use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension

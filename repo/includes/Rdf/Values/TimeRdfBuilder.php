@@ -71,7 +71,7 @@ class TimeRdfBuilder implements ValueSnakRdfBuilder {
 
 	private function sayDateLiteral( RdfWriter $writer, TimeValue $value ) {
 		$dateValue = $this->dateCleaner->getStandardValue( $value );
-		if ( !is_null( $dateValue ) ) {
+		if ( $dateValue !== null ) {
 			// XXX: type should perhaps depend on precision.
 			$writer->value( $dateValue, 'xsd', 'dateTime' );
 		} else {

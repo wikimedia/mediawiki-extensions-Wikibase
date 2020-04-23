@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use InvalidArgumentException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\DataModel\Entity\ItemId;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory

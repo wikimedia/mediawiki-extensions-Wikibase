@@ -2,25 +2,25 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use InvalidArgumentException;
 use Language;
+use MediaWiki\Logger\LoggerFactory;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Term\Fingerprint;
-use Wikibase\DataModel\Term\FingerprintProvider;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Summary;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\SummaryFormatter;
-use MediaWiki\Logger\LoggerFactory;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase entity that features

@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use DataValues\StringValue;
 use FormatJson;
 use MediaWiki\Revision\RevisionRecord;
-use ApiUsageException;
 use PHPUnit\Framework\Constraint\Constraint;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;

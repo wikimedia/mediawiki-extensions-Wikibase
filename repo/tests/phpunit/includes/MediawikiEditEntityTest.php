@@ -19,10 +19,10 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntity;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediawikiEditEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -99,10 +99,10 @@ class MediawikiEditEntityTest extends MediaWikiTestCase {
 		Status $status = null,
 		$expects = null
 	) {
-		if ( is_null( $status ) ) {
+		if ( $status === null ) {
 			$status = Status::newGood();
 		}
-		if ( is_null( $expects ) ) {
+		if ( $expects === null ) {
 			$expects = $this->any();
 		}
 		$runner = $this->getMockBuilder( EditFilterHookRunner::class )

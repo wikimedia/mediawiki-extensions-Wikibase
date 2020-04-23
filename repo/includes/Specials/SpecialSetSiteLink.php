@@ -2,21 +2,21 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use InvalidArgumentException;
 use OutOfBoundsException;
 use SiteLookup;
 use Status;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\SummaryFormatter;
 
@@ -421,7 +421,7 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 
 			$itemTitle = $this->getEntityTitle( $badgeId );
 
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
+			if ( $itemTitle === null || !$itemTitle->exists() ) {
 				$status->fatal( 'wikibase-wikibaserepopage-invalid-id', $badgeId );
 				return false;
 			}

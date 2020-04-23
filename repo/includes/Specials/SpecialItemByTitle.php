@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Psr\Log\LoggerInterface;
 use Site;
 use SiteLookup;

@@ -38,7 +38,7 @@ class EntitySourceDefinitionsLegacyClientSettingsParser {
 			unset( $repoSettingsArray[''] );
 		}
 
-		if ( !isset( $localEntityNamespaces, $localDatabaseName, $localConceptBaseUri ) ) {
+		if ( !isset( $localEntityNamespaces ) || !isset( $localDatabaseName ) || !isset( $localConceptBaseUri ) ) {
 			throw new InvalidArgumentException( 'local entity source not defined!' );
 		}
 

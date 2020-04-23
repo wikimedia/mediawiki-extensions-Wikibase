@@ -29,9 +29,9 @@ abstract class BaseUnitStorage implements UnitStorage {
 	 * Load data from storage.
 	 */
 	private function loadData() {
-		if ( is_null( $this->storageData ) ) {
+		if ( $this->storageData === null ) {
 			$this->storageData = $this->loadStorageData();
-			if ( is_null( $this->storageData ) ) {
+			if ( $this->storageData === null ) {
 				throw new \RuntimeException( "Failed to load unit storage" );
 			}
 		}
@@ -43,7 +43,7 @@ abstract class BaseUnitStorage implements UnitStorage {
 	 * @return bool
 	 */
 	public function isPrimaryUnit( $unit ) {
-		if ( is_null( $this->storageData ) ) {
+		if ( $this->storageData === null ) {
 			$this->loadData();
 		}
 		if ( !isset( $this->storageData[$unit] ) ) {
@@ -59,7 +59,7 @@ abstract class BaseUnitStorage implements UnitStorage {
 	 *                    'unit' => primary unit
 	 */
 	public function getConversion( $unit ) {
-		if ( is_null( $this->storageData ) ) {
+		if ( $this->storageData === null ) {
 			$this->loadData();
 		}
 		if ( !isset( $this->storageData[$unit] ) ) {

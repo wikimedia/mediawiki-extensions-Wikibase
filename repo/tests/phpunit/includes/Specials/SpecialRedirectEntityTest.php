@@ -12,18 +12,18 @@ use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\MessageException;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
-use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Interactors\RedirectCreationException;
 use Wikibase\Repo\Interactors\TokenCheckException;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Specials\SpecialRedirectEntity;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
-use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialRedirectEntity

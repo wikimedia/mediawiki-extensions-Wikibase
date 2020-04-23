@@ -5,8 +5,8 @@ namespace Wikibase\Lib\Tests\Store;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 
 /**
  * @covers \Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup

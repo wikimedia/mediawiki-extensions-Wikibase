@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @group Wikibase

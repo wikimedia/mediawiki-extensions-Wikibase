@@ -6,8 +6,6 @@ use ApiMain;
 use DataValues\StringValue;
 use RuntimeException;
 use ValueValidators\Result;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -18,6 +16,8 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\StatementModificationHelper;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\WikibaseRepo;
 

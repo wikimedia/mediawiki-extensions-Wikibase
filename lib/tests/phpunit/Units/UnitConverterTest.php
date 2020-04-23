@@ -83,11 +83,11 @@ class UnitConverterTest extends \PHPUnit\Framework\TestCase {
 		$q = new QuantityValue( $decimal, 'http://acme.test/Q123', $up, $low );
 		$qConverted = $uc->toStandardUnits( $q );
 
-		$this->assertEquals( '+13.70', $qConverted->getAmount()->getValue(), 'Wrong amount' );
+		$this->assertSame( '+13.70', $qConverted->getAmount()->getValue(), 'Wrong amount' );
 		$this->assertEquals( 'http://acme.test/Q345', $qConverted->getUnit(), 'Wrong unit' );
-		$this->assertEquals( '+14.20', $qConverted->getUpperBound()->getValue(),
+		$this->assertSame( '+14.20', $qConverted->getUpperBound()->getValue(),
 			'Wrong upper bound' );
-		$this->assertEquals( '+13.64', $qConverted->getLowerBound()->getValue(),
+		$this->assertSame( '+13.64', $qConverted->getLowerBound()->getValue(),
 			'Wrong lower bound' );
 	}
 

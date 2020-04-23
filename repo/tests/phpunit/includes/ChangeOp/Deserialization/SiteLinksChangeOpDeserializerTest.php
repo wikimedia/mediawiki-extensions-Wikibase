@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeOp\Deserialization;
 use Exception;
 use HashSiteStore;
 use Site;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -15,6 +14,7 @@ use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinksChangeOpDeserializer;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**

@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
@@ -20,6 +19,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Validators\SnakValidator;
 

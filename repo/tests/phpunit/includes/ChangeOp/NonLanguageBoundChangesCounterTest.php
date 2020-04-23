@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\ChangeOpsResult;
+use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 
 /**
  * @covers \Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter

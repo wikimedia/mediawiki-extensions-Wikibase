@@ -4,11 +4,11 @@ namespace Wikibase\Client\Tests\Unit\Serializer;
 
 use DataValues\Serializers\DataValueSerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
-use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Statement\StatementList;
 
 /**
  * @covers \Wikibase\Client\Serializer\ClientStatementListSerializer

@@ -28,8 +28,8 @@ use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

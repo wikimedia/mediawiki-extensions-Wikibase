@@ -3,18 +3,18 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
-use LogicException;
 use ApiUsageException;
+use LogicException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\BadRevisionException;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
-use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 
 /**

@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo;
 
-use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
+use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use User;
 
 /**
  * Class for changing a property's data type.

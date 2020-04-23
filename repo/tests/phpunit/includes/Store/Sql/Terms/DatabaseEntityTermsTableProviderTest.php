@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
-use Wikibase\Repo\Store\Sql\Terms\DatabaseEntityTermsTableProvider;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\Store\Sql\Terms\DatabaseEntityTermsTableProvider;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\Terms\DatabaseEntityTermsTableProvider

@@ -10,11 +10,11 @@ use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers \Wikibase\Client\Changes\ChangeRunCoalescer

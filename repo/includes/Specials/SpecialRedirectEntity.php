@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Specials;
 
 use Exception;
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

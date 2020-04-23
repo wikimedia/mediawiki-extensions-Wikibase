@@ -5,15 +5,15 @@ namespace Wikibase\Client\Usage\Sql;
 use ArrayIterator;
 use InvalidArgumentException;
 use Traversable;
-use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\DBError;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
 use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikimedia\Rdbms\DBError;
+use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * An SQL based usage tracker implementation.

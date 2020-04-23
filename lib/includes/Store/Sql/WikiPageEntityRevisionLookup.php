@@ -11,13 +11,13 @@ use Psr\Log\LoggerInterface;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\Lib\Store\InconsistentRedirectException;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\DivergingEntityIdException;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\InconsistentRedirectException;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
 

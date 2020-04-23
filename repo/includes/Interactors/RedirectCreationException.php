@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Interactors;
 
-use Wikibase\Lib\MessageException;
 use Exception;
+use Wikibase\Lib\MessageException;
 
 /**
  * Exception representing a failure to execute the "create redirect" use case.

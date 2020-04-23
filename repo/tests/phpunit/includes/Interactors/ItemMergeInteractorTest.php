@@ -10,20 +10,20 @@ use Status;
 use TestSites;
 use Title;
 use User;
-use Wikibase\Lib\Store\LatestRevisionIdResult;
-use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
+use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\EntityModificationTestHelper;
-use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Interactors\ItemMergeInteractor

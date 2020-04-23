@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
-use Wikibase\Lib\Store\ChunkAccess;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Lib\Store\ChunkAccess;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IResultWrapper;
 

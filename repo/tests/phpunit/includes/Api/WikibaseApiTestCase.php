@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ApiUsageException;
 use ChangeTags;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
@@ -11,7 +12,6 @@ use Revision;
 use TestSites;
 use TestUser;
 use Title;
-use ApiUsageException;
 use User;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;

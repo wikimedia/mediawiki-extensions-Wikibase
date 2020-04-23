@@ -8,9 +8,9 @@ use HashSiteStore;
 use Language;
 use TestSites;
 use Title;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 

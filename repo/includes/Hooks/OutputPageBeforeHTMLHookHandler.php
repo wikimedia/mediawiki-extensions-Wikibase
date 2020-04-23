@@ -6,10 +6,10 @@ use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\EntityFactory;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
@@ -27,8 +27,8 @@ use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
-use Wikibase\View\ToolbarEditSectionGenerator;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
+use Wikibase\View\ToolbarEditSectionGenerator;
 
 /**
  * Handler for the "OutputPageBeforeHTML" hook.

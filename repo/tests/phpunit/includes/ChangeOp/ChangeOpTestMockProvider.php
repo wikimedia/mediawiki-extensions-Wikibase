@@ -2,14 +2,12 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use PHPUnit\Framework\MockObject\MockBuilder;
-use PHPUnit\Framework\MockObject\MockObject;
-use Wikibase\Lib\DataType;
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use OutOfBoundsException;
+use PHPUnit\Framework\MockObject\MockBuilder;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ValueValidators\Error;
 use ValueValidators\Result;
@@ -26,12 +24,14 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
-use Wikibase\Repo\Validators\NullFingerprintValidator;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
+use Wikibase\Repo\Validators\NullFingerprintValidator;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;

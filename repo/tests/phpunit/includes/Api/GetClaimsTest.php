@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ApiUsageException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;

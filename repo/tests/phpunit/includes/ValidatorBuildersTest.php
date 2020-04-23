@@ -10,6 +10,7 @@ use DataValues\QuantityValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
@@ -25,7 +26,6 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\CachingCommonsMediaFileNameLookup;
 use Wikibase\Repo\ValidatorBuilders;
-use MediaWiki\Site\MediaWikiPageNameNormalizer;
 
 /**
  * @covers \Wikibase\Repo\ValidatorBuilders

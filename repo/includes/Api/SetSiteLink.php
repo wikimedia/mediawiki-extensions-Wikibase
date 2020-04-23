@@ -3,18 +3,18 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
-use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
+use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.

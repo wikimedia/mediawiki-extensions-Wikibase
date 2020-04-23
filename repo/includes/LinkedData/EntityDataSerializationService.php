@@ -20,13 +20,13 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Lib\Store\RedirectRevision;
+use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikimedia\Purtle\RdfWriterFactory;
 

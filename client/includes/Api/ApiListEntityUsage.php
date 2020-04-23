@@ -214,7 +214,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		$this->addWhereFld( 'eu_entity_id', $params['entities'] );
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$this->addContinue( $params['continue'] );
 		}
 

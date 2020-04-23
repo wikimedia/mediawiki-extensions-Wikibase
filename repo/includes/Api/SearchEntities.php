@@ -142,13 +142,13 @@ class SearchEntities extends ApiBase {
 
 		$displayLabel = $match->getDisplayLabel();
 
-		if ( !is_null( $displayLabel ) ) {
+		if ( $displayLabel !== null ) {
 			$entry['label'] = $displayLabel->getText();
 		}
 
 		$displayDescription = $match->getDisplayDescription();
 
-		if ( !is_null( $displayDescription ) ) {
+		if ( $displayDescription !== null ) {
 			$entry['description'] = $displayDescription->getText();
 		}
 

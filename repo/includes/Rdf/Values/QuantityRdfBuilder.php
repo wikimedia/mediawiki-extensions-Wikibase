@@ -110,7 +110,7 @@ class QuantityRdfBuilder implements ValueSnakRdfBuilder {
 	 * @param string|null $normLName
 	 */
 	private function linkNormalizedValue( $valueNamespace, $valueLName, $normLName ) {
-		if ( is_null( $valueLName ) || is_null( $normLName ) ) {
+		if ( $valueLName === null || $normLName === null ) {
 			return;
 		}
 		$valueWriter = $this->complexValueHelper->getValueNodeWriter();

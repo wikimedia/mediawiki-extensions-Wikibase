@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\SimpleCache\CacheInterface;
-use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;

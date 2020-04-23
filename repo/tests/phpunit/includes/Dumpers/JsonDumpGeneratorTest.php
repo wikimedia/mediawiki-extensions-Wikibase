@@ -2,11 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Dumpers;
 
-use Exception;
 use DataValues\Serializers\DataValueSerializer;
+use Exception;
 use InvalidArgumentException;
 use MWContentSerializationException;
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\DeserializerFactory;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -14,16 +16,14 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
-use Onoi\MessageReporter\MessageReporter;
+use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

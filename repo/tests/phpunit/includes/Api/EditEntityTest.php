@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use MediaWiki\MediaWikiServices;
 use ReadOnlyError;
 use User;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;

@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 
 /**
  * API module for setting the DataValue contained by the main snak of a claim.

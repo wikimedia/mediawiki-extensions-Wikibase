@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
-use Parser;
 use MediaWiki\MediaWikiServices;
+use Parser;
 use ParserOptions;
 use PPFrame;
 use PPNode;
@@ -13,10 +13,10 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRenderer;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**

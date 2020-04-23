@@ -9,6 +9,7 @@ use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -17,7 +18,6 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\Usage\EntityUsage;
 
 /**
  * @covers \Wikibase\Client\Hooks\EditActionHookHandler

@@ -9,12 +9,12 @@ use SiteLookup;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\EntityFactory;
+use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\SummaryFormatter;
 

@@ -4,8 +4,8 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
+use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
 
 /**
  * @covers \Wikibase\Repo\Validators\InterWikiLinkExistsValidator

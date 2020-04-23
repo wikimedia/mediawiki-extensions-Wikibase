@@ -6,10 +6,10 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Store\FieldPropertyInfoProvider;
-use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikibase\Lib\PropertyInfoSnakUrlExpander;
+use Wikibase\Lib\Store\FieldPropertyInfoProvider;
 use Wikibase\Lib\Store\PropertyInfoLookup;
+use Wikibase\Lib\Store\PropertyInfoProvider;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikimedia\Assert\ParameterTypeException;
 

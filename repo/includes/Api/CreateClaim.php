@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\ChangeOp\ChangeOpMainSnak;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Entity\PropertyId;
 
 /**
  * API module for creating claims.

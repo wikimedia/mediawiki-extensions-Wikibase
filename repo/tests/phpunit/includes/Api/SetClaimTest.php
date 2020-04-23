@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use DataValues\NumberValue;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use FormatJson;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -350,11 +350,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 			'claim' => FormatJson::encode( $serialized ),
 		];
 
-		if ( !is_null( $index ) ) {
+		if ( $index !== null ) {
 			$params['index'] = $index;
 		}
 
-		if ( !is_null( $baserevid ) ) {
+		if ( $baserevid !== null ) {
 			$params['baserevid'] = $baserevid;
 		}
 

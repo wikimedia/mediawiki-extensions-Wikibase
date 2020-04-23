@@ -4,11 +4,11 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 

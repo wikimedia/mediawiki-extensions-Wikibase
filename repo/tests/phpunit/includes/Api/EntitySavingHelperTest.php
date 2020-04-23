@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use FauxRequest;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Status;
-use ApiUsageException;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -16,13 +16,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Repo\EditEntity\EditEntity;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikibase\MediaInfo\DataModel\MediaInfoId;
 use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
+use Wikibase\Repo\EditEntity\EditEntity;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SummaryFormatter;
 

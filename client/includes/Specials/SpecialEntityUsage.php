@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Specials;
 
+use Html;
 use HtmlArmor;
 use HTMLForm;
-use Html;
 use Linker;
 use MediaWiki\MediaWikiServices;
 use QueryPage;

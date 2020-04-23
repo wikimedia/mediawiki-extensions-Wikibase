@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiUsageException;
 use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use Diff\Comparer\ComparableComparer;
@@ -12,8 +13,6 @@ use InvalidArgumentException;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
-use ApiUsageException;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -21,6 +20,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**

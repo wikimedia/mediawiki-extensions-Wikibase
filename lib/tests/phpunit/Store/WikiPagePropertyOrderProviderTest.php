@@ -2,11 +2,11 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
+use MediaWikiTestCase;
 use Title;
+use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use WikiPage;
 use WikitextContent;
-use MediaWikiTestCase;
 
 /**
  * @covers \Wikibase\Lib\Store\WikiPagePropertyOrderProvider

@@ -5,10 +5,10 @@ namespace Wikibase\Repo\Tests\Specials;
 use DataValues\Serializers\DataValueSerializer;
 use FauxRequest;
 use FauxResponse;
-use Language;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
+use Language;
 use OutputPage;
 use Psr\Log\NullLogger;
 use SiteList;
@@ -28,8 +28,8 @@ use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Specials\SpecialEntityData;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialEntityData

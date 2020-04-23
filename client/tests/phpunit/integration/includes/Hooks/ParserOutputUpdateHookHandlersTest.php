@@ -14,6 +14,8 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\LangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -30,12 +32,10 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\Client\LangLinkHandler;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers \Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers

@@ -5,13 +5,13 @@ namespace Wikibase\Lib\Store\Elastic;
 use CirrusSearch\Connection;
 use CirrusSearch\SearchConfig;
 use MediaWiki\MediaWikiServices;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 
 /**
  * Term lookup using ElasticSearch.

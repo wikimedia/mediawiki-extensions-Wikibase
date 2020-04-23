@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use MediaWiki\Storage\NameTableStore;
 use MediaWiki\Storage\NameTableAccessException;
+use MediaWiki\Storage\NameTableStore;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use WANObjectCache;

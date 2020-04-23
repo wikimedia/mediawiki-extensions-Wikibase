@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\View;
 
-use MediaWikiLangTestCase;
 use MediaWiki\MediaWikiServices;
+use MediaWikiLangTestCase;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 
 /**

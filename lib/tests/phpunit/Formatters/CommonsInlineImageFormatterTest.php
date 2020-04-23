@@ -8,9 +8,9 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use ParserOptions;
-use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
 
 /**
  * @covers \Wikibase\Lib\Formatters\CommonsInlineImageFormatter

@@ -2,8 +2,8 @@
 
 namespace Wikibase;
 
-use Wikibase\Lib\DataType;
 use MWException;
+use Wikibase\Lib\DataType;
 
 /**
  * Data provider for the property type (a.k.a. data type) selector UI element.

@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Specials;
 
 use Exception;
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Message;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
@@ -176,7 +176,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$fromTitle = $this->titleLookup->getTitleForId( $fromId );
 		$toTitle = $this->titleLookup->getTitleForId( $toId );
 
-		/** @var EntityRevision $newRevisionFrom  */
+		/** @var EntityRevision $newRevisionFrom */
 		/** @var EntityRevision $newRevisionTo */
 		list( $newRevisionFrom, $newRevisionTo, )
 			= $this->interactor->mergeItems( $fromId, $toId, $ignoreConflicts, $summary );

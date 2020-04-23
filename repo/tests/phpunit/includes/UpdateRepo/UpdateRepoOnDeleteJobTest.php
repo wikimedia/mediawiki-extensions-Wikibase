@@ -14,13 +14,13 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
 use Wikibase\SummaryFormatter;
-use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob

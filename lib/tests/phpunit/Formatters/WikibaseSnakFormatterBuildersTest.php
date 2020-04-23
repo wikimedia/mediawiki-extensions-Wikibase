@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use ValueFormatters\FormatterOptions;
@@ -11,10 +10,11 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 
 /**

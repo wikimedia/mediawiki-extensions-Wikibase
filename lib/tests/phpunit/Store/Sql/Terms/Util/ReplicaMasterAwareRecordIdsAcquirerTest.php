@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer;
-use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\DatabaseSqlite;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\Terms\Util\ReplicaMasterAwareRecordIdsAcquirer

@@ -18,9 +18,9 @@ use Title;
 use TitleValue;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\RepoHooks;
-use Wikibase\Repo\ParserOutput\TermboxView;
 use WikiImporter;
 
 /**

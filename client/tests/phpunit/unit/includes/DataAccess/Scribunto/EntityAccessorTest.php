@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
-use InvalidArgumentException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
+use InvalidArgumentException;
 use Language;
 use ReflectionMethod;
 use Wikibase\Client\DataAccess\Scribunto\EntityAccessor;

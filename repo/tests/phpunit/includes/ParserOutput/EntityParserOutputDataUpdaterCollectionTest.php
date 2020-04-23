@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use InvalidArgumentException;
 use ParserOutput;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Repo\ParserOutput\EntityParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\EntityParserOutputDataUpdaterCollection;
+use Wikibase\Repo\ParserOutput\EntityParserOutputUpdater;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\EntityParserOutputUpdater

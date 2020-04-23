@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Changes;
 
+use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
-use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpRemove;
 
 /**

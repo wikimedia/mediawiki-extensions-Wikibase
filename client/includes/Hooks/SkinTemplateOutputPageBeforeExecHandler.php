@@ -7,8 +7,8 @@ use OutputPage;
 use QuickTemplate;
 use Skin;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\RepoItemLinkGenerator;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Handler for the "SkinTemplateOutputPageBeforeExec" hook.

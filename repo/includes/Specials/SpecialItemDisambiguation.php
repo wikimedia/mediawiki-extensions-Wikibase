@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use WebRequest;
 use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;

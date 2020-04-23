@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Store;
 
 use MapCacheLRU;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\TermIndexEntry;
 

@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\EntityId;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\NullMessageReporter;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\TermIndexEntry;

@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use Deserializers\Deserializer;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**

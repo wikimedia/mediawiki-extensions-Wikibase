@@ -140,7 +140,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 			$this->addWhereFld( 'eu_entity_id', $params['entities'] );
 		}
 
-		if ( !is_null( $params['continue'] ) ) {
+		if ( $params['continue'] !== null ) {
 			$db = $this->getDB();
 			list( $pageContinueSql, $entityContinueSql, $aspectContinueSql ) = explode( '|', $params['continue'], 3 );
 			$pageContinue = (int)$pageContinueSql;

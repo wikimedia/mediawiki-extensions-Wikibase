@@ -2,13 +2,13 @@
 
 namespace Wikibase\View\Tests;
 
-use Wikibase\Lib\DataTypeFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\LanguageDirectionalityLookup;
 use Wikibase\View\LocalizedTextProvider;

@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
+use ApiUsageException;
+use DataValues\Geo\Parsers\GlobeCoordinateParser;
+use FauxRequest;
+use Language;
+use ValueParsers\NullParser;
+use ValueParsers\ParseException;
 use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\DataTypeFactory;
-use DataValues\Geo\Parsers\GlobeCoordinateParser;
-use FauxRequest;
-use Language;
-use ApiUsageException;
-use ValueParsers\NullParser;
-use ValueParsers\ParseException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\BuilderBasedDataTypeValidatorFactory;

@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Notifications;
 
-use Psr\Log\LoggerInterface;
 use JobQueueGroup;
 use JobSpecification;
+use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Changes\Change;
 
 /**

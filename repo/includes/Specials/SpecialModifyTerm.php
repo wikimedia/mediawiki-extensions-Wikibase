@@ -2,22 +2,22 @@
 
 namespace Wikibase\Repo\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use Language;
 use Status;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Lib\UserInputException;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\SummaryFormatter;
-use Wikibase\Lib\UserInputException;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.

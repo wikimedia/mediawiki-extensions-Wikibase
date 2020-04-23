@@ -7,8 +7,8 @@ use MediaWiki\Revision\SlotRecord;
 use MWException;
 use RecentChange;
 use User;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\EntityContent;
 
 /**

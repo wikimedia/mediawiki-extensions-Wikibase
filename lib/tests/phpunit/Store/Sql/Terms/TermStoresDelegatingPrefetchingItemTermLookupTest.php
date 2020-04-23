@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 

@@ -10,11 +10,11 @@ use MWException;
 use Psr\Log\LoggerInterface;
 use Title;
 use User;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnDelete;
 use Wikibase\Client\UpdateRepo\UpdateRepoOnMove;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\NamespaceChecker;
 use WikiPage;
 
 /**

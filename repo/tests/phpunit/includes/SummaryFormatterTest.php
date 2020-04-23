@@ -6,18 +6,18 @@ use DataValues\DataValue;
 use Language;
 use MediaWikiLangTestCase;
 use ValueFormatters\ValueFormatter;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Summary;
-use Wikibase\RepoHooks;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\RepoHooks;
 use Wikibase\SummaryFormatter;
 
 /**
@@ -459,7 +459,7 @@ class SummaryFormatterTest extends MediaWikiLangTestCase {
 
 		RepoHooks::onFormat( $comment, $pre, $auto, $post, $itemTitle, $local );
 
-		if ( is_null( $expected ) ) {
+		if ( $expected === null ) {
 			$this->assertNull( $comment, 'Didn\'t find the expected null' );
 		} else {
 			$this->assertRegExp( $expected, $comment, "Didn't find the expected final comment" );

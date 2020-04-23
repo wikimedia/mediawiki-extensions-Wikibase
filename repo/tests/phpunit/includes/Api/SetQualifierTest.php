@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use DataValues\StringValue;
 use FormatJson;
-use ApiUsageException;
 use PHPUnit\Framework\Constraint\Constraint;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;

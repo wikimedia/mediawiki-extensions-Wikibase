@@ -4,12 +4,12 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
+use Wikibase\Repo\ChangeOp\ChangeOpReferenceRemove;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**

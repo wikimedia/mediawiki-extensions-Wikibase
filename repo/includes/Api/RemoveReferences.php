@@ -4,12 +4,12 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use Wikibase\DataModel\Services\Statement\StatementGuidParser;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
-use Wikibase\DataModel\Services\Statement\StatementGuidParser;
-use Wikibase\DataModel\Statement\Statement;
 
 /**
  * API module for removing one or more references of the same statement.

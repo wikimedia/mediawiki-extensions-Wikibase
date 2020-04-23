@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Wikibase\Lib\DataType;
-use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use OutOfBoundsException;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 
 /**
  * @covers \Wikibase\Lib\DataTypeFactory

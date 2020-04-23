@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiUsageException;
 use Profiler;
 use Site;
 use SiteLookup;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\StringNormalizer;
@@ -105,7 +105,7 @@ class EntityByTitleHelper {
 		foreach ( $sites as $siteId ) {
 			foreach ( $titles as $title ) {
 				$itemId = $this->getEntityId( $siteId, $title, $normalize );
-				if ( !is_null( $itemId ) ) {
+				if ( $itemId !== null ) {
 					$ids[] = $itemId;
 				} else {
 					$missingEntities[] = [ 'site' => $siteId, 'title' => $title ];

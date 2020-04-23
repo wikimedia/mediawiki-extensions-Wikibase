@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests;
 
-use Wikibase\Lib\DataType;
 use InvalidArgumentException;
+use Wikibase\Lib\DataType;
 
 /**
  * @covers \Wikibase\Lib\DataType

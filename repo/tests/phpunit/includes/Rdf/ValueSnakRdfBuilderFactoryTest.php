@@ -5,16 +5,16 @@ namespace Wikibase\Repo\Tests\Rdf;
 use Closure;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityMentionListener;
+use Wikibase\Rdf\NullDedupeBag;
+use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
+use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
-use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\NullEntityMentionListener;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
-use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\DedupeBag;
 
 /**
  * @covers \Wikibase\Rdf\ValueSnakRdfBuilderFactory

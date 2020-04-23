@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Validators;
 
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\DataValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
@@ -17,6 +16,7 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
 
 /**

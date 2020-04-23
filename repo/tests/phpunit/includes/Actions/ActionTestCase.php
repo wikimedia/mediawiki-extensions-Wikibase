@@ -16,8 +16,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\ItemContent;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 

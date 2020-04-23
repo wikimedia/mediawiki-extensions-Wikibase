@@ -8,6 +8,7 @@ use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +18,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikimedia\Assert\ParameterElementTypeException;
 

@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Hooks;
 
-use LanguageCode;
 use Hooks;
+use LanguageCode;
 use Site;
 use SiteLookup;
 use Title;

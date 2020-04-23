@@ -4,8 +4,8 @@ namespace Wikibase\Lib;
 
 use ArrayObject;
 use Closure;
-use OutOfBoundsException;
 use MediaWiki\Logger\LoggerFactory;
+use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
 
 /**

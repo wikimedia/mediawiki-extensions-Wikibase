@@ -2,9 +2,9 @@
 
 namespace Wikibase\Lib\Store;
 
-use WikiPage;
-use Title;
 use TextContent;
+use Title;
+use WikiPage;
 
 /**
  * Provides a list of ordered Property numbers

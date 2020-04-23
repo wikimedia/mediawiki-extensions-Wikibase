@@ -2,14 +2,14 @@
 
 namespace Wikibase\Lib\Changes;
 
-use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
+use Wikibase\DataModel\Statement\Statement;
 
 /**
  * @license GPL-2.0-or-later

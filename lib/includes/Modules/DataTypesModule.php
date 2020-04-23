@@ -2,12 +2,12 @@
 
 namespace Wikibase\Lib\Modules;
 
-use Wikibase\Lib\DataType;
-use Wikibase\Lib\DataTypeFactory;
 use Exception;
 use FormatJson;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 
 /**
  * Resource loader module for defining resources that will create a MW config var in JavaScript

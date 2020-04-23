@@ -169,7 +169,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 
 		// lookup is for `wikibase-item`, but Title is `wikitext` & default will come up empty...
 		$result = $lookup->getEntityIdForTitle( $title );
-		$this->assertEquals( null, $result );
+		$this->assertNull( $result );
 
 		$results = $lookup->getEntityIds( [ $title ] );
 		$this->assertSame( [], $results );
@@ -189,7 +189,7 @@ class ByTypeDispatchingEntityIdLookupTest extends TestCase {
 
 		// lookup is for `wikibase-item`, but Title is `wikitext` & default will come up empty...
 		$result = $lookup->getEntityIdForTitle( Title::newFromDBkey( 'P99' ) );
-		$this->assertEquals( null, $result );
+		$this->assertNull( $result );
 
 		$results = $lookup->getEntityIds( [ Title::newFromDBkey( 'P99' ) ] );
 		$this->assertSame( [], $results );

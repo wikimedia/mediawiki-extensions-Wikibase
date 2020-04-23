@@ -3,8 +3,8 @@
 namespace Wikibase\Repo;
 
 use BagOStuff;
-use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use InvalidArgumentException;
+use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use Wikimedia\Assert\Assert;
 
 /**

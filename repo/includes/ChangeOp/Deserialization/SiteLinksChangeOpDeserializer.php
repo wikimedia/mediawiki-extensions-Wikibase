@@ -3,13 +3,13 @@
 namespace Wikibase\Repo\ChangeOp\Deserialization;
 
 use SiteList;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOps;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpDeserializer;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 
 /**

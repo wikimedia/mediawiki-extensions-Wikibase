@@ -21,8 +21,8 @@ use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Changes\TestChanges;
+use Wikibase\Lib\Tests\MockRepository;
 
 /**
  * @covers \Wikibase\Client\Changes\ChangeHandler
@@ -617,7 +617,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 		foreach ( $expectedRootJobParams as $k => $exp ) {
 			$act = $actualRootJobParams[$k];
 			if ( $k !== 'scheduleRefreshLinks' ) {
-				$this->assertEquals( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
+				$this->assertSame( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
 			}
 			$this->assertEquals( $exp['rootJobSignature'], $act['rootJobSignature'], "$k/rootJobSignature" );
 		}

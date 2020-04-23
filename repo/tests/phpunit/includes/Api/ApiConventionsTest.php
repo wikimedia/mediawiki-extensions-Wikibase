@@ -39,7 +39,7 @@ class ApiConventionsTest extends \MediaWikiTestCase {
 	 * Connects the assertions for the different methods and iterates through the api modules
 	 *
 	 * @dataProvider wikibaseApiModuleProvider
-	*/
+	 */
 	public function testApiConventions( $moduleClass, $moduleName ) {
 		$params = [];
 		$user = $this->getTestUser()->getUser();

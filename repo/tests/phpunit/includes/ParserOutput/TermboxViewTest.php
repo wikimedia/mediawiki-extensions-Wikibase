@@ -10,13 +10,13 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
 use Wikibase\View\Termbox\Renderer\TermboxRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
-use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**

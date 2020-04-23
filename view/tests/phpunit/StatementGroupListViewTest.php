@@ -13,9 +13,9 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Store\PropertyOrderProvider;
-use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\EditSectionGenerator;
 use Wikibase\View\StatementGroupListView;
+use Wikibase\View\StatementHtmlGenerator;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\Template\TemplateRegistry;
 

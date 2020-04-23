@@ -2,12 +2,12 @@
 
 namespace Wikibase\Repo\Tests;
 
-use Wikibase\Lib\DataType;
-use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
 use User;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;

@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use InvalidArgumentException;
+use Onoi\MessageReporter\MessageReporter;
+use Onoi\MessageReporter\NullMessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Reporting\LogWarningExceptionHandler;
-use Onoi\MessageReporter\MessageReporter;
-use Onoi\MessageReporter\NullMessageReporter;
 use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IResultWrapper;
 
 /**
  * Implements initial population (priming) for the wb_changes_subscription table,

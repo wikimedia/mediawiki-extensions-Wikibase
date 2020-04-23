@@ -4,14 +4,14 @@ namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 use Wikibase\Client\Tests\Integration\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Integration\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
 use Wikibase\Client\Usage\Sql\SqlUsageTracker;
+use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
 /**
  * @covers \Wikibase\Client\Usage\Sql\SqlUsageTracker

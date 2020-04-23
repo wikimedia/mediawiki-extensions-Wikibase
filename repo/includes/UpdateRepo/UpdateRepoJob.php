@@ -7,11 +7,11 @@ use Psr\Log\LoggerInterface;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\FormatableSummary;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\SummaryFormatter;
 
 /**

@@ -6,8 +6,8 @@ use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\WikitextExternalIdentifierFormatter;
 use Wikibase\Lib\SnakUrlExpander;
 use Wikimedia\Assert\ParameterTypeException;
 

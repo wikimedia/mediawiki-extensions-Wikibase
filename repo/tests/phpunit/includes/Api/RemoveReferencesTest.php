@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
-use DataValues\StringValue;
 use ApiUsageException;
+use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;

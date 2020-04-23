@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Merge;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -12,7 +13,6 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\Merge\StatementsMerger;
-use PHPUnit\Framework\TestCase;
 use Wikibase\Repo\Tests\NewStatement;
 use Wikibase\Repo\WikibaseRepo;
 

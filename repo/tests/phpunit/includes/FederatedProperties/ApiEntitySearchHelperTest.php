@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
-use PHPUnit\Framework\TestCase;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;

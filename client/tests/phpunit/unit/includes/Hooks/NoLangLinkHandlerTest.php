@@ -2,13 +2,13 @@
 
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
-use Parser;
 use MediaWiki\MediaWikiServices;
+use Parser;
 use ParserOptions;
 use ParserOutput;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * @covers \Wikibase\Client\Hooks\NoLangLinkHandler

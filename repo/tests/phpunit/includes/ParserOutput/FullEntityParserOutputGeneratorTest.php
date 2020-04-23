@@ -43,14 +43,14 @@ use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
-use Wikibase\View\ViewPlaceHolderEmitter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
-use Wikibase\View\ViewContent;
 use Wikibase\View\Template\TemplateFactory;
+use Wikibase\View\ViewContent;
+use Wikibase\View\ViewPlaceHolderEmitter;
 
 /**
  * @covers \Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator

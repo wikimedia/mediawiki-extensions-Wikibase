@@ -2,25 +2,25 @@
 
 namespace Wikibase\Client\Tests\Unit\RecentChanges;
 
-use Diff\DiffOp\Diff\Diff;
 use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
 use ExternalUserNames;
 use Language;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Diff\ItemDiffer;
-use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use SiteLookup;
-use Wikimedia\TestingAccessWrapper;
 use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
+use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
+use Wikibase\DataModel\Services\Diff\ItemDiffer;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
-use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
+use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Client\RecentChanges\RecentChangeFactory
@@ -64,7 +64,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return EntityChange
 	 */
 	private function newEntityChange( $action, EntityId $entityId, Diff $diff, array $fields ) {
-		/** @var EntityChange $instance  */
+		/** @var EntityChange $instance */
 		$instance = new ItemChange( $fields );
 
 		$instance->setEntityId( $entityId );

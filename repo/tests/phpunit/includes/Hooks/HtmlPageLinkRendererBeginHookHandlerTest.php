@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
 use Language;
-use MediaWikiTestCase;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
+use MediaWikiTestCase;
 use RequestContext;
 use SpecialPage;
 use Title;

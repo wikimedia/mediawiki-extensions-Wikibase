@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
 use RuntimeException;

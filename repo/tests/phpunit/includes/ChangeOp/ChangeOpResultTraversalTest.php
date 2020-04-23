@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\ChangeOp;
 
-use Wikibase\Repo\ChangeOp\ChangeOpResultTraversal;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
+use Wikibase\Repo\ChangeOp\ChangeOpResultTraversal;
 use Wikibase\Repo\ChangeOp\ChangeOpsResult;
 
 /**

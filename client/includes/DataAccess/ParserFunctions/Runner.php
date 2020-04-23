@@ -5,11 +5,11 @@ namespace Wikibase\Client\DataAccess\ParserFunctions;
 use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
-use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**

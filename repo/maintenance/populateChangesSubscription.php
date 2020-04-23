@@ -4,9 +4,9 @@ namespace Wikibase;
 
 use LoggedUpdateMaintenance;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Store\Sql\ChangesSubscriptionTableBuilder;

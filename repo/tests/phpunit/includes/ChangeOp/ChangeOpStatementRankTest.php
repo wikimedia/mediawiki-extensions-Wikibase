@@ -4,12 +4,12 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use Wikibase\Repo\ChangeOp\ChangeOpStatementRank;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
+use Wikibase\Repo\ChangeOp\ChangeOpStatementRank;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 
 /**

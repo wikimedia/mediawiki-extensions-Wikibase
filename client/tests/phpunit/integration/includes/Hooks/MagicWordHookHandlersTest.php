@@ -3,11 +3,11 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use Language;
-use Wikibase\Client\Hooks\MagicWordHookHandlers;
 use MediaWikiTestCase;
 use Parser;
 use ParserOutput;
 use Title;
+use Wikibase\Client\Hooks\MagicWordHookHandlers;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\TestingAccessWrapper;
 

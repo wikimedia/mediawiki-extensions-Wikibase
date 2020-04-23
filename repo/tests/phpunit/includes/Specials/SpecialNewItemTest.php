@@ -8,6 +8,9 @@ use HashSiteStore;
 use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use SiteStore;
+use ValueValidators\Error;
+use ValueValidators\Result;
+use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -15,9 +18,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
-use ValueValidators\Error;
-use ValueValidators\Result;
-use ValueValidators\ValueValidator;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**

@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Integration\Specials;
 
 use SpecialPageTestBase;
 use Title;
-use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Specials\SpecialUnconnectedPages;
 
 /**
  * @covers \Wikibase\Client\Specials\SpecialUnconnectedPages
@@ -55,7 +55,7 @@ class SpecialUnconnectedPagesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 *  @dataProvider provideBuildConditionals
+	 * @dataProvider provideBuildConditionals
 	 */
 	public function testBuildConditionals( $text, $expected ) {
 		$page = $this->newSpecialPage();

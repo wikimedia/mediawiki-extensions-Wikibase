@@ -2,8 +2,8 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use RuntimeException;
 use Onoi\MessageReporter\MessageReporter;
+use RuntimeException;
 use Wikibase\Lib\Reporting\ReportingExceptionHandler;
 use Wikibase\Repo\Content\DataUpdateAdapter;
 

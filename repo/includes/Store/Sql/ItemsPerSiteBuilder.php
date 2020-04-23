@@ -2,14 +2,14 @@
 
 namespace Wikibase\Repo\Store\Sql;
 
+use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Onoi\MessageReporter\MessageReporter;
-use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -91,7 +91,7 @@ class ItemsPerSiteBuilder {
 
 			$total += $this->rebuildSiteLinks( $ids );
 			$this->report( 'Processed ' . $total . ' entities.' );
-		};
+		}
 
 		$this->report( 'Rebuild done.' );
 	}

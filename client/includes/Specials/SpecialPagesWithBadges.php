@@ -2,8 +2,8 @@
 
 namespace Wikibase\Client\Specials;
 
-use HTMLForm;
 use Html;
+use HTMLForm;
 use InvalidArgumentException;
 use QueryPage;
 use Skin;

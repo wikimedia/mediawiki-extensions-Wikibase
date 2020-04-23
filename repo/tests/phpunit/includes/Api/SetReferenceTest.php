@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Api;
 
+use ApiUsageException;
 use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
-use ApiUsageException;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -325,15 +325,15 @@ class SetReferenceTest extends WikibaseApiTestCase {
 			'snaks' => $snaksJson,
 		];
 
-		if ( !is_null( $snaksOrderJson ) ) {
+		if ( $snaksOrderJson !== null ) {
 			$params['snaks-order'] = $snaksOrderJson;
 		}
 
-		if ( !is_null( $referenceHash ) ) {
+		if ( $referenceHash !== null ) {
 			$params['reference'] = $referenceHash;
 		}
 
-		if ( !is_null( $index ) ) {
+		if ( $index !== null ) {
 			$params['index'] = $index;
 		}
 

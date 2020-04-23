@@ -4,8 +4,8 @@ namespace Wikibase\Client\Hooks;
 
 use Parser;
 use ParserOutput;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Handles the NOEXTERNALLANGLINKS parser function.

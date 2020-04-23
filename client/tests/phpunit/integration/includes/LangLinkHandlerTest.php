@@ -8,12 +8,12 @@ use Site;
 use TestSites;
 use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
+use Wikibase\Client\Hooks\NoLangLinkHandler;
+use Wikibase\Client\LangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Client\LangLinkHandler;
-use Wikibase\Client\NamespaceChecker;
-use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**

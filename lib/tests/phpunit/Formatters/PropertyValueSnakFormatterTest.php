@@ -2,12 +2,10 @@
 
 namespace Wikibase\Lib\Tests\Formatters;
 
-use MediaWikiCoversValidator;
-use Wikibase\Lib\DataType;
-use Wikibase\Lib\DataTypeFactory;
 use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use InvalidArgumentException;
+use MediaWikiCoversValidator;
 use OutOfBoundsException;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormatterOptions;
@@ -18,12 +16,14 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\DataType;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValue\UnmappedEntityIdValue;
 use Wikibase\Lib\Formatters\DispatchingValueFormatter;
-use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
 use Wikibase\Lib\Formatters\PropertyValueSnakFormatter;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\UnDeserializableValueFormatter;
+use Wikibase\Lib\Formatters\UnmappedEntityIdValueFormatter;
 
 /**
  * @covers \Wikibase\Lib\Formatters\PropertyValueSnakFormatter

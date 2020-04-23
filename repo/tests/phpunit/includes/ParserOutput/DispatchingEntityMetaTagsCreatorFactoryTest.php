@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Language;
 use LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
-use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\View\DefaultMetaTagsCreator;
 use Wikibase\View\EntityMetaTagsCreator;
 

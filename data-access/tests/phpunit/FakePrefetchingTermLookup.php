@@ -2,8 +2,8 @@
 
 namespace Wikibase\DataAccess\Tests;
 
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataAccess\PrefetchingTermLookup;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermTypes;
 
 /**

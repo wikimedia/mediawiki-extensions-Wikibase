@@ -3,16 +3,10 @@
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
+use ApiUsageException;
 use Deserializers\Deserializer;
 use Title;
-use ApiUsageException;
 use Wikibase\DataModel\Entity\ClearableEntity;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpResult;
-use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -26,8 +20,14 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
+use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -384,7 +384,7 @@ class EditEntity extends ModifyEntity {
 	 * @param mixed $data
 	 */
 	private function checkValidJson( $data ) {
-		if ( is_null( $data ) ) {
+		if ( $data === null ) {
 			$this->errorReporter->dieError( 'Invalid json: The supplied JSON structure could not be parsed or '
 				. 'recreated as a valid structure', 'invalid-json' );
 		}

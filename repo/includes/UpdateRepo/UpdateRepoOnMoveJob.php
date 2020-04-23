@@ -3,16 +3,16 @@
 namespace Wikibase\Repo\UpdateRepo;
 
 use MediaWiki\Logger\LoggerFactory;
-use Psr\Log\LoggerInterface;
 use OutOfBoundsException;
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;
 use Wikibase\SummaryFormatter;

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\EditEntity;
 
 use InvalidArgumentException;
-use Wikibase\Lib\Store\EntityContentTooBigException;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use ReadOnlyError;
@@ -15,13 +14,14 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\Lib\Store\EntityContentTooBigException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
-use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

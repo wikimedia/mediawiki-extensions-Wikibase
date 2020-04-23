@@ -7,10 +7,10 @@ use MWNamespace;
 use QueryPage;
 use Skin;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\Client\NamespaceChecker;
-use Wikimedia\Rdbms\IDatabase;
+use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\FakeResultWrapper;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**

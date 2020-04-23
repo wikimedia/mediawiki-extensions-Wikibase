@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
+use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -13,14 +14,13 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Lib\WikibaseSettings;
 

@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\Geo\Values\GlobeCoordinateValue;
-use MediaWiki\MediaWikiServices;
 use DataValues\Geo\Values\LatLongValue;
 use ExtensionRegistry;
 use Language;
+use MediaWiki\MediaWikiServices;
 use Parser;
 use ParserOutput;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;

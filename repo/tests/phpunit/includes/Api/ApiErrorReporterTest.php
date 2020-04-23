@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiErrorFormatter;
 use ApiMain;
+use ApiUsageException;
 use DataValues\IllegalValueException;
 use Language;
 use Status;
-use ApiUsageException;
 use ValueParsers\ParseException;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Localizer\DispatchingExceptionLocalizer;

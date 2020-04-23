@@ -19,9 +19,9 @@ use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikimedia\Assert\Assert;
 
@@ -229,7 +229,7 @@ class ResultBuilder {
 	 */
 	private function checkPathType( $path ) {
 		Assert::parameter(
-			is_string( $path ) || is_array( $path ) || is_null( $path ),
+			is_string( $path ) || is_array( $path ) || $path === null,
 			'$path',
 			'$path must be an array (or null)'
 		);
@@ -240,7 +240,7 @@ class ResultBuilder {
 	 */
 	private function checkKeyType( $key ) {
 		Assert::parameter(
-			is_string( $key ) || is_int( $key ) || is_null( $key ),
+			is_string( $key ) || is_int( $key ) || $key === null,
 			'$key',
 			'$key must be an array (or null)'
 		);

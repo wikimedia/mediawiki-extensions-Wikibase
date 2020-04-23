@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
+use ApiUsageException;
 use DataValues\DataValue;
 use DataValues\StringValue;
 use DataValues\TimeValue;
-use ApiUsageException;
 use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;

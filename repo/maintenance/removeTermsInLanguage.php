@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Maintenance;
 
 use InvalidArgumentException;
 use Maintenance;
+use User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
@@ -11,7 +12,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
-use User;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 

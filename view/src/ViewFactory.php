@@ -2,13 +2,13 @@
 
 namespace Wikibase\View;
 
-use Language;
-use Wikibase\Lib\DataTypeFactory;
 use InvalidArgumentException;
+use Language;
 use SiteLookup;
 use ValueFormatters\NumberLocalizer;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChain;

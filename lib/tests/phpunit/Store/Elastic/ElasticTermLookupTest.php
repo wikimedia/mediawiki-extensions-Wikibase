@@ -11,8 +11,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\Store\Elastic\ElasticTermLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Elastic\TermLookupSearcher;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\Store\EntityTermLookupTest;
 
 /**

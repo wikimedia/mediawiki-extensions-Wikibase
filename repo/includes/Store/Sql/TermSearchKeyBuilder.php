@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use Psr\Log\LoggerInterface;
 use Onoi\MessageReporter\MessageReporter;
+use Psr\Log\LoggerInterface;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikimedia\Rdbms\IDatabase;
 

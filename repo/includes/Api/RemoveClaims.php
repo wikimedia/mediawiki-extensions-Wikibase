@@ -4,15 +4,15 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOps;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Repo\ChangeOp\ChangeOp;
+use Wikibase\Repo\ChangeOp\ChangeOpException;
+use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 
 /**
  * API module for removing claims.
@@ -128,7 +128,7 @@ class RemoveClaims extends ApiBase {
 				$this->errorReporter->dieError( "Invalid claim guid $guid", 'invalid-guid' );
 			}
 
-			if ( is_null( $entityId ) ) {
+			if ( $entityId === null ) {
 				$entityId = $this->guidParser->parse( $guid )->getEntityId();
 			} else {
 				if ( !$this->guidParser->parse( $guid )->getEntityId()->equals( $entityId ) ) {
@@ -137,7 +137,7 @@ class RemoveClaims extends ApiBase {
 			}
 		}
 
-		if ( is_null( $entityId ) ) {
+		if ( $entityId === null ) {
 			$this->errorReporter->dieError( 'Could not find an entity for the claims', 'invalid-guid' );
 		}
 

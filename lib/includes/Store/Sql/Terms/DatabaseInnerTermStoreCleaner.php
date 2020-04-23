@@ -17,7 +17,7 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class DatabaseInnerTermStoreCleaner {
 
-	/** @var IDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds*/
+	/** @var IDatabase a connection to DB_REPLICA. Note only set on cleanTermInLangIds */
 	private $dbr = null;
 
 	/** @var IDatabase a connection to DB_MASTER. Note only set on cleanTermInLangIds */

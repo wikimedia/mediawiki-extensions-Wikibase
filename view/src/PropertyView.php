@@ -2,14 +2,14 @@
 
 namespace Wikibase\View;
 
+use InvalidArgumentException;
+use OutOfBoundsException;
+use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\DataTypeFactory;
-use InvalidArgumentException;
-use Wikibase\DataModel\Entity\EntityDocument;
-use OutOfBoundsException;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\View\Template\TemplateFactory;
 
 /**

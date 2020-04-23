@@ -47,7 +47,7 @@
 		"mediawiki/minus-x": "1.0.0",
 		"cache/integration-tests": "dev-master#ba6fcfd823d623ba73c2faba5a208067281c4c38",
 		"mediawiki/mediawiki-phan-config": "0.10.2",
-		"wikibase/wikibase-codesniffer": "1.0.0"
+		"wikibase/wikibase-codesniffer": "1.1.0"
 	},
 	"suggest": {
 		"ext-calendar": "Needed for dumpRdf script"
@@ -55,7 +55,9 @@
 	"scripts": {
 		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
 		"phpcs": "phpcs -p -s",
+		"phpcs-modified": "bash build/phpcsGitModified.sh",
 		"fix": "phpcbf",
+		"fix-modified": "bash build/phpcbfGitModified.sh",
 		"test": [
 			"composer validate --no-interaction",
 			"composer lint",

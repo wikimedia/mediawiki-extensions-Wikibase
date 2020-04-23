@@ -4,8 +4,8 @@ namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
 use Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\WikibaseLanguageDependentLuaBindings

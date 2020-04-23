@@ -402,7 +402,7 @@ class WikiPageEntityStore implements EntityStore {
 		if ( $flags & EDIT_UPDATE ) {
 			if ( !$parentRevision ) {
 				throw new StorageException( 'Can\'t perform an update with no parent revision' );
-			};
+			}
 			if ( !$parentRevision->hasSlot( $slotRole ) ) {
 				throw new StorageException(
 					'Can\'t perform an update when the parent revision doesn\'t have expected slot: ' . $slotRole

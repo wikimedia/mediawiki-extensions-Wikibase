@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Tests;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
-use Wikibase\Lib\Changes\EntityChange;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\ChangePruner;
@@ -55,7 +55,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 
 		$this->db->delete( 'wb_changes', '*' );
 
-		$this->assertEquals( 0, $this->db->selectRowCount( 'wb_changes' ),
+		$this->assertSame( 0, $this->db->selectRowCount( 'wb_changes' ),
 			'sanity check: wb_changes table is empty' );
 
 		$this->addTestChanges();
@@ -74,7 +74,7 @@ class ChangePrunerTest extends MediaWikiTestCase {
 		$this->assertStringContainsString( '1 rows pruned', $this->messages[3] );
 		$this->assertStringContainsString( '0 rows pruned', $this->messages[5] );
 
-		$this->assertEquals( 0, $this->db->selectRowCount( 'wb_changes' ), 'wb_changes table is empty' );
+		$this->assertSame( 0, $this->db->selectRowCount( 'wb_changes' ), 'wb_changes table is empty' );
 	}
 
 	private function addTestChanges() {

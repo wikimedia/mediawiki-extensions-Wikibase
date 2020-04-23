@@ -61,7 +61,7 @@ class SiteLinkBadgeChangeOpSerializationValidator {
 
 			$itemTitle = $this->titleLookup->getTitleForId( $badgeId );
 
-			if ( is_null( $itemTitle ) || !$itemTitle->exists() ) {
+			if ( $itemTitle === null || !$itemTitle->exists() ) {
 				throw new ChangeOpDeserializationException(
 					'Badges: no item found matching id "' . $badgeSerialization . '"',
 					'no-such-entity',

@@ -8,10 +8,10 @@ use OutputPage;
 use Status;
 use UserBlockedError;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\SummaryFormatter;
 
 /**

@@ -2,28 +2,28 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
+use FauxRequest;
 use Language;
 use MediaWikiIntegrationTestCase;
-use FauxRequest;
 use OutputPage;
 use PHPUnit\Framework\MockObject\MockObject;
 use RequestContext;
 use Title;
 use User;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityFactory;
-use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
-use Wikibase\View\Template\TemplateFactory;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\View\Template\TemplateFactory;
 
 /**
  * @covers \Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler

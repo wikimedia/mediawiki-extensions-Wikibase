@@ -4,21 +4,21 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiUsageException;
 use DataValues\DataValue;
-use Wikibase\Lib\DataValueFactory;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use LogicException;
-use ApiUsageException;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Lib\Formatters\TypedValueFormatter;
-use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
+use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
+use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
+use Wikibase\Lib\Formatters\TypedValueFormatter;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

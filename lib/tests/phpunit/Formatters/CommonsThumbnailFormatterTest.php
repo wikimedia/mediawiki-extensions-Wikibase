@@ -4,8 +4,8 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\StringValue;
 use InvalidArgumentException;
-use MediaWikiTestCase;
 use MediaWiki\MediaWikiServices;
+use MediaWikiTestCase;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 
 /**

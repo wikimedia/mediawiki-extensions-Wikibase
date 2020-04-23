@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Validators;
 
 use InvalidArgumentException;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\Validators\NotEntityIdValidator;
 
 /**

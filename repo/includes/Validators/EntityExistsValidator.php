@@ -29,7 +29,7 @@ class EntityExistsValidator implements ValueValidator {
 	private $entityType;
 
 	public function __construct( EntityLookup $entityLookup, $entityType = null ) {
-		if ( !is_string( $entityType ) && !is_null( $entityType ) ) {
+		if ( !is_string( $entityType ) && $entityType !== null ) {
 			throw new InvalidArgumentException( '$entityType must be a string or null' );
 		}
 

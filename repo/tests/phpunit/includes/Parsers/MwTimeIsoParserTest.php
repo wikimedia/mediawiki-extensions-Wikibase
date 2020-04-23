@@ -7,8 +7,8 @@ use Language;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use ValueParsers\ParserOptions;
-use ValueParsers\ValueParser;
 use ValueParsers\Test\StringValueParserTest;
+use ValueParsers\ValueParser;
 use Wikibase\Repo\Parsers\MwTimeIsoParser;
 
 /**

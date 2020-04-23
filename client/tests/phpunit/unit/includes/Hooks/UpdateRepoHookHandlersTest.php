@@ -10,9 +10,9 @@ use ReflectionMethod;
 use Title;
 use User;
 use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Client\NamespaceChecker;
 
 /**
  * @covers \Wikibase\Client\Hooks\UpdateRepoHookHandlers
