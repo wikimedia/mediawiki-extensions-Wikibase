@@ -32,7 +32,7 @@ describe( 'init', () => {
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 
 		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
@@ -63,9 +63,7 @@ describe( 'init', () => {
 
 		browser.setNetworkConditions( { latency: 100, throughput: 1000 } );
 
-		DataBridgePage.overloadedLink.click();
-		DataBridgePage.app.waitForDisplayed( 10000 );
-		DataBridgePage.dismissWarningAnonymousEdit();
+		DataBridgePage.launchApp();
 		browser.waitUntil(
 			() => {
 				return DataBridgePage.loadingBar.isDisplayed();
@@ -103,7 +101,7 @@ describe( 'init', () => {
 			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-			DataBridgePage.openBridgeOnPage( title );
+			DataBridgePage.openAppOnPage( title );
 
 			DataBridgePage.bridge.waitForDisplayed( 5000 );
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
@@ -169,7 +167,7 @@ describe( 'init', () => {
 			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-			DataBridgePage.openBridgeOnPage( title );
+			DataBridgePage.openAppOnPage( title );
 
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
@@ -217,9 +215,7 @@ describe( 'init', () => {
 					( pageContentLanguage ) => window.mw.config.set( 'wgPageContentLanguage', pageContentLanguage ),
 					pageContentLanguage
 				);
-				DataBridgePage.overloadedLink.click();
-				DataBridgePage.app.waitForDisplayed( 10000 );
-				DataBridgePage.dismissWarningAnonymousEdit();
+				DataBridgePage.launchApp();
 				DataBridgePage.bridge.waitForDisplayed();
 
 				browser.waitUntil(

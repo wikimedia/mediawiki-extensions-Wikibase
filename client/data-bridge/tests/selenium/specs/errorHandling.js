@@ -18,7 +18,7 @@ describe( 'App', () => {
 
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 
 		DataBridgePage.error.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.error.isDisplayed() );
@@ -54,9 +54,7 @@ describe( 'App', () => {
 		DataBridgePage.open( title );
 
 		NetworkUtil.disableNetwork();
-		DataBridgePage.overloadedLink.click();
-		DataBridgePage.app.waitForDisplayed( 10000 );
-		DataBridgePage.dismissWarningAnonymousEdit();
+		DataBridgePage.launchApp();
 		DataBridgePage.error.waitForDisplayed();
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
@@ -91,7 +89,7 @@ describe( 'App', () => {
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 
 		DataBridgePage.bridge.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
@@ -150,7 +148,7 @@ describe( 'App', () => {
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 
 		DataBridgePage.bridge.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );

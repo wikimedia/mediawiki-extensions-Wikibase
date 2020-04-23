@@ -28,7 +28,7 @@ describe( 'App', () => {
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 
 		DataBridgePage.bridge.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.bridge.isDisplayed() );

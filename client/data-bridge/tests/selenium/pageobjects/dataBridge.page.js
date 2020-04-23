@@ -141,8 +141,12 @@ class DataBridgePage extends Page {
 		Util.waitForModuleState( 'wikibase.client.data-bridge.app', 'ready', 10000 );
 	}
 
-	openBridgeOnPage( title ) {
+	openAppOnPage( title ) {
 		this.open( title );
+		this.launchApp();
+	}
+
+	launchApp() {
 		this.overloadedLink.click();
 		this.app.waitForDisplayed( 10000 );
 		this.dismissWarningAnonymousEdit();
