@@ -95,6 +95,7 @@ describe( 'permission checks', () => {
 			DataBridgePage.overloadedLink.click();
 			DataBridgePage.error.waitForDisplayed( 5000 );
 
+			assert.ok( DataBridgePage.showsErrorPermission() );
 			assert.equal( DataBridgePage.permissionErrors.length, 1 );
 			assert.ok( !DataBridgePage.bridge.isDisplayed() );
 		} );
@@ -115,6 +116,7 @@ describe( 'permission checks', () => {
 			DataBridgePage.overloadedLink.click();
 			DataBridgePage.error.waitForDisplayed( 5000 );
 
+			assert.ok( DataBridgePage.showsErrorPermission() );
 			// client and repo on the same installation so we expect a "blocked user" from both
 			assert.strictEqual( DataBridgePage.permissionErrors.length, 2 );
 			assert.ok( !DataBridgePage.bridge.isDisplayed() );
