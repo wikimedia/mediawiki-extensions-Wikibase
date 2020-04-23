@@ -53,11 +53,13 @@
 		"ext-calendar": "Needed for dumpRdf script"
 	},
 	"scripts": {
+		"lint": "parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
+		"phpcs": "phpcs -p -s",
 		"fix": "phpcbf",
 		"test": [
 			"composer validate --no-interaction",
-			"parallel-lint . --exclude vendor --exclude node_modules --exclude .git",
-			"phpcs -p -s",
+			"composer lint",
+			"composer phpcs",
 			"minus-x check ."
 		],
 		"doxygen-docker": "bash build/doxygen-docker.sh"
