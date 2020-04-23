@@ -3,7 +3,8 @@
  */
 const fs = require( 'fs' ),
 	saveScreenshot = require( 'wdio-mediawiki' ).saveScreenshot,
-	videoUtil = require( './VideoUtil' );
+	videoUtil = require( './VideoUtil' ),
+	networkUtil = require( './NetworkUtil' );
 
 exports.config = {
 
@@ -146,6 +147,7 @@ exports.config = {
 	 */
 	afterTest( test ) {
 		videoUtil.stopVideoRecording( test );
+		networkUtil.enableNetwork();
 		if ( !test.passed ) {
 			const filePath = saveScreenshot( test.title );
 			/* eslint-disable-next-line no-console */
