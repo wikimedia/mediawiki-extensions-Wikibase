@@ -11,9 +11,11 @@ function shallowMountWithProps( props = {} ): any {
 		},
 	} );
 }
+
 describe( 'EventEmittingButton', () => {
 
 	const pressedClass = '.wb-ui-event-emitting-button--pressed';
+
 	describe( 'if there is no href', () => {
 		it( 'emits an event on click', () => {
 			const wrapper = shallowMountWithProps();

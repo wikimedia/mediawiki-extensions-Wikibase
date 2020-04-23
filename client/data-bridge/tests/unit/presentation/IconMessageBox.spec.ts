@@ -1,5 +1,6 @@
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import { shallowMount } from '@vue/test-utils';
+
 describe( 'IconMessageBox', () => {
 	it( 'gets content through the default slot', () => {
 		const message = 'some message';

@@ -14,6 +14,7 @@ describe( 'ServiceContainer', () => {
 		'repoRouter',
 		'clientRouter',
 	];
+
 	describe.each( serviceNames )( '%s', ( name: keyof Services ) => {
 		it( 'throws an error if it is not set', () => {
 			expect( () => ( new ServiceContainer() ).get( name ) ).toThrow();

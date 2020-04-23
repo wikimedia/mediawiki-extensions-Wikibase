@@ -133,6 +133,7 @@ describe( 'BatchingApi', () => {
 			],
 		],
 	];
+
 	test.each( testCases )( '%s', async (
 		_name,
 		originalParams: object[],
