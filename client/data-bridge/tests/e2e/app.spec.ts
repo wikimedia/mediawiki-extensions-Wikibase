@@ -16,6 +16,7 @@ import {
 	addPropertyLabelResponse,
 	addDataBridgeConfigResponse,
 	addReferenceRenderingResponse,
+	addEntityDataResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -77,6 +78,7 @@ function prepareTestEnv( options: {
 			get: getMockFullRepoBatchedQueryResponse(
 				{ propertyId },
 				entityTitle,
+				Entities,
 			),
 		} ),
 		mockMwApiConstructor( {
@@ -91,9 +93,6 @@ function prepareTestEnv( options: {
 		} ),
 	);
 	window.$ = {
-		get() {
-			return Promise.resolve( JSON.parse( JSON.stringify( Entities ) ) );
-		},
 		uls: {
 			data: {
 				getDir: jest.fn().mockReturnValue( 'ltr' ),
@@ -128,7 +127,7 @@ describe( 'app', () => {
 	describe( 'app states', () => {
 		it( 'shows loading when app is launched', async () => {
 			const testLink = prepareTestEnv( {} );
-			window.$.get = function () {
+			window.mw.ForeignApi!.prototype.get = function () {
 				return new Promise( () => { /* never resolves */ } );
 			} as any;
 
@@ -259,11 +258,11 @@ describe( 'app', () => {
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId },
 					entityTitle,
+					testSet,
 				),
 				postWithEditToken,
 				assertCurrentUser,
 			} );
-			window.$.get = () => Promise.resolve( testSet ) as any;
 
 			await init();
 
@@ -479,11 +478,10 @@ describe( 'app', () => {
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId },
 					entityTitle,
+					testSet,
 				),
 				postWithEditToken,
 			} );
-
-			window.$.get = () => Promise.resolve( testSet ) as any;
 
 			await init();
 
@@ -533,11 +531,10 @@ describe( 'app', () => {
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId },
 					entityTitle,
+					testSet,
 				),
 				postWithEditToken,
 			} );
-
-			window.$.get = () => Promise.resolve( testSet ) as any;
 
 			await init();
 
@@ -636,6 +633,7 @@ describe( 'app', () => {
 			get: getMockFullRepoBatchedQueryResponse(
 				{ propertyId, propertyLabel: 'something', dataType },
 				DEFAULT_ENTITY,
+				Entities,
 			),
 		} );
 		const mockTracker = jest.fn();
@@ -753,16 +751,19 @@ describe( 'app', () => {
 			const testLink = prepareTestEnv( {} );
 			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{
-							propertyId: DEFAULT_PROPERTY,
-						},
-						addPageInfoProtectedpageResponse(
-							DEFAULT_ENTITY,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-									{},
+					addEntityDataResponse(
+						Entities,
+						addPropertyLabelResponse(
+							{
+								propertyId: DEFAULT_PROPERTY,
+							},
+							addPageInfoProtectedpageResponse(
+								DEFAULT_ENTITY,
+								addSiteinfoRestrictionsResponse(
+									addDataBridgeConfigResponse(
+										{},
+										{},
+									),
 								),
 							),
 						),
@@ -801,16 +802,19 @@ describe( 'app', () => {
 			} );
 			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				get: jest.fn().mockResolvedValue(
-					addPropertyLabelResponse(
-						{
-							propertyId: DEFAULT_PROPERTY,
-						},
-						addPageInfoProtectedpageResponse(
-							DEFAULT_ENTITY,
-							addSiteinfoRestrictionsResponse(
-								addDataBridgeConfigResponse(
-									{},
-									{},
+					addEntityDataResponse(
+						Entities,
+						addPropertyLabelResponse(
+							{
+								propertyId: DEFAULT_PROPERTY,
+							},
+							addPageInfoProtectedpageResponse(
+								DEFAULT_ENTITY,
+								addSiteinfoRestrictionsResponse(
+									addDataBridgeConfigResponse(
+										{},
+										{},
+									),
 								),
 							),
 						),

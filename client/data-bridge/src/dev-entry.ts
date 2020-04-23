@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import ApiReadingEntityRepository from '@/data-access/ApiReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import Entity from '@/datamodel/Entity';
 import Entities from '@/mock-data/data/Q42.data.json';
@@ -17,15 +17,14 @@ import cssjanus from 'cssjanus';
 
 const services = new ServiceContainer();
 
-services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
+services.set( 'readingEntityRepository', new ApiReadingEntityRepository(
 	{
 		get: () => new Promise( ( resolve ) => {
 			setTimeout( () => {
 				resolve( Entities );
 			}, 1100 );
 		} ),
-	} as any, // eslint-disable-line @typescript-eslint/no-explicit-any
-	'',
+	},
 ) );
 
 services.set( 'writingEntityRepository', {

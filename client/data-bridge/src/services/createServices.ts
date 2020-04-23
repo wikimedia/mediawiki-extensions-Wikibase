@@ -1,10 +1,10 @@
 import ApiCore from '@/data-access/ApiCore';
+import ApiReadingEntityRepository from '@/data-access/ApiReadingEntityRepository';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import BatchingApi from '@/data-access/BatchingApi';
 import ClientRouter from '@/data-access/ClientRouter';
 import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import ServiceContainer from '@/services/ServiceContainer';
-import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import MwWindow from '@/@types/mediawiki/MwWindow';
 import RepoRouter from '@/data-access/RepoRouter';
@@ -36,11 +36,6 @@ export default function createServices(
 
 	const clientMwApi = new mwWindow.mw.Api();
 
-	services.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
-		mwWindow.$,
-		repoRouter.getPageUrl( 'Special:EntityData' ),
-	) );
-
 	if ( mwWindow.mw.ForeignApi === undefined ) {
 		throw new Error( 'mw.ForeignApi was not loaded!' );
 	}
@@ -49,6 +44,10 @@ export default function createServices(
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
 	const repoApi = new BatchingApi( new ApiCore( repoMwApi ) );
+
+	services.set( 'readingEntityRepository', new ApiReadingEntityRepository(
+		repoApi,
+	) );
 
 	services.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
 		repoMwApi,

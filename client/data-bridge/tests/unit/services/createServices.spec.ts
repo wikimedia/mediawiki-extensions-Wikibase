@@ -1,7 +1,7 @@
 import createServices from '@/services/createServices';
 import MwWindow, { MwMessages } from '@/@types/mediawiki/MwWindow';
 import ServiceContainer from '@/services/ServiceContainer';
-import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import ApiReadingEntityRepository from '@/data-access/ApiReadingEntityRepository';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import ApiEntityLabelRepository from '@/data-access/ApiEntityLabelRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
@@ -22,7 +22,7 @@ import Tracker from '@/tracking/Tracker';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
 
 const mockReadingEntityRepository = {};
-jest.mock( '@/data-access/SpecialPageReadingEntityRepository', () => {
+jest.mock( '@/data-access/ApiReadingEntityRepository', () => {
 	return jest.fn().mockImplementation( () => {
 		return mockReadingEntityRepository;
 	} );
@@ -193,26 +193,26 @@ describe( 'createServices', () => {
 		expect( services ).toBeInstanceOf( ServiceContainer );
 	} );
 
-	it( 'pulls wbRepo from mw.config, ', () => {
+	it( 'creates ReadingEntityRepository', () => {
 		const wbRepo = {
 			url: 'http://localhost',
 			scriptPath: '/w',
 			articlePath: '/wiki/$1',
 		};
-		const specialEntityDataUrl = 'http://localhost/wiki/Special:EntityData';
-		mockRepoRouter.getPageUrl.mockReturnValue( specialEntityDataUrl );
 		const mwWindow = mockMwWindow( {
 			wbRepo,
 		} );
 		const services = createServices( mwWindow, [], {} as Tracker );
 
-		expect( mwWindow.mw.config.get ).toHaveBeenCalledWith( 'wbRepo' );
-		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
-		expect( SpecialPageReadingEntityRepository ).toHaveBeenCalledWith(
-			mwWindow.$,
-			specialEntityDataUrl,
-		);
-		expect( mockRepoRouter.getPageUrl ).toHaveBeenCalledWith( 'Special:EntityData' );
+		expect( mwWindow.mw.ForeignApi )
+			.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
+		expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			.toBeInstanceOf( mwWindow.mw.ForeignApi );
+		expect( BatchingApi )
+			.toHaveBeenCalledWith( mockRepoApiCore );
+
+		expect( ApiReadingEntityRepository ).toHaveBeenCalledTimes( 1 );
+		expect( ApiReadingEntityRepository ).toHaveBeenCalledWith( mockBatchingApi );
 		expect( services.get( 'readingEntityRepository' ) ).toBe( mockReadingEntityRepository );
 	} );
 

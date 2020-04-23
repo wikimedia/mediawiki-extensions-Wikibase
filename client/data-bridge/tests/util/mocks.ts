@@ -13,6 +13,7 @@ import {
 	ApiQueryResponsePage,
 } from '@/definitions/data-access/ApiQuery';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
+import clone from '@/store/clone';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
@@ -234,6 +235,20 @@ export function addPropertyLabelResponse(
 	return response;
 }
 
+export function addEntityDataResponse(
+	data: { entities: { [ id: string ]: object } },
+	response: { entities?: { [ id: string ]: object } },
+): object {
+	const entities: { [ id: string ]: any } = response.entities || ( response.entities = {} );
+	for ( const [ id, entity ] of Object.entries( data.entities ) ) {
+		if ( id in entities ) {
+			throw new Error( 'Merging entity data is currently not supported' );
+		}
+		entities[ id ] = clone( entity );
+	}
+	return response;
+}
+
 export function getMockFullRepoBatchedQueryResponse(
 	propertyLabelResponseInput: {
 		propertyId: string;
@@ -243,17 +258,21 @@ export function getMockFullRepoBatchedQueryResponse(
 		fallbackLanguage?: string;
 	},
 	entityTitle: string,
+	entities: { entities: { [ id: string ]: object } },
 	dataBridgeConfig: Partial<WikibaseRepoConfiguration> = {},
 ): jest.Mock {
 	return jest.fn().mockResolvedValue(
-		addPropertyLabelResponse(
-			propertyLabelResponseInput,
-			addPageInfoNoEditRestrictionsResponse(
-				entityTitle,
-				addSiteinfoRestrictionsResponse(
-					addDataBridgeConfigResponse(
-						dataBridgeConfig,
-						{},
+		addEntityDataResponse(
+			entities,
+			addPropertyLabelResponse(
+				propertyLabelResponseInput,
+				addPageInfoNoEditRestrictionsResponse(
+					entityTitle,
+					addSiteinfoRestrictionsResponse(
+						addDataBridgeConfigResponse(
+							dataBridgeConfig,
+							{},
+						),
 					),
 				),
 			),

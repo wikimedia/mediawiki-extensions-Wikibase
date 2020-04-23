@@ -13,6 +13,7 @@ import {
 	mockMwConfig,
 	mockMwEnv,
 	mockMwApiConstructor,
+	addEntityDataResponse,
 } from '../util/mocks';
 import { budge } from '../util/timer';
 import {
@@ -66,6 +67,7 @@ function prepareTestEnv( options: {
 			get: getMockFullRepoBatchedQueryResponse(
 				{ propertyId, language: pageLanguage },
 				entityTitle,
+				Entities,
 			),
 		} ),
 		mockMwApiConstructor( {
@@ -137,6 +139,7 @@ describe( 'string data value', () => {
 			const get = getMockFullRepoBatchedQueryResponse(
 				{ propertyId, propertyLabel, language: pageLanguage },
 				DEFAULT_ENTITY,
+				Entities,
 			);
 
 			window.mw.ForeignApi = mockMwForeignApiConstructor( {
@@ -160,10 +163,10 @@ describe( 'string data value', () => {
 			expect( ( text as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: [ propertyId ],
+				ids: [ propertyId, DEFAULT_ENTITY ],
 				languagefallback: true,
 				languages: [ pageLanguage ],
-				props: [ 'labels', 'datatype' ],
+				props: [ 'labels', 'datatype', 'info', 'claims' ],
 				formatversion: '2',
 			} );
 		} );
@@ -183,6 +186,7 @@ describe( 'string data value', () => {
 					fallbackLanguage: language,
 				},
 				DEFAULT_ENTITY,
+				Entities,
 			);
 			window.mw.ForeignApi = mockMwForeignApiConstructor( {
 				expectedUrl: 'http://localhost/w/api.php',
@@ -205,10 +209,10 @@ describe( 'string data value', () => {
 			expect( ( text as HTMLElement ).textContent ).toBe( propertyLabel );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: [ propertyId ],
+				ids: [ propertyId, DEFAULT_ENTITY ],
 				languagefallback: true,
 				languages: [ pageLanguage ],
-				props: [ 'labels', 'datatype' ],
+				props: [ 'labels', 'datatype', 'info', 'claims' ],
 				formatversion: '2',
 			} );
 		} );
@@ -218,18 +222,22 @@ describe( 'string data value', () => {
 			const testLink = prepareTestEnv( { propertyId } );
 
 			const get = jest.fn().mockResolvedValue(
-				addPageInfoNoEditRestrictionsResponse(
-					DEFAULT_ENTITY,
-					addSiteinfoRestrictionsResponse(
-						addDataBridgeConfigResponse( {}, {
-							entities: {
-								[ propertyId ]: {
-									id: propertyId,
-									datatype: 'string',
-									labels: {},
+				addEntityDataResponse(
+					Entities,
+					// no addPropertyLabelResponse( … )
+					addPageInfoNoEditRestrictionsResponse(
+						DEFAULT_ENTITY,
+						addSiteinfoRestrictionsResponse(
+							addDataBridgeConfigResponse( {}, {
+								entities: {
+									[ propertyId ]: {
+										id: propertyId,
+										datatype: 'string',
+										labels: {},
+									},
 								},
-							},
-						} as any ),
+							} as any ),
+						),
 					),
 				),
 			);
@@ -255,10 +263,10 @@ describe( 'string data value', () => {
 			expect( ( text as HTMLElement ).getAttribute( 'lang' ) ).toBe( 'zxx' );
 			expect( get ).toHaveBeenCalledWith( {
 				action: 'wbgetentities',
-				ids: [ propertyId ],
+				ids: [ propertyId, DEFAULT_ENTITY ],
 				languagefallback: true,
 				languages: [ pageLanguage ],
-				props: [ 'labels', 'datatype' ],
+				props: [ 'labels', 'datatype', 'info', 'claims' ],
 				formatversion: '2',
 			} );
 		} );
@@ -282,6 +290,7 @@ describe( 'string data value', () => {
 						fallbackLanguage: language,
 					},
 					DEFAULT_ENTITY,
+					Entities,
 				),
 			} );
 
@@ -319,6 +328,7 @@ describe( 'string data value', () => {
 						fallbackLanguage: language,
 					},
 					DEFAULT_ENTITY,
+					Entities,
 				),
 			} );
 
@@ -447,6 +457,7 @@ describe( 'string data value', () => {
 				get: getMockFullRepoBatchedQueryResponse(
 					{ propertyId: DEFAULT_PROPERTY },
 					DEFAULT_ENTITY,
+					Entities,
 					{
 						dataTypeLimits: {
 							string: {

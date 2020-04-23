@@ -6,7 +6,7 @@ import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import EditFlow from '@/definitions/EditFlow';
 import init from '@/mediawiki/init';
 import ServiceContainer from '@/services/ServiceContainer';
-import SpecialPageReadingEntityRepository from '@/data-access/SpecialPageReadingEntityRepository';
+import ApiReadingEntityRepository from '@/data-access/ApiReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import {
 	mockMwForeignApiConstructor,
@@ -88,12 +88,8 @@ describe( 'init', () => {
 			MwApiConstructor,
 		);
 		const expectedServices = new ServiceContainer();
-		expectedServices.set( 'readingEntityRepository', new SpecialPageReadingEntityRepository(
-			window.$,
-			wbRepoConfig.url + wbRepoConfig.articlePath.replace(
-				'$1',
-				'Special:EntityData',
-			),
+		expectedServices.set( 'readingEntityRepository', new ApiReadingEntityRepository(
+			repoApi,
 		) );
 		expectedServices.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
 			repoMwApi,
