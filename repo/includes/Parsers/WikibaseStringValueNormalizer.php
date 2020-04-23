@@ -3,7 +3,8 @@
 namespace Wikibase\Repo\Parsers;
 
 use InvalidArgumentException;
-use ValueParsers\Normalizers\StringNormalizer;
+use ValueParsers\Normalizers\StringNormalizer as ValueParsersStringNormalizer;
+use Wikibase\Lib\StringNormalizer as WikibaseLibStringNormalizer;
 
 /**
  * Adapter implementing ValueParsers\Normalizers\StringNormalizer based on \Wikibase\Lib\StringNormalizer.
@@ -12,17 +13,17 @@ use ValueParsers\Normalizers\StringNormalizer;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikibaseStringValueNormalizer implements StringNormalizer {
+class WikibaseStringValueNormalizer implements ValueParsersStringNormalizer {
 
 	/**
-	 * @var \Wikibase\Lib\StringNormalizer
+	 * @var WikibaseLibStringNormalizer
 	 */
 	private $normalizer;
 
 	/**
-	 * @param \Wikibase\Lib\StringNormalizer $normalizer
+	 * @param WikibaseLibStringNormalizer $normalizer
 	 */
-	public function __construct( \Wikibase\Lib\StringNormalizer $normalizer ) {
+	public function __construct( WikibaseLibStringNormalizer $normalizer ) {
 		$this->normalizer = $normalizer;
 	}
 

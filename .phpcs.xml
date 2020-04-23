@@ -56,23 +56,6 @@
 		<!-- FIXME: Add missing @covers -->
 		<exclude-pattern>tests/phpunit/*</exclude-pattern>
 	</rule>
-	<rule ref="Wikibase.Namespaces.FullQualifiedClassName">
-		<!-- FIXME: Add use statements, some class name conflicts -->
-		<exclude-pattern>DescriptionsField\.php</exclude-pattern>
-		<exclude-pattern>ElasticTermResult\.php</exclude-pattern>
-		<exclude-pattern>EntityResultSet\.php</exclude-pattern>
-		<exclude-pattern>EntityResultType\.php</exclude-pattern>
-		<exclude-pattern>EntitySearchElasticTest\.php</exclude-pattern>
-		<exclude-pattern>EntitySearchProfiles\.php</exclude-pattern>
-		<exclude-pattern>LabelsField\.php</exclude-pattern>
-		<exclude-pattern>MoreLikeWikibaseTest\.php</exclude-pattern>
-		<exclude-pattern>PerRepositoryServiceWiring\.php</exclude-pattern>
-		<exclude-pattern>SearchEntitiesIntegrationTest\.php</exclude-pattern>
-		<exclude-pattern>TermLookupSearcher\.php</exclude-pattern>
-		<exclude-pattern>WikibasePrefixSearcher\.php</exclude-pattern>
-		<exclude-pattern>WikibaseRepo\.entitytypes\.php</exclude-pattern>
-		<exclude-pattern>WikibaseStringValueNormalizer\.php</exclude-pattern>
-	</rule>
 
 	<!-- Metrics are intentionally not part of the base Wikibase CodeSniffer rule set. -->
 	<rule ref="Generic.Metrics.CyclomaticComplexity">

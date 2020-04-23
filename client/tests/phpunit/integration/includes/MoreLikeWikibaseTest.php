@@ -5,6 +5,8 @@ namespace Wikibase\Client\Tests\Integration;
 use CirrusSearch\CirrusSearch;
 use CirrusSearch\HashSearchConfig;
 use CirrusSearch\Search\SearchContext;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\MatchAll;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
@@ -22,20 +24,20 @@ class MoreLikeWikibaseTest extends MediaWikiTestCase {
 
 	public static function setUpBeforeClass() : void {
 		if ( !class_exists( CirrusSearch::class ) ||
-			!class_exists( \Elastica\Query\BoolQuery::class ) ) {
+			!class_exists( BoolQuery::class ) ) {
 			self::markTestSkipped( "CirrusSearch needs to be enabled to run this test" );
 		}
 	}
 
 	public function applyProvider() {
 		if ( !class_exists( CirrusSearch::class ) ||
-			!class_exists( \Elastica\Query\BoolQuery::class ) ) {
+			!class_exists( BoolQuery::class ) ) {
 			return [];
 		}
 		return [
 			'single page morelike w/wikibase' => [
 				'morelikewithwikibase:Some page',
-				( new \Elastica\Query\BoolQuery() )
+				( new BoolQuery() )
 					->addFilter( new \Elastica\Query\Exists( 'wikibase_item' ) )
 					->addMust( ( new \Elastica\Query\MoreLikeThis() )
 						->setParams( [
@@ -86,7 +88,7 @@ class MoreLikeWikibaseTest extends MediaWikiTestCase {
 			$this->assertFalse( $context->areResultsPossible() );
 		} else {
 			$this->assertEquals( $expectedQuery, $context->getQuery() );
-			if ( $expectedQuery instanceof \Elastica\Query\MatchAll ) {
+			if ( $expectedQuery instanceof MatchAll ) {
 				$this->assertEquals( $term, $result, 'Term must be unchanged' );
 			} else {
 				$this->assertSame( '', $result, 'Term must be empty string' );

@@ -6,7 +6,9 @@ use CirrusSearch\Connection;
 use CirrusSearch\ElasticsearchIntermediary;
 use CirrusSearch\RequestLog;
 use CirrusSearch\SearchRequestLog;
+use Elastica\Exception\ExceptionInterface;
 use Elastica\Exception\InvalidException;
+use Elastica\Exception\NotFoundException;
 use Title;
 
 /**
@@ -102,11 +104,11 @@ class TermLookupSearcher extends ElasticsearchIntermediary {
 			$query->setSize( $size );
 			$resultSet = $pageType->search( $query, [ 'search_type' => 'query_then_fetch' ] );
 			return $this->success( $resultSet->getResults() );
-		} catch ( \Elastica\Exception\NotFoundException $e ) {
+		} catch ( NotFoundException $e ) {
 			// NotFoundException just means the field didn't exist.
 			// It is up to the caller to decide if that is an error.
 			return $this->success( [] );
-		} catch ( \Elastica\Exception\ExceptionInterface $e ) {
+		} catch ( ExceptionInterface $e ) {
 			return $this->failure( $e );
 		}
 	}

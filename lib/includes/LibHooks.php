@@ -69,7 +69,7 @@ final class LibHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
-			'localBasePath' => __DIR__  . '/../',
+			'localBasePath' => __DIR__ . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
 		];
 
