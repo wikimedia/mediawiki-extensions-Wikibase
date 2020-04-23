@@ -37,6 +37,13 @@ class DataBridgePage extends Page {
 		};
 	}
 
+	static get ERROR_TYPES() {
+		return {
+			UNKNOWN: '.wb-db-error-unknown',
+			PERMISSION: '.wb-db-error-permission',
+		};
+	}
+
 	static get STRING_VALUE() {
 		return '.wb-db-string-value .wb-db-string-value__input';
 	}
@@ -160,6 +167,14 @@ class DataBridgePage extends Page {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.ERROR}`
 		);
+	}
+
+	showsErrorUnknown() {
+		return this.error.$( DataBridgePage.ERROR_TYPES.UNKNOWN ).isDisplayed();
+	}
+
+	showsErrorPermission() {
+		return this.error.$( DataBridgePage.ERROR_TYPES.PERMISSION ).isDisplayed();
 	}
 
 	get permissionErrors() {

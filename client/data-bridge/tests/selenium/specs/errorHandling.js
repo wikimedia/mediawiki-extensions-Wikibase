@@ -4,7 +4,7 @@ const assert = require( 'assert' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 describe( 'App', () => {
-	it( 'shows an error when launching bridge for a non-existent entity', () => {
+	it( 'shows ErrorUnknown when launching bridge for a non-existent entity', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const nonExistentEntityId = 'Q999999999';
@@ -21,6 +21,8 @@ describe( 'App', () => {
 
 		DataBridgePage.error.waitForDisplayed( 5000 );
 		assert.ok( DataBridgePage.error.isDisplayed() );
+		assert.ok( DataBridgePage.showsErrorUnknown() );
+
 		const errorText = DataBridgePage.error.getText();
 		assert.ok( errorText.match( new RegExp( propertyId ) ) );
 		assert.ok( errorText.match( new RegExp( nonExistentEntityId ) ) );
