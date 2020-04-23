@@ -6,6 +6,17 @@ import {
 	PartialEntity,
 } from '@/definitions/data-access/ApiWbgetentities';
 
+/*
+ * Typical usage of these functions:
+ *
+ * const response = await this.api.get( {
+ *     action: 'wbgetentities',
+ *     ids: new Set( [ entityId ] ),
+ *     // ...
+ * } ).catch( convertNoSuchEntityError );
+ * const entity = getApiEntity( response, entityId ) as EntityWith...;
+ */
+
 export function getApiEntity( response: ApiWbgetentitiesResponse, entityId: string ): PartialEntity {
 	if ( typeof response.entities !== 'object' ) {
 		throw new TechnicalProblem( 'Result not well formed.' );

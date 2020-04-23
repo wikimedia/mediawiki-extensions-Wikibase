@@ -1,4 +1,5 @@
 import DataType from '@/datamodel/DataType';
+import StatementMap from '@/datamodel/StatementMap';
 import { ApiResponse } from '@/definitions/data-access/Api';
 
 export interface ApiWbgetentitiesResponse extends ApiResponse {
@@ -28,4 +29,12 @@ export interface EntityWithLabels extends PartialEntity {
 			'for-language'?: string;
 		};
 	};
+}
+
+export interface EntityWithInfo extends PartialEntity {
+	lastrevid: number;
+}
+
+export interface EntityWithClaims extends PartialEntity {
+	claims: StatementMap;
 }
