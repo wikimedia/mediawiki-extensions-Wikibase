@@ -85,7 +85,6 @@ return [
 			'dataValues.values',
 			'jquery.util.getDirectionality',
 			'jquery.wikibase.entityselector',
-			'test.sinonjs',
 			'wikibase.datamodel',
 			'wikibase.entityChangers.EntityChangersFactory',
 			'wikibase.experts.modules',
@@ -109,7 +108,6 @@ return [
 			'resources/wikibase/view/ViewFactoryFactory.js',
 		],
 		'dependencies' => [
-			'test.sinonjs',
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ReadModeViewFactory',
 		],
@@ -183,7 +181,6 @@ return [
 			'resources/wikibase/view/ViewController.js',
 		],
 		'dependencies' => [
-			'test.sinonjs',
 			'wikibase.view.ControllerViewFactory',
 			'wikibase.view.ReadModeViewFactory',
 		],
