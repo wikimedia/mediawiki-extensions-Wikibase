@@ -214,7 +214,6 @@ return call_user_func( function() {
 				'wikibase.api.ValueCaller',
 				'wikibase.formatters.ApiValueFormatter',
 				'wikibase.datamodel',
-				'wikibase.entityPage.entityLoaded',
 				'wikibase.entityChangers.EntityChangersFactory',
 				'wikibase.EntityInitializer',
 				'wikibase.api.RepoApi',
