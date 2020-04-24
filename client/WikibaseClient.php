@@ -168,6 +168,9 @@ call_user_func( function() {
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 
+	// search hooks
+	$wgHooks['SearchResultProvideDescription'][] = '\Wikibase\Client\Hooks\DescriptionProviderHookHandler::onSearchResultProvideDescription';
+
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
 	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
