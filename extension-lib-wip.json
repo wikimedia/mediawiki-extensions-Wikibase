@@ -11,12 +11,12 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"Hooks": {
-		"UnitTestsList": "\\Wikibase\\LibHooks::registerPhpUnitTests",
-		"ResourceLoaderTestModules": "\\Wikibase\\LibHooks::registerQUnitTests",
-		"ResourceLoaderRegisterModules": "\\Wikibase\\LibHooks::onResourceLoaderRegisterModules",
-		"ExtensionTypes": "\\Wikibase\\LibHooks::onExtensionTypes"
+		"UnitTestsList": "\\Wikibase\\Lib\\LibHooks::registerPhpUnitTests",
+		"ResourceLoaderTestModules": "\\Wikibase\\Lib\\LibHooks::registerQUnitTests",
+		"ResourceLoaderRegisterModules": "\\Wikibase\\Lib\\LibHooks::onResourceLoaderRegisterModules",
+		"ExtensionTypes": "\\Wikibase\\Lib\\LibHooks::onExtensionTypes"
 	},
-	"callback": "\\Wikibase\\LibHooks::onRegistration",
+	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"MessagesDirs": {
 		"WikibaseLib": [
 			"lib/i18n"
