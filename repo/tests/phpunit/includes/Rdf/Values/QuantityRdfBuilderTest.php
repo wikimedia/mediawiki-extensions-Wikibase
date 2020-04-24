@@ -3,24 +3,24 @@
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\QuantityValue;
+use DataValues\UnboundedQuantityValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\ItemId;
-use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Lib\Units\UnitStorage;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\Values\ComplexValueRdfHelper;
-use Wikibase\Rdf\Values\QuantityRdfBuilder;
+use Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Repo\Rdf\Values\QuantityRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\Values\QuantityRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\Values\QuantityRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

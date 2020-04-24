@@ -2,21 +2,21 @@
 
 namespace Wikibase\Repo\Tests\Rdf\Values;
 
-use DataValues\Geo\Values\LatLongValue;
 use DataValues\Geo\Values\GlobeCoordinateValue;
+use DataValues\Geo\Values\LatLongValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\Values\ComplexValueRdfHelper;
-use Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder;
+use Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Repo\Rdf\Values\GlobeCoordinateRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers \Wikibase\Rdf\Values\GlobeCoordinateRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\Values\GlobeCoordinateRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

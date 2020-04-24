@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf\Values;
+namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\DataValue;
 use Wikibase\Rdf\DedupeBag;

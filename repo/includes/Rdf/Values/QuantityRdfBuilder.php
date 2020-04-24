@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Rdf\Values;
+namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\QuantityValue;
 use DataValues\UnboundedQuantityValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Units\UnitConverter;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Rdf\Values\ObjectUriRdfBuilder;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Repo\Rdf\Values\ObjectUriRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers \Wikibase\Rdf\Values\ObjectUriRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\Values\ObjectUriRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

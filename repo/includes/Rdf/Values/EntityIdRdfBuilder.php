@@ -1,11 +1,11 @@
 <?php
 
-namespace Wikibase\Rdf\Values;
+namespace Wikibase\Repo\Rdf\Values;
 
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

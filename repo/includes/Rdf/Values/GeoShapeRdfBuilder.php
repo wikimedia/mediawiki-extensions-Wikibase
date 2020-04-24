@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\DataValue;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\Values\ObjectUriRdfBuilder;
 
 /**
  * @license GPL-2.0-or-later

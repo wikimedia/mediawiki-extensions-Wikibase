@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf\Values;
+namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\MonolingualTextValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
