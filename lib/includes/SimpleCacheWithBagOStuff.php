@@ -17,7 +17,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	use LoggerAwareTrait;
 
-	const KEY_REGEX = '/^[a-zA-Z0-9_\-.\:]+\z/';
+	private const KEY_PREFIX_REGEX = '/^[a-zA-Z0-9_\-.\:]+\z/';
 
 	/**
 	 * @var BagOStuff
@@ -42,7 +42,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * @throws \InvalidArgumentException If prefix has wrong format or secret is not a string or empty
 	 */
 	public function __construct( BagOStuff $inner, $prefix, $secret ) {
-		$this->assertKeyIsValid( $prefix );
+		$this->assertKeyPrefixIsValid( $prefix );
 
 		if ( !is_string( $secret ) || empty( $secret ) ) {
 			throw new \InvalidArgumentException( "Secret is required to be a nonempty string" );
@@ -67,7 +67,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function get( $key, $default = null ) {
 		$key = $this->inner->makeKey( $this->prefix, $key );
-		$this->assertKeyIsValid( $key );
 
 		$result = $this->inner->get( $key );
 		if ( $result === false ) {
@@ -93,7 +92,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function set( $key, $value, $ttl = null ) {
 		$key = $this->inner->makeKey( $this->prefix, $key );
-		$this->assertKeyIsValid( $key );
 		$ttl = $this->normalizeTtl( $ttl );
 
 		$value = $this->serialize( $value );
@@ -113,7 +111,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function delete( $key ) {
 		$key = $this->inner->makeKey( $this->prefix, $key );
-		$this->assertKeyIsValid( $key );
 
 		return $this->inner->delete( $key );
 	}
@@ -148,7 +145,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			},
 			$keys
 		);
-		$this->assertKeysAreValid( $keys );
 
 		$innerResult = $this->inner->getMulti( $prefixedKeys );
 		$result = [];
@@ -208,7 +204,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function deleteMultiple( $keys ) {
 		$keys = $this->toArray( $keys );
-		$this->assertKeysAreValid( $keys );
 		$result = true;
 		foreach ( $keys as $key ) {
 			$result &= $this->delete( $key );
@@ -233,15 +228,8 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function has( $key ) {
 		$key = $this->inner->makeKey( $this->prefix, $key );
-		$this->assertKeyIsValid( $key );
 		$result = $this->inner->get( $key );
 		return $result !== false;
-	}
-
-	private function assertKeysAreValid( $keys ) {
-		foreach ( $keys as $key ) {
-			$this->assertKeyIsValid( $key );
-		}
 	}
 
 	/**
@@ -251,7 +239,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 * 								allow integers to be present as keys in $values in `setMultiple()`
 	 * @throws CacheInvalidArgumentException
 	 */
-	private function assertKeyIsValid( $key, $allowIntegers = false ) {
+	private function assertKeyPrefixIsValid( $key, $allowIntegers = false ) {
 		if ( $allowIntegers && is_int( $key ) ) {
 			$key = (string)$key;
 		}
@@ -265,7 +253,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
 		}
 
-		if ( !preg_match( self::KEY_REGEX, $key ) ) {
+		if ( !preg_match( self::KEY_PREFIX_REGEX, $key ) ) {
 			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
@@ -307,7 +295,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		if ( $var instanceof Traversable ) {
 			$result = [];
 			foreach ( $var as $key => $value ) {
-				$this->assertKeyIsValid( $key, true );
 				$result[ $key ] = $value;
 			}
 		} else {
