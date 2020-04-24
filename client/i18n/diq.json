@@ -70,5 +70,6 @@
 	"wikibase-pageinfo-entity-usage-O": "Zewbina (İfadeyi)",
 	"wikibase-otherprojects": "Proceyanê binan de",
 	"wikibase-otherprojects-beta-message": "Kıştê proceyanê binan",
-	"wikibase-client-data-bridge-references-heading": "Çımeyi"
+	"wikibase-client-data-bridge-references-heading": "Çımeyi",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "{{WBREPONAME}} sera erci bıvurnê"
 }

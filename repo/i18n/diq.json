@@ -60,6 +60,7 @@
 	"wikibase-sitelink-site-edit-placeholder": "wiki",
 	"wikibase-sitelink-page-edit-placeholder": "pele",
 	"wikibase-statementsection-statements": "İfadeyi",
+	"wikibase-statementsection-identifiers": "Şınasnayoğ",
 	"wikibase-sitelinks": "Gırey sita",
 	"wikibase-sitelinks-special": "Pelê bini",
 	"wikibase-remove": "wedare",
@@ -88,7 +89,9 @@
 	"wikibase-itemdisambiguation-lookup-label": "Etiket:",
 	"wikibase-itemdisambiguation-submit": "Cı geyre",
 	"wikibase-newproperty-datatype": "Babetê melumati:",
+	"wikibase-description-helppage": "Help:İzahat",
 	"wikibase-label-helppage": "Help:Etiket",
+	"special-newitem": "Yew obceyo newe vırazê",
 	"wikibase-newentity-language": "Zıwan:",
 	"wikibase-newentity-label": "Etiket:",
 	"wikibase-newentity-description": "Şınasnayış:",
@@ -125,6 +128,8 @@
 	"wikibase-restoreold": "reset kerê",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]]i ([[User talk:$4|werênayış]]) vurnayışê $3i peyser gırewt",
 	"wikibase-listdatatypes-wikibase-item-head": "obje",
+	"wikibase-listdatatypes-wikibase-property-head": "Xısusiyet",
+	"wikibase-listdatatypes-tabular-data-head": "Tabloy data",
 	"wikibase-listdatatypes-string-head": "La",
 	"wikibase-listdatatypes-time-head": "Zeman",
 	"wikibase-listdatatypes-url-head": "GRE",
@@ -140,5 +145,6 @@
 	"content-model-wikibase-query": "Wikibase pers",
 	"right-item-merge": "objan yew ke",
 	"right-property-create": "Xısusiyeti vıraze",
-	"wikibase-pageinfo-subscription-none": "Çıniyo"
+	"wikibase-pageinfo-subscription-none": "Çıniyo",
+	"wikibase-tainted-ref-popper-help-link-text": "Pheşti"
 }

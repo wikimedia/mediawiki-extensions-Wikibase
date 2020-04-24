@@ -9,6 +9,7 @@
 			"Orbot707"
 		]
 	},
+	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-error-unexpected": "Xeta: $1.",
 	"wikibase-quantitydetails-amount": "Miqdar",
 	"wikibase-quantitydetails-unit": "Lete",
@@ -27,16 +28,22 @@
 	"wikibase-sitelinks-link-columnheading": "Pela gıreyıne",
 	"wikibase-snakview-snaktypeselector-novalue": "erc çıniyo",
 	"wikibase-tooltip-error-details": "Teferruati",
-	"datatypes-type-string": "La",
+	"wikibase-validator-no-validators": "Qedexe",
+	"datatypes-type-string": "Rêze",
 	"datatypes-type-quantity": "Miqdar",
-	"datatypes-type-monolingualtext": "Nuştey yo zıwani",
-	"datatypes-type-multilingualtext": "Nuştey zaf Zıwani",
+	"datatypes-type-monolingualtext": "Nuştey yew zıwanıni",
+	"datatypes-type-multilingualtext": "Nuştey zaf zıwanıni",
 	"datatypes-type-number": "Numre",
-	"datatypes-type-mediawiki-title": "Sernamey MediaWiki",
+	"datatypes-type-mediawiki-title": "Serekê MediaWiki",
 	"datatypes-type-unknown": "Nêvaciyayo",
 	"datatypes-type-boolean": "Boolean",
-	"datatypes-type-globe-coordinate": "Koordinatê coğrafyayêni",
-	"datatypes-type-time": "Noktay zemani",
+	"datatypes-type-globe-coordinate": "Koordinatê Coğrafyay",
+	"datatypes-type-time": "Zemani de puani",
 	"datatypes-type-wikibase-item": "Obje",
-	"version-wikibase": "Wikibase"
+	"datatypes-type-wikibase-property": "Xısusiyet",
+	"datatypes-type-commonsMedia": "Commons media dosya",
+	"datatypes-type-geo-shape": "Şekılê coğrafya",
+	"datatypes-type-tabular-data": "Tabloy data",
+	"version-wikibase": "Wikibase",
+	"wikibase-entity-summary-wbcreateclaim-value": "{{PLURAL:$1|waşte|waşteyi}} vıraziyaye"
 }

@@ -5,6 +5,7 @@
 			"S4b1nuz E.656"
 		]
 	},
+	"wikibase-client-desc": "Client pe l'estenscion Wikibase",
 	"tooltip-t-wikibase": "Ingancio a l'elemento de l'archivvio di dæti connessi",
 	"wikibase-after-page-delete": "Ti doviesci levâ ascì l'ingancio a sta paggina [$1 da l'elemento {{WBREPONAME}} associou] pe mantegnî i inganci lenguisteghi.",
 	"wikibase-comment-update": "Elemento {{WBREPONAME}} modificou",
