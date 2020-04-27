@@ -7,14 +7,14 @@ use MediaWiki\MediaWikiServices;
 use MWException;
 use Title;
 use User;
-use Wikibase\EditEntityAction;
+use Wikibase\Repo\Actions\EditEntityAction;
+use Wikibase\Repo\Actions\SubmitEntityAction;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SubmitEntityAction;
 use WikiPage;
 
 /**
- * @covers \Wikibase\EditEntityAction
- * @covers \Wikibase\SubmitEntityAction
+ * @covers \Wikibase\Repo\Actions\EditEntityAction
+ * @covers \Wikibase\Repo\Actions\SubmitEntityAction
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Actions;
 
 use Content;
 use IContextSource;
@@ -13,8 +13,10 @@ use Page;
 use Status;
 use Title;
 use WatchAction;
+use Wikibase\EntityContent;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\SummaryFormatter;
 use WikiPage;
 
 /**
@@ -312,3 +314,6 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 }
+
+/** @deprecated */
+class_alias( SubmitEntityAction::class, 'Wikibase\SubmitEntityAction' );
