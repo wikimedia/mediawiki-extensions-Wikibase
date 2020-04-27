@@ -24,7 +24,6 @@
 
 .wikibase-entitysearch-list .wb-entitysearch-suggestions .special-query {
 	overflow: hidden;
-	-o-text-overflow: ellipsis; /* Opera 9 to 10 */
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

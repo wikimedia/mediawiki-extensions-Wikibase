@@ -22,7 +22,6 @@
 .wb-toggle span.ui-icon.wb-toggle-icon3dtrans {
 	-webkit-transition: 0.25s ease-out;
 	-moz-transition: 0.25s ease-out;
-	-o-transition: 0.25s ease-out;
 	transition: 0.25s ease-out;
 }
 
@@ -30,7 +29,6 @@
 .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 	-webkit-transition: 0.25s ease-out;
 	-moz-transition: 0.25s ease-out;
-	-o-transition: 0.25s ease-out;
 	transition: 0.25s ease-out;
 	-webkit-transform: rotate( -90deg );
 	-moz-transform: rotate( -90deg );
@@ -44,7 +42,6 @@ body.rtl .wb-toggle-collapsed span.ui-icon.wb-toggle-icon3dtrans {
 	-webkit-transform: rotate( 90deg );
 	-moz-transform: rotate( 90deg );
 	-ms-transform: rotate( 90deg );
-	-o-transform: rotate( 90deg );
 	transform: rotate( 90deg );
 }
 
