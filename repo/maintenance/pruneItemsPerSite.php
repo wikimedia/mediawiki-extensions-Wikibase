@@ -97,12 +97,14 @@ class PruneItemsPerSite extends Maintenance {
 			[
 				'page' => [
 					'LEFT JOIN',
-					'page_title = ' . $dbr->buildConcat( [
-						$dbr->addQuotes( "Q" ),
-						"ips_item_id",
-					] ),
-					'page_namespace' => $itemNamespace,
-					'page_is_redirect' => 0,
+					[
+						'page_title = ' . $dbr->buildConcat( [
+							$dbr->addQuotes( "Q" ),
+							"ips_item_id",
+						] ),
+						'page_namespace' => $itemNamespace,
+						'page_is_redirect' => 0,
+					],
 				],
 			]
 		);
