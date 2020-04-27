@@ -72,6 +72,8 @@ The entity types repository is an associative array mapping entity type identifi
   * The name of a Lua module that should be used to represent entities of this type. The module must expose a create() function* mw.wikibase.getEntity() will call this function with a clone of the entity data and return its result. If this is not specified, the standard mw.wikibase.entity module is used.
 * entity-id-lookup-callback (client only)
   * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
+* prefetching-term-lookup-callback
+  * A callable that returns [PrefetchingTermLookup] instance. When a callback is not provided, the fallback of a NullPrefetchingTermLookup is used.
 
 Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 
@@ -97,3 +99,4 @@ The entity type definitions themselves are wrapped by the [EntityTypeDefinitions
 [EntityLinkFormatter]: @ref Wikibase::Repo::Hooks::Formatters::EntityLinkFormatter
 [EntityIdFormatter]: @ref Wikibase::DataModel::Services::EntityId::EntityIdFormatter
 [EntityReferenceExtractors]: @ref Wikibase::Repo::EntityReferenceExtractors::EntityReferenceExtractor
+[PrefetchingTermLookup]: @ref Wikibase::DataAccess::PrefetchingTermLookup
