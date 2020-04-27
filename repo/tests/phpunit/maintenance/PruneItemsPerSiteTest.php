@@ -109,6 +109,8 @@ class PruneItemsPerSiteTest extends MaintenanceBaseTestCase {
 			],
 			__METHOD__
 		);
+		// Create a page with the entity id as title, but in a non-entity NS
+		$this->editPage( 'User talk:Q' . ( 3453577 + $c ), __METHOD__, __METHOD__ );
 	}
 
 }
