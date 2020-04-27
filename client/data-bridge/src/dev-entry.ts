@@ -13,6 +13,7 @@ import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
 import messages from '@/mock-data/messages';
 import Reference from '@/datamodel/Reference';
+import cssjanus from 'cssjanus';
 
 const services = new ServiceContainer();
 
@@ -171,3 +172,8 @@ launch(
 // to determine the style of some buttons (e.g. back button)
 const direction = getOrEnforceUrlParameter( 'dir', 'ltr' ) as string;
 ( document.querySelector( 'html' ) as HTMLElement ).setAttribute( 'dir', direction );
+if ( direction === 'rtl' ) {
+	for ( const style of document.querySelectorAll( 'style' ) ) {
+		style.innerHTML = cssjanus.transform( style.innerHTML );
+	}
+}
