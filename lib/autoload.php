@@ -4,6 +4,5 @@
 global $wgAutoloadClasses;
 
 $wgAutoloadClasses += [
-	'Wikibase\\LibHooks' => __DIR__ . '/LibHooks.php',
 	'Wikibase\\PopulateSitesTable' => __DIR__ . '/maintenance/populateSitesTable.php',
 ];

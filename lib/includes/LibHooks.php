@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Lib;
 
 use ExtensionRegistry;
 use ResourceLoader;
@@ -24,7 +24,7 @@ final class LibHooks {
 
 		$wgResourceModules = array_merge(
 			$wgResourceModules,
-			require __DIR__ . '/resources/Resources.php'
+			require __DIR__ . '/../resources/Resources.php'
 		);
 	}
 
@@ -37,8 +37,8 @@ final class LibHooks {
 	 * @return bool
 	 */
 	public static function registerPhpUnitTests( array &$paths ) {
-		$paths[] = __DIR__ . '/tests/phpunit/';
-		$paths[] = __DIR__ . '/../data-access/tests/phpunit/';
+		$paths[] = __DIR__ . '/../tests/phpunit/';
+		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
 
 		return true;
 	}
@@ -54,7 +54,7 @@ final class LibHooks {
 	public static function registerQUnitTests( array &$testModules, ResourceLoader $resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
-			require __DIR__ . '/tests/qunit/resources.php'
+			require __DIR__ . '/../tests/qunit/resources.php'
 		);
 
 		return true;
@@ -69,7 +69,7 @@ final class LibHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
-			'localBasePath' => __DIR__,
+			'localBasePath' => __DIR__  . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
 		];
 
