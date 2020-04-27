@@ -64,12 +64,9 @@ class EntityContentDiffView extends DifferenceEngine {
 	/**
 	 * Get a header for a specified revision.
 	 *
-	 * @param Revision|RevisionRecord $rev Mismatch is because core still says Revision,
-	 * core can't change without triggering errors that this doesn't implement it properly,
-	 * suppress for a bit
+	 * @param Revision|RevisionRecord $rev Pasing Revision is deprecated since 1.35
 	 * @param string $complete 'complete' to get the header wrapped depending
 	 *        the visibility of the revision and a link to edit the page.
-	 * @suppress PhanParamSignatureRealMismatchHasNoParamType
 	 *
 	 * @return string HTML fragment
 	 */
@@ -78,6 +75,7 @@ class EntityContentDiffView extends DifferenceEngine {
 		//      Perhaps some parts could be factored out to reduce code duplication.
 
 		if ( $rev instanceof Revision ) {
+			wfDeprecated( __METHOD__ . ' with Revision objects', '1.35' );
 			$rev = $rev->getRevisionRecord();
 		}
 
