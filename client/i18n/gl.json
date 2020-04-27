@@ -3,6 +3,7 @@
 		"authors": [
 			"Banjo",
 			"Elisardojm",
+			"Giromin Cangiaxo",
 			"Iváns",
 			"Toliño"
 		]
@@ -63,7 +64,7 @@
 	"wikibase-error-deserialize-error": "Erro ao deseriar os datos.",
 	"wikibase-error-serialize-error": "Erro ao seriar os datos.",
 	"wikibase-error-invalid-entity-id": "O identificador \"$2\" é descoñecido para o sistema. Por favor, use un identificador de entidade válido.",
-	"wikibase-error-exceeded-entity-access-limit": "Acccedeuse a demasiadas entidades {{WBREPONAME}}.",
+	"wikibase-error-exceeded-entity-access-limit": "Accedeuse a demasiadas entidades {{WBREPONAME}}.",
 	"unconnectedpages": "Páxinas non conectadas con elementos",
 	"unconnectedpages-summary": "Esta páxina lista páxinas sen conexión a un elemento de datos (nos espazos de nomes que admiten elementos conectados). A lista está ordenada por identificador de páxina descendente, polo que as páxinas máis novas móstranse primeiro.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|ligazón interlingüística|ligazóns interlingüísticas}} na páxina)",

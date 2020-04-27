@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abdullahi",
 			"Abshirdheere"
 		]
 	},
+	"wikibase-sitelinks-wikipedia": "Wikipedia",
 	"datatypes-type-quantity": "Tayo",
 	"datatypes-type-number": "Tiro"
 }
