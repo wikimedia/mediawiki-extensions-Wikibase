@@ -91,11 +91,9 @@ export class RootGetters extends Getters<Application> {
 	public get reportIssueTemplateBody(): string {
 		const pageUrl = this.state.pageUrl;
 		const stackTrace = JSON.stringify( this.state.applicationErrors, errorPropertyNameReplacer, 4 );
-		const activeState = this.state as InitializedApplicationState;
-		const entityId = activeState[ NS_ENTITY ].id;
 
 		return [ `The error happened on: ${pageUrl}`,
-			`Item: ${entityId}`,
+			`Item title: ${this.state.entityTitle}`,
 			`Property: ${this.state.targetProperty}`,
 			`Error message: ${this.state.applicationErrors[ 0 ].type}`,
 			'Debug information:',

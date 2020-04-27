@@ -331,10 +331,9 @@ describe( 'root/getters', () => {
 	describe( 'reportIssueTemplateBody', () => {
 		it( 'builds a string matching the snapshot', () => {
 			const pageUrl = 'https://bg.client.example.com/wiki/Дъглас_Адамс';
+			const entityTitle = `Item:${entityId}`;
 			const applicationState = newApplicationState( {
-				[ NS_ENTITY ]: {
-					id: entityId,
-				},
+				entityTitle,
 				targetProperty,
 				pageUrl,
 				applicationErrors: [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: { stack: 'test' } } ],
