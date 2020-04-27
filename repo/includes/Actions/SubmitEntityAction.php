@@ -314,6 +314,3 @@ class SubmitEntityAction extends EditEntityAction {
 	}
 
 }
-
-/** @deprecated */
-class_alias( SubmitEntityAction::class, 'Wikibase\SubmitEntityAction' );

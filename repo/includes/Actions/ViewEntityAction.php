@@ -183,6 +183,3 @@ class ViewEntityAction extends ViewAction {
 	}
 
 }
-
-/** @deprecated */
-class_alias( ViewEntityAction::class, 'Wikibase\ViewEntityAction' );
