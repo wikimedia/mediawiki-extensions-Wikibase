@@ -41,6 +41,7 @@ class DataBridgePage extends Page {
 		return {
 			UNKNOWN: '.wb-db-error-unknown',
 			PERMISSION: '.wb-db-error-permission',
+			SAVING: '.wb-db-error-saving',
 		};
 	}
 
@@ -183,6 +184,10 @@ class DataBridgePage extends Page {
 
 	get permissionErrors() {
 		return this.error.$$( DataBridgePage.PERMISSION_ERROR_CONTAINER );
+	}
+
+	showsErrorSaving() {
+		return this.error.$( DataBridgePage.ERROR_TYPES.SAVING ).isDisplayed();
 	}
 
 	get bailoutActions() {

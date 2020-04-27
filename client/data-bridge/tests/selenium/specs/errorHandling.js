@@ -63,4 +63,56 @@ describe( 'App', () => {
 		DataBridgePage.errorUnknownRelaunch.click();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
+
+	it( 'shows ErrorSaving when losing internet connection before saving', () => {
+		const title = DataBridgePage.getDummyTitle();
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+		const stringPropertyExampleValue = 'initialValue';
+		const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+			'claims': [ {
+				'mainsnak': {
+					'snaktype': 'value',
+					'property': propertyId,
+					'datavalue': { 'value': stringPropertyExampleValue, 'type': 'string' },
+				},
+				'type': 'statement',
+				'rank': 'normal',
+			} ],
+		} ) );
+		const content = DataBridgePage.createInfoboxWikitext( [ {
+			label: 'official website',
+			entityId,
+			propertyId,
+			editFlow: 'overwrite',
+		} ] );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+		DataBridgePage.openBridgeOnPage( title );
+
+		DataBridgePage.bridge.waitForDisplayed( 5000 );
+		assert.ok( DataBridgePage.bridge.isDisplayed() );
+
+		const newValue = 'newValue';
+		browser.waitUntil(
+			() => {
+				DataBridgePage.value.setValue( newValue );
+				return DataBridgePage.value.getValue() === newValue;
+			}
+		);
+
+		DataBridgePage.editDecision( 'replace' ).click();
+
+		// show License
+		DataBridgePage.saveButton.click();
+		DataBridgePage.licensePopup.waitForDisplayed();
+
+		// lose internet connection
+		NetworkUtil.disableNetwork();
+
+		// actually trigger save
+		DataBridgePage.saveButton.click();
+
+		DataBridgePage.error.waitForDisplayed();
+		assert.ok( DataBridgePage.showsErrorSaving() );
+	} );
 } );

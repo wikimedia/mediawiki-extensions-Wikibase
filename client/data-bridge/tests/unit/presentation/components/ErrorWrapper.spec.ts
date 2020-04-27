@@ -12,6 +12,7 @@ import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupported
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
+import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -188,6 +189,21 @@ describe( 'ErrorWrapper', () => {
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 		expect( wrapper.find( ErrorUnsupportedSnakType ).exists() ).toBe( true );
+	} );
+
+	it( 'mounts ErrorSaving on saving error', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.SAVING_FAILED,
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		expect( wrapper.find( ErrorSaving ).exists() ).toBe( true );
 	} );
 
 	it( 'repeats ErrorUnknown\'s "relaunch" event', () => {

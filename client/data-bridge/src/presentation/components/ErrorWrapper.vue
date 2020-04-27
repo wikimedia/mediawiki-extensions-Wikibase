@@ -18,6 +18,9 @@
 			v-else-if="unsupportedSnakTypeError !== null"
 			:snak-type="unsupportedSnakTypeError.info.snakType"
 		/>
+		<ErrorSaving
+			v-else-if="isGenericSavingError"
+		/>
 		<ErrorUnknown
 			v-else
 			@relaunch="relaunch"
@@ -35,6 +38,7 @@ import ErrorUnknown from '@/presentation/components/ErrorUnknown.vue';
 import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupportedDatatype.vue';
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
+import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
@@ -49,6 +53,7 @@ import ApplicationError, {
 		ErrorUnsupportedDatatype,
 		ErrorDeprecatedStatement,
 		ErrorAmbiguousStatement,
+		ErrorSaving,
 	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
@@ -92,6 +97,10 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 			}
 		}
 		return null;
+	}
+
+	public get isGenericSavingError(): boolean {
+		return this.rootModule.getters.isGenericSavingError;
 	}
 
 	private relaunch(): void {
