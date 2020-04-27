@@ -5,18 +5,18 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 use DataValues\TimeValue;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\JulianDateTimeValueCleaner;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\Values\ComplexValueRdfHelper;
-use Wikibase\Rdf\Values\TimeRdfBuilder;
+use Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Repo\Rdf\Values\TimeRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers \Wikibase\Rdf\Values\TimeRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\Values\TimeRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

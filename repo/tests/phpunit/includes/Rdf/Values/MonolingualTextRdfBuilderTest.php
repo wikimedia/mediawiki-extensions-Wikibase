@@ -4,13 +4,13 @@ namespace Wikibase\Repo\Tests\Rdf\Values;
 
 use DataValues\MonolingualTextValue;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Rdf\Values\MonolingualTextRdfBuilder;
+use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Repo\Rdf\Values\MonolingualTextRdfBuilder;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 
 /**
- * @covers \Wikibase\Rdf\Values\MonolingualTextRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\Values\MonolingualTextRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

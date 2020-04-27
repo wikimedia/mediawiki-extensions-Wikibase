@@ -7,12 +7,12 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\HashDedupeBag;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\Values\ComplexValueRdfHelper;
+use Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\Values\ComplexValueRdfHelper
+ * @covers \Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper
  *
  * @group Wikibase
  * @group WikibaseRdf
