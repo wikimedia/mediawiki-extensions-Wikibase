@@ -7,7 +7,6 @@ use ChangeTags;
 use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use PHPUnit\Framework\Constraint\Constraint;
-use Revision;
 use TestSites;
 use TestUser;
 use Title;
@@ -424,11 +423,14 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 			$regex = "!$r!";
 		}
 
-		$rev = Revision::newFromId( $revid );
-		$this->assertNotNull( $rev, "revision not found: $revid" );
+		$revRecord = MediaWikiServices::getInstance()
+			->getRevisionLookup()
+			->getRevisionById( $revid );
+		$this->assertNotNull( $revRecord, "revision not found: $revid" );
 
-		$comment = $rev->getComment();
-		$this->assertRegExp( $regex, $comment );
+		$comment = $revRecord->getComment();
+		$this->assertInstanceOf( 'CommentStoreComment', $comment );
+		$this->assertRegExp( $regex, $comment->text );
 	}
 
 	protected function assertCanTagSuccessfulRequest(

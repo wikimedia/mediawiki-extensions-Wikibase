@@ -9,12 +9,13 @@ use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Revision\SlotRecord;
 use MediaWikiTestCase;
 use RawMessage;
 use ReflectionClass;
-use Revision;
 use Serializers\Serializer;
 use Status;
+use Title;
 use User;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -441,11 +442,20 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$redirectRevId = $store->saveRedirect( $redirect, 'redirect one', $user, EDIT_UPDATE );
 
 		// FIXME: use the $lookup to check this, once EntityLookup supports redirects.
-		$revision = Revision::newFromId( $redirectRevId );
+		$revisionLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$revisionRecord = $revisionLookup->getRevisionById( $redirectRevId );
 
-		$this->assertTrue( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
-		$this->assertTrue( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
-		$this->assertTrue( $revision->getContent()->getEntityRedirect()->equals( $redirect ), 'getEntityRedirect()' );
+		$this->assertTrue(
+			Title::newFromLinkTarget( $revisionRecord->getPageAsLinkTarget() )->isRedirect(),
+			'Title::isRedirect'
+		);
+
+		$revisionContent = $revisionRecord->getContent( SlotRecord::MAIN );
+		$this->assertTrue( $revisionContent->isRedirect(), 'EntityContent::isRedirect()' );
+		$this->assertTrue(
+			$revisionContent->getEntityRedirect()->equals( $redirect ),
+			'getEntityRedirect()'
+		);
 
 		$this->assertRedirectPerPage( $q33, $oneId );
 
@@ -457,10 +467,16 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// Revert to original content
 		$r1 = $store->saveEntity( $one, 'restore one', $user, EDIT_UPDATE );
-		$revision = Revision::newFromId( $r1->getRevisionId() );
+		$revisionRecord = $revisionLookup->getRevisionById( $r1->getRevisionId() );
 
-		$this->assertFalse( $revision->getTitle()->isRedirect(), 'Title::isRedirect' );
-		$this->assertFalse( $revision->getContent()->isRedirect(), 'EntityContent::isRedirect()' );
+		$this->assertFalse(
+			Title::newFromLinkTarget( $revisionRecord->getPageAsLinkTarget() )->isRedirect(),
+			'Title::isRedirect'
+		);
+		$this->assertFalse(
+			$revisionRecord->getContent( SlotRecord::MAIN )->isRedirect(),
+			'EntityContent::isRedirect()'
+		);
 	}
 
 	private function assertRedirectPerPage( EntityId $expected, EntityId $entityId ) {
@@ -614,9 +630,10 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 			$user = $this->getTestUser()->getUser();
 		}
 
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
 		try {
 			$rev = $store->saveEntity( $entity, $summary, $user, $flags, $baseRevId );
-			$status = Status::newGood( Revision::newFromId( $rev->getRevisionId() ) );
+			$status = Status::newGood( $revLookup->getRevisionById( $rev->getRevisionId() ) );
 		} catch ( StorageException $ex ) {
 			$status = $ex->getStatus();
 
