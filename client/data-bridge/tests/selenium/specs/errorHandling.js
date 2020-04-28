@@ -1,7 +1,8 @@
 const assert = require( 'assert' ),
 	Api = require( 'wdio-mediawiki/Api' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
+	NetworkUtil = require( './../NetworkUtil' );
 
 describe( 'App', () => {
 	it( 'shows ErrorUnknown when launching bridge for a non-existent entity', () => {
@@ -26,5 +27,40 @@ describe( 'App', () => {
 		const errorText = DataBridgePage.error.getText();
 		assert.ok( errorText.match( new RegExp( propertyId ) ) );
 		assert.ok( errorText.match( new RegExp( nonExistentEntityId ) ) );
+	} );
+
+	it( 'can be relaunched from ErrorUnknown', () => {
+		const title = DataBridgePage.getDummyTitle();
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+		const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+			'claims': [ {
+				'mainsnak': {
+					'snaktype': 'value',
+					'property': propertyId,
+					'datavalue': { 'value': 'foo bar baz', 'type': 'string' },
+				},
+				'type': 'statement',
+				'rank': 'normal',
+			} ],
+		} ) );
+		const content = DataBridgePage.createInfoboxWikitext( [ {
+			label: 'prevail at last',
+			entityId,
+			propertyId,
+			editFlow: 'overwrite',
+		} ] );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+		DataBridgePage.open( title );
+
+		NetworkUtil.disableNetwork();
+		DataBridgePage.overloadedLink.click();
+		DataBridgePage.error.waitForDisplayed();
+
+		assert.ok( DataBridgePage.showsErrorUnknown() );
+
+		NetworkUtil.enableNetwork();
+		DataBridgePage.errorUnknownRelaunch.click();
+		DataBridgePage.bridge.waitForDisplayed();
 	} );
 } );

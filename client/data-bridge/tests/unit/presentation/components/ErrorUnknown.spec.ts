@@ -55,4 +55,10 @@ describe( 'ErrorUnknown', () => {
 		shallowMount( ErrorUnknown, { mocks, store, localVue } );
 		expect( trackApplicationErrorsAsUnknown ).toHaveBeenCalledTimes( 1 );
 	} );
+
+	it( 'repeats relaunch button\'s "click" event as "relaunch"', () => {
+		const wrapper = shallowMount( ErrorUnknown, { store } );
+		wrapper.find( '.wb-db-error-unknown__relaunch' ).vm.$emit( 'click' );
+		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
+	} );
 } );
