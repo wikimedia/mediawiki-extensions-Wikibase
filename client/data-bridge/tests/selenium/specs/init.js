@@ -27,7 +27,7 @@ describe( 'init', () => {
 			label: 'official website',
 			entityId,
 			propertyId,
-			editFlow: 'overwrite',
+			editFlow: 'single-best-value',
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
@@ -59,7 +59,7 @@ describe( 'init', () => {
 				label: 'official website',
 				entityId,
 				propertyId,
-				editFlow: 'overwrite',
+				editFlow: 'single-best-value',
 			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
@@ -125,7 +125,7 @@ describe( 'init', () => {
 				label: 'official website',
 				entityId,
 				propertyId: stringPropertyId,
-				editFlow: 'overwrite',
+				editFlow: 'single-best-value',
 			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
@@ -170,7 +170,7 @@ describe( 'init', () => {
 					label: 'official website',
 					entityId,
 					propertyId,
-					editFlow: 'overwrite',
+					editFlow: 'single-best-value',
 				} ] );
 				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 

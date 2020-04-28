@@ -50,7 +50,7 @@ function prepareTestEnv( options: {
 	const entityId = options.entityId || DEFAULT_ENTITY;
 	const entityTitle = entityId;
 	const propertyId = options.propertyId || DEFAULT_PROPERTY;
-	const editFlow = options.editFlow || EditFlow.OVERWRITE;
+	const editFlow = options.editFlow || EditFlow.SINGLE_BEST_VALUE;
 	const pageLanguage = options.pageLanguage || 'en';
 	const clientPageTitle = 'Client_page';
 
