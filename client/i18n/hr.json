@@ -102,6 +102,7 @@
 	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Trenutačno ne možete urediti $1 jer sadrži više od jedne vrijednosti.",
 	"wikibase-client-data-bridge-unknown-error-heading": "Nešto nije u redu",
 	"wikibase-client-data-bridge-error-reload-bridge": "Ponovo učitaj",
+	"wikibase-client-data-bridge-error-go-back": "Idi natrag",
 	"wikibase-client-data-bridge-thank-you-head": "Hvala Vam na uređivanju!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Uredi referenciju na projektu {{WBREPONAME}}"
 }
