@@ -1254,7 +1254,7 @@ describe( 'root/actions', () => {
 	} );
 
 	describe( 'retrySave', () => {
-		it( 'commits clearApplicationErrors and dispatches saveBridge', async () => {
+		it( 'commits clearApplicationErrors, sets the status to READY and dispatches saveBridge', async () => {
 			const rootModuleDispatch = jest.fn();
 			const entityId = 'Q42';
 			const targetPropertyId = 'P42';
@@ -1312,8 +1312,9 @@ describe( 'root/actions', () => {
 				dispatch: entityModuleDispatch,
 			};
 			await actions.retrySave();
-
-			expect( commit ).toHaveBeenCalledWith( 'clearApplicationErrors' );
+			expect( commit ).toHaveBeenCalledTimes( 2 );
+			expect( commit ).toHaveBeenNthCalledWith( 1, 'clearApplicationErrors' );
+			expect( commit ).toHaveBeenNthCalledWith( 2, 'setApplicationStatus', ApplicationStatus.READY );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'saveBridge' );
 		} );
 	} );

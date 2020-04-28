@@ -25,13 +25,15 @@
 				type="primaryProgressive"
 				size="M"
 				:message="$messages.get( $messages.KEYS.ERROR_RETRY_SAVE )"
+				@click="retrySave"
 			/>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { mixins } from 'vue-class-component';
+import StateMixin from '@/presentation/StateMixin';
 import Component from 'vue-class-component';
 import EventEmittingButton from '@/presentation/components/EventEmittingButton.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
@@ -48,7 +50,10 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
 		ReportIssue,
 	},
 } )
-export default class ErrorSaving extends Vue {
+export default class ErrorSaving extends mixins( StateMixin ) {
+	public retrySave(): void {
+		this.rootModule.dispatch( 'retrySave' );
+	}
 }
 </script>
 
