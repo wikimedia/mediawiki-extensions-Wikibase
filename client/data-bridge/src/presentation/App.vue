@@ -3,6 +3,7 @@
 		<AppHeader
 			@save="save"
 			@close="close"
+			@back="back"
 		/>
 		<div class="wb-db-app__body">
 			<ErrorWrapper v-if="hasError" @relaunch="relaunch" />
@@ -85,6 +86,10 @@ export default class App extends mixins( StateMixin ) {
 		} else {
 			this.$emit( Events.cancel );
 		}
+	}
+
+	public back(): void {
+		this.rootModule.dispatch( 'goBackFromErrorToReady' );
 	}
 
 	public dismissLicense(): void {

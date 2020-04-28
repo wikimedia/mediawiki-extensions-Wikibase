@@ -279,10 +279,15 @@ RootActions
 			} );
 	}
 
-	public retrySave(): Promise<void> {
+	public async retrySave(): Promise<void> {
+		await this.dispatch( 'goBackFromErrorToReady' );
+		return this.dispatch( 'saveBridge' );
+	}
+
+	public goBackFromErrorToReady(): Promise<void> {
 		this.commit( 'clearApplicationErrors' );
 		this.commit( 'setApplicationStatus', ApplicationStatus.READY );
-		return this.dispatch( 'saveBridge' );
+		return Promise.resolve();
 	}
 
 	public addError(
