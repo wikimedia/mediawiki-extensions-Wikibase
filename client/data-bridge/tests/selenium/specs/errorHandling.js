@@ -64,7 +64,7 @@ describe( 'App', () => {
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
 
-	it( 'shows ErrorSaving when losing internet connection before saving', () => {
+	it( 'can retry saving bridge from ErrorSaving', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const stringPropertyExampleValue = 'initialValue';
@@ -112,7 +112,15 @@ describe( 'App', () => {
 		// actually trigger save
 		DataBridgePage.saveButton.click();
 
+		// show ErrorSaving screen
 		DataBridgePage.error.waitForDisplayed();
+
 		assert.ok( DataBridgePage.showsErrorSaving() );
+
+		// restore internet connection
+		NetworkUtil.enableNetwork();
+		DataBridgePage.retrySaveButton.click();
+		DataBridgePage.thankYouScreen.waitForDisplayed();
 	} );
+
 } );

@@ -98,6 +98,10 @@ class DataBridgePage extends Page {
 		return '.wb-db-error-unknown__relaunch';
 	}
 
+	static get RETRY_SAVE_BUTTON() {
+		return '.wb-db-error-saving__retry';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -159,6 +163,12 @@ class DataBridgePage extends Page {
 	get closeButton() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.CLOSE}`
+		);
+	}
+
+	get retrySaveButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.RETRY_SAVE_BUTTON}`
 		);
 	}
 

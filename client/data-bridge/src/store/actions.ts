@@ -281,6 +281,7 @@ RootActions
 
 	public retrySave(): Promise<void> {
 		this.commit( 'clearApplicationErrors' );
+		this.commit( 'setApplicationStatus', ApplicationStatus.READY );
 		return this.dispatch( 'saveBridge' );
 	}
 

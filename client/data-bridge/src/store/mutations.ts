@@ -35,7 +35,7 @@ export class RootMutations extends Mutations<Application> {
 	}
 
 	public clearApplicationErrors(): void {
-		this.state.applicationErrors.length = 0;
+		this.state.applicationErrors = [];
 	}
 
 	public setEditDecision( editDecision: EditDecision ): void {
