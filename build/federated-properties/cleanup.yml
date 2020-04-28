@@ -1,0 +1,68 @@
+- hosts: test_systems
+  name: "Clean up a test system with a 'Federated Properties' enabled instance of Wikibase"
+  become: yes
+  tasks:
+    - name: "Get service facts"
+      service_facts:
+
+    - name: "Get package facts"
+      package_facts:
+
+    - name: Run `docker-compose down`
+      docker_compose:
+          project_src: "{{ PROJECT_DIR }}"
+          state: absent
+      when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
+
+    - name: Prune containers and volumes
+      docker_prune:
+          containers: yes
+          volumes: yes
+      when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
+
+    - name: Ensure docker service is stopped
+      systemd:
+          state: stopped
+          name: docker
+      when: "ansible_facts.services['docker'] is defined and ansible_facts.services['docker'].state == 'running'"
+
+    - name: Uninstall previously installed python packages
+      pip:
+        name: "docker-compose"
+        state: present
+      when: "'python3-pip' in ansible_facts.packages"
+
+    - name: Uninstall previously installed packages
+      package:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - "php-ast"
+        - "php-curl"
+        - "php-intl"
+        - "php-mbstring"
+        - "php-mysql"
+        - "php-xml"
+        - "python3-pip"
+        - "composer"
+        - "git"
+        - "docker.io"
+
+    - name: Remove cron jobs
+      cron:
+          name: "{{ item }}"
+          user: "mediawiki"
+          state: absent
+      loop:
+          - "gitPullMaster"
+          - "logrotate"
+
+    - name: Remove LocalSettings.php
+      file:
+          path: "{{ MW_PATH }}/LocalSettings.php"
+          state: absent
+
+    - name: Remove project directory
+      file:
+          path: "{{ PROJECT_DIR }}"
+          state: absent
