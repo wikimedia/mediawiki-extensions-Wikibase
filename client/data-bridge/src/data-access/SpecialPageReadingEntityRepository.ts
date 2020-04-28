@@ -3,7 +3,6 @@ import HttpStatus from 'http-status-codes';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 import ReadingEntityRevisionRepository from '@/definitions/data-access/ReadingEntityRevisionRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
@@ -21,8 +20,9 @@ export interface SpecialPageWikibaseEntityResponse {
 	};
 }
 
+// TODO implement ReadingEntityRepository as well (T251245)
 export default class SpecialPageReadingEntityRepository
-implements ReadingEntityRepository, ReadingEntityRevisionRepository {
+implements /* ReadingEntityRepository, */ ReadingEntityRevisionRepository {
 	private readonly $: JQueryStatic;
 	private readonly specialEntityDataUrl: string;
 
@@ -31,7 +31,7 @@ implements ReadingEntityRepository, ReadingEntityRevisionRepository {
 		this.specialEntityDataUrl = this.trimTrailingSlashes( specialEntityDataUrl );
 	}
 
-	public getEntity( entityId: string, rev?: number ): Promise<EntityRevision> {
+	public getEntity( entityId: string, rev: number ): Promise<EntityRevision> {
 		return Promise.resolve( this.$.get( ...this.buildRequestParams( entityId, rev ) ) )
 			.then( ( data: unknown ): EntityRevision => {
 				if ( !this.isWellFormedResponse( data ) ) {
