@@ -109,95 +109,33 @@ describe( 'AppHeader', () => {
 			const button = wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' );
 			expect( button.props( 'message' ) ).toBe( publishMessage );
 		} );
-	} );
 
-	it( 'disables the save button while saving', async () => {
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
+		it( 'disables the save button while saving', async () => {
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
+			await localVue.nextTick();
+
+			expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 		} );
 
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).trigger( 'click' );
-		await localVue.nextTick();
+		it( 'hides the save button after changes are saved', async () => {
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
 
-		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
-	} );
-
-	it( 'hides the save button after changes are saved', async () => {
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
+			store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+			expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 		} );
 
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
-		expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
-	} );
-
-	it( 'renders the close button using the CANCEL message', () => {
-		const cancelMessage = 'cancel that';
-		const messageGet = jest.fn().mockReturnValue( cancelMessage );
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			mocks: {
-				$messages: {
-					KEYS: MessageKeys,
-					get: messageGet,
-				},
-			},
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
-		const button = wrapper.find( '.wb-ui-event-emitting-button--close' );
-		expect( button.props( 'message' ) ).toBe( cancelMessage );
-	} );
-
-	it( 'bubbles the click event from the save button as save event', async () => {
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( 'save' ) ).toHaveLength( 1 );
-	} );
-
-	it( 'bubbles the click event from the close button as close event', async () => {
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
-	} );
-
-	it( 'disables close while in saving state', async () => {
-		store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
-		const wrapper = shallowMount( AppHeader, {
-			store,
-			localVue,
-			stubs: { ProcessDialogHeader, EventEmittingButton },
-		} );
-
-		await wrapper.find( '.wb-ui-event-emitting-button--close' ).trigger( 'click' );
-		await localVue.nextTick();
-
-		expect( wrapper.emitted( initEvents.cancel ) ).toBeFalsy();
-	} );
-
-	describe( 'if there is an error', () => {
-		it( 'doesn\'t show the save button ', () => {
+		it( 'doesn\'t show the save button if there is an error', () => {
 			store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: {} } ] );
 			const wrapper = shallowMount( AppHeader, {
 				store,
@@ -207,6 +145,72 @@ describe( 'AppHeader', () => {
 
 			expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 		} );
+	} );
+
+	describe( 'close button rendering', () => {
+		it( 'renders the close button using the CANCEL message', () => {
+			const cancelMessage = 'cancel that';
+			const messageGet = jest.fn().mockReturnValue( cancelMessage );
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
+				},
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.CANCEL );
+			const button = wrapper.find( '.wb-ui-event-emitting-button--close' );
+			expect( button.props( 'message' ) ).toBe( cancelMessage );
+		} );
+
+		it( 'disables close while in saving state', async () => {
+			store.commit( 'setApplicationStatus', ApplicationStatus.SAVING );
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--close' ).trigger( 'click' );
+			await localVue.nextTick();
+
+			expect( wrapper.emitted( initEvents.cancel ) ).toBeFalsy();
+		} );
+	} );
+
+	describe( 'event handling', () => {
+
+		it( 'bubbles the click event from the save button as save event', async () => {
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).vm.$emit( 'click' );
+			await localVue.nextTick();
+
+			expect( wrapper.emitted( 'save' ) ).toHaveLength( 1 );
+		} );
+
+		it( 'bubbles the click event from the close button as close event', async () => {
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--close' ).vm.$emit( 'click' );
+			await localVue.nextTick();
+
+			expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
+		} );
+
 	} );
 
 } );
