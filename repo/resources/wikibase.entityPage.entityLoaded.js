@@ -62,6 +62,14 @@
 		url,
 		specialEntityDataPath;
 
+	if ( entityId === null ) {
+		mw.log.error(
+			'wikibase.entityPage.entityLoaded should only be loaded ' +
+			'in conjunction with the right JS config (e.g. ParserOutputJsConfigBuilder)!'
+		);
+		return;
+	}
+
 	// Load from Special:EntityData because it gets cached in several layers
 	specialEntityDataPath = mwConfig.get( 'wgArticlePath' ).replace(
 		/\$1/g, 'Special:EntityData/' + entityId + '.json'
