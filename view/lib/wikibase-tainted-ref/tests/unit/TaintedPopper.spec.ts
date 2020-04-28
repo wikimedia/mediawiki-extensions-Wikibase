@@ -5,7 +5,7 @@ import Message from '@/vue-plugins/Message';
 import Application from '@/store/Application';
 import TaintedPopper from '@/presentation/components/TaintedPopper.vue';
 import { POPPER_HIDE, STATEMENT_TAINTED_STATE_UNTAINT } from '@/store/actionTypes';
-import { GET_FEEDBACK_LINK, GET_HELP_LINK } from '@/store/getterTypes';
+import { GET_HELP_LINK } from '@/store/getterTypes';
 
 const localVue = createLocalVue();
 const trackingFunction: any = jest.fn();
@@ -21,7 +21,6 @@ function createMockStore( helpLink?: string ): Store<Partial<Application>> {
 			[ STATEMENT_TAINTED_STATE_UNTAINT ]: jest.fn(),
 		},
 		getters: {
-			[ GET_FEEDBACK_LINK ]: jest.fn(),
 			[ GET_HELP_LINK ]: helpLink ? () => helpLink : jest.fn(),
 		},
 	} );
@@ -107,21 +106,12 @@ describe( 'TaintedPopper.vue', () => {
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-title)' );
 		expect( wrapper.find( '.wb-tr-popper-help' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-help-link-text)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-text)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.title )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-title)' );
-		expect( wrapper.find( '.wb-tr-popper-feedback a' ).element.textContent )
-			.toMatch( '(wikibase-tainted-ref-popper-feedback-link-text)' );
 		expect( wrapper.find( '.wb-tr-popper-remove-warning' ).element.textContent )
 			.toMatch( '(wikibase-tainted-ref-popper-remove-warning)' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-text' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-title' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-title' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-help-link-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-text' );
-		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-feedback-link-title' );
 		expect( messageToTextFunction ).toHaveBeenCalledWith( 'wikibase-tainted-ref-popper-remove-warning' );
 	} );
 } );

@@ -7,5 +7,4 @@ export default interface Application {
 	statementsPopperIsOpen: StatementsPopperIsOpen;
 	statementsEditState: StatementsEditState;
 	helpLink: string;
-	feedbackLink: string;
 }

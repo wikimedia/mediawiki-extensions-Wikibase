@@ -17,14 +17,6 @@
 			<button class="wb-tr-popper-remove-warning" @click="removeWarningClick">
 				{{ removeWarningText }}
 			</button>
-			<p class="wb-tr-popper__text wb-tr-popper-feedback">
-				{{ popperFeedbackText }}
-				<a
-					:title="popperFeedbackLinkTitle"
-					:href="feedbackLink"
-					target="_blank"
-				>{{ popperFeedbackLinkText }}</a>
-			</p>
 		</template>
 	</Popper>
 </template>
@@ -37,7 +29,7 @@ import {
 	Vue,
 } from 'vue-property-decorator';
 import Popper from '@/presentation/components/Popper.vue';
-import { GET_FEEDBACK_LINK, GET_HELP_LINK } from '@/store/getterTypes';
+import { GET_HELP_LINK } from '@/store/getterTypes';
 
 @Component( {
 	props: {
@@ -76,21 +68,6 @@ export default class TaintedPopper extends Vue {
 		return this.$message( 'wikibase-tainted-ref-popper-remove-warning' );
 	}
 
-	public get popperFeedbackText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-text' );
-	}
-
-	public get popperFeedbackLinkText(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-text' );
-	}
-
-	public get popperFeedbackLinkTitle(): string {
-		return this.$message( 'wikibase-tainted-ref-popper-feedback-link-title' );
-	}
-
-	@Getter( GET_FEEDBACK_LINK )
-	public feedbackLink!: string;
-
 	public removeWarningClick( _event: MouseEvent ): void {
 		this.$track( 'counter.wikibase.view.tainted-ref.removeWarningClick', 1 );
 		this.$store.dispatch( STATEMENT_TAINTED_STATE_UNTAINT, this.$props.guid );
@@ -99,7 +76,6 @@ export default class TaintedPopper extends Vue {
 </script>
 
 <style lang="scss">
-	.wb-tr-popper-feedback a,
 	.wb-tr-popper-help a {
 		color: $link-blue;
 	}
@@ -115,17 +91,6 @@ export default class TaintedPopper extends Vue {
 
 	.wb-tr-popper__text--top {
 		margin-top: 4px;
-	}
-
-	.wb-tr-popper-feedback a {
-		color: $link-blue;
-	}
-
-	.wb-tr-popper-feedback {
-		font-weight: normal;
-		color: $basic-text-black;
-		margin: 8px 0 8px 0;
-		line-height: 22px;
 	}
 
 	.wb-tr-popper-remove-warning {

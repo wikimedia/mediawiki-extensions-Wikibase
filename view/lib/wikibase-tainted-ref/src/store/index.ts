@@ -13,7 +13,6 @@ export function createStore( metricTracker: TrackFunction ): Store<Application> 
 		statementsPopperIsOpen: { },
 		statementsEditState: { },
 		helpLink: '',
-		feedbackLink: '',
 	};
 	return new Store( {
 		state,

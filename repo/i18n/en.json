@@ -470,9 +470,6 @@
 	"wikibase-tainted-ref-popper-title": "Potential reference/value mismatch",
 	"wikibase-tainted-ref-popper-help-link-title": "Help page for this constraint type",
 	"wikibase-tainted-ref-popper-help-link-text": "Help",
-	"wikibase-tainted-ref-popper-feedback-text": "Is this new feature useful?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Leave your feedback",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Feedback page link",
 	"wikibase-tainted-ref-popper-remove-warning": "Remove warning",
 	"wikibase-tainted-ref-tainted-icon-title": "This statement has some potential issues."
 }
