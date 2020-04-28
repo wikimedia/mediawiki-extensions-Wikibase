@@ -15,14 +15,30 @@
 			/>
 		</template>
 		<template v-slot:safeAction>
-			<EventEmittingButton
-				:message="$messages.get( $messages.KEYS.CANCEL )"
-				type="close"
-				size="L"
-				:squary="true"
-				:disabled="isSaving"
-				@click="close"
-			/>
+			<span
+				:class="{ 'app-header__close-button--desktop-only': canGoBack }"
+			>
+				<EventEmittingButton
+					:message="$messages.get( $messages.KEYS.CANCEL )"
+					type="close"
+					size="L"
+					:squary="true"
+					:disabled="isSaving"
+					@click="close"
+				/>
+			</span>
+			<span
+				v-if="canGoBack"
+				class="app-header__back-button"
+			>
+				<EventEmittingButton
+					:message="$messages.get( $messages.KEYS.ERROR_GO_BACK )"
+					type="back"
+					size="L"
+					:squary="true"
+					@click="back"
+				/>
+			</span>
 		</template>
 	</ProcessDialogHeader>
 </template>
@@ -54,6 +70,10 @@ export default class AppHeader extends mixins( StateMixin ) {
 		);
 	}
 
+	public get canGoBack(): boolean {
+		return this.rootModule.getters.canGoToPreviousState;
+	}
+
 	public get isSaved(): boolean {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.SAVED;
 	}
@@ -83,5 +103,25 @@ export default class AppHeader extends mixins( StateMixin ) {
 		this.$emit( 'save' );
 	}
 
+	public back(): void {
+		this.$emit( 'back' );
+	}
+
 }
 </script>
+
+<style lang="scss">
+.app-header {
+	@media not screen and ( max-width: $breakpoint ) {
+		&__back-button {
+			display: none;
+		}
+	}
+
+	@media ( max-width: $breakpoint ) {
+		&__close-button--desktop-only {
+			display: none;
+		}
+	}
+}
+</style>

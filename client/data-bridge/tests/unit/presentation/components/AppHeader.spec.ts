@@ -11,6 +11,7 @@ import EventEmittingButton from '@/presentation/components/EventEmittingButton.v
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { initEvents } from '@/events';
 import { ErrorTypes } from '@/definitions/ApplicationError';
+import Vue from 'vue';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -181,6 +182,83 @@ describe( 'AppHeader', () => {
 
 			expect( wrapper.emitted( initEvents.cancel ) ).toBeFalsy();
 		} );
+
+		it( 'adds a class to show close button only on desktop if back button is available', () => {
+			Vue.set( store, 'getters', {
+				canGoToPreviousState: true,
+				targetLabel: { value: 'P123', language: 'zxx' },
+			} );
+
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect(
+				wrapper.find( '.app-header__close-button--desktop-only .wb-ui-event-emitting-button--close' ).exists(),
+			).toBe( true );
+		} );
+
+		it( 'does not add a class limiting the close button to desktop if the back button is not available', () => {
+			Vue.set( store, 'getters', {
+				canGoToPreviousState: false,
+				targetLabel: { value: 'P123', language: 'zxx' },
+			} );
+
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect(
+				wrapper.find( '.app-header__close-button--desktop-only .wb-ui-event-emitting-button--close' ).exists(),
+			).toBe( false );
+		} );
+	} );
+
+	describe( 'back button rendering', () => {
+		it( 'renders the back button with the correct message if it is allowed by the store', () => {
+			const backMessage = 'go back!';
+			const messageGet = jest.fn().mockReturnValue( backMessage );
+			Vue.set( store, 'getters', {
+				canGoToPreviousState: true,
+				targetLabel: { value: 'P123', language: 'zxx' },
+			} );
+
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				mocks: {
+					$messages: {
+						KEYS: MessageKeys,
+						get: messageGet,
+					},
+				},
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( messageGet ).toHaveBeenCalledWith( MessageKeys.ERROR_GO_BACK );
+			const backButton = wrapper.find( '.wb-ui-event-emitting-button--back' );
+			expect( backButton.exists() ).toBe( true );
+			expect( backButton.props( 'message' ) ).toBe( backMessage );
+		} );
+
+		it( 'doesn\'t render the back button otherwise', () => {
+			Vue.set( store, 'getters', {
+				canGoToPreviousState: false,
+				targetLabel: { value: 'P123', language: 'zxx' },
+			} );
+
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( wrapper.find( '.wb-ui-event-emitting-button--back' ).exists() ).toBe( false );
+		} );
 	} );
 
 	describe( 'event handling', () => {
@@ -209,6 +287,23 @@ describe( 'AppHeader', () => {
 			await localVue.nextTick();
 
 			expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
+		} );
+
+		it( 'bubbles the click event from the back button as back event', async () => {
+			Vue.set( store, 'getters', {
+				canGoToPreviousState: true,
+				targetLabel: { value: 'P123', language: 'zxx' },
+			} );
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			await wrapper.find( '.wb-ui-event-emitting-button--back' ).vm.$emit( 'click' );
+			await localVue.nextTick();
+
+			expect( wrapper.emitted( 'back' ) ).toHaveLength( 1 );
 		} );
 
 	} );
