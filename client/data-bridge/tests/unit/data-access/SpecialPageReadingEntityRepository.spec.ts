@@ -82,8 +82,32 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 		};
 
 		expect( jQueryMock.get ).toHaveBeenCalledTimes( 1 );
-		expect( jQueryMock.get ).toHaveBeenCalledWith( 'index.php?title=Special:EntityData/Q123.json' );
+		expect( jQueryMock.get ).toHaveBeenCalledWith( 'index.php?title=Special:EntityData/Q123.json', {} );
 		expect( actualResultData ).toEqual( expectedData );
+	} );
+
+	describe( 'expected URL + params', () => {
+		it.each( [
+			[ 'index.php/Special:EntityData', undefined, 'index.php/Special:EntityData/Q1.json', {} ],
+			[ 'index.php/Special:EntityData', 2, 'index.php/Special:EntityData/Q1.json', { revision: 2 } ],
+			[ 'index.php?title=Special:EntityData', undefined, 'index.php?title=Special:EntityData/Q1.json', {} ],
+			[ 'index.php?title=Special:EntityData', 2, 'index.php?title=Special:EntityData/Q1.json', { revision: 2 } ],
+		] )(
+			'base URL %s + revision ID %s = URL %s + params %s',
+			async ( baseUrl, revisionId, expectedUrl, expectedParams ) => {
+				const jQueryMock = jQueryGetMock( {} );
+				jest.spyOn( jQueryMock, 'get' );
+
+				const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, baseUrl );
+				try {
+					await entityDataSupplier.getEntity( 'Q1', revisionId );
+				} catch ( _e ) {
+					// ignore result not well-formed error
+				}
+
+				expect( jQueryMock.get ).toHaveBeenCalledWith( expectedUrl, expectedParams );
+			},
+		);
 	} );
 
 	describe( 'if there is a problem', () => {

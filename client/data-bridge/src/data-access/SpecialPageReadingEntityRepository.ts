@@ -4,6 +4,7 @@ import EntityNotFound from '@/data-access/error/EntityNotFound';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
 import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
+import ReadingEntityRevisionRepository from '@/definitions/data-access/ReadingEntityRevisionRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import jqXHR = JQuery.jqXHR;
@@ -20,7 +21,8 @@ export interface SpecialPageWikibaseEntityResponse {
 	};
 }
 
-export default class SpecialPageReadingEntityRepository implements ReadingEntityRepository {
+export default class SpecialPageReadingEntityRepository
+implements ReadingEntityRepository, ReadingEntityRevisionRepository {
 	private readonly $: JQueryStatic;
 	private readonly specialEntityDataUrl: string;
 
@@ -29,8 +31,8 @@ export default class SpecialPageReadingEntityRepository implements ReadingEntity
 		this.specialEntityDataUrl = this.trimTrailingSlashes( specialEntityDataUrl );
 	}
 
-	public getEntity( entityId: string, _rev?: number ): Promise<EntityRevision> {
-		return Promise.resolve( this.$.get( this.buildRequestUrl( entityId ) ) )
+	public getEntity( entityId: string, rev?: number ): Promise<EntityRevision> {
+		return Promise.resolve( this.$.get( ...this.buildRequestParams( entityId, rev ) ) )
 			.then( ( data: unknown ): EntityRevision => {
 				if ( !this.isWellFormedResponse( data ) ) {
 					throw new TechnicalProblem( 'Result not well formed.' );
@@ -56,8 +58,13 @@ export default class SpecialPageReadingEntityRepository implements ReadingEntity
 		return typeof data === 'object' && data !== null && 'entities' in data;
 	}
 
-	private buildRequestUrl( entityId: string ): string {
-		return `${this.specialEntityDataUrl}/${entityId}.json`;
+	private buildRequestParams( entityId: string, revisionId: number|undefined ): [ string, object ] {
+		const url = `${this.specialEntityDataUrl}/${entityId}.json`;
+		if ( revisionId !== undefined ) {
+			return [ url, { revision: revisionId } ];
+		} else {
+			return [ url, {} ];
+		}
 	}
 
 	private trimTrailingSlashes( string: string ): string {

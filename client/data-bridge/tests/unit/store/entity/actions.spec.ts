@@ -19,13 +19,11 @@ describe( 'entity/actions', () => {
 	describe( 'entityInit', () => {
 		it( 'dispatches to entityWrite on successful Entity lookup', async () => {
 			const id = 'Q42';
-			const revisionId = 4711;
-			const entity = newMockableEntityRevision( { id, revisionId } );
+			const entity = newMockableEntityRevision( { id } );
 
 			const readingEntityRepository = {
-				getEntity: ( thisEntityId: string, thisRevision: number ) => {
+				getEntity: ( thisEntityId: string ) => {
 					expect( thisEntityId ).toBe( id );
-					expect( thisRevision ).toBe( revisionId );
 					return Promise.resolve( entity );
 				},
 			};
@@ -44,7 +42,6 @@ describe( 'entity/actions', () => {
 
 			await actions.entityInit( {
 				entity: id,
-				revision: revisionId,
 			} );
 
 			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', entity );
@@ -52,7 +49,6 @@ describe( 'entity/actions', () => {
 
 		it( 'propagates error on failed lookup', async () => {
 			const id = 'Q42';
-			const revisionId = 4711;
 			const error = new Error( 'this should be propagated' );
 
 			const readingEntityRepository = {
@@ -73,7 +69,6 @@ describe( 'entity/actions', () => {
 
 			await expect( actions.entityInit( {
 				entity: id,
-				revision: revisionId,
 			} ) ).rejects.toBe( error );
 
 			expect( dispatch ).not.toHaveBeenCalled();

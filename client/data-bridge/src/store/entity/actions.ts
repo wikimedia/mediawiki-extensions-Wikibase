@@ -18,10 +18,10 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 	}
 
 	public entityInit(
-		payload: { entity: string; revision?: number },
+		payload: { entity: string },
 	): Promise<void> {
 		return this.store.$services.get( 'readingEntityRepository' )
-			.getEntity( payload.entity, payload.revision )
+			.getEntity( payload.entity )
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 
