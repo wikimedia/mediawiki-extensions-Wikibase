@@ -1458,6 +1458,29 @@ class WikibaseRepo {
 		return new NullTermsCollisionDetector();
 	}
 
+	public function getDatabaseTermInLangIdsResolver( EntitySource $source ): DatabaseTermInLangIdsResolver {
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+		$databaseName = $source->getDatabaseName();
+		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()
+			->getMainLB( $databaseName );
+
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$databaseName,
+			$logger
+		);
+		return new DatabaseTermInLangIdsResolver(
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$loadBalancer,
+			$databaseName,
+			$logger
+		);
+	}
+
 	/**
 	 * @return EntityConstraintProvider
 	 */
