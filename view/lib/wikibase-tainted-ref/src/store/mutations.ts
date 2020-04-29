@@ -7,7 +7,6 @@ import {
 	SET_TAINTED,
 	SET_UNTAINTED,
 	SET_HELP_LINK,
-	SET_FEEDBACK_LINK,
 	SET_ALL_EDIT_MODE_FALSE,
 	SET_STATEMENT_EDIT_FALSE,
 	SET_STATEMENT_EDIT_TRUE,
@@ -81,11 +80,5 @@ export const mutations: MutationTree<Application> = {
 		url: string,
 	): void {
 		state.helpLink = url;
-	},
-	[ SET_FEEDBACK_LINK ](
-		state: Application,
-		url: string,
-	): void {
-		state.feedbackLink = url;
 	},
 };

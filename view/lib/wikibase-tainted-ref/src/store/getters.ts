@@ -2,7 +2,6 @@ import { GetterTree } from 'vuex';
 import Application from '@/store/Application';
 import {
 	GET_EDIT_STATE,
-	GET_FEEDBACK_LINK,
 	GET_HELP_LINK,
 	GET_POPPER_STATE,
 	GET_STATEMENT_TAINTED_STATE,
@@ -26,8 +25,5 @@ export const getters: GetterTree<Application, Application> = {
 	},
 	[ GET_HELP_LINK ]( state: Application ): string {
 		return state.helpLink;
-	},
-	[ GET_FEEDBACK_LINK ]( state: Application ): string {
-		return state.feedbackLink;
 	},
 };

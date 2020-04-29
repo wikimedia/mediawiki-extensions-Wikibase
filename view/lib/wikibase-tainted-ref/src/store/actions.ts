@@ -3,8 +3,7 @@ import {
 	STORE_INIT,
 	STATEMENT_TAINTED_STATE_TAINT,
 	STATEMENT_TAINTED_STATE_UNTAINT,
-	HELP_LINK_SET, FEEDBACK_LINK_SET,
-	START_EDIT, STOP_EDIT,
+	HELP_LINK_SET, START_EDIT, STOP_EDIT,
 } from '@/store/actionTypes';
 import Application from './Application';
 import { ActionContext, ActionTree } from 'vuex';
@@ -17,7 +16,6 @@ import {
 	SET_TAINTED,
 	SET_UNTAINTED,
 	SET_HELP_LINK,
-	SET_FEEDBACK_LINK,
 	SET_STATEMENT_EDIT_TRUE,
 	SET_STATEMENT_EDIT_FALSE,
 } from '@/store/mutationTypes';
@@ -81,12 +79,5 @@ export default function actions( metricTracker: TrackFunction ): ActionTree<Appl
 		): void {
 			context.commit( SET_HELP_LINK, url );
 		},
-		[ FEEDBACK_LINK_SET ](
-			context: ActionContext<Application, Application>,
-			url: string,
-		): void {
-			context.commit( SET_FEEDBACK_LINK, url );
-		},
-
 	};
 }

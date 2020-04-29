@@ -4449,7 +4449,6 @@ var STATEMENT_TAINTED_STATE_UNTAINT = 'untaintTaintedState';
 var POPPER_SHOW = 'showPopper';
 var POPPER_HIDE = 'hidePopper';
 var HELP_LINK_SET = 'setHelpLink';
-var FEEDBACK_LINK_SET = 'setFeedbackLink';
 var START_EDIT = 'startStatementEdit';
 var STOP_EDIT = 'stopStatementEdit';
 // EXTERNAL MODULE: ./node_modules/vuex/dist/vuex.esm.js
@@ -4540,7 +4539,6 @@ var GET_STATEMENT_TAINTED_STATE = 'getStatementTaintedState';
 var GET_POPPER_STATE = 'getPopperState';
 var GET_EDIT_STATE = 'getEditState';
 var GET_HELP_LINK = 'getHelpLink';
-var GET_FEEDBACK_LINK = 'getFeedbackLink';
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedIcon.vue?vue&type=script&lang=ts&
 
 
@@ -4714,12 +4712,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_TaintedIcon = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0e8fa4f4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedPopper.vue?vue&type=template&id=9b28b62a&
-var TaintedPoppervue_type_template_id_9b28b62a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Popper',{attrs:{"guid":_vm.guid,"title":_vm.popperTitle},scopedSlots:_vm._u([{key:"subheading-area",fn:function(){return [_c('div',{staticClass:"wb-tr-popper-help"},[_c('a',{attrs:{"title":_vm.popperHelpLinkTitle,"href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v(_vm._s(_vm.popperHelpLinkText))])])]},proxy:true},{key:"content",fn:function(){return [_c('p',{staticClass:"wb-tr-popper__text wb-tr-popper__text--top"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")]),_c('button',{staticClass:"wb-tr-popper-remove-warning",on:{"click":_vm.removeWarningClick}},[_vm._v("\n\t\t\t"+_vm._s(_vm.removeWarningText)+"\n\t\t")]),_c('p',{staticClass:"wb-tr-popper__text wb-tr-popper-feedback"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperFeedbackText)+"\n\t\t\t"),_c('a',{attrs:{"title":_vm.popperFeedbackLinkTitle,"href":_vm.feedbackLink,"target":"_blank"}},[_vm._v(_vm._s(_vm.popperFeedbackLinkText))])])]},proxy:true}])})}
-var TaintedPoppervue_type_template_id_9b28b62a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0e8fa4f4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/TaintedPopper.vue?vue&type=template&id=6721fc42&
+var TaintedPoppervue_type_template_id_6721fc42_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Popper',{attrs:{"guid":_vm.guid,"title":_vm.popperTitle},scopedSlots:_vm._u([{key:"subheading-area",fn:function(){return [_c('div',{staticClass:"wb-tr-popper-help"},[_c('a',{attrs:{"title":_vm.popperHelpLinkTitle,"href":_vm.helpLink,"target":"_blank"},on:{"click":_vm.helpClick}},[_vm._v(_vm._s(_vm.popperHelpLinkText))])])]},proxy:true},{key:"content",fn:function(){return [_c('p',{staticClass:"wb-tr-popper__text wb-tr-popper__text--top"},[_vm._v("\n\t\t\t"+_vm._s(_vm.popperText)+"\n\t\t")]),_c('button',{staticClass:"wb-tr-popper-remove-warning",on:{"click":_vm.removeWarningClick}},[_vm._v("\n\t\t\t"+_vm._s(_vm.removeWarningText)+"\n\t\t")])]},proxy:true}])})}
+var TaintedPoppervue_type_template_id_6721fc42_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/presentation/components/TaintedPopper.vue?vue&type=template&id=9b28b62a&
+// CONCATENATED MODULE: ./src/presentation/components/TaintedPopper.vue?vue&type=template&id=6721fc42&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0e8fa4f4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/presentation/components/Popper.vue?vue&type=template&id=a4e9afb6&
 var Poppervue_type_template_id_a4e9afb6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"wb-tr-popper-wrapper",attrs:{"tabindex":"-1"},on:{"focusout":_vm.onFocusout,"keydown":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"esc",27,$event.key,["Esc","Escape"])){ return null; }return _vm.closeKeyPress($event)}}},[_c('div',{staticClass:"wb-tr-popper-triangle"}),_c('div',{staticClass:"wb-tr-popper-body"},[_c('div',{staticClass:"wb-tr-title-wrapper"},[_c('span',{staticClass:"wb-tr-popper-title"},[_vm._v(_vm._s(_vm.title))]),_c('button',{staticClass:"wb-tr-popper-close",on:{"click":_vm.closeClick}})]),_c('div',{staticClass:"wb-tr-popper-subheading-area"},[_vm._t("subheading-area")],2),_c('div',{staticClass:"wb-tr-popper-content"},[_vm._t("content")],2)])])}
@@ -4874,29 +4872,12 @@ function (_Vue) {
     get: function get() {
       return this.$message('wikibase-tainted-ref-popper-remove-warning');
     }
-  }, {
-    key: "popperFeedbackText",
-    get: function get() {
-      return this.$message('wikibase-tainted-ref-popper-feedback-text');
-    }
-  }, {
-    key: "popperFeedbackLinkText",
-    get: function get() {
-      return this.$message('wikibase-tainted-ref-popper-feedback-link-text');
-    }
-  }, {
-    key: "popperFeedbackLinkTitle",
-    get: function get() {
-      return this.$message('wikibase-tainted-ref-popper-feedback-link-title');
-    }
   }]);
 
   return TaintedPopper;
 }(external_commonjs_vue2_commonjs2_vue2_amd_vue2_root_vue2_default.a);
 
 __decorate([Getter(GET_HELP_LINK)], TaintedPoppervue_type_script_lang_ts_TaintedPopper.prototype, "helpLink", void 0);
-
-__decorate([Getter(GET_FEEDBACK_LINK)], TaintedPoppervue_type_script_lang_ts_TaintedPopper.prototype, "feedbackLink", void 0);
 
 TaintedPoppervue_type_script_lang_ts_TaintedPopper = __decorate([vue_class_component_common_default()({
   props: {
@@ -4924,8 +4905,8 @@ var TaintedPoppervue_type_style_index_0_lang_scss_ = __webpack_require__("10bb")
 
 var TaintedPopper_component = normalizeComponent(
   components_TaintedPoppervue_type_script_lang_ts_,
-  TaintedPoppervue_type_template_id_9b28b62a_render,
-  TaintedPoppervue_type_template_id_9b28b62a_staticRenderFns,
+  TaintedPoppervue_type_template_id_6721fc42_render,
+  TaintedPoppervue_type_template_id_6721fc42_staticRenderFns,
   false,
   null,
   null,
@@ -5046,7 +5027,6 @@ var SET_UNTAINTED = 'setUntainted';
 var SET_POPPER_HIDDEN = 'setPopperHidden';
 var SET_POPPER_VISIBLE = 'setPopperVisible';
 var SET_HELP_LINK = 'setHelpLink';
-var SET_FEEDBACK_LINK = 'setFeedbackLink';
 var SET_ALL_EDIT_MODE_FALSE = 'setAllStatementEditFalse';
 var SET_STATEMENT_EDIT_TRUE = 'setStatementEditTrue';
 var SET_STATEMENT_EDIT_FALSE = 'setStatementEditFalse';
@@ -5082,8 +5062,6 @@ function actions(metricTracker) {
     context.commit(SET_POPPER_VISIBLE, guid);
   }), _defineProperty(_ref, HELP_LINK_SET, function (context, url) {
     context.commit(SET_HELP_LINK, url);
-  }), _defineProperty(_ref, FEEDBACK_LINK_SET, function (context, url) {
-    context.commit(SET_FEEDBACK_LINK, url);
   }), _ref;
 }
 // CONCATENATED MODULE: ./src/store/mutations.ts
@@ -5120,8 +5098,6 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, SET_ALL_UNTAINTED,
   state.statementsPopperIsOpen[guid] = true;
 }), _defineProperty(_mutations, SET_HELP_LINK, function (state, url) {
   state.helpLink = url;
-}), _defineProperty(_mutations, SET_FEEDBACK_LINK, function (state, url) {
-  state.feedbackLink = url;
 }), _mutations);
 // CONCATENATED MODULE: ./src/store/getters.ts
 
@@ -5143,8 +5119,6 @@ var getters = (_getters = {}, _defineProperty(_getters, GET_STATEMENT_TAINTED_ST
   };
 }), _defineProperty(_getters, GET_HELP_LINK, function (state) {
   return state.helpLink;
-}), _defineProperty(_getters, GET_FEEDBACK_LINK, function (state) {
-  return state.feedbackLink;
 }), _getters);
 // CONCATENATED MODULE: ./src/store/index.ts
 
@@ -5158,8 +5132,7 @@ function createStore(metricTracker) {
     statementsTaintedState: {},
     statementsPopperIsOpen: {},
     statementsEditState: {},
-    helpLink: '',
-    feedbackLink: ''
+    helpLink: ''
   };
   return new vuex_esm["a" /* Store */]({
     state: state,
@@ -5173,7 +5146,7 @@ function createStore(metricTracker) {
 
 
 
-function launch(hookHandler, helpLink, feedbackLink, trackFunction) {
+function launch(hookHandler, helpLink, trackFunction) {
   var store = createStore(trackFunction);
   var guids = [];
   document.querySelectorAll('.wikibase-statementview').forEach(function (element) {
@@ -5194,7 +5167,6 @@ function launch(hookHandler, helpLink, feedbackLink, trackFunction) {
   });
   store.dispatch(STORE_INIT, guids);
   store.dispatch(HELP_LINK_SET, helpLink);
-  store.dispatch(FEEDBACK_LINK_SET, feedbackLink);
   hookHandler.addStore(store);
 }
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js

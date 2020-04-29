@@ -23,6 +23,5 @@ function trackMock( topic: string, data?: object|number|string ): void {
 launch(
 	new CSRHookHandler(),
 	'https://www.wikidata.org/wiki/Special:MyLanguage/Help:Sources',
-	'https://www.wikidata.org/wiki/Wikidata:Mismatched_reference_notification_input',
 	trackMock,
 );
