@@ -146,7 +146,7 @@ class MediawikiEditFilterHookRunner implements EditFilterHookRunner {
 		}
 
 		$context->setTitle( $title );
-		$context->setWikiPage( new WikiPage( $title ) );
+		$context->setWikiPage( WikiPage::factory( $title ) );
 
 		return $context;
 	}

@@ -226,7 +226,7 @@ class SubmitEntityAction extends EditEntityAction {
 		}
 
 		// save edit
-		$page = new WikiPage( $title );
+		$page = WikiPage::factory( $title );
 
 		// NOTE: Constraint checks are performed automatically via EntityContent::prepareSave.
 		$status = $page->doEditContent(
