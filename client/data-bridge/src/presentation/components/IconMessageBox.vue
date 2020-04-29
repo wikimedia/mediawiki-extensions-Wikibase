@@ -19,6 +19,7 @@ import { Prop } from 'vue-property-decorator';
 
 const validTypes = [
 	'error',
+	'warning',
 	'notice',
 ];
 
@@ -77,6 +78,10 @@ export default class IconMessageBox extends Vue {
 		background-image: $svg-error;
 	}
 
+	&--warning:before {
+		background-image: $svg-warning;
+	}
+
 	&--notice:before {
 		background-image: $svg-notice;
 	}
@@ -84,6 +89,11 @@ export default class IconMessageBox extends Vue {
 	&--block#{&}--error {
 		border-color: $error-message-border;
 		background-color: $error-message-background;
+	}
+
+	&--block#{&}--warning {
+		border-color: $warning-message-border;
+		background-color: $warning-message-background;
 	}
 
 	&--block#{&}--notice {

@@ -42,6 +42,8 @@ $message-padding-vertical: 1.5 * $base-spacing-unit;
 $message-padding-horizontal: 3 * $base-spacing-unit;
 $error-message-background: $wmui-color-red90;
 $error-message-border: $wmui-color-red50;
+$warning-message-background: $wmui-color-yellow90;
+$warning-message-border: $wmui-color-yellow50;
 $notice-message-background: $wmui-color-base80;
 $notice-message-border: $wmui-color-base50;
 
@@ -57,6 +59,7 @@ $stacking-height-loading-bar: 20;
 
 $svg-close: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/close.svg );
 $svg-error: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/error-error.svg );
+$svg-warning: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/alert-warning.svg );
 $svg-notice: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/notice.svg );
 $svg-info: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/infoFilled.svg );
 $svg-collapse: url( ~oojs-ui/dist/themes/wikimediaui/images/icons/collapse-progressive.svg );
