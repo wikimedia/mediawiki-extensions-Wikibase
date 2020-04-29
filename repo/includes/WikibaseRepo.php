@@ -702,7 +702,7 @@ class WikibaseRepo {
 	public function getEntityContentFactory() {
 		return new EntityContentFactory(
 			$this->getContentModelMappings(),
-			$this->entityTypeDefinitions->getContentHandlerFactoryCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK ),
 			$this->entitySourceDefinitions,
 			$this->getLocalEntitySource(),
 			MediaWikiServices::getInstance()->getInterwikiLookup()
@@ -731,7 +731,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityDiffer() {
 		$entityDiffer = new EntityDiffer();
-		foreach ( $this->entityTypeDefinitions->getEntityDifferStrategyBuilders() as $builder ) {
+		foreach ( $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
@@ -742,7 +742,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityPatcher() {
 		$entityPatcher = new EntityPatcher();
-		foreach ( $this->entityTypeDefinitions->getEntityPatcherStrategyBuilders() as $builder ) {
+		foreach ( $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_PATCHER_STRATEGY_BUILDER ) as $builder ) {
 			$entityPatcher->registerEntityPatcherStrategy( call_user_func( $builder ) );
 		}
 		return $entityPatcher;
@@ -760,28 +760,28 @@ class WikibaseRepo {
 	 */
 	public function getEntityTitleLookup() {
 		return new TypeDispatchingEntityTitleStoreLookup(
-			$this->entityTypeDefinitions->getEntityTitleStoreLookupFactoryCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK ),
 			$this->getEntityContentFactory()
 		);
 	}
 
 	public function getEntityTitleTextLookup(): EntityTitleTextLookup {
 		return new TypeDispatchingTitleTextLookup(
-			$this->entityTypeDefinitions->getEntityTitleTextLookupCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::TITLE_TEXT_LOOKUP_CALLBACK ),
 			new TitleLookupBasedEntityTitleTextLookup( $this->getEntityTitleLookup() )
 		);
 	}
 
 	public function getEntityUrlLookup(): EntityUrlLookup {
 		return new TypeDispatchingUrlLookup(
-			$this->entityTypeDefinitions->getEntityUrlLookupCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::URL_LOOKUP_CALLBACK ),
 			new TitleLookupBasedEntityUrlLookup( $this->getEntityTitleLookup() )
 		);
 	}
 
 	public function getEntityArticleIdLookup(): EntityArticleIdLookup {
 		return new TypeDispatchingArticleIdLookup(
-			$this->entityTypeDefinitions->getEntityArticleIdLookupCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK ),
 			new TitleLookupBasedEntityArticleIdLookup( $this->getEntityTitleLookup() )
 		);
 	}
@@ -799,7 +799,7 @@ class WikibaseRepo {
 		$dbName = false; // false means the local database
 		return new PrefetchingWikiPageEntityMetaDataAccessor(
 			new TypeDispatchingWikiPageEntityMetaDataAccessor(
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
 				new WikiPageEntityMetaDataLookup(
 					$entityNamespaceLookup,
 					new EntityIdLocalPartPageTableEntityQuery(
@@ -833,7 +833,7 @@ class WikibaseRepo {
 	 * @return callable[]
 	 */
 	public function getEntityRevisionLookupFactoryCallbacks() {
-		return $this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks();
+		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK );
 	}
 
 	/**
@@ -891,7 +891,7 @@ class WikibaseRepo {
 	 * @return callable[]
 	 */
 	public function getEntityStoreFactoryCallbacks() {
-		return $this->entityTypeDefinitions->getEntityStoreFactoryCallbacks();
+		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_STORE_FACTORY_CALLBACK );
 	}
 
 	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
@@ -983,7 +983,7 @@ class WikibaseRepo {
 	public function getEntityIdComposer() {
 		if ( $this->entityIdComposer === null ) {
 			$this->entityIdComposer = new EntityIdComposer(
-				$this->entityTypeDefinitions->getEntityIdComposers()
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
 			);
 		}
 
@@ -1030,7 +1030,7 @@ class WikibaseRepo {
 	 * @return EntityChangeOpProvider
 	 */
 	public function getEntityChangeOpProvider() {
-		return new EntityChangeOpProvider( $this->entityTypeDefinitions->getChangeOpDeserializerCallbacks() );
+		return new EntityChangeOpProvider( $this->entityTypeDefinitions->get( EntityTypeDefinitions::CHANGEOP_DESERIALIZER_CALLBACK ) );
 	}
 
 	/**
@@ -1535,7 +1535,7 @@ class WikibaseRepo {
 	 * @return array
 	 */
 	public function getContentModelMappings() {
-		$map = $this->entityTypeDefinitions->getContentModelIds();
+		$map = $this->entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID );
 
 		Hooks::run( 'WikibaseContentModelMapping', [ &$map ] );
 
@@ -1546,7 +1546,7 @@ class WikibaseRepo {
 	 * @return EntityFactory
 	 */
 	public function getEntityFactory() {
-		$instantiators = $this->entityTypeDefinitions->getEntityFactoryCallbacks();
+		$instantiators = $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_FACTORY_CALLBACK );
 
 		return new EntityFactory( $instantiators );
 	}
@@ -1560,7 +1560,7 @@ class WikibaseRepo {
 	 */
 	public function getEnabledEntityTypes() {
 		$types = array_keys( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() );
-		$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+		$subEntityTypes = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
 
 		return array_reduce(
 			$types,
@@ -1584,7 +1584,7 @@ class WikibaseRepo {
 	public function getLocalEntityTypes() {
 		$localSource = $this->getLocalEntitySource();
 		$types = $localSource->getEntityTypes();
-		$subEntityTypes = $this->entityTypeDefinitions->getSubEntityTypes();
+		$subEntityTypes = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
 
 		return array_reduce(
 			$types,
@@ -1658,7 +1658,7 @@ class WikibaseRepo {
 	 */
 	private function getAllTypesEntityDeserializer() {
 		if ( $this->entityDeserializer === null ) {
-			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->getDeserializerFactoryCallbacks();
+			$deserializerFactoryCallbacks = $this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK );
 			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
 			$deserializers = [];
 
@@ -1948,7 +1948,7 @@ class WikibaseRepo {
 	 * @return FieldDefinitions
 	 */
 	public function getFieldDefinitionsByType( $type ) {
-		$definitions = $this->entityTypeDefinitions->getFieldDefinitions();
+		$definitions = $this->entityTypeDefinitions->get( EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS );
 		if ( isset( $definitions[$type] ) && is_callable( $definitions[$type] ) ) {
 			return call_user_func( $definitions[$type], $this->getTermsLanguages()->getLanguages(),
 				$this->settings );
@@ -2117,16 +2117,18 @@ class WikibaseRepo {
 		return new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
 			$this->getLanguageNameLookup(),
-			$this->entityTypeDefinitions->getEntityIdHtmlLinkFormatterCallbacks()
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);
 	}
 
 	public function getEntityViewFactory() {
-		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->getViewFactoryCallbacks() );
+		return new DispatchingEntityViewFactory( $this->entityTypeDefinitions->get( EntityTypeDefinitions::VIEW_FACTORY_CALLBACK ) );
 	}
 
 	public function getEntityMetaTagsCreatorFactory() {
-		return new DispatchingEntityMetaTagsCreatorFactory( $this->entityTypeDefinitions->getMetaTagsFactoryCallbacks() );
+		return new DispatchingEntityMetaTagsCreatorFactory(
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::META_TAGS_CREATOR_CALLBACK )
+		);
 	}
 
 	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
@@ -2149,7 +2151,7 @@ class WikibaseRepo {
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),
 			$this->getCompactEntitySerializer(),
 			new EntityReferenceExtractorDelegator(
-				$this->entityTypeDefinitions->getEntityReferenceExtractorCallbacks(),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REFERENCE_EXTRACTOR_CALLBACK ),
 				new StatementEntityReferenceExtractor( $this->getItemUrlParser() )
 			),
 			$this->getKartographerEmbeddingHandler(),
@@ -2260,7 +2262,7 @@ class WikibaseRepo {
 		return [
 			'types' => $this->entityTypeDefinitions->getEntityTypes(),
 			'deserializer-factory-functions'
-				=> $this->entityTypeDefinitions->getJsDeserializerFactoryFunctions()
+				=> $this->entityTypeDefinitions->get( EntityTypeDefinitions::JS_DESERIALIZER_FACTORY_FUNCTION )
 		];
 	}
 
@@ -2305,8 +2307,8 @@ class WikibaseRepo {
 	public function getEntityRdfBuilderFactory() {
 		if ( $this->entityRdfBuilderFactory === null ) {
 			$this->entityRdfBuilderFactory = new EntityRdfBuilderFactory(
-				$this->entityTypeDefinitions->getRdfBuilderFactoryCallbacks(),
-				$this->entityTypeDefinitions->getLabelPredicates()
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::RDF_LABEL_PREDICATES )
 			);
 		}
 
@@ -2333,7 +2335,7 @@ class WikibaseRepo {
 		$terseSnakFormatter = $formatterFactory->getSnakFormatter( SnakFormatter::FORMAT_HTML, $options );
 
 		return new EntityDiffVisualizerFactory(
-			$this->entityTypeDefinitions->getEntityDiffVisualizerCallbacks(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFF_VISUALIZER_CALLBACK ),
 			$contextSource,
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) ),
 			new ClaimDifferenceVisualizer(
@@ -2415,10 +2417,10 @@ class WikibaseRepo {
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
 				$this->getDataAccessSettings(),
 				$source,
-				$this->entityTypeDefinitions->getDeserializerFactoryCallbacks(),
-				$this->entityTypeDefinitions->getEntityMetaDataAccessorCallbacks(),
-				$this->entityTypeDefinitions->getPrefetchingTermLookupCallbacks(),
-				$this->entityTypeDefinitions->getEntityRevisionLookupFactoryCallbacks()
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::DESERIALIZER_FACTORY_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_METADATA_ACCESSOR_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::PREFETCHING_TERM_LOOKUP_CALLBACK ),
+				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK )
 			);
 		}
 		return new MultipleEntitySourceServices( $this->entitySourceDefinitions, $genericServices, $singleSourceServices );
@@ -2448,11 +2450,11 @@ class WikibaseRepo {
 	 * @return callable[]
 	 */
 	public function getEntitySearchHelperCallbacks() {
-		return $this->entityTypeDefinitions->getEntitySearchHelperCallbacks();
+		return $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK );
 	}
 
 	public function getEntityLinkFormatterFactory( Language $language ) {
-		return new EntityLinkFormatterFactory( $language, $this->entityTypeDefinitions->getLinkFormatterCallbacks() );
+		return new EntityLinkFormatterFactory( $language, $this->entityTypeDefinitions->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK ) );
 	}
 
 	/**
@@ -2460,7 +2462,7 @@ class WikibaseRepo {
 	 * @return string[]
 	 */
 	public function getFulltextSearchTypes() {
-		$searchTypes = $this->entityTypeDefinitions->getFulltextSearchTypes();
+		$searchTypes = $this->entityTypeDefinitions->get( EntityTypeDefinitions::FULLTEXT_SEARCH_CONTEXT );
 		foreach ( $searchTypes as $key => $value ) {
 			if ( is_callable( $value ) ) {
 				$searchTypes[$key] = $value();

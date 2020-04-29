@@ -75,7 +75,7 @@ class EntitySourceDefinitions {
 	}
 
 	private function buildSubEntityTypeMap( EntityTypeDefinitions $entityTypeDefinitions ) {
-		$subEntityTypes = $entityTypeDefinitions->getSubEntityTypes();
+		$subEntityTypes = $entityTypeDefinitions->get( EntityTypeDefinitions::SUB_ENTITY_TYPES );
 
 		$subEntityTypeMap = [];
 		foreach ( $subEntityTypes as $type => $subTypes ) {

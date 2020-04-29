@@ -24,8 +24,8 @@ class EntityRdfBuilderFactory {
 	private $labelPredicates;
 
 	/**
-	 * @param callable[] $factoryCallbacks Factory callback functions as returned by
-	 *        EntityTypeDefinitions::getRdfBuilderFactoryCallbacks(). Callbacks will be invoked
+	 * @param callable[] $factoryCallbacks Factory callback functions as returned for
+	 *        EntityTypeDefinitions::RDF_BUILDER_FACTORY_CALLBACK. Callbacks will be invoked
 	 *        with the signature ($mode, RdfVocabulary, RdfWrite, EntityMentionListener, DedupeBag)
 	 *        and must return a EntityRdfBuilder (or null).
 	 * @param string[][][] $labelPredicates
