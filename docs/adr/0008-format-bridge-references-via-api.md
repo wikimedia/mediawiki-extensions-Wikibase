@@ -1,4 +1,4 @@
-# 8. Format Bridge references via API {#adr_0008}
+# 8) Format Bridge references via API {#adr_0008}
 
 Date: 2020-02-17
 
