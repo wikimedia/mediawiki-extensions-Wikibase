@@ -74,4 +74,20 @@ describe( 'ErrorSaving', () => {
 
 		expect( retrySave ).toHaveBeenCalledTimes( 1 );
 	} );
+
+	it( 'goes back if the back button is clicked', async () => {
+		const goBackFromErrorToReady = jest.fn();
+		const localStore = createTestStore( { actions: { goBackFromErrorToReady } } );
+		const wrapper = shallowMount( ErrorSaving, {
+			store: localStore,
+			localVue,
+		} );
+
+		const button = wrapper.find( '.wb-db-error-saving__buttons .wb-db-error-saving__back' );
+		expect( button.exists() ).toBe( true );
+		button.vm.$emit( 'click' );
+
+		await localVue.nextTick();
+		expect( goBackFromErrorToReady ).toHaveBeenCalled();
+	} );
 } );

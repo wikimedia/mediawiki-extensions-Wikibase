@@ -99,6 +99,23 @@ describe( 'App.vue', () => {
 		expect( wrapper.classes() ).toContain( 'wb-db-app' );
 	} );
 
+	it( 'goes back if the back button is clicked', async () => {
+		const goBackFromErrorToReady = jest.fn();
+		const localStore = hotUpdateDeep( store, {
+			actions: {
+				goBackFromErrorToReady,
+			},
+		} );
+		const wrapper = shallowMount( App, {
+			store: localStore,
+			localVue,
+		} );
+
+		await wrapper.find( AppHeader ).vm.$emit( 'back' );
+		await localVue.nextTick();
+		expect( goBackFromErrorToReady ).toHaveBeenCalled();
+	} );
+
 	it( 'shows License on 1st save click, saves on 2nd save click, emits on refs click', async () => {
 		const bridgeSave = jest.fn();
 		const localStore = hotUpdateDeep( store, {
