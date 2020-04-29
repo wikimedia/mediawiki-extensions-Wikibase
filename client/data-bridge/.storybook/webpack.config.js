@@ -32,10 +32,7 @@ module.exports = async ( { config } ) => {
 				loader: 'postcss-loader',
 				options: {
 					ident: 'postcss',
-					plugins: Object.entries( ourPostCssConfig.plugins )
-						.map( ( [ plugin, config ] ) => {
-							return require( plugin )( config );
-						} ),
+					plugins: ourPostCssConfig.plugins,
 				},
 			},
 			{
