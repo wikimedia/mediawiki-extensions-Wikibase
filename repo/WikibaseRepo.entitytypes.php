@@ -22,6 +22,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
+use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\Store\EntityInfo;
@@ -48,10 +49,10 @@ use Wikimedia\Purtle\RdfWriter;
 
 return [
 	'item' => [
-		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newItemSerializer();
 		},
-		'view-factory-callback' => function(
+		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
 			EntityDocument $entity,
@@ -72,26 +73,26 @@ return [
 					)
 			);
 		},
-		'meta-tags-creator-callback' => function ( $userLanguage ) {
+		Def::META_TAGS_CREATOR_CALLBACK => function ( $userLanguage ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
-		'content-model-id' => CONTENT_MODEL_WIKIBASE_ITEM,
-		'content-handler-factory-callback' => function() {
+		Def::CONTENT_MODEL_ID => CONTENT_MODEL_WIKIBASE_ITEM,
+		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newItemHandler();
 		},
-		'entity-factory-callback' => function() {
+		Def::ENTITY_FACTORY_CALLBACK => function() {
 			return new Item();
 		},
-		'changeop-deserializer-callback' => function() {
+		Def::CHANGEOP_DESERIALIZER_CALLBACK => function() {
 			return new ItemChangeOpDeserializer(
 				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
 			);
 		},
-		'rdf-builder-factory-callback' => function(
+		Def::RDF_BUILDER_FACTORY_CALLBACK => function(
 			$flavorFlags,
 			RdfVocabulary $vocabulary,
 			RdfWriter $writer,
@@ -109,7 +110,7 @@ return [
 			}
 			return new NullEntityRdfBuilder();
 		},
-		'entity-diff-visualizer-callback' => function (
+		Def::ENTITY_DIFF_VISUALIZER_CALLBACK => function (
 			MessageLocalizer $messageLocalizer,
 			ClaimDiffer $claimDiffer,
 			ClaimDifferenceVisualizer $claimDiffView,
@@ -133,7 +134,7 @@ return [
 				$basicEntityDiffVisualizer
 			);
 		},
-		'entity-search-callback' => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
@@ -161,10 +162,10 @@ return [
 					]
 			);
 		},
-		'link-formatter-callback' => function( Language $language ) {
+		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
-		'entity-id-html-link-formatter-callback' => function( Language $language ) {
+		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
@@ -174,7 +175,7 @@ return [
 				$repo->getLanguageNameLookup()
 			);
 		},
-		'entity-reference-extractor-callback' => function() {
+		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
 			return new EntityReferenceExtractorCollection( [
 				new SiteLinkBadgeItemReferenceExtractor(),
 				new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getItemUrlParser() )
@@ -182,10 +183,10 @@ return [
 		},
 	],
 	'property' => [
-		'storage-serializer-factory-callback' => function( SerializerFactory $serializerFactory ) {
+		Def::STORAGE_SERIALIZER_FACTORY_CALLBACK => function( SerializerFactory $serializerFactory ) {
 			return $serializerFactory->newPropertySerializer();
 		},
-		'view-factory-callback' => function(
+		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
 			EntityDocument $entity,
@@ -206,26 +207,26 @@ return [
 					)
 			);
 		},
-		'meta-tags-creator-callback' => function ( Language $userLanguage ) {
+		Def::META_TAGS_CREATOR_CALLBACK => function ( Language $userLanguage ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
-		'content-model-id' => CONTENT_MODEL_WIKIBASE_PROPERTY,
-		'content-handler-factory-callback' => function() {
+		Def::CONTENT_MODEL_ID => CONTENT_MODEL_WIKIBASE_PROPERTY,
+		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newPropertyHandler();
 		},
-		'entity-factory-callback' => function() {
+		Def::ENTITY_FACTORY_CALLBACK => function() {
 			return Property::newFromType( '' );
 		},
-		'changeop-deserializer-callback' => function() {
+		Def::CHANGEOP_DESERIALIZER_CALLBACK => function() {
 			return new PropertyChangeOpDeserializer(
 				WikibaseRepo::getDefaultInstance()->getChangeOpDeserializerFactory()
 			);
 		},
-		'rdf-builder-factory-callback' => function(
+		Def::RDF_BUILDER_FACTORY_CALLBACK => function(
 			$flavorFlags,
 			RdfVocabulary $vocabulary,
 			RdfWriter $writer,
@@ -238,7 +239,7 @@ return [
 				WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getRdfDataTypes()
 			);
 		},
-		'entity-search-callback' => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
@@ -270,10 +271,10 @@ return [
 				$repo->getPropertyDataTypeLookup()
 			);
 		},
-		'link-formatter-callback' => function( Language $language ) {
+		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			return new DefaultEntityLinkFormatter( $language );
 		},
-		'entity-id-html-link-formatter-callback' => function( Language $language ) {
+		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$languageLabelLookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
@@ -283,7 +284,7 @@ return [
 				$repo->getLanguageNameLookup()
 			);
 		},
-		'entity-reference-extractor-callback' => function() {
+		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
 			return new StatementEntityReferenceExtractor( WikibaseRepo::getDefaultInstance()->getItemUrlParser() );
 		},
 	]

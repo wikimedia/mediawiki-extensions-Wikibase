@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests;
 use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Content\EntityHandler;
@@ -45,9 +46,9 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$registry = $this->getRegistry();
 
 		$this->assertArrayHasKey( $entityType, $registry );
-		$this->assertArrayHasKey( 'view-factory-callback', $registry[$entityType] );
+		$this->assertArrayHasKey( EntityTypeDefinitions::VIEW_FACTORY_CALLBACK, $registry[$entityType] );
 
-		$callback = $registry[$entityType]['view-factory-callback'];
+		$callback = $registry[$entityType][EntityTypeDefinitions::VIEW_FACTORY_CALLBACK];
 
 		$this->assertIsCallable( $callback );
 
@@ -69,8 +70,8 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$registry = $this->getRegistry();
 
 		$this->assertArrayHasKey( $entityType, $registry );
-		$this->assertArrayHasKey( 'content-model-id', $registry[$entityType] );
-		$this->assertSame( 'wikibase-' . $entityType, $registry[$entityType]['content-model-id'] );
+		$this->assertArrayHasKey( EntityTypeDefinitions::CONTENT_MODEL_ID, $registry[$entityType] );
+		$this->assertSame( 'wikibase-' . $entityType, $registry[$entityType][EntityTypeDefinitions::CONTENT_MODEL_ID] );
 	}
 
 	/**
@@ -80,9 +81,9 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$registry = $this->getRegistry();
 
 		$this->assertArrayHasKey( $entityType, $registry );
-		$this->assertArrayHasKey( 'content-handler-factory-callback', $registry[$entityType] );
+		$this->assertArrayHasKey( EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK, $registry[$entityType] );
 
-		$callback = $registry[$entityType]['content-handler-factory-callback'];
+		$callback = $registry[$entityType][EntityTypeDefinitions::CONTENT_HANDLER_FACTORY_CALLBACK];
 
 		$this->assertIsCallable( $callback );
 

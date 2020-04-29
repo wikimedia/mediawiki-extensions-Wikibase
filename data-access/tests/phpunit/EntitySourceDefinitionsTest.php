@@ -53,7 +53,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 
 		$sourceDefinitions = new EntitySourceDefinitions(
 			[ $itemSource, $propertySource ],
-			new EntityTypeDefinitions( [ 'item' => [ 'sub-entity-types' => [ 'subitem' ] ] ] )
+			new EntityTypeDefinitions( [ 'item' => [ EntityTypeDefinitions::SUB_ENTITY_TYPES => [ 'subitem' ] ] ] )
 		);
 
 		$this->assertEquals( $itemSource, $sourceDefinitions->getSourceForEntityType( 'subitem' ) );
@@ -75,7 +75,7 @@ class EntitySourceDefinitionsTest extends TestCase {
 		$sources = [ $itemSource, $propertySource, $otherSource ];
 		$entityTypeDefinitions = [
 			'other' => [
-				'sub-entity-types' => [ 'otherSub' ],
+				EntityTypeDefinitions::SUB_ENTITY_TYPES => [ 'otherSub' ],
 			],
 			'otherSub' => [],
 		];

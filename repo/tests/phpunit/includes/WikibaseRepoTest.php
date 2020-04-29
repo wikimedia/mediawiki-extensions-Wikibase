@@ -460,7 +460,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		return new EntityTypeDefinitions(
 			[
 				'lexeme' => [
-					'sub-entity-types' => [
+					EntityTypeDefinitions::SUB_ENTITY_TYPES => [
 						'form',
 					],
 				],
@@ -791,8 +791,8 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	private function getDataValueFactory() {
 		return $this->getWikibaseRepoWithCustomEntityTypeDefinitions( [
 			'item' => [
-				'entity-id-pattern' => ItemId::PATTERN,
-				'entity-id-builder' => function ( $serialization ) {
+				EntityTypeDefinitions::ENTITY_ID_PATTERN => ItemId::PATTERN,
+				EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
 					return new ItemId( $serialization );
 				},
 			],

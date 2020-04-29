@@ -21,6 +21,42 @@ use InvalidArgumentException;
  */
 class EntityTypeDefinitions {
 
+	public const ENTITY_STORE_FACTORY_CALLBACK = 'entity-store-factory-callback';
+	public const ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK = 'entity-revision-lookup-factory-callback';
+	public const ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK = 'entity-title-store-lookup-factory-callback';
+	public const ENTITY_METADATA_ACCESSOR_CALLBACK = 'entity-metadata-accessor-callback';
+	public const PREFETCHING_TERM_LOOKUP_CALLBACK = 'prefetching-term-lookup-callback';
+	public const SERIALIZER_FACTORY_CALLBACK = 'serializer-factory-callback';
+	public const STORAGE_SERIALIZER_FACTORY_CALLBACK = 'storage-serializer-factory-callback';
+	public const DESERIALIZER_FACTORY_CALLBACK = 'deserializer-factory-callback';
+	public const VIEW_FACTORY_CALLBACK = 'view-factory-callback';
+	public const META_TAGS_CREATOR_CALLBACK = 'meta-tags-creator-callback';
+	public const CONTENT_MODEL_ID = 'content-model-id';
+	public const CONTENT_HANDLER_FACTORY_CALLBACK = 'content-handler-factory-callback';
+	public const ENTITY_FACTORY_CALLBACK = 'entity-factory-callback';
+	public const ENTITY_DIFFER_STRATEGY_BUILDER = 'entity-differ-strategy-builder';
+	public const ENTITY_PATCHER_STRATEGY_BUILDER = 'entity-patcher-strategy-builder';
+	public const ENTITY_DIFF_VISUALIZER_CALLBACK = 'entity-diff-visualizer-callback';
+	public const JS_DESERIALIZER_FACTORY_FUNCTION = 'js-deserializer-factory-function';
+	public const ENTITY_ID_COMPOSER_CALLBACK = 'entity-id-composer-callback';
+	public const CHANGEOP_DESERIALIZER_CALLBACK = 'changeop-deserializer-callback';
+	public const RDF_BUILDER_FACTORY_CALLBACK = 'rdf-builder-factory-callback';
+	public const ENTITY_SEARCH_CALLBACK = 'entity-search-callback';
+	public const SUB_ENTITY_TYPES = 'sub-entity-types';
+	public const LINK_FORMATTER_CALLBACK = 'link-formatter-callback';
+	public const ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK = 'entity-id-html-link-formatter-callback';
+	public const ENTITY_REFERENCE_EXTRACTOR_CALLBACK = 'entity-reference-extractor-callback';
+	public const FULLTEXT_SEARCH_CONTEXT = 'fulltext-search-context';
+	public const SEARCH_FIELD_DEFINITIONS = 'search-field-definitions';
+	public const RDF_LABEL_PREDICATES = 'rdf-builder-label-predicates';
+	public const LUA_ENTITY_MODULE = 'lua-entity-module';
+	public const ENTITY_ID_LOOKUP_CALLBACK = 'entity-id-lookup-callback';
+	public const ARTICLE_ID_LOOKUP_CALLBACK = 'article-id-lookup-callback';
+	public const TITLE_TEXT_LOOKUP_CALLBACK = 'title-text-lookup-callback';
+	public const URL_LOOKUP_CALLBACK = 'url-lookup-callback';
+	public const ENTITY_ID_PATTERN = 'entity-id-pattern';
+	public const ENTITY_ID_BUILDER = 'entity-id-builder';
+
 	/**
 	 * @var array[]
 	 */
@@ -70,98 +106,98 @@ class EntityTypeDefinitions {
 	 * @return callable[]
 	 */
 	public function getEntityStoreFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-store-factory-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_STORE_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityRevisionLookupFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-revision-lookup-factory-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_REVISION_LOOKUP_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityTitleStoreLookupFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-title-store-lookup-factory-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_TITLE_STORE_LOOKUP_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityMetaDataAccessorCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-metadata-accessor-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_METADATA_ACCESSOR_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getPrefetchingTermLookupCallbacks() {
-		return $this->getMapForDefinitionField( 'prefetching-term-lookup-callback' );
+		return $this->getMapForDefinitionField( self::PREFETCHING_TERM_LOOKUP_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getSerializerFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'serializer-factory-callback' );
+		return $this->getMapForDefinitionField( self::SERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getStorageSerializerFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'storage-serializer-factory-callback' );
+		return $this->getMapForDefinitionField( self::STORAGE_SERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getDeserializerFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'deserializer-factory-callback' );
+		return $this->getMapForDefinitionField( self::DESERIALIZER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getViewFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'view-factory-callback' );
+		return $this->getMapForDefinitionField( self::VIEW_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getMetaTagsFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'meta-tags-creator-callback' );
+		return $this->getMapForDefinitionField( self::META_TAGS_CREATOR_CALLBACK );
 	}
 
 	/**
 	 * @return string[]
 	 */
 	public function getContentModelIds() {
-		return $this->getMapForDefinitionField( 'content-model-id' );
+		return $this->getMapForDefinitionField( self::CONTENT_MODEL_ID );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getContentHandlerFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'content-handler-factory-callback' );
+		return $this->getMapForDefinitionField( self::CONTENT_HANDLER_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-factory-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_FACTORY_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityDifferStrategyBuilders() {
-		return $this->getMapForDefinitionField( 'entity-differ-strategy-builder' );
+		return $this->getMapForDefinitionField( self::ENTITY_DIFFER_STRATEGY_BUILDER );
 	}
 
 	/**
@@ -170,21 +206,21 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getEntityDiffVisualizerCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-diff-visualizer-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_DIFF_VISUALIZER_CALLBACK );
 	}
 
 	/**
 	 * @return callable[]
 	 */
 	public function getEntityPatcherStrategyBuilders() {
-		return $this->getMapForDefinitionField( 'entity-patcher-strategy-builder' );
+		return $this->getMapForDefinitionField( self::ENTITY_PATCHER_STRATEGY_BUILDER );
 	}
 
 	/**
 	 * @return string[]
 	 */
 	public function getJsDeserializerFactoryFunctions() {
-		return $this->getMapForDefinitionField( 'js-deserializer-factory-function' );
+		return $this->getMapForDefinitionField( self::JS_DESERIALIZER_FACTORY_FUNCTION );
 	}
 
 	/**
@@ -194,8 +230,8 @@ class EntityTypeDefinitions {
 		$result = [];
 
 		foreach ( $this->entityTypeDefinitions as $def ) {
-			if ( isset( $def['entity-id-pattern'] ) && isset( $def['entity-id-builder'] ) ) {
-				$result[$def['entity-id-pattern']] = $def['entity-id-builder'];
+			if ( isset( $def[self::ENTITY_ID_PATTERN] ) && isset( $def[self::ENTITY_ID_BUILDER] ) ) {
+				$result[$def[self::ENTITY_ID_PATTERN]] = $def[self::ENTITY_ID_BUILDER];
 			}
 		}
 
@@ -208,7 +244,7 @@ class EntityTypeDefinitions {
 	 *  all entity types.
 	 */
 	public function getEntityIdComposers() {
-		return $this->getMapForDefinitionField( 'entity-id-composer-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_ID_COMPOSER_CALLBACK );
 	}
 
 	/**
@@ -219,7 +255,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getChangeOpDeserializerCallbacks() {
-		return $this->getMapForDefinitionField( 'changeop-deserializer-callback' );
+		return $this->getMapForDefinitionField( self::CHANGEOP_DESERIALIZER_CALLBACK );
 	}
 
 	/**
@@ -228,7 +264,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getRdfBuilderFactoryCallbacks() {
-		return $this->getMapForDefinitionField( 'rdf-builder-factory-callback' );
+		return $this->getMapForDefinitionField( self::RDF_BUILDER_FACTORY_CALLBACK );
 	}
 
 	/**
@@ -237,7 +273,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getEntitySearchHelperCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-search-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_SEARCH_CALLBACK );
 	}
 
 	/**
@@ -245,7 +281,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types, will only contain entity types that have sub entities.
 	 */
 	public function getSubEntityTypes() {
-		return $this->getMapForDefinitionField( 'sub-entity-types' );
+		return $this->getMapForDefinitionField( self::SUB_ENTITY_TYPES );
 	}
 
 	/**
@@ -254,7 +290,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getLinkFormatterCallbacks() {
-		return $this->getMapForDefinitionField( 'link-formatter-callback' );
+		return $this->getMapForDefinitionField( self::LINK_FORMATTER_CALLBACK );
 	}
 
 	/**
@@ -263,7 +299,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getEntityIdHtmlLinkFormatterCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-id-html-link-formatter-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK );
 	}
 
 	/**
@@ -272,7 +308,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getEntityReferenceExtractorCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-reference-extractor-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_REFERENCE_EXTRACTOR_CALLBACK );
 	}
 
 	/**
@@ -281,7 +317,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getFulltextSearchTypes() {
-		return $this->getMapForDefinitionField( 'fulltext-search-context' );
+		return $this->getMapForDefinitionField( self::FULLTEXT_SEARCH_CONTEXT );
 	}
 
 	/**
@@ -290,7 +326,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getFieldDefinitions() {
-		return $this->getMapForDefinitionField( 'search-field-definitions' );
+		return $this->getMapForDefinitionField( self::SEARCH_FIELD_DEFINITIONS );
 	}
 
 	/**
@@ -299,7 +335,7 @@ class EntityTypeDefinitions {
 	 * Contains only types that have non-default predicates.
 	 */
 	public function getLabelPredicates() {
-		return $this->getMapForDefinitionField( 'rdf-builder-label-predicates' );
+		return $this->getMapForDefinitionField( self::RDF_LABEL_PREDICATES );
 	}
 
 	/**
@@ -308,7 +344,7 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getLuaEntityModules() {
-		return $this->getMapForDefinitionField( 'lua-entity-module' );
+		return $this->getMapForDefinitionField( self::LUA_ENTITY_MODULE );
 	}
 
 	/**
@@ -317,19 +353,19 @@ class EntityTypeDefinitions {
 	 * Not guaranteed to contain all entity types.
 	 */
 	public function getEntityIdLookupCallbacks() {
-		return $this->getMapForDefinitionField( 'entity-id-lookup-callback' );
+		return $this->getMapForDefinitionField( self::ENTITY_ID_LOOKUP_CALLBACK );
 	}
 
 	public function getEntityArticleIdLookupCallbacks() {
-		return $this->getMapForDefinitionField( 'article-id-lookup-callback' );
+		return $this->getMapForDefinitionField( self::ARTICLE_ID_LOOKUP_CALLBACK );
 	}
 
 	public function getEntityTitleTextLookupCallbacks() {
-		return $this->getMapForDefinitionField( 'title-text-lookup-callback' );
+		return $this->getMapForDefinitionField( self::TITLE_TEXT_LOOKUP_CALLBACK );
 	}
 
 	public function getEntityUrlLookupCallbacks() {
-		return $this->getMapForDefinitionField( 'url-lookup-callback' );
+		return $this->getMapForDefinitionField( self::URL_LOOKUP_CALLBACK );
 	}
 
 }
