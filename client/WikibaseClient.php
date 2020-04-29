@@ -39,6 +39,7 @@ use Wikibase\Client\Api\Description;
 use Wikibase\Client\Api\PageTerms;
 use Wikibase\Client\ChangeNotificationJob;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
+use Wikibase\Client\ChangeVisibilityNotificationJob;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\Specials\SpecialPagesWithBadges;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
@@ -170,6 +171,12 @@ call_user_func( function() {
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
 	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
+	$wgJobClasses['ChangeVisibilityNotification'] = function ( Title $unused, array $params ) {
+		return new ChangeVisibilityNotificationJob(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$params
+		);
+	};
 	$wgJobClasses['wikibase-InjectRCRecords'] = function ( Title $unused, array $params ) {
 		$mwServices = MediaWikiServices::getInstance();
 		$wbServices = WikibaseClient::getDefaultInstance();
