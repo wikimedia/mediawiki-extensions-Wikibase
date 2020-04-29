@@ -43,5 +43,7 @@
 	"wikibase-pageinfo-entity-id-none": "ڪوبہ نہ",
 	"wikibase-pageinfo-entity-usage": "هن صفحي تي {{WBREPONAME}} جا استعمال ٿيل حصا",
 	"wikibase-pageinfo-entity-usage-S": "سرزمين-ڳنڍڻو",
-	"wikibase-otherprojects": "ٻيون رٿائون"
+	"wikibase-otherprojects": "ٻيون رٿائون",
+	"wikibase-client-data-bridge-error-go-back": "واپس وڃو",
+	"wikibase-client-data-bridge-error-retry-save": "ٻيهر محفوظ ڪيو"
 }

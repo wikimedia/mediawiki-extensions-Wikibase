@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Naufal06",
 			"NoiX180",
 			"Pras"
 		]
@@ -86,5 +87,6 @@
 	"notification-bundle-header-page-connection": "<strong>$3</strong> lan {{PLURAL:$4|sakaca liya|$4 kaca liya|100=99+ kaca liya}} {{GENDER:$2|kagayut}} karo wiji {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1|Deleng}} wiji",
 	"notification-subject-page-connection": "Kaca ing {{SITENAME}} sing panjenengan {{GENDER:$3|gawé}} wis {{GENDER:$2|nggayut}} wiji {{WBREPONAME}}",
-	"unresolved-property-category": "Kaca mawa properti durung rampung"
+	"unresolved-property-category": "Kaca mawa properti durung rampung",
+	"wikibase-client-data-bridge-error-go-back": "Balik"
 }

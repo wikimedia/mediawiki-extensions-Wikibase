@@ -4,6 +4,8 @@
 			"Salomo Christian Hutajulu"
 		]
 	},
+	"wikibase-comment-update": "Diubah do item {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunihon",
 	"wikibase-otherprojects": "Di bagasan proyek na asing"
 }

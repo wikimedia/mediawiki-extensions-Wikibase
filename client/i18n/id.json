@@ -6,6 +6,7 @@
 			"Iwan Novirion",
 			"Kenrick95",
 			"MF-Warburg",
+			"Naufal06",
 			"Snidata",
 			"Taylor"
 		]
@@ -71,5 +72,6 @@
 	"wikibase-otherprojects": "Dalam proyek lain",
 	"wikibase-otherprojects-beta-message": "Proyek lain menu samping",
 	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}.",
-	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}"
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}",
+	"wikibase-client-data-bridge-error-go-back": "Kembali"
 }
