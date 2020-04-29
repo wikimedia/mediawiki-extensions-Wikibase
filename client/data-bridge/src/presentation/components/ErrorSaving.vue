@@ -20,6 +20,7 @@
 				type="neutral"
 				size="M"
 				:message="$messages.get( $messages.KEYS.ERROR_GO_BACK )"
+				@click="goBack"
 			/><EventEmittingButton
 				class="wb-db-error-saving__retry"
 				type="primaryProgressive"
@@ -53,6 +54,10 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
 export default class ErrorSaving extends mixins( StateMixin ) {
 	public retrySave(): void {
 		this.rootModule.dispatch( 'retrySave' );
+	}
+
+	public goBack(): void {
+		this.rootModule.dispatch( 'goBackFromErrorToReady' );
 	}
 }
 </script>

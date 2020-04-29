@@ -25,6 +25,7 @@ class DataBridgePage extends Page {
 		return {
 			SAVE: `${headerClass} .wb-ui-event-emitting-button--primaryProgressive`,
 			CLOSE: `${headerClass} .wb-ui-event-emitting-button--close`,
+			BACK: `${headerClass} .wb-ui-event-emitting-button--back`,
 		};
 	}
 
@@ -102,6 +103,11 @@ class DataBridgePage extends Page {
 		return '.wb-db-error-saving__retry';
 	}
 
+	static get ERROR_SAVING_BACK_BUTTON() {
+		// only visible on desktop (window width larger than breakpoint)
+		return '.wb-db-error-saving__back';
+	}
+
 	getDummyTitle() {
 		return Util.getTestString( 'Talk:Data-bridge-test-page-' );
 	}
@@ -166,9 +172,21 @@ class DataBridgePage extends Page {
 		);
 	}
 
+	get headerBackButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.HEADER_ELEMENTS.BACK}`
+		);
+	}
+
 	get retrySaveButton() {
 		return $(
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.RETRY_SAVE_BUTTON}`
+		);
+	}
+
+	get errorSavingBackButton() {
+		return $(
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ERROR_SAVING_BACK_BUTTON}`
 		);
 	}
 
