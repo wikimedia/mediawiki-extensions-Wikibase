@@ -1,10 +1,10 @@
-# x) Use cache instead of wb_terms for efficient fetching of data needed to display an entity in the short form {#adr_xxxx}
+# 0) Use cache instead of wb_terms for efficient fetching of data needed to display an entity in the short form {#adr_0000}
 
 Date: 2018-06-28
 
 ## Status
 
-proposed
+accepted
 
 ## Context
 
