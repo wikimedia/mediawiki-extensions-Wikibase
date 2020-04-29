@@ -74,7 +74,7 @@ Once the setup process has completed, you can access your newly installed Wikiba
 Set up your VPS instance on https://horizon.wikimedia.org and a web proxy to reach it from the internet, then:
 ```sh
 $ cd extensions/Wikibase/build/federated-properties
-$ ansible-playbook fedProps.yml --limit wikidata-federatedproperties.wikidata-dev.eqiad.wmflabs
+$ ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-dev.eqiad.wmflabs
 ```
 
 Once the setup process has completed, you can access the newly installed Wikibase test system via https://wikidata-federated-properties.wmflabs.org.
