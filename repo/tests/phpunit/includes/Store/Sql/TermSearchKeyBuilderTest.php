@@ -10,6 +10,7 @@ use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\Store\Sql\TermSearchKeyBuilder;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\Rdbms\IDatabase;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\TermSearchKeyBuilder
@@ -53,7 +54,7 @@ class TermSearchKeyBuilderTest extends \MediaWikiTestCase {
 
 		// remove search key
 		$dbw = wfGetDB( DB_MASTER );
-		$dbw->update( $termCache->getTableName(), [ 'term_search_key' => '' ], [], __METHOD__ );
+		$dbw->update( $termCache->getTableName(), [ 'term_search_key' => '' ], IDatabase::ALL_ROWS, __METHOD__ );
 
 		// rebuild search key
 		$builder = new TermSearchKeyBuilder( $termCache, new NullLogger() );
