@@ -97,6 +97,9 @@ services.set( 'tracker', {
 	trackUnknownError( type: string ): void {
 		console.info( `Tracking unknown error: '${type}'` );
 	},
+	trackSavingUnknownError( type: string ): void {
+		console.info( `Tracking unknown error on save: '${type}'` );
+	},
 } );
 
 services.set( 'editAuthorizationChecker', {

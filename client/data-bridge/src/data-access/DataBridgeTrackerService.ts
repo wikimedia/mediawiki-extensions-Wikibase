@@ -19,4 +19,8 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 	public trackUnknownError( type: string ): void {
 		this.tracker.increment( `error.unknown.${type}` );
 	}
+
+	public trackSavingUnknownError( type: string ): void {
+		this.tracker.increment( `error.onsave.unknown.${type}` );
+	}
 }

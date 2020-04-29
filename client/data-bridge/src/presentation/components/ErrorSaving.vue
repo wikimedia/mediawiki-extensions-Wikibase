@@ -52,6 +52,10 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
 	},
 } )
 export default class ErrorSaving extends mixins( StateMixin ) {
+	public mounted(): void {
+		this.rootModule.dispatch( 'trackApplicationErrorsOnSaveAsUnknown' );
+	}
+
 	public retrySave(): void {
 		this.rootModule.dispatch( 'retrySave' );
 	}
