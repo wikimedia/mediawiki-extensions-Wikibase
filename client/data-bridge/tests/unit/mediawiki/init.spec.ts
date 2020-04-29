@@ -83,7 +83,7 @@ describe( 'init', () => {
 			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
-			editFlow = EditFlow.OVERWRITE,
+			editFlow = EditFlow.SINGLE_BEST_VALUE,
 			dataBridgeConfig = {
 				hrefRegExp: '',
 				editTags: [],
@@ -143,7 +143,7 @@ describe( 'init', () => {
 			using = jest.fn().mockResolvedValue( require ),
 			entityId = 'Q5',
 			propertyId = 'P4711',
-			editFlow = EditFlow.OVERWRITE;
+			editFlow = EditFlow.SINGLE_BEST_VALUE;
 		mockMwEnv( using );
 
 		const selectedElement = {
@@ -191,7 +191,7 @@ describe( 'init', () => {
 			),
 			entityId = 'Q5',
 			propertyId = 'P4711',
-			editFlow = EditFlow.OVERWRITE,
+			editFlow = EditFlow.SINGLE_BEST_VALUE,
 			dataBridgeConfig = {
 				hrefRegExp: '',
 				editTags: [],

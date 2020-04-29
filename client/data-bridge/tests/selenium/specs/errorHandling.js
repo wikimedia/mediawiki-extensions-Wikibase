@@ -13,7 +13,7 @@ describe( 'App', () => {
 			label: 'shows the occurrence of errors',
 			entityId: nonExistentEntityId,
 			propertyId,
-			editFlow: 'overwrite',
+			editFlow: 'single-best-value',
 		} ] );
 
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
@@ -47,7 +47,7 @@ describe( 'App', () => {
 			label: 'prevail at last',
 			entityId,
 			propertyId,
-			editFlow: 'overwrite',
+			editFlow: 'single-best-value',
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
@@ -83,7 +83,7 @@ describe( 'App', () => {
 			label: 'official website',
 			entityId,
 			propertyId,
-			editFlow: 'overwrite',
+			editFlow: 'single-best-value',
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 

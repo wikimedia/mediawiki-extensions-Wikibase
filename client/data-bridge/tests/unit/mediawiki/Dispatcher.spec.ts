@@ -81,7 +81,7 @@ describe( 'Dispatcher', () => {
 			const entityId = 'Q4711';
 			const propertyId = 'P815';
 			const entityTitle = entityId;
-			const editFlow = EditFlow.OVERWRITE;
+			const editFlow = EditFlow.SINGLE_BEST_VALUE;
 			const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';
 			const tracker = {} as Tracker;
 

@@ -152,7 +152,7 @@ launch(
 		entityId: 'Q42',
 		propertyId: getOrEnforceUrlParameter( 'propertyId', 'P373' ) as string,
 		entityTitle: 'Q42',
-		editFlow: EditFlow.OVERWRITE,
+		editFlow: EditFlow.SINGLE_BEST_VALUE,
 		client: {
 			usePublish: getOrEnforceUrlParameter( 'usePublish', 'false' ) === 'true',
 			issueReportingLink: 'https://http.cat/404',

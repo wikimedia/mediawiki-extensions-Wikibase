@@ -49,7 +49,7 @@ describe( 'permission checks', () => {
 			label: 'official website',
 			entityId,
 			propertyId,
-			editFlow: 'overwrite',
+			editFlow: 'single-best-value',
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 	} );

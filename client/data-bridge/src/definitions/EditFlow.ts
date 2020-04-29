@@ -1,5 +1,5 @@
 enum EditFlow {
-	OVERWRITE = 'overwrite',
+	SINGLE_BEST_VALUE = 'single-best-value',
 }
 
 export default EditFlow;

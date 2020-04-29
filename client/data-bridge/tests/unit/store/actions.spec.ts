@@ -40,7 +40,7 @@ describe( 'root/actions', () => {
 	const defaultPropertyId = 'P71';
 	function newMockAppInformation( fields: Partial<AppInformation> = {} ): AppInformation {
 		return {
-			editFlow: EditFlow.OVERWRITE,
+			editFlow: EditFlow.SINGLE_BEST_VALUE,
 			propertyId: defaultPropertyId,
 			entityId: defaultEntityId,
 			entityTitle: 'Entity Title',
@@ -105,7 +105,7 @@ describe( 'root/actions', () => {
 		it(
 			`commits to ${listOfCommits.join( ', ' )}`,
 			async () => {
-				const editFlow = EditFlow.OVERWRITE;
+				const editFlow = EditFlow.SINGLE_BEST_VALUE;
 				const propertyId = 'P42';
 				const entityTitle = 'Douglas Adams';
 				const originalHref = 'https://example.com/index.php?title=Item:Q42&uselang=en#P31';

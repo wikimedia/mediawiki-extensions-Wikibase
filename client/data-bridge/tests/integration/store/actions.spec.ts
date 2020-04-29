@@ -135,7 +135,7 @@ describe( 'store/actions', () => {
 
 		info = {
 			pageTitle: 'Client_page',
-			editFlow: EditFlow.OVERWRITE,
+			editFlow: EditFlow.SINGLE_BEST_VALUE,
 			propertyId: 'P31',
 			entityId: 'Q42',
 			entityTitle: 'Q42',
@@ -182,7 +182,7 @@ describe( 'store/actions', () => {
 			it( 'switches into error state if the statement not existing on the entity', () => {
 				const errorStore = createStore( services );
 				const misleadingInfo = {
-					editFlow: EditFlow.OVERWRITE,
+					editFlow: EditFlow.SINGLE_BEST_VALUE,
 					propertyId: 'P2312',
 					entityId: 'Q42',
 					entityTitle: 'Q42',
@@ -197,7 +197,7 @@ describe( 'store/actions', () => {
 			it( 'switches into error state if the statement is ambiguous', () => {
 				const errorStore = createStore( services );
 				const misleadingInfo = {
-					editFlow: EditFlow.OVERWRITE,
+					editFlow: EditFlow.SINGLE_BEST_VALUE,
 					propertyId: 'P60',
 					entityId: 'Q42',
 					entityTitle: 'Q42',
@@ -211,7 +211,7 @@ describe( 'store/actions', () => {
 			it( 'switches into error state if has not a `value` as snak type', () => {
 				const errorStore = createStore( services );
 				const misleadingInfo = {
-					editFlow: EditFlow.OVERWRITE,
+					editFlow: EditFlow.SINGLE_BEST_VALUE,
 					propertyId: 'P23',
 					entityId: 'Q42',
 					entityTitle: 'Q42',
@@ -225,7 +225,7 @@ describe( 'store/actions', () => {
 			it( 'switch into error state if is not a string data value type', () => {
 				const errorStore = createStore( services );
 				const misleadingInfo = {
-					editFlow: EditFlow.OVERWRITE,
+					editFlow: EditFlow.SINGLE_BEST_VALUE,
 					propertyId: 'P42',
 					entityId: 'Q42',
 					entityTitle: 'Q42',
@@ -248,7 +248,7 @@ describe( 'store/actions', () => {
 
 				const permissionProblemStore = createStore( services );
 				const misleadingInfo = {
-					editFlow: EditFlow.OVERWRITE,
+					editFlow: EditFlow.SINGLE_BEST_VALUE,
 					propertyId: 'P42',
 					entityId: 'Q42',
 					entityTitle: 'Q42',

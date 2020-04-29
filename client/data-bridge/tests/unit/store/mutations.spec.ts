@@ -19,7 +19,7 @@ describe( 'root/mutations', () => {
 	} );
 
 	it( 'changes the editFlow of the state', () => {
-		const editFlow: EditFlow = EditFlow.OVERWRITE;
+		const editFlow: EditFlow = EditFlow.SINGLE_BEST_VALUE;
 		const state: Application = newApplicationState();
 
 		const mutations = inject( RootMutations, { state } );

@@ -7,15 +7,15 @@ describe( 'domBridgeElementSelector', () => {
 		const validHrefWithQueryString = 'https://example.com/wiki/Item:Q11235?uselang=en#P314';
 		document.body.innerHTML = `
 		<div>
-		 <span data-bridge-edit-flow="overwrite">
+		 <span data-bridge-edit-flow="single-best-value">
 		  <a rel="nofollow" class="external text" href="${validHref}">
 			a link to be selected
 		  </a>
 		 </span>
-		 <span data-bridge-edit-flow="overwrite" data-bridge-entity-id="Q123456" data-bridge-property-id="P123">
+		 <span data-bridge-edit-flow="single-best-value" data-bridge-entity-id="Q123456" data-bridge-property-id="P123">
 		  <button>Hi, I'm a button! I should not be selected!</button>
 		 </span>
-		 <span data-bridge-edit-flow="overwrite">
+		 <span data-bridge-edit-flow="single-best-value">
 		  <a rel="nofollow" class="external text" href="${validHrefWithQueryString}">
 			a link to be selected
 		  </a>
@@ -38,12 +38,12 @@ describe( 'domBridgeElementSelector', () => {
 		expect( actualSelectedElementsWithData[ 0 ].entityId ).toBe( 'Q4115189' );
 		expect( actualSelectedElementsWithData[ 0 ].propertyId ).toBe( 'P31' );
 		expect( actualSelectedElementsWithData[ 0 ].entityTitle ).toBe( 'Item:Q4115189' );
-		expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( 'overwrite' );
+		expect( actualSelectedElementsWithData[ 0 ].editFlow ).toBe( 'single-best-value' );
 
 		expect( actualSelectedElementsWithData[ 1 ].entityId ).toBe( 'Q11235' );
 		expect( actualSelectedElementsWithData[ 1 ].propertyId ).toBe( 'P314' );
 		expect( actualSelectedElementsWithData[ 1 ].entityTitle ).toBe( 'Item:Q11235' );
-		expect( actualSelectedElementsWithData[ 1 ].editFlow ).toBe( 'overwrite' );
+		expect( actualSelectedElementsWithData[ 1 ].editFlow ).toBe( 'single-best-value' );
 	} );
 
 	describe( 'given valid html', () => {
@@ -52,34 +52,34 @@ describe( 'domBridgeElementSelector', () => {
 				'can parse information from href',
 				{
 					html: `
-<span data-bridge-edit-flow="overwrite">
+<span data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 </span>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
 					expectedEntityTitle: 'Item:Q4115189',
-					editFlow: 'overwrite',
+					editFlow: 'single-best-value',
 				},
 			],
 			[
 				'ignores additional elements, as long as they are not another link',
 				{
 					html: `
-<span data-bridge-edit-flow="overwrite">
+<span data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 	<button>You could also click me!</button>
 </span>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
 					expectedEntityTitle: 'Item:Q4115189',
-					editFlow: 'overwrite',
+					editFlow: 'single-best-value',
 				},
 			],
 			[
 				'ignores additional data attributes',
 				{
 					html: `
-<span data-bridge-edit-flow="overwrite" data-bridge-entity-id="Q123456" data-bridge-property-id="P123">
+<span data-bridge-edit-flow="single-best-value" data-bridge-entity-id="Q123456" data-bridge-property-id="P123">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">
 		a link to be selected
 	</a>
@@ -87,20 +87,20 @@ describe( 'domBridgeElementSelector', () => {
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
 					expectedEntityTitle: 'Item:Q4115189',
-					editFlow: 'overwrite',
+					editFlow: 'single-best-value',
 				},
 			],
 			[
 				'works also on other elements than spans',
 				{
 					html: `<table><tr>
-<td data-bridge-edit-flow="overwrite">
+<td data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 </td></tr></table>`,
 					expectedEntityId: 'Q4115189',
 					expectedPropertyId: 'P31',
 					expectedEntityTitle: 'Item:Q4115189',
-					editFlow: 'overwrite',
+					editFlow: 'single-best-value',
 				},
 			],
 		] )( '%s', ( _, { html, expectedEntityId, expectedPropertyId, expectedEntityTitle, editFlow } ) => {
@@ -137,7 +137,7 @@ describe( 'domBridgeElementSelector', () => {
 					'skips if there are multiple links inside',
 					{
 						html: `
-<span data-bridge-edit-flow="overwrite">
+<span data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189#P31">a link to be selected</a>
 	<a rel="nofollow" class="external text" href="https://google.com">another link</a>
 </span>`,
@@ -147,7 +147,7 @@ describe( 'domBridgeElementSelector', () => {
 					'skips links without a propertyId',
 					{
 						html: `
-<span data-bridge-edit-flow="overwrite">
+<span data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://example.com/wiki/Item:Q4115189">link text</a>
 </span>`,
 					},
@@ -174,7 +174,7 @@ describe( 'domBridgeElementSelector', () => {
 					'skips span without an unrelated link',
 					{
 						html: `
-<span data-bridge-edit-flow="overwrite">
+<span data-bridge-edit-flow="single-best-value">
 	<a rel="nofollow" class="external text" href="https://google.com/">link text</a>
 </span>`,
 					},

@@ -64,7 +64,7 @@ function prepareTestEnv( options: {
 	const entityId = options.entityId || DEFAULT_ENTITY;
 	const entityTitle = entityId;
 	const propertyId = options.propertyId || DEFAULT_PROPERTY;
-	const editFlow = options.editFlow || EditFlow.OVERWRITE;
+	const editFlow = options.editFlow || EditFlow.SINGLE_BEST_VALUE;
 
 	const app = { launch, createServices };
 	const require = jest.fn().mockReturnValue( app );
