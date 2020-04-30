@@ -25,6 +25,8 @@ docs/*.tmp
 # other docs
 /docs/data-bridge-storybook/
 /docs/tainted-ref-storybook/
+/docs/data-bridge-dist-size/
+/docs/tainted-ref-dist-size/
 
 # Editors
 *.kate-swp
