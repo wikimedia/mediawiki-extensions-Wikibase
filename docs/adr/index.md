@@ -11,6 +11,7 @@ Superseding decisions should reference ADRs they're changing or overriding.
 
 Current ADRs include:
 
+* @subpage adr_0000
 * @subpage adr_0001
 * @subpage adr_0002
 * @subpage adr_0003
@@ -20,7 +21,3 @@ Current ADRs include:
 * @subpage adr_0007
 * @subpage adr_0008
 * @subpage adr_0009
-
-Including one that needs to be cleaned up and included:
-
-* @subpage adr_xxxx
