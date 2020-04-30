@@ -68,8 +68,9 @@ describe( 'Dispatcher', () => {
 			const editTags = [ 'my tag' ];
 			const pageTitle = 'Client_page';
 			const pageUrl = 'https://client.example/wiki/Client_page';
+			const userName = 'Test user';
 			const mwWindow = {
-				mw: { config: mockMwConfig( { wgPageName: pageTitle } ) },
+				mw: { config: mockMwConfig( { wgPageName: pageTitle, wgUserName: userName } ) },
 				location: { href: pageUrl },
 			};
 			const emitter = jest.fn();
@@ -116,6 +117,7 @@ describe( 'Dispatcher', () => {
 					},
 					originalHref,
 					pageUrl,
+					userName,
 				},
 				mockServices,
 			);

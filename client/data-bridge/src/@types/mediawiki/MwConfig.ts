@@ -6,6 +6,7 @@ interface MwConfigValues {
 	wbRepo: WbRepo;
 	wgPageContentLanguage: string;
 	wgPageName: string;
+	wgUserName: string|null;
 }
 
 interface MwConfig {

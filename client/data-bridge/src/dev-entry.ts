@@ -162,6 +162,7 @@ launch(
 		},
 		originalHref: 'https://example.com/index.php?title=Item:Q47&uselang=en#P20',
 		pageUrl: 'https://client.example/wiki/Client_page',
+		userName: null,
 	},
 	services,
 ).on( initEvents.saved, () => {

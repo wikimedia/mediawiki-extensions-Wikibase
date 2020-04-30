@@ -48,6 +48,7 @@ describe( 'root/actions', () => {
 			pageTitle: '',
 			client: { usePublish: true, issueReportingLink: '' },
 			pageUrl: '',
+			userName: null,
 			...fields,
 		};
 	}
@@ -138,6 +139,38 @@ describe( 'root/actions', () => {
 				expect( commit ).toHaveBeenCalledWith( 'setPageTitle', pageTitle );
 				expect( commit ).toHaveBeenCalledWith( 'setPageUrl', pageUrl );
 				expect( commit ).toHaveBeenCalledWith( 'setApplicationStatus', ApplicationStatus.READY );
+			},
+		);
+
+		it.each( [
+			[ false, 'Test user' ],
+			[ true, null ],
+		] )(
+			'sets showWarningAnonymousEdit to %s if user name is %s',
+			async ( expected: boolean, userName: string|null ) => {
+				const information = newMockAppInformation( { userName } );
+
+				const commit = jest.fn();
+				const actions = inject( RootActions, {
+					commit,
+					dispatch: jest.fn(),
+				} );
+				// @ts-ignore
+				actions.store = {
+					$services: newMockServiceContainer( {
+						wikibaseRepoConfigRepository,
+						editAuthorizationChecker,
+						propertyDatatypeRepository,
+					} ),
+				};
+
+				// @ts-ignore
+				actions.entityModule = {
+					dispatch: jest.fn(),
+				};
+
+				await actions.initBridge( information );
+				expect( commit ).toHaveBeenCalledWith( 'setShowWarningAnonymousEdit', expected );
 			},
 		);
 

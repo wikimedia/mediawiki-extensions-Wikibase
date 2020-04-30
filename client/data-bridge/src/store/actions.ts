@@ -58,6 +58,7 @@ RootActions
 		this.commit( 'setOriginalHref', information.originalHref );
 		this.commit( 'setPageTitle', information.pageTitle );
 		this.commit( 'setPageUrl', information.pageUrl );
+		this.commit( 'setShowWarningAnonymousEdit', information.userName === null );
 
 		this.dispatch( 'requestAndSetTargetLabel', information.propertyId );
 

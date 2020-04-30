@@ -19,4 +19,6 @@ export default interface AppInformation {
 	originalHref: string;
 	/** The exact URL of the client page on which the Bridge was opened. */
 	pageUrl: string;
+	/** The user name of the user currently logged into MediaWiki. */
+	userName: string|null;
 }

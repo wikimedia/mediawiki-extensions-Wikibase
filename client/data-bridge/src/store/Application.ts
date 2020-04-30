@@ -22,6 +22,7 @@ interface Application {
 	targetLabel: Term|null;
 	targetProperty: string;
 	pageUrl: string;
+	showWarningAnonymousEdit: boolean;
 }
 
 export default Application;
