@@ -123,7 +123,7 @@ describe( 'App', () => {
 		DataBridgePage.thankYouScreen.waitForDisplayed();
 	} );
 
-	it( 'can go back from a save error both on desktop and mobile', () => {
+	it.skip( 'can go back from a save error both on desktop and mobile', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const stringPropertyExampleValue = 'initialValue';
