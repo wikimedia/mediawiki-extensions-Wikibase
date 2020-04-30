@@ -29,6 +29,33 @@ storiesOf( 'IconMessageBox', module )
 				</IconMessageBox>
 			</div>`,
 	} ) )
+	.add( 'warning', () => ( {
+		components: { IconMessageBox },
+		template:
+			`<div>
+				<IconMessageBox type="warning">
+					I think you ought to know...
+				</IconMessageBox>
+			</div>`,
+	} ) )
+	.add( 'warning long', () => ( {
+		components: { IconMessageBox },
+		template:
+			`<div>
+				<IconMessageBox type="warning">
+					{{ new Array( 42 ).fill( 'I think you ought to know...' ).join( ' ' ) }}
+				</IconMessageBox>
+			</div>`,
+	} ) )
+	.add( 'warning inline', () => ( {
+		components: { IconMessageBox },
+		template:
+			`<div>
+				<IconMessageBox type="warning" :inline="true">
+					I think you ought to know...
+				</IconMessageBox>
+			</div>`,
+	} ) )
 	.add( 'notice', () => ( {
 		components: { IconMessageBox },
 		template:
