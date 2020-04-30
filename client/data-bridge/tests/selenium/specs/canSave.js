@@ -47,13 +47,7 @@ function ensureTagExists( bridgeEditTag ) {
 }
 
 function assertSaveButtonDisabled( untilMessage = '' ) {
-	let isSaveButtonClickable = true;
-	try {
-		DataBridgePage.saveButton.click(); // This should do exactly nothing because the button is disabled
-	} catch ( e ) { // TODO though we catch this error, it still logs a scary message to the console :/
-		isSaveButtonClickable = false;
-	}
-	assert.ok( !isSaveButtonClickable, 'Save button should not be clickable ' + untilMessage );
+	assert.ok( !DataBridgePage.saveButton.isClickable(), 'disabled button should not be clickable ' + untilMessage );
 	assert.ok( !DataBridgePage.saveButton.isFocused(), 'disabled button should not be focusable' );
 	assert.ok( !DataBridgePage.saveButton.isSelected(), 'disabled button should not be selectable' );
 }
