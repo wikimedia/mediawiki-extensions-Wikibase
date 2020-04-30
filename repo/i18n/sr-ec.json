@@ -318,7 +318,5 @@
 	"wikibase-pageinfo-subscription-none": "Нема",
 	"wikibase-search-bad-entity-type": "Лоша врста јединице: $1",
 	"wikibase-tainted-ref-popper-text": "Вредност изјаве је промењена, али је референца остала иста. Уклоните ово упозорење само ако је референца и даље исправна.",
-	"wikibase-tainted-ref-popper-feedback-text": "Да ли је ова нова могућност корисна?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Оставите повратне информације",
 	"wikibase-tainted-ref-popper-remove-warning": "Уклони упозорење"
 }

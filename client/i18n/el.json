@@ -3,6 +3,7 @@
 		"authors": [
 			"FocalPoint",
 			"Geraki",
+			"Giorgos456",
 			"Glavkos",
 			"Nikosgranturismogt",
 			"Nikosguard",
@@ -96,5 +97,6 @@
 	"unresolved-property-category": "Σελίδες με ανεπίλυτες ιδιότητες",
 	"unresolved-property-category-desc": "Αυτή η κατηγορία περιλαμβάνει σελίδες που αναφέρουν ιδιότητες {{WBREPONAME}} που δεν μπορούν να βρεθούν ούτε με το ID ιδιότητας ούτε με την ετικέτα.",
 	"connected-redirect-category": "Ανακατευθύνσεις συνδεδεμένες σε ένα αντικείμενο {{WBREPONAME}}",
-	"connected-redirect-category-desc": "Αυτή η κατηγορία καταγράφει σελίδες ανακατεύθυνσεις που είναι συνδεδεμένες σε ένα αντικείμενο {{WBREPONAME}}."
+	"connected-redirect-category-desc": "Αυτή η κατηγορία καταγράφει σελίδες ανακατεύθυνσεις που είναι συνδεδεμένες σε ένα αντικείμενο {{WBREPONAME}}.",
+	"wikibase-client-data-bridge-error-go-back": "Επιστροφή"
 }

@@ -371,9 +371,6 @@
 	"wikibase-tainted-ref-popper-title": "Võimalik viite ja väärtuse kokkusobimatus",
 	"wikibase-tainted-ref-popper-help-link-title": "Selle kitsenduse tüübi abileht",
 	"wikibase-tainted-ref-popper-help-link-text": "Abi",
-	"wikibase-tainted-ref-popper-feedback-text": "Kas see funktsioon on kasulik?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Jäta tagasisidet",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Tagasiside lehekülje link",
 	"wikibase-tainted-ref-popper-remove-warning": "Eemalda hoiatus",
 	"wikibase-tainted-ref-tainted-icon-title": "Sel avaldusel on võimalikke probleeme."
 }

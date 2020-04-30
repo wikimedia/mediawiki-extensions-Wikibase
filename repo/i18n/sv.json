@@ -429,7 +429,5 @@
 	"wikibase-tainted-ref-warning-icon-title": "Detta uttalande har några möjliga problem",
 	"wikibase-tainted-ref-popper-text": "Värdet ändrades, men referensen förblev densamma.",
 	"wikibase-tainted-ref-popper-help-link-text": "Hjälp",
-	"wikibase-tainted-ref-popper-feedback-text": "Är denna nya funktion användbar?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Lämna återkoppling",
 	"wikibase-tainted-ref-popper-remove-warning": "Ta bort varning"
 }

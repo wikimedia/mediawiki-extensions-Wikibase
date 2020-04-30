@@ -444,9 +444,6 @@
 	"wikibase-tainted-ref-popper-title": "المرجع/عدم تطابق القيمة المحتمل",
 	"wikibase-tainted-ref-popper-help-link-title": "صفحة المساعدة لهذا النوع من القيود",
 	"wikibase-tainted-ref-popper-help-link-text": "مساعدة",
-	"wikibase-tainted-ref-popper-feedback-text": "هل هذه الميزة الجديدة مفيدة؟",
-	"wikibase-tainted-ref-popper-feedback-link-text": "اترك ملاحظاتك",
-	"wikibase-tainted-ref-popper-feedback-link-title": "رابط صفحة التعليقات",
 	"wikibase-tainted-ref-popper-remove-warning": "أزل التحذير",
 	"wikibase-tainted-ref-tainted-icon-title": "هذا البيان به بعض القضايا المحتملة."
 }

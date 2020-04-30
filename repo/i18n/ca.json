@@ -373,9 +373,6 @@
 	"wikibase-tainted-ref-warning-icon-title": "Aquesta declaració té algunes incidències",
 	"wikibase-tainted-ref-popper-text": "El valor d'aquesta declaració ha canviat, però la referència segueix sent la mateixa. Podeu eliminar aquest avís en cas que la referència encara sigui correcta.",
 	"wikibase-tainted-ref-popper-help-link-text": "Ajuda",
-	"wikibase-tainted-ref-popper-feedback-text": "És útil aquesta nova funcionalitat?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Deixeu els vostres comentaris",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Enllaç a la pàgina de comentaris",
 	"wikibase-tainted-ref-popper-remove-warning": "Elimina l'avís",
 	"wikibase-tainted-ref-tainted-icon-title": "Aquesta declaració pot tenir algun problema."
 }

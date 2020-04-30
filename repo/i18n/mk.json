@@ -421,9 +421,6 @@
 	"wikibase-tainted-ref-popper-title": "Потенцијално несовпаѓање во наводот/вредноста",
 	"wikibase-tainted-ref-popper-help-link-title": "Помошна страница за овој вид ограничување",
 	"wikibase-tainted-ref-popper-help-link-text": "Помош",
-	"wikibase-tainted-ref-popper-feedback-text": "Дали е ви користи оваа нова можност?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Дајте ваше мислење",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Врска за страницата со мислења",
 	"wikibase-tainted-ref-popper-remove-warning": "Отстрани предупредување",
 	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми."
 }

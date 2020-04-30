@@ -424,9 +424,6 @@
 	"wikibase-tainted-ref-popper-title": "Potensiell mangel på samsvar mellom referanse og verdi",
 	"wikibase-tainted-ref-popper-help-link-title": "Hjelpeside for denne begrensningstypen",
 	"wikibase-tainted-ref-popper-help-link-text": "Hjelp",
-	"wikibase-tainted-ref-popper-feedback-text": "Er denne nye funksjonen nyttig?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Send tilbakemelding",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Lenke til tilbakemeldingsside",
 	"wikibase-tainted-ref-popper-remove-warning": "Fjern advarsel",
 	"wikibase-tainted-ref-tainted-icon-title": "Denne påstanden har mulige problemer."
 }

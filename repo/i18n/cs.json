@@ -412,9 +412,6 @@
 	"wikibase-tainted-ref-popper-title": "Možná neshoda reference a hodnoty",
 	"wikibase-tainted-ref-popper-help-link-title": "Stránka s nápovědou pro tento typ omezení",
 	"wikibase-tainted-ref-popper-help-link-text": "Nápověda",
-	"wikibase-tainted-ref-popper-feedback-text": "Je tato nová funkce užitečná?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Poskytněte zpětnou vazbu",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Odkaz na stránku se zpětnou vazbou",
 	"wikibase-tainted-ref-popper-remove-warning": "Odstranit varování",
 	"wikibase-tainted-ref-tainted-icon-title": "Toto tvrzení může mít určité problémy."
 }

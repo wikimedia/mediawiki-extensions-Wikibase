@@ -397,9 +397,6 @@
 	"wikibase-tainted-ref-popper-text": "Az állítás értéke megváltozott, de a forráshivatkozás azonos maradt. Eltávolíthatod ezt a figyelmeztetést, ha a forráshivatkozás még mindig helyes.",
 	"wikibase-tainted-ref-popper-help-link-title": "Súgólap ehhez a kikötéstípushoz",
 	"wikibase-tainted-ref-popper-help-link-text": "Súgó",
-	"wikibase-tainted-ref-popper-feedback-text": "Hasznos ez az új funkció?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Adj visszajelzést",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Hivatkozás a visszajelzéslapra",
 	"wikibase-tainted-ref-popper-remove-warning": "Figyelmeztetés eltávolítása",
 	"wikibase-tainted-ref-tainted-icon-title": "Ezzel az állítással lehet, hogy problémák vannak."
 }

@@ -429,9 +429,6 @@
 	"wikibase-tainted-ref-popper-title": "ייתכן שיש חוסר התאמה בין במקור לבין הערך",
 	"wikibase-tainted-ref-popper-help-link-title": "דף העזרה לסוג האילוץ הזה",
 	"wikibase-tainted-ref-popper-help-link-text": "עזרה",
-	"wikibase-tainted-ref-popper-feedback-text": "האם האפשרות החדשה הזאת שימושית?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "שלחו את המשוב שלכם",
-	"wikibase-tainted-ref-popper-feedback-link-title": "קישור לדף המשוב",
 	"wikibase-tainted-ref-popper-remove-warning": "הסרת אזהרה",
 	"wikibase-tainted-ref-tainted-icon-title": "בקביעה הזאת יש סוגיות אפשריות."
 }

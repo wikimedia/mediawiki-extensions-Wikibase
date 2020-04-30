@@ -472,9 +472,6 @@
 	"wikibase-tainted-ref-popper-title": "Discordance potentielle de référence / valeur",
 	"wikibase-tainted-ref-popper-help-link-title": "Page d’aide pour ce type de contrainte",
 	"wikibase-tainted-ref-popper-help-link-text": "Aide",
-	"wikibase-tainted-ref-popper-feedback-text": "Cette nouvelle fonctionnalité est-elle utile ?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "Donner votre avis",
-	"wikibase-tainted-ref-popper-feedback-link-title": "Lien vers la page pour donner son avis",
 	"wikibase-tainted-ref-popper-remove-warning": "Supprimer l’avertissement",
 	"wikibase-tainted-ref-tainted-icon-title": "Cette instruction présente des problèmes potentiels."
 }

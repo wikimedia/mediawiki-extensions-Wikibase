@@ -448,9 +448,6 @@
 	"wikibase-tainted-ref-popper-title": "潛在參考/值不相配",
 	"wikibase-tainted-ref-popper-help-link-title": "此受限類型的說明頁面",
 	"wikibase-tainted-ref-popper-help-link-text": "說明",
-	"wikibase-tainted-ref-popper-feedback-text": "此新功能有用嗎？",
-	"wikibase-tainted-ref-popper-feedback-link-text": "留下您的回饋意見",
-	"wikibase-tainted-ref-popper-feedback-link-title": "回饋意見頁面連結",
 	"wikibase-tainted-ref-popper-remove-warning": "移除警告",
 	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。"
 }

@@ -389,9 +389,6 @@
 	"wikibase-tainted-ref-warning-icon-title": "이 문에는 잠재적인 문제가 있습니다",
 	"wikibase-tainted-ref-popper-text": "값이 변경되었으나 환경 설정은 그대로 유지됩니다.",
 	"wikibase-tainted-ref-popper-help-link-text": "도움말",
-	"wikibase-tainted-ref-popper-feedback-text": "이 기능이 유용합니까?",
-	"wikibase-tainted-ref-popper-feedback-link-text": "의견 남기기",
-	"wikibase-tainted-ref-popper-feedback-link-title": "피드백 페이지 링크",
 	"wikibase-tainted-ref-popper-remove-warning": "경고 제거",
 	"wikibase-tainted-ref-tainted-icon-title": "이 문에는 잠재적인 문제가 있습니다."
 }
