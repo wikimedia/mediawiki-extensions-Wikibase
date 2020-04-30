@@ -7,10 +7,12 @@ storiesOf( 'StringDataValue', module )
 		data: () => ( {
 			sampleLabel: { value: 'lorem', language: 'la' },
 			sampleValue: { type: 'string', value: 'ipsum' },
-			sampleSetter: ( value ) => {
+		} ),
+		methods: {
+			sampleSetter( value ) {
 				this.sampleValue = { ...value };
 			},
-		} ),
+		},
 		components: { StringDataValue },
 		template:
 			`<div>
@@ -32,10 +34,12 @@ storiesOf( 'StringDataValue', module )
 				type: 'string',
 				value: 'Lorem-ipsum-dolor-sit-amet,-consetetur-sadipscing-elitr,-sed-diam-nonumy-eirmod-tempor-invidunt-ut-labore-et-dolore-magna-aliquyam-erat,-sed-diam-voluptua.-At-vero-eos-et-accusam-et-justo-duo-dolores-et-ea-rebum.-Stet-clita-kasd-gubergren,-no-sea-takimata-sanctus-est-Lorem-ipsum-dolor-sit-amet.-Lorem-ipsum-dolor-sit-amet,-consetetur-sadipscing-elitr,-sed-diam-nonumy-eirmod-tempor-invidunt-ut-labore-et-dolore-magna-aliquyam-erat,-sed-diam-voluptua.-At-vero-eos-et-accusam-et-justo-duo-dolores-et-ea-rebum.-Stet-clita-kasd-gubergren,-no-sea-takimata-sanctus-est-Lorem-ipsum-dolor-sit-amet.-Lorem-ipsum-dolor-sit-amet,-consetetur-sadipscing-elitr,-sed-diam-nonumy-eirmod-tempor-invidunt-ut-labore-et-dolore-magna-aliquyam-erat,-sed-diam-voluptua.-At-vero-eos-et-accusam-et-justo-duo-dolores-et-ea-rebum.-Stet-clita-kasd-gubergren,-no-sea-takimata-sanctus-est-Lorem-ipsum-dolor-sit-amet.', // eslint-disable-line max-len
 			},
-			sampleSetter: ( value ) => {
+		} ),
+		methods: {
+			sampleSetter( value ) {
 				this.sampleValue = { ...value };
 			},
-		} ),
+		},
 		components: { StringDataValue },
 		template:
 			`<div>
@@ -47,10 +51,12 @@ storiesOf( 'StringDataValue', module )
 		data: () => ( {
 			sampleLabel: { value: 'empty', language: 'en' },
 			sampleValue: { type: 'string', value: '' },
-			sampleSetter: ( value ) => {
+		} ),
+		methods: {
+			sampleSetter( value ) {
 				this.sampleValue = { ...value };
 			},
-		} ),
+		},
 		components: { StringDataValue },
 		template:
 			`<div>
@@ -62,11 +68,13 @@ storiesOf( 'StringDataValue', module )
 		data: () => ( {
 			sampleLabel: { value: 'empty', language: 'en' },
 			sampleValue: { type: 'string', value: '' },
-			sampleSetter: ( value ) => {
-				this.sampleValue = { ...value };
-			},
 			placeholder: 'placeholder',
 		} ),
+		methods: {
+			sampleSetter( value ) {
+				this.sampleValue = { ...value };
+			},
+		},
 		components: { StringDataValue },
 		template:
 			`<div>
@@ -78,10 +86,12 @@ storiesOf( 'StringDataValue', module )
 		data: () => ( {
 			sampleLabel: { value: 'maxlength=15', language: 'en' },
 			sampleValue: { type: 'string', value: 'lorem ipsum' },
-			sampleSetter: ( value ) => {
+		} ),
+		methods: {
+			sampleSetter( value ) {
 				this.sampleValue = { ...value };
 			},
-		} ),
+		},
 		components: { StringDataValue },
 		template:
 			`<div>
