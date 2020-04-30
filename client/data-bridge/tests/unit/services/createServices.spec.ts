@@ -231,7 +231,7 @@ describe( 'createServices', () => {
 
 			expect( mwWindow.mw.ForeignApi )
 				.toHaveBeenCalledWith( 'http://localhost/w/api.php' );
-			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
+			expect( ( ApiCore as unknown as jest.Mock ).mock.calls[ 0 ][ 0 ] )
 				.toBeInstanceOf( mwWindow.mw.ForeignApi );
 			expect( ( ApiWritingRepository as unknown as jest.Mock ).mock.calls[ 0 ][ 1 ] )
 				.toBe( editTags );

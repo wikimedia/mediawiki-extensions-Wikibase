@@ -1,8 +1,9 @@
-import Api, {
+import {
 	ApiAction,
 	ApiParams,
 	ApiResponse,
 	ApiResponsesMap,
+	ReadingApi,
 } from '@/definitions/data-access/Api';
 
 /**
@@ -56,9 +57,9 @@ import Api, {
  * conflicts with requests specifying non-default values can be detected.
  * Using formatversion: 2 is strongly encouraged.
  */
-export default class BatchingApi implements Api {
+export default class BatchingApi implements ReadingApi {
 
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
 	private readonly requests: {
 		params: ApiParams<ApiAction>;
@@ -72,7 +73,7 @@ export default class BatchingApi implements Api {
 	 * @param api Underlying implementation responsible for
 	 * making the merged API calls (usually an {@link ApiCore}).
 	 */
-	public constructor( api: Api ) {
+	public constructor( api: ReadingApi ) {
 		this.api = api;
 		this.requests = [];
 	}

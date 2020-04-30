@@ -38,13 +38,29 @@ import { ApiWbgetentitiesResponse } from '@/definitions/data-access/ApiWbgetenti
  * conflicts with requests specifying non-default values can be detected.
  * Using formatversion: 2 is strongly encouraged.
  */
-export default interface Api {
+export default interface Api extends ReadingApi, WritingApi {}
+
+export interface ReadingApi {
 	/**
 	 * Send a GET request with at least the given parameters.
 	 * The resulting response may include data from other requests
 	 * which were combined with this one.
 	 */
 	get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[ action ]>;
+}
+
+export interface WritingApi {
+	/**
+	 * Send a POST request with the given parameters and with a valid edit token
+	 */
+	postWithEditToken( params: ApiParams<string> ): Promise<unknown>;
+
+	/**
+	 * Add parameters to assert that the current local browser tab login status is also true at the server.
+	 *
+	 * Otherwise the same as postWithEditToken
+	 */
+	postWithEditTokenAndAssertUser( params: ApiParams<string> ): Promise<unknown>;
 }
 
 export interface ApiParams<action extends ApiAction> {

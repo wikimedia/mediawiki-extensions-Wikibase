@@ -77,7 +77,8 @@ describe( 'init', () => {
 				expectedUrl: foreignApiUrl,
 			} ),
 			repoMwApi = new MwForeignApiConstructor( foreignApiUrl ),
-			repoApi = new BatchingApi( new ApiCore( repoMwApi ) ),
+			repoApiCore = new ApiCore( repoMwApi ),
+			repoApi = new BatchingApi( repoApiCore ),
 			MwApiConstructor = mockMwApiConstructor( {} ),
 			clientMwApi = new MwApiConstructor(),
 			clientApi = new ApiCore( clientMwApi );
@@ -94,7 +95,7 @@ describe( 'init', () => {
 			repoApi,
 		) );
 		expectedServices.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
-			repoMwApi,
+			repoApiCore,
 			editTags,
 		) ) );
 		expectedServices.set( 'languageInfoRepository', new MwLanguageInfoRepository(

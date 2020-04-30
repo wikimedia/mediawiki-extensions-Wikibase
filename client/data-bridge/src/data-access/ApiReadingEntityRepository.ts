@@ -4,7 +4,7 @@ import {
 	convertNoSuchEntityError,
 	getApiEntity,
 } from '@/data-access/ApiWbgetentities';
-import Api from '@/definitions/data-access/Api';
+import { ReadingApi } from '@/definitions/data-access/Api';
 import {
 	EntityWithClaims,
 	EntityWithInfo,
@@ -12,9 +12,9 @@ import {
 import ReadingEntityRepository from '@/definitions/data-access/ReadingEntityRepository';
 
 export default class ApiReadingEntityRepository implements ReadingEntityRepository {
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: ReadingApi ) {
 		this.api = api;
 	}
 

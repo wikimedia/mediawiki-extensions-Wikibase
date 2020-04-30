@@ -1,4 +1,4 @@
-import Api from '@/definitions/data-access/Api';
+import { ReadingApi } from '@/definitions/data-access/Api';
 import { ApiQueryResponseBody } from '@/definitions/data-access/ApiQuery';
 import WikibaseRepoConfigRepository, {
 	WikibaseRepoConfiguration,
@@ -10,9 +10,9 @@ interface ApiQueryDataBridgeConfigBody extends ApiQueryResponseBody {
 }
 
 export default class ApiRepoConfigRepository implements WikibaseRepoConfigRepository {
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: ReadingApi ) {
 		this.api = api;
 	}
 

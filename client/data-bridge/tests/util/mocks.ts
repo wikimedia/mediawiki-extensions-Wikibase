@@ -296,5 +296,24 @@ export function mockApi( successObject?: unknown, rejectData?: unknown ): Api & 
 		post(): any {
 			return Promise.resolve();
 		},
+		postWithEditToken(): any {
+			if ( successObject ) {
+				return Promise.resolve( successObject );
+			}
+			if ( rejectData ) {
+				return Promise.reject( rejectData );
+			}
+		},
+		postWithEditTokenAndAssertUser(): any {
+			if ( successObject ) {
+				return Promise.resolve( successObject );
+			}
+			if ( rejectData ) {
+				return Promise.reject( rejectData );
+			}
+		},
+		assertCurrentUser( params: any ): any {
+			return params;
+		},
 	} as any;
 }

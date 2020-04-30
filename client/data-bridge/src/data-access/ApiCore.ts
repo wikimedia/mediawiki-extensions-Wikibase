@@ -28,6 +28,25 @@ export default class ApiCore implements Api {
 		this.api = api;
 	}
 
+	public postWithEditTokenAndAssertUser<action extends ApiAction>(
+		params: ApiParams<action>,
+	): Promise<unknown> {
+		return Promise.resolve( // turn jQuery promise into native one
+			this.api.postWithEditToken(
+				this.api.assertCurrentUser( this.mapParameters( params ) ),
+			).catch( this.mwApiRejectionToError ),
+		);
+	}
+
+	public postWithEditToken<action extends ApiAction>(
+		params: ApiParams<action>,
+	): Promise<unknown> {
+		return Promise.resolve( // turn jQuery promise into native one
+			this.api.postWithEditToken( this.mapParameters( params ) )
+				.catch( this.mwApiRejectionToError ),
+		);
+	}
+
 	public get<action extends ApiAction>( params: ApiParams<action> ): Promise<ApiResponsesMap[action]> {
 		return Promise.resolve( // turn jQuery promise into native one
 			this.api.get( this.mapParameters( params ) )

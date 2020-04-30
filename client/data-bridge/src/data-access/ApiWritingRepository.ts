@@ -1,12 +1,8 @@
-import { MwApi } from '@/@types/mediawiki/MwWindow';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
-import TechnicalProblem from '@/data-access/error/TechnicalProblem';
-import JQueryTechnicalError from '@/data-access/error/JQueryTechnicalError';
-import EntityNotFound from '@/data-access/error/EntityNotFound';
-import HttpStatus from 'http-status-codes';
 import StatementMap from '@/datamodel/StatementMap';
+import { WritingApi } from '@/definitions/data-access/Api';
 
 interface ApiResponseEntity {
 	id: string;
@@ -19,57 +15,37 @@ interface ResponseSuccess {
 	entity: ApiResponseEntity;
 }
 
-interface ResponseError {
-	error: { code: string };
-}
-
-type Response = ResponseError|ResponseSuccess;
-
 export default class ApiWritingRepository implements WritingEntityRepository {
-	private api: MwApi;
+	private api: WritingApi;
 	private tags?: string[];
 
-	public constructor( api: MwApi, tags?: string[] ) {
+	public constructor( api: WritingApi, tags?: string[] ) {
 		this.api = api;
 		this.tags = tags || undefined;
 	}
 
-	private static isError( response: Response ): response is ResponseError {
-		return !!( ( response as ResponseError ).error );
-	}
-
 	public saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
-		return Promise.resolve(
-			this.api.postWithEditToken( this.api.assertCurrentUser( {
-				action: 'wbeditentity',
-				id: entity.id,
-				baserevid: base?.revisionId,
-				data: JSON.stringify( {
-					claims: entity.statements,
-				} ),
-				tags: this.tags,
-			} ) ),
-		).then( ( response: Response ): EntityRevision => {
-			if ( typeof response !== 'object' ) {
-				throw new TechnicalProblem( 'unknown response type.' );
-			}
-			if ( ApiWritingRepository.isError( response ) ) {
-				throw new TechnicalProblem( response.error.code );
-			}
-
+		return this.api.postWithEditTokenAndAssertUser( {
+			action: 'wbeditentity',
+			id: entity.id,
+			baserevid: base?.revisionId,
+			data: JSON.stringify( {
+				claims: entity.statements,
+			} ),
+			tags: this.tags,
+		} ).then( ( response: unknown ): EntityRevision => {
 			return new EntityRevision(
 				new Entity(
-					response.entity.id,
-					response.entity.claims,
+					( response as ResponseSuccess ).entity.id,
+					( response as ResponseSuccess ).entity.claims,
 				),
-				response.entity.lastrevid,
+				( response as ResponseSuccess ).entity.lastrevid,
 			);
+		},
+		( error ) => {
+			// Specialized error handling should be added here
 
-		}, ( error: JQuery.jqXHR ): never => {
-			if ( error.status && error.status === HttpStatus.NOT_FOUND ) {
-				throw new EntityNotFound( 'The given api page does not exist.' );
-			}
-			throw new JQueryTechnicalError( error );
+			throw error;
 		} );
 	}
 }

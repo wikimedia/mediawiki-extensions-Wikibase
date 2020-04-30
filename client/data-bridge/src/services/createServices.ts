@@ -43,14 +43,15 @@ export default function createServices(
 	const repoMwApi = new mwWindow.mw.ForeignApi( // TODO use repoRouter with a getScript() method maybe
 		`${repoConfig.url}${repoConfig.scriptPath}/api.php`,
 	);
-	const repoApi = new BatchingApi( new ApiCore( repoMwApi ) );
+	const repoApiCore = new ApiCore( repoMwApi );
+	const repoApi = new BatchingApi( repoApiCore );
 
 	services.set( 'readingEntityRepository', new ApiReadingEntityRepository(
 		repoApi,
 	) );
 
 	services.set( 'writingEntityRepository', new TrimmingWritingRepository( new ApiWritingRepository(
-		repoMwApi,
+		repoApiCore,
 		editTags.length === 0 ? undefined : editTags,
 	) ) );
 

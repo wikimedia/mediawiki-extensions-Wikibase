@@ -5,7 +5,7 @@ import {
 } from '@/data-access/ApiQuery';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
-import Api, { ApiBlockedError, ApiError } from '@/definitions/data-access/Api';
+import { ApiBlockedError, ApiError, ReadingApi } from '@/definitions/data-access/Api';
 import PageEditPermissionErrorsRepository, {
 	PermissionError,
 	PermissionErrorCascadeProtectedPage,
@@ -26,9 +26,9 @@ function isApiErrorRawErrorformat( error: ApiError ): error is ApiErrorRawErrorf
 
 export default class ApiPageEditPermissionErrorsRepository implements PageEditPermissionErrorsRepository {
 
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: ReadingApi ) {
 		this.api = api;
 	}
 

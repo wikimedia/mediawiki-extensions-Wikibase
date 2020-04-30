@@ -4,14 +4,14 @@ import {
 } from '@/data-access/ApiWbgetentities';
 import DataType from '@/datamodel/DataType';
 import EntityId from '@/datamodel/EntityId';
-import Api from '@/definitions/data-access/Api';
+import { ReadingApi } from '@/definitions/data-access/Api';
 import { EntityWithDataType } from '@/definitions/data-access/ApiWbgetentities';
 import PropertyDatatypeRepository from '@/definitions/data-access/PropertyDatatypeRepository';
 
 export default class ApiPropertyDataTypeRepository implements PropertyDatatypeRepository {
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
-	public constructor( api: Api ) {
+	public constructor( api: ReadingApi ) {
 		this.api = api;
 	}
 

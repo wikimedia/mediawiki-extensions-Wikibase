@@ -2,7 +2,7 @@ import {
 	convertNoSuchEntityError,
 	getApiEntity,
 } from '@/data-access/ApiWbgetentities';
-import Api from '@/definitions/data-access/Api';
+import { ReadingApi } from '@/definitions/data-access/Api';
 import { EntityWithLabels } from '@/definitions/data-access/ApiWbgetentities';
 import EntityLabelRepository from '@/definitions/data-access/EntityLabelRepository';
 import Term from '@/datamodel/Term';
@@ -10,9 +10,9 @@ import EntityWithoutLabelInLanguageException from '@/data-access/error/EntityWit
 
 export default class ApiEntityLabelRepository implements EntityLabelRepository {
 	private readonly forLanguageCode: string;
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 
-	public constructor( forLanguageCode: string, api: Api ) {
+	public constructor( forLanguageCode: string, api: ReadingApi ) {
 		this.forLanguageCode = forLanguageCode;
 		this.api = api;
 	}

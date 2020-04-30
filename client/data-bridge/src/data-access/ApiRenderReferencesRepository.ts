@@ -1,4 +1,4 @@
-import Api, { ApiResponse } from '@/definitions/data-access/Api';
+import { ApiResponse, ReadingApi } from '@/definitions/data-access/Api';
 import Reference from '@/datamodel/Reference';
 import ReferencesRenderingRepository from '@/definitions/data-access/ReferencesRenderingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
@@ -10,10 +10,10 @@ interface FormatReferenceResponse {
 }
 
 export default class ApiRenderReferencesRepository implements ReferencesRenderingRepository {
-	private readonly api: Api;
+	private readonly api: ReadingApi;
 	private readonly language: string;
 
-	public constructor( api: Api, language: string ) {
+	public constructor( api: ReadingApi, language: string ) {
 		this.api = api;
 		this.language = language;
 	}

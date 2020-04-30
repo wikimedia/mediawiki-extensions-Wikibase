@@ -1,7 +1,7 @@
 import { mockApi } from '../../util/mocks';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
 import Reference from '@/datamodel/Reference';
-import Api from '@/definitions/data-access/Api';
+import Api, { ReadingApi } from '@/definitions/data-access/Api';
 import { MwApi } from '@/@types/mediawiki/MwWindow';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 
@@ -55,7 +55,7 @@ describe( 'ApiRenderReferencesRepository', function () {
 					},
 				} );
 			} ),
-		} as Api;
+		} as ReadingApi;
 		const references: Reference[] = [
 			{
 				hash: 'ref1',
