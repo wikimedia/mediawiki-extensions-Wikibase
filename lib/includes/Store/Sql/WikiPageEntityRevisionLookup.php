@@ -168,6 +168,10 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	/**
 	 * @see EntityRevisionLookup::getLatestRevisionId
 	 *
+	 * This tries to provide redirect information when returning the LatestRevisionIdResult which results in loading the whole entity.
+	 * This is probably okay as redirects are not the most commons case.
+	 * There is no guarantee that the entity redirected to is not also a redirect.
+	 *
 	 * @param EntityId $entityId
 	 * @param string $mode
 	 *

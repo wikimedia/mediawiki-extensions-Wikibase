@@ -65,6 +65,7 @@ interface EntityRevisionLookup {
 	 * Returns the id of the latest revision of the given entity, or false if there is no such entity.
 	 *
 	 * Implementations of this method must not silently resolve redirects.
+	 * They can however return a LatestRevisionIdResult object containing information about the redirect.
 	 *
 	 * @param EntityId $entityId
 	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER.

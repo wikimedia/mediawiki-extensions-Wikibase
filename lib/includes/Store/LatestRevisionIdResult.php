@@ -69,7 +69,7 @@ final class LatestRevisionIdResult {
 
 	/**
 	 * @param int $revisionId
-	 * @param EntityId $redirectsTo
+	 * @param EntityId $redirectsTo (could be another redirect)
 	 * @return self
 	 */
 	public static function redirect( $revisionId, EntityId $redirectsTo ) {
