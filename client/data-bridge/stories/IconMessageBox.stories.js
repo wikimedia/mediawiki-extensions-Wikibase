@@ -70,7 +70,7 @@ storiesOf( 'IconMessageBox', module )
 		template:
 			`<div>
 				<IconMessageBox type="notice">
-					Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you...Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you...Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you... Just to inform you...Just to inform you... Just to inform you...Just to inform you... Just to inform you...  Just to inform you...Just to inform you... Just to inform you...Just to inform you...Just to inform you... 
+					{{ new Array( 42 ).fill( 'Just to inform you…' ).join( ' ' ) }}
 				</IconMessageBox>
 			</div>`,
 	} ) )
