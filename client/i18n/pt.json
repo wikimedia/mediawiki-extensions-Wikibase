@@ -131,5 +131,7 @@
 	"connected-redirect-category": "Redirecionamentos ligados a um elemento {{WBREPONAME}}",
 	"connected-redirect-category-desc": "Esta categoria lista páginas de redirecionamento que estão ligadas a um elemento {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Editar propriedade",
-	"wikibase-client-data-bridge-references-heading": "Referências"
+	"wikibase-client-data-bridge-references-heading": "Referências",
+	"wikibase-client-data-bridge-saving-error-heading": "Não é possível guardar as alterações",
+	"wikibase-client-data-bridge-error-go-back": "Anterior"
 }

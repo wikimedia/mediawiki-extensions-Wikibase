@@ -135,8 +135,10 @@
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "복수의 값 편집은 현재 지원되지 않습니다",
 	"wikibase-client-data-bridge-somevalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
 	"wikibase-client-data-bridge-novalue-error-head": "$1의 값 편집은 현재 지원되지 않습니다",
+	"wikibase-client-data-bridge-saving-error-heading": "변경사항을 저장할 수 없습니다",
 	"wikibase-client-data-bridge-unknown-error-heading": "무언가가 잘못되었습니다",
 	"wikibase-client-data-bridge-unknown-error-message": "오류가 발생하여 선택된 값은 지금 편집할 수 없습니다. 다시 불러오기를 실행해 보십시오.",
 	"wikibase-client-data-bridge-error-reload-bridge": "다시 불러오기",
+	"wikibase-client-data-bridge-error-go-back": "돌아가기",
 	"wikibase-client-data-bridge-thank-you-head": "편집에 감사드립니다!"
 }

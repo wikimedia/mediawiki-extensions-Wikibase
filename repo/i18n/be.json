@@ -208,5 +208,8 @@
 	"content-model-wikibase-property": "Уласцівасць элемента Wikibase",
 	"content-model-wikibase-query": "Запыт Wikibase",
 	"action-item-merge": "аб’яднанне элементаў",
-	"right-item-merge": "Аб’яднанне элементаў"
+	"right-item-merge": "Аб’яднанне элементаў",
+	"wikibase-tainted-ref-popper-text": "Значэнне гэтага сцверджання было зменена, але зноска засталася той жа. Вы можаце прыбраць гэта папярэджанне, калі зноска дагэтуль правільная.",
+	"wikibase-tainted-ref-popper-title": "Магчымая неадпаведнасць зноскі значэнню",
+	"wikibase-tainted-ref-popper-remove-warning": "Прыбраць папярэджанне"
 }
