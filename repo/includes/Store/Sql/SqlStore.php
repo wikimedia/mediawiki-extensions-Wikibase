@@ -329,15 +329,20 @@ class SqlStore implements Store {
 			[ 'LIMIT' => 1000 ] // TODO: continuation
 		);
 
+		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
+		$user = RequestContext::getMain()->getUser();
+
+		// FIXME WikiPage::doEditUpdates is deprecated (T249563)
 		foreach ( $pages as $pageRow ) {
 			$page = WikiPage::newFromID( $pageRow->page_id );
-			$revision = Revision::newFromId( $pageRow->page_latest );
+			$revisionRecord = $revLookup->getRevisionById( $pageRow->page_latest );
+			$revision = new Revision( $revisionRecord );
 			try {
-				$page->doEditUpdates( $revision, RequestContext::getMain()->getUser() );
+				$page->doEditUpdates( $revision, $user );
 			} catch ( DBQueryError $e ) {
 				wfLogWarning(
 					'editUpdateFailed for ' . $page->getId() . ' on revision ' .
-					$revision->getId() . ': ' . $e->getMessage()
+					$revisionRecord->getId() . ': ' . $e->getMessage()
 				);
 			}
 		}

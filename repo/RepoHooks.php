@@ -501,7 +501,9 @@ final class RepoHooks {
 						? $request->getText( 'restore' )
 						: $skinTemplate->getRevisionId();
 
-					$rev = Revision::newFromId( $revid );
+					$rev = MediaWikiServices::getInstance()
+						->getRevisionLookup()
+						->getRevisionById( $revid );
 					if ( !$rev || $rev->isDeleted( RevisionRecord::DELETED_TEXT ) ) {
 						return;
 					}
