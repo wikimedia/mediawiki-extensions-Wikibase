@@ -38,7 +38,7 @@ class TermboxFlagTest extends TestCase {
 	}
 
 	public function testAllTrue_shouldRenderTermboxReturnsTrue() {
-		if ( !class_exists( 'MobileContext' ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' ) ) {
 			$this->markTestSkipped();
 		}
 		$flag = new TermboxFlag(

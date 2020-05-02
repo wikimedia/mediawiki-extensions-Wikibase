@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 
+use ExtensionRegistry;
 use PHPUnit\Framework\TestSuite;
 use Scribunto_LuaEngineTestBase;
 use Title;
@@ -12,7 +13,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\WikibaseSettings;
 
-if ( !class_exists( Scribunto_LuaEngineTestBase::class ) ) {
+if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	/**
 	 * Fake base class in case Scribunto is not available.
 	 *
