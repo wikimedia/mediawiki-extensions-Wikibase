@@ -151,6 +151,15 @@ describe( 'root/mutations', () => {
 		expect( state.pageUrl ).toBe( pageUrl );
 	} );
 
+	it( 'sets the “show warning for anonymous edit” flag of the store', () => {
+		const state: Application = newApplicationState();
+
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.setShowWarningAnonymousEdit( true );
+		expect( state.showWarningAnonymousEdit ).toBe( true );
+	} );
+
 	it( 'resets the root module of the store', () => {
 		const state: Application = newApplicationState( {
 			applicationStatus: ApplicationStatus.SAVING,

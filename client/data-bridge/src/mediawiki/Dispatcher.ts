@@ -45,6 +45,7 @@ export default class Dispatcher {
 				},
 				originalHref: selectedElement.link.href,
 				pageUrl: this.mwWindow.location.href,
+				userName: this.mwWindow.mw.config.get( 'wgUserName' ),
 			},
 			this.app.createServices(
 				this.mwWindow,

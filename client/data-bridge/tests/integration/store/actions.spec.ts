@@ -142,6 +142,7 @@ describe( 'store/actions', () => {
 			client,
 			originalHref: 'https://example.com/index.php?title=Item:Q42&uselang=en#P31',
 			pageUrl: 'https://client.example/wiki/Client_page',
+			userName: 'Test user',
 		};
 
 		store = createStore( services );
@@ -175,6 +176,7 @@ describe( 'store/actions', () => {
 				);
 				expect( successStore.state.pageTitle ).toBe( info.pageTitle );
 				expect( successStore.state.pageUrl ).toBe( info.pageUrl );
+				expect( successStore.state.showWarningAnonymousEdit ).toBe( false );
 			} );
 		} );
 

@@ -23,6 +23,7 @@ export function mockMwConfig( values: {
 	wbRepo?: WbRepo;
 	wgPageContentLanguage?: string;
 	wgPageName?: string;
+	wgUserName?: string;
 } = {} ): MwConfig {
 	if ( values.hrefRegExp === undefined ) {
 		values.hrefRegExp = 'https://www\\.wikidata\\.org/wiki/((Q[1-9][0-9]*)).*#(P[1-9][0-9]*)';
@@ -47,6 +48,8 @@ export function mockMwConfig( values: {
 					return values.wgPageContentLanguage || 'en';
 				case 'wgPageName':
 					return values.wgPageName || 'Client_page';
+				case 'wgUserName':
+					return values.wgUserName || null;
 				default:
 					throw new Error( `unexpected config key ${key}` );
 			}

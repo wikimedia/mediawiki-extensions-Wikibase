@@ -62,12 +62,14 @@ describe( 'init', () => {
 			issueReportingLink = 'https://bugs.example/new?body=<body>',
 			pageTitle = 'Client_page',
 			contentLanguage = 'fr',
+			userName = 'Test user',
 			config = mockMwConfig( {
 				editTags,
 				usePublish,
 				issueReportingLink,
 				wgPageName: pageTitle,
 				wgPageContentLanguage: contentLanguage,
+				wgUserName: userName,
 			} ),
 			wbRepoConfig = config.get( 'wbRepo' ),
 			foreignApiUrl = wbRepoConfig.url + wbRepoConfig.scriptPath + '/api.php',
@@ -164,6 +166,7 @@ describe( 'init', () => {
 					client: { usePublish, issueReportingLink },
 					originalHref: testLinkHref,
 					pageUrl: 'https://data-bridge.test/jest', // configured in jest.config.js
+					userName,
 				},
 				expectedServices,
 			);

@@ -18,4 +18,5 @@ export class BaseState implements Application {
 	public targetLabel: Term|null = null;
 	public targetProperty = '';
 	public pageUrl = '';
+	public showWarningAnonymousEdit = false;
 }
