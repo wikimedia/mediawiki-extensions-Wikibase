@@ -4,11 +4,13 @@
 		:class="[
 			`wb-ui-event-emitting-button--${this.type}`,
 			`wb-ui-event-emitting-button--size-${this.size}`,
-			{ 'wb-ui-event-emitting-button--squary': squary },
-			{ 'wb-ui-event-emitting-button--pressed': isPressed },
-			{ 'wb-ui-event-emitting-button--iconOnly': isIconOnly },
-			{ 'wb-ui-event-emitting-button--frameless': isFrameless },
-			{ 'wb-ui-event-emitting-button--disabled': disabled },
+			{
+				'wb-ui-event-emitting-button--squary': squary,
+				'wb-ui-event-emitting-button--pressed': isPressed,
+				'wb-ui-event-emitting-button--iconOnly': isIconOnly,
+				'wb-ui-event-emitting-button--frameless': isFrameless,
+				'wb-ui-event-emitting-button--disabled': disabled,
+			},
 		]"
 		:href="href"
 		:tabindex="tabindex"
