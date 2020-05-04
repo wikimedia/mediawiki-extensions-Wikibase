@@ -196,7 +196,8 @@ class PropertyRdfBuilder implements EntityRdfBuilder {
 			$this->vocabulary->propertyNamespaceNames[$repositoryName][RdfVocabulary::NSP_NOVALUE],
 			$localName
 		)->a( 'owl', 'Class' );
-		$internalClass = $this->writer->blank();
+		$stableBNodeLabel = md5( implode( '-', [ 'owl:complementOf', $repositoryName, $localName ] ) );
+		$internalClass = $this->writer->blank( $stableBNodeLabel );
 		$this->writer->say( 'owl', 'complementOf' )->is( '_', $internalClass );
 		$this->writer->about( '_', $internalClass )->say( 'a' )->is( 'owl', 'Restriction' );
 		$this->writer->say( 'owl', 'onProperty' )->is(

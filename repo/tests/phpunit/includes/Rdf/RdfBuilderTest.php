@@ -52,7 +52,7 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 			)
 		);
 
-		$this->helper->setAllBlanksEqual( true );
+		$this->helper->setAllBlanksEqual( false );
 	}
 
 	/**
