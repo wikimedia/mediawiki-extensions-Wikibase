@@ -93,17 +93,8 @@ describe( 'root/actions', () => {
 			getDataType: jest.fn().mockResolvedValue( 'string' ),
 		};
 
-		const listOfCommits = [
-			'setEditFlow',
-			'setPropertyPointer',
-			'setEntityTitle',
-			'setOriginalHref',
-			'setPageTitle',
-			'setPageUrl',
-		];
-
 		it(
-			`commits to ${listOfCommits.join( ', ' )}`,
+			'commits relevant parts of AppInformation',
 			async () => {
 				const editFlow = EditFlow.SINGLE_BEST_VALUE;
 				const propertyId = 'P42';
