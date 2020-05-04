@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -18,7 +19,13 @@ class TitleLookupBasedEntityUrlLookup implements EntityUrlLookup {
 		$this->titleLookup = $titleLookup;
 	}
 
-	public function getFullUrl( EntityId $id ): string {
-		return $this->titleLookup->getTitleForId( $id )->getFullURL();
+	public function getFullUrl( EntityId $id ): ?string {
+		$title = $this->titleLookup->getTitleForId( $id );
+		return $title ? $title->getFullURL() : null;
+	}
+
+	public function getLinkUrl( EntityId $id ): ?string {
+		$title = $this->titleLookup->getTitleForId( $id );
+		return $title ? $title->getLinkURL() : null;
 	}
 }

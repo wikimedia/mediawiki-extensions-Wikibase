@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -37,4 +38,10 @@ class ApiEntityUrlLookup implements EntityUrlLookup {
 			] );
 	}
 
+	public function getLinkUrl( EntityId $id ): ?string {
+		// Assume that when using an API based lookup we are always referring to Entities somewhere else.
+		// So always return the full URL.
+		// This is always true for Federated Properties, but might change if this is ever used elsewhere.
+		return $this->getFullUrl( $id );
+	}
 }

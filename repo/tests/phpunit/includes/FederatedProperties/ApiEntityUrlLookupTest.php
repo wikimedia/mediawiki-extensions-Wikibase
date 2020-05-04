@@ -1,8 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityTitleTextLookup;
@@ -17,26 +19,35 @@ use Wikibase\Repo\FederatedProperties\ApiEntityUrlLookup;
  */
 class ApiEntityUrlLookupTest extends TestCase {
 
-	public function provideTestGetFullUrl() {
-		return [
-			[ 'Q123', new ItemId( 'Q123' ), 'pretend.url/w/index.php?title=Q123' ],
-			[ 'Item:Q456', new ItemId( 'Q456' ), 'pretend.url/w/index.php?title=Item%3AQ456' ],
-			[ null, new PropertyId( 'P666' ), null ],
-		];
+	public function provideTestGetUrl() {
+		yield [ 'Q123', new ItemId( 'Q123' ), 'https://pretend.url/w/index.php?title=Q123' ];
+		yield [ 'Item:Q456', new ItemId( 'Q456' ), 'https://pretend.url/w/index.php?title=Item%3AQ456' ];
+		yield [ null, new PropertyId( 'P666' ), null ];
 	}
 
 	/**
-	 * @dataProvider provideTestGetFullUrl
+	 * @dataProvider provideTestGetUrl
 	 */
-	public function testGetFullUrl( $prefixedText, $entityId, $expected ) {
+	public function testGetFullUrl( ?string $prefixedText, EntityId $entityId, ?string $expected ) {
 		$lookup = new ApiEntityUrlLookup(
 			$this->getApiEntityTitleTextLookup( $prefixedText ),
-			'pretend.url/w/'
+			'https://pretend.url/w/'
 		);
 		$this->assertSame( $expected, $lookup->getFullUrl( $entityId ) );
 	}
 
-	private function getApiEntityTitleTextLookup( $prefixedText ) {
+	/**
+	 * @dataProvider provideTestGetUrl
+	 */
+	public function testGetLinkUrl( ?string $prefixedText, EntityId $entityId, ?string $expected ) {
+		$lookup = new ApiEntityUrlLookup(
+			$this->getApiEntityTitleTextLookup( $prefixedText ),
+			'https://pretend.url/w/'
+		);
+		$this->assertSame( $expected, $lookup->getLinkUrl( $entityId ) );
+	}
+
+	private function getApiEntityTitleTextLookup( ?string $prefixedText ) {
 		$mock = $this->createMock( ApiEntityTitleTextLookup::class );
 		$mock->expects( $this->any() )
 			->method( 'getPrefixedText' )
