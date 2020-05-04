@@ -1,0 +1,27 @@
+{
+    "entities": {
+        "P18": {
+            "datatype": "commonsMedia",
+            "id": "P18",
+            "labels": {
+                "de": {
+                    "language": "de",
+                    "value": "Bild"
+                }
+            },
+            "type": "property"
+        },
+        "P31": {
+            "datatype": "wikibase-item",
+            "id": "P31",
+            "labels": {
+                "de": {
+                    "language": "de",
+                    "value": "ist ein(e)"
+                }
+            },
+            "type": "property"
+        }
+    },
+    "success": 1
+}

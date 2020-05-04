@@ -1,0 +1,20 @@
+{
+    "entities": {
+        "P18": {
+            "datatype": "commonsMedia",
+            "id": "P18",
+            "labels": {
+                "de": {
+                    "language": "de",
+                    "value": "Bild"
+                },
+                "en": {
+                    "language": "en",
+                    "value": "image"
+                }
+            },
+            "type": "property"
+        }
+    },
+    "success": 1
+}

@@ -1,0 +1,15 @@
+{
+    "entities": {
+        "Q42": {
+            "id": "Q42",
+            "labels": {
+                "en": {
+                    "language": "en",
+                    "value": "Douglas Adams"
+                }
+            },
+            "type": "item"
+        }
+    },
+    "success": 1
+}

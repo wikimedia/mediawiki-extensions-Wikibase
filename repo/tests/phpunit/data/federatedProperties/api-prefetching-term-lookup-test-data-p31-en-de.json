@@ -1,0 +1,20 @@
+{
+    "entities": {
+        "P31": {
+            "datatype": "wikibase-item",
+            "id": "P31",
+            "labels": {
+                "de": {
+                    "language": "de",
+                    "value": "ist ein(e)"
+                },
+                "en": {
+                    "language": "en",
+                    "value": "instance of"
+                }
+            },
+            "type": "property"
+        }
+    },
+    "success": 1
+}
