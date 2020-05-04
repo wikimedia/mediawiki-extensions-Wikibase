@@ -426,7 +426,7 @@
 	"wikibase-pageinfo-wb-identifiers": "Bu varlıktaki harici tanımlayıcı ifadelerinin sayısı",
 	"wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",
 	"wikibase-search-bad-profile-name": "Aramada bozuk profil adı: $1",
-	"wikibase-search-namespace-mix": "Aramadaki varlık ve makale ad alanlarının karıştırılması şu anda desteklenmemektedir. Yalnızca varlık ad alanları aranacaktır.",
+	"wikibase-search-namespace-mix": "Aramadaki varlık ve madde ad alanlarının karıştırılması şu anda desteklenmemektedir. Yalnızca varlık ad alanları aranacaktır.",
 	"wikibase-search-config-notfound": "Tam metin arama yapılandırması bulunamadı: $1",
 	"wikibase-search-config-badclass": "Kötü sorgu oluşturucu sınıfı: $1",
 	"wikibase-refresh-for-missing-datatype": "Yerel istemci betikte $1 veri türü bulunamadı. Bu, eski bir önbelleğe alınmış komut dosyasının sonucu olabilir. Sorunu çözmek için yerel önbelleği (çoğu tarayıcıda Ctrl-Shift-R veya Cmd-Shift-R) atlayarak tarayıcınızı yenilemeye çalışın.",

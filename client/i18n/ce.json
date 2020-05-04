@@ -49,7 +49,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} нисдарш",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} чохь бина хийцамаш.",
 	"wikibase-replicationnote": "Дехар до, тидам бар бина хийцам гучу ца болуш маситта минот яла там бу массо вики-проекташкахь.",
-	"wikibase-watchlist-show-changes-pref": "Викихаамаш чохь хийла хийцамаш гайта тергаме могӀам чохь",
+	"wikibase-watchlist-show-changes-pref": "{{grammar:genitive|{{WBREPONAME}}}} чура хийцамаш гайта тергаме могӀам чохь",
 	"wikibase-error-deserialize-error": "Хаамашна десериализаци ян цаделира.",
 	"wikibase-error-serialize-error": "Хаамашна сериализаци ян цаделира.",
 	"wikibase-error-invalid-entity-id": "Язйина идентификатор системин йоьвзуш яц. Лела йе хӀинца лелаш йолу черахь цхьаъ.",

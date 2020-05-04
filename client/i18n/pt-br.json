@@ -151,6 +151,7 @@
 	"wikibase-client-data-bridge-novalue-error-head": "A edição do valor de $1 atualmente não é suportada",
 	"wikibase-client-data-bridge-saving-error-heading": "Não foi possível salvar as alterações",
 	"wikibase-client-data-bridge-saving-error-message": "Não foi possível salvar suas alterações devido a um erro. Tente salvar novamente.",
+	"wikibase-client-data-bridge-unknown-error-heading": "Algo deu errado",
 	"wikibase-client-data-bridge-unknown-error-message": "Ocorreu um erro e o valor selecionado não pode ser editado no momento. Tente recarregar.",
 	"wikibase-client-data-bridge-error-reload-bridge": "Recarregar",
 	"wikibase-client-data-bridge-error-go-back": "Voltar",

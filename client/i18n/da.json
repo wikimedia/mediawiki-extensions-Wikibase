@@ -86,5 +86,6 @@
 	"unresolved-property-category": "Sider med uløste egenskaber",
 	"wikibase-client-data-bridge-permissions-error-info": "Flere detaljer",
 	"wikibase-client-data-bridge-references-heading": "Referencer",
-	"wikibase-client-data-bridge-license-heading": "Benyttelse og licens"
+	"wikibase-client-data-bridge-license-heading": "Benyttelse og licens",
+	"wikibase-client-data-bridge-error-go-back": "Gå tilbage"
 }

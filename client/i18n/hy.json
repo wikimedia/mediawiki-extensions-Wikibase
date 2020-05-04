@@ -33,5 +33,6 @@
 	"wikibase-rc-wikibase-edit-letter": "Դ",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}}ի խմբագրում",
 	"wikibase-otherprojects": "Այլ նախագծերում",
-	"wikibase-client-data-bridge-dialog-title": "Խմբագրել $1"
+	"wikibase-client-data-bridge-dialog-title": "Խմբագրել $1",
+	"wikibase-client-data-bridge-error-go-back": "Հետ գնալ"
 }
