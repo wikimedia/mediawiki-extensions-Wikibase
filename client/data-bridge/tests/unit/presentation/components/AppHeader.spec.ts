@@ -326,7 +326,7 @@ describe( 'AppHeader', () => {
 
 			// @ts-ignore
 			const closeButton = wrapper.findComponent( '.wb-ui-event-emitting-button--close' );
-			await closeButton.vm.$emit( 'click' );
+			closeButton.vm.$emit( 'click' );
 
 			expect( wrapper.emitted( 'close' ) ).toHaveLength( 1 );
 		} );
@@ -346,7 +346,7 @@ describe( 'AppHeader', () => {
 
 			// @ts-ignore
 			const backButton = wrapper.findComponent( '.wb-ui-event-emitting-button--back' );
-			await backButton.vm.$emit( 'click' );
+			backButton.vm.$emit( 'click' );
 
 			expect( wrapper.emitted( 'back' ) ).toHaveLength( 1 );
 		} );

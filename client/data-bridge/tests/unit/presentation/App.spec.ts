@@ -118,7 +118,7 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'back' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'back' );
 		expect( goBackFromErrorToReady ).toHaveBeenCalled();
 	} );
 
@@ -138,11 +138,13 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		await nextTick();
 		expect( bridgeSave ).not.toHaveBeenCalled();
 		expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		await nextTick();
 		expect( bridgeSave ).toHaveBeenCalledTimes( 1 );
 		expect( wrapper.emitted( initEvents.saved ) ).toBeFalsy();
 
@@ -150,7 +152,7 @@ describe( 'App.vue', () => {
 		await nextTick();
 
 		expect( wrapper.findComponent( ThankYou ).exists() ).toBe( true );
-		await wrapper.findComponent( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
+		wrapper.findComponent( ThankYou ).vm.$emit( 'opened-reference-edit-on-repo' );
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
@@ -173,13 +175,16 @@ describe( 'App.vue', () => {
 				propsData: { emitter: mockEmitter },
 			} );
 
-			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+			wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+			await nextTick();
 			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 
-			await wrapper.findComponent( License ).vm.$emit( 'close' );
+			wrapper.findComponent( License ).vm.$emit( 'close' );
+			await nextTick();
 			expect( wrapper.findComponent( License ).exists() ).toBe( false );
 
-			await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+			wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+			await nextTick();
 			expect( bridgeSave ).not.toHaveBeenCalled();
 			expect( wrapper.findComponent( License ).exists() ).toBe( true );
 		},
@@ -193,7 +198,8 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'save' );
+		await nextTick();
 
 		expect( wrapper.findComponent( DataBridge ).classes( 'wb-db-app__data-bridge--overlayed' ) ).toBe( true );
 	} );
@@ -223,7 +229,7 @@ describe( 'App.vue', () => {
 
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.saved );
 	} );
@@ -236,7 +242,7 @@ describe( 'App.vue', () => {
 			propsData: { emitter: mockEmitter },
 		} );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.cancel );
@@ -252,7 +258,7 @@ describe( 'App.vue', () => {
 
 		store.commit( 'addApplicationErrors', [ { type: ErrorTypes.EDIT_CONFLICT } ] );
 
-		await wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
+		wrapper.findComponent( AppHeader ).vm.$emit( 'close' );
 
 		expect( mockEmitter.emit ).toHaveBeenCalledTimes( 1 );
 		expect( mockEmitter.emit ).toHaveBeenCalledWith( initEvents.reload );
