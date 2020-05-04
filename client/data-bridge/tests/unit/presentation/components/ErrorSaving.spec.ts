@@ -18,7 +18,8 @@ describe( 'ErrorSaving', () => {
 	const mocks = { $messages };
 
 	const retrySave = jest.fn();
-	const store = createTestStore( { actions: { retrySave } } );
+	const trackApplicationErrorsOnSaveAsUnknown = jest.fn();
+	const store = createTestStore( { actions: { retrySave, trackApplicationErrorsOnSaveAsUnknown } } );
 
 	const localVue = createLocalVue();
 	localVue.use( Vuex );
@@ -77,7 +78,10 @@ describe( 'ErrorSaving', () => {
 
 	it( 'goes back if the back button is clicked', async () => {
 		const goBackFromErrorToReady = jest.fn();
-		const localStore = createTestStore( { actions: { goBackFromErrorToReady } } );
+		const localStore = createTestStore( { actions: {
+			goBackFromErrorToReady,
+			trackApplicationErrorsOnSaveAsUnknown,
+		} } );
 		const wrapper = shallowMount( ErrorSaving, {
 			store: localStore,
 			localVue,
@@ -89,5 +93,10 @@ describe( 'ErrorSaving', () => {
 
 		await localVue.nextTick();
 		expect( goBackFromErrorToReady ).toHaveBeenCalled();
+	} );
+
+	it( 'dispatches trackApplicationErrorsOnSaveAsUnknown on mount', () => {
+		shallowMount( ErrorSaving, { mocks, store, localVue } );
+		expect( trackApplicationErrorsOnSaveAsUnknown ).toHaveBeenCalledTimes( 1 );
 	} );
 } );

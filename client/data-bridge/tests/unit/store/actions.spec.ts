@@ -1341,17 +1341,11 @@ describe( 'root/actions', () => {
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_2' );
 		} );
 
-		it.each( [
-			[ 'lower_snake_case', 'lower_snake_case' ],
-			[ 'UPPER_SNAKE_CASE', 'upper_snake_case' ],
-			[ 'lower-kebab-case', 'lower_kebab_case' ],
-			[ 'UPPER-KEBAB-CASE', 'upper_kebab_case' ],
-			[ '*consecutive* non-letters', 'consecutive_non_letters' ],
-			[ '!!!extra important!!!', 'extra_important' ],
-			[ 'error 502', 'error_502' ],
-		] )( 'maps type %s to %s', async ( type: string, expectedType: string ) => {
+		it( 'normalizes error names', async () => {
 			const state = newApplicationState( {
-				applicationErrors: [ { type } as ApplicationError ],
+				applicationErrors: [
+					{ type: 'Error with Strange formatting!' } as unknown as ApplicationError,
+				],
 			} );
 			const actions = inject( RootActions, { state } );
 			const tracker = newMockTracker();
@@ -1363,8 +1357,51 @@ describe( 'root/actions', () => {
 			};
 
 			await actions.trackApplicationErrorsAsUnknown();
-
-			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( expectedType );
+			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'error_with_strange_formatting' );
 		} );
 	} );
+
+	describe( 'trackApplicationErrorsOnSaveAsUnknown', () => {
+		it( 'sends application errors to tracker', async () => {
+			const state = newApplicationState( {
+				applicationErrors: [
+					{ type: 'type_1' } as unknown as ApplicationError,
+					{ type: 'type_2' } as unknown as ApplicationError,
+				],
+			} );
+			const actions = inject( RootActions, { state } );
+			const tracker = newMockTracker();
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			await actions.trackApplicationErrorsOnSaveAsUnknown();
+
+			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_1' );
+			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_2' );
+		} );
+
+		it( 'normalizes error names', async () => {
+			const state = newApplicationState( {
+				applicationErrors: [
+					{ type: 'Save-error with Strange formatting!' } as unknown as ApplicationError,
+				],
+			} );
+			const actions = inject( RootActions, { state } );
+			const tracker = newMockTracker();
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			await actions.trackApplicationErrorsOnSaveAsUnknown();
+			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'save_error_with_strange_formatting' );
+		} );
+	} );
+
 } );

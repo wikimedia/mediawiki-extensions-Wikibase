@@ -21,6 +21,7 @@ import ServiceContainer from '@/services/ServiceContainer';
 import statementMutationFactory from '@/change-op/statement-mutation/statementMutationFactory';
 import clone from '@/store/clone';
 import StatementMutationStrategy from '@/change-op/statement-mutation/strategies/StatementMutationStrategy';
+import errorTypeFormatter from '@/utils/errorTypeFormatter';
 
 export class RootActions extends Actions<
 Application,
@@ -306,11 +307,15 @@ RootActions
 
 	public async trackApplicationErrorsAsUnknown(): Promise<void> {
 		for ( const error of this.state.applicationErrors ) {
-			const type = ( error.type || 'error-type-undefined' )
-				.toLowerCase()
-				.replace( /[^a-z0-9_]+/g, '_' )
-				.replace( /^[^a-z0-9]|[^a-z0-9]$/g, '' );
+			const type = errorTypeFormatter( error.type );
 			this.store.$services.get( 'tracker' ).trackUnknownError( type );
+		}
+	}
+
+	public async trackApplicationErrorsOnSaveAsUnknown(): Promise<void> {
+		for ( const error of this.state.applicationErrors ) {
+			const type = errorTypeFormatter( error.type );
+			this.store.$services.get( 'tracker' ).trackSavingUnknownError( type );
 		}
 	}
 
