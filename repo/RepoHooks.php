@@ -446,22 +446,27 @@ final class RepoHooks {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
 
 		$wikiPage = $history->getWikiPage();
-		$rev = new Revision( $row );
+		$services = MediaWikiServices::getInstance();
+
+		$revisionRecord = $services->getRevisionFactory()->newRevisionFromRow( $row );
+		$linkTarget = $revisionRecord->getPageAsLinkTarget();
 
 		if ( $entityContentFactory->isEntityContentModel( $history->getTitle()->getContentModel() )
-			&& $wikiPage->getLatest() !== $rev->getId()
-			&& MediaWikiServices::getInstance()->getPermissionManager()
-					->quickUserCan( 'edit', $history->getUser(), $rev->getTitle() )
-			&& !$rev->isDeleted( RevisionRecord::DELETED_TEXT )
+			&& $wikiPage->getLatest() !== $revisionRecord->getId()
+			&& $services->getPermissionManager()->quickUserCan(
+				'edit',
+				$history->getUser(),
+				$linkTarget
+			)
+			&& !$revisionRecord->isDeleted( RevisionRecord::DELETED_TEXT )
 		) {
-			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-			$link = $linkRenderer->makeKnownLink(
-				$rev->getTitle(),
+			$link = $services->getLinkRenderer()->makeKnownLink(
+				$linkTarget,
 				$history->msg( 'wikibase-restoreold' )->text(),
 				[],
 				[
 					'action' => 'edit',
-					'restore' => $rev->getId()
+					'restore' => $revisionRecord->getId()
 				]
 			);
 
