@@ -7,6 +7,7 @@ dist/*
 !dist/data-bridge.common.js
 !dist/data-bridge.css
 !dist/img
+# note: when adding additional files to dist/, also add them to test:distnodiff
 
 # local env files
 .env.local
