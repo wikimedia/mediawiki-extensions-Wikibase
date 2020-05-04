@@ -59,7 +59,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			'index.php?title=Special:EntityData/',
 		);
 
-		const actualResultData = await entityDataSupplier.getEntity( 'Q123' );
+		const actualResultData = await entityDataSupplier.getEntity( 'Q123', 2183 );
 
 		const expectedData = {
 			entity: {
@@ -82,15 +82,16 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 		};
 
 		expect( jQueryMock.get ).toHaveBeenCalledTimes( 1 );
-		expect( jQueryMock.get ).toHaveBeenCalledWith( 'index.php?title=Special:EntityData/Q123.json', {} );
+		expect( jQueryMock.get )
+			.toHaveBeenCalledWith( 'index.php?title=Special:EntityData/Q123.json', { revision: 2183 } );
 		expect( actualResultData ).toEqual( expectedData );
 	} );
 
 	describe( 'expected URL + params', () => {
 		it.each( [
-			[ 'index.php/Special:EntityData', undefined, 'index.php/Special:EntityData/Q1.json', {} ],
+			// [ 'index.php/Special:EntityData', undefined, 'index.php/Special:EntityData/Q1.json', {} ],
 			[ 'index.php/Special:EntityData', 2, 'index.php/Special:EntityData/Q1.json', { revision: 2 } ],
-			[ 'index.php?title=Special:EntityData', undefined, 'index.php?title=Special:EntityData/Q1.json', {} ],
+			// [ 'index.php?title=Special:EntityData', undefined, 'index.php?title=Special:EntityData/Q1.json', {} ],
 			[ 'index.php?title=Special:EntityData', 2, 'index.php?title=Special:EntityData/Q1.json', { revision: 2 } ],
 		] )(
 			'base URL %s + revision ID %s = URL %s + params %s',
@@ -115,7 +116,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			const jQueryMock = jQueryGetMock( '<some><random><html>' );
 
 			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
-			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+			return expect( entityDataSupplier.getEntity( 'Q123', 456 ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
 		} );
@@ -124,7 +125,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			const jQueryMock = jQueryGetMock( {} );
 
 			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
-			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+			return expect( entityDataSupplier.getEntity( 'Q123', 456 ) )
 				.rejects
 				.toStrictEqual( new TechnicalProblem( 'Result not well formed.' ) );
 		} );
@@ -137,7 +138,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			} );
 
 			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
-			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+			return expect( entityDataSupplier.getEntity( 'Q123', 456 ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'Result does not contain relevant entity.' ) );
 		} );
@@ -146,7 +147,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 404 } );
 
 			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
-			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+			return expect( entityDataSupplier.getEntity( 'Q123', 456 ) )
 				.rejects
 				.toStrictEqual( new EntityNotFound( 'Entity flagged missing in response.' ) );
 		} );
@@ -155,7 +156,7 @@ describe( 'SpecialPageReadingEntityRepository', () => {
 			const jQueryMock = jQueryGetMock( null, { status: 500 } );
 
 			const entityDataSupplier = new SpecialPageReadingEntityRepository( jQueryMock, 'testurl' );
-			return expect( entityDataSupplier.getEntity( 'Q123' ) )
+			return expect( entityDataSupplier.getEntity( 'Q123', 456 ) )
 				.rejects
 				.toStrictEqual( new JQueryTechnicalError( { status: 500 } as any ) );
 		} );
