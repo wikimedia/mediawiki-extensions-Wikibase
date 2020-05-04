@@ -1,5 +1,5 @@
 <template>
-	<p
+	<div
 		class="wb-db-report-issue"
 		v-html="message"
 	/>

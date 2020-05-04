@@ -38,7 +38,7 @@ describe( 'ReportIssue', () => {
 			entityTitle,
 			errorCode,
 		);
-		expect( wrapper.find( 'p' ).html() ).toContain( 'Some <abbr>HTML</abbr>.' );
+		expect( wrapper.find( '.wb-db-report-issue' ).html() ).toContain( 'Some <abbr>HTML</abbr>.' );
 	} );
 
 	it( 'replaces <body> with the issue body getter, URL-encoded', () => {
