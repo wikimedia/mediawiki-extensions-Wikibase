@@ -11,7 +11,7 @@
 				:squary="true"
 				@click="save"
 				:disabled="!canStartSaving"
-				v-if="!hasError && !isSaved"
+				v-if="!hasWarning && !hasError && !isSaved"
 			/>
 		</template>
 		<template v-slot:safeAction>
@@ -80,6 +80,10 @@ export default class AppHeader extends mixins( StateMixin ) {
 
 	public get hasError(): boolean {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
+	}
+
+	public get hasWarning(): boolean {
+		return this.rootModule.state.showWarningAnonymousEdit;
 	}
 
 	public get publishOrSave(): string {

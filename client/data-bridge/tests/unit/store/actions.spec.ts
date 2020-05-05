@@ -1432,4 +1432,17 @@ describe( 'root/actions', () => {
 		} );
 	} );
 
+	describe( 'dismissWarningAnonymousEdit', () => {
+		it( 'commits the unset flag to the store', () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+
+			actions.dismissWarningAnonymousEdit();
+
+			expect( commit ).toHaveBeenCalledWith( 'setShowWarningAnonymousEdit', false );
+		} );
+	} );
+
 } );

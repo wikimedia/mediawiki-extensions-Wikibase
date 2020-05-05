@@ -91,8 +91,7 @@ describe( 'permission checks', () => {
 			// logout
 			browser.deleteCookies();
 
-			DataBridgePage.open( title );
-			DataBridgePage.overloadedLink.click();
+			DataBridgePage.openBridgeOnPage( title );
 			DataBridgePage.error.waitForDisplayed( 5000 );
 
 			assert.ok( DataBridgePage.showsErrorPermission() );
@@ -112,8 +111,7 @@ describe( 'permission checks', () => {
 
 		it( 'show a permission error when opening bridge', () => {
 			LoginPage.loginAdmin();
-			DataBridgePage.open( title );
-			DataBridgePage.overloadedLink.click();
+			DataBridgePage.openBridgeOnPage( title );
 			DataBridgePage.error.waitForDisplayed( 5000 );
 
 			assert.ok( DataBridgePage.showsErrorPermission() );

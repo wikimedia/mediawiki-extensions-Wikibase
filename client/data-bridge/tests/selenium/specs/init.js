@@ -1,5 +1,6 @@
 const assert = require( 'assert' ),
 	Api = require( 'wdio-mediawiki/Api' ),
+	LoginPage = require( 'wdio-mediawiki/LoginPage' ),
 	Util = require( 'wdio-mediawiki/Util' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
@@ -63,6 +64,8 @@ describe( 'init', () => {
 		browser.setNetworkConditions( { latency: 100, throughput: 1000 } );
 
 		DataBridgePage.overloadedLink.click();
+		DataBridgePage.app.waitForDisplayed( 10000 );
+		DataBridgePage.dismissWarningAnonymousEdit();
 		browser.waitUntil(
 			() => {
 				return DataBridgePage.loadingBar.isDisplayed();
@@ -166,9 +169,7 @@ describe( 'init', () => {
 			} ] );
 			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-			DataBridgePage.open( title );
-			DataBridgePage.overloadedLink.click();
-			DataBridgePage.bridge.waitForDisplayed();
+			DataBridgePage.openBridgeOnPage( title );
 
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
@@ -217,7 +218,9 @@ describe( 'init', () => {
 					pageContentLanguage
 				);
 				DataBridgePage.overloadedLink.click();
-				DataBridgePage.bridge.waitForDisplayed( 10000 );
+				DataBridgePage.app.waitForDisplayed( 10000 );
+				DataBridgePage.dismissWarningAnonymousEdit();
+				DataBridgePage.bridge.waitForDisplayed();
 
 				browser.waitUntil(
 					() => DataBridgePage.propertyLabel.getText() === expectedLabel,
@@ -249,6 +252,109 @@ describe( 'init', () => {
 					label = Util.getTestString( 'Zieleigenschaft-' );
 				test( { labels: { [ language ]: { value: label, language } } }, 'he', null );
 			} );
+		} );
+	} );
+
+	describe( 'warning for anonymous edits', () => {
+		describe( 'when anonymous', () => {
+			it( 'is shown and can be dismissed', () => {
+				const title = DataBridgePage.getDummyTitle();
+				const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+				const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+					'claims': [ {
+						'mainsnak': {
+							'snaktype': 'value',
+							'property': propertyId,
+							'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+						},
+						'type': 'statement',
+						'rank': 'normal',
+					} ],
+				} ) );
+				const content = DataBridgePage.createInfoboxWikitext( [ {
+					label: 'official website',
+					entityId,
+					propertyId,
+					editFlow: 'single-best-value',
+				} ] );
+				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+				DataBridgePage.open( title );
+				DataBridgePage.overloadedLink.click();
+				DataBridgePage.app.waitForDisplayed( 10000 );
+
+				assert.ok( DataBridgePage.warningAnonymousEdit.isDisplayed() );
+
+				DataBridgePage.warningAnonymousEditProceedButton.click();
+				DataBridgePage.bridge.waitForDisplayed();
+				assert.ok( !DataBridgePage.warningAnonymousEdit.isDisplayed() );
+			} );
+
+			it( 'is shown and leads to login page', () => {
+				const title = DataBridgePage.getDummyTitle();
+				const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+				const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+					'claims': [ {
+						'mainsnak': {
+							'snaktype': 'value',
+							'property': propertyId,
+							'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+						},
+						'type': 'statement',
+						'rank': 'normal',
+					} ],
+				} ) );
+				const content = DataBridgePage.createInfoboxWikitext( [ {
+					label: 'official website',
+					entityId,
+					propertyId,
+					editFlow: 'single-best-value',
+				} ] );
+				browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+				DataBridgePage.open( title );
+				DataBridgePage.overloadedLink.click();
+				DataBridgePage.app.waitForDisplayed( 10000 );
+
+				assert.ok( DataBridgePage.warningAnonymousEdit.isDisplayed() );
+
+				DataBridgePage.warningAnonymousEditLoginButton.click();
+				DataBridgePage.app.waitForDisplayed( undefined, true ); // wait until not displayed
+				assert.equal( browser.execute( () => {
+					return window.mw.config.get( 'wgCanonicalNamespace' ) + ':'
+						+ window.mw.config.get( 'wgCanonicalSpecialPageName' );
+				} ), 'Special:Userlogin' );
+			} );
+		} );
+
+		it( 'is not shown when logged in', () => {
+			LoginPage.loginAdmin();
+
+			const title = DataBridgePage.getDummyTitle();
+			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+			const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+				'claims': [ {
+					'mainsnak': {
+						'snaktype': 'value',
+						'property': propertyId,
+						'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+					},
+					'type': 'statement',
+					'rank': 'normal',
+				} ],
+			} ) );
+			const content = DataBridgePage.createInfoboxWikitext( [ {
+				label: 'official website',
+				entityId,
+				propertyId,
+				editFlow: 'single-best-value',
+			} ] );
+			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+			DataBridgePage.open( title );
+			DataBridgePage.overloadedLink.click();
+			DataBridgePage.bridge.waitForDisplayed( 10000 );
+			assert.ok( !DataBridgePage.warningAnonymousEdit.isDisplayed() );
 		} );
 	} );
 } );

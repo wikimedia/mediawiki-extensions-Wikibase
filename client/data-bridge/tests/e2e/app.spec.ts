@@ -186,6 +186,25 @@ describe( 'app', () => {
 			).toBeNull();
 		} );
 
+		it( 'shows warning when anonymous', async () => {
+			const testLink = prepareTestEnv( { mwConfig: mockMwConfig( { wgUserName: null } ) } );
+
+			await init();
+			testLink!.click();
+			await budge();
+
+			expect( mockPrepareContainer ).toHaveBeenCalledTimes( 1 );
+			expect( on ).toHaveBeenCalledTimes( 1 );
+			expect( select( '.wb-db-app' ) ).not.toBeNull();
+			expect( select( '.wb-db-app .wb-db-warning-anonymous-edit' ) ).not.toBeNull();
+			expect( select( '.wb-db-app .wb-ui-processdialog-header' ) ).not.toBeNull();
+			expect(
+				select(
+					'.wb-db-app .wb-ui-processdialog-header a.wb-ui-event-emitting-button--primaryProgressive',
+				),
+			).toBeNull();
+		} );
+
 	} );
 
 	describe( 'api call and ooui trigger on save', () => {

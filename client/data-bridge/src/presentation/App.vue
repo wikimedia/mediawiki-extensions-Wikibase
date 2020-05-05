@@ -6,7 +6,15 @@
 			@back="back"
 		/>
 		<div class="wb-db-app__body">
-			<ErrorWrapper v-if="hasError" @relaunch="relaunch" />
+			<WarningAnonymousEdit
+				v-if="showWarningAnonymousEdit"
+				:login-url="loginUrl"
+				@proceed="dismissWarningAnonymousEdit"
+			/>
+			<ErrorWrapper
+				v-else-if="hasError"
+				@relaunch="relaunch"
+			/>
 			<ThankYou
 				v-else-if="isSaved"
 				:repo-link="repoLink"
@@ -31,6 +39,7 @@
 </template>
 
 <script lang="ts">
+import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
 import { mixins } from 'vue-class-component';
 import { Component } from 'vue-property-decorator';
 import Events from '@/events';
@@ -45,6 +54,7 @@ import AppHeader from '@/presentation/components/AppHeader.vue';
 
 @Component( {
 	components: {
+		WarningAnonymousEdit,
 		AppHeader,
 		License,
 		DataBridge,
@@ -78,6 +88,19 @@ export default class App extends mixins( StateMixin ) {
 
 	public get repoLink(): string {
 		return this.rootModule.state.originalHref;
+	}
+
+	public get showWarningAnonymousEdit(): boolean {
+		return this.rootModule.state.showWarningAnonymousEdit;
+	}
+
+	public get loginUrl(): string {
+		return this.$clientRouter.getPageUrl(
+			'Special:UserLogin',
+			{
+				returnto: this.rootModule.state.pageTitle,
+			},
+		);
 	}
 
 	public close(): void {
@@ -117,6 +140,10 @@ export default class App extends mixins( StateMixin ) {
 		 * @type {Event}
 		 */
 		this.$emit( Events.relaunch );
+	}
+
+	public dismissWarningAnonymousEdit(): void {
+		this.rootModule.dispatch( 'dismissWarningAnonymousEdit' );
 	}
 }
 </script>

@@ -1,6 +1,7 @@
 import EntityRevision from '@/datamodel/EntityRevision';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import ThankYou from '@/presentation/components/ThankYou.vue';
+import WarningAnonymousEdit from '@/presentation/components/WarningAnonymousEdit.vue';
 import Vuex, { Store } from 'vuex';
 import Entities from '@/mock-data/data/Q42.data.json';
 import {
@@ -282,6 +283,56 @@ describe( 'App.vue', () => {
 
 				expect( wrapper.find( Loading ).props( 'isInitializing' ) ).toBe( false );
 				expect( wrapper.find( Loading ).props( 'isSaving' ) ).toBe( false );
+			} );
+		} );
+
+		describe( 'if the user is not logged in', () => {
+			it( 'mounts WarningAnonymousEdit, dismisses on click', async () => {
+				const pageTitle = 'https://client.test/Page';
+				const loginUrl = 'https://client.test/Login';
+				store.commit( 'setShowWarningAnonymousEdit', true );
+				store.commit( 'setPageTitle', pageTitle );
+				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
+				const $clientRouter = {
+					getPageUrl: jest.fn().mockReturnValue( loginUrl ),
+				};
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+					mocks: { $clientRouter },
+				} );
+
+				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );
+				expect( wrapper.find( Loading ).exists() ).toBe( false );
+				expect( $clientRouter.getPageUrl ).toHaveBeenCalledWith(
+					'Special:UserLogin',
+					{
+						returnto: pageTitle,
+					},
+				);
+				expect( wrapper.find( WarningAnonymousEdit ).props( 'loginUrl' ) ).toBe( loginUrl );
+
+				wrapper.find( WarningAnonymousEdit ).vm.$emit( 'proceed' );
+				await localVue.nextTick();
+				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( false );
+				expect( wrapper.find( Loading ).exists() ).toBe( true );
+			} );
+
+			it( 'mounts WarningAnonymousEdit even if there are errors', () => {
+				store.commit( 'setShowWarningAnonymousEdit', true );
+				store.commit( 'setApplicationStatus', ApplicationStatus.READY );
+				store.commit( 'addApplicationErrors', [
+					{ type: ErrorTypes.INITIALIZATION_ERROR, info: {} },
+				] );
+				const $clientRouter = { getPageUrl: jest.fn().mockReturnValue( '' ) };
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+					mocks: { $clientRouter },
+				} );
+
+				expect( wrapper.find( WarningAnonymousEdit ).exists() ).toBe( true );
+				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( false );
 			} );
 		} );
 

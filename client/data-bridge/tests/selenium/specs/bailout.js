@@ -36,8 +36,7 @@ describe( 'bail-out', () => {
 		} ] );
 		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
-		DataBridgePage.open( title );
-		DataBridgePage.overloadedLink.click();
+		DataBridgePage.openBridgeOnPage( title );
 		DataBridgePage.error.waitForDisplayed( 5000 );
 
 		assert.ok( /\burl\b/.test( DataBridgePage.error.getText() ) );

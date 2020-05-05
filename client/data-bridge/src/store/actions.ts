@@ -320,4 +320,9 @@ RootActions
 		}
 	}
 
+	public dismissWarningAnonymousEdit(): Promise<void> {
+		this.commit( 'setShowWarningAnonymousEdit', false );
+		return Promise.resolve();
+	}
+
 }

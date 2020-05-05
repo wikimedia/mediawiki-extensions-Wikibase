@@ -55,12 +55,16 @@ describe( 'App', () => {
 
 		NetworkUtil.disableNetwork();
 		DataBridgePage.overloadedLink.click();
+		DataBridgePage.app.waitForDisplayed( 10000 );
+		DataBridgePage.dismissWarningAnonymousEdit();
 		DataBridgePage.error.waitForDisplayed();
 
 		assert.ok( DataBridgePage.showsErrorUnknown() );
 
 		NetworkUtil.enableNetwork();
 		DataBridgePage.errorUnknownRelaunch.click();
+		DataBridgePage.app.waitForDisplayed( 10000 );
+		DataBridgePage.dismissWarningAnonymousEdit();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
 

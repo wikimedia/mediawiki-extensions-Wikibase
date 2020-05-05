@@ -146,6 +146,17 @@ describe( 'AppHeader', () => {
 
 			expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
 		} );
+
+		it( 'hides the save button while warning about anonymous editing', () => {
+			store.commit( 'setShowWarningAnonymousEdit', true );
+			const wrapper = shallowMount( AppHeader, {
+				store,
+				localVue,
+				stubs: { ProcessDialogHeader, EventEmittingButton },
+			} );
+
+			expect( wrapper.find( '.wb-ui-event-emitting-button--primaryProgressive' ).exists() ).toBe( false );
+		} );
 	} );
 
 	describe( 'close button rendering', () => {
