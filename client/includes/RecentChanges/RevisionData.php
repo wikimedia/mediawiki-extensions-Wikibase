@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Client\RecentChanges;
 
 /**
@@ -39,6 +40,11 @@ class RevisionData {
 	private $siteId;
 
 	/**
+	 * @var int
+	 */
+	private $visibility;
+
+	/**
 	 * @var array
 	 */
 	protected $changeParams;
@@ -49,6 +55,7 @@ class RevisionData {
 	 * @param string $comment
 	 * @param string|null $commentHtml
 	 * @param string $siteId
+	 * @param int $visibility
 	 * @param array $changeParams
 	 */
 	public function __construct(
@@ -57,6 +64,7 @@ class RevisionData {
 		$comment,
 		$commentHtml,
 		$siteId,
+		int $visibility,
 		array $changeParams
 	) {
 		$this->userName = $userName;
@@ -64,6 +72,7 @@ class RevisionData {
 		$this->comment = $comment;
 		$this->commentHtml = $commentHtml;
 		$this->siteId = $siteId;
+		$this->visibility = $visibility;
 		$this->changeParams = $changeParams;
 	}
 
@@ -104,6 +113,13 @@ class RevisionData {
 	 */
 	public function getParentId() {
 		return intval( $this->changeParams['parent_id'] );
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getVisibility(): int {
+		return $this->visibility;
 	}
 
 	/**

@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
 use Language;
+use MediaWiki\Revision\RevisionRecord;
 use RecentChange;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -67,6 +68,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expectedRev->getSiteId(), $actualRev->getSiteId(), $message . 'rev:getSiteId' );
 		$this->assertEquals( $expectedRev->getTimestamp(), $actualRev->getTimestamp(), $message . 'rev:getTimestamp' );
 		$this->assertEquals( $expectedRev->getUserName(), $actualRev->getUserName(), $message . 'rev:getUserName' );
+		$this->assertEquals( $expectedRev->getVisibility(), $actualRev->getVisibility(), $message . 'rev:getVisibility' );
 	}
 
 	public function testNewFromRecentChange_siteLinkChange() {
@@ -222,17 +224,47 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testNewFromRecentChange_visibility() {
+		$recentChange = $this->makeRecentChange(
+			'',
+			null,
+			'wikibase-comment-update',
+			null,
+			'wikibase-item~update',
+			false,
+			RevisionRecord::DELETED_USER
+		);
+
+		$externalChangeFactory = $this->getExternalChangeFactory();
+
+		$this->assertExternalChangeEquals(
+			$this->makeExpectedExternalChange(
+				'(wikibase-comment-update)',
+				null,
+				'update',
+				RevisionRecord::DELETED_USER
+			),
+			$externalChangeFactory->newFromRecentChange( $recentChange )
+		);
+	}
+
 	/**
 	 * @param string $expectedComment
 	 * @param string|null $commentHtml
 	 * @param string $expectedType
+	 * @param int $visibility
 	 *
 	 * @return ExternalChange
 	 */
-	private function makeExpectedExternalChange( $expectedComment, $commentHtml, $expectedType ) {
+	private function makeExpectedExternalChange(
+		$expectedComment,
+		$commentHtml,
+		$expectedType,
+		int $visibility = 0
+	) {
 		return new ExternalChange(
 			new ItemId( 'Q4' ),
-			$this->makeRevisionData( $expectedComment, $commentHtml ),
+			$this->makeRevisionData( $expectedComment, $commentHtml, $visibility ),
 			$expectedType
 		);
 	}
@@ -240,16 +272,18 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @param string $comment
 	 * @param string|null $commentHtml
+	 * @param int $visibility
 	 *
 	 * @return RevisionData
 	 */
-	private function makeRevisionData( $comment, $commentHtml = null ) {
+	private function makeRevisionData( $comment, $commentHtml = null, int $visibility = 0 ) {
 		return new RevisionData(
 			'Cat',
 			'20130819111741',
 			strval( $comment ),
 			$commentHtml,
 			'testrepo',
+			$visibility,
 			[
 				'page_id' => 5,
 				'rev_id' => 92,
@@ -275,16 +309,26 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 	 * @param null|string|array $compositeLegacyComment
 	 * @param string $changeType
 	 * @param bool $isBot
+	 * @param int $visibility
 	 *
 	 * @return RecentChange
 	 */
-	private function makeRecentChange( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $isBot ) {
+	private function makeRecentChange(
+		$comment,
+		$commentHtml,
+		$legacyComment,
+		$compositeLegacyComment,
+		$changeType,
+		$isBot,
+		int $visibility = 0
+	) {
 		$recentChange = new RecentChange();
 		$recentChange->counter = 2;
 
 		$attribs = $this->makeAttribs(
 			$this->makeRCParams( $comment, $commentHtml, $legacyComment, $compositeLegacyComment, $changeType, $isBot ),
-			$isBot
+			$isBot,
+			$visibility
 		);
 
 		$attribs['rc_comment'] = $comment;
@@ -337,7 +381,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 		return $params;
 	}
 
-	private function makeAttribs( array $rcParams, $bot ) {
+	private function makeAttribs( array $rcParams, $bot, int $visibility ) {
 		return [
 			'rc_id' => 315,
 			'rc_timestamp' => '20130819111741',
@@ -359,7 +403,7 @@ class ExternalChangeFactoryTest extends \MediaWikiTestCase {
 			'rc_ip' => '',
 			'rc_old_len' => 2,
 			'rc_new_len' => 2,
-			'rc_deleted' => 0,
+			'rc_deleted' => $visibility,
 			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
