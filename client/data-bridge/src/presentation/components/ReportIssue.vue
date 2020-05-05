@@ -31,7 +31,12 @@ export default class ReportIssue extends mixins( StateMixin ) {
 .wb-db-report-issue {
 	@include body-responsive();
 	@include marginForCenterColumn();
-	overflow-x: auto;
+	max-width: calc( 100% - 2 * #{$margin-center-column-side} ); // restrict text content to parent width minus margin
+	overflow-wrap: break-word;
+
+	@media ( max-width: $breakpoint ) {
+		max-width: 100%; // margin is 0 on mobile (see marginForCenterColum() mixin)
+	}
 
 	p {
 		// use margin shorthand to override all MediaWiki default margins, not just margin-bottom
