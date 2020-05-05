@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -29,8 +30,12 @@ class TypeDispatchingUrlLookup implements EntityUrlLookup {
 		$this->defaultLookup = $defaultLookup;
 	}
 
-	public function getFullUrl( EntityId $id ): string {
+	public function getFullUrl( EntityId $id ): ?string {
 		return $this->getLookupForType( $id )->getFullUrl( $id );
+	}
+
+	public function getLinkUrl( EntityId $id ): ?string {
+		return $this->getLookupForType( $id )->getLinkUrl( $id );
 	}
 
 	private function getLookupForType( EntityId $id ): EntityUrlLookup {
@@ -47,5 +52,4 @@ class TypeDispatchingUrlLookup implements EntityUrlLookup {
 
 		return $this->lookups[$entityType];
 	}
-
 }

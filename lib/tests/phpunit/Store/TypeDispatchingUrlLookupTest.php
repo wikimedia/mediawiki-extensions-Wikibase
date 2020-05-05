@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store;
 
 use PHPUnit\Framework\TestCase;
@@ -16,13 +17,23 @@ use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
  */
 class TypeDispatchingUrlLookupTest extends TestCase {
 
-	public function testGivenNoLookupDefinedForEntityType_usesDefaultLookup() {
+	public function provideGetUrlMethods(): array {
+		return [
+			[ 'getFullUrl' ],
+			[ 'getLinkUrl' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideGetUrlMethods
+	 */
+	public function testGivenNoLookupDefinedForEntityType_usesDefaultLookup( string $method ) {
 		$entityId = new PropertyId( 'P123' );
 		$url = 'http://some-wikibase/wiki/Property:P123';
 
 		$defaultLookup = $this->createMock( EntityUrlLookup::class );
 		$defaultLookup->expects( $this->once() )
-			->method( 'getFullUrl' )
+			->method( $method )
 			->with( $entityId )
 			->willReturn( $url );
 
@@ -33,18 +44,21 @@ class TypeDispatchingUrlLookupTest extends TestCase {
 			$defaultLookup
 		);
 
-		$this->assertSame( $url, $lookup->getFullUrl( $entityId ) );
+		$this->assertSame( $url, $lookup->$method( $entityId ) );
 	}
 
-	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup() {
+	/**
+	 * @dataProvider provideGetUrlMethods
+	 */
+	public function testGivenLookupDefinedForEntityType_usesRespectiveLookup( string $method ) {
 		$entityId = new PropertyId( 'P321' );
 		$url = 'http://some-wikibase/wiki/Property:P321';
 
 		$lookup = new TypeDispatchingUrlLookup(
-			[ 'property' => function () use ( $entityId, $url ) {
+			[ 'property' => function () use ( $entityId, $url, $method ) {
 				$propertyUrlLookup = $this->createMock( EntityUrlLookup::class );
 				$propertyUrlLookup->expects( $this->once() )
-					->method( 'getFullUrl' )
+					->method( $method )
 					->with( $entityId )
 					->willReturn( $url );
 
@@ -53,7 +67,7 @@ class TypeDispatchingUrlLookupTest extends TestCase {
 			$this->newNeverCalledMockLookup()
 		);
 
-		$this->assertSame( $url, $lookup->getFullUrl( $entityId ) );
+		$this->assertSame( $url, $lookup->$method( $entityId ) );
 	}
 
 	private function newNeverCalledMockLookup(): EntityUrlLookup {
