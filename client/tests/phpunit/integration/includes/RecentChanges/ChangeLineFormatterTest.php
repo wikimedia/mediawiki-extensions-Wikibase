@@ -7,6 +7,7 @@ use DerivativeContext;
 use HamcrestPHPUnitIntegration;
 use Language;
 use Linker;
+use MediaWiki\Revision\RevisionRecord;
 use MediaWikiLangTestCase;
 use RecentChange;
 use RequestContext;
@@ -62,7 +63,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	public function testFormat( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$context = $this->getTestContext();
 
-		// Use the actual setting, because out handler for the FormatAutocomment hook will check
+		// Use the actual setting, because our handler for the FormatAutocomment hook will check
 		// the wiki id against this setting.
 		$repoWikiId = WikibaseClient::getDefaultInstance()->getSettings()->getSetting( 'repoSiteId' );
 
@@ -326,6 +327,54 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 					null
 				)
 			],
+			'user name hidden' => [
+				[],
+				[
+					'/history-deleted.*(username removed)/',
+					// Make sure the user name is not mentioned
+					'/^(?!.*Cat).*$/',
+				],
+				$this->getEditSiteLinkRecentChange(
+					'this shall be ignored',
+					'a',
+					[],
+					null,
+					RevisionRecord::DELETED_USER
+				)
+			],
+			'edit summary hidden' => [
+				[],
+				[
+					'/history-deleted.*(edit summary removed)/',
+					// Make sure the edit summary is not mentioned
+					'/^(?!.*super-private).*$/',
+				],
+				$this->getEditSiteLinkRecentChange(
+					'this shall be ignored',
+					'super-private',
+					[],
+					null,
+					RevisionRecord::DELETED_COMMENT
+				)
+			],
+			'user name and edit summary hidden' => [
+				[],
+				[
+					'/history-deleted.*(edit summary removed)/',
+					'/history-deleted.*(username removed)/',
+					// Make sure the user name is not mentioned
+					'/^(?!.*Cat).*$/',
+					// Make sure the edit summary is not mentioned
+					'/^(?!.*super-private).*$/',
+				],
+				$this->getEditSiteLinkRecentChange(
+					'this shall be ignored',
+					'super-private',
+					[],
+					null,
+					RevisionRecord::DELETED_COMMENT | RevisionRecord::DELETED_USER
+				)
+			],
 		];
 	}
 
@@ -407,7 +456,8 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$comment,
 		$commentHtml = null,
 		$legacyComment = null,
-		$compositeLegacyComment = null
+		$compositeLegacyComment = null,
+		int $visibility = 0
 	) {
 		$params = [
 			'wikibase-repo-change' => [
@@ -439,7 +489,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		}
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 52, 114 );
-		return $this->makeRecentChange( $params, $title, $comment );
+		return $this->makeRecentChange( $params, $title, $comment, $visibility );
 	}
 
 	protected function getLogChangeTagMatchers() {
@@ -508,7 +558,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		];
 
 		$title = $this->makeTitle( NS_MAIN, 'Canada', 12, 53 );
-		return $this->makeRecentChange( $params, $title, 'Log Change Comment' );
+		return $this->makeRecentChange( $params, $title, 'Log Change Comment', 0 );
 	}
 
 	/**
@@ -549,7 +599,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		return $title;
 	}
 
-	private function makeRecentChange( array $params, Title $title, $comment ) {
+	private function makeRecentChange( array $params, Title $title, $comment, int $visibility ) {
 		$attribs = [
 			'rc_id' => 1234,
 			'rc_timestamp' => $params['wikibase-repo-change']['time'],
@@ -572,7 +622,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			'rc_ip' => '127.0.0.1',
 			'rc_old_len' => 123,
 			'rc_new_len' => 123,
-			'rc_deleted' => false,
+			'rc_deleted' => $visibility,
 			'rc_logid' => 0,
 			'rc_log_type' => null,
 			'rc_log_action' => '',
