@@ -22,7 +22,7 @@ describe( 'TrimmingWritingRepository', () => {
 
 		expect( actualResponse ).toBe( response );
 		expect( inner.saveEntity ).toHaveBeenCalledTimes( 1 );
-		expect( inner.saveEntity ).toHaveBeenCalledWith( entity, undefined );
+		expect( inner.saveEntity ).toHaveBeenCalledWith( entity, undefined, true );
 	} );
 
 	const snak1: Snak = { snaktype: 'value', datavalue: { type: 'string', value: 'snak1' } } as Snak;
@@ -117,10 +117,11 @@ describe( 'TrimmingWritingRepository', () => {
 		const inner: ApiWritingRepository = { saveEntity: jest.fn() } as unknown as ApiWritingRepository;
 		const base = new EntityRevision( baseEntity, 123 );
 		const repo = new TrimmingWritingRepository( inner );
+		const assertUser = true;
 
-		await repo.saveEntity( newEntity, base );
+		await repo.saveEntity( newEntity, base, assertUser );
 
-		expect( inner.saveEntity ).toHaveBeenCalledWith( trimmed, base );
+		expect( inner.saveEntity ).toHaveBeenCalledWith( trimmed, base, assertUser );
 	} );
 
 	it.each( [
@@ -144,7 +145,9 @@ describe( 'TrimmingWritingRepository', () => {
 		const inner: ApiWritingRepository = { saveEntity: jest.fn() } as unknown as ApiWritingRepository;
 		const base = new EntityRevision( baseEntity, 123 );
 		const repo = new TrimmingWritingRepository( inner );
+		const assertUser = true;
 
-		return expect( repo.saveEntity( newEntity, base ) ).rejects.toStrictEqual( new TechnicalProblem( error ) );
+		return expect( repo.saveEntity( newEntity, base, assertUser ) )
+			.rejects.toStrictEqual( new TechnicalProblem( error ) );
 	} );
 } );

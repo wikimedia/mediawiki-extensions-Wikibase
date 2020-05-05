@@ -1079,7 +1079,11 @@ describe( 'root/actions', () => {
 				);
 			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).toStrictEqual( statementsState );
 			expect( statementMutationStrategy.mock.calls[ 0 ][ 2 ] ).not.toBe( statementsState );
-			expect( entityModuleDispatch ).toHaveBeenCalledWith( 'entitySave', statementsState[ entityId ] );
+
+			expect( entityModuleDispatch ).toHaveBeenCalledWith(
+				'entitySave',
+				{ statements: statementsState[ entityId ] },
+			);
 			expect( purgeTitles.purge ).toHaveBeenCalledWith( [ pageTitle ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );

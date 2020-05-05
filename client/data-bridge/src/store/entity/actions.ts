@@ -26,17 +26,17 @@ export class EntityActions extends Actions<EntityState, Getters<EntityState>, En
 	}
 
 	public entitySave(
-		statements: StatementMap,
+		payload: { statements: StatementMap; assertUser?: boolean },
 	): Promise<void> {
 		const entityId = this.state.id;
-		const entity = new Entity( entityId, statements );
+		const entity = new Entity( entityId, payload.statements );
 		const base = new EntityRevision(
 			new Entity( entityId, this.statementsModule.state[ entityId ] ),
 			this.state.baseRevision,
 		);
 
 		return this.store.$services.get( 'writingEntityRepository' )
-			.saveEntity( entity, base )
+			.saveEntity( entity, base, payload.assertUser )
 			.then( ( entityRevision: EntityRevision ) => this.dispatch( 'entityWrite', entityRevision ) );
 	}
 

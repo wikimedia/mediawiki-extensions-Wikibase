@@ -110,10 +110,12 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions.entitySave( newStatements ) ).resolves.toBe( resolvedValue );
+			await expect( actions.entitySave( { statements: newStatements } ) )
+				.resolves.toBe( resolvedValue );
 			expect( revidIncrementingWritingEntityRepository.saveEntity ).toHaveBeenCalledWith(
 				newEntity,
 				{ entity: oldEntity, revisionId: revision },
+				undefined,
 			);
 			expect( dispatch ).toHaveBeenCalledWith( 'entityWrite', {
 				entity: newEntity,
@@ -126,7 +128,11 @@ describe( 'entity/actions', () => {
 				statements = {},
 				error = new Error( 'this should be propagated' ),
 				writingEntityRepository = {
-					saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
+					saveEntity(
+						_entity: Entity,
+						_assertUser: true,
+						_base?: EntityRevision,
+					): Promise<EntityRevision> {
 						return Promise.reject( error );
 					},
 				},
@@ -149,7 +155,8 @@ describe( 'entity/actions', () => {
 				},
 			};
 
-			await expect( actions.entitySave( statements ) ).rejects.toBe( error );
+			await expect( actions.entitySave( { statements } ) )
+				.rejects.toBe( error );
 			expect( dispatch ).not.toHaveBeenCalled();
 		} );
 	} );

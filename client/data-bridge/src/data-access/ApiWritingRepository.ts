@@ -24,8 +24,8 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 		this.tags = tags || undefined;
 	}
 
-	public saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
-		return this.api.postWithEditTokenAndAssertUser( {
+	public saveEntity( entity: Entity, base?: EntityRevision, assertUser = true ): Promise<EntityRevision> {
+		const params = {
 			action: 'wbeditentity',
 			id: entity.id,
 			baserevid: base?.revisionId,
@@ -33,7 +33,15 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 				claims: entity.statements,
 			} ),
 			tags: this.tags,
-		} ).then( ( response: unknown ): EntityRevision => {
+		};
+		let promise;
+
+		if ( assertUser ) {
+			promise = this.api.postWithEditTokenAndAssertUser( params );
+		} else {
+			promise = this.api.postWithEditToken( params );
+		}
+		return promise.then( ( response: unknown ): EntityRevision => {
 			return new EntityRevision(
 				new Entity(
 					( response as ResponseSuccess ).entity.id,

@@ -102,7 +102,11 @@ describe( 'store/actions', () => {
 		} );
 
 		services.set( 'writingEntityRepository', {
-			async saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
+			async saveEntity(
+				_entity: Entity,
+				_base?: EntityRevision,
+				_assertUser?: boolean,
+			): Promise<EntityRevision> {
 				throw new Error( 'These tests should not write any entities' );
 			},
 		} );
@@ -153,7 +157,7 @@ describe( 'store/actions', () => {
 		state: InitializedApplicationState,
 		entityId = info.entityId,
 		propertyId = info.propertyId,
-	): DataValue|undefined {
+	): DataValue | undefined {
 		return state
 			.statements[ entityId ][ propertyId ][ 0 ]
 			.mainsnak.datavalue;
@@ -277,11 +281,11 @@ describe( 'store/actions', () => {
 			await expect(
 				store.dispatch(
 					action( NS_ENTITY, 'entitySave' ),
-					testSet.entity.statements,
+					{ statements: testSet.entity.statements },
 				),
 			).rejects.toBe( rejectError );
 
-			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, undefined );
 		} );
 
 		it( 'stores the responded entity, if the request succeeded', async () => {
@@ -317,9 +321,12 @@ describe( 'store/actions', () => {
 			store = createStore( services );
 			await store.dispatch( 'initBridge', info );
 
-			await store.dispatch( action( NS_ENTITY, 'entitySave' ), testSet.entity.statements );
+			await store.dispatch(
+				action( NS_ENTITY, 'entitySave' ),
+				{ statements: testSet.entity.statements },
+			);
 
-			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
+			expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, undefined );
 
 			const state = store.state as InitializedApplicationState;
 			expect( state.statements ).toEqual( { Q42: response.entity.statements } );
@@ -380,7 +387,7 @@ describe( 'store/actions', () => {
 					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
-				expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet );
+				expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, undefined );
 				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
@@ -438,7 +445,7 @@ describe( 'store/actions', () => {
 					.statements.P31[ 0 ]
 					.mainsnak.datavalue!.value = newStringValue;
 
-				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet );
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, undefined );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
@@ -517,7 +524,7 @@ describe( 'store/actions', () => {
 					},
 				} );
 
-				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet );
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, undefined );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );

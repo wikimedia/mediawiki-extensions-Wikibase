@@ -28,11 +28,11 @@ export default class TrimmingWritingRepository implements WritingEntityRepositor
 		this.apiWritingRepository = apiWritingRepository;
 	}
 
-	public async saveEntity( entity: Entity, base?: EntityRevision ): Promise<EntityRevision> {
+	public async saveEntity( entity: Entity, base?: EntityRevision, assertUser = true ): Promise<EntityRevision> {
 		if ( base ) {
 			entity = this.trimEntity( entity, base.entity );
 		}
-		return this.apiWritingRepository.saveEntity( entity, base );
+		return this.apiWritingRepository.saveEntity( entity, base, assertUser );
 	}
 
 	private trimEntity( newEntity: Entity, baseEntity: Entity ): Entity {
@@ -67,7 +67,7 @@ export default class TrimmingWritingRepository implements WritingEntityRepositor
 		return trimmedStatementMap;
 	}
 
-	private trimStatementGroup( newStatements: Statement[], baseStatements: Statement[] ): Statement[]|null {
+	private trimStatementGroup( newStatements: Statement[], baseStatements: Statement[] ): Statement[] | null {
 		const baseStatementsById = statementListById( baseStatements );
 		const trimmedStatementsGroup = [];
 		for ( const newStatement of newStatements ) {
@@ -93,7 +93,7 @@ export default class TrimmingWritingRepository implements WritingEntityRepositor
 		return trimmedStatementsGroup.length ? trimmedStatementsGroup : null;
 	}
 
-	private trimStatement( newStatement: Statement, baseStatement: Statement ): Statement|null {
+	private trimStatement( newStatement: Statement, baseStatement: Statement ): Statement | null {
 		// statement parts cannot be omitted, so there’s no need to go into any more detail here
 		if ( deepEqual( newStatement, baseStatement ) ) {
 			return null;

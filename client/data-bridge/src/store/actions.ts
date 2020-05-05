@@ -259,7 +259,7 @@ RootActions
 			throw error;
 		}
 
-		return this.entityModule.dispatch( 'entitySave', statements[ entityId ] )
+		return this.entityModule.dispatch( 'entitySave', { statements: statements[ entityId ] } )
 			.catch( ( error: Error ) => {
 				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;

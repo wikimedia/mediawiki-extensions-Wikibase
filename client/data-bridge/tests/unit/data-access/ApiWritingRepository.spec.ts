@@ -208,6 +208,98 @@ describe( 'ApiWritingRepository', () => {
 			} );
 	} );
 
+	it( 'saves and asserts user by default', () => {
+		const api = mockApi( {
+			success: 1,
+			entity: {
+				id: 'Q0',
+				claims: {},
+				lastrevid: -1,
+			},
+		} );
+		jest.spyOn( api, 'postWithEditToken' );
+		jest.spyOn( api, 'postWithEditTokenAndAssertUser' );
+		const toBeWrittenEntity = {
+			id: 'Q123',
+			statements: {
+				P20: [ {
+					mainsnak: {
+						snaktype: 'value',
+						property: 'P20',
+						datavalue: {
+							value: 'String for Wikidata bridge',
+							type: 'string',
+						},
+						datatype: 'string',
+					},
+					type: 'statement',
+					id: 'Q123$36ae6854-4e74-d74c-d583-701bc130166f',
+					rank: 'normal',
+				} ],
+			} as any,
+		};
+
+		const entityWriter = new ApiWritingRepository( api );
+
+		return entityWriter.saveEntity( toBeWrittenEntity )
+			.then( () => {
+				expect( api.postWithEditTokenAndAssertUser ).toHaveBeenCalledTimes( 1 );
+			} );
+	} );
+
+	it( 'can save without asserting the user', () => {
+		const api = mockApi( {
+			success: 1,
+			entity: {
+				id: 'Q0',
+				claims: {},
+				lastrevid: -1,
+			},
+		} );
+		jest.spyOn( api, 'postWithEditToken' );
+		jest.spyOn( api, 'postWithEditTokenAndAssertUser' );
+		const toBeWrittenEntity = {
+			id: 'Q123',
+			statements: {
+				P20: [ {
+					mainsnak: {
+						snaktype: 'value',
+						property: 'P20',
+						datavalue: {
+							value: 'String for Wikidata bridge',
+							type: 'string',
+						},
+						datatype: 'string',
+					},
+					type: 'statement',
+					id: 'Q123$36ae6854-4e74-d74c-d583-701bc130166f',
+					rank: 'normal',
+				} ],
+			} as any,
+		};
+		const baseRevision = {
+			revisionId: 123,
+			entity: {} as Entity,
+		};
+		const expectedParams = {
+			action: 'wbeditentity',
+			baserevid: baseRevision.revisionId,
+			id: toBeWrittenEntity.id,
+			data: JSON.stringify( {
+				claims: toBeWrittenEntity.statements,
+			} ),
+		};
+		const assertUser = false;
+
+		const entityWriter = new ApiWritingRepository( api );
+
+		return entityWriter.saveEntity( toBeWrittenEntity, baseRevision, assertUser )
+			.then( () => {
+				expect( api.postWithEditToken ).toHaveBeenCalledTimes( 1 );
+				expect( api.postWithEditToken ).toHaveBeenCalledWith( expectedParams );
+			} );
+	} );
+
 	describe( 'if there is a problem', () => {
 		it( 'bubbles errors coming from the ApiCore', () => {
 			const error = new Error( 'nosuchrevid' );
@@ -217,7 +309,6 @@ describe( 'ApiWritingRepository', () => {
 				labels: { de: { language: 'de', value: 'test' } },
 				statements: {},
 			};
-
 			const entityWriter = new ApiWritingRepository( mockWritingApi1 );
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
