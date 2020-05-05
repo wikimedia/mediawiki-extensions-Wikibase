@@ -35,6 +35,14 @@ class CachingPrefetchingTermLookup implements PrefetchingTermLookup {
 	 */
 	private $termLanguages;
 
+	/**
+	 * @param CacheInterface $cache This must actually be a functioning cache, that can at least cache things within the current request.
+	 * This is because the UncachedTermsPrefetcher uses the cache to pass data back to this class.
+	 * If you do not have a cache you should be using PrefetchingPropertyTermLookup directly.
+	 * @param UncachedTermsPrefetcher $termsPrefetcher
+	 * @param RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
+	 * @param ContentLanguages $termLanguages
+	 */
 	public function __construct(
 		CacheInterface $cache,
 		UncachedTermsPrefetcher $termsPrefetcher,
