@@ -31,7 +31,6 @@ export default class ReportIssue extends mixins( StateMixin ) {
 .wb-db-report-issue {
 	@include body-responsive();
 	@include marginForCenterColumn();
-	max-width: calc( 100% - 2 * #{$margin-center-column-side} );
 	overflow-x: auto;
 
 	p {
