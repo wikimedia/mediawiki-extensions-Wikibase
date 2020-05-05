@@ -62,6 +62,18 @@ storiesOf( 'EventEmittingButton', module )
 			message="primaryProgressive XL"
 		/>`,
 	} ) )
+	.add( 'primaryProgressive M full-width', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<div style="max-width: 25em; padding: 2em; border: 1px solid black;">
+				<EventEmittingButton
+					type="primaryProgressive"
+					size="M"
+					message="primaryProgressive M"
+					style="width: 100%"
+				/>
+			</div>`,
+	} ) )
 	.add( 'close M', () => ( {
 		components: { EventEmittingButton },
 		template:

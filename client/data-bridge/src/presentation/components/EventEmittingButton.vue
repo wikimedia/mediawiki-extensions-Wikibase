@@ -175,6 +175,7 @@ export default class EventEmittingButton extends Vue {
 	font-weight: bold;
 	line-height: $line-height-text;
 	align-items: center;
+	justify-content: center;
 	display: inline-flex;
 	border-width: 1px;
 	border-radius: 2px;
