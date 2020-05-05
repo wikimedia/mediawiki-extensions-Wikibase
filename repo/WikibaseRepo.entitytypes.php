@@ -240,49 +240,61 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function() {
 			global $wgSecretKey;
+
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-			if ( $wikibaseRepo->getDataAccessSettings()->useNormalizedPropertyTerms() ) {
-				$cacheSecret = hash( 'sha256', $wgSecretKey );
-
-				$cache = new SimpleCacheWithBagOStuff(
-					MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-					'wikibase.prefetchingPropertyTermLookup.',
-					$cacheSecret
-				);
-				$cache = new StatsdRecordingSimpleCache(
-					$cache,
-					MediaWikiServices::getInstance()->getStatsdDataFactory(),
-					[
-						'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
-						'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
-					]
-				);
-				$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $wikibaseRepo->getEntityRevisionLookup() );
-				$source = $wikibaseRepo->getEntitySourceDefinitions()
-					->getSourceForEntityType( Property::ENTITY_TYPE );
-				$propertySourceDbName = $source->getDatabaseName();
-				$loadBalancer = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB( $propertySourceDbName );
-
-				return new CachingPrefetchingTermLookup(
-					$cache,
-					new UncachedTermsPrefetcher(
-						new PrefetchingPropertyTermLookup(
-							$loadBalancer,
-							$wikibaseRepo->getDatabaseTermInLangIdsResolver( $source ),
-							$propertySourceDbName
-						),
-						$redirectResolvingRevisionLookup,
-						60 // 1 minute ttl
-					),
-					$redirectResolvingRevisionLookup,
-					WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+			// Legacy wb_terms mode
+			if ( !$wikibaseRepo->getDataAccessSettings()->useNormalizedPropertyTerms() ) {
+				return new BufferingTermIndexTermLookup(
+					$wikibaseRepo->getStore()->getTermIndex(), // TODO: customize buffer sizes
+					1000
 				);
 			}
 
-			return new BufferingTermIndexTermLookup(
-				$wikibaseRepo->getStore()->getTermIndex(), // TODO: customize buffer sizes
-				1000
+			$mwServices = MediaWikiServices::getInstance();
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$bagOStuff = $mwServices->getLocalServerObjectCache();
+
+			$source = $wikibaseRepo->getEntitySourceDefinitions()
+				->getSourceForEntityType( Property::ENTITY_TYPE );
+			$propertySourceDbName = $source->getDatabaseName();
+			$propertySourceLB = $mwServices->getDBLoadBalancerFactory()->getMainLB( $propertySourceDbName );
+
+			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
+				$propertySourceLB,
+				$wikibaseRepo->getDatabaseTermInLangIdsResolver( $source ),
+				$propertySourceDbName
+			);
+
+			// If MediaWiki has no local server cache available, return the raw lookup.
+			if ( $bagOStuff instanceof EmptyBagOStuff ) {
+				return $prefetchingPropertyTermLookup;
+			}
+
+			$cache = new SimpleCacheWithBagOStuff(
+				$bagOStuff,
+				'wikibase.prefetchingPropertyTermLookup.',
+				$cacheSecret
+			);
+			$cache = new StatsdRecordingSimpleCache(
+				$cache,
+				$mwServices->getStatsdDataFactory(),
+				[
+					'miss' => 'wikibase.prefetchingPropertyTermLookupCache.miss',
+					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
+				]
+			);
+			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $wikibaseRepo->getEntityRevisionLookup() );
+
+			return new CachingPrefetchingTermLookup(
+				$cache,
+				new UncachedTermsPrefetcher(
+					$prefetchingPropertyTermLookup,
+					$redirectResolvingRevisionLookup,
+					60 // 1 minute ttl
+				),
+				$redirectResolvingRevisionLookup,
+				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
 			);
 		},
 		Def::VIEW_FACTORY_CALLBACK => function(
