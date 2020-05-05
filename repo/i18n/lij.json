@@ -397,5 +397,15 @@
 	"right-property-term": "Cangia i termi da Propietæ (etichette, descrissioin, alias)",
 	"action-property-create": "creâ de Propietæ",
 	"right-property-create": "Crea de Propietæ",
-	"wikibase-entity-not-viewable-title": "Discordansa do tipo de contegnuo: imposcibbile vixoalizâ o contegnuo"
+	"wikibase-entity-not-viewable-title": "Discordansa do tipo de contegnuo: imposcibbile vixoalizâ o contegnuo",
+	"wikibase-entity-not-viewable": "O tipo de contegnuo \"$1\" indicou o no l'è 'n'Entitæ e o no pœu vese mostrou da Wikibase.",
+	"wikibase-pageinfo-subscription": "Wiki sottoscrite a quest'entitæ",
+	"wikibase-pageinfo-subscription-none": "Nisciun",
+	"wikibase-pageinfo-wb-claims": "Nummero de deciarassioin inte quest'entitæ",
+	"wikibase-pageinfo-wb-identifiers": "Nummero de deciarassioin pe identificatoî esterni in questa entitæ",
+	"wikibase-search-bad-entity-type": "Tipo d'entitæ grammo:$1",
+	"wikibase-search-bad-profile-name": "Nomme de profî de serchia grammo: $1",
+	"wikibase-search-namespace-mix": "Po-u momento inta serchia no se ghe pœu mescciâ i namespace de entitæ con quelli di articcoli. Saiâ sercou soo che i namespace d'entitæ.",
+	"wikibase-search-config-notfound": "Configuassion de serchia a scrito completo non trovâ: $1",
+	"wikibase-search-config-badclass": "Gramma classe de construtô de recesta: $1"
 }
