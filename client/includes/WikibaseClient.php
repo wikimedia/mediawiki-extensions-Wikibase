@@ -1252,8 +1252,7 @@ final class WikibaseClient {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
-			$this->settings->getSetting( 'siteGlobalID' ),
-			$this->getContentLanguage()->getCode()
+			$this->settings->getSetting( 'siteGlobalID' )
 		);
 	}
 

@@ -45,7 +45,6 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 			$usageLookup,
 			$titleFactory,
 			'enwiki',
-			'en',
 			false
 		);
 	}
