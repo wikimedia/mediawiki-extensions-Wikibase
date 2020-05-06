@@ -1,6 +1,14 @@
 <?php
 $wgServer = '{{ PROTOCOL }}://{{ SERVER_NAME }}{{ PORT }}';
 
+# Developer mode and debugging
+error_reporting( -1 );
+ini_set( 'display_errors', 1 );
+$wgShowExceptionDetails = true;
+$wgShowSQLErrors = true;
+$wgDebugDumpSql  = true;
+$wgShowDBErrorBacktrace = true;
+
 ## Database settings
 ## Environment variables will be substituted in here.
 $wgDBserver = "mysql.svc:3306";
