@@ -4,6 +4,8 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
+use Psr\Log\NullLogger;
+use Psr\Log\Test\TestLogger;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 
 /**
@@ -24,7 +26,11 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 			->with( $apiUrl . '?' . http_build_query( $params ) )
 			->willReturn( $this->newMockResponseWithHeaders() );
 
-		$api = new GenericActionApiClient( $requestFactory, $apiUrl );
+		$api = new GenericActionApiClient(
+			$requestFactory,
+			$apiUrl,
+			new NullLogger()
+		);
 		$api->get( $params );
 	}
 
@@ -37,7 +43,11 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 			->method( 'create' )
 			->willReturn( $mwResponse );
 
-		$api = new GenericActionApiClient( $requestFactory, 'https://does-not-matter/' );
+		$api = new GenericActionApiClient(
+			$requestFactory,
+			'https://does-not-matter/',
+			new NullLogger()
+		);
 		$response = $api->get( [] );
 
 		$this->assertEquals( $headers, $response->getHeaders() );
@@ -50,6 +60,26 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 			->willReturn( $headers );
 
 		return $mwResponse;
+	}
+
+	public function testGetRequestIsLogged() {
+		$apiUrl = 'https://wikidata.org/w/api.php';
+		$params = [ 'a-param' => 'a value', 'another-param' => 'another value' ];
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
+		$requestFactory->expects( $this->once() )
+			->method( 'create' )
+			->willReturn( $this->newMockResponseWithHeaders() );
+
+		$logger = new TestLogger();
+
+		$api = new GenericActionApiClient(
+			$requestFactory,
+			$apiUrl,
+			$logger
+		);
+		$api->get( $params );
+
+		$logger->hasDebugThatContains( 'https://wikidata.org/w/api.php' );
 	}
 
 }
