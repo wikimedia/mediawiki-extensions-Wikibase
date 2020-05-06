@@ -407,5 +407,17 @@
 	"wikibase-search-bad-profile-name": "Nomme de profî de serchia grammo: $1",
 	"wikibase-search-namespace-mix": "Po-u momento inta serchia no se ghe pœu mescciâ i namespace de entitæ con quelli di articcoli. Saiâ sercou soo che i namespace d'entitæ.",
 	"wikibase-search-config-notfound": "Configuassion de serchia a scrito completo non trovâ: $1",
-	"wikibase-search-config-badclass": "Gramma classe de construtô de recesta: $1"
+	"wikibase-search-config-badclass": "Gramma classe de construtô de recesta: $1",
+	"wikibase-refresh-for-missing-datatype": "Imposcibbile trovâ o tipo de dæti $1 into script client locale, foscia percose o script de cache o l'è obsoleto. Pe resciorve o problema prœuva a forsâ o rinfresco do to navegatô bypassando a cache locale (Ctrl-Shift-R ò Cmd-Shift-R inta ciu gran parte di navegatoî) .",
+	"wikibase-outdated-client-script": "Oh-oh, gh'è bezœugno de 'n rinfresco forsou!",
+	"wikibase-shortcopyrightwarning-heading": "Atribussion de lisensia",
+	"wikibase-entity-save-error-heading": "Quarcos'o l'è anæto storto",
+	"wikibase-entity-save-error-message": "A to modiffica a n'ha posciuo ese pubricâ. Ti pœu provâ a scacâ torna o pomello \"pubbrica\".",
+	"wikibase-tainted-ref-warning-icon-title": "Sta deciarassion chie a g'ha di problemi potensiæ",
+	"wikibase-tainted-ref-popper-text": "O valô de questa deciarassion o l'è stæto cangiou, ma a referensa a l'è arestâ a mæxima. Ti pœu eliminâ st'avizo se-a referensa a l'è ancon coretta.",
+	"wikibase-tainted-ref-popper-title": "Discordansa potensiâ tra valô e referensa",
+	"wikibase-tainted-ref-popper-help-link-title": "Paggina d'agiutto pe sto tipo de vincolo",
+	"wikibase-tainted-ref-popper-help-link-text": "Agiùtto",
+	"wikibase-tainted-ref-popper-remove-warning": "Elimmina avizo",
+	"wikibase-tainted-ref-tainted-icon-title": "Sta deciarassion chie a g'ha di problemi potensiæ."
 }

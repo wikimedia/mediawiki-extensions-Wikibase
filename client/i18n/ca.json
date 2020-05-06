@@ -108,6 +108,7 @@
 	"wikibase-otherprojects-beta-description": "Afegeix una secció «{{int:wikibase-otherprojects}}» en la barra lateral que proporciona enllaços a altres projectes de Wikimedia segons les dades de {{WBREPONAME}}.",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexió|Connexions}} amb {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifiqueu-me quan algú connecti una pàgina {{GENDER:|que he creat}} a un element de {{WBREPONAME}}.",
+	"notification-header-page-connection": "La pàgina <strong>$3</strong> ha estat {{GENDER:$2|connectada}} a {{PLURAL:$4|-1=un element de {{WBREPONAME}}|l'element $4 de {{WBREPONAME}}}}, on es poden obtenir dades relatives a aquest tema.",
 	"notification-link-text-view-item": "{{GENDER:$1|Mostra}} l'element",
 	"notification-subject-page-connection": "Una pàgina de {{SITENAME}} que {{GENDER:$3|vàreu crear}} s'ha {{GENDER:$2|connectat}} a l'element de {{WBREPONAME}}",
 	"unresolved-property-category": "Pàgines amb propietats no resoltes",
@@ -152,5 +153,17 @@
 	"wikibase-client-data-bridge-somevalue-error-head": "La modificació del valor per $1 no està disponible actualment",
 	"wikibase-client-data-bridge-somevalue-error-body": "$1 està marcat com a <i>valor desconegut</i> a {{WBREPONAME}}. La modificació de valors marcats com a <i>valor desconegut</i> no està disponible actualment.",
 	"wikibase-client-data-bridge-novalue-error-head": "La modificació del valor per $1 no està disponible actualment",
-	"wikibase-client-data-bridge-novalue-error-body": "$1 està marcat com a <i>cap valor</i> a {{WBREPONAME}}. La modificació de valors marcats com a <i>cap valor</i> no està disponible actualment."
+	"wikibase-client-data-bridge-novalue-error-body": "$1 està marcat com a <i>cap valor</i> a {{WBREPONAME}}. La modificació de valors marcats com a <i>cap valor</i> no està disponible actualment.",
+	"wikibase-client-data-bridge-saving-error-heading": "No s'han pogut desar els canvis",
+	"wikibase-client-data-bridge-saving-error-message": "Els vostres canvis no s'han pogut desar a causa d'un error. Proveu de desar de nou.",
+	"wikibase-client-data-bridge-unknown-error-heading": "Ha fallat alguna cosa",
+	"wikibase-client-data-bridge-unknown-error-message": "S'ha produït un error i el valor seleccionat no es pot modificat de moment. Proveu de recarregar.",
+	"wikibase-client-data-bridge-error-report": "<p>Si l'error persisteix, [$1 informeu  d'aquest problema] incloent-hi la informació següent:</p>\n<ul>\n<li>$2</li>\n<li>$3 de $4</li>\n<li>Codi d'error: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-reload-bridge": "Recarrega",
+	"wikibase-client-data-bridge-error-go-back": "Vés enrere",
+	"wikibase-client-data-bridge-error-retry-save": "Torna a provar de desar",
+	"wikibase-client-data-bridge-reference-note": "La modificació de les referències es podrà fer a {{WBREPONAME}} després de desar",
+	"wikibase-client-data-bridge-thank-you-head": "Gràcies per la vostra modificació!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Podeu modificar les referències per aquesta propietat a {{WBREPONAME}} clicant el botó a sota.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Modifica la referència a {{WBREPONAME}}"
 }
