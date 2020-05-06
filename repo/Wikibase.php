@@ -117,12 +117,6 @@ require_once __DIR__ . '/../view/WikibaseView.php';
 // Load autoload info as long as extension classes are not PSR-4-autoloaded
 require_once __DIR__ . '/autoload.php';
 
-// Nasty hack: part of repo relies on classes defined in Client! load it if in repo-only mode
-if ( !defined( 'WBC_VERSION' ) ) {
-	global $wgAutoloadClasses;
-	$wgAutoloadClasses['Wikibase\\Client\\Store\\TitleFactory'] = __DIR__ . '/../client/includes/Store/TitleFactory.php';
-}
-
 call_user_func( function() {
 	global $wgAPIMetaModules,
 		$wgAPIListModules,

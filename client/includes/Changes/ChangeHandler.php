@@ -9,7 +9,7 @@ use LinkBatch;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
-use Wikibase\Client\Store\TitleFactory;
+use TitleFactory;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;

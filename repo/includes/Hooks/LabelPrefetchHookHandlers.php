@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Hooks;
 use ChangesList;
 use RequestContext;
 use Title;
-use Wikibase\Client\Store\TitleFactory;
+use TitleFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
