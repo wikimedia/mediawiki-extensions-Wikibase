@@ -6,6 +6,8 @@ import { EntityActions } from '@/store/entity/actions';
 import { inject } from 'vuex-smart-module';
 import newMockServiceContainer from '../../services/newMockServiceContainer';
 import newEntityState from './newEntityState';
+import SavingError from '@/data-access/error/SavingError';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 
 describe( 'entity/actions', () => {
 	const revidIncrementingWritingEntityRepository: WritingEntityRepository = {
@@ -123,7 +125,7 @@ describe( 'entity/actions', () => {
 			} );
 		} );
 
-		it( 'propagates error on failed save', async () => {
+		it( 'propagates non-SavingError errors on failed save', async () => {
 			const entityId = 'Q42',
 				statements = {},
 				error = new Error( 'this should be propagated' ),
@@ -157,6 +159,52 @@ describe( 'entity/actions', () => {
 
 			await expect( actions.entitySave( { statements } ) )
 				.rejects.toBe( error );
+			expect( dispatch ).not.toHaveBeenCalled();
+		} );
+
+		it( 'commits SavingError errors individually but still rejects', async () => {
+			const assertAnonFailedError = { code: 'assertanonfailed' };
+			const assertUserFailedError = { code: 'assertuserfailed' };
+			const badTagsError = { code: 'badtags' };
+			const entityId = 'Q42';
+			const statements = {};
+			const error = new SavingError( [
+				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
+				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
+				{ type: ErrorTypes.SAVING_FAILED, info: badTagsError },
+			] );
+			const writingEntityRepository = {
+				saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
+					return Promise.reject( error );
+				},
+			};
+			const commit = jest.fn();
+			const dispatch = jest.fn();
+			const actions = inject( EntityActions, {
+				dispatch,
+				state: newEntityState(),
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					writingEntityRepository,
+				} ),
+			};
+			// @ts-ignore
+			actions.statementsModule = {
+				state: {
+					[ entityId ]: statements,
+				},
+			};
+			// @ts-ignore
+			actions.rootModule = {
+				commit,
+			};
+
+			const expectedError = new Error( 'saving failed' );
+
+			await expect( actions.entitySave( { statements } ) ).rejects.toStrictEqual( expectedError );
 			expect( dispatch ).not.toHaveBeenCalled();
 		} );
 	} );

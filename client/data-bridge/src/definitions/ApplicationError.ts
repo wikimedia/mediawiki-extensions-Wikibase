@@ -12,6 +12,8 @@ export enum ErrorTypes {
 	UNSUPPORTED_DATATYPE = 'UNSUPPORTED_DATATYPE',
 	UNSUPPORTED_DATAVALUE_TYPE = 'UNSUPPORTED_DATAVALUE_TYPE',
 	SAVING_FAILED = 'SAVING_FAILED',
+	ASSERT_ANON_FAILED = 'ASSERT_ANON_FAILED',
+	ASSERT_USER_FAILED = 'ASSERT_USER_FAILED',
 }
 
 export interface ApplicationErrorBase {
@@ -53,7 +55,9 @@ export interface UnsupportedSnakTypeError extends ApplicationErrorBase {
 }
 
 interface SavingFailedError extends ApplicationErrorBase {
-	type: ErrorTypes.SAVING_FAILED;
+	type: ErrorTypes.SAVING_FAILED
+	| ErrorTypes.ASSERT_ANON_FAILED
+	| ErrorTypes.ASSERT_USER_FAILED;
 }
 
 type ApplicationError = MissingPermissionsError
