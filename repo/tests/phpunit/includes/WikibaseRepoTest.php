@@ -51,6 +51,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -283,6 +284,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetEntityArticleIdLookupReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityArticleIdLookup();
 		$this->assertInstanceOf( EntityArticleIdLookup::class, $returnValue );
+	}
+
+	public function testGetEntityExistenceCheckerReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityExistenceChecker();
+		$this->assertInstanceOf( EntityExistenceChecker::class, $returnValue );
 	}
 
 	public function testGetEntityIdLookupReturnType() {

@@ -117,6 +117,7 @@ use Wikibase\Lib\Store\ByIdDispatchingItemTermStoreWriter;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -142,9 +143,11 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\TermIndexItemTermStoreWriter;
 use Wikibase\Lib\Store\TermIndexPropertyTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\TypeDispatchingArticleIdLookup;
+use Wikibase\Lib\Store\TypeDispatchingExistenceChecker;
 use Wikibase\Lib\Store\TypeDispatchingTitleTextLookup;
 use Wikibase\Lib\Store\TypeDispatchingUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
@@ -783,6 +786,13 @@ class WikibaseRepo {
 		return new TypeDispatchingArticleIdLookup(
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ARTICLE_ID_LOOKUP_CALLBACK ),
 			new TitleLookupBasedEntityArticleIdLookup( $this->getEntityTitleLookup() )
+		);
+	}
+
+	public function getEntityExistenceChecker(): EntityExistenceChecker {
+		return new TypeDispatchingExistenceChecker(
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::EXISTENCE_CHECKER_CALLBACK ),
+			new TitleLookupBasedEntityExistenceChecker( $this->getEntityTitleLookup() )
 		);
 	}
 
