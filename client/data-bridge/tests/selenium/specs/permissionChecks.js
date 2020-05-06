@@ -87,7 +87,7 @@ describe( 'permission checks', () => {
 
 	describe( 'if the item is protected on the repo', () => {
 		it( 'show a permission error when opening bridge', () => {
-			WikibaseApi.protectEntity( entityId );
+			browser.call( () => WikibaseApi.protectEntity( entityId ) );
 			// logout
 			browser.deleteCookies();
 
