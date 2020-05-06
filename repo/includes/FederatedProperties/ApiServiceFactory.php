@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\FederatedProperties;
 
 use Language;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Repo\WikibaseRepo;
@@ -30,7 +31,8 @@ class ApiServiceFactory {
 	private function newFederatedPropertiesApiClient(): GenericActionApiClient {
 		return new GenericActionApiClient(
 			MediaWikiServices::getInstance()->getHttpRequestFactory(),
-			$this->getUrlForScriptFile( 'api.php' )
+			$this->getUrlForScriptFile( 'api.php' ),
+			LoggerFactory::getInstance( 'Wikibase.FederatedProperties' )
 		);
 	}
 
