@@ -14,6 +14,9 @@ export enum ErrorTypes {
 	SAVING_FAILED = 'SAVING_FAILED',
 	ASSERT_ANON_FAILED = 'ASSERT_ANON_FAILED',
 	ASSERT_USER_FAILED = 'ASSERT_USER_FAILED',
+	ASSERT_NAMED_USER_FAILED = 'ASSERT_NAMED_USER_FAILED',
+	BAD_TAGS = 'BAD_TAGS',
+	NO_SUCH_REVID = 'NO_SUCH_REVID',
 }
 
 export interface ApplicationErrorBase {
@@ -54,10 +57,13 @@ export interface UnsupportedSnakTypeError extends ApplicationErrorBase {
 	};
 }
 
-interface SavingFailedError extends ApplicationErrorBase {
+export interface SavingFailedError extends ApplicationErrorBase {
 	type: ErrorTypes.SAVING_FAILED
 	| ErrorTypes.ASSERT_ANON_FAILED
-	| ErrorTypes.ASSERT_USER_FAILED;
+	| ErrorTypes.ASSERT_USER_FAILED
+	| ErrorTypes.ASSERT_NAMED_USER_FAILED
+	| ErrorTypes.BAD_TAGS
+	| ErrorTypes.NO_SUCH_REVID;
 }
 
 type ApplicationError = MissingPermissionsError

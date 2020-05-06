@@ -165,13 +165,13 @@ describe( 'entity/actions', () => {
 		it( 'commits SavingError errors individually but still rejects', async () => {
 			const assertAnonFailedError = { code: 'assertanonfailed' };
 			const assertUserFailedError = { code: 'assertuserfailed' };
-			const badTagsError = { code: 'badtags' };
+			const someOtherApiError = { code: 'foo' };
 			const entityId = 'Q42';
 			const statements = {};
 			const error = new SavingError( [
 				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
 				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
-				{ type: ErrorTypes.SAVING_FAILED, info: badTagsError },
+				{ type: ErrorTypes.SAVING_FAILED, info: someOtherApiError },
 			] );
 			const writingEntityRepository = {
 				saveEntity( _entity: Entity, _base?: EntityRevision ): Promise<EntityRevision> {
