@@ -74,7 +74,9 @@ class RevisionDataTest extends \PHPUnit\Framework\TestCase {
 			'parent_id' => 90,
 		];
 
-		return new RevisionData( 'Cat', '20130819111741', $comment, $commentHtml, 'testrepo', $changeParams );
+		return new RevisionData(
+			'Cat', '20130819111741', $comment, $commentHtml, 'testrepo', 0, $changeParams
+		);
 	}
 
 }

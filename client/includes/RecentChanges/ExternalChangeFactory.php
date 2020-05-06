@@ -94,6 +94,7 @@ class ExternalChangeFactory {
 			$comment,
 			$commentHtml,
 			$repoId,
+			(int)$recentChange->getAttribute( 'rc_deleted' ),
 			$changeParams
 		);
 	}
