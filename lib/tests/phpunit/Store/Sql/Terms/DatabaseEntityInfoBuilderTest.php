@@ -85,14 +85,12 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 
 		$itemTermStoreWriter = new DatabaseItemTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
 			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
-			$this->getItemSource()
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
 			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
-			$this->getPropertySource()
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer()
 		);
 
 		foreach ( $this->getKnownEntities() as $entity ) {
@@ -174,14 +172,6 @@ class DatabaseEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 				[ 'IGNORE' ]
 			);
 		}
-	}
-
-	private function getItemSource() {
-		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 10, 'slot' => 'main' ] ], '', '', '', '' );
-	}
-
-	private function getPropertySource() {
-		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 	/**

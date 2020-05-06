@@ -5,7 +5,6 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
 use Psr\Log\NullLogger;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -258,13 +257,8 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 			JobQueueGroup::singleton(),
 			new DatabaseTermInLangIdsAcquirer( $this->lbFactory, $typeIdsStore, $logger ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore,
-				$this->lbFactory->getMainLB(), false, $logger ), new StringNormalizer(),
-			$this->getItemSource()
+				$this->lbFactory->getMainLB(), false, $logger ), new StringNormalizer()
 		);
-	}
-
-	private function getItemSource() {
-		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 10, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 }

@@ -2,11 +2,8 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -15,7 +12,9 @@ use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * PropertyTermStoreWriter implementation for the 2019 SQL based secondary property term storage
+ * PropertyTermStoreWriter implementation for the 2019 SQL based secondary property term storage.
+ *
+ * This can only be used to write to Property term stores on the local database.
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
@@ -39,19 +38,15 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
 
-	/** @var EntitySource */
-	private $entitySource;
-
 	public function __construct(
 		ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
-		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer, EntitySource $entitySource
+		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsResolver = $termInLangIdsResolver;
 		$this->stringNormalizer = $stringNormalizer;
-		$this->entitySource = $entitySource;
 	}
 
 	private function getDbw(): IDatabase {
@@ -62,7 +57,6 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_storeTerms'
 		);
-		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $propertyId, $fingerprint );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
@@ -156,7 +150,6 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.PropertyTermStore_deleteTerms'
 		);
-		$this->assertCanWritePropertyTerms();
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $propertyId );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
@@ -201,31 +194,6 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 		}
 
 		return array_values( array_unique( $termInLangIdsToCleanUp ) );
-	}
-
-	private function shouldWriteToProperties() : bool {
-		return $this->entitySource->getDatabaseName() === false;
-	}
-
-	private function assertPropertiesAreLocal() : void {
-		if ( !$this->shouldWriteToProperties() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with remote entity sources!'
-			);
-		}
-	}
-
-	private function assertCanWritePropertyTerms() {
-		$this->assertUsingPropertySource();
-		$this->assertPropertiesAreLocal();
-	}
-
-	private function assertUsingPropertySource() {
-		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
-			throw new InvalidArgumentException(
-				$this->entitySource->getSourceName() . ' does not provided properties'
-			);
-		}
 	}
 
 }

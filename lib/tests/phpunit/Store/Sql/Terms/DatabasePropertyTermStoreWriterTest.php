@@ -2,11 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use JobQueueGroup;
 use MediaWikiTestCase;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
@@ -77,7 +75,6 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 	}
 
 	private function getPropertyTermStoreWriter(
-		?EntitySource $propertySourceOverride = null,
 		$jobQueueMockOverride = null
 	) {
 		if ( $jobQueueMockOverride === null ) {
@@ -99,23 +96,8 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 		return new DatabasePropertyTermStoreWriter( $loadBalancer, $jobQueue,
 			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
-			new StringNormalizer(), $propertySourceOverride ?: $this->getPropertySource()
+			new StringNormalizer()
 		);
-	}
-
-	private function getPropertySource() {
-		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
-	}
-
-	private function getNonLocalPropertySource() {
-		return new EntitySource( 'remote', 'someDb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
-	}
-
-	public function testStoreTerms_throwsForNonLocalItemSource() {
-		$store = $this->getPropertyTermStoreWriter( $this->getNonLocalPropertySource() );
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->storeTerms( new PropertyId( 'P1' ), $this->fingerprintEmpty );
 	}
 
 	public function testStoreAndGetTerms() {
@@ -296,40 +278,6 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testStoreTerms_throwsForNonPropertyEntitySource() {
-		$store = $this->getTermStoreNotHandlingProperties();
-
-		$this->expectException( InvalidArgumentException::class );
-
-		$store->storeTerms( new PropertyId( 'P1' ), $this->fingerprintEmpty );
-	}
-
-	public function testDeleteTerms_throwsForNonPropertyEntitySource() {
-		$store = $this->getTermStoreNotHandlingProperties();
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->deleteTerms( new PropertyId( 'P1' ) );
-	}
-
-	private function getTermStoreNotHandlingProperties() {
-		$loadBalancer = new FakeLoadBalancer( [
-			'dbr' => $this->db,
-		] );
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			WANObjectCache::newEmpty()
-		);
-
-		return new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( new FakeLBFactory( [
-				'lb' => $loadBalancer
-			] ), $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
-			new StringNormalizer(), new EntitySource( 'test', false,
-				[ 'item' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' )
-		);
-	}
-
 	public function testStoresAndGetsUTF8Text() {
 		$store = $this->getPropertyTermStoreWriter();
 
@@ -349,7 +297,7 @@ class DatabasePropertyTermStoreWriterTest extends MediaWikiTestCase {
 	}
 
 	public function testCleanupJobWorks() {
-		$store = $this->getPropertyTermStoreWriter( null, JobQueueGroup::singleton() );
+		$store = $this->getPropertyTermStoreWriter( JobQueueGroup::singleton() );
 		$fingerprint1 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa1' ) ] ) );
 		$fingerprint2 = new Fingerprint( new Termlist( [ new Term( 'en', 'p--aaaaaaaaaaaaaa2' ) ] ) );
 

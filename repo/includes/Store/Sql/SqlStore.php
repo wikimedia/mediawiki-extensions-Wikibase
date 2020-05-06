@@ -647,7 +647,11 @@ class SqlStore implements Store {
 	 */
 	private function getPropertyInfoTable() {
 		if ( $this->propertyInfoTable === null ) {
-			$this->propertyInfoTable = new PropertyInfoTable( $this->entityIdComposer, $this->entitySource );
+			$this->propertyInfoTable = new PropertyInfoTable(
+				$this->entityIdComposer,
+				$this->entitySource->getDatabaseName(),
+				true
+			);
 		}
 		return $this->propertyInfoTable;
 	}

@@ -58,14 +58,11 @@ return [
 			return new ItemPatcher();
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function( SingleEntitySourceServices $entitySourceServices ) {
-			$mediaWikiServices = MediaWikiServices::getInstance();
-			$sourceDbName = $entitySourceServices->getEntitySource()->getDatabaseName();
-			$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()->getMainLB( $sourceDbName );
 			$termIdsResolver = $entitySourceServices->getTermInLangIdsResolver();
 
 			return new TermStoresDelegatingPrefetchingItemTermLookup(
 				$entitySourceServices->getDataAccessSettings(),
-				new PrefetchingItemTermLookup( $loadBalancer, $termIdsResolver, $sourceDbName ),
+				new PrefetchingItemTermLookup( $termIdsResolver ),
 				$entitySourceServices->getTermIndexPrefetchingTermLookup()
 			);
 		},
@@ -102,13 +99,8 @@ return [
 			$cacheSecret = hash( 'sha256', $wgSecretKey );
 			$bagOStuff = $mwServices->getLocalServerObjectCache();
 
-			$sourceDbName = $entitySourceServices->getEntitySource()->getDatabaseName();
-			$propertySourceLB = $mwServices->getDBLoadBalancerFactory()->getMainLB( $sourceDbName );
-
 			$prefetchingPropertyTermLookup = new PrefetchingPropertyTermLookup(
-				$propertySourceLB,
-				$entitySourceServices->getTermInLangIdsResolver(),
-				$sourceDbName
+				$entitySourceServices->getTermInLangIdsResolver()
 			);
 
 			// If MediaWiki has no local server cache available, return the raw lookup.

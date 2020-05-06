@@ -57,7 +57,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @param WikiPageEntityMetaDataAccessor $entityMetaDataAccessor
 	 * @param WikiPageEntityDataLoader $entityDataLoader
 	 * @param RevisionStore $revisionStore
-	 * @param string|bool $wiki The name of the wiki database to use (use false for the local wiki)
+	 * @param string|bool $wiki The name of the wiki database to use (can be false for the local wiki)
 	 */
 	public function __construct(
 		WikiPageEntityMetaDataAccessor $entityMetaDataAccessor,

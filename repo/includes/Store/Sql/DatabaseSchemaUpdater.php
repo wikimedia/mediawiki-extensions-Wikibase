@@ -224,7 +224,11 @@ class DatabaseSchemaUpdater {
 
 		$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $propertySource );
+		$table = new PropertyInfoTable(
+			$wikibaseRepo->getEntityIdComposer(),
+			$propertySource->getDatabaseName(),
+			true
+		);
 
 		$contentCodec = $wikibaseRepo->getEntityContentDataCodec();
 		$propertyInfoBuilder = $wikibaseRepo->newPropertyInfoBuilder();
@@ -285,7 +289,7 @@ class DatabaseSchemaUpdater {
 		);
 
 		$rebuilder = new PropertyTermsRebuilder(
-			$wikibaseRepo->getNewPropertyTermStoreWriter(),
+			$wikibaseRepo->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter(),
 			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
 			$reporter,
 			$reporter,
@@ -332,7 +336,7 @@ class DatabaseSchemaUpdater {
 		$highestId = (int)$highestId->id_value;
 
 		$rebuilder = new ItemTermsRebuilder(
-			$wikibaseRepo->getNewItemTermStoreWriter(),
+			$wikibaseRepo->getNewTermStoreWriterFactory()->newItemTermStoreWriter(),
 			self::newItemIdIterator( $highestId ),
 			$reporter,
 			$reporter,

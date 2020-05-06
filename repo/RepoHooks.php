@@ -807,7 +807,7 @@ final class RepoHooks {
 
 		// If the entity type is not from the local source, don't check anything else
 		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
-		if ( $entitySource->getDatabaseName() !== false ) {
+		if ( $entitySource->getSourceName() !== $wikibaseRepo->getLocalEntitySource()->getSourceName() ) {
 			return true;
 		}
 

@@ -96,7 +96,11 @@ class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 			''
 		);
 
-		$table = new PropertyInfoTable( $wikibaseRepo->getEntityIdComposer(), $entitySource );
+		$table = new PropertyInfoTable(
+			$wikibaseRepo->getEntityIdComposer(),
+			$entitySource->getDatabaseName(),
+			true
+		);
 		$this->resetPropertyInfoTable( $table );
 		$properties = $this->initProperties();
 
