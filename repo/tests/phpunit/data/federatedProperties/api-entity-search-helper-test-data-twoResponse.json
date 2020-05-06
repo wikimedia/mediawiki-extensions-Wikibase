@@ -11,8 +11,7 @@
 		"pageid": 15087952,
 		"url": "//www.wikidata.org/wiki/Property:P577",
 		"datatype": "time",
-		"label": "publication date",
-		"description": "date or point in time when a work was first published or released",
+		"label": "TEST: This result deliberately only has a label returned",
 		"match": {
 		  "type": "label",
 		  "language": "en",
@@ -27,8 +26,7 @@
 		"pageid": 6426,
 		"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
 		"datatype": "string",
-		"label": "publication date",
-		"description": "eVrebfchLUnnzaCGDytx test",
+		"description": "TEST: This result deliberately only has a description returned",
 		"match": {
 		  "type": "label",
 		  "language": "en",

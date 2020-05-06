@@ -61,36 +61,37 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 			'format' => 'json',
 		];
 		$response = $this->api->get( $params );
-		$jsonResult = json_decode( $response->getBody()->getContents() );
+		$jsonResult = json_decode( $response->getBody()->getContents(), true );
 
 		if ( $response->getStatusCode() !== 200 ) {
 
 			throw new ApiRequestException( 'Unexpected response output' );
 		}
 
-		foreach ( $jsonResult->search as $result ) {
+		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here
+		foreach ( $jsonResult['search'] as $result ) {
 
 			$termSearchResult = new TermSearchResult(
-				$this->getMatchedTerm( $result ),
-				$result->match->type,
-				new PropertyId( $result->id ),
-				new Term( $languageCode, $result->label ),
-				new Term( $languageCode, $result->description ),
+				$this->getMatchedTerm( $result['match'] ),
+				$result['match']['type'],
+				new PropertyId( $result['id'] ),
+				array_key_exists( 'label', $result ) ? new Term( $languageCode, $result['label'] ) : null,
+				array_key_exists( 'description', $result ) ? new Term( $languageCode, $result['description'] ) : null,
 				[
-					TermSearchResult::CONCEPTURI_META_DATA_KEY => $result->concepturi,
-					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result->datatype,
+					TermSearchResult::CONCEPTURI_META_DATA_KEY => $result['concepturi'],
+					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result['datatype'],
 				]
 			);
-			$allResults[ $result->id ] = $termSearchResult;
+			$allResults[ $result['id'] ] = $termSearchResult;
 		}
 		return $allResults;
 	}
 
-	private function getMatchedTerm( $result ) {
+	private function getMatchedTerm( array $match ) {
 
-		if ( $result->match->type === 'entityId' ) {
-			return new Term( 'qid', $result->match->text );
+		if ( $match['type'] === 'entityId' ) {
+			return new Term( 'qid', $match['text'] );
 		}
-		return new Term( $result->match->language, $result->match->text );
+		return new Term( $match['language'], $match['text'] );
 	}
 }

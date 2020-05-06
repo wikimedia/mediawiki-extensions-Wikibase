@@ -108,11 +108,11 @@ class ApiEntitySearchHelperTest extends TestCase {
 				$resultToTest->getEntityId()
 			);
 			$this->assertEquals(
-				new Term( $langCode, $expectedResult[ 'label' ] ),
+				array_key_exists( 'label', $expectedResult ) ? new Term( $langCode, $expectedResult[ 'label' ] ) : null,
 				$resultToTest->getDisplayLabel()
 			);
 			$this->assertEquals(
-				new Term( $langCode, $expectedResult[ 'description' ] ),
+				array_key_exists( 'description', $expectedResult ) ? new Term( $langCode, $expectedResult[ 'description' ] ) : null,
 				$resultToTest->getDisplayDescription()
 			);
 			$this->assertEquals(
