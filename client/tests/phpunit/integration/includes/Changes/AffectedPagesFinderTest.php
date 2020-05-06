@@ -78,7 +78,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$usageLookup,
 			$this->getTitleFactory(),
 			'enwiki',
-			'en',
 			false
 		);
 
@@ -516,7 +515,6 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 			$this->getSiteLinkUsageLookup( $pageTitle ),
 			new TitleFactory(),
 			'enwiki',
-			'en',
 			false
 		);
 

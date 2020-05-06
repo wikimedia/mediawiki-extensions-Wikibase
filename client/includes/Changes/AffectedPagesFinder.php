@@ -43,11 +43,6 @@ class AffectedPagesFinder {
 	private $siteId;
 
 	/**
-	 * @var string
-	 */
-	private $contentLanguageCode;
-
-	/**
 	 * @var bool
 	 */
 	private $checkPageExistence;
@@ -61,7 +56,6 @@ class AffectedPagesFinder {
 	 * @param UsageLookup $usageLookup
 	 * @param TitleFactory $titleFactory
 	 * @param string $siteId
-	 * @param string $contentLanguageCode
 	 * @param bool $checkPageExistence To disable slow filtering that is not relevant in test
 	 *  scenarios. Not meant to be used in production!
 	 *
@@ -71,15 +65,10 @@ class AffectedPagesFinder {
 		UsageLookup $usageLookup,
 		TitleFactory $titleFactory,
 		$siteId,
-		$contentLanguageCode,
 		$checkPageExistence = true
 	) {
 		if ( !is_string( $siteId ) ) {
 			throw new InvalidArgumentException( '$siteId must be a string' );
-		}
-
-		if ( !is_string( $contentLanguageCode ) ) {
-			throw new InvalidArgumentException( '$contentLanguageCode must be a string' );
 		}
 
 		if ( !is_bool( $checkPageExistence ) ) {
@@ -89,7 +78,6 @@ class AffectedPagesFinder {
 		$this->usageLookup = $usageLookup;
 		$this->titleFactory = $titleFactory;
 		$this->siteId = $siteId;
-		$this->contentLanguageCode = $contentLanguageCode;
 		$this->checkPageExistence = $checkPageExistence;
 		// TODO inject me
 		$this->logger = WikibaseClient::getDefaultInstance()->getLogger();
