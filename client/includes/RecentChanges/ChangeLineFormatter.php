@@ -105,8 +105,9 @@ class ChangeLineFormatter {
 		$rev = $externalChange->getRev();
 		$changeType = $externalChange->getChangeType();
 
-		$data['currentAndLastLinks'] = $this->repoLinker->buildEntityLink( $entityId )
-			. wfMessage( 'word-separator' )->escaped();
+		$wordSeparator = wfMessage( 'word-separator' )->escaped();
+		$data['currentAndLastLinks'] =
+			$wordSeparator . $this->repoLinker->buildEntityLink( $entityId ) . $wordSeparator;
 		$data['currentAndLastLinks'] .= ( $changeType === 'restore' || $changeType === 'remove' )
 			? $this->formatDeletionLogLink()
 			: $this->formatDiffHist( $entityId, $rev, $count );
