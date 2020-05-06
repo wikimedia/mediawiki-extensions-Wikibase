@@ -4,6 +4,7 @@ namespace Wikibase\Client\RecentChanges;
 
 use Language;
 use Linker;
+use MediaWiki\Revision\RevisionRecord;
 use Title;
 use User;
 use Wikibase\Client\RepoLinker;
@@ -68,7 +69,7 @@ class ChangeLineFormatter {
 		}
 
 		$line .= $this->formatTimestamp( $rev->getTimestamp() );
-		$line .= implode( $this->formatUserLinks( $rev->getUserName() ) );
+		$line .= implode( $this->formatUserLinks( $rev->getUserName(), $rev->getVisibility() ) );
 
 		$line .= $this->getFormattedComment( $rev, $title, $externalChange->getSiteId() );
 
@@ -87,7 +88,12 @@ class ChangeLineFormatter {
 		$data['recentChangesFlags']['wikibase-edit'] = true;
 		$data['timestampLink'] = $this->buildPermanentLink( $entityId, $rev );
 
-		list( $data['userLink'], $data['userTalkLink'] ) = $this->formatUserLinks( $rev->getUserName() );
+		$userLinks = $this->formatUserLinks( $rev->getUserName(), $rev->getVisibility() );
+		if ( count( $userLinks ) > 1 ) {
+			list( $data['userLink'], $data['userTalkLink'] ) = $userLinks;
+		} else {
+			$data['userLink'] = array_pop( $userLinks );
+		}
 
 		$data['comment'] = $this->getFormattedComment( $rev, $title, $externalChange->getSiteId() );
 	}
@@ -160,6 +166,15 @@ class ChangeLineFormatter {
 	 * @return string HTML
 	 */
 	private function getFormattedComment( RevisionData $rev, Title $title, $siteId ) {
+		if ( !RevisionRecord::userCanBitfield(
+			$rev->getVisibility(),
+			RevisionRecord::DELETED_COMMENT,
+			$this->user )
+		) {
+			return ' <span class="history-deleted comment">' .
+				wfMessage( 'rev-deleted-comment' )->escaped() . '</span>';
+		}
+
 		$commentHtml = $rev->getCommentHtml();
 		if ( $commentHtml === null || $commentHtml === '' ) {
 			$commentHtml = Linker::formatComment( $rev->getComment(), $title, false, $siteId );
@@ -199,10 +214,22 @@ class ChangeLineFormatter {
 
 	/**
 	 * @param string $userName
+	 * @param int $visibility
 	 *
 	 * @return string[] array of HTML
 	 */
-	private function formatUserLinks( $userName ) {
+	private function formatUserLinks( $userName, int $visibility ) {
+		if ( !RevisionRecord::userCanBitfield(
+			$visibility,
+			RevisionRecord::DELETED_USER,
+			$this->user )
+		) {
+			return [
+				' <span class="history-deleted">' .
+				wfMessage( 'rev-deleted-user' )->escaped() . '</span>'
+			];
+		}
+
 		$links = $this->buildUserLinks( $userName );
 
 		if ( User::isIP( $userName ) ) {
