@@ -36,10 +36,47 @@ describe( 'init', () => {
 		assert.ok( DataBridgePage.app.isDisplayed() );
 	} );
 
-	describe( 'once app is launched', () => {
-		// TODO testing the loading behaviour actually fails,
-		// because the tests running are too slow to see the loading components
+	it( 'indicates loading while app gathers its data', () => {
+		const title = DataBridgePage.getDummyTitle();
+		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+		const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+			'claims': [ {
+				'mainsnak': {
+					'snaktype': 'value',
+					'property': propertyId,
+					'datavalue': { 'value': 'ExampleString', 'type': 'string' },
+				},
+				'type': 'statement',
+				'rank': 'normal',
+			} ],
+		} ) );
+		const content = DataBridgePage.createInfoboxWikitext( [ {
+			label: 'official website',
+			entityId,
+			propertyId,
+			editFlow: 'single-best-value',
+		} ] );
+		browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
 
+		DataBridgePage.open( title );
+
+		browser.setNetworkConditions( { latency: 100, throughput: 1000 } );
+
+		DataBridgePage.overloadedLink.click();
+		browser.waitUntil(
+			() => {
+				return DataBridgePage.loadingBar.isDisplayed();
+			},
+			{
+				interval: 500,
+				timeout: 10000,
+			}
+		);
+		DataBridgePage.loadingBar.waitForExist( undefined, true );
+		assert.ok( DataBridgePage.bridge.isDisplayed() );
+	} );
+
+	describe( 'once app is launched', () => {
 		it( 'shows the current targetValue', () => {
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );

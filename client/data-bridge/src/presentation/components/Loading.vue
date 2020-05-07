@@ -4,7 +4,7 @@
 		or the content which is being saved and needs to be unchangeable until the saving is complete -->
 		<slot v-if="ready" />
 
-		<IndeterminateProgressBar class="wb-db-load__visibility" v-if="loadingIsSlow" />
+		<IndeterminateProgressBar class="wb-db-load__bar" v-if="loadingIsSlow" />
 	</div>
 </template>
 
@@ -155,7 +155,7 @@ export default class Loading extends Vue {
 </script>
 <style lang="scss">
 .wb-db-load {
-	&__visibility {
+	&__bar {
 		z-index: $stacking-height-loading-bar;
 	}
 }

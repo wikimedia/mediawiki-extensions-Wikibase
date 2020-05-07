@@ -31,7 +31,6 @@ class DataBridgePage extends Page {
 
 	static get ROOT_SWITCH() {
 		return {
-			LOAD: '.wb-db-load',
 			ERROR: '.wb-db-error',
 			BRIDGE: '.wb-db-bridge',
 			THANKYOU: '.wb-db-thankyou',
@@ -106,6 +105,10 @@ class DataBridgePage extends Page {
 	static get ERROR_SAVING_BACK_BUTTON() {
 		// only visible on desktop (window width larger than breakpoint)
 		return '.wb-db-error-saving__back';
+	}
+
+	static get LOADING_BAR() {
+		return '.wb-db-load__bar';
 	}
 
 	getDummyTitle() {
@@ -190,9 +193,9 @@ class DataBridgePage extends Page {
 		);
 	}
 
-	get int() {
+	get loadingBar() {
 		return $(
-			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ROOT_SWITCH.LOAD}`
+			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.LOADING_BAR}`
 		);
 	}
 
