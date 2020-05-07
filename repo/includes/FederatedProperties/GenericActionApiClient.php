@@ -43,6 +43,11 @@ class GenericActionApiClient {
 		$request = $this->requestFactory->create( $url );
 		$request->execute();
 		$this->logger->debug( 'Requested: ' . $url );
+
+		if ( $request->getStatus() === 0 ) {
+			throw new ApiRequestExecutionException(); // probably hit a timeout
+		}
+
 		return new MwHttpRequestToResponseInterfaceAdapter( $request );
 	}
 
