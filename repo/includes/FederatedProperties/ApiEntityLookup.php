@@ -23,15 +23,32 @@ class ApiEntityLookup {
 	}
 
 	public function fetchEntities( array $entityIds ): void {
+		$this->entityLookupResult = array_merge(
+			$this->entityLookupResult,
+			$this->getEntities( $this->getEntitiesToFetch( $entityIds ) )
+		);
+	}
+
+	private function getEntitiesToFetch( array $entityIds ): array {
+		return array_filter( $entityIds, function ( $id ) {
+			return !array_key_exists( $id, $this->entityLookupResult );
+		} );
+	}
+
+	private function getEntities( array $ids ) {
+		if ( empty( $ids ) ) {
+			return [];
+		}
+
 		$response = $this->api->get( [
 			'action' => 'wbgetentities',
-			'ids' => implode( '|', $entityIds ),
+			'ids' => implode( '|', $ids ),
 			'props' => 'labels|descriptions|datatype',
 			'format' => 'json'
 		] );
 
 		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here
-		$this->entityLookupResult = json_decode( $response->getBody()->getContents(), true )[ 'entities' ];
+		return json_decode( $response->getBody()->getContents(), true )[ 'entities' ];
 	}
 
 	/**
@@ -46,4 +63,5 @@ class ApiEntityLookup {
 
 		return $this->entityLookupResult[ $entityId->getSerialization() ];
 	}
+
 }
