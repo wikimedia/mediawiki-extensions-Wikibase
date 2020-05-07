@@ -40,11 +40,13 @@ const validTypes = [
 	'close',
 	'neutral',
 	'back',
+	'link',
 ];
 
 const framelessTypes = [
 	'close',
 	'back',
+	'link',
 ];
 
 const imageOnlyTypes = [
@@ -288,6 +290,22 @@ export default class EventEmittingButton extends Vue {
 		}
 	}
 
+	&--link {
+		color: $color-primary;
+
+		&:hover {
+			color: $color-primary--hover;
+		}
+
+		&:active {
+			color: $color-primary--active;
+		}
+
+		&:focus {
+			color: $color-primary--hover;
+		}
+	}
+
 	&--frameless {
 		border-color: transparent;
 		background-color: $wmui-color-base100;
@@ -377,6 +395,10 @@ export default class EventEmittingButton extends Vue {
 
 	&--squary {
 		border-radius: 0;
+	}
+
+	&--link#{&}--disabled {
+		color: $color-base--disabled;
 	}
 }
 </style>

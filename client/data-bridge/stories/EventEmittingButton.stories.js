@@ -158,4 +158,23 @@ storiesOf( 'EventEmittingButton', module )
 				size="L"
 				message="back"
 			/>`,
+	} ) )
+	.add( 'link M', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<EventEmittingButton
+				type="link"
+				size="M"
+				message="Keep editing"
+			/>`,
+	} ) )
+	.add( 'link M disabled', () => ( {
+		components: { EventEmittingButton },
+		template:
+			`<EventEmittingButton
+				type="link"
+				size="M"
+				message="Keep editing"
+				:disabled="true"
+			/>`,
 	} ) );
