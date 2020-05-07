@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarningAnonymousEdit matches the snapshot 1`] = `
+<div
+  class="wb-db-warning-anonymous-edit"
+>
+  <h2
+    class="wb-db-warning-anonymous-edit__heading"
+  >
+    
+		Some &lt;abbr&gt;HTML&lt;/abbr&gt;.
+	
+  </h2>
+   
+  <iconmessagebox-stub
+    class="wb-db-warning-anonymous-edit__message"
+    type="warning"
+  >
+    <p>
+      Some 
+      <abbr>
+        HTML
+      </abbr>
+      .
+    </p>
+  </iconmessagebox-stub>
+   
+  <div
+    class="wb-db-warning-anonymous-edit__buttons"
+  >
+    <eventemittingbutton-stub
+      class="wb-db-warning-anonymous-edit__proceed"
+      message="Some <abbr>HTML</abbr>."
+      preventdefault="true"
+      size="M"
+      type="primaryProgressive"
+    />
+     
+    <eventemittingbutton-stub
+      class="wb-db-warning-anonymous-edit__login"
+      href="https://data-bridge.test/Login"
+      message="Some <abbr>HTML</abbr>."
+      size="M"
+      type="neutral"
+    />
+  </div>
+</div>
+`;
