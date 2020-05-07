@@ -114,5 +114,8 @@
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "Уређивање вредности својства $1 тренутно није подржано",
 	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Тренутно није подржано уређивање више вредности",
 	"wikibase-client-data-bridge-somevalue-error-head": "Уређивање вредности својства $1 тренутно није подржано",
-	"wikibase-client-data-bridge-novalue-error-head": "Уређивање вредности својства $1 тренутно није подржано"
+	"wikibase-client-data-bridge-novalue-error-head": "Уређивање вредности својства $1 тренутно није подржано",
+	"wikibase-client-data-bridge-saving-error-heading": "Није могуће сачувати промене",
+	"wikibase-client-data-bridge-error-go-back": "Назад",
+	"wikibase-client-data-bridge-error-retry-save": "Покушај да сачуваш"
 }

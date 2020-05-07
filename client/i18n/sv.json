@@ -38,6 +38,7 @@
 	"wikibase-linkitem-alreadylinked": "Sidan du vill länka med är redan kopplad till ett [$1 objekt] i den centrala databasen som länkar till [[$2]] på denna webbplats. Objekt kan endast ha en bifogad sida per webbplats. Välj en annan sida att länka med.",
 	"wikibase-linkitem-close": "Stäng dialogruta och uppdatera sidan",
 	"wikibase-linkitem-failure": "Ett okänt fel uppstod när den angivna sidan skulle länkas.",
+	"wikibase-linkitem-failed-modify": "Kunde inte länka sidor: Misslyckades att sammanfoga motsvarande objekt på {{WBREPONAME}}.",
 	"wikibase-linkitem-title": "Länka med sida",
 	"wikibase-linkitem-linkpage": "Länka med sida",
 	"wikibase-linkitem-selectlink": "Var god välj en webbplats och en sida du vill länka till denna sida.",

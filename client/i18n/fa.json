@@ -10,6 +10,7 @@
 			"Ebraminio",
 			"FarsiNevis",
 			"Huji",
+			"Iriman",
 			"Ladsgroup",
 			"Mahdy Saffar",
 			"Mehran",
@@ -22,7 +23,7 @@
 		]
 	},
 	"wikibase-client-desc": "کارخواه برای افزونهٔ ویکی‌بیس",
-	"tooltip-t-wikibase": "پیوند به آیتم متصل به مخزن داده",
+	"tooltip-t-wikibase": "پیوند به آیتم متصل در مخزن داده",
 	"wikibase-after-page-move": "شما ممکن است در عین حال بخواهید آیتم وابستهٔ {{WBREPONAME}} را نیز به [$1 روزرسانی] کنید، تا پیوند به صفحه منتقل شده باقی بماند.",
 	"wikibase-after-page-move-queued": "[$1 آیتم {{WBREPONAME}}] مرتبط با این صفحه به‌زودی به‌صورت خودکار روزآمد خواهد شد. توجه داشته باشید که ممکن است این به‌صورت مداوم اتفاق نیفتد.",
 	"wikibase-after-page-delete": "برای تمیزکاری میان‌ویکی‌ها، باید پیوند به این صفحه را از [$1 آیتم مربوطه در {{WBREPONAME}}] نیز حذف کنید.",
@@ -118,5 +119,6 @@
 	"wikibase-client-data-bridge-references-heading": "مرجع‌ها",
 	"wikibase-client-data-bridge-unknown-error-heading": "مشکلی وجود دارد",
 	"wikibase-client-data-bridge-error-reload-bridge": "بارگیری دوباره",
+	"wikibase-client-data-bridge-error-go-back": "برگرد",
 	"wikibase-client-data-bridge-thank-you-head": "سپاس از شما بابت ویرایش‌تان!"
 }
