@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"1AnuraagPandey"
+			"1AnuraagPandey",
+			"Ajeetsinghawadhi"
 		]
 	},
 	"tooltip-t-wikibase": "सम्बद्ध डाटा भण्डार प्रविष्टि की कड़ी",
 	"wikibase-comment-update": "{{WBREPONAME}} आइटम परिवर्तित",
 	"wikibase-dataitem": "{{WBREPONAME}} प्रविष्टि",
-	"wikibase-editlinks": "कड़ी संपादित करें",
+	"wikibase-editlinks": "कड़ी संपादित करैं",
 	"wikibase-editlinkstitle": "अन्तरभाषा कड़ी संपादित करें",
 	"wikibase-rc-hide-wikidata": "विकिडेटा $1",
 	"wikibase-rc-hide-wikidata-hide": "लुकुआवा जाय",
