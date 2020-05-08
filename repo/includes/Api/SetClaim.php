@@ -128,6 +128,12 @@ class SetClaim extends ApiBase {
 			throw new LogicException( 'ApiErrorReporter::dieError did not throw an exception' );
 		}
 
+		if ( $params['ignoreduplicatemainsnak'] ) {
+			if ( $this->statementMainSnakAlreadyExists( $statement, $entity->getStatements() ) ) {
+				$this->addWarning( 'wikibase-setclaim-warning-duplicatemainsnak' );
+				return;
+			}
+		}
 		$summary = $this->getSummary( $params, $statement, $entity->getStatements() );
 
 		$index = $params['index'] ?? null;
@@ -144,6 +150,22 @@ class SetClaim extends ApiBase {
 		if ( $index !== null ) {
 			$stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
 		}
+	}
+
+	private function statementMainSnakAlreadyExists(
+		Statement $statement,
+		StatementList $existingStatements
+	) : bool {
+		$propertyId = $statement->getPropertyId();
+		$mainSnak = $statement->getMainSnak();
+		foreach ( $existingStatements as $existingStatement ) {
+			if ( $existingStatement->getPropertyId()->equals( $propertyId ) ) {
+				if ( $existingStatement->getMainSnak()->equals( $mainSnak ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -250,6 +272,7 @@ class SetClaim extends ApiBase {
 					self::PARAM_TYPE => 'integer',
 				],
 				'bot' => false,
+				'ignoreduplicatemainsnak' => false,
 			],
 			parent::getAllowedParams()
 		);

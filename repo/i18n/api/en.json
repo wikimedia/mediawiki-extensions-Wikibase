@@ -245,6 +245,7 @@
 	"apihelp-wbsetclaim-param-index": "The index within the entity's list of statements to move the statement to. Optional. Be aware that when setting an index that specifies a position not next to a statement whose main snak does not feature the same property, the whole group of statements whose main snaks feature the same property is moved. When not provided, an existing statement will stay in place while a new statement will be appended to the last one whose main snak features the same property.",
 	"apihelp-wbsetclaim-param-summary": "Summary for the edit.\nWill be prepended by an automatically generated comment. The length limit of the autocomment together with the summary is 260 characters. Be aware that everything above that limit will be cut off.",
 	"apihelp-wbsetclaim-param-baserevid": "The numeric identifier for the revision to base the modification on.\nThis is used for detecting conflicts during save.",
+	"apihelp-wbsetclaim-param-ignoreduplicatemainsnak": "If this is true, and the entity already has a claim with the same main snak as the claim being sent in the request, then the request is ignored",
 	"apihelp-wbsetclaim-param-bot": "Mark this edit as bot. This URL flag will only be respected if the user belongs to the group \"{{int:group-bot}}\".",
 	"apihelp-wbsetclaim-param-tags": "Change tags to apply to the revision.",
 	"apihelp-wbsetclaim-example-1": "Set the claim with the given ID to property <samp>P1</samp> with a string value of \"<var>City</var>\"",
