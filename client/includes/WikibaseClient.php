@@ -41,7 +41,7 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
-use Wikibase\Client\Hooks\LangLinkHandler;
+use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -218,11 +218,6 @@ final class WikibaseClient {
 	 * @var OutputFormatValueFormatterFactory|null
 	 */
 	private $valueFormatterFactory = null;
-
-	/**
-	 * @var LangLinkHandler|null
-	 */
-	private $langLinkHandler = null;
 
 	/**
 	 * @var ClientParserOutputDataUpdater|null
@@ -976,23 +971,16 @@ final class WikibaseClient {
 		return $this->namespaceChecker;
 	}
 
-	/**
-	 * @return LangLinkHandler
-	 */
-	public function getLangLinkHandler() {
-		if ( $this->langLinkHandler === null ) {
-			$this->langLinkHandler = new LangLinkHandler(
-				$this->getLanguageLinkBadgeDisplay(),
-				$this->getNamespaceChecker(),
-				$this->getStore()->getSiteLinkLookup(),
-				$this->getStore()->getEntityLookup(),
-				$this->siteLookup,
-				$this->settings->getSetting( 'siteGlobalID' ),
-				$this->getLangLinkSiteGroup()
-			);
-		}
-
-		return $this->langLinkHandler;
+	public function getLangLinkHandlerFactory(): LangLinkHandlerFactory {
+		return new LangLinkHandlerFactory(
+			$this->getLanguageLinkBadgeDisplay(),
+			$this->getNamespaceChecker(),
+			$this->getStore()->getSiteLinkLookup(),
+			$this->getStore()->getEntityLookup(),
+			$this->siteLookup,
+			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->getLangLinkSiteGroup()
+		);
 	}
 
 	/**

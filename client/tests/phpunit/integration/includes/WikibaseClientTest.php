@@ -15,7 +15,7 @@ use SiteLookup;
 use Wikibase\Client\Changes\ChangeHandler;
 use Wikibase\Client\DataAccess\DataAccessSnakFormatterFactory;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
-use Wikibase\Client\Hooks\LangLinkHandler;
+use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;
@@ -192,7 +192,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertInstanceOf( Site::class, $returnValue );
 	}
 
-	public function testGetLangLinkHandlerReturnType() {
+	public function testGetLangLinkHandlerFactoryReturnType() {
 		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
 
 		$settings->setSetting( 'siteGroup', 'wikipedia' );
@@ -208,8 +208,8 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 			$this->getEntitySourceDefinitions()
 		);
 
-		$handler = $wikibaseClient->getLangLinkHandler();
-		$this->assertInstanceOf( LangLinkHandler::class, $handler );
+		$factory = $wikibaseClient->getLangLinkHandlerFactory();
+		$this->assertInstanceOf( LangLinkHandlerFactory::class, $factory );
 	}
 
 	public function testGetParserOutputDataUpdaterType() {

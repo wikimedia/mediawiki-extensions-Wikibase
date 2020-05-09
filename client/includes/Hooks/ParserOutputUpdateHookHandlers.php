@@ -21,9 +21,9 @@ class ParserOutputUpdateHookHandlers {
 	private $namespaceChecker;
 
 	/**
-	 * @var LangLinkHandler
+	 * @var LangLinkHandlerFactory
 	 */
-	private $langLinkHandler;
+	private $langLinkHandlerFactory;
 
 	/**
 	 * @var ClientParserOutputDataUpdater
@@ -41,7 +41,7 @@ class ParserOutputUpdateHookHandlers {
 
 		return new self(
 			$wikibaseClient->getNamespaceChecker(),
-			$wikibaseClient->getLangLinkHandler(),
+			$wikibaseClient->getLangLinkHandlerFactory(),
 			$wikibaseClient->getParserOutputDataUpdater()
 		);
 	}
@@ -66,11 +66,11 @@ class ParserOutputUpdateHookHandlers {
 
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
-		LangLinkHandler $langLinkHandler,
+		LangLinkHandlerFactory $langLinkHandlerFactory,
 		ClientParserOutputDataUpdater $parserOutputDataUpdater
 	) {
 		$this->namespaceChecker = $namespaceChecker;
-		$this->langLinkHandler = $langLinkHandler;
+		$this->langLinkHandlerFactory = $langLinkHandlerFactory;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
 	}
 
@@ -89,11 +89,12 @@ class ParserOutputUpdateHookHandlers {
 			return true;
 		}
 
-		$useRepoLinks = $this->langLinkHandler->useRepoLinks( $title, $parserOutput );
+		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler();
+		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
 
 		if ( $useRepoLinks ) {
 			// add links
-			$this->langLinkHandler->addLinksFromRepository( $title, $parserOutput );
+			$langLinkHandler->addLinksFromRepository( $title, $parserOutput );
 		}
 
 		$this->parserOutputDataUpdater->updateItemIdProperty( $title, $parserOutput );

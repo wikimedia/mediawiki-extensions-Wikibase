@@ -10,7 +10,7 @@ use ParserOutput;
 use Site;
 use SiteLookup;
 use Title;
-use Wikibase\Client\Hooks\LangLinkHandler;
+use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
@@ -166,11 +166,11 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$parserOutputDataUpdater = $this->newParserOutputDataUpdater( $mockRepo, $siteLinkData, $settings );
 
-		$langLinkHandler = $this->newLangLinkHandler( $namespaceChecker, $mockRepo, $settings );
+		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo, $settings );
 
 		return new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
-			$langLinkHandler,
+			$langLinkHandlerFactory,
 			$parserOutputDataUpdater
 		);
 	}
@@ -394,11 +394,11 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 		$mockRepo->putEntity( $item );
 
-		$langLinkHandler = $this->newLangLinkHandler( $namespaceChecker, $mockRepo );
+		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo );
 
 		$handler = new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
-			$langLinkHandler,
+			$langLinkHandlerFactory,
 			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] )
 		);
 
@@ -459,10 +459,10 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		);
 	}
 
-	private function newLangLinkHandler( $namespaceChecker, $mockRepo ) {
+	private function newLangLinkHandlerFactory( $namespaceChecker, $mockRepo ) {
 		$settings = $this->newSettings();
 
-		$langLinkHandler = new LangLinkHandler(
+		return new LangLinkHandlerFactory(
 			$this->getBadgeDisplay(),
 			$namespaceChecker,
 			$mockRepo,
@@ -471,8 +471,6 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);
-
-		return $langLinkHandler;
 	}
 
 }
