@@ -8,9 +8,7 @@ use Site;
 use SiteLookup;
 use Title;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -34,14 +32,14 @@ class OtherProjectsSidebarGenerator {
 	private $siteLinkLookup;
 
 	/**
+	 * @var SiteLinksForDisplayLookup
+	 */
+	private $siteLinksForDisplayLookup;
+
+	/**
 	 * @var SiteLookup
 	 */
 	private $siteLookup;
-
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
 
 	/**
 	 * @var SidebarLinkBadgeDisplay
@@ -61,8 +59,8 @@ class OtherProjectsSidebarGenerator {
 	/**
 	 * @param string $localSiteId
 	 * @param SiteLinkLookup $siteLinkLookup
+	 * @param SiteLinksForDisplayLookup $siteLinksForDisplayLookup
 	 * @param SiteLookup $siteLookup
-	 * @param EntityLookup $entityLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $siteIdsToOutput
@@ -70,16 +68,16 @@ class OtherProjectsSidebarGenerator {
 	public function __construct(
 		$localSiteId,
 		SiteLinkLookup $siteLinkLookup,
+		SiteLinksForDisplayLookup $siteLinksForDisplayLookup,
 		SiteLookup $siteLookup,
-		EntityLookup $entityLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
 		UsageAccumulator $usageAccumulator,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
+		$this->siteLinksForDisplayLookup = $siteLinksForDisplayLookup;
 		$this->siteLookup = $siteLookup;
-		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->usageAccumulator = $usageAccumulator;
 		$this->siteIdsToOutput = $siteIdsToOutput;
@@ -111,7 +109,9 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	public function buildProjectLinkSidebarFromItemId( ItemId $itemId ) {
-		$sidebar = $this->buildPreliminarySidebarFromSiteLinks( $this->getSiteLinks( $itemId ) );
+		$sidebar = $this->buildPreliminarySidebarFromSiteLinks(
+			$this->siteLinksForDisplayLookup->getSiteLinksForItemId( $itemId )
+		);
 		$sidebar = $this->runHook( $itemId, $sidebar );
 
 		return $this->sortAndFlattenSidebar( $sidebar );
@@ -217,22 +217,6 @@ class OtherProjectsSidebarGenerator {
 		}
 
 		return $result;
-	}
-
-	/**
-	 * @param ItemId $itemId
-	 *
-	 * @return SiteLink[]
-	 */
-	private function getSiteLinks( ItemId $itemId ) {
-		/** @var Item $item */
-		$item = $this->entityLookup->getEntity( $itemId );
-		'@phan-var Item|null $item';
-		if ( $item === null ) {
-			return [];
-		}
-
-		return $item->getSiteLinkList()->toArray();
 	}
 
 	/**

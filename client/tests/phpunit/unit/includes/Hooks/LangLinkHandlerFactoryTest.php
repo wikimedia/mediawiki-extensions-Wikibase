@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use Psr\Log\LoggerInterface;
 use SiteStore;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
@@ -29,6 +30,7 @@ class LangLinkHandlerFactoryTest extends \MediaWikiUnitTestCase {
 			$this->createMock( SiteLinkLookup::class ),
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( SiteStore::class ),
+			$this->createMock( LoggerInterface::class ),
 			'srwiki',
 			'wikipedia'
 		);

@@ -4,12 +4,14 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
 use ParserOutput;
+use Psr\Log\NullLogger;
 use Site;
 use TestSites;
 use Title;
 use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
+use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -83,8 +85,12 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		return new LangLinkHandler(
 			$this->getLanguageLinkBadgeDisplay(),
 			new NamespaceChecker( [ NS_TALK ] ),
-			$this->mockRepo,
-			$this->mockRepo,
+			new SiteLinksForDisplayLookup(
+				$this->mockRepo,
+				$this->mockRepo,
+				new NullLogger(),
+				'srwiki'
+			),
 			$siteStore,
 			'srwiki',
 			'wikipedia'
@@ -132,42 +138,6 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 		}
 
 		return $badgesByPrefix;
-	}
-
-	public function provideGetEntityLinks() {
-		return [
-			[ // #0
-				'Xoo', // page
-				[] // expected links
-			],
-			[ // #1
-				'Foo_sr', // page
-				[ // expected links
-					'dewiki' => 'Foo de',
-					'enwiki' => 'Foo en',
-					'srwiki' => 'Foo sr',
-					'dewiktionary' => 'Foo de word',
-					'enwiktionary' => 'Foo en word',
-				]
-			],
-		];
-	}
-
-	/**
-	 * @dataProvider provideGetEntityLinks
-	 */
-	public function testGetEntityLinks( $title, array $expectedLinks ) {
-		if ( is_string( $title ) ) {
-			$title = Title::newFromText( $title );
-		}
-
-		$links = [];
-
-		foreach ( $this->langLinkHandler->getEntityLinks( $title ) as $link ) {
-			$links[$link->getSiteId()] = $link->getPageName();
-		}
-
-		$this->assertArrayEquals( $expectedLinks, $links, false, true );
 	}
 
 	public function provideGetNoExternalLangLinks() {

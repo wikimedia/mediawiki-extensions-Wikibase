@@ -7,10 +7,7 @@ use Site;
 use SiteLookup;
 use Title;
 use Wikibase\Client\NamespaceChecker;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @todo split this up and find a better home for stuff that adds
@@ -34,14 +31,9 @@ class LangLinkHandler {
 	private $namespaceChecker;
 
 	/**
-	 * @var SiteLinkLookup
+	 * @var SiteLinksForDisplayLookup
 	 */
-	private $siteLinkLookup;
-
-	/**
-	 * @var EntityLookup
-	 */
-	private $entityLookup;
+	private $siteLinksForDisplayLookup;
 
 	/**
 	 * @var SiteLookup
@@ -61,8 +53,7 @@ class LangLinkHandler {
 	/**
 	 * @param LanguageLinkBadgeDisplay $badgeDisplay
 	 * @param NamespaceChecker $namespaceChecker determines which namespaces wikibase is enabled on
-	 * @param SiteLinkLookup $siteLinkLookup
-	 * @param EntityLookup $entityLookup
+	 * @param SiteLinksForDisplayLookup $siteLinkForDisplayLookup
 	 * @param SiteLookup $siteLookup
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
@@ -70,70 +61,17 @@ class LangLinkHandler {
 	public function __construct(
 		LanguageLinkBadgeDisplay $badgeDisplay,
 		NamespaceChecker $namespaceChecker,
-		SiteLinkLookup $siteLinkLookup,
-		EntityLookup $entityLookup,
+		SiteLinksForDisplayLookup $siteLinkForDisplayLookup,
 		SiteLookup $siteLookup,
 		$siteId,
 		$siteGroup
 	) {
 		$this->badgeDisplay = $badgeDisplay;
 		$this->namespaceChecker = $namespaceChecker;
-		$this->siteLinkLookup = $siteLinkLookup;
-		$this->entityLookup = $entityLookup;
+		$this->siteLinksForDisplayLookup = $siteLinkForDisplayLookup;
 		$this->siteLookup = $siteLookup;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
-	}
-
-	/**
-	 * Finds the corresponding item on the repository and returns the item's site links.
-	 *
-	 * @param Title $title
-	 *
-	 * @return SiteLink[] A map of SiteLinks, indexed by global site id.
-	 */
-	public function getEntityLinks( Title $title ) {
-		$links = [];
-
-		$itemId = $this->siteLinkLookup->getItemIdForLink(
-			$this->siteId,
-			$title->getPrefixedText()
-		);
-
-		if ( $itemId !== null ) {
-			//NOTE: SiteLinks we could get from $this->siteLinkLookup do not contain badges,
-			//      so we have to fetch the links from the Item.
-
-			/** @var Item $item */
-			$item = $this->entityLookup->getEntity( $itemId );
-			'@phan-var Item|null $item';
-
-			if ( $item ) {
-				$links = iterator_to_array( $item->getSiteLinkList() );
-				$links = $this->indexLinksBySiteId( $links );
-			} else {
-				wfLogWarning( __METHOD__ . ": Could not load item " . $itemId->getSerialization()
-					. " for " . $title->getPrefixedText() );
-			}
-		}
-
-		return $links;
-	}
-
-	/**
-	 * @param SiteLink[] $links
-	 *
-	 * @return SiteLink[] The SiteLinks in $links, indexed by site ID
-	 */
-	private function indexLinksBySiteId( array $links ) {
-		$indexed = [];
-
-		foreach ( $links as $link ) {
-			$key = $link->getSiteId();
-			$indexed[$key] = $link;
-		}
-
-		return $indexed;
 	}
 
 	/**
@@ -328,7 +266,7 @@ class LangLinkHandler {
 		$onPageLinks = $out->getLanguageLinks();
 		$onPageLinks = $this->localLinksToArray( $onPageLinks );
 
-		$repoLinks = $this->getEntityLinks( $title );
+		$repoLinks = $this->siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title );
 
 		$repoLinks = $this->filterRepoLinksByGroup( $repoLinks, $allowedGroups );
 		$repoLinks = $this->suppressRepoLinks( $out, $repoLinks );

@@ -11,13 +11,11 @@ use TestSites;
 use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
+use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
 use Wikibase\Client\Usage\UsageAccumulator;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Services\Lookup\InMemoryEntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\DataModel\SiteLinkList;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -53,8 +51,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
-			$this->getEntityLookup(),
 			$sidebarLinkBadgeDisplay,
 			$this->getUsageAccumulator(),
 			$siteIdsToOutput
@@ -129,8 +127,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
-			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
 			$siteIdsToOutput
@@ -158,8 +156,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
-			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
 			$siteIdsToOutput
@@ -296,8 +294,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$lookup,
+			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
-			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
 			[ 'enwiki' ]
@@ -325,8 +323,8 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
 			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
-			$this->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
 			$this->getUsageAccumulator(),
 			[ 'unknown-site' ]
@@ -378,17 +376,19 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		return $lookup;
 	}
 
-	private function getEntityLookup() {
-		$item = new Item( new ItemId( self::TEST_ITEM_ID ) );
-		$item->setSiteLinkList( new SiteLinkList( [
-			new SiteLink( 'enwikiquote', 'Nyan Cat' ),
-			new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
-			new SiteLink( 'enwiktionary', 'Nyan Cat' ),
-		] ) );
-
-		$lookup = new InMemoryEntityLookup();
-		$lookup->addEntity( $item );
-
+	/**
+	 * @return SiteLinksForDisplayLookup
+	 */
+	private function getSiteLinkForDisplayLookup() {
+		$lookup = $this->createMock( SiteLinksForDisplayLookup::class );
+		$lookup->expects( $this->any() )
+			->method( 'getSiteLinksForItemId' )
+			->with( new ItemId( self::TEST_ITEM_ID ) )
+			->will( $this->returnValue( [
+				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),
+				'enwiki' => new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
+				'enwiktionary' => new SiteLink( 'enwiktionary', 'Nyan Cat' )
+			] ) );
 		return $lookup;
 	}
 

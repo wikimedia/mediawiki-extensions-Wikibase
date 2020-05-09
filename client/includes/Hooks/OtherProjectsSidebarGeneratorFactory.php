@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -39,18 +40,25 @@ class OtherProjectsSidebarGeneratorFactory {
 	 */
 	private $sidebarLinkBadgeDisplay;
 
+	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
 	public function __construct(
 		SettingsArray $settings,
 		SiteLinkLookup $siteLinkLookup,
 		SiteLookup $siteLookup,
 		EntityLookup $entityLookup,
-		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
+		LoggerInterface $logger
 	) {
 		$this->settings = $settings;
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLookup = $siteLookup;
 		$this->entityLookup = $entityLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
+		$this->logger = $logger;
 	}
 
 	/**
@@ -62,8 +70,13 @@ class OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGenerator(
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->siteLinkLookup,
+			new SiteLinksForDisplayLookup(
+				$this->siteLinkLookup,
+				$this->entityLookup,
+				$this->logger,
+				$this->settings->getSetting( 'siteGlobalID' )
+			),
 			$this->siteLookup,
-			$this->entityLookup,
 			$this->sidebarLinkBadgeDisplay,
 			$usageAccumulator,
 			$this->settings->getSetting( 'otherProjectsLinks' )

@@ -2,17 +2,15 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use HashSiteStore;
-use Language;
-use TestSites;
+use Psr\Log\LoggerInterface;
+use SiteLookup;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory
@@ -31,20 +29,13 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 			'otherProjectsLinks' => [ 'enwiktionary' ]
 		] );
 
-		$siteLinkLookup = new MockRepository();
-		$siteStore = new HashSiteStore( TestSites::getSites() );
-		$sidebarLinkBadgeDisplay = new SidebarLinkBadgeDisplay(
-			$this->createMock( LabelDescriptionLookup::class ),
-			[],
-			Language::factory( 'en' )
-		);
-
 		$factory = new OtherProjectsSidebarGeneratorFactory(
 			$settings,
-			$siteLinkLookup,
-			$siteStore,
+			$this->createMock( SiteLinkLookup::class ),
+			$this->createMock( SiteLookup::class ),
 			$this->createMock( EntityLookup::class ),
-			$sidebarLinkBadgeDisplay
+			$this->createMock( SidebarLinkBadgeDisplay::class ),
+			$this->createMock( LoggerInterface::class )
 		);
 
 		$otherProjectSidebarGenerator = $factory->getOtherProjectsSidebarGenerator( $this->createMock( UsageAccumulator::class ) );

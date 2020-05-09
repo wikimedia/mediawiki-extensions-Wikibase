@@ -7,6 +7,7 @@ use Language;
 use MediaWikiSite;
 use MediaWikiTestCase;
 use ParserOutput;
+use Psr\Log\NullLogger;
 use Site;
 use SiteLookup;
 use Title;
@@ -219,7 +220,8 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$siteLinkLookup,
 			$this->getSiteLookup(),
 			$this->getEntityLookup( $siteLinkData ),
-			$sidebarLinkBadgeDisplay
+			$sidebarLinkBadgeDisplay,
+			new NullLogger()
 		);
 	}
 
@@ -468,6 +470,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->getSiteLookup(),
+			new NullLogger(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )
 		);

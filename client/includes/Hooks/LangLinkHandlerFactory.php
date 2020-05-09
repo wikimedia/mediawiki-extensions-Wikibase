@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -39,6 +40,11 @@ class LangLinkHandlerFactory {
 	private $siteLookup;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @var string
 	 */
 	private $siteId;
@@ -54,6 +60,7 @@ class LangLinkHandlerFactory {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLookup $siteLookup
+	 * @param LoggerInterface $logger
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
 	 */
@@ -63,6 +70,7 @@ class LangLinkHandlerFactory {
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
 		SiteLookup $siteLookup,
+		LoggerInterface $logger,
 		$siteId,
 		$siteGroup
 	) {
@@ -71,6 +79,7 @@ class LangLinkHandlerFactory {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
 		$this->siteLookup = $siteLookup;
+		$this->logger = $logger;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
 	}
@@ -79,8 +88,12 @@ class LangLinkHandlerFactory {
 		return new LangLinkHandler(
 			$this->badgeDisplay,
 			$this->namespaceChecker,
-			$this->siteLinkLookup,
-			$this->entityLookup,
+			new SiteLinksForDisplayLookup(
+				$this->siteLinkLookup,
+				$this->entityLookup,
+				$this->logger,
+				$this->siteId
+			),
 			$this->siteLookup,
 			$this->siteId,
 			$this->siteGroup
