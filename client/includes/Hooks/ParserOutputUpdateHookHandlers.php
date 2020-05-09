@@ -8,6 +8,8 @@ use StubUserLang;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
+use Wikibase\Client\Usage\EntityUsageFactory;
+use Wikibase\Client\Usage\ParserOutputUsageAccumulator;
 use Wikibase\Client\WikibaseClient;
 
 /**
@@ -31,6 +33,11 @@ class ParserOutputUpdateHookHandlers {
 	private $parserOutputDataUpdater;
 
 	/**
+	 * @var EntityUsageFactory
+	 */
+	private $entityUsageFactory;
+
+	/**
 	 * @return self
 	 */
 	public static function newFromGlobalState() {
@@ -42,7 +49,8 @@ class ParserOutputUpdateHookHandlers {
 		return new self(
 			$wikibaseClient->getNamespaceChecker(),
 			$wikibaseClient->getLangLinkHandlerFactory(),
-			$wikibaseClient->getParserOutputDataUpdater()
+			$wikibaseClient->getParserOutputDataUpdater(),
+			new EntityUsageFactory( $wikibaseClient->getEntityIdParser() )
 		);
 	}
 
@@ -67,11 +75,13 @@ class ParserOutputUpdateHookHandlers {
 	public function __construct(
 		NamespaceChecker $namespaceChecker,
 		LangLinkHandlerFactory $langLinkHandlerFactory,
-		ClientParserOutputDataUpdater $parserOutputDataUpdater
+		ClientParserOutputDataUpdater $parserOutputDataUpdater,
+		EntityUsageFactory $entityUsageFactory
 	) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->langLinkHandlerFactory = $langLinkHandlerFactory;
 		$this->parserOutputDataUpdater = $parserOutputDataUpdater;
+		$this->entityUsageFactory = $entityUsageFactory;
 	}
 
 	/**
@@ -89,7 +99,8 @@ class ParserOutputUpdateHookHandlers {
 			return true;
 		}
 
-		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler();
+		$usageAccumulator = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
+		$langLinkHandler = $this->langLinkHandlerFactory->getLangLinkHandler( $usageAccumulator );
 		$useRepoLinks = $langLinkHandler->useRepoLinks( $title, $parserOutput );
 
 		if ( $useRepoLinks ) {

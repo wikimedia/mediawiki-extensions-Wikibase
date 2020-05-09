@@ -157,15 +157,30 @@ Parameters:
 * $rootJobParams
   * Any relevant root job parameters to be inherited by child jobs.
 
-#### WikibaseClientOtherProjectsSidebar {#WikibaseClientOtherProjectsSidebar}
+#### WikibaseClientOtherProjectsSidebar {#WikibaseClientOtherProjectsSidebar} (DEPRECATED)
+Deprecated, Use [WikibaseClientSiteLinksForItem] instead.
+
 Called by [OtherProjectsSidebarGenerator] to allow altering the other projects sidebar.
 Only called in case the page we're on is linked with an item.
 
 Parameters:
 * $itemId
   * Id of the item the page is linked with.
-* &$newSidedbar
+* &$newSidebar
   * Array containing the sidebar definition. The array consists of arrays indexed by site groups containing arrays indexed by site id. These arrays represent the link to the given site. They contain the keys “msg”, “href” and “class” which contain the respective attributes for the link that is going to be created.
+
+#### WikibaseClientSiteLinksForItem {#WikibaseClientSiteLinksForItem}
+Called by [OtherProjectsSidebarGenerator] to allow altering the sitelinks used
+in language links and the other projects sidebar.
+Only called in case the page we are on is linked with an item.
+
+Parameters:
+* $item
+  * Item the page is linked with.
+* &$siteLinks
+  * Array containing the site links to display indexed by site ID.
+* $usageAccumulator
+  * A [UsageAccumulator] to track the usages of Wikibase entities done by the hook handlers.
 
 #### WikibaseClientEntityNamespaces {#WikibaseClientEntityNamespaces}
 Called by [WikibaseClient::getEntityNamespaceLookup()] to allow additional mappings between Entity types and namespace IDs to be defined.

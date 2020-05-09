@@ -978,6 +978,7 @@ final class WikibaseClient {
 			$this->getStore()->getSiteLinkLookup(),
 			$this->getStore()->getEntityLookup(),
 			$this->siteLookup,
+			MediaWikiServices::getInstance()->getHookContainer(),
 			$this->getLogger(),
 			$this->settings->getSetting( 'siteGlobalID' ),
 			$this->getLangLinkSiteGroup()
@@ -1143,6 +1144,7 @@ final class WikibaseClient {
 			$this->siteLookup,
 			$this->getStore()->getEntityLookup(),
 			$this->getSidebarLinkBadgeDisplay(),
+			MediaWikiServices::getInstance()->getHookContainer(),
 			$this->getLogger()
 		);
 	}

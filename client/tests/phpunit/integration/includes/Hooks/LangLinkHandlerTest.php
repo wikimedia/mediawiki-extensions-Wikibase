@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
+use MediaWiki\HookContainer\HookContainer;
 use ParserOutput;
 use Psr\Log\NullLogger;
 use Site;
@@ -13,6 +14,7 @@ use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -88,6 +90,8 @@ class LangLinkHandlerTest extends \MediaWikiTestCase {
 			new SiteLinksForDisplayLookup(
 				$this->mockRepo,
 				$this->mockRepo,
+				$this->createMock( UsageAccumulator::class ),
+				$this->createMock( HookContainer::class ),
 				new NullLogger(),
 				'srwiki'
 			),

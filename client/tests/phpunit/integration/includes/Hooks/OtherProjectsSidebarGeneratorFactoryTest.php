@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\HookContainer\HookContainer;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
@@ -35,6 +36,7 @@ class OtherProjectsSidebarGeneratorFactoryTest extends \MediaWikiTestCase {
 			$this->createMock( SiteLookup::class ),
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( SidebarLinkBadgeDisplay::class ),
+			$this->createMock( HookContainer::class ),
 			$this->createMock( LoggerInterface::class )
 		);
 

@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
 use Language;
+use MediaWiki\HookContainer\HookContainer;
 use MediaWikiSite;
 use MediaWikiTestCase;
 use ParserOutput;
@@ -172,7 +173,8 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		return new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
-			$parserOutputDataUpdater
+			$parserOutputDataUpdater,
+			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
 	}
 
@@ -221,6 +223,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$this->getSiteLookup(),
 			$this->getEntityLookup( $siteLinkData ),
 			$sidebarLinkBadgeDisplay,
+			$this->createMock( HookContainer::class ),
 			new NullLogger()
 		);
 	}
@@ -401,7 +404,8 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$handler = new ParserOutputUpdateHookHandlers(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
-			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] )
+			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] ),
+			$this->createMock( EntityUsageFactory::class )
 		);
 
 		$title = Title::makeTitle( NS_MAIN, 'Foobarium' );
@@ -470,6 +474,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 			$mockRepo,
 			$mockRepo,
 			$this->getSiteLookup(),
+			$this->createMock( HookContainer::class ),
 			new NullLogger(),
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'languageLinkSiteGroup' )

@@ -2,12 +2,15 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWiki\HookContainer\HookContainer;
 use Psr\Log\LoggerInterface;
 use Title;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -39,6 +42,8 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 		$siteLinksForDisplayLookup = new SiteLinksForDisplayLookup(
 			$siteLinkLookup,
 			$entityLookup,
+			$this->createMock( UsageAccumulator::class ),
+			$this->createMock( HookContainer::class ),
 			$this->createMock( LoggerInterface::class ),
 			'srwiki'
 		);
@@ -66,6 +71,8 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 		$siteLinksForDisplayLookup = new SiteLinksForDisplayLookup(
 			$siteLinkLookup,
 			$entityLookup,
+			$this->createMock( UsageAccumulator::class ),
+			$this->createMock( HookContainer::class ),
 			$this->createMock( LoggerInterface::class ),
 			'srwiki'
 		);
@@ -98,13 +105,35 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 			->with( new ItemId( 'Q1' ) )
 			->willReturn( $item );
 
+		$usageAccumulator = $this->createMock( UsageAccumulator::class );
+
+		$hookContainer = $this->createMock( HookContainer::class );
+		$hookContainer->expects( $this->once() )
+			->method( 'run' )
+			->with( 'WikibaseClientSiteLinksForItem', [
+				$item,
+				$links->toArray(),
+				$usageAccumulator
+			] )
+			->willReturnCallback( function ( string $hook, array $args ) {
+				$links = &$args[1];
+				$links['frwikisource'] = new SiteLink( 'frwikisource', 'FooSource' );
+				$links['enwiki'] = new SiteLink( 'enwiki', 'Foo en', [ new ItemId( 'Q42' ) ] );
+				return true;
+			} );
+
 		$siteLinksForDisplayLookup = new SiteLinksForDisplayLookup(
 			$siteLinkLookup,
 			$entityLookup,
+			$this->createMock( UsageAccumulator::class ),
+			$hookContainer,
 			$this->createMock( LoggerInterface::class ),
 			'srwiki'
 		);
 
-		$this->assertArrayEquals( $links->toArray(), $siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title ), false, true );
+		$expectedLinks = $links->toArray();
+		$expectedLinks['frwikisource'] = new SiteLink( 'frwikisource', 'FooSource' );
+		$expectedLinks['enwiki'] = new SiteLink( 'enwiki', 'Foo en', [ new ItemId( 'Q42' ) ] );
+		$this->assertArrayEquals( $expectedLinks, $siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title ), false, true );
 	}
 }

@@ -2,9 +2,11 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\HookContainer\HookContainer;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -40,6 +42,11 @@ class LangLinkHandlerFactory {
 	private $siteLookup;
 
 	/**
+	 * @var HookContainer
+	 */
+	private $hooksContainer;
+
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
@@ -60,6 +67,7 @@ class LangLinkHandlerFactory {
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
 	 * @param SiteLookup $siteLookup
+	 * @param HookContainer $hookContainer
 	 * @param LoggerInterface $logger
 	 * @param string $siteId The global site ID for the local wiki
 	 * @param string $siteGroup The ID of the site group to use for showing language links.
@@ -70,6 +78,7 @@ class LangLinkHandlerFactory {
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
 		SiteLookup $siteLookup,
+		HookContainer $hookContainer,
 		LoggerInterface $logger,
 		$siteId,
 		$siteGroup
@@ -79,18 +88,26 @@ class LangLinkHandlerFactory {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
 		$this->siteLookup = $siteLookup;
+		$this->hooksContainer = $hookContainer;
 		$this->logger = $logger;
 		$this->siteId = $siteId;
 		$this->siteGroup = $siteGroup;
 	}
 
-	public function getLangLinkHandler(): LangLinkHandler {
+	/**
+	 * @param UsageAccumulator $usageAccumulator
+	 *
+	 * @return LangLinkHandler
+	 */
+	public function getLangLinkHandler( UsageAccumulator $usageAccumulator ): LangLinkHandler {
 		return new LangLinkHandler(
 			$this->badgeDisplay,
 			$this->namespaceChecker,
 			new SiteLinksForDisplayLookup(
 				$this->siteLinkLookup,
 				$this->entityLookup,
+				$usageAccumulator,
+				$this->hooksContainer,
 				$this->logger,
 				$this->siteId
 			),

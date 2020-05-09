@@ -2,8 +2,11 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\HookContainer\HookContainer;
 use Psr\Log\LoggerInterface;
 use Title;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
@@ -23,6 +26,12 @@ class SiteLinksForDisplayLookup {
 	/** @var EntityLookup */
 	private $entityLookup;
 
+	/** @var UsageAccumulator */
+	private $usageAccumulator;
+
+	/** @var HookContainer */
+	private $hookContainer;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -32,17 +41,23 @@ class SiteLinksForDisplayLookup {
 	/**
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param EntityLookup $entityLookup
+	 * @param UsageAccumulator $usageAccumulator
+	 * @param HookContainer $hookContainer
 	 * @param LoggerInterface $logger
 	 * @param string $siteId The global site ID for the local wiki
 	 */
 	public function __construct(
 		SiteLinkLookup $siteLinkLookup,
 		EntityLookup $entityLookup,
+		UsageAccumulator $usageAccumulator,
+		HookContainer $hookContainer,
 		LoggerInterface $logger,
 		string $siteId
 	) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->entityLookup = $entityLookup;
+		$this->usageAccumulator = $usageAccumulator;
+		$this->hookContainer = $hookContainer;
 		$this->logger = $logger;
 		$this->siteId = $siteId;
 	}
@@ -86,6 +101,18 @@ class SiteLinksForDisplayLookup {
 		}
 
 		'@phan-var \Wikibase\DataModel\Entity\Item $item';
-		return $item->getSiteLinkList()->toArray();
+		return $this->getSiteLinksForItem( $item );
+	}
+
+	private function getSiteLinksForItem( Item $item ) {
+		$siteLinks = $item->getSiteLinkList()->toArray();
+
+		$this->hookContainer->run( 'WikibaseClientSiteLinksForItem', [
+			$item,
+			&$siteLinks,
+			$this->usageAccumulator
+		] );
+
+		return $siteLinks;
 	}
 }

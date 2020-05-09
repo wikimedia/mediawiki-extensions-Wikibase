@@ -126,6 +126,7 @@ class OtherProjectsSidebarGenerator {
 	private function runHook( ItemId $itemId, array $sidebar ) {
 		$newSidebar = $sidebar;
 
+		// Deprecated, use WikibaseClientSiteLinksForItem instead
 		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [
 			$itemId, &$newSidebar, $this->siteIdsToOutput, $this->usageAccumulator
 		] );
