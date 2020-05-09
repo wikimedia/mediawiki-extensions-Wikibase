@@ -1,13 +1,12 @@
 <?php
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\Hooks;
 
 use ParserOutput;
 use Site;
 use SiteLookup;
 use Title;
-use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
-use Wikibase\Client\Hooks\NoLangLinkHandler;
+use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;

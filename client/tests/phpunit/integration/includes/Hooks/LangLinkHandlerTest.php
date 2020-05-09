@@ -1,15 +1,15 @@
 <?php
 
-namespace Wikibase\Client\Tests\Integration;
+namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
 use ParserOutput;
 use Site;
 use TestSites;
 use Title;
+use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
-use Wikibase\Client\LangLinkHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,7 +17,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers \Wikibase\Client\LangLinkHandler
+ * @covers \Wikibase\Client\Hooks\LangLinkHandler
  *
  * @group WikibaseClient
  * @group Wikibase

@@ -41,6 +41,7 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\DataAccess\ParserFunctions\StatementGroupRendererFactory;
 use Wikibase\Client\DataAccess\ReferenceFormatterFactory;
 use Wikibase\Client\DataAccess\SnaksFinder;
+use Wikibase\Client\Hooks\LangLinkHandler;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
 use Wikibase\Client\Hooks\ParserFunctionRegistrant;

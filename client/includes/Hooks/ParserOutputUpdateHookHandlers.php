@@ -6,7 +6,6 @@ use Content;
 use ParserOutput;
 use StubUserLang;
 use Title;
-use Wikibase\Client\LangLinkHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\WikibaseClient;
