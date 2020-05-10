@@ -147,6 +147,7 @@ return call_user_func( function() {
 				'dataValues.values',
 				'jquery.valueview.ExpertStore',
 				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.experts.MultilineTextValue',
 				'jquery.valueview.experts.UnDeserializableValue',
 				'jquery.valueview.experts.UnsupportedValue',
 				'dataValues',

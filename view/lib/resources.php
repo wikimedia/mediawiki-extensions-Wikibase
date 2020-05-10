@@ -1116,6 +1116,23 @@ return call_user_func( function() {
 			],
 		],
 
+		'jquery.valueview.experts.MultilineTextValue' => $wikibaseDatavaluesValueviewSrcPaths + [
+			'scripts' => [
+				'experts/MultilineTextValue.js',
+				'../lib/jquery/jquery.focusAt.js',
+			],
+			'styles' => [
+				'experts/MultilineTextValue.css',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.inputautoexpand',
+				'jquery.valueview.experts',
+				'jquery.valueview.Expert',
+				"ext.codeEditor.ace",
+			],
+		],
+
 		'jquery.valueview.experts.TimeInput' => $wikibaseDatavaluesValueviewSrcPaths + [
 			'scripts' => [
 				'experts/TimeInput.js',

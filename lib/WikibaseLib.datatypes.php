@@ -22,6 +22,7 @@ return [
 	'PT:monolingualtext'   => [ 'value-type' => 'monolingualtext' ],
 	'PT:quantity'          => [ 'value-type' => 'quantity' ],
 	'PT:string'            => [ 'value-type' => 'string' ],
+	'PT:multilinetext'     => [ 'value-type' => 'string' ],
 	'PT:tabular-data'      => [ 'value-type' => 'string' ],
 	'PT:entity-schema'     => [ 'value-type' => 'string' ],
 	'PT:time'              => [ 'value-type' => 'time' ],

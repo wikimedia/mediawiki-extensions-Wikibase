@@ -76,6 +76,14 @@
 		parserStore.registerDataTypeParser(
 			util.inherit(
 				ApiBasedValueParser,
+				{ API_VALUE_PARSER_ID: 'multilinetext' }
+			),
+			'multilinetext'
+		);
+
+		parserStore.registerDataTypeParser(
+			util.inherit(
+				ApiBasedValueParser,
 				{ API_VALUE_PARSER_ID: 'external-id' }
 			),
 			'external-id'

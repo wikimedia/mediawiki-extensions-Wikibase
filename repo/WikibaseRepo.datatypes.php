@@ -60,6 +60,7 @@ use Wikibase\Repo\Parsers\EntityIdValueParser;
 use Wikibase\Repo\Parsers\MediaWikiNumberUnlocalizer;
 use Wikibase\Repo\Parsers\MonolingualTextParser;
 use Wikibase\Repo\Parsers\TimeParserFactory;
+use Wikibase\Repo\Parsers\WikibaseMultilineTextValueNormalizer;
 use Wikibase\Repo\Parsers\WikibaseStringValueNormalizer;
 use Wikibase\Repo\Rdf\Values\GeoShapeRdfBuilder;
 use Wikibase\Repo\Rdf\Values\TabularDataRdfBuilder;
@@ -291,6 +292,34 @@ return call_user_func( function() {
 				return new LiteralValueRdfBuilder( null, null );
 			},
 			'search-index-data-formatter-callback' => function ( StringValue $value ) {
+				return $value->getValue();
+			},
+		],
+		'PT:multilinetext' => [
+			'expert-module' => 'jquery.valueview.experts.MultilineTextValue',
+			'validator-factory-callback' => function() {
+				$factory = WikibaseRepo::getDefaultValidatorBuilders();
+				return $factory->buildMultilineTextValidators();
+			},
+			'parser-factory-callback' => function( ParserOptions $options ) {
+				$normalizer = WikibaseRepo::getDefaultInstance()->getStringNormalizer();
+				return new StringParser( new WikibaseMultilineTextValueNormalizer( $normalizer ) );
+			},
+			'formatter-factory-callback' => function( $format, FormatterOptions $options ) {
+				$factory = WikibaseRepo::getDefaultValueFormatterBuilders();
+				return $factory->newMultilineTextFormatter( $format, $options );
+			},
+			'rdf-builder-factory-callback' => function (
+				$flags,
+				RdfVocabulary $vocab,
+				RdfWriter $writer,
+				EntityMentionListener $tracker,
+				DedupeBag $dedupe
+			) {
+				return new LiteralValueRdfBuilder( null, null );
+			},
+			'search-index-data-formatter-callback' => function ( StringValue $value ) {
+				// TODO: MultilineTextValue ?
 				return $value->getValue();
 			},
 		],

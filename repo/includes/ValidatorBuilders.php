@@ -478,6 +478,19 @@ class ValidatorBuilders {
 	}
 
 	/**
+	 * @param int $maxLength
+	 * @return ValueValidator[]
+	 */
+	public function buildMultilineTextValidators( $maxLength = 1024*1024 ) {
+		return [
+			new TypeValidator( DataValue::class ),
+			new DataValueValidator(
+				new StringLengthValidator(1, $maxLength, 'mb_strlen')
+			)
+		];
+	}
+
+	/**
 	 * @return ValueValidator[]
 	 */
 	public function buildQuantityValidators() {

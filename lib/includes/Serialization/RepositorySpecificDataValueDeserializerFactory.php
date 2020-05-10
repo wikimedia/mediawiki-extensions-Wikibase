@@ -59,6 +59,7 @@ class RepositorySpecificDataValueDeserializerFactory {
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
 			'globecoordinate' => GlobeCoordinateValue::class,
+//			'multilinetext' => StringValue::class,
 			'monolingualtext' => MonolingualTextValue::class,
 			'quantity' => QuantityValue::class,
 			'time' => TimeValue::class,

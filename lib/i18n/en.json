@@ -79,6 +79,7 @@
 	"wikibase-validator-no-validators": "Forbidden",
 	"datatypes-type-string": "String",
 	"datatypes-type-quantity": "Quantity",
+	"datatypes-type-multilinetext": "Multiline text",
 	"datatypes-type-monolingualtext": "Monolingual text",
 	"datatypes-type-multilingualtext": "Multilingual text",
 	"datatypes-type-number": "Number",

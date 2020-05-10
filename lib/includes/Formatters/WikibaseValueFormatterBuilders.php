@@ -337,6 +337,24 @@ class WikibaseValueFormatterBuilders {
 	 *
 	 * @return ValueFormatter
 	 */
+	public function newMultilineTextFormatter( $format, FormatterOptions $options ) {
+		switch ( $this->snakFormat->getBaseFormat( $format ) ) {
+			case SnakFormatter::FORMAT_HTML:
+				return new HtmlMultilineTextFormatter( $options );
+			case SnakFormatter::FORMAT_WIKI:
+				// Use the string formatter without escaping!
+				return new StringFormatter( $options );
+			default:
+				return $this->newStringFormatter( $format, $options );
+		}
+	}
+
+	/**
+	 * @param string $format The desired target format, see SnakFormatter::FORMAT_XXX
+	 * @param FormatterOptions $options
+	 *
+	 * @return ValueFormatter
+	 */
 	public function newCommonsMediaFormatter( $format, FormatterOptions $options ) {
 		if ( $this->snakFormat->isPossibleFormat( SnakFormatter::FORMAT_HTML_VERBOSE, $format ) ) {
 			return new CommonsInlineImageFormatter(
