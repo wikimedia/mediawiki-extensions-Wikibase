@@ -174,5 +174,10 @@
 	"wikibase-client-data-bridge-reference-note": "Editing references will be possible on {{WBREPONAME}} after saving",
 	"wikibase-client-data-bridge-thank-you-head": "Thank you for your edit!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "You can edit references for this property on {{WBREPONAME}} by clicking the button below.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Edit reference on {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Edit reference on {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "You are not logged in",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "You can publish your changes without logging in. Your IP address will be recorded in the page's edit history. You can also log back in and retry publishing.",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Publish without logging in",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Log in (Opens in a new tab)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Keep editing"
 }

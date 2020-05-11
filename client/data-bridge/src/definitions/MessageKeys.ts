@@ -57,6 +57,11 @@ enum MessageKeys {
 	THANK_YOU_HEAD = 'wikibase-client-data-bridge-thank-you-head',
 	THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY = 'wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body',
 	THANK_YOU_EDIT_REFERENCE_ON_REPO_BUTTON = 'wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button',
+	SAVING_ERROR_ASSERTUSER_HEADING = 'wikibase-client-data-bridge-saving-error-assertuser-heading',
+	SAVING_ERROR_ASSERTUSER_MESSAGE = 'wikibase-client-data-bridge-saving-error-assertuser-message',
+	SAVING_ERROR_ASSERTUSER_PROCEED = 'wikibase-client-data-bridge-saving-error-assertuser-proceed',
+	SAVING_ERROR_ASSERTUSER_LOGIN = 'wikibase-client-data-bridge-saving-error-assertuser-login',
+	SAVING_ERROR_ASSERTUSER_KEEP_EDITING = 'wikibase-client-data-bridge-saving-error-assertuser-editing',
 }
 
 export default MessageKeys;

@@ -188,5 +188,10 @@
 	"wikibase-client-data-bridge-reference-note": "Message assuring the user they will be able to edit references after saving",
 	"wikibase-client-data-bridge-thank-you-head": "Heading of a message displayed when the user has successfully saved a change via Wikidata Bridge.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Suggestion for the user that they could edit references directly on Wikidata next. The button below has the label {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button}}.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Label of a button sending the user to the Wikibase repository to edit references, shown after {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body}}."
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Label of a button sending the user to the Wikibase repository to edit references, shown after {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body}}.",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Heading of a message displayed when an edit could not be saved because the user logged out.",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Part of an error page displayed when an edit could not be saved because the user logged out.",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Label of a button to try saving an edit again after an assert user error occurred.",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Label of a button to open a new login window after an assert user error occurred.",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Label of a button to go back to the editing screen after an assert user error occurred."
 }

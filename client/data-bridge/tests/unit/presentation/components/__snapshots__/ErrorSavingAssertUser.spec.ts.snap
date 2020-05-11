@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorSavingAssertUser matches the snapshot 1`] = `
+<div
+  class="wb-db-error-saving-assertuser"
+>
+  <h2
+    class="wb-db-error-saving-assertuser__heading"
+  >
+    
+		Test &lt;abbr&gt;HTML&lt;/abbr&gt;.
+	
+  </h2>
+   
+  <iconmessagebox-stub
+    class="wb-db-error-saving-assertuser__message"
+    type="warning"
+  >
+    
+		Test &lt;abbr&gt;HTML&lt;/abbr&gt;.
+	
+  </iconmessagebox-stub>
+   
+  <div
+    class="wb-db-error-saving-assertuser__buttons"
+  >
+    <eventemittingbutton-stub
+      class="wb-db-error-saving-assertuser__proceed"
+      message="Test <abbr>HTML</abbr>."
+      preventdefault="true"
+      size="M"
+      type="primaryProgressive"
+    />
+     
+    <eventemittingbutton-stub
+      class="wb-db-error-saving-assertuser__login"
+      href="https://data-bridge.test/Login"
+      message="Test <abbr>HTML</abbr>."
+      newtab="true"
+      size="M"
+      type="neutral"
+    />
+     
+    <eventemittingbutton-stub
+      class="wb-db-error-saving-assertuser__back"
+      message="Test <abbr>HTML</abbr>."
+      preventdefault="true"
+      size="M"
+      type="link"
+    />
+  </div>
+</div>
+`;
