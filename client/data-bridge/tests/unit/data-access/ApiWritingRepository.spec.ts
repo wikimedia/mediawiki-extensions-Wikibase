@@ -2,6 +2,9 @@ import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import { mockApi } from '../../util/mocks';
+import ApiErrors from '@/data-access/error/ApiErrors';
+import SavingError from '@/data-access/error/SavingError';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 
 describe( 'ApiWritingRepository', () => {
 	it( 'returns well formatted answer as expected', () => {
@@ -301,8 +304,8 @@ describe( 'ApiWritingRepository', () => {
 	} );
 
 	describe( 'if there is a problem', () => {
-		it( 'bubbles errors coming from the ApiCore', () => {
-			const error = new Error( 'nosuchrevid' );
+		it( 'bubbles non ApiErrors errors coming from the ApiCore', () => {
+			const error = new Error( 'network timed out' );
 			const mockWritingApi1 = mockApi( null, error );
 			const toBeWrittenEntity = {
 				id: 'Q123',
@@ -313,6 +316,34 @@ describe( 'ApiWritingRepository', () => {
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
 				.rejects
 				.toBe( error );
+		} );
+
+		it( 'repackages ApiErrors into instances of ApplicationError wrapped into SavingError', () => {
+			const assertAnonFailedError = { code: 'assertanonfailed' };
+			const assertUserFailedError = { code: 'assertuserfailed' };
+			const badTagsError = { code: 'badtags' };
+			const apiErrors = new ApiErrors( [
+				assertAnonFailedError,
+				assertUserFailedError,
+				badTagsError,
+			] );
+			const mockWritingApi1 = mockApi( null, apiErrors );
+			const toBeWrittenEntity = {
+				id: 'Q123',
+				labels: { de: { language: 'de', value: 'test' } },
+				statements: {},
+			};
+			const entityWriter = new ApiWritingRepository( mockWritingApi1 );
+
+			const expectedError = new SavingError( [
+				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
+				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
+				{ type: ErrorTypes.SAVING_FAILED, info: badTagsError },
+			] );
+
+			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
+				.rejects
+				.toStrictEqual( expectedError );
 		} );
 	} );
 } );

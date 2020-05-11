@@ -3,6 +3,9 @@ import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import StatementMap from '@/datamodel/StatementMap';
 import { WritingApi } from '@/definitions/data-access/Api';
+import ApiErrors from '@/data-access/error/ApiErrors';
+import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
+import SavingError from '@/data-access/error/SavingError';
 
 interface ApiResponseEntity {
 	id: string;
@@ -50,10 +53,21 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 				( response as ResponseSuccess ).entity.lastrevid,
 			);
 		},
-		( error ) => {
-			// Specialized error handling should be added here
+		( error: Error ): never => {
+			if ( !( error instanceof ApiErrors ) ) {
+				throw error;
+			}
 
-			throw error;
+			throw new SavingError( error.errors.map( ( apiError ): ApplicationError => {
+				switch ( apiError.code ) {
+					case 'assertanonfailed':
+						return { type: ErrorTypes.ASSERT_ANON_FAILED, info: apiError };
+					case 'assertuserfailed':
+						return { type: ErrorTypes.ASSERT_USER_FAILED, info: apiError };
+					default:
+						return { type: ErrorTypes.SAVING_FAILED, info: apiError };
+				}
+			} ) );
 		} );
 	}
 }
