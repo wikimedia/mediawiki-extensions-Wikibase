@@ -64,5 +64,6 @@
 	"pageswithbadges": "Pàjine co insegne",
 	"wikibase-otherprojects": "In altri projeti",
 	"notification-header-page-connection": "Ła pàjina <strong>$3</strong> ła xé {{GENDER:$2|stà conetesta}} {{PLURAL:$4|-1=a on ełemento {{WBREPONAME}}|a l'ełemento {{WBREPONAME}} $4}}, andove i dati rełevanti so ła voxe i połe esare muciai.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> e {{PLURAL:$4|n'altra pàjina|altre $4 pàjine|100=99+ altre pàjine}} łe xe {{GENDER:$2|stae coneteste}} a ełementi {{WBREPONAME}}, andove i dati riłevanti i połe èsar muciai.",
 	"notification-link-text-view-item": "{{GENDER:$1|Varda}} ełemento"
 }

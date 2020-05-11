@@ -127,6 +127,7 @@
 	"wikibase-client-data-bridge-edit-decision-heading": "Seleziona il tipo di modifica che hai fatto:",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ho corretto</strong> un valore sbagliato",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ho aggiornato</strong> un valore obsoleto",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Modifica senza effettuare l'accesso",
 	"wikibase-client-data-bridge-saving-error-heading": "Impossibile salvare le modifiche",
 	"wikibase-client-data-bridge-unknown-error-heading": "Qualcosa è andato storto",
 	"wikibase-client-data-bridge-error-reload-bridge": "Ricarica",

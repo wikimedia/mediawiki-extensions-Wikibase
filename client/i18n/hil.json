@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Pare Mo",
-			"Redhotchili23"
+			"Redhotchili23",
+			"Xerxesbcd"
 		]
 	},
 	"wikibase-comment-update": "Nabag·o ang {{WBREPONAME}}",
@@ -10,5 +11,8 @@
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",
 	"wikibase-rc-wikibase-edit-title": "liwaton",
-	"wikibase-otherprojects": "sa ibang proyekto"
+	"wikibase-otherprojects": "sa ibang proyekto",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Wala ka naka log-in",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Bag-uhon ang dokumento nga wala naka log-in",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "mag log-in o mag intra"
 }

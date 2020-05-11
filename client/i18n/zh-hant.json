@@ -155,6 +155,7 @@
 	"wikibase-client-data-bridge-edit-decision-update-description": "之前的值曾是正確的但現已過時。",
 	"wikibase-client-data-bridge-references-heading": "參考",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "您尚未登入",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>警告</strong>：您尚未登入。若您進行任何編輯，您的 IP 位址將會被公開。若您<strong>登入</strong>或<strong>建立帳號</strong>，您的編輯將會以您的使用者名稱標示，並能擁有另外的益處。",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "不登入編輯",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "登入或註冊",
 	"wikibase-client-data-bridge-license-heading": "使用與許可",

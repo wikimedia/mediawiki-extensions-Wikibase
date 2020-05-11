@@ -48,7 +48,7 @@
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "他言語の表示",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-configure-link-label": "設定",
 	"wikibase-setting-entitytermsview-showEntitytermslistview": "ページ読み込み時に自分のすべての言語でラベル、別名、説明を表示する",
-	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "利用者のインターフェイス言語以外の言語も、利用者ページの[[mw:Special:MyLanguage/Extension:Babel|Babel 拡張機能]]構文を使って設定することができます。",
+	"wikibase-setting-entitytermsview-showEntitytermslistview-help": "利用者のインターフェイス言語以外の言語も、利用者ページの[[mw:Special:MyLanguage/Extension:Babel|Babel 拡張機能]]構文を使って表示言語に設定することができます。",
 	"wikibase-entitytermsforlanguagelistview-aliases": "別名",
 	"wikibase-entitytermsforlanguagelistview-description": "説明",
 	"wikibase-entitytermsforlanguagelistview-label": "ラベル",

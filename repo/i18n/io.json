@@ -52,6 +52,7 @@
 	"wikibase-setsitelink-label": "Ligilo a retsituo:",
 	"wikibase-modifyentity-id": "Identifiko-nombro (ID):",
 	"wikibase-modifyterm-language": "Linguala kodexo:",
+	"wikibase-itemmerge-permissiondenied": "Nepermisata.",
 	"special-redirectentity": "Ridirektar ento",
 	"wikibase-entity-summary-undo": "Desfacar revizo $3 da [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|skribar mesajo]])",
 	"wikibase-noentity": "Ca ento ne existas. Vu povas [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} searchar l'etiketi asociita] por deskovrar ube ol povas renkontresar."

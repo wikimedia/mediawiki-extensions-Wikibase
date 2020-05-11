@@ -12,6 +12,7 @@
 	"wikibase-deletedentity-property": "Probbietà scangellate",
 	"wikibase-deletedentity-query": "Inderrogazione scangellate",
 	"wikibase-error-unexpected": "Errore: $1.",
+	"wikibase-error-unknown": "Ave assute 'n'errore.",
 	"wikibase-error-save-generic": "Ha assute 'n'errore mendre ste reggistramme.",
 	"wikibase-error-remove-generic": "Ha assute 'n'errore mendre ste facemme 'na scangellazione.",
 	"wikibase-error-save-connection": "Ha assute 'n'errore de connessione mendre ste reggistramme. Pe piacere condrolle 'a connessione Indernétte toje.",
@@ -121,6 +122,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Ccrejate 'n'endità nove",
 	"wikibase-entity-summary-wbeditentity-update": "Cangiate 'n'endità",
 	"wikibase-entity-summary-wbeditentity-override": "Sdevacate n'endità",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Cangiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Cangiate etichette, descrizione e/o alias jndr'à $3 {{PLURAL:$3|lènghe}}, e otre vanne",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Cangiate etichette, descrizione e/o alias jndr'à {{#commaseparatedlist: $3}}, e otre vanne",
 	"wikibase-entity-summary-wbsetreference": "'Mboste 'nu referimende",
 	"wikibase-entity-summary-wbsetreference-add": "Aggiunde 'nu referimende sus a richieste",
 	"wikibase-entity-summary-wbsetreference-set": "Cangiate 'u referimende sus a richieste",
@@ -180,5 +185,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Ccrejate 'na probbietà nove",
 	"wikibase-property-summary-wbeditentity-update": "Cangiate 'na probbietà",
 	"wikibase-property-summary-wbeditentity-override": "Sdevacate 'na probbietà",
-	"wikibase-property-summary-special-create-property": "Ccrejate 'na probbietà [$2] cu {{PLURAL:$1|'nu valore|valore}}"
+	"wikibase-property-summary-special-create-property": "Ccrejate 'na probbietà [$2] cu {{PLURAL:$1|'nu valore|valore}}",
+	"wikibase-reference-formatter-snak-retrieved": "Pigghiate $1"
 }

@@ -151,6 +151,7 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Giriş yapmadınız",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Uyarı:</strong> Giriş yapmadınız. Herhangi bir düzenleme yaparsanız IP adresiniz herkes tarafından görülebilir. <strong>Giriş</strong> veya <strong>bir hesap oluşturursanız</strong>, düzenlemeleriniz diğer avantajların yanı sıra kullanıcı adınızla da ilişkilendirilir.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Giriş yapmadan düzenle",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Oturum açın veya kayıt olun",
 	"wikibase-client-data-bridge-license-heading": "Kullanım ve lisans",
 	"wikibase-client-data-bridge-license-body": "<p>Bu değerin değiştirilmesi, {{WBREPONAME}} ve muhtemelen diğer dillerde wikiler üzerinde de değiştirecektir.</p>\n<p>\"{{int:$1}}\" düğmesini tıklayarak, [$2 kullanım şartlarını] kabul etmiş olursunuz ve [$3 $4] altındaki katkınızı geri dönülmez şekilde bırakmayı kabul edersiniz.</p>",
 	"wikibase-client-data-bridge-bailout-heading": "Bunun yerine aşağıdakileri yapabilirsiniz:",
