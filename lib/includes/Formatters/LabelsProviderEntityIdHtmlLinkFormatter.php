@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Formatters;
 
 use Html;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -11,7 +10,10 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityExistenceChecker;
+use Wikibase\Lib\Store\EntityRedirectChecker;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 
 /**
  * Formats entity IDs by generating an HTML link to the corresponding page title.
@@ -23,9 +25,24 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityExistenceChecker
 	 */
-	protected $entityTitleLookup;
+	protected $entityExistenceChecker;
+
+	/**
+	 * @var EntityTitleTextLookup
+	 */
+	protected $entityTitleTextLookup;
+
+	/**
+	 * @var EntityUrlLookup
+	 */
+	protected $entityUrlLookup;
+
+	/**
+	 * @var EntityRedirectChecker
+	 */
+	protected $entityRedirectChecker;
 
 	/**
 	 * @var LanguageFallbackIndicator
@@ -39,14 +56,19 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
-		EntityTitleLookup $entityTitleLookup,
-		LanguageNameLookup $languageNameLookup
+		LanguageNameLookup $languageNameLookup,
+		EntityExistenceChecker $entityExistenceChecker,
+		EntityTitleTextLookup $entityTitleTextLookup,
+		EntityUrlLookup $entityUrlLookup,
+		EntityRedirectChecker $entityRedirectChecker
 	) {
 		parent::__construct( $labelDescriptionLookup );
-
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackIndicator = new LanguageFallbackIndicator( $languageNameLookup );
 		$this->nonExistingFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
+		$this->entityExistenceChecker = $entityExistenceChecker;
+		$this->entityTitleTextLookup = $entityTitleTextLookup;
+		$this->entityUrlLookup = $entityUrlLookup;
+		$this->entityRedirectChecker = $entityRedirectChecker;
 	}
 
 	/**
@@ -57,24 +79,18 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	 * @return string HTML
 	 */
 	public function formatEntityId( EntityId $entityId ) {
-		$title = $this->entityTitleLookup->getTitleForId( $entityId );
-
-		if ( $title === null ) {
-			return $this->nonExistingFormatter->formatEntityId( $entityId );
-		}
-
 		$term = $this->lookupEntityLabel( $entityId );
 
-		// We can skip the potentially expensive isKnown() check if we found a term.
+		// We can skip the potentially expensive exists() check if we found a term.
 		if ( $term !== null ) {
 			$label = $term->getText();
-		} elseif ( !$title->isKnown() ) {
+		} elseif ( !$this->entityExistenceChecker->exists( $entityId ) ) {
 			return $this->nonExistingFormatter->formatEntityId( $entityId );
 		} else {
 			$label = $entityId->getSerialization();
 		}
 
-		$html = Html::element( 'a', $this->getAttributes( $title, $term ), $label );
+		$html = Html::element( 'a', $this->getAttributes( $entityId, $term ), $label );
 
 		if ( $term instanceof TermFallback ) {
 			$html .= $this->languageFallbackIndicator->getHtml( $term );
@@ -84,15 +100,15 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	}
 
 	/**
-	 * @param Title $title
+	 * @param EntityId $entityId
 	 * @param Term|null $term
 	 *
 	 * @return string[]
 	 */
-	private function getAttributes( Title $title, Term $term = null ) {
+	private function getAttributes( EntityId $entityId, Term $term = null ) {
 		$attributes = [
-			'title' => $title->getPrefixedText(),
-			'href' => $title->isLocal() ? $title->getLocalURL() : $title->getFullURL()
+			'title' => $this->entityTitleTextLookup->getPrefixedText( $entityId ),
+			'href' => $this->entityUrlLookup->getLinkUrl( $entityId )
 		];
 
 		if ( $term instanceof TermFallback
@@ -102,7 +118,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 			// TODO: Mark as RTL/LTR if appropriate.
 		}
 
-		if ( $title->isLocal() && $title->isRedirect() ) {
+		if ( $this->entityRedirectChecker->isRedirect( $entityId ) ) {
 			$attributes['class'] = 'mw-redirect';
 		}
 

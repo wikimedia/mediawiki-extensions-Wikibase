@@ -19,8 +19,10 @@ class TitleLookupBasedEntityExistenceChecker implements EntityExistenceChecker {
 		$this->titleLookup = $titleLookup;
 	}
 
-	public function isDeleted( EntityId $id ): bool {
-		return !$this->titleLookup->getTitleForId( $id )->isKnown();
+	public function exists( EntityId $id ): bool {
+		$title = $this->titleLookup->getTitleForId( $id );
+
+		return $title !== null && $title->isKnown();
 	}
 
 }

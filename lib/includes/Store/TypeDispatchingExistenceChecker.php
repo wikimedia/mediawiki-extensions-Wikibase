@@ -21,9 +21,8 @@ class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
 		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultExistenceChecker );
 	}
 
-	public function isDeleted( EntityId $id ): bool {
+	public function exists( EntityId $id ): bool {
 		return $this->serviceDispatcher->getServiceForType( $id->getEntityType() )
-			->isDeleted( $id );
+			->exists( $id );
 	}
-
 }

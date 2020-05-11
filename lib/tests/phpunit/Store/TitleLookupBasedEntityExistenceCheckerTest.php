@@ -19,13 +19,13 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 
 	/**
-	 * @dataProvider boolProvider
+	 * @dataProvider existenceProvider
 	 */
-	public function testIsDeleted( bool $isKnown ) {
+	public function testExists( bool $isNull, bool $isKnown, bool $expected ) {
 		$entityId = new ItemId( 'Q123' );
 
-		$title = $this->createMock( Title::class );
-		$title->expects( $this->once() )
+		$mockTitle = $this->createMock( Title::class );
+		$mockTitle->expects( $this->atMost( 1 ) )
 			->method( 'isKnown' )
 			->willReturn( $isKnown );
 
@@ -33,17 +33,34 @@ class TitleLookupBasedEntityExistenceCheckerTest extends TestCase {
 		$titleLookup->expects( $this->once() )
 			->method( 'getTitleForId' )
 			->with( $entityId )
-			->willReturn( $title );
+			->willReturn( $isNull ? null : $mockTitle );
 
+		$result = ( new TitleLookupBasedEntityExistenceChecker( $titleLookup ) )
+			->exists( $entityId );
 		$this->assertSame(
-			!$isKnown,
-			( new TitleLookupBasedEntityExistenceChecker( $titleLookup ) )
-				->isDeleted( $entityId )
+			$expected,
+			$result
 		);
 	}
 
-	public function boolProvider() {
-		return [ [ true ], [ false ] ];
+	public function existenceProvider() {
+		return [
+			'title is null' => [
+				'isNull' => true,
+				'isKnown' => false,
+				'expected' => false
+			],
+			'title is not null and is known' => [
+				'isNull' => false,
+				'isKnown' => true,
+				'expected' => true
+			],
+			'title is not null and not known' => [
+				'isNull' => false,
+				'isKnown' => false,
+				'expected' => false
+			]
+		];
 	}
 
 }
