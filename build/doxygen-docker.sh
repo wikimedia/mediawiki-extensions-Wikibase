@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# Run Doxygen in docker using the same docker image as CI
-# The 'latest' image ius used. A changelog can be found at https://gerrit.wikimedia.org/g/integration/config/+/master/dockerfiles/doxygen/changelog
+# Run Doxygen in docker using the same docker image as WMF CI
+# The 'latest' image is used. A changelog can be found at https://gerrit.wikimedia.org/g/integration/config/+/master/dockerfiles/doxygen/changelog
 # The 'latest' image tag may differ slightly from the version being used in CI for Wikibase at any given time.
 #
 # This script can be run using a composer script. `composer doxygen-docker`
 # The output of the docs build can be found in docs/php
 
-echo "This script delibrety hides some Doxygen errors."
+echo "This script deliberately hides some Doxygen errors."
 
-# GREP #1, Ignore PHP file unknonwn commands as post of these are due to PHP namepsaces being used in comments
+# GREP #1, Ignore PHP file unknown commands as most of these are due to PHP namepsaces being used in comments
 # GREP #2, Ignore PHP file comments with {@link CLASS} as this still generates the correct link in doxygen and
-#          and the @link is needed for clickable links in IDEsStatementGroupRenderer
+#          and the @link is needed for clickable links in IDEs
 # GREP #3, Ignore erorrs caused by @var annotations without declaring the name of the var (only the type)
 # GREP #4, Ignore doxygen trying to parse mediawiki parser functions like {{#property}} which we have in docs
 docker run --rm -v /"$(pwd)"://src --user $(id -u):$(id -g) --entrypoint=doxygen --workdir=//src docker-registry.wikimedia.org/releng/doxygen:latest \
