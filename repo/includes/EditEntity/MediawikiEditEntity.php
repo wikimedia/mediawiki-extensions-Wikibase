@@ -411,8 +411,7 @@ class MediawikiEditEntity implements EditEntity {
 		$latestRev = $this->getLatestRevision();
 
 		if ( !$latestRev ) {
-			wfLogWarning( 'Failed to load latest revision of entity ' . $newEntity->getId() . '! '
-				. 'This may indicate entries missing from thw wb_entities_per_page table.' );
+			wfLogWarning( 'Failed to load latest revision of entity ' . $newEntity->getId() . '!' );
 			return null;
 		}
 
