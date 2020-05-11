@@ -253,8 +253,8 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		$result = $this->parseWikitextToHtml( '{{#statements:P625|from=Q32489}}' );
 
 		$text = $result->getText( [ 'unwrap' => true ] );
-		$this->assertContains( 'class="mw-kartographer-maplink"', $text );
-		$this->assertNotContains( '&lt;maplink', $text );
+		$this->assertStringContainsString( 'class="mw-kartographer-maplink"', $text );
+		$this->assertStringNotContainsString( '&lt;maplink', $text );
 	}
 
 	/**
