@@ -18,6 +18,7 @@ EXCLUDE                = docs/php vendor
 
 EXCLUDE_PATTERNS       = */node_modules/* \
                          */lib/resources/*/*.md \
+                         */build/federated-properties/*.md \
                          */view/lib/wikibase-data-model/*.md \
                          */view/lib/wikibase-data-values/*.md \
                          */view/lib/wikibase-data-values-value-view/*.md \
