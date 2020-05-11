@@ -278,7 +278,7 @@
 	"special-setsitelink": "{{doc-special|SetSiteLink}}\nThe special page allows the user to set a sitelink for an item.",
 	"wikibase-setsitelink-introfull": "Intro text when a sitelink is to be set. Parameters:\n* $1 - the ID that links to the item\n* $2 - the site id the sitelink is to be set to",
 	"wikibase-setsitelink-intro": "A short text at the top of the page that allows users to set the sitelink of an item, explaining the form.",
-	"wikibase-setsitelink-intro-badges": "An addition to the the text at the top of the page that allows users to set the sitelink of an item, explaining the badges input.",
+	"wikibase-setsitelink-intro-badges": "An addition to the text at the top of the page that allows users to set the sitelink of an item, explaining the badges input.",
 	"wikibase-setsitelink-site": "Label for the input field to type the site id to set the sitelink to.",
 	"wikibase-setsitelink-label": "Label for the input field to type the sitelink to set the item to.",
 	"wikibase-setsitelink-badges": "Label for the input field to type the badges to set the item to.\n{{Identical|Badge}}",
