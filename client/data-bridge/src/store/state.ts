@@ -19,4 +19,5 @@ export class BaseState implements Application {
 	public targetProperty = '';
 	public pageUrl = '';
 	public showWarningAnonymousEdit = false;
+	public assertUserWhenSaving = true;
 }

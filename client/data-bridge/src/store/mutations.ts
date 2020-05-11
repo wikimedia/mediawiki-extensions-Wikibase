@@ -66,6 +66,10 @@ export class RootMutations extends Mutations<Application> {
 		this.state.showWarningAnonymousEdit = showWarningAnonymousEdit;
 	}
 
+	public setAssertUserWhenSaving( assertUserWhenSaving: boolean ): void {
+		this.state.assertUserWhenSaving = assertUserWhenSaving;
+	}
+
 	public reset(): void {
 		// this.state already has all the properties, and Object.assign() invokes setters, so this is reactive
 		Object.assign( this.state, new BaseState() );

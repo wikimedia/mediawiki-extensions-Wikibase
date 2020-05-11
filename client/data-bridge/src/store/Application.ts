@@ -23,6 +23,7 @@ interface Application {
 	targetProperty: string;
 	pageUrl: string;
 	showWarningAnonymousEdit: boolean;
+	assertUserWhenSaving: boolean;
 }
 
 export default Application;

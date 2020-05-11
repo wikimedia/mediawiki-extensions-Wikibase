@@ -387,7 +387,7 @@ describe( 'store/actions', () => {
 					store.dispatch( 'saveBridge' ),
 				).rejects.toBe( rejectError );
 
-				expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, undefined );
+				expect( saveEntity ).toHaveBeenCalledWith( testSet.entity, testSet, true );
 				expect( store.state.applicationErrors.length ).toBeGreaterThan( 0 );
 				expect( getStatementModuleDataValue( state )! ).toStrictEqual( statementAfterInit );
 			} );
@@ -445,7 +445,7 @@ describe( 'store/actions', () => {
 					.statements.P31[ 0 ]
 					.mainsnak.datavalue!.value = newStringValue;
 
-				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, undefined );
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, true );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );
@@ -524,7 +524,7 @@ describe( 'store/actions', () => {
 					},
 				} );
 
-				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, undefined );
+				expect( saveEntity ).toHaveBeenCalledWith( entityChangedByUserInteraction, testSet, true );
 
 				const state = ( store.state as InitializedApplicationState );
 				expect( state.statements.Q42 ).toEqual( saveResponse.entity.statements );

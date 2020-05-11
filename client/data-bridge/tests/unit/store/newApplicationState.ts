@@ -18,6 +18,7 @@ export default function ( fields?: RecursivePartial<InitializedApplicationState>
 		entityTitle: '',
 		originalHref: '',
 		pageTitle: '',
+		assertUserWhenSaving: true,
 	};
 
 	if ( fields !== null ) {

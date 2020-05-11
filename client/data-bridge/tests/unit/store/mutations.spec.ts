@@ -160,6 +160,14 @@ describe( 'root/mutations', () => {
 		expect( state.showWarningAnonymousEdit ).toBe( true );
 	} );
 
+	it( 'sets the assertUserWhenSaving flag', () => {
+		const state: Application = newApplicationState();
+		const mutations = inject( RootMutations, { state } );
+
+		mutations.setAssertUserWhenSaving( false );
+		expect( state.assertUserWhenSaving ).toBe( false );
+	} );
+
 	it( 'resets the root module of the store', () => {
 		const state: Application = newApplicationState( {
 			applicationStatus: ApplicationStatus.SAVING,

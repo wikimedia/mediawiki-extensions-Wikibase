@@ -259,7 +259,10 @@ RootActions
 			throw error;
 		}
 
-		return this.entityModule.dispatch( 'entitySave', { statements: statements[ entityId ] } )
+		return this.entityModule.dispatch( 'entitySave', {
+			statements: statements[ entityId ],
+			assertUser: this.state.assertUserWhenSaving,
+		} )
 			.catch( ( error: Error ) => {
 				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
 				throw error;
@@ -322,6 +325,11 @@ RootActions
 
 	public dismissWarningAnonymousEdit(): Promise<void> {
 		this.commit( 'setShowWarningAnonymousEdit', false );
+		return Promise.resolve();
+	}
+
+	public stopAssertingUserWhenSaving(): Promise<void> {
+		this.commit( 'setAssertUserWhenSaving', false );
 		return Promise.resolve();
 	}
 

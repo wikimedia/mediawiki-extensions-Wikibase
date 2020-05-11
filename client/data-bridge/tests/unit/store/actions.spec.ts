@@ -1082,10 +1082,53 @@ describe( 'root/actions', () => {
 
 			expect( entityModuleDispatch ).toHaveBeenCalledWith(
 				'entitySave',
-				{ statements: statementsState[ entityId ] },
+				{ statements: statementsState[ entityId ], assertUser: true },
 			);
 			expect( purgeTitles.purge ).toHaveBeenCalledWith( [ pageTitle ] );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+		} );
+
+		it( 'takes assertUserWhenSaving = false into account', async () => {
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				entity: {
+					id: 'Q123',
+				},
+				statements: {},
+				assertUserWhenSaving: false,
+			} );
+			const actions = inject( RootActions, {
+				state,
+				commit: jest.fn(),
+				dispatch: jest.fn(),
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles: {
+						purge: jest.fn().mockReturnValue( Promise.resolve() ),
+					},
+				} ),
+			};
+
+			const statementMutationStrategy = jest.fn().mockReturnValue( {} );
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
+
+			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+			await actions.saveBridge();
+
+			expect( entityModuleDispatch ).toHaveBeenCalledWith(
+				'entitySave',
+				{ statements: undefined, assertUser: false },
+			);
 		} );
 
 		it( 'gracefully ignores but tracks problems while purging the page', async () => {
@@ -1442,6 +1485,19 @@ describe( 'root/actions', () => {
 			actions.dismissWarningAnonymousEdit();
 
 			expect( commit ).toHaveBeenCalledWith( 'setShowWarningAnonymousEdit', false );
+		} );
+	} );
+
+	describe( 'stopAssertingUserWhenSaving', () => {
+		it( 'sets assertUserWhenSaving to false', () => {
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				commit,
+			} );
+
+			actions.stopAssertingUserWhenSaving();
+
+			expect( commit ).toHaveBeenCalledWith( 'setAssertUserWhenSaving', false );
 		} );
 	} );
 
