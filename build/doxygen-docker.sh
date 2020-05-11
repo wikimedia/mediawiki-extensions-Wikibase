@@ -14,7 +14,7 @@ echo "This script delibrety hides some Doxygen errors."
 #          and the @link is needed for clickable links in IDEsStatementGroupRenderer
 # GREP #3, Ignore erorrs caused by @var annotations without declaring the name of the var (only the type)
 # GREP #4, Ignore doxygen trying to parse mediawiki parser functions like {{#property}} which we have in docs
-docker run --rm -v /"$(pwd)"://src --entrypoint=doxygen --workdir=//src docker-registry.wikimedia.org/releng/doxygen:latest \
+docker run --rm -v /"$(pwd)"://src --user $(id -u):$(id -g) --entrypoint=doxygen --workdir=//src docker-registry.wikimedia.org/releng/doxygen:latest \
 |& grep -v -w -E -i "php:[0-9]+: warning: Found unknown command" \
 |& grep -v -w -E -i "php:[0-9]+: warning: unable to resolve link to '[a-z]+' for \\\\link command" \
 |& grep -v -w -E -i "php:[0-9]+: warning: documented symbol '[^']+' was not declared or defined" \
