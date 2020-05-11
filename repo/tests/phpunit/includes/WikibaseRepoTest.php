@@ -54,6 +54,7 @@ use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -289,6 +290,11 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 	public function testGetEntityExistenceCheckerReturnType() {
 		$returnValue = $this->getWikibaseRepo()->getEntityExistenceChecker();
 		$this->assertInstanceOf( EntityExistenceChecker::class, $returnValue );
+	}
+
+	public function testGetEntityRedirectCheckerReturnType() {
+		$returnValue = $this->getWikibaseRepo()->getEntityRedirectChecker();
+		$this->assertInstanceOf( EntityRedirectChecker::class, $returnValue );
 	}
 
 	public function testGetEntityIdLookupReturnType() {

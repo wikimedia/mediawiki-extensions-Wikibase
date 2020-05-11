@@ -55,6 +55,7 @@ class EntityTypeDefinitions {
 	public const TITLE_TEXT_LOOKUP_CALLBACK = 'title-text-lookup-callback';
 	public const URL_LOOKUP_CALLBACK = 'url-lookup-callback';
 	public const EXISTENCE_CHECKER_CALLBACK = 'existence-checker-callback';
+	public const REDIRECT_CHECKER_CALLBACK = 'redirect-checker-callback';
 	public const ENTITY_ID_PATTERN = 'entity-id-pattern';
 	public const ENTITY_ID_BUILDER = 'entity-id-builder';
 
