@@ -127,7 +127,7 @@ describe( 'App', () => {
 		DataBridgePage.thankYouScreen.waitForDisplayed();
 	} );
 
-	it.skip( 'can go back from a save error both on desktop and mobile', () => {
+	it( 'can go back from a save error both on desktop and mobile', () => {
 		const title = DataBridgePage.getDummyTitle();
 		const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
 		const stringPropertyExampleValue = 'initialValue';
@@ -183,6 +183,7 @@ describe( 'App', () => {
 		// ensure check that we are on desktop
 		if ( browser.getWindowSize().width <= 500 ) {
 			browser.setWindowSize( 800, 600 );
+			browser.pause( 1000 ); // wait for resize animations to complete
 		}
 
 		assert.ok( DataBridgePage.errorSavingBackButton.isDisplayed() );
@@ -194,6 +195,7 @@ describe( 'App', () => {
 
 		// switch to mobile
 		browser.setWindowSize( 300, 740 );
+		browser.pause( 1000 ); // wait for resize animations to complete
 
 		// show License
 		DataBridgePage.saveButton.click();
