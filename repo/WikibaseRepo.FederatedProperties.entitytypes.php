@@ -13,8 +13,10 @@
  * @license GPL-2.0-or-later
  */
 
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Store\EntityArticleIdNullLookup;
+use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Repo\WikibaseRepo;
 
 return [
@@ -36,6 +38,13 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function() {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiPrefetchingTermLookup();
+		},
+		Def::REDIRECT_CHECKER_CALLBACK => function () {
+			return new class implements EntityRedirectChecker {
+				public function isRedirect( EntityId $id ): bool {
+					return false;
+				}
+			};
 		},
 	]
 ];
