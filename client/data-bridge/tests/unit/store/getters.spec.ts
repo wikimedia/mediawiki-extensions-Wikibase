@@ -373,7 +373,7 @@ describe( 'root/getters', () => {
 		it( 'is false if there is at least one error other than a saving error', () => {
 			const applicationState = newApplicationState( {
 				applicationErrors: [
-					{ type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: { stack: 'test' } },
+					{ type: ErrorTypes.ASSERT_ANON_FAILED, info: { stack: 'test' } },
 					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
 				],
 			} );
@@ -387,7 +387,9 @@ describe( 'root/getters', () => {
 		it( 'is true if there are only saving errors', () => {
 			const applicationState = newApplicationState( {
 				applicationErrors: [
-					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+					{ type: ErrorTypes.ASSERT_NAMED_USER_FAILED, info: { stack: 'test' } },
+					{ type: ErrorTypes.BAD_TAGS, info: { stack: 'test' } },
+					{ type: ErrorTypes.NO_SUCH_REVID, info: { stack: 'test' } },
 					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test2' } },
 				],
 			} );

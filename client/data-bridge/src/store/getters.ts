@@ -13,7 +13,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';
 import { statementModule } from '@/store/statements';
 import errorPropertyNameReplacer from '@/utils/errorPropertyNameReplacer';
-import { ErrorTypes } from '@/definitions/ApplicationError';
+import { ErrorTypes, SavingFailedError } from '@/definitions/ApplicationError';
 
 export class RootGetters extends Getters<Application> {
 
@@ -71,7 +71,12 @@ export class RootGetters extends Getters<Application> {
 	public get isGenericSavingError(): boolean {
 		return this.state.applicationErrors.length > 0 && this.state.applicationErrors.every(
 			( error ) => {
-				return error.type === ErrorTypes.SAVING_FAILED;
+				return [
+					ErrorTypes.SAVING_FAILED,
+					ErrorTypes.BAD_TAGS,
+					ErrorTypes.NO_SUCH_REVID,
+					ErrorTypes.ASSERT_NAMED_USER_FAILED,
+				].includes( ( error as SavingFailedError ).type );
 			},
 		);
 	}

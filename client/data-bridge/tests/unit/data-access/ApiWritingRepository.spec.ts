@@ -321,11 +321,17 @@ describe( 'ApiWritingRepository', () => {
 		it( 'repackages ApiErrors into instances of ApplicationError wrapped into SavingError', () => {
 			const assertAnonFailedError = { code: 'assertanonfailed' };
 			const assertUserFailedError = { code: 'assertuserfailed' };
+			const assertNamedUserFailedError = { code: 'assertnameduserfailed' };
 			const badTagsError = { code: 'badtags' };
+			const noSuchRevIdError = { code: 'nosuchrevid' };
+			const someOtherApiError = { code: 'foo' };
 			const apiErrors = new ApiErrors( [
 				assertAnonFailedError,
 				assertUserFailedError,
+				assertNamedUserFailedError,
 				badTagsError,
+				noSuchRevIdError,
+				someOtherApiError,
 			] );
 			const mockWritingApi1 = mockApi( null, apiErrors );
 			const toBeWrittenEntity = {
@@ -338,7 +344,10 @@ describe( 'ApiWritingRepository', () => {
 			const expectedError = new SavingError( [
 				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
 				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
-				{ type: ErrorTypes.SAVING_FAILED, info: badTagsError },
+				{ type: ErrorTypes.ASSERT_NAMED_USER_FAILED, info: assertNamedUserFailedError },
+				{ type: ErrorTypes.BAD_TAGS, info: badTagsError },
+				{ type: ErrorTypes.NO_SUCH_REVID, info: noSuchRevIdError },
+				{ type: ErrorTypes.SAVING_FAILED, info: someOtherApiError },
 			] );
 
 			return expect( entityWriter.saveEntity( toBeWrittenEntity ) )
