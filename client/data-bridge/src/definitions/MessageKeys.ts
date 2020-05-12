@@ -56,6 +56,7 @@ enum MessageKeys {
 	NOVALUE_ERROR_BODY = 'wikibase-client-data-bridge-novalue-error-body',
 	LICENSE_HEADING = 'wikibase-client-data-bridge-license-heading',
 	LICENSE_BODY = 'wikibase-client-data-bridge-license-body',
+	LOGIN_WARNING = 'wikibase-client-data-bridge-login-warning',
 	REFERENCE_NOTE = 'wikibase-client-data-bridge-reference-note',
 	THANK_YOU_HEAD = 'wikibase-client-data-bridge-thank-you-head',
 	THANK_YOU_EDIT_REFERENCE_ON_REPO_BODY = 'wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body',

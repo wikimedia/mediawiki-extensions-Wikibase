@@ -21,6 +21,10 @@
 		<ErrorSaving
 			v-else-if="isGenericSavingError"
 		/>
+		<ErrorSavingAssertUser
+			v-else-if="isAssertUserFailedError"
+			:login-url="loginUrl"
+		/>
 		<ErrorUnknown
 			v-else
 			@relaunch="relaunch"
@@ -39,6 +43,7 @@ import ErrorUnsupportedDatatype from '@/presentation/components/ErrorUnsupported
 import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedStatement.vue';
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
+import ErrorSavingAssertUser from '@/presentation/components/ErrorSavingAssertUser.vue';
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
@@ -54,6 +59,7 @@ import ApplicationError, {
 		ErrorDeprecatedStatement,
 		ErrorAmbiguousStatement,
 		ErrorSaving,
+		ErrorSavingAssertUser,
 	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
@@ -101,6 +107,19 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 
 	public get isGenericSavingError(): boolean {
 		return this.rootModule.getters.isGenericSavingError;
+	}
+
+	public get isAssertUserFailedError(): boolean {
+		return this.rootModule.getters.isAssertUserFailedError;
+	}
+
+	public get loginUrl(): string {
+		return this.$clientRouter.getPageUrl(
+			'Special:UserLogin',
+			{
+				warning: this.$messages.KEYS.LOGIN_WARNING,
+			},
+		);
 	}
 
 	private relaunch(): void {
