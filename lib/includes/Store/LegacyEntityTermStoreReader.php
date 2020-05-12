@@ -9,6 +9,8 @@ use Wikibase\Lib\TermIndexEntry;
  * Methods factored out of TermIndex during the migration away from wb_terms.
  * This interface is old and poorly shaped, but not deprecated at this stage.
  *
+ * @deprecated As wb_terms is going away, See https://phabricator.wikimedia.org/T208425
+ *
  * @license GPL-2.0-or-later
  */
 interface LegacyEntityTermStoreReader {

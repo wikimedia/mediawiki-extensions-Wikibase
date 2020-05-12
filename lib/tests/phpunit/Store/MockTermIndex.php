@@ -14,6 +14,8 @@ use Wikibase\Lib\TermIndexEntry;
 /**
  * Mock implementation of TermIndex.
  *
+ * @deprecated As wb_terms is going away, See https://phabricator.wikimedia.org/T208425
+ *
  * @note: this uses internal knowledge about which functions of TermIndex are used
  * by PropertyLabelResolver, and how.
  *
