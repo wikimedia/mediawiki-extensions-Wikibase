@@ -321,6 +321,27 @@ class DataBridgePage extends Page {
 			`${DataBridgePage.OOUI} ${DataBridgePage.ROOT} ${DataBridgePage.ERROR_TYPES.UNKNOWN} ${DataBridgePage.ERROR_UNKNOWN_BUTTON_RELAUNCH}`
 		);
 	}
+
+	setMobileWindowSize( mobile = true ) {
+		const DESKTOP_WIDTH = 800,
+			DESKTOP_HEIGHT = 600,
+			MOBILE_WIDTH = 300,
+			MOBILE_HEIGHT = 740,
+			targetWidth = mobile ? MOBILE_WIDTH : DESKTOP_WIDTH,
+			targetHeight = mobile ? MOBILE_HEIGHT : DESKTOP_HEIGHT,
+			browserWidth = browser.getWindowSize().width;
+
+		if (
+			mobile === false && browserWidth >= targetWidth
+			||
+			mobile && browserWidth <= targetWidth
+		) {
+			return; // don't change size if window has right dimensions already
+		}
+
+		browser.setWindowSize( targetWidth, targetHeight );
+		browser.pause( 1000 ); // wait for resize animations to complete
+	}
 }
 
 module.exports = new DataBridgePage();
