@@ -211,5 +211,7 @@
 	"right-item-merge": "Аб’яднанне элементаў",
 	"wikibase-tainted-ref-popper-text": "Значэнне гэтага сцверджання было зменена, але зноска засталася той жа. Вы можаце прыбраць гэта папярэджанне, калі зноска дагэтуль правільная.",
 	"wikibase-tainted-ref-popper-title": "Магчымая неадпаведнасць зноскі значэнню",
+	"wikibase-tainted-ref-popper-help-link-title": "Старонка даведкі для гэтага тыпу абмежавання",
+	"wikibase-tainted-ref-popper-help-link-text": "Даведка",
 	"wikibase-tainted-ref-popper-remove-warning": "Прыбраць папярэджанне"
 }

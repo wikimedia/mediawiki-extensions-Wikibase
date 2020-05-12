@@ -16,6 +16,7 @@
 			"NBS",
 			"Okras",
 			"Ole Yves",
+			"Pacha Tchernof",
 			"Putnik",
 			"Sealle",
 			"Soul Train",
@@ -126,8 +127,9 @@
 	"connected-redirect-category-desc": "Эта категория перечисляет страницы-перенаправления, которые связаны с элементом {{grammar:genitive|{{WBREPONAME}}}}.",
 	"wikibase-client-data-bridge-dialog-title": "Редактировать $1",
 	"wikibase-client-data-bridge-references-heading": "Примечания",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Войти или Зарегистрироваться",
 	"wikibase-client-data-bridge-license-heading": "Использование и лицензия",
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Перезагрузить",
-	"wikibase-client-data-bridge-error-go-back": "Назад"
+	"wikibase-client-data-bridge-error-go-back": "Вернуться назад"
 }

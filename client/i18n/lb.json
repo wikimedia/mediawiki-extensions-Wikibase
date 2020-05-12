@@ -91,6 +91,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Onbekannte Berechtigungsfeeler",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Dir kënnt dëse Wäert aus onbekannte Grënn dëse Wäert net änneren",
 	"wikibase-client-data-bridge-references-heading": "Referenzen",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Dir sidd net ageloggt",
 	"wikibase-client-data-bridge-saving-error-heading": "Konnt net gespäichert ginn",
 	"wikibase-client-data-bridge-unknown-error-heading": "Et ass eppes schif gaangen",
 	"wikibase-client-data-bridge-error-reload-bridge": "Nei lueden",
