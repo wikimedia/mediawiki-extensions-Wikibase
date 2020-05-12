@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * TermIndex implementation that does nothing.
  *
+ * @deprecated As wb_terms is going away, See https://phabricator.wikimedia.org/T208425
+ *
  * This will for example be used in the MediaInfo entity handler which currently gets a real
  * TermIndex implementation despite not needing to use it at all.
  */

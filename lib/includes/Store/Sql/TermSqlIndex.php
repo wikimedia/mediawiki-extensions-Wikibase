@@ -30,6 +30,8 @@ use Wikimedia\Rdbms\IDatabase;
 /**
  * Term lookup cache.
  *
+ * @deprecated As wb_terms is going away, See https://phabricator.wikimedia.org/T208425
+ *
  * @license GPL-2.0-or-later
  */
 class TermSqlIndex extends DBAccessBase implements TermIndex, LabelConflictFinder {
