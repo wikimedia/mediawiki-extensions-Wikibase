@@ -180,11 +180,8 @@ describe( 'App', () => {
 
 		assert.ok( DataBridgePage.showsErrorSaving() );
 
-		// ensure check that we are on desktop
-		if ( browser.getWindowSize().width <= 500 ) {
-			browser.setWindowSize( 800, 600 );
-			browser.pause( 1000 ); // wait for resize animations to complete
-		}
+		// ensure that we are on desktop
+		DataBridgePage.setMobileWindowSize( false );
 
 		assert.ok( DataBridgePage.errorSavingBackButton.isDisplayed() );
 		assert.ok( !DataBridgePage.headerBackButton.isDisplayed() );
@@ -194,8 +191,7 @@ describe( 'App', () => {
 		assert.equal( DataBridgePage.value.getValue(), newValue );
 
 		// switch to mobile
-		browser.setWindowSize( 300, 740 );
-		browser.pause( 1000 ); // wait for resize animations to complete
+		DataBridgePage.setMobileWindowSize();
 
 		// show License
 		DataBridgePage.saveButton.click();
