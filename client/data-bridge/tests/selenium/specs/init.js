@@ -171,6 +171,7 @@ describe( 'init', () => {
 
 			DataBridgePage.openBridgeOnPage( title );
 
+			DataBridgePage.bridge.waitForDisplayed();
 			assert.ok( DataBridgePage.bridge.isDisplayed() );
 			assert.strictEqual( DataBridgePage.nthReference( 1 ).getText(), 'A. B. https://example.com.' );
 			assert.strictEqual( DataBridgePage.nthReference( 2 ).getText(), 'C.' );
