@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
+use Wikimedia\Assert\ParameterElementTypeException;
 
 /**
  * @covers \Wikibase\Repo\FederatedProperties\ApiEntityLookup
@@ -25,6 +26,10 @@ class ApiEntityLookupTest extends TestCase {
 
 	private $data = [];
 
+	private $p1;
+	private $p11;
+	private $p18;
+
 	protected function setUp(): void {
 		parent::setUp();
 		// Load data files once at the start of tests rather than for each test case
@@ -32,47 +37,55 @@ class ApiEntityLookupTest extends TestCase {
 			$content = file_get_contents( __DIR__ . '/../../data/federatedProperties/' . $file );
 			$this->data[$file] = json_decode( $content, true );
 		}
+		$this->p1 = new PropertyId( 'P1' );
+		$this->p11 = new PropertyId( 'P11' );
+		$this->p18 = new PropertyId( 'P18' );
+	}
+
+	public function testFetchEntitiesDoesNotAllowStrings() {
+		$apiEntityLookup = new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) );
+		$this->expectException( ParameterElementTypeException::class );
+		$apiEntityLookup->fetchEntities( [ 'P1', 'P2' ] );
 	}
 
 	public function testGetResultForIdReturnsEntityResponseData() {
-		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ 'P18' ] );
+		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ $this->p18 ] );
 		$apiEntityLookup = new ApiEntityLookup( $api );
-		$apiEntityLookup->fetchEntities( [ 'P18' ] );
+		$apiEntityLookup->fetchEntities( [ $this->p18 ] );
 
 		$this->assertEquals(
 			$this->data[$this->responseDataFiles['p18-en']]['entities']['P18'],
-			$apiEntityLookup->getResultPartForId( new PropertyId( 'P18' ) )
+			$apiEntityLookup->getResultPartForId( $this->p18 )
 		);
 	}
 
 	public function testGivenEntityIsMissing_GetResultPartForIdReturnsMissing() {
-		$api = $this->newMockApi( $this->responseDataFiles['p1-missing'], [ 'P1' ] );
+		$api = $this->newMockApi( $this->responseDataFiles['p1-missing'], [ $this->p1 ] );
 		$apiEntityLookup = new ApiEntityLookup( $api );
-		$apiEntityLookup->fetchEntities( [ 'P1' ] );
+		$apiEntityLookup->fetchEntities( [ $this->p1 ] );
 
 		$this->assertEquals(
 			$this->data[$this->responseDataFiles['p1-missing']]['entities']['P1'],
-			$apiEntityLookup->getResultPartForId( new PropertyId( 'P1' ) )
+			$apiEntityLookup->getResultPartForId( $this->p1 )
 		);
 	}
 
 	public function testGivenEntityHasNotBeenFetched_GetResultPartForIdThrowsException() {
 		$apiEntityLookup = new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) );
 		$this->expectException( LogicException::class );
-		$propertyId = new PropertyId( 'P11' );
-		$apiEntityLookup->getResultPartForId( $propertyId );
+		$apiEntityLookup->getResultPartForId( $this->p11 );
 	}
 
 	public function testFetchEntitiesDoesNotRepeatedlyFetchEntities() {
-		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ 'P18' ] );
+		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ $this->p18 ] );
 		$apiEntityLookup = new ApiEntityLookup( $api );
 
-		$apiEntityLookup->fetchEntities( [ 'P18' ] );
-		$apiEntityLookup->fetchEntities( [ 'P18' ] ); // should not trigger another api call
+		$apiEntityLookup->fetchEntities( [ $this->p18 ] );
+		$apiEntityLookup->fetchEntities( [ $this->p18 ] ); // should not trigger another api call
 
 		$this->assertEquals(
 			$this->data[$this->responseDataFiles['p18-en']]['entities']['P18'],
-			$apiEntityLookup->getResultPartForId( new PropertyId( 'P18' ) )
+			$apiEntityLookup->getResultPartForId( $this->p18 )
 		);
 	}
 
@@ -81,8 +94,8 @@ class ApiEntityLookupTest extends TestCase {
 		$api->expects( $this->exactly( 2 ) )
 			->method( 'get' )
 			->withConsecutive(
-				[ $this->getRequestParameters( [ 'P1' ] ) ],
-				[ $this->getRequestParameters( [ 'P18' ] ) ]
+				[ $this->getRequestParameters( [ $this->p1 ] ) ],
+				[ $this->getRequestParameters( [ $this->p18 ] ) ]
 			)
 			->willReturnOnConsecutiveCalls(
 				$this->newResponse( $this->responseDataFiles['p1-missing'] ),
@@ -91,11 +104,11 @@ class ApiEntityLookupTest extends TestCase {
 
 		$entityLookup = new ApiEntityLookup( $api );
 
-		$entityLookup->fetchEntities( [ 'P1' ] );
-		$entityLookup->fetchEntities( [ 'P1', 'P18' ] );
+		$entityLookup->fetchEntities( [ $this->p1 ] );
+		$entityLookup->fetchEntities( [ $this->p1, $this->p18 ] );
 	}
 
-	private function newMockApi( $responseDataFile, $ids ) {
+	private function newMockApi( string $responseDataFile, array $ids ) : GenericActionApiClient {
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
 			->method( 'get' )
@@ -105,7 +118,7 @@ class ApiEntityLookupTest extends TestCase {
 		return $api;
 	}
 
-	private function getRequestParameters( $ids ) {
+	private function getRequestParameters( array $ids ): array {
 		return [
 			'action' => 'wbgetentities',
 			'ids' => implode( '|', $ids ),
