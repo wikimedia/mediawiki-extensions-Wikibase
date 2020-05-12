@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\ServiceByTypeDispatcher;
 
 /**
  * @license GPL-2.0-or-later
@@ -11,45 +12,22 @@ use Wikibase\DataModel\Entity\EntityId;
 class TypeDispatchingUrlLookup implements EntityUrlLookup {
 
 	/**
-	 * @var array
+	 * @var ServiceByTypeDispatcher
 	 */
-	private $callbacks;
-
-	/**
-	 * @var EntityUrlLookup
-	 */
-	private $defaultLookup;
-
-	/**
-	 * @var EntityUrlLookup[]
-	 */
-	private $lookups;
+	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityUrlLookup $defaultLookup ) {
-		$this->callbacks = $callbacks;
-		$this->defaultLookup = $defaultLookup;
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultLookup );
 	}
 
 	public function getFullUrl( EntityId $id ): ?string {
-		return $this->getLookupForType( $id )->getFullUrl( $id );
+		return $this->serviceDispatcher->getServiceForType( $id->getEntityType() )
+			->getFullUrl( $id );
 	}
 
 	public function getLinkUrl( EntityId $id ): ?string {
-		return $this->getLookupForType( $id )->getLinkUrl( $id );
+		return $this->serviceDispatcher->getServiceForType( $id->getEntityType() )
+			->getLinkUrl( $id );
 	}
 
-	private function getLookupForType( EntityId $id ): EntityUrlLookup {
-		$entityType = $id->getEntityType();
-		if ( !array_key_exists( $entityType, $this->callbacks ) ) {
-			return $this->defaultLookup;
-		}
-
-		return $this->lookups[$entityType] ?? $this->createLookup( $entityType );
-	}
-
-	private function createLookup( string $entityType ): EntityUrlLookup {
-		$this->lookups[$entityType] = $this->callbacks[$entityType]();
-
-		return $this->lookups[$entityType];
-	}
 }
