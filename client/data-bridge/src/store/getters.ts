@@ -86,6 +86,11 @@ export class RootGetters extends Getters<Application> {
 			&& this.state.applicationErrors[ 0 ].type === ErrorTypes.ASSERT_USER_FAILED;
 	}
 
+	public get isEditConflictError(): boolean {
+		return this.state.applicationErrors.length === 1
+			&& this.state.applicationErrors[ 0 ].type === ErrorTypes.EDIT_CONFLICT;
+	}
+
 	public get canGoToPreviousState(): boolean {
 		return this.getters.isGenericSavingError || this.getters.isAssertUserFailedError;
 	}

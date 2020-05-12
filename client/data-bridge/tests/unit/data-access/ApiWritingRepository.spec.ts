@@ -322,6 +322,7 @@ describe( 'ApiWritingRepository', () => {
 			const assertAnonFailedError = { code: 'assertanonfailed' };
 			const assertUserFailedError = { code: 'assertuserfailed' };
 			const assertNamedUserFailedError = { code: 'assertnameduserfailed' };
+			const editConflictError = { code: 'editconflict' };
 			const badTagsError = { code: 'badtags' };
 			const noSuchRevIdError = { code: 'nosuchrevid' };
 			const someOtherApiError = { code: 'foo' };
@@ -329,6 +330,7 @@ describe( 'ApiWritingRepository', () => {
 				assertAnonFailedError,
 				assertUserFailedError,
 				assertNamedUserFailedError,
+				editConflictError,
 				badTagsError,
 				noSuchRevIdError,
 				someOtherApiError,
@@ -345,6 +347,7 @@ describe( 'ApiWritingRepository', () => {
 				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
 				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
 				{ type: ErrorTypes.ASSERT_NAMED_USER_FAILED, info: assertNamedUserFailedError },
+				{ type: ErrorTypes.EDIT_CONFLICT, info: editConflictError },
 				{ type: ErrorTypes.BAD_TAGS, info: badTagsError },
 				{ type: ErrorTypes.NO_SUCH_REVID, info: noSuchRevIdError },
 				{ type: ErrorTypes.SAVING_FAILED, info: someOtherApiError },

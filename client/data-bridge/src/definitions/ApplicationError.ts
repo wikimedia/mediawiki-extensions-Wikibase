@@ -15,6 +15,7 @@ export enum ErrorTypes {
 	ASSERT_ANON_FAILED = 'ASSERT_ANON_FAILED',
 	ASSERT_USER_FAILED = 'ASSERT_USER_FAILED',
 	ASSERT_NAMED_USER_FAILED = 'ASSERT_NAMED_USER_FAILED',
+	EDIT_CONFLICT = 'EDIT_CONFLICT',
 	BAD_TAGS = 'BAD_TAGS',
 	NO_SUCH_REVID = 'NO_SUCH_REVID',
 }
@@ -62,6 +63,7 @@ export interface SavingFailedError extends ApplicationErrorBase {
 	| ErrorTypes.ASSERT_ANON_FAILED
 	| ErrorTypes.ASSERT_USER_FAILED
 	| ErrorTypes.ASSERT_NAMED_USER_FAILED
+	| ErrorTypes.EDIT_CONFLICT
 	| ErrorTypes.BAD_TAGS
 	| ErrorTypes.NO_SUCH_REVID;
 }

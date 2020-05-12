@@ -66,6 +66,8 @@ export default class ApiWritingRepository implements WritingEntityRepository {
 						return { type: ErrorTypes.ASSERT_USER_FAILED, info: apiError };
 					case 'assertnameduserfailed':
 						return { type: ErrorTypes.ASSERT_NAMED_USER_FAILED, info: apiError };
+					case 'editconflict':
+						return { type: ErrorTypes.EDIT_CONFLICT, info: apiError };
 					case 'nosuchrevid':
 						return { type: ErrorTypes.NO_SUCH_REVID, info: apiError };
 					case 'badtags':

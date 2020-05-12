@@ -502,4 +502,55 @@ describe( 'root/getters', () => {
 		} );
 	} );
 
+	describe( 'isEditConflictError', () => {
+		it( 'is true if there is only one error and that is an edit conflict error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.EDIT_CONFLICT, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isEditConflictError ).toBe( true );
+		} );
+
+		it( 'is false if there is only one error and that is some other error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isEditConflictError ).toBe( false );
+		} );
+
+		it( 'is false if there is more than one error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.EDIT_CONFLICT, info: { stack: 'test' } },
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isEditConflictError ).toBe( false );
+		} );
+
+		it( 'is false if there is no error', () => {
+			const applicationState = newApplicationState();
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isEditConflictError ).toBe( false );
+		} );
+	} );
+
 } );
