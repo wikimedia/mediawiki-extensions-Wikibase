@@ -42,45 +42,22 @@
 			parserStore.registerDataValueParser( Parser, dvType );
 		} );
 
-		parserStore.registerDataTypeParser(
-			util.inherit(
-				ApiBasedValueParser,
-				{ API_VALUE_PARSER_ID: 'commonsMedia' }
-			),
-			'commonsMedia'
-		);
-
-		parserStore.registerDataTypeParser(
-			util.inherit(
-				ApiBasedValueParser,
-				{ API_VALUE_PARSER_ID: 'geo-shape' }
-			),
-			'geo-shape'
-		);
-
-		parserStore.registerDataTypeParser(
-			util.inherit(
-				ApiBasedValueParser,
-				{ API_VALUE_PARSER_ID: 'tabular-data' }
-			),
-			'tabular-data'
-		);
-
-		parserStore.registerDataTypeParser(
-			util.inherit(
-				ApiBasedValueParser,
-				{ API_VALUE_PARSER_ID: 'url' }
-			),
-			'url'
-		);
-
-		parserStore.registerDataTypeParser(
-			util.inherit(
-				ApiBasedValueParser,
-				{ API_VALUE_PARSER_ID: 'external-id' }
-			),
+		var dataTypeParserIDs = [
+			'commonsMedia',
+			'geo-shape',
+			'tabular-data',
+			'url',
 			'external-id'
-		);
+		];
+
+		dataTypeParserIDs.forEach( function ( parserId ) {
+			var Parser = util.inherit(
+				ApiBasedValueParser,
+				{ API_VALUE_PARSER_ID: parserId }
+			);
+
+			parserStore.registerDataTypeParser( Parser, parserId );
+		} );
 
 		return parserStore;
 	};
