@@ -58,10 +58,6 @@ export default class IconMessageBox extends Vue {
 		padding: $message-padding-vertical $message-padding-horizontal;
 	}
 
-	&--block:before {
-		background-position: 0 $message-padding-vertical;
-	}
-
 	&:before {
 		background-repeat: no-repeat;
 		background-size: contain;
@@ -72,6 +68,12 @@ export default class IconMessageBox extends Vue {
 		top: 0;
 		position: absolute;
 		content: '';
+	}
+
+	&--block#{&}--error:before,
+	&--block#{&}--warning:before,
+	&--block#{&}--notice:before {
+		background-position: 0 $message-padding-vertical;
 	}
 
 	&--error:before {
