@@ -9,7 +9,10 @@
 			class="wb-db-warning-anonymous-edit__message"
 			type="warning"
 		>
-			<p v-html="$messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_MESSAGE )" />
+			<p
+				class="wb-db-warning-anonymous-edit__message-text"
+				v-html="$messages.get( $messages.KEYS.ANONYMOUS_EDIT_WARNING_MESSAGE )"
+			/>
 		</IconMessageBox>
 		<div class="wb-db-warning-anonymous-edit__buttons">
 			<EventEmittingButton
@@ -70,6 +73,10 @@ export default class WarningAnonymousEdit extends Vue {
 
 	&__message {
 		@include marginForCenterColumn( 3 * $base-spacing-unit );
+	}
+
+	&__message-text {
+		margin: 0;
 	}
 
 	&__buttons {
