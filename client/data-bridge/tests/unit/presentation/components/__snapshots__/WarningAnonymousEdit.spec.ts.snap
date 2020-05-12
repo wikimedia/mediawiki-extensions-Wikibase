@@ -16,7 +16,9 @@ exports[`WarningAnonymousEdit matches the snapshot 1`] = `
     class="wb-db-warning-anonymous-edit__message"
     type="warning"
   >
-    <p>
+    <p
+      class="wb-db-warning-anonymous-edit__message-text"
+    >
       Some 
       <abbr>
         HTML
