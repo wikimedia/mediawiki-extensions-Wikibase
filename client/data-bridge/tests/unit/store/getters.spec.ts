@@ -418,19 +418,87 @@ describe( 'root/getters', () => {
 			expect( getters.canGoToPreviousState ).toBe( true );
 		} );
 
-		it( 'is false if isGenericSavingError is false', () => {
+		it( 'is true if isAssertUserFailedError is true', () => {
+			const applicationState = newApplicationState();
+			const isAssertUserFailedError = true;
+
+			// @ts-ignore
+			const getters = inject( RootGetters, {
+				state: applicationState,
+				getters: {
+					isAssertUserFailedError,
+				},
+			} );
+
+			expect( getters.canGoToPreviousState ).toBe( true );
+		} );
+
+		it( 'is false if isGenericSavingError and isAssertUserFailedError is false', () => {
 			const applicationState = newApplicationState();
 			const isSavingError = false;
+			const isAssertUserFailedError = false;
 
 			// @ts-ignore
 			const getters = inject( RootGetters, {
 				state: applicationState,
 				getters: {
 					isGenericSavingError: isSavingError,
+					isAssertUserFailedError,
 				},
 			} );
 
 			expect( getters.canGoToPreviousState ).toBe( false );
+		} );
+	} );
+
+	describe( 'isAssertUserFailedError', () => {
+		it( 'is true if there is only one error and that is a assert user failed error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.ASSERT_USER_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isAssertUserFailedError ).toBe( true );
+		} );
+
+		it( 'is false if there is only one error and that is some other error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isAssertUserFailedError ).toBe( false );
+		} );
+
+		it( 'is false if there is more than one error', () => {
+			const applicationState = newApplicationState( {
+				applicationErrors: [
+					{ type: ErrorTypes.ASSERT_USER_FAILED, info: { stack: 'test' } },
+					{ type: ErrorTypes.SAVING_FAILED, info: { stack: 'test' } },
+				],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isAssertUserFailedError ).toBe( false );
+		} );
+
+		it( 'is false if there is no error', () => {
+			const applicationState = newApplicationState();
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.isAssertUserFailedError ).toBe( false );
 		} );
 	} );
 
