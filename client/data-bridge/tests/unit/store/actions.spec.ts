@@ -1,3 +1,4 @@
+import SavingError from '@/data-access/error/SavingError';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
@@ -1319,6 +1320,57 @@ describe( 'root/actions', () => {
 			expect( commit ).toHaveBeenCalledWith(
 				'addApplicationErrors',
 				[ { type: ErrorTypes.SAVING_FAILED, info: error } ],
+			);
+		} );
+
+		it( 'logs SavingError errors individually and rejects', async () => {
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				entity: {
+					id: 'Q123',
+				},
+				statements: {},
+			} );
+
+			const commit = jest.fn();
+			const actions = inject( RootActions, {
+				state,
+				commit,
+			} );
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles: {
+						purge: jest.fn().mockReturnValue( Promise.resolve() ),
+					},
+				} ),
+			};
+
+			const statementMutationStrategy = jest.fn().mockReturnValue( {} );
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
+
+			const assertAnonFailedError = { code: 'assertanonfailed' };
+			const assertUserFailedError = { code: 'assertuserfailed' };
+			const someOtherApiError = { code: 'foo' };
+			const savingEntityError = new SavingError( [
+				{ type: ErrorTypes.ASSERT_ANON_FAILED, info: assertAnonFailedError },
+				{ type: ErrorTypes.ASSERT_USER_FAILED, info: assertUserFailedError },
+				{ type: ErrorTypes.SAVING_FAILED, info: someOtherApiError },
+			] );
+			const entityModuleDispatch = jest.fn( () => Promise.reject( savingEntityError ) );
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+
+			await expect( actions.saveBridge() ).rejects.toBe( savingEntityError );
+			expect( commit ).toHaveBeenCalledWith(
+				'addApplicationErrors',
+				savingEntityError.errors,
 			);
 		} );
 
