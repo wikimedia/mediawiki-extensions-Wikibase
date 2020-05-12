@@ -4,6 +4,8 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib;
 
+use Wikimedia\Assert\Assert;
+
 /**
  * @license GPL-2.0-or-later
  */
@@ -19,10 +21,13 @@ class ServiceByTypeDispatcher {
 	private $defaultService;
 
 	/**
-	 * @param $callbacks callable[] map of entity types to callbacks creating the service to be used
-	 * @param $defaultService - the service to be used when there is no callback defined for the given entity type
+	 * @param callable[] $callbacks map of entity types to callbacks creating the service to be used
+	 * @param object $defaultService - the service to be used when there is no callback defined for the given entity type
 	 */
-	public function __construct( array $callbacks, $defaultService ) {
+	public function __construct( array $callbacks, object $defaultService ) {
+		Assert::parameterElementType( 'callable', $callbacks, '$callbacks' );
+		Assert::parameterKeyType( 'string', $callbacks, '$callbacks' );
+		Assert::parameterType( 'object', $defaultService, '$defaultService' );
 		$this->callbacks = $callbacks;
 		$this->defaultService = $defaultService;
 	}
