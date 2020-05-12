@@ -5,6 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikimedia\Assert\Assert;
 
 /**
  * @license GPL-2.0-or-later
@@ -22,27 +23,40 @@ class ApiEntityLookup {
 		$this->api = $api;
 	}
 
+	/**
+	 * @param EntityId[] $entityIds
+	 */
 	public function fetchEntities( array $entityIds ): void {
+		Assert::parameterElementType( EntityId::class, $entityIds, '$entityIds' );
 		$this->entityLookupResult = array_merge(
 			$this->entityLookupResult,
 			$this->getEntities( $this->getEntitiesToFetch( $entityIds ) )
 		);
 	}
 
+	/**
+	 * @param EntityId[] $entityIds
+	 * @return EntityId[]
+	 */
 	private function getEntitiesToFetch( array $entityIds ): array {
 		return array_filter( $entityIds, function ( $id ) {
-			return !array_key_exists( $id, $this->entityLookupResult );
+			return !array_key_exists( $id->getSerialization(), $this->entityLookupResult );
 		} );
 	}
 
-	private function getEntities( array $ids ) {
-		if ( empty( $ids ) ) {
+	/**
+	 * @param EntityId[] $entityIds
+	 * @return array the json_decoded part of the wbgetentities API response for the entity.
+	 */
+	private function getEntities( array $entityIds ) {
+		if ( empty( $entityIds ) ) {
 			return [];
 		}
+		Assert::parameterElementType( EntityId::class, $entityIds, '$entityIds' );
 
 		$response = $this->api->get( [
 			'action' => 'wbgetentities',
-			'ids' => implode( '|', $ids ),
+			'ids' => implode( '|', $entityIds ),
 			'props' => 'labels|descriptions|datatype',
 			'format' => 'json'
 		] );
