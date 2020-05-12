@@ -62,14 +62,18 @@ class ApiServiceFactory {
 
 	public function newApiPropertyDataTypeLookup(): ApiPropertyDataTypeLookup {
 		return new ApiPropertyDataTypeLookup(
-			$this->newFederatedPropertiesApiClient()
+			$this->newApiEntityLookup()
 		);
 	}
 
 	public function newApiPrefetchingTermLookup(): ApiPrefetchingTermLookup {
 		return new ApiPrefetchingTermLookup(
-			$this->newFederatedPropertiesApiClient()
+			$this->newApiEntityLookup()
 		);
+	}
+
+	public function newApiEntityLookup(): ApiEntityLookup {
+		return new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 	}
 
 }

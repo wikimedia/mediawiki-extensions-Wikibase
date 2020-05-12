@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPrefetchingTermLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 use function GuzzleHttp\Psr7\stream_for;
@@ -35,9 +36,10 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	private $data = [];
 
-	private $p18, $p31;
+	private $p18, $p31, $q42;
 
 	protected function setUp(): void {
+		$this->q42 = new ItemId( 'Q42' );
 		$this->p18 = new PropertyId( 'P18' );
 		$this->p31 = new PropertyId( 'P31' );
 
@@ -92,7 +94,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	 */
 	public function testGetLabels( $entityIdString, $languages, $responseFile, $expectedLabels ) {
 		$apiLookup = new ApiPrefetchingTermLookup(
-			$this->newMockApi( [ $entityIdString ], $languages, $responseFile )
+			new ApiEntityLookup( $this->newMockApi( [ $entityIdString ], $responseFile ) )
 		);
 
 		$entityId = ( $entityIdString[0] == 'P' ) ? new PropertyId( $entityIdString ) : new ItemId( $entityIdString );
@@ -102,7 +104,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetDescriptions() {
 		$apiLookup = new ApiPrefetchingTermLookup(
-			$this->createMock( GenericActionApiClient::class )
+			new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) )
 		);
 
 		$this->expectException( \BadMethodCallException::class );
@@ -111,7 +113,7 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 
 	public function testGetPrefetchedAliases() {
 		$apiLookup = new ApiPrefetchingTermLookup(
-			$this->createMock( GenericActionApiClient::class )
+			new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) )
 		);
 
 		$this->expectException( \BadMethodCallException::class );
@@ -121,11 +123,10 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testPrefetchTermsAndGetPrefetchedTerm() {
 		$api = $this->newMockApi(
 			[ $this->p18->getSerialization(), $this->p31->getSerialization() ],
-			[ 'en' ],
 			$this->responseDataFiles[ 'p18-p31-en' ]
 		);
 
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 
 		$apiLookup->prefetchTerms( [ $this->p18, $this->p31 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 
@@ -140,16 +141,15 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$api->expects( $this->any() )
 			->method( 'get' )
 			->withConsecutive(
-				[ $this->getRequestParameters( [ $this->p18->getSerialization() ], [ 'en' ] ) ],
-				[ $this->getRequestParameters( [ $this->p31->getSerialization() ], [ 'en' ] ) ]
+				[ $this->getRequestParameters( [ $this->p18->getSerialization() ] ) ],
+				[ $this->getRequestParameters( [ $this->p31->getSerialization() ] ) ]
 			)
 			->willReturnOnConsecutiveCalls(
 				$this->newMockResponse( $this->responseDataFiles[ 'p18-en' ], 200 ),
 				$this->newMockResponse( $this->responseDataFiles[ 'p31-en' ], 200 )
 			);
 
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
-
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$this->assertSame( 'image', $apiLookup->getLabel( $this->p18, 'en' ) );
 
@@ -166,16 +166,16 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$api->expects( $this->any() )
 			->method( 'get' )
 			->withConsecutive(
-				[ $this->getRequestParameters( [ $this->p18->getSerialization() ], [ 'en' ] ) ],
+				[ $this->getRequestParameters( [ $this->p18->getSerialization() ] ) ],
 				// the second request will NOT ask for P18, that has already been fetched
-				[ $this->getRequestParameters( [ $this->p31->getSerialization() ], [ 'en' ] ) ]
+				[ $this->getRequestParameters( [ $this->p31->getSerialization() ] ) ]
 			)
 			->willReturnOnConsecutiveCalls(
 				$this->newMockResponse( $this->responseDataFiles[ 'p18-en' ], 200 ),
 				$this->newMockResponse( $this->responseDataFiles[ 'p31-en' ], 200 )
 			);
 
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 
 		// prefetch P18 first and verify the label
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
@@ -190,35 +190,30 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	}
 
 	public function testConsecutivePrefetch_newLanguage() {
-		$api = $this->createMock( GenericActionApiClient::class );
-		// expect two API request
-		$api->expects( $this->any() )
-			->method( 'get' )
-			->withConsecutive(
-				[ $this->getRequestParameters( [ $this->p18->getSerialization() ], [ 'en' ] ) ],
-				[ $this->getRequestParameters( [ $this->p18->getSerialization() ], [ 'de' ] ) ]
-			)
-			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( $this->responseDataFiles[ 'p18-en' ], 200 ),
-				$this->newMockResponse( $this->responseDataFiles[ 'p18-de' ], 200 )
-			);
+		$api = $this->newMockApi(
+			[ $this->p18->getSerialization() ],
+			$this->responseDataFiles[ 'p18-en-de' ]
+		);
 
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 
 		// prefetch only language 'en' for P18 first
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
+
 		$this->assertSame( 'image', $apiLookup->getLabel( $this->p18, 'en' ) );
 
 		// prefetch only language 'de' for P18 next
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'de' ] );
+
 		// verify that P18-en is still buffered
 		$this->assertSame( 'image', $apiLookup->getLabel( $this->p18, 'en' ) );
 		// verify that P18-de has been added to buffer
+
 		$this->assertSame( 'Bild', $apiLookup->getLabel( $this->p18, 'de' ) );
 	}
 
 	public function testGetPrefetchedTerm_notPrefetched() {
-		$apiLookup = new ApiPrefetchingTermLookup( $this->createMock( GenericActionApiClient::class ) );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) ) );
 		$this->assertNull( $apiLookup->getPrefetchedTerm( $this->p18, TermTypes::TYPE_LABEL, 'en' ) );
 	}
 
@@ -226,11 +221,10 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		// en and de are requested, but only return en (pretend neither entity has a de label)
 		$api = $this->newMockApi(
 			[ $this->p18->getSerialization(), $this->p31->getSerialization() ],
-			[ 'en', 'de' ],
 			$this->responseDataFiles[ 'p18-p31-en' ]
 		);
 
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 		$apiLookup->prefetchTerms(
 			[ $this->p18, $this->p31 ],
 			[ TermTypes::TYPE_LABEL ],
@@ -243,33 +237,31 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 	public function testPrefetchTerms_sameTermsTwice() {
 		$api = $this->newMockApi(
 			[ $this->p18->getSerialization() ],
-			[ 'en' ],
 			$this->responseDataFiles[ 'p18-en' ]
 		);
-		$apiLookup = new ApiPrefetchingTermLookup( $api );
+		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
 
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$apiLookup->prefetchTerms( [ $this->p18 ], [ TermTypes::TYPE_LABEL ], [ 'en' ] );
 		$this->assertTrue( true ); // no error
 	}
 
-	private function getRequestParameters( $ids, $languageCodes ) {
+	private function getRequestParameters( $ids ) {
 		$params = [
 				'action' => 'wbgetentities',
 				'ids' => implode( '|', $ids ),
-				'props' => 'labels',
-		        'languages' => implode( '|', $languageCodes ),
-			    'format' => 'json'
+				'props' => 'labels|descriptions|datatype',
+				'format' => 'json'
 			];
 
 		return $params;
 	}
 
-	private function newMockApi( $ids, $languageCodes, $responseDataFile ) {
+	private function newMockApi( $ids, $responseDataFile ) {
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
 			->method( 'get' )
-			->with( $this->getRequestParameters( $ids, $languageCodes ) )
+			->with( $this->getRequestParameters( $ids ) )
 			->willReturn( $this->newMockResponse( $responseDataFile, 200 ) );
 
 		return $api;

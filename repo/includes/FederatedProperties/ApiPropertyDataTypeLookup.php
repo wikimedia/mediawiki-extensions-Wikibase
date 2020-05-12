@@ -7,45 +7,31 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
- * Simple implementation using individual wbgetentities calls with no caching.
- *
- * If caching is desired it should probably be done in a wrapping service.
- * If Federated Properties needs a PropertyInfoLookup implementation then this
- * service should probably use that rather than doing its own API calls.
- *
  * @license GPL-2.0-or-later
  * @author Addshore
  */
 class ApiPropertyDataTypeLookup implements PropertyDataTypeLookup {
 
 	/**
-	 * @var GenericActionApiClient
+	 * @var ApiEntityLookup
 	 */
-	private $api;
+	private $apiEntityLookup;
 
 	/**
-	 * @param GenericActionApiClient $api
+	 * @param ApiEntityLookup $apiEntityLookup
 	 */
-	public function __construct( GenericActionApiClient $api ) {
-		$this->api = $api;
+	public function __construct( ApiEntityLookup $apiEntityLookup ) {
+		$this->apiEntityLookup = $apiEntityLookup;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
-		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here
-		$responsePartForProperty = json_decode( $this->api->get( [
-			'action' => 'wbgetentities',
-			'ids' => $propertyId->getSerialization(),
-			'props' => 'datatype',
-			'format' => 'json'
-		] )->getBody(), true )['entities'][$propertyId->getSerialization()];
-
+		$responsePartForProperty = $this->apiEntityLookup->getResultPartForId( $propertyId );
 		if ( !isset( $responsePartForProperty['datatype'] ) ) {
 			throw new PropertyDataTypeLookupException( $propertyId );
 		}
-
 		return $responsePartForProperty['datatype'];
 	}
 
