@@ -20,6 +20,7 @@ use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFa
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
@@ -70,7 +71,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	/**
 	 * @var DataAccessSettings
 	 */
-	private $settings;
+	private $dataAccessSettings;
 
 	/**
 	 * @var EntitySource
@@ -92,6 +93,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $termSearchInteractorFactory = null;
 
 	private $termIndex = null;
+	private $termIndexPrefetchingTermLookup = null;
 
 	private $prefetchingTermLookup = null;
 
@@ -110,7 +112,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		EntityIdComposer $entityIdComposer,
 		Deserializer $dataValueDeserializer,
 		NameTableStore $slotRoleStore,
-		DataAccessSettings $settings,
+		DataAccessSettings $dataAccessSettings,
 		EntitySource $entitySource,
 		array $deserializerFactoryCallbacks,
 		array $entityMetaDataAccessorCallbacks,
@@ -129,7 +131,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		$this->entityIdComposer = $entityIdComposer;
 		$this->dataValueDeserializer = $dataValueDeserializer;
 		$this->slotRoleStore = $slotRoleStore;
-		$this->settings = $settings;
+		$this->dataAccessSettings = $dataAccessSettings;
 		$this->entitySource = $entitySource;
 		$this->deserializerFactoryCallbacks = $deserializerFactoryCallbacks;
 		$this->entityMetaDataAccessorCallbacks = $entityMetaDataAccessorCallbacks;
@@ -165,6 +167,54 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		);
 	}
 
+	/**
+	 * @return EntitySource The EntitySource object for this set of services
+	 */
+	public function getEntitySource() : EntitySource {
+		return $this->entitySource;
+	}
+
+	/**
+	 * @deprecated This should not be used, and was introduced only to fix an UBN on master.
+	 * This is currently used to create a TermStoresDelegatingPrefetchingItemTermLookup,
+	 * when that service construction should actually be moved to within this class.
+	 * The TermStoresDelegatingPrefetchingItemTermLookup service will be going away once we remove
+	 * all wb_terms migration related code, and thus we will remove this method after that point.
+	 *
+	 * @return DataAccessSettings
+	 */
+	public function getDataAccessSettings() : DataAccessSettings {
+		return $this->dataAccessSettings;
+	}
+
+	/**
+	 * It would be nice to only return hint against the TermInLangIdsResolver interface here,
+	 * but current users need a method only provided by DatabaseTermInLangIdsResolver
+	 * @return DatabaseTermInLangIdsResolver
+	 */
+	public function getTermInLangIdsResolver() : DatabaseTermInLangIdsResolver {
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$logger = LoggerFactory::getInstance( 'Wikibase' );
+
+		$databaseName = $this->entitySource->getDatabaseName();
+		$loadBalancer = $mediaWikiServices->getDBLoadBalancerFactory()
+			->getMainLB( $databaseName );
+
+		$databaseTypeIdsStore = new DatabaseTypeIdsStore(
+			$loadBalancer,
+			$mediaWikiServices->getMainWANObjectCache(),
+			$databaseName,
+			$logger
+		);
+		return new DatabaseTermInLangIdsResolver(
+			$databaseTypeIdsStore,
+			$databaseTypeIdsStore,
+			$loadBalancer,
+			$databaseName,
+			$logger
+		);
+	}
+
 	public function getEntityRevisionLookup() {
 		if ( $this->entityRevisionLookup === null ) {
 			if ( !WikibaseSettings::isRepoEnabled() ) {
@@ -177,7 +227,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$this->entityIdParser,
 				$serializer,
 				$this->getEntityDeserializer(),
-				$this->settings->maxSerializedEntitySizeInBytes()
+				$this->dataAccessSettings->maxSerializedEntitySizeInBytes()
 			);
 
 			/** @var WikiPageEntityMetaDataAccessor $metaDataAccessor */
@@ -325,7 +375,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$typeDispatchingMapping = [];
 
 			// Properties
-			if ( $this->settings->useNormalizedPropertyTerms() === true ) {
+			if ( $this->dataAccessSettings->useNormalizedPropertyTerms() === true ) {
 				$typeDispatchingMapping[Property::ENTITY_TYPE] = $newEntityInfoBuilder;
 			} else {
 				$typeDispatchingMapping[Property::ENTITY_TYPE] = $oldEntityInfoBuilder;
@@ -333,7 +383,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 			// Items
 			$itemEntityInfoBuilderMapping = [];
-			foreach ( $this->settings->getItemTermsMigrationStages() as $maxId => $stage ) {
+			foreach ( $this->dataAccessSettings->getItemTermsMigrationStages() as $maxId => $stage ) {
 				if ( $maxId === 'max' ) {
 					$maxId = Int32EntityId::MAX;
 				}
@@ -372,12 +422,27 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 				$this->entitySource
 			);
 
-			$this->termIndex->setUseSearchFields( $this->settings->useSearchFields() );
-			$this->termIndex->setForceWriteSearchFields( $this->settings->forceWriteSearchFields() );
+			$this->termIndex->setUseSearchFields( $this->dataAccessSettings->useSearchFields() );
+			$this->termIndex->setForceWriteSearchFields( $this->dataAccessSettings->forceWriteSearchFields() );
 
 		}
 
 		return $this->termIndex;
+	}
+
+	/**
+	 * @deprecated This will be removed once wb_terms related code has been removed from Wikibase
+	 * @return BufferingTermIndexTermLookup
+	 */
+	public function getTermIndexPrefetchingTermLookup() : PrefetchingTermLookup {
+		if ( $this->termIndexPrefetchingTermLookup === null ) {
+
+			$this->termIndexPrefetchingTermLookup = new BufferingTermIndexTermLookup(
+				$this->getTermIndex(), // TODO: customize buffer sizes
+				1000
+			);
+		}
+		return $this->termIndexPrefetchingTermLookup;
 	}
 
 	public function getPrefetchingTermLookup() {
