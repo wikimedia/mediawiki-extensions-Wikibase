@@ -1,3 +1,4 @@
+import SavingError from '@/data-access/error/SavingError';
 import Vue from 'vue';
 import { Store } from 'vuex';
 import BridgeConfig from '@/presentation/plugins/BridgeConfigPlugin';
@@ -264,7 +265,11 @@ RootActions
 			assertUser: this.state.assertUserWhenSaving,
 		} )
 			.catch( ( error: Error ) => {
-				this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
+				if ( error instanceof SavingError ) {
+					this.commit( 'addApplicationErrors', error.errors );
+				} else {
+					this.commit( 'addApplicationErrors', [ { type: ErrorTypes.SAVING_FAILED, info: error } ] );
+				}
 				throw error;
 			} )
 			.then( () => {
