@@ -17,6 +17,7 @@
 				type="primaryProgressive"
 				size="M"
 				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_PROCEED )"
+				@click="proceed"
 			/>
 			<EventEmittingButton
 				class="wb-db-error-saving-assertuser__login"
@@ -59,6 +60,11 @@ import ReportIssue from '@/presentation/components/ReportIssue.vue';
 export default class ErrorSavingAssertUser extends mixins( StateMixin ) {
 	@Prop( { required: true, type: String } )
 	public loginUrl!: string;
+
+	public async proceed(): Promise<void> {
+		await this.rootModule.dispatch( 'stopAssertingUserWhenSaving' );
+		await this.rootModule.dispatch( 'retrySave' );
+	}
 }
 </script>
 
