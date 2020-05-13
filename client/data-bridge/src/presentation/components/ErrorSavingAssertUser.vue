@@ -16,7 +16,7 @@
 				class="wb-db-error-saving-assertuser__proceed"
 				type="primaryProgressive"
 				size="M"
-				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_PROCEED )"
+				:message="$messages.get( publishOrSave )"
 				@click="proceed"
 			/>
 			<EventEmittingButton
@@ -70,6 +70,12 @@ export default class ErrorSavingAssertUser extends mixins( StateMixin ) {
 	public back(): void {
 		this.rootModule.dispatch( 'goBackFromErrorToReady' );
 	}
+
+	public get publishOrSave(): string {
+		return this.$bridgeConfig.usePublish ?
+			this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_PUBLISH : this.$messages.KEYS.SAVING_ERROR_ASSERTUSER_SAVE;
+	}
+
 }
 </script>
 
