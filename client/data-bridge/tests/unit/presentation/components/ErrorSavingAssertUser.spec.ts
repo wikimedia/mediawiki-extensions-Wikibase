@@ -60,7 +60,11 @@ describe( 'ErrorSavingAssertUser', () => {
 		expect( retrySave ).toHaveBeenCalledTimes( 1 );
 	} );
 
-	it( 'goes back if the keep editing button is clicked', async () => {
+	// from our point of view, login/app behave identically; difference is tested in browser tests
+	it.each( [
+		[ 'login' ],
+		[ 'back' ],
+	] )( 'goes back if the %s button is clicked', async ( buttonName: string ) => {
 		const $messages = {
 			KEYS: MessageKeys,
 			get: jest.fn().mockReturnValue( 'Test <abbr>HTML</abbr>.' ),
@@ -74,7 +78,7 @@ describe( 'ErrorSavingAssertUser', () => {
 			store,
 			localVue,
 		} );
-		const button = wrapper.find( '.wb-db-error-saving-assertuser__back' );
+		const button = wrapper.find( `.wb-db-error-saving-assertuser__${buttonName}` );
 		button.vm.$emit( 'click' );
 		await localVue.nextTick();
 
