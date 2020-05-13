@@ -88,7 +88,8 @@ export default class ErrorSavingAssertUser extends mixins( StateMixin ) {
 		}
 	}
 
-	&__proceed {
+	&__proceed,
+	&__login {
 		margin-bottom: $base-spacing-unit;
 	}
 
