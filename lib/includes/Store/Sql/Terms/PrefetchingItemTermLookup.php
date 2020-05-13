@@ -9,8 +9,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTermLookupBase;
-use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * A {@link PrefetchingTermLookup} that only supports items,
@@ -20,17 +18,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
  */
 class PrefetchingItemTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
-
 	/** @var DatabaseTermInLangIdsResolver */
 	private $termInLangIdsResolver;
-
-	/** @var IDatabase|null */
-	private $dbr;
-
-	/** @var bool|string */
-	private $databaseDomain;
 
 	/** @var array[] entity numeric id -> terms array */
 	private $terms = [];
@@ -41,18 +30,12 @@ class PrefetchingItemTermLookup extends EntityTermLookupBase implements Prefetch
 	private $termKeys = [];
 
 	/**
-	 * @param ILoadBalancer $loadBalancer
 	 * @param DatabaseTermInLangIdsResolver $termInlangIdsResolver
-	 * @param bool|string $databaseDomain
 	 */
 	public function __construct(
-		ILoadBalancer $loadBalancer,
-		DatabaseTermInLangIdsResolver $termInlangIdsResolver,
-		$databaseDomain = false
+		DatabaseTermInLangIdsResolver $termInlangIdsResolver
 	) {
-		$this->loadBalancer = $loadBalancer;
 		$this->termInLangIdsResolver = $termInlangIdsResolver;
-		$this->databaseDomain = $databaseDomain;
 	}
 
 	protected function getTermsOfType( EntityId $entityId, $termType, array $languageCodes ) {

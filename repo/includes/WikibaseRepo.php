@@ -133,11 +133,8 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
-use Wikibase\Lib\Store\Sql\Terms\DatabasePropertyTermStoreWriter;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsAcquirer;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
+use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -1809,7 +1806,7 @@ class WikibaseRepo {
 			'tmpPropertyTermsMigrationStage' );
 
 		$old = new PropertyTermStoreWriterAdapter( $this->getOldPropertyTermStoreWriter() );
-		$new = new PropertyTermStoreWriterAdapter( $this->getNewPropertyTermStoreWriter() );
+		$new = new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
 
 		switch ( $propertyTermsMigrationStage ) {
 			case MIGRATION_OLD:
@@ -1829,7 +1826,7 @@ class WikibaseRepo {
 	public function getItemTermStoreWriters(): array {
 		$itemTermsMigrationStages = $this->settings->getSetting( 'tmpItemTermsMigrationStages' );
 		$oldItemTermStore = $this->getOldItemTermStoreWriter();
-		$newItemTermStore = $this->getNewItemTermStoreWriter();
+		$newItemTermStore = $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter();
 
 		$arrayForWriters = $this->getItemTermStoreArrayForWriters( $itemTermsMigrationStages, $oldItemTermStore, $newItemTermStore );
 
@@ -1886,6 +1883,17 @@ class WikibaseRepo {
 		return [ 'old' => $oldStores, 'new' => $newStores ];
 	}
 
+	public function getNewTermStoreWriterFactory(): TermStoreWriterFactory {
+		return new TermStoreWriterFactory(
+			$this->getLocalEntitySource(),
+			$this->getStringNormalizer(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			MediaWikiServices::getInstance()->getMainWANObjectCache(),
+			JobQueueGroup::singleton(),
+			$this->getLogger()
+		);
+	}
+
 	/**
 	 * @return PropertyTermStoreWriter for the OLD term storage schema (wb_terms)
 	 */
@@ -1894,72 +1902,10 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return PropertyTermStoreWriter for the NEW term storage schema
-	 */
-	public function getNewPropertyTermStoreWriter(): PropertyTermStoreWriter {
-		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$loadBalancer = $loadBalancerFactory->getMainLB();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
-		);
-
-		return new DatabasePropertyTermStoreWriter(
-			$loadBalancer,
-			JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore, $this->getLogger() ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer, false, $this->getLogger() ),
-			$this->getStringNormalizer(),
-			$this->getPropertySource()
-		);
-	}
-
-	private function getPropertySource() : EntitySource {
-		$propertySource = $this->entitySourceDefinitions->getSourceForEntityType( Property::ENTITY_TYPE );
-
-		if ( $propertySource === null ) {
-			throw new LogicException( 'No source providing Properties configured!' );
-		}
-
-		return $propertySource;
-	}
-
-	/**
 	 * @return ItemTermStoreWriter for the OLD term storage schema (wb_terms)
 	 */
 	private function getOldItemTermStoreWriter(): ItemTermStoreWriter {
 		return new TermIndexItemTermStoreWriter( $this->getStore()->getTermIndex() );
-	}
-
-	/**
-	 * @return ItemTermStoreWriter for the NEW term storage schema
-	 */
-	public function getNewItemTermStoreWriter(): ItemTermStoreWriter {
-		$loadBalancerFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$loadBalancer = $loadBalancerFactory->getMainLB();
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			MediaWikiServices::getInstance()->getMainWANObjectCache()
-		);
-
-		return new DatabaseItemTermStoreWriter(
-			$loadBalancer,
-			JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( $loadBalancerFactory, $typeIdsStore, $this->getLogger() ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer, false, $this->getLogger() ),
-			$this->getStringNormalizer(),
-			$this->getItemSource()
-		);
-	}
-
-	private function getItemSource() : EntitySource {
-		$itemSource = $this->entitySourceDefinitions->getSourceForEntityType( Item::ENTITY_TYPE );
-
-		if ( $itemSource === null ) {
-			throw new LogicException( 'No source providing Items configured!' );
-		}
-
-		return $itemSource;
 	}
 
 	/**

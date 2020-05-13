@@ -315,7 +315,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			// probably create/provide one for itself (all data needed in in the entity source)
 
 			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
-			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
 
 			$cacheSecret = hash( 'sha256', $wgSecretKey );
@@ -489,7 +488,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		if ( $this->propertyInfoLookup === null ) {
 			$this->propertyInfoLookup = new PropertyInfoTable(
 				$this->entityIdComposer,
-				$this->entitySource
+				$this->entitySource->getDatabaseName(),
+				false
 			);
 		}
 		return $this->propertyInfoLookup;

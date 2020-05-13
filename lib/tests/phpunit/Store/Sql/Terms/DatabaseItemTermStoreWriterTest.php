@@ -2,11 +2,9 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use JobQueueGroup;
 use MediaWikiIntegrationTestCase;
 use WANObjectCache;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -83,7 +81,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getItemTermStoreWriter(
-		?EntitySource $itemSourceOverride = null,
 		$jobQueueMockOverride = null
 	) : DatabaseItemTermStoreWriter {
 		if ( $jobQueueMockOverride === null ) {
@@ -106,23 +103,8 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		return new DatabaseItemTermStoreWriter( $loadBalancer, $jobQueue,
 			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
 			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
-			new StringNormalizer(), $itemSourceOverride ?: $this->getItemSource()
+			new StringNormalizer()
 		);
-	}
-
-	private function getItemSource() {
-		return new EntitySource( 'test', false, [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
-	}
-
-	private function getNonLocalItemSource() {
-		return new EntitySource( 'remote', 'someDb', [ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ], '', '', '', '' );
-	}
-
-	public function testStoreTerms_throwsForNonLocalItemSource() {
-		$store = $this->getItemTermStoreWriter( $this->getNonLocalItemSource() );
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->storeTerms( new ItemId( 'Q1' ), $this->fingerprintEmpty );
 	}
 
 	public function testStoreAndGetTerms() {
@@ -284,38 +266,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function testStoreTerms_throwsForNonItemEntitySource() {
-		$store = $this->getTermStoreNotHandlingItems();
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->storeTerms( new ItemId( 'Q1' ), $this->fingerprintEmpty );
-	}
-
-	public function testDeleteTerms_throwsForNonItemEntitySource() {
-		$store = $this->getTermStoreNotHandlingItems();
-
-		$this->expectException( InvalidArgumentException::class );
-		$store->deleteTerms( new ItemId( 'Q1' ) );
-	}
-
-	private function getTermStoreNotHandlingItems() {
-		$loadBalancer = new FakeLoadBalancer( [
-			'dbr' => $this->db,
-		] );
-		$typeIdsStore = new DatabaseTypeIdsStore(
-			$loadBalancer,
-			WANObjectCache::newEmpty()
-		);
-
-		return new DatabaseItemTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
-			new DatabaseTermInLangIdsAcquirer( new FakeLBFactory( [
-				'lb' => $loadBalancer
-			] ), $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ),
-			new StringNormalizer(), $this->getPropertySource()
-		);
-	}
-
 	public function testStoresAndGetsUTF8Text() {
 		$store = $this->getItemTermStoreWriter();
 
@@ -335,7 +285,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testCleanupJobWorks() {
-		$store = $this->getItemTermStoreWriter( null, JobQueueGroup::singleton() );
+		$store = $this->getItemTermStoreWriter( JobQueueGroup::singleton() );
 		$fingerprint1 = new Fingerprint( new Termlist( [ new Term( 'en', 'a--aaaaaaaaaaaaaa1' ) ] ) );
 		$fingerprint2 = new Fingerprint( new Termlist( [ new Term( 'en', 'a--aaaaaaaaaaaaaa2' ) ] ) );
 
@@ -368,8 +318,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		);
 		$propertyTermStoreWriter = new DatabasePropertyTermStoreWriter( $loadBalancer, JobQueueGroup::singleton(),
 			new DatabaseTermInLangIdsAcquirer( $lbFactory, $typeIdsStore ),
-			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer(),
-			$this->getPropertySource()
+			new DatabaseTermInLangIdsResolver( $typeIdsStore, $typeIdsStore, $loadBalancer ), new StringNormalizer()
 		);
 
 		$propertyTermStoreWriter->storeTerms( new PropertyId( 'P12' ), new Fingerprint(
@@ -386,10 +335,6 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 		$r = $this->getTermsForProperty( new PropertyId( 'P12' ) );
 		$this->assertTrue( $r->hasLabel( 'nl' ) );
 		$this->assertEquals( 'van', $r->getLabel( 'nl' )->getText() );
-	}
-
-	private function getPropertySource() {
-		return new EntitySource( 'test', false, [ 'property' => [ 'namespaceId' => 123, 'slot' => 'main' ] ], '', '', '', '' );
 	}
 
 	private function insertItemTermRow( int $itemid, int $termInLangId ): void {

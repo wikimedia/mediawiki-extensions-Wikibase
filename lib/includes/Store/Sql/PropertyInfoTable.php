@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Store\Sql;
 
 use DBAccessBase;
 use InvalidArgumentException;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -33,20 +32,26 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	private $entityIdComposer;
 
 	/**
-	 * @var EntitySource
+	 * @var bool
 	 */
-	private $entitySource;
+	private $allowWrites;
 
+	/**
+	 * @param EntityIdComposer $entityIdComposer
+	 * @param string|bool $databaseName For the property source
+	 * @param bool $allowWrites Should writes be allowed to the table? false in cases that a remote property source is being used.
+	 *
+	 * TODO split this more cleanly into a lookup and a writer, and then $allowWrites would not be needed?
+	 */
 	public function __construct(
 		EntityIdComposer $entityIdComposer,
-		EntitySource $entitySource
+		$databaseName,
+		bool $allowWrites
 	) {
-		$databaseName = $entitySource->getDatabaseName();
-
 		parent::__construct( $databaseName );
+		$this->allowWrites = $allowWrites;
 		$this->tableName = 'wb_property_info';
 		$this->entityIdComposer = $entityIdComposer;
-		$this->entitySource = $entitySource;
 	}
 
 	/**
@@ -111,8 +116,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @throws DBError
 	 */
 	public function getPropertyInfo( PropertyId $propertyId ) {
-		$this->assertCanHandlePropertyId( $propertyId );
-
 		$dbr = $this->getConnection( DB_REPLICA );
 
 		$res = $dbr->selectField(
@@ -199,7 +202,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 			throw new InvalidArgumentException( 'Missing required info field: ' . PropertyInfoLookup::KEY_DATA_TYPE );
 		}
 
-		$this->assertCanHandlePropertyId( $propertyId );
 		$this->assertCanWritePropertyInfo();
 
 		$type = $info[ PropertyInfoLookup::KEY_DATA_TYPE ];
@@ -231,7 +233,6 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 	 * @return bool
 	 */
 	public function removePropertyInfo( PropertyId $propertyId ) {
-		$this->assertCanHandlePropertyId( $propertyId );
 		$this->assertCanWritePropertyInfo();
 
 		$dbw = $this->getConnection( DB_MASTER );
@@ -248,18 +249,8 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 		return $c > 0;
 	}
 
-	private function assertCanHandlePropertyId( PropertyId $id ) {
-		$this->assertEntitySourceProvidesProperties();
-	}
-
-	private function assertEntitySourceProvidesProperties() {
-		if ( !in_array( Property::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
-			throw new InvalidArgumentException( 'Entity source: ' . $this->entitySource->getSourceName() . ' does not provide properties.' );
-		}
-	}
-
 	private function assertCanWritePropertyInfo() : void {
-		if ( $this->entitySource->getDatabaseName() !== false ) {
+		if ( !$this->allowWrites ) {
 			throw new InvalidArgumentException(
 				'This implementation cannot be used to write data to non-local database'
 			);

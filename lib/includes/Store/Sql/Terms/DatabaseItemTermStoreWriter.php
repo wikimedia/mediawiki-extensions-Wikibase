@@ -2,11 +2,8 @@
 
 namespace Wikibase\Lib\Store\Sql\Terms;
 
-use InvalidArgumentException;
 use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
@@ -15,7 +12,9 @@ use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
- * ItemTermStoreWriter implementation for the 2019 SQL based secondary item term storage
+ * ItemTermStoreWriter implementation for the 2019 SQL based secondary item term storage.
+ *
+ * This can only be used to write to Item term stores on the local database.
  *
  * @see @ref md_docs_storage_terms
  * @license GPL-2.0-or-later
@@ -39,19 +38,15 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	/** @var JobQueueGroup */
 	private $jobQueueGroup;
 
-	/** @var EntitySource */
-	private $entitySource;
-
 	public function __construct(
 		ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup, TermInLangIdsAcquirer $termInLangIdsAcquirer,
-		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer, EntitySource $entitySource
+		TermInLangIdsResolver $termInLangIdsResolver, StringNormalizer $stringNormalizer
 	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->termInLangIdsAcquirer = $termInLangIdsAcquirer;
 		$this->termInLangIdsResolver = $termInLangIdsResolver;
 		$this->stringNormalizer = $stringNormalizer;
-		$this->entitySource = $entitySource;
 	}
 
 	private function getDbw(): IDatabase {
@@ -62,7 +57,6 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_storeTerms'
 		);
-		$this->assertCanWriteItemTerms();
 
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
@@ -169,7 +163,6 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
 			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
 		);
-		$this->assertCanWriteItemTerms();
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
@@ -216,28 +209,4 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 		return array_values( array_unique( $termInLangIdsToCleanUp ) );
 	}
 
-	private function shouldWriteToItems() : bool {
-		return $this->entitySource->getDatabaseName() === false;
-	}
-
-	private function assertItemsAreLocal() : void {
-		if ( !$this->shouldWriteToItems() ) {
-			throw new InvalidArgumentException(
-				'This implementation cannot be used with remote entity sources!'
-			);
-		}
-	}
-
-	private function assertCanWriteItemTerms() {
-		$this->assertItemsAreLocal();
-		$this->assertUsingItemSource();
-	}
-
-	private function assertUsingItemSource() {
-		if ( !in_array( Item::ENTITY_TYPE, $this->entitySource->getEntityTypes() ) ) {
-			throw new InvalidArgumentException(
-				$this->entitySource->getSourceName() . ' does not provided properties'
-			);
-		}
-	}
 }

@@ -1,10 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWikiTestCase;
-use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -35,22 +35,11 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wb_property_info';
 	}
 
-	private function newPropertyInfoTable() {
-		$irrelevantPropertyNamespaceId = 200;
-
+	private function newPropertyInfoTable( bool $allowWrites = true ) {
 		return new PropertyInfoTable(
 			$this->getEntityComposer(),
-			new EntitySource(
-				'testsource',
-				false,
-				[
-					'property' => [ 'namespaceId' => $irrelevantPropertyNamespaceId, 'slot' => 'main' ],
-				],
-				'',
-				'',
-				'',
-				''
-			)
+			false,
+			$allowWrites
 		);
 	}
 
@@ -187,68 +176,16 @@ class PropertyInfoTableTest extends MediaWikiTestCase {
 		$this->assertNull( $tableOne->getPropertyInfo( $propertyId ) );
 	}
 
-	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_setPropertyInfoThrowsException() {
-		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+	public function testGivenNonWriting_setPropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTable( false );
 		$this->expectException( InvalidArgumentException::class );
 		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
 	}
 
-	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_getPropertyInfoThrowsException() {
-		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
-		$this->expectException( InvalidArgumentException::class );
-		$infoTable->getPropertyInfo( new PropertyId( 'P1' ) );
-	}
-
-	public function testGivenPropertyIdAndSourceDoesNotProvideProperties_removePropertyInfoThrowsException() {
-		$infoTable = $this->newPropertyInfoTableForItemOnlySource();
+	public function testGivenNonWriting_removePropertyInfoThrowsException() {
+		$infoTable = $this->newPropertyInfoTable( false );
 		$this->expectException( InvalidArgumentException::class );
 		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
-	}
-
-	public function testGivenPropertyIdAndNotLocalSource_setPropertyInfoThrowsException() {
-		$infoTable = $this->newPropertyInfoTableForNonLocalOnlySource();
-		$this->expectException( InvalidArgumentException::class );
-		$infoTable->setPropertyInfo( new PropertyId( 'P1' ), [ PropertyInfoLookup::KEY_DATA_TYPE => 'string' ] );
-	}
-
-	public function testGivenPropertyIdAndNotLocalSource_removePropertyInfoThrowsException() {
-		$infoTable = $this->newPropertyInfoTableForNonLocalOnlySource();
-		$this->expectException( InvalidArgumentException::class );
-		$infoTable->removePropertyInfo( new PropertyId( 'P1' ) );
-	}
-
-	private function newPropertyInfoTableForItemOnlySource() {
-		$irrelevantItemNamespaceId = 100;
-
-		return new PropertyInfoTable(
-			$this->getEntityComposer(),
-			new EntitySource(
-				'testsource',
-				false,
-				[ 'item' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ],
-				'',
-				'',
-				'',
-				''
-			)
-		);
-	}
-
-	private function newPropertyInfoTableForNonLocalOnlySource() {
-		$irrelevantItemNamespaceId = 100;
-
-		return new PropertyInfoTable(
-			$this->getEntityComposer(),
-			new EntitySource(
-				'testsource',
-				'nonlocaldb',
-				[ 'property' => [ 'namespaceId' => $irrelevantItemNamespaceId, 'slot' => 'main' ] ],
-				'',
-				'',
-				'',
-				''
-			)
-		);
 	}
 
 	private function getEntityComposer() {
