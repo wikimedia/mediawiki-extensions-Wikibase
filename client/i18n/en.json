@@ -174,6 +174,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Reload page",
 	"wikibase-client-data-bridge-error-go-back": "Go back",
 	"wikibase-client-data-bridge-error-retry-save": "Retry save",
+	"wikibase-client-data-bridge-login-warning": "After logging in successfully, <strong>please close this tab and return to the original tab</strong> to retry saving.",
 	"wikibase-client-data-bridge-reference-note": "Editing references will be possible on {{WBREPONAME}} after saving",
 	"wikibase-client-data-bridge-thank-you-head": "Thank you for your edit!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "You can edit references for this property on {{WBREPONAME}} by clicking the button below.",
