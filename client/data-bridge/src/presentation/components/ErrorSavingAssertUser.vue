@@ -33,6 +33,7 @@
 				type="link"
 				size="M"
 				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_KEEP_EDITING )"
+				@click="back"
 			/>
 		</div>
 	</div>
@@ -64,6 +65,10 @@ export default class ErrorSavingAssertUser extends mixins( StateMixin ) {
 	public async proceed(): Promise<void> {
 		await this.rootModule.dispatch( 'stopAssertingUserWhenSaving' );
 		await this.rootModule.dispatch( 'retrySave' );
+	}
+
+	public back(): void {
+		this.rootModule.dispatch( 'goBackFromErrorToReady' );
 	}
 }
 </script>
