@@ -185,5 +185,10 @@
 	"wikibase-client-data-bridge-reference-note": "儲存後可以編輯在{{WBREPONAME}}的參考",
 	"wikibase-client-data-bridge-thank-you-head": "感謝您的編輯！",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "您可以透過點擊下方按鈕來編輯在{{WBREPONAME}}的此項屬性參考。",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "編輯在{{WBREPONAME}}的參考"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "編輯在{{WBREPONAME}}的參考",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "您尚未登入",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "您可以不經由登入來發布您的更改。您的 IP 位址將會記錄在頁面的編輯歷史裡。您也可以重新登入並重試發布。",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "不登入發布",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "登入（在新分頁開啟）",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "繼續編輯"
 }

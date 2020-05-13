@@ -169,5 +169,10 @@
 	"wikibase-client-data-bridge-reference-note": "Die Bearbeitung von Einzelnachweisen wird nach dem Speichern auf {{WBREPONAME}} möglich sein",
 	"wikibase-client-data-bridge-thank-you-head": "Vielen Dank für deine Bearbeitung!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Du kannst den Einzelnachweis für diese Eigenschaft auf {{WBREPONAME}} durch Klick auf die Schaltfläche bearbeiten.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Bearbeite den Einzelnachweis auf {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Bearbeite den Einzelnachweis auf {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Du bist nicht angemeldet",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Du kannst deine Änderungen veröffentlichen, ohne dich anzumelden. Deine IP-Adresse wird in der Versionsgeschichte der Seite gespeichert. Du kannst dich auch wieder einloggen und die Veröffentlichung erneut versuchen.",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Ohne Anmeldung veröffentlichen",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Anmelden (Öffnet in einer neuen Registerkarte)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Weiter bearbeiten"
 }

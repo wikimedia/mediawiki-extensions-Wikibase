@@ -13,6 +13,7 @@
 			"Revi",
 			"Ykhwong",
 			"관인생략",
+			"그냥기여자",
 			"렌즈",
 			"밝은소년",
 			"아라"
@@ -140,5 +141,6 @@
 	"wikibase-client-data-bridge-unknown-error-message": "오류가 발생하여 선택된 값은 지금 편집할 수 없습니다. 다시 불러오기를 실행해 보십시오.",
 	"wikibase-client-data-bridge-error-reload-bridge": "다시 불러오기",
 	"wikibase-client-data-bridge-error-go-back": "돌아가기",
+	"wikibase-client-data-bridge-error-retry-save": "저장 재시도",
 	"wikibase-client-data-bridge-thank-you-head": "편집에 감사드립니다!"
 }

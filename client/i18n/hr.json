@@ -105,5 +105,9 @@
 	"wikibase-client-data-bridge-error-reload-bridge": "Ponovo učitaj",
 	"wikibase-client-data-bridge-error-go-back": "Idi natrag",
 	"wikibase-client-data-bridge-thank-you-head": "Hvala Vam na uređivanju!",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Uredi referenciju na projektu {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Uredi referenciju na projektu {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Niste se prijavili",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Možete objaviti Vaše promjene bez prijavljivanja. Vaša IP-adresa bit će zabilježena u povijesti uređivanja stranice. Također, možete se ponovo prijaviti i ponovo pokušati objavljivanje.",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Prijavi se (otvara se u novoj kartici)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Nastavi uređivanje"
 }

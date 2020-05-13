@@ -10,6 +10,7 @@
 			"Kkairri",
 			"Marine-Blue",
 			"Mirinano",
+			"Object＊tofu",
 			"Omotecho",
 			"Otokoume",
 			"Penn Station",
@@ -116,6 +117,8 @@
 	"wikibase-client-data-bridge-cascadeprotected-on-repo-head": "<strong>{{WBREPONAME}}において、この値は現在カスケード保護されているため、[$2 管理者]のみが編集できます。</strong>",
 	"wikibase-client-data-bridge-cascadeprotected-on-repo-body": "<p><strong>なぜこの値は保護されているのですか？</strong></p>\n<p>この値が、「カスケード保護」のオプション付きで保護されている{{PLURAL:$1|以下のページ}}から読み込まれているためです</p>\n$2",
 	"wikibase-client-data-bridge-blocked-on-repo-head": "<strong>あなたの利用者名またはIPアドレスは{{WBREPONAME}}においてブロックされています。</strong>",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<stちゅうrong>警告</strong>: あなたはログインしていません。このまま編集するとあなたの IP アドレスが公開されます。<strong>ログイン</strong>または<strong>アカウントを作成</strong>すると、編集の帰属表示が利用者名になるなどの利点があります。",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "ログインせずに編集",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ロろグイン / 登録",
 	"wikibase-client-data-bridge-error-reload-bridge": "再読み込み"
 }

@@ -163,5 +163,10 @@
 	"wikibase-client-data-bridge-reference-note": "A edição de referências será possível em {{WBREPONAME}} depois de salvar",
 	"wikibase-client-data-bridge-thank-you-head": "Obrigado pela sua edição!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Você pode editar as referências para esta propriedade em {{WBREPONAME}} clicando no botão abaixo.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Editar referência em {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Editar referência em {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Não tem entrado",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Você pode publicar suas alterações sem entrar. Seu endereço IP será registrado no histórico de edições da página. Você também pode entrar novamente e publicar novamente.",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Publicar sem entrar",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Entrar (abrir em uma nova guia)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continuar editando"
 }

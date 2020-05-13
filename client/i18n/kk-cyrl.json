@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
+			"Fontan 030",
 			"Нұрлан Рахымжанов"
 		]
 	},
@@ -48,7 +49,7 @@
 	"wikibase-unconnectedpages-submit": "Өту",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}} данасы ID",
 	"wikibase-pageinfo-entity-id-none": "Ешқандай",
-	"wikibase-otherprojects": "Басқа жобалар",
+	"wikibase-otherprojects": "Басқа жобаларда",
 	"wikibase-otherprojects-beta-message": "Басқа жобалар бүйірлік тақтасы",
 	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді."
 }
