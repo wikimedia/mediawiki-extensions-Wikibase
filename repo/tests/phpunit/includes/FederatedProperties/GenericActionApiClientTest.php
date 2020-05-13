@@ -6,6 +6,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
 use Psr\Log\NullLogger;
 use Psr\Log\Test\TestLogger;
+use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 
 /**
@@ -38,28 +39,14 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		$headers = [ 'Some-header' => [ 'some value' ] ];
 		$mwResponse = $this->newMockResponseWithHeaders( $headers );
 
-		$requestFactory = $this->createMock( HttpRequestFactory::class );
-		$requestFactory->expects( $this->once() )
-			->method( 'create' )
-			->willReturn( $mwResponse );
-
 		$api = new GenericActionApiClient(
-			$requestFactory,
+			$this->newMockRequestFactory( $mwResponse ),
 			'https://does-not-matter/',
 			new NullLogger()
 		);
 		$response = $api->get( [] );
 
 		$this->assertEquals( $headers, $response->getHeaders() );
-	}
-
-	private function newMockResponseWithHeaders( array $headers = [ 'Some-header' => [ 'some' ] ] ) {
-		$mwResponse = $this->createMock( MWHttpRequest::class );
-		$mwResponse->expects( $this->any() )
-			->method( 'getResponseHeaders' )
-			->willReturn( $headers );
-
-		return $mwResponse;
 	}
 
 	public function testGetRequestIsLogged() {
@@ -80,6 +67,39 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		$api->get( $params );
 
 		$logger->hasDebugThatContains( 'https://wikidata.org/w/api.php' );
+	}
+
+	public function testGivenRequestHitsTimeout_throwsException() {
+		$response = $this->newMockResponseWithHeaders();
+		$response->expects( $this->once() )
+			->method( 'getStatus' )
+			->willReturn( 0 );
+		$api = new GenericActionApiClient(
+			$this->newMockRequestFactory( $response ),
+			'https://wikidata.org/w/api.php',
+			new NullLogger()
+		);
+
+		$this->expectException( ApiRequestExecutionException::class );
+		$api->get( [] );
+	}
+
+	private function newMockResponseWithHeaders( array $headers = [ 'Some-header' => [ 'some' ] ] ) {
+		$mwResponse = $this->createMock( MWHttpRequest::class );
+		$mwResponse->expects( $this->any() )
+			->method( 'getResponseHeaders' )
+			->willReturn( $headers );
+
+		return $mwResponse;
+	}
+
+	private function newMockRequestFactory( $mwResponse ) {
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
+		$requestFactory->expects( $this->once() )
+			->method( 'create' )
+			->willReturn( $mwResponse );
+
+		return $requestFactory;
 	}
 
 }
