@@ -4,6 +4,10 @@ JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
 
+### 3.2.0 (2020-05-13)
+* Various improvements to error handling, now requests the `plaintext`
+  `errorformat` from the API and explicitly passes a language to use.
+
 ### 3.1.1 (2019-04-26)
 
 * Fix getLocationAgnosticMwApi to use browser location not wgServer to fix bugs
