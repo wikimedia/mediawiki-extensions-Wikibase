@@ -30,7 +30,7 @@ describe( 'App', () => {
 	} );
 
 	beforeEach( 'open bridge', () => {
-		DataBridgePage.openBridgeOnPage( title );
+		DataBridgePage.openAppOnPage( title );
 	} );
 
 	it( 'closes on clicking the close button', () => {
