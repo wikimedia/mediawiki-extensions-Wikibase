@@ -21,7 +21,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	private $responseDataFiles = [
 		'p18-en' => 'api-prefetching-term-lookup-test-data-p18-en.json',
-		'p1-missing' => 'api-entity-lookup-p1-missing.json',
+		'p1-missing' => 'wbgetentities-p1-missing.json',
 	];
 
 	private $data = [];

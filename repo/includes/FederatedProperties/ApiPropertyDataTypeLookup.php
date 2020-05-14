@@ -4,6 +4,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 
 /**
  * Simple implementation using individual wbgetentities calls with no caching.
@@ -34,12 +35,18 @@ class ApiPropertyDataTypeLookup implements PropertyDataTypeLookup {
 	 */
 	public function getDataTypeIdForProperty( PropertyId $propertyId ) {
 		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here
-		return json_decode( $this->api->get( [
+		$responsePartForProperty = json_decode( $this->api->get( [
 			'action' => 'wbgetentities',
 			'ids' => $propertyId->getSerialization(),
 			'props' => 'datatype',
 			'format' => 'json'
-		] )->getBody(), true )['entities'][$propertyId->getSerialization()]['datatype'];
+		] )->getBody(), true )['entities'][$propertyId->getSerialization()];
+
+		if ( !isset( $responsePartForProperty['datatype'] ) ) {
+			throw new PropertyDataTypeLookupException( $propertyId );
+		}
+
+		return $responsePartForProperty['datatype'];
 	}
 
 }
