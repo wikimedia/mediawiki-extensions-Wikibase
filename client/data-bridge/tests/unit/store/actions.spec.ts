@@ -989,15 +989,6 @@ describe( 'root/actions', () => {
 			} );
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles: {
-						purge: jest.fn().mockReturnValue( Promise.resolve() ),
-					},
-				} ),
-			};
-
 			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
 			// @ts-ignore
 			actions.statementMutationFactory = ( () => ( {
@@ -1031,7 +1022,6 @@ describe( 'root/actions', () => {
 					],
 				},
 			};
-			const pageTitle = 'South_Pole_Telescope';
 			const state = newApplicationState( {
 				applicationStatus: ApplicationStatus.READY,
 				targetValue,
@@ -1040,23 +1030,13 @@ describe( 'root/actions', () => {
 					id: entityId,
 				},
 				statements: statementsState,
-				pageTitle,
 			} );
-			const purgeTitles: MediaWikiPurge = {
-				purge: jest.fn().mockReturnValue( Promise.resolve() ),
-			};
 
 			const actions = inject( RootActions, {
 				state,
 				commit,
 				dispatch: rootModuleDispatch,
 			} );
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles,
-				} ),
-			};
 
 			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
 
@@ -1085,7 +1065,7 @@ describe( 'root/actions', () => {
 				'entitySave',
 				{ statements: statementsState[ entityId ], assertUser: true },
 			);
-			expect( purgeTitles.purge ).toHaveBeenCalledWith( [ pageTitle ] );
+			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'purgeTargetPage' );
 			expect( rootModuleDispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
 		} );
 
@@ -1103,15 +1083,6 @@ describe( 'root/actions', () => {
 				commit: jest.fn(),
 				dispatch: jest.fn(),
 			} );
-
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles: {
-						purge: jest.fn().mockReturnValue( Promise.resolve() ),
-					},
-				} ),
-			};
 
 			const statementMutationStrategy = jest.fn().mockReturnValue( {} );
 			// @ts-ignore
@@ -1132,70 +1103,6 @@ describe( 'root/actions', () => {
 			);
 		} );
 
-		it( 'gracefully ignores but tracks problems while purging the page', async () => {
-			const rootModuleDispatch = jest.fn();
-			const commit = jest.fn();
-			const entityId = 'Q42';
-			const targetPropertyId = 'P42';
-			const targetValue: DataValue = {
-				type: 'string',
-				value: 'a new value',
-			};
-			const statementsState: StatementState = {
-				[ entityId ]: {
-					[ targetPropertyId ]: [
-						{} as Statement,
-					],
-				},
-			};
-			const pageTitle = 'South_Pole_Telescope';
-			const state = newApplicationState( {
-				applicationStatus: ApplicationStatus.READY,
-				targetValue,
-				targetProperty: targetPropertyId,
-				entity: {
-					id: entityId,
-				},
-				statements: statementsState,
-				pageTitle,
-			} );
-			const purgeTitles: MediaWikiPurge = {
-				purge: jest.fn().mockReturnValue( Promise.reject() ),
-			};
-			const trackTitlePurgeError = jest.fn();
-
-			const actions = inject( RootActions, {
-				state,
-				commit,
-				dispatch: rootModuleDispatch,
-			} );
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles,
-					tracker: newMockTracker( {
-						trackTitlePurgeError,
-					} ),
-				} ),
-			};
-
-			const entityModuleDispatch = jest.fn( () => Promise.resolve() );
-
-			const statementMutationStrategy = jest.fn().mockReturnValue( statementsState );
-			// @ts-ignore
-			actions.statementMutationFactory = ( () => ( {
-				apply: statementMutationStrategy,
-			} ) );
-
-			// @ts-ignore
-			actions.entityModule = {
-				dispatch: entityModuleDispatch,
-			};
-
-			await expect( actions.saveBridge() ).resolves.toBeUndefined();
-			expect( trackTitlePurgeError ).toHaveBeenCalledTimes( 1 );
-		} );
-
 		it( 'chooses the strategy based on the edit decision', async () => {
 			const editDecision = EditDecision.UPDATE;
 			const state = newApplicationState( {
@@ -1211,15 +1118,6 @@ describe( 'root/actions', () => {
 				commit: jest.fn(),
 				dispatch: jest.fn(),
 			} );
-
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles: {
-						purge: jest.fn().mockReturnValue( Promise.resolve() ),
-					},
-				} ),
-			};
 
 			const statementMutationFactory = jest.fn( ( () => ( {
 				apply: jest.fn().mockReturnValue( {} ),
@@ -1338,15 +1236,6 @@ describe( 'root/actions', () => {
 				commit,
 			} );
 
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					purgeTitles: {
-						purge: jest.fn().mockReturnValue( Promise.resolve() ),
-					},
-				} ),
-			};
-
 			const statementMutationStrategy = jest.fn().mockReturnValue( {} );
 			// @ts-ignore
 			actions.statementMutationFactory = ( () => ( {
@@ -1374,6 +1263,100 @@ describe( 'root/actions', () => {
 			);
 		} );
 
+		it( 'purges the page if there is an edit conflict error', async () => {
+			const state = newApplicationState( {
+				applicationStatus: ApplicationStatus.READY,
+				entity: {
+					id: 'Q123',
+				},
+				statements: {},
+			} );
+
+			const dispatch = jest.fn();
+			const actions = inject( RootActions, {
+				state,
+				commit: jest.fn(),
+				dispatch,
+			} );
+
+			const statementMutationStrategy = jest.fn().mockReturnValue( {} );
+			// @ts-ignore
+			actions.statementMutationFactory = ( () => ( {
+				apply: statementMutationStrategy,
+			} ) );
+
+			const savingEntityError = new SavingError( [
+				{ type: ErrorTypes.ASSERT_USER_FAILED },
+				{ type: ErrorTypes.EDIT_CONFLICT },
+				{ type: ErrorTypes.SAVING_FAILED },
+			] );
+			const entityModuleDispatch = jest.fn( () => Promise.reject( savingEntityError ) );
+			// @ts-ignore
+			actions.entityModule = {
+				dispatch: entityModuleDispatch,
+			};
+
+			await expect( actions.saveBridge() ).rejects.toThrow();
+			expect( dispatch ).toHaveBeenCalledWith( 'purgeTargetPage' );
+		} );
+
+	} );
+
+	describe( 'purgeTargetPage', () => {
+		it( 'purges the page title', async () => {
+			const pageTitle = 'South_Pole_Telescope';
+			const state = newApplicationState( {
+				pageTitle,
+			} );
+
+			const actions = inject( RootActions, {
+				state,
+			} );
+
+			const purgeTitles: MediaWikiPurge = {
+				purge: jest.fn().mockReturnValue( Promise.resolve() ),
+			};
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles,
+				} ),
+			};
+
+			await actions.purgeTargetPage();
+
+			expect( purgeTitles.purge ).toHaveBeenCalledWith( [ pageTitle ] );
+		} );
+
+		it( 'gracefully ignores but tracks problems while purging the page', async () => {
+			const pageTitle = 'South_Pole_Telescope';
+			const state = newApplicationState( {
+				pageTitle,
+			} );
+
+			const actions = inject( RootActions, {
+				state,
+			} );
+
+			const purgeTitles: MediaWikiPurge = {
+				purge: jest.fn().mockReturnValue( Promise.reject() ),
+			};
+			const trackTitlePurgeError = jest.fn();
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					purgeTitles,
+					tracker: newMockTracker( {
+						trackTitlePurgeError,
+					} ),
+				} ),
+			};
+
+			await expect( actions.purgeTargetPage() ).resolves.toBeUndefined();
+			expect( trackTitlePurgeError ).toHaveBeenCalledTimes( 1 );
+		} );
 	} );
 
 	describe( 'retrySave', () => {
