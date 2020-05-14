@@ -194,7 +194,7 @@ return call_user_func( function() {
 				"wikibase.client.linkitem.init.js",
 				[
 					"name" => "config.json",
-					"callback" => "Wikibase\\ClientHooks::getSiteConfiguration"
+					"callback" => "Wikibase\\Client\\ClientHooks::getSiteConfiguration"
 				]
 			],
 			'messages' => [

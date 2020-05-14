@@ -96,8 +96,8 @@ call_user_func( function() {
 	$wgTrackingCategories[] = 'unresolved-property-category';
 	$wgTrackingCategories[] = 'connected-redirect-category';
 
-	$wgHooks['UnitTestsList'][] = '\Wikibase\ClientHooks::registerUnitTests';
-	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\ClientHooks::onBaseTemplateToolbox';
+	$wgHooks['UnitTestsList'][] = '\Wikibase\Client\ClientHooks::registerUnitTests';
+	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\Client\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][] =
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onOldChangesListRecentChangesLine';
 	$wgHooks['EnhancedChangesListModifyLineData'][] =
@@ -109,28 +109,28 @@ call_user_func( function() {
 	$wgHooks['ContentAlterParserOutput'][] = '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
 	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSidebarBeforeOutput';
 
-	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\ClientHooks::onParserFirstCallInit';
+	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\Client\ClientHooks::onParserFirstCallInit';
 	$wgHooks['SkinTemplateOutputPageBeforeExec'][] =
 		'\Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler::onSkinTemplateOutputPageBeforeExec';
 	$wgHooks['SpecialMovepageAfterMove'][] = '\Wikibase\Client\Hooks\MovePageNotice::onSpecialMovepageAfterMove';
-	$wgHooks['GetPreferences'][] = '\Wikibase\ClientHooks::onGetPreferences';
-	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplay';
-	$wgHooks['BeforePageDisplay'][] = '\Wikibase\ClientHooks::onBeforePageDisplayAddJsConfig';
-	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\ClientHooks::onScribuntoExternalLibraries';
+	$wgHooks['GetPreferences'][] = '\Wikibase\Client\ClientHooks::onGetPreferences';
+	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplay';
+	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplayAddJsConfig';
+	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\Client\ClientHooks::onScribuntoExternalLibraries';
 	$wgHooks['InfoAction'][] = '\Wikibase\Client\Hooks\InfoActionHookHandler::onInfoAction';
-	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\ClientHooks::onEditAction';
-	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\ClientHooks::onBaseTemplateAfterPortlet';
-	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\ClientHooks::onArticleDeleteAfterSuccess';
+	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\Client\ClientHooks::onEditAction';
+	$wgHooks['BaseTemplateAfterPortlet'][] = '\Wikibase\Client\ClientHooks::onBaseTemplateAfterPortlet';
+	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\Client\ClientHooks::onArticleDeleteAfterSuccess';
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler::onParserLimitReportPrepare';
-	$wgHooks['FormatAutocomments'][] = '\Wikibase\ClientHooks::onFormat';
+	$wgHooks['FormatAutocomments'][] = '\Wikibase\Client\ClientHooks::onFormat';
 	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
-	$wgHooks['AbortEmailNotification'][] = '\Wikibase\ClientHooks::onAbortEmailNotification';
-	$wgHooks['SearchDataForIndex'][] = '\Wikibase\ClientHooks::onSearchDataForIndex';
-	$wgHooks['SearchIndexFields'][] = '\Wikibase\ClientHooks::onSearchIndexFields';
+	$wgHooks['AbortEmailNotification'][] = '\Wikibase\Client\ClientHooks::onAbortEmailNotification';
+	$wgHooks['SearchDataForIndex'][] = '\Wikibase\Client\ClientHooks::onSearchDataForIndex';
+	$wgHooks['SearchIndexFields'][] = '\Wikibase\Client\ClientHooks::onSearchIndexFields';
 
-	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\ClientHooks::onCirrusSearchAddQueryFeatures';
+	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\Client\ClientHooks::onCirrusSearchAddQueryFeatures';
 
-	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\ClientHooks::onSkinAfterBottomScripts';
+	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\Client\ClientHooks::onSkinAfterBottomScripts';
 
 	// for client notifications (requires the Echo extension)
 	// note that Echo calls BeforeCreateEchoEvent hook when it is being initialized,
@@ -298,7 +298,7 @@ call_user_func( function() {
 		);
 	};
 
-	$wgHooks['wgQueryPages'][] = 'Wikibase\ClientHooks::onwgQueryPages';
+	$wgHooks['wgQueryPages'][] = '\Wikibase\Client\ClientHooks::onwgQueryPages';
 
 	// Resource loader modules
 	$wgResourceModules = array_merge(

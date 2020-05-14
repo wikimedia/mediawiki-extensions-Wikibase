@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Client;
 
 use Action;
 use BaseTemplate;
@@ -23,10 +23,8 @@ use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
-use Wikibase\Client\MoreLikeWikibase;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
@@ -59,7 +57,7 @@ final class ClientHooks {
 	 * @param string[] &$paths
 	 */
 	public static function registerUnitTests( array &$paths ) {
-		$paths[] = __DIR__ . '/tests/phpunit/';
+		$paths[] = __DIR__ . '/../tests/phpunit/';
 	}
 
 	/**
