@@ -20,14 +20,14 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\EntityExistenceChecker;
+use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
-use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
-use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -135,6 +135,26 @@ class WikibaseValueFormatterBuilders {
 	private $thumbLimits;
 
 	/**
+	 * @var EntityExistenceChecker
+	 */
+	private $entityExistenceChecker;
+
+	/**
+	 * @var EntityTitleTextLookup
+	 */
+	private $entityTitleTextLookup;
+
+	/**
+	 * @var EntityUrlLookup
+	 */
+	private $entityUrlLookup;
+
+	/**
+	 * @var EntityRedirectChecker
+	 */
+	private $entityRedirectChecker;
+
+	/**
 	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
@@ -146,6 +166,10 @@ class WikibaseValueFormatterBuilders {
 	 * @param EntityLookup $entityLookup
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param int $entitySchemaNamespace
+	 * @param EntityExistenceChecker $entityExistenceChecker
+	 * @param EntityTitleTextLookup $entityTitleTextLookup
+	 * @param EntityUrlLookup $entityUrlLookup
+	 * @param EntityRedirectChecker $entityRedirectChecker
 	 * @param EntityTitleLookup|null $entityTitleLookup
 	 * @param CachingKartographerEmbeddingHandler|null $kartographerEmbeddingHandler
 	 * @param bool $useKartographerMaplinkInWikitext
@@ -163,6 +187,10 @@ class WikibaseValueFormatterBuilders {
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
 		$entitySchemaNamespace,
+		EntityExistenceChecker $entityExistenceChecker,
+		EntityTitleTextLookup $entityTitleTextLookup,
+		EntityUrlLookup $entityUrlLookup,
+		EntityRedirectChecker $entityRedirectChecker,
 		EntityTitleLookup $entityTitleLookup = null,
 		CachingKartographerEmbeddingHandler $kartographerEmbeddingHandler = null,
 		$useKartographerMaplinkInWikitext = false,
@@ -220,6 +248,10 @@ class WikibaseValueFormatterBuilders {
 		$this->useKartographerMaplinkInWikitext = $useKartographerMaplinkInWikitext;
 		$this->entitySchemaNamespace = $entitySchemaNamespace;
 		$this->thumbLimits = $thumbLimits;
+		$this->entityExistenceChecker = $entityExistenceChecker;
+		$this->entityTitleTextLookup = $entityTitleTextLookup;
+		$this->entityUrlLookup = $entityUrlLookup;
+		$this->entityRedirectChecker = $entityRedirectChecker;
 	}
 
 	private function newPlainEntityIdFormatter( FormatterOptions $options ) {
@@ -542,11 +574,10 @@ class WikibaseValueFormatterBuilders {
 		return new LabelsProviderEntityIdHtmlLinkFormatter(
 			$lookup,
 			$this->languageNameLookup,
-			new TitleLookupBasedEntityExistenceChecker( $this->entityTitleLookup ),
-			new TitleLookupBasedEntityTitleTextLookup( $this->entityTitleLookup ),
-			new TitleLookupBasedEntityUrlLookup( $this->entityTitleLookup ),
-			new TitleLookupBasedEntityRedirectChecker( $this->entityTitleLookup )
-
+			$this->entityExistenceChecker,
+			$this->entityTitleTextLookup,
+			$this->entityUrlLookup,
+			$this->entityRedirectChecker
 		);
 	}
 

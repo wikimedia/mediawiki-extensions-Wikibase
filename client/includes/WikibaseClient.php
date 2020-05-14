@@ -118,6 +118,10 @@ use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -338,6 +342,10 @@ final class WikibaseClient {
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
 				$this->settings->getSetting( 'entitySchemaNamespace' ),
+				new TitleLookupBasedEntityExistenceChecker( $entityTitleLookup ),
+				new TitleLookupBasedEntityTitleTextLookup( $entityTitleLookup ),
+				new TitleLookupBasedEntityUrlLookup( $entityTitleLookup ),
+				new TitleLookupBasedEntityRedirectChecker( $entityTitleLookup ),
 				$entityTitleLookup,
 				$kartographerEmbeddingHandler,
 				$this->settings->getSetting( 'useKartographerMaplinkInWikitext' ),
