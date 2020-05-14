@@ -188,6 +188,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Label of a button to reload the whole page after an error occurred. (Contrast with {{msg-mw|wikibase-client-data-bridge-error-reload-bridge}}, which only reloads the Wikidata Bridge within the page.)",
 	"wikibase-client-data-bridge-error-go-back": "Label of a button to return to the main Wikidata Bridge application after an error occurred.\n\n{{Identical|Go back}}",
 	"wikibase-client-data-bridge-error-retry-save": "Label of a button to try saving an edit again after an error occurred.",
+	"wikibase-client-data-bridge-login-warning": "Message that is shown on [[Special:UserLogin]] when the user was sent there after clicking “log in” on a Data Bridge warning that they are currently not logged in. The login page was opened in a new tab; after logging in, the user needs to close that tab to return to the original tab with Data Bridge so they can save their edit again.",
 	"wikibase-client-data-bridge-reference-note": "Message assuring the user they will be able to edit references after saving",
 	"wikibase-client-data-bridge-thank-you-head": "Heading of a message displayed when the user has successfully saved a change via Wikidata Bridge.",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Suggestion for the user that they could edit references directly on Wikidata next. The button below has the label {{msg-mw|wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button}}.",

@@ -10,6 +10,9 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"Hooks": {
+		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle"
+	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/"
 	},
