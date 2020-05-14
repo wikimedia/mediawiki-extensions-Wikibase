@@ -193,5 +193,10 @@
 	"wikibase-client-data-bridge-reference-note": "Modifier les préférences sera possible sur {{WBREPONAME}} après enregistrement",
 	"wikibase-client-data-bridge-thank-you-head": "Merci pour votre modification !",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Vous pouvez modifier les références pour cette propriété sur {{WBREPONAME}} en cliquant sur le bouton ci-dessous.",
-	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Modifier la référence sur {{WBREPONAME}}"
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Modifier la référence sur {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Vous n’êtes pas connecté",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Vous pouvez publier vos modifications sans vous connecter. Votre adresse IP sera enregistrée dans l’historique de modification de la page. Vous pouvez aussi vous reconnecter et essayer de publier de nouveau.",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Publier sans se connecter",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Se connecter (ouvre dans un nouvel onglet)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continuer à modifier"
 }

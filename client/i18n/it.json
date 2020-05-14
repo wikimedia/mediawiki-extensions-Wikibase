@@ -129,12 +129,16 @@
 	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Ho corretto</strong> un valore sbagliato",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Ho aggiornato</strong> un valore obsoleto",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Non hai effettuato l'accesso",
-	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Attenzione</strong>: Accesso non effettuato. Se effettuerai delle modifiche il tuo indirizzo IP sarà visibile pubblicamente. Se <strong>accedi</strong> o <strong>crei un'utenza</strong>, le tue modifiche saranno attribuite al tuo nome utente, insieme ad altri benefici.",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Attenzione:</strong> non hai effettuato l'accesso. Se effettuerai delle modifiche il tuo indirizzo IP sarà visibile pubblicamente. Se <strong>accedi</strong> o <strong>crei un'utenza</strong>, le tue modifiche saranno attribuite al tuo nome utente, insieme ad altri benefici.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Modifica senza effettuare l'accesso",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Accedi o registrati",
 	"wikibase-client-data-bridge-saving-error-heading": "Impossibile salvare le modifiche",
 	"wikibase-client-data-bridge-unknown-error-heading": "Qualcosa è andato storto",
 	"wikibase-client-data-bridge-error-reload-bridge": "Ricarica",
 	"wikibase-client-data-bridge-error-go-back": "Torna indietro",
-	"wikibase-client-data-bridge-thank-you-head": "Grazie per la tua modifica!"
+	"wikibase-client-data-bridge-thank-you-head": "Grazie per la tua modifica!",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Non hai effettuato l'accesso",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Pubblica senza effettuare l'accesso",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Accedi (apre una nuova scheda)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continua a modificare"
 }

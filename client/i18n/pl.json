@@ -119,5 +119,9 @@
 	"wikibase-client-data-bridge-dialog-title": "Edytuj $1",
 	"wikibase-client-data-bridge-saving-error-heading": "Nie można zapisać zmian",
 	"wikibase-client-data-bridge-error-go-back": "Wróć",
-	"wikibase-client-data-bridge-error-retry-save": "Spróbuj zapisać ponownie"
+	"wikibase-client-data-bridge-error-retry-save": "Spróbuj zapisać ponownie",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Nie jesteś zalogowany",
+	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Opublikuj bez logowania",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Zaloguj się (otwórz w nowej karcie)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Wróć do edytowania"
 }
