@@ -265,6 +265,10 @@ RootActions
 			assertUser: this.state.assertUserWhenSaving,
 		} )
 			.catch( ( error: Error ) => {
+				if ( error instanceof SavingError
+					&& error.errors.some( ( savingError ) => savingError.type === ErrorTypes.EDIT_CONFLICT ) ) {
+					this.dispatch( 'purgeTargetPage' );
+				}
 				if ( error instanceof SavingError ) {
 					this.commit( 'addApplicationErrors', error.errors );
 				} else {
@@ -273,12 +277,7 @@ RootActions
 				throw error;
 			} )
 			.then( () => {
-				return this.store.$services.get( 'purgeTitles' )
-					.purge( [ this.state.pageTitle ] )
-					.catch( () => {
-						// we don't want to stop normal operation in that case
-						this.store.$services.get( 'tracker' ).trackTitlePurgeError();
-					} );
+				return this.dispatch( 'purgeTargetPage' );
 			} )
 			.then( () => {
 				this.commit(
@@ -286,6 +285,15 @@ RootActions
 					ApplicationStatus.SAVED,
 				);
 				return this.dispatch( 'postEntityLoad' );
+			} );
+	}
+
+	public purgeTargetPage(): Promise<void> {
+		return this.store.$services.get( 'purgeTitles' )
+			.purge( [ this.state.pageTitle ] )
+			.catch( () => {
+				// we don't want to stop normal operation in that case
+				this.store.$services.get( 'tracker' ).trackTitlePurgeError();
 			} );
 	}
 
