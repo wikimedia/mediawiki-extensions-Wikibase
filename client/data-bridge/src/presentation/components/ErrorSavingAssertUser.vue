@@ -27,6 +27,7 @@
 				:message="$messages.get( $messages.KEYS.SAVING_ERROR_ASSERTUSER_LOGIN )"
 				:new-tab="true"
 				:prevent-default="false"
+				@click="back"
 			/>
 			<EventEmittingButton
 				class="wb-db-error-saving-assertuser__back"
