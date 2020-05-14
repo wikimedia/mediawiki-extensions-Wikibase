@@ -33,9 +33,6 @@ return [
 		Def::ENTITY_SEARCH_CALLBACK => function() {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntitySearchHelper();
 		},
-		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newEntityIdHtmlLinkFormatter( $language );
-		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function() {
 			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiPrefetchingTermLookup();
 		},

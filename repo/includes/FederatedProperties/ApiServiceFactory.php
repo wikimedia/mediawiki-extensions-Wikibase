@@ -2,10 +2,8 @@
 
 namespace Wikibase\Repo\FederatedProperties;
 
-use Language;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
-use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -65,15 +63,6 @@ class ApiServiceFactory {
 	public function newApiPropertyDataTypeLookup(): ApiPropertyDataTypeLookup {
 		return new ApiPropertyDataTypeLookup(
 			$this->newFederatedPropertiesApiClient()
-		);
-	}
-
-	public function newEntityIdHtmlLinkFormatter( Language $language ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		return new LabelsProviderEntityIdHtmlLinkFormatter(
-			$repo->getLanguageFallbackLabelDescriptionLookupFactory()->newLabelDescriptionLookup( $language ),
-			$this->newApiEntityUrlLookup(),
-			new LanguageFallbackIndicator( $repo->getLanguageNameLookup() )
 		);
 	}
 
