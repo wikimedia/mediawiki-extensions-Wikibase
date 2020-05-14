@@ -10,6 +10,14 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface EntityExistenceChecker {
 
-	public function isDeleted( EntityId $id ): bool;
+	/**
+	 * This exists check returns true, iff an entity has both been created and not deleted,
+	 * i.e. deleted entities do not exist.
+	 *
+	 * @param EntityId $id
+	 *
+	 * @return bool
+	 */
+	public function exists( EntityId $id ): bool;
 
 }

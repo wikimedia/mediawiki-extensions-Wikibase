@@ -24,6 +24,10 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
+use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
+use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -537,8 +541,12 @@ class WikibaseValueFormatterBuilders {
 		$lookup = $this->labelDescriptionLookupFactory->getLabelDescriptionLookup( $options );
 		return new LabelsProviderEntityIdHtmlLinkFormatter(
 			$lookup,
-			$this->entityTitleLookup,
-			$this->languageNameLookup
+			$this->languageNameLookup,
+			new TitleLookupBasedEntityExistenceChecker( $this->entityTitleLookup ),
+			new TitleLookupBasedEntityTitleTextLookup( $this->entityTitleLookup ),
+			new TitleLookupBasedEntityUrlLookup( $this->entityTitleLookup ),
+			new TitleLookupBasedEntityRedirectChecker( $this->entityTitleLookup )
+
 		);
 	}
 

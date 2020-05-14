@@ -4,16 +4,17 @@ namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
 use MediaWikiTestCase;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityExistenceChecker;
+use Wikibase\Lib\Store\EntityRedirectChecker;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 
 /**
  * @covers \Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter
@@ -28,118 +29,55 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	use HamcrestPHPUnitIntegration;
 
-	/**
-	 * @param Term|null $term
-	 *
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookup( Term $term = null ) {
-		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->returnValue( $term ?: new Term( 'xy', 'A label' ) ) );
+	private const DEFAULT_URL = '/wiki/Q42';
 
-		return $labelDescriptionLookup;
-	}
+	private $labelDescriptionLookup;
+	private $languageNameLookup;
+	private $existenceChecker;
+	private $titleTextFormatter;
+	private $urlLookup;
+	private $redirectChecker;
 
-	/**
-	 * @return LabelDescriptionLookup
-	 */
-	private function getLabelDescriptionLookupNoLabel() {
-		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
-		$labelDescriptionLookup->expects( $this->any() )
-			->method( 'getLabel' )
-			->will( $this->throwException( new LabelDescriptionLookupException(
-				new ItemId( 'Q100' ),
-				'meep'
-			) ) );
+	protected function setUp(): void {
+		parent::setUp();
 
-		return $labelDescriptionLookup;
-	}
-
-	/**
-	 * @param bool $exists
-	 * @param bool $isRedirect
-	 *
-	 * @return EntityTitleLookup
-	 */
-	private function newEntityTitleLookup( $exists = true, $isRedirect = false ) {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $exists, $isRedirect ) {
-				$title = Title::newFromText( $id->getSerialization() );
-				$title->resetArticleID( $exists ? $id->getNumericId() : 0 );
-				$title->mRedirect = $isRedirect;
-
-				return $title;
-			} )
-		);
-
-		return $entityTitleLookup;
+		$this->labelDescriptionLookup = $this->newMockLabelDescriptionLookup();
+		$this->languageNameLookup = $this->newMockLanguageNameLookup();
+		$this->existenceChecker = $this->newMockExistenceChecker();
+		$this->titleTextFormatter = $this->newMockTitleTextFormatter();
+		$this->urlLookup = $this->newMockUrlLookup();
+		$this->redirectChecker = $this->newMockRedirectChecker();
 	}
 
 	public function formatProvider() {
-		$escapedItemUrl = preg_quote( Title::newFromText( 'Q42' )->getLocalURL(), '/' );
-
 		return [
 			'has a label' => [
-				'expectedRegex' => '/' . $escapedItemUrl . '.*>A label</',
+				'expectedPattern' => '@href="' . self::DEFAULT_URL . '".*>A label<@',
+				'label' => new Term( 'en', 'A label' ),
 			],
 			"has no label" => [
-				'expectedRegex' => '/' . $escapedItemUrl . '.*>Q42</',
-				'hasLabel' => false
+				'expectedPattern' => '@href="' . self::DEFAULT_URL . '".*>Q42<@',
+				'label' => null,
+			],
+			'has a title' => [
+				'expectedPattern' => '@title="A title".*@',
+				'label' => null,
+				'title' => 'A title'
+			],
+			"has no title" => [
+				'expectedPattern' => '@a href="' . self::DEFAULT_URL . '">Q42<@',
+				'label' => null,
+				'title' => null
 			],
 			"doesn't exist, lookup labels" => [
-				'expectedRegex' => '/^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
-					preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
-					'</',
-				'hasLabel' => false,
+				'expectedPattern' => '@^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '@' ) . '.*>' .
+					preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '@' ) .
+					'<@',
+				'label' => null,
+				'title' => null,
 				'exists' => false
 			],
 		];
-	}
-
-	private function getFormatter( $hasLabel, $exists, Term $term = null ) : LabelsProviderEntityIdHtmlLinkFormatter {
-		if ( $hasLabel ) {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookup( $term );
-		} else {
-			$labelDescriptionLookup = $this->getLabelDescriptionLookupNoLabel();
-		}
-
-		$entityTitleLookup = $this->newEntityTitleLookup( $exists );
-
-		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
-		$languageNameLookup->expects( $this->any() )
-			->method( 'getName' )
-			->will( $this->returnCallback( function ( $languageCode ) {
-				$names = [
-						'de' => 'Deutsch',
-						'de-at' => 'Österreichisches Deutsch',
-						'de-ch' => 'Schweizer Hochdeutsch',
-						'en' => 'english in german',
-						'en-ca' => 'Canadian English'
-				];
-				return $names[ $languageCode ];
-			} ) );
-
-		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$entityTitleLookup,
-			$languageNameLookup
-		);
-
-		return $formatter;
-	}
-
-	/**
-	 * @dataProvider formatProvider
-	 */
-	public function testFormat( $expectedRegex, $hasLabel = true, $exists = true ) {
-		$formatter = $this->getFormatter( $hasLabel, $exists );
-		$result = $formatter->formatEntityId( new ItemId( 'Q42' ) );
-
-		$this->assertRegExp( $expectedRegex, $result );
 	}
 
 	public function formatProvider_fallback() {
@@ -156,32 +94,32 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 
 		return [
 			'plain term' => [
-				'expectedRegex' => '@>Kätzchen<@',
+				'expectedPattern' => '@>Kätzchen<@',
 				'term' => $deTerm,
 			],
 			'plain fallabck term' => [
-				'expectedRegex' => '@>Kätzchen<@',
+				'expectedPattern' => '@>Kätzchen<@',
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expectedRegex' => '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>@',
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expectedRegex' => '@ lang="de-at">Kätzchen</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="de-at">Kätzchen</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>@',
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expectedRegex' => '@>Frass</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@>Frass</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration">'
 					. preg_quote( $translitDeCh, '@' )
 					. '</sup>@',
 				'term' => $deChTerm,
 			],
 			'transliteration to other variant' => [
-				'expectedRegex' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
 					. 'variant">'
 					. preg_quote( $translitEnCa, '@' )
@@ -189,7 +127,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expectedRegex' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>@',
 				'term' => $deEnTerm,
 			],
@@ -197,84 +135,145 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider formatProvider
+	 */
+	public function testFormat( $expectedPattern, $label, $title = null, $exists = true ) {
+		$entityId = new ItemId( 'Q42' );
+		$this->labelDescriptionLookup = $this->newMockLabelDescriptionLookup( $label, $entityId );
+		$this->existenceChecker = $this->newMockExistenceChecker( $exists, $entityId );
+		$this->titleTextFormatter = $this->newMockTitleTextFormatter( $title, $entityId );
+
+		$result = $this->newFormatter()->formatEntityId( $entityId );
+
+		$this->assertRegExp( $expectedPattern, $result );
+	}
+
+	/**
 	 * @dataProvider formatProvider_fallback
 	 */
-	public function testFormat_fallback( $expectedRegex, Term $term ) {
-		$formatter = $this->getFormatter( true, true, $term );
+	public function testFormat_fallback( $expectedPattern, Term $term ) {
+		$entityId = new ItemId( 'Q42' );
+		$this->labelDescriptionLookup = $this->newMockLabelDescriptionLookup( $term, $entityId );
 
-		$result = $formatter->formatEntityId( new ItemId( 'Q42' ) );
+		$result = $this->newFormatter()->formatEntityId( $entityId );
 
-		$this->assertRegExp( $expectedRegex, $result );
+		$this->assertRegExp( $expectedPattern, $result );
 	}
 
 	public function testGivenEntityIdWithNullTitle_htmlForNonExistentEntityIsDisplayed() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( $this->anything() )
-			->will( $this->returnValue( null ) );
+		$entityId = new ItemId( 'Q42' );
+		$this->existenceChecker = $this->newMockExistenceChecker( false, $entityId );
 
-		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
-			$this->createMock( LabelDescriptionLookup::class ),
-			$entityTitleLookup,
-			$this->createMock( LanguageNameLookup::class )
-		);
+		$expectedPattern = '@^Q42' . preg_quote( wfMessage( 'word-separator' )->text(), '@' ) . '.*>' .
+			preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '@' ) .
+			'<@';
 
-		$expectedPattern = '/^Q123' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
-			preg_quote( wfMessage( 'parentheses', wfMessage( 'wikibase-deletedentity-item' )->text() )->text(), '/' ) .
-			'</';
-
-		$this->assertRegExp( $expectedPattern, $formatter->formatEntityId( new ItemId( 'Q123' ) ) );
+		$this->assertRegExp( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
 	}
 
-	public function testGivenForeignEntityId_fullUrlIsUsedInTheOutput() {
-		$this->setUserLang( 'en' );
+	public function testUsesUrlFromLookup() {
+		$url = '/wiki/Q23';
+		$entityId = new ItemId( 'Q23' );
+		$this->urlLookup = $this->newMockUrlLookup( $url, $entityId );
 
-		$localTitle = $this->createMock( Title::class );
-		$localTitle->expects( $this->any() )
-			->method( 'isLocal' )
-			->will( $this->returnValue( true ) );
-		$localTitle->expects( $this->any() )
-			->method( 'getLocalUrl' )
-			->will( $this->returnValue( '/wiki/Q42' ) );
+		$expectedPattern = '@href="' . $url . '".*>@';
 
-		$foreignTitle = $this->createMock( Title::class );
-		$foreignTitle->expects( $this->any() )
-			->method( 'isLocal' )
-			->will( $this->returnValue( false ) );
-		$foreignTitle->expects( $this->any() )
-			->method( 'getFullUrl' )
-			->will( $this->returnValue( 'http://foo.wiki/wiki/Q42' ) );
-
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function ( EntityId $id ) use ( $localTitle, $foreignTitle ) {
-				return $id->isForeign() ? $foreignTitle : $localTitle;
-			} ) );
-
-		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
-			$this->getLabelDescriptionLookup( new Term( 'en', 'Something' ) ),
-			$entityTitleLookup,
-			$this->createMock( LanguageNameLookup::class )
-		);
-
-		$this->assertRegExp( '|"http://foo.wiki/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'foo:Q42' ) ) );
-		$this->assertRegExp( '|"/wiki/Q42".*>Something<|', $formatter->formatEntityId( new ItemId( 'Q42' ) ) );
+		$this->assertRegExp( $expectedPattern, $this->newFormatter()->formatEntityId( $entityId ) );
 	}
 
 	public function testFormat_redirectHasClass() {
-		$exists = true;
-		$isRedirect = true;
-		$entityTitleLookup = $this->newEntityTitleLookup( $exists, $isRedirect );
-		$formatter = new LabelsProviderEntityIdHtmlLinkFormatter(
-			$this->getLabelDescriptionLookup(),
-			$entityTitleLookup,
-			$this->createMock( LanguageNameLookup::class )
+		$entityId = new ItemId( 'Q42' );
+		$this->redirectChecker = $this->newMockRedirectChecker( true, $entityId );
+
+		$this->assertThatHamcrest(
+			$this->newFormatter()->formatEntityId( $entityId ),
+			htmlPiece( havingChild( withClass( 'mw-redirect' ) ) )
 		);
-
-		$formattedEntityId = $formatter->formatEntityId( new ItemId( 'Q42' ) );
-
-		$this->assertThatHamcrest( $formattedEntityId, htmlPiece( havingChild( withClass( 'mw-redirect' ) ) ) );
 	}
 
+	private function newFormatter(): LabelsProviderEntityIdHtmlLinkFormatter {
+		return new LabelsProviderEntityIdHtmlLinkFormatter(
+			$this->labelDescriptionLookup,
+			$this->languageNameLookup,
+			$this->existenceChecker,
+			$this->titleTextFormatter,
+			$this->urlLookup,
+			$this->redirectChecker
+		);
+	}
+
+	private function newMockLabelDescriptionLookup( Term $label = null, ItemId $entityId = null ): LabelDescriptionLookup {
+		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
+		$labelDescriptionLookup
+			->expects( $this->any() )
+			->method( 'getLabel' )
+			->with( $entityId ?? $this->anything() )
+			->willReturn( $label );
+
+		return $labelDescriptionLookup;
+	}
+
+	private function newMockLanguageNameLookup(): LanguageNameLookup {
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
+		$languageNameLookup->expects( $this->any() )
+			->method( 'getName' )
+			->will(
+				$this->returnCallback(
+					function ( $languageCode ) {
+						$names = [
+							'de' => 'Deutsch',
+							'de-at' => 'Österreichisches Deutsch',
+							'de-ch' => 'Schweizer Hochdeutsch',
+							'en' => 'english in german',
+							'en-ca' => 'Canadian English'
+						];
+						return $names[$languageCode];
+					}
+				)
+			);
+
+		return $languageNameLookup;
+	}
+
+	private function newMockExistenceChecker( bool $exists = true, EntityId $entityId = null ): EntityExistenceChecker {
+		$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
+		$entityExistenceChecker
+			->expects( $this->any() )
+			->method( 'exists' )
+			->with( $entityId ?? $this->anything() )
+			->willReturn( $exists );
+
+		return $entityExistenceChecker;
+	}
+
+	private function newMockTitleTextFormatter( string $titleText = null, EntityId $entityId = null ): EntityTitleTextLookup {
+		$titleTextFormatter = $this->createMock( EntityTitleTextLookup::class );
+		$titleTextFormatter
+			->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->with( $entityId ?? $this->anything() )
+			->willReturn( $titleText );
+
+		return $titleTextFormatter;
+	}
+
+	private function newMockUrlLookup( string $url = self::DEFAULT_URL, EntityId $entityId = null ): EntityUrlLookup {
+		$urlLookup = $this->createMock( EntityUrlLookup::class );
+		$urlLookup->expects( $this->any() )
+			->method( 'getLinkUrl' )
+			->with( $entityId ?? $this->anything() )
+			->willReturn( $url );
+		return $urlLookup;
+	}
+
+	private function newMockRedirectChecker( bool $isRedirect = false, EntityId $entityId = null ): EntityRedirectChecker {
+		$entityRedirectChecker = $this->createMock( EntityRedirectChecker::class );
+		$entityRedirectChecker
+			->expects( $this->any() )
+			->method( 'isRedirect' )
+			->with( $entityId ?? $this->anything() )
+			->willReturn( $isRedirect );
+
+		return $entityRedirectChecker;
+	}
 }

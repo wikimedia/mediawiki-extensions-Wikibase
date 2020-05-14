@@ -171,8 +171,11 @@ return [
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
-				$repo->getEntityTitleLookup(),
-				$repo->getLanguageNameLookup()
+				$repo->getLanguageNameLookup(),
+				$repo->getEntityExistenceChecker(),
+				$repo->getEntityTitleTextLookup(),
+				$repo->getEntityUrlLookup(),
+				$repo->getEntityRedirectChecker()
 			);
 		},
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {
@@ -280,8 +283,11 @@ return [
 			$languageLabelLookup = $languageLabelLookupFactory->newLabelDescriptionLookup( $language );
 			return new LabelsProviderEntityIdHtmlLinkFormatter(
 				$languageLabelLookup,
-				$repo->getEntityTitleLookup(),
-				$repo->getLanguageNameLookup()
+				$repo->getLanguageNameLookup(),
+				$repo->getEntityExistenceChecker(),
+				$repo->getEntityTitleTextLookup(),
+				$repo->getEntityUrlLookup(),
+				$repo->getEntityRedirectChecker()
 			);
 		},
 		Def::ENTITY_REFERENCE_EXTRACTOR_CALLBACK => function() {

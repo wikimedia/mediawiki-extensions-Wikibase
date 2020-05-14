@@ -20,13 +20,13 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 
 	public function testGivenNoExistenceCheckerDefinedForEntityType_usesDefaultChecker() {
 		$entityId = new PropertyId( 'P123' );
-		$isDeleted = false;
+		$exists = true;
 
 		$defaultChecker = $this->createMock( EntityExistenceChecker::class );
 		$defaultChecker->expects( $this->once() )
-			->method( 'isDeleted' )
+			->method( 'exists' )
 			->with( $entityId )
-			->willReturn( $isDeleted );
+			->willReturn( $exists );
 
 		$existenceChecker = new TypeDispatchingExistenceChecker(
 			[ 'item' => function () {
@@ -35,27 +35,27 @@ class TypeDispatchingExistenceCheckerTest extends TestCase {
 			$defaultChecker
 		);
 
-		$this->assertSame( $isDeleted, $existenceChecker->isDeleted( $entityId ) );
+		$this->assertSame( $exists, $existenceChecker->exists( $entityId ) );
 	}
 
 	public function testGivenExistenceCheckerDefinedForEntityType_usesRespectiveExistenceChecker() {
 		$entityId = new PropertyId( 'P321' );
-		$isDeleted = true;
+		$exists = false;
 
 		$existenceChecker = new TypeDispatchingExistenceChecker(
-			[ 'property' => function () use ( $entityId, $isDeleted ) {
+			[ 'property' => function () use ( $entityId, $exists ) {
 				$propertyExistenceChecker = $this->createMock( EntityExistenceChecker::class );
 				$propertyExistenceChecker->expects( $this->once() )
-					->method( 'isDeleted' )
+					->method( 'exists' )
 					->with( $entityId )
-					->willReturn( $isDeleted );
+					->willReturn( $exists );
 
 				return $propertyExistenceChecker;
 			} ],
 			$this->newNeverCalledMockChecker()
 		);
 
-		$this->assertSame( $isDeleted, $existenceChecker->isDeleted( $entityId ) );
+		$this->assertSame( $exists, $existenceChecker->exists( $entityId ) );
 	}
 
 	private function newNeverCalledMockChecker(): EntityExistenceChecker {
