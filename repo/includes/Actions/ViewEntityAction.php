@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Actions;
 
 use Article;
 use Html;
@@ -183,3 +183,6 @@ class ViewEntityAction extends ViewAction {
 	}
 
 }
+
+/** @deprecated */
+class_alias( ViewEntityAction::class, 'Wikibase\ViewEntityAction' );

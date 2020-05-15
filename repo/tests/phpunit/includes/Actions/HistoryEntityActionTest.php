@@ -14,12 +14,12 @@ use WebRequest;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Repo\Actions\HistoryEntityAction;
 use WikiPage;
 
 /**
- * @covers \Wikibase\HistoryEntityAction
+ * @covers \Wikibase\Repo\Actions\HistoryEntityAction
  *
  * @group Action
  * @group Wikibase

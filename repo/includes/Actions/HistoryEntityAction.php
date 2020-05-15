@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Actions;
 
 use HistoryAction;
 use IContextSource;
@@ -74,3 +74,6 @@ class HistoryEntityAction extends HistoryAction {
 	}
 
 }
+
+/** @deprecated */
+class_alias( HistoryEntityAction::class, 'Wikibase\HistoryEntityAction' );

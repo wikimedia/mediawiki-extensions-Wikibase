@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Actions;
 
 use Html;
 use IContextSource;
@@ -17,6 +17,7 @@ use OOUI\TextInputWidget;
 use Page;
 use Status;
 use WebRequest;
+use Wikibase\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;
@@ -507,3 +508,6 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EditEntityAction::class, 'Wikibase\EditEntityAction' );

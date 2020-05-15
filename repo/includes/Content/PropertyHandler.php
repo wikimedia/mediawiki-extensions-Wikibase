@@ -12,8 +12,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\EditEntityAction;
-use Wikibase\HistoryEntityAction;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
@@ -21,11 +19,13 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\PropertyContent;
 use Wikibase\PropertyInfoBuilder;
+use Wikibase\Repo\Actions\EditEntityAction;
+use Wikibase\Repo\Actions\HistoryEntityAction;
+use Wikibase\Repo\Actions\SubmitEntityAction;
+use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\SubmitEntityAction;
-use Wikibase\ViewEntityAction;
 
 /**
  * Content handler for Wikibase items.

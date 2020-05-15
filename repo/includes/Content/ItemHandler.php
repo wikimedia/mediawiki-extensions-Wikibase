@@ -17,19 +17,19 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\EditEntityAction;
-use Wikibase\HistoryEntityAction;
 use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\SiteLinkStore;
+use Wikibase\Repo\Actions\EditEntityAction;
+use Wikibase\Repo\Actions\HistoryEntityAction;
+use Wikibase\Repo\Actions\SubmitEntityAction;
+use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Validators\EntityConstraintProvider;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
-use Wikibase\SubmitEntityAction;
-use Wikibase\ViewEntityAction;
 
 /**
  * Content handler for Wikibase items.

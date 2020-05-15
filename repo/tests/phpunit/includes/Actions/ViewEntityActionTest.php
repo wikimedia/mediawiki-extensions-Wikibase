@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Tests\Actions;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Actions\ViewEntityAction;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\ViewEntityAction;
 use WikiPage;
 
 /**
- * @covers \Wikibase\ViewEntityAction
+ * @covers \Wikibase\Repo\Actions\ViewEntityAction
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -156,7 +156,7 @@ class ViewEntityActionTest extends ActionTestCase {
 	}
 
 	/**
-	 * @covers \Wikibase\ViewEntityAction::onBeforeDisplayNoArticleText
+	 * @covers \Wikibase\Repo\Actions\ViewEntityAction::onBeforeDisplayNoArticleText
 	 */
 	public function testShow404() {
 		$id = new ItemId( 'q1122334455' );
