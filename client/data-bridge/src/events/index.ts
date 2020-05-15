@@ -1,6 +1,7 @@
 export enum initEvents {
 	saved = 'saved',
 	cancel = 'cancel',
+	reload = 'reload',
 }
 
 export enum appEvents {

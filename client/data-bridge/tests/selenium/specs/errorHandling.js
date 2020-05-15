@@ -333,7 +333,7 @@ describe( 'App', () => {
 	} );
 
 	describe( 'when there is an edit conflict', () => {
-		it( 'shows the right error component', () => {
+		beforeEach( 'run bridge, clear item, trigger error', () => {
 			// prepare Bridge for saving
 			const title = DataBridgePage.getDummyTitle();
 			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
@@ -380,8 +380,22 @@ describe( 'App', () => {
 			// trigger error
 			DataBridgePage.saveButton.click();
 			DataBridgePage.error.waitForDisplayed();
+		} );
 
+		it( 'reloads on reload button click', () => {
 			assert.ok( ErrorSavingEditConflict.isDisplayed() );
+
+			ErrorSavingEditConflict.reloadButton.click();
+
+			DataBridgePage.app.waitForDisplayed( undefined, /* reverse */ true );
+		} );
+
+		it( 'reloads on close button click', () => {
+			assert.ok( ErrorSavingEditConflict.isDisplayed() );
+
+			DataBridgePage.closeButton.click();
+
+			DataBridgePage.app.waitForDisplayed( undefined, /* reverse */ true );
 		} );
 	} );
 
