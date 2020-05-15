@@ -25,6 +25,10 @@
 			v-else-if="isAssertUserFailedError"
 			:login-url="loginUrl"
 		/>
+		<ErrorSavingEditConflict
+			v-else-if="isEditConflictError"
+			@reload="reload"
+		/>
 		<ErrorUnknown
 			v-else
 			@relaunch="relaunch"
@@ -44,6 +48,7 @@ import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedS
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
 import ErrorSavingAssertUser from '@/presentation/components/ErrorSavingAssertUser.vue';
+import ErrorSavingEditConflict from '@/presentation/components/ErrorSavingEditConflict.vue';
 import ApplicationError, {
 	ErrorTypes,
 	UnsupportedDatatypeError,
@@ -60,6 +65,7 @@ import ApplicationError, {
 		ErrorAmbiguousStatement,
 		ErrorSaving,
 		ErrorSavingAssertUser,
+		ErrorSavingEditConflict,
 	},
 } )
 export default class ErrorWrapper extends mixins( StateMixin ) {
@@ -113,6 +119,10 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 		return this.rootModule.getters.isAssertUserFailedError;
 	}
 
+	public get isEditConflictError(): boolean {
+		return this.rootModule.getters.isEditConflictError;
+	}
+
 	public get loginUrl(): string {
 		return this.$clientRouter.getPageUrl(
 			'Special:UserLogin',
@@ -128,6 +138,14 @@ export default class ErrorWrapper extends mixins( StateMixin ) {
 		 * @type {Event}
 		 */
 		this.$emit( 'relaunch' );
+	}
+
+	private reload(): void {
+		/**
+		 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
+		 * @type {Event}
+		 */
+		this.$emit( 'reload' );
 	}
 }
 </script>
