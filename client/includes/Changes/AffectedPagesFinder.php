@@ -18,7 +18,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\ItemChange;
-use Wikibase\Lib\Store\StorageException;
 
 /**
  * @license GPL-2.0-or-later
@@ -292,14 +291,8 @@ class AffectedPagesFinder {
 
 		/** @var PageEntityUsages $pageEntityUsages */
 		foreach ( $usages as $pageEntityUsages ) {
-			try {
-				$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
-			} catch ( StorageException $ex ) {
-				// page not found, skip
-				continue;
-			}
-
-			if ( $this->checkPageExistence && !$title->exists() ) {
+			$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
+			if ( !$title || ( $this->checkPageExistence && !$title->exists() ) ) {
 				continue;
 			}
 
@@ -319,10 +312,9 @@ class AffectedPagesFinder {
 		$titles = [];
 
 		foreach ( $names as $name ) {
-			try {
-				$titles[] = $this->titleFactory->newFromText( $name );
-			} catch ( StorageException $ex ) {
-				// Invalid title in the diff? Skip.
+			$title = $this->titleFactory->newFromText( $name );
+			if ( $title ) {
+				$titles[] = $title;
 			}
 		}
 
