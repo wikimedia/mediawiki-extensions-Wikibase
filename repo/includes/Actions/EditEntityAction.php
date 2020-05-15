@@ -508,6 +508,3 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EditEntityAction::class, 'Wikibase\EditEntityAction' );

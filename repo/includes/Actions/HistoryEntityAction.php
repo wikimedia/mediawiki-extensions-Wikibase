@@ -74,6 +74,3 @@ class HistoryEntityAction extends HistoryAction {
 	}
 
 }
-
-/** @deprecated */
-class_alias( HistoryEntityAction::class, 'Wikibase\HistoryEntityAction' );
