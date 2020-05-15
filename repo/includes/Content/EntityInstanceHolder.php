@@ -59,6 +59,3 @@ class EntityInstanceHolder implements EntityHolder {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EntityInstanceHolder::class, 'Wikibase\Content\EntityInstanceHolder' );

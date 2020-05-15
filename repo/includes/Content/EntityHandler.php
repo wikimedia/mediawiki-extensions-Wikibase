@@ -31,9 +31,6 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 use WikiPage;
 
-// TEMPORARY: ensure that EntityHolder, including its class alias, is autoloaded
-class_exists( EntityHolder::class );
-
 /**
  * Base handler class for Entity content classes.
  * @license GPL-2.0-or-later

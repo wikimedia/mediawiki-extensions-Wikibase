@@ -141,6 +141,3 @@ class PropertyContent extends EntityContent {
 	}
 
 }
-
-/** @deprecated */
-class_alias( PropertyContent::class, 'Wikibase\PropertyContent' );

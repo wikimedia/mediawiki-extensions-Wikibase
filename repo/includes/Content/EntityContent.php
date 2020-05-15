@@ -692,6 +692,3 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 }
-
-/** @deprecated */
-class_alias( EntityContent::class, 'Wikibase\EntityContent' );

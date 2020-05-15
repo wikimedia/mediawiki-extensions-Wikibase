@@ -45,6 +45,3 @@ interface EntityHolder {
 	public function getEntityType();
 
 }
-
-/** @deprecated */
-class_alias( EntityHolder::class, 'Wikibase\Content\EntityHolder' );
