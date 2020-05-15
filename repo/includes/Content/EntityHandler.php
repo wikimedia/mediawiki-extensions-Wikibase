@@ -16,7 +16,6 @@ use ParserOutput;
 use Revision;
 use SearchEngine;
 use Title;
-use Wikibase\Content\DeferredDecodingEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;

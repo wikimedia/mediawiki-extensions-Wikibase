@@ -2,15 +2,15 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use Wikibase\Content\DeferredCopyEntityHolder;
 use Wikibase\Content\EntityHolder;
 use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Content\DeferredCopyEntityHolder;
 
 /**
- * @covers \Wikibase\Content\DeferredCopyEntityHolder
+ * @covers \Wikibase\Repo\Content\DeferredCopyEntityHolder
  *
  * @group Wikibase
  * @group WikibaseEntity
