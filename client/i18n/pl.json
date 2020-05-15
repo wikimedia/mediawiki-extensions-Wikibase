@@ -118,10 +118,14 @@
 	"connected-redirect-category-desc": "Ta kategoria zawiera przekierowania, które są połączone z elementem Wikidanych.",
 	"wikibase-client-data-bridge-dialog-title": "Edytuj $1",
 	"wikibase-client-data-bridge-saving-error-heading": "Nie można zapisać zmian",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Wykryto konflikt edycji",
+	"wikibase-client-data-bridge-error-reload-page": "Odśwież stronę",
 	"wikibase-client-data-bridge-error-go-back": "Wróć",
 	"wikibase-client-data-bridge-error-retry-save": "Spróbuj zapisać ponownie",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Nie jesteś zalogowany",
-	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Opublikuj bez logowania",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Możesz opublikować zmiany bez logowania. Twój adres IP zostanie zapisany w historii edycji strony. Możesz się także zalogować i spróbować opublikować edycję ponownie.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Opublikuj bez logowania",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Zapisz bez logowania",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Zaloguj się (otwórz w nowej karcie)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Wróć do edytowania"
 }

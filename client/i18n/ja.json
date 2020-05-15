@@ -121,5 +121,5 @@
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "ログインせずに編集",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ロろグイン / 登録",
 	"wikibase-client-data-bridge-error-reload-bridge": "再読み込み",
-	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "ログインせずに編集"
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "ログインせずに編集"
 }

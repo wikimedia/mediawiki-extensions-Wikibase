@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Servien"
+			"Servien",
+			"Slomox"
 		]
 	},
-	"wikibase-edit": "ännern"
+	"wikibase-edit": "ännern",
+	"wikibase-tainted-ref-popper-help-link-text": "Hülp"
 }

@@ -138,7 +138,7 @@
 	"wikibase-client-data-bridge-error-go-back": "Torna indietro",
 	"wikibase-client-data-bridge-thank-you-head": "Grazie per la tua modifica!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Non hai effettuato l'accesso",
-	"wikibase-client-data-bridge-saving-error-assertuser-proceed": "Pubblica senza effettuare l'accesso",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Pubblica senza effettuare l'accesso",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Accedi (apre una nuova scheda)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continua a modificare"
 }

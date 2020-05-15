@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AlimOmar",
 			"Uzdil"
 		]
 	},
@@ -14,5 +15,14 @@
 	"wikibase-rc-hide-wikidata-show": "كۆرسەت",
 	"wikibase-rc-wikibase-edit-letter": "سان",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} تەھرىرلەش",
-	"wikibase-otherprojects": "باشقا تۈرلەردە"
+	"wikibase-otherprojects": "باشقا تۈرلەردە",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "تىزىملىتىپ كىرمەي تەھرىرلەڭ",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "تەھرىردە توقۇنۇش بايقالغان",
+	"wikibase-client-data-bridge-error-reload-page": "بەتنى قايتا يۈكلەڭ",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "سىز تېخى تىزىمغا ئالدۇرمىدىڭىز",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "ئۆزگەرتىشلىرىڭىزنى تىزىمغا ئالدۇرماي ئېلان قىلالايسىز. IP ئادرېسىڭىز بەت تەھرىرلەش تارىخىغا خاتىرىلىنىدۇ. سىز يەنە ئارقىغا قايتىپ قايتا ئىلەن قىلسىڭىز بولىدۇ.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "تىزىملاتماي ئېلان قىلىڭ",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "تىزىمغا ئالدۇرۇپ كىرمەي ساقلاش",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "كىرىش (يېڭى بەتكۈچتە ئېچىلىدۇ)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "داۋاملىق تەھرىرلەڭ"
 }
