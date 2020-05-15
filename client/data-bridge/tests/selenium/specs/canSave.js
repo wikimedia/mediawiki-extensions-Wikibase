@@ -4,20 +4,13 @@ const assert = require( 'assert' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 function createTag( tagname, reason ) {
-	let bot;
-	return Api.bot()
-		.then( ( mwBot ) => {
-			bot = mwBot;
-			return bot.getEditToken();
-		} ).then( ( botState ) => {
-			return bot.request( {
-				action: 'managetags',
-				operation: 'create',
-				tag: tagname,
-				reason,
-				token: botState.csrftoken,
-			} );
-		} );
+	return Api.bot().then( ( bot ) => bot.request( {
+		action: 'managetags',
+		operation: 'create',
+		tag: tagname,
+		reason,
+		token: bot.editToken,
+	} ) );
 }
 
 function getLatestRevisionTags( title ) {
