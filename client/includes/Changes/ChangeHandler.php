@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Changes;
 
-use Exception;
 use Hooks;
 use InvalidArgumentException;
 use LinkBatch;
@@ -233,11 +232,9 @@ class ChangeHandler {
 		$titles = [];
 
 		foreach ( $usagesPerPage as $usages ) {
-			try {
-				$title = $this->titleFactory->newFromID( $usages->getPageId() );
+			$title = $this->titleFactory->newFromID( $usages->getPageId() );
+			if ( $title ) {
 				$titles[] = $title;
-			} catch ( Exception $ex ) {
-				// No title for that ID, maybe the page got deleted just now.
 			}
 		}
 
