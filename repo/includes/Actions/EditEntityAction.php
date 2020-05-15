@@ -17,7 +17,7 @@ use OOUI\TextInputWidget;
 use Page;
 use Status;
 use WebRequest;
-use Wikibase\EntityContent;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\DispatchingEntityDiffVisualizer;

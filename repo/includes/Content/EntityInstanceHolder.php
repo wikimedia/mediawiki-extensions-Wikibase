@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Content;
+namespace Wikibase\Repo\Content;
 
 use RuntimeException;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -59,3 +59,6 @@ class EntityInstanceHolder implements EntityHolder {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EntityInstanceHolder::class, 'Wikibase\Content\EntityInstanceHolder' );

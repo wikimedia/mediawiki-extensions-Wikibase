@@ -7,9 +7,9 @@ use InvalidArgumentException;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
 use User;
-use Wikibase\EntityContent;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
+use Wikibase\Repo\Content\EntityContent;
 use Wikimedia\Assert\Assert;
 
 /**

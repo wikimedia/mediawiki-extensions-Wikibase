@@ -6,7 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 
 /**
- * Represents a diff between two Wikibase\EntityContent instances.
+ * Represents a diff between two Wikibase\Repo\Content\EntityContent instances.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

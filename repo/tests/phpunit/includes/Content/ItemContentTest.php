@@ -12,8 +12,6 @@ use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 use ParserOutput;
 use Title;
-use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -39,17 +37,19 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Store\NullEntityTermStoreWriter;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
+use Wikibase\Repo\Content\EntityHolder;
+use Wikibase\Repo\Content\EntityInstanceHolder;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\ItemContent
- * @covers \Wikibase\EntityContent
+ * @covers \Wikibase\Repo\Content\ItemContent
+ * @covers \Wikibase\Repo\Content\EntityContent
  *
  * @group Wikibase
  * @group WikibaseItem

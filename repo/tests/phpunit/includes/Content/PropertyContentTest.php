@@ -9,8 +9,6 @@ use DataValues\TimeValue;
 use InvalidArgumentException;
 use ParserOutput;
 use Title;
-use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -28,11 +26,13 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\PropertyContent;
+use Wikibase\Repo\Content\EntityHolder;
+use Wikibase\Repo\Content\EntityInstanceHolder;
+use Wikibase\Repo\Content\PropertyContent;
 
 /**
- * @covers \Wikibase\PropertyContent
- * @covers \Wikibase\EntityContent
+ * @covers \Wikibase\Repo\Content\PropertyContent
+ * @covers \Wikibase\Repo\Content\EntityContent
  *
  * @group Database
  * @group Wikibase

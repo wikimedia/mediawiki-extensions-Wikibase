@@ -16,13 +16,11 @@ use ParserOutput;
 use Revision;
 use SearchEngine;
 use Title;
-use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
@@ -32,6 +30,9 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Assert\Assert;
 use WikiPage;
+
+// TEMPORARY: ensure that EntityHolder, including its class alias, is autoloaded
+class_exists( EntityHolder::class );
 
 /**
  * Base handler class for Entity content classes.

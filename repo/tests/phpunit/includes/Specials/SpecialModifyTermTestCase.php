@@ -7,7 +7,7 @@ use Language;
 use Message;
 use SpecialPageTestBase;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\EntityContent;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use RuntimeException;
-use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityContentDataCodec;

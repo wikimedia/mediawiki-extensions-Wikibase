@@ -14,10 +14,10 @@ use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\Content\ItemContent;
 use Wikimedia\TestingAccessWrapper;
 
 /**

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Content;
 
 use RuntimeException;
-use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 
