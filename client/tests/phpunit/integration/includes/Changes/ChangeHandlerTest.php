@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
+use InvalidArgumentException;
 use MediaWikiTestCase;
 use Psr\Log\NullLogger;
 use SiteLookup;
@@ -20,7 +21,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Store\SiteLinkLookup;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 use Wikibase\Lib\Tests\MockRepository;
 
@@ -234,7 +234,7 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				if ( isset( $titlesById[$id] ) ) {
 					return Title::newFromText( $titlesById[$id] );
 				} else {
-					throw new StorageException( 'Unknown ID: ' . $id );
+					throw new InvalidArgumentException( 'Unknown ID: ' . $id );
 				}
 			} ) );
 
@@ -244,13 +244,13 @@ class ChangeHandlerTest extends MediaWikiTestCase {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
-					throw new StorageException( 'Bad title text: ' . $text );
+					return $title;
 				}
 
 				if ( isset( $pageIdsByTitle[$text] ) ) {
 					$title->resetArticleID( $pageIdsByTitle[$text] );
 				} else {
-					throw new StorageException( 'Unknown title text: ' . $text );
+					throw new InvalidArgumentException( 'Unknown title text: ' . $text );
 				}
 
 				return $title;
