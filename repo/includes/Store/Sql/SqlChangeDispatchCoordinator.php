@@ -535,9 +535,15 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		// Wait for all database replicas to be updated, but only for repo db. The
 		// "domain" argument is documented at ILBFactory::waitForReplication.
+		$waitForReplicationStartTime = ( microtime( true ) );
 		$this->LBFactory->waitForReplication( [ 'domain' => $this->repoDB ] );
+		$waitForReplicationTime = microtime( true ) - $waitForReplicationStartTime;
+		$this->stats->timing(
+			'wikibase.repo.SqlChangeDispatchCoordinator.releaseClient-waitForReplication-time',
+			$waitForReplicationTime * 1000
+		);
 
-		$this->trace( "Released $wikiDB for site $siteID at {$state['chd_seen']}." );
+		$this->trace( "Released $wikiDB for site $siteID at {$state['chd_seen']} and waited $waitForReplicationTime seconds for replicas." );
 	}
 
 	/**
