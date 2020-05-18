@@ -1,3 +1,4 @@
+import MessageKeys from '@/definitions/MessageKeys';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
@@ -13,6 +14,7 @@ import ErrorDeprecatedStatement from '@/presentation/components/ErrorDeprecatedS
 import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousStatement.vue';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
+import ErrorSavingAssertUser from '@/presentation/components/ErrorSavingAssertUser.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -204,6 +206,32 @@ describe( 'ErrorWrapper', () => {
 		} );
 		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
 		expect( wrapper.find( ErrorSaving ).exists() ).toBe( true );
+	} );
+
+	it( 'mounts ErrorSavingAssertUser on assertuser error', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.ASSERT_USER_FAILED,
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const loginUrl = 'https://client.example/login';
+		const $clientRouter = {
+			getPageUrl: jest.fn().mockReturnValue( loginUrl ),
+		};
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store, mocks: { $clientRouter } } );
+		expect( wrapper.find( ErrorSavingAssertUser ).exists() ).toBe( true );
+		expect( $clientRouter.getPageUrl ).toHaveBeenCalledWith(
+			'Special:UserLogin',
+			{
+				warning: MessageKeys.LOGIN_WARNING,
+			},
+		);
+		expect( wrapper.find( ErrorSavingAssertUser ).props( 'loginUrl' ) ).toBe( loginUrl );
 	} );
 
 	it( 'repeats ErrorUnknown\'s "relaunch" event', () => {
