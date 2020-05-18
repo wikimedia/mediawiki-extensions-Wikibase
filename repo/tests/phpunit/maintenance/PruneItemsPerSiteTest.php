@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests;
+namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\Tests\Maintenance\MaintenanceBaseTestCase;
 use Wikibase\DataModel\Entity\Item;
