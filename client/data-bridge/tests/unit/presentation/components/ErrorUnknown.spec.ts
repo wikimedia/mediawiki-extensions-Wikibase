@@ -17,8 +17,8 @@ describe( 'ErrorUnknown', () => {
 	};
 	const mocks = { $messages };
 
-	const trackApplicationErrorsAsUnknown = jest.fn();
-	const store = createTestStore( { actions: { trackApplicationErrorsAsUnknown } } );
+	const trackErrorsFallingBackToGenericView = jest.fn();
+	const store = createTestStore( { actions: { trackErrorsFallingBackToGenericView } } );
 
 	const localVue = createLocalVue();
 	localVue.use( Vuex );
@@ -51,9 +51,9 @@ describe( 'ErrorUnknown', () => {
 		expect( eventEmittingButton.props( 'message' ) ).toBe( `⧼${MessageKeys.ERROR_RELOAD_BRIDGE}⧽` );
 	} );
 
-	it( 'dispatches trackApplicationErrorsAsUnknown on mount', () => {
+	it( 'dispatches trackErrorsFallingBackToGenericView on mount', () => {
 		shallowMount( ErrorUnknown, { mocks, store, localVue } );
-		expect( trackApplicationErrorsAsUnknown ).toHaveBeenCalledTimes( 1 );
+		expect( trackErrorsFallingBackToGenericView ).toHaveBeenCalledTimes( 1 );
 	} );
 
 	it( 'repeats relaunch button\'s "click" event as "relaunch"', () => {
