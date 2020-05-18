@@ -39,10 +39,6 @@ export default class DataBridge extends mixins( StateMixin ) {
 		return targetValue;
 	}
 
-	public get targetProperty(): string {
-		return this.rootModule.state.targetProperty;
-	}
-
 	public get targetLabel(): Term {
 		return this.rootModule.getters.targetLabel;
 	}
