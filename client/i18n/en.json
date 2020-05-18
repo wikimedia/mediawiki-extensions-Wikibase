@@ -138,7 +138,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Unknown permission error",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "You cannot edit this value due to unknown reasons",
 	"wikibase-client-data-bridge-edit-decision-heading": "Please select the type of edit that you made:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>I corrected</strong> a wrong value",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>I corrected</strong> an incorrect value",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "The previous value was not correct and has never been.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>I updated</strong> an outdated value",
 	"wikibase-client-data-bridge-edit-decision-update-description": "The previous value used to be correct but is now outdated.",
