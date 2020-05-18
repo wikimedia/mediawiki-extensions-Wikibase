@@ -12,6 +12,6 @@ module.exports.collectCoverageFrom = [
 	'!src/mock-data/**',
 	'!src/mock-entry.ts',
 ];
-module.exports.coverageReporters = [ 'lcov' ];
+module.exports.coverageReporters = [ 'lcov', 'text' ];
 
 module.exports.setupFiles = [ '<rootDir>/tests/config/globalSetup.ts' ];
