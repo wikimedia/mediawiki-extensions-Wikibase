@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Hooks;
 
 use OutputPage;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\OutputPageJsConfigBuilder;
+use Wikibase\Repo\OutputPageJsConfigBuilder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

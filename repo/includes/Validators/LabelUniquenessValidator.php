@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Validators;
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 
 /**
  * Validator for checking that entity labels and aliases are unique (per language).

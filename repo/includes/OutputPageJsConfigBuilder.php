@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use Language;
 use Message;
 use OutputPage;
+use Wikibase\CopyrightMessageBuilder;
 use Wikimedia\Assert\Assert;
 
 /**

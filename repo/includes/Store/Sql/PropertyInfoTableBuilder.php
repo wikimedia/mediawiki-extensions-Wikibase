@@ -11,7 +11,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\DataModel\Services\Lookup\PropertyLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\PropertyInfoBuilder;
+use Wikibase\Repo\PropertyInfoBuilder;
 
 /**
  * Utility class for rebuilding the wb_property_info table.

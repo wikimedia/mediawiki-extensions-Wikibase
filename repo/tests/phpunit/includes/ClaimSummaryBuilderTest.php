@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests;
 use DataValues\StringValue;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
-use Wikibase\ClaimSummaryBuilder;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
@@ -14,10 +13,11 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
 
 /**
- * @covers \Wikibase\ClaimSummaryBuilder
+ * @covers \Wikibase\Repo\ClaimSummaryBuilder
  *
  * @group Wikibase
  *

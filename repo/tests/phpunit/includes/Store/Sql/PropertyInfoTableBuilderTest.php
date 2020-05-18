@@ -10,7 +10,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\PropertyInfoBuilder;
+use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\Store\Sql\PropertyInfoTableBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Store;

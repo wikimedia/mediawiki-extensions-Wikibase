@@ -5,11 +5,11 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use HTMLForm;
 use WebRequest;
-use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\ItemDisambiguation;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.

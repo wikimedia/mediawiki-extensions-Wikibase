@@ -3,11 +3,11 @@
 namespace Wikibase\Repo\Tests;
 
 use MWException;
-use Wikibase\DataTypeSelector;
 use Wikibase\Lib\DataType;
+use Wikibase\Repo\DataTypeSelector;
 
 /**
- * @covers \Wikibase\DataTypeSelector
+ * @covers \Wikibase\Repo\DataTypeSelector
  *
  * @group Wikibase
  *

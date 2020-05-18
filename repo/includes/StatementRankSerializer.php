@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use Deserializers\Deserializer;
 use Deserializers\Exceptions\DeserializationException;

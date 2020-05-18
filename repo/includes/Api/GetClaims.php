@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\StatementRankSerializer;
+use Wikibase\Repo\StatementRankSerializer;
 
 /**
  * API module for getting claims.

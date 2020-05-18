@@ -6,13 +6,13 @@ use MediaWikiTestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\ItemDisambiguation;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\ItemDisambiguation;
 
 /**
- * @covers \Wikibase\ItemDisambiguation
+ * @covers \Wikibase\Repo\ItemDisambiguation
  *
  * @group Wikibase
  * @group SpecialPage

@@ -8,10 +8,10 @@ use Serializers\Exceptions\SerializationException;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\StatementRankSerializer;
+use Wikibase\Repo\StatementRankSerializer;
 
 /**
- * @covers \Wikibase\StatementRankSerializer
+ * @covers \Wikibase\Repo\StatementRankSerializer
  *
  * @group Wikibase
  *

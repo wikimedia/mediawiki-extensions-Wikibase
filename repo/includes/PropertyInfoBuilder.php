@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\Property;

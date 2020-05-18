@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use Html;
 use Wikibase\DataModel\Entity\EntityId;

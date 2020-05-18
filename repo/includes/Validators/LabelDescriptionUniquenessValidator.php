@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 
 /**
  * Validator for checking that the combination of an entity's label and description
