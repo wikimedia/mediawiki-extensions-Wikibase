@@ -10,7 +10,7 @@ use MediaWiki\Hook\LoginFormValidErrorMessagesHook;
  */
 class LoginFormValidErrorMessagesHandler implements LoginFormValidErrorMessagesHook {
 
-	public function onLoginFormValidErrorMessages( &$messages ): void {
+	public function onLoginFormValidErrorMessages( array &$messages ): void {
 		$messages[] = 'wikibase-client-data-bridge-login-warning';
 	}
 
