@@ -193,7 +193,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Recharger la page",
 	"wikibase-client-data-bridge-error-go-back": "Retour",
 	"wikibase-client-data-bridge-error-retry-save": "Réessayer d’enregistrer",
-	"wikibase-client-data-bridge-login-warning": "Après vous être connecté, <strong>veuillez fermer cet onglet et revenir à l’onglet d’origine</string> pour essayer d’enregistrer de nouveau.",
+	"wikibase-client-data-bridge-login-warning": "Après vous être connecté, <strong>veuillez fermer cet onglet et revenir à l’onglet d’origine</strong> pour essayer d’enregistrer de nouveau.",
 	"wikibase-client-data-bridge-reference-note": "Modifier les préférences sera possible sur {{WBREPONAME}} après enregistrement",
 	"wikibase-client-data-bridge-thank-you-head": "Merci pour votre modification !",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Vous pouvez modifier les références pour cette propriété sur {{WBREPONAME}} en cliquant sur le bouton ci-dessous.",
