@@ -15,6 +15,7 @@ import ErrorAmbiguousStatement from '@/presentation/components/ErrorAmbiguousSta
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import ErrorSaving from '@/presentation/components/ErrorSaving.vue';
 import ErrorSavingAssertUser from '@/presentation/components/ErrorSavingAssertUser.vue';
+import ErrorSavingEditConflict from '@/presentation/components/ErrorSavingEditConflict.vue';
 import ApplicationError, { ErrorTypes, UnsupportedDatatypeError } from '@/definitions/ApplicationError';
 import { createTestStore } from '../../../util/store';
 
@@ -247,5 +248,35 @@ describe( 'ErrorWrapper', () => {
 		const wrapper = shallowMount( ErrorWrapper, { store, localVue } );
 		wrapper.find( ErrorUnknown ).vm.$emit( 'relaunch' );
 		expect( wrapper.emitted( 'relaunch' ) ).toHaveLength( 1 );
+	} );
+
+	it( 'mounts ErrorSavingEditConflict on edit conflict error', () => {
+		const applicationErrors: ApplicationError[] = [
+			{
+				type: ErrorTypes.EDIT_CONFLICT,
+			},
+		];
+		const store = createTestStore( {
+			state: {
+				applicationErrors,
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { localVue, store } );
+		expect( wrapper.find( ErrorSavingEditConflict ).exists() ).toBe( true );
+	} );
+
+	it( 'repeats ErrorSavingEditConflict\'s "reload" event', () => {
+		const store = createTestStore( {
+			state: {
+				applicationErrors: [
+					{
+						type: ErrorTypes.EDIT_CONFLICT,
+					},
+				],
+			},
+		} );
+		const wrapper = shallowMount( ErrorWrapper, { store, localVue } );
+		wrapper.find( ErrorSavingEditConflict ).vm.$emit( 'reload' );
+		expect( wrapper.emitted( 'reload' ) ).toHaveLength( 1 );
 	} );
 } );

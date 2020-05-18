@@ -3,6 +3,7 @@ const assert = require( 'assert' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
 	ErrorSavingAssertUser = require( '../pageobjects/ErrorSavingAssertUser' ),
+	ErrorSavingEditConflict = require( '../pageobjects/ErrorSavingEditConflict' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
 	DomUtil = require( './../DomUtil' ),
 	NetworkUtil = require( './../NetworkUtil' ),
@@ -328,6 +329,59 @@ describe( 'App', () => {
 				 */
 				assert.ok( browser.$( '.warningbox strong' ).isDisplayed() );
 			} );
+		} );
+	} );
+
+	describe( 'when there is an edit conflict', () => {
+		it( 'shows the right error component', () => {
+			// prepare Bridge for saving
+			const title = DataBridgePage.getDummyTitle();
+			const propertyId = browser.call( () => WikibaseApi.getProperty( 'string' ) );
+			const stringPropertyExampleValue = 'initialValue';
+			const entityId = browser.call( () => WikibaseApi.createItem( 'data bridge browser test item', {
+				'claims': [ {
+					'mainsnak': {
+						'snaktype': 'value',
+						'property': propertyId,
+						'datavalue': { 'value': stringPropertyExampleValue, 'type': 'string' },
+					},
+					'type': 'statement',
+					'rank': 'normal',
+				} ],
+			} ) );
+			const content = DataBridgePage.createInfoboxWikitext( [ {
+				label: 'official website',
+				entityId,
+				propertyId,
+				editFlow: 'single-best-value',
+			} ] );
+			browser.call( () => Api.bot().then( ( bot ) => bot.edit( title, content ) ) );
+
+			DataBridgePage.openAppOnPage( title );
+			DataBridgePage.bridge.waitForDisplayed( 5000 );
+
+			const newValue = 'newValue';
+			DomUtil.setValue( DataBridgePage.value, newValue );
+
+			DataBridgePage.editDecision( 'replace' ).click();
+
+			DataBridgePage.saveButton.click();
+			DataBridgePage.licensePopup.waitForDisplayed();
+
+			// clear the item, removing the target statement
+			browser.call( () => Api.bot().then( ( bot ) => bot.request( {
+				action: 'wbeditentity',
+				id: entityId,
+				token: bot.editToken,
+				data: '{}',
+				clear: 1,
+			} ) ) );
+
+			// trigger error
+			DataBridgePage.saveButton.click();
+			DataBridgePage.error.waitForDisplayed();
+
+			assert.ok( ErrorSavingEditConflict.isDisplayed() );
 		} );
 	} );
 
