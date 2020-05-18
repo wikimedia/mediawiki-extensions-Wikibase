@@ -11,7 +11,7 @@ import {
 import App from '@/presentation/App.vue';
 import { createStore } from '@/store';
 import Application from '@/store/Application';
-import { initEvents } from '@/events';
+import { initEvents, appEvents } from '@/events';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditFlow from '@/definitions/EditFlow';
 import DataBridge from '@/presentation/components/DataBridge.vue';
@@ -228,6 +228,20 @@ describe( 'App.vue', () => {
 		expect( wrapper.emitted( initEvents.cancel ) ).toHaveLength( 1 );
 	} );
 
+	it( 'reloads on close button click during edit conflict', async () => {
+		const wrapper = shallowMount( App, {
+			store,
+			localVue,
+		} );
+
+		store.commit( 'addApplicationErrors', [ { type: ErrorTypes.EDIT_CONFLICT } ] );
+
+		await wrapper.find( AppHeader ).vm.$emit( 'close' );
+		await localVue.nextTick();
+
+		expect( wrapper.emitted( initEvents.reload ) ).toHaveLength( 1 );
+	} );
+
 	describe( 'component switch', () => {
 
 		describe( 'if there is an error', () => {
@@ -239,6 +253,20 @@ describe( 'App.vue', () => {
 				} );
 
 				expect( wrapper.find( ErrorWrapper ).exists() ).toBe( true );
+			} );
+
+			it.each( [
+				[ 'relaunch', appEvents.relaunch ],
+				[ 'reload', initEvents.reload ],
+			] )( 'repeats %s ErrorWrapper event as %s init/app event', ( errorWrapperEvent, initAppEvent ) => {
+				store.commit( 'addApplicationErrors', [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR } ] );
+				const wrapper = shallowMount( App, {
+					store,
+					localVue,
+				} );
+				wrapper.find( ErrorWrapper ).vm.$emit( errorWrapperEvent );
+
+				expect( wrapper.emitted( initAppEvent ) ).toHaveLength( 1 );
 			} );
 		} );
 

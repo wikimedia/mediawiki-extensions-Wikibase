@@ -169,6 +169,8 @@ launch(
 	console.info( 'Application event: saved' );
 } ).on( initEvents.cancel, () => {
 	console.info( 'Application event: canceled' );
+} ).on( initEvents.reload, () => {
+	console.info( 'Application event: reload' );
 } );
 
 // The EventEmittingButton uses the `dir` attribute set at the root level of the page

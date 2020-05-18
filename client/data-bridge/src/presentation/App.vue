@@ -14,6 +14,7 @@
 			<ErrorWrapper
 				v-else-if="hasError"
 				@relaunch="relaunch"
+				@reload="reload"
 			/>
 			<ThankYou
 				v-else-if="isSaved"
@@ -86,6 +87,11 @@ export default class App extends mixins( StateMixin ) {
 		return this.rootModule.getters.applicationStatus === ApplicationStatus.ERROR;
 	}
 
+	public get hasErrorRequiringReload(): boolean {
+		return this.hasError &&
+			this.rootModule.getters.isEditConflictError;
+	}
+
 	public get repoLink(): string {
 		return this.rootModule.state.originalHref;
 	}
@@ -106,6 +112,8 @@ export default class App extends mixins( StateMixin ) {
 	public close(): void {
 		if ( this.isSaved ) {
 			this.$emit( Events.saved );
+		} else if ( this.hasErrorRequiringReload ) {
+			this.reload();
 		} else {
 			this.$emit( Events.cancel );
 		}
@@ -140,6 +148,14 @@ export default class App extends mixins( StateMixin ) {
 		 * @type {Event}
 		 */
 		this.$emit( Events.relaunch );
+	}
+
+	private reload(): void {
+		/**
+		 * An event fired when the user requested to reload the whole page (usually bubbled from a child component)
+		 * @type {Event}
+		 */
+		this.$emit( Events.reload );
 	}
 
 	public dismissWarningAnonymousEdit(): void {

@@ -14,6 +14,9 @@ export default function subscribeToEvents( emitter: EventEmitter,
 	emitter.on( initEvents.cancel, () => {
 		windowManager.clearWindows().catch( () => { /* do nothing */ } );
 	} );
+	emitter.on( initEvents.reload, () => {
+		mwWindow.location.reload();
+	} );
 
 	windowManager.on( 'closing', ( _win: OOUIWindow, compatClosing: JQuery.Promise<unknown> ) => {
 		compatClosing.then( () => {
