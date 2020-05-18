@@ -1,7 +1,8 @@
 const assert = require( 'assert' ),
 	Api = require( 'wdio-mediawiki/Api' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
-	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
+	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
+	DomUtil = require( './../DomUtil' );
 
 function createTag( tagname, reason ) {
 	return Api.bot().then( ( bot ) => bot.request( {
@@ -81,12 +82,7 @@ describe( 'App', () => {
 		assertSaveButtonDisabled( 'until value was changed' );
 
 		const newValue = 'newValue';
-		browser.waitUntil(
-			() => {
-				DataBridgePage.value.setValue( newValue );
-				return DataBridgePage.value.getValue() === newValue;
-			}
-		);
+		DomUtil.setValue( DataBridgePage.value, newValue );
 
 		assertSaveButtonDisabled( 'until edit decision was made' );
 
@@ -158,12 +154,7 @@ describe( 'App', () => {
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
-		browser.waitUntil(
-			() => {
-				DataBridgePage.value.setValue( newValue );
-				return DataBridgePage.value.getValue() === newValue;
-			}
-		);
+		DomUtil.setValue( DataBridgePage.value, newValue );
 
 		DataBridgePage.editDecision( 'update' ).click();
 

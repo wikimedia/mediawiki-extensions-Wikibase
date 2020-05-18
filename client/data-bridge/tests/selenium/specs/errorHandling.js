@@ -4,6 +4,7 @@ const assert = require( 'assert' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
 	ErrorSavingAssertUser = require( '../pageobjects/ErrorSavingAssertUser' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
+	DomUtil = require( './../DomUtil' ),
 	NetworkUtil = require( './../NetworkUtil' ),
 	WindowUtil = require( './../WindowUtil' );
 
@@ -98,12 +99,7 @@ describe( 'App', () => {
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
-		browser.waitUntil(
-			() => {
-				DataBridgePage.value.setValue( newValue );
-				return DataBridgePage.value.getValue() === newValue;
-			}
-		);
+		DomUtil.setValue( DataBridgePage.value, newValue );
 
 		DataBridgePage.editDecision( 'replace' ).click();
 
@@ -157,12 +153,7 @@ describe( 'App', () => {
 		assert.ok( DataBridgePage.bridge.isDisplayed() );
 
 		const newValue = 'newValue';
-		browser.waitUntil(
-			() => {
-				DataBridgePage.value.setValue( newValue );
-				return DataBridgePage.value.getValue() === newValue;
-			}
-		);
+		DomUtil.setValue( DataBridgePage.value, newValue );
 
 		DataBridgePage.editDecision( 'replace' ).click();
 
@@ -244,12 +235,7 @@ describe( 'App', () => {
 			DataBridgePage.bridge.waitForDisplayed( 5000 );
 
 			const newValue = 'newValue';
-			browser.waitUntil(
-				() => {
-					DataBridgePage.value.setValue( newValue );
-					return DataBridgePage.value.getValue() === newValue;
-				}
-			);
+			DomUtil.setValue( DataBridgePage.value, newValue );
 
 			DataBridgePage.editDecision( 'replace' ).click();
 
@@ -289,10 +275,8 @@ describe( 'App', () => {
 			ErrorSavingAssertUser.loginButton.click();
 			WindowUtil.doInOtherWindow( () => {
 				LoginPage.username.waitForDisplayed();
-				LoginPage.username.setValue( browser.config.mwUser );
-				LoginPage.password.setValue( browser.config.mwPwd );
-				// set username again because the first time sometimes cuts off the beginning, unclear why
-				LoginPage.username.setValue( browser.config.mwUser );
+				DomUtil.setValue( LoginPage.username, browser.config.mwUser );
+				DomUtil.setValue( LoginPage.password, browser.config.mwPwd );
 				LoginPage.loginButton.click();
 				LoginPage.username.waitForDisplayed( undefined, /* reverse: */ true );
 			} );
