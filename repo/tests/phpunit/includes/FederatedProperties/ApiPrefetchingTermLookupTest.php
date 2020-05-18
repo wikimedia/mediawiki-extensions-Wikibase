@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermTypes;
@@ -102,13 +103,33 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$this->assertEquals( $expectedLabels, $labels );
 	}
 
-	public function testGetDescriptions() {
+	/**
+	 * @dataProvider descriptionsTestProvider
+	 */
+	public function testGetDescriptions( EntityId $entityId, $languages, $responseFile, $expectedDescriptions ) {
 		$apiLookup = new ApiPrefetchingTermLookup(
-			new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) )
+			new ApiEntityLookup( $this->newMockApi( [ $entityId->getSerialization() ], $responseFile ) )
 		);
 
-		$this->expectException( \BadMethodCallException::class );
-		$apiLookup->getDescriptions( new PropertyId( 'P1' ), [ 'some', 'languages' ] );
+		$this->assertEquals(
+			$expectedDescriptions,
+			$apiLookup->getDescriptions( $entityId, $languages )
+		);
+	}
+
+	public function descriptionsTestProvider() {
+		yield 'en description' => [
+			new PropertyId( 'P18' ),
+			[ 'en' ],
+			$this->responseDataFiles[ 'p18-en-de' ],
+			[ 'en' => 'image of relevant illustration of the subject' ]
+		];
+		yield 'en and de descriptions' => [
+			new PropertyId( 'P18' ),
+			[ 'en', 'de' ],
+			$this->responseDataFiles[ 'p18-en-de' ],
+			[ 'en' => 'image of relevant illustration of the subject', 'de' => 'Foto, Grafik etc. des Objekts' ]
+		];
 	}
 
 	public function testGetPrefetchedAliases() {

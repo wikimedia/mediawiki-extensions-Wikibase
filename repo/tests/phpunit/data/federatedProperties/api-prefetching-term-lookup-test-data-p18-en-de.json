@@ -13,6 +13,16 @@
                     "value": "image"
                 }
             },
+            "descriptions": {
+                "en": {
+                    "language": "en",
+                    "value": "image of relevant illustration of the subject"
+                },
+                "de": {
+                    "language": "de",
+                    "value": "Foto, Grafik etc. des Objekts"
+                }
+            },
             "type": "property"
         }
     },

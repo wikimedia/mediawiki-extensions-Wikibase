@@ -29,6 +29,8 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	 */
 	private $apiEntityLookup;
 
+	private const SUPPORTED_TERM_TYPES = [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION ];
+
 	/**
 	 * @param ApiEntityLookup $apiEntityLookup
 	 */
@@ -74,9 +76,7 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	 * @throws BadMethodCallException if $termTypes is anything other than [ 'label' ]
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes ): void {
-		if ( $termTypes !== [ TermTypes::TYPE_LABEL ] ) {
-			throw new BadMethodCallException( 'TermTypes must be only label' );
-		}
+		$this->validateTermTypes( $termTypes );
 
 		$entityIdsToFetch = $this->getEntityIdsToFetch( $entityIds, $termTypes, $languageCodes );
 
@@ -197,5 +197,13 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 		}
 
 		return $translation;
+	}
+
+	private function validateTermTypes( array $termTypes ): void {
+		foreach ( $termTypes as $termType ) {
+			if ( !in_array( $termType, self::SUPPORTED_TERM_TYPES ) ) {
+				throw new BadMethodCallException( "term type $termType is not supported by " . __CLASS__ );
+			}
+		}
 	}
 }
