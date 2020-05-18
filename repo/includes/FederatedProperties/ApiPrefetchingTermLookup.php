@@ -25,15 +25,15 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 	private $termKeys = [];
 
 	/**
-	 * @var GenericActionApiClient
+	 * @var ApiEntityLookup
 	 */
-	private $api;
+	private $apiEntityLookup;
 
 	/**
-	 * @param GenericActionApiClient $api
+	 * @param ApiEntityLookup $apiEntityLookup
 	 */
-	public function __construct( GenericActionApiClient $api ) {
-		$this->api = $api;
+	public function __construct( ApiEntityLookup $apiEntityLookup ) {
+		$this->apiEntityLookup = $apiEntityLookup;
 	}
 
 	/**
@@ -85,32 +85,17 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 		}
 
 		// Fetch up to 50 entities each time
-		ksort( $entityIdsToFetch );
-		$entityIdBatches = array_chunk( array_keys( $entityIdsToFetch ), 50 );
+		$entityIdBatches = array_chunk( $entityIdsToFetch, 50 );
 
 		foreach ( $entityIdBatches as $entityIdBatch ) {
-			$responseBody = $this->fetchEntities( $entityIdBatch, $languageCodes, $termTypes );
-			if ( $responseBody !== null ) {
-				foreach ( $responseBody['entities'] as $entityId => $entity ) {
-					$this->terms = array_replace_recursive( $this->terms, [ $entityId => $entity ] );
-				}
+			$this->apiEntityLookup->fetchEntities( $entityIdBatch );
+			foreach ( $entityIdBatch as $entityId ) {
+				$this->terms[ $entityId->getSerialization() ] = array_replace_recursive(
+					$this->terms, $this->apiEntityLookup->getResultPartForId( $entityId )
+				);
 			}
 		}
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
-	}
-
-	private function fetchEntities( $entityIds, $languageCodes, $termTypes ) {
-		$params = [
-			'action' => 'wbgetentities',
-			'ids' => implode( "|", $entityIds ),
-			'languages' => implode( "|", $languageCodes ),
-			'props' => implode( "|", $this->translateTermTypesToApiProps( $termTypes ) ),
-			'format' => 'json'
-		];
-
-		$response = $this->api->get( $params );
-		$responseBody = json_decode( $response->getBody()->getContents(), true );
-		return $responseBody;
 	}
 
 	private function getEntityIdsToFetch( array $entityIds, array $termTypes, array $languageCodes ): array {

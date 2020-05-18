@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
+use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPropertyDataTypeLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
 
@@ -22,22 +23,29 @@ class ApiPropertyDataTypeLookupTest extends TestCase {
 		$propertyId = new PropertyId( 'P666' );
 		$apiResultFile = __DIR__ . '/../../data/federatedProperties/wbgetentities-property-datatype.json';
 		$expected = 'secretEvilDataType';
+		$apiEntityLookup = new ApiEntityLookup( $this->getApiClient( $apiResultFile ) );
 
-		$lookup = new ApiPropertyDataTypeLookup(
-			$this->getApiClient( $apiResultFile )
-		);
+		$apiEntityLookup->fetchEntities( [ $propertyId ] );
+
+		$lookup = new ApiPropertyDataTypeLookup( $apiEntityLookup );
 
 		$this->assertSame( $expected, $lookup->getDataTypeIdForProperty( $propertyId ) );
 	}
 
 	public function testGivenPropertyDoesNotExist_throwsException() {
-		$lookup = new ApiPropertyDataTypeLookup(
+		$p1 = new PropertyId( 'P1' );
+		$apiEntityLookup = new ApiEntityLookup(
 			$this->getApiClient( __DIR__ . '/../../data/federatedProperties/wbgetentities-p1-missing.json' )
 		);
+		$lookup = new ApiPropertyDataTypeLookup(
+			$apiEntityLookup
+		);
+
+		$apiEntityLookup->fetchEntities( [ $p1 ] );
 
 		$this->expectException( PropertyDataTypeLookupException::class );
 
-		$lookup->getDataTypeIdForProperty( new PropertyId( 'P1' ) );
+		$lookup->getDataTypeIdForProperty( $p1 );
 	}
 
 	private function getApiClient( $responseDataFile ) {
