@@ -21,6 +21,7 @@ class ApiEntityLookupTest extends TestCase {
 
 	private $responseDataFiles = [
 		'p18-en' => 'api-prefetching-term-lookup-test-data-p18-en.json',
+		'p31-en-de' => 'api-prefetching-term-lookup-test-data-p31-en-de.json',
 		'p1-missing' => 'wbgetentities-p1-missing.json',
 	];
 
@@ -29,6 +30,7 @@ class ApiEntityLookupTest extends TestCase {
 	private $p1;
 	private $p11;
 	private $p18;
+	private $p31;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -40,6 +42,7 @@ class ApiEntityLookupTest extends TestCase {
 		$this->p1 = new PropertyId( 'P1' );
 		$this->p11 = new PropertyId( 'P11' );
 		$this->p18 = new PropertyId( 'P18' );
+		$this->p31 = new PropertyId( 'P31' );
 	}
 
 	public function testFetchEntitiesDoesNotAllowStrings() {
@@ -87,6 +90,30 @@ class ApiEntityLookupTest extends TestCase {
 			$this->data[$this->responseDataFiles['p18-en']]['entities']['P18'],
 			$apiEntityLookup->getResultPartForId( $this->p18 )
 		);
+	}
+
+	public function testFetchEntitiesBatchesInChunks() {
+		// Api mock that ensures 2 api calls, but only bothers returning 2 entities (that can be used to ensure results are merged)
+		$api = $this->createMock( GenericActionApiClient::class );
+		$api->expects( $this->exactly( 2 ) )
+			->method( 'get' )
+			->willReturn(
+				$this->newResponse( $this->responseDataFiles['p18-en'] ),
+				$this->newResponse( $this->responseDataFiles['p31-en-de'] )
+			);
+
+		// Generate a list of 60 ids to fetch, as 50 is the batch size
+		$toFetch = [];
+		foreach ( range( 1, 60 ) as $number ) {
+			$toFetch[] = new PropertyId( 'P' . $number );
+		}
+
+		$apiEntityLookup = new ApiEntityLookup( $api );
+		$apiEntityLookup->fetchEntities( $toFetch );
+
+		// Fetching out results that were mocked though not result in an exception, which means the results were correctly merged
+		$apiEntityLookup->getResultPartForId( $this->p18 );
+		$apiEntityLookup->getResultPartForId( $this->p31 );
 	}
 
 	public function testGivenFetchEntitiesCalledRepeatedly_requestsOnlyNotPreviouslyFetchedEntities() {
