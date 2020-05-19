@@ -1,5 +1,6 @@
 import Tracker from '@/tracking/Tracker';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
+import errorTypeFormatter from '@/utils/errorTypeFormatter';
 
 export default class DataBridgeTrackerService implements BridgeTracker {
 	private readonly tracker: Tracker;
@@ -17,10 +18,10 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 	}
 
 	public trackUnknownError( type: string ): void {
-		this.tracker.increment( `error.unknown.${type}` );
+		this.tracker.increment( `error.unknown.${errorTypeFormatter( type )}` );
 	}
 
 	public trackSavingUnknownError( type: string ): void {
-		this.tracker.increment( `error.onsave.unknown.${type}` );
+		this.tracker.increment( `error.onsave.unknown.${errorTypeFormatter( type )}` );
 	}
 }

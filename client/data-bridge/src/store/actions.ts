@@ -22,7 +22,6 @@ import ServiceContainer from '@/services/ServiceContainer';
 import statementMutationFactory from '@/change-op/statement-mutation/statementMutationFactory';
 import clone from '@/store/clone';
 import StatementMutationStrategy from '@/change-op/statement-mutation/strategies/StatementMutationStrategy';
-import errorTypeFormatter from '@/utils/errorTypeFormatter';
 
 export class RootActions extends Actions<
 Application,
@@ -324,15 +323,13 @@ RootActions
 
 	public async trackErrorsFallingBackToGenericView(): Promise<void> {
 		for ( const error of this.state.applicationErrors ) {
-			const type = errorTypeFormatter( error.type );
-			this.store.$services.get( 'tracker' ).trackUnknownError( type );
+			this.store.$services.get( 'tracker' ).trackUnknownError( error.type );
 		}
 	}
 
 	public async trackSavingErrorsFallingBackToGenericView(): Promise<void> {
 		for ( const error of this.state.applicationErrors ) {
-			const type = errorTypeFormatter( error.type );
-			this.store.$services.get( 'tracker' ).trackSavingUnknownError( type );
+			this.store.$services.get( 'tracker' ).trackSavingUnknownError( error.type );
 		}
 	}
 

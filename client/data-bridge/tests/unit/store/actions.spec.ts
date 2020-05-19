@@ -1446,25 +1446,6 @@ describe( 'root/actions', () => {
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_1' );
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_2' );
 		} );
-
-		it( 'normalizes error names', async () => {
-			const state = newApplicationState( {
-				applicationErrors: [
-					{ type: 'Error with Strange formatting!' } as unknown as ApplicationError,
-				],
-			} );
-			const actions = inject( RootActions, { state } );
-			const tracker = newMockTracker();
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					tracker,
-				} ),
-			};
-
-			await actions.trackErrorsFallingBackToGenericView();
-			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'error_with_strange_formatting' );
-		} );
 	} );
 
 	describe( 'trackSavingErrorsFallingBackToGenericView', () => {
@@ -1488,25 +1469,6 @@ describe( 'root/actions', () => {
 
 			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_1' );
 			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_2' );
-		} );
-
-		it( 'normalizes error names', async () => {
-			const state = newApplicationState( {
-				applicationErrors: [
-					{ type: 'Save-error with Strange formatting!' } as unknown as ApplicationError,
-				],
-			} );
-			const actions = inject( RootActions, { state } );
-			const tracker = newMockTracker();
-			// @ts-ignore
-			actions.store = {
-				$services: newMockServiceContainer( {
-					tracker,
-				} ),
-			};
-
-			await actions.trackSavingErrorsFallingBackToGenericView();
-			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'save_error_with_strange_formatting' );
 		} );
 	} );
 
