@@ -32,10 +32,7 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 		$this->generateAutoloadForComponent(
 			'repo',
-			[ 'includes', 'maintenance' ],
-			[
-				'tests/phpunit/maintenance/MockAddUnits.php',
-			]
+			[ 'includes', 'maintenance' ]
 		);
 
 		echo "Done.\n\n";

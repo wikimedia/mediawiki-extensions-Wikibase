@@ -19,7 +19,8 @@
 		"Wikibase\\Repo\\": "repo/includes/"
 	},
 	"TestAutoloadNamespaces": {
-		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/"
+		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
+		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/"
 	},
 	"manifest_version": 2
 }

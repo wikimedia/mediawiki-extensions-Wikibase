@@ -63,6 +63,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\SearchEntities' => __DIR__ . '/maintenance/searchEntities.php',
 	'Wikibase\\Store' => __DIR__ . '/includes/Store/Store.php',
 	'Wikibase\\SummaryFormatter' => __DIR__ . '/includes/SummaryFormatter.php',
-	'Wikibase\\Tests\\MockAddUnits' => __DIR__ . '/tests/phpunit/maintenance/MockAddUnits.php',
 	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
 ];

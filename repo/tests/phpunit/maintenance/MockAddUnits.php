@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Tests;
+namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\Sparql\SparqlClient;
 use Wikibase\AddUnitConversions;
