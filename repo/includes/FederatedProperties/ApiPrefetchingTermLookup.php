@@ -84,16 +84,11 @@ class ApiPrefetchingTermLookup extends EntityTermLookupBase implements Prefetchi
 			return;
 		}
 
-		// Fetch up to 50 entities each time
-		$entityIdBatches = array_chunk( $entityIdsToFetch, 50 );
-
-		foreach ( $entityIdBatches as $entityIdBatch ) {
-			$this->apiEntityLookup->fetchEntities( $entityIdBatch );
-			foreach ( $entityIdBatch as $entityId ) {
-				$this->terms[ $entityId->getSerialization() ] = array_replace_recursive(
-					$this->terms, $this->apiEntityLookup->getResultPartForId( $entityId )
-				);
-			}
+		$this->apiEntityLookup->fetchEntities( $entityIdsToFetch );
+		foreach ( $entityIdsToFetch as $entityId ) {
+			$this->terms[ $entityId->getSerialization() ] = array_replace_recursive(
+				$this->terms, $this->apiEntityLookup->getResultPartForId( $entityId )
+			);
 		}
 		$this->setKeys( $entityIds, $termTypes, $languageCodes );
 	}

@@ -28,10 +28,15 @@ class ApiEntityLookup {
 	 */
 	public function fetchEntities( array $entityIds ): void {
 		Assert::parameterElementType( EntityId::class, $entityIds, '$entityIds' );
-		$this->entityLookupResult = array_merge(
-			$this->entityLookupResult,
-			$this->getEntities( $this->getEntitiesToFetch( $entityIds ) )
-		);
+
+		// Fetch up to 50 entities each time
+		$entityIdBatches = array_chunk( $entityIds, 50 );
+		foreach ( $entityIdBatches as $entityIdBatch ) {
+			$this->entityLookupResult = array_merge(
+				$this->entityLookupResult,
+				$this->getEntities( $this->getEntitiesToFetch( $entityIdBatch ) )
+			);
+		}
 	}
 
 	/**
