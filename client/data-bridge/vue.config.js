@@ -26,7 +26,7 @@ module.exports = {
 		},
 		externals: externals(),
 		optimization: {
-			minimize: true,
+			minimize: !DEV_MODE,
 			minimizer: [ new TerserPlugin( {
 				include: /\.common\.js$/,
 				sourceMap: true,
