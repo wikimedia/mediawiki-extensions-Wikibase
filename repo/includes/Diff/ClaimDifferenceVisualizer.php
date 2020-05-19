@@ -10,7 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\StatementRankSerializer;
+use Wikibase\Repo\StatementRankSerializer;
 
 /**
  * Class for generating HTML for Claim Diffs.

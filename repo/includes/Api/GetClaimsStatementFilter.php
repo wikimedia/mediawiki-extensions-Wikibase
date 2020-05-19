@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementFilter;
-use Wikibase\StatementRankSerializer;
+use Wikibase\Repo\StatementRankSerializer;
 
 /**
  * @license GPL-2.0-or-later

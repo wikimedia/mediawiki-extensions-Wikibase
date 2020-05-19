@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use InvalidArgumentException;
 use Wikibase\DataModel\Statement\Statement;

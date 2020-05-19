@@ -8,10 +8,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
-use Wikibase\PropertyInfoBuilder;
+use Wikibase\Repo\PropertyInfoBuilder;
 
 /**
- * @covers \Wikibase\PropertyInfoBuilder
+ * @covers \Wikibase\Repo\PropertyInfoBuilder
  *
  * @group Wikibase
  *

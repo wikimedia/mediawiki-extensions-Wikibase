@@ -6,10 +6,10 @@ use Language;
 use OutputPage;
 use Title;
 use User;
-use Wikibase\OutputPageJsConfigBuilder;
+use Wikibase\Repo\OutputPageJsConfigBuilder;
 
 /**
- * @covers \Wikibase\OutputPageJsConfigBuilder
+ * @covers \Wikibase\Repo\OutputPageJsConfigBuilder
  *
  * @group Wikibase
  * @group Database

@@ -11,7 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\LabelDescriptionDuplicateDetector;
+use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 
 /**
