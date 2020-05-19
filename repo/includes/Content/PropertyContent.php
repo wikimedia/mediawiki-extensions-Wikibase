@@ -1,12 +1,10 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use InvalidArgumentException;
 use LogicException;
 use ParserOptions;
-use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\Property;
 
 /**
@@ -143,3 +141,6 @@ class PropertyContent extends EntityContent {
 	}
 
 }
+
+/** @deprecated */
+class_alias( PropertyContent::class, 'Wikibase\PropertyContent' );

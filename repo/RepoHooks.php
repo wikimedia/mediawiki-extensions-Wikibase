@@ -38,6 +38,7 @@ use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;

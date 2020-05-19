@@ -10,7 +10,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Diff\EntityContentDiffView;
 
 /**

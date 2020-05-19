@@ -14,14 +14,14 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\EntityContent;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
- * @covers \Wikibase\EntityContent
+ * @covers \Wikibase\Repo\Content\EntityContent
  *
  * @group Wikibase
  *

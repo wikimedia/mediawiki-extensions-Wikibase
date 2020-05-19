@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use Hooks;
 use InvalidArgumentException;
@@ -8,8 +8,6 @@ use LogicException;
 use MWException;
 use ParserOptions;
 use Title;
-use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\Repo\ItemSearchTextGenerator;
@@ -237,3 +235,6 @@ class ItemContent extends EntityContent {
 	}
 
 }
+
+/** @deprecated */
+class_alias( ItemContent::class, 'Wikibase\ItemContent' );

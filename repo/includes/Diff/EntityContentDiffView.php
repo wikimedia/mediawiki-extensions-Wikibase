@@ -12,7 +12,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MWException;
 use ParserOutput;
 use Revision;
-use Wikibase\EntityContent;
+use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\ToolbarEditSectionGenerator;
 use WikiPage;

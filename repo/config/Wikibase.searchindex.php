@@ -4,8 +4,8 @@ use DataValues\MonolingualTextValue;
 use DataValues\StringValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
+use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\Content\ItemContent;
 
 /**
  * Example showing how the search index behavior for Wikibase entities

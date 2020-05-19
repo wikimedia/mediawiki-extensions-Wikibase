@@ -2,13 +2,13 @@
 
 namespace Wikibase\Repo\Tests\Content;
 
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Repo\Content\EntityInstanceHolder;
 
 /**
- * @covers \Wikibase\Content\EntityInstanceHolder
+ * @covers \Wikibase\Repo\Content\EntityInstanceHolder
  *
  * @group Wikibase
  * @group WikibaseEntity

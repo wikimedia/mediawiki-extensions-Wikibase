@@ -9,15 +9,15 @@ use RequestContext;
 use Status;
 use Title;
 use User;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\EntityInstanceHolder;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 

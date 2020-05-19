@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Content;
 
 use RuntimeException;
-use Wikibase\Content\EntityHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -12,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Repo\Content\DeferredDecodingEntityHolder;
+use Wikibase\Repo\Content\EntityHolder;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

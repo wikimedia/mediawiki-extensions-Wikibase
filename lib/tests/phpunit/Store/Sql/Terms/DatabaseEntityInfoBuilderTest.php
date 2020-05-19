@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
-use Wikibase\ItemContent;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseItemTermStoreWriter;
@@ -26,7 +25,8 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\Lib\WikibaseSettings;
-use Wikibase\PropertyContent;
+use Wikibase\Repo\Content\ItemContent;
+use Wikibase\Repo\Content\PropertyContent;
 use Wikipage;
 
 /**

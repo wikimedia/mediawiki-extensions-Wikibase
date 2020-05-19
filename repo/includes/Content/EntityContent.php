@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Content;
 
 use AbstractContent;
 use Article;
@@ -23,16 +23,12 @@ use Status;
 use Title;
 use User;
 use ValueValidators\Result;
-use Wikibase\Content\EntityHolder;
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\ArrayValueCollector;
-use Wikibase\Repo\Content\DeferredCopyEntityHolder;
-use Wikibase\Repo\Content\EntityContentDiff;
 use Wikibase\Repo\FingerprintSearchTextGenerator;
 use Wikibase\Repo\Validators\EntityValidator;
 use Wikibase\Repo\WikibaseRepo;
@@ -696,3 +692,6 @@ abstract class EntityContent extends AbstractContent {
 	}
 
 }
+
+/** @deprecated */
+class_alias( EntityContent::class, 'Wikibase\EntityContent' );
