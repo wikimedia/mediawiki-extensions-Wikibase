@@ -32,8 +32,12 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\Store\EntityExistenceChecker;
+use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 
 /**
  * @covers \Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders
@@ -93,6 +97,13 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			->method( 'getName' )
 			->will( $this->returnValue( 'Deutsch' ) );
 
+		$urlLookup = $this->createMock( EntityUrlLookup::class );
+		$urlLookup->expects( $this->any() )
+			->method( 'getLinkUrl' )
+			->willReturnCallback( function ( EntityId $id ) {
+				return '/wiki/' . $id->getSerialization();
+			} );
+
 		return new WikibaseValueFormatterBuilders(
 			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
@@ -105,6 +116,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			$this->createMock( EntityLookup::class ),
 			$this->createMock( EntityRevisionLookup::class ),
 			1,
+			$this->createMock( EntityExistenceChecker::class ),
+			$this->createMock( EntityTitleTextLookup::class ),
+			$urlLookup,
+			$this->createMock( EntityRedirectChecker::class ),
 			$entityTitleLookup,
 			$this->newKartographerEmbeddingHandler(),
 			true,
