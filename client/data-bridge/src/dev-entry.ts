@@ -94,6 +94,9 @@ services.set( 'tracker', {
 	trackTitlePurgeError() {
 		console.info( 'Tracking purge error' );
 	},
+	trackError( type: string ): void {
+		console.info( `Tracking error: '${type}'` );
+	},
 	trackUnknownError( type: string ): void {
 		console.info( `Tracking unknown error: '${type}'` );
 	},

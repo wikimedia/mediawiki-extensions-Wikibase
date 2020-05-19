@@ -10,6 +10,7 @@ import ServiceContainer from '@/services/ServiceContainer';
 import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
 import { entityModule } from './entity';
 import { statementModule } from '@/store/statements';
+import mutationsTrackerPlugin from '@/tracking/mutationsTrackerPlugin';
 
 Vue.use( Vuex );
 
@@ -28,6 +29,7 @@ export function createStore( services: ServiceContainer ): Store<Application> {
 
 	const store = smartCreateStore( rootModule, {
 		strict: process.env.NODE_ENV !== 'production',
+		plugins: [ mutationsTrackerPlugin( services.get( 'tracker' ) ) ],
 	} );
 
 	store.$services = services;

@@ -27,6 +27,15 @@ describe( 'DataBridgeTrackerService', () => {
 		expect( tracker.increment ).toHaveBeenCalledWith( 'error.purge' );
 	} );
 
+	it( 'tracks a given error type', () => {
+		const tracker = getMockTracker();
+		const service = new DataBridgeTrackerService( tracker );
+
+		service.trackError( 'Error with Strange formatting!' );
+
+		expect( tracker.increment ).toHaveBeenCalledWith( 'error.all.error_with_strange_formatting' );
+	} );
+
 	it( 'tracks a given unknown error type', () => {
 		const tracker = getMockTracker();
 		const service = new DataBridgeTrackerService( tracker );

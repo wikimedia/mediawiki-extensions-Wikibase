@@ -12,6 +12,7 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { initEvents } from '@/events';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import Vue from 'vue';
+import newMockTracker from '../../../util/newMockTracker';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -20,7 +21,7 @@ describe( 'AppHeader', () => {
 	let store: Store<Application>;
 
 	beforeEach( () => {
-		store = createStore( newMockServiceContainer( {} ) );
+		store = createStore( newMockServiceContainer( { tracker: newMockTracker() } ) );
 	} );
 
 	it( 'shows the header with title', () => {
