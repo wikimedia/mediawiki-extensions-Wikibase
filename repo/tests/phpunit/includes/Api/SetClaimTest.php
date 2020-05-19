@@ -138,7 +138,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$statement->setGuid( $guid );
 
 			// Addition request
-			$this->makeRequest( $statement, $entityId, 1, 'addition request' );
+			$this->makeRequestAndAssertResult( $statement, $entityId, 1, 'addition request' );
 
 			// Reorder qualifiers
 			if ( count( $statement->getQualifiers() ) > 0 ) {
@@ -150,7 +150,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 				$serialized = $statementSerializer->serialize( $statement );
 				$firstPropertyId = array_shift( $serialized['qualifiers-order'] );
 				array_push( $serialized['qualifiers-order'], $firstPropertyId );
-				$this->makeRequest( $serialized, $entityId, 1, 'reorder qualifiers' );
+				$this->makeRequestAndAssertResult( $serialized, $entityId, 1, 'reorder qualifiers' );
 			}
 
 			$newSnak = new PropertyValueSnak( $statement->getPropertyId(), new StringValue( '\o/' ) );
@@ -158,7 +158,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$newStatement->setGuid( $guid );
 
 			// Update request
-			$this->makeRequest( $newStatement, $entityId, 1, 'update request' );
+			$this->makeRequestAndAssertResult( $newStatement, $entityId, 1, 'update request' );
 		}
 	}
 
@@ -282,7 +282,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		foreach ( $cases as $label => $case ) {
 			list( $entityId, $statement, $error ) = $case;
 
-			$this->makeRequest( $statement, $entityId, 1, $label, null, null, $error );
+			$this->makeRequestAndAssertResult( $statement, $entityId, 1, $label, null, null, $error );
 		}
 	}
 
@@ -312,8 +312,59 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$statement->setGuid( $guid );
 
 			// Add new statement at index 2:
-			$this->makeRequest( $statement, $entityId, 4, 'addition request', 2 );
+			$this->makeRequestAndAssertResult( $statement, $entityId, 4, 'addition request', 2 );
 		}
+	}
+
+	public function testSetDuplicateMainSnakNoIgnore() {
+		$mainSnak = new PropertyValueSnak( self::$propertyIds[0], new StringValue( 'good' ) );
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$entity = new Item();
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$entityId = $entity->getId();
+		$guidGenerator = new GuidGenerator();
+		$entity->getStatements()->addNewStatement(
+			$mainSnak,
+			null,
+			null,
+			$guidGenerator->newGuid( $entityId )
+		);
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_UPDATE );
+
+		$newStatement = new Statement( $mainSnak );
+		$newStatement->setGuid( $guidGenerator->newGuid( $entityId ) );
+		$this->makeRequestAndAssertResult( $newStatement, $entityId, 2, 'duplicate test' );
+	}
+
+	public function testSetDuplicateMainSnakWithIgnore() {
+		$mainSnak = new PropertyValueSnak( self::$propertyIds[0], new StringValue( 'good' ) );
+
+		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
+
+		$entity = new Item();
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$entityId = $entity->getId();
+		$guidGenerator = new GuidGenerator();
+		$entity->getStatements()->addNewStatement(
+			$mainSnak,
+			null,
+			null,
+			$guidGenerator->newGuid( $entityId )
+		);
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_UPDATE );
+
+		$newStatement = new Statement( $mainSnak );
+		$newStatement->setGuid( $guidGenerator->newGuid( $entityId ) );
+		$this->makeRequest(
+			$newStatement,
+			null,
+			null,
+			null,
+			true
+		);
+		$this->assertStatementWasNotSet( $newStatement, $entityId );
 	}
 
 	/**
@@ -324,25 +375,23 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 * @param int|null $index
 	 * @param int|null $baserevid
 	 * @param string|null $error
+	 * @param bool|null $ignoreDuplicateMainSnak
+	 * @return array
 	 */
 	private function makeRequest(
 		$statement,
-		EntityId $entityId,
-		$expectedCount,
-		$requestLabel,
 		$index = null,
 		$baserevid = null,
-		$error = null
+		$error = null,
+		$ignoreDuplicateMainSnak = null
 	) {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$statementSerializer = $serializerFactory->newStatementSerializer();
-		$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
 
 		if ( $statement instanceof Statement ) {
 			$serialized = $statementSerializer->serialize( $statement );
 		} else {
 			$serialized = $statement;
-			$statement = $statementDeserializer->deserialize( $serialized );
 		}
 
 		$params = [
@@ -358,7 +407,47 @@ class SetClaimTest extends WikibaseApiTestCase {
 			$params['baserevid'] = $baserevid;
 		}
 
+		if ( $ignoreDuplicateMainSnak !== null ) {
+			$params['ignoreduplicatemainsnak'] = $ignoreDuplicateMainSnak;
+		}
+
 		$resultArray = $this->assertApiRequest( $params, $error );
+
+		if ( $resultArray ) {
+			return $resultArray;
+		}
+		return [];
+	}
+
+	/**
+	 * @param Statement|array $statement Native or serialized statement object.
+	 * @param EntityId $entityId
+	 * @param int $expectedCount
+	 * @param string $requestLabel A label to identify requests that are made in errors.
+	 * @param int|null $index
+	 * @param int|null $baserevid
+	 * @param string|null $error
+	 */
+	private function makeRequestAndAssertResult(
+		$statement,
+		EntityId $entityId,
+		$expectedCount,
+		$requestLabel,
+		$index = null,
+		$baserevid = null,
+		$error = null
+	) {
+		$resultArray = $this->makeRequest(
+			$statement,
+			$index,
+			$baserevid,
+			$error
+		);
+
+		if ( !( $statement instanceof Statement ) ) {
+			$statementDeserializer = WikibaseRepo::getDefaultInstance()->getExternalFormatStatementDeserializer();
+			$statement = $statementDeserializer->deserialize( $statement );
+		}
 
 		if ( $resultArray ) {
 			$this->assertValidResponse( $resultArray );
@@ -434,6 +523,23 @@ class SetClaimTest extends WikibaseApiTestCase {
 	}
 
 	/**
+	 * @param Statement $statement
+	 * @param EntityId $entityId
+	 */
+	private function assertStatementWasNotSet(
+		Statement $statement,
+		EntityId $entityId
+	) {
+		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
+
+		/** @var StatementListProvider $entity */
+		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
+
+		$statements = $entity->getStatements();
+		$this->assertNull( $statements->getFirstStatementWithGuid( $statement->getGuid() ) );
+	}
+
+	/**
 	 * @see Bug T60394 - "specified index out of bounds" issue when moving a statement
 	 * @note A hack is  in place in ChangeOpStatement to allow this
 	 */
@@ -458,7 +564,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		// Add new statement at index 3 using the baserevid and a different property id
 		$statement = new Statement( new PropertyNoValueSnak( self::$propertyIds[2] ) );
 		$statement->setGuid( $guidGenerator->newGuid( $entityId ) );
-		$this->makeRequest( $statement, $entityId, 2, 'addition request', 3, $revision->getRevisionId() );
+		$this->makeRequestAndAssertResult( $statement, $entityId, 2, 'addition request', 3, $revision->getRevisionId() );
 	}
 
 	public function testBadPropertyError() {

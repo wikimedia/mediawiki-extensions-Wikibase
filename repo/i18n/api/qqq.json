@@ -267,6 +267,7 @@
 	"apihelp-wbsetclaim-param-index": "{{doc-apihelp-param|wbsetclaim|index}}",
 	"apihelp-wbsetclaim-param-summary": "{{doc-apihelp-param|wbsetclaim|summary}}",
 	"apihelp-wbsetclaim-param-baserevid": "{{doc-apihelp-param|wbsetclaim|baserevid}}",
+	"apihelp-wbsetclaim-param-ignoreduplicatemainsnak": "{{doc-apihelp-param|wbsetclaim|ignoreduplicatemainsnak}}",
 	"apihelp-wbsetclaim-param-bot": "{{doc-apihelp-param|wbsetclaim|bot}}",
 	"apihelp-wbsetclaim-param-tags": "{{doc-apihelp-param|wbsetclaim|tags}}",
 	"apihelp-wbsetclaim-example-1": "{{doc-apihelp-example|wbsetclaim}}",
