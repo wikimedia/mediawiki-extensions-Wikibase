@@ -5,7 +5,7 @@ export async function insert( element: HTMLTextAreaElement, value: string ): Pro
 }
 
 export async function selectRadioInput( element: HTMLInputElement ): Promise<void> {
-	const event = new Event( 'input' );
+	const event = new MouseEvent( 'click' );
 	element.dispatchEvent( event );
 }
 
