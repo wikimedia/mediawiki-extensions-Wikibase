@@ -74,9 +74,20 @@ class ApiEntityLookupTest extends TestCase {
 	}
 
 	public function testGivenEntityHasNotBeenFetched_GetResultPartForIdThrowsException() {
+		$this->markTestSkipped( 'This is desired behaviour, but not yet implemented. T253125.' );
 		$apiEntityLookup = new ApiEntityLookup( $this->createMock( GenericActionApiClient::class ) );
 		$this->expectException( LogicException::class );
 		$apiEntityLookup->getResultPartForId( $this->p11 );
+	}
+
+	public function testGivenEntityHasNotBeenFetched_GetResultPartForIdFetches() {
+		$api = $this->newMockApi( $this->responseDataFiles['p18-en'], [ $this->p18 ] );
+		$apiEntityLookup = new ApiEntityLookup( $api );
+		$resultPart = $apiEntityLookup->getResultPartForId( $this->p18 );
+		$this->assertEquals(
+			$this->data[$this->responseDataFiles['p18-en']]['entities']['P18'],
+			$resultPart
+		);
 	}
 
 	public function testFetchEntitiesDoesNotRepeatedlyFetchEntities() {

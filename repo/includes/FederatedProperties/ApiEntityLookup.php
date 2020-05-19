@@ -3,7 +3,6 @@
 
 namespace Wikibase\Repo\FederatedProperties;
 
-use LogicException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikimedia\Assert\Assert;
 
@@ -77,7 +76,8 @@ class ApiEntityLookup {
 	 */
 	public function getResultPartForId( EntityId $entityId ): array {
 		if ( !array_key_exists( $entityId->getSerialization(), $this->entityLookupResult ) ) {
-			throw new LogicException( 'Trying to get data from an entity that was not fetched' );
+			wfDebugLog( 'Wikibase', 'Entity ' . $entityId->getSerialization() . ' not prefetched.' );
+			$this->fetchEntities( [ $entityId ] );
 		}
 
 		return $this->entityLookupResult[ $entityId->getSerialization() ];
