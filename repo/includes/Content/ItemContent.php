@@ -235,6 +235,3 @@ class ItemContent extends EntityContent {
 	}
 
 }
-
-/** @deprecated */
-class_alias( ItemContent::class, 'Wikibase\ItemContent' );
