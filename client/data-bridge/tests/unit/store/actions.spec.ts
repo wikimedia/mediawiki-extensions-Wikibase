@@ -1424,7 +1424,7 @@ describe( 'root/actions', () => {
 		} );
 	} );
 
-	describe( 'trackApplicationErrorsAsUnknown', () => {
+	describe( 'trackErrorsFallingBackToGenericView', () => {
 		it( 'sends application errors to tracker', async () => {
 			const state = newApplicationState( {
 				applicationErrors: [
@@ -1441,7 +1441,7 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			await actions.trackApplicationErrorsAsUnknown();
+			await actions.trackErrorsFallingBackToGenericView();
 
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_1' );
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'type_2' );
@@ -1462,12 +1462,12 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			await actions.trackApplicationErrorsAsUnknown();
+			await actions.trackErrorsFallingBackToGenericView();
 			expect( tracker.trackUnknownError ).toHaveBeenCalledWith( 'error_with_strange_formatting' );
 		} );
 	} );
 
-	describe( 'trackApplicationErrorsOnSaveAsUnknown', () => {
+	describe( 'trackSavingErrorsFallingBackToGenericView', () => {
 		it( 'sends application errors to tracker', async () => {
 			const state = newApplicationState( {
 				applicationErrors: [
@@ -1484,7 +1484,7 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			await actions.trackApplicationErrorsOnSaveAsUnknown();
+			await actions.trackSavingErrorsFallingBackToGenericView();
 
 			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_1' );
 			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'type_2' );
@@ -1505,7 +1505,7 @@ describe( 'root/actions', () => {
 				} ),
 			};
 
-			await actions.trackApplicationErrorsOnSaveAsUnknown();
+			await actions.trackSavingErrorsFallingBackToGenericView();
 			expect( tracker.trackSavingUnknownError ).toHaveBeenCalledWith( 'save_error_with_strange_formatting' );
 		} );
 	} );

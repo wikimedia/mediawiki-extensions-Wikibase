@@ -322,14 +322,14 @@ RootActions
 		return Promise.resolve();
 	}
 
-	public async trackApplicationErrorsAsUnknown(): Promise<void> {
+	public async trackErrorsFallingBackToGenericView(): Promise<void> {
 		for ( const error of this.state.applicationErrors ) {
 			const type = errorTypeFormatter( error.type );
 			this.store.$services.get( 'tracker' ).trackUnknownError( type );
 		}
 	}
 
-	public async trackApplicationErrorsOnSaveAsUnknown(): Promise<void> {
+	public async trackSavingErrorsFallingBackToGenericView(): Promise<void> {
 		for ( const error of this.state.applicationErrors ) {
 			const type = errorTypeFormatter( error.type );
 			this.store.$services.get( 'tracker' ).trackSavingUnknownError( type );
