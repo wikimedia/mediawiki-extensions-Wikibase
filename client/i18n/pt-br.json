@@ -132,7 +132,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Erro de permissão desconhecido",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Você não pode editar este valor devido a razões desconhecidas",
 	"wikibase-client-data-bridge-edit-decision-heading": "Selecione o tipo de edição que você fez:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Eu corrigi</strong> um valor errado",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Eu corrigi</strong> um valor incorreto",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "O valor anterior não estava correto e nunca esteve.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Eu atualizei</strong> um valor desatualizado",
 	"wikibase-client-data-bridge-edit-decision-update-description": "O valor anterior costumava estar correto, mas agora está desatualizado.",
