@@ -540,7 +540,7 @@ describe( 'store/actions', () => {
 		} );
 	} );
 
-	it( 'installs plugin that tracks application errors', async () => {
+	it( 'track application errors thanks to mutationsTrackerPlugin', async () => {
 		const trackError = jest.fn();
 		services.set( 'tracker', newMockTracker( { trackError } ) );
 		services.set( 'editAuthorizationChecker', {
@@ -563,10 +563,12 @@ describe( 'store/actions', () => {
 		expect( trackError ).toHaveBeenNthCalledWith( 1, PageNotEditable.ITEM_SEMI_PROTECTED );
 		expect( trackError ).toHaveBeenNthCalledWith( 2, PageNotEditable.PAGE_CASCADE_PROTECTED );
 
+		trackError.mockClear();
+
 		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
 		await store.dispatch( 'saveBridge' ).catch( () => undefined );
 
-		expect( trackError ).toHaveBeenCalledTimes( 3 );
-		expect( trackError ).toHaveBeenNthCalledWith( 3, ErrorTypes.APPLICATION_LOGIC_ERROR );
+		expect( trackError ).toHaveBeenCalledTimes( 1 );
+		expect( trackError ).toHaveBeenCalledWith( ErrorTypes.APPLICATION_LOGIC_ERROR );
 	} );
 } );
