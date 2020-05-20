@@ -17,7 +17,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Tests\Changes\TestChanges;
 
 /**
@@ -56,7 +55,7 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 				$title = Title::newFromText( $text, $defaultNs );
 
 				if ( !$title ) {
-					throw new StorageException( 'Bad title text: ' . $text );
+					return $title;
 				}
 
 				$title->resetArticleID( $text );
