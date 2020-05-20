@@ -7,7 +7,7 @@ function isAddApplicationErrorsMutation(
 	type: string,
 	_payload: unknown,
 ): _payload is Parameters<typeof RootMutations.prototype.addApplicationErrors>[0] {
-	return type === 'addApplicationErrors';
+	return type === RootMutations.prototype.addApplicationErrors.name;
 }
 
 export default function mutationsTrackerPlugin( tracker: BridgeTracker ): ( store: Store<Application> ) => void {
