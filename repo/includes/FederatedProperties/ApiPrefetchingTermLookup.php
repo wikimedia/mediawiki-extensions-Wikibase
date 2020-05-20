@@ -12,6 +12,9 @@ use Wikibase\Lib\Store\EntityTermLookupBase;
 /**
  * A {@link PrefetchingTermLookup} for federated properties
  *
+ * Prefetches from GenericActionApiClient(API) and stores them in $terms (current process only).
+ * Looks up terms from $terms.
+ *
  * @license GPL-2.0-or-later
  */
 class ApiPrefetchingTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {

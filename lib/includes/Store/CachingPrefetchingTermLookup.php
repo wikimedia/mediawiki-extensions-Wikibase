@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use Psr\SimpleCache\CacheInterface;
@@ -9,6 +10,14 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
 
 /**
+ * Prefetches terms from the UncachedTermsPrefetcher which stores the terms in the CacheInterface.
+ * Looks up terms from CacheInterface.
+ *
+ * For this reason CacheInterface MUST be a real cache (can store for at least this 1 request).
+ *
+ * CacheInterface determines the medium of caching, and thus the availability (process, server, WAN).
+ * UncachedTermsPrefetcher controls the ttl of the cached data.
+ *
  * @license GPL-2.0-or-later
  */
 class CachingPrefetchingTermLookup implements PrefetchingTermLookup {

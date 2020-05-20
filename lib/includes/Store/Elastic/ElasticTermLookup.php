@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Elastic;
 
 use CirrusSearch\Connection;
@@ -15,6 +16,11 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 
 /**
  * Term lookup using ElasticSearch.
+ *
+ * Prefetches from TermLookupSearcher(Elastic) and stores them in $labels, $descriptions (current process only).
+ * Looks up terms from $labels, $descriptions.
+ *
+ * Aliases are currently not implemented in this PrefetchingTermLookup, and will always return an empty array.
  */
 class ElasticTermLookup implements PrefetchingTermLookup {
 

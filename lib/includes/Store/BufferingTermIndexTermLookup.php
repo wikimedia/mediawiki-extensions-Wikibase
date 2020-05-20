@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Lib\Store;
 
 use MapCacheLRU;
@@ -10,6 +11,13 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\TermIndexEntry;
 
 /**
+ * Prefetches from TermIndex(DB) and stores them in MapCacheLRU (current process only).
+ * Looks up terms from MapCacheLRU, but also falls back to TermIndex(DB) in the case that requested languages have not already been fetched.
+ *
+ * This extra fetch fallback behaviour is not the norm in currently PrefetchingTermLookup implementations.
+ * Per the stats call that has been added, it doesnt appear to happen in Wikidata production.
+ * This odd extra logic will be removed along with this class when wb_terms is finally killed.
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
@@ -67,6 +75,8 @@ class BufferingTermIndexTermLookup extends EntityTermLookupBase implements Prefe
 	}
 
 	/**
+	 * Get terms from the TermBuffer but falls back to TermIndex if languages are requested that have no previously been fetched.
+	 *
 	 * @param EntityId $entityId
 	 * @param string $termType
 	 * @param string[] $languageCodes The languages to get terms for
