@@ -445,7 +445,7 @@ abstract class EntityContentTestCase extends \MediaWikiTestCase {
 		$entityContent = $this->newBlank();
 		$title = $this->createTitleForEntity( $entityContent->getEntity() );
 
-		$updates = $entityContent->getDeletionUpdates( new WikiPage( $title ) );
+		$updates = $entityContent->getDeletionUpdates( WikiPage::factory( $title ) );
 
 		$this->assertDataUpdates( $updates );
 	}

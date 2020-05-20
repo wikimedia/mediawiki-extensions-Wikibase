@@ -59,7 +59,7 @@ class ViewEntityAction extends ViewAction {
 	 *  print view).
 	 */
 	private function isEditable() {
-		return $this->page->isCurrent()
+		return $this->getArticle()->isCurrent()
 			&& !$this->isDiff()
 			&& !$this->getOutput()->isPrintable();
 	}
@@ -76,7 +76,7 @@ class ViewEntityAction extends ViewAction {
 
 		// NOTE: page-wide property, independent of user permissions
 		$outputPage->addJsConfigVars( 'wbIsEditView', $this->isEditable() );
-		$this->page->view();
+		$this->getArticle()->view();
 
 		$this->overridePageMetaTags( $outputPage );
 	}

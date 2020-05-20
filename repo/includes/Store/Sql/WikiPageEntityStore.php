@@ -191,7 +191,7 @@ class WikiPageEntityStore implements EntityStore {
 			throw new StorageException( 'Entity could not be mapped to a page title!' );
 		}
 
-		return new WikiPage( $title );
+		return WikiPage::factory( $title );
 	}
 
 	/**
