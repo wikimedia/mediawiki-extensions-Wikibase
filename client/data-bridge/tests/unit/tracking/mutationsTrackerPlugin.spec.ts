@@ -1,27 +1,42 @@
 import newMockTracker from '../../util/newMockTracker';
 import mutationsTrackerPlugin from '@/tracking/mutationsTrackerPlugin';
 import { ErrorTypes } from '@/definitions/ApplicationError';
+import Application from '@/store/Application';
+import { Store } from 'vuex';
 
 describe( 'mutationsTrackerPlugin', () => {
-	it( 'tracks addApplicationErrors mutations', () => {
-		const trackError = jest.fn();
-		const mockTracker = newMockTracker( { trackError } );
+	const trackError = jest.fn(),
+		mockTracker = newMockTracker( { trackError } ),
+		plugin = mutationsTrackerPlugin( mockTracker ),
+		mockStore = { subscribe: jest.fn() } as Store<Application> & { subscribe: jest.Mock };
 
-		const plugin = mutationsTrackerPlugin( mockTracker );
-
+	it( 'subscribes to the mutations on the store', () => {
 		expect( typeof plugin === 'function' ).toBe( true );
 
-		const mockStore = { subscribe: jest.fn() };
-		// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-		// @ts-ignore
 		plugin( mockStore );
 
-		expect( mockStore.subscribe ).toHaveBeenCalled();
+		expect( mockStore.subscribe ).toHaveBeenCalledTimes( 1 );
 		const callback = mockStore.subscribe.mock.calls[ 0 ][ 0 ];
 		expect( typeof callback === 'function' ).toBe( true );
+	} );
+
+	it( 'tracks addApplicationErrors mutations', () => {
+		plugin( mockStore );
+
+		const callback = mockStore.subscribe.mock.calls[ 0 ][ 0 ];
 
 		const errorType = ErrorTypes.APPLICATION_LOGIC_ERROR;
 		callback( { type: 'addApplicationErrors', payload: [ { type: errorType } ] } );
+		expect( trackError ).toHaveBeenCalledTimes( 1 );
 		expect( trackError ).toHaveBeenCalledWith( errorType );
+	} );
+
+	it( 'does not track a random other mutation', () => {
+		plugin( mockStore );
+
+		const callback = mockStore.subscribe.mock.calls[ 0 ][ 0 ];
+
+		callback( { type: 'setPageUrl', payload: [ 'Douglas_Adams' ] } );
+		expect( trackError ).not.toHaveBeenCalled();
 	} );
 } );
