@@ -31,8 +31,17 @@ describe( 'DataBridgeTrackerService', () => {
 		const tracker = getMockTracker();
 		const service = new DataBridgeTrackerService( tracker );
 
-		service.trackUnknownError( 'some_type' );
+		service.trackUnknownError( 'Error with Strange formatting!' );
 
-		expect( tracker.increment ).toHaveBeenCalledWith( 'error.unknown.some_type' );
+		expect( tracker.increment ).toHaveBeenCalledWith( 'error.unknown.error_with_strange_formatting' );
+	} );
+
+	it( 'tracks a given unknown saving error type', () => {
+		const tracker = getMockTracker();
+		const service = new DataBridgeTrackerService( tracker );
+
+		service.trackSavingUnknownError( 'Error with Strange formatting!' );
+
+		expect( tracker.increment ).toHaveBeenCalledWith( 'error.onsave.unknown.error_with_strange_formatting' );
 	} );
 } );
