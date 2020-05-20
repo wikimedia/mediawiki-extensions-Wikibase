@@ -1,5 +1,6 @@
 import Entity from '@/datamodel/Entity';
 import { Store } from 'vuex';
+import { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import Application, { InitializedApplicationState } from '@/store/Application';
 import EditFlow from '@/definitions/EditFlow';
@@ -537,5 +538,35 @@ describe( 'store/actions', () => {
 				expect( state.applicationErrors ).toStrictEqual( [] );
 			} );
 		} );
+	} );
+
+	it( 'installs plugin that tracks application errors', async () => {
+		const trackError = jest.fn();
+		services.set( 'tracker', newMockTracker( { trackError } ) );
+		services.set( 'editAuthorizationChecker', {
+			canUseBridgeForItemAndPage: () => Promise.resolve( [
+				{
+					type: PageNotEditable.ITEM_SEMI_PROTECTED,
+					info: { right: 'editsemiprotected' },
+				},
+				{
+					type: PageNotEditable.PAGE_CASCADE_PROTECTED,
+					info: { pages: [] },
+				},
+			] ),
+		} );
+
+		const store = createStore( services );
+		await store.dispatch( 'initBridge', info ).catch( () => undefined );
+
+		expect( trackError ).toHaveBeenCalledTimes( 2 );
+		expect( trackError ).toHaveBeenNthCalledWith( 1, PageNotEditable.ITEM_SEMI_PROTECTED );
+		expect( trackError ).toHaveBeenNthCalledWith( 2, PageNotEditable.PAGE_CASCADE_PROTECTED );
+
+		store.commit( 'setApplicationStatus', ApplicationStatus.SAVED );
+		await store.dispatch( 'saveBridge' ).catch( () => undefined );
+
+		expect( trackError ).toHaveBeenCalledTimes( 3 );
+		expect( trackError ).toHaveBeenNthCalledWith( 3, ErrorTypes.APPLICATION_LOGIC_ERROR );
 	} );
 } );

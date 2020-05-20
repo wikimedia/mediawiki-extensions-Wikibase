@@ -33,6 +33,7 @@ jest.mock( 'vue', () => {
 
 const store = {
 	dispatch: jest.fn(),
+	subscribe: jest.fn(),
 };
 const mockCreateStore = jest.fn( ( _x: any ) => store );
 jest.mock( '@/store', () => ( {

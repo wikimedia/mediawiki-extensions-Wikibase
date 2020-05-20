@@ -24,6 +24,7 @@ import EntityId from '@/datamodel/EntityId';
 import newMockServiceContainer from '../services/newMockServiceContainer';
 import License from '@/presentation/components/License.vue';
 import AppHeader from '@/presentation/components/AppHeader.vue';
+import newMockTracker from '../../util/newMockTracker';
 
 const localVue = createLocalVue();
 localVue.use( Vuex );
@@ -71,9 +72,7 @@ describe( 'App.vue', () => {
 			'propertyDatatypeRepository': {
 				getDataType: jest.fn().mockResolvedValue( 'string' ),
 			},
-			'tracker': {
-				trackPropertyDatatype: jest.fn(),
-			},
+			'tracker': newMockTracker(),
 			'editAuthorizationChecker': {
 				canUseBridgeForItemAndPage: () => Promise.resolve( [] ),
 			},
