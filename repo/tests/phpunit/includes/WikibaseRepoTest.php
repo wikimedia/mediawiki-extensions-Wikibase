@@ -62,6 +62,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\StringNormalizer;
@@ -1201,6 +1202,13 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 				$publicMethod->invoke( $wbRepoServices );
 			}
 		}
+	}
+
+	public function testLinkTargetEntityIdLookup() {
+		$this->assertInstanceOf(
+			LinkTargetEntityIdLookup::class,
+			$this->getWikibaseRepo()->getLinkTargetEntityIdLookup()
+		);
 	}
 
 	/**

@@ -127,9 +127,11 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
+use Wikibase\Lib\Store\SimpleEntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -2506,6 +2508,10 @@ class WikibaseRepo {
 		return new ApiServiceFactory(
 			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
 		);
+	}
+
+	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
+		return new SimpleEntityLinkTargetEntityIdLookup( $this->getEntityNamespaceLookup(), $this->getEntityIdParser() );
 	}
 
 }
