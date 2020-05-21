@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"AlimOmar",
 			"Macofe",
 			"Sahran",
 			"Uzdil"
@@ -31,5 +32,6 @@
 	"wikibase-setlabel-label": "ئەن",
 	"wikibase-modifyentity-id": "كىملىكى",
 	"wikibase-modifyterm-language": ":تىل كودى",
-	"wikibase-restoreold": "ئەسلىگە كەلتۈر"
+	"wikibase-restoreold": "ئەسلىگە كەلتۈر",
+	"wikibase-setclaim-warning-duplicatemainsnak": "كۆپەيتىلگەن ئاساسلىق snak بايقالدى. بايانات قوشۇلمىدى."
 }

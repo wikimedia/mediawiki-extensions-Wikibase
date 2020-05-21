@@ -227,6 +227,7 @@
 	"apihelp-wbsetclaim-param-index": "İfadenin taşınacağı deyimler listesindeki dizin. İsteğe bağlı. Ana yılanı aynı özelliğe sahip olmayan bir ifadenin yanında olmayan bir konum belirten bir dizin belirlerken, ana yılanları aynı özelliğe sahip olan tüm ifade grubunun taşındığını unutmayın. Sağlanmadığında, mevcut bir ifade yerinde kalacak, ana yılanı da aynı özelliğe sahip olan son ifadeye yeni bir ifade eklenecektir.",
 	"apihelp-wbsetclaim-param-summary": "Değişiklik özeti.\nOtomatik olarak oluşturulan bir yorumun başına gelecektir. Özetle birlikte otomatik kaydın uzunluğu 260 karakterdir. Sınırın üstündeki her şeyin silineceğini unutmayın.",
 	"apihelp-wbsetclaim-param-baserevid": "Değişikliğin temelini oluşturan sürümün sayısal tanımlayıcısı.\nBu, kaydetme sırasındaki çakışmaları tespit etmek için kullanılır.",
+	"apihelp-wbsetclaim-param-ignoreduplicatemainsnak": "Bu true ve işletmenin zaten istekte gönderilen hak talebi ile aynı ana yılana sahip bir talebi varsa, istek yoksayılır",
 	"apihelp-wbsetclaim-param-bot": "Bu düzenlemeyi bot olarak işaretleyin.  Bu URL işaretin yalnızca \"{{int:group-bot}}\" kullanıcı grubuna aitse önem verilir.",
 	"apihelp-wbsetclaim-param-tags": "Düzeltmeye uygulanacak etiketleri değiştirin.",
 	"apihelp-wbsetclaim-example-1": "Verilen kimliğe sahip talebi, \"<var>City</var>\" dize değerine sahip <samp>P1</samp> özelliğine ayarlayın.",

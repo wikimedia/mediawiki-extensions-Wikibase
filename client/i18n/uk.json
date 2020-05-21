@@ -143,7 +143,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Невідома помилка доступу",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Ви не можете відредагувати це значення з невідомих причин",
 	"wikibase-client-data-bridge-edit-decision-heading": "Будь ласка, виберіть тип редагування, яки ви робили:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Було виправлено</strong> хибне значення",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Виправлено мною</strong> неправильне значення",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Попереднє значення було неправильним і ніколи правильним не було.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Було оновлено</strong> застаріле значення",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Попереднє значення колись було правильним, але тепер є застарілим.",

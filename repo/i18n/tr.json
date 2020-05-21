@@ -440,5 +440,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Bu kısıtlama türü için yardım sayfası",
 	"wikibase-tainted-ref-popper-help-link-text": "Yardım",
 	"wikibase-tainted-ref-popper-remove-warning": "Uyarıyı kaldır",
-	"wikibase-tainted-ref-tainted-icon-title": "Bu ifadenin bazı potansiyel sorunları var."
+	"wikibase-tainted-ref-tainted-icon-title": "Bu ifadenin bazı potansiyel sorunları var.",
+	"wikibase-setclaim-warning-duplicatemainsnak": "Çift ana yılan tespit edildi. Açıklama eklenmedi."
 }

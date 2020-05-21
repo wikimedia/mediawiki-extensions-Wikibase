@@ -143,7 +143,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Bilinmeyen izin hatası",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Bu değeri bilinmeyen sebeplerden dolayı düzenleyemezsiniz",
 	"wikibase-client-data-bridge-edit-decision-heading": "Lütfen yapmış olduğunuz düzenlemenin türünü seçiniz:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>| corrected</strong> yanlış bir değer",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "Yanlış bir değeri <strong>düzelttim</strong>",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Önceki değer hiçbir zaman doğru değildi.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>| updated</strong> zaman aşımına uğramış bir değer",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Önceki değer doğruydu fakat şimdi geçerliliğini kaybetti.",

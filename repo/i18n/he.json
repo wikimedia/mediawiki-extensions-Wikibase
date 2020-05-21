@@ -430,5 +430,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "דף העזרה לסוג האילוץ הזה",
 	"wikibase-tainted-ref-popper-help-link-text": "עזרה",
 	"wikibase-tainted-ref-popper-remove-warning": "הסרת אזהרה",
-	"wikibase-tainted-ref-tainted-icon-title": "בקביעה הזאת יש סוגיות אפשריות."
+	"wikibase-tainted-ref-tainted-icon-title": "בקביעה הזאת יש סוגיות אפשריות.",
+	"wikibase-setclaim-warning-duplicatemainsnak": "נמצא סנאק כפול. הקביעה לא נוספה."
 }
