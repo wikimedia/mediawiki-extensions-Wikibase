@@ -202,6 +202,6 @@
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "Vous pouvez publier vos modifications sans vous connecter. Votre adresse IP sera enregistrée dans l’historique de modification de la page. Vous pouvez aussi vous reconnecter et essayer de publier de nouveau.",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publier sans se connecter",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Enregistrer sans se connecter",
-	"wikibase-client-data-bridge-saving-error-assertuser-login": "Se connecter (ouvre dans un nouvel onglet)",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Se connecter (s'ouvre dans un nouvel onglet)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continuer à modifier"
 }

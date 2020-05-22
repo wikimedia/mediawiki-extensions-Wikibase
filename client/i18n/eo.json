@@ -81,5 +81,6 @@
 	"wikibase-otherprojects-beta-description": "Aldonas al flanka strio sekcion \"{{int:wikibase-otherprojects}}\", kiu provizas ligilojn al aliaj Vikimediaj projektoj laŭ datumoj de {{WBREPONAME}}.",
 	"notification-header-page-connection": "La paĝo <strong>$3</strong> estis {{GENDER:$2|konektita}} al {{PLURAL:$4|-1={{WBREPONAME}}-ero|la {{WBREPONAME}}-ero $4}}, kie datumoj rilataj al la temo povas esti kolektitaj.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vidi}} eron",
-	"notification-subject-page-connection": "Paĝo ĉe {{SITENAME}}, kiun vi {{GENDER:$3|kreis}}, estis {{GENDER:$2|konektita}} al {{WBREPONAME}}-ero"
+	"notification-subject-page-connection": "Paĝo ĉe {{SITENAME}}, kiun vi {{GENDER:$3|kreis}}, estis {{GENDER:$2|konektita}} al {{WBREPONAME}}-ero",
+	"wikibase-client-data-bridge-error-go-back": "Reveni"
 }
