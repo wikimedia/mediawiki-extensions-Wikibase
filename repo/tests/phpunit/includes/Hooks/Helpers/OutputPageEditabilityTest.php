@@ -56,6 +56,7 @@ class OutputPageEditabilityTest extends TestCase {
 		$out = $this->newOutputPage();
 		$out->setRevisionId( 123 );
 		$title = $this->createMock( Title::class );
+		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->expects( $this->once() )
 			->method( 'getLatestRevID' )
 			->willReturn( 321 );
@@ -90,6 +91,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
 		$title = $this->createMock( Title::class );
+		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->expects( $this->once() )
 			->method( 'exists' )
 			->willReturn( true );
@@ -123,6 +125,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->overrideUserRightsForTesting( $user, [ 'edit' ] );
 
 		$title = $this->createMock( Title::class );
+		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
@@ -153,6 +156,7 @@ class OutputPageEditabilityTest extends TestCase {
 			->overrideUserRightsForTesting( $user, [ 'edit', 'create' ] );
 
 		$title = $this->createMock( Title::class );
+		$title->method( 'getNamespace' )->willReturn( NS_MAIN );
 		$title->method( 'getRestrictions' )->willReturn( [] );
 		$title->expects( $this->once() )
 			->method( 'exists' )
