@@ -157,7 +157,7 @@ abstract class SpecialModifyTerm extends SpecialModifyEntity {
 			$status = $this->checkTermChangePermissions( $entityId );
 
 			if ( !$status->isOK() ) {
-				$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
+				$this->showErrorHTML( $this->msg( 'permissionserrors' )->parse() );
 				return false;
 			}
 		}

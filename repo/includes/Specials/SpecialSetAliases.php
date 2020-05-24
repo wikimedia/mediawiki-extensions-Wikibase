@@ -140,7 +140,7 @@ class SpecialSetAliases extends SpecialModifyTerm {
 				throw new UserInputException(
 					'wikibase-wikibaserepopage-pipe-in-alias',
 					[],
-					$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )
+					$this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )->text()
 				);
 			}
 		}

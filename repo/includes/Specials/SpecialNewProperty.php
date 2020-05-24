@@ -165,7 +165,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 	 * @inheritDoc
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-newproperty-fieldset' );
+		return $this->msg( 'wikibase-newproperty-fieldset' )->parse();
 	}
 
 	/**

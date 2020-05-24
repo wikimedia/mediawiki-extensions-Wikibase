@@ -218,9 +218,9 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			} )->show();
 
 		if ( $siteId && !$siteExists ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-site' ) );
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-site' )->parse() );
 		} elseif ( $siteExists && $page ) {
-			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-item' ) );
+			$this->showErrorHTML( $this->msg( 'wikibase-itembytitle-error-item' )->parse() );
 
 			$createLink = $this->getTitleFor( 'NewItem' );
 			$this->getOutput()->addHTML(

@@ -51,8 +51,8 @@ class DataBridgeReferenceFormatter implements ReferenceFormatter {
 		] );
 
 		$formattedParts = [];
-		$separator = $this->messageLocalizer->msg( 'wikibase-reference-formatter-snak-separator' );
-		$terminator = $this->messageLocalizer->msg( 'wikibase-reference-formatter-snak-terminator' );
+		$separator = $this->messageLocalizer->msg( 'wikibase-reference-formatter-snak-separator' )->text();
+		$terminator = $this->messageLocalizer->msg( 'wikibase-reference-formatter-snak-terminator' )->text();
 
 		$referenceUrlSnaks = $referenceSnaks->getByPropertyId( $this->properties->referenceUrlPropertyId );
 		$titleSnaks = $referenceSnaks->getByPropertyId( $this->properties->titlePropertyId );

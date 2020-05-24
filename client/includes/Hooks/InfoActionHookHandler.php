@@ -181,7 +181,7 @@ class InfoActionHookHandler {
 	private function getDescriptionInfoRow( $context, $description, $source ) {
 		return [
 			// messages: wikibase-pageinfo-description-local, wikibase-pageinfo-description-central
-			$context->msg( 'wikibase-pageinfo-description-' . $source ),
+			$context->msg( 'wikibase-pageinfo-description-' . $source )->parse(),
 			$description
 		];
 	}
@@ -201,7 +201,7 @@ class InfoActionHookHandler {
 		);
 
 		return [
-			$context->msg( 'wikibase-pageinfo-entity-id' ),
+			$context->msg( 'wikibase-pageinfo-entity-id' )->parse(),
 			$itemLink
 		];
 	}
@@ -213,8 +213,8 @@ class InfoActionHookHandler {
 	 */
 	private function getUnconnectedItemPageInfo( IContextSource $context ) {
 		return [
-			$context->msg( 'wikibase-pageinfo-entity-id' ),
-			$context->msg( 'wikibase-pageinfo-entity-id-none' )
+			$context->msg( 'wikibase-pageinfo-entity-id' )->parse(),
+			$context->msg( 'wikibase-pageinfo-entity-id-none' )->parse()
 		];
 	}
 
@@ -297,7 +297,7 @@ class InfoActionHookHandler {
 			$output .= Html::rawElement( 'ul', [], $aspectContent );
 		}
 		$output = Html::rawElement( 'ul', [], $output );
-		return [ $context->msg( 'wikibase-pageinfo-entity-usage' ), $output ];
+		return [ $context->msg( 'wikibase-pageinfo-entity-usage' )->parse(), $output ];
 	}
 
 }
