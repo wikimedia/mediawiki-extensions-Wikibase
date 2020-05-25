@@ -11,13 +11,13 @@ describe( 'mutationsTrackerPlugin', () => {
 		mockStore = { subscribe: jest.fn() } as Store<Application> & { subscribe: jest.Mock };
 
 	it( 'subscribes to the mutations on the store', () => {
-		expect( typeof plugin === 'function' ).toBe( true );
+		expect( typeof plugin ).toBe( 'function' );
 
 		plugin( mockStore );
 
 		expect( mockStore.subscribe ).toHaveBeenCalledTimes( 1 );
 		const callback = mockStore.subscribe.mock.calls[ 0 ][ 0 ];
-		expect( typeof callback === 'function' ).toBe( true );
+		expect( typeof callback ).toBe( 'function' );
 	} );
 
 	it( 'tracks addApplicationErrors mutations', () => {
