@@ -1,9 +1,12 @@
-import ApplicationError from '@/definitions/ApplicationError';
 import BridgeTracker from '@/definitions/data-access/BridgeTracker';
 import { Store } from 'vuex';
 import Application from '@/store/Application';
+import { RootMutations } from '@/store/mutations';
 
-function isAddApplicationErrorsMutation( type: string, _payload: unknown ): _payload is ApplicationError[] {
+function isAddApplicationErrorsMutation(
+	type: string,
+	_payload: unknown,
+): _payload is Parameters<typeof RootMutations.prototype.addApplicationErrors>[0] {
 	return type === 'addApplicationErrors';
 }
 
