@@ -358,7 +358,7 @@
 	"wikibase-self-conflict-patched": "Yaptığınız düzenleme son sürüme eklendi ve bu varsa bazı ara düzenlemelerinizi geçersiz kılacaktır.",
 	"wikibase-conflict-patched": "Yaptığınız düzenleme en son sürüme eklendi.",
 	"wikibase-save-unresolved-redirect": "Bir değişikliği kaydetmeye çalışırken $1 olarak $2 çözülmemiş bir yönlendirme ile karşılaşıldı.",
-	"wikibase-restoreold": "geri yükle",
+	"wikibase-restoreold": "geri getir",
 	"wikibase-entity-summary-restore": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] düzenlemeleri $3 sürümüne döndürüldü",
 	"wikibase-entity-summary-undo": "[[Special:Contributions/$4|{{GENDER:$4|$4}}]] düzenlemeleri $3 sürümüne döndürüldü ([[User talk:$4|tartışma]])",
 	"wikibase-non-entity-diff": "Varlık olmayan bir içerik ile varlık farklı değil.",

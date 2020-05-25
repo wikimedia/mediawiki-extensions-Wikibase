@@ -3,6 +3,7 @@
 		"authors": [
 			"Alex00728",
 			"ChongDae",
+			"Codenstory",
 			"Ellif",
 			"Garam",
 			"Hwangjy9",
@@ -393,5 +394,6 @@
 	"wikibase-tainted-ref-popper-text": "값이 변경되었으나 환경 설정은 그대로 유지됩니다.",
 	"wikibase-tainted-ref-popper-help-link-text": "도움말",
 	"wikibase-tainted-ref-popper-remove-warning": "경고 제거",
-	"wikibase-tainted-ref-tainted-icon-title": "이 문에는 잠재적인 문제가 있습니다."
+	"wikibase-tainted-ref-tainted-icon-title": "이 문에는 잠재적인 문제가 있습니다.",
+	"wikibase-setclaim-warning-duplicatemainsnak": "메인 스나크 복제가 감지되었습니다. 구문이 추가되지 않습니다."
 }

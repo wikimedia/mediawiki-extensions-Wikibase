@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Codenstory",
 			"Revi",
 			"Ykhwong",
 			"고솜"
@@ -35,6 +36,7 @@
 	"apihelp-query+wbsubscribers-param-prop": "결과에 추가할 속성",
 	"apihelp-query+wbsubscribers-param-limit": "최대 결과 수",
 	"apihelp-wbsetaliases-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
+	"apihelp-wbsetclaim-param-ignoreduplicatemainsnak": "이것이 사실이고 엔티티가 요청에서 전송된 클레임과 동일한 기본 스나크을 가진 클레임이 이미 있는 경우 요청은 무시됩니다",
 	"apihelp-wbsetclaim-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbsetclaimvalue-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",
 	"apihelp-wbsetdescription-param-bot": "이 편집을 봇으로 표시합니다. 이 URL 플래그는 사용자가 그룹 \"{{int:group-bot}}\"에 속해 있을 경우에만 준수합니다.",

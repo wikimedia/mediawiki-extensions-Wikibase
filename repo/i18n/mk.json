@@ -422,5 +422,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Помошна страница за овој вид ограничување",
 	"wikibase-tainted-ref-popper-help-link-text": "Помош",
 	"wikibase-tainted-ref-popper-remove-warning": "Отстрани предупредување",
-	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми."
+	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми.",
+	"wikibase-setclaim-warning-duplicatemainsnak": "Пронајдена е дуплирана главна спојница. Не го додадов исказот."
 }

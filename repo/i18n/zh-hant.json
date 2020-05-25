@@ -449,5 +449,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "此受限類型的說明頁面",
 	"wikibase-tainted-ref-popper-help-link-text": "說明",
 	"wikibase-tainted-ref-popper-remove-warning": "移除警告",
-	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。"
+	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。",
+	"wikibase-setclaim-warning-duplicatemainsnak": "偵測到重覆的主要敘述。無法添加陳述。"
 }

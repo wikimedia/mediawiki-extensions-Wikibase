@@ -3,6 +3,7 @@
 		"authors": [
 			"Adam-Yourist",
 			"Agilight",
+			"Ailbeve",
 			"Alexander Yukal",
 			"Alexey zakharenkov",
 			"Dicto23456",
@@ -133,5 +134,6 @@
 	"wikibase-client-data-bridge-license-heading": "Использование и лицензия",
 	"wikibase-client-data-bridge-license-body": "<p>Изменение этого значения также приведет к его изменению в {{WBREPONAME}} и, возможно, в вики на других языках.</p>\n<p>Нажимая \"{{int:$1}}\", вы соглашаетесь с [$2 условиями использования] и безоговорочно соглашаетесь опубликовать свой вклад в соответствии с [$3 $4].</p>",
 	"wikibase-client-data-bridge-error-reload-bridge": "Перезагрузить",
+	"wikibase-client-data-bridge-error-reload-page": "Перезагрузить страницу",
 	"wikibase-client-data-bridge-error-go-back": "Вернуться назад"
 }
