@@ -31,7 +31,8 @@ return call_user_func( function() {
 				return new ResourceLoaderFileModule(
 					[
 						'scripts' => [
-							'data-bridge.init.js'
+							'vendor-chunks.js',
+							'data-bridge.init.js',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
@@ -91,10 +92,10 @@ return call_user_func( function() {
 				return new ResourceLoaderFileModule(
 					[
 						'scripts' => [
-							'data-bridge.common.js'
+							'data-bridge.app.js'
 						],
 						'styles' => [
-							'data-bridge.css',
+							'css/data-bridge.app.css',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
