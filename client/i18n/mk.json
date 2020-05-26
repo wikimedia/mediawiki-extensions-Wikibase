@@ -128,7 +128,7 @@
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Непозната грешка со дозволата",
 	"wikibase-client-data-bridge-permissions-error-unknown-body": "Не можете да ја уредите оваа вредност од непознати причини",
 	"wikibase-client-data-bridge-edit-decision-heading": "Изберете какво уредување направивте:",
-	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Исправив</strong> погрешна вредност",
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>Исправив</strong> неисправна вредност",
 	"wikibase-client-data-bridge-edit-decision-replace-description": "Претходната вредност никогаш не беше, и никогаш била исправна.",
 	"wikibase-client-data-bridge-edit-decision-update-label": "<strong>Подновив</strong> застарена вредност",
 	"wikibase-client-data-bridge-edit-decision-update-description": "Претходната вредност била исправна, но сега е застарена.",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Diki Ananta",
 			"NoiX180"
 		]
 	},
@@ -17,7 +18,7 @@
 	"apihelp-query+wblistentityusage-param-limit": "Akèhé panggunané èntitas sing kudu dibalèkaké.",
 	"apihelp-query+wblistentityusage-example-simple": "Jupuk kaca sing nganggo èntitas <kbd>Q2</kbd>.",
 	"apihelp-query+wblistentityusage-example-url": "Jupuk kaca sing nganggo èntitas <kbd>Q2</kbd> sinartan URLé.",
-	"apihelp-query+pageterms-example-simple": "Jupuk kabèh istilah sing magepokan kaca 'London', ing basané panganggo.",
+	"apihelp-query+pageterms-example-simple": "Jupuk kabèh istilah sing magepokan kaca 'London', ing basané naraguna.",
 	"apihelp-query+pageterms-example-label-en": "Jupuk labèl lan aliyas magepokan kaca 'London', ing basa Inggris.",
 	"apihelp-query+pageterms-example-item": "Jupuk labèl lan aliyasé wiji Q84.",
 	"apihelp-query+pageterms-param-terms": "Jinis istilah sing kudu dijupuk, contoné 'dhéskripsi'. Yèn ora dilebokaké, kabèh jinis bakal dibalèkaké.",

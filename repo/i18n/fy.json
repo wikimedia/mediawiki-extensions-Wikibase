@@ -22,6 +22,7 @@
 	"wikibase-diffview-qualifier": "kwalifikaasje",
 	"wikibase-statementsection-statements": "Ferklearringen",
 	"wikibase-sitelinks-special": "Oare webstees",
+	"wikibase-referenceview-tabs-manual": "Hânmjittich",
 	"wikibase-statementview-rank-normal": "Normale rang",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|boarne|boarnen}}",
 	"wikibase-snakview-property-input-placeholder": "eigenskip",
