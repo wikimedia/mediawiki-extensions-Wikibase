@@ -12,8 +12,8 @@ import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';
 import { statementModule } from '@/store/statements';
-import errorPropertyNameReplacer from '@/utils/errorPropertyNameReplacer';
 import { ErrorTypes, SavingFailedError } from '@/definitions/ApplicationError';
+import { serializeError } from 'serialize-error';
 
 export class RootGetters extends Getters<Application> {
 
@@ -105,7 +105,8 @@ export class RootGetters extends Getters<Application> {
 
 	public get reportIssueTemplateBody(): string {
 		const pageUrl = this.state.pageUrl;
-		const stackTrace = JSON.stringify( this.state.applicationErrors, errorPropertyNameReplacer, 4 );
+		const serializedApplicationErrors = this.state.applicationErrors.map( ( error ) => serializeError( error ) );
+		const stackTrace = JSON.stringify( serializedApplicationErrors, null, 4 );
 
 		return [ `The error happened on: ${pageUrl}`,
 			`Item title: ${this.state.entityTitle}`,
