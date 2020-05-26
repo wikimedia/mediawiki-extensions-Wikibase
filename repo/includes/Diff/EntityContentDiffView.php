@@ -155,22 +155,16 @@ class EntityContentDiffView extends DifferenceEngine {
 
 	/**
 	 * @param WikiPage $page
-	 * @param Revision|RevisionRecord $rev Mismatch is because core still says Revision,
-	 * core can't change without triggering errors that this doesn't implement it properly,
-	 * suppress for a bit
-	 * @suppress PhanParamSignatureRealMismatchHasNoParamType
+	 * @param RevisionRecord $rev
 	 *
 	 * @return ParserOutput|bool False if the revision was not found
 	 */
-	protected function getParserOutput( WikiPage $page, $rev ) {
+	protected function getParserOutput( WikiPage $page, RevisionRecord $rev ) {
 		$parserOptions = $page->makeParserOptions( $this->getContext() );
 
 		// Do not poison parser cache with diff-specific stuff
 		$parserOptions->addExtraKey( 'diff=1' );
 
-		// Both Revision and RevisionRecord have getId methods (Revision::getId actually just
-		// calls RevisionRecord::getId) so no need for special handling based on the
-		// class of the object passed
 		$parserOutput = $page->getParserOutput( $parserOptions, $rev->getId() );
 
 		if ( $parserOutput ) {
