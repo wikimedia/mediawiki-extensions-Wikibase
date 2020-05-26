@@ -18,6 +18,7 @@ use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\User\UserIdentity;
 use MWException;
 use OutputPage;
 use PageProps;
@@ -26,7 +27,6 @@ use ParserOptions;
 use ParserOutput;
 use RecentChange;
 use ResourceLoader;
-use Revision;
 use Skin;
 use SkinTemplate;
 use StubUserLang;
@@ -214,23 +214,20 @@ final class RepoHooks {
 	/**
 	 * Called when a revision was inserted due to an edit.
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/NewRevisionFromEditComplete
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RevisionFromEditComplete
 	 *
 	 * @param WikiPage $wikiPage
-	 * @param Revision $revision
+	 * @param RevisionRecord $revisionRecord
 	 * @param int $baseID
-	 * @param User $user
+	 * @param UserIdentity $user
 	 */
-	public static function onNewRevisionFromEditComplete(
+	public static function onRevisionFromEditComplete(
 		WikiPage $wikiPage,
-		Revision $revision,
+		RevisionRecord $revisionRecord,
 		$baseID,
-		User $user
+		UserIdentity $user
 	) {
 		$entityContentFactory = WikibaseRepo::getDefaultInstance()->getEntityContentFactory();
-
-		// TODO replace hook with one that doesn't use Revision objects - T250338
-		$revisionRecord = $revision->getRevisionRecord();
 
 		if ( $entityContentFactory->isEntityContentModel( $wikiPage->getContent()->getModel() ) ) {
 			self::notifyEntityStoreWatcherOnUpdate(
@@ -354,7 +351,7 @@ final class RepoHooks {
 
 	/**
 	 * Nasty hack to inject information from RC into the change notification saved earlier
-	 * by the onNewRevisionFromEditComplete hook handler.
+	 * by the onRevisionFromEditComplete hook handler.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/RecentChange_save
 	 *
