@@ -98,7 +98,7 @@ class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
 	private function newSubjectInstance(
 		$thumbSize = 0,
 		$thumbLimits = [ 120 ]
-	): CommonsInLineImageFormatter {
+	): CommonsInlineImageFormatter {
 		if ( !MediaWikiServices::getInstance()->getRepoGroup()->findFile( 'Example.jpg' ) ) {
 			$this->markTestSkipped( '"Example.jpg" not found? Instant commons disabled?' );
 		}

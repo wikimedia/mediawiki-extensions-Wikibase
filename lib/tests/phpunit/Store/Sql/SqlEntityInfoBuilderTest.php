@@ -19,7 +19,7 @@ use Wikibase\Lib\Tests\Store\EntityInfoBuilderTestCase;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\PropertyContent;
-use Wikipage;
+use WikiPage;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder
@@ -138,7 +138,7 @@ class SqlEntityInfoBuilderTest extends EntityInfoBuilderTestCase {
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @return Wikipage|null
+	 * @return WikiPage|null
 	 */
 	private function createPage( EntityDocument $entity ) {
 

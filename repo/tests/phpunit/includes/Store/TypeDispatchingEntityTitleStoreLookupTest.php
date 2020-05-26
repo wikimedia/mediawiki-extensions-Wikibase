@@ -34,7 +34,7 @@ class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestC
 			$this->newDefaultService()
 		);
 
-		$this->expectException( PostConditionException::class );
+		$this->expectException( PostconditionException::class );
 		$lookup->getTitleForId( new PropertyId( 'P1' ) );
 	}
 
