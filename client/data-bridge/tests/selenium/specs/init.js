@@ -3,6 +3,7 @@ const assert = require( 'assert' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' ),
 	Util = require( 'wdio-mediawiki/Util' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
+	WarningAnonymousEdit = require( '../pageobjects/WarningAnonymousEdit' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 describe( 'init', () => {
@@ -280,11 +281,11 @@ describe( 'init', () => {
 				DataBridgePage.overloadedLink.click();
 				DataBridgePage.app.waitForDisplayed( 10000 );
 
-				assert.ok( DataBridgePage.warningAnonymousEdit.isDisplayed() );
+				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
-				DataBridgePage.warningAnonymousEditProceedButton.click();
+				WarningAnonymousEdit.proceedButton.click();
 				DataBridgePage.bridge.waitForDisplayed();
-				assert.ok( !DataBridgePage.warningAnonymousEdit.isDisplayed() );
+				assert.ok( !WarningAnonymousEdit.root.isDisplayed() );
 			} );
 
 			it( 'is shown and leads to login page', () => {
@@ -313,9 +314,9 @@ describe( 'init', () => {
 				DataBridgePage.overloadedLink.click();
 				DataBridgePage.app.waitForDisplayed( 10000 );
 
-				assert.ok( DataBridgePage.warningAnonymousEdit.isDisplayed() );
+				assert.ok( WarningAnonymousEdit.root.isDisplayed() );
 
-				DataBridgePage.warningAnonymousEditLoginButton.click();
+				WarningAnonymousEdit.loginButton.click();
 				DataBridgePage.app.waitForDisplayed( undefined, true ); // wait until not displayed
 				assert.equal( browser.execute( () => {
 					return window.mw.config.get( 'wgCanonicalNamespace' ) + ':'
@@ -351,7 +352,7 @@ describe( 'init', () => {
 			DataBridgePage.open( title );
 			DataBridgePage.overloadedLink.click();
 			DataBridgePage.bridge.waitForDisplayed( 10000 );
-			assert.ok( !DataBridgePage.warningAnonymousEdit.isDisplayed() );
+			assert.ok( !WarningAnonymousEdit.root.isDisplayed() );
 		} );
 	} );
 } );

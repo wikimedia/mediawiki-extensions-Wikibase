@@ -1,5 +1,6 @@
 const Page = require( 'wdio-mediawiki/Page' ),
-	Util = require( 'wdio-mediawiki/Util' );
+	Util = require( 'wdio-mediawiki/Util' ),
+	WarningAnonymousEdit = require( './WarningAnonymousEdit' );
 
 class DataBridgePage extends Page {
 	static get ARTICLE_ELEMENTS() {
@@ -31,17 +32,9 @@ class DataBridgePage extends Page {
 
 	static get ROOT_SWITCH() {
 		return {
-			WARNING_ANONYMOUS_EDIT: '.wb-db-warning-anonymous-edit',
 			ERROR: '.wb-db-error',
 			BRIDGE: '.wb-db-bridge',
 			THANKYOU: '.wb-db-thankyou',
-		};
-	}
-
-	static get WARNING_ANONYMOUS_EDIT_BUTTONS() {
-		return {
-			PROCEED: '.wb-db-warning-anonymous-edit__proceed',
-			LOGIN: '.wb-db-warning-anonymous-edit__login',
 		};
 	}
 
@@ -149,7 +142,7 @@ class DataBridgePage extends Page {
 	launchApp() {
 		this.overloadedLink.click();
 		this.app.waitForDisplayed( 10000 );
-		this.dismissWarningAnonymousEdit();
+		WarningAnonymousEdit.dismiss();
 	}
 
 	get overloadedLink() {
@@ -162,25 +155,6 @@ class DataBridgePage extends Page {
 
 	get app() {
 		return $( '#data-bridge-app' );
-	}
-
-	get warningAnonymousEdit() {
-		return $( DataBridgePage.ROOT_SWITCH.WARNING_ANONYMOUS_EDIT );
-	}
-
-	get warningAnonymousEditProceedButton() {
-		return $( DataBridgePage.WARNING_ANONYMOUS_EDIT_BUTTONS.PROCEED );
-	}
-
-	get warningAnonymousEditLoginButton() {
-		return $( DataBridgePage.WARNING_ANONYMOUS_EDIT_BUTTONS.LOGIN );
-	}
-
-	dismissWarningAnonymousEdit() {
-		if ( this.warningAnonymousEdit.isDisplayed() ) {
-			this.warningAnonymousEditProceedButton.click();
-			this.warningAnonymousEdit.waitForDisplayed( undefined, true );
-		}
 	}
 
 	get saveButton() {
