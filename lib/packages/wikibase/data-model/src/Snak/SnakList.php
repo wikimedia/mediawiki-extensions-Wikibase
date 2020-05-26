@@ -18,6 +18,9 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
+ *
+ * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class SnakList extends ArrayObject implements Comparable, Hashable {
 
@@ -275,10 +278,7 @@ class SnakList extends ArrayObject implements Comparable, Hashable {
 	 * @return string
 	 */
 	public function serialize() {
-		return serialize( [
-			'data' => $this->getArrayCopy(),
-			'index' => $this->indexOffset,
-		] );
+		return serialize( $this->__serialize() );
 	}
 
 	/**
@@ -288,14 +288,34 @@ class SnakList extends ArrayObject implements Comparable, Hashable {
 	 */
 	public function unserialize( $serialized ) {
 		$serializationData = unserialize( $serialized );
+		$this->__unserialize( $serializationData );
+	}
 
-		foreach ( $serializationData['data'] as $offset => $value ) {
+	/**
+	 * @see https://wiki.php.net/rfc/custom_object_serialization
+	 *
+	 * @return array
+	 */
+	public function __serialize(): array {
+		return [
+			'data' => $this->getArrayCopy(),
+			'index' => $this->indexOffset,
+		];
+	}
+
+	/**
+	 * @see https://wiki.php.net/rfc/custom_object_serialization
+	 *
+	 * @param array $data
+	 */
+	public function __unserialize( $data ) : void {
+		foreach ( $data['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
 			// as these elements have already gone through this.
 			parent::offsetSet( $offset, $value );
 		}
 
-		$this->indexOffset = $serializationData['index'];
+		$this->indexOffset = $data['index'];
 	}
 
 	/**

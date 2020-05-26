@@ -412,6 +412,21 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $references->isEmpty() );
 	}
 
+	/**
+	 * This integration test (relies on ReferenceList::getValueHash) is supposed to break whenever the hash
+	 * calculation changes.
+	 */
+	public function testGetValueHashStability() {
+		$array = new ReferenceList();
+		$snak1 = new PropertyNoValueSnak( 1 );
+		$snak2 = new PropertyNoValueSnak( 3 );
+		$snak3 = new PropertyNoValueSnak( 2 );
+
+		$array->addNewReference( $snak1, $snak2, $snak3 );
+		$expectedHash = '92244e1a91f60b7fa922d42441995442bf50adb5';
+		$this->assertSame( $expectedHash, $array->getValueHash() );
+	}
+
 	public function testRemoveReferenceHashRemovesIdenticalObjects() {
 		$reference = new Reference( [ new PropertyNoValueSnak( 1 ) ] );
 		$references = new ReferenceList( [ $reference, $reference ] );
@@ -505,11 +520,17 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 	public function testSerializationStability() {
 		$list = new ReferenceList();
 		$list->addNewReference( new PropertyNoValueSnak( 1 ) );
-		$this->assertSame(
-			"a:1:{i:0;O:28:\"Wikibase\\DataModel\\Reference\":1:{s:35:\"\x00Wikibase\\DataModel\\"
+
+		$testString = "a:1:{i:0;O:28:\"Wikibase\\DataModel\\Reference\":1:{s:35:\"\x00Wikibase\\DataModel\\"
 			. "Reference\x00snaks\";C:32:\"Wikibase\\DataModel\\Snak\\SnakList\":100:{a:2:{s:4:\""
 			. 'data";a:1:{i:0;C:43:"Wikibase\\DataModel\\Snak\\PropertyNoValueSnak":2:{P1}}s:5'
-			. ':"index";i:0;}}}}',
+			. ':"index";i:0;}}}}';
+
+		$secondList = new ReferenceList();
+		$secondList->unserialize( $testString );
+
+		$this->assertSame(
+			$testString,
 			$list->serialize()
 		);
 	}

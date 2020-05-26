@@ -24,6 +24,9 @@ use Wikibase\DataModel\Snak\Snak;
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Kreuz
  * @author Bene* < benestar.wikimedia@gmail.com >
+ *
+ * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {
 
@@ -230,6 +233,26 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	 */
 	public function serialize() {
 		return serialize( array_values( $this->references ) );
+	}
+
+	/**
+	 * @see https://wiki.php.net/rfc/custom_object_serialization
+	 *
+	 * @return array
+	 */
+	public function __serialize() {
+		return [
+			'references' => array_values( $this->references )
+		];
+	}
+
+	/**
+	 * @see https://wiki.php.net/rfc/custom_object_serialization
+	 *
+	 * @param array $data
+	 */
+	public function __unserialize( array $data ) : void {
+		$this->references = $data['references'];
 	}
 
 	/**
