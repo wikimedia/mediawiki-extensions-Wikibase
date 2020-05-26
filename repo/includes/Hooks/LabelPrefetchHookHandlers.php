@@ -16,9 +16,9 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Hook handlers for triggering prefetching of labels.
  *
- * Wikibase uses the HtmlPageLinkRendererBegin hook handler
+ * Wikibase uses the HtmlPageLinkRendererEnd hook handler
  *
- * @see HtmlPageLinkRendererBeginHookHandler
+ * @see HtmlPageLinkRendererEndHookHandler
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

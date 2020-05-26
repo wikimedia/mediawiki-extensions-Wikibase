@@ -83,7 +83,7 @@ class ShowSearchHitHandler {
 			$languageFallbackChainFactory->newFromContext( $context ),
 			$wikibaseRepo->getEntityIdLookup(),
 			$wikibaseRepo->getEntityLookup(),
-			new DefaultEntityLinkFormatter( $context->getLanguage() )
+			new DefaultEntityLinkFormatter( $context->getLanguage(), $wikibaseRepo->getEntityTitleTextLookup() )
 		);
 	}
 

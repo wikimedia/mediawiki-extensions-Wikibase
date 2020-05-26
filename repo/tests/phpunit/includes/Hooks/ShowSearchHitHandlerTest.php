@@ -19,6 +19,7 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -153,8 +154,12 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			$this->getMockFallbackChain( $languages ),
 			$this->getEntityIdLookup(),
 			$this->getEntityLookup( $entities ),
-			new DefaultEntityLinkFormatter( Language::factory( 'en' ) )
+			new DefaultEntityLinkFormatter( Language::factory( 'en' ), $this->getEntityTitleTextLookupMock() )
 		);
+	}
+
+	private function getEntityTitleTextLookupMock() {
+		return $this->createMock( EntityTitleTextLookup::class );
 	}
 
 	/**

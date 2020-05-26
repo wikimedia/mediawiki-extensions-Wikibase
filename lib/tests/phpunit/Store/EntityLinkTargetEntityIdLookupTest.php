@@ -8,29 +8,30 @@ use TitleValue;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\SimpleEntityLinkTargetEntityIdLookup;
 
 /**
- * @covers \Wikibase\Lib\Store\SimpleEntityLinkTargetEntityIdLookup
+ * @covers \Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class SimpleEntityLinkTargetEntityIdLookupTest extends TestCase {
+class EntityLinkTargetEntityIdLookupTest extends TestCase {
 
 	public function provideTestGetEntityId() {
 		yield 'good namespace and parsable ID' => [ new TitleValue( 111, 'Q1' ), new ItemId( 'Q1' ) ];
 		yield 'bad namespace and parsable ID' => [ new TitleValue( 222, 'Q1' ), RuntimeException::class ];
 		yield 'good namespace and not parsable ID' => [ new TitleValue( 111, 'XXYz' ), null ];
+		yield 'special entity page' => [ new TitleValue( -1, 'EntityPage/Q1' ), new ItemId( 'Q1' ) ];
 	}
 
 	/**
 	 * @dataProvider provideTestGetEntityId
 	 */
 	public function testGetEntityId( $inLinkTarget, $expected ) {
-		$lookup = new SimpleEntityLinkTargetEntityIdLookup(
+		$lookup = new EntityLinkTargetEntityIdLookup(
 			$this->getMockEntityNamespaceLookupWhere111IsItemNamespace(),
 			$this->getMockEntityIdParserWhereQ1IsParseable()
 		);

@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiTestCase;
 use RequestContext;
-use Wikibase\Repo\Hooks\HtmlPageLinkRendererBeginHookHandler;
+use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
@@ -36,7 +36,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testHtmlPageLinkRendererBeginHookHandler(): void {
-		TestingAccessWrapper::newFromClass( HtmlPageLinkRendererBeginHookHandler::class )
+		TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )
 			->newFromGlobalState();
 	}
 

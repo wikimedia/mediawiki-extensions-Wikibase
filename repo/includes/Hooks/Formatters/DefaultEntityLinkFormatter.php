@@ -6,6 +6,7 @@ use HtmlArmor;
 use Language;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
 
 /**
  * Utility class to format entity links with labels for usage in hooks.
@@ -17,8 +18,14 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 */
 	private $pageLanguage;
 
-	public function __construct( Language $pageLanguage ) {
+	/**
+	 * @var EntityTitleTextLookup
+	 */
+	private $entityTitleTextLookup;
+
+	public function __construct( Language $pageLanguage, EntityTitleTextLookup $entityTitleTextLookup ) {
 		$this->pageLanguage = $pageLanguage;
+		$this->entityTitleTextLookup = $entityTitleTextLookup;
 	}
 
 	/**
@@ -76,7 +83,11 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	/**
 	 * @inheritDoc
 	 */
-	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null ) {
+	public function getTitleAttribute(
+		$entityIdOrTitle,
+		array $labelData = null,
+		array $descriptionData = null
+	) {
 		/** @var Language $labelLang */
 		/** @var Language $descriptionLang */
 
@@ -84,10 +95,19 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		list( $descriptionText, $descriptionLang ) = $this->extractTextAndLanguage( $descriptionData );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		$titleText = ( $labelText !== '' )
-			? $labelLang->getDirMark() . $labelText
-			  . $this->pageLanguage->getDirMark()
-			: $title->getPrefixedText();
+		if ( $entityIdOrTitle instanceof EntityId ) {
+			$titleText = ( $labelText !== '' )
+				? $labelLang->getDirMark() . $labelText
+				. $this->pageLanguage->getDirMark()
+				: $this->entityTitleTextLookup->getPrefixedText( $entityIdOrTitle );
+		} elseif ( $entityIdOrTitle instanceof Title ) {
+			$titleText = ( $labelText !== '' )
+				? $labelLang->getDirMark() . $labelText
+				. $this->pageLanguage->getDirMark()
+				: $entityIdOrTitle->getPrefixedText();
+		} else {
+			throw new \LogicException( '$entityIdOrTitle should have been Title or EntityId' );
+		}
 
 		if ( $descriptionText !== '' ) {
 			$descriptionText = $descriptionLang->getDirMark() . $descriptionText
