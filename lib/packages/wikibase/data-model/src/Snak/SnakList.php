@@ -20,7 +20,6 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Addshore
  *
  * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class SnakList extends ArrayObject implements Comparable, Hashable {
 

@@ -26,7 +26,6 @@ use Wikibase\DataModel\Snak\Snak;
  * @author Bene* < benestar.wikimedia@gmail.com >
  *
  * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {
 
