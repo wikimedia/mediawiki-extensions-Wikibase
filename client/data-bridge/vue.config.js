@@ -52,4 +52,7 @@ module.exports = {
 			},
 		},
 	},
+	transpileDependencies: [
+		'serialize-error',
+	],
 };
