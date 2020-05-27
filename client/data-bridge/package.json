@@ -26,6 +26,7 @@
     "deep-equal": "^2.0.1",
     "events": "^3.1.0",
     "normalize.css": "^8.0.1",
+    "serialize-error": "^7.0.1",
     "uuid": "^8.1.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",

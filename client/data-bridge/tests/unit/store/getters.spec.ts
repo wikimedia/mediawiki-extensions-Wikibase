@@ -344,6 +344,23 @@ describe( 'root/getters', () => {
 
 			expect( getters.reportIssueTemplateBody ).toMatchSnapshot();
 		} );
+
+		it( 'serializes Error objects with information', () => {
+			const errorMessage = 'some error message';
+			const pageUrl = 'https://bg.client.example.com/wiki/Дъглас_Адамс';
+			const entityTitle = `Item:${entityId}`;
+			const applicationState = newApplicationState( {
+				entityTitle,
+				targetProperty,
+				pageUrl,
+				applicationErrors: [ { type: ErrorTypes.APPLICATION_LOGIC_ERROR, info: new Error( errorMessage ) } ],
+			} );
+			const getters = inject( RootGetters, {
+				state: applicationState,
+			} );
+
+			expect( getters.reportIssueTemplateBody ).toEqual( expect.stringContaining( errorMessage ) );
+		} );
 	} );
 
 	describe( 'isGenericSavingError', () => {
