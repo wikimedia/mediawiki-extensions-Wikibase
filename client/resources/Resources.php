@@ -92,15 +92,15 @@ return call_user_func( function() {
 				return new ResourceLoaderFileModule(
 					[
 						'scripts' => [
-							'data-bridge.app.js'
+							'resources/wikibase.client.data-bridge.app.js'
 						],
 						'styles' => [
-							'css/data-bridge.app.css',
+							'data-bridge/dist/css/data-bridge.app.css',
 						],
 						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
 							[ 'desktop', 'mobile' ] :
 							[],
-						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
+						'remoteExtPath' => 'Wikibase/client',
 						'dependencies' => [
 							'vue',
 							'vuex',
@@ -177,6 +177,42 @@ return call_user_func( function() {
 							'grouppage-sysop',
 							'emailuser',
 						],
+					],
+					__DIR__ . '/..'
+				);
+			},
+		],
+
+		'wikibase.client.data-bridge.app.modern' => [
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'data-bridge.app.modern.js'
+						],
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop', 'mobile' ] :
+							[],
+						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
+					],
+					__DIR__ . '/../data-bridge/dist'
+				);
+			},
+		],
+
+		'wikibase.client.data-bridge.app.legacy' => [
+			'factory' => function () {
+				$clientSettings = WikibaseClient::getDefaultInstance()->getSettings();
+				return new ResourceLoaderFileModule(
+					[
+						'scripts' => [
+							'data-bridge.app.js'
+						],
+						'targets' => $clientSettings->getSetting( 'dataBridgeEnabled' ) ?
+							[ 'desktop', 'mobile' ] :
+							[],
+						'remoteExtPath' => 'Wikibase/client/data-bridge/dist',
 					],
 					__DIR__ . '/../data-bridge/dist'
 				);

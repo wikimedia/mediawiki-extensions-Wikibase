@@ -41,8 +41,8 @@ export default async (): Promise<void> => {
 			API_MODULE,
 			ULS_MODULE,
 			MWLANGUAGE_MODULE,
-		] ).then( ( require ) => {
-			const app = require( APP_MODULE );
+		] ).then( async ( require ) => {
+			const app = await require( APP_MODULE );
 			return new Dispatcher( mwWindow, app, dataBridgeConfig, eventTracker );
 		} );
 		const initTracker = new MwInitTracker( eventTracker, window.performance );

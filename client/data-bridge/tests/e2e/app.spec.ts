@@ -67,7 +67,7 @@ function prepareTestEnv( options: {
 	const editFlow = options.editFlow || EditFlow.SINGLE_BEST_VALUE;
 
 	const app = { launch, createServices };
-	const require = jest.fn().mockReturnValue( app );
+	const require = jest.fn().mockResolvedValue( app );
 	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(

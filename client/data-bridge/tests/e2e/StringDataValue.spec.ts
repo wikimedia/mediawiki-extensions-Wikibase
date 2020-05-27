@@ -56,7 +56,7 @@ function prepareTestEnv( options: {
 	const clientPageTitle = 'Client_page';
 
 	const app = { launch, createServices };
-	const require = jest.fn().mockReturnValue( app );
+	const require = jest.fn().mockResolvedValue( app );
 	const using = jest.fn().mockResolvedValue( require );
 
 	mockMwEnv(
