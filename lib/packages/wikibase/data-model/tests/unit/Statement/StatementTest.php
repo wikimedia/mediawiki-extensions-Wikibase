@@ -79,6 +79,12 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertEquals( 'foobar', $statement->getGuid() );
 	}
 
+	public function testHashStability() {
+		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
+		$statement = new Statement( $mainSnak );
+		$this->assertSame( '50c73da6759fd31868fb0cc9c218969fa776f62c', $statement->getHash() );
+	}
+
 	public function testSetAndGetMainSnak() {
 		$mainSnak = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
 		$statement = new Statement( $mainSnak );

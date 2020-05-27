@@ -188,6 +188,11 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $reference0->equals( $reference1 ) );
 	}
 
+	public function testReferenceHashStability() {
+		$reference = new Reference( [ new PropertyNoValueSnak( 42 ) ] );
+		$this->assertSame( 'f2be45ba65676e69367433547812db03b8c661ef', $reference->getHash() );
+	}
+
 	public function testReferenceDoesNotEqualReferenceWithMoreSnaks() {
 		$reference0 = new Reference( [ new PropertyNoValueSnak( 42 ) ] );
 
