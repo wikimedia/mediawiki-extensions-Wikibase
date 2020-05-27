@@ -87,6 +87,11 @@ class HtmlPageLinkRendererBeginHookHandler {
 	private $labelDescriptionLookup;
 
 	/**
+	 * Attribute that is added to links that went through this hook and got formatted via EntityLinkFormatter
+	 */
+	public const FORMATTED_ENTITY_LINK_ATTR = 'data-formatted-entity-link';
+
+	/**
 	 * @return self
 	 */
 	private static function newFromGlobalState() {
@@ -263,6 +268,9 @@ class HtmlPageLinkRendererBeginHookHandler {
 
 		// add wikibase styles in all cases, so we can format the link properly:
 		$out->addModuleStyles( [ 'wikibase.common' ] );
+
+		// tells HtmlPageLinkRendererEndHookHandler which links are formatted entity links
+		$customAttribs[self::FORMATTED_ENTITY_LINK_ATTR] = true;
 
 		return true;
 	}

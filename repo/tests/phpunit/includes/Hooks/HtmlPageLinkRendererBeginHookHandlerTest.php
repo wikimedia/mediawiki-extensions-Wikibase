@@ -363,6 +363,21 @@ class HtmlPageLinkRendererBeginHookHandlerTest extends MediaWikiTestCase {
 		$this->assertArrayNotHasKey( 'title', $customAttribs );
 	}
 
+	public function testGivenEntityLinkToFormat_addsIndicatingAttribute() {
+		$customAttribs = [];
+
+		$context = $this->newContext();
+		$this->newInstance()->doHtmlPageLinkRendererBegin(
+			$this->getLinkRenderer(),
+			$this->newTitle( self::ITEM_WITHOUT_LABEL ),
+			$text,
+			$customAttribs,
+			$context
+		);
+
+		$this->assertArrayHasKey( HtmlPageLinkRendererBeginHookHandler::FORMATTED_ENTITY_LINK_ATTR, $customAttribs );
+	}
+
 	/**
 	 * @return EntityIdLookup
 	 */
