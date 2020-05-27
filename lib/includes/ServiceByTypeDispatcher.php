@@ -20,16 +20,21 @@ class ServiceByTypeDispatcher {
 
 	private $defaultService;
 
+	private $type;
+
 	/**
+	 * @param string $type type of the dispatched services, i.e. type of the default service and the return value of the callbacks
 	 * @param callable[] $callbacks map of entity types to callbacks creating the service to be used
 	 * @param object $defaultService - the service to be used when there is no callback defined for the given entity type
 	 */
-	public function __construct( array $callbacks, object $defaultService ) {
+	public function __construct( string $type, array $callbacks, object $defaultService ) {
 		Assert::parameterElementType( 'callable', $callbacks, '$callbacks' );
 		Assert::parameterKeyType( 'string', $callbacks, '$callbacks' );
-		Assert::parameterType( 'object', $defaultService, '$defaultService' );
+		Assert::parameterType( $type, $defaultService, '$defaultService' );
+
 		$this->callbacks = $callbacks;
 		$this->defaultService = $defaultService;
+		$this->type = $type;
 	}
 
 	public function getServiceForType( string $entityType ) {
@@ -42,6 +47,11 @@ class ServiceByTypeDispatcher {
 
 	private function createService( string $entityType ) {
 		$this->services[$entityType] = $this->callbacks[$entityType]();
+
+		Assert::postcondition(
+			$this->services[$entityType] instanceof $this->type,
+			"callback must return an instance of $this->type"
+		);
 
 		return $this->services[$entityType];
 	}

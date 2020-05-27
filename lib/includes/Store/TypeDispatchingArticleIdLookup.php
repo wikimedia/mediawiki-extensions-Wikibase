@@ -16,7 +16,7 @@ class TypeDispatchingArticleIdLookup implements EntityArticleIdLookup {
 	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityArticleIdLookup $defaultLookup ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultLookup );
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityArticleIdLookup::class, $callbacks, $defaultLookup );
 	}
 
 	public function getArticleId( EntityId $id ): ?int {

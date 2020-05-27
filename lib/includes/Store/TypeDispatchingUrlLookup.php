@@ -17,7 +17,7 @@ class TypeDispatchingUrlLookup implements EntityUrlLookup {
 	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityUrlLookup $defaultLookup ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultLookup );
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityUrlLookup::class, $callbacks, $defaultLookup );
 	}
 
 	public function getFullUrl( EntityId $id ): ?string {
