@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess;
 use Hooks;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\Lib\ServiceByTypeDispatcher;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikimedia\Assert\Assert;
 
@@ -22,25 +23,14 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 	 */
 	private $entityContentModels;
 
-	/**
-	 * EntityIdLookup[]
-	 */
-	private $lookups;
-
-	/**
-	 * EntityIdLookup
-	 */
-	private $defaultLookup;
+	private $serviceDispatcher;
 
 	public function __construct( array $entityContentModels, array $lookups, EntityIdLookup $defaultLookup ) {
 		Assert::parameterElementType( 'string', $entityContentModels, '$entityContentModels' );
 		Assert::parameterElementType( 'string', array_keys( $entityContentModels ), 'keys of $entityContentModels' );
-		Assert::parameterElementType( 'callable', $lookups, '$lookups' );
-		Assert::parameterElementType( 'string', array_keys( $lookups ), 'keys of $lookups' );
 
 		$this->entityContentModels = $entityContentModels;
-		$this->lookups = $lookups;
-		$this->defaultLookup = $defaultLookup;
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityIdLookup::class, $lookups, $defaultLookup );
 	}
 
 	public function getEntityIds( array $titles ) {
@@ -87,17 +77,8 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 	 */
 	private function getLookupForContentModel( $contentModel ) {
 		$entityType = array_search( $contentModel, $this->entityContentModels, true );
-		if ( $entityType === false || !isset( $this->lookups[$entityType] ) ) {
-			return $this->defaultLookup;
-		}
 
-		$lookup = call_user_func( $this->lookups[$entityType] );
-		Assert::postcondition(
-			$lookup instanceof EntityIdLookup,
-			'Callback must return an instance of EntityIdLookup'
-		);
-
-		return $lookup;
+		return $this->serviceDispatcher->getServiceForType( $entityType );
 	}
 
 }
