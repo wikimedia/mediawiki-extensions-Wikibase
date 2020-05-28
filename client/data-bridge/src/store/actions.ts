@@ -106,7 +106,11 @@ RootActions
 
 		this.store.$services.get( 'tracker' ).trackPropertyDatatype( dataType );
 
-		await this.dispatch( 'renderReferences' );
+		try {
+			await this.dispatch( 'renderReferences' );
+		} catch ( e ) {
+			this.store.$services.get( 'tracker' ).trackError( 'render_references' );
+		}
 
 		BridgeConfig( Vue, { ...wikibaseRepoConfiguration, ...information.client } );
 
