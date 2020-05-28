@@ -15,7 +15,7 @@ export default class MwInitTracker {
 	public startClickDelayTracker(): () => void {
 		const clickStarted = this.performance.now();
 
-		return () => {
+		return (): void => {
 			const clickDelay = this.performance.now() - clickStarted;
 			this.tracker.recordTiming( 'clickDelay', clickDelay );
 		};

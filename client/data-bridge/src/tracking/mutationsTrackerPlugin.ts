@@ -11,7 +11,7 @@ function isAddApplicationErrorsMutation(
 }
 
 export default function mutationsTrackerPlugin( tracker: BridgeTracker ): ( store: Store<Application> ) => void {
-	return ( store ): void => {
+	return ( store: Store<Application> ): void => {
 		store.subscribe( ( { type, payload }: { type: string; payload: unknown } ): void => {
 			if ( !isAddApplicationErrorsMutation( type, payload ) ) {
 				return;

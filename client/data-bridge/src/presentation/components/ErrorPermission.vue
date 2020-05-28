@@ -31,6 +31,7 @@ import { MissingPermissionsError } from '@/definitions/data-access/BridgePermiss
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
 import MessageKeys from '@/definitions/MessageKeys';
 import MediaWikiRouter from '@/definitions/MediaWikiRouter';
+import { VNode } from 'vue/types';
 
 interface PermissionTypeRenderer {
 	header: keyof typeof MessageKeys;
@@ -245,7 +246,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 
 	private bdi( text: string ): HTMLElement {
 		return new Vue( {
-			render( createElement: CreateElement ) {
+			render( createElement: CreateElement ): VNode {
 				return createElement( 'bdi', text );
 			},
 		} ).$mount().$el as HTMLElement;

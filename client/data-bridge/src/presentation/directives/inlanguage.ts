@@ -3,7 +3,7 @@ import { VNode } from 'vue/types/vnode';
 import LanguageInfoRepository from '@/definitions/data-access/LanguageInfoRepository';
 
 export default ( resolver: LanguageInfoRepository ) => {
-	return ( el: HTMLElement, binding: DirectiveBinding, _vnode: VNode ) => {
+	return ( el: HTMLElement, binding: DirectiveBinding, _vnode: VNode ): void => {
 		if ( !binding.value ) {
 			return;
 		}
