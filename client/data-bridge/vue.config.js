@@ -19,6 +19,8 @@ module.exports = {
 	configureWebpack: () => ( {
 		output: {
 			filename: `${filePrefix}[name].js`,
+			libraryTarget: 'commonjs2',
+			chunkFilename: 'vendor-chunks.js',
 		},
 		entry: {
 			app: './src/main.ts',
@@ -26,21 +28,22 @@ module.exports = {
 		},
 		externals: externals(),
 		optimization: {
+			splitChunks: {
+				minChunks: 2,
+			},
 			minimize: !DEV_MODE,
 			minimizer: [ new TerserPlugin( {
-				include: /\.common\.js$/,
+				include: /\.js$/,
 				sourceMap: true,
 				extractComments: false,
 			} ) ],
 		},
 	} ),
 	chainWebpack: ( config ) => {
-		config.optimization.delete( 'splitChunks' );
-
 		if ( process.env.NODE_ENV === 'production' ) {
 			config.plugin( 'extract-css' )
 				.tap( ( [ options, ...args ] ) => [
-					Object.assign( {}, options, { filename: `${filePrefix}[name].css` } ),
+					Object.assign( {}, options, { filename: `css/${filePrefix}[name].css` } ),
 					...args,
 				] );
 		}
