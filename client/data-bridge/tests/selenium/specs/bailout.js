@@ -1,14 +1,15 @@
 const assert = require( 'assert' ),
 	Api = require( 'wdio-mediawiki/Api' ),
+	BailoutActions = require( '../pageobjects/BailoutActions' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 
 describe( 'bail-out', () => {
 	function testBailoutActions() {
-		const suggestionGoToRepo = DataBridgePage.bailoutSuggestionGoToRepo;
+		const suggestionGoToRepo = BailoutActions.suggestionGoToRepo;
 		const goToRepoLink = suggestionGoToRepo.$( 'a' );
 		assert.ok( goToRepoLink.isClickable() );
-		const suggestionEditArticle = DataBridgePage.bailoutSuggestionEditArticle;
+		const suggestionEditArticle = BailoutActions.suggestionEditArticle;
 		const editArticleLink = suggestionEditArticle.$( 'a' );
 		assert.ok( editArticleLink.isClickable() );
 		assert.ok( /action=edit/.test( editArticleLink.getAttribute( 'href' ) ) );

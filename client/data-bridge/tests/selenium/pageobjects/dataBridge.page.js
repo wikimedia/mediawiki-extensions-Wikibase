@@ -89,15 +89,6 @@ class DataBridgePage extends Page {
 		return '.wb-db-error-permission-info';
 	}
 
-	static get BAILOUT_ACTIONS() {
-		return {
-			CONTAINER: '.wb-db-bailout-actions',
-			HEADING: '.wb-db-bailout-actions__heading',
-			SUGGESTION_GO_TO_REPO: '.wb-db-bailout-actions__suggestion:nth-child(1)',
-			SUGGESTION_EDIT_ARTICLE: '.wb-db-bailout-actions__suggestion:nth-child(2)',
-		};
-	}
-
 	static get THANKYOU_BUTTON() {
 		return '.wb-db-thankyou__button';
 	}
@@ -251,18 +242,6 @@ class DataBridgePage extends Page {
 
 	showsErrorSaving() {
 		return this.error.$( DataBridgePage.ERROR_TYPES.SAVING ).isDisplayed();
-	}
-
-	get bailoutActions() {
-		return this.error.$( DataBridgePage.BAILOUT_ACTIONS.CONTAINER );
-	}
-
-	get bailoutSuggestionGoToRepo() {
-		return this.bailoutActions.$( DataBridgePage.BAILOUT_ACTIONS.SUGGESTION_GO_TO_REPO );
-	}
-
-	get bailoutSuggestionEditArticle() {
-		return this.bailoutActions.$( DataBridgePage.BAILOUT_ACTIONS.SUGGESTION_EDIT_ARTICLE );
 	}
 
 	get bridge() {
