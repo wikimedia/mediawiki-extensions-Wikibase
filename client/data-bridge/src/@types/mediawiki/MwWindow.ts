@@ -5,10 +5,10 @@ export interface MwMessage {
 	text(): string;
 	parse(): string;
 }
-export type MwMessages = ( key: string, ...params: ( string|HTMLElement )[] ) => MwMessage;
+export type MwMessages = ( key: string, ...params: readonly ( string|HTMLElement )[] ) => MwMessage;
 
 interface ResourceLoader {
-	using( module: string|string[] ): Promise<any>;
+	using( module: string | readonly string[] ): Promise<any>;
 }
 
 export interface MwLanguage {
@@ -17,8 +17,8 @@ export interface MwLanguage {
 
 interface MwLog {
 	deprecate( obj: object, key: string, val: any, msg?: string, logName?: string ): void;
-	error( ...msg: any[] ): void;
-	warn( ...msg: string[] ): void;
+	error( ...msg: readonly any[] ): void;
+	warn( ...msg: readonly string[] ): void;
 }
 
 /** @see: https://doc.wikimedia.org/mediawiki-core/master/js/#!/api/mw.Api-property-defaultOptions */
@@ -29,7 +29,7 @@ interface ApiOptions {
 }
 
 type MwApiParameterPrimitive = string | number | boolean | undefined;
-export type MwApiParameter = MwApiParameterPrimitive | MwApiParameterPrimitive[];
+export type MwApiParameter = MwApiParameterPrimitive | readonly MwApiParameterPrimitive[];
 export type MwApiParameters = Record<string, MwApiParameter>;
 export type MwApiParametersWithout<K extends string> = MwApiParameters & { [ k in K ]?: never };
 
@@ -77,9 +77,9 @@ export interface MediaWiki {
 }
 
 interface Events {
-	[ name: string ]: any[];
+	[ name: string ]: readonly any[];
 }
-type EventListener<A extends any[]> = ( ...args: A ) => void;
+type EventListener<A extends readonly any[]> = ( ...args: A ) => void;
 
 /** https://doc.wikimedia.org/oojs/master/OO.EventEmitter.html */
 export interface OOEventEmitter<E extends Events> {
@@ -106,7 +106,7 @@ interface WindowManagerEvents extends Events {
 
 export type WindowManagerConstructor = new() => WindowManager;
 export interface WindowManager extends OOEventEmitter<WindowManagerEvents> {
-	addWindows( elements: OOElement[] ): void;
+	addWindows( elements: readonly OOElement[] ): void;
 	openWindow( element: OOElement ): void;
 	clearWindows(): JQuery.Promise<unknown, unknown, unknown>;
 	destroy(): void;

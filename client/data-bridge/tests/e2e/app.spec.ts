@@ -102,7 +102,7 @@ function prepareTestEnv( options: {
 			return new URLSearchParams( params as Record<string, string> ).toString();
 		},
 	} as any;
-	window.mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
+	window.mw.message = jest.fn( ( key: string, ..._params: readonly ( string|HTMLElement )[] ) => {
 		return {
 			text: jest.fn(),
 			parse: () => `⧼${key}⧽`,

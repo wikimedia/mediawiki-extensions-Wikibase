@@ -251,7 +251,7 @@ export default class ErrorPermission extends mixins( StateMixin ) {
 		} ).$mount().$el as HTMLElement;
 	}
 
-	private convertToHtmlList( arr: string[], mwRouter: MediaWikiRouter ): HTMLElement {
+	private convertToHtmlList( arr: readonly string[], mwRouter: MediaWikiRouter ): HTMLElement {
 		const pageListInstance = new PageList( {
 			propsData: {
 				pages: arr,

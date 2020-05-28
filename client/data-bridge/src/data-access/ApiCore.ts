@@ -89,7 +89,7 @@ export default class ApiCore implements Api {
 			default: { // API error(s)
 				const result = arg2 as {
 					error?: ApiError; // errorformat = 'bc' (default)
-					errors?: ApiError[]; // errorformat ≠ 'bc'
+					errors?: readonly ApiError[]; // errorformat ≠ 'bc'
 				}; // arg3 is also result, arg4 is jqXHR
 				if ( result.error ) {
 					throw new ApiErrors( [ result.error ] );

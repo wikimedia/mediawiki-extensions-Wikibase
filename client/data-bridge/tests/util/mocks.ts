@@ -17,7 +17,7 @@ import clone from '@/store/clone';
 
 export function mockMwConfig( values: {
 	hrefRegExp?: string|null;
-	editTags?: string[];
+	editTags?: readonly string[];
 	usePublish?: boolean;
 	issueReportingLink?: string;
 	wbRepo?: WbRepo;
@@ -163,7 +163,7 @@ export function getOrCreateApiQueryResponsePage( response: ApiQueryResponseBody,
 	let page = getApiQueryResponsePage( response, title );
 	if ( page === null ) {
 		page = { title };
-		( response.pages || ( response.pages = [] ) ).push( page );
+		response.pages = [ ...response.pages || [], page ];
 	}
 	return page;
 }

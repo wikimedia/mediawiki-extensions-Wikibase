@@ -14,7 +14,7 @@ export default interface AppBridge {
 
 	createServices(
 		mwWindow: MwWindow,
-		editTags: string[],
+		editTags: readonly string[],
 		eventTracker: Tracker,
 	): ServiceContainer;
 }

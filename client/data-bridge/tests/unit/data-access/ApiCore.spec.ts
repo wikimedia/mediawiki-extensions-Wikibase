@@ -13,7 +13,7 @@ import jqXHR = JQuery.jqXHR;
 
 describe( 'ApiCore', () => {
 
-	function mockRejectingMwApi( ...args: any[] ): MwApi {
+	function mockRejectingMwApi( ...args: readonly any[] ): MwApi {
 		return {
 			get() {
 				return $.Deferred().reject( ...args ).promise();

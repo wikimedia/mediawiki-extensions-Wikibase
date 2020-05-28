@@ -26,11 +26,11 @@ export class RootMutations extends Mutations<Application> {
 		this.state.targetLabel = label;
 	}
 
-	public setRenderedTargetReferences( referencesHtml: string[] ): void {
+	public setRenderedTargetReferences( referencesHtml: readonly string[] ): void {
 		this.state.renderedTargetReferences = referencesHtml;
 	}
 
-	public addApplicationErrors( errors: ApplicationError[] ): void {
+	public addApplicationErrors( errors: readonly ApplicationError[] ): void {
 		this.state.applicationErrors.push( ...errors );
 	}
 

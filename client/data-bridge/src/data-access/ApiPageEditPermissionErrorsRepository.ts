@@ -17,7 +17,7 @@ import PageEditPermissionErrorsRepository, {
 
 export interface ApiErrorRawErrorformat extends ApiError {
 	key: string;
-	params: ( string|number )[];
+	params: readonly ( string|number )[];
 }
 
 function isApiErrorRawErrorformat( error: ApiError ): error is ApiErrorRawErrorformat {
@@ -65,7 +65,7 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 		);
 	}
 
-	private apiErrorToPermissionError( error: ApiError, semiProtectedLevels: string[] ): PermissionError {
+	private apiErrorToPermissionError( error: ApiError, semiProtectedLevels: readonly string[] ): PermissionError {
 		if ( !isApiErrorRawErrorformat( error ) ) {
 			throw new TechnicalProblem( 'API returned wrong error format.' );
 		}

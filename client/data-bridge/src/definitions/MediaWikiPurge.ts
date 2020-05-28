@@ -1,3 +1,3 @@
 export default interface MediaWikiPurge {
-	purge( titles: string[] ): Promise<void>;
+	purge( titles: readonly string[] ): Promise<void>;
 }

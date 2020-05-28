@@ -18,7 +18,7 @@ export interface PermissionErrorProtectedPage {
 
 export interface PermissionErrorCascadeProtectedPage {
 	type: PermissionErrorType.CASCADE_PROTECTED_PAGE;
-	pages: string[];
+	pages: readonly string[];
 }
 
 export interface PermissionErrorBlockedUser {
@@ -38,7 +38,7 @@ export interface PermissionErrorUnknown {
 	type: PermissionErrorType.UNKNOWN;
 	code: string;
 	messageKey: string;
-	messageParams: ( string|number )[];
+	messageParams: readonly ( string|number )[];
 }
 
 /**

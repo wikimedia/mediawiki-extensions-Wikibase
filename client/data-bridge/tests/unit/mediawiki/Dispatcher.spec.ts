@@ -65,7 +65,7 @@ describe( 'Dispatcher', () => {
 
 		it( 'triggers service creation and launches app', () => {
 			const usePublish = true;
-			const editTags = [ 'my tag' ];
+			const editTags: readonly string[] = [ 'my tag' ];
 			const pageTitle = 'Client_page';
 			const pageUrl = 'https://client.example/wiki/Client_page';
 			const userName = 'Test user';

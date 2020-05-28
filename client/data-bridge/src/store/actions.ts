@@ -97,7 +97,7 @@ RootActions
 		],
 	}: {
 		information: AppInformation;
-		results: [ WikibaseRepoConfiguration, MissingPermissionsError[], string, unknown ];
+		results: [ WikibaseRepoConfiguration, readonly MissingPermissionsError[], string, unknown ];
 	} ): Promise<void> {
 		if ( permissionErrors.length ) {
 			this.commit( 'addApplicationErrors', permissionErrors );
@@ -308,7 +308,7 @@ RootActions
 	}
 
 	public addError(
-		errors: ApplicationError[],
+		errors: readonly ApplicationError[],
 	): Promise<void> {
 		this.commit( 'addApplicationErrors', errors );
 		return Promise.resolve();

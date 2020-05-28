@@ -21,7 +21,7 @@ import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepo
 
 export default function createServices(
 	mwWindow: MwWindow,
-	editTags: string[],
+	editTags: readonly string[],
 	eventTracker: Tracker,
 ): ServiceContainer {
 	const services = new ServiceContainer();

@@ -10,12 +10,12 @@ export interface ApiQueryResponsePage {
 }
 
 export interface ApiQueryResponseBody {
-	normalized?: {
+	normalized?: readonly {
 		fromencoded: boolean;
 		from: string;
 		to: string;
 	}[];
-	pages?: ApiQueryResponsePage[];
+	pages?: readonly ApiQueryResponsePage[];
 }
 
 export interface ApiQueryResponse extends ApiResponse {
@@ -23,15 +23,15 @@ export interface ApiQueryResponse extends ApiResponse {
 }
 export interface ApiQueryInfoTestResponsePage extends ApiQueryResponsePage {
 	actions: {
-		[action: string]: ApiError[];
+		[action: string]: readonly ApiError[];
 	};
 }
 
 export interface ApiQueryRestrictionsResponseBody extends ApiQueryResponseBody {
 	restrictions: {
-		types: string[];
-		levels: string[];
-		cascadinglevels: string[];
-		semiprotectedlevels: string[];
+		types: readonly string[];
+		levels: readonly string[];
+		cascadinglevels: readonly string[];
+		semiprotectedlevels: readonly string[];
 	};
 }

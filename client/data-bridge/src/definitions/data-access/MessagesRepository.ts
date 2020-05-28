@@ -1,3 +1,3 @@
 export default interface MessagesRepository {
-	get( messageKey: string, ...params: ( string| HTMLElement )[] ): string;
+	get( messageKey: string, ...params: readonly ( string| HTMLElement )[] ): string;
 }

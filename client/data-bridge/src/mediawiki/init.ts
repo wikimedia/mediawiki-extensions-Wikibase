@@ -28,7 +28,7 @@ export default async (): Promise<void> => {
 		return;
 	}
 	const bridgeElementSelector = new BridgeDomElementsSelector( dataBridgeConfig.hrefRegExp );
-	const linksToOverload: SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
+	const linksToOverload: readonly SelectedElement[] = bridgeElementSelector.selectElementsToOverload();
 	if ( linksToOverload.length > 0 ) {
 		const eventTracker = new PrefixingEventTracker(
 			new EventTracker( mwWindow.mw.track ),

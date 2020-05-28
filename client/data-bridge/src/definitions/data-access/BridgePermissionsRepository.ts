@@ -38,7 +38,7 @@ export interface CascadeProtectedReason extends ApplicationErrorBase {
 	type: PageNotEditable.ITEM_CASCADE_PROTECTED
 	| PageNotEditable.PAGE_CASCADE_PROTECTED;
 	info: {
-		pages: string[];
+		pages: readonly string[];
 	};
 }
 
@@ -47,7 +47,7 @@ export interface UnknownReason extends ApplicationErrorBase {
 	info: {
 		code: string;
 		messageKey: string;
-		messageParams: ( string|number )[];
+		messageParams: readonly ( string|number )[];
 	};
 }
 

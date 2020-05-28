@@ -91,7 +91,7 @@ function prepareTestEnv( options: {
 			},
 		},
 	} as any;
-	window.mw.message = jest.fn( ( key: string, ..._params: ( string|HTMLElement )[] ) => {
+	window.mw.message = jest.fn( ( key: string, ..._params: readonly ( string|HTMLElement )[] ) => {
 		return {
 			text: jest.fn(),
 			parse: () => `⧼${key}⧽`,

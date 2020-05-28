@@ -34,7 +34,9 @@ describe( 'CombiningPermissionsRepository', () => {
 		expect( clientRepository.getPermissionErrors ).toHaveBeenCalledWith( clientTitle );
 	} );
 
-	function mockPermissionErrorsRepository( errors: PermissionError[] = [] ): PageEditPermissionErrorsRepository {
+	function mockPermissionErrorsRepository(
+		errors: PermissionError[] = [],
+	): PageEditPermissionErrorsRepository {
 		return {
 			getPermissionErrors( _title: string ): Promise<PermissionError[]> {
 				return Promise.resolve( errors );

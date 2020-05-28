@@ -4,7 +4,7 @@ import Vue from 'vue';
 export default function repeater(
 	app: Vue,
 	emitter: EventEmitter,
-	eventNames: string[],
+	eventNames: readonly string[],
 ): void {
 	eventNames.forEach( ( value: string ) => {
 		app.$on( value, ( ...payload: unknown[] ) => {

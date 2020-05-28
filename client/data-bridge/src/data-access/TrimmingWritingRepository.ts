@@ -7,7 +7,7 @@ import StatementMap from '@/datamodel/StatementMap';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import deepEqual from 'deep-equal';
 
-function statementListById( statementList: Statement[] ): Record<string, Statement> {
+function statementListById( statementList: readonly Statement[] ): Record<string, Statement> {
 	const statementsById: Record<string, Statement> = {};
 	for ( const statement of statementList ) {
 		if ( statement.id ) {
@@ -67,7 +67,10 @@ export default class TrimmingWritingRepository implements WritingEntityRepositor
 		return trimmedStatementMap;
 	}
 
-	private trimStatementGroup( newStatements: Statement[], baseStatements: Statement[] ): Statement[] | null {
+	private trimStatementGroup(
+		newStatements: readonly Statement[],
+		baseStatements: readonly Statement[],
+	): Statement[] | null {
 		const baseStatementsById = statementListById( baseStatements );
 		const trimmedStatementsGroup = [];
 		for ( const newStatement of newStatements ) {
