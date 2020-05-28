@@ -4,8 +4,7 @@ namespace Wikibase\Repo\Store;
 
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikimedia\Assert\Assert;
-use Wikimedia\Assert\PostconditionException;
+use Wikibase\Lib\ServiceByTypeDispatcher;
 
 /**
  * An EntityTitleStoreLookup that guarantees to return the titles of pages that actually store the
@@ -17,22 +16,22 @@ use Wikimedia\Assert\PostconditionException;
 class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 
 	/**
-	 * @var array indexed by entity type
-	 */
-	private $lookups;
-
-	/**
 	 * @var EntityTitleStoreLookup
 	 */
 	private $defaultLookup;
+
+	/**
+	 * @var ServiceByTypeDispatcher
+	 */
+	private $serviceDispatcher;
 
 	/**
 	 * @param callable[] $callbacks indexed by entity type
 	 * @param EntityTitleStoreLookup $defaultLookup
 	 */
 	public function __construct( array $callbacks, EntityTitleStoreLookup $defaultLookup ) {
-		$this->lookups = $callbacks;
 		$this->defaultLookup = $defaultLookup;
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityTitleStoreLookup::class, $callbacks, $defaultLookup );
 	}
 
 	/**
@@ -41,34 +40,8 @@ class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 	 * @return Title|null
 	 */
 	public function getTitleForId( EntityId $id ) {
-		return $this->getLookup( $id->getEntityType() )->getTitleForId( $id );
-	}
-
-	/**
-	 * @param string $entityType
-	 *
-	 * @throws PostConditionException
-	 * @return EntityTitleStoreLookup
-	 */
-	private function getLookup( $entityType ) {
-		if ( !array_key_exists( $entityType, $this->lookups ) ) {
-			return $this->defaultLookup;
-		}
-
-		if ( is_callable( $this->lookups[$entityType] ) ) {
-			$this->lookups[$entityType] = call_user_func(
-				$this->lookups[$entityType],
-				$this->defaultLookup
-			);
-
-			Assert::postcondition(
-				$this->lookups[$entityType] instanceof EntityTitleStoreLookup,
-				"Callback provided for $entityType must create a EntityTitleStoreLookup"
-			);
-
-		}
-
-		return $this->lookups[$entityType];
+		return $this->serviceDispatcher->getServiceForType( $id->getEntityType(), [ $this->defaultLookup ] )
+			->getTitleForId( $id );
 	}
 
 	/**
@@ -79,7 +52,10 @@ class TypeDispatchingEntityTitleStoreLookup implements EntityTitleStoreLookup {
 
 		$result = [];
 		foreach ( $byType as $type => $idsForType ) {
-			$result = array_merge( $result, $this->getLookup( $type )->getTitlesForIds( $idsForType ) );
+			$result = array_merge(
+				$result,
+				$this->serviceDispatcher->getServiceForType( $type, [ $this->defaultLookup ] )->getTitlesForIds( $idsForType )
+			);
 		}
 
 		return $result;

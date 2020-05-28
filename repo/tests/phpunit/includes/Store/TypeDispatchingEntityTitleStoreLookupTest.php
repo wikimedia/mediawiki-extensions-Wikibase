@@ -21,9 +21,6 @@ use Wikimedia\Assert\PostconditionException;
 class TypeDispatchingEntityTitleStoreLookupTest extends \PHPUnit\Framework\TestCase {
 	use MediaWikiCoversValidator;
 
-	/**
-	 * @covers \Wikibase\Repo\Store\TypeDispatchingEntityTitleStoreLookup::getLookup
-	 */
 	public function testGivenInvalidCallback_getTitleForIdFails() {
 		$lookup = new TypeDispatchingEntityTitleStoreLookup(
 			[
