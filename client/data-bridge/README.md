@@ -25,6 +25,8 @@ This uses the values from `.env` for configuration - create a `.env.local` file 
 docker-compose run --rm node npm run build
 ```
 
+Bridge is built with Vue's [modern mode](https://cli.vuejs.org/guide/browser-compatibility.html#modern-mode) to ship light-weight JavaScript to capable browsers. MediaWiki chooses one or the other distribution using `client/resources/wikibase.client.data-bridge.app.js`.
+
 ### Automatically fix code style violations
 ```
 docker-compose run --rm node npm run fix
