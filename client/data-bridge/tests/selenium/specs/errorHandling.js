@@ -4,6 +4,7 @@ const assert = require( 'assert' ),
 	DataBridgePage = require( '../pageobjects/dataBridge.page' ),
 	ErrorSavingAssertUser = require( '../pageobjects/ErrorSavingAssertUser' ),
 	ErrorSavingEditConflict = require( '../pageobjects/ErrorSavingEditConflict' ),
+	WarningAnonymousEdit = require( '../pageobjects/WarningAnonymousEdit' ),
 	WikibaseApi = require( 'wdio-wikibase/wikibase.api' ),
 	DomUtil = require( './../DomUtil' ),
 	NetworkUtil = require( './../NetworkUtil' ),
@@ -67,7 +68,7 @@ describe( 'App', () => {
 		NetworkUtil.enableNetwork();
 		DataBridgePage.errorUnknownRelaunch.click();
 		DataBridgePage.app.waitForDisplayed( 10000 );
-		DataBridgePage.dismissWarningAnonymousEdit();
+		WarningAnonymousEdit.dismiss();
 		DataBridgePage.bridge.waitForDisplayed();
 	} );
 
