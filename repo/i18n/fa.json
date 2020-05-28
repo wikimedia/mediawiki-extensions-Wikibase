@@ -66,7 +66,7 @@
 	"wikibase-description-edit-placeholder-language-aware": "توصیف را در $1 وارد کنید",
 	"wikibase-aliases-edit-placeholder": "وارد کردن تعدادی نام مستعار",
 	"wikibase-aliases-edit-placeholder-language-aware": "وارد کردن تعدادی نام مستعار در $1",
-	"wikibase-aliases-edit-label": "نام‌های مستعار جداشده توسط خط عمود:",
+	"wikibase-aliases-edit-label": "نام‌های مستعار جداشده توسط خط عمودی:",
 	"wikibase-content-language-edit-label": "زبان:",
 	"wikibase-content-language-edit-not-recognized-language": "زبان ورودی قابل شناخته شدن نیست.",
 	"wikibase-diffview-reference": "منبع",
