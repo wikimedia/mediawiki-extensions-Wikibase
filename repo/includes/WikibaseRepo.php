@@ -123,6 +123,7 @@ use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
@@ -141,6 +142,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\TermIndexItemTermStoreWriter;
 use Wikibase\Lib\Store\TermIndexPropertyTermStoreWriter;
+use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
@@ -1803,11 +1805,14 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return PropertyTermStoreWriterAdapter[]
+	 * @return EntityTermStoreWriter[]
 	 */
-	public function getPropertyTermStoreWriters() {
-		$propertyTermsMigrationStage = $this->settings->getSetting(
-			'tmpPropertyTermsMigrationStage' );
+	public function getPropertyTermStoreWriters(): array {
+		if ( !in_array( Property::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
+			return [ new ThrowingEntityTermStoreWriter() ];
+		}
+
+		$propertyTermsMigrationStage = $this->settings->getSetting( 'tmpPropertyTermsMigrationStage' );
 
 		$old = new PropertyTermStoreWriterAdapter( $this->getOldPropertyTermStoreWriter() );
 		$new = new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
@@ -1827,7 +1832,14 @@ class WikibaseRepo {
 		}
 	}
 
+	/**
+	 * @return EntityTermStoreWriter[]
+	 */
 	public function getItemTermStoreWriters(): array {
+		if ( !in_array( Item::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
+			return [ new ThrowingEntityTermStoreWriter() ];
+		}
+
 		$itemTermsMigrationStages = $this->settings->getSetting( 'tmpItemTermsMigrationStages' );
 		$oldItemTermStore = $this->getOldItemTermStoreWriter();
 		$newItemTermStore = $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter();
