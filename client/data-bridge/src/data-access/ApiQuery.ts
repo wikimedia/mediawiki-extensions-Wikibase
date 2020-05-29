@@ -1,3 +1,4 @@
+import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import {
 	ApiQueryInfoTestResponsePage,
 	ApiQueryResponseBody,
@@ -20,10 +21,18 @@ export function getApiQueryResponsePage( response: ApiQueryResponseBody, title: 
 	return null;
 }
 
-export function isInfoTestPage( page: ApiQueryResponsePage ): page is ApiQueryInfoTestResponsePage {
-	return 'actions' in page;
+export function assertIsInfoTestPage(
+	page: ApiQueryResponsePage,
+): asserts page is ApiQueryInfoTestResponsePage {
+	if ( !( 'actions' in page ) ) {
+		throw new TechnicalProblem( 'API info did not return test actions.' );
+	}
 }
 
-export function isRestrictionsBody( body: ApiQueryResponseBody ): body is ApiQueryRestrictionsResponseBody {
-	return 'restrictions' in body;
+export function assertIsRestrictionsBody(
+	body: ApiQueryResponseBody,
+): asserts body is ApiQueryRestrictionsResponseBody {
+	if ( !( 'restrictions' in body ) ) {
+		throw new TechnicalProblem( 'API siteinfo did not return restrictions.' );
+	}
 }

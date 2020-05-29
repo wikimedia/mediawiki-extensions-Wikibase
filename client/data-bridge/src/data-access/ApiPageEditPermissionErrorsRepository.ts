@@ -1,7 +1,7 @@
 import {
 	getApiQueryResponsePage,
-	isInfoTestPage,
-	isRestrictionsBody,
+	assertIsInfoTestPage,
+	assertIsRestrictionsBody,
 } from '@/data-access/ApiQuery';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import TitleInvalid from '@/data-access/error/TitleInvalid';
@@ -20,8 +20,12 @@ export interface ApiErrorRawErrorformat extends ApiError {
 	params: readonly ( string|number )[];
 }
 
-function isApiErrorRawErrorformat( error: ApiError ): error is ApiErrorRawErrorformat {
-	return 'key' in error && 'params' in error;
+function assertIsApiErrorRawErrorformat(
+	error: ApiError,
+): asserts error is ApiErrorRawErrorformat {
+	if ( !( 'key' in error && 'params' in error ) ) {
+		throw new TechnicalProblem( 'API returned wrong error format.' );
+	}
 }
 
 export default class ApiPageEditPermissionErrorsRepository implements PageEditPermissionErrorsRepository {
@@ -52,12 +56,8 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 		if ( page.invalid ) { // no need to check .missing, intestactions still works in that case
 			throw new TitleInvalid( title );
 		}
-		if ( !isInfoTestPage( page ) ) {
-			throw new TechnicalProblem( 'API info did not return test actions.' );
-		}
-		if ( !isRestrictionsBody( queryBody ) ) {
-			throw new TechnicalProblem( 'API siteinfo did not return restrictions.' );
-		}
+		assertIsInfoTestPage( page );
+		assertIsRestrictionsBody( queryBody );
 		const semiProtectedLevels = queryBody.restrictions.semiprotectedlevels
 			.map( this.rewriteCompatibilityRight );
 		return page.actions.edit.map(
@@ -66,9 +66,7 @@ export default class ApiPageEditPermissionErrorsRepository implements PageEditPe
 	}
 
 	private apiErrorToPermissionError( error: ApiError, semiProtectedLevels: readonly string[] ): PermissionError {
-		if ( !isApiErrorRawErrorformat( error ) ) {
-			throw new TechnicalProblem( 'API returned wrong error format.' );
-		}
+		assertIsApiErrorRawErrorformat( error );
 		switch ( error.code ) {
 			case 'protectedpage': {
 				const right = error.params[ 0 ] as string;
