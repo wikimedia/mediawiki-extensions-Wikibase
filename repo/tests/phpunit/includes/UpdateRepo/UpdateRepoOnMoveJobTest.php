@@ -14,6 +14,11 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\DataModel\Services\Diff\EntityPatcher;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\RedirectResolvingEntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
+use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -131,6 +136,51 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @param $params
+	 * @param EntityLookup $entityLookup
+	 * @param EntityStore $entityStore
+	 * @param SummaryFormatter $summaryFormatter
+	 * @param string $normalizedPageName
+	 * @param Item $titleItem
+	 * @param EntityRevisionLookup|null $editEntityLookup
+	 * @param EntityStore|null $editEntityStore
+	 *
+	 * @return UpdateRepoOnMoveJob
+	 */
+	private function getJob( $params, $entityLookup, $entityStore, $summaryFormatter,
+		$normalizedPageName, $titleItem, $editEntityLookup = null, $editEntityStore = null ) {
+
+		if ( !isset( $editEntityLookup ) ) {
+			$editEntityLookup = $entityLookup;
+		}
+
+		if ( !isset( $editEntityStore ) ) {
+			$editEntityStore = $entityStore;
+		}
+
+		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
+		$job->initServices(
+			$entityLookup,
+			$entityStore,
+			$summaryFormatter,
+			new NullLogger(),
+			$this->getSiteLookup( $normalizedPageName ),
+			new MediawikiEditEntityFactory(
+				$this->getEntityTitleLookup( $titleItem->getId() ),
+				$editEntityLookup,
+				$editEntityStore,
+				$this->getEntityPermissionChecker(),
+				new EntityDiffer(),
+				new EntityPatcher(),
+				$this->getMockEditFitlerHookRunner(),
+				new NullStatsdDataFactory(),
+				PHP_INT_MAX
+			)
+		);
+		return $job;
+	}
+
+	/**
 	 * @dataProvider runProvider
 	 * @param string $expected
 	 * @param string $normalizedPageName
@@ -157,26 +207,7 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 			'user' => $user->getName()
 		];
 
-		$job = new UpdateRepoOnMoveJob( Title::newMainPage(), $params );
-		$job->initServices(
-			$mockRepository,
-			$mockRepository,
-			$this->getSummaryFormatter(),
-			new NullLogger(),
-			$this->getSiteLookup( $normalizedPageName ),
-			new MediawikiEditEntityFactory(
-				$this->getEntityTitleLookup( $item->getId() ),
-				$mockRepository,
-				$mockRepository,
-				$this->getEntityPermissionChecker(),
-				new EntityDiffer(),
-				new EntityPatcher(),
-				$this->getMockEditFitlerHookRunner(),
-				new NullStatsdDataFactory(),
-				PHP_INT_MAX
-			)
-		);
-
+		$job = $this->getJob( $params, $mockRepository, $mockRepository, $this->getSummaryFormatter(), $normalizedPageName, $item );
 		$job->run();
 
 		/** @var Item $item */
@@ -191,6 +222,86 @@ class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
 		$this->assertEquals(
 			$item->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
 			[ new ItemId( 'Q42' ) ]
+		);
+	}
+
+	/** @var MockObject|EntityLookup */
+	private $entityLookup;
+
+	/** @var MockObject|EntityLookup */
+	private $redirectLookup;
+
+	/**
+	 * Creates two items and mocks the UnresolvedEntityRedirectException being thrown resulting in the
+	 * second item being updated instead.
+	 *
+	 * @see https://phabricator.wikimedia.org/T251878
+	 */
+	public function testShouldSupportFirstLevelRedirects() {
+		$expected = "New page name";
+		$normalizedPageName = "New page name";
+		$oldTitle = "Old page name";
+
+		$user = User::newFromName( 'UpdateRepo' );
+
+		// Needed as UpdateRepoOnMoveJob instantiates a User object
+		$user->addToDatabase();
+
+		$item = new Item();
+
+		$redirectedItem = new Item();
+		$redirectedItem->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Old page name', [ new ItemId( 'Q42' ) ] );
+
+		$mockRepository = new MockRepository();
+		$this->entityLookup = $this->createMock( EntityLookup::class );
+		$this->redirectLookup = new RedirectResolvingEntityLookup( $this->entityLookup );
+
+		$unresolvedRedirectionException = new UnresolvedEntityRedirectException( new ItemId( 'Q123' ), new ItemId( 'Q42' ) );
+		$this->entityLookup->method( 'getEntity' )
+			->will( $this->onConsecutiveCalls(
+				$this->throwException( $unresolvedRedirectionException ),
+				$redirectedItem
+			) );
+
+		$mockRepository->saveEntity( $item, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
+		$mockRepository->saveEntity( $redirectedItem, 'UpdateRepoOnDeleteJobTest', $user, EDIT_NEW );
+
+		$params = [
+			'siteId' => 'enwiki',
+			'entityId' => $item->getId()->getSerialization(),
+			'oldTitle' => $oldTitle,
+			'newTitle' => 'New page name',
+			'user' => $user->getName()
+		];
+
+		$job = $this->getJob(
+							$params,
+							$this->redirectLookup,
+							$mockRepository,
+							$this->getSummaryFormatter(),
+							$normalizedPageName,
+							$redirectedItem,
+							$mockRepository,
+							$mockRepository );
+		$job->run();
+
+		/** @var Item $item */
+		$dbItem = $mockRepository->getEntity( $redirectedItem->getId() );
+
+		$this->assertSame(
+			$expected,
+			$dbItem->getSiteLinkList()->getBySiteId( 'enwiki' )->getPageName(),
+			'Title linked on enwiki after the job ran'
+		);
+
+		$this->assertEquals(
+			$dbItem->getSiteLinkList()->getBySiteId( 'enwiki' )->getBadges(),
+			[ new ItemId( 'Q42' ) ]
+		);
+
+		$this->assertNotEquals(
+			$dbItem->getId(),
+			$item->getId()
 		);
 	}
 

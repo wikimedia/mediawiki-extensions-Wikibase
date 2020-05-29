@@ -7,10 +7,10 @@ use Psr\Log\LoggerInterface;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\FormatableSummary;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\SummaryFormatter;
 
@@ -23,9 +23,9 @@ use Wikibase\SummaryFormatter;
 abstract class UpdateRepoJob extends Job {
 
 	/**
-	 * @var EntityRevisionLookup
+	 * @var EntityLookup
 	 */
-	protected $entityRevisionLookup;
+	protected $entityLookup;
 
 	/**
 	 * @var EntityStore
@@ -48,13 +48,13 @@ abstract class UpdateRepoJob extends Job {
 	private $editEntityFactory;
 
 	protected function initRepoJobServices(
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityLookup $entityLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
-		$this->entityRevisionLookup = $entityRevisionLookup;
+		$this->entityLookup = $entityLookup;
 		$this->entityStore = $entityStore;
 		$this->summaryFormatter = $summaryFormatter;
 		$this->logger = $logger;
@@ -97,10 +97,9 @@ abstract class UpdateRepoJob extends Job {
 	private function getItem() {
 		$params = $this->getParams();
 		$itemId = new ItemId( $params['entityId'] );
-
 		try {
-			$entityRevision = $this->entityRevisionLookup->getEntityRevision( $itemId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
-		} catch ( StorageException $ex ) {
+			$entity = $this->entityLookup->getEntity( $itemId );
+		} catch ( EntityLookupException $ex ) {
 			$this->logger->debug(
 				'{method}: EntityRevision couldn\'t be loaded for {itemIdSerialization}: {msg}',
 				[
@@ -113,8 +112,8 @@ abstract class UpdateRepoJob extends Job {
 			return null;
 		}
 
-		if ( $entityRevision ) {
-			return $entityRevision->getEntity();
+		if ( $entity instanceof Item ) {
+			return $entity;
 		}
 
 		$this->logger->debug(

@@ -958,10 +958,13 @@ class WikibaseRepo {
 	 *        Store::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
 	 *        Store::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
+	 * @param string $lookupMode One of the EntityRevisionLookup lookup mode constants
+	 * TODO this should perhaps not refer to EntityRevisionLookup
+	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED ) {
-		return $this->getStore()->getEntityLookup( $cache );
+	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED, $lookupMode = Store::LATEST_FROM_REPLICA ) {
+		return $this->getStore()->getEntityLookup( $cache, $lookupMode );
 	}
 
 	public function getPropertyLookup( $cacheMode = Store::LOOKUP_CACHING_ENABLED ): PropertyLookup {
