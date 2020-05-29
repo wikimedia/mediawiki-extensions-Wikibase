@@ -37,55 +37,35 @@ export class StatementGetters extends Getters<StatementState> {
 	public get rank() {
 		return ( pathToStatement: PathToStatement ): Rank | null => {
 			const statement = pathToStatement.resolveStatement( this.state );
-			if ( !statement ) {
-				return null;
-			}
-
-			return statement.rank;
+			return statement?.rank ?? null;
 		};
 	}
 
 	public get dataValue() {
 		return ( pathToSnak: PathToSnak ): DataValue | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
-			if ( !snak || !snak.datavalue ) {
-				return null;
-			}
-
-			return snak.datavalue;
+			return snak?.datavalue ?? null;
 		};
 	}
 
 	public get snakType() {
 		return ( pathToSnak: PathToSnak ): SnakType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
-			if ( !snak ) {
-				return null;
-			}
-
-			return snak.snaktype;
+			return snak?.snaktype ?? null;
 		};
 	}
 
 	public get dataType() {
 		return ( pathToSnak: PathToSnak ): DataType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
-			if ( !snak ) {
-				return null;
-			}
-
-			return snak.datatype;
+			return snak?.datatype ?? null;
 		};
 	}
 
 	public get dataValueType() {
 		return ( pathToSnak: PathToSnak ): DataValueType | null => {
 			const snak = pathToSnak.resolveSnakInStatement( this.state );
-			if ( !snak || !snak.datavalue ) {
-				return null;
-			}
-
-			return snak.datavalue.type;
+			return snak?.datavalue?.type ?? null;
 		};
 	}
 }
