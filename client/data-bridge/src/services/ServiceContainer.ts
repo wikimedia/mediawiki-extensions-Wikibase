@@ -28,11 +28,7 @@ export interface Services {
 }
 
 export default class ServiceContainer {
-	private readonly services: Partial<Services>;
-
-	public constructor() {
-		this.services = {};
-	}
+	private readonly services: Partial<Services> = {};
 
 	public set<K extends keyof Services>( key: K, service: Services[ K ] ): void {
 		this.services[ key ] = service;
