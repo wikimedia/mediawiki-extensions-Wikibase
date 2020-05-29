@@ -5,6 +5,7 @@ storybook-static/
 dist/*
 !dist/data-bridge.init.js
 !dist/data-bridge.app.js
+!dist/data-bridge.app.modern.js
 !dist/vendor-chunks.js
 !dist/css/data-bridge.app.css
 !dist/img

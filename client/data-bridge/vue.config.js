@@ -18,9 +18,9 @@ function externals() {
 module.exports = {
 	configureWebpack: () => ( {
 		output: {
-			filename: `${filePrefix}[name].js`,
+			filename: process.env.VUE_CLI_MODERN_BUILD ? `${filePrefix}[name].modern.js` : `${filePrefix}[name].js`,
 			libraryTarget: 'commonjs2',
-			chunkFilename: 'vendor-chunks.js',
+			chunkFilename: process.env.VUE_CLI_MODERN_BUILD ? 'vendor-chunks.modern.js' : 'vendor-chunks.js',
 		},
 		entry: {
 			app: './src/main.ts',
