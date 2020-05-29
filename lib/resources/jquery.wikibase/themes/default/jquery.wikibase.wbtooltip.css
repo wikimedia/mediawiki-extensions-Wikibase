@@ -21,3 +21,8 @@
 	background: #fee7e6;
 	border-color: #b32424;
 }
+
+.wikibase-wbtooltip-tip.wb-error .tipsy-inner {
+	/* Increase the max-width for errors, per https://phabricator.wikimedia.org/T247690#6173888 */
+	max-width: 17em;
+}
