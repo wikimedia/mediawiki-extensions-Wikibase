@@ -1,3 +1,7 @@
+import {
+	DataValue,
+	DataValueType,
+} from '@wmde/wikibase-datamodel-types';
 import Entity from '@/datamodel/Entity';
 import { Store } from 'vuex';
 import { ErrorTypes } from '@/definitions/ApplicationError';
@@ -13,7 +17,6 @@ import { action } from '@wmde/vuex-helpers/dist/namespacedStoreMethods';
 import Term from '@/datamodel/Term';
 import { WikibaseRepoConfiguration } from '@/definitions/data-access/WikibaseRepoConfigRepository';
 import { PageNotEditable } from '@/definitions/data-access/BridgePermissionsRepository';
-import DataValue from '@/datamodel/DataValue';
 import clone from '@/store/clone';
 import EditDecision from '@/definitions/EditDecision';
 import newMockTracker from '../../util/newMockTracker';
@@ -56,7 +59,7 @@ describe( 'store/actions', () => {
 							property: 'P42',
 							datatype: 'string',
 							datavalue: {
-								type: 'monolingualtext',
+								type: 'monolingualtext' as DataValueType,
 								value: 'a string value',
 							},
 						},

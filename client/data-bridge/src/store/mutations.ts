@@ -1,7 +1,7 @@
+import { DataValue } from '@wmde/wikibase-datamodel-types';
 import EditDecision from '@/definitions/EditDecision';
 import clone from '@/store/clone';
 import { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
-import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import ApplicationError from '@/definitions/ApplicationError';
 import { BaseState } from '@/store/state';

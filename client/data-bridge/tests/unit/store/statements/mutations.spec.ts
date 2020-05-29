@@ -1,8 +1,10 @@
+import {
+	Snak,
+	Statement,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import { StatementMutations } from '@/store/statements/mutations';
 import newStatementState from './newStatementState';
-import Statement from '@/datamodel/Statement';
-import StatementMap from '@/datamodel/StatementMap';
-import Snak from '@/datamodel/Snak';
 import { inject } from 'vuex-smart-module';
 
 describe( 'statements/Mutations', () => {

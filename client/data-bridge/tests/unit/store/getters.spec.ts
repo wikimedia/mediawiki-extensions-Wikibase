@@ -1,3 +1,8 @@
+import {
+	DataType,
+	Reference,
+	Statement,
+} from '@wmde/wikibase-datamodel-types';
 import { ErrorTypes } from '@/definitions/ApplicationError';
 import EditDecision from '@/definitions/EditDecision';
 import {
@@ -9,8 +14,6 @@ import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/Applica
 import clone from '@/store/clone';
 import { inject } from 'vuex-smart-module';
 import { RootGetters } from '@/store/getters';
-import Statement from '@/datamodel/Statement';
-import Reference from '@/datamodel/Reference';
 
 describe( 'root/getters', () => {
 	const entityId = 'Q42';
@@ -203,7 +206,7 @@ describe( 'root/getters', () => {
 								value: '11888092r',
 								type: 'string',
 							},
-							'datatype': 'external-id',
+							'datatype': 'external-id' as DataType,
 						},
 					],
 				},

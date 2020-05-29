@@ -1,7 +1,7 @@
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
-import StatementMap from '@/datamodel/StatementMap';
 import { WritingApi } from '@/definitions/data-access/Api';
 import ApiErrors from '@/data-access/error/ApiErrors';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';

@@ -1,4 +1,5 @@
 /* eslint no-console: "off" */
+import { Reference } from '@wmde/wikibase-datamodel-types';
 import ApiReadingEntityRepository from '@/data-access/ApiReadingEntityRepository';
 import MwLanguageInfoRepository from '@/data-access/MwLanguageInfoRepository';
 import Entity from '@/datamodel/Entity';
@@ -12,7 +13,6 @@ import { initEvents } from '@/events';
 import MessageKeys from '@/definitions/MessageKeys';
 import clone from '@/store/clone';
 import messages from '@/mock-data/messages';
-import Reference from '@/datamodel/Reference';
 import cssjanus from 'cssjanus';
 
 const services = new ServiceContainer();

@@ -1,5 +1,7 @@
-import DataType from '@/datamodel/DataType';
-import StatementMap from '@/datamodel/StatementMap';
+import {
+	DataType,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import { ApiResponse } from '@/definitions/data-access/Api';
 
 export interface ApiWbgetentitiesResponse extends ApiResponse {

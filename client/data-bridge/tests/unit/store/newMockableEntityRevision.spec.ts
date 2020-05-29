@@ -1,6 +1,8 @@
+import {
+	Snak,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import newMockableEntityRevision from './newMockableEntityRevision';
-import Snak from '@/datamodel/Snak';
-import StatementMap from '@/datamodel/StatementMap';
 
 describe( 'newMockableEntityRevision', () => {
 	it( 'contains a entity', () => {

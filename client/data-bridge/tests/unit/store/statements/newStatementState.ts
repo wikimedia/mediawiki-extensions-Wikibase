@@ -1,5 +1,5 @@
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import { StatementState } from '@/store/statements';
-import StatementMap from '@/datamodel/StatementMap';
 
 export default function newStatementState(
 	statements?: { [ key: string ]: StatementMap },

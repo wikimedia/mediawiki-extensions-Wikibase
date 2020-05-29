@@ -1,8 +1,10 @@
-import { PathToSnak } from '@/store/statements/PathToSnak';
-import DataValue from '@/datamodel/DataValue';
-import EntityId from '@/datamodel/EntityId';
-import StatementMap from '@/datamodel/StatementMap';
+import {
+	DataValue,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import StatementMutationError from '@/change-op/statement-mutation/StatementMutationError';
+import { PathToSnak } from '@/store/statements/PathToSnak';
+import EntityId from '@/datamodel/EntityId';
 import StatementMutationStrategy from './StatementMutationStrategy';
 
 export default class ReplaceMutationStrategy implements StatementMutationStrategy {

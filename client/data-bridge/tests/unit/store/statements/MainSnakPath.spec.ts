@@ -1,6 +1,9 @@
-import Statement from '@/datamodel/Statement';
+import {
+	DataType,
+	Snak,
+	Statement,
+} from '@wmde/wikibase-datamodel-types';
 import newStatementState from './newStatementState';
-import Snak from '@/datamodel/Snak';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 
 describe( 'resolveMainSnak', () => {
@@ -12,7 +15,7 @@ describe( 'resolveMainSnak', () => {
 			mainsnak: {
 				property: 'P42',
 				snaktype: 'somevalue',
-				datatype: 'url',
+				datatype: 'url' as DataType,
 			},
 		} ];
 
@@ -29,7 +32,7 @@ describe( 'resolveMainSnak', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',
-			datatype: 'url',
+			datatype: 'url' as DataType,
 		};
 
 		const state = newStatementState( { Q42: {
@@ -54,7 +57,7 @@ describe( 'resolveMainSnak', () => {
 			mainsnak: {
 				property: 'P42',
 				snaktype: 'somevalue',
-				datatype: 'url',
+				datatype: 'url' as DataType,
 			},
 		};
 
@@ -81,7 +84,7 @@ describe( 'resolveMainSnak', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',
-			datatype: 'url',
+			datatype: 'url' as DataType,
 		};
 
 		const state = newStatementState( { Q42: {
@@ -104,7 +107,7 @@ describe( 'resolveMainSnak', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',
-			datatype: 'url',
+			datatype: 'url' as DataType,
 		};
 
 		const state = newStatementState( { Q42: {
@@ -129,7 +132,7 @@ describe( 'resolveMainSnak', () => {
 		const mainsnak: Snak = {
 			property: 'P42',
 			snaktype: 'somevalue',
-			datatype: 'url',
+			datatype: 'url' as DataType,
 		};
 
 		const state = newStatementState( { Q42: {

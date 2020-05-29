@@ -1,3 +1,4 @@
+import { DataValue } from '@wmde/wikibase-datamodel-types';
 import SavingError from '@/data-access/error/SavingError';
 import Vue from 'vue';
 import { Store } from 'vuex';
@@ -7,7 +8,6 @@ import ApplicationStatus from '@/definitions/ApplicationStatus';
 import AppInformation from '@/definitions/AppInformation';
 import EditDecision from '@/definitions/EditDecision';
 import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';
-import DataValue from '@/datamodel/DataValue';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import { Actions, Context } from 'vuex-smart-module';

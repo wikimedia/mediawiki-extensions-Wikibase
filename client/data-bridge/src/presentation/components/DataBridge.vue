@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
+import { DataValue } from '@wmde/wikibase-datamodel-types';
 import StateMixin from '@/presentation/StateMixin';
 import EditDecision from '@/presentation/components/EditDecision.vue';
 import Component, { mixins } from 'vue-class-component';
-import DataValue from '@/datamodel/DataValue';
 import Term from '@/datamodel/Term';
 import StringDataValue from '@/presentation/components/StringDataValue.vue';
 import ReferenceSection from '@/presentation/components/ReferenceSection.vue';

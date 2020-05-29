@@ -1,3 +1,4 @@
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import JQueryStatic from 'jquery';
 import HttpStatus from 'http-status-codes';
 import EntityNotFound from '@/data-access/error/EntityNotFound';
@@ -7,7 +8,6 @@ import ReadingEntityRevisionRepository from '@/definitions/data-access/ReadingEn
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 import jqXHR = JQuery.jqXHR;
-import StatementMap from '@/datamodel/StatementMap';
 import EntityId from '@/datamodel/EntityId';
 
 export interface SpecialPageWikibaseEntityResponse {

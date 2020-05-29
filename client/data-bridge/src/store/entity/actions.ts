@@ -1,3 +1,4 @@
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import { Store } from 'vuex';
@@ -6,7 +7,6 @@ import { EntityState } from '@/store/entity';
 import { Actions, Context, Getters } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 import { statementModule } from '@/store/statements';
-import StatementMap from '@/datamodel/StatementMap';
 
 export class EntityActions extends Actions<EntityState, Getters<EntityState>, EntityMutations, EntityActions> {
 	private store!: Store<Application>;

@@ -1,3 +1,4 @@
+import { Reference } from '@wmde/wikibase-datamodel-types';
 import { Store } from 'vuex';
 import Status from '@/definitions/ApplicationStatus';
 import Application, { InitializedApplicationState } from '@/store/Application';
@@ -6,7 +7,6 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import Term from '@/datamodel/Term';
-import Reference from '@/datamodel/Reference';
 import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import { Context, Getters } from 'vuex-smart-module';

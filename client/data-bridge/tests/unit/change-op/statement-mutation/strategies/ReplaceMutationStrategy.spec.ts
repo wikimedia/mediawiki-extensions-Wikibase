@@ -1,10 +1,12 @@
+import {
+	DataValue,
+	DataValueType,
+	Snak,
+} from '@wmde/wikibase-datamodel-types';
 import ReplaceMutationStrategy from '@/change-op/statement-mutation/strategies/ReplaceMutationStrategy';
 import StatementMutationError from '@/change-op/statement-mutation/StatementMutationError';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import DataValue from '@/datamodel/DataValue';
-import DataValueType from '@/datamodel/DataValueType';
 import { StatementState } from '@/store/statements';
-import Snak from '@/datamodel/Snak';
 import clone from '@/store/clone';
 
 describe( 'ReplaceMutationStrategy', () => {

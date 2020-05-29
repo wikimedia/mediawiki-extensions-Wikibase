@@ -1,4 +1,4 @@
-import StatementMap from '@/datamodel/StatementMap';
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import EntityRevision from '@/datamodel/EntityRevision';
 import Entity from '@/datamodel/Entity';
 

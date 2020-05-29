@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts">
+import { SnakType } from '@wmde/wikibase-datamodel-types';
 import { Prop } from 'vue-property-decorator';
 import Component, { mixins } from 'vue-class-component';
 import StateMixin from '@/presentation/StateMixin';
-import { SnakType } from '@/datamodel/Snak';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';

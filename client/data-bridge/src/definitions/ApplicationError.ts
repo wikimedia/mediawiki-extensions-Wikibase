@@ -1,5 +1,7 @@
-import DataType from '@/datamodel/DataType';
-import { SnakType } from '@/datamodel/Snak';
+import {
+	DataType,
+	SnakType,
+} from '@wmde/wikibase-datamodel-types';
 import { MissingPermissionsError } from '@/definitions/data-access/BridgePermissionsRepository';
 
 export enum ErrorTypes {

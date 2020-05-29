@@ -1,5 +1,7 @@
-import { SnakType } from '@/datamodel/Snak';
-import DataValue from '@/datamodel/DataValue';
+import {
+	DataValue,
+	SnakType,
+} from '@wmde/wikibase-datamodel-types';
 
 export interface PayloadSnakDataValue<COORDINATES> {
 	path: COORDINATES;

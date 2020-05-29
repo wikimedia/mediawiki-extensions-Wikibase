@@ -14,16 +14,16 @@
 	</div>
 </template>
 <script lang="ts">
+import Term from '@/datamodel/Term';
+import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
+import { DataValue } from '@wmde/wikibase-datamodel-types';
+import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
+import { v4 as uuid } from 'uuid';
 import {
 	Component,
 	Prop,
 	Vue,
 } from 'vue-property-decorator';
-import DataValue from '@/datamodel/DataValue';
-import Term from '@/datamodel/Term';
-import PropertyLabel from '@/presentation/components/PropertyLabel.vue';
-import { ResizingTextField } from '@wmde/wikibase-vuejs-components';
-import { v4 as uuid } from 'uuid';
 
 @Component( {
 	components: { PropertyLabel, ResizingTextField },

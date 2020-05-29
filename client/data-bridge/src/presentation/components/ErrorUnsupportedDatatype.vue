@@ -23,10 +23,10 @@
 </template>
 
 <script lang="ts">
+import { DataType } from '@wmde/wikibase-datamodel-types';
 import { Prop } from 'vue-property-decorator';
 import Component, { mixins } from 'vue-class-component';
 import StateMixin from '@/presentation/StateMixin';
-import DataType from '@/datamodel/DataType';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';
 import TermLabel from '@/presentation/components/TermLabel.vue';
