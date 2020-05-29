@@ -3,12 +3,6 @@
  * @author H. Snater < mediawiki@snater.com >
  */
 
-/* FIXME: Remove when core's jquery.tipsy.css is fixed. */
-.wikibase-wbtooltip-tip.tipsy-nw .tipsy-arrow,
-.wikibase-wbtooltip-tip.tipsy-ne .tipsy-arrow {
-	top: 0;
-}
-
 .wikibase-wbtooltip-tip.wb-error .tipsy-arrow {
 	/* @embed */
 	background-image: url( images/tipsy-error.png );
