@@ -20,12 +20,22 @@ class MediaWikiContentLanguagesTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertIsArray( $result );
 
-		// Just check for some langs
-		$knownLangCodes = [ 'en', 'de', 'es', 'fr', 'nl', 'ru', 'zh' ];
-		$this->assertSame(
-			$knownLangCodes,
-			array_intersect( $knownLangCodes, $result )
-		);
+		$missing = array_diff( [
+			// Just check for some langs
+			'de',
+			'en',
+			'es',
+			'fr',
+			'nl',
+			'ru',
+			'zh',
+			// https://gerrit.wikimedia.org/r/599684
+			'ami',
+			'lld',
+			'smn',
+			'trv',
+		], $result );
+		$this->assertEmpty( $missing, implode( ', ', $missing ) );
 	}
 
 }
