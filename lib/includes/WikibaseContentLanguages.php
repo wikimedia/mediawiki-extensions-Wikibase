@@ -78,7 +78,6 @@ class WikibaseContentLanguages {
 					'abq', // T155367
 					'abq-latn', // T155424
 					'alc', // T190981
-					'ami', // T174238
 					'bdr', // T234330
 					'bnn', // T174230
 					'brx', // T155369
@@ -110,7 +109,6 @@ class WikibaseContentLanguages {
 					'lag', // T161983
 					'lcm', // T234761
 					'lkt', // T125066
-					'lld', // T125066
 					'mfa', // T235468
 					'mid', // T155418
 					'mnc', // T137808
@@ -147,14 +145,12 @@ class WikibaseContentLanguages {
 					'sjn', // T185194
 					'sjt', // T217521
 					'sju', // T188599
-					'smn', // T188580
 					'sms', // T188579
 					'ssf', // T174236
 					'syc', // T164580
 					'tlb', // T216798
 					'tli', // T230145
 					'tnq', // T220284
-					'trv', // T174228
 					'tzl', // T98314
 					'uga', // T155431
 					'umu', // T160531
