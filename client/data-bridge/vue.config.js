@@ -19,7 +19,7 @@ module.exports = {
 	configureWebpack: () => ( {
 		output: {
 			filename: process.env.VUE_CLI_MODERN_BUILD ? `${filePrefix}[name].modern.js` : `${filePrefix}[name].js`,
-			libraryTarget: 'commonjs2',
+			libraryTarget: DEV_MODE ? undefined : 'commonjs2',
 			chunkFilename: process.env.VUE_CLI_MODERN_BUILD ? 'vendor-chunks.modern.js' : 'vendor-chunks.js',
 		},
 		entry: {
