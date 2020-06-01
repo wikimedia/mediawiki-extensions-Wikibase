@@ -34,6 +34,7 @@
 	"wikibase-time-precision-millennium": "$1 հազարամյակ",
 	"wikibase-time-precision-century": "$1 դար",
 	"wikibase-time-precision-10annum": "$1s-ականներ",
+	"wikibase-time-precision-BCE-10annum": "$1-ականներ մ.թ.ա.",
 	"wikibase-entity-summary-wbsetitem": "Նոր տարրը ստեղծված է",
 	"wikibase-item-summary-wbeditentity-create": "Նոր տարրը ստեղծված է",
 	"wikibase-item-summary-wbeditentity-create-item": "Նոր տարրը ստեղծված է"

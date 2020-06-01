@@ -6,6 +6,7 @@
 			"Amire80",
 			"Athena Atterdag",
 			"Batumski brodyaga",
+			"Diman Russkov",
 			"Diralik",
 			"Frhdkazan",
 			"Hoo",
@@ -128,6 +129,7 @@
 	"wikibase-propertypage-bad-datatype": "Неизвестный тип данных: $1",
 	"wikibase-claimview-snak-tooltip": "Введите значение, соответствующее свойству «$1». Если значение свойства отсутствует или неизвестно, вы можете выбрать альтернативный вариант, нажав на значок рядом с полем ввода и введя свой текст.",
 	"wikibase-claimview-snak-new-tooltip": "После указания свойства можно ввести его значение. Если значение свойства отсутствует или неизвестно, вы можете выбрать альтернативный вариант, нажав на значок рядом с полем ввода и введя свой текст.",
+	"wikibase-referenceview-tabs-manual": "Руководство",
 	"wikibase-statementview-rank-preferred": "Предпочтительный ранг",
 	"wikibase-statementview-rank-tooltip-preferred": "Корректное и актуальное значение",
 	"wikibase-statementview-rank-normal": "Нормальный ранг",
@@ -147,6 +149,7 @@
 	"wikibase-snakformat-invalid-value": "Недопустимое значение.",
 	"wikibase-snakformat-propertynotfound": "Свойство не найдено.",
 	"wikibase-shortcopyrightwarning": "Нажав на кнопку «$1», вы соглашаетесь с [[$2|условиями использования]], а также соглашаетесь безотзывно публиковать свой вклад на условиях $3.",
+	"wikibase-shortcopyrightwarning-accept-persist": "Я принимаю эти условия для моих будущих правок. Не показывать больше это сообщение.",
 	"wikibase-copyrighttooltip-acknowledge": "Я принимаю эти условия для моих будущих правок. Не показывать больше это сообщение.",
 	"wikibase-entityselector-more": "ещё",
 	"wikibase-entityselector-notfound": "Совпадений не найдено",
@@ -390,5 +393,7 @@
 	"wikibase-pageinfo-wb-claims": "Количестве утверждений в этом объекте",
 	"wikibase-pageinfo-wb-identifiers": "количестве внешних идентификаторов в этом объекте",
 	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1",
-	"wikibase-tainted-ref-warning-icon-title": "Это утверждение имеет некоторые потенциальные проблемы"
+	"wikibase-tainted-ref-warning-icon-title": "Это утверждение имеет некоторые потенциальные проблемы",
+	"wikibase-tainted-ref-popper-help-link-text": "Справка",
+	"wikibase-tainted-ref-popper-remove-warning": "Убрать предупреждение"
 }

@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Belkacem77"
+			"Belkacem77",
+			"YouvaDjouadi"
 		]
 	},
-	"tooltip-t-wikibase": "Aseɣwen ɣer uferdis n temsisɣelt n isefka yeqqnen",
+	"tooltip-t-wikibase": "Aseɣwen ɣer uferdis n yifecka uqqinen",
 	"wikibase-comment-update": "Aferdis {{WBREPONAME}} ibeddel",
 	"wikibase-dataitem": "Aferdis {{WBREPONAME}}",
 	"wikibase-editlinks": "Ẓreg iseɣwan",
-	"wikibase-editlinkstitle": "Ẓreg iseɣwan n gar tutlayin",
+	"wikibase-editlinkstitle": "Ẓreg iseɣwan agerutlayanen",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ffer",
 	"wikibase-rc-hide-wikidata-show": "Sken",
