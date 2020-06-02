@@ -13,10 +13,6 @@ export default class DataBridgeTrackerService implements BridgeTracker {
 		this.tracker.increment( `datatype.${datatype}` );
 	}
 
-	public trackTitlePurgeError(): void {
-		this.tracker.increment( 'error.purge' );
-	}
-
 	public trackError( type: string ): void {
 		this.tracker.increment( `error.all.${errorTypeFormatter( type )}` );
 	}

@@ -18,15 +18,6 @@ describe( 'DataBridgeTrackerService', () => {
 		expect( tracker.increment ).toHaveBeenCalledWith( 'datatype.string' );
 	} );
 
-	it( 'tracks a title purge error', () => {
-		const tracker = getMockTracker();
-		const service = new DataBridgeTrackerService( tracker );
-
-		service.trackTitlePurgeError();
-
-		expect( tracker.increment ).toHaveBeenCalledWith( 'error.purge' );
-	} );
-
 	it( 'tracks a given error type', () => {
 		const tracker = getMockTracker();
 		const service = new DataBridgeTrackerService( tracker );

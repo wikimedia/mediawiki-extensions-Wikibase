@@ -296,7 +296,7 @@ RootActions
 			.purge( [ this.state.pageTitle ] )
 			.catch( () => {
 				// we don't want to stop normal operation in that case
-				this.store.$services.get( 'tracker' ).trackTitlePurgeError();
+				this.store.$services.get( 'tracker' ).trackError( 'purge' );
 			} );
 	}
 
