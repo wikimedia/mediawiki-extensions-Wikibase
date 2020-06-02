@@ -19,6 +19,8 @@ use Wikimedia\Rdbms\IResultWrapper;
 /**
  * Class EntityInfoBuilder implementation relying on database access.
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */

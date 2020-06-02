@@ -20,6 +20,8 @@ use Wikimedia\Rdbms\ILoadBalancer;
 /**
  * Class EntityInfoBuilder implementation relying on database access for the new term store.
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  */
 class DatabaseEntityInfoBuilder implements EntityInfoBuilder {

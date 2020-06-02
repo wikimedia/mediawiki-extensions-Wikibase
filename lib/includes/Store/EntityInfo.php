@@ -22,6 +22,8 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * @see EntityInfoBuilder
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
@@ -44,6 +46,8 @@ class EntityInfo {
 	 * Returns the array of entity info records as provided to the constructor.
 	 * See the class level documentation for information about the expected structure of this array.
 	 *
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @return array[]
 	 */
 	public function asArray() {
@@ -51,6 +55,8 @@ class EntityInfo {
 	}
 
 	/**
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 *
 	 * @return bool
@@ -84,6 +90,8 @@ class EntityInfo {
 	}
 
 	/**
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
@@ -96,6 +104,8 @@ class EntityInfo {
 	}
 
 	/**
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
 	 *
@@ -108,6 +118,8 @@ class EntityInfo {
 	}
 
 	/**
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
@@ -119,6 +131,8 @@ class EntityInfo {
 	}
 
 	/**
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *

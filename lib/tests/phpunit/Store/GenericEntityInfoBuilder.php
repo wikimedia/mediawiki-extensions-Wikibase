@@ -20,6 +20,8 @@ use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
  * This is a rather inefficient implementation of EntityInfoBuilder, intended
  * mainly for testing.
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */

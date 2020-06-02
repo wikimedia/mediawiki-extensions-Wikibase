@@ -9,6 +9,8 @@ use Wikimedia\Assert\Assert;
  * An {@link EntityInfoBuilder} wrapping several other {@link EntityInfoBuilder}s,
  * dispatching between them based on the numeric ID.
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  */
 class ByIdDispatchingEntityInfoBuilder implements EntityInfoBuilder {

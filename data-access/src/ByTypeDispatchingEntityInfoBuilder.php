@@ -8,6 +8,8 @@ use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikimedia\Assert\Assert;
 
 /**
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  */
 class ByTypeDispatchingEntityInfoBuilder implements EntityInfoBuilder {

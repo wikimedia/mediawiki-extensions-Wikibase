@@ -14,6 +14,8 @@ use Wikibase\DataModel\Services\Lookup\TermLookupException;
  *
  * @see EntityInfoBuilder
  *
+ * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
@@ -30,6 +32,8 @@ class EntityInfoTermLookup implements TermLookup {
 
 	/**
 	 * Gets the label of an Entity with the specified EntityId and language code.
+	 *
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
 	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
@@ -53,6 +57,8 @@ class EntityInfoTermLookup implements TermLookup {
 	/**
 	 * Gets all labels of an Entity with the specified EntityId.
 	 *
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
+	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes
 	 *
@@ -69,6 +75,8 @@ class EntityInfoTermLookup implements TermLookup {
 
 	/**
 	 * Gets the description of an Entity with the specified EntityId and language code.
+	 *
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
 	 *
 	 * @param EntityId $entityId
 	 * @param string $languageCode
@@ -91,6 +99,8 @@ class EntityInfoTermLookup implements TermLookup {
 
 	/**
 	 * Gets all descriptions of an Entity with the specified EntityId.
+	 *
+	 * @deprecated Any usage of EntityInfo is now unintended and should be removed T254283
 	 *
 	 * @param EntityId $entityId
 	 * @param string[] $languageCodes
