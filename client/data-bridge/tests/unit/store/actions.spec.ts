@@ -563,6 +563,42 @@ describe( 'root/actions', () => {
 
 		} );
 
+		it( 'gracefully ignores but tracks problems while rendering references', async () => {
+			const dispatch = jest.fn( ( action: string ) => {
+				if ( action === 'renderReferences' ) {
+					throw new Error( 'bad things happened' );
+				}
+				return Promise.resolve();
+			} );
+			const actions = inject( RootActions, {
+				state: newApplicationState(),
+				dispatch,
+			} );
+			const tracker = newMockTracker();
+
+			// @ts-ignore
+			actions.store = {
+				$services: newMockServiceContainer( {
+					tracker,
+				} ),
+			};
+
+			actions.initBridgeWithRemoteData( {
+				information: newMockAppInformation(),
+				results: [
+					{} as WikibaseRepoConfiguration,
+					[],
+					'string',
+					undefined,
+				],
+			} );
+
+			expect( dispatch ).toHaveBeenCalledWith( 'renderReferences' );
+			expect( tracker.trackError ).toHaveBeenCalledWith( 'render_references' );
+
+			expect( dispatch ).toHaveBeenCalledWith( 'postEntityLoad' );
+		} );
+
 		it( 'resets the config plugin', async () => {
 			const information = newMockAppInformation();
 			const actions = inject( RootActions, {
