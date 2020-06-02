@@ -18,7 +18,7 @@ class TypeDispatchingRedirectChecker implements EntityRedirectChecker {
 	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityRedirectChecker $defaultRedirectChecker ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultRedirectChecker );
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityRedirectChecker::class, $callbacks, $defaultRedirectChecker );
 	}
 
 	public function isRedirect( EntityId $id ): bool {

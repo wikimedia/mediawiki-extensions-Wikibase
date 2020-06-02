@@ -3,8 +3,11 @@
 namespace Wikibase\Lib\Tests;
 
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Wikibase\Lib\ServiceByTypeDispatcher;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikimedia\Assert\AssertionException;
+use Wikimedia\Assert\PostconditionException;
 
 /**
  * @covers \Wikibase\Lib\ServiceByTypeDispatcher
@@ -16,41 +19,46 @@ use Wikimedia\Assert\AssertionException;
 class ServiceByTypeDispatcherTest extends TestCase {
 
 	public function provideTestConstruction() {
-		yield[ true, [], (object)[] ];
-		yield[ true, [ 'type' => $this->getSomeServiceReturningCallback() ], (object)[] ];
-		yield[ false, [ $this->getSomeServiceReturningCallback() ], (object)[] ];
-		yield[ false, [ null ], (object)[] ];
+		yield[ true, stdClass::class, [], new stdClass() ];
+		yield[ true, stdClass::class, [ 'type' => $this->getSomeServiceReturningCallback() ], new stdClass() ];
+		yield[ false, stdClass::class, [ $this->getSomeServiceReturningCallback() ], new stdClass() ];
+		yield[ false, stdClass::class, [ null ], new stdClass() ];
+		yield 'default not matching type' => [ false, EntityUrlLookup::class, [], new stdClass() ];
 	}
 
 	private function getSomeServiceReturningCallback( $fakeServiceToReturn = null ) {
-		return function() use ( $fakeServiceToReturn ){
-			return $fakeServiceToReturn ? $fakeServiceToReturn : (object)[];
+		return function () use ( $fakeServiceToReturn ) {
+			return $fakeServiceToReturn ?? new stdClass();
 		};
 	}
 
 	/**
 	 * @dataProvider provideTestConstruction
 	 */
-	public function testConstruction( $expectedSuccess, $callbacks, $defaultService ) {
+	public function testConstruction( $expectedSuccess, string $type, $callbacks, $defaultService ) {
 		if ( !$expectedSuccess ) {
 			$this->expectException( AssertionException::class );
 		} else {
 			$this->expectNotToPerformAssertions();
 		}
-		new ServiceByTypeDispatcher( $callbacks, $defaultService );
+		new ServiceByTypeDispatcher( $type, $callbacks, $defaultService );
 	}
 
 	public function testServiceDefault() {
-		$defaultService = (object)[];
-		$dispatcher = new ServiceByTypeDispatcher( [], $defaultService );
+		$defaultService = new stdClass();
+		$dispatcher = new ServiceByTypeDispatcher( stdClass::class, [], $defaultService );
 		$this->assertSame( $defaultService, $dispatcher->getServiceForType( 'foo' ) );
 	}
 
 	public function testServiceDispatches() {
-		$defaultService = (object)[];
-		$typeService = (object)[];
+		$defaultService = new stdClass();
+		$typeService = new stdClass();
 
-		$dispatcher = new ServiceByTypeDispatcher( [ 'foo' => $this->getSomeServiceReturningCallback( $typeService ) ], $defaultService );
+		$dispatcher = new ServiceByTypeDispatcher(
+			stdClass::class,
+			[ 'foo' => $this->getSomeServiceReturningCallback( $typeService ) ],
+			$defaultService
+		);
 
 		$dispatchedService = $dispatcher->getServiceForType( 'foo' );
 		$this->assertSame( $typeService, $dispatchedService );
@@ -58,11 +66,22 @@ class ServiceByTypeDispatcherTest extends TestCase {
 	}
 
 	public function testServiceDispatchesAndReturnsSameInstance() {
-		$dispatcher = new ServiceByTypeDispatcher( [ 'foo' => $this->getSomeServiceReturningCallback() ], (object)[] );
+		$dispatcher = new ServiceByTypeDispatcher( stdClass::class, [ 'foo' => $this->getSomeServiceReturningCallback() ], new stdClass() );
 
 		$dispatchedServiceOne = $dispatcher->getServiceForType( 'foo' );
 		$dispatchedServiceTwo = $dispatcher->getServiceForType( 'foo' );
 		$this->assertSame( $dispatchedServiceOne, $dispatchedServiceTwo );
+	}
+
+	public function testValidatesTypeAfterDispatch() {
+		$dispatcher = new ServiceByTypeDispatcher(
+			EntityUrlLookup::class,
+			[ 'foo' => $this->getSomeServiceReturningCallback() ],
+			$this->createMock( EntityUrlLookup::class )
+		);
+
+		$this->expectException( PostconditionException::class );
+		$dispatcher->getServiceForType( 'foo' );
 	}
 
 }

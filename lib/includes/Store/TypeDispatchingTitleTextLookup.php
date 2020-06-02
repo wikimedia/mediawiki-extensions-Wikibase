@@ -16,7 +16,7 @@ class TypeDispatchingTitleTextLookup implements EntityTitleTextLookup {
 	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityTitleTextLookup $defaultLookup ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultLookup );
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityTitleTextLookup::class, $callbacks, $defaultLookup );
 	}
 
 	public function getPrefixedText( EntityId $id ): ?string {

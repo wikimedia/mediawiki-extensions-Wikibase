@@ -18,7 +18,7 @@ class TypeDispatchingExistenceChecker implements EntityExistenceChecker {
 	private $serviceDispatcher;
 
 	public function __construct( array $callbacks, EntityExistenceChecker $defaultExistenceChecker ) {
-		$this->serviceDispatcher = new ServiceByTypeDispatcher( $callbacks, $defaultExistenceChecker );
+		$this->serviceDispatcher = new ServiceByTypeDispatcher( EntityExistenceChecker::class, $callbacks, $defaultExistenceChecker );
 	}
 
 	public function exists( EntityId $id ): bool {
