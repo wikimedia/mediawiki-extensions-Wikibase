@@ -4,7 +4,10 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\QuantityValue;
 use Language;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
+use Wikibase\DataModel\Entity\EntityIdValue;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -13,6 +16,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\Tests\NewItem;
+use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -24,7 +28,9 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
+class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
+
+	use WikibaseTablesUsed;
 
 	/**
 	 * @var EntityStore
@@ -119,6 +125,41 @@ class EntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 			__METHOD__,
 			$this->getTestUser()->getUser()
 		);
+	}
+
+	public function testGetParserOutputIncludesLabelsOfRedirectEntityUsedAsStatementValue() {
+		$this->markTablesUsedForEntityEditing();
+
+		$repo = WikibaseRepo::getDefaultInstance();
+		$mwServices = MediaWikiServices::getInstance();
+
+		$property = new Property( new PropertyId( 'P93' ), null, 'wikibase-item' );
+		$item = new Item( new ItemId( 'Q303' ) );
+
+		$redirectSourceId = new ItemId( 'Q809' );
+		$redirectSource = new Item( $redirectSourceId );
+		$redirectSource->setLabel( 'en', 'redirect label' );
+
+		$redirectTargetId = new ItemId( 'Q808' );
+		$redirectTarget = new Item( $redirectTargetId );
+		$redirectTarget->setLabel( 'en', 'target label' );
+
+		$item->getStatements()->addNewStatement( new PropertyValueSnak( $property->getId(), new EntityIdValue( $redirectSourceId ) ) );
+
+		$user = $this->getTestUser()->getUser();
+		$store = $repo->getEntityStore();
+		$store->saveEntity( $property, 'test property', $user );
+		$store->saveEntity( $redirectSource, 'test item', $user );
+		$store->saveEntity( $redirectTarget, 'test item', $user );
+		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
+		$revision = $store->saveEntity( $item, 'test item', $user );
+
+		$language = $mwServices->getLanguageFactory()->getLanguage( 'en' );
+		$entityParserOutputGenerator = $repo->getEntityParserOutputGenerator( $language );
+
+		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
+
+		$this->assertStringContainsString( 'target label', $parserOutput->getText() );
 	}
 
 }

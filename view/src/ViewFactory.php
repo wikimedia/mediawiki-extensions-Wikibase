@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use Language;
 use SiteLookup;
 use ValueFormatters\NumberLocalizer;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
@@ -14,8 +13,6 @@ use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoTermLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -195,7 +192,7 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EntityInfo $entityInfo
+	 * @param EntityInfo|null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
@@ -204,14 +201,14 @@ class ViewFactory {
 	public function newItemView(
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		EntityInfo $entityInfo,
+		$unused,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			$this->newEntityInfoBasedLabelDescriptionLookup( $fallbackChain, $entityInfo ),
+			null,
 			$fallbackChain,
 			$editSectionGenerator
 		);
@@ -245,7 +242,7 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EntityInfo $entityInfo
+	 * @param EntityInfo|null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
@@ -254,12 +251,12 @@ class ViewFactory {
 	public function newPropertyView(
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		EntityInfo $entityInfo,
+		$unused,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			$this->newEntityInfoBasedLabelDescriptionLookup( $fallbackChain, $entityInfo ),
+			null,
 			$fallbackChain,
 			$this->newToolbarEditSectionGenerator()
 		);
@@ -277,7 +274,7 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param EntityInfo|null $unused
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
@@ -285,13 +282,13 @@ class ViewFactory {
 	 */
 	public function newStatementSectionsView(
 		$languageCode,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		$unused,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
-			$labelDescriptionLookup,
+			null,
 			$fallbackChain,
 			$editSectionGenerator
 		);
@@ -306,7 +303,7 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
+	 * @param EntityInfo|null $unused
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
@@ -314,14 +311,13 @@ class ViewFactory {
 	 */
 	public function newStatementGroupListView(
 		$languageCode,
-		LabelDescriptionLookup $labelDescriptionLookup,
+		$unused,
 		LanguageFallbackChain $fallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
-			$fallbackChain,
-			$labelDescriptionLookup
+			$fallbackChain
 		);
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
 			Language::factory( $languageCode )
@@ -353,16 +349,6 @@ class ViewFactory {
 			$this->specialPageLinker,
 			$this->templateFactory,
 			$this->textProvider
-		);
-	}
-
-	private function newEntityInfoBasedLabelDescriptionLookup(
-		LanguageFallbackChain $fallbackChain,
-		EntityInfo $entityInfo
-	) : LanguageFallbackLabelDescriptionLookup {
-		return new LanguageFallbackLabelDescriptionLookup(
-			new EntityInfoTermLookup( $entityInfo ),
-			$fallbackChain
 		);
 	}
 

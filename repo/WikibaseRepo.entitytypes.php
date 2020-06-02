@@ -25,7 +25,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
@@ -56,14 +55,14 @@ return [
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
 			EntityDocument $entity,
-			EntityInfo $entityInfo
+			$unused = null
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newItemView(
 				$language,
 				$fallbackChain,
-				$entityInfo,
+				$unused,
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,
@@ -194,14 +193,14 @@ return [
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
 			EntityDocument $entity,
-			EntityInfo $entityInfo
+			$unused = null
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newPropertyView(
 				$language,
 				$fallbackChain,
-				$entityInfo,
+				$unused,
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,

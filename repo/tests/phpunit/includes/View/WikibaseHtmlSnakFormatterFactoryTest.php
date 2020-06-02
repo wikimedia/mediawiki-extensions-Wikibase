@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\View;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -24,7 +23,6 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testGetSnakFormatter() {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
 		$languageFallbackChain = new LanguageFallbackChain( [] );
-		$labelDescriptionLookup = $this->createMock( LabelDescriptionLookup::class );
 
 		$outputFormatSnakFormatterFactory = $this->getMockBuilder(
 				OutputFormatSnakFormatterFactory::class
@@ -39,7 +37,6 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 				new FormatterOptions( [
 					ValueFormatter::OPT_LANG => 'en',
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup
 				] )
 			)
 			->will( $this->returnValue( $snakFormatter ) );
@@ -48,8 +45,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$snakFormatterReturned = $factory->getSnakFormatter(
 			'en',
-			$languageFallbackChain,
-			$labelDescriptionLookup
+			$languageFallbackChain
 		);
 		$this->assertEquals( $snakFormatter, $snakFormatterReturned );
 	}

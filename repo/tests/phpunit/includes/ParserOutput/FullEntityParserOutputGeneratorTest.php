@@ -14,8 +14,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -24,7 +22,6 @@ use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
@@ -41,7 +38,6 @@ use Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
-use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityDocumentView;
@@ -119,7 +115,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$this->assertSame( '<HTML>', $parserOutput->getText(), 'html text' );
 
 		/**
-		 * @see \Wikibase\Repo\Tests\ParserOutput\EntityParserOutputGeneratorIntegrationTest
+		 * @see \Wikibase\Repo\Tests\ParserOutput\FullEntityParserOutputGeneratorIntegrationTest
 		 * for tests concerning html view placeholder integration.
 		 */
 
@@ -471,101 +467,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
 
 		return $dataTypeLookup;
-	}
-
-	public function testGetParserOutputIncludesLabelsOfRedirectEntity() {
-		$item = new Item( new ItemId( 'Q303' ) );
-
-		$redirectSourceId = new ItemId( 'Q809' );
-		$redirectSource = new Item( $redirectSourceId );
-		$redirectSource->setLabel( 'en', 'redirect label' );
-
-		$redirectTargetId = new ItemId( 'Q808' );
-		$redirectTarget = new Item( $redirectTargetId );
-		$redirectTarget->setLabel( 'en', 'target label' );
-
-		$item->getStatements()->addNewStatement( new PropertyValueSnak( new PropertyId( 'P11' ), new EntityIdValue( $redirectSourceId ) ) );
-
-		$user = $this->getTestUser()->getUser();
-
-		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
-		$revision = $store->saveEntity( $item, 'test item', $user );
-		$store->saveEntity( $redirectSource, 'test item', $user );
-		$store->saveEntity( $redirectTarget, 'test item', $user );
-		$store->saveRedirect( new EntityRedirect( $redirectSourceId, $redirectTargetId ), 'mistake', $user );
-
-		$entityParserOutputGenerator = $this->getGeneratorForRedirectTest();
-
-		$parserOutput = $entityParserOutputGenerator->getParserOutput( $revision );
-
-		$foo = $parserOutput->getText();
-
-		$this->assertStringContainsString( 'target label', $foo );
-	}
-
-	private function getGeneratorForRedirectTest() {
-		$entityTitleLookup = $this->getEntityTitleLookupMock();
-		$entityIdParser = new BasicEntityIdParser();
-
-		$dataUpdaters = [
-			new ReferencedEntitiesDataUpdater(
-				$this->newEntityReferenceExtractor(),
-				$entityTitleLookup
-			)
-		];
-		$cache = $this->createMock( CacheInterface::class );
-		$cache->method( 'get' )
-			->willReturn( false );
-
-		return new FullEntityParserOutputGenerator(
-			$this->getViewFactoryForRedirectTest(),
-			$this->getEntityMetaTagsFactory(),
-			$this->getConfigBuilderMock(),
-			$entityTitleLookup,
-			new SqlEntityInfoBuilder(
-				$entityIdParser,
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
-				new NullLogger(),
-				new EntitySource(
-					'test',
-					false,
-					[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					''
-				),
-				$cache
-			),
-			$this->newLanguageFallbackChain(),
-			TemplateFactory::getDefaultInstance(),
-			$this->createMock( LocalizedTextProvider::class ),
-			new EntityDataFormatProvider(),
-			$dataUpdaters,
-			Language::factory( 'en' )
-		);
-	}
-
-	private function getViewFactoryForRedirectTest() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		return new DispatchingEntityViewFactory( [
-			'item' => function(
-				Language $language,
-				LanguageFallbackChain $fallbackChain,
-				EntityDocument $entity,
-				EntityInfo $entityInfo
-			) use ( $repo ) {
-				$viewFactory = $repo->getViewFactory();
-				$termsView = $this->createMock( PlaceholderEmittingEntityTermsView::class );
-				$termsView->method( 'getPlaceholders' )->with( $entity )->willReturn( [] );
-				return $viewFactory->newItemView(
-					$language,
-					$fallbackChain,
-					$entityInfo,
-					$termsView
-				);
-			},
-		] );
 	}
 
 	private function newEntityReferenceExtractor() {
