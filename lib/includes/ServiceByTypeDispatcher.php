@@ -37,16 +37,22 @@ class ServiceByTypeDispatcher {
 		$this->type = $type;
 	}
 
-	public function getServiceForType( string $entityType ) {
+	/**
+	 * @param string $entityType
+	 * @param array $callbackArgs arguments to be passed to the service creation callback
+	 *
+	 * @return object
+	 */
+	public function getServiceForType( string $entityType, array $callbackArgs = [] ) {
 		if ( !array_key_exists( $entityType, $this->callbacks ) ) {
 			return $this->defaultService;
 		}
 
-		return $this->services[$entityType] ?? $this->createService( $entityType );
+		return $this->services[$entityType] ?? $this->createService( $entityType, $callbackArgs );
 	}
 
-	private function createService( string $entityType ) {
-		$this->services[$entityType] = $this->callbacks[$entityType]();
+	private function createService( string $entityType, array $args = [] ) {
+		$this->services[$entityType] = $this->callbacks[$entityType]( ...$args );
 
 		Assert::postcondition(
 			$this->services[$entityType] instanceof $this->type,

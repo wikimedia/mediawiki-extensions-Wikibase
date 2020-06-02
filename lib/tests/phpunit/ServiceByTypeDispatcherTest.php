@@ -84,4 +84,20 @@ class ServiceByTypeDispatcherTest extends TestCase {
 		$dispatcher->getServiceForType( 'foo' );
 	}
 
+	public function testPassesArgumentsToCallback() {
+		$callbackArgs = [ 'some', 'additional arguments' ];
+		$callback = function ( ...$args ) use ( $callbackArgs ) {
+			$this->assertSame( $callbackArgs[0], $args[0] );
+			$this->assertSame( $callbackArgs[1], $args[1] );
+			return new stdClass();
+		};
+		$dispatcher = new ServiceByTypeDispatcher(
+			stdClass::class,
+			[ 'foo' => $callback ],
+			new stdClass()
+		);
+
+		$dispatcher->getServiceForType( 'foo', $callbackArgs );
+	}
+
 }
