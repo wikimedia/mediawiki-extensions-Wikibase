@@ -24,14 +24,10 @@ export class RootGetters extends Getters<Application> {
 	}
 
 	public get targetLabel(): Term {
-		if ( this.state.targetLabel === null ) {
-			return {
-				language: 'zxx',
-				value: this.state.targetProperty,
-			};
-		}
-
-		return this.state.targetLabel;
+		return this.state.targetLabel ?? {
+			language: 'zxx',
+			value: this.state.targetProperty,
+		};
 	}
 
 	public get targetReferences(): Reference[] {
@@ -40,7 +36,7 @@ export class RootGetters extends Getters<Application> {
 			const entityId = activeState[ NS_ENTITY ].id;
 			const statements = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
 
-			return statements.references ? statements.references : [];
+			return statements.references ?? [];
 		} catch ( _ignored ) {
 			return [];
 		}
