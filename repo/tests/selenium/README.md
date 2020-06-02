@@ -15,10 +15,16 @@ Set up MediaWiki-Vagrant:
 
 ## Run all specs
 
-Run test specs from both mediawiki/core and installed extensions:
+Run test specs from mediawiki/core via:
 
     cd mediawiki
     npm run selenium
+
+Run test specs from Wikibase via:
+
+    cd mediawiki/extensions/Wikibase
+    npm run selenium-test
+
 
 ## Run specific tests
 
