@@ -65,7 +65,7 @@ export interface WritingApi {
 
 export interface ApiParams<action extends ApiAction> {
 	action: action;
-	[ name: string ]: string | number | boolean | undefined | ( string|number )[] | Set<string|number>;
+	[ name: string ]: string | number | boolean | undefined | readonly ( string|number )[] | Set<string|number>;
 }
 
 export type ApiResponse = {

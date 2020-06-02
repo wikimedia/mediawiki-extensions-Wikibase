@@ -134,7 +134,7 @@ function mockMwWindow( options: {
 		bcp47(): string;
 	};
 	wgPageContentLanguage?: string;
-	editTags?: string[];
+	editTags?: readonly string[];
 	message?: MwMessages;
 	tracker?: ( key: string, payload?: unknown ) => void;
 } = {} ): MwWindow {

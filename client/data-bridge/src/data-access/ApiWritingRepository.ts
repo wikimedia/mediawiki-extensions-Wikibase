@@ -20,9 +20,9 @@ interface ResponseSuccess {
 
 export default class ApiWritingRepository implements WritingEntityRepository {
 	private api: WritingApi;
-	private tags?: string[];
+	private tags?: readonly string[];
 
-	public constructor( api: WritingApi, tags?: string[] ) {
+	public constructor( api: WritingApi, tags?: readonly string[] ) {
 		this.api = api;
 		this.tags = tags || undefined;
 	}

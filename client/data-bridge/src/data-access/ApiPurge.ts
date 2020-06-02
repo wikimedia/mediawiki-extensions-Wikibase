@@ -10,7 +10,7 @@ export default class ApiPurge implements MediaWikiPurge {
 		this.api = api;
 	}
 
-	public purge( titles: string[] ): Promise<void> {
+	public purge( titles: readonly string[] ): Promise<void> {
 		if ( titles.length > this.TITLES_LIMIT ) {
 			throw new TechnicalProblem( `You cannot purge more than ${this.TITLES_LIMIT} titles` );
 		}

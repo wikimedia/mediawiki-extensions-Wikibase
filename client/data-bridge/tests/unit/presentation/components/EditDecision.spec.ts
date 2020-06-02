@@ -23,7 +23,7 @@ localVue.use( Vuex );
  * (The resulting array will contain elements in order of their last appearance
  * in the source array.)
  */
-function unique<T>( value: T, index: number, array: T[] ): boolean {
+function unique<T>( value: T, index: number, array: readonly T[] ): boolean {
 	return array.includes( value, index + 1 );
 }
 

@@ -20,7 +20,7 @@ describe( 'MwMessagesRepository', () => {
 	} );
 
 	it( 'get mw.message, the messages keys and parameters to build a message collection', () => {
-		const mwMessages = jest.fn( ( _key: string, ...parameter: ( string|HTMLElement )[] ): MwMessage => {
+		const mwMessages = jest.fn( ( _key: string, ...parameter: readonly ( string|HTMLElement )[] ): MwMessage => {
 			return {
 				parse: jest.fn().mockReturnValueOnce( parameter[ 0 ] ),
 				text: jest.fn(),

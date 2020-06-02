@@ -8,7 +8,7 @@ export default class MwMessagesRepository implements MessagesRepository {
 		this.mwMessages = mwMessages;
 	}
 
-	public get( messageKey: string, ...params: ( string|HTMLElement )[] ): string {
+	public get( messageKey: string, ...params: readonly ( string|HTMLElement )[] ): string {
 		return this.mwMessages( messageKey, ...params ).parse();
 	}
 }

@@ -50,7 +50,7 @@ jest.mock( '@/events/repeater', () => ( {
 const mockExtendVueEnvironment = jest.fn();
 jest.mock( '@/presentation/extendVueEnvironment', () => ( {
 	__esModule: true,
-	default: ( ...args: any[] ) => mockExtendVueEnvironment( ...args ),
+	default: ( ...args: readonly any[] ) => mockExtendVueEnvironment( ...args ),
 } ) );
 
 const messagesRepository = {};

@@ -18,7 +18,7 @@ export default class ApiRenderReferencesRepository implements ReferencesRenderin
 		this.language = language;
 	}
 
-	public getRenderedReferences( references: Reference[] ): Promise<string[]> {
+	public getRenderedReferences( references: readonly Reference[] ): Promise<string[]> {
 		return Promise.all(
 			references.map( ( reference ) => this.renderSingleReference( reference ) ),
 		);

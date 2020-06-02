@@ -27,7 +27,7 @@ import StateMixin from '@/presentation/StateMixin';
 @Component( {
 } )
 export default class ReferenceSection extends mixins( StateMixin ) {
-	public get renderedTargetReferences(): string[] {
+	public get renderedTargetReferences(): readonly string[] {
 		return this.rootModule.state.renderedTargetReferences;
 	}
 }
