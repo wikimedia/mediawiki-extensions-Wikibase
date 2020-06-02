@@ -1,5 +1,9 @@
 # Wikibase DataModel release notes
 
+## Version 9.5.0 (2020-05-02)
+
+* Added PHP 7.4 support 
+
 ## Version 9.4.0 (2020-04-03)
 
 * Added `getGuidPart` to `StatementGuid`
