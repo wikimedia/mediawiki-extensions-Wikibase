@@ -38,6 +38,11 @@ class WikiTextPropertyOrderProviderTestHelper {
 				. "* p5", // Testing for lower case property IDs
 				[ 'P1' => 0, 'P133' => 1, 'P5' => 2 ]
 			],
+			'multiple bullets' => [
+				"* P1 \n"
+				. "** P2 \n",
+				[ 'P1' => 0, 'P2' => 1 ]
+			],
 			'strip multiline comment' => [
 				"* P1 \n"
 				. "<!-- * P133 \n"
