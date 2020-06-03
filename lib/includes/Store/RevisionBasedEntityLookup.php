@@ -23,8 +23,14 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 */
 	private $lookup;
 
-	public function __construct( EntityRevisionLookup $lookup ) {
+	/**
+	 * @var string
+	 */
+	private $lookupMode;
+
+	public function __construct( EntityRevisionLookup $lookup, string $lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA ) {
 		$this->lookup = $lookup;
+		$this->lookupMode = $lookupMode;
 	}
 
 	/**
@@ -37,7 +43,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 */
 	public function getEntity( EntityId $entityId ) {
 		try {
-			$revision = $this->lookup->getEntityRevision( $entityId );
+			$revision = $this->lookup->getEntityRevision( $entityId,  0, $this->lookupMode );
 		} catch ( EntityLookupException $ex ) {
 			throw $ex;
 		} catch ( \Exception $ex ) {

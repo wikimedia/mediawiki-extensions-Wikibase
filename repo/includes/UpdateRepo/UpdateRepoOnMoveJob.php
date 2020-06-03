@@ -8,8 +8,8 @@ use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -58,9 +58,8 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 	protected function initRepoJobServicesFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		$this->initServices(
-			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED, Store::LATEST_FROM_MASTER ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
@@ -70,7 +69,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	}
 
 	public function initServices(
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityLookup $entityLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
@@ -78,7 +77,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
-			$entityRevisionLookup,
+			$entityLookup,
 			$entityStore,
 			$summaryFormatter,
 			$logger,
@@ -191,7 +190,6 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	protected function applyChanges( Item $item ) {
 		$params = $this->getParams();
 		$siteId = $params['siteId'];
-
 		$oldSiteLink = $this->getSiteLink( $item, $siteId );
 
 		$siteLink = new SiteLink(
@@ -202,6 +200,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 
 		$item->getSiteLinkList()->removeLinkWithSiteId( $siteId );
 		$item->getSiteLinkList()->addSiteLink( $siteLink );
+
 		return true;
 	}
 

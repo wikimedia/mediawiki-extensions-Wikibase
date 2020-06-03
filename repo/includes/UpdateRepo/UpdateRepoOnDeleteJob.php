@@ -8,8 +8,8 @@ use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -55,7 +55,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$this->initServices(
-			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED, Store::LATEST_FROM_MASTER ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),
@@ -65,7 +65,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 	}
 
 	public function initServices(
-		EntityRevisionLookup $entityRevisionLookup,
+		EntityLookup $entityLookup,
 		EntityStore $entityStore,
 		SummaryFormatter $summaryFormatter,
 		LoggerInterface $logger,
@@ -73,7 +73,7 @@ class UpdateRepoOnDeleteJob extends UpdateRepoJob {
 		MediawikiEditEntityFactory $editEntityFactory
 	) {
 		$this->initRepoJobServices(
-			$entityRevisionLookup,
+			$entityLookup,
 			$entityStore,
 			$summaryFormatter,
 			$logger,

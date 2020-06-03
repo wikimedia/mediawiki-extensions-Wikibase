@@ -403,11 +403,13 @@ class SqlStore implements Store {
 	 *        self::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
 	 *        self::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
+	 * @param string $lookupMode One of self::LATEST_FROM_*
+	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED ) {
+	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED, string $lookupMode = self::LATEST_FROM_REPLICA ) {
 		$revisionLookup = $this->getEntityRevisionLookup( $cache );
-		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup );
+		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup, $lookupMode );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );
 		return $resolvingLookup;
 	}
