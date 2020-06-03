@@ -110,49 +110,54 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Add Wikibase item link in toolbox
+	 * Build 'Wikidata item' link for later addition to the toolbox section of the sidebar
 	 *
-	 * @param BaseTemplate $baseTemplate
-	 * @param array[] &$toolbox
+	 * @param Skin $skin
+	 *
+	 * @return string[]|null Array of link elements or Null if link cannot be created.
 	 */
-	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$skin = $baseTemplate->getSkin();
+	public static function buildWikidataItemLink( Skin $skin ): ?array {
+		$wbClient = WikibaseClient::getDefaultInstance();
 		$title = $skin->getTitle();
 		$idString = $skin->getOutput()->getProperty( 'wikibase_item' );
 		$entityId = null;
 
 		if ( $idString !== null ) {
-			$entityIdParser = $wikibaseClient->getEntityIdParser();
+			$entityIdParser = $wbClient->getEntityIdParser();
 			$entityId = $entityIdParser->parse( $idString );
-		} elseif ( $title && Action::getActionName( $skin ) !== 'view' && $title->exists() ) {
+		} elseif ( $title &&
+			Action::getActionName( $skin->getContext() ) !== 'view' && $title->exists()
+		) {
 			// Try to load the item ID from Database, but only do so on non-article views,
 			// (where the article's OutputPage isn't available to us).
-			$entityId = self::getEntityIdForTitle( $title );
+			$entityId = self::getEntityIdForTitle( $title, $wbClient );
 		}
 
 		if ( $entityId !== null ) {
-			$repoLinker = $wikibaseClient->newRepoLinker();
-			$toolbox['wikibase'] = [
-				'text' => $baseTemplate->getMsg( 'wikibase-dataitem' )->text(),
+			$repoLinker = $wbClient->newRepoLinker();
+
+			return [
+				'id' => 't-wikibase',
+				'text' => $skin->msg( 'wikibase-dataitem' )->text(),
 				'href' => $repoLinker->getEntityUrl( $entityId ),
-				'id' => 't-wikibase'
 			];
 		}
+
+		return null;
 	}
 
 	/**
-	 * @param Title|null $title
+	 * @param Title $title
+	 * @param WikibaseClient $wbClient
 	 *
 	 * @return EntityId|null
 	 */
-	private static function getEntityIdForTitle( Title $title = null ) {
-		if ( $title === null || !self::isWikibaseEnabled( $title->getNamespace() ) ) {
+	private static function getEntityIdForTitle( Title $title, WikibaseClient $wbClient ): ?EntityId {
+		if ( !self::isWikibaseEnabled( $title->getNamespace() ) ) {
 			return null;
 		}
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$entityIdLookup = $wikibaseClient->getEntityIdLookup();
+		$entityIdLookup = $wbClient->getEntityIdLookup();
 		return $entityIdLookup->getEntityIdForTitle( $title );
 	}
 

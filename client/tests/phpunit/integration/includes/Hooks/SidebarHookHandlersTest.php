@@ -232,14 +232,14 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	/**
-	 * Call the doSidebarBeforeOutput() function on the SidebarHookHandlers object under test.
+	 * Call the buildOtherProjectsSidebar() function on the SidebarHookHandlers object under test.
 	 *
 	 * @param array|null $projects A list of projects
 	 * @param string $itemId
 	 *
 	 * @return array The resulting sidebar array
 	 */
-	private function callDoSidebarBeforeOutput( $projects, $itemId = 'Q42' ) {
+	private function callBuildOtherProjectsSidebar( $projects, $itemId = 'Q42' ) {
 		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
 
 		$context = new RequestContext();
@@ -256,29 +256,28 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$handler = $this->newSidebarHookHandlers();
 
-		$handler->doSidebarBeforeOutput( $skin, $sidebar );
+		$sidebar = $handler->buildOtherProjectsSidebar( $skin );
+
 		return $sidebar;
 	}
 
-	public function testDoSidebarBeforeOutput() {
+	public function testBuildOtherProjectsSidebar() {
 		$projects = [ 'foo' => 'bar' ];
-		$sidebar = $this->callDoSidebarBeforeOutput( $projects );
 
-		$this->assertArrayHasKey( 'wikibase-otherprojects', $sidebar );
-		$this->assertEquals( $sidebar['wikibase-otherprojects'], $projects );
+		$this->assertIsArray( $this->callBuildOtherProjectsSidebar( $projects ) );
 	}
 
-	public function testDoSidebarBeforeOutput_noItem() {
-		$sidebar = $this->callDoSidebarBeforeOutput( null, null );
+	public function testBuildOtherProjectsSidebar_noItem() {
+		$sidebar = $this->callBuildOtherProjectsSidebar( null, null );
 
-		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
+		$this->assertNull( $sidebar );
 	}
 
-	public function testDoSidebarBeforeOutput_empty() {
+	public function testBuildOtherProjectsSidebar_empty() {
 		$projects = [];
-		$sidebar = $this->callDoSidebarBeforeOutput( $projects );
+		$sidebar = $this->callBuildOtherProjectsSidebar( $projects );
 
-		$this->assertArrayNotHasKey( 'wikibase-otherprojects', $sidebar );
+		$this->assertNull( $sidebar );
 	}
 
 	private function assertOutputPageProperties( $props, OutputPage $outputPage ) {

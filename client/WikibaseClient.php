@@ -97,7 +97,6 @@ call_user_func( function() {
 	$wgTrackingCategories[] = 'connected-redirect-category';
 
 	$wgHooks['UnitTestsList'][] = '\Wikibase\Client\ClientHooks::registerUnitTests';
-	$wgHooks['BaseTemplateToolbox'][] = '\Wikibase\Client\ClientHooks::onBaseTemplateToolbox';
 	$wgHooks['OldChangesListRecentChangesLine'][] =
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onOldChangesListRecentChangesLine';
 	$wgHooks['EnhancedChangesListModifyLineData'][] =

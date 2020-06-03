@@ -6,6 +6,7 @@ use OutputPage;
 use ParserOutput;
 use Skin;
 use Title;
+use Wikibase\Client\ClientHooks;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\WikibaseClient;
 
@@ -102,17 +103,37 @@ class SidebarHookHandlers {
 	}
 
 	/**
-	 * Adds the "other projects" section to the sidebar, if enabled project wide or
-	 * the user has the beta featured enabled.
+	 * SidebarBeforeOutput hook handler
+	 *
+	 * This handler adds too items to the sidebar section.
+	 * First it adds the 'Wikidata items' to the 'toolbox' section of the sidebar.
+	 * Second it adds the 'In other projects' item which lives in its own section.
+	 *
+	 * The items generation logic are handled separately for each. This callback
+	 * is only concerned with adding them to the &$sidebar array (if they exist).
+	 *
+	 * If currrent page cannot have 'Wikidata item' link, this callback will receive
+	 * null value from ClientHooks::buildWikidataItemLink() method and so it will
+	 * skip attempting to add the link. Same thing repeats for the second case.
 	 *
 	 * @param Skin $skin
 	 * @param array &$sidebar
-	 *
-	 * @return bool
 	 */
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+		// Add 'Wikidata item' to the toolbox
+		$wikidataItemLink = ClientHooks::buildWikidataItemLink( $skin );
+
+		if ( $wikidataItemLink !== null ) {
+			$sidebar['TOOLBOX']['wikibase'] = $wikidataItemLink;
+		}
+
+		// Add the 'In other projects' section
 		$handler = self::getInstance();
-		return $handler->doSidebarBeforeOutput( $skin, $sidebar );
+		$otherProjectsSidebar = $handler->buildOtherProjectsSidebar( $skin );
+
+		if ( $otherProjectsSidebar !== null ) {
+			$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+		}
 	}
 
 	public function __construct(
@@ -195,24 +216,23 @@ class SidebarHookHandlers {
 	}
 
 	/**
-	 * Adds the "other projects" section to the sidebar, if enabled project wide or
+	 * Build 'In other projects' section of the sidebar, if enabled project wide or
 	 * the user has the beta featured enabled.
 	 *
 	 * @param Skin $skin
-	 * @param array &$sidebar
 	 *
-	 * @return bool
+	 * @return null|array[] Array of 'In other projects' contents or null if there are none
 	 */
-	public function doSidebarBeforeOutput( Skin $skin, array &$sidebar ) {
+	public function buildOtherProjectsSidebar( Skin $skin ): ?array {
 		$outputPage = $skin->getContext()->getOutput();
 
 		$otherProjectsSidebar = $outputPage->getProperty( 'wikibase-otherprojects-sidebar' );
 
-		if ( !empty( $otherProjectsSidebar ) ) {
-			$sidebar['wikibase-otherprojects'] = $otherProjectsSidebar;
+		if ( empty( $otherProjectsSidebar ) ) {
+			return null;
 		}
 
-		return true;
+		return $otherProjectsSidebar;
 	}
 
 }
