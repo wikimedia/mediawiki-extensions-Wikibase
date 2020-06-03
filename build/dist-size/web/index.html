@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<script src='./lib/plotly.js'></script>
+</head>
+
+<body>
+	<div id="scatter"></div>
+
+	<script type="module">
+		import { DistHist } from './lib/main.js';
+
+		DistHist(
+			document.getElementById( 'scatter' ),
+			'data.json'
+		);
+	</script>
+</body>
+</html>
