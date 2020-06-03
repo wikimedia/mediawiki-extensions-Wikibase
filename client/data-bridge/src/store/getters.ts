@@ -33,9 +33,9 @@ export class RootGetters extends Getters<Application> {
 		try {
 			const activeState = this.state as InitializedApplicationState;
 			const entityId = activeState[ NS_ENTITY ].id;
-			const statements = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
+			const statement = activeState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ];
 
-			return statements.references ?? [];
+			return statement.references ?? [];
 		} catch ( _ignored ) {
 			return [];
 		}
