@@ -17,6 +17,7 @@
 			"Liuxinyu970226",
 			"Mywood",
 			"Shizhao",
+			"SomeyaMako",
 			"Stevenliuyi",
 			"Xiaomingyan",
 			"Xiplus",
@@ -135,5 +136,16 @@
 	"wikibase-client-data-bridge-permissions-error": "因为以下{{PLURAL:$1|原因}}，您没有权限来编辑此值：",
 	"wikibase-client-data-bridge-permissions-error-info": "更多详情",
 	"wikibase-client-data-bridge-protected-on-repo-head": "<strong>此值当前在{{WBREPONAME}}上被[$1 全保护]，并且仅能被[$2 管理员]编辑。</strong>",
-	"wikibase-client-data-bridge-deprecated-statement-error-head": "当前不支持编辑$1的值"
+	"wikibase-client-data-bridge-edit-decision-replace-label": "<strong>我修正了</strong>一个错误值",
+	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "您尚未登录",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "不登录，直接编辑",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "登录或注册",
+	"wikibase-client-data-bridge-deprecated-statement-error-head": "当前不支持编辑$1的值",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "检测到编辑冲突",
+	"wikibase-client-data-bridge-error-reload-page": "重新载入页面",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "您现在没有登录",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "即使您没有登录您也可以发布更改。您的IP地址将会被记录在页面编辑历史中。您也可以重新登录并重试发布。",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "不登录，直接保存",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "在新标签页登录",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "继续编辑"
 }
