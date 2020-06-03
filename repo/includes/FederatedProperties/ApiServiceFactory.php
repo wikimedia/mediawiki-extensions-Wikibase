@@ -76,4 +76,8 @@ class ApiServiceFactory {
 		return new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 	}
 
+	public function newApiEntityExistenceChecker(): ApiEntityExistenceChecker {
+		return new ApiEntityExistenceChecker( $this->newApiEntityLookup() );
+	}
+
 }
