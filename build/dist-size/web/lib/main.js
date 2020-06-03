@@ -29,7 +29,7 @@ function augmentFileHistoryBySizeDelta( fileHistory ) {
 
 	let previousRevision = null;
 	newHistory.forEach( ( revision ) => {
-		const previousSize = previousRevision ? previousRevision[ FIELDS.SIZE ] : 0;
+		const previousSize = previousRevision ? previousRevision[ FIELDS.SIZE ] : null;
 		const deltaPercent = Math.round( ( revision[ FIELDS.SIZE ] - previousSize ) / previousSize * 100 );
 		revision[ CUSTOM_FIELDS.PREVIOUS_SIZE ] = previousSize;
 		revision[ CUSTOM_FIELDS.SIZE_DELTA_PERCENT ] = deltaPercent;
@@ -54,7 +54,8 @@ function showRevisionInformation( revision ) {
  * @return {?Object}
  */
 function buildSizeDeltaAnnotation( revision ) {
-	if ( revision[ CUSTOM_FIELDS.PREVIOUS_SIZE ] === 0 ) { // inception may be a notable but not with respect to size
+	if ( revision[ CUSTOM_FIELDS.PREVIOUS_SIZE ] === null || revision[ FIELDS.SIZE ] === null ) {
+		// inception & removal may be a notable but not with respect to size
 		return null;
 	}
 	const sizeDeltaPercent = revision[ CUSTOM_FIELDS.SIZE_DELTA_PERCENT ];
