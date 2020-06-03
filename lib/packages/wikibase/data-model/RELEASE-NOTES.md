@@ -1,6 +1,10 @@
 # Wikibase DataModel release notes
 
-## Version 9.5.0 (2020-05-02)
+## Version 9.5.1 (2020-06-03)
+
+* Updated release notes
+
+## Version 9.5.0 (2020-06-02)
 
 * Added PHP 7.4 support 
 
