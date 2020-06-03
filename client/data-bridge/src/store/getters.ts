@@ -6,7 +6,6 @@ import {
 	NS_STATEMENTS,
 } from '@/store/namespaces';
 import Term from '@/datamodel/Term';
-import Statement from '@/datamodel/Statement';
 import Reference from '@/datamodel/Reference';
 import deepEqual from 'deep-equal';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
@@ -51,7 +50,7 @@ export class RootGetters extends Getters<Application> {
 		const entityId = initState[ NS_ENTITY ].id;
 		return !deepEqual(
 			this.state.targetValue,
-			( initState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ] as Statement )
+			initState[ NS_STATEMENTS ][ entityId ][ this.state.targetProperty ][ 0 ]
 				.mainsnak
 				.datavalue,
 			{ strict: true },
