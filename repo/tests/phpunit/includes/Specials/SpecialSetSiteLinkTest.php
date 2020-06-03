@@ -78,11 +78,6 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 
 		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
 
-		$siteLinkGroups = $settings->getSetting( 'siteLinkGroups' );
-		if ( $siteLinkGroups === [] ) {
-			$siteLinkGroups = [ 'wikipedia' ];
-		}
-
 		return new SpecialSetSiteLink(
 			$copyrightView,
 			$wikibaseRepo->getSummaryFormatter(),
@@ -90,7 +85,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,
 			$siteLinkTargetProvider,
-			$siteLinkGroups,
+			[ 'wikipedia' ],
 			$settings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
 			$siteLinkChangeOpFactory
