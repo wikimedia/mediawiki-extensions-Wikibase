@@ -43,5 +43,8 @@ return [
 				}
 			};
 		},
+		Def::EXISTENCE_CHECKER_CALLBACK => function () {
+			return WikibaseRepo::getDefaultInstance()->newFederatedPropertiesServiceFactory()->newApiEntityExistenceChecker();
+		},
 	]
 ];
