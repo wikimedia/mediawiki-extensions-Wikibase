@@ -91,9 +91,6 @@ services.set( 'tracker', {
 	trackPropertyDatatype( datatype: string ) {
 		console.info( `Tracking datatype: '${datatype}'` );
 	},
-	trackTitlePurgeError() {
-		console.info( 'Tracking purge error' );
-	},
 	trackError( type: string ): void {
 		console.info( `Tracking error: '${type}'` );
 	},

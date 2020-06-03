@@ -1378,20 +1378,21 @@ describe( 'root/actions', () => {
 			const purgeTitles: MediaWikiPurge = {
 				purge: jest.fn().mockReturnValue( Promise.reject() ),
 			};
-			const trackTitlePurgeError = jest.fn();
+			const trackError = jest.fn();
 
 			// @ts-ignore
 			actions.store = {
 				$services: newMockServiceContainer( {
 					purgeTitles,
 					tracker: newMockTracker( {
-						trackTitlePurgeError,
+						trackError,
 					} ),
 				} ),
 			};
 
 			await expect( actions.purgeTargetPage() ).resolves.toBeUndefined();
-			expect( trackTitlePurgeError ).toHaveBeenCalledTimes( 1 );
+			expect( trackError ).toHaveBeenCalledTimes( 1 );
+			expect( trackError ).toHaveBeenCalledWith( 'purge' );
 		} );
 	} );
 
