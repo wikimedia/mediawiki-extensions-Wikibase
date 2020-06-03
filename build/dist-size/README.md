@@ -1,4 +1,4 @@
-# `dist/` size over time
+# dist/ size over time
 
 This tracks the size of the `dist/` directory (the resources shipped to clients) of a Wikibase component over time.
 The `analyze` script goes through the Git history (via the github API) and collects data for each relevant commit,
