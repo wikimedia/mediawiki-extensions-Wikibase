@@ -169,7 +169,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Seite neu laden",
 	"wikibase-client-data-bridge-error-go-back": "Zurück",
 	"wikibase-client-data-bridge-error-retry-save": "Speichern wiederholen",
-	"wikibase-client-data-bridge-login-warning": "Nachdem du dich erfolgreich angemeldet hast, <strong>schließe bitte diese Registerkarte und kehre zur ursprünglichen Registerkarte zurück</strong>, um das Speichern erneut zu versuchen.",
+	"wikibase-client-data-bridge-login-warning": "Nachdem du dich angemeldet hast, <strong>schließe bitte diese Registerkarte und kehre zur ursprünglichen Registerkarte zurück</strong>, um das Speichern erneut zu versuchen.",
 	"wikibase-client-data-bridge-reference-note": "Die Bearbeitung von Einzelnachweisen wird nach dem Speichern auf {{WBREPONAME}} möglich sein",
 	"wikibase-client-data-bridge-thank-you-head": "Vielen Dank für deine Bearbeitung!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Du kannst den Einzelnachweis für diese Eigenschaft auf {{WBREPONAME}} durch Klick auf die Schaltfläche bearbeiten.",
