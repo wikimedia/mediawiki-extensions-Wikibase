@@ -55,7 +55,7 @@ class EntityLinkFormatterFactory {
 	/**
 	 * @return EntityLinkFormatter
 	 */
-	private function getDefaultLinkFormatter() {
+	public function getDefaultLinkFormatter() {
 		return $this->getOrCreateLinkFormatter( 'default' );
 	}
 
