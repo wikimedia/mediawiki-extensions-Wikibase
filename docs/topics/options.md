@@ -129,20 +129,7 @@ Useful if you want to experiment with [useTermsTableSearchFields] and don’t wa
 #### entitySources {#common_entitySources}
 An associative array mapping entity source names to settings relevant to the particular source.
 
-DEFAULT: Populated with a local default from existing settings:
- - [entityNamespaces](#entityNamespaces)
- - [changesDatabase](#changesDatabase)
- - [conceptBaseUri](#conceptBaseUri)
-And with foreign repos using [foreignRepositories]{#foreignRepositories}
-
-Configuration of each source is an associative array containing the following keys:
-
- - `entityNamespaces`: A map of entity type identifiers (strings) that the local wiki supports from the foreign repository to namespaces (IDs or canonical names) related to pages of entities of the given type on foreign repository's wiki. If entities are stored in alternative slots, the syntax ```<namespace>/<slot>``` can be used to define which slot to use.
- - `repoDatabase`: A symbolic database identifier (string) that MediaWiki's LBFactory class understands. Note that `false` would mean “this wiki's database”.
- - `baseUri`: A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
- - `interwikiPrefix`: An interwiki prefix configured in the local wiki referring to the wiki related to the entity source.
- - `rdfNodeNamespacePrefix`: A prefix used in RDF turtle node namespaces, e.g. 'wd' would result in namespaces like 'wd' for the entity namespace, and 'wdt' for the direct claim namespace, whereas 'sdc' prefix would result in the namespaces 'sdc' and 'sdct' accordingly.
- - `rdfPredicateNamespacePrefix`: A prefix used in RDF turtle predicate namespaces, e.g. '' would result in namespaces like 'ps' for the simple value claim namespace, whereas 'sdc' prefix would result in the namespace 'sdcps'.
+See the [entitysources topic] for more details about the value of this setting.
 
 #### localEntitySourceName
 Name of the entity source name of the "local" repo, i.e. the repo of / on the local wiki.
@@ -913,6 +900,7 @@ DEFAULT: array mapping each well-known name to `null`.
 [wikiPageUpdaterDbBatchSize]: #client_wikiPageUpdaterDbBatchSize
 [siteGlobalID]: #client_siteGlobalID
 [wb_terms]: @ref md_docs_sql_wb_terms
+[entitysources topic]: @ref md_docs_topics_entitysources
 [wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
 [reference URL]: https://www.wikidata.org/wiki/Property:P854
 [title]: https://www.wikidata.org/wiki/Property:P1476

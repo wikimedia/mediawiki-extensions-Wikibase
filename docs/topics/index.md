@@ -6,6 +6,7 @@ This directory collects some documentation of specific topics:
 * @subpage md_docs_topics_changeop-serializations
 * @subpage md_docs_topics_constraints
 * @subpage md_docs_topics_datatypes
+* @subpage md_docs_topics_entitysources
 * @subpage md_docs_topics_entitytypes
 * @subpage md_docs_topics_federation
 * @subpage md_docs_topics_hooks-js
@@ -17,6 +18,7 @@ This directory collects some documentation of specific topics:
 * @subpage md_docs_topics_globals - PHP globals
 * @subpage md_docs_topics_options - Wikibase settings & configuration
 * @subpage md_docs_topics_public-apis
+* @subpage md_docs_topics_repo-client-relationship
 * @subpage md_docs_topics_rdf-binding
 * @subpage md_docs_topics_services
 * @subpage md_docs_topics_storage - Primary and secondary SQL storage
