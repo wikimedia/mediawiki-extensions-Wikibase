@@ -64,7 +64,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
@@ -96,7 +96,7 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	public function getEntityRevisionFromCache(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
@@ -143,11 +143,11 @@ class CacheRetrievingEntityRevisionLookup implements EntityRevisionLookup {
 	 *
 	 * @return LatestRevisionIdResult
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		// If we do not need to verify the revision, and the revision isn't
 		// needed for an update, we can get the revision from the cached object.
 		// XXX: whether this is actually quicker depends on the cache.
-		if ( !$this->shouldVerifyRevision && $mode !== self::LATEST_FROM_MASTER ) {
+		if ( !$this->shouldVerifyRevision && $mode !== LookupConstants::LATEST_FROM_MASTER ) {
 			$entityRevision = $this->cache->get( $entityId );
 
 			if ( $entityRevision ) {

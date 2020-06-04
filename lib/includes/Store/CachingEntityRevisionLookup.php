@@ -76,7 +76,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
@@ -122,7 +122,7 @@ class CachingEntityRevisionLookup implements EntityRevisionLookup, EntityStoreWa
 	 *
 	 * @return LatestRevisionIdResult
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		return $this->cacheRetrievingLookup->getLatestRevisionId( $entityId, $mode );
 	}
 

@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityContentTooBigException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -332,9 +333,9 @@ class MediawikiEditEntity implements EditEntity {
 	 */
 	private function getReplicaMode() {
 		if ( $this->allowMasterConnection === true ) {
-			return EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+			return LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 		} else {
-			return EntityRevisionLookup::LATEST_FROM_REPLICA;
+			return LookupConstants::LATEST_FROM_REPLICA;
 		}
 	}
 

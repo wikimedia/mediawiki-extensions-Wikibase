@@ -9,6 +9,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 
 /**
@@ -57,7 +58,7 @@ class PropertyDataTypeChanger {
 		$entityRevision = $this->entityRevisionLookup->getEntityRevision(
 			$propertyId,
 			0,
-			EntityRevisionLookup::LATEST_FROM_MASTER
+			 LookupConstants::LATEST_FROM_MASTER
 		);
 
 		if ( $entityRevision === null ) {

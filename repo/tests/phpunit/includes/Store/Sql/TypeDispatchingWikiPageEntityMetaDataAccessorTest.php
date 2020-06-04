@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 
@@ -53,7 +53,7 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 	public function testLoadRevisionInformationDispatching() {
 		$entityIdOne = $this->getMockEntityId( 'type1', 'ID1' );
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
 		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$accessor->loadRevisionInformation( [ $entityIdOne ], $mode )
@@ -85,7 +85,7 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 	public function testLoadRevisionInformationByRevisionId() {
 		$entityIdOne = $this->getMockEntityId( 'type1', 'ID1' );
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
 		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$accessor->loadRevisionInformationByRevisionId( $entityIdOne, 1, $mode )
@@ -114,7 +114,7 @@ class TypeDispatchingWikiPageEntityMetaDataAccessorTest extends TestCase {
 	public function testLoadLatestRevisionIdsDispatching() {
 		$entityIdOne = $this->getMockEntityId( 'type1', 'ID1' );
 		$entityIdTwo = $this->getMockEntityId( 'type2', 'ID2' );
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK;
+		$mode = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
 
 		$accessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$accessor->loadLatestRevisionIds( [ $entityIdOne ], $mode )

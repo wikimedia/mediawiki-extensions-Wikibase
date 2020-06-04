@@ -16,6 +16,7 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
@@ -96,7 +97,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$this->editEntityFactory = $editEntityFactory;
 		$this->permissionManager = $permissionManager;
 
-		$this->defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_MASTER;
+		$this->defaultRetrievalMode = LookupConstants::LATEST_FROM_MASTER;
 	}
 
 	/**

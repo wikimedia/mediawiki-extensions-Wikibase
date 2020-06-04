@@ -26,6 +26,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\HashSiteLinkStore;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -122,7 +123,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		$key = $entityId->getSerialization();
 
@@ -447,7 +448,7 @@ class MockRepository implements EntityLookup, EntityRedirectLookup,
 	 *
 	 * @return LatestRevisionIdResult
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		try {
 			$revision = $this->getEntityRevision( $entityId, 0, $mode );
 		} catch ( RevisionedUnresolvedRedirectException $e ) {

@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -59,7 +60,7 @@ class UpdateRepoOnMoveJob extends UpdateRepoJob {
 	protected function initRepoJobServicesFromGlobalState() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$this->initServices(
-			$wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED, Store::LATEST_FROM_MASTER ),
+			$wikibaseRepo->getEntityLookup( Store::LOOKUP_CACHING_DISABLED, LookupConstants::LATEST_FROM_MASTER ),
 			$wikibaseRepo->getEntityStore(),
 			$wikibaseRepo->getSummaryFormatter(),
 			LoggerFactory::getInstance( 'UpdateRepo' ),

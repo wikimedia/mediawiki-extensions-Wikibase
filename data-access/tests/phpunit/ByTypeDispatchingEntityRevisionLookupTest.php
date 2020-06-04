@@ -8,6 +8,7 @@ use Wikibase\DataAccess\ByTypeDispatchingEntityRevisionLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 
 /**
  * @covers \Wikibase\DataAccess\ByTypeDispatchingEntityRevisionLookup
@@ -31,7 +32,7 @@ class ByTypeDispatchingEntityRevisionLookupTest extends TestCase {
 	public function testGivenEntityIdOfKnownType_getEntityRevisionDispatchesRequestToRelevantLookup() {
 		$itemId = new ItemId( 'Q1' );
 		$revId = 123;
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 
 		$itemLookup = $this->createMock( EntityRevisionLookup::class );
 		$itemLookup->expects( $this->atLeastOnce() )

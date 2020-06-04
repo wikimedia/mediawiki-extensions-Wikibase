@@ -31,6 +31,7 @@ use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
 use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\LegacyEntityTermStoreReader;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
@@ -403,11 +404,11 @@ class SqlStore implements Store {
 	 *        self::LOOKUP_CACHING_RETRIEVE_ONLY to get a lookup which reads from the cache, but doesn't store retrieved entities
 	 *        self::LOOKUP_CACHING_ENABLED to get a caching lookup (default)
 	 *
-	 * @param string $lookupMode One of self::LATEST_FROM_*
+	 * @param string $lookupMode One of LookupConstants::LATEST_FROM_*
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED, string $lookupMode = self::LATEST_FROM_REPLICA ) {
+	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED, string $lookupMode = LookupConstants::LATEST_FROM_REPLICA ) {
 		$revisionLookup = $this->getEntityRevisionLookup( $cache );
 		$revisionBasedLookup = new RevisionBasedEntityLookup( $revisionLookup, $lookupMode );
 		$resolvingLookup = new RedirectResolvingEntityLookup( $revisionBasedLookup );

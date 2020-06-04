@@ -13,6 +13,7 @@ use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
@@ -49,7 +50,7 @@ class EntityLoadingHelper {
 	/**
 	 * @var string See the LATEST_XXX constants defined in EntityRevisionLookup
 	 */
-	protected $defaultRetrievalMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+	protected $defaultRetrievalMode = LookupConstants::LATEST_FROM_REPLICA;
 
 	/**
 	 * @var EntityByLinkedTitleLookup|null

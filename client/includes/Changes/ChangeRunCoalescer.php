@@ -13,6 +13,7 @@ use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 
 /**
  * A transformer for lists of EntityChanges that combines runs of changes into a single change.
@@ -169,7 +170,7 @@ class ChangeRunCoalescer {
 		$entityRev = $this->entityRevisionLookup->getEntityRevision(
 			$entityId,
 			$latestRevId,
-			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+			LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		if ( !$entityRev ) {

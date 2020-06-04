@@ -32,6 +32,7 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
@@ -44,6 +45,7 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Store;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -549,7 +551,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// create an edit and check if the anon user is last to edit --------------------
 		$lastRevIdResult = $lookup->getLatestRevisionId(
 			$itemId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
+			 LookupConstants::LATEST_FROM_MASTER
 		);
 		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
 		$item->setLabel( 'en', "Test Anon" );
@@ -563,7 +565,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// create an edit and check if the sysop user is last to edit --------------------
 		$lastRevIdResult = $lookup->getLatestRevisionId(
 			$itemId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
+			 LookupConstants::LATEST_FROM_MASTER
 		);
 		$lastRevId = $this->extractConcreteRevisionId( $lastRevIdResult );
 		$item->setLabel( 'en', "Test SysOp" );
@@ -886,7 +888,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		// check that it's gone
 		$latestRevisionIdResult = $lookup->getLatestRevisionId(
 			$entityId,
-			EntityRevisionLookup::LATEST_FROM_MASTER
+			 LookupConstants::LATEST_FROM_MASTER
 		);
 		$this->assertNonexistentRevision( $latestRevisionIdResult );
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );

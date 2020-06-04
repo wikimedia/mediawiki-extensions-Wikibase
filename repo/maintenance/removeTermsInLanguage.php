@@ -8,7 +8,7 @@ use User;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
@@ -54,7 +54,7 @@ class RemoveTermsInLanguage extends Maintenance {
 			$entityRevision = $entityRevisionLookup->getEntityRevision(
 				$entityId,
 				0,
-				EntityRevisionLookup::LATEST_FROM_MASTER
+				 LookupConstants::LATEST_FROM_MASTER
 			);
 
 			if ( $entityRevision === null ) {

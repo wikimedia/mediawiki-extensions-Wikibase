@@ -21,8 +21,8 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\InconsistentRedirectException;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -284,7 +284,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
 		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $entityId ], EntityRevisionLookup::LATEST_FROM_MASTER )
+			->loadRevisionInformation( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( [ 'Q6654' => false ] );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
@@ -295,7 +295,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			false
 		);
 
-		$result = $lookup->getEntityRevision( $entityId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$result = $lookup->getEntityRevision( $entityId, 0, LookupConstants::LATEST_FROM_MASTER );
 		$this->assertNull( $result );
 	}
 
@@ -312,7 +312,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
 		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$mockMetaDataAccessor
-			->loadRevisionInformationByRevisionId( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER )
+			->loadRevisionInformationByRevisionId( $entityId, $revId, LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( false );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
@@ -324,7 +324,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		);
 
 		$this->expectException( StorageException::class );
-		$lookup->getEntityRevision( $entityId, $revId, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$lookup->getEntityRevision( $entityId, $revId, LookupConstants::LATEST_FROM_MASTER );
 	}
 
 	public function testGetEntityRevision_ThrowsWhenFoundEntityRevisionContainsDivergingEntityId() {
@@ -338,7 +338,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			->willReturn( $oldEntityId );
 		$revId = 4711;
 		$revTimestamp = 20160114180301;
-		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$lookupMode = LookupConstants::LATEST_FROM_REPLICA;
 
 		$slotRecord = $this->createMock( SlotRecord::class );
 
@@ -405,7 +405,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 
 		$revId = 2000;
 		$slotRole = 'mediainfo';
-		$lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$lookupMode = LookupConstants::LATEST_FROM_REPLICA;
 
 		$slotRecord = $this->createMock( SlotRecord::class );
 
@@ -484,7 +484,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		/** @var WikiPageEntityMetaDataAccessor|ObjectProphecy $mockMetaDataAccessor */
 		$mockMetaDataAccessor = $this->prophesize( WikiPageEntityMetaDataAccessor::class );
 		$mockMetaDataAccessor
-			->loadRevisionInformation( [ $entityId ], EntityRevisionLookup::LATEST_FROM_MASTER )
+			->loadRevisionInformation( [ $entityId ], LookupConstants::LATEST_FROM_MASTER )
 			->willReturn( [ 'Q6654' => false ] );
 		$mockMetaDataAccessor = $mockMetaDataAccessor->reveal();
 
@@ -495,7 +495,7 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 			false
 		);
 
-		$result = $lookup->getLatestRevisionId( $entityId, EntityRevisionLookup::LATEST_FROM_MASTER );
+		$result = $lookup->getLatestRevisionId( $entityId, LookupConstants::LATEST_FROM_MASTER );
 		$result->onNonexistentEntity(
 				function () {
 					$this->assertTrue( true );

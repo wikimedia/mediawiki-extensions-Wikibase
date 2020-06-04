@@ -10,8 +10,9 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
+use Wikibase\Lib\Store\LookupConstants;
+use Wikibase\Store;
 
 /**
  * A WikiPageEntityMetaDataAccessor decorator that implements prefetching and caching.
@@ -161,15 +162,15 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	 * @see WikiPageEntityMetaDataAccessor::loadRevisionInformation
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects
 	 * or false if an entity could not be found.
 	 */
 	public function loadRevisionInformation( array $entityIds, $mode ) {
-		if ( $mode === EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		if ( $mode === LookupConstants::LATEST_FROM_MASTER ) {
 			// Don't attempt to use the cache in case we are asked to fetch
 			// from master. Also don't put load on the master by just fetching
 			// everything in $this->toFetch.
@@ -201,16 +202,16 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return stdClass|bool false if no such entity exists
 	 */
 	public function loadRevisionInformationByRevisionId(
 		EntityId $entityId,
 		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+		$mode = LookupConstants::LATEST_FROM_MASTER
 	) {
 		// Caching this would have little or no benefit, but would be rather complex.
 		return $this->lookup->loadRevisionInformationByRevisionId( $entityId, $revisionId, $mode );
@@ -220,9 +221,9 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 	 * @see WikiPageEntityMetaDataAccessor::loadLatestRevisionIds
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (int|bool)[] Array of entity ID serialization => revision IDs
 	 * or false if an entity could not be found (including if the page is a redirect).
@@ -232,7 +233,7 @@ class PrefetchingWikiPageEntityMetaDataAccessor implements
 
 		$revisionIds = [];
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
 			foreach ( $entityIds as $index => $entityId ) {
 				$id = $entityId->getSerialization();
 				$data = $this->cache->get( $id );

@@ -19,6 +19,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
@@ -193,7 +194,7 @@ class EditEntity extends ModifyEntity {
 			if ( $preparedParameters['baserevid'] && $exists ) {
 				$latestRevisionResult = $this->revisionLookup->getLatestRevisionId(
 					$entity->getId(),
-					EntityRevisionLookup::LATEST_FROM_MASTER
+					 LookupConstants::LATEST_FROM_MASTER
 				);
 
 				$returnFalse = function () {

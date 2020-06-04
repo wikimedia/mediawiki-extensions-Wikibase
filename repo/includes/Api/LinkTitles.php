@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\WikibaseRepo;
@@ -143,7 +144,7 @@ class LinkTitles extends ApiBase {
 		} elseif ( $fromId === null && $toId !== null ) {
 			// reuse to-site's item
 			/** @var Item $item */
-			$itemRev = $lookup->getEntityRevision( $toId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$itemRev = $lookup->getEntityRevision( $toId, 0, LookupConstants::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
 			'@phan-var Item $item';
 			$fromLink = new SiteLink( $fromSite->getGlobalId(), $fromPage );
@@ -153,7 +154,7 @@ class LinkTitles extends ApiBase {
 		} elseif ( $fromId !== null && $toId === null ) {
 			// reuse from-site's item
 			/** @var Item $item */
-			$itemRev = $lookup->getEntityRevision( $fromId, 0, EntityRevisionLookup::LATEST_FROM_MASTER );
+			$itemRev = $lookup->getEntityRevision( $fromId, 0, LookupConstants::LATEST_FROM_MASTER );
 			$item = $itemRev->getEntity();
 			'@phan-var Item $item';
 			$toLink = new SiteLink( $toSite->getGlobalId(), $toPage );

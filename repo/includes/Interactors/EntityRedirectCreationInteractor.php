@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
@@ -150,7 +151,7 @@ abstract class EntityRedirectCreationInteractor {
 			$revision = $this->entityRevisionLookup->getEntityRevision(
 				$entityId,
 				0,
-				EntityRevisionLookup::LATEST_FROM_MASTER
+				 LookupConstants::LATEST_FROM_MASTER
 			);
 
 			if ( !$revision ) {

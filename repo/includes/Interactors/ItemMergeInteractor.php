@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
@@ -207,7 +208,7 @@ class ItemMergeInteractor {
 			$revision = $this->entityRevisionLookup->getEntityRevision(
 				$itemId,
 				0,
-				EntityRevisionLookup::LATEST_FROM_MASTER
+				 LookupConstants::LATEST_FROM_MASTER
 			);
 
 			if ( !$revision ) {

@@ -11,6 +11,7 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\PropertyDataTypeChanger;
 
@@ -99,7 +100,7 @@ class PropertyDataTypeChangerTest extends \PHPUnit\Framework\TestCase {
 			->with(
 				$this->isInstanceOf( PropertyId::class ),
 				0,
-				EntityRevisionLookup::LATEST_FROM_MASTER
+				 LookupConstants::LATEST_FROM_MASTER
 			)
 			->will( $this->returnCallback( function( PropertyId $propertyId ) {
 				if ( $propertyId->getSerialization() === 'P42' ) {

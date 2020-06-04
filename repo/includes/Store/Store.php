@@ -39,10 +39,6 @@ interface Store {
 	const LOOKUP_CACHING_DISABLED = 'uncached';
 	const LOOKUP_CACHING_RETRIEVE_ONLY = 'retrieve-only';
 
-	const LATEST_FROM_REPLICA = LookupConstants::LATEST_FROM_REPLICA;
-	const LATEST_FROM_REPLICA_WITH_FALLBACK = LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK;
-	const LATEST_FROM_MASTER = LookupConstants::LATEST_FROM_MASTER;
-
 	/**
 	 * @return SiteLinkStore
 	 */
@@ -127,7 +123,7 @@ interface Store {
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED, string $lookupMode = self::LATEST_FROM_REPLICA );
+	public function getEntityLookup( $cache = self::LOOKUP_CACHING_ENABLED, string $lookupMode = LookupConstants::LATEST_FROM_REPLICA );
 
 	/**
 	 * @param string $cache One of self::LOOKUP_CACHING_*

@@ -5,6 +5,7 @@ namespace Wikibase\DataAccess;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -43,7 +44,7 @@ class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		$lookup = $this->getLookupForEntity( $entityId );
 
@@ -54,7 +55,7 @@ class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 		return $lookup->getEntityRevision( $entityId, $revisionId, $mode );
 	}
 
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		$lookup = $this->getLookupForEntity( $entityId );
 
 		if ( $lookup === null ) {

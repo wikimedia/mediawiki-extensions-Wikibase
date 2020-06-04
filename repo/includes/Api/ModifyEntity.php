@@ -10,6 +10,7 @@ use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
@@ -191,7 +192,7 @@ abstract class ModifyEntity extends ApiBase {
 			$currentEntityRevision = $this->revisionLookup->getEntityRevision(
 				$entity->getId(),
 				0,
-				EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+				 LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
 			);
 			if ( $currentEntityRevision ) {
 				$currentEntityResult = $changeOp->validate( $currentEntityRevision->getEntity() );

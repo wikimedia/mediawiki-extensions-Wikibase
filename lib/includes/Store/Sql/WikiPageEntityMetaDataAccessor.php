@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Store\Sql;
 
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 
 /**
  * Interface for services giving access to meta data about one or more entities as needed for
@@ -26,9 +26,9 @@ interface WikiPageEntityMetaDataAccessor {
 	 * 'page_latest'.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects
 	 * or false if an entity could not be found.
@@ -40,21 +40,21 @@ interface WikiPageEntityMetaDataAccessor {
 	 * revision of the entity or to load entity content from a MediaWiki revision. Included fields are
 	 * 'rev_id', 'rev_timestamp', 'page_latest'.
 	 * Given that revision are immutable, this function will always try to load a revision from
-	 * replica first and only use the master (with EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
-	 * or EntityRevisionLookup::LATEST_FROM_MASTER) in case the revision couldn't be found.
+	 * replica first and only use the master (with LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
+	 * or LookupConstants::LATEST_FROM_MASTER) in case the revision couldn't be found.
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId Revision id to fetch data about, must be an integer greater than 0.
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER).
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER).
 	 *
 	 * @return stdClass|bool false if no such entity exists
 	 */
 	public function loadRevisionInformationByRevisionId(
 		EntityId $entityId,
 		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+		$mode = LookupConstants::LATEST_FROM_MASTER
 	);
 
 	/**
@@ -62,9 +62,9 @@ interface WikiPageEntityMetaDataAccessor {
 	 * Returns an array of integer revision IDs
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (int|bool)[] Array mapping entity ID serializations to either revision IDs
 	 * or false if an entity could not be found (including if the page is a redirect).

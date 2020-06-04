@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store\Sql;
 use InvalidArgumentException;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -70,9 +70,9 @@ class TypeDispatchingWikiPageEntityMetaDataAccessor implements WikiPageEntityMet
 	 * @see WikiPageEntityMetaDataAccessor::loadRevisionInformation
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (stdClass|bool)[] Array mapping entity ID serializations to either objects
 	 * or false if an entity could not be found.
@@ -97,16 +97,16 @@ class TypeDispatchingWikiPageEntityMetaDataAccessor implements WikiPageEntityMet
 	 *
 	 * @param EntityId $entityId
 	 * @param int $revisionId Revision id to fetch data about, must be an integer greater than 0.
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER).
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER).
 	 *
 	 * @return stdClass|bool false if no such entity exists
 	 */
 	public function loadRevisionInformationByRevisionId(
 		EntityId $entityId,
 		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+		$mode = LookupConstants::LATEST_FROM_MASTER
 	) {
 		return $this
 			->getAccessor( $entityId->getEntityType() )
@@ -117,9 +117,9 @@ class TypeDispatchingWikiPageEntityMetaDataAccessor implements WikiPageEntityMet
 	 * @see WikiPageEntityMetaDataAccessor::loadLatestRevisionIds
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @return (int|bool)[] Array mapping entity ID serializations to either revision IDs
 	 * or false if an entity could not be found (including if the page is a redirect).

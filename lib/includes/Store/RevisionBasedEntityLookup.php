@@ -28,7 +28,7 @@ class RevisionBasedEntityLookup implements EntityLookup {
 	 */
 	private $lookupMode;
 
-	public function __construct( EntityRevisionLookup $lookup, string $lookupMode = EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+	public function __construct( EntityRevisionLookup $lookup, string $lookupMode = LookupConstants::LATEST_FROM_REPLICA ) {
 		$this->lookup = $lookup;
 		$this->lookupMode = $lookupMode;
 	}

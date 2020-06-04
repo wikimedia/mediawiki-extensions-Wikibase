@@ -17,6 +17,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\InconsistentRedirectException;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikimedia\Assert\Assert;
@@ -91,7 +92,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	) {
 		Assert::parameterType( 'integer', $revisionId, '$revisionId' );
 		Assert::parameterType( 'string', $mode, '$mode' );
@@ -178,7 +179,7 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @throws InconsistentRedirectException
 	 * @return LatestRevisionIdResult
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA ) {
+	public function getLatestRevisionId( EntityId $entityId, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
 		$rows = $this->entityMetaDataAccessor->loadRevisionInformation( [ $entityId ], $mode );
 		$row = $rows[$entityId->getSerialization()];
 
@@ -219,8 +220,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 	 * @return array list( EntityRevision|null $entityRevision, EntityRedirect|null $entityRedirect )
 	 * with either $entityRevision or $entityRedirect or both being null (but not both being non-null).
 	 */
-	private function loadEntity( $row, $mode = self::LATEST_FROM_REPLICA ) {
-		$revStoreFlags = ( $mode == self::LATEST_FROM_MASTER || $mode == self::LATEST_FROM_REPLICA_WITH_FALLBACK )
+	private function loadEntity( $row, $mode = LookupConstants::LATEST_FROM_REPLICA ) {
+		$revStoreFlags = ( $mode == LookupConstants::LATEST_FROM_MASTER || $mode == LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK )
 			? IDBAccessObject::READ_LATEST : 0;
 
 		// TODO: WikiPageEntityMetaDataLookup should use RevisionStore::getQueryInfo,

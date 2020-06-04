@@ -10,7 +10,7 @@ use stdClass;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikimedia\Rdbms\DBQueryError;
 
 /**
@@ -70,9 +70,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
 	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
@@ -85,11 +85,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		$this->assertCanHandleEntityIds( $entityIds );
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
 			$rows = $this->selectRevisionInformationMultiple( $entityIds, DB_REPLICA );
 		}
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+		if ( $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
 			// Attempt to load (missing) rows from master if the caller asked for that.
 			$loadFromMaster = [];
 			/** @var EntityId $entityId */
@@ -125,13 +125,13 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	public function loadRevisionInformationByRevisionId(
 		EntityId $entityId,
 		$revisionId,
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER
+		$mode = LookupConstants::LATEST_FROM_MASTER
 	) {
 		$this->assertCanHandleEntityId( $entityId );
 
 		$row = $this->selectRevisionInformationById( $entityId, $revisionId, DB_REPLICA );
 
-		if ( !$row && $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+		if ( !$row && $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
 			// Try loading from master, unless the caller only wants replica data.
 			$this->logger->debug(
 				'{method}: try to load {entityId} with {revisionId} from DB_MASTER.',
@@ -150,9 +150,9 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 	/**
 	 * @param EntityId[] $entityIds
-	 * @param string $mode (EntityRevisionLookup::LATEST_FROM_REPLICA,
-	 *     EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *     EntityRevisionLookup::LATEST_FROM_MASTER)
+	 * @param string $mode ( LookupConstants::LATEST_FROM_REPLICA,
+	 *     LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *     LookupConstants::LATEST_FROM_MASTER)
 	 *
 	 * @throws DBQueryError
 	 * @throws InvalidArgumentException When some of $entityIds does not belong the repository of this lookup
@@ -165,11 +165,11 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 
 		$this->assertCanHandleEntityIds( $entityIds );
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_MASTER ) {
+		if ( $mode !== LookupConstants::LATEST_FROM_MASTER ) {
 			$revisionIds = $this->selectLatestRevisionIdsMultiple( $entityIds, DB_REPLICA );
 		}
 
-		if ( $mode !== EntityRevisionLookup::LATEST_FROM_REPLICA ) {
+		if ( $mode !== LookupConstants::LATEST_FROM_REPLICA ) {
 			// Attempt to load (missing) rows from master if the caller asked for that.
 			$loadFromMaster = [];
 			/** @var EntityId $entityId */

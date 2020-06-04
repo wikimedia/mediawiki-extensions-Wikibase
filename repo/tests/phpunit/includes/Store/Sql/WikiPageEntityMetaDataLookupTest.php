@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Repo\WikibaseRepo;
@@ -213,7 +213,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
 			$entityRevision->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+			 LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		$this->assertEquals( $entityRevision->getRevisionId(), $result->rev_id );
@@ -229,7 +229,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $lookup->loadRevisionInformationByRevisionId(
 			$entityRevision->getEntity()->getId(),
 			$entityRevision->getRevisionId(),
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 
 		// No fallback: Lagged data is omitted.
@@ -311,7 +311,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadRevisionInformation(
 				$entityIds,
-				EntityRevisionLookup::LATEST_FROM_REPLICA
+				 LookupConstants::LATEST_FROM_REPLICA
 			);
 
 		$this->assertRevisionInformation( $entityIds, $result );
@@ -334,7 +334,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadRevisionInformation(
 			$entityIds,
-			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+			 LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		$this->assertRevisionInformation( $entityIds, $result );
@@ -348,7 +348,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->expectException( EntityLookupException::class );
 		$metaDataLookup->loadRevisionInformation(
 			[ $entityId ],
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -358,7 +358,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->expectException( InvalidArgumentException::class );
 		$lookup->loadRevisionInformation(
 			[ new PropertyId( 'P123' ) ],
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -369,7 +369,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$lookup->loadRevisionInformationByRevisionId(
 			new PropertyId( 'P123' ),
 			1,
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -439,7 +439,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadLatestRevisionIds(
 				$entityIds,
-				EntityRevisionLookup::LATEST_FROM_REPLICA
+				 LookupConstants::LATEST_FROM_REPLICA
 			);
 
 		$this->assertLatestRevisionIds( $entityIds, $result );
@@ -459,7 +459,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$result = $lookup->loadLatestRevisionIds(
 			$entityIds,
-			EntityRevisionLookup::LATEST_FROM_REPLICA_WITH_FALLBACK
+			 LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK
 		);
 
 		$this->assertLatestRevisionIds( $entityIds, $result );
@@ -473,7 +473,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$this->expectException( EntityLookupException::class );
 		$result = $metaDataLookup->loadLatestRevisionIds(
 			[ $entityId ],
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
 
@@ -483,7 +483,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 		$result = $this->getWikiPageEntityMetaDataLookup()
 			->loadLatestRevisionIds(
 				[ $entityId ],
-				EntityRevisionLookup::LATEST_FROM_REPLICA
+				 LookupConstants::LATEST_FROM_REPLICA
 			);
 
 		$this->assertSame( [ $entityId->getSerialization() => false ], $result );
@@ -496,7 +496,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 
 		$lookup->loadLatestRevisionIds(
 			[ new PropertyId( 'P123' ) ],
-			EntityRevisionLookup::LATEST_FROM_REPLICA
+			 LookupConstants::LATEST_FROM_REPLICA
 		);
 	}
 

@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 
@@ -24,7 +24,7 @@ use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\TestCase {
 
 	public function testPrefetch() {
-		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$fromReplica = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -71,7 +71,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	 * automatically resizes the cache to handle that.
 	 */
 	public function testPrefetch_moreAtOnce() {
-		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$fromReplica = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -103,7 +103,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	 * discard some entities in order to store the ones that are immediately needed.
 	 */
 	public function testPrefetch_discardPrefetch() {
-		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$fromReplica = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -138,8 +138,8 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$q4 = new ItemId( 'Q4' );
 		$q5 = new ItemId( 'Q5' );
 
-		$fromMaster = EntityRevisionLookup::LATEST_FROM_MASTER;
-		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$fromMaster = LookupConstants::LATEST_FROM_MASTER;
+		$fromReplica = LookupConstants::LATEST_FROM_REPLICA;
 
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->exactly( 3 ) )
@@ -227,7 +227,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
 			->method( 'loadRevisionInformationByRevisionId' )
-			->with( $q1, 123, EntityRevisionLookup::LATEST_FROM_MASTER )
+			->with( $q1, 123, LookupConstants::LATEST_FROM_MASTER )
 			->will( $this->returnValue( 'passthrough' ) );
 
 		$accessor = new PrefetchingWikiPageEntityMetaDataAccessor( $lookup, new NullLogger() );
@@ -238,7 +238,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_usesCache() {
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
@@ -259,7 +259,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_usesLookup() {
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
@@ -283,7 +283,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_mergesCacheAndLookup() {
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 		$q3 = new ItemId( 'Q3' );
@@ -329,7 +329,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_masterSkipsCache() {
-		$mode = EntityRevisionLookup::LATEST_FROM_MASTER;
+		$mode = LookupConstants::LATEST_FROM_MASTER;
 		$q1 = new ItemId( 'Q1' );
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
 		$lookup->expects( $this->once() )
@@ -352,7 +352,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_doesPrefetch() {
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 		$q2 = new ItemId( 'Q2' );
 
@@ -381,7 +381,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	}
 
 	public function testLoadLatestRevisionIds_noResultForRedirect() {
-		$mode = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$mode = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );
@@ -410,7 +410,7 @@ class PrefetchingWikiPageEntityMetaDataAccessorTest extends \PHPUnit\Framework\T
 	 * @param array $params
 	 */
 	private function purgeMethodTest( $method, array $params ) {
-		$fromReplica = EntityRevisionLookup::LATEST_FROM_REPLICA;
+		$fromReplica = LookupConstants::LATEST_FROM_REPLICA;
 		$q1 = new ItemId( 'Q1' );
 
 		$lookup = $this->createMock( WikiPageEntityMetaDataAccessor::class );

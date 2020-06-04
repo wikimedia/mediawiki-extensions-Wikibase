@@ -130,6 +130,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\ItemTermStoreWriterAdapter;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
+use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
@@ -963,7 +964,7 @@ class WikibaseRepo {
 	 *
 	 * @return EntityLookup
 	 */
-	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED, $lookupMode = Store::LATEST_FROM_REPLICA ) {
+	public function getEntityLookup( $cache = Store::LOOKUP_CACHING_ENABLED, $lookupMode = LookupConstants::LATEST_FROM_REPLICA ) {
 		return $this->getStore()->getEntityLookup( $cache, $lookupMode );
 	}
 

@@ -13,32 +13,6 @@ use Wikibase\DataModel\Entity\EntityId;
 interface EntityRevisionLookup {
 
 	/**
-	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
-	 * but a slightly lagged version is acceptable. This would generally be the case when fetching
-	 * entities for display.
-	 */
-	const LATEST_FROM_REPLICA = 'replica';
-
-	/**
-	 * Flag used to indicate that loading slightly lagged data is fine (like
-	 * LATEST_FROM_REPLICA), but in case an entity or revision couldn't be found,
-	 * we try loading it from master.
-	 *
-	 * Note that this flag must only be used in code that is exclusively called from POST requests,
-	 * since master may reside in a different datacenter and GET requests which trigger reading or
-	 * writing to master result in an error in that case.
-	 */
-	const LATEST_FROM_REPLICA_WITH_FALLBACK = 'master_fallback';
-
-	/**
-	 * Flag to use instead of a revision ID to indicate that the latest revision is desired,
-	 * and it is essential to assert that there really is no newer version, to avoid data loss
-	 * or conflicts. This would generally be the case when loading an entity for
-	 * editing/modification.
-	 */
-	const LATEST_FROM_MASTER = 'master';
-
-	/**
 	 * Returns the entity revision with the provided id or null if there is no such
 	 * entity or if access is forbidden. If a $revisionId is given, the requested revision of the entity is loaded.
 	 * If that revision does not exist or does not belong to the given entity,
@@ -48,8 +22,8 @@ interface EntityRevisionLookup {
 	 *
 	 * @param EntityId $entityId
 	 * @param int|null $revisionId The desired revision id, or 0 for the latest revision.
-	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or
-	 *        LATEST_FROM_MASTER.
+	 * @param string $mode LookupConstants::LATEST_FROM_REPLICA, LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 *        LookupConstants::LATEST_FROM_MASTER.
 	 *
 	 * @throws RevisionedUnresolvedRedirectException
 	 * @throws StorageException
@@ -58,7 +32,7 @@ interface EntityRevisionLookup {
 	public function getEntityRevision(
 		EntityId $entityId,
 		$revisionId = 0,
-		$mode = self::LATEST_FROM_REPLICA
+		$mode = LookupConstants::LATEST_FROM_REPLICA
 	);
 
 	/**
@@ -68,11 +42,15 @@ interface EntityRevisionLookup {
 	 * They can however return a LatestRevisionIdResult object containing information about the redirect.
 	 *
 	 * @param EntityId $entityId
-	 * @param string $mode LATEST_FROM_REPLICA, LATEST_FROM_REPLICA_WITH_FALLBACK or LATEST_FROM_MASTER.
-	 *        LATEST_FROM_MASTER would force the revision to be determined from the canonical master database.
+	 * @param string $mode LookupConstants::LATEST_FROM_REPLICA, LookupConstants::LATEST_FROM_REPLICA_WITH_FALLBACK or
+	 * LookupConstants::LATEST_FROM_MASTER.
+	 * 	LATEST_FROM_MASTER would force the revision to be determined from the canonical master database.
 	 *
 	 * @return LatestRevisionIdResult
 	 */
-	public function getLatestRevisionId( EntityId $entityId, $mode = self::LATEST_FROM_REPLICA );
+	public function getLatestRevisionId(
+		EntityId $entityId,
+		$mode = LookupConstants::LATEST_FROM_REPLICA
+	);
 
 }
