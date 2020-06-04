@@ -22,6 +22,7 @@ use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
@@ -121,7 +122,12 @@ class ShowSearchHitHandler {
 			return;
 		}
 
-		$entity = $this->getEntity( $title );
+		try {
+			$entity = $this->getEntity( $title );
+		} catch ( RevisionedUnresolvedRedirectException $exception ) {
+			return;
+		}
+
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			return;
 		}
