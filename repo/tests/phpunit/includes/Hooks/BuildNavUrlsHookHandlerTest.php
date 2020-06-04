@@ -54,6 +54,7 @@ class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
 		$this->entityNamespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 
 		$this->skin = $this->createMock( SkinTemplate::class );
+		$this->skin->method( 'msg' )->willReturn( $this->createMock( Message::class ) );
 
 		$this->mockTitle = $this->createMock( Title::class );
 

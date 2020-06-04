@@ -25,7 +25,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 
-		$this->getOutput()->addHTML( $this->msg( 'wikibase-listdatatypes-intro' ) );
+		$this->getOutput()->addHTML( $this->msg( 'wikibase-listdatatypes-intro' )->parse() );
 		$this->getOutput()->addHTML( Html::openElement( 'dl' ) );
 
 		// some of the datatype descriptions

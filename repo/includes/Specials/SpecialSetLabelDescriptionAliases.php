@@ -131,7 +131,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		);
 
 		if ( !$status->isOK() ) {
-			$this->showErrorHTML( $this->msg( 'permissionserrors' ) );
+			$this->showErrorHTML( $this->msg( 'permissionserrors' )->parse() );
 			return false;
 		}
 
@@ -323,7 +323,7 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		if ( $this->assertNoPipeCharacterInAliases( $entity->getFingerprint() ) ) {
 			$logger = LoggerFactory::getInstance( 'Wikibase' );
 			$logger->error( 'Special:SpecialSetLabelDescriptionAliases attempt to save pipes in aliases' );
-			$this->showErrorHTML( $this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' ) );
+			$this->showErrorHTML( $this->msg( 'wikibase-wikibaserepopage-pipe-in-alias' )->parse() );
 			return false;
 		}
 		$changeOps = $this->getChangeOps( $entity->getFingerprint() );

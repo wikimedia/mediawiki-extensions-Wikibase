@@ -108,9 +108,9 @@ class BuildNavUrlsHookHandler {
 
 		return [
 			'wb-concept-uri' => [
-				'text' => $skin->msg( 'wikibase-concept-uri' ),
+				'text' => $skin->msg( 'wikibase-concept-uri' )->text(),
 				'href' => $this->baseConceptUri . $entityId->getSerialization(),
-				'title' => $skin->msg( 'wikibase-concept-uri-tooltip' )
+				'title' => $skin->msg( 'wikibase-concept-uri-tooltip' )->text()
 			]
 		];
 	}

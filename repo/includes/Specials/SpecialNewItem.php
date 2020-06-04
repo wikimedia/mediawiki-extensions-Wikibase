@@ -200,7 +200,7 @@ class SpecialNewItem extends SpecialNewEntity {
 	 * @return string
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-newitem-fieldset' );
+		return $this->msg( 'wikibase-newitem-fieldset' )->parse();
 	}
 
 	/**

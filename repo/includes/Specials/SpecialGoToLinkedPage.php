@@ -249,7 +249,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 	private function outputError() {
 		if ( $this->errorMessageKey !== null ) {
 			$this->showErrorHTML(
-				$this->msg( 'wikibase-gotolinkedpage-error-' . $this->errorMessageKey ) );
+				$this->msg( 'wikibase-gotolinkedpage-error-' . $this->errorMessageKey )->parse() );
 		}
 	}
 
