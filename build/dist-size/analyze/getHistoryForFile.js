@@ -29,14 +29,11 @@ module.exports = async function ( client, repoOwner, repoName, filePath ) {
 
 		fileHistory.forEach( ( value, index ) => {
 			const sizeInfo = byteSizes[ `commit${index}` ];
-			if ( sizeInfo === null ) {
-				return;
-			}
 			history.push( {
 				sha: value.oid,
 				date: value.committedDate,
 				subject: value.messageHeadline,
-				size: sizeInfo.byteSize,
+				size: sizeInfo ? sizeInfo.byteSize : null,
 			} );
 		} );
 
