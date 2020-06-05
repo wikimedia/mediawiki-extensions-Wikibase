@@ -100,5 +100,6 @@
 	"wikibase-client-data-bridge-error-go-back": "Zréck goen",
 	"wikibase-client-data-bridge-thank-you-head": "Merci fir Är Ännerung!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Referenz op {{WBREPONAME}} änneren",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Dir sidd net ageloggt",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Späicheren ouni anzeloggen"
 }

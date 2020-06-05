@@ -163,7 +163,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Atualizar página",
 	"wikibase-client-data-bridge-error-go-back": "Voltar",
 	"wikibase-client-data-bridge-error-retry-save": "Repetir salvamento",
-	"wikibase-client-data-bridge-login-warning": "Após entrar com sucesso, <strong>feche esta guia e retorne à guia original</strong> para tentar novamente salvar.",
+	"wikibase-client-data-bridge-login-warning": "Após entrar, <strong>feche esta guia e retorne à guia original</strong> para tentar novamente salvar.",
 	"wikibase-client-data-bridge-reference-note": "A edição de referências será possível em {{WBREPONAME}} depois de salvar",
 	"wikibase-client-data-bridge-thank-you-head": "Obrigado pela sua edição!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Você pode editar as referências para esta propriedade em {{WBREPONAME}} clicando no botão abaixo.",
