@@ -2,7 +2,6 @@
 
 namespace Wikibase\Repo\Hooks\Formatters;
 
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 
 /**
@@ -21,14 +20,14 @@ interface EntityLinkFormatter {
 
 	/**
 	 * Get "title" attribute for Wikidata entity link.
-	 * @param EntityId|Title $entityIdOrTitle
+	 * @param EntityId $entityId
 	 * @param string[]|null $labelData
 	 * @param string[]|null $descriptionData
 	 *
 	 * @return string The plain, unescaped title="…" attribute for the link.
 	 */
 	public function getTitleAttribute(
-		$entityIdOrTitle,
+		EntityId $entityId,
 		array $labelData = null,
 		array $descriptionData = null
 	);
