@@ -31,17 +31,21 @@ async function main() {
 	} );
 
 	const data = {};
-	for ( const filePath of files ) {
-		console.info( `Analysing ${filePath}` );
-		data[ filePath ] = await getHistoryForFile( client, repoOwner, repoName, filePath );
-	}
+	await Promise.all( files.map(
+		async ( filePath ) => {
+			data[ filePath ] = await getHistoryForFile( client, repoOwner, repoName, filePath );
+			console.info( `Analysed ${filePath}` );
+		},
+	) );
 
 	await fs.mkdir( outputDirectory );
-	await fs.writeFile( `${outputDirectory}/data.json`, JSON.stringify( data ) );
-	await fs.copyFile( 'build/dist-size/web/index.html', `${outputDirectory}/index.html` );
 	await fs.mkdir( `${outputDirectory}/lib` );
-	await fs.copyFile( 'build/dist-size/web/lib/main.js', `${outputDirectory}/lib/main.js` );
-	await fs.copyFile( 'node_modules/plotly.js/dist/plotly.min.js', `${outputDirectory}/lib/plotly.js` );
+	await Promise.all( [
+		fs.writeFile( `${outputDirectory}/data.json`, JSON.stringify( data ) ),
+		fs.copyFile( 'build/dist-size/web/index.html', `${outputDirectory}/index.html` ),
+		fs.copyFile( 'build/dist-size/web/lib/main.js', `${outputDirectory}/lib/main.js` ),
+		fs.copyFile( 'node_modules/plotly.js/dist/plotly.min.js', `${outputDirectory}/lib/plotly.js` ),
+	] );
 }
 
 main().catch( ( e ) => {
