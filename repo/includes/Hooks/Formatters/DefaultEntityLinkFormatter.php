@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Hooks\Formatters;
 
 use HtmlArmor;
 use Language;
-use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 
@@ -84,7 +83,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 * @inheritDoc
 	 */
 	public function getTitleAttribute(
-		$entityIdOrTitle,
+		EntityId $entityId,
 		array $labelData = null,
 		array $descriptionData = null
 	) {
@@ -95,19 +94,10 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 		list( $descriptionText, $descriptionLang ) = $this->extractTextAndLanguage( $descriptionData );
 
 		// Set title attribute for constructed link, and make tricks with the directionality to get it right
-		if ( $entityIdOrTitle instanceof EntityId ) {
-			$titleText = ( $labelText !== '' )
-				? $labelLang->getDirMark() . $labelText
-				. $this->pageLanguage->getDirMark()
-				: $this->entityTitleTextLookup->getPrefixedText( $entityIdOrTitle );
-		} elseif ( $entityIdOrTitle instanceof Title ) {
-			$titleText = ( $labelText !== '' )
-				? $labelLang->getDirMark() . $labelText
-				. $this->pageLanguage->getDirMark()
-				: $entityIdOrTitle->getPrefixedText();
-		} else {
-			throw new \LogicException( '$entityIdOrTitle should have been Title or EntityId' );
-		}
+		$titleText = ( $labelText !== '' )
+			? $labelLang->getDirMark() . $labelText
+			. $this->pageLanguage->getDirMark()
+			: $this->entityTitleTextLookup->getPrefixedText( $entityId );
 
 		if ( $descriptionText !== '' ) {
 			$descriptionText = $descriptionLang->getDirMark() . $descriptionText
