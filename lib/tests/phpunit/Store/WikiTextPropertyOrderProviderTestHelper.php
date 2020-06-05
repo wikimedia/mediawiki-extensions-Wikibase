@@ -20,7 +20,7 @@ class WikiTextPropertyOrderProviderTestHelper {
 			'syntax that is not accepted' => [
 				"*\nP1\n"
 				. "* P2P\n"
-				. "# P3\n"
+				. " # P3\n"
 				. " * P4\n"
 				. "* Property:P5\n"
 				. "* [[d:P6]]\n"
@@ -41,6 +41,21 @@ class WikiTextPropertyOrderProviderTestHelper {
 			'multiple bullets' => [
 				"* P1 \n"
 				. "** P2 \n",
+				[ 'P1' => 0, 'P2' => 1 ]
+			],
+			'ordered list' => [
+				"# P1 \n"
+				. "# P2 \n",
+				[ 'P1' => 0, 'P2' => 1 ]
+			],
+			'ordered with multiple pounds' => [
+				"# P1 \n"
+				. "## P2 \n",
+				[ 'P1' => 0, 'P2' => 1 ]
+			],
+			'mixed bullets and pounds' => [
+				"# P1 \n"
+				. "#* P2 \n",
 				[ 'P1' => 0, 'P2' => 1 ]
 			],
 			'strip multiline comment' => [
