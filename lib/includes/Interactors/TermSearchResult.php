@@ -88,13 +88,6 @@ class TermSearchResult {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getRepositoryName() {
-		return $this->entityId->getRepositoryName();
-	}
-
-	/**
 	 * @return Term|null
 	 */
 	public function getDisplayLabel() {
