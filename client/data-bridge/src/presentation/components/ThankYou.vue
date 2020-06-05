@@ -67,6 +67,11 @@ export default class ThankYou extends Vue {
 	&__body {
 		@include body-responsive();
 		@include marginForCenterColumn( 3 * $base-spacing-unit );
+		max-width: calc( 100% - 2 * #{$margin-center-column-side} ); // restrict text content to parent width - margin
+
+		@media ( max-width: $breakpoint ) {
+			max-width: 100%; // margin is 0 on mobile (see marginForCenterColum() mixin)
+		}
 	}
 
 	&__button {
