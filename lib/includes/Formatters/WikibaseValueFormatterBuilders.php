@@ -43,11 +43,6 @@ use Wikimedia\Assert\Assert;
 class WikibaseValueFormatterBuilders {
 
 	/**
-	 * @var Language
-	 */
-	private $defaultLanguage;
-
-	/**
 	 * @var FormatterLabelDescriptionLookupFactory
 	 */
 	private $labelDescriptionLookupFactory;
@@ -155,7 +150,6 @@ class WikibaseValueFormatterBuilders {
 	private $entityRedirectChecker;
 
 	/**
-	 * @param Language $defaultLanguage
 	 * @param FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityIdParser $itemUriParser
@@ -176,7 +170,6 @@ class WikibaseValueFormatterBuilders {
 	 * @param array $thumbLimits
 	 */
 	public function __construct(
-		Language $defaultLanguage,
 		FormatterLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
 		LanguageNameLookup $languageNameLookup,
 		EntityIdParser $itemUriParser,
@@ -232,7 +225,6 @@ class WikibaseValueFormatterBuilders {
 			'$thumbLimits'
 		);
 
-		$this->defaultLanguage = $defaultLanguage;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->languageNameLookup = $languageNameLookup;
 		$this->itemUriParser = $itemUriParser;
