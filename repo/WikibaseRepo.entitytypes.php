@@ -163,7 +163,8 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			return new DefaultEntityLinkFormatter( $language );
+			$repo = WikibaseRepo::getDefaultInstance();
+			return new DefaultEntityLinkFormatter( $language, $repo->getEntityTitleTextLookup() );
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();
@@ -275,7 +276,8 @@ return [
 			);
 		},
 		Def::LINK_FORMATTER_CALLBACK => function( Language $language ) {
-			return new DefaultEntityLinkFormatter( $language );
+			$repo = WikibaseRepo::getDefaultInstance();
+			return new DefaultEntityLinkFormatter( $language, $repo->getEntityTitleTextLookup() );
 		},
 		Def::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK => function( Language $language ) {
 			$repo = WikibaseRepo::getDefaultInstance();

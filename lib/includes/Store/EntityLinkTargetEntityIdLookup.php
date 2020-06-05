@@ -9,11 +9,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 
 /**
- * In the context of this class for lack of a better name a "simple entity" is an entity
- * which has a title whose main text is a parseable entity ID.
- * For example: Property:P123 or Item:Q3
+ * @license GPL-2.0-or-later
  */
-class SimpleEntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
+class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -31,18 +29,24 @@ class SimpleEntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 	}
 
 	public function getEntityId( LinkTarget $linkTarget ): ?EntityId {
-		$entityTypeForNamespace = $this->entityNamespaceLookup->getEntityType( $linkTarget->getNamespace() );
-		if ( !$entityTypeForNamespace ) {
-			return null;
+		if ( $linkTarget->getNamespace() === -1 && explode( '/', $linkTarget->getText(), 2 )[0] === 'EntityPage' ) {
+			$idText = explode( '/', $linkTarget->getText(), 2 )[1];
+		} else {
+			$idText = $linkTarget->getText();
+
+			$entityTypeForNamespace = $this->entityNamespaceLookup->getEntityType( $linkTarget->getNamespace() );
+			if ( !$entityTypeForNamespace ) {
+				return null;
+			}
 		}
 
 		try {
-			$entityId = $this->entityIdParser->parse( $linkTarget->getText() );
+			$entityId = $this->entityIdParser->parse( $idText );
 		} catch ( EntityIdParsingException $e ) {
 			return null;
 		}
 
-		if ( $entityId->getEntityType() !== $entityTypeForNamespace ) {
+		if ( isset( $entityTypeForNamespace ) && $entityId->getEntityType() !== $entityTypeForNamespace ) {
 			throw new RuntimeException( 'Managed to lookup EntityId but got an unexpected type for namespace.' );
 		}
 

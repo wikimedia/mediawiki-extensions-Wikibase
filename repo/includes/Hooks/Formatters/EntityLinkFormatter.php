@@ -21,13 +21,17 @@ interface EntityLinkFormatter {
 
 	/**
 	 * Get "title" attribute for Wikidata entity link.
-	 * @param Title $title
+	 * @param EntityId|Title $entityIdOrTitle
 	 * @param string[]|null $labelData
 	 * @param string[]|null $descriptionData
 	 *
 	 * @return string The plain, unescaped title="…" attribute for the link.
 	 */
-	public function getTitleAttribute( Title $title, array $labelData = null, array $descriptionData = null );
+	public function getTitleAttribute(
+		$entityIdOrTitle,
+		array $labelData = null,
+		array $descriptionData = null
+	);
 
 	/**
 	 * Optionally update the fragment of the link.

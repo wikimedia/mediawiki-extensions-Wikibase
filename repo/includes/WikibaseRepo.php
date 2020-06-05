@@ -118,6 +118,7 @@ use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRedirectChecker;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -132,7 +133,6 @@ use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\PropertyTermStoreWriterAdapter;
-use Wikibase\Lib\Store\SimpleEntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
@@ -1364,7 +1364,7 @@ class WikibaseRepo {
 	 */
 	private function newSummaryFormatter() {
 		// This needs to use an EntityIdPlainLinkFormatter as we want to mangle
-		// the links created in HtmlPageLinkRendererBeginHookHandler afterwards (the links must not
+		// the links created in HtmlPageLinkRendererEndHookHandler afterwards (the links must not
 		// contain a display text: [[Item:Q1]] is fine but [[Item:Q1|Q1]] isn't).
 		$idFormatter = new EntityIdPlainLinkFormatter( $this->getEntityTitleLookup() );
 
@@ -2439,7 +2439,11 @@ class WikibaseRepo {
 	}
 
 	public function getEntityLinkFormatterFactory( Language $language ) {
-		return new EntityLinkFormatterFactory( $language, $this->entityTypeDefinitions->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK ) );
+		return new EntityLinkFormatterFactory(
+			$language,
+			$this->getEntityTitleTextLookup(),
+			$this->entityTypeDefinitions->get( EntityTypeDefinitions::LINK_FORMATTER_CALLBACK )
+		);
 	}
 
 	/**
@@ -2526,7 +2530,7 @@ class WikibaseRepo {
 	}
 
 	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
-		return new SimpleEntityLinkTargetEntityIdLookup( $this->getEntityNamespaceLookup(), $this->getEntityIdParser() );
+		return new EntityLinkTargetEntityIdLookup( $this->getEntityNamespaceLookup(), $this->getEntityIdParser() );
 	}
 
 }

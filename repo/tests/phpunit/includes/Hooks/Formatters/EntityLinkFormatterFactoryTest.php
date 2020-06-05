@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks\Formatters;
 
 use Language;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikimedia\Assert\ParameterElementTypeException;
@@ -18,9 +19,9 @@ use Wikimedia\Assert\ParameterTypeException;
 class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 
 	public function testGivenEntityTypeWithRegisteredCallback_returnsCallbackResult() {
-		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), [
+		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), $this->getEntityTitleTextLookup(), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language );
+				return new DefaultEntityLinkFormatter( $language, $this->getEntityTitleTextLookup() );
 			},
 		] );
 
@@ -30,8 +31,12 @@ class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 		);
 	}
 
+	private function getEntityTitleTextLookup() {
+		return $this->createMock( EntityTitleTextLookup::class );
+	}
+
 	public function testGivenUnknownEntityType_returnsDefaultFormatter() {
-		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), [] );
+		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), $this->getEntityTitleTextLookup(),  [] );
 
 		$this->assertInstanceOf(
 			DefaultEntityLinkFormatter::class,
@@ -44,7 +49,7 @@ class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 	 */
 	public function testGivenNotArrayOfCallbacks_throwsException( $notCallbacks ) {
 		$this->expectException( ParameterElementTypeException::class );
-		new EntityLinkFormatterFactory( Language::factory( 'en' ), $notCallbacks );
+		new EntityLinkFormatterFactory( Language::factory( 'en' ), $this->getEntityTitleTextLookup(), $notCallbacks );
 	}
 
 	/**
@@ -52,14 +57,14 @@ class EntityLinkFormatterFactoryTest extends \MediaWikiTestCase {
 	 */
 	public function testGivenEntityTypeNotAString_getLinkFormatterThrowsException( $notAString ) {
 		$this->expectException( ParameterTypeException::class );
-		( new EntityLinkFormatterFactory( Language::factory( 'en' ), [] ) )
+		( new EntityLinkFormatterFactory( Language::factory( 'en' ), $this->getEntityTitleTextLookup(), [] ) )
 			->getLinkFormatter( $notAString );
 	}
 
 	public function testGivenSameTypeAndLanguage_getLinkFormatterCachesResult() {
-		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), [
+		$factory = new EntityLinkFormatterFactory( Language::factory( 'en' ), $this->getEntityTitleTextLookup(), [
 			'item' => function ( $language ) {
-				return new DefaultEntityLinkFormatter( $language );
+				return new DefaultEntityLinkFormatter( $language, $this->getEntityTitleTextLookup() );
 			},
 		] );
 
