@@ -271,13 +271,26 @@ class MediawikiEditEntity implements EditEntity {
 
 	/**
 	 * Is the entity new?
-	 * An entity is new in case it either doesn't have an id or the Title belonging
-	 * to it doesn't (yet) exist.
 	 *
 	 * @return bool
 	 */
 	private function isNew() {
 		return $this->getEntityId() === null || $this->getLatestRevisionId() === 0;
+	}
+
+	/**
+	 * Does this entity belong to a new page?
+	 * (An entity may {@link isNew be new}, and yet not belong to a new page,
+	 * e. g. if it is stored in a non-main slot.)
+	 *
+	 * @return bool
+	 */
+	private function isNewPage(): bool {
+		$title = $this->getTitle();
+		if ( $title !== null ) {
+			return !$title->exists();
+		}
+		return true;
 	}
 
 	/**
@@ -773,13 +786,14 @@ class MediawikiEditEntity implements EditEntity {
 	private function getWatchDefault() {
 		// User wants to watch all edits or all creations.
 		if ( $this->user->getOption( 'watchdefault' )
-			|| ( $this->user->getOption( 'watchcreations' ) && $this->isNew() )
+			|| ( $this->user->getOption( 'watchcreations' ) && $this->isNewPage() )
 		) {
 			return true;
 		}
 
 		// keep current state
-		return !$this->isNew() && $this->entityStore->isWatching( $this->user, $this->getEntityId() );
+		return $this->getEntityId() !== null &&
+			$this->entityStore->isWatching( $this->user, $this->getEntityId() );
 	}
 
 	/**
