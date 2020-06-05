@@ -69,12 +69,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	 */
 	public function getNamespaceChecker() {
 		if ( $this->namespaceChecker === null ) {
-			$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
-			$this->namespaceChecker = new NamespaceChecker(
-				$settings->getSetting( 'excludeNamespaces' ),
-				$settings->getSetting( 'namespaces' )
-			);
+			$this->namespaceChecker = WikibaseClient::getDefaultInstance()->getNamespaceChecker();
 		}
 
 		return $this->namespaceChecker;
