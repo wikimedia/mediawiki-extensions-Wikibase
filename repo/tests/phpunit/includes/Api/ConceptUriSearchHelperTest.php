@@ -85,7 +85,6 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getEntityId(), $results[0]->getEntityId() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTerm(), $results[0]->getMatchedTerm() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
-		$this->assertSame( $property1TermSearchResult->getRepositoryName(), $results[0]->getRepositoryName() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
 				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri
@@ -139,7 +138,6 @@ class ConceptUriSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getEntityId(), $results[0]->getEntityId() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTerm(), $results[0]->getMatchedTerm() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
-		$this->assertSame( $property1TermSearchResult->getRepositoryName(), $results[0]->getRepositoryName() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
 				ConceptUriSearchHelper::CONCEPTURI_META_DATA_KEY => $property1ConceptUri

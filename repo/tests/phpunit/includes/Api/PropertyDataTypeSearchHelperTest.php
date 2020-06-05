@@ -77,7 +77,6 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property1TermSearchResult->getEntityId(), $results[0]->getEntityId() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTerm(), $results[0]->getMatchedTerm() );
 		$this->assertSame( $property1TermSearchResult->getMatchedTermType(), $results[0]->getMatchedTermType() );
-		$this->assertSame( $property1TermSearchResult->getRepositoryName(), $results[0]->getRepositoryName() );
 		$this->assertEquals(
 			array_merge( $property1TermSearchResult->getMetaData(), [
 				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property1Datatype
@@ -90,7 +89,6 @@ class PropertyDataTypeSearchHelperTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( $property2TermSearchResult->getEntityId(), $results[1]->getEntityId() );
 		$this->assertSame( $property2TermSearchResult->getMatchedTerm(), $results[1]->getMatchedTerm() );
 		$this->assertSame( $property2TermSearchResult->getMatchedTermType(), $results[1]->getMatchedTermType() );
-		$this->assertSame( $property2TermSearchResult->getRepositoryName(), $results[1]->getRepositoryName() );
 		$this->assertEquals(
 			array_merge( $property2TermSearchResult->getMetaData(), [
 				PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $property2Datatype
