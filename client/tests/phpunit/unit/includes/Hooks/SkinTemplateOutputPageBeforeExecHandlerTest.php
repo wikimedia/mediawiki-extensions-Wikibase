@@ -9,7 +9,6 @@ use IContextSource;
 use OutputPage;
 use PHPUnit\Framework\TestCase;
 use Skin;
-use SkinFallbackTemplate;
 use SkinTemplate;
 use Title;
 use Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler;
@@ -98,16 +97,16 @@ class SkinTemplateOutputPageBeforeExecHandlerTest extends TestCase {
 	}
 
 	/**
-	 * Changes $actualLanguageUrls and $actualWbeditlanglinks when SkinFallbackTemplate::set is called.
+	 * Changes $actualLanguageUrls and $actualWbeditlanglinks when SkinFTemplate::set is called.
 	 *
 	 * @param mixed $languageUrls
 	 * @param mixed &$actualLanguageUrls
 	 * @param mixed &$actualWbeditlanglinks
 	 *
-	 * @return SkinFallbackTemplate
+	 * @return SkinTemplate
 	 */
 	private function getTemplate( $languageUrls, &$actualLanguageUrls, &$actualWbeditlanglinks = null ) {
-		$template = $this->createMock( SkinFallbackTemplate::class );
+		$template = $this->createMock( SkinTemplate::class );
 
 		$template->expects( $this->any() )
 			->method( 'get' )
