@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Store;
 
+use BagOStuff;
 use MediaWiki\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use WANObjectCache;
@@ -26,7 +27,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	protected $lookup;
 
 	/**
-	 * @var WANObjectCache
+	 * @var BagOStuff|WANObjectCache
 	 */
 	protected $cache;
 
@@ -59,14 +60,14 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 
 	/**
 	 * @param PropertyInfoLookup $lookup The info lookup to call back to.
-	 * @param WANObjectCache $cache
+	 * @param BagOStuff|WANObjectCache $cache
 	 * @param string $cacheKeyGroup Group name of the Wikibases to be used when generating global cache keys
 	 * @param int $cacheDuration Number of seconds to keep the cached version for.
 	 *                                   Defaults to 3600 seconds = 1 hour.
 	 */
 	public function __construct(
 		PropertyInfoLookup $lookup,
-		WANObjectCache $cache,
+		$cache,
 		$cacheKeyGroup,
 		$cacheDuration = 3600
 	) {
@@ -107,7 +108,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 			return null;
 		}
 
-		$info = $this->getPropertyInfoFromWANCache( $propertyId );
+		$info = $this->getPropertyInfoFromCache( $propertyId );
 		$this->propertyInfo[$id] = $info;
 		return $info;
 	}
@@ -117,11 +118,11 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 	 *
 	 * @return array|null
 	 */
-	private function getPropertyInfoFromWANCache( PropertyId $propertyId ) {
+	private function getPropertyInfoFromCache( PropertyId $propertyId ) {
 		$info = $this->cache->getWithSetCallback(
 			$this->getSinglePropertyCacheKey( $propertyId ),
 			$this->cacheDuration,
-			function ( $oldValue, &$ttl, array &$setOpts ) use ( $propertyId ) {
+			function () use ( $propertyId ) {
 				$allInfo = $this->getAllPropertyInfo();
 				$id = $propertyId->getSerialization();
 
@@ -165,7 +166,7 @@ class CachingPropertyInfoLookup implements PropertyInfoLookup {
 			$this->propertyInfo = $this->cache->getWithSetCallback(
 				$this->getFullTableCacheKey(),
 				$this->cacheDuration,
-				function ( $oldValue, &$ttl, array &$setOpts ) use ( &$wanCacheHit, $fname ) {
+				function () use ( &$wanCacheHit, $fname ) {
 					$this->logger->debug(
 						'{method}: caching fresh property info table', [ 'method' => $fname ]
 					);
