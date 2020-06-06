@@ -341,7 +341,7 @@ DEFAULT: ```[]``` (meaning RDF is available for all entity types)
 Formats that shall be available via SpecialEntityData.
 
 The first format will be used as the default.
-This is a whitelist, some formats may not be supported because when missing optional dependencies (e.g. purtle).
+Even if a format is allowed here, it may not be supported because when missing optional dependencies (e.g. purtle).
 The formats are given using logical names as used by EntityDataSerializationService.
 
 #### dataCdnMaxAge

@@ -2119,7 +2119,7 @@ class WikibaseRepo {
 	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
-		$entityDataFormatProvider->setFormatWhiteList( $formats );
+		$entityDataFormatProvider->setAllowedFormats( $formats );
 
 		$services = MediaWikiServices::getInstance();
 
