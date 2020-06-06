@@ -105,7 +105,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 			} );
 
 		return new WikibaseValueFormatterBuilders(
-			Language::factory( 'en' ),
 			new FormatterLabelDescriptionLookupFactory( $termLookup ),
 			$languageNameLookup,
 			new ItemIdParser(),

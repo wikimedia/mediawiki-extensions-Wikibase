@@ -519,7 +519,6 @@ class WikibaseRepo {
 	 */
 	private function newWikibaseValueFormatterBuilders( array $thumbLimits ) {
 		return new WikibaseValueFormatterBuilders(
-			$this->getContentLanguage(),
 			new FormatterLabelDescriptionLookupFactory( $this->getTermLookup() ),
 			$this->getLanguageNameLookup(),
 			$this->getItemUrlParser(),
