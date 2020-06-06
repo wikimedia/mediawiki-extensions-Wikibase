@@ -117,7 +117,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @throws InvalidArgumentException
 	 * @return EntityUsage[]
 	 */
-	private function handleBlacklistedUsages( array $usages ) {
+	private function handleDisabledUsages( array $usages ) {
 		$newUsages = [];
 
 		foreach ( $usages as $usage ) {
@@ -162,7 +162,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			);
 		}
 
-		$usages = $this->handleBlacklistedUsages( $usages );
+		$usages = $this->handleDisabledUsages( $usages );
 		if ( empty( $usages ) ) {
 			return;
 		}
@@ -214,7 +214,7 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 			// queryUsages guarantees this to be identity string => EntityUsage
 			$oldUsages = $usageTable->queryUsages( $pageId );
 
-			$usages = $this->handleBlacklistedUsages( $usages );
+			$usages = $this->handleDisabledUsages( $usages );
 			$newUsages = $this->reindexEntityUsages( $usages );
 
 			$removed = array_diff_key( $oldUsages, $newUsages );

@@ -102,7 +102,7 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		);
 		$sqlUsageTracker->addUsedEntities( 23, $usages );
 
-		// All entries but the blacklisted should be set
+		// All entries but the disabled ones should be set
 		$this->assertEquals(
 			[ 'Q3#S', 'Q3#O', 'Q4#L.de', 'Q4#O', 'Q5#O' ],
 			array_keys( $this->getUsages( 23 ) )
@@ -113,7 +113,7 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 		$this->trackerTester->testReplaceUsedEntities();
 	}
 
-	public function testReplaceUsedEntitiesBlacklist() {
+	public function testReplaceUsedEntitiesWithDisabledUsageAspects() {
 		$q3 = new ItemId( 'Q3' );
 		$q4 = new ItemId( 'Q4' );
 
@@ -130,18 +130,18 @@ class SqlUsageTrackerTest extends MediaWikiTestCase {
 			[],
 			100
 		);
-		// Make sure the blacklisted entries are actually removed.
+		// Make sure the disabled entries are actually removed.
 		$sqlUsageTracker->addUsedEntities( 23, $usages );
 
-		$sqlUsageTrackerWithBlacklist = new SqlUsageTracker(
+		$sqlUsageTrackerWithDisabledUsageAspects = new SqlUsageTracker(
 			new ItemIdParser(),
 			new SessionConsistentConnectionManager( $lb ),
 			[ EntityUsage::STATEMENT_USAGE ],
 			100
 		);
-		$sqlUsageTrackerWithBlacklist->replaceUsedEntities( 23, $usages );
+		$sqlUsageTrackerWithDisabledUsageAspects->replaceUsedEntities( 23, $usages );
 
-		// All entries but the blacklisted should be set
+		// All entries but the disabled ones should be set
 		$this->assertEquals(
 			[ 'Q3#S', 'Q4#L.de' ],
 			array_keys( $this->getUsages( 23 ) )
