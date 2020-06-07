@@ -45,7 +45,8 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		try {
 			$request = $this->requestFactory->create(
 				$this->formatUrl( $entityId, $revision, $language, $editLink, $preferredLanguages ),
-				[ 'timeout' => $this->ssrServerTimeout ]
+				[ 'timeout' => $this->ssrServerTimeout ],
+				__METHOD__
 			);
 			$request->execute();
 		} catch ( Exception $e ) {

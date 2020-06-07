@@ -40,7 +40,7 @@ class GenericActionApiClient {
 
 	public function get( array $params ): ResponseInterface {
 		$url = $this->getUrlFromParams( $params );
-		$request = $this->requestFactory->create( $url );
+		$request = $this->requestFactory->create( $url, [], __METHOD__ );
 		$request->execute();
 		$this->logger->debug( 'Requested: ' . $url );
 

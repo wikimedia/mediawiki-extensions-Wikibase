@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Maintenance;
 
-use Http;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -109,7 +108,7 @@ class PopulateSitesTable extends Maintenance {
 	protected function getSiteMatrixData( $url ) {
 		$url .= '?action=sitematrix&format=json';
 
-		$json = Http::get( $url );
+		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
 
 		if ( !$json ) {
 			throw new MWException( "Got no data from $url\n" );

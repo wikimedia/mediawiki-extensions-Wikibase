@@ -3,8 +3,8 @@
 namespace Wikibase;
 
 use BagOStuff;
-use Http;
 use Maintenance;
+use MediaWiki\MediaWikiServices;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )
@@ -84,7 +84,7 @@ TEXT
 			$url = rtrim( $this->source, '?' ) . '?' . $url;
 		}
 
-		$json = Http::get( $url );
+		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
 		$data = json_decode( $json, true );
 
 		if ( is_array( $data ) ) {
