@@ -245,7 +245,7 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 
 	private function newEntityParserOutputGenerator( $title = null, $description = null ) {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'ntriples' ] );
+		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'ntriples' ] );
 
 		$entityTitleLookup = $this->getEntityTitleLookupMock();
 

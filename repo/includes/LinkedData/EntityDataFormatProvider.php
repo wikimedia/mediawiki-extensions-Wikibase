@@ -16,11 +16,11 @@ use Wikimedia\Purtle\RdfWriterFactory;
 class EntityDataFormatProvider {
 
 	/**
-	 * White list of supported formats.
+	 * List of allowed formats. If non-null, only formats listed here are allowed.
 	 *
 	 * @var string[]|null
 	 */
-	private $formatWhiteList = null;
+	private $allowedFormats = null;
 
 	/**
 	 * @var null|array Associative array from MIME type to format name
@@ -44,10 +44,10 @@ class EntityDataFormatProvider {
 	}
 
 	/**
-	 * @param string[]|null $formatWhiteList
+	 * @param string[]|null $allowedFormats
 	 */
-	public function setFormatWhiteList( array $formatWhiteList = null ) {
-		$this->formatWhiteList = $formatWhiteList;
+	public function setAllowedFormats( array $allowedFormats = null ) {
+		$this->allowedFormats = $allowedFormats;
 
 		// force re-init of format maps
 		$this->fileExtensions = null;
@@ -57,8 +57,8 @@ class EntityDataFormatProvider {
 	/**
 	 * @return string[]|null
 	 */
-	public function getFormatWhiteList() {
-		return $this->formatWhiteList;
+	public function getAllowedFormats() {
+		return $this->allowedFormats;
 	}
 
 	/**
@@ -174,7 +174,7 @@ class EntityDataFormatProvider {
 		$formatNames = $api->getModuleManager()->getNames( 'format' );
 
 		foreach ( $formatNames as $name ) {
-			if ( $this->formatWhiteList !== null && !in_array( $name, $this->formatWhiteList ) ) {
+			if ( $this->allowedFormats !== null && !in_array( $name, $this->allowedFormats ) ) {
 				continue;
 			}
 
@@ -193,9 +193,9 @@ class EntityDataFormatProvider {
 		$formats = $this->rdfWriterFactory->getSupportedFormats();
 
 		foreach ( $formats as $name ) {
-			// check whitelist, and don't override API formats
-			if ( ( $this->formatWhiteList !== null
-					&& !in_array( $name, $this->formatWhiteList ) )
+			// check allowed formats, and don't override API formats
+			if ( ( $this->allowedFormats !== null
+					&& !in_array( $name, $this->allowedFormats ) )
 				|| in_array( $name, $this->mimeTypes )
 				|| in_array( $name, $this->fileExtensions )
 			) {

@@ -93,7 +93,7 @@ class EntityDataFormatProviderTest extends \MediaWikiTestCase {
 	private function getProvider() {
 		$provider = new EntityDataFormatProvider();
 
-		$provider->setFormatWhiteList(
+		$provider->setAllowedFormats(
 			[
 				// using the API
 				'json', // default

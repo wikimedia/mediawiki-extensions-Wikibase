@@ -137,7 +137,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			true
 		);
 
-		$entityDataFormatProvider->setFormatWhiteList(
+		$entityDataFormatProvider->setAllowedFormats(
 			[
 				// using the API
 				'json', // default

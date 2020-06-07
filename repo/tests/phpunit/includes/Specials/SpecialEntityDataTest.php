@@ -123,7 +123,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];
-		$entityDataFormatProvider->setFormatWhiteList( $formats );
+		$entityDataFormatProvider->setAllowedFormats( $formats );
 
 		$defaultFormat = 'rdf';
 		$supportedExtensions = array_combine( $formats, $formats );
@@ -221,7 +221,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 	private function newEntityDataFormatProvider() {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
-		$entityDataFormatProvider->setFormatWhiteList( [ 'json', 'rdfxml', 'ntriples' ] );
+		$entityDataFormatProvider->setAllowedFormats( [ 'json', 'rdfxml', 'ntriples' ] );
 
 		return $entityDataFormatProvider;
 	}
