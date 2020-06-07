@@ -74,7 +74,7 @@ class DatabaseSchemaUpdater {
 
 		$this->addChangesTable( $updater, $type );
 
-		if ( $db->tableExists( 'wb_aliases' ) ) {
+		if ( $db->tableExists( 'wb_aliases', __METHOD__ ) ) {
 			// Update from 0.1.
 			$updater->dropExtensionTable( 'wb_items_per_site' );
 			$updater->dropExtensionTable( 'wb_items' );
@@ -87,7 +87,7 @@ class DatabaseSchemaUpdater {
 			);
 
 			$this->store->rebuild();
-		} elseif ( !$db->tableExists( 'wb_items_per_site' ) ) {
+		} elseif ( !$db->tableExists( 'wb_items_per_site', __METHOD__ ) ) {
 			// Clean installation
 			$updater->addExtensionTable(
 				'wb_items_per_site',
@@ -103,7 +103,7 @@ class DatabaseSchemaUpdater {
 
 		$this->registerPropertyInfoTableUpdates( $updater );
 
-		if ( $db->tableExists( 'wb_entity_per_page' ) ) {
+		if ( $db->tableExists( 'wb_entity_per_page', __METHOD__ ) ) {
 			$updater->dropExtensionTable( 'wb_entity_per_page' );
 		}
 
@@ -430,7 +430,7 @@ class DatabaseSchemaUpdater {
 	 */
 	private function updateTermsTable( DatabaseUpdater $updater, IDatabase $db ) {
 		// ---- Update from 0.1 or 0.2. ----
-		if ( !$db->fieldExists( 'wb_terms', 'term_search_key' ) ) {
+		if ( !$db->fieldExists( 'wb_terms', 'term_search_key', __METHOD__ ) ) {
 			$updater->addExtensionField(
 				'wb_terms',
 				'term_search_key',

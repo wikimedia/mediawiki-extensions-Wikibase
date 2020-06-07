@@ -88,7 +88,8 @@ class SqlIdGenerator implements IdGenerator {
 			$success = $database->update(
 				'wb_id_counters',
 				[ 'id_value' => $id ],
-				[ 'id_type' => $type ]
+				[ 'id_type' => $type ],
+				__METHOD__
 			);
 		} else {
 			$id = 1;
@@ -98,7 +99,8 @@ class SqlIdGenerator implements IdGenerator {
 				[
 					'id_value' => $id,
 					'id_type' => $type,
-				]
+				],
+				__METHOD__
 			);
 
 			// Retry once, since a race condition on initial insert can cause one to fail.

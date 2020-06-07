@@ -284,7 +284,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 		$existingRows = $db->select(
 			$this->table,
 			$selectColumns,
-			$db->makeList( $recordsSelectConditions, IDatabase::LIST_OR )
+			$db->makeList( $recordsSelectConditions, IDatabase::LIST_OR ),
+			__METHOD__
 		);
 
 		$existingRecords = [];

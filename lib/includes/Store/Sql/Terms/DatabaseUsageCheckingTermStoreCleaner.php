@@ -81,12 +81,14 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 			$usedInProperties = $dbw->selectField(
 				'wbt_property_terms',
 				'wbpt_term_in_lang_id',
-				[ 'wbpt_term_in_lang_id' => $termInLangId ]
+				[ 'wbpt_term_in_lang_id' => $termInLangId ],
+				__METHOD__
 			);
 			$usedInItems = $dbw->selectField(
 				'wbt_item_terms',
 				'wbit_term_in_lang_id',
-				[ 'wbit_term_in_lang_id' => $termInLangId ]
+				[ 'wbit_term_in_lang_id' => $termInLangId ],
+				__METHOD__
 			);
 
 			if ( $usedInProperties === false && $usedInItems === false ) {

@@ -75,7 +75,7 @@ class DatabasePropertyTermStoreWriter implements PropertyTermStoreWriter {
 					)
 				);
 			}
-		} );
+		}, __METHOD__ );
 	}
 
 	/**

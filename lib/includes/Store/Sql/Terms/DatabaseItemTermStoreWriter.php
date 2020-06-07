@@ -75,7 +75,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 					)
 				);
 			}
-		} );
+		}, __METHOD__ );
 	}
 
 	/**
@@ -139,7 +139,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 						$fname,
 						[ 'IGNORE' ]
 					);
-				} );
+				}, $fname );
 			}
 		);
 

@@ -264,7 +264,8 @@ class SiteLinkTable extends DBAccessBase implements SiteLinkStore {
 			[
 				'ips_site_id' => $globalSiteId,
 				'ips_site_page' => $pageTitle,
-			]
+			],
+			__METHOD__
 		);
 
 		$this->releaseConnection( $db );

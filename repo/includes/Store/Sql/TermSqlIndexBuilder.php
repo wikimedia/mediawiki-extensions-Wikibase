@@ -298,7 +298,7 @@ class TermSqlIndexBuilder {
 				count( $rowIds )
 			);
 			foreach ( $rowIds as $id ) {
-				$db->delete( self::TABLE_NAME, [ 'term_row_id' => $id ] );
+				$db->delete( self::TABLE_NAME, [ 'term_row_id' => $id ], __METHOD__ );
 			}
 		}
 	}

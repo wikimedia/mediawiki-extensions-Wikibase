@@ -114,7 +114,8 @@ class DatabaseInnerTermStoreCleaner {
 			$stillUsed = $this->dbw->selectField(
 				'wbt_term_in_lang',
 				'wbtl_text_in_lang_id',
-				[ 'wbtl_text_in_lang_id' => $textInLangId ]
+				[ 'wbtl_text_in_lang_id' => $textInLangId ],
+				__METHOD__
 			);
 
 			if ( $stillUsed === false ) {
@@ -229,7 +230,8 @@ class DatabaseInnerTermStoreCleaner {
 			$stillUsed = $this->dbw->selectField(
 				'wbt_text_in_lang',
 				'wbxl_text_id',
-				[ 'wbxl_text_id' => $textId ]
+				[ 'wbxl_text_id' => $textId ],
+				__METHOD__
 			);
 
 			if ( $stillUsed === false ) {
