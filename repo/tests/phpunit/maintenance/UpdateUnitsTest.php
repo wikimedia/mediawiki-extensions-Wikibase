@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\DecimalMath;
 use MediaWikiLangTestCase;
-use Wikibase\UpdateUnits;
+use Wikibase\Repo\Maintenance\UpdateUnits;
 
 /**
- * @covers \Wikibase\UpdateUnits
+ * @covers \Wikibase\Repo\Maintenance\UpdateUnits
  *
  * @group Wikibase
  *

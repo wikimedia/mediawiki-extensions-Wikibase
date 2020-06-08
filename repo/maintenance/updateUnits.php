@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use DataValues\DecimalMath;
 use DataValues\DecimalValue;
