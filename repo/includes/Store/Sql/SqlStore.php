@@ -625,13 +625,8 @@ class SqlStore implements Store {
 	 * @return PropertyInfoStore
 	 */
 	private function newPropertyInfoStore() {
-		// TODO: this should be changed so it uses the same PropertyInfoTable instance which is used by
-		// the lookup configured for local repo in DispatchingPropertyInfoLookup (if using dispatching services
-		// from client). As we don't want to introduce DispatchingPropertyInfoStore service, this should probably
-		// be accessing RepositorySpecificServices of local repo (which is currently not exposed
-		// to/by WikibaseClient).
-		// For non-dispatching-service use case it is already using the same PropertyInfoTable instance
-		// for both store and lookup - no change needed here.
+		// TODO: this should be changed so it uses the same PropertyInfoTable instance which is used by the
+		// lookup configured for local entity source As we don't want to introduce DispatchingPropertyInfoStore service.
 
 		$table = $this->getPropertyInfoTable();
 
