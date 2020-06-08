@@ -16,8 +16,8 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\RepoHooks;
 use Wikibase\SummaryFormatter;
 
 /**

@@ -45,7 +45,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\RebuildPropertyTerms' => __DIR__ . '/maintenance/rebuildPropertyTerms.php',
 	'Wikibase\\RebuildTermSqlIndex' => __DIR__ . '/maintenance/rebuildTermSqlIndex.php',
 	'Wikibase\\RebuildTermsSearchKey' => __DIR__ . '/maintenance/rebuildTermsSearchKey.php',
-	'Wikibase\\RepoHooks' => __DIR__ . '/RepoHooks.php',
 	'Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId' => __DIR__ . '/maintenance/populateTermFullEntityId.php',
 	'Wikibase\\Repo\\Maintenance\\PruneItemsPerSite' => __DIR__ . '/maintenance/pruneItemsPerSite.php',
 	'Wikibase\\Repo\\Maintenance\\RebuildItemsPerSite' => __DIR__ . '/maintenance/rebuildItemsPerSite.php',

@@ -1012,49 +1012,49 @@ call_user_func( function() {
 		);
 	};
 
-	$wgHooks['BeforePageDisplay'][] = 'Wikibase\RepoHooks::onBeforePageDisplay';
+	$wgHooks['BeforePageDisplay'][] = 'Wikibase\Repo\RepoHooks::onBeforePageDisplay';
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
-	$wgHooks['UnitTestsList'][] = 'Wikibase\RepoHooks::registerUnitTests';
-	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\RepoHooks::registerQUnitTests';
+	$wgHooks['UnitTestsList'][] = 'Wikibase\Repo\RepoHooks::registerUnitTests';
+	$wgHooks['ResourceLoaderTestModules'][] = 'Wikibase\Repo\RepoHooks::registerQUnitTests';
 
-	$wgHooks['NamespaceIsMovable'][] = 'Wikibase\RepoHooks::onNamespaceIsMovable';
-	$wgHooks['RevisionFromEditComplete'][] = 'Wikibase\RepoHooks::onRevisionFromEditComplete';
-	$wgHooks['SkinTemplateNavigation'][] = 'Wikibase\RepoHooks::onPageTabs';
-	$wgHooks['RecentChange_save'][] = 'Wikibase\RepoHooks::onRecentChangeSave';
-	$wgHooks['ArticleDeleteComplete'][] = 'Wikibase\RepoHooks::onArticleDeleteComplete';
-	$wgHooks['ArticleUndelete'][] = 'Wikibase\RepoHooks::onArticleUndelete';
-	$wgHooks['GetPreferences'][] = 'Wikibase\RepoHooks::onGetPreferences';
+	$wgHooks['NamespaceIsMovable'][] = 'Wikibase\Repo\RepoHooks::onNamespaceIsMovable';
+	$wgHooks['RevisionFromEditComplete'][] = 'Wikibase\Repo\RepoHooks::onRevisionFromEditComplete';
+	$wgHooks['SkinTemplateNavigation'][] = 'Wikibase\Repo\RepoHooks::onPageTabs';
+	$wgHooks['RecentChange_save'][] = 'Wikibase\Repo\RepoHooks::onRecentChangeSave';
+	$wgHooks['ArticleDeleteComplete'][] = 'Wikibase\Repo\RepoHooks::onArticleDeleteComplete';
+	$wgHooks['ArticleUndelete'][] = 'Wikibase\Repo\RepoHooks::onArticleUndelete';
+	$wgHooks['GetPreferences'][] = 'Wikibase\Repo\RepoHooks::onGetPreferences';
 	$wgHooks['HtmlPageLinkRendererEnd'][] = 'Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler::onHtmlPageLinkRendererEnd';
 	$wgHooks['ChangesListInitRows'][] = 'Wikibase\Repo\Hooks\LabelPrefetchHookHandlers::onChangesListInitRows';
-	$wgHooks['OutputPageBodyAttributes'][] = 'Wikibase\RepoHooks::onOutputPageBodyAttributes';
-	$wgHooks['FormatAutocomments'][] = 'Wikibase\RepoHooks::onFormat';
-	$wgHooks['PageHistoryLineEnding'][] = 'Wikibase\RepoHooks::onPageHistoryLineEnding';
-	$wgHooks['ApiCheckCanExecute'][] = 'Wikibase\RepoHooks::onApiCheckCanExecute';
-	$wgHooks['SetupAfterCache'][] = 'Wikibase\RepoHooks::onSetupAfterCache';
+	$wgHooks['OutputPageBodyAttributes'][] = 'Wikibase\Repo\RepoHooks::onOutputPageBodyAttributes';
+	$wgHooks['FormatAutocomments'][] = 'Wikibase\Repo\RepoHooks::onFormat';
+	$wgHooks['PageHistoryLineEnding'][] = 'Wikibase\Repo\RepoHooks::onPageHistoryLineEnding';
+	$wgHooks['ApiCheckCanExecute'][] = 'Wikibase\Repo\RepoHooks::onApiCheckCanExecute';
+	$wgHooks['SetupAfterCache'][] = 'Wikibase\Repo\RepoHooks::onSetupAfterCache';
 	$wgHooks['ShowSearchHit'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHit';
 	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHitTitle';
-	$wgHooks['TitleGetRestrictionTypes'][] = 'Wikibase\RepoHooks::onTitleGetRestrictionTypes';
-	$wgHooks['AbuseFilter-contentToString'][] = 'Wikibase\RepoHooks::onAbuseFilterContentToString';
-	$wgHooks['SpecialPage_reorderPages'][] = 'Wikibase\RepoHooks::onSpecialPageReorderPages';
-	$wgHooks['OutputPageParserOutput'][] = 'Wikibase\RepoHooks::onOutputPageParserOutput';
-	$wgHooks['ContentModelCanBeUsedOn'][] = 'Wikibase\RepoHooks::onContentModelCanBeUsedOn';
+	$wgHooks['TitleGetRestrictionTypes'][] = 'Wikibase\Repo\RepoHooks::onTitleGetRestrictionTypes';
+	$wgHooks['AbuseFilter-contentToString'][] = 'Wikibase\Repo\RepoHooks::onAbuseFilterContentToString';
+	$wgHooks['SpecialPage_reorderPages'][] = 'Wikibase\Repo\RepoHooks::onSpecialPageReorderPages';
+	$wgHooks['OutputPageParserOutput'][] = 'Wikibase\Repo\RepoHooks::onOutputPageParserOutput';
+	$wgHooks['ContentModelCanBeUsedOn'][] = 'Wikibase\Repo\RepoHooks::onContentModelCanBeUsedOn';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler::onOutputPageBeforeHtmlRegisterConfig';
-	$wgHooks['APIQuerySiteInfoGeneralInfo'][] = 'Wikibase\RepoHooks::onAPIQuerySiteInfoGeneralInfo';
-	$wgHooks['APIQuerySiteInfoStatisticsInfo'][] = 'Wikibase\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
-	$wgHooks['ImportHandleRevisionXMLTag'][] = 'Wikibase\RepoHooks::onImportHandleRevisionXMLTag';
-	$wgHooks['BaseTemplateToolbox'][] = 'Wikibase\RepoHooks::onBaseTemplateToolbox';
+	$wgHooks['APIQuerySiteInfoGeneralInfo'][] = 'Wikibase\Repo\RepoHooks::onAPIQuerySiteInfoGeneralInfo';
+	$wgHooks['APIQuerySiteInfoStatisticsInfo'][] = 'Wikibase\Repo\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
+	$wgHooks['ImportHandleRevisionXMLTag'][] = 'Wikibase\Repo\RepoHooks::onImportHandleRevisionXMLTag';
+	$wgHooks['BaseTemplateToolbox'][] = 'Wikibase\Repo\RepoHooks::onBaseTemplateToolbox';
 	$wgHooks['SkinTemplateBuildNavUrlsNav_urlsAfterPermalink'][]
 		= 'Wikibase\Repo\Hooks\BuildNavUrlsHookHandler::onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink';
-	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\RepoHooks::onResourceLoaderRegisterModules';
+	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\Repo\RepoHooks::onResourceLoaderRegisterModules';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\Repo\Actions\ViewEntityAction::onBeforeDisplayNoArticleText';
-	$wgHooks['InfoAction'][] = '\Wikibase\RepoHooks::onInfoAction';
-	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\RepoHooks::onBeforePageDisplayMobile';
-	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\RepoHooks::onApiMaxLagInfo';
-	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\RepoHooks::onParserOptionsRegister';
-	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\RepoHooks::onRejectParserCacheValue';
-	$wgHooks['ApiQuery::moduleManager'][] = '\Wikibase\RepoHooks::onApiQueryModuleManager';
-	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\RepoHooks::onParserFirstCallInit';
+	$wgHooks['InfoAction'][] = '\Wikibase\Repo\RepoHooks::onInfoAction';
+	$wgHooks['BeforePageDisplayMobile'][] = '\Wikibase\Repo\RepoHooks::onBeforePageDisplayMobile';
+	$wgHooks['ApiMaxLagInfo'][] = '\Wikibase\Repo\RepoHooks::onApiMaxLagInfo';
+	$wgHooks['ParserOptionsRegister'][] = '\Wikibase\Repo\RepoHooks::onParserOptionsRegister';
+	$wgHooks['RejectParserCacheValue'][] = '\Wikibase\Repo\RepoHooks::onRejectParserCacheValue';
+	$wgHooks['ApiQuery::moduleManager'][] = '\Wikibase\Repo\RepoHooks::onApiQueryModuleManager';
+	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\Repo\RepoHooks::onParserFirstCallInit';
 	$wgHooks['WikibaseRepoEntityTypes'][] =
 		'Wikibase\Repo\Hooks\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes';
 	$wgHooks['ArticleRevisionVisibilitySet'][] = 'Wikibase\Repo\Hooks\ArticleRevisionVisibilitySetHookHandler::onArticleRevisionVisibilitySet';
@@ -1063,7 +1063,7 @@ call_user_func( function() {
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
 
 	// test hooks
-	$wgHooks['MediaWikiPHPUnitTest::startTest'][] = '\Wikibase\RepoHooks::onMediaWikiPHPUnitTestStartTest';
+	$wgHooks['MediaWikiPHPUnitTest::startTest'][] = '\Wikibase\Repo\RepoHooks::onMediaWikiPHPUnitTestStartTest';
 
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge(

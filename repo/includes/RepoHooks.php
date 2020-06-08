@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use ApiBase;
 use ApiEditPage;
@@ -146,7 +146,7 @@ final class RepoHooks {
 	 * @param string[] &$paths
 	 */
 	public static function registerUnitTests( array &$paths ) {
-		$paths[] = __DIR__ . '/tests/phpunit/';
+		$paths[] = __DIR__ . '/../tests/phpunit/';
 	}
 
 	/**
@@ -158,7 +158,7 @@ final class RepoHooks {
 	public static function registerQUnitTests( array &$testModules, ResourceLoader $resourceLoader ) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
-			require __DIR__ . '/tests/qunit/resources.php'
+			require __DIR__ . '/../tests/qunit/resources.php'
 		);
 	}
 
@@ -959,7 +959,7 @@ final class RepoHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
-			'localBasePath' => __DIR__,
+			'localBasePath' => __DIR__ . '/..',
 			'remoteExtPath' => 'Wikibase/repo',
 		];
 
