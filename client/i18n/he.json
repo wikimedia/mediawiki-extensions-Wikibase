@@ -171,7 +171,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "רענון הדף",
 	"wikibase-client-data-bridge-error-go-back": "חזרה",
 	"wikibase-client-data-bridge-error-retry-save": "לנסות לשמור שוב",
-	"wikibase-client-data-bridge-login-warning": "אחרי כניסה מוצלחת, <strong>נא לסגור את הלשונית הזאת ולחזור ללשונית המקורית</strong> כדי לנסות שוב לשמור.",
+	"wikibase-client-data-bridge-login-warning": "אחרי כניסה, <strong>נא לסגור את הלשונית הזאת ולחזור ללשונית המקורית</strong> כדי לנסות שוב לשמור.",
 	"wikibase-client-data-bridge-reference-note": "עריכת מקורות תהיה אפשרית באתר {{WBREPONAME}} אחרי שמירה",
 	"wikibase-client-data-bridge-thank-you-head": "תודה על העריכה שלך!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "באפשרותך לערוך מקורות למאפיין הזה באתר {{WBREPONAME}} באמצעות לחיצה על הכפתור למטה.",

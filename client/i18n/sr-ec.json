@@ -15,7 +15,7 @@
 		]
 	},
 	"wikibase-client-desc": "Клијент за додатак Wikibase",
-	"tooltip-t-wikibase": "Веза ка повезаним подацима ставке у складишту",
+	"tooltip-t-wikibase": "Веза ка ставци на спремишту података",
 	"wikibase-after-page-move": "Ваше премештање се сада треба [$1 одразити на језичну везу ставке на Википодацима]. Тражимо да проверите да ли се то догодило.",
 	"wikibase-after-page-move-queued": "[$1 Ставка Википодатака] повезана са овом страницом ће се аутоматски ажурирати. Напомињемо да се ово не може десити одмах.",
 	"wikibase-after-page-delete": "Веза ка овој страници треба да буде уклоњена из [$1 повезане ставке на Википодацима]. Тражимо да проверите да ли се то догодило.",
@@ -31,7 +31,7 @@
 	"wikibase-comment-sitelink-remove": "Уклоњена веза за језик: $1",
 	"wikibase-comment-multi": "$1 {{PLURAL:$1|промена|промене|промена}}",
 	"wikibase-dataitem": "Ставка на Википодацима",
-	"wikibase-editlinks": "Измени везе",
+	"wikibase-editlinks": "Уреди везе",
 	"wikibase-editlinkstitle": "Измените међујезичке везе",
 	"wikibase-addlinkstitle": "Додајте међујезичне везе",
 	"wikibase-linkitem-addlinks": "Додај везе",

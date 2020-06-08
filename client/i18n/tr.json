@@ -179,7 +179,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Sayfayı yeniden yükle",
 	"wikibase-client-data-bridge-error-go-back": "Geri dön",
 	"wikibase-client-data-bridge-error-retry-save": "Kaydetmeyi tekrar dene",
-	"wikibase-client-data-bridge-login-warning": "Başarıyla oturum açtıktan sonra, kaydetmeyi tekrar denemek için <strong>lütfen bu sekmeyi kapatın ve orijinal sekmesine dönün</strong>.",
+	"wikibase-client-data-bridge-login-warning": "Oturum açtıktan sonra, kaydetmeyi tekrar denemek için <strong>lütfen bu sekmeyi kapatın ve orijinal sekmesine dönün</strong>.",
 	"wikibase-client-data-bridge-reference-note": "Kaynakçayı kaydettikten sonra {{WBREPONAME}} üzerinde düzenleme yapmak mümkün olacak",
 	"wikibase-client-data-bridge-thank-you-head": "Düzenlemeniz için teşekkür ederiz!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Bu düğmeye ilişkin referansları aşağıdaki düğmeyi tıklayarak {{WBREPONAME}} adresinde düzenleyebilirsiniz.",
