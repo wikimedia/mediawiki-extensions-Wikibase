@@ -10,7 +10,7 @@ use Wikimedia\Assert\Assert;
 
 /**
  * An EntityRevisionLookup that dispatches by entity type to inner EntityRevisionLookups.
- * If no lookup is registered for the entity type the the lookup will fail in an unexceptional
+ * If no lookup is registered for the entity type the lookup will fail in an unexceptional
  * way.
  *
  * TODO Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup is similar, but a bit different,

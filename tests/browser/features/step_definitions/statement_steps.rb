@@ -154,7 +154,7 @@ When(/^I edit claim (\d+) in group (\d+)$/) do |claim_index, group_index|
   end
 end
 
-When(/^I memorize the value of the the claim value input field$/) do
+When(/^I memorize the value of the claim value input field$/) do
   @memorized_label = on(ItemPage).claim_value_input_field_element.when_visible.value
 end
 
