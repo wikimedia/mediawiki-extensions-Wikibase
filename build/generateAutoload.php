@@ -26,11 +26,6 @@ class GenerateWikibaseAutoload extends Maintenance {
 
 	public function execute() {
 		$this->generateAutoloadForComponent(
-			'lib',
-			[ 'includes', 'maintenance' ]
-		);
-
-		$this->generateAutoloadForComponent(
 			'repo',
 			[ 'includes', 'maintenance' ]
 		);

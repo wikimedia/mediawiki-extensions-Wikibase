@@ -26,6 +26,9 @@
 		"Wikibase\\Lib\\": "lib/includes/",
 		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
+	"AutoloadClasses": {
+		"Wikibase\\Lib\\Maintenance\\PopulateSitesTable": "lib/maintenance/populateSitesTable.php"
+	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
