@@ -20,6 +20,7 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -146,14 +147,17 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	/**
 	 * @param string[] $languages
 	 * @param Item[] $entities
+	 * @param EntityLookup|null $lookup
+	 *
 	 * @return ShowSearchHitHandler
+	 * @throws MWException
 	 */
-	private function getShowSearchHitHandler( array $languages, array $entities ) {
+	private function getShowSearchHitHandler( array $languages, array $entities, EntityLookup $lookup = null ) {
 		return new ShowSearchHitHandler(
 			$this->getEntityContentFactory(),
 			$this->getMockFallbackChain( $languages ),
 			$this->getEntityIdLookup(),
-			$this->getEntityLookup( $entities ),
+			isset( $lookup ) ? $lookup : $this->getEntityLookup( $entities ),
 			new DefaultEntityLinkFormatter( Language::factory( 'en' ), $this->getEntityTitleTextLookupMock() )
 		);
 	}
@@ -190,14 +194,16 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @param Item[] $entities Map ID -> Entity
 	 * @return EntityLookup
 	 */
-	private function getEntityLookup( array $entities ) {
+	private function getEntityLookup( array $entities = null ) {
 		$entityLookup = $this->createMock( EntityLookup::class );
-		$entityLookup->expects( $this->any() )
-			->method( 'getEntity' )
-			->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {
-				$key = $id->getSerialization();
-				return $entities[$key];
-			} ) );
+		if ( isset( $entities ) ) {
+			$entityLookup->expects( $this->any() )
+				->method( 'getEntity' )
+				->will( $this->returnCallback( function ( ItemId $id ) use ( $entities ) {
+					$key = $id->getSerialization();
+					return $entities[$key];
+				} ) );
+		}
 		return $entityLookup;
 	}
 
@@ -317,6 +323,50 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 				$size;
 
 		$this->assertFileContains( $testFile, $output );
+	}
+
+	/**
+	 * Searches of items with Double Redirects result in RevisionedUnresolvedRedirectException
+	 * being thrown by the EntityLookup, this should be handled and not bubble up to the ui.
+	 *
+	 * @see https://phabricator.wikimedia.org/T251880
+	 */
+	public function testRedirectExceptionsShouldReturnNothing() {
+		$displayLanguage = 'en';
+		$languages = [ $displayLanguage ];
+
+		$lookup = $this->getEntityLookup();
+		$lookup->expects( $this->any() )
+			->method( 'getEntity' )
+			->willThrowException( new RevisionedUnresolvedRedirectException( new ItemId( 'Q1' ), new ItemId( 'Q2' ), "" ) );
+
+		$showHandler = TestingAccessWrapper::newFromObject(
+			$this->getShowSearchHitHandler( $languages, [], $lookup )
+		);
+
+		$link = '<a>link</a>';
+		$extract = '<span>unaltered extract</span>';
+		$redirect = $section = $score = $size = $date = $related = $html = '';
+
+		$showHandler->__call(
+			'showPlainSearchHit',
+			[
+				$this->getSearchPage( $displayLanguage ),
+				$this->getSearchResult( "TITLE" ),
+				[],
+				&$link,
+				&$redirect,
+				&$section,
+				&$extract,
+				&$score,
+				&$size,
+				&$date,
+				&$related,
+				&$html,
+			]
+		);
+		$this->assertSame( '<span>unaltered extract</span>', $extract );
+		$this->assertSame( '', $size );
 	}
 
 	/**
