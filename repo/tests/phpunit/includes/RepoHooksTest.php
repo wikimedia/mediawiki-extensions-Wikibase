@@ -19,12 +19,12 @@ use TitleValue;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\ParserOutput\TermboxView;
+use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\RepoHooks;
 use WikiImporter;
 
 /**
- * @covers \Wikibase\RepoHooks
+ * @covers \Wikibase\Repo\RepoHooks
  *
  * @group Wikibase
  *

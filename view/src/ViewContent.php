@@ -8,7 +8,7 @@ namespace Wikibase\View;
  * The placeholders can e.g. be stored in the (cached) ParserOutput object for later
  * use in the page output.
  * @see \ParserOutput::setExtensionData()
- * @see \Wikibase\RepoHooks::onOutputPageParserOutput()
+ * @see \Wikibase\Repo\RepoHooks::onOutputPageParserOutput()
  *
  * @license GPL-2.0-or-later
  */
