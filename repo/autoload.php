@@ -50,8 +50,8 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Maintenance\\PruneItemsPerSite' => __DIR__ . '/maintenance/pruneItemsPerSite.php',
 	'Wikibase\\Repo\\Maintenance\\RebuildItemsPerSite' => __DIR__ . '/maintenance/rebuildItemsPerSite.php',
 	'Wikibase\\Repo\\Maintenance\\RemoveTermsInLanguage' => __DIR__ . '/maintenance/removeTermsInLanguage.php',
-	'Wikibase\\SearchEntities' => __DIR__ . '/maintenance/searchEntities.php',
+	'Wikibase\\Repo\\Maintenance\\SearchEntities' => __DIR__ . '/maintenance/searchEntities.php',
+	'Wikibase\\Repo\\Maintenance\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
 	'Wikibase\\Store' => __DIR__ . '/includes/Store/Store.php',
 	'Wikibase\\SummaryFormatter' => __DIR__ . '/includes/SummaryFormatter.php',
-	'Wikibase\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
 ];
