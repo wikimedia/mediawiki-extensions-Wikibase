@@ -405,9 +405,16 @@ class DirectSqlStore implements ClientStore {
 		if ( $this->propertyInfoLookup === null ) {
 			$propertyInfoLookup = $this->wikibaseServices->getPropertyInfoLookup();
 
-			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
+			$wanCachedPropertyInfoLookup = new CachingPropertyInfoLookup(
 				$propertyInfoLookup,
 				MediaWikiServices::getInstance()->getMainWANObjectCache(),
+				$this->cacheKeyGroup,
+				$this->cacheDuration
+			);
+
+			$this->propertyInfoLookup = new CachingPropertyInfoLookup(
+				$wanCachedPropertyInfoLookup,
+				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
 				$this->cacheKeyGroup,
 				$this->cacheDuration
 			);
