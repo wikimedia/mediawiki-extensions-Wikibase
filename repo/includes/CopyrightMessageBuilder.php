@@ -52,6 +52,3 @@ class CopyrightMessageBuilder {
 	}
 
 }
-
-/** @deprecated */
-class_alias( CopyrightMessageBuilder::class, 'Wikibase\CopyrightMessageBuilder' );
