@@ -283,6 +283,3 @@ class SummaryFormatter {
 	}
 
 }
-
-/** @deprecated */
-class_alias( SummaryFormatter::class, 'Wikibase\SummaryFormatter' );
