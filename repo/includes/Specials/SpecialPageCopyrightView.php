@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Html;
 use Language;
 use Message;
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\CopyrightMessageBuilder;
 
 /**
  * @license GPL-2.0-or-later

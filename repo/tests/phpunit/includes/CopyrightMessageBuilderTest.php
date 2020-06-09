@@ -3,10 +3,10 @@
 namespace Wikibase\Repo\Tests;
 
 use Language;
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\CopyrightMessageBuilder;
 
 /**
- * @covers \Wikibase\CopyrightMessageBuilder
+ * @covers \Wikibase\Repo\CopyrightMessageBuilder
  *
  * @group Wikibase
  *

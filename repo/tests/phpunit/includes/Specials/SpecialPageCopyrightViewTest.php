@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Specials;
 
 use Language;
 use Message;
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 
 /**

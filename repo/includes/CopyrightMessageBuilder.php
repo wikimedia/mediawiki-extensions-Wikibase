@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use Language;
 use Message;
@@ -52,3 +52,6 @@ class CopyrightMessageBuilder {
 	}
 
 }
+
+/** @deprecated */
+class_alias( CopyrightMessageBuilder::class, 'Wikibase\CopyrightMessageBuilder' );
