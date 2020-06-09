@@ -5,8 +5,6 @@ namespace Wikibase\Repo\Store\Sql;
 use HashBagOStuff;
 use Hooks;
 use MediaWiki\MediaWikiServices;
-use RequestContext;
-use Revision;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -52,8 +50,6 @@ use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\DBQueryError;
-use WikiPage;
 
 /**
  * Implementation of the store interface using an SQL backend via MediaWiki's
@@ -315,38 +311,11 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @inheritDoc
+	 * @see Store::rebuild
+	 *
+	 * Does nothing.
 	 */
 	public function rebuild() {
-		$dbw = wfGetDB( DB_MASTER );
-
-		// TODO: refactor selection code out (relevant for other stores)
-
-		$pages = $dbw->select(
-			[ 'page' ],
-			[ 'page_id', 'page_latest' ],
-			[ 'page_content_model' => WikibaseRepo::getDefaultInstance()->getEntityContentFactory()->getEntityContentModels() ],
-			__METHOD__,
-			[ 'LIMIT' => 1000 ] // TODO: continuation
-		);
-
-		$revLookup = MediaWikiServices::getInstance()->getRevisionLookup();
-		$user = RequestContext::getMain()->getUser();
-
-		// FIXME WikiPage::doEditUpdates is deprecated (T249563)
-		foreach ( $pages as $pageRow ) {
-			$page = WikiPage::newFromID( $pageRow->page_id );
-			$revisionRecord = $revLookup->getRevisionById( $pageRow->page_latest );
-			$revision = new Revision( $revisionRecord );
-			try {
-				$page->doEditUpdates( $revision, $user );
-			} catch ( DBQueryError $e ) {
-				wfLogWarning(
-					'editUpdateFailed for ' . $page->getId() . ' on revision ' .
-					$revisionRecord->getId() . ': ' . $e->getMessage()
-				);
-			}
-		}
 	}
 
 	/**
