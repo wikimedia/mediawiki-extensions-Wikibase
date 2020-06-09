@@ -32,7 +32,6 @@
  */
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\CopyrightMessageBuilder;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
@@ -68,6 +67,7 @@ use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\ItemDisambiguation;
 use Wikibase\Repo\SiteLinkTargetProvider;

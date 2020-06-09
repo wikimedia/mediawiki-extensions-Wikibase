@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials;
 
-use Wikibase\CopyrightMessageBuilder;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetDescription;
 use Wikibase\Repo\WikibaseRepo;
