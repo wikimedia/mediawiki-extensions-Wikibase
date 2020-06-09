@@ -19,16 +19,16 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Reporting\ExceptionHandler;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Dumpers\JsonDumpGenerator;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\Dumpers\JsonDumpGenerator
- * @covers \Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Repo\Dumpers\JsonDumpGenerator
+ * @covers \Wikibase\Repo\Dumpers\DumpGenerator
  *
  * @group Wikibase
  *

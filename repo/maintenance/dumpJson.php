@@ -6,9 +6,9 @@ use MediaWiki\MediaWikiServices;
 use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Dumpers\DumpGenerator;
-use Wikibase\Dumpers\JsonDumpGenerator;
 use Wikibase\Lib\Store\EntityRevisionLookup;
+use Wikibase\Repo\Dumpers\DumpGenerator;
+use Wikibase\Repo\Dumpers\JsonDumpGenerator;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
