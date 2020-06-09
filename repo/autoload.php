@@ -49,7 +49,5 @@ $wgAutoloadClasses += [
 	'Wikibase\\Repo\\Maintenance\\RemoveTermsInLanguage' => __DIR__ . '/maintenance/removeTermsInLanguage.php',
 	'Wikibase\\Repo\\Maintenance\\SearchEntities' => __DIR__ . '/maintenance/searchEntities.php',
 	'Wikibase\\Repo\\Maintenance\\UpdateUnits' => __DIR__ . '/maintenance/updateUnits.php',
-	'Wikibase\\Repo\\Store\\Store' => __DIR__ . '/includes/Store/Store.php',
-	'Wikibase\\Store' => __DIR__ . '/includes/Store/Store.php',
 	'Wikibase\\SummaryFormatter' => __DIR__ . '/includes/SummaryFormatter.php',
 ];

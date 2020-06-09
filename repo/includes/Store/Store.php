@@ -184,6 +184,3 @@ interface Store {
 	public function getChangeStore();
 
 }
-
-/** @deprecated */
-class_alias( Store::class, 'Wikibase\Store' );
