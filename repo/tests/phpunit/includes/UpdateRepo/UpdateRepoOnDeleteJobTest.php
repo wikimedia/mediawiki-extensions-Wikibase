@@ -19,8 +19,8 @@ use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob;
-use Wikibase\SummaryFormatter;
 
 /**
  * @covers \Wikibase\Repo\UpdateRepo\UpdateRepoOnDeleteJob

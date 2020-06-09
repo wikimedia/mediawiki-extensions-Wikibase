@@ -18,7 +18,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.

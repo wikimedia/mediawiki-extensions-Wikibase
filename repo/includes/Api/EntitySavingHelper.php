@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Helper class for api modules to save entities.

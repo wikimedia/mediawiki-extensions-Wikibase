@@ -12,7 +12,7 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Special page for setting the aliases of a Wikibase entity.

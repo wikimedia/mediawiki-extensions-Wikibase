@@ -16,8 +16,8 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * Page for creating new Wikibase properties.

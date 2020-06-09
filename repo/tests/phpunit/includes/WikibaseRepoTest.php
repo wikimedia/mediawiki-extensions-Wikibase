@@ -87,13 +87,13 @@ use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
 use Wikibase\Repo\PropertyInfoBuilder;
 use Wikibase\Repo\SnakFactory;
 use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\ValidatorBuilders;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\EntityExistsValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 

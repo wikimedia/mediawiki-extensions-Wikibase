@@ -16,8 +16,8 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * Abstract special page for setting a value of a Wikibase entity.

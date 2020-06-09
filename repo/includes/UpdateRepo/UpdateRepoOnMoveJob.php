@@ -15,8 +15,8 @@ use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * Job for updating the repo after a page on the client has been moved.

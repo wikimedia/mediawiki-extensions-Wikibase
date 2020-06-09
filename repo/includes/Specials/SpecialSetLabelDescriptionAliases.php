@@ -20,7 +20,7 @@ use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase entity that features

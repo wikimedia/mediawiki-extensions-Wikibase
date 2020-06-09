@@ -14,8 +14,8 @@ use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * Abstract base class for special pages of the WikibaseRepo extension.

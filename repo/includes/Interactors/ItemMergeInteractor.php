@@ -22,7 +22,7 @@ use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Merge\MergeFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * @license GPL-2.0-or-later

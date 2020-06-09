@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo;
 
 use DataValues\DataValue;
 use Exception;
@@ -283,3 +283,6 @@ class SummaryFormatter {
 	}
 
 }
+
+/** @deprecated */
+class_alias( SummaryFormatter::class, 'Wikibase\SummaryFormatter' );

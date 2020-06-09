@@ -20,7 +20,7 @@ use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * @covers \Wikibase\Repo\Api\ApiHelperFactory

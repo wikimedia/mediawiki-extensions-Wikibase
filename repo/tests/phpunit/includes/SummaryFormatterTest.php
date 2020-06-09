@@ -17,11 +17,11 @@ use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\RepoHooks;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
- * @covers \Wikibase\SummaryFormatter
+ * @covers \Wikibase\Repo\SummaryFormatter
  *
  * @group Wikibase
  * @group Database

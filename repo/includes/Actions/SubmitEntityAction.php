@@ -15,8 +15,8 @@ use Title;
 use WatchAction;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 use WikiPage;
 
 /**

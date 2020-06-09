@@ -23,8 +23,8 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
 use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\EditEntity\EditEntity;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
+use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\SummaryFormatter;
 
 /**
  * @covers \Wikibase\Repo\Api\EntitySavingHelper

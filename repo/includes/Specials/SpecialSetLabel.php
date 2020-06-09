@@ -10,7 +10,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Special page for setting the label of a Wikibase entity.

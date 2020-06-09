@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\FormatableSummary;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\SummaryFormatter;
+use Wikibase\Repo\SummaryFormatter;
 
 /**
  * Job template for updating the repo after a change in client.
