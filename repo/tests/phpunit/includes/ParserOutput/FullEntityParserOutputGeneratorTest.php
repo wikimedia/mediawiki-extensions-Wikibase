@@ -5,13 +5,10 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 use DataValues\StringValue;
 use Language;
 use MediaWikiTestCase;
-use Psr\Log\NullLogger;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
 use Title;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
@@ -24,7 +21,6 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
@@ -39,7 +35,6 @@ use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityDocumentView;
 use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\EntityView;
@@ -248,8 +243,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 		$propertyDataTypeMatcher = new PropertyDataTypeMatcher( $this->getPropertyDataTypeLookup() );
 		$repoGroup = $this->createMock( RepoGroup::class );
 
-		$entityIdParser = new BasicEntityIdParser();
-
 		$statementUpdater = new CompositeStatementDataUpdater(
 			new ExternalLinksDataUpdater( $propertyDataTypeMatcher ),
 			new ImageLinksDataUpdater( $propertyDataTypeMatcher, $repoGroup )
@@ -272,21 +265,6 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
 			$this->getEntityMetaTagsFactory( $title, $description ),
 			$this->getConfigBuilderMock(),
 			$entityTitleLookup,
-			new SqlEntityInfoBuilder(
-				$entityIdParser,
-				WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup(),
-				new NullLogger(),
-				new EntitySource(
-					'test',
-					false,
-					[ 'item' => [ 'namespaceId' => 1200, 'slot' => 'main' ] ],
-					'',
-					'',
-					'',
-					''
-				),
-				$cache
-			),
 			$this->newLanguageFallbackChain(),
 			TemplateFactory::getDefaultInstance(),
 			$this->createMock( LocalizedTextProvider::class ),

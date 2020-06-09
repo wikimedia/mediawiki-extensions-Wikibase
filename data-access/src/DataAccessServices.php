@@ -5,7 +5,6 @@ namespace Wikibase\DataAccess;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 
@@ -15,11 +14,6 @@ use Wikibase\Lib\Store\PropertyInfoLookup;
  * @license GPL-2.0-or-later
  */
 interface DataAccessServices {
-
-	/**
-	 * @return EntityInfoBuilder
-	 */
-	public function getEntityInfoBuilder();
 
 	/**
 	 * @return EntityPrefetcher

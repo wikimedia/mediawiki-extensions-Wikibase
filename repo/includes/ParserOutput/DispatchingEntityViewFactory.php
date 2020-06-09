@@ -6,7 +6,6 @@ use Language;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\View\EntityDocumentView;
 use Wikimedia\Assert\Assert;
 
@@ -38,7 +37,6 @@ class DispatchingEntityViewFactory {
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EntityDocument $entity
-	 * @param EntityInfo $entityInfo
 	 *
 	 * @throws OutOfBoundsException
 	 * @return EntityDocumentView
@@ -46,8 +44,7 @@ class DispatchingEntityViewFactory {
 	public function newEntityView(
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		EntityDocument $entity,
-		EntityInfo $entityInfo
+		EntityDocument $entity
 	) {
 		$entityType = $entity->getType();
 		if ( !isset( $this->entityViewFactoryCallbacks[$entityType] ) ) {
@@ -58,8 +55,7 @@ class DispatchingEntityViewFactory {
 			$this->entityViewFactoryCallbacks[$entityType],
 			$language,
 			$fallbackChain,
-			$entity,
-			$entityInfo
+			$entity
 		);
 
 		Assert::postcondition(

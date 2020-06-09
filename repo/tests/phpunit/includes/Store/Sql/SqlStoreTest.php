@@ -11,7 +11,6 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
@@ -57,8 +56,6 @@ class SqlStoreTest extends MediaWikiTestCase {
 
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
-		$wikibaseServices->method( 'getEntityInfoBuilder' )
-			->willReturn( $this->createMock( EntityInfoBuilder::class ) );
 		$wikibaseServices->method( 'getEntityPrefetcher' )
 			->willReturn( $prefetchingAccessor );
 		$wikibaseServices->method( 'getEntityRevisionLookup' )
@@ -135,11 +132,6 @@ class SqlStoreTest extends MediaWikiTestCase {
 		$service = $this->newInstance()->getEntityRevisionLookup( $type );
 
 		$this->assertInstanceOf( EntityRevisionLookup::class, $service );
-	}
-
-	public function testGetEntityInfoBuilder() {
-		$service = $this->newInstance()->getEntityInfoBuilder();
-		$this->assertInstanceOf( EntityInfoBuilder::class, $service );
 	}
 
 	public function testGetPropertyInfoLookup() {

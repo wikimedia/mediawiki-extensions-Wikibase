@@ -9,7 +9,6 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
@@ -55,7 +54,6 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 			$this->getMockBuilder( DispatchingEntityViewFactory::class )
 				->disableOriginalConstructor()->getMock(),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
-			$this->createMock( EntityInfoBuilder::class ),
 			$this->createMock( EntityTitleLookup::class ),
 			new LanguageFallbackChainFactory(),
 			$this->getMockBuilder( TemplateFactory::class )

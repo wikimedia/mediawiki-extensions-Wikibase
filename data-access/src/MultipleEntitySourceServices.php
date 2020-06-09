@@ -34,8 +34,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 
 	private $entityRevisionLookup = null;
 
-	private $entityInfoBuilder = null;
-
 	private $termSearchInteractorFactory = null;
 
 	private $prefetchingTermLookup = null;
@@ -71,21 +69,6 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 
 		return $this->entityRevisionLookup;
-	}
-
-	public function getEntityInfoBuilder() {
-		if ( $this->entityInfoBuilder === null ) {
-			$buildersPerType = [];
-
-			/** @var EntitySource $source */
-			foreach ( $this->entitySourceDefinitions->getEntityTypeToSourceMapping() as $entityType => $source ) {
-				$buildersPerType[$entityType] = $this->singleSourceServices[$source->getSourceName()]->getEntityInfoBuilder();
-			}
-
-			$this->entityInfoBuilder = new ByTypeDispatchingEntityInfoBuilder( $buildersPerType );
-		}
-
-		return $this->entityInfoBuilder;
 	}
 
 	public function getTermSearchInteractorFactory() {
