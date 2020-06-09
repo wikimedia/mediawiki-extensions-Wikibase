@@ -44,8 +44,8 @@ use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store;
 use Wikimedia\TestingAccessWrapper;
 
 /**

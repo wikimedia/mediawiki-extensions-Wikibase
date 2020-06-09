@@ -12,7 +12,6 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\LookupConstants;
-use Wikibase\Store;
 
 /**
  * A WikiPageEntityMetaDataAccessor decorator that implements prefetching and caching.

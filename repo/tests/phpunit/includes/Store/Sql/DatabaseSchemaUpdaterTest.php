@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MysqlUpdater;
 use Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater;
-use Wikibase\Store;
+use Wikibase\Repo\Store\Store;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**

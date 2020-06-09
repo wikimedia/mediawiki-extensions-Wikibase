@@ -91,8 +91,8 @@ use Wikibase\Repo\Specials\SpecialSetDescription;
 use Wikibase\Repo\Specials\SpecialSetLabel;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Specials\SpecialSetSiteLink;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store;
 
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );

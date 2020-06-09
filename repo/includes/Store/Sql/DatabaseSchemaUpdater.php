@@ -22,8 +22,8 @@ use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
 use Wikibase\Repo\RangeTraversable;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store;
 use Wikimedia\Rdbms\IDatabase;
 
 /**

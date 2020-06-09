@@ -29,7 +29,7 @@ use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Store\Sql\SqlChangeStore;
 use Wikibase\Repo\Store\Sql\SqlStore;
-use Wikibase\Store;
+use Wikibase\Repo\Store\Store;
 
 /**
  * @covers \Wikibase\Repo\Store\Sql\SqlStore

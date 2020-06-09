@@ -19,9 +19,9 @@ use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpApplyException;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
+use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\Tests\ChangeOp\ChangeOpResultStub;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity

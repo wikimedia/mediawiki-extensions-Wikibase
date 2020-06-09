@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Store;
 
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
@@ -19,9 +19,6 @@ use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\TermIndex;
-use Wikibase\Repo\Store\ChangeStore;
-use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
-use Wikibase\Repo\Store\SiteLinkConflictLookup;
 
 /**
  * Store interface. All interaction with store Wikibase does on top
@@ -187,3 +184,6 @@ interface Store {
 	public function getChangeStore();
 
 }
+
+/** @deprecated */
+class_alias( Store::class, 'Wikibase\Store' );
