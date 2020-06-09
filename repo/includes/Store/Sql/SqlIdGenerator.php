@@ -24,7 +24,7 @@ class SqlIdGenerator implements IdGenerator {
 	/**
 	 * @var int[][]
 	 */
-	private $idBlacklist;
+	private $reservedIds;
 
 	/**
 	 * @var bool whether use a separate master database connection to generate new id or not.
@@ -33,15 +33,15 @@ class SqlIdGenerator implements IdGenerator {
 
 	/**
 	 * @param ILoadBalancer $loadBalancer
-	 * @param int[][] $idBlacklist
+	 * @param int[][] $reservedIds
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		array $idBlacklist = [],
+		array $reservedIds = [],
 		$separateDbConnection = false
 	) {
 		$this->loadBalancer = $loadBalancer;
-		$this->idBlacklist = $idBlacklist;
+		$this->reservedIds = $reservedIds;
 		$this->separateDbConnection = $separateDbConnection;
 	}
 
@@ -118,7 +118,7 @@ class SqlIdGenerator implements IdGenerator {
 			throw new RuntimeException( 'Could not generate a reliably unique ID.' );
 		}
 
-		if ( array_key_exists( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist[$type] ) ) {
+		if ( array_key_exists( $type, $this->reservedIds ) && in_array( $id, $this->reservedIds[$type] ) ) {
 			$id = $this->generateNewId( $database, $type );
 		}
 

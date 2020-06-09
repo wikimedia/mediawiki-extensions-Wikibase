@@ -25,30 +25,30 @@ class UpsertSqlIdGeneratorTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testGetNewId_noBlacklist() {
+	public function testGetNewId_noReservedIds() {
 		$generator = new UpsertSqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$id = $generator->getNewId( 'wikibase-upsert-kittens' );
 		$this->assertSame( 1, $id );
 	}
 
-	public function testIdBlacklisting() {
+	public function testReservedIds() {
 		$generator = new UpsertSqlIdGenerator(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			[ 'wikibase-upsert-blacklist' => [ 1, 2 ] ]
+			[ 'wikibase-upsert-reserved' => [ 1, 2 ] ]
 		);
 
-		$id = $generator->getNewId( 'wikibase-upsert-blacklist' );
+		$id = $generator->getNewId( 'wikibase-upsert-reserved' );
 		$this->assertSame( 3, $id );
 	}
 
-	public function testIdBlacklisting_onlyAppliesForSpecifiedEntityType() {
+	public function testReservedIds_onlyAppliesForSpecifiedEntityType() {
 		$generator = new UpsertSqlIdGenerator(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			[ 'wikibase-upsert-blacklist' => [ 1, 2 ] ]
+			[ 'wikibase-upsert-reserved' => [ 1, 2 ] ]
 		);
 
-		$id = $generator->getNewId( 'wikibase-upsert-non-blacklist' );
+		$id = $generator->getNewId( 'wikibase-upsert-non-reserved' );
 		$this->assertSame( 1, $id );
 	}
 
