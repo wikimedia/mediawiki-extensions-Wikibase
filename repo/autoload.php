@@ -9,7 +9,6 @@ $wgAutoloadClasses += [
 	'Wikibase\\ChangePropertyDataType' => __DIR__ . '/maintenance/changePropertyDataType.php',
 	'Wikibase\\ClearTermSqlIndexSearchFields' => __DIR__ . '/maintenance/clearTermSqlIndexSearchFields.php',
 	'Wikibase\\DispatchChanges' => __DIR__ . '/maintenance/dispatchChanges.php',
-	'Wikibase\\DumpEntities' => __DIR__ . '/maintenance/DumpEntities.php',
 	'Wikibase\\DumpJson' => __DIR__ . '/maintenance/dumpJson.php',
 	'Wikibase\\DumpRdf' => __DIR__ . '/maintenance/dumpRdf.php',
 	'Wikibase\\PopulateChangesSubscription' => __DIR__ . '/maintenance/populateChangesSubscription.php',
