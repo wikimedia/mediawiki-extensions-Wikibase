@@ -111,10 +111,8 @@ namespace Wikibase\DataAccess\Tests;
 
 /**
  * @brief Code relating to dumping Repo entities
- *
- * @todo This should be within Wikibase\Repo
  */
-namespace Wikibase\Dumpers;
+namespace Wikibase\Repo\Dumpers;
 
 /**
  * @brief Root namespace for Lib extension code

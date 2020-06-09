@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Dumpers;
+namespace Wikibase\Repo\Dumpers;
 
 use InvalidArgumentException;
 use LogicException;

@@ -15,7 +15,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
-use Wikibase\Dumpers\RdfDumpGenerator;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -27,14 +26,15 @@ use Wikibase\Rdf\PropertyRdfBuilder;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Dumpers\RdfDumpGenerator
- * @covers \Wikibase\Dumpers\DumpGenerator
+ * @covers \Wikibase\Repo\Dumpers\RdfDumpGenerator
+ * @covers \Wikibase\Repo\Dumpers\DumpGenerator
  *
  * @group Wikibase
  * @group WikibaseRdf
