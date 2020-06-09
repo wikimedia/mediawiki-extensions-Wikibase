@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Hooks;
 
 use MediaWikiTestCase;
+use Message;
 use Psr\Log\LoggerInterface;
 use SkinTemplate;
 use Title;
