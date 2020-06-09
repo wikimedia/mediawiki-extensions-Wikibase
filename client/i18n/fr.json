@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ash Crow",
 			"Ayack",
 			"Brenloch56",
 			"Choodyam",
@@ -36,7 +37,7 @@
 		]
 	},
 	"wikibase-client-desc": "Client pour l’extension Wikibase",
-	"tooltip-t-wikibase": "Lien vers l’élément de référentiel des données connectées",
+	"tooltip-t-wikibase": "Lien vers l’élément dans le dépôt de données connectées",
 	"wikibase-after-page-move": "Votre renommage doit maintenant être [$1 reconduit dans le lien interlangue {{WBREPONAME}}]. Veuillez vérifier que c’est bien le cas.",
 	"wikibase-after-page-move-queued": "L’[$1 élément {{WBREPONAME}}] associé avec cette page sera mis à jour automatiquement. Veuillez noter que cela peut ne pas être instantané.",
 	"wikibase-after-page-delete": "Le lien vers cette page devrait avoir été supprimé de [$1 {{WBREPONAME}} l’élément associé]. Nous vous demandons de vérifier que c’est bien le cas.",

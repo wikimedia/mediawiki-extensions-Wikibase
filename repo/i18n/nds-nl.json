@@ -6,7 +6,9 @@
 		]
 	},
 	"wikibase-edit": "bewarken",
+	"wikibase-publish": "uutgeaven",
 	"wikibase-add": "tovogen",
+	"wikibase-publish-inprogress": "Uutgeaven…",
 	"wikibase-label-empty": "Geen etiket insteld",
 	"wikibase-description-empty": "Geen beskryving insteld",
 	"wikibase-statementsection-statements": "Verklaoringen",
