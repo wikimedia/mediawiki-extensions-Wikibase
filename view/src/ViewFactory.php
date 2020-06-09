@@ -191,7 +191,6 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
@@ -200,7 +199,6 @@ class ViewFactory {
 	public function newItemView(
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		$unused,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
@@ -241,7 +239,6 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
@@ -250,7 +247,6 @@ class ViewFactory {
 	public function newPropertyView(
 		Language $language,
 		LanguageFallbackChain $fallbackChain,
-		$unused,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(

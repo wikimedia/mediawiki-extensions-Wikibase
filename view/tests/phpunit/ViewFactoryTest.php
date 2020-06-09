@@ -13,7 +13,6 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\CacheableEntityTermsView;
 use Wikibase\View\EditSectionGenerator;
@@ -113,7 +112,6 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$itemView = $factory->newItemView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			new EntityInfo( [] ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);
 
@@ -125,7 +123,6 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$propertyView = $factory->newPropertyView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			new EntityInfo( [] ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);
 

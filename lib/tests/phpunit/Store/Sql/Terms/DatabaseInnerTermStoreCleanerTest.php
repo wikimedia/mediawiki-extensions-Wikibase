@@ -28,6 +28,19 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiTestCase {
 		$this->tablesUsed[] = 'wbt_term_in_lang';
 	}
 
+	public function addDBData() {
+		parent::addDBData();
+		// Make sure the tables we are inserting to are empty
+		$this->db->truncate(
+			[
+				'wbt_type',
+				'wbt_text',
+				'wbt_text_in_lang',
+				'wbt_term_in_lang',
+			]
+		);
+	}
+
 	private function getCleaner(): DatabaseInnerTermStoreCleaner {
 		return new DatabaseInnerTermStoreCleaner();
 	}

@@ -129,7 +129,6 @@ class LanguageFallbackChain {
 	 * @return string[]
 	 */
 	private function getValueArray( $value, $languageCode, $sourceLanguageCode = null ) {
-		// Data from an EntityInfoBuilder is already made of pre-build arrays
 		if ( !is_array( $value ) ) {
 			$value = [
 				'value' => $value,

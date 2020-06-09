@@ -7,7 +7,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EntityDocumentView;
 
@@ -56,8 +55,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 			$callback,
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			new Item( new ItemId( 'Q123' ) ),
-			new EntityInfo( [] )
+			new Item( new ItemId( 'Q123' ) )
 		);
 
 		$this->assertInstanceOf( EntityDocumentView::class, $entityView );
