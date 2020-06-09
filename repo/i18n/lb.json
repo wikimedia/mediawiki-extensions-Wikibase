@@ -97,7 +97,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Ech akzeptéieren dës Bedingunge fir meng zukünfteg Ännerungen. Dëse Message net nach eng Kéier weisen.",
 	"wikibase-entityselector-more": "méi",
 	"wikibase-entityselector-notfound": "Et gouf näischt fonnt",
-	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt. Är  [https://en.wikipedia.org/wiki/IP_address IP Adress] gëtt visibel gemaach wann Dir ännerunge maacht. Wann Dir Iech  <strong>[[Special:UserLogin|aloggt]]<7srong> oder <strong>[[Special:CreateAccount|e Beniotzerkont uleett]]</strong>, da ginn Är Ännerungen engem Benotzernumm zougeschriwwen, nieft aneren Avantagen.",
+	"wikibase-anonymouseditwarning": "Opgepasst: Dir sidd net ageloggt. Är  [https://en.wikipedia.org/wiki/IP_address IP Adress] gëtt visibel gemaach wann Dir ännerunge maacht. Wann Dir Iech <strong>[[Special:UserLogin|aloggt]]</strong> oder <strong>[[Special:CreateAccount|e Beniotzerkont uleett]]</strong>, da ginn Är Ännerungen engem Benotzernumm zougeschriwwen, nieft aneren Avantagen.",
 	"wikibase-anonymouseditwarning-heading": "Dir sidd net ageloggt",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Mech warne wann ech net ageloggt sinn.",
 	"wikibase-anonymouseditwarning-dismiss-button": "Änneren ouni anzeloggen",
