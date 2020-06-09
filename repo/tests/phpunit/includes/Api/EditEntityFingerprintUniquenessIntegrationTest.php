@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
+use Wikibase\Repo\Tests\WikibaseTablesUsed;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -18,14 +19,11 @@ use ApiUsageException;
  */
 class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase {
 
+	use WikibaseTablesUsed;
+
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'wbt_type';
-		$this->tablesUsed[] = 'wbt_text';
-		$this->tablesUsed[] = 'wbt_text_in_lang';
-		$this->tablesUsed[] = 'wbt_term_in_lang';
-		$this->tablesUsed[] = 'wbt_property_terms';
-		$this->tablesUsed[] = 'wbt_item_terms';
+		$this->markAnyTermsStorageUsed();
 	}
 
 	public function testNewPropertyLabelConflict() {

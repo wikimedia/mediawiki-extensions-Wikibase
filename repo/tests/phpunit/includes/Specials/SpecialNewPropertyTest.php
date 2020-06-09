@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
+use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -27,19 +28,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  */
 class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
+	use WikibaseTablesUsed;
 
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
-		$tables = [
-			'wbt_type',
-			'wbt_text',
-			'wbt_text_in_lang',
-			'wbt_term_in_lang',
-			'wbt_property_terms',
-			'wbt_item_terms'
-		];
-		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
+		$this->markTablesUsedForEntityEditing();
 	}
 
 	protected function newSpecialPage() {

@@ -16,6 +16,7 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
+use Wikibase\Repo\Tests\WikibaseTablesUsed;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -38,6 +39,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
+	use WikibaseTablesUsed;
+
 	/**
 	 * @var SiteStore
 	 */
@@ -45,18 +48,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		// @todo This list should be stored somewhere, DRY
-		$tables = [
-			'wbt_type',
-			'wbt_text',
-			'wbt_text_in_lang',
-			'wbt_term_in_lang',
-			'wbt_property_terms',
-			'wbt_item_terms'
-		];
-		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
-
+		$this->markTablesUsedForEntityEditing();
 		$this->siteStore = new HashSiteStore();
 	}
 
