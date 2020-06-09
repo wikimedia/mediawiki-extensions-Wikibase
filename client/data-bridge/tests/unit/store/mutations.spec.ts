@@ -1,4 +1,4 @@
-import DataValue from '@/datamodel/DataValue';
+import { DataValue } from '@wmde/wikibase-datamodel-types';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus from '@/definitions/ApplicationStatus';
 import EditDecision from '@/definitions/EditDecision';

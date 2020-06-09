@@ -1,3 +1,8 @@
+import {
+	DataValue,
+	Reference,
+	Statement,
+} from '@wmde/wikibase-datamodel-types';
 import SavingError from '@/data-access/error/SavingError';
 import ApplicationError, { ErrorTypes } from '@/definitions/ApplicationError';
 import ApplicationStatus, { ValidApplicationStatus } from '@/definitions/ApplicationStatus';
@@ -22,12 +27,9 @@ import newMockServiceContainer from '../services/newMockServiceContainer';
 import newMockTracker from '../../util/newMockTracker';
 import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
-import DataValue from '@/datamodel/DataValue';
 import { StatementState } from '@/store/statements';
-import Statement from '@/datamodel/Statement';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 import { getMockBridgeRepoConfig } from '../../util/mocks';
-import Reference from '@/datamodel/Reference';
 import { budge } from '../../util/timer';
 
 const mockBridgeConfig = jest.fn();

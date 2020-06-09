@@ -1,3 +1,4 @@
+import { DataType } from '@wmde/wikibase-datamodel-types';
 import MessageKeys from '@/definitions/MessageKeys';
 import ErrorWrapper from '@/presentation/components/ErrorWrapper.vue';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
@@ -98,7 +99,7 @@ describe( 'ErrorWrapper', () => {
 			{
 				type: ErrorTypes.UNSUPPORTED_DATATYPE,
 				info: {
-					unsupportedDatatype: 'time',
+					unsupportedDatatype: 'time' as DataType,
 				},
 			} as UnsupportedDatatypeError,
 			{
@@ -130,7 +131,7 @@ describe( 'ErrorWrapper', () => {
 			{
 				type: ErrorTypes.UNSUPPORTED_DATATYPE,
 				info: {
-					unsupportedDatatype: 'time',
+					unsupportedDatatype: 'time' as DataType,
 				},
 			} as UnsupportedDatatypeError,
 		];

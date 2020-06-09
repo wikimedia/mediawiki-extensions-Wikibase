@@ -1,8 +1,8 @@
+import { DataType } from '@wmde/wikibase-datamodel-types';
 import {
 	convertNoSuchEntityError,
 	getApiEntity,
 } from '@/data-access/ApiWbgetentities';
-import DataType from '@/datamodel/DataType';
 import EntityId from '@/datamodel/EntityId';
 import { ReadingApi } from '@/definitions/data-access/Api';
 import { EntityWithDataType } from '@/definitions/data-access/ApiWbgetentities';

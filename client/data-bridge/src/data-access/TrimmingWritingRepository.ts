@@ -1,9 +1,11 @@
+import {
+	Statement,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
-import Statement from '@/datamodel/Statement';
-import StatementMap from '@/datamodel/StatementMap';
 import WritingEntityRepository from '@/definitions/data-access/WritingEntityRepository';
 import deepEqual from 'deep-equal';
 

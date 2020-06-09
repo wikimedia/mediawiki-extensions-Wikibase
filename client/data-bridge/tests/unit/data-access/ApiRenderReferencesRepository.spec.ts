@@ -1,6 +1,6 @@
+import { Reference } from '@wmde/wikibase-datamodel-types';
 import { mockApi } from '../../util/mocks';
 import ApiRenderReferencesRepository from '@/data-access/ApiRenderReferencesRepository';
-import Reference from '@/datamodel/Reference';
 import Api, { ReadingApi } from '@/definitions/data-access/Api';
 import { MwApi } from '@/@types/mediawiki/MwWindow';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';

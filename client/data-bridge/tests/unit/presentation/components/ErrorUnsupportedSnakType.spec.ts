@@ -1,5 +1,5 @@
-import { SnakType } from '@/datamodel/Snak';
 import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { SnakType } from '@wmde/wikibase-datamodel-types';
 import ErrorUnsupportedSnakType from '@/presentation/components/ErrorUnsupportedSnakType.vue';
 import IconMessageBox from '@/presentation/components/IconMessageBox.vue';
 import BailoutActions from '@/presentation/components/BailoutActions.vue';

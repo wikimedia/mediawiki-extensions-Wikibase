@@ -1,11 +1,13 @@
-import StatementMap from '@/datamodel/StatementMap';
-import Snak from '@/datamodel/Snak';
+import {
+	DataValue,
+	Snak,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { inject } from 'vuex-smart-module';
 import { StatementGetters } from '@/store/statements/getters';
 import newStatementState from './newStatementState';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import DataValue from '@/datamodel/DataValue';
 import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';
 
 describe( 'statements/Getters', () => {

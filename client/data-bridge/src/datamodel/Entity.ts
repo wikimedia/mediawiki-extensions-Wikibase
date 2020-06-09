@@ -1,5 +1,5 @@
+import { StatementMap } from '@wmde/wikibase-datamodel-types';
 import EntityId from '@/datamodel/EntityId';
-import StatementMap from '@/datamodel/StatementMap';
 
 export default class Entity {
 	public readonly id: EntityId;

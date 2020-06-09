@@ -1,5 +1,5 @@
+import { Reference } from '@wmde/wikibase-datamodel-types';
 import { ApiResponse, ReadingApi } from '@/definitions/data-access/Api';
-import Reference from '@/datamodel/Reference';
 import ReferencesRenderingRepository from '@/definitions/data-access/ReferencesRenderingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 

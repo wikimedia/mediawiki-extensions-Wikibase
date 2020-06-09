@@ -1,9 +1,11 @@
+import {
+	DataValue,
+	Snak,
+	Statement,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import StatementMutationStrategy from '@/change-op/statement-mutation/strategies/StatementMutationStrategy';
 import EntityId from '@/datamodel/EntityId';
-import StatementMap from '@/datamodel/StatementMap';
-import DataValue from '@/datamodel/DataValue';
-import Statement from '@/datamodel/Statement';
-import Snak from '@/datamodel/Snak';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';

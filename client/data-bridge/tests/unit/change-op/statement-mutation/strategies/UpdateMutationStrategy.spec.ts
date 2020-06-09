@@ -1,10 +1,12 @@
-import DataValue from '@/datamodel/DataValue';
+import {
+	DataValue,
+	DataValueType,
+} from '@wmde/wikibase-datamodel-types';
 import { StatementState } from '@/store/statements';
 import clone from '@/store/clone';
 import UpdateMutationStrategy from '@/change-op/statement-mutation/strategies/UpdateMutationStrategy';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
 import StatementMutationError from '@/change-op/statement-mutation/StatementMutationError';
-import DataValueType from '@/datamodel/DataValueType';
 
 describe( 'UpdateMutationStrategy', () => {
 	const mockState: StatementState = {

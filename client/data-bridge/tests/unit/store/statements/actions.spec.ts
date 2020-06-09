@@ -1,5 +1,9 @@
+import {
+	DataType,
+	DataValue,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import { StatementActions } from '@/store/statements/actions';
-import StatementMap from '@/datamodel/StatementMap';
 import { inject } from 'vuex-smart-module';
 
 describe( 'statement actions', () => {
@@ -13,14 +17,14 @@ describe( 'statement actions', () => {
 						mainsnak: {
 							snaktype: 'value',
 							property: 'P23',
-							datatype: 'wikibase-item',
+							datatype: 'wikibase-item' as DataType,
 							datavalue: {
 								value: {
 									'entity-type': 'item',
 									id: 'Q6342720',
 								},
 								type: 'wikibase-entityid',
-							},
+							} as unknown as DataValue,
 						},
 						type: 'statement',
 						rank: 'normal',

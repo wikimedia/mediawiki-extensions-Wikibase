@@ -1,6 +1,8 @@
-import DataValue from '@/datamodel/DataValue';
+import {
+	DataValue,
+	StatementMap,
+} from '@wmde/wikibase-datamodel-types';
 import EntityId from '@/datamodel/EntityId';
-import StatementMap from '@/datamodel/StatementMap';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';

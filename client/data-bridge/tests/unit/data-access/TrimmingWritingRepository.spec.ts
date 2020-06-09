@@ -1,10 +1,12 @@
+import {
+	Snak,
+	Statement,
+} from '@wmde/wikibase-datamodel-types';
 import ApiWritingRepository from '@/data-access/ApiWritingRepository';
 import TrimmingWritingRepository from '@/data-access/TrimmingWritingRepository';
 import TechnicalProblem from '@/data-access/error/TechnicalProblem';
 import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
-import Snak from '@/datamodel/Snak';
-import Statement from '@/datamodel/Statement';
 
 describe( 'TrimmingWritingRepository', () => {
 	it( 'delegates to inner service without base revision', async () => {

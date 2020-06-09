@@ -1,12 +1,14 @@
-import DataType from '@/datamodel/DataType';
-import { Rank } from '@/datamodel/Statement';
+import {
+	DataType,
+	DataValue,
+	DataValueType,
+	Rank,
+	SnakType,
+} from '@wmde/wikibase-datamodel-types';
 import { StatementState } from '@/store/statements';
 import { PathToStatement } from '@/store/statements/PathToStatement';
 import { Getters } from 'vuex-smart-module';
 import EntityId from '@/datamodel/EntityId';
-import DataValue from '@/datamodel/DataValue';
-import { SnakType } from '@/datamodel/Snak';
-import DataValueType from '@/datamodel/DataValueType';
 import { PathToSnak } from '@/store/statements/PathToSnak';
 import { PathToStatementGroup } from '@/store/statements/PathToStatementGroup';
 
