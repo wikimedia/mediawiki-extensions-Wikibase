@@ -15,9 +15,8 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  * Factory for LabelDescriptionLookup objects based on FormatterOptions.
  *
  * The LabelDescriptionLookup is created based on the values of the options
- * OPT_LABEL_DESCRIPTION_LOOKUP, OPT_LANGUAGE_FALLBACK_CHAIN, and ValueFormatter::OPT_LANG:
+ * OPT_LANGUAGE_FALLBACK_CHAIN, and ValueFormatter::OPT_LANG:
  *
- * * OPT_LABEL_DESCRIPTION_LOOKUP can be used to provide a custom LabelDescriptionLookup instance directly
  * * If OPT_LANGUAGE_FALLBACK_CHAIN is set, a LanguageFallbackLabelDescriptionLookup will be created byed on
  *   the LanguageFallbackChain contained in that option.
  * * If ValueFormatter::OPT_LANG is set, a LanguageLabelDescriptionLookup is created
@@ -28,7 +27,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  */
 class FormatterLabelDescriptionLookupFactory {
 
-	const OPT_LABEL_DESCRIPTION_LOOKUP = 'LabelDescriptionLookup';
 	const OPT_LANGUAGE_FALLBACK_CHAIN = 'languages';
 
 	/**
@@ -47,27 +45,14 @@ class FormatterLabelDescriptionLookupFactory {
 	 * @return LabelDescriptionLookup
 	 */
 	public function getLabelDescriptionLookup( FormatterOptions $options ) {
-		if ( $options->hasOption( self::OPT_LABEL_DESCRIPTION_LOOKUP ) ) {
-			return $this->getLabelDescriptionLookupFromOptions( $options );
-		} elseif ( $options->hasOption( self::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
+		if ( $options->hasOption( self::OPT_LANGUAGE_FALLBACK_CHAIN ) ) {
 			return $this->newLanguageFallbackLabelDescriptionLookup( $options );
 		} elseif ( $options->hasOption( ValueFormatter::OPT_LANG ) ) {
 			return $this->newLanguageLabelDescriptionLookup( $options );
 		} else {
-			throw new InvalidArgumentException( 'OPT_LANG, OPT_LANGUAGE_FALLBACK_CHAIN, '
-				. 'or OPT_LABEL_DESCRIPTION_LOOKUP must be set in FormatterOptions.' );
+			throw new InvalidArgumentException( 'OPT_LANG or OPT_LANGUAGE_FALLBACK_CHAIN, '
+				. 'must be set in FormatterOptions.' );
 		}
-	}
-
-	private function getLabelDescriptionLookupFromOptions( FormatterOptions $options ) {
-		$labelDescriptionLookup = $options->getOption( self::OPT_LABEL_DESCRIPTION_LOOKUP );
-
-		if ( !( $labelDescriptionLookup instanceof LabelDescriptionLookup ) ) {
-			throw new InvalidArgumentException( 'OPT_LABEL_DESCRIPTION_LOOKUP must be used ' .
-				'with an instance of LabelDescriptionLookup.' );
-		}
-
-		return $labelDescriptionLookup;
 	}
 
 	private function newLanguageFallbackLabelDescriptionLookup( FormatterOptions $options ) {
