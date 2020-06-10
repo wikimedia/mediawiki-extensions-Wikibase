@@ -128,17 +128,6 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
 	}
 
-	public function testNewStatementSectionsView_oldWay() {
-		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
-			'de',
-			null,
-			new LanguageFallbackChain( [] ),
-			$this->createMock( EditSectionGenerator::class )
-		);
-
-		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );
-	}
-
 	public function testNewStatementSectionsView() {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
 			'de',

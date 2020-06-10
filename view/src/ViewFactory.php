@@ -267,23 +267,20 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $fallbackChainOrUnused
-	 * @param EditSectionGenerator|LanguageFallbackChain $editSectionGeneratorOrFallbackChain
-	 * @param EditSectionGenerator|null $editSectionGeneratorOrUnused
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
 		$languageCode,
-		$fallbackChainOrUnused,
-		$editSectionGeneratorOrFallbackChain,
-		$editSectionGeneratorOrUnused = null
+		LanguageFallbackChain $fallbackChain,
+		EditSectionGenerator $editSectionGenerator
 	) {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
-			$fallbackChainOrUnused,
-			$editSectionGeneratorOrFallbackChain,
-			$editSectionGeneratorOrUnused
+			$fallbackChain,
+			$editSectionGenerator
 		);
 
 		return new StatementSectionsView(
@@ -296,21 +293,16 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain|null $fallbackChainOrUnused
-	 * @param EditSectionGenerator|LanguageFallbackChain $editSectionGeneratorOrFallbackChain
-	 * @param EditSectionGenerator|null $editSectionGeneratorOrUnused
+	 * @param LanguageFallbackChain $fallbackChain
+	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementGroupListView
 	 */
 	public function newStatementGroupListView(
 		$languageCode,
-		$fallbackChainOrUnused,
-		$editSectionGeneratorOrFallbackChain,
-		$editSectionGeneratorOrUnused = null
+		LanguageFallbackChain $fallbackChain,
+		EditSectionGenerator $editSectionGenerator
 	) {
-		$fallbackChain = $fallbackChainOrUnused ?: $editSectionGeneratorOrFallbackChain;
-		$editSectionGenerator = $editSectionGeneratorOrUnused ?: $editSectionGeneratorOrFallbackChain;
-
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
 			$fallbackChain
