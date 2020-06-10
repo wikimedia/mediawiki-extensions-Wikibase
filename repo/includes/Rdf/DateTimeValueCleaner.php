@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use DataValues\IllegalValueException;
 use DataValues\TimeValue;

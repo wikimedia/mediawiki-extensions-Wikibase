@@ -8,16 +8,16 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\EntityRdfBuilder;
-use Wikibase\Rdf\EntityRdfBuilderFactory;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\NullDedupeBag;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\EntityRdfBuilderFactory
+ * @covers \Wikibase\Repo\Rdf\EntityRdfBuilderFactory
  *
  * @group Wikibase
  * @group WikibaseRdf

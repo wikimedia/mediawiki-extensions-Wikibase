@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\TermsRdfBuilder;
+use Wikibase\Repo\Rdf\TermsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Rdf\TermsRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\TermsRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

@@ -1,6 +1,8 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
+
+use Wikibase\Rdf\DedupeBag;
 
 /**
  * Null implementation of DedupeBag.

@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\PropertyRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\PropertyRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

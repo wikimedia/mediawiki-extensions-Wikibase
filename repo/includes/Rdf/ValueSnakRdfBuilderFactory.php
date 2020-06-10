@@ -1,7 +1,11 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
+use Wikibase\Rdf\DedupeBag;
+use Wikibase\Rdf\EntityMentionListener;
+use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 

@@ -2,16 +2,16 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\SnakRdfBuilder;
-use Wikibase\Rdf\TruthyStatementRdfBuilder;
+use Wikibase\Repo\Rdf\NullDedupeBag;
+use Wikibase\Repo\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\Rdf\TruthyStatementRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\TruthyStatementRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\TruthyStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

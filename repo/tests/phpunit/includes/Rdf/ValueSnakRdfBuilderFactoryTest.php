@@ -7,17 +7,17 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\NullEntityMentionListener;
 use Wikibase\Rdf\RdfProducer;
 use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
-use Wikibase\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Rdf\NullDedupeBag;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\ValueSnakRdfBuilderFactory
+ * @covers \Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory
  *
  * @group Wikibase
  * @group WikibaseRdf

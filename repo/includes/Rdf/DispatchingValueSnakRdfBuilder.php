@@ -1,8 +1,9 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 

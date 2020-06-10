@@ -2,11 +2,11 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\SiteLinksRdfBuilder;
+use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\SiteLinksRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\SiteLinksRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

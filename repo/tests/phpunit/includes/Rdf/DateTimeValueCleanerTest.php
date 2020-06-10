@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use DataValues\TimeValue;
-use Wikibase\Rdf\DateTimeValueCleaner;
-use Wikibase\Rdf\JulianDateTimeValueCleaner;
+use Wikibase\Repo\Rdf\DateTimeValueCleaner;
+use Wikibase\Repo\Rdf\JulianDateTimeValueCleaner;
 
 /**
- * @covers \Wikibase\Rdf\DateTimeValueCleaner
- * @covers \Wikibase\Rdf\JulianDateTimeValueCleaner
+ * @covers \Wikibase\Repo\Rdf\DateTimeValueCleaner
+ * @covers \Wikibase\Repo\Rdf\JulianDateTimeValueCleaner
  *
  * @group Wikibase
  * @group WikibaseRdf

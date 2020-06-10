@@ -12,6 +12,11 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\FullStatementRdfBuilder;
+use Wikibase\Repo\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\Rdf\TruthyStatementRdfBuilder;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

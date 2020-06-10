@@ -12,11 +12,11 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Rdf\EntityMentionListener;
 use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\SnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Repo\Rdf\SnakRdfBuilder;
 
 /**
- * @covers \Wikibase\Rdf\SnakRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\SnakRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

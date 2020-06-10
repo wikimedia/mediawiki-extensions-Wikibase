@@ -6,16 +6,16 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Rdf\DedupeBag;
 use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\FullStatementRdfBuilder;
 use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\NullDedupeBag;
 use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\Rdf\FullStatementRdfBuilder;
+use Wikibase\Repo\Rdf\NullDedupeBag;
+use Wikibase\Repo\Rdf\SnakRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\FullStatementRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\FullStatementRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

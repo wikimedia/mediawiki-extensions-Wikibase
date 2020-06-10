@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Tests\Rdf;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\DispatchingValueSnakRdfBuilder;
 use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\DispatchingValueSnakRdfBuilder
+ * @covers \Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

@@ -70,6 +70,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\ItemDisambiguation;
+use Wikibase\Repo\Rdf\PropertyRdfBuilder;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Specials\SpecialAvailableBadges;
 use Wikibase\Repo\Specials\SpecialDispatchStats;
@@ -121,6 +122,7 @@ call_user_func( function() {
 	global $wgAPIMetaModules,
 		$wgAPIListModules,
 		$wgAPIModules,
+		$wgAutoloadClasses,
 		$wgAvailableRights,
 		$wgEventLoggingSchemas,
 		$wgExtensionMessagesFiles,
@@ -133,6 +135,10 @@ call_user_func( function() {
 		$wgValueParsers,
 		$wgWBRepoDataTypes,
 		$wgWBRepoSettings;
+
+	// HACK: WikibaseRepo.datatypes.php needs constants from PropertyRdfBuilder,
+	// but the AutoloadNamespaces from extension.json are not registered yet
+	$wgAutoloadClasses[PropertyRdfBuilder::class] = __DIR__ . '/includes/Rdf/PropertyRdfBuilder.php';
 
 	// Registry and definition of data types
 	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
