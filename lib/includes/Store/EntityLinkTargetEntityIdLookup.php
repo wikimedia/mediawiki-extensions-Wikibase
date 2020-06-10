@@ -29,12 +29,13 @@ class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 	}
 
 	public function getEntityId( LinkTarget $linkTarget ): ?EntityId {
-		if ( $linkTarget->getNamespace() === -1 && explode( '/', $linkTarget->getText(), 2 )[0] === 'EntityPage' ) {
+		$namespace = $linkTarget->getNamespace();
+		if ( $namespace === -1 && explode( '/', $linkTarget->getText(), 2 )[0] === 'EntityPage' ) {
 			$idText = explode( '/', $linkTarget->getText(), 2 )[1];
 		} else {
 			$idText = $linkTarget->getText();
 
-			$entityTypeForNamespace = $this->entityNamespaceLookup->getEntityType( $linkTarget->getNamespace() );
+			$entityTypeForNamespace = $this->entityNamespaceLookup->getEntityType( $namespace );
 			if ( !$entityTypeForNamespace ) {
 				return null;
 			}
@@ -47,7 +48,9 @@ class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 		}
 
 		if ( isset( $entityTypeForNamespace ) && $entityId->getEntityType() !== $entityTypeForNamespace ) {
-			throw new RuntimeException( 'Managed to lookup EntityId but got an unexpected type for namespace.' );
+			throw new RuntimeException(
+				"Managed to lookup EntityId '${entityId}' but got an unexpected type '${entityTypeForNamespace}' for namespace '${namespace}'."
+			);
 		}
 
 		return $entityId;
