@@ -19,30 +19,30 @@ use Wikibase\Repo\Store\Sql\SqlIdGenerator;
  */
 class SqlIdGeneratorTest extends \MediaWikiTestCase {
 
-	public function testGetNewId_noBlacklist() {
+	public function testGetNewId_noReservedIds() {
 		$generator = new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$id = $generator->getNewId( 'wikibase-kittens' );
 		$this->assertSame( 1, $id );
 	}
 
-	public function testIdBlacklisting() {
+	public function testReservedIds() {
 		$generator = new SqlIdGenerator(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			[ 'wikibase-blacklist' => [ 1, 2 ] ]
+			[ 'wikibase-reserved' => [ 1, 2 ] ]
 		);
 
-		$id = $generator->getNewId( 'wikibase-blacklist' );
+		$id = $generator->getNewId( 'wikibase-reserved' );
 		$this->assertSame( 3, $id );
 	}
 
-	public function testIdBlacklisting_onlyAppliesForSpecifiedEntityType() {
+	public function testReservedIds_onlyAppliesForSpecifiedEntityType() {
 		$generator = new SqlIdGenerator(
 			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			[ 'wikibase-blacklist' => [ 1, 2 ] ]
+			[ 'wikibase-reserved' => [ 1, 2 ] ]
 		);
 
-		$id = $generator->getNewId( 'wikibase-non-blacklist' );
+		$id = $generator->getNewId( 'wikibase-non-reserved' );
 		$this->assertSame( 1, $id );
 	}
 

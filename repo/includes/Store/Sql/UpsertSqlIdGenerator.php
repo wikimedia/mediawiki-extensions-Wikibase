@@ -32,14 +32,14 @@ class UpsertSqlIdGenerator implements IdGenerator {
 	/**
 	 * @var int[][]
 	 */
-	private $idBlacklist;
+	private $reservedIds;
 
 	/**
-	 * Limit for id generation attempts that hit the blacklist.
-	 * We have not had any blacklists in the past with anywhere near this number of sequential entity ids.
+	 * Limit for id generation attempts that hit reserved ids.
+	 * We have not had any reserved ids in the past with anywhere near this number of sequential entity ids.
 	 * @var int
 	 */
-	private $blacklistAttempts = 10;
+	private const MAX_ATTEMPTS = 10;
 
 	/**
 	 * @var bool whether use a separate master database connection to generate new id or not.
@@ -48,16 +48,16 @@ class UpsertSqlIdGenerator implements IdGenerator {
 
 	/**
 	 * @param ILoadBalancer $loadBalancer
-	 * @param int[][] $idBlacklist
+	 * @param int[][] $reservedIds
 	 * @param bool $separateDbConnection
 	 */
 	public function __construct(
 		ILoadBalancer $loadBalancer,
-		array $idBlacklist = [],
+		array $reservedIds = [],
 		$separateDbConnection = false
 	) {
 		$this->loadBalancer = $loadBalancer;
-		$this->idBlacklist = $idBlacklist;
+		$this->reservedIds = $reservedIds;
 		$this->separateDbConnection = $separateDbConnection;
 	}
 
@@ -76,23 +76,23 @@ class UpsertSqlIdGenerator implements IdGenerator {
 
 		$idGenerations = 0;
 		do {
-			if ( $idGenerations >= $this->blacklistAttempts ) {
+			if ( $idGenerations >= self::MAX_ATTEMPTS ) {
 				throw new RuntimeException(
-					"Could not generate a non blacklisted ID of type '{$type}', tried {$this->blacklistAttempts} times."
+					"Could not generate a non-reserved ID of type '$type', tried " . self::MAX_ATTEMPTS . ' times.'
 				);
 			}
 			$id = $this->generateNewId( $database, $type );
 			$idGenerations++;
 
-		} while ( $this->idIsOnBlacklist( $type, $id ) );
+		} while ( $this->idIsReserved( $type, $id ) );
 
 		$this->loadBalancer->reuseConnection( $database );
 
 		return $id;
 	}
 
-	private function idIsOnBlacklist( $type, $id ) {
-		return array_key_exists( $type, $this->idBlacklist ) && in_array( $id, $this->idBlacklist[$type] );
+	private function idIsReserved( $type, $id ) {
+		return array_key_exists( $type, $this->reservedIds ) && in_array( $id, $this->reservedIds[$type] );
 	}
 
 	/**
