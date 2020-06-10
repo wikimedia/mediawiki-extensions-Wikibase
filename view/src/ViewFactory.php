@@ -205,7 +205,6 @@ class ViewFactory {
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			null,
 			$fallbackChain,
 			$editSectionGenerator
 		);
@@ -251,7 +250,6 @@ class ViewFactory {
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			null,
 			$fallbackChain,
 			$this->newToolbarEditSectionGenerator()
 		);
@@ -269,23 +267,23 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param null $unused
-	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param LanguageFallbackChain|null $fallbackChainOrUnused
+	 * @param EditSectionGenerator|LanguageFallbackChain $editSectionGeneratorOrFallbackChain
+	 * @param EditSectionGenerator|null $editSectionGeneratorOrUnused
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
 		$languageCode,
-		$unused,
-		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		$fallbackChainOrUnused,
+		$editSectionGeneratorOrFallbackChain,
+		$editSectionGeneratorOrUnused = null
 	) {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
-			null,
-			$fallbackChain,
-			$editSectionGenerator
+			$fallbackChainOrUnused,
+			$editSectionGeneratorOrFallbackChain,
+			$editSectionGeneratorOrUnused
 		);
 
 		return new StatementSectionsView(
@@ -298,18 +296,21 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param null $unused
-	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EditSectionGenerator $editSectionGenerator
+	 * @param LanguageFallbackChain|null $fallbackChainOrUnused
+	 * @param EditSectionGenerator|LanguageFallbackChain $editSectionGeneratorOrFallbackChain
+	 * @param EditSectionGenerator|null $editSectionGeneratorOrUnused
 	 *
 	 * @return StatementGroupListView
 	 */
 	public function newStatementGroupListView(
 		$languageCode,
-		$unused,
-		LanguageFallbackChain $fallbackChain,
-		EditSectionGenerator $editSectionGenerator
+		$fallbackChainOrUnused,
+		$editSectionGeneratorOrFallbackChain,
+		$editSectionGeneratorOrUnused = null
 	) {
+		$fallbackChain = $fallbackChainOrUnused ?: $editSectionGeneratorOrFallbackChain;
+		$editSectionGenerator = $editSectionGeneratorOrUnused ?: $editSectionGeneratorOrFallbackChain;
+
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
 			$fallbackChain

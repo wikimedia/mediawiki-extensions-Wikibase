@@ -7,7 +7,6 @@ use InvalidArgumentException;
 use Language;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -129,10 +128,20 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf( PropertyView::class, $propertyView );
 	}
 
+	public function testNewStatementSectionsView_oldWay() {
+		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
+			'de',
+			null,
+			new LanguageFallbackChain( [] ),
+			$this->createMock( EditSectionGenerator::class )
+		);
+
+		$this->assertInstanceOf( StatementSectionsView::class, $statementSectionsView );
+	}
+
 	public function testNewStatementSectionsView() {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
 			'de',
-			$this->createMock( LabelDescriptionLookup::class ),
 			new LanguageFallbackChain( [] ),
 			$this->createMock( EditSectionGenerator::class )
 		);
