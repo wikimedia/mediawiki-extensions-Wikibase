@@ -434,7 +434,7 @@ Section configurations other than "statements" and "identifiers" require you to 
 
 DEFAULT: ```[]```
 
-#### idBlacklist
+#### reservedIds
 A map from entity ID type to a list of IDs to reserve and skip for new entities of that type.
 
 IDs are given as integers.

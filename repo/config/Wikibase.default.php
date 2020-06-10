@@ -33,7 +33,7 @@ return [
 	// debug flag for termbox ssr
 	'termboxUserSpecificSsrEnabled' => true,
 
-	'idBlacklist' => [],
+	'reservedIds' => [],
 
 	// List of supported entity types, mapping entity type identifiers to namespace IDs.
 	// This setting is used to enable entity types.
