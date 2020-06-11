@@ -92,6 +92,3 @@ class HashDedupeBag implements DedupeBag {
 	}
 
 }
-
-/** @deprecated */
-class_alias( HashDedupeBag::class, 'Wikibase\Rdf\HashDedupeBag' );

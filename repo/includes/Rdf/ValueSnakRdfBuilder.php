@@ -34,6 +34,3 @@ interface ValueSnakRdfBuilder {
 	);
 
 }
-
-/** @deprecated */
-class_alias( ValueSnakRdfBuilder::class, 'Wikibase\Rdf\ValueSnakRdfBuilder' );

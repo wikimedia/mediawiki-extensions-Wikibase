@@ -521,6 +521,3 @@ class RdfVocabulary {
 	}
 
 }
-
-/** @deprecated */
-class_alias( RdfVocabulary::class, 'Wikibase\Rdf\RdfVocabulary' );

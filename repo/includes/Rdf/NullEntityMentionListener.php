@@ -42,6 +42,3 @@ class NullEntityMentionListener implements EntityMentionListener {
 	}
 
 }
-
-/** @deprecated */
-class_alias( NullEntityMentionListener::class, 'Wikibase\Rdf\NullEntityMentionListener' );

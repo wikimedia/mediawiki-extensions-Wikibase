@@ -42,6 +42,3 @@ interface EntityMentionListener {
 	public function subEntityMentioned( EntityDocument $entity );
 
 }
-
-/** @deprecated */
-class_alias( EntityMentionListener::class, 'Wikibase\Rdf\EntityMentionListener' );
