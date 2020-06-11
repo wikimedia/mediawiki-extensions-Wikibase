@@ -16,7 +16,8 @@
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Repo\\": "repo/includes/"
+		"Wikibase\\Repo\\": "repo/includes/",
+		"Wikibase\\Repo\\Maintenance\\": "repo/maintenance/"
 	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",

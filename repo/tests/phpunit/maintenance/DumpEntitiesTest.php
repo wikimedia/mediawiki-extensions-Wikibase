@@ -3,12 +3,12 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWikiCoversValidator;
-use Wikibase\DumpEntities;
+use Wikibase\Repo\Maintenance\DumpEntities;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\DumpEntities
+ * @covers \Wikibase\Repo\Maintenance\DumpEntities
  *
  * @group Wikibase
  *
