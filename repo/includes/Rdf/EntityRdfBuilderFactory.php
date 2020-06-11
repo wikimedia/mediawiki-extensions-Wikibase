@@ -2,10 +2,6 @@
 
 namespace Wikibase\Repo\Rdf;
 
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\EntityRdfBuilder;
-use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Purtle\RdfWriter;
 

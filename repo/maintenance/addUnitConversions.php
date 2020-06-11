@@ -12,7 +12,7 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Units\JsonUnitStorage;
 use Wikibase\Lib\Units\UnitConverter;
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\Values\ComplexValueRdfHelper;
 use Wikibase\Repo\Rdf\Values\QuantityRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;

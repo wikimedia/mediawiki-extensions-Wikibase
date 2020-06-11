@@ -12,10 +12,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 
 /**
- * @covers \Wikibase\Rdf\RdfVocabulary
+ * @covers \Wikibase\Repo\Rdf\RdfVocabulary
  *
  * @group Wikibase
  * @group WikibaseRdf

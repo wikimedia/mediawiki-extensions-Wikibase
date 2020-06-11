@@ -3,9 +3,9 @@
 namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\DataValue;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\DedupeBag;
+use Wikibase\Repo\Rdf\HashDedupeBag;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

@@ -21,12 +21,12 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
-use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\RdfBuilder;
-use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\HashDedupeBag;
+use Wikibase\Repo\Rdf\RdfBuilder;
+use Wikibase\Repo\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
 use Wikimedia\Purtle\RdfWriterFactory;
 

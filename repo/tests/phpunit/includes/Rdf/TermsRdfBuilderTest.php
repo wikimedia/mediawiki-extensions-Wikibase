@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\TermsRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 use Wikimedia\TestingAccessWrapper;

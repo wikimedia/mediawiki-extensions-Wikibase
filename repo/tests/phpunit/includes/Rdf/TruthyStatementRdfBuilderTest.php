@@ -2,9 +2,9 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\NullEntityMentionListener;
-use Wikibase\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\NullDedupeBag;
+use Wikibase\Repo\Rdf\NullEntityMentionListener;
+use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\SnakRdfBuilder;
 use Wikibase\Repo\Rdf\TruthyStatementRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;

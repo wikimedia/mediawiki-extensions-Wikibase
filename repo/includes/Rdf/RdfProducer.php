@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 /**
  * RDF producer options
@@ -74,3 +74,6 @@ interface RdfProducer {
 	const PRODUCE_ALL = 0xFFFF;
 
 }
+
+/** @deprecated */
+class_alias( RdfProducer::class, 'Wikibase\Rdf\RdfProducer' );

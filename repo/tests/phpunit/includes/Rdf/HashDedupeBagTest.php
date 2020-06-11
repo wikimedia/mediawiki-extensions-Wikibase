@@ -2,10 +2,10 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
-use Wikibase\Rdf\HashDedupeBag;
+use Wikibase\Repo\Rdf\HashDedupeBag;
 
 /**
- * @covers \Wikibase\Rdf\HashDedupeBag
+ * @covers \Wikibase\Repo\Rdf\HashDedupeBag
  *
  * @group Wikibase
  * @group WikibaseRdf

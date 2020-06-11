@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -42,3 +42,6 @@ interface EntityMentionListener {
 	public function subEntityMentioned( EntityDocument $entity );
 
 }
+
+/** @deprecated */
+class_alias( EntityMentionListener::class, 'Wikibase\Rdf\EntityMentionListener' );

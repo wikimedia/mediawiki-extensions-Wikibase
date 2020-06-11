@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 /**
  * Interface for a facility that avoids duplicates based on value hashes.
@@ -30,3 +30,6 @@ interface DedupeBag {
 	public function alreadySeen( $hash, $namespace = '' );
 
 }
+
+/** @deprecated */
+class_alias( DedupeBag::class, 'Wikibase\Rdf\DedupeBag' );

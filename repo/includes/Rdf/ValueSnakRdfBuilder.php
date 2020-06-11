@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikimedia\Purtle\RdfWriter;
@@ -34,3 +34,6 @@ interface ValueSnakRdfBuilder {
 	);
 
 }
+
+/** @deprecated */
+class_alias( ValueSnakRdfBuilder::class, 'Wikibase\Rdf\ValueSnakRdfBuilder' );

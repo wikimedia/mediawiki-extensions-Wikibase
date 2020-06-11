@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 
@@ -19,3 +19,6 @@ class NullEntityRdfBuilder implements EntityRdfBuilder {
 	}
 
 }
+
+/** @deprecated */
+class_alias( NullEntityRdfBuilder::class, 'Wikibase\Rdf\NullEntityRdfBuilder' );

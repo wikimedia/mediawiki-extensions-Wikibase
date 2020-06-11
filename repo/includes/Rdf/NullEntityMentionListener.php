@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -42,3 +42,6 @@ class NullEntityMentionListener implements EntityMentionListener {
 	}
 
 }
+
+/** @deprecated */
+class_alias( NullEntityMentionListener::class, 'Wikibase\Rdf\NullEntityMentionListener' );
