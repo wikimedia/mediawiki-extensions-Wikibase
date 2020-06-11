@@ -11,15 +11,20 @@ use MediaWikiTestCase;
 use RequestContext;
 use SpecialPage;
 use Title;
+use Wikibase\DataAccess\EntitySource;
+use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -292,8 +297,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$handler = $this->newInstance();
 
 		$title = Title::makeTitle(
-			NS_SPECIAL,
-			'EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
+			0,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX
 		);
@@ -323,8 +328,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$handler = $this->newInstance( $prefixedText );
 
 		$title = Title::makeTitle(
-			NS_SPECIAL,
-			'EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
+			0,
+			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX
 		);
@@ -536,18 +541,25 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$languageFallbackChainFactory->expects( $this->any() )
 			->method( 'newFromContext' )
 			->willReturn( $languageFallback );
+		$entityIdParser = new ItemIdParser();
 
 		return new HtmlPageLinkRendererEndHookHandler(
 			$this->getEntityExistenceChecker( $isDeleted ),
 			$this->getEntityIdLookup(),
-			new ItemIdParser(),
+			$entityIdParser,
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$this->getInterwikiLookup(),
 			$this->getEntityLinkFormatterFactory( $titleText ),
 			MediaWikiServices::getInstance()->getSpecialPageFactory(),
 			$languageFallbackChainFactory,
-			$this->entityUrlLookup
+			$this->entityUrlLookup,
+			new EntityLinkTargetEntityIdLookup(
+				$this->getEntityNamespaceLookup(),
+				$entityIdParser,
+				$this->newMockEntitySourceDefinitions(),
+				$this->newMockEntitySource()
+			)
 		);
 	}
 
@@ -578,6 +590,30 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 			->willReturn( $titleText );
 
 		return $entityTitleTextLookup;
+	}
+
+	private function newMockEntitySourceDefinitions() {
+		$foreignItemSource = $this->createMock( EntitySource::class );
+		$foreignItemSource->expects( $this->any() )
+			->method( 'getInterwikiPrefix' )
+			->willReturn( self::FOREIGN_REPO_PREFIX );
+
+		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
+		$sourceDefs->expects( $this->any() )
+			->method( 'getSourceForEntityType' )
+			->with( Item::ENTITY_TYPE )
+			->willReturn( $foreignItemSource );
+
+		return $sourceDefs;
+	}
+
+	private function newMockEntitySource() {
+		$entitySource = $this->createMock( EntitySource::class );
+		$entitySource->expects( $this->any() )
+			->method( 'getEntityTypes' )
+			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
+
+		return $entitySource;
 	}
 
 }
