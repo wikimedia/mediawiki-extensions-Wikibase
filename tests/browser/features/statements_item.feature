@@ -48,6 +48,6 @@ Feature: Creating statements of type item
 #      And I press the ARROWDOWN key in the claim value input field
 #      And I press the ARROWDOWN key in the claim value input field
 #      And I press the RETURN key in the claim value input field
-#      And I memorize the value of the the claim value input field
+#      And I memorize the value of the claim value input field
 #      And I press the RETURN key in the claim value input field
 #    Then Statement value of claim 1 in group 1 should be what I memorized
