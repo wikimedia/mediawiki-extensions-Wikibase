@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 /**
  * Hash based implementation of DedupeBag.
@@ -92,3 +92,6 @@ class HashDedupeBag implements DedupeBag {
 	}
 
 }
+
+/** @deprecated */
+class_alias( HashDedupeBag::class, 'Wikibase\Rdf\HashDedupeBag' );

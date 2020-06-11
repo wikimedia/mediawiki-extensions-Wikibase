@@ -2,8 +2,6 @@
 
 namespace Wikibase\Repo\Rdf;
 
-use Wikibase\Rdf\DedupeBag;
-
 /**
  * Null implementation of DedupeBag.
  *

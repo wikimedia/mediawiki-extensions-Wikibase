@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use DataValues\DataValue;
 use OutOfBoundsException;
@@ -521,3 +521,6 @@ class RdfVocabulary {
 	}
 
 }
+
+/** @deprecated */
+class_alias( RdfVocabulary::class, 'Wikibase\Rdf\RdfVocabulary' );

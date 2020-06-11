@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\DataValue;
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 
 /**
  * @license GPL-2.0-or-later

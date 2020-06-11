@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Rdf;
+namespace Wikibase\Repo\Rdf;
 
 use Wikibase\DataModel\Entity\EntityDocument;
 
@@ -34,3 +34,6 @@ interface EntityRdfBuilder {
 	public function addEntityStub( EntityDocument $entity );
 
 }
+
+/** @deprecated */
+class_alias( EntityRdfBuilder::class, 'Wikibase\Rdf\EntityRdfBuilder' );

@@ -23,9 +23,9 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Tests\MockRepository;
-use Wikibase\Rdf\RdfVocabulary;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

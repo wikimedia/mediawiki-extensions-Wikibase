@@ -5,8 +5,8 @@ namespace Wikibase\Repo\Tests\Rdf;
 use DataValues\StringValue;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Repo\Rdf\DispatchingValueSnakRdfBuilder;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

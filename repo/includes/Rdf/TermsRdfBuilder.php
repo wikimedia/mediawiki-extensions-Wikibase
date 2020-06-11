@@ -9,8 +9,6 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Rdf\EntityRdfBuilder;
-use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

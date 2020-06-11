@@ -10,10 +10,10 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
-use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Repo\Rdf\EntityMentionListener;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SnakRdfBuilder;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
 
 /**
  * @covers \Wikibase\Repo\Rdf\SnakRdfBuilder

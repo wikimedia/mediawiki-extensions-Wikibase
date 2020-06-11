@@ -4,12 +4,12 @@ namespace Wikibase\Repo\Tests\Rdf;
 
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\EntityMentionListener;
-use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\DedupeBag;
+use Wikibase\Repo\Rdf\EntityMentionListener;
 use Wikibase\Repo\Rdf\FullStatementRdfBuilder;
+use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\NullDedupeBag;
+use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\SnakRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\RdfWriter;

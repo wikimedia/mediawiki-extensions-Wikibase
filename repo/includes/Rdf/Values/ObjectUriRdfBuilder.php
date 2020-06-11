@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\DataValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

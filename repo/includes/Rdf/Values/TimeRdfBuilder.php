@@ -4,9 +4,9 @@ namespace Wikibase\Repo\Rdf\Values;
 
 use DataValues\TimeValue;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
-use Wikibase\Rdf\RdfVocabulary;
-use Wikibase\Rdf\ValueSnakRdfBuilder;
 use Wikibase\Repo\Rdf\DateTimeValueCleaner;
+use Wikibase\Repo\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\ValueSnakRdfBuilder;
 use Wikimedia\Purtle\RdfWriter;
 
 /**

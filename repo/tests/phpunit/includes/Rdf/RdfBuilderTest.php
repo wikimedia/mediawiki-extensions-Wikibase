@@ -12,21 +12,21 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\HashDedupeBag;
-use Wikibase\Rdf\NullEntityRdfBuilder;
-use Wikibase\Rdf\RdfBuilder;
-use Wikibase\Rdf\RdfProducer;
-use Wikibase\Rdf\RdfVocabulary;
+use Wikibase\Repo\Rdf\DedupeBag;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
+use Wikibase\Repo\Rdf\HashDedupeBag;
+use Wikibase\Repo\Rdf\NullEntityRdfBuilder;
 use Wikibase\Repo\Rdf\PropertyRdfBuilder;
+use Wikibase\Repo\Rdf\RdfBuilder;
+use Wikibase\Repo\Rdf\RdfProducer;
+use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
- * @covers \Wikibase\Rdf\RdfBuilder
+ * @covers \Wikibase\Repo\Rdf\RdfBuilder
  *
  * @group Wikibase
  * @group WikibaseRdf

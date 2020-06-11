@@ -8,9 +8,6 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\Rdf\DedupeBag;
-use Wikibase\Rdf\EntityRdfBuilder;
-use Wikibase\Rdf\RdfVocabulary;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
