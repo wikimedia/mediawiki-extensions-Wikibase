@@ -19,7 +19,6 @@ use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
-use Wikibase\Client\Hooks\SkinTemplateOutputPageBeforeExecHandler;
 use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -111,12 +110,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	public function testSidebarHookHandlers(): void {
 		TestingAccessWrapper::newFromClass( SidebarHookHandlers::class )
 			->getInstance();
-		$this->assertTrue( true );
-	}
-
-	public function testSkinTemplateOutputPageBeforeExecHandler(): void {
-		TestingAccessWrapper::newFromClass( SkinTemplateOutputPageBeforeExecHandler::class )
-			->newFromGlobalState();
 		$this->assertTrue( true );
 	}
 

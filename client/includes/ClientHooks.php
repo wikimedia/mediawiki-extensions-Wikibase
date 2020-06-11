@@ -3,7 +3,6 @@
 namespace Wikibase\Client;
 
 use Action;
-use BaseTemplate;
 use ContentHandler;
 use EditPage;
 use MediaWiki\MediaWikiServices;
@@ -18,11 +17,11 @@ use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
-use Wikibase\Client\Hooks\BaseTemplateAfterPortletHandler;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
+use Wikibase\Client\Hooks\SkinAfterPortletHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\DataModel\Entity\EntityId;
@@ -273,16 +272,24 @@ final class ClientHooks {
 	}
 
 	/**
-	 * @param BaseTemplate $skinTemplate
-	 * @param string $name
+	 * @see SkinAfterPortletHandler
+	 *
+	 * @param Skin $skin
+	 * @param string $portlet
 	 * @param string &$html
 	 */
-	public static function onBaseTemplateAfterPortlet( BaseTemplate $skinTemplate, $name, &$html ) {
-		$handler = new BaseTemplateAfterPortletHandler();
-		$link = $handler->getEditLink( $skinTemplate, $name );
+	public static function onSkinAfterPortlet( Skin $skin, $portlet, &$html ): void {
+		// Get the appropriate action link and append it.
+		// If $actionLink gets html for 'edit' action, the section title would
+		// have been already added due to presence of languages content.
+		// If $actionLink gets html for 'add' action, the presence of the content
+		// fragment (non-empty string) will alerts skin to display empty languages
+		// section and its title even though there are no languages.
+		// If $actionLink gets null, no link will be added. The hook is aborted.
+		$actionLink = SkinAfterPortletHandler::handleRequest( $skin );
 
-		if ( $link ) {
-			$html .= $link;
+		if ( $actionLink && $portlet === 'lang' ) {
+			$html .= $actionLink;
 		}
 	}
 
@@ -313,7 +320,7 @@ final class ClientHooks {
 
 	/**
 	 * Register wikibase_item field.
-	 * @param array $fields
+	 * @param array &$fields
 	 * @param SearchEngine $engine
 	 */
 	public static function onSearchIndexFields( array &$fields, SearchEngine $engine ) {
@@ -323,7 +330,7 @@ final class ClientHooks {
 
 	/**
 	 * Put wikibase_item into the data.
-	 * @param array $fields
+	 * @param array &$fields
 	 * @param ContentHandler $handler
 	 * @param WikiPage $page
 	 * @param ParserOutput $output
@@ -345,7 +352,7 @@ final class ClientHooks {
 	/**
 	 * Add morelikewithwikibase keyword.
 	 * @param $config
-	 * @param array $extraFeatures
+	 * @param array &$extraFeatures
 	 */
 	public static function onCirrusSearchAddQueryFeatures(
 		$config,
