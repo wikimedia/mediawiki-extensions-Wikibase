@@ -5,29 +5,29 @@ namespace Wikibase\Repo\Tests\Hooks;
 use MediaWikiTestCase;
 use Message;
 use Psr\Log\LoggerInterface;
-use SkinTemplate;
+use Skin;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\Hooks\BuildNavUrlsHookHandler;
+use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Repo\Hooks\BuildNavUrlsHookHandler
+ * @covers \Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler
  *
  * @group Wikibase
  * @license GPL-2.0-or-later
  */
-class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
+class SidebarBeforeOutputHookHandlerTest extends MediaWikiTestCase {
 
 	private $entityNamespaceLookup;
 	private $entityIdLookup;
 	private $entityLookup;
 	/**
-	 * @var \PHPUnit\Framework\MockObject\MockObject|SkinTemplate
+	 * @var \PHPUnit\Framework\MockObject\MockObject|Skin
 	 */
 	private $skin;
 	/**
@@ -54,7 +54,7 @@ class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
 
 		$this->entityNamespaceLookup = $this->createMock( EntityNamespaceLookup::class );
 
-		$this->skin = $this->createMock( SkinTemplate::class );
+		$this->skin = $this->createMock( Skin::class );
 		$this->skin->method( 'msg' )->willReturn( $this->createMock( Message::class ) );
 
 		$this->mockTitle = $this->createMock( Title::class );
@@ -76,31 +76,24 @@ class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
 		$this->skin->method( 'getTitle' )->willReturn( $this->mockTitle );
 	}
 
-	public function testNewFromGlobalState() {
-		$this->assertInstanceOf(
-			BuildNavUrlsHookHandler::class,
-			BuildNavUrlsHookHandler::newFromGlobalState()
-		);
+	public function testBuildConceptUriLink() {
+		$resultArray = $this->getHookHandler()->buildConceptUriLink( $this->skin );
+
+		$this->assertArrayHasKey( 'id', $resultArray );
 	}
 
-	public function testBuildConceptUri() {
-		$resultArray = $this->getHookHandler()->buildConceptUris( $this->skin );
-
-		$this->assertArrayHasKey( 'wb-concept-uri', $resultArray );
-	}
-
-	public function test_buildConceptUris_WithNoTitleReturnsEmptyArray() {
-		$skin = $this->createMock( SkinTemplate::class );
+	public function test_buildConceptUriLink_WithNoTitleReturnsNull() {
+		$skin = $this->createMock( Skin::class );
 		$skin->method( 'getTitle' )->willReturn( null );
 
-		$this->assertArrayEquals( [], $this->getHookHandler()->buildConceptUris( $skin ) );
+		$this->assertNull( $this->getHookHandler()->buildConceptUriLink( $skin ) );
 	}
 
-	public function test_buildConceptUris_WithNoEntityIdReturnsEmptyArray() {
+	public function test_buildConceptUriLink_WithNoEntityIdReturnsNull() {
 		$this->entityIdLookup = $this->createMock( EntityIdLookup::class );
 		$this->entityIdLookup->method( 'getEntityIdForTitle' )->willReturn( null );
 
-		$this->assertArrayEquals( [], $this->getHookHandler()->buildConceptUris( $this->skin ) );
+		$this->assertNull( $this->getHookHandler()->buildConceptUriLink( $this->skin ) );
 	}
 
 	public function testGetValidEntityId() {
@@ -127,14 +120,16 @@ class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
 
 	public function test_getValidEntityId_WhenEntityLookupThrowsReturnsNull() {
 		$this->entityLookup = $this->createMock( EntityLookup::class );
-		$this->entityLookup->method( 'hasEntity' )->willThrowException( new EntityLookupException( $this->mockEntityId ) );
+		$this->entityLookup->method( 'hasEntity' )
+			->willThrowException( new EntityLookupException( $this->mockEntityId ) );
 
 		$this->assertNull( $this->getHookHandler()->getValidEntityId( $this->mockTitle ) );
 	}
 
 	public function test_getValidEntityId_WhenEntityLookupThrowsLogsWarning() {
 		$this->entityLookup = $this->createMock( EntityLookup::class );
-		$this->entityLookup->method( 'hasEntity' )->willThrowException( new EntityLookupException( $this->mockEntityId ) );
+		$this->entityLookup->method( 'hasEntity' )
+			->willThrowException( new EntityLookupException( $this->mockEntityId ) );
 
 		$this->logger
 			->expects( $this->once() )
@@ -152,7 +147,7 @@ class BuildNavUrlsHookHandlerTest extends MediaWikiTestCase {
 
 	private function getHookHandler(): TestingAccessWrapper {
 		$baseUri = 'http://foo';
-		$hookHandler = new BuildNavUrlsHookHandler(
+		$hookHandler = new SidebarBeforeOutputHookHandler(
 			$baseUri,
 			$this->entityIdLookup,
 			$this->entityLookup,

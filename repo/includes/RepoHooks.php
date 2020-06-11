@@ -7,7 +7,6 @@ use ApiEditPage;
 use ApiModuleManager;
 use ApiQuery;
 use ApiQuerySiteinfo;
-use BaseTemplate;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -42,13 +41,13 @@ use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
+use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
-use Wikibase\Repo\WikibaseRepo;
 use WikiPage;
 
 /**
@@ -938,18 +937,29 @@ final class RepoHooks {
 	}
 
 	/**
-	 * Called in BaseTemplate::getToolbox(), allows us to add navigation URLs to the toolbox.
+	 * Add Concept URI link to the toolbox section of the sidebar.
 	 *
-	 * @param BaseTemplate $baseTemplate
-	 * @param array[] &$toolbox
+	 * @param Skin $skin
+	 * @param string[] &$sidebar
+	 * @return void
 	 */
-	public static function onBaseTemplateToolbox( BaseTemplate $baseTemplate, array &$toolbox ) {
-		if ( !isset( $baseTemplate->data['nav_urls']['wb-concept-uri'] ) ) {
+	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ): void {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$hookHandler = new SidebarBeforeOutputHookHandler(
+			$repo->getSettings()->getSetting( 'conceptBaseUri' ),
+			$repo->getEntityIdLookup(),
+			$repo->getEntityLookup(),
+			$repo->getEntityNamespaceLookup(),
+			$repo->getLogger()
+		);
+
+		$conceptUriLink = $hookHandler->buildConceptUriLink( $skin );
+
+		if ( $conceptUriLink === null ) {
 			return;
 		}
 
-		$toolbox['wb-concept-uri'] = $baseTemplate->data['nav_urls']['wb-concept-uri'];
-		$toolbox['wb-concept-uri']['id'] = 't-wb-concept-uri';
+		$sidebar['TOOLBOX']['wb-concept-uri'] = $conceptUriLink;
 	}
 
 	/**
