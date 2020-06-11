@@ -1,6 +1,6 @@
 This provides a quick and automated way to configure a test system for a 'Federated Properties' enabled Wikibase instance
 
-### Prerequesites
+### Prerequisites
 
 We use [ansible](https://docs.ansible.com/ansible/latest/index.html) to manipulate remote servers via SSH - essentially automating what you'd otherwise do "by hand" in a step-by-step approach. Make sure to have version >=2.8, e.g. by installing via `pip`:
 ```
@@ -26,7 +26,7 @@ If you want to use a virtual machine to run the test system on your computer, pl
 $ sudo apt install vagrant virtualbox-qt
 
 # creates a Debian VM with 1024MB memory and 2 CPUs.
-$ cd extensions/Wikibase/build/federated-properties
+$ cd extensions/Wikibase/build/federated-properties/vagrant
 $ vagrant up
 ```
 

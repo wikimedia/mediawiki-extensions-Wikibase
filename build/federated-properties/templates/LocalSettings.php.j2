@@ -65,3 +65,12 @@ wfLoadExtension( 'cldr' );
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
 $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_URL }}";
 
+# simulate source API errors via request parameter
+if( isset ( $_GET['sourceApiResponse'] ) ) {
+   $wgParserCacheType = CACHE_NONE;
+   $code = $_GET['sourceApiResponse'];
+
+   if( $code == 404 ) {
+      $wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'http://notFound.404';
+   }
+}
