@@ -2529,7 +2529,12 @@ class WikibaseRepo {
 	}
 
 	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
-		return new EntityLinkTargetEntityIdLookup( $this->getEntityNamespaceLookup(), $this->getEntityIdParser() );
+		return new EntityLinkTargetEntityIdLookup(
+			$this->getEntityNamespaceLookup(),
+			$this->getEntityIdParser(),
+			$this->entitySourceDefinitions,
+			$this->getLocalEntitySource()
+		);
 	}
 
 }
