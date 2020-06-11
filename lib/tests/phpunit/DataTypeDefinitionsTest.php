@@ -39,6 +39,9 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			'PT:bar' => [
 				'value-type' => 'BAR',
 				'formatter-factory-callback' => 'DataTypeDefinitionsTest::getBarFormatter',
+				'rdf-data-type' => function () {
+					return 'acme-test-2';
+				},
 			]
 		];
 	}
@@ -64,7 +67,7 @@ class DataTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetRdfDataTypes() {
 		$defs = $this->getDataTypeDefinitions();
-		$this->assertSame( [ 'foo' => 'acme-test' ], $defs->getRdfDataTypes() );
+		$this->assertSame( [ 'foo' => 'acme-test', 'bar' => 'acme-test-2' ], $defs->getRdfDataTypes() );
 	}
 
 	public function testGetValidatorFactoryCallbacks() {

@@ -325,12 +325,22 @@ class DataTypeDefinitions {
 	/**
 	 * Produce array of types for RDF.
 	 * Using PropertyRdfBuilder constants for data types is recommended.
+	 * In situations where PropertyRdfBuilder has not been autoloaded yet,
+	 * the type may be wrapped in a callback.
 	 * @return string[]
 	 */
 	public function getRdfDataTypes() {
-		return $this->getFilteredByPrefix(
-			$this->getMapForDefinitionField( 'rdf-data-type' ),
-			'PT:'
+		return array_map(
+			function ( $dataType ) {
+				if ( is_callable( $dataType ) ) {
+					$dataType = ( $dataType )();
+				}
+				return $dataType;
+			},
+			$this->getFilteredByPrefix(
+				$this->getMapForDefinitionField( 'rdf-data-type' ),
+				'PT:'
+			)
 		);
 	}
 
