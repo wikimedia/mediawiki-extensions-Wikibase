@@ -1043,9 +1043,7 @@ call_user_func( function() {
 	$wgHooks['APIQuerySiteInfoGeneralInfo'][] = 'Wikibase\Repo\RepoHooks::onAPIQuerySiteInfoGeneralInfo';
 	$wgHooks['APIQuerySiteInfoStatisticsInfo'][] = 'Wikibase\Repo\RepoHooks::onAPIQuerySiteInfoStatisticsInfo';
 	$wgHooks['ImportHandleRevisionXMLTag'][] = 'Wikibase\Repo\RepoHooks::onImportHandleRevisionXMLTag';
-	$wgHooks['BaseTemplateToolbox'][] = 'Wikibase\Repo\RepoHooks::onBaseTemplateToolbox';
-	$wgHooks['SkinTemplateBuildNavUrlsNav_urlsAfterPermalink'][]
-		= 'Wikibase\Repo\Hooks\BuildNavUrlsHookHandler::onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink';
+	$wgHooks['SidebarBeforeOutput'][] = 'Wikibase\Repo\RepoHooks::onSidebarBeforeOutput';
 	$wgHooks['ResourceLoaderRegisterModules'][] = 'Wikibase\Repo\RepoHooks::onResourceLoaderRegisterModules';
 	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\Repo\Actions\ViewEntityAction::onBeforeDisplayNoArticleText';
 	$wgHooks['InfoAction'][] = '\Wikibase\Repo\RepoHooks::onInfoAction';

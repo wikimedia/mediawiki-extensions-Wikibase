@@ -3,24 +3,22 @@
 namespace Wikibase\Repo\Hooks;
 
 use Psr\Log\LoggerInterface;
-use SkinTemplate;
+use Skin;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
+ *
+ * If in appropriate namespace and page, create a Concept URI link
+ * for later addition to the sidebar.
  */
-class BuildNavUrlsHookHandler {
+class SidebarBeforeOutputHookHandler {
 
-	/**
-	 * @var self
-	 */
-	private static $instance = null;
 	/**
 	 * @var string
 	 */
@@ -49,7 +47,6 @@ class BuildNavUrlsHookHandler {
 		EntityNamespaceLookup $nsLookup,
 		LoggerInterface $logger
 	) {
-
 		$this->baseConceptUri = $baseConceptUri;
 		$this->idLookup = $idLookup;
 		$this->entityLookup = $entityLookup;
@@ -58,70 +55,37 @@ class BuildNavUrlsHookHandler {
 	}
 
 	/**
-	 * Instantiates the hook handler with services from the WikibaseRepo Singleton
+	 * Build concept URI link for the sidebar toolbox.
 	 *
-	 * @return BuildNavUrlsHookHandler
+	 * @param Skin $skin
+	 * @return string[]|null Array of link elements or Null if link cannot be created.
 	 */
-	public static function newFromGlobalState() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		return new self(
-			$repo->getSettings()->getSetting( 'conceptBaseUri' ),
-			$repo->getEntityIdLookup(),
-			$repo->getEntityLookup(),
-			$repo->getEntityNamespaceLookup(),
-			$repo->getLogger()
-		);
-	}
-
-	/**
-	 * Called in SkinTemplate::buildNavUrls(), allows us to set up navigation URLs to later be used
-	 * in the toolbox.
-	 *
-	 * @param SkinTemplate $skinTemplate
-	 * @param array[] &$navigationUrls
-	 */
-	public static function onSkinTemplateBuildNavUrlsNavUrlsAfterPermalink(
-		SkinTemplate $skinTemplate,
-		array &$navigationUrls
-	) {
-		$navigationUrls = array_merge( $navigationUrls, self::newFromGlobalState()->buildConceptUris( $skinTemplate ) );
-	}
-
-	/**
-	 * Build concept uri array for nav urls
-	 *
-	 * @param SkinTemplate $skin
-	 * @return string[][]
-	 */
-	private function buildConceptUris( SkinTemplate $skin ) {
+	public function buildConceptUriLink( Skin $skin ): ?array {
 		$title = $skin->getTitle();
-
-		if ( $title === null ) {
-			return [];
-		}
-
 		$entityId = $this->getValidEntityId( $title );
 
-		if ( $entityId === null ) {
-			return [];
+		if ( $title === null || $entityId === null ) {
+			return null;
 		}
 
 		return [
-			'wb-concept-uri' => [
-				'text' => $skin->msg( 'wikibase-concept-uri' )->text(),
-				'href' => $this->baseConceptUri . $entityId->getSerialization(),
-				'title' => $skin->msg( 'wikibase-concept-uri-tooltip' )->text()
-			]
+			'id' => 't-wb-concept-uri',
+			'text' => $skin->msg( 'wikibase-concept-uri' )->text(),
+			'href' => $this->baseConceptUri . $entityId->getSerialization(),
+			'title' => $skin->msg( 'wikibase-concept-uri-tooltip' )->text()
 		];
 	}
 
 	/**
 	 * Get a valid entity id, based on a series of checks
 	 *
-	 * @param Title $title
+	 * @param Title|null $title
 	 * @return EntityId|null
 	 */
-	private function getValidEntityId( Title $title ): ?EntityId {
+	private function getValidEntityId( ?Title $title ): ?EntityId {
+		if ( $title === null ) {
+			return null;
+		}
 
 		if ( !$this->nsLookup->isNamespaceWithEntities( $title->getNamespace() ) ) {
 			return null;
@@ -155,5 +119,4 @@ class BuildNavUrlsHookHandler {
 
 		return $entityId;
 	}
-
 }
