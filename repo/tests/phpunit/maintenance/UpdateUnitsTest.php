@@ -6,6 +6,9 @@ use DataValues\DecimalMath;
 use MediaWikiLangTestCase;
 use Wikibase\Repo\Maintenance\UpdateUnits;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/updateUnits.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\UpdateUnits
  *

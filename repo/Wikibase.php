@@ -114,9 +114,6 @@ $GLOBALS['wgValueParsers'] = [];
 require_once __DIR__ . '/../lib/WikibaseLib.php';
 require_once __DIR__ . '/../view/WikibaseView.php';
 
-// Load autoload info as long as extension classes are not PSR-4-autoloaded
-require_once __DIR__ . '/autoload.php';
-
 call_user_func( function() {
 	global $wgAPIMetaModules,
 		$wgAPIListModules,

@@ -9,6 +9,9 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\Repo\Maintenance\PruneItemsPerSite;
 use Wikibase\Repo\WikibaseRepo;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/pruneItemsPerSite.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\PruneItemsPerSite
  *

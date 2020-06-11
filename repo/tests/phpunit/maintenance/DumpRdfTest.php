@@ -43,6 +43,9 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/dumpRdf.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\DumpRdf
  *

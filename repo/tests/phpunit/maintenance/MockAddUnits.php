@@ -6,6 +6,9 @@ use MediaWiki\Sparql\SparqlClient;
 use Wikibase\Lib\Units\UnitConverter;
 use Wikibase\Repo\Maintenance\AddUnitConversions;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/addUnitConversions.php';
+
 /**
  * @license GPL-2.0-or-later
  * @author Stas Malyshev

@@ -8,6 +8,9 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Maintenance\RemoveTermsInLanguage;
 use Wikibase\Repo\WikibaseRepo;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/removeTermsInLanguage.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\RemoveTermsInLanguage
  *
