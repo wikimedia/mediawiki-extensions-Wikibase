@@ -185,7 +185,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "重新載入頁面",
 	"wikibase-client-data-bridge-error-go-back": "返回",
 	"wikibase-client-data-bridge-error-retry-save": "重試儲存",
-	"wikibase-client-data-bridge-login-warning": "成功登入後，<strong>請關閉此分頁並回到原來的分頁</strong>來重試儲存。",
+	"wikibase-client-data-bridge-login-warning": "登入後，<strong>請關閉此分頁並回到原來的分頁</strong>來重試儲存。",
 	"wikibase-client-data-bridge-reference-note": "儲存後可以編輯在{{WBREPONAME}}的參考",
 	"wikibase-client-data-bridge-thank-you-head": "感謝您的編輯！",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "您可以透過點擊下方按鈕來編輯在{{WBREPONAME}}的此項屬性參考。",

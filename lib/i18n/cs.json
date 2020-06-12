@@ -19,6 +19,7 @@
 	"wikibase-deletedentity-property": "Smazaná vlastnost",
 	"wikibase-deletedentity-query": "Smazaný dotaz",
 	"wikibase-error-unexpected": "Chyba: $1.",
+	"wikibase-error-unknown": "Došlo k chybě.",
 	"wikibase-error-save-generic": "Kvůli chybě nebylo možné změny uložit.",
 	"wikibase-error-remove-generic": "Kvůli chybě nebylo možné odstranění provést.",
 	"wikibase-error-save-connection": "Kvůli chybě spojení nebylo možné změny uložit. Prosím zkontrolujte své připojení k Internetu.",
@@ -101,6 +102,7 @@
 	"datatypes-type-geo-shape": "Geografický tvar",
 	"datatypes-type-tabular-data": "Tabulková data",
 	"datatypes-type-external-id": "Externí identifikátor",
+	"datatypes-type-entity-schema": "Entitní schéma",
 	"version-wikibase": "Wikibáze",
 	"wikibase-time-calendar-gregorian": "gregoriánský",
 	"wikibase-time-calendar-julian": "juliánský",
@@ -190,5 +192,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "Vytvořena nová vlastnost",
 	"wikibase-property-summary-wbeditentity-update": "Změněna vlastnost",
 	"wikibase-property-summary-wbeditentity-override": "Vymazána vlastnost",
-	"wikibase-property-summary-special-create-property": "Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}"
+	"wikibase-property-summary-special-create-property": "Založena vlastnost pro [$2] s {{PLURAL:$1|hodnotou|hodnotami}}",
+	"wikibase-reference-formatter-snak-retrieved": "Získáno $1"
 }
