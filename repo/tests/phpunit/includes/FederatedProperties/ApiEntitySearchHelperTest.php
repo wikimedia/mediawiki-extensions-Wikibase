@@ -10,7 +10,9 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
+use Wikibase\Repo\WikibaseRepo;
 use function GuzzleHttp\Psr7\stream_for;
 
 /**
@@ -29,7 +31,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 		'api-entity-search-helper-test-data-entityIdResponse.json',
 		'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
 		'api-entity-search-helper-test-data-errorResponse.json',
-		'api-entity-search-helper-test-data-unexpectedResponse.json'
+		'api-entity-search-helper-test-data-unexpectedResponse.json',
+		'api-entity-search-helper-test-data-filteredResult.json'
 	];
 
 	private $data = [];
@@ -44,6 +47,106 @@ class ApiEntitySearchHelperTest extends TestCase {
 		}
 	}
 
+	private function getNewApiSearchHelper( $api, $dataTypes = null ) {
+		if ( $dataTypes === null ) {
+			$dataTypes = WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getTypeIds();
+		}
+		return new ApiEntitySearchHelper( $api, $dataTypes );
+	}
+
+	private function setupTestApi( &$params, $langCode, $responseDataFile, $statusCode = 200 ) {
+		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
+		$api = $this->createMock( GenericActionApiClient::class );
+		$requestParams = $params;
+		$requestParams['limit'] = $requestParams['limit'] * ApiEntitySearchHelper::API_SEARCH_MULTIPLIER;
+		$api->expects( $this->once() )
+			->method( 'get' )
+			->with( $requestParams )
+			->willReturn( $this->newMockResponse( $responseDataFile, $statusCode ) );
+		return $api;
+	}
+
+	/**
+	 * @dataProvider filteringResultsResponseProvider
+	 *
+	 * @param $params
+	 * @param string $responseDataFile
+	 * @param $expectedResultsEntityIds
+	 * @param $dataTypes
+	 * @param string $langCode
+	 * @param $shouldThrowError
+	 */
+	public function testGetRankedSearchResultsFiltering(
+		$params,
+		$responseDataFile,
+		$expectedResultsEntityIds,
+		$dataTypes,
+		$shouldThrowError,
+		$langCode = 'de'
+	) {
+
+		$api = $this->setupTestApi( $params, $langCode, $responseDataFile );
+		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api, $dataTypes );
+
+		if ( isset( $shouldThrowError ) ) {
+			$this->expectException( $shouldThrowError );
+		}
+
+		$results = $apiEntitySearchHelper->getRankedSearchResults(
+			$params[ 'search' ],
+			$langCode,
+			'property',
+			$params[ 'limit' ],
+			$params[ 'strictlanguage' ]
+		);
+
+		$this->assertEquals( count( $expectedResultsEntityIds ), count( $results ) );
+		$this->assertEquals( $expectedResultsEntityIds, array_keys( $results ) );
+	}
+
+	public function filteringResultsResponseProvider() {
+
+		$file = 'api-entity-search-helper-test-data-filteredResult.json';
+		$defaultParams = [
+			'action' => 'wbsearchentities',
+			'search' => 'P147',
+			'type' => 'property',
+			'limit' => 3,
+			'strictlanguage' => false
+		];
+
+		return [
+			'filteredStringResponse' => [
+				array_merge( $defaultParams, [ 'limit' => 3 ] ),
+				$file,
+				[ 'P1', 'P4', 'P5' ], // returned entities
+				[ 'string' ], // datatypes
+				null,
+			],
+			'filteredEmptyResult' => [
+				array_merge( $defaultParams, [ 'limit' => 6 ] ),
+				'api-entity-search-helper-test-data-emptyResponse.json',
+				[],
+				[],
+				null,
+			],
+			'filteredResultOneLessThanLimit8' => [
+				array_merge( $defaultParams, [ 'limit' => 8 ] ),
+				$file,
+				[ 'P1', 'P2', 'P3', 'P4', 'P5', 'P6', 'P7' ],
+				[ 'string', 'time' ],
+				null,
+			],
+			'filteredResultOneLessThanLimit' => [
+				array_merge( $defaultParams, [ 'limit' => 2 ] ),
+				$file,
+				[ 'P8' ],
+				[ 'monolingualtext' ],
+				FederatedPropertiesException::class,
+			]
+		];
+	}
+
 	/**
 	 * @dataProvider paramsAndExpectedResponseProvider
 	 * @param string $responseDataFile
@@ -53,15 +156,9 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 */
 	public function testGetRankedSearchResults( $langCode, $params, $responseDataFile, $expectedResultsEntityIds ) {
 
-		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
+		$api = $this->setupTestApi( $params, $langCode, $responseDataFile );
+		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api );
 
-		$api = $this->createMock( GenericActionApiClient::class );
-		$api->expects( $this->once() )
-			->method( 'get' )
-			->with( $params )
-			->willReturn( $this->newMockResponse( $responseDataFile, 200 ) );
-
-		$apiEntitySearchHelper = new ApiEntitySearchHelper( $api );
 		$responseData = $this->data[ $responseDataFile ];
 		$results = $apiEntitySearchHelper->getRankedSearchResults(
 			$params[ 'search' ],
@@ -69,7 +166,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 			'property',
 			$params[ 'limit' ],
 			$params[ 'strictlanguage' ]
-
 		);
 
 		$this->assertEquals( count( $expectedResultsEntityIds ), count( $results ) );
@@ -153,14 +249,8 @@ class ApiEntitySearchHelperTest extends TestCase {
 	 * @param array $expectedResultsEntityId
 	 */
 	public function testApiResponseStructureIsValid( $langCode, $params, $responseDataFile, $statusCode ) {
-		$params = array_merge( $params, [ 'language' => $langCode, 'uselang' => $langCode, 'format' => 'json' ] );
-		$api = $this->createMock( GenericActionApiClient::class );
-		$api->expects( $this->once() )
-			->method( 'get' )
-			->with( $params )
-			->willReturn( $this->newMockResponse( $responseDataFile, $statusCode ) );
-		$apiEntitySearchHelper = new ApiEntitySearchHelper( $api );
-
+		$api = $this->setupTestApi( $params, $langCode, $responseDataFile, $statusCode );
+		$apiEntitySearchHelper = $this->getNewApiSearchHelper( $api );
 		try {
 			$apiEntitySearchHelper->getRankedSearchResults(
 				$params[ 'search' ],
@@ -271,7 +361,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 				],
 				'api-entity-search-helper-test-data-multipleEntityIdResponse.json',
 				[ 'P147', 'P160020' ]
-			]
+			],
 		];
 	}
 }

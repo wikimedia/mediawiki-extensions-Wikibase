@@ -17,15 +17,35 @@ use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 class ApiEntitySearchHelper implements EntitySearchHelper {
 
 	/**
+	 * @var int
+	 *
+	 * When making requests there is a risk of too many items being filtered out.
+	 * In order to work around this but not ending up making multiple requests,
+	 * for now each search limit will be multiplied using this variable.
+	 *
+	 * @see https://phabricator.wikimedia.org/T252012
+	 */
+	public const API_SEARCH_MULTIPLIER = 2;
+
+	/**
 	 * @var GenericActionApiClient
 	 */
 	private $api;
 
 	/**
-	 * @param GenericActionApiClient $api
+	 * @var array
 	 */
-	public function __construct( GenericActionApiClient $api ) {
+	private $typesEnabled = [];
+
+	/**
+	 * @param GenericActionApiClient $api
+	 * @param string[] $enabledDataTypes
+	 */
+	public function __construct( GenericActionApiClient $api, array $enabledDataTypes ) {
 		$this->api = $api;
+		foreach ( $enabledDataTypes as $dataType ) {
+			$this->typesEnabled[$dataType] = true;
+		}
 	}
 
 	/**
@@ -38,7 +58,6 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 	 * @param bool $strictLanguage
 	 *
 	 * @return TermSearchResult[] Key: string Serialized EntityId
-	 * @throws ApiRequestException
 	 * @throws InvalidArgumentException
 	 */
 	public function getRankedSearchResults( $text, $languageCode, $entityType, $limit, $strictLanguage ) {
@@ -48,29 +67,10 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 
 			throw new InvalidArgumentException( 'Wrong argument passed in. Entity type must be a property' );
 		}
+		$jsonResult = $this->makeRequest( $text, $languageCode, $entityType, $limit, $strictLanguage );
+		$filteredResult = $this->filterRequest( $jsonResult, $limit );
 
-		// https://www.wikidata.org/w/api.php?action=help&modules=wbsearchentities
-		$params = [
-			'action' => 'wbsearchentities',
-			'search' => $text,
-			'language' => $languageCode,
-			'type' => $entityType,
-			'limit' => $limit,
-			'strictlanguage' => $strictLanguage,
-			'uselang' => $languageCode,
-			'format' => 'json',
-		];
-		$response = $this->api->get( $params );
-		$jsonResult = json_decode( $response->getBody()->getContents(), true );
-
-		if ( $response->getStatusCode() !== 200 ) {
-
-			throw new ApiRequestException( 'Unexpected response output' );
-		}
-
-		// @phan-suppress-next-line PhanTypeArraySuspiciousNullable The API response will be JSON here
-		foreach ( $jsonResult['search'] as $result ) {
-
+		foreach ( $filteredResult as $result ) {
 			$termSearchResult = new TermSearchResult(
 				$this->getMatchedTerm( $result['match'] ),
 				$result['match']['type'],
@@ -82,9 +82,81 @@ class ApiEntitySearchHelper implements EntitySearchHelper {
 					PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY => $result['datatype'],
 				]
 			);
+
 			$allResults[ $result['id'] ] = $termSearchResult;
 		}
 		return $allResults;
+	}
+
+	/**
+	 * @param array $jsonResult
+	 * @param int $limit
+	 *
+	 * @return array
+	 * @throws FederatedPropertiesException
+	 *
+	 * @see https://phabricator.wikimedia.org/T252012
+	 */
+	private function filterRequest( array $jsonResult, int $limit ) {
+		$resultsArray = [];
+		$filteredResultCount = 0;
+
+		foreach ( $jsonResult['search'] as $result ) {
+			if ( !isset( $this->typesEnabled[$result['datatype']] ) ) {
+				continue;
+			}
+			$filteredResultCount++;
+			$resultsArray[] = $result;
+
+			if ( $filteredResultCount === $limit ) {
+				return $resultsArray;
+			}
+		}
+
+		$shouldFetchMore = $filteredResultCount < $limit && count( $jsonResult['search'] ) > $limit;
+
+		if ( $shouldFetchMore ) {
+			throw new FederatedPropertiesException( 'Result has too many unsupported data types.' );
+		}
+		return $resultsArray;
+	}
+
+	/**
+	 * @param string $text
+	 * @param string $languageCode
+	 * @param string $entityType
+	 * @param int $limit
+	 * @param bool $strictLanguage
+	 *
+	 * @return mixed
+	 * @throws ApiRequestException
+	 *
+	 * @see https://www.wikidata.org/w/api.php?action=help&modules=wbsearchentities
+	 */
+	private function makeRequest(
+		string $text,
+		string $languageCode,
+		string $entityType,
+		int $limit,
+		bool $strictLanguage
+	) {
+		$params = [
+			'action' => 'wbsearchentities',
+			'search' => $text,
+			'language' => $languageCode,
+			'type' => $entityType,
+			'limit' => self::API_SEARCH_MULTIPLIER * $limit,
+			'strictlanguage' => $strictLanguage,
+			'uselang' => $languageCode,
+			'format' => 'json',
+		];
+		$response = $this->api->get( $params );
+		$jsonResult = json_decode( $response->getBody()->getContents(), true );
+
+		if ( $response->getStatusCode() !== 200 ) {
+			throw new ApiRequestException( 'Unexpected response output' );
+		}
+		return $jsonResult;
 	}
 
 	private function getMatchedTerm( array $match ) {
