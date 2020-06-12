@@ -1123,7 +1123,7 @@ class WikibaseRepo {
 		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'original' ) {
 			return new SqlIdGenerator(
 				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->getSettings()->getSetting( 'idBlacklist' ),
+				$this->getSettings()->getSetting( 'reservedIds' ),
 				$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
 			);
 		}
@@ -1134,7 +1134,7 @@ class WikibaseRepo {
 			// ID selection fails anyway...
 			return new UpsertSqlIdGenerator(
 				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->getSettings()->getSetting( 'idBlacklist' ),
+				$this->getSettings()->getSetting( 'reservedIds' ),
 				$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
 			);
 		}
