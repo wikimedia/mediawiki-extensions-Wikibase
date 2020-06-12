@@ -43,7 +43,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			$this->getSkin( $noExternalLangLinks, $languageUrls )
 		);
 
-		$this->assertStringContainsString( 'Edit links', $result );
+		$this->assertStringContainsString( wfMessage( 'wikibase-editlinks' )->text(), $result );
 	}
 
 	public function testDoSkinAfterPortlet_addLink() {
@@ -56,7 +56,7 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			$this->getSkin( $noExternalLangLinks, $languageUrls )
 		);
 
-		$this->assertStringContainsString( 'Add links', $result );
+		$this->assertStringContainsString( wfMessage( 'wikibase-linkitem-addlinks' )->text(), $result );
 	}
 
 	public function testDoSkinAfterPortlet_nonViewAction() {
