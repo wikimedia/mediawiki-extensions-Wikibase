@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
+use Message;
 use OutputPage;
 use Status;
 use UserBlockedError;
@@ -125,7 +126,7 @@ abstract class SpecialNewEntity extends SpecialWikibaseRepoPage {
 	abstract protected function getFormFields();
 
 	/**
-	 * @return string Legend for the fieldset
+	 * @return string|Message $msg Legend for the fieldset, Message key or Message object
 	 */
 	abstract protected function getLegend();
 

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use Message;
 use OutputPage;
 use SiteLookup;
 use Status;
@@ -197,10 +198,10 @@ class SpecialNewItem extends SpecialNewEntity {
 	/**
 	 * @see SpecialNewEntity::getLegend
 	 *
-	 * @return string
+	 * @return string|Message $msg Message key or Message object
 	 */
 	protected function getLegend() {
-		return $this->msg( 'wikibase-newitem-fieldset' )->parse();
+		return $this->msg( 'wikibase-newitem-fieldset' );
 	}
 
 	/**
