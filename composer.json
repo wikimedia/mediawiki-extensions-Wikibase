@@ -42,11 +42,11 @@
 		"guzzlehttp/guzzle": "^6.0.0"
 	},
 	"require-dev": {
-		"jakub-onderka/php-parallel-lint": "1.0.0",
-		"jakub-onderka/php-console-highlighter": "0.4.0",
-		"mediawiki/minus-x": "1.0.0",
 		"cache/integration-tests": "dev-master#ba6fcfd823d623ba73c2faba5a208067281c4c38",
 		"mediawiki/mediawiki-phan-config": "0.10.2",
+		"mediawiki/minus-x": "1.1.0",
+		"php-parallel-lint/php-console-highlighter": "0.5.0",
+		"php-parallel-lint/php-parallel-lint": "1.2.0",
 		"wikibase/wikibase-codesniffer": "1.1.0"
 	},
 	"suggest": {
