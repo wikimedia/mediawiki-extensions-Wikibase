@@ -45,11 +45,3 @@ call_user_func( function() {
 } );
 
 define( 'WBL_VERSION', '0.5 alpha' );
-
-// Nasty hack: some lib's tests rely on ItemContent class defined in Repo! Load it in client-only mode to have tests pass
-if ( !defined( 'WB_VERSION' ) && defined( 'MW_PHPUNIT_TEST' ) ) {
-	global $wgAutoloadClasses;
-	$wgAutoloadClasses['Wikibase\\Repo\\Content\\ItemContent'] = __DIR__ . '/../repo/includes/Content/ItemContent.php';
-	$wgAutoloadClasses['Wikibase\\Repo\\Content\\EntityContent'] = __DIR__ . '/../repo/includes/Content/EntityContent.php';
-	$wgAutoloadClasses['Wikibase\\Repo\\Content\\EntityContentDiff'] = __DIR__ . '/../repo/includes/Content/EntityContentDiff.php';
-}

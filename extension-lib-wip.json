@@ -33,5 +33,10 @@
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
 	},
+	"TestAutoloadClasses": {
+		"Wikibase\\Repo\\Content\\ItemContent": "repo/includes/Content/ItemContent.php",
+		"Wikibase\\Repo\\Content\\EntityContent": "repo/includes/Content/EntityContent.php",
+		"Wikibase\\Repo\\Content\\EntityContentDiff": "repo/includes/Content/EntityContentDiff.php"
+	},
 	"manifest_version": 2
 }
