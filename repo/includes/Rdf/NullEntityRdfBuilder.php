@@ -19,6 +19,3 @@ class NullEntityRdfBuilder implements EntityRdfBuilder {
 	}
 
 }
-
-/** @deprecated */
-class_alias( NullEntityRdfBuilder::class, 'Wikibase\Rdf\NullEntityRdfBuilder' );

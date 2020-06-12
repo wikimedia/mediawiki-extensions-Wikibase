@@ -30,6 +30,3 @@ interface DedupeBag {
 	public function alreadySeen( $hash, $namespace = '' );
 
 }
-
-/** @deprecated */
-class_alias( DedupeBag::class, 'Wikibase\Rdf\DedupeBag' );

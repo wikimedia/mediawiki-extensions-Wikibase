@@ -34,6 +34,3 @@ interface EntityRdfBuilder {
 	public function addEntityStub( EntityDocument $entity );
 
 }
-
-/** @deprecated */
-class_alias( EntityRdfBuilder::class, 'Wikibase\Rdf\EntityRdfBuilder' );

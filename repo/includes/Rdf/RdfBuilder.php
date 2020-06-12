@@ -545,6 +545,3 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	}
 
 }
-
-/** @deprecated */
-class_alias( RdfBuilder::class, 'Wikibase\Rdf\RdfBuilder' );

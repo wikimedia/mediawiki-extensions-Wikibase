@@ -74,6 +74,3 @@ interface RdfProducer {
 	const PRODUCE_ALL = 0xFFFF;
 
 }
-
-/** @deprecated */
-class_alias( RdfProducer::class, 'Wikibase\Rdf\RdfProducer' );
