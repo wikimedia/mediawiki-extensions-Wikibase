@@ -15,14 +15,6 @@ class DatabaseUsageCheckingTermStoreCleaner implements TermStoreCleaner {
 	 */
 	private $innerCleaner;
 	/**
-	 * @var \Wikimedia\Rdbms\IDatabase
-	 */
-	private $dbw = null;
-	/**
-	 * @var \Wikimedia\Rdbms\IDatabase
-	 */
-	private $dbr = null;
-	/**
 	 * @var ILoadBalancer
 	 */
 	private $loadBalancer;
