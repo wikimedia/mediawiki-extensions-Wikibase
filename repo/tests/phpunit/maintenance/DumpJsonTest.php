@@ -29,13 +29,13 @@ use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\DumpJson;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\Maintenance\DumpJson;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * @covers \Wikibase\DumpJson
+ * @covers \Wikibase\Repo\Maintenance\DumpJson
  *
  * @group Wikibase
  *

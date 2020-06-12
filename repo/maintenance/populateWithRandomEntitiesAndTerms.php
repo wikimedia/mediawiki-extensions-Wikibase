@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Build;
+namespace Wikibase\Repo\Maintenance;
 
 use Generator;
 use Maintenance;

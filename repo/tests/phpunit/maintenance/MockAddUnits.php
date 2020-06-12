@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use MediaWiki\Sparql\SparqlClient;
-use Wikibase\AddUnitConversions;
 use Wikibase\Lib\Units\UnitConverter;
+use Wikibase\Repo\Maintenance\AddUnitConversions;
 
 /**
  * @license GPL-2.0-or-later

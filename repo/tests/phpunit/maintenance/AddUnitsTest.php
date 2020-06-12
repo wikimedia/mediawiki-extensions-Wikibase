@@ -11,7 +11,7 @@ use Wikibase\Repo\Tests\Rdf\NTriplesRdfTestHelper;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 
 /**
- * @covers \Wikibase\AddUnitConversions
+ * @covers \Wikibase\Repo\Maintenance\AddUnitConversions
  *
  * @group Wikibase
  *
