@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use LoggedUpdateMaintenance;
 use Onoi\MessageReporter\ObservableMessageReporter;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\Repo\Maintenance;
 
 use MediaWiki\MediaWikiServices;
 use SiteLookup;
@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Dumpers\DumpGenerator;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
-use Wikibase\Repo\Maintenance\DumpEntities;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
