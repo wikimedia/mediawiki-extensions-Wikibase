@@ -615,7 +615,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * This method performs entity level permission checks, checks the edit toke, enforces rate
 	 * limits, resolves edit conflicts, and updates user watchlists if appropriate.
 	 *
-	 * Success or failure are reported via the STatus object returned by this method.
+	 * Success or failure are reported via the Status object returned by this method.
 	 *
 	 * @param EntityDocument $newEntity
 	 * @param string $summary The edit summary.
@@ -665,7 +665,7 @@ class MediawikiEditEntity implements EditEntity {
 			return $this->status;
 		}
 
-		//NOTE: Make sure the latest revision is loaded and cached.
+		// NOTE: Make sure the latest revision is loaded and cached.
 		//      Would happen on demand anyway, but we want a well-defined point at which "latest" is
 		//      frozen to a specific revision, just before the first check for edit conflicts.
 		//      We can use the ID of the latest revision to protect against race conditions:
