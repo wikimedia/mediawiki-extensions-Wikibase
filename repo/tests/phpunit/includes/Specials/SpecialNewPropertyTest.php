@@ -30,7 +30,7 @@ use Wikimedia\Rdbms\IMaintainableDatabase;
  */
 class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 		$tables = [
@@ -61,7 +61,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		];
 	}
 
-	public function tearDown() : void {
+	protected function tearDown() : void {
 		parent::tearDown();
 		// Cleaning ContentHandler cache because RepoHooks instantiate
 		// and cache those prior to changing the migration setting

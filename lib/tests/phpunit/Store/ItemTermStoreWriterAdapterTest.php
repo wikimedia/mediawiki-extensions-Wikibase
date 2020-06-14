@@ -29,7 +29,7 @@ class ItemTermStoreWriterAdapterTest extends TestCase {
 	 */
 	private $itemTermStoreWriter;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		$this->itemTermStoreWriter = $this->newItemTermStoreWriter();
 	}
 

@@ -115,7 +115,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 		$mockRepository->putEntity( $item );
 	}
 
-	public function tearDown() : void {
+	protected function tearDown() : void {
 		parent::tearDown();
 
 		WikibaseClient::getDefaultInstance( 'reset' );

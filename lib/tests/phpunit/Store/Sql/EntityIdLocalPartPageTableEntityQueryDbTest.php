@@ -20,7 +20,7 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
  */
 class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiTestCase {
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'page';
 		$this->tablesUsed[] = 'slots';

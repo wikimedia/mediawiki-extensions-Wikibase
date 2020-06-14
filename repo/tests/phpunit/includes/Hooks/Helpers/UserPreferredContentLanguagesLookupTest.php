@@ -20,7 +20,7 @@ class UserPreferredContentLanguagesLookupTest extends TestCase {
 	private $userLanguageLookup;
 	private $contentLanguages;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->userLanguageLookup = $this->createMock( UserLanguageLookup::class );

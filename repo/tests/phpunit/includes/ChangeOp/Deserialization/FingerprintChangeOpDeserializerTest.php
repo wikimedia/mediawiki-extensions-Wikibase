@@ -30,7 +30,7 @@ class FingerprintChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 	/** @var AliasesChangeOpDeserializer */
 	private $aliasesChangeOpDeserializerMock;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$createNullChangeOpCallback = function ( $changeRequest ) {
 			return new NullChangeOp();
 		};

@@ -27,7 +27,7 @@ class TermStoresDelegatingPrefetchingItemTermLookupTest extends TestCase {
 	/** @var PrefetchingTermLookup */
 	private $wbTermsStorePrefetchingTermLookup;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->normalizedStoreItemId = ItemId::newFromNumber( 123 );
 		$this->wbTermsStoreItemId = ItemId::newFromNumber( 321 );
 

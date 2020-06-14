@@ -38,7 +38,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'federatedPropertiesEnabled', false );

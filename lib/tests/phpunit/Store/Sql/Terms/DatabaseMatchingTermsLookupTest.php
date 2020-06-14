@@ -41,7 +41,7 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 	 */
 	private $lbFactory;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		// We can't use the mediawiki integration test since we union temp tables.
 		$this->sqliteDb = $this->setUpNewDb();
 		$loadBalancer = new FakeLoadBalancer( [

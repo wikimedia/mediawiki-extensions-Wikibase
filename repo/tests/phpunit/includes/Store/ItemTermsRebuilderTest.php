@@ -46,7 +46,7 @@ class ItemTermsRebuilderTest extends MediaWikiTestCase {
 
 	private $itemIds;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->itemTermStoreWriter = $this->newItemTermStoreWriter();

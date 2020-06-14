@@ -28,7 +28,7 @@ class ChangeOpsResultTest extends TestCase {
 	/** @var ChangeOpResult */
 	private $changeOpResult2;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->entityId = $this->createMock( EntityId::class );
 		$this->changeOpResult1 = $this->createMock( ChangeOpResult::class );
 		$this->changeOpResult2 = $this->createMock( ChangeOpResult::class );

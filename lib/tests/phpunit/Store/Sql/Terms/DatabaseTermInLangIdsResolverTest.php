@@ -33,7 +33,7 @@ class DatabaseTermInLangIdsResolverTest extends TestCase {
 		return __DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql';
 	}
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		$this->typeIdsResolver = new StaticTypeIdsStore( [
 			'label' => self::TYPE_LABEL,
 			'description' => self::TYPE_DESCRIPTION,

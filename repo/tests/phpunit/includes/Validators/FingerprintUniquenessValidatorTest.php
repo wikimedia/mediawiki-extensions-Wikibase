@@ -34,7 +34,7 @@ class FingerprintUniquenessValidatorTest extends TestCase {
 	/** @var TermLookup */
 	private $termLookup;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->termsCollisionDetector = $this->createMock( TermsCollisionDetector::class );
 		$this->termLookup = $this->createMock( TermLookup::class );
 	}
