@@ -16,8 +16,7 @@
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Repo\\": "repo/includes/",
-		"Wikibase\\Repo\\Maintenance\\": "repo/maintenance/"
+		"Wikibase\\Repo\\": "repo/includes/"
 	},
 	"AutoloadClasses": {
 		"Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId": "repo/maintenance/populateTermFullEntityId.php",
