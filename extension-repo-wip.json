@@ -19,6 +19,10 @@
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Repo\\Maintenance\\": "repo/maintenance/"
 	},
+	"AutoloadClasses": {
+		"Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId": "repo/maintenance/populateTermFullEntityId.php",
+		"Wikibase\\Repo\\Maintenance\\RebuildTermsSearchKey": "repo/maintenance/rebuildTermsSearchKey.php"
+	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/"

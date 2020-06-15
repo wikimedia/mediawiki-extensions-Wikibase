@@ -34,6 +34,9 @@ use Wikibase\Repo\Maintenance\DumpJson;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\WikibaseRepo;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/dumpJson.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\DumpJson
  *
