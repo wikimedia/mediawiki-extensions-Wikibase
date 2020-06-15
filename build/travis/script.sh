@@ -4,4 +4,4 @@ set -ex
 
 cd ../phase3/tests/phpunit
 
-php phpunit.php --group Wikibase,Purtle
+php phpunit.php --group Wikibase
