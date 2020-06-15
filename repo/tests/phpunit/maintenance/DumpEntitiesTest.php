@@ -7,6 +7,9 @@ use Wikibase\Repo\Maintenance\DumpEntities;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikimedia\TestingAccessWrapper;
 
+// files in maintenance/ are not autoloaded to avoid accidental usage, so load explicitly
+require_once __DIR__ . '/../../../maintenance/DumpEntities.php';
+
 /**
  * @covers \Wikibase\Repo\Maintenance\DumpEntities
  *
