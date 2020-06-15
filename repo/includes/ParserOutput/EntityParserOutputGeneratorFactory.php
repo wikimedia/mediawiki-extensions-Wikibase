@@ -17,8 +17,10 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -183,6 +185,13 @@ class EntityParserOutputGeneratorFactory {
 			$this->stats,
 			'wikibase.repo.ParserOutputGenerator.timing'
 		);
+
+		if ( WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$pog = new FederatedPropertiesEntityParserOutputGenerator(
+				$pog,
+				$userLanguage
+			);
+		}
 
 		return $pog;
 	}
