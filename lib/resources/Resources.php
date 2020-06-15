@@ -116,11 +116,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'vue2' => $moduleTemplate + [
-			'scripts' => 'vendor/vue2.common.prod.js',
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'jquery.event.special.eachchange' => $libPaths + [
 			'scripts' => [
 				'jquery.event/jquery.event.special.eachchange.js'

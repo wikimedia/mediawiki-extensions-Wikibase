@@ -95,8 +95,8 @@ npm update vue
   printf '%s\n' '(function(){'
   cat node_modules/vue/dist/vue.common.prod.js
   printf '\n%s\n' '})();'
-} >| lib/resources/vendor/vue2.common.prod.js
-git add -f lib/resources/vendor/vue2.common.prod.js
+} >| view/resources/vendor/vue2.common.prod.js
+git add -f view/resources/vendor/vue2.common.prod.js
 ```
 
 (The surrounding IIFE is necessary to avoid Vue breaking the page in ResourceLoader’s debug mode, see [T229390](https://phabricator.wikimedia.org/T229390).)
