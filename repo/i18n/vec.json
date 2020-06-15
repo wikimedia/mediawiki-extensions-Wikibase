@@ -210,5 +210,6 @@
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interogasion Wikibase",
 	"action-property-create": "crear le proprietà",
-	"right-property-create": "Crea proprietà"
+	"right-property-create": "Crea proprietà",
+	"wikibase-tainted-ref-warning-icon-title": "Sta declarasion ła ga calche potensiałe problema"
 }
