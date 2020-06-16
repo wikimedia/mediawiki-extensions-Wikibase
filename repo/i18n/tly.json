@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ganbarzada"
+			"Ganbarzada",
+			"Patriot Kur"
 		]
 	},
-	"wikibase-edit": "Sərost"
+	"wikibase-edit": "Sərost",
+	"wikibase-cancel": "ləğv karde",
+	"wikibase-add": "əlovə"
 }
