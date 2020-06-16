@@ -155,26 +155,6 @@ class DataTypesModule extends ResourceLoaderModule {
 	}
 
 	/**
-	 * Returns the message keys of the registered data types.
-	 * @see ResourceLoaderModule::getMessages
-	 * @since 0.1
-	 *
-	 * @return string[]
-	 */
-	public function getMessages() {
-		$messageKeys = [];
-
-		foreach ( $this->dataTypes as $dataType ) {
-			// TODO: currently we assume that the type is using a message while it does not have to.
-			//  Either change the system to ensure that a message is used or put the type labels
-			//  directly into the JSON. Either way, the information should be in DataType::toArray.
-			$messageKeys[] = $dataType->getMessageKey();
-		}
-
-		return $messageKeys;
-	}
-
-	/**
 	 * @see ResourceLoaderModule::getDefinitionSummary
 	 *
 	 * @param ResourceLoaderContext $context
