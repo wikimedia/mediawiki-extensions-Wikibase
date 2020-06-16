@@ -169,7 +169,7 @@ class DataTypesModule extends ResourceLoaderModule {
 			// TODO: currently we assume that the type is using a message while it does not have to.
 			//  Either change the system to ensure that a message is used or put the type labels
 			//  directly into the JSON. Either way, the information should be in DataType::toArray.
-			$messageKeys[] = 'datatypes-type-' . $dataType->getId();
+			$messageKeys[] = $dataType->getMessageKey();
 		}
 
 		return $messageKeys;
