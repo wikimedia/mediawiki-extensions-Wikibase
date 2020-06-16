@@ -20,7 +20,7 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 			[
 				'WikibaseRepo' . '::' => 0,
 				'Wikibase\\Repo\\' => 5,
-				'Wikibase\\\\Repo\\\\' => 2,
+				'Wikibase\\\\Repo\\\\' => 1,
 				'WikibaseClient' . '::' => 0,
 				'Wikibase\\Client\\' => 0,
 				'Wikibase\\\\Client\\\\' => 1,
@@ -38,6 +38,14 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 				$maxAllowance,
 				$counts[$string],
 				'You are not allowed to use ' . $string . ' in this component'
+			);
+			$this->assertThat(
+				$maxAllowance,
+				$this->logicalNot( $this->greaterThan( $counts[$string] ) ),
+				'It looks like you successfully reduced the usage of ' .
+				$string . ' in this component. Congratulations :) ' .
+				'Please lower the threshold in NoBadDependencyUsageTest accordingly, ' .
+				'so that no new usages are accidentally introduced in the future.'
 			);
 		}
 	}
