@@ -16,15 +16,12 @@
 	"TestAutoloadNamespaces": {
 		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
 	},
-	"AutoloadClasses": {
-		"Wikibase\\ViewHooks": "view/ViewHooks.php"
-	},
 	"Hooks": {
-		"ResourceLoaderRegisterModules": "\\Wikibase\\ViewHooks::onResourceLoaderRegisterModules",
-		"ResourceLoaderTestModules": "\\Wikibase\\ViewHooks::onResourceLoaderTestModules",
-		"UnitTestsList": "\\Wikibase\\ViewHooks::onUnitTestsList"
+		"ResourceLoaderRegisterModules": "\\Wikibase\\View\\ViewHooks::onResourceLoaderRegisterModules",
+		"ResourceLoaderTestModules": "\\Wikibase\\View\\ViewHooks::onResourceLoaderTestModules",
+		"UnitTestsList": "\\Wikibase\\View\\ViewHooks::onUnitTestsList"
 	},
-	"callback": "\\Wikibase\\ViewHooks::onRegistration",
+	"callback": "\\Wikibase\\View\\ViewHooks::onRegistration",
 	"MessagesDirs": {
 		"WikibaseView": [
 			"view/lib/wikibase-data-values-value-view/i18n"

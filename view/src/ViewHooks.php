@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase;
+namespace Wikibase\View;
 
 use ExtensionRegistry;
 use ResourceLoader;
@@ -21,7 +21,7 @@ final class ViewHooks {
 
 		$wgResourceModules = array_merge(
 			$wgResourceModules,
-			require __DIR__ . '/resources.php'
+			require __DIR__ . '/../resources.php'
 		);
 	}
 
@@ -36,7 +36,7 @@ final class ViewHooks {
 	 */
 	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
 		$moduleTemplate = [
-			'localBasePath' => __DIR__,
+			'localBasePath' => __DIR__ . '/..',
 			'remoteExtPath' => 'Wikibase/view',
 		];
 
@@ -80,8 +80,8 @@ final class ViewHooks {
 	) {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
-			require __DIR__ . '/lib/resources.test.php',
-			require __DIR__ . '/tests/qunit/resources.php'
+			require __DIR__ . '/../lib/resources.test.php',
+			require __DIR__ . '/../tests/qunit/resources.php'
 		);
 	}
 
@@ -91,7 +91,7 @@ final class ViewHooks {
 	 * @param string[] &$paths
 	 */
 	public static function onUnitTestsList( array &$paths ) {
-		$paths[] = __DIR__ . '/tests/phpunit';
+		$paths[] = __DIR__ . '/../tests/phpunit';
 	}
 
 }
