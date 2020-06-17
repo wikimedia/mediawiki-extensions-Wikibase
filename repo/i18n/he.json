@@ -431,5 +431,6 @@
 	"wikibase-tainted-ref-popper-help-link-text": "עזרה",
 	"wikibase-tainted-ref-popper-remove-warning": "הסרת אזהרה",
 	"wikibase-tainted-ref-tainted-icon-title": "בקביעה הזאת יש סוגיות אפשריות.",
-	"wikibase-setclaim-warning-duplicatemainsnak": "נמצא סנאק כפול. הקביעה לא נוספה."
+	"wikibase-setclaim-warning-duplicatemainsnak": "נמצא סנאק כפול. הקביעה לא נוספה.",
+	"wikibase-federated-properties-source-wiki-api-error-message": "קביעות על הפריט הזה אינן זמינות באופן זמני בשל בקשה כושלת לוויקי המקור של הפדרציה. נא לרענן את הדף."
 }

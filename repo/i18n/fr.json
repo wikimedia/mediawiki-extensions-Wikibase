@@ -474,5 +474,6 @@
 	"wikibase-tainted-ref-popper-help-link-text": "Aide",
 	"wikibase-tainted-ref-popper-remove-warning": "Supprimer l’avertissement",
 	"wikibase-tainted-ref-tainted-icon-title": "Cette instruction présente des problèmes potentiels.",
-	"wikibase-setclaim-warning-duplicatemainsnak": "Snak principal dupliqué détecté. La déclaration n’a pas été ajoutée."
+	"wikibase-setclaim-warning-duplicatemainsnak": "Snak principal dupliqué détecté. La déclaration n’a pas été ajoutée.",
+	"wikibase-federated-properties-source-wiki-api-error-message": "Les déclarations concernant cet élément sont temporairement indisponibles en raison d’une demande non aboutie auprès du wiki source de la fédération. Veuillez rafraîchir la page."
 }
