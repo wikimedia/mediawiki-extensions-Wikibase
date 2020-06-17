@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use GuzzleHttp\Psr7\Response;

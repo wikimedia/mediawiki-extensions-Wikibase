@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 /**
@@ -53,7 +54,7 @@ class ApiEntityNamespaceInfoLookup {
 			'meta' => 'siteinfo',
 			'siprop' => 'namespaces',
 			'format' => 'json'
-		] )->getBody(), true )['query']['namespaces'];
+		] )->getBody()->getContents(), true )['query']['namespaces'];
 	}
 
 	private function getNamespaceNameForContentModel( string $entityContentModel ): ?string {
