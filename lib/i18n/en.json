@@ -14,8 +14,6 @@
 	"wikibase-error-unknown": "An error has occured.",
 	"wikibase-error-save-generic": "Could not save due to an error.",
 	"wikibase-error-remove-generic": "Could not remove due to an error.",
-	"wikibase-error-save-connection": "Could not save due to a connection error. Please check your Internet connection.",
-	"wikibase-error-remove-connection": "Could not remove due to a connection error. Please check your Internet connection.",
 	"wikibase-error-save-timeout": "We are experiencing technical difficulties. Please try again.",
 	"wikibase-error-remove-timeout": "We are experiencing technical difficulties. Please try again.",
 	"wikibase-error-autocomplete-connection": "Could not query site API. Please try again later.",

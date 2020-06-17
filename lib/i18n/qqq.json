@@ -27,8 +27,6 @@
 	"wikibase-error-unknown": "Generic error shown when no parameters have been passed alongside an unknown error",
 	"wikibase-error-save-generic": "Generic error message for an error happening during a save operation.",
 	"wikibase-error-remove-generic": "Generic error message for an error happening during a remove operation",
-	"wikibase-error-save-connection": "Error message for an error happening during a save operation. The error might most likely be caused by a connection problem.",
-	"wikibase-error-remove-connection": "Error message for an error happening during a remove operation. The error might most likely be caused by a connection problem.",
 	"wikibase-error-save-timeout": "Error message for an error happening during a save operation. The error was caused by a request time out.",
 	"wikibase-error-remove-timeout": "Error message for an error happening during a remove operation. The error was caused by a request time out.",
 	"wikibase-error-autocomplete-connection": "Error message for page auto-complete input box; displayed when API could not be reached.",
