@@ -31,7 +31,7 @@ class ChangeOpFingerprintResultTest extends TestCase {
 	/** @var ItemId */
 	private $itemId;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->itemId = ItemId::newFromNumber( 123 );
 		$this->innerChangeOpResult = $this->createMock( ChangeOpsResult::class );
 		$this->innerChangeOpResult->method( 'getEntityId' )->willReturn( $this->itemId );

@@ -44,7 +44,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	 */
 	private $siteStore;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// @todo This list should be stored somewhere, DRY
@@ -78,7 +78,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 	}
 
-	public function tearDown() : void {
+	protected function tearDown() : void {
 		parent::tearDown();
 		// Cleaning ContentHandler cache because RepoHooks instantiate
 		// and cache those prior to changing the migration setting

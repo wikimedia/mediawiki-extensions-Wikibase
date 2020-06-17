@@ -21,7 +21,7 @@ use Wikibase\Repo\Validators\FingerprintUniquenessValidator;
  */
 class ByIdFingerprintUniquenessValidatorTest extends TestCase {
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->fingerprintUniquenessValidator = $this->createMock( FingerprintUniquenessValidator::class );
 	}
 

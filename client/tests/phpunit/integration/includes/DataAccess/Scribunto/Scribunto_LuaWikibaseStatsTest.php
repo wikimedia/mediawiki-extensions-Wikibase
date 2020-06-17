@@ -32,7 +32,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		];
 	}
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$mwServices = MediaWikiServices::getInstance();
@@ -50,7 +50,7 @@ class Scribunto_LuaWikibaseStatsTest extends Scribunto_LuaWikibaseLibraryTestCas
 		$settings->setSetting( 'trackLuaFunctionCallsPerSiteGroup', false );
 	}
 
-	public function tearDown() : void {
+	protected function tearDown() : void {
 		$mwServices = MediaWikiServices::getInstance();
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 

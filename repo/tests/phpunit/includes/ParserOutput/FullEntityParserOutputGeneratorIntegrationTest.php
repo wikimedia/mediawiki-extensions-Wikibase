@@ -46,7 +46,7 @@ class FullEntityParserOutputGeneratorIntegrationTest extends MediaWikiTestCase {
 
 	private $propertyNamespace;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 
 		$this->repo = WikibaseRepo::getDefaultInstance();

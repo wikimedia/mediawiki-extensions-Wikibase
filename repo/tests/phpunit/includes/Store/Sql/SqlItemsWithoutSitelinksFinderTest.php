@@ -22,7 +22,7 @@ use Wikibase\Repo\Store\Sql\SqlItemsWithoutSitelinksFinder;
  */
 class SqlItemsWithoutSitelinksFinderTest extends MediaWikiTestCase {
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 
 		static $setUp = false;

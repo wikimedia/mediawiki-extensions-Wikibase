@@ -26,7 +26,7 @@ class ChangeOpFingerprintTest extends TestCase {
 	/** @var TermValidatorFactory */
 	private $termValidatorFactory;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		$this->innerChangeOp = $this->createMock( ChangeOps::class );
 		$this->termValidatorFactory = $this->createMock( TermValidatorFactory::class );
 	}

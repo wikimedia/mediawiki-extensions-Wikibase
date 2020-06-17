@@ -43,7 +43,7 @@ class SidebarBeforeOutputHookHandlerTest extends MediaWikiTestCase {
 	 */
 	private $logger;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->mockEntityId = $this->createMock( EntityId::class );

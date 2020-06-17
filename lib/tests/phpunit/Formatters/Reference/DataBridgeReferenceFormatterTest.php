@@ -36,7 +36,7 @@ class DataBridgeReferenceFormatterTest extends TestCase {
 	private $otherPropertyId1;
 	private $otherPropertyId2;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->referenceUrlPropertyId = new PropertyId( 'P1' );

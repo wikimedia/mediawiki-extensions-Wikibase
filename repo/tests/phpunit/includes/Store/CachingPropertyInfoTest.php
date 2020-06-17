@@ -29,7 +29,7 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
  */
 class CachingPropertyInfoTest extends \MediaWikiTestCase {
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wb_property_info';
 		$this->truncateTable( 'wb_property_info' );

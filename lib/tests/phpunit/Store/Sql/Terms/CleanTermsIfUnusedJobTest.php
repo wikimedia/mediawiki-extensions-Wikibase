@@ -15,7 +15,7 @@ class CleanTermsIfUnusedJobTest extends MediaWikiIntegrationTestCase {
 	private $termInLangId;
 	private $params;
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->termInLangId = 'cat_terminlang';
 		$this->params = [ CleanTermsIfUnusedJob::TERM_IN_LANG_IDS => [ $this->termInLangId ] ];

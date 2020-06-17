@@ -33,7 +33,7 @@ class DescriptionTest extends TestCase {
 	 */
 	private $continueEnumParameter;
 
-	public function setUp() : void {
+	protected function setUp() : void {
 		parent::setUp();
 		$this->resultData = [];
 		$this->continueEnumParameter = null;
