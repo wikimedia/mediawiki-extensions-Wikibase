@@ -2,7 +2,6 @@
 
 namespace Wikibase\View;
 
-use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
 
@@ -17,14 +16,11 @@ interface HtmlSnakFormatterFactory {
 	/**
 	 * @param string $languageCode
 	 * @param LanguageFallbackChain $languageFallbackChain
-	 * @param LabelDescriptionLookup $labelDescriptionLookup
-	 *
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter(
 		$languageCode,
-		LanguageFallbackChain $languageFallbackChain,
-		LabelDescriptionLookup $labelDescriptionLookup
+		LanguageFallbackChain $languageFallbackChain
 	);
 
 }
