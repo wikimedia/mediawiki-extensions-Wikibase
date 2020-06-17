@@ -18,8 +18,6 @@
 	"wikibase-error-remove-connection": "Could not remove due to a connection error. Please check your Internet connection.",
 	"wikibase-error-save-timeout": "We are experiencing technical difficulties. Please try again.",
 	"wikibase-error-remove-timeout": "We are experiencing technical difficulties. Please try again.",
-	"wikibase-error-autocomplete-connection": "Could not query site API. Please try again later.",
-	"wikibase-error-autocomplete-response": "Server responded: $1",
 	"wikibase-error-ui-no-external-page": "A page \"$2\" could not be found on \"$1\".",
 	"wikibase-error-ui-edit-conflict": "The same value was edited in the meantime, causing an edit conflict. Please reload the page.",
 	"wikibase-error-entity-too-big": "The entity is too big. The maximum allowed entity size is $1.",

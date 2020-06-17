@@ -19,16 +19,16 @@ class MessageExceptionLocalizerTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideGetExceptionMessage() {
 		$exception = new MessageException(
-			'wikibase-error-autocomplete-response',
-			[ 'cannot autocomplete' ],
-			'autocomplete error'
+			'wikibase-entitydata-storage-error',
+			[ 'Q1', 123 ],
+			'a message'
 		);
 
 		return [
 			'MessageException' => [
 				$exception,
-				'wikibase-error-autocomplete-response',
-				[ 'cannot autocomplete' ]
+				'wikibase-entitydata-storage-error',
+				[ 'Q1', 123 ]
 			]
 		];
 	}
