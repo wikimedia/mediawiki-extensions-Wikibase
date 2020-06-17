@@ -49,7 +49,7 @@ class FederatedPropertiesErrorTest extends MediaWikiTestCase {
 		$this->assertEquals( $e->msg->parse(), '<div class="errorbox">⧼key⧽</div>' );
 
 		$this->assertStringContainsString(
-			'<span class="wikibase-title-label">No label defined</span>',
+			'<span class="wikibase-title-label">' . wfMessage( 'wikibase-label-empty' )->parse() . '</span>',
 			$e->title->parse()
 		);
 	}
