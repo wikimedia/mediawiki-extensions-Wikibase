@@ -612,4 +612,34 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
+	public function testFederatedPropertiesFailure() {
+		WikibaseRepo::resetClassStatics();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = $wikibaseRepo->getSettings();
+
+		$oldFederatedPropertiesEnabled = $settings->getSetting( 'federatedPropertiesEnabled' );
+		$oldFederatedPropertiesSourceScriptUrl = $settings->getSetting( 'federatedPropertiesSourceScriptUrl' );
+
+		$settings->setSetting( 'federatedPropertiesEnabled', true );
+		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
+
+		$store = $wikibaseRepo->getEntityStore();
+
+		$statement = $this->getStatements()[0];
+
+		$entity = new Item();
+		$store->saveEntity( $entity, 'setclaimtest', $this->user, EDIT_NEW );
+		$entityId = $entity->getId();
+
+		$guidGenerator = new GuidGenerator();
+		$guid = $guidGenerator->newGuid( $entityId );
+
+		$statement->setGuid( $guid );
+
+		$this->makeRequestAndAssertResult( $statement, $entityId, 1, 'addition request', null, null, 'failed-save' );
+
+		$settings->setSetting( 'federatedPropertiesEnabled', $oldFederatedPropertiesEnabled );
+		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', $oldFederatedPropertiesSourceScriptUrl );
+	}
+
 }
