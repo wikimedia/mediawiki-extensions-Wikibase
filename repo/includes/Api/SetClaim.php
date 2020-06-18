@@ -22,6 +22,7 @@ use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -105,6 +106,17 @@ class SetClaim extends ApiBase {
 	 * @inheritDoc
 	 */
 	public function execute() {
+		try {
+			$this->executeInternal();
+		} catch ( FederatedPropertiesException $ex ) {
+			$this->errorReporter->dieWithError(
+				'wikibase-federated-properties-save-api-error-message',
+				'failed-save'
+			);
+		}
+	}
+
+	private function executeInternal() {
 		$params = $this->extractRequestParams();
 		$statement = $this->getStatementFromParams( $params );
 		$guid = $statement->getGuid();
