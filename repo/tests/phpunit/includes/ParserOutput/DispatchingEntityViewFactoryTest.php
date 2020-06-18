@@ -8,7 +8,6 @@ use LogicException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EntityDocumentView;
 
@@ -38,8 +37,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory->newEntityView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$this->createMock( EntityDocument::class ),
-			$this->createMock( EntityInfo::class )
+			$this->createMock( EntityDocument::class )
 		);
 	}
 
@@ -61,8 +59,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory->newEntityView(
 			Language::factory( 'en' ),
 			new LanguageFallbackChain( [] ),
-			$unknownEntity,
-			$this->createMock( EntityInfo::class )
+			$unknownEntity
 		);
 	}
 
@@ -73,7 +70,6 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$entity->expects( $this->once() )
 			->method( 'getType' )
 			->willReturn( 'foo' );
-		$entityInfo = $this->createMock( EntityInfo::class );
 		$entityView = $this->createMock( EntityDocumentView::class );
 
 		$factory = new DispatchingEntityViewFactory(
@@ -81,19 +77,16 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 				'foo' => function(
 					Language $languageParam,
 					LanguageFallbackChain $fallbackChainParam,
-					EntityDocument $entityParam,
-					EntityInfo $entityInfoParam
+					EntityDocument $entityParam
 				) use(
 					$language,
 					$languageFallbackChain,
 					$entity,
-					$entityInfo,
 					$entityView
 				) {
 					$this->assertSame( $language, $languageParam );
 					$this->assertSame( $languageFallbackChain, $fallbackChainParam );
 					$this->assertSame( $entity, $entityParam );
-					$this->assertSame( $entityInfo, $entityInfoParam );
 
 					return $entityView;
 				}
@@ -103,8 +96,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$newEntityView = $factory->newEntityView(
 			$language,
 			$languageFallbackChain,
-			$entity,
-			$entityInfo
+			$entity
 		);
 
 		$this->assertSame( $entityView, $newEntityView );

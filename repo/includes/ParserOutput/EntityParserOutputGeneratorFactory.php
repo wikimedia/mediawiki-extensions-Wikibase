@@ -14,7 +14,6 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
@@ -43,11 +42,6 @@ class EntityParserOutputGeneratorFactory {
 	 * @var DispatchingEntityMetaTagsCreatorFactory
 	 */
 	private $entityMetaTagsCreatorFactory;
-
-	/**
-	 * @var EntityInfoBuilder
-	 */
-	private $entityInfoBuilder;
 
 	/**
 	 * @var EntityTitleLookup
@@ -113,7 +107,6 @@ class EntityParserOutputGeneratorFactory {
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
-	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param TemplateFactory $templateFactory
@@ -132,7 +125,6 @@ class EntityParserOutputGeneratorFactory {
 	public function __construct(
 		DispatchingEntityViewFactory $entityViewFactory,
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
-		EntityInfoBuilder $entityInfoBuilder,
 		EntityTitleLookup $entityTitleLookup,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		TemplateFactory $templateFactory,
@@ -149,7 +141,6 @@ class EntityParserOutputGeneratorFactory {
 	) {
 		$this->entityViewFactory = $entityViewFactory;
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
-		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->templateFactory = $templateFactory;
@@ -171,7 +162,6 @@ class EntityParserOutputGeneratorFactory {
 			$this->entityMetaTagsCreatorFactory,
 			new ParserOutputJsConfigBuilder(),
 			$this->entityTitleLookup,
-			$this->entityInfoBuilder,
 			$this->getLanguageFallbackChain( $userLanguage ),
 			$this->templateFactory,
 			new MediaWikiLocalizedTextProvider( $userLanguage ),

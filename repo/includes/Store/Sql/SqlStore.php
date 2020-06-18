@@ -20,7 +20,6 @@ use Wikibase\Lib\Store\CachingEntityRevisionLookup;
 use Wikibase\Lib\Store\CachingPropertyInfoLookup;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -534,15 +533,6 @@ class SqlStore implements Store {
 		}
 
 		return $this->cacheRetrievingEntityRevisionLookup;
-	}
-
-	/**
-	 * @see Store::getEntityInfoBuilder
-	 *
-	 * @return EntityInfoBuilder
-	 */
-	public function getEntityInfoBuilder() {
-		return $this->wikibaseServices->getEntityInfoBuilder();
 	}
 
 	/**

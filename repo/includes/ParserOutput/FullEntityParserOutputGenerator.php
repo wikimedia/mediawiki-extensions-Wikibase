@@ -8,8 +8,6 @@ use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\LanguageFallbackChain;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -46,11 +44,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @var EntityTitleLookup
 	 */
 	private $entityTitleLookup;
-
-	/**
-	 * @var EntityInfoBuilder
-	 */
-	private $entityInfoBuilder;
 
 	/**
 	 * @var LanguageFallbackChain
@@ -92,7 +85,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param EntityInfoBuilder $entityInfoBuilder
 	 * @param LanguageFallbackChain $languageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
@@ -105,7 +97,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
-		EntityInfoBuilder $entityInfoBuilder,
 		LanguageFallbackChain $languageFallbackChain,
 		TemplateFactory $templateFactory,
 		LocalizedTextProvider $textProvider,
@@ -117,7 +108,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->entityInfoBuilder = $entityInfoBuilder;
 		$this->languageFallbackChain = $languageFallbackChain;
 		$this->templateFactory = $templateFactory;
 		$this->textProvider = $textProvider;
@@ -157,8 +147,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		if ( $generateHtml ) {
 			$this->addHtmlToParserOutput(
 				$parserOutput,
-				$entityRevision,
-				$this->getEntityInfo( $parserOutput )
+				$entityRevision
 			);
 		} else {
 			// If we don't have HTML, the ParserOutput in question
@@ -187,43 +176,16 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		return $parserOutput;
 	}
 
-	/**
-	 * Fetches some basic entity information from a set of entity IDs.
-	 *
-	 * @param ParserOutput $parserOutput
-	 *
-	 * @return EntityInfo
-	 */
-	private function getEntityInfo( ParserOutput $parserOutput ) {
-		/**
-		 * Set in ReferencedEntitiesDataUpdater.
-		 *
-		 * @see ReferencedEntitiesDataUpdater::updateParserOutput
-		 * @fixme Use ReferencedEntitiesDataUpdater::getEntityIds instead.
-		 */
-		$entityIds = $parserOutput->getExtensionData( 'referenced-entities' );
-
-		if ( !is_array( $entityIds ) ) {
-			wfLogWarning( '$entityIds from ParserOutput "referenced-entities" extension data'
-				. ' expected to be an array' );
-			$entityIds = [];
-		}
-
-		return $this->entityInfoBuilder->collectEntityInfo( $entityIds, $this->languageFallbackChain->getFetchLanguageCodes() );
-	}
-
 	private function addHtmlToParserOutput(
 		ParserOutput $parserOutput,
-		EntityRevision $entityRevision,
-		EntityInfo $entityInfo
+		EntityRevision $entityRevision
 	) {
 		$entity = $entityRevision->getEntity();
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->language,
 			$this->languageFallbackChain,
-			$entity,
-			$entityInfo
+			$entity
 		);
 
 		// Set the display title to display the label together with the item's id

@@ -18,8 +18,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\Store\EntityInfo;
-use Wikibase\Lib\Store\EntityInfoBuilder;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -61,34 +59,6 @@ class MultipleEntitySourceServicesTest extends TestCase {
 		$propertyRevisionLookup->method( $this->anything() )
 			->willThrowException( new LogicException( 'This service should not be used' ) );
 		return $propertyRevisionLookup;
-	}
-
-	public function testGetEntityInfoBuilderReturnsBuilderHandlingAllSourceEntities() {
-		$itemId = 'Q200';
-		$propertyId = 'P500';
-
-		$itemInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$itemInfoBuilder->method( 'collectEntityInfo' )
-			->willReturn( new EntityInfo( [ $itemId => 'item info' ] ) );
-
-		$itemServices = $this->createMock( SingleEntitySourceServices::class );
-		$itemServices->method( 'getEntityInfoBuilder' )
-			->willReturn( $itemInfoBuilder );
-
-		$propertyInfoBuilder = $this->createMock( EntityInfoBuilder::class );
-		$propertyInfoBuilder->method( 'collectEntityInfo' )
-			->willReturn( new EntityInfo( [ $propertyId => 'property info' ] ) );
-
-		$propertyServices = $this->createMock( SingleEntitySourceServices::class );
-		$propertyServices->method( 'getEntityInfoBuilder' )
-			->willReturn( $propertyInfoBuilder );
-
-		$services = $this->newMultipleEntitySourceServices( [ 'items' => $itemServices, 'props' => $propertyServices ] );
-
-		$infoBuilder = $services->getEntityInfoBuilder();
-		$info = $infoBuilder->collectEntityInfo( [ new PropertyId( $propertyId ), new ItemId( $itemId ) ], [ 'en' ] );
-
-		$this->assertEquals( [ $itemId => 'item info', $propertyId => 'property info' ], $info->asArray() );
 	}
 
 	public function testGetTermSearchInteractorFactoryGeneratesInteractorsReturningResultsForConfiguredSources() {

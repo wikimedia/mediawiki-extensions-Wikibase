@@ -12,7 +12,6 @@ use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\EntityInfo;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\View\Template\TemplateFactory;
 
@@ -192,7 +191,7 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EntityInfo|null $unused
+	 * @param null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
@@ -242,7 +241,7 @@ class ViewFactory {
 	 *
 	 * @param Language $language
 	 * @param LanguageFallbackChain $fallbackChain
-	 * @param EntityInfo|null $unused
+	 * @param null $unused
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
@@ -274,7 +273,7 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param EntityInfo|null $unused
+	 * @param null $unused
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
@@ -303,7 +302,7 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param EntityInfo|null $unused
+	 * @param null $unused
 	 * @param LanguageFallbackChain $fallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *

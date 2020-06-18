@@ -10,7 +10,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
@@ -60,7 +59,6 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiTestCa
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( ParserOutputJsConfigBuilder::class ),
 			$this->createMock( EntityTitleLookup::class ),
-			$this->createMock( SqlEntityInfoBuilder::class ),
 			$this->createMock( LanguageFallbackChain::class ),
 			TemplateFactory::getDefaultInstance(),
 			$this->createMock( LocalizedTextProvider::class ),
