@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Irus"
+			"Irus",
+			"Nkankane"
 		]
 	},
+	"tooltip-t-wikibase": "Xhumanisa nento yenqolobane yemininingwane",
+	"wikibase-dataitem": "{{WBREPONAME}} into",
 	"wikibase-editlinks": "Hlela links",
-	"wikibase-editlinkstitle": "Hlela interlanguage links"
+	"wikibase-editlinkstitle": "Hlela interlanguage links",
+	"wikibase-rc-hide-wikidata-show": "Khombisa"
 }

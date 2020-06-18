@@ -6,11 +6,9 @@
 			"மதனாஹரன்"
 		]
 	},
-	"wikibase-error-autocomplete-response": "வழங்கி பதிலளித்தது: $1",
 	"wikibase-sitelinks-wikipedia": "விக்கிப்பீடியா",
 	"wikibase-sitelinks-sitename-columnheading": "மொழி",
 	"wikibase-sitelinks-link-columnheading": "இணைத்த கட்டுரை",
-	"wikibase-tooltip-error-details": "விவரங்கள்",
 	"datatypes-type-quantity": "அளவு",
 	"datatypes-type-number": "எண்",
 	"datatypes-type-mediawiki-title": "மீடியாவிக்கி தலைப்பு",

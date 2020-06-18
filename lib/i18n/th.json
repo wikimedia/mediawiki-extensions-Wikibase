@@ -37,7 +37,6 @@
 	"wikibase-sitelinks-link-columnheading": "หน้าที่เชื่อมโยง",
 	"wikibase-snakview-snaktypeselector-somevalue": "ไม่ทราบ",
 	"wikibase-snakview-snaktypeselector-novalue": "ค่าว่าง",
-	"wikibase-tooltip-error-details": "รายละเอียด",
 	"wikibase-undeserializable-value": "ค่าดังกล่าวไม่ถูกต้อง และไม่สามารถแสดงผลค่าได้",
 	"wikibase-validator-invalid": "ค่าไม่ถูกต้อง",
 	"wikibase-validator-missing-field": "ขาด field \"$1\" ที่ต้องการ",
