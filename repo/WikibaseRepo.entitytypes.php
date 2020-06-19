@@ -54,15 +54,13 @@ return [
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
-			EntityDocument $entity,
-			$unused = null
+			EntityDocument $entity
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newItemView(
 				$language,
 				$fallbackChain,
-				$unused,
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,
@@ -192,15 +190,13 @@ return [
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
 			LanguageFallbackChain $fallbackChain,
-			EntityDocument $entity,
-			$unused = null
+			EntityDocument $entity
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$viewFactory = $wikibaseRepo->getViewFactory();
 			return $viewFactory->newPropertyView(
 				$language,
 				$fallbackChain,
-				$unused,
 				( new EntityTermsViewFactory() )
 					->newEntityTermsView(
 						$entity,

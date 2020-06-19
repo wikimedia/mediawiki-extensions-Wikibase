@@ -12,24 +12,17 @@ use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityRedirect;
-use Wikibase\DataModel\Entity\Int32EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
-use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
-use Wikibase\Lib\Store\ByIdDispatchingEntityInfoBuilder;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
-use Wikibase\Lib\Store\Sql\SqlEntityInfoBuilder;
-use Wikibase\Lib\Store\Sql\Terms\DatabaseEntityInfoBuilder;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
@@ -87,8 +80,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private $slotRoleStore;
 	private $entityRevisionLookup = null;
-
-	private $entityInfoBuilder = null;
 
 	private $termSearchInteractorFactory = null;
 
@@ -305,100 +296,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 		}
 
 		return $this->entityMetaDataAccessor;
-	}
-
-	public function getEntityInfoBuilder() {
-		global $wgSecretKey;
-
-		if ( $this->entityInfoBuilder === null ) {
-			// TODO: Having this lookup in GenericServices seems shady, this class should
-			// probably create/provide one for itself (all data needed in in the entity source)
-
-			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
-			$databaseName = $this->entitySource->getDatabaseName();
-
-			$cacheSecret = hash( 'sha256', $wgSecretKey );
-
-			$cache = new SimpleCacheWithBagOStuff(
-				MediaWikiServices::getInstance()->getLocalServerObjectCache(),
-				'wikibase.sqlEntityInfoBuilder.',
-				$cacheSecret
-			);
-			$cache = new StatsdRecordingSimpleCache(
-				$cache,
-				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				[
-					'miss' => 'wikibase.sqlEntityInfoBuilder.miss',
-					'hit' => 'wikibase.sqlEntityInfoBuilder.hit'
-				]
-			);
-
-			$mediaWikiServices = MediaWikiServices::getInstance();
-			$logger = LoggerFactory::getInstance( 'Wikibase' );
-
-			$loadBalancerFactory = $mediaWikiServices->getDBLoadBalancerFactory();
-			$loadBalancer = $loadBalancerFactory->getMainLB( $databaseName );
-			$databaseTypeIdsStore = new DatabaseTypeIdsStore(
-				$loadBalancer,
-				$mediaWikiServices->getMainWANObjectCache(),
-				$databaseName,
-				$logger
-			);
-			$termIdsResolver = new DatabaseTermInLangIdsResolver(
-				$databaseTypeIdsStore,
-				$databaseTypeIdsStore,
-				$loadBalancer,
-				$databaseName,
-				$logger
-			);
-
-			$oldEntityInfoBuilder = new SqlEntityInfoBuilder(
-				$this->entityIdParser,
-				$entityNamespaceLookup,
-				$logger,
-				$this->entitySource,
-				$cache
-			);
-
-			$newEntityInfoBuilder = new DatabaseEntityInfoBuilder(
-				$this->entityIdParser,
-				$this->entityIdComposer,
-				$entityNamespaceLookup,
-				$logger,
-				$this->entitySource,
-				$cache,
-				$loadBalancer,
-				$termIdsResolver
-			);
-
-			$typeDispatchingMapping = [];
-
-			// Properties
-			if ( $this->dataAccessSettings->useNormalizedPropertyTerms() === true ) {
-				$typeDispatchingMapping[Property::ENTITY_TYPE] = $newEntityInfoBuilder;
-			} else {
-				$typeDispatchingMapping[Property::ENTITY_TYPE] = $oldEntityInfoBuilder;
-			}
-
-			// Items
-			$itemEntityInfoBuilderMapping = [];
-			foreach ( $this->dataAccessSettings->getItemTermsMigrationStages() as $maxId => $stage ) {
-				if ( $maxId === 'max' ) {
-					$maxId = Int32EntityId::MAX;
-				}
-
-				if ( $stage >= MIGRATION_WRITE_NEW ) {
-					$itemEntityInfoBuilderMapping[$maxId] = $newEntityInfoBuilder;
-				} else {
-					$itemEntityInfoBuilderMapping[$maxId] = $oldEntityInfoBuilder;
-				}
-			}
-			$typeDispatchingMapping[Item::ENTITY_TYPE] = new ByIdDispatchingEntityInfoBuilder( $itemEntityInfoBuilderMapping );
-
-			$this->entityInfoBuilder = new ByTypeDispatchingEntityInfoBuilder( $typeDispatchingMapping );
-		}
-
-		return $this->entityInfoBuilder;
 	}
 
 	public function getTermSearchInteractorFactory() {
