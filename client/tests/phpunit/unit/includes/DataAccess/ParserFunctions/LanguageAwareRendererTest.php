@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\DataAccess\ParserFunctions;
 
 use DataValues\StringValue;
@@ -125,6 +127,29 @@ class LanguageAwareRendererTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertRegExp(
 			'/wikibase-property-render-error.*invalidLabel.*qqx/',
+			$result
+		);
+	}
+
+	public function testRenderForPropertyNotFound_translated() {
+		$renderer = $this->getRenderer(
+			$this->getPropertyIdResolverForPropertyNotFound(),
+			$this->getSnaksFinder( [] ),
+			$this->getEntityLookup( 100 ),
+			'de',
+			$this->getMockParserOutput( 1 )
+		);
+		$result = $renderer->render( new ItemId( 'Q4' ), 'invalidLabel' );
+
+		$this->assertStringContainsString(
+			wfMessage( 'wikibase-property-render-error' )
+				->params( 'invalidLabel' )
+				->params(
+					wfMessage( 'wikibase-property-notfound' )
+						->params( 'invalidLabel', 'de' )
+				)
+				->inLanguage( 'de' )
+				->text(),
 			$result
 		);
 	}

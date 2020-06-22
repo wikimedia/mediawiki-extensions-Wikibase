@@ -1,9 +1,13 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\DataAccess\ParserFunctions;
 
+use Exception;
 use InvalidArgumentException;
 use Language;
+use Message;
 use ParserOutput;
 use Status;
 use Title;
@@ -11,6 +15,7 @@ use Wikibase\Client\DataAccess\StatementTransclusionInteractor;
 use Wikibase\Client\PropertyLabelNotResolvedException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
+use Wikibase\Lib\MessageException;
 
 /**
  * StatementGroupRenderer of the {{#property}} parser function.
@@ -69,12 +74,11 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 			$this->parserOutput->addTrackingCategory( 'unresolved-property-category',
 				$this->title );
 
-			// @fixme use ExceptionLocalizer
-			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
 		} catch ( EntityLookupException $ex ) {
-			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
 		} catch ( InvalidArgumentException $ex ) {
-			$status = $this->getStatusForException( $propertyLabelOrId, $ex->getMessage() );
+			$status = $this->getStatusForException( $propertyLabelOrId, $ex );
 		}
 
 		if ( !$status->isGood() ) {
@@ -85,13 +89,12 @@ class LanguageAwareRenderer implements StatementGroupRenderer {
 		return $status->getValue();
 	}
 
-	/**
-	 * @param string $propertyLabel
-	 * @param string $message
-	 *
-	 * @return Status
-	 */
-	private function getStatusForException( $propertyLabel, $message ) {
+	private function getStatusForException( string $propertyLabel, Exception $exception ): Status {
+		if ( $exception instanceof MessageException ) {
+			$message = new Message( $exception->getKey(), $exception->getParams() );
+		} else {
+			$message = $exception->getMessage();
+		}
 		return Status::newFatal(
 			'wikibase-property-render-error',
 			$propertyLabel,

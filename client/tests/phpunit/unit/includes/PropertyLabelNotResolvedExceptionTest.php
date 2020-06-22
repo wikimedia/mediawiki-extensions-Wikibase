@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit;
 
 use Exception;
@@ -16,21 +18,20 @@ use Wikibase\Client\PropertyLabelNotResolvedException;
  */
 class PropertyLabelNotResolvedExceptionTest extends \PHPUnit\Framework\TestCase {
 
-	public function testWithDefaultParameters() {
+	public function testAsMessageException() {
 		$ex = new PropertyLabelNotResolvedException( '<LABEL>', '<LANGUAGECODE>' );
-		$message = $ex->getMessage();
-		$this->assertStringContainsString( '<LABEL>', $message );
-		$this->assertStringContainsString( '<LANGUAGECODE>', $message );
-		$this->assertSame( 0, $ex->getCode() );
-		$this->assertNull( $ex->getPrevious() );
+
+		$this->assertSame( 'wikibase-property-notfound', $ex->getKey() );
+		$this->assertSame( [ '<LABEL>', '<LANGUAGECODE>' ], $ex->getParams() );
 	}
 
-	public function testWithCustomParameters() {
+	public function testAsException() {
+		$message = 'some message';
 		$previous = new Exception();
-		$ex = new PropertyLabelNotResolvedException( '', '', '<MESSAGE>', $previous );
-		$message = $ex->getMessage();
-		$this->assertSame( '<MESSAGE>', $message );
-		$this->assertSame( 0, $ex->getCode() );
+
+		$ex = new PropertyLabelNotResolvedException( '', '', $message, $previous );
+
+		$this->assertSame( $message, $ex->getMessage() );
 		$this->assertSame( $previous, $ex->getPrevious() );
 	}
 
