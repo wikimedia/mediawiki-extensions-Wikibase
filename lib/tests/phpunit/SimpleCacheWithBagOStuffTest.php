@@ -3,7 +3,6 @@ declare( strict_types=1 );
 
 namespace Wikibase\Lib\Tests;
 
-// use Cache\IntegrationTests\SimpleCacheTest;
 use HashBagOStuff;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
@@ -11,12 +10,11 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 
 /**
- * FIXME: disabled because it's incompatible with PHPUnit 8 (T237164)
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleCacheTest*/ {
+class SimpleCacheWithBagOStuffTest extends SimpleCacheTestCase {
 
 	protected $skippedTests = [
 		'testClear' => 'Not possible to implement for BagOStuff'
@@ -192,93 +190,14 @@ class SimpleCacheWithBagOStuffTest extends \PHPUnit\Framework\TestCase /*SimpleC
 		$this->assertNull( $cache->get( 'key3' ), 'Value must expire after ttl.' );
 	}
 
-	public function testWrongKeyTypeLogsException() {
-		$invalidKey = 0;
-		$inner = new HashBagOStuff();
-
-		$prefix = 'someprefix';
-		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
-		$logger = $this->createMock( LoggerInterface::class );
-
-		$cache->setLogger( $logger );
-
-		$logger->expects( $this->once() )
-			->method( 'error' )
-			->with(
-				'{class}: Cache key should be string or integer, `{type}` is given',
-				[
-					'class' => SimpleCacheWithBagOStuff::class,
-					'key' => $invalidKey,
-					'prefix' => $prefix,
-					'type' => 'integer'
-				]
-			);
-
-		$cache->set( $invalidKey, 'some value' );
-	}
-
-	public function testEmptyKeyLogsException() {
-		$invalidKey = '';
-		$inner = new HashBagOStuff();
-
-		$prefix = 'someprefix';
-		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
-		$logger = $this->createMock( LoggerInterface::class );
-
-		$cache->setLogger( $logger );
-
-		$logger->expects( $this->once() )
-			->method( 'error' )
-			->with(
-				'{class}: Cache key cannot be an empty string',
-				[
-					'class' => SimpleCacheWithBagOStuff::class,
-					'key' => $invalidKey,
-					'prefix' => $prefix,
-				]
-			);
-
-		$cache->set( $invalidKey, 'some value' );
-	}
-
-	public function testInvalidCharInKeyLogsException() {
-		$invalidKey = 'invalid\\key';
-		$inner = new HashBagOStuff();
-
-		$prefix = 'someprefix';
-		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
-		$logger = $this->createMock( LoggerInterface::class );
-
-		$cache->setLogger( $logger );
-
-		$logger->expects( $this->once() )
-			->method( 'error' )
-			->with(
-				'{class}: Cache key contains characters that are not allowed: `{key}`',
-				[
-					'class' => SimpleCacheWithBagOStuff::class,
-					'key' => $invalidKey,
-					'prefix' => $prefix,
-				]
-			);
-
-		$cache->set( $invalidKey, 'some value' );
-	}
-
 	public function testUTF8KeysAreValid() {
 		$inner = new HashBagOStuff();
 
 		$prefix = 'someprefix';
 		$cache = new SimpleCacheWithBagOStuff( $inner, $prefix, 'some secret' );
-		$logger = $this->createMock( LoggerInterface::class );
 
-		$cache->setLogger( $logger );
-
-		$logger->expects( $this->never() )
-			->method( 'error' );
-
-		$cache->set( '🏄', 'some value' );
-		$cache->set( '⧼Lang⧽', 'some value' );
+		$this->assertTrue( $cache->set( '🏄', 'some value' ) );
+		$this->assertTrue( $cache->set( '⧼Lang⧽', 'some value' ) );
 	}
 
 }
