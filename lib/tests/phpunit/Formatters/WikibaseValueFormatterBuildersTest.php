@@ -616,14 +616,6 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 				new EntityIdValue( new ItemId( 'Q5' ) ),
 				'@>Name für Q5<@'
 			],
-			'LabelDescriptionLookup option' => [
-				'newEntityIdFormatter',
-				new FormatterOptions( [
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup,
-				] ),
-				new EntityIdValue( new ItemId( 'Q5' ) ),
-				'@>Custom LabelDescriptionLookup<@'
-			],
 		];
 	}
 

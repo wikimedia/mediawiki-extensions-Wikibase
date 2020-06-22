@@ -84,15 +84,6 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 				] ),
 				'Kätzchen'
 			],
-			'language and fallback chain and LabelDescriptionLookup' => [
-				$termLookup,
-				new FormatterOptions( [
-					ValueFormatter::OPT_LANG => 'fr',
-					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $frChain,
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => $labelDescriptionLookup
-				] ),
-				'Kätzchen'
-			],
 		];
 	}
 
@@ -117,11 +108,6 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 			'bad fallback chain' => [
 				new FormatterOptions( [
 					FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => [ 'x', 'y', 'z' ],
-				] ),
-			],
-			'bad LabelDescriptionLookup' => [
-				new FormatterOptions( [
-					FormatterLabelDescriptionLookupFactory::OPT_LABEL_DESCRIPTION_LOOKUP => new LanguageFallbackChain( [] )
 				] ),
 			],
 			'no options' => [
