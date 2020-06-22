@@ -109,6 +109,8 @@
 	"wikibase-page-schema-publisher-name": "",
 	"wikibase-page-schema-publisher-logo-url": "",
 	"wikibase-page-schema-author-name": "",
+	"wikibase-sitelinks-sitename-columnheading": "Language",
+	"wikibase-sitelinks-link-columnheading": "Linked page",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connection|Connections}} with {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notify me when someone connects a page {{GENDER:|I created}} to a {{WBREPONAME}} item.",
 	"notification-header-page-connection": "The page <strong>$3</strong> was {{GENDER:$2|connected}} to {{PLURAL:$4|-1=a {{WBREPONAME}} item|the {{WBREPONAME}} item $4}}, where data relevant to the topic can be collected.",
