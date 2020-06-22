@@ -10,6 +10,33 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"GroupPermissions": {
+		"*": {
+			"item-term": true,
+			"property-term": true,
+			"item-merge": true,
+			"item-redirect": true,
+			"property-create": true
+		}
+	},
+	"AvailableRights": [
+		"item-term",
+		"property-term",
+		"item-merge",
+		"item-redirect",
+		"property-create"
+	],
+	"GrantPermissions": {
+		"editpage": {
+			"item-term": true,
+			"property-term": true,
+			"item-merge": true,
+			"item-redirect": true
+		},
+		"createeditmovepage": {
+			"property-create": true
+		}
+	},
 	"JobClasses": {
 		"CleanTermsIfUnused": "Wikibase\\Lib\\Store\\Sql\\Terms\\CleanTermsIfUnusedJob::getJobSpecification",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",

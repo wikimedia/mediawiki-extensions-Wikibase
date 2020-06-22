@@ -110,10 +110,7 @@ call_user_func( function() {
 	global $wgAPIMetaModules,
 		$wgAPIListModules,
 		$wgAPIModules,
-		$wgAvailableRights,
 		$wgExtensionMessagesFiles,
-		$wgGrantPermissions,
-		$wgGroupPermissions,
 		$wgHooks,
 		$wgMessagesDirs,
 		$wgResourceModules,
@@ -123,26 +120,6 @@ call_user_func( function() {
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
 	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-
-	// rights
-	// names should be according to other naming scheme
-	$wgGroupPermissions['*']['item-term'] = true;
-	$wgGroupPermissions['*']['property-term'] = true;
-	$wgGroupPermissions['*']['item-merge'] = true;
-	$wgGroupPermissions['*']['item-redirect'] = true;
-	$wgGroupPermissions['*']['property-create'] = true;
-
-	$wgAvailableRights[] = 'item-term';
-	$wgAvailableRights[] = 'property-term';
-	$wgAvailableRights[] = 'item-merge';
-	$wgAvailableRights[] = 'item-redirect';
-	$wgAvailableRights[] = 'property-create';
-
-	$wgGrantPermissions['editpage']['item-term'] = true;
-	$wgGrantPermissions['editpage']['item-redirect'] = true;
-	$wgGrantPermissions['editpage']['item-merge'] = true;
-	$wgGrantPermissions['editpage']['property-term'] = true;
-	$wgGrantPermissions['createeditmovepage']['property-create'] = true;
 
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
