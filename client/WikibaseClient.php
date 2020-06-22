@@ -72,7 +72,6 @@ call_user_func( function() {
 		$wgRecentChangesFlags,
 		$wgResourceModules,
 		$wgSpecialPages,
-		$wgTrackingCategories,
 		$wgWBClientDataTypes,
 		$wgWBClientSettings;
 
@@ -91,10 +90,6 @@ call_user_func( function() {
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
-
-	// Tracking categories
-	$wgTrackingCategories[] = 'unresolved-property-category';
-	$wgTrackingCategories[] = 'connected-redirect-category';
 
 	$wgHooks['UnitTestsList'][] = '\Wikibase\Client\ClientHooks::registerUnitTests';
 	$wgHooks['OldChangesListRecentChangesLine'][] =
