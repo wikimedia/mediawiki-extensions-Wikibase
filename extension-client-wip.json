@@ -13,6 +13,10 @@
 	"Hooks": {
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle"
 	},
+	"TrackingCategories": [
+		"unresolved-property-category",
+		"connected-redirect-category"
+	],
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/"
 	},
