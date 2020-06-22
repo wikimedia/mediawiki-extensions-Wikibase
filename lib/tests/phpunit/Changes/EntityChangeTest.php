@@ -5,19 +5,16 @@ namespace Wikibase\Lib\Tests\Changes;
 use CommentStoreComment;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Revision\SlotRecord;
 use MediaWiki\User\UserIdentityValue;
 use MWException;
 use RecentChange;
 use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\WikibaseSettings;
-use Wikibase\Repo\Content\ItemContent;
 use Wikimedia\TestingAccessWrapper;
 
 /**
@@ -261,15 +258,11 @@ class EntityChangeTest extends ChangeRowTest {
 		}
 
 		$id = new ItemId( 'Q7' );
-		$item = new Item( $id );
-
 		$entityChange = $this->newEntityChange( $id );
-
 		$timestamp = '20140523' . '174422';
 
 		$revRecord = new MutableRevisionRecord( Title::newFromText( 'Required workaround' ) );
 		$revRecord->setParentId( 3 );
-		$revRecord->setContent( SlotRecord::MAIN, ItemContent::newFromItem( $item ) );
 		$revRecord->setComment( CommentStoreComment::newUnsavedComment( 'Test!' ) );
 		$revRecord->setTimestamp( $timestamp );
 		$revRecord->setId( 5 );
@@ -292,25 +285,15 @@ class EntityChangeTest extends ChangeRowTest {
 		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
-	public function testGivenEntityChangeWithoutObjectId_setRevisionInfoSetsObjectId() {
-		$content = $this->getMockBuilder( ItemContent::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$content->expects( $this->once() )
-			->method( 'getEntityId' )
-			->will( $this->returnValue( new ItemId( 'Q1' ) ) );
-
+	public function testGivenEntityChangeWithoutObjectId_setRevisionInfoThrowsException() {
 		$revision = $this->getMockBuilder( RevisionRecord::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$revision->expects( $this->once() )
-			->method( 'getContent' )
-			->will( $this->returnValue( $content ) );
 
 		$change = new EntityChange( [ 'info' => [], 'type' => '~' ] );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
+		$this->expectException( MWException::class );
 		$change->setRevisionInfo( $revision, 3 );
-		$this->assertSame( 'Q1', $change->getObjectId() );
 	}
 
 	public function testSetTimestamp() {
