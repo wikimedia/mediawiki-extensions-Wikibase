@@ -56,6 +56,46 @@ docker-compose run --rm node npm run test:lint
 docker-compose run --rm node npm run storybook
 ```
 
+### Git helpers
+
+To automatically resolve merge conflicts within `dist/` by doing a rebuild, run the following command:
+
+```sh
+npx npm-merge-driver install \
+    --driver-name bridge-rebuild \
+    --driver 'npx npm-merge-driver merge %A %O %B %P -c \"cd -- \\\"\$(git rev-parse --show-toplevel)/client/data-bridge\\\" && npm ci && npm run build:app\"' \
+    --files /client/data-bridge/dist/{data-bridge.{app{,.modern},init}.js,css/data-bridge.app.css}
+```
+
+This is very useful when rebasing unmerged changes, for example.
+
+To automatically prefix messages of Bridge-related commits with the keyword “bridge:”,
+put the following in `.git/hooks/prepare-commit-msg` and ensure the file is executable:
+
+```sh
+#!/usr/bin/env bash
+
+case $2 in
+    message|template|commit|'')
+        if ! git diff --cached --exit-code -- '://client/data-bridge/*' > /dev/null &&
+                git diff --cached --exit-code -- ':!/client/data-bridge/*' > /dev/null; then
+            # differences in data bridge and none outside it,
+            # prefix the message with "bridge: " if necessary
+            sed -i '
+                1 {
+                    # add bridge: prefix
+                    s/^/bridge: /
+                    # remove duplicate prefix
+                    s/ bridge://g
+                    # remove bridge: again before rebase.autosquash prefixes
+                    s/^bridge: \(fixup!\|squash!\)/\1/
+                }
+                ' -- "$1"
+        fi
+        ;;
+esac
+```
+
 ## Debugging
 
 Bridge augments MediaWiki pages and uses some of its modules to do its work.
