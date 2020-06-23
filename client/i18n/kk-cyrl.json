@@ -51,5 +51,7 @@
 	"wikibase-pageinfo-entity-id-none": "Ешқандай",
 	"wikibase-otherprojects": "Басқа жобаларда",
 	"wikibase-otherprojects-beta-message": "Басқа жобалар бүйірлік тақтасы",
-	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді."
+	"wikibase-otherprojects-beta-description": "Бүйірлік тақтаға «{{int:wikibase-otherprojects}}» бөлімін қосу, ол {{WBREPONAME}} деректеріне негізделген Уикимедиа жобаларының сілтемелерін береді.",
+	"wikibase-sitelinks-sitename-columnheading": "Тіл",
+	"wikibase-sitelinks-link-columnheading": "Сілтенген бет"
 }

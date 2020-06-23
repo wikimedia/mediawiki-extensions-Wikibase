@@ -43,5 +43,7 @@
 	"wikibase-entityusage-submit": "પાનાંઓ દર્શાવો",
 	"wikibase-pageinfo-entity-id-none": "કંઇ નહિં",
 	"wikibase-pageinfo-entity-usage-T": "શીર્ષક",
-	"wikibase-otherprojects": "અન્ય પ્રકલ્પોમાં"
+	"wikibase-otherprojects": "અન્ય પ્રકલ્પોમાં",
+	"wikibase-sitelinks-sitename-columnheading": "ભાષા",
+	"wikibase-sitelinks-link-columnheading": "જોડાયેલું પાનું"
 }

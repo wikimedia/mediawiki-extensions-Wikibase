@@ -110,6 +110,8 @@
 	"wikibase-property-render-error": "$1 속성 표시 실패: $2",
 	"wikibase-otherprojects": "다른 프로젝트",
 	"wikibase-otherprojects-beta-message": "다른 프로젝트 사이드바",
+	"wikibase-sitelinks-sitename-columnheading": "언어",
+	"wikibase-sitelinks-link-columnheading": "링크된 문서",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}로 {{PLURAL:$1|연결}}",
 	"echo-pref-tooltip-wikibase-action": "누군가가 {{GENDER:|내가 만든}} 문서를 {{WBREPONAME}} 항목에 연결할 때 내게 알립니다.",
 	"notification-header-page-connection": "<strong>$3</strong> 문서가 주제 관련 데이터를 포함하는 {{PLURAL:$4|-1={{WBREPONAME}} 항목|{{WBREPONAME}} 항목 $4}}에 {{GENDER:$2|연결되었습니다}}.",

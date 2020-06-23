@@ -80,6 +80,8 @@
 	"wikibase-otherprojects": "इतर प्रकल्पात",
 	"wikibase-otherprojects-beta-message": "इतर प्रकल्प कडपट्टी(साईडबार)",
 	"wikibase-otherprojects-beta-description": "हे कडपट्टीस (साईडबार) \"{{int:wikibase-otherprojects}}\" विभाग जोडते,ज्यायोगे, {{WBREPONAME}}वर आधारीत दुसऱ्या विकिमिडिया प्रकल्पांशी दुवे दिल्या जातात.",
+	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"wikibase-sitelinks-link-columnheading": "जोडलेले पान",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}}शी असणारे{{PLURAL:$1|अनुबंध}}",
 	"echo-pref-tooltip-wikibase-action": "{{WBREPONAME}} कलमाशी जर कोणी, {{GENDER:|मी तयार केलेले}} पान जोडत असेल तर मला सूचित करा.",
 	"notification-header-page-connection": "हे पान <strong>$3</strong> {{WBREPONAME}} या कलमाशी {{GENDER:$2|जोडल्या गेले}}.",

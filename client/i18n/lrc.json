@@ -33,5 +33,7 @@
 	"wikibase-watchlist-show-changes-pref": "نشو دئن ویرایشتیا ویکی دیتا د سیل برگ تو",
 	"wikibase-unconnectedpages-submit": "رو",
 	"wikibase-pageinfo-entity-id-none": "هيش كوم",
-	"wikibase-otherprojects": "پرۉژٱیا هنی"
+	"wikibase-otherprojects": "پرۉژٱیا هنی",
+	"wikibase-sitelinks-sitename-columnheading": "زون",
+	"wikibase-sitelinks-link-columnheading": "بلگه هوم پیوندار"
 }

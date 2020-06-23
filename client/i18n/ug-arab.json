@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AlimOmar",
+			"Sahran",
 			"Uzdil"
 		]
 	},
@@ -16,6 +17,7 @@
 	"wikibase-rc-wikibase-edit-letter": "سان",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} تەھرىرلەش",
 	"wikibase-otherprojects": "باشقا تۈرلەردە",
+	"wikibase-sitelinks-sitename-columnheading": "تىل",
 	"wikibase-client-data-bridge-edit-decision-replace-label": "مەن بىر خاتا قىممەتنى <strong>تۈزەتتىم</strong>",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "تىزىملىتىپ كىرمەي تەھرىرلەڭ",
 	"wikibase-client-data-bridge-edit-conflict-error-heading": "تەھرىردە توقۇنۇش بايقالغان",

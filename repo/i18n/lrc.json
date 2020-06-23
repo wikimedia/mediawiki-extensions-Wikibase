@@ -41,6 +41,8 @@
 	"wikibase-copyrighttooltip-acknowledge": "مه ای قانونا نه سی ویرایشتیا نهایی م قوول کردم.دواره ای پیغوم نشو نئیه",
 	"wikibase-entityselector-more": "بیشتر",
 	"wikibase-anonymouseditwarning": "زنئار:شما وامین نیومایته.\nنشونه آی پی تو سی ویرگار ویرایشت ای چی ضفظ بوئه.",
+	"wikibase-validator-invalid": "انازه نادیار",
+	"wikibase-validator-bad-type": "$2 وه جا $1",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 یه گل واگردونیه.",
 	"special-itembytitle": "قلم وا داسون",
 	"wikibase-itembytitle-lookup-fieldset": "قلمیا نه سی سیلجا و نوم ون مئن جوری کو",

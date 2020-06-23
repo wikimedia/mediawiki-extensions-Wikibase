@@ -43,6 +43,7 @@
 	"wikibase-pageinfo-entity-usage-X": "Totas las donadas de l'entitat",
 	"wikibase-pageinfo-entity-usage-O": "Autre (declaracions)",
 	"wikibase-otherprojects": "Dins d'autres projèctes",
+	"wikibase-sitelinks-sitename-columnheading": "Lenga",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexion|Connexions}} amb {{WBREPONAME}}",
 	"notification-link-text-view-item": "{{GENDER:$1|visualiza}} la notificacion",
 	"unresolved-property-category": "Paginas amb de proprietats pas resolgudas"

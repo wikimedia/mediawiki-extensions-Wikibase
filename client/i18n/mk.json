@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "На други проекти",
 	"wikibase-otherprojects-beta-message": "Странична лента со други проекти",
 	"wikibase-otherprojects-beta-description": "Во страничникот додава дел „{{int:wikibase-otherprojects}}“ што содржи врски до другите Викимедиини проекти врз основа на податоците на {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Јазик",
+	"wikibase-sitelinks-link-columnheading": "Сврзана страница",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Поврзување|Поврзувања}} со {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Извести ме кога некој ќе поврзе страница што {{GENDER:|ја имам создадено}} со предмет на {{WBREPONAME}}.",
 	"notification-header-page-connection": "Страницата <strong>$3</strong> е {{GENDER:$2|поврзана}} со {{PLURAL:$4|-1=предмет од {{WBREPONAME}}|предметот $4 од {{WBREPONAME}}}}, каде се собираат податоци релевантни на темата.",

@@ -103,6 +103,8 @@
 	"wikibase-otherprojects": "Në projekte të tjera",
 	"wikibase-otherprojects-beta-message": "Anështyllë projektesh të tjera",
 	"wikibase-otherprojects-beta-description": "Shton te anështylla një ndarje \"{{int:wikibase-otherprojects}}\" që furnizon lidhje për te projekte të tjerë Wikimedia të bazuar në të dhëna {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Gjuhë",
+	"wikibase-sitelinks-link-columnheading": "Lidhi një faqe",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lidhje|Lidhje}} me {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Njoftomë, kur dikush lidh një faqe {{GENDER:|Krijova}} te një objekt {{WBREPONAME}}.",
 	"notification-header-page-connection": "Faqja <strong>$3</strong> u {{GENDER:$2|lidh}} te {{PLURAL:$4|-1=një objekt {{WBREPONAME}}|objekti {{WBREPONAME}}  $4}}, i cili përmban të dhëna që lidhen me temën.",

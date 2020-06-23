@@ -61,5 +61,7 @@
 	"wikibase-property-render-error": "Nun s'arriniscìu a rènniri lu valuri dâ prupità $1: $2",
 	"wikibase-otherprojects": "Àutri pruggetti",
 	"wikibase-otherprojects-beta-message": "Sbarra latirali di l'àutri pruggetti",
-	"wikibase-otherprojects-beta-description": "Agghiunci na sizzioni \"{{int:wikibase-otherprojects}}\" â sbarra latirali, chi duna culligamenti a l'àutri pruggetti di Wikimedia chi si bàsanu supra ê dati di {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Agghiunci na sizzioni \"{{int:wikibase-otherprojects}}\" â sbarra latirali, chi duna culligamenti a l'àutri pruggetti di Wikimedia chi si bàsanu supra ê dati di {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Lingua",
+	"wikibase-sitelinks-link-columnheading": "Pàggina assuciata"
 }

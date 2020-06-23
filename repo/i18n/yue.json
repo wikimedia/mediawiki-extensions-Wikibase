@@ -3,6 +3,7 @@
 		"authors": [
 			"Ktchankt",
 			"Ladsgroup",
+			"Obonggi",
 			"Yueman"
 		]
 	},
@@ -14,5 +15,6 @@
 	"wikibase-statementsection-statements": "陳述",
 	"wikibase-sitelinks-special": "第啲網站",
 	"wikibase-statementview-rank-normal": "正常等級",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|參考來源}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|參考來源}}",
+	"wikibase-validator-bad-url": "不允許包含某啲字符（例如空格同方括號）嘅鏈接"
 }

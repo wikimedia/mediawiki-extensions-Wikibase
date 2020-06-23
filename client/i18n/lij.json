@@ -99,6 +99,8 @@
 	"wikibase-otherprojects": "Inte di atri progetti",
 	"wikibase-otherprojects-beta-message": "Bara laterâ di atri progetti",
 	"wikibase-otherprojects-beta-description": "A l'azonze 'na seçion \"{{int:wikibase-otherprojects}}\" a-a bara laterâ ch'a fornisce di inganci a-i atri progetti Wikimedia bazæ in scî dæti {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Lengua",
+	"wikibase-sitelinks-link-columnheading": "Paggina inganciâ",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conescion|Conescioin}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avixime quande quarchedun o conette 'na paggina che {{GENDER:|ho creou}} a 'n elemento {{WBREPONAME}}.",
 	"notification-header-page-connection": "A paggina <strong>$3</strong> a l'è {{GENDER:$2|stæta conessa}} {{PLURAL:$4|-1=a 'n elemento {{WBREPONAME}}|a l'elemento {{WBREPONAME}} $4}}, donde i dæti rilevanti a l'argomento pœuan ese arecugeiti.",

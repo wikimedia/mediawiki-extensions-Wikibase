@@ -15,8 +15,6 @@
 	"wikibase-error-ui-no-external-page": "L'articolo specificà no'l xe stà catà sul sito corispondente.",
 	"wikibase-error-ui-edit-conflict": "Ghe xe un conflito de edizion. Par piaser ricarica e salva da novo.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
-	"wikibase-sitelinks-sitename-columnheading": "Lengua",
-	"wikibase-sitelinks-link-columnheading": "Voxe ligà",
 	"wikibase-snakview-snaktypeselector-somevalue": "valor sconossùo",
 	"wikibase-snakview-snaktypeselector-novalue": "nissun valor",
 	"datatypes-type-wikibase-item": "Elemento",

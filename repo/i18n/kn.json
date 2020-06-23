@@ -26,6 +26,7 @@
 	"wikibase-statementview-rank-normal": "ಸಾಧಾರಣ ಶ್ರೇಣಿ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ಉಲ್ಲೇಖ|ಉಲ್ಲೇಖಗಳು}}",
 	"wikibase-entityselector-more": "ಹೆಚ್ಚು",
+	"wikibase-validator-bad-value": "ದತ್ತಾಂಶದ ಮೌಲ್ಯ ಕೆಟ್ಟುಹೋದ: $1",
 	"wikibase-itembytitle-lookup-page": "ಪುಟ:",
 	"wikibase-itembytitle-submit": "ಹುಡುಕು",
 	"wikibase-itemdisambiguation-lookup-language": "ಭಾಷಾ ಸಂಕೇತ:",

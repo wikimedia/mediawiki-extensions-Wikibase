@@ -65,6 +65,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Titel",
 	"wikibase-pageinfo-entity-usage-X": "Alle entiteitsdata",
 	"wikibase-otherprojects": "Ander projekte",
+	"wikibase-sitelinks-sitename-columnheading": "Taal",
+	"wikibase-sitelinks-link-columnheading": "Geskakelde artikel",
 	"notification-link-text-view-item": "{{GENDER:$1|Wys}} item",
 	"wikibase-client-data-bridge-cascadeprotected-on-client-head": "<strong> Hierdie bladsy is tans [[Project:Cascade|cascade protected]] op hierdie wiki en kan slegs geredigeer word deur [[Project:Administrators|administrators]].</strong>",
 	"wikibase-client-data-bridge-bailout-heading": "In plaas daarvan sou u die volgende kon doen:",

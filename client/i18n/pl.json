@@ -106,6 +106,8 @@
 	"wikibase-otherprojects": "W innych projektach",
 	"wikibase-otherprojects-beta-message": "Pasek siostrzanych projektów",
 	"wikibase-otherprojects-beta-description": "Dodaje sekcję „{{int:wikibase-otherprojects}}” do paska bocznego, zawierającą odnośniki do innych projektów Wikimedia w oparciu o dane z Wikidanych.",
+	"wikibase-sitelinks-sitename-columnheading": "Język",
+	"wikibase-sitelinks-link-columnheading": "Powiązana strona",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Połączenie|Połączenia}} z Wikidanymi",
 	"echo-pref-tooltip-wikibase-action": "Powiadom mnie, gdy ktoś połączy stronę, którą {{GENDER:|utworzyłem|utworzyłam}}, z elementem Wikidanych.",
 	"notification-header-page-connection": "Strona <strong>$3</strong> została {{GENDER:$2|powiązana}} z elementem Wikidanych.",

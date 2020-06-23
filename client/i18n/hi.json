@@ -69,6 +69,8 @@
 	"wikibase-pageinfo-entity-usage-X": "सभी इकाई डाटा",
 	"wikibase-otherprojects": "अन्य परियोजनाओं में",
 	"wikibase-otherprojects-beta-message": "अन्य परियोजना साइडबार",
+	"wikibase-sitelinks-sitename-columnheading": "भाषा",
+	"wikibase-sitelinks-link-columnheading": "जुड़े पृष्ठ",
 	"notification-link-text-view-item": "वस्तु {{GENDER:$1|देखें}}",
 	"wikibase-client-data-bridge-unknown-error-heading": "कुछ गलत हुअा है",
 	"wikibase-client-data-bridge-error-reload-bridge": "पुनः लोड करें"

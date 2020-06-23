@@ -227,6 +227,7 @@
 	"apihelp-wbsetclaim-param-index": "在實體的聲明清單裡，用來移動聲明的索引，可選用。請注意，當有設定指定不在聲明之後位置的索引時，該主敘述不會具有相同屬性，整個主敘述具有相同屬性的聲明群組則會被移動。若未提供，已存在聲明會留在新聲明附加到最後一個主敘述具有相同屬性的位置。",
 	"apihelp-wbsetclaim-param-summary": "編輯的摘要。\n會自動產生註釋來附加在開頭。摘要與自動註釋的共同長度限制是 260 個字元，請注意超出限制的任何內容將會被去除。",
 	"apihelp-wbsetclaim-param-baserevid": "基於變動的修訂之數字識別碼。\n此用於在儲存期間偵測衝突。",
+	"apihelp-wbsetclaim-param-ignoreduplicatemainsnak": "若為 true，且實體帶有相同主要敘述的聲稱，會如同請求裡發送的聲稱，而請求則會被忽略",
 	"apihelp-wbsetclaim-param-bot": "標註此為機器人編輯。該 URL 標記僅會在使用者隸屬「{{int:group-bot}}」群組時採用。",
 	"apihelp-wbsetclaim-param-tags": "更改標籤來套用到修訂。",
 	"apihelp-wbsetclaim-example-1": "將帶有指定 ID 的聲稱設定成帶有「<var>City</var>」字串值的屬性 <samp>P1</samp>",

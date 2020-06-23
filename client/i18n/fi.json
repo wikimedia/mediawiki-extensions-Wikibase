@@ -85,6 +85,8 @@
 	"wikibase-otherprojects": "Muissa hankkeissa",
 	"wikibase-otherprojects-beta-message": "Muut projektit -sivupalkki",
 	"wikibase-otherprojects-beta-description": "Lisää sivupalkkiin osion ”{{int:wikibase-otherprojects}}”, joka tarjoaa linkit muihin Wikimedia-hankkeisiin perustuen dataan sivustolla {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Kieli",
+	"wikibase-sitelinks-link-columnheading": "Linkitetty sivu",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Yhteys|Yhteydet}} {{WBREPONAME}}an",
 	"echo-pref-tooltip-wikibase-action": "Ilmoita minulle, kun joku yhdistää sivun {{GENDER:|jonka loin}} {{WBREPONAME}}-kohteeseen.",
 	"notification-header-page-connection": "Sivu <strong>$3</strong> {{GENDER:$2|yhdistettiin}} {{PLURAL:$4|-1={{WBREPONAME}}-kohteeseen|{{WBREPONAME}}-kohteeseen $4}}, joka sisältää aiheeseen liittyviä tietoja.",

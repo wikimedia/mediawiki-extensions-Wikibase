@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Abella",
+			"Alvaro Vidal-Abarca",
 			"Arnaugir",
 			"Edinwiki",
 			"Fitoschido",
@@ -106,6 +107,8 @@
 	"wikibase-otherprojects": "En altres projectes",
 	"wikibase-otherprojects-beta-message": "Barra lateral d'altres projectes",
 	"wikibase-otherprojects-beta-description": "Afegeix una secció «{{int:wikibase-otherprojects}}» en la barra lateral que proporciona enllaços a altres projectes de Wikimedia segons les dades de {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Llengua",
+	"wikibase-sitelinks-link-columnheading": "Pàgina enllaçada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connexió|Connexions}} amb {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifiqueu-me quan algú connecti una pàgina {{GENDER:|que he creat}} a un element de {{WBREPONAME}}.",
 	"notification-header-page-connection": "La pàgina <strong>$3</strong> ha estat {{GENDER:$2|connectada}} a {{PLURAL:$4|-1=un element de {{WBREPONAME}}|l'element $4 de {{WBREPONAME}}}}, on es poden obtenir dades relatives a aquest tema.",

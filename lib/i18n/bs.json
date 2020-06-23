@@ -19,8 +19,6 @@
 	"wikibase-error-ui-no-external-page": "Stranica \"$2\" nije pronađena na \"$1\".",
 	"wikibase-error-ui-edit-conflict": "Došlo je do sukoba između izmjena. Osvježite stranicu i pokušajte ponovo sačuvati vaše izmjene.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
-	"wikibase-sitelinks-sitename-columnheading": "Jezik",
-	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
 	"wikibase-snakview-snaktypeselector-novalue": "nema vrijednosti",
 	"datatypes-type-quantity": "Količina",
 	"datatypes-type-monolingualtext": "Jednojezički tekst",

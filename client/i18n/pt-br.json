@@ -112,6 +112,8 @@
 	"wikibase-otherprojects": "Em outros projetos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de outros projetos",
 	"wikibase-otherprojects-beta-description": "Adiciona uma seção \"{{int:wikibase-otherprojects}}\" na barra lateral que fornece links para outros projetos Wikimedia com base em dados {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Idioma",
+	"wikibase-sitelinks-link-columnheading": "Página vinculada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexão|Conexões}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notifique-me quando alguém conecta uma página {{GENDER:|que eu criei}} para um item {{WBREPONAME}}.",
 	"notification-header-page-connection": "A página <strong> $3</strong> foi {{GENDER: $2|conectada}} para {{PLURAL:$4|-1=a {{WBREPONAME}} item|o {{WBREPONAME }} item $4}}, onde os dados relevantes para o tópico podem ser coletados.",

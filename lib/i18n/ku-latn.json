@@ -11,9 +11,6 @@
 	"wikibase-globedetails-longitude": "Hêlîlar",
 	"wikibase-globedetails-latitude": "Hêlîpan",
 	"wikibase-sitelinks-wikipedia": "Wîkîpediya",
-	"wikibase-sitelinks-sitename-columnheading": "Ziman",
-	"wikibase-sitelinks-link-columnheading": "Rûpela girêdayî",
-	"wikibase-validator-no-such-entity": "$1 nehat dîtin",
 	"wikibase-time-precision-century": "sedsala $1{{PLURAL:$1|ê|an}}",
 	"wikibase-entity-summary-wbsetsitelink-add": "Girêdanê li [$2] zêde bike"
 }

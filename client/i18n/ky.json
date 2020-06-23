@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Growingup",
 			"Janatkg"
 		]
 	},
 	"wikibase-editlinks": "Шилтемелерди оңдоо",
 	"wikibase-rc-hide-wikidata-hide": "Жашыруу",
-	"wikibase-rc-hide-wikidata-show": "Көрсөтүү"
+	"wikibase-rc-hide-wikidata-show": "Көрсөтүү",
+	"wikibase-sitelinks-sitename-columnheading": "Тил"
 }

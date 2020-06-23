@@ -37,6 +37,8 @@
 	"entityusage": "Páiginas que outelizan ua antidade",
 	"wikibase-pageinfo-entity-id": "ID de l eilemiento {{WBREPONAME}}",
 	"wikibase-otherprojects": "Noutros porjetos",
+	"wikibase-sitelinks-sitename-columnheading": "Lhéngua",
+	"wikibase-sitelinks-link-columnheading": "Páigina associada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Lhigaçon|Lhigaçones}} cun {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Abisar-me quando alguien lhigar ua páigina que {{GENDER:|you tenga criado}} pa un eilemiento {{WBREPONAME}}.",
 	"unresolved-property-category": "Páiginas que refrencian propiadades ineisistentes"

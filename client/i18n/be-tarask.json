@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "У іншых праектах",
 	"wikibase-otherprojects-beta-message": "Бакавая панэль іншых праектаў",
 	"wikibase-otherprojects-beta-description": "Дадае на бакавую панэль разьдзел «{{int:wikibase-otherprojects}}», які ўтрымлівае спасылкі на іншыя праекты фундацыі «Вікімэдыя», заснаваныя на зьвестках з {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Мова",
+	"wikibase-sitelinks-link-columnheading": "Злучаная старонка",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|1=Злучэньне|Злучэньні}} з {{GRAMMAR:творны|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Паведамляць мне, калі нехта злучае {{GENDER:|створаную мной}} старонку з элемэнтам {{GRAMMAR:родны|{{WBREPONAME}}}}.",
 	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|далучаная}} да {{PLURAL:$4|-1=элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}}|элемэнту {{GRAMMAR:родны|{{WBREPONAME}}}} $4}}, дзе могуць быць знойдзеныя зьвесткі датычныя тэмы.",

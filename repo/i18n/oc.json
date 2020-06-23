@@ -88,6 +88,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Accèpti aquelas condicions per mos modificacions que venon. Afichar pas mai aqueste messatge.",
 	"wikibase-entityselector-more": "mai",
 	"wikibase-anonymouseditwarning": "Atencion: Sètz pas connectat.\nVòstra adreça IP serà enregistrada dins l’istoric de las modificacions d'aquesta entitat.",
+	"wikibase-validator-invalid": "Valor invalida",
 	"wikibase-validator-label-conflict": "La proprietat $3 a ja un libellat « $1 » associat al còdi de lenga $2.",
 	"wikibase-validator-not-a-language": "«&nbsp;$1&nbsp;» es pas un còdi de lenga conegut.",
 	"wikibase-wikibaserepopage-invalid-id": "L’ID « $1 » es desconegut del sistèma. Utilizatz un ID d’entitat valid.",

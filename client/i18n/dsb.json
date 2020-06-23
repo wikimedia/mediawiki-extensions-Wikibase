@@ -36,5 +36,7 @@
 	"wikibase-rc-show-wikidata-pref": "Změny {{WBREPONAME}} w aktualnych změnach pokazaś",
 	"wikibase-replicationnote": "Pšosym źiwaj na to, až móžo někotare minuty traś, až změny njejsu widobne na wšych wikijach.",
 	"wikibase-watchlist-show-changes-pref": "Změny {{WBREPONAME}} w twójich wobglědowańkach pokazaś",
-	"wikibase-error-invalid-entity-id": "Zapódany ID jo systemoju njeznaty. Pšosym wužyj płaśiwy entitowy ID."
+	"wikibase-error-invalid-entity-id": "Zapódany ID jo systemoju njeznaty. Pšosym wužyj płaśiwy entitowy ID.",
+	"wikibase-sitelinks-sitename-columnheading": "Rěc",
+	"wikibase-sitelinks-link-columnheading": "Wótkazany bok"
 }

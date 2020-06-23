@@ -77,6 +77,8 @@
 	"wikibase-pageinfo-entity-usage-X": "موجود کی جملہ معلومات",
 	"wikibase-pageinfo-entity-usage-O": "دیگر (بیانات)",
 	"wikibase-otherprojects": "دیگر منصوبوں میں",
+	"wikibase-sitelinks-sitename-columnheading": "زبانیں",
+	"wikibase-sitelinks-link-columnheading": "مربوط شدہ صفحات",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} سے {{PLURAL:$1|رابطہ|رابطے}}",
 	"notification-header-page-connection": "صفحہ <strong>$3</strong> {{PLURAL:$4|-1={{WBREPONAME}} کے آئٹم|\n{{WBREPONAME}} کے آئٹم $4}} سے  {{GENDER:$2|مربوط}} کیا۔",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> اور {{PLURAL:$4|ایک دوسرے صفحے|$4 دوسرے صفحات|100=99+ دوسرے صفحات}} کو {{WBREPONAME}} آئٹموں سے {{GENDER:$2|مربوط}} کیا۔",

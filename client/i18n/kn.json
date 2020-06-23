@@ -20,5 +20,6 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ಸಂಪಾದನೆ",
 	"wikibase-unconnectedpages-submit": "ಹೋಗು",
 	"wikibase-pageinfo-entity-id-none": "ಯಾವುದೂ ಇಲ್ಲ",
-	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳಲ್ಲಿ"
+	"wikibase-otherprojects": "ಇತರೆ ಯೋಜನೆಗಳಲ್ಲಿ",
+	"wikibase-sitelinks-sitename-columnheading": "ಭಾಷೆ"
 }

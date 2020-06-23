@@ -11,8 +11,6 @@
 	"wikibase-error-ui-no-external-page": "Die gespesifiseerde bladsy kon nie op die ooreenkomende webwerf gevind word nie.",
 	"wikibase-error-ui-edit-conflict": "Twee wysigings bots met mekaar. Laai asseblief oor en stoor weer.",
 	"wikibase-sitelinks-wikipedia": "Wikipedia",
-	"wikibase-sitelinks-sitename-columnheading": "Taal",
-	"wikibase-sitelinks-link-columnheading": "Geskakelde artikel",
 	"wikibase-snakview-snaktypeselector-somevalue": "onbekende waarde",
 	"wikibase-snakview-snaktypeselector-novalue": "geen waarde",
 	"datatypes-type-monolingualtext": "Eentalige teks",

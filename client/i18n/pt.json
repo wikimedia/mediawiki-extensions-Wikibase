@@ -120,6 +120,8 @@
 	"wikibase-otherprojects": "Noutros projetos",
 	"wikibase-otherprojects-beta-message": "Barra lateral de outros projetos",
 	"wikibase-otherprojects-beta-description": "Adiciona uma secção \"{{int:wikibase-otherprojects}}\" à barra lateral que fornece ligações para outros projetos Wikimedia baseados em dados {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Língua",
+	"wikibase-sitelinks-link-columnheading": "Página associada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Ligação|Ligações}} com {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificar-me quando alguém ligar uma página que {{GENDER:|eu tenha criado}} a um elemento {{WBREPONAME}}.",
 	"notification-header-page-connection": "A página <strong>$3</strong> foi {{GENDER:$2|ligada}} {{PLURAL:$4|-1=a um elemento {{WBREPONAME}}|ao elemento {{WBREPONAME}} $4}} onde podem ser coligidos dados relevantes para o assunto.",

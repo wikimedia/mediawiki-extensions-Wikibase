@@ -97,6 +97,8 @@
 	"wikibase-otherprojects": "Jndr'à otre pruggette",
 	"wikibase-otherprojects-beta-message": "Otre pruggette jndr'à barre laterale",
 	"wikibase-otherprojects-beta-description": "Aggiunge 'na sezione \"{{int:wikibase-otherprojects}}\" a 'a barre laterale ca dèje collegaminde a le otre pruggette Uicchimedie ca se basane sus a le date {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Lènghe",
+	"wikibase-sitelinks-link-columnheading": "Pàgene collegate",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Connessione|Connessiune}} cu {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avvisame quanne quacchedune colleghe 'na pàgene ca {{GENDER:|agghie ccrejate}} a 'n'elemende {{WBREPONAME}}.",
 	"notification-header-page-connection": "'A pàgene <strong>$3</strong> ha {{GENDER:$2|state collegate}} {{PLURAL:$4|-1=a 'n'elemende de {{WBREPONAME}}|a l'elemende de {{WBREPONAME}} $4}}, addò le date 'mbortande sus a l'argomende ponne essere cugghiute.",

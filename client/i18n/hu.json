@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "Társlapok",
 	"wikibase-otherprojects-beta-message": "Társlapok oldalsáv",
 	"wikibase-otherprojects-beta-description": "Az oldalsávhoz hozzáad egy \"{{int:wikibase-otherprojects}}\" szakaszt, amely a {{WBREPONAME}} adatai alapján más WikiMedia-projektekhez nyújt linkeket.",
+	"wikibase-sitelinks-sitename-columnheading": "Nyelv",
+	"wikibase-sitelinks-link-columnheading": "Kapcsolt oldal",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Összekapcsolás|Összekapcsolások}} a(z) {{WBREPONAME}} adatbázissal",
 	"echo-pref-tooltip-wikibase-action": "Értesítést kérek, ha valaki összekapcsol egy általam létrehozott oldalt egy {{WBREPONAME}}-elemmel.",
 	"notification-header-page-connection": "A(z) <strong>$3</strong> {{GENDER:$2|össze lett kapcsolva}} {{PLURAL:$4|-1=egy {{WBREPONAME}}-elemmel|a(z) $4 {{WBREPONAME}}-elemmel}}, ahol a témához releváns adatokat lehet összegyűjteni.",

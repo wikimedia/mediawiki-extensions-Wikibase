@@ -81,6 +81,8 @@
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Deklaratioun: $1",
 	"wikibase-pageinfo-entity-usage-O": "Aner (Deklaratiounen)",
 	"wikibase-otherprojects": "An anere Projeten",
+	"wikibase-sitelinks-sitename-columnheading": "Sprooch",
+	"wikibase-sitelinks-link-columnheading": "Verlinkt Säit",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Verbindung|Verbindunge}} mat {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Mech informéiere wann een eng Säit {{GENDER:|déi ech ugeluecht hunn}} mat engem {{WBREPONAME}}-Element verbënnt.",
 	"notification-header-page-connection": "D'Säit <strong>$3</strong> gouf {{GENDER:$2|mat}} {{PLURAL:$4|-1=engem {{WBREPONAME}}-Objet|dem {{WBREPONAME}}-Objet $4}} verbonnen, wou Donnéeën a Relatioun mam Sujet gesammelt kënne ginn.",

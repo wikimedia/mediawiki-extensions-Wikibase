@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "Tại dự án khác",
 	"wikibase-otherprojects-beta-message": "Hộp thanh bên dự án khác",
 	"wikibase-otherprojects-beta-description": "Thêm hộp thanh bên “{{int:wikibase-otherprojects}}” có liên kết đến các dự án Wikimedia khác theo dữ liệu {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Ngôn ngữ",
+	"wikibase-sitelinks-link-columnheading": "Trang liên kết",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Liên kết|Các liên kết}} từ {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Báo cho tôi biết khi có người liên kết một trang tôi tạo ra với khoản mục {{WBREPONAME}}.",
 	"notification-header-page-connection": "Trang <strong>$3</strong> {{GENDER:$2}}đã được liên kết với {{PLURAL:$4|-1=một khoản mục {{WBREPONAME}}|khoản mục {{WBREPONAME}} $4}}, khoản mục này chứa dữ liệu có liên quan đến đề tài.",

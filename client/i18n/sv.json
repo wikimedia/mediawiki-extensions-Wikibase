@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "På andra projekt",
 	"wikibase-otherprojects-beta-message": "Sidopanel för andra projekt",
 	"wikibase-otherprojects-beta-description": "Lägger till ett \"{{int:wikibase-otherprojects}}\"-avsnitt till sidofältet som innehåller länkar till andra Wikimedia-projekten utifrån {{WBREPONAME}}-data.",
+	"wikibase-sitelinks-sitename-columnheading": "Språk",
+	"wikibase-sitelinks-link-columnheading": "Länkad sida",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Anslutning|Anslutningar}} med {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Meddela mig när någon ansluter en sida som {{GENDER:|jag har skapat}} till ett {{WBREPONAME}}-objekt.",
 	"notification-header-page-connection": "Sidan <strong>$3</strong> {{GENDER:$2|anslöts}} till {{PLURAL:$4|-1=ett {{WBREPONAME}}-objekt|{{WBREPONAME}}-objektet $4}}, där data som är relevant till ämnet kan samlas in.",

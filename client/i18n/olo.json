@@ -21,5 +21,6 @@
 	"wikibase-unconnectedpages-submit": "Ozuta sivut",
 	"wikibase-pageswithbadges-submit": "Ozuta sivut",
 	"wikibase-pageinfo-entity-id-none": "Nimidä",
-	"wikibase-otherprojects": "Toizis projektois"
+	"wikibase-otherprojects": "Toizis projektois",
+	"wikibase-sitelinks-sitename-columnheading": "Kieli"
 }

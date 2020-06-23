@@ -81,6 +81,8 @@
 	"wikibase-otherprojects": "Ing proyèk liya",
 	"wikibase-otherprojects-beta-message": "Wilah sisih proyèk liya",
 	"wikibase-otherprojects-beta-description": "Nambahaké pérangan \"{{int:wikibase-otherprojects}}\" ing wilah sisih sing ngemu pranala nyang proyèk Wikimédia liya adhedhasar data ing {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Basa",
+	"wikibase-sitelinks-link-columnheading": "Kaca ginayut",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Gegayutan}} karo {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Kandhani aku yèn ana sing nggayutaké kaca {{GENDER:|sing takgawé}} karo wiji {{WBREPONAME}}.",
 	"notification-header-page-connection": "Kaca <strong>$3</strong> {{GENDER:$2|kagayut}} karo wiji {{WBREPONAME}}.",

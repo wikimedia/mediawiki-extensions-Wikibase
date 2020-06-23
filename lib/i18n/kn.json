@@ -12,7 +12,5 @@
 	"wikibase-timedetails-calendar": "ಪಂಚಾಂಗ",
 	"wikibase-globedetails-longitude": "ರೇಖಾಂಶ",
 	"wikibase-globedetails-latitude": "ಅಕ್ಷಾಂಶ",
-	"wikibase-sitelinks-wikipedia": "ವಿಕಿಪೀಡಿಯ",
-	"wikibase-sitelinks-sitename-columnheading": "ಭಾಷೆ",
-	"wikibase-validator-bad-value": "ದತ್ತಾಂಶದ ಮೌಲ್ಯ ಕೆಟ್ಟುಹೋದ: $1"
+	"wikibase-sitelinks-wikipedia": "ವಿಕಿಪೀಡಿಯ"
 }

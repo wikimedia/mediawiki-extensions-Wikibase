@@ -8,7 +8,8 @@
 			"MF-Warburg",
 			"Naufal06",
 			"Snidata",
-			"Taylor"
+			"Taylor",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikibase-client-desc": "Klien untuk ekstensi Wikibase",
@@ -72,6 +73,8 @@
 	"wikibase-otherprojects": "Dalam proyek lain",
 	"wikibase-otherprojects-beta-message": "Proyek lain menu samping",
 	"wikibase-otherprojects-beta-description": "Tambahkan bagian \"{{int:wikibase-otherprojects}}\" ke menu samping untuk pranala ke proyek lain Wikimedia berdasarkan data dari {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
+	"wikibase-sitelinks-link-columnheading": "Laman terkait",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Koneksi}} dengan {{WBREPONAME}}",
 	"wikibase-client-data-bridge-error-go-back": "Kembali"
 }

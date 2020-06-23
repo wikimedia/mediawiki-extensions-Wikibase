@@ -49,6 +49,7 @@
 	"wikibase-snakview-property-input-placeholder": "ځانتيا",
 	"wikibase-snakview-variations-novalue-label": "بې ارزښته",
 	"wikibase-entityselector-more": "نور",
+	"wikibase-validator-no-such-entity": "$1 و نه موندل شو",
 	"wikibase-itembytitle-lookup-site": "وېبځی:",
 	"wikibase-itembytitle-lookup-page": "مخ:",
 	"wikibase-itembytitle-submit": "پلټل",

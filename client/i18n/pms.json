@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Borichèt",
-			"Dragonòt"
+			"Dragonòt",
+			"පසිඳු කාවින්ද"
 		]
 	},
 	"wikibase-client-desc": "Client për l'estension Wikibase",
@@ -53,5 +54,7 @@
 	"wikibase-pageinfo-entity-id": "ID ëd l'element Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Gnun",
 	"wikibase-property-render-error": "Faliment ant ël rendiment ëd la propietà $1: $2",
-	"wikibase-otherprojects": "An autri proget"
+	"wikibase-otherprojects": "An autri proget",
+	"wikibase-sitelinks-sitename-columnheading": "Lenga",
+	"wikibase-sitelinks-link-columnheading": "Pàgina colegà"
 }

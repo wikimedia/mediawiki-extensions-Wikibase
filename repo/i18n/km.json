@@ -22,5 +22,6 @@
 	"wikibase-sitelinks-special": "វិបសាយផ្សេងទៀត",
 	"wikibase-badgeselector-badge-placeholder-title": "ចុចដើម្បីដាក់សញ្ញាសម្គាល់។",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
+	"wikibase-validator-invalid": "តម្លៃ​មិន​ត្រឹម​ត្រូវ",
 	"special-availablebadges": "សញ្ញាសម្គាល់ដែលអាចប្រើបាន"
 }

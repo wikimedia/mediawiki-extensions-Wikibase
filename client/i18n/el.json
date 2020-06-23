@@ -88,6 +88,8 @@
 	"wikibase-otherprojects": "Σε άλλα εγχειρήματα",
 	"wikibase-otherprojects-beta-message": "Άλλα εγχειρήματα πλευρικής εργαλειοθήκης",
 	"wikibase-otherprojects-beta-description": "Προσθέτει μια ενότητα \"{{int:wikibase-otherprojects}}\" στην πλευρική στήλη, που παραθέτει συνδέσμους προς άλλα εγχειρήματα Wikimedia με βάση δεδομένα από {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Γλώσσα",
+	"wikibase-sitelinks-link-columnheading": "Σελίδες που συνδέονται",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Σύνδεση|Συνδέσεις}} με {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Να ειδοποιούμαι όταν κάποιος συνδέει μια σελίδα που {{GENDER:|δημιούργησα}} με ένα αντικείμενο  {{WBREPONAME}}.",
 	"notification-header-page-connection": "Η σελίδα <strong>$3</strong> {{GENDER:$2|συνδέθηκε}} με το {{PLURAL:$4|-1=ένα αντικείμενο {{WBREPONAME}}|το αντικείμενο {{WBREPONAME}} $4}}, όπου δεδομένα σχετικά με το θέμα μπορούν να συλλέγονται.",

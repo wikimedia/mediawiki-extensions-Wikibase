@@ -23,5 +23,7 @@
 	"wikibase-rc-show-wikidata-pref": "මෑත වෙනස්කම්වල විකිදත්ත සංස්කරණ පෙන්වන්න",
 	"wikibase-rc-wikibase-edit-letter": "ද",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} සංස්කරණය",
-	"wikibase-otherprojects": "වෙනත් ව්‍යාපෘති"
+	"wikibase-otherprojects": "වෙනත් ව්‍යාපෘති",
+	"wikibase-sitelinks-sitename-columnheading": "භාෂාව",
+	"wikibase-sitelinks-link-columnheading": "සබැඳිගත ලිපිය"
 }

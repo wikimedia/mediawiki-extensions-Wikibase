@@ -65,5 +65,7 @@
 	"wikibase-property-render-error": "خطا در ارائهٔ خصوصیت  $1: $2",
 	"wikibase-otherprojects": "پروژۀلئ تر",
 	"wikibase-otherprojects-beta-message": "نوار کناری سایر پروژه‌ها",
-	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد."
+	"wikibase-otherprojects-beta-description": "یک قسمت «{{int:wikibase-otherprojects}}» به نوار کناری می‌افزاید که پیوندهایی به دیگر پروژه‌های ویکی‌مدیا واقع‌شده در داده‌های {{WBREPONAME}} می‌دهد.",
+	"wikibase-sitelinks-sitename-columnheading": "زوون",
+	"wikibase-sitelinks-link-columnheading": "وەڵگە پیوند هوواردێ"
 }

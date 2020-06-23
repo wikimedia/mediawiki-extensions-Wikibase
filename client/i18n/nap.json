@@ -69,5 +69,7 @@
 	"wikibase-property-render-error": "Errore pe' tramente ca se faceva 'o rendering d' 'a proprietà $1: $2",
 	"wikibase-otherprojects": "Int'a n'ati pruggette",
 	"wikibase-otherprojects-beta-message": "Ati pruggete ncopp' 'a barra laterale",
-	"wikibase-otherprojects-beta-description": "Azzecca na sezione \"{{int:wikibase-otherprojects}}\" ncopp' 'a barra laterale ca ve darrà nu cullegamento a l'ati pruggette Wikimedia basate ncopp' 'e date {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Azzecca na sezione \"{{int:wikibase-otherprojects}}\" ncopp' 'a barra laterale ca ve darrà nu cullegamento a l'ati pruggette Wikimedia basate ncopp' 'e date {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Lengua",
+	"wikibase-sitelinks-link-columnheading": "Paggena cullegata"
 }

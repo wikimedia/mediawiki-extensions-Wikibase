@@ -77,6 +77,8 @@
 	"wikibase-otherprojects": "ഇതരപദ്ധതികളിൽ",
 	"wikibase-otherprojects-beta-message": "ഇതരപദ്ധതികൾ സൈഡ്‌ബാർ",
 	"wikibase-otherprojects-beta-description": "{{WBREPONAME}} വിവരങ്ങൾക്കനുസരിച്ച്, സൈഡ്ബാറിൽ മറ്റ് വിക്കിമീഡിയ പദ്ധതികളിലേക്ക് കണ്ണികൾ നൽകുന്ന \"{{int:wikibase-otherprojects}}\" ഭാഗം ചേർക്കുന്നു.",
+	"wikibase-sitelinks-sitename-columnheading": "ഭാഷ",
+	"wikibase-sitelinks-link-columnheading": "കണ്ണിചേർത്തിട്ടുള്ള താൾ",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} സംരംഭത്തിലോട്ടുള്ള {{PLURAL:$1|ബന്ധം|ബന്ധങ്ങൾ}}",
 	"echo-pref-tooltip-wikibase-action": "{{GENDER:|ഞാൻ സൃഷ്ടിച്ച}} ഒരു താൾ ആരെങ്കിലും ഒരു {{WBREPONAME}} ഇനവുമായി ബന്ധപ്പെടുത്തിയാൽ എന്നെ അറിയിക്കുക.",
 	"notification-header-page-connection": "<strong>$3</strong> എന്ന താൾ, വിഷയവുമായി ബന്ധപ്പെട്ട വിവരങ്ങൾ ശേഖരിക്കാനാവുന്ന, {{PLURAL:$4|-1=ഒരു {{WBREPONAME}} ഇനവുമായി| {{WBREPONAME}} ഇനം $4 എന്നതുമായി}} {{GENDER:$2|ബന്ധിപ്പിച്ചിരിക്കുന്നു}}.",

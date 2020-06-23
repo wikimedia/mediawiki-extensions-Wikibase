@@ -48,6 +48,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|çavkanî}}",
 	"wikibase-snakview-variations-somevalue-label": "nirxê nenas",
 	"wikibase-entityselector-more": "bêhtir",
+	"wikibase-validator-no-such-entity": "$1 nehat dîtin",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 beralîkirinek e.",
 	"wikibase-itembytitle-lookup-page": "Rûpel:",
 	"wikibase-itembytitle-submit": "Lêgerîn",

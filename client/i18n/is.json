@@ -94,6 +94,8 @@
 	"wikibase-otherprojects": "Í öðrum verkefnum",
 	"wikibase-otherprojects-beta-message": "Hliðarstika annara verkefna",
 	"wikibase-otherprojects-beta-description": "Bætir við \"{{int:wikibase-otherprojects}}\" fyrirsögn í hliðarstikuna með tenglum á önnur Wikimedia verkefni, byggt á gögnum {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Tungumál",
+	"wikibase-sitelinks-link-columnheading": "Tengd síða",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tenging|Tengingar}} við {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Láta mig vita þegar einhver tengir síðu sem {{GENDER:|ég bjó til}} við {{WBREPONAME}} hlut.",
 	"notification-header-page-connection": "Síðan <strong>$3</strong> {{GENDER:$2|tengdist}} við {{PLURAL:$4|-1=a {{WBREPONAME}} atriði|{{WBREPONAME}} atriðið $4}}, sem inniheldur gögnin varðandi viðfangsefnið.",

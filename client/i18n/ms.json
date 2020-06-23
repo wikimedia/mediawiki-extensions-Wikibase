@@ -59,5 +59,7 @@
 	"wikibase-pageinfo-entity-id": "ID Perkara Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Tiada",
 	"wikibase-property-render-error": "Sifat $1 gagal dihasilkan: $2",
-	"wikibase-otherprojects": "Dalam projek lain"
+	"wikibase-otherprojects": "Dalam projek lain",
+	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
+	"wikibase-sitelinks-link-columnheading": "Halaman terpaut"
 }

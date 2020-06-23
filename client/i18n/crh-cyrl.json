@@ -27,5 +27,6 @@
 	"wikibase-watchlist-show-changes-pref": "Козетюв джедвелимде {{WBREPONAME}} денъиштирильмелерини косьтер",
 	"wikibase-error-serialize-error": "Малюмат сериализация этилип оламады.",
 	"wikibase-error-invalid-entity-id": "Язылгъан ID системагъа белли дегиль. Кечерли IDлерден бирини къулланынъыз.",
-	"unconnectedpages": "Элементлерге багъланмагъан саифелер"
+	"unconnectedpages": "Элементлерге багъланмагъан саифелер",
+	"wikibase-sitelinks-link-columnheading": "Багълангъан саифе"
 }

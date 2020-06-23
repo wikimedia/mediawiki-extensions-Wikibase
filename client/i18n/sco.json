@@ -71,6 +71,8 @@
 	"wikibase-otherprojects": "In ither projects",
 	"wikibase-otherprojects-beta-message": "Ither projects sidebar",
 	"wikibase-otherprojects-beta-description": "Adds an \"{{int:wikibase-otherprojects}}\" section tae the sidebar that provides airtins tae the ither Wikimedia projects based on {{WBREPONAME}} data.",
+	"wikibase-sitelinks-sitename-columnheading": "Leid",
+	"wikibase-sitelinks-link-columnheading": "Airtit page",
 	"unresolved-property-category": "Pages wi unresolved properties",
 	"connected-redirect-category": "Redirects connectit tae a {{WBREPONAME}} eetem"
 }

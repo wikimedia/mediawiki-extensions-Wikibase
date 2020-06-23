@@ -115,6 +115,8 @@
 	"wikibase-otherprojects": "Diğer projelerde",
 	"wikibase-otherprojects-beta-message": "Diğer projeler kenar çubuğu",
 	"wikibase-otherprojects-beta-description": "Kenar çubuğuna, {{WBREPONAME}} bilgilerine dayalı olarak diğer Wikimedia projelerine bağlantı veren bir \"{{int:wikibase-otherprojects}}\" ekler.",
+	"wikibase-sitelinks-sitename-columnheading": "Dil",
+	"wikibase-sitelinks-link-columnheading": "Bağlantılı sayfa",
 	"echo-category-title-wikibase-action": "{{WBREPONAME}} ile ilgili {{PLURAL:$1|bağlantı|bağlantılar}}",
 	"echo-pref-tooltip-wikibase-action": "Birisi bir {{WBREPONAME}} ögesine {{GENDER:|yarattığım}} bir sayfayı bağladığında bana bildir.",
 	"notification-header-page-connection": "<strong>$3</strong> sayfası, konuyla ilgili verileri içeren {{PLURAL:$4|-1=bir {{WBREPONAME}} ögesine|$4 numaralı {{WBREPONAME}}}} ögesine {{GENDER:$2|bağlandı}}.",

@@ -102,6 +102,8 @@
 	"wikibase-otherprojects": "På andre prosjekter",
 	"wikibase-otherprojects-beta-message": "Andre prosjekter i sidefeltet",
 	"wikibase-otherprojects-beta-description": "Legger til «{{int:wikibase-otherprojects}}» i sidefeltet, med lenker til andre Wikimedia-prosjekter basert på data fra {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Språk",
+	"wikibase-sitelinks-link-columnheading": "Lenket side",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Tilkobling|Tilkoblinger}} til {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Gi meg et varsel når noen kobler en side {{GENDER:|jeg}} opprettet til et {{WBREPONAME}}-element.",
 	"notification-header-page-connection": "Siden <strong>$3</strong> ble {{GENDER:$2|koblet}} til {{PLURAL:$4|-1=et {{WBREPONAME}}-element|{{WBREPONAME}}-elementet $4}}, der relevant data om emnet kan samles.",

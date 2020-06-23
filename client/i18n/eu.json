@@ -43,6 +43,7 @@
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Etiketa:$1",
 	"wikibase-pageinfo-entity-usage-T": "Izenburua",
 	"wikibase-otherprojects": "Beste proiektuetan",
+	"wikibase-sitelinks-sitename-columnheading": "Hizkuntza",
 	"notification-link-text-view-item": "{{GENDER:$1|Ikus}} elementua",
 	"wikibase-client-data-bridge-unknown-error-message": "Errore bat gertatu da eta aukeraturiko balioa ezin daiteke editatu orain. Mesedez saiatu birkargatzen",
 	"wikibase-client-data-bridge-error-report": "<p>errorea matentzen bada, mesedez  [$1 arazo honen berri eman] honako informazio hau gehituz:</p>\n<ul>\n<li>$2</li>\n<li>$3 of $4</li>\n<li>Errorearen kodea: $5</li>\n</ul>",

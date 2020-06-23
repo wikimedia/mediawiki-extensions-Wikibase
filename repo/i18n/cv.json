@@ -8,6 +8,7 @@
 	"wikibase-edit": "тӳрлет",
 	"wikibase-sitelinks-special": "Урăх сайтсем",
 	"wikibase-entityselector-more": "нумайрах",
+	"wikibase-validator-no-such-entity": "$1 тупăнмарĕ",
 	"wikibase-gotolinkedpage-submit": "Куç",
 	"wikibase-gotolinkedpage-error-item-not-found": "Элеменчĕ тупăнмарĕ",
 	"wikibase-itemmerge-no-such-entity": "Элеменчĕ тупăнмарĕ."

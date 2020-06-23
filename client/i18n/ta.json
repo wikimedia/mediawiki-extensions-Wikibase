@@ -23,5 +23,7 @@
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} தொகுப்பு",
 	"wikibase-pageinfo-entity-usage-T": "தலைப்பு",
 	"wikibase-otherprojects": "பிற திட்டங்களில்",
+	"wikibase-sitelinks-sitename-columnheading": "மொழி",
+	"wikibase-sitelinks-link-columnheading": "இணைத்த கட்டுரை",
 	"connected-redirect-category": "{{WBREPONAME}}-இற்கு இணைக்கப்பட்டுள்ள வழிமாற்றுகள்"
 }

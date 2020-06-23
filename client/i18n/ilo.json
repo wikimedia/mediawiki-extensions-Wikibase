@@ -52,5 +52,7 @@
 	"wikibase-pageinfo-entity-id": "ID ti Banag ti {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Awan",
 	"wikibase-property-render-error": "Napaay a nangipaay ti tagikua ti $1:$2",
-	"wikibase-otherprojects": "Kadagiti sabali a proyekto"
+	"wikibase-otherprojects": "Kadagiti sabali a proyekto",
+	"wikibase-sitelinks-sitename-columnheading": "Pagsasao",
+	"wikibase-sitelinks-link-columnheading": "Naisilpo a panid"
 }

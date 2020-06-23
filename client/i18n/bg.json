@@ -70,6 +70,8 @@
 	"wikibase-pageinfo-entity-usage-T": "Заглавие",
 	"wikibase-pageinfo-entity-usage-O": "Други (изявления)",
 	"wikibase-otherprojects": "В други проекти",
+	"wikibase-sitelinks-sitename-columnheading": "Език",
+	"wikibase-sitelinks-link-columnheading": "Свързана страница",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Свързване|Свързвания}} с {{WBREPONAME}}",
 	"unresolved-property-category": "Страници с недостъпни свойства",
 	"unresolved-property-category-desc": "Тази категория обхваща страници с референции към свойства на {{WBREPONAME}}, които не могат да бъдат намерени нито чрез идентификационния номер на свойството, нито чрез етикета.",

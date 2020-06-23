@@ -85,6 +85,7 @@
 	"wikibase-otherprojects": "E raktresoù all",
 	"wikibase-otherprojects-beta-message": "Barrennoù-kostez raktresoù all",
 	"wikibase-otherprojects-beta-description": "Ouzhpennañ a ra ur rann \"{{int:wikibase-otherprojects}}\" d'ar varrenn-gostez a bourchas liammoù war-zu ar raktresoù Wikimedia all diazezet war roadennoù {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Yezh",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Liammet}} gant {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Kas keloù din pa vez liammet gant unan bennak ur bajenn {{GENDER:|bet krouet ganin}} d'un elfenn {{WBREPONAME}}.",
 	"notification-header-page-connection": "{{GENDER:$2|Liammet}} eo bet ar bajenn <strong>$3</strong> ouzh un elfenn {{WBREPONAME}}.",

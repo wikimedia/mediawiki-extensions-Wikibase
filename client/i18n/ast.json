@@ -100,6 +100,8 @@
 	"wikibase-otherprojects": "N'otros proyeutos",
 	"wikibase-otherprojects-beta-message": "Barra llateral d'otros proyeutos",
 	"wikibase-otherprojects-beta-description": "Amiesta la seición «{{int:wikibase-otherprojects}}» a la barra llateral qu'ufre enllaces los demás proyeutos de Wikimedia basaos nos datos de {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Llingua",
+	"wikibase-sitelinks-link-columnheading": "Páxina enllazada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexón|Conexones}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Avisame cuando daquién conecta una páxina que {{GENDER:|creé}} a un elementu de {{WBREPONAME}}.",
 	"notification-header-page-connection": "La páxina <strong>$3</strong> {{GENDER:$2|conectóse}} {{PLURAL:$4|-1=a un elementu de|al elementu $4 de}} {{WBREPONAME}} onde pueden recoyese datos rellacionaos col asuntu.",

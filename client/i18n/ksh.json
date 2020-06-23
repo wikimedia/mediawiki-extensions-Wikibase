@@ -51,5 +51,7 @@
 	"wikibase-property-render-error": "Mer kunnte di Eijeschaff „$1“ nit aanzeije: $2",
 	"wikibase-otherprojects": "En andere Projäkte",
 	"wikibase-otherprojects-beta-message": "Menühs vun andere Projäkte",
-	"wikibase-otherprojects-beta-description": "Brängk ene Afschnett „{{int:wikibase-otherprojects}}“ en et Menü met Lengks op andere Projäkte vun de WikkiMehdija_Schtefftong met Dahte us em {{WBREPONAME}}."
+	"wikibase-otherprojects-beta-description": "Brängk ene Afschnett „{{int:wikibase-otherprojects}}“ en et Menü met Lengks op andere Projäkte vun de WikkiMehdija_Schtefftong met Dahte us em {{WBREPONAME}}.",
+	"wikibase-sitelinks-sitename-columnheading": "Schprohch",
+	"wikibase-sitelinks-link-columnheading": "De verlengk Sigg"
 }

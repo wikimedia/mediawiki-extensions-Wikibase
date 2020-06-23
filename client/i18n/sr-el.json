@@ -93,6 +93,8 @@
 	"wikibase-otherprojects": "Na drugim projektima",
 	"wikibase-otherprojects-beta-message": "Drugi projekti na bočnoj traci",
 	"wikibase-otherprojects-beta-description": "Dodaje odeljak „{{int:wikibase-otherprojects}}“ na bočnoj traci s vezama na ostale Vikimedijine projekte na osnovu podataka iz Vikibaze.",
+	"wikibase-sitelinks-sitename-columnheading": "Jezik",
+	"wikibase-sitelinks-link-columnheading": "Povezana stranica",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Povezivanje|Povezivanja}} s Vikipodacima",
 	"echo-pref-tooltip-wikibase-action": "Obaveštava vas kada neko poveže stranicu koju ste napravili na stavku Vikipodataka.",
 	"notification-header-page-connection": "{{GENDER:$2|Korisnik|Korisnica|Korisnik}} $2 je {{GENDER:$2|povezao|povezala|povezao}} stranicu <strong>$3</strong> na stavku na Vikipodacima.",

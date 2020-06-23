@@ -28,8 +28,6 @@
 	"wikibase-globedetails-longitude": "Географска дължина",
 	"wikibase-globedetails-latitude": "Географска ширина",
 	"wikibase-sitelinks-wikipedia": "Уикипедия",
-	"wikibase-sitelinks-sitename-columnheading": "Език",
-	"wikibase-sitelinks-link-columnheading": "Свързана страница",
 	"wikibase-snakview-snaktypeselector-somevalue": "неизвестна стойност",
 	"wikibase-snakview-snaktypeselector-novalue": "без стойност",
 	"datatypes-type-string": "Низ",

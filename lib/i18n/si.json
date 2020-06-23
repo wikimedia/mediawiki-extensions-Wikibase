@@ -8,8 +8,6 @@
 	},
 	"wikibase-error-ui-edit-conflict": "මෙය සංස්කරණ ගැටුමකි. කරුණාකර ප්‍රතිපූර්ණය කර නැවත සුරකින්න.",
 	"wikibase-sitelinks-wikipedia": "විකිපීඩියා",
-	"wikibase-sitelinks-sitename-columnheading": "භාෂාව",
-	"wikibase-sitelinks-link-columnheading": "සබැඳිගත ලිපිය",
 	"datatypes-type-string": "තන්තුව",
 	"datatypes-type-quantity": "ප්‍රමාණය",
 	"datatypes-type-number": "අංකය",

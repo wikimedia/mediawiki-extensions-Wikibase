@@ -62,6 +62,8 @@
 	"wikibase-pageinfo-entity-usage-D": "Апісанне",
 	"wikibase-pageinfo-entity-usage-T": "Загаловак",
 	"wikibase-otherprojects": "У іншых праектах",
+	"wikibase-sitelinks-sitename-columnheading": "Мова",
+	"wikibase-sitelinks-link-columnheading": "Злучаны артыкул",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Злучэнне|Злучэнні}} з элементам {{grammar:родны|{{WBREPONAME}}}}",
 	"echo-pref-tooltip-wikibase-action": "Паведамляць мне, калі хтосьці падключаецца да старонкі, якую {{GENDER:|я стварыў у|я стварыла ў}} элеменце {{grammar:родны|{{WBREPONAME}}}}.",
 	"notification-header-page-connection": "Старонка <strong>$3</strong> была {{GENDER:$2|злучана}} з {{PLURAL:$4|-1=элементам {{grammar:родны|{{WBREPONAME}}}}|элементам {{grammar:родны|{{WBREPONAME}}}} $4}}, які змяшчае інфармацыю, датычную дадзенай тэмы.",

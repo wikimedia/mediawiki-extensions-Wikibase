@@ -22,6 +22,7 @@
 	"wikibase-sitelinks-special": "Digər saytlar",
 	"wikibase-statementview-rank-normal": "Normal dərəcə",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|mənbə|mənbələr}}",
+	"wikibase-validator-no-such-property": "$1 xüsusiyyəti tapılmadı",
 	"special-newitem": "Yeni müddəa yarat",
 	"wikibase-newitem-fieldset": "Yeni müddəa yarat",
 	"wikibase-listdatatypes-wikibase-property-head": "Xüsusiyyət"

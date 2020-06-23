@@ -48,5 +48,7 @@
 	"wikibase-property-render-error": "«$1» шартны ачылыууну халаты: $2",
 	"wikibase-otherprojects": "Башха проектледе",
 	"wikibase-otherprojects-beta-message": "Башха проектлени къабыргъа панели",
-	"wikibase-otherprojects-beta-description": "Къабыргъа панелге «{{int:wikibase-otherprojects}}» бёлюмню къошады, ол а {{WBREPONAME}}ге кёре Викимедиа фондну башха проектлерине джибериуле кёргюзтеди."
+	"wikibase-otherprojects-beta-description": "Къабыргъа панелге «{{int:wikibase-otherprojects}}» бёлюмню къошады, ол а {{WBREPONAME}}ге кёре Викимедиа фондну башха проектлерине джибериуле кёргюзтеди.",
+	"wikibase-sitelinks-sitename-columnheading": "Тил",
+	"wikibase-sitelinks-link-columnheading": "Байламлы бет"
 }

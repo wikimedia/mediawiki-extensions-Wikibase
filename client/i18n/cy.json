@@ -40,5 +40,7 @@
 	"wikibase-unconnectedpages-submit": "Gwneler",
 	"wikibase-pageinfo-entity-id": "ID yr Eitem {{WBREPONAME}}",
 	"wikibase-pageinfo-entity-id-none": "Dim",
-	"wikibase-otherprojects": "Mewn prosiectau eraill"
+	"wikibase-otherprojects": "Mewn prosiectau eraill",
+	"wikibase-sitelinks-sitename-columnheading": "Iaith",
+	"wikibase-sitelinks-link-columnheading": "Tudalen a gysylltwyd"
 }

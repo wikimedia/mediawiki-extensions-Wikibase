@@ -25,5 +25,6 @@
 	"wikibase-pageinfo-entity-usage-D-with-modifier": "Descrive: $1",
 	"wikibase-pageinfo-entity-usage-T": "Titulo",
 	"wikibase-pageinfo-entity-usage-C-with-modifier": "Declara: $1",
-	"wikibase-otherprojects": "En otra projetas"
+	"wikibase-otherprojects": "En otra projetas",
+	"wikibase-sitelinks-sitename-columnheading": "Lingua"
 }
