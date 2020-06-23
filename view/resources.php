@@ -373,178 +373,179 @@ return call_user_func( function() {
 		],
 
 		'dataValues' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'dataValues.js',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
+			'scripts' => [
+				'dataValues.js',
 			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
 		'jquery.animateWithEvent' => $wikibaseDatavaluesValueviewLibPaths + [
-				'packageFiles' => [
-					'jquery/jquery.animateWithEvent.js',
-					'jquery/jquery.AnimationEvent.js',
-					'jquery/jquery.PurposedCallbacks.js',
-				],
+			'packageFiles' => [
+				'jquery/jquery.animateWithEvent.js',
+				'jquery/jquery.AnimationEvent.js',
+				'jquery/jquery.PurposedCallbacks.js',
 			],
+		],
 
 		'jquery.inputautoexpand' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'jquery/jquery.inputautoexpand.js',
-				],
-				'dependencies' => [
-					'jquery.event.special.eachchange',
-				],
+			'scripts' => [
+				'jquery/jquery.inputautoexpand.js',
 			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+			],
+		],
 
 		'jquery.ui.commonssuggester' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'jquery.ui/jquery.ui.commonssuggester.js',
-				],
-				'styles' => [
-					'jquery.ui/jquery.ui.commonssuggester.css',
-				],
-				'dependencies' => [
-					'jquery.ui.suggester',
-					'jquery.ui',
-					'util.highlightSubstring',
-				],
+			'scripts' => [
+				'jquery.ui/jquery.ui.commonssuggester.js',
 			],
+			'styles' => [
+				'jquery.ui/jquery.ui.commonssuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui',
+				'util.highlightSubstring',
+			],
+		],
 
 		'jquery.ui.languagesuggester' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'jquery.ui/jquery.ui.languagesuggester.js',
-				],
-				'dependencies' => [
-					'jquery.ui.suggester',
-					'jquery.ui',
-				],
+			'scripts' => [
+				'jquery.ui/jquery.ui.languagesuggester.js',
 			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui',
+			],
+		],
 
 		'util.ContentLanguages' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'util/util.ContentLanguages.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
+			'scripts' => [
+				'util/util.ContentLanguages.js',
 			],
+			'dependencies' => [
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
 		'util.Extendable' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'util/util.Extendable.js',
-				],
+			'scripts' => [
+				'util/util.Extendable.js',
 			],
+		],
 
 		'util.MessageProvider' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'util/util.MessageProvider.js',
-				],
+			'scripts' => [
+				'util/util.MessageProvider.js',
 			],
+		],
 
 		'util.MessageProviders' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'util/util.HashMessageProvider.js',
-					'util/util.CombiningMessageProvider.js',
-					'util/util.PrefixingMessageProvider.js',
-				],
+			'scripts' => [
+				'util/util.HashMessageProvider.js',
+				'util/util.CombiningMessageProvider.js',
+				'util/util.PrefixingMessageProvider.js',
 			],
+		],
 
 		'util.Notifier' => $wikibaseDatavaluesValueviewLibPaths + [
-				'scripts' => [
-					'util/util.Notifier.js',
-				],
+			'scripts' => [
+				'util/util.Notifier.js',
 			],
+		],
 
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'DataValue.js',
-				],
-				'dependencies' => [
-					'dataValues',
-					'util.inherit',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
+			'scripts' => [
+				'DataValue.js',
 			],
+			'dependencies' => [
+				'dataValues',
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
 		'dataValues.values' => $wikibaseDatavaluesPaths + [
-				'scripts' => [
-					// Note: The order here is relevant, scripts should be places after the ones they
-					//  depend on.
-					'lib/globeCoordinate/globeCoordinate.js',
-					'lib/globeCoordinate/globeCoordinate.GlobeCoordinate.js',
-					'src/values/BoolValue.js',
-					'src/values/DecimalValue.js',
-					'src/values/GlobeCoordinateValue.js',
-					'src/values/MonolingualTextValue.js',
-					'src/values/MultilingualTextValue.js',
-					'src/values/StringValue.js',
-					'src/values/NumberValue.js',
-					'src/values/TimeValue.js',
-					'src/values/QuantityValue.js',
-					'src/values/UnknownValue.js',
-					'src/values/UnDeserializableValue.js',
-				],
-				'dependencies' => [
-					'dataValues.DataValue',
-					'dataValues.TimeValue',
-					'util.inherit',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
+			'scripts' => [
+				// Note: The order here is relevant, scripts should be places after the ones they
+				//  depend on.
+				'lib/globeCoordinate/globeCoordinate.js',
+				'lib/globeCoordinate/globeCoordinate.GlobeCoordinate.js',
+				'src/values/BoolValue.js',
+				'src/values/DecimalValue.js',
+				'src/values/GlobeCoordinateValue.js',
+				'src/values/MonolingualTextValue.js',
+				'src/values/MultilingualTextValue.js',
+				'src/values/StringValue.js',
+				'src/values/NumberValue.js',
+				'src/values/TimeValue.js',
+				'src/values/QuantityValue.js',
+				'src/values/UnknownValue.js',
+				'src/values/UnDeserializableValue.js',
 			],
+			'dependencies' => [
+				'dataValues.DataValue',
+				'dataValues.TimeValue',
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
 		'dataValues.TimeValue' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'values/TimeValue.js',
-				],
-				'dependencies' => [
-					'dataValues.DataValue',
-					'util.inherit',
-				],
-				'targets' => [ 'desktop', 'mobile' ],
+			'scripts' => [
+				'values/TimeValue.js',
 			],
+			'dependencies' => [
+				'dataValues.DataValue',
+				'util.inherit',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
 
 		'valueFormatters' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'valueFormatters/valueFormatters.js',
-					'valueFormatters/formatters/ValueFormatter.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-				],
+			'scripts' => [
+				'valueFormatters/valueFormatters.js',
+				'valueFormatters/formatters/ValueFormatter.js',
 			],
+			'dependencies' => [
+				'util.inherit',
+			],
+		],
 
 		'valueParsers' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'valueParsers/valueParsers.js',
-				],
+			'scripts' => [
+				'valueParsers/valueParsers.js',
 			],
+		],
 
 		'valueParsers.ValueParserStore' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'valueParsers/ValueParserStore.js',
-				],
-				'dependencies' => [
-					'valueParsers',
-				],
+			'scripts' => [
+				'valueParsers/ValueParserStore.js',
 			],
+			'dependencies' => [
+				'valueParsers',
+			],
+		],
 
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
-				'scripts' => [
-					'valueParsers/parsers/ValueParser.js',
+			'scripts' => [
+				'valueParsers/parsers/ValueParser.js',
 
-					'valueParsers/parsers/BoolParser.js',
-					'valueParsers/parsers/FloatParser.js',
-					'valueParsers/parsers/IntParser.js',
-					'valueParsers/parsers/NullParser.js',
-					'valueParsers/parsers/StringParser.js',
-				],
-				'dependencies' => [
-					'dataValues.values',
-					'util.inherit',
-					'valueParsers',
-				],
+				'valueParsers/parsers/BoolParser.js',
+				'valueParsers/parsers/FloatParser.js',
+				'valueParsers/parsers/IntParser.js',
+				'valueParsers/parsers/NullParser.js',
+				'valueParsers/parsers/StringParser.js',
 			],
+			'dependencies' => [
+				'dataValues.values',
+				'util.inherit',
+				'valueParsers',
+			],
+		],
+
 		'wikibase.serialization' => [
 			'packageFiles' => [
 				'index.js',
@@ -591,295 +592,299 @@ return call_user_func( function() {
 			'localBasePath' => __DIR__ . '/lib/wikibase-serialization/src',
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
 		],
+
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps
 		// jQuery.valueview to jQuery.valueview.valueview without losing any properties.
 		'jquery.valueview' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'packageFiles' => [
-					'jquery.valueview.js',
-					'jquery.valueview.valueview.js',
-					'jquery.valueview.ViewState.js',
-				],
-				'styles' => [
-					'jquery.valueview.valueview.css',
-				],
-				'dependencies' => [
-					'dataValues.DataValue',
-					'jquery.ui',
-					'jquery.valueview.experts.EmptyValue',
-					'jquery.valueview.ExpertStore',
-					'util.Notifier',
-					'valueFormatters',
-					'valueParsers.ValueParserStore',
-				],
+			'packageFiles' => [
+				'jquery.valueview.js',
+				'jquery.valueview.valueview.js',
+				'jquery.valueview.ViewState.js',
 			],
+			'styles' => [
+				'jquery.valueview.valueview.css',
+			],
+			'dependencies' => [
+				'dataValues.DataValue',
+				'jquery.ui',
+				'jquery.valueview.experts.EmptyValue',
+				'jquery.valueview.ExpertStore',
+				'util.Notifier',
+				'valueFormatters',
+				'valueParsers.ValueParserStore',
+			],
+		],
 
 		'jquery.valueview.Expert' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'jquery.valueview.experts.js',
-					'jquery.valueview.Expert.js',
-				],
-				'dependencies' => [
-					'util.inherit',
-					'util.MessageProviders',
-					'util.Notifier',
-					'util.Extendable'
-				],
+			'scripts' => [
+				'jquery.valueview.experts.js',
+				'jquery.valueview.Expert.js',
 			],
+			'dependencies' => [
+				'util.inherit',
+				'util.MessageProviders',
+				'util.Notifier',
+				'util.Extendable'
+			],
+		],
 
 		'jquery.valueview.experts.CommonsMediaType' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/CommonsMediaType.js',
-				],
-				'dependencies' => [
-					'jquery.event.special.eachchange',
-					'jquery.ui.commonssuggester',
-					'jquery.valueview.experts.StringValue',
-					'jquery.valueview.Expert',
-				],
+			'scripts' => [
+				'experts/CommonsMediaType.js',
 			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.commonssuggester',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.Expert',
+			],
+		],
 
 		'jquery.valueview.experts.GeoShape' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/GeoShape.js',
-				],
-				'dependencies' => [
-					'jquery.event.special.eachchange',
-					'jquery.ui.commonssuggester',
-					'jquery.valueview.experts.StringValue',
-					'jquery.valueview.Expert',
-				],
+			'scripts' => [
+				'experts/GeoShape.js',
 			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.commonssuggester',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.Expert',
+			],
+		],
 
 		'jquery.valueview.experts.TabularData' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/TabularData.js',
-				],
-				'dependencies' => [
-					'jquery.event.special.eachchange',
-					'jquery.ui.commonssuggester',
-					'jquery.valueview.experts.StringValue',
-					'jquery.valueview.Expert',
-				],
+			'scripts' => [
+				'experts/TabularData.js',
 			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.commonssuggester',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.Expert',
+			],
+		],
 
 		'jquery.valueview.experts.EmptyValue' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/EmptyValue.js',
-				],
-				'styles' => [
-					'experts/EmptyValue.css',
-				],
-				'dependencies' => [
-					'jquery.valueview.Expert',
-				],
-				'messages' => [
-					'valueview-expert-emptyvalue-empty',
-				],
+			'scripts' => [
+				'experts/EmptyValue.js',
 			],
+			'styles' => [
+				'experts/EmptyValue.css',
+			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+			],
+			'messages' => [
+				'valueview-expert-emptyvalue-empty',
+			],
+		],
 
 		'jquery.valueview.experts.GlobeCoordinateInput' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/GlobeCoordinateInput.js',
-				],
-				'styles' => [
-					'experts/GlobeCoordinateInput.css',
-				],
-				'dependencies' => [
-					'jquery.valueview.ExpertExtender',
-					'jquery.valueview.experts.StringValue',
-					'jquery.valueview.Expert',
-					'util.MessageProvider',
-				],
-				'messages' => [
-					'valueview-expert-globecoordinateinput-precision',
-					'valueview-expert-globecoordinateinput-nullprecision',
-					'valueview-expert-globecoordinateinput-customprecision',
-				],
+			'scripts' => [
+				'experts/GlobeCoordinateInput.js',
 			],
+			'styles' => [
+				'experts/GlobeCoordinateInput.css',
+			],
+			'dependencies' => [
+				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.experts.StringValue',
+				'jquery.valueview.Expert',
+				'util.MessageProvider',
+			],
+			'messages' => [
+				'valueview-expert-globecoordinateinput-precision',
+				'valueview-expert-globecoordinateinput-nullprecision',
+				'valueview-expert-globecoordinateinput-customprecision',
+			],
+		],
 
 		'jquery.valueview.experts.MonolingualText' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'packageFiles' => [
-					'experts/MonolingualText.js',
-					'ExpertExtender/ExpertExtender.LanguageSelector.js',
-				],
-				'dependencies' => [
-					'jquery.valueview.Expert',
-					'jquery.valueview.ExpertExtender',
-					'jquery.valueview.experts.StringValue',
-					'jquery.event.special.eachchange',
-					'jquery.ui.languagesuggester',
-					'util.MessageProviders',
-				],
-				'messages' => [
-					'valueview-expertextender-languageselector-languagetemplate',
-					'valueview-expertextender-languageselector-label',
-				],
+			'packageFiles' => [
+				'experts/MonolingualText.js',
+				'ExpertExtender/ExpertExtender.LanguageSelector.js',
 			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.experts.StringValue',
+				'jquery.event.special.eachchange',
+				'jquery.ui.languagesuggester',
+				'util.MessageProviders',
+			],
+			'messages' => [
+				'valueview-expertextender-languageselector-languagetemplate',
+				'valueview-expertextender-languageselector-label',
+			],
+		],
 
 		'jquery.valueview.experts.QuantityInput' => $wikibaseDatavaluesValueviewPaths + [
-				'packageFiles' => [
-					'src/experts/QuantityInput.js',
-					'src/ExpertExtender/ExpertExtender.UnitSelector.js',
-					'lib/jquery.ui/jquery.ui.unitsuggester.js',
-				],
-				'styles' => [
-					'lib/jquery.ui/jquery.ui.unitsuggester.css',
-				],
-				'dependencies' => [
-					'jquery.ui.suggester',
-					'jquery.ui',
-					'jquery.valueview.Expert',
-					'jquery.valueview.ExpertExtender',
-					'jquery.valueview.experts.StringValue',
-				],
-				'messages' => [
-					'valueview-expertextender-unitsuggester-label',
-				],
+			'packageFiles' => [
+				'src/experts/QuantityInput.js',
+				'src/ExpertExtender/ExpertExtender.UnitSelector.js',
+				'lib/jquery.ui/jquery.ui.unitsuggester.js',
 			],
+			'styles' => [
+				'lib/jquery.ui/jquery.ui.unitsuggester.css',
+			],
+			'dependencies' => [
+				'jquery.ui.suggester',
+				'jquery.ui',
+				'jquery.valueview.Expert',
+				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.experts.StringValue',
+			],
+			'messages' => [
+				'valueview-expertextender-unitsuggester-label',
+			],
+		],
 
 		'jquery.valueview.experts.StringValue' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/StringValue.js',
-					'../lib/jquery/jquery.focusAt.js',
-				],
-				'dependencies' => [
-					'jquery.event.special.eachchange',
-					'jquery.inputautoexpand',
-					'jquery.valueview.Expert',
-				],
+			'scripts' => [
+				'experts/StringValue.js',
+				'../lib/jquery/jquery.focusAt.js',
 			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.inputautoexpand',
+				'jquery.valueview.Expert',
+			],
+		],
 
 		'jquery.valueview.experts.TimeInput' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/TimeInput.js',
-				],
-				'styles' => [
-					'experts/TimeInput.css',
-				],
-				'dependencies' => [
-					'dataValues.TimeValue',
-					'jquery.valueview.ExpertExtender',
-					'jquery.valueview.Expert',
-					'util.MessageProvider',
-				],
-				'messages' => [
-					'valueview-expert-timeinput-calendar',
-					'valueview-expert-timeinput-precision',
-					'valueview-expert-timevalue-calendar-gregorian',
-					'valueview-expert-timevalue-calendar-julian',
-				],
+			'scripts' => [
+				'experts/TimeInput.js',
 			],
+			'styles' => [
+				'experts/TimeInput.css',
+			],
+			'dependencies' => [
+				'dataValues.TimeValue',
+				'jquery.valueview.ExpertExtender',
+				'jquery.valueview.Expert',
+				'util.MessageProvider',
+			],
+			'messages' => [
+				'valueview-expert-timeinput-calendar',
+				'valueview-expert-timeinput-precision',
+				'valueview-expert-timevalue-calendar-gregorian',
+				'valueview-expert-timevalue-calendar-julian',
+			],
+		],
 
 		'jquery.valueview.experts.UnDeserializableValue' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/UnDeserializableValue.js'
-				],
-				'dependencies' => [
-					'jquery.valueview.Expert',
-				]
+			'scripts' => [
+				'experts/UnDeserializableValue.js'
 			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+			]
+		],
 
 		'jquery.valueview.ExpertStore' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'experts/UnsupportedValue.js',
-					'jquery.valueview.ExpertStore.js',
-				],
-				'styles' => [
-					'experts/UnsupportedValue.css',
-				],
-				'dependencies' => [
-					'jquery.valueview.Expert',
-				],
-				'messages' => [
-					'valueview-expert-unsupportedvalue-unsupporteddatatype',
-					'valueview-expert-unsupportedvalue-unsupporteddatavalue',
-				]
+			'scripts' => [
+				'experts/UnsupportedValue.js',
+				'jquery.valueview.ExpertStore.js',
 			],
+			'styles' => [
+				'experts/UnsupportedValue.css',
+			],
+			'dependencies' => [
+				'jquery.valueview.Expert',
+			],
+			'messages' => [
+				'valueview-expert-unsupportedvalue-unsupporteddatatype',
+				'valueview-expert-unsupportedvalue-unsupporteddatavalue',
+			]
+		],
 
 		'jquery.valueview.ExpertExtender' => $wikibaseDatavaluesValueviewSrcPaths + [
-				'scripts' => [
-					'ExpertExtender/ExpertExtender.js',
-					'../lib/jquery.ui/jquery.ui.inputextender.js',
-					'ExpertExtender/ExpertExtender.Container.js',
-					'ExpertExtender/ExpertExtender.Listrotator.js',
-					'../lib/jquery.ui/jquery.ui.listrotator.js',
-					'ExpertExtender/ExpertExtender.Preview.js',
-					'../lib/jquery.ui/jquery.ui.preview.js',
-				],
-				'styles' => [
-					'../lib/jquery.ui/jquery.ui.inputextender.css',
-					'../lib/jquery.ui/jquery.ui.listrotator.css',
-					'ExpertExtender/ExpertExtender.Preview.css',
-					'../lib/jquery.ui/jquery.ui.preview.css',
-				],
-				'dependencies' => [
-					'jquery.animateWithEvent',
-					'jquery.event.special.eachchange',
-					'jquery.valueview',
-					'util.Extendable',
-					'jquery.ui',
-					'util.MessageProviders',
-				],
-				'messages' => [
-					'valueview-listrotator-manually',
-					'valueview-preview-label',
-					'valueview-preview-novalue',
-				],
+			'scripts' => [
+				'ExpertExtender/ExpertExtender.js',
+				'../lib/jquery.ui/jquery.ui.inputextender.js',
+				'ExpertExtender/ExpertExtender.Container.js',
+				'ExpertExtender/ExpertExtender.Listrotator.js',
+				'../lib/jquery.ui/jquery.ui.listrotator.js',
+				'ExpertExtender/ExpertExtender.Preview.js',
+				'../lib/jquery.ui/jquery.ui.preview.js',
 			],
+			'styles' => [
+				'../lib/jquery.ui/jquery.ui.inputextender.css',
+				'../lib/jquery.ui/jquery.ui.listrotator.css',
+				'ExpertExtender/ExpertExtender.Preview.css',
+				'../lib/jquery.ui/jquery.ui.preview.css',
+			],
+			'dependencies' => [
+				'jquery.animateWithEvent',
+				'jquery.event.special.eachchange',
+				'jquery.valueview',
+				'util.Extendable',
+				'jquery.ui',
+				'util.MessageProviders',
+			],
+			'messages' => [
+				'valueview-listrotator-manually',
+				'valueview-preview-label',
+				'valueview-preview-novalue',
+			],
+		],
 
 		'wikibase.termbox' => $wikibaseTermboxPaths + [
-				'class' => TermboxModule::class,
-				'scripts' => [
-					'dist/wikibase.termbox.main.js',
-				],
-				'targets' => 'mobile',
-				'dependencies' => [
-					'wikibase.termbox.styles',
-					'wikibase.getLanguageNameByCode',
-					'wikibase.entityPage.entityLoaded',
-					'wikibase.WikibaseContentLanguages',
-					'wikibase.getUserLanguages',
-					'mw.config.values.wbRepo'
-				],
-				// 'messages' are declared by ./resources.json via TermboxModule.
+			'class' => TermboxModule::class,
+			'scripts' => [
+				'dist/wikibase.termbox.main.js',
 			],
+			'targets' => 'mobile',
+			'dependencies' => [
+				'wikibase.termbox.styles',
+				'wikibase.getLanguageNameByCode',
+				'wikibase.entityPage.entityLoaded',
+				'wikibase.WikibaseContentLanguages',
+				'wikibase.getUserLanguages',
+				'mw.config.values.wbRepo'
+			],
+			// 'messages' are declared by ./resources.json via TermboxModule.
+		],
 
 		'wikibase.termbox.styles' => $wikibaseTermboxPaths + [
-				'styles' => [
-					'dist/wikibase.termbox.main.css',
-				],
-				'skinStyles' => [
-					'minerva' => '../../resources/wikibase/termbox/minerva.less',
-				],
-				'targets' => 'mobile'
+			'styles' => [
+				'dist/wikibase.termbox.main.css',
 			],
+			'skinStyles' => [
+				'minerva' => '../../resources/wikibase/termbox/minerva.less',
+			],
+			'targets' => 'mobile'
+		],
+
 		// DEPRECATED, use the vue module from core instead
 		'vue2' => $moduleTemplate + [
-				'scripts' => 'vendor/vue2.common.prod.js',
-				'targets' => [ 'desktop', 'mobile' ],
-			],
+			'scripts' => 'vendor/vue2.common.prod.js',
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
 		'wikibase.tainted-ref' => [
-				'scripts' => [
-					'tainted-ref.init.js',
-					'tainted-ref.common.js',
-				],
-				'styles' => [
-					'tainted-ref.app.css',
-				],
-				'dependencies' => [
-					'vue2',
-				],
-				'messages' => [
-					'wikibase-tainted-ref-popper-text',
-					'wikibase-tainted-ref-popper-title',
-					'wikibase-tainted-ref-popper-help-link-title',
-					'wikibase-tainted-ref-popper-help-link-text',
-					'wikibase-tainted-ref-popper-remove-warning',
-					'wikibase-tainted-ref-tainted-icon-title',
-				],
-				'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
-				'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
+			'scripts' => [
+				'tainted-ref.init.js',
+				'tainted-ref.common.js',
 			],
+			'styles' => [
+				'tainted-ref.app.css',
+			],
+			'dependencies' => [
+				'vue2',
+			],
+			'messages' => [
+				'wikibase-tainted-ref-popper-text',
+				'wikibase-tainted-ref-popper-title',
+				'wikibase-tainted-ref-popper-help-link-title',
+				'wikibase-tainted-ref-popper-help-link-text',
+				'wikibase-tainted-ref-popper-remove-warning',
+				'wikibase-tainted-ref-tainted-icon-title',
+			],
+			'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
+			'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
+		],
+
 	];
 
 	return $modules;
