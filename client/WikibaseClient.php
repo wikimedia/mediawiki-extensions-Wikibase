@@ -151,12 +151,6 @@ call_user_func( function() {
 	// recent changes / watchlist hooks
 	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery';
 
-	// magic words
-	$wgHooks['MagicWordwgVariableIDs'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onMagicWordwgVariableIDs';
-	$wgHooks['ParserGetVariableValueSwitch'][] = '\Wikibase\Client\Hooks\MagicWordHookHandlers::onParserGetVariableValueSwitch';
-	$wgHooks['ResourceLoaderJqueryMsgModuleMagicWords'][]
-		= '\Wikibase\Client\Hooks\MagicWordHookHandlers::onResourceLoaderJqueryMsgModuleMagicWords';
-
 	// update hooks
 	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
 

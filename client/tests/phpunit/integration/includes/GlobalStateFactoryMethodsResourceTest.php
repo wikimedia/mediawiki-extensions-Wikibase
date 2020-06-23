@@ -12,7 +12,7 @@ use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
-use Wikibase\Client\Hooks\MagicWordHookHandlers;
+use Wikibase\Client\Hooks\MagicWordHookHandler;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
@@ -75,7 +75,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testMagicWordHookHandlers(): void {
-		MagicWordHookHandlers::newFromGlobalState();
+		MagicWordHookHandler::newFromGlobalState();
 		$this->assertTrue( true );
 	}
 
