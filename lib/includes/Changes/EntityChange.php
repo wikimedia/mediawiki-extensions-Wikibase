@@ -3,13 +3,11 @@
 namespace Wikibase\Lib\Changes;
 
 use MediaWiki\Revision\RevisionRecord;
-use MediaWiki\Revision\SlotRecord;
 use MWException;
 use RecentChange;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Repo\Content\EntityContent;
 
 /**
  * Represents a change for an entity; to be extended by various change subtypes
@@ -226,14 +224,9 @@ class EntityChange extends DiffChange {
 		] );
 
 		if ( !$this->hasField( 'object_id' ) ) {
-			/** @var EntityContent $content */
-			$content = $revision->getContent( SlotRecord::MAIN ); // potentially expensive!
-			'@phan-var EntityContent $content';
-			$entityId = $content->getEntityId();
-
-			$this->setFields( [
-				'object_id' => $entityId->getSerialization(),
-			] );
+			throw new MWException(
+				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
+			);
 		}
 
 		$comment = $revision->getComment();
