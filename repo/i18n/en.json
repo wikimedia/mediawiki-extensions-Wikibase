@@ -82,8 +82,6 @@
 	"wikibase-sitelinks-special": "Other sites",
 	"wikibase-badgeselector-badge-placeholder-title": "Click to assign a badge.",
 	"wikibase-remove": "remove",
-	"wikibase-move-up": "move up",
-	"wikibase-move-down": "move down",
 	"wikibase-undo-title": "Undoing edit to \"$1\"",
 	"wikibase-restore-title": "Restoring old revision of \"$1\"",
 	"wikibase-partial-undo": "The edit can partially be undone.",
