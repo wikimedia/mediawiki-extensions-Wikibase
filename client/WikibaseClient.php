@@ -302,11 +302,4 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/WikibaseClient.default.php'
 	);
-
-	$wgRecentChangesFlags['wikibase-edit'] = [
-		'letter' => 'wikibase-rc-wikibase-edit-letter',
-		'title' => 'wikibase-rc-wikibase-edit-title',
-		'legend' => 'wikibase-rc-wikibase-edit-legend',
-		'grouping' => 'all',
-	];
 } );

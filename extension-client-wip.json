@@ -25,5 +25,13 @@
 		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
 		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/"
 	},
+	"RecentChangesFlags": {
+		"wikibase-edit": {
+			"letter": "wikibase-rc-wikibase-edit-letter",
+			"title": "wikibase-rc-wikibase-edit-title",
+			"legend": "wikibase-rc-wikibase-edit-legend",
+			"grouping": "all"
+		}
+	},
 	"manifest_version": 2
 }
