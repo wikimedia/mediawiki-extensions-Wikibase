@@ -10,8 +10,17 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"HookHandlers": {
+		"Magic": {
+			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
+		}
+	},
 	"Hooks": {
-		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle"
+		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
+		"MagicWordwgVariableIDs": "Magic",
+		"ParserGetVariableValueSwitch": "Magic",
+		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",

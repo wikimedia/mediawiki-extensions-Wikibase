@@ -3,8 +3,12 @@
 namespace Wikibase\Client\Hooks;
 
 use Language;
+use MediaWiki\Hook\MagicWordwgVariableIDsHook;
+use MediaWiki\Hook\ParserGetVariableValueSwitchHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderJqueryMsgModuleMagicWordsHook;
 use Message;
 use Parser;
+use PPFrame;
 use ResourceLoaderContext;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\SettingsArray;
@@ -13,7 +17,11 @@ use Wikibase\Lib\SettingsArray;
  * File defining hooks related to magic words
  * @license GPL-2.0-or-later
  */
-class MagicWordHookHandlers {
+class MagicWordHookHandler implements
+	MagicWordwgVariableIDsHook,
+	ParserGetVariableValueSwitchHook,
+	ResourceLoaderJqueryMsgModuleMagicWordsHook
+{
 
 	/**
 	 * @var SettingsArray
@@ -39,7 +47,7 @@ class MagicWordHookHandlers {
 	 *
 	 * @return bool
 	 */
-	public static function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
+	public function onMagicWordwgVariableIDs( &$aCustomVariableIds ) {
 		$aCustomVariableIds[] = 'noexternallanglinks';
 		$aCustomVariableIds[] = 'wbreponame';
 
@@ -70,27 +78,16 @@ class MagicWordHookHandlers {
 	}
 
 	/**
-	 * Static handler for the ParserGetVariableValueSwitch hook
-	 *
-	 * @param Parser $parser
-	 * @param string[] &$cache
-	 * @param string $magicWordId
-	 * @param ?string &$ret
-	 */
-	public static function onParserGetVariableValueSwitch( Parser $parser, array &$cache, $magicWordId, &$ret ) {
-		$handler = self::newFromGlobalState();
-		$handler->doParserGetVariableValueSwitch( $parser, $cache, $magicWordId, $ret );
-	}
-
-	/**
+	 * Handler for the ParserGetVariableValueSwitch hook.
 	 * Apply the magic word.
 	 *
 	 * @param Parser $parser
 	 * @param string[] &$cache
 	 * @param string $magicWordId
 	 * @param ?string &$ret
+	 * @param PPFrame $frame
 	 */
-	protected function doParserGetVariableValueSwitch( Parser $parser, array &$cache, $magicWordId, &$ret ) {
+	public function onParserGetVariableValueSwitch( $parser, &$cache, $magicWordId, &$ret, $frame ) {
 		if ( $magicWordId === 'noexternallanglinks' ) {
 			NoLangLinkHandler::handle( $parser, '*' );
 			$ret = $cache[$magicWordId] = '';
@@ -101,24 +98,14 @@ class MagicWordHookHandlers {
 	}
 
 	/**
-	 * Static handler for the ResourceLoaderJqueryMsgModuleMagicWords hook
-	 *
-	 * @param ResourceLoaderContext $context
-	 * @param string[] &$magicWords
-	 */
-	public static function onResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
-		$handler = self::newFromGlobalState();
-		$handler->doResourceLoaderJqueryMsgModuleMagicWords( $context, $magicWords );
-	}
-
-	/**
-	 * Adds magic word constant(s) for use by jQueryMsg
+	 * Handler for the ResourceLoaderJqueryMsgModuleMagicWords hook.
+	 * Adds magic word constant(s) for use by jQueryMsg.
 	 *
 	 * @param ResourceLoaderContext $context
 	 * @param string[] &$magicWords Associative array mapping all-caps magic
 	 *  words to string values
 	 */
-	protected function doResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
+	public function onResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
 		$lang = Language::factory( $context->getLanguage() );
 		$magicWords['WBREPONAME'] = $this->getRepoName( $lang );
 	}

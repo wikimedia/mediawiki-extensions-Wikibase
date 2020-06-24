@@ -7,12 +7,12 @@ use MediaWikiTestCase;
 use Parser;
 use ParserOutput;
 use Title;
-use Wikibase\Client\Hooks\MagicWordHookHandlers;
+use Wikibase\Client\Hooks\MagicWordHookHandler;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Client\Hooks\MagicWordHookHandlers
+ * @covers \Wikibase\Client\Hooks\MagicWordHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -20,7 +20,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Matthew Flaschen < mflaschen@wikimedia.org >
  */
-class MagicWordHookHandlersTest extends MediaWikiTestCase {
+class MagicWordHookHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideGetRepoName
@@ -29,8 +29,8 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'repoSiteName', $siteName );
 
-		/** @var MagicWordHookHandlers $handler */
-		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandlers( $settings ) );
+		/** @var MagicWordHookHandler $handler */
+		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandler( $settings ) );
 
 		$actual = $handler->getRepoName(
 			Language::factory( $langCode )
@@ -82,13 +82,14 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$settings = new SettingsArray();
 		$settings->setSetting( 'repoSiteName', 'wikibase-client-desc' );
 
-		/** @var MagicWordHookHandlers $handler */
-		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandlers( $settings ) );
+		/** @var MagicWordHookHandler $handler */
+		$handler = TestingAccessWrapper::newFromObject( new MagicWordHookHandler( $settings ) );
 
 		$cache = [];
+		$frame = null;
 		call_user_func_array(
-			[ $handler, 'doParserGetVariableValueSwitch' ],
-			[ $parser, &$cache, 'wbreponame', &$ret ]
+			[ $handler, 'onParserGetVariableValueSwitch' ],
+			[ $parser, &$cache, 'wbreponame', &$ret, $frame ]
 		);
 
 		$this->assertArrayHasKey( 'wbreponame', $cache );
@@ -109,16 +110,17 @@ class MagicWordHookHandlersTest extends MediaWikiTestCase {
 		$parser->method( 'getTitle' )
 			->willReturn( Title::newMainPage() );
 
-		/** @var MagicWordHookHandlers $handler */
+		/** @var MagicWordHookHandler $handler */
 		$handler = TestingAccessWrapper::newFromObject(
-			new MagicWordHookHandlers( new SettingsArray() )
+			new MagicWordHookHandler( new SettingsArray() )
 		);
 
 		$ret = null;
 		$cache = [];
+		$frame = null;
 		call_user_func_array(
-			[ $handler, 'doParserGetVariableValueSwitch' ],
-			[ $parser, &$cache, 'noexternallanglinks', &$ret ]
+			[ $handler, 'onParserGetVariableValueSwitch' ],
+			[ $parser, &$cache, 'noexternallanglinks', &$ret, $frame ]
 		);
 
 		$this->assertArrayHasKey( 'noexternallanglinks', $cache );
