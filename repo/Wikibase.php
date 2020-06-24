@@ -119,7 +119,6 @@ call_user_func( function() {
 		$wgAPIListModules,
 		$wgAPIModules,
 		$wgAvailableRights,
-		$wgEventLoggingSchemas,
 		$wgExtensionMessagesFiles,
 		$wgGrantPermissions,
 		$wgGroupPermissions,
@@ -1070,6 +1069,4 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
-
-	$wgEventLoggingSchemas['WikibaseTermboxInteraction'] = 18726648;
 } );

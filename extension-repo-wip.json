@@ -26,5 +26,12 @@
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/"
 	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"WikibaseTermboxInteraction": 18726648
+			}
+		}
+	},
 	"manifest_version": 2
 }
