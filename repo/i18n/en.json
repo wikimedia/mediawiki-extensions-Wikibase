@@ -503,5 +503,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "This statement has some potential issues.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Duplicate main snak detected. Statement not added.",
 	"wikibase-federated-properties-save-api-error-message": "Your save failed due to a failed request to the federation source Wiki.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "Statements about this item are temporarily unavailable due to a failed request to the federation source Wiki. Please refresh the page."
+	"wikibase-federated-properties-source-wiki-api-error-message": "Statements about this item are temporarily unavailable due to a failed request to the federation source Wiki. Please refresh the page.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "This Wikibase uses federated properties from an external source. You can access the $1.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 List of Properties on $2]"
 }

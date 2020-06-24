@@ -68,6 +68,7 @@ use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\CopyrightMessageBuilder;
+use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\ItemDisambiguation;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -939,6 +940,13 @@ call_user_func( function() {
 	$wgSpecialPages['ListDatatypes'] = SpecialListDatatypes::class;
 	$wgSpecialPages['ListProperties'] = function () {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+			return new SpecialListFederatedProperties(
+				$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+			);
+		}
+
 		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$prefetchingTermLookup,
