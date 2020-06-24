@@ -18,9 +18,13 @@
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
+		},
+		"SqlUsageTrackerSchemaUpdater": {
+			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		}
 	},
 	"Hooks": {
+		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
 		"ParserGetVariableValueSwitch": "Magic",
