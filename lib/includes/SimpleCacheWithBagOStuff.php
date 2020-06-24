@@ -14,11 +14,10 @@ use Traversable;
 /**
  * @license GPL-2.0-or-later
  */
-class SimpleCacheWithBagOStuff implements CacheInterface {
+final class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	use LoggerAwareTrait;
 
-	private const KEY_PREFIX_REGEX = '/^[a-zA-Z0-9_\-.\:]+\z/';
 	private const INVALID_KEY_REGEX = '/[\{\}\(\)\/\\\\@:]/';
 
 	/**
@@ -43,10 +42,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *
 	 * @throws \InvalidArgumentException If prefix has wrong format or secret is not a string or empty
 	 */
-	public function __construct( BagOStuff $inner, $prefix, $secret ) {
-		$this->assertKeyPrefixIsValid( $prefix );
+	public function __construct( BagOStuff $inner, string $prefix, string $secret ) {
+		$this->assertKeyIsValid( $prefix );
 
-		if ( !is_string( $secret ) || empty( $secret ) ) {
+		if ( empty( $secret ) ) {
 			throw new \InvalidArgumentException( "Secret is required to be a nonempty string" );
 		}
 
@@ -280,32 +279,6 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		}
 
 		if ( preg_match( self::INVALID_KEY_REGEX, $key ) ) {
-			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
-		}
-	}
-
-	/**
-	 * @param mixed $key
-	 * @param bool $allowIntegers Due to the fact that in PHP array indices are automatically casted
-	 * 								to integers if possible, e.g. `['0' => ''] === [0 => '']`, we have to
-	 * 								allow integers to be present as keys in $values in `setMultiple()`
-	 * @throws CacheInvalidArgumentException
-	 */
-	private function assertKeyPrefixIsValid( $key, $allowIntegers = false ) {
-		if ( $allowIntegers && is_int( $key ) ) {
-			$key = (string)$key;
-		}
-
-		if ( !is_string( $key ) ) {
-			$type = gettype( $key );
-			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
-		}
-
-		if ( $key === '' ) {
-			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
-		}
-
-		if ( !preg_match( self::KEY_PREFIX_REGEX, $key ) ) {
 			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
