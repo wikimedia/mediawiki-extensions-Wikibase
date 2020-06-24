@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Rest\Hook\SearchResultProvideDescriptionHook;
 use Title;
 use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\WikibaseClient;
@@ -11,7 +12,7 @@ use Wikibase\Client\WikibaseClient;
 /**
  * Description Provider Hook Hander for Search Results
  */
-class DescriptionProviderHookHandler {
+class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHook {
 
 	private $descriptionLookup;
 	private $allowLocalShortDesc;
@@ -24,9 +25,9 @@ class DescriptionProviderHookHandler {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	public function doSearchResultProvideDescription(
+	public function onSearchResultProvideDescription(
 		array $pageIdentities,
-		array &$results
+		&$descriptions
 	): void {
 		if ( !$this->allowLocalShortDesc ) {
 			$sources = [ DescriptionLookup::SOURCE_CENTRAL ];
@@ -38,13 +39,13 @@ class DescriptionProviderHookHandler {
 			return Title::makeTitle( $identity->getNamespace(), $identity->getDBkey() );
 		}, $pageIdentities );
 
-		$descriptions = $this->descriptionLookup->getDescriptions(
+		$newDescriptions = $this->descriptionLookup->getDescriptions(
 			$pageIdTitles,
 			$sources
 		);
 
-		foreach ( $descriptions as $pageId => $description ) {
-			$results[$pageId] = $description;
+		foreach ( $newDescriptions as $pageId => $description ) {
+			$descriptions[$pageId] = $description;
 		}
 	}
 
@@ -53,17 +54,6 @@ class DescriptionProviderHookHandler {
 		$allowLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'allowLocalShortDesc' );
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
 		return new DescriptionProviderHookHandler( $allowLocalShortDesc, $descriptionLookup );
-	}
-
-	/**
-	 * Used to update Search Results with descriptions for Search Engine.
-	 */
-	public static function onSearchResultProvideDescription(
-		array $pageIdentities,
-		array &$results
-	): void {
-		$handler = self::newFromGlobalState();
-		$handler->doSearchResultProvideDescription( $pageIdentities, $results );
 	}
 
 }

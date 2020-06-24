@@ -39,7 +39,7 @@ class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
 			$allowLocalShortDesc,
 			$descriptionLookup
 		);
-		$handler->doSearchResultProvideDescription( $pageIdentities, $results );
+		$handler->onSearchResultProvideDescription( $pageIdentities, $results );
 		$this->assertEquals( $hookResults, $results );
 	}
 

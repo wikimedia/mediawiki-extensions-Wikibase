@@ -11,6 +11,10 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"HookHandlers": {
+		"DescriptionProviderHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
+		},
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
@@ -20,7 +24,8 @@
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
 		"ParserGetVariableValueSwitch": "Magic",
-		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic"
+		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
+		"SearchResultProvideDescription": "DescriptionProviderHookHandler"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
