@@ -50,8 +50,6 @@
 	"wikibase-sitelinks-empty": "Бұл элемент үшін сайт-сілтемесі жоқ.",
 	"wikibase-sitelinks-special": "Басқа сайттар",
 	"wikibase-remove": "алып тастау",
-	"wikibase-move-up": "жоғары жылжыту",
-	"wikibase-move-down": "төмен жылжыту",
 	"wikibase-undo-title": "\"$1\" данасына жасалмаған өңдеме",
 	"wikibase-restore-title": "Бұрынғы тарихын қалпына келтіру: \"$1\"",
 	"wikibase-undo-revision-error": "Болдырмау орындалмады",

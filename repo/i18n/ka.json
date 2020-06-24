@@ -56,8 +56,6 @@
 	"wikibase-sitelinks-empty": "საიტის არცერთ გვერდს არ აქვს აქ ბმული.",
 	"wikibase-sitelinks-special": "სხვა საიტები",
 	"wikibase-remove": "წაშლა",
-	"wikibase-move-up": "ზემოთ გადატანა",
-	"wikibase-move-down": "ქვემოთ გადატანა",
 	"wikibase-undo-title": "რედაქტირების გაუქმება „$1“-თვის",
 	"wikibase-restore-title": "ძველი ვერსიის აღდგენა „$1“-თვის",
 	"wikibase-partial-undo": "ცვლილება შესაძლებელია ნაწილობრივ გაუქმდეს.",

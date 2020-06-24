@@ -20,8 +20,6 @@
 	"wikibase-diffview-description": "kuvvaus",
 	"wikibase-diffview-link": "länkit",
 	"wikibase-sitelinks-special": "Muut sivustot",
-	"wikibase-move-up": "siirä ylös",
-	"wikibase-move-down": "siirä alas",
 	"wikibase-undo-title": "Kumothaan sivuun $1 tehty mookkaus",
 	"wikibase-restore-title": "Sivun ”$1” vanhan versuunin palauttaminen",
 	"wikibase-partial-undo": "Mookkaus voidaan kumota osittain.",

@@ -19,8 +19,6 @@
 	"wikibase-sitelink-page-edit-placeholder": "sivu",
 	"wikibase-statementsection-statements": "Tovendus",
 	"wikibase-sitelinks-special": "Toizii sivuloi",
-	"wikibase-move-up": "nosta ylembä",
-	"wikibase-move-down": "siirrä alemba",
 	"wikibase-statementview-rank-normal": "Normuali listusijoitus",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|lähteh|lähtehty}}",
 	"wikibase-itembytitle-lookup-site": "Saitu:",

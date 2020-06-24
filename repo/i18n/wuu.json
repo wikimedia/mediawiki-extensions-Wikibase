@@ -14,8 +14,6 @@
 	"wikibase-sitelink-page-edit-placeholder": "頁",
 	"wikibase-statementsection-statements": "声明",
 	"wikibase-sitelinks-special": "其他网站",
-	"wikibase-move-up": "移上去",
-	"wikibase-move-down": "移落去",
 	"wikibase-statementview-rank-normal": "普通级",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|来源}}"
 }

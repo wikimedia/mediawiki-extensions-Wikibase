@@ -70,7 +70,6 @@
 	"wikibase-undo-badpage": "Neispravna izmjena: Izmjena $2 ne pripada stranici [[:$1]].",
 	"wikibase-undo-firstrev": "Nije bilo moguće poništiti pravljenje stranice",
 	"wikibase-disambiguation-title": "Čvor za \"$1\"",
-	"wb-special-newitem-new-item-notification": "Nova stavka $1 napravljena je i preusmjerena na ovu stranicu. Nazad na $2.",
 	"wikibase-aliases-input-help-message": "Da biste lakše pronašli jedinicu, možete unijeti alternativne nazive.",
 	"wikibase-propertypage-datatype": "Vrsta podatka",
 	"wikibase-claimview-snak-tooltip": "Unesite vrijednost koja odgovara svojstvu \"$1\". Ako svojstvo nema vrijednost ili ako ona nije poznata, možete izabrati alternativnu vrstu klikom na ikonu ispred polja za unos.",

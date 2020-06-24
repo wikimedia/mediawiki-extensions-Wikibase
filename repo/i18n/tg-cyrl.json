@@ -57,8 +57,6 @@
 	"wikibase-sitelinks-empty": "Ягон саҳифа ба ин элемент пайванд нест.",
 	"wikibase-sitelinks-special": "Дигар сомонаҳо",
 	"wikibase-remove": "ҳазф кардан",
-	"wikibase-move-up": "ба боло",
-	"wikibase-move-down": "ба поён",
 	"wikibase-statementview-rank-normal": "Рутбаи оддӣ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|эзоҳ}}",
 	"wikibase-snakview-property-input-placeholder": "Хусусият",

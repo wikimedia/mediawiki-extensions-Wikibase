@@ -35,7 +35,6 @@
 	"wikibase-undo-badpage": "Crouye vèrsion&nbsp;: la vèrsion $2 est pas a [[:$1]].",
 	"wikibase-undo-firstrev": "Empossiblo d’anular la crèacion de la pâge",
 	"wikibase-disambiguation-title": "Homonimia por « $1 »",
-	"wb-special-newitem-new-item-notification": "Un novél èlèment $1 fêt et pués redirigiê vers la sina pâge. Retôrn a $2.",
 	"wikibase-propertypage-datatype": "Tipo de donâs",
 	"wikibase-statementview-rank-normal": "Renche normala",
 	"wikibase-snakview-property-input-placeholder": "propriètât",

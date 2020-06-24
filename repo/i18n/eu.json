@@ -65,8 +65,6 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|entry|sarrera}}",
 	"wikibase-sitelinks-special": "Beste guneak",
 	"wikibase-remove": "kendu",
-	"wikibase-move-up": "goratu",
-	"wikibase-move-down": "beheratu",
 	"wikibase-propertypage-datatype": "Datu mota",
 	"wikibase-propertypage-bad-datatype": "Datu mota ezezaguna:$1",
 	"wikibase-statementview-rank-normal": "Eremu arrunta",

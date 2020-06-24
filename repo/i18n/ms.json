@@ -64,7 +64,6 @@
 	"wikibase-undo-firstrev": "Penciptaan halaman tidak boleh dibalikkan",
 	"wikibase-undo-nocontent": "Isi kandungan semakan $2 dari halaman $1 tidak dapat dimuatkan",
 	"wikibase-disambiguation-title": "Penyahkekaburan untuk \"$1\"",
-	"wb-special-newitem-new-item-notification": "Perkara baru $1 dicipta lalu dilencongkan ke halamannya. Kembali ke $2.",
 	"wikibase-aliases-input-help-message": "Jika set data ini dikenali dengan lebih daripada satu nama, anda boleh menaipkan nama lain dan sinonim supaya ia boleh dicari dengan nama-nama alternatifnya.",
 	"wikibase-propertypage-datatype": "Jenis data",
 	"wikibase-claimview-snak-tooltip": "Isikan nilai yang berkenaan dengan sifat yang bernama \"$1\". Jika sifat itu tiada nilai yang ditetapkan atau nilai sebenarnya tidak diketahui, anda boleh memilih satu alternatif untuk menentukan nilai yang sesuai dengan mengklik iklon di sebelah petak isi nilai.",

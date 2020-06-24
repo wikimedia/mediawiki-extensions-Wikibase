@@ -72,8 +72,6 @@
 	"wikibase-sitelinks-special": "Faqe të tjera",
 	"wikibase-badgeselector-badge-placeholder-title": "Kliko për të shtuar një shenjë dalluese.",
 	"wikibase-remove": "hiqe",
-	"wikibase-move-up": "lëvize lart",
-	"wikibase-move-down": "lëvize poshtë",
 	"wikibase-undo-title": "Zhbërja e editimeve në \"$1\"",
 	"wikibase-restore-title": "Kthimi i revidimeve të vjetra të \"$1\"",
 	"wikibase-partial-undo": "Editimi mund të kthehet pjesërisht.",

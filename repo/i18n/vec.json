@@ -81,7 +81,6 @@
 	"wikibase-undo-firstrev": "No se pol anular la creasion de la pagina",
 	"wikibase-undo-nocontent": "No se pol cargar el contegnùo de la version $2 de la pagina $1",
 	"wikibase-disambiguation-title": "Disanbigua par \"$1\"",
-	"wb-special-newitem-new-item-notification": "L'elemento novo $1 el xe stà creà e el rimanda a la so pagina. Torna a $2.",
 	"wikibase-aliases-input-help-message": "Se sto insieme de dati el xe conosesto con pi de un nome, te pol inserir alias e sinonimi, in modo che se possa catarlo anca tramite i so nomi alternativi.",
 	"wikibase-propertypage-datatype": "Tipo de dato",
 	"wikibase-claimview-snak-tooltip": "Inserisi un valor corispondente a la proprietà che se ciama \"$1\". Se la proprietà no la ga nisun valor designà o se no se sa el valor efetivo, se pol sieliere n'alternativa a la specifica de un valor personalizà strucando su l'icona in parte a la casèla de input del valor.",
@@ -210,6 +209,5 @@
 	"content-model-wikibase-property": "Proprietà Wikibase",
 	"content-model-wikibase-query": "Interogasion Wikibase",
 	"action-property-create": "crear le proprietà",
-	"right-property-create": "Crea proprietà",
-	"wikibase-tainted-ref-warning-icon-title": "Sta declarasion ła ga calche potensiałe problema"
+	"right-property-create": "Crea proprietà"
 }

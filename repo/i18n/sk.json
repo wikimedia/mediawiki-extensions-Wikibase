@@ -59,8 +59,6 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|položka|položky|položiek}}",
 	"wikibase-sitelinks-special": "Iné projekty",
 	"wikibase-remove": "odstrániť",
-	"wikibase-move-up": "presunúť vyššie",
-	"wikibase-move-down": "presunúť nižšie",
 	"wikibase-undo-title": "Vrátenie úpravy „$1“ späť",
 	"wikibase-restore-title": "Obnovenie starej revízie „$1“",
 	"wikibase-undo-revision-error": "Vrátenie úpravy sa nepodarilo",

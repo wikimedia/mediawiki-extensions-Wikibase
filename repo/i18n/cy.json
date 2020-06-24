@@ -41,8 +41,6 @@
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|cofnod|cofnod|cofnodion}}",
 	"wikibase-sitelinks-special": "Gwefannau eraill",
 	"wikibase-remove": "datgysyllter",
-	"wikibase-move-up": "symud lan",
-	"wikibase-move-down": "symud i lawr",
 	"wikibase-undo-title": "Gwrthdroi golygiad i \"$1\"",
 	"wikibase-restore-title": "Adfer hen ddiwygiad o \"$1\"",
 	"wikibase-partial-undo": "Gellir gwrthdroi'r golygiad hwn yn rhannol yn unig.",

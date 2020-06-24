@@ -28,8 +28,6 @@
 	"wikibase-sitelinks-special": "ਹੋਰ ਸਾਈਟਾਂ",
 	"wikibase-badgeselector-badge-placeholder-title": "ਬਿੱਲਾ ਮੁਕੱਰਰ ਕਰਨ ਵਾਸਤੇ ਨੱਪੋ।",
 	"wikibase-remove": "ਹਟਾਓ",
-	"wikibase-move-up": "ਉਤਾਂਹ ਘੱਲੋ",
-	"wikibase-move-down": "ਹੇਠਾਂ ਘੱਲੋ",
 	"wikibase-undo-title": "\"$1\" ਦੀ ਸੋਧ ਨਕਾਰੀ ਜਾ ਰਹੀ ਹੈ",
 	"wikibase-statementview-rank-normal": "ਆਮ ਦਰਜਾ",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ਹਵਾਲਾ|ਹਵਾਲੇ}}",

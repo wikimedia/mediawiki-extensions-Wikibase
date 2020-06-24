@@ -58,8 +58,6 @@
 	"wikibase-sitelinks": "साइटकड़ी",
 	"wikibase-sitelinks-special": "अन्य वेबसाइट",
 	"wikibase-remove": "ह्टाना",
-	"wikibase-move-up": "ऊपर भेजें",
-	"wikibase-move-down": "नीचे भेजें",
 	"wikibase-undo-revision-error": "विफल पूर्ववत करें",
 	"wikibase-propertypage-datatype": "डाटा के प्रकार",
 	"wikibase-propertypage-bad-datatype": "अज्ञात डाटा प्रकार: $1",

@@ -28,8 +28,6 @@
 	"wikibase-statementsection-statements": "आचार्यदेशीयानि",
 	"wikibase-sitelinks-special": "अन्यानि जालस्थानानि",
 	"wikibase-remove": "निष्कास्यताम्",
-	"wikibase-move-up": "उपरि गम्यताम्",
-	"wikibase-move-down": "अधः गम्यताम्",
 	"wikibase-statementview-rank-normal": "सामान्यश्रेणी",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|उल्लेखः|उल्लेखाः}}",
 	"wikibase-snakview-property-input-placeholder": "गुणधर्मः",
