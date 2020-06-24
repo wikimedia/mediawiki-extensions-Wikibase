@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Modules;
 
 use Exception;
-use FormatJson;
+use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
 use Wikibase\Lib\DataType;
@@ -150,9 +150,8 @@ class DataTypesModule extends ResourceLoaderModule {
 		foreach ( $this->dataTypes as $dataType ) {
 			$typesJson[ $dataType->getId() ] = $dataType->toArray();
 		}
-		$typesJson = FormatJson::encode( $typesJson );
 
-		return "mediaWiki.config.set( '$configVarName', $typesJson );";
+		return ResourceLoader::makeConfigSetScript( [ $configVarName => $typesJson ] );
 	}
 
 	/**
