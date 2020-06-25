@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Usage\Sql;
 
 use DatabaseUpdater;
+use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use Onoi\MessageReporter\CallbackMessageReporter;
@@ -14,64 +15,42 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SqlUsageTrackerSchemaUpdater {
-
-	/**
-	 * @var DatabaseUpdater
-	 */
-	private $dbUpdater;
-
-	public function __construct( DatabaseUpdater $dbUpdater ) {
-		$this->dbUpdater = $dbUpdater;
-	}
-
-	/**
-	 * Static entry point for MediaWiki's LoadExtensionSchemaUpdates hook.
-	 *
-	 * @param DatabaseUpdater $dbUpdater
-	 *
-	 * @return bool
-	 */
-	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		$usageTrackerSchemaUpdater = new self( $dbUpdater );
-		$usageTrackerSchemaUpdater->doSchemaUpdate();
-
-		return true;
-	}
-
+class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	/**
 	 * Applies any schema updates
+	 *
+	 * @param DatabaseUpdater $updater DatabaseUpdater subclass
 	 */
-	public function doSchemaUpdate() {
+	public function onLoadExtensionSchemaUpdates( $updater ) {
 		$table = EntityUsageTable::DEFAULT_TABLE_NAME;
-		$db = $this->dbUpdater->getDB();
+		$db = $updater->getDB();
 
-		if ( !$this->dbUpdater->tableExists( $table ) ) {
+		if ( !$updater->tableExists( $table ) ) {
 			$script = $this->getUpdateScriptPath( 'entity_usage', $db->getType() );
-			$this->dbUpdater->addExtensionTable( $table, $script );
+			$updater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
 			// Note that this must be done with a static function,
 			// for reasons that do not need explaining at this juncture.
-			$this->dbUpdater->addExtensionUpdate( [
+			$updater->addExtensionUpdate( [
 				[ __CLASS__, 'fillUsageTable' ],
 			] );
 		} else {
 			// This update is neither needed on SQLite nor does it work there.
 			if ( $db->getType() !== 'sqlite' ) {
 				$script = $this->getUpdateScriptPath( 'entity_usage-alter-aspect-varbinary-37', $db->getType() );
-				$this->dbUpdater->modifyExtensionField( $table, 'eu_aspect', $script );
+				$updater->modifyExtensionField( $table, 'eu_aspect', $script );
 			}
 
 			$script = $this->getUpdateScriptPath( 'entity_usage-drop-entity_type', $db->getType() );
-			$this->dbUpdater->dropExtensionField( $table, 'eu_entity_type', $script );
+			$updater->dropExtensionField( $table, 'eu_entity_type', $script );
 
 			if ( $db->getType() === 'sqlite' ) {
 				$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched.sqlite', $db->getType() );
-				$this->dbUpdater->dropExtensionField( $table, 'eu_touched', $script );
+				$updater->dropExtensionField( $table, 'eu_touched', $script );
 			} else {
 				$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched', $db->getType() );
-				$this->dbUpdater->dropExtensionField( $table, 'eu_touched', $script );
+				$updater->dropExtensionField( $table, 'eu_touched', $script );
 			}
 		}
 	}

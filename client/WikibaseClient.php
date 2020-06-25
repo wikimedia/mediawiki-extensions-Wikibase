@@ -151,9 +151,6 @@ call_user_func( function() {
 	// recent changes / watchlist hooks
 	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery';
 
-	// update hooks
-	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Client\Usage\Sql\SqlUsageTrackerSchemaUpdater::onSchemaUpdate';
-
 	// job classes
 	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
 	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
