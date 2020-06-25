@@ -37,7 +37,8 @@ class ApiServiceFactory {
 
 	public function newApiEntitySearchHelper(): ApiEntitySearchHelper {
 		return new ApiEntitySearchHelper(
-			$this->newFederatedPropertiesApiClient()
+			$this->newFederatedPropertiesApiClient(),
+			WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getTypeIds()
 		);
 	}
 

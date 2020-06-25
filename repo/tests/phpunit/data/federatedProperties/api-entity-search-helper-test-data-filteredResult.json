@@ -1,0 +1,128 @@
+{
+	"searchinfo": {
+		"search": "publication date"
+	},
+	"search": [
+		{
+			"repository": "local",
+			"id": "P1",
+			"concepturi": "http://www.wikidata.org/entity/P577",
+			"title": "Property:P577",
+			"pageid": 15087952,
+			"url": "//www.wikidata.org/wiki/Property:P577",
+			"datatype": "string",
+			"label": "TEST: This result deliberately only has a label returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P2",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P14",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "time",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P3",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P14",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "time",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P4",
+			"concepturi": "http://www.wikidata.org/entity/P54",
+			"title": "Property:P577",
+			"pageid": 15087952,
+			"url": "//www.wikidata.org/wiki/Property:P577",
+			"datatype": "string",
+			"label": "TEST: This result deliberately only has a label returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P5",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P5",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "string",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P6",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P6",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "time",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P7",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P6",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "time",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		},
+		{
+			"repository": "local",
+			"id": "P8",
+			"concepturi": "https://wikidata.beta.wmflabs.org/entity/P8",
+			"title": "Property:P14",
+			"pageid": 6426,
+			"url": "https://wikidata.beta.wmflabs.org/wiki/Property:P14",
+			"datatype": "monolingualtext",
+			"description": "TEST: This result deliberately only has a description returned",
+			"match": {
+				"type": "label",
+				"language": "en",
+				"text": "publication date"
+			}
+		}
+	],
+	"success": 1
+}
