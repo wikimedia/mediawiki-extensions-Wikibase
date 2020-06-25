@@ -2,6 +2,8 @@
 
 namespace Wikibase\Lib;
 
+use ExtensionRegistry;
+
 /**
  * @deprecated Each component should manage its own settings,
  *  and such settings should be defined in their own configuration.
@@ -36,15 +38,16 @@ final class Settings extends SettingsArray {
 	 */
 	private function initFromGlobals() {
 		$settings = [];
+		$extensionRegistry = ExtensionRegistry::getInstance();
 
 		//NOTE: Repo overrides client. This is important especially for
 		//      settings initialized by WikibaseLib.
 
-		if ( defined( 'WBC_VERSION' ) ) {
+		if ( $extensionRegistry->isLoaded( 'WikibaseClient' ) ) {
 			$settings = array_merge( $settings, $GLOBALS['wgWBClientSettings'] );
 		}
 
-		if ( defined( 'WB_VERSION' ) ) {
+		if ( $extensionRegistry->isLoaded( 'WikibaseRepository' ) ) {
 			$settings = array_merge( $settings, $GLOBALS['wgWBRepoSettings'] );
 		}
 

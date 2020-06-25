@@ -201,7 +201,7 @@ call_user_func( function() {
 			// NOTE: when changing repo and/or client integration, remember to update the
 			// self-documentation of the API module in the "apihelp-query+pageterms-description"
 			// message and the PageTerms::getExamplesMessages() method.
-			if ( defined( 'WB_VERSION' ) ) {
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 				$repo = WikibaseRepo::getDefaultInstance();
 				$termBuffer = $repo->getTermBuffer();
 				$entityIdLookup = $repo->getEntityContentFactory();

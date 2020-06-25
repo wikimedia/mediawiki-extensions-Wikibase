@@ -47,10 +47,11 @@ class LuaWikibaseIntegrationTest extends MediaWikiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
-			$this->markTestSkipped( 'Lua tests need Scribunto to be installled.' );
+		$extensionRegistry = ExtensionRegistry::getInstance();
+		if ( !$extensionRegistry->isLoaded( 'Scribunto' ) ) {
+			$this->markTestSkipped( 'Lua tests need Scribunto to be installed.' );
 		}
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !$extensionRegistry->isLoaded( 'WikibaseRepository' ) ) {
 			$this->markTestSkipped( 'This integration test needs WikibaseRepo.' );
 		}
 
