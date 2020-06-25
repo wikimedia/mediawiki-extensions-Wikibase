@@ -70,7 +70,7 @@ return call_user_func( function() {
 		 * which is 'wikibase_shared/' + deployment branch name + '-' + repo database name, and have
 		 * it set in both $wgWBClientSettings and $wgWBRepoSettings.
 		 */
-		'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
+		'sharedCacheKeyPrefix' => 'wikibase_shared/' . $GLOBALS['wgDBname'],
 		'sharedCacheKeyGroup' => $GLOBALS['wgDBname'],
 
 		/**

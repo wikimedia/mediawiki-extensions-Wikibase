@@ -25,7 +25,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ),
+					'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				],
 				[ // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -41,7 +41,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ),
+					'sharedCacheKeyPrefix' => 'wikibase_shared/',
 				]
 			],
 
@@ -71,7 +71,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 						],
 					],
 					'changesDatabase' => null,
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
+					'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
 				]
 			],
 
@@ -83,7 +83,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/' . rawurlencode( WBL_VERSION ),
+					'sharedCacheKeyPrefix' => 'foo:WBL/',
 				],
 				[ // $wg
 					'wgServer' => 'http://www.acme.com',
@@ -99,7 +99,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 					'siteGlobalID' => 'mywiki',
 					'repoDatabase' => 'foo',
 					'changesDatabase' => 'doo',
-					'sharedCacheKeyPrefix' => 'foo:WBL/' . rawurlencode( WBL_VERSION ),
+					'sharedCacheKeyPrefix' => 'foo:WBL/',
 				]
 			],
 		];
@@ -130,7 +130,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 						],
 					],
 					'changesDatabase' => false,
-					'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-mw_mywiki',
+					'sharedCacheKeyPrefix' => 'wikibase_shared/mw_mywiki',
 				]
 			];
 		}
@@ -221,7 +221,7 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 		$this->markTestSkipped( 'flaky, see T214761' );
 		$this->setMwGlobals( $wg );
 
-		$defaults = require '../../config/WikibaseClient.default.php';
+		$defaults = require __DIR__ . '/../../config/WikibaseClient.default.php';
 
 		$settings = array_merge( $defaults, $settings );
 		$settings = new SettingsArray( $settings );

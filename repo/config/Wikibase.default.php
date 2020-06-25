@@ -150,7 +150,7 @@ return [
 	 * Please note that $wgWBClientSettings overrides settings such as this one in the repo, if
 	 * client is enabled on the same wiki.
 	 */
-	'sharedCacheKeyPrefix' => 'wikibase_shared/' . rawurlencode( WBL_VERSION ) . '-' . $GLOBALS['wgDBname'],
+	'sharedCacheKeyPrefix' => 'wikibase_shared/' . $GLOBALS['wgDBname'],
 	'sharedCacheKeyGroup' => $GLOBALS['wgDBname'],
 
 	/**
