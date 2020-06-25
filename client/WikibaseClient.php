@@ -64,7 +64,6 @@ call_user_func( function() {
 	global $wgAPIListModules,
 		$wgAPIMetaModules,
 		$wgAPIPropModules,
-		$wgExtensionFunctions,
 		$wgExtensionMessagesFiles,
 		$wgHooks,
 		$wgJobClasses,
@@ -129,9 +128,6 @@ call_user_func( function() {
 	// thus we have to register these two handlers disregarding Echo is loaded or not
 	$wgHooks['BeforeCreateEchoEvent'][] = '\Wikibase\Client\Hooks\EchoSetupHookHandlers::onBeforeCreateEchoEvent';
 	$wgHooks['EchoGetBundleRules'][] = '\Wikibase\Client\Hooks\EchoNotificationsHandlers::onEchoGetBundleRules';
-
-	// conditionally register the remaining two handlers which would otherwise fail
-	$wgExtensionFunctions[] = '\Wikibase\Client\Hooks\ExtensionLoadHandler::onExtensionLoad';
 
 	// tracking local edits
 	if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
