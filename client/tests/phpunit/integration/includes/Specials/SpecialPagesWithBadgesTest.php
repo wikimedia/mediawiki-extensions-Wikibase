@@ -74,6 +74,10 @@ class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 		return $specialPage;
 	}
 
+	public function testNewFromGlobalState() {
+		$this->assertInstanceOf( SpecialPagesWithBadges::class, SpecialPagesWithBadges::newFromGlobalState() );
+	}
+
 	public function testExecuteWithoutAnyParams() {
 		list( $result, ) = $this->executeSpecialPage( '' );
 

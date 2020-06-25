@@ -47,5 +47,16 @@
 			"grouping": "all"
 		}
 	},
+	"SpecialPages": {
+		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
+		"PagesWithBadges": {
+			"class": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges",
+			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::newFromGlobalState"
+		},
+		"EntityUsage": {
+			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",
+			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::newFromGlobalState"
+		}
+	},
 	"manifest_version": 2
 }

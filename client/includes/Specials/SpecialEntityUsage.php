@@ -11,6 +11,7 @@ use QueryPage;
 use Skin;
 use Title;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -43,6 +44,12 @@ class SpecialEntityUsage extends QueryPage {
 		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;
+	}
+
+	public static function newFromGlobalState(): self {
+		return new self(
+			WikibaseClient::getDefaultInstance()->getEntityIdParser()
+		);
 	}
 
 	/**

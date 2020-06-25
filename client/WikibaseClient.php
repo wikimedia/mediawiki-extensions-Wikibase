@@ -40,12 +40,8 @@ use Wikibase\Client\Api\PageTerms;
 use Wikibase\Client\ChangeNotificationJob;
 use Wikibase\Client\Changes\InjectRCRecordsJob;
 use Wikibase\Client\ChangeVisibilityNotificationJob;
-use Wikibase\Client\Specials\SpecialEntityUsage;
-use Wikibase\Client\Specials\SpecialPagesWithBadges;
-use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\WikibaseClient;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -259,27 +255,6 @@ call_user_func( function() {
 			);
 		}
 	];
-
-	// Special page registration
-	$wgSpecialPages['UnconnectedPages'] = SpecialUnconnectedPages::class;
-	$wgSpecialPages['PagesWithBadges'] = function() {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$settings = $wikibaseClient->getSettings();
-		return new SpecialPagesWithBadges(
-			new LanguageFallbackLabelDescriptionLookupFactory(
-				$wikibaseClient->getLanguageFallbackChainFactory(),
-				$wikibaseClient->getTermLookup(),
-				$wikibaseClient->getTermBuffer()
-			),
-			array_keys( $settings->getSetting( 'badgeClassNames' ) ),
-			$settings->getSetting( 'siteGlobalID' )
-		);
-	};
-	$wgSpecialPages['EntityUsage'] = function () {
-		return new SpecialEntityUsage(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser()
-		);
-	};
 
 	$wgHooks['wgQueryPages'][] = '\Wikibase\Client\ClientHooks::onwgQueryPages';
 
