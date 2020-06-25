@@ -41,7 +41,7 @@ call_user_func( function() {
 	$wgWBRepoSettings['entityNamespaces']['property'] = WB_NS_PROPERTY;
 
 	// Make sure we use the same keys on repo and clients, so we can share cached objects.
-	$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL/' . rawurlencode( WBL_VERSION );
+	$wgWBRepoSettings['sharedCacheKeyPrefix'] = $wgDBname . ':WBL';
 	$wgWBRepoSettings['sharedCacheKeyGroup'] = $wgDBname;
 
 	// NOTE: no need to set up $wgNamespaceContentModels, Wikibase will do that automatically based on $wgWBRepoSettings

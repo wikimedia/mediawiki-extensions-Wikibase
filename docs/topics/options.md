@@ -96,9 +96,9 @@ DEFAULT: Constructed from [$wgDBname].
 #### sharedCacheKeyPrefix {#common_sharedCacheKeyPrefix}
 Prefix to use for cache keys that should be shared among a wikibase repo and all its clients.
 
-In order to share caches between clients (and the repo), set a prefix based on the repo's name and `WBL_VERSION` or a similar version ID.
+In order to share caches between clients (and the repo), set a prefix based on the repo's name and optionally some version ID.
 
-DEFAULT: Constructed from [$wgDBname] and WBL_VERSION.
+DEFAULT: Constructed from [$wgDBname].
 
 #### sharedCacheDuration
 The duration of entries in the shared object cache, in seconds.
