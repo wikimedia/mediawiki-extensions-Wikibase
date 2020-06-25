@@ -19,7 +19,7 @@ use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\Hooks\SidebarHookHandlers;
-use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
+use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -114,7 +114,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testUpdateRepoHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( UpdateRepoHookHandlers::class )
+		TestingAccessWrapper::newFromClass( UpdateRepoHookHandler::class )
 			->newFromGlobalState();
 		$this->assertTrue( true );
 	}

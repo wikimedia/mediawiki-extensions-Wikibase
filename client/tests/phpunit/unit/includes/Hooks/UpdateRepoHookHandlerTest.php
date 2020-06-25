@@ -9,13 +9,14 @@ use Psr\Log\NullLogger;
 use ReflectionMethod;
 use Title;
 use User;
-use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
+use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use WikiPage;
 
 /**
- * @covers \Wikibase\Client\Hooks\UpdateRepoHookHandlers
+ * @covers \Wikibase\Client\Hooks\UpdateRepoHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -23,7 +24,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
+class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function doArticleDeleteCompleteProvider() {
 		return [
@@ -56,8 +57,14 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 		);
 		$title = $this->getTitle();
 
+		$wikiPage = $this->createMock( WikiPage::class );
+		$wikiPage->expects( $this->any() )
+			->method( 'getTitle' )
+			->willReturn( $title );
+
 		$this->assertTrue(
-			$handler->doArticleDeleteComplete( $title, $this->createMock( User::class ) )
+			$handler->onArticleDeleteComplete( $wikiPage, $this->createMock( User::class ),
+				null, null, null, null, null )
 		);
 
 		$this->assertSame(
@@ -104,7 +111,8 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 		$newTitle = $this->getTitle();
 
 		$this->assertTrue(
-			$handler->doTitleMoveComplete( $oldTitle, $newTitle, $this->createMock( User::class ) )
+			$handler->onTitleMoveComplete( $oldTitle, $newTitle, $this->createMock( User::class ),
+				null, null, null, null )
 		);
 
 		$this->assertSame(
@@ -118,11 +126,11 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewFromGlobalState() {
-		$reflectionMethod = new ReflectionMethod( UpdateRepoHookHandlers::class, 'newFromGlobalState' );
+		$reflectionMethod = new ReflectionMethod( UpdateRepoHookHandler::class, 'newFromGlobalState' );
 		$reflectionMethod->setAccessible( true );
 		$handler = $reflectionMethod->invoke( null );
 
-		$this->assertInstanceOf( UpdateRepoHookHandlers::class, $handler );
+		$this->assertInstanceOf( UpdateRepoHookHandler::class, $handler );
 	}
 
 	/**
@@ -182,7 +190,7 @@ class UpdateRepoHookHandlersTest extends \PHPUnit\Framework\TestCase {
 			->with( 'clientwiki', 'UpdateRepoHookHandlersTest' )
 			->will( $this->returnValue( $itemId ) );
 
-		return new UpdateRepoHookHandlers(
+		return new UpdateRepoHookHandler(
 			$namespaceChecker,
 			$jobQueueGroup,
 			$siteLinkLookup,
