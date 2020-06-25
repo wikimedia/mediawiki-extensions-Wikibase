@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
+use ExtensionRegistry;
 use LogicException;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
@@ -57,7 +58,7 @@ class TestDispatchCoordinator extends Maintenance {
 	 * Maintenance script entry point.
 	 */
 	public function execute() {
-		if ( !defined( 'WBL_VERSION' ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
 
@@ -124,7 +125,7 @@ class TestDispatchCoordinator extends Maintenance {
 
 			if ( $state ) {
 				$clientId = $state['chd_site'];
-				$this->log( "Got a lock on clinet wiki $clientId" );
+				$this->log( "Got a lock on client wiki $clientId" );
 				break;
 			} else {
 				$this->log( "Could not get a lock on any client wiki. Sleep and retry." );

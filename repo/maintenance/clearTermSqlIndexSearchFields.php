@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Maintenance;
 
+use ExtensionRegistry;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
@@ -60,7 +61,7 @@ class ClearTermSqlIndexSearchFields extends Maintenance {
 	}
 
 	public function execute() {
-		if ( !defined( 'WB_VERSION' ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 			$this->fatalError(
 				'You need to have Wikibase enabled in order to use this maintenance script!'
 			);

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Maintenance;
 
 use Exception;
+use ExtensionRegistry;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
 use MWException;
@@ -224,7 +225,7 @@ class DispatchChanges extends Maintenance {
 	 * instead of dispatching.
 	 */
 	public function execute() {
-		if ( !defined( 'WBL_VERSION' ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
 			throw new MWException( "WikibaseLib has not been loaded." );
 		}
