@@ -46,6 +46,7 @@
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
 		"LinksUpdateComplete": "DataUpdateHookHandler",
+		"ChangesListSpecialPageQuery": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
