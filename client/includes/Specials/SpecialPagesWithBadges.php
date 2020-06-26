@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use QueryPage;
 use Skin;
 use Title;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
@@ -56,6 +57,20 @@ class SpecialPagesWithBadges extends QueryPage {
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->badgeIds = $badgeIds;
 		$this->siteId = $siteId;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+		return new self(
+			new LanguageFallbackLabelDescriptionLookupFactory(
+				$wikibaseClient->getLanguageFallbackChainFactory(),
+				$wikibaseClient->getTermLookup(),
+				$wikibaseClient->getTermBuffer()
+			),
+			array_keys( $settings->getSetting( 'badgeClassNames' ) ),
+			$settings->getSetting( 'siteGlobalID' )
+		);
 	}
 
 	/**
