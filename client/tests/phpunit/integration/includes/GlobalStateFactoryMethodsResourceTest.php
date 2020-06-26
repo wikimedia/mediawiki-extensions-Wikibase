@@ -8,7 +8,7 @@ use MediaWikiTestCase;
 use RequestContext;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
-use Wikibase\Client\Hooks\DataUpdateHookHandlers;
+use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
@@ -56,7 +56,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testDataUpdateHookHandlers() {
-		DataUpdateHookHandlers::newFromGlobalState();
+		DataUpdateHookHandler::newFromGlobalState();
+		$this->assertTrue( true );
 	}
 
 	public function testEchoNotificationsHandlers() {

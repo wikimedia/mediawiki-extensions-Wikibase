@@ -4,10 +4,13 @@ namespace Wikibase\Client\Hooks;
 
 use Content;
 use DeferredUpdates;
+use ExtensionRegistry;
 use InvalidArgumentException;
 use JobQueueGroup;
 use LinksUpdate;
-use LogEntry;
+use MediaWiki\Hook\LinksUpdateCompleteHook;
+use MediaWiki\Hook\ParserCacheSaveCompleteHook;
+use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use ParserCache;
 use ParserOptions;
 use ParserOutput;
@@ -33,7 +36,11 @@ use WikiPage;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class DataUpdateHookHandlers {
+class DataUpdateHookHandler implements
+				LinksUpdateCompleteHook,
+				ArticleDeleteCompleteHook,
+				ParserCacheSaveCompleteHook
+{
 
 	/**
 	 * @var UsageUpdater
@@ -69,69 +76,6 @@ class DataUpdateHookHandlers {
 		);
 	}
 
-	/**
-	 * Static handler for the LinksUpdateComplete hook.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LinksUpdateComplete
-	 * @see doLinksUpdateComplete
-	 *
-	 * @param LinksUpdate $linksUpdate
-	 */
-	public static function onLinksUpdateComplete( LinksUpdate $linksUpdate ) {
-		$handler = self::newFromGlobalState();
-		$handler->doLinksUpdateComplete( $linksUpdate );
-	}
-
-	/**
-	 * Static handler for ArticleDeleteComplete
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
-	 * @see doArticleDeleteComplete
-	 *
-	 * @param WikiPage &$wikiPage
-	 * @param User &$user
-	 * @param string $reason
-	 * @param int $id id of the article that was deleted
-	 * @param Content|null $content
-	 * @param LogEntry $logEntry
-	 */
-	public static function onArticleDeleteComplete(
-		WikiPage &$wikiPage,
-		User &$user,
-		$reason,
-		$id,
-		?Content $content,
-		LogEntry $logEntry
-	) {
-		$title = $wikiPage->getTitle();
-
-		DeferredUpdates::addCallableUpdate( function() use ( $title, $id ) {
-			$handler = self::newFromGlobalState();
-			$handler->doArticleDeleteComplete( $title->getNamespace(), $id );
-		} );
-	}
-
-	/**
-	 * Static handler for ParserCacheSaveComplete
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSaveComplete
-	 * @see doParserCacheSaveComplete
-	 *
-	 * @param ParserCache $parserCache
-	 * @param ParserOutput $pout
-	 * @param Title $title
-	 * @param ParserOptions $pops
-	 * @param int $revId
-	 */
-	public static function onParserCacheSaveComplete(
-		ParserCache $parserCache,
-		ParserOutput $pout,
-		Title $title,
-		ParserOptions $pops,
-		$revId
-	) {
-		$handler = self::newFromGlobalState();
-		$handler->doParserCacheSaveComplete( $pout, $title );
-	}
-
 	public function __construct(
 		UsageUpdater $usageUpdater,
 		JobQueueGroup $jobScheduler,
@@ -145,11 +89,44 @@ class DataUpdateHookHandlers {
 	}
 
 	/**
+	 * Static handler for ArticleDeleteComplete
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+	 *
+	 * @param WikiPage $wikiPage WikiPage that was deleted
+	 * @param User $user User that deleted the article
+	 * @param string $reason Reason the article was deleted
+	 * @param int $id ID of the article that was deleted
+	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
+	 * @param \ManualLogEntry $logEntry ManualLogEntry used to record the deletion
+	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
+	 */
+	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id,
+		$content, $logEntry, $archivedRevisionCount
+	) {
+		DeferredUpdates::addCallableUpdate( function () use ( $id ) {
+			$this->usageUpdater->pruneUsagesForPage( $id );
+		} );
+	}
+
+	/**
 	 * Triggered when a page gets re-rendered to update secondary link tables.
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
 	 * @param LinksUpdate $linksUpdate
+	 * @param mixed $ticket Prior result of LBFactory::getEmptyTransactionTicket()
 	 */
+	public function onLinksUpdateComplete( $linksUpdate, $ticket ) {
+		// Tests fail because when repo is not loaded, it tries to connect to repo's database
+		if (
+			!ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) &&
+			defined( 'MW_PHPUNIT_TEST' )
+		) {
+			return;
+		}
+
+		$this->doLinksUpdateComplete( $linksUpdate );
+	}
+
 	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ) {
 		$title = $linksUpdate->getTitle();
 
@@ -157,7 +134,7 @@ class DataUpdateHookHandlers {
 		$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
 		// Please note that page views that happen between the page save but before this is run will have
-		// their usages removed (as we might add the usages via doParserCacheSaveComplete before this is run).
+		// their usages removed (as we might add the usages via onParserCacheSaveComplete before this is run).
 		$this->usageUpdater->replaceUsagesForPage( $title->getArticleID(), $usageAcc->getUsages() );
 	}
 
@@ -165,11 +142,14 @@ class DataUpdateHookHandlers {
 	 * Triggered when a new rendering of a page is committed to the ParserCache.
 	 * Implemented to update usage tracking information via UsageUpdater.
 	 *
-	 * @param ParserOutput $parserOutput
-	 * @param Title $title
+	 * @param ParserCache $parserCache ParserCache object $parserOutput was stored in
+	 * @param ParserOutput $parserOutput ParserOutput object that was stored
+	 * @param Title $title Title of the page that was parsed to generate $parserOutput
+	 * @param ParserOptions $popts ParserOptions used for generating $parserOutput
+	 * @param int $revId ID of the revision that was parsed to create $parserOutput
 	 */
-	public function doParserCacheSaveComplete( ParserOutput $parserOutput, Title $title ) {
-		DeferredUpdates::addCallableUpdate( function() use ( $parserOutput, $title ) {
+	public function onParserCacheSaveComplete( $parserCache, $parserOutput, $title, $popts, $revId ) {
+		DeferredUpdates::addCallableUpdate( function () use ( $parserOutput, $title ) {
 			$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
 			$usages = $this->reindexEntityUsages( $usageAcc->getUsages() );
@@ -220,17 +200,6 @@ class DataUpdateHookHandlers {
 		}
 
 		return $reindexed;
-	}
-
-	/**
-	 * Triggered after a page was deleted.
-	 * Implemented to prune usage tracking information via UsageUpdater.
-	 *
-	 * @param int $namespace
-	 * @param int $pageId
-	 */
-	public function doArticleDeleteComplete( $namespace, $pageId ) {
-		$this->usageUpdater->pruneUsagesForPage( $pageId );
 	}
 
 }

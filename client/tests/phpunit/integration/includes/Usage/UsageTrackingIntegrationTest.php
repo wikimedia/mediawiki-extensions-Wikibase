@@ -5,7 +5,6 @@ namespace Wikibase\Client\Tests\Integration\Usage;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
-use Wikibase\Client\Hooks\DataUpdateHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
@@ -63,19 +62,6 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$ns = $this->getDefaultWikitextNS();
 		$this->articleTitle = Title::makeTitle( $ns, 'UsageTrackingIntegrationTest_Article' );
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
-
-		// Register the necessary hook handlers. Registration of these handlers is normally skipped for unit test runs.
-		$this->mergeMwGlobalArrayValue( 'wgHooks', [
-			'ArticleDeleteComplete' => [
-				DataUpdateHookHandlers::class . '::onArticleDeleteComplete',
-			],
-			'LinksUpdateComplete' => [
-				DataUpdateHookHandlers::class . '::onLinksUpdateComplete',
-			],
-			'ParserCacheSaveComplete' => [
-				DataUpdateHookHandlers::class . '::onParserCacheSaveComplete',
-			]
-		] );
 	}
 
 	protected function tearDown() : void {

@@ -117,19 +117,6 @@ call_user_func( function() {
 
 	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\Client\ClientHooks::onSkinAfterBottomScripts';
 
-	// tracking local edits
-	if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-		// NOTE: Usage tracking is pointless during unit testing, and slows things down.
-		// Also, usage tracking can trigger failures when it tries to access the repo database
-		// when WikibaseClient is tested without WikibaseRepo enabled.
-		// NOTE: UsageTrackingIntegrationTest explicitly enables these hooks and asserts that
-		// they are functioning correctly. If any hooks used for tracking are added or changed,
-		// that must be reflected in UsageTrackingIntegrationTest.
-		$wgHooks['LinksUpdateComplete'][] = '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onLinksUpdateComplete';
-		$wgHooks['ArticleDeleteComplete'][] = '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onArticleDeleteComplete';
-		$wgHooks['ParserCacheSaveComplete'][] = '\Wikibase\Client\Hooks\DataUpdateHookHandlers::onParserCacheSaveComplete';
-	}
-
 	// recent changes / watchlist hooks
 	$wgHooks['ChangesListSpecialPageQuery'][] = '\Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery';
 

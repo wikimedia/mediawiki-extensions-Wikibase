@@ -14,6 +14,10 @@
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
 	"HookHandlers": {
+		"DataUpdateHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
+		},
 		"DescriptionProviderHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
@@ -38,17 +42,22 @@
 		}
 	},
 	"Hooks": {
+		"ArticleDeleteComplete": [
+			"UpdateRepoHookHandler",
+			"DataUpdateHookHandler"
+		],
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
+		"LinksUpdateComplete": "DataUpdateHookHandler",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
 		"ParserClearState": "ParserClearStateHookHandler",
+		"ParserCacheSaveComplete": "DataUpdateHookHandler",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "ParserLimitReportPrepareHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
-		"ArticleDeleteComplete": "UpdateRepoHookHandler",
 		"TitleMoveComplete": "UpdateRepoHookHandler"
 	},
 	"TrackingCategories": [

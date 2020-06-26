@@ -2,11 +2,12 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use ExtensionRegistry;
 use JobQueueGroup;
 use LinksUpdate;
 use ParserOutput;
 use Title;
-use Wikibase\Client\Hooks\DataUpdateHookHandlers;
+use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
@@ -16,7 +17,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\ItemId;
 
 /**
- * @covers \Wikibase\Client\Hooks\DataUpdateHookHandlers
+ * @covers \Wikibase\Client\Hooks\DataUpdateHookHandler
  *
  * @group WikibaseClient
  * @group WikibaseUsageTracking
@@ -27,7 +28,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
+class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @param Title $title
@@ -155,7 +156,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	 * @param bool $asyncAdd whether addUsagesForPage() should be called via the job queue
 	 * @param bool $replace whether replaceUsagesForPage() should be used
 	 *
-	 * @return DataUpdateHookHandlers
+	 * @return DataUpdateHookHandler
 	 */
 	private function newDataUpdateHookHandlers(
 		Title $title,
@@ -169,7 +170,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$jobScheduler = $this->newJobScheduler( $title, $expectedUsages, $asyncAdd );
 		$usageLookup = $this->newUsageLookup( $currentUsages );
 
-		return new DataUpdateHookHandlers(
+		return new DataUpdateHookHandler(
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
@@ -251,8 +252,8 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 	}
 
 	public function testNewFromGlobalState() {
-		$handler = DataUpdateHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( DataUpdateHookHandlers::class, $handler );
+		$handler = DataUpdateHookHandler::newFromGlobalState();
+		$this->assertInstanceOf( DataUpdateHookHandler::class, $handler );
 	}
 
 	public function provideEntityUsages() {
@@ -293,7 +294,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, $usages, false, true );
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
 	public function testDoParserCacheSaveCompleteNoChangeEntityUsage() {
@@ -311,13 +312,13 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$jobScheduler = $this->newJobScheduler( $title, $usages, false );
 		$usageLookup = $this->newUsageLookup( $usages );
 
-		$handler = new DataUpdateHookHandlers(
+		$handler = new DataUpdateHookHandler(
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
 			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
 	public function testDoParserCacheSaveCompletePartialUpdate() {
@@ -345,13 +346,13 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 		$jobScheduler = $this->newJobScheduler( $title, $expected, true );
 		$usageLookup = $this->newUsageLookup( $currentUsages );
 
-		$handler = new DataUpdateHookHandlers(
+		$handler = new DataUpdateHookHandler(
 			$usageUpdater,
 			$jobScheduler,
 			$usageLookup,
 			new EntityUsageFactory( new BasicEntityIdParser() )
 		);
-		$handler->doParserCacheSaveComplete( $parserOutput, $title );
+		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
 	public function testDoArticleDeleteComplete() {
@@ -359,7 +360,7 @@ class DataUpdateHookHandlersTest extends \MediaWikiTestCase {
 
 		// Assertions are done by the UsageUpdater mock
 		$handler = $this->newDataUpdateHookHandlers( $title, null, true, false );
-		$handler->doArticleDeleteComplete( $title->getNamespace(), $title->getArticleID() );
+		$handler->onArticleDeleteComplete( null, null, null, $title->getArticleID(), null, null, null );
 	}
 
 }
