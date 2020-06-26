@@ -24,6 +24,10 @@
 		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
+		},
+		"UpdateRepoHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::newFromGlobalState"
 		}
 	},
 	"Hooks": {
@@ -32,7 +36,9 @@
 		"MagicWordwgVariableIDs": "Magic",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
-		"SearchResultProvideDescription": "DescriptionProviderHookHandler"
+		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
+		"ArticleDeleteComplete": "UpdateRepoHookHandler",
+		"TitleMoveComplete": "UpdateRepoHookHandler"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",

@@ -6,7 +6,6 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use Title;
 use Wikibase\Client\Hooks\DataUpdateHookHandlers;
-use Wikibase\Client\Hooks\UpdateRepoHookHandlers;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\ItemId;
@@ -69,17 +68,13 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [
 			'ArticleDeleteComplete' => [
 				DataUpdateHookHandlers::class . '::onArticleDeleteComplete',
-				UpdateRepoHookHandlers::class . '::onArticleDeleteComplete',
 			],
 			'LinksUpdateComplete' => [
 				DataUpdateHookHandlers::class . '::onLinksUpdateComplete',
 			],
 			'ParserCacheSaveComplete' => [
 				DataUpdateHookHandlers::class . '::onParserCacheSaveComplete',
-			],
-			'TitleMoveComplete' => [
-				UpdateRepoHookHandlers::class . '::onTitleMoveComplete',
-			],
+			]
 		] );
 	}
 

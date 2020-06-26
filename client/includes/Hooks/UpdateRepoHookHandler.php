@@ -5,7 +5,9 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use JobQueueGroup;
 use LogEntry;
+use MediaWiki\Hook\TitleMoveCompleteHook;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
 use MWException;
 use Psr\Log\LoggerInterface;
 use Title;
@@ -25,7 +27,7 @@ use WikiPage;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandlers {
+class UpdateRepoHookHandler implements TitleMoveCompleteHook, ArticleDeleteCompleteHook {
 
 	/**
 	 * @var NamespaceChecker
@@ -65,7 +67,7 @@ class UpdateRepoHookHandlers {
 	/**
 	 * @return self|null
 	 */
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
@@ -90,66 +92,6 @@ class UpdateRepoHookHandlers {
 			$settings->getSetting( 'siteGlobalID' ),
 			$settings->getSetting( 'propagateChangesToRepo' )
 		);
-	}
-
-	/**
-	 * After a page has been moved also update the item on the repo.
-	 * This only works if there's a user account with the same name on the repo.
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
-	 *
-	 * @param Title $oldTitle
-	 * @param Title $newTitle
-	 * @param User $user
-	 * @param integer $pageId database ID of the page that's been moved
-	 * @param integer $redirectId database ID of the created redirect
-	 * @param string $reason
-	 *
-	 * @return bool
-	 */
-	public static function onTitleMoveComplete(
-		Title $oldTitle,
-		Title $newTitle,
-		User $user,
-		$pageId,
-		$redirectId,
-		$reason
-	) {
-		$handler = self::newFromGlobalState();
-
-		if ( $handler ) {
-			$handler->doTitleMoveComplete( $oldTitle, $newTitle, $user );
-		}
-
-		return true;
-	}
-
-	/**
-	 * After a page has been deleted also update the item on the repo.
-	 * This only works if there's a user account with the same name on the repo.
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
-	 *
-	 * @param WikiPage &$wikiPage
-	 * @param User &$user
-	 * @param string $reason
-	 * @param int $id id of the article that was deleted
-	 * @param Content|null $content
-	 * @param LogEntry $logEntry
-	 */
-	public static function onArticleDeleteComplete(
-		WikiPage &$wikiPage,
-		User &$user,
-		$reason,
-		$id,
-		?Content $content,
-		LogEntry $logEntry
-	) {
-		$handler = self::newFromGlobalState();
-
-		if ( $handler ) {
-			$handler->doArticleDeleteComplete( $wikiPage->getTitle(), $user );
-		}
 	}
 
 	/**
@@ -192,12 +134,29 @@ class UpdateRepoHookHandlers {
 	}
 
 	/**
-	 * @param Title $title
-	 * @param User $user
+	 * After a page has been deleted also update the item on the repo.
+	 * This only works if there's a user account with the same name on the repo.
 	 *
-	 * @return bool
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+	 *
+	 * @param WikiPage $wikiPage WikiPage that was deleted
+	 * @param User $user User that deleted the article
+	 * @param string $reason Reason the article was deleted
+	 * @param int $id ID of the article that was deleted
+	 * @param Content|null $content Content of the deleted page (or null, when deleting a broken page)
+	 * @param \ManualLogEntry $logEntry ManualLogEntry used to record the deletion
+	 * @param int $archivedRevisionCount Number of revisions archived during the deletion
+	 * @return bool|void True or no return value to continue or false to abort
 	 */
-	public function doArticleDeleteComplete( Title $title, User $user ) {
+	public function onArticleDeleteComplete(
+		$wikiPage,
+		$user,
+		$reason,
+		$id,
+		$content,
+		$logEntry,
+		$archivedRevisionCount
+	) {
 		if ( $this->propagateChangesToRepo !== true ) {
 			return true;
 		}
@@ -208,7 +167,7 @@ class UpdateRepoHookHandlers {
 			$this->logger,
 			$user,
 			$this->siteGlobalID,
-			$title
+			$wikiPage->getTitle()
 		);
 
 		if ( !$updateRepo->isApplicable() ) {
@@ -220,7 +179,7 @@ class UpdateRepoHookHandlers {
 
 			// To be able to find out about this in the ArticleDeleteAfter hook
 			// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
-			$title->wikibasePushedDeleteToRepo = true;
+			$wikiPage->getTitle()->wikibasePushedDeleteToRepo = true;
 		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
@@ -241,14 +200,31 @@ class UpdateRepoHookHandlers {
 	}
 
 	/**
-	 * @param Title $oldTitle
-	 * @param Title $newTitle
+	 * After a page has been moved also update the item on the repo.
+	 * This only works if there's a user account with the same name on the repo.
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
+	 *
+	 * @param Title $old
+	 * @param Title $nt
 	 * @param User $user
+	 * @param int $pageId database ID of the page that's been moved
+	 * @param int $redirid ID of the created redirect
+	 * @param string $reason
+	 * @param \Revision $revision Revision created by the move
 	 *
 	 * @return bool
 	 */
-	public function doTitleMoveComplete( Title $oldTitle, Title $newTitle, User $user ) {
-		if ( !$this->isWikibaseEnabled( $newTitle->getNamespace() ) ) {
+	public function onTitleMoveComplete(
+		$old,
+		$nt,
+		$user,
+		$pageId,
+		$redirid,
+		$reason,
+		$revision
+	) {
+		if ( !$this->isWikibaseEnabled( $nt->getNamespace() ) ) {
 			return true;
 		}
 
@@ -262,8 +238,8 @@ class UpdateRepoHookHandlers {
 			$this->logger,
 			$user,
 			$this->siteGlobalID,
-			$oldTitle,
-			$newTitle
+			$old,
+			$nt
 		);
 
 		if ( !$updateRepo->isApplicable() ) {
@@ -275,7 +251,7 @@ class UpdateRepoHookHandlers {
 
 			// To be able to find out about this in the SpecialMovepageAfterMove hook
 			// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
-			$newTitle->wikibasePushedMoveToRepo = true;
+			$nt->wikibasePushedMoveToRepo = true;
 		} catch ( MWException $e ) {
 			// This is not a reason to let an exception bubble up, we just
 			// show a message to the user that the Wikibase item needs to be
