@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
+use MediaWiki\Revision\RevisionRecord;
 use Psr\Log\NullLogger;
 use ReflectionMethod;
 use Title;
@@ -74,7 +75,7 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function doTitleMoveCompleteProvider() {
+	public function doPageMoveCompleteProvider() {
 		return [
 			'Success' => [
 				true, true, true, new ItemId( 'Q42' )
@@ -92,9 +93,9 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @dataProvider doTitleMoveCompleteProvider
+	 * @dataProvider doPageMoveCompleteProvider
 	 */
-	public function testDoTitleMoveComplete(
+	public function testDoPageMoveComplete(
 		$expectsSuccess,
 		$isWikibaseEnabled,
 		$propagateChangesToRepo,
@@ -111,8 +112,15 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$newTitle = $this->getTitle();
 
 		$this->assertTrue(
-			$handler->onTitleMoveComplete( $oldTitle, $newTitle, $this->createMock( User::class ),
-				null, null, null, null )
+			$handler->onPageMoveComplete(
+				$oldTitle,
+				$newTitle,
+				$this->createMock( User::class ),
+				0,
+				0,
+				'',
+				$this->createMock( RevisionRecord::class )
+			)
 		);
 
 		$this->assertSame(

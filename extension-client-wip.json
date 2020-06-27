@@ -78,7 +78,7 @@
 		"SidebarBeforeOutput": "SidebarHookHandler",
 		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
-		"TitleMoveComplete": "UpdateRepoHookHandler"
+		"PageMoveComplete": "UpdateRepoHookHandler"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
