@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Hook\ParserClearStateHook;
 use Parser;
 use Wikibase\Client\WikibaseClient;
 
@@ -9,7 +12,7 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class ParserClearStateHookHandler {
+class ParserClearStateHookHandler implements ParserClearStateHook {
 
 	/**
 	 * Called when resetting the state of the Parser between parses.
@@ -18,7 +21,7 @@ class ParserClearStateHookHandler {
 	 *
 	 * @return bool
 	 */
-	public static function onParserClearState( Parser $parser ) {
+	public function onParserClearState( $parser ) {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		// Reset the entity access limits, per T127462
 		$wikibaseClient->getRestrictedEntityLookup()->reset();

@@ -110,7 +110,6 @@ call_user_func( function() {
 	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\Client\ClientHooks::onArticleDeleteAfterSuccess';
 	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\Client\ClientHooks::onFormat';
-	$wgHooks['ParserClearState'][] = '\Wikibase\Client\Hooks\ParserClearStateHookHandler::onParserClearState';
 	$wgHooks['AbortEmailNotification'][] = '\Wikibase\Client\ClientHooks::onAbortEmailNotification';
 	$wgHooks['SearchDataForIndex'][] = '\Wikibase\Client\ClientHooks::onSearchDataForIndex';
 	$wgHooks['SearchIndexFields'][] = '\Wikibase\Client\ClientHooks::onSearchIndexFields';

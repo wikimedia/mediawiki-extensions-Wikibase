@@ -22,6 +22,9 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
 		},
+		"ParserClearStateHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\ParserClearStateHookHandler"
+		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
@@ -36,6 +39,7 @@
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
+		"ParserClearState": "ParserClearStateHookHandler",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
