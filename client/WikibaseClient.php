@@ -99,7 +99,6 @@ call_user_func( function() {
 	$wgHooks['SidebarBeforeOutput'][] = '\Wikibase\Client\Hooks\SidebarHookHandlers::onSidebarBeforeOutput';
 
 	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\Client\ClientHooks::onParserFirstCallInit';
-	$wgHooks['SpecialMovepageAfterMove'][] = '\Wikibase\Client\Hooks\MovePageNotice::onSpecialMovepageAfterMove';
 	$wgHooks['GetPreferences'][] = '\Wikibase\Client\ClientHooks::onGetPreferences';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplayAddJsConfig';

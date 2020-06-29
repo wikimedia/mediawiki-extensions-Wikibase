@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Html;
+use MediaWiki\Hook\SpecialMovepageAfterMoveHook;
 use MovePageForm;
 use Title;
 use Wikibase\Client\RepoLinker;
@@ -16,7 +17,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class MovePageNotice {
+class MovePageNotice implements SpecialMovepageAfterMoveHook {
 
 	/**
 	 * @var SiteLinkLookup
@@ -44,7 +45,7 @@ class MovePageNotice {
 		$this->repoLinker = $repoLinker;
 	}
 
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();
@@ -61,30 +62,10 @@ class MovePageNotice {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/SpecialMovepageAfterMove
 	 *
 	 * @param MovePageForm $movePage
-	 * @param Title &$oldTitle
-	 * @param Title &$newTitle
-	 *
-	 * @return bool
+	 * @param Title $oldTitle
+	 * @param Title $newTitle
 	 */
-	public static function onSpecialMovepageAfterMove( MovePageForm $movePage, Title &$oldTitle,
-		Title &$newTitle ) {
-		$self = self::newFromGlobalState();
-
-		$self->doSpecialMovepageAfterMove( $movePage, $oldTitle, $newTitle );
-
-		return true;
-	}
-
-	/**
-	 * @param MovePageForm $movePage
-	 * @param Title &$oldTitle
-	 * @param Title &$newTitle
-	 */
-	public function doSpecialMovepageAfterMove(
-		MovePageForm $movePage,
-		Title &$oldTitle,
-		Title &$newTitle
-	) {
+	public function onSpecialMovepageAfterMove( $movePage, $oldTitle, $newTitle ) {
 		$out = $movePage->getOutput();
 		$out->addModules( 'wikibase.client.miscStyles' );
 		$out->addHTML( $this->getPageMoveNoticeHtml( $oldTitle, $newTitle ) );
