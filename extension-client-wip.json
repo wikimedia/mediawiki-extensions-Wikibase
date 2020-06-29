@@ -27,6 +27,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
 		},
+		"InfoActionHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::newFromGlobalState"
+		},
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
@@ -50,8 +54,9 @@
 		],
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
-		"LinksUpdateComplete": "DataUpdateHookHandler",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
+		"InfoAction": "InfoActionHookHandler",
+		"LinksUpdateComplete": "DataUpdateHookHandler",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",

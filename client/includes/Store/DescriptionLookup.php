@@ -101,7 +101,6 @@ class DescriptionLookup {
 
 		$pageId = $title->getArticleID();
 		if ( array_key_exists( $pageId, $descriptions ) ) {
-			// @phan-suppress-next-line PhanTypeArraySuspiciousNull False positives due to reference
 			$actualSource = $actualSources[$pageId];
 			return $descriptions[$pageId];
 		} else {
