@@ -62,10 +62,7 @@ class DataUpdateHookHandler implements
 	 */
 	private $entityUsageFactory;
 
-	/**
-	 * @return self
-	 */
-	public static function newFromGlobalState() {
+	public static function newFromGlobalState(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
@@ -102,7 +99,7 @@ class DataUpdateHookHandler implements
 	 */
 	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id,
 		$content, $logEntry, $archivedRevisionCount
-	) {
+	): void {
 		DeferredUpdates::addCallableUpdate( function () use ( $id ) {
 			$this->usageUpdater->pruneUsagesForPage( $id );
 		} );
@@ -115,7 +112,7 @@ class DataUpdateHookHandler implements
 	 * @param LinksUpdate $linksUpdate
 	 * @param mixed $ticket Prior result of LBFactory::getEmptyTransactionTicket()
 	 */
-	public function onLinksUpdateComplete( $linksUpdate, $ticket ) {
+	public function onLinksUpdateComplete( $linksUpdate, $ticket ): void {
 		// Tests fail because when repo is not loaded, it tries to connect to repo's database
 		if (
 			!ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) &&
@@ -127,7 +124,7 @@ class DataUpdateHookHandler implements
 		$this->doLinksUpdateComplete( $linksUpdate );
 	}
 
-	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ) {
+	public function doLinksUpdateComplete( LinksUpdate $linksUpdate ): void {
 		$title = $linksUpdate->getTitle();
 
 		$parserOutput = $linksUpdate->getParserOutput();
@@ -148,7 +145,7 @@ class DataUpdateHookHandler implements
 	 * @param ParserOptions $popts ParserOptions used for generating $parserOutput
 	 * @param int $revId ID of the revision that was parsed to create $parserOutput
 	 */
-	public function onParserCacheSaveComplete( $parserCache, $parserOutput, $title, $popts, $revId ) {
+	public function onParserCacheSaveComplete( $parserCache, $parserOutput, $title, $popts, $revId ): void {
 		DeferredUpdates::addCallableUpdate( function () use ( $parserOutput, $title ) {
 			$usageAcc = new ParserOutputUsageAccumulator( $parserOutput, $this->entityUsageFactory );
 
