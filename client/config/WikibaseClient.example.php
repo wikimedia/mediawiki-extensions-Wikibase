@@ -12,8 +12,8 @@
  * @author Daniel Kinzler
  */
 
-if ( !defined( 'WBC_VERSION' ) ) {
-	die( 'Not an entry point. Load WikibaseClient.php first.' );
+if ( !defined( 'MEDIAWIKI' ) ) {
+	die( 'Not an entry point.' );
 }
 
 // The global site ID by which this wiki is known on the repo.

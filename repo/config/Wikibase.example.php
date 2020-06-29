@@ -12,8 +12,8 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'WB_VERSION' ) ) {
-	die( 'Not an entry point. Load Wikibase.php first.' );
+if ( !defined( 'MEDIAWIKI' ) ) {
+	die( 'Not an entry point.' );
 }
 
 call_user_func( function() {
