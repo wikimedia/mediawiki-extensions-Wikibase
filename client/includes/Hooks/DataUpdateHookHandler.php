@@ -29,7 +29,7 @@ use WikiPage;
  * Hook handlers for triggering data updates.
  *
  * This class has a static interface for use with MediaWiki's hook mechanism; the static
- * handler functions will create a new instance of DataUpdateHookHandlers and then call the
+ * handler functions will create a new instance of DataUpdateHookHandler and then call the
  * corresponding member function on that.
  *
  * @license GPL-2.0-or-later

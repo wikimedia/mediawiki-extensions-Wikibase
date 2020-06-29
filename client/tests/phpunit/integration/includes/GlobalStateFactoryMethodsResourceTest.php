@@ -55,7 +55,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 			->newFromGlobalState( RequestContext::getMain(), 'dummy' );
 	}
 
-	public function testDataUpdateHookHandlers() {
+	public function testDataUpdateHookHandler() {
 		DataUpdateHookHandler::newFromGlobalState();
 		$this->assertTrue( true );
 	}
