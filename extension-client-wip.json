@@ -25,6 +25,10 @@
 		"ParserClearStateHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserClearStateHookHandler"
 		},
+		"ParserLimitReportPrepareHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\ParserLimitReportPrepareHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserLimitReportPrepareHookHandler::newFromGlobalState"
+		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
@@ -41,6 +45,7 @@
 		"MagicWordwgVariableIDs": "Magic",
 		"ParserClearState": "ParserClearStateHookHandler",
 		"ParserGetVariableValueSwitch": "Magic",
+		"ParserLimitReportPrepare": "ParserLimitReportPrepareHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
 		"ArticleDeleteComplete": "UpdateRepoHookHandler",

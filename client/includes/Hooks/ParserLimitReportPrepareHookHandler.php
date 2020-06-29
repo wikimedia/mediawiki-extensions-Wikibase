@@ -1,7 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Hook\ParserLimitReportPrepareHook;
 use Parser;
 use ParserOutput;
 use Wikibase\Client\WikibaseClient;
@@ -11,7 +14,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class ParserLimitReportPrepareHookHandler {
+class ParserLimitReportPrepareHookHandler implements ParserLimitReportPrepareHook {
 
 	/**
 	 * @var RestrictedEntityLookup
@@ -50,19 +53,7 @@ class ParserLimitReportPrepareHookHandler {
 	 *
 	 * @return bool
 	 */
-	public static function onParserLimitReportPrepare( Parser $parser, ParserOutput $output ) {
-		$handler = self::newFromGlobalState();
-
-		return $handler->doParserLimitReportPrepare( $parser, $output );
-	}
-
-	/**
-	 * @param Parser $parser
-	 * @param ParserOutput $output
-	 *
-	 * @return bool
-	 */
-	public function doParserLimitReportPrepare( Parser $parser, ParserOutput $output ) {
+	public function onParserLimitReportPrepare( $parser, $output ) {
 		$output->setLimitReportData(
 			'limitreport-entityaccesscount',
 			[

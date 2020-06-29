@@ -108,7 +108,6 @@ call_user_func( function() {
 	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\Client\ClientHooks::onEditAction';
 	$wgHooks['SkinAfterPortlet'][] = '\Wikibase\Client\ClientHooks::onSkinAfterPortlet';
 	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\Client\ClientHooks::onArticleDeleteAfterSuccess';
-	$wgHooks['ParserLimitReportPrepare'][] = '\Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler::onParserLimitReportPrepare';
 	$wgHooks['FormatAutocomments'][] = '\Wikibase\Client\ClientHooks::onFormat';
 	$wgHooks['AbortEmailNotification'][] = '\Wikibase\Client\ClientHooks::onAbortEmailNotification';
 	$wgHooks['SearchDataForIndex'][] = '\Wikibase\Client\ClientHooks::onSearchDataForIndex';
