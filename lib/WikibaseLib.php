@@ -43,5 +43,3 @@ call_user_func( function() {
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
 	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/i18n';
 } );
-
-define( 'WBL_VERSION', '0.5 alpha' );
