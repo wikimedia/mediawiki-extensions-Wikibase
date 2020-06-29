@@ -65,7 +65,7 @@ class ExtensionLoadHandler {
 		//
 		// recent changes / watchlist hooks
 		$hooks['ChangesListSpecialPageStructuredFilters'][] =
-			ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters';
+			ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters';
 
 		return $hooks;
 	}

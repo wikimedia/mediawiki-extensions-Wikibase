@@ -4,10 +4,11 @@ namespace Wikibase\Client\Tests\Integration;
 
 use ChangesList;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
+use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
@@ -51,8 +52,9 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testChangesListSpecialPageHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( ChangesListSpecialPageHookHandlers::class )
-			->newFromGlobalState( RequestContext::getMain(), 'dummy' );
+		ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices(
+			MediaWikiServices::getInstance()->getDBLoadBalancer()
+		);
 	}
 
 	public function testDataUpdateHookHandlers() {

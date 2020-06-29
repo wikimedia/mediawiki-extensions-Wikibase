@@ -14,6 +14,11 @@
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
 	"HookHandlers": {
+		"ChangesListSpecialPageHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices",
+			"services": [ "DBLoadBalancer" ]
+		},
 		"DataUpdateHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
@@ -46,7 +51,7 @@
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
 		"LinksUpdateComplete": "DataUpdateHookHandler",
-		"ChangesListSpecialPageQuery": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandlers::onChangesListSpecialPageQuery",
+		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",

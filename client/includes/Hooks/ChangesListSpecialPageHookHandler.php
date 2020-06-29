@@ -5,32 +5,19 @@ namespace Wikibase\Client\Hooks;
 use ChangesListBooleanFilter;
 use ChangesListSpecialPage;
 use ExtensionRegistry;
-use FormOptions;
-use IContextSource;
 use MediaWiki\MediaWikiServices;
-use RequestContext;
+use MediaWiki\SpecialPage\Hook\ChangesListSpecialPageQueryHook;
 use User;
-use WebRequest;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\WikibaseClient;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 /**
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ChangesListSpecialPageHookHandlers {
-
-	/**
-	 * @var WebRequest
-	 */
-	private $request;
-
-	/**
-	 * @var User
-	 */
-	private $user;
+class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHook {
 
 	/**
 	 * @var IDatabase
@@ -38,143 +25,49 @@ class ChangesListSpecialPageHookHandlers {
 	private $dbr;
 
 	/**
-	 * @var string
-	 */
-	private $pageName;
-
-	/**
 	 * @var bool
 	 */
 	private $showExternalChanges;
 
 	/**
-	 * @var self
-	 */
-	private static $instance = null;
-
-	/**
-	 * @param WebRequest $request
-	 * @param User $user
 	 * @param IDatabase $dbr
-	 * @param string $pageName
 	 * @param bool $showExternalChanges
 	 */
 	public function __construct(
-		WebRequest $request,
-		User $user,
 		IDatabase $dbr,
-		$pageName,
 		$showExternalChanges
 	) {
-		$this->request = $request;
-		$this->user = $user;
 		$this->dbr = $dbr;
-		$this->pageName = $pageName;
 		$this->showExternalChanges = $showExternalChanges;
 	}
 
 	/**
-	 * @param IContextSource $context
-	 * @param string $specialPageName
-	 *
+	 * @param ILoadBalancer $loadBalancer
 	 * @return self
 	 */
-	private static function newFromGlobalState(
-		IContextSource $context,
-		$specialPageName
-	) {
-		Assert::parameterType( 'string', $specialPageName, '$specialPageName' );
-
+	public static function newFromGlobalStateAndServices( ILoadBalancer $loadBalancer ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		return new self(
-			$context->getRequest(),
-			$context->getUser(),
-			MediaWikiServices::getInstance()->getDBLoadBalancer()->getLazyConnectionRef( DB_REPLICA ),
-			$specialPageName,
+			$loadBalancer->getLazyConnectionRef( DB_REPLICA ),
 			$settings->getSetting( 'showExternalRecentChanges' )
 		);
 	}
 
 	/**
-	 * @param IContextSource $context
-	 * @param string $specialPageName
-	 *
-	 * @return self
-	 */
-	private static function getInstance(
-		IContextSource $context,
-		$specialPageName
-	) {
-		if ( self::$instance === null ) {
-			self::$instance = self::newFromGlobalState( $context, $specialPageName );
-		}
-
-		return self::$instance;
-	}
-
-	/**
-	 * Modifies recent changes and watchlist options to show a toggle for Wikibase changes
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageStructuredFilters
-	 *
-	 * @param ChangesListSpecialPage $specialPage
-	 *
-	 * @return bool
-	 */
-	public static function onChangesListSpecialPageStructuredFilters(
-		ChangesListSpecialPage $specialPage
-	) {
-		$hookHandler = self::getInstance(
-			$specialPage->getContext(),
-			$specialPage->getName()
-		);
-
-		$hookHandler->addFilterIfEnabled( $specialPage );
-
-		return true;
-	}
-
-	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ChangesListSpecialPageQuery
-	 *
-	 * @param string $specialPageName
-	 * @param array &$tables
-	 * @param array &$fields
-	 * @param array &$conds
-	 * @param array &$query_options
-	 * @param array &$join_conds
-	 * @param FormOptions $opts
-	 *
-	 * @return bool
-	 */
-	public static function onChangesListSpecialPageQuery(
-		$specialPageName,
-		array &$tables,
-		array &$fields,
-		array &$conds,
-		array &$query_options,
-		array &$join_conds,
-		FormOptions $opts
-	) {
-		$hookHandler = self::getInstance(
-			RequestContext::getMain(),
-			$specialPageName
-		);
-
-		$hookHandler->addWikibaseConditionsIfFilterUnavailable( $conds );
-
-		return true;
-	}
-
-	// This is separate so hasWikibaseChangesEnabled can be mocked
-
-	/**
 	 * This is used to force-hide Wikibase changes if hasWikibaseChangesEnabled returns
 	 * false.  The user will not even see the option in that case.
 	 *
-	 * @param array &$conds
+	 * @param string $name Name of the special page, e.g. 'Watchlist'
+	 * @param array &$tables Array of tables to be queried
+	 * @param array &$fields Array of columns to select
+	 * @param array &$conds Array of WHERE conditionals for query
+	 * @param array &$query_options Array of options for the database request
+	 * @param array &$join_conds Join conditions for the tables
+	 * @param \FormOptions $opts FormOptions for this request
 	 */
-	protected function addWikibaseConditionsIfFilterUnavailable( array &$conds ) {
+	public function onChangesListSpecialPageQuery( $name, &$tables, &$fields,
+			&$conds, &$query_options, &$join_conds, $opts ) {
 		if ( !$this->hasWikibaseChangesEnabled() ) {
 			// Force-hide if hasWikibaseChangesEnabled is false
 			// The user-facing hideWikibase is handled by
@@ -183,14 +76,18 @@ class ChangesListSpecialPageHookHandlers {
 		}
 	}
 
-	public function addFilterIfEnabled( ChangesListSpecialPage $specialPage ) {
+	/**
+	 * @param ChangesListSpecialPage $special
+	 */
+	public static function onChangesListSpecialPageStructuredFilters( $special ) {
+		$handler = self::newFromGlobalStateAndServices( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 		// The *user-facing* filter is only registered if external changes
 		// are enabled.
 		//
 		// If the user-facing filter is not registered, it's always *hidden*.
 		// (See ChangesListSpecialPageQuery).
-		if ( $this->hasWikibaseChangesEnabled() ) {
-			$this->addFilter( $specialPage );
+		if ( $handler->hasWikibaseChangesEnabled() ) {
+			$handler->addFilter( $special );
 		}
 	}
 
@@ -209,7 +106,7 @@ class ChangesListSpecialPageHookHandlers {
 			'description' => 'wikibase-rcfilters-hide-wikibase-description',
 			'showHide' => 'wikibase-rc-hide-wikidata',
 			// If the preference is enabled, then don't hide Wikidata edits
-			'default' => !$this->hasShowWikibaseEditsPrefEnabled(),
+			'default' => !$this->hasShowWikibaseEditsPrefEnabled( $specialPage->getUser(), $specialPage->getName() ),
 			'queryCallable' => function ( $specialClassName, $ctx, $dbr, &$tables, &$fields,
 				&$conds, &$query_options, &$join_conds ) {
 				$this->addWikibaseConditions( $dbr, $conds );
@@ -268,11 +165,8 @@ class ChangesListSpecialPageHookHandlers {
 		return $this->showExternalChanges;
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function hasShowWikibaseEditsPrefEnabled() {
-		return (bool)$this->user->getOption( $this->getOptionName() );
+	private function hasShowWikibaseEditsPrefEnabled( User $user, string $pageName ): bool {
+		return (bool)$user->getOption( $this->getOptionName( $pageName ) );
 	}
 
 	/**
@@ -282,11 +176,8 @@ class ChangesListSpecialPageHookHandlers {
 		return 'hideWikibase';
 	}
 
-	/**
-	 * @return string
-	 */
-	private function getOptionName() {
-		if ( $this->pageName === 'Watchlist' ) {
+	private function getOptionName( string $pageName ): string {
+		if ( $pageName === 'Watchlist' ) {
 			return 'wlshowwikibase';
 		}
 

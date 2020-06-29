@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use ExtensionRegistry;
 use PHPUnit\Framework\TestCase;
 use Wikibase\Client\Api\ApiFormatReference;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandlers;
+use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\ExtensionLoadHandler;
 
@@ -36,7 +36,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 				EchoNotificationsHandlers::class . '::onWikibaseHandleChange',
 			],
 			'ChangesListSpecialPageStructuredFilters' => [
-				ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters',
+				ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters',
 			],
 		];
 		$this->assertSame( $expectedHooks, $actualHooks );
@@ -53,7 +53,7 @@ class ExtensionLoadHandlerTest extends TestCase {
 
 		$expectedHooks = [
 			'ChangesListSpecialPageStructuredFilters' => [
-				ChangesListSpecialPageHookHandlers::class . '::onChangesListSpecialPageStructuredFilters',
+				ChangesListSpecialPageHookHandler::class . '::onChangesListSpecialPageStructuredFilters',
 			],
 		];
 		$this->assertSame( $expectedHooks, $actualHooks );
