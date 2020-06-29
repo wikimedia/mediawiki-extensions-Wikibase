@@ -166,7 +166,7 @@
 	"wikibase-client-data-bridge-error-reload-page": "Превчитај ја страницата",
 	"wikibase-client-data-bridge-error-go-back": "Назад",
 	"wikibase-client-data-bridge-error-retry-save": "Пробај пак",
-	"wikibase-client-data-bridge-login-warning": "По успешната најава, <strong>затворете го јазичево и вратете се на првобитното јазиче</strong> за пак да пробате да зачувате.",
+	"wikibase-client-data-bridge-login-warning": "По најавата, <strong>затворете го јазичево и вратете се на првобитното јазиче</strong> за пак да пробате да зачувате.",
 	"wikibase-client-data-bridge-reference-note": "Уредувањето на наводи ќе биде возможно на {{WBREPONAME}} по зачувувањето",
 	"wikibase-client-data-bridge-thank-you-head": "Ви благодариме за уредувањето!",
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Можете да уредувате наводи за ова својство на {{WBREPONAME}} стискајќи на копчето подолу.",

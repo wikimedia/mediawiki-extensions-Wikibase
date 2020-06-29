@@ -196,7 +196,7 @@
 	"wikibase-validator-bad-data-type": "Mauvais type de données : $1",
 	"wikibase-validator-bad-url": "Les URL ne doivent pas contenir certains caractères comme les espaces ou les crochets : $1",
 	"wikibase-validator-url-scheme-missing": "Un protocole tel que « https:// » est manquant dans cette URL : $1",
-	"wikibase-validator-bad-url-scheme": "Le protocole d’URL « $1 » n’est pas pris en charge.",
+	"wikibase-validator-bad-url-scheme": "Le schéma d'URL « $1 » n’est pas pris en charge.",
 	"wikibase-validator-unknown-unit": "Unité inconnue : $1",
 	"wikibase-validator-not-allowed": "Valeur interdite : $1",
 	"wikibase-validator-no-validators": "Interdit",
