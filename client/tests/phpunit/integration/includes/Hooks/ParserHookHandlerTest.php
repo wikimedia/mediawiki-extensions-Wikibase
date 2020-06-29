@@ -15,7 +15,7 @@ use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
 
 /**
- * @covers \Wikibase\Client\Hooks\ParserClearStateHookHandler
+ * @covers \Wikibase\Client\Hooks\ParserHookHandler
  *
  * @group Wikibase
  * @group WikibaseClient
@@ -25,12 +25,22 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
+class ParserHookHandlerTest extends MediaWikiTestCase {
+
+	private function resetWikibaseClient(): WikibaseClient {
+		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
+
+		// clear any hook container or handler which might hold a stale
+		// RestrictedEntityLookup after we reset WikibaseClient
+		$this->resetServices();
+
+		return $wikibaseClient;
+	}
 
 	protected function setUp() : void {
 		parent::setUp();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
+		$wikibaseClient = $this->resetWikibaseClient();
 		$store = $wikibaseClient->getStore();
 
 		if ( !( $store instanceof MockClientStore ) ) {
@@ -46,9 +56,8 @@ class ParserClearStateHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	protected function tearDown() : void {
+		$this->resetWikibaseClient();
 		parent::tearDown();
-
-		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	public function testStateCleared() {

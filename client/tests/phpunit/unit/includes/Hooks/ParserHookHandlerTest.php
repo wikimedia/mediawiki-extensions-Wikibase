@@ -6,11 +6,11 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use Parser;
 use ParserOutput;
-use Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler;
+use Wikibase\Client\Hooks\ParserHookHandler;
 use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
 
 /**
- * @covers \Wikibase\Client\Hooks\ParserLimitReportPrepareHookHandler
+ * @covers \Wikibase\Client\Hooks\ParserHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -19,7 +19,7 @@ use Wikibase\DataModel\Services\Lookup\RestrictedEntityLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ParserLimitReportPrepareHookHandlerTest extends \PHPUnit\Framework\TestCase {
+class ParserHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	public function testOnParserLimitReportPrepare() {
 		$restrictedEntityLookup = $this->getMockBuilder( RestrictedEntityLookup::class )
@@ -30,7 +30,7 @@ class ParserLimitReportPrepareHookHandlerTest extends \PHPUnit\Framework\TestCas
 			->method( 'getEntityAccessCount' )
 			->will( $this->returnValue( 42 ) );
 
-		$handler = new ParserLimitReportPrepareHookHandler(
+		$handler = new ParserHookHandler(
 			$restrictedEntityLookup,
 			1234
 		);

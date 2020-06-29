@@ -26,12 +26,9 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
 		},
-		"ParserClearStateHookHandler": {
-			"class": "\\Wikibase\\Client\\Hooks\\ParserClearStateHookHandler"
-		},
-		"ParserLimitReportPrepareHookHandler": {
-			"class": "\\Wikibase\\Client\\Hooks\\ParserLimitReportPrepareHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserLimitReportPrepareHookHandler::newFromGlobalState"
+		"ParserHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
 		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
@@ -52,10 +49,10 @@
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
-		"ParserClearState": "ParserClearStateHookHandler",
 		"ParserCacheSaveComplete": "DataUpdateHookHandler",
+		"ParserClearState": "ParserHookHandler",
 		"ParserGetVariableValueSwitch": "Magic",
-		"ParserLimitReportPrepare": "ParserLimitReportPrepareHookHandler",
+		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
 		"TitleMoveComplete": "UpdateRepoHookHandler"
