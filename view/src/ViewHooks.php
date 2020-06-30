@@ -16,7 +16,7 @@ final class ViewHooks {
 	 * Callback called after extension registration,
 	 * for any work that cannot be done directly in extension.json.
 	 */
-	public static function onRegistration() {
+	public static function onRegistration(): void {
 		global $wgResourceModules;
 
 		$wgResourceModules = array_merge(
@@ -29,12 +29,9 @@ final class ViewHooks {
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
-	 *
-	 * @param ResourceLoader $resourceLoader
-	 *
-	 * @return bool
+	 * @param ResourceLoader $rl
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+	public static function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
 		$moduleTemplate = [
 			'localBasePath' => __DIR__ . '/..',
 			'remoteExtPath' => 'Wikibase/view',
@@ -63,9 +60,7 @@ final class ViewHooks {
 			$modules['wikibase.getLanguageNameByCode']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
-		$resourceLoader->register( $modules );
-
-		return true;
+		$rl->register( $modules );
 	}
 
 	/**
@@ -77,7 +72,7 @@ final class ViewHooks {
 	public static function onResourceLoaderTestModules(
 		array &$testModules,
 		ResourceLoader $resourceLoader
-	) {
+	) : void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			require __DIR__ . '/../lib/resources.test.php',
@@ -90,7 +85,7 @@ final class ViewHooks {
 	 *
 	 * @param string[] &$paths
 	 */
-	public static function onUnitTestsList( array &$paths ) {
+	public static function onUnitTestsList( array &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit';
 	}
 
