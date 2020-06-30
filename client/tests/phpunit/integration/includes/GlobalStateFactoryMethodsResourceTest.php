@@ -51,7 +51,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 			->newFromGlobalState( new ChangesList( RequestContext::getMain() ) );
 	}
 
-	public function testChangesListSpecialPageHookHandlers(): void {
+	public function testChangesListSpecialPageHookHandler(): void {
 		ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices(
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);
