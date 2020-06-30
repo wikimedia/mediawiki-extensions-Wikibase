@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
-use ExtensionRegistry;
 use JobQueueGroup;
 use LinksUpdate;
 use ParserOutput;
@@ -158,7 +157,7 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 	 *
 	 * @return DataUpdateHookHandler
 	 */
-	private function newDataUpdateHookHandlers(
+	private function newDataUpdateHookHandler(
 		Title $title,
 		array $expectedUsages = null,
 		$prune = true,
@@ -281,7 +280,7 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 		$linksUpdate = $this->newLinksUpdate( $title, $usages );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usages, false, false, true );
+		$handler = $this->newDataUpdateHookHandler( $title, $usages, false, false, true );
 		$handler->doLinksUpdateComplete( $linksUpdate );
 	}
 
@@ -293,7 +292,7 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, $usages, false, true );
+		$handler = $this->newDataUpdateHookHandler( $title, $usages, false, true );
 		$handler->onParserCacheSaveComplete( null, $parserOutput, $title, null, null );
 	}
 
@@ -359,7 +358,7 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 		$title = $this->newTitle( 23, NS_MAIN, 'Oxygen' );
 
 		// Assertions are done by the UsageUpdater mock
-		$handler = $this->newDataUpdateHookHandlers( $title, null, true, false );
+		$handler = $this->newDataUpdateHookHandler( $title, null, true, false );
 		$handler->onArticleDeleteComplete( null, null, null, $title->getArticleID(), null, null, null );
 	}
 
