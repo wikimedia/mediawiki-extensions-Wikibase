@@ -502,6 +502,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Remove warning",
 	"wikibase-tainted-ref-tainted-icon-title": "This statement has some potential issues.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Duplicate main snak detected. Statement not added.",
+	"wikibase-federated-properties-search-api-error-message": "Properties temporarily unavailable.",
 	"wikibase-federated-properties-save-api-error-message": "Your save failed due to a failed request to the federation source Wiki.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Statements about this item are temporarily unavailable due to a failed request to the federation source Wiki. Please refresh the page."
 }

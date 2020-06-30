@@ -11,6 +11,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -51,6 +52,11 @@ class SearchEntities extends ApiBase {
 	private $entityArticleIdLookup;
 
 	/**
+	 * @var ApiErrorReporter
+	 */
+	private $errorReporter;
+
+	/**
 	 * @see ApiBase::__construct
 	 */
 	public function __construct(
@@ -62,7 +68,8 @@ class SearchEntities extends ApiBase {
 		EntitySourceDefinitions $entitySourceDefinitions,
 		EntityTitleTextLookup $entityTitleTextLookup,
 		EntityUrlLookup $entityUrlLookup,
-		EntityArticleIdLookup $entityArticleIdLookup
+		EntityArticleIdLookup $entityArticleIdLookup,
+		ApiErrorReporter $errorReporter
 	) {
 		parent::__construct( $mainModule, $moduleName, '' );
 
@@ -78,6 +85,7 @@ class SearchEntities extends ApiBase {
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->entityArticleIdLookup = $entityArticleIdLookup;
+		$this->errorReporter = $errorReporter;
 	}
 
 	/**
@@ -188,6 +196,17 @@ class SearchEntities extends ApiBase {
 	 * @inheritDoc
 	 */
 	public function execute() {
+		try {
+			$this->executeInternal();
+		} catch ( FederatedPropertiesException $ex ) {
+			$this->errorReporter->dieWithError(
+				'wikibase-federated-properties-search-api-error-message',
+				'failed-property-search'
+			);
+		}
+	}
+
+	public function executeInternal() {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$params = $this->extractRequestParams();

@@ -24,6 +24,7 @@ use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
@@ -157,7 +158,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			], new EntityTypeDefinitions( [] ) ),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
-			$this->createMock( EntityArticleIdLookup::class )
+			$this->createMock( EntityArticleIdLookup::class ),
+			$this->createMock( ApiErrorReporter::class )
 		);
 
 		$apiModule->execute();
