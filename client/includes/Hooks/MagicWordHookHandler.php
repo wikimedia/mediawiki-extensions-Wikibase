@@ -105,7 +105,10 @@ class MagicWordHookHandler implements
 	 * @param string[] &$magicWords Associative array mapping all-caps magic
 	 *  words to string values
 	 */
-	public function onResourceLoaderJqueryMsgModuleMagicWords( ResourceLoaderContext $context, array &$magicWords ) {
+	public function onResourceLoaderJqueryMsgModuleMagicWords(
+		ResourceLoaderContext $context,
+		array &$magicWords
+	): void {
 		$lang = Language::factory( $context->getLanguage() );
 		$magicWords['WBREPONAME'] = $this->getRepoName( $lang );
 	}
