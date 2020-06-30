@@ -64,9 +64,7 @@ call_user_func( function() {
 		$wgHooks,
 		$wgJobClasses,
 		$wgMessagesDirs,
-		$wgRecentChangesFlags,
 		$wgResourceModules,
-		$wgSpecialPages,
 		$wgWBClientDataTypes,
 		$wgWBClientSettings;
 
