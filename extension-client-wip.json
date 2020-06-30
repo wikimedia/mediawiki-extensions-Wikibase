@@ -56,13 +56,23 @@
 		}
 	},
 	"Hooks": {
+		"AbortEmailNotification": "\\Wikibase\\Client\\ClientHooks::onAbortEmailNotification",
+		"ArticleDeleteAfterSuccess": "\\Wikibase\\Client\\ClientHooks::onArticleDeleteAfterSuccess",
 		"ArticleDeleteComplete": [
 			"UpdateRepoHookHandler",
 			"DataUpdateHookHandler"
 		],
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
-		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
+		"BeforePageDisplay": [
+			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplay",
+			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplayAddJsConfig"
+		],
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
+		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
+		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
+		"EditPage::showStandardInputs:options": "\\Wikibase\\Client\\ClientHooks::onEditAction",
+		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",
+		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoActionHookHandler",
 		"LinksUpdateComplete": "DataUpdateHookHandler",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
@@ -71,14 +81,22 @@
 		"OutputPageParserOutput": "SidebarHookHandler",
 		"ParserCacheSaveComplete": "DataUpdateHookHandler",
 		"ParserClearState": "ParserHookHandler",
+		"ParserFirstCallInit": "\\Wikibase\\Client\\ClientHooks::onParserFirstCallInit",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
+		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
+		"SearchDataForIndex": "\\Wikibase\\Client\\ClientHooks::onSearchDataForIndex",
+		"SearchIndexFields": "\\Wikibase\\Client\\ClientHooks::onSearchIndexFields",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
 		"SidebarBeforeOutput": "SidebarHookHandler",
+		"SkinAfterBottomScripts": "\\Wikibase\\Client\\ClientHooks::onSkinAfterBottomScripts",
+		"SkinAfterPortlet": "\\Wikibase\\Client\\ClientHooks::onSkinAfterPortlet",
 		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
-		"PageMoveComplete": "UpdateRepoHookHandler"
+		"PageMoveComplete": "UpdateRepoHookHandler",
+		"UnitTestsList": "\\Wikibase\\Client\\ClientHooks::registerUnitTests",
+		"wgQueryPages": "\\Wikibase\\Client\\ClientHooks::onwgQueryPages"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
