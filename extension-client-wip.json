@@ -92,6 +92,12 @@
 		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
 		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/"
 	},
+	"JobClasses": {
+		"wikibase-addUsagesForPage": "\\Wikibase\\Client\\Store\\AddUsagesForPageJob",
+		"ChangeNotification": "\\Wikibase\\Client\\ChangeNotificationJob",
+		"ChangeVisibilityNotification": "\\Wikibase\\Client\\ChangeVisibilityNotificationJob::newFromGlobalState",
+		"wikibase-InjectRCRecords": "\\Wikibase\\Client\\Changes\\InjectRCRecordsJob::newFromGlobalState"
+	},
 	"RecentChangesFlags": {
 		"wikibase-edit": {
 			"letter": "wikibase-rc-wikibase-edit-letter",

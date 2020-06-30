@@ -6,12 +6,14 @@ use InvalidArgumentException;
 use Job;
 use JobSpecification;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Title;
 use TitleFactory;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -157,6 +159,26 @@ class InjectRCRecordsJob extends Job {
 
 		$this->titleFactory = new TitleFactory();
 		$this->logger = new NullLogger();
+	}
+
+	public static function newFromGlobalState( Title $unused, array $params ) {
+		$mwServices = MediaWikiServices::getInstance();
+		$wbServices = WikibaseClient::getDefaultInstance();
+
+		$job = new self(
+			$mwServices->getDBLoadBalancerFactory(),
+			$wbServices->getStore()->getEntityChangeLookup(),
+			$wbServices->getEntityChangeFactory(),
+			$wbServices->getRecentChangeFactory(),
+			$params
+		);
+
+		$job->setRecentChangesFinder( $wbServices->getStore()->getRecentChangesFinder() );
+
+		$job->setLogger( $wbServices->getLogger() );
+		$job->setStats( $mwServices->getStatsdDataFactory() );
+
+		return $job;
 	}
 
 	public function setRecentChangesFinder( RecentChangesFinder $rcDuplicateDetector ) {

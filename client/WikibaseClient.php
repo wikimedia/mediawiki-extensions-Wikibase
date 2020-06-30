@@ -31,16 +31,11 @@
  * @license GPL-2.0-or-later
  */
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\Client\Api\ApiClientInfo;
 use Wikibase\Client\Api\ApiListEntityUsage;
 use Wikibase\Client\Api\ApiPropsEntityUsage;
 use Wikibase\Client\Api\Description;
 use Wikibase\Client\Api\PageTerms;
-use Wikibase\Client\ChangeNotificationJob;
-use Wikibase\Client\Changes\InjectRCRecordsJob;
-use Wikibase\Client\ChangeVisibilityNotificationJob;
-use Wikibase\Client\Store\AddUsagesForPageJob;
 use Wikibase\Client\WikibaseClient;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -109,35 +104,6 @@ call_user_func( function() {
 	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\Client\ClientHooks::onCirrusSearchAddQueryFeatures';
 
 	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\Client\ClientHooks::onSkinAfterBottomScripts';
-
-	// job classes
-	$wgJobClasses['wikibase-addUsagesForPage'] = AddUsagesForPageJob::class;
-	$wgJobClasses['ChangeNotification'] = ChangeNotificationJob::class;
-	$wgJobClasses['ChangeVisibilityNotification'] = function ( Title $unused, array $params ) {
-		return new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$params
-		);
-	};
-	$wgJobClasses['wikibase-InjectRCRecords'] = function ( Title $unused, array $params ) {
-		$mwServices = MediaWikiServices::getInstance();
-		$wbServices = WikibaseClient::getDefaultInstance();
-
-		$job = new InjectRCRecordsJob(
-			$mwServices->getDBLoadBalancerFactory(),
-			$wbServices->getStore()->getEntityChangeLookup(),
-			$wbServices->getEntityChangeFactory(),
-			$wbServices->getRecentChangeFactory(),
-			$params
-		);
-
-		$job->setRecentChangesFinder( $wbServices->getStore()->getRecentChangesFinder() );
-
-		$job->setLogger( $wbServices->getLogger() );
-		$job->setStats( $mwServices->getStatsdDataFactory() );
-
-		return $job;
-	};
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = [
