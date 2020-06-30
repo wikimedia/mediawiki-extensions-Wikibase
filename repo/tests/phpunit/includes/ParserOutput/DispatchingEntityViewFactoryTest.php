@@ -7,6 +7,7 @@ use Language;
 use LogicException;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\View\EntityDocumentView;
@@ -36,7 +37,7 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException( OutOfBoundsException::class );
 		$factory->newEntityView(
 			Language::factory( 'en' ),
-			new TermLanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( EntityDocument::class )
 		);
 	}
@@ -58,14 +59,14 @@ class DispatchingEntityViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$this->expectException( LogicException::class );
 		$factory->newEntityView(
 			Language::factory( 'en' ),
-			new TermLanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$unknownEntity
 		);
 	}
 
 	public function testNewEntityView() {
 		$language = Language::factory( 'en' );
-		$languageFallbackChain = new TermLanguageFallbackChain( [] );
+		$languageFallbackChain = new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) );
 		$entity = $this->createMock( EntityDocument::class );
 		$entity->expects( $this->once() )
 			->method( 'getType' )

@@ -6,7 +6,9 @@ use IContextSource;
 use Language;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
 
@@ -19,6 +21,14 @@ use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
  */
 class TermboxRequestInspectorTest extends TestCase {
 
+	private $stubContentLanguages;
+
+	protected function setUp(): void {
+		$this->stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$this->stubContentLanguages->method( 'hasLanguage' )
+			->willReturn( true );
+	}
+
 	public function testGivenContextWithDefaultLanguages_returnsTrue() {
 		$language = Language::factory( 'de' );
 		$context = $this->newContextWithLanguage( $language );
@@ -27,12 +37,18 @@ class TermboxRequestInspectorTest extends TestCase {
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $language )
-			->willReturn( new TermLanguageFallbackChain( [ $language, 'en' ] ) );
+			->willReturn( new TermLanguageFallbackChain(
+				[ LanguageWithConversion::factory( 'de' ), LanguageWithConversion::factory( 'en' ) ],
+				$this->stubContentLanguages
+			) );
 
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromContext' )
 			->with( $context )
-			->willReturn( new TermLanguageFallbackChain( [ $language, 'en' ] ) );
+			->willReturn( new TermLanguageFallbackChain(
+				[ LanguageWithConversion::factory( 'de' ), LanguageWithConversion::factory( 'en' ) ],
+				$this->stubContentLanguages
+			) );
 
 		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
 
@@ -47,12 +63,17 @@ class TermboxRequestInspectorTest extends TestCase {
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $language )
-			->willReturn( new TermLanguageFallbackChain( [ $language ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ LanguageWithConversion::factory( 'en' ) ], $this->stubContentLanguages ) );
 
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromContext' )
 			->with( $context )
-			->willReturn( new TermLanguageFallbackChain( [ $language, 'de' ] ) );
+			->willReturn(
+				new TermLanguageFallbackChain( [
+					LanguageWithConversion::factory( 'en' ),
+					LanguageWithConversion::factory( 'de' ),
+				], $this->stubContentLanguages )
+			);
 
 		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
 

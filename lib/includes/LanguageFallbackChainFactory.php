@@ -69,7 +69,10 @@ class LanguageFallbackChainFactory {
 
 		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
 			$chain = $this->buildFromLanguage( $language, $mode );
-			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain( $chain );
+			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
+				$chain,
+				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+			);
 		}
 
 		return $this->languageCache[$languageCode][$mode];
@@ -88,7 +91,10 @@ class LanguageFallbackChainFactory {
 
 		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
 			$chain = $this->buildFromLanguage( $languageCode, $mode );
-			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain( $chain );
+			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain(
+				$chain,
+				WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+			);
 		}
 
 		return $this->languageCache[$languageCode][$mode];
@@ -223,7 +229,10 @@ class LanguageFallbackChainFactory {
 		$babel = $this->getBabel( $languageCode, $user );
 
 		$chain = $this->buildFromBabel( $babel );
-		$languageFallbackChain = new TermLanguageFallbackChain( $chain );
+		$languageFallbackChain = new TermLanguageFallbackChain(
+			$chain,
+			WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM )
+		);
 
 		$this->userLanguageCache[$user->getName()][$languageCode] = $languageFallbackChain;
 

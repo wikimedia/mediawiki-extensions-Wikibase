@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -59,14 +60,17 @@ class FormatterLabelDescriptionLookupFactoryTest extends \PHPUnit\Framework\Test
 
 		$labelDescriptionLookup = new LanguageLabelDescriptionLookup( $termLookup, 'de' );
 
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )
+			->willReturn( true );
 		$deChChain = new TermLanguageFallbackChain( [
 			LanguageWithConversion::factory( 'de-ch' ),
 			LanguageWithConversion::factory( 'de' ),
-		] );
+		], $stubContentLanguages );
 
 		$frChain = new TermLanguageFallbackChain( [
 			LanguageWithConversion::factory( 'fr' ),
-		] );
+		], $stubContentLanguages );
 
 		return [
 			'language' => [
