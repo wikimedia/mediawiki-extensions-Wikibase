@@ -104,7 +104,6 @@ call_user_func( function() {
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplay';
 	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplayAddJsConfig';
 	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\Client\ClientHooks::onScribuntoExternalLibraries';
-	$wgHooks['InfoAction'][] = '\Wikibase\Client\Hooks\InfoActionHookHandler::onInfoAction';
 	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\Client\ClientHooks::onEditAction';
 	$wgHooks['SkinAfterPortlet'][] = '\Wikibase\Client\ClientHooks::onSkinAfterPortlet';
 	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\Client\ClientHooks::onArticleDeleteAfterSuccess';

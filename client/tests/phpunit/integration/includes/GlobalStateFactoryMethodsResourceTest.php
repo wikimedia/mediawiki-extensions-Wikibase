@@ -13,6 +13,7 @@ use Wikibase\Client\Hooks\DataUpdateHookHandler;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
+use Wikibase\Client\Hooks\InfoActionHookHandler;
 use Wikibase\Client\Hooks\MagicWordHookHandler;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
@@ -74,6 +75,11 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 
 	public function testEditActionHookHandler() {
 		EditActionHookHandler::newFromGlobalState( RequestContext::getMain() );
+		$this->assertTrue( true );
+	}
+
+	public function testInfoActionHookHandler() {
+		InfoActionHookHandler::newFromGlobalState();
 		$this->assertTrue( true );
 	}
 

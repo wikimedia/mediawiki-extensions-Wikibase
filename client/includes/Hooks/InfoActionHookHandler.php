@@ -4,6 +4,7 @@ namespace Wikibase\Client\Hooks;
 
 use Html;
 use IContextSource;
+use MediaWiki\Hook\InfoActionHook;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\RepoLinker;
@@ -19,7 +20,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class InfoActionHookHandler {
+class InfoActionHookHandler implements InfoActionHook {
 
 	/**
 	 * @var NamespaceChecker
@@ -81,15 +82,7 @@ class InfoActionHookHandler {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	/**
-	 * Adds the Entity ID of the corresponding Wikidata item in action=info
-	 *
-	 * @param IContextSource $context
-	 * @param array[] &$pageInfo
-	 *
-	 * @return bool
-	 */
-	public static function onInfoAction( IContextSource $context, array &$pageInfo ) {
+	public static function newFromGlobalState(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
@@ -103,7 +96,7 @@ class InfoActionHookHandler {
 		$idParser = $wikibaseClient->getEntityIdParser();
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
 
-		$self = new self(
+		return new self(
 			$namespaceChecker,
 			$wikibaseClient->newRepoLinker(),
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
@@ -113,19 +106,15 @@ class InfoActionHookHandler {
 			$idParser,
 			$descriptionLookup
 		);
-
-		$pageInfo = $self->handle( $context, $pageInfo );
-
-		return true;
 	}
 
 	/**
-	 * @param IContextSource $context
-	 * @param array[] $pageInfo
+	 * Adds the Entity ID of the corresponding Wikidata item in action=info
 	 *
-	 * @return array[]
+	 * @param IContextSource $context
+	 * @param array[] &$pageInfo
 	 */
-	public function handle( IContextSource $context, array $pageInfo ) {
+	public function onInfoAction( $context, &$pageInfo ) {
 		// Check if wikibase namespace is enabled
 		$title = $context->getTitle();
 		$usage = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
@@ -149,8 +138,6 @@ class InfoActionHookHandler {
 		if ( $usage ) {
 			$pageInfo['header-properties'][] = $this->formatEntityUsage( $context, $usage );
 		}
-
-		return $pageInfo;
 	}
 
 	/**

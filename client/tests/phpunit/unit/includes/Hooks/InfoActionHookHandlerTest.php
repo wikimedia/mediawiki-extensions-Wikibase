@@ -32,9 +32,9 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
-	 * @dataProvider handleProvider
+	 * @dataProvider provideTestOnInfoActionData
 	 */
-	public function testHandle(
+	public function testOnInfoAction(
 		array $expected,
 		IContextSource $context,
 		array $pageInfo,
@@ -45,12 +45,12 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$message
 	) {
 		$hookHandler = $this->newHookHandler( $enabled, $itemId, $localDescription, $centralDescription );
-		$pageInfo = $hookHandler->handle( $context, $pageInfo );
+		$hookHandler->onInfoAction( $context, $pageInfo );
 
 		$this->assertEquals( $expected, $pageInfo, $message );
 	}
 
-	public function handleProvider() {
+	public function provideTestOnInfoActionData() {
 		$context = $this->getContext();
 		$labeledLink = '<a href="https://www.wikidata.org/wiki/Q4" class="external">Berlin</a>';
 		$unLabeledLink = '<a href="https://www.wikidata.org/wiki/Q4" class="external">Q4</a>';
