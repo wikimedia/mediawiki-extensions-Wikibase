@@ -18,7 +18,7 @@ use Wikibase\Client\Hooks\MagicWordHookHandler;
 use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ParserHookHandler;
-use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
+use Wikibase\Client\Hooks\ParserOutputUpdateHookHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
 use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\UpdateRepoHookHandler;
@@ -105,7 +105,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testParserOutputUpdateHookHandlers(): void {
-		ParserOutputUpdateHookHandlers::newFromGlobalState();
+		ParserOutputUpdateHookHandler::newFromGlobalState();
 		$this->assertTrue( true );
 	}
 

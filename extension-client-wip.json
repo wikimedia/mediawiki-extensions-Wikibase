@@ -19,6 +19,10 @@
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices",
 			"services": [ "DBLoadBalancer" ]
 		},
+		"ParserOutputUpdateHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::newFromGlobalState"
+		},
 		"DataUpdateHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
@@ -67,6 +71,7 @@
 			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplay",
 			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplayAddJsConfig"
 		],
+		"ContentAlterParserOutput": "ParserOutputUpdateHookHandler",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
 		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use HashSiteStore;
@@ -15,7 +17,7 @@ use Title;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
+use Wikibase\Client\Hooks\ParserOutputUpdateHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
@@ -40,7 +42,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
- * @covers \Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers
+ * @covers \Wikibase\Client\Hooks\ParserOutputUpdateHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -49,7 +51,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
+class ParserOutputUpdateHookHandlerTest extends MediaWikiTestCase {
 
 	/**
 	 * @param string $globalId
@@ -158,7 +160,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		return new SettingsArray( $defaults );
 	}
 
-	private function newParserOutputUpdateHookHandlers( array $siteLinkData ) {
+	private function newParserOutputUpdateHookHandler( array $siteLinkData ) {
 		$settings = $this->newSettings();
 
 		$namespaceChecker = $this->newNamespaceChecker();
@@ -170,7 +172,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo, $settings );
 
-		return new ParserOutputUpdateHookHandlers(
+		return new ParserOutputUpdateHookHandler(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
 			$parserOutputDataUpdater,
@@ -248,8 +250,8 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
 		$settings->setSetting( 'siteGroup', 'NYAN' );
 
-		$handler = ParserOutputUpdateHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( ParserOutputUpdateHookHandlers::class, $handler );
+		$handler = ParserOutputUpdateHookHandler::newFromGlobalState();
+		$this->assertInstanceOf( ParserOutputUpdateHookHandler::class, $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}
@@ -322,7 +324,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		] );
 
 		$parserOutput = $this->newParserOutput( $pagePropsBefore, [] );
-		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
+		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
@@ -349,7 +351,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$title = Title::makeTitle( NS_MAIN, 'Plutonium' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
-		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkData() );
+		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkData() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
@@ -366,7 +368,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 		$title = Title::makeTitle( NS_USER, 'Foo' );
 
 		$parserOutput = $this->newParserOutput( [], [] );
-		$handler = $this->newParserOutputUpdateHookHandlers( $this->getTestSiteLinkDataInNotEnabledNamespace() );
+		$handler = $this->newParserOutputUpdateHookHandler( $this->getTestSiteLinkDataInNotEnabledNamespace() );
 
 		$handler->doContentAlterParserOutput( $title, $parserOutput );
 
@@ -401,7 +403,7 @@ class ParserOutputUpdateHookHandlersTest extends MediaWikiTestCase {
 
 		$langLinkHandlerFactory = $this->newLangLinkHandlerFactory( $namespaceChecker, $mockRepo );
 
-		$handler = new ParserOutputUpdateHookHandlers(
+		$handler = new ParserOutputUpdateHookHandler(
 			$namespaceChecker,
 			$langLinkHandlerFactory,
 			$this->newParserOutputDataUpdater( $mockRepo, [ $itemId => [ $siteLink ] ] ),
