@@ -78,7 +78,7 @@ class MovePageNoticeTest extends \MediaWikiTestCase {
 				->method( 'getOutput' )
 				->will( $this->returnValue( $outputPage ) );
 
-		$movePageNotice->doSpecialMovepageAfterMove( $movePageForm, $oldTitle, $newTitle );
+		$movePageNotice->onSpecialMovepageAfterMove( $movePageForm, $oldTitle, $newTitle );
 
 		$this->assertTrue( true ); // The mocks do the assertions we need
 	}

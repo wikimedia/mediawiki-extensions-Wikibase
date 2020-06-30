@@ -35,6 +35,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
 		},
+		"MovePageNotice": {
+			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
+			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::newFromGlobalState"
+		},
 		"ParserHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
@@ -66,6 +70,7 @@
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
+		"SpecialMovepageAfterMove": "MovePageNotice",
 		"TitleMoveComplete": "UpdateRepoHookHandler"
 	},
 	"TrackingCategories": [
