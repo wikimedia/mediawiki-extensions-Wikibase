@@ -20,7 +20,7 @@ use Wikibase\Client\Hooks\NoLangLinkHandler;
 use Wikibase\Client\Hooks\ParserHookHandler;
 use Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers;
 use Wikibase\Client\Hooks\ShortDescHandler;
-use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -116,8 +116,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testSidebarHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( SidebarHookHandlers::class )
-			->getInstance();
+		SidebarHookHandler::newFromGlobalState();
 		$this->assertTrue( true );
 	}
 

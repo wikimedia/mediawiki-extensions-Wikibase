@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use IContextSource;
@@ -12,7 +14,7 @@ use Title;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\SidebarHookHandlers;
+use Wikibase\Client\Hooks\SidebarHookHandler;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\WikibaseClient;
@@ -20,7 +22,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\Lib\SettingsArray;
 
 /**
- * @covers \Wikibase\Client\Hooks\SidebarHookHandlers
+ * @covers \Wikibase\Client\Hooks\SidebarHookHandler
  *
  * @group WikibaseClient
  * @group Wikibase
@@ -29,7 +31,7 @@ use Wikibase\Lib\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SidebarHookHandlersTest extends \MediaWikiTestCase {
+class SidebarHookHandlerTest extends \MediaWikiTestCase {
 
 	/**
 	 * @return LabelDescriptionLookup
@@ -75,28 +77,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		return $sidebarGenerator;
 	}
 
-	/**
-	 * @param array $projects
-	 *
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	private function getOtherProjectsSidebarGeneratorFactory( array $projects ) {
-		$otherProjectsSidebarGenerator = $this->getSidebarGenerator( $projects );
-
-		$otherProjectsSidebarGeneratorFactory = $this->getMockBuilder(
-				OtherProjectsSidebarGeneratorFactory::class
-			)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$otherProjectsSidebarGeneratorFactory->expects( $this->any() )
-			->method( 'getOtherProjectsSidebarGenerator' )
-			->will( $this->returnValue( $otherProjectsSidebarGenerator ) );
-
-		return $otherProjectsSidebarGeneratorFactory;
-	}
-
-	private function newSidebarHookHandlers() {
+	private function newSidebarHookHandler() {
 		$en = Language::factory( 'en' );
 		$settings = $this->newSettings();
 
@@ -111,10 +92,9 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			)
 		);
 
-		return new SidebarHookHandlers(
+		return new SidebarHookHandler(
 			$namespaceChecker,
-			$badgeDisplay,
-			$this->getOtherProjectsSidebarGeneratorFactory( [ 'dummy' => 'xyz' ] )
+			$badgeDisplay
 		);
 	}
 
@@ -128,19 +108,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		}
 	}
 
-	public function testNewFromGlobalState() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
-		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
-		$settings->setSetting( 'siteGroup', 'NYAN' );
-
-		$handler = SidebarHookHandlers::newFromGlobalState();
-		$this->assertInstanceOf( SidebarHookHandlers::class, $handler );
-
-		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
-	}
-
-	public function testDoOutputPageParserOutput() {
+	public function testOnOutputPageParserOutput() {
 		$title = Title::makeTitle( NS_MAIN, 'Oxygen' );
 
 		$sisterLinks = [
@@ -166,7 +134,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 			'wikibase-otherprojects-sidebar' => $sisterLinks,
 		];
 
-		$handler = $this->newSidebarHookHandlers();
+		$handler = $this->newSidebarHookHandler();
 
 		$parserOutput = new ParserOutput();
 
@@ -176,12 +144,12 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$this->primeParserOutput( $parserOutput, $pageProps, $extData );
 
-		$handler->doOutputPageParserOutput( $outputPage, $parserOutput );
+		$handler->onOutputPageParserOutput( $outputPage, $parserOutput );
 
 		$this->assertOutputPageProperties( $outputProps, $outputPage );
 	}
 
-	public function testDoSkinTemplateGetLanguageLink() {
+	public function testOnSkinTemplateGetLanguageLink() {
 		$badges = [
 			'en' => [
 				'class' => 'badge-Q3',
@@ -208,8 +176,8 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 		$output = new OutputPage( $context );
 		$output->setProperty( 'wikibase_badges', $badges );
 
-		$handler = $this->newSidebarHookHandlers();
-		$handler->doSkinTemplateGetLanguageLink( $link, $languageLinkTitle, $dummy, $output );
+		$handler = $this->newSidebarHookHandler();
+		$handler->onSkinTemplateGetLanguageLink( $link, $languageLinkTitle, $dummy, $output );
 
 		$this->assertEquals( $expected, $link );
 	}
@@ -254,7 +222,7 @@ class SidebarHookHandlersTest extends \MediaWikiTestCase {
 
 		$sidebar = [];
 
-		$handler = $this->newSidebarHookHandlers();
+		$handler = $this->newSidebarHookHandler();
 
 		$sidebar = $handler->buildOtherProjectsSidebar( $skin );
 

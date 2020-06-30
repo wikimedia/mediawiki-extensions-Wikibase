@@ -43,6 +43,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
 		},
+		"SidebarHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::newFromGlobalState"
+		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
@@ -64,12 +68,15 @@
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
+		"OutputPageParserOutput": "SidebarHookHandler",
 		"ParserCacheSaveComplete": "DataUpdateHookHandler",
 		"ParserClearState": "ParserHookHandler",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
+		"SidebarBeforeOutput": "SidebarHookHandler",
+		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
 		"TitleMoveComplete": "UpdateRepoHookHandler"
 	},
