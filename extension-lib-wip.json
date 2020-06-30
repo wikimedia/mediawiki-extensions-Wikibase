@@ -11,8 +11,8 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"Hooks": {
-		"UnitTestsList": "\\Wikibase\\Lib\\LibHooks::registerPhpUnitTests",
-		"ResourceLoaderTestModules": "\\Wikibase\\Lib\\LibHooks::registerQUnitTests",
+		"UnitTestsList": "\\Wikibase\\Lib\\LibHooks::onUnitTestsList",
+		"ResourceLoaderTestModules": "\\Wikibase\\Lib\\LibHooks::onResourceLoaderTestModules",
 		"ResourceLoaderRegisterModules": "\\Wikibase\\Lib\\LibHooks::onResourceLoaderRegisterModules",
 		"ExtensionTypes": "\\Wikibase\\Lib\\LibHooks::onExtensionTypes"
 	},

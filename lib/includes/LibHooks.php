@@ -19,7 +19,7 @@ final class LibHooks {
 	 * Callback called after extension registration,
 	 * for any work that cannot be done directly in extension.json.
 	 */
-	public static function onRegistration() {
+	public static function onRegistration(): void {
 		global $wgResourceModules;
 
 		$wgResourceModules = array_merge(
@@ -30,44 +30,37 @@ final class LibHooks {
 
 	/**
 	 * Hook to add PHPUnit test cases.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
-	 *
 	 * @param string[] &$paths
-	 *
-	 * @return bool
+	 * @return void
 	 */
-	public static function registerPhpUnitTests( array &$paths ) {
+	public static function onUnitTestsList( array &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
-
-		return true;
 	}
 
 	/**
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
-	 *
 	 * @param array &$testModules
-	 * @param ResourceLoader $resourceLoader
-	 *
-	 * @return boolean
+	 * @param ResourceLoader $rl
+	 * @return void
 	 */
-	public static function registerQUnitTests( array &$testModules, ResourceLoader $resourceLoader ) {
+	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			require __DIR__ . '/../tests/qunit/resources.php'
 		);
-
-		return true;
 	}
 
 	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
-	 * @param ResourceLoader $resourceLoader
-	 *
-	 * @return bool
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderRegisterModules
+	 * @param ResourceLoader $rl
+	 * @return void
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ) {
+	public static function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
 		$moduleTemplate = [
 			'localBasePath' => __DIR__ . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
@@ -91,24 +84,19 @@ final class LibHooks {
 			$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
-		$resourceLoader->register( $modules );
-
-		return true;
+		$rl->register( $modules );
 	}
 
 	/**
 	 * Called when generating the extensions credits, use this to change the tables headers.
+	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ExtensionTypes
-	 *
 	 * @param array &$extensionTypes
-	 *
-	 * @return boolean
+	 * @return void
 	 */
-	public static function onExtensionTypes( array &$extensionTypes ) {
+	public static function onExtensionTypes( array &$extensionTypes ): void {
 		// @codeCoverageIgnoreStart
 		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
-
-		return true;
 		// @codeCoverageIgnoreEnd
 	}
 
