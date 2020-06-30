@@ -387,4 +387,34 @@
 
 		hookStub.restore();
 	} );
+
+	QUnit.test( 'Error message defaults to parsing by function', function ( assert ) {
+		var $entitySelector = newTestEntitySelector();
+
+		assert.strictEqual(
+			typeof $entitySelector.data( 'entityselector' ).options.messages.error,
+			'function',
+			'Default error message is parsed from exception'
+		);
+	} );
+
+	QUnit.test( 'Error parser gets exception message from exception object', function ( assert ) {
+		var $entitySelector = newTestEntitySelector();
+
+		$entitySelector.data( 'entityselector' )._error = {
+			name: 'Error',
+			detailedMessage: 'message',
+			message: '',
+			code: 0,
+			action: 'abc'
+		};
+
+		var errorMessage = $entitySelector.data( 'entityselector' ).options.messages.error();
+
+		assert.strictEqual(
+			errorMessage,
+			'message',
+			'Default error message is fetched from actual error'
+		);
+	} );
 }() );
