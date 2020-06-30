@@ -45,17 +45,11 @@ require_once __DIR__ . '/../lib/WikibaseLib.php';
 
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
-		$wgMessagesDirs,
-		$wgWBClientSettings;
+		$wgMessagesDirs;
 
 	// i18n messages, kept for backward compatibility (T256245)
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
-
-	$wgWBClientSettings = array_merge(
-		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
-		require __DIR__ . '/config/WikibaseClient.default.php'
-	);
 } );

@@ -95,11 +95,18 @@ class WikibaseSettings {
 	 * @return SettingsArray
 	 */
 	public static function getClientSettings() {
+		global $wgWBClientSettings;
+
 		if ( !self::isClientEnabled() ) {
 			throw new MWException( 'Cannot access client settings: Wikibase Client component is not enabled!' );
 		}
 
-		$settings = self::getSettings( 'wgWBClientSettings' );
+		$clientSettings = array_merge(
+			require __DIR__ . '/../config/WikibaseLib.default.php',
+			require __DIR__ . '/../../client/config/WikibaseClient.default.php'
+		);
+
+		$settings = self::mergeSettings( $clientSettings, $wgWBClientSettings ?? [] );
 
 		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
 
@@ -130,6 +137,42 @@ class WikibaseSettings {
 		$settings = $GLOBALS[$var];
 
 		return new SettingsArray( $settings );
+	}
+
+	/**
+	 * Merge two arrays of default and custom settings,
+	 * so that it looks like the custom settings were added on top of the default settings.
+	 *
+	 * Originally, Wikibase extensions were loaded and configured somewhat like this:
+	 *
+	 *     require_once "$IP/extensions/Wikibase/client/WikibaseClient.php";
+	 *     $wgWBClientSettings['repoUrl'] = 'https://pool.my.wiki';
+	 *
+	 * Here, $wgWBClientSettings would be initialized by WikibaseClient.php.
+	 * However, with the move to extension registration and wfLoadExtension(),
+	 * this is no longer possible, and $wgWBClientSettings will start out empty.
+	 * This method returns an array that looks like the custom settings
+	 * were added on top of existing default settings as above,
+	 * even though the default settings were in fact only loaded later.
+	 *
+	 * @param array $defaultSettings The default settings loaded from some other config file.
+	 * @param array $customSettings The custom settings from a configuration global.
+	 * @return SettingsArray The merged settings.
+	 */
+	private static function mergeSettings(
+		array $defaultSettings,
+		array $customSettings
+	): SettingsArray {
+		foreach ( $customSettings as $key => $value ) {
+			$defaultValue = $defaultSettings[$key] ?? [];
+			if ( is_array( $value ) && is_array( $defaultValue ) ) {
+				$defaultSettings[$key] = array_merge( $defaultValue, $value );
+			} else {
+				$defaultSettings[$key] = $value;
+			}
+		}
+
+		return new SettingsArray( $defaultSettings );
 	}
 
 	/**
