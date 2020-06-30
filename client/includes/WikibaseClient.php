@@ -519,6 +519,13 @@ final class WikibaseClient {
 		return $this->getStore()->getEntityLookup();
 	}
 
+	private static function getDefaultDataTypes() {
+		$baseDataTypes = require __DIR__ . '/../../lib/WikibaseLib.datatypes.php';
+		$clientDataTypes = require __DIR__ . '/../WikibaseClient.datatypes.php';
+
+		return array_merge_recursive( $baseDataTypes, $clientDataTypes );
+	}
+
 	/**
 	 * @return array[]
 	 */
@@ -736,29 +743,23 @@ final class WikibaseClient {
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBClientDataTypes;
-
-		if ( !is_array( $wgWBClientDataTypes ) ) {
-			throw new MWException( '$wgWBClientDataTypes must be array. '
-				. 'Maybe you forgot to require WikibaseClient.php in your LocalSettings.php?' );
-		}
-
-		$dataTypeDefinitions = $wgWBClientDataTypes;
-		Hooks::run( 'WikibaseClientDataTypes', [ &$dataTypeDefinitions ] );
+		$dataTypeDefinitionsArray = self::getDefaultDataTypes();
+		Hooks::run( 'WikibaseClientDataTypes', [ &$dataTypeDefinitionsArray ] );
 
 		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseClientEntityTypes', [ &$entityTypeDefinitionsArray ] );
 
 		$settings = WikibaseSettings::getClientSettings();
 
+		$dataTypeDefinitions = new DataTypeDefinitions(
+			$dataTypeDefinitionsArray,
+			$settings->getSetting( 'disabledDataTypes' )
+		);
 		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
-			new DataTypeDefinitions(
-				$dataTypeDefinitions,
-				$settings->getSetting( 'disabledDataTypes' )
-			),
+			$dataTypeDefinitions,
 			$entityTypeDefinitions,
 			MediaWikiServices::getInstance()->getSiteLookup(),
 			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )

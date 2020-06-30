@@ -138,7 +138,7 @@ class ParseValue extends ApiBase {
 		// Parsers are registered by datatype.
 		// Note: parser used to be addressed by a name independent of datatype, using the 'parser'
 		// parameter. For backwards compatibility, parsers are also registered under their old names
-		// in $wgValueParsers, and thus in the ValueParserFactory.
+		// in the ValueParserFactory (WikibaseRepo::getValueParserFactory).
 		$name = $params['datatype'] ?: $params['parser'];
 
 		if ( empty( $name ) && isset( $params['property'] ) ) {

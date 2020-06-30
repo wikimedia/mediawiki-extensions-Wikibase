@@ -1,7 +1,7 @@
 <?php
 /**
  * Definition of data types for use with Wikibase.
- * The array returned by the code below is supposed to be merged into $wgWBClientDataTypes.
+ * The array returned by the code below is supposed to be merged into the Client data types.
  * It defines the formatters used by the client to display data values of different types.
  *
  * @note: Keep in sync with lib/WikibaseLib.datatypes.php
