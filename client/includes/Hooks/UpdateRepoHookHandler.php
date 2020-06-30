@@ -5,9 +5,12 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use JobQueueGroup;
 use LogEntry;
-use MediaWiki\Hook\TitleMoveCompleteHook;
+use MediaWiki\Hook\PageMoveCompleteHook;
+use MediaWiki\Linker\LinkTarget;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use MediaWiki\Revision\RevisionRecord;
+use MediaWiki\User\UserIdentity;
 use MWException;
 use Psr\Log\LoggerInterface;
 use Title;
@@ -27,7 +30,7 @@ use WikiPage;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandler implements TitleMoveCompleteHook, ArticleDeleteCompleteHook {
+class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteCompleteHook {
 
 	/**
 	 * @var NamespaceChecker
@@ -203,34 +206,38 @@ class UpdateRepoHookHandler implements TitleMoveCompleteHook, ArticleDeleteCompl
 	 * After a page has been moved also update the item on the repo.
 	 * This only works if there's a user account with the same name on the repo.
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleMoveComplete
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/PageMoveComplete
 	 *
-	 * @param Title $old
-	 * @param Title $nt
-	 * @param User $user
+	 * @param LinkTarget $oldLinkTarget
+	 * @param LinkTarget $newLinkTarget
+	 * @param UserIdentity $userIdentity
 	 * @param int $pageId database ID of the page that's been moved
 	 * @param int $redirid ID of the created redirect
 	 * @param string $reason
-	 * @param \Revision $revision Revision created by the move
+	 * @param RevisionRecord $revisionRecord revision created by the move
 	 *
 	 * @return bool
 	 */
-	public function onTitleMoveComplete(
-		$old,
-		$nt,
-		$user,
+	public function onPageMoveComplete(
+		$oldLinkTarget,
+		$newLinkTarget,
+		$userIdentity,
 		$pageId,
 		$redirid,
 		$reason,
-		$revision
+		$revisionRecord
 	) {
-		if ( !$this->isWikibaseEnabled( $nt->getNamespace() ) ) {
+		if ( !$this->isWikibaseEnabled( $newLinkTarget->getNamespace() ) ) {
 			return true;
 		}
 
 		if ( $this->propagateChangesToRepo !== true ) {
 			return true;
 		}
+
+		$old = Title::newFromLinkTarget( $oldLinkTarget );
+		$nt = Title::newFromLinkTarget( $newLinkTarget );
+		$user = User::newFromIdentity( $userIdentity );
 
 		$updateRepo = new UpdateRepoOnMove(
 			$this->repoDatabase,
