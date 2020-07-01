@@ -26,7 +26,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class BulkSubscriptionUpdaterTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes_subscription table." );
 		}

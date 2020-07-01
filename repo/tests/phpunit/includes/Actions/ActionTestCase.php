@@ -30,7 +30,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 	/** @var User */
 	protected $user;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$testUser = new \TestUser( 'ActionTestUser' );
@@ -48,7 +48,7 @@ class ActionTestCase extends \MediaWikiTestCase {
 		ApiQueryInfo::resetTokenCache();
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		ApiQueryInfo::resetTokenCache();
 
 		parent::tearDown();

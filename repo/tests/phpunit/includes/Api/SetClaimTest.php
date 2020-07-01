@@ -44,7 +44,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	private static $propertyIds;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !self::$propertyIds ) {

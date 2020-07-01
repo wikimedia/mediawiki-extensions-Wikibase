@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialAvailableBadgesTest extends SpecialPageTestBase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setContentLang( 'qqx' );

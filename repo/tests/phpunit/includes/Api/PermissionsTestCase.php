@@ -17,7 +17,7 @@ class PermissionsTestCase extends WikibaseApiTestCase {
 
 	private static $hasSetup;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !isset( self::$hasSetup ) ) {

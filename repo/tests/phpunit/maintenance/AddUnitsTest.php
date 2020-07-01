@@ -37,7 +37,7 @@ class AddUnitsTest extends MediaWikiLangTestCase {
 	 */
 	private $helper;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->script = new MockAddUnits();
 		$this->client =

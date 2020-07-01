@@ -23,7 +23,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
  */
 class SpecialPagesWithBadgesTest extends SpecialPageTestBase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 	}

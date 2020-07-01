@@ -32,7 +32,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class TermSqlIndexTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {

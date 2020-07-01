@@ -47,7 +47,7 @@ class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
 	 */
 	private $redirectId;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !$this->data ) {

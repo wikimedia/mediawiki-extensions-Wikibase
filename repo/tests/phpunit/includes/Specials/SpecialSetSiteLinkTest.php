@@ -92,7 +92,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		);
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgGroupPermissions', [ '*' => [ 'read' => true, 'edit' => true ] ] );
@@ -112,7 +112,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
 

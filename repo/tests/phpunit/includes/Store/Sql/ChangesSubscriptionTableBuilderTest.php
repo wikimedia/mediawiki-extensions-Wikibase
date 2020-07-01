@@ -24,7 +24,7 @@ class ChangesSubscriptionTableBuilderTest extends \MediaWikiTestCase {
 
 	const TABLE_NAME = 'wb_changes_subscription';
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->tablesUsed[] = self::TABLE_NAME;
 		$this->tablesUsed[] = 'wb_items_per_site';
 

@@ -27,7 +27,7 @@ class ApiEntityNamespaceInfoLookupTest extends TestCase {
 
 	private $data = [];
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// Load data files once at the start of tests rather than for each test case.

@@ -50,7 +50,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 */
 	private $deserializerFactory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

@@ -72,7 +72,7 @@ final class ViewHooks {
 	public static function onResourceLoaderTestModules(
 		array &$testModules,
 		ResourceLoader $resourceLoader
-	) : void {
+	): void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			require __DIR__ . '/../lib/resources.test.php',

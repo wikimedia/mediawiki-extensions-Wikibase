@@ -23,7 +23,7 @@ use Wikibase\Client\MoreLikeWikibase;
  */
 class MoreLikeWikibaseTest extends MediaWikiTestCase {
 
-	public static function setUpBeforeClass() : void {
+	public static function setUpBeforeClass(): void {
 		if (
 			!ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' )
 			|| !class_exists( BoolQuery::class )

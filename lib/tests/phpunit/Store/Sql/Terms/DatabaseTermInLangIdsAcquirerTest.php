@@ -30,7 +30,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	 */
 	private $lbFactory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->db = $this->setUpNewDb();
 		$loadBalancer = new FakeLoadBalancer( [
 			'dbr' => $this->db

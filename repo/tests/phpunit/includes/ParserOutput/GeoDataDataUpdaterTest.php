@@ -37,7 +37,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		return !ExtensionRegistry::getInstance()->isLoaded( 'GeoData' );
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( $this->willSkipTests() ) {
 			$this->markTestSkipped( 'GeoData extension is required.' );
 		}

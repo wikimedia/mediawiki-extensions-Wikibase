@@ -25,7 +25,7 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class PropertyInfoTableTest extends MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {

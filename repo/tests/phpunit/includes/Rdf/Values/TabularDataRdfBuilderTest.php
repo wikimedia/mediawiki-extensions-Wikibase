@@ -28,7 +28,7 @@ class TabularDataRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $helper;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->helper = new NTriplesRdfTestHelper();

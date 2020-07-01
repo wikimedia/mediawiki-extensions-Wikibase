@@ -32,7 +32,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	 */
 	private $cache;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		/** @var ObjectProphecy $cache */

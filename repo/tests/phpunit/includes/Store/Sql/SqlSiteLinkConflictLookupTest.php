@@ -23,7 +23,7 @@ use Wikibase\Repo\Store\Sql\SqlSiteLinkConflictLookup;
  */
 class SqlSiteLinkConflictLookupTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !WikibaseSettings::isRepoEnabled() ) {

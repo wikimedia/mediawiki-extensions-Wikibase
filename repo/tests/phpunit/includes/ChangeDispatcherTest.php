@@ -150,7 +150,7 @@ class ChangeDispatcherTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->subscriptions['enwiki'] = [
 			new PropertyId( 'P11' ),
 			new ItemId( 'Q22' ),

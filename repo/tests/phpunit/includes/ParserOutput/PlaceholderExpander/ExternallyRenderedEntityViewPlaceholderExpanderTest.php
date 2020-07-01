@@ -53,7 +53,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 
 	private $enableUserSpecificSSR;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->outputPage = $this->createMock( OutputPage::class );

@@ -16,7 +16,7 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class DatabaseInnerTermStoreCleanerTest extends MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}

@@ -23,7 +23,7 @@ class MetaDataBridgeConfigTest extends MediaWikiIntegrationTestCase {
 
 	private $titleCallbackCalls = [];
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );

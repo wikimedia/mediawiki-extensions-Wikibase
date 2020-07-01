@@ -59,7 +59,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $isExternallyRendered;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->itemId = new ItemId( 'Q1' );
 		$this->uiLanguageCode = 'en';

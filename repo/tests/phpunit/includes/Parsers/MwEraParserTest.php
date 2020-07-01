@@ -35,7 +35,7 @@ class MwEraParserTest extends StringValueParserTest {
 		return new MwEraParser( $options );
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$services = MediaWikiServices::getInstance();
@@ -50,7 +50,7 @@ class MwEraParserTest extends StringValueParserTest {
 		);
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
 		MediaWikiServices::getInstance()->redefineService(
 			'LanguageFactory',

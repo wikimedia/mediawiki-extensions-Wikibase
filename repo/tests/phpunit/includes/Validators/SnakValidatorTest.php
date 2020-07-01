@@ -49,7 +49,7 @@ class SnakValidatorTest extends \PHPUnit\Framework\TestCase {
 	 */
 	private $validatorFactory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$numericValidator = new TestValidator( '/^\d+$/' );

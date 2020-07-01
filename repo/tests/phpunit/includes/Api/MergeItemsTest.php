@@ -68,7 +68,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 */
 	private $apiModuleTestHelper = null;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->entityModificationTestHelper = new EntityModificationTestHelper();

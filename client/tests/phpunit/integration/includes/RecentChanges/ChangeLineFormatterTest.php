@@ -38,7 +38,7 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 
 	protected $repoLinker;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// these are required because Linker is used in ChangeLineFormatter

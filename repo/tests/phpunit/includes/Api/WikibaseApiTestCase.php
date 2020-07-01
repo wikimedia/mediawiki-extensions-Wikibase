@@ -27,7 +27,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	/** @var User */
 	protected $user;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 
 		parent::setUp();
 

@@ -17,7 +17,7 @@ class CommaSeparatedListTest extends \PHPUnit\Framework\TestCase {
 
 	private $handler;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->handler = new CommaSeparatedList();
 	}

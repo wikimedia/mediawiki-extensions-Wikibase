@@ -249,7 +249,7 @@ class PropertyInfoTable extends DBAccessBase implements PropertyInfoLookup, Prop
 		return $c > 0;
 	}
 
-	private function assertCanWritePropertyInfo() : void {
+	private function assertCanWritePropertyInfo(): void {
 		if ( !$this->allowWrites ) {
 			throw new InvalidArgumentException(
 				'This implementation cannot be used to write data to non-local database'

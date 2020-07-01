@@ -29,7 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class PropertyInfoTableBuilderTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wb_property_info';
 	}

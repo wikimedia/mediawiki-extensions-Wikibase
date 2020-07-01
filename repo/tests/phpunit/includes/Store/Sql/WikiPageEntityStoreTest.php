@@ -61,7 +61,7 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 	const FAKE_NS_ID = 654;
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		// Make sure we never leave the testing WikibaseServices in place
