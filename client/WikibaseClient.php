@@ -83,7 +83,6 @@ call_user_func( function() {
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyLineData';
 	$wgHooks['EnhancedChangesListModifyBlockLineData'][] =
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData';
-	$wgHooks['ContentAlterParserOutput'][] = '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = [
