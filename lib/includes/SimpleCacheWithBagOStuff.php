@@ -1,4 +1,5 @@
 <?php
+declare( strict_types = 1 );
 
 namespace Wikibase\Lib;
 
@@ -18,6 +19,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	use LoggerAwareTrait;
 
 	private const KEY_PREFIX_REGEX = '/^[a-zA-Z0-9_\-.\:]+\z/';
+	private const INVALID_KEY_REGEX = '/[\{\}\(\)\/\\\\@:]/';
 
 	/**
 	 * @var BagOStuff
@@ -66,6 +68,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function get( $key, $default = null ) {
+		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 
 		$result = $this->inner->get( $key );
@@ -91,6 +94,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function set( $key, $value, $ttl = null ) {
+		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 		$ttl = $this->normalizeTtl( $ttl );
 
@@ -110,6 +114,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function delete( $key ) {
+		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 
 		return $this->inner->delete( $key );
@@ -139,6 +144,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function getMultiple( $keys, $default = null ) {
 		$keys = $this->toArray( $keys );
+		$this->assertKeysAreValid( $keys );
 		$prefixedKeys = array_map(
 			function ( $k ) {
 				return $this->inner->makeKey( $this->prefix, $k );
@@ -180,6 +186,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function setMultiple( $values, $ttl = null ) {
 		$values = $this->toAssociativeArray( $values );
+		$this->assertKeysAreValidAllowIntegers( array_keys( $values ) );
 
 		$ttl = $this->normalizeTtl( $ttl );
 
@@ -204,6 +211,7 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 */
 	public function deleteMultiple( $keys ) {
 		$keys = $this->toArray( $keys );
+		$this->assertKeysAreValid( $keys );
 		$result = true;
 		foreach ( $keys as $key ) {
 			$result &= $this->delete( $key );
@@ -227,9 +235,75 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	 *   MUST be thrown if the $key string is not a legal value.
 	 */
 	public function has( $key ) {
+		$this->assertKeyIsValid( $key );
 		$key = $this->inner->makeKey( $this->prefix, $key );
 		$result = $this->inner->get( $key );
 		return $result !== false;
+	}
+
+	/*
+	 * Due to the fact that in PHP array indices are automatically casted
+	 * to integers if possible, e.g. `['0' => ''] === [0 => '']`, we have to
+	 * allow integers to be present as keys in $values in `setMultiple()`
+	 */
+	private function assertKeysAreValidAllowIntegers( $keys ): void {
+		$this->assertKeysAreValid(
+			array_map(
+				function ( $key ) {
+					if ( is_int( $key ) ) {
+						return (string)$key;
+					}
+					return $key;
+				},
+				$keys
+			)
+		);
+	}
+
+	private function assertKeysAreValid( $keys ): void {
+		foreach ( $keys as $key ) {
+			$this->assertKeyIsValid( $key );
+		}
+	}
+
+	/**
+	 * @throws CacheInvalidArgumentException
+	 */
+	private function assertKeyIsValid( $key ): void {
+		if ( !is_string( $key ) ) {
+			$type = gettype( $key );
+			$context = [
+				'type' => $type,
+				'key' => $key,
+				'prefix' => $this->prefix,
+				'class' => __CLASS__,
+			];
+			$this->logger->error( '{class}: Cache key should be string or integer, `{type}` is given', $context );
+//			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
+			return;
+		}
+
+		if ( $key === '' ) {
+			$context = [
+				'key' => $key,
+				'prefix' => $this->prefix,
+				'class' => __CLASS__,
+			];
+			$this->logger->error( '{class}: Cache key cannot be an empty string', $context );
+//			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
+			return;
+		}
+
+		if ( preg_match( self::INVALID_KEY_REGEX, $key ) ) {
+			$context = [
+				'key' => $key,
+				'prefix' => $this->prefix,
+				'class' => __CLASS__,
+			];
+			$this->logger->error( '{class}: Cache key contains characters that are not allowed: `{key}`', $context );
+//			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
+			return;
+		}
 	}
 
 	/**
@@ -295,6 +369,10 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		if ( $var instanceof Traversable ) {
 			$result = [];
 			foreach ( $var as $key => $value ) {
+				if ( !( is_string( $key ) || is_int( $key ) ) ) {
+					$type = gettype( $key );
+					throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
+				}
 				$result[ $key ] = $value;
 			}
 		} else {
