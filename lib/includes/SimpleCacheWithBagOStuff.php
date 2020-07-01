@@ -272,37 +272,15 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 	private function assertKeyIsValid( $key ): void {
 		if ( !is_string( $key ) ) {
 			$type = gettype( $key );
-			$context = [
-				'type' => $type,
-				'key' => $key,
-				'prefix' => $this->prefix,
-				'class' => __CLASS__,
-			];
-			$this->logger->error( '{class}: Cache key should be string or integer, `{type}` is given', $context );
-//			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
-			return;
+			throw new CacheInvalidArgumentException( "Cache key should be string or integer, `{$type}` is given" );
 		}
 
 		if ( $key === '' ) {
-			$context = [
-				'key' => $key,
-				'prefix' => $this->prefix,
-				'class' => __CLASS__,
-			];
-			$this->logger->error( '{class}: Cache key cannot be an empty string', $context );
-//			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
-			return;
+			throw new CacheInvalidArgumentException( "Cache key cannot be an empty string" );
 		}
 
 		if ( preg_match( self::INVALID_KEY_REGEX, $key ) ) {
-			$context = [
-				'key' => $key,
-				'prefix' => $this->prefix,
-				'class' => __CLASS__,
-			];
-			$this->logger->error( '{class}: Cache key contains characters that are not allowed: `{key}`', $context );
-//			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
-			return;
+			throw new CacheInvalidArgumentException( "Cache key contains characters that are not allowed: `{$key}`" );
 		}
 	}
 
