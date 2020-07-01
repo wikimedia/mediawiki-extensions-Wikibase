@@ -79,7 +79,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
 
-	$wgHooks['UnitTestsList'][] = '\Wikibase\Client\ClientHooks::registerUnitTests';
 	$wgHooks['OldChangesListRecentChangesLine'][] =
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onOldChangesListRecentChangesLine';
 	$wgHooks['EnhancedChangesListModifyLineData'][] =
@@ -87,23 +86,6 @@ call_user_func( function() {
 	$wgHooks['EnhancedChangesListModifyBlockLineData'][] =
 		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData';
 	$wgHooks['ContentAlterParserOutput'][] = '\Wikibase\Client\Hooks\ParserOutputUpdateHookHandlers::onContentAlterParserOutput';
-
-	$wgHooks['ParserFirstCallInit'][] = '\Wikibase\Client\ClientHooks::onParserFirstCallInit';
-	$wgHooks['GetPreferences'][] = '\Wikibase\Client\ClientHooks::onGetPreferences';
-	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplay';
-	$wgHooks['BeforePageDisplay'][] = '\Wikibase\Client\ClientHooks::onBeforePageDisplayAddJsConfig';
-	$wgHooks['ScribuntoExternalLibraries'][] = '\Wikibase\Client\ClientHooks::onScribuntoExternalLibraries';
-	$wgHooks['EditPage::showStandardInputs:options'][] = '\Wikibase\Client\ClientHooks::onEditAction';
-	$wgHooks['SkinAfterPortlet'][] = '\Wikibase\Client\ClientHooks::onSkinAfterPortlet';
-	$wgHooks['ArticleDeleteAfterSuccess'][] = '\Wikibase\Client\ClientHooks::onArticleDeleteAfterSuccess';
-	$wgHooks['FormatAutocomments'][] = '\Wikibase\Client\ClientHooks::onFormat';
-	$wgHooks['AbortEmailNotification'][] = '\Wikibase\Client\ClientHooks::onAbortEmailNotification';
-	$wgHooks['SearchDataForIndex'][] = '\Wikibase\Client\ClientHooks::onSearchDataForIndex';
-	$wgHooks['SearchIndexFields'][] = '\Wikibase\Client\ClientHooks::onSearchIndexFields';
-
-	$wgHooks['CirrusSearchAddQueryFeatures'][] = '\Wikibase\Client\ClientHooks::onCirrusSearchAddQueryFeatures';
-
-	$wgHooks['SkinAfterBottomScripts'][] = '\Wikibase\Client\ClientHooks::onSkinAfterBottomScripts';
 
 	// api modules
 	$wgAPIMetaModules['wikibase'] = [
@@ -181,8 +163,6 @@ call_user_func( function() {
 			);
 		}
 	];
-
-	$wgHooks['wgQueryPages'][] = '\Wikibase\Client\ClientHooks::onwgQueryPages';
 
 	$wgWBClientSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
