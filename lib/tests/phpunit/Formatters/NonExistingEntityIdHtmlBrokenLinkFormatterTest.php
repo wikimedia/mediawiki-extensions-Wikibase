@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Formatters;
 
-use PHPUnit\Framework\TestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -18,18 +18,23 @@ use Wikibase\Lib\Store\EntityUrlLookup;
  *
  * @license GPL-2.0-or-later
  */
-class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends TestCase {
+class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends MediaWikiIntegrationTestCase {
+
+	protected function setUp(): void {
+		parent::setUp();
+		$this->setUserLang( 'qqx' );
+	}
 
 	public function provideTestFormatEntityIdBrokenLink() {
 		yield [
 			new ItemId( 'Q1' ),
-			'<a title="someTitle (page does not exist)" href="http://someurl.com" class="new">'
-			. 'Q1 <span class="wb-entity-undefinedinfo">(⧼somePrefix-item⧽)</span></a>'
+			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">'
+			. 'Q1(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span></a>'
 		];
 		yield [
 			new PropertyId( 'P99' ),
-			'<a title="someTitle (page does not exist)" href="http://someurl.com" class="new">'
-			. 'P99 <span class="wb-entity-undefinedinfo">(⧼somePrefix-property⧽)</span></a>'
+			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">'
+			. 'P99(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span></a>'
 		];
 	}
 
