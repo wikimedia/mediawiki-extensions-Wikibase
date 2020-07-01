@@ -167,6 +167,8 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 			return [];
 		}
 
+		$forLogStartRecords = $records;
+
 		if ( is_callable( $recordsToInsertDecoratorCallback ) ) {
 			$records = $recordsToInsertDecoratorCallback( $records );
 		}
@@ -208,9 +210,17 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 				$records = $this->filterNonExistingRecords( $records, $insertedRecords );
 
 				if ( count( $records ) === $recordsCount ) {
+					wfDebugLog(
+						'Wikibase',
+						__METHOD__ . ': Fail-safe: ' .
+						' $recordsCount: ' . json_encode( $recordsCount ) .
+						' $forLogStartRecords: ' . json_encode( $forLogStartRecords ) .
+						' $insertedRecords: ' . json_encode( $insertedRecords ) .
+						' $records: ' . json_encode( $records )
+					);
 					// Logic error, this should never happen.
 					$exception = new Exception(
-						'Fail-safe exception. Avoiding infinite loop due to possibily undetectable'
+						'Fail-safe exception. Avoiding infinite loop due to possibly undetectable'
 						. " existing records in master.\n"
 						. ' It may be due to encoding incompatibility'
 						. ' between database values and values passed in $neededRecords parameter.'
