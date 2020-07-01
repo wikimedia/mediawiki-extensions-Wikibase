@@ -57,9 +57,7 @@ call_user_func( function() {
 		$wgAPIPropModules,
 		$wgExtensionMessagesFiles,
 		$wgHooks,
-		$wgJobClasses,
 		$wgMessagesDirs,
-		$wgResourceModules,
 		$wgWBClientDataTypes,
 		$wgWBClientSettings;
 
