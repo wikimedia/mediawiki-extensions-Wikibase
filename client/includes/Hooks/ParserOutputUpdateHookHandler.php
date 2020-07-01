@@ -7,7 +7,6 @@ namespace Wikibase\Client\Hooks;
 use Content;
 use MediaWiki\Content\Hook\ContentAlterParserOutputHook;
 use ParserOutput;
-use StubUserLang;
 use Title;
 use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
@@ -53,9 +52,6 @@ class ParserOutputUpdateHookHandler implements ContentAlterParserOutputHook {
 	}
 
 	public static function newFromGlobalState(): self {
-		global $wgLang;
-
-		StubUserLang::unstub( $wgLang );
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
