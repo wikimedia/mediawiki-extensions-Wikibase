@@ -28,6 +28,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class SpecialModifyTerm extends SpecialModifyEntity {
 
+	use ParameterizedDescriptionTrait;
+
 	/**
 	 * The language the value is set in.
 	 *
