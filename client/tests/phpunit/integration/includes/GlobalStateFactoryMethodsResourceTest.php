@@ -4,32 +4,17 @@ namespace Wikibase\Client\Tests\Integration;
 
 use ApiMain;
 use ApiQuery;
-use ChangesList;
 use IContextSource;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
-use Wikibase\Client\Api\ApiClientInfo;
-use Wikibase\Client\Api\ApiListEntityUsage;
-use Wikibase\Client\Api\ApiPropsEntityUsage;
-use Wikibase\Client\Api\Description;
-use Wikibase\Client\Api\PageTerms;
-use Wikibase\Client\Hooks\ChangesListLinesHandler;
-use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
-use Wikibase\Client\Hooks\DataUpdateHookHandler;
+use Traversable;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
-use Wikibase\Client\Hooks\InfoActionHookHandler;
-use Wikibase\Client\Hooks\MagicWordHookHandler;
-use Wikibase\Client\Hooks\MovePageNotice;
 use Wikibase\Client\Hooks\NoLangLinkHandler;
-use Wikibase\Client\Hooks\ParserHookHandler;
-use Wikibase\Client\Hooks\ParserOutputUpdateHookHandler;
 use Wikibase\Client\Hooks\ShortDescHandler;
-use Wikibase\Client\Hooks\SidebarHookHandler;
-use Wikibase\Client\Hooks\UpdateRepoHookHandler;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
@@ -55,40 +40,66 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->disallowHttpAccess();
 	}
 
-	public function testApiClientInfo(): void {
-		ApiClientInfo::newFromGlobalState( $this->mockApiQuery(), 'query' );
+	private function getExtensionJson(): array {
+		static $extensionJson = null;
+		if ( $extensionJson === null ) {
+			$extensionJson = json_decode(
+				file_get_contents( __DIR__ . '/../../../../../extension-client-wip.json' ),
+				true
+			);
+		}
+		return $extensionJson;
+	}
+
+	/** @dataProvider provideHookHandlerNames */
+	public function testHookHandler( string $hookHandlerName ): void {
+		$specification = $this->getExtensionJson()['HookHandlers'][$hookHandlerName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+		] );
 		$this->assertTrue( true );
 	}
 
-	public function testApiListEntityUsage(): void {
-		ApiListEntityUsage::newFromGlobalState( $this->mockApiQuery(), 'query' );
+	public function provideHookHandlerNames(): Traversable {
+		foreach ( $this->getExtensionJson()['HookHandlers'] as $hookHandlerName => $specification ) {
+			yield [ $hookHandlerName ];
+		}
+	}
+
+	/** @dataProvider provideApiModuleListsAndNames */
+	public function testApiModule( string $moduleList, string $moduleName ): void {
+		$specification = $this->getExtensionJson()[$moduleList][$moduleName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+			'extraArgs' => [ $this->mockApiQuery(), 'query' ],
+		] );
 		$this->assertTrue( true );
 	}
 
-	public function testApiPropsEntityUsage(): void {
-		ApiPropsEntityUsage::newFromGlobalState( $this->mockApiQuery(), 'query' );
+	public function provideApiModuleListsAndNames(): Traversable {
+		foreach ( [ 'APIListModules', 'APIMetaModules', 'APIPropModules' ] as $moduleList ) {
+			foreach ( $this->getExtensionJson()[$moduleList] as $moduleName => $specification ) {
+				yield [ $moduleList, $moduleName ];
+			}
+		}
+	}
+
+	/** @dataProvider provideSpecialPageNames */
+	public function testSpecialPage( string $specialPageName ): void {
+		$specification = $this->getExtensionJson()['SpecialPages'][$specialPageName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+		] );
 		$this->assertTrue( true );
 	}
 
-	public function testChangesListLinesHandler(): void {
-		TestingAccessWrapper::newFromClass( ChangesListLinesHandler::class )
-			->newFromGlobalState( new ChangesList( RequestContext::getMain() ) );
-	}
-
-	public function testChangesListSpecialPageHookHandler(): void {
-		ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices(
-			MediaWikiServices::getInstance()->getDBLoadBalancer()
-		);
-	}
-
-	public function testDataUpdateHookHandler() {
-		DataUpdateHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testDescription(): void {
-		Description::newFromGlobalState( $this->mockApiQuery(), 'query' );
-		$this->assertTrue( true );
+	public function provideSpecialPageNames(): Traversable {
+		foreach ( $this->getExtensionJson()['SpecialPages'] as $specialPageName => $specification ) {
+			yield [ $specialPageName ];
+		}
 	}
 
 	public function testEchoNotificationsHandlers() {
@@ -106,55 +117,14 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function testInfoActionHookHandler() {
-		InfoActionHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testMagicWordHookHandlers(): void {
-		MagicWordHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testMovePageNotice(): void {
-		MovePageNotice::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
 	public function testNoLangLinkHandler(): void {
 		TestingAccessWrapper::newFromClass( NoLangLinkHandler::class )
 			->newFromGlobalState();
 		$this->assertTrue( true );
 	}
 
-	public function testPageTerms(): void {
-		PageTerms::newFromGlobalState( $this->mockApiQuery(), 'query' );
-		$this->assertTrue( true );
-	}
-
-	public function testParserHookHandler(): void {
-		ParserHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testParserOutputUpdateHookHandlers(): void {
-		ParserOutputUpdateHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
 	public function testShortDescHandler(): void {
 		TestingAccessWrapper::newFromClass( ShortDescHandler::class )
-			->newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testSidebarHookHandlers(): void {
-		SidebarHookHandler::newFromGlobalState();
-		$this->assertTrue( true );
-	}
-
-	public function testUpdateRepoHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( UpdateRepoHookHandler::class )
 			->newFromGlobalState();
 		$this->assertTrue( true );
 	}
