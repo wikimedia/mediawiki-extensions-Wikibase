@@ -218,12 +218,6 @@ call_user_func( function() {
 
 	$wgHooks['wgQueryPages'][] = '\Wikibase\Client\ClientHooks::onwgQueryPages';
 
-	// Resource loader modules
-	$wgResourceModules = array_merge(
-		$wgResourceModules,
-		require __DIR__ . '/resources/Resources.php'
-	);
-
 	$wgWBClientSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/WikibaseClient.default.php'

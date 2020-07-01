@@ -193,6 +193,24 @@
 				"mediawiki.storage",
 				"mediawiki.icon"
 			]
+		},
+		"wikibase.client.data-bridge.init": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::initModule"
+		},
+		"wikibase.client.data-bridge.externalModifiers": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::externalModifiersModule"
+		},
+		"mw.config.values.wbDataBridgeConfig": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::configModule"
+		},
+		"wikibase.client.data-bridge.app": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::appModule"
+		},
+		"wikibase.client.data-bridge.app.modern": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::modernAppModule"
+		},
+		"wikibase.client.data-bridge.app.legacy": {
+			"factory": "\\Wikibase\\Client\\DataBridge\\DataBridgeResourceLoaderModules::legacyAppModule"
 		}
 	},
 	"SpecialPages": {
