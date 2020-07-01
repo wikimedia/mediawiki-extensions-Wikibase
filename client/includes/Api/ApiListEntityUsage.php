@@ -10,6 +10,7 @@ use ApiResult;
 use Title;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
+use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -34,6 +35,14 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 		parent::__construct( $query, $moduleName, 'wbeu' );
 
 		$this->repoLinker = $repoLinker;
+	}
+
+	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+		return new self(
+			$apiQuery,
+			$moduleName,
+			WikibaseClient::getDefaultInstance()->newRepoLinker()
+		);
 	}
 
 	/**
