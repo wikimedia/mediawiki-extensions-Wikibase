@@ -41,6 +41,7 @@ use UnexpectedValueException;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use ValueParsers\NullParser;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -399,29 +400,23 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	private static function newInstance() {
-		global $wgWBRepoDataTypes;
-
-		if ( !is_array( $wgWBRepoDataTypes ) ) {
-			throw new MWException( '$wgWBRepoDataTypes must be array. '
-				. 'Maybe you forgot to require Wikibase.php in your LocalSettings.php?' );
-		}
-
-		$dataTypeDefinitions = $wgWBRepoDataTypes;
-		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitions ] );
+		$dataTypeDefinitionsArray = self::getDefaultDataTypes();
+		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitionsArray ] );
 
 		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
 		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitionsArray ] );
 
 		$settings = WikibaseSettings::getRepoSettings();
 
+		$dataTypeDefinitions = new DataTypeDefinitions(
+			$dataTypeDefinitionsArray,
+			$settings->getSetting( 'disabledDataTypes' )
+		);
 		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
-			new DataTypeDefinitions(
-				$dataTypeDefinitions,
-				$settings->getSetting( 'disabledDataTypes' )
-			),
+			$dataTypeDefinitions,
 			$entityTypeDefinitions,
 			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
@@ -669,6 +664,13 @@ class WikibaseRepo {
 		return $this->dataTypeFactory;
 	}
 
+	private static function getDefaultDataTypes() {
+		$baseDataTypes = require __DIR__ . '/../../lib/WikibaseLib.datatypes.php';
+		$repoDataTypes = require __DIR__ . '/../WikibaseRepo.datatypes.php';
+
+		return array_merge_recursive( $baseDataTypes, $repoDataTypes );
+	}
+
 	/**
 	 * @return array[]
 	 */
@@ -683,13 +685,24 @@ class WikibaseRepo {
 	 * @return ValueParserFactory
 	 */
 	public function getValueParserFactory() {
-		global $wgValueParsers;
-
 		if ( $this->valueParserFactory === null ) {
 			$callbacks = $this->dataTypeDefinitions->getParserFactoryCallbacks();
 
-			// For backwards-compatibility, also register parsers under legacy names.
-			$callbacks = array_merge( $wgValueParsers, $callbacks );
+			// For backwards-compatibility, also register parsers under legacy names,
+			// for use with the deprecated 'parser' parameter of the wbparsevalue API module.
+			$prefixedCallbacks = $this->dataTypeDefinitions->getParserFactoryCallbacks(
+				DataTypeDefinitions::PREFIXED_MODE
+			);
+			if ( isset( $prefixedCallbacks['VT:wikibase-entityid'] ) ) {
+				$callbacks['wikibase-entityid'] = $prefixedCallbacks['VT:wikibase-entityid'];
+			}
+			if ( isset( $prefixedCallbacks['VT:globecoordinate'] ) ) {
+				$callbacks['globecoordinate'] = $prefixedCallbacks['VT:globecoordinate'];
+			}
+			// 'null' is not a datatype. Kept for backwards compatibility.
+			$callbacks['null'] = function() {
+				return new NullParser();
+			};
 
 			$this->valueParserFactory = new ValueParserFactory( $callbacks );
 		}

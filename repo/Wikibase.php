@@ -103,13 +103,6 @@ define( 'WB_VERSION', '0.5 alpha' );
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' );
 
-/**
- * Registry of ValueParsers classes or factory callbacks, by datatype.
- * @note: that parsers are also registered under their old names for backwards compatibility,
- * for use with the deprecated 'parser' parameter of the wbparsevalue API module.
- */
-$GLOBALS['wgValueParsers'] = [];
-
 // Sub-extensions needed by WikibaseRepository
 require_once __DIR__ . '/../lib/WikibaseLib.php';
 require_once __DIR__ . '/../view/WikibaseView.php';
@@ -126,20 +119,7 @@ call_user_func( function() {
 		$wgMessagesDirs,
 		$wgResourceModules,
 		$wgSpecialPages,
-		$wgValueParsers,
-		$wgWBRepoDataTypes,
 		$wgWBRepoSettings;
-
-	// Registry and definition of data types
-	$wgWBRepoDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
-
-	$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';
-
-	// merge WikibaseRepo.datatypes.php into $wgWBRepoDataTypes
-	foreach ( $repoDataTypes as $type => $repoDef ) {
-		$baseDef = $wgWBRepoDataTypes[$type] ?? [];
-		$wgWBRepoDataTypes[$type] = array_merge( $baseDef, $repoDef );
-	}
 
 	// constants
 	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
@@ -171,18 +151,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
-
-	/**
-	 * @var callable[] $wgValueParsers Defines parser factory callbacks by parser name (not data type name).
-	 * @deprecated use $wgWBRepoDataTypes instead.
-	 */
-	$wgValueParsers['wikibase-entityid'] = $wgWBRepoDataTypes['VT:wikibase-entityid']['parser-factory-callback'];
-	$wgValueParsers['globecoordinate'] = $wgWBRepoDataTypes['VT:globecoordinate']['parser-factory-callback'];
-
-	// 'null' is not a datatype. Kept for backwards compatibility.
-	$wgValueParsers['null'] = function() {
-		return new ValueParsers\NullParser();
-	};
 
 	// API module registration
 	$wgAPIModules['wbgetentities'] = [

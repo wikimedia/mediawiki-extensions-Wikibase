@@ -17,12 +17,15 @@ Property data types are used to declare which kinds of values can be associated 
 
 ## Data Type Definitions
 
-Property data types are defined in the global <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code> arrays, respectively.
-These arrays are constructed at bootstrap time in [Wikibase.php] resp. [WikibaseClient.php] based on the information returned when including the files [WikibaseLib.datatypes.php], [Wikibase.datatypes.php], and [WikibaseClient.datatypes.php], respectively.
+Property data types are defined in definition arrays maintained by the Repo and Client.
+These arrays are constructed at bootstrap time in [WikibaseRepo] resp. [WikibaseClient]
+based on the information returned when including the files [WikibaseLib.datatypes.php], [WikibaseRepo.datatypes.php], and [WikibaseClient.datatypes.php], respectively.
+The definition arrays can be further modified using the <code>WikibaseRepoDataTypes</code> resp. <code>WikibaseClientDataTypes</code> hooks.
+They are associative arrays that map property data types and value types to a set of constructor callbacks (aka factory methods).
 
-The <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code> are associative arrays that map property data types and value types to a set of constructor callbacks (aka factory methods).
-
-Property data types and value types are used as keys in the <code>$wgWBRepoDataTypes</code> and <code>$wgWBClientDataTypes</code>. They are distinguished by the prefixes “VT:” and “PT:”. For instance, the string value type would use the key “VT:string”, while the url data type would use the key “PT:url”.
+Property data types and value types are used as keys in the definition arrays.
+They are distinguished by the prefixes “VT:” and “PT:”.
+For instance, the string value type would use the key “VT:string”, while the url data type would use the key “PT:url”.
 
 Logically, the value type defines the structure of the value, while the property data type defines the interpretation of the value. Property data types may impose additional constraints on the values, or impact how they are rendered or exported.
 
@@ -64,6 +67,7 @@ The data type definitions themselves are wrapped by a [DataTypeDefinitions] obje
 [DataTypeDefinitions]: @ref Wikibase::Lib::DataTypeDefinitions
 [DataTypeFactory]: @ref Wikibase::Lib::DataTypeFactory
 [WikibaseRepo]: @ref Wikibase::Repo::WikibaseRepo
+[WikibaseClient]: @ref Wikibase::Client::WikibaseClient
 [ValueSnakRdfBuilder]: @ref Wikibase::Rdf::ValueSnakRdfBuilder
 [PropertyRdfBuilder]: @ref Wikibase::Rdf::PropertyRdfBuilder
 [WikibaseClient::getDataTypeFactory()]: @ref Wikibase::Client::WikibaseClient::getDataTypeFactory()
@@ -71,9 +75,7 @@ The data type definitions themselves are wrapped by a [DataTypeDefinitions] obje
 [WikibaseRepo::getDataTypeValidatorFactory()]: @ref Wikibase::Repo::WikibaseRepo::getDataTypeValidatorFactory()
 [DataTypeValidatorFactory]: @ref Wikibase::Repo::DataTypeValidatorFactory
 [WikibaseLib.datatypes.php]: @ref WikibaseLib.datatypes.php
-[Wikibase.datatypes.php]: @ref Wikibase.datatypes.php
+[WikibaseRepo.datatypes.php]: @ref WikibaseRepo.datatypes.php
 [WikibaseClient.datatypes.php]: @ref WikibaseClient.datatypes.php
-[WikibaseClient.php]: @ref client/WikibaseClient.php
-[Wikibase.php]: @ref repo/Wikibase.php
 [WikibaseRepoDataTypes]: @ref WikibaseRepoDataTypes
 [WikibaseClientDataTypes]: @ref WikibaseClientDataTypes

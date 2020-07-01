@@ -58,18 +58,7 @@ call_user_func( function() {
 		$wgExtensionMessagesFiles,
 		$wgHooks,
 		$wgMessagesDirs,
-		$wgWBClientDataTypes,
 		$wgWBClientSettings;
-
-	// Registry and definition of data types
-	$wgWBClientDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
-	$clientDatatypes = require __DIR__ . '/WikibaseClient.datatypes.php';
-
-	// merge WikibaseClient.datatypes.php into $wgWBClientDataTypes
-	foreach ( $clientDatatypes as $type => $clientDef ) {
-		$baseDef = $wgWBClientDataTypes[$type] ?? [];
-		$wgWBClientDataTypes[$type] = array_merge( $baseDef, $clientDef );
-	}
 
 	// i18n
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
