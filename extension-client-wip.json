@@ -279,5 +279,13 @@
 			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::newFromGlobalState"
 		}
 	},
+	"MessagesDirs": {
+		"wikibaseclient": "client/i18n",
+		"wikibaseclientapi": "client/i18n/api"
+	},
+	"ExtensionMessagesFiles": {
+		"Wikibaseclientalias" : "client/WikibaseClient.i18n.alias.php",
+		"wikibaseclientmagic": "client/WikibaseClient.i18n.magic.php"
+	},
 	"manifest_version": 2
 }

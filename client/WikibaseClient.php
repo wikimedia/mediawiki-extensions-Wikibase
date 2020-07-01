@@ -49,7 +49,7 @@ call_user_func( function() {
 		$wgMessagesDirs,
 		$wgWBClientSettings;
 
-	// i18n
+	// i18n messages, kept for backward compatibility (T256245)
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
