@@ -5,6 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Client;
 
 use Job;
+use MediaWiki\MediaWikiServices;
+use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
@@ -56,6 +58,13 @@ class ChangeVisibilityNotificationJob extends Job {
 		);
 
 		$this->loadBalancer = $loadBalancer;
+	}
+
+	public static function newFromGlobalState( Title $unused, array $params ) {
+		return new self(
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			$params
+		);
 	}
 
 	/**
