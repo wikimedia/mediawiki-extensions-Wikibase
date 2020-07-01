@@ -37,7 +37,7 @@ class TermStoreDelegatingMatchingTermsLookupTest extends TestCase {
 	 */
 	private $propertyMigrationStage;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->oldTermStoreLookup = $this->createMock( MatchingTermsLookup::class );

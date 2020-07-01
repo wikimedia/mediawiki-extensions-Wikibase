@@ -23,7 +23,7 @@ class ShortDescHandlerTest extends TestCase {
 	 */
 	private $handler;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->handler = new ShortDescHandler();
 	}

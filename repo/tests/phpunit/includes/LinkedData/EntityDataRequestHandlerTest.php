@@ -53,7 +53,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 */
 	private $obLevel;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
@@ -61,7 +61,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$this->obLevel = ob_get_level();
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		$obLevel = ob_get_level();
 
 		while ( ob_get_level() > $this->obLevel ) {

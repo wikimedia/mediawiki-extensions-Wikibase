@@ -41,7 +41,7 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->user = $this->getTestUser()->getUser();
 	}

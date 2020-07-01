@@ -37,7 +37,7 @@ class ParserHookHandlerTest extends MediaWikiTestCase {
 		return $wikibaseClient;
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$wikibaseClient = $this->resetWikibaseClient();
@@ -55,7 +55,7 @@ class ParserHookHandlerTest extends MediaWikiTestCase {
 		);
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		$this->resetWikibaseClient();
 		parent::tearDown();
 	}

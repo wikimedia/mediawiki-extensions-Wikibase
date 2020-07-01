@@ -33,7 +33,7 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  */
 class ApiXmlFormatTest extends ApiFormatTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->setupSiteLinkGroups();
 	}

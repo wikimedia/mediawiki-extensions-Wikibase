@@ -44,7 +44,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $oldEntityNamespaces;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Integration test requires repo and client extension to be active on the same wiki.' );
 		}
@@ -64,7 +64,7 @@ class UsageTrackingIntegrationTest extends MediaWikiTestCase {
 		$this->templateTitle = Title::makeTitle( NS_TEMPLATE, 'UsageTrackingIntegrationTest_Template' );
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		WikibaseClient::getDefaultInstance()->getSettings()->setSetting(

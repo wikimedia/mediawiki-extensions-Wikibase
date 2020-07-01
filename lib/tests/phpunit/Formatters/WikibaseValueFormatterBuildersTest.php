@@ -58,7 +58,7 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
 
 	const CACHE_TTL_IN_SECONDS = 10;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setMwGlobals( 'wgArticlePath', '/wiki/$1' );

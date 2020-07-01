@@ -23,7 +23,7 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class PagePropsEntityIdLookupTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->tablesUsed[] = 'page_props';
 		parent::setUp();
 	}

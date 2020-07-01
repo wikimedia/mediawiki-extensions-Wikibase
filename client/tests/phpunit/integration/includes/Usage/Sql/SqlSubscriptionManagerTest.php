@@ -22,7 +22,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class SqlSubscriptionManagerTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( 'Skipping test for SqlSubscriptionManager, '
 				. 'because the repo-side table wb_changes_subscription is not available.' );

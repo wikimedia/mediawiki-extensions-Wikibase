@@ -32,7 +32,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 	 */
 	private static $hasSetup;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		self::$testAction = 'wbsetaliases';
 		parent::setUp();
 

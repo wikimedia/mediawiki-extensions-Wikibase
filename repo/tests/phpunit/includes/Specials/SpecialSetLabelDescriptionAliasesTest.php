@@ -47,7 +47,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 
 	private static $languageCodes = [ 'en', 'de', 'de-ch', 'ii', 'zh' ];
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 	}

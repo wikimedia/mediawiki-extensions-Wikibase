@@ -57,7 +57,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $store;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
@@ -110,7 +110,7 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
 		);
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );

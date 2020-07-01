@@ -31,7 +31,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->tablesUsed[] = 'wbt_item_terms';
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 		// Cleaning ContentHandler cache because RepoHooks instantiate
 		// and cache those prior to changing the migration setting

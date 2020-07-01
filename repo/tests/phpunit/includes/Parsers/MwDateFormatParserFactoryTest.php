@@ -30,7 +30,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 	 */
 	private $factory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->factory = new MwDateFormatParserFactory();
 	}
 

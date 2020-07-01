@@ -37,7 +37,7 @@ abstract class SpecialWikibaseRepoPageTestBase extends SpecialPageTestBase {
 	 */
 	protected $mockRepository;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->mockRepository = new MockRepository();

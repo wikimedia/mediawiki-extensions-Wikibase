@@ -26,7 +26,7 @@ class AvailableBadgesTest extends ApiTestCase {
 
 	private static $oldBadgeItems;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// Allow some badges for testing
@@ -35,7 +35,7 @@ class AvailableBadgesTest extends ApiTestCase {
 		$settings->setSetting( 'badgeItems', self::$badgeItems );
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();

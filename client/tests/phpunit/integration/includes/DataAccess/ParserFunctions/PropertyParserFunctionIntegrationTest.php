@@ -39,7 +39,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $oldAllowDataAccessInUserLanguage;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
@@ -87,7 +87,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiTestCase {
 		);
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		$this->setAllowDataAccessInUserLanguage( $this->oldAllowDataAccessInUserLanguage );

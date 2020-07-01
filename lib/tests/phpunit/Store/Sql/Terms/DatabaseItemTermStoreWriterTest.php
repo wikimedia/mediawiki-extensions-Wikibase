@@ -51,7 +51,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 	/** * @var MockJobQueueFactory */
 	private $mockJobQueueFactory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );

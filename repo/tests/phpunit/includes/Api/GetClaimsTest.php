@@ -43,7 +43,7 @@ class GetClaimsTest extends ApiTestCase {
 	 */
 	private $serializerFactory;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->serializerFactory = new SerializerFactory(

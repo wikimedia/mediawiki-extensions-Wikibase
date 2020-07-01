@@ -38,7 +38,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 	 */
 	private static $hasSetup;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

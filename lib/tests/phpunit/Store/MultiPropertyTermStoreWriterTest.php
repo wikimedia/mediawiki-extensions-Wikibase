@@ -28,7 +28,7 @@ class MultiPropertyTermStoreWriterTest extends TestCase {
 	/** @var Fingerprint */
 	private $fingerprint;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->propertyId = new PropertyId( 'P1' );
 		$this->fingerprint = new Fingerprint(

@@ -28,7 +28,7 @@ use WikiPage;
  */
 class EditEntityActionTest extends ActionTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// Remove handlers for the "OutputPageParserOutput" hook

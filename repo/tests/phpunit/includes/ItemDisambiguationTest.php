@@ -24,7 +24,7 @@ use Wikibase\Repo\ItemDisambiguation;
  */
 class ItemDisambiguationTest extends MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->setUserLang( 'qqx' );

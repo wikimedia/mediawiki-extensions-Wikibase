@@ -44,7 +44,7 @@ class PropertyTermsRebuilderTest extends MediaWikiTestCase {
 	 */
 	private $progressReporter;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->propertyTermStoreWriter = $this->newPropertyTermStoreWriter();

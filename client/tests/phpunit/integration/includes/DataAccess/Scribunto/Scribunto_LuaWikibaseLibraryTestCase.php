@@ -22,7 +22,7 @@ if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	 */
 	abstract class Scribunto_LuaWikibaseLibraryTestCase extends \PHPUnit\Framework\TestCase {
 
-		protected function setUp() : void {
+		protected function setUp(): void {
 			$this->markTestSkipped( 'Scribunto is not available' );
 		}
 
@@ -136,7 +136,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		return $res;
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because a local wb_terms table"
 				. " is not available on a WikibaseClient only instance." );
@@ -166,7 +166,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		$settings->setSetting( 'useKartographerMaplinkInWikitext', true );
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		parent::tearDown();
 
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();

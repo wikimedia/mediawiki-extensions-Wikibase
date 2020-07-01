@@ -40,7 +40,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		return new MwTimeIsoParser( $options );
 	}
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$services = MediaWikiServices::getInstance();
@@ -57,7 +57,7 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 		);
 	}
 
-	protected function tearDown() : void {
+	protected function tearDown(): void {
 		MediaWikiServices::getInstance()->resetServiceForTesting( 'LanguageFactory' );
 		MediaWikiServices::getInstance()->redefineService(
 			'LanguageFactory',

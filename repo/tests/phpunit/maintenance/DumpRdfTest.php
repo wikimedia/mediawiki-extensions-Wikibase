@@ -57,7 +57,7 @@ require_once __DIR__ . '/../../../maintenance/dumpRdf.php';
  */
 class DumpRdfTest extends MediaWikiLangTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		// Needed because SiteLinksRdfBuilder is constructed from global state

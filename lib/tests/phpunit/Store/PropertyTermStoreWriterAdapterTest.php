@@ -30,7 +30,7 @@ class PropertyTermStoreWriterAdapterTest extends TestCase {
 	 */
 	private $propertyTermStoreWriter;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		$this->propertyTermStoreWriter = $this->newPropertyTermStoreWriter();
 	}
 

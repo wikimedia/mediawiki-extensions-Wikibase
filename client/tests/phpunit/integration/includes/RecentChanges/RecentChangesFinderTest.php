@@ -20,7 +20,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  */
 class RecentChangesFinderTest extends \MediaWikiTestCase {
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		$this->tablesUsed[] = 'recentchanges';

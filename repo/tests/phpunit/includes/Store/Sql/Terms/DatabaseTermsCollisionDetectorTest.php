@@ -52,7 +52,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiTestCase {
 	/** @var int */
 	private $deBarDescriptionTermInLangId;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->tablesUsed[] = 'wbt_type';
 		$this->tablesUsed[] = 'wbt_text';
