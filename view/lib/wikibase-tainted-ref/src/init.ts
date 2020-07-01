@@ -16,7 +16,7 @@ export default async (): Promise<void> => {
 	if ( mwWindow.mw.config.get( 'wbTaintedReferencesEnabled' ) ) {
 		const require = await mwWindow.mw.loader.using( RL_COMMON_MODULE_NAME );
 		const app = require( RL_COMMON_MODULE_NAME );
-		const Vue = require( 'vue2' );
+		const Vue = require( 'vue' );
 
 		const statementTracker = new StatementTracker( mwWindow.mw.track, new ReferenceListChangeCounter() );
 		const hookHandler = new MWHookHandler( mwWindow.mw.hook, new TaintedChecker(), statementTracker );
