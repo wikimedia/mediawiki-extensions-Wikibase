@@ -5,6 +5,7 @@ namespace Wikibase\Client\Api;
 use ApiQuery;
 use ApiQueryBase;
 use Wikibase\Client\Store\DescriptionLookup;
+use Wikibase\Client\WikibaseClient;
 
 /**
  * Provides a short description of the page in the content language.
@@ -43,6 +44,18 @@ class Description extends ApiQueryBase {
 		parent::__construct( $query, $moduleName, 'desc' );
 		$this->allowLocalShortDesc = $allowLocalShortDesc;
 		$this->descriptionLookup = $descriptionLookup;
+	}
+
+	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+		$client = WikibaseClient::getDefaultInstance();
+		$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
+		$descriptionLookup = $client->getDescriptionLookup();
+		return new self(
+			$apiQuery,
+			$moduleName,
+			$allowLocalShortDesc,
+			$descriptionLookup
+		);
 	}
 
 	/**

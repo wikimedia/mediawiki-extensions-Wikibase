@@ -10,6 +10,32 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"APIListModules": {
+		"wblistentityusage": {
+			"class": "\\Wikibase\\Client\\Api\\ApiListEntityUsage",
+			"factory": "\\Wikibase\\Client\\Api\\ApiListEntityUsage::newFromGlobalState"
+		}
+	},
+	"APIMetaModules": {
+		"wikibase": {
+			"class": "\\Wikibase\\Client\\Api\\ApiClientInfo",
+			"factory": "\\Wikibase\\Client\\Api\\ApiClientInfo::newFromGlobalState"
+		}
+	},
+	"APIPropModules": {
+		"pageterms": {
+			"class": "\\Wikibase\\Client\\Api\\PageTerms",
+			"factory": "\\Wikibase\\Client\\Api\\PageTerms::newFromGlobalState"
+		},
+		"description": {
+			"class": "\\Wikibase\\Client\\Api\\Description",
+			"factory": "\\Wikibase\\Client\\Api\\Description::newFromGlobalState"
+		},
+		"wbentityusage": {
+			"class": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage",
+			"factory": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage::newFromGlobalState"
+		}
+	},
 	"ExtensionFunctions": [
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],

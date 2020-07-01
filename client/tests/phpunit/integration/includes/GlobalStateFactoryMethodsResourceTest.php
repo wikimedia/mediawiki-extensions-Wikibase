@@ -2,11 +2,19 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
+use ApiMain;
+use ApiQuery;
 use ChangesList;
+use IContextSource;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
+use Wikibase\Client\Api\ApiClientInfo;
+use Wikibase\Client\Api\ApiListEntityUsage;
+use Wikibase\Client\Api\ApiPropsEntityUsage;
+use Wikibase\Client\Api\Description;
+use Wikibase\Client\Api\PageTerms;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\Hooks\ChangesListSpecialPageHookHandler;
 use Wikibase\Client\Hooks\DataUpdateHookHandler;
@@ -47,6 +55,21 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->disallowHttpAccess();
 	}
 
+	public function testApiClientInfo(): void {
+		ApiClientInfo::newFromGlobalState( $this->mockApiQuery(), 'query' );
+		$this->assertTrue( true );
+	}
+
+	public function testApiListEntityUsage(): void {
+		ApiListEntityUsage::newFromGlobalState( $this->mockApiQuery(), 'query' );
+		$this->assertTrue( true );
+	}
+
+	public function testApiPropsEntityUsage(): void {
+		ApiPropsEntityUsage::newFromGlobalState( $this->mockApiQuery(), 'query' );
+		$this->assertTrue( true );
+	}
+
 	public function testChangesListLinesHandler(): void {
 		TestingAccessWrapper::newFromClass( ChangesListLinesHandler::class )
 			->newFromGlobalState( new ChangesList( RequestContext::getMain() ) );
@@ -60,6 +83,11 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 
 	public function testDataUpdateHookHandler() {
 		DataUpdateHookHandler::newFromGlobalState();
+		$this->assertTrue( true );
+	}
+
+	public function testDescription(): void {
+		Description::newFromGlobalState( $this->mockApiQuery(), 'query' );
 		$this->assertTrue( true );
 	}
 
@@ -96,6 +124,11 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	public function testNoLangLinkHandler(): void {
 		TestingAccessWrapper::newFromClass( NoLangLinkHandler::class )
 			->newFromGlobalState();
+		$this->assertTrue( true );
+	}
+
+	public function testPageTerms(): void {
+		PageTerms::newFromGlobalState( $this->mockApiQuery(), 'query' );
 		$this->assertTrue( true );
 	}
 
@@ -178,6 +211,16 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 				return $factory;
 			}
 		);
+	}
+
+	private function mockApiQuery(): ApiQuery {
+		$apiMain = $this->createMock( ApiMain::class );
+		$apiMain->method( 'getContext' )
+			->willReturn( $this->createMock( IContextSource::class ) );
+		$apiQuery = $this->createMock( ApiQuery::class );
+		$apiQuery->method( 'getMain' )
+			->willReturn( $apiMain );
+		return $apiQuery;
 	}
 
 }
