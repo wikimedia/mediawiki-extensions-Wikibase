@@ -226,9 +226,9 @@ class ClientDefaultsTest extends \MediaWikiTestCase {
 		$settings = array_merge( $defaults, $settings );
 		$settings = new SettingsArray( $settings );
 
-		//NOTE: thisWikiIsTheRepo us used by some "magic" (dynamic) defaults
+		//NOTE: thisWikiIsTheRepo is used by some "magic" (dynamic) defaults
 		//      to decide how to behave. Normally, this is true if and only if
-		//      WB_VERSION is defined.
+		//      the WikibaseRepo extension is loaded.
 		$settings->setSetting( 'thisWikiIsTheRepo', $repoIsLocal );
 
 		foreach ( $expected as $key => $exp ) {

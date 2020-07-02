@@ -160,9 +160,8 @@ return call_user_func( function() {
 	// We use Closures to calculate such settings on the fly, the first time they
 	// are used. See SettingsArray::setSetting() for details.
 
-	//NOTE: when this is executed, WB_VERSION may not yet be defined, because
-	//      the repo extension has not yet been initialized. We need to defer the
-	//      check and do it inside the closures.
+	//NOTE: when this is executed, the repo extension may not have been initialized yet.
+	//      We need to defer the check and do it inside the closures.
 	//      We use the pseudo-setting thisWikiIsTheRepo to store this information.
 	//      thisWikiIsTheRepo should really never be overwritten, except for testing.
 
