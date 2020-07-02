@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
+use Http;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -16,32 +17,72 @@ use Psr\Log\LoggerInterface;
  */
 class GenericActionApiClient {
 
+	/*
+	 * @var HttpRequestFactory
+	 */
 	private $requestFactory;
+
+	/*
+	 * @var string
+	 */
 	private $repoActionApiUrl;
+
+	/*
+	 * @var LoggerInterface
+	 */
 	private $logger;
+
+	/*
+	 * @var string
+	 */
+	private $userAgent;
+
+	/*
+	 * @var string
+	 */
+	private $userAgentServerName;
 
 	/**
 	 * @param HttpRequestFactory $requestFactory
 	 * @param string $repoActionApiUrl e.g. https://www.wikidata.org/w/api.php
 	 * @param LoggerInterface $logger
+	 * @param string $userAgentServerName
 	 */
 	public function __construct(
 		HttpRequestFactory $requestFactory,
 		string $repoActionApiUrl,
-		LoggerInterface $logger
+		LoggerInterface $logger,
+		string $userAgentServerName
 	) {
 		$this->requestFactory = $requestFactory;
 		$this->repoActionApiUrl = $repoActionApiUrl;
 		$this->logger = $logger;
+		$this->userAgentServerName = $userAgentServerName;
 	}
 
 	private function getUrlFromParams( array $params ) {
 		return wfAppendQuery( $this->repoActionApiUrl, $params );
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getUserAgent() {
+		if ( $this->userAgent === null ) {
+			$this->userAgent = $this->requestFactory->getUserAgent() . ' Wikibase-FederatedProperties ';
+			$this->userAgent .= '(' . hash( 'md5', $this->userAgentServerName ) . ')';
+		}
+		return $this->userAgent;
+	}
+
 	public function get( array $params ): ResponseInterface {
 		$url = $this->getUrlFromParams( $params );
-		$request = $this->requestFactory->create( $url, [], __METHOD__ );
+		$request = $this->requestFactory->create(
+			$url,
+			[ 'userAgent' => $this->getUserAgent() ],
+			__METHOD__
+		);
+
 		$request->execute();
 		$this->logger->debug( 'Requested: ' . $url );
 

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Http\HttpRequestFactory;
 use MWHttpRequest;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Psr\Log\Test\TestLogger;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
@@ -17,7 +18,12 @@ use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
  *
  * @license GPL-2.0-or-later
  */
-class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
+class GenericActionApiClientTest extends TestCase {
+
+	/**
+	 * @var string
+	 */
+	private $serverName = 'this.needs.to.be.static';
 
 	public function testGetBuildsUrlCorrectly() {
 		$apiUrl = 'https://wikidata.org/w/api.php';
@@ -31,7 +37,8 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		$api = new GenericActionApiClient(
 			$requestFactory,
 			$apiUrl,
-			new NullLogger()
+			new NullLogger(),
+			$this->serverName
 		);
 		$api->get( $params );
 	}
@@ -40,10 +47,12 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		$headers = [ 'Some-header' => [ 'some value' ] ];
 		$mwResponse = $this->newMockResponseWithHeaders( $headers );
 
+		$url = 'https://does-not-matter/';
 		$api = new GenericActionApiClient(
-			$this->newMockRequestFactory( $mwResponse ),
-			'https://does-not-matter/',
-			new NullLogger()
+			$this->newMockRequestFactory( $mwResponse, $url ),
+			$url,
+			new NullLogger(),
+			$this->serverName
 		);
 		$response = $api->get( [] );
 
@@ -63,7 +72,8 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		$api = new GenericActionApiClient(
 			$requestFactory,
 			$apiUrl,
-			$logger
+			$logger,
+			$this->serverName
 		);
 		$api->get( $params );
 
@@ -71,14 +81,16 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testGivenRequestHitsTimeout_throwsException() {
+		$url = 'https://wikidata.org/w/api.php';
 		$response = $this->newMockResponseWithHeaders();
 		$response->expects( $this->once() )
 			->method( 'getStatus' )
 			->willReturn( 0 );
 		$api = new GenericActionApiClient(
-			$this->newMockRequestFactory( $response ),
-			'https://wikidata.org/w/api.php',
-			new NullLogger()
+			$this->newMockRequestFactory( $response, $url ),
+			$url,
+			new NullLogger(),
+			$this->serverName
 		);
 
 		$this->expectException( ApiRequestExecutionException::class );
@@ -94,10 +106,18 @@ class GenericActionApiClientTest extends \PHPUnit\Framework\TestCase {
 		return $mwResponse;
 	}
 
-	private function newMockRequestFactory( $mwResponse ) {
+	private function newMockRequestFactory( $mwResponse, $url ) {
 		$requestFactory = $this->createMock( HttpRequestFactory::class );
+		$requestFactory->method( 'getUserAgent' )
+			->withAnyParameters()
+			->willReturn( 'MediaWiki/N.NN.N-test' );
 		$requestFactory->expects( $this->once() )
 			->method( 'create' )
+			->with(
+				$url,
+				[ 'userAgent' => 'MediaWiki/N.NN.N-test Wikibase-FederatedProperties (0b2eec0d3e5fe90a000893458285ab32)' ],
+				'Wikibase\Repo\FederatedProperties\GenericActionApiClient::get'
+			)
 			->willReturn( $mwResponse );
 
 		return $requestFactory;

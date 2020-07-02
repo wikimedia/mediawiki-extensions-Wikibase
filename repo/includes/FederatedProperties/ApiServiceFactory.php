@@ -17,10 +17,17 @@ class ApiServiceFactory {
 	 */
 	private $federatedPropertiesSourceScriptUrl;
 
+	/**
+	 * @var string
+	 */
+	private $serverName;
+
 	public function __construct(
-		string $federatedPropertiesSourceScriptUrl
+		string $federatedPropertiesSourceScriptUrl,
+		string $serverName
 	) {
 		$this->federatedPropertiesSourceScriptUrl = $federatedPropertiesSourceScriptUrl;
+		$this->serverName = $serverName;
 	}
 
 	private function getUrlForScriptFile( $scriptFile ): string {
@@ -31,7 +38,8 @@ class ApiServiceFactory {
 		return new GenericActionApiClient(
 			MediaWikiServices::getInstance()->getHttpRequestFactory(),
 			$this->getUrlForScriptFile( 'api.php' ),
-			LoggerFactory::getInstance( 'Wikibase.FederatedProperties' )
+			LoggerFactory::getInstance( 'Wikibase.FederatedProperties' ),
+			$this->serverName
 		);
 	}
 
