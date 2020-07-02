@@ -99,8 +99,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-define( 'WB_VERSION', '0.5 alpha' );
-
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' );
 
