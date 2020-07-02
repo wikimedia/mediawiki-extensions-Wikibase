@@ -79,7 +79,7 @@ return call_user_func( function() {
 				'wikibase/wikibase.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.aliasesview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.descriptionview.css',
-				'jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
+				'jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguagelistview.css',
 				'jquery/wikibase/themes/default/jquery.wikibase.entitytermsforlanguageview.css',
@@ -228,7 +228,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/snakview/themes/default/snakview.SnakTypeSelector.css',
 				'resources/jquery/wikibase/themes/default/jquery.wikibase.statementview.RankSelector.css',
 				'lib/wikibase-data-values-value-view/lib/jquery.ui/jquery.ui.toggler.css',
-				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.css',
+				'resources/jquery/wikibase/themes/default/jquery.wikibase.entityview.less',
 				'resources/wikibase/utilities/wikibase.utilities.ui.css',
 				'resources/jquery/ui/jquery.ui.closeable.css'
 			],
