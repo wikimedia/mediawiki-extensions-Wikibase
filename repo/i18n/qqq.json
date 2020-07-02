@@ -539,5 +539,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "Title for icon that indicates that a statement's references were tainted.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Warning returned from wbsetclaim api call when a statement has not been added because the entity already has a statement with the same main snak.",
 	"wikibase-federated-properties-save-api-error-message": "Message shown when a save failed due to a failure in reaching the federated properties source wiki.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "Message of error page shown after a failed request to the federation source Wiki."
+	"wikibase-federated-properties-source-wiki-api-error-message": "Message of error page shown after a failed request to the federation source Wiki.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "Notice message that points out that this Wikibase uses federated properties from an external source and how to access that.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "Name of the Special:ListProperties page, linked to an external source."
 }
