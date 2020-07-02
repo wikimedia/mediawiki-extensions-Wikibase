@@ -158,10 +158,12 @@
 			"grouping": "all"
 		}
 	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "client/resources",
+		"remoteExtPath": "Wikibase/client/resources"
+	},
 	"ResourceModules": {
 		"wikibase.client.init": {
-			"localBasePath": "client/resources",
-			"remoteExtPath": "Wikibase/client/resources",
 			"skinStyles": {
 				"modern": "wikibase.client.css",
 				"monobook": "wikibase.client.css",
@@ -173,16 +175,12 @@
 			}
 		},
 		"wikibase.client.miscStyles": {
-			"localBasePath": "client/resources",
-			"remoteExtPath": "Wikibase/client/resources",
 			"styles": [
 				"wikibase.client.page-move.css",
 				"wikibase.client.changeslist.css"
 			]
 		},
 		"wikibase.client.linkitem.init": {
-			"localBasePath": "client/resources",
-			"remoteExtPath": "Wikibase/client/resources",
 			"packageFiles": [
 				"wikibase.client.linkitem.init.js",
 				{
@@ -198,8 +196,6 @@
 			]
 		},
 		"jquery.wikibase.linkitem": {
-			"localBasePath": "client/resources",
-			"remoteExtPath": "Wikibase/client/resources",
 			"scripts": [
 				"wikibase.client.getMwApiForRepo.js",
 				"jquery.wikibase/jquery.wikibase.linkitem.js",
@@ -243,8 +239,6 @@
 			]
 		},
 		"wikibase.client.action.edit.collapsibleFooter": {
-			"localBasePath": "client/resources",
-			"remoteExtPath": "Wikibase/client/resources",
 			"scripts": "wikibase.client.action.edit.collapsibleFooter.js",
 			"dependencies": [
 				"jquery.makeCollapsible",
