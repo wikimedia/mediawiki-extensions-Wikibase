@@ -3,25 +3,16 @@
 namespace Wikibase\Client;
 
 use Action;
-use ContentHandler;
 use MediaWiki\MediaWikiServices;
-use OutputPage;
-use ParserOutput;
-use RecentChange;
-use SearchEngine;
-use SearchIndexField;
 use Skin;
 use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
-use Wikibase\Client\RecentChanges\RecentChangeFactory;
-use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
-use WikiPage;
 
 /**
  * File defining the hook handlers for the Wikibase Client extension.
@@ -39,16 +30,6 @@ final class ClientHooks {
 	 */
 	protected static function isWikibaseEnabled( $namespace ) {
 		return WikibaseClient::getDefaultInstance()->getNamespaceChecker()->isWikibaseEnabled( $namespace );
-	}
-
-	/**
-	 * Hook to add PHPUnit test cases.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
-	 *
-	 * @param string[] &$paths
-	 */
-	public static function registerUnitTests( array &$paths ) {
-		$paths[] = __DIR__ . '/../tests/phpunit/';
 	}
 
 	/**
@@ -153,20 +134,6 @@ final class ClientHooks {
 	}
 
 	/**
-	 * Add the connected item prefixed id as a JS config variable, for gadgets etc.
-	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
-	 */
-	public static function onBeforePageDisplayAddJsConfig( OutputPage $out, Skin $skin ) {
-		$prefixedId = $out->getProperty( 'wikibase_item' );
-
-		if ( $prefixedId !== null ) {
-			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
-		}
-	}
-
-	/**
 	 * Adds a preference for showing or hiding Wikidata entries in recent changes
 	 *
 	 * @param User $user
@@ -190,62 +157,6 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-	}
-
-	/**
-	 * @param array[] &$queryPages
-	 */
-	public static function onwgQueryPages( &$queryPages ) {
-		$queryPages[] = [ SpecialUnconnectedPages::class, 'UnconnectedPages' ];
-		// SpecialPagesWithBadges and SpecialEntityUsage also extend QueryPage,
-		// but are not useful in the list of query pages,
-		// since they require a parameter (badge, entity id) to operate
-	}
-
-	/**
-	 * @param User $editor
-	 * @param Title $title
-	 * @param RecentChange $recentChange
-	 *
-	 * @return bool
-	 */
-	public static function onAbortEmailNotification( User $editor, Title $title, RecentChange $recentChange ) {
-		if ( $recentChange->getAttribute( 'rc_source' ) === RecentChangeFactory::SRC_WIKIBASE ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	/**
-	 * Register wikibase_item field.
-	 * @param array &$fields
-	 * @param SearchEngine $engine
-	 */
-	public static function onSearchIndexFields( array &$fields, SearchEngine $engine ) {
-		$fields['wikibase_item'] = $engine->makeSearchFieldMapping( 'wikibase_item',
-				SearchIndexField::INDEX_TYPE_KEYWORD );
-	}
-
-	/**
-	 * Put wikibase_item into the data.
-	 * @param array &$fields
-	 * @param ContentHandler $handler
-	 * @param WikiPage $page
-	 * @param ParserOutput $output
-	 * @param SearchEngine $engine
-	 */
-	public static function onSearchDataForIndex(
-		array &$fields,
-		ContentHandler $handler,
-		WikiPage $page,
-		ParserOutput $output,
-		SearchEngine $engine
-	) {
-		$wikibaseItem = $output->getProperty( 'wikibase_item' );
-		if ( $wikibaseItem ) {
-			$fields['wikibase_item'] = $wikibaseItem;
-		}
 	}
 
 	/**

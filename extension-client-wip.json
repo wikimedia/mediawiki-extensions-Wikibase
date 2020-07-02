@@ -104,13 +104,16 @@
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
+		"TrivialHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\TrivialHookHandler"
+		},
 		"UpdateRepoHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::newFromGlobalState"
 		}
 	},
 	"Hooks": {
-		"AbortEmailNotification": "\\Wikibase\\Client\\ClientHooks::onAbortEmailNotification",
+		"AbortEmailNotification": "TrivialHookHandler",
 		"ArticleDeleteAfterSuccess": "DeletePageNoticeCreator",
 		"ArticleDeleteComplete": [
 			"UpdateRepoHookHandler",
@@ -119,7 +122,7 @@
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"BeforePageDisplay": [
 			"BeforePageDisplayHandler",
-			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplayAddJsConfig"
+			"TrivialHookHandler"
 		],
 		"ContentAlterParserOutput": "ParserOutputUpdateHookHandler",
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
@@ -144,8 +147,8 @@
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
-		"SearchDataForIndex": "\\Wikibase\\Client\\ClientHooks::onSearchDataForIndex",
-		"SearchIndexFields": "\\Wikibase\\Client\\ClientHooks::onSearchIndexFields",
+		"SearchDataForIndex": "TrivialHookHandler",
+		"SearchIndexFields": "TrivialHookHandler",
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
 		"SidebarBeforeOutput": "SidebarHookHandler",
 		"SkinAfterBottomScripts": "\\Wikibase\\Client\\ClientHooks::onSkinAfterBottomScripts",
@@ -153,8 +156,8 @@
 		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
 		"PageMoveComplete": "UpdateRepoHookHandler",
-		"UnitTestsList": "\\Wikibase\\Client\\ClientHooks::registerUnitTests",
-		"wgQueryPages": "\\Wikibase\\Client\\ClientHooks::onwgQueryPages"
+		"UnitTestsList": "TrivialHookHandler",
+		"wgQueryPages": "TrivialHookHandler"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
