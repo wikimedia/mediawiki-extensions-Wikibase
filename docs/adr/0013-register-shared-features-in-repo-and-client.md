@@ -1,4 +1,4 @@
-# 13) Register shared features in Repo and Client
+# 13) Register shared features in Repo and Client {#adr_0013}
 
 Date: 2020-06-26
 
