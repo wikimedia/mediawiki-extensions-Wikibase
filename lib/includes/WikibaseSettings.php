@@ -2,10 +2,8 @@
 
 namespace Wikibase\Lib;
 
-use Exception;
 use ExtensionRegistry;
 use Hooks;
-use MediaWiki\Logger\LoggerFactory;
 use MWException;
 use OutOfBoundsException;
 
@@ -29,21 +27,7 @@ class WikibaseSettings {
 	 * @return bool True if and only if the Wikibase repository component is enabled on this wiki.
 	 */
 	public static function isRepoEnabled() {
-		$defined = defined( 'WB_VERSION' );
-		$loaded = ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' );
-
-		if ( $defined !== $loaded ) {
-			LoggerFactory::getInstance( 'Wikibase' )->warning(
-				'WikibaseSettings::isRepoEnabled() used during early initialization! (T256238)',
-				[
-					'defined' => $defined,
-					'loaded' => $loaded,
-					'exception' => new Exception(), // for logging the stack trace
-				]
-			);
-		}
-
-		return $defined;
+		return ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' );
 	}
 
 	/**
@@ -72,21 +56,7 @@ class WikibaseSettings {
 	 * @return bool True if and only if the Wikibase client component is enabled on this wiki.
 	 */
 	public static function isClientEnabled() {
-		$defined = defined( 'WBC_VERSION' );
-		$loaded = ExtensionRegistry::getInstance()->isLoaded( 'WikibaseClient' );
-
-		if ( $defined !== $loaded ) {
-			LoggerFactory::getInstance( 'Wikibase' )->warning(
-				'WikibaseSettings::isClientEnabled() used during early initialization! (T256238)',
-				[
-					'defined' => $defined,
-					'loaded' => $loaded,
-					'exception' => new Exception(), // for logging the stack trace
-				]
-			);
-		}
-
-		return $defined;
+		return ExtensionRegistry::getInstance()->isLoaded( 'WikibaseClient' );
 	}
 
 	/**
