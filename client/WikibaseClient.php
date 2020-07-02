@@ -35,8 +35,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "Not an entry point.\n" );
 }
 
-define( 'WBC_VERSION', '0.5 alpha' );
-
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client-wip.json' );
 
