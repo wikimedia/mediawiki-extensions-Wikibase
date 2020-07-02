@@ -1,10 +1,11 @@
+@import 'mediawiki.mixins.less';
+
 /**
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
  */
 .wikibase-entityview {
-	clear: both; /* wrap around success message */
-	float: left; /* float left to let widget container float right next to it */
+	.mixin-clearfix();
 }
 
 @media screen and ( min-width: 1570px ) {
