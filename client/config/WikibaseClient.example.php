@@ -27,7 +27,7 @@ $wgWBClientSettings['showExternalRecentChanges'] = true;
 // use the automatic defaults for repo-related settings.
 // If this wiki isn't running the repo extension,
 // configure an example repo.
-if ( !defined( 'WB_VERSION' ) ) {
+if ( !defined( 'WB_NO_CONFIGURE_EXAMPLE_REPO' ) ) {
 	// Base URL for building links to the repository.
 	// Assumes your wiki is setup as "http://repo.example.org/wiki/"
 	// This can be protocol relative, such as "//www.wikidata.org"
