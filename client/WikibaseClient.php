@@ -45,7 +45,6 @@ require_once __DIR__ . '/../lib/WikibaseLib.php';
 
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
-		$wgHooks,
 		$wgMessagesDirs,
 		$wgWBClientSettings;
 
@@ -54,13 +53,6 @@ call_user_func( function() {
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
-
-	$wgHooks['OldChangesListRecentChangesLine'][] =
-		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onOldChangesListRecentChangesLine';
-	$wgHooks['EnhancedChangesListModifyLineData'][] =
-		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyLineData';
-	$wgHooks['EnhancedChangesListModifyBlockLineData'][] =
-		'\Wikibase\Client\Hooks\ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData';
 
 	$wgWBClientSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
