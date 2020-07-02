@@ -31,7 +31,7 @@
  * @license GPL-2.0-or-later
  */
 
-if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnableWikibaseRepo'] ) {
+if ( $wgEnableWikibaseRepo ?? true ) {
 	require_once __DIR__ . '/repo/Wikibase.php';
 
 	if ( $wgWikimediaJenkinsCI ?? false ) {
@@ -39,7 +39,7 @@ if ( !array_key_exists( 'wgEnableWikibaseRepo', $GLOBALS ) || $GLOBALS['wgEnable
 	}
 }
 
-if ( !array_key_exists( 'wgEnableWikibaseClient', $GLOBALS ) || $GLOBALS['wgEnableWikibaseClient'] ) {
+if ( $wgEnableWikibaseClient ?? true ) {
 	require_once __DIR__ . '/client/WikibaseClient.php';
 
 	if ( $wgWikimediaJenkinsCI ?? false ) {
