@@ -36,8 +36,6 @@ use WikiPage;
  */
 final class ClientHooks {
 
-	const PAGE_SCHEMA_SPLIT_TEST_TREATMENT = 'treatment';
-
 	/**
 	 * @see NamespaceChecker::isWikibaseEnabled
 	 *
