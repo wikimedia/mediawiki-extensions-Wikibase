@@ -30,6 +30,14 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 	 * @return string HTML
 	 */
 	public function formatEntityId( EntityId $entityId ) {
+		return $entityId->getSerialization() . $this->getUndefinedInfoMessage( $entityId );
+	}
+
+	/**
+	 * @param EntityId $entityId
+	 * @return string
+	 */
+	protected function getUndefinedInfoMessage( EntityId $entityId ) {
 		$attributes = [ 'class' => 'wb-entity-undefinedinfo' ];
 
 		$message = wfMessage( 'parentheses',
@@ -39,7 +47,7 @@ class NonExistingEntityIdHtmlFormatter implements EntityIdFormatter {
 		$undefinedInfo = Html::element( 'span', $attributes, $message );
 
 		$separator = wfMessage( 'word-separator' )->escaped();
-		return $entityId->getSerialization() . $separator . $undefinedInfo;
-	}
 
+		return $separator . $undefinedInfo;
+	}
 }
