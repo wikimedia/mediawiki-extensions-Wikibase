@@ -14,6 +14,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @covers \Wikibase\Lib\Store\Sql\SqlChangeStore
@@ -100,6 +101,10 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	 * @dataProvider saveChangeInsertProvider
 	 */
 	public function testSaveChange_insert( array $expected, EntityChange $change ) {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $lb->getConnection( DB_MASTER );
 
@@ -134,6 +139,10 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 	}
 
 	public function testSaveChange_update() {
+		if ( !WikibaseSettings::isRepoEnabled() ) {
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have a local wb_changes table." );
+		}
+
 		$lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $lb->getConnection( DB_MASTER );
 
