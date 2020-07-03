@@ -3,6 +3,14 @@
 JavaScript client for the Wikibase Repository web API.
 
 ## Release notes
+### 4.0.0 (dev)
+* These method have been removed from RepoApi.js
+** searchEntities
+** createClaim
+** getClaims
+** setClaimValue
+** setReference
+** removeReferences
 
 ### 3.2.0 (2020-05-13)
 * Various improvements to error handling, now requests the `plaintext`
