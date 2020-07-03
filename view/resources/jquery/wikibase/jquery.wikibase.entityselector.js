@@ -217,22 +217,6 @@
 		},
 
 		/**
-		 * Determines whether a term matches a label considering the `caseSensitive` option.
-		 *
-		 * @protected
-		 *
-		 * @param {string} term
-		 * @param {Object} suggestion
-		 * @return {boolean}
-		 */
-		_termMatchesSuggestion: function ( term, suggestion ) {
-			var label = suggestion.label || suggestion.id;
-			return label === term
-				|| !this.options.caseSensitive && label.toLowerCase() === term.toLowerCase()
-				|| term === suggestion.id;
-		},
-
-		/**
 		 * Create and return the data object for the api call.
 		 *
 		 * Warning, PropertySuggester's EntitySelector overrides this!
