@@ -40,6 +40,10 @@
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
 	"HookHandlers": {
+		"ChangesListLinesHandler": {
+			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
+			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::newFromGlobalState"
+		},
 		"ChangesListSpecialPageHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices",
@@ -102,8 +106,8 @@
 		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
 		"EditPage::showStandardInputs:options": "\\Wikibase\\Client\\ClientHooks::onEditAction",
-		"EnhancedChangesListModifyBlockLineData": "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::onEnhancedChangesListModifyBlockLineData",
-		"EnhancedChangesListModifyLineData": "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::onEnhancedChangesListModifyLineData",
+		"EnhancedChangesListModifyBlockLineData": "ChangesListLinesHandler",
+		"EnhancedChangesListModifyLineData": "ChangesListLinesHandler",
 		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoActionHookHandler",
@@ -111,7 +115,7 @@
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
-		"OldChangesListRecentChangesLine": "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::onOldChangesListRecentChangesLine",
+		"OldChangesListRecentChangesLine": "ChangesListLinesHandler",
 		"OutputPageParserOutput": "SidebarHookHandler",
 		"ParserCacheSaveComplete": "DataUpdateHookHandler",
 		"ParserClearState": "ParserHookHandler",

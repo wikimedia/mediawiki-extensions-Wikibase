@@ -1,9 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use ChangesList;
 use EnhancedChangesList;
+use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
+use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;
+use MediaWiki\Hook\OldChangesListRecentChangesLineHook;
 use OldChangesList;
 use RecentChange;
 use UnexpectedValueException;
@@ -19,7 +24,11 @@ use Wikibase\Client\WikibaseClient;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Matěj Suchánek
  */
-class ChangesListLinesHandler {
+class ChangesListLinesHandler implements
+	EnhancedChangesListModifyBlockLineDataHook,
+	EnhancedChangesListModifyLineDataHook,
+	OldChangesListRecentChangesLineHook
+{
 
 	/**
 	 * @var ExternalChangeFactory
@@ -31,21 +40,12 @@ class ChangesListLinesHandler {
 	 */
 	private $formatter;
 
-	/**
-	 * @var self
-	 */
-	private static $instance = null;
-
 	public function __construct( ExternalChangeFactory $changeFactory, ChangeLineFormatter $formatter ) {
 		$this->changeFactory = $changeFactory;
 		$this->formatter = $formatter;
 	}
 
-	/**
-	 * @param ChangesList $changesList
-	 * @return self
-	 */
-	private static function newFromGlobalState( ChangesList $changesList ) {
+	public static function newFromGlobalState(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$changeFactory = new ExternalChangeFactory(
 			$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),
@@ -53,8 +53,6 @@ class ChangesListLinesHandler {
 			$wikibaseClient->getEntityIdParser()
 		);
 		$formatter = new ChangeLineFormatter(
-			$changesList->getUser(),
-			$changesList->getLanguage(),
 			$wikibaseClient->newRepoLinker()
 		);
 
@@ -62,50 +60,19 @@ class ChangesListLinesHandler {
 	}
 
 	/**
-	 * @param ChangesList $changesList
-	 * @return self
-	 */
-	private static function getInstance( ChangesList $changesList ) {
-		if ( self::$instance === null ) {
-			self::$instance = self::newFromGlobalState( $changesList );
-		}
-
-		return self::$instance;
-	}
-
-	/**
-	 * Hook for formatting recent changes links
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OldChangesListRecentChangesLine
-	 * @see doOldChangesListRecentChangesLine
-	 *
 	 * @param OldChangesList &$changesList
 	 * @param string &$s
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
+	 * @param string[] &$attribs
 	 */
-	public static function onOldChangesListRecentChangesLine(
-		OldChangesList &$changesList,
+	public function onOldChangesListRecentChangesLine(
+		$changesList,
 		&$s,
-		RecentChange $rc,
-		&$classes = []
-	) {
-		$self = self::getInstance( $changesList );
-		$self->doOldChangesListRecentChangesLine( $changesList, $s, $rc, $classes );
-	}
-
-	/**
-	 * @param OldChangesList &$changesList
-	 * @param string &$s
-	 * @param RecentChange $rc
-	 * @param string[] &$classes
-	 */
-	public function doOldChangesListRecentChangesLine(
-		OldChangesList &$changesList,
-		&$s,
-		RecentChange $rc,
-		&$classes
-	) {
+		$rc,
+		&$classes = [],
+		&$attribs = []
+	): void {
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
 				$externalChange = $this->changeFactory->newFromRecentChange( $rc );
@@ -115,41 +82,24 @@ class ChangesListLinesHandler {
 
 			// fixme: inject formatter and flags into a changes list formatter
 			$flag = $changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' );
-			$line = $this->formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag );
+			$lang = $changesList->getLanguage();
+			$user = $changesList->getUser();
+			$line = $this->formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag, $lang, $user );
 
 			$s = $line;
 		}
 	}
 
 	/**
-	 * Static handler for EnhancedChangesListModifyBlockLineData
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/EnhancedChangesListModifyBlockLineData
-	 * @see doEnhancedChangesListModifyBlockLineData
-	 *
 	 * @param EnhancedChangesList $changesList
 	 * @param array &$data
 	 * @param RecentChange $rc
 	 */
-	public static function onEnhancedChangesListModifyBlockLineData(
-		EnhancedChangesList $changesList,
-		array &$data,
-		RecentChange $rc
-	) {
-		$self = self::getInstance( $changesList );
-		$self->doEnhancedChangesListModifyBlockLineData( $changesList, $data, $rc );
-	}
-
-	/**
-	 * @param EnhancedChangesList $changesList
-	 * @param array &$data
-	 * @param RecentChange $rc
-	 */
-	public function doEnhancedChangesListModifyBlockLineData(
-		EnhancedChangesList $changesList,
-		array &$data,
-		RecentChange $rc
-	) {
+	public function onEnhancedChangesListModifyBlockLineData(
+		$changesList,
+		&$data,
+		$rc
+	): void {
 		$data['recentChangesFlags']['wikibase-edit'] = false;
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
@@ -162,48 +112,29 @@ class ChangesListLinesHandler {
 				$data,
 				$externalChange,
 				$rc->getTitle(),
-				$rc->counter
+				$rc->counter,
+				$changesList->getLanguage(),
+				$changesList->getUser()
 			);
 		}
 	}
 
 	/**
-	 * Static handler for EnhancedChangesListModifyLineData
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/EnhancedChangesListModifyLineData
-	 * @see doEnhancedChangesListModifyLineData
-	 *
 	 * @param EnhancedChangesList $changesList
 	 * @param array &$data
 	 * @param RecentChange[] $block
 	 * @param RecentChange $rc
 	 * @param string[] &$classes
+	 * @param string[] &$attribs
 	 */
-	public static function onEnhancedChangesListModifyLineData(
-		EnhancedChangesList $changesList,
-		array &$data,
-		array $block,
-		RecentChange $rc,
-		array &$classes
-	) {
-		$self = self::getInstance( $changesList );
-		$self->doEnhancedChangesListModifyLineData( $changesList, $data, $block, $rc, $classes );
-	}
-
-	/**
-	 * @param EnhancedChangesList $changesList
-	 * @param array &$data
-	 * @param RecentChange[] $block
-	 * @param RecentChange $rc
-	 * @param string[] &$classes
-	 */
-	public function doEnhancedChangesListModifyLineData(
-		EnhancedChangesList $changesList,
-		array &$data,
-		array $block,
-		RecentChange $rc,
-		array &$classes
-	) {
+	public function onEnhancedChangesListModifyLineData(
+		$changesList,
+		&$data,
+		$block,
+		$rc,
+		&$classes = [],
+		&$attribs = []
+	): void {
 		$data['recentChangesFlags']['wikibase-edit'] = false;
 		if ( RecentChangeFactory::isWikibaseChange( $rc ) ) {
 			try {
@@ -216,7 +147,9 @@ class ChangesListLinesHandler {
 				$data,
 				$externalChange,
 				$rc->getTitle(),
-				$rc->counter
+				$rc->counter,
+				$changesList->getLanguage(),
+				$changesList->getUser()
 			);
 		}
 	}
