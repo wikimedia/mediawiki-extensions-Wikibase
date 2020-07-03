@@ -61,6 +61,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
 		},
+		"EditActionHookHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::newFromGlobalState"
+		},
 		"InfoActionHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::newFromGlobalState"
@@ -105,7 +109,7 @@
 		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
 		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
-		"EditPage::showStandardInputs:options": "\\Wikibase\\Client\\ClientHooks::onEditAction",
+		"EditPage::showStandardInputs:options": "EditActionHookHandler",
 		"EnhancedChangesListModifyBlockLineData": "ChangesListLinesHandler",
 		"EnhancedChangesListModifyLineData": "ChangesListLinesHandler",
 		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",

@@ -5,6 +5,7 @@ namespace Wikibase\Client\Tests\Unit\Hooks;
 use EditPage;
 use Html;
 use IContextSource;
+use OutputPage;
 use RequestContext;
 use Title;
 use Wikibase\Client\Hooks\EditActionHookHandler;
@@ -38,18 +39,14 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @param string $message
 	 */
 	public function testHandle( $expected, IContextSource $context, $entityId, $message ) {
-		$hookHandler = $this->newHookHandler( $entityId, $context );
+		$out = new OutputPage( $context );
+		$hookHandler = $this->newHookHandler( $entityId );
 		$editor = $this->getEditPage();
-		$hookHandler->handle( $editor );
+		$tabindex = 0; // unused but must be a variable to be passed by reference
+		$hookHandler->onEditPage__showStandardInputs_options( $editor, $out, $tabindex );
 
 		$this->assertSame( $expected, $editor->editFormTextAfterTools, $message );
-	}
-
-	public function testNewFromGlobalState() {
-		$context = $this->getContext();
-
-		$handler = EditActionHookHandler::newFromGlobalState( $context );
-		$this->assertInstanceOf( EditActionHookHandler::class, $handler );
+		$this->assertContains( 'wikibase.client.action.edit.collapsibleFooter', $out->getModules() );
 	}
 
 	public function handleProvider() {
@@ -87,11 +84,10 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param ItemId|bool $entityId
-	 * @param IContextSource $context
 	 *
 	 * @return EditActionHookHandler
 	 */
-	private function newHookHandler( $entityId, IContextSource $context ) {
+	private function newHookHandler( $entityId ) {
 		$repoLinker = $this->getMockBuilder( RepoLinker::class )
 			->disableOriginalConstructor()
 			->setMethods( [ 'buildEntityLink' ] )
@@ -147,8 +143,7 @@ class EditActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			$repoLinker,
 			$sqlUsageTracker,
 			$labelDescriptionLookupFactory,
-			$idParser,
-			$context
+			$idParser
 		);
 
 		return $hookHandler;
