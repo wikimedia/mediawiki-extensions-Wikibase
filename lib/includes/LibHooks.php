@@ -3,6 +3,10 @@
 namespace Wikibase\Lib;
 
 use ExtensionRegistry;
+use MediaWiki\Hook\ExtensionTypesHook;
+use MediaWiki\Hook\ResourceLoaderRegisterModulesHook;
+use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderTestModulesHook;
 use ResourceLoader;
 
 /**
@@ -13,7 +17,12 @@ use ResourceLoader;
  * @author Daniel Werner < daniel.a.r.werner@gmail.com >
  * @author H. Snater < mediawiki@snater.com >
  */
-final class LibHooks {
+final class LibHooks implements
+	UnitTestsListHook,
+	ResourceLoaderTestModulesHook,
+	ResourceLoaderRegisterModulesHook,
+	ExtensionTypesHook
+{
 
 	/**
 	 * Callback called after extension registration,
@@ -35,7 +44,7 @@ final class LibHooks {
 	 * @param string[] &$paths
 	 * @return void
 	 */
-	public static function onUnitTestsList( array &$paths ): void {
+	public function onUnitTestsList( &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
 	}
@@ -46,7 +55,7 @@ final class LibHooks {
 	 * @param ResourceLoader $rl
 	 * @return void
 	 */
-	public static function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
+	public function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			require __DIR__ . '/../tests/qunit/resources.php'
@@ -60,7 +69,7 @@ final class LibHooks {
 	 * @param ResourceLoader $rl
 	 * @return void
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
+	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
 		$moduleTemplate = [
 			'localBasePath' => __DIR__ . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
@@ -94,7 +103,7 @@ final class LibHooks {
 	 * @param array &$extensionTypes
 	 * @return void
 	 */
-	public static function onExtensionTypes( array &$extensionTypes ): void {
+	public function onExtensionTypes( &$extensionTypes ): void {
 		// @codeCoverageIgnoreStart
 		$extensionTypes['wikibase'] = wfMessage( 'version-wikibase' )->text();
 		// @codeCoverageIgnoreEnd
