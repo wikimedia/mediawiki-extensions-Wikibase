@@ -289,6 +289,17 @@ return call_user_func( function() {
 					return WikibaseRepo::getDefaultInstance()->getPropertyValueExpertsModule();
 				}
 		],
+
+		'wikibase.sites' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.sites.js',
+			],
+			'dependencies' => [
+				'mw.config.values.wbSiteDetails',
+				'wikibase',
+				'wikibase.Site',
+			],
+		],
 	];
 
 	return $modules;

@@ -65,17 +65,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'wikibase.sites' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.sites.js',
-			],
-			'dependencies' => [
-				'mw.config.values.wbSiteDetails',
-				'wikibase',
-				'wikibase.Site',
-			],
-		],
-
 		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',

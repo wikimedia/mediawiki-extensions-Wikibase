@@ -252,10 +252,11 @@
 			var sites,
 				linkableSites = [],
 				site,
-				currentSiteId;
+				currentSiteId,
+				sitesModule = require( '../wikibase.sites.js' );
 
 			currentSiteId = this.options.globalSiteId;
-			sites = wb.sites.getSitesOfGroup( this.options.langLinkSiteGroup );
+			sites = sitesModule.getSitesOfGroup( this.options.langLinkSiteGroup );
 
 			for ( site in sites ) {
 				if ( sites[ site ].getId() !== currentSiteId ) {
@@ -483,7 +484,7 @@
 		 * @return {jQuery}
 		 */
 		_createSiteLinkTable: function ( entity ) {
-			var i, $siteLinks;
+			var i, $siteLinks, sites = require( '../wikibase.sites.js' );
 
 			$siteLinks = $( '<div>' )
 				.attr( 'id', 'wbclient-linkItem-siteLinks' )
@@ -506,7 +507,7 @@
 					.find( 'table' )
 					.append(
 						this._createSiteLinkRow(
-							wb.sites.getSite( entity.sitelinks[ i ].site ),
+							sites.getSite( entity.sitelinks[ i ].site ),
 							entity.sitelinks[ i ]
 						)
 					);
