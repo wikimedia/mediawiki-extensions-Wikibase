@@ -4,7 +4,6 @@ namespace Wikibase\Client;
 
 use Action;
 use ContentHandler;
-use EditPage;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Parser;
@@ -19,7 +18,6 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
-use Wikibase\Client\Hooks\EditActionHookHandler;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\Hooks\SkinAfterPortletHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -223,27 +221,6 @@ final class ClientHooks {
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
-	}
-
-	/**
-	 * Adds the Entity usage data in ActionEdit
-	 *
-	 * @param EditPage $editor
-	 * @param OutputPage $output
-	 * @param int $tabindex
-	 */
-	public static function onEditAction( EditPage $editor, OutputPage $output, $tabindex ) {
-		if ( $editor->section ) {
-			// Shorten out, like template transclusion in core
-			return;
-		}
-
-		$editActionHookHandler = EditActionHookHandler::newFromGlobalState(
-			$editor->getContext()
-		);
-		$editActionHookHandler->handle( $editor );
-
-		$output->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
 	}
 
 	/**

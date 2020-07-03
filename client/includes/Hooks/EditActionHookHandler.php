@@ -1,10 +1,15 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use EditPage;
 use Html;
 use IContextSource;
+use MediaWiki\Hook\EditPage__showStandardInputs_optionsHook;
+use MessageLocalizer;
+use OutputPage;
 use Wikibase\Client\RepoLinker;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
@@ -13,10 +18,12 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 
 /**
+ * Adds the Entity usage data in ActionEdit.
+ *
  * @license GPL-2.0-or-later
  * @author Amir Sarabadani < ladsgroup@gmail.com >
  */
-class EditActionHookHandler {
+class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook {
 
 	/**
 	 * @var RepoLinker
@@ -38,30 +45,19 @@ class EditActionHookHandler {
 	 */
 	private $idParser;
 
-	/**
-	 * @var IContextSource
-	 */
-	private $context;
-
 	public function __construct(
 		RepoLinker $repoLinker,
 		UsageLookup $usageLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $labelDescriptionLookupFactory,
-		EntityIdParser $idParser,
-		IContextSource $context
+		EntityIdParser $idParser
 	) {
 		$this->repoLinker = $repoLinker;
 		$this->usageLookup = $usageLookup;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->idParser = $idParser;
-		$this->context = $context;
 	}
 
-	/**
-	 * @param IContextSource $context
-	 * @return self
-	 */
-	public static function newFromGlobalState( IContextSource $context ) {
+	public static function newFromGlobalState(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();
@@ -76,19 +72,29 @@ class EditActionHookHandler {
 			$wikibaseClient->newRepoLinker(),
 			$usageLookup,
 			$labelDescriptionLookupFactory,
-			$idParser,
-			$context
+			$idParser
 		);
 	}
 
-	public function handle( EditPage $editor ) {
+	/**
+	 * @param EditPage $editor
+	 * @param OutputPage $out
+	 * @param int $tabindex
+	 */
+	// phpcs:ignore MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+	public function onEditPage__showStandardInputs_options( $editor, $out, &$tabindex ): void {
+		if ( $editor->section ) {
+			// Shorten out, like template transclusion in core
+			return;
+		}
+
 		// Check if there are usages to show
 		$title = $editor->getTitle();
 		$usages = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
 
 		if ( $usages ) {
-			$header = $this->getHeader();
-			$usageOutput = $this->formatEntityUsage( $usages );
+			$header = $this->getHeader( $out );
+			$usageOutput = $this->formatEntityUsage( $usages, $out );
 			$output = Html::rawElement(
 				'div',
 				[ 'class' => 'wikibase-entity-usage' ],
@@ -96,14 +102,17 @@ class EditActionHookHandler {
 			);
 			$editor->editFormTextAfterTools .= $output;
 		}
+
+		$out->addModules( 'wikibase.client.action.edit.collapsibleFooter' );
 	}
 
 	/**
 	 * @param string[] $rowAspects
+	 * @param IContextSource $context
 	 *
 	 * @return string HTML
 	 */
-	private function formatAspects( array $rowAspects ) {
+	private function formatAspects( array $rowAspects, IContextSource $context ): string {
 		$aspects = [];
 
 		foreach ( $rowAspects as $aspect ) {
@@ -122,17 +131,18 @@ class EditActionHookHandler {
 			if ( $aspect[1] !== null ) {
 				$msgKey .= '-with-modifier';
 			}
-			$aspects[] = $this->context->msg( $msgKey, $aspect[1] )->parse();
+			$aspects[] = $context->msg( $msgKey, $aspect[1] )->parse();
 		}
 
-		return $this->context->getLanguage()->commaList( $aspects );
+		return $context->getLanguage()->commaList( $aspects );
 	}
 
 	/**
 	 * @param EntityUsage[] $usages
+	 * @param IContextSource $context
 	 * @return string HTML
 	 */
-	private function formatEntityUsage( array $usages ) {
+	private function formatEntityUsage( array $usages, IContextSource $context ): string {
 		$usageAspectsByEntity = [];
 		$entityIds = [];
 
@@ -150,7 +160,7 @@ class EditActionHookHandler {
 
 		$output = '';
 		$labelLookup = $this->labelDescriptionLookupFactory->newLabelDescriptionLookup(
-			$this->context->getLanguage(),
+			$context->getLanguage(),
 			array_values( $entityIds )
 		);
 
@@ -158,8 +168,8 @@ class EditActionHookHandler {
 			$label = $labelLookup->getLabel( $entityIds[$entityId] );
 			$text = $label === null ? $entityId : $label->getText();
 
-			$aspectContent = $this->formatAspects( $aspects );
-			$colon = $this->context->msg( 'colon-separator' )->plain();
+			$aspectContent = $this->formatAspects( $aspects, $context );
+			$colon = $context->msg( 'colon-separator' )->plain();
 			$output .= Html::rawElement(
 				'li',
 				[],
@@ -174,13 +184,14 @@ class EditActionHookHandler {
 	}
 
 	/**
+	 * @param MessageLocalizer $context
 	 * @return string HTML
 	 */
-	private function getHeader() {
+	private function getHeader( MessageLocalizer $context ): string {
 		return Html::rawElement(
 			'div',
 			[ 'class' => 'wikibase-entityusage-explanation' ],
-			$this->context->msg( 'wikibase-pageinfo-entity-usage' )->parseAsBlock()
+			$context->msg( 'wikibase-pageinfo-entity-usage' )->parseAsBlock()
 		);
 	}
 
