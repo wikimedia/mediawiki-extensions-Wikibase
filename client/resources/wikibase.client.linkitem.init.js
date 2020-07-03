@@ -30,7 +30,6 @@
 				$linkItemLink
 				.show()
 				.linkitem( {
-					mwApiForRepo: wikibase.client.getMwApiForRepo(),
 					pageTitle: ( new mw.Title(
 						mw.config.get( 'wgPageName' )
 					) ).getPrefixedText(),

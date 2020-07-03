@@ -4,6 +4,8 @@
  */
 ( function ( wb ) {
 	'use strict';
+	var PageConnector = require( '../wikibase.client.PageConnector.js' ),
+		getMwApiForRepo = require( '../wikibase.client.getMwApiForRepo.js' );
 
 	/**
 	 * This widget allows linking articles with Wikibase items or creating new wikibase items directly
@@ -31,9 +33,6 @@
 	 *        (1) {jQuery.Event}
 	 */
 	$.widget( 'wikibase.linkitem', {
-		/**
-		 * @type wikibase.PageConnector
-		 */
 		_pageConnector: null,
 
 		/**
@@ -65,12 +64,13 @@
 		 */
 		targetArticle: null,
 
+		mwApiForRepo: getMwApiForRepo(),
+
 		/**
 		 * Options
 		 * @see jQuery.Widget.options
 		 */
 		options: {
-			mwApiForRepo: null,
 			pageTitle: null,
 			globalSiteId: null,
 			namespaceNumber: null,
@@ -92,7 +92,7 @@
 			.hide()
 			.after( $dialogSpinner );
 
-			this.options.mwApiForRepo.get( {
+			this.mwApiForRepo.get( {
 				action: 'query',
 				meta: 'userinfo'
 			} )
@@ -354,8 +354,8 @@
 			this.targetSite = $( '#wbclient-linkItem-site' ).siteselector( 'getSelectedSite' ).getId();
 			this.targetArticle = $( '#wbclient-linkItem-page' ).val();
 
-			this._pageConnector = new wb.PageConnector(
-				new wb.api.RepoApi( this.options.mwApiForRepo, mw.config.get( 'wgUserLanguage' ) ),
+			this._pageConnector = new PageConnector(
+				new wb.api.RepoApi( this.mwApiForRepo, mw.config.get( 'wgUserLanguage' ) ),
 				this.options.globalSiteId,
 				this.options.pageTitle,
 				this.targetSite,

@@ -16,7 +16,7 @@
 	 * @param {string} secondSiteId
 	 * @param {string} secondPageName
 	 */
-	wb.PageConnector = function PageConnector(
+	var PageConnector = function PageConnector(
 		repoApi,
 		firstSiteId,
 		firstPageName,
@@ -31,7 +31,7 @@
 		this._secondPageName = secondPageName;
 	};
 
-	$.extend( wb.PageConnector.prototype, {
+	$.extend( PageConnector.prototype, {
 		/**
 		 * @type wikibase.api.RepoApi
 		 */
@@ -351,5 +351,7 @@
 		}
 
 	} );
+
+	module.exports = wb.PageConnector = PageConnector;
 
 }( wikibase ) );
