@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Notifications;
 
 use Wikibase\Lib\Changes\Change;
-use Wikibase\Repo\Store\ChangeStore;
+use Wikibase\Lib\Changes\ChangeStore;
 
 /**
  * Notification channel based on a database table.

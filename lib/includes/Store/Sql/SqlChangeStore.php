@@ -1,10 +1,11 @@
 <?php
 
-namespace Wikibase\Repo\Store\Sql;
+declare( strict_types = 1 );
+namespace Wikibase\Lib\Store\Sql;
 
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\ChangeRow;
-use Wikibase\Repo\Store\ChangeStore;
+use Wikibase\Lib\Changes\ChangeStore;
 use Wikimedia\Assert\Assert;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\ILoadBalancer;

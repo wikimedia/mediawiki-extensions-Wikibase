@@ -1,17 +1,22 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Store\Sql;
+declare( strict_types = 1 );
+namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
 use RecentChange;
+use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\ItemIdParser;
+use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
-use Wikibase\Repo\Store\Sql\SqlChangeStore;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\Changes\ItemChange;
+use Wikibase\Lib\Store\Sql\SqlChangeStore;
 
 /**
- * @covers \Wikibase\Repo\Store\Sql\SqlChangeStore
+ * @covers \Wikibase\Lib\Store\Sql\SqlChangeStore
  *
  * @group Database
  *
@@ -25,8 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 	public function saveChangeInsertProvider() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$factory = $wikibaseRepo->getEntityChangeFactory();
+		$factory = $this->getEntityChangeFactory();
 
 		$time = wfTimestamp( TS_MW );
 
@@ -136,9 +140,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$db->delete( 'wb_changes', '*', __METHOD__ );
 		$this->tablesUsed[] = 'wb_changes';
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$factory = $wikibaseRepo->getEntityChangeFactory();
-
+		$factory = $this->getEntityChangeFactory();
 		$change = $factory->newForEntity( EntityChange::ADD, new ItemId( 'Q21389475' ) );
 		$change->setField( 'time', wfTimestampNow() );
 
@@ -166,4 +168,16 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$this->assertEquals( $expected, $row );
 	}
 
+	private function getEntityChangeFactory() {
+		$changeClasses = [
+			Item::ENTITY_TYPE => ItemChange::class,
+			// Other types of entities will use EntityChange
+		];
+
+		return new EntityChangeFactory(
+			new EntityDiffer(),
+			new ItemIdParser(),
+			$changeClasses
+		);
+	}
 }

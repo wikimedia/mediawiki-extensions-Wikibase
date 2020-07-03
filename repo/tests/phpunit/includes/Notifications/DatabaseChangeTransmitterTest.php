@@ -3,8 +3,8 @@
 namespace Wikibase\Repo\Tests\Notifications;
 
 use Wikibase\Lib\Changes\Change;
+use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
-use Wikibase\Repo\Store\ChangeStore;
 
 /**
  * @covers \Wikibase\Repo\Notifications\DatabaseChangeTransmitter

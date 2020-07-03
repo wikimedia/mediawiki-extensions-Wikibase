@@ -8,10 +8,10 @@ use MediaWikiTestCase;
 use Onoi\MessageReporter\MessageReporter;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\ChangePruner;
-use Wikibase\Repo\Store\Sql\SqlChangeStore;
 
 /**
  * @covers \Wikibase\Repo\ChangePruner

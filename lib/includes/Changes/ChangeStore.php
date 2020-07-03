@@ -1,8 +1,7 @@
 <?php
 
-namespace Wikibase\Repo\Store;
-
-use Wikibase\Lib\Changes\Change;
+declare( strict_types = 1 );
+namespace Wikibase\Lib\Changes;
 
 /**
  * Service interface for recording changes.
