@@ -517,16 +517,6 @@
 		},
 
 		/**
-		 * Removes all tags.
-		 */
-		removeAll: function () {
-			var self = this;
-			this._$tagList.children( '.tagadata-choice' ).each( function () {
-				self.removeTag( $( this ) );
-			} );
-		},
-
-		/**
 		 * Returns whether two tags conflict by containing the same text.
 		 *
 		 * @return {boolean}

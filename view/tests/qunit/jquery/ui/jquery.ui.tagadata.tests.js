@@ -122,25 +122,6 @@
 		done();
 	} );
 
-	QUnit.test( 'removeAll()', function ( assert ) {
-		var $tagadata = createTagadata(),
-			tagadata = $tagadata.data( 'tagadata' ),
-			done = assert.async(),
-			i = tagadata.getTags().length;
-
-		$tagadata.on( 'tagadatatagremoved', function () {
-			if ( --i === 0 ) {
-				assert.ok(
-					true,
-					'Removed all tags.'
-				);
-				done();
-			}
-		} );
-
-		tagadata.removeAll();
-	} );
-
 	QUnit.test( 'disable(), enable()', function ( assert ) {
 		var $tagadata = createTagadata(),
 			tagadata = $tagadata.data( 'tagadata' );
