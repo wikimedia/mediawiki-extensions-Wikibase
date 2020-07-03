@@ -3,10 +3,12 @@
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use EnhancedChangesList;
+use Language;
 use MediaWikiTestCase;
 use OldChangesList;
 use RecentChange;
 use Title;
+use User;
 use Wikibase\Client\Hooks\ChangesListLinesHandler;
 use Wikibase\Client\RecentChanges\ChangeLineFormatter;
 use Wikibase\Client\RecentChanges\ExternalChange;
@@ -24,25 +26,12 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
  */
 class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 
-	/**
-	 * @return ChangeLineFormatter
-	 */
 	private function getChangeLineFormatter() {
-		$formatter = $this->getMockBuilder( ChangeLineFormatter::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		return $formatter;
+		return $this->createMock( ChangeLineFormatter::class );
 	}
 
-	/**
-	 * @param int $times
-	 * @return ExternalChangeFactory
-	 */
-	private function getChangeFactory( $times = 0 ) {
-		$changeFactory = $this->getMockBuilder( ExternalChangeFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getChangeFactory( int $times = 0 ): ExternalChangeFactory {
+		$changeFactory = $this->createMock( ExternalChangeFactory::class );
 		$changeFactory->expects( $this->exactly( $times ) )
 			->method( 'newFromRecentChange' )
 			->willReturn( $this->getMockBuilder( ExternalChange::class )
@@ -53,20 +42,13 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 		return $changeFactory;
 	}
 
-	/**
-	 * @param string
-	 * @return RecentChange
-	 */
-	private function getRecentChange( $source ) {
+	private function getRecentChange( string $source ): RecentChange {
 		$recentChange = new RecentChange;
 		$recentChange->setAttribs( [ 'rc_source' => $source ] );
 		return $recentChange;
 	}
 
-	/**
-	 * @return RecentChange
-	 */
-	private function getWikibaseChange() {
+	private function getWikibaseChange(): RecentChange {
 		$recentChange = $this->getRecentChange( RecentChangeFactory::SRC_WIKIBASE );
 		$recentChange->counter = 1;
 		$recentChange->mTitle = $this->createMock( Title::class );
@@ -84,13 +66,11 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 			$this->getChangeFactory(),
 			$formatter
 		);
-		$changesList = $this->getMockBuilder( OldChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $changesList = $this->createMock( OldChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
-		$handler->doOldChangesListRecentChangesLine(
+		$handler->onOldChangesListRecentChangesLine(
 			$changesList,
 			$line,
 			$recentChange,
@@ -106,14 +86,12 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 			$this->getChangeFactory(),
 			$this->getChangeLineFormatter()
 		);
-		$changesList = $this->getMockBuilder( EnhancedChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
 		$data = [];
-		$handler->doEnhancedChangesListModifyBlockLineData(
+		$handler->onEnhancedChangesListModifyBlockLineData(
 			$changesList,
 			$data,
 			$recentChange
@@ -130,15 +108,13 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 			$this->getChangeFactory(),
 			$this->getChangeLineFormatter()
 		);
-		$changesList = $this->getMockBuilder( EnhancedChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
 		$data = [];
 		$classes = [];
-		$handler->doEnhancedChangesListModifyLineData(
+		$handler->onEnhancedChangesListModifyLineData(
 			$changesList,
 			$data,
 			[],
@@ -167,18 +143,20 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 			->method( 'format' )
 			->willReturn( 'Formatted line' );
 
-		$changesList = $this->getMockBuilder( OldChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $changesList = $this->createMock( OldChangesList::class );
 		$changesList->expects( $this->once() )
 			->method( 'recentChangesFlags' )
 			->willReturn( 'flags' );
+		$changesList->method( 'getUser' )
+			->willReturn( $this->createMock( User::class ) );
+		$changesList->method( 'getLanguage' )
+			->willReturn( $this->createMock( Language::class ) );
 
 		$handler = new ChangesListLinesHandler( $changeFactory, $formatter );
 
 		$line = '';
 		$classes = [];
-		$handler->doOldChangesListRecentChangesLine(
+		$handler->onOldChangesListRecentChangesLine(
 			$changesList,
 			$line,
 			$this->getWikibaseChange(),
@@ -193,17 +171,18 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 
 		$formatter = $this->getChangeLineFormatter();
 		$formatter->expects( $this->once() )
-			->method( 'formatDataForEnhancedBlockLine' )
-			->willReturn( true );
+			->method( 'formatDataForEnhancedBlockLine' );
 
-		$changesList = $this->getMockBuilder( EnhancedChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
+		$changesList->method( 'getUser' )
+			->willReturn( $this->createMock( User::class ) );
+		$changesList->method( 'getLanguage' )
+			->willReturn( $this->createMock( Language::class ) );
 
 		$handler = new ChangesListLinesHandler( $changeFactory, $formatter );
 
 		$data = [];
-		$handler->doEnhancedChangesListModifyBlockLineData(
+		$handler->onEnhancedChangesListModifyBlockLineData(
 			$changesList,
 			$data,
 			$this->getWikibaseChange()
@@ -215,18 +194,19 @@ class ChangesListLinesHandlerTest extends MediaWikiTestCase {
 
 		$formatter = $this->getChangeLineFormatter();
 		$formatter->expects( $this->once() )
-			->method( 'formatDataForEnhancedLine' )
-			->willReturn( true );
+			->method( 'formatDataForEnhancedLine' );
 
-		$changesList = $this->getMockBuilder( EnhancedChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $this->createMock( EnhancedChangesList::class );
+		$changesList->method( 'getUser' )
+			->willReturn( $this->createMock( User::class ) );
+		$changesList->method( 'getLanguage' )
+			->willReturn( $this->createMock( Language::class ) );
 
 		$handler = new ChangesListLinesHandler( $changeFactory, $formatter );
 
 		$data = [];
 		$classes = [];
-		$handler->doEnhancedChangesListModifyLineData(
+		$handler->onEnhancedChangesListModifyLineData(
 			$changesList,
 			$data,
 			[],

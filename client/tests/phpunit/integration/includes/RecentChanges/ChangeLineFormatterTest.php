@@ -76,8 +76,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 		$externalChange = $changeFactory->newFromRecentChange( $recentChange );
 
 		$formatter = new ChangeLineFormatter(
-			$changesList->getUser(),
-			Language::factory( 'en' ),
 			$this->repoLinker
 		);
 
@@ -85,7 +83,9 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$externalChange,
 			$recentChange->getTitle(),
 			$recentChange->counter,
-			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' )
+			$changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' ),
+			Language::factory( 'en' ),
+			$this->getTestContext()->getUser()
 		);
 
 		foreach ( $expectedTags as $key => $tagMatcher ) {
@@ -107,8 +107,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 */
 	public function testFormatDataForEnhancedLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
-			$this->getTestContext()->getUser(),
-			Language::factory( 'en' ),
 			$this->repoLinker
 		);
 
@@ -133,7 +131,9 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$data,
 			$externalChange,
 			$recentChange->getTitle(),
-			$recentChange->counter
+			$recentChange->counter,
+			Language::factory( 'en' ),
+			$this->getTestContext()->getUser()
 		);
 
 		$this->assertArrayNotHasKey( 'characterDiff', $data );
@@ -187,8 +187,6 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 	 */
 	public function testFormatDataForEnhancedBlockLine( array $expectedTags, array $patterns, RecentChange $recentChange ) {
 		$formatter = new ChangeLineFormatter(
-			$this->getTestContext()->getUser(),
-			Language::factory( 'en' ),
 			$this->repoLinker
 		);
 
@@ -214,7 +212,9 @@ class ChangeLineFormatterTest extends MediaWikiLangTestCase {
 			$data,
 			$externalChange,
 			$recentChange->getTitle(),
-			$recentChange->counter
+			$recentChange->counter,
+			Language::factory( 'en' ),
+			$this->getTestContext()->getUser()
 		);
 
 		$this->assertArrayNotHasKey( 'separatorAftercharacterDiff', $data );

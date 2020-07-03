@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\RecentChanges;
 
 use Language;
@@ -21,91 +23,80 @@ use Wikibase\DataModel\Entity\EntityId;
 class ChangeLineFormatter {
 
 	/**
-	 * @var User
-	 */
-	private $user;
-
-	/**
-	 * @var Language
-	 */
-	private $lang;
-
-	/**
 	 * @var RepoLinker
 	 */
 	private $repoLinker;
 
-	public function __construct( User $user, Language $lang, RepoLinker $repoLinker ) {
-		$this->user = $user;
-		$this->lang = $lang;
+	public function __construct( RepoLinker $repoLinker ) {
 		$this->repoLinker = $repoLinker;
 	}
 
-	/**
-	 * @param ExternalChange $externalChange
-	 * @param Title $title
-	 * @param int $count
-	 * @param string $flag - flag formatted by ChangesList::recentChangesFlags()
-	 *
-	 * @return string HTML
-	 */
-	public function format( ExternalChange $externalChange, Title $title, $count, $flag ) {
+	public function format(
+		ExternalChange $externalChange,
+		Title $title,
+		int $count,
+		string $flag,
+		Language $lang,
+		User $user
+	): string {
 		$changeType = $externalChange->getChangeType();
 		$rev = $externalChange->getRev();
 		$entityId = $externalChange->getEntityId();
 
-		$line = ( $changeType === 'restore' || $changeType === 'remove' )
-			? $this->formatDeletionLogLink()
-			: $this->formatDiffHist( $entityId, $rev, $count );
+		$formattedHTMLLine = ( $changeType === 'restore' || $changeType === 'remove' )
+			? $this->formatDeletionLogLinkHTML()
+			: $this->formatDiffHistHTML( $entityId, $rev, $count, $lang );
 
-		$line .= $this->changeSeparator();
-		$line .= $flag . ' ';
+		$formattedHTMLLine .= $this->getChangeSeparatorHTML();
+		$formattedHTMLLine .= $flag . ' ';
 		// @fixme: deprecated method, use \LinkRenderer
 		$link = Linker::link( $title );
-		$line .= "<span class=\"mw-title\">$link</span>";
+		$formattedHTMLLine .= "<span class=\"mw-title\">$link</span>";
 
 		if ( $changeType !== 'remove' ) {
-			$line .= $this->formatEntityLink( $entityId );
+			$formattedHTMLLine .= $this->formatEntityLinkHTML( $entityId );
 		}
 
-		$line .= $this->formatTimestamp( $rev->getTimestamp() );
-		$line .= implode( $this->formatUserLinks( $rev->getUserName(), $rev->getVisibility() ) );
+		$formattedHTMLLine .= $this->formatTimestampHTML( $rev->getTimestamp(), $lang, $user );
+		$formattedHTMLLine .= implode( $this->formatUserLinksHTML( $rev->getUserName(), $rev->getVisibility(), $lang, $user ) );
 
-		$line .= $this->getFormattedComment( $rev, $title, $externalChange->getSiteId() );
+		$formattedHTMLLine .= $this->getFormattedCommentHTML( $rev, $title, $externalChange->getSiteId(), $user );
 
-		return $line;
+		return $formattedHTMLLine;
 	}
 
-	/**
-	 * @param array &$data
-	 * @param ExternalChange $externalChange
-	 * @param Title $title
-	 */
-	private function formatCommonDataForEnhancedLine( array &$data, ExternalChange $externalChange, Title $title ) {
+	private function formatCommonDataForEnhancedLine(
+		array &$data,
+		ExternalChange $externalChange,
+		Title $title,
+		Language $lang,
+		User $user
+	): void {
 		$entityId = $externalChange->getEntityId();
 		$rev = $externalChange->getRev();
 
 		$data['recentChangesFlags']['wikibase-edit'] = true;
-		$data['timestampLink'] = $this->buildPermanentLink( $entityId, $rev );
+		$data['timestampLink'] = $this->buildPermanentLinkHTML( $entityId, $rev, $lang, $user );
 
-		$userLinks = $this->formatUserLinks( $rev->getUserName(), $rev->getVisibility() );
+		$userLinks = $this->formatUserLinksHTML( $rev->getUserName(), $rev->getVisibility(), $lang, $user );
 		if ( count( $userLinks ) > 1 ) {
 			list( $data['userLink'], $data['userTalkLink'] ) = $userLinks;
 		} else {
 			$data['userLink'] = array_pop( $userLinks );
 		}
 
-		$data['comment'] = $this->getFormattedComment( $rev, $title, $externalChange->getSiteId() );
+		$data['comment'] = $this->getFormattedCommentHTML( $rev, $title, $externalChange->getSiteId(), $user );
 	}
 
-	/**
-	 * @param array &$data
-	 * @param ExternalChange $externalChange
-	 * @param Title $title
-	 * @param int $count
-	 */
-	public function formatDataForEnhancedLine( array &$data, ExternalChange $externalChange, Title $title, $count ) {
-		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title );
+	public function formatDataForEnhancedLine(
+		array &$data,
+		ExternalChange $externalChange,
+		Title $title,
+		int $count,
+		Language $lang,
+		User $user
+	): void {
+		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title, $lang, $user );
 
 		$entityId = $externalChange->getEntityId();
 		$rev = $externalChange->getRev();
@@ -115,24 +106,25 @@ class ChangeLineFormatter {
 		$data['currentAndLastLinks'] =
 			$wordSeparator . $this->repoLinker->buildEntityLink( $entityId ) . $wordSeparator;
 		$data['currentAndLastLinks'] .= ( $changeType === 'restore' || $changeType === 'remove' )
-			? $this->formatDeletionLogLink()
-			: $this->formatDiffHist( $entityId, $rev, $count );
+			? $this->formatDeletionLogLinkHTML()
+			: $this->formatDiffHistHTML( $entityId, $rev, $count, $lang );
 
-		$data['separatorAfterCurrentAndLastLinks'] = $this->changeSeparator();
+		$data['separatorAfterCurrentAndLastLinks'] = $this->getChangeSeparatorHTML();
 
 		unset( $data['characterDiff'] );
 		// @fixme: this has different case than in formatDataForEnhancedBlockLine
 		unset( $data['separatorAfterCharacterDiff'] );
 	}
 
-	/**
-	 * @param array &$data
-	 * @param ExternalChange $externalChange
-	 * @param Title $title
-	 * @param int $count
-	 */
-	public function formatDataForEnhancedBlockLine( array &$data, ExternalChange $externalChange, Title $title, $count ) {
-		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title );
+	public function formatDataForEnhancedBlockLine(
+		array &$data,
+		ExternalChange $externalChange,
+		Title $title,
+		int $count,
+		Language $lang,
+		User $user
+	): void {
+		$this->formatCommonDataForEnhancedLine( $data, $externalChange, $title, $lang, $user );
 
 		$entityId = $externalChange->getEntityId();
 		$rev = $externalChange->getRev();
@@ -140,36 +132,29 @@ class ChangeLineFormatter {
 
 		if ( $changeType === 'restore' || $changeType === 'remove' ) {
 			$data['articleLink'] = ''
-				. $this->formatDeletionLogLink()
+				. $this->formatDeletionLogLinkHTML()
 				. $data['articleLink']
-				. $this->formatEntityLink( $entityId );
+				. $this->formatEntityLinkHTML( $entityId );
 			unset( $data['historyLink'] );
 		} else {
-			$data['articleLink'] .= $this->formatEntityLink( $entityId );
+			$data['articleLink'] .= $this->formatEntityLinkHTML( $entityId );
 			$data['historyLink'] = ''
 				. wfMessage( 'word-separator' )->escaped()
-				. $this->formatDiffHist( $entityId, $rev, $count );
+				. $this->formatDiffHistHTML( $entityId, $rev, $count, $lang );
 		}
 
-		$data['separatorAfterLinks'] = $this->changeSeparator();
+		$data['separatorAfterLinks'] = $this->getChangeSeparatorHTML();
 
 		unset( $data['characterDiff'] );
 		// @fixme: this has different case than in formatDataForEnhancedLine
 		unset( $data['separatorAftercharacterDiff'] );
 	}
 
-	/**
-	 * @param RevisionData $rev
-	 * @param Title $title
-	 * @param string $siteId
-	 *
-	 * @return string HTML
-	 */
-	private function getFormattedComment( RevisionData $rev, Title $title, $siteId ) {
+	private function getFormattedCommentHTML( RevisionData $rev, Title $title, string $siteId, User $user ): string {
 		if ( !RevisionRecord::userCanBitfield(
 			$rev->getVisibility(),
 			RevisionRecord::DELETED_COMMENT,
-			$this->user )
+			$user )
 		) {
 			return ' <span class="history-deleted comment">' .
 				wfMessage( 'rev-deleted-comment' )->escaped() . '</span>';
@@ -179,50 +164,38 @@ class ChangeLineFormatter {
 		if ( $commentHtml === null || $commentHtml === '' ) {
 			$commentHtml = Linker::formatComment( $rev->getComment(), $title, false, $siteId );
 		}
-		return $this->wrapCommentBlock( $commentHtml );
+		return $this->wrapCommentBlockHTML( $commentHtml );
 	}
 
-	/**
-	 * @param string $commentHtml Formatted comment HTML
-	 *
-	 * @return string Formatted comment HTML wrapped as comment block
-	 */
-	private function wrapCommentBlock( $commentHtml ) {
+	private function wrapCommentBlockHTML( string $commentHtml ): string {
 		//NOTE: keep in sync with Linker::commentBlock
 		$formatted = wfMessage( 'parentheses' )->rawParams( $commentHtml )->escaped();
 		return " <span class=\"comment\">$formatted</span>";
 	}
 
-	/**
-	 * @return string HTML
-	 */
-	private function changeSeparator() {
+	private function getChangeSeparatorHTML(): string {
 		return ' <span class="mw-changeslist-separator">. .</span> ';
 	}
 
-	/**
-	 * @param string $timestamp
-	 *
-	 * @return string HTML
-	 */
-	private function formatTimestamp( $timestamp ) {
+	private function formatTimestampHTML( string $timestamp, Language $lang, User $user ): string {
 		return wfMessage( 'semicolon-separator' )->text()
 			. '<span class="mw-changeslist-date">'
-			. $this->lang->userTime( $timestamp, $this->user )
+			. $lang->userTime( $timestamp, $user )
 			. '</span> <span class="mw-changeslist-separator">. .</span> ';
 	}
 
 	/**
 	 * @param string $userName
 	 * @param int $visibility
-	 *
+	 * @param Language $lang
+	 * @param User $user
 	 * @return string[] array of HTML
 	 */
-	private function formatUserLinks( $userName, int $visibility ) {
+	private function formatUserLinksHTML( string $userName, int $visibility, Language $lang, User $user ): array {
 		if ( !RevisionRecord::userCanBitfield(
 			$visibility,
 			RevisionRecord::DELETED_USER,
-			$this->user )
+			$user )
 		) {
 			return [
 				' <span class="history-deleted">' .
@@ -230,12 +203,12 @@ class ChangeLineFormatter {
 			];
 		}
 
-		$links = $this->buildUserLinks( $userName );
+		$links = $this->buildUserLinksHTML( $userName );
 
 		if ( User::isIP( $userName ) ) {
-			return $this->formatIpUserLinks( $links );
+			return $this->formatIpUserLinksHTML( $links );
 		} else {
-			return $this->formatRegisteredUserLinks( $links );
+			return $this->formatRegisteredUserLinksHTML( $links, $lang );
 		}
 	}
 
@@ -246,7 +219,7 @@ class ChangeLineFormatter {
 	 *
 	 * @return string[] array of HTML
 	 */
-	private function formatIpUserLinks( array $links ) {
+	private function formatIpUserLinksHTML( array $links ): array {
 		$ret = [];
 
 		$ret[] = $links['contribs'];
@@ -260,12 +233,11 @@ class ChangeLineFormatter {
 
 	/**
 	 * @fixme use shared bits of formatting from ChangesList and OldChangesList
-	 *
 	 * @param string[] $links
-	 *
+	 * @param Language $lang
 	 * @return string[] array of HTML
 	 */
-	private function formatRegisteredUserLinks( array $links ) {
+	private function formatRegisteredUserLinksHTML( array $links, Language $lang ): array {
 		$ret = [];
 
 		$ret[] = $links['user'];
@@ -278,29 +250,21 @@ class ChangeLineFormatter {
 		$ret[] = wfMessage( 'word-separator' )->plain()
 			. '<span class="mw-usertoollinks">'
 			. wfMessage( 'parentheses' )->rawParams(
-				$this->lang->pipeList( $usertools )
+				$lang->pipeList( $usertools )
 			)->text()
 			. '</span>';
 
 		return $ret;
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return string HTML
-	 */
-	private function formatEntityLink( EntityId $entityId ) {
+	private function formatEntityLinkHTML( EntityId $entityId ): string {
 		$entityLink = $this->repoLinker->buildEntityLink( $entityId );
 
 		return wfMessage( 'word-separator' )->plain()
 			. wfMessage( 'parentheses' )->rawParams( $entityLink )->text();
 	}
 
-	/**
-	 * @return string HTML
-	 */
-	private function formatDeletionLogLink() {
+	private function formatDeletionLogLinkHTML(): string {
 		$logLink = $this->repoLinker->formatLink(
 			$this->repoLinker->getPageUrl( 'Special:Log/delete' ),
 			wfMessage( 'dellogpage' )->text()
@@ -309,29 +273,16 @@ class ChangeLineFormatter {
 		return wfMessage( 'parentheses' )->rawParams( $logLink )->text();
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @param RevisionData $rev
-	 * @param int $count
-	 *
-	 * @return string HTML
-	 */
-	private function formatDiffHist( EntityId $entityId, RevisionData $rev, $count ) {
-		$diffLink = $this->buildDiffLink( $entityId, $rev, $count );
-		$historyLink = $this->buildHistoryLink( $entityId, $rev );
+	private function formatDiffHistHTML( EntityId $entityId, RevisionData $rev, int $count, Language $lang ): string {
+		$diffLink = $this->buildDiffLinkHTML( $entityId, $rev, $count );
+		$historyLink = $this->buildHistoryLinkHTML( $entityId, $rev );
 
 		return wfMessage( 'parentheses' )->rawParams(
-			$this->lang->pipeList( [ $diffLink, $historyLink ] )
+			$lang->pipeList( [ $diffLink, $historyLink ] )
 		)->text();
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @param RevisionData $rev
-	 *
-	 * @return string HTML
-	 */
-	private function buildPermanentLink( EntityId $entityId, RevisionData $rev ) {
+	private function buildPermanentLinkHTML( EntityId $entityId, RevisionData $rev, Language $lang, User $user ): string {
 		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
@@ -342,18 +293,11 @@ class ChangeLineFormatter {
 
 		return $this->repoLinker->formatLink(
 			$url,
-			$this->lang->userTime( $rev->getTimestamp(), $this->user )
+			$lang->userTime( $rev->getTimestamp(), $user )
 		);
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @param RevisionData $rev
-	 * @param int $count
-	 *
-	 * @return string HTML
-	 */
-	private function buildDiffLink( EntityId $entityId, RevisionData $rev, $count ) {
+	private function buildDiffLinkHTML( EntityId $entityId, RevisionData $rev, $count ): string {
 		$params = [
 			'title' => $this->repoLinker->getEntityTitle( $entityId ),
 			'curid' => $rev->getPageId(),
@@ -372,13 +316,7 @@ class ChangeLineFormatter {
 		);
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @param RevisionData $rev
-	 *
-	 * @return string HTML
-	 */
-	private function buildHistoryLink( EntityId $entityId, RevisionData $rev ) {
+	private function buildHistoryLinkHTML( EntityId $entityId, RevisionData $rev ): string {
 		$titleText = $this->repoLinker->getEntityTitle( $entityId );
 
 		$params = [
@@ -395,12 +333,7 @@ class ChangeLineFormatter {
 		);
 	}
 
-	/**
-	 * @param string $userName
-	 *
-	 * @return string HTML
-	 */
-	private function buildUserLink( $userName ) {
+	private function buildUserLinkHTML( string $userName ): string {
 		return $this->repoLinker->formatLink(
 			// @todo: localise this once namespaces are localised on the repo
 			$this->repoLinker->getPageUrl( "User:$userName" ),
@@ -411,13 +344,7 @@ class ChangeLineFormatter {
 		);
 	}
 
-	/**
-	 * @param string $userName
-	 * @param string|null $text
-	 *
-	 * @return string HTML
-	 */
-	private function buildUserContribsLink( $userName, $text = null ) {
+	private function buildUserContribsLinkHTML( string $userName, ?string $text = null ): string {
 		// @todo: know how the repo is localised. it's english now
 		// for namespaces and special pages
 		$link = $this->repoLinker->getPageUrl( "Special:Contributions/$userName" );
@@ -429,12 +356,7 @@ class ChangeLineFormatter {
 		return $this->repoLinker->formatLink( $link, $text );
 	}
 
-	/**
-	 * @param string $userName
-	 *
-	 * @return string HTML
-	 */
-	private function buildUserTalkLink( $userName ) {
+	private function buildUserTalkLinkHTML( string $userName ): string {
 		// @todo: localize this once we can localize namespaces on the repo
 		$link = $this->repoLinker->getPageUrl( "User_talk:$userName" );
 		$text = wfMessage( 'talkpagelinktext' )->text();
@@ -447,16 +369,16 @@ class ChangeLineFormatter {
 	 *
 	 * @return string[] List of HTML links
 	 */
-	private function buildUserLinks( $userName ) {
+	private function buildUserLinksHTML( string $userName ): array {
 		$links = [];
 
-		$links['usertalk'] = $this->buildUserTalkLink( $userName );
+		$links['usertalk'] = $this->buildUserTalkLinkHTML( $userName );
 
 		if ( User::isIP( $userName ) ) {
-			$links['contribs'] = $this->buildUserContribsLink( $userName, $userName );
+			$links['contribs'] = $this->buildUserContribsLinkHTML( $userName, $userName );
 		} else {
-			$links['user'] = $this->buildUserLink( $userName );
-			$links['contribs'] = $this->buildUserContribsLink( $userName );
+			$links['user'] = $this->buildUserLinkHTML( $userName );
+			$links['contribs'] = $this->buildUserContribsLinkHTML( $userName );
 		}
 
 		return $links;
