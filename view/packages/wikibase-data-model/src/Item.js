@@ -69,13 +69,6 @@ var SELF = util.inherit(
 	/**
 	 * @param {SiteLink} siteLink
 	 */
-	addSiteLink: function( siteLink ) {
-		this._siteLinkSet.setSiteLink( siteLink );
-	},
-
-	/**
-	 * @param {SiteLink} siteLink
-	 */
 	removeSiteLink: function( siteLink ) {
 		this._siteLinkSet.removeSiteLink( siteLink );
 	},

@@ -86,14 +86,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {boolean}
-	 */
-	hasLabelFor: function( languageCode ) {
-		return this._labels.hasItemForKey( languageCode );
-	},
-
-	/**
-	 * @param {string} languageCode
 	 * @param {Term|null} term
 	 */
 	setLabel: function( languageCode, term ) {
@@ -145,14 +137,6 @@ $.extend( SELF.prototype, {
 
 	/**
 	 * @param {string} languageCode
-	 * @return {boolean}
-	 */
-	hasDescriptionFor: function( languageCode ) {
-		return this._descriptions.hasItemForKey( languageCode );
-	},
-
-	/**
-	 * @param {string} languageCode
 	 * @param {Term|null} term
 	 */
 	setDescription: function( languageCode, term ) {
@@ -200,14 +184,6 @@ $.extend( SELF.prototype, {
 	 */
 	hasAliases: function( languageCode, aliases ) {
 		return this._aliases.hasItem( languageCode, aliases );
-	},
-
-	/**
-	 * @param {string} languageCode
-	 * @return {boolean}
-	 */
-	hasAliasesFor: function( languageCode ) {
-		return this._aliases.hasItemForKey( languageCode );
 	},
 
 	/**

@@ -46,9 +46,9 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 	function checkGetters( assert, term, map ) {
 		var languageCodes = map.getKeys(),
 			functionNames = {
-				labels: ['getLabels', 'hasLabel', 'hasLabelFor', 'getLabelFor'],
-				descriptions: ['getDescriptions', 'hasDescription', 'hasDescriptionFor', 'getDescriptionFor'],
-				aliases: ['getAliases', 'hasAliases', 'hasAliasesFor', 'getAliasesFor']
+				labels: ['getLabels', 'hasLabel', 'getLabelFor'],
+				descriptions: ['getDescriptions', 'hasDescription', 'getDescriptionFor'],
+				aliases: ['getAliases', 'hasAliases', 'getAliasesFor']
 			};
 
 		assert.ok(
@@ -154,13 +154,6 @@ QUnit.test( 'setLabel()', function( assert ) {
 		fingerprint.hasLabel( 'de', label ),
 		'Set label.'
 	);
-
-	fingerprint.setLabel( 'de', new Term( 'de', '' ) );
-
-	assert.ok(
-		!fingerprint.hasLabelFor( 'de' ),
-		'Set label with empty term removes label.'
-	);
 } );
 
 QUnit.test( 'removeLabel()', function( assert ) {
@@ -228,13 +221,6 @@ QUnit.test( 'setDescription()', function( assert ) {
 	assert.ok(
 		fingerprint.hasDescription( 'de', description ),
 		'Set description.'
-	);
-
-	fingerprint.setDescription( 'de', new Term( 'de', '' ) );
-
-	assert.ok(
-		!fingerprint.hasDescriptionFor( 'de' ),
-		'Set description with empty term removes description.'
 	);
 } );
 
@@ -330,13 +316,6 @@ QUnit.test( 'setAliases()', function( assert ) {
 	assert.ok(
 		fingerprint.hasAliases( 'en', enAliases ),
 		'Set aliases passing a MultiTermMap object.'
-	);
-
-	fingerprint.setAliases( 'en', new MultiTerm( 'en', [] ) );
-
-	assert.ok(
-		!fingerprint.hasAliasesFor( 'en' ),
-		'Set aliases with empty list removes aliases.'
 	);
 
 	assert.throws(

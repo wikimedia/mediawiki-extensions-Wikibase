@@ -63,13 +63,6 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * @param {string[]} [badges=[]]
-	 */
-	setBadges: function( badges ) {
-		this._badges = badges || [];
-	},
-
-	/**
 	 * @return {string[]}
 	 */
 	getBadges: function() {

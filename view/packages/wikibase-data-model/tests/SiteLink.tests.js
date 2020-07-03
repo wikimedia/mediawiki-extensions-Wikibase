@@ -37,22 +37,6 @@ QUnit.test( 'Badges', function( assert ) {
 		'Instantiated site link with no badges.'
 	);
 
-	siteLink.setBadges( badges );
-
-	assert.equal(
-		badges.join( ',' ),
-		siteLink.getBadges().join( ',' ),
-		'Set badges.'
-	);
-
-	siteLink.setBadges();
-
-	assert.equal(
-		siteLink.getBadges().length,
-		0,
-		'Removed badges.'
-	);
-
 	siteLink = new SiteLink( 'test-id', 'test-page', badges );
 
 	assert.equal(
