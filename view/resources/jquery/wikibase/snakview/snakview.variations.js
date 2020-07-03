@@ -96,25 +96,6 @@
 		 */
 		getVariation: function ( snakType ) {
 			return variations[ snakType ] || null;
-		},
-
-		/**
-		 * Returns a `Variation` instance used by a `jQuery.wikibase.snakview` for representing a
-		 * particular kind of `Snak`.
-		 *
-		 * @param {string} snakType
-		 * @param {jQuery.wikibase.snakview.ViewState} viewState
-		 * @param {jQuery} $variationViewPort
-		 * @return {Variation|null}
-		 */
-		newFromSnakType: function ( snakType, viewState, $variationViewPort ) {
-			if ( typeof snakType !== 'string' ) {
-				throw new Error( 'Snak type required for choosing a suitable variation' );
-			}
-			if ( !SELF.hasVariation( snakType ) ) {
-				return null;
-			}
-			return new ( SELF.getVariation( snakType ) )( viewState, $variationViewPort );
 		}
 	};
 
