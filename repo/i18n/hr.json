@@ -98,6 +98,10 @@
 	"wikibase-entityselector-more": "više",
 	"wikibase-entityselector-notfound": "Podudarnost nije pronađena",
 	"wikibase-anonymouseditwarning": "Upozorenje: niste prijavljeni. Vaša [https://hr.wikipedia.org/wiki/IP_broj IP-adresa] bit će javno vidljiva, ako načinite i jedno uređivanje. Ako ste <strong>[[Special:UserLogin|prijavljeni]]</strong> ili <strong>[[Special:CreateAccount|stvorite račun]]</strong>, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu uz druge koristi.",
+	"wikibase-anonymouseditwarning-heading": "Trenutačno niste prijavljeni",
+	"wikibase-anonymouseditwarning-message": "Trenutačno Vaša IP-adresa bit će javno vidljiva, ukoliko načinite bilo koje uređivanje. Ako se prijavite ili stvorite račun, Vaša će uređivanja biti pripisana Vašemu suradničkom imenu, uz druge blagodati.",
+	"wikibase-anonymouseditwarning-dismiss-persist": "Upozori me kad god nisam prijavljen.",
+	"wikibase-anonymouseditwarning-dismiss-button": "Želim uređivati bez prijave",
 	"wikibase-validator-invalid": "Vrijednost nije valjana",
 	"wikibase-validator-missing-field": "Nedostaje obvezno polje \"$1\"",
 	"wikibase-validator-bad-type": "$2 umjesto $1",
@@ -183,5 +187,6 @@
 	"wikibase-listdatatypes-time-head": "Vrijeme",
 	"wikibase-concept-uri": "URI koncepta",
 	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom",
-	"wikibase-tainted-ref-popper-remove-warning": "Ukloni upozorenje"
+	"wikibase-tainted-ref-popper-remove-warning": "Ukloni upozorenje",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Popis svojstava na $2]"
 }

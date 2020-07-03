@@ -6,7 +6,9 @@
 		]
 	},
 	"wikibase-editlinks": "Ticpatlaz in tlatzonhuiliztli",
-	"wikibase-rc-hide-wikidata-hide": "Tiquihyānaz",
+	"wikibase-linkitem-input-site": "Tlahtolli",
+	"wikibase-rc-hide-wikidata-hide": "Tictlatiz",
 	"wikibase-rc-hide-wikidata-show": "Monextiz",
-	"wikibase-rc-wikibase-edit-letter": "M"
+	"wikibase-rc-wikibase-edit-letter": "M",
+	"wikibase-sitelinks-sitename-columnheading": "Tlahtolli"
 }

@@ -474,5 +474,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Remover aviso",
 	"wikibase-tainted-ref-tainted-icon-title": "Esta declaração tem alguns problemas em potencial.",
 	"wikibase-federated-properties-save-api-error-message": "Seu salvamento falhou devido a uma solicitação falhada á Wiki de origem da federação.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "As instruções sobre este item estão temporariamente indisponíveis devido a uma falha na solicitação á wiki de origem da federação. Atualize a página."
+	"wikibase-federated-properties-source-wiki-api-error-message": "As instruções sobre este item estão temporariamente indisponíveis devido a uma falha na solicitação á wiki de origem da federação. Atualize a página.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "Este Wikibase usa propriedades federadas de uma fonte externa. Você pode acessar o $1.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista de propriedades em $2]"
 }
