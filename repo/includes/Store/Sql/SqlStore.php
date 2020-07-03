@@ -37,6 +37,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
+use Wikibase\Lib\Store\Sql\SqlChangeStore;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;

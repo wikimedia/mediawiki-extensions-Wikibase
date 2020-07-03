@@ -19,7 +19,7 @@ class NoBadDependencyUsageTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringsNotInLib(
 			[
 				'WikibaseRepo' . '::' => 0,
-				'Wikibase\\Repo\\' => 1,
+				'Wikibase\\Repo\\' => 0,
 				'Wikibase\\\\Repo\\\\' => 1,
 				'WikibaseClient' . '::' => 0,
 				'Wikibase\\Client\\' => 0,
