@@ -2,9 +2,11 @@
 
 namespace Wikibase\Client\Hooks;
 
+use MediaWiki\Hook\ParserFirstCallInitHook;
 use Parser;
 use PPFrame;
 use Wikibase\Client\DataAccess\ParserFunctions\Runner;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 
 /**
@@ -12,7 +14,7 @@ use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Thiemo Kreuz
  */
-class ParserFunctionRegistrant {
+class ParserFunctionRegistrant implements ParserFirstCallInitHook {
 
 	/**
 	 * @var bool Setting to enable use of property parser function.
@@ -32,7 +34,17 @@ class ParserFunctionRegistrant {
 		$this->allowLocalShortDesc = $allowLocalShortDesc;
 	}
 
-	public function register( Parser $parser ) {
+	public static function newFromGlobalState(): self {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$settings = $wikibaseClient->getSettings();
+		return new self(
+			$settings->getSetting( 'allowDataTransclusion' ),
+			$settings->getSetting( 'allowLocalShortDesc' )
+		);
+	}
+
+	/** @param Parser $parser */
+	public function onParserFirstCallInit( $parser ): void {
 		$this->registerNoLangLinkHandler( $parser );
 		$this->registerShortDescHandler( $parser );
 		$this->registerParserFunctions( $parser );

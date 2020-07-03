@@ -6,7 +6,6 @@ use Action;
 use ContentHandler;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
-use Parser;
 use ParserOutput;
 use RecentChange;
 use SearchEngine;
@@ -212,15 +211,6 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-	}
-
-	/**
-	 * Register the parser functions.
-	 *
-	 * @param Parser $parser
-	 */
-	public static function onParserFirstCallInit( Parser $parser ) {
-		WikibaseClient::getDefaultInstance()->getParserFunctionRegistrant()->register( $parser );
 	}
 
 	/**

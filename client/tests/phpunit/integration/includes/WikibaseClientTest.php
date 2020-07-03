@@ -18,7 +18,6 @@ use Wikibase\Client\DataAccess\ParserFunctions\Runner;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\OtherProjectsSitesProvider;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
@@ -386,11 +385,6 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 			'repointerwiki>',
 			$recentChangeFactory->externalUsernames->addPrefix( 'TestUser' )
 		);
-	}
-
-	public function testGetParserFunctionRegistrant() {
-		$registrant = $this->getWikibaseClient()->getParserFunctionRegistrant();
-		$this->assertInstanceOf( ParserFunctionRegistrant::class, $registrant );
 	}
 
 	public function testGetPropertyParserFunctionRunner() {

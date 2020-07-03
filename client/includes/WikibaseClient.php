@@ -44,7 +44,6 @@ use Wikibase\Client\DataAccess\SnaksFinder;
 use Wikibase\Client\Hooks\LangLinkHandlerFactory;
 use Wikibase\Client\Hooks\LanguageLinkBadgeDisplay;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGeneratorFactory;
-use Wikibase\Client\Hooks\ParserFunctionRegistrant;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -1175,16 +1174,6 @@ final class WikibaseClient {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
 		}
 		return $entityDiffer;
-	}
-
-	/**
-	 * @return ParserFunctionRegistrant
-	 */
-	public function getParserFunctionRegistrant() {
-		return new ParserFunctionRegistrant(
-			$this->settings->getSetting( 'allowDataTransclusion' ),
-			$this->settings->getSetting( 'allowLocalShortDesc' )
-		);
 	}
 
 	/**

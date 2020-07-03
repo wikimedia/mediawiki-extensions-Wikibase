@@ -77,6 +77,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
 			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::newFromGlobalState"
 		},
+		"ParserFunctionRegistrant": {
+			"class": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant",
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::newFromGlobalState"
+		},
 		"ParserHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
@@ -123,7 +127,7 @@
 		"OutputPageParserOutput": "SidebarHookHandler",
 		"ParserCacheSaveComplete": "DataUpdateHookHandler",
 		"ParserClearState": "ParserHookHandler",
-		"ParserFirstCallInit": "\\Wikibase\\Client\\ClientHooks::onParserFirstCallInit",
+		"ParserFirstCallInit": "ParserFunctionRegistrant",
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",

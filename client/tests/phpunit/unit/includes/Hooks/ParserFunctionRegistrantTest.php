@@ -63,7 +63,7 @@ class ParserFunctionRegistrantTest extends \PHPUnit\Framework\TestCase {
 
 		list( $allowDataTransclusion, $allowLocalShortDesc ) = array_values( $constructorArgs );
 		$registrant = new ParserFunctionRegistrant( $allowDataTransclusion, $allowLocalShortDesc );
-		$registrant->register( $parser );
+		$registrant->onParserFirstCallInit( $parser );
 		$actual = $parser->getFunctionHooks();
 		foreach ( $expected as $funcHook ) {
 			$this->assertContains( $funcHook, $actual );
