@@ -3,8 +3,6 @@
 namespace Wikibase\Repo\Api;
 
 use ApiResult;
-use MediaWiki\Revision\RevisionRecord;
-use Revision;
 use Serializers\Serializer;
 use SiteLookup;
 use Status;
@@ -1085,9 +1083,9 @@ class ResultBuilder {
 	/**
 	 * Adds the ID of the new revision from the Status object to the API result structure.
 	 * The status value is expected to be structured in the way that EditEntity::attemptSave()
-	 * resp WikiPage::doEditContent() do it: as an array, with an EntityRevision or Revision
-	 *  object in the 'revision' field. If $oldRevId is set and the latest edit was null,
-	 * a 'nochange' flag is also added.
+	 * resp WikiPage::doEditContent() do it: as an array, with an EntityRevision object in the
+	 *  'revision' field. If $oldRevId is set and the latest edit was null, a 'nochange' flag
+	 *  is also added.
 	 *
 	 * If no revision is found in the Status object, this method does nothing.
 	 *
@@ -1102,7 +1100,12 @@ class ResultBuilder {
 		$value = $status->getValue();
 
 		if ( isset( $value['revision'] ) ) {
-			$revisionId = $this->getRevisionId( $value['revision'] );
+			if ( $value['revision'] instanceof EntityRevision ) {
+				// Should always be the case, but sanity check
+				$revisionId = $value['revision']->getRevisionId();
+			} else {
+				$revisionId = 0;
+			}
 
 			$this->setValue( $path, 'lastrevid', $revisionId );
 
@@ -1111,16 +1114,6 @@ class ResultBuilder {
 				$this->setValue( $path, 'nochange', true );
 			}
 		}
-	}
-
-	private function getRevisionId( $revision ) {
-		if ( $revision instanceof Revision || $revision instanceof RevisionRecord ) {
-			$revisionId = $revision->getId();
-		} elseif ( $revision instanceof EntityRevision ) {
-			$revisionId = $revision->getRevisionId();
-		}
-
-		return empty( $revisionId ) ? 0 : $revisionId;
 	}
 
 }

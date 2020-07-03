@@ -7,7 +7,6 @@ use DataValues\Serializers\DataValueSerializer;
 use DataValues\StringValue;
 use HashSiteStore;
 use InvalidArgumentException;
-use Revision;
 use Status;
 use Title;
 use Wikibase\DataModel\Entity\Item;
@@ -1391,11 +1390,11 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAddRevisionIdFromStatusToResult() {
 		$result = $this->getDefaultResult();
-		$mockRevision = $this->getMockBuilder( Revision::class )
-		->disableOriginalConstructor()
-		->getMock();
+		$mockRevision = $this->getMockBuilder( EntityRevision::class )
+			->disableOriginalConstructor()
+			->getMock();
 		$mockRevision->expects( $this->once() )
-			->method( 'getId' )
+			->method( 'getRevisionId' )
 			->will( $this->returnValue( 123 ) );
 		$mockStatus = $this->createMock( Status::class );
 		$mockStatus->expects( $this->once() )
