@@ -27,7 +27,7 @@ QUnit.test( 'Basic tests', function( assert ) {
 } );
 
 QUnit.test( 'Badges', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 2 );
 	var siteLink = new SiteLink( 'test-id', 'test-page' ),
 		badges = ['Q123', 'Q456'];
 

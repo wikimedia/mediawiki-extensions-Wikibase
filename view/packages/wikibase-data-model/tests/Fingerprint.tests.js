@@ -35,7 +35,7 @@ var testSets = [
 ];
 
 QUnit.test( 'Constructor (positive)', function( assert ) {
-	assert.expect( 26 );
+	assert.expect( 20 );
 	var i, fingerprint;
 
 	/**
@@ -68,12 +68,6 @@ QUnit.test( 'Constructor (positive)', function( assert ) {
 			assert.ok(
 				fingerprint[functionNames[term][2]]( languageCodes[j] ),
 				'Test set #' + i + ': Verified result of ' + functionNames[term][2]
-					+ ' for language #' + languageCodes[j] + '.'
-			);
-
-			assert.ok(
-				fingerprint[functionNames[term][3]]( languageCodes[j] ),
-				'Test set #' + i + ': Verified result of ' + functionNames[term][3]
 					+ ' for language #' + languageCodes[j] + '.'
 			);
 		}
@@ -132,7 +126,7 @@ QUnit.test( 'Constructor (negative)', function( assert ) {
 } );
 
 QUnit.test( 'setLabel()', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 3 );
 	var fingerprint = new Fingerprint(),
 		label = new Term( 'de', 'de-label' );
 
@@ -200,7 +194,7 @@ QUnit.test( 'removeLabelFor()', function( assert ) {
 } );
 
 QUnit.test( 'setDescription()', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 3 );
 	var fingerprint = new Fingerprint(),
 		description = new Term( 'de', 'de-description' );
 
@@ -274,7 +268,7 @@ QUnit.test( 'removeDescriptionFor()', function( assert ) {
 } );
 
 QUnit.test( 'setAliases()', function( assert ) {
-	assert.expect( 8 );
+	assert.expect( 7 );
 	var fingerprint = new Fingerprint(),
 		deAliases = new MultiTerm( 'de', ['de-alias'] ),
 		enAliases = new MultiTerm( 'en', ['en-alias'] ),
