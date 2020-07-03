@@ -10,11 +10,16 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"HookHandlers": {
+		"*": {
+			"class": "\\Wikibase\\Lib\\LibHooks"
+		}
+	},
 	"Hooks": {
-		"UnitTestsList": "\\Wikibase\\Lib\\LibHooks::onUnitTestsList",
-		"ResourceLoaderTestModules": "\\Wikibase\\Lib\\LibHooks::onResourceLoaderTestModules",
-		"ResourceLoaderRegisterModules": "\\Wikibase\\Lib\\LibHooks::onResourceLoaderRegisterModules",
-		"ExtensionTypes": "\\Wikibase\\Lib\\LibHooks::onExtensionTypes"
+		"UnitTestsList": "*",
+		"ResourceLoaderTestModules": "*",
+		"ResourceLoaderRegisterModules": "*",
+		"ExtensionTypes": "*"
 	},
 	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"MessagesDirs": {
