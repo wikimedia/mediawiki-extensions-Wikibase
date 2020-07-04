@@ -27,7 +27,7 @@ QUnit.test( 'Basic tests', function( assert ) {
 } );
 
 QUnit.test( 'Badges', function( assert ) {
-	assert.expect( 4 );
+	assert.expect( 2 );
 	var siteLink = new SiteLink( 'test-id', 'test-page' ),
 		badges = ['Q123', 'Q456'];
 
@@ -35,22 +35,6 @@ QUnit.test( 'Badges', function( assert ) {
 		siteLink.getBadges().length,
 		0,
 		'Instantiated site link with no badges.'
-	);
-
-	siteLink.setBadges( badges );
-
-	assert.equal(
-		badges.join( ',' ),
-		siteLink.getBadges().join( ',' ),
-		'Set badges.'
-	);
-
-	siteLink.setBadges();
-
-	assert.equal(
-		siteLink.getBadges().length,
-		0,
-		'Removed badges.'
 	);
 
 	siteLink = new SiteLink( 'test-id', 'test-page', badges );
