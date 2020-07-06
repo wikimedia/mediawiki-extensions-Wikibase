@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Mohamed Belarhzali",
 			"Tifinaghes"
 		]
 	},
+	"wikibase-edit": "senfel",
 	"wikibase-save": "ⵣⵎⵎⴻⵎ",
 	"wikibase-cancel": "ⵓⴽⵓⵙ",
 	"wikibase-add": "ⵔⵏⵉ",

@@ -7,7 +7,8 @@
 			"Glavkos",
 			"Nikosgranturismogt",
 			"Nikosguard",
-			"Protnet"
+			"Protnet",
+			"Xaris333"
 		]
 	},
 	"wikibase-client-desc": "Πελάτης για την επέκταση Wikibase",
@@ -74,6 +75,7 @@
 	"wikibase-pageinfo-entity-id-none": "Κανένα",
 	"wikibase-pageinfo-description-local": "Τοπική περιγραφή",
 	"wikibase-pageinfo-description-central": "Κεντρική περιγραφή",
+	"wikibase-pageinfo-entity-usage": "Οντότητες {{WBREPONAME}} που χρησιμοποιούνται σε αυτή τη σελίδα",
 	"wikibase-pageinfo-entity-usage-S": "Σύνδεσμος ιστοτόπου",
 	"wikibase-pageinfo-entity-usage-L": "Μερικές ετικέτες",
 	"wikibase-pageinfo-entity-usage-L-with-modifier": "Ετικέτα: $1",

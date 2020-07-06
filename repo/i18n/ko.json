@@ -421,5 +421,7 @@
 	"wikibase-tainted-ref-popper-help-link-text": "도움말",
 	"wikibase-tainted-ref-popper-remove-warning": "경고 제거",
 	"wikibase-tainted-ref-tainted-icon-title": "이 문에는 잠재적인 문제가 있습니다.",
-	"wikibase-setclaim-warning-duplicatemainsnak": "메인 스나크 복제가 감지되었습니다. 구문이 추가되지 않습니다."
+	"wikibase-setclaim-warning-duplicatemainsnak": "메인 스나크 복제가 감지되었습니다. 구문이 추가되지 않습니다.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "이 위키베이스는 외부 자원에서 결합된 특성을 사용하고 있습니다. $1에 접속해 세부 내용을 확인하실 수 있습니다.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 $2의 특성 목록]"
 }

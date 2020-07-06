@@ -454,5 +454,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Пронајдена е дуплирана главна спојница. Не го додадов исказот.",
 	"wikibase-federated-properties-save-api-error-message": "Зачувувањето не успеа поради неуспешно барање до здруженото изворно вики.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "Исказите за овој предмет се привремено недостапни поради неуспешно барање од изворното здружено вики. Превчитајте ја страницата."
+	"wikibase-federated-properties-source-wiki-api-error-message": "Исказите за овој предмет се привремено недостапни поради неуспешно барање од изворното здружено вики. Превчитајте ја страницата.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "Оваа викибаза користи здружени својства од надворешен извор. Можете да пристапите кон $1.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Список на својства на $2]"
 }

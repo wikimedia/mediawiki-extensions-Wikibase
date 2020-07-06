@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
+			"Laitei",
 			"Teitei Para"
 		]
 	},
-	"wikibase-editlinkstitle": "Interlanguage links taopathi"
+	"tooltip-t-wikibase": "Data pachôna chhaichhi lâta pazao hawpa link",
+	"wikibase-comment-update": "{{WBREPONAME}} chhaichhi pathlai haw",
+	"wikibase-dataitem": "{{WBREPONAME}} hmodâh",
+	"wikibase-editlinks": "Linkzy taopathi",
+	"wikibase-editlinkstitle": "Interlanguage links taopathi",
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-show": "Palâ",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} taopathi"
 }

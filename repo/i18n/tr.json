@@ -382,7 +382,7 @@
 	"wikibase-api-no-such-sitelink": "Rozetlerin düzenlenmesi esnasında \"$1\" için bir sitebağlantısı bulunamadı.",
 	"wikibase-api-not-recognized-datatype": "Bir veri türü bekleniyor ancak eksik ya da tanınmıyor.",
 	"wikibase-api-tags-invalid": "Etiketlerin değişkenleri geçersiz.",
-	"wikibase-api-target-not-empty": "Yönlendirme sadece boş veya silinmiş varlığın üstünde oluşturulabilir.",
+	"wikibase-api-target-not-empty": "Yönlendirme yalnızca boş veya silinmiş varlığın üstünde oluşturulabilir.",
 	"wikibase-api-target-is-redirect": "Yönlendirmenin hedefi başka bir yönlendirme olmamalıdır.",
 	"wikibase-api-target-is-incompatible": "Farklı türde bir varlığa yönlendirme denemesi.",
 	"wikibase-api-cant-redirect": "Yönlendirme oluşturulamıyor (muhtemelen bu türde varlıklar arasındaki yönlendirme desteklenmiyor).",
@@ -473,5 +473,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "Bu ifadenin bazı potansiyel sorunları var.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Çift ana yılan tespit edildi. Açıklama eklenmedi.",
 	"wikibase-federated-properties-save-api-error-message": "Federasyon kaynağı vikiye yapılan başarısız bir istek nedeniyle kaydınız başarısız oldu.",
-	"wikibase-federated-properties-source-wiki-api-error-message": "Federasyon kaynağı vikiye yapılan başarısız bir istek nedeniyle bu öğeyle ilgili ifadeler geçici olarak kullanılamıyor. Lütfen sayfayı yenileyin."
+	"wikibase-federated-properties-source-wiki-api-error-message": "Federasyon kaynağı vikiye yapılan başarısız bir istek nedeniyle bu öğeyle ilgili ifadeler geçici olarak kullanılamıyor. Lütfen sayfayı yenileyin.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "Bu Wikibase, harici bir kaynaktan gelen federe özellikleri kullanır. $1 erişebilirsiniz.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 $2 Üzerndeki Özellik Listesi]"
 }

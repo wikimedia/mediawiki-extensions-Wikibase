@@ -45,6 +45,7 @@
 	"wikibase-pageswithbadges-submit": "Montrez pagini",
 	"wikibase-entityusage-submit": "Montrez pagini",
 	"wikibase-pageinfo-entity-id": "Identifiko dil artiklo en {{WBREPONAME}}",
+	"wikibase-pageinfo-entity-id-none": "Nulo",
 	"wikibase-pageinfo-entity-usage": "Enti de {{WBREPONAME}} uzita en ca pagino",
 	"wikibase-pageinfo-entity-usage-S": "Ligilo a retsituo",
 	"wikibase-otherprojects": "En altra projeti",
