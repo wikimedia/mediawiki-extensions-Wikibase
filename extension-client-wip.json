@@ -89,6 +89,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::newFromGlobalState"
 		},
+		"SkinAfterPortletHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::newFromGlobalState"
+		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
@@ -137,7 +141,7 @@
 		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
 		"SidebarBeforeOutput": "SidebarHookHandler",
 		"SkinAfterBottomScripts": "\\Wikibase\\Client\\ClientHooks::onSkinAfterBottomScripts",
-		"SkinAfterPortlet": "\\Wikibase\\Client\\ClientHooks::onSkinAfterPortlet",
+		"SkinAfterPortlet": "SkinAfterPortletHandler",
 		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
 		"PageMoveComplete": "UpdateRepoHookHandler",
