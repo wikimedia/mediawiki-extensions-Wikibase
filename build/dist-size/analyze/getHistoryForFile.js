@@ -1,3 +1,5 @@
+'use strict';
+
 const getCommits = require( './queries/getCommits' );
 const getSizes = require( './queries/getSizes' );
 

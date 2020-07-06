@@ -1,3 +1,5 @@
+'use strict';
+
 require( 'cross-fetch/polyfill' );
 const ApolloClient = require( 'apollo-boost' ).default;
 const fs = require( 'fs' ).promises;
