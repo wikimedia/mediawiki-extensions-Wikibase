@@ -61,6 +61,10 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
 		},
+		"DeletePageNoticeCreator": {
+			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",
+			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::newFromGlobalState"
+		},
 		"DescriptionProviderHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
@@ -107,7 +111,7 @@
 	},
 	"Hooks": {
 		"AbortEmailNotification": "\\Wikibase\\Client\\ClientHooks::onAbortEmailNotification",
-		"ArticleDeleteAfterSuccess": "\\Wikibase\\Client\\ClientHooks::onArticleDeleteAfterSuccess",
+		"ArticleDeleteAfterSuccess": "DeletePageNoticeCreator",
 		"ArticleDeleteComplete": [
 			"UpdateRepoHookHandler",
 			"DataUpdateHookHandler"

@@ -15,7 +15,6 @@ use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
-use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
@@ -191,29 +190,6 @@ final class ClientHooks {
 			'label-message' => 'wikibase-watchlist-show-changes-pref',
 			'section' => 'watchlist/advancedwatchlist',
 		];
-	}
-
-	/**
-	 * Notify the user that we have automatically updated the repo or that they
-	 * need to do that per hand.
-	 *
-	 * @param Title $title
-	 * @param OutputPage $out
-	 */
-	public static function onArticleDeleteAfterSuccess( Title $title, OutputPage $out ) {
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
-		$repoLinker = $wikibaseClient->newRepoLinker();
-
-		$deletePageNotice = new DeletePageNoticeCreator(
-			$siteLinkLookup,
-			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
-			$repoLinker
-		);
-
-		$html = $deletePageNotice->getPageDeleteNoticeHtml( $title );
-
-		$out->addHTML( $html );
 	}
 
 	/**

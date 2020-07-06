@@ -1,10 +1,15 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Hooks;
 
 use Html;
+use MediaWiki\Page\Hook\ArticleDeleteAfterSuccessHook;
+use OutputPage;
 use Title;
 use Wikibase\Client\RepoLinker;
+use Wikibase\Client\WikibaseClient;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -14,7 +19,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class DeletePageNoticeCreator {
+class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 
 	/**
 	 * @var SiteLinkLookup
@@ -36,10 +41,30 @@ class DeletePageNoticeCreator {
 	 * @param string $siteId Global id of the client wiki
 	 * @param RepoLinker $repoLinker
 	 */
-	public function __construct( SiteLinkLookup $siteLinkLookup, $siteId, RepoLinker $repoLinker ) {
+	public function __construct( SiteLinkLookup $siteLinkLookup, string $siteId, RepoLinker $repoLinker ) {
 		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteId = $siteId;
 		$this->repoLinker = $repoLinker;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
+		$repoLinker = $wikibaseClient->newRepoLinker();
+
+		return new self(
+			$siteLinkLookup,
+			$wikibaseClient->getSettings()->getSetting( 'siteGlobalID' ),
+			$repoLinker
+		);
+	}
+
+	/**
+	 * @param Title $title
+	 * @param OutputPage $outputPage
+	 */
+	public function onArticleDeleteAfterSuccess( $title, $outputPage ): void {
+		$outputPage->addHTML( $this->getPageDeleteNoticeHtml( $title ) );
 	}
 
 	/**
@@ -50,7 +75,7 @@ class DeletePageNoticeCreator {
 	 *
 	 * @return string|null
 	 */
-	private function getItemUrl( Title $title ) {
+	private function getItemUrl( Title $title ): ?string {
 		$entityId = $this->siteLinkLookup->getItemIdForLink(
 			$this->siteId,
 			$title->getPrefixedText()
@@ -68,7 +93,7 @@ class DeletePageNoticeCreator {
 	 *
 	 * @return string|null
 	 */
-	public function getPageDeleteNoticeHtml( Title $title ) {
+	public function getPageDeleteNoticeHtml( Title $title ): ?string {
 		$itemLink = $this->getItemUrl( $title );
 
 		if ( !$itemLink ) {
@@ -88,7 +113,7 @@ class DeletePageNoticeCreator {
 		return $html;
 	}
 
-	private function getMessage( Title $title ) {
+	private function getMessage( Title $title ): string {
 		// @phan-suppress-next-line PhanUndeclaredProperty Dynamic property
 		if ( isset( $title->wikibasePushedDeleteToRepo ) ) {
 			// We're going to update the item using the repo job queue \o/
