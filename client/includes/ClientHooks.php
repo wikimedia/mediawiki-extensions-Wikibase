@@ -19,7 +19,6 @@ use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
 use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
-use Wikibase\Client\Hooks\SkinAfterPortletHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\Specials\SpecialUnconnectedPages;
 use Wikibase\DataModel\Entity\EntityId;
@@ -244,28 +243,6 @@ final class ClientHooks {
 		$html = $deletePageNotice->getPageDeleteNoticeHtml( $title );
 
 		$out->addHTML( $html );
-	}
-
-	/**
-	 * @see SkinAfterPortletHandler
-	 *
-	 * @param Skin $skin
-	 * @param string $portlet
-	 * @param string &$html
-	 */
-	public static function onSkinAfterPortlet( Skin $skin, $portlet, &$html ): void {
-		// Get the appropriate action link and append it.
-		// If $actionLink gets html for 'edit' action, the section title would
-		// have been already added due to presence of languages content.
-		// If $actionLink gets html for 'add' action, the presence of the content
-		// fragment (non-empty string) will alerts skin to display empty languages
-		// section and its title even though there are no languages.
-		// If $actionLink gets null, no link will be added. The hook is aborted.
-		$actionLink = SkinAfterPortletHandler::handleRequest( $skin );
-
-		if ( $actionLink && $portlet === 'lang' ) {
-			$html .= $actionLink;
-		}
 	}
 
 	/**

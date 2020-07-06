@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Hooks;
 
 use Action;
+use MediaWiki\Skins\Hook\SkinAfterPortletHook;
 use Skin;
 use Wikibase\Client\RepoItemLinkGenerator;
 use Wikibase\Client\WikibaseClient;
@@ -16,7 +17,7 @@ use Wikibase\Client\WikibaseClient;
  * @author Marius Hoch < hoo@online.de >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SkinAfterPortletHandler {
+class SkinAfterPortletHandler implements SkinAfterPortletHook {
 	/**
 	 * @var RepoItemLinkGenerator
 	 */
@@ -26,7 +27,7 @@ class SkinAfterPortletHandler {
 		$this->repoItemLinkGenerator = $repoItemLinkGenerator;
 	}
 
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(
@@ -42,13 +43,16 @@ class SkinAfterPortletHandler {
 
 	/**
 	 * @param Skin $skin
-	 * @return null|string
+	 * @param string $portlet
+	 * @param string $html
 	 */
-	public static function handleRequest( Skin $skin ): ?string {
-		$handler = self::newFromGlobalState();
-		$itemLink = $handler->doSkinAfterPortlet( $skin );
-
-		return $itemLink;
+	public function onSkinAfterPortlet( $skin, $portlet, &$html ): void {
+		if ( $portlet === 'lang' ) {
+			$actionLink = $this->doSkinAfterPortlet( $skin );
+			if ( $actionLink ) {
+				$html .= $actionLink;
+			}
+		}
 	}
 
 	/**
