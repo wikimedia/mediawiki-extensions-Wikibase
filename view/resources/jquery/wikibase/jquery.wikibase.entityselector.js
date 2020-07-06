@@ -79,6 +79,11 @@
 	 *        Name of the hook that fires when searching for entities.
 	 * @param {string} [options.messages.more='more']
 	 *        Label of the link to display more suggestions.
+	 * @param {string[]} [options.showErrorCodes=['failed-property-search']]
+	 *        Show errors with these error-codes in the ui.
+	 * @param {Function} [options.responseErrorFactory=null]
+	 *        Optional Callback to parse error message from response object
+	 *        @see wikibase.api.RepoApiError.newFromApiResponse
 	 */
 	/**
 	 * @event selected
@@ -100,10 +105,13 @@
 			timeout: 8000,
 			messages: {
 				more: mwMsgOrString( 'wikibase-entityselector-more', 'more' ),
-				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' )
+				notfound: mwMsgOrString( 'wikibase-entityselector-notfound', 'Nothing found' ),
+				error: null
 			},
 			searchHookName: 'wikibase.entityselector.search',
-			searchApiParametersHookName: 'wikibase.entityselector.search.api-parameters'
+			searchApiParametersHookName: 'wikibase.entityselector.search.api-parameters',
+			showErrorCodes: [ 'failed-property-search' ],
+			responseErrorFactory: null
 		},
 
 		/**
@@ -122,6 +130,14 @@
 		 * @protected
 		 */
 		_cache: null,
+
+		/**
+		 * Error object from last search.
+		 *
+		 * @property {Object} [_error={}]
+		 * @protected
+		 */
+		_error: null,
 
 		/**
 		 * Warning, PropertySuggester's EntitySelector overrides this!
@@ -145,6 +161,12 @@
 				this.options.source = this._initDefaultSource();
 			} else if ( typeof this.options.source !== 'function' && !Array.isArray( this.options.source ) ) {
 				throw new Error( 'Source needs to be a function or an array' );
+			}
+
+			if ( !this.options.messages.error ) {
+				this.options.messages.error = function () {
+					return self._error && self._error.detailedMessage ? self._error.detailedMessage : null;
+				};
 			}
 
 			$.ui.suggester.prototype._create.call( this );
@@ -264,6 +286,12 @@
 				var deferred = $.Deferred(),
 					hookResults = self._fireSearchHook( term );
 
+				// clear previous error
+				if ( self._error ) {
+					self._error = null;
+					self._cache.suggestions = null;
+					self._updateMenu( [] );
+				}
 				$.ajax( {
 					url: self.options.url,
 					timeout: self.options.timeout,
@@ -271,9 +299,23 @@
 					data: self._getSearchApiParameters( term )
 				} )
 				.done( function ( response, statusText, jqXHR ) {
+					// T141955
 					if ( response.error ) {
 						deferred.reject( response.error.info );
 						return;
+					}
+
+					// The default endpoint wbsearchentities responds with an array of errors.
+					if ( response.errors && self.options.responseErrorFactory ) {
+						var error = self.options.responseErrorFactory( response, 'search' );
+
+						if ( error && self.options.showErrorCodes.indexOf( error.code ) !== -1 ) {
+							self._error = error;
+							self._cache = {};
+							self._updateMenu( [] );
+							deferred.reject( error.message );
+							return;
+						}
 					}
 					self._combineResults( hookResults, response.search ).then( function ( results ) {
 						deferred.resolve(
@@ -471,7 +513,6 @@
 		 */
 		_initMenu: function ( ooMenu ) {
 			var self = this;
-
 			$.ui.suggester.prototype._initMenu.apply( this, arguments );
 
 			$( this.options.menu )
@@ -513,11 +554,20 @@
 			customItems.unshift( new $.ui.ooMenu.CustomItem(
 				this.options.messages.notfound,
 				function () {
-					return self._cache.suggestions && !self._cache.suggestions.length
+					return !self._error && self._cache.suggestions && !self._cache.suggestions.length
 						&& self.element.val().trim() !== '';
 				},
 				null,
 				'ui-entityselector-notfound'
+			) );
+
+			customItems.unshift( new $.ui.ooMenu.CustomItem(
+				this.options.messages.error,
+				function () {
+					return self._error !== null;
+				},
+				null,
+				'ui-entityselector-error'
 			) );
 
 			ooMenu._evaluateVisibility = function ( customItem ) {

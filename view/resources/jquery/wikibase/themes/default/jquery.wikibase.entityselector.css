@@ -45,12 +45,14 @@
 	display: inline;
 }
 
-.ui-entityselector-list .ui-entityselector-notfound {
+.ui-entityselector-list .ui-entityselector-notfound,
+.ui-entityselector-list .ui-entityselector-error {
 	/* Common bright red .wb-error color */
 	background-color: #fee7e6;
 }
 
-.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover a {
+.ui-entityselector-list .ui-entityselector-notfound.ui-state-hover a,
+.ui-entityselector-list .ui-entityselector-error.ui-state-hover a {
 	color: #000;
 }
 

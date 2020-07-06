@@ -229,7 +229,8 @@
 
 			return $( '<input>' ).entityselector( {
 				url: repoApiUrl,
-				type: 'property'
+				type: 'property',
+				responseErrorFactory: wb.api.RepoApiError.newFromApiResponse
 			} )
 			.prop( 'placeholder', mw.msg( 'wikibase-snakview-property-input-placeholder' ) )
 			.on( 'eachchange', function ( event, oldValue ) {
