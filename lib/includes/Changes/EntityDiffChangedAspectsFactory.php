@@ -162,4 +162,10 @@ class EntityDiffChangedAspectsFactory {
 		return array_values( array_unique( $changedStatements ) );
 	}
 
+	/**
+	 * @return EntityDiffChangedAspects
+	 */
+	public function newEmpty() {
+		return $this->newFromEntityDiff( new Diff() );
+	}
 }

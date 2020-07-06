@@ -15,7 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikimedia\Rdbms\ILBFactory;
@@ -214,7 +214,7 @@ class InjectRCRecordsJobTest extends \MediaWikiTestCase {
 			'object_id' => $itemId->getSerialization(),
 		] );
 
-		$diff = EntityDiffChangedAspects::newEmpty();
+		$diff = ( new EntityDiffChangedAspectsFactory() )->newEmpty();
 
 		return [
 			'mock change' => [

@@ -150,7 +150,7 @@ class EntityChangeFactory {
 		}
 
 		$instance = $this->newForEntity( $action, $id );
-		$aspectsDiff = EntityDiffChangedAspects::newFromEntityDiff( $diff );
+		$aspectsDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
 		$instance->setCompactDiff( $aspectsDiff );
 
 		return $instance;

@@ -17,7 +17,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiffer;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\Lib\Changes\EntityChange;
-use Wikibase\Lib\Changes\EntityDiffChangedAspects;
+use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\Tests\Changes\MockRepoClientCentralIdLookup;
 use Wikimedia\TestingAccessWrapper;
@@ -77,7 +77,7 @@ class RecentChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		// instantiate and handle the change
 		$type = 'wikibase-' . $entityId->getEntityType() . '~' . $action;
 		$instance->setField( 'type', $type );
-		$instance->setCompactDiff( EntityDiffChangedAspects::newFromEntityDiff( $diff ) );
+		$instance->setCompactDiff( ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff ) );
 
 		return $instance;
 	}
