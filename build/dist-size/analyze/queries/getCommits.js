@@ -1,3 +1,5 @@
+'use strict';
+
 const gql = require( 'apollo-boost' ).gql;
 
 module.exports = function () {

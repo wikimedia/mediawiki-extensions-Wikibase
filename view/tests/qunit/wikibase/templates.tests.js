@@ -136,7 +136,7 @@
 					'',
 					'<div><!-- white space -->	text with&amp;nbsp;spaces<div></div><!-- white space --> \n</div>'
 				],
-				/* eslint-enable*/
+				/* eslint-enable */
 				'<span><input value="$1" /></span>': [
 					'<span><input value="param"></span>',
 					'<span><input value="&lt;div&gt;&lt;/div&gt;"></span>',
