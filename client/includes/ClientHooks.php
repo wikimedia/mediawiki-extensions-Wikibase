@@ -15,7 +15,6 @@ use Title;
 use User;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseEntityLibrary;
 use Wikibase\Client\DataAccess\Scribunto\Scribunto_LuaWikibaseLibrary;
-use Wikibase\Client\Hooks\BeforePageDisplayHandler;
 use Wikibase\Client\Hooks\DeletePageNoticeCreator;
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
@@ -166,24 +165,6 @@ final class ClientHooks {
 		if ( $prefixedId !== null ) {
 			$out->addJsConfigVars( 'wgWikibaseItemId', $prefixedId );
 		}
-	}
-
-	/**
-	 * Adds css for the edit links sidebar link or JS to create a new item
-	 * or to link with an existing one.
-	 *
-	 * @param OutputPage $out
-	 * @param Skin $skin
-	 */
-	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$clientInstance = WikibaseClient::getDefaultInstance();
-		$beforePageDisplayHandler = new BeforePageDisplayHandler(
-			$clientInstance->getNamespaceChecker(),
-			$clientInstance->getSettings()->getSetting( 'dataBridgeEnabled' )
-		);
-
-		$actionName = Action::getActionName( $skin->getContext() );
-		$beforePageDisplayHandler->addModules( $out, $actionName );
 	}
 
 	/**

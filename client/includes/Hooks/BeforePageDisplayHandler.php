@@ -2,16 +2,23 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Action;
+use MediaWiki\Hook\BeforePageDisplayHook;
 use OutputPage;
+use Skin;
 use Title;
 use User;
 use Wikibase\Client\NamespaceChecker;
+use Wikibase\Client\WikibaseClient;
 
 /**
+ * Adds CSS for the edit links sidebar link or JS to create a new item
+ * or to link with an existing one.
+ *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class BeforePageDisplayHandler {
+class BeforePageDisplayHandler implements BeforePageDisplayHook {
 
 	/**
 	 * @var NamespaceChecker
@@ -26,6 +33,23 @@ class BeforePageDisplayHandler {
 	public function __construct( NamespaceChecker $namespaceChecker, $dataBridgeEnabled ) {
 		$this->namespaceChecker = $namespaceChecker;
 		$this->dataBridgeEnabled = $dataBridgeEnabled;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		return new self(
+			$wikibaseClient->getNamespaceChecker(),
+			$wikibaseClient->getSettings()->getSetting( 'dataBridgeEnabled' )
+		);
+	}
+
+	/**
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		$actionName = Action::getActionName( $out );
+		$this->addModules( $out, $actionName );
 	}
 
 	/**

@@ -40,6 +40,10 @@
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
 	"HookHandlers": {
+		"BeforePageDisplayHandler": {
+			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
+			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::newFromGlobalState"
+		},
 		"ChangesListLinesHandler": {
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
 			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::newFromGlobalState"
@@ -110,7 +114,7 @@
 		],
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"BeforePageDisplay": [
-			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplay",
+			"BeforePageDisplayHandler",
 			"\\Wikibase\\Client\\ClientHooks::onBeforePageDisplayAddJsConfig"
 		],
 		"ContentAlterParserOutput": "ParserOutputUpdateHookHandler",
