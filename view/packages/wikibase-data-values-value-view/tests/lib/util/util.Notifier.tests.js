@@ -33,30 +33,6 @@
 		);
 	} );
 
-	QUnit.test( 'Notifier.prototype.hasListenerFor', function( assert ) {
-		var notificationKeys = [ 'foo', 'bar123', 'xxx' ],
-			notificationMap = {};
-
-		$.map( notificationKeys, function( val, i ) {
-			notificationMap[ val ] = $.noop;
-		} );
-
-		var notifier = new Notifier( notificationMap ),
-			emptyNotifier = new Notifier( {} );
-
-		// check whether all notification keys are available on the Notifier object:
-		$.each( notificationKeys, function( i, value ) {
-			assert.strictEqual(
-				notifier.hasListenerFor( value ), true,
-				'Notifier has registered callback for notification "' + value + '"'
-			);
-			assert.strictEqual(
-				emptyNotifier.hasListenerFor( value ), false,
-				'Empty Notifier does not have callback for notification "' + value + '"'
-			);
-		} );
-	} );
-
 	QUnit.test( 'Notifier.prototype.notify', function( assert ) {
 		var notifier;
 

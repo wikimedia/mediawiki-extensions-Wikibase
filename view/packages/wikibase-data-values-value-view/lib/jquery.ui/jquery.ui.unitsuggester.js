@@ -125,19 +125,6 @@ $.widget( 'ui.unitsuggester', PARENT, {
 	},
 
 	/**
-	 * Determines whether a term matches a label.
-	 * @protected
-	 *
-	 * @param {string} term
-	 * @param {Object} suggestion
-	 * @return {boolean}
-	 */
-	_termMatchesSuggestion: function( term, suggestion ) {
-		return ( term.toLowerCase() === suggestion.id.toLowerCase() ) ||
-			( suggestion.label && term.toLowerCase() === suggestion.label.toLowerCase() );
-	},
-
-	/**
 	 * Create and return the data object for the api call.
 	 *
 	 * @protected

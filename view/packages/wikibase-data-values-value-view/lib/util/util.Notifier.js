@@ -83,17 +83,6 @@ util.Notifier = ( function() {
 		};
 
 		/**
-		 * Returns whether the `Notifier` actually has a listener for a certain notification topic.
-		 * `false` if no callback is registered for the notification subject.
-		 *
-		 * @param {string} notification
-		 * @return {boolean}
-		 */
-		this.hasListenerFor = function( notification ) {
-			return !!notificationMap[ notification ];
-		};
-
-		/**
 		 * Returns what is currently being notified. Will only return a value when used within a
 		 * callback because only within callbacks things are being notified.
 		 *
