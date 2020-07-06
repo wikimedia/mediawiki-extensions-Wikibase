@@ -77,17 +77,6 @@
 		},
 
 		/**
-		 * Returns whether a `Variation` constructor for representing a particular kind of `Snak`
-		 * within a `jQuery.wikibase.snakview` is registered.
-		 *
-		 * @param {string} snakType
-		 * @return {boolean}
-		 */
-		hasVariation: function ( snakType ) {
-			return snakType in variations;
-		},
-
-		/**
 		 * Returns the constructor of the `Variation` used to represent a particular kind of `Snak`
 		 * within a `jQuery.wikibase.snakview`.
 		 *
