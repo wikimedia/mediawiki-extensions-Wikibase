@@ -81,39 +81,12 @@ var SELF
 	},
 
 	/**
-	 * Returns the amount held by this quantity, as a string in standard format.
-	 *
-	 * @return {string}
-	 */
-	getAmount: function() {
-		return this._amount;
-	},
-
-	/**
 	 * Returns the unit held by this quantity. Returns null in case of unit-less quantities.
 	 *
 	 * @return {string|null}
 	 */
 	getUnit: function() {
 		return this._unit;
-	},
-
-	/**
-	 * Returns the quantity's lower boundary.
-	 *
-	 * @return {dataValues.DecimalValue|null}
-	 */
-	getLowerBound: function() {
-		return this._lowerBound;
-	},
-
-	/**
-	 * Returns the quantity's upper boundary.
-	 *
-	 * @return {dataValues.DecimalValue|null}
-	 */
-	getUpperBound: function() {
-		return this._upperBound;
 	},
 
 	/**

@@ -9,7 +9,7 @@
 	QUnit.module( 'globeCoordinate.GlobeCoordinate.js' );
 
 	QUnit.test( 'Basic checks', function( assert ) {
-		assert.expect( 9 );
+		assert.expect( 8 );
 		var c;
 
 		assert.throws(
@@ -59,27 +59,15 @@
 			'http://www.wikidata.org/entity/Q2',
 			'Verified getGlobe()'
 		);
-
-		assert.deepEqual(
-			c.getDecimal(),
-			{ latitude: 1.5, longitude: 1.5, precision: 0.1 },
-			'Verified getDecimal()'
-		);
 	} );
 
 	QUnit.test( 'Precision defaults to null', function( assert ) {
-		assert.expect( 3 );
+		assert.expect( 2 );
 		var c = new globeCoordinate.GlobeCoordinate( { latitude: 0, longitude: 0 } );
 
 		assert.ok(
 			c.getPrecision() === null,
 			'Verified getPrecision()'
-		);
-
-		assert.deepEqual(
-			c.getDecimal(),
-			{ latitude: 0, longitude: 0, precision: null },
-			'Verified getDecimal()'
 		);
 
 		assert.ok(
@@ -89,7 +77,7 @@
 	} );
 
 	QUnit.test( 'Costum globe', function( assert ) {
-		assert.expect( 2 );
+		assert.expect( 1 );
 		var c = new globeCoordinate.GlobeCoordinate( {
 			latitude: 20,
 			longitude: 25.5,
@@ -100,11 +88,6 @@
 			c.getGlobe(),
 			'http://www.wikidata.org/entity/Q313',
 			'Verified getGlobe()'
-		);
-
-		assert.ok(
-			typeof c.getDecimal().globe === 'undefined',
-			'Verified getDecimal()'
 		);
 	} );
 
