@@ -2535,8 +2535,12 @@ class WikibaseRepo {
 
 	public function newFederatedPropertiesServiceFactory(): ApiServiceFactory {
 		$this->throwLogicExceptionIfFederatedPropertiesNotEnabledAndConfigured();
+
+		global $wgServerName;
+
 		return new ApiServiceFactory(
-			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+			$this->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+			$wgServerName
 		);
 	}
 
