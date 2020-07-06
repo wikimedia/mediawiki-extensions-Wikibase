@@ -10,13 +10,13 @@ The setting is off by default. To enable Federated Properties from [Wikidata], s
 
 For now the feature is not intended for production use. It is only meant to facilitate the evaluation of Wikibase as a software for third party use cases.
 
-Federated Properties must only be enabled for a fresh Wikibase installation without any existing local Properties. Local Properties and Federated Properties cannot coexist on a Wikibase at the same time. The setting should be considered permanent after entering any data into the wiki.
+Federated Properties must only be enabled for a fresh Wikibase installation without any existing local Properties. Local Properties and Federated Properties cannot coexist on a Wikibase at the same time. The setting should be considered permanent after entering any data into the wiki (see [Known Issues](@ref known-issues)).
 
 ## Implementation
 
 The following sections describe the implementation details of the Federated Properties feature. It is intended for developers working on the code, and those who want to know what is going on under the hood.
 
-### Requesting data from the source wiki
+### Requesting Data from the Source Wiki
 
 A Wikibase with Federated Properties enabled fetches data about those Properties using the source wiki's HTTP API. The two endpoints that are currently used are <code>wbsearchentities</code> for searching, and <code>wbgetentities</code> for fetching the data needed to display statements on Item pages and for making edits.
 
@@ -31,6 +31,12 @@ In the past, <code>EntityInfoBuilder</code> was used to load data about entities
 ### Handling IDs of Federated Properties
 
 For the MVP, version IDs of Federated Properties carry no information about their source wiki. The decision is documented in the [ADR about handling Federated Property IDs].
+
+### Known Issues {#known-issues}
+
+In it's current implementation, federated properties do not support usage of local properties combined with federated ones. As there is no real distinction between the two different kinds, using local properties when federation is enabled will either mark them as deleted or as the corresponding property found on the federated source.
+
+For the same reason, using federated properties and then turning the feature off would either mark these properties as deleted or show the local property with the corresponding identifier.
 
 [Wikidata]: https://www.wikidata.org/wiki/Wikidata:Main_Page
 [federatedPropertiesSourceScriptUrl setting]: @ref repo_federatedPropertiesSourceScriptUrl
