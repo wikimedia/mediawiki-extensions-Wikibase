@@ -209,6 +209,7 @@ call_user_func( function() {
 				$repo->getEntitySearchHelperCallbacks(),
 				$mainModule->getRequest()
 			);
+			$apiHelperFactory = $repo->getApiHelperFactory( $mainModule->getContext() );
 
 			return new SearchEntities(
 				$mainModule,
@@ -219,7 +220,8 @@ call_user_func( function() {
 				$repo->getEntitySourceDefinitions(),
 				$repo->getEntityTitleTextLookup(),
 				$repo->getEntityUrlLookup(),
-				$repo->getEntityArticleIdLookup()
+				$repo->getEntityArticleIdLookup(),
+				$apiHelperFactory->getErrorReporter( $mainModule )
 			);
 		},
 	];

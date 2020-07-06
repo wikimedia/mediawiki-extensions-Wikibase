@@ -18,6 +18,7 @@ use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
@@ -131,7 +132,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			], new EntityTypeDefinitions( [] ) ),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
-			$this->newMockArticleIdLookup()
+			$this->newMockArticleIdLookup(),
+			$this->createMock( ApiErrorReporter::class )
 		);
 
 		$module->execute();
@@ -396,7 +398,8 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 			),
 			$this->newMockTitleTextLookup(),
 			$this->newMockUrlLookup(),
-			$this->newMockArticleIdLookup()
+			$this->newMockArticleIdLookup(),
+			$this->createMock( ApiErrorReporter::class )
 		);
 
 		$module->execute();
