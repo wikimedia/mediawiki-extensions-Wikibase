@@ -12,7 +12,9 @@ mirrors most of the PHP implementations of DataValue classes as specified in the
 [![Build Status](https://secure.travis-ci.org/wmde/DataValuesJavaScript.png?branch=master)](http://travis-ci.org/wmde/DataValuesJavaScript)
 
 ## Release notes
-
+### 0.11.0 (dev)
+* Removed `globeCoordinate.GlobeCoordinate.getDecimal`
+* Removed `getLowerBound`, `getUpperBound`, `getAmount` from QuantityValue
 ### 0.10.0 (2017-10-06)
 * The library is now a pure JavaScript library.
 * Removed MediaWiki ResourceLoader module definitions.

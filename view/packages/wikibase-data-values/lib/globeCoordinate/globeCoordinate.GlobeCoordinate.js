@@ -108,18 +108,6 @@
 		getPrecision: function() { return this._precision; },
 
 		/**
-		 * @return {Object}
-		 * @private
-		 */
-		getDecimal: function() {
-			return {
-				latitude: this._latitude,
-				longitude: this._longitude,
-				precision: this._precision
-			};
-		},
-
-		/**
 		 * Compares the object to another GlobeCoordinate object and returns whether both represent
 		 * the same information.
 		 *
