@@ -1,11 +1,13 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Modules;
 
 use ResourceLoader;
 use ResourceLoaderContext;
 use ResourceLoaderModule;
-use Wikibase\Lib\Settings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * JavaScript variables needed to access the repo independent from the current
@@ -27,20 +29,18 @@ class RepoAccessModule extends ResourceLoaderModule {
 	 *
 	 * @return string
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( ResourceLoaderContext $context ): string {
 		global $wgServer, $wgScriptPath, $wgArticlePath;
 
-		$settings = Settings::singleton();
-
-		if ( $settings->hasSetting( 'repoUrl' ) ) {
-			// We're on a client (or at least the client configuration is available)
+		if ( WikibaseSettings::isClientEnabled() ) {
+			$settings = WikibaseSettings::getClientSettings();
 			$wbRepo = [
 				'url' => $settings->getSetting( 'repoUrl' ),
 				'scriptPath' => $settings->getSetting( 'repoScriptPath' ),
 				'articlePath' => $settings->getSetting( 'repoArticlePath' )
 			];
 		} else {
-			// Client configuration isn't available... just assume we're the repo
+			// just assume we're the repo
 			$wbRepo = [
 				'url' => $wgServer,
 				'scriptPath' => $wgScriptPath,
