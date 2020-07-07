@@ -871,7 +871,7 @@ return call_user_func( function() {
 				'tainted-ref.app.css',
 			],
 			'dependencies' => [
-				'vue2',
+				'vue',
 			],
 			'messages' => [
 				'wikibase-tainted-ref-popper-text',
