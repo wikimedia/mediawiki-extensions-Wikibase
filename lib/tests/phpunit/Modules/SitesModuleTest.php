@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Modules;
 
 use BagOStuff;
@@ -111,7 +113,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		// Call twice. Expect 1 compute.
 		$module1 = $this->newMockModule( [ new MediaWikiSite() ], [ Site::GROUP_NONE ], $cache );
 		$module1->expects( $this->once() )->method( 'makeScript' )
-			->willReturn( [ 'mock details to use' ] );
+			->willReturn( 'mock script' );
 		$module1->getScript( $this->getContext( 'qqx' ) );
 		$module1->getScript( $this->getContext( 'qqx' ) );
 
@@ -155,6 +157,62 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
+	/** @dataProvider provideSettingsPairs */
+	public function testSettings_RepoOnly(
+		?SettingsArray $clientSettings,
+		?SettingsArray $repoSettings,
+		string $expected
+	) {
+		$site1 = new MediaWikiSite();
+		$site1->setGlobalId( 'wiki1' );
+		$site1->setGroup( 'group1' );
+		$site1->setLinkPath( 'https://one.test/$1' );
+		$site2 = new MediaWikiSite();
+		$site2->setGlobalId( 'wiki2' );
+		$site2->setGroup( 'group2' );
+		$site2->setLinkPath( 'https://two.test/$1' );
+		$module = new SitesModule(
+			$clientSettings,
+			$repoSettings,
+			new HashSiteStore( [ $site1, $site2 ] ),
+			new HashBagOStuff()
+		);
+
+		$script = $module->getScript( $this->getContext( 'qqx' ) );
+
+		$this->assertStringContainsString( $expected, $script );
+	}
+
+	public function provideSettingsPairs() {
+		yield 'Repo only' => [
+			null,
+			new SettingsArray( [
+				'siteLinkGroups' => [ 'group1' ],
+				'specialSiteLinkGroups' => [],
+			] ),
+			'wiki1',
+		];
+		yield 'Client only' => [
+			new SettingsArray( [
+				'siteLinkGroups' => [ 'group2' ],
+				'specialSiteLinkGroups' => [],
+			] ),
+			null,
+			'wiki2',
+		];
+		yield 'Repo overrides Client' => [
+			new SettingsArray( [
+				'siteLinkGroups' => [ 'group2' ],
+				'specialSiteLinkGroups' => [],
+			] ),
+			new SettingsArray( [
+				'siteLinkGroups' => [ 'group1' ],
+				'specialSiteLinkGroups' => [],
+			] ),
+			'wiki1',
+		];
+	}
+
 	private function getModulesForVersionHash() {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( 'siteid' );
@@ -181,6 +239,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 				'siteLinkGroups' => $groups,
 				'specialSiteLinkGroups' => $specials
 			] ),
+			null,
 			new HashSiteStore( $sites ),
 			new HashBagOStuff()
 		);
@@ -193,6 +252,7 @@ class SitesModuleTest extends \PHPUnit\Framework\TestCase {
 					'siteLinkGroups' => $groups,
 					'specialSiteLinkGroups' => [],
 				] ),
+				null,
 				new HashSiteStore( $sites ),
 				$cache
 			] )

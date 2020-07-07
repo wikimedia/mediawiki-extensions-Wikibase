@@ -3,7 +3,7 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\Modules\RepoAccessModule;
 use Wikibase\Lib\Modules\SitesModule;
-use Wikibase\Lib\Settings;
+use Wikibase\Lib\WikibaseSettings;
 
 /**
  * @license GPL-2.0-or-later
@@ -38,7 +38,8 @@ return call_user_func( function() {
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
 			'factory' => function () {
 				return new SitesModule(
-					Settings::singleton(),
+					WikibaseSettings::isClientEnabled() ? WikibaseSettings::getClientSettings() : null,
+					WikibaseSettings::isRepoEnabled() ? WikibaseSettings::getRepoSettings() : null,
 					MediaWikiServices::getInstance()->getSiteStore(),
 					MediaWikiServices::getInstance()->getLocalServerObjectCache()
 				);

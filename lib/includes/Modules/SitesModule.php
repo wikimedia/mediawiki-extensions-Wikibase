@@ -1,8 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Modules;
 
 use BagOStuff;
+use InvalidArgumentException;
 use MediaWikiSite;
 use ResourceLoader;
 use ResourceLoaderContext;
@@ -28,7 +31,12 @@ class SitesModule extends ResourceLoaderModule {
 	/**
 	 * @var SettingsArray
 	 */
-	private $settings;
+	private $clientSettings;
+
+	/**
+	 * @var SettingsArray
+	 */
+	private $repoSettings;
 
 	/**
 	 * @var SiteLookup
@@ -40,8 +48,20 @@ class SitesModule extends ResourceLoaderModule {
 	 */
 	private $cache;
 
-	public function __construct( SettingsArray $settings, SiteLookup $siteLookup, BagOStuff $cache ) {
-		$this->settings = $settings;
+	/**
+	 * @param SettingsArray|null $clientSettings The Client settings, if Client is enabled, else null.
+	 * @param SettingsArray|null $repoSettings The Repo settings, if Repo is enabled, else null.
+	 * @param SiteLookup $siteLookup
+	 * @param BagOStuff $cache
+	 */
+	public function __construct(
+		?SettingsArray $clientSettings,
+		?SettingsArray $repoSettings,
+		SiteLookup $siteLookup,
+		BagOStuff $cache
+	) {
+		$this->clientSettings = $clientSettings ?: new SettingsArray();
+		$this->repoSettings = $repoSettings ?: new SettingsArray();
 		$this->siteLookup = $siteLookup;
 		$this->cache = $cache;
 	}
@@ -54,7 +74,7 @@ class SitesModule extends ResourceLoaderModule {
 	 * @param ResourceLoaderContext $context
 	 * @return string JavaScript Code
 	 */
-	public function getScript( ResourceLoaderContext $context ) {
+	public function getScript( ResourceLoaderContext $context ): string {
 		$languageCode = $context->getLanguage();
 		return $this->cache->getWithSetCallback(
 			$this->cache->makeKey( 'wikibase-sites-module', 'script', $languageCode ),
@@ -65,8 +85,7 @@ class SitesModule extends ResourceLoaderModule {
 		);
 	}
 
-	/** @return bool */
-	public function enableModuleContentVersion() {
+	public function enableModuleContentVersion(): bool {
 		// Let ResourceLoaderModule::getVersionHash() invoke getScript() and hash that.
 		return true;
 	}
@@ -75,9 +94,9 @@ class SitesModule extends ResourceLoaderModule {
 	 * @param string $languageCode
 	 * @return string JavaScript Code
 	 */
-	protected function makeScript( $languageCode ) {
-		$groups = $this->settings->getSetting( 'siteLinkGroups' );
-		$specialGroups = $this->settings->getSetting( 'specialSiteLinkGroups' );
+	protected function makeScript( string $languageCode ): string {
+		$groups = $this->getSetting( 'siteLinkGroups' );
+		$specialGroups = $this->getSetting( 'specialSiteLinkGroups' );
 		$specialPos = array_search( 'special', $groups );
 		if ( $specialPos !== false ) {
 			// The "special" group actually maps to multiple groups
@@ -102,12 +121,27 @@ class SitesModule extends ResourceLoaderModule {
 	}
 
 	/**
+	 * Get a setting from the repo or client settings, with repo overriding client.
+	 */
+	private function getSetting( string $settingName ) {
+		if ( $this->repoSettings->hasSetting( $settingName ) ) {
+			return $this->repoSettings->getSetting( $settingName );
+		}
+		if ( $this->clientSettings->hasSetting( $settingName ) ) {
+			return $this->clientSettings->getSetting( $settingName );
+		}
+		throw new InvalidArgumentException(
+			"Setting $settingName is missing from both Repo and Client settings!"
+		);
+	}
+
+	/**
 	 * @param MediaWikiSite $site
 	 * @param string[] $specialGroups
 	 * @param string $languageCode
 	 * @return string[]
 	 */
-	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, $languageCode ) {
+	private function computeSiteDetails( MediaWikiSite $site, array $specialGroups, string $languageCode ): array {
 		$languageNameLookup = new LanguageNameLookup();
 
 		// FIXME: quickfix to allow a custom site-name / handling for the site groups which are
@@ -147,7 +181,7 @@ class SitesModule extends ResourceLoaderModule {
 	 * @param string $languageCode
 	 * @return string
 	 */
-	private function getSpecialSiteLanguageName( Site $site, $languageCode ) {
+	private function getSpecialSiteLanguageName( Site $site, string $languageCode ): string {
 		$siteId = $site->getGlobalId();
 		$messageKey = 'wikibase-sitelinks-sitename-' . $siteId;
 
@@ -164,7 +198,7 @@ class SitesModule extends ResourceLoaderModule {
 	 * @param string[] $groups
 	 * @return bool
 	 */
-	private function shouldSiteBeIncluded( Site $site, array $groups ) {
+	private function shouldSiteBeIncluded( Site $site, array $groups ): bool {
 		return $site->getType() === Site::TYPE_MEDIAWIKI && in_array( $site->getGroup(), $groups );
 	}
 
