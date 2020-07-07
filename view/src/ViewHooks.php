@@ -3,6 +3,9 @@
 namespace Wikibase\View;
 
 use ExtensionRegistry;
+use MediaWiki\Hook\ResourceLoaderRegisterModulesHook;
+use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderTestModulesHook;
 use ResourceLoader;
 
 /**
@@ -10,7 +13,11 @@ use ResourceLoader;
  *
  * @license GPL-2.0-or-later
  */
-final class ViewHooks {
+final class ViewHooks implements
+	UnitTestsListHook,
+	ResourceLoaderRegisterModulesHook,
+	ResourceLoaderTestModulesHook
+{
 
 	/**
 	 * Callback called after extension registration,
@@ -31,7 +38,7 @@ final class ViewHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 * @param ResourceLoader $rl
 	 */
-	public static function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
+	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
 		$moduleTemplate = [
 			'localBasePath' => __DIR__ . '/..',
 			'remoteExtPath' => 'Wikibase/view',
@@ -67,12 +74,9 @@ final class ViewHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 *
 	 * @param array &$testModules
-	 * @param ResourceLoader $resourceLoader
+	 * @param ResourceLoader $rl
 	 */
-	public static function onResourceLoaderTestModules(
-		array &$testModules,
-		ResourceLoader $resourceLoader
-	): void {
+	public function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
 			require __DIR__ . '/../lib/resources.test.php',
@@ -85,7 +89,7 @@ final class ViewHooks {
 	 *
 	 * @param string[] &$paths
 	 */
-	public static function onUnitTestsList( array &$paths ): void {
+	public function onUnitTestsList( &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit';
 	}
 
