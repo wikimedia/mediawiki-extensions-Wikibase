@@ -6,6 +6,10 @@ Federated Properties is a feature that allows a newly created Wikibase instance 
 
 The setting is off by default. To enable Federated Properties from [Wikidata], set <code>$wgWBRepoSettings['federatedPropertiesEnabled'] = true;</code> in your wiki's <code>LocalSettings.php</code>. To configure a different source wiki, the [federatedPropertiesSourceScriptUrl setting] must be set accordingly to the source wiki's script path url, e.g. <code>$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta.wmflabs.org/w/';</code>.
 
+## Privacy notice
+
+Once you enable Federated Properties in your Wikibase installation, all requests to the federation source Wiki will include an anonymized unique identifier as the useragent. This will be used only to detect abnormal traffic to the source Wiki for the purposes of preventing abuse.
+
 ## Limitations
 
 For now the feature is not intended for production use. It is only meant to facilitate the evaluation of Wikibase as a software for third party use cases.
