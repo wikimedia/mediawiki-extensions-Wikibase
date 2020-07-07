@@ -20,6 +20,9 @@ This uses the values from `.env` for configuration - create a `.env.local` file 
 
 
 ### Compiles and minifies for production
+
+NOTE: This must be run after making changes to the javascript/typescript files and before committing so that the latest build files will be available in /dist.
+
 ```
 docker-compose run --rm node npm run build
 ```
