@@ -304,7 +304,7 @@ class EntityChange extends DiffChange {
 		$info = parent::unserializeInfo( $serialization );
 
 		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) ) {
-			$compactDiff = EntityDiffChangedAspects::newEmpty();
+			$compactDiff = ( new EntityDiffChangedAspectsFactory() )->newEmpty();
 			$compactDiff->unserialize( $info['compactDiff'] );
 			$info['compactDiff'] = $compactDiff;
 		}

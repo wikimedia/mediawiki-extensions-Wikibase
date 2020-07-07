@@ -2,7 +2,6 @@
 
 namespace Wikibase\Lib\Changes;
 
-use Diff\DiffOp\Diff\Diff;
 use MWException;
 use Serializable;
 use Wikimedia\Assert\Assert;
@@ -88,22 +87,6 @@ class EntityDiffChangedAspects implements Serializable {
 		$this->statementChanges = $statementChanges;
 		$this->siteLinkChanges = $siteLinkChanges;
 		$this->otherChanges = $otherChanges;
-	}
-
-	/**
-	 * @return self
-	 */
-	public static function newEmpty() {
-		return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( new Diff() );
-	}
-
-	/**
-	 * @param Diff $entityDiff
-	 *
-	 * @return self
-	 */
-	public static function newFromEntityDiff( Diff $entityDiff ) {
-		return ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $entityDiff );
 	}
 
 	/**
