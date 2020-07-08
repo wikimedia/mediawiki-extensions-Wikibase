@@ -480,6 +480,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "移除警告",
 	"wikibase-tainted-ref-tainted-icon-title": "此聲明存在一些潛在問題。",
 	"wikibase-setclaim-warning-duplicatemainsnak": "偵測到重覆的主要敘述。無法添加陳述。",
+	"wikibase-federated-properties-search-api-error-message": "屬性暫時不可用。",
 	"wikibase-federated-properties-save-api-error-message": "因對於聯合來源 Wiki 的請求失敗，您的儲存無效。",
 	"wikibase-federated-properties-source-wiki-api-error-message": "因對於聯合來源 Wiki 的請求失敗，關於此項目的陳述暫時不可用。請重新整理頁面。",
 	"wikibase-federated-properties-special-list-of-properties-notice": "此 Wikibase 使用來自外部來源的聯合屬性。您可以存取$1。",

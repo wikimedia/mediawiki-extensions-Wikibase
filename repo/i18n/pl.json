@@ -372,5 +372,6 @@
 	"wikibase-pageinfo-subscription-none": "Brak",
 	"wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1",
 	"wikibase-entity-save-error-heading": "Coś poszło nie tak",
-	"wikibase-entity-save-error-message": "Twoja zmiana nie mogła zostać zapisana. Możesz spróbować ponownie naciskając przycisk publikacji."
+	"wikibase-entity-save-error-message": "Twoja zmiana nie mogła zostać zapisana. Możesz spróbować ponownie naciskając przycisk publikacji.",
+	"wikibase-federated-properties-search-api-error-message": "Własności tymczasowo niedostępne."
 }
