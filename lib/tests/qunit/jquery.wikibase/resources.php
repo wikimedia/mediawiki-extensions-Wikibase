@@ -13,15 +13,6 @@ return call_user_func( function() {
 	];
 
 	return [
-		'jquery.wikibase.siteselector.tests' => $moduleBase + [
-			'scripts' => [
-				'jquery.wikibase.siteselector.tests.js',
-			],
-			'dependencies' => [
-				'jquery.wikibase.siteselector',
-				'wikibase.Site',
-			],
-		],
 
 		'jquery.wikibase.wbtooltip.tests' => $moduleBase + [
 			'scripts' => [

@@ -144,17 +144,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'jquery.wikibase.siteselector' => $jqueryWikibasePaths + [
-			'scripts' => [
-				'jquery.wikibase.siteselector.js',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.suggester',
-				'util.highlightSubstring',
-			],
-		],
-
 		'jquery.wikibase.wbtooltip' => $jqueryWikibasePaths + [
 			'scripts' => [
 				'jquery.wikibase.wbtooltip.js',

@@ -7,6 +7,8 @@
 	var PageConnector = require( '../wikibase.client.PageConnector.js' ),
 		getMwApiForRepo = require( '../wikibase.client.getMwApiForRepo.js' );
 
+	require( './jquery.wikibase.siteselector.js' );
+
 	/**
 	 * This widget allows linking articles with Wikibase items or creating new wikibase items directly
 	 * in client wikis.

@@ -227,7 +227,8 @@
 				"jquery.wikibase/jquery.wikibase.linkitem.js",
 				"wikibase.client.PageConnector.js",
 				"wikibase.client.getMwApiForRepo.js",
-				"wikibase.sites.js"
+				"wikibase.sites.js",
+				"jquery.wikibase/jquery.wikibase.siteselector.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css"
@@ -236,7 +237,7 @@
 				"jquery.spinner",
 				"jquery.ui",
 				"jquery.ui.suggester",
-				"jquery.wikibase.siteselector",
+				"util.highlightSubstring",
 				"jquery.wikibase.wbtooltip",
 				"mediawiki.api",
 				"mediawiki.util",
