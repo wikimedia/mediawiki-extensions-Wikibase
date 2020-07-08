@@ -31,11 +31,11 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 * @return string
 	 */
 	public function getModelId() {
-		return CONTENT_MODEL_WIKIBASE_PROPERTY;
+		return PropertyContent::CONTENT_MODEL_ID;
 	}
 
 	public function testGetModelID() {
-		$this->assertSame( CONTENT_MODEL_WIKIBASE_PROPERTY, $this->getHandler()->getModelID() );
+		$this->assertSame( PropertyContent::CONTENT_MODEL_ID, $this->getHandler()->getModelID() );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 
 		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
-		$this->assertSame( CONTENT_MODEL_WIKIBASE_PROPERTY, $data['content_model'], 'content_modek' );
+		$this->assertSame( PropertyContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten", $data['text'], 'text' );
 	}
 

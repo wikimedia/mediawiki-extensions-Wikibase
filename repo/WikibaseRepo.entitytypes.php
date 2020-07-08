@@ -27,6 +27,8 @@ use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
 use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
+use Wikibase\Repo\Content\ItemContent;
+use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Diff\BasicEntityDiffVisualizer;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
@@ -76,7 +78,7 @@ return [
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
-		Def::CONTENT_MODEL_ID => CONTENT_MODEL_WIKIBASE_ITEM,
+		Def::CONTENT_MODEL_ID => ItemContent::CONTENT_MODEL_ID,
 		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newItemHandler();
@@ -212,7 +214,7 @@ return [
 			$languageFallbackChain = $languageFallbackChainFactory->newFromLanguage( $userLanguage );
 			return new FingerprintableEntityMetaTagsCreator( $languageFallbackChain );
 		},
-		Def::CONTENT_MODEL_ID => CONTENT_MODEL_WIKIBASE_PROPERTY,
+		Def::CONTENT_MODEL_ID => PropertyContent::CONTENT_MODEL_ID,
 		Def::CONTENT_HANDLER_FACTORY_CALLBACK => function() {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			return $wikibaseRepo->newPropertyHandler();

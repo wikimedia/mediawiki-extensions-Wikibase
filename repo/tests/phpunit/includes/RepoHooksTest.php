@@ -18,6 +18,7 @@ use Title;
 use TitleValue;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\RepoHooks;
 use Wikibase\Repo\WikibaseRepo;
@@ -172,12 +173,12 @@ class RepoHooksTest extends MediaWikiTestCase {
 				false
 			],
 			'item_allowimport' => [
-				[ 'model' => CONTENT_MODEL_WIKIBASE_ITEM ],
+				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
 				false,
 				MWException::class
 			],
 			'item_noimport' => [
-				[ 'model' => CONTENT_MODEL_WIKIBASE_ITEM ],
+				[ 'model' => ItemContent::CONTENT_MODEL_ID ],
 				true
 			]
 		];
@@ -376,9 +377,9 @@ XML
 	public function provideOnContentModelCanBeUsedOn() {
 		// true
 		yield 'Wikitext on a talk page' => [ CONTENT_MODEL_WIKITEXT, new TitleValue( NS_TALK, 'Foo' ), true ];
-		yield 'Item on an item' => [ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( WB_NS_ITEM, 'Q123' ), true ];
+		yield 'Item on an item' => [ ItemContent::CONTENT_MODEL_ID, new TitleValue( WB_NS_ITEM, 'Q123' ), true ];
 		yield 'Item on a talk page (not checked by this hook)' =>
-			[ CONTENT_MODEL_WIKIBASE_ITEM, new TitleValue( NS_TALK, 'Foo' ), true ];
+			[ ItemContent::CONTENT_MODEL_ID, new TitleValue( NS_TALK, 'Foo' ), true ];
 		yield 'Wikitext on a page with an entity in a slot' =>
 			[ CONTENT_MODEL_WIKITEXT, new TitleValue( self::FAKE_NS_ID, 'goat' ), true ];
 		// false

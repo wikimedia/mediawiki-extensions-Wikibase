@@ -41,6 +41,7 @@ use Wikibase\Lib\Store\StorageException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Content\ItemContent;
+use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
@@ -154,8 +155,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
 				[
-					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
+					'item' => ItemContent::CONTENT_MODEL_ID,
+					'property' => PropertyContent::CONTENT_MODEL_ID,
 					'custom-type' => 'wikibase-custom-type',
 				],
 				[
@@ -1005,8 +1006,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$store = new WikiPageEntityStore(
 			new EntityContentFactory(
 				[
-					'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-					'property' => CONTENT_MODEL_WIKIBASE_PROPERTY,
+					'item' => ItemContent::CONTENT_MODEL_ID,
+					'property' => PropertyContent::CONTENT_MODEL_ID,
 				],
 				[
 					'item' => function() use ( $wikibaseRepo ) {
