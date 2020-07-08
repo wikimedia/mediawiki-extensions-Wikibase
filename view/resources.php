@@ -456,6 +456,12 @@ return call_user_func( function() {
 			],
 		],
 
+		'util.highlightSubstring' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'util/util.highlightSubstring.js',
+			],
+		],
+
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'DataValue.js',

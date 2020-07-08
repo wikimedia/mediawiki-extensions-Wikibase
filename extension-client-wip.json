@@ -230,7 +230,8 @@
 				"wikibase.sites.js",
 				"jquery.wikibase/jquery.wikibase.siteselector.js",
 				"jquery.wikibase/jquery.wikibase.wbtooltip.js",
-				"wikibase.buildErrorOutput.js"
+				"wikibase.buildErrorOutput.js",
+				"util.highlightSubstring.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css",
@@ -240,7 +241,6 @@
 				"jquery.spinner",
 				"jquery.ui",
 				"jquery.ui.suggester",
-				"util.highlightSubstring",
 				"jquery.tipsy",
 				"mediawiki.api",
 				"mediawiki.util",

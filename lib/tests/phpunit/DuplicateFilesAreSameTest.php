@@ -40,10 +40,6 @@ class DuplicateFilesAreSameTest extends \PHPUnit\Framework\TestCase {
 				$wikibaseLib . 'jquery.util/jquery.util.getscrollbarwidth.js',
 				$wikibaseDataValueVW . 'jquery.util/jquery.util.getscrollbarwidth.js'
 			],
-			"util.highlightSubstring.js" => [
-				$wikibaseLib . 'util/util.highlightSubstring.js',
-				$wikibaseDataValueVW . 'util/util.highlightSubstring.js'
-			],
 			"util.inherit.js" => [
 				$wikibaseLib . 'util/util.inherit.js',
 				__DIR__ . '/../../../view/lib/wikibase-data-values/lib/util/util.inherit.js',

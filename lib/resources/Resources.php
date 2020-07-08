@@ -117,12 +117,6 @@ return call_user_func( function() {
 			],
 		],
 
-		'util.highlightSubstring' => $libPaths + [
-			'scripts' => [
-				'util/util.highlightSubstring.js',
-			],
-		],
-
 		'util.inherit' => $libPaths + [
 			'scripts' => [
 				'util/util.inherit.js',
