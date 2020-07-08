@@ -16,10 +16,15 @@
 	"TestAutoloadNamespaces": {
 		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
 	},
+	"HookHandlers": {
+		"*": {
+			"class": "\\Wikibase\\View\\ViewHooks"
+		}
+	},
 	"Hooks": {
-		"ResourceLoaderRegisterModules": "\\Wikibase\\View\\ViewHooks::onResourceLoaderRegisterModules",
-		"ResourceLoaderTestModules": "\\Wikibase\\View\\ViewHooks::onResourceLoaderTestModules",
-		"UnitTestsList": "\\Wikibase\\View\\ViewHooks::onUnitTestsList"
+		"ResourceLoaderRegisterModules": "*",
+		"ResourceLoaderTestModules": "*",
+		"UnitTestsList": "*"
 	},
 	"callback": "\\Wikibase\\View\\ViewHooks::onRegistration",
 	"MessagesDirs": {
