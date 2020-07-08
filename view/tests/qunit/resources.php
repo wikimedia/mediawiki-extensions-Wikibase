@@ -221,4 +221,12 @@ return [
 			'wikibase.Site',
 		],
 	],
+	'jquery.wikibase.wbtooltip.tests' => $moduleBase + [
+		'scripts' => [
+			'jquery/wikibase/jquery.wikibase.wbtooltip.tests.js',
+		],
+		'dependencies' => [
+			'jquery.wikibase.wbtooltip',
+		],
+	],
 ];
