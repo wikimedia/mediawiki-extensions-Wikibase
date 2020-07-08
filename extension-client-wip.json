@@ -223,10 +223,10 @@
 			]
 		},
 		"jquery.wikibase.linkitem": {
-			"scripts": [
-				"wikibase.client.getMwApiForRepo.js",
+			"packageFiles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.js",
-				"wikibase.client.PageConnector.js"
+				"wikibase.client.PageConnector.js",
+				"wikibase.client.getMwApiForRepo.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css"
