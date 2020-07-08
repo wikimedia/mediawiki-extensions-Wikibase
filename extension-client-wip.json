@@ -226,7 +226,8 @@
 			"packageFiles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.js",
 				"wikibase.client.PageConnector.js",
-				"wikibase.client.getMwApiForRepo.js"
+				"wikibase.client.getMwApiForRepo.js",
+				"wikibase.sites.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css"
@@ -241,7 +242,8 @@
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
 				"jquery.event.special.eachchange",
-				"wikibase.sites",
+				"mw.config.values.wbSiteDetails",
+				"wikibase.Site",
 				"wikibase.api.RepoApi"
 			],
 			"messages": [
