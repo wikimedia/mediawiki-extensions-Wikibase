@@ -896,6 +896,19 @@ return call_user_func( function() {
 				'util.highlightSubstring',
 			],
 		],
+		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
+			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.wbtooltip.js',
+			],
+			'styles' => [
+				'jquery/wikibase/themes/default/jquery.wikibase.wbtooltip.css'
+			],
+			'dependencies' => [
+				'jquery.tipsy',
+				'jquery.ui',
+				'wikibase.buildErrorOutput',
+			],
+		],
 	];
 
 	return $modules;

@@ -8,6 +8,7 @@
 		getMwApiForRepo = require( '../wikibase.client.getMwApiForRepo.js' );
 
 	require( './jquery.wikibase.siteselector.js' );
+	require( './jquery.wikibase.wbtooltip.js' );
 
 	/**
 	 * This widget allows linking articles with Wikibase items or creating new wikibase items directly

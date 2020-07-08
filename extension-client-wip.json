@@ -228,17 +228,20 @@
 				"wikibase.client.PageConnector.js",
 				"wikibase.client.getMwApiForRepo.js",
 				"wikibase.sites.js",
-				"jquery.wikibase/jquery.wikibase.siteselector.js"
+				"jquery.wikibase/jquery.wikibase.siteselector.js",
+				"jquery.wikibase/jquery.wikibase.wbtooltip.js"
 			],
 			"styles": [
-				"jquery.wikibase/jquery.wikibase.linkitem.css"
+				"jquery.wikibase/jquery.wikibase.linkitem.css",
+				"jquery.wikibase/jquery.wikibase.wbtooltip.css"
 			],
 			"dependencies": [
 				"jquery.spinner",
 				"jquery.ui",
 				"jquery.ui.suggester",
 				"util.highlightSubstring",
-				"jquery.wikibase.wbtooltip",
+				"jquery.tipsy",
+				"wikibase.buildErrorOutput",
 				"mediawiki.api",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
