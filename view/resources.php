@@ -885,6 +885,17 @@ return call_user_func( function() {
 			'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
 		],
 
+		// TODO: Merge with wikibase.view.ControllerViewFactory
+		'jquery.wikibase.siteselector' => $moduleTemplate + [
+			'scripts' => [
+				'jquery/wikibase/jquery.wikibase.siteselector.js',
+			],
+			'dependencies' => [
+				'jquery.event.special.eachchange',
+				'jquery.ui.suggester',
+				'util.highlightSubstring',
+			],
+		],
 	];
 
 	return $modules;
