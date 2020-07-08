@@ -281,7 +281,8 @@
 		 * @TODO: Error tooltip should be a separate tooltip derivative.
 		 */
 		_buildErrorTooltip: function () {
-			return wb.buildErrorOutput( this.options.content )
+			var buildErrorOutput = require( '../wikibase.buildErrorOutput.js' );
+			return buildErrorOutput( this.options.content )
 				.addClass( this.widgetFullName + '-error' );
 		},
 
