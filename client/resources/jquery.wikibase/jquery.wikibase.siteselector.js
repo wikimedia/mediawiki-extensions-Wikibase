@@ -5,6 +5,9 @@
 ( function () {
 	'use strict';
 
+	require( '../jquery.ui/jquery.ui.suggester.js' );
+	require( '../jquery.ui/jquery.ui.ooMenu.js' );
+
 	/**
 	 * Site selector
 	 * Enhances an input box with auto-complete and auto-suggestion functionality for site ids.

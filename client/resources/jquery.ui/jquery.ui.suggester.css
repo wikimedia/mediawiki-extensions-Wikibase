@@ -5,24 +5,24 @@
 
 .ui-widget.ui-suggester-list {
 	font-family: sans-serif; /* reset the "Smoothness" jQuery UI theme */
-	font-size: 0.8125rem; /* results in 13px with the Vector skin */
+	font-size: 13px;
 }
 
 .ui-suggester-list {
-	background: white;
-	border-color: #C9C9C9;
+	background: #fff;
+	border-color: #c8ccd1;
 	min-width: 8em; /* same as .ui-listrotator-label */
 }
 
 .ui-suggester-list .ui-state-hover {
-	border: none;
-	background: #4C59A6;
-	color: white;
+	border: 0;
+	background: #2a4b8d;
+	color: #fff;
 }
 
 .ui-suggester-list .ui-state-hover a,
 .ui-suggester-list .ui-state-hover a:hover {
-	color: white;
+	color: #fff;
 }
 
 .ui-suggester-list {
@@ -31,7 +31,7 @@
 }
 
 .ui-suggester-list a {
-	color: black;
+	color: #000;
 	padding: 0 0.2em;
 	text-decoration: none;
 }

@@ -462,6 +462,22 @@ return call_user_func( function() {
 			],
 		],
 
+		'jquery.ui.suggester' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.ui/jquery.ui.suggester.js',
+				'jquery.ui/jquery.ui.ooMenu.js',
+				'jquery.util/jquery.util.getscrollbarwidth.js',
+			],
+			'styles' => [
+				'jquery.ui/jquery.ui.suggester.css',
+				'jquery.ui/jquery.ui.ooMenu.css',
+			],
+			'dependencies' => [
+				'jquery.ui',
+				'util.inherit',
+			],
+		],
+
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'DataValue.js',
