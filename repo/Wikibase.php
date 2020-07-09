@@ -117,10 +117,6 @@ call_user_func( function() {
 		$wgSpecialPages,
 		$wgWBRepoSettings;
 
-	// constants
-	define( 'CONTENT_MODEL_WIKIBASE_ITEM', "wikibase-item" );
-	define( 'CONTENT_MODEL_WIKIBASE_PROPERTY', "wikibase-property" );
-
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
