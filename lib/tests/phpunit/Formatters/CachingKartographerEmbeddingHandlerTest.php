@@ -46,16 +46,11 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testGetHtml_cached() {
-		$parser = $this->getMockBuilder( Parser::class )
-			->disableOriginalConstructor()
-			->enableProxyingToOriginalMethods()
-			->setProxyTarget(
-				MediaWikiServices::getInstance()->getParserFactory()->create()
-			)
-			->getMock();
+		$parser = $this->createMock( Parser::class );
 
 		$parser->expects( $this->once() )
-			->method( 'parse' );
+			->method( 'parse' )
+			->willReturn( $this->createMock( ParserOutput::class ) );
 
 		$handler = new CachingKartographerEmbeddingHandler( $parser );
 		$language = Language::factory( 'qqx' );
@@ -67,8 +62,8 @@ class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
 			$language
 		);
 
-		$result = $handler->getHtml( $this->newSampleCoordinate(), $language );
-		$this->assertStringContainsString( 'mw-kartographer-map', $result );
+		// This should be cached and not trigger Parser::parse() a second time
+		$handler->getHtml( $this->newSampleCoordinate(), $language );
 	}
 
 	public function testGetHtml_marsCoordinate() {
