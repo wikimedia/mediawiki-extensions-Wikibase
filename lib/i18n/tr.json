@@ -56,7 +56,7 @@
 	"datatypes-type-boolean": "Boole",
 	"datatypes-type-globe-coordinate": "Coğrafik koordinatlar",
 	"datatypes-type-time": "Zaman içinde puan",
-	"datatypes-type-wikibase-item": "Öge",
+	"datatypes-type-wikibase-item": "Öğe",
 	"datatypes-type-wikibase-property": "Özellik",
 	"datatypes-type-commonsMedia": "Commons medya dosyası",
 	"datatypes-type-geo-shape": "Coğrafi şekil",

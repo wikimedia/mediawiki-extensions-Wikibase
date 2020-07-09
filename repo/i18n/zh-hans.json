@@ -461,5 +461,7 @@
 	"wikibase-entity-save-error-heading": "出错了",
 	"wikibase-tainted-ref-popper-help-link-text": "帮助",
 	"wikibase-tainted-ref-popper-remove-warning": "移除警告",
-	"wikibase-federated-properties-special-list-of-properties-notice": "该Wikibase使用来自外部的联合属性。你可以访问$1"
+	"wikibase-federated-properties-search-api-error-message": "属性暂时不可用。",
+	"wikibase-federated-properties-special-list-of-properties-notice": "该Wikibase使用来自外部的联合属性。你可以访问$1",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "在$2上的$1属性列表"
 }
