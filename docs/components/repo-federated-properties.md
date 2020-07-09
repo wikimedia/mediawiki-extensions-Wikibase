@@ -38,9 +38,9 @@ For the MVP, version IDs of Federated Properties carry no information about thei
 
 ### Known Issues {#known-issues}
 
-In it's current implementation, federated properties do not support usage of local properties combined with federated ones. As there is no real distinction between the two different kinds, using local properties when federation is enabled will either mark them as deleted or as the corresponding property found on the federated source.
+In the current implementation, Federated Properties cannot be used in combination with local properties. This means enabling the feature on a Wikibase instance that already contains local properties is not supported. As there is currently no distinction between the two different kinds of properties, using local properties when federation is enabled will either cause them to display as a deleted, or as the property with the same entity ID on the federation source Wiki.
 
-For the same reason, using federated properties and then turning the feature off would either mark these properties as deleted or show the local property with the corresponding identifier.
+For the same reason, enabling Federated Properties and then turning off the feature is not supported once any statements have been added. Doing so will result in those properties displaying as deleted properties.
 
 [Wikidata]: https://www.wikidata.org/wiki/Wikidata:Main_Page
 [federatedPropertiesSourceScriptUrl setting]: @ref repo_federatedPropertiesSourceScriptUrl
