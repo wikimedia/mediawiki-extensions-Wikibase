@@ -841,7 +841,8 @@ return call_user_func( function() {
 				'wikibase.entityPage.entityLoaded',
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.getUserLanguages',
-				'mw.config.values.wbRepo'
+				'mw.config.values.wbRepo',
+				'vue'
 			],
 			// 'messages' are declared by ./resources.json via TermboxModule.
 		],
