@@ -6,8 +6,8 @@
  * @note: When adding entity types here, also add the corresponding information to
  * repo/WikibaseRepo.entitytypes.php
  *
- * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
- * objects or loading classes here!
+ * @note This is bootstrap code, it is executed for EVERY request.
+ * Avoid instantiating objects here!
  *
  * @see docs/entitytypes.wiki
  *

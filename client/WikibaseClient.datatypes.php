@@ -6,8 +6,8 @@
  *
  * @note: Keep in sync with lib/WikibaseLib.datatypes.php
  *
- * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
- * objects or loading classes here!
+ * @note This is bootstrap code, it is executed for EVERY request.
+ * Avoid instantiating objects here!
  *
  * @note: 'validator-factory-callback' fields delegate to a global instance of
  * ValidatorsBuilders

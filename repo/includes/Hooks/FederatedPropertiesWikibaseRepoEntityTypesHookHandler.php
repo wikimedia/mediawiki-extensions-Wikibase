@@ -21,8 +21,8 @@ class FederatedPropertiesWikibaseRepoEntityTypesHookHandler {
 	/**
 	 * Adds overrides for entity services concerning federated properties if the feature is enabled.
 	 *
-	 * @note This is bootstrap code, it is executed for EVERY request. Avoid instantiating
-	 * objects or loading classes here!
+	 * @note This is bootstrap code, it is executed for EVERY request.
+	 * Avoid instantiating objects here!
 	 *
 	 * @param array[] $entityTypeDefinitions
 	 */

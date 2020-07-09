@@ -8,10 +8,10 @@
  *
  * @note: Keep in sync with lib/WikibaseLib.entitytypes.php
  *
- * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
- * objects or loading classes here!
+ * @note This is bootstrap code, it is executed for EVERY request.
+ * Avoid instantiating objects here!
  *
- * @see docs/entiytypes.wiki
+ * @see docs/entitytypes.wiki
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
