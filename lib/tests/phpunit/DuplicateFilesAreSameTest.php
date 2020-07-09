@@ -20,26 +20,6 @@ class DuplicateFilesAreSameTest extends \PHPUnit\Framework\TestCase {
 				$wikibaseLib . 'jquery.event/jquery.event.special.eachchange.js',
 				$wikibaseDataValueVW . 'jquery.event/jquery.event.special.eachchange.js'
 			],
-			"jquery.ui.ooMenu.css" => [
-				$wikibaseLib . 'jquery.ui/jquery.ui.ooMenu.css',
-				$wikibaseDataValueVW . 'jquery.ui/jquery.ui.ooMenu.css'
-			],
-			"jquery.ui.ooMenu.js" => [
-				$wikibaseLib . 'jquery.ui/jquery.ui.ooMenu.js',
-				$wikibaseDataValueVW . 'jquery.ui/jquery.ui.ooMenu.js'
-			],
-			"jquery.ui.suggester.css" => [
-				$wikibaseLib . 'jquery.ui/jquery.ui.suggester.css',
-				$wikibaseDataValueVW . 'jquery.ui/jquery.ui.suggester.css'
-			],
-			"jquery.ui.suggester.js" => [
-				$wikibaseLib . 'jquery.ui/jquery.ui.suggester.js',
-				$wikibaseDataValueVW . 'jquery.ui/jquery.ui.suggester.js'
-			],
-			"jquery.util.getscrollbarwidth.js" => [
-				$wikibaseLib . 'jquery.util/jquery.util.getscrollbarwidth.js',
-				$wikibaseDataValueVW . 'jquery.util/jquery.util.getscrollbarwidth.js'
-			],
 			"util.inherit.js" => [
 				$wikibaseLib . 'util/util.inherit.js',
 				__DIR__ . '/../../../view/lib/wikibase-data-values/lib/util/util.inherit.js',

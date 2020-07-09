@@ -231,16 +231,21 @@
 				"jquery.wikibase/jquery.wikibase.siteselector.js",
 				"jquery.wikibase/jquery.wikibase.wbtooltip.js",
 				"wikibase.buildErrorOutput.js",
-				"util.highlightSubstring.js"
+				"util.highlightSubstring.js",
+				"jquery.ui/jquery.ui.suggester.js",
+				"jquery.ui/jquery.ui.ooMenu.js",
+				"jquery.util.getscrollbarwidth.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css",
-				"jquery.wikibase/jquery.wikibase.wbtooltip.css"
+				"jquery.wikibase/jquery.wikibase.wbtooltip.css",
+				"jquery.ui/jquery.ui.suggester.css",
+				"jquery.ui/jquery.ui.ooMenu.css"
 			],
 			"dependencies": [
 				"jquery.spinner",
 				"jquery.ui",
-				"jquery.ui.suggester",
+				"util.inherit",
 				"jquery.tipsy",
 				"mediawiki.api",
 				"mediawiki.util",
