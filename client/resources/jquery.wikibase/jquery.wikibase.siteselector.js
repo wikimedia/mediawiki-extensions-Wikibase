@@ -295,8 +295,9 @@
 		 * @return {string}
 		 */
 		_createItemLabel: function ( site, requestTerm ) {
-			return util.highlightSubstring( requestTerm, site.getShortName() )
-			+ ' (' + util.highlightSubstring( requestTerm, site.getId() ) + ')';
+			var highlightSubstring = require( '../util.highlightSubstring.js' );
+			return highlightSubstring( requestTerm, site.getShortName() )
+			+ ' (' + highlightSubstring( requestTerm, site.getId() ) + ')';
 		},
 
 		/**
