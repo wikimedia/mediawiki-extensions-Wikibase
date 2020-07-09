@@ -26,6 +26,7 @@
 				"MemberExpression": "off"
 			}
 		],
+		"jsdoc/require-param": "off",
 		"max-len": "off",
 		"mediawiki/valid-package-file-require": "error",
 		"new-cap": "off",
