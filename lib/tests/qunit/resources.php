@@ -11,10 +11,6 @@ return call_user_func( function() {
 		'localBasePath' => __DIR__,
 		'remoteExtPath' => 'Wikibase/lib/tests/qunit',
 	];
-	$packageFilesModuleBase = [
-		'localBasePath' => dirname( dirname( __DIR__ ) ),
-		'remoteExtPath' => 'Wikibase/repo/',
-	];
 
 	$modules = [
 		'wikibase.Site.tests' => $moduleBase + [
@@ -23,17 +19,6 @@ return call_user_func( function() {
 			],
 			'dependencies' => [
 				'wikibase.Site',
-			],
-		],
-
-		'wikibase.sites.tests' => $moduleBase + [
-			'scripts' => [
-				'wikibase.sites.tests.js',
-			],
-			'dependencies' => [
-				'wikibase',
-				'wikibase.Site',
-				'wikibase.sites',
 			],
 		],
 

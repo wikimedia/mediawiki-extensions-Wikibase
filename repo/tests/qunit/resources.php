@@ -83,5 +83,16 @@ return call_user_func( function() {
 				'resources/wikibase.PropertyDataTypeStore.js',
 			],
 		],
+
+		'wikibase.sites.tests' => $moduleBase + [
+			'scripts' => [
+				'wikibase.sites.tests.js',
+			],
+			'dependencies' => [
+				'wikibase',
+				'wikibase.Site',
+				'wikibase.sites',
+			],
+		],
 	];
 } );
