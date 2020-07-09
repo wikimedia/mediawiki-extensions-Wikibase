@@ -5,10 +5,10 @@
  * The array returned by the code below is supposed to be merged with the content of
  * repo/WikibaseRepo.entitytypes.php.
  *
- * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
- * objects or loading classes here!
+ * @note This is bootstrap code, it is executed for EVERY request.
+ * Avoid instantiating objects here!
  *
- * @see docs/entiytypes.md
+ * @see docs/entitytypes.md
  *
  * @license GPL-2.0-or-later
  */

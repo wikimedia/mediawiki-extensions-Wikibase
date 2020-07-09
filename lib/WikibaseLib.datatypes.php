@@ -8,8 +8,8 @@
  * @note: When adding data types here, also add the corresponding information to
  * repo/WikibaseRepo.datatypes.php and client/WikibaseClient.datatypes.php
  *
- * @note: This is bootstrap code, it is executed for EVERY request. Avoid instantiating
- * objects or loading classes here!
+ * @note This is bootstrap code, it is executed for EVERY request.
+ * Avoid instantiating objects here!
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
