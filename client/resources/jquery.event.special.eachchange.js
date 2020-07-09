@@ -3,6 +3,7 @@
 
 	/**
 	 * Event id used for data binding and as namespace.
+	 *
 	 * @property {string}
 	 * @ignore
 	 */
@@ -10,6 +11,7 @@
 
 	/**
 	 * Name(s) of events that are in fact supported by the client.
+	 *
 	 * @property {string}
 	 * @ignore
 	 */
@@ -19,6 +21,7 @@
 
 	/**
 	 * Checks whether a handler with a given event id has already been triggered.
+	 *
 	 * @ignore
 	 *
 	 * @param {string} eventId
@@ -27,7 +30,7 @@
 	 */
 	function alreadyTriggered( eventId, index ) {
 		for ( var i = 0; i < triggeredHandlers.length; i++ ) {
-			if ( eventId === triggeredHandlers[i].id && index === triggeredHandlers[i].index ) {
+			if ( eventId === triggeredHandlers[ i ].id && index === triggeredHandlers[ i ].index ) {
 				return true;
 			}
 		}
@@ -37,6 +40,7 @@
 	/**
 	 * Returns the value of a jQuery element or null if the element does not feature retrieving its
 	 * value via .val().
+	 *
 	 * @ignore
 	 *
 	 * @param {jQuery} $elem
@@ -54,6 +58,7 @@
 
 	/**
 	 * Assigns a namespace to a string of one or more event names separated by a space character.
+	 *
 	 * @ignore
 	 *
 	 * @param {string} eventNames
@@ -65,7 +70,7 @@
 			namespacedNames = [];
 
 		for ( var i = 0; i < names.length; i++ ) {
-			namespacedNames.push( names[i] + '.' + namespace );
+			namespacedNames.push( names[ i ] + '.' + namespace );
 		}
 
 		return namespacedNames.join( ' ' );
@@ -74,6 +79,7 @@
 	/**
 	 * Returns a string of on or more event names to be used for detecting any instant changes of an
 	 * input box. This should be just 'input' in recent browsers.
+	 *
 	 * @ignore
 	 *
 	 * @return {string}
@@ -86,8 +92,8 @@
 		}
 
 		var fallbackEvents = 'keyup keydown blur cut paste mousedown mouseup mouseout',
-			$input = $( '<input/>' ),
-			supported = 'oninput' in $input[0];
+			$input = $( '<input>' ),
+			supported = 'oninput' in $input[ 0 ];
 		return ( supported ) ? 'input' : fallbackEvents;
 	}
 
@@ -116,11 +122,11 @@
 	 * @param {string} previousValue
 	 */
 	$.event.special.eachchange = {
-		setup: function( data, namespaces, eventHandle ) {
+		setup: function ( data, namespaces, eventHandle ) {
 			inputEvent = getInputEvent();
 		},
 
-		add: function( handleObj ) {
+		add: function ( handleObj ) {
 			var eventData = $.data( this, EVENT_ID + handleObj.namespace ),
 				$elem = $( this ),
 				eventId = EVENT_ID + handleObj.namespace,
@@ -128,10 +134,10 @@
 
 			if ( !eventData ) {
 				eventData = { handlers: [], prevVal: getValue( $elem ) };
-				$( document ).on( eventNameString, function( event ) {
-					eventData = $.data( $elem[0], eventId );
+				$( document ).on( eventNameString, function ( event ) {
+					eventData = $.data( $elem[ 0 ], eventId );
 					eventData.prevVal = getValue( $elem );
-					$.data( $elem[0], eventId, eventData );
+					$.data( $elem[ 0 ], eventId, eventData );
 				} );
 			}
 
@@ -141,7 +147,7 @@
 			$.data( this, eventId, eventData );
 
 			// Delegate the "eachchange" event to the supported input event(s):
-			$elem.on( eventNameString, function( event ) {
+			$elem.on( eventNameString, function ( event ) {
 				eventData = $.data( this, eventId );
 
 				if ( !eventData ) {
@@ -156,21 +162,22 @@
 			} );
 		},
 
-		remove: function( handleObj ) {
+		remove: function ( handleObj ) {
 			var eventId = EVENT_ID + handleObj.namespace;
 			$( this ).off( '.' + eventId );
 			$( document ).off( '.' + eventId );
 			$.removeData( this, eventId );
 		},
 
-		trigger: function( event, data ) {
+		trigger: function ( event, data ) {
 			// Since the value might have changed multiple times programmatically before calling
 			// .trigger(Handlers)(), the previous value will be set to the current value and
 			// forwarded to the handler(s) when issuing .trigger(Handler)().
 			var self = this,
 				prevVal = getValue( $( this ) );
 
-			$.each( $.data( this ), function( eventId, eventData ) {
+			// eslint-disable-next-line no-jquery/no-each-util
+			$.each( $.data( this ), function ( eventId, eventData ) {
 				if ( eventId.indexOf( EVENT_ID ) === 0 ) {
 					eventData.prevVal = prevVal;
 					$.data( self, eventId, eventData );
@@ -181,7 +188,7 @@
 			triggeredHandlers = [];
 		},
 
-		handle: function( event, data ) {
+		handle: function ( event, data ) {
 			if ( event.namespace !== '' ) {
 				var eventData = $.data( this, EVENT_ID + event.namespace );
 				if ( eventData ) {
@@ -191,7 +198,8 @@
 			} else {
 				var self = this;
 
-				$.each( $.data( this ), function( eventId, eventData ) {
+				// eslint-disable-next-line no-jquery/no-each-util
+				$.each( $.data( this ), function ( eventId, eventData ) {
 					if ( eventId.indexOf( EVENT_ID ) !== 0 ) {
 						// Event is not an eachchange event.
 						return true;
@@ -201,7 +209,7 @@
 
 					for ( var i = 0; i < handlers.length; i++ ) {
 						if ( !alreadyTriggered( eventId, i ) ) {
-							handlers[i].call( self, event, eventData.prevVal );
+							handlers[ i ].call( self, event, eventData.prevVal );
 
 							triggeredHandlers.push( {
 								id: eventId,

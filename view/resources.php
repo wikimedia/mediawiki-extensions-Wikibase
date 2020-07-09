@@ -478,6 +478,15 @@ return call_user_func( function() {
 			],
 		],
 
+		'jquery.event.special.eachchange' => $wikibaseDatavaluesValueviewLibPaths + [
+			'scripts' => [
+				'jquery.event/jquery.event.special.eachchange.js'
+			],
+			'dependencies' => [
+				'jquery.client',
+			],
+		],
+
 		'dataValues.DataValue' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'DataValue.js',
@@ -613,6 +622,13 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 			'localBasePath' => __DIR__ . '/lib/wikibase-serialization/src',
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-serialization/src',
+		],
+
+		'util.inherit' => $wikibaseDatavaluesPaths + [
+			'scripts' => [
+				'lib/util/util.inherit.js',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		// Loads the actual valueview widget into jQuery.valueview.valueview and maps

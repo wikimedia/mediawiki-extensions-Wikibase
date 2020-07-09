@@ -9,6 +9,7 @@
 
 	require( './jquery.wikibase.siteselector.js' );
 	require( './jquery.wikibase.wbtooltip.js' );
+	require( '../jquery.event.special.eachchange.js' );
 
 	/**
 	 * This widget allows linking articles with Wikibase items or creating new wikibase items directly
