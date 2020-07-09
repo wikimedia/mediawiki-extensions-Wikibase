@@ -91,7 +91,7 @@ class ItemHandler extends EntityHandler {
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
-			CONTENT_MODEL_WIKIBASE_ITEM,
+			ItemContent::CONTENT_MODEL_ID,
 			null,
 			$contentCodec,
 			$constraintProvider,

@@ -86,7 +86,7 @@ class PropertyHandler extends EntityHandler {
 		$legacyExportFormatDetector = null
 	) {
 		parent::__construct(
-			CONTENT_MODEL_WIKIBASE_PROPERTY,
+			PropertyContent::CONTENT_MODEL_ID,
 			null,
 			$contentCodec,
 			$constraintProvider,

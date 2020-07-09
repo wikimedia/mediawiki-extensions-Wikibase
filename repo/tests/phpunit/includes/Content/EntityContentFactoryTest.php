@@ -17,6 +17,8 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Content\ItemContent;
+use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -123,8 +125,8 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 
 		return new EntityContentFactory(
 			[
-				'item' => CONTENT_MODEL_WIKIBASE_ITEM,
-				'property' => CONTENT_MODEL_WIKIBASE_PROPERTY
+				'item' => ItemContent::CONTENT_MODEL_ID,
+				'property' => PropertyContent::CONTENT_MODEL_ID
 			],
 			[
 				'item' => function() use ( $wikibaseRepo ) {

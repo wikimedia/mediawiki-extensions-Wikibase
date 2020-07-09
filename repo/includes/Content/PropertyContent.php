@@ -16,6 +16,8 @@ use Wikibase\DataModel\Entity\Property;
  */
 class PropertyContent extends EntityContent {
 
+	public const CONTENT_MODEL_ID = 'wikibase-property';
+
 	/**
 	 * @var EntityHolder|null
 	 */
@@ -34,7 +36,7 @@ class PropertyContent extends EntityContent {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( EntityHolder $propertyHolder = null ) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_PROPERTY );
+		parent::__construct( self::CONTENT_MODEL_ID );
 
 		if ( $propertyHolder !== null
 			&& $propertyHolder->getEntityType() !== Property::ENTITY_TYPE

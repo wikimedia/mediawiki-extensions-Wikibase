@@ -46,11 +46,11 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return string
 	 */
 	public function getModelId() {
-		return CONTENT_MODEL_WIKIBASE_ITEM;
+		return ItemContent::CONTENT_MODEL_ID;
 	}
 
 	public function testGetModelID() {
-		$this->assertSame( CONTENT_MODEL_WIKIBASE_ITEM, $this->getHandler()->getModelID() );
+		$this->assertSame( ItemContent::CONTENT_MODEL_ID, $this->getHandler()->getModelID() );
 	}
 
 	/**
@@ -283,7 +283,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$page = $this->getMockWikiPage( $handler );
 
 		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
-		$this->assertSame( CONTENT_MODEL_WIKIBASE_ITEM, $data['content_model'], 'content_modek' );
+		$this->assertSame( ItemContent::CONTENT_MODEL_ID, $data['content_model'], 'content_modek' );
 		$this->assertSame( "Kitten\nKitten", $data['text'], 'text' );
 	}
 

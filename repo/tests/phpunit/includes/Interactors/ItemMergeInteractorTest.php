@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\LatestRevisionIdResult;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
@@ -114,7 +115,7 @@ class ItemMergeInteractorTest extends MediaWikiTestCase {
 		$mock->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
-				$contentHandler = ContentHandler::getForModelID( CONTENT_MODEL_WIKIBASE_ITEM );
+				$contentHandler = ContentHandler::getForModelID( ItemContent::CONTENT_MODEL_ID );
 				return $contentHandler->getTitleForId( $id );
 			} ) );
 

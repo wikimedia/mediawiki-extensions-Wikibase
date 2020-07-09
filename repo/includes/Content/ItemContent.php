@@ -23,6 +23,8 @@ use Wikibase\Repo\ItemSearchTextGenerator;
  */
 class ItemContent extends EntityContent {
 
+	public const CONTENT_MODEL_ID = 'wikibase-item';
+
 	/**
 	 * @var EntityHolder|null
 	 */
@@ -54,7 +56,7 @@ class ItemContent extends EntityContent {
 		EntityRedirect $entityRedirect = null,
 		Title $redirectTitle = null
 	) {
-		parent::__construct( CONTENT_MODEL_WIKIBASE_ITEM );
+		parent::__construct( self::CONTENT_MODEL_ID );
 
 		if ( $itemHolder !== null && $entityRedirect !== null ) {
 			throw new InvalidArgumentException(
@@ -72,12 +74,12 @@ class ItemContent extends EntityContent {
 		}
 
 		if ( $redirectTitle !== null
-			&& $redirectTitle->getContentModel() !== CONTENT_MODEL_WIKIBASE_ITEM
+			&& $redirectTitle->getContentModel() !== self::CONTENT_MODEL_ID
 		) {
 			if ( $redirectTitle->exists() ) {
 				throw new InvalidArgumentException(
 					'$redirectTitle must refer to a page with content model '
-					. CONTENT_MODEL_WIKIBASE_ITEM );
+					. self::CONTENT_MODEL_ID );
 			}
 		}
 
