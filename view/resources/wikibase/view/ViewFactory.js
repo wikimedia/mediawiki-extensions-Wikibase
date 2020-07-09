@@ -362,7 +362,7 @@
 
 	/**
 	 * @param {Function} startEditingCallback
-	 * @returns {function(*=, *=, *=, *=): *}
+	 * @return {function(*=, *=, *=, *=): *}
 	 */
 	SELF.prototype.getAdderWithStartEditing = function ( startEditingCallback ) {
 		var structureEditorFactory = this._structureEditorFactory;

@@ -11,6 +11,7 @@
 
 	/**
 	 * Displays multiple fingerprints (see jQuery.wikibase.entitytermsforlanguageview).
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {Fingerprint} value

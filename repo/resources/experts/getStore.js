@@ -6,13 +6,13 @@
 	'use strict';
 
 	/**
-	 * @type {object} Map from property type to expert module name
+	 * @type {Object} Map from property type to expert module name
 	 */
 	var registeredExperts = require( 'wikibase.experts.modules' );
 
 	/**
 	 * @param {dataTypes.DataTypeStore} dataTypeStore
-	 * @returns {jQuery.valueview.ExpertStore}
+	 * @return {jQuery.valueview.ExpertStore}
 	 */
 	module.exports = function ( dataTypeStore ) {
 		var expertStore = new vv.ExpertStore( vv.experts.UnsupportedValue );
@@ -46,8 +46,8 @@
 	};
 
 	/**
-	 * @param {object} registeredExperts Map from property type to expert module name
-	 * @returns {object} Map from property type to expert constructor
+	 * @param {Object} registeredExperts Map from property type to expert module name
+	 * @return {Object} Map from property type to expert constructor
 	 */
 	function resolveExpertModules( registeredExperts ) {
 		var constructors = {};

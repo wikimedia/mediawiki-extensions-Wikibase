@@ -6,6 +6,7 @@
 
 	/**
 	 * Displays and allows editing of `datamodel.MultiTerm` objects.
+	 *
 	 * @see datamodel.MultiTerm
 	 * @class jQuery.wikibase.aliasesview
 	 * @extends jQuery.ui.EditableTemplatedWidget

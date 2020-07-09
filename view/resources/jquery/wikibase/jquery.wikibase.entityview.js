@@ -5,6 +5,7 @@
 
 	/**
 	 * Abstract base view for displaying a Wikibase `Entity`.
+	 *
 	 * @class jQuery.wikibase.entityview
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @abstract
@@ -159,6 +160,7 @@
 	/**
 	 * List of entityview types. Every entityview type should add itself to the list in order to be
 	 * matched by $( ':wikibase-entityview' ) pseudo selector.
+	 *
 	 * @property {string[]}
 	 * @static
 	 */

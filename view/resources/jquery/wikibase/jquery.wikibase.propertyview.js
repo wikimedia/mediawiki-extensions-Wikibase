@@ -5,6 +5,7 @@
 
 	/**
 	 * View for displaying a Wikibase `Property`.
+	 *
 	 * @see wikibase.datamodel.Property
 	 * @class jQuery.wikibase.propertyview
 	 * @extends jQuery.wikibase.entityview

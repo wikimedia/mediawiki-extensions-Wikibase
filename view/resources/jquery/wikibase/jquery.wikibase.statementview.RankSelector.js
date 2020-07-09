@@ -6,6 +6,7 @@
 
 	/**
 	 * The node of the `RankSelector` menu to select a `RANK` from.
+	 *
 	 * @property {jQuery|null} [$menu=null]
 	 * @ignore
 	 */
@@ -32,6 +33,7 @@
 
 	/**
 	 * Selector for choosing a `Statement` rank.
+	 *
 	 * @see datamodel.Statement.RANK
 	 * @class jQuery.wikibase.statementview.RankSelector
 	 * @extends jQuery.ui.EditableTemplatedWidget
@@ -77,6 +79,7 @@
 
 		/**
 		 * The `RANK` currently featured by the `RankSelector`.
+		 *
 		 * @see datamodel.Statement.RANK
 		 * @type {number}
 		 */

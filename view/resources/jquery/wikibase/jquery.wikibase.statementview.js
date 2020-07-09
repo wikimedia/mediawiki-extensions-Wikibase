@@ -7,6 +7,7 @@
 
 	/**
 	 * View for displaying and editing `datamodel.Statement` objects.
+	 *
 	 * @see datamodel.Statement
 	 * @class jQuery.wikibase.statementview
 	 * @extends jQuery.ui.EditableTemplatedWidget
@@ -115,6 +116,7 @@
 
 		/**
 		 * Shortcut to the `listview` managing the `referenceview`s.
+		 *
 		 * @property {jQuery.wikibase.listview|null}
 		 * @private
 		 */
@@ -122,6 +124,7 @@
 
 		/**
 		 * Reference to the `listview` widget managing the qualifier `snaklistview`s.
+		 *
 		 * @property {jQuery.wikibase.listview|null}
 		 * @private
 		 */
@@ -129,6 +132,7 @@
 
 		/**
 		 * Reference to the `toggler` widget managing expanding/collapsing
+		 *
 		 * @property {jQuery}
 		 * @private
 		 */

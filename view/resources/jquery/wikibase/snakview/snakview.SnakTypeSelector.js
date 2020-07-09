@@ -10,6 +10,7 @@
 	 * `jQuery.wikibase.snakview`.
 	 * Because of being tightly bound to the `variations`, the widget is
 	 * considered part of the `jQuery.wikibase.snakview` rather than being a stand-alone widget.
+	 *
 	 * @see jQuery.wikibase.snakview
 	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview.SnakTypeSelector
@@ -41,6 +42,7 @@
 		/**
 		 * The function for removing global event listeners, if there are any. Empty function if
 		 * no gloabel event listeners are registered.
+		 *
 		 * @property {Function}
 		 * @private
 		 */

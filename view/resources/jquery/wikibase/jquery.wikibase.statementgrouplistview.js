@@ -7,6 +7,7 @@
 	/**
 	 * View for displaying `datamodel.Statement` objects grouped by their main `Snak`'s
 	 * `Property` id by managing a list of `jQuery.wikibase.statementgroupview` widgets.
+	 *
 	 * @see datamodel.StatementGroup
 	 * @see datamodel.StatementGroupSet
 	 * @uses jQuery.wikibase.statementgrouplabelscroll

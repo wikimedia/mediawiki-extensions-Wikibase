@@ -33,7 +33,7 @@ module.exports = ( function () {
 	/**
 	 * Set or clear error
 	 *
-	 * @param {mixed|undefined} [error] The error or undefined, if error should be
+	 * @param {Mixed|undefined} [error] The error or undefined, if error should be
 	 * cleared
 	 */
 	SELF.prototype.setError = util.abstractMember;

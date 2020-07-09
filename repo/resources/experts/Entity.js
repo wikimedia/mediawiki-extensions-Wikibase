@@ -6,6 +6,7 @@
 
 	/**
 	 * `valueview` `Expert` for specifying a reference to a Wikibase `Entity`.
+	 *
 	 * @class wikibase.experts.Entity
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @abstract
@@ -100,6 +101,7 @@
 
 	/**
 	 * `Entity` type this `Expert` supports.
+	 *
 	 * @property {string} [TYPE=null]
 	 * @static
 	 */

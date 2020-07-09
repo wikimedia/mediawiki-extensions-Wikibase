@@ -8,6 +8,7 @@
 	/**
 	 * Template cache that stores the parameter types templates have been generated with. These
 	 * templates do not need to be validated anymore allowing to skip the validation process.
+	 *
 	 * @type {Object}
 	 */
 	var cache = {};

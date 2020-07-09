@@ -9,6 +9,7 @@
 
 	/**
 	 * Entity store fetching entities from API.
+	 *
 	 * @constructor
 	 * @extends EntityStore
 	 *

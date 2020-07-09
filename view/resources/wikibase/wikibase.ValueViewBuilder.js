@@ -41,12 +41,12 @@
 
 	$.extend( SELF.prototype, {
 		/**
-		 * @var {Object}
+		 * @member {Object}
 		 */
 		_baseOptions: null,
 
 		/**
-		 * @var {wikibase.ValueFormatterFactory}
+		 * @member {wikibase.ValueFormatterFactory}
 		 */
 		_formatterFactory: null,
 

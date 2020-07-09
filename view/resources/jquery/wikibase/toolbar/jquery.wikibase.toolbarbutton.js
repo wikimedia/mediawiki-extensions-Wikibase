@@ -11,6 +11,7 @@
 
 	/**
 	 * Represents a button to be used in a jQuery.wikibase.toolbar.
+	 *
 	 * @extends jQuery.wikibase.toolbaritem
 	 *
 	 * @option {string} [cssClassSuffix]

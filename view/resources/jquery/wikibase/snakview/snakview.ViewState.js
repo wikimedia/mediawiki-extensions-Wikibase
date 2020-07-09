@@ -21,6 +21,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * The `snakview` the `ViewState` is interfacing to.
+		 *
 		 * @property {jQuery.wikibase.snakview}
 		 */
 		_view: null,

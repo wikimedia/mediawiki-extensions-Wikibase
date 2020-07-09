@@ -34,6 +34,7 @@
 	$.widget( 'wikibase.wbtooltip', PARENT, {
 		/**
 		 * Options.
+		 *
 		 * @type {Object}
 		 */
 		options: {
@@ -45,6 +46,7 @@
 
 		/**
 		 * Tipsy tooltip plugin object.
+		 *
 		 * @type {Object}
 		 */
 		_tipsy: null,

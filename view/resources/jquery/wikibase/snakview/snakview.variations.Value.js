@@ -8,6 +8,7 @@
 	/**
 	 * `snakview` `Variation` for displaying and creating `datamodel.PropertyValueSnak`s.
 	 * Serves a `jQuery.valueview` widget used to display and alter the `Snak`'s value.
+	 *
 	 * @see jQuery.valueview
 	 * @see jQuery.wikibase.snakview
 	 * @see datamodel.PropertyValueSnak
@@ -22,6 +23,7 @@
 		/**
 		 * The `valueview` widget instance or `null` if the `Property`'s `DataType` is not
 		 * supported.
+		 *
 		 * @property {jQuery.valueview|null} [_valueView=null]
 		 * @private
 		 */
@@ -31,6 +33,7 @@
 		 * The `DataValue` last set in `_setValue()`. This field will not be updated, it only serves
 		 * to remember the value until `draw()` is called. Afterwards, it is set to `false` until
 		 * the next call to `_setValue()`.
+		 *
 		 * @property {dataValues.DataValue|null|false} [_newDataValue=null]
 		 * @private
 		 */

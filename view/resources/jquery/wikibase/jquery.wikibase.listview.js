@@ -5,6 +5,7 @@
 
 	/**
 	 * View for displaying and editing list items, each represented by a single random widget.
+	 *
 	 * @class jQuery.wikibase.listview
 	 * @extends jQuery.ui.TemplatedWidget
 	 * @license GPL-2.0-or-later
@@ -40,6 +41,7 @@
 
 		/**
 		 * Short-cut for `this.options.listItemAdapter`.
+		 *
 		 * @property {jQuery.wikibase.listview.ListItemAdapter}
 		 * @private
 		 */
@@ -48,6 +50,7 @@
 		/**
 		 * The DOM elements this `listview`'s element contained when it was initialized. These DOM
 		 * elements are reused in `this._addLiValue` until the array is empty.
+		 *
 		 * @property {HTMLElement[]|null}
 		 * @private
 		 */

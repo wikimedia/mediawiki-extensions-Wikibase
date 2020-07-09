@@ -3,6 +3,7 @@
 
 	/**
 	 * Base constructor for objects representing a data type.
+	 *
 	 * @class wikibase.dataTypes.DataType
 	 * @abstract
 	 * @since 0.1
@@ -36,6 +37,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Data type (a.k.a. property type) identifier.
+		 *
 		 * @property {string}
 		 * @private
 		 */
@@ -43,6 +45,7 @@
 
 		/**
 		 * Identifier of the data value type internally used by this data type.
+		 *
 		 * @property {string}
 		 * @private
 		 */
@@ -69,6 +72,7 @@
 
 	/**
 	 * Creates a new DataType object from a given JSON structure.
+	 *
 	 * @static
 	 *
 	 * @param {string} dataTypeId

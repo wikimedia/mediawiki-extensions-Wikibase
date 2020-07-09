@@ -10,6 +10,7 @@
 
 	/**
 	 * Displays and allows editing a site link.
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {datamodel.SiteLink} [value]

@@ -34,27 +34,27 @@
 		},
 		{
 			/**
-			 * @var {wikibase.api.FormatValueCaller}
+			 * @member {wikibase.api.FormatValueCaller}
 			 */
 			_formatValueCaller: null,
 
 			/**
-			 * @var {string|null}
+			 * @member {string|null}
 			 */
 			_dataTypeId: null,
 
 			/**
-			 * @var {string|null}
+			 * @member {string|null}
 			 */
 			_propertyId: null,
 
 			/**
-			 * @var {Object}
+			 * @member {Object}
 			 */
 			_options: null,
 
 			/**
-			 * @var {string} outputType
+			 * @member {string} outputType
 			 */
 			_outputType: null,
 

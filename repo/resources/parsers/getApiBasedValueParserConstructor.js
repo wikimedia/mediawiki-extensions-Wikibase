@@ -20,12 +20,14 @@
 		/**
 		 * Base constructor for objects representing a value parser which is doing an API request to the
 		 * 'parseValue' API module.
+		 *
 		 * @constructor
 		 * @extends valueParsers.ValueParser
 		 */
 		return util.inherit( 'WbApiBasedValueParser', PARENT, {
 			/**
 			 * The key of the related API parser.
+			 *
 			 * @type {string}
 			 */
 			API_VALUE_PARSER_ID: null,

@@ -7,6 +7,7 @@
 
 	/**
 	 * Entity stubs as returned from the API and handled by the entityselector.
+	 *
 	 * @type {Object[]}
 	 */
 	var entityStubs = [

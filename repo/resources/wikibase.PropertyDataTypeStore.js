@@ -70,7 +70,7 @@
 		 * @param {Object} node
 		 * @param {string} propertyId
 		 *
-		 * @returns {null|string}
+		 * @return {null|string}
 		 */
 		_findDataTypeInEntity: function ( node, propertyId ) {
 			if ( !node || typeof node !== 'object' ) {

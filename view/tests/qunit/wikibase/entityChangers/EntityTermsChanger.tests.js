@@ -15,6 +15,7 @@
 
 	/**
 	 * Syntactic sugar for readability
+	 *
 	 * @type {createFingerprint}
 	 */
 	var newFingerprint = createFingerprint;
@@ -547,7 +548,7 @@
 
 	/**
 	 * @param revisionId
-	 * @returns {SuccessfulCallbackBuilder}
+	 * @return {SuccessfulCallbackBuilder}
 	 */
 	function functionReturningSuccessfulResponse( revisionId ) {
 		var result = apiResponseForRevision( revisionId );

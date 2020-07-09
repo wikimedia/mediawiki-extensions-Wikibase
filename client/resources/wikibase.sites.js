@@ -12,7 +12,7 @@
 		 *
 		 * TODO: This should go together with the old UI.
 		 *
-		 * @var Object
+		 * @member Object
 		 */
 		this._siteList = null;
 

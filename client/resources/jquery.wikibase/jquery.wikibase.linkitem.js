@@ -45,24 +45,28 @@
 
 		/**
 		 * Spinner (set if there's something ongoing)
+		 *
 		 * @type jQuery
 		 */
 		$spinner: null,
 
 		/**
 		 * Button to go on (next step)
+		 *
 		 * @type jQuery
 		 */
 		$goButton: null,
 
 		/**
 		 * Global ID of the site to link with
+		 *
 		 * @type {string}
 		 */
 		targetSite: null,
 
 		/**
 		 * Name of the page title to link with
+		 *
 		 * @type {string}
 		 */
 		targetArticle: null,
@@ -71,6 +75,7 @@
 
 		/**
 		 * Options
+		 *
 		 * @see jQuery.Widget.options
 		 */
 		options: {

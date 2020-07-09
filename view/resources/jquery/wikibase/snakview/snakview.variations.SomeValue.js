@@ -9,6 +9,7 @@
 	 * `snakview` `Variation` for displaying and creating
 	 * `datamodel.PropertySomeValueSnak`s. Only displays a message, does not offer any
 	 * additional user interface interaction.
+	 *
 	 * @see jQuery.wikibase.snakview
 	 * @see datamodel.PropertySomeValueSnak
 	 * @class jQuery.wikibase.snakview.variations.SomeValue

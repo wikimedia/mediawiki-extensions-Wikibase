@@ -21,6 +21,7 @@
 
 		/**
 		 * Values to be passed to the template function as parameters.
+		 *
 		 * @type {Array}
 		 */
 		var params = [
@@ -48,6 +49,7 @@
 		 * structure in multiple cases, it will not throw errors treating the HTML structure as
 		 * valid. While the first array value represents the normally expected result, the second
 		 * value represents the result expected for IE.
+		 *
 		 * @type {Array}
 		 */
 		var testsData = [

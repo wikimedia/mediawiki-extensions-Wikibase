@@ -111,6 +111,7 @@
 
 	/**
 	 * Get entity from config
+	 *
 	 * @param configVarName
 	 * @return {jQuery.Promise}
 	 *         Resolved parameters:

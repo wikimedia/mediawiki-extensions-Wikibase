@@ -12,6 +12,7 @@
 
 	/**
 	 * "Edit" toolbar widget.
+	 *
 	 * @extends jQuery.wikibase.toolbar
 	 *
 	 * This widget offers a "edit" toolbar allowing editing-related interaction with a specific widget.
@@ -58,6 +59,7 @@
 		/**
 		 * Names of methods that are required in the interaction widget to ensure proper toolbar
 		 * interaction.
+		 *
 		 * @type {string[]}
 		 */
 		_requiredMethods: [
@@ -74,6 +76,7 @@
 
 		/**
 		 * Node holding the tooltip image with the tooltip itself attached.
+		 *
 		 * @type {null|jQuery}
 		 */
 		_$tooltipAnchor: null,

@@ -3,6 +3,7 @@
 	/**
 	 * Map of `Snak` type IDs and related `Variation`s required for representing different kinds of
 	 * `Snaks` with `jQuery.wikibase.snakview`.
+	 *
 	 * @property {Object}
 	 * @ignore
 	 */
@@ -10,6 +11,7 @@
 
 	/**
 	 * Store for `jQuery.wikibase.snakview.variations.Variation` objects.
+	 *
 	 * @class jQuery.wikibase.snakview.variations
 	 * @singleton
 	 * @license GPL-2.0-or-later

@@ -7,6 +7,7 @@
 	/**
 	 * View for displaying and editing a list of `datamodel.Statement` objects by using
 	 * `jQuery.wikibase.statementview` widgets.
+	 *
 	 * @see jQuery.wikibase.statementview
 	 * @see datamodel.Statement
 	 * @see datamodel.StatementList

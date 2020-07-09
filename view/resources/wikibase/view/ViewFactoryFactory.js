@@ -12,7 +12,7 @@
 		 * @param {boolean} isEditable
 		 * @param {Array} factoryArguments
 		 *
-		 * @returns {wikibase.view.ControllerViewFactory|wikibase.view.ReadModeViewFactory}
+		 * @return {wikibase.view.ControllerViewFactory|wikibase.view.ReadModeViewFactory}
 		 */
 		getViewFactory: function ( isEditable, factoryArguments ) {
 			if ( isEditable ) {

@@ -11,6 +11,7 @@
 
 	/**
 	 * Toolbar widget that can be filled with compatible toolbar items.
+	 *
 	 * @constructor
 	 * @extends jQuery.wikibase.toolbaritem
 	 *

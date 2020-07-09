@@ -20,6 +20,7 @@
 
 	/**
 	 * Displays and allows editing multiple site links.
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {wikibase.datamodel.SiteLink[]} [value]

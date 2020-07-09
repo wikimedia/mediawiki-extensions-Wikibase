@@ -8,6 +8,7 @@
 
 	/**
 	 * View for displaying and editing `datamodel.Reference` objects.
+	 *
 	 * @see datamodel.Reference
 	 * @class jQuery.wikibase.referenceview
 	 * @extends jQuery.ui.EditableTemplatedWidget

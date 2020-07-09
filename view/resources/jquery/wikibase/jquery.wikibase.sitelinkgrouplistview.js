@@ -94,6 +94,7 @@
 
 	/**
 	 * Encapsulates multiple sitelinkgroupview widgets.
+	 *
 	 * @extends jQuery.ui.TemplatedWidget
 	 *
 	 * @option {jQuery.wikibase.listview.ListItemAdapter} listItemAdapter

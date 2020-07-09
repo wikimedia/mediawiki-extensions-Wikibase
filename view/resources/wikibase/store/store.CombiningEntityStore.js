@@ -31,6 +31,7 @@
 
 	/**
 	 * Entity store wrapping multiple EntityStore instances.
+	 *
 	 * @constructor
 	 * @extends EntityStore
 	 *

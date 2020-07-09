@@ -24,6 +24,7 @@
 
 	/**
 	 * Generates and returns a GUID.
+	 *
 	 * @see http://php.net/manual/en/function.com-create-guid.php
 	 * @return {string}
 	 */

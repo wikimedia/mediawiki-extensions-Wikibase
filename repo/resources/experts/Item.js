@@ -6,6 +6,7 @@ module.exports = ( function ( wb, vv ) {
 
 	/**
 	 * `valueview` `Expert` for specifying a reference to a Wikibase `Item`.
+	 *
 	 * @see jQuery.valueview.expert
 	 * @see jQuery.valueview.Expert
 	 * @class wikibase.experts.Item

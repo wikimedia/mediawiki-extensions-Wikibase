@@ -9,6 +9,7 @@
 
 	/**
 	 * Displays and allows editing label and description in a specific language.
+	 *
 	 * @extends jQuery.ui.TemplatedWidget
 	 *
 	 * @option {Object|null} value

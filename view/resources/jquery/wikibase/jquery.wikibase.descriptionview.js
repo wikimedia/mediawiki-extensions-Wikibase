@@ -10,6 +10,7 @@
 
 	/**
 	 * Manages a description.
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {datamodel.Term} value

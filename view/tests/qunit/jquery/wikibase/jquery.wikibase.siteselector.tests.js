@@ -7,6 +7,7 @@
 
 	/**
 	 * Site details as required by the wikibase.Site constructor.
+	 *
 	 * @type {Object[]}
 	 */
 	var siteDetails = [

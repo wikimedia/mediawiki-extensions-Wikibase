@@ -17,6 +17,7 @@
 
 	/**
 	 * View for displaying and editing `datamodel.Snak` objects.
+	 *
 	 * @see datamodel.Snak
 	 * @class jQuery.wikibase.snakview
 	 * @extends jQuery.ui.EditableTemplatedWidget
@@ -103,6 +104,7 @@
 		 * `Snak`. May be `null` if an unsupported `Snak` type is represented by the `snakview`. In this
 		 * case, the `snakview` won't be able to display the `Snak` but displays an appropriate message
 		 * instead.
+		 *
 		 * @property {Variation|null}
 		 * @private
 		 */
@@ -111,6 +113,7 @@
 		/**
 		 * Cache for the values of specific `variation`s used to have those
 		 * values restored when toggling the `Snak` type.
+		 *
 		 * @property {Object}
 		 * @private
 		 */
@@ -118,6 +121,7 @@
 
 		/**
 		 * Whether then `snakview`'s value is regarded "valid" at the moment.
+		 *
 		 * @property {boolean}
 		 * @private
 		 */

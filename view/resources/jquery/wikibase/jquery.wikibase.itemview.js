@@ -5,6 +5,7 @@
 
 	/**
 	 * View for displaying a Wikibase `Item`.
+	 *
 	 * @see wikibase.datamodel.Item
 	 * @class jQuery.wikibase.itemview
 	 * @extends jQuery.wikibase.entityview

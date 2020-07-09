@@ -6,6 +6,7 @@
 
 	/**
 	 * View for displaying and editing a `datamodel.SnakList` object.
+	 *
 	 * @see datamodel.SnakList
 	 * @class jQuery.wikibase.snaklistview
 	 * @extends jQuery.ui.EditableTemplatedWidget
@@ -64,6 +65,7 @@
 		/**
 		 * Short-cut to the `listview` widget used by the `snaklistview` to manage the `snakview`
 		 * widgets.
+		 *
 		 * @property {jQuery.wikibase.listview}
 		 * @private
 		 */
@@ -72,6 +74,7 @@
 		/**
 		 * Short-cut to the `ListItemAdapter` in use with the `listview` widget used to manage the
 		 * `snakview` widgets.
+		 *
 		 * @property {jQuery.wikibase.listview.ListItemAdapter}
 		 * @private
 		 */

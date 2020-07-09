@@ -11,6 +11,7 @@
 
 	/**
 	 * Toolbar by default featuring a single button.
+	 *
 	 * @extends jQuery.wikibase.toolbar
 	 *
 	 * @option {string} [label]

@@ -5,6 +5,7 @@
 
 	/**
 	 * Whether loaded in MediaWiki context.
+	 *
 	 * @property {boolean}
 	 * @ignore
 	 */
@@ -12,6 +13,7 @@
 
 	/**
 	 * Whether actual `entityselector` resource loader module is loaded.
+	 *
 	 * @property {boolean}
 	 * @ignore
 	 */
@@ -116,6 +118,7 @@
 
 		/**
 		 * Caching the most current entity returned from the API.
+		 *
 		 * @property {Object}
 		 * @private
 		 */

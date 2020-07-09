@@ -63,6 +63,7 @@
 		/**
 		 * A unique class for this `Variation`, applied to the `Variation` DOM's `class` attribute.
 		 * Will be set by the `Variation` factory when creating a new `Variation` definition.
+		 *
 		 * @property {string}
 		 * @readonly
 		 */
@@ -71,6 +72,7 @@
 		/**
 		 * The constructor of the `Snak` the `Variation` is for. Will be set by the `Variation`
 		 * factory when creating a new `Variation` definition.
+		 *
 		 * @property {datamodel.Snak}
 		 * @readonly
 		 */
@@ -80,6 +82,7 @@
 		 * The DOM node displaying the `Variation`'s current state and/or input elements for user
 		 * interaction during the `snakview`'s edit mode. The node's content has to be updated by
 		 * the `draw()` function.
+		 *
 		 * @property {jQuery}
 		 * @protected
 		 */
@@ -195,6 +198,7 @@
 
 		/**
 		 * Updates the `Variation` view port's content.
+		 *
 		 * @abstract
 		 */
 		draw: util.abstractMember,

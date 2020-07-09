@@ -7,6 +7,7 @@
 
 	/**
 	 * "Remove" toolbar widget by default offering a "remove" button.
+	 *
 	 * @class jQuery.wikibase.removetoolbar
 	 * @extends jQuery.wikibase.singlebuttontoolbar
 	 * @license GPL-2.0-or-later

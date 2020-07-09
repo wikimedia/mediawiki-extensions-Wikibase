@@ -9,12 +9,14 @@
 
 	/**
 	 * References one single $menu instance that is reused for all badgeselector instances.
+	 *
 	 * @type {jQuery}
 	 */
 	var $menu = null;
 
 	/**
 	 * Selector for toggling badges.
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {string[]} [value]

@@ -23,6 +23,7 @@
 
 	/**
 	 * Manages a sitelinklistview widget specific to a particular site link group.
+	 *
 	 * @extends jQuery.ui.EditableTemplatedWidget
 	 *
 	 * @option {string} groupName

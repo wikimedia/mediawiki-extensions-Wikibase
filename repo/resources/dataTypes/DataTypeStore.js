@@ -20,6 +20,7 @@
 	$.extend( SELF.prototype, {
 		/**
 		 * Data type definitions.
+		 *
 		 * @property {Object} [_dataTypes={}]
 		 * @private
 		 */

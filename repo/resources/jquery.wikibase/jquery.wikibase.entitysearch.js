@@ -9,6 +9,7 @@
 
 	/**
 	 * Entity selector widget enhanced to be used as global search element.
+	 *
 	 * @extends jQuery.wikibase.entityselector
 	 *
 	 * @option {jQuery.ui.ooMenu.CustomItem} [suggestionsPlaceholder]

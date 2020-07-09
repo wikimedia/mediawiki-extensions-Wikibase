@@ -11,6 +11,7 @@
 
 	/**
 	 * "Add" toolbar widget by default offering an "add" button.
+	 *
 	 * @extends jQuery.wikibase.singlebuttontoolbar
 	 *
 	 * @option {string} [label]
