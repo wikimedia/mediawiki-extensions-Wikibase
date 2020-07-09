@@ -229,7 +229,8 @@
 				"wikibase.client.getMwApiForRepo.js",
 				"wikibase.sites.js",
 				"jquery.wikibase/jquery.wikibase.siteselector.js",
-				"jquery.wikibase/jquery.wikibase.wbtooltip.js"
+				"jquery.wikibase/jquery.wikibase.wbtooltip.js",
+				"wikibase.buildErrorOutput.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css",
@@ -241,7 +242,6 @@
 				"jquery.ui.suggester",
 				"util.highlightSubstring",
 				"jquery.tipsy",
-				"wikibase.buildErrorOutput",
 				"mediawiki.api",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",

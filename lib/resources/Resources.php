@@ -52,15 +52,6 @@ return call_user_func( function() {
 			'targets' => [ 'desktop', 'mobile' ],
 		],
 
-		'wikibase.buildErrorOutput' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.buildErrorOutput.js',
-			],
-			'dependencies' => [
-				'wikibase',
-			],
-		],
-
 		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',

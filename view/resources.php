@@ -909,6 +909,14 @@ return call_user_func( function() {
 				'wikibase.buildErrorOutput',
 			],
 		],
+		'wikibase.buildErrorOutput' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase/wikibase.buildErrorOutput.js',
+			],
+			'dependencies' => [
+				'wikibase',
+			],
+		],
 	];
 
 	return $modules;
