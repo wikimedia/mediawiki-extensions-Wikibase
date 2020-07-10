@@ -40,7 +40,7 @@ if ( $wgEnableWikibaseRepo ?? true ) {
 }
 
 if ( $wgEnableWikibaseClient ?? true ) {
-	require_once __DIR__ . '/client/WikibaseClient.php';
+	wfLoadExtension( 'WikibaseClient', __DIR__ . '/extension-client.json' );
 
 	if ( $wgWikimediaJenkinsCI ?? false ) {
 		require_once __DIR__ . '/client/config/WikibaseClient.ci.php';
