@@ -41,4 +41,13 @@ class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 		$this->assertStringContainsString( 'wikibase-federated-properties-special-list-of-properties-notice', $output );
 		$this->assertStringContainsString( 'wikibase-federated-properties-special-list-of-properties-source-ref', $output );
 	}
+
+	public function testExecute_withDataTypeId() {
+		[ $output, ] = $this->executeSpecialPage( 'string' );
+
+		$this->assertIsString( $output );
+		$this->assertStringContainsString( 'href="http://my.test.url/w/index.php?title=Special:ListProperties/string"', $output );
+		$this->assertStringContainsString( 'wikibase-federated-properties-special-list-of-properties-notice', $output );
+		$this->assertStringContainsString( 'wikibase-federated-properties-special-list-of-properties-source-ref', $output );
+	}
 }

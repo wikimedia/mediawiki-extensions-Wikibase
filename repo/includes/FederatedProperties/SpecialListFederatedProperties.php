@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 use OOUI\HtmlSnippet;
@@ -32,23 +33,28 @@ class SpecialListFederatedProperties extends SpecialWikibasePage {
 	public function execute( $subPage ) {
 		parent::execute( $subPage );
 		$this->getOutput()->enableOOUI();
-		$this->getOutput()->addHTML( $this->htmlNoticeWidget() );
+		$this->getOutput()->addHTML( $this->htmlNoticeWidget( $subPage ) );
 	}
 
-	private function htmlNoticeWidget() : string {
-		return ( new MessageWidget( [ 'label' => new HtmlSnippet( $this->htmlNoticeLabel() ) ] ) )->toString();
+	private function htmlNoticeWidget( ?string $dataTypeId ) : string {
+		return ( new MessageWidget( [ 'label' => new HtmlSnippet( $this->htmlNoticeLabel( $dataTypeId ) ) ] ) )->toString();
 	}
 
-	private function htmlNoticeLabel() : string {
+	private function htmlNoticeLabel( ?string $dataTypeId ) : string {
 		return wfMessage( 'wikibase-federated-properties-special-list-of-properties-notice' )
-			->rawParams( $this->htmlLinkToRemotePage() )
+			->rawParams( $this->htmlLinkToRemotePage( $dataTypeId ) )
 			->escaped();
 	}
 
-	private function htmlLinkToRemotePage() : string {
+	private function htmlLinkToRemotePage( ?string $dataTypeId ) : string {
+		$specialPage = 'Special:ListProperties';
+		if ( $dataTypeId ) {
+			$specialPage .= '/' . wfEscapeWikiText( $dataTypeId );
+		}
+
 		return wfMessage(
 			'wikibase-federated-properties-special-list-of-properties-source-ref',
-			$this->scriptUrl . 'index.php?title=Special:ListProperties',   // the href target URL
+			$this->scriptUrl . 'index.php?title=' . $specialPage,   // the href target URL
 			parse_url( $this->scriptUrl, PHP_URL_HOST )           // the source domain name as displayed in the message
 		)->parse();
 	}
