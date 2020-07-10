@@ -36,7 +36,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 // load parts already converted to extension registration
-wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client-wip.json' );
+wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client.json' );
 
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
