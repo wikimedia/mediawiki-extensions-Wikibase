@@ -964,9 +964,6 @@ call_user_func( function() {
 	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHitTitle';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler::onOutputPageBeforeHTML';
 	$wgHooks['OutputPageBeforeHTML'][] = 'Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler::onOutputPageBeforeHtmlRegisterConfig';
-	$wgHooks['BeforeDisplayNoArticleText'][] = 'Wikibase\Repo\Actions\ViewEntityAction::onBeforeDisplayNoArticleText';
-	$wgHooks['WikibaseRepoEntityTypes'][] =
-		'Wikibase\Repo\Hooks\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes';
 	$wgHooks['ArticleRevisionVisibilitySet'][] = 'Wikibase\Repo\Hooks\ArticleRevisionVisibilitySetHookHandler::onArticleRevisionVisibilitySet';
 	$wgHooks[ 'SpecialPage_initList' ][] = 'Wikibase\Repo\Hooks\FederatedPropertiesSpecialPageHookHandler::onSpecialPageInitList';
 
