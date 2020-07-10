@@ -5,7 +5,6 @@
 			"Addshore"
 		]
 	},
-	"wikibase-lib-desc": "Holds common functionality for the Wikibase and Wikibase Client extensions",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Deleted Item",
 	"wikibase-deletedentity-property": "Deleted Property",

@@ -35,9 +35,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
 
-// load parts already converted to extension registration
-wfLoadExtension( 'WikibaseLib', __DIR__ . '/../extension-lib-wip.json' );
-
 call_user_func( function() {
 	global $wgMessagesDirs;
 	// Keep i18n globals so mergeMessageFileList.php doesn't break
