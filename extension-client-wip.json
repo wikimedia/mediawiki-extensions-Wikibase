@@ -65,6 +65,9 @@
 			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",
 			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::newFromGlobalState"
 		},
+		"LibHooks": {
+			"class": "\\Wikibase\\Lib\\LibHooks"
+		},
 		"DescriptionProviderHookHandler": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
@@ -131,6 +134,7 @@
 		"EditPage::showStandardInputs:options": "EditActionHookHandler",
 		"EnhancedChangesListModifyBlockLineData": "ChangesListLinesHandler",
 		"EnhancedChangesListModifyLineData": "ChangesListLinesHandler",
+		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
 		"InfoAction": "InfoActionHookHandler",
@@ -146,6 +150,8 @@
 		"ParserGetVariableValueSwitch": "Magic",
 		"ParserLimitReportPrepare": "ParserHookHandler",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
+		"ResourceLoaderRegisterModules": "LibHooks",
+		"ResourceLoaderTestModules": "LibHooks",
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
 		"SearchDataForIndex": "TrivialHookHandler",
 		"SearchIndexFields": "TrivialHookHandler",
@@ -156,7 +162,10 @@
 		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
 		"SpecialMovepageAfterMove": "MovePageNotice",
 		"PageMoveComplete": "UpdateRepoHookHandler",
-		"UnitTestsList": "TrivialHookHandler",
+		"UnitTestsList": [
+			"TrivialHookHandler",
+			"LibHooks"
+		],
 		"wgQueryPages": "TrivialHookHandler"
 	},
 	"TrackingCategories": [
@@ -164,12 +173,20 @@
 		"connected-redirect-category"
 	],
 	"AutoloadNamespaces": {
-		"Wikibase\\Client\\": "client/includes/"
+		"Wikibase\\Client\\": "client/includes/",
+		"Wikibase\\Lib\\": "lib/includes/",
+		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Client\\Tests\\Integration\\": "client/tests/phpunit/integration/includes/",
 		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
-		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/"
+		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/",
+		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
+	},
+	"TestAutoloadClasses": {
+		"Wikibase\\Repo\\Content\\ItemContent": "repo/includes/Content/ItemContent.php",
+		"Wikibase\\Repo\\Content\\EntityContent": "repo/includes/Content/EntityContent.php"
 	},
 	"JobClasses": {
 		"wikibase-addUsagesForPage": "\\Wikibase\\Client\\Store\\AddUsagesForPageJob",
@@ -316,11 +333,13 @@
 	},
 	"MessagesDirs": {
 		"wikibaseclient": "client/i18n",
-		"wikibaseclientapi": "client/i18n/api"
+		"wikibaseclientapi": "client/i18n/api",
+		"WikibaseLib": "lib/i18n"
 	},
 	"ExtensionMessagesFiles": {
 		"Wikibaseclientalias" : "client/WikibaseClient.i18n.alias.php",
 		"wikibaseclientmagic": "client/WikibaseClient.i18n.magic.php"
 	},
+	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"manifest_version": 2
 }

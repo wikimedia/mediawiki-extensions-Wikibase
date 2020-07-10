@@ -38,9 +38,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseClient', __DIR__ . '/../extension-client-wip.json' );
 
-// Sub-extensions needed by WikibaseClient
-require_once __DIR__ . '/../lib/WikibaseLib.php';
-
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
 		$wgMessagesDirs;
@@ -48,6 +45,7 @@ call_user_func( function() {
 	// i18n messages, kept for backward compatibility (T256245)
 	$wgMessagesDirs['wikibaseclient'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['wikibaseclientapi'] = __DIR__ . '/i18n/api';
+	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/../lib/i18n';
 	$wgExtensionMessagesFiles['Wikibaseclientalias'] = __DIR__ . '/WikibaseClient.i18n.alias.php';
 	$wgExtensionMessagesFiles['wikibaseclientmagic'] = __DIR__ . '/WikibaseClient.i18n.magic.php';
 } );
