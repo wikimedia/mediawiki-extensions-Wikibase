@@ -43,7 +43,9 @@
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Repo\\": "repo/includes/"
+		"Wikibase\\Repo\\": "repo/includes/",
+		"Wikibase\\Lib\\": "lib/includes/",
+		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"AutoloadClasses": {
 		"Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId": "repo/maintenance/populateTermFullEntityId.php",
@@ -51,7 +53,9 @@
 	},
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
-		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/"
+		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
+		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
 	},
 	"attributes": {
 		"EventLogging": {
@@ -60,9 +64,15 @@
 			}
 		}
 	},
+	"MessagesDirs": {
+		"WikibaseLib": "lib/i18n"
+	},
 	"HookHandlers": {
 		"ChangesSubscriptionSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
+		},
+		"LibHooks": {
+			"class": "\\Wikibase\\Lib\\LibHooks"
 		}
 	},
 	"Hooks": {
@@ -78,6 +88,7 @@
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
 		"BeforePageDisplayMobile": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplayMobile",
 		"ContentModelCanBeUsedOn": "\\Wikibase\\Repo\\RepoHooks::onContentModelCanBeUsedOn",
+		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Repo\\RepoHooks::onFormat",
 		"GetPreferences": "\\Wikibase\\Repo\\RepoHooks::onGetPreferences",
 		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
@@ -92,16 +103,26 @@
 		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
 		"RecentChange_save": "\\Wikibase\\Repo\\RepoHooks::onRecentChangeSave",
 		"RejectParserCacheValue": "\\Wikibase\\Repo\\RepoHooks::onRejectParserCacheValue",
-		"ResourceLoaderRegisterModules": "\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
-		"ResourceLoaderTestModules": "\\Wikibase\\Repo\\RepoHooks::registerQUnitTests",
+		"ResourceLoaderRegisterModules": [
+			"\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
+			"LibHooks"
+		],
+		"ResourceLoaderTestModules": [
+			"\\Wikibase\\Repo\\RepoHooks::registerQUnitTests",
+			"LibHooks"
+		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
 		"SpecialPage_reorderPages": "\\Wikibase\\Repo\\RepoHooks::onSpecialPageReorderPages",
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
-		"UnitTestsList": "\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
+		"UnitTestsList": [
+			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
+			"LibHooks"
+		],
 		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
 	},
+	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
 	"manifest_version": 2
 }

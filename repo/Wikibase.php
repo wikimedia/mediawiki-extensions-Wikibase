@@ -103,7 +103,6 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' );
 
 // Sub-extensions needed by WikibaseRepository
-require_once __DIR__ . '/../lib/WikibaseLib.php';
 require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
@@ -120,6 +119,7 @@ call_user_func( function() {
 	// i18n
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
+	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/../lib/i18n';
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
