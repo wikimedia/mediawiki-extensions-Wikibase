@@ -60,6 +60,11 @@
 			}
 		}
 	},
+	"HookHandlers": {
+		"ChangesSubscriptionSchemaUpdater": {
+			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
+		}
+	},
 	"Hooks": {
 		"APIQuerySiteInfoGeneralInfo": "\\Wikibase\\Repo\\RepoHooks::onAPIQuerySiteInfoGeneralInfo",
 		"APIQuerySiteInfoStatisticsInfo": "\\Wikibase\\Repo\\RepoHooks::onAPIQuerySiteInfoStatisticsInfo",
@@ -77,6 +82,7 @@
 		"GetPreferences": "\\Wikibase\\Repo\\RepoHooks::onGetPreferences",
 		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
 		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
+		"LoadExtensionSchemaUpdates": "ChangesSubscriptionSchemaUpdater",
 		"MediaWikiPHPUnitTest::startTest": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiPHPUnitTestStartTest",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",

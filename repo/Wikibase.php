@@ -967,9 +967,6 @@ call_user_func( function() {
 	$wgHooks['ArticleRevisionVisibilitySet'][] = 'Wikibase\Repo\Hooks\ArticleRevisionVisibilitySetHookHandler::onArticleRevisionVisibilitySet';
 	$wgHooks[ 'SpecialPage_initList' ][] = 'Wikibase\Repo\Hooks\FederatedPropertiesSpecialPageHookHandler::onSpecialPageInitList';
 
-	// update hooks
-	$wgHooks['LoadExtensionSchemaUpdates'][] = '\Wikibase\Repo\Store\Sql\ChangesSubscriptionSchemaUpdater::onSchemaUpdate';
-
 	// Resource Loader Modules:
 	$wgResourceModules = array_merge(
 		$wgResourceModules,

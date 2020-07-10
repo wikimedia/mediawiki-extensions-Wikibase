@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
+use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use Onoi\MessageReporter\ObservableMessageReporter;
@@ -14,46 +15,24 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ChangesSubscriptionSchemaUpdater {
-
+class ChangesSubscriptionSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	/**
-	 * @var DatabaseUpdater
-	 */
-	private $dbUpdater;
-
-	public function __construct( DatabaseUpdater $dbUpdater ) {
-		$this->dbUpdater = $dbUpdater;
-	}
-
-	/**
-	 * Static entry point for MediaWiki's LoadExtensionSchemaUpdates hook.
+	 * Handler for MediaWiki's LoadExtensionSchemaUpdates hook.
 	 *
 	 * @param DatabaseUpdater $dbUpdater
-	 *
-	 * @return bool
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $dbUpdater ) {
-		$changesSubscriptionSchemaUpdater = new self( $dbUpdater );
-		$changesSubscriptionSchemaUpdater->doSchemaUpdate();
-
-		return true;
-	}
-
-	/**
-	 * Applies any schema updates
-	 */
-	public function doSchemaUpdate() {
+	public function onLoadExtensionSchemaUpdates( $dbUpdater ): void {
 		$table = 'wb_changes_subscription';
 
-		if ( !$this->dbUpdater->tableExists( $table ) ) {
-			$db = $this->dbUpdater->getDB();
+		if ( !$dbUpdater->tableExists( $table ) ) {
+			$db = $dbUpdater->getDB();
 			$script = $this->getUpdateScriptPath( 'changes_subscription', $db->getType() );
-			$this->dbUpdater->addExtensionTable( $table, $script );
+			$dbUpdater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
 			// Note that this must be done with a static function,
 			// for reasons that do not need explaining at this juncture.
-			$this->dbUpdater->addExtensionUpdate( [
+			$dbUpdater->addExtensionUpdate( [
 				[ __CLASS__, 'fillSubscriptionTable' ],
 				$table
 			] );
