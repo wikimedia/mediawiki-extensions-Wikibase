@@ -29,6 +29,12 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	private function getMockTermIndex() {
 		return new MockMatchingTermsLookup(
 			[
+				/**
+				 * NOTE: The ordering of the properties is important for the test-case that covers the limit being applied in case of
+				 * a language fallback being used. If the order is changed, it might subtly lead to that line not being covered despite all
+				 * tests passing!
+				 */
+
 				//Q111 - Has label, description and alias all the same
 				$this->getTermIndexEntry( 'Foo', 'en', TermIndexEntry::TYPE_LABEL, new ItemId( 'Q111' ) ),
 				$this->getTermIndexEntry( 'Foo', 'en', TermIndexEntry::TYPE_DESCRIPTION, new ItemId( 'Q111' ) ),
@@ -41,11 +47,13 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				$this->getTermIndexEntry( 'Taa', 'en', TermIndexEntry::TYPE_ALIAS, new ItemId( 'Q555' ) ),
 				$this->getTermIndexEntry( 'TAAA', 'en-ca', TermIndexEntry::TYPE_ALIAS, new ItemId( 'Q555' ) ),
 				$this->getTermIndexEntry( 'Taa', 'en-ca', TermIndexEntry::TYPE_ALIAS, new ItemId( 'Q555' ) ),
+				//P11
+				$this->getTermIndexEntry( 'Lahmacun', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P11' ) ),
 				//P22
-				$this->getTermIndexEntry( 'Lama', 'en-ca', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P22' ) ),
+				$this->getTermIndexEntry( 'Lama', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P22' ) ),
 				$this->getTermIndexEntry( 'La-description', 'en', TermIndexEntry::TYPE_DESCRIPTION, new PropertyId( 'P22' ) ),
 				//P44
-				$this->getTermIndexEntry( 'Lama', 'en', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P44' ) ),
+				$this->getTermIndexEntry( 'Lama', 'en-ca', TermIndexEntry::TYPE_LABEL, new PropertyId( 'P44' ) ),
 				$this->getTermIndexEntry( 'Lama-de-desc', 'de', TermIndexEntry::TYPE_DESCRIPTION, new PropertyId( 'P44' ) ),
 			]
 		);
@@ -307,17 +315,40 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 				[ 'La', 'en-ca', 'property', $allTermTypes ],
 				[
 					[
-						'entityId' => new PropertyId( 'P22' ),
+						'entityId' => new PropertyId( 'P44' ),
 						'term' => new Term( 'en-ca', 'Lama' ),
 						'termtype' => 'label',
 					],
 					[
-						'entityId' => new PropertyId( 'P44' ),
+						'entityId' => new PropertyId( 'P11' ),
+						'term' => new Term( 'en', 'Lahmacun' ),
+						'termtype' => 'label' ,
+					],
+					[
+						'entityId' => new PropertyId( 'P22' ),
 						'term' => new Term( 'en', 'Lama' ),
 						'termtype' => 'label' ,
 					],
 				],
 			],
+			'P22&P44 La en-ca with fallback all terms search LIMIT 2' => [
+				'caseSensitive' => true,
+				'prefixSearch' => true,
+				'limit' => 2,
+				[ 'La', 'en-ca', 'property', $allTermTypes ],
+				[
+					[
+						'entityId' => new PropertyId( 'P44' ),
+						'term' => new Term( 'en-ca', 'Lama' ),
+						'termtype' => 'label',
+					],
+					[
+						'entityId' => new PropertyId( 'P11' ),
+						'term' => new Term( 'en', 'Lahmacun' ),
+						'termtype' => 'label' ,
+					],
+				],
+			]
 		];
 	}
 

@@ -155,7 +155,7 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 			);
 
 			if ( count( $matchedTermIndexEntries ) > $limit ) {
-				array_slice( $matchedTermIndexEntries, 0, $limit, true );
+				$matchedTermIndexEntries = array_slice( $matchedTermIndexEntries, 0, $limit, true );
 			}
 		}
 
