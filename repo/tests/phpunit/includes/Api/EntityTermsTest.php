@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Client\Tests\Integration\Api;
+namespace Wikibase\Repo\Tests\Api;
 
 use ApiMain;
 use ApiPageSet;
@@ -11,25 +11,24 @@ use FauxRequest;
 use MediaWikiLangTestCase;
 use RequestContext;
 use Title;
-use Wikibase\Client\Api\PageTerms;
 use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Repo\Api\EntityTerms;
 
 /**
- * @covers \Wikibase\Client\Api\PageTerms
+ * @covers \Wikibase\Repo\Api\EntityTerms
  *
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
- * @group WikibaseClient
+ * @group WikibaseRepo
  *
  * @license GPL-2.0-or-later
- * @author Daniel Kinzler
  */
-class PageTermsTest extends MediaWikiLangTestCase {
+class EntityTermsTest extends MediaWikiLangTestCase {
 
 	/**
 	 * @param array $params
@@ -102,7 +101,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		return $entityIds;
 	}
 
-	public function newEntityId( $pageId ): EntityId {
+	public function newEntityId( int $pageId ): EntityId {
 		if ( $pageId > 1000 ) {
 			return new PropertyId( "P$pageId" );
 		} else {
@@ -134,11 +133,11 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		$titles = $this->makeTitles( explode( '|', $params['titles'] ) );
 		$entityIds = $this->makeEntityIds( array_keys( $terms ) );
 
-		$module = new PageTerms(
+		$module = new EntityTerms(
 			new FakePrefetchingTermLookup(),
 			$this->getEntityIdLookup( $entityIds ),
 			$this->getQueryModule( $params, $titles ),
-			'pageterms'
+			'entityterms'
 		);
 
 		$module->execute();
@@ -152,7 +151,7 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		return $data;
 	}
 
-	public function pageTermsProvider() {
+	public function entityTermsProvider() {
 		$terms = [
 			11 => [
 				'label' => [
@@ -189,27 +188,27 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		yield 'by title' => [
 			[
 				'action' => 'query',
-				'prop' => 'pageterms',
-				'titles' => 'No11|No22|No3333',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22|P3333',
 			],
 			$terms,
 			[
 				11 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q11 en label' ],
 						'description' => [ 'Q11 en description' ],
 						'alias' => [ 'Q11 en alias 1', 'Q11 en alias 2' ],
 					]
 				],
 				22 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q22 en label' ],
 						'description' => [ 'Q22 en description' ],
 						'alias' => [ 'Q22 en alias 1', 'Q22 en alias 2' ],
 					]
 				],
 				3333 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'P3333 en label' ],
 						'description' => [ 'P3333 en description' ],
 						'alias' => [ 'P3333 en alias 1', 'P3333 en alias 2' ],
@@ -221,19 +220,19 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		yield 'descriptions only' => [
 			[
 				'action' => 'query',
-				'prop' => 'pageterms',
-				'titles' => 'No11|No22',
-				'wbptterms' => 'description',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22',
+				'wbetterms' => 'description',
 			],
 			$terms,
 			[
 				11 => [
-					'terms' => [
+					'entityterms' => [
 						'description' => [ 'Q11 en description' ],
 					]
 				],
 				22 => [
-					'terms' => [
+					'entityterms' => [
 						'description' => [ 'Q22 en description' ],
 					]
 				],
@@ -243,21 +242,21 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		yield 'with uselang' => [
 			[
 				'action' => 'query',
-				'prop' => 'pageterms',
-				'titles' => 'No11|No22',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22',
 				'uselang' => 'de',
-				'wbptterms' => 'label|description',
+				'wbetterms' => 'label|description',
 			],
 			$terms,
 			[
 				11 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q11 de label' ],
 						'description' => [ 'Q11 de description' ],
 					]
 				],
 				22 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q22 de label' ],
 						'description' => [ 'Q22 de description' ],
 					]
@@ -268,14 +267,14 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		yield 'title without entity' => [
 			[
 				'action' => 'query',
-				'prop' => 'pageterms',
-				'titles' => 'No11|SomeTitleWithoutEntity',
-				'wbptterms' => 'label|description',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|SomeTitleWithoutEntity',
+				'wbetterms' => 'label|description',
 			],
 			$terms,
 			[
 				11 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q11 en label' ],
 						'description' => [ 'Q11 en description' ],
 					]
@@ -286,15 +285,15 @@ class PageTermsTest extends MediaWikiLangTestCase {
 		yield 'continue' => [
 			[
 				'action' => 'query',
-				'prop' => 'pageterms',
-				'titles' => 'No11|No22',
-				'wbptcontinue' => '20',
-				'wbptterms' => 'label|description',
+				'prop' => 'entityterms',
+				'titles' => 'Q11|Q22',
+				'wbetcontinue' => '20',
+				'wbetterms' => 'label|description',
 			],
 			$terms,
 			[
 				22 => [
-					'terms' => [
+					'entityterms' => [
 						'label' => [ 'Q22 en label' ],
 						'description' => [ 'Q22 en description' ],
 					]
@@ -304,9 +303,9 @@ class PageTermsTest extends MediaWikiLangTestCase {
 	}
 
 	/**
-	 * @dataProvider pageTermsProvider
+	 * @dataProvider entityTermsProvider
 	 */
-	public function testPageTerms( array $params, array $terms, array $expected ): void {
+	public function testEntityTerms( array $params, array $terms, array $expected ): void {
 		$result = $this->callApiModule( $params, $terms );
 
 		if ( isset( $result['error'] ) ) {

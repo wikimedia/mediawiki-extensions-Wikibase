@@ -96,7 +96,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function provideApiQueryModuleListsAndNames(): Traversable {
-		foreach ( [ 'APIListModules', 'APIMetaModules' ] as $moduleList ) {
+		foreach ( [ 'APIListModules', 'APIMetaModules', 'APIPropModules' ] as $moduleList ) {
 			foreach ( $this->getExtensionJson()[$moduleList] as $moduleName => $specification ) {
 				yield [ $moduleList, $moduleName ];
 			}
