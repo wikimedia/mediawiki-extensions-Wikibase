@@ -187,20 +187,18 @@ class ChangeVisibilityNotificationJob extends Job {
 		if ( $candidateResults->numRows() === 0 ) {
 			return [];
 		}
-
-		$needleMap = [];
+		$ids = [];
 		foreach ( $revisionIdentifiers as $revisionIdentifier ) {
-			$needleMap[$revisionIdentifier->getRevisionId() . '#' . $revisionIdentifier->getRevisionParentId()] = true;
+			$ids[$revisionIdentifier->getRevisionId()] = true;
 		}
 
 		$results = [];
 		foreach ( $candidateResults as $rc ) {
 			$metadata = $this->readRecentChangeParams( $rc->rc_params );
 
-			$parent_id = $metadata[ 'parent_id' ];
 			$rev_id = $metadata[ 'rev_id' ];
 
-			if ( isset( $needleMap["$rev_id#$parent_id"] ) ) {
+			if ( isset( $ids[$rev_id] ) ) {
 				$results[] = (int)$rc->rc_id;
 			}
 		}
@@ -239,7 +237,7 @@ class ChangeVisibilityNotificationJob extends Job {
 			$metadata = [];
 		}
 
-		$metadata = array_merge( [ 'parent_id' => 0, 'rev_id' => 0 ], $metadata );
+		$metadata = array_merge( [ 'rev_id' => 0 ], $metadata );
 		return $metadata;
 	}
 

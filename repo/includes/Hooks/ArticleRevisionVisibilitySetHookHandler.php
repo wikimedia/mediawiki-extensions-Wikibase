@@ -220,8 +220,7 @@ class ArticleRevisionVisibilitySetHookHandler {
 		return new RepoRevisionIdentifier(
 			$entityId->getSerialization(),
 			$revision->getTimestamp(),
-			$revision->getId(),
-			$revision->getParentId()
+			$revision->getId()
 		);
 	}
 
