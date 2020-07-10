@@ -65,7 +65,14 @@
 		}
 	},
 	"MessagesDirs": {
+		"Wikibase": "repo/i18n",
+		"WikibaseApi": "repo/i18n/api",
 		"WikibaseLib": "lib/i18n"
+	},
+	"ExtensionMessagesFiles": {
+		"WikibaseAlias": "repo/Wikibase.i18n.alias.php",
+		"WikibaseNS": "repo/Wikibase.i18n.namespaces.php",
+		"wikibaserepomagic": "repo/WikibaseRepo.i18n.magic.php"
 	},
 	"HookHandlers": {
 		"ChangesSubscriptionSchemaUpdater": {

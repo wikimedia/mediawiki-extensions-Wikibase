@@ -116,7 +116,7 @@ call_user_func( function() {
 		$wgSpecialPages,
 		$wgWBRepoSettings;
 
-	// i18n
+	// i18n messages, kept for backward compatibility (T257442)
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
 	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
 	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/../lib/i18n';
