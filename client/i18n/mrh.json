@@ -11,7 +11,9 @@
 	"wikibase-editlinks": "Linkzy taopathi",
 	"wikibase-editlinkstitle": "Interlanguage links taopathi",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Nyu",
 	"wikibase-rc-hide-wikidata-show": "Palâ",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} taopathi"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} taopathi",
+	"wikibase-otherprojects": "Parawche hro lâta"
 }

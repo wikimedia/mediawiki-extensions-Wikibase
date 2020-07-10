@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Laitei"
+			"Laitei",
+			"Teitei Para"
 		]
 	},
 	"wikibase-edit": "taopathi",
 	"wikibase-add": "khô",
+	"wikibase-description-empty": "Reipakawhna palâsapa y vei",
 	"wikibase-sitelinks-special": "Site hropazy"
 }
