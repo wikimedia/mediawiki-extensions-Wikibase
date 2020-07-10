@@ -31,6 +31,8 @@ use Wikibase\Repo\SummaryFormatter;
  */
 class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 
+	use ParameterizedDescriptionTrait;
+
 	/**
 	 * @var FingerprintChangeOpFactory
 	 */
