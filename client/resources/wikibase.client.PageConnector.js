@@ -324,8 +324,9 @@
 					labels: {},
 					sitelinks: {}
 				},
-				firstSite = wb.sites.getSite( firstSiteId ),
-				secondSite = wb.sites.getSite( secondSiteId );
+				wbSites = require( './wikibase.sites.js' ),
+				firstSite = wbSites.getSite( firstSiteId ),
+				secondSite = wbSites.getSite( secondSiteId );
 
 			// Labels (page titles)
 			entityData.labels[ firstSite.getLanguageCode() ] = {
