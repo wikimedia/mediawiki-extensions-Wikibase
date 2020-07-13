@@ -73,19 +73,6 @@ return call_user_func( function() {
 				'mobile'
 			]
 		],
-
-		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
-			'scripts' => [
-				'namespace.js',
-				'ParseValueCaller.js',
-				'FormatValueCaller.js',
-			],
-			'dependencies' => [
-				'wikibase.api.RepoApi',
-				'dataValues.DataValue',
-			]
-		],
-
 	];
 
 	return $modules;
