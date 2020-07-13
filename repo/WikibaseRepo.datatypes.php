@@ -413,10 +413,10 @@ return call_user_func( function() {
 				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
 					try {
-						return new EntityIdValueFormatter( $factory->newItemPropertyIdHtmlLinkFormatter( $options ) );
+						return new EntityIdValueFormatter( $factory->newItemIdHtmlLinkFormatter( $options ) );
 					} catch ( \Exception $e ) {
 						$logger->error(
-							"Failed to construct ItemIdHtmlLinkFormatter: {exception_message}",
+							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",
 							[
 								'exception' => $e,
 							]
@@ -445,7 +445,7 @@ return call_user_func( function() {
 				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
 					$logger = LoggerFactory::getInstance( 'Wikibase.NewPropertyIdFormatter' );
 					try {
-						return new EntityIdValueFormatter( $factory->newItemPropertyIdHtmlLinkFormatter( $options ) );
+						return new EntityIdValueFormatter( $factory->newPropertyIdHtmlLinkFormatter( $options ) );
 					} catch ( \Exception $e ) {
 						$logger->error(
 							"Failed to construct ItemPropertyIdHtmlLinkFormatter: {exception_message}",

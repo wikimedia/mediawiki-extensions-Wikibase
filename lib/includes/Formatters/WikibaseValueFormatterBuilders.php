@@ -306,24 +306,42 @@ class WikibaseValueFormatterBuilders {
 		return $this->escapeValueFormatter( $format, $plainFormatter );
 	}
 
-	public function newItemPropertyIdHtmlLinkFormatter( FormatterOptions $options ) {
-		$nonCachingLookup = new LanguageFallbackLabelDescriptionLookup(
+	public function newPropertyIdHtmlLinkFormatter( FormatterOptions $options ) {
+		return new ItemPropertyIdHtmlLinkFormatter(
+			$this->getLabelDescriptionLookup( $options ),
+			$this->entityTitleLookup,
+			$this->languageNameLookup,
+			new NonExistingEntityIdHtmlBrokenLinkFormatter(
+				'wikibase-deletedentity-',
+				$this->entityTitleTextLookup,
+				$this->entityUrlLookup
+			)
+		);
+	}
+
+	public function newItemIdHtmlLinkFormatter( FormatterOptions $options ) {
+		return new ItemPropertyIdHtmlLinkFormatter(
+			$this->getLabelDescriptionLookup( $options ),
+			$this->entityTitleLookup,
+			$this->languageNameLookup,
+			new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' )
+		);
+	}
+
+	private function getNonCachingLookup( FormatterOptions $options ) {
+		return new LanguageFallbackLabelDescriptionLookup(
 			new EntityRetrievingTermLookup( $this->entityLookup ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
+	}
 
-		$labelDescriptionLookup = new CachingFallbackLabelDescriptionLookup(
+	private function getLabelDescriptionLookup( FormatterOptions $options ) {
+		return new CachingFallbackLabelDescriptionLookup(
 			$this->cache,
 			new RedirectResolvingLatestRevisionLookup( $this->entityRevisionLookup ),
-			$nonCachingLookup,
+			$this->getNonCachingLookup( $options ),
 			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ),
 			$this->cacheTtlInSeconds
-		);
-
-		return new ItemPropertyIdHtmlLinkFormatter(
-			$labelDescriptionLookup,
-			$this->entityTitleLookup,
-			$this->languageNameLookup
 		);
 	}
 
