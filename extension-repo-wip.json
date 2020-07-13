@@ -82,6 +82,10 @@
 		"ChangesSubscriptionSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
 		},
+		"FederatedPropertiesSpecialPage": {
+			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::newFromGlobalState"
+		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		}
@@ -127,6 +131,7 @@
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
+		"SpecialPage_initList": "FederatedPropertiesSpecialPage",
 		"SpecialPage_reorderPages": "\\Wikibase\\Repo\\RepoHooks::onSpecialPageReorderPages",
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
 		"UnitTestsList": [
