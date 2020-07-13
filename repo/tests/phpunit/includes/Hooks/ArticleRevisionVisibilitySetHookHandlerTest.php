@@ -212,7 +212,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 			$batchSize
 		);
 
-		$handler->handle(
+		$handler->onArticleRevisionVisibilitySet(
 			$this->newTitle(),
 			$revisionIds,
 			$visibilityChangeMap

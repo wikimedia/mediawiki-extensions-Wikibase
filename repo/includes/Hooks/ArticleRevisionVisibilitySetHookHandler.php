@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Hooks;
 use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
+use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
@@ -28,7 +29,7 @@ use Wikimedia\Timestamp\ConvertibleTimestamp;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ArticleRevisionVisibilitySetHookHandler {
+class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibilitySetHook {
 
 	/**
 	 * @var RevisionLookup
@@ -113,16 +114,12 @@ class ArticleRevisionVisibilitySetHookHandler {
 		);
 	}
 
-	public static function onArticleRevisionVisibilitySet( Title $title, array $ids, array $visibilityChangeMap ) {
-		self::newFromGlobalState()->handle( $title, $ids, $visibilityChangeMap );
-	}
-
 	/**
 	 * @param Title $title
 	 * @param int[] $ids
 	 * @param int[][] $visibilityChangeMap
 	 */
-	public function handle( Title $title, array $ids, array $visibilityChangeMap ): void {
+	public function onArticleRevisionVisibilitySet( $title, $ids, $visibilityChangeMap ): void {
 		if ( !$this->propagateChangeVisibility ) {
 			return;
 		}
