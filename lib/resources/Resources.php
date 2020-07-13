@@ -57,7 +57,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'mediawiki.api',
 				'mediawiki.ForeignApi',
-				'util.inherit',
 			],
 			'messages' => [
 				'wikibase-error-unexpected',
