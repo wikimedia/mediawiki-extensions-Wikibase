@@ -40,24 +40,24 @@
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
 	"HookHandlers": {
-		"BeforePageDisplayHandler": {
+		"BeforePageDisplay": {
 			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::newFromGlobalState"
 		},
-		"ChangesListLinesHandler": {
+		"ChangesListLines": {
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
 			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::newFromGlobalState"
 		},
-		"ChangesListSpecialPageHookHandler": {
+		"ChangesListSpecialPage": {
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices",
 			"services": [ "DBLoadBalancer" ]
 		},
-		"ParserOutputUpdateHookHandler": {
+		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::newFromGlobalState"
 		},
-		"DataUpdateHookHandler": {
+		"DataUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
 		},
@@ -68,15 +68,15 @@
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
-		"DescriptionProviderHookHandler": {
+		"DescriptionProvider": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
 		},
-		"EditActionHookHandler": {
+		"EditAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::newFromGlobalState"
 		},
-		"InfoActionHookHandler": {
+		"InfoAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::newFromGlobalState"
 		},
@@ -92,81 +92,81 @@
 			"class": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::newFromGlobalState"
 		},
-		"ParserHookHandler": {
+		"Parser": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
 		},
-		"SidebarHookHandler": {
+		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::newFromGlobalState"
 		},
-		"SkinAfterPortletHandler": {
+		"SkinAfterPortlet": {
 			"class": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::newFromGlobalState"
 		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
 		},
-		"TrivialHookHandler": {
+		"Trivial": {
 			"class": "\\Wikibase\\Client\\Hooks\\TrivialHookHandler"
 		},
-		"UpdateRepoHookHandler": {
+		"UpdateRepo": {
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
 			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::newFromGlobalState"
 		}
 	},
 	"Hooks": {
-		"AbortEmailNotification": "TrivialHookHandler",
+		"AbortEmailNotification": "Trivial",
 		"ArticleDeleteAfterSuccess": "DeletePageNoticeCreator",
 		"ArticleDeleteComplete": [
-			"UpdateRepoHookHandler",
-			"DataUpdateHookHandler"
+			"UpdateRepo",
+			"DataUpdate"
 		],
 		"BeforeCreateEchoEvent": "\\Wikibase\\Client\\Hooks\\EchoSetupHookHandlers::onBeforeCreateEchoEvent",
 		"BeforePageDisplay": [
-			"BeforePageDisplayHandler",
-			"TrivialHookHandler"
+			"BeforePageDisplay",
+			"Trivial"
 		],
-		"ContentAlterParserOutput": "ParserOutputUpdateHookHandler",
-		"ChangesListSpecialPageQuery": "ChangesListSpecialPageHookHandler",
+		"ContentAlterParserOutput": "ParserOutputUpdate",
+		"ChangesListSpecialPageQuery": "ChangesListSpecialPage",
 		"CirrusSearchAddQueryFeatures": "\\Wikibase\\Client\\ClientHooks::onCirrusSearchAddQueryFeatures",
 		"EchoGetBundleRules": "\\Wikibase\\Client\\Hooks\\EchoNotificationsHandlers::onEchoGetBundleRules",
-		"EditPage::showStandardInputs:options": "EditActionHookHandler",
-		"EnhancedChangesListModifyBlockLineData": "ChangesListLinesHandler",
-		"EnhancedChangesListModifyLineData": "ChangesListLinesHandler",
+		"EditPage::showStandardInputs:options": "EditAction",
+		"EnhancedChangesListModifyBlockLineData": "ChangesListLines",
+		"EnhancedChangesListModifyLineData": "ChangesListLines",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Client\\ClientHooks::onFormat",
 		"GetPreferences": "\\Wikibase\\Client\\ClientHooks::onGetPreferences",
-		"InfoAction": "InfoActionHookHandler",
-		"LinksUpdateComplete": "DataUpdateHookHandler",
+		"InfoAction": "InfoAction",
+		"LinksUpdateComplete": "DataUpdate",
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
-		"OldChangesListRecentChangesLine": "ChangesListLinesHandler",
-		"OutputPageParserOutput": "SidebarHookHandler",
-		"ParserCacheSaveComplete": "DataUpdateHookHandler",
-		"ParserClearState": "ParserHookHandler",
+		"OldChangesListRecentChangesLine": "ChangesListLines",
+		"OutputPageParserOutput": "Sidebar",
+		"ParserCacheSaveComplete": "DataUpdate",
+		"ParserClearState": "Parser",
 		"ParserFirstCallInit": "ParserFunctionRegistrant",
 		"ParserGetVariableValueSwitch": "Magic",
-		"ParserLimitReportPrepare": "ParserHookHandler",
+		"ParserLimitReportPrepare": "Parser",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"ResourceLoaderRegisterModules": "LibHooks",
 		"ResourceLoaderTestModules": "LibHooks",
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
-		"SearchDataForIndex": "TrivialHookHandler",
-		"SearchIndexFields": "TrivialHookHandler",
-		"SearchResultProvideDescription": "DescriptionProviderHookHandler",
-		"SidebarBeforeOutput": "SidebarHookHandler",
+		"SearchDataForIndex": "Trivial",
+		"SearchIndexFields": "Trivial",
+		"SearchResultProvideDescription": "DescriptionProvider",
+		"SidebarBeforeOutput": "Sidebar",
 		"SkinAfterBottomScripts": "\\Wikibase\\Client\\ClientHooks::onSkinAfterBottomScripts",
-		"SkinAfterPortlet": "SkinAfterPortletHandler",
-		"SkinTemplateGetLanguageLink": "SidebarHookHandler",
+		"SkinAfterPortlet": "SkinAfterPortlet",
+		"SkinTemplateGetLanguageLink": "Sidebar",
 		"SpecialMovepageAfterMove": "MovePageNotice",
-		"PageMoveComplete": "UpdateRepoHookHandler",
+		"PageMoveComplete": "UpdateRepo",
 		"UnitTestsList": [
-			"TrivialHookHandler",
+			"Trivial",
 			"LibHooks"
 		],
-		"wgQueryPages": "TrivialHookHandler"
+		"wgQueryPages": "Trivial"
 	},
 	"TrackingCategories": [
 		"unresolved-property-category",
