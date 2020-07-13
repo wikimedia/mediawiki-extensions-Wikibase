@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiPageSet;
@@ -8,6 +10,7 @@ use ApiQueryGeneratorBase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to search for Wikibase entities that can be used as a generator.
@@ -47,7 +50,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 */
 	public function __construct(
 		ApiQuery $apiQuery,
-		$moduleName,
+		string $moduleName,
 		EntitySearchHelper $entitySearchHelper,
 		EntityTitleLookup $titleLookup,
 		ContentLanguages $termsLanguages,
@@ -61,10 +64,26 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		$this->entityTypes = $entityTypes;
 	}
 
+	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		return new self(
+			$apiQuery,
+			$moduleName,
+			new TypeDispatchingEntitySearchHelper(
+				$repo->getEntitySearchHelperCallbacks(),
+				$apiQuery->getRequest()
+			),
+			$repo->getEntityTitleLookup(),
+			$repo->getTermsLanguages(),
+			$repo->getEnabledEntityTypes()
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$searchResults = $this->getSearchResults( $params );
 		$result = $this->getResult();
@@ -90,7 +109,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	/**
 	 * @param ApiPageSet $resultPageSet
 	 */
-	public function executeGenerator( $resultPageSet ) {
+	public function executeGenerator( $resultPageSet ): void {
 		$params = $this->extractRequestParams();
 		$searchResults = $this->getSearchResults( $params );
 		$titles = [];
@@ -109,7 +128,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 *
 	 * @return TermSearchResult[]
 	 */
-	private function getSearchResults( array $params ) {
+	private function getSearchResults( array $params ): array {
 		return $this->entitySearchHelper->getRankedSearchResults(
 			$params['search'],
 			$params['language'] ?: $this->getLanguage()->getCode(),
@@ -125,21 +144,21 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	 * @param array $params
 	 * @return string
 	 */
-	public function getCacheMode( $params ) {
+	public function getCacheMode( $params ): string {
 		return 'public';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function isInternal() {
+	public function isInternal(): bool {
 		return true; // mark this api module as internal until we settled on a solution for search
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return [
 			'search' => [
 				self::PARAM_TYPE => 'string',
@@ -169,7 +188,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=query&list=wbsearch&wbssearch=abc&wbslanguage=en' => 'apihelp-query+wbsearch-example-1',
 			'action=query&list=wbsearch&wbssearch=abc&wbslanguage=en&wbslimit=50' => 'apihelp-query+wbsearch-example-2',

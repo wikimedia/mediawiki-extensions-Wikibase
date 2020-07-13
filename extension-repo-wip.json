@@ -13,6 +13,14 @@
 	"APIModules": {
 	},
 	"APIListModules": {
+		"wbsearch": {
+			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
+			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::newFromGlobalState"
+		},
+		"wbsubscribers": {
+			"class": "\\Wikibase\\Repo\\Api\\ListSubscribers",
+			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::newFromGlobalState"
+		}
 	},
 	"APIMetaModules": {
 		"wbcontentlanguages": {

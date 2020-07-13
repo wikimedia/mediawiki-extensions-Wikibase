@@ -1,15 +1,19 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
+use MediaWiki\MediaWikiServices;
 use SiteLookup;
 use stdClass;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -46,7 +50,7 @@ class ListSubscribers extends ApiQueryBase {
 	 */
 	public function __construct(
 		ApiQuery $mainModule,
-		$moduleName,
+		string $moduleName,
 		ApiErrorReporter $errorReporter,
 		EntityIdParser $idParser,
 		SiteLookup $siteLookup
@@ -58,7 +62,20 @@ class ListSubscribers extends ApiQueryBase {
 		$this->siteLookup = $siteLookup;
 	}
 
-	public function execute() {
+	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$mediaWikiServices = MediaWikiServices::getInstance();
+		$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );
+		return new self(
+			$apiQuery,
+			$moduleName,
+			$apiHelper->getErrorReporter( $apiQuery ),
+			$wikibaseRepo->getEntityIdParser(),
+			$mediaWikiServices->getSiteLookup()
+		);
+	}
+
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 
 		$idStrings = $params['entities'];
@@ -84,12 +101,12 @@ class ListSubscribers extends ApiQueryBase {
 
 	/**
 	 * @param string[] $idStrings
-	 * @param string $continue
+	 * @param string|null $continue
 	 * @param int $limit
 	 *
 	 * @return IResultWrapper
 	 */
-	public function doQuery( array $idStrings, $continue, $limit ) {
+	public function doQuery( array $idStrings, ?string $continue, int $limit ): IResultWrapper {
 		$this->addFields( [
 			'cs_entity_id',
 			'cs_subscriber_id',
@@ -113,7 +130,7 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @param string $continueParam
 	 */
-	private function addContinue( $continueParam ) {
+	private function addContinue( string $continueParam ): void {
 		$db = $this->getDB();
 		$continueParams = explode( '|', $continueParam );
 		if ( count( $continueParams ) !== 2 ) {
@@ -138,7 +155,7 @@ class ListSubscribers extends ApiQueryBase {
 	 * @param int $limit
 	 * @param array $props
 	 */
-	private function formatResult( IResultWrapper $res, $limit, array $props ) {
+	private function formatResult( IResultWrapper $res, int $limit, array $props ): void {
 		$currentEntity = null;
 		$count = 0;
 		$result = $this->getResult();
@@ -180,9 +197,9 @@ class ListSubscribers extends ApiQueryBase {
 	}
 
 	/**
-	 * @param object $row
+	 * @param stdClass $row
 	 */
-	private function setContinueFromRow( $row ) {
+	private function setContinueFromRow( stdClass $row ): void {
 		$this->setContinueEnumParameter(
 			'continue',
 			"{$row->cs_entity_id}|{$row->cs_subscriber_id}"
@@ -195,7 +212,7 @@ class ListSubscribers extends ApiQueryBase {
 	 *
 	 * @return string[]
 	 */
-	private function getSubscriber( stdClass $row, $url ) {
+	private function getSubscriber( stdClass $row, bool $url ): array {
 		$entry = [
 			'site' => $row->cs_subscriber_id,
 		];
@@ -214,7 +231,7 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return [
 			'entities' => [
 				self::PARAM_TYPE => 'string',
@@ -244,7 +261,7 @@ class ListSubscribers extends ApiQueryBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			"action=query&list=wbsubscribers&wblsentities=Q42" =>
 				"apihelp-query+wbsubscribers-example-1",
@@ -259,7 +276,7 @@ class ListSubscribers extends ApiQueryBase {
 	 *
 	 * @return null|string
 	 */
-	private function getEntityUsageUrl( $subscription, $entityIdString ) {
+	private function getEntityUsageUrl( string $subscription, string $entityIdString ): ?string {
 		$site = $this->siteLookup->getSite( $subscription );
 		if ( !$site ) {
 			return null;
@@ -273,7 +290,7 @@ class ListSubscribers extends ApiQueryBase {
 	 * @param array $params
 	 * @return string
 	 */
-	public function getCacheMode( $params ) {
+	public function getCacheMode( $params ): string {
 		return 'public';
 	}
 

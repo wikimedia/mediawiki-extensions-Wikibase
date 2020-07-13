@@ -45,10 +45,8 @@ use Wikibase\Repo\Api\FormatSnakValue;
 use Wikibase\Repo\Api\GetClaims;
 use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\LinkTitles;
-use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\ParseValue;
-use Wikibase\Repo\Api\QuerySearchEntities;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
@@ -105,8 +103,7 @@ wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' )
 require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
-	global $wgAPIListModules,
-		$wgAPIModules,
+	global $wgAPIModules,
 		$wgExtensionMessagesFiles,
 		$wgHooks,
 		$wgMessagesDirs,
@@ -623,40 +620,6 @@ call_user_func( function() {
 				$apiHelperFactory->getResultBuilder( $apiMain ),
 				$apiHelperFactory->getErrorReporter( $apiMain ),
 				MediaWikiServices::getInstance()->getStatsdDataFactory()
-			);
-		}
-	];
-
-	$wgAPIListModules['wbsearch'] = [
-		'class' => QuerySearchEntities::class,
-		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-
-			return new QuerySearchEntities(
-				$apiQuery,
-				$moduleName,
-				new TypeDispatchingEntitySearchHelper(
-					$repo->getEntitySearchHelperCallbacks(),
-					$apiQuery->getRequest()
-				),
-				$repo->getEntityTitleLookup(),
-				$repo->getTermsLanguages(),
-				$repo->getEnabledEntityTypes()
-			);
-		}
-	];
-	$wgAPIListModules['wbsubscribers'] = [
-		'class' => ListSubscribers::class,
-		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$mediaWikiServices = MediaWikiServices::getInstance();
-			$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );
-			return new ListSubscribers(
-				$apiQuery,
-				$moduleName,
-				$apiHelper->getErrorReporter( $apiQuery ),
-				$wikibaseRepo->getEntityIdParser(),
-				$mediaWikiServices->getSiteLookup()
 			);
 		}
 	];
