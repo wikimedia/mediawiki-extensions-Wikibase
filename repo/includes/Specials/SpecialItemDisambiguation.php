@@ -4,12 +4,16 @@ namespace Wikibase\Repo\Specials;
 
 use Html;
 use HTMLForm;
+use RequestContext;
 use WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the label of the item and the language of the label.
@@ -65,6 +69,28 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->itemDisambiguation = $itemDisambiguation;
 		$this->entitySearchHelper = $entitySearchHelper;
 		$this->limit = $limit;
+	}
+
+	public static function newFromGlobalState(): self {
+		global $wgLang;
+
+		$languageCode = $wgLang->getCode();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$languageNameLookup = new LanguageNameLookup( $languageCode );
+		$itemDisambiguation = new ItemDisambiguation(
+			$wikibaseRepo->getEntityTitleLookup(),
+			$languageNameLookup,
+			$languageCode
+		);
+		return new self(
+			new MediaWikiContentLanguages(),
+			$languageNameLookup,
+			$itemDisambiguation,
+			new TypeDispatchingEntitySearchHelper(
+				$wikibaseRepo->getEntitySearchHelperCallbacks(),
+				RequestContext::getMain()->getRequest()
+			)
+		);
 	}
 
 	/**

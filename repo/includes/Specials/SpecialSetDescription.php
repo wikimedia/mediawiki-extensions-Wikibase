@@ -8,9 +8,11 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOps;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting the description of a Wikibase entity.
@@ -34,6 +36,25 @@ class SpecialSetDescription extends SpecialModifyTerm {
 			$entityTitleLookup,
 			$editEntityFactory,
 			$entityPermissionChecker
+		);
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new self(
+			$copyrightView,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getEntityPermissionChecker()
 		);
 	}
 

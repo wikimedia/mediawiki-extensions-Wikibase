@@ -28,6 +28,70 @@
 		}
 	},
 	"SpecialPages": {
+		"NewItem": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::newFromGlobalState"
+		},
+		"NewProperty": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::newFromGlobalState"
+		},
+		"ItemByTitle": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialItemByTitle::newFromGlobalState"
+		},
+		"GoToLinkedPage": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::newFromGlobalState"
+		},
+		"ItemDisambiguation": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::newFromGlobalState"
+		},
+		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
+		"SetLabel": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::newFromGlobalState"
+		},
+		"SetDescription": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::newFromGlobalState"
+		},
+		"SetAliases": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::newFromGlobalState"
+		},
+		"SetLabelDescriptionAliases": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::newFromGlobalState"
+		},
+		"SetSiteLink": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::newFromGlobalState"
+		},
+		"ListDatatypes": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
+		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
+		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
+		"EntityPage": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::newFromGlobalState"
+		},
+		"MyLanguageFallbackChain": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain::newFromGlobalState"
+		},
+		"MergeItems": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::newFromGlobalState"
+		},
+		"RedirectEntity": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::newFromGlobalState"
+		},
+		"AvailableBadges": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::newFromGlobalState"
+		}
 	},
 	"GroupPermissions": {
 		"*": {

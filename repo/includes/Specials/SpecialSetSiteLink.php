@@ -16,9 +16,11 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting the sitepage of a Wikibase entity.
@@ -117,6 +119,38 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->badgeItems = $badgeItems;
 		$this->labelDescriptionLookupFactory = $labelDescriptionLookupFactory;
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$siteLookup = $wikibaseRepo->getSiteLookup();
+		$settings = $wikibaseRepo->getSettings();
+
+		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
+		$siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$siteLookup,
+			$settings->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
+		return new self(
+			$copyrightView,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$siteLookup,
+			$siteLinkTargetProvider,
+			$settings->getSetting( 'siteLinkGroups' ),
+			$settings->getSetting( 'badgeItems' ),
+			$labelDescriptionLookupFactory,
+			$siteLinkChangeOpFactory
+		);
 	}
 
 	public function doesWrites() {

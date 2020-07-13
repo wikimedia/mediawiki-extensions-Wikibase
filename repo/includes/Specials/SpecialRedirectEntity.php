@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use Exception;
 use Html;
 use HTMLForm;
+use RequestContext;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -12,6 +13,7 @@ use Wikibase\Lib\UserInputException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for creating redirects between entities
@@ -53,6 +55,23 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->tokenCheck = $tokenCheck;
 		$this->interactor = $interactor;
+	}
+
+	public static function newFromGlobalState(): self {
+		$user = RequestContext::getMain()->getUser();
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		return new self(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getExceptionLocalizer(),
+			new TokenCheckInteractor(
+				$user
+			),
+			$wikibaseRepo->newItemRedirectCreationInteractor(
+				$user,
+				RequestContext::getMain()
+			)
+		);
 	}
 
 	/**

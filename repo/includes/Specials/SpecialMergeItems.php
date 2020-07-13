@@ -6,6 +6,7 @@ use Exception;
 use Html;
 use HTMLForm;
 use Message;
+use RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
@@ -17,6 +18,7 @@ use Wikibase\Repo\Interactors\ItemMergeException;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\TokenCheckInteractor;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for merging one item to another.
@@ -66,6 +68,18 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->tokenCheck = $tokenCheck;
 		$this->interactor = $interactor;
 		$this->titleLookup = $titleLookup;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		return new self(
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getExceptionLocalizer(),
+			new TokenCheckInteractor( RequestContext::getMain()->getUser() ),
+			$wikibaseRepo->newItemMergeInteractor( RequestContext::getMain() ),
+			$wikibaseRepo->getEntityTitleLookup()
+		);
 	}
 
 	public function doesWrites() {
