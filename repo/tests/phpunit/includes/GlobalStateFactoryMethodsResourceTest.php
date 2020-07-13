@@ -2,9 +2,14 @@
 
 namespace Wikibase\Repo\Tests;
 
+use ApiMain;
+use ApiQuery;
+use IContextSource;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
+use Traversable;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
@@ -33,6 +38,85 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		// https://phabricator.wikimedia.org/T243729
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
+	}
+
+	private function getExtensionJson(): array {
+		static $extensionJson = null;
+		if ( $extensionJson === null ) {
+			$extensionJson = json_decode(
+				file_get_contents( __DIR__ . '/../../../../extension-repo-wip.json' ),
+				true
+			);
+		}
+		return $extensionJson;
+	}
+
+	/** @dataProvider provideHookHandlerNames */
+	public function testHookHandler( string $hookHandlerName ): void {
+		$specification = $this->getExtensionJson()['HookHandlers'][$hookHandlerName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+		] );
+		$this->assertTrue( true );
+	}
+
+	public function provideHookHandlerNames(): Traversable {
+		foreach ( $this->getExtensionJson()['HookHandlers'] as $hookHandlerName => $specification ) {
+			yield [ $hookHandlerName ];
+		}
+	}
+
+	/** @dataProvider provideApiModuleNames */
+	public function testApiModule( string $moduleName ): void {
+		$specification = $this->getExtensionJson()['APIModules'][$moduleName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+			'extraArgs' => [ $this->mockApiMain(), 'modulename' ],
+		] );
+		$this->assertTrue( true );
+	}
+
+	public function provideApiModuleNames(): Traversable {
+		foreach ( $this->getExtensionJson()['APIModules'] as $moduleName => $specification ) {
+			yield [ $moduleName ];
+		}
+	}
+
+	/** @dataProvider provideApiQueryModuleListsAndNames */
+	public function testApiQueryModule( string $moduleList, string $moduleName ): void {
+		$specification = $this->getExtensionJson()[$moduleList][$moduleName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+			'extraArgs' => [ $this->mockApiQuery(), 'query' ],
+		] );
+		$this->assertTrue( true );
+	}
+
+	public function provideApiQueryModuleListsAndNames(): Traversable {
+		foreach ( [ 'APIListModules', 'APIMetaModules' ] as $moduleList ) {
+			foreach ( $this->getExtensionJson()[$moduleList] as $moduleName => $specification ) {
+				yield [ $moduleList, $moduleName ];
+			}
+		}
+	}
+
+	/** @dataProvider provideSpecialPageNames */
+	public function testSpecialPage( string $specialPageName ): void {
+		$specification = $this->getExtensionJson()['SpecialPages'][$specialPageName];
+		$objectFactory = MediaWikiServices::getInstance()->getObjectFactory();
+		$objectFactory->createObject( $specification, [
+			'allowClassName' => true,
+		] );
+		$this->assertTrue( true );
+	}
+
+	public function provideSpecialPageNames(): Traversable {
+		foreach ( $this->getExtensionJson()['SpecialPages'] as $specialPageName => $specification ) {
+			yield [ $specialPageName ];
+		}
 	}
 
 	public function testHtmlPageLinkRendererBeginHookHandler(): void {
@@ -105,6 +189,20 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 				return $factory;
 			}
 		);
+	}
+
+	private function mockApiMain(): ApiMain {
+		$apiMain = $this->createMock( ApiMain::class );
+		$apiMain->method( 'getContext' )
+			->willReturn( $this->createMock( IContextSource::class ) );
+		return $apiMain;
+	}
+
+	private function mockApiQuery(): ApiQuery {
+		$apiQuery = $this->createMock( ApiQuery::class );
+		$apiQuery->method( 'getMain' )
+			->willReturn( $this->mockApiMain() );
+		return $apiQuery;
 	}
 
 }

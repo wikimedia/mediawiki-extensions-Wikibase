@@ -10,6 +10,14 @@
 	"requires": {
 		"MediaWiki": ">= 1.35"
 	},
+	"APIModules": {
+	},
+	"APIListModules": {
+	},
+	"APIMetaModules": {
+	},
+	"SpecialPages": {
+	},
 	"GroupPermissions": {
 		"*": {
 			"item-term": true,
