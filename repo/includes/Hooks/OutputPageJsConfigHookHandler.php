@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use OutputPage;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\OutputPageJsConfigBuilder;
@@ -12,7 +13,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch
  */
-class OutputPageJsConfigHookHandler {
+class OutputPageJsConfigHookHandler implements OutputPageBeforeHTMLHook {
 
 	/**
 	 * @var EntityNamespaceLookup
@@ -74,10 +75,7 @@ class OutputPageJsConfigHookHandler {
 		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
 	}
 
-	/**
-	 * @return self
-	 */
-	private static function newFromGlobalState() {
+	public static function newFromGlobalState(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 
@@ -92,41 +90,19 @@ class OutputPageJsConfigHookHandler {
 	}
 
 	/**
-	 * Puts user-specific and other vars that we don't want stuck
-	 * in parser cache (e.g. copyright message)
-	 *
 	 * @param OutputPage $out
-	 * @param string &$html
-	 *
-	 * @return bool
+	 * @param string &$text Text that will be displayed, in HTML
 	 */
-	public static function onOutputPageBeforeHtmlRegisterConfig( OutputPage $out, &$html ) {
-		$instance = self::newFromGlobalState();
-		return $instance->doOutputPageBeforeHtmlRegisterConfig( $out );
-	}
-
-	/**
-	 * @param OutputPage $out
-	 *
-	 * @return bool
-	 */
-	public function doOutputPageBeforeHtmlRegisterConfig( OutputPage $out ) {
+	public function onOutputPageBeforeHTML( $out, &$text ): void {
 		$title = $out->getTitle();
 
 		if ( !$title
 			|| !$this->entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() )
 		) {
-			return true;
+			return;
 		}
 
-		$this->handle( $out );
-
-		return true;
-	}
-
-	private function handle( OutputPage $out ) {
 		$outputConfigVars = $this->buildConfigVars( $out );
-
 		$out->addJsConfigVars( $outputConfigVars );
 	}
 

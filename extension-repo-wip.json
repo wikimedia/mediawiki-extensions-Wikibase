@@ -100,6 +100,10 @@
 		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
+		},
+		"OutputPageJsConfig": {
+			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::newFromGlobalState"
 		}
 	},
 	"Hooks": {
@@ -124,6 +128,7 @@
 		"LoadExtensionSchemaUpdates": "ChangesSubscriptionSchemaUpdater",
 		"MediaWikiPHPUnitTest::startTest": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiPHPUnitTestStartTest",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
+		"OutputPageBeforeHTML": "OutputPageJsConfig",
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
 		"OutputPageParserOutput": "\\Wikibase\\Repo\\RepoHooks::onOutputPageParserOutput",
 		"PageHistoryLineEnding": "\\Wikibase\\Repo\\RepoHooks::onPageHistoryLineEnding",
