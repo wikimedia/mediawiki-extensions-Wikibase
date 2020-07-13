@@ -22,7 +22,7 @@ class FederatedPropertiesSpecialPageHookHandlerTest extends TestCase {
 		];
 
 		$hookHandler = new FederatedPropertiesSpecialPageHookHandler( true );
-		$hookHandler->doSpecialPageUnset( $mockList );
+		$hookHandler->onSpecialPage_initList( $mockList );
 
 		$this->assertfalse( isset( $mockList[ 'NewProperty' ] ) );
 	}
@@ -38,7 +38,7 @@ class FederatedPropertiesSpecialPageHookHandlerTest extends TestCase {
 		];
 
 		$hookHandler = new FederatedPropertiesSpecialPageHookHandler( false );
-		$hookHandler->doSpecialPageUnset( $mockList );//mockList should not change
+		$hookHandler->onSpecialPage_initList( $mockList );//mockList should not change
 
 		$this->assertEquals( $expected, $mockList );
 	}
