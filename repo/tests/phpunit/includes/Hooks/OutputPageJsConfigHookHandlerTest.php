@@ -41,8 +41,9 @@ class OutputPageJsConfigHookHandlerTest extends MediaWikiTestCase {
 		$context->setTitle( $title );
 
 		$output = $context->getOutput();
+		$text = '';
 
-		$hookHandler->doOutputPageBeforeHtmlRegisterConfig( $output );
+		$hookHandler->onOutputPageBeforeHTML( $output, $text );
 
 		$configVars = $output->getJsConfigVars();
 
