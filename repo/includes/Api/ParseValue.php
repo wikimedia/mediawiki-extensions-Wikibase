@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -25,6 +27,7 @@ use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for using value parsers.
@@ -86,7 +89,7 @@ class ParseValue extends ApiBase {
 	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		DataTypeFactory $dataTypeFactory,
 		ValueParserFactory $valueParserFactory,
 		DataTypeValidatorFactory $dataTypeValidatorFactory,
@@ -105,10 +108,27 @@ class ParseValue extends ApiBase {
 		$this->errorReporter = $errorReporter;
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			$wikibaseRepo->getDataTypeFactory(),
+			$wikibaseRepo->getValueParserFactory(),
+			$wikibaseRepo->getDataTypeValidatorFactory(),
+			$wikibaseRepo->getExceptionLocalizer(),
+			$wikibaseRepo->getValidatorErrorLocalizer(),
+			$wikibaseRepo->getPropertyDataTypeLookup(),
+			$apiHelperFactory->getErrorReporter( $mainModule )
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$parser = $this->getParser();
@@ -130,7 +150,7 @@ class ParseValue extends ApiBase {
 	 * @return ValueParser
 	 * @throws LogicException
 	 */
-	private function getParser() {
+	private function getParser(): ValueParser {
 		$params = $this->extractRequestParams();
 
 		$options = $this->getOptionsObject( $params['options'] );
@@ -180,10 +200,7 @@ class ParseValue extends ApiBase {
 		}
 	}
 
-	/**
-	 * @return ValueValidator
-	 */
-	private function getValidator() {
+	private function getValidator(): ValueValidator {
 		$params = $this->extractRequestParams();
 
 		$name = $params['datatype'];
@@ -211,7 +228,7 @@ class ParseValue extends ApiBase {
 	 *
 	 * @return ValueValidator
 	 */
-	private function wrapValidators( array $validators ) {
+	private function wrapValidators( array $validators ): ValueValidator {
 		if ( count( $validators ) === 1 ) {
 			return reset( $validators );
 		}
@@ -219,14 +236,7 @@ class ParseValue extends ApiBase {
 		return new CompositeValidator( $validators, true );
 	}
 
-	/**
-	 * @param ValueParser $parser
-	 * @param string $value
-	 * @param ValueValidator|null $validator
-	 *
-	 * @return array
-	 */
-	private function parseStringValue( ValueParser $parser, $value, ValueValidator $validator = null ) {
+	private function parseStringValue( ValueParser $parser, string $value, ?ValueValidator $validator ): array {
 		$result = [
 			'raw' => $value
 		];
@@ -266,7 +276,7 @@ class ParseValue extends ApiBase {
 	 *
 	 * @return string[]
 	 */
-	private function getValidatorErrorCodes( array $errors ) {
+	private function getValidatorErrorCodes( array $errors ): array {
 		return array_map(
 			function ( Error $error ) {
 				return $error->getCode();
@@ -275,7 +285,7 @@ class ParseValue extends ApiBase {
 		);
 	}
 
-	private function addParseErrorToResult( array &$result, ParseException $parseError ) {
+	private function addParseErrorToResult( array &$result, ParseException $parseError ): void {
 		$result['error'] = get_class( $parseError );
 
 		$result['error-info'] = $parseError->getMessage();
@@ -285,7 +295,7 @@ class ParseValue extends ApiBase {
 		$this->errorReporter->addStatusToResult( $status, $result );
 	}
 
-	private function outputResults( array $results ) {
+	private function outputResults( array $results ): void {
 		ApiResult::setIndexedTagName( $results, 'result' );
 
 		$this->getResult()->addValue(
@@ -295,12 +305,7 @@ class ParseValue extends ApiBase {
 		);
 	}
 
-	/**
-	 * @param string|null $optionsParam
-	 *
-	 * @return ParserOptions
-	 */
-	private function getOptionsObject( $optionsParam ) {
+	private function getOptionsObject( ?string $optionsParam ): ParserOptions {
 		$parserOptions = new ParserOptions();
 		$parserOptions->setOption( ValueParser::OPT_LANG, $this->getLanguage()->getCode() );
 
@@ -330,7 +335,7 @@ class ParseValue extends ApiBase {
 	 *
 	 * @return Status
 	 */
-	protected function getExceptionStatus( Exception $error ) {
+	protected function getExceptionStatus( Exception $error ): Status {
 		$msg = $this->exceptionLocalizer->getExceptionMessage( $error );
 		$status = Status::newFatal( $msg );
 		$status->setResult( false, $error->getMessage() );
@@ -341,7 +346,7 @@ class ParseValue extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedParams() {
+	public function getAllowedParams(): array {
 		return [
 			'datatype' => [
 				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
@@ -375,7 +380,7 @@ class ParseValue extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbparsevalue&datatype=string&values=foo|bar' =>
 				'apihelp-wbparsevalue-example-1',

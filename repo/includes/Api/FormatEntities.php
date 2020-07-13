@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -15,6 +17,7 @@ use RemexHtml\TreeBuilder\TreeBuilder;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\EntityIdFormatterFactory;
 
 /**
@@ -51,7 +54,7 @@ class FormatEntities extends ApiBase {
 
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		EntityIdParser $entityIdParser,
 		EntityIdFormatterFactory $entityIdFormatterFactory,
 		ResultBuilder $resultBuilder,
@@ -67,7 +70,21 @@ class FormatEntities extends ApiBase {
 		$this->dataFactory = $dataFactory;
 	}
 
-	public function execute() {
+	public static function factory( ApiMain $apiMain, string $moduleName, IBufferingStatsdDataFactory $dataFactory ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+		return new self(
+			$apiMain,
+			$moduleName,
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
+			$apiHelperFactory->getResultBuilder( $apiMain ),
+			$apiHelperFactory->getErrorReporter( $apiMain ),
+			$dataFactory
+		);
+	}
+
+	public function execute(): void {
 		$this->getMain()->setCacheMode( 'public' );
 
 		$language = $this->getMain()->getLanguage();
@@ -95,7 +112,7 @@ class FormatEntities extends ApiBase {
 	 *
 	 * @return EntityId[]
 	 */
-	private function getEntityIdsFromIdParam( array $params ) {
+	private function getEntityIdsFromIdParam( array $params ): array {
 		$ids = [];
 		foreach ( $params['ids'] as $id ) {
 			try {
@@ -119,7 +136,7 @@ class FormatEntities extends ApiBase {
 	 * @param string $html
 	 * @return string
 	 */
-	private static function makeLinksAbsolute( $html ) {
+	private static function makeLinksAbsolute( string $html ): string {
 		$formatter = new class extends HtmlFormatter {
 
 			public function element( SerializerNode $parent, SerializerNode $node, $contents ) {
@@ -153,7 +170,7 @@ class FormatEntities extends ApiBase {
 		return $serializer->getResult();
 	}
 
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return [
 			'ids' => [
 				self::PARAM_TYPE => 'string',
@@ -162,7 +179,7 @@ class FormatEntities extends ApiBase {
 		];
 	}
 
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		$exampleMessages = [
 			'action=wbformatentities&ids=Q2'
 				=> 'apihelp-wbformatentities-example-1',

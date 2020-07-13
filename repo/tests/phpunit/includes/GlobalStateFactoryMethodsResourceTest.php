@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use ApiMain;
 use ApiQuery;
+use ApiResult;
 use DerivativeContext;
 use IContextSource;
 use LanguageQqx;
@@ -204,6 +205,10 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 			->willReturn( $contextSource );
 		$apiMain->method( 'getRequest' )
 			->willReturn( $contextSource->getRequest() );
+		$apiMain->method( 'getLanguage' )
+			->willReturn( new LanguageQqx() );
+		$apiMain->method( 'getResult' )
+			->willReturn( new ApiResult( false ) );
 		return $apiMain;
 	}
 

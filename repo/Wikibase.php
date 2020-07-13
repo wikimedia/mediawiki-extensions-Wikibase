@@ -36,13 +36,10 @@ use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\EditSummaryHelper;
-use Wikibase\Repo\Api\FormatEntities;
-use Wikibase\Repo\Api\FormatSnakValue;
 use Wikibase\Repo\Api\GetClaims;
 use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\LinkTitles;
 use Wikibase\Repo\Api\MergeItems;
-use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
@@ -526,41 +523,6 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbformatvalue'] = [
-		'class' => FormatSnakValue::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
-			return new FormatSnakValue(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getValueFormatterFactory(),
-				$wikibaseRepo->getSnakFormatterFactory(),
-				$wikibaseRepo->getDataValueFactory(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-		}
-	];
-	$wgAPIModules['wbparsevalue'] = [
-		'class' => ParseValue::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
-			return new ParseValue(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getDataTypeFactory(),
-				$wikibaseRepo->getValueParserFactory(),
-				$wikibaseRepo->getDataTypeValidatorFactory(),
-				$wikibaseRepo->getExceptionLocalizer(),
-				$wikibaseRepo->getValidatorErrorLocalizer(),
-				$wikibaseRepo->getPropertyDataTypeLookup(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-		}
-	];
 	$wgAPIModules['wbcreateredirect'] = [
 		'class' => CreateRedirect::class,
 		'factory' => function( ApiMain $apiMain, $moduleName ) {
@@ -573,22 +535,6 @@ call_user_func( function() {
 				$apiHelperFactory->getErrorReporter( $apiMain ),
 				$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
 				MediaWikiServices::getInstance()->getPermissionManager()
-			);
-		}
-	];
-	$wgAPIModules['wbformatentities'] = [
-		'class' => FormatEntities::class,
-		'factory' => function( ApiMain $apiMain, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
-			return new FormatEntities(
-				$apiMain,
-				$moduleName,
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
-				$apiHelperFactory->getResultBuilder( $apiMain ),
-				$apiHelperFactory->getErrorReporter( $apiMain ),
-				MediaWikiServices::getInstance()->getStatsdDataFactory()
 			);
 		}
 	];

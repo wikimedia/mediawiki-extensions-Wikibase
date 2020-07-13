@@ -11,7 +11,22 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"APIModules": {
-		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges"
+		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges",
+		"wbformatentities": {
+			"class": "\\Wikibase\\Repo\\Api\\FormatEntities",
+			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
+			"services": [
+				"StatsdDataFactory"
+			]
+		},
+		"wbformatvalue": {
+			"class": "\\Wikibase\\Repo\\Api\\FormatSnakValue",
+			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory"
+		},
+		"wbparsevalue": {
+			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
+			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"
+		}
 	},
 	"APIListModules": {
 		"wbsearch": {
