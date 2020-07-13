@@ -251,7 +251,9 @@
 				"util.highlightSubstring.js",
 				"jquery.ui/jquery.ui.suggester.js",
 				"jquery.ui/jquery.ui.ooMenu.js",
-				"jquery.util.getscrollbarwidth.js"
+				"jquery.util.getscrollbarwidth.js",
+				"util.inherit.js",
+				"jquery.event.special.eachchange.js"
 			],
 			"styles": [
 				"jquery.wikibase/jquery.wikibase.linkitem.css",
@@ -262,12 +264,10 @@
 			"dependencies": [
 				"jquery.spinner",
 				"jquery.ui",
-				"util.inherit",
 				"jquery.tipsy",
 				"mediawiki.api",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
-				"jquery.event.special.eachchange",
 				"mw.config.values.wbSiteDetails",
 				"wikibase.Site",
 				"wikibase.api.RepoApi"

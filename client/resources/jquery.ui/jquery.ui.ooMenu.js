@@ -1,14 +1,12 @@
-( function ( util ) {
+( function () {
 	'use strict';
 
 	/**
 	 * jQuery.ui.ooMenu provides an object-oriented menu structure. Menu items are managed using
 	 * specific objects instead of DOM elements.
-	 * (uses `util.inherit`)
 	 *
 	 * @class jQuery.ui.ooMenu
 	 * @extends jQuery.Widget
-	 * @uses util
 	 * @license GNU GPL v2+
 	 * @author H. Snater < mediawiki@snater.com >
 	 *
@@ -497,18 +495,19 @@
 	 * @throws {Error} if any required parameter is not specified properly.
 	 */
 	var CustomItem = function ( label, visibility, action, cssClass, link ) {
-		if ( !label ) {
-			throw new Error( 'Label needs to be specified' );
-		}
+			if ( !label ) {
+				throw new Error( 'Label needs to be specified' );
+			}
 
-		this._label = label;
-		this.setVisibility( visibility );
-		this.setAction( action );
-		this.setCssClass( cssClass );
-		this._link = link || null;
-	};
+			this._label = label;
+			this.setVisibility( visibility );
+			this.setAction( action );
+			this.setCssClass( cssClass );
+			this._link = link || null;
+		},
+		inherit = require( '../util.inherit.js' );
 
-	CustomItem = util.inherit(
+	CustomItem = inherit(
 		Item,
 		CustomItem,
 		{
@@ -599,4 +598,4 @@
 		CustomItem: CustomItem
 	} );
 
-}( util ) );
+}() );

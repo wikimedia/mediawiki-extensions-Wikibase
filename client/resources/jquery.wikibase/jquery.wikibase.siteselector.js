@@ -346,16 +346,17 @@
 	 * @throws {Error} if a required parameter is not specified.
 	 */
 	var Item = function ( label, value, site ) {
-		if ( !label || !value || !site ) {
-			throw new Error( 'Required parameter(s) not specified' );
-		}
+			if ( !label || !value || !site ) {
+				throw new Error( 'Required parameter(s) not specified' );
+			}
 
-		this._label = label;
-		this._value = value;
-		this._site = site;
-	};
+			this._label = label;
+			this._value = value;
+			this._site = site;
+		},
+		inherit = require( '../util.inherit.js' );
 
-	Item = util.inherit(
+	Item = inherit(
 		$.ui.ooMenu.Item,
 		Item,
 		{

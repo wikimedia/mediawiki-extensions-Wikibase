@@ -23,11 +23,6 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/lib/resources/wikibase-api/src',
 	];
 
-	$libPaths = [
-		'localBasePath' => __DIR__ . '/lib',
-		'remoteExtPath' => 'Wikibase/lib/resources/lib',
-	];
-
 	$modules = [
 
 		'mw.config.values.wbSiteDetails' => $moduleTemplate + [
@@ -92,21 +87,6 @@ return call_user_func( function() {
 			]
 		],
 
-		'jquery.event.special.eachchange' => $libPaths + [
-			'scripts' => [
-				'jquery.event/jquery.event.special.eachchange.js'
-			],
-			'dependencies' => [
-				'jquery.client',
-			],
-		],
-
-		'util.inherit' => $libPaths + [
-			'scripts' => [
-				'util/util.inherit.js',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
 	];
 
 	return $modules;

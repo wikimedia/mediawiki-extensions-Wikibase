@@ -1,14 +1,9 @@
-/**
- * @class util
- * @singleton
- */
-this.util = this.util || {};
-
-( function( util ) {
+( function () {
 	'use strict';
 
 	/**
 	 * Extends an object with the attributes of another object.
+	 *
 	 * @ignore
 	 *
 	 * @param {Object} target
@@ -16,9 +11,10 @@ this.util = this.util || {};
 	 * @return {Object}
 	 */
 	function extend( target, source ) {
-		for( var v in source ) {
-			if( source.hasOwnProperty( v ) ) {
-				target[v] = source[v];
+		for ( var v in source ) {
+			// eslint-disable-next-line no-prototype-builtins
+			if ( source.hasOwnProperty( v ) ) {
+				target[ v ] = source[ v ];
 			}
 		}
 		return target;
@@ -26,6 +22,7 @@ this.util = this.util || {};
 
 	/**
 	 * Helper to create a function which will execute a given function.
+	 *
 	 * @ignore
 	 *
 	 * @param {Function} [originalFn=function() {}] Optional function which will be executed by new
@@ -34,12 +31,13 @@ this.util = this.util || {};
 	 */
 	function createFunction( originalFn ) {
 		return originalFn
-			? function() { originalFn.apply( this, arguments ); }
-			: function() {};
+			? function () { originalFn.apply( this, arguments ); }
+			: function () {};
 	}
 
 	/**
 	 * Helper for prototypical inheritance.
+	 *
 	 * @license GPL-2.0+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
 	 *
@@ -62,11 +60,11 @@ this.util = this.util || {};
 	 *
 	 * @throws {Error} in case a malicious function name is given or a reserved word is used.
 	 */
-	util.inherit = function( nameOrBase, baseOrConstructor, constructorOrMembers, members ) {
+	var inherit = function ( nameOrBase, baseOrConstructor, constructorOrMembers, members ) {
 		var base = baseOrConstructor,
 			constructor = constructorOrMembers;
 
-		if( typeof nameOrBase !== 'string' ) {
+		if ( typeof nameOrBase !== 'string' ) {
 			members = constructorOrMembers;
 			constructor = baseOrConstructor;
 			base = nameOrBase;
@@ -75,8 +73,8 @@ this.util = this.util || {};
 		// allow to omit constructor since it can be inherited directly. But if given, require it as
 		// second parameter for readability. If no constructor, second parameter is the prototype
 		// extension object.
-		if( !members ) {
-			if( typeof constructor === 'function' ) {
+		if ( !members ) {
+			if ( typeof constructor === 'function' ) {
 				members = {};
 			} else {
 				members = constructor || {};
@@ -100,25 +98,13 @@ this.util = this.util || {};
 		// Set "constructor" property properly, allow explicit overwrite via member definition.
 		// NOTE: in IE < 9, overwritten "constructor" properties are still set as not enumerable,
 		//  so don't do this as part of the extend above.
-		NewConstructor.prototype.constructor =
-			members.hasOwnProperty( 'constructor' ) ? members.constructor : NewConstructor;
+		// eslint-disable-next-line no-prototype-builtins
+		NewConstructor.prototype.constructor = members.hasOwnProperty( 'constructor' ) ?
+			members.constructor : NewConstructor;
 
 		return NewConstructor;
 	};
 
-	/**
-	 * Throw a kind of meaningful error whenever the function should be overwritten when inherited.
-	 *
-	 *     @example
-	 *     SomethingAbstract.prototype = {
-	 *         someFunc: function( a, b ) { doSomething() },
-	 *         someAbstractFunc: util.abstractFunction
-	 *     };
-	 *
-	 * @throws {Error} when called.
-	 */
-	util.abstractMember = function() {
-		throw new Error( 'Call to undefined abstract function' );
-	};
+	module.exports = inherit;
 
-}( util ) );
+}() );
