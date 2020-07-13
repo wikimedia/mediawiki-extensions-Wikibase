@@ -166,9 +166,9 @@
 		"wikibaserepomagic": "repo/WikibaseRepo.i18n.magic.php"
 	},
 	"HookHandlers": {
-	  	"ArticleRevisionVisibilitySet": {
-		  	"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
-		  	"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::newFromGlobalState"
+		"ArticleRevisionVisibilitySet": {
+			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::newFromGlobalState"
 		},
 		"ChangesSubscriptionSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
@@ -193,7 +193,7 @@
 		"ApiMaxLagInfo": "\\Wikibase\\Repo\\RepoHooks::onApiMaxLagInfo",
 		"ApiQuery::moduleManager": "\\Wikibase\\Repo\\RepoHooks::onApiQueryModuleManager",
 		"ArticleDeleteComplete": "\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete",
-	  	"ArticleRevisionVisibilitySet": "ArticleRevisionVisibilitySet",
+		"ArticleRevisionVisibilitySet": "ArticleRevisionVisibilitySet",
 		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
 		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
