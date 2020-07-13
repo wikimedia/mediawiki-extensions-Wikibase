@@ -1,7 +1,7 @@
 <?php
 
 declare( strict_types = 1 );
-namespace Wikibase\Repo\Tests\ParserOutput;
+namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use Language;
 use MediaWikiTestCase;
