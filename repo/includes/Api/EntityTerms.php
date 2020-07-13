@@ -2,36 +2,31 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Client\Api;
+namespace Wikibase\Repo\Api;
 
 use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
-use ExtensionRegistry;
 use InvalidArgumentException;
 use Title;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermIndexEntry;
-use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
- * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.
- * For example, if a data item has the label "Washington" and the description "capital
- * city of the US", and has a sitelink to the local page called "Washington DC", calling
- * pageterms with titles=Washington_DC would include that label and description
- * in the response.
+ * Provides wikibase terms (labels, descriptions, aliases) for entity pages.
+ * For example, if data item Q61 has the label "Washington" and the description
+ * "capital city of the US", calling entityterms with titles=Q61 would include
+ * that label and description in the response.
  *
- * @note This closely mirrors the Repo entityterms API, except for newFromGlobalState.
+ * @note This closely mirrors the Client pageterms API, except for newFromGlobalState.
  *
  * @license GPL-2.0-or-later
- * @author Daniel Kinzler
  */
-class PageTerms extends ApiQueryBase {
+class EntityTerms extends ApiQueryBase {
 
 	/**
 	 * @todo Use LabelDescriptionLookup for labels/descriptions, so we can apply language fallback.
@@ -50,27 +45,15 @@ class PageTerms extends ApiQueryBase {
 		ApiQuery $query,
 		string $moduleName
 	) {
-		parent::__construct( $query, $moduleName, 'wbpt' );
+		parent::__construct( $query, $moduleName, 'wbet' );
 		$this->termBuffer = $termBuffer;
 		$this->idLookup = $idLookup;
 	}
 
 	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
-		// FIXME: HACK: make pageterms work directly on entity pages on the repo.
-		// We should instead use an EntityIdLookup that combines the repo and the client
-		// implementation, see T115117.
-		// NOTE: when changing repo and/or client integration, remember to update the
-		// self-documentation of the API module in the "apihelp-query+pageterms-description"
-		// message and the PageTerms::getExamplesMessages() method.
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			$termBuffer = $repo->getTermBuffer();
-			$entityIdLookup = $repo->getEntityContentFactory();
-		} else {
-			$client = WikibaseClient::getDefaultInstance();
-			$termBuffer = $client->getTermBuffer();
-			$entityIdLookup = $client->getEntityIdLookup();
-		}
+		$repo = WikibaseRepo::getDefaultInstance();
+		$termBuffer = $repo->getTermBuffer();
+		$entityIdLookup = $repo->getEntityContentFactory();
 
 		return new self(
 			$termBuffer,
@@ -249,7 +232,7 @@ class PageTerms extends ApiQueryBase {
 	private function addTermsForPage( ApiResult $result, int $pageId, array $termsByType ): bool {
 		ApiResult::setIndexedTagNameRecursive( $termsByType, 'term' );
 
-		$fit = $result->addValue( [ 'query', 'pages', $pageId ], 'terms', $termsByType );
+		$fit = $result->addValue( [ 'query', 'pages', $pageId ], 'entityterms', $termsByType );
 
 		if ( !$fit ) {
 			$this->setContinueEnumParameter( 'continue', $pageId );
@@ -281,7 +264,7 @@ class PageTerms extends ApiQueryBase {
 				self::PARAM_TYPE => TermIndexEntry::$validTermTypes,
 				self::PARAM_DFLT => implode( '|',  TermIndexEntry::$validTermTypes ),
 				self::PARAM_ISMULTI => true,
-				self::PARAM_HELP_MSG => 'apihelp-query+pageterms-param-terms',
+				self::PARAM_HELP_MSG => 'apihelp-query+entityterms-param-terms',
 			],
 		];
 	}
@@ -290,16 +273,10 @@ class PageTerms extends ApiQueryBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
-		if ( WikibaseSettings::isRepoEnabled() ) {
-			return [];
-		} else {
-			return [
-				'action=query&prop=pageterms&titles=London'
-					=> 'apihelp-query+pageterms-example-simple',
-				'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
-					=> 'apihelp-query+pageterms-example-label-en',
-			];
-		}
+		return [
+			'action=query&prop=entityterms&titles=Q84'
+				=> 'apihelp-query+entityterms-example-item',
+		];
 	}
 
 }

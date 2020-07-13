@@ -20,6 +20,12 @@
 			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::newFromGlobalState"
 		}
 	},
+	"APIPropModules": {
+		"entityterms": {
+			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
+			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::newFromGlobalState"
+		}
+	},
 	"SpecialPages": {
 	},
 	"GroupPermissions": {
