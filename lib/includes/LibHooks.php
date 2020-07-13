@@ -82,7 +82,6 @@ final class LibHooks implements
 				],
 				'dependencies' => [
 					'mediawiki.util',
-					'util.inherit',
 					'wikibase',
 				],
 			],
