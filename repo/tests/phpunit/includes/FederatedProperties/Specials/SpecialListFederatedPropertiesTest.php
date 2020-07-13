@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\FederatedProperties;
+namespace Wikibase\Repo\Tests\FederatedProperties\Specials;
 
 use SpecialPageTestBase;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
