@@ -72,7 +72,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 // load parts already converted to extension registration
-wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' );
+wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo.json' );
 
 // Sub-extensions needed by WikibaseRepository
 require_once __DIR__ . '/../view/WikibaseView.php';

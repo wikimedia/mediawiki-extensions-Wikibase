@@ -47,7 +47,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		static $extensionJson = null;
 		if ( $extensionJson === null ) {
 			$extensionJson = json_decode(
-				file_get_contents( __DIR__ . '/../../../../extension-repo-wip.json' ),
+				file_get_contents( __DIR__ . '/../../../../extension-repo.json' ),
 				true
 			);
 		}
