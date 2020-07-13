@@ -34,4 +34,10 @@ if [ $? -gt 0 ]; then
 fi
 
 mysql -e 'create database its_a_mw;'
-php maintenance/install.php --dbtype $DBTYPE --dbuser root --dbname its_a_mw --dbpath $(pwd) --pass nyan TravisWiki admin
+php maintenance/install.php \
+    --dbtype $DBTYPE \
+    --dbuser root \
+    --dbname its_a_mw \
+    --dbpath $(pwd) \
+    --pass shie3Ekutaiy5Giebuwi \
+    TravisWiki admin
