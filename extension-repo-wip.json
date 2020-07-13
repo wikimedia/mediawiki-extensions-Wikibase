@@ -11,6 +11,7 @@
 		"MediaWiki": ">= 1.35"
 	},
 	"APIModules": {
+		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges"
 	},
 	"APIListModules": {
 	},

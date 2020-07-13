@@ -35,7 +35,6 @@ use MediaWiki\MediaWikiServices;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Repo\Api\AvailableBadges;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Api\EditEntity;
@@ -594,7 +593,6 @@ call_user_func( function() {
 			);
 		}
 	];
-	$wgAPIModules['wbavailablebadges'] = AvailableBadges::class;
 	$wgAPIModules['wbcreateredirect'] = [
 		'class' => CreateRedirect::class,
 		'factory' => function( ApiMain $apiMain, $moduleName ) {
