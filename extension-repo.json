@@ -99,6 +99,9 @@
 		"AvailableBadges": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::newFromGlobalState"
+		},
+		"ListProperties": {
+			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::newFromGlobalState"
 		}
 	},
 	"GroupPermissions": {
