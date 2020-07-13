@@ -6,6 +6,7 @@ use HttpError;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for addressing entity data pages without knowing the namespace.
@@ -37,6 +38,13 @@ class SpecialEntityPage extends SpecialWikibasePage {
 
 		$this->entityIdParser = $entityIdParser;
 		$this->entityTitleLookup = $entityTitleLookup;
+	}
+
+	public static function newFromGlobalState(): self {
+		return new self(
+			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
+		);
 	}
 
 	/**

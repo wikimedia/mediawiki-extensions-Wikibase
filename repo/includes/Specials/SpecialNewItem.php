@@ -12,6 +12,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
@@ -19,6 +20,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLTrimmedTextField;
 use Wikibase\Repo\Store\TermsCollisionDetector;
 use Wikibase\Repo\SummaryFormatter;
 use Wikibase\Repo\Validators\TermValidatorFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Page for creating new Wikibase items.
@@ -72,6 +74,28 @@ class SpecialNewItem extends SpecialNewEntity {
 		$this->siteLookup = $siteLookup;
 		$this->termValidatorFactory = $termValidatorFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new self(
+			$copyrightView,
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getTermValidatorFactory(),
+			$wikibaseRepo->getItemTermsCollisionDetector()
+		);
 	}
 
 	/**

@@ -10,6 +10,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\DataTypeSelector;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
@@ -56,6 +57,26 @@ class SpecialNewProperty extends SpecialNewEntity {
 		);
 
 		$this->termsCollisionDetector = $termsCollisionDetector;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new self(
+			$copyrightView,
+			$wikibaseRepo->getEntityNamespaceLookup(),
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getPropertyTermsCollisionDetector()
+		);
 	}
 
 	/**

@@ -11,6 +11,7 @@ use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing items by providing the identifier of a site and the title
@@ -88,6 +89,25 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 		$this->logger = $logger;
 		$this->groups = $siteLinkGroups;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$siteLinkTargetProvider = new SiteLinkTargetProvider(
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+		);
+
+		return new self(
+			$wikibaseRepo->getEntityTitleLookup(),
+			new LanguageNameLookup(),
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$siteLinkTargetProvider,
+			$wikibaseRepo->getLogger(),
+			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
+		);
 	}
 
 	/**

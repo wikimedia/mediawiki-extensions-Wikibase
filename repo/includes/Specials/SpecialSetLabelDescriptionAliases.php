@@ -18,9 +18,11 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\SummaryFormatter;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Special page for setting label, description and aliases of a Wikibase entity that features
@@ -88,6 +90,27 @@ class SpecialSetLabelDescriptionAliases extends SpecialModifyEntity {
 		$this->changeOpFactory = $changeOpFactory;
 		$this->termsLanguages = $termsLanguages;
 		$this->permissionChecker = $permissionChecker;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		$settings = $wikibaseRepo->getSettings();
+		$copyrightView = new SpecialPageCopyrightView(
+			new CopyrightMessageBuilder(),
+			$settings->getSetting( 'dataRightsUrl' ),
+			$settings->getSetting( 'dataRightsText' )
+		);
+
+		return new self(
+			$copyrightView,
+			$wikibaseRepo->getSummaryFormatter(),
+			$wikibaseRepo->getEntityTitleLookup(),
+			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getChangeOpFactoryProvider()->getFingerprintChangeOpFactory(),
+			$wikibaseRepo->getTermsLanguages(),
+			$wikibaseRepo->getEntityPermissionChecker()
+		);
 	}
 
 	public function doesWrites() {

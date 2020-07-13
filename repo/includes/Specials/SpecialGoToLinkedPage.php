@@ -11,6 +11,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
 use Wikibase\DataModel\Services\Lookup\EntityRedirectLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Enables accessing a linked page on a site by providing the item id and site
@@ -74,6 +75,17 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$this->redirectLookup = $redirectLookup;
 		$this->idParser = $idParser;
 		$this->entityLookup = $entityLookup;
+	}
+
+	public static function newFromGlobalState(): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		return new self(
+			$wikibaseRepo->getSiteLookup(),
+			$wikibaseRepo->getStore()->newSiteLinkStore(),
+			$wikibaseRepo->getStore()->getEntityRedirectLookup(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStore()->getEntityLookup()
+		);
 	}
 
 	/**
