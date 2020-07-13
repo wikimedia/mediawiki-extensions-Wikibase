@@ -1,25 +1,25 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiQuery;
 use ApiQueryBase;
+use ExtensionRegistry;
 use Language;
 use Wikibase\Lib\WikibaseContentLanguages;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
  */
 class MetaContentLanguages extends ApiQueryBase {
 
-	/**
-	 * @var WikibaseContentLanguages
-	 */
+	/** @var WikibaseContentLanguages */
 	private $wikibaseContentLanguages;
 
-	/**
-	 * @var bool
-	 */
+	/** @var bool */
 	private $expectKnownLanguageNames;
 
 	/**
@@ -32,19 +32,34 @@ class MetaContentLanguages extends ApiQueryBase {
 	 */
 	public function __construct(
 		WikibaseContentLanguages $wikibaseContentLanguages,
-		$expectKnownLanguageNames,
+		bool $expectKnownLanguageNames,
 		ApiQuery $queryModule,
-		$moduleName
+		string $moduleName
 	) {
 		parent::__construct( $queryModule, $moduleName, 'wbcl' );
 		$this->wikibaseContentLanguages = $wikibaseContentLanguages;
 		$this->expectKnownLanguageNames = $expectKnownLanguageNames;
 	}
 
+	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+		$repo = WikibaseRepo::getDefaultInstance();
+
+		// if CLDR is available, we expect to have some language name
+		// (falling back to English if necessary) for any content language
+		$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
+
+		return new self(
+			$repo->getWikibaseContentLanguages(),
+			$expectKnownLanguageNames,
+			$apiQuery,
+			$moduleName
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$result = $this->getResult();
 
@@ -96,14 +111,14 @@ class MetaContentLanguages extends ApiQueryBase {
 	 * @param array $params
 	 * @return string
 	 */
-	public function getCacheMode( $params ) {
+	public function getCacheMode( $params ): string {
 		return 'public';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return [
 			'context' => [
 				self::PARAM_DFLT => 'term',
@@ -126,7 +141,7 @@ class MetaContentLanguages extends ApiQueryBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		$pathUrl = 'action=' . $this->getQuery()->getModuleName() .
 			'&meta=' . $this->getModuleName();
 		$pathMsg = $this->getModulePath();

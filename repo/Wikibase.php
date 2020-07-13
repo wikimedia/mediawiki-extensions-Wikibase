@@ -47,7 +47,6 @@ use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\LinkTitles;
 use Wikibase\Repo\Api\ListSubscribers;
 use Wikibase\Repo\Api\MergeItems;
-use Wikibase\Repo\Api\MetaContentLanguages;
 use Wikibase\Repo\Api\ParseValue;
 use Wikibase\Repo\Api\QuerySearchEntities;
 use Wikibase\Repo\Api\RemoveClaims;
@@ -106,8 +105,7 @@ wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo-wip.json' )
 require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
-	global $wgAPIMetaModules,
-		$wgAPIListModules,
+	global $wgAPIListModules,
 		$wgAPIModules,
 		$wgExtensionMessagesFiles,
 		$wgHooks,
@@ -627,24 +625,6 @@ call_user_func( function() {
 				MediaWikiServices::getInstance()->getStatsdDataFactory()
 			);
 		}
-	];
-
-	$wgAPIMetaModules['wbcontentlanguages'] = [
-		'class' => MetaContentLanguages::class,
-		'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-
-			// if CLDR is available, we expect to have some language name
-			// (falling back to English if necessary) for any content language
-			$expectKnownLanguageNames = ExtensionRegistry::getInstance()->isLoaded( 'cldr' );
-
-			return new MetaContentLanguages(
-				$repo->getWikibaseContentLanguages(),
-				$expectKnownLanguageNames,
-				$apiQuery,
-				$moduleName
-			);
-		},
 	];
 
 	$wgAPIListModules['wbsearch'] = [
