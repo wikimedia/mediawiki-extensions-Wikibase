@@ -241,25 +241,29 @@
 		},
 		"jquery.wikibase.linkitem": {
 			"packageFiles": [
-				"jquery.wikibase/jquery.wikibase.linkitem.js",
-				"wikibase.client.PageConnector.js",
-				"wikibase.client.getMwApiForRepo.js",
-				"wikibase.sites.js",
-				"jquery.wikibase/jquery.wikibase.siteselector.js",
-				"jquery.wikibase/jquery.wikibase.wbtooltip.js",
-				"wikibase.buildErrorOutput.js",
-				"util.highlightSubstring.js",
-				"jquery.ui/jquery.ui.suggester.js",
-				"jquery.ui/jquery.ui.ooMenu.js",
-				"jquery.util.getscrollbarwidth.js",
-				"util.inherit.js",
-				"jquery.event.special.eachchange.js"
+				"client/resources/jquery.wikibase/jquery.wikibase.linkitem.js",
+				"client/resources/wikibase.client.PageConnector.js",
+				"client/resources/wikibase.client.getMwApiForRepo.js",
+				"client/resources/wikibase.sites.js",
+				"client/resources/jquery.wikibase/jquery.wikibase.siteselector.js",
+				"client/resources/jquery.wikibase/jquery.wikibase.wbtooltip.js",
+				"client/resources/wikibase.buildErrorOutput.js",
+				"client/resources/util.highlightSubstring.js",
+				"client/resources/jquery.ui/jquery.ui.suggester.js",
+				"client/resources/jquery.ui/jquery.ui.ooMenu.js",
+				"client/resources/jquery.util.getscrollbarwidth.js",
+				"client/resources/util.inherit.js",
+				"client/resources/jquery.event.special.eachchange.js",
+				"lib/resources/wikibase-api/src/namespace.js",
+				"lib/resources/wikibase-api/src/RepoApi.js",
+				"lib/resources/wikibase-api/src/getLocationAgnosticMwApi.js",
+				"lib/resources/wikibase-api/src/RepoApiError.js"
 			],
 			"styles": [
-				"jquery.wikibase/jquery.wikibase.linkitem.css",
-				"jquery.wikibase/jquery.wikibase.wbtooltip.css",
-				"jquery.ui/jquery.ui.suggester.css",
-				"jquery.ui/jquery.ui.ooMenu.css"
+				"client/resources/jquery.wikibase/jquery.wikibase.linkitem.css",
+				"client/resources/jquery.wikibase/jquery.wikibase.wbtooltip.css",
+				"client/resources/jquery.ui/jquery.ui.suggester.css",
+				"client/resources/jquery.ui/jquery.ui.ooMenu.css"
 			],
 			"dependencies": [
 				"jquery.spinner",
@@ -270,7 +274,7 @@
 				"mediawiki.jqueryMsg",
 				"mw.config.values.wbSiteDetails",
 				"wikibase.Site",
-				"wikibase.api.RepoApi"
+				"mediawiki.ForeignApi"
 			],
 			"messages": [
 				"wikibase-error-unexpected",
@@ -290,8 +294,18 @@
 				"wikibase-linkitem-failed-modify",
 				"wikibase-replicationnote",
 				"wikibase-sitelinks-sitename-columnheading",
-				"wikibase-sitelinks-link-columnheading"
-			]
+				"wikibase-sitelinks-link-columnheading",
+				"wikibase-error-unexpected",
+				"wikibase-error-unknown",
+				"wikibase-error-save-generic",
+				"wikibase-error-remove-generic",
+				"wikibase-error-save-timeout",
+				"wikibase-error-remove-timeout",
+				"wikibase-error-ui-no-external-page",
+				"wikibase-error-ui-edit-conflict"
+			],
+			"localBasePath": "",
+			"remoteExtPath": "Wikibase/"
 		},
 		"wikibase.client.action.edit.collapsibleFooter": {
 			"scripts": "wikibase.client.action.edit.collapsibleFooter.js",
