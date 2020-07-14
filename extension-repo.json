@@ -23,9 +23,21 @@
 			"class": "\\Wikibase\\Repo\\Api\\FormatSnakValue",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory"
 		},
+		"wbgetclaims": {
+			"class": "\\Wikibase\\Repo\\Api\\GetClaims",
+			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory"
+		},
+		"wbgetentities": {
+			"class": "\\Wikibase\\Repo\\Api\\GetEntities",
+			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory"
+		},
 		"wbparsevalue": {
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"
+		},
+		"wbsearchentities": {
+			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
+			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory"
 		}
 	},
 	"APIListModules": {

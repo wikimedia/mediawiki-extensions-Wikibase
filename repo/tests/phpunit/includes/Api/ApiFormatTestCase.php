@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ObjectFactory;
 
 /**
  * @group API
@@ -65,13 +66,10 @@ abstract class ApiFormatTestCase extends \MediaWikiTestCase {
 		$ctx = $ctx->newTestContext( $request, $this->user );
 		$main = new ApiMain( $ctx, true );
 
-		if ( isset( $wgAPIModules[$moduleName]['factory'] )
-			&& $wgAPIModules[$moduleName]['class'] === $moduleClass
-		) {
-			return $wgAPIModules[$moduleName]['factory']( $main, $moduleName );
-		}
-
-		return new $moduleClass( $main, $moduleName );
+		return ObjectFactory::getObjectFromSpec( $wgAPIModules[$moduleName], [
+			'assertClass' => $moduleClass,
+			'extraArgs' => [ $main, $moduleName ],
+		] );
 	}
 
 	protected function getNewEntityRevision( $withData = false ) {
