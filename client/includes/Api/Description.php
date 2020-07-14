@@ -46,7 +46,7 @@ class Description extends ApiQueryBase {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$client = WikibaseClient::getDefaultInstance();
 		$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
 		$descriptionLookup = $client->getDescriptionLookup();

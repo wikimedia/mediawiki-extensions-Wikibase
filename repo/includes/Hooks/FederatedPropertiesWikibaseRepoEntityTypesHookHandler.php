@@ -27,7 +27,7 @@ class FederatedPropertiesWikibaseRepoEntityTypesHookHandler {
 	 * @param array[] $entityTypeDefinitions
 	 */
 	public static function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
-		self::newFromGlobalState()->doWikibaseRepoEntityTypes( $entityTypeDefinitions );
+		self::factory()->doWikibaseRepoEntityTypes( $entityTypeDefinitions );
 	}
 
 	public function doWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
@@ -41,7 +41,7 @@ class FederatedPropertiesWikibaseRepoEntityTypesHookHandler {
 		);
 	}
 
-	private static function newFromGlobalState(): self {
+	private static function factory(): self {
 		return new self(
 			WikibaseSettings::getRepoSettings()->getSetting( 'federatedPropertiesEnabled' ),
 			require __DIR__ . '/../../WikibaseRepo.FederatedProperties.entitytypes.php'

@@ -66,7 +66,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	public function testNewFromGlobalState() {
-		$this->assertInstanceOf( SpecialEntityUsage::class, SpecialEntityUsage::newFromGlobalState() );
+		$this->assertInstanceOf( SpecialEntityUsage::class, SpecialEntityUsage::factory() );
 	}
 
 	public function testExecuteWithValidParam() {

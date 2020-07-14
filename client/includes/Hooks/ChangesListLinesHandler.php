@@ -45,7 +45,7 @@ class ChangesListLinesHandler implements
 		$this->formatter = $formatter;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$changeFactory = new ExternalChangeFactory(
 			$wikibaseClient->getSettings()->getSetting( 'repoSiteId' ),

@@ -77,7 +77,7 @@ class EchoNotificationsHandlers {
 	/**
 	 * @return self
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
@@ -110,7 +110,7 @@ class EchoNotificationsHandlers {
 	 * @param bool $autocreated True when account was auto-created
 	 */
 	public static function onLocalUserCreated( User $user, $autocreated ) {
-		$self = self::newFromGlobalState();
+		$self = self::factory();
 		$self->doLocalUserCreated( $user, $autocreated );
 	}
 
@@ -132,7 +132,7 @@ class EchoNotificationsHandlers {
 	 * @param Change $change
 	 */
 	public static function onWikibaseHandleChange( Change $change ) {
-		$self = self::newFromGlobalState();
+		$self = self::factory();
 		$self->doWikibaseHandleChange( $change );
 	}
 

@@ -39,7 +39,7 @@ class EchoSetupHookHandlers {
 	/**
 	 * @return self
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$settings = WikibaseSettings::getClientSettings();
 
 		return new self(
@@ -62,7 +62,7 @@ class EchoSetupHookHandlers {
 		array &$notificationCategories,
 		array &$icons
 	) {
-		$self = self::newFromGlobalState();
+		$self = self::factory();
 		$self->doBeforeCreateEchoEvent( $notifications, $notificationCategories, $icons );
 	}
 

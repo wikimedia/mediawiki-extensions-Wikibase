@@ -50,7 +50,7 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 		}
 	}
 
-	public static function newFromGlobalState(): DescriptionProviderHookHandler {
+	public static function factory(): DescriptionProviderHookHandler {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$allowLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'allowLocalShortDesc' );
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();

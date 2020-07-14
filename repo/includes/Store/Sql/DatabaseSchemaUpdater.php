@@ -42,7 +42,7 @@ class DatabaseSchemaUpdater {
 		$this->store = $store;
 	}
 
-	private static function newFromGlobalState() {
+	private static function factory() {
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 
 		return new self( $store );
@@ -57,7 +57,7 @@ class DatabaseSchemaUpdater {
 	 * @return bool
 	 */
 	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$schemaUpdater = self::newFromGlobalState();
+		$schemaUpdater = self::factory();
 		$schemaUpdater->doSchemaUpdate( $updater );
 
 		return true;

@@ -71,7 +71,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 		$this->limit = $limit;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		global $wgLang;
 
 		$languageCode = $wgLang->getCode();

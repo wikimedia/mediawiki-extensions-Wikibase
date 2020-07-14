@@ -22,7 +22,7 @@ use Wikibase\Repo\WikibaseRepo;
  * "capital city of the US", calling entityterms with titles=Q61 would include
  * that label and description in the response.
  *
- * @note This closely mirrors the Client pageterms API, except for newFromGlobalState.
+ * @note This closely mirrors the Client pageterms API, except for the factory method.
  *
  * @license GPL-2.0-or-later
  */
@@ -50,7 +50,7 @@ class EntityTerms extends ApiQueryBase {
 		$this->idLookup = $idLookup;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$termBuffer = $repo->getTermBuffer();
 		$entityIdLookup = $repo->getEntityContentFactory();

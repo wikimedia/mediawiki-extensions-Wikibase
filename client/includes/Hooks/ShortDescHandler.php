@@ -22,7 +22,7 @@ class ShortDescHandler {
 	 * @return string
 	 */
 	public static function handle( Parser $parser, $shortDesc, $controlArg = '' ) {
-		$handler = self::newFromGlobalState();
+		$handler = self::factory();
 		$handler->doHandle( $parser, $shortDesc, $controlArg );
 		return '';
 	}
@@ -30,7 +30,7 @@ class ShortDescHandler {
 	/**
 	 * @return self
 	 */
-	private static function newFromGlobalState() {
+	private static function factory() {
 		return new self();
 	}
 

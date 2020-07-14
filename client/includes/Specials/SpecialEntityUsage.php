@@ -46,7 +46,7 @@ class SpecialEntityUsage extends QueryPage {
 		$this->idParser = $idParser;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		return new self(
 			WikibaseClient::getDefaultInstance()->getEntityIdParser()
 		);

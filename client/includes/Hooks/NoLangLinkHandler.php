@@ -29,14 +29,14 @@ class NoLangLinkHandler {
 	 * @param string ...$langs Language codes or '*'
 	 */
 	public static function handle( Parser $parser, ...$langs ) {
-		$handler = self::newFromGlobalState();
+		$handler = self::factory();
 		$handler->doHandle( $parser, $langs );
 	}
 
 	/**
 	 * @return self
 	 */
-	private static function newFromGlobalState() {
+	private static function factory() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 

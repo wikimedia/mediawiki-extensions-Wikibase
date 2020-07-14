@@ -134,7 +134,7 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function testNewFromGlobalState() {
-		$reflectionMethod = new ReflectionMethod( UpdateRepoHookHandler::class, 'newFromGlobalState' );
+		$reflectionMethod = new ReflectionMethod( UpdateRepoHookHandler::class, 'factory' );
 		$reflectionMethod->setAccessible( true );
 		$handler = $reflectionMethod->invoke( null );
 

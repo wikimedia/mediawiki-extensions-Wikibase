@@ -124,26 +124,26 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 
 	public function testHtmlPageLinkRendererBeginHookHandler(): void {
 		TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )
-			->newFromGlobalState();
+			->factory();
 	}
 
 	public function testLabelPrefetchHookHandlers(): void {
 		TestingAccessWrapper::newFromClass( LabelPrefetchHookHandlers::class )
-			->newFromGlobalState();
+			->factory();
 	}
 
 	public function testOutputPageBeforeHTMLHookHandler(): void {
-		OutputPageBeforeHTMLHookHandler::newFromGlobalState();
+		OutputPageBeforeHTMLHookHandler::factory();
 	}
 
 	public function testOutputPageJsConfigHookHandler(): void {
 		TestingAccessWrapper::newFromClass( OutputPageJsConfigHookHandler::class )
-			->newFromGlobalState();
+			->factory();
 	}
 
 	public function testShowSearchHitHandler(): void {
 		TestingAccessWrapper::newFromClass( ShowSearchHitHandler::class )
-			->newFromGlobalState( RequestContext::getMain() );
+			->factory( RequestContext::getMain() );
 	}
 
 	public function testTermboxFlag(): void {

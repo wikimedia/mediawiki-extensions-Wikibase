@@ -35,7 +35,7 @@ class MagicWordHookHandler implements
 	/**
 	 * @return self
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$client = WikibaseClient::getDefaultInstance();
 		return new self( $client->getSettings() );
 	}

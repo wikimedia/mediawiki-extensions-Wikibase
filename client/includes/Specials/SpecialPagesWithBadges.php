@@ -59,7 +59,7 @@ class SpecialPagesWithBadges extends QueryPage {
 		$this->siteId = $siteId;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 		return new self(

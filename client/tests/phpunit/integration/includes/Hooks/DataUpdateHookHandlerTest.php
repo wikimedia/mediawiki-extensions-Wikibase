@@ -251,7 +251,7 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testNewFromGlobalState() {
-		$handler = DataUpdateHookHandler::newFromGlobalState();
+		$handler = DataUpdateHookHandler::factory();
 		$this->assertInstanceOf( DataUpdateHookHandler::class, $handler );
 	}
 

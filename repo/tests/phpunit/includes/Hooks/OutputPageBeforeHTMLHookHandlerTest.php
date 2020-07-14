@@ -81,7 +81,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	public function testNewFromGlobalState_returnsSelf() {
 		$this->assertInstanceOf(
 			OutputPageBeforeHTMLHookHandler::class,
-			OutputPageBeforeHTMLHookHandler::newFromGlobalState()
+			OutputPageBeforeHTMLHookHandler::factory()
 		);
 	}
 

@@ -75,7 +75,7 @@ class OutputPageJsConfigHookHandler implements OutputPageBeforeHTMLHook {
 		$this->taintedReferencesEnabled = $taintedReferencesEnabled;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 

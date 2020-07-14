@@ -70,7 +70,7 @@ class SpecialMergeItems extends SpecialWikibasePage {
 		$this->titleLookup = $titleLookup;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(

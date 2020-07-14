@@ -98,7 +98,7 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		$this->jobBatchSize = $jobBatchSize;
 	}
 
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$wbRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(

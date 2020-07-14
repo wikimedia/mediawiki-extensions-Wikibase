@@ -21,7 +21,7 @@ class SpecialListPropertiesDispatchingFactory {
 	 * @return SpecialListFederatedProperties|SpecialListProperties
 	 * @throws \MWException
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {

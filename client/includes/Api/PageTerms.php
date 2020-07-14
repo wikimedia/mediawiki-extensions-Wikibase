@@ -26,7 +26,7 @@ use Wikibase\Repo\WikibaseRepo;
  * pageterms with titles=Washington_DC would include that label and description
  * in the response.
  *
- * @note This closely mirrors the Repo entityterms API, except for newFromGlobalState.
+ * @note This closely mirrors the Repo entityterms API, except for the factory method.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -55,7 +55,7 @@ class PageTerms extends ApiQueryBase {
 		$this->idLookup = $idLookup;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		// FIXME: HACK: make pageterms work directly on entity pages on the repo.
 		// We should instead use an EntityIdLookup that combines the repo and the client
 		// implementation, see T115117.

@@ -64,7 +64,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 		$this->entityTypes = $entityTypes;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 
 		return new self(

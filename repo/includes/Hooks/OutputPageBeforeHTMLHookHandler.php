@@ -122,7 +122,7 @@ class OutputPageBeforeHTMLHookHandler {
 	/**
 	 * @return self
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -160,7 +160,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param string &$html the HTML to mangle
 	 */
 	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		self::newFromGlobalState()->doOutputPageBeforeHTML( $out, $html );
+		self::factory()->doOutputPageBeforeHTML( $out, $html );
 	}
 
 	/**

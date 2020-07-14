@@ -13,27 +13,27 @@
 	"APIListModules": {
 		"wblistentityusage": {
 			"class": "\\Wikibase\\Client\\Api\\ApiListEntityUsage",
-			"factory": "\\Wikibase\\Client\\Api\\ApiListEntityUsage::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Api\\ApiListEntityUsage::factory"
 		}
 	},
 	"APIMetaModules": {
 		"wikibase": {
 			"class": "\\Wikibase\\Client\\Api\\ApiClientInfo",
-			"factory": "\\Wikibase\\Client\\Api\\ApiClientInfo::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Api\\ApiClientInfo::factory"
 		}
 	},
 	"APIPropModules": {
 		"pageterms": {
 			"class": "\\Wikibase\\Client\\Api\\PageTerms",
-			"factory": "\\Wikibase\\Client\\Api\\PageTerms::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Api\\PageTerms::factory"
 		},
 		"description": {
 			"class": "\\Wikibase\\Client\\Api\\Description",
-			"factory": "\\Wikibase\\Client\\Api\\Description::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Api\\Description::factory"
 		},
 		"wbentityusage": {
 			"class": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage",
-			"factory": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Api\\ApiPropsEntityUsage::factory"
 		}
 	},
 	"ExtensionFunctions": [
@@ -42,67 +42,67 @@
 	"HookHandlers": {
 		"BeforePageDisplay": {
 			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler::factory"
 		},
 		"ChangesListLines": {
 			"class" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler",
-			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::newFromGlobalState"
+			"factory" : "\\Wikibase\\Client\\Hooks\\ChangesListLinesHandler::factory"
 		},
 		"ChangesListSpecialPage": {
 			"class": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::newFromGlobalStateAndServices",
+			"factory": "\\Wikibase\\Client\\Hooks\\ChangesListSpecialPageHookHandler::factory",
 			"services": [ "DBLoadBalancer" ]
 		},
 		"ParserOutputUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserOutputUpdateHookHandler::factory"
 		},
 		"DataUpdate": {
 			"class": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\DataUpdateHookHandler::factory"
 		},
 		"DeletePageNoticeCreator": {
 			"class": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator",
-			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\DeletePageNoticeCreator::factory"
 		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
 		"DescriptionProvider": {
 			"class": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\DescriptionProviderHookHandler::factory"
 		},
 		"EditAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\EditActionHookHandler::factory"
 		},
 		"InfoAction": {
 			"class": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\InfoActionHookHandler::factory"
 		},
 		"Magic": {
 			"class": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\MagicWordHookHandler::factory"
 		},
 		"MovePageNotice": {
 			"class": "\\Wikibase\\Client\\Hooks\\MovePageNotice",
-			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\MovePageNotice::factory"
 		},
 		"ParserFunctionRegistrant": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserFunctionRegistrant::factory"
 		},
 		"Parser": {
 			"class": "\\Wikibase\\Client\\Hooks\\ParserHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\ParserHookHandler::factory"
 		},
 		"Sidebar": {
 			"class": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\SidebarHookHandler::factory"
 		},
 		"SkinAfterPortlet": {
 			"class": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\SkinAfterPortletHandler::factory"
 		},
 		"SqlUsageTrackerSchemaUpdater": {
 			"class": "\\Wikibase\\Client\\Usage\\Sql\\SqlUsageTrackerSchemaUpdater"
@@ -112,7 +112,7 @@
 		},
 		"UpdateRepo": {
 			"class": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler",
-			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Client\\Hooks\\UpdateRepoHookHandler::factory"
 		}
 	},
 	"Hooks": {
@@ -324,11 +324,11 @@
 		"UnconnectedPages": "Wikibase\\Client\\Specials\\SpecialUnconnectedPages",
 		"PagesWithBadges": {
 			"class": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges",
-			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::newFromGlobalState"
+			"factory": "Wikibase\\Client\\Specials\\SpecialPagesWithBadges::factory"
 		},
 		"EntityUsage": {
 			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",
-			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::newFromGlobalState"
+			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::factory"
 		}
 	},
 	"MessagesDirs": {

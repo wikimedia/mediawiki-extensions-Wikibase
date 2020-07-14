@@ -47,7 +47,7 @@ class DeletePageNoticeCreator implements ArticleDeleteAfterSuccessHook {
 		$this->repoLinker = $repoLinker;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();

@@ -57,7 +57,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		$this->idParser = $idParser;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		$usageLookup = $wikibaseClient->getStore()->getUsageLookup();

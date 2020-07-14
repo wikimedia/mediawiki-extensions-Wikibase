@@ -70,7 +70,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 	/**
 	 * @return self|null
 	 */
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 

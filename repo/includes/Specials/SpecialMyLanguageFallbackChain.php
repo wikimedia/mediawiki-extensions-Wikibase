@@ -37,7 +37,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		return new self(
 			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 		);

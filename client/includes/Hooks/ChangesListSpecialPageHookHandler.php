@@ -45,7 +45,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	 * @param ILoadBalancer $loadBalancer
 	 * @return self
 	 */
-	public static function newFromGlobalStateAndServices( ILoadBalancer $loadBalancer ) {
+	public static function factory( ILoadBalancer $loadBalancer ) {
 		$settings = WikibaseClient::getDefaultInstance()->getSettings();
 
 		return new self(
@@ -80,7 +80,7 @@ class ChangesListSpecialPageHookHandler implements ChangesListSpecialPageQueryHo
 	 * @param ChangesListSpecialPage $special
 	 */
 	public static function onChangesListSpecialPageStructuredFilters( $special ) {
-		$handler = self::newFromGlobalStateAndServices( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$handler = self::factory( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 		// The *user-facing* filter is only registered if external changes
 		// are enabled.
 		//

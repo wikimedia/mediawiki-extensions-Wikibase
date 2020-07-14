@@ -16,92 +16,92 @@
 	"APIListModules": {
 		"wbsearch": {
 			"class": "\\Wikibase\\Repo\\Api\\QuerySearchEntities",
-			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Api\\QuerySearchEntities::factory"
 		},
 		"wbsubscribers": {
 			"class": "\\Wikibase\\Repo\\Api\\ListSubscribers",
-			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::factory"
 		}
 	},
 	"APIMetaModules": {
 		"wbcontentlanguages": {
 			"class": "\\Wikibase\\Repo\\Api\\MetaContentLanguages",
-			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::factory"
 		}
 	},
 	"APIPropModules": {
 		"entityterms": {
 			"class": "\\Wikibase\\Repo\\Api\\EntityTerms",
-			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Api\\EntityTerms::factory"
 		}
 	},
 	"SpecialPages": {
 		"NewItem": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewItem",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialNewItem::factory"
 		},
 		"NewProperty": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory"
 		},
 		"ItemByTitle": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialItemByTitle::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialItemByTitle::factory"
 		},
 		"GoToLinkedPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::factory"
 		},
 		"ItemDisambiguation": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation::factory"
 		},
 		"ItemsWithoutSitelinks": "Wikibase\\Repo\\Specials\\SpecialItemsWithoutSitelinks",
 		"SetLabel": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabel",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabel::factory"
 		},
 		"SetDescription": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetDescription",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetDescription::factory"
 		},
 		"SetAliases": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetAliases",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetAliases::factory"
 		},
 		"SetLabelDescriptionAliases": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetLabelDescriptionAliases::factory"
 		},
 		"SetSiteLink": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory"
 		},
 		"ListDatatypes": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
 		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
 		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::factory"
 		},
 		"MyLanguageFallbackChain": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain::factory"
 		},
 		"MergeItems": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory"
 		},
 		"RedirectEntity": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::factory"
 		},
 		"AvailableBadges": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::factory"
 		},
 		"ListProperties": {
-			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::newFromGlobalState"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::factory"
 		}
 	},
 	"GroupPermissions": {
@@ -171,21 +171,21 @@
 	"HookHandlers": {
 		"ArticleRevisionVisibilitySet": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory"
 		},
 		"ChangesSubscriptionSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
 		},
 		"FederatedPropertiesSpecialPage": {
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::factory"
 		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},
 		"OutputPageJsConfig": {
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::newFromGlobalState"
+			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory"
 		}
 	},
 	"Hooks": {

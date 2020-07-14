@@ -57,7 +57,7 @@ class SpecialRedirectEntity extends SpecialWikibasePage {
 		$this->interactor = $interactor;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$user = RequestContext::getMain()->getUser();
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 

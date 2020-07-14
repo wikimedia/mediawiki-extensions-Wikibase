@@ -103,29 +103,29 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testEchoNotificationsHandlers() {
-		EchoNotificationsHandlers::newFromGlobalState();
+		EchoNotificationsHandlers::factory();
 		$this->assertTrue( true );
 	}
 
 	public function testEchoSetupHookHandlers() {
-		EchoSetupHookHandlers::newFromGlobalState();
+		EchoSetupHookHandlers::factory();
 		$this->assertTrue( true );
 	}
 
 	public function testEditActionHookHandler() {
-		EditActionHookHandler::newFromGlobalState( RequestContext::getMain() );
+		EditActionHookHandler::factory( RequestContext::getMain() );
 		$this->assertTrue( true );
 	}
 
 	public function testNoLangLinkHandler(): void {
 		TestingAccessWrapper::newFromClass( NoLangLinkHandler::class )
-			->newFromGlobalState();
+			->factory();
 		$this->assertTrue( true );
 	}
 
 	public function testShortDescHandler(): void {
 		TestingAccessWrapper::newFromClass( ShortDescHandler::class )
-			->newFromGlobalState();
+			->factory();
 		$this->assertTrue( true );
 	}
 

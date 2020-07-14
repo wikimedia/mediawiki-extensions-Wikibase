@@ -82,7 +82,7 @@ class InfoActionHookHandler implements InfoActionHook {
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 

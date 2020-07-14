@@ -250,7 +250,7 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiTestCase {
 		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
 		$settings->setSetting( 'siteGroup', 'NYAN' );
 
-		$handler = ParserOutputUpdateHookHandler::newFromGlobalState();
+		$handler = ParserOutputUpdateHookHandler::factory();
 		$this->assertInstanceOf( ParserOutputUpdateHookHandler::class, $handler );
 
 		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );

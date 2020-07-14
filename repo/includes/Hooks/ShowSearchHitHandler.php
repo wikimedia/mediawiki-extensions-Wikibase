@@ -75,7 +75,7 @@ class ShowSearchHitHandler {
 	 * @param IContextSource $context
 	 * @return self
 	 */
-	private static function newFromGlobalState( IContextSource $context ) {
+	private static function factory( IContextSource $context ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 
@@ -102,7 +102,7 @@ class ShowSearchHitHandler {
 		if ( $result instanceof ExtendedResult ) {
 			return;
 		}
-		$self = self::newFromGlobalState( $searchPage->getContext() );
+		$self = self::factory( $searchPage->getContext() );
 		$self->showPlainSearchHit( $searchPage, $result, $terms, $link, $redirect, $section, $extract,
 				$score, $size, $date, $related, $html );
 	}
@@ -245,7 +245,7 @@ class ShowSearchHitHandler {
 		if ( $result instanceof ExtendedResult ) {
 			return;
 		}
-		$self = self::newFromGlobalState( $specialSearch->getContext() );
+		$self = self::factory( $specialSearch->getContext() );
 		$self->showPlainSearchTitle( $title, $titleSnippet );
 	}
 

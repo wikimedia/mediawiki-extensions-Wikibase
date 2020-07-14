@@ -62,7 +62,7 @@ class ListSubscribers extends ApiQueryBase {
 		$this->siteLookup = $siteLookup;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );

@@ -53,7 +53,7 @@ class LabelPrefetchHookHandlers {
 	/**
 	 * @return self|null
 	 */
-	private static function newFromGlobalState() {
+	private static function factory() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termBuffer = $wikibaseRepo->getTermBuffer();
 
@@ -63,7 +63,7 @@ class LabelPrefetchHookHandlers {
 
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
 
-		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::newFromGlobalState
+		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::factory
 		$context = RequestContext::getMain();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
@@ -89,7 +89,7 @@ class LabelPrefetchHookHandlers {
 		ChangesList $list,
 		$rows
 	) {
-		$handler = self::newFromGlobalState();
+		$handler = self::factory();
 
 		if ( !$handler ) {
 			return true;

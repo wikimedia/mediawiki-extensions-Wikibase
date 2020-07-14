@@ -45,7 +45,7 @@ class MovePageNotice implements SpecialMovepageAfterMoveHook {
 		$this->repoLinker = $repoLinker;
 	}
 
-	public static function newFromGlobalState() {
+	public static function factory() {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$siteLinkLookup = $wikibaseClient->getStore()->getSiteLinkLookup();
 		$repoLinker = $wikibaseClient->newRepoLinker();

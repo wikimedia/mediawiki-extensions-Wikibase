@@ -36,7 +36,7 @@ class ParserHookHandler implements
 		$this->entityAccessLimit = $entityAccessLimit;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 
 		return new self(

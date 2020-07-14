@@ -107,9 +107,9 @@ class HtmlPageLinkRendererEndHookHandler {
 	/**
 	 * @return self
 	 */
-	private static function newFromGlobalState() {
+	private static function factory() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::newFromGlobalState
+		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
 		$context = RequestContext::getMain();
 		$services = MediaWikiServices::getInstance();
 
@@ -158,7 +158,7 @@ class HtmlPageLinkRendererEndHookHandler {
 			return true;
 		}
 
-		$handler = self::newFromGlobalState();
+		$handler = self::factory();
 		return $handler->doHtmlPageLinkRendererEnd(
 			$linkRenderer,
 			Title::newFromLinkTarget( $target ),

@@ -40,7 +40,7 @@ class SpecialEntityPage extends SpecialWikibasePage {
 		$this->entityTitleLookup = $entityTitleLookup;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		return new self(
 			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
 			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()

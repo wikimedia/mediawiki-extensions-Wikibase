@@ -41,7 +41,7 @@ class MetaContentLanguages extends ApiQueryBase {
 		$this->expectKnownLanguageNames = $expectKnownLanguageNames;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 
 		// if CLDR is available, we expect to have some language name

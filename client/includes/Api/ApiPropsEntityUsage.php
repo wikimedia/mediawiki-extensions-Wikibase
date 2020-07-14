@@ -35,7 +35,7 @@ class ApiPropsEntityUsage extends ApiQueryBase {
 		$this->repoLinker = $repoLinker;
 	}
 
-	public static function newFromGlobalState( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		return new self(
 			$apiQuery,
 			$moduleName,

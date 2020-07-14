@@ -29,7 +29,7 @@ class FederatedPropertiesSpecialPageHookHandler implements SpecialPage_initListH
 		}
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		return new self( WikibaseSettings::getRepoSettings()->getSetting( 'federatedPropertiesEnabled' ) );
 	}
 }

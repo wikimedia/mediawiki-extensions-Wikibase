@@ -77,7 +77,7 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$this->entityLookup = $entityLookup;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->getSiteLookup(),

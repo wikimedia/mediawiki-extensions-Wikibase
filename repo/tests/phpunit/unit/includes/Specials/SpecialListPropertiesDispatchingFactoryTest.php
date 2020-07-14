@@ -23,7 +23,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', true );
 
-		$specialPage = SpecialListPropertiesDispatchingFactory::newFromGlobalState();
+		$specialPage = SpecialListPropertiesDispatchingFactory::factory();
 
 		$this->assertInstanceOf( SpecialListFederatedProperties::class, $specialPage );
 	}
@@ -32,7 +32,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', false );
 
-		$specialPage = SpecialListPropertiesDispatchingFactory::newFromGlobalState();
+		$specialPage = SpecialListPropertiesDispatchingFactory::factory();
 
 		$this->assertInstanceOf( SpecialListProperties::class, $specialPage );
 	}

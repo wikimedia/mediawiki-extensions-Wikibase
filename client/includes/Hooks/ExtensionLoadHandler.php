@@ -30,7 +30,7 @@ class ExtensionLoadHandler {
 		$this->extensionRegistry = $extensionRegistry;
 	}
 
-	public static function newFromGlobalState(): self {
+	public static function factory(): self {
 		return new self(
 			ExtensionRegistry::getInstance()
 		);
@@ -39,7 +39,7 @@ class ExtensionLoadHandler {
 	public static function onExtensionLoad() {
 		global $wgHooks, $wgWBClientSettings, $wgAPIModules;
 
-		$handler = self::newFromGlobalState();
+		$handler = self::factory();
 
 		$wgHooks = array_merge_recursive( $wgHooks, $handler->getHooks() );
 
