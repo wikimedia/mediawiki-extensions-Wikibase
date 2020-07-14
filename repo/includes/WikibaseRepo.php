@@ -180,6 +180,7 @@ use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -430,6 +431,16 @@ class WikibaseRepo {
 		}
 
 		$parser = new EntitySourceDefinitionsLegacyRepoSettingsParser();
+
+		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
+
+			return $configParser->initializeDefaults(
+				$parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
+				$entityTypeDefinitions
+			);
+		}
+
 		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
 	}
 
