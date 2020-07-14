@@ -207,6 +207,10 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::factory"
 		},
+		"LabelPrefetchHookHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory"
+		},
 		"LibHooks": {
 			"class": "\\Wikibase\\Lib\\LibHooks"
 		},

@@ -12,10 +12,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
+use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
 
 /**
- * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandlers
+ * @covers \Wikibase\Repo\Hooks\LabelPrefetchHookHandler
  *
  * @group Wikibase
  * @group Database
@@ -25,7 +25,7 @@ use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
+class LabelPrefetchHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @param Title[] $titles
@@ -56,7 +56,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
 	 *
-	 * @return LabelPrefetchHookHandlers
+	 * @return LabelPrefetchHookHandler
 	 */
 	private function getLabelPrefetchHookHandlers( $prefetchTerms, array $termTypes, array $languageCodes ) {
 		$termBuffer = $this->createMock( TermBuffer::class );
@@ -71,7 +71,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 
 		$titleFactory = new TitleFactory();
 
-		return new LabelPrefetchHookHandlers(
+		return new LabelPrefetchHookHandler(
 			$termBuffer,
 			$idLookup,
 			$titleFactory,
@@ -130,7 +130,7 @@ class LabelPrefetchHookHandlersTest extends \PHPUnit\Framework\TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$linkBeginHookHandler->doChangesListInitRows(
+		$linkBeginHookHandler->onChangesListInitRows(
 			$changesList,
 			$rows
 		);
