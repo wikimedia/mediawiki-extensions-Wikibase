@@ -961,6 +961,33 @@ return call_user_func( function() {
 			],
 		],
 
+		'wikibase.api.RepoApi' => $wikibaseApiPaths + [
+			'scripts' => [
+				'namespace.js',
+				'RepoApi.js',
+				'getLocationAgnosticMwApi.js',
+				'RepoApiError.js',
+			],
+			'dependencies' => [
+				'mediawiki.api',
+				'mediawiki.ForeignApi',
+			],
+			'messages' => [
+				'wikibase-error-unexpected',
+				'wikibase-error-unknown',
+				'wikibase-error-save-generic',
+				'wikibase-error-remove-generic',
+				'wikibase-error-save-timeout',
+				'wikibase-error-remove-timeout',
+				'wikibase-error-ui-no-external-page',
+				'wikibase-error-ui-edit-conflict',
+			],
+			'targets' => [
+				'desktop',
+				'mobile'
+			]
+		],
+
 		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
 			'scripts' => [
 				'namespace.js',
