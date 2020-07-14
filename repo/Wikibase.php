@@ -79,7 +79,6 @@ call_user_func( function() {
 		$wgHooks,
 		$wgMessagesDirs,
 		$wgResourceModules,
-		$wgSpecialPages,
 		$wgWBRepoSettings;
 
 	// i18n messages, kept for backward compatibility (T257442)
