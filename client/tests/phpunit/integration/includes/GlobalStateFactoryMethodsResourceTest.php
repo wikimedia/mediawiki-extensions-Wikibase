@@ -10,7 +10,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
-use Traversable;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
 use Wikibase\Client\Hooks\EditActionHookHandler;
@@ -62,7 +61,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function provideHookHandlerNames(): Traversable {
+	public function provideHookHandlerNames(): iterable {
 		foreach ( $this->getExtensionJson()['HookHandlers'] as $hookHandlerName => $specification ) {
 			yield [ $hookHandlerName ];
 		}
@@ -79,7 +78,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function provideApiModuleListsAndNames(): Traversable {
+	public function provideApiModuleListsAndNames(): iterable {
 		foreach ( [ 'APIListModules', 'APIMetaModules', 'APIPropModules' ] as $moduleList ) {
 			foreach ( $this->getExtensionJson()[$moduleList] as $moduleName => $specification ) {
 				yield [ $moduleList, $moduleName ];
@@ -97,7 +96,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$this->assertTrue( true );
 	}
 
-	public function provideSpecialPageNames(): Traversable {
+	public function provideSpecialPageNames(): iterable {
 		foreach ( $this->getExtensionJson()['SpecialPages'] as $specialPageName => $specification ) {
 			yield [ $specialPageName ];
 		}
