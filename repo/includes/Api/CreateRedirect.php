@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -12,6 +14,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\Interactors\RedirectCreationException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating entity redirects.
@@ -53,7 +56,7 @@ class CreateRedirect extends ApiBase {
 	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		EntityIdParser $idParser,
 		ApiErrorReporter $errorReporter,
 		ItemRedirectCreationInteractor $interactor,
@@ -67,10 +70,23 @@ class CreateRedirect extends ApiBase {
 		$this->permissionManager = $permissionManager;
 	}
 
+	public static function factory( ApiMain $apiMain, string $moduleName, PermissionManager $permissionManager ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
+		return new self(
+			$apiMain,
+			$moduleName,
+			$wikibaseRepo->getEntityIdParser(),
+			$apiHelperFactory->getErrorReporter( $apiMain ),
+			$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
+			$permissionManager
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$bot = $params['bot'] &&
 			$this->permissionManager->userHasRight( $this->getUser(), 'bot' );
@@ -95,7 +111,7 @@ class CreateRedirect extends ApiBase {
 	 *
 	 * @throws RedirectCreationException
 	 */
-	private function createRedirect( EntityId $fromId, EntityId $toId, $bot, ApiResult $result ) {
+	private function createRedirect( EntityId $fromId, EntityId $toId, bool $bot, ApiResult $result ): void {
 		$this->interactor->createRedirect( $fromId, $toId, $bot );
 
 		$result->addValue( null, 'success', 1 );
@@ -107,7 +123,7 @@ class CreateRedirect extends ApiBase {
 	 *
 	 * @throws ApiUsageException always
 	 */
-	private function handleRedirectCreationException( RedirectCreationException $ex ) {
+	private function handleRedirectCreationException( RedirectCreationException $ex ): void {
 		$cause = $ex->getPrevious();
 
 		if ( $cause ) {
@@ -120,28 +136,28 @@ class CreateRedirect extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	public function mustBePosted() {
+	public function mustBePosted(): bool {
 		return true;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return [
 			'from' => [
 				self::PARAM_TYPE => 'string',
@@ -165,7 +181,7 @@ class CreateRedirect extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbcreateredirect&from=Q11&to=Q12'
 				=> 'apihelp-wbcreateredirect-example-1',

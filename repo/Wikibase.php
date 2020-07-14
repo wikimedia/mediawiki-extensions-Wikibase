@@ -31,10 +31,7 @@
  * @license GPL-2.0-or-later
  */
 
-use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Api\CreateClaim;
-use Wikibase\Repo\Api\CreateRedirect;
-use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
@@ -313,39 +310,6 @@ call_user_func( function() {
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
 				}
-			);
-		}
-	];
-	$wgAPIModules['wbmergeitems'] = [
-		'class' => MergeItems::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
-			return new MergeItems(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->newItemMergeInteractor( $mainModule->getContext() ),
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				}
-			);
-		}
-	];
-	$wgAPIModules['wbcreateredirect'] = [
-		'class' => CreateRedirect::class,
-		'factory' => function( ApiMain $apiMain, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
-			return new CreateRedirect(
-				$apiMain,
-				$moduleName,
-				$wikibaseRepo->getEntityIdParser(),
-				$apiHelperFactory->getErrorReporter( $apiMain ),
-				$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
-				MediaWikiServices::getInstance()->getPermissionManager()
 			);
 		}
 	];

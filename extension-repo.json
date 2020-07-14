@@ -16,6 +16,13 @@
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
 			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory"
 		},
+		"wbcreateredirect": {
+			"class": "\\Wikibase\\Repo\\Api\\CreateRedirect",
+			"factory": "\\Wikibase\\Repo\\Api\\CreateRedirect::factory",
+			"services": [
+				"PermissionManager"
+			]
+		},
 		"wbformatentities": {
 			"class": "\\Wikibase\\Repo\\Api\\FormatEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
@@ -38,6 +45,10 @@
 		"wblinktitles": {
 			"class": "\\Wikibase\\Repo\\Api\\LinkTitles",
 			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory"
+		},
+		"wbmergeitems": {
+			"class": "\\Wikibase\\Repo\\Api\\MergeItems",
+			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory"
 		},
 		"wbparsevalue": {
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
