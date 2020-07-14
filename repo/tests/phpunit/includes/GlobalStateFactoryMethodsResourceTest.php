@@ -4,16 +4,13 @@ namespace Wikibase\Repo\Tests;
 
 use ApiMain;
 use ApiQuery;
-use ApiResult;
-use DerivativeContext;
-use IContextSource;
-use LanguageQqx;
+use ApiTestContext;
+use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
 use Traversable;
-use WebRequest;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
@@ -196,36 +193,14 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	private function mockApiMain(): ApiMain {
-		$contextSource = $this->createMock( IContextSource::class );
-		$contextSource->method( 'getRequest' )
-			->willReturn( $this->createMock( WebRequest::class ) );
-		$contextSource->method( 'getLanguage' )
-			->willReturn( new LanguageQqx() );
-		$contextSource = new DerivativeContext( $contextSource );
-		$apiMain = $this->createMock( ApiMain::class );
-		$apiMain->method( 'getContext' )
-			->willReturn( $contextSource );
-		$apiMain->method( 'getRequest' )
-			->willReturn( $contextSource->getRequest() );
-		$apiMain->method( 'getLanguage' )
-			->willReturn( $contextSource->getLanguage() );
-		$apiMain->method( 'getResult' )
-			->willReturn( new ApiResult( false ) );
-		return $apiMain;
+		$request = new FauxRequest();
+		$ctx = new ApiTestContext();
+		$ctx = $ctx->newTestContext( $request );
+		return new ApiMain( $ctx );
 	}
 
 	private function mockApiQuery(): ApiQuery {
-		$apiMain = $this->mockApiMain();
-		$apiQuery = $this->createMock( ApiQuery::class );
-		$apiQuery->method( 'getMain' )
-			->willReturn( $apiMain );
-		$apiQuery->method( 'getContext' )
-			->willReturn( $apiMain->getContext() );
-		$apiQuery->method( 'getRequest' )
-			->willReturn( $apiMain->getRequest() );
-		$apiQuery->method( 'getLanguage' )
-			->willReturn( new LanguageQqx() );
-		return $apiQuery;
+		return new ApiQuery( $this->mockApiMain(), 'query' );
 	}
 
 }
