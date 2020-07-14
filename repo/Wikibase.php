@@ -34,25 +34,16 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
-use Wikibase\Repo\Api\EditEntity;
-use Wikibase\Repo\Api\EditSummaryHelper;
 use Wikibase\Repo\Api\LinkTitles;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
-use Wikibase\Repo\Api\SetAliases;
 use Wikibase\Repo\Api\SetClaim;
 use Wikibase\Repo\Api\SetClaimValue;
-use Wikibase\Repo\Api\SetDescription;
-use Wikibase\Repo\Api\SetLabel;
 use Wikibase\Repo\Api\SetQualifier;
 use Wikibase\Repo\Api\SetReference;
-use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\Api\StatementModificationHelper;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
-use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
-use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\SiteLinkTargetProvider;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
@@ -84,65 +75,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
 
 	// API module registration
-	$wgAPIModules['wbsetlabel'] = [
-		'class' => SetLabel::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			return new SetLabel(
-				$mainModule,
-				$moduleName,
-				WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-					->getFingerprintChangeOpFactory()
-			);
-		}
-	];
-	$wgAPIModules['wbsetdescription'] = [
-		'class' => SetDescription::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			return new SetDescription(
-				$mainModule,
-				$moduleName,
-				WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-					->getFingerprintChangeOpFactory()
-			);
-		}
-	];
-	$wgAPIModules['wbsetaliases'] = [
-		'class' => SetAliases::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			return new SetAliases(
-				$mainModule,
-				$moduleName,
-				WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-					->getFingerprintChangeOpFactory()
-			);
-		}
-	];
-	$wgAPIModules['wbeditentity'] = [
-		'class' => EditEntity::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-			return new EditEntity(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getTermsLanguages(),
-				$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getEntityFactory(),
-				$wikibaseRepo->getExternalFormatStatementDeserializer(),
-				$wikibaseRepo->getDataTypeDefinitions()->getTypeIds(),
-				$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
-				$wikibaseRepo->getEntityChangeOpProvider(),
-				new EditSummaryHelper(
-					new ChangedLanguagesCollector(),
-					new ChangedLanguagesCounter(),
-					new NonLanguageBoundChangesCounter()
-				)
-			);
-		}
-	];
 	$wgAPIModules['wblinktitles'] = [
 		'class' => LinkTitles::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
@@ -168,20 +100,6 @@ call_user_func( function() {
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
 				}
-			);
-		}
-	];
-	$wgAPIModules['wbsetsitelink'] = [
-		'class' => SetSiteLink::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-			return new SetSiteLink(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getChangeOpFactoryProvider()
-					->getSiteLinkChangeOpFactory(),
-				$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator()
 			);
 		}
 	];

@@ -12,6 +12,10 @@
 	},
 	"APIModules": {
 		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges",
+		"wbeditentity": {
+			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
+			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory"
+		},
 		"wbformatentities": {
 			"class": "\\Wikibase\\Repo\\Api\\FormatEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
@@ -38,6 +42,22 @@
 		"wbsearchentities": {
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory"
+		},
+		"wbsetaliases": {
+			"class": "\\Wikibase\\Repo\\Api\\SetAliases",
+			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory"
+		},
+		"wbsetdescription": {
+			"class": "\\Wikibase\\Repo\\Api\\SetDescription",
+			"factory": "\\Wikibase\\Repo\\Api\\SetDescription::factory"
+		},
+		"wbsetlabel": {
+			"class": "\\Wikibase\\Repo\\Api\\SetLabel",
+			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory"
+		},
+		"wbsetsitelink": {
+			"class": "\\Wikibase\\Repo\\Api\\SetSiteLink",
+			"factory": "\\Wikibase\\Repo\\Api\\SetSiteLink::factory"
 		}
 	},
 	"APIListModules": {

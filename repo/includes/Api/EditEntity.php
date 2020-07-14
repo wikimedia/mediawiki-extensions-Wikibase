@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
@@ -21,14 +23,19 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
+use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
+use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
+use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\Store\Store;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Derived class for API modules modifying a single entity identified by id xor a combination of
@@ -117,7 +124,7 @@ class EditEntity extends ModifyEntity {
 	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $revisionLookup,
 		EntityIdParser $idParser,
@@ -146,12 +153,36 @@ class EditEntity extends ModifyEntity {
 		$this->editSummaryHelper = $editSummaryHelper;
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+		return new self(
+			$mainModule,
+			$moduleName,
+			$wikibaseRepo->getTermsLanguages(),
+			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getEntityFactory(),
+			$wikibaseRepo->getExternalFormatStatementDeserializer(),
+			$wikibaseRepo->getDataTypeDefinitions()->getTypeIds(),
+			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
+			$wikibaseRepo->getEntityChangeOpProvider(),
+			new EditSummaryHelper(
+				new ChangedLanguagesCollector(),
+				new ChangedLanguagesCounter(),
+				new NonLanguageBoundChangesCounter()
+			)
+		);
+	}
+
 	/**
 	 * @see ApiBase::needsToken
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
@@ -160,7 +191,7 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return bool Always true.
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -169,12 +200,12 @@ class EditEntity extends ModifyEntity {
 	 *
 	 * @return bool
 	 */
-	private function entityExists( EntityId $entityId ) {
+	private function entityExists( EntityId $entityId ): bool {
 		$title = $this->getTitleLookup()->getTitleForId( $entityId );
 		return ( $title !== null && $title->exists() );
 	}
 
-	protected function prepareParameters( array $params ) {
+	protected function prepareParameters( array $params ): array {
 		$this->validateDataParameter( $params );
 		$params[self::PARAM_DATA] = json_decode( $params[self::PARAM_DATA], true );
 		return parent::prepareParameters( $params );
@@ -183,8 +214,8 @@ class EditEntity extends ModifyEntity {
 	protected function validateEntitySpecificParameters(
 		array $preparedParameters,
 		EntityDocument $entity,
-		$baseRevId
-	) {
+		int $baseRevId
+	): void {
 		$data = $preparedParameters[self::PARAM_DATA];
 		$this->validateDataProperties( $data, $entity, $baseRevId );
 
@@ -227,16 +258,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param ChangeOp $changeOp
-	 * @param array $preparedParameters
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument $entity, ChangeOp $changeOp, array $preparedParameters ): Summary {
 		$data = $preparedParameters[self::PARAM_DATA];
 
 		$exists = $this->entityExists( $entity->getId() );
@@ -280,17 +302,11 @@ class EditEntity extends ModifyEntity {
 		return $this->getSummary( $preparedParameters, $entity, $changeOpResult );
 	}
 
-	/**
-	 * @param array $preparedParameters
-	 * @param EntityDocument $entity
-	 * @param ChangeOpResult $changeOpResult
-	 * @return Summary
-	 */
 	private function getSummary(
 		array $preparedParameters,
 		EntityDocument $entity,
 		ChangeOpResult $changeOpResult
-	) {
+	): Summary {
 		$summary = $this->createSummary( $preparedParameters );
 
 		if ( $this->isUpdatingExistingEntity( $preparedParameters ) ) {
@@ -306,7 +322,7 @@ class EditEntity extends ModifyEntity {
 		return $summary;
 	}
 
-	private function isUpdatingExistingEntity( array $preparedParameters ) {
+	private function isUpdatingExistingEntity( array $preparedParameters ): bool {
 		$isTargetingEntity = isset( $preparedParameters['id'] );
 		$isTargetingPage = isset( $preparedParameters['site'] ) && isset( $preparedParameters['title'] );
 
@@ -320,7 +336,7 @@ class EditEntity extends ModifyEntity {
 	 * @throws ApiUsageException
 	 * @return ChangeOp
 	 */
-	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {
 		$data = $preparedParameters[self::PARAM_DATA];
 
 		try {
@@ -330,7 +346,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	private function buildResult( EntityDocument $entity ) {
+	private function buildResult( EntityDocument $entity ): void {
 		$builder = $this->getResultBuilder();
 
 		if ( $entity instanceof LabelsProvider ) {
@@ -354,10 +370,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $params
-	 */
-	private function validateDataParameter( array $params ) {
+	private function validateDataParameter( array $params ): void {
 		if ( !isset( $params[self::PARAM_DATA] ) ) {
 			$this->errorReporter->dieError( 'No data to operate upon', 'no-data' );
 		}
@@ -368,7 +381,7 @@ class EditEntity extends ModifyEntity {
 	 * @param EntityDocument $entity
 	 * @param int $revisionId
 	 */
-	private function validateDataProperties( $data, EntityDocument $entity, $revisionId = 0 ) {
+	private function validateDataProperties( $data, EntityDocument $entity, int $revisionId ): void {
 		$entityId = $entity->getId();
 		$title = $entityId === null ? null : $this->getTitleLookup()->getTitleForId( $entityId );
 
@@ -384,7 +397,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @param mixed $data
 	 */
-	private function checkValidJson( $data ) {
+	private function checkValidJson( $data ): void {
 		if ( $data === null ) {
 			$this->errorReporter->dieError( 'Invalid json: The supplied JSON structure could not be parsed or '
 				. 'recreated as a valid structure', 'invalid-json' );
@@ -406,11 +419,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param Title|null $title
-	 */
-	private function checkPageIdProp( array $data, Title $title = null ) {
+	private function checkPageIdProp( array $data, ?Title $title ): void {
 		if ( isset( $data['pageid'] )
 			&& ( $title === null || $title->getArticleID() !== $data['pageid'] )
 		) {
@@ -421,11 +430,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param Title|null $title
-	 */
-	private function checkNamespaceProp( array $data, Title $title = null ) {
+	private function checkNamespaceProp( array $data, ?Title $title ): void {
 		// not completely convinced that we can use title to get the namespace in this case
 		if ( isset( $data['ns'] )
 			&& ( $title === null || $title->getNamespace() !== $data['ns'] )
@@ -437,11 +442,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param Title|null $title
-	 */
-	private function checkTitleProp( array $data, Title $title = null ) {
+	private function checkTitleProp( array $data, ?Title $title ): void {
 		if ( isset( $data['title'] )
 			&& ( $title === null || $title->getPrefixedText() !== $data['title'] )
 		) {
@@ -452,13 +453,9 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param int|null $revisionId
-	 */
-	private function checkRevisionProp( array $data, $revisionId ) {
+	private function checkRevisionProp( array $data, int $revisionId ): void {
 		if ( isset( $data['lastrevid'] )
-			&& ( !is_int( $revisionId ) || $revisionId !== $data['lastrevid'] )
+			&& ( $revisionId !== $data['lastrevid'] )
 		) {
 			$this->errorReporter->dieError(
 				'Illegal field used in call: "lastrevid", must either be correct or not given',
@@ -467,11 +464,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param EntityId|null $entityId
-	 */
-	private function checkEntityId( array $data, EntityId $entityId = null ) {
+	private function checkEntityId( array $data, ?EntityId $entityId ): void {
 		if ( isset( $data['id'] ) ) {
 			if ( !$entityId ) {
 				$this->errorReporter->dieError(
@@ -490,11 +483,7 @@ class EditEntity extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @param array $data
-	 * @param EntityDocument $entity
-	 */
-	private function checkEntityType( array $data, EntityDocument $entity ) {
+	private function checkEntityType( array $data, EntityDocument $entity ): void {
 		if ( isset( $data['type'] )
 			&& $entity->getType() !== $data['type']
 		) {
@@ -508,7 +497,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			parent::getAllowedParams(),
 			[
@@ -527,7 +516,7 @@ class EditEntity extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			// Creating new entities
 			'action=wbeditentity&new=item&data={}'
@@ -582,7 +571,7 @@ class EditEntity extends ModifyEntity {
 	 * @param mixed $value
 	 * @param string $message
 	 */
-	private function assertArray( $value, $message ) {
+	private function assertArray( $value, string $message ): void {
 		$this->assertType( 'array', $value, $message );
 	}
 
@@ -590,7 +579,7 @@ class EditEntity extends ModifyEntity {
 	 * @param mixed $value
 	 * @param string $message
 	 */
-	private function assertString( $value, $message ) {
+	private function assertString( $value, string $message ): void {
 		$this->assertType( 'string', $value, $message );
 	}
 
@@ -599,13 +588,13 @@ class EditEntity extends ModifyEntity {
 	 * @param mixed $value
 	 * @param string $message
 	 */
-	private function assertType( $type, $value, $message ) {
+	private function assertType( string $type, $value, string $message ): void {
 		if ( gettype( $value ) !== $type ) {
 			$this->errorReporter->dieError( $message, 'not-recognized-' . $type );
 		}
 	}
 
-	private function dieIfNotClearable( EntityDocument $entity ) {
+	private function dieIfNotClearable( EntityDocument $entity ): void {
 		if ( !( $entity instanceof ClearableEntity ) ) {
 			$this->errorReporter->dieError(
 				'Cannot clear an entity of type ' . $entity->getType(),

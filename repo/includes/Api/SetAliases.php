@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
@@ -26,18 +28,22 @@ class SetAliases extends ModifyEntity {
 	 */
 	private $termChangeOpFactory;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param FingerprintChangeOpFactory $termChangeOpFactory
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory
 	) {
 		parent::__construct( $mainModule, $moduleName );
 		$this->termChangeOpFactory = $termChangeOpFactory;
+	}
+
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		return new self(
+			$mainModule,
+			$moduleName,
+			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+				->getFingerprintChangeOpFactory()
+		);
 	}
 
 	/**
@@ -45,7 +51,7 @@ class SetAliases extends ModifyEntity {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
@@ -54,7 +60,7 @@ class SetAliases extends ModifyEntity {
 	 *
 	 * @return bool Always true.
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -65,7 +71,7 @@ class SetAliases extends ModifyEntity {
 	 *
 	 * @throws ApiUsageException
 	 */
-	protected function validateParameters( array $params ) {
+	protected function validateParameters( array $params ): void {
 		parent::validateParameters( $params );
 
 		if ( !( ( !empty( $params['add'] ) || !empty( $params['remove'] ) )
@@ -78,7 +84,7 @@ class SetAliases extends ModifyEntity {
 		}
 	}
 
-	private function adjustSummary( Summary &$summary, array $params, AliasesProvider $entity ) {
+	private function adjustSummary( Summary $summary, array $params, AliasesProvider $entity ): void {
 		if ( !empty( $params['add'] ) && !empty( $params['remove'] ) ) {
 			$language = $params['language'];
 
@@ -95,16 +101,7 @@ class SetAliases extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param ChangeOp $changeOp
-	 * @param array $preparedParameters
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument $entity, ChangeOp $changeOp, array $preparedParameters ): Summary {
 		if ( !( $entity instanceof AliasesProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain aliases', 'not-supported' );
 		}
@@ -141,7 +138,7 @@ class SetAliases extends ModifyEntity {
 	 *
 	 * @return string[]
 	 */
-	private function normalizeAliases( array $aliases ) {
+	private function normalizeAliases( array $aliases ): array {
 		$stringNormalizer = $this->stringNormalizer;
 
 		$aliases = array_map(
@@ -161,15 +158,7 @@ class SetAliases extends ModifyEntity {
 		return $aliases;
 	}
 
-	/**
-	 * @see ModifyEntity::getChangeOp
-	 *
-	 * @param array $preparedParameters
-	 * @param EntityDocument $entity
-	 *
-	 * @return ChangeOp
-	 */
-	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {
 		$changeOps = [];
 		$language = $preparedParameters['language'];
 
@@ -207,7 +196,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			parent::getAllowedParams(),
 			[
@@ -234,7 +223,7 @@ class SetAliases extends ModifyEntity {
 		);
 	}
 
-	protected function getEntityTypesWithAliases() {
+	protected function getEntityTypesWithAliases(): array {
 		// TODO inject me
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$supportedEntityTypes = [];
@@ -250,7 +239,7 @@ class SetAliases extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetaliases&language=en&id=Q1&set=Foo|Bar'
 				=> 'apihelp-wbsetaliases-example-1',
