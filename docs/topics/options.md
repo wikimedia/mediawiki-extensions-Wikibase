@@ -132,9 +132,15 @@ An associative array mapping entity source names to settings relevant to the par
 See the [entitysources topic] for more details about the value of this setting.
 
 #### localEntitySourceName
-Name of the entity source name of the "local" repo, i.e. the repo of / on the local wiki.
-
+Name of the entity source name of the "local" repo.
+"local" is in quotes here, as "local" does not necessarily mean the local wiki.
 Should be the name of the entity source defined in [entitySources] setting.
+
+This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
+In these complex situations:
+
+- Repo: This should likely ALWAYS be the name of the entity source of the LOCAL repository (same site)
+- Client: This should be the name of the entity source of the site containing Item definitions (data is used from here, including sitelinks)
 
 DEFAULT: ```local```
 
