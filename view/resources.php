@@ -45,6 +45,11 @@ return call_user_func( function() {
 		'remoteExtPath' => 'Wikibase/view/lib/wikibase-termbox',
 	];
 
+	$wikibaseApiPaths = [
+		'localBasePath' => __DIR__ . '/../lib/resources/wikibase-api/src',
+		'remoteExtPath' => 'Wikibase/lib/resources/wikibase-api/src',
+	];
+
 	$modules = [
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
@@ -954,6 +959,18 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase',
 			],
+		],
+
+		'wikibase.api.ValueCaller' => $wikibaseApiPaths + [
+			'scripts' => [
+				'namespace.js',
+				'ParseValueCaller.js',
+				'FormatValueCaller.js',
+			],
+			'dependencies' => [
+				'wikibase.api.RepoApi',
+				'dataValues.DataValue',
+			]
 		],
 	];
 
