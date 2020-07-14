@@ -30,18 +30,9 @@ return call_user_func( function() {
 				);
 			},
 		],
-
 		'mw.config.values.wbRepo' => $moduleTemplate + [
 			'class' => RepoAccessModule::class,
 		],
-
-		'wikibase' => $moduleTemplate + [
-			'scripts' => [
-				'wikibase.js',
-			],
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 	];
 
 	return $modules;

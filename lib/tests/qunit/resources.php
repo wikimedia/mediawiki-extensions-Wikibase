@@ -21,15 +21,6 @@ return call_user_func( function() {
 				'wikibase.Site',
 			],
 		],
-
-		'wikibase.tests' => $moduleBase + [
-			'scripts' => [
-				'wikibase.tests.js',
-			],
-			'dependencies' => [
-				'wikibase',
-			],
-		],
 	];
 
 	return $modules;
