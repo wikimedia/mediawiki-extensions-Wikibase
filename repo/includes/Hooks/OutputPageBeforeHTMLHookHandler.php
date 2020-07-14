@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Hooks;
 
+use MediaWiki\Hook\OutputPageBeforeHTMLHook;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -36,7 +37,7 @@ use Wikibase\View\ToolbarEditSectionGenerator;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class OutputPageBeforeHTMLHookHandler {
+class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 	/**
 	 * @var TemplateFactory
@@ -122,7 +123,7 @@ class OutputPageBeforeHTMLHookHandler {
 	/**
 	 * @return self
 	 */
-	public static function factory() {
+	public static function factory(): self {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -159,15 +160,7 @@ class OutputPageBeforeHTMLHookHandler {
 	 * @param OutputPage $out
 	 * @param string &$html the HTML to mangle
 	 */
-	public static function onOutputPageBeforeHTML( OutputPage $out, &$html ) {
-		self::factory()->doOutputPageBeforeHTML( $out, $html );
-	}
-
-	/**
-	 * @param OutputPage $out
-	 * @param string &$html
-	 */
-	public function doOutputPageBeforeHTML( OutputPage $out, &$html ) {
+	public function onOutputPageBeforeHTML( $out, &$html ): void {
 		if ( !$out->isArticle() ) {
 			return;
 		}
