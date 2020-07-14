@@ -21,6 +21,14 @@ return [
 			'wikibase.tests',
 		]
 	],
+	'wikibase.tests' => $moduleBase + [
+		'scripts' => [
+			'wikibase/wikibase.tests.js',
+		],
+		'dependencies' => [
+			'wikibase',
+		],
+	],
 
 	'wikibase.view.tests' => $moduleBase + [
 		'scripts' => [

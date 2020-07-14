@@ -51,6 +51,13 @@ return call_user_func( function() {
 	];
 
 	$modules = [
+		'wikibase' => $moduleTemplate + [
+			'scripts' => [
+				'wikibase.js',
+			],
+			'targets' => [ 'desktop', 'mobile' ],
+		],
+
 		'jquery.wikibase.entityselector' => $moduleTemplate + [
 			'scripts' => [
 				'jquery/wikibase/jquery.wikibase.entityselector.js',
