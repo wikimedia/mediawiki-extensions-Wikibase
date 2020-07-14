@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -95,7 +97,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @see ApiBase::__construct
 	 */
-	public function __construct( ApiMain $mainModule, $moduleName, $modulePrefix = '' ) {
+	public function __construct( ApiMain $mainModule, string $moduleName, string $modulePrefix = '' ) {
 		parent::__construct( $mainModule, $moduleName, $modulePrefix );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -124,21 +126,15 @@ abstract class ModifyEntity extends ApiBase {
 		$this->badgeItems = $settings->getSetting( 'badgeItems' );
 	}
 
-	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ) {
+	public function setServices( SiteLinkTargetProvider $siteLinkTargetProvider ): void {
 		$this->siteLinkTargetProvider = $siteLinkTargetProvider;
 	}
 
-	/**
-	 * @return EntityTitleStoreLookup
-	 */
-	protected function getTitleLookup() {
+	protected function getTitleLookup(): EntityTitleStoreLookup {
 		return $this->titleLookup;
 	}
 
-	/**
-	 * @return ResultBuilder
-	 */
-	protected function getResultBuilder() {
+	protected function getResultBuilder(): ResultBuilder {
 		return $this->resultBuilder;
 	}
 
@@ -149,7 +145,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return Summary
 	 */
-	protected function createSummary( array $params ) {
+	protected function createSummary( array $params ): Summary {
 		$summary = new Summary( $this->getModuleName() );
 		$summary->setUserSummary( $params['summary'] );
 		return $summary;
@@ -158,17 +154,17 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * Actually modify the entity.
 	 *
-	 * @param EntityDocument &$entity
+	 * @param EntityDocument $entity
 	 * @param ChangeOp $changeOp
 	 * @param array $preparedParameters
 	 *
 	 * @return Summary|null a summary of the modification, or null to indicate failure.
 	 */
 	abstract protected function modifyEntity(
-		EntityDocument &$entity,
+		EntityDocument $entity,
 		ChangeOp $changeOp,
 		array $preparedParameters
-	);
+	): ?Summary;
 
 	/**
 	 * Applies the given ChangeOp to the given Entity.
@@ -180,7 +176,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return ChangeOpResult
 	 */
-	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ) {
+	protected function applyChangeOp( ChangeOp $changeOp, EntityDocument $entity, Summary $summary = null ): ChangeOpResult {
 		try {
 			// NOTE: Always validate modification against the current revision, if it exists!
 			//       Otherwise, we may miss e.g. a combination of language/label/description
@@ -232,15 +228,15 @@ abstract class ModifyEntity extends ApiBase {
 	 * @param array $params
 	 * @return array
 	 */
-	protected function prepareParameters( array $params ) {
+	protected function prepareParameters( array $params ): array {
 		return $params;
 	}
 
 	protected function validateEntitySpecificParameters(
 		array $preparedParameters,
 		EntityDocument $entity,
-		$baseRevId
-	) {
+		int $baseRevId
+	): void {
 	}
 
 	/**
@@ -248,7 +244,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @param array $params
 	 */
-	protected function validateParameters( array $params ) {
+	protected function validateParameters( array $params ): void {
 		$entityReferenceBySiteLinkGiven = isset( $params['site'] ) && isset( $params['title'] );
 		$entityReferenceBySiteLinkPartial = ( isset( $params['site'] ) xor isset( $params['title'] ) );
 		$entityIdGiven = isset( $params['id'] );
@@ -282,7 +278,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$user = $this->getUser();
 
@@ -338,7 +334,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return ChangeOp
 	 */
-	abstract protected function getChangeOp( array $preparedParameters, EntityDocument $entity );
+	abstract protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp;
 
 	/**
 	 * Check the rights for the user accessing the module.
@@ -349,7 +345,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return Status the check's result
 	 */
-	private function checkPermissions( EntityDocument $entity, User $user, ChangeOp $changeOp ) {
+	private function checkPermissions( EntityDocument $entity, User $user, ChangeOp $changeOp ): Status {
 		$status = Status::newGood();
 
 		foreach ( $changeOp->getActions() as $perm ) {
@@ -360,7 +356,7 @@ abstract class ModifyEntity extends ApiBase {
 		return $status;
 	}
 
-	private function addToOutput( EntityDocument $entity, Status $status, $oldRevId = null ) {
+	private function addToOutput( EntityDocument $entity, Status $status, int $oldRevId ): void {
 		$this->getResultBuilder()->addBasicEntityInformation( $entity->getId(), 'entity' );
 		$this->getResultBuilder()->addRevisionIdFromStatusToResult( $status, 'entity', $oldRevId );
 
@@ -379,7 +375,7 @@ abstract class ModifyEntity extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			parent::getAllowedParams(),
 			$this->getAllowedParamsForId(),
@@ -394,7 +390,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return array[]
 	 */
-	private function getAllowedParamsForId() {
+	private function getAllowedParamsForId(): array {
 		return [
 			'id' => [
 				self::PARAM_TYPE => 'string',
@@ -411,7 +407,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return array[]
 	 */
-	private function getAllowedParamsForSiteLink() {
+	private function getAllowedParamsForSiteLink(): array {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		return [
@@ -429,7 +425,7 @@ abstract class ModifyEntity extends ApiBase {
 	 *
 	 * @return array
 	 */
-	private function getAllowedParamsForEntity() {
+	private function getAllowedParamsForEntity(): array {
 		return [
 			'baserevid' => [
 				self::PARAM_TYPE => 'integer',

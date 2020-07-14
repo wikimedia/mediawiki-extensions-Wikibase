@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
@@ -10,11 +12,11 @@ use Wikibase\DataModel\SiteLinkList;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
-use Wikibase\Repo\ChangeOp\ChangeOpSiteLink;
 use Wikibase\Repo\ChangeOp\ChangeOpValidationException;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\Deserialization\SiteLinkBadgeChangeOpSerializationValidator;
 use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module to associate a page on a site with a Wikibase entity or remove an already made such association.
@@ -34,15 +36,9 @@ class SetSiteLink extends ModifyEntity {
 	 */
 	private $badgeSerializationValidator;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
-	 * @param SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
 	) {
@@ -52,12 +48,24 @@ class SetSiteLink extends ModifyEntity {
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			$wikibaseRepo->getChangeOpFactoryProvider()
+				->getSiteLinkChangeOpFactory(),
+			$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator()
+		);
+	}
+
 	/**
 	 * @see ApiBase::isWriteMode()
 	 *
 	 * @return bool Always true.
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -66,7 +74,7 @@ class SetSiteLink extends ModifyEntity {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
@@ -77,7 +85,7 @@ class SetSiteLink extends ModifyEntity {
 	 *
 	 * @return bool
 	 */
-	private function shouldRemove( array $params ) {
+	private function shouldRemove( array $params ): bool {
 		if ( $params['linktitle'] === '' || ( !isset( $params['linktitle'] ) && !isset( $params['badges'] ) ) ) {
 			return true;
 		} else {
@@ -85,16 +93,7 @@ class SetSiteLink extends ModifyEntity {
 		}
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param ChangeOp $changeOp
-	 * @param array $preparedParameters
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+	protected function modifyEntity( EntityDocument $entity, ChangeOp $changeOp, array $preparedParameters ): Summary {
 		if ( !( $entity instanceof Item ) ) {
 			$this->errorReporter->dieError( "The given entity is not an item", "not-item" );
 		}
@@ -134,13 +133,7 @@ class SetSiteLink extends ModifyEntity {
 		return $summary;
 	}
 
-	/**
-	 * @param array $preparedParameters
-	 * @param EntityDocument $entity
-	 *
-	 * @return ChangeOpSiteLink
-	 */
-	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {
 		if ( $this->shouldRemove( $preparedParameters ) ) {
 			$linksite = $this->stringNormalizer->trimToNFC( $preparedParameters['linksite'] );
 			return $this->siteLinkChangeOpFactory->newRemoveSiteLinkOp( $linksite );
@@ -177,7 +170,7 @@ class SetSiteLink extends ModifyEntity {
 		}
 	}
 
-	private function parseSiteLinkBadges( array $badges ) {
+	private function parseSiteLinkBadges( array $badges ): array {
 		try {
 			$this->badgeSerializationValidator->validateBadgeSerialization( $badges );
 		} catch ( ChangeOpDeserializationException $exception ) {
@@ -187,7 +180,7 @@ class SetSiteLink extends ModifyEntity {
 		return $this->getBadgeItemIds( $badges );
 	}
 
-	private function getBadgeItemIds( array $badges ) {
+	private function getBadgeItemIds( array $badges ): array {
 		return array_map( function( $badge ) {
 			return new ItemId( $badge );
 		}, $badges );
@@ -196,7 +189,7 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		$sites = $this->siteLinkTargetProvider->getSiteList( $this->siteLinkGroups );
 
 		return array_merge(
@@ -220,7 +213,7 @@ class SetSiteLink extends ModifyEntity {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetsitelink&id=Q42&linksite=enwiki&linktitle=Hydrogen'
 			=> 'apihelp-wbsetsitelink-example-1',

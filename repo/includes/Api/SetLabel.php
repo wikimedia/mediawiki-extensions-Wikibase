@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiMain;
@@ -7,7 +9,6 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOp;
-use Wikibase\Repo\ChangeOp\ChangeOpLabel;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -28,14 +29,9 @@ class SetLabel extends ModifyTerm {
 	 */
 	private $termChangeOpFactory;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param FingerprintChangeOpFactory $termChangeOpFactory
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory
 	) {
 		parent::__construct( $mainModule, $moduleName );
@@ -43,16 +39,16 @@ class SetLabel extends ModifyTerm {
 		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
-	/**
-	 * @see ModifyEntity::modifyEntity
-	 *
-	 * @param EntityDocument &$entity
-	 * @param ChangeOp $changeOp
-	 * @param array $preparedParameters
-	 *
-	 * @return Summary
-	 */
-	protected function modifyEntity( EntityDocument &$entity, ChangeOp $changeOp, array $preparedParameters ) {
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		return new self(
+			$mainModule,
+			$moduleName,
+			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+				->getFingerprintChangeOpFactory()
+		);
+	}
+
+	protected function modifyEntity( EntityDocument $entity, ChangeOp $changeOp, array $preparedParameters ): Summary {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			$this->errorReporter->dieError( 'The given entity cannot contain labels', 'not-supported' );
 		}
@@ -75,13 +71,7 @@ class SetLabel extends ModifyTerm {
 		return $summary;
 	}
 
-	/**
-	 * @param array $preparedParameters
-	 * @param EntityDocument $entity
-	 *
-	 * @return ChangeOpLabel
-	 */
-	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ) {
+	protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp {
 		$label = "";
 		$language = $preparedParameters['language'];
 
@@ -103,7 +93,7 @@ class SetLabel extends ModifyTerm {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
@@ -112,14 +102,14 @@ class SetLabel extends ModifyTerm {
 	 *
 	 * @return bool Always true.
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetlabel&id=Q42&language=en&value=Wikimedia&format=jsonfm'
 				=> 'apihelp-wbsetlabel-example-1',
@@ -131,7 +121,7 @@ class SetLabel extends ModifyTerm {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			parent::getAllowedParams(),
 			[
@@ -142,7 +132,7 @@ class SetLabel extends ModifyTerm {
 		);
 	}
 
-	protected function getEntityTypesWithLabels() {
+	protected function getEntityTypesWithLabels(): array {
 		// TODO inject me
 		$entityFactory = WikibaseRepo::getDefaultInstance()->getEntityFactory();
 		$supportedEntityTypes = [];
