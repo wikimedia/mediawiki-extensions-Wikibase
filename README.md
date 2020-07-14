@@ -83,21 +83,4 @@ Some notable (not a comprehensive list) mentions are
 * the use of qunit to test this code; e.g. in `repo/tests/qunit`, available [via a special page](https://www.mediawiki.org/wiki/Manual:JavaScript_unit_testing)
 * [vue.js](https://vuejs.org/v2/guide/) as a frontend framework; e.g. in [data-bridge](./client/data-bridge), the [Lexeme](https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/extensions/WikibaseLexeme/) extension, and [termbox](https://gerrit.wikimedia.org/g/wikibase/termbox)
 
-##### Updating vue
-
-Wikibase [exposes vue as a ResourceLoader](./lib/resources/Resources.php) module so it can be shared between applications. As ResourceLoader in the production environment does not have access to files only acquired through a Javascript package manager (npm), we keep a copy of its source in our repository.
-
-To update that copy you can run the following command and commit the changes to git.
-
-```bash
-npm update vue
-{
-  printf '%s\n' '(function(){'
-  cat node_modules/vue/dist/vue.common.prod.js
-  printf '\n%s\n' '})();'
-} >| view/resources/vendor/vue2.common.prod.js
-git add -f view/resources/vendor/vue2.common.prod.js
-```
-
-(The surrounding IIFE is necessary to avoid Vue breaking the page in ResourceLoader’s debug mode, see [T229390](https://phabricator.wikimedia.org/T229390).)
 
