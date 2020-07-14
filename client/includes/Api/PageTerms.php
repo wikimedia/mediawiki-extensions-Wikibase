@@ -7,7 +7,6 @@ namespace Wikibase\Client\Api;
 use ApiQuery;
 use ApiQueryBase;
 use ApiResult;
-use ExtensionRegistry;
 use InvalidArgumentException;
 use Title;
 use Wikibase\Client\WikibaseClient;
@@ -16,8 +15,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermIndexEntry;
-use Wikibase\Lib\WikibaseSettings;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Provides wikibase terms (labels, descriptions, aliases, etc.) for local pages.
@@ -56,21 +53,9 @@ class PageTerms extends ApiQueryBase {
 	}
 
 	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
-		// FIXME: HACK: make pageterms work directly on entity pages on the repo.
-		// We should instead use an EntityIdLookup that combines the repo and the client
-		// implementation, see T115117.
-		// NOTE: when changing repo and/or client integration, remember to update the
-		// self-documentation of the API module in the "apihelp-query+pageterms-description"
-		// message and the PageTerms::getExamplesMessages() method.
-		if ( ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			$termBuffer = $repo->getTermBuffer();
-			$entityIdLookup = $repo->getEntityContentFactory();
-		} else {
-			$client = WikibaseClient::getDefaultInstance();
-			$termBuffer = $client->getTermBuffer();
-			$entityIdLookup = $client->getEntityIdLookup();
-		}
+		$client = WikibaseClient::getDefaultInstance();
+		$termBuffer = $client->getTermBuffer();
+		$entityIdLookup = $client->getEntityIdLookup();
 
 		return new self(
 			$termBuffer,
@@ -290,16 +275,12 @@ class PageTerms extends ApiQueryBase {
 	 * @inheritDoc
 	 */
 	protected function getExamplesMessages(): array {
-		if ( WikibaseSettings::isRepoEnabled() ) {
-			return [];
-		} else {
-			return [
-				'action=query&prop=pageterms&titles=London'
-					=> 'apihelp-query+pageterms-example-simple',
-				'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
-					=> 'apihelp-query+pageterms-example-label-en',
-			];
-		}
+		return [
+			'action=query&prop=pageterms&titles=London'
+				=> 'apihelp-query+pageterms-example-simple',
+			'action=query&prop=pageterms&titles=London&wbptterms=label|alias&uselang=en'
+				=> 'apihelp-query+pageterms-example-label-en',
+		];
 	}
 
 }
