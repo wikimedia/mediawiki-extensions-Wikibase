@@ -78,13 +78,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
 	}
 
-	public function testNewFromGlobalState_returnsSelf() {
-		$this->assertInstanceOf(
-			OutputPageBeforeHTMLHookHandler::class,
-			OutputPageBeforeHTMLHookHandler::factory()
-		);
-	}
-
 	/**
 	 * @return OutputPage
 	 */

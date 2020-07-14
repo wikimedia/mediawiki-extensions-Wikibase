@@ -19,7 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
-	public function testNewFromGlobalStateNoFederation() {
+	public function testFactoryNoFederation() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', true );
 
@@ -28,7 +28,7 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 		$this->assertInstanceOf( SpecialListFederatedProperties::class, $specialPage );
 	}
 
-	public function testNewFromGlobalStateFederation() {
+	public function testFactoryFederation() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', false );
 

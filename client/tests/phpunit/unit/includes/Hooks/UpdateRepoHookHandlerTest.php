@@ -7,7 +7,6 @@ use JobQueue;
 use JobQueueGroup;
 use MediaWiki\Revision\RevisionRecord;
 use Psr\Log\NullLogger;
-use ReflectionMethod;
 use Title;
 use User;
 use Wikibase\Client\Hooks\UpdateRepoHookHandler;
@@ -131,14 +130,6 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertFalse( property_exists( $oldTitle, 'wikibasePushedMoveToRepo' ),
 			'Should not touch $oldTitle' );
-	}
-
-	public function testNewFromGlobalState() {
-		$reflectionMethod = new ReflectionMethod( UpdateRepoHookHandler::class, 'factory' );
-		$reflectionMethod->setAccessible( true );
-		$handler = $reflectionMethod->invoke( null );
-
-		$this->assertInstanceOf( UpdateRepoHookHandler::class, $handler );
 	}
 
 	/**
