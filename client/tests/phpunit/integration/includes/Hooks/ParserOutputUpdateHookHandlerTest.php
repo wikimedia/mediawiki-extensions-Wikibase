@@ -23,7 +23,6 @@ use Wikibase\Client\NamespaceChecker;
 use Wikibase\Client\ParserOutput\ClientParserOutputDataUpdater;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\EntityUsageFactory;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -242,18 +241,6 @@ class ParserOutputUpdateHookHandlerTest extends MediaWikiTestCase {
 		}
 
 		return $parserOutput;
-	}
-
-	public function testNewFromGlobalState() {
-		$settings = WikibaseClient::getDefaultInstance()->getSettings();
-
-		$oldSiteGroupValue = $settings->getSetting( 'siteGroup' );
-		$settings->setSetting( 'siteGroup', 'NYAN' );
-
-		$handler = ParserOutputUpdateHookHandler::factory();
-		$this->assertInstanceOf( ParserOutputUpdateHookHandler::class, $handler );
-
-		$settings->setSetting( 'siteGroup', $oldSiteGroupValue );
 	}
 
 	public function parserAfterParseProvider() {

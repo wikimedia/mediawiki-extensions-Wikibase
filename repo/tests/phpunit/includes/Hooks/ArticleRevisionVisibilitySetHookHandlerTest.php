@@ -224,13 +224,6 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		);
 	}
 
-	public function testNewFromGlobalState() {
-		$this->assertInstanceOf(
-			ArticleRevisionVisibilitySetHookHandler::class,
-			ArticleRevisionVisibilitySetHookHandler::factory()
-		);
-	}
-
 	/**
 	 * @return string
 	 */

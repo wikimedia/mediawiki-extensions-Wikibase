@@ -65,10 +65,6 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		return $specialPage;
 	}
 
-	public function testNewFromGlobalState() {
-		$this->assertInstanceOf( SpecialEntityUsage::class, SpecialEntityUsage::factory() );
-	}
-
 	public function testExecuteWithValidParam() {
 		$lang = Language::factory( 'qqx' );
 		list( $result, ) = $this->executeSpecialPage( 'Q3', null, $lang );

@@ -250,11 +250,6 @@ class DataUpdateHookHandlerTest extends \MediaWikiTestCase {
 		return $linksUpdate;
 	}
 
-	public function testNewFromGlobalState() {
-		$handler = DataUpdateHookHandler::factory();
-		$this->assertInstanceOf( DataUpdateHookHandler::class, $handler );
-	}
-
 	public function provideEntityUsages() {
 		return [
 			'usage' => [
