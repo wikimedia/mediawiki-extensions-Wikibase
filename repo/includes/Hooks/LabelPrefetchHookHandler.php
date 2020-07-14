@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
+use MediaWiki\Hook\ChangesListInitRowsHook;
 use RequestContext;
 use Title;
 use TitleFactory;
@@ -23,7 +24,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class LabelPrefetchHookHandlers {
+class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 
 	/**
 	 * @var TermBuffer
@@ -51,16 +52,11 @@ class LabelPrefetchHookHandlers {
 	private $languageCodes;
 
 	/**
-	 * @return self|null
+	 * @return self
 	 */
-	private static function factory() {
+	public static function factory(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termBuffer = $wikibaseRepo->getTermBuffer();
-
-		if ( $termBuffer === null ) {
-			return null;
-		}
-
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
 
 		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::factory
@@ -75,27 +71,6 @@ class LabelPrefetchHookHandlers {
 			$termTypes,
 			$languageFallbackChain->getFetchLanguageCodes()
 		);
-	}
-
-	/**
-	 * Static handler for the ChangesListInitRows hook.
-	 *
-	 * @param ChangesList $list
-	 * @param IResultWrapper|object[] $rows
-	 *
-	 * @return bool
-	 */
-	public static function onChangesListInitRows(
-		ChangesList $list,
-		$rows
-	) {
-		$handler = self::factory();
-
-		if ( !$handler ) {
-			return true;
-		}
-
-		return $handler->doChangesListInitRows( $list, $rows );
 	}
 
 	/**
@@ -122,10 +97,8 @@ class LabelPrefetchHookHandlers {
 	/**
 	 * @param ChangesList $list
 	 * @param IResultWrapper|object[] $rows
-	 *
-	 * @return bool
 	 */
-	public function doChangesListInitRows( ChangesList $list, $rows ) {
+	public function onChangesListInitRows( $list, $rows ): void {
 		try {
 			$titles = $this->getChangedTitles( $rows );
 			$entityIds = $this->idLookup->getEntityIds( $titles );
@@ -133,8 +106,6 @@ class LabelPrefetchHookHandlers {
 		} catch ( StorageException $ex ) {
 			wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
 		}
-
-		return true;
 	}
 
 	/**

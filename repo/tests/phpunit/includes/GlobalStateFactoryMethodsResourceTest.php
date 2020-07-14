@@ -12,7 +12,6 @@ use MediaWikiTestCase;
 use RequestContext;
 use Traversable;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
-use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
@@ -121,11 +120,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 
 	public function testHtmlPageLinkRendererBeginHookHandler(): void {
 		TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )
-			->factory();
-	}
-
-	public function testLabelPrefetchHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( LabelPrefetchHookHandlers::class )
 			->factory();
 	}
 
