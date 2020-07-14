@@ -4,7 +4,8 @@ namespace Wikibase\Client\Tests\Integration;
 
 use ApiMain;
 use ApiQuery;
-use IContextSource;
+use ApiTestContext;
+use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
@@ -184,13 +185,10 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	private function mockApiQuery(): ApiQuery {
-		$apiMain = $this->createMock( ApiMain::class );
-		$apiMain->method( 'getContext' )
-			->willReturn( $this->createMock( IContextSource::class ) );
-		$apiQuery = $this->createMock( ApiQuery::class );
-		$apiQuery->method( 'getMain' )
-			->willReturn( $apiMain );
-		return $apiQuery;
+		$request = new FauxRequest();
+		$ctx = new ApiTestContext();
+		$ctx = $ctx->newTestContext( $request );
+		return new ApiQuery( new ApiMain( $ctx ), 'query' );
 	}
 
 }
