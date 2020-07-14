@@ -179,10 +179,12 @@ class SummaryFormatter {
 				return $this->idFormatter->formatEntityId( $arg );
 			} elseif ( $arg instanceof DataValue ) {
 				return $this->valueFormatter->format( $arg );
-			} elseif ( method_exists( $arg, '__toString' ) ) {
-				return strval( $arg );
 			} elseif ( is_object( $arg ) ) {
-				return '<' . get_class( $arg ) . '>';
+				if ( method_exists( $arg, '__toString' ) ) {
+					return strval( $arg );
+				} else {
+					return '<' . get_class( $arg ) . '>';
+				}
 			} elseif ( is_array( $arg ) ) {
 				if ( !empty( $arg ) && !isset( $arg[0] ) ) {
 					// turn assoc array into a list
