@@ -199,6 +199,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$contextSource = $this->createMock( IContextSource::class );
 		$contextSource->method( 'getRequest' )
 			->willReturn( $this->createMock( WebRequest::class ) );
+		$contextSource->method( 'getLanguage' )
+			->willReturn( new LanguageQqx() );
 		$contextSource = new DerivativeContext( $contextSource );
 		$apiMain = $this->createMock( ApiMain::class );
 		$apiMain->method( 'getContext' )
@@ -206,7 +208,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		$apiMain->method( 'getRequest' )
 			->willReturn( $contextSource->getRequest() );
 		$apiMain->method( 'getLanguage' )
-			->willReturn( new LanguageQqx() );
+			->willReturn( $contextSource->getLanguage() );
 		$apiMain->method( 'getResult' )
 			->willReturn( new ApiResult( false ) );
 		return $apiMain;

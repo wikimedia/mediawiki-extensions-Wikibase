@@ -36,14 +36,11 @@ use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Api\EditEntity;
 use Wikibase\Repo\Api\EditSummaryHelper;
-use Wikibase\Repo\Api\GetClaims;
-use Wikibase\Repo\Api\GetEntities;
 use Wikibase\Repo\Api\LinkTitles;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
-use Wikibase\Repo\Api\SearchEntities;
 use Wikibase\Repo\Api\SetAliases;
 use Wikibase\Repo\Api\SetClaim;
 use Wikibase\Repo\Api\SetClaimValue;
@@ -87,33 +84,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
 
 	// API module registration
-	$wgAPIModules['wbgetentities'] = [
-		'class' => GetEntities::class,
-		'factory' => function( ApiMain $apiMain, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$settings = $wikibaseRepo->getSettings();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
-
-			$siteLinkTargetProvider = new SiteLinkTargetProvider(
-				$wikibaseRepo->getSiteLookup(),
-				$settings->getSetting( 'specialSiteLinkGroups' )
-			);
-
-			return new GetEntities(
-				$apiMain,
-				$moduleName,
-				$wikibaseRepo->getStringNormalizer(),
-				$wikibaseRepo->getLanguageFallbackChainFactory(),
-				$siteLinkTargetProvider,
-				$wikibaseRepo->getStore()->getEntityPrefetcher(),
-				$settings->getSetting( 'siteLinkGroups' ),
-				$apiHelperFactory->getErrorReporter( $apiMain ),
-				$apiHelperFactory->getResultBuilder( $apiMain ),
-				$wikibaseRepo->getEntityRevisionLookup(),
-				$wikibaseRepo->getEntityIdParser()
-			);
-		}
-	];
 	$wgAPIModules['wbsetlabel'] = [
 		'class' => SetLabel::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
@@ -135,30 +105,6 @@ call_user_func( function() {
 					->getFingerprintChangeOpFactory()
 			);
 		}
-	];
-	$wgAPIModules['wbsearchentities'] = [
-		'class' => SearchEntities::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$repo = WikibaseRepo::getDefaultInstance();
-			$entitySearchHelper = new Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper(
-				$repo->getEntitySearchHelperCallbacks(),
-				$mainModule->getRequest()
-			);
-			$apiHelperFactory = $repo->getApiHelperFactory( $mainModule->getContext() );
-
-			return new SearchEntities(
-				$mainModule,
-				$moduleName,
-				$entitySearchHelper,
-				null,
-				$repo->getTermsLanguages(),
-				$repo->getEntitySourceDefinitions(),
-				$repo->getEntityTitleTextLookup(),
-				$repo->getEntityUrlLookup(),
-				$repo->getEntityArticleIdLookup(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-		},
 	];
 	$wgAPIModules['wbsetaliases'] = [
 		'class' => SetAliases::class,
@@ -265,28 +211,6 @@ call_user_func( function() {
 				},
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
-	$wgAPIModules['wbgetclaims'] = [
-		'class' => GetClaims::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
-			return new GetClaims(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getStatementGuidValidator(),
-				$wikibaseRepo->getStatementGuidParser(),
-				$wikibaseRepo->getEntityIdParser(),
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntityLoadingHelper( $module );
 				}
 			);
 		}
