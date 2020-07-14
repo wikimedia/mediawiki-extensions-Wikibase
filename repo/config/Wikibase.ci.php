@@ -21,7 +21,7 @@ require __DIR__ . '/Wikibase.example.php';
 $wgWBCSUseCirrus = false;
 
 // CirrusSearch should not perform any updates
-$wgDisableSearchUpdate = true;
+$wgCirrusSearchDisableUpdate = true;
 
 // enable data bridge
 $wgWBRepoSettings['dataBridgeEnabled'] = true;
