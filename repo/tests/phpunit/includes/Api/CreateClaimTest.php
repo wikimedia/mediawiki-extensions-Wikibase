@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
@@ -24,7 +26,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class CreateClaimTest extends WikibaseApiTestCase {
 
-	protected function getNewItemAndProperty() {
+	protected function getNewItemAndProperty(): array {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$item = new Item();
@@ -36,9 +38,8 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		return [ $item, $property ];
 	}
 
-	protected function assertRequestValidity( $resultArray ) {
+	protected function assertRequestValidity( array $resultArray ): void {
 		$this->assertResultSuccess( $resultArray );
-		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'claim', $resultArray, 'top level element has a claim key' );
 		$this->assertArrayNotHasKey( 'lastrevid', $resultArray['claim'], 'claim has a lastrevid key' );
 
@@ -96,7 +97,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		] );
 	}
 
-	public function invalidRequestProvider() {
+	public function invalidRequestProvider(): iterable {
 		$argLists = [];
 
 		//0
@@ -208,7 +209,7 @@ class CreateClaimTest extends WikibaseApiTestCase {
 		return $argLists;
 	}
 
-	public function getItemAndPropertyForInvalid() {
+	public function getItemAndPropertyForInvalid(): array {
 		static $array = null;
 
 		if ( $array === null ) {

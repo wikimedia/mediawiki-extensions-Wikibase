@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -23,6 +25,7 @@ use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\ClaimSummaryBuilder;
 use Wikibase\Repo\Diff\ClaimDiffer;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating or updating an entire Claim.
@@ -69,20 +72,9 @@ class SetClaim extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param ApiErrorReporter $errorReporter
-	 * @param Deserializer $statementDeserializer
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param StatementModificationHelper $modificationHelper
-	 * @param StatementGuidParser $guidParser
-	 * @param callable $resultBuilderInstantiator
-	 * @param callable $entitySavingHelperInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		ApiErrorReporter $errorReporter,
 		Deserializer $statementDeserializer,
 		StatementChangeOpFactory $statementChangeOpFactory,
@@ -102,10 +94,39 @@ class SetClaim extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakFactory(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $mainModule )
+		);
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$wikibaseRepo->getExternalFormatStatementDeserializer(),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$modificationHelper,
+			$wikibaseRepo->getStatementGuidParser(),
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getResultBuilder( $module );
+			},
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getEntitySavingHelper( $module );
+			}
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		try {
 			$this->executeInternal();
 		} catch ( FederatedPropertiesException $ex ) {
@@ -116,7 +137,7 @@ class SetClaim extends ApiBase {
 		}
 	}
 
-	private function executeInternal() {
+	private function executeInternal(): void {
 		$params = $this->extractRequestParams();
 		$statement = $this->getStatementFromParams( $params );
 		$guid = $statement->getGuid();
@@ -190,7 +211,7 @@ class SetClaim extends ApiBase {
 	 *
 	 * @todo this summary builder is ugly and summary stuff needs to be refactored
 	 */
-	private function getSummary( array $params, Statement $statement, StatementList $statementList ) {
+	private function getSummary( array $params, Statement $statement, StatementList $statementList ): Summary {
 		$claimSummaryBuilder = new ClaimSummaryBuilder(
 			$this->getModuleName(),
 			new ClaimDiffer( new OrderedListDiffer( new ComparableComparer() ) )
@@ -216,7 +237,7 @@ class SetClaim extends ApiBase {
 	 * @throws LogicException
 	 * @return Statement
 	 */
-	private function getStatementFromParams( array $params ) {
+	private function getStatementFromParams( array $params ): Statement {
 		try {
 			$serializedStatement = json_decode( $params['claim'], true );
 			if ( !is_array( $serializedStatement ) ) {
@@ -246,7 +267,7 @@ class SetClaim extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -255,14 +276,14 @@ class SetClaim extends ApiBase {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			[
 				'claim' => [
@@ -293,7 +314,7 @@ class SetClaim extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetclaim&claim={"id":"Q2$5627445f-43cb-ed6d-3adb-760e85bd17ee",'
 				. '"type":"claim","mainsnak":{"snaktype":"value","property":"P1",'
