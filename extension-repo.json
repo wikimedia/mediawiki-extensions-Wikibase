@@ -35,6 +35,10 @@
 			"class": "\\Wikibase\\Repo\\Api\\GetEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory"
 		},
+		"wblinktitles": {
+			"class": "\\Wikibase\\Repo\\Api\\LinkTitles",
+			"factory": "\\Wikibase\\Repo\\Api\\LinkTitles::factory"
+		},
 		"wbparsevalue": {
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"

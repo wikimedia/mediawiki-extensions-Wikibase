@@ -34,7 +34,6 @@
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
-use Wikibase\Repo\Api\LinkTitles;
 use Wikibase\Repo\Api\MergeItems;
 use Wikibase\Repo\Api\RemoveClaims;
 use Wikibase\Repo\Api\RemoveQualifiers;
@@ -44,8 +43,6 @@ use Wikibase\Repo\Api\SetClaimValue;
 use Wikibase\Repo\Api\SetQualifier;
 use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\StatementModificationHelper;
-use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -75,34 +72,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
 
 	// API module registration
-	$wgAPIModules['wblinktitles'] = [
-		'class' => LinkTitles::class,
-		'factory' => function ( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$settings = $wikibaseRepo->getSettings();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-
-			$siteLinkTargetProvider = new SiteLinkTargetProvider(
-				$wikibaseRepo->getSiteLookup(),
-				$settings->getSetting( 'specialSiteLinkGroups' )
-			);
-
-			return new LinkTitles(
-				$mainModule,
-				$moduleName,
-				$siteLinkTargetProvider,
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$settings->getSetting( 'siteLinkGroups' ),
-				$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
 	$wgAPIModules['wbcreateclaim'] = [
 		'class' => CreateClaim::class,
 		'factory' => function ( ApiMain $mainModule, $moduleName ) {
