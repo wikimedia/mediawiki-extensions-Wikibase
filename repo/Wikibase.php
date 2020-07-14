@@ -32,7 +32,6 @@
  */
 
 use MediaWiki\MediaWikiServices;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\CreateRedirect;
 use Wikibase\Repo\Api\EditEntity;
@@ -57,13 +56,10 @@ use Wikibase\Repo\Api\SetQualifier;
 use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\SetSiteLink;
 use Wikibase\Repo\Api\StatementModificationHelper;
-use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCollector;
 use Wikibase\Repo\ChangeOp\ChangedLanguagesCounter;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
-use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\SiteLinkTargetProvider;
-use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -597,35 +593,6 @@ call_user_func( function() {
 			);
 		}
 	];
-
-	// Special page registration
-	$wgSpecialPages['ListProperties'] = function () {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
-		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
-			return new SpecialListFederatedProperties(
-				$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
-			);
-		}
-
-		$prefetchingTermLookup = $wikibaseRepo->getPrefetchingTermLookup();
-		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$prefetchingTermLookup,
-			$wikibaseRepo->getLanguageFallbackChainFactory()
-				->newFromLanguage( $wikibaseRepo->getUserLanguage() )
-		);
-		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
-			->getEntityIdFormatter( $wikibaseRepo->getUserLanguage() );
-		return new SpecialListProperties(
-			$wikibaseRepo->getDataTypeFactory(),
-			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
-			$labelDescriptionLookup,
-			$entityIdFormatter,
-			$wikibaseRepo->getEntityTitleLookup(),
-			$prefetchingTermLookup,
-			$wikibaseRepo->getLanguageFallbackChainFactory()
-		);
-	};
 
 	$wgHooks['LoadExtensionSchemaUpdates'][] = 'Wikibase\Repo\Store\Sql\DatabaseSchemaUpdater::onSchemaUpdate';
 	$wgHooks['HtmlPageLinkRendererEnd'][] = 'Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler::onHtmlPageLinkRendererEnd';
