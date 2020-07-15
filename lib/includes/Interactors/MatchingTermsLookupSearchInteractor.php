@@ -134,14 +134,7 @@ class MatchingTermsLookupSearchInteractor implements ConfigurableTermSearchInter
 
 		$limit = $this->termSearchOptions->getLimit();
 
-		// Shortcut out if we already have enough TermIndexEntries
-		if ( count( $matchedTermIndexEntries ) >= $limit
-			|| !$this->termSearchOptions->getUseLanguageFallback()
-		) {
-			return $matchedTermIndexEntries;
-		}
-
-		if ( $this->termSearchOptions->getUseLanguageFallback() ) {
+		if ( count( $matchedTermIndexEntries ) < $limit && $this->termSearchOptions->getUseLanguageFallback() ) {
 			// Matches in the main language will always be first
 			$matchedTermIndexEntries = array_merge(
 				$matchedTermIndexEntries,
