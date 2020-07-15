@@ -1,6 +1,6 @@
 <?php
 
-namespace Wikibase\Repo\Tests\Api;
+namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
@@ -25,35 +25,12 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class SetClaimFederatedPropertiesTest extends WikibaseApiTestCase {
-
-	/**
-	 * @var bool|null
-	 */
-	private $oldFederatedPropertiesEnabled;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$this->oldFederatedPropertiesEnabled = $settings->getSetting( 'federatedPropertiesEnabled' );
-		$settings->setSetting( 'federatedPropertiesEnabled', true );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'federatedPropertiesEnabled', $this->oldFederatedPropertiesEnabled );
-	}
+class SetClaimTest extends FederatedPropertiesApiTestCase {
 
 	public function testFederatedPropertiesFailure() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
 
-		$oldFederatedPropertiesSourceScriptUrl = $settings->getSetting( 'federatedPropertiesSourceScriptUrl' );
-		// Make sure federated properties can't work.
-		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
+		$this->setSourceWikiUnavailable();
 
 		$store = $wikibaseRepo->getEntityStore();
 
@@ -76,8 +53,6 @@ class SetClaimFederatedPropertiesTest extends WikibaseApiTestCase {
 			'action' => 'wbsetclaim',
 			'claim' => FormatJson::encode( $serialized ),
 		] );
-
-		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', $oldFederatedPropertiesSourceScriptUrl );
 	}
 
 }

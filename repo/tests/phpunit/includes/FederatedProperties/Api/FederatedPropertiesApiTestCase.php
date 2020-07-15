@@ -1,8 +1,9 @@
 <?php
 
 declare( strict_types = 1 );
-namespace Wikibase\Repo\Tests\Api;
+namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
+use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
