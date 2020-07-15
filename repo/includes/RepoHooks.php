@@ -49,6 +49,7 @@ use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 use Wikibase\Repo\Store\Sql\SqlSubscriptionLookup;
+use Wikibase\View\ViewHooks;
 use WikiPage;
 
 /**
@@ -1162,6 +1163,7 @@ final class RepoHooks {
 		global $wgResourceModules;
 
 		LibHooks::onRegistration();
+		ViewHooks::onRegistration();
 
 		$wgResourceModules = array_merge(
 			$wgResourceModules,

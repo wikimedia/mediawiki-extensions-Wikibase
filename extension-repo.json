@@ -233,7 +233,8 @@
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",
-		"Wikibase\\DataAccess\\": "data-access/src/"
+		"Wikibase\\DataAccess\\": "data-access/src/",
+		"Wikibase\\View\\": "view/src/"
 	},
 	"AutoloadClasses": {
 		"Wikibase\\Repo\\Maintenance\\PopulateTermFullEntityId": "repo/maintenance/populateTermFullEntityId.php",
@@ -243,7 +244,8 @@
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
-		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
+		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/",
+		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
 	},
 	"attributes": {
 		"EventLogging": {
@@ -255,7 +257,8 @@
 	"MessagesDirs": {
 		"Wikibase": "repo/i18n",
 		"WikibaseApi": "repo/i18n/api",
-		"WikibaseLib": "lib/i18n"
+		"WikibaseLib": "lib/i18n",
+		"WikibaseView": "view/lib/wikibase-data-values-value-view/i18n"
 	},
 	"ExtensionMessagesFiles": {
 		"WikibaseAlias": "repo/Wikibase.i18n.alias.php",
@@ -289,6 +292,9 @@
 		"OutputPageJsConfig": {
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory"
+		},
+		"ViewHooks": {
+			"class": "\\Wikibase\\View\\ViewHooks"
 		}
 	},
 	"Hooks": {
@@ -326,11 +332,13 @@
 		"RejectParserCacheValue": "\\Wikibase\\Repo\\RepoHooks::onRejectParserCacheValue",
 		"ResourceLoaderRegisterModules": [
 			"\\Wikibase\\Repo\\RepoHooks::onResourceLoaderRegisterModules",
-			"LibHooks"
+			"LibHooks",
+			"ViewHooks"
 		],
 		"ResourceLoaderTestModules": [
 			"\\Wikibase\\Repo\\RepoHooks::registerQUnitTests",
-			"LibHooks"
+			"LibHooks",
+			"ViewHooks"
 		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
@@ -341,7 +349,8 @@
 		"TitleGetRestrictionTypes": "\\Wikibase\\Repo\\RepoHooks::onTitleGetRestrictionTypes",
 		"UnitTestsList": [
 			"\\Wikibase\\Repo\\RepoHooks::registerUnitTests",
-			"LibHooks"
+			"LibHooks",
+			"ViewHooks"
 		],
 		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
 	},

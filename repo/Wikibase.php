@@ -38,7 +38,7 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo.json' );
 
-// Sub-extensions needed by WikibaseRepository
+// Only needed temporarily for i18n messages.
 require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
