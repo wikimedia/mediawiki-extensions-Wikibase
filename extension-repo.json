@@ -354,6 +354,8 @@
 		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
+		"ShowSearchHit": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::onShowSearchHit",
+		"ShowSearchHitTitle": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::onShowSearchHitTitle",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
 		"SpecialPage_initList": "FederatedPropertiesSpecialPage",
