@@ -32,7 +32,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ new Term( 'lkt', 'lkt term' ), 'lkt term' ],
 			[ new Term( 'lkt', 'lkt & term' ), 'lkt &amp; term' ],
-			[ new TermFallback( 'lkt', 'lkt & term', 'lkt', 'lkt' ), 'lkt &amp; term' ],
+			[ new TermFallback( 'lkt', 'lkt & term', 'lkt', 'lkt' ), 'lkt &amp; term&nbsp;' ],
 			[
 				new TermFallback(
 					'de-at',
@@ -40,7 +40,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 					'de',
 					'de'
 				),
-				'<span lang="de" dir="ltr">lkt &amp; term</span><sup '
+				'<span lang="de" dir="ltr">lkt &amp; term</span>&nbsp;<sup '
 					. 'class="wb-language-fallback-indicator wb-language-fallback-variant"></sup>'
 			],
 			[
@@ -50,7 +50,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 					'arc',
 					'arc'
 				),
-				'<span lang="arc" dir="rtl">arc term</span><sup '
+				'<span lang="arc" dir="rtl">arc term</span>&nbsp;<sup '
 					. 'class="wb-language-fallback-indicator"></sup>'
 			],
 		];
