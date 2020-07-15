@@ -246,7 +246,7 @@ abstract class DumpEntities extends Maintenance {
 
 		$wgHooks['MediaWikiServices'][] = function() {
 			global $wgDBDefaultGroup;
-			if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
+			if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 				// Something instantiates the MediaWikiServices before Wikibase
 				// is loaded, nothing we can do here.
 				wfWarn( self::class . ': Can not change default DB group.' );
