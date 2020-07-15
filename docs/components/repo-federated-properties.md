@@ -6,6 +6,40 @@ Federated Properties is a feature that allows a newly created Wikibase instance 
 
 The setting is off by default. To enable Federated Properties from [Wikidata], set <code>$wgWBRepoSettings['federatedPropertiesEnabled'] = true;</code> in your wiki's <code>LocalSettings.php</code>. To configure a different source wiki, the [federatedPropertiesSourceScriptUrl setting] must be set accordingly to the source wiki's script path url, e.g. <code>$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = 'https://wikidata.beta.wmflabs.org/w/';</code>.
 
+## Configuring EntitySources
+
+Using federated properties by only enabling the feature will default the `federatedPropertiesSourceScriptUrl` to https://www.wikidata.org/w/. In this case no additional configuration of ```entitysources``` is required.
+
+Using the feature with any other source wiki will however require `entitysources` to be manually configured in order to get the correct RDF representation of entities.
+
+The following example is a configuration of `entitysources` similar to what is automatically generated. However here we are using **wikidata.beta.wmflabs.org** as the source wiki.
+
+Adding this to the `LocalSettings.php` of **wikidata-federated-properties.wmflabs.org** would result in the RDF representation to be correct.
+
+```
+$wgWBRepoSettings['entitySources'] = [
+	'local' => [
+		'entityNamespaces' => [ 'item' => 120 ],
+		'repoDatabase' => false,
+		'baseUri' => 'http://wikidata-federated-properties.wmflabs.org/entity/',
+		'interwikiPrefix' => '',
+		'rdfNodeNamespacePrefix' => 'wd',
+		'rdfPredicateNamespacePrefix' => 'wdt',
+	],
+	'fedprops' => [
+		'entityNamespaces' => [ 'property' => 120 ],
+		'repoDatabase' => false,
+		'baseUri' => 'http://wikidata.beta.wmflabs.org/entity/',
+		'interwikiPrefix' => 'wd',
+		'rdfNodeNamespacePrefix' => 'fpwd',
+		'rdfPredicateNamespacePrefix' => 'fpwd',
+	],
+];
+```
+
+The two configurations contain separate sources for the local `item` and federated `property`. The `entityNamespaces` for these entities depends on the configuration of that particular wiki. For more information on the different `entityNamespaces` in Wikidata see https://www.wikidata.org/wiki/Help:Namespaces.
+
+The `interwikiPrefix` is a configuration to support links between MediaWiki instances. This also depend on the configuration on each instance and should ideally point to a wiki defined in the `interwiki` table  For more information on interwiki links see https://www.mediawiki.org/wiki/Manual:Interwiki.
 ## Privacy notice
 
 Once you enable Federated Properties in your Wikibase installation, all requests to the federation source Wiki will include an anonymized unique identifier as the useragent. This will be used only to detect abnormal traffic to the source Wiki for the purposes of preventing abuse.
