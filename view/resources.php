@@ -907,12 +907,6 @@ return call_user_func( function() {
 			'targets' => 'mobile'
 		],
 
-		// DEPRECATED, use the vue module from core instead
-		'vue2' => $moduleTemplate + [
-			'scripts' => 'vendor/vue2.common.prod.js',
-			'targets' => [ 'desktop', 'mobile' ],
-		],
-
 		'wikibase.tainted-ref' => [
 			'scripts' => [
 				'tainted-ref.init.js',
