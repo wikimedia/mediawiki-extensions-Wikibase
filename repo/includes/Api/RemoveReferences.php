@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -10,6 +12,7 @@ use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOps;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for removing one or more references of the same statement.
@@ -50,19 +53,9 @@ class RemoveReferences extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param ApiErrorReporter $errorReporter
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param StatementModificationHelper $modificationHelper
-	 * @param StatementGuidParser $guidParser
-	 * @param callable $resultBuilderInstantiator
-	 * @param callable $entitySavingHelperInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		ApiErrorReporter $errorReporter,
 		StatementChangeOpFactory $statementChangeOpFactory,
 		StatementModificationHelper $modificationHelper,
@@ -80,10 +73,38 @@ class RemoveReferences extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakFactory(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $mainModule )
+		);
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$modificationHelper,
+			$wikibaseRepo->getStatementGuidParser(),
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getResultBuilder( $module );
+			},
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getEntitySavingHelper( $module );
+			}
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -117,10 +138,7 @@ class RemoveReferences extends ApiBase {
 		$this->resultBuilder->markSuccess();
 	}
 
-	/**
-	 * @param array $params
-	 */
-	private function validateParameters( array $params ) {
+	private function validateParameters( array $params ): void {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
 			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
@@ -132,7 +150,7 @@ class RemoveReferences extends ApiBase {
 	 *
 	 * @return ChangeOp[]
 	 */
-	private function getChangeOps( $guid, array $referenceHashes ) {
+	private function getChangeOps( string $guid, array $referenceHashes ): array {
 		$changeOps = [];
 
 		foreach ( $referenceHashes as $referenceHash ) {
@@ -148,7 +166,7 @@ class RemoveReferences extends ApiBase {
 	 *
 	 * @return string[]
 	 */
-	private function getReferenceHashesFromParams( array $params, Statement $statement ) {
+	private function getReferenceHashesFromParams( array $params, Statement $statement ): array {
 		$references = $statement->getReferences();
 		$hashes = [];
 
@@ -165,7 +183,7 @@ class RemoveReferences extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -174,14 +192,14 @@ class RemoveReferences extends ApiBase {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			[
 				'statement' => [
@@ -213,7 +231,7 @@ class RemoveReferences extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbremovereferences&statement=Q42$D8404CDA-25E4-4334-AF13-A3290BCD9C0F'
 				. '&references=455481eeac76e6a8af71a6b493c073d54788e7e9&token=foobar'

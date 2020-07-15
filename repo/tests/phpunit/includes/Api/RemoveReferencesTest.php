@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
@@ -35,7 +37,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	/**
 	 * @return Snak[]
 	 */
-	protected function snakProvider() {
+	protected function snakProvider(): iterable {
 		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( 42 );
@@ -48,7 +50,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	/**
 	 * @return Statement[]
 	 */
-	protected function statementProvider() {
+	protected function statementProvider(): iterable {
 		$statements = [];
 
 		$mainSnak = new PropertyNoValueSnak( 42 );
@@ -138,7 +140,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		] );
 	}
 
-	protected function makeValidRequest( $statementGuid, array $hashes ) {
+	protected function makeValidRequest( string $statementGuid, array $hashes ): void {
 		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
@@ -153,7 +155,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		$this->makeInvalidRequest( $statementGuid, $hashes, 'no-such-reference' );
 	}
 
-	protected function makeInvalidRequest( $statementGuid, array $hashes, $expectedError = null ) {
+	protected function makeInvalidRequest( string $statementGuid, array $hashes, ?string $expectedError ): void {
 		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
@@ -176,7 +178,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidGuidProvider
 	 */
-	public function testInvalidStatementGuid( $statementGuid, $hash ) {
+	public function testInvalidStatementGuid( string $statementGuid, string $hash ) {
 		$params = [
 			'action' => 'wbremovereferences',
 			'statement' => $statementGuid,
@@ -192,7 +194,7 @@ class RemoveReferencesTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function invalidGuidProvider() {
+	public function invalidGuidProvider(): iterable {
 		$snak = new PropertyValueSnak( 722, new StringValue( 'abc' ) );
 		$hash = $snak->getHash();
 

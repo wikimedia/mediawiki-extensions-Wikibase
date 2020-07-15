@@ -31,11 +31,6 @@
  * @license GPL-2.0-or-later
  */
 
-use Wikibase\Repo\Api\RemoveReferences;
-use Wikibase\Repo\Api\SetReference;
-use Wikibase\Repo\Api\StatementModificationHelper;
-use Wikibase\Repo\WikibaseRepo;
-
 if ( !defined( 'MEDIAWIKI' ) ) {
 	die( 'Not an entry point.' );
 }
@@ -47,11 +42,9 @@ wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo.json' );
 require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
-	global $wgAPIModules,
-		$wgExtensionMessagesFiles,
+	global $wgExtensionMessagesFiles,
 		$wgHooks,
 		$wgMessagesDirs,
-		$wgResourceModules,
 		$wgWBRepoSettings;
 
 	// i18n messages, kept for backward compatibility (T257442)
@@ -61,69 +54,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
-
-	// API module registration
-	$wgAPIModules['wbsetreference'] = [
-		'class' => SetReference::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-			$modificationHelper = new StatementModificationHelper(
-				$wikibaseRepo->getSnakFactory(),
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-
-			return new SetReference(
-				$mainModule,
-				$moduleName,
-				$wikibaseRepo->getBaseDataModelDeserializerFactory(),
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$modificationHelper,
-				$wikibaseRepo->getStatementGuidParser(),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
-	$wgAPIModules['wbremovereferences'] = [
-		'class' => RemoveReferences::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-			$modificationHelper = new StatementModificationHelper(
-				$wikibaseRepo->getSnakFactory(),
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-
-			return new RemoveReferences(
-				$mainModule,
-				$moduleName,
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$modificationHelper,
-				$wikibaseRepo->getStatementGuidParser(),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
 
 	$wgHooks['HtmlPageLinkRendererEnd'][] = 'Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler::onHtmlPageLinkRendererEnd';
 	$wgHooks['ShowSearchHit'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHit';

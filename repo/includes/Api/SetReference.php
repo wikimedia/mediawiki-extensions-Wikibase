@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -10,8 +12,9 @@ use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\ChangeOp\ChangeOpReference;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a reference or setting the value of an existing one.
@@ -57,20 +60,9 @@ class SetReference extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param DeserializerFactory $deserializerFactory
-	 * @param ApiErrorReporter $errorReporter
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param StatementModificationHelper $modificationHelper
-	 * @param StatementGuidParser $guidParser
-	 * @param callable $resultBuilderInstantiator
-	 * @param callable $entitySavingHelperInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		DeserializerFactory $deserializerFactory,
 		ApiErrorReporter $errorReporter,
 		StatementChangeOpFactory $statementChangeOpFactory,
@@ -90,10 +82,39 @@ class SetReference extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakFactory(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $mainModule )
+		);
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			$wikibaseRepo->getBaseDataModelDeserializerFactory(),
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$modificationHelper,
+			$wikibaseRepo->getStatementGuidParser(),
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getResultBuilder( $module );
+			},
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getEntitySavingHelper( $module );
+			}
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -137,20 +158,13 @@ class SetReference extends ApiBase {
 		$this->resultBuilder->addReference( $newReference );
 	}
 
-	/**
-	 * @param array $params
-	 */
-	private function validateParameters( array $params ) {
+	private function validateParameters( array $params ): void {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['statement'] ) ) ) {
 			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
 	}
 
-	/**
-	 * @param Statement $statement
-	 * @param string $referenceHash
-	 */
-	private function validateReferenceHash( Statement $statement, $referenceHash ) {
+	private function validateReferenceHash( Statement $statement, string $referenceHash ): void {
 		if ( !$statement->getReferences()->hasReferenceHash( $referenceHash ) ) {
 			$this->errorReporter->dieError(
 				'Statement does not have a reference with the given hash',
@@ -159,13 +173,7 @@ class SetReference extends ApiBase {
 		}
 	}
 
-	/**
-	 * @param string $arrayParam
-	 * @param string $parameter
-	 *
-	 * @return array
-	 */
-	private function getArrayFromParam( $arrayParam, $parameter ) {
+	private function getArrayFromParam( string $arrayParam, string $parameter ): array {
 		$rawArray = json_decode( $arrayParam, true );
 
 		if ( !is_array( $rawArray ) || !count( $rawArray ) ) {
@@ -178,12 +186,7 @@ class SetReference extends ApiBase {
 		return $rawArray;
 	}
 
-	/**
-	 * @param Reference $reference
-	 *
-	 * @return ChangeOpReference
-	 */
-	private function getChangeOp( Reference $reference ) {
+	private function getChangeOp( Reference $reference ): ChangeOp {
 		$params = $this->extractRequestParams();
 
 		$guid = $params['statement'];
@@ -196,7 +199,7 @@ class SetReference extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -205,14 +208,14 @@ class SetReference extends ApiBase {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			[
 				'statement' => [
@@ -252,7 +255,7 @@ class SetReference extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetreference&statement=Q76$D4FDE516-F20C-4154-ADCE-7C5B609DFDFF&snaks='
 				. '{"P212":[{"snaktype":"value","property":"P212","datavalue":{"type":"string",'
