@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
@@ -52,7 +54,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		}
 	}
 
-	private function getPropertyIds() {
+	private function getPropertyIds(): array {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$propertyIds = [];
@@ -71,7 +73,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	/**
 	 * @return Snak[]
 	 */
-	private function getSnaks() {
+	private function getSnaks(): array {
 		$snaks = [];
 
 		$snaks[] = new PropertyNoValueSnak( self::$propertyIds[0] );
@@ -84,7 +86,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	/**
 	 * @return Statement[]
 	 */
-	private function getStatements() {
+	private function getStatements(): array {
 		$statements = [];
 
 		$ranks = [
@@ -369,9 +371,6 @@ class SetClaimTest extends WikibaseApiTestCase {
 
 	/**
 	 * @param Statement|array $statement Native or serialized statement object.
-	 * @param EntityId $entityId
-	 * @param int $expectedCount
-	 * @param string $requestLabel A label to identify requests that are made in errors.
 	 * @param int|null $index
 	 * @param int|null $baserevid
 	 * @param string|null $error
@@ -380,11 +379,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 */
 	private function makeRequest(
 		$statement,
-		$index = null,
-		$baserevid = null,
-		$error = null,
-		$ignoreDuplicateMainSnak = null
-	) {
+		?int $index,
+		?int $baserevid,
+		?string $error,
+		?bool $ignoreDuplicateMainSnak = null
+	): array {
 		$serializerFactory = new SerializerFactory( new DataValueSerializer() );
 		$statementSerializer = $serializerFactory->newStatementSerializer();
 
@@ -431,11 +430,11 @@ class SetClaimTest extends WikibaseApiTestCase {
 	private function makeRequestAndAssertResult(
 		$statement,
 		EntityId $entityId,
-		$expectedCount,
-		$requestLabel,
-		$index = null,
-		$baserevid = null,
-		$error = null
+		int $expectedCount,
+		string $requestLabel,
+		?int $index = null,
+		?int $baserevid = null,
+		?string $error = null
 	) {
 		$resultArray = $this->makeRequest(
 			$statement,
@@ -461,7 +460,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 	 *
 	 * @return array|bool
 	 */
-	private function assertApiRequest( array $params, $error ) {
+	private function assertApiRequest( array $params, ?string $error ) {
 		$resultArray = false;
 
 		try {
@@ -483,7 +482,7 @@ class SetClaimTest extends WikibaseApiTestCase {
 		return $resultArray;
 	}
 
-	private function assertValidResponse( array $resultArray ) {
+	private function assertValidResponse( array $resultArray ): void {
 		$this->assertResultSuccess( $resultArray );
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
 		$this->assertArrayHasKey( 'pageinfo', $resultArray, 'top level element has a pageinfo key' );
@@ -504,9 +503,9 @@ class SetClaimTest extends WikibaseApiTestCase {
 	private function assertStatementWasSet(
 		Statement $statement,
 		EntityId $entityId,
-		$expectedCount,
-		$requestLabel
-	) {
+		int $expectedCount,
+		string $requestLabel
+	): void {
 		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var StatementListProvider $entity */
@@ -522,14 +521,10 @@ class SetClaimTest extends WikibaseApiTestCase {
 		$this->assertSame( $expectedCount, $statements->count(), "Statements count is wrong after {$requestLabel}" );
 	}
 
-	/**
-	 * @param Statement $statement
-	 * @param EntityId $entityId
-	 */
 	private function assertStatementWasNotSet(
 		Statement $statement,
 		EntityId $entityId
-	) {
+	): void {
 		$this->assertNotNull( $statement->getGuid(), 'Cannot search for statements with no GUID' );
 
 		/** @var StatementListProvider $entity */

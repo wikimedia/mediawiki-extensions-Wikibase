@@ -12,6 +12,10 @@
 	},
 	"APIModules": {
 		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges",
+		"wbcreateclaim": {
+			"class": "\\Wikibase\\Repo\\Api\\CreateClaim",
+			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory"
+		},
 		"wbeditentity": {
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
 			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory"
@@ -54,6 +58,10 @@
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"
 		},
+		"wbremoveclaims": {
+			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",
+			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory"
+		},
 		"wbremovequalifiers": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory"
@@ -65,6 +73,14 @@
 		"wbsetaliases": {
 			"class": "\\Wikibase\\Repo\\Api\\SetAliases",
 			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory"
+		},
+		"wbsetclaim": {
+			"class": "\\Wikibase\\Repo\\Api\\SetClaim",
+			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory"
+		},
+		"wbsetclaimvalue": {
+			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",
+			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory"
 		},
 		"wbsetdescription": {
 			"class": "\\Wikibase\\Repo\\Api\\SetDescription",
