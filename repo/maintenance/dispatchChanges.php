@@ -225,9 +225,9 @@ class DispatchChanges extends Maintenance {
 	 * instead of dispatching.
 	 */
 	public function execute() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
 			// Since people might waste time debugging odd errors when they forget to enable the extension. BTDT.
-			throw new MWException( "WikibaseLib has not been loaded." );
+			throw new MWException( "WikibaseRepository has not been loaded." );
 		}
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
