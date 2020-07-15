@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -7,8 +9,9 @@ use ApiMain;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\Repo\ChangeOp\ChangeOpQualifier;
+use Wikibase\Repo\ChangeOp\ChangeOp;
 use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * API module for creating a qualifier or setting the value of an existing one.
@@ -64,7 +67,7 @@ class SetQualifier extends ApiBase {
 	 */
 	public function __construct(
 		ApiMain $mainModule,
-		$moduleName,
+		string $moduleName,
 		callable $errorReporterInstantiator,
 		StatementChangeOpFactory $statementChangeOpFactory,
 		StatementModificationHelper $modificationHelper,
@@ -83,10 +86,40 @@ class SetQualifier extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
+	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
+		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
+
+		$modificationHelper = new StatementModificationHelper(
+			$wikibaseRepo->getSnakFactory(),
+			$wikibaseRepo->getEntityIdParser(),
+			$wikibaseRepo->getStatementGuidValidator(),
+			$apiHelperFactory->getErrorReporter( $mainModule )
+		);
+
+		return new self(
+			$mainModule,
+			$moduleName,
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getErrorReporter( $module );
+			},
+			$changeOpFactoryProvider->getStatementChangeOpFactory(),
+			$modificationHelper,
+			$wikibaseRepo->getStatementGuidParser(),
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getResultBuilder( $module );
+			},
+			function ( $module ) use ( $apiHelperFactory ) {
+				return $apiHelperFactory->getEntitySavingHelper( $module );
+			}
+		);
+	}
+
 	/**
 	 * @inheritDoc
 	 */
-	public function execute() {
+	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
@@ -116,7 +149,7 @@ class SetQualifier extends ApiBase {
 	 *
 	 * @param array $params
 	 */
-	private function validateParameters( array $params ) {
+	private function validateParameters( array $params ): void {
 		if ( !( $this->modificationHelper->validateStatementGuid( $params['claim'] ) ) ) {
 			$this->errorReporter->dieError( 'Invalid claim guid', 'invalid-guid' );
 		}
@@ -142,11 +175,7 @@ class SetQualifier extends ApiBase {
 		}
 	}
 
-	/**
-	 * @param Statement $statement
-	 * @param string $qualifierHash
-	 */
-	private function validateQualifierHash( Statement $statement, $qualifierHash ) {
+	private function validateQualifierHash( Statement $statement, string $qualifierHash ): void {
 		if ( !$statement->getQualifiers()->hasSnakHash( $qualifierHash ) ) {
 			$this->errorReporter->dieError(
 				'Claim does not have a qualifier with the given hash',
@@ -155,10 +184,7 @@ class SetQualifier extends ApiBase {
 		}
 	}
 
-	/**
-	 * @return ChangeOpQualifier
-	 */
-	private function getChangeOp() {
+	private function getChangeOp(): ChangeOp {
 		$params = $this->extractRequestParams();
 
 		$guid = $params['claim'];
@@ -181,7 +207,7 @@ class SetQualifier extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	public function isWriteMode() {
+	public function isWriteMode(): bool {
 		return true;
 	}
 
@@ -190,14 +216,14 @@ class SetQualifier extends ApiBase {
 	 *
 	 * @return string
 	 */
-	public function needsToken() {
+	public function needsToken(): string {
 		return 'csrf';
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	protected function getAllowedParams() {
+	protected function getAllowedParams(): array {
 		return array_merge(
 			[
 				'claim' => [
@@ -240,7 +266,7 @@ class SetQualifier extends ApiBase {
 	/**
 	 * @inheritDoc
 	 */
-	protected function getExamplesMessages() {
+	protected function getExamplesMessages(): array {
 		return [
 			'action=wbsetqualifier&claim=Q2$4554c0f4-47b2-1cd9-2db9-aa270064c9f3&property=P1'
 				. '&value="GdyjxP8I6XB3"&snaktype=value&token=foobar'

@@ -33,11 +33,9 @@
 
 use Wikibase\Repo\Api\CreateClaim;
 use Wikibase\Repo\Api\RemoveClaims;
-use Wikibase\Repo\Api\RemoveQualifiers;
 use Wikibase\Repo\Api\RemoveReferences;
 use Wikibase\Repo\Api\SetClaim;
 use Wikibase\Repo\Api\SetClaimValue;
-use Wikibase\Repo\Api\SetQualifier;
 use Wikibase\Repo\Api\SetReference;
 use Wikibase\Repo\Api\StatementModificationHelper;
 use Wikibase\Repo\WikibaseRepo;
@@ -239,68 +237,6 @@ call_user_func( function() {
 				$moduleName,
 				$apiHelperFactory->getErrorReporter( $mainModule ),
 				$wikibaseRepo->getExternalFormatStatementDeserializer(),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$modificationHelper,
-				$wikibaseRepo->getStatementGuidParser(),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
-	$wgAPIModules['wbremovequalifiers'] = [
-		'class' => RemoveQualifiers::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-			$modificationHelper = new StatementModificationHelper(
-				$wikibaseRepo->getSnakFactory(),
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-
-			return new RemoveQualifiers(
-				$mainModule,
-				$moduleName,
-				$apiHelperFactory->getErrorReporter( $mainModule ),
-				$changeOpFactoryProvider->getStatementChangeOpFactory(),
-				$modificationHelper,
-				$wikibaseRepo->getStatementGuidParser(),
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getResultBuilder( $module );
-				},
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
-			);
-		}
-	];
-	$wgAPIModules['wbsetqualifier'] = [
-		'class' => SetQualifier::class,
-		'factory' => function( ApiMain $mainModule, $moduleName ) {
-			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-			$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
-			$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
-
-			$modificationHelper = new StatementModificationHelper(
-				$wikibaseRepo->getSnakFactory(),
-				$wikibaseRepo->getEntityIdParser(),
-				$wikibaseRepo->getStatementGuidValidator(),
-				$apiHelperFactory->getErrorReporter( $mainModule )
-			);
-
-			return new SetQualifier(
-				$mainModule,
-				$moduleName,
-				function ( $module ) use ( $apiHelperFactory ) {
-					return $apiHelperFactory->getErrorReporter( $module );
-				},
 				$changeOpFactoryProvider->getStatementChangeOpFactory(),
 				$modificationHelper,
 				$wikibaseRepo->getStatementGuidParser(),

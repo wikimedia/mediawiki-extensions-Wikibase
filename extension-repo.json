@@ -54,6 +54,10 @@
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"
 		},
+		"wbremovequalifiers": {
+			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
+			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory"
+		},
 		"wbsearchentities": {
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory"
@@ -69,6 +73,10 @@
 		"wbsetlabel": {
 			"class": "\\Wikibase\\Repo\\Api\\SetLabel",
 			"factory": "\\Wikibase\\Repo\\Api\\SetLabel::factory"
+		},
+		"wbsetqualifier": {
+			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
+			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory"
 		},
 		"wbsetsitelink": {
 			"class": "\\Wikibase\\Repo\\Api\\SetSiteLink",

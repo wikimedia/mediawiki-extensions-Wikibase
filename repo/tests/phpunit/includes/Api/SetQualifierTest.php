@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
@@ -10,13 +12,13 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
-use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -53,7 +55,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 *
 	 * @return Snak
 	 */
-	private function getTestSnak( $type, $data ) {
+	private function getTestSnak( string $type, $data ): Snak {
 		static $snaks = [];
 
 		if ( !isset( $snaks[$type] ) ) {
@@ -74,14 +76,14 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	 *
 	 * @return Property
 	 */
-	protected function makeProperty( Property $property ) {
+	protected function makeProperty( Property $property ): Property {
 		$store = WikibaseRepo::getDefaultInstance()->getEntityStore();
 
 		$store->saveEntity( $property, 'testing', $this->user, EDIT_NEW );
 		return $property;
 	}
 
-	protected function getTestItem() {
+	protected function getTestItem(): Item {
 		static $item = null;
 
 		if ( !$item ) {
@@ -105,7 +107,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		return $item;
 	}
 
-	public function provideAddRequests() {
+	public function provideAddRequests(): iterable {
 		return [
 			[ PropertyNoValueSnak::class ],
 			[ PropertySomeValueSnak::class ],
@@ -116,7 +118,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider provideAddRequests
 	 */
-	public function testAddRequests( $snakType, $data = null ) {
+	public function testAddRequests( string $snakType, $data = null ) {
 		$item = $this->getTestItem();
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
@@ -151,14 +153,14 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		] );
 	}
 
-	public function provideChangeRequests() {
+	public function provideChangeRequests(): iterable {
 		return [ [ PropertyValueSnak::class, new StringValue( 'o_O' ) ] ];
 	}
 
 	/**
 	 * @dataProvider provideChangeRequests
 	 */
-	public function testChangeRequests( $snakType, $data ) {
+	public function testChangeRequests( string $snakType, $data ) {
 		$item = $this->getTestItem();
 		$statements = $item->getStatements()->toArray();
 		/** @var Statement $statement */
@@ -178,7 +180,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		$this->makeSetQualifierRequest( $guid, $hash, $newQualifier, $item->getId() );
 	}
 
-	protected function makeSetQualifierRequest( $statementGuid, $snakhash, Snak $qualifier, EntityId $entityId ) {
+	protected function makeSetQualifierRequest( string $statementGuid, ?string $snakhash, Snak $qualifier, EntityId $entityId ): void {
 		$params = [
 			'action' => 'wbsetqualifier',
 			'claim' => $statementGuid,
@@ -194,7 +196,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 
 		$this->makeValidRequest( $params );
 
-		/** @var StatementListProvider $entity */
+		/** @var StatementListProvidingEntity $entity */
 		$entity = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $entityId );
 
 		$statements = $entity->getStatements();
@@ -208,7 +210,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		);
 	}
 
-	protected function makeValidRequest( array $params ) {
+	protected function makeValidRequest( array $params ): array {
 		list( $resultArray, ) = $this->doApiRequestWithToken( $params );
 
 		$this->assertIsArray( $resultArray, 'top level element is an array' );
@@ -221,7 +223,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 	/**
 	 * @dataProvider invalidRequestProvider
 	 */
-	public function testInvalidRequest( $itemHandle, $guid, $propertyHande, $snakType, $value, $error ) {
+	public function testInvalidRequest( string $itemHandle, ?string $guid, string $propertyHande, string $snakType, $value, $error ) {
 		$itemId = new ItemId( EntityTestHelper::getId( $itemHandle ) );
 		$item = WikibaseRepo::getDefaultInstance()->getEntityLookup()->getEntity( $itemId );
 
@@ -260,7 +262,7 @@ class SetQualifierTest extends WikibaseApiTestCase {
 		}
 	}
 
-	public function invalidRequestProvider() {
+	public function invalidRequestProvider(): iterable {
 		return [
 			'bad guid 1' => [ 'Berlin', 'xyz', 'StringProp', 'value', 'abc', 'invalid-guid' ],
 			'bad guid 2' => [ 'Berlin', 'x$y$z', 'StringProp', 'value', 'abc', 'invalid-guid' ],
