@@ -265,6 +265,16 @@
 		"WikibaseNS": "repo/Wikibase.i18n.namespaces.php",
 		"wikibaserepomagic": "repo/WikibaseRepo.i18n.magic.php"
 	},
+	"QUnitTestModule": {
+		"remoteExtPath": "Wikibase/lib/tests/qunit",
+		"localBasePath": "lib/tests/qunit",
+		"scripts": [
+			"wikibase.Site.tests.js"
+		],
+		"dependencies": [
+			"wikibase.Site"
+		]
+	},
 	"HookHandlers": {
 		"ArticleRevisionVisibilitySet": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
@@ -337,7 +347,6 @@
 		],
 		"ResourceLoaderTestModules": [
 			"\\Wikibase\\Repo\\RepoHooks::registerQUnitTests",
-			"LibHooks",
 			"ViewHooks"
 		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",

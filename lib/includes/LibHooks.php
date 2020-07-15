@@ -6,7 +6,6 @@ use ExtensionRegistry;
 use MediaWiki\Hook\ExtensionTypesHook;
 use MediaWiki\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Hook\UnitTestsListHook;
-use MediaWiki\ResourceLoader\Hook\ResourceLoaderTestModulesHook;
 use ResourceLoader;
 
 /**
@@ -19,7 +18,6 @@ use ResourceLoader;
  */
 final class LibHooks implements
 	UnitTestsListHook,
-	ResourceLoaderTestModulesHook,
 	ResourceLoaderRegisterModulesHook,
 	ExtensionTypesHook
 {
@@ -47,19 +45,6 @@ final class LibHooks implements
 	public function onUnitTestsList( &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
-	}
-
-	/**
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
-	 * @param array &$testModules
-	 * @param ResourceLoader $rl
-	 * @return void
-	 */
-	public function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
-		$testModules['qunit'] = array_merge(
-			$testModules['qunit'],
-			require __DIR__ . '/../tests/qunit/resources.php'
-		);
 	}
 
 	/**

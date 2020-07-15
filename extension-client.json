@@ -39,6 +39,16 @@
 	"ExtensionFunctions": [
 		"\\Wikibase\\Client\\Hooks\\ExtensionLoadHandler::onExtensionLoad"
 	],
+	"QUnitTestModule": {
+		"remoteExtPath": "Wikibase/lib/tests/qunit",
+		"localBasePath": "lib/tests/qunit",
+		"scripts": [
+			"wikibase.Site.tests.js"
+		],
+		"dependencies": [
+			"wikibase.Site"
+		]
+	},
 	"HookHandlers": {
 		"BeforePageDisplay": {
 			"class": "\\Wikibase\\Client\\Hooks\\BeforePageDisplayHandler",
@@ -151,7 +161,6 @@
 		"ParserLimitReportPrepare": "Parser",
 		"ResourceLoaderJqueryMsgModuleMagicWords": "Magic",
 		"ResourceLoaderRegisterModules": "LibHooks",
-		"ResourceLoaderTestModules": "LibHooks",
 		"ScribuntoExternalLibraries": "\\Wikibase\\Client\\ClientHooks::onScribuntoExternalLibraries",
 		"SearchDataForIndex": "Trivial",
 		"SearchIndexFields": "Trivial",
