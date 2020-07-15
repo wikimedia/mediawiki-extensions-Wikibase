@@ -169,6 +169,7 @@
 	"apihelp-wbsearchentities-example-4": "Søk etter «abc» på engelsk med ei grense på 2 og en offset på 2",
 	"apihelp-wbsearchentities-example-5": "Søk etter «alphabet» på engelsk uten URL-parameter",
 	"apihelp-wbsearchentities-example-6": "Søk etter «Q1234» på engelsk, for å matche entitets-ID-en.",
+	"apihelp-query+entityterms-example-item": "Hent etiketter og alias fra elementet Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "Returnerer informasjon om innholdsspråkene Wikibase godtar i forskjellige kontekster.",
 	"apihelp-query+wbcontentlanguages-param-context": "Konteksten der språkkodene bør være gyldige.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "Begrepene (etikett, beskrivelse og alias) tel en entitet.",

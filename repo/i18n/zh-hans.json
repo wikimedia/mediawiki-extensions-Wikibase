@@ -463,5 +463,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "移除警告",
 	"wikibase-federated-properties-search-api-error-message": "属性暂时不可用。",
 	"wikibase-federated-properties-special-list-of-properties-notice": "该Wikibase使用来自外部的联合属性。你可以访问$1",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "在$2上的$1属性列表"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "在$2上的$1属性列表",
+	"special-setaliases-parameterized": "设置$1别名",
+	"special-setlabel-parameterized": "设置$1标签"
 }

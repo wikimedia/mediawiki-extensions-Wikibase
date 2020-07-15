@@ -484,5 +484,9 @@
 	"wikibase-federated-properties-save-api-error-message": "因對於聯合來源 Wiki 的請求失敗，您的儲存無效。",
 	"wikibase-federated-properties-source-wiki-api-error-message": "因對於聯合來源 Wiki 的請求失敗，關於此項目的陳述暫時不可用。請重新整理頁面。",
 	"wikibase-federated-properties-special-list-of-properties-notice": "此 Wikibase 使用來自外部來源的聯合屬性。您可以存取$1。",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 在$2的屬性清單]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 在$2的屬性清單]",
+	"special-setaliases-parameterized": "設定$1別名",
+	"special-setlabel-parameterized": "設定$1標籤",
+	"special-setdescription-parameterized": "設定$1描述",
+	"special-setlabeldescriptionaliases-parameterized": "設定$1標籤、描述與別名"
 }

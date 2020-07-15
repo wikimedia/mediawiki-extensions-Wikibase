@@ -19,7 +19,6 @@
 			"YoViajo"
 		]
 	},
-	"wikibase-lib-desc": "Contiene una funcionalidad común para las extensiones Wikibase y cliente de Wikibase.",
 	"specialpages-group-wikibase": "Wikibase",
 	"wikibase-deletedentity-item": "Elemento borrado",
 	"wikibase-deletedentity-property": "Propiedad borrada",

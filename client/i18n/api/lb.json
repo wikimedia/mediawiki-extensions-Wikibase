@@ -5,7 +5,6 @@
 		]
 	},
 	"apihelp-query+wblistentityusage-param-entities": "Entitéiten déi benotzt goufen.",
-	"apihelp-query+pageterms-example-item": "D'Etiketten an d'Aliase vum Element Q84 kréien.",
 	"apihelp-query+description-example": "D'Beschreiwung fir d'Säit 'London' kréien.",
 	"apihelp-wbformatreference-param-reference": "D'Referenz als JSON-Objet."
 }

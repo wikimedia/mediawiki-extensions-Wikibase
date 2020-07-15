@@ -27,7 +27,6 @@
 	"apihelp-query+pageterms-summary": "Merrni termat e {{WBREPONAME}} (kryesisht etiketa, përshkrime dhe aliase) të përshoqëruar me një faqe përmes një lidhjeje sajti. Në vetë faqen e njësisë, termat përdoren drejtpërsëdrejti. Kujdes: Në një wiki depo, ky modul funksionon vetëm drejtpërsëdrejti në faqe njësish, jo në faqe të lidhura te një njësi përmes një lidhje sajti. Kjo mund të ndryshojë në të ardhmen.",
 	"apihelp-query+pageterms-example-simple": "Merrni krejt termat përshoqëruar me faqen 'London', në gjuhën e përdoruesit.",
 	"apihelp-query+pageterms-example-label-en": "Merrni etiketa dhe aliase përshoqëruar me faqen 'London', në anglisht.",
-	"apihelp-query+pageterms-example-item": "Merrni etiketa dhe aliase të objektit Q84.",
 	"apihelp-query+pageterms-param-terms": "Llojet e termave që duhen marrë, p.sh. 'përshkrim', secili i sjellë si një matricë vargjesh të dhënë sipas llojit të tyre, p.sh. {\"përshkrim\": [\"foo\"]}. Nëse s’përcaktohet, sillen krejt llojet.",
 	"apihelp-query+description-summary": "Merrni një përshkrim të shkurtër, i njohur edhe si nëntitull, që shpjegon se për çfarë është faqja në fjalë.",
 	"apihelp-query+description-extended-description": "Përshkrimi është tekst i thjeshtë, në një rresht, por ama edhe arbitrar (duke përfshirë, potencialisht, etiketa HTML shqeto, të cilat edhe këto duhen interpretuar si tekst i thjeshtë). Në HTML s’duhet të përdoret pa u paraprirë!",

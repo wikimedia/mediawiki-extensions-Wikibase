@@ -23,7 +23,6 @@
 	"apihelp-query+pageterms-description": "Kaout an termenoù liammet ouzh ur bajenn dre un elfenn roadenn liammet. War ur bajenn entite eus wikibase eo implijet war-eeun termenoù an entite.\nDiwallit mat : war ur wiki sanailhañ, termenoù ar pajennoù ne'z eont en-dro nemet war ar pajennoù entite. Marteze a-walc'h e cheñcho an dra-se en amzer da zont.",
 	"apihelp-query+pageterms-example-simple": "Kaout an holl dermenoù liammet ouzh ar bajenn 'London' e yezh an implijer.",
 	"apihelp-query+pageterms-example-label-en": "Kaout an tikedennoù hag an aliasoù liammet ouzh ar bajenn 'London', e saozneg.",
-	"apihelp-query+pageterms-example-item": "Kaout tikedennoù hag aliasoù an elfenn Q84.",
 	"apihelp-query+pageterms-param-terms": "Ar seurt termenoù da gaout, da sk. 'deskrivadur'. Ma n'eo ket resisaet e vo distroet kement seurt zo.",
 	"apihelp-query+wikibase-description": "Tapout titouroù diwar-benn arval ar Wikibase ha war kavlec'h Wikibase stag outañ.",
 	"apihelp-query+wikibase-example": "Tapout hent an URL ha titouroù all diwar-benn arval Wikibase hag ar c'havlec'h.",

@@ -189,5 +189,6 @@
 	"wikibase-concept-uri-tooltip": "URI koji označava koncept opisan ovom stavkom",
 	"wikibase-tainted-ref-popper-remove-warning": "Ukloni upozorenje",
 	"wikibase-federated-properties-search-api-error-message": "Svojstva su privremeno nedostupna.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Popis svojstava na $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Popis svojstava na $2]",
+	"special-setdescription-parameterized": "Postavljanje opisa za $1"
 }

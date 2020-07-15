@@ -26,7 +26,6 @@
 	"apihelp-query+pageterms-summary": "取得透過站台連結關聯至頁面的{{WBREPONAME}}名稱（代表性標籤、描述，以及別名）。在項目頁面本身，名稱會被直接使用。請注意：在儲存庫 wiki 裡，此模組僅在項目頁面上直接運作，而非透過站台連結來連接至項目的頁面上。這在往後可能會有變動。",
 	"apihelp-query+pageterms-example-simple": "取得所有關聯到頁面「London」，以使用者語言的項目。",
 	"apihelp-query+pageterms-example-label-en": "取得關聯到頁面「London」的英語標籤和別名。",
-	"apihelp-query+pageterms-example-item": "取得項目 Q84 的標籤與別名。",
 	"apihelp-query+pageterms-param-terms": "要取得的名稱類型，例如：'description'；會依類型來各個回傳以字串為鍵值的陣列，例如：{\"description\": [\"foo\"]}。若未特別指定，會回傳所有類型。",
 	"apihelp-query+description-summary": "取得解釋目標頁面相關內容的簡短描述（即子標題）。",
 	"apihelp-query+description-extended-description": "描述為單行任意內容的純文字（可能會包含原始的 HTML 標籤，並且也會詮釋成純文字）。這不應使用於 HTML 非轉義！",

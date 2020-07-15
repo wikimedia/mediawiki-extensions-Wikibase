@@ -510,5 +510,9 @@
 	"wikibase-federated-properties-save-api-error-message": "Votre sauvegarde a échoué suite à l'échec d'une requête sur le Wiki des sources de la fédération.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Les déclarations concernant cet élément sont temporairement indisponibles en raison d’une demande non aboutie auprès du wiki source de la fédération. Veuillez rafraîchir la page.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Cette wikibase utilise des propriétés fédérées d'une source externe. Vous pouvez accéder au $1.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste des propriétés sur $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste des propriétés sur $2]",
+	"special-setaliases-parameterized": "Définir les alias $1",
+	"special-setlabel-parameterized": "Définir le libellé $1",
+	"special-setdescription-parameterized": "Donner la description de $1",
+	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, description et alias $1"
 }

@@ -29,7 +29,6 @@
 	"apihelp-query+pageterms-summary": "Obtener los términos de {{WBREPONAME}} (normalmente, etiquetas, descripciones y alias) asociados con una página mediante un enlace de sitio. En la propia página de entidad, se usan directamente los términos. Advertencia: en un wiki repositorio, este módulo solo funciona directamente en las páginas de entidad, no en las páginas conectadas a un elemento mediante un enlace de sitio. Esto puede cambiar en el futuro.",
 	"apihelp-query+pageterms-example-simple": "Obtener todos los términos asociados con la página 'London', en el idioma del usuario.",
 	"apihelp-query+pageterms-example-label-en": "Obtener etiquetas y alias asociados con la página 'London', en inglés.",
-	"apihelp-query+pageterms-example-item": "Obtener etiquetas y alias del elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos que se deben obtener; p. ej., \"description\", cada uno de los cuales devuelto como una matriz de cadenas con claves según su tipo; p. ej., {\"description\": [\"foo\"]}. Si no se especifica, se devolverán todos los tipos.",
 	"apihelp-query+description-summary": "Obtener una descripción breve o subtítulo que explica el tema de la página de destino.",
 	"apihelp-query+description-extended-description": "La descripción está en texto sin formato, en una sola línea, pero, por lo demás, arbitraria (puede incluir etiquetas HTML sin procesar, que también se deben interpretar como texto sin formato). ¡No debe usarse en HTML sin escapar!",

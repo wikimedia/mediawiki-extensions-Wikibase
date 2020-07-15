@@ -26,7 +26,6 @@
 	"apihelp-query+pageterms-summary": "Ottieni i termini {{WBREPONAME}} (tipicamente etichette, descrizioni e alias) associati a una pagina tramite un collegamento al sito. Sulla pagina di un'entità wikibase, questi termini sono usati direttamente.\nAttenzione: su un repository wiki, questo modulo funziona solo se usato direttamente sulle pagine dell'entità, non sulle pagine connesse a un'entità tramite un collegamento al sito. Questa cosa potrebbe cambiare in futuro.",
 	"apihelp-query+pageterms-example-simple": "Ottieni tutti i termini associati alla pagina 'London', nella lingua dell'utente.",
 	"apihelp-query+pageterms-example-label-en": "Ottieni etichette ed alias associati alla pagina 'London', in inglese.",
-	"apihelp-query+pageterms-example-item": "Ottieni le etichette e gli alias dell'elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "Il tipo di termine da ottenere, ad esempio 'description', ognuna restituita come una matrice di stringhe con chiave il loro tipo, ad esempio {\"description\": [\"foo\"]}. Se non specificato, saranno restituiti tutti i tipi.",
 	"apihelp-query+description-paramvalue-prefersource-local": "Descrizioni locali tramite la parser function <code><nowiki>{{SHORTDESC:...}}</nowiki></code> nel wikitesto della pagina.",
 	"apihelp-query+description-example": "Ottieni la descrizione per la pagina 'London'.",

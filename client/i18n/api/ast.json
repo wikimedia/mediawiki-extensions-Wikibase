@@ -27,7 +27,6 @@
 	"apihelp-query+pageterms-summary": "Algama los términos de {{WBREPONAME}} (de vezu etiquetes, descripciones y alcuños) asociaos con una páxina al traviés d'un enllaz de sitiu. Na propia páxina d'entidá, úsense direutamente los términos. Cuidáu: N'una wiki de repo, esti módulu sólo funciona direutamente nes páxines d'entidá, non nes páxines coneutaes con una entidá per un enllaz de sitiu. Esto puede cambiar nel futuru.",
 	"apihelp-query+pageterms-example-simple": "Algama tolos términos asociaos cola páxina 'London', na llingua del usuariu.",
 	"apihelp-query+pageterms-example-label-en": "Algama les etiquetes y alcuños asociaos cola páxina 'London', n'inglés.",
-	"apihelp-query+pageterms-example-item": "Recibir les etiquetes y alcuños del elementu Q84.",
 	"apihelp-query+pageterms-param-terms": "Los tipos de términos a algamar; p.ex., \"description\", caún d'ellos devueltu como una matriz de cadenes con claves según el so tipu; p. ex., {\"description\": [\"foo\"]}. Si nun s'especifica, devuélvense tolos tipos.",
 	"apihelp-query+description-summary": "Recibir una descripción curtia (subtítulu) esplicando'l tema de la páxina destín.",
 	"apihelp-query+description-extended-description": "La descripcion ye testu planu, nuna única llinia, pero polo demás arbitrariu (potencialmente incluyendo etiquetes HTML en crudo, que tamién tendríen d'interpretase como testu planu). Nun tien d'usase con HTML ensin escapar.",

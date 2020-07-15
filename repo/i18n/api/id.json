@@ -145,6 +145,7 @@
 	"apihelp-wbsearchentities-example-1": "Cari \"abc\" dalam bahasa Inggris dengan pengaturan standar untuk jenis dan batas",
 	"apihelp-wbsearchentities-example-2": "Cari \"abc\" dalam bahasa Inggris dengan batas 50 hasil",
 	"apihelp-wbsearchentities-example-3": "Cari \"alphabet\" dalam bahasa Inggris untuk jenis atribut",
+	"apihelp-query+entityterms-example-item": "Dapatkan label dan nama lain dari butir Q84.",
 	"apihelp-query+wbsearch-description": "Cari entitas dengan menggunakan label dan nama lain.\nHal ini bisa dipergunakan sebagai sebuah pembangkit untuk permintaan (''query'') lain.",
 	"apihelp-query+wbsearch-param-search": "Cari teks ini.",
 	"apihelp-query+wbsearch-param-language": "Cari dalam bahasa ini.",

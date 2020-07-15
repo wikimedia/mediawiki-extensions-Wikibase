@@ -5,6 +5,7 @@
 			"Basvb",
 			"Bdijkstra",
 			"Breghtje",
+			"Dutchy45",
 			"Elroy",
 			"Festina90",
 			"Flightmare",
@@ -416,5 +417,6 @@
 	"wikibase-tainted-ref-popper-text": "De waarde van deze verklaring is gewijzigd, maar de referentie is hetzelfde gebleven. Je kunt deze waarschuwing verwijderen als de referentie nog steeds correct is.",
 	"wikibase-tainted-ref-popper-title": "Referentie/waarde komt mogelijk niet overeen",
 	"wikibase-tainted-ref-popper-help-link-text": "Hulp",
-	"wikibase-tainted-ref-popper-remove-warning": "Waarschuwing verwijderen"
+	"wikibase-tainted-ref-popper-remove-warning": "Waarschuwing verwijderen",
+	"wikibase-federated-properties-search-api-error-message": "Eigenschappen tijdelijk niet beschikbaar"
 }

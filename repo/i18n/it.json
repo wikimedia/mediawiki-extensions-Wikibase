@@ -416,5 +416,9 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Pagina di aiuto per questo tipo di vincolo",
 	"wikibase-federated-properties-search-api-error-message": "Proprietà temporaneamente non disponibili.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Questo WikiBase usa proprietà federate provenienti da fonte esterna. Puoi accedere a $1",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista delle Proprietà su $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista delle Proprietà su $2]",
+	"special-setaliases-parameterized": "Imposta alias per $1",
+	"special-setlabel-parameterized": "Imposta etichetta per $1",
+	"special-setdescription-parameterized": "Imposta descrizione per $1",
+	"special-setlabeldescriptionaliases-parameterized": "Imposta etichetta, descrizione e alias per $1"
 }

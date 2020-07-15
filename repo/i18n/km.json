@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ladsgroup",
+			"Pichnat Thong",
 			"Sovichet",
 			"គីមស៊្រុន"
 		]
@@ -23,5 +24,8 @@
 	"wikibase-badgeselector-badge-placeholder-title": "ចុចដើម្បីដាក់សញ្ញាសម្គាល់។",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|ឯកសារ​យោង|ឯកសារ​យោង}}",
 	"wikibase-validator-invalid": "តម្លៃ​មិន​ត្រឹម​ត្រូវ",
-	"special-availablebadges": "សញ្ញាសម្គាល់ដែលអាចប្រើបាន"
+	"special-availablebadges": "សញ្ញាសម្គាល់ដែលអាចប្រើបាន",
+	"special-setaliases-parameterized": "ដាក់ឈ្មោះប្តូរអោយ$1",
+	"special-setlabel-parameterized": "ដាក់ស្លាកអោយ$1",
+	"special-setdescription-parameterized": "ដាក់ពិពណ៌នាអោយ$1"
 }

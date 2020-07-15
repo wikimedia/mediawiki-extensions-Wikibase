@@ -169,6 +169,7 @@
 	"apihelp-wbsearchentities-example-4": "חיפוש \"abc\" בשפה האנגלית עם הגבלה של 2 והיסט של 2",
 	"apihelp-wbsearchentities-example-5": "חיפוש \"alphabet\" בשפה האנגלית ללא הפרמטר url",
 	"apihelp-wbsearchentities-example-6": "חיפוש עבור \"Q1234\" בשפה אנגלית, כדי להתאים למזהה של הישות.",
+	"apihelp-query+entityterms-example-item": "קבלת תוויות וכינויים של הפריט Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "מחזיר מידע על שפות התוכן של שוויקיבייס מקבל בהקשרים שונים.",
 	"apihelp-query+wbcontentlanguages-param-context": "ההקשר שבו שפת התוכן אמורה להיות תקינה.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "האיברים (תווית, תיאור, כינויים) של ישות.",

@@ -145,6 +145,7 @@
 	"apihelp-wbsearchentities-example-1": "Ieškoti \"abc\" anglų kalba, su numatytosiomis tipo ir limito reikšmėmis",
 	"apihelp-wbsearchentities-example-2": "Ieškoti \"abc\" anglų kalba su limitu 50",
 	"apihelp-wbsearchentities-example-3": "Ieškoti savybės tipo \"alphabet\" anglų kalba",
+	"apihelp-query+entityterms-example-item": "Gauti etiketes ir alternatyvius vardus įrašo Q84.",
 	"apihelp-query+wbsearch-description": "Ieško esybių pagal žymes ir alternatyvius vardus.\nTai gali būti naudojama kaip generatorius kitoms užklausoms.\nGrąžina sutampantį terminą, kuris turėtų būti rodomas.",
 	"apihelp-query+wbsearch-param-search": "Ieškoti šio teksto.",
 	"apihelp-query+wbsearch-param-language": "Ieškoti šia kalba.",

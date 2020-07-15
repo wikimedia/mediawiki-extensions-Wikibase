@@ -28,6 +28,7 @@
 	"wikibase-linkitem-confirmitem-text": "La pagino quon vu selektis ja esas asociita ad [$1 artiklo en nia centrala receveyo di artikli]. Voluntez verifikar se {{PLURAL:$2|la pagino|la pagini}} montrita infre {{PLURAL:$2|esas|esas}} {{PLURAL:$2|la pagino quon|la pagini quin}} vu deziras ligilar a la nuna pagino.",
 	"wikibase-linkitem-confirmitem-button": "Konfirmez",
 	"wikibase-linkitem-success-link": "La pagini ligesis. Vu povas trovar la pagino qua kontenas la ligili en nia [$1 centrala receveyo di datumi].",
+	"limitreport-entityaccesscount": "Quanto di enti de Wikibase portita",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Celar",
 	"wikibase-rc-hide-wikidata-show": "Montrar",

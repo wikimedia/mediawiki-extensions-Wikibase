@@ -176,6 +176,7 @@
 	"apihelp-wbsearchentities-example-4": "ابحث عن \"abc\" باللغة الإنجليزية مع حد 2 وإزاحة 2",
 	"apihelp-wbsearchentities-example-5": "ابحث عن \"alphabet\" باللغة الإنجليزية مع حذف معامل المسار",
 	"apihelp-wbsearchentities-example-6": "ابحث عن \"Q1234\" بالإنجليزية; لمطابقة معرّف الكيان.",
+	"apihelp-query+entityterms-example-item": "الحصول على التسميات والأسماء المستعارة للعنصر Q84.",
 	"apihelp-query+wbcontentlanguages-summary": "يعرض معلومات عن لغات محتوى تقبلها قاعدة الويكي في سياقات مختلفة.",
 	"apihelp-query+wbcontentlanguages-param-context": "السياق الذي يجب أن تكون لغات المحتوى فيه صالحة.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "مصطلحات (التسمية والوصف والأسماء المستعارة) الكيان.",

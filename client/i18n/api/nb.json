@@ -27,7 +27,6 @@
 	"apihelp-query+pageterms-summary": "Hent {{WBREPONAME}}-termer (typisk etiketter, beskrivelser og alias) knytta til en side via en nettstedlenke. På entitetssiden selv brukes termene direkte. Forbehold: På en repowiki vil denne modulen bare fungere direkte på entitetssider, ikke på sider koblet til en entitet via en nettstedlenke. Dette kan endre seg i fremtiden.",
 	"apihelp-query+pageterms-example-simple": "Hent alle termer assosiert med siden «London», på brukerens språk.",
 	"apihelp-query+pageterms-example-label-en": "Hent etiketter og alias assosiert med siden «London», på engelsk.",
-	"apihelp-query+pageterms-example-item": "Hent etiketter og alias fra elementet Q84.",
 	"apihelp-query+pageterms-param-terms": "Type termer som hentes, f.eks. «description»; hver av dem returneres som en tabell over strenger med typen som nøkkel, f.eks. {\"description\": [\"foo\"]}. Hvis det ikke spesifiseres, så vil alle typer bli returnert.",
 	"apihelp-query+description-summary": "Få en kort beskrivelse, også kalt undertittel, som forklarer hva målsiden handler om.",
 	"apihelp-query+description-extended-description": "Beskrivelsen er en enkelt linje med ren tekst. Merk at teksten potensielt kan inneholde rå HTML-tagger, så resultatet må ikke brukes uten HTML-escaping.",

@@ -6,7 +6,6 @@
 			"LR Guanzon"
 		]
 	},
-	"wikibase-lib-desc": "Naghahawak ng karaniwang panunungkulan para sa mga pandugtong ng Wikibase at Wikibase Client",
 	"wikibase-error-save-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagsagip at dahil dito, hindi makumpleto ang mga pagbabago.",
 	"wikibase-error-remove-generic": "Naganap ang isang kamalian habang sinusubukang isagawa ang pagtanggal at dahil dito, hindi makukumpleto ang mga binago mo.",
 	"wikibase-error-save-timeout": "Nakakaranas kami ng mga suliraning teknikal, at dahil dito hindi mabuo ang iyong \"pagsagip\".",

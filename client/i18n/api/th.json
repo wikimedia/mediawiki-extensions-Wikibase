@@ -16,6 +16,5 @@
 	"apihelp-query+wblistentityusage-param-entities": "รายการสนเทศที่ถูกเรียกใช้แล้ว",
 	"apihelp-query+wblistentityusage-param-limit": "จำนวนการเรียกใช้รายการสนเทศที่จะคืนค่า",
 	"apihelp-query+wblistentityusage-example-simple": "ดึงหน้าที่เรียกใช้รายการสนเทศ <kbd>Q2</kbd>.",
-	"apihelp-query+wblistentityusage-example-url": "ดึงหน้าที่เรียกใช้รายการสนเทศ <kbd>Q2</kbd> โดยรวม URL มาด้วย",
-	"apihelp-query+pageterms-example-item": "ดึงค่าป้ายชื่อและชื่ออื่นของรายการ Q84"
+	"apihelp-query+wblistentityusage-example-url": "ดึงหน้าที่เรียกใช้รายการสนเทศ <kbd>Q2</kbd> โดยรวม URL มาด้วย"
 }

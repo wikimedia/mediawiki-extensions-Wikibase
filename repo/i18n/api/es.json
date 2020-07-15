@@ -106,6 +106,7 @@
 	"apihelp-wbsearchentities-example-1": "Buscar «abc» en inglés, con tipo y límite predeterminados",
 	"apihelp-wbsearchentities-example-2": "Buscar \"abc\" en el idioma inglés con un límite de 50",
 	"apihelp-wbsearchentities-example-4": "Buscar \"abc\" en el idioma inglés con un límite de 2 y un desplazamiento de 2",
+	"apihelp-query+entityterms-example-item": "Obtener etiquetas y alias del elemento Q84.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Un valor de texto monolingüe en una declaración.",
 	"apihelp-query+wbcontentlanguages-param-prop": "Las propiedades que deben devolverse sobre cada idioma.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "El código de idioma.",

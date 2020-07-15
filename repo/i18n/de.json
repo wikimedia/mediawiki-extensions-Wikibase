@@ -481,5 +481,9 @@
 	"wikibase-federated-properties-save-api-error-message": "Ihr Speichern ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Aussagen zu diesem Datenobjekt sind aufgrund einer fehlgeschlagenen Anfrage an das Verbundquellen-Wiki vorübergehend nicht verfügbar. Bitte aktualisiere die Seite.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Diese Wikibase-Instanz verwendet föderierte Eigenschaften aus einer externen Quelle. Du kannst über $1 darauf zugreifen.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste der Eigenschaften auf $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste der Eigenschaften auf $2]",
+	"special-setaliases-parameterized": "Aliasse für $1 festlegen",
+	"special-setlabel-parameterized": "Bezeichnung für $1 festlegen",
+	"special-setdescription-parameterized": "Beschreibung für $1 festlegen",
+	"special-setlabeldescriptionaliases-parameterized": "Bezeichnung, Beschreibung und Aliasse für $1 festlegen"
 }

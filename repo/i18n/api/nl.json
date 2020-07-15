@@ -151,6 +151,7 @@
 	"apihelp-wbsearchentities-example-3": "Zoeken naar \"alphabet\" in de Engelse taal voor type eigenschap",
 	"apihelp-wbsearchentities-example-4": "Zoeken naar \"abc\" in de Engelse taal met een maximum van 2 resultaten en een startpositie van 2",
 	"apihelp-wbsearchentities-example-5": "Zoeken naar \"alphabet\" in de Engelse taal voor type-eigenschap",
+	"apihelp-query+entityterms-example-item": "Labels en aliassen voor het item Q84 opvragen.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "De taalcode.",
 	"apihelp-query+wbsearch-description": "Zoekt naar entiteiten met behulp van labels en aliassen.\nDit kan worden gebruikt als een generator voor andere zoekopdrachten.\nGeeft de overeenkomende term terug die moet worden weergegeven.",
 	"apihelp-query+wbsearch-param-search": "Naar deze tekst zoeken.",

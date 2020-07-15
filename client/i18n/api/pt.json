@@ -30,7 +30,6 @@
 	"apihelp-query+pageterms-summary": "Obter os termos {{WBREPONAME}} (tipicamente rótulos, descrições e nomes alternativos) associados a uma página através de uma hiperligação intersites. Na página da própria entidade, os termos são usados diretamente. Note: numa wiki de repositório, este módulo só funciona diretamente em páginas de entidades, e não em páginas ligadas a uma entidade através de uma hiperligação intersites. Isto poderá mudar no futuro.",
 	"apihelp-query+pageterms-example-simple": "Obter todos os termos associados à página 'Londres', na língua do utilizador.",
 	"apihelp-query+pageterms-example-label-en": "Obter os rótulos e nomes alternativos associados à página 'Londres', em inglês.",
-	"apihelp-query+pageterms-example-item": "Obter os rótulos e nomes alternativos do elemento Q84.",
 	"apihelp-query+pageterms-param-terms": "O tipo de termos a serem obtidos (por exemplo, 'description'), cada um dos quais devolvido como uma matriz de textos (strings) cuja chave é o seu tipo (por exemplo, {\"description\": [\"foo\"]}). Se não for especificado, serão devolvidos todos os tipos.",
 	"apihelp-query+description-summary": "Obter uma descrição breve, isto é, um subtítulo que explica o objetivo da página de destino.",
 	"apihelp-query+description-extended-description": "A descrição é texto simples, numa única linha, mas em tudo o resto arbitrária (possivelmente incluindo elementos de HTML puro, que também devem ser interpretados como texto simples). Não pode ser usada no interior de HTML sem escapes!",

@@ -78,6 +78,7 @@
 	"apihelp-wbsearchentities-param-type": "Cerca per questo tipo di entità.",
 	"apihelp-wbsearchentities-param-limit": "Numero massimo di risultati",
 	"apihelp-wbsearchentities-example-6": "Cerca\"Q1234\" in lingua inglese, per corrispondere all'ID entità.",
+	"apihelp-query+entityterms-example-item": "Ottieni le etichette e gli alias dell'elemento Q84.",
 	"apihelp-query+wbcontentlanguages-param-context": "Il contesto in cui le lingue dei contenuti dovrebbero essere valide.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-term": "I termini (etichetta, descrizione, alias) di un'entità.",
 	"apihelp-query+wbcontentlanguages-paramvalue-context-monolingualtext": "Un valore di testo monolingua in una dichiarazione.",

@@ -110,6 +110,7 @@
 	"apihelp-wbsearchentities-example-1": "جستجوی \"abc\" در زبان انگلیسی، که پیش‌فرض نوع و محدودیت است",
 	"apihelp-wbsearchentities-example-2": "جستجو برای \"abc\" در زبان انگلیسی با محدودیت ۵۰",
 	"apihelp-wbsearchentities-example-3": "جستجو برای \"alphabet\" در انگلیسی برای نوع خصوصیت",
+	"apihelp-query+entityterms-example-item": "گرفتن برچسب‌ها و نام‌های مستعار آیتم Q84.",
 	"apihelp-query+wbcontentlanguages-paramvalue-prop-code": "کد زبان.",
 	"apihelp-query+wbsearch-param-search": "این متن را جستجو کن.",
 	"apihelp-query+wbsearch-param-language": "در این زبان جستجو کن.",

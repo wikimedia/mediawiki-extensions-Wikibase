@@ -22,6 +22,5 @@
 	"apihelp-query+wblistentityusage-example-url": "Uzyskaj strony wykorzystujące obiekt <kbd>Q2</kbd> z dołączonym adresem URL.",
 	"apihelp-query+wblistentityusage-example-aspect": "Uzyskaj strony wykorzystujące element <kbd>Q2</kbd>, a aspektem ma być link do strony lub stwierdzenie.",
 	"apihelp-query+pageterms-example-label-en": "Uzyskaj etykiety i aliasy powiązane ze stroną 'London' po angielsku.",
-	"apihelp-query+pageterms-example-item": "Uzyskaj etykietę i aliasy elementu Q84.",
 	"apihelp-query+description-param-prefersource": "Które źródło opisu preferować, jeśli występuje:"
 }

@@ -69,6 +69,7 @@
 	"apihelp-wbsearchentities-param-limit": "Eredmények maximális száma",
 	"apihelp-wbsearchentities-example-1": "Keresés „abc”-re angolul, alapértelmezett típussal és limittel",
 	"apihelp-wbsearchentities-example-2": "Keresés „abc”-re angolul 50-es limittel",
+	"apihelp-query+entityterms-example-item": "A Q84 elem címkéinek és más neveinek lekérdezése.",
 	"apihelp-query+wbsearch-param-search": "Keresés erre a szövegre.",
 	"apihelp-query+wbsearch-param-language": "Keresés ezen a nyelven.",
 	"apihelp-query+wbsearch-param-limit": "Eredmények maximális száma",

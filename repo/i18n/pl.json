@@ -373,5 +373,9 @@
 	"wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1",
 	"wikibase-entity-save-error-heading": "Coś poszło nie tak",
 	"wikibase-entity-save-error-message": "Twoja zmiana nie mogła zostać zapisana. Możesz spróbować ponownie naciskając przycisk publikacji.",
-	"wikibase-federated-properties-search-api-error-message": "Własności tymczasowo niedostępne."
+	"wikibase-federated-properties-search-api-error-message": "Własności tymczasowo niedostępne.",
+	"special-setaliases-parameterized": "Ustaw aliasy $1",
+	"special-setlabel-parameterized": "Ustaw etykietę $1",
+	"special-setdescription-parameterized": "Ustaw opis $1",
+	"special-setlabeldescriptionaliases-parameterized": "Ustaw etykietę, opis i aliasy $1"
 }

@@ -26,7 +26,6 @@
 	"apihelp-query+pageterms-summary": "通过网站链接获取与页面相关的{{WBREPONAME}}术语（代表的标签、描述和别名）。在实体页面本身，术语会被直接使用。敬告：在存储库wiki上，此模块只能直接工作于实体页面，而不是通过网站链接连接到实体的页面。这可能在将来更新。",
 	"apihelp-query+pageterms-example-simple": "获取与页面“London”相关的所有术语，在用户语言中。",
 	"apihelp-query+pageterms-example-label-en": "获取与页面“London”相关的英语标签和别名。",
-	"apihelp-query+pageterms-example-item": "获取项Q84的标签和别名。",
 	"apihelp-query+pageterms-param-terms": "要获取的术语类型，例如“description”，按类型每个返回为字符串键控数组，例如{\"description\": [\"foo\"]}。如果未指定，就返回所有类型。",
 	"apihelp-query+description-summary": "获取一段简短描述（或称子标题）解释目标页面有关什么话题。",
 	"apihelp-query+description-extended-description": "描述是单行任意内容的纯文本（可能包含原始HTML标签，这也应解释为纯文本）。它必须不能用于HTML非转义！",

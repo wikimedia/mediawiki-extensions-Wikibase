@@ -9,6 +9,7 @@
 	"apihelp-wbavailablebadges-example-1": "'Nderroghe tutte le vôsce distindive disponibbile",
 	"apihelp-wbcreateclaim-description": "Ccreje asserziune Uicchibase.",
 	"apihelp-wbcreateclaim-summary": "Ccreje asserziune Uicchibase.",
+	"apihelp-query+entityterms-example-item": "Pigghie le etichette e le alias d'a vôsce Q84.",
 	"apihelp-query+wbdatabridgeconfig-summary": "Tuèrne 'a 'mbormazione ca te serve pa funzione [[mw:Special:MyLanguage/Wikidata Bridge|Ponde d'u Date]].",
 	"apihelp-query+wbdatabridgeconfig-extended-description": "Quiste jè 'nu modeule 'nderne. Pe piacere no 'u sce ausanne.",
 	"apihelp-query+wbsubscribers-param-prop": "Probbietà da aggiungere a 'u resultate"
