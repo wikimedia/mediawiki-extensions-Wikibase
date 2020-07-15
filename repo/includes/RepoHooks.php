@@ -33,6 +33,7 @@ use Title;
 use User;
 use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
+use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
@@ -1154,6 +1155,17 @@ final class RepoHooks {
 		$parser->setFunctionHook(
 			CommaSeparatedList::NAME,
 			[ CommaSeparatedList::class, 'handle' ]
+		);
+	}
+
+	public static function onRegistration() {
+		global $wgResourceModules;
+
+		LibHooks::onRegistration();
+
+		$wgResourceModules = array_merge(
+			$wgResourceModules,
+			require __DIR__ . '/../resources/Resources.php'
 		);
 	}
 }

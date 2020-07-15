@@ -318,12 +318,6 @@ call_user_func( function() {
 	$wgHooks['ShowSearchHit'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHit';
 	$wgHooks['ShowSearchHitTitle'][] = 'Wikibase\Repo\Hooks\ShowSearchHitHandler::onShowSearchHitTitle';
 
-	// Resource Loader Modules:
-	$wgResourceModules = array_merge(
-		$wgResourceModules,
-		require __DIR__ . '/resources/Resources.php'
-	);
-
 	$wgWBRepoSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
