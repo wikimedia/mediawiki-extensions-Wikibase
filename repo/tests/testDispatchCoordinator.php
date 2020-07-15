@@ -58,8 +58,8 @@ class TestDispatchCoordinator extends Maintenance {
 	 * Maintenance script entry point.
 	 */
 	public function execute() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseLib' ) ) {
-			throw new MWException( "WikibaseLib has not been loaded." );
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'WikibaseRepository' ) ) {
+			throw new MWException( "WikibaseRepository has not been loaded." );
 		}
 
 		$this->cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
