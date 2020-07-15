@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Store\Sql;
 
 use DatabaseUpdater;
 use HashBagOStuff;
+use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 use MediaWiki\MediaWikiServices;
 use MWException;
 use Onoi\MessageReporter\ObservableMessageReporter;
@@ -31,7 +32,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class DatabaseSchemaUpdater {
+class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	/**
 	 * @var Store
@@ -42,7 +43,7 @@ class DatabaseSchemaUpdater {
 		$this->store = $store;
 	}
 
-	private static function factory() {
+	public static function factory() {
 		$store = WikibaseRepo::getDefaultInstance()->getStore();
 
 		return new self( $store );
@@ -53,17 +54,8 @@ class DatabaseSchemaUpdater {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/LoadExtensionSchemaUpdates
 	 *
 	 * @param DatabaseUpdater $updater
-	 *
-	 * @return bool
 	 */
-	public static function onSchemaUpdate( DatabaseUpdater $updater ) {
-		$schemaUpdater = self::factory();
-		$schemaUpdater->doSchemaUpdate( $updater );
-
-		return true;
-	}
-
-	public function doSchemaUpdate( DatabaseUpdater $updater ) {
+	public function onLoadExtensionSchemaUpdates( $updater ) {
 		$db = $updater->getDB();
 		$type = $db->getType();
 

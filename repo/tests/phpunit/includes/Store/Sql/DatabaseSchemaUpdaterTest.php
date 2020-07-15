@@ -39,7 +39,7 @@ class DatabaseSchemaUpdaterTest extends \PHPUnit\Framework\TestCase {
 			->will( $this->returnValue( $db ) );
 
 		$databaseSchemaUpdater = new DatabaseSchemaUpdater( $store );
-		$databaseSchemaUpdater->doSchemaUpdate( $updater );
+		$databaseSchemaUpdater->onLoadExtensionSchemaUpdates( $updater );
 	}
 
 }
