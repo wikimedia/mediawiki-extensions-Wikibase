@@ -85,6 +85,12 @@ class MockMatchingTermsLookup implements MatchingTermsLookup {
 		array $options = []
 	) {
 		$options['orderByWeight'] = true;
+
+		if ( array_key_exists( 'LIMIT', $options ) ) {
+			$limit = $options['LIMIT'];
+		}
+		$options['LIMIT'] = 2500;
+
 		$terms = $this->getMatchingTerms( $criteria, $termType, $entityType, $options );
 		$previousEntityIdSerializations = [];
 		$returnTerms = [];
@@ -93,6 +99,10 @@ class MockMatchingTermsLookup implements MatchingTermsLookup {
 				$returnTerms[] = $termIndexEntry;
 				$previousEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
 			}
+		}
+
+		if ( isset( $limit ) && count( $returnTerms ) > $limit ) {
+			$returnTerms = array_slice( $returnTerms, 0, $limit );
 		}
 		return $returnTerms;
 	}
