@@ -321,6 +321,6 @@
 		],
 		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
 	},
-	"callback": "\\Wikibase\\Lib\\LibHooks::onRegistration",
+	"callback": "\\Wikibase\\Repo\\RepoHooks::onRegistration",
 	"manifest_version": 2
 }
