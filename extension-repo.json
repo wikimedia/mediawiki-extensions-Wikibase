@@ -235,9 +235,6 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory"
 		},
-		"ChangesSubscriptionSchemaUpdater": {
-			"class": "\\Wikibase\\Repo\\Store\\Sql\\ChangesSubscriptionSchemaUpdater"
-		},
 		"DatabaseSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater",
 			"factory": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater::factory"
@@ -281,10 +278,7 @@
 		"GetPreferences": "\\Wikibase\\Repo\\RepoHooks::onGetPreferences",
 		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
 		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
-		"LoadExtensionSchemaUpdates": [
-			"DatabaseSchemaUpdater",
-			"ChangesSubscriptionSchemaUpdater"
-		],
+		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
 		"MediaWikiPHPUnitTest::startTest": "\\Wikibase\\Repo\\RepoHooks::onMediaWikiPHPUnitTestStartTest",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
 		"OutputPageBeforeHTML": [

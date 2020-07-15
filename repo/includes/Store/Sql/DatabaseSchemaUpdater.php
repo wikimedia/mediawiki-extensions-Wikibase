@@ -113,6 +113,26 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				[ __CLASS__, 'rebuildItemTerms' ]
 			] );
 		}
+
+		$this->updateChangesSubscriptionTable( $updater );
+	}
+
+	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
+		$table = 'wb_changes_subscription';
+
+		if ( !$dbUpdater->tableExists( $table ) ) {
+			$db = $dbUpdater->getDB();
+			$script = $this->getUpdateScriptPath( 'changes_subscription', $db->getType() );
+			$dbUpdater->addExtensionTable( $table, $script );
+
+			// Register function for populating the table.
+			// Note that this must be done with a static function,
+			// for reasons that do not need explaining at this juncture.
+			$dbUpdater->addExtensionUpdate( [
+				[ __CLASS__, 'fillSubscriptionTable' ],
+				$table
+			] );
+		}
 	}
 
 	/**
@@ -509,6 +529,30 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
 		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
+	}
+
+	/**
+	 * Static wrapper for EntityUsageTableBuilder::fillUsageTable
+	 *
+	 * @param DatabaseUpdater $dbUpdater
+	 * @param string $table
+	 */
+	public static function fillSubscriptionTable( DatabaseUpdater $dbUpdater, $table ) {
+		$primer = new ChangesSubscriptionTableBuilder(
+			// would be nice to pass in $dbUpdater->getDB().
+			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			WikibaseRepo::getDefaultInstance()->getEntityIdComposer(),
+			$table,
+			1000
+		);
+
+		$reporter = new ObservableMessageReporter();
+		$reporter->registerReporterCallback( function( $msg ) use ( $dbUpdater ) {
+			$dbUpdater->output( "\t$msg\n" );
+		} );
+		$primer->setProgressReporter( $reporter );
+
+		$primer->fillSubscriptionTable();
 	}
 
 }
