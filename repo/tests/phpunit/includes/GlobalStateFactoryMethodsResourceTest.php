@@ -10,7 +10,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
 use MediaWikiTestCase;
 use RequestContext;
-use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
@@ -115,11 +114,6 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 		foreach ( $this->getExtensionJson()['SpecialPages'] as $specialPageName => $specification ) {
 			yield [ $specialPageName ];
 		}
-	}
-
-	public function testHtmlPageLinkRendererBeginHookHandler(): void {
-		TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )
-			->factory();
 	}
 
 	public function testOutputPageJsConfigHookHandler(): void {

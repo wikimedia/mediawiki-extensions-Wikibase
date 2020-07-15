@@ -33,7 +33,6 @@ use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler
@@ -467,13 +466,6 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$this->assertEquals( $expectedAttribs, $customAttribs );
 	}
 
-	public function testFactory() {
-		$this->assertInstanceOf(
-			HtmlPageLinkRendererEndHookHandler::class,
-			TestingAccessWrapper::newFromClass( HtmlPageLinkRendererEndHookHandler::class )->factory()
-		);
-	}
-
 	/**
 	 * @return TermLookup
 	 */
@@ -567,7 +559,9 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 			$this->getTermLookup(),
 			$this->getEntityNamespaceLookup(),
 			$this->getInterwikiLookup(),
-			$this->getEntityLinkFormatterFactory( $titleText ),
+			function () use ( $titleText ) {
+				return $this->getEntityLinkFormatterFactory( $titleText );
+			},
 			MediaWikiServices::getInstance()->getSpecialPageFactory(),
 			$languageFallbackChainFactory,
 			$this->entityUrlLookup,

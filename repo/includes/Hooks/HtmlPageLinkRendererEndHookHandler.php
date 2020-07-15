@@ -5,9 +5,9 @@ namespace Wikibase\Repo\Hooks;
 use Action;
 use HtmlArmor;
 use MediaWiki\Interwiki\InterwikiLookup;
+use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Linker\LinkTarget;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Special\SpecialPageFactory;
 use RequestContext;
 use Title;
@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class HtmlPageLinkRendererEndHookHandler {
+class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook {
 
 	/**
 	 * @var EntityExistenceChecker
@@ -70,9 +70,9 @@ class HtmlPageLinkRendererEndHookHandler {
 	private $interwikiLookup;
 
 	/**
-	 * @var EntityLinkFormatterFactory
+	 * @var callable
 	 */
-	private $linkFormatterFactory;
+	private $linkFormatterFactoryCallback;
 
 	/**
 	 * @var SpecialPageFactory
@@ -104,14 +104,13 @@ class HtmlPageLinkRendererEndHookHandler {
 	 */
 	private $federatedPropertiesSourceScriptUrl;
 
-	/**
-	 * @return self
-	 */
-	private static function factory() {
+	public static function factory(
+		InterwikiLookup $interwikiLookup,
+		SpecialPageFactory $specialPageFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
 		$context = RequestContext::getMain();
-		$services = MediaWikiServices::getInstance();
 
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 		return new self(
@@ -119,9 +118,11 @@ class HtmlPageLinkRendererEndHookHandler {
 			$entityIdParser,
 			$wikibaseRepo->getTermLookup(),
 			$wikibaseRepo->getEntityNamespaceLookup(),
-			$services->getInterwikiLookup(),
-			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() ),
-			$services->getSpecialPageFactory(),
+			$interwikiLookup,
+			function ( $language ) use ( $wikibaseRepo ) {
+				return $wikibaseRepo->getEntityLinkFormatterFactory( $language );
+			},
+			$specialPageFactory,
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getEntityUrlLookup(),
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
@@ -143,14 +144,14 @@ class HtmlPageLinkRendererEndHookHandler {
 	 *
 	 * @return bool true to continue processing the link, false to use $ret directly as the HTML for the link
 	 */
-	public static function onHtmlPageLinkRendererEnd(
-		LinkRenderer $linkRenderer,
-		LinkTarget $target,
-		bool $isKnown,
+	public function onHtmlPageLinkRendererEnd(
+		$linkRenderer,
+		$target,
+		$isKnown,
 		&$text,
-		array &$extraAttribs,
+		&$extraAttribs,
 		&$ret
-	) {
+	): bool {
 		$context = RequestContext::getMain();
 		if ( !$context->hasTitle() ) {
 			// Short-circuit this hook if no title is
@@ -158,8 +159,7 @@ class HtmlPageLinkRendererEndHookHandler {
 			return true;
 		}
 
-		$handler = self::factory();
-		return $handler->doHtmlPageLinkRendererEnd(
+		return $this->doHtmlPageLinkRendererEnd(
 			$linkRenderer,
 			Title::newFromLinkTarget( $target ),
 			$text,
@@ -175,7 +175,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		TermLookup $termLookup,
 		EntityNamespaceLookup $entityNamespaceLookup,
 		InterwikiLookup $interwikiLookup,
-		EntityLinkFormatterFactory $linkFormatterFactory,
+		callable $linkFormatterFactoryCallback,
 		SpecialPageFactory $specialPageFactory,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityUrlLookup $entityUrlLookup,
@@ -187,7 +187,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		$this->termLookup = $termLookup;
 		$this->entityNamespaceLookup = $entityNamespaceLookup;
 		$this->interwikiLookup = $interwikiLookup;
-		$this->linkFormatterFactory = $linkFormatterFactory;
+		$this->linkFormatterFactoryCallback = $linkFormatterFactoryCallback;
 		$this->specialPageFactory = $specialPageFactory;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->entityUrlLookup = $entityUrlLookup;
@@ -214,6 +214,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		&$html = null
 	) {
 		$outTitle = $context->getOutput()->getTitle();
+		$linkFormatterFactory = call_user_func( $this->linkFormatterFactoryCallback, $context->getLanguage() );
 
 		// For good measure: Don't do anything in case the OutputPage has no Title set.
 		if ( !$outTitle ) {
@@ -234,7 +235,8 @@ class HtmlPageLinkRendererEndHookHandler {
 		}
 
 		try {
-			return $this->internalDoHtmlPageLinkRendererEnd( $linkRenderer, $target, $text, $customAttribs, $context, $html );
+			return $this->internalDoHtmlPageLinkRendererEnd(
+				$linkRenderer, $target, $text, $customAttribs, $context, $linkFormatterFactory, $html );
 		} catch ( FederatedPropertiesException $ex ) {
 			$this->federatedPropsDegradedDoHtmlPageLinkRendererEnd( $target, $text, $customAttribs );
 
@@ -277,6 +279,7 @@ class HtmlPageLinkRendererEndHookHandler {
 	 * @param HtmlArmor|string|null &$text
 	 * @param array &$customAttribs
 	 * @param RequestContext $context
+	 * @param EntityLinkFormatterFactory $linkFormatterFactory
 	 * @param string|null &$html
 	 *
 	 * @return bool true to continue processing the link, false to use $html directly for the link
@@ -287,6 +290,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		&$text,
 		array &$customAttribs,
 		RequestContext $context,
+		EntityLinkFormatterFactory $linkFormatterFactory,
 		&$html = null
 	) {
 		$out = $context->getOutput();
@@ -336,7 +340,7 @@ class HtmlPageLinkRendererEndHookHandler {
 		$labelData = $this->termFallbackToTermData( $label );
 		$descriptionData = $this->termFallbackToTermData( $description );
 
-		$linkFormatter = $this->linkFormatterFactory->getLinkFormatter( $entityId->getEntityType() );
+		$linkFormatter = $linkFormatterFactory->getLinkFormatter( $entityId->getEntityType() );
 		$text = new HtmlArmor( $linkFormatter->getHtml( $entityId, $labelData ) );
 
 		$customAttribs['title'] = $linkFormatter->getTitleAttribute(
