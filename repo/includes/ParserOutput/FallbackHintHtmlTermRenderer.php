@@ -48,7 +48,7 @@ class FallbackHintHtmlTermRenderer implements HtmlTermRenderer {
 					'dir="' . ( $this->languageDirectionalityLookup->getDirectionality( $actualLanguageCode ) ?: 'auto' ) . '"' .
 				'>' . $html . '</span>';
 			}
-			$html .= $this->languageFallbackIndicator->getHtml( $term );
+			$html .= '&nbsp;' . $this->languageFallbackIndicator->getHtml( $term );
 		}
 		return $html;
 	}
