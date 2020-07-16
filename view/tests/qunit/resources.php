@@ -225,7 +225,7 @@ return [
 			'jquery/wikibase/jquery.wikibase.siteselector.tests.js',
 		],
 		'dependencies' => [
-			'jquery.wikibase.siteselector',
+			'wikibase.view.ControllerViewFactory',
 			'wikibase.Site',
 		],
 	],
