@@ -57,7 +57,7 @@ return [
 	 * It can be one of these stages:
 	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
 	 */
-	'tmpItemSearchMigrationStage' => MIGRATION_OLD,
+	'tmpItemSearchMigrationStage' => MIGRATION_NEW,
 
 	/**
 	 * @note This config option is primarily added for Wikidata transition use-case and can be
@@ -68,6 +68,6 @@ return [
 	 * It can be one of these stages:
 	 * MIGRATION_OLD, MIGRATION_WRITE_BOTH, MIGRATION_WRITE_NEW, MIGRATION_NEW
 	 */
-	'tmpPropertySearchMigrationStage' => MIGRATION_OLD,
+	'tmpPropertySearchMigrationStage' => MIGRATION_NEW,
 
 ];
