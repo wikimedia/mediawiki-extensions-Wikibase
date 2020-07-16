@@ -60,7 +60,7 @@ class LanguageFallbackIndicator {
 		$attributes = [ 'class' => $classes ];
 
 		$html = Html::element( 'sup', $attributes, $text );
-		return $html;
+		return '&nbsp;' . $html;
 	}
 
 	/**

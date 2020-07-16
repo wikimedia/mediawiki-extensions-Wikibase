@@ -102,24 +102,24 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expectedPattern' => '@ lang="de">Kätzchen</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="de">Kätzchen</a>&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>@',
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expectedPattern' => '@ lang="de-at">Kätzchen</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="de-at">Kätzchen</a>&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>@',
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expectedPattern' => '@>Frass</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@>Frass</a>&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration">'
 					. preg_quote( $translitDeCh, '@' )
 					. '</sup>@',
 				'term' => $deChTerm,
 			],
 			'transliteration to other variant' => [
-				'expectedPattern' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="en">Kitten</a>&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
 					. 'variant">'
 					. preg_quote( $translitEnCa, '@' )
@@ -127,7 +127,7 @@ class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTe
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expectedPattern' => '@ lang="en">Kitten</a><sup class="wb-language-fallback-'
+				'expectedPattern' => '@ lang="en">Kitten</a>&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>@',
 				'term' => $deEnTerm,
 			],

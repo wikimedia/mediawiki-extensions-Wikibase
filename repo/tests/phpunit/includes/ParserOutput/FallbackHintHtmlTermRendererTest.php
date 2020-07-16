@@ -32,7 +32,7 @@ class FallbackHintHtmlTermRendererTest extends \PHPUnit\Framework\TestCase {
 		return [
 			[ new Term( 'lkt', 'lkt term' ), 'lkt term' ],
 			[ new Term( 'lkt', 'lkt & term' ), 'lkt &amp; term' ],
-			[ new TermFallback( 'lkt', 'lkt & term', 'lkt', 'lkt' ), 'lkt &amp; term&nbsp;' ],
+			[ new TermFallback( 'lkt', 'lkt & term', 'lkt', 'lkt' ), 'lkt &amp; term' ],
 			[
 				new TermFallback(
 					'de-at',

@@ -57,24 +57,24 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 				'term' => $deTermFallback,
 			],
 			'fallback to base' => [
-				'expected' => '<sup class="wb-language-fallback-'
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Deutsch</sup>',
 				'term' => $deAtTerm,
 			],
 			'fallback to variant' => [
-				'expected' => '<sup class="wb-language-fallback-'
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-variant">Österreichisches Deutsch</sup>',
 				'term' => $atDeTerm,
 			],
 			'transliteration to requested language' => [
-				'expected' => '<sup class="wb-language-fallback-'
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration">'
 					. $translitDeCh
 					. '</sup>',
 				'term' => $deChTerm,
 			],
 			'transliteration to other variant' => [
-				'expected' => '<sup class="wb-language-fallback-'
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator wb-language-fallback-transliteration wb-language-fallback-'
 					. 'variant">'
 					. $translitEnCa
@@ -82,7 +82,7 @@ class LanguageFallbackIndicatorTest extends \PHPUnit\Framework\TestCase {
 				'term' => $enGbEnCaTerm,
 			],
 			'fallback to alternative language' => [
-				'expected' => '<sup class="wb-language-fallback-'
+				'expected' => '&nbsp;<sup class="wb-language-fallback-'
 					. 'indicator">english in german</sup>',
 				'term' => $deEnTerm,
 			],
