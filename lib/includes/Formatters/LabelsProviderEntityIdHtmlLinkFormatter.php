@@ -52,7 +52,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	/**
 	 * @var NonExistingEntityIdHtmlFormatter
 	 */
-	private $nonExistingFormatter;
+	private $nonExistingEntityIdHtmlFormatter;
 
 	public function __construct(
 		LabelDescriptionLookup $labelDescriptionLookup,
@@ -64,11 +64,14 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 	) {
 		parent::__construct( $labelDescriptionLookup );
 		$this->languageFallbackIndicator = new LanguageFallbackIndicator( $languageNameLookup );
-		$this->nonExistingFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
 		$this->entityExistenceChecker = $entityExistenceChecker;
 		$this->entityTitleTextLookup = $entityTitleTextLookup;
 		$this->entityUrlLookup = $entityUrlLookup;
 		$this->entityRedirectChecker = $entityRedirectChecker;
+		$this->nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatterLinker(
+			$this->entityTitleTextLookup,
+			$this->entityUrlLookup
+		);
 	}
 
 	/**
@@ -85,7 +88,7 @@ class LabelsProviderEntityIdHtmlLinkFormatter extends EntityIdLabelFormatter {
 		if ( $term !== null ) {
 			$label = $term->getText();
 		} elseif ( !$this->entityExistenceChecker->exists( $entityId ) ) {
-			return $this->nonExistingFormatter->formatEntityId( $entityId );
+			return $this->nonExistingEntityIdHtmlFormatter->formatEntityId( $entityId );
 		} else {
 			$label = $entityId->getSerialization();
 		}
