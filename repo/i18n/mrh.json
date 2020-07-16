@@ -9,5 +9,9 @@
 	"wikibase-add": "khô",
 	"wikibase-description-empty": "Reipakawhna palâsapa y vei",
 	"wikibase-sitelinks-special": "Site hropazy",
-	"wikibase-statementview-rank-normal": "Rank a daihpa"
+	"wikibase-statementview-rank-normal": "Rank a daihpa",
+	"special-setaliases-parameterized": "$1 mohchakhyhpa bie teih",
+	"special-setlabel-parameterized": "$1 label bai teih",
+	"special-setdescription-parameterized": "$1 palâsana tao teih",
+	"special-setlabeldescriptionaliases-parameterized": "$1 label, palâsana nata mohchakhyhpa zy tao teih"
 }
