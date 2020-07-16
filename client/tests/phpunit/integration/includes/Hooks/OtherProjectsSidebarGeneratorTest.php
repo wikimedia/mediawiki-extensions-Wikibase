@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use Closure;
 use HashSiteStore;
 use Language;
 use MediaWikiSite;
@@ -11,10 +12,12 @@ use Title;
 use Wikibase\Client\Hooks\OtherProjectsSidebarGenerator;
 use Wikibase\Client\Hooks\SidebarLinkBadgeDisplay;
 use Wikibase\Client\Hooks\SiteLinksForDisplayLookup;
+use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * @covers \Wikibase\Client\Hooks\OtherProjectsSidebarGenerator
@@ -41,11 +44,17 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		array $result,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [],
+		] );
+
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
+			$this->getSiteLinkLookup(),
 			$this->getSiteLinkForDisplayLookup(),
 			$this->getSiteLookup(),
 			$sidebarLinkBadgeDisplay,
+			$this->getUsageAccumulator(),
 			$siteIdsToOutput
 		);
 
@@ -108,6 +117,227 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @dataProvider projectLinkSidebarProvider
+	 */
+	public function testBuildProjectLinkSidebarFromItemId( array $siteIdsToOutput, array $result ) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [],
+		] );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
+			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
+			$siteIdsToOutput
+		);
+
+		$this->assertEquals(
+			$result,
+			$otherProjectSidebarGenerator->buildProjectLinkSidebarFromItemId( new ItemId( self::TEST_ITEM_ID ) )
+		);
+	}
+
+	/**
+	 * @dataProvider projectLinkSidebarHookProvider
+	 */
+	public function testBuildProjectLinkSidebar_hook(
+		Closure $handler,
+		array $siteIdsToOutput,
+		array $result,
+		$suppressErrors = false
+	) {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [ $handler ],
+		] );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
+			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
+			$siteIdsToOutput
+		);
+
+		if ( $suppressErrors ) {
+			\Wikimedia\suppressWarnings();
+		}
+		$this->assertEquals(
+			$result,
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+
+		if ( $suppressErrors ) {
+			\Wikimedia\restoreWarnings();
+		}
+	}
+
+	public function projectLinkSidebarHookProvider() {
+		$wiktionaryLink = [
+			'msg' => 'wikibase-otherprojects-wiktionary',
+			'class' => 'wb-otherproject-link wb-otherproject-wiktionary',
+			'href' => 'https://en.wiktionary.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		];
+		$wikiquoteLink = [
+			'msg' => 'wikibase-otherprojects-wikiquote',
+			'class' => 'wb-otherproject-link wb-otherproject-wikiquote',
+			'href' => 'https://en.wikiquote.org/wiki/Nyan_Cat',
+			'hreflang' => 'en'
+		];
+		$wikipediaLink = [
+			'msg' => 'wikibase-otherprojects-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia ' .
+				'badge-' . self::BADGE_ITEM_ID . ' ' . self::BADGE_CSS_CLASS,
+			'href' => 'https://en.wikipedia.org/wiki/Nyan_Cat',
+			'hreflang' => 'en',
+			'itemtitle' => self::BADGE_ITEM_LABEL,
+		];
+		$changedWikipedaLink = [
+			'msg' => 'wikibase-otherprojects-wikipedia',
+			'class' => 'wb-otherproject-link wb-otherproject-wikipedia ' .
+				'badge-' . self::BADGE_ITEM_ID . ' ' . self::BADGE_CSS_CLASS,
+			'href' => 'https://en.wikipedia.org/wiki/Cat',
+			'hreflang' => 'en',
+			'itemtitle' => self::BADGE_ITEM_LABEL,
+		];
+
+		return [
+			'Noop hook, gets the right data' => [
+				function( ItemId $itemId, array &$sidebar ) use ( $wikipediaLink, $wikiquoteLink, $wiktionaryLink ) {
+					$this->assertSame(
+						[
+							'wikiquote' => [ 'enwikiquote' => $wikiquoteLink ],
+							'wikipedia' => [ 'enwiki' => $wikipediaLink ],
+							'wiktionary' => [ 'enwiktionary' => $wiktionaryLink ]
+						],
+						$sidebar
+					);
+					$this->assertSame( self::TEST_ITEM_ID, $itemId->getSerialization() );
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Hook changes enwiki link' => [
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia']['enwiki']['href'] = $changedWikipedaLink['href'];
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Hook inserts enwiki link' => [
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$this->assertArrayNotHasKey(
+						'wikipedia',
+						$sidebar,
+						'No Wikipedia link present yet'
+					);
+
+					$sidebar['wikipedia']['enwiki'] = $changedWikipedaLink;
+				},
+				[ 'enwiktionary', 'enwikiquote' ],
+				[ $changedWikipedaLink, $wikiquoteLink, $wiktionaryLink ]
+			],
+			'Invalid hook #1, original data is being used' => [
+				function( ItemId $itemId, array &$sidebar ) {
+					$sidebar = null;
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
+				true
+			],
+			'Invalid hook #2, original data is being used' => [
+				function( ItemId $itemId, array &$sidebar ) {
+					$sidebar[0]['msg'] = [];
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
+				true
+			],
+			'Invalid hook #3, original data is being used' => [
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia']['enwiki']['href'] = 1.2;
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
+				true
+			],
+			'Invalid hook #4, original data is being used' => [
+				function( ItemId $itemId, array &$sidebar ) use ( $changedWikipedaLink ) {
+					$sidebar['wikipedia'][] = $changedWikipedaLink;
+				},
+				[ 'enwiktionary', 'enwiki', 'enwikiquote' ],
+				[ $wikipediaLink, $wikiquoteLink, $wiktionaryLink ],
+				true
+			],
+		];
+	}
+
+	public function testBuildProjectLinkSidebar_hookNotCalledIfPageNotConnected() {
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [
+				function () {
+					$this->fail( 'Should not get called.' );
+				},
+			],
+		] );
+
+		$lookup = $this->createMock( SiteLinkLookup::class );
+		$lookup->expects( $this->any() )
+				->method( 'getItemIdForSiteLink' )
+				->will( $this->returnValue( null ) );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$lookup,
+			$this->getSiteLinkForDisplayLookup(),
+			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
+			[ 'enwiki' ]
+		);
+
+		$this->assertSame(
+			[],
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+	}
+
+	public function testBuildProjectLinkSidebar_hookCalledWithEmptySidebar() {
+		$called = false;
+
+		$this->mergeMwGlobalArrayValue( 'wgHooks', [
+			'WikibaseClientOtherProjectsSidebar' => [
+				function ( ItemId $itemId, $sidebar ) use ( &$called ) {
+					$this->assertSame( self::TEST_ITEM_ID, $itemId->getSerialization() );
+					$this->assertSame( [], $sidebar );
+					$called = true;
+				},
+			],
+		] );
+
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkLookup(),
+			$this->getSiteLinkForDisplayLookup(),
+			$this->getSiteLookup(),
+			$this->getSidebarLinkBadgeDisplay(),
+			$this->getUsageAccumulator(),
+			[ 'unknown-site' ]
+		);
+
+		$this->assertSame(
+			[],
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+		);
+		$this->assertTrue( $called, 'Hook needs to be called' );
+	}
+
+	/**
 	 * @return SiteLookup
 	 */
 	private function getSiteLookup() {
@@ -124,19 +354,46 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	}
 
 	/**
+	 * @return SiteLinkLookup
+	 */
+	private function getSiteLinkLookup() {
+		$itemId = new ItemId( self::TEST_ITEM_ID );
+
+		$lookup = $this->createMock( SiteLinkLookup::class );
+		$lookup->expects( $this->any() )
+			->method( 'getItemIdForLink' )
+			->will( $this->returnValue( $itemId ) );
+
+		$lookup->expects( $this->any() )
+			->method( 'getSiteLinksForItem' )
+			->with( $itemId )
+			->will( $this->returnValue( [
+				new SiteLink( 'enwikiquote', 'Nyan Cat' ),
+				new SiteLink( 'enwiki', 'Nyan Cat' ),
+				new SiteLink( 'enwiktionary', 'Nyan Cat' )
+			] ) );
+
+		return $lookup;
+	}
+
+	/**
 	 * @return SiteLinksForDisplayLookup
 	 */
 	private function getSiteLinkForDisplayLookup() {
 		$lookup = $this->createMock( SiteLinksForDisplayLookup::class );
 		$lookup->expects( $this->any() )
-			->method( 'getSiteLinksForPageTitle' )
-			->with( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+			->method( 'getSiteLinksForItemId' )
+			->with( new ItemId( self::TEST_ITEM_ID ) )
 			->will( $this->returnValue( [
 				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),
 				'enwiki' => new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
 				'enwiktionary' => new SiteLink( 'enwiktionary', 'Nyan Cat' )
 			] ) );
 		return $lookup;
+	}
+
+	private function getUsageAccumulator() {
+		return $this->createMock( UsageAccumulator::class );
 	}
 
 	/**

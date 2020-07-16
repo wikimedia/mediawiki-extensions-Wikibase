@@ -2,11 +2,15 @@
 
 namespace Wikibase\Client\Hooks;
 
+use Hooks;
 use LanguageCode;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\Client\Usage\UsageAccumulator;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
+use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
  * Outputs a sidebar section for other project links.
@@ -21,6 +25,11 @@ class OtherProjectsSidebarGenerator {
 	 * @var string
 	 */
 	private $localSiteId;
+
+	/**
+	 * @var SiteLinkLookup
+	 */
+	private $siteLinkLookup;
 
 	/**
 	 * @var SiteLinksForDisplayLookup
@@ -38,28 +47,39 @@ class OtherProjectsSidebarGenerator {
 	private $sidebarLinkBadgeDisplay;
 
 	/**
+	 * @var UsageAccumulator
+	 */
+	private $usageAccumulator;
+
+	/**
 	 * @var string[]
 	 */
 	private $siteIdsToOutput;
 
 	/**
 	 * @param string $localSiteId
+	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param SiteLinksForDisplayLookup $siteLinksForDisplayLookup
 	 * @param SiteLookup $siteLookup
 	 * @param SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+	 * @param UsageAccumulator $usageAccumulator
 	 * @param string[] $siteIdsToOutput
 	 */
 	public function __construct(
 		$localSiteId,
+		SiteLinkLookup $siteLinkLookup,
 		SiteLinksForDisplayLookup $siteLinksForDisplayLookup,
 		SiteLookup $siteLookup,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay,
+		UsageAccumulator $usageAccumulator,
 		array $siteIdsToOutput
 	) {
 		$this->localSiteId = $localSiteId;
+		$this->siteLinkLookup = $siteLinkLookup;
 		$this->siteLinksForDisplayLookup = $siteLinksForDisplayLookup;
 		$this->siteLookup = $siteLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
+		$this->usageAccumulator = $usageAccumulator;
 		$this->siteIdsToOutput = $siteIdsToOutput;
 	}
 
@@ -70,10 +90,86 @@ class OtherProjectsSidebarGenerator {
 	 * group and global ids.
 	 */
 	public function buildProjectLinkSidebar( Title $title ) {
-		$sidebar = $this->buildPreliminarySidebarFromSiteLinks(
-			$this->siteLinksForDisplayLookup->getSiteLinksForPageTitle( $title )
+		$itemId = $this->siteLinkLookup->getItemIdForLink(
+			$this->localSiteId,
+			$title->getPrefixedText()
 		);
+
+		if ( !$itemId ) {
+			return [];
+		}
+
+		return $this->buildProjectLinkSidebarFromItemId( $itemId );
+	}
+
+	/**
+	 * @param ItemId $itemId
+	 *
+	 * @return array[] Array of arrays of attributes describing sidebar links, sorted by the site's
+	 * group and global ids.
+	 */
+	public function buildProjectLinkSidebarFromItemId( ItemId $itemId ) {
+		$sidebar = $this->buildPreliminarySidebarFromSiteLinks(
+			$this->siteLinksForDisplayLookup->getSiteLinksForItemId( $itemId )
+		);
+		$sidebar = $this->runHook( $itemId, $sidebar );
+
 		return $this->sortAndFlattenSidebar( $sidebar );
+	}
+
+	/**
+	 * @param ItemId $itemId
+	 * @param array $sidebar
+	 *
+	 * @return array
+	 */
+	private function runHook( ItemId $itemId, array $sidebar ) {
+		$newSidebar = $sidebar;
+
+		// Deprecated, use WikibaseClientSiteLinksForItem instead
+		Hooks::run( 'WikibaseClientOtherProjectsSidebar', [
+			$itemId, &$newSidebar, $this->siteIdsToOutput, $this->usageAccumulator
+		] );
+
+		if ( $newSidebar === $sidebar ) {
+			return $sidebar;
+		}
+
+		// @phan-suppress-next-line PhanRedundantCondition Hook + pass-by-ref false positive
+		if ( !is_array( $newSidebar ) || !$this->isValidSidebar( $newSidebar ) ) {
+			wfLogWarning( 'Other projects sidebar data invalid after hook run.' );
+			return $sidebar;
+		}
+
+		return $newSidebar;
+	}
+
+	/**
+	 * @param array $sidebar
+	 * @return bool
+	 */
+	private function isValidSidebar( array $sidebar ) {
+		// Make sure all required array keys are set and are string.
+		foreach ( $sidebar as $siteGroup => $perSiteGroup ) {
+			if ( !is_string( $siteGroup ) || !is_array( $perSiteGroup ) ) {
+				return false;
+			}
+
+			foreach ( $perSiteGroup as $siteId => $perSite ) {
+				if ( !is_string( $siteId )
+					|| !isset( $perSite['msg'] )
+					|| !isset( $perSite['class'] )
+					|| !isset( $perSite['href'] )
+					|| !is_string( $perSite['msg'] )
+					|| !is_string( $perSite['class'] )
+					|| !is_string( $perSite['href'] )
+				) {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	/**

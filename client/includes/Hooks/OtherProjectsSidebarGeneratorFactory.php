@@ -77,6 +77,7 @@ class OtherProjectsSidebarGeneratorFactory {
 	public function getOtherProjectsSidebarGenerator( UsageAccumulator $usageAccumulator ) {
 		return new OtherProjectsSidebarGenerator(
 			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->siteLinkLookup,
 			new SiteLinksForDisplayLookup(
 				$this->siteLinkLookup,
 				$this->entityLookup,
@@ -87,6 +88,7 @@ class OtherProjectsSidebarGeneratorFactory {
 			),
 			$this->siteLookup,
 			$this->sidebarLinkBadgeDisplay,
+			$usageAccumulator,
 			$this->settings->getSetting( 'otherProjectsLinks' )
 		);
 	}

@@ -157,6 +157,18 @@ Parameters:
 * $rootJobParams
   * Any relevant root job parameters to be inherited by child jobs.
 
+#### WikibaseClientOtherProjectsSidebar {#WikibaseClientOtherProjectsSidebar} (DEPRECATED)
+Deprecated, Use [WikibaseClientSiteLinksForItem] instead.
+
+Called by [OtherProjectsSidebarGenerator] to allow altering the other projects sidebar.
+Only called in case the page we're on is linked with an item.
+
+Parameters:
+* $itemId
+  * Id of the item the page is linked with.
+* &$newSidebar
+  * Array containing the sidebar definition. The array consists of arrays indexed by site groups containing arrays indexed by site id. These arrays represent the link to the given site. They contain the keys “msg”, “href” and “class” which contain the respective attributes for the link that is going to be created.
+
 #### WikibaseClientSiteLinksForItem {#WikibaseClientSiteLinksForItem}
 Called by [OtherProjectsSidebarGenerator] to allow altering the sitelinks used
 in language links and the other projects sidebar.
