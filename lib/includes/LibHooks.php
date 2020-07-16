@@ -48,7 +48,7 @@ final class LibHooks implements
 	}
 
 	/**
-	 * Register ResourceLoader modules with dynamic dependencies.
+	 * Register the wikibase.Site ResourceLoader module with a dynamic dependency on ULS.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderRegisterModules
 	 * @param ResourceLoader $rl
@@ -58,28 +58,24 @@ final class LibHooks implements
 		if ( $rl->isModuleRegistered( 'wikibase.Site' ) ) {
 			return;
 		}
-		$moduleTemplate = [
+
+		$module = [
 			'localBasePath' => __DIR__ . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
-		];
-
-		$modules = [
-			'wikibase.Site' => $moduleTemplate + [
-				'scripts' => [
-					'resources/wikibase.Site.js',
-				],
-				'dependencies' => [
-					'mediawiki.util',
-				],
+			'scripts' => [
+				'resources/wikibase.Site.js',
+			],
+			'dependencies' => [
+				'mediawiki.util',
 			],
 		];
 
 		$isUlsLoaded = ExtensionRegistry::getInstance()->isLoaded( 'UniversalLanguageSelector' );
 		if ( $isUlsLoaded ) {
-			$modules['wikibase.Site']['dependencies'][] = 'ext.uls.mediawiki';
+			$module['dependencies'][] = 'ext.uls.mediawiki';
 		}
 
-		$rl->register( $modules );
+		$rl->register( 'wikibase.Site', $module );
 	}
 
 	/**
