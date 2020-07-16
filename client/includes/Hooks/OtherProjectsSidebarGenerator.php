@@ -6,6 +6,7 @@ use LanguageCode;
 use Site;
 use SiteLookup;
 use Title;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 
 /**
@@ -61,6 +62,19 @@ class OtherProjectsSidebarGenerator {
 		$this->siteLookup = $siteLookup;
 		$this->sidebarLinkBadgeDisplay = $sidebarLinkBadgeDisplay;
 		$this->siteIdsToOutput = $siteIdsToOutput;
+	}
+
+	/**
+	 * @param ItemId $itemId
+	 *
+	 * @return array[] Array of arrays of attributes describing sidebar links, sorted by the site's
+	 * group and global ids.
+	 */
+	public function buildProjectLinkSidebarFromItemId( ItemId $itemId ) {
+		$sidebar = $this->buildPreliminarySidebarFromSiteLinks(
+			$this->siteLinksForDisplayLookup->getSiteLinksForItemId( $itemId )
+		);
+		return $this->sortAndFlattenSidebar( $sidebar );
 	}
 
 	/**
