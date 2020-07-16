@@ -55,6 +55,9 @@ final class LibHooks implements
 	 * @return void
 	 */
 	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
+		if ( $rl->isModuleRegistered( 'wikibase.Site' ) ) {
+			return;
+		}
 		$moduleTemplate = [
 			'localBasePath' => __DIR__ . '/../',
 			'remoteExtPath' => 'Wikibase/lib',
