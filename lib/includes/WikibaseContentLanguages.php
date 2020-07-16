@@ -99,6 +99,7 @@ class WikibaseContentLanguages {
 					'fro', // T181823
 					'fuf', // T155429
 					'gez', // T155373
+					'gil', // T241424
 					'gmy', // T155421
 					'hai', // T138131
 					'haz', // T155374
