@@ -28,6 +28,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
@@ -45,7 +46,6 @@ use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\WikiPageEntityStore;
-use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -231,7 +231,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// update entity
 		$empty->setId( $entityId );
-		$empty->getFingerprint()->setLabel( 'en', 'UPDATED' );
+		$termLang = 'en';
+		$termText = 'UPDATED';
+		$empty->getFingerprint()->setLabel( $termLang, $termText );
 
 		$r2 = $store->saveEntity( $empty, 'update one', $user, EDIT_UPDATE, false, [ 'mw-replace' ] );
 		$this->assertNotEquals( $r1->getRevisionId(), $r2->getRevisionId(), 'expected new revision id' );
@@ -245,9 +247,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$r2tags = ChangeTags::getTags( $this->db, null, $r2->getRevisionId() );
 		$this->assertSame( [], array_diff( [ 'mw-replace' ], $r2tags ) );
 
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertNotEmpty( $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity()' );
+		// check that the term storage got updated (via a DataUpdate).
+		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		$this->assertSame( $termText, $termLookup->getLabel( $entityId, $termLang ) );
 	}
 
 	public function testSaveEntity_invalidContent() {
@@ -433,7 +435,8 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		// create one
 		$one = new Item();
-		$one->setLabel( 'en', 'one' );
+		$termLang = 'en';
+		$one->setLabel( $termLang, 'one' );
 
 		$r1 = $store->saveEntity( $one, 'create one', $user, EDIT_NEW );
 		$oneId = $r1->getEntity()->getId();
@@ -462,9 +465,9 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 
 		$this->assertRedirectPerPage( $q33, $oneId );
 
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertSame( [], $termIndex->getTermsOfEntity( $oneId ), 'getTermsOfEntity' );
+		// check that the term storage got updated (via a DataUpdate).
+		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		$this->assertNull( $termLookup->getLabel( $oneId, $termLang ) );
 
 		// TODO: check notifications in wb_changes table!
 
@@ -894,11 +897,16 @@ class WikiPageEntityStoreTest extends MediaWikiTestCase {
 		$this->assertNonexistentRevision( $latestRevisionIdResult );
 		$this->assertNull( $lookup->getEntityRevision( $entityId ), 'getEntityRevision' );
 
-		// check that the term index got updated (via a DataUpdate).
-		$termIndex = WikibaseRepo::getDefaultInstance()->getStore()->getLegacyEntityTermStoreReader();
-		$this->assertSame( [], $termIndex->getTermsOfEntity( $entityId ), 'getTermsOfEntity' );
-
 		// TODO: check notifications in wb_changes table!
+
+		// check that the term storage got updated (via a DataUpdate).
+		$termLookup = WikibaseRepo::getDefaultInstance()->getTermLookup();
+		try {
+			$label = $termLookup->getLabel( $entityId, 'en' );
+			$this->assertNull( $label );
+		} catch ( TermLookupException $e ) {
+			// Expected
+		}
 	}
 
 	public function provideCanCreateWithCustomId() {
