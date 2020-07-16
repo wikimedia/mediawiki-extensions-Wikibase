@@ -106,11 +106,6 @@ class EntityDataSerializationService {
 	 */
 	private $entityRdfBuilderFactory;
 
-	/**
-	 * @var bool Whether to serialize empty containers (e.g. descriptions) as {} instead of []
-	 */
-	private $serializeEmptyListsAsObjects;
-
 	public function __construct(
 		EntityLookup $entityLookup,
 		EntityTitleLookup $entityTitleLookup,
@@ -122,8 +117,7 @@ class EntityDataSerializationService {
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
-		RdfVocabulary $rdfVocabulary,
-		$serializeEmptyListsAsObjects = true
+		RdfVocabulary $rdfVocabulary
 	) {
 		$this->entityLookup = $entityLookup;
 		$this->entityTitleLookup = $entityTitleLookup;
@@ -136,7 +130,6 @@ class EntityDataSerializationService {
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
-		$this->serializeEmptyListsAsObjects = $serializeEmptyListsAsObjects;
 
 		$this->rdfWriterFactory = new RdfWriterFactory();
 	}
@@ -413,9 +406,7 @@ class EntityDataSerializationService {
 			$this->entitySerializer,
 			$this->siteLookup,
 			$this->propertyLookup,
-			// add metadata if this is true, to let ApiResult know it's an associative array, so
-			// that the json serializer will output {} instead of [] in case of empty containers
-			$this->serializeEmptyListsAsObjects
+			true // include metadata for the API result printer
 		);
 		$resultBuilder->addEntityRevision( null, $entityRevision );
 

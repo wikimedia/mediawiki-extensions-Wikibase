@@ -145,8 +145,7 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 				'items',
 				[ 'items' => 'wd', 'props' => 'pro', ],
 				[ 'items' => '', 'props' => 'pro', ]
-			),
-			true
+			)
 		);
 	}
 

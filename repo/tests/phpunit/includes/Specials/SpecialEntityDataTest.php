@@ -118,8 +118,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 				'test',
 				[ 'test' => '' ],
 				[ 'test' => '' ]
-			),
-			true
+			)
 		);
 
 		$formats = [ 'json', 'rdfxml', 'ntriples', 'turtle' ];

@@ -92,8 +92,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getCompactBaseDataModelSerializerFactory(),
 			$wikibaseRepo->getCompactEntitySerializer(),
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getRdfVocabulary(),
-			$wikibaseRepo->getSettings()->getSetting( 'tmpSerializeEmptyListsAsObjects' )
+			$wikibaseRepo->getRdfVocabulary()
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataCdnMaxAge' );
