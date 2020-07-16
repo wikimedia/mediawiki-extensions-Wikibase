@@ -8,7 +8,6 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\Hook\ArticleRevisionVisibilitySetHook;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\RevisionRecord;
 use Title;
@@ -98,11 +97,11 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		$this->jobBatchSize = $jobBatchSize;
 	}
 
-	public static function factory() {
+	public static function factory( RevisionLookup $revisionLookup ) {
 		$wbRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
-			MediaWikiServices::getInstance()->getRevisionLookup(),
+			$revisionLookup,
 			$wbRepo->getEntityContentFactory(),
 			$wbRepo->getEntityNamespaceLookup(),
 			new TitleFactory(),

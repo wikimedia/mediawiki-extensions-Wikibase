@@ -278,7 +278,10 @@
 	"HookHandlers": {
 		"ArticleRevisionVisibilitySet": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
-			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory"
+			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory",
+			"services": [
+				"RevisionLookup"
+			]
 		},
 		"DatabaseSchemaUpdater": {
 			"class": "\\Wikibase\\Repo\\Store\\Sql\\DatabaseSchemaUpdater",
