@@ -10,7 +10,11 @@ use Wikibase\DataModel\Entity\EntityId;
 trait TermCacheKeyBuilder {
 
 	public function buildCacheKey( EntityId $id, int $revision, string $language, string $termType ) {
-		return "{$id->getSerialization()}_{$revision}_{$language}_{$termType}";
+		return str_replace(
+			[ '{', '}', '(', ')', '/', '\\', '@', ':' ],
+			'_',
+			"{$id->getSerialization()}_{$revision}_{$language}_{$termType}"
+		);
 	}
 
 }
