@@ -29,8 +29,7 @@ class RepoRevisionIdentifierFactory {
 		return new RepoRevisionIdentifier(
 			$data['entityIdSerialization'],
 			$data['revisionTimestamp'],
-			$data['revisionId'],
-			$data['revisionParentId']
+			$data['revisionId']
 		);
 	}
 

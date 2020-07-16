@@ -37,20 +37,17 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		$repoRevision24IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q44801',
 			$this->getMwTimestamp(),
-			24,
-			23
+			24
 		) )->toArray();
 		$repoRevision25IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q44802',
 			$this->getMwTimestamp(),
-			25,
-			24
+			25
 		) )->toArray();
 		$repoRevision26IdentifierArray = ( new RepoRevisionIdentifier(
 			'Q44803',
 			$this->getMwTimestamp(),
-			26,
-			25
+			26
 		) )->toArray();
 		$visibilityChangeMap = [
 			12 =>
@@ -307,7 +304,6 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 					$revisionRecord->setTimestamp( '20050504121300' );
 				}
 				$revisionRecord->setId( 12 + $id );
-				$revisionRecord->setParentId( 11 + $id );
 				$revisionRecord->setPageId( 43789 + $id );
 
 				return $revisionRecord;

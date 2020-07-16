@@ -23,7 +23,6 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 			'entityIdSerialization' => 'Q12',
 			'revisionTimestamp' => '20200302125300',
 			'revisionId' => 123,
-			'revisionParentId' => 23,
 		];
 
 		$invalidEntityIdSerialization = $validParams;
@@ -35,14 +34,10 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 		$invalidRevisionId = $validParams;
 		$invalidRevisionId['revisionId'] = '123';
 
-		$invalidParentRevisionId = $validParams;
-		$invalidParentRevisionId['revisionParentId'] = '23';
-
 		return [
 			'Invalid entityIdSerialization' => $invalidEntityIdSerialization,
 			'Invalid revisionTimestamp' => $invalidRevisionTimestamp,
-			'Invalid revisionId' => $invalidRevisionId,
-			'Invalid revisionParentId' => $invalidParentRevisionId,
+			'Invalid revisionId' => $invalidRevisionId
 		];
 	}
 
@@ -52,12 +47,11 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 	public function testInvalidConstruction(
 		$entityIdSerialization,
 		$revisionTimestamp,
-		$revisionId,
-		$revisionParentId
+		$revisionId
 	) {
 		$this->expectException( TypeError::class );
 
-		new RepoRevisionIdentifier( $entityIdSerialization, $revisionTimestamp, $revisionId, $revisionParentId );
+		new RepoRevisionIdentifier( $entityIdSerialization, $revisionTimestamp, $revisionId );
 	}
 
 	private function newRepoRevisionIdentifier() {
@@ -90,20 +84,12 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 		);
 	}
 
-	public function testGetRevisionParentId() {
-		$this->assertSame(
-			23,
-			$this->newRepoRevisionIdentifier()->getRevisionParentId()
-		);
-	}
-
 	public function testToArray() {
 		$expected = [
 			'arrayFormatVersion' => RepoRevisionIdentifier::ARRAYFORMATVERSION,
 			'entityIdSerialization' => 'Q12',
 			'revisionTimestamp' => '20200302125300',
 			'revisionId' => 123,
-			'revisionParentId' => 23,
 		];
 
 		$this->assertSame( $expected, $this->newRepoRevisionIdentifier()->toArray() );
@@ -121,9 +107,8 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 	 * @return string
 	 */
 	private function getKnownGoodSerialization() {
-		return 'C:43:"Wikibase\Lib\Changes\RepoRevisionIdentifier":130:{{"arrayFormatVersion":1,' .
-			'"entityIdSerialization":"Q12","revisionTimestamp":"20200302125300","revisionId":123,' .
-			'"revisionParentId":23}}';
+		return 'C:43:"Wikibase\Lib\Changes\RepoRevisionIdentifier":108:{{"arrayFormatVersion":1,' .
+			'"entityIdSerialization":"Q12","revisionTimestamp":"20200302125300","revisionId":123}}';
 	}
 
 	public function testUnserialize() {
@@ -159,8 +144,8 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 		);
 		// Change the length of the serialization "body" (the content from Serializable::serialize)
 		$entityDiffChangedAspectsSerialization = str_replace(
-			'":130:',
-			'":' . ( strlen( strval( $arrayFormatVersion ) ) + 129 ) . ':',
+			'":108:',
+			'":' . ( strlen( strval( $arrayFormatVersion ) ) + 107 ) . ':',
 			$entityDiffChangedAspectsSerialization
 		);
 

@@ -216,8 +216,7 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		return new RepoRevisionIdentifier(
 			$entityId->getSerialization(),
 			$revision->getTimestamp(),
-			$revision->getId(),
-			$revision->getParentId()
+			$revision->getId()
 		);
 	}
 

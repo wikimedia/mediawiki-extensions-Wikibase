@@ -39,8 +39,7 @@ class RepoRevisionIdentifierFactoryTest extends \PHPUnit\Framework\TestCase {
 		return new RepoRevisionIdentifier(
 			'Q12',
 			'20200302125300',
-			123,
-			23
+			123
 		);
 	}
 
