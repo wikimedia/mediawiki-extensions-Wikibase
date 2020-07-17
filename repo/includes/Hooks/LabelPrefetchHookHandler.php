@@ -4,10 +4,10 @@ namespace Wikibase\Repo\Hooks;
 
 use ChangesList;
 use MediaWiki\Hook\ChangesListInitRowsHook;
-use RequestContext;
 use Title;
 use TitleFactory;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
@@ -47,9 +47,9 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 	private $termTypes;
 
 	/**
-	 * @var string[]
+	 * @var LanguageFallbackChainFactory
 	 */
-	private $languageCodes;
+	private $languageFallbackChainFactory;
 
 	/**
 	 * @return self
@@ -58,18 +58,14 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termBuffer = $wikibaseRepo->getTermBuffer();
 		$termTypes = [ TermIndexEntry::TYPE_LABEL, TermIndexEntry::TYPE_DESCRIPTION ];
-
-		// NOTE: keep in sync with fallback chain construction in LinkBeginHookHandler::factory
-		$context = RequestContext::getMain();
 		$languageFallbackChainFactory = $wikibaseRepo->getLanguageFallbackChainFactory();
-		$languageFallbackChain = $languageFallbackChainFactory->newFromContext( $context );
 
 		return new self(
 			$termBuffer,
 			$wikibaseRepo->getEntityIdLookup(),
 			new TitleFactory(),
 			$termTypes,
-			$languageFallbackChain->getFetchLanguageCodes()
+			$languageFallbackChainFactory
 		);
 	}
 
@@ -78,20 +74,20 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 	 * @param EntityIdLookup $idLookup
 	 * @param TitleFactory $titleFactory
 	 * @param string[] $termTypes
-	 * @param string[] $languageCodes
+	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 */
 	public function __construct(
 		TermBuffer $buffer,
 		EntityIdLookup $idLookup,
 		TitleFactory $titleFactory,
 		array $termTypes,
-		array $languageCodes
+		LanguageFallbackChainFactory $languageFallbackChainFactory
 	) {
 		$this->buffer = $buffer;
 		$this->idLookup = $idLookup;
 		$this->titleFactory = $titleFactory;
 		$this->termTypes = $termTypes;
-		$this->languageCodes = $languageCodes;
+		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 	}
 
 	/**
@@ -102,7 +98,9 @@ class LabelPrefetchHookHandler implements ChangesListInitRowsHook {
 		try {
 			$titles = $this->getChangedTitles( $rows );
 			$entityIds = $this->idLookup->getEntityIds( $titles );
-			$this->buffer->prefetchTerms( $entityIds, $this->termTypes, $this->languageCodes );
+			$languageCodes = $this->languageFallbackChainFactory->newFromContext( $list )
+				->getFetchLanguageCodes();
+			$this->buffer->prefetchTerms( $entityIds, $this->termTypes, $languageCodes );
 		} catch ( StorageException $ex ) {
 			wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
 		}
