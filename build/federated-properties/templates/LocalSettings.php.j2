@@ -1,5 +1,5 @@
 <?php
-$wgServer = '{{ PROTOCOL }}://{{ SERVER_NAME }}{{ PORT }}';
+$wgServer = '{{ SCHEME }}://{{ SERVER_NAME }}{{ PORT }}';
 
 # Developer mode and debugging
 error_reporting( -1 );
@@ -63,7 +63,27 @@ wfLoadExtension( 'cldr' );
 
 # Federated Properties
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
-$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_URL }}";
+$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_SCHEME }}://{{ SOURCE_REPO_HOST }}/w/";
+
+$wgWBRepoSettings['entitySources'] = [
+	'local' => [
+		'entityNamespaces' => [ 'item' => 120 ],
+		'repoDatabase' => false,
+		'baseUri' => 'http://{{ SERVER_NAME }}/entity/',
+		'interwikiPrefix' => '',
+		'rdfNodeNamespacePrefix' => 'wd',
+		'rdfPredicateNamespacePrefix' => 'wdt',
+	],
+	'fedprops' => [
+		'entityNamespaces' => [ 'property' => 120 ],
+		'repoDatabase' => false,
+		'baseUri' => 'http://{{ SOURCE_REPO_HOST }}/entity/',
+		'interwikiPrefix' => 'wd',
+		'rdfNodeNamespacePrefix' => 'fpwd',
+		'rdfPredicateNamespacePrefix' => 'fpwd',
+	],
+];
+
 
 # simulate source API errors via request header
 if( isset ( $_SERVER['HTTP_X_FEDPROPS_SOURCEAPIRESPONSE'] ) ) {
