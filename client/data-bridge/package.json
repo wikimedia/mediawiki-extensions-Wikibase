@@ -79,7 +79,7 @@
     "http-status-codes": "^1.4.0",
     "jquery": "^3.5.1",
     "less-variable-resolver": "^0.1.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "oojs-ui": "^0.39.0",
     "postcss-prefixwrap": "^1.13.0",
