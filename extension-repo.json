@@ -311,7 +311,7 @@
 				"SpecialPageFactory"
 			]
 		},
-		"LabelPrefetchHookHandler": {
+		"LabelPrefetch": {
 			"class": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\LabelPrefetchHookHandler::factory"
 		},
@@ -347,6 +347,7 @@
 		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
 		"BeforePageDisplayMobile": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplayMobile",
+		"ChangesListInitRows": "LabelPrefetch",
 		"ContentModelCanBeUsedOn": "\\Wikibase\\Repo\\RepoHooks::onContentModelCanBeUsedOn",
 		"ExtensionTypes": "LibHooks",
 		"FormatAutocomments": "\\Wikibase\\Repo\\RepoHooks::onFormat",
