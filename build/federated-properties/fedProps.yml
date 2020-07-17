@@ -68,6 +68,14 @@
           dest: "{{ MW_PATH }}"
           version: "master"
 
+    - name: Ensure .htaccess is in place
+      copy:
+          src: "files/htaccess"
+          dest: "{{ MW_PATH }}/.htaccess"
+          mode: 0644
+      tags:
+          - source
+
     - name: Ensure symbolic link for script dir is in place
       file:
           src: "/var/www/html"

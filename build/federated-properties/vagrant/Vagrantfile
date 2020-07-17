@@ -2,11 +2,11 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'debian/buster64'
   config.vm.box_version = '10.0.0'
   config.vm.network 'private_network', ip: '192.168.100.42'
-  config.vm.hostname = 'federated-properties'
+  config.vm.hostname = 'federatedProperties-vm'
 
   config.vm.provider 'virtualbox' do |v|
-    v.name = 'wikibase-federatedProperties'
-    v.memory = 1024
+    v.name = 'wikibase-federated-properties.vm'
+    v.memory = 3072
     v.cpus = 2
     v.customize ['modifyvm', :id, '--vram', '16']
   end
