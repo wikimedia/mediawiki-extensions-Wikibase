@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use ApiUsageException;
-use MediaWiki\MediaWikiServices;
+use IBufferingStatsdDataFactory;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\Lib\Summary;
@@ -28,21 +28,27 @@ class SetAliases extends ModifyEntity {
 	 */
 	private $termChangeOpFactory;
 
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		FingerprintChangeOpFactory $termChangeOpFactory
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		IBufferingStatsdDataFactory $stats
 	) {
 		parent::__construct( $mainModule, $moduleName );
 		$this->termChangeOpFactory = $termChangeOpFactory;
+		$this->stats = $stats;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory( ApiMain $mainModule, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
 		return new self(
 			$mainModule,
 			$moduleName,
 			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-				->getFingerprintChangeOpFactory()
+				->getFingerprintChangeOpFactory(),
+			$stats
 		);
 	}
 
@@ -111,10 +117,9 @@ class SetAliases extends ModifyEntity {
 		// FIXME: if we have ADD and REMOVE operations in the same call,
 		// we will also have two ChangeOps updating the same edit summary.
 		// This will cause the edit summary to be overwritten by the last ChangeOp being applied.
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$stats->increment( 'wikibase.repo.api.wbsetaliases.total' );
+		$this->stats->increment( 'wikibase.repo.api.wbsetaliases.total' );
 		if ( !empty( $preparedParameters['add'] ) && !empty( $preparedParameters['remove'] ) ) {
-			$stats->increment( 'wikibase.repo.api.wbsetaliases.addremove' );
+			$this->stats->increment( 'wikibase.repo.api.wbsetaliases.addremove' );
 		}
 
 		$summary = $this->createSummary( $preparedParameters );
