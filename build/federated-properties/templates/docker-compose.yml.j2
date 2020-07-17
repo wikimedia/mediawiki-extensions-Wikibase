@@ -4,13 +4,13 @@ version: '3'
 
 services:
   wikibase:
-    container_name: wikibase
     image: wikibase/wikibase:1.33-bundle
+    container_name: wikibase
+    hostname: wikibase
     links:
       - mysql
     ports:
-    # CONFIG - Change the 8181 here to expose Wikibase & MediaWiki on a different port
-     - "8080:80"
+     - "80:80"
     volumes:
       - {{ MW_PATH }}:/var/www/html
       - mediawiki-images-data:/var/www/html/images
@@ -23,7 +23,6 @@ services:
         aliases:
          - wikibase.svc
          - {{ SERVER_NAME }}
-         # CONFIG - Add your real wikibase hostname here, for example wikibase-registry.wmflabs.org
     environment:
       - DB_SERVER=mysql.svc:3306
       - MW_ELASTIC_HOST=elasticsearch.svc
@@ -33,20 +32,20 @@ services:
       - MW_ADMIN_PASS=${WIKI_ADMIN_PASSWORD}
       - MW_ADMIN_EMAIL=admin@example.com
       - MW_WG_SECRET_KEY=secretkey
-      # CONFIG - Change the default values below (should match mysql values in this file)
       - DB_USER=wikiuser
       - DB_PASS=${MYSQL_PASSWORD}
       - DB_NAME=my_wiki
       - QS_PUBLIC_SCHEME_HOST_AND_PORT=http://localhost:9191
+
   mysql:
-    container_name: mysql
     image: mariadb:10.3
+    container_name: mysql
+    hostname: mysql
     restart: unless-stopped
     volumes:
       - mediawiki-mysql-data:/var/lib/mysql
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
-      # CONFIG - Change the default values below (should match values passed to wikibase)
       MYSQL_DATABASE: 'my_wiki'
       MYSQL_USER: 'wikiuser'
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -54,9 +53,11 @@ services:
       default:
         aliases:
          - mysql.svc
+
   elasticsearch:
-    container_name: elasticsearch
     image: wikibase/elasticsearch:5.6.14-extra
+    container_name: elasticsearch
+    hostname: elasticsearch
     restart: unless-stopped
     networks:
       default:
@@ -66,6 +67,64 @@ services:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
 
+  wdqs-frontend:
+    image: wikibase/wdqs-frontend:latest
+    container_name: wdqs-frontend
+    hostname: wdqs-frontend
+    restart: unless-stopped
+    ports:
+     - "8834:80"
+    depends_on:
+    - wdqs-proxy
+    environment:
+      - WIKIBASE_HOST={{ SERVER_NAME }}
+      - WDQS_HOST=wdqs-proxy
+
+  wdqs:
+    image: wikibase/wdqs:latest
+    container_name: wdqs
+    hostname: wdqs
+    volumes:
+      - query-service-data:/wdqs/data
+    environment:
+      - WIKIBASE_HOST={{ SERVER_NAME }}
+      - WDQS_HOST=wdqs
+      - WDQS_PORT=9999
+      - WDQS_ENTITY_NAMESPACES=120,122
+      - WIKIBASE_SCHEME={{ SCHEME }}
+    restart: unless-stopped
+    command: /runBlazegraph.sh
+    expose:
+      - 9999
+
+  wdqs-updater:
+    image: wikibase/wdqs:latest
+    container_name: wdqs-updater
+    hostname: wdqs-updater
+    restart: unless-stopped
+    command: /runUpdate.sh
+    depends_on:
+      - wdqs
+      - wikibase
+    environment:
+      - WIKIBASE_HOST={{ SERVER_NAME }}
+      - WDQS_HOST=wdqs
+      - WDQS_PORT=9999
+      - WDQS_ENTITY_NAMESPACES=120,122
+
+  wdqs-proxy:
+    image: wikibase/wdqs-proxy
+    container_name: wdqs-proxy
+    hostname: wdqs-proxy
+    restart: unless-stopped
+    environment:
+      - PROXY_PASS_HOST=wdqs:9999
+    ports:
+      - "8835:80"
+    depends_on:
+      - wdqs
+
 volumes:
   mediawiki-mysql-data:
   mediawiki-images-data:
+  query-service-data:
