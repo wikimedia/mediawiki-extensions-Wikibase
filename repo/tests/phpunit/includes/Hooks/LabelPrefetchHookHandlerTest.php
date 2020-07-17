@@ -11,6 +11,8 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
+use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
 
@@ -71,12 +73,23 @@ class LabelPrefetchHookHandlerTest extends \PHPUnit\Framework\TestCase {
 
 		$titleFactory = new TitleFactory();
 
+		// TODO: Instead of mocking, these need to have a null implementation of an interface
+		$fallbackChain = $this->createMock( LanguageFallbackChain::class );
+		$fallbackChain->expects( $this->any() )
+			->method( 'getFetchLanguageCodes' )
+			->willReturn( $languageCodes );
+
+		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
+		$fallbackChainFactory->expects( $this->any() )
+			->method( 'newFromContext' )
+			->willReturn( $fallbackChain );
+
 		return new LabelPrefetchHookHandler(
 			$termBuffer,
 			$idLookup,
 			$titleFactory,
 			$termTypes,
-			$languageCodes
+			$fallbackChainFactory
 		);
 	}
 
@@ -126,9 +139,7 @@ class LabelPrefetchHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		);
 
 		/** @var ChangesList $changesList */
-		$changesList = $this->getMockBuilder( ChangesList::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$changesList = $this->createMock( ChangesList::class );
 
 		$linkBeginHookHandler->onChangesListInitRows(
 			$changesList,
