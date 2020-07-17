@@ -114,7 +114,10 @@
 		},
 		"wbsubscribers": {
 			"class": "\\Wikibase\\Repo\\Api\\ListSubscribers",
-			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::factory",
+			"services": [
+				"SiteLookup"
+			]
 		}
 	},
 	"APIMetaModules": {
