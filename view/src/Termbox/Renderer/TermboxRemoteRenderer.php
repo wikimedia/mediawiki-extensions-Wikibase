@@ -7,8 +7,8 @@ use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
 use MediaWiki\Http\HttpRequestFactory;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageWithConversion;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later
@@ -41,7 +41,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 	/**
 	 * @inheritDoc
 	 */
-	public function getContent( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	public function getContent( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
 		try {
 			$request = $this->requestFactory->create(
 				$this->formatUrl( $entityId, $revision, $language, $editLink, $preferredLanguages ),
@@ -91,12 +91,12 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		$this->stats->increment( 'wikibase.view.TermboxRemoteRenderer.requestError' );
 	}
 
-	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	private function formatUrl( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
 		return $this->ssrServerUrl . '?' .
 			http_build_query( $this->getRequestParams( $entityId, $revision, $language, $editLink, $preferredLanguages ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages ) {
+	private function getRequestParams( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'revision' => $revision,
@@ -106,7 +106,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 		];
 	}
 
-	private function getLanguageCodes( LanguageFallbackChain $preferredLanguages ) {
+	private function getLanguageCodes( TermLanguageFallbackChain $preferredLanguages ) {
 		return array_map( function ( LanguageWithConversion $language ) {
 			return $language->getLanguageCode();
 		}, $preferredLanguages->getFallbackChain() );

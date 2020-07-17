@@ -3,7 +3,7 @@
 namespace Wikibase\View;
 
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * A factory constructing SnakFormatters that output HTML.
@@ -15,12 +15,12 @@ interface HtmlSnakFormatterFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter(
 		$languageCode,
-		LanguageFallbackChain $languageFallbackChain
+		TermLanguageFallbackChain $termLanguageFallbackChain
 	);
 
 }

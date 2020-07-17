@@ -5,10 +5,10 @@ namespace Wikibase\Lib\Tests\Store;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup
@@ -93,10 +93,10 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
 	/**
 	 * @param string $languageCode
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain( $languageCode ) {
-		$languageFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
+		$languageFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 

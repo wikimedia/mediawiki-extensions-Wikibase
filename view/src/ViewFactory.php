@@ -10,9 +10,9 @@ use Wikibase\DataModel\Services\Statement\Grouper\StatementGrouper;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormat;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -190,7 +190,7 @@ class ViewFactory {
 	 * Creates an ItemView suitable for rendering the item.
 	 *
 	 * @param Language $language
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return ItemView
@@ -198,14 +198,14 @@ class ViewFactory {
 	 */
 	public function newItemView(
 		Language $language,
-		LanguageFallbackChain $fallbackChain,
+		TermLanguageFallbackChain $termFallbackChain,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$editSectionGenerator = $this->newToolbarEditSectionGenerator();
 
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			$fallbackChain,
+			$termFallbackChain,
 			$editSectionGenerator
 		);
 
@@ -237,7 +237,7 @@ class ViewFactory {
 	 * Creates an PropertyView suitable for rendering the property.
 	 *
 	 * @param Language $language
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param CacheableEntityTermsView $entityTermsView
 	 *
 	 * @return PropertyView
@@ -245,12 +245,12 @@ class ViewFactory {
 	 */
 	public function newPropertyView(
 		Language $language,
-		LanguageFallbackChain $fallbackChain,
+		TermLanguageFallbackChain $termFallbackChain,
 		CacheableEntityTermsView $entityTermsView
 	) {
 		$statementSectionsView = $this->newStatementSectionsView(
 			$language->getCode(),
-			$fallbackChain,
+			$termFallbackChain,
 			$this->newToolbarEditSectionGenerator()
 		);
 
@@ -267,19 +267,19 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementSectionsView
 	 */
 	public function newStatementSectionsView(
 		$languageCode,
-		LanguageFallbackChain $fallbackChain,
+		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$statementGroupListView = $this->newStatementGroupListView(
 			$languageCode,
-			$fallbackChain,
+			$termFallbackChain,
 			$editSectionGenerator
 		);
 
@@ -293,19 +293,19 @@ class ViewFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $fallbackChain
+	 * @param TermLanguageFallbackChain $termFallbackChain
 	 * @param EditSectionGenerator $editSectionGenerator
 	 *
 	 * @return StatementGroupListView
 	 */
 	public function newStatementGroupListView(
 		$languageCode,
-		LanguageFallbackChain $fallbackChain,
+		TermLanguageFallbackChain $termFallbackChain,
 		EditSectionGenerator $editSectionGenerator
 	) {
 		$snakFormatter = $this->htmlSnakFormatterFactory->getSnakFormatter(
 			$languageCode,
-			$fallbackChain
+			$termFallbackChain
 		);
 		$propertyIdFormatter = $this->htmlIdFormatterFactory->getEntityIdFormatter(
 			Language::factory( $languageCode )

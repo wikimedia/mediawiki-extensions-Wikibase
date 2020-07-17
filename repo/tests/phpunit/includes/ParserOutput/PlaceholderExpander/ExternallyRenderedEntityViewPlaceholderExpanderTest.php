@@ -8,9 +8,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\ExternallyRenderedEntityViewPlaceholderExpander;
@@ -120,7 +120,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 			->with( EntityTermsView::TERMS_EDIT_SPECIAL_PAGE, [ $entityId->getSerialization() ] )
 			->willReturn( $editPageLink );
 
-		$languageFallbackChain = $this->createMock( LanguageFallbackChain::class );
+		$languageFallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$this->languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromContext' )
 			->with( $this->outputPage )
@@ -239,7 +239,7 @@ class ExternallyRenderedEntityViewPlaceholderExpanderTest extends TestCase {
 	protected function newLanguageFallbackChainFactory() {
 		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		$factory->method( 'newFromContext' )
-			->willReturn( $this->createMock( LanguageFallbackChain::class ) );
+			->willReturn( $this->createMock( TermLanguageFallbackChain::class ) );
 
 		return $factory;
 	}

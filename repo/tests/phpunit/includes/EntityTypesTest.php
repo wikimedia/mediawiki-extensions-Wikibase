@@ -6,7 +6,7 @@ use Language;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\View\EntityDocumentView;
 
@@ -54,7 +54,7 @@ class EntityTypesTest extends \PHPUnit\Framework\TestCase {
 		$entityView = call_user_func(
 			$callback,
 			Language::factory( 'en' ),
-			new LanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [] ),
 			new Item( new ItemId( 'Q123' ) )
 		);
 

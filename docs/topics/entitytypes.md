@@ -35,7 +35,7 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-composer-callback (repo and client)
   * A callable that returns an EntityId instance for the given unique part of an entity ID serialization. Only entity types with IDs that are constructed from a static and a unique part can and should specify this.
 * view-factory-callback (repo only)
-  * A callable that returns an [EntityDocumentView] instance, with the arguments being a language code, a LabelDescriptionLookup, a LanguageFallbackChain and an EditSectionGenerator
+  * A callable that returns an [EntityDocumentView] instance, with the arguments being a language code, a LabelDescriptionLookup, a TermLanguageFallbackChain and an EditSectionGenerator
 * content-model-id (repo only)
   * A string representing the id of the content model
 * content-handler-factory-callback (repo only)
@@ -73,7 +73,7 @@ The entity types repository is an associative array mapping entity type identifi
 * entity-id-lookup-callback (client only)
   * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 * prefetching-term-lookup-callback
-  * A callable that returns a [PrefetchingTermLookup] instance. When no callback is provided for an entity type, a `NullPrefetchingTermLookup` is used as a fallback. The `PrefetchingTermLookup` is used to prefetch terms for all entities that appear on the page in all languages in the `LanguageFallbackChain` to minimize the number of term lookups when an entity page is being rendered. This happens in `LanguageFallbackLabelDescriptionLookupFactory::newLabelDescriptionLookup`.
+  * A callable that returns a [PrefetchingTermLookup] instance. When no callback is provided for an entity type, a `NullPrefetchingTermLookup` is used as a fallback. The `PrefetchingTermLookup` is used to prefetch terms for all entities that appear on the page in all languages in the `TermLanguageFallbackChain` to minimize the number of term lookups when an entity page is being rendered. This happens in `LanguageFallbackLabelDescriptionLookupFactory::newLabelDescriptionLookup`.
 
 Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 

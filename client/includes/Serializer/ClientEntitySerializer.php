@@ -6,7 +6,7 @@ use Serializers\Exceptions\SerializationException;
 use Serializers\Serializer;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later
@@ -20,9 +20,9 @@ class ClientEntitySerializer extends ClientSerializer {
 	private $entitySerializer;
 
 	/**
-	 * @var LanguageFallbackChain[]
+	 * @var TermLanguageFallbackChain[]
 	 */
-	private $fallbackChains;
+	private $termFallbackChains;
 
 	/**
 	 * @var string[]
@@ -33,19 +33,19 @@ class ClientEntitySerializer extends ClientSerializer {
 	 * @param Serializer $entitySerializer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param string[] $filterLangCodes
-	 * @param LanguageFallbackChain[] $fallbackChains
+	 * @param TermLanguageFallbackChain[] $termFallbackChains
 	 */
 	public function __construct(
 		Serializer $entitySerializer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $filterLangCodes,
-		array $fallbackChains
+		array $termFallbackChains
 	) {
 		parent::__construct( $dataTypeLookup );
 
 		$this->filterLangCodes = $filterLangCodes;
 		$this->entitySerializer = $entitySerializer;
-		$this->fallbackChains = $fallbackChains;
+		$this->termFallbackChains = $termFallbackChains;
 	}
 
 	/**
@@ -59,7 +59,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	public function serialize( $entity ) {
 		$serialization = $this->entitySerializer->serialize( $entity );
 
-		if ( !empty( $this->fallbackChains ) ) {
+		if ( !empty( $this->termFallbackChains ) ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization );
 		}
 
@@ -100,7 +100,7 @@ class ClientEntitySerializer extends ClientSerializer {
 	 */
 	private function getTermsSerializationWithFallbackInfo( array $serialization ) {
 		$newSerialization = $serialization;
-		foreach ( $this->fallbackChains as $requestedLanguageCode => $fallbackChain ) {
+		foreach ( $this->termFallbackChains as $requestedLanguageCode => $fallbackChain ) {
 			if ( !array_key_exists( $requestedLanguageCode, $serialization ) ) {
 				$fallbackSerialization = $fallbackChain->extractPreferredValue( $serialization );
 				if ( $fallbackSerialization !== null ) {

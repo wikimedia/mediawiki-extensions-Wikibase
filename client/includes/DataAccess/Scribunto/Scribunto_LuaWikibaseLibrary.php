@@ -23,11 +23,11 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * Registers and defines functions to access Wikibase through the Scribunto extension
@@ -57,9 +57,9 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	private $snakSerializationRenderers = [];
 
 	/**
-	 * @var LanguageFallbackChain|null
+	 * @var TermLanguageFallbackChain|null
 	 */
-	private $fallbackChain = null;
+	private $termFallbackChain = null;
 
 	/**
 	 * @var ParserOutputUsageAccumulator|null
@@ -143,15 +143,15 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	private function getLanguageFallbackChain() {
-		if ( $this->fallbackChain === null ) {
-			$this->fallbackChain = WikibaseClient::getDefaultInstance()->
+		if ( $this->termFallbackChain === null ) {
+			$this->termFallbackChain = WikibaseClient::getDefaultInstance()->
 				getDataAccessLanguageFallbackChain( $this->getLanguage() );
 		}
 
-		return $this->fallbackChain;
+		return $this->termFallbackChain;
 	}
 
 	/**

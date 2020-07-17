@@ -24,7 +24,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\Content\ItemContent;
@@ -55,7 +55,7 @@ return [
 		},
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
-			LanguageFallbackChain $fallbackChain,
+			TermLanguageFallbackChain $fallbackChain,
 			EntityDocument $entity
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -191,7 +191,7 @@ return [
 		},
 		Def::VIEW_FACTORY_CALLBACK => function(
 			Language $language,
-			LanguageFallbackChain $fallbackChain,
+			TermLanguageFallbackChain $fallbackChain,
 			EntityDocument $entity
 		) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();

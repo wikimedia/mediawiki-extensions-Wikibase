@@ -7,8 +7,8 @@ use Html;
 use IContextSource;
 use Language;
 use SpecialPage;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -20,7 +20,7 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var TermLanguageFallbackChain
 	 */
 	private $chain;
 
@@ -74,7 +74,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	/**
 	 * Get the chain stored for display.
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function getLanguageFallbackChain() {
 		if ( $this->chain === null ) {
@@ -89,11 +89,11 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	/**
 	 * Set a new chain for display and return the original one.
 	 *
-	 * @param LanguageFallbackChain $chain
+	 * @param TermLanguageFallbackChain $chain
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
-	public function setLanguageFallbackChain( LanguageFallbackChain $chain ) {
+	public function setLanguageFallbackChain( TermLanguageFallbackChain $chain ) {
 		return wfSetVar( $this->chain, $chain );
 	}
 

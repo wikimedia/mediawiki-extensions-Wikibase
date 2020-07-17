@@ -6,8 +6,8 @@ use IContextSource;
 use Language;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\PlaceholderExpander\TermboxRequestInspector;
 
 /**
@@ -27,12 +27,12 @@ class TermboxRequestInspectorTest extends TestCase {
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $language )
-			->willReturn( new LanguageFallbackChain( [ $language, 'en' ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ $language, 'en' ] ) );
 
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromContext' )
 			->with( $context )
-			->willReturn( new LanguageFallbackChain( [ $language, 'en' ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ $language, 'en' ] ) );
 
 		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
 
@@ -47,12 +47,12 @@ class TermboxRequestInspectorTest extends TestCase {
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguage' )
 			->with( $language )
-			->willReturn( new LanguageFallbackChain( [ $language ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ $language ] ) );
 
 		$languageFallbackChainFactory->expects( $this->once() )
 			->method( 'newFromContext' )
 			->with( $context )
-			->willReturn( new LanguageFallbackChain( [ $language, 'de' ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ $language, 'de' ] ) );
 
 		$inspector = new TermboxRequestInspector( $languageFallbackChainFactory );
 

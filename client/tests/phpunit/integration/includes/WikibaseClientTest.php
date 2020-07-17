@@ -40,7 +40,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Formatters\WikibaseSnakFormatterBuilders;
 use Wikibase\Lib\Formatters\WikibaseValueFormatterBuilders;
 use Wikibase\Lib\Interactors\TermSearchInteractor;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
@@ -48,6 +47,7 @@ use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
 use Wikimedia\TestingAccessWrapper;
@@ -429,7 +429,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$lang = Language::factory( 'de' );
 		$fallbackChain = $this->getWikibaseClient()->getDataAccessLanguageFallbackChain( $lang );
 
-		$this->assertInstanceOf( LanguageFallbackChain::class, $fallbackChain );
+		$this->assertInstanceOf( TermLanguageFallbackChain::class, $fallbackChain );
 		// "de" falls back to "en"
 		$this->assertCount( 2, $fallbackChain->getFetchLanguageCodes() );
 	}

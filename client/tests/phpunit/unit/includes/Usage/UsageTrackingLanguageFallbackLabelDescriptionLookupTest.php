@@ -8,8 +8,8 @@ use Wikibase\Client\Usage\UsageAccumulator;
 use Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Client\Usage\UsageTrackingLanguageFallbackLabelDescriptionLookup
@@ -139,7 +139,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookupTest extends \PHPUnit\F
 		array $fetchLanguageCodes,
 		$trackUsagesInAllLanguages
 	) {
-		$languageFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
+		$languageFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$languageFallbackChain->expects( $this->exactly( $trackUsagesInAllLanguages ? 0 : 1 ) )

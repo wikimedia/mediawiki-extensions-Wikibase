@@ -3,7 +3,7 @@
 namespace Wikibase\View\Termbox\Renderer;
 
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later
@@ -11,16 +11,16 @@ use Wikibase\Lib\LanguageFallbackChain;
 interface TermboxRenderer {
 
 	/**
-	 * @throws TermboxRenderingException
-	 *
 	 * @param EntityId $entityId
 	 * @param int $revision
 	 * @param string $language
 	 * @param string $editLink
-	 * @param LanguageFallbackChain $preferredLanguages
+	 * @param TermLanguageFallbackChain $preferredLanguages
 	 *
 	 * @return string
+	 * @throws TermboxRenderingException
+	 *
 	 */
-	public function getContent( EntityId $entityId, $revision, $language, $editLink, LanguageFallbackChain $preferredLanguages );
+	public function getContent( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages );
 
 }

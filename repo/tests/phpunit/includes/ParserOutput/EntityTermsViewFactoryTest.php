@@ -6,7 +6,7 @@ use Language;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\EntityTermsViewFactory;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -25,7 +25,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
 				Language::factory( 'en' ),
-				new LanguageFallbackChain( [] )
+				new TermLanguageFallbackChain( [] )
 			);
 
 		$this->assertInstanceOf( PlaceholderEmittingEntityTermsView::class, $termsView );
@@ -36,7 +36,7 @@ class EntityTermsViewFactoryTest extends TestCase {
 			->newEntityTermsView(
 				new Item( new ItemId( 'Q42' ) ),
 				Language::factory( 'en' ),
-				new LanguageFallbackChain( [] ),
+				new TermLanguageFallbackChain( [] ),
 				true
 			);
 

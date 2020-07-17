@@ -7,7 +7,7 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\View\HtmlSnakFormatterFactory;
 
 /**
@@ -29,30 +29,30 @@ class WikibaseHtmlSnakFormatterFactory implements HtmlSnakFormatterFactory {
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @return FormatterOptions
 	 */
 	private function getFormatterOptions(
 		$languageCode,
-		LanguageFallbackChain $languageFallbackChain
+		TermLanguageFallbackChain $termLanguageFallbackChain
 	) {
 		$formatterOptions = new FormatterOptions( [
 			ValueFormatter::OPT_LANG => $languageCode,
-			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $languageFallbackChain,
+			FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN => $termLanguageFallbackChain,
 		] );
 		return $formatterOptions;
 	}
 
 	/**
 	 * @param string $languageCode
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @return SnakFormatter
 	 */
 	public function getSnakFormatter(
 		$languageCode,
-		LanguageFallbackChain $languageFallbackChain
+		TermLanguageFallbackChain $termLanguageFallbackChain
 	) {
-		$formatterOptions = $this->getFormatterOptions( $languageCode, $languageFallbackChain );
+		$formatterOptions = $this->getFormatterOptions( $languageCode, $termLanguageFallbackChain );
 
 		return $this->snakFormatterFactory->getSnakFormatter(
 			SnakFormatter::FORMAT_HTML_VERBOSE,

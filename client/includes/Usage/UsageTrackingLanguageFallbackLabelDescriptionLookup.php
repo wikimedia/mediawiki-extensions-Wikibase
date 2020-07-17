@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * LanguageFallbackLabelDescriptionLookup decorator that records label usage in an UsageAccumulator.
@@ -30,9 +30,9 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 	private $usageAccumulator;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var TermLanguageFallbackChain
 	 */
-	private $languageFallbackChain;
+	private $termLanguageFallbackChain;
 
 	/**
 	 * @var bool
@@ -42,13 +42,13 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 	/**
 	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param UsageAccumulator $usageAccumulator
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @param bool $trackUsagesInAllLanguages
 	 */
 	public function __construct(
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
 		UsageAccumulator $usageAccumulator,
-		LanguageFallbackChain $languageFallbackChain,
+		TermLanguageFallbackChain $termLanguageFallbackChain,
 		$trackUsagesInAllLanguages
 	) {
 		if ( !is_bool( $trackUsagesInAllLanguages ) ) {
@@ -57,7 +57,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->usageAccumulator = $usageAccumulator;
-		$this->languageFallbackChain = $languageFallbackChain;
+		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
 		$this->trackUsagesInAllLanguages = $trackUsagesInAllLanguages;
 	}
 
@@ -108,7 +108,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 			return [ null ];
 		}
 
-		$fetchLanguages = $this->languageFallbackChain->getFetchLanguageCodes();
+		$fetchLanguages = $this->termLanguageFallbackChain->getFetchLanguageCodes();
 
 		if ( $termFallback === null ) {
 			// Nothing found: Record the full fallback chains as used.

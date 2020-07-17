@@ -61,7 +61,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 	 * containing the 'value' and 'language' fields, or null
 	 * or an empty array.
 	 *
-	 * @see LanguageFallbackChain::extractPreferredValueOrAny
+	 * @see TermLanguageFallbackChain::extractPreferredValueOrAny
 	 *
 	 * @return array list( string $text, Language $language )
 	 */
