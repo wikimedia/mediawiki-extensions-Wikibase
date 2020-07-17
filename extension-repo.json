@@ -318,6 +318,10 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory"
 		},
+		"ShowSearchHit": {
+			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory"
+		},
 		"ViewHooks": {
 			"class": "\\Wikibase\\View\\ViewHooks"
 		}
@@ -366,8 +370,8 @@
 		],
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
-		"ShowSearchHit": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::onShowSearchHit",
-		"ShowSearchHitTitle": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::onShowSearchHitTitle",
+		"ShowSearchHit": "ShowSearchHit",
+		"ShowSearchHitTitle": "ShowSearchHit",
 		"SidebarBeforeOutput": "\\Wikibase\\Repo\\RepoHooks::onSidebarBeforeOutput",
 		"SkinTemplateNavigation": "\\Wikibase\\Repo\\RepoHooks::onPageTabs",
 		"SpecialPage_initList": "FederatedPropertiesSpecialPage",
