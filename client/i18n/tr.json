@@ -188,7 +188,7 @@
 	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "{{WBREPONAME}} üzerinde kaynak düzenleyin",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Oturum açmadınız",
 	"wikibase-client-data-bridge-saving-error-assertuser-message": "Değişikliklerinizi giriş yapmadan yayınlayabilirsiniz. IP adresiniz sayfanın düzenleme geçmişine kaydedilir. Ayrıca tekrar giriş yapabilir ve yayınlamayı tekrar deneyebilirsiniz.",
-	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Oturum açmada yayınla",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Oturum açmadan yayımla",
 	"wikibase-client-data-bridge-saving-error-assertuser-save": "Oturum açmadan kaydet",
 	"wikibase-client-data-bridge-saving-error-assertuser-login": "Oturum aç (Yeni bir sekmede açılır)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Düzenlemeye devam et"
