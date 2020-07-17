@@ -44,7 +44,10 @@
 		},
 		"wbgetentities": {
 			"class": "\\Wikibase\\Repo\\Api\\GetEntities",
-			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory",
+			"services": [
+				"StatsdDataFactory"
+			]
 		},
 		"wblinktitles": {
 			"class": "\\Wikibase\\Repo\\Api\\LinkTitles",
@@ -76,11 +79,17 @@
 		},
 		"wbsetaliases": {
 			"class": "\\Wikibase\\Repo\\Api\\SetAliases",
-			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetAliases::factory",
+			"services": [
+				"StatsdDataFactory"
+			]
 		},
 		"wbsetclaim": {
 			"class": "\\Wikibase\\Repo\\Api\\SetClaim",
-			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
+			"services": [
+				"StatsdDataFactory"
+			]
 		},
 		"wbsetclaimvalue": {
 			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",

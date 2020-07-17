@@ -11,9 +11,9 @@ use DataValues\IllegalValueException;
 use Deserializers\Deserializer;
 use Diff\Comparer\ComparableComparer;
 use Diff\Differ\OrderedListDiffer;
+use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
-use MediaWiki\MediaWikiServices;
 use OutOfBoundsException;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
@@ -72,6 +72,9 @@ class SetClaim extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
+
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
@@ -81,7 +84,8 @@ class SetClaim extends ApiBase {
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		IBufferingStatsdDataFactory $stats
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -92,9 +96,10 @@ class SetClaim extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
+		$this->stats = $stats;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory( ApiMain $mainModule, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
@@ -119,7 +124,8 @@ class SetClaim extends ApiBase {
 			},
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
-			}
+			},
+			$stats
 		);
 	}
 
@@ -178,10 +184,9 @@ class SetClaim extends ApiBase {
 		$this->resultBuilder->markSuccess();
 		$this->resultBuilder->addStatement( $statement );
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
+		$this->stats->increment( 'wikibase.repo.api.wbsetclaim.total' );
 		if ( $index !== null ) {
-			$stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
+			$this->stats->increment( 'wikibase.repo.api.wbsetclaim.index' );
 		}
 	}
 

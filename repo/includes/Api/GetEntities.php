@@ -6,7 +6,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
-use MediaWiki\MediaWikiServices;
+use IBufferingStatsdDataFactory;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -72,6 +72,9 @@ class GetEntities extends ApiBase {
 	 */
 	private $idParser;
 
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
+
 	/**
 	 * @param ApiMain $mainModule
 	 * @param string $moduleName
@@ -84,6 +87,7 @@ class GetEntities extends ApiBase {
 	 * @param ResultBuilder $resultBuilder
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
+	 * @param IBufferingStatsdDataFactory $stats
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -98,7 +102,8 @@ class GetEntities extends ApiBase {
 		ApiErrorReporter $errorReporter,
 		ResultBuilder $resultBuilder,
 		EntityRevisionLookup $entityRevisionLookup,
-		EntityIdParser $idParser
+		EntityIdParser $idParser,
+		IBufferingStatsdDataFactory $stats
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -111,9 +116,10 @@ class GetEntities extends ApiBase {
 		$this->resultBuilder = $resultBuilder;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
+		$this->stats = $stats;
 	}
 
-	public static function factory( ApiMain $apiMain, string $moduleName ): self {
+	public static function factory( ApiMain $apiMain, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
@@ -134,7 +140,8 @@ class GetEntities extends ApiBase {
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$wikibaseRepo->getEntityRevisionLookup(),
-			$wikibaseRepo->getEntityIdParser()
+			$wikibaseRepo->getEntityIdParser(),
+			$stats
 		);
 	}
 
@@ -157,8 +164,7 @@ class GetEntities extends ApiBase {
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
 
-		$stats = MediaWikiServices::getInstance()->getStatsdDataFactory();
-		$stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
+		$this->stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
 
 		$entityRevisions = $this->getEntityRevisionsFromEntityIds( $entityIds, $resolveRedirects );
 
