@@ -6,7 +6,7 @@ use Html;
 use HtmlArmor;
 use HTMLForm;
 use Linker;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Languages\LanguageConverterFactory;
 use QueryPage;
 use Skin;
 use Title;
@@ -30,6 +30,9 @@ class SpecialEntityUsage extends QueryPage {
 	 */
 	private $idParser;
 
+	/** @var LanguageConverterFactory */
+	private $languageConverterFactory;
+
 	/**
 	 * @var EntityId|null
 	 */
@@ -40,15 +43,17 @@ class SpecialEntityUsage extends QueryPage {
 	 *
 	 * @param EntityIdParser $idParser
 	 */
-	public function __construct( EntityIdParser $idParser ) {
+	public function __construct( EntityIdParser $idParser, LanguageConverterFactory $languageConverterFactory ) {
 		parent::__construct( 'EntityUsage' );
 
 		$this->idParser = $idParser;
+		$this->languageConverterFactory = $languageConverterFactory;
 	}
 
-	public static function factory(): self {
+	public static function factory( LanguageConverterFactory $languageConverterFactory ): self {
 		return new self(
-			WikibaseClient::getDefaultInstance()->getEntityIdParser()
+			WikibaseClient::getDefaultInstance()->getEntityIdParser(),
+			$languageConverterFactory
 		);
 	}
 
@@ -180,8 +185,8 @@ class SpecialEntityUsage extends QueryPage {
 			);
 		}
 
-		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
-		$linkText = $contLang->convert( htmlspecialchars( $title->getPrefixedText() ) );
+		$languageConverter = $this->languageConverterFactory->getLanguageConverter();
+		$linkText = $languageConverter->convert( htmlspecialchars( $title->getPrefixedText() ) );
 		return $this->getLinkRenderer()->makeLink(
 			$title,
 			new HtmlArmor( $linkText )
