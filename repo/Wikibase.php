@@ -43,7 +43,6 @@ require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
-		$wgHooks,
 		$wgMessagesDirs,
 		$wgWBRepoSettings;
 
@@ -54,8 +53,6 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
-
-	$wgHooks['HtmlPageLinkRendererEnd'][] = 'Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler::onHtmlPageLinkRendererEnd';
 
 	$wgWBRepoSettings = array_merge(
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
