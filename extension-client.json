@@ -347,7 +347,10 @@
 		},
 		"EntityUsage": {
 			"class": "Wikibase\\Client\\Specials\\SpecialEntityUsage",
-			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::factory"
+			"factory": "Wikibase\\Client\\Specials\\SpecialEntityUsage::factory",
+			"services": [
+				"LanguageConverterFactory"
+			]
 		}
 	},
 	"MessagesDirs": {

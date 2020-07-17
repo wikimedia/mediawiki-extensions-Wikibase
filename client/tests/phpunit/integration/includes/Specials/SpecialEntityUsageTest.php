@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Integration\Specials;
 
 use Language;
+use LanguageQqx;
+use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use Title;
@@ -54,15 +56,20 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$idParser = WikibaseClient::getDefaultInstance()->getEntityIdParser();
 
 		$specialPage = $this->getMockBuilder( SpecialEntityUsage::class )
-			->setConstructorArgs( [ $idParser ] )
-			->setMethods( [ 'reallyDoQuery' ] )
+			->setConstructorArgs( [ $idParser, $this->languageConverterFactory() ] )
+			->onlyMethods( [ 'reallyDoQuery' ] )
 			->getMock();
 
-		$specialPage->expects( $this->any() )
-			->method( 'reallyDoQuery' )
-			->will( $this->returnValue( $this->reallyDoQueryMock() ) );
+		$specialPage->method( 'reallyDoQuery' )
+			->willReturn( $this->reallyDoQueryMock() );
 
 		return $specialPage;
+	}
+
+	private function languageConverterFactory(): LanguageConverterFactory {
+		return new LanguageConverterFactory( false, function () {
+			return new LanguageQqx();
+		} );
 	}
 
 	public function testExecuteWithValidParam() {
@@ -105,7 +112,7 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 		$this->addReallyDoQueryData();
 
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
-		$special = new SpecialEntityUsage( $wikibaseClient->getEntityIdParser() );
+		$special = new SpecialEntityUsage( $wikibaseClient->getEntityIdParser(), $this->languageConverterFactory() );
 		$special->prepareParams( 'Q3' );
 		$res = $special->reallyDoQuery( 50 );
 		$values = [];
