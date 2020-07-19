@@ -110,6 +110,7 @@ class WikibaseContentLanguages {
 					'lcm', // T234761
 					'lkt', // T125066
 					'mfa', // T235468
+					'mic', // T258331
 					'mid', // T155418
 					'mnc', // T137808
 					'moe', // T151129
