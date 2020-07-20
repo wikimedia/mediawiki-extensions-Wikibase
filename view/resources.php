@@ -216,6 +216,7 @@ return call_user_func( function() {
 				'resources/jquery/wikibase/jquery.wikibase.statementlistview.js',
 				'resources/jquery/wikibase/jquery.wikibase.statementview.js',
 				'resources/jquery/wikibase/jquery.wikibase.statementview.RankSelector.js',
+				'resources/jquery/wikibase/jquery.wikibase.siteselector.js',
 				'resources/jquery/ui/jquery.ui.tagadata.js',
 				'resources/jquery/jquery.sticknode.js',
 				'resources/jquery/jquery.removeClassByRegex.js',
@@ -255,7 +256,6 @@ return call_user_func( function() {
 				'jquery.inputautoexpand',
 				'jquery.throttle-debounce',
 				'jquery.wikibase.entityselector',
-				'jquery.wikibase.siteselector',
 				'wikibase.buildErrorOutput',
 				'wikibase.getLanguageNameByCode',
 				'wikibase.sites',
@@ -928,18 +928,6 @@ return call_user_func( function() {
 			],
 			'remoteExtPath' => 'Wikibase/view/lib/wikibase-tainted-ref/dist',
 			'localBasePath' => __DIR__ . '/lib/wikibase-tainted-ref/dist',
-		],
-
-		// TODO: Merge with wikibase.view.ControllerViewFactory
-		'jquery.wikibase.siteselector' => $moduleTemplate + [
-			'scripts' => [
-				'jquery/wikibase/jquery.wikibase.siteselector.js',
-			],
-			'dependencies' => [
-				'jquery.event.special.eachchange',
-				'jquery.ui.suggester',
-				'util.highlightSubstring',
-			],
 		],
 		'jquery.wikibase.wbtooltip' => $moduleTemplate + [
 			'scripts' => [

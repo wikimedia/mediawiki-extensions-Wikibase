@@ -8,6 +8,8 @@
 	var PARENT = $.ui.EditableTemplatedWidget,
 		datamodel = require( 'wikibase.datamodel' );
 
+	require( './jquery.wikibase.siteselector.js' );
+
 	/**
 	 * Displays and allows editing a site link.
 	 *
