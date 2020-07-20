@@ -7,7 +7,7 @@ use ConfigFactory;
 use DerivativeContext;
 use ImportStringSource;
 use MediaWiki\Linker\LinkTarget;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use OutputPage;
 use ParserOptions;
@@ -35,7 +35,7 @@ use WikiImporter;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class RepoHooksTest extends MediaWikiTestCase {
+class RepoHooksTest extends MediaWikiIntegrationTestCase {
 
 	/* private */ const FAKE_NS_ID = 4557;
 

@@ -4,7 +4,7 @@ namespace Wikibase\Lib\Tests\Store;
 
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Serializers\DataValueSerializer;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MWContentSerializationException;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -27,7 +27,7 @@ use Wikibase\Lib\Store\EntityContentTooBigException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityContentDataCodecTest extends MediaWikiTestCase {
+class EntityContentDataCodecTest extends MediaWikiIntegrationTestCase {
 
 	private function getCodec( $maxBlobSize = 0 ) {
 		$idParser = new BasicEntityIdParser();

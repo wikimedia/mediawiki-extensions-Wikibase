@@ -9,7 +9,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchAll;
 use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\MoreLikeWikibase;
 
@@ -21,7 +21,7 @@ use Wikibase\Client\MoreLikeWikibase;
  * @group Wikibase
  * @group WikibaseClient
  */
-class MoreLikeWikibaseTest extends MediaWikiTestCase {
+class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 
 	public static function setUpBeforeClass(): void {
 		if (

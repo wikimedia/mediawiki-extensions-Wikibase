@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Term;
@@ -22,7 +22,7 @@ use Wikibase\Repo\ItemDisambiguation;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ItemDisambiguationTest extends MediaWikiTestCase {
+class ItemDisambiguationTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -14,7 +14,7 @@ use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use RequestContext;
@@ -108,7 +108,7 @@ use Wikimedia\TestingAccessWrapper;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends MediaWikiTestCase {
+class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

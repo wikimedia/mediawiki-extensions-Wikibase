@@ -2,7 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Client\ChangeNotificationJob;
 
@@ -16,7 +16,7 @@ use Wikibase\Client\ChangeNotificationJob;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class ChangeNotificationJobTest extends MediaWikiTestCase {
+class ChangeNotificationJobTest extends MediaWikiIntegrationTestCase {
 
 	// TODO: testNewFromChanges
 	// TODO: testGetChanges

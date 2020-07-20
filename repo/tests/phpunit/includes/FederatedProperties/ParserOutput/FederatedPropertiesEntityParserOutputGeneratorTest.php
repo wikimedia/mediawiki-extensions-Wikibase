@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\LanguageFallbackChain;
@@ -29,7 +29,7 @@ use Wikibase\View\Template\TemplateFactory;
  *
  * @license GPL-2.0-or-later
  */
-class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiTestCase {
+class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider errorPageProvider

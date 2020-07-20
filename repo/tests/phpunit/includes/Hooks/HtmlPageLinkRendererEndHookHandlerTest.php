@@ -7,7 +7,7 @@ use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use SpecialPage;
 use Title;
@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
+class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	const ITEM_WITH_LABEL = 'Q1';
 	const ITEM_WITHOUT_LABEL = 'Q11';

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseInnerTermStoreCleaner;
 use Wikibase\Lib\WikibaseSettings;
 
@@ -14,7 +14,7 @@ use Wikibase\Lib\WikibaseSettings;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseInnerTermStoreCleanerTest extends MediaWikiTestCase {
+class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		if ( !WikibaseSettings::isRepoEnabled() ) {

@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ParserOutput;
 
 use DataValues\StringValue;
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
@@ -52,7 +52,7 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class FullEntityParserOutputGeneratorTest extends MediaWikiTestCase {
+class FullEntityParserOutputGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var DispatchingEntityViewFactory

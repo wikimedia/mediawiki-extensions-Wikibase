@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackChain;
@@ -20,7 +20,7 @@ use Wikibase\Lib\TermIndexEntry;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiTestCase {
+class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetLabel() {
 		$termLookup = $this->getTermLookup();

@@ -10,7 +10,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWiki\Revision\SlotRecord;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RawMessage;
 use ReflectionClass;
 use Serializers\Serializer;
@@ -58,7 +58,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikiPageEntityStoreTest extends MediaWikiTestCase {
+class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	const FAKE_NS_ID = 654;
 

@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use DataValues\TimeValue;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\Lib\Formatters\MwTimeIsoFormatter;
@@ -17,7 +17,7 @@ use Wikibase\Lib\Formatters\MwTimeIsoFormatter;
  *
  * @license GPL-2.0-or-later
  */
-class MwTimeIsoFormatterTest extends MediaWikiTestCase {
+class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 
 	public function formatProvider() {
 		$gregorian = 'http://www.wikidata.org/entity/Q1985727';

@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
@@ -26,7 +26,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+class LabelsProviderEntityIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	use HamcrestPHPUnitIntegration;
 
 	private const DEFAULT_URL = '/wiki/Q42';
