@@ -9,6 +9,7 @@
 			"Mahir256",
 			"Nasir8891",
 			"Nokib Sarkar",
+			"Sibabrata Banerjee",
 			"Sohom Datta",
 			"ZI Jony",
 			"আফতাবুজ্জামান"
@@ -315,5 +316,6 @@
 	"action-property-create": "বৈশিষ্ট্য তৈরি",
 	"right-property-create": "বৈশিষ্ট্য তৈরি",
 	"wikibase-pageinfo-subscription-none": "কিছুই না",
-	"wikibase-tainted-ref-tainted-icon-title": "এই বিবৃতির কিছু সম্ভাব্য সমস্যা রয়েছে।"
+	"wikibase-tainted-ref-tainted-icon-title": "এই বিবৃতির কিছু সম্ভাব্য সমস্যা রয়েছে।",
+	"wikibase-federated-properties-search-api-error-message": "বৈশিষ্ট্যসমূহ সাময়িকভাবে অনুপলব্ধ"
 }

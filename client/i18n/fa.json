@@ -130,6 +130,6 @@
 	"wikibase-client-data-bridge-thank-you-head": "سپاس از شما بابت ویرایش‌تان!",
 	"wikibase-client-data-bridge-saving-error-assertuser-heading": "شما وارد سامانه نشده‌ايد",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "انتشار بدون ورود به سامانه",
-	"wikibase-client-data-bridge-saving-error-assertuser-login": "ورود به سامانه (در برگه‌ای جدید باز می‌شود)",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "ورود به سامانه (در زبانه‌ای جدید باز می‌شود)",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "ادامهٔ ویرایش"
 }

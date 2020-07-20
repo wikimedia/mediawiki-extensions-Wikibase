@@ -465,5 +465,9 @@
 	"wikibase-federated-properties-save-api-error-message": "השמירה שלך נכשלה בשל בקשה כושלת לוויקי המקור של הפדרציה.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "קביעות על הפריט הזה אינן זמינות באופן זמני בשל בקשה כושלת לוויקי המקור של הפדרציה. נא לרענן את הדף.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "התקנת הוויקיבייס הזאת משתמשת במאפיינים בפדרציה ממקור חיצוני. אפשר לגשת ל{{GRAMMAR:תחילית:$1}}.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 רשימת מאפיינים באתר $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 רשימת מאפיינים באתר $2]",
+	"special-setaliases-parameterized": "",
+	"special-setlabel-parameterized": "",
+	"special-setdescription-parameterized": "",
+	"special-setlabeldescriptionaliases-parameterized": ""
 }
