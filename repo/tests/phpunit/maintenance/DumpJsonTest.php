@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Maintenance;
 
 use DataValues\StringValue;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -45,7 +45,7 @@ require_once __DIR__ . '/../../../maintenance/dumpJson.php';
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class DumpJsonTest extends MediaWikiTestCase {
+class DumpJsonTest extends MediaWikiIntegrationTestCase {
 
 	private function getDumpJson() {
 		$dumpScript = new DumpJson();

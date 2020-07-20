@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ParserOutput;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -24,7 +24,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ReferencedEntitiesDataUpdaterTest extends MediaWikiTestCase {
+class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 
 	const UNIT_PREFIX = 'unit:';
 

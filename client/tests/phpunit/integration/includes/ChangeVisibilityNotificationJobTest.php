@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests;
 
 use Language;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RecentChange;
 use Title;
 use Wikibase\Client\ChangeVisibilityNotificationJob;
@@ -25,7 +25,7 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
+class ChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

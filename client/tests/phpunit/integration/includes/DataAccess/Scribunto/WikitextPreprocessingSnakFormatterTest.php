@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\Scribunto;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
 use Wikibase\Client\DataAccess\Scribunto\WikitextPreprocessingSnakFormatter;
@@ -25,7 +25,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class WikitextPreprocessingSnakFormatterTest extends MediaWikiTestCase {
+class WikitextPreprocessingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param Snak $expectedSnak

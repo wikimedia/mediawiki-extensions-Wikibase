@@ -8,7 +8,7 @@ use ApiTestContext;
 use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\Client\Hooks\EchoNotificationsHandlers;
 use Wikibase\Client\Hooks\EchoSetupHookHandlers;
@@ -29,7 +29,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
+class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

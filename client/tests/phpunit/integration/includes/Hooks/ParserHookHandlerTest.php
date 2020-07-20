@@ -6,7 +6,7 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use Language;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
 use Title;
@@ -25,7 +25,7 @@ use Wikibase\Client\WikibaseClient;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ParserHookHandlerTest extends MediaWikiTestCase {
+class ParserHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function resetWikibaseClient(): WikibaseClient {
 		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );

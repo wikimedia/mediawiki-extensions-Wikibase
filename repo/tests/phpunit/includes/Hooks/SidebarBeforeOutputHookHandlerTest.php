@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Hooks;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Message;
 use Psr\Log\LoggerInterface;
 use Skin;
@@ -21,7 +21,7 @@ use Wikimedia\TestingAccessWrapper;
  * @group Wikibase
  * @license GPL-2.0-or-later
  */
-class SidebarBeforeOutputHookHandlerTest extends MediaWikiTestCase {
+class SidebarBeforeOutputHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private $entityNamespaceLookup;
 	private $entityIdLookup;

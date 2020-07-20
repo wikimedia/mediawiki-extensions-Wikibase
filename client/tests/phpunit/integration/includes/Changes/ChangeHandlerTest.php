@@ -4,7 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use SiteLookup;
 use Title;
@@ -37,7 +37,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @author Daniel Kinzler
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ChangeHandlerTest extends MediaWikiTestCase {
+class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 	private function getAffectedPagesFinder( UsageLookup $usageLookup, TitleFactory $titleFactory ) {
 		// @todo: mock the finder directly

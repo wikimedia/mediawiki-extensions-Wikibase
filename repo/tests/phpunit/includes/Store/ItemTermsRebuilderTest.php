@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store;
 
 use LogicException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Onoi\MessageReporter\SpyMessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -27,7 +27,7 @@ use Wikibase\Repo\Store\ItemTermsRebuilder;
  *
  * @license GPL-2.0-or-later
  */
-class ItemTermsRebuilderTest extends MediaWikiTestCase {
+class ItemTermsRebuilderTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var ItemTermStoreWriter

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -39,7 +39,7 @@ use Wikibase\Repo\Store\Store;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class SqlStoreTest extends MediaWikiTestCase {
+class SqlStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function newInstance() {
 		$changeFactory = $this->getMockBuilder( EntityChangeFactory::class )

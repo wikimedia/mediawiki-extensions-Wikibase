@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
 
 /**
@@ -17,7 +17,7 @@ use Wikibase\Lib\Formatters\CommonsThumbnailFormatter;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class CommonsThumbnailFormatterTest extends MediaWikiTestCase {
+class CommonsThumbnailFormatterTest extends MediaWikiIntegrationTestCase {
 
 	public function fileNameProvider() {
 		$titleFormatter = MediaWikiServices::getInstance()->getTitleFormatter();

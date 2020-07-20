@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Units;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Wikibase\Lib\Units\CSVUnitStorage;
 use Wikibase\Lib\Units\InMemoryUnitStorage;
@@ -19,7 +19,7 @@ use Wikimedia\ObjectFactory;
  *
  * @license GPL-2.0-or-later
  */
-class UnitStorageTest extends MediaWikiTestCase {
+class UnitStorageTest extends MediaWikiIntegrationTestCase {
 
 	public function storageModels() {
 		return [

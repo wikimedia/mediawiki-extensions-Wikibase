@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWiki\Storage\NameTableStore;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
@@ -18,7 +18,7 @@ use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
  *
  * @license GPL-2.0-or-later
  */
-class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiTestCase {
+class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

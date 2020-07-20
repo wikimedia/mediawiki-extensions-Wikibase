@@ -6,7 +6,7 @@ use ContextSource;
 use ExtensionRegistry;
 use HtmlArmor;
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use RawMessage;
 use SearchResult;
@@ -33,7 +33,7 @@ use Wikibase\Repo\Hooks\ShowSearchHitHandler;
  * @license GPL-2.0-or-later
  * @author Matěj Suchánek
  */
-class ShowSearchHitHandlerTest extends MediaWikiTestCase {
+class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Test cases that should be covered:
@@ -67,7 +67,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$context->method( 'getLanguage' )
 			->willReturn( Language::factory( $language ) );
 		$context->method( 'getUser' )
-			->willReturn( MediaWikiTestCase::getTestUser()->getUser() );
+			->willReturn( MediaWikiIntegrationTestCase::getTestUser()->getUser() );
 
 		$searchPage->method( 'getContext' )->willReturn( $context );
 

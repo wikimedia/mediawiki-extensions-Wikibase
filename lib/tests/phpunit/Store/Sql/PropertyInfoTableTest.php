@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
@@ -23,7 +23,7 @@ use Wikibase\Lib\WikibaseSettings;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class PropertyInfoTableTest extends MediaWikiTestCase {
+class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

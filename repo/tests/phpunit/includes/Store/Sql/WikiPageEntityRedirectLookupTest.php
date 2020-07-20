@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use ContentHandler;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -29,7 +29,7 @@ use WikiPage;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class WikiPageEntityRedirectLookupTest extends MediaWikiTestCase {
+class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var ItemId|null

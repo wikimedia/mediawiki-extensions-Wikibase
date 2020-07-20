@@ -5,7 +5,7 @@ namespace Wikibase\Repo\Tests\Interactors;
 use ContentHandler;
 use HashSiteStore;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Status;
 use TestSites;
 use Title;
@@ -38,7 +38,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Lucie-Aimée Kaffee
  */
-class ItemMergeInteractorTest extends MediaWikiTestCase {
+class ItemMergeInteractorTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var MockRepository|null

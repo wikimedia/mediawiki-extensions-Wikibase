@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
@@ -15,7 +15,7 @@ use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
  *
  * @license GPL-2.0-or-later
  */
-class FederatedPropertiesErrorTest extends MediaWikiTestCase {
+class FederatedPropertiesErrorTest extends MediaWikiIntegrationTestCase {
 
 	public function testOutputShouldGenerateErrorPage() {
 		$languageCode = 'en';

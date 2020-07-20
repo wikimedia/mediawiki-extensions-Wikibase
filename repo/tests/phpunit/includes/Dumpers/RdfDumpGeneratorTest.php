@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Dumpers;
 
 use HashSiteStore;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use Site;
 use SiteLookup;
@@ -42,7 +42,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class RdfDumpGeneratorTest extends MediaWikiTestCase {
+class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_DATA = 'http://data.acme.test/';
