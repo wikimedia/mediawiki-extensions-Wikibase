@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -18,7 +18,7 @@ use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ParserOutputJsConfigBuilderTest extends MediaWikiTestCase {
+class ParserOutputJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testBuildConfigItem() {
 		$item = new Item( new ItemId( 'Q5881' ) );

@@ -6,7 +6,7 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use HashSiteStore;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MessageLocalizer;
 use RawMessage;
 use Site;
@@ -26,7 +26,7 @@ use Wikibase\Repo\Diff\ClaimDifferenceVisualizer;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class BasicEntityDiffVisualizerTest extends MediaWikiTestCase {
+class BasicEntityDiffVisualizerTest extends MediaWikiIntegrationTestCase {
 
 	public function testVisualizingEmptyDiff() {
 		$emptyDiff = new EntityContentDiff( new EntityDiff(), new Diff(), 'item' );

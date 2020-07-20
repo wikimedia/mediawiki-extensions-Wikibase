@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\AliasGroup;
 use Wikibase\DataModel\Term\AliasGroupList;
@@ -28,7 +28,7 @@ use Wikibase\Lib\WikibaseSettings;
  *
  * @license GPL-2.0-or-later
  */
-class PrefetchingPropertyTermLookupTest extends MediaWikiTestCase {
+class PrefetchingPropertyTermLookupTest extends MediaWikiIntegrationTestCase {
 
 	/** @var PrefetchingPropertyTermLookup */
 	private $lookup;

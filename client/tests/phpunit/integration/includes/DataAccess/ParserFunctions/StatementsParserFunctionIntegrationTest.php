@@ -5,7 +5,7 @@ namespace Wikibase\Client\Tests\Integration\DataAccess\ParserFunctions;
 use ExtensionRegistry;
 use Language;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
 use ParserOutput;
@@ -40,7 +40,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class StatementsParserFunctionIntegrationTest extends MediaWikiTestCase {
+class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var bool|null

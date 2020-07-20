@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -18,7 +18,7 @@ use Wikimedia\Rdbms\LBFactory;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
+class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

@@ -8,7 +8,7 @@ use ApiTestContext;
 use FauxRequest;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -26,7 +26,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
+class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

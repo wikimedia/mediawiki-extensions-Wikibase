@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
@@ -30,7 +30,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  *
  * @license GPL-2.0-or-later
  */
-class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	use HamcrestPHPUnitIntegration;
 
 	/** @var EntityTitleLookup|ObjectProphecy */

@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ObjectCache;
 use ReflectionMethod;
 use Status;
@@ -36,7 +36,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class MediawikiEditEntityTest extends MediaWikiTestCase {
+class MediawikiEditEntityTest extends MediaWikiIntegrationTestCase {
 
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
