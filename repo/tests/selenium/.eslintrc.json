@@ -1,21 +1,9 @@
 {
-	"parserOptions": {
-		"ecmaVersion": 6
-	},
-	"env": {
-		"es6": true,
-		"mocha": true,
-		"node": true
-	},
-	"globals": {
-		"browser": false
-	},
+	"root": true,
+	"extends": [
+		"wikimedia/selenium"
+	],
 	"rules": {
-		"compat/compat": 0,
-		"max-len": 0,
-		"mediawiki/valid-package-file-require": 0,
-		"no-console": 0,
-		"no-restricted-syntax": 0,
-		"no-restricted-properties": 0
+		"mocha/no-setup-in-describe": "warn"
 	}
 }
