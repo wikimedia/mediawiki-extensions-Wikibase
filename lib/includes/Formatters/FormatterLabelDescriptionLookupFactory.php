@@ -18,7 +18,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  * OPT_LANGUAGE_FALLBACK_CHAIN, and ValueFormatter::OPT_LANG:
  *
  * * If OPT_LANGUAGE_FALLBACK_CHAIN is set, a LanguageFallbackLabelDescriptionLookup will be created byed on
- *   the LanguageFallbackChain contained in that option.
+ *   the TermLanguageFallbackChain contained in that option.
  * * If ValueFormatter::OPT_LANG is set, a LanguageLabelDescriptionLookup is created
  * * If none of these options is set, an InvalidArgumentException is thrown.
  *

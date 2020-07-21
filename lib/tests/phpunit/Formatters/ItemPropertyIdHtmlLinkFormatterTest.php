@@ -515,7 +515,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 					) {
 						// The case when we don't have an exact match but can transliterate label
 						// in another language to the language we need.
-						// @see \Wikibase\LanguageFallbackChain::extractPreferredValue
+						// @see \Wikibase\Lib\TermLanguageFallbackChain::extractPreferredValue
 						$actualLanguageCode = $requestLanguage;
 						return new TermFallback(
 							$requestLanguage,

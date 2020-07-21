@@ -144,7 +144,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @param Item[] $entities
 	 * @param EntityLookup|null $lookup
 	 *
-	 * @param LanguageFallbackChain|null $fallbackChain
+	 * @param TermLanguageFallbackChain|null $fallbackChain
 	 * @return ShowSearchHitHandler
 	 */
 	private function getShowSearchHitHandler(

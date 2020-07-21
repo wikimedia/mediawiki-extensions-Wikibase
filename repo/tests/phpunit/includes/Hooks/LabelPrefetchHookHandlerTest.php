@@ -11,9 +11,9 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
 
 /**
@@ -74,7 +74,7 @@ class LabelPrefetchHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$titleFactory = new TitleFactory();
 
 		// TODO: Instead of mocking, these need to have a null implementation of an interface
-		$fallbackChain = $this->createMock( LanguageFallbackChain::class );
+		$fallbackChain = $this->createMock( TermLanguageFallbackChain::class );
 		$fallbackChain->expects( $this->any() )
 			->method( 'getFetchLanguageCodes' )
 			->willReturn( $languageCodes );

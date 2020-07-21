@@ -94,7 +94,7 @@ class UsageTrackingLanguageFallbackLabelDescriptionLookup implements FallbackLab
 	}
 
 	/**
-	 * Get the languages from the LanguageFallbackChain used to get a given TermFallback.
+	 * Get the languages from the TermLanguageFallbackChain used to get a given TermFallback.
 	 *
 	 * @param TermFallback|null $termFallback
 	 *
