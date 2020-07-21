@@ -58,8 +58,4 @@ call_user_func( function() {
 		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
 		require __DIR__ . '/config/Wikibase.default.php'
 	);
-
-	// Tell client/config/WikibaseClient.example.php not to configure an example repo, because this wiki is the repo;
-	// added in July 2020, this is hopefully just a fairly short-lived hack.
-	define( 'WB_NO_CONFIGURE_EXAMPLE_REPO', 1 );
 } );
