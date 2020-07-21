@@ -26,6 +26,7 @@
         name: "{{ item }}"
         state: present
       loop:
+          - "setuptools"
           - "docker-compose"
 
     - name: Ensure user 'mediawiki' exists and belongs to the 'docker' group

@@ -4,10 +4,23 @@ test_systems:
       SCHEME: "https"
       SERVER_NAME: "wikidata-federated-properties.wmflabs.org"
       PORT: ""
+      SOURCE_REPO_SCHEME: "https"
+      SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
+
     wikibase-federated-properties.vm:
       SCHEME: "http"
       SERVER_NAME: "wikibase-federated-properties.vm"
       PORT: ""
+      SOURCE_REPO_SCHEME: "https"
+      SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
+
+    fedprops-euspecies.wikidata-dev.eqiad.wmflabs:
+        SCHEME: "https"
+        SERVER_NAME: "eu-invasive-species-federated-properties.wmflabs.org"
+        PORT: ""
+        SOURCE_REPO_SCHEME: "https"
+        SOURCE_REPO_HOST: "www.wikidata.org"
+
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
     PROJECT_NAME: "federatedProperties"
@@ -16,8 +29,6 @@ test_systems:
     LOG_DIR: "{{ PROJECT_DIR }}/log"
     MW_PATH: "{{ PROJECT_DIR }}/mediawiki"
     MW_SCRIPT_PATH: "/w"
-    SOURCE_REPO_SCHEME: "https"
-    SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
 
 
 
