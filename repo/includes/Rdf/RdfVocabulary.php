@@ -198,8 +198,6 @@ class RdfVocabulary {
 			self::NS_PROV => self::PROV_URI,
 		];
 
-		$topUri = $this->getConceptUriBase( $conceptUris[$localEntitySourceName] );
-
 		$propertyNamespaces = [
 			self::NSP_CLAIM,
 			self::NSP_CLAIM_STATEMENT,
