@@ -458,5 +458,8 @@
 	"wikibase-federated-properties-source-wiki-api-error-message": "Исказите за овој предмет се привремено недостапни поради неуспешно барање од изворното здружено вики. Превчитајте ја страницата.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Оваа викибаза користи здружени својства од надворешен извор. Можете да пристапите кон $1.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Список на својства на $2]",
+	"special-setaliases-parameterized": "Задај истозначници за $1",
+	"special-setlabel-parameterized": "Задај натпис за $1",
+	"special-setdescription-parameterized": "Задај опис за $1",
 	"special-setlabeldescriptionaliases-parameterized": "Задавање на натпис, опис и истозначници за $1"
 }
