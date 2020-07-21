@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Changes;
 
-use MWException;
+use Exception;
 use Serializable;
 use Wikimedia\Assert\Assert;
 
@@ -149,13 +149,13 @@ class EntityDiffChangedAspects implements Serializable {
 	 *
 	 * @param string $serialized JSON
 	 *
-	 * @throws MWException
+	 * @throws Exception
 	 */
 	public function unserialize( $serialized ) {
 		$data = json_decode( $serialized );
 
 		if ( $data->arrayFormatVersion !== self::ARRAYFORMATVERSION ) {
-			throw new MWException( 'Unsupported format version ' . $data->arrayFormatVersion );
+			throw new Exception( 'Unsupported format version ' . $data->arrayFormatVersion );
 		}
 
 		$this->labelChanges = $data->labelChanges;

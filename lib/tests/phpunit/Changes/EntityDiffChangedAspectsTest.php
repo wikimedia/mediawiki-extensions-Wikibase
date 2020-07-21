@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use Exception;
 use InvalidArgumentException;
-use MWException;
 use Wikibase\Lib\Changes\EntityDiffChangedAspects;
 
 /**
@@ -182,7 +182,7 @@ class EntityDiffChangedAspectsTest extends \PHPUnit\Framework\TestCase {
 			$entityDiffChangedAspectsSerialization
 		);
 
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		unserialize( $entityDiffChangedAspectsSerialization );
 	}
 

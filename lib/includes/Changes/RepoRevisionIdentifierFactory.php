@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Changes;
 
-use MWException;
+use Exception;
 
 /**
  * Factory for RepoRevisionIdentifier objects.
@@ -19,11 +19,11 @@ class RepoRevisionIdentifierFactory {
 	 * @param array $data
 	 * @return RepoRevisionIdentifier
 	 *
-	 * @throws MWException
+	 * @throws Exception
 	 */
 	public function newFromArray( array $data ): RepoRevisionIdentifier {
 		if ( $data['arrayFormatVersion'] !== RepoRevisionIdentifier::ARRAYFORMATVERSION ) {
-			throw new MWException( 'Unsupported format version ' . $data['arrayFormatVersion'] );
+			throw new Exception( 'Unsupported format version ' . $data['arrayFormatVersion'] );
 		}
 
 		return new RepoRevisionIdentifier(

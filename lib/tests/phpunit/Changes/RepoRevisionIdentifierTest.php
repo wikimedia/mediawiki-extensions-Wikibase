@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Changes;
 
-use MWException;
+use Exception;
 use TypeError;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 
@@ -149,7 +149,7 @@ class RepoRevisionIdentifierTest extends \PHPUnit\Framework\TestCase {
 			$entityDiffChangedAspectsSerialization
 		);
 
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		unserialize( $entityDiffChangedAspectsSerialization );
 	}
 

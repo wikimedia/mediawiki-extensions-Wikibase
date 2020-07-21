@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Tests\Changes;
 
+use Exception;
 use MediaWikiIntegrationTestCase;
-use MWException;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 
@@ -29,7 +29,7 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 
 	public function testCanNotCalculateAgeWithoutTime() {
 		$change = $this->newChangeRow();
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getAge();
 	}
 
@@ -40,7 +40,7 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 
 	public function testCanNotReturnTimeWithoutTime() {
 		$change = $this->newChangeRow();
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getTime();
 	}
 
@@ -51,7 +51,7 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 
 	public function testCanNotReturnDefaultObjectId() {
 		$change = $this->newChangeRow();
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getObjectId();
 	}
 
@@ -62,7 +62,7 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 
 	public function testCanNotReturnFieldWithoutDefault() {
 		$change = $this->newChangeRow();
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getField( 'field' );
 	}
 
@@ -94,7 +94,7 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 
 	public function testCanNotUnserializeWithoutObjectId() {
 		$change = $this->newChangeRow( [ 'info' => 's:5:"value";' ] );
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getInfo();
 	}
 
