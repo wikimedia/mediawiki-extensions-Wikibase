@@ -7,6 +7,7 @@ use ApiEditPage;
 use ApiModuleManager;
 use ApiQuery;
 use ApiQuerySiteinfo;
+use CentralIdLookup;
 use Content;
 use ContentHandler;
 use ExtensionRegistry;
@@ -31,7 +32,6 @@ use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
-use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
@@ -379,7 +379,7 @@ final class RepoHooks {
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();
 
-				$centralIdLookup = ( new CentralIdLookupFactory() )->getCentralIdLookup();
+				$centralIdLookup = CentralIdLookup::factoryNonLocal();
 				if ( $centralIdLookup === null ) {
 					$centralUserId = 0;
 				} else {

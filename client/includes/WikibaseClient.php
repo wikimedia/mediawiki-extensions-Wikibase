@@ -3,6 +3,7 @@
 namespace Wikibase\Client;
 
 use CachedBagOStuff;
+use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
@@ -84,7 +85,6 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
@@ -1296,7 +1296,7 @@ final class WikibaseClient {
 				$this->siteLookup,
 				$this->settings->getSetting( 'siteGlobalID' )
 			),
-			( new CentralIdLookupFactory() )->getCentralIdLookup(),
+			CentralIdLookup::factoryNonLocal(),
 			( $interwikiPrefix !== null ) ?
 				new ExternalUserNames( $interwikiPrefix, false ) : null
 		);

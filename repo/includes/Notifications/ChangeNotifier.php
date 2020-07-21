@@ -41,12 +41,12 @@ class ChangeNotifier {
 	 * @param ChangeTransmitter[] $changeTransmitters
 	 * @param CentralIdLookup|null $centralIdLookup CentralIdLookup, or null if
 	 *   this repository is not connected to a central user system,
-	 *   @see Wikibase\Lib\Changes\CentralIdLookupFactory.
+	 *   see CentralIdLookup::factoryNonLocal.
 	 */
 	public function __construct(
 		EntityChangeFactory $changeFactory,
 		array $changeTransmitters,
-		CentralIdLookup $centralIdLookup = null
+		?CentralIdLookup $centralIdLookup
 	) {
 		Assert::parameterElementType(
 			ChangeTransmitter::class,
