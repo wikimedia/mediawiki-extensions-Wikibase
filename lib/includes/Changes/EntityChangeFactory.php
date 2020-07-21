@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Changes;
 
+use Exception;
 use InvalidArgumentException;
-use MWException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -125,7 +125,7 @@ class EntityChangeFactory {
 	 * @param EntityDocument|null $newEntity
 	 *
 	 * @return EntityChange
-	 * @throws MWException
+	 * @throws Exception
 	 */
 	public function newFromUpdate(
 		$action,
@@ -133,7 +133,7 @@ class EntityChangeFactory {
 		EntityDocument $newEntity = null
 	) {
 		if ( $oldEntity === null && $newEntity === null ) {
-			throw new MWException( 'Either $oldEntity or $newEntity must be given' );
+			throw new Exception( 'Either $oldEntity or $newEntity must be given' );
 		}
 
 		if ( $oldEntity === null ) {
@@ -143,7 +143,7 @@ class EntityChangeFactory {
 			$id = $oldEntity->getId();
 			$diff = $this->entityDiffer->getDestructionDiff( $oldEntity );
 		} elseif ( $oldEntity->getType() !== $newEntity->getType() ) {
-			throw new MWException( 'Entity type mismatch' );
+			throw new Exception( 'Entity type mismatch' );
 		} else {
 			$id = $newEntity->getId();
 			$diff = $this->entityDiffer->diffEntities( $oldEntity, $newEntity );

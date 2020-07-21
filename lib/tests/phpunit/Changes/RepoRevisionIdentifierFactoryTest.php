@@ -3,7 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Changes;
 
-use MWException;
+use Exception;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
 
@@ -31,7 +31,7 @@ class RepoRevisionIdentifierFactoryTest extends \PHPUnit\Framework\TestCase {
 		$data = $this->newRepoRevisionIdentifier()->toArray();
 		$data['arrayFormatVersion'] = 2;
 
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$factory->newFromArray( $data );
 	}
 

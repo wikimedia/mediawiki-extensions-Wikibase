@@ -2,8 +2,8 @@
 
 namespace Wikibase\Lib\Changes;
 
+use Exception;
 use MediaWiki\Revision\RevisionRecord;
-use MWException;
 use RecentChange;
 use User;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -224,7 +224,7 @@ class EntityChange extends DiffChange {
 		] );
 
 		if ( !$this->hasField( 'object_id' ) ) {
-			throw new MWException(
+			throw new Exception(
 				'EntityChange::setRevisionInfo() called without calling setEntityId() first!'
 			);
 		}
@@ -279,7 +279,7 @@ class EntityChange extends DiffChange {
 				$info,
 				function ( $v ) {
 					if ( is_object( $v ) ) {
-						throw new MWException( "Refusing to serialize PHP object of type " .
+						throw new Exception( "Refusing to serialize PHP object of type " .
 							get_class( $v ) );
 					}
 				}

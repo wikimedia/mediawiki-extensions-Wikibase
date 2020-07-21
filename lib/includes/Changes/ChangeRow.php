@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Changes;
 
-use MWException;
+use Exception;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -24,7 +24,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getAge
 	 *
-	 * @throws MWException if the "time" field is not set
+	 * @throws Exception if the "time" field is not set
 	 * @return int Seconds
 	 */
 	public function getAge() {
@@ -34,7 +34,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getTime
 	 *
-	 * @throws MWException if the "time" field is not set
+	 * @throws Exception if the "time" field is not set
 	 * @return string TS_MW
 	 */
 	public function getTime() {
@@ -57,7 +57,7 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @see Change::getObjectId
 	 *
-	 * @throws MWException if the "object_id" field is not set
+	 * @throws Exception if the "object_id" field is not set
 	 * @return string
 	 */
 	public function getObjectId() {
@@ -67,16 +67,16 @@ abstract class ChangeRow implements Change {
 	/**
 	 * @param string $name
 	 *
-	 * @throws MWException if the requested field is not set
+	 * @throws Exception if the requested field is not set
 	 * @return mixed
 	 */
 	public function getField( $name ) {
 		if ( !$this->hasField( $name ) ) {
-			throw new MWException( 'Attempted to get not-set field ' . $name );
+			throw new Exception( 'Attempted to get not-set field ' . $name );
 		}
 
 		if ( $name === 'info' ) {
-			throw new MWException( 'Use getInfo instead' );
+			throw new Exception( 'Use getInfo instead' );
 		}
 
 		return $this->fields[$name];
@@ -177,7 +177,7 @@ abstract class ChangeRow implements Change {
 	}
 
 	/**
-	 * @throws MWException if the "id" field is not set
+	 * @throws Exception if the "id" field is not set
 	 * @return int|null Number to be used as an identifier when persisting the change.
 	 */
 	public function getId() {

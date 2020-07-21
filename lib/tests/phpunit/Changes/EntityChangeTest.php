@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Tests\Changes;
 
 use CommentStoreComment;
+use Exception;
 use MediaWiki\Revision\MutableRevisionRecord;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\User\UserIdentityValue;
-use MWException;
 use RecentChange;
 use Title;
 use User;
@@ -292,7 +292,7 @@ class EntityChangeTest extends ChangeRowTest {
 
 		$change = new EntityChange( [ 'info' => [], 'type' => '~' ] );
 		$this->assertFalse( $change->hasField( 'object_id' ), 'precondition' );
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->setRevisionInfo( $revision, 3 );
 	}
 
@@ -324,7 +324,7 @@ class EntityChangeTest extends ChangeRowTest {
 	public function testDoesNotSerializeObjects() {
 		$info = [ 'array' => [ 'object' => (object)[] ] ];
 		$change = new EntityChange( [ 'info' => $info ] );
-		$this->expectException( MWException::class );
+		$this->expectException( Exception::class );
 		$change->getSerializedInfo();
 	}
 
