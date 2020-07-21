@@ -13,7 +13,7 @@ use Language;
  * @author Liangent < liangent@gmail.com >
  * @author Thiemo Kreuz
  */
-class LanguageFallbackChain {
+class TermLanguageFallbackChain {
 
 	/**
 	 * @var LanguageWithConversion[]
@@ -141,3 +141,9 @@ class LanguageFallbackChain {
 	}
 
 }
+
+/**
+ * Todo: Remove this after all consumers of this class in other extensions have been renamed.
+ *       See patch Ib20eef3d75400a65b98cbfe28dd61b146d1adc31
+ */
+class_alias( TermLanguageFallbackChain::class, 'Wikibase\Lib\LanguageFallbackChain' );

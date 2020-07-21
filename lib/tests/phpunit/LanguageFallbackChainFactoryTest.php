@@ -7,8 +7,8 @@ use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
 use User;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Lib\LanguageFallbackChainFactory
@@ -381,13 +381,13 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	public function testNewFromContext() {
 		$factory = $this->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContext( RequestContext::getMain() );
-		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
+		$this->assertTrue( $languageFallbackChain instanceof TermLanguageFallbackChain );
 	}
 
 	public function testNewFromContextAndLanguageCode() {
 		$factory = $this->getLanguageFallbackChainFactory();
 		$languageFallbackChain = $factory->newFromContextAndLanguageCode( RequestContext::getMain(), 'en' );
-		$this->assertTrue( $languageFallbackChain instanceof LanguageFallbackChain );
+		$this->assertTrue( $languageFallbackChain instanceof TermLanguageFallbackChain );
 	}
 
 	/**

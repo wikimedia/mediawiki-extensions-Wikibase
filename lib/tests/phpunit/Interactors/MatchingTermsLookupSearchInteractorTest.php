@@ -10,10 +10,10 @@ use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
 
 /**
@@ -133,10 +133,10 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	/**
 	 * @param string $langCode
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function getMockLanguageFallbackChainFromLanguage( $langCode ) {
-		$mockFallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
+		$mockFallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mockFallbackChain->expects( $this->any() )

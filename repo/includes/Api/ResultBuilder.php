@@ -16,11 +16,11 @@ use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\DataModel\Term\AliasGroupList;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -267,7 +267,7 @@ class ResultBuilder {
 	 * @param string[]|string $props a list of fields to include, or "all"
 	 * @param string[]|null $filterSiteIds A list of site IDs to filter by
 	 * @param string[] $filterLangCodes A list of language codes to filter by
-	 * @param LanguageFallbackChain[] $fallbackChains with keys of the origional language
+	 * @param TermLanguageFallbackChain[] $termFallbackChains with keys of the origional language
 	 */
 	public function addEntityRevision(
 		$sourceEntityIdSerialization,
@@ -275,7 +275,7 @@ class ResultBuilder {
 		$props = 'all',
 		array $filterSiteIds = null,
 		array $filterLangCodes = [],
-		array $fallbackChains = []
+		array $termFallbackChains = []
 	) {
 		$entity = $entityRevision->getEntity();
 		$entityId = $entity->getId();
@@ -304,7 +304,7 @@ class ResultBuilder {
 				$props,
 				$filterSiteIds,
 				$filterLangCodes,
-				$fallbackChains
+				$termFallbackChains
 			);
 
 			$record = array_merge( $record, $entitySerialization );
@@ -359,7 +359,7 @@ class ResultBuilder {
 	 * @param array|string $props
 	 * @param string[]|null $filterSiteIds
 	 * @param string[] $filterLangCodes
-	 * @param LanguageFallbackChain[] $fallbackChains
+	 * @param TermLanguageFallbackChain[] $termFallbackChains
 	 *
 	 * @return array
 	 */
@@ -368,7 +368,7 @@ class ResultBuilder {
 		$props,
 		?array $filterSiteIds,
 		array $filterLangCodes,
-		array $fallbackChains
+		array $termFallbackChains
 	) {
 		$serialization = $this->entitySerializer->serialize( $entity );
 
@@ -380,8 +380,8 @@ class ResultBuilder {
 		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
 		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
 		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
-		if ( !empty( $fallbackChains ) ) {
-			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $fallbackChains );
+		if ( !empty( $termFallbackChains ) ) {
+			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $termFallbackChains );
 		}
 		$serialization = $this->filterEntitySerializationUsingLangCodes(
 			$serialization,
@@ -469,25 +469,25 @@ class ResultBuilder {
 
 	/**
 	 * @param array $serialization
-	 * @param LanguageFallbackChain[] $fallbackChains
+	 * @param TermLanguageFallbackChain[] $termFallbackChains
 	 *
 	 * @return array
 	 */
 	private function addEntitySerializationFallbackInfo(
 		array $serialization,
-		array $fallbackChains
+		array $termFallbackChains
 	) {
 		if ( isset( $serialization['labels'] ) ) {
 			$serialization['labels'] = $this->getTermsSerializationWithFallbackInfo(
 				$serialization['labels'],
-				$fallbackChains
+				$termFallbackChains
 			);
 		}
 
 		if ( isset( $serialization['descriptions'] ) ) {
 			$serialization['descriptions'] = $this->getTermsSerializationWithFallbackInfo(
 				$serialization['descriptions'],
-				$fallbackChains
+				$termFallbackChains
 			);
 		}
 
@@ -496,16 +496,16 @@ class ResultBuilder {
 
 	/**
 	 * @param array $serialization
-	 * @param LanguageFallbackChain[] $fallbackChains
+	 * @param TermLanguageFallbackChain[] $termFallbackChains
 	 *
 	 * @return array
 	 */
 	private function getTermsSerializationWithFallbackInfo(
 		array $serialization,
-		array $fallbackChains
+		array $termFallbackChains
 	) {
 		$newSerialization = $serialization;
-		foreach ( $fallbackChains as $requestedLanguageCode => $fallbackChain ) {
+		foreach ( $termFallbackChains as $requestedLanguageCode => $fallbackChain ) {
 			if ( !array_key_exists( $requestedLanguageCode, $serialization ) ) {
 				$fallbackSerialization = $fallbackChain->extractPreferredValue( $serialization );
 				if ( $fallbackSerialization !== null ) {

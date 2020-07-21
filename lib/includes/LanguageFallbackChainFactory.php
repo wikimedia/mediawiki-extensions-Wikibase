@@ -13,7 +13,7 @@ use MWException;
 use User;
 
 /**
- * Object creating LanguageFallbackChain objects in Wikibase.
+ * Object creating TermLanguageFallbackChain objects in Wikibase.
  *
  * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
@@ -62,14 +62,14 @@ class LanguageFallbackChainFactory {
 	 * @param Language $language
 	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromLanguage( Language $language, $mode = self::FALLBACK_ALL ) {
 		$languageCode = $language->getCode();
 
 		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
 			$chain = $this->buildFromLanguage( $language, $mode );
-			$this->languageCache[$languageCode][$mode] = new LanguageFallbackChain( $chain );
+			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain( $chain );
 		}
 
 		return $this->languageCache[$languageCode][$mode];
@@ -81,14 +81,14 @@ class LanguageFallbackChainFactory {
 	 * @param string $languageCode
 	 * @param int $mode Bitfield of self::FALLBACK_*
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromLanguageCode( $languageCode, $mode = self::FALLBACK_ALL ) {
 		$languageCode = LanguageWithConversion::validateLanguageCode( $languageCode );
 
 		if ( !isset( $this->languageCache[$languageCode][$mode] ) ) {
 			$chain = $this->buildFromLanguage( $languageCode, $mode );
-			$this->languageCache[$languageCode][$mode] = new LanguageFallbackChain( $chain );
+			$this->languageCache[$languageCode][$mode] = new TermLanguageFallbackChain( $chain );
 		}
 
 		return $this->languageCache[$languageCode][$mode];
@@ -99,7 +99,7 @@ class LanguageFallbackChainFactory {
 	 *
 	 * @param Language|string $language Language object or language code as string
 	 * @param int $mode Bitfield of self::FALLBACK_*
-	 * @param LanguageFallbackChain[] $chain for recursive calls
+	 * @param TermLanguageFallbackChain[] $chain for recursive calls
 	 * @param bool[] $fetched for recursive calls
 	 *
 	 * @throws InvalidArgumentException
@@ -183,7 +183,7 @@ class LanguageFallbackChainFactory {
 	 *
 	 * @param IContextSource $context
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromContext( IContextSource $context ) {
 		return $this->newFromUserAndLanguageCode( $context->getUser(), $context->getLanguage()->getCode() );
@@ -195,7 +195,7 @@ class LanguageFallbackChainFactory {
 	 * @param IContextSource $context
 	 * @param string $languageCode
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromContextAndLanguageCode( IContextSource $context, $languageCode ) {
 		return $this->newFromUserAndLanguageCode( $context->getUser(), $languageCode );
@@ -207,7 +207,7 @@ class LanguageFallbackChainFactory {
 	 * @param User $user
 	 * @param string $languageCode
 	 *
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	public function newFromUserAndLanguageCode( User $user, $languageCode ) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Babel' ) || $user->isAnon() ) {
@@ -223,7 +223,7 @@ class LanguageFallbackChainFactory {
 		$babel = $this->getBabel( $languageCode, $user );
 
 		$chain = $this->buildFromBabel( $babel );
-		$languageFallbackChain = new LanguageFallbackChain( $chain );
+		$languageFallbackChain = new TermLanguageFallbackChain( $chain );
 
 		$this->userLanguageCache[$user->getName()][$languageCode] = $languageFallbackChain;
 

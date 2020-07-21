@@ -8,8 +8,8 @@ use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\LanguageLabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * Factory for LabelDescriptionLookup objects based on FormatterOptions.
@@ -58,9 +58,9 @@ class FormatterLabelDescriptionLookupFactory {
 	private function newLanguageFallbackLabelDescriptionLookup( FormatterOptions $options ) {
 		$fallbackChain = $options->getOption( self::OPT_LANGUAGE_FALLBACK_CHAIN );
 
-		if ( !( $fallbackChain instanceof LanguageFallbackChain ) ) {
+		if ( !( $fallbackChain instanceof TermLanguageFallbackChain ) ) {
 			throw new InvalidArgumentException( 'OPT_LANGUAGE_FALLBACK_CHAIN must be used ' .
-				'with an instance of LanguageFallbackChain.' );
+				'with an instance of TermLanguageFallbackChain.' );
 		}
 
 		return new LanguageFallbackLabelDescriptionLookup( $this->termLookup, $fallbackChain );

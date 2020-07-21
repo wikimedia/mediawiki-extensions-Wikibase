@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\ParserOutput\TextInjector;
 use Wikibase\View\EntityTermsView;
@@ -68,7 +68,7 @@ class TermboxViewTest extends TestCase {
 		$fallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguageCode' )
 			->with( $languageCode )
-			->willReturn( new LanguageFallbackChain( [ $languageCode ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ $languageCode ] ) );
 
 		$termbox = new TermboxView(
 			$fallbackChainFactory,
@@ -89,7 +89,7 @@ class TermboxViewTest extends TestCase {
 		$editLinkUrl = '/edit/Q42';
 		$response = 'termbox says hi';
 
-		$fallbackChain = new LanguageFallbackChain( [ $language ] );
+		$fallbackChain = new TermLanguageFallbackChain( [ $language ] );
 		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$fallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguageCode' )

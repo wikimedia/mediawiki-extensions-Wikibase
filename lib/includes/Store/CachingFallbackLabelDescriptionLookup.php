@@ -6,7 +6,7 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @license GPL-2.0-or-later
@@ -49,9 +49,9 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $labelDescriptionLookup;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var TermLanguageFallbackChain
 	 */
-	private $languageFallbackChain;
+	private $termLanguageFallbackChain;
 
 	/**
 	 * @var int
@@ -62,20 +62,20 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	 * @param CacheInterface $cache
 	 * @param RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
 	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @param int $cacheTtlInSeconds
 	 */
 	public function __construct(
 		CacheInterface $cache,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
-		LanguageFallbackChain $languageFallbackChain,
+		TermLanguageFallbackChain $termLanguageFallbackChain,
 		$cacheTtlInSeconds
 	) {
 		$this->cache = $cache;
 		$this->redirectResolvingRevisionLookup = $redirectResolvingRevisionLookup;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
-		$this->languageFallbackChain = $languageFallbackChain;
+		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 	}
 
@@ -86,7 +86,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	 * @return TermFallback|null
 	 */
 	public function getDescription( EntityId $entityId ) {
-		$languageCodes = $this->languageFallbackChain->getFetchLanguageCodes();
+		$languageCodes = $this->termLanguageFallbackChain->getFetchLanguageCodes();
 
 		$languageCode = $languageCodes[0];
 		$description = $this->getTerm( $entityId, $languageCode, self::DESCRIPTION );
@@ -101,7 +101,7 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	 * @return TermFallback|null
 	 */
 	public function getLabel( EntityId $entityId ) {
-		$languageCodes = $this->languageFallbackChain->getFetchLanguageCodes();
+		$languageCodes = $this->termLanguageFallbackChain->getFetchLanguageCodes();
 		$languageCode = $languageCodes[0];
 		$label = $this->getTerm( $entityId, $languageCode, self::LABEL );
 

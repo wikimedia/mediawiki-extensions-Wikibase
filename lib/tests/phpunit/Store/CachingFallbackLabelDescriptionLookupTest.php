@@ -9,10 +9,10 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup
@@ -334,7 +334,7 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 	}
 
 	private function newFallbackChain() {
-		$fallbackChain = $this->prophesize( LanguageFallbackChain::class );
+		$fallbackChain = $this->prophesize( TermLanguageFallbackChain::class );
 		$fallbackChain->getFetchLanguageCodes()->willReturn( [ 'en' ] );
 		return $fallbackChain->reveal();
 	}

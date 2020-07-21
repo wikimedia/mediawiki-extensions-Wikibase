@@ -7,9 +7,9 @@ use Language;
 use ParserOutput;
 use SpecialPage;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -46,9 +46,9 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	private $entityTitleLookup;
 
 	/**
-	 * @var LanguageFallbackChain
+	 * @var TermLanguageFallbackChain
 	 */
-	private $languageFallbackChain;
+	private $termLanguageFallbackChain;
 
 	/**
 	 * @var TemplateFactory
@@ -85,7 +85,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
 	 * @param ParserOutputJsConfigBuilder $configBuilder
 	 * @param EntityTitleLookup $entityTitleLookup
-	 * @param LanguageFallbackChain $languageFallbackChain
+	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
 	 * @param TemplateFactory $templateFactory
 	 * @param LocalizedTextProvider $textProvider
 	 * @param EntityDataFormatProvider $entityDataFormatProvider
@@ -97,7 +97,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory,
 		ParserOutputJsConfigBuilder $configBuilder,
 		EntityTitleLookup $entityTitleLookup,
-		LanguageFallbackChain $languageFallbackChain,
+		TermLanguageFallbackChain $termLanguageFallbackChain,
 		TemplateFactory $templateFactory,
 		LocalizedTextProvider $textProvider,
 		EntityDataFormatProvider $entityDataFormatProvider,
@@ -108,7 +108,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->entityMetaTagsCreatorFactory = $entityMetaTagsCreatorFactory;
 		$this->configBuilder = $configBuilder;
 		$this->entityTitleLookup = $entityTitleLookup;
-		$this->languageFallbackChain = $languageFallbackChain;
+		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
 		$this->templateFactory = $templateFactory;
 		$this->textProvider = $textProvider;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
@@ -184,7 +184,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
 		$entityView = $this->entityViewFactory->newEntityView(
 			$this->language,
-			$this->languageFallbackChain,
+			$this->termLanguageFallbackChain,
 			$entity
 		);
 

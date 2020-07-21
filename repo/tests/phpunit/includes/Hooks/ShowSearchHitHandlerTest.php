@@ -17,11 +17,11 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 
@@ -150,7 +150,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getShowSearchHitHandler(
 		array $entities = [],
 		EntityLookup $lookup = null,
-		LanguageFallbackChain $fallbackChain = null
+		TermLanguageFallbackChain $fallbackChain = null
 	) {
 		return new ShowSearchHitHandler(
 			$this->getEntityContentFactory(),
@@ -160,7 +160,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function getFallbackChainFactory( LanguageFallbackChain $mockChain = null ): LanguageFallbackChainFactory {
+	private function getFallbackChainFactory( TermLanguageFallbackChain $mockChain = null ): LanguageFallbackChainFactory {
 		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		if ( $mockChain !== null ) {
 			$factory->method( 'newFromContext' )->willReturn( $mockChain );
@@ -174,10 +174,10 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string[] $languages
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	private function getMockFallbackChain( array $languages ) {
-		$mock = $this->createMock( LanguageFallbackChain::class );
+		$mock = $this->createMock( TermLanguageFallbackChain::class );
 		$mock->expects( $this->any() )
 			->method( 'getFetchLanguageCodes' )
 			->will( $this->returnValue( $languages ) );

@@ -18,8 +18,8 @@ use Wikibase\Lib\Formatters\EntityIdValueFormatter;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory
@@ -119,7 +119,7 @@ class OutputFormatValueFormatterFactoryTest extends \PHPUnit\Framework\TestCase 
 		}
 
 		if ( $expectedFallback !== null ) {
-			/** @var LanguageFallbackChain $languageFallback */
+			/** @var TermLanguageFallbackChain $languageFallback */
 			$languageFallback = $options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN );
 			$languages = $languageFallback->getFallbackChain();
 			$lang = $languages[0]->getLanguage()->getCode();

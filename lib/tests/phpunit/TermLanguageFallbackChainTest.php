@@ -3,12 +3,12 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
- * @covers \Wikibase\Lib\LanguageFallbackChain
+ * @covers \Wikibase\Lib\TermLanguageFallbackChain
  *
  * @group Wikibase
  *
@@ -16,7 +16,7 @@ use Wikibase\Lib\LanguageWithConversion;
  * @author Liangent < liangent@gmail.com >
  * @author Thiemo Kreuz
  */
-class LanguageFallbackChainTest extends \MediaWikiTestCase {
+class TermLanguageFallbackChainTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider provideExtractPreferredValue
@@ -218,7 +218,7 @@ class LanguageFallbackChainTest extends \MediaWikiTestCase {
 			$languagesWithConversion[] = LanguageWithConversion::factory( $language );
 		}
 
-		$chain = new LanguageFallbackChain( $languagesWithConversion );
+		$chain = new TermLanguageFallbackChain( $languagesWithConversion );
 
 		$codes = $chain->getFetchLanguageCodes();
 		$this->assertEquals( $languages, $codes );

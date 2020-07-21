@@ -13,8 +13,8 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageWithConversion;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\View\Termbox\Renderer\TermboxRemoteRenderer;
 use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 
@@ -315,10 +315,10 @@ class TermboxRemoteRendererTest extends TestCase {
 	}
 
 	/**
-	 * @return LanguageFallbackChain
+	 * @return TermLanguageFallbackChain
 	 */
 	private function newLanguageFallbackChain( $languages = [] ) {
-		return new LanguageFallbackChain( array_map( function ( $languageCode ) {
+		return new TermLanguageFallbackChain( array_map( function ( $languageCode ) {
 			return LanguageWithConversion::factory( Language::factory( $languageCode ) );
 		}, $languages ) );
 	}

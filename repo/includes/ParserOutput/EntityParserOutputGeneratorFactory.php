@@ -12,9 +12,9 @@ use Serializers\Serializer;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -186,7 +186,7 @@ class EntityParserOutputGeneratorFactory {
 		return $pog;
 	}
 
-	private function getLanguageFallbackChain( Language $language ): LanguageFallbackChain {
+	private function getLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {
 		// Language fallback must depend ONLY on the target language,
 		// so we don't confuse the parser cache with user specific HTML.
 		return $this->languageFallbackChainFactory->newFromLanguage(

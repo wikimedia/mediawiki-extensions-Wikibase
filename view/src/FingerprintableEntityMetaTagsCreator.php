@@ -5,7 +5,7 @@ namespace Wikibase\View;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\FingerprintProvider;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -15,10 +15,10 @@ use Wikimedia\Assert\Assert;
  */
 class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 
-	private $languageFallbackChain;
+	private $termLanguageFallbackChain;
 
-	public function __construct( LanguageFallbackChain $languageFallbackChain ) {
-		$this->languageFallbackChain = $languageFallbackChain;
+	public function __construct( TermLanguageFallbackChain $termLanguageFallbackChain ) {
+		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 		$descriptions = $entity->getFingerprint()
 			->getDescriptions()
 			->toTextArray();
-		$preferred = $this->languageFallbackChain->extractPreferredValue( $descriptions );
+		$preferred = $this->termLanguageFallbackChain->extractPreferredValue( $descriptions );
 
 		if ( is_array( $preferred ) ) {
 			return $preferred['value'];
@@ -68,7 +68,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 		$labels = $entity->getFingerprint()
 			->getLabels()
 			->toTextArray();
-		$preferred = $this->languageFallbackChain->extractPreferredValue( $labels );
+		$preferred = $this->termLanguageFallbackChain->extractPreferredValue( $labels );
 
 		if ( is_array( $preferred ) ) {
 			return $preferred['value'];

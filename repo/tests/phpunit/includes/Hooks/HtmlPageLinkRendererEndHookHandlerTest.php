@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -28,6 +27,7 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\StorageException;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
@@ -540,7 +540,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 	}
 
 	private function newInstance( $titleText = "foo", $isDeleted = false ) {
-		$languageFallback = new LanguageFallbackChain( [
+		$languageFallback = new TermLanguageFallbackChain( [
 			LanguageWithConversion::factory( 'de-ch' ),
 			LanguageWithConversion::factory( 'de' ),
 			LanguageWithConversion::factory( 'en' ),

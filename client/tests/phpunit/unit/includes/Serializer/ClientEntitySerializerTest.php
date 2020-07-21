@@ -10,7 +10,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
  * @covers \Wikibase\Client\Serializer\ClientEntitySerializer
@@ -30,7 +30,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			SerializerFactory::OPTION_SERIALIZE_REFERENCE_SNAKS_WITHOUT_HASH
 		);
 
-		$fallbackChain = $this->getMockBuilder( LanguageFallbackChain::class )
+		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$fallbackChain->expects( $this->any() )
@@ -95,7 +95,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			$serializer,
 			new InMemoryDataTypeLookup(),
 			[ 'en' ],
-			[ 'en' => new LanguageFallbackChain( [] ) ]
+			[ 'en' => new TermLanguageFallbackChain( [] ) ]
 		);
 
 		$serialization = $instance->serialize( new Item() );

@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use Language;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -117,9 +117,9 @@ class OutputFormatValueFormatterFactory {
 			);
 		}
 
-		if ( !( $options->getOption( $fallbackOption ) instanceof LanguageFallbackChain ) ) {
+		if ( !( $options->getOption( $fallbackOption ) instanceof TermLanguageFallbackChain ) ) {
 			throw new InvalidArgumentException( 'The value of OPT_LANGUAGE_FALLBACK_CHAIN must be '
-				. 'an instance of LanguageFallbackChain.' );
+				. 'an instance of TermLanguageFallbackChain.' );
 		}
 	}
 
