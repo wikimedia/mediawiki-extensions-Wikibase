@@ -27,7 +27,7 @@ services:
       - DB_SERVER=mysql.svc:3306
       - MW_ELASTIC_HOST=elasticsearch.svc
       - MW_ELASTIC_PORT=9200
-      # CONFIG - Change the default values below
+      - MW_INSTALL_PATH=/var/www/html
       - MW_ADMIN_NAME=WikibaseAdmin
       - MW_ADMIN_PASS=${WIKI_ADMIN_PASSWORD}
       - MW_ADMIN_EMAIL=admin@example.com
