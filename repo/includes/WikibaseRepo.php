@@ -86,7 +86,6 @@ use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
-use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
@@ -197,6 +196,8 @@ use Wikibase\Repo\Localizer\ParseExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\Notifications\DatabaseChangeTransmitter;
 use Wikibase\Repo\Notifications\HookChangeTransmitter;
+use Wikibase\Repo\Notifications\RepoEntityChange;
+use Wikibase\Repo\Notifications\RepoItemChange;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
@@ -744,7 +745,7 @@ class WikibaseRepo {
 	public function getEntityChangeFactory(): EntityChangeFactory {
 		//TODO: take this from a setting or registry.
 		$changeClasses = [
-			Item::ENTITY_TYPE => ItemChange::class,
+			Item::ENTITY_TYPE => RepoItemChange::class,
 			// Other types of entities will use EntityChange
 		];
 
@@ -752,6 +753,7 @@ class WikibaseRepo {
 			$this->getEntityDiffer(),
 			$this->getEntityIdParser(),
 			$changeClasses,
+			RepoEntityChange::class,
 			$this->getLogger()
 		);
 	}

@@ -85,6 +85,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
+use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
@@ -1159,6 +1160,7 @@ final class WikibaseClient {
 			$this->getEntityDiffer(),
 			$this->getEntityIdParser(),
 			$changeClasses,
+			EntityChange::class,
 			$this->getLogger()
 		);
 	}

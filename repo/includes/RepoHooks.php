@@ -43,6 +43,7 @@ use Wikibase\Repo\Content\EntityHandler;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
+use Wikibase\Repo\Notifications\RepoEntityChange;
 use Wikibase\Repo\ParserOutput\PlaceholderEmittingEntityTermsView;
 use Wikibase\Repo\ParserOutput\TermboxFlag;
 use Wikibase\Repo\ParserOutput\TermboxVersionParserCacheValueRejector;
@@ -374,7 +375,9 @@ final class RepoHooks {
 		if ( $logType === null || ( $logType === 'delete' && $logAction === 'restore' ) ) {
 			$changeLookup = WikibaseRepo::getDefaultInstance()->getStore()->getEntityChangeLookup();
 
+			/** @var RepoEntityChange $change */
 			$change = $changeLookup->loadByRevisionId( $revId, EntityChangeLookup::FROM_MASTER );
+			'@phan-var RepoEntityChange $change';
 
 			if ( $change ) {
 				$changeStore = WikibaseRepo::getDefaultInstance()->getStore()->getChangeStore();

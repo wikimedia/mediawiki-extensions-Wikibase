@@ -77,7 +77,9 @@ class ChangeNotifier {
 			return null;
 		}
 
+		/** @var RepoEntityChange $change */
 		$change = $this->changeFactory->newFromUpdate( EntityChange::REMOVE, $content->getEntity() );
+		'@phan-var RepoEntityChange $change';
 		$change->setTimestamp( $timestamp );
 		$change->setMetadataFromUser(
 			$user,
@@ -107,7 +109,9 @@ class ChangeNotifier {
 			return null;
 		}
 
+		/** @var RepoEntityChange $change */
 		$change = $this->changeFactory->newFromUpdate( EntityChange::RESTORE, null, $content->getEntity() );
+		'@phan-var RepoEntityChange $change';
 
 		$change->setRevisionInfo(
 			$revisionRecord,
@@ -150,7 +154,9 @@ class ChangeNotifier {
 			return null;
 		}
 
+		/** @var RepoEntityChange $change */
 		$change = $this->changeFactory->newFromUpdate( EntityChange::ADD, null, $content->getEntity() );
+		'@phan-var RepoEntityChange $change';
 		$change->setRevisionInfo(
 			$revisionRecord,
 			$this->getCentralUserId( User::newFromIdentity( $revisionRecord->getUser() ) )
@@ -221,7 +227,7 @@ class ChangeNotifier {
 	 * @param EntityContent $oldContent
 	 * @param EntityContent $newContent
 	 *
-	 * @return EntityChange|null
+	 * @return RepoEntityChange|null
 	 */
 	private function getChangeForModification( EntityContent $oldContent, EntityContent $newContent ) {
 		$oldEntity = $oldContent->isRedirect() ? null : $oldContent->getEntity();
@@ -241,7 +247,9 @@ class ChangeNotifier {
 			$action = EntityChange::UPDATE;
 		}
 
+		/** @var RepoEntityChange $change */
 		$change = $this->changeFactory->newFromUpdate( $action, $oldEntity, $newEntity );
+		'@phan-var RepoEntityChange $change';
 		return $change;
 	}
 
