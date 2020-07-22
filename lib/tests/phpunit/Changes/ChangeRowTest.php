@@ -3,7 +3,6 @@
 namespace Wikibase\Lib\Tests\Changes;
 
 use Exception;
-use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikimedia\AtEase\AtEase;
@@ -19,7 +18,7 @@ use Wikimedia\AtEase\AtEase;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class ChangeRowTest extends MediaWikiIntegrationTestCase {
+class ChangeRowTest extends \PHPUnit\Framework\TestCase {
 
 	public function testAgeCalculation() {
 		$change = $this->newChangeRow( [ 'time' => date( 'YmdHis' ) ] );
