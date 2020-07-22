@@ -3,6 +3,7 @@
 namespace Wikibase\Repo;
 
 use CachedBagOStuff;
+use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
 use DataValues\MonolingualTextValue;
@@ -84,7 +85,6 @@ use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
-use Wikibase\Lib\Changes\CentralIdLookupFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\ItemChange;
 use Wikibase\Lib\ContentLanguages;
@@ -1574,7 +1574,7 @@ class WikibaseRepo {
 		return new ChangeNotifier(
 			$this->getEntityChangeFactory(),
 			$transmitters,
-			( new CentralIdLookupFactory() )->getCentralIdLookup()
+			CentralIdLookup::factoryNonLocal()
 		);
 	}
 
