@@ -124,6 +124,8 @@ class WikibaseContentLanguages {
 					'ood', // T155423
 					'otk', // T137809
 					'peo', // T189427
+					'phn-latn', // T155425
+					'phn-phnx', // T155425
 					'pi-sidd', // T230881
 					'pjt', // T155426
 					'ppu', // T174233
@@ -163,7 +165,6 @@ class WikibaseContentLanguages {
 					'zun', // T155435
 				] )
 			),
-
 			// MediaWiki language codes we don't want for monolingual text values
 			new StaticContentLanguages( [
 				// Language codes that are not even well-formed BCP 47 language codes
