@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Akamycoco",
 			"Iyuqciyang"
 		]
 	},
 	"tooltip-t-wikibase": "Mgaluk bitaq wada mggaluk ka rpun skuan pntasan bnkgan",
 	"wikibase-comment-update": "Wada kmpriyux {{WBREPONAME}} bngkgan",
+	"wikibase-dataitem": "{{WBREPONAME}} bnkgan",
 	"wikibase-editlinks": "Mggaluk smmalu patas.",
 	"wikibase-editlinkstitle": "Mggaluk qmangaw kari smmalu patas.",
 	"wikibase-linkitem-input-page": "ruwahan patas",
