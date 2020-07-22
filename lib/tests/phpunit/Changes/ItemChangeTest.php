@@ -58,11 +58,8 @@ class ItemChangeTest extends EntityChangeTest {
 	}
 
 	public function changeBackwardsCompatProvider() {
-		global $wgDevelopmentWarnings;
-
 		//NOTE: Disable developer warnings that may get triggered by
 		//      the B/C code path.
-		$wgDevelopmentWarnings = false;
 		AtEase::suppressWarnings();
 
 		try {
@@ -98,7 +95,6 @@ class ItemChangeTest extends EntityChangeTest {
 
 			$cases['atomic-sitelink-diff'] = [ $change ];
 		} finally {
-			$wgDevelopmentWarnings = true;
 			AtEase::restoreWarnings();
 		}
 
@@ -114,9 +110,6 @@ class ItemChangeTest extends EntityChangeTest {
 	public function testGetSiteLinkDiffBackwardsCompat( ItemChange $change ) {
 		//NOTE: Disable developer warnings that may get triggered by
 		//      the B/C code path.
-		$this->setMwGlobals( 'wgDevelopmentWarnings', false );
-
-		// Also suppress notices that may be triggered by wfLogWarning
 		AtEase::suppressWarnings();
 
 		try {
