@@ -344,7 +344,7 @@ class GetEntities extends ApiBase {
 	 *
 	 * @return array
 	 *     0 => string[] languageCodes that the user wants returned
-	 *     1 => LanguageFallbackChain[] Keys are requested lang codes
+	 *     1 => TermLanguageFallbackChain[] Keys are requested lang codes
 	 */
 	private function getLanguageCodesAndFallback( array $params ): array {
 		$languageCodes = ( is_array( $params['languages'] ) ? $params['languages'] : [] );

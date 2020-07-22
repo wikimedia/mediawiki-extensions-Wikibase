@@ -57,7 +57,7 @@ class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 
 	/**
 	 * @param string[]|null $termData A term record as returned by
-	 * LanguageFallbackChain::extractPreferredValueOrAny(),
+	 * TermLanguageFallbackChain::extractPreferredValueOrAny(),
 	 * containing the 'value' and 'language' fields, or null
 	 * or an empty array.
 	 *
