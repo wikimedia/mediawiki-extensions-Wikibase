@@ -86,7 +86,7 @@ class ComplexValueRdfHelper {
 			$normalized ? $this->vocabulary->claimToValueNormalized : $this->vocabulary->claimToValue;
 
 		$writer->say( $namespaces[$propertyValueNamespace], $propertyValueLName )
-			->is( RdfVocabulary::NS_VALUE, $valueLName );
+			->is( $snakNamespace, $valueLName );
 
 		if ( $this->dedupeBag->alreadySeen( $valueLName, 'V' ) !== false ) {
 			return null;
