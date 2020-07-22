@@ -7,6 +7,8 @@ use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\DataModel\Statement\Statement;
@@ -16,6 +18,13 @@ use Wikibase\DataModel\Statement\Statement;
  * @author Marius Hoch
  */
 class EntityDiffChangedAspectsFactory {
+
+	/** @var LoggerInterface */
+	private $logger;
+
+	public function __construct( ?LoggerInterface $logger = null ) {
+		$this->logger = $logger ?: new NullLogger();
+	}
 
 	/**
 	 * @param Diff $entityDiff
@@ -151,7 +160,9 @@ class EntityDiffChangedAspectsFactory {
 
 				$changedStatements[] = $newStatement->getPropertyId()->getSerialization();
 			} else {
-				wfLogWarning( 'Unknown DiffOp type ' . get_class( $diffOp ) );
+				$this->logger->warning( 'Unknown DiffOp type {class}', [
+					'class' => get_class( $diffOp ),
+				] );
 				continue;
 			}
 

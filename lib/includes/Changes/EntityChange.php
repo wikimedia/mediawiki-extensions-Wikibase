@@ -43,7 +43,7 @@ class EntityChange extends DiffChange {
 	public function getEntityId() {
 		if ( !$this->entityId && $this->hasField( 'object_id' ) ) {
 			// FIXME: this should not happen
-			wfWarn( "object_id set in EntityChange, but not entityId" );
+			$this->logger->warning( 'object_id set in EntityChange, but not entityId' );
 			$idParser = new BasicEntityIdParser();
 			$this->entityId = $idParser->parse( $this->getObjectId() );
 		}
@@ -304,7 +304,8 @@ class EntityChange extends DiffChange {
 		$info = parent::unserializeInfo( $serialization );
 
 		if ( isset( $info['compactDiff'] ) && is_string( $info['compactDiff'] ) ) {
-			$compactDiff = ( new EntityDiffChangedAspectsFactory() )->newEmpty();
+			$aspectsFactory = new EntityDiffChangedAspectsFactory( $this->logger );
+			$compactDiff = $aspectsFactory->newEmpty();
 			$compactDiff->unserialize( $info['compactDiff'] );
 			$info['compactDiff'] = $compactDiff;
 		}

@@ -20,8 +20,8 @@ abstract class DiffChange extends ChangeRow {
 		if ( !array_key_exists( 'compactDiff', $info ) ) {
 			// This shouldn't happen, but we should be robust against corrupt, incomplete
 			// obsolete instances in the database, etc.
-			wfLogWarning( 'Cannot get the diff when it has not been set yet.' );
-			return ( new EntityDiffChangedAspectsFactory() )->newEmpty();
+			$this->logger->warning( 'Cannot get the diff when it has not been set yet.' );
+			return ( new EntityDiffChangedAspectsFactory( $this->logger ) )->newEmpty();
 		} else {
 			return $info['compactDiff'];
 		}

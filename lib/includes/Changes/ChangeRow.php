@@ -3,6 +3,8 @@
 namespace Wikibase\Lib\Changes;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Class representing a single change (ie a row in the wb_changes).
@@ -12,6 +14,18 @@ use Exception;
  * @author Daniel Kinzler
  */
 abstract class ChangeRow implements Change {
+
+	/** @var LoggerInterface */
+	protected $logger;
+
+	public function __construct( array $fields = [] ) {
+		$this->logger = new NullLogger();
+		$this->setFields( $fields );
+	}
+
+	public function setLogger( LoggerInterface $logger ): void {
+		$this->logger = $logger;
+	}
 
 	/**
 	 * The fields of the object.
@@ -48,10 +62,6 @@ abstract class ChangeRow implements Change {
 	 */
 	public function getUserId() {
 		return $this->hasField( 'user_id' ) ? $this->getField( 'user_id' ) : 0;
-	}
-
-	public function __construct( array $fields = [] ) {
-		$this->setFields( $fields );
 	}
 
 	/**
@@ -146,7 +156,9 @@ abstract class ChangeRow implements Change {
 		$info = json_decode( $str, true );
 
 		if ( !is_array( $info ) ) {
-			wfLogWarning( "Failed to unserializeInfo of id: " . $this->getObjectId() );
+			$this->logger->warning( 'Failed to unserializeInfo of id: {id}', [
+				'id' => $this->getObjectId(),
+			] );
 			return [];
 		}
 
