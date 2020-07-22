@@ -110,4 +110,40 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 		unset( $custom );
 	}
 
+	/** @dataProvider provideSettingsComplexMerges */
+	public function testMergeSettingsComplexMerges(
+		array $default,
+		array $custom,
+		array $expected,
+		array $overrideArrays = [],
+		array $twoDArrayMerge = [],
+		array $falseMeansRemove = []
+	) {
+		/** @var SettingsArray $actual */
+		$actual = TestingAccessWrapper::newFromClass( WikibaseSettings::class )
+			->mergeSettings( $default, $custom, $overrideArrays, $twoDArrayMerge, $falseMeansRemove );
+
+		$this->assertSame( $expected, $actual->getArrayCopy() );
+	}
+
+	public function provideSettingsComplexMerges() {
+		$default = [ 'key' => [ 'one', 'two' ] ];
+		$custom['key']['two'] = false;
+		$expected = [ 'key' => [ 'one' ] ];
+		yield "['key'][], false removing the key" => [ $default, $custom, $expected, [], [], [ 'key' ] ];
+		unset( $custom );
+
+		$default = [ 'key' => [ 'a' => 'A', 'b' => 'B' ] ];
+		$custom['key']['a'] = 'Ä';
+		$expected = [ 'key' => [ 'a' => 'Ä' ] ];
+		yield "['key']['a'], override all config" => [ $default, $custom, $expected, [ 'key' ], [], [] ];
+		unset( $custom );
+
+		$default = [ 'key' => [ 'a' => [ 'a' => 'A' ], 'b' => [ 'B' ] ] ];
+		$custom['key']['a']['b'] = 'Ä';
+		$expected = [ 'key' => [ 'a' => [ 'a' => 'A', 'b' => 'Ä' ], 'b' => [ 'B' ] ] ];
+		yield "['key']['a'], 2d merge" => [ $default, $custom, $expected, [], [ 'key' ], [] ];
+		unset( $custom );
+	}
+
 }

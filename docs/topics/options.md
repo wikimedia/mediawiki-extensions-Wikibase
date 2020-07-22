@@ -202,6 +202,11 @@ EXAMPLE: ```http://www.wikidata.org/entity/```
 #### globeUris
 Mapping of globe URIs to canonical names, as recognized and used by [GeoData] extension when indexing and querying for coordinates.
 
+If you want to remove one from this list, set its value to false. For example:
+```php
+$wgWBRepoSettings['globeUris']['http://www.wikidata.org/entity/Q2'] = false;
+```
+
 EXAMPLE: ```['http://www.wikidata.org/entity/Q2' => 'earth']```
 
 ### Properties & Items
@@ -489,6 +494,11 @@ Which URL schemes should be allowed in URL data values.
 Supported schemes are `ftps`, `ircs`, `mms`, `nntp`, `redis`, `sftp`, `telnet`, `worldwind` and `gopher`.
 Schemes (protocols) added here will only have any effect if validation is supported for that protocol; that is, adding `ftps` will work, while adding `dummy` will do nothing.
 
+If you want to remove one from this list, set its value to false. For example:
+```php
+$wgWBRepoSettings['urlSchemes']['mailto'] = false;
+```
+
 DEFAULT: is ```['bzr', 'cvs', 'ftp', 'git', 'http', 'https', 'irc', 'mailto', 'ssh', 'svn']```
 
 #### entityNamespaces {#entityNamespaces}
@@ -520,6 +530,12 @@ EXAMPLE: ```[ 'class' => 'Wikibase\\Lib\\JsonUnitStorage', 'args' => [ 'myUnits.
 Special non-canonical languages and their BCP 47 mappings
 
 Based on: https://meta.wikimedia.org/wiki/Special_language_codes
+
+If you want to remove one from this list, set its value to false. For example:
+```php
+$wgWBRepoSettings['canonicalLanguageCodes']['simple'] = false;
+```
+
 
 #### dataBridgeEnabled {#repo_dataBridgeEnabled}
 Enable the repo parts of the Data Bridge Feature; see the corresponding client setting for more information.
