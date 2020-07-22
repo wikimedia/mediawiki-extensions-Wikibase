@@ -1,3 +1,5 @@
+'use strict';
+
 const Util = require( 'wdio-mediawiki/Util' );
 const assert = require( 'assert' );
 const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
@@ -31,7 +33,7 @@ describe( 'item', function () {
 		browser.keys( [ 'Tab' ] );
 		browser.keys( [ 'Enter' ] );
 		// property input automatically focused
-		let statement = ItemPage.statements[ 0 ];
+		const statement = ItemPage.statements[ 0 ];
 		ItemPage.getNthQualifierPropertyInput( statement, 0 ).waitForDisplayed();
 		// property field should be automatically focused
 		browser.keys( propertyId );

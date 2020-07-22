@@ -1,3 +1,5 @@
+'use strict';
+
 const WikibaseApi = require( 'wdio-wikibase/wikibase.api' );
 const Util = require( 'wdio-mediawiki/Util' );
 const EntityPage = require( 'wdio-wikibase/pageobjects/entity.page' );

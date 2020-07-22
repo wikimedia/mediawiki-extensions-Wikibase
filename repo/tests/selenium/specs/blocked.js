@@ -1,22 +1,22 @@
+'use strict';
+
 const assert = require( 'assert' ),
 	MWBot = require( 'mwbot' ),
 	Page = require( 'wdio-mediawiki/Page' ),
 	LoginPage = require( 'wdio-mediawiki/LoginPage' );
 
+const bot = new MWBot( {
+	apiUrl: browser.config.baseUrl + '/api.php'
+} );
+
 describe( 'blocked user cannot use', function () {
 
-	const bot = new MWBot( {
-		apiUrl: browser.config.baseUrl + '/api.php'
-	} );
-
-	before( function setupBot() {
-		return bot.loginGetEditToken( {
+	before( function () {
+		bot.loginGetEditToken( {
 			username: browser.config.mwUser,
 			password: browser.config.mwPwd
 		} );
-	} );
 
-	before( function loginUser() {
 		LoginPage.loginAdmin();
 	} );
 
