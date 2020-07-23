@@ -4,6 +4,8 @@ namespace Wikibase\Lib\Changes;
 
 use Exception;
 use InvalidArgumentException;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -34,20 +36,26 @@ class EntityChangeFactory {
 	 */
 	private $changeClasses;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	/**
 	 * @param EntityDiffer $entityDiffer
 	 * @param EntityIdParser $idParser
 	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
+	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
 		EntityIdParser $idParser,
-		array $changeClasses
+		array $changeClasses,
+		?LoggerInterface $logger = null
 	) {
 		$this->entityDiffer = $entityDiffer;
 		$this->idParser = $idParser;
 		$this->changeClasses = $changeClasses;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
@@ -68,6 +76,8 @@ class EntityChangeFactory {
 
 		/** @var EntityChange $instance */
 		$instance = new $class( $fields );
+
+		$instance->setLogger( $this->logger );
 
 		$instance->setEntityId( $entityId );
 
@@ -150,7 +160,8 @@ class EntityChangeFactory {
 		}
 
 		$instance = $this->newForEntity( $action, $id );
-		$aspectsDiff = ( new EntityDiffChangedAspectsFactory() )->newFromEntityDiff( $diff );
+		$aspectsFactory = new EntityDiffChangedAspectsFactory( $this->logger );
+		$aspectsDiff = $aspectsFactory->newFromEntityDiff( $diff );
 		$instance->setCompactDiff( $aspectsDiff );
 
 		return $instance;

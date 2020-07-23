@@ -1148,10 +1148,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return EntityChangeFactory
-	 */
-	public function getEntityChangeFactory() {
+	public function getEntityChangeFactory(): EntityChangeFactory {
 		//TODO: take this from a setting or registry.
 		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
@@ -1161,7 +1158,8 @@ final class WikibaseClient {
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
 			$this->getEntityIdParser(),
-			$changeClasses
+			$changeClasses,
+			$this->getLogger()
 		);
 	}
 

@@ -741,10 +741,7 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityChangeFactory
-	 */
-	public function getEntityChangeFactory() {
+	public function getEntityChangeFactory(): EntityChangeFactory {
 		//TODO: take this from a setting or registry.
 		$changeClasses = [
 			Item::ENTITY_TYPE => ItemChange::class,
@@ -754,7 +751,8 @@ class WikibaseRepo {
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
 			$this->getEntityIdParser(),
-			$changeClasses
+			$changeClasses,
+			$this->getLogger()
 		);
 	}
 

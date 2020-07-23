@@ -55,11 +55,11 @@ class ItemChange extends EntityChange {
 	private function logWarning( $obj ) {
 		// This shouldn't happen, but we should be robust against corrupt, incomplete
 		// or obsolete instances in the database, etc.
-
-		$cls = $obj === null ? 'null' : get_class( $obj );
-		wfLogWarning(
-			'Cannot get sitelink diff from ' . $cls . '. Change #' . $this->getId()
-			. ", type " . $this->getType() );
+		$this->logger->warning( 'Cannot get sitelink diff from {class}. Change #{id}, type {type}', [
+			'class' => $obj === null ? 'null' : get_class( $obj ),
+			'id' => $this->getId(),
+			'type' => $this->getType(),
+		] );
 	}
 
 }
