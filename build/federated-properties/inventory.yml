@@ -21,6 +21,13 @@ test_systems:
         SOURCE_REPO_SCHEME: "https"
         SOURCE_REPO_HOST: "www.wikidata.org"
 
+    fedprops-opennext.wikidata-dev.eqiad.wmflabs:
+        SCHEME: "https"
+        SERVER_NAME: "opennext-federated-properties.wmflabs.org"
+        PORT: ""
+        SOURCE_REPO_SCHEME: "https"
+        SOURCE_REPO_HOST: "www.wikidata.org"
+
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
     PROJECT_NAME: "federatedProperties"
