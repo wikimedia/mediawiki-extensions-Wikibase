@@ -1335,7 +1335,7 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 			$this->assertSame( 'fpwd', $propertySource->getRdfPredicateNamespacePrefix() );
 			$this->assertSame( 'fpwd', $propertySource->getRdfNodeNamespacePrefix() );
 			$this->assertSame( 'wd', $propertySource->getInterwikiPrefix() );
-			$this->assertSame( [ 'property' => 120 ], $propertySource->getEntityNamespaceIds() ); // uses wikidata default not config
+			$this->assertSame( [ 'property' => 122 ], $propertySource->getEntityNamespaceIds() ); // uses wikidata default not config
 			$this->assertSame( [ 'property' => 'main' ], $propertySource->getEntitySlotNames() );
 			$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
 		}

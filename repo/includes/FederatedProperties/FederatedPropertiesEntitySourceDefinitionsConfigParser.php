@@ -74,18 +74,16 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 
 		$propertyIndex = array_search( Property::ENTITY_TYPE, $entityTypes );
 
-		unset( $entityTypes[$propertyIndex] );
-		unset( $entitySlots[ Property::ENTITY_TYPE] );
-		unset( $entityNamespaceIds[ Property::ENTITY_TYPE] );
-
 		$entityNamespaceIdsAndSlots = [];
-
 		foreach ( $entityTypes as $entityType ) {
 			$entityNamespaceIdsAndSlots[$entityType] = [
 				'namespaceId' => $entityNamespaceIds[$entityType],
 				'slot' => $entitySlots[$entityType]
 			];
 		}
+
+		$propertyNamespaceIdAndSlot = $entityNamespaceIdsAndSlots[Property::ENTITY_TYPE];
+		unset( $entityNamespaceIdsAndSlots[ Property::ENTITY_TYPE] );
 
 		$newLocal = new EntitySource(
 			$defaultLocal->getSourceName(),
@@ -100,7 +98,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 		$fedPropsSource = new EntitySource(
 			'fedprops',
 			false,
-			[ Property::ENTITY_TYPE => [ 'namespaceId' => 120, 'slot' => 'main' ] ],
+			[ Property::ENTITY_TYPE => $propertyNamespaceIdAndSlot ],
 			'http://www.wikidata.org/entity/',
 			'fpwd',
 			'fpwd',
