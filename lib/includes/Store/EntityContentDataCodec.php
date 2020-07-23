@@ -15,6 +15,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\LegacyIdInterpreter;
+use Wikimedia\AtEase\AtEase;
 
 /**
  * A codec for use by EntityContent resp EntityHandler subclasses for the
@@ -202,7 +203,7 @@ class EntityContentDataCodec {
 		}
 
 		$format = $this->sanitizeFormat( $format );
-		\Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 		switch ( $format ) {
 			case CONTENT_FORMAT_JSON:
 				$data = json_decode( $blob, true );
@@ -213,7 +214,7 @@ class EntityContentDataCodec {
 			default:
 				throw new InvalidArgumentException( "Unsupported decoding format: $format" );
 		}
-		\Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 
 		if ( !is_array( $data ) ) {
 			throw new MWContentSerializationException( "Failed to decode as $format" );

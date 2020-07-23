@@ -9,6 +9,7 @@ use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
 use Wikibase\Lib\Changes\ItemChange;
+use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\Lib\Changes\ItemChange
@@ -62,7 +63,7 @@ class ItemChangeTest extends EntityChangeTest {
 		//NOTE: Disable developer warnings that may get triggered by
 		//      the B/C code path.
 		$wgDevelopmentWarnings = false;
-		\Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 
 		try {
 			$cases = [];
@@ -98,7 +99,7 @@ class ItemChangeTest extends EntityChangeTest {
 			$cases['atomic-sitelink-diff'] = [ $change ];
 		} finally {
 			$wgDevelopmentWarnings = true;
-			\Wikimedia\restoreWarnings();
+			AtEase::restoreWarnings();
 		}
 
 		return $cases;
@@ -116,7 +117,7 @@ class ItemChangeTest extends EntityChangeTest {
 		$this->setMwGlobals( 'wgDevelopmentWarnings', false );
 
 		// Also suppress notices that may be triggered by wfLogWarning
-		\Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 
 		try {
 			$siteLinkDiff = $change->getSiteLinkDiff();
@@ -126,7 +127,7 @@ class ItemChangeTest extends EntityChangeTest {
 				'getSiteLinkDiff must return a Diff'
 			);
 		} finally {
-			\Wikimedia\restoreWarnings();
+			AtEase::restoreWarnings();
 		}
 	}
 

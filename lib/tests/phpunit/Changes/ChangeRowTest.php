@@ -6,6 +6,7 @@ use Exception;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\Changes\ChangeRow;
 use Wikibase\Lib\Changes\EntityChange;
+use Wikimedia\AtEase\AtEase;
 
 /**
  * @covers \Wikibase\Lib\Changes\ChangeRow
@@ -104,9 +105,9 @@ class ChangeRowTest extends MediaWikiIntegrationTestCase {
 			'info' => 's:5:"value";',
 		] );
 
-		\Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 		$info = $change->getInfo();
-		\Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 
 		$this->assertSame( [], $info );
 	}

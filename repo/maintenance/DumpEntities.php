@@ -18,6 +18,7 @@ use Wikibase\Repo\Store\Sql\SqlEntityIdPager;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\AtEase\AtEase;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -219,9 +220,9 @@ abstract class DumpEntities extends Maintenance {
 		$dumper->setBatchSize( $batchSize );
 
 		$idStream = $this->makeIdStream( $entityTypes, $exceptionReporter );
-		\Wikimedia\suppressWarnings();
+		AtEase::suppressWarnings();
 		$dumper->generateDump( $idStream );
-		\Wikimedia\restoreWarnings();
+		AtEase::restoreWarnings();
 
 		if ( $idStream instanceof EntityIdReader ) {
 			// close stream / free resources
