@@ -147,7 +147,7 @@ class TestDispatchCoordinator extends Maintenance {
 	}
 
 	private function readTestValue( $key ) {
-		$memcKey = wfMemcKey( 'test-dispatch-coordinator-' . $key );
+		$memcKey = $this->cache->makeKey( 'test-dispatch-coordinator-' . $key );
 		$value = $this->cache->get( $memcKey );
 		if ( $value === null ) {
 			throw new RuntimeException( "Caching mechanism doesn't work as expected." );
@@ -157,7 +157,7 @@ class TestDispatchCoordinator extends Maintenance {
 	}
 
 	private function writeTestValue( $key, $value ) {
-		$memcKey = wfMemcKey( 'test-dispatch-coordinator-' . $key );
+		$memcKey = $this->cache->makeKey( 'test-dispatch-coordinator-' . $key );
 		$this->cache->set( $memcKey, $value, WANObjectCache::TTL_MINUTE * 15 );
 		$this->log( "Set cache key $key to $value" );
 	}

@@ -154,7 +154,7 @@ TEXT
 	 * @param string $prefix
 	 */
 	private function clearCacheEntry( $prefix ) {
-		$key = wfMemcKey( 'interwiki', $prefix );
+		$key = $this->cache->makeKey( 'interwiki', $prefix );
 		$this->cache->delete( $key );
 	}
 
