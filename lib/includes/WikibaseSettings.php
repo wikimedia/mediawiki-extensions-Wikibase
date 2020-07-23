@@ -5,7 +5,6 @@ namespace Wikibase\Lib;
 use ExtensionRegistry;
 use Hooks;
 use MWException;
-use OutOfBoundsException;
 
 /**
  * WikibaseSettings is a static access point to Wikibase settings defined as global state
@@ -39,16 +38,35 @@ class WikibaseSettings {
 	 * @return SettingsArray
 	 */
 	public static function getRepoSettings() {
+		global $wgWBRepoSettings;
 		if ( !self::isRepoEnabled() ) {
 			throw new MWException( 'Cannot access repo settings: Wikibase Repository component is not enabled!' );
 		}
 
-		$settings = self::getSettings( 'wgWBRepoSettings' );
+		$repoSettings = array_merge(
+			require __DIR__ . '/../config/WikibaseLib.default.php',
+			require __DIR__ . '/../../repo/config/Wikibase.default.php'
+		);
+		// Hack to make a proper merge strategy for these configs in case they are being overriden by sysadmins
+		// More info T257447
+		// TODO: This should move to a proper mediawiki config handler: T258658
+		$overrideArrays = [ 'entityDataFormats' ];
+		$twoDArrayMerge = [ 'string-limits', 'pagePropertiesRdf' ];
+		$falseMeansRemove = [ 'urlSchemes', 'canonicalLanguageCodes', 'globeUris' ];
+
+		$settings = self::mergeSettings(
+			$repoSettings,
+			$wgWBRepoSettings ?? [],
+			$overrideArrays,
+			$twoDArrayMerge,
+			$falseMeansRemove
+		);
 
 		$entityNamespaces = self::buildEntityNamespaceConfigurations( $settings );
+
 		Hooks::run( 'WikibaseRepoEntityNamespaces', [ &$entityNamespaces ] );
 
-		$settings->setSetting( 'entityNamespaces', $entityNamespaces );
+		self::applyEntityNamespacesToSettings( $settings, $entityNamespaces );
 		return $settings;
 	}
 
@@ -88,28 +106,6 @@ class WikibaseSettings {
 	}
 
 	/**
-	 * Returns settings for a wikibase component based on global state.
-	 * This is intended to be used to access settings specified in LocalSettings.php.
-	 *
-	 * @param string $var The name of a global variable.
-	 *
-	 * @return SettingsArray
-	 */
-	private static function getSettings( $var ) {
-		if ( !isset( $GLOBALS[$var] ) ) {
-			throw new OutOfBoundsException( 'No such global configuration variable: ' . $var );
-		}
-
-		if ( !is_array( $GLOBALS[$var] ) ) {
-			throw new OutOfBoundsException( 'Not a Wikibase configuration array: ' . $var );
-		}
-
-		$settings = $GLOBALS[$var];
-
-		return new SettingsArray( $settings );
-	}
-
-	/**
 	 * Merge two arrays of default and custom settings,
 	 * so that it looks like the custom settings were added on top of the default settings.
 	 *
@@ -127,22 +123,67 @@ class WikibaseSettings {
 	 *
 	 * @param array $defaultSettings The default settings loaded from some other config file.
 	 * @param array $customSettings The custom settings from a configuration global.
+	 * @param string[] $overrideArrays
+	 * @param string[] $twoDArrayMerge
+	 * @param string[] $falseMeansRemove
 	 * @return SettingsArray The merged settings.
 	 */
 	private static function mergeSettings(
 		array $defaultSettings,
-		array $customSettings
+		array $customSettings,
+		array $overrideArrays = [],
+		array $twoDArrayMerge = [],
+		array $falseMeansRemove = []
 	): SettingsArray {
 		foreach ( $customSettings as $key => $value ) {
 			$defaultValue = $defaultSettings[$key] ?? [];
 			if ( is_array( $value ) && is_array( $defaultValue ) ) {
-				$defaultSettings[$key] = array_merge( $defaultValue, $value );
+				$defaultSettings[$key] = self::mergeComplexArrays(
+					$key,
+					$value,
+					$defaultValue,
+					$twoDArrayMerge,
+					$overrideArrays,
+					$falseMeansRemove
+				);
 			} else {
 				$defaultSettings[$key] = $value;
 			}
 		}
 
 		return new SettingsArray( $defaultSettings );
+	}
+
+	private static function mergeComplexArrays(
+		string $key,
+		array $value,
+		array $defaultValue,
+		array $twoDArrayMerge,
+		array $overrideArrays,
+		array $falseMeansRemove
+	): array {
+		if ( in_array( $key, $twoDArrayMerge ) ) {
+			return wfArrayPlus2d( $defaultValue, $value );
+		}
+		if ( in_array( $key, $overrideArrays ) ) {
+			return $value;
+		}
+		if ( in_array( $key, $falseMeansRemove ) ) {
+			$result = array_merge( $defaultValue, $value );
+			foreach ( $result as $valueKey => $valueValue ) {
+				if ( $valueValue === false ) {
+					unset( $result[$valueKey] );
+					$index = array_search( $valueKey, $result );
+					if ( $index !== false ) {
+						unset( $result[$index] );
+					}
+				}
+			}
+
+			// Keep the non-numeric keys but drop the numeric ones
+			return array_merge( $result );
+		}
+		return array_merge( $defaultValue, $value );
 	}
 
 	/**

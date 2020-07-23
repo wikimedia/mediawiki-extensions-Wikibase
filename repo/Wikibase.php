@@ -43,8 +43,7 @@ require_once __DIR__ . '/../view/WikibaseView.php';
 
 call_user_func( function() {
 	global $wgExtensionMessagesFiles,
-		$wgMessagesDirs,
-		$wgWBRepoSettings;
+		$wgMessagesDirs;
 
 	// i18n messages, kept for backward compatibility (T257442)
 	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
@@ -53,9 +52,4 @@ call_user_func( function() {
 	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
 	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
 	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
-
-	$wgWBRepoSettings = array_merge(
-		require __DIR__ . '/../lib/config/WikibaseLib.default.php',
-		require __DIR__ . '/config/Wikibase.default.php'
-	);
 } );
