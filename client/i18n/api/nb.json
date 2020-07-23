@@ -38,5 +38,13 @@
 	"apihelp-query+wikibase-description": "Få informasjon om Wikibase-klienten og det tilknyttede Wikibase-sentrallageret.",
 	"apihelp-query+wikibase-summary": "Hent informasjon om Wikibase-klienten og det tilknyttede Wikibase-lageret.",
 	"apihelp-query+wikibase-example": "Få URL-sti og annen informasjon om Wikibase-klienten og sentrallageret.",
-	"apihelp-query+wikibase-param-prop": "Hvilke egenskaper som kan fås:\n;<kbd>url</kbd>: Grunn-URL, skriftsti og artikkelsti for Wikibase-sentrallageret.\n;<kbd>siteid</kbd>: Side-ID-en for dette nettstedet."
+	"apihelp-query+wikibase-param-prop": "Hvilke egenskaper som kan fås:\n;<kbd>url</kbd>: Grunn-URL, skriftsti og artikkelsti for Wikibase-sentrallageret.\n;<kbd>siteid</kbd>: Side-ID-en for dette nettstedet.",
+	"apihelp-wbformatreference-summary": "Formaterer en referanse for visning til brukere.",
+	"apihelp-wbformatreference-example-1": "Formater en tom referanse med Data Bridge-stil til HTML.",
+	"apihelp-wbformatreference-example-2": "Formater en referanse med én streng med Data Bridge-stil til HTML.",
+	"apihelp-wbformatreference-param-reference": "Referansen som et JSON-objekt.",
+	"apihelp-wbformatreference-param-style": "Stilen referansen skal formeteres i.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Stilen brukt av [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Ikke tiltenkt alminnelig bruk.",
+	"apihelp-wbformatreference-param-outputformat": "Formatet resultatet skal returneres i.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-oppmerking."
 }

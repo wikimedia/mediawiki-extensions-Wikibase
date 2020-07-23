@@ -10,13 +10,16 @@
 	"tooltip-t-wikibase": "الربط بعنصر مرتابط في مستودع البيانات",
 	"wikibase-comment-update": "تبديل عنصر {{WBREPONAME}}",
 	"wikibase-dataitem": "عنصر {{WBREPONAME}}",
-	"wikibase-editlinks": "عدل الروابط",
+	"wikibase-editlinks": "بدل ليانات",
 	"wikibase-editlinkstitle": "تعديل الروابط ما بين اللغات",
+	"wikibase-linkitem-addlinks": "زيد ليانات",
+	"wikibase-linkitem-title": "ربط معا صفحة",
+	"wikibase-linkitem-linkpage": "ربط معا صفحة",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "خبي",
 	"wikibase-rc-hide-wikidata-show": "وري",
 	"wikibase-rc-wikibase-edit-letter": "د",
 	"wikibase-rc-wikibase-edit-title": "تعديل {{WBREPONAME}}",
 	"unconnectedpages": "صفاحي مامربوطينش",
-	"wikibase-otherprojects": "في مشاريع أخرى"
+	"wikibase-otherprojects": "فمشاريع خرا"
 }
