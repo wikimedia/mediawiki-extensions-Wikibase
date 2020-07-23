@@ -3,11 +3,11 @@
  *
  * @license GPL-2.0-or-later
  */
-( function () {
+( function ( userLang, contentLanguages ) {
 	'use strict';
 
 	$( function () {
-		var $lang, fields, fieldCount, autonyms, langWidget;
+		var $lang, fields, fieldCount, availableLangs, langWidget;
 
 		$lang = $( document.getElementsByName( 'lang' ) ).closest( '.oo-ui-inputWidget' );
 		if ( $lang.length === 0 ) {
@@ -40,18 +40,18 @@
 			return;
 		}
 
-		autonyms = $.uls ? $.uls.data.getAutonyms() : {};
+		availableLangs = contentLanguages.getAllPairs() || {};
 		langWidget = OO.ui.infuse( $lang );
 		fields.forEach( function ( field ) {
 			field.$input = OO.ui.infuse( field.$element ).$input;
 		} );
 
 		function updatePlaceholders( languageCode ) {
-			var autonym = autonyms[ languageCode ],
+			var language = availableLangs[ languageCode ],
 				langDir = $.uls ? $.uls.data.getDir( languageCode ) : null;
 
-			if ( typeof autonym !== 'string' ) {
-				autonym = '[' + languageCode + ']';
+			if ( typeof language !== 'string' ) {
+				language = '[' + languageCode + ']';
 			}
 
 			fields.forEach( function ( field ) {
@@ -59,9 +59,11 @@
 				// * wikibase-label-edit-placeholder-language-aware
 				// * wikibase-description-edit-placeholder-language-aware
 				// * wikibase-aliases-edit-placeholder-language-aware
-				field.$input.prop( 'placeholder', mw.msg( field.msgAware, autonym ) );
+				field.$input.prop( 'placeholder', mw.msg( field.msgAware, language ) );
+
 				if ( langDir ) {
 					field.$input.prop( 'dir', langDir );
+					field.$input.addClass( 'wb-placeholder-dir-' + $.uls.data.getDir( userLang ) );
 				}
 			} );
 		}
@@ -70,4 +72,4 @@
 		langWidget.on( 'change', updatePlaceholders );
 	} );
 
-}() );
+}( mw.config.values.wgUserLanguage, new window.wb.WikibaseContentLanguages() ) );

@@ -275,6 +275,12 @@ return call_user_func( function() {
 		'wikibase.special.newEntity' => $moduleTemplate + [
 			'scripts' => [
 				'wikibase.special/wikibase.special.newEntity.js',
+			],
+			'dependencies' => [
+				'wikibase.WikibaseContentLanguages'
+			],
+			'styles' => [
+				'../../view/resources/wikibase/wikibase.less'
 			]
 		],
 
