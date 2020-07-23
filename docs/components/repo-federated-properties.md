@@ -10,7 +10,7 @@ The setting is off by default. To enable Federated Properties from [Wikidata], s
 
 Using federated properties by only enabling the feature will default the `federatedPropertiesSourceScriptUrl` to https://www.wikidata.org/w/. In this case no additional configuration of ```entitysources``` is required.
 
-Using the feature with any other source wiki will however require `entitysources` to be manually configured in order to get the correct RDF representation of entities.
+Using the feature with any other source wiki will however require `entitysources` to be manually configured in order to get the correct RDF representation of entities, links and namespaces.
 
 The following example is a configuration of `entitysources` similar to what is automatically generated. However here we are using **wikidata.beta.wmflabs.org** as the source wiki.
 
@@ -27,7 +27,7 @@ $wgWBRepoSettings['entitySources'] = [
 		'rdfPredicateNamespacePrefix' => 'wdt',
 	],
 	'fedprops' => [
-		'entityNamespaces' => [ 'property' => 120 ],
+		'entityNamespaces' => [ 'property' => 122 ],
 		'repoDatabase' => false,
 		'baseUri' => 'http://wikidata.beta.wmflabs.org/entity/',
 		'interwikiPrefix' => 'wd',
@@ -37,7 +37,8 @@ $wgWBRepoSettings['entitySources'] = [
 ];
 ```
 
-The two configurations contain separate sources for the local `item` and federated `property`. The `entityNamespaces` for these entities depends on the configuration of that particular wiki. For more information on the different `entityNamespaces` in Wikidata see https://www.wikidata.org/wiki/Help:Namespaces.
+The two configurations contain separate sources for the local `item` and federated `property`. The `entityNamespaces` for these entities must always match the namespace mapping that exists on the local wiki.
+So if the local Property namespace is 122, and your federating to wikidata.org with a Property namespace of 120, your `entityNamespaces` value for Properties would be 122.
 
 The `interwikiPrefix` is a configuration to support links between MediaWiki instances. This also depend on the configuration on each instance and should ideally point to a wiki defined in the `interwiki` table  For more information on interwiki links see https://www.mediawiki.org/wiki/Manual:Interwiki.
 ## Privacy notice
