@@ -48,11 +48,10 @@ $wgRCMaxAge = 365 * 24 * 3600;
 wfLoadSkin( 'Vector' );
 
 ## Wikibase
-# Load Wikibase repo, client & lib with the example / default settings.
-require_once "$IP/extensions/Wikibase/lib/WikibaseLib.php";
-require_once "$IP/extensions/Wikibase/repo/Wikibase.php";
+# Load Wikibase repo & client with the example / default settings.
+wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
+wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
-require_once "$IP/extensions/Wikibase/client/WikibaseClient.php";
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
 # UniversalLanguageSelector
