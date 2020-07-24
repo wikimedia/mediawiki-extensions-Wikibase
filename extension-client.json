@@ -184,6 +184,7 @@
 	"AutoloadNamespaces": {
 		"Wikibase\\Client\\": "client/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",
+		"Wikibase\\Lib\\Changes\\": "lib/packages/wikibase/changes/src/",
 		"Wikibase\\DataAccess\\": "data-access/src/"
 	},
 	"TestAutoloadNamespaces": {
@@ -191,6 +192,7 @@
 		"Wikibase\\Client\\Tests\\Unit\\": "client/tests/phpunit/unit/includes/",
 		"Wikibase\\Client\\Tests\\Mocks\\": "client/tests/phpunit/mocks/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/"
 	},
 	"JobClasses": {

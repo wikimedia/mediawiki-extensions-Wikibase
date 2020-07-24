@@ -18,6 +18,7 @@
             <directory>repo/tests/phpunit</directory>
             <directory>view/tests/phpunit</directory>
             <directory>data-access/tests/phpunit</directory>
+            <directory>lib/packages/wikibase/changes/tests</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -34,6 +35,8 @@
             <directory suffix=".php">view/src</directory>
 
             <directory suffix=".php">data-access/src</directory>
+
+            <directory suffix=".php">lib/packages/wikibase/changes/src</directory>
         </whitelist>
     </filter>
 </phpunit>

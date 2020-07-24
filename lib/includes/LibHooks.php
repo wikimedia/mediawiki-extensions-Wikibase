@@ -45,6 +45,7 @@ final class LibHooks implements
 	public function onUnitTestsList( &$paths ): void {
 		$paths[] = __DIR__ . '/../tests/phpunit/';
 		$paths[] = __DIR__ . '/../../data-access/tests/phpunit/';
+		$paths[] = __DIR__ . '/../packages/wikibase/changes/tests/';
 	}
 
 	/**

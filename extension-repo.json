@@ -245,6 +245,7 @@
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
 		"Wikibase\\Lib\\": "lib/includes/",
+		"Wikibase\\Lib\\Changes\\": "lib/packages/wikibase/changes/src/",
 		"Wikibase\\DataAccess\\": "data-access/src/",
 		"Wikibase\\View\\": "view/src/"
 	},
@@ -256,6 +257,7 @@
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
+		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/",
 		"Wikibase\\View\\Tests\\": "view/tests/phpunit/"
 	},

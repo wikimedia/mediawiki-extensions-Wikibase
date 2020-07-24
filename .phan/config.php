@@ -40,6 +40,7 @@ $cfg['directory_list'] = array_merge(
 		'repo/maintenance',
 		'lib/maintenance',
 		'view/src',
+		'lib/packages/wikibase/changes/src',
 	]
 );
 
