@@ -36,6 +36,9 @@ class EntityChangeFactory {
 	 */
 	private $changeClasses;
 
+	/** @var string */
+	private $defaultEntityChange;
+
 	/** @var LoggerInterface */
 	private $logger;
 
@@ -44,17 +47,20 @@ class EntityChangeFactory {
 	 * @param EntityIdParser $idParser
 	 * @param string[] $changeClasses Maps entity type IDs to subclasses of EntityChange.
 	 * Entity types not mapped explicitly are assumed to use EntityChange itself.
+	 * @param string $defaultEntityChange
 	 * @param LoggerInterface|null $logger
 	 */
 	public function __construct(
 		EntityDiffer $entityDiffer,
 		EntityIdParser $idParser,
 		array $changeClasses,
+		string $defaultEntityChange = EntityChange::class,
 		?LoggerInterface $logger = null
 	) {
 		$this->entityDiffer = $entityDiffer;
 		$this->idParser = $idParser;
 		$this->changeClasses = $changeClasses;
+		$this->defaultEntityChange = $defaultEntityChange;
 		$this->logger = $logger ?: new NullLogger();
 	}
 
@@ -65,13 +71,13 @@ class EntityChangeFactory {
 	 *
 	 * @return EntityChange
 	 */
-	public function newForEntity( $action, EntityId $entityId, array $fields = [] ) {
+	public function newForEntity( $action, EntityId $entityId, array $fields = [] ): EntityChange {
 		$entityType = $entityId->getEntityType();
 
 		if ( isset( $this->changeClasses[ $entityType ] ) ) {
 			$class = $this->changeClasses[$entityType];
 		} else {
-			$class = EntityChange::class;
+			$class = $this->defaultEntityChange;
 		}
 
 		/** @var EntityChange $instance */
@@ -101,7 +107,7 @@ class EntityChangeFactory {
 	 * @throws InvalidArgumentException
 	 * @return EntityChange
 	 */
-	public function newForChangeType( $changeType, EntityId $entityId, array $fields ) {
+	public function newForChangeType( $changeType, EntityId $entityId, array $fields ): EntityChange {
 		$changeType = explode( '~', $changeType, 2 );
 		Assert::parameter(
 			isset( $changeType[1] ),
@@ -119,7 +125,7 @@ class EntityChangeFactory {
 	 * @throws InvalidArgumentException
 	 * @return EntityChange
 	 */
-	public function newFromFieldData( array $fields ) {
+	public function newFromFieldData( array $fields ): EntityChange {
 		Assert::parameter( isset( $fields['type'] ), '$fields[\'type\']', 'must be set' );
 		Assert::parameter( isset( $fields['object_id'] ), '$fields[\'object_id\']', 'must be set' );
 
@@ -141,7 +147,7 @@ class EntityChangeFactory {
 		$action,
 		EntityDocument $oldEntity = null,
 		EntityDocument $newEntity = null
-	) {
+	): EntityChange {
 		if ( $oldEntity === null && $newEntity === null ) {
 			throw new Exception( 'Either $oldEntity or $newEntity must be given' );
 		}

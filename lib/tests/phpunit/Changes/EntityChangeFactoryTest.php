@@ -40,7 +40,8 @@ class EntityChangeFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = new EntityChangeFactory(
 			new EntityDiffer(),
 			new BasicEntityIdParser(),
-			$changeClasses
+			$changeClasses,
+			EntityChange::class
 		);
 
 		return $factory;
