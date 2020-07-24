@@ -671,7 +671,7 @@ final class RepoHooks {
 	 * @param string[] &$types The types of protection available
 	 */
 	public static function onTitleGetRestrictionTypes( Title $title, array &$types ) {
-		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getDefaultInstance()->getLocalEntityNamespaceLookup();
 
 		if ( $namespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			// Remove create and move protection for Wikibase namespaces

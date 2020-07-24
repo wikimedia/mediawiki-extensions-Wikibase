@@ -2116,6 +2116,14 @@ class WikibaseRepo {
 		return $this->getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
+	public function getLocalEntityNamespaceLookup(): EntityNamespaceLookup {
+		$localEntitySource = $this->getLocalEntitySource();
+		$nsIds = $localEntitySource->getEntityNamespaceIds();
+		$entitySlots = $localEntitySource->getEntitySlotNames();
+
+		return new EntityNamespaceLookup( $nsIds, $entitySlots );
+	}
+
 	/**
 	 * @return EntityIdHtmlLinkFormatterFactory
 	 */
