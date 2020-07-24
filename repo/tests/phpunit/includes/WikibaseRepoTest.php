@@ -469,6 +469,48 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		$this->assertContains( 'form', $localEntityTypes );
 	}
 
+	public function testGetLocalEntityNamespaceLookup() {
+		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$settings->setSetting( 'localEntitySourceName', 'local' );
+
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+
+		$wikibaseRepo = new WikibaseRepo(
+			$settings,
+			new DataTypeDefinitions( [] ),
+			$entityTypeDefinitions,
+			new EntitySourceDefinitions( [
+				new EntitySource(
+					'local',
+					false,
+					[
+						'foo' => [ 'namespaceId' => 100, 'slot' => 'main' ],
+					],
+					'',
+					'wd',
+					'',
+					''
+				),
+				new EntitySource(
+					'otherSource',
+					false,
+					[
+						'bar' => [ 'namespaceId' => 102, 'slot' => 'main' ],
+					],
+					'',
+					'wd',
+					'',
+					''
+				)
+			], $entityTypeDefinitions )
+		);
+
+		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
+
+		$this->assertContains( 'foo', $localEntityTypes );
+		$this->assertNotContains( 'bar', $localEntityTypes );
+	}
+
 	private function getEntityTypeDefinitions() {
 		return new EntityTypeDefinitions(
 			[
