@@ -115,7 +115,7 @@
 		// before. However, this will require triggering the entity selector's API call and waiting
 		// for its response.
 
-		$( '#searchGoButton' ).on( 'click keydown', function ( event ) {
+		$( '#searchButton' ).on( 'click keydown', function ( event ) {
 			if ( !$input.data( 'entityselector' ) ) {
 				return;
 			}
