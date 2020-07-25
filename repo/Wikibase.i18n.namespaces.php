@@ -88,6 +88,17 @@ $namespaceNames['es'] = [
 	WB_NS_QUERY_TALK => 'Consulta_discusión',
 ];
 
+$namespaceNames['fr'] = [
+	WB_NS_ITEM      => 'Élément',
+	WB_NS_ITEM_TALK => 'Discussion élément',
+
+	WB_NS_PROPERTY      => 'Propriété',
+	WB_NS_PROPERTY_TALK => 'Discussion propriété',
+
+	WB_NS_QUERY      => 'Requête',
+	WB_NS_QUERY_TALK => 'Discussion requête',
+];
+
 $namespaceNames['he'] = [
 	WB_NS_ITEM      => 'פריט',
 	WB_NS_ITEM_TALK => 'שיחת_פריט',
