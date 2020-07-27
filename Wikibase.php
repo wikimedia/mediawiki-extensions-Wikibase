@@ -32,7 +32,7 @@
  */
 
 if ( $wgEnableWikibaseRepo ?? true ) {
-	require_once __DIR__ . '/repo/Wikibase.php';
+	wfLoadExtension( 'WikibaseRepository', __DIR__ . '/extension-repo.json' );
 
 	if ( $wgWikimediaJenkinsCI ?? false ) {
 		require_once __DIR__ . '/repo/config/Wikibase.ci.php';
