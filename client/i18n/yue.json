@@ -29,5 +29,6 @@
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}}改動",
 	"wikibase-pageinfo-entity-id": "{{WBREPONAME}}項目ID",
 	"wikibase-otherprojects": "第啲項目",
+	"wikibase-sitelinks-sitename-columnheading": "話",
 	"wikibase-client-data-bridge-error-go-back": "返去"
 }

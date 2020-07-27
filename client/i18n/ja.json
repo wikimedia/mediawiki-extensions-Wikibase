@@ -17,6 +17,7 @@
 			"Penn Station",
 			"Ridmevo",
 			"Shirayuki",
+			"Siglite3",
 			"Sujiniku",
 			"Yusuke1109",
 			"にょきにょき"
@@ -123,7 +124,7 @@
 	"wikibase-client-data-bridge-references-heading": "脚注",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>警告</strong>: あなたはログインしていません。このまま編集するとあなたの IP アドレスが公開されます。<strong>ログイン</strong>または<strong>アカウントを作成</strong>すると、編集の帰属表示が利用者名になるなどの利点があります。",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "ログインせずに編集",
-	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ロろグイン / 登録",
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ログイン / 登録",
 	"wikibase-client-data-bridge-error-reload-bridge": "再読み込み",
 	"wikibase-client-data-bridge-saving-error-assertuser-publish": "ログインせずに編集"
 }
