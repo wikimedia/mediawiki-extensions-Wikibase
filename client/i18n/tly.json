@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Ganbarzada",
-			"Patriot Kur"
+			"Patriot Kur",
+			"Гусейн"
 		]
 	},
+	"tooltip-t-wikibase": "Link bə elementon repozitoriyə rımuz",
 	"wikibase-comment-update": "{{WBREPONAME}} element degiş be",
 	"wikibase-dataitem": "çı {{WBREPONAME}} element",
 	"wikibase-editlinks": "Keçidon sərost bıkə",
