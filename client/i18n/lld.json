@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Asenoner",
+			"Fierodelveneto",
 			"Starladin"
 		]
 	},
@@ -10,6 +11,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}} element",
 	"wikibase-editlinks": "Muda i links",
 	"wikibase-editlinkstitle": "Muda i links te autra rujenedes",
+	"wikibase-linkitem-addlinks": "Jonté liam",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ascogn",
 	"wikibase-rc-hide-wikidata-show": "Mostra",
