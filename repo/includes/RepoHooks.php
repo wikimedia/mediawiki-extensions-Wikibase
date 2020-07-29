@@ -495,8 +495,9 @@ final class RepoHooks {
 			if ( MediaWikiServices::getInstance()->getPermissionManager()
 					->quickUserCan( 'edit', $skinTemplate->getUser(), $title )
 			) {
+				$out = $skinTemplate->getOutput();
 				$request = $skinTemplate->getRequest();
-				$old = !$skinTemplate->isRevisionCurrent()
+				$old = !$out->isRevisionCurrent()
 					&& !$request->getCheck( 'diff' );
 
 				$restore = $request->getCheck( 'restore' );
@@ -506,7 +507,7 @@ final class RepoHooks {
 
 					$revid = $restore
 						? $request->getText( 'restore' )
-						: $skinTemplate->getRevisionId();
+						: $out->getRevisionId();
 
 					$rev = MediaWikiServices::getInstance()
 						->getRevisionLookup()
