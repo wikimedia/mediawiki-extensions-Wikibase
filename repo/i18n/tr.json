@@ -111,7 +111,7 @@
 	"wikibase-propertypage-bad-datatype": "Bilinmeyen veri türü: $1",
 	"wikibase-claimview-snak-tooltip": "\"$1\" isimli özelliğin yerini tutabilecek bir değer ekleyin. Eğer özelliğin değeri belirlenmemiş veya gerçek değeri bilinmiyorsa, kutucuktaki simgeye tıklayarak alternatif bir değer türü seçebilirsiniz.",
 	"wikibase-claimview-snak-new-tooltip": "Bir özellik belirttikten sonra buna karşılık gelen bir değer ekleyebilirsiniz. Özelliğin belirlenmiş bir değeri yoksa veya gerçek değer bilinmiyorsa, kutucuktan önceki simgeye tıklayarak alternatif bir değer türü seçebilirsiniz.",
-	"wikibase-referenceview-tabs-manual": "Manüel",
+	"wikibase-referenceview-tabs-manual": "Elle",
 	"wikibase-statementview-rank-preferred": "Öncelikli sıralama",
 	"wikibase-statementview-rank-tooltip-preferred": "Geçerli ve güncel değer",
 	"wikibase-statementview-rank-normal": "Normal sıralama",
