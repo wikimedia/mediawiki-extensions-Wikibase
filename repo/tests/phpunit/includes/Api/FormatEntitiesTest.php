@@ -133,8 +133,8 @@ class FormatEntitiesTest extends ApiTestCase {
 				"some text before the <a href=\"$foo\">link</a>",
 			],
 			'elements inside and after' => [
-				'<a href="/foo"><bdi>foo</bdi></a><sup>hi</sup>',
-				"<a href=\"$foo\"><bdi>foo</bdi></a><sup>hi</sup>",
+				'<a href="/foo"><bdi>foo</bdi></a>&nbsp;<sup>hi</sup>',
+				"<a href=\"$foo\"><bdi>foo</bdi></a>&nbsp;<sup>hi</sup>",
 			],
 			'elements before' => [
 				'<sub>howdy</sub><a href="/foo">link</a>',
