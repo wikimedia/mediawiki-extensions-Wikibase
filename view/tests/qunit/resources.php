@@ -141,21 +141,4 @@ return [
 			'wikibase.view.__namespace',
 		]
 	],
-	'jquery.wikibase.siteselector.tests' => $moduleBase + [
-		'scripts' => [
-			'jquery/wikibase/jquery.wikibase.siteselector.tests.js',
-		],
-		'dependencies' => [
-			'wikibase.view.ControllerViewFactory',
-			'wikibase.Site',
-		],
-	],
-	'jquery.wikibase.wbtooltip.tests' => $moduleBase + [
-		'scripts' => [
-			'jquery/wikibase/jquery.wikibase.wbtooltip.tests.js',
-		],
-		'dependencies' => [
-			'jquery.wikibase.wbtooltip',
-		],
-	],
 ];
