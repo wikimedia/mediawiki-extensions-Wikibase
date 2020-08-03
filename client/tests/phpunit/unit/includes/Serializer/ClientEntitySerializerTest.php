@@ -10,6 +10,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -95,7 +96,7 @@ class ClientEntitySerializerTest extends \PHPUnit\Framework\TestCase {
 			$serializer,
 			new InMemoryDataTypeLookup(),
 			[ 'en' ],
-			[ 'en' => new TermLanguageFallbackChain( [] ) ]
+			[ 'en' => new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ) ]
 		);
 
 		$serialization = $instance->serialize( new Item() );

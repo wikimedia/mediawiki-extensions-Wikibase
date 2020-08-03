@@ -22,9 +22,19 @@ class TermLanguageFallbackChain {
 
 	/**
 	 * @param LanguageWithConversion[] $chain
+	 * @param ContentLanguages|null $termLanguages
 	 */
-	public function __construct( array $chain ) {
-		$this->chain = $chain;
+	public function __construct( array $chain, ContentLanguages $termLanguages = null ) {
+		if ( $termLanguages === null ) {
+			// FIXME remove after all other extensions where this chain is created are fixed. See Id9d23c074525a5041cd05adec98edcfef2e7239d
+			$termLanguages = WikibaseContentLanguages::getDefaultInstance()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
+		}
+		$this->chain = array_values( array_filter(
+			$chain,
+			static function ( $language ) use ( $termLanguages ) {
+				return $termLanguages->hasLanguage( $language->getLanguageCode() );
+			}
+		) );
 	}
 
 	/**

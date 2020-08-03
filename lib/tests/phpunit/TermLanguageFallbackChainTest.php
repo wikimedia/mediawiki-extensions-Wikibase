@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -17,6 +18,36 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  * @author Thiemo Kreuz
  */
 class TermLanguageFallbackChainTest extends \MediaWikiTestCase {
+
+	public function testFilteringOutInvalidLanguages() {
+		$chainOfTestLanguageCodes = [
+			'123',
+			'notALanguage',
+			'()',
+			'@',
+			'de',
+			'🏄',
+			'en',
+			'',
+			'⧼Lang⧽',
+		];
+		$chainOfLanguages = array_map( function ( string $langCode ) {
+			return LanguageWithConversion::factory( $langCode );
+		}, $chainOfTestLanguageCodes );
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )->willReturnCallback(
+			function ( $langCode ) {
+				return $langCode === 'de' || $langCode === 'en';
+			}
+		);
+		$chain = new TermLanguageFallbackChain( $chainOfLanguages, $stubContentLanguages );
+		$actualFallbackChain = array_map( function ( LanguageWithConversion $lang ) {
+			return $lang->getLanguageCode();
+		},
+			$chain->getFallbackChain() );
+
+		$this->assertSame( [ 'de', 'en' ], $actualFallbackChain );
+	}
 
 	/**
 	 * @dataProvider provideExtractPreferredValue
@@ -218,7 +249,9 @@ class TermLanguageFallbackChainTest extends \MediaWikiTestCase {
 			$languagesWithConversion[] = LanguageWithConversion::factory( $language );
 		}
 
-		$chain = new TermLanguageFallbackChain( $languagesWithConversion );
+		$contentLanguages = $this->createStub( ContentLanguages::class );
+		$contentLanguages->method( 'hasLanguage' )->willReturn( true );
+		$chain = new TermLanguageFallbackChain( $languagesWithConversion, $contentLanguages );
 
 		$codes = $chain->getFetchLanguageCodes();
 		$this->assertEquals( $languages, $codes );

@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\View;
 
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -22,7 +23,7 @@ class WikibaseHtmlSnakFormatterFactoryTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGetSnakFormatter() {
 		$snakFormatter = $this->createMock( SnakFormatter::class );
-		$languageFallbackChain = new TermLanguageFallbackChain( [] );
+		$languageFallbackChain = new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) );
 
 		$outputFormatSnakFormatterFactory = $this->getMockBuilder(
 				OutputFormatSnakFormatterFactory::class

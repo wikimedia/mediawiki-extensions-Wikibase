@@ -7,7 +7,9 @@ use PHPUnit\Framework\TestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermList;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageWithConversion;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\TermboxView;
@@ -64,11 +66,14 @@ class TermboxViewTest extends TestCase {
 			->willReturn( $markers );
 
 		$languageCode = 'en';
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )
+			->willReturn( true );
 		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$fallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguageCode' )
 			->with( $languageCode )
-			->willReturn( new TermLanguageFallbackChain( [ $languageCode ] ) );
+			->willReturn( new TermLanguageFallbackChain( [ LanguageWithConversion::factory( $languageCode ) ], $stubContentLanguages ) );
 
 		$termbox = new TermboxView(
 			$fallbackChainFactory,
@@ -89,7 +94,10 @@ class TermboxViewTest extends TestCase {
 		$editLinkUrl = '/edit/Q42';
 		$response = 'termbox says hi';
 
-		$fallbackChain = new TermLanguageFallbackChain( [ $language ] );
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )
+			->willReturn( true );
+		$fallbackChain = new TermLanguageFallbackChain( [ LanguageWithConversion::factory( $language ) ], $stubContentLanguages );
 		$fallbackChainFactory = $this->createMock( LanguageFallbackChainFactory::class );
 		$fallbackChainFactory->expects( $this->once() )
 			->method( 'newFromLanguageCode' )

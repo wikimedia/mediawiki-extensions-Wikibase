@@ -8,6 +8,7 @@ use Language;
 use ValueFormatters\BasicNumberLocalizer;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\DataModel\Services\Statement\Grouper\NullStatementGrouper;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\LanguageNameLookup;
@@ -110,7 +111,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->newViewFactory();
 		$itemView = $factory->newItemView(
 			Language::factory( 'en' ),
-			new TermLanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);
 
@@ -121,7 +122,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 		$factory = $this->newViewFactory();
 		$propertyView = $factory->newPropertyView(
 			Language::factory( 'en' ),
-			new TermLanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( CacheableEntityTermsView::class )
 		);
 
@@ -131,7 +132,7 @@ class ViewFactoryTest extends \PHPUnit\Framework\TestCase {
 	public function testNewStatementSectionsView() {
 		$statementSectionsView = $this->newViewFactory()->newStatementSectionsView(
 			'de',
-			new TermLanguageFallbackChain( [] ),
+			new TermLanguageFallbackChain( [], $this->createStub( ContentLanguages::class ) ),
 			$this->createMock( EditSectionGenerator::class )
 		);
 
