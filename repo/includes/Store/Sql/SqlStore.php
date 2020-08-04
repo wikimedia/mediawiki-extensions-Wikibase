@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Store\Sql;
 use HashBagOStuff;
 use Hooks;
 use MediaWiki\MediaWikiServices;
+use ObjectCache;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -492,7 +493,7 @@ class SqlStore implements Store {
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			new EntityRevisionCache(
-				wfGetCache( $this->cacheType ),
+				ObjectCache::getInstance( $this->cacheType ),
 				$this->cacheDuration,
 				$this->getEntityRevisionLookupCacheKey()
 			),
@@ -521,7 +522,7 @@ class SqlStore implements Store {
 		if ( !$this->cacheRetrievingEntityRevisionLookup ) {
 			$cacheRetrievingEntityRevisionLookup = new CacheRetrievingEntityRevisionLookup(
 				new EntityRevisionCache(
-					wfGetCache( $this->cacheType ),
+					ObjectCache::getInstance( $this->cacheType ),
 					$this->cacheDuration,
 					$this->getEntityRevisionLookupCacheKey()
 				),
