@@ -240,19 +240,12 @@ final class ClientHooks {
 			function () {
 				$wikibaseClient = WikibaseClient::getDefaultInstance();
 
-				/**
-				 * @var \MediaWikiSite $site
-				 */
 				$site = $wikibaseClient->getSite();
-
-				$currentSite = [];
-				if ( $site ) {
-					$currentSite = [
-						'globalSiteId' => $site->getGlobalId(),
-						'languageCode' => $site->getLanguageCode(),
-						'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
-					];
-				}
+				$currentSite = [
+					'globalSiteId' => $site->getGlobalId(),
+					'languageCode' => $site->getLanguageCode(),
+					'langLinkSiteGroup' => $wikibaseClient->getLangLinkSiteGroup()
+				];
 
 				return [ 'currentSite' => $currentSite ];
 			},
