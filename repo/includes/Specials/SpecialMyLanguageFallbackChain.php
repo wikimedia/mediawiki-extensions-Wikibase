@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Specials;
 
 use ExtensionRegistry;
@@ -43,21 +45,13 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 		);
 	}
 
-	/**
-	 * @see SpecialPage::getGroupName
-	 *
-	 * @return string
-	 */
-	protected function getGroupName() {
+	/** @inheritDoc */
+	protected function getGroupName(): string {
 		return 'wikibase';
 	}
 
-	/**
-	 * @see SpecialPage::getDescription
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
+	/** @inheritDoc */
+	public function getDescription(): string {
 		return $this->msg( 'special-mylanguagefallbackchain' )->text();
 	}
 
@@ -66,35 +60,20 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 *
 	 * @param IContextSource $context
 	 */
-	public function setContext( $context ) {
+	public function setContext( $context ): void {
 		$this->chain = null;
 		parent::setContext( $context );
 	}
 
 	/**
 	 * Get the chain stored for display.
-	 *
-	 * @return TermLanguageFallbackChain
 	 */
-	public function getLanguageFallbackChain() {
+	public function getLanguageFallbackChain(): TermLanguageFallbackChain {
 		if ( $this->chain === null ) {
-			$this->setLanguageFallbackChain(
-				$this->languageFallbackChainFactory->newFromContext( $this->getContext() )
-			);
+			$this->chain = $this->languageFallbackChainFactory->newFromContext( $this->getContext() );
 		}
 
 		return $this->chain;
-	}
-
-	/**
-	 * Set a new chain for display and return the original one.
-	 *
-	 * @param TermLanguageFallbackChain $chain
-	 *
-	 * @return TermLanguageFallbackChain
-	 */
-	public function setLanguageFallbackChain( TermLanguageFallbackChain $chain ) {
-		return wfSetVar( $this->chain, $chain );
 	}
 
 	/**
@@ -102,7 +81,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	 *
 	 * @param string|null $subPage
 	 */
-	public function execute( $subPage ) {
+	public function execute( $subPage ): void {
 		$this->setHeaders();
 		$this->outputHeader();
 

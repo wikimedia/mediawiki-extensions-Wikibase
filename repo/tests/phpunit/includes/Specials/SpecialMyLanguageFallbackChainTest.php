@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\Specials;
 
 use SpecialPageTestBase;
@@ -19,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialMyLanguageFallbackChainTest extends SpecialPageTestBase {
 
-	protected function newSpecialPage() {
+	protected function newSpecialPage(): SpecialMyLanguageFallbackChain {
 		return new SpecialMyLanguageFallbackChain(
 			WikibaseRepo::getDefaultInstance()->getLanguageFallbackChainFactory()
 		);
