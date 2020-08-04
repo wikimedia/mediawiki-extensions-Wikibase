@@ -4,6 +4,7 @@ namespace Wikibase\Client\Store\Sql;
 
 use HashBagOStuff;
 use MediaWiki\MediaWikiServices;
+use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
 use Wikibase\Client\Store\UsageUpdater;
@@ -351,7 +352,7 @@ class DirectSqlStore implements ClientStore {
 		// Lower caching layer using persistent cache (e.g. memcached).
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			new EntityRevisionCache(
-				wfGetCache( $this->cacheType ),
+				ObjectCache::getInstance( $this->cacheType ),
 				$this->cacheDuration,
 				$cacheKeyPrefix
 			),
