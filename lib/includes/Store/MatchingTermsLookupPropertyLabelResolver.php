@@ -23,7 +23,7 @@ class MatchingTermsLookupPropertyLabelResolver extends AbstractTermPropertyLabel
 	/**
 	 * @param string $languageCode The language of the labels to look up (typically, the wiki's content language)
 	 * @param MatchingTermsLookup $matchingTermsLookup  The MatchingTermsLookup service to look up labels with
-	 * @param BagOStuff $cache      The cache to use for labels (typically from wfGetMainCache())
+	 * @param BagOStuff $cache      The cache to use for labels (typically from ObjectCache::getLocalClusterInstance())
 	 * @param int $cacheDuration    Number of seconds to keep the cached version for.
 	 *                              Defaults to 3600 seconds = 1 hour.
 	 * @param string $cacheKey      The cache key to use, auto-generated based on $lang per default.

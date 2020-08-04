@@ -5,6 +5,7 @@ namespace Wikibase;
 use BagOStuff;
 use Maintenance;
 use MediaWiki\MediaWikiServices;
+use ObjectCache;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false
 	? getenv( 'MW_INSTALL_PATH' )
@@ -57,7 +58,7 @@ TEXT
 		$force = $this->getOption( 'force', false );
 		$this->source = $this->getOption( 'source', 'https://en.wikipedia.org/w/api.php' );
 
-		$this->cache = wfGetMainCache();
+		$this->cache = ObjectCache::getLocalClusterInstance();
 
 		$data = $this->fetchLinks();
 

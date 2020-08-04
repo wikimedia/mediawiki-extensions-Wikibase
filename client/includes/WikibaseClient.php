@@ -1230,7 +1230,7 @@ final class WikibaseClient {
 			),
 			// TODO: Make configurable? Should be similar, maybe identical to sharedCacheType and
 			// sharedCacheDuration, but can not reuse these because this here is not shared.
-			wfGetMainCache(),
+			ObjectCache::getLocalClusterInstance(),
 			60 * 60
 		);
 	}
@@ -1378,7 +1378,7 @@ final class WikibaseClient {
 
 			$this->propertyOrderProvider = new CachingPropertyOrderProvider(
 				$innerProvider,
-				wfGetMainCache()
+				ObjectCache::getLocalClusterInstance()
 			);
 		}
 
