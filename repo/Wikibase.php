@@ -15,19 +15,3 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 
 // load parts already converted to extension registration
 wfLoadExtension( 'WikibaseRepository', __DIR__ . '/../extension-repo.json' );
-
-// Only needed temporarily for i18n messages.
-require_once __DIR__ . '/../view/WikibaseView.php';
-
-call_user_func( function() {
-	global $wgExtensionMessagesFiles,
-		$wgMessagesDirs;
-
-	// i18n messages, kept for backward compatibility (T257442)
-	$wgMessagesDirs['Wikibase'] = __DIR__ . '/i18n';
-	$wgMessagesDirs['WikibaseApi'] = __DIR__ . '/i18n/api';
-	$wgMessagesDirs['WikibaseLib'] = __DIR__ . '/../lib/i18n';
-	$wgExtensionMessagesFiles['WikibaseAlias'] = __DIR__ . '/Wikibase.i18n.alias.php';
-	$wgExtensionMessagesFiles['WikibaseNS'] = __DIR__ . '/Wikibase.i18n.namespaces.php';
-	$wgExtensionMessagesFiles['wikibaserepomagic'] = __DIR__ . '/WikibaseRepo.i18n.magic.php';
-} );
