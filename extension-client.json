@@ -279,6 +279,7 @@
 				"mediawiki.api",
 				"mediawiki.util",
 				"mediawiki.jqueryMsg",
+				"mw.config.values.wbRepo",
 				"mw.config.values.wbSiteDetails",
 				"wikibase.Site",
 				"mediawiki.ForeignApi"
