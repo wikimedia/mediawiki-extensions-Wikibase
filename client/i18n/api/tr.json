@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Alpkant",
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"MuratTheTurkish"
 		]
 	},
 	"apihelp-query+wbentityusage-description": "Belirli sayfalarda kullanılan tüm varlık kimliklerini döndürür.",
@@ -23,8 +24,8 @@
 	"apihelp-query+wblistentityusage-example-simple": "<kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
 	"apihelp-query+wblistentityusage-example-url": "URL dahil olarak <kbd>Q2</kbd> varlığını kullanan sayfaları alın.",
 	"apihelp-query+wblistentityusage-example-aspect": "<kbd>Q2</kbd> varlığını kullanan sayfalar olsun ve görünüm site bağlantısı veya ifade oldu.",
-	"apihelp-query+pageterms-description": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın. Varlık sayfasının kendisinde, terimler doğrudan kullanılır. Uyarı: Depo vikide bu modül, bir site bağlantısı yoluyla bir varlığa bağlı sayfalarda değil, yalnızca doğrudan varlık sayfalarında çalışır. Bu gelecekte değişebilir.",
-	"apihelp-query+pageterms-summary": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın. Varlık sayfasının kendisinde, terimler doğrudan kullanılır. Uyarı: Depo vikide bu modül, bir site bağlantısı yoluyla bir varlığa bağlı sayfalarda değil, yalnızca doğrudan varlık sayfalarında çalışır. Bu gelecekte değişebilir.",
+	"apihelp-query+pageterms-description": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın.",
+	"apihelp-query+pageterms-summary": "Bir site bağlantısı aracılığıyla bir sayfayla ilişkili {{WBREPONAME}} terimlerini (genellikle etiketler, açıklamalar ve takma adlar) alın.",
 	"apihelp-query+pageterms-example-simple": "'London' sayfası ile ilişkili tüm terimleri kullanıcı dilinde edinin.",
 	"apihelp-query+pageterms-example-label-en": "İngilizce 'London' sayfası ile ilişkili etiketler ve takma adlar alın.",
 	"apihelp-query+pageterms-param-terms": "Alınacak terim türleri, ör. her biri türlerine göre anahtarlanmış bir dizeler dizisi olarak dönen 'description' ör. {\"description\": [\"foo\"]}. Belirtilmezse, tüm türler döndürülür.",

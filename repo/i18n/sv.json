@@ -455,5 +455,7 @@
 	"wikibase-tainted-ref-popper-text": "Värdet ändrades, men referensen förblev densamma.",
 	"wikibase-tainted-ref-popper-help-link-text": "Hjälp",
 	"wikibase-tainted-ref-popper-remove-warning": "Ta bort varning",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista över egenskaper på $2]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista över egenskaper på $2]",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Avbryt",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Fortsätt till källwikin"
 }

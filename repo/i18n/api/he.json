@@ -186,7 +186,7 @@
 	"apihelp-query+wbdatabridgeconfig-extended-description": "זהו מודול פנימי. נא לא להשתמש בו.",
 	"apihelp-query+wbsearch-description": "חיפוש ישויות באמצעות תוויות וכינויים.\nזה יכול להיות מחולל עבור שאילתות אחרות.\nמחזיר את האיבר המתאים שאמור להיות מוצג.",
 	"apihelp-query+wbsearch-summary": "חיפוש ישויות באמצעות תוויות וכינויים.",
-	"apihelp-query+wbsearch-extended-description": "זה יכול להיות מחולל עבור שאילתות אחרות.\nמחזיר את האיבר המתאים שאמור להיות מוצג.",
+	"apihelp-query+wbsearch-extended-description": "זה יכול להיות מחוֹלל עבור שאילתות אחרות.\nמחזיר את האיבר המתאים שאמור להיות מוצג.",
 	"apihelp-query+wbsearch-param-search": "חיפוש הטקסט הזה.",
 	"apihelp-query+wbsearch-param-language": "חיפוש בשפה הזאת.",
 	"apihelp-query+wbsearch-param-strictlanguage": "האם לכבות גיבוי שפה",
