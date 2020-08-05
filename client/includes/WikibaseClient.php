@@ -12,6 +12,7 @@ use DataValues\StringValue;
 use DataValues\TimeValue;
 use DataValues\UnknownValue;
 use Deserializers\Deserializer;
+use Deserializers\DispatchableDeserializer;
 use Deserializers\DispatchingDeserializer;
 use ExtensionRegistry;
 use ExternalUserNames;
@@ -25,6 +26,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWikiSite;
 use MWException;
 use ObjectCache;
+use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 use Serializers\Serializer;
 use Site;
@@ -413,10 +415,7 @@ final class WikibaseClient {
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
 
-	/**
-	 * @return DataTypeFactory
-	 */
-	public function getDataTypeFactory() {
+	public function getDataTypeFactory(): DataTypeFactory {
 		if ( $this->dataTypeFactory === null ) {
 			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
 		}
@@ -424,10 +423,7 @@ final class WikibaseClient {
 		return $this->dataTypeFactory;
 	}
 
-	/**
-	 * @return EntityIdParser
-	 */
-	public function getEntityIdParser() {
+	public function getEntityIdParser(): EntityIdParser {
 		if ( $this->entityIdParser === null ) {
 			$this->entityIdParser = new DispatchingEntityIdParser(
 				$this->entityTypeDefinitions->getEntityIdBuilders()
@@ -437,10 +433,7 @@ final class WikibaseClient {
 		return $this->entityIdParser;
 	}
 
-	/**
-	 * @return EntityIdComposer
-	 */
-	public function getEntityIdComposer() {
+	public function getEntityIdComposer(): EntityIdComposer {
 		if ( $this->entityIdComposer === null ) {
 			$this->entityIdComposer = new EntityIdComposer(
 				$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_COMPOSER_CALLBACK )
@@ -450,10 +443,7 @@ final class WikibaseClient {
 		return $this->entityIdComposer;
 	}
 
-	/**
-	 * @return WikibaseServices
-	 */
-	public function getWikibaseServices() {
+	public function getWikibaseServices(): WikibaseServices {
 		if ( $this->wikibaseServices === null ) {
 			$this->wikibaseServices = $this->newEntitySourceWikibaseServices();
 		}
@@ -544,10 +534,7 @@ final class WikibaseClient {
 		return $this->termBuffer;
 	}
 
-	/**
-	 * @return TermLookup
-	 */
-	public function getTermLookup() {
+	public function getTermLookup(): TermLookup {
 		if ( !$this->termLookup ) {
 			$this->termLookup = $this->getPrefetchingTermLookup();
 		}
@@ -555,10 +542,7 @@ final class WikibaseClient {
 		return $this->termLookup;
 	}
 
-	/**
-	 * @return PrefetchingTermLookup
-	 */
-	private function getPrefetchingTermLookup() {
+	private function getPrefetchingTermLookup(): PrefetchingTermLookup {
 		if ( !$this->prefetchingTermLookup ) {
 			$this->prefetchingTermLookup = $this->getWikibaseServices()->getPrefetchingTermLookup();
 		}
@@ -567,21 +551,14 @@ final class WikibaseClient {
 	}
 
 	/**
-	 * @param string $displayLanguageCode
-	 *
 	 * XXX: This is not used by client itself, but is used by ArticlePlaceholder!
-	 *
-	 * @return TermSearchInteractor
 	 */
-	public function newTermSearchInteractor( $displayLanguageCode ) {
+	public function newTermSearchInteractor( string $displayLanguageCode ): TermSearchInteractor {
 		return $this->getWikibaseServices()->getTermSearchInteractorFactory()
 			->newInteractor( $displayLanguageCode );
 	}
 
-	/**
-	 * @return PropertyDataTypeLookup
-	 */
-	public function getPropertyDataTypeLookup() {
+	public function getPropertyDataTypeLookup(): PropertyDataTypeLookup {
 		if ( $this->propertyDataTypeLookup === null ) {
 			$infoLookup = $this->getStore()->getPropertyInfoLookup();
 			$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
@@ -595,17 +572,11 @@ final class WikibaseClient {
 		return $this->propertyDataTypeLookup;
 	}
 
-	/**
-	 * @return StringNormalizer
-	 */
-	public function getStringNormalizer() {
+	public function getStringNormalizer(): StringNormalizer {
 		return $this->getWikibaseServices()->getStringNormalizer();
 	}
 
-	/**
-	 * @return RepoLinker
-	 */
-	public function newRepoLinker() {
+	public function newRepoLinker(): RepoLinker {
 		return new RepoLinker(
 			$this->entitySourceDefinitions,
 			$this->settings->getSetting( 'repoUrl' ),
@@ -614,17 +585,11 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return LanguageFallbackChainFactory
-	 */
-	public function getLanguageFallbackChainFactory() {
+	public function getLanguageFallbackChainFactory(): LanguageFallbackChainFactory {
 		return $this->getWikibaseServices()->getLanguageFallbackChainFactory();
 	}
 
-	/**
-	 * @return LanguageFallbackLabelDescriptionLookupFactory
-	 */
-	public function getLanguageFallbackLabelDescriptionLookupFactory() {
+	public function getLanguageFallbackLabelDescriptionLookupFactory(): LanguageFallbackLabelDescriptionLookupFactory {
 		return new LanguageFallbackLabelDescriptionLookupFactory(
 			$this->getLanguageFallbackChainFactory(),
 			$this->getTermLookup(),
@@ -634,10 +599,8 @@ final class WikibaseClient {
 
 	/**
 	 * Returns an instance of the default store.
-	 *
-	 * @return ClientStore
 	 */
-	public function getStore() {
+	public function getStore(): ClientStore {
 		if ( $this->store === null ) {
 			$this->store = new DirectSqlStore(
 				$this->getEntityChangeFactory(),
@@ -691,9 +654,8 @@ final class WikibaseClient {
 
 	/**
 	 * @throws MWException when called to early
-	 * @return Language
 	 */
-	public function getContentLanguage() {
+	public function getContentLanguage(): Language {
 		/**
 		 * Before this constant is defined, custom config may not have been taken into account.
 		 * So try not to allow code to use a language before that point.
@@ -710,9 +672,8 @@ final class WikibaseClient {
 
 	/**
 	 * @throws MWException when called to early
-	 * @return Language
 	 */
-	private function getUserLanguage() {
+	private function getUserLanguage(): Language {
 		global $wgLang;
 
 		// TODO: define a LanguageProvider service instead of using a global directly.
@@ -728,10 +689,7 @@ final class WikibaseClient {
 		return $wgLang;
 	}
 
-	/**
-	 * @return SettingsArray
-	 */
-	public function getSettings() {
+	public function getSettings(): SettingsArray {
 		return $this->settings;
 	}
 
@@ -800,7 +758,7 @@ final class WikibaseClient {
 		return self::$defaultInstance;
 	}
 
-	public function getLogger() {
+	public function getLogger(): LoggerInterface {
 		return LoggerFactory::getInstance( 'Wikibase' );
 	}
 
@@ -814,9 +772,8 @@ final class WikibaseClient {
 	 * new Site object is constructed from the configured ID.
 	 *
 	 * @throws MWException
-	 * @return Site
 	 */
-	public function getSite() {
+	public function getSite(): Site {
 		if ( $this->site === null ) {
 			$globalId = $this->settings->getSetting( 'siteGlobalID' );
 			$localId = $this->settings->getSetting( 'siteLocalID' );
@@ -911,10 +868,8 @@ final class WikibaseClient {
 	/**
 	 * Returns a OutputFormatSnakFormatterFactory the provides SnakFormatters
 	 * for different output formats.
-	 *
-	 * @return OutputFormatSnakFormatterFactory
 	 */
-	private function getSnakFormatterFactory() {
+	private function getSnakFormatterFactory(): OutputFormatSnakFormatterFactory {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
 				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
@@ -930,10 +885,8 @@ final class WikibaseClient {
 	/**
 	 * Returns a OutputFormatValueFormatterFactory the provides ValueFormatters
 	 * for different output formats.
-	 *
-	 * @return OutputFormatValueFormatterFactory
 	 */
-	private function getValueFormatterFactory() {
+	private function getValueFormatterFactory(): OutputFormatValueFormatterFactory {
 		if ( $this->valueFormatterFactory === null ) {
 			$this->valueFormatterFactory = new OutputFormatValueFormatterFactory(
 				$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
@@ -945,10 +898,7 @@ final class WikibaseClient {
 		return $this->valueFormatterFactory;
 	}
 
-	/**
-	 * @return EntityIdParser
-	 */
-	private function getRepoItemUriParser() {
+	private function getRepoItemUriParser(): EntityIdParser {
 		$itemConceptUriBase = $this->getItemSource()->getConceptBaseUri();
 
 		return new SuffixEntityIdParser(
@@ -957,10 +907,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return NamespaceChecker
-	 */
-	public function getNamespaceChecker() {
+	public function getNamespaceChecker(): NamespaceChecker {
 		if ( $this->namespaceChecker === null ) {
 			$this->namespaceChecker = new NamespaceChecker(
 				$this->settings->getSetting( 'excludeNamespaces' ),
@@ -985,10 +932,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return ClientParserOutputDataUpdater
-	 */
-	public function getParserOutputDataUpdater() {
+	public function getParserOutputDataUpdater(): ClientParserOutputDataUpdater {
 		if ( $this->parserOutputDataUpdater === null ) {
 			$this->parserOutputDataUpdater = new ClientParserOutputDataUpdater(
 				$this->getOtherProjectsSidebarGeneratorFactory(),
@@ -1003,10 +947,7 @@ final class WikibaseClient {
 		return $this->parserOutputDataUpdater;
 	}
 
-	/**
-	 * @return SidebarLinkBadgeDisplay
-	 */
-	public function getSidebarLinkBadgeDisplay() {
+	public function getSidebarLinkBadgeDisplay(): SidebarLinkBadgeDisplay {
 		if ( $this->sidebarLinkBadgeDisplay === null ) {
 			$labelDescriptionLookupFactory = $this->getLanguageFallbackLabelDescriptionLookupFactory();
 			$badgeClassNames = $this->settings->getSetting( 'badgeClassNames' );
@@ -1022,30 +963,20 @@ final class WikibaseClient {
 		return $this->sidebarLinkBadgeDisplay;
 	}
 
-	/**
-	 * @return LanguageLinkBadgeDisplay
-	 */
-	public function getLanguageLinkBadgeDisplay() {
+	public function getLanguageLinkBadgeDisplay(): LanguageLinkBadgeDisplay {
 		return new LanguageLinkBadgeDisplay(
 			$this->getSidebarLinkBadgeDisplay()
 		);
 	}
 
-	/**
-	 * @return DeserializerFactory A factory with knowledge about items, properties, and the
-	 *  elements they are made of, but no other entity types.
-	 */
-	public function getBaseDataModelDeserializerFactory() {
+	public function getBaseDataModelDeserializerFactory(): DeserializerFactory {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser()
 		);
 	}
 
-	/**
-	 * @return InternalDeserializerFactory
-	 */
-	private function getInternalFormatDeserializerFactory() {
+	private function getInternalFormatDeserializerFactory(): InternalDeserializerFactory {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
 			$this->getEntityIdParser(),
@@ -1053,10 +984,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return DispatchingDeserializer
-	 */
-	private function getAllTypesEntityDeserializer() {
+	private function getAllTypesEntityDeserializer(): DispatchableDeserializer {
 		if ( $this->entityDeserializer === null ) {
 			$deserializerFactoryCallbacks = $this->getEntityDeserializerFactoryCallbacks();
 			$baseDeserializerFactory = $this->getBaseDataModelDeserializerFactory();
@@ -1074,10 +1002,8 @@ final class WikibaseClient {
 
 	/**
 	 * Returns a deserializer to deserialize statements in both current and legacy serialization.
-	 *
-	 * @return Deserializer
 	 */
-	public function getInternalFormatStatementDeserializer() {
+	public function getInternalFormatStatementDeserializer(): Deserializer {
 		return $this->getInternalFormatDeserializerFactory()->newStatementDeserializer();
 	}
 
@@ -1099,26 +1025,19 @@ final class WikibaseClient {
 	 * Returns a SerializerFactory creating serializers that generate the most compact serialization.
 	 * A factory returned has knowledge about items, properties, and the elements they are made of,
 	 * but no other entity types.
-	 *
-	 * @return SerializerFactory
 	 */
-	public function getCompactBaseDataModelSerializerFactory() {
+	public function getCompactBaseDataModelSerializerFactory(): SerializerFactory {
 		return $this->getWikibaseServices()->getCompactBaseDataModelSerializerFactory();
 	}
 
 	/**
 	 * Returns an entity serializer that generates the most compact serialization.
-	 *
-	 * @return Serializer
 	 */
-	public function getCompactEntitySerializer() {
+	public function getCompactEntitySerializer(): Serializer {
 		return $this->getWikibaseServices()->getCompactEntitySerializer();
 	}
 
-	/**
-	 * @return DataValueDeserializer
-	 */
-	private function getDataValueDeserializer() {
+	private function getDataValueDeserializer(): DataValueDeserializer {
 		return new DataValueDeserializer( [
 			'string' => StringValue::class,
 			'unknown' => UnknownValue::class,
@@ -1134,10 +1053,7 @@ final class WikibaseClient {
 		] );
 	}
 
-	/**
-	 * @return OtherProjectsSidebarGeneratorFactory
-	 */
-	public function getOtherProjectsSidebarGeneratorFactory() {
+	public function getOtherProjectsSidebarGeneratorFactory(): OtherProjectsSidebarGeneratorFactory {
 		return new OtherProjectsSidebarGeneratorFactory(
 			$this->settings,
 			$this->getStore()->getSiteLinkLookup(),
@@ -1165,10 +1081,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return EntityDiffer
-	 */
-	private function getEntityDiffer() {
+	private function getEntityDiffer(): EntityDiffer {
 		$entityDiffer = new EntityDiffer();
 		foreach ( $this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_DIFFER_STRATEGY_BUILDER ) as $builder ) {
 			$entityDiffer->registerEntityDifferStrategy( call_user_func( $builder ) );
@@ -1176,10 +1089,7 @@ final class WikibaseClient {
 		return $entityDiffer;
 	}
 
-	/**
-	 * @return StatementGroupRendererFactory
-	 */
-	private function getStatementGroupRendererFactory() {
+	private function getStatementGroupRendererFactory(): StatementGroupRendererFactory {
 		return new StatementGroupRendererFactory(
 			$this->getPropertyLabelResolver(),
 			new SnaksFinder(),
@@ -1190,10 +1100,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return DataAccessSnakFormatterFactory
-	 */
-	public function getDataAccessSnakFormatterFactory() {
+	public function getDataAccessSnakFormatterFactory(): DataAccessSnakFormatterFactory {
 		return new DataAccessSnakFormatterFactory(
 			$this->getLanguageFallbackChainFactory(),
 			$this->getSnakFormatterFactory(),
@@ -1204,10 +1111,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return Runner
-	 */
-	public function getPropertyParserFunctionRunner() {
+	public function getPropertyParserFunctionRunner(): Runner {
 		return new Runner(
 			$this->getStatementGroupRendererFactory(),
 			$this->getStore()->getSiteLinkLookup(),
@@ -1218,10 +1122,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return OtherProjectsSitesProvider
-	 */
-	public function getOtherProjectsSitesProvider() {
+	public function getOtherProjectsSitesProvider(): OtherProjectsSitesProvider {
 		return new CachingOtherProjectsSitesProvider(
 			new OtherProjectsSitesGenerator(
 				$this->siteLookup,
@@ -1235,10 +1136,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return AffectedPagesFinder
-	 */
-	private function getAffectedPagesFinder() {
+	private function getAffectedPagesFinder(): AffectedPagesFinder {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
@@ -1246,10 +1144,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return ChangeHandler
-	 */
-	public function getChangeHandler() {
+	public function getChangeHandler(): ChangeHandler {
 		$logger = $this->getLogger();
 
 		$pageUpdater = new WikiPageUpdater(
@@ -1279,10 +1174,7 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @return RecentChangeFactory
-	 */
-	public function getRecentChangeFactory() {
+	public function getRecentChangeFactory(): RecentChangeFactory {
 		$repoSite = $this->siteLookup->getSite(
 			$this->getDatabaseDomainNameOfLocalRepo()
 		);
@@ -1321,7 +1213,7 @@ final class WikibaseClient {
 		throw new LogicException( 'No source configured: ' . $localRepoSourceName );
 	}
 
-	public function getWikibaseContentLanguages() {
+	public function getWikibaseContentLanguages(): WikibaseContentLanguages {
 		if ( $this->wikibaseContentLanguages === null ) {
 			$this->wikibaseContentLanguages = WikibaseContentLanguages::getDefaultInstance();
 		}
@@ -1331,17 +1223,12 @@ final class WikibaseClient {
 
 	/**
 	 * Get a ContentLanguages object holding the languages available for labels, descriptions and aliases.
-	 *
-	 * @return ContentLanguages
 	 */
-	public function getTermsLanguages() {
+	public function getTermsLanguages(): ContentLanguages {
 		return $this->getWikibaseContentLanguages()->getContentLanguages( WikibaseContentLanguages::CONTEXT_TERM );
 	}
 
-	/**
-	 * @return RestrictedEntityLookup
-	 */
-	public function getRestrictedEntityLookup() {
+	public function getRestrictedEntityLookup(): RestrictedEntityLookup {
 		if ( $this->restrictedEntityLookup === null ) {
 			$disabledEntityTypesEntityLookup = new DisabledEntityTypesEntityLookup(
 				$this->getEntityLookup(),
@@ -1356,10 +1243,7 @@ final class WikibaseClient {
 		return $this->restrictedEntityLookup;
 	}
 
-	/**
-	 * @return PropertyOrderProvider
-	 */
-	public function getPropertyOrderProvider() {
+	public function getPropertyOrderProvider(): PropertyOrderProvider {
 		if ( $this->propertyOrderProvider === null ) {
 			$title = Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' );
 			$innerProvider = new WikiPagePropertyOrderProvider( $title );
@@ -1385,19 +1269,11 @@ final class WikibaseClient {
 		return $this->propertyOrderProvider;
 	}
 
-	/**
-	 * @return EntityNamespaceLookup
-	 */
-	public function getEntityNamespaceLookup() {
+	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
 		return $this->getWikibaseServices()->getEntityNamespaceLookup();
 	}
 
-	/**
-	 * @param Language $language
-	 *
-	 * @return TermLanguageFallbackChain
-	 */
-	public function getDataAccessLanguageFallbackChain( Language $language ) {
+	public function getDataAccessLanguageFallbackChain( Language $language ): TermLanguageFallbackChain {
 		return $this->getLanguageFallbackChainFactory()->newFromLanguage(
 			$language,
 			LanguageFallbackChainFactory::FALLBACK_ALL
@@ -1406,9 +1282,8 @@ final class WikibaseClient {
 
 	/**
 	 * @fixme this is duplicated in WikibaseRepo...
-	 * @return CacheInterface
 	 */
-	public function getFormatterCache() {
+	public function getFormatterCache(): CacheInterface {
 		global $wgSecretKey;
 
 		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
@@ -1441,7 +1316,7 @@ final class WikibaseClient {
 		return $cache;
 	}
 
-	public function getEntityIdLookup() {
+	public function getEntityIdLookup(): EntityIdLookup {
 		if ( $this->entityIdLookup === null ) {
 			$this->entityIdLookup = new ByTypeDispatchingEntityIdLookup(
 				$this->entityTypeDefinitions->get( EntityTypeDefinitions::CONTENT_MODEL_ID ),
@@ -1456,10 +1331,7 @@ final class WikibaseClient {
 		return $this->entityIdLookup;
 	}
 
-	/**
-	 * @return DescriptionLookup
-	 */
-	public function getDescriptionLookup() {
+	public function getDescriptionLookup(): DescriptionLookup {
 		if ( $this->descriptionLookup === null ) {
 			$this->descriptionLookup = new DescriptionLookup(
 				$this->getEntityIdLookup(),
