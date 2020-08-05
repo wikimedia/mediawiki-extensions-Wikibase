@@ -41,9 +41,10 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 		array $result,
 		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
 	) {
+		$targetTitle = Title::makeTitle( NS_MAIN, 'Nyan Cat' );
 		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
 			'enwiki',
-			$this->getSiteLinkForDisplayLookup(),
+			$this->getSiteLinkForDisplayLookup( 'getSiteLinksForPageTitle', $targetTitle ),
 			$this->getSiteLookup(),
 			$sidebarLinkBadgeDisplay,
 			$siteIdsToOutput
@@ -51,7 +52,30 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 
 		$this->assertEquals(
 			$result,
-			$otherProjectSidebarGenerator->buildProjectLinkSidebar( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+			$otherProjectSidebarGenerator->buildProjectLinkSidebar( $targetTitle )
+		);
+	}
+
+	/**
+	 * @dataProvider projectLinkSidebarProvider
+	 */
+	public function testBuildProjectLinksSidebarFromItemId(
+		array $siteIdsToOutput,
+		array $result,
+		SidebarLinkBadgeDisplay $sidebarLinkBadgeDisplay
+	) {
+		$itemId = new ItemId( 'Q1' );
+		$otherProjectSidebarGenerator = new OtherProjectsSidebarGenerator(
+			'enwiki',
+			$this->getSiteLinkForDisplayLookup( 'getSiteLinksForItemId', $itemId ),
+			$this->getSiteLookup(),
+			$sidebarLinkBadgeDisplay,
+			$siteIdsToOutput
+		);
+
+		$this->assertEquals(
+			$result,
+			$otherProjectSidebarGenerator->buildProjectLinkSidebarFromItemId( $itemId )
 		);
 	}
 
@@ -126,11 +150,11 @@ class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
 	/**
 	 * @return SiteLinksForDisplayLookup
 	 */
-	private function getSiteLinkForDisplayLookup() {
+	private function getSiteLinkForDisplayLookup( string $expectedMethod, $expectedArgument ) {
 		$lookup = $this->createMock( SiteLinksForDisplayLookup::class );
 		$lookup->expects( $this->any() )
-			->method( 'getSiteLinksForPageTitle' )
-			->with( Title::makeTitle( NS_MAIN, 'Nyan Cat' ) )
+			->method( $expectedMethod )
+			->with( $expectedArgument )
 			->will( $this->returnValue( [
 				'enwikiquote' => new SiteLink( 'enwikiquote', 'Nyan Cat' ),
 				'enwiki' => new SiteLink( 'enwiki', 'Nyan Cat', [ new ItemId( self::BADGE_ITEM_ID ) ] ),
