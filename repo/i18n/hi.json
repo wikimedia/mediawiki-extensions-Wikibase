@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abijeet Patro",
 			"Goelujjwal",
 			"Innocentbunny",
 			"Jayprakash12345",
@@ -170,5 +171,6 @@
 	"content-model-wikibase-query": "विकिबैस क्वारी",
 	"action-property-create": "गुण निर्मित करें",
 	"right-property-create": "गुण निर्मित करें",
-	"wikibase-pageinfo-subscription-none": "कोई नहीं"
+	"wikibase-pageinfo-subscription-none": "कोई नहीं",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "रद्द करें"
 }

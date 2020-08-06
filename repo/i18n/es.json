@@ -450,5 +450,5 @@
 	"wikibase-federated-properties-leaving-site-notice-continue": "Continua al fuente Wiki",
 	"wikibase-federated-properties-leaving-site-notice-notice": "Esto es propiedad nacional. Sera redirigido a $ 1 para ver a los detalles",
 	"wikibase-federated-properties-leaving-site-notice-header": "Dejar Wikibase local",
-	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje"
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo"
 }
