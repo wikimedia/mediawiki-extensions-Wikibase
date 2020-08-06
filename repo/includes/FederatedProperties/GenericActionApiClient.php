@@ -17,27 +17,27 @@ use Psr\Log\LoggerInterface;
  */
 class GenericActionApiClient {
 
-	/*
+	/**
 	 * @var HttpRequestFactory
 	 */
 	private $requestFactory;
 
-	/*
+	/**
 	 * @var string
 	 */
 	private $repoActionApiUrl;
 
-	/*
+	/**
 	 * @var LoggerInterface
 	 */
 	private $logger;
 
-	/*
+	/**
 	 * @var string
 	 */
 	private $userAgent;
 
-	/*
+	/**
 	 * @var string
 	 */
 	private $userAgentServerName;

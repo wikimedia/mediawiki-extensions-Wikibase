@@ -108,7 +108,7 @@ class DispatchingValueFormatter implements ValueFormatter, TypedValueFormatter {
 	 * @throws FormattingException if no appropriate formatter is found
 	 */
 	protected function getFormatter( $dataValueType, $dataTypeId = null ) {
-		/* @var ValueFormatter */
+		/** @var ValueFormatter */
 		$formatter = null;
 
 		if ( $dataTypeId !== null ) {

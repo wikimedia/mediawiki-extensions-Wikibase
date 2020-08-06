@@ -155,7 +155,7 @@ class EntityDiffChangedAspectsFactory {
 				$statement = $diffOp->getOldValue();
 			} elseif ( $diffOp instanceof DiffOpChange ) {
 				$statement = $diffOp->getOldValue();
-				/* @var $newStatement Statement */
+				/** @var $newStatement Statement */
 				$newStatement = $diffOp->getNewValue();
 
 				$changedStatements[] = $newStatement->getPropertyId()->getSerialization();
