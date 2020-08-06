@@ -194,6 +194,8 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		int $batchSize = 3,
 		bool $propagateChangeVisibility = true
 	) {
+		$this->markTestSkipped( 'Disabled until we can fix it - T259785' );
+
 		$wikiIds = [ 'dummywiki', 'another_wiki' ];
 		$jobQueueGroupFactoryCallCount = 0;
 
