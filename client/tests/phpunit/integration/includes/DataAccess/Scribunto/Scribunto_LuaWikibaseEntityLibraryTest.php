@@ -293,7 +293,7 @@ class Scribunto_LuaWikibaseEntityLibraryTest extends Scribunto_LuaWikibaseLibrar
 	 * @return Scribunto_LuaWikibaseEntityLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
-		/* @var $engine Scribunto_LuaEngine */
+		/** @var $engine Scribunto_LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 

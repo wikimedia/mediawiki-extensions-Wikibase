@@ -513,7 +513,7 @@ namespace CirrusSearch\Search {
 		public function setResultsType( ResultsType $resultsType ) {
 		}
 
-		/*
+		/**
 		 * @param string $profileContext
 		 */
 		public function setProfileContext( $profileContext ) {

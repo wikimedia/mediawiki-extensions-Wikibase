@@ -65,7 +65,7 @@ class PropertyDataTypeChanger {
 			throw new StorageException( "Could not load property: " . $propertyId->getSerialization() );
 		}
 
-		/* @var Property $property */
+		/** @var Property $property */
 		$property = $entityRevision->getEntity();
 		'@phan-var Property $property';
 
