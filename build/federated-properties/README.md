@@ -14,9 +14,11 @@ You need to be in possession of an SSH private key for which there is a associat
 
 ### Inventory
 
-The file `inventory.yml` contains a set of two differrent hosts, which can be used as targets for the test system setup:
- * `wikidata-federated-properties.wikidata-dev.eqiad.wmflabs` - the project's official cloud VPS test instance on https://horizon.wikimedia.org/
+The file `inventory.yml` contains a set of hosts, which can be used as targets for the test system setup:
  * `wikibase-federated-properties.vm` - a virtual machine on your computer
+ * `wikidata-federated-properties.wikidata-dev.eqiad.wmflabs` - the project's official cloud VPS test instance
+ * `fedprops-euspecies.wikidata-dev.eqiad.wmflabs` - a demo system created in https://phabricator.wikimedia.org/T256457
+ * `fedprops-opennext.wikidata-dev.eqiad.wmflabs` - a demo system created in https://phabricator.wikimedia.org/T256457
 
 ### Use your own test system on a VM
 #### Create
