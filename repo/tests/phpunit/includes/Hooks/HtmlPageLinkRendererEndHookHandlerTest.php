@@ -13,10 +13,10 @@ use SpecialPage;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Lib\ContentLanguages;
@@ -53,6 +53,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 	const ITEM_FOREIGN_NO_DATA = 'foo:Q22';
 	const ITEM_FOREIGN_NO_PREFIX = 'Q2';
 	const ITEM_FOREIGN_NO_DATA_NO_PREFIX = 'Q22';
+	const PROPERTY_WITH_LABEL = 'P1';
 
 	const FOREIGN_REPO_PREFIX = 'foo';
 	const UNKNOWN_FOREIGN_REPO = 'bar';
@@ -132,6 +133,24 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		$this->assertStringContainsString( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
 
 		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
+	}
+
+	/**
+	 * @dataProvider validContextProvider
+	 */
+	public function testDoHtmlPageLinkRendererBegin_federatedPropertiesEnabled( RequestContext $context ) {
+		$handler = $this->newInstance( 'foo', false, true, Property::ENTITY_TYPE );
+
+		$title = Title::makeTitle( WB_NS_PROPERTY, self::PROPERTY_WITH_LABEL );
+		$text = $title->getFullText();
+		$customAttribs = [];
+
+		$ret = $handler->doHtmlPageLinkRendererEnd(
+			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
+
+		$this->assertTrue( $ret );
+		$this->assertStringContainsString( 'fedprop', $customAttribs['class'] );
+		$this->assertContains( 'wikibase.federatedPropertiesLeavingSiteNotice', $context->getOutput()->getModules() );
 	}
 
 	public function invalidContextProvider() {
@@ -486,6 +505,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 						return [ 'en' => self::DUMMY_LABEL_FOREIGN_ITEM ];
 					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
 						return [];
+					case self::PROPERTY_WITH_LABEL:
+						return [ 'en' => self::DUMMY_LABEL ];
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
 				}
@@ -504,6 +525,8 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 						return [ 'en' => self::DUMMY_DESCRIPTION_FOREIGN_ITEM ];
 					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
 						return [];
+					case self::PROPERTY_WITH_LABEL:
+						return [];
 					default:
 						throw new StorageException( "Unexpected entity id $id" );
 				}
@@ -515,7 +538,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 	private function getEntityNamespaceLookup() {
 		$entityNamespaces = [
 			'item' => 0,
-			'property' => 102
+			'property' => 122
 		];
 
 		return new EntityNamespaceLookup( $entityNamespaces );
@@ -540,7 +563,12 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		return MediaWikiServices::getInstance()->getLinkRenderer();
 	}
 
-	private function newInstance( $titleText = "foo", $isDeleted = false ) {
+	private function newInstance(
+		$titleText = "foo",
+		$isDeleted = false,
+		$federatedPropertiesEnabled = false,
+		$entityType = Item::ENTITY_TYPE
+	) {
 		$stubContentLanguages = $this->createStub( ContentLanguages::class );
 		$stubContentLanguages->method( 'hasLanguage' )
 			->willReturn( true );
@@ -555,8 +583,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		$languageFallbackChainFactory->expects( $this->any() )
 			->method( 'newFromContext' )
 			->willReturn( $languageFallback );
-		$entityIdParser = new ItemIdParser();
-
+		$entityIdParser = new BasicEntityIdParser();
 		return new HtmlPageLinkRendererEndHookHandler(
 			$this->getEntityExistenceChecker( $isDeleted ),
 			$entityIdParser,
@@ -572,10 +599,11 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 			new EntityLinkTargetEntityIdLookup(
 				$this->getEntityNamespaceLookup(),
 				$entityIdParser,
-				$this->newMockEntitySourceDefinitions(),
+				$this->newMockEntitySourceDefinitions( $entityType ),
 				$this->newMockEntitySource()
 			),
-			'http://source.wiki/script/'
+			'http://source.wiki/script/',
+			$federatedPropertiesEnabled
 		);
 	}
 
@@ -584,6 +612,9 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 
 		return new EntityLinkFormatterFactory( Language::factory( 'en' ), $titleTextLookup, [
 			'item' => function( $language ) use ( $titleTextLookup ) {
+				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
+			},
+			'property' => function( $language ) use ( $titleTextLookup ) {
 				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
 			},
 		] );
@@ -608,7 +639,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		return $entityTitleTextLookup;
 	}
 
-	private function newMockEntitySourceDefinitions() {
+	private function newMockEntitySourceDefinitions( $entityType ) {
 		$foreignItemSource = $this->createMock( EntitySource::class );
 		$foreignItemSource->expects( $this->any() )
 			->method( 'getInterwikiPrefix' )
@@ -617,7 +648,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
 		$sourceDefs->expects( $this->any() )
 			->method( 'getSourceForEntityType' )
-			->with( Item::ENTITY_TYPE )
+			->with( $entityType )
 			->willReturn( $foreignItemSource );
 
 		return $sourceDefs;
