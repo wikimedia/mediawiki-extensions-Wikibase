@@ -107,6 +107,11 @@
           command: install
           working_dir: "{{ MW_PATH }}"
 
+    - name: Run 'composer update' on mediawiki core
+      composer:
+          command: update
+          working_dir: "{{ MW_PATH }}"
+
     - name: Ensure docker is started
       systemd:
           state: started
