@@ -589,7 +589,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 	 * @return Scribunto_LuaWikibaseLibrary
 	 */
 	private function newScribuntoLuaWikibaseLibrary( &$cacheSplit = false, Language $userLang = null ) {
-		/* @var $engine Scribunto_LuaEngine */
+		/** @var $engine Scribunto_LuaEngine */
 		$engine = $this->getEngine();
 		$engine->load();
 

@@ -38,11 +38,11 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 	 */
 	private static $hasSetup;
 
-	/* @var ItemId */
+	/** @var ItemId */
 	private static $gaItemId;
-	/* @var ItemId */
+	/** @var ItemId */
 	private static $faItemId;
-	/* @var ItemId */
+	/** @var ItemId */
 	private static $otherItemId;
 
 	public function provideData() {

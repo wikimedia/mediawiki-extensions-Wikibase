@@ -18,7 +18,7 @@ class ItemTermsRebuilder {
 
 	/** @var ItemTermStoreWriter */
 	private $itemTermStoreWriter;
-	/* @var iterable */
+	/** @var iterable */
 	private $itemIds;
 	/** @var MessageReporter */
 	private $progressReporter;
