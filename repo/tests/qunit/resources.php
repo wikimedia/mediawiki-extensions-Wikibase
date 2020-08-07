@@ -48,50 +48,10 @@ return call_user_func( function() {
 			'remoteExtPath' => 'Wikibase/repo',
 		],
 
-		'wikibase.experts.Item.tests' => $moduleBase + [
-			'scripts' => [
-				'experts/Item.tests.js',
-			],
-			'dependencies' => [
-				'jquery.valueview.tests.testExpert',
-				'wikibase.experts.Item',
-			],
-		],
-
-		'wikibase.experts.Property.tests' => $moduleBase + [
-			'scripts' => [
-				'experts/Property.tests.js',
-			],
-			'dependencies' => [
-				'jquery.valueview.tests.testExpert',
-				'wikibase.experts.Property',
-			],
-		],
-
-		'wikibase.EntityInitializer.tests' => $moduleBase + [
-			'scripts' => [
-				'wikibase.EntityInitializer.tests.js',
-			],
-			'dependencies' => [
-				'wikibase.EntityInitializer'
-			],
-		],
-
 		'wikibase.PropertyDataTypeStore.tests' => $packageFilesModuleBase + [
 			'packageFiles' => [
 				'tests/qunit/wikibase.PropertyDataTypeStore.tests.js',
 				'resources/wikibase.PropertyDataTypeStore.js',
-			],
-		],
-
-		'wikibase.sites.tests' => $moduleBase + [
-			'scripts' => [
-				'wikibase.sites.tests.js',
-			],
-			'dependencies' => [
-				'wikibase',
-				'wikibase.Site',
-				'wikibase.sites',
 			],
 		],
 	];
