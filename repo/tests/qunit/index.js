@@ -75,4 +75,15 @@
 	require( './dataTypes/DataType.tests.js' );
 	require( './dataTypes/DataTypeStore.tests.js' );
 	require( './wikibase.PropertyDataTypeStore.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/view/ViewFactoryFactory.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/store/store.CachingEntityStore.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/store/store.CombiningEntityStore.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/entityIdFormatter/DataValueBasedEntityIdHtmlFormatter.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/entityIdFormatter/DataValueBasedEntityIdPlainFormatter.tests.js' );
+	require( '../../../view/tests/qunit/jquery/jquery.util.EventSingletonManager.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/wikibase.ValueViewBuilder.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/view/ViewFactory.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/view/ToolbarViewController.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/utilities/GuidGenerator.tests.js' );
+	require( '../../../view/tests/qunit/wikibase/view/ToolbarFactory.tests.js' );
 }() );
