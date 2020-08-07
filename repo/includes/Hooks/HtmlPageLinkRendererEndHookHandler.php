@@ -345,7 +345,23 @@ class HtmlPageLinkRendererEndHookHandler {
 		return null;
 	}
 
+	/**
+	 * Should be given an already confirmed valid interwiki link that uses Special:EntityPage
+	 * to link to an entity on a remote Wikibase
+	 */
 	private function extractForeignIdString( LinkTarget $linkTarget ): ?string {
+		return $this->extractForeignIdStringMainNs( $linkTarget ) ?: $this->extractForeignIdStringSpecialNs( $linkTarget );
+	}
+
+	private function extractForeignIdStringMainNs( LinkTarget $linkTarget ): ?string {
+		if ( $linkTarget->getNamespace() !== NS_MAIN ) {
+			return null;
+		}
+
+		return $this->extractForeignIdStringSpecialNs( Title::newFromText( $linkTarget->getText() ) );
+	}
+
+	private function extractForeignIdStringSpecialNs( LinkTarget $linkTarget ): ?string {
 		// FIXME: This encodes knowledge from EntityContentFactory::getTitleForId
 		$prefix = 'EntityPage/';
 		$prefixLength = strlen( $prefix );
