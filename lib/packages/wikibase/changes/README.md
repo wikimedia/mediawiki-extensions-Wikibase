@@ -15,6 +15,6 @@ please submit a change to the Wikibase project on [Gerrit][].
 
 [change propagation]: https://doc.wikimedia.org/Wikibase/master/php/md_docs_topics_change-propagation.html
 [Wikibase]: https://wikiba.se/
-[lib/packages/wikibase/changes]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/master/lib/packages/wikibase/changes/
+[lib/packages/wikibase/changes/]: https://gerrit.wikimedia.org/g/mediawiki/extensions/Wikibase/+/master/lib/packages/wikibase/changes/
 [wikimedia/wikibase-changes]: https://github.com/wikimedia/wikibase-changes
 [Gerrit]: https://www.mediawiki.org/wiki/Special:MyLanguage/Gerrit
