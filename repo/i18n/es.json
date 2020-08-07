@@ -6,6 +6,7 @@
 			"Armando-Martin",
 			"Benfutbol10",
 			"Chocolate con galleta",
+			"Ciencia Al Poder",
 			"Csbotero",
 			"Dalton2",
 			"DannyS712",
@@ -448,7 +449,7 @@
 	"wikibase-federated-properties-search-api-error-message": "Las propiedades no están disponibles por ahora.",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Cancelar",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Continua al fuente Wiki",
-	"wikibase-federated-properties-leaving-site-notice-notice": "Esto es propiedad nacional. Sera redirigido a $ 1 para ver a los detalles",
+	"wikibase-federated-properties-leaving-site-notice-notice": "Esta es propiedad federada. Serás redirigido a $1 para ver a los detalles.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Dejar Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo"
 }

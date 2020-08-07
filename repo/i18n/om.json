@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Oromoo",
 			"Tumsaa"
 		]
 	},
+	"wikibase-edit": "gulaali",
 	"wikibase-entitytermsforlanguagelistview-more": "Afaanota dabalataa",
 	"wikibase-itemdisambiguation-lookup-language": "Lakkaddaa Afaanii",
 	"wikibase-modifyterm-language": "Lakkaddaa Afaanii"

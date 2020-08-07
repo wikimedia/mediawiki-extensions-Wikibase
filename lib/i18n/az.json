@@ -3,13 +3,17 @@
 		"authors": [
 			"Dağlı95",
 			"Eminn",
+			"Toghrul Rahimli",
 			"Wertuose"
 		]
 	},
 	"wikibase-error-unexpected": "Xəta: $1",
 	"wikibase-sitelinks-wikipedia": "Vikipediya",
+	"wikibase-snakview-snaktypeselector-somevalue": "naməlum dəyər",
+	"wikibase-snakview-snaktypeselector-novalue": "dəyər yoxdur",
 	"datatypes-type-wikibase-item": "Maddə",
 	"wikibase-entity-summary-wbsetitem": "Yeni müddəa yaradıldı",
+	"wikibase-entity-summary-wbsetqualifier-add": "Əlavə edilmiş {{PLURAL:$1|dəyər|dəyərlər}}",
 	"wikibase-item-summary-wbcreate-new": "Yeni müddəa yaradıldı",
 	"wikibase-item-summary-wbeditentity": "Yeni müddəa yaradıldı",
 	"wikibase-item-summary-wbeditentity-create": "Yeni müddəa yaradıldı"
