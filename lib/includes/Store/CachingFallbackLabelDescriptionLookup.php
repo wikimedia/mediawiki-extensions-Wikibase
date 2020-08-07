@@ -87,6 +87,10 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	 */
 	public function getDescription( EntityId $entityId ) {
 		$languageCodes = $this->termLanguageFallbackChain->getFetchLanguageCodes();
+		if ( !$languageCodes ) {
+			// Can happen when the current interface language is not a valid term language, e.g. "de-formal"
+			return null;
+		}
 
 		$languageCode = $languageCodes[0];
 		$description = $this->getTerm( $entityId, $languageCode, self::DESCRIPTION );
@@ -102,6 +106,11 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	 */
 	public function getLabel( EntityId $entityId ) {
 		$languageCodes = $this->termLanguageFallbackChain->getFetchLanguageCodes();
+		if ( !$languageCodes ) {
+			// Can happen when the current interface language is not a valid term language, e.g. "de-formal"
+			return null;
+		}
+
 		$languageCode = $languageCodes[0];
 		$label = $this->getTerm( $entityId, $languageCode, self::LABEL );
 

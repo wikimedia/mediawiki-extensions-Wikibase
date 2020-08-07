@@ -163,6 +163,26 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ldLookup->getLabel()->shouldNotHaveBeenCalled();
 	}
 
+	public function testGivenEmptyLanguageCodes_getLabelReturnsNull() {
+		$itemId = new ItemId( 'Q123' );
+		$ttlInSeconds = 10;
+
+		$fallbackChain = $this->prophesize( TermLanguageFallbackChain::class );
+		$fallbackChain->getFetchLanguageCodes()->willReturn( [] );
+		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
+
+		$lookup = new CachingFallbackLabelDescriptionLookup(
+			$this->cache->reveal(),
+			$revLookup->reveal(),
+			$this->prophesize( FallbackLabelDescriptionLookup::class )->reveal(),
+			$fallbackChain->reveal(),
+			$ttlInSeconds
+		);
+
+		$this->assertNull( $lookup->getLabel( $itemId ) );
+		$revLookup->lookupLatestRevisionResolvingRedirect()->shouldNotHaveBeenCalled();
+	}
+
 	public function testGivenNoDescriptionInCache_getDescriptionPassesRequestToInnerLookup() {
 		$itemId = new ItemId( 'Q123' );
 
@@ -281,6 +301,26 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$this->assertNull( $lookup->getDescription( $itemId ) );
 
 		$ldLookup->getDescription()->shouldNotHaveBeenCalled();
+	}
+
+	public function testGivenEmptyLanguageCodes_getDescriptionReturnsNull() {
+		$itemId = new ItemId( 'Q123' );
+		$ttlInSeconds = 10;
+
+		$fallbackChain = $this->prophesize( TermLanguageFallbackChain::class );
+		$fallbackChain->getFetchLanguageCodes()->willReturn( [] );
+		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
+
+		$lookup = new CachingFallbackLabelDescriptionLookup(
+			$this->cache->reveal(),
+			$revLookup->reveal(),
+			$this->prophesize( FallbackLabelDescriptionLookup::class )->reveal(),
+			$fallbackChain->reveal(),
+			$ttlInSeconds
+		);
+
+		$this->assertNull( $lookup->getDescription( $itemId ) );
+		$revLookup->lookupLatestRevisionResolvingRedirect()->shouldNotHaveBeenCalled();
 	}
 
 	public function testNoRevisionFoundForTheEntity_ReturnsNull() {
