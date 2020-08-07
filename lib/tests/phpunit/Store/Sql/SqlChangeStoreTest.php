@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
-use RecentChange;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -41,21 +40,22 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		$changeWithDiff->setField( 'time', $time );
 		$changeWithDiff->setCompactDiff( ( new EntityDiffChangedAspectsFactory() )->newEmpty() );
 
-		$rc = new RecentChange();
-		$rc->setAttribs( [
-			'rc_user' => 34,
-			'rc_user_text' => 'BlackMagicIsEvil',
-			'rc_timestamp' => $time,
-			'rc_bot' => 0,
-			'rc_cur_id' => 2354,
-			'rc_this_oldid' => 343,
-			'rc_last_oldid' => 897,
-			'rc_comment_text' => 'Fake data!',
-			'rc_comment_data' => null
-		] );
-
 		$changeWithDataFromRC = $factory->newForEntity( EntityChange::REMOVE, new ItemId( 'Q123' ) );
-		$changeWithDataFromRC->setMetadataFromRC( $rc, 9 );
+		// the fields and metadata mirror RepoEntityChange::setMetadataFromRC()
+		$changeWithDataFromRC->setFields( [
+			'revision_id' => 343,
+			'time' => $time,
+			'user_id' => 34,
+		] );
+		$changeWithDataFromRC->setMetadata( [
+			'bot' => 0,
+			'page_id' => 2354,
+			'rev_id' => 343,
+			'parent_id' => 897,
+			'comment' => 'Fake data!',
+			'user_text' => 'BlackMagicIsEvil',
+			'central_user_id' => 9,
+		] );
 
 		return [
 			'Simple change' => [
