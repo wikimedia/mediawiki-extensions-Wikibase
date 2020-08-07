@@ -102,7 +102,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 			'http://www.wikidata.org/entity/',
 			'fpwd',
 			'fpwd',
-			'wd'
+			'wikidata'
 		);
 
 		return new EntitySourceDefinitions( [ $newLocal, $fedPropsSource ], $entityTypeDefinitions );

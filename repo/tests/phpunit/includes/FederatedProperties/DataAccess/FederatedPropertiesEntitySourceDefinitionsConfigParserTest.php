@@ -65,7 +65,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 		$this->assertSame( 'http://www.wikidata.org/entity/', $propertySource->getConceptBaseUri() );
 		$this->assertSame( 'fpwd', $propertySource->getRdfPredicateNamespacePrefix() );
 		$this->assertSame( 'fpwd', $propertySource->getRdfNodeNamespacePrefix() );
-		$this->assertSame( 'wd', $propertySource->getInterwikiPrefix() );
+		$this->assertSame( 'wikidata', $propertySource->getInterwikiPrefix() );
 		$this->assertSame( [ 'property' => 120 ], $propertySource->getEntityNamespaceIds() );
 		$this->assertSame( [ 'property' => 'main' ], $propertySource->getEntitySlotNames() );
 		$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
@@ -83,7 +83,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 			$namespaceDefinition,
 			'http://localhost/entity',
 			'wd',
-			'wd',
+			'wikidata',
 			''
 		);
 	}
