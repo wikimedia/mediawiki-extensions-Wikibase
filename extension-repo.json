@@ -350,7 +350,15 @@
 			"repo/tests/qunit/wikibase.sites.tests.js",
 			"repo/tests/qunit/wikibase.EntityInitializer.tests.js",
 			"repo/tests/qunit/experts/Property.tests.js",
-			"repo/tests/qunit/experts/Item.tests.js"
+			"repo/tests/qunit/experts/Item.tests.js",
+			"repo/tests/qunit/jquery.wikibase/jquery.wikibase.entitysearch.tests.js",
+			"repo/resources/jquery.wikibase/jquery.wikibase.entitysearch.js",
+			"repo/tests/qunit/dataTypes/DataType.tests.js",
+			"repo/resources/dataTypes/DataType.js",
+			"repo/tests/qunit/dataTypes/DataTypeStore.tests.js",
+			"repo/resources/dataTypes/DataTypeStore.js",
+			"repo/tests/qunit/wikibase.PropertyDataTypeStore.tests.js",
+			"repo/resources/wikibase.PropertyDataTypeStore.js"
 		],
 		"dependencies": [
 			"wikibase.EntityInitializer",
@@ -465,10 +473,7 @@
 			"LibHooks",
 			"ViewHooks"
 		],
-		"ResourceLoaderTestModules": [
-			"\\Wikibase\\Repo\\RepoHooks::registerQUnitTests",
-			"ViewHooks"
-		],
+		"ResourceLoaderTestModules": "ViewHooks",
 		"RevisionFromEditComplete": "\\Wikibase\\Repo\\RepoHooks::onRevisionFromEditComplete",
 		"SetupAfterCache": "\\Wikibase\\Repo\\RepoHooks::onSetupAfterCache",
 		"ShowSearchHit": "ShowSearchHit",
