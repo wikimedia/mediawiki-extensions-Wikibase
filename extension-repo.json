@@ -358,7 +358,6 @@
 			"dataValues.values",
 			"jquery.util.getDirectionality",
 			"jquery.valueview.Expert",
-			"jquery.valueview.tests.testExpert",
 			"jquery.wikibase.entityselector",
 			"jquery.wikibase.wbtooltip",
 			"util.inherit",
@@ -371,11 +370,9 @@
 			"wikibase.getLanguageNameByCode",
 			"wikibase.serialization",
 			"wikibase.templates",
-			"wikibase.tests",
 			"wikibase.utilities.ClaimGuidGenerator",
 			"wikibase.ui.entityViewInit",
 			"wikibase.view.ControllerViewFactory",
-			"wikibase.view.tests.getMockListItemAdapter",
 			"wikibase.WikibaseContentLanguages",
 			"wikibase.getUserLanguages"
 		]

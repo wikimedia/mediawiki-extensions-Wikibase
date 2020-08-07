@@ -79,7 +79,6 @@ final class ViewHooks implements
 	public function onResourceLoaderTestModules( array &$testModules, ResourceLoader $rl ): void {
 		$testModules['qunit'] = array_merge(
 			$testModules['qunit'],
-			require __DIR__ . '/../lib/resources.test.php',
 			require __DIR__ . '/../tests/qunit/resources.php'
 		);
 	}

@@ -14,22 +14,6 @@ $packageFilesModuleBase = [
 ];
 
 return [
-	'wikibase.view.tests.getMockListItemAdapter' => $moduleBase + [
-		'scripts' => 'getMockListItemAdapter.js',
-		'dependencies' => [
-			'wikibase.view.ControllerViewFactory',
-			'wikibase.tests',
-		]
-	],
-	'wikibase.tests' => $moduleBase + [
-		'scripts' => [
-			'wikibase/wikibase.tests.js',
-		],
-		'dependencies' => [
-			'wikibase',
-		],
-	],
-
 	'wikibase.view.tests.ViewFactoryFactory' => $packageFilesModuleBase + [
 		'packageFiles' => [
 			'tests/qunit/wikibase/view/ViewFactoryFactory.tests.js',
