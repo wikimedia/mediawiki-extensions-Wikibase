@@ -18,6 +18,7 @@ jobs:
           targetRepo: wikibase-changes
           targetBranch: main
           filterArguments: >-
+            --force
             --path=lib/includes/changes/
             --path=lib/includes/Changes/
             --path=lib/tests/phpunit/changes/
