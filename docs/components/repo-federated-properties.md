@@ -30,7 +30,7 @@ $wgWBRepoSettings['entitySources'] = [
 		'entityNamespaces' => [ 'property' => 122 ],
 		'repoDatabase' => false,
 		'baseUri' => 'http://wikidata.beta.wmflabs.org/entity/',
-		'interwikiPrefix' => 'wd',
+		'interwikiPrefix' => 'wikidatabeta',
 		'rdfNodeNamespacePrefix' => 'fpwd',
 		'rdfPredicateNamespacePrefix' => 'fpwd',
 	],
@@ -40,7 +40,9 @@ $wgWBRepoSettings['entitySources'] = [
 The two configurations contain separate sources for the local `item` and federated `property`. The `entityNamespaces` for these entities must always match the namespace mapping that exists on the local wiki.
 So if the local Property namespace is 122, and your federating to wikidata.org with a Property namespace of 120, your `entityNamespaces` value for Properties would be 122.
 
-The `interwikiPrefix` is a configuration to support links between MediaWiki instances. This also depend on the configuration on each instance and should ideally point to a wiki defined in the `interwiki` table  For more information on interwiki links see https://www.mediawiki.org/wiki/Manual:Interwiki.
+The `interwikiPrefix` is a configuration to support links between MediaWiki instances. This also depend on the configuration on each instance and should point to a wiki defined in the `interwiki` table  For more information on interwiki links see https://www.mediawiki.org/wiki/Manual:Interwiki.
+If this is not done various links will not be correctly rendered.
+
 ## Privacy notice
 
 Once you enable Federated Properties in your Wikibase installation, all requests to the federation source Wiki will include an anonymized unique identifier as the useragent. This will be used only to detect abnormal traffic to the source Wiki for the purposes of preventing abuse.
