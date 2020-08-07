@@ -163,7 +163,7 @@ class WikibaseSettings {
 		array $falseMeansRemove
 	): array {
 		if ( in_array( $key, $twoDArrayMerge ) ) {
-			return wfArrayPlus2d( $defaultValue, $value );
+			return wfArrayPlus2d( $value, $defaultValue );
 		}
 		if ( in_array( $key, $overrideArrays ) ) {
 			return $value;

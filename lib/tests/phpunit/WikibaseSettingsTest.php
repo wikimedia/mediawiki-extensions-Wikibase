@@ -141,8 +141,14 @@ class WikibaseSettingsTest extends \PHPUnit\Framework\TestCase {
 
 		$default = [ 'key' => [ 'a' => [ 'a' => 'A' ], 'b' => [ 'B' ] ] ];
 		$custom['key']['a']['b'] = 'Ä';
-		$expected = [ 'key' => [ 'a' => [ 'a' => 'A', 'b' => 'Ä' ], 'b' => [ 'B' ] ] ];
-		yield "['key']['a'], 2d merge" => [ $default, $custom, $expected, [], [ 'key' ], [] ];
+		$expected = [ 'key' => [ 'a' => [ 'b' => 'Ä', 'a' => 'A' ], 'b' => [ 'B' ] ] ];
+		yield "['key']['a'], 2d merge (add value)" => [ $default, $custom, $expected, [], [ 'key' ], [] ];
+		unset( $custom );
+
+		$default = [ 'key' => [ 'a' => [ 'a' => 'A' ], 'b' => [ 'B' ] ] ];
+		$custom['key']['a']['a'] = 'C';
+		$expected = [ 'key' => [ 'a' => [ 'a' => 'C' ], 'b' => [ 'B' ] ] ];
+		yield "['key']['a'], 2d merge (update value)" => [ $default, $custom, $expected, [], [ 'key' ], [] ];
 		unset( $custom );
 	}
 
