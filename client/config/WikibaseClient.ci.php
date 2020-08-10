@@ -15,6 +15,9 @@
  * @license GPL-2.0-or-later
  */
 
+// enable data access in user language, for LuaWikibaseIntegrationTest
+$wgWBClientSettings['allowDataAccessInUserLanguage'] = true;
+
 // enable Data Bridge (Wikidata Bridge)
 $wgWBClientSettings['dataBridgeEnabled'] = true;
 $wgWBClientSettings['dataBridgeHrefRegExp'] = '[/=]((?:Item:)?(Q[1-9][0-9]*)).*#(P[1-9][0-9]*)$';
