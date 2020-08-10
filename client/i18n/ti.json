@@ -4,10 +4,17 @@
 			"Joanmp17"
 		]
 	},
-	"wikibase-linkitem-input-site": "ቋንቋ፥",
+	"wikibase-editlinks": "መጋጠሚታት ኣመዓራርይ",
+	"wikibase-linkitem-addlinks": "መጋጠሚታት ወስኽ",
+	"wikibase-linkitem-input-site": "ቋንቋ፦",
 	"wikibase-linkitem-input-page": "ገጽ፦",
 	"wikibase-linkitem-confirmitem-button": "ኣረጋግጽ",
 	"wikibase-rc-hide-wikidata-hide": "ከውል",
 	"wikibase-rc-hide-wikidata-show": "ኣርእይ",
-	"wikibase-otherprojects": "ብካልኦት ፕሮጀክታት"
+	"wikibase-entityusage-submit": "ገጻት ኣርእይ",
+	"wikibase-pageinfo-entity-usage-T": "ኣርእስቲ",
+	"wikibase-otherprojects": "ብካልኦት ፕሮጀክታት",
+	"wikibase-sitelinks-sitename-columnheading": "ቋንቋ",
+	"wikibase-client-data-bridge-permissions-error-info": "ተወሳኺ ዝርዝራት",
+	"wikibase-client-data-bridge-error-go-back": "ተመለስ"
 }

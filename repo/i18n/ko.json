@@ -424,5 +424,7 @@
 	"wikibase-setclaim-warning-duplicatemainsnak": "메인 스나크 복제가 감지되었습니다. 구문이 추가되지 않습니다.",
 	"wikibase-federated-properties-search-api-error-message": "속성을 일시적으로 사용할 수 없습니다.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "이 위키베이스는 외부 자원에서 결합된 특성을 사용하고 있습니다. $1에 접속해 세부 내용을 확인하실 수 있습니다.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 $2의 특성 목록]"
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 $2의 특성 목록]",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "취소",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "이 메시지를 더 이상 보지 않습니다"
 }

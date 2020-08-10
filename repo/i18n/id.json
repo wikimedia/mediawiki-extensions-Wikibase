@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ahdan",
+			"Akmaie Ajam",
 			"Bagas Chrisara",
 			"Beeyan",
 			"Bennylin",
@@ -355,5 +356,10 @@
 	"action-property-create": "buat atribut",
 	"right-property-create": "Buat atribut",
 	"wikibase-entity-not-viewable-title": "Ketidaksesuaian jenis isian: Tidak dapat menampilkan isian",
-	"wikibase-entity-not-viewable": "Jenis isian $1 yang diberikan bukanlah sebuah Entitas dan tidak dapat ditampilkan oleh Wikibase."
+	"wikibase-entity-not-viewable": "Jenis isian $1 yang diberikan bukanlah sebuah Entitas dan tidak dapat ditampilkan oleh Wikibase.",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Batalkan",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Lanjutkan mereferensikan Wiki",
+	"wikibase-federated-properties-leaving-site-notice-notice": "Ini adalah properti federasi. Anda akan dialihkan ke $1 untuk melihat rinciannya.",
+	"wikibase-federated-properties-leaving-site-notice-header": "Keluar dari Wikibase lokal",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Jangan tampilkan pesan ini lagi"
 }

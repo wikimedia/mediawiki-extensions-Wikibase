@@ -14,5 +14,6 @@
 	"wikibase-statementview-rank-normal": "عام درجہ",
 	"wikibase-listdatavaluetypes-name-string": "سٹرنگ",
 	"wikibase-listdatavaluetypes-name-time": "ویلا",
-	"wikibase-tainted-ref-popper-help-link-text": "مدد"
+	"wikibase-tainted-ref-popper-help-link-text": "مدد",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "منسوخ"
 }

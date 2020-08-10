@@ -376,6 +376,8 @@
 	"wikibase-entity-save-error-message": "Twoja zmiana nie mogła zostać zapisana. Możesz spróbować ponownie naciskając przycisk publikacji.",
 	"wikibase-federated-properties-search-api-error-message": "Własności tymczasowo niedostępne.",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Anuluj",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Kontynuuj do źródłowej wiki",
+	"wikibase-federated-properties-leaving-site-notice-header": "Opuszczasz lokalną Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Nie pokazuj ponownie tego komunikatu",
 	"special-setaliases-parameterized": "Ustaw aliasy $1",
 	"special-setlabel-parameterized": "Ustaw etykietę $1",

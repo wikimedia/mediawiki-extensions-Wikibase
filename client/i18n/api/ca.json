@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
+			"Mguix",
 			"Toniher"
 		]
 	},
@@ -11,7 +12,7 @@
 	"apihelp-query+wblistentityusage-param-prop": "Propietats per afegir al resultat.",
 	"apihelp-query+wblistentityusage-param-entities": "Entitats que s'han utilitzat.",
 	"apihelp-query+wblistentityusage-example-simple": "Aconsegueix pàgines que utilitzin l'entitat <kbd>Q2</kbd>.",
-	"apihelp-query+pageterms-description": "Aconsegueix termes de {{WBREPONAME}} (típicament etiquetes, descripcions i àlies) associats amb una pàgina mitjançant un enllaç de lloc. En la mateixa pàgina d'entitat, els termes s'utilitzen directament. Atenció: en un wiki repositori aquest mòdul només funciona directament en les pàgines d'entitat, no en pàgines connectades amb una entitat mitjançant un enllaç de lloc. Això podria canviar en un futur.",
+	"apihelp-query+pageterms-description": "Aconsegueix termes de {{WBREPONAME}} (típicament etiquetes, descripcions i àlies) associats amb una pàgina mitjançant un enllaç de lloc.",
 	"apihelp-query+pageterms-example-simple": "Aconsegueix tots els termes associats amb la pàgina 'London', en la llengua de l'usuari.",
 	"apihelp-query+pageterms-example-label-en": "Aconsegueix etiquetes i àlies associats amb la pàgina 'London', en anglès.",
 	"apihelp-query+pageterms-param-terms": "Els tipus de termes que s'obtindran, p. ex., 'description', cada un com una llista de cadenes prenent per índex llur tipus. P. ex., {\"description\": [\"foo\"]}. Si no s'especifica res, es retornen tots els tipus.",

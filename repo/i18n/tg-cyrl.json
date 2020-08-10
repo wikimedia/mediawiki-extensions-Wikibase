@@ -152,5 +152,6 @@
 	"action-property-create": "эҷоди хусусиятҳо",
 	"right-property-create": "Эҷоди хусусиятҳо",
 	"wikibase-pageinfo-subscription-none": "Ҳеҷ",
-	"wikibase-entity-save-error-heading": "Чизе хато шуд"
+	"wikibase-entity-save-error-heading": "Чизе хато шуд",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Тамом"
 }

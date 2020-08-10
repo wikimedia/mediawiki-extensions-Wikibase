@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Maammee",
 			"Tumsaa"
 		]
 	},
-	"wikibase-snakformatter-formatting-exception": "Dogoggora dhaangessuu:$1"
+	"wikibase-snakformatter-formatting-exception": "Dogoggora dhaangessuu: $1."
 }
