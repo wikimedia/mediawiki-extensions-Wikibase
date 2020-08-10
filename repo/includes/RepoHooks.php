@@ -413,6 +413,10 @@ final class RepoHooks {
 			'type' => 'api'
 		];
 
+		$preferences['wb-dismissleavingsitenotice'] = [
+			'type' => 'api'
+		];
+
 		$preferences['wikibase-entitytermsview-showEntitytermslistview'] = [
 			'type' => 'toggle',
 			'label-message' => 'wikibase-setting-entitytermsview-showEntitytermslistview',
