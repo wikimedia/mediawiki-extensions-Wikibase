@@ -80,6 +80,14 @@ return p
 		}
 	} );
 
+	// note: this test is only effective with $wgWBClientSettings['allowDataAccessInUserLanguage'] = true;
+	// otherwise it still passes but doesn’t test anything in particular
+	it( 'getLabel can be invoked correctly with strange uselang query param', async () => {
+		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
+		await writeTextToPage( `{{#invoke:${module}|getLabel}}`, pageTitle );
+		await parsePage( pageTitle, { uselang: '⧼Lang⧽' } ); // should not throw
+	} );
+
 	it( 'getLabelByLang can be invoked correctly', async () => {
 		const pageTitle = utils.title( 'WikibaseTestPageToParse-' );
 		await writeTextToPage( `{{#invoke:${module}|getLabelByLang}}`, pageTitle );
@@ -128,12 +136,13 @@ return p
 		return action.getAnon().edit( pageTitle, { text }, 'post' );
 	}
 
-	function parsePage( pageTitle ) {
+	function parsePage( pageTitle, extraParams = {} ) {
 		return action.getAnon().action( 'parse', {
 			page: pageTitle,
 			disablelimitreport: true,
 			formatversion: 2,
 			wrapoutputclass: '',
+			...extraParams,
 		} );
 	}
 
