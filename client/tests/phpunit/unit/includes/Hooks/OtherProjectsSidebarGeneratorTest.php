@@ -26,7 +26,7 @@ use Wikibase\DataModel\Term\Term;
  * @author Thomas Pellissier Tanon
  * @author Marius Hoch < hoo@online.de >
  */
-class OtherProjectsSidebarGeneratorTest extends \MediaWikiTestCase {
+class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 
 	const TEST_ITEM_ID = 'Q123';
 	const BADGE_ITEM_ID = 'Q4242';
