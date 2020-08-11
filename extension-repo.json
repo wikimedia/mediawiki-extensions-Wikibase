@@ -282,7 +282,8 @@
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase",
 		"localBasePath": "",
-		"scripts": [
+		"packageFiles": [
+			"repo/tests/qunit/index.js",
 			"view/tests/qunit/wikibase/wikibase.tests.js",
 			"view/tests/qunit/getMockListItemAdapter.js",
 			"view/lib/wikibase-data-values-value-view/tests/src/jquery.valueview.tests.testExpert.js",
