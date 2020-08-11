@@ -9,7 +9,9 @@
 	"wikibase-comment-update": "{{WBREPONAME}} mi'a jijjiirame",
 	"wikibase-dataitem": "Mi'a {{WBREPONAME}",
 	"wikibase-editlinks": "Geessituu gulaali",
+	"wikibase-rc-hide-wikidata-hide": "Dhoksi",
 	"wikibase-rc-hide-wikidata-show": "Agarsiisi",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} gulaali"
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} gulaali",
+	"wikibase-otherprojects": "Piroojektiiwwan biroon"
 }
