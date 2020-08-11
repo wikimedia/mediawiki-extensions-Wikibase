@@ -6,6 +6,21 @@
  */
 ( function () {
 	'use strict';
+	var cookieKey = 'wikibase.dismissleavingsitenotice';
+	var optionsKey = 'wb-dismissleavingsitenotice';
+
+	var dismissLeavingSiteNotice = function () {
+		return mw.cookie.get( cookieKey ) || mw.user.options.get( optionsKey );
+	};
+
+	// used as a cache if api is called
+	var cachedCheckBoxValue = dismissLeavingSiteNotice();
+
+	// no need to continue if it won't get called
+	if ( cachedCheckBoxValue ) {
+		return;
+	}
+
 	var hostWikibaseLocation = require( './federatedPropertiesHostWikibase.json' );
 
 	$( function () {
@@ -25,17 +40,29 @@
 		LeavingSiteNoticeDialog.prototype.initialize = function () {
 			LeavingSiteNoticeDialog.super.prototype.initialize.apply( this, arguments );
 			var dialog = this;
-			/* commenting out checkbox since it is not functional yet
-			var inputCheckbox = new OO.ui.FieldLayout(
-				new OO.ui.CheckboxInputWidget( {
-					selected: false
-				} ),
+
+			var inputCheckbox = new OO.ui.CheckboxInputWidget( {
+				selected: dismissLeavingSiteNotice() || cachedCheckBoxValue
+			} );
+			var checkBoxFieldLayout = new OO.ui.FieldLayout(
+				inputCheckbox,
 				{
 					label: mw.msg( 'wikibase-federated-properties-leaving-site-notice-checkbox-label' ),
 					align: 'inline'
 				}
 			);
-*/
+			inputCheckbox.on( 'change', function ( selected ) {
+				selected = selected || null;
+				cachedCheckBoxValue = selected;
+
+				if ( mw.user.isAnon() ) {
+					mw.cookie.set( cookieKey, selected, { expires: 3 * 365 * 24 * 60 * 60, path: '/' } );
+				} else {
+					var api = new mw.Api();
+					api.saveOption( optionsKey, selected );
+				}
+			} );
+
 			var cancelButton = new OO.ui.ButtonWidget( {
 				label: mw.msg( 'wikibase-federated-properties-leaving-site-notice-cancel' ),
 				classes: [ 'wb-leaving-site-notice-cancel' ]
@@ -50,7 +77,6 @@
 					'primary',
 					'progressive'
 				],
-				target: '_blank',
 				classes: [ 'wb-leaving-site-notice-continue' ]
 			} );
 
@@ -68,6 +94,7 @@
 
 			var $content = $( '<div>' ).append(
 				$( '<p>' ).text( mw.msg( 'wikibase-federated-properties-leaving-site-notice-notice', hostWikibaseLocation ) ),
+				checkBoxFieldLayout.$element,
 				buttonLayout.$element
 			);
 
@@ -106,6 +133,10 @@
 
 		mw.hook( 'wikibase.entityPage.entityView.rendered' ).add( function () {
 			$( '.wikibase-statementgroupview-property-label a' ).on( 'click', function ( e ) {
+				if ( dismissLeavingSiteNotice() ) {
+					return;
+				}
+
 				e.preventDefault();
 				fireLeavingSiteDialog( this.href );
 			} );
