@@ -57,7 +57,25 @@ class WikibaseContentLanguages {
 	}
 
 	public static function getDefaultTermsLanguages() {
-		return new MediaWikiContentLanguages();
+		return new UnionContentLanguages(
+			new MediaWikiContentLanguages(),
+			new StaticContentLanguages(
+				[
+					'fkv', // T167259
+					'kea', // T127435
+					'nod', // T93880
+					'ota', // T59342
+					'rmf', // T226701
+					'rwr', // T61905
+					'sjd', // T226701
+					'sje', // T146707
+					'sju', // T226701
+					'smj', // T146707
+					'sms', // T220118, T223544
+					'srq', // T113408
+				]
+			)
+		);
 	}
 
 	public static function getDefaultMonolingualTextLanguages() {
