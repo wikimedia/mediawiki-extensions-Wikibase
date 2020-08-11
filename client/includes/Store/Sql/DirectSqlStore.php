@@ -350,9 +350,10 @@ class DirectSqlStore implements ClientStore {
 		$dispatchingLookup = $this->wikibaseServices->getEntityRevisionLookup();
 
 		// Lower caching layer using persistent cache (e.g. memcached).
+		// TODO: Cleanup the cache, it's not needed as SqlBlobStore itself has a better cache
 		$persistentCachingLookup = new CachingEntityRevisionLookup(
 			new EntityRevisionCache(
-				ObjectCache::getInstance( $this->cacheType ),
+				ObjectCache::getInstance( CACHE_NONE ),
 				$this->cacheDuration,
 				$cacheKeyPrefix
 			),
