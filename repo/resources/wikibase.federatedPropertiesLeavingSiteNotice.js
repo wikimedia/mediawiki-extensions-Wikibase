@@ -93,19 +93,26 @@
 		var windowManager = new OO.ui.WindowManager();
 		$( document.body ).append( windowManager.$element );
 
+		var fireLeavingSiteDialog = function ( data ) {
+			// Create a new dialog window.
+			var processDialog = new LeavingSiteNoticeDialog( {
+				size: 'medium',
+				data: data
+			} );
+
+			windowManager.addWindows( [ processDialog ] );
+			windowManager.openWindow( processDialog );
+		};
+
 		mw.hook( 'wikibase.entityPage.entityView.rendered' ).add( function () {
 			$( '.wikibase-statementgroupview-property-label a' ).on( 'click', function ( e ) {
 				e.preventDefault();
-				// Create a new dialog window.
-				var processDialog = new LeavingSiteNoticeDialog( {
-					size: 'medium',
-					data: this.href
-				} );
-
-				windowManager.addWindows( [ processDialog ] );
-				windowManager.openWindow( processDialog );
-
+				fireLeavingSiteDialog( this.href );
 			} );
+		} );
+		$( '.comment a.fedprop' ).on( 'click', function ( e ) {
+			e.preventDefault();
+			fireLeavingSiteDialog( this.href );
 		} );
 
 	} );
