@@ -526,7 +526,7 @@ Should be in the format [ObjectFactory] understands.
 
 EXAMPLE: ```[ 'class' => 'Wikibase\\Lib\\JsonUnitStorage', 'args' => [ 'myUnits.json' ] ]```
 
-### canonicalLanguageCodes
+#### canonicalLanguageCodes
 Special non-canonical languages and their BCP 47 mappings
 
 Based on: https://meta.wikimedia.org/wiki/Special_language_codes
