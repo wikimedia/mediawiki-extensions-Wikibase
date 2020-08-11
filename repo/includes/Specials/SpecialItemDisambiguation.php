@@ -9,7 +9,6 @@ use WebRequest;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\MediaWikiContentLanguages;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\TypeDispatchingEntitySearchHelper;
 use Wikibase\Repo\ItemDisambiguation;
@@ -83,7 +82,7 @@ class SpecialItemDisambiguation extends SpecialWikibasePage {
 			$languageCode
 		);
 		return new self(
-			new MediaWikiContentLanguages(),
+			$wikibaseRepo->getTermsLanguages(),
 			$languageNameLookup,
 			$itemDisambiguation,
 			new TypeDispatchingEntitySearchHelper(
