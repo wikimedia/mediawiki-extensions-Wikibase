@@ -84,7 +84,7 @@
 			} );
 
 			$extender
-				.append( $( '<span>' ).text( label ) )
+				.append( $( '<span>' ).text( label + ' ' ) )
 				.append( this.$selector );
 		},
 

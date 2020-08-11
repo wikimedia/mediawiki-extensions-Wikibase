@@ -113,7 +113,7 @@
 				this.$selector.on( 'eachchange', this._onValueChange );
 			}
 			$extender
-				.append( $( '<span />' ).text( this._messageProvider.getMessage( 'label' ) ) )
+				.append( $( '<span />' ).text( this._messageProvider.getMessage( 'label' ) + ' ' ) )
 				.append( this.$selector );
 		},
 
