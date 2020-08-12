@@ -312,7 +312,7 @@
 	"content-model-wikibase-query": "উইকিবেজ কোয়েরি",
 	"action-item-merge": "আইটেম একত্রীকরণ",
 	"right-item-merge": "আইটেম একত্রীকারক",
-	"right-item-redirect": "আইটেম পুননির্দেশনা তৈরি",
+	"right-item-redirect": "আইটেম পুনর্নির্দেশ তৈরি",
 	"action-property-create": "বৈশিষ্ট্য তৈরি",
 	"right-property-create": "বৈশিষ্ট্য তৈরি",
 	"wikibase-pageinfo-subscription-none": "কিছুই না",

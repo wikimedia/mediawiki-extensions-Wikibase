@@ -4,6 +4,7 @@
 			"AlnashPiyash2",
 			"Irus",
 			"Kaganer",
+			"Kotwys",
 			"Wadorgurt"
 		]
 	},
@@ -11,7 +12,7 @@
 	"wikibase-comment-update": "{{WBREPONAME}}лэн элементсы воштэмын",
 	"wikibase-dataitem": "{{WBREPONAME}}ысь элемент",
 	"wikibase-editlinks": "Чӧлсконъёсыз тупатыны",
-	"wikibase-editlinkstitle": "Кылъёс куспын чӧлсконъёсыз тупатыны",
+	"wikibase-editlinkstitle": "Кылъёс куспысь чӧлсконъёсыз тупатоно",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Ватыны",
 	"wikibase-rc-hide-wikidata-show": "Возьматыны",
