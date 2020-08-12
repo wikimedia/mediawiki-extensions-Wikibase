@@ -338,7 +338,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		$handler = $this->newInstance();
 
 		$title = Title::makeTitle(
-			0,
+			NS_MAIN,
 			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX
@@ -365,11 +365,11 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 	}
 
 	public function testGivenIdFromOtherSourceWithoutLabelAndDesc_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
-		$prefixedText = 'exptectedtPrefixedText';
+		$prefixedText = 'expectedPrefixedText';
 		$handler = $this->newInstance( $prefixedText );
 
 		$title = Title::makeTitle(
-			0,
+			NS_MAIN,
 			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX
