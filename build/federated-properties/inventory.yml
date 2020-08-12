@@ -6,6 +6,7 @@ test_systems:
       PORT: ""
       SOURCE_REPO_SCHEME: "https"
       SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
+      FEDPROPS_INTERWIKI_PREFIX: 'wdbeta'
 
     wikibase-federated-properties.vm:
       SCHEME: "http"
@@ -13,6 +14,7 @@ test_systems:
       PORT: ""
       SOURCE_REPO_SCHEME: "https"
       SOURCE_REPO_HOST: "wikidata.beta.wmflabs.org"
+      FEDPROPS_INTERWIKI_PREFIX: 'wdbeta'
 
     fedprops-euspecies.wikidata-dev.eqiad.wmflabs:
         SCHEME: "https"
@@ -20,6 +22,7 @@ test_systems:
         PORT: ""
         SOURCE_REPO_SCHEME: "https"
         SOURCE_REPO_HOST: "www.wikidata.org"
+        FEDPROPS_INTERWIKI_PREFIX: 'wikidata'
 
     fedprops-opennext.wikidata-dev.eqiad.wmflabs:
         SCHEME: "https"
@@ -27,6 +30,7 @@ test_systems:
         PORT: ""
         SOURCE_REPO_SCHEME: "https"
         SOURCE_REPO_HOST: "www.wikidata.org"
+        FEDPROPS_INTERWIKI_PREFIX: 'wikidata'
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
