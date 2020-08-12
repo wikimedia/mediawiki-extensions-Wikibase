@@ -29,8 +29,8 @@ class StatementsMerger {
 	}
 
 	/**
-	 * @param StatementsListProvider|EntityDocument $source
-	 * @param StatementsListProvider|EntityDocument $target
+	 * @param StatementListProvider|EntityDocument $source
+	 * @param StatementListProvider|EntityDocument $target
 	 * @suppress PhanTypeMismatchArgument,PhanTypeMismatchDeclaredParam False positives with intersection types
 	 */
 	public function merge( StatementListProvider $source, StatementListProvider $target ) {
