@@ -30,7 +30,6 @@ final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModule
 	/**
 	 * Register ResourceLoader modules with dynamic dependencies.
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
 	 * @param ResourceLoader $rl
 	 */
 	public function onResourceLoaderRegisterModules( ResourceLoader $rl ): void {
