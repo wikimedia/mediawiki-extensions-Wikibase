@@ -71,4 +71,8 @@
 	require( './wikibase.EntityInitializer.tests.js' );
 	require( './experts/Property.tests.js' );
 	require( './experts/Item.tests.js' );
+	require( './jquery.wikibase/jquery.wikibase.entitysearch.tests.js' );
+	require( './dataTypes/DataType.tests.js' );
+	require( './dataTypes/DataTypeStore.tests.js' );
+	require( './wikibase.PropertyDataTypeStore.tests.js' );
 }() );
