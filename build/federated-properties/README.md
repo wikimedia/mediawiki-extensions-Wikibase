@@ -98,3 +98,14 @@ ansible-playbook cleanup.yml --limit wikidata-federated-properties.wikidata-dev.
 # cleanup both simultaneously
 ansible-playbook cleanup.yml
 ```
+
+### Interwiki links
+
+For the federated properties to render correctly on a wikibase installation using a manual configuration of entitysources we need to have a row in the interwiki table pointing to the correct federtated source wiki.
+
+This can be manually inserted using the following example where ```wdbeta``` is used.
+
+```sql
+INSERT INTO interwiki (iw_prefix, iw_url, iw_local, iw_trans, iw_api, iw_wikiid) VALUES ('wdbeta', 'https://wikidata.beta.wmflabs.org/wiki/$1', 1, 0, 'https://wikidata.beta.wmflabs.org/w/api.php', '');
+```
+
