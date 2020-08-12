@@ -65,7 +65,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
 		return [
 			'scripts' => [
-				__DIR__ . '/../../../../sql/AddNormalizedTermsTablesDDL.sql',
+				__DIR__ . '/../../../../sql/mysql/AddNormalizedTermsTablesDDL.sql',
 			],
 			'create' => [
 				'wbt_item_terms',

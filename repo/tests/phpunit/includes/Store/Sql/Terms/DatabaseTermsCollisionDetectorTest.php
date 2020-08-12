@@ -82,7 +82,7 @@ class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getSqlFileAbsolutePath() {
-		return __DIR__ . '/../../../../../../sql/AddNormalizedTermsTablesDDL.sql';
+		return __DIR__ . '/../../../../../../sql/mysql/AddNormalizedTermsTablesDDL.sql';
 	}
 
 	/**
