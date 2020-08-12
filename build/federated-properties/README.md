@@ -106,6 +106,6 @@ For the federated properties to render correctly on a wikibase installation usin
 This can be manually inserted using the following example where ```wdbeta``` is used.
 
 ```sql
-INSERT INTO interwiki (iw_prefix, iw_url, iw_local, iw_trans, iw_api, iw_wikiid) VALUES ('wdbeta', 'https://wikidata.beta.wmflabs.org/wiki/$1', 1, 0, 'https://wikidata.beta.wmflabs.org/w/api.php', '');
+INSERT INTO interwiki (iw_prefix, iw_url, iw_local, iw_trans, iw_api, iw_wikiid) VALUES ('wdbeta', 'https://wikidata.beta.wmflabs.org/wiki/$1', 0, 0, 'https://wikidata.beta.wmflabs.org/w/api.php', '');
 ```
 
