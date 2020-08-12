@@ -48,10 +48,13 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 				$title->expects( $this->any() )
 					->method( 'getFullURL' )
-					->will( $this->returnValue( strstr( $id, ':' )
-						? self::FOREIGN_ENTITY_PAGE_URL
-						: self::LOCAL_ENTITY_PAGE_URL
-					) );
+					->will( $this->returnCallback(
+						function ( $query ) use ( $id ) {
+							$base = strstr( $id, ':' )
+								? self::FOREIGN_ENTITY_PAGE_URL
+								: self::LOCAL_ENTITY_PAGE_URL;
+							return wfAppendQuery( $base, $query );
+						} ) );
 
 				return $title;
 			} ) );
@@ -87,6 +90,32 @@ class SpecialEntityPageTest extends SpecialPageTestBase {
 
 		$this->assertSame( 301, $response->getStatusCode() );
 		$this->assertSame( self::LOCAL_ENTITY_PAGE_URL, $response->getHeader( 'Location' ) );
+	}
+
+	public function provideQueryArgumentsToSpecialPage() {
+		return [
+			'no query arguments' => [ [], '' ],
+			'supported query argument' => [ [ 'revision' => 123 ], '?revision=123' ],
+			'unsupported query argument' => [ [ 'foo' => 'bar' ], '' ],
+			'mixed' => [ [ 'revision' => 123, 'foo' => 'bar' ], '?revision=123' ],
+		];
+	}
+
+	/**
+	 * @dataProvider provideQueryArgumentsToSpecialPage
+	 */
+	public function testGivenQueryArguments_redirectIncludesArguments(
+		$arguments,
+		$expectedUrlSuffix
+	) {
+		$request = new FauxRequest( $arguments );
+
+		/** @var FauxResponse $response */
+		list( , $response ) = $this->executeSpecialPage( 'Q100', $request );
+
+		$this->assertSame( 301, $response->getStatusCode() );
+		$expectedUrl = self::LOCAL_ENTITY_PAGE_URL . $expectedUrlSuffix;
+		$this->assertSame( $expectedUrl, $response->getHeader( 'Location' ) );
 	}
 
 	public function provideForeignEntityIdArgumentsToSpecialPage() {
