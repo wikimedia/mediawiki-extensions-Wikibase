@@ -509,7 +509,7 @@
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 List of Properties on $2]",
   "wikibase-federated-properties-leaving-site-notice-cancel": "Cancel",
   "wikibase-federated-properties-leaving-site-notice-continue": "Continue to source wiki",
-  "wikibase-federated-properties-leaving-site-notice-notice": "This is a federated property. You'll be redirected to $1 in order to view it's details.",
+  "wikibase-federated-properties-leaving-site-notice-notice": "This is a federated property. You'll be redirected to $1 in order to view its details.",
   "wikibase-federated-properties-leaving-site-notice-header": "Leaving local Wikibase",
   "wikibase-federated-properties-leaving-site-notice-checkbox-label": "Don't show me this message again",
   "special-setaliases-parameterized": "Set $1 aliases",
