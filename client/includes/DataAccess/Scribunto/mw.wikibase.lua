@@ -276,10 +276,6 @@ function wikibase.setupInterface()
 		checkType( 'getLabelByLang', 1, id, 'string' )
 		checkType( 'getLabelByLang', 2, languageCode, 'string' )
 
-		if not mw.language.isKnownLanguageTag( languageCode ) then
-			return nil
-		end
-
 		return php.getLabelByLanguage( id, languageCode )
 	end
 
