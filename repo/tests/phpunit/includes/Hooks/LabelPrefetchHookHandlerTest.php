@@ -54,7 +54,7 @@ class LabelPrefetchHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * @param callback $prefetchTerms
+	 * @param callable $prefetchTerms
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
 	 *
