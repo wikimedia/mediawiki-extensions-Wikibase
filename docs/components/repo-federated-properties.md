@@ -73,6 +73,34 @@ In the past, <code>EntityInfoBuilder</code> was used to load data about entities
 
 For the MVP, version IDs of Federated Properties carry no information about their source wiki. The decision is documented in the [ADR about handling Federated Property IDs].
 
+### Caching
+
+Enabling caching when using federated properties can result in changes from the source wiki being delayed for a few different reasons.
+
+On the local wiki the parser cache will cache pages until the cache is either expired or the cache is manually purged. The parser cache can also be disabled which would ensure that the properties are always fetched from the source wiki, but has the downside of slowing down page requests.
+
+To manually purge the cache of a page mediawiki offers a [query parameter](https://www.mediawiki.org/wiki/Manual:Purge) that can be appended to the url of any wiki. The following example shows this being done on the item Q1 on wikidata.org.
+
+<pre>
+https://www.wikidata.org/wiki/Q1<b>?action=purge</b>
+</pre>
+
+This will display a new page with an OK button asking if the user would like to purge the cache for that page. Clicking OK will purge the cache.
+
+Another option of clearing the parser cache would be to set the expiration of the cache to something smaller than the default value. The following example sets [$wgParserCacheExpireTime](https://www.mediawiki.org/wiki/Manual:$wgParserCacheExpireTime) to 10 minutes which would be more in sync with the cache on the API for fetching properties of wikidata.org.
+
+```php
+$wgParserCacheExpireTime = 600;
+```
+
+A third option to clear the cache would be to disable it completely. This can be achieved by setting [$wgParserCacheType](https://www.mediawiki.org/wiki/Manual:$wgParserCacheType) to CACHE_NONE in the LocalSettings.php file.
+
+```php
+$wgParserCacheType = CACHE_NONE;
+```
+
+For more information on caching and how it can be configured see the [documentation](https://www.mediawiki.org/wiki/Manual:Caching) for a complete overview on how caching is used in mediawiki.
+
 ### Known Issues {#known-issues}
 
 In the current implementation, Federated Properties cannot be used in combination with local properties. This means enabling the feature on a Wikibase instance that already contains local properties is not supported. As there is currently no distinction between the two different kinds of properties, using local properties when federation is enabled will either cause them to display as a deleted, or as the property with the same entity ID on the federation source Wiki.
