@@ -61,6 +61,7 @@ class WikibaseContentLanguages {
 			new MediaWikiContentLanguages(),
 			new StaticContentLanguages(
 				[
+					'dag', // T260037
 					'fkv', // T167259
 					'kea', // T127435
 					'nod', // T93880
