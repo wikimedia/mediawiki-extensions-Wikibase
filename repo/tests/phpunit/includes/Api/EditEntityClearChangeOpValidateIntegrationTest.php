@@ -135,7 +135,8 @@ class EditEntityClearChangeOpValidateIntegrationTest extends \MediaWikiTestCase 
 				new ChangedLanguagesCollector(),
 				new ChangedLanguagesCounter(),
 				new NonLanguageBoundChangesCounter()
-			)
+			),
+			false
 		);
 	}
 

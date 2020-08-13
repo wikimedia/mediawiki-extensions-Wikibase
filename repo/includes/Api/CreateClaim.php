@@ -18,6 +18,8 @@ use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
  */
 class CreateClaim extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StatementChangeOpFactory
 	 */
@@ -26,7 +28,7 @@ class CreateClaim extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var StatementModificationHelper
@@ -43,15 +45,6 @@ class CreateClaim extends ApiBase {
 	 */
 	private $entitySavingHelper;
 
-	/**
-	 * @param ApiMain $mainModule
-	 * @param string $moduleName
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param ApiErrorReporter $errorReporter
-	 * @param StatementModificationHelper $modificationHelper
-	 * @param callable $resultBuilderInstantiator
-	 * @param callable $entitySavingHelperInstantiator
-	 */
 	public function __construct(
 		ApiMain $mainModule,
 		$moduleName,
@@ -59,7 +52,8 @@ class CreateClaim extends ApiBase {
 		ApiErrorReporter $errorReporter,
 		StatementModificationHelper $modificationHelper,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -69,6 +63,7 @@ class CreateClaim extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 		$this->entitySavingHelper->setEntityIdParam( 'entity' );
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	/**
@@ -78,7 +73,10 @@ class CreateClaim extends ApiBase {
 		$params = $this->extractRequestParams();
 		$this->validateParameters( $params );
 
-		$entity = $this->entitySavingHelper->loadEntity();
+		$entityId = $this->entitySavingHelper->getEntityIdFromParams( $params );
+		$this->validateAlteringEntityById( $entityId );
+
+		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		$propertyId = $this->modificationHelper->getEntityIdFromString( $params['property'] );
 		if ( !( $propertyId instanceof PropertyId ) ) {
