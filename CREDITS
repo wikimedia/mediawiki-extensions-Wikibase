@@ -13,8 +13,9 @@ The following list can be found parsed under:
 This includes current and previous members.
 
 * Abraham Taherivand
-* addshore
+* Adam Shorland
 * Adrian Heine
+* Alaa Sarhan
 * Aleksey Bekh-Ivanov
 * Amir Sarabadani
 * Anja Jentzsch
@@ -23,6 +24,8 @@ This includes current and previous members.
 * Daniel Kinzler
 * Daniel Werner
 * Denny Vrandečić
+* Greta Doçi
+* Guergana Tzatchkova
 * H. Snater
 * Jakob Warkotsch
 * Jan Dittrich
@@ -31,6 +34,7 @@ This includes current and previous members.
 * Jeroen De Dauw
 * John Erling Blad
 * Jonas Kress
+* Itamar Givon
 * Katie Filbert
 * Leszek Manicki
 * Lucas Werkmeister
@@ -38,11 +42,19 @@ This includes current and previous members.
 * Lydia Pintscher
 * Marius Hoch
 * Markus Krötzsch
+* Matthias Geisler
+* Michael Große
 * Nikola Smolenski
+* Noa Rave
 * Pablo Grass
+* Perside Rosalie
+* Silvan Heintze
 * Stanislav Malyshev
 * Thiemo Kreuz
+* Thomas Arrow
+* Tobias Andersson
 * Tobias Gritschacher
+* Tonina Zhelyazkova
 
 == Patch Contributors ==
 * 1ec5
@@ -65,7 +77,9 @@ This includes current and previous members.
 * Chad Horohoe
 * dachary
 * danmichaelo
+* DannyS712
 * Dan Michael O. Heggø
+* David Causse
 * Dereckson
 * Ebrahim Byagowi
 * ecotg
@@ -140,7 +154,6 @@ This includes current and previous members.
 * tholam
 * Timo Tijhof
 * Tim Starling
-* Tom Arrow
 * Tony Thomas
 * Tpt
 * TTO
