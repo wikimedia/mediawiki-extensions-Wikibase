@@ -27,7 +27,6 @@ use Wikibase\Repo\Tests\FederatedProperties\FederatedPropertiesTestCase;
 class EntityContentDiffViewTest extends FederatedPropertiesTestCase {
 
 	public function testGenerateContentDiffBodyWithStatement_doesNotResultInException() {
-		$this->setFederatedPropertiesEnabled();
 		$this->setSourceWikiUnavailable();
 
 		$item = new Item( new ItemId( 'Q11' ) );
