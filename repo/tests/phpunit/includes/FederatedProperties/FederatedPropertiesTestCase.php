@@ -11,6 +11,11 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class FederatedPropertiesTestCase extends MediaWikiTestCase {
 
+	protected function setSourceWikiUnavailable() {
+		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
+	}
+
 	protected function setFederatedPropertiesEnabled() {
 		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$settings->setSetting( 'federatedPropertiesEnabled', true );
