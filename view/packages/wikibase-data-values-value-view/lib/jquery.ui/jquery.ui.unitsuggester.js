@@ -7,7 +7,6 @@ var PARENT = $.ui.suggester;
  * @class jQuery.ui.unitsuggester
  * @extends jQuery.ui.suggester
  * @license GNU GPL v2+
- * @author Thiemo Mättig
  * @author Jonas Kress
  *
  * @constructor

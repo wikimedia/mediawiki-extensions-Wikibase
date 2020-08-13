@@ -1,6 +1,5 @@
 /**
  * @license GNU GPL v2+
- * @author Thiemo Mättig
  */
 ( function( $, QUnit, vv ) {
 	'use strict';
