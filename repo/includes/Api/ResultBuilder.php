@@ -437,19 +437,30 @@ class ResultBuilder {
 	}
 
 	private function injectEntitySerializationWithDataTypes( array $serialization ) {
-		$serialization = $this->modifier->modifyUsingCallback(
-			$serialization,
+		$modifyPaths = [
 			'claims/*/*/mainsnak',
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
-		);
-		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-			$serialization,
-			'claims/*/*/qualifiers'
-		);
-		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-			$serialization,
-			'claims/*/*/references/*/snaks'
-		);
+			'*/*/claims/*/*/mainsnak', // statements on subentities
+		];
+		$groupedSnakModifyPaths = [
+			'claims/*/*/qualifiers',
+			'claims/*/*/references/*/snaks',
+			'*/*/claims/*/*/qualifiers',
+			'*/*/claims/*/*/references/*/snaks',
+		];
+		foreach ( $modifyPaths as $modifyPath ) {
+			$serialization = $this->modifier->modifyUsingCallback(
+				$serialization,
+				$modifyPath,
+				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+			);
+		}
+
+		foreach ( $groupedSnakModifyPaths as $groupedSnakModifyPath ) {
+			$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+				$serialization,
+				$groupedSnakModifyPath
+			);
+		}
 		return $serialization;
 	}
 
