@@ -40,9 +40,10 @@ class SetSiteLink extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
-		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator
+		SiteLinkBadgeChangeOpSerializationValidator $badgeSerializationValidator,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->badgeSerializationValidator = $badgeSerializationValidator;
@@ -56,7 +57,8 @@ class SetSiteLink extends ModifyEntity {
 			$moduleName,
 			$wikibaseRepo->getChangeOpFactoryProvider()
 				->getSiteLinkChangeOpFactory(),
-			$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator()
+			$wikibaseRepo->getSiteLinkBadgeChangeOpSerializationValidator(),
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 
