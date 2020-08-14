@@ -26,6 +26,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class RemoveClaims extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StatementChangeOpFactory
 	 */
@@ -34,7 +36,7 @@ class RemoveClaims extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var StatementModificationHelper
@@ -64,7 +66,8 @@ class RemoveClaims extends ApiBase {
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -75,6 +78,7 @@ class RemoveClaims extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	public static function factory( ApiMain $mainModule, string $moduleName ): self {
@@ -101,7 +105,8 @@ class RemoveClaims extends ApiBase {
 			},
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
-			}
+			},
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 
@@ -111,6 +116,9 @@ class RemoveClaims extends ApiBase {
 	public function execute(): void {
 		$params = $this->extractRequestParams();
 		$entityId = $this->getEntityId( $params );
+
+		$this->validateAlteringEntityById( $entityId );
+
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		if ( $entity instanceof StatementListProvider ) {
