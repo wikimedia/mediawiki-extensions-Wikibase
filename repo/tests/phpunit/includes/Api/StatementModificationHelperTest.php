@@ -96,7 +96,8 @@ class StatementModificationHelperTest extends \MediaWikiTestCase {
 			},
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
-			}
+			},
+			false
 		);
 	}
 
