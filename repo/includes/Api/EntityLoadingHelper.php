@@ -187,7 +187,7 @@ class EntityLoadingHelper {
 	 *
 	 * @return EntityId|null
 	 */
-	protected function getEntityIdFromParams( array $params ) {
+	public function getEntityIdFromParams( array $params ) {
 		if ( isset( $params[$this->entityIdParam] ) ) {
 			return $this->getEntityIdFromString( $params[$this->entityIdParam] );
 		} elseif ( isset( $params['site'] ) && isset( $params['title'] ) ) {
