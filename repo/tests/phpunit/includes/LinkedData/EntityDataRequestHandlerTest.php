@@ -350,6 +350,37 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		);
 	}
 
+	public function testCacheHeaderIsSetWithRevision() {
+		$output = $this->makeOutputPage( [ 'revision' => EntityDataTestProvider::ITEM_REVISION_ID ], [] );
+		$request = $output->getRequest();
+
+		/** @var FauxResponse $response */
+		$response = $request->response();
+
+		$handler = $this->newHandler();
+		ob_start();
+		$handler->handleRequest( 'Q42.json', $request, $output );
+		ob_end_clean();
+
+		$this->assertStringContainsString( 'public', $response->getHeader( 'Cache-Control' ) );
+	}
+
+	public function testCacheHeaderIsNotSetWithoutRevision() {
+		$output = $this->makeOutputPage( [], [] );
+		$request = $output->getRequest();
+
+		/** @var FauxResponse $response */
+		$response = $request->response();
+
+		$handler = $this->newHandler();
+		ob_start();
+		$handler->handleRequest( 'Q42.json', $request, $output );
+		ob_end_clean();
+
+		$this->assertStringContainsString( 'no-cache', $response->getHeader( 'Cache-Control' ) );
+		$this->assertStringContainsString( 'private', $response->getHeader( 'Cache-Control' ) );
+	}
+
 	//TODO: test canHandleRequest
 	//TODO: test getCanonicalFormat
 	//TODO: test ALL the things!
