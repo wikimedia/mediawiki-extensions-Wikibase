@@ -4,6 +4,7 @@
 			"Joanmp17"
 		]
 	},
+	"wikibase-dataitem": "ናይ {{WBREPONAME}} ውልቀ ነገር",
 	"wikibase-editlinks": "መጋጠሚታት ኣመዓራርይ",
 	"wikibase-linkitem-addlinks": "መጋጠሚታት ወስኽ",
 	"wikibase-linkitem-input-site": "ቋንቋ፦",
@@ -16,5 +17,6 @@
 	"wikibase-otherprojects": "ብካልኦት ፕሮጀክታት",
 	"wikibase-sitelinks-sitename-columnheading": "ቋንቋ",
 	"wikibase-client-data-bridge-permissions-error-info": "ተወሳኺ ዝርዝራት",
+	"wikibase-client-data-bridge-error-reload-bridge": "እንደገና ጸዓን",
 	"wikibase-client-data-bridge-error-go-back": "ተመለስ"
 }

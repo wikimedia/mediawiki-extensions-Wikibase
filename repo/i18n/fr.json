@@ -512,6 +512,8 @@
 	"wikibase-federated-properties-special-list-of-properties-notice": "Cette wikibase utilise des propriétés fédérées d'une source externe. Vous pouvez accéder au $1.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste des propriétés sur $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Annuler",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Continuer vers le wiki source",
+	"wikibase-federated-properties-leaving-site-notice-notice": "Ceci est une propriété fédérée. Vous serez redirigé vers $1 pour afficher ses détails.",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ne plus m'afficher ce message",
 	"special-setaliases-parameterized": "Définir les alias $1",
 	"special-setlabel-parameterized": "Définir le libellé $1",
