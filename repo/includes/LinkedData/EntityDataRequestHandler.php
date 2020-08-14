@@ -549,11 +549,9 @@ class EntityDataRequestHandler {
 	public function outputData( WebRequest $request, WebResponse $response, $data, $contentType, $lastModified ) {
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
-		//FIXME: do not cache if revision was requested explicitly!
 		$maxAge = $request->getInt( 'maxage', $this->maxAge );
 		$sMaxAge = $request->getInt( 'smaxage', $this->maxAge );
 
-		// XXX: do we want public caching even for data from old revisions?
 		$maxAge  = max( self::MINIMUM_MAX_AGE, min( self::MAXIMUM_MAX_AGE, $maxAge ) );
 		$sMaxAge = max( self::MINIMUM_MAX_AGE, min( self::MAXIMUM_MAX_AGE, $sMaxAge ) );
 
@@ -568,9 +566,11 @@ class EntityDataRequestHandler {
 			$response->header( "X-Frame-Options: $this->frameOptionsHeader" );
 		}
 
-		// allow the client to cache this
-		$mode = 'public';
-		$response->header( 'Cache-Control: ' . $mode . ', s-maxage=' . $sMaxAge . ', max-age=' . $maxAge );
+		if ( array_key_exists( 'revision', $request->getValues( 'revision' ) ) ) {
+			$response->header( 'Cache-Control: public, s-maxage=' . $sMaxAge . ', max-age=' . $maxAge );
+		} else {
+			$response->header( 'Cache-Control: private, no-cache, s-maxage=0' );
+		}
 
 		ob_clean(); // remove anything that might already be in the output buffer.
 

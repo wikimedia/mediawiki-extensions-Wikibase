@@ -18,6 +18,8 @@ use Wikibase\Repo\Rdf\RdfVocabulary;
  * @author Daniel Kinzler
  */
 class EntityDataTestProvider {
+	const ITEM_REVISION_ID = 4242;
+	const PROPERTY_REVISON_ID = 4243;
 
 	/**
 	 * @return EntityRevision[]
@@ -26,12 +28,12 @@ class EntityDataTestProvider {
 		$item = new Item( new ItemId( 'Q42' ) );
 		$item->setLabel( 'en', 'Raarrr!' );
 
-		$itemRev = new EntityRevision( $item, 4242, '20131211100908' );
+		$itemRev = new EntityRevision( $item, self::ITEM_REVISION_ID, '20131211100908' );
 
 		$property = new Property( new PropertyId( 'P42' ), null, 'string' );
 		$property->setLabel( 'en', 'Propertyyy' );
 
-		$propertyRev = new EntityRevision( $property, 4243, '20141211100908' );
+		$propertyRev = new EntityRevision( $property, self::PROPERTY_REVISON_ID, '20141211100908' );
 
 		return [ $itemRev, $propertyRev ];
 	}
