@@ -9,8 +9,10 @@ use ApiMain;
 use ApiResult;
 use DataValues\DataValue;
 use Exception;
+use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
+use NullStatsdDataFactory;
 use OutOfBoundsException;
 use Status;
 use ValueParsers\ParseException;
@@ -74,6 +76,9 @@ class ParseValue extends ApiBase {
 	 */
 	private $errorReporter;
 
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
+
 	/**
 	 * @see ApiBase::__construct
 	 *
@@ -86,6 +91,7 @@ class ParseValue extends ApiBase {
 	 * @param ValidatorErrorLocalizer $validatorErrorLocalizer
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param ApiErrorReporter $errorReporter
+	 * @param IBufferingStatsdDataFactory|null $stats
 	 */
 	public function __construct(
 		ApiMain $mainModule,
@@ -96,7 +102,8 @@ class ParseValue extends ApiBase {
 		ExceptionLocalizer $exceptionLocalizer,
 		ValidatorErrorLocalizer $validatorErrorLocalizer,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
-		ApiErrorReporter $errorReporter
+		ApiErrorReporter $errorReporter,
+		IBufferingStatsdDataFactory $stats = null
 	) {
 		parent::__construct( $mainModule, $moduleName );
 		$this->dataTypeFactory = $dataTypeFactory;
@@ -106,11 +113,13 @@ class ParseValue extends ApiBase {
 		$this->validatorErrorLocalizer = $validatorErrorLocalizer;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->errorReporter = $errorReporter;
+		$this->stats = $stats ?: new NullStatsdDataFactory();
 	}
 
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		IBufferingStatsdDataFactory $stats,
 		DataTypeFactory $dataTypeFactory,
 		ValueParserFactory $valueParserFactory
 	): self {
@@ -126,7 +135,8 @@ class ParseValue extends ApiBase {
 			$wikibaseRepo->getExceptionLocalizer(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$apiHelperFactory->getErrorReporter( $mainModule )
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$stats
 		);
 	}
 
@@ -322,6 +332,7 @@ class ParseValue extends ApiBase {
 			}
 
 			foreach ( $options as $name => $value ) {
+				$this->stats->increment( "wikibase.repo.api.parsevalue.options.$name" );
 				$parserOptions->setOption( $name, $value );
 			}
 		}
