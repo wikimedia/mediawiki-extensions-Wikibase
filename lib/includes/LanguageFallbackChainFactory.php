@@ -8,7 +8,10 @@ use IContextSource;
 use InvalidArgumentException;
 use Language;
 use LanguageConverter;
-use LogicException;
+use MediaWiki\Languages\LanguageConverterFactory;
+use MediaWiki\Languages\LanguageFactory;
+use MediaWiki\Languages\LanguageFallback;
+use MediaWiki\MediaWikiServices;
 use MWException;
 use User;
 
@@ -41,20 +44,35 @@ class LanguageFallbackChainFactory {
 	 */
 	const FALLBACK_OTHERS = 4;
 
-	/**
-	 * @var array[]
-	 */
-	private $languageCache;
+	/** @var LanguageFactory */
+	private $languageFactory;
+
+	/** @var LanguageConverterFactory */
+	private $languageConverterFactory;
+
+	/** @var LanguageFallback */
+	private $languageFallback;
 
 	/**
 	 * @var array[]
 	 */
-	private $userLanguageCache;
+	private $languageCache = [];
 
 	/**
-	 * @var callback
+	 * @var array[]
 	 */
-	private $getLanguageFallbacksFor = 'Language::getFallbacksFor';
+	private $userLanguageCache = [];
+
+	public function __construct(
+		?LanguageFactory $languageFactory = null,
+		?LanguageConverterFactory $languageConverterFactory = null,
+		?LanguageFallback $languageFallback = null
+	) {
+		$services = MediaWikiServices::getInstance();
+		$this->languageFactory = $languageFactory ?: $services->getLanguageFactory();
+		$this->languageConverterFactory = $languageConverterFactory ?: $services->getLanguageConverterFactory();
+		$this->languageFallback = $languageFallback ?: $services->getLanguageFallback();
+	}
 
 	/**
 	 * Get the fallback chain based a single language, and specified fallback level.
@@ -135,29 +153,30 @@ class LanguageFallbackChainFactory {
 
 			if ( in_array( $pieces[0], LanguageConverter::$languagesWithVariants ) ) {
 				if ( is_string( $language ) ) {
-					$language = Language::factory( $language );
+					$language = $this->languageFactory->getLanguage( $language );
 				}
-				$parentLanguage = $language->getParentLanguage();
+				$parentLanguage = $this->languageFactory->getParentLanguage( $language->getCode() );
 			}
 
 			if ( $parentLanguage ) {
 				// It's less likely to trigger conversion mistakes by converting
 				// zh-tw to zh-hk first instead of converting zh-cn to zh-tw.
-				$variantFallbacks = $parentLanguage->getConverter()
-					->getVariantFallbacks( $languageCode );
+				$parentLanguageConverter = $this->languageConverterFactory->getLanguageConverter( $parentLanguage );
+				$variantFallbacks = $parentLanguageConverter->getVariantFallbacks( $languageCode );
 				if ( is_array( $variantFallbacks ) ) {
 					$variants = array_unique( array_merge(
-						$variantFallbacks, $parentLanguage->getVariants()
+						$variantFallbacks,
+						$parentLanguageConverter->getVariants()
 					) );
 				} else {
-					$variants = $parentLanguage->getVariants();
+					$variants = $parentLanguageConverter->getVariants();
 				}
 
 				foreach ( $variants as $variant ) {
 					if ( !isset( $fetched[$variant] )
 						// The self::FALLBACK_SELF mode is already responsible for self-references.
 						&& $variant !== $languageCode
-						&& $parentLanguage->hasVariant( $variant )
+						&& $parentLanguageConverter->hasVariant( $variant )
 					) {
 						$chain[] = LanguageWithConversion::factory( $language, $variant );
 						$fetched[$variant] = true;
@@ -175,7 +194,7 @@ class LanguageFallbackChainFactory {
 			$recursiveMode &= self::FALLBACK_VARIANTS;
 			$recursiveMode |= self::FALLBACK_SELF;
 
-			$fallbacks = call_user_func( $this->getLanguageFallbacksFor, $languageCode );
+			$fallbacks = $this->languageFallback->getAll( $languageCode );
 			foreach ( $fallbacks as $other ) {
 				$this->buildFromLanguage( $other, $recursiveMode, $chain, $fetched );
 			}
@@ -323,19 +342,6 @@ class LanguageFallbackChainFactory {
 		}
 
 		return $chain;
-	}
-
-	/**
-	 * @param callable $getLanguageFallbacksFor
-	 */
-	public function setGetLanguageFallbacksFor( $getLanguageFallbacksFor ) {
-		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-			throw new LogicException(
-				'Overriding the getLanguageFallbacksFor function is only supported in test mode'
-			);
-		}
-
-		$this->getLanguageFallbacksFor = $getLanguageFallbacksFor;
 	}
 
 }
