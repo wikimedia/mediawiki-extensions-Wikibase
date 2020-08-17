@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
@@ -76,10 +78,7 @@ class OutputFormatValueFormatterFactory {
 	 *        callback must return a ValueFormatter suitable for emitting the given output format,
 	 *        or null.
 	 */
-	public function setFormatterFactoryCallback( $type, $factoryFunction ) {
-		Assert::parameterType( 'string', $type, '$type' );
-		Assert::parameterType( 'callable|null', $factoryFunction, '$factoryFunction' );
-
+	public function setFormatterFactoryCallback( string $type, ?callable $factoryFunction ) {
 		if ( $factoryFunction === null ) {
 			unset( $this->factoryFunctions[$type] );
 		} else {

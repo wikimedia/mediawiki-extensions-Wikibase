@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use ValueFormatters\FormattingException;
@@ -52,13 +54,12 @@ class BinaryOptionDispatchingSnakFormatter implements SnakFormatter {
 	 * @param array $specialCasedPropertyDataTypes
 	 */
 	public function __construct(
-		$format,
+		string $format,
 		PropertyDataTypeLookup $dataTypeLookup,
 		SnakFormatter $specialCaseSnakFormatter,
 		SnakFormatter $fallbackSnakFormatter,
 		array $specialCasedPropertyDataTypes
 	) {
-		Assert::parameterType( 'string', $format, '$format' );
 		Assert::parameterElementType(
 			'string',
 			$specialCasedPropertyDataTypes,

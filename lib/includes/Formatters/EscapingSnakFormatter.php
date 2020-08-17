@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use Wikibase\DataModel\Snak\Snak;
@@ -37,10 +39,7 @@ class EscapingSnakFormatter implements SnakFormatter {
 	 *
 	 * @throws ParameterTypeException
 	 */
-	public function __construct( $format, SnakFormatter $formatter, $escapeCallback ) {
-		Assert::parameterType( 'string', $format, '$format' );
-		Assert::parameterType( 'callable', $escapeCallback, '$escapeCallback' );
-
+	public function __construct( string $format, SnakFormatter $formatter, callable $escapeCallback ) {
 		$this->format = $format;
 		$this->formatter = $formatter;
 		$this->escapeCallback = $escapeCallback;

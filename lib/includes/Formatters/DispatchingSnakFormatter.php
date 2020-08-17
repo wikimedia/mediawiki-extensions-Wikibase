@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Formatters;
 
 use InvalidArgumentException;
@@ -7,7 +9,6 @@ use ValueFormatters\FormattingException;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\Snak;
-use Wikimedia\Assert\Assert;
 
 /**
  * DispatchingSnakFormatter will format a Snak by delegating the formatting to an appropriate
@@ -57,13 +58,11 @@ class DispatchingSnakFormatter implements SnakFormatter {
 	 *         MIME parameters are ignored.
 	 */
 	public function __construct(
-		$format,
+		string $format,
 		PropertyDataTypeLookup $dataTypeLookup,
 		array $formattersBySnakType,
 		array $formattersByDataType
 	) {
-		Assert::parameterType( 'string', $format, '$format' );
-
 		$this->assertFormatterArray( $format, $formattersBySnakType );
 		$this->assertFormatterArray( $format, $formattersByDataType );
 
