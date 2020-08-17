@@ -129,7 +129,7 @@ class LanguageFallbackChainFactory {
 	 * @throws InvalidArgumentException
 	 * @return LanguageWithConversion[]
 	 */
-	private function buildFromLanguage( $language, $mode, array &$chain = [], array &$fetched = [] ) {
+	private function buildFromLanguage( $language, $mode, array $chain = [], array &$fetched = [] ) {
 		if ( !is_int( $mode ) ) {
 			throw new InvalidArgumentException( '$mode must be an integer' );
 		}
@@ -196,7 +196,7 @@ class LanguageFallbackChainFactory {
 
 			$fallbacks = $this->languageFallback->getAll( $languageCode );
 			foreach ( $fallbacks as $other ) {
-				$this->buildFromLanguage( $other, $recursiveMode, $chain, $fetched );
+				$chain = $this->buildFromLanguage( $other, $recursiveMode, $chain, $fetched );
 			}
 		}
 
@@ -319,7 +319,7 @@ class LanguageFallbackChainFactory {
 					} catch ( MWException $e ) {
 						continue;
 					}
-					$this->buildFromLanguage( $languageCode, $mode, $chain, $fetched );
+					$chain = $this->buildFromLanguage( $languageCode, $mode, $chain, $fetched );
 				}
 			}
 		}
@@ -332,7 +332,7 @@ class LanguageFallbackChainFactory {
 				} catch ( MWException $e ) {
 					continue;
 				}
-				$this->buildFromLanguage(
+				$chain = $this->buildFromLanguage(
 					$languageCode,
 					self::FALLBACK_OTHERS | self::FALLBACK_VARIANTS,
 					$chain,
