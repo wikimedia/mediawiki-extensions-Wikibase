@@ -7,7 +7,6 @@ use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\StringNormalizer;
 
 /**
@@ -18,11 +17,6 @@ use Wikibase\Lib\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class GenericServicesTest extends \PHPUnit\Framework\TestCase {
-
-	public function testGetEntityNamespaceLookup() {
-		$services = $this->newGenericServices();
-		$this->assertInstanceOf( EntityNamespaceLookup::class, $services->getEntityNamespaceLookup() );
-	}
 
 	public function testGetEntitySerializer() {
 		$services = $this->newGenericServices();

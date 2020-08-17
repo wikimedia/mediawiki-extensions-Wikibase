@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikimedia\Assert\Assert;
@@ -39,6 +40,8 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	private $prefetchingTermLookup = null;
 
 	private $entityPrefetcher = null;
+
+	private $entityNamespaceLookup = null;
 
 	/**
 	 * @param EntitySourceDefinitions $entitySourceDefinitions
@@ -149,10 +152,14 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 		}
 	}
 
-	public function getEntityNamespaceLookup() {
-		// TODO: entity namespace lookup is actually source-specific service, should not be provided by
-		// GenericServices
-		return $this->genericServices->getEntityNamespaceLookup();
+	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
+		if ( $this->entityNamespaceLookup === null ) {
+			$this->entityNamespaceLookup = array_reduce( $this->singleSourceServices, function ( $nsLookup, $service ){
+				return $nsLookup->merge( $service->getEntityNamespaceLookup() );
+			}, new EntityNamespaceLookup( [], [] ) );
+		}
+
+		return $this->entityNamespaceLookup;
 	}
 
 	public function getFullEntitySerializer() {
