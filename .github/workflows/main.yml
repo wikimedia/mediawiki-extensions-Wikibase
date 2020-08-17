@@ -13,7 +13,7 @@ jobs:
       - name: git-filter-repo
         uses: wmde/git-filter-repo-docker-action@v1
         with:
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY_CHANGES }}
           targetOrg: wikimedia
           targetRepo: wikibase-changes
           targetBranch: main
