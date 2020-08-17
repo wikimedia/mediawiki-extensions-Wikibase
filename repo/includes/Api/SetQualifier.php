@@ -23,6 +23,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetQualifier extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StatementChangeOpFactory
 	 */
@@ -31,7 +33,7 @@ class SetQualifier extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var StatementModificationHelper
@@ -73,7 +75,8 @@ class SetQualifier extends ApiBase {
 		StatementModificationHelper $modificationHelper,
 		StatementGuidParser $guidParser,
 		callable $resultBuilderInstantiator,
-		callable $entitySavingHelperInstantiator
+		callable $entitySavingHelperInstantiator,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -84,6 +87,7 @@ class SetQualifier extends ApiBase {
 		$this->guidParser = $guidParser;
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	public static function factory( ApiMain $mainModule, string $moduleName ): self {
@@ -112,7 +116,8 @@ class SetQualifier extends ApiBase {
 			},
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getEntitySavingHelper( $module );
-			}
+			},
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 
@@ -124,6 +129,8 @@ class SetQualifier extends ApiBase {
 		$this->validateParameters( $params );
 
 		$entityId = $this->guidParser->parse( $params['claim'] )->getEntityId();
+		$this->validateAlteringEntityById( $entityId );
+
 		$entity = $this->entitySavingHelper->loadEntity( $entityId );
 
 		$summary = $this->modificationHelper->createSummary( $params, $this );
