@@ -3,8 +3,8 @@
 /**
  * Example configuration for the Wikibase extension.
  *
- * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
- * It should furthermore not be included from outside the extension.
+ * This file is NOT an entry point the Wikibase extension.
+ * It should not be included from outside the extension.
  *
  * @see docs/options.wiki
  *

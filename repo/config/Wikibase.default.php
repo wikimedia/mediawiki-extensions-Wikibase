@@ -3,8 +3,8 @@
 /**
  * This file assigns the default values to all Wikibase Repo settings.
  *
- * This file is NOT an entry point the Wikibase extension. Use Wikibase.php.
- * It should furthermore not be included from outside the extension.
+ * This file is NOT an entry point the Wikibase extension.
+ * It should not be included from outside the extension.
  *
  * @license GPL-2.0-or-later
  */
