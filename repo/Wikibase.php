@@ -118,7 +118,8 @@ call_user_func( function() {
 				$apiHelperFactory->getErrorReporter( $apiMain ),
 				$apiHelperFactory->getResultBuilder( $apiMain ),
 				$wikibaseRepo->getEntityRevisionLookup(),
-				$wikibaseRepo->getEntityIdParser()
+				$wikibaseRepo->getEntityIdParser(),
+				$wikibaseRepo->inFederatedPropertyMode()
 			);
 		}
 	];
@@ -364,7 +365,8 @@ call_user_func( function() {
 				},
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
+				},
+				$wikibaseRepo->inFederatedPropertyMode()
 			);
 		}
 	];
@@ -395,7 +397,8 @@ call_user_func( function() {
 				},
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
+				},
+				$wikibaseRepo->inFederatedPropertyMode()
 			);
 		}
 	];
@@ -425,7 +428,8 @@ call_user_func( function() {
 				},
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
+				},
+				$wikibaseRepo->inFederatedPropertyMode()
 			);
 		}
 	];
@@ -519,7 +523,8 @@ call_user_func( function() {
 				},
 				function ( $module ) use ( $apiHelperFactory ) {
 					return $apiHelperFactory->getEntitySavingHelper( $module );
-				}
+				},
+				$wikibaseRepo->inFederatedPropertyMode()
 			);
 		}
 	];
