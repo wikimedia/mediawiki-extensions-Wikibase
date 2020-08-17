@@ -9,7 +9,6 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewProperty;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialNewProperty
@@ -43,22 +42,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			'wbt_item_terms'
 		];
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
-	}
-
-	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
-		return [
-			'scripts' => [
-				__DIR__ . '/../../../../sql/mysql/AddNormalizedTermsTablesDDL.sql',
-			],
-			'create' => [
-				'wbt_item_terms',
-				'wbt_property_terms',
-				'wbt_term_in_lang',
-				'wbt_text_in_lang',
-				'wbt_text',
-				'wbt_type',
-			],
-		];
 	}
 
 	protected function tearDown(): void {
