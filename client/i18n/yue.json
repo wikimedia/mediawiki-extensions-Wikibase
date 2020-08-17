@@ -4,6 +4,7 @@
 			"CRCHF",
 			"Hello903hello",
 			"Moon0319",
+			"Roy17",
 			"Streetdeck",
 			"Waihorace",
 			"Yueman"
@@ -16,7 +17,7 @@
 	"wikibase-dataitem": "{{WBREPONAME}}項目",
 	"wikibase-editlinks": "改拎",
 	"wikibase-editlinkstitle": "改跨語言拎",
-	"wikibase-linkitem-addlinks": "加新拎",
+	"wikibase-linkitem-addlinks": "加新連結",
 	"wikibase-linkitem-input-site": "話:",
 	"wikibase-linkitem-input-page": "頁面：",
 	"wikibase-linkitem-confirmitem-button": "確認",

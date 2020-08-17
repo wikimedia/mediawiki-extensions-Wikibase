@@ -141,7 +141,7 @@
 	"wikibase-validator-invalid": "Valor inválido",
 	"wikibase-validator-missing-field": "Campo obrigatório \"$1\" em falta",
 	"wikibase-validator-bad-type": "$2 em vez de $1",
-	"wikibase-validator-too-long": "Não deve ser mais do que {{PLURAL:$1|um caracter|$1 caracteres}} longo",
+	"wikibase-validator-too-long": "Não deve ser mais do que {{PLURAL:$1|um carácter|$1 caracteres}} longo",
 	"wikibase-validator-label-too-long": "O rótulo não pode ter mais do que {{PLURAL:$1|um carácter|$1 caracteres}}",
 	"wikibase-validator-label-too-short": "O rótulo tem de ter pelo menos {{PLURAL:$1|um carácter|$1 caracteres}} de comprimento",
 	"wikibase-validator-description-too-long": "A descrição não pode ter mais do que {{PLURAL:$1|um carácter|$1 caracteres}}",

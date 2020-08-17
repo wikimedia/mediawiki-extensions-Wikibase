@@ -514,6 +514,7 @@
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Annuler",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Continuer vers le wiki source",
 	"wikibase-federated-properties-leaving-site-notice-notice": "Ceci est une propriété fédérée. Vous serez redirigé vers $1 pour afficher ses détails.",
+	"wikibase-federated-properties-leaving-site-notice-header": "Quitter le Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ne plus m'afficher ce message",
 	"special-setaliases-parameterized": "Définir les alias $1",
 	"special-setlabel-parameterized": "Définir le libellé $1",

@@ -430,7 +430,7 @@
 	"wikibase-api-no-such-claim": "{{notranslate}}\nCould not find such a claim on wikidata, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-entity": "Error message shown when an entity ID was requested that does not exist in the database. This could be to the user entering the wrong data.\n* $1 - the entity ID",
 	"wikibase-api-no-such-entity-link": "{{notranslate}}\nError message when the user provides a site and page name combination (usually referred to as a \"sitelink\") not contained in any item.",
-	"wikibase-api-no-such-reference": "!!DO NOT TRANSLATE!! Could not find such a reference, this could be to the user entering the wrong data",
+	"wikibase-api-no-such-reference": "{{notranslate}}\nCould not find such a reference, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-site": "{{notranslate}}\nCould not find such a site, this could be to the user entering the wrong data",
 	"wikibase-api-no-such-sitelink": "Could not find such a sitelink, this could be to the user entering the wrong data\n* $1 - the site id",
 	"wikibase-api-no-such-statement": "{{notranslate}}\nCould not find such a statement, this could be to the user entering the wrong data",

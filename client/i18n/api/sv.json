@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Lokal Profil",
+			"Sabelöga",
 			"WikiPhoenix"
 		]
 	},
@@ -10,7 +11,7 @@
 	"apihelp-query+wblistentityusage-param-entities": "Entiteter som har använts.",
 	"apihelp-query+wblistentityusage-param-limit": "Hur många entitetsanvändningar att returnera.",
 	"apihelp-query+wblistentityusage-example-simple": "Hämta sidor som använder entiteten <kbd>Q2</kbd>.",
-	"apihelp-query+pageterms-description": "Få termer associerade med en sida via ett associerat dataobjekt.",
+	"apihelp-query+pageterms-description": "Få {{WBREPONAME}}-termerna (oftast etiketter, beskrivningar och alias) associerade med en sida via en sajtlänk.",
 	"apihelp-query+pageterms-example-simple": "Få alla termer associerade med sidan 'London', på användarens språk.",
 	"apihelp-query+pageterms-example-label-en": "Få etiketter och alias associerade med sidan 'London', på engelska.",
 	"apihelp-query+pageterms-param-terms": "Den typen av termer som ska hämtas, t.ex. 'description'. Om ej angivt returneras alla typer.",

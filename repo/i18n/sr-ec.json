@@ -341,6 +341,7 @@
 	"wikibase-search-bad-entity-type": "Лоша врста јединице: $1",
 	"wikibase-tainted-ref-popper-text": "Вредност изјаве је промењена, али је референца остала иста. Уклоните ово упозорење само ако је референца и даље исправна.",
 	"wikibase-tainted-ref-popper-remove-warning": "Уклони упозорење",
+	"wikibase-federated-properties-save-api-error-message": "Чување није успело због неуспешног захтева заједничком изворном викију.",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Откажи",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Настави на изворни вики",
 	"wikibase-federated-properties-leaving-site-notice-header": "Напуштање локалне викибазе",
