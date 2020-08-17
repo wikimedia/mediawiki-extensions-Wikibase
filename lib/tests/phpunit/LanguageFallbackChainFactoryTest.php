@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
+use MediaWiki\Languages\LanguageFallback;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
@@ -49,12 +50,12 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getLanguageFallbackChainFactory() {
-		$factory = new LanguageFallbackChainFactory();
-		$factory->setGetLanguageFallbacksFor( function( $code ) {
-			return $this->getLanguageFallbacksForCallback( $code );
-		} );
-
-		return $factory;
+		$languageFallback = $this->createMock( LanguageFallback::class );
+		$languageFallback->method( 'getAll' )
+			->willReturnCallback( function( $code ) {
+				return $this->getLanguageFallbacksForCallback( $code );
+			} );
+		return new LanguageFallbackChainFactory( null, null, $languageFallback );
 	}
 
 	/**
