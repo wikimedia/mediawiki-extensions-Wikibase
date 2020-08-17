@@ -27,6 +27,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class GetEntities extends ApiBase {
 
+	use FederatedPropertyApiValidatorTrait;
+
 	/**
 	 * @var StringNormalizer
 	 */
@@ -55,7 +57,7 @@ class GetEntities extends ApiBase {
 	/**
 	 * @var ApiErrorReporter
 	 */
-	private $errorReporter;
+	protected $errorReporter;
 
 	/**
 	 * @var ResultBuilder
@@ -88,6 +90,7 @@ class GetEntities extends ApiBase {
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityIdParser $idParser
 	 * @param IBufferingStatsdDataFactory $stats
+	 * @param bool $federatedPropertiesEnabled
 	 *
 	 * @see ApiBase::__construct
 	 */
@@ -103,7 +106,8 @@ class GetEntities extends ApiBase {
 		ResultBuilder $resultBuilder,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityIdParser $idParser,
-		IBufferingStatsdDataFactory $stats
+		IBufferingStatsdDataFactory $stats,
+		bool $federatedPropertiesEnabled
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -117,6 +121,7 @@ class GetEntities extends ApiBase {
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->idParser = $idParser;
 		$this->stats = $stats;
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
 	public static function factory( ApiMain $apiMain, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
@@ -141,7 +146,8 @@ class GetEntities extends ApiBase {
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$wikibaseRepo->getEntityRevisionLookup(),
 			$wikibaseRepo->getEntityIdParser(),
-			$stats
+			$stats,
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 
@@ -163,6 +169,9 @@ class GetEntities extends ApiBase {
 		$resolveRedirects = $params['redirects'] === 'yes';
 
 		$entityIds = $this->getEntityIdsFromParams( $params );
+		foreach ( $entityIds as $entityId ) {
+			$this->validateAlteringEntityById( $entityId );
+		}
 
 		$this->stats->updateCount( 'wikibase.repo.api.getentities.entities', count( $entityIds ) );
 
