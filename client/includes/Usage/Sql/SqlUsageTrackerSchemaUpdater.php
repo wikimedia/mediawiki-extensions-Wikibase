@@ -76,37 +76,28 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {
-		$types = [
-			$type,
-			'mysql'
-		];
-
-		foreach ( $types as $type ) {
-			$path = __DIR__ . '/../../../sql/' . $type . '/archives/' . $name . '.sql';
-
-			if ( file_exists( $path ) ) {
-				return $path;
-			}
-		}
-
-		throw new MWException( "Could not find schema update script '$name'" );
+		return $this->getScriptPath( 'archives/' . $name, $type );
 	}
 
 	private function getTablesScriptPath( $type ) {
+		return $this->getScriptPath( 'tables', $type );
+	}
+
+	private function getScriptPath( $name, $type ) {
 		$types = [
 			$type,
 			'mysql'
 		];
 
 		foreach ( $types as $type ) {
-			$path = __DIR__ . '/../../../sql/' . $type . '/tables.sql';
+			$path = __DIR__ . '/../../../sql/' . $type . '/' . $name . '.sql';
 
 			if ( file_exists( $path ) ) {
 				return $path;
 			}
 		}
 
-		throw new MWException( "Could not find schema update script for tables.sql" );
+		throw new MWException( "Could not find schema script '$name'" );
 	}
 
 }
