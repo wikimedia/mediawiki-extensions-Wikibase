@@ -18,7 +18,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Specials\SpecialNewItem;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikimedia\Rdbms\IMaintainableDatabase;
 
 /**
  * @covers \Wikibase\Repo\Specials\SpecialNewItem
@@ -60,22 +59,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		$this->tablesUsed = array_merge( $this->tablesUsed, $tables );
 
 		$this->siteStore = new HashSiteStore();
-	}
-
-	protected function getSchemaOverrides( IMaintainableDatabase $db ) {
-		return [
-			'scripts' => [
-				__DIR__ . '/../../../../sql/mysql/AddNormalizedTermsTablesDDL.sql',
-			],
-			'create' => [
-				'wbt_item_terms',
-				'wbt_property_terms',
-				'wbt_term_in_lang',
-				'wbt_text_in_lang',
-				'wbt_text',
-				'wbt_type',
-			],
-		];
 	}
 
 	protected function tearDown(): void {
