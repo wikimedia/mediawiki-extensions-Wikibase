@@ -43,7 +43,7 @@ class DatabaseTermInLangIdsAcquirerTest extends TestCase {
 	private function setUpNewDb() {
 		$db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
 		$db->sourceFile(
-			__DIR__ . '/../../../../../../repo/sql/AddNormalizedTermsTablesDDL.sql' );
+			__DIR__ . '/../../../../../../repo/sql/mysql/AddNormalizedTermsTablesDDL.sql' );
 
 		return $db;
 	}

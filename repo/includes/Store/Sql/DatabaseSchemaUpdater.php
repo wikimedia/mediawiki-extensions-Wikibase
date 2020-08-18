@@ -75,7 +75,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 			$updater->addExtensionTable(
 				'wb_items_per_site',
-				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
+				$this->getScriptPath( 'Wikibase', $db->getType() )
 			);
 
 			$this->store->rebuild();
@@ -83,7 +83,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			// Clean installation
 			$updater->addExtensionTable(
 				'wb_items_per_site',
-				$this->getUpdateScriptPath( 'Wikibase', $db->getType() )
+				$this->getScriptPath( 'Wikibase', $db->getType() )
 			);
 
 			$this->store->rebuild();
@@ -101,7 +101,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$updater->addExtensionTable(
 			'wbt_text',
-			$this->getUpdateScriptPath( 'AddNormalizedTermsTablesDDL', $db->getType() )
+			$this->getScriptPath( 'AddNormalizedTermsTablesDDL', $db->getType() )
 		);
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
 			$updater->addExtensionUpdate( [
@@ -195,12 +195,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		if ( !$updater->tableExists( $table ) ) {
 			$type = $updater->getDB()->getType();
-			$fileBase = __DIR__ . '/../../../sql/' . $table;
-
-			$file = $fileBase . '.' . $type . '.sql';
-			if ( !file_exists( $file ) ) {
-				$file = $fileBase . '.sql';
-			}
+			$file = $this->getScriptPath( $table, $type );
 
 			$updater->addExtensionTable( $table, $file );
 
@@ -373,65 +368,25 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 	}
 
-	/**
-	 * Returns the script directory that contains a file with the given name.
-	 *
-	 * @param string $fileName with extension
-	 *
-	 * @throws MWException If the file was not found in any script directory
-	 * @return string The directory that contains the file
-	 */
-	private function getUpdateScriptDir( $fileName ) {
-		$dirs = [
-			__DIR__,
-			__DIR__ . '/../../../sql'
-		];
-
-		foreach ( $dirs as $dir ) {
-			if ( file_exists( "$dir/$fileName" ) ) {
-				return $dir;
-			}
-		}
-
-		throw new MWException( "Update script not found: $fileName" );
+	private function getUpdateScriptPath( $name, $type ) {
+		return $this->getScriptPath( 'archives/' . $name, $type );
 	}
 
-	/**
-	 * Returns the appropriate script file for use with the given database type.
-	 * Searches for files with type-specific extensions in the script directories,
-	 * falling back to the plain ".sql" extension if no specific script is found.
-	 *
-	 * @param string $name the script's name, without file extension
-	 * @param string $type the database type, as returned by IDatabase::getType()
-	 *
-	 * @return string The path to the script file
-	 * @throws MWException If the script was not found in any script directory
-	 */
-	private function getUpdateScriptPath( $name, $type ) {
-		$extensions = [
-			'sqlite' => 'sqlite.sql',
-			//'postgres' => 'pg.sql', // PG support is broken as of Dec 2013
-			'mysql' => 'mysql.sql',
+	private function getScriptPath( $name, $type ) {
+		$types = [
+			$type,
+			'mysql'
 		];
 
-		// Find the base directory by looking for a plain ".sql" file.
-		$dir = $this->getUpdateScriptDir( "$name.sql" );
+		foreach ( $types as $type ) {
+			$path = __DIR__ . '/../../../sql/' . $type . '/' . $name . '.sql';
 
-		if ( isset( $extensions[$type] ) ) {
-			$extension = $extensions[$type];
-			$path = "$dir/$name.$extension";
-
-			// if a type-specific file exists, use it
-			if ( file_exists( "$dir/$name.$extension" ) ) {
+			if ( file_exists( $path ) ) {
 				return $path;
 			}
-		} else {
-			throw new MWException( "Database type $type is not supported by Wikibase!" );
 		}
 
-		// we already know that the generic file exists
-		$path = "$dir/$name.sql";
-		return $path;
+		throw new MWException( "Could not find schema script '$name'" );
 	}
 
 	/**
