@@ -453,23 +453,9 @@ final class WikibaseClient {
 
 	private function newEntitySourceWikibaseServices() {
 		$nameTableStoreFactory = MediaWikiServices::getInstance()->getNameTableStoreFactory();
-
-		$entityNamespaceIds = [];
-		$entitySlotNames = [];
-		$sources = $this->entitySourceDefinitions->getSources();
-		foreach ( $sources as $source ) {
-			$entityNamespaceIds = array_merge( $entityNamespaceIds, $source->getEntityNamespaceIds() );
-			$entitySlotNames = array_merge( $entitySlotNames, $source->getEntitySlotNames() );
-		}
-
-		$genericServices = new GenericServices(
-			$this->entityTypeDefinitions,
-			$entityNamespaceIds,
-			$entitySlotNames
-		);
+		$genericServices = new GenericServices( $this->entityTypeDefinitions );
 
 		$singleSourceServices = [];
-
 		foreach ( $this->entitySourceDefinitions->getSources() as $source ) {
 			// TODO: extract
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(

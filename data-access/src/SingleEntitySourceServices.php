@@ -19,6 +19,7 @@ use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
+use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\MatchingTermsLookup;
@@ -100,6 +101,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $propertyInfoLookup = null;
 
 	private $entityRevisionLookupFactoryCallbacks;
+	private $entityNamespaceLookup;
 
 	public function __construct(
 		GenericServices $genericServices,
@@ -167,6 +169,20 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	public function getEntitySource() : EntitySource {
 		return $this->entitySource;
+	}
+
+	/**
+	 * @return EntityNamespaceLookup The EntityNamespaceLookup object for this EntitySource
+	 */
+	public function getEntityNamespaceLookup() : EntityNamespaceLookup {
+		if ( $this->entityNamespaceLookup === null ) {
+			$this->entityNamespaceLookup = new EntityNamespaceLookup(
+				$this->entitySource->getEntityNamespaceIds(),
+				$this->entitySource->getEntitySlotNames()
+			);
+		}
+
+		return $this->entityNamespaceLookup;
 	}
 
 	/**
@@ -275,9 +291,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	private function getEntityMetaDataAccessor() {
 		if ( $this->entityMetaDataAccessor === null ) {
-			// TODO: Having this lookup in GenericServices seems shady, this class should
-			// probably create/provide one for itself (all data needed in in the entity source)
-			$entityNamespaceLookup = $this->genericServices->getEntityNamespaceLookup();
+			$entityNamespaceLookup = $this->getEntityNamespaceLookup();
 			$repositoryName = '';
 			$databaseName = $this->entitySource->getDatabaseName();
 			$this->entityMetaDataAccessor = new PrefetchingWikiPageEntityMetaDataAccessor(

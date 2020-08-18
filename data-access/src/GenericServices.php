@@ -8,7 +8,6 @@ use Serializers\Serializer;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\StringNormalizer;
 
 /**
@@ -17,16 +16,6 @@ use Wikibase\Lib\StringNormalizer;
  * @license GPL-2.0-or-later
  */
 class GenericServices {
-
-	/**
-	 * @var int[]
-	 */
-	private $entityNamespaces;
-
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
 
 	/**
 	 * @var EntityTypeDefinitions
@@ -59,39 +48,12 @@ class GenericServices {
 	private $stringNormalizer;
 
 	/**
-	 * @var string[]
-	 */
-	private $entitySlots;
-
-	/**
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param int[] $entityNamespaces
-	 * @param string[] $entitySlots
 	 */
 	public function __construct(
-		EntityTypeDefinitions $entityTypeDefinitions,
-		array $entityNamespaces,
-		array $entitySlots = []
+		EntityTypeDefinitions $entityTypeDefinitions
 	) {
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
-		// TODO: this seems wrong, or at least suspicious: namespaces and slots are repo/db/wiki-specific stuff
-		// and should not be relied by any other user. Only the wiki itself can make sense of namespace 123 etc
-		$this->entityNamespaces = $entityNamespaces;
-		$this->entitySlots = $entitySlots;
-	}
-
-	/**
-	 * @return EntityNamespaceLookup
-	 */
-	public function getEntityNamespaceLookup() {
-		if ( $this->entityNamespaceLookup === null ) {
-			$this->entityNamespaceLookup = new EntityNamespaceLookup(
-				$this->entityNamespaces,
-				$this->entitySlots
-			);
-		}
-
-		return $this->entityNamespaceLookup;
 	}
 
 	/**
