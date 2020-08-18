@@ -26,7 +26,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$db = $updater->getDB();
 
 		if ( !$updater->tableExists( $table ) ) {
-			$script = $this->getTablesScriptPath( $db->getType() );
+			$script = $this->getScriptPath( 'entity_usage', $db->getType() );
 			$updater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
@@ -77,10 +77,6 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	private function getUpdateScriptPath( $name, $type ) {
 		return $this->getScriptPath( 'archives/' . $name, $type );
-	}
-
-	private function getTablesScriptPath( $type ) {
-		return $this->getScriptPath( 'tables', $type );
 	}
 
 	private function getScriptPath( $name, $type ) {

@@ -1,0 +1,45 @@
+[
+	{
+		"name": "wbc_entity_usage",
+		"columns": [
+			{
+				"name": "eu_row_id",
+				"type": "bigint",
+				"options": { "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "eu_entity_id",
+				"comment": "The ID of the entity being used",
+				"type": "binary",
+				"options": { "length": 255, "notnull": true }
+			},
+			{
+				"name": "eu_aspect",
+				"comment": "The aspect of the entity. See EntityUsage::XXX_USAGE for possible values.",
+				"type": "binary",
+				"options": { "length": 37, "notnull": true }
+			},
+			{
+				"name": "eu_page_id",
+				"type": "integer",
+				"comment": "The ID of the page that uses the entities.",
+				"options": { "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "eu_entity_id",
+				"comment": "Record one usage per page per aspect of an entity",
+				"columns": [ "eu_entity_id", "eu_aspect", "eu_page_id" ],
+				"unique": true
+			},
+			{
+				"name": "eu_page_id",
+				"comment": "Look up (and especially, delete) usage entries by page id",
+				"columns": [ "eu_page_id", "eu_entity_id" ],
+				"unique": false
+			}
+		],
+		"pk": [ "eu_row_id" ]
+	}
+]
