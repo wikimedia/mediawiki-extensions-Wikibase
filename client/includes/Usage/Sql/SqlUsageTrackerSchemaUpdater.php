@@ -26,7 +26,7 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		$db = $updater->getDB();
 
 		if ( !$updater->tableExists( $table ) ) {
-			$script = $this->getUpdateScriptPath( 'entity_usage', $db->getType() );
+			$script = $this->getTablesScriptPath( $db->getType() );
 			$updater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
@@ -45,13 +45,8 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$script = $this->getUpdateScriptPath( 'entity_usage-drop-entity_type', $db->getType() );
 			$updater->dropExtensionField( $table, 'eu_entity_type', $script );
 
-			if ( $db->getType() === 'sqlite' ) {
-				$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched.sqlite', $db->getType() );
-				$updater->dropExtensionField( $table, 'eu_touched', $script );
-			} else {
-				$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched', $db->getType() );
-				$updater->dropExtensionField( $table, 'eu_touched', $script );
-			}
+			$script = $this->getUpdateScriptPath( 'entity_usage-drop-touched', $db->getType() );
+			$updater->dropExtensionField( $table, 'eu_touched', $script );
 		}
 	}
 
@@ -81,13 +76,13 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	}
 
 	private function getUpdateScriptPath( $name, $type ) {
-		$extensions = [
-			'.sql',
-			'.' . $type . '.sql',
+		$types = [
+			$type,
+			'mysql'
 		];
 
-		foreach ( $extensions as $ext ) {
-			$path = __DIR__ . '/../../../sql/' . $name . $ext;
+		foreach ( $types as $type ) {
+			$path = __DIR__ . '/../../../sql/' . $type . '/archives/' . $name . '.sql';
 
 			if ( file_exists( $path ) ) {
 				return $path;
@@ -95,6 +90,23 @@ class SqlUsageTrackerSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 
 		throw new MWException( "Could not find schema update script '$name'" );
+	}
+
+	private function getTablesScriptPath( $type ) {
+		$types = [
+			$type,
+			'mysql'
+		];
+
+		foreach ( $types as $type ) {
+			$path = __DIR__ . '/../../../sql/' . $type . '/tables.sql';
+
+			if ( file_exists( $path ) ) {
+				return $path;
+			}
+		}
+
+		throw new MWException( "Could not find schema update script for tables.sql" );
 	}
 
 }
