@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
+use Exception;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\WikibaseRepo;
@@ -21,6 +22,20 @@ class ApiServiceFactory {
 	 * @var string
 	 */
 	private $serverName;
+
+	/**
+	 * @var ApiEntityLookup|null
+	 */
+	private static $apiEntityLookupInstance = null;
+
+	public static function resetClassStatics() {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
+			throw new Exception(
+				'Cannot reset ApiServiceFactory class statics outside of tests.'
+			);
+		}
+		self::$apiEntityLookupInstance = null;
+	}
 
 	public function __construct(
 		string $federatedPropertiesSourceScriptUrl,
@@ -83,7 +98,10 @@ class ApiServiceFactory {
 	}
 
 	public function newApiEntityLookup(): ApiEntityLookup {
-		return new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
+		if ( self::$apiEntityLookupInstance === null ) {
+			self::$apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
+		}
+		return self::$apiEntityLookupInstance;
 	}
 
 	public function newApiEntityExistenceChecker(): ApiEntityExistenceChecker {
