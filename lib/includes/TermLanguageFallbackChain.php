@@ -1,4 +1,5 @@
 <?php
+declare( strict_types = 1 );
 
 namespace Wikibase\Lib;
 
@@ -41,7 +42,7 @@ class TermLanguageFallbackChain {
 	 *
 	 * @return LanguageWithConversion[]
 	 */
-	public function getFallbackChain() {
+	public function getFallbackChain(): array {
 		return $this->chain;
 	}
 
@@ -52,7 +53,7 @@ class TermLanguageFallbackChain {
 	 *
 	 * @return string[]
 	 */
-	public function getFetchLanguageCodes() {
+	public function getFetchLanguageCodes(): array {
 		$codes = [];
 
 		foreach ( $this->chain as $language ) {
@@ -74,7 +75,7 @@ class TermLanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no "acceptable" data can be found.
 	 */
-	public function extractPreferredValue( array $data ) {
+	public function extractPreferredValue( array $data ): ?array {
 		if ( empty( $data ) ) {
 			return null;
 		}
@@ -113,7 +114,7 @@ class TermLanguageFallbackChain {
 	 * 	'source' => language code of the language where the value is translated from
 	 * ), or null when no data with a valid language code can be found.
 	 */
-	public function extractPreferredValueOrAny( array $data ) {
+	public function extractPreferredValueOrAny( array $data ): ?array {
 		$preferred = $this->extractPreferredValue( $data );
 
 		if ( $preferred !== null ) {
@@ -137,7 +138,7 @@ class TermLanguageFallbackChain {
 	 *
 	 * @return string[]
 	 */
-	private function getValueArray( $value, $languageCode, $sourceLanguageCode = null ) {
+	private function getValueArray( $value, string $languageCode, ?string $sourceLanguageCode = null ): array {
 		if ( !is_array( $value ) ) {
 			$value = [
 				'value' => $value,
