@@ -35,20 +35,23 @@ class SetAliases extends ModifyEntity {
 		ApiMain $mainModule,
 		string $moduleName,
 		FingerprintChangeOpFactory $termChangeOpFactory,
-		IBufferingStatsdDataFactory $stats
+		IBufferingStatsdDataFactory $stats,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 		$this->termChangeOpFactory = $termChangeOpFactory;
 		$this->stats = $stats;
 	}
 
 	public static function factory( ApiMain $mainModule, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
+			$wikibaseRepo->getChangeOpFactoryProvider()
 				->getFingerprintChangeOpFactory(),
-			$stats
+			$stats,
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 

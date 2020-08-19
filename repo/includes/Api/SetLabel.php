@@ -32,19 +32,22 @@ class SetLabel extends ModifyTerm {
 	public function __construct(
 		ApiMain $mainModule,
 		string $moduleName,
-		FingerprintChangeOpFactory $termChangeOpFactory
+		FingerprintChangeOpFactory $termChangeOpFactory,
+		bool $federatedPropertiesEnabled
 	) {
-		parent::__construct( $mainModule, $moduleName );
+		parent::__construct( $mainModule, $moduleName, $federatedPropertiesEnabled );
 
 		$this->termChangeOpFactory = $termChangeOpFactory;
 	}
 
 	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$mainModule,
 			$moduleName,
-			WikibaseRepo::getDefaultInstance()->getChangeOpFactoryProvider()
-				->getFingerprintChangeOpFactory()
+			$wikibaseRepo->getChangeOpFactoryProvider()
+				->getFingerprintChangeOpFactory(),
+			$wikibaseRepo->inFederatedPropertyMode()
 		);
 	}
 
