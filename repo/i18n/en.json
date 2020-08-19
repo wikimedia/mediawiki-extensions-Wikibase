@@ -516,5 +516,6 @@
 	"special-setlabel-parameterized": "Set $1 label",
 	"special-setdescription-parameterized": "Set $1 description",
 	"special-setlabeldescriptionaliases-parameterized": "Set $1 label, description and aliases",
-	"special-parameterized-description-separator": "/"
+	"special-parameterized-description-separator": "/",
+	"wikibase-federated-properties-local-property-api-error-message": "You can not interact with properties using this API while federated properties is enabled"
 }
