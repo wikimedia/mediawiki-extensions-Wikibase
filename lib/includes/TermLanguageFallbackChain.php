@@ -31,6 +31,9 @@ class TermLanguageFallbackChain {
 				return $termLanguages->hasLanguage( $language->getLanguageCode() );
 			}
 		) );
+		if ( !empty( $chain ) && empty( $this->chain ) ) {
+			$this->chain = [ LanguageWithConversion::factory( 'en' ) ];
+		}
 	}
 
 	/**

@@ -49,6 +49,18 @@ class TermLanguageFallbackChainTest extends \MediaWikiTestCase {
 		$this->assertSame( [ 'de', 'en' ], $actualFallbackChain );
 	}
 
+	public function testChainNotBeingUnintentionallyEmpty() {
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )->willReturn( false );
+		$chain = new TermLanguageFallbackChain( [ LanguageWithConversion::factory( '⧼Lang⧽' ) ], $stubContentLanguages );
+		$actualFallbackChain = array_map( function ( LanguageWithConversion $lang ) {
+			return $lang->getLanguageCode();
+		},
+			$chain->getFallbackChain() );
+
+		$this->assertSame( [ 'en' ], $actualFallbackChain );
+	}
+
 	/**
 	 * @dataProvider provideExtractPreferredValue
 	 */
