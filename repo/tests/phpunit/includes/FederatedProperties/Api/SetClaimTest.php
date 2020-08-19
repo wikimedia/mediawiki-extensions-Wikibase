@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 use DataValues\Serializers\DataValueSerializer;
 use FormatJson;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
@@ -27,6 +28,22 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SetClaimTest extends FederatedPropertiesApiTestCase {
 
+	public function testAlteringPropertiesIsNotSupported() {
+		$entity = new Property( new PropertyId( 'P123' ), null, 'string' );
+		$entityId = $entity->getId();
+
+		$statement = new Statement( new PropertyNoValueSnak( new PropertyId( 'P626' ) ) );
+		$guidGenerator = new GuidGenerator();
+		$guid = $guidGenerator->newGuid( $entityId );
+		$statement->setGuid( $guid );
+
+		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-local-property-api-error-message' ) );
+		$this->doApiRequestWithToken( [
+			'action' => 'wbsetclaim',
+			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),
+		] );
+	}
+
 	public function testFederatedPropertiesFailure() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
@@ -42,17 +59,18 @@ class SetClaimTest extends FederatedPropertiesApiTestCase {
 
 		$guidGenerator = new GuidGenerator();
 		$guid = $guidGenerator->newGuid( $entityId );
-
 		$statement->setGuid( $guid );
-
-		$statementSerializer = ( new SerializerFactory( new DataValueSerializer() ) )->newStatementSerializer();
-		$serialized = $statementSerializer->serialize( $statement );
 
 		$this->setExpectedApiException( wfMessage( 'wikibase-federated-properties-save-api-error-message' ) );
 		$this->doApiRequestWithToken( [
 			'action' => 'wbsetclaim',
-			'claim' => FormatJson::encode( $serialized ),
+			'claim' => FormatJson::encode( $this->getSerializedStatement( $statement ) ),
 		] );
+	}
+
+	private function getSerializedStatement( $statement ) {
+		$statementSerializer = ( new SerializerFactory( new DataValueSerializer() ) )->newStatementSerializer();
+		return $statementSerializer->serialize( $statement );
 	}
 
 }
