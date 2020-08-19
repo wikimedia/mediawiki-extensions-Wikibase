@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Ladsgroup",
-			"Leli Forte"
+			"Leli Forte",
+			"ToniSant"
 		]
 	},
 	"wikibase-edit": "immodifika",
@@ -14,5 +15,6 @@
 	"wikibase-statementview-rank-normal": "Klassifikazzjoni normali",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|referenza|referenzi}}",
 	"wikibase-wikibaserepopage-unresolved-redirect": "$1 hi ridirezzjoni.",
-	"wikibase-wikibaserepopage-storage-exception": "Sar żball waqt it-tlugħ ta' $1:$2."
+	"wikibase-wikibaserepopage-storage-exception": "Sar żball waqt it-tlugħ ta' $1:$2.",
+	"wikibase-dispatchstats-no-stats": "Bħalissa m'hawnx statistika."
 }

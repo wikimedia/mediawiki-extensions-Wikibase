@@ -199,6 +199,7 @@
 	"content-model-wikibase-query": "Wikibase дехар",
 	"right-item-term": "Хийца элементийн терминаш (билгалонаш, хаамаш, харц цӀерш)",
 	"right-item-merge": "Цхьаьнатоха элементаш",
+	"right-item-redirect": "Элементашна дӀасахьажорг кхоллар",
 	"right-property-term": "Хийца башхаллийн терминаш (билгалонаш, хаамаш, харц цӀерш)",
 	"right-property-create": "билгало кхоллар",
 	"wikibase-pageinfo-subscription-none": "ХӀан-хӀа"
