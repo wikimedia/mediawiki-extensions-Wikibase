@@ -30,9 +30,9 @@ PHP Codesniffer already has a Generic.PHP.RequireStrictTypes sniff implemented t
 Code for estimation of completion:
 ```
 EST_DONE=$(grep --exclude-dir={vendor,node_modules,.idea,.phan} --include=\*.php -rnw . -e "strict_types" | wc -l) \
-&& EST_TODO=$(find ./ -type f -name "*.php" | wc -l) Wikibase PHP files have strict_types \
-&& EST_PRECENT=$(( $EST_DONE/EST_TODO*100 )) \
-&& echo ${EST_DONE}/${EST_TODO} Wikibase PHP files with strict_types
+&& EST_TODO=$(find ./ -type f -name "*.php" | wc -l) \
+&& EST_PRECENT=$(( $EST_DONE*100/EST_TODO )) \
+&& echo ${EST_DONE}/${EST_TODO} = ${EST_PRECENT}%
 ```
 
 ## Decision
