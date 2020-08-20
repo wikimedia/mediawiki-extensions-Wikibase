@@ -7,7 +7,9 @@ CREATE TABLE /*_*/wbc_entity_usage (
   eu_entity_id BLOB NOT NULL, eu_aspect BLOB NOT NULL,
   eu_page_id INTEGER NOT NULL
 );
+
 CREATE UNIQUE INDEX eu_entity_id ON /*_*/wbc_entity_usage (
   eu_entity_id, eu_aspect, eu_page_id
 );
+
 CREATE INDEX eu_page_id ON /*_*/wbc_entity_usage (eu_page_id, eu_entity_id);
