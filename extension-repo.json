@@ -431,7 +431,8 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\ArticleRevisionVisibilitySetHookHandler::factory",
 			"services": [
-				"RevisionLookup"
+				"RevisionLookup",
+				"TitleFactory"
 			]
 		},
 		"DatabaseSchemaUpdater": {

@@ -97,14 +97,14 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		$this->jobBatchSize = $jobBatchSize;
 	}
 
-	public static function factory( RevisionLookup $revisionLookup ) {
+	public static function factory( RevisionLookup $revisionLookup, TitleFactory $titleFactory ) {
 		$wbRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
 			$revisionLookup,
 			$wbRepo->getEntityContentFactory(),
 			$wbRepo->getLocalEntityNamespaceLookup(),
-			new TitleFactory(),
+			$titleFactory,
 			$wbRepo->getSettings()->getSetting( 'localClientDatabases' ),
 			'JobQueueGroup::singleton',
 			$wbRepo->getSettings()->getSetting( 'propagateChangeVisibility' ),
