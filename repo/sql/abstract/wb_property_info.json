@@ -1,0 +1,26 @@
+[
+	{
+		"name": "wb_property_info",
+		"columns": [
+			{
+			  "name": "pi_property_id",
+			  "type": "integer",
+			  "options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "pi_type",
+				"type": "binary",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+			  "name": "pi_info",
+			  "type": "blob",
+			  "options": { "length": 65535, "notnull": true }
+			}
+		],
+		"indexes": [
+		  { "name": "pi_type", "columns": [ "pi_type" ], "unique": false }
+		],
+		"pk": [ "pi_property_id" ]
+	}
+]

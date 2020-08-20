@@ -2,11 +2,11 @@
 -- Source: extensions/Wikibase/repo/sql/abstract/wb_property_info.json
 -- Do not modify this file directly.
 -- See https://www.mediawiki.org/wiki/Manual:Schema_changes
-CREATE TABLE /*_*/wb_property_info (
-  pi_property_id INTEGER UNSIGNED NOT NULL,
-  pi_type BLOB NOT NULL,
-  pi_info BLOB NOT NULL,
+CREATE TABLE wb_property_info (
+  pi_property_id INT NOT NULL,
+  pi_type TEXT NOT NULL,
+  pi_info TEXT NOT NULL,
   PRIMARY KEY(pi_property_id)
 );
 
-CREATE INDEX pi_type ON /*_*/wb_property_info (pi_type);
+CREATE INDEX pi_type ON wb_property_info (pi_type);
