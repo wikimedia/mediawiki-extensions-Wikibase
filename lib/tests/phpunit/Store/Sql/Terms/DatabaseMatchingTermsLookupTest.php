@@ -55,7 +55,7 @@ class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
 	private function setUpNewDb() {
 		$db = DatabaseSqlite::newStandaloneInstance( ':memory:' );
 		$db->sourceFile(
-			__DIR__ . '/../../../../../../repo/sql/mysql/AddNormalizedTermsTablesDDL.sql' );
+			__DIR__ . '/../../../../../../repo/sql/sqlite/AddNormalizedTermsTablesDDL.sql' );
 
 		return $db;
 	}

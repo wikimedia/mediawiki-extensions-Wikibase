@@ -1,0 +1,186 @@
+[
+	{
+		"name": "wbt_item_terms",
+		"comment": "Stores a record per term per item per language. this table is expected to be the longest one in this group of tables. Term text, type and language are normalized further through wb_term_in_lang table.",
+		"columns": [
+			{
+				"name": "wbit_id",
+				"type": "bigint",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wbit_item_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "wbit_term_in_lang_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_item_terms_item_id",
+				"columns": [ "wbit_item_id" ],
+				"unique": false
+			},
+			{
+				"name": "wbt_item_terms_term_in_lang_id_item_id",
+				"columns": [ "wbit_term_in_lang_id", "wbit_item_id" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wbit_id" ]
+	},
+	{
+		"name": "wbt_property_terms",
+		"comment": "Stores a record per term per property per language. Term text, type and language are normalized further through wb_term_in_lang table.",
+		"columns": [
+			{
+				"name": "wbpt_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wbpt_property_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "wbpt_term_in_lang_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_property_terms_property_id",
+				"columns": [ "wbpt_property_id" ],
+				"unique": false
+			},
+			{
+				"name": "wbt_property_terms_term_in_lang_id_property_id",
+				"columns": [ "wbpt_term_in_lang_id", "wbpt_property_id" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wbpt_id" ]
+	},
+	{
+		"name": "wbt_term_in_lang",
+		"comment": "Stores a record per term per text per language. Term text and language are normalized further through wb_text_in_lang table.",
+		"columns": [
+			{
+				"name": "wbtl_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wbtl_type_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "wbtl_text_in_lang_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_term_in_lang_type_id_text_in",
+				"columns": [ "wbtl_type_id" ],
+				"unique": false
+			},
+			{
+				"name": "wbt_term_in_lang_text_in_lang_id_lang_id",
+				"columns": [ "wbtl_text_in_lang_id", "wbtl_type_id" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wbtl_id" ]
+	},
+	{
+		"name": "wbt_text_in_lang",
+		"comment": "Stores a record per term text per language. Text is normalized through wb_term_text table.",
+		"columns": [
+			{
+				"name": "wbxl_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wbxl_language",
+				"type": "binary",
+				"options": { "length": 20, "notnull": true }
+			},
+			{
+				"name": "wbxl_text_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_text_in_lang_language",
+				"columns": [ "wbxl_language" ],
+				"unique": false
+			},
+			{
+				"name": "wbt_text_in_lang_text_id_text_id",
+				"columns": [ "wbxl_text_id", "wbxl_language" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wbxl_id" ]
+	},
+	{
+		"name": "wbt_text",
+		"comment": "Stores a record per text value that are used in different terms in different languages.",
+		"columns": [
+			{
+				"name": "wbx_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wbx_text",
+				"type": "binary",
+				"options": { "length": 255, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_text_text",
+				"columns": [ "wbx_text" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wbx_id" ]
+	},
+	{
+		"name": "wbt_type",
+		"comment": "Normalized term type names",
+		"columns": [
+			{
+				"name": "wby_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "wby_name",
+				"type": "binary",
+				"options": { "length": 45, "notnull": true }
+			}
+		],
+		"indexes": [
+			{
+				"name": "wbt_type_name",
+				"columns": [ "wby_name" ],
+				"unique": true
+			}
+		],
+		"pk": [ "wby_id" ]
+	}
+]
