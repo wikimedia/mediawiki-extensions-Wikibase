@@ -34,6 +34,7 @@ use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler
@@ -682,6 +683,24 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
 
 		return $entitySource;
+	}
+
+	/**
+	 * @dataProvider linkTargetProvider
+	 */
+	public function testExtractForeignIdString( $linkTarget, $expectedOutput ) {
+		$wrapper = TestingAccessWrapper::newFromObject( $this->newInstance() );
+		$output = $wrapper->extractForeignIdString( $linkTarget );
+		$this->assertSame( $expectedOutput, $output );
+	}
+
+	public function linkTargetProvider() {
+		return [
+			'NS=MAIN, title=null' => [ Title::makeTitle( NS_MAIN, null ), null ], // T260853
+			'NS=SPECIAL, title=null' => [ Title::makeTitle( NS_SPECIAL, null ), null ],
+			'NS=SPECIAL, title=EntityPage/Q123' => [ Title::newFromText( 'Special:EntityPage/Q123' ), 'Q123' ],
+			'NS=MAIN, title=Special:EntityPage/Q123' => [ Title::newFromText( 'wikidata:Special:EntityPage/Q123' ), 'Q123' ],
+		];
 	}
 
 }
