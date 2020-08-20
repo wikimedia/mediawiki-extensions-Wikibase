@@ -90,8 +90,8 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 			case 'kk':
 				return [ 'kk-cyrl', 'en' ];
 			default:
-				// Language::getFallbacksFor returns [ 'en' ] if $code is unknown
-				return [ 'en' ];
+				// Language::getFallbacksFor returns [ 'en' ] if $code is unknown and conforms to /^[a-z0-9-]{2,}$/
+				return preg_match( '/^[a-z0-9-]{2,}$/', $code ) ? [ 'en' ] : [];
 		}
 	}
 
@@ -359,6 +359,11 @@ class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 					[ 'kk', 'kk-tr' ],
 					[ 'kk', 'kk-cn' ],
 				]
+			],
+			[
+				'languageCode' => '⧼Lang⧽',
+				'mode' => LanguageFallbackChainFactory::FALLBACK_ALL,
+				'expected' => [ 'en' ]
 			],
 		];
 	}
