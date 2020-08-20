@@ -490,5 +490,6 @@
 	"special-setaliases-parameterized": "Aliasse für $1 festlegen",
 	"special-setlabel-parameterized": "Bezeichnung für $1 festlegen",
 	"special-setdescription-parameterized": "Beschreibung für $1 festlegen",
-	"special-setlabeldescriptionaliases-parameterized": "Bezeichnung, Beschreibung und Aliasse für $1 festlegen"
+	"special-setlabeldescriptionaliases-parameterized": "Bezeichnung, Beschreibung und Aliasse für $1 festlegen",
+	"wikibase-federated-properties-local-property-api-error-message": "Du kannst nicht mit Eigenschaften über diese API interagieren, solange föderierte Eigenschaften aktiviert sind."
 }

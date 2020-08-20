@@ -10,6 +10,7 @@
 			"Jdforrester",
 			"Jkjk",
 			"Littledogboy",
+			"Luklos",
 			"Marek Pavlica",
 			"Matěj Grabovský",
 			"Matěj Suchánek",
@@ -449,5 +450,6 @@
 	"wikibase-tainted-ref-popper-help-link-title": "Stránka s nápovědou pro tento typ omezení",
 	"wikibase-tainted-ref-popper-help-link-text": "Nápověda",
 	"wikibase-tainted-ref-popper-remove-warning": "Odstranit varování",
-	"wikibase-tainted-ref-tainted-icon-title": "Toto tvrzení může mít určité problémy."
+	"wikibase-tainted-ref-tainted-icon-title": "Toto tvrzení může mít určité problémy.",
+	"wikibase-federated-properties-local-property-api-error-message": "Nemůžete interagovat s vlastnostmi pomocí tohoto rozhraní API, pokud jsou povoleny federované vlastnosti"
 }

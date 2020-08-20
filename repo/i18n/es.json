@@ -450,7 +450,7 @@
 	"wikibase-federated-properties-search-api-error-message": "Las propiedades no están disponibles por ahora.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Las declaraciones sobre este elemento son temporalmente inutilizables debido a una petición fallada a la fuente de federación wiki. Complacer refresh la página.",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Cancelar",
-	"wikibase-federated-properties-leaving-site-notice-continue": "Continua al fuente Wiki",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Continuar al wiki de origen",
 	"wikibase-federated-properties-leaving-site-notice-notice": "Esta es propiedad federada. Serás redirigido a $1 para ver a los detalles.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Dejar Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo"

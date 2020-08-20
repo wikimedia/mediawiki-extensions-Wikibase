@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Trondtr"
+			"Trondtr",
+			"Yupik"
 		]
 	},
 	"wikibase-edit": "mute",
@@ -9,5 +10,6 @@
 	"wikibase-label-empty": "Nommâ ij lah lasettum",
 	"wikibase-description-empty": "Kuvvim ij lah lasettum",
 	"wikibase-sitelinks-special": "Eres siijđoh",
-	"wikibase-statementview-rank-normal": "Táválâš sajattâh"
+	"wikibase-statementview-rank-normal": "Táválâš sajattâh",
+	"wikibase-anonymouseditwarning": "<strong>Váruttâs:</strong> Jieh lah čälittâm jieijâd siisâ. IP-čujottâsâd uáinoo almolávt puohháid, jis hammiih. Jis <strong>[[Special:UserLogin|čälittah jieijâd siisâ]]</strong> teikâ <strong>[[Special:CreateAccount|rááhtáh tubdâlduv]]</strong>, tuu hammim čálloo tuu kevtteetubdâlduvâi rähtim hammiimin já siämmást tun finniih kiävtun ávhálijd piergâsijd."
 }

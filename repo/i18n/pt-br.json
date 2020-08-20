@@ -486,5 +486,6 @@
 	"special-setaliases-parameterized": "Definir nomes alternativos de $1",
 	"special-setlabel-parameterized": "Definir rótulo de $1",
 	"special-setdescription-parameterized": "Definir descrição de $1",
-	"special-setlabeldescriptionaliases-parameterized": "Definir rótulo, descrição e nomes alternativos de $1"
+	"special-setlabeldescriptionaliases-parameterized": "Definir rótulo, descrição e nomes alternativos de $1",
+	"wikibase-federated-properties-local-property-api-error-message": "Você não pode interagir com propriedades usando esta API enquanto as propriedades federadas estão habilitadas"
 }
