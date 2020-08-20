@@ -132,7 +132,10 @@
 	"APIMetaModules": {
 		"wbcontentlanguages": {
 			"class": "\\Wikibase\\Repo\\Api\\MetaContentLanguages",
-			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\MetaContentLanguages::factory",
+			"services": [
+				"LanguageNameUtils"
+			]
 		}
 	},
 	"APIPropModules": {

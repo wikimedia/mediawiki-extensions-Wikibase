@@ -7,7 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiQuery;
 use ApiQueryBase;
 use ExtensionRegistry;
-use Language;
+use MediaWiki\Languages\LanguageNameUtils;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -22,26 +22,36 @@ class MetaContentLanguages extends ApiQueryBase {
 	/** @var bool */
 	private $expectKnownLanguageNames;
 
+	/** @var LanguageNameUtils */
+	private $languageNameUtils;
+
 	/**
 	 * @param WikibaseContentLanguages $wikibaseContentLanguages
 	 * @param bool $expectKnownLanguageNames whether we should expect MediaWiki
 	 * to know a language name for any language code that occurs in the content languages
 	 * (if true, warnings will be raised for any language without known language name)
+	 * @param LanguageNameUtils $languageNameUtils source of language names and autonyms
 	 * @param ApiQuery $queryModule
 	 * @param string $moduleName
 	 */
 	public function __construct(
 		WikibaseContentLanguages $wikibaseContentLanguages,
 		bool $expectKnownLanguageNames,
+		LanguageNameUtils $languageNameUtils,
 		ApiQuery $queryModule,
 		string $moduleName
 	) {
 		parent::__construct( $queryModule, $moduleName, 'wbcl' );
 		$this->wikibaseContentLanguages = $wikibaseContentLanguages;
 		$this->expectKnownLanguageNames = $expectKnownLanguageNames;
+		$this->languageNameUtils = $languageNameUtils;
 	}
 
-	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
+	public static function factory(
+		ApiQuery $apiQuery,
+		string $moduleName,
+		LanguageNameUtils $languageNameUtils
+	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 
 		// if CLDR is available, we expect to have some language name
@@ -51,6 +61,7 @@ class MetaContentLanguages extends ApiQueryBase {
 		return new self(
 			$repo->getWikibaseContentLanguages(),
 			$expectKnownLanguageNames,
+			$languageNameUtils,
 			$apiQuery,
 			$moduleName
 		);
@@ -84,7 +95,7 @@ class MetaContentLanguages extends ApiQueryBase {
 			}
 
 			if ( $includeAutonym ) {
-				$autonym = Language::fetchLanguageName( $languageCode );
+				$autonym = $this->languageNameUtils->getLanguageName( $languageCode );
 				if ( $autonym === '' ) {
 					$autonym = null;
 				}
@@ -93,7 +104,7 @@ class MetaContentLanguages extends ApiQueryBase {
 
 			if ( $includeName ) {
 				$userLanguageCode = $this->getLanguage()->getCode();
-				$name = Language::fetchLanguageName( $languageCode, $userLanguageCode );
+				$name = $this->languageNameUtils->getLanguageName( $languageCode, $userLanguageCode );
 				if ( $name === '' ) {
 					if ( $this->expectKnownLanguageNames ) {
 						wfLogWarning( 'No name known for language ' . $languageCode );
