@@ -445,7 +445,13 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			return null;
 		}
 
-		return $this->extractForeignIdStringSpecialNs( Title::newFromText( $linkTarget->getText() ) );
+		$linkTargetChangedNamespace = Title::newFromText( $linkTarget->getText() );
+
+		if ( $linkTargetChangedNamespace === null ) {
+			return null;
+		}
+
+		return $this->extractForeignIdStringSpecialNs( $linkTargetChangedNamespace );
 	}
 
 	private function extractForeignIdStringSpecialNs( LinkTarget $linkTarget ): ?string {
