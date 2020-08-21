@@ -235,7 +235,7 @@ class EntityDataRequestHandler {
 
 		//XXX: allow for logged in users only?
 		if ( $request->getText( 'action' ) === 'purge' ) {
-			$this->purgeWebCache( $entityId );
+			$this->purgeWebCache( $entityId, $revision );
 			//XXX: Now what? Proceed to show the data?
 		}
 
@@ -308,11 +308,14 @@ class EntityDataRequestHandler {
 	 * Purges the entity data identified by the doc parameter from any HTTP caches.
 	 * Does nothing if $wgUseCdn is not set.
 	 *
-	 * @param EntityId $id       The entity
+	 * @param EntityId $id The entity ID for which to purge all data.
+	 * @param int $revision The revision ID (0 for current/unspecified)
 	 */
-	public function purgeWebCache( EntityId $id ) {
-		$urls = $this->uriManager->getCacheableUrls( $id );
-		$this->htmlCacheUpdater->purgeUrls( $urls );
+	public function purgeWebCache( EntityId $id, int $revision ) {
+		$urls = $this->uriManager->getPotentiallyCachedUrls( $id, $revision );
+		if ( $urls !== [] ) {
+			$this->htmlCacheUpdater->purgeUrls( $urls );
+		}
 	}
 
 	/**
@@ -530,6 +533,8 @@ class EntityDataRequestHandler {
 		$output->disable();
 		$this->outputData(
 			$request,
+			$id,
+			$revision,
 			$output->getRequest()->response(),
 			$data,
 			$contentType,
@@ -541,12 +546,22 @@ class EntityDataRequestHandler {
 	 * Output the entity data and set the appropriate HTTP response headers.
 	 *
 	 * @param WebRequest  $request
+	 * @param EntityId    $requestId       the original entity ID of the request
+	 * @param int         $requestRevision the original revision ID of the request (0 for latest)
 	 * @param WebResponse $response
 	 * @param string      $data        the data to output
 	 * @param string      $contentType the data's mime type
 	 * @param string      $lastModified
 	 */
-	public function outputData( WebRequest $request, WebResponse $response, $data, $contentType, $lastModified ) {
+	public function outputData(
+		WebRequest $request,
+		EntityId $requestId,
+		int $requestRevision,
+		WebResponse $response,
+		string $data,
+		string $contentType,
+		string $lastModified
+	) {
 		// NOTE: similar code as in RawAction::onView, keep in sync.
 
 		$maxAge = $request->getInt( 'maxage', $this->maxAge );
@@ -566,7 +581,8 @@ class EntityDataRequestHandler {
 			$response->header( "X-Frame-Options: $this->frameOptionsHeader" );
 		}
 
-		if ( array_key_exists( 'revision', $request->getValues( 'revision' ) ) ) {
+		$cacheableUrls = $this->uriManager->getCacheableUrls( $requestId, $requestRevision );
+		if ( in_array( $request->getFullRequestURL(), $cacheableUrls ) ) {
 			$response->header( 'Cache-Control: public, s-maxage=' . $sMaxAge . ', max-age=' . $maxAge );
 		} else {
 			$response->header( 'Cache-Control: private, no-cache, s-maxage=0' );

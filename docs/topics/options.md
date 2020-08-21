@@ -349,6 +349,22 @@ Note: keep that low, because such caches cannot always be purged easily.
 
 DEFAULT: [$wgCdnMaxAge]
 
+#### entityDataCachePaths
+URL paths for which entity data shall be cacheable.
+A list of strings, each of which should be a URL path pattern,
+usually starting with [$wgArticlePath] or [$wgScriptPath] and containing `{entity_id}` and `{revision_id}` placeholders,
+but not including [$wgServer] or any other server.
+
+Entity data is only cached if the request URL exactly matches one of the patterns specified here.
+
+DEFAULT (assuming [$wgArticlePath] is `/wiki/$1`):
+```
+[
+    '/wiki/Special:EntityData/{entity_id}.json?revision={revision_id}',
+    '/wiki/Special:EntityData/{entity_id}.ttl?flavor=dump&revision={revision_id}',
+]
+```
+
 ### Search
 
 #### enableEntitySearchUI

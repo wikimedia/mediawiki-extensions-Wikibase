@@ -40,6 +40,7 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$title,
 			$extensions,
+			[ '/data/{entity_id}/{revision_id}' ],
 			$titleLookup
 		);
 
@@ -170,28 +171,29 @@ class EntityDataUriManagerTest extends \MediaWikiTestCase {
 		$this->assertRegExp( $expectedExp, $actual );
 	}
 
-	public function provideGetCacheableUrls() {
-		$title = Title::newFromText( "Special:EntityDataUriManagerTest" );
-		$base = $title->getInternalURL();
-
-		return [
-			[ 'Q12', [
-				"$base/Q12.txt",
-				"$base/Q12.rdf",
-			] ],
-		];
-	}
-
-	/**
-	 * @dataProvider provideGetCacheableUrls
-	 */
-	public function testGetCacheableUrls( $id, $expected ) {
-		$id = new ItemId( $id );
-
+	public function testCacheableOrPotentiallyCachedUrls_withoutRevisionId() {
 		$uriManager = $this->makeUriManager();
 
-		$actual = $uriManager->getCacheableUrls( $id );
-		$this->assertEquals( $expected, $actual );
+		$this->assertEmpty( $uriManager->getCacheableUrls( new ItemId( 'Q1' ) ) );
+		$this->assertEmpty( $uriManager->getPotentiallyCachedUrls( new ItemId( 'Q1' ) ) );
+	}
+
+	public function testCacheableOrPotentiallyCachedUrls_withRevisionId() {
+		$this->setMwGlobals( [
+			'wgCanonicalServer' => 'http://canonical.test',
+			'wgInternalServer' => 'http://internal.test',
+		] );
+		$uriManager = $this->makeUriManager();
+
+		$cacheableUrls = $uriManager->getCacheableUrls( new ItemId( 'Q1' ), 2 );
+		$potentiallyCachedUrls = $uriManager->getPotentiallyCachedUrls( new ItemId( 'Q1' ), 2 );
+
+		$this->assertSame( [
+			'http://canonical.test/data/Q1/2',
+		], $cacheableUrls );
+		$this->assertSame( [
+			'http://internal.test/data/Q1/2',
+		], $potentiallyCachedUrls );
 	}
 
 }

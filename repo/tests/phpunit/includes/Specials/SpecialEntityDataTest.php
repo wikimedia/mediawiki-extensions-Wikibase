@@ -130,6 +130,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		$uriManager = new EntityDataUriManager(
 			$title,
 			$supportedExtensions,
+			[],
 			$titleLookup
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
@@ -191,6 +192,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		array $expHeaders = []
 	) {
 		$request = new FauxRequest( $params );
+		$request->setRequestURL( $this->newSpecialPage()->getPageTitle( $subpage )->getLocalURL( $params ) );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
 		foreach ( $headers as $name => $value ) {
