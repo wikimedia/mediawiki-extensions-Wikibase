@@ -5,6 +5,7 @@
 			"Ladsgroup",
 			"Leduyquang753",
 			"Minh Nguyen",
+			"Nguyễn Mạnh An",
 			"Shirayuki",
 			"Trần Nguyễn Minh Huy",
 			"Vinhtantran",
@@ -270,7 +271,7 @@
 	"wikibase-itemmerge-no-such-entity": "Không tìm thấy khoản mục.",
 	"wikibase-itemmerge-cant-load-entity-content": "Không thể tải khoản mục.",
 	"wikibase-itemmerge-cant-merge-self": "Không thể nhập một khoản mục vào chính nó.",
-	"wikibase-tokencheck-missingtoken": "Yêu cầu dấu hiệu sửa đổi.",
+	"wikibase-tokencheck-missingtoken": "Cần chìa khóa bí mật để sửa đổi.",
 	"wikibase-tokencheck-mustposttoken": "Việc sửa đổi chỉ có thể dùng yêu cầu POST.",
 	"wikibase-tokencheck-badtoken": "Dấu hiệu sửa đổi sai (có lẽ phiên làm việc của bạn đã hết hạn).",
 	"special-dispatchstats": "Thống kê truyền thay đổi",
@@ -399,5 +400,6 @@
 	"wikibase-pageinfo-subscription": "Wiki theo dõi khoản mục này",
 	"wikibase-pageinfo-subscription-none": "Không có",
 	"wikibase-search-bad-entity-type": "Kiểu thực thể hỏng: $1",
-	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1"
+	"wikibase-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
+	"wikibase-federated-properties-local-property-api-error-message": "Bạn không thể tương tác với các thuộc tính bằng API này trong khi các thuộc tính được liên kết được bật"
 }

@@ -87,6 +87,10 @@
 	"wikibase-entity-summary-wbeditentity-create": "Nova entitat creada",
 	"wikibase-entity-summary-wbeditentity-update": "Entitat modificada",
 	"wikibase-entity-summary-wbeditentity-override": "S'ha netejat una entitat",
+	"wikibase-entity-summary-wbeditentity-update-languages": "Etiqueta, descripció o àlies canviats en $3 {{PLURAL:$3|llengua|llengües}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-short": "Etiqueta, descripció o àlies canviats en {{#commaseparatedlist: $3}}",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other": "Etiqueta, descripció o àlies canviats en $3 {{PLURAL:$3|llengua|llengües}}, i d'altres parts",
+	"wikibase-entity-summary-wbeditentity-update-languages-and-other-short": "Etiqueta, descripció o àlies canviats en {{#commaseparatedlist: $3}}, i d'altres parts",
 	"wikibase-entity-summary-wbsetreference": "Defineix una referència",
 	"wikibase-entity-summary-wbsetreference-add": "S'ha afegit una referència a la declaració",
 	"wikibase-entity-summary-wbsetreference-set": "S'ha canviat la referència d'una declaració",
@@ -146,5 +150,6 @@
 	"wikibase-property-summary-wbeditentity-create-property": "S'ha creat una nova propietat",
 	"wikibase-property-summary-wbeditentity-update": "S’ha canviat una propietat",
 	"wikibase-property-summary-wbeditentity-override": "S'ha eliminat una propietat",
-	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}"
+	"wikibase-property-summary-special-create-property": "S'ha creat una propietat [$2] amb {{PLURAL:$1|valor|valors}}",
+	"wikibase-reference-formatter-snak-retrieved": "Consulta $1"
 }

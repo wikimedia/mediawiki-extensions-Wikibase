@@ -104,7 +104,7 @@
 	"wikibase-sitelinks-sitename-columnheading": "Ngôn ngữ",
 	"wikibase-sitelinks-link-columnheading": "Trang liên kết",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Liên kết|Các liên kết}} từ {{WBREPONAME}}",
-	"echo-pref-tooltip-wikibase-action": "Báo cho tôi biết khi có người liên kết một trang tôi tạo ra với khoản mục {{WBREPONAME}}.",
+	"echo-pref-tooltip-wikibase-action": "Báo cho tôi khi có người liên kết một trang tôi tạo ra tại khoản mục {{WBREPONAME}}.",
 	"notification-header-page-connection": "Trang <strong>$3</strong> {{GENDER:$2}}đã được liên kết với {{PLURAL:$4|-1=một khoản mục {{WBREPONAME}}|khoản mục {{WBREPONAME}} $4}}, khoản mục này chứa dữ liệu có liên quan đến đề tài.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> và {{PLURAL:$4|một trang|$4 trang|100=99+ trang}} khác được  {{GENDER:$2}}liên kết với khoản mục {{WBREPONAME}}.",
 	"notification-link-text-view-item": "{{GENDER:$1}}Xem khoản mục",
