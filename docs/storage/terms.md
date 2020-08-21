@@ -30,7 +30,7 @@ The "Epic" task for this was https://phabricator.wikimedia.org/T208425 - *[EPIC]
 ### New Secondary Storage
 
 The storage is made up of multiple normalized tables, all prefixed with "wbt_".DatabaseTermInLangIdsAcquirer
-The tables were created by [AddNormalizedTermsTablesDDL.sql] which includes some documentation.
+The tables were created by [term_store.sql] which includes some documentation.
 
 * [wbt_item_terms]
 * [wbt_property_terms]
@@ -165,4 +165,4 @@ This is important for cases such as Wikidata that has publicly accessible databa
 [DatabaseTermInLangIdsAcquirer]: @ref Wikibase::Lib::Store::Sql::Terms::DatabaseTermInLangIdsAcquirer
 [Wikibase\Lib\Store\Sql\Terms]: @ref Wikibase::Lib::Store::Sql::Terms
 [vendor component]: @ref libraries
-[AddNormalizedTermsTablesDDL.sql]: @ref AddNormalizedTermsTablesDDL.sql
+[term_store.sql]: @ref term_store.sql

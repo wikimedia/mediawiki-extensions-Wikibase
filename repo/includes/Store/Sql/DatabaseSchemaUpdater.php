@@ -101,7 +101,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$updater->addExtensionTable(
 			'wbt_text',
-			$this->getScriptPath( 'AddNormalizedTermsTablesDDL', $db->getType() )
+			$this->getScriptPath( 'term_store', $db->getType() )
 		);
 		if ( !$updater->updateRowExists( __CLASS__ . '::rebuildPropertyTerms' ) ) {
 			$updater->addExtensionUpdate( [
