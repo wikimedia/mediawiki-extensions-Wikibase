@@ -46,6 +46,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				for ( $i = 1; $i <= 12; $i++ ) {
 					$numbers[$languageCode . 'Month' . $i] = $i;
 					$numbers[$languageCode . 'Month' . $i . 'Gen'] = $i;
+					$numbers[$languageCode . 'MÖnth' . $i . 'unicode' ] = $i;
 				}
 				return $numbers;
 			} ) );
@@ -219,6 +220,9 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'pt' ],
 			'16 yueMonth8 2013' =>
 				[ '+2013-08-16T00:00:00Z', TimeValue::PRECISION_DAY, $gregorian, 'yue' ],
+
+			'csMÖnth3unicode 1999' =>
+				[ '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH, $gregorian, 'cs' ],
 		];
 
 		$argLists = [];
