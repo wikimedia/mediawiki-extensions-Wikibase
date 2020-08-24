@@ -252,7 +252,7 @@
 	"wikibase-redirectentity-submit": "Viruleedung",
 	"wikibase-redirect-permissiondenied": "Autorisatioun refuséiert",
 	"special-mylanguagefallbackchain": "Meng Lëscht vun Ersatz-Sproochen",
-	"wikibase-mylanguagefallbackchain-babel": "Dir kënnt et änneren andeems Dir <nowiki>{{#babel: }}</nowiki> op {{GENDER:$1|Är}} [[Special:MyPage|Benotzersäit]] setzt.",
+	"wikibase-mylanguagefallbackchain-babel": "Dir kënnt se änneren andeem Dir <nowiki>{{#babel: }}</nowiki> op {{GENDER:$1|Är}} [[Special:MyPage|Benotzersäit]] setzt.",
 	"wikibase-mylanguagefallbackchain-converted-item": "$1 - $2, ëmgewandelt vu(n) $3 - $4",
 	"wikibase-api-target-not-empty": "D'Viruleedung ka just uewen an enger eideler oder enger geläschter Eenheet stoen.",
 	"wikibase-api-target-is-redirect": "D'Zil vun der Viruleedung däerf keng Viruleedung sinn.",
