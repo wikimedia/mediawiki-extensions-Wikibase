@@ -45,7 +45,7 @@ export default async (): Promise<void> => {
 			const app = await require( APP_MODULE );
 			return new Dispatcher( mwWindow, app, dataBridgeConfig, eventTracker );
 		} );
-		const initTracker = new MwInitTracker( eventTracker, window.performance );
+		const initTracker = new MwInitTracker( eventTracker, window.performance, window.document );
 
 		linksToOverload.forEach( ( selectedElement: SelectedElement ) => {
 			let isOpening = false;
