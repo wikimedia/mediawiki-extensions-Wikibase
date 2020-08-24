@@ -462,6 +462,10 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler::factory"
 		},
+		"PageHistoryPagerHookHandler": {
+			"class": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler",
+			"factory": "\\Wikibase\\Repo\\Hooks\\PageHistoryPagerHookHandler::factory"
+		},
 		"ShowSearchHit": {
 			"class": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\ShowSearchHitHandler::factory"
@@ -501,6 +505,7 @@
 		"OutputPageBodyAttributes": "\\Wikibase\\Repo\\RepoHooks::onOutputPageBodyAttributes",
 		"OutputPageParserOutput": "\\Wikibase\\Repo\\RepoHooks::onOutputPageParserOutput",
 		"PageHistoryLineEnding": "\\Wikibase\\Repo\\RepoHooks::onPageHistoryLineEnding",
+		"PageHistoryPager::doBatchLookups": "PageHistoryPagerHookHandler",
 		"ParserFirstCallInit": "\\Wikibase\\Repo\\RepoHooks::onParserFirstCallInit",
 		"ParserOptionsRegister": "\\Wikibase\\Repo\\RepoHooks::onParserOptionsRegister",
 		"RecentChange_save": "\\Wikibase\\Repo\\RepoHooks::onRecentChangeSave",
