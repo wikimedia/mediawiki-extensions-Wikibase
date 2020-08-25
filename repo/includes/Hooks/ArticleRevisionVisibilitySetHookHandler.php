@@ -103,7 +103,7 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		return new self(
 			$revisionLookup,
 			$wbRepo->getEntityContentFactory(),
-			$wbRepo->getEntityNamespaceLookup(),
+			$wbRepo->getLocalEntityNamespaceLookup(),
 			new TitleFactory(),
 			$wbRepo->getSettings()->getSetting( 'localClientDatabases' ),
 			'JobQueueGroup::singleton',
