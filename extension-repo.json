@@ -566,6 +566,13 @@
 				"WikibaseRepo.Settings"
 			]
 		},
+		"EntityDataPurger": {
+			"class": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger",
+			"factory": "\\Wikibase\\Repo\\Hooks\\EntityDataPurger::factory",
+			"services": [
+				"HtmlCacheUpdater"
+			]
+		},
 		"FederatedPropertiesSpecialPage": {
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::factory"
@@ -621,7 +628,10 @@
 			"DeleteDispatcher",
 			"\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete"
 		],
-		"ArticleRevisionVisibilitySet": "ArticleRevisionVisibilitySet",
+		"ArticleRevisionVisibilitySet": [
+			"ArticleRevisionVisibilitySet",
+			"EntityDataPurger"
+		],
 		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
 		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",
 		"BeforePageDisplay": "\\Wikibase\\Repo\\RepoHooks::onBeforePageDisplay",
