@@ -36,8 +36,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 	public function __construct() {
 		parent::__construct( 'EntityData' );
-
-		$this->entityDataFormatProvider = new EntityDataFormatProvider();
 	}
 
 	/**
@@ -76,6 +74,10 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
+		if ( $this->entityDataFormatProvider === null ) {
+			$this->entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
+		}
+
 		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
 		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
@@ -96,7 +98,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataCdnMaxAge' );
 		$formats = $wikibaseRepo->getSettings()->getSetting( 'entityDataFormats' );
-		$this->entityDataFormatProvider->setAllowedFormats( $formats );
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
