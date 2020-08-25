@@ -36,6 +36,7 @@ use Psr\SimpleCache\CacheInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
+use SpecialPage;
 use StubObject;
 use Title;
 use UnexpectedValueException;
@@ -185,6 +186,7 @@ use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ChangeOpApplyExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpDeserializationExceptionLocalizer;
 use Wikibase\Repo\Localizer\ChangeOpValidationExceptionLocalizer;
@@ -2159,6 +2161,28 @@ class WikibaseRepo {
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setAllowedFormats( $formats );
 		return $entityDataFormatProvider;
+	}
+
+	public function getEntityDataUriManager(): EntityDataUriManager {
+		$entityDataFormatProvider = $this->getEntityDataFormatProvider();
+
+		// build a mapping of formats to file extensions and include HTML
+		$supportedExtensions = [];
+		$supportedExtensions['html'] = 'html';
+		foreach ( $entityDataFormatProvider->getSupportedFormats() as $format ) {
+			$ext = $entityDataFormatProvider->getExtension( $format );
+
+			if ( $ext !== null ) {
+				$supportedExtensions[$format] = $ext;
+			}
+		}
+
+		return new EntityDataUriManager(
+			SpecialPage::getTitleFor( 'EntityData' ),
+			$supportedExtensions,
+			$this->getSettings()->getSetting( 'entityDataCachePaths' ),
+			$this->getEntityTitleLookup()
+		);
 	}
 
 	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
