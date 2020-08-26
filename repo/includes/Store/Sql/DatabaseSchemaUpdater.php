@@ -122,7 +122,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		if ( !$dbUpdater->tableExists( $table ) ) {
 			$db = $dbUpdater->getDB();
-			$script = $this->getUpdateScriptPath( 'changes_subscription', $db->getType() );
+			$script = $this->getScriptPath( 'changes_subscription', $db->getType() );
 			$dbUpdater->addExtensionTable( $table, $script );
 
 			// Register function for populating the table.
@@ -142,7 +142,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	private function addChangesTable( DatabaseUpdater $updater, $type ) {
 		$updater->addExtensionTable(
 			'wb_changes',
-			$this->getUpdateScriptPath( 'changes', $type )
+			$this->getScriptPath( 'changes', $type )
 		);
 
 		if ( $type === 'mysql' && !$updater->updateRowExists( 'ChangeChangeObjectId.sql' ) ) {
@@ -157,7 +157,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$updater->addExtensionTable(
 			'wb_changes_dispatch',
-			$this->getUpdateScriptPath( 'changes_dispatch', $type )
+			$this->getScriptPath( 'changes_dispatch', $type )
 		);
 	}
 
