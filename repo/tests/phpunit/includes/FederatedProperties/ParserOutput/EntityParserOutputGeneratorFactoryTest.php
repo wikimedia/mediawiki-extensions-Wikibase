@@ -31,8 +31,6 @@ use Wikibase\View\Template\TemplateFactory;
 class EntityParserOutputGeneratorFactoryTest extends FederatedPropertiesTestCase {
 
 	public function testGetFederatedPropertiesEntityParserOutputGenerator() {
-		$this->setFederatedPropertiesEnabled();
-
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
 		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 
