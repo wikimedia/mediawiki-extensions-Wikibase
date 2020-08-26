@@ -5,13 +5,16 @@ namespace Wikibase\Repo\Tests\Hooks;
 use PHPUnit\Framework\TestCase;
 use Title;
 use TitleFactory;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
 
 /**
@@ -51,14 +54,22 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 	 * @param callable $prefetchTerms
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
-	 *
+	 * @param PrefetchingTermLookup|null $prefetchingTermLookup
+	 * @param EntityLookup|null $entityLookup
+	 * @param bool $federatedPropertiesEnabled
 	 * @return LabelPrefetchHookHandler
 	 */
 	protected function getLabelPrefetchHookHandlers(
 		$prefetchTerms,
 		array $termTypes,
-		array $languageCodes
+		array $languageCodes,
+		PrefetchingTermLookup $prefetchingTermLookup = null,
+		bool $federatedPropertiesEnabled = false
 	) {
+		if ( $prefetchingTermLookup == null ) {
+			$prefetchingTermLookup = $this->createMock( PrefetchingTermLookup::class );
+		}
+
 		$termBuffer = $this->createMock( TermBuffer::class );
 		$termBuffer->expects( $this->atLeastOnce() )
 			->method( 'prefetchTerms' )
@@ -86,7 +97,9 @@ abstract class LabelPrefetchHookHandlerTestBase extends TestCase {
 			$idLookup,
 			$titleFactory,
 			$termTypes,
-			$fallbackChainFactory
+			$fallbackChainFactory,
+			$federatedPropertiesEnabled,
+			new SummaryParsingPrefetchHelper( $prefetchingTermLookup )
 		);
 	}
 
