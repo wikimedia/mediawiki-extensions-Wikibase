@@ -265,6 +265,7 @@
 		"LoadExtensionSchemaUpdates": "SqlUsageTrackerSchemaUpdater",
 		"LoginFormValidErrorMessages": "\\Wikibase\\Client\\Hooks\\LoginFormValidErrorMessagesHandler::handle",
 		"MagicWordwgVariableIDs": "Magic",
+		"MaintenanceShellStart": "\\Wikibase\\Client\\ClientHooks::onMaintenanceShellStart",
 		"OldChangesListRecentChangesLine": "ChangesListLines",
 		"OutputPageParserOutput": "Sidebar",
 		"ParserCacheSaveComplete": "DataUpdate",

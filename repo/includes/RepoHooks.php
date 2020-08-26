@@ -1157,4 +1157,8 @@ final class RepoHooks {
 			new StaticContentLanguages( [ 'mul' ] )
 		);
 	}
+
+	public static function onMaintenanceShellStart(): void {
+		require_once __DIR__ . '/MaintenanceShellStart.php';
+	}
 }

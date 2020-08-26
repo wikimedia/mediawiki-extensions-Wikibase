@@ -917,6 +917,7 @@
 		"ImportHandleRevisionXMLTag": "\\Wikibase\\Repo\\RepoHooks::onImportHandleRevisionXMLTag",
 		"InfoAction": "\\Wikibase\\Repo\\RepoHooks::onInfoAction",
 		"LoadExtensionSchemaUpdates": "DatabaseSchemaUpdater",
+		"MaintenanceShellStart": "\\Wikibase\\Repo\\RepoHooks::onMaintenanceShellStart",
 		"NamespaceIsMovable": "\\Wikibase\\Repo\\RepoHooks::onNamespaceIsMovable",
 		"OutputPageBeforeHTML": [
 			"OutputPageBeforeHTML",
