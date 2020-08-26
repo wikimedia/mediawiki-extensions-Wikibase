@@ -493,5 +493,6 @@
 	"special-setaliases-parameterized": "設定$1別名",
 	"special-setlabel-parameterized": "設定$1標籤",
 	"special-setdescription-parameterized": "設定$1描述",
-	"special-setlabeldescriptionaliases-parameterized": "設定$1標籤、描述與別名"
+	"special-setlabeldescriptionaliases-parameterized": "設定$1標籤、描述與別名",
+	"wikibase-federated-properties-local-property-api-error-message": "啟用聯合屬性後，您無法使用此 API 與屬性進行互動"
 }

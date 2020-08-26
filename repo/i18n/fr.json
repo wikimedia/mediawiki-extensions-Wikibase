@@ -519,5 +519,6 @@
 	"special-setaliases-parameterized": "Définir les alias $1",
 	"special-setlabel-parameterized": "Définir le libellé $1",
 	"special-setdescription-parameterized": "Donner la description de $1",
-	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, description et alias $1"
+	"special-setlabeldescriptionaliases-parameterized": "Définir le libellé, description et alias $1",
+	"wikibase-federated-properties-local-property-api-error-message": "Vous ne pouvez pas interagir avec des propriétés en utilisant cette API quand les propriétés fédérées sont activées"
 }

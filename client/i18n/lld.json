@@ -20,6 +20,8 @@
 	"unconnectedpages": "Plates nia colegades",
 	"pageswithbadges": "Plates cun plachëtes",
 	"entityusage": "Utilisaziun dl'entité",
+	"wikibase-pageinfo-entity-id": "ID elemënt Wikidata",
+	"wikibase-pageinfo-entity-usage": "Entites Wikidata utilisades sön chësta plata",
 	"wikibase-otherprojects": "Te d'atri proiec",
 	"wikibase-client-data-bridge-permissions-error-info": "Deplü detais",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Fal nia conesciü de autorisaziun",
