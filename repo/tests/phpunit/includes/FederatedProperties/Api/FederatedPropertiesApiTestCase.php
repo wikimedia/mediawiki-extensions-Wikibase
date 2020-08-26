@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 use Wikibase\Repo\Tests\Api\WikibaseApiTestCase;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Repo\Tests\FederatedProperties\FederatedPropertiesTestTrait;
 
 /**
  * @license GPL-2.0-or-later
@@ -13,23 +13,10 @@ use Wikibase\Repo\WikibaseRepo;
  */
 abstract class FederatedPropertiesApiTestCase extends WikibaseApiTestCase {
 
-	protected function setSourceWikiUnavailable() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
-	}
-
-	public function testFederatedPropertiesEnabled() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$this->assertSame( true, $settings->getSetting( 'federatedPropertiesEnabled' ) );
-	}
+	use FederatedPropertiesTestTrait;
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		global $wgWBRepoSettings;
-		$newRepoSettings = $wgWBRepoSettings;
-		$newRepoSettings['federatedPropertiesEnabled'] = true;
-
-		$this->setMwGlobals( 'wgWBRepoSettings', $newRepoSettings );
+		$this->setFederatedPropertiesEnabled();
 	}
 }
