@@ -131,19 +131,6 @@ An associative array mapping entity source names to settings relevant to the par
 
 See the [entitysources topic] for more details about the value of this setting.
 
-#### localEntitySourceName
-Name of the entity source name of the "local" repo.
-"local" is in quotes here, as "local" does not necessarily mean the local wiki.
-Should be the name of the entity source defined in [entitySources] setting.
-
-This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
-In these complex situations:
-
-- Repo: This should likely ALWAYS be the name of the entity source of the LOCAL repository (same site)
-- Client: This should be the name of the entity source of the site containing Item definitions (data is used from here, including sitelinks)
-
-DEFAULT: ```local```
-
 #### disabledDataTypes
 Array listing of disabled data types on a wiki.
 
@@ -425,6 +412,15 @@ If disabled, user-specific termbox markup will only be created by client-side re
 Text for data license link.
 
 DEFAULT: [$wgRightsText]
+
+#### localEntitySourceName
+Name of the entity source of the local repo (the same site).
+
+Must match the name of the entity source as defined in [entitySources] setting.
+
+This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
+
+DEFAULT: ```local```
 
 #### statementSections
 Configuration to group statements together based on their datatype or other criteria like "propertySet". For example, putting all of external identifiers in one place.
@@ -825,6 +821,15 @@ Each repository's settings are an associative array containing the following key
  - 'repoDatabase': A symbolic database identifier (string) that MediaWiki's LBFactory class understands. Note that `false` would mean “this wiki's database”!
  - 'baseUri': A base URI (string) for concept URIs. It should contain scheme and authority part of the URI.
  - 'prefixMapping': A prefix mapping array, see also docs/foreign-entity-ids.wiki in the DataModel component.
+
+#### itemAndPropertySourceName
+Name of the providing Item and Property definitions (data is used from here, including sitelinks).
+
+Must match the name of the entity source as defined in [entitySources] setting.
+
+This setting is intended to be used by Wikibase installations with complex setups which have multiple repos attached.
+
+DEFAULT: ```local```
 
 #### propagateChangesToRepo
 Switch to enable or disable the propagation of client changes to the repo.
