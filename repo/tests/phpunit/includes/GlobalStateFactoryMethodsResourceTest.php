@@ -14,7 +14,7 @@ use RequestContext;
 use Traversable;
 use WebRequest;
 use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
-use Wikibase\Repo\Hooks\LabelPrefetchHookHandlers;
+use Wikibase\Repo\Hooks\LabelPrefetchHookHandler;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageJsConfigHookHandler;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -128,7 +128,7 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
 	}
 
 	public function testLabelPrefetchHookHandlers(): void {
-		TestingAccessWrapper::newFromClass( LabelPrefetchHookHandlers::class )
+		TestingAccessWrapper::newFromClass( LabelPrefetchHookHandler::class )
 			->newFromGlobalState();
 	}
 

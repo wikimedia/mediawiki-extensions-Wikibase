@@ -10,6 +10,7 @@ use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\TermIndexEntry;
+use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -23,7 +24,7 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class LabelPrefetchHookHandlers {
+class LabelPrefetchHookHandler {
 
 	/**
 	 * @var TermBuffer
@@ -51,6 +52,16 @@ class LabelPrefetchHookHandlers {
 	private $languageCodes;
 
 	/**
+	 * @var bool
+	 */
+	private $federatedPropertiesEnabled;
+
+	/**
+	 * @var SummaryParsingPrefetchHelper
+	 */
+	private $federatedPropertiesPrefetchingHelper;
+
+	/**
 	 * @return self|null
 	 */
 	private static function newFromGlobalState() {
@@ -73,7 +84,9 @@ class LabelPrefetchHookHandlers {
 			$wikibaseRepo->getEntityIdLookup(),
 			new TitleFactory(),
 			$termTypes,
-			$languageFallbackChain->getFetchLanguageCodes()
+			$languageFallbackChain->getFetchLanguageCodes(),
+			$wikibaseRepo->inFederatedPropertyMode(),
+			new SummaryParsingPrefetchHelper( $wikibaseRepo->getPrefetchingTermLookup() )
 		);
 	}
 
@@ -104,19 +117,25 @@ class LabelPrefetchHookHandlers {
 	 * @param TitleFactory $titleFactory
 	 * @param string[] $termTypes
 	 * @param string[] $languageCodes
+	 * @param bool $federatedPropertiesEnabled
+	 * @param SummaryParsingPrefetchHelper $summaryParsingPrefetchHelper
 	 */
 	public function __construct(
 		TermBuffer $buffer,
 		EntityIdLookup $idLookup,
 		TitleFactory $titleFactory,
 		array $termTypes,
-		array $languageCodes
+		array $languageCodes,
+		bool $federatedPropertiesEnabled,
+		SummaryParsingPrefetchHelper $summaryParsingPrefetchHelper
 	) {
 		$this->buffer = $buffer;
 		$this->idLookup = $idLookup;
 		$this->titleFactory = $titleFactory;
 		$this->termTypes = $termTypes;
 		$this->languageCodes = $languageCodes;
+		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
+		$this->federatedPropertiesPrefetchingHelper = $summaryParsingPrefetchHelper;
 	}
 
 	/**
@@ -130,6 +149,13 @@ class LabelPrefetchHookHandlers {
 			$titles = $this->getChangedTitles( $rows );
 			$entityIds = $this->idLookup->getEntityIds( $titles );
 			$this->buffer->prefetchTerms( $entityIds, $this->termTypes, $this->languageCodes );
+			if ( $this->federatedPropertiesEnabled ) {
+				$this->federatedPropertiesPrefetchingHelper->prefetchFederatedProperties(
+					$rows,
+					$this->languageCodes,
+					$this->termTypes
+				);
+			}
 		} catch ( StorageException $ex ) {
 			wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
 		}

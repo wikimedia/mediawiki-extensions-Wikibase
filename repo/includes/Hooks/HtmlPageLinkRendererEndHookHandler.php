@@ -38,7 +38,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Label lookups are relatively expensive if done repeatedly for individual labels. If possible,
  * labels should be pre-loaded and buffered for later use via the HtmlPageLinkRendererEnd hook.
  *
- * @see LabelPrefetchHookHandlers
+ * @see LabelPrefetchHookHandler
  *
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
