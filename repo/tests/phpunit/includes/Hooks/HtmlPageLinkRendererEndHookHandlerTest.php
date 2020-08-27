@@ -1,38 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlArmor;
 use Language;
-use MediaWiki\Interwiki\InterwikiLookup;
-use MediaWiki\Linker\LinkRenderer;
-use MediaWiki\MediaWikiServices;
-use MediaWikiIntegrationTestCase;
 use RequestContext;
 use SpecialPage;
 use Title;
-use Wikibase\DataAccess\EntitySource;
-use Wikibase\DataAccess\EntitySourceDefinitions;
-use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\Property;
-use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\LanguageWithConversion;
-use Wikibase\Lib\Store\EntityExistenceChecker;
-use Wikibase\Lib\Store\EntityLinkTargetEntityIdLookup;
-use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
-use Wikibase\Lib\Store\StorageException;
-use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
-use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
-use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
-use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\TestingAccessWrapper;
 
@@ -44,70 +20,7 @@ use Wikimedia\TestingAccessWrapper;
  *
  * @license GPL-2.0-or-later
  */
-class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCase {
-
-	const ITEM_WITH_LABEL = 'Q1';
-	const ITEM_WITHOUT_LABEL = 'Q11';
-	const ITEM_DELETED = 'Q111';
-	const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
-	const ITEM_FOREIGN = 'foo:Q2';
-	const ITEM_FOREIGN_NO_DATA = 'foo:Q22';
-	const ITEM_FOREIGN_NO_PREFIX = 'Q2';
-	const ITEM_FOREIGN_NO_DATA_NO_PREFIX = 'Q22';
-	const PROPERTY_WITH_LABEL = 'P1';
-
-	const FOREIGN_REPO_PREFIX = 'foo';
-	const UNKNOWN_FOREIGN_REPO = 'bar';
-
-	const DUMMY_LABEL = 'linkbegin-label';
-	const DUMMY_LABEL_FOREIGN_ITEM = 'linkbegin-foreign-item-label';
-
-	const DUMMY_DESCRIPTION = 'linkbegin-description';
-	const DUMMY_DESCRIPTION_FOREIGN_ITEM = 'linkbegin-foreign-item-description';
-
-	private $entityUrlLookup;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->entityUrlLookup = $this->createMock( EntityUrlLookup::class );
-	}
-
-	/**
-	 * @param string $id
-	 * @param bool $exists
-	 *
-	 * @return Title
-	 */
-	private function newTitle( $id, $exists = true ) {
-		$title = Title::makeTitle( NS_MAIN, $id );
-		$title->resetArticleID( $exists ? 1 : 0 );
-		$this->assertSame( $exists, $title->exists(), 'Sanity check' );
-		return $title;
-	}
-
-	/**
-	 * @param string $title
-	 *
-	 * @return RequestContext
-	 */
-	private function newContext( $title = 'Special:Recentchanges' ) {
-		return RequestContext::newExtraneousContext( Title::newFromText( $title ) );
-	}
-
-	public function validContextProvider() {
-		$historyContext = $this->newContext( 'Foo' );
-		$historyContext->getRequest()->setVal( 'action', 'history' );
-
-		$diffContext = $this->newContext( 'Foo' );
-		$diffContext->getRequest()->setVal( 'diff', 123 );
-
-		return [
-			'Special page' => [ $this->newContext() ],
-			'Action history' => [ $historyContext ],
-			'Diff' => [ $diffContext ],
-		];
-	}
+class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHookHandlerTestBase {
 
 	/**
 	 * @dataProvider validContextProvider
@@ -134,39 +47,6 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		$this->assertStringContainsString( self::DUMMY_DESCRIPTION, $customAttribs['title'] );
 
 		$this->assertContains( 'wikibase.common', $context->getOutput()->getModuleStyles() );
-	}
-
-	/**
-	 * @dataProvider validContextProvider
-	 */
-	public function testDoHtmlPageLinkRendererBegin_federatedPropertiesEnabled( RequestContext $context ) {
-		$handler = $this->newInstance( 'foo', false, true, Property::ENTITY_TYPE );
-
-		$title = Title::makeTitle( WB_NS_PROPERTY, self::PROPERTY_WITH_LABEL );
-		$text = $title->getFullText();
-		$customAttribs = [];
-
-		$ret = $handler->doHtmlPageLinkRendererEnd(
-			$this->getLinkRenderer(), $title, $text, $customAttribs, $context );
-
-		$this->assertTrue( $ret );
-		$this->assertStringContainsString( 'fedprop', $customAttribs['class'] );
-		$this->assertContains( 'wikibase.federatedPropertiesLeavingSiteNotice', $context->getOutput()->getModules() );
-	}
-
-	public function invalidContextProvider() {
-		$deleteContext = $this->newContext( 'Foo' );
-		$deleteContext->getRequest()->setVal( 'action', 'delete' );
-
-		$diffNonViewContext = $this->newContext( 'Foo' );
-		$diffNonViewContext->getRequest()->setVal( 'action', 'protect' );
-		$diffNonViewContext->getRequest()->setVal( 'diff', 123 );
-
-		return [
-			'Action delete' => [ $deleteContext ],
-			'Non-special page' => [ $this->newContext( 'Foo' ) ],
-			'Edge case: diff parameter set, but action != view' => [ $diffNonViewContext ],
-		];
 	}
 
 	/**
@@ -476,213 +356,6 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCas
 		);
 
 		$this->assertEquals( 'some-other-class', $customAttribs['class'] );
-	}
-
-	public function testFederatedPropertiesFailure() {
-		$customAttribs = [ 'class' => 'new another' ];
-		$html = 'change-me';
-
-		$this->entityUrlLookup->expects( $this->once() )
-			->method( 'getLinkUrl' )
-			->with( new ItemId( 'Q1' ) )
-			->willThrowException( new ApiRequestExecutionException() );
-
-		$returnValue = $this->newInstance()->doHtmlPageLinkRendererEnd(
-			$this->getLinkRenderer(),
-			$this->newTitle( self::ITEM_WITH_LABEL ),
-			$text,
-			$customAttribs,
-			$this->newContext(),
-			$html
-		);
-		$this->assertTrue( $returnValue );
-
-		// This will fallback to using the plain entity id as title and link text, and it will
-		// link via Special:EntityData (as we can't lookup namespaces).
-		$expectedAttribs = [
-			'href' => 'http://source.wiki/script/index.php?title=Special:EntityData/Q1',
-			'class' => 'another',
-			'title' => 'Q1'
-		];
-		$this->assertSame( 'Q1', $text );
-		$this->assertEquals( $expectedAttribs, $customAttribs );
-	}
-
-	/**
-	 * @return TermLookup
-	 */
-	private function getTermLookup() {
-		$termLookup = $this->createMock( TermLookup::class );
-
-		$termLookup->expects( $this->any() )
-			->method( 'getLabels' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
-				switch ( $id->getSerialization() ) {
-					case self::ITEM_WITH_LABEL:
-					case self::ITEM_LABEL_NO_DESCRIPTION:
-						return [ 'en' => self::DUMMY_LABEL ];
-					case self::ITEM_WITHOUT_LABEL:
-						return [];
-					case self::ITEM_FOREIGN_NO_PREFIX:
-						return [ 'en' => self::DUMMY_LABEL_FOREIGN_ITEM ];
-					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
-						return [];
-					case self::PROPERTY_WITH_LABEL:
-						return [ 'en' => self::DUMMY_LABEL ];
-					default:
-						throw new StorageException( "Unexpected entity id $id" );
-				}
-			} ) );
-
-		$termLookup->expects( $this->any() )
-			->method( 'getDescriptions' )
-			->will( $this->returnCallback( function ( EntityId $id ) {
-				switch ( $id->getSerialization() ) {
-					case self::ITEM_WITH_LABEL:
-						return [ 'en' => self::DUMMY_DESCRIPTION ];
-					case self::ITEM_WITHOUT_LABEL:
-					case self::ITEM_LABEL_NO_DESCRIPTION:
-						return [];
-					case self::ITEM_FOREIGN_NO_PREFIX:
-						return [ 'en' => self::DUMMY_DESCRIPTION_FOREIGN_ITEM ];
-					case self::ITEM_FOREIGN_NO_DATA_NO_PREFIX:
-						return [];
-					case self::PROPERTY_WITH_LABEL:
-						return [];
-					default:
-						throw new StorageException( "Unexpected entity id $id" );
-				}
-			} ) );
-
-		return $termLookup;
-	}
-
-	private function getEntityNamespaceLookup() {
-		$entityNamespaces = [
-			'item' => 0,
-			'property' => 122
-		];
-
-		return new EntityNamespaceLookup( $entityNamespaces );
-	}
-
-	private function getInterwikiLookup() {
-		$lookup = $this->createMock( InterwikiLookup::class );
-		$lookup->expects( $this->any() )
-			->method( 'isValidInterwiki' )
-			->will(
-				$this->returnCallback( function( $interwiki ) {
-					return $interwiki === self::FOREIGN_REPO_PREFIX;
-				} )
-			);
-		return $lookup;
-	}
-
-	/**
-	 * @return LinkRenderer
-	 */
-	private function getLinkRenderer() {
-		return MediaWikiServices::getInstance()->getLinkRenderer();
-	}
-
-	private function newInstance(
-		$titleText = "foo",
-		$isDeleted = false,
-		$federatedPropertiesEnabled = false,
-		$entityType = Item::ENTITY_TYPE
-	) {
-		$stubContentLanguages = $this->createStub( ContentLanguages::class );
-		$stubContentLanguages->method( 'hasLanguage' )
-			->willReturn( true );
-		$languageFallback = new TermLanguageFallbackChain( [
-			LanguageWithConversion::factory( 'de-ch' ),
-			LanguageWithConversion::factory( 'de' ),
-			LanguageWithConversion::factory( 'en' ),
-		], $stubContentLanguages );
-		$languageFallbackChainFactory = $this
-			->createMock( LanguageFallbackChainFactory::class );
-
-		$languageFallbackChainFactory->expects( $this->any() )
-			->method( 'newFromContext' )
-			->willReturn( $languageFallback );
-		$entityIdParser = new BasicEntityIdParser();
-		return new HtmlPageLinkRendererEndHookHandler(
-			$this->getEntityExistenceChecker( $isDeleted ),
-			$entityIdParser,
-			$this->getTermLookup(),
-			$this->getEntityNamespaceLookup(),
-			$this->getInterwikiLookup(),
-			function () use ( $titleText ) {
-				return $this->getEntityLinkFormatterFactory( $titleText );
-			},
-			MediaWikiServices::getInstance()->getSpecialPageFactory(),
-			$languageFallbackChainFactory,
-			$this->entityUrlLookup,
-			new EntityLinkTargetEntityIdLookup(
-				$this->getEntityNamespaceLookup(),
-				$entityIdParser,
-				$this->newMockEntitySourceDefinitions( $entityType ),
-				$this->newMockEntitySource()
-			),
-			'http://source.wiki/script/',
-			$federatedPropertiesEnabled
-		);
-	}
-
-	private function getEntityLinkFormatterFactory( $titleText ) {
-		$titleTextLookup = $this->getEntityTitleTextLookup( $titleText );
-
-		return new EntityLinkFormatterFactory( Language::factory( 'en' ), $titleTextLookup, [
-			'item' => function( $language ) use ( $titleTextLookup ) {
-				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
-			},
-			'property' => function( $language ) use ( $titleTextLookup ) {
-				return new DefaultEntityLinkFormatter( $language, $titleTextLookup );
-			},
-		] );
-	}
-
-	private function getEntityExistenceChecker( $isDeleted ) {
-		$entityExistenceChecker = $this->createMock( EntityExistenceChecker::class );
-
-		$entityExistenceChecker->expects( $this->any() )
-			->method( 'exists' )
-			->willReturn( !$isDeleted );
-		return $entityExistenceChecker;
-	}
-
-	private function getEntityTitleTextLookup( $titleText ) {
-		$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
-
-		$entityTitleTextLookup->expects( $this->any() )
-			->method( 'getPrefixedText' )
-			->willReturn( $titleText );
-
-		return $entityTitleTextLookup;
-	}
-
-	private function newMockEntitySourceDefinitions( $entityType ) {
-		$foreignItemSource = $this->createMock( EntitySource::class );
-		$foreignItemSource->expects( $this->any() )
-			->method( 'getInterwikiPrefix' )
-			->willReturn( self::FOREIGN_REPO_PREFIX );
-
-		$sourceDefs = $this->createMock( EntitySourceDefinitions::class );
-		$sourceDefs->expects( $this->any() )
-			->method( 'getSourceForEntityType' )
-			->with( $entityType )
-			->willReturn( $foreignItemSource );
-
-		return $sourceDefs;
-	}
-
-	private function newMockEntitySource() {
-		$entitySource = $this->createMock( EntitySource::class );
-		$entitySource->expects( $this->any() )
-			->method( 'getEntityTypes' )
-			->willReturn( [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] );
-
-		return $entitySource;
 	}
 
 	/**
