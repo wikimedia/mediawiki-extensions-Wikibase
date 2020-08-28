@@ -5,17 +5,23 @@ namespace Wikibase\Repo\Tests\FederatedProperties\ParserOutput;
 
 use Language;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiRequestExecutionException;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesError;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
+use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
 use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
@@ -31,6 +37,81 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiIntegrationTestCase {
 
+	public function testShouldPrefetchFederatedProperties() {
+		$labelLanguage = 'en';
+		$userLanguage = 'en';
+
+		$item = new Item( new ItemId( 'Q7799929' ) );
+		$item->setLabel( $labelLanguage, 'kitten item' );
+
+		$statementWithReference = new Statement( new PropertyNoValueSnak( 1 ) );
+		$statementWithReference->addNewReference( new PropertyNoValueSnak( 4 ) );
+
+		$item->getStatements()->addStatement( $statementWithReference );
+		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 2 ) ) );
+		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 3 ) ) );
+		$item->getStatements()->addStatement( new Statement( new PropertyNoValueSnak( 3 ) ) );
+
+		$expectedIds = [
+			new PropertyId( "P1" ),
+			new PropertyId( "P2" ),
+			new PropertyId( "P3" ),
+			new PropertyId( "P4" )
+		];
+
+		$prefetchingTermLookup = $this->createMock( ApiEntityLookup::class );
+		$prefetchingTermLookup->expects( $this->once() )
+			->method( 'fetchEntities' )
+			->willReturnCallback( $this->getPrefetchTermsCallback(
+				$expectedIds
+			) );
+
+		$innerPog = $this->createMock( EntityParserOutputGenerator::class );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $prefetchingTermLookup, $innerPog, $userLanguage );
+
+		$entityParserOutputGenerator->getParserOutput( new EntityRevision( $item, 4711 ), false );
+	}
+
+	public function testShouldNotCallPrefetchIfNoProperties() {
+		$labelLanguage = 'en';
+		$userLanguage = 'en';
+
+		$item = new Item( new ItemId( 'Q7799929' ) );
+		$item->setLabel( $labelLanguage, 'kitten item' );
+
+		$prefetchingTermLookup = $this->createMock( ApiEntityLookup::class );
+		$prefetchingTermLookup->expects( $this->never() )
+			->method( 'fetchEntities' );
+
+		$innerPog = $this->createMock( EntityParserOutputGenerator::class );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $prefetchingTermLookup, $innerPog, $userLanguage );
+
+		$entityParserOutputGenerator->getParserOutput( new EntityRevision( $item, 4711 ), false );
+	}
+
+	protected function getPrefetchTermsCallback( $expectedIds ) {
+		$prefetchTerms = function (
+			array $entityIds,
+			array $termTypes = null,
+			array $languageCodes = null
+		) use (
+			$expectedIds
+		) {
+			$expectedIdStrings = array_map( function( EntityId $id ) {
+				return $id->getSerialization();
+			}, $expectedIds );
+			$entityIdStrings = array_map( function( EntityId $id ) {
+				return $id->getSerialization();
+			}, $entityIds );
+
+			sort( $expectedIdStrings );
+			sort( $entityIdStrings );
+
+			$this->assertEquals( $expectedIdStrings, $entityIdStrings );
+		};
+		return $prefetchTerms;
+	}
+
 	/**
 	 * @dataProvider errorPageProvider
 	 */
@@ -39,8 +120,16 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiIntegr
 		$item = new Item( new ItemId( 'Q7799929' ) );
 		$item->setLabel( $labelLanguage, 'kitten item' );
 
+		$prefetchingTermLookup = $this->createMock( ApiEntityLookup::class );
+		$prefetchingTermLookup->expects( $this->never() )
+			->method( 'fetchEntities' );
+
 		$updater = $this->createMock( ItemParserOutputUpdater::class );
-		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( [ $updater ], $userLanguage );
+		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator(
+			$prefetchingTermLookup,
+			$this->getFullGeneratorMock( [ $updater ], $userLanguage ),
+			$userLanguage
+		);
 		$updater->method( 'updateParserOutput' )
 			->willThrowException( new ApiRequestExecutionException() );
 
@@ -50,11 +139,8 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiIntegr
 		$entityParserOutputGenerator->getParserOutput( new EntityRevision( $item, 4711 ), false );
 	}
 
-	private function newEntityParserOutputGenerator( $dataUpdaters = null, $languageCode = 'en' ) {
-
-		$language = Language::factory( $languageCode );
-
-		$fullGenerator = new FullEntityParserOutputGenerator(
+	private function getFullGeneratorMock( $dataUpdaters, $language ) {
+		return new FullEntityParserOutputGenerator(
 			$this->createMock( DispatchingEntityViewFactory::class ),
 			$this->createMock( DispatchingEntityMetaTagsCreatorFactory::class ),
 			$this->createMock( ParserOutputJsConfigBuilder::class ),
@@ -64,10 +150,16 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends MediaWikiIntegr
 			$this->createMock( LocalizedTextProvider::class ),
 			new EntityDataFormatProvider(),
 			$dataUpdaters,
-			$language
+			Language::factory( $language )
 		);
+	}
 
-		return new FederatedPropertiesEntityParserOutputGenerator( $fullGenerator, $language );
+	private function newEntityParserOutputGenerator( $prefetchingTermLookup, $fullGenerator, $languageCode = 'en' ) {
+		return new FederatedPropertiesEntityParserOutputGenerator(
+			$fullGenerator,
+			Language::factory( $languageCode ),
+			$prefetchingTermLookup
+		);
 	}
 
 	public function errorPageProvider() {
