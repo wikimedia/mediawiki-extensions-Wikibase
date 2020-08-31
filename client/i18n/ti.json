@@ -4,6 +4,7 @@
 			"Joanmp17"
 		]
 	},
+	"wikibase-comment-multi": "$1 {{PLURAL:$1|ለውጢ|ለውጥታት}}",
 	"wikibase-dataitem": "ናይ {{WBREPONAME}} ውልቀ ነገር",
 	"wikibase-editlinks": "መጋጠሚታት ኣመዓራርይ",
 	"wikibase-linkitem-addlinks": "መጋጠሚታት ወስኽ",
