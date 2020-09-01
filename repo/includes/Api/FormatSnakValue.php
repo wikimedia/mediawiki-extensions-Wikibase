@@ -19,6 +19,7 @@ use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Formatters\TypedValueFormatter;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -90,6 +91,13 @@ class FormatSnakValue extends ApiBase {
 			$value = $this->decodeDataValue( $params['datavalue'] );
 			$dataTypeId = $this->getDataTypeId( $params );
 			$formattedValue = $this->formatValue( $params, $value, $dataTypeId );
+		} catch ( FederatedPropertiesException $ex ) {
+			$this->errorReporter->dieException(
+				new FederatedPropertiesException( wfMessage( 'wikibase-federated-properties-failed-request-api-error-message' )->text() ),
+				'federated-properties-failed-request',
+				503,
+				[ 'property' => $params['property'] ]
+			);
 		} catch ( InvalidArgumentException $invalidArgumentException ) {
 			$this->errorReporter->dieException(
 				$invalidArgumentException,

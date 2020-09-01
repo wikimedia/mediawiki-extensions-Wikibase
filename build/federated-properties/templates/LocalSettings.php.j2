@@ -2,12 +2,16 @@
 $wgServer = '{{ SCHEME }}://{{ SERVER_NAME }}{{ PORT }}';
 
 # Developer mode and debugging
-error_reporting( -1 );
-ini_set( 'display_errors', 1 );
-$wgShowExceptionDetails = true;
-$wgShowSQLErrors = true;
-$wgDebugDumpSql  = true;
-$wgShowDBErrorBacktrace = true;
+if ( {{ DEV_ERROR_REPORTING }} ) {
+	error_reporting( -1 );
+	ini_set( 'display_errors', 1 );
+	$wgShowExceptionDetails = true;
+	$wgShowSQLErrors = true;
+	$wgDebugDumpSql  = true;
+	$wgShowDBErrorBacktrace = true;
+} else {
+	ini_set( 'display_errors', 0 );
+}
 
 ## Database settings
 ## Environment variables will be substituted in here.
@@ -37,6 +41,9 @@ $wgArticlePath = "/wiki/$1";
 
 #Set Secret
 $wgSecretKey = "secretkey";
+
+// https://phabricator.wikimedia.org/T235554#6435256
+$wgDisableOutputCompression  = true;
 
 ## RC Age
 # https://www.mediawiki.org/wiki/Manual:
