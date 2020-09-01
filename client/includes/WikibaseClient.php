@@ -1188,15 +1188,15 @@ final class WikibaseClient {
 	}
 
 	private function getEntitySourceOfLocalRepo(): EntitySource {
-		$localRepoSourceName = $this->settings->getSetting( 'localEntitySourceName' );
+		$itemAndPropertySourceName = $this->settings->getSetting( 'itemAndPropertySourceName' );
 		$sources = $this->entitySourceDefinitions->getSources();
 		foreach ( $sources as $source ) {
-			if ( $source->getSourceName() === $localRepoSourceName ) {
+			if ( $source->getSourceName() === $itemAndPropertySourceName ) {
 				return $source;
 			}
 		}
 
-		throw new LogicException( 'No source configured: ' . $localRepoSourceName );
+		throw new LogicException( 'No source configured: ' . $itemAndPropertySourceName );
 	}
 
 	public function getWikibaseContentLanguages(): WikibaseContentLanguages {

@@ -355,7 +355,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetRecentChangeFactory() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
-		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
+		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
@@ -447,7 +447,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetDatabaseDomainNameOfLocalRepo() {
 		$settings = new SettingsArray( WikibaseClient::getDefaultInstance()->getSettings()->getArrayCopy() );
 
-		$settings->setSetting( 'localEntitySourceName', 'localrepo' );
+		$settings->setSetting( 'itemAndPropertySourceName', 'localrepo' );
 
 		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$wikibaseClient = new WikibaseClient(
@@ -515,7 +515,7 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	private function getWikibaseClient( SettingsArray $settings = null ) {
 		if ( $settings === null ) {
 			$settings = WikibaseClient::getDefaultInstance()->getSettings();
-			$settings->setSetting( 'localEntitySourceName', 'test' );
+			$settings->setSetting( 'itemAndPropertySourceName', 'test' );
 		}
 		return new WikibaseClient(
 			new SettingsArray( $settings->getArrayCopy() ),

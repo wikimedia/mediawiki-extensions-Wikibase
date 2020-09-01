@@ -123,8 +123,10 @@ return call_user_func( function() {
 		'useKartographerMaplinkInWikitext' => false,
 		'trackLuaFunctionCallsPerSiteGroup' => false,
 		'trackLuaFunctionCallsPerWiki' => false,
-
-		'localEntitySourceName' => 'local',
+		'localEntitySourceName' => 'local', // DEPRECATED
+		'itemAndPropertySourceName' => function ( SettingsArray $settings ): string {
+			return $settings->getSetting( 'localEntitySourceName' );
+		},
 		'entitySources' => [],
 
 		'dataBridgeEnabled' => false, # if true, the next setting must also be specified
