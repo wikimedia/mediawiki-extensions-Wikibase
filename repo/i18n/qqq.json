@@ -543,9 +543,14 @@
 	"wikibase-federated-properties-source-wiki-api-error-message": "Message of error page shown after a failed request to the federation source Wiki.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Notice message that points out that this Wikibase uses federated properties from an external source and how to access that.\n\nParameters:\n* $1 is the link to the external wiki.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "Link text shown on Special:ListProperties linking to the external source wiki.\n\nParameters:\n* $1 is the href for the link.\n* $2 is the domain of the external wiki.",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Button title for the Try again button.",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Message displayed in the dialog indicating thet editing failed.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Dialog header indication that editing failed.",
 	"special-setaliases-parameterized": "{{doc-special|SetAliases}}\nThe special page allows the user to set aliases for an entity. \n\nParameters:\n* $1 is the entity types that allows modification. If entity types are not used in the translation this parameter can be ignored.",
 	"special-setlabel-parameterized": "{{doc-special|SetLabel}}\nThe special page allows the user to set an entity's label in a particular language. \n\nParameters:\n* $1 is the entity types that allows modification. If entity types are not used in the translation this parameter can be ignored.",
 	"special-setdescription-parameterized": "{{doc-special|SetDescription}}\nThe special page allows the user to set a description for an entity. \n\nParameters:\n* $1 is the entity types that allows modification. If entity types are not used in the translation this parameter can be ignored.",
 	"special-setlabeldescriptionaliases-parameterized": "{{doc-special|SetLabelDescriptionAliases}}\nThe special page allows the user to set label, description and aliases for an entity. \n\nParameters:\n* $1 is the entity types that allows modification. If entity types are not used in the translation this parameter can be ignored.",
-	"special-parameterized-description-separator": "{{optional}}\nThe separator used between entity types in the parameterized description."
+	"special-parameterized-description-separator": "{{optional}}\nThe separator used between entity types in the parameterized description.",
+	"wikibase-federated-properties-local-property-api-error-message": "Error Message shown when federated properties is enabled and the user is trying to edit properties through the api.",
+	"wikibase-federated-properties-failed-request-api-error-message": "Error Message shown when federated properties is enabled and a request to the federated source wiki failed."
 }

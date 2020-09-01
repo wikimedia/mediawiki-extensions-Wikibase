@@ -300,6 +300,21 @@ return call_user_func( function() {
 				'wikibase.Site',
 			],
 		],
+
+		'wikibase.federatedPropertiesEditRequestFailureNotice' => $moduleTemplate + [
+			'packageFiles' => [
+				'wikibase.federatedPropertiesEditRequestFailureNotice.js',
+			],
+			'dependencies' => [
+				'oojs-ui',
+			],
+			'messages' => [
+				'wikibase-federated-properties-edit-request-failed-notice-try-again',
+				'wikibase-federated-properties-edit-request-failed-notice-notice',
+				'wikibase-federated-properties-edit-request-failed-notice-header',
+			]
+		],
+
 	];
 
 	return $modules;

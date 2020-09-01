@@ -65,6 +65,9 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 			$this->prefetchFederatedProperties( $entity );
 
 			$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
+			$po->setEnableOOUI( true );
+			$po->addModules( 'wikibase.federatedPropertiesEditRequestFailureNotice' );
+
 		} catch ( FederatedPropertiesException $ex ) {
 
 			if ( $entity instanceof LabelsProvider ) {
