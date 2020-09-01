@@ -71,7 +71,7 @@ class ApiServiceFactory {
 		);
 	}
 
-	private function newApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
+	private function getApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
 		if ( self::$apiEntityNamespaceInfoLookup === null ) {
 			self::$apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
 				$this->newFederatedPropertiesApiClient(),
@@ -83,7 +83,7 @@ class ApiServiceFactory {
 
 	public function newApiEntityTitleTextLookup(): ApiEntityTitleTextLookup {
 		return new ApiEntityTitleTextLookup(
-			$this->newApiEntityNamespaceInfoLookup()
+			$this->getApiEntityNamespaceInfoLookup()
 		);
 	}
 
@@ -96,17 +96,17 @@ class ApiServiceFactory {
 
 	public function newApiPropertyDataTypeLookup(): ApiPropertyDataTypeLookup {
 		return new ApiPropertyDataTypeLookup(
-			$this->newApiEntityLookup()
+			$this->getApiEntityLookup()
 		);
 	}
 
 	public function newApiPrefetchingTermLookup(): ApiPrefetchingTermLookup {
 		return new ApiPrefetchingTermLookup(
-			$this->newApiEntityLookup()
+			$this->getApiEntityLookup()
 		);
 	}
 
-	public function newApiEntityLookup(): ApiEntityLookup {
+	public function getApiEntityLookup(): ApiEntityLookup {
 		if ( self::$apiEntityLookupInstance === null ) {
 			self::$apiEntityLookupInstance = new ApiEntityLookup( $this->newFederatedPropertiesApiClient() );
 		}
@@ -114,7 +114,7 @@ class ApiServiceFactory {
 	}
 
 	public function newApiEntityExistenceChecker(): ApiEntityExistenceChecker {
-		return new ApiEntityExistenceChecker( $this->newApiEntityLookup() );
+		return new ApiEntityExistenceChecker( $this->getApiEntityLookup() );
 	}
 
 }

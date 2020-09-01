@@ -181,7 +181,7 @@ class EntityParserOutputGeneratorFactory {
 			$pog = new FederatedPropertiesEntityParserOutputGenerator(
 				$pog,
 				$userLanguage,
-				$wikibaseRepo->newFederatedPropertiesServiceFactory()->newApiEntityLookup()
+				$wikibaseRepo->newFederatedPropertiesServiceFactory()->getApiEntityLookup()
 			);
 		}
 
