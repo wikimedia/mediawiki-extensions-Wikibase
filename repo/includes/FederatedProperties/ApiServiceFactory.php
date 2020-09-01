@@ -28,6 +28,11 @@ class ApiServiceFactory {
 	 */
 	private static $apiEntityLookupInstance = null;
 
+	/**
+	 * @var ApiEntityNamespaceInfoLookup|null
+	 */
+	private static $apiEntityNamespaceInfoLookup = null;
+
 	public static function resetClassStatics() {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			throw new Exception(
@@ -35,6 +40,7 @@ class ApiServiceFactory {
 			);
 		}
 		self::$apiEntityLookupInstance = null;
+		self::$apiEntityNamespaceInfoLookup = null;
 	}
 
 	public function __construct(
@@ -66,10 +72,13 @@ class ApiServiceFactory {
 	}
 
 	private function newApiEntityNamespaceInfoLookup(): ApiEntityNamespaceInfoLookup {
-		return new ApiEntityNamespaceInfoLookup(
-			$this->newFederatedPropertiesApiClient(),
-			WikibaseRepo::getDefaultInstance()->getContentModelMappings()
-		);
+		if ( self::$apiEntityNamespaceInfoLookup === null ) {
+			self::$apiEntityNamespaceInfoLookup = new ApiEntityNamespaceInfoLookup(
+				$this->newFederatedPropertiesApiClient(),
+				WikibaseRepo::getDefaultInstance()->getContentModelMappings()
+			);
+		}
+		return self::$apiEntityNamespaceInfoLookup;
 	}
 
 	public function newApiEntityTitleTextLookup(): ApiEntityTitleTextLookup {
