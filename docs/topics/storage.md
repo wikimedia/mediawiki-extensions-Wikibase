@@ -7,6 +7,7 @@
 * @subpage md_docs_storage_propertyinfo
 * @subpage md_docs_storage_sitelinks
 * @subpage md_docs_storage_terms
+* @subpage md_docs_storage_terms-caching
 
 ## SQL Tables
 
