@@ -8,15 +8,15 @@
 			"Youssoufkadialy"
 		]
 	},
-	"tooltip-t-wikibase": "ߜߋ߲߬ߞߘߎ߬ߟߌ ߟߐ߲ߕߊ ߟߎ߫ ߡߙߊ߬ߞߏ߲ߘߏ ߓߎ߲ߓߎ߲߫ ߜߋ߲߬ߞߘߎ߬ߣߍ߲ ߠߊ߫",
+	"tooltip-t-wikibase": "ߛߘߌ߬ߜߋ߲߫ ߜߋ߲߬ߞߘߎ߬ߕߊ ߓߟߏߡߟߊ ߡߙߊ߬ߞߏ߲ߘߏ ߝߌ߬ߛߌ ߟߎ߬ ߟߊ߫",
 	"wikibase-comment-update": "{{WBREPONAME}} ߓߐߛߎ߲ ߢߟߊߞߎߘߦߊ",
-	"wikibase-dataitem": "{{WBREPONAME}} ߓߎ߲ߓߎ߲",
+	"wikibase-dataitem": "{{WBREPONAME}} ߞߎߡߘߊ",
 	"wikibase-editlinks": "ߛߘߌ߬ߜߋ߲ ߡߊߦߟߍ߬ߡߊ߲߫",
-	"wikibase-editlinkstitle": "ߞߊ߲ߣߌߢߐ߲߯ߕߍ߫ ߛߘߌߜߋ߲ ߠߎ߬ ߢߟߊߞߎߘߦߊ",
+	"wikibase-editlinkstitle": "ߞߊ߲ߣߌߢߐ߲߯ߕߍ߫ ߛߘߌߜߋ߲ ߠߎ߬ ߡߊߦߟߍ߬ߡߊ߲߫",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "ߢߡߊߘߏ߲߰",
 	"wikibase-rc-hide-wikidata-show": "ߊ߬ ߦߌ߬ߘߊ߬",
 	"wikibase-rc-wikibase-edit-letter": "ߘ",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ߊ߬ ߡߊߦߟߍ߬ߡߊ߲߫",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} ߡߊߦߟߍ߬ߡߊ߲߫",
 	"wikibase-otherprojects": "ߖߊ߬ߕߋ߬ߘߐ߬ߛߌ߰ ߜߘߍ ߟߎ߬ ߘߐ߫"
 }

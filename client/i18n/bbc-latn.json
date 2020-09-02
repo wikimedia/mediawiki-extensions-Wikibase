@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Herryz",
 			"Salomo Christian Hutajulu"
 		]
 	},
 	"wikibase-comment-update": "Diubah do item {{WBREPONAME}}",
+	"wikibase-editlinks": "Padimpos Link",
 	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunihon",
 	"wikibase-otherprojects": "Di bagasan siulaon na asing"
