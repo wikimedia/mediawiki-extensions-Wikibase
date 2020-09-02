@@ -42,12 +42,17 @@ class SummaryParsingPrefetchHelper {
 		if ( empty( $resultProperties ) ) {
 			return;
 		}
-
-		$this->prefetchingLookup->prefetchTerms(
-			$resultProperties,
-			$termTypes,
-			$languageCodes
-		);
+		try {
+			$this->prefetchingLookup->prefetchTerms(
+				$resultProperties,
+				$termTypes,
+				$languageCodes
+			);
+		} catch ( FederatedPropertiesException $ex ) {
+			wfLogWarning(
+				__METHOD__ . ': Prefetching failed for federated properties: ' . implode( ',', $resultProperties )
+			);
+		}
 	}
 
 	/**

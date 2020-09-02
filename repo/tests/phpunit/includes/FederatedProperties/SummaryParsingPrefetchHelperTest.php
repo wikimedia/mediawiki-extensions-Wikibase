@@ -4,10 +4,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Revision\RevisionRecord;
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermTypes;
+use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\SummaryParsingPrefetchHelper;
 
 /**
@@ -45,6 +47,18 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 				[ 'en' ]
 			);
 
+		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
+	}
+
+	public function testShouldNotFatalOnFailedRequests() {
+		$helper = new SummaryParsingPrefetchHelper( $this->prefetchingLookup );
+		$rows = [ (object)[ 'rev_comment_text' => '[[Property:P31]]' ] ];
+
+		$this->prefetchingLookup->expects( $this->once() )
+			->method( 'prefetchTerms' )
+			->willThrowException( new ApiRequestException( 'oh no!' ) );
+
+		$this->expectException( Warning::class );
 		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
 	}
 
