@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Dumpers;
 use InvalidArgumentException;
 use MWContentSerializationException;
 use PageProps;
-use SiteList;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookupException;
@@ -225,7 +224,6 @@ class RdfDumpGenerator extends DumpGenerator {
 	 * @param string                     $format
 	 * @param resource                   $output
 	 * @param string                     $flavor Either "full" or "truthy"
-	 * @param SiteList                   $sites
 	 * @param EntityRevisionLookup       $entityRevisionLookup
 	 * @param PropertyDataTypeLookup     $propertyLookup
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
@@ -242,7 +240,6 @@ class RdfDumpGenerator extends DumpGenerator {
 		$format,
 		$output,
 		$flavor,
-		SiteList $sites,
 		EntityRevisionLookup $entityRevisionLookup,
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
@@ -258,7 +255,6 @@ class RdfDumpGenerator extends DumpGenerator {
 		}
 
 		$rdfBuilder = new RdfBuilder(
-			$sites,
 			$vocabulary,
 			$valueSnakRdfBuilderFactory,
 			$propertyLookup,

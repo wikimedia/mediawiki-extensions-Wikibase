@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use HashSiteStore;
-use SiteList;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -114,7 +113,6 @@ class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
 			$dataTypeLookup,
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
-			new SiteList(),
 			new EntityDataFormatProvider(),
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),

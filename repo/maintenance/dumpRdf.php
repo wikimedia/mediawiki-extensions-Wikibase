@@ -186,7 +186,6 @@ class DumpRdf extends DumpEntities {
 			$this->getOption( 'format', 'ttl' ),
 			$output,
 			$flavor,
-			$this->siteLookup->getSites(),
 			$this->revisionLookup,
 			$this->propertyDatatypeLookup,
 			$this->valueSnakRdfBuilderFactory,

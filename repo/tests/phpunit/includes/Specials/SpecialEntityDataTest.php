@@ -11,7 +11,6 @@ use HttpError;
 use Language;
 use OutputPage;
 use Psr\Log\NullLogger;
-use SiteList;
 use SpecialPage;
 use SpecialPageTestBase;
 use Title;
@@ -96,7 +95,6 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$dataTypeLookup,
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
-			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),

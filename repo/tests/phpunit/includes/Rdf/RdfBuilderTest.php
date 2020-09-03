@@ -145,7 +145,6 @@ class RdfBuilderTest extends \MediaWikiTestCase {
 		$entityRdfBuilderFactory = new EntityRdfBuilderFactory( $this->getRdfBuilderFactoryCallbacks( $siteLookup ), [] );
 		$emitter = new NTriplesRdfWriter();
 		$builder = new RdfBuilder(
-			$siteLookup->getSites(),
 			$vocabulary ?: $this->getTestData()->getVocabulary(),
 			$valueBuilderFactory,
 			$this->getTestData()->getMockRepository(),

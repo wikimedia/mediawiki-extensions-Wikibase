@@ -11,7 +11,6 @@ use MWException;
 use PageProps;
 use RequestContext;
 use Serializers\Serializer;
-use SiteList;
 use SiteLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -72,11 +71,6 @@ class EntityDataSerializationService {
 	private $propertyLookup;
 
 	/**
-	 * @var SiteList
-	 */
-	private $sites;
-
-	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -112,7 +106,6 @@ class EntityDataSerializationService {
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
-		SiteList $sites,
 		EntityDataFormatProvider $entityDataFormatProvider,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
@@ -124,7 +117,6 @@ class EntityDataSerializationService {
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
-		$this->sites = $sites;
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
@@ -363,7 +355,6 @@ class EntityDataSerializationService {
 		$rdfWriter = $this->rdfWriterFactory->getWriter( $format );
 
 		$rdfBuilder = new RdfBuilder(
-			$this->sites,
 			$this->rdfVocabulary,
 			$this->valueSnakRdfBuilderFactory,
 			$this->propertyLookup,

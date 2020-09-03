@@ -204,7 +204,6 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 			'ntriples',
 			$out,
 			$flavor,
-			$siteLookup->getSites(),
 			$entityRevisionLookup,
 			$dataTypeLookup,
 			$rdfBuilderFactory,
