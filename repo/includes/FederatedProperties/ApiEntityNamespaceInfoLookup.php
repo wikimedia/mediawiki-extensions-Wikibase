@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
 /**
+ * A class for getting namespaces for federated properties one time per request.
  * @license GPL-2.0-or-later
  */
 class ApiEntityNamespaceInfoLookup {
@@ -63,7 +64,7 @@ class ApiEntityNamespaceInfoLookup {
 				if ( array_key_exists( 'canonical', $namespace ) ) {
 					return $namespace['canonical'];
 				}
-				if ( $namespace['id'] === 0 ) {
+				if ( $namespace['id'] === NS_MAIN ) {
 					return '';
 				}
 			}

@@ -21,11 +21,20 @@ class ApiEntityUrlLookup implements EntityUrlLookup {
 	 */
 	private $sourceWikibaseUrl;
 
+	/**
+	 * ApiEntityUrlLookup constructor.
+	 * @param ApiEntityTitleTextLookup $titleTextLookup
+	 * @param string $sourceWikibaseUrl
+	 */
 	public function __construct( ApiEntityTitleTextLookup $titleTextLookup, string $sourceWikibaseUrl ) {
 		$this->titleTextLookup = $titleTextLookup;
 		$this->sourceWikibaseUrl = $sourceWikibaseUrl;
 	}
 
+	/**
+	 * @param EntityId $id
+	 * @return string|null
+	 */
 	public function getFullUrl( EntityId $id ): ?string {
 		$titleText = $this->titleTextLookup->getPrefixedText( $id );
 
@@ -38,6 +47,10 @@ class ApiEntityUrlLookup implements EntityUrlLookup {
 			] );
 	}
 
+	/**
+	 * @param EntityId $id
+	 * @return string|null
+	 */
 	public function getLinkUrl( EntityId $id ): ?string {
 		// Assume that when using an API based lookup we are always referring to Entities somewhere else.
 		// So always return the full URL.
