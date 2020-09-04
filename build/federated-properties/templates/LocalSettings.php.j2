@@ -2,12 +2,14 @@
 $wgServer = '{{ SCHEME }}://{{ SERVER_NAME }}{{ PORT }}';
 
 # Developer mode and debugging
-error_reporting( -1 );
-ini_set( 'display_errors', 1 );
-$wgShowExceptionDetails = true;
-$wgShowSQLErrors = true;
-$wgDebugDumpSql  = true;
-$wgShowDBErrorBacktrace = true;
+if ( {{ DEV_ERROR_REPORTING }} ) {
+	error_reporting( -1 );
+	ini_set( 'display_errors', 1 );
+	$wgShowExceptionDetails = true;
+	$wgShowSQLErrors = true;
+	$wgDebugDumpSql  = true;
+	$wgShowDBErrorBacktrace = true;
+}
 
 ## Database settings
 ## Environment variables will be substituted in here.
