@@ -64,12 +64,23 @@ vagrant@federatedProperties-vm:~$
 
 #### Run ansible
 
+### Makefile
+
+The easiest way to run ansible is using the Makefile
+```sh
+cd extensions/Wikibase/build/federated-properties
+make cloud
+```
+
+`cloud` can be replaced with another instance identifer (see the Makefile).
+
+### Local VM
+
 ```sh
 $ cd extensions/Wikibase/build/federated-properties
 $ ansible-playbook fedProps.yml --limit wikibase-federated-properties.vm
 ```
 Once the setup process has completed, you can access your newly installed Wikibase test system via http://wikibase-federated-properties.vm/ and the Wikidata Query Service via http://wikibase-federated-properties.vm:8834/.
-
 
 ### Use a cloud VPS instance
 
@@ -80,7 +91,6 @@ $ ansible-playbook fedProps.yml --limit wikidata-federated-properties.wikidata-d
 ```
 
 Once the setup process has completed, you can access the newly installed Wikibase test system via https://wikidata-federated-properties.wmflabs.org.
-
 
 ### Cleanup
 
