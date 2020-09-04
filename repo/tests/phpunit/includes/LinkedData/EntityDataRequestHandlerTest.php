@@ -12,7 +12,6 @@ use HttpError;
 use OutputPage;
 use Psr\Log\NullLogger;
 use RequestContext;
-use SiteList;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -111,7 +110,6 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
-			new SiteList(),
 			$entityDataFormatProvider,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),

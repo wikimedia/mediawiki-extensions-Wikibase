@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Rdf;
 
 use PageProps;
-use SiteList;
 use SplQueue;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -95,7 +94,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	private $entityRdfBuilders;
 
 	/**
-	 * @param SiteList $sites
 	 * @param RdfVocabulary $vocabulary
 	 * @param ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory
 	 * @param PropertyDataTypeLookup $propertyLookup
@@ -106,7 +104,6 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 * @param EntityTitleLookup $titleLookup
 	 */
 	public function __construct(
-		SiteList $sites,
 		RdfVocabulary $vocabulary,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		PropertyDataTypeLookup $propertyLookup,
