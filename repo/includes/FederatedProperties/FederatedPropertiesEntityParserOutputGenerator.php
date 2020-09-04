@@ -91,15 +91,12 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 		$propertyIds = array_map( function( $snak ) {
 			return $snak->getPropertyId();
 		}, $entity->getStatements()->getAllSnaks() );
+
 		if ( empty( $propertyIds ) ) {
 			return;
 		}
 
-		$propertyIds = array_unique( $propertyIds );
-
-		$this->apiEntityLookup->fetchEntities(
-			$propertyIds
-		);
+		$this->apiEntityLookup->fetchEntities( array_unique( $propertyIds ) );
 	}
 
 }
