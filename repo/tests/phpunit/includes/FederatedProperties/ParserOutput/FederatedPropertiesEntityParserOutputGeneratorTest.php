@@ -145,6 +145,7 @@ class FederatedPropertiesEntityParserOutputGeneratorTest extends EntityParserOut
 
 		$parserOutput = $parserOutputGen->getParserOutput( $entityRevision );
 		$resourceLoaderModules = $parserOutput->getModules();
+		$this->assertContains( 'wikibase.federatedPropertiesLeavingSiteNotice', $resourceLoaderModules );
 		$this->assertContains( 'wikibase.federatedPropertiesEditRequestFailureNotice', $resourceLoaderModules );
 	}
 

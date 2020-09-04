@@ -67,6 +67,7 @@ class FederatedPropertiesEntityParserOutputGenerator implements EntityParserOutp
 			$po = $this->inner->getParserOutput( $entityRevision, $generateHtml );
 			$po->setEnableOOUI( true );
 			$po->addModules( 'wikibase.federatedPropertiesEditRequestFailureNotice' );
+			$po->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
 
 		} catch ( FederatedPropertiesException $ex ) {
 
