@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewPlaceHolderEmitter;
@@ -81,8 +80,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 */
 	private $language;
 
-	private $repoSettings;
-
 	/**
 	 * @param DispatchingEntityViewFactory $entityViewFactory
 	 * @param DispatchingEntityMetaTagsCreatorFactory $entityMetaTagsCreatorFactory
@@ -118,7 +115,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		$this->dataUpdaters = $dataUpdaters;
 		$this->language = $language;
 		$this->languageCode = $language->getCode();
-		$this->repoSettings = WikibaseRepo::getDefaultInstance()->getSettings();
 	}
 
 	/**
@@ -224,11 +220,6 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 		// FIXME: Separate the JavaScript that is also needed in read-only mode from
 		// the JavaScript that is only necessary for editing.
 		$parserOutput->addModules( 'wikibase.ui.entityViewInit' );
-
-		if ( $this->repoSettings->getSetting( 'federatedPropertiesEnabled' ) ) {
-			$parserOutput->setEnableOOUI( true );
-			$parserOutput->addModules( 'wikibase.federatedPropertiesLeavingSiteNotice' );
-		}
 	}
 
 	/**
