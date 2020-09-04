@@ -379,6 +379,8 @@
 	"wikibase-federated-properties-leaving-site-notice-continue": "Kontynuuj do źródłowej wiki",
 	"wikibase-federated-properties-leaving-site-notice-header": "Opuszczasz lokalną Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Nie pokazuj ponownie tego komunikatu",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Spróbuj ponownie",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Edycja nie powiodła się",
 	"special-setaliases-parameterized": "Ustaw aliasy $1",
 	"special-setlabel-parameterized": "Ustaw etykietę $1",
 	"special-setdescription-parameterized": "Ustaw opis $1",

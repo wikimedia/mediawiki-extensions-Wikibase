@@ -478,7 +478,7 @@
 	"wikibase-tainted-ref-tainted-icon-title": "Diese Aussage hat einige potenzielle Probleme.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Doppelter Hauptsnak entdeckt. Aussage wurde nicht hinzugefügt.",
 	"wikibase-federated-properties-search-api-error-message": "Eigenschaften vorübergehend nicht verfügbar.",
-	"wikibase-federated-properties-save-api-error-message": "Ihr Speichern ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen.",
+	"wikibase-federated-properties-save-api-error-message": "Dein Speichern ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Aussagen zu diesem Datenobjekt sind aufgrund einer fehlgeschlagenen Anfrage an das Verbundquellen-Wiki vorübergehend nicht verfügbar. Bitte aktualisiere die Seite.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "Diese Wikibase-Instanz verwendet föderierte Eigenschaften aus einer externen Quelle. Du kannst über $1 darauf zugreifen.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Liste der Eigenschaften auf $2]",
@@ -487,9 +487,13 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Dies ist eine föderale Eigenschaft. Du wirst zu $1 umgeleitet, um die Details einzusehen.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Verlassen des lokalen Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Zeige mir diese Nachricht nicht noch einmal",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Erneut versuchen",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Du kannst diese Aussage aufgrund einer fehlgeschlagenen Anfrage an das Föderations-Quellen-Wiki nicht bearbeiten.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Bearbeitung fehlgeschlagen",
 	"special-setaliases-parameterized": "Aliasse für $1 festlegen",
 	"special-setlabel-parameterized": "Bezeichnung für $1 festlegen",
 	"special-setdescription-parameterized": "Beschreibung für $1 festlegen",
 	"special-setlabeldescriptionaliases-parameterized": "Bezeichnung, Beschreibung und Aliasse für $1 festlegen",
-	"wikibase-federated-properties-local-property-api-error-message": "Du kannst nicht mit Eigenschaften über diese API interagieren, solange föderierte Eigenschaften aktiviert sind."
+	"wikibase-federated-properties-local-property-api-error-message": "Du kannst nicht mit Eigenschaften über diese API interagieren, solange föderierte Eigenschaften aktiviert sind.",
+	"wikibase-federated-properties-failed-request-api-error-message": "Die Anfrage ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen."
 }
