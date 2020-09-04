@@ -2,41 +2,24 @@
 
 namespace Wikibase\Repo\Tests\ParserOutput;
 
-use DataValues\StringValue;
 use Language;
-use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
 use RepoGroup;
 use SpecialPage;
-use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
-use Wikibase\DataModel\Services\EntityId\SuffixEntityIdParser;
-use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
-use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorCollection;
-use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
-use Wikibase\Repo\EntityReferenceExtractors\SiteLinkBadgeItemReferenceExtractor;
-use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\CompositeStatementDataUpdater;
-use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\ExternalLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\FullEntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\ImageLinksDataUpdater;
 use Wikibase\Repo\ParserOutput\ItemParserOutputUpdater;
-use Wikibase\Repo\ParserOutput\ParserOutputJsConfigBuilder;
 use Wikibase\Repo\ParserOutput\ReferencedEntitiesDataUpdater;
-use Wikibase\View\EntityDocumentView;
-use Wikibase\View\EntityMetaTagsCreator;
 use Wikibase\View\EntityView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\Template\TemplateFactory;
@@ -52,12 +35,7 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
  */
-class FullEntityParserOutputGeneratorTest extends MediaWikiIntegrationTestCase {
-
-	/**
-	 * @var DispatchingEntityViewFactory
-	 */
-	private $entityViewFactory;
+class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTestBase {
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -273,195 +251,4 @@ class FullEntityParserOutputGeneratorTest extends MediaWikiIntegrationTestCase {
 			Language::factory( 'en' )
 		);
 	}
-
-	/**
-	 * @return TermLanguageFallbackChain
-	 */
-	private function newLanguageFallbackChain() {
-		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fallbackChain->expects( $this->any() )
-			->method( 'extractPreferredValue' )
-			->will( $this->returnCallback( function( $labels ) {
-				if ( array_key_exists( 'en', $labels ) ) {
-					return [
-						'value' => $labels['en'],
-						'language' => 'en',
-						'source' => 'en'
-					];
-				}
-
-				return null;
-			} ) );
-
-		$fallbackChain->method( 'getFetchLanguageCodes' )
-			->willReturn( [ 'en' ] );
-
-		return $fallbackChain;
-	}
-
-	private function newItem() {
-		$item = new Item( new ItemId( 'Q7799929' ) );
-
-		$item->setLabel( 'en', 'kitten item' );
-
-		$statements = $item->getStatements();
-
-		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'http://an.url.com' ) ) );
-		$statements->addNewStatement( new PropertyValueSnak( 42, new StringValue( 'https://another.url.org' ) ) );
-
-		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:This is a file.pdf' ) ) );
-		$statements->addNewStatement( new PropertyValueSnak( 10, new StringValue( 'File:Selfie.jpg' ) ) );
-
-		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'kitten', [ new ItemId( 'Q42' ) ] );
-		$item->getSiteLinkList()->addNewSiteLink( 'dewiki', 'meow', [ new ItemId( 'Q42' ), new ItemId( 'Q35' ) ] );
-
-		return $item;
-	}
-
-	/**
-	 * @param bool $createView
-	 *
-	 * @return DispatchingEntityViewFactory
-	 */
-	private function mockEntityViewFactory( $createView ) {
-		$entityViewFactory = $this->getMockBuilder( DispatchingEntityViewFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$entityViewFactory->expects( $createView ? $this->once() : $this->never() )
-			->method( 'newEntityView' )
-			->will( $this->returnValue( $this->getEntityView() ) );
-
-		return $entityViewFactory;
-	}
-
-	/**
-	 * @return EntityDocumentView
-	 */
-	private function getEntityView() {
-		$entityView = $this->getMockBuilder( EntityDocumentView::class )
-			->setMethods( [
-				'getTitleHtml',
-				'getContent'
-			] )
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
-
-		$entityView->expects( $this->any() )
-			->method( 'getTitleHtml' )
-			->will( $this->returnValue( '<TITLE>' ) );
-
-		$viewContent = new ViewContent(
-			'<HTML>',
-			[]
-		);
-
-		$entityView->expects( $this->any() )
-			->method( 'getContent' )
-			->will( $this->returnValue( $viewContent ) );
-
-		return $entityView;
-	}
-
-	/**
-	 * @return DispatchingEntityMetaTagsCreatorFactory
-	 */
-	private function getEntityMetaTagsFactory( $title = null, $description = null ) {
-		$entityMetaTagsCreatorFactory = $this->createMock( DispatchingEntityMetaTagsCreatorFactory::class );
-
-		$entityMetaTagsCreatorFactory
-			->method( 'newEntityMetaTags' )
-			->will( $this->returnValue( $this->getMetaTags( $title, $description ) ) );
-
-		return $entityMetaTagsCreatorFactory;
-	}
-
-	/**
-	 * @return EntityMetaTags
-	 */
-	private function getMetaTags( $title, $description ) {
-		$entityMetaTagsCreator = $this->getMockBuilder( EntityMetaTagsCreator::class )
-			->setMethods( [
-				'getMetaTags',
-			] )
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
-
-		$tags = [];
-
-		$tags[ 'title' ] = $title;
-
-		if ( $description !== null ) {
-			$tags[ 'description' ] = $description;
-		}
-
-		$entityMetaTagsCreator->expects( $this->any() )
-			->method( 'getMetaTags' )
-			->will( $this->returnValue( $tags ) );
-
-		return $entityMetaTagsCreator;
-	}
-
-	/**
-	 * @return ParserOutputJsConfigBuilder
-	 */
-	private function getConfigBuilderMock() {
-		$configBuilder = $this->getMockBuilder( ParserOutputJsConfigBuilder::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$configBuilder->expects( $this->any() )
-			->method( 'build' )
-			->will( $this->returnValue( [ '<JS>' ] ) );
-
-		return $configBuilder;
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getEntityTitleLookupMock() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $id ) {
-				return Title::makeTitle(
-					NS_MAIN,
-					$id->getEntityType() . ':' . $id->getSerialization()
-				);
-			} ) );
-
-		return $entityTitleLookup;
-	}
-
-	private function getPropertyDataTypeLookup() {
-		$dataTypeLookup = new InMemoryDataTypeLookup();
-
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P42' ), 'url' );
-		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P10' ), 'commonsMedia' );
-
-		return $dataTypeLookup;
-	}
-
-	private function newEntityReferenceExtractor() {
-		return new EntityReferenceExtractorDelegator( [
-			'item' => function() {
-				return new EntityReferenceExtractorCollection( [
-					new SiteLinkBadgeItemReferenceExtractor(),
-					new StatementEntityReferenceExtractor(
-						$this->getMockBuilder( SuffixEntityIdParser::class )
-							->disableOriginalConstructor()
-							->getMock()
-					)
-				] );
-			}
-		], $this->getMockBuilder( StatementEntityReferenceExtractor::class )
-			->disableOriginalConstructor()
-			->getMock() );
-	}
-
 }
