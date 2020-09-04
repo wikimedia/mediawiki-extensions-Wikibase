@@ -38,6 +38,9 @@ $wgArticlePath = "/wiki/$1";
 #Set Secret
 $wgSecretKey = "secretkey";
 
+// https://phabricator.wikimedia.org/T235554#6435256
+$wgDisableOutputCompression  = true;
+
 ## RC Age
 # https://www.mediawiki.org/wiki/Manual:
 # Items in the recentchanges table are periodically purged; entries older than this many seconds will go.
