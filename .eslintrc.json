@@ -48,7 +48,8 @@
 		"vars-on-top": "off",
 		"mediawiki/class-doc": "off",
 		"no-jquery/no-class-state": "off",
-		"no-jquery/no-global-selector": "off"
+		"no-jquery/no-global-selector": "off",
+		"no-shadow": "warn"
 	},
 	"settings": {
 		"no-jquery": {

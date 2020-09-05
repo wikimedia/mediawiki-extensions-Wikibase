@@ -1,5 +1,6 @@
 /**
  * List of qunit tests to run in repo
+ *
  * @license GPL-2.0-or-later
  */
 
