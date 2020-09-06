@@ -418,6 +418,7 @@
 	"wikibase-federated-properties-special-list-of-properties-notice": "Questo WikiBase usa proprietà federate provenienti da fonte esterna. Puoi accedere a $1",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista delle Proprietà su $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Annulla",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Riprova",
 	"special-setaliases-parameterized": "Imposta alias per $1",
 	"special-setlabel-parameterized": "Imposta etichetta per $1",
 	"special-setdescription-parameterized": "Imposta descrizione per $1",

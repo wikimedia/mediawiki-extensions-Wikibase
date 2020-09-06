@@ -14,5 +14,7 @@
 	"wikibase-sitelinks-special": "Ōðre webbstedas",
 	"wikibase-statementview-rank-normal": "Gewunelic hād",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}",
-	"wikibase-redirect-source-and-target-are-the-same": "Hit is unmeaht to forþwisienne an þing to him sylfum"
+	"wikibase-redirect-source-and-target-are-the-same": "Hit is unmeaht to forþwisienne an þing to him sylfum",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Eft anginne",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Adihtung getrucede"
 }

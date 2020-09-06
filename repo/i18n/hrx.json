@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Iohanen",
 			"Midnight Gambler"
 		]
 	},
-	"wikibase-edit": "beoorbeite"
+	"wikibase-edit": "beoorbeite",
+	"wikibase-add": "adizioneere"
 }

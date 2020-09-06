@@ -6,9 +6,11 @@
 			"Oromoom"
 		]
 	},
+	"tooltip-t-wikibase": "Mi'a kuusa data walqabatuun hidhi",
 	"wikibase-comment-update": "{{WBREPONAME}} mi'a jijjiirame",
 	"wikibase-dataitem": "Mi'a {{WBREPONAME}}",
 	"wikibase-editlinks": "Geessituu gulaali",
+	"wikibase-editlinkstitle": "Geessitu afaani gara afaani gulaali",
 	"wikibase-rc-hide-wikidata-hide": "Dhoksi",
 	"wikibase-rc-hide-wikidata-show": "Agarsiisi",
 	"wikibase-rc-wikibase-edit-letter": "D",

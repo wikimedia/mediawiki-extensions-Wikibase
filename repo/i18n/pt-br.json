@@ -483,9 +483,13 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Esta é uma propriedade federada. Você será redirecionado para $1 para ver os detalhes.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Saindo do Wikibase local",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Não me mostre esta mensagem novamente",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Tente novamente",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Você não pode editar esta declaração devido a uma falha na solicitação na Wiki de origem da federação.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "A edição falhou",
 	"special-setaliases-parameterized": "Definir nomes alternativos de $1",
 	"special-setlabel-parameterized": "Definir rótulo de $1",
 	"special-setdescription-parameterized": "Definir descrição de $1",
 	"special-setlabeldescriptionaliases-parameterized": "Definir rótulo, descrição e nomes alternativos de $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Você não pode interagir com propriedades usando esta API enquanto as propriedades federadas estão habilitadas"
+	"wikibase-federated-properties-local-property-api-error-message": "Você não pode interagir com propriedades usando esta API enquanto as propriedades federadas estão habilitadas",
+	"wikibase-federated-properties-failed-request-api-error-message": "A solicitação falhou devido a uma falha na solicitação na wiki de origem da federação."
 }

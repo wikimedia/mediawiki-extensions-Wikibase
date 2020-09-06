@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joetaras"
+			"Joetaras",
+			"S4b1nuz E.656"
 		]
 	},
 	"wikibase-client-desc": "Cliende pe l'estenzione Uicchibase",
@@ -37,7 +38,7 @@
 	"wikibase-linkitem-confirmitem-button": "Conferme",
 	"wikibase-linkitem-not-loggedin-title": "Tu è abbesògne de trasè",
 	"wikibase-linkitem-not-loggedin": "Tu a trasè sus a sta uicchi e jndr'à l'[archivije date cendralizzate $1] pe ausà sta funzione.",
-	"wikibase-linkitem-success-link": "Le pàggene onne state collegate. Puè acchià l'elemende ca tène le collegaminde jndr'à l'[archivije date cendralizzate $1] nuèstre",
+	"wikibase-linkitem-success-link": "Le pàggene onne state collegate. Puè acchià l'elemende ca tène le collegaminde jndr'à l'[$1 archivije date cendralizzate] nuèstre.",
 	"limitreport-entityaccesscount": "Numere de endità uicchibase carecate",
 	"wikibase-property-notfound": "Probbietà $1 non acchiate.",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

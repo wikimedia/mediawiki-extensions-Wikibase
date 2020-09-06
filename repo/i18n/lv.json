@@ -202,5 +202,6 @@
 	"right-item-merge": "Apvienot vienumus",
 	"wikibase-entity-save-error-heading": "Kaut kas nogāja greizi",
 	"wikibase-tainted-ref-popper-help-link-text": "Palīdzība",
-	"wikibase-tainted-ref-popper-remove-warning": "Noņemt brīdinājumu"
+	"wikibase-tainted-ref-popper-remove-warning": "Noņemt brīdinājumu",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Atcelt"
 }
