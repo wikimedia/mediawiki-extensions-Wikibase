@@ -513,7 +513,7 @@
 	"wikibase-federated-properties-leaving-site-notice-header": "Leaving local Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Don't show me this message again",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Try again",
-	"wikibase-federated-properties-edit-request-failed-notice-notice": "You cannot edit this statement due to a failed request to the federation source Wiki.",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "You cannot edit this statement due to a failed request to the federation source wiki.",
 	"wikibase-federated-properties-edit-request-failed-notice-header": "Editing failed",
 	"special-setaliases-parameterized": "Set $1 aliases",
 	"special-setlabel-parameterized": "Set $1 label",
