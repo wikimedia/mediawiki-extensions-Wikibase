@@ -9,6 +9,8 @@ if ( {{ DEV_ERROR_REPORTING }} ) {
 	$wgShowSQLErrors = true;
 	$wgDebugDumpSql  = true;
 	$wgShowDBErrorBacktrace = true;
+} else {
+	ini_set( 'display_errors', 0 );
 }
 
 ## Database settings
