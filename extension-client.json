@@ -198,7 +198,7 @@
 	"JobClasses": {
 		"wikibase-addUsagesForPage": "\\Wikibase\\Client\\Store\\AddUsagesForPageJob",
 		"ChangeNotification": "\\Wikibase\\Client\\ChangeNotificationJob",
-		"ChangeVisibilityNotification": "\\Wikibase\\Client\\ChangeVisibilityNotificationJob::newFromGlobalState",
+		"ChangeVisibilityNotification": "\\Wikibase\\Client\\ChangeModification\\ChangeVisibilityNotificationJob::newFromGlobalState",
 		"wikibase-InjectRCRecords": "\\Wikibase\\Client\\Changes\\InjectRCRecordsJob::newFromGlobalState"
 	},
 	"RecentChangesFlags": {

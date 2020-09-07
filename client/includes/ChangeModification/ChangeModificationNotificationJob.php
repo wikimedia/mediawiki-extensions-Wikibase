@@ -2,11 +2,9 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Client;
+namespace Wikibase\Client\ChangeModification;
 
 use Job;
-use MediaWiki\MediaWikiServices;
-use Title;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
@@ -15,17 +13,18 @@ use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
- * Job for notifying a client wiki of a batch of revision visibility changes on the repository.
+ * Base class for Jobs handling modifications to a set of client changes (identified
+ * by RepoRevisionIdentifiers).
  *
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class ChangeVisibilityNotificationJob extends Job {
+abstract class ChangeModificationNotificationJob extends Job {
 
 	/**
 	 * @var ILoadBalancer
 	 */
-	private $loadBalancer;
+	protected $loadBalancer;
 
 	/**
 	 * @var RepoRevisionIdentifier[]
@@ -33,14 +32,12 @@ class ChangeVisibilityNotificationJob extends Job {
 	private $revisionIdentifiers;
 
 	/**
-	 * Constructs a ChangeVisibilityNotificationJob for the repo revisions given.
-	 *
+	 * @param string $jobName Name of this job.
 	 * @param ILoadBalancer $loadBalancer
-	 * @param array $params Contains the name of the repo, revisionIdentifiersJson to redact
-	 *   and the visibilityBitFlag to set.
+	 * @param array $params Contains the revisionIdentifiersJson to act upon.
 	 */
-	public function __construct( ILoadBalancer $loadBalancer, array $params = [] ) {
-		parent::__construct( 'ChangeVisibilityNotification', $params );
+	public function __construct( string $jobName, ILoadBalancer $loadBalancer, array $params = [] ) {
+		parent::__construct( $jobName, $params );
 
 		Assert::parameterType( 'array', $params, '$params' );
 		Assert::parameter(
@@ -51,20 +48,7 @@ class ChangeVisibilityNotificationJob extends Job {
 
 		$this->revisionIdentifiers = $this->unpackRevisionIdentifiers( $params['revisionIdentifiersJson'] );
 
-		Assert::parameter(
-			isset( $params['visibilityBitFlag'] ),
-			'$params',
-			'$params[\'visibilityBitFlag\'] not set.'
-		);
-
 		$this->loadBalancer = $loadBalancer;
-	}
-
-	public static function newFromGlobalState( Title $unused, array $params ) {
-		return new self(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
-			$params
-		);
 	}
 
 	/**
@@ -87,29 +71,33 @@ class ChangeVisibilityNotificationJob extends Job {
 	 * @return bool success
 	 */
 	public function run() {
-		$visibilityBitFlag = $this->params['visibilityBitFlag'];
-		$toRedact = $this->getRecentChangesToRedact( $visibilityBitFlag );
-		if ( $toRedact === [] ) {
+		$relevantChanges = $this->getRelevantRecentChanges();
+		if ( $relevantChanges === [] ) {
 			return true;
 		}
 
-		$this->redactRecentChanges( $toRedact, $visibilityBitFlag );
+		$this->modifyChanges( $relevantChanges );
+
 		return true;
 	}
 
 	/**
-	 * @param int $visibilityBitFlag
-	 * @return int[] rc_ids to redact
+	 * @param int[] $relevantChanges Ids of changes relevant for this job.
+	 * @return void
 	 */
-	private function getRecentChangesToRedact( int $visibilityBitFlag ): array {
+	abstract protected function modifyChanges( array $relevantChanges ): void;
+
+	/**
+	 * @return int[] Relevant rc_ids
+	 */
+	protected function getRelevantRecentChanges(): array {
 		$revisionIdentifiersByEntityId = $this->getGroupedRepoRevisionIdentifiers();
 
 		$toRedact = [];
 		foreach ( $revisionIdentifiersByEntityId as $entityIdSerialization => $revisionIdentifiers ) {
 			$candidateResults = $this->selectCandidateResults(
 				$entityIdSerialization,
-				$revisionIdentifiers,
-				$visibilityBitFlag
+				$revisionIdentifiers
 			);
 
 			$toRedact = array_merge(
@@ -122,33 +110,14 @@ class ChangeVisibilityNotificationJob extends Job {
 	}
 
 	/**
-	 * @param int[] $rcIds
-	 * @param int $visibilityBitFlag Target rc_deleted bitflag (ignore entries that already have it)
-	 */
-	private function redactRecentChanges( array $rcIds, int $visibilityBitFlag ) {
-		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
-
-		foreach ( array_chunk( $rcIds, 100 ) as $rcIdBatch ) {
-			$dbw->update(
-				'recentchanges',
-				[ 'rc_deleted' => $visibilityBitFlag ],
-				[ 'rc_id' => $rcIdBatch ],
-				__METHOD__
-			);
-		}
-	}
-
-	/**
 	 * @param string $entityIdSerialization
 	 * @param RepoRevisionIdentifier[] $revisionIdentifiers
-	 * @param int $visibilityBitFlag Target rc_deleted bitflag (ignore rows that already have it)
 	 *
 	 * @return IResultWrapper
 	 */
 	private function selectCandidateResults(
 		string $entityIdSerialization,
-		array $revisionIdentifiers,
-		int $visibilityBitFlag
+		array $revisionIdentifiers
 	): IResultWrapper {
 		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 		$rcParamPattern = $dbr->buildLike(
@@ -162,14 +131,11 @@ class ChangeVisibilityNotificationJob extends Job {
 			$timestamps[] = $revisionIdentifier->getRevisionTimestamp();
 		}
 
-		// For extra clarity: $visibilityBitFlag is int.
-		Assert::parameterType( 'integer', $visibilityBitFlag, '$visibilityBitFlag' );
 		return $dbr->select(
 			'recentchanges',
 			[ 'rc_id', 'rc_params' ],
 			[
 				'rc_timestamp' => $timestamps,
-				"rc_deleted != $visibilityBitFlag",
 				"rc_params $rcParamPattern",
 				'rc_source' => RecentChangeFactory::SRC_WIKIBASE
 			],

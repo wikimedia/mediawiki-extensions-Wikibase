@@ -1,13 +1,13 @@
 <?php
 
-namespace Wikibase\Client\Tests;
+namespace Wikibase\Client\Tests\ChangeModification;
 
 use Language;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use RecentChange;
 use Title;
-use Wikibase\Client\ChangeVisibilityNotificationJob;
+use Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob;
 use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Client\RecentChanges\SiteLinkCommentCreator;
 use Wikibase\DataModel\Entity\EntityIdParser;
@@ -17,7 +17,7 @@ use Wikibase\Lib\Changes\EntityChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 
 /**
- * @covers \Wikibase\Client\ChangeVisibilityNotificationJob
+ * @covers \Wikibase\Client\ChangeModification\ChangeVisibilityNotificationJob
  *
  * @group Wikibase
  * @group WikibaseChange
@@ -83,7 +83,8 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTestCase {
 		$this->initRecentChanges();
 
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( $revisionIdentifiers ),
 				'visibilityBitFlag' => $visibilityBitFlag
@@ -143,7 +144,8 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTestCase {
 		$additionalRecentChange->save();
 
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'P42', '20161111111111', 342, 343 ),
@@ -204,7 +206,8 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiIntegrationTestCase {
 
 	public function testToString() {
 		$job = new ChangeVisibilityNotificationJob(
-			MediaWikiServices::getInstance()->getDBLoadBalancer(),
+			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'UpdateRowsPerQuery' ),
 			[
 				'revisionIdentifiersJson' => $this->revisionIdentifiersToJson( [
 					new RepoRevisionIdentifier( 'Q1', '1', 1, 1 ),
