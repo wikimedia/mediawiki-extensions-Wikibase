@@ -1,7 +1,6 @@
 <?php
 
 declare( strict_types=1 );
-
 namespace Wikibase\Repo\FederatedProperties;
 
 use InvalidArgumentException;
@@ -14,6 +13,8 @@ use Wikibase\Lib\SettingsArray;
 /**
  * A class to initialize default entitySource values for federated properties
  *
+ * This is currently only used when the source wiki is set to it's default value.
+ *
  * @license GPL-2.0-or-later
  *
  * @author Tobias Andersson
@@ -23,7 +24,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	/**
 	 * @var string
 	 */
-	private $fedPropsSource;
+	private $sourceScriptUrl;
 
 	/**
 	 * @var string
@@ -31,7 +32,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	private $localEntitySourceName;
 
 	public function __construct( SettingsArray $settings ) {
-		$this->fedPropsSource = $settings->getSetting( 'federatedPropertiesSourceScriptUrl' );
+		$this->sourceScriptUrl = $settings->getSetting( 'federatedPropertiesSourceScriptUrl' );
 		$this->localEntitySourceName = $settings->getSetting( 'localEntitySourceName' );
 	}
 
@@ -42,8 +43,8 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	private function getLocalEntitySource( array $sources ) : EntitySource {
 		$result = array_filter(
 			$sources,
-			function ( $e ) {
-				return $e->getSourceName() === $this->localEntitySourceName;
+			function ( $entitySource ) {
+				return $entitySource->getSourceName() === $this->localEntitySourceName;
 			}
 		);
 
@@ -55,13 +56,16 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	}
 
 	/**
+	 * If the source wiki is set to it's default value we can setup the entity sources automatically
+	 * based on what we know of the setup of www.wikidata.org
+	 *
 	 * @param EntitySourceDefinitions $definitions
 	 * @param EntityTypeDefinitions $entityTypeDefinitions
 	 * @return EntitySourceDefinitions
 	 */
 	public function initializeDefaults( EntitySourceDefinitions $definitions, EntityTypeDefinitions $entityTypeDefinitions ) {
 
-		if ( $this->fedPropsSource !== 'https://www.wikidata.org/w/' ) {
+		if ( $this->sourceScriptUrl !== 'https://www.wikidata.org/w/' ) {
 			return $definitions;
 		}
 
@@ -71,8 +75,6 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 		$entityTypes = $defaultLocal->getEntityTypes();
 		$entityNamespaceIds = $defaultLocal->getEntityNamespaceIds();
 		$entitySlots = $defaultLocal->getEntitySlotNames();
-
-		$propertyIndex = array_search( Property::ENTITY_TYPE, $entityTypes );
 
 		$entityNamespaceIdsAndSlots = [];
 		foreach ( $entityTypes as $entityType ) {
