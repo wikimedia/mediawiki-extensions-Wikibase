@@ -11,7 +11,6 @@ use Wikimedia\AtEase\AtEase;
  * @covers \Wikibase\Lib\Changes\ChangeRow
  * @covers \Wikibase\Lib\Changes\EntityChange
  *
- * @group Database
  * @group Wikibase
  * @group WikibaseChange
  *
