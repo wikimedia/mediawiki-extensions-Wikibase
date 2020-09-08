@@ -297,5 +297,6 @@
 	"right-property-create": "Oprette egenskaber",
 	"wikibase-pageinfo-subscription-none": "Ingen",
 	"wikibase-tainted-ref-popper-help-link-text": "Hjælp",
-	"wikibase-federated-properties-leaving-site-notice-cancel": "Annullér"
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Annullér",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Prøv igen"
 }

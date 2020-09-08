@@ -459,5 +459,7 @@
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Lista över egenskaper på $2]",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Avbryt",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Fortsätt till källwikin",
-	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Visa inte det här meddelandet igen"
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Visa inte det här meddelandet igen",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Försök igen",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Redigering misslyckades"
 }
