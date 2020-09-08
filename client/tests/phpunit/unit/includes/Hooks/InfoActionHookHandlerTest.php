@@ -199,7 +199,7 @@ class InfoActionHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			) {
 				return Html::rawElement( 'a', [
 					'href' => 'https://www.wikidata.org/wiki/' . $entityId,
-					'class' => implode( ' ', $classes ),
+					'class' => $classes,
 				], $text ?: $entityId );
 			} ) );
 
