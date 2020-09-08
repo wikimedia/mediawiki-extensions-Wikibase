@@ -103,7 +103,7 @@ class EntityLoadingHelperTest extends \MediaWikiTestCase {
 		}
 
 		// TODO: Remove the deprecated dieError when it is not used any more.
-		$dieWithErrorCodeMethods = $this->logicalOr( 'dieWithError', 'dieError' );
+		$dieWithErrorCodeMethods = $this->logicalOr( 'dieWithError', 'dieError', 'dieStatus' );
 
 		if ( $expectedErrorCode ) {
 			$mock->expects( $this->once() )

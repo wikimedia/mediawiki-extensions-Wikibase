@@ -403,12 +403,12 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$value = $status->getValue();
 		$errorCode = null;
 
-		if ( is_array( $value ) && isset( $value['errorCode'] ) ) {
+		if ( isset( $value['errorCode'] ) ) {
 			$errorCode = $value['errorCode'];
 		} else {
 			$editError = 0;
 
-			if ( is_array( $value ) && isset( $value['errorFlags'] ) ) {
+			if ( isset( $value['errorFlags'] ) ) {
 				$editError = $value['errorFlags'];
 			}
 
