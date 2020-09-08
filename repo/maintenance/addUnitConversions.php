@@ -351,7 +351,6 @@ QUERY;
 	private function createRdfVocabulary( $baseUri, $typeUris ) {
 		$entityDataTitle = Title::makeTitle( NS_SPECIAL, 'EntityData' );
 
-		$irrelevantValue = 1000;
 		return new RdfVocabulary(
 			[ '' => $baseUri ],
 			[ '' => $entityDataTitle->getCanonicalURL() . '/' ],
