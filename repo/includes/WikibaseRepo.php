@@ -1240,7 +1240,7 @@ class WikibaseRepo {
 		return $this->store;
 	}
 
-	private function getLocalEntitySource() {
+	public function getLocalEntitySource() {
 		if ( $this->getDataAccessSettings()->useEntitySourceBasedFederation() ) {
 			$localEntitySourceName = $this->settings->getSetting( 'localEntitySourceName' );
 			$sources = $this->entitySourceDefinitions->getSources();
