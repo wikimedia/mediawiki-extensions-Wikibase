@@ -105,7 +105,7 @@ The duration of entries in the shared object cache, in seconds.
 
 DEFAULT: 3600 seconds (1 hour).
 
-#### sharedCacheType
+#### sharedCacheType {#common_sharedCacheType}
 The type of cache to use for the shared object cache. Use `CACHE_XXX` constants.
 
 DEFAULT: [$wgMainCacheType]
