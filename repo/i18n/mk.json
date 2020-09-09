@@ -463,9 +463,13 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Ова е осојузено својство. Ќе бидете пренасочени на $1 за да ги погледате неговите поединости.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Напуштање на месната викибаза",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Повеќе не ја покажувај поракава",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Обиди се пак",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Не можете да го уредите исказов поради неуспешно барање со изворното вики на осојузувањето.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Уредувањето не успеа",
 	"special-setaliases-parameterized": "Задај истозначници за $1",
 	"special-setlabel-parameterized": "Задај натпис за $1",
 	"special-setdescription-parameterized": "Задај опис за $1",
 	"special-setlabeldescriptionaliases-parameterized": "Задавање на натпис, опис и истозначници за $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Не можете да работите со својствата користејќи го овој приложник додека се овозможени осојузените својства"
+	"wikibase-federated-properties-local-property-api-error-message": "Не можете да работите со својствата користејќи го овој приложник додека се овозможени осојузените својства",
+	"wikibase-federated-properties-failed-request-api-error-message": "Барањето не успеа поради неуспешно барање до здруженото изворно вики."
 }

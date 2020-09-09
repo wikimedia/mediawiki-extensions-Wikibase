@@ -345,5 +345,7 @@
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Откажи",
 	"wikibase-federated-properties-leaving-site-notice-continue": "Настави на изворни вики",
 	"wikibase-federated-properties-leaving-site-notice-header": "Напуштање локалне викибазе",
-	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Не приказуј поново ову поруку"
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Не приказуј поново ову поруку",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Покушај поново",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Уређивање није успело"
 }
