@@ -42,14 +42,14 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		return $changeFactory;
 	}
 
-	private function getRecentChange( string $source ): RecentChange {
+	private function getRecentChange( string $source, array $attributes = [] ): RecentChange {
 		$recentChange = new RecentChange;
-		$recentChange->setAttribs( [ 'rc_source' => $source ] );
+		$recentChange->setAttribs( array_merge( [ 'rc_source' => $source ], $attributes ) );
 		return $recentChange;
 	}
 
-	private function getWikibaseChange(): RecentChange {
-		$recentChange = $this->getRecentChange( RecentChangeFactory::SRC_WIKIBASE );
+	private function getWikibaseChange( array $attributes = [] ): RecentChange {
+		$recentChange = $this->getRecentChange( RecentChangeFactory::SRC_WIKIBASE, $attributes );
 		$recentChange->counter = 1;
 		$recentChange->mTitle = $this->createMock( Title::class );
 		return $recentChange;
@@ -66,7 +66,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getChangeFactory(),
 			$formatter
 		);
-		$changesList = $changesList = $this->createMock( OldChangesList::class );
+		$changesList = $this->createMock( OldChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
@@ -86,7 +86,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getChangeFactory(),
 			$this->getChangeLineFormatter()
 		);
-		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
+		$changesList = $this->createMock( EnhancedChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
@@ -108,7 +108,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 			$this->getChangeFactory(),
 			$this->getChangeLineFormatter()
 		);
-		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
+		$changesList = $this->createMock( EnhancedChangesList::class );
 
 		$recentChange = $this->getRecentChange( $source );
 
@@ -143,7 +143,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'format' )
 			->willReturn( 'Formatted line' );
 
-		$changesList = $changesList = $this->createMock( OldChangesList::class );
+		$changesList = $this->createMock( OldChangesList::class );
 		$changesList->expects( $this->once() )
 			->method( 'recentChangesFlags' )
 			->willReturn( 'flags' );
@@ -166,6 +166,63 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [], $classes );
 	}
 
+	public function oldChangesListLineFlagsProvider() {
+		return [
+			[
+				[],
+				'wikibase-edit'
+			],
+			[
+				[ 'rc_minor' => true, 'rc_bot' => true ],
+				'wikibase-edit,minor,bot'
+			],
+			[
+				[ 'rc_minor' => 0, 'rc_bot' => 1 ],
+				'wikibase-edit,bot'
+			],
+			[
+				[ 'rc_minor' => true, 'rc_bot' => false ],
+				'wikibase-edit,minor'
+			],
+		];
+	}
+
+	/**
+	 * @dataProvider oldChangesListLineFlagsProvider
+	 */
+	public function testOldChangesListLineFlags( array $attributes, string $expected ) {
+		$changeFactory = $this->getChangeFactory( 1 );
+
+		$formatter = $this->getChangeLineFormatter();
+		$formatter->expects( $this->once() )
+			->method( 'format' )
+			->will( $this->returnArgument( 3 ) ); // $flags
+
+		$changesList = $this->createMock( OldChangesList::class );
+		$changesList->expects( $this->once() )
+			->method( 'recentChangesFlags' )
+			->will( $this->returnCallback( function ( $flags, $sep ) {
+				return implode( ',', array_keys( $flags, true ) );
+			} ) );
+		$changesList->method( 'getUser' )
+			->willReturn( $this->createMock( User::class ) );
+		$changesList->method( 'getLanguage' )
+			->willReturn( $this->createMock( Language::class ) );
+
+		$handler = new ChangesListLinesHandler( $changeFactory, $formatter );
+
+		$line = '';
+		$classes = [];
+		$handler->onOldChangesListRecentChangesLine(
+			$changesList,
+			$line,
+			$this->getWikibaseChange( $attributes ),
+			$classes
+		);
+		$this->assertEquals( $expected, $line );
+		$this->assertSame( [], $classes );
+	}
+
 	public function testEnhancedChangesListModifyBlockLineData() {
 		$changeFactory = $this->getChangeFactory( 1 );
 
@@ -173,7 +230,7 @@ class ChangesListLinesHandlerTest extends MediaWikiIntegrationTestCase {
 		$formatter->expects( $this->once() )
 			->method( 'formatDataForEnhancedBlockLine' );
 
-		$changesList = $changesList = $this->createMock( EnhancedChangesList::class );
+		$changesList = $this->createMock( EnhancedChangesList::class );
 		$changesList->method( 'getUser' )
 			->willReturn( $this->createMock( User::class ) );
 		$changesList->method( 'getLanguage' )
