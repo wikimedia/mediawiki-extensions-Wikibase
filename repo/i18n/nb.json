@@ -466,9 +466,13 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Dette er en føderert egenskap. Du blir omdirigert til $1 for å se detaljene dens.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Forlater lokal Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Ikke vis denne meldingen igjen",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Prøv igjen",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Du kan ikke redigere denne påstanden på grunn av en mislykket forespørsel til føderasjonskildewikien.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Redigering mislyktes",
 	"special-setaliases-parameterized": "Sett aliaser for $1",
 	"special-setlabel-parameterized": "Sett etikett for $1",
 	"special-setdescription-parameterized": "Sett beskrivelse for $1",
 	"special-setlabeldescriptionaliases-parameterized": "Sett etikett, beskrivelse og aliaser for $1",
-	"wikibase-federated-properties-local-property-api-error-message": "Du kan ikke samhandle med egenskaper med dette API-et mens fødererte egenskaper er slått på"
+	"wikibase-federated-properties-local-property-api-error-message": "Du kan ikke samhandle med egenskaper med dette API-et mens fødererte egenskaper er slått på",
+	"wikibase-federated-properties-failed-request-api-error-message": "Forespørselen mislyktes på grunn av en mislykket forespørsel til føderasjonskildewikien."
 }
