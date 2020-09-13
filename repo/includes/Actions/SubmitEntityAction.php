@@ -12,6 +12,7 @@ use MWException;
 use Page;
 use Status;
 use Title;
+use User;
 use WatchAction;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\Content\EntityContent;
@@ -307,9 +308,9 @@ class SubmitEntityAction extends EditEntityAction {
 
 		if ( $user->isLoggedIn()
 			&& $user->getOption( 'watchdefault' )
-			&& !$user->isWatched( $title )
+			&& !$user->isWatched( $title, User::IGNORE_USER_RIGHTS )
 		) {
-			WatchAction::doWatch( $title, $user );
+			WatchAction::doWatch( $title, $user, User::IGNORE_USER_RIGHTS );
 		}
 	}
 
