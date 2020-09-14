@@ -11,6 +11,7 @@ use MapCacheLRU;
 use Parser;
 use ParserOptions;
 use ParserOutput;
+use RequestContext;
 use Title;
 
 /**
@@ -107,7 +108,14 @@ class CachingKartographerEmbeddingHandler {
 		$clearState = true;
 
 		$title = Title::newFromText( 'Special:BlankPage' );
-		$parserOptions = new ParserOptions( null, $language );
+
+		// Cannot use $this->parser->getUser(), because that relies on the parser
+		// having either a User or ParserOptions set, causing failures:
+		// Error: Call to a member function getUser() on null
+		$parserOptions = new ParserOptions(
+			RequestContext::getMain()->getUser(),
+			$language
+		);
 		foreach ( $values as $value ) {
 			if ( $value->getGlobe() !== GlobeCoordinateValue::GLOBE_EARTH ) {
 				continue;
