@@ -453,5 +453,6 @@
 	"wikibase-federated-properties-leaving-site-notice-continue": "Continuar al wiki de origen",
 	"wikibase-federated-properties-leaving-site-notice-notice": "Esta es propiedad federada. Serás redirigido a $1 para ver a los detalles.",
 	"wikibase-federated-properties-leaving-site-notice-header": "A punto de dejar Wikibase local",
-	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo"
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "No mostrar este mensaje de nuevo",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Intentar de nuevo"
 }

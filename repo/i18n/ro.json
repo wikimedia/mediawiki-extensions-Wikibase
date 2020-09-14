@@ -6,6 +6,7 @@
 			"Ladsgroup",
 			"Macofe",
 			"Minisarm",
+			"NGC 54",
 			"Rsocol",
 			"Stelistcristi",
 			"Strainu",
@@ -241,5 +242,6 @@
 	"content-model-wikibase-property": "Proprietate Wikibase",
 	"content-model-wikibase-query": "Interogare Wikibase",
 	"action-property-create": "creați proprietăți",
-	"right-property-create": "Creează proprietăți"
+	"right-property-create": "Creează proprietăți",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Încercați din nou"
 }
