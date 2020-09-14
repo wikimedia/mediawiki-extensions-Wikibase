@@ -77,6 +77,10 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				'wb_items_per_site',
 				$this->getScriptPath( 'Wikibase', $db->getType() )
 			);
+			$updater->addExtensionTable(
+				'wb_id_counters',
+				$this->getScriptPath( 'wb_id_counters', $db->getType() )
+			);
 
 			$this->store->rebuild();
 		} elseif ( !$db->tableExists( 'wb_items_per_site', __METHOD__ ) ) {
@@ -84,6 +88,10 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$updater->addExtensionTable(
 				'wb_items_per_site',
 				$this->getScriptPath( 'Wikibase', $db->getType() )
+			);
+			$updater->addExtensionTable(
+				'wb_id_counters',
+				$this->getScriptPath( 'wb_id_counters', $db->getType() )
 			);
 
 			$this->store->rebuild();
