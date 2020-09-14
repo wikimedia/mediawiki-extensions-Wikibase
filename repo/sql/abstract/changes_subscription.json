@@ -1,0 +1,27 @@
+[
+	{
+		"name": "wb_changes_subscription",
+		"columns": [
+			{
+				"name": "cs_row_id",
+				"type": "bigint",
+				"options": { "unsigned": false, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "cs_entity_id",
+				"type": "binary",
+				"options": { "length": 255, "notnull": true }
+			},
+			{
+				"name": "cs_subscriber_id",
+				"type": "binary",
+				"options": { "length": 255, "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "cs_entity_id", "columns": [ "cs_entity_id", "cs_subscriber_id" ], "unique": true },
+			{ "name": "cs_subscriber_id", "columns": [ "cs_subscriber_id" ], "unique": false }
+		],
+		"pk": [ "cs_row_id" ]
+	}
+]
