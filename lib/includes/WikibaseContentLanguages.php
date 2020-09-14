@@ -128,6 +128,7 @@ class WikibaseContentLanguages {
 					'koy', // T125066
 					'lag', // T161983
 					'lcm', // T234761
+					'lij-mc', // T254968
 					'lkt', // T125066
 					'mfa', // T235468
 					'mic', // T258331
