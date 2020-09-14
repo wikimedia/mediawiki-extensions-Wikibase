@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiUsageException;
 use FauxRequest;
 use LogicException;
+use MediaWiki\Debug\DeprecatablePropertyArray;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Status;
@@ -59,36 +60,22 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 * @return SummaryFormatter
 	 */
 	private function getMockSummaryFormatter() {
-		return $this->getMockBuilder( SummaryFormatter::class )
-			->disableOriginalConstructor()
-			->getMock();
+		return $this->createMock( SummaryFormatter::class );
 	}
 
-	/**
-	 * @param int|null $calls
-	 *
-	 * @return EditEntity
-	 */
-	private function getMockEditEntity( $calls ) {
+	private function getMockEditEntity( ?int $calls, ?Status $status ): EditEntity {
 		$mock = $this->createMock( EditEntity::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'attemptSave' )
-			->will( $this->returnValue( Status::newGood() ) );
+			->willReturn( $status ?? Status::newGood() );
 		return $mock;
 	}
 
-	/**
-	 * @param int|null $calls
-	 *
-	 * @return MediawikiEditEntityFactory
-	 */
-	private function getMockEditEntityFactory( $calls ) {
-		$mock = $this->getMockBuilder( MediawikiEditEntityFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+	private function getMockEditEntityFactory( ?int $calls, ?Status $status ): MediawikiEditEntityFactory {
+		$mock = $this->createMock( MediawikiEditEntityFactory::class );
 		$mock->expects( $calls === null ? $this->any() : $this->exactly( $calls ) )
 			->method( 'newEditEntity' )
-			->will( $this->returnValue( $this->getMockEditEntity( $calls ) ) );
+			->willReturn( $this->getMockEditEntity( $calls, $status ) );
 		return $mock;
 	}
 
@@ -122,12 +109,8 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	}
 
 	private function newContext( array $params ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		$context = new RequestContext();
-		$context->setUser( $user );
+		$context->setUser( $this->createMock( User::class ) );
 		$context->setRequest( new FauxRequest( $params ) );
 
 		return $context;
@@ -269,6 +252,34 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	}
 
 	/**
+	 * @dataProvider errorStatusProvider
+	 */
+	public function testGivenErroneousSaveStatus_attemptSaveDiesWithError( array $statusValue, string $expectedErrorCode ) {
+		$status = Status::newFatal( 'sad' );
+
+		// intentionally not using a vanilla array as the Status value, because this was the source of a regression -> T260869
+		$status->value = new DeprecatablePropertyArray( $statusValue, [], __METHOD__ . ' status' );
+		$helper = $this->newEntitySavingHelper( [
+			'dieErrorCode' => $expectedErrorCode,
+			'attemptSaveStatus' => $status,
+		] );
+
+		$this->expectException( ApiUsageException::class );
+		$helper->attemptSaveEntity( new Item(), '' );
+	}
+
+	public function errorStatusProvider() {
+		yield 'with errorFlags' => [
+			[ 'errorFlags' => EditEntity::SAVE_ERROR ],
+			'failed-save',
+		];
+		yield 'with concrete errorCode' => [
+			[ 'errorCode' => 'sadness' ],
+			'sadness',
+		];
+	}
+
+	/**
 	 * @param array $config Associative configuration array. Known keys:
 	 *   - params: request parameters, as an associative array
 	 *   - revision: revision ID for EntityRevision
@@ -279,7 +290,8 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	 *   - exception: Exception to throw from getEntityRevisions
 	 *   - dieErrorCode: The error code expected by dieError
 	 *   - dieExceptionCode: The error code expected by dieException
-	 *   - newEditEntityCalls: expected number of calles to newEditEntity
+	 *   - newEditEntityCalls: expected number of calls to newEditEntity
+	 *   - attemptSaveStatus: Status object returned by the call to EditEntity::attemptSave
 	 *
 	 * @return EntitySavingHelper
 	 */
@@ -303,7 +315,8 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			),
 			$this->getMockSummaryFormatter(),
 			$this->getMockEditEntityFactory(
-				$config['newEditEntityCalls'] ?? null
+				$config['newEditEntityCalls'] ?? null,
+				$config['attemptSaveStatus'] ?? null
 			),
 			MediaWikiServices::getInstance()->getPermissionManager()
 		);
