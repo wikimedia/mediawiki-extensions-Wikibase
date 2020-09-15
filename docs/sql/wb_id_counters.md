@@ -15,12 +15,12 @@ Part of the \ref md_docs_storage_id-counters storage system.
 | Field    | Type             | Null | Key | Default | Extra |
 +----------+------------------+------+-----+---------+-------+
 | id_value | int(10) unsigned | NO   |     | NULL    |       |
-| id_type  | varbinary(32)    | NO   | PRI | NULL    |       |
+| id_type  | varbinary(32)    | NO   |     | NULL    |       |
 +----------+------------------+------+-----+---------+-------+
 ```
 
 **Extra Indexes:**
-None!
+ - id_type
 
 **Example data:**
 
