@@ -21,6 +21,22 @@ class TermboxFlagTest extends TestCase {
 		$this->assertInstanceOf( TermboxFlag::class, TermboxFlag::getInstance() );
 	}
 
+	public function testGivenDesktopFeatureFlagSetFalse_shouldRenderTermboxReturnsFalse() {
+		$flag = new TermboxFlag(
+			$this->newSettingsWithFeatureFlag( false, true ),
+			$this->createMock( ExtensionRegistry::class )
+		);
+		$this->assertFalse( $flag->shouldRenderTermbox() );
+	}
+
+	public function testGivenDesktopFeatureFlagSetTrue_shouldRenderTermboxReturnsTrue() {
+		$flag = new TermboxFlag(
+			$this->newSettingsWithFeatureFlag( true, true ),
+			$this->createMock( ExtensionRegistry::class )
+		);
+		$this->assertTrue( $flag->shouldRenderTermbox() );
+	}
+
 	public function testGivenFeatureFlagSetFalse_shouldRenderTermboxReturnsFalse() {
 		$flag = new TermboxFlag(
 			$this->newSettingsWithFeatureFlag( false ),
@@ -48,19 +64,30 @@ class TermboxFlagTest extends TestCase {
 		$this->assertSame( MobileContext::singleton()->shouldDisplayMobileView(), $flag->shouldRenderTermbox() );
 	}
 
-	private function newSettingsWithFeatureFlag( $setting ) {
+	private function newSettingsWithFeatureFlag( $setting, $desktop = false ) {
 		$settings = $this->createMock( SettingsArray::class );
-		$settings->expects( $this->once() )
+		$settings->expects( $this->atMost( 2 ) )
 			->method( 'getSetting' )
-			->with( TermboxFlag::TERMBOX_FLAG )
-			->willReturn( $setting );
+			->with( $this->logicalOr(
+				$this->equalTo( TermboxFlag::TERMBOX_DESKTOP_FLAG ),
+				$this->equalTo( TermboxFlag::TERMBOX_FLAG )
+			) )
+			->willReturnCallback( function ( $key ) use ( $setting, $desktop ) {
+				if (
+					( $key === TermboxFlag::TERMBOX_DESKTOP_FLAG && $desktop ) ||
+					( $key === TermboxFlag::TERMBOX_FLAG && !$desktop )
+				) {
+					return $setting;
+				}
+				return false;
+			} );
 
 		return $settings;
 	}
 
 	private function newExtensionRegistryWithMobileExtension( $isEnabled ) {
 		$registry = $this->createMock( ExtensionRegistry::class );
-		$registry->expects( $this->once() )
+		$registry->expects( $this->atMost( 2 ) )
 			->method( 'isLoaded' )
 			->with( 'MobileFrontend' )
 			->willReturn( $isEnabled );

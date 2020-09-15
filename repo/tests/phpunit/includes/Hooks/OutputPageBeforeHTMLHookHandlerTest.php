@@ -268,6 +268,30 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $contentBetweenEditLinks, $html );
 	}
 
+	public function testTermboxModulesEnabled() {
+		$out = $this->newOutputPage();
+		$this->isExternallyRendered = true;
+		$this->userLanguageLookup = $this->newUserLanguageLookup();
+		$html = '';
+
+		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
+
+		$this->assertSame( [ 'wikibase.termbox' ], $out->getModules() );
+		$this->assertSame( [ 'wikibase.termbox.styles' ], $out->getModuleStyles() );
+	}
+
+	public function testTermboxModulesDisabled() {
+		$out = $this->newOutputPage();
+		$this->isExternallyRendered = false;
+		$this->userLanguageLookup = $this->newUserLanguageLookup();
+		$html = '';
+
+		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
+
+		$this->assertSame( [], $out->getModules() );
+		$this->assertSame( [], $out->getModuleStyles() );
+	}
+
 	private function mockEditability( $permissive = true ) {
 		$editability = $this->createMock( OutputPageEditability::class );
 		$editability->method( 'validate' )->willReturn( $permissive );

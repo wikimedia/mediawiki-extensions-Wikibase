@@ -16,7 +16,8 @@ class TermboxFlag {
 
 	private $extensionRegistry;
 
-	const TERMBOX_FLAG = 'termboxEnabled';
+	public const TERMBOX_FLAG = 'termboxEnabled';
+	public const TERMBOX_DESKTOP_FLAG = 'termboxDesktopEnabled';
 
 	public function __construct(
 		SettingsArray $settings,
@@ -39,9 +40,23 @@ class TermboxFlag {
 	 * @return bool
 	 */
 	public function shouldRenderTermbox() {
-		return $this->settings->getSetting( self::TERMBOX_FLAG )
-			&& $this->extensionRegistry->isLoaded( 'MobileFrontend' )
+		return (
+			$this->isMobile() && $this->shouldRenderTermboxMobile() ||
+			!$this->isMobile() && $this->shouldRenderTermboxDesktop()
+		);
+	}
+
+	private function shouldRenderTermboxMobile(): bool {
+		return $this->settings->getSetting( self::TERMBOX_FLAG );
+	}
+
+	private function isMobile(): bool {
+		return $this->extensionRegistry->isLoaded( 'MobileFrontend' )
 			&& MobileContext::singleton()->shouldDisplayMobileView();
+	}
+
+	private function shouldRenderTermboxDesktop(): bool {
+		return $this->settings->getSetting( self::TERMBOX_DESKTOP_FLAG );
 	}
 
 }
