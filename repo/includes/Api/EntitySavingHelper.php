@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiUsageException;
+use ArrayAccess;
 use InvalidArgumentException;
 use LogicException;
 use MediaWiki\Permissions\PermissionManager;
@@ -403,12 +404,12 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$value = $status->getValue();
 		$errorCode = null;
 
-		if ( isset( $value['errorCode'] ) ) {
+		if ( $this->isArrayLike( $value ) && isset( $value['errorCode'] ) ) {
 			$errorCode = $value['errorCode'];
 		} else {
 			$editError = 0;
 
-			if ( isset( $value['errorFlags'] ) ) {
+			if ( $this->isArrayLike( $value ) && isset( $value['errorFlags'] ) ) {
 				$editError = $value['errorFlags'];
 			}
 
@@ -423,6 +424,13 @@ class EntitySavingHelper extends EntityLoadingHelper {
 
 		//NOTE: will just add warnings or do nothing if there's no error
 		$this->handleStatus( $status, $errorCode );
+	}
+
+	/**
+	 * Checks whether accessing array keys is safe, with e.g. @see DeprecatablePropertyArray
+	 */
+	private function isArrayLike( $value ): bool {
+		return is_array( $value ) || $value instanceof ArrayAccess;
 	}
 
 	/**
