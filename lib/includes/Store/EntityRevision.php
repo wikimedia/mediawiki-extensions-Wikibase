@@ -18,7 +18,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
  */
 class EntityRevision {
 
-	/* public */ const UNSAVED_REVISION = 0;
+	public const UNSAVED_REVISION = 0;
 
 	/**
 	 * @var EntityDocument

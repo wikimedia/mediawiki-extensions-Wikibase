@@ -19,7 +19,7 @@ use Wikibase\View\Termbox\Renderer\TermboxRenderingException;
 class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpander {
 
 	// render the root element and give client side re-rendering a chance
-	/* public */ const FALLBACK_HTML = '<div class="wikibase-entitytermsview renderer-fallback"></div>';
+	public const FALLBACK_HTML = '<div class="wikibase-entitytermsview renderer-fallback"></div>';
 
 	private $outputPage;
 

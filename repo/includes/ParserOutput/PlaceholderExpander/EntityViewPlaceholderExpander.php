@@ -29,7 +29,7 @@ use Wikibase\View\TermsListView;
  */
 class EntityViewPlaceholderExpander implements PlaceholderExpander {
 
-	/* public */ const INITIALLY_COLLAPSED_SETTING_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
+	public const INITIALLY_COLLAPSED_SETTING_NAME = 'wikibase-entitytermsview-showEntitytermslistview';
 
 	/**
 	 * @var TemplateFactory

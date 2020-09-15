@@ -20,44 +20,44 @@ interface EditEntity {
 	/**
 	 * indicates a permission error
 	 */
-	/* public */ const PERMISSION_ERROR = 1;
+	public const PERMISSION_ERROR = 1;
 
 	/**
 	 * indicates an unresolved edit conflict
 	 */
-	/* public */ const EDIT_CONFLICT_ERROR = 2;
+	public const EDIT_CONFLICT_ERROR = 2;
 
 	/**
 	 * indicates a token or session error
 	 */
-	/* public */ const TOKEN_ERROR = 4;
+	public const TOKEN_ERROR = 4;
 
 	/**
 	 * indicates that an error occurred while saving
 	 */
-	/* public */ const SAVE_ERROR = 8;
+	public const SAVE_ERROR = 8;
 
 	/**
 	 * Indicates that the content failed some precondition to saving,
 	 * such as a global uniqueness constraint.
 	 */
-	/* public */ const PRECONDITION_FAILED = 16;
+	public const PRECONDITION_FAILED = 16;
 
 	/**
 	 * Indicates that the content triggered an edit filter that uses
 	 * the EditFilterMergedContent hook to supervise edits.
 	 */
-	/* public */ const FILTERED = 32;
+	public const FILTERED = 32;
 
 	/**
 	 * Indicates that the edit exceeded a rate limit.
 	 */
-	/* public */ const RATE_LIMIT = 64;
+	public const RATE_LIMIT = 64;
 
 	/**
 	 * bit mask for asking for any error.
 	 */
-	/* public */ const ANY_ERROR = 0xFFFFFFFF;
+	public const ANY_ERROR = 0xFFFFFFFF;
 
 	/**
 	 * Returns the ID of the entity being edited.
