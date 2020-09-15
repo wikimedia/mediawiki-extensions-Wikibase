@@ -25,6 +25,11 @@ class Description extends ApiQueryBase {
 	private $allowLocalShortDesc;
 
 	/**
+	 * @var bool Setting to disable central descriptions and force using local override.
+	 */
+	private $forceLocalShortDesc;
+
+	/**
 	 * @var DescriptionLookup
 	 */
 	private $descriptionLookup;
@@ -33,27 +38,32 @@ class Description extends ApiQueryBase {
 	 * @param ApiQuery $query
 	 * @param string $moduleName
 	 * @param bool $allowLocalShortDesc Whether the wiki allows local descriptions.
+	 * @param bool $forceLocalShortDesc Whether the wiki forces local descriptions.
 	 * @param DescriptionLookup $descriptionLookup
 	 */
 	public function __construct(
 		ApiQuery $query,
-		$moduleName,
-		$allowLocalShortDesc,
+		string $moduleName,
+		bool $allowLocalShortDesc,
+		bool $forceLocalShortDesc,
 		DescriptionLookup $descriptionLookup
 	) {
 		parent::__construct( $query, $moduleName, 'desc' );
 		$this->allowLocalShortDesc = $allowLocalShortDesc;
+		$this->forceLocalShortDesc = $forceLocalShortDesc;
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
 	public static function factory( ApiQuery $apiQuery, string $moduleName ): self {
 		$client = WikibaseClient::getDefaultInstance();
 		$allowLocalShortDesc = $client->getSettings()->getSetting( 'allowLocalShortDesc' );
+		$forceLocalShortDesc = $client->getSettings()->getSetting( 'forceLocalShortDesc' );
 		$descriptionLookup = $client->getDescriptionLookup();
 		return new self(
 			$apiQuery,
 			$moduleName,
 			$allowLocalShortDesc,
+			$forceLocalShortDesc,
 			$descriptionLookup
 		);
 	}
@@ -76,6 +86,8 @@ class Description extends ApiQueryBase {
 
 		if ( !$this->allowLocalShortDesc ) {
 			$sources = [ DescriptionLookup::SOURCE_CENTRAL ];
+		} elseif ( $this->forceLocalShortDesc ) {
+			$sources = [ DescriptionLookup::SOURCE_LOCAL ];
 		} elseif ( $preferSource === DescriptionLookup::SOURCE_LOCAL ) {
 			$sources = [ DescriptionLookup::SOURCE_LOCAL, DescriptionLookup::SOURCE_CENTRAL ];
 		} else {

@@ -40,6 +40,7 @@ return call_user_func( function() {
 		'referencedEntityIdMaxReferencedEntityVisits' => 50,
 		'pageSchemaNamespaces' => [],
 		'allowLocalShortDesc' => false,
+		'forceLocalShortDesc' => false,
 		'propagateChangesToRepo' => true,
 		'propertyOrderUrl' => null,
 		'useTermsTableSearchFields' => true,

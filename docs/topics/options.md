@@ -697,6 +697,11 @@ Switch to enable local override of the central description with `{{SHORTDESC:}}`
 
 DEFAULT: ```false```
 
+#### forceLocalShortDesc
+Switch to force local override of the central description with `{{SHORTDESC:}}`. Requires `allowLocalShortDesc` to be enabled.
+
+DEFAULT: ```false```
+
 #### allowArbitraryDataAccess {#client_allowArbitraryDataAccess}
 Switch to allow accessing arbitrary items from the `wikibase` [Scribunto] module and the via the parser functions (instead of just the item which is linked to the current page).
 

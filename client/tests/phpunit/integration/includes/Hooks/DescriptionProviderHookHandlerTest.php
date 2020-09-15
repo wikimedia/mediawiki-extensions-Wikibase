@@ -21,6 +21,7 @@ class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
 	public function testDescriptionProvider(
 		$pageIdentities,
 		$allowLocalShortDesc,
+		$forceLocalShortDesc,
 		$lookupArguments,
 		$lookupResults,
 		$hookResults
@@ -37,6 +38,7 @@ class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
 		$results = [ 1 => null, 2 => null ];
 		$handler = new DescriptionProviderHookHandler(
 			$allowLocalShortDesc,
+			$forceLocalShortDesc,
 			$descriptionLookup
 		);
 		$handler->onSearchResultProvideDescription( $pageIdentities, $results );
@@ -51,6 +53,7 @@ class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
 		yield [
 			$pageIdentities,
 			true,
+			false,
 			[ DescriptionLookup::SOURCE_CENTRAL, DescriptionLookup::SOURCE_LOCAL ],
 			[ 1 => 'description' ],
 			[ 1 => 'description', 2 => null ]
@@ -58,7 +61,16 @@ class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
 		yield [
 			$pageIdentities,
 			false,
+			false,
 			[ DescriptionLookup::SOURCE_CENTRAL ],
+			[ 2 => 'description' ],
+			[ 1 => null, 2 => 'description' ]
+		];
+		yield [
+			$pageIdentities,
+			true,
+			true,
+			[ DescriptionLookup::SOURCE_LOCAL ],
 			[ 2 => 'description' ],
 			[ 1 => null, 2 => 'description' ]
 		];
