@@ -5,16 +5,6 @@
 -- TODO: figure out which lengths to use for some of the varchar fields.
 
 
--- Unique ID generator.
-CREATE TABLE IF NOT EXISTS /*_*/wb_id_counters (
-  id_value                   INT unsigned        NOT NULL,
-  id_type                    VARBINARY(32)       NOT NULL
-) /*$wgDBTableOptions*/;
-
-CREATE UNIQUE INDEX /*i*/wb_id_counters_type ON /*_*/wb_id_counters (id_type);
-
-
-
 -- Derived storage.
 -- Links site+title pairs to item ids.
 CREATE TABLE IF NOT EXISTS /*_*/wb_items_per_site (
