@@ -490,6 +490,8 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "此為聯合屬性。您將會被重新導向到$1來查看該詳細內容。",
 	"wikibase-federated-properties-leaving-site-notice-header": "離開本地 Wikibase",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "不必再對我顯示此訊息",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "再試一次",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "編輯失敗",
 	"special-setaliases-parameterized": "設定$1別名",
 	"special-setlabel-parameterized": "設定$1標籤",
 	"special-setdescription-parameterized": "設定$1描述",
