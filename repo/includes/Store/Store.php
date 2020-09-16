@@ -52,11 +52,6 @@ interface Store {
 	public function clear();
 
 	/**
-	 * Rebuilds the store from the original data source.
-	 */
-	public function rebuild();
-
-	/**
 	 * Use of this method indicates cases that should be migrated away from the expectation
 	 * that all of this functionality is provided by a single class. Or that said thing needs
 	 * to select one of the more specific services mentioned in the deprecated message.

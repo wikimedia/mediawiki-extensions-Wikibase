@@ -55,15 +55,6 @@ class StoreTest extends \MediaWikiTestCase {
 
 	/**
 	 * @dataProvider instanceProvider
-	 * @param Store $store
-	 */
-	public function testRebuild( Store $store ) {
-		$store->rebuild();
-		$this->assertTrue( true );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
 	 */
 	public function testNewSiteLinkStore( Store $store ) {
 		$this->assertInstanceOf( SiteLinkLookup::class, $store->newSiteLinkStore() );

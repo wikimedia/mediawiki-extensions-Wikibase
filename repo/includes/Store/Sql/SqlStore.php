@@ -312,14 +312,6 @@ class SqlStore implements Store {
 	}
 
 	/**
-	 * @see Store::rebuild
-	 *
-	 * Does nothing.
-	 */
-	public function rebuild() {
-	}
-
-	/**
 	 * @see Store::newSiteLinkStore
 	 *
 	 * @return SiteLinkStore
