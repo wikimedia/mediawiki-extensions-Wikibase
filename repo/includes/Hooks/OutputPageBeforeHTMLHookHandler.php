@@ -15,6 +15,7 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\BabelUserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\OutputPageRevisionIdReader;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\MediaWikiLanguageDirectionalityLookup;
@@ -94,6 +95,11 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 */
 	private $userPreferredTermsLanguages;
 
+	/**
+	 * @var OutputPageEntityViewChecker
+	 */
+	private $entityViewChecker;
+
 	public function __construct(
 		TemplateFactory $templateFactory,
 		UserLanguageLookup $userLanguageLookup,
@@ -105,7 +111,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$cookiePrefix,
 		OutputPageEditability $editability,
 		$isExternallyRendered,
-		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages
+		UserPreferredContentLanguagesLookup $userPreferredTermsLanguages,
+		OutputPageEntityViewChecker $entityViewChecker
 	) {
 		$this->templateFactory = $templateFactory;
 		$this->userLanguageLookup = $userLanguageLookup;
@@ -118,6 +125,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$this->isExternallyRendered = $isExternallyRendered;
 		$this->editability = $editability;
 		$this->userPreferredTermsLanguages = $userPreferredTermsLanguages;
+		$this->entityViewChecker = $entityViewChecker;
 	}
 
 	/**
@@ -129,6 +137,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$termLanguages = $wikibaseRepo->getTermsLanguages();
 		$babelUserLanguageLookup = new BabelUserLanguageLookup();
+		$entityViewChecker = new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() );
 
 		return new self(
 			TemplateFactory::getDefaultInstance(),
@@ -137,7 +146,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			$wikibaseRepo->getEntityRevisionLookup(),
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
-				$wikibaseRepo->getEntityContentFactory(),
+				$entityViewChecker,
 				$wikibaseRepo->getEntityIdParser()
 			),
 			$wikibaseRepo->getEntityFactory(),
@@ -148,7 +157,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 				$termLanguages,
 				$babelUserLanguageLookup,
 				MediaWikiServices::getInstance()->getContentLanguage()->getCode()
-			)
+			),
+			$entityViewChecker
 		);
 	}
 
@@ -161,7 +171,11 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 * @param string &$html the HTML to mangle
 	 */
 	public function onOutputPageBeforeHTML( $out, &$html ): void {
-		if ( !$out->isArticle() ) {
+		// TODO: !$out->isArticle() should not need to be part of the guard condition.
+		// A browser test in another repository (termbox) relies on `wbUserSpecifiedLanguages` to be propagated
+		// to the JS code on a non entity page which does not make sense. It does no harm for now and will be
+		// removed in a follow-up.
+		if ( !$out->isArticle() && !$this->entityViewChecker->hasEntityView( $out ) ) {
 			return;
 		}
 
