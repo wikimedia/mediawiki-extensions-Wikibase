@@ -243,7 +243,8 @@
 	"JobClasses": {
 		"CleanTermsIfUnused": "Wikibase\\Lib\\Store\\Sql\\Terms\\CleanTermsIfUnusedJob::getJobSpecification",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
-		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob"
+		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob",
+		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob"
 	},
 	"AutoloadNamespaces": {
 		"Wikibase\\Repo\\": "repo/includes/",
@@ -443,6 +444,10 @@
 			"class": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\DifferenceEngineViewHeaderHookHandler::factory"
 		},
+		"DeleteDispatcher": {
+			"class": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher",
+			"factory": "\\Wikibase\\Repo\\Hooks\\DeleteDispatcher::factory"
+		},
 		"FederatedPropertiesSpecialPage": {
 			"class": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler",
 			"factory": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesSpecialPageHookHandler::factory"
@@ -489,7 +494,10 @@
 		"ApiCheckCanExecute": "\\Wikibase\\Repo\\RepoHooks::onApiCheckCanExecute",
 		"ApiMaxLagInfo": "\\Wikibase\\Repo\\RepoHooks::onApiMaxLagInfo",
 		"ApiQuery::moduleManager": "\\Wikibase\\Repo\\RepoHooks::onApiQueryModuleManager",
-		"ArticleDeleteComplete": "\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete",
+		"ArticleDeleteComplete": [
+			"DeleteDispatcher",
+			"\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete"
+		],
 		"ArticleRevisionVisibilitySet": "ArticleRevisionVisibilitySet",
 		"ArticleUndelete": "\\Wikibase\\Repo\\RepoHooks::onArticleUndelete",
 		"BeforeDisplayNoArticleText": "\\Wikibase\\Repo\\Actions\\ViewEntityAction::onBeforeDisplayNoArticleText",

@@ -332,4 +332,7 @@ return [
 	'propagateChangeVisibility' => false,
 	'changeVisibilityNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 	'changeVisibilityNotificationJobBatchSize' => 3,
+
+	'propagatePageDeletion' => false,
+	'deleteNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 ];
