@@ -1,0 +1,33 @@
+[
+	{
+		"name": "wb_items_per_site",
+		"comment": "Derived storage. Links site+title pairs to item ids.",
+		"columns": [
+			{
+				"name": "ips_row_id",
+				"type": "bigint",
+				"options": { "unsigned": true, "notnull": true, "autoincrement": true }
+			},
+			{
+				"name": "ips_item_id",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			},
+			{
+				"name": "ips_site_id",
+				"type": "binary",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+				"name": "ips_site_page",
+				"type": "string",
+				"options": { "length": 310, "notnull": true }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_ips_item_site_page", "columns": [ "ips_site_id", "ips_site_page" ], "unique": true },
+			{ "name": "wb_ips_item_id", "columns": [ "ips_item_id" ], "unique": false }
+		],
+		"pk": [ "ips_row_id" ]
+	}
+]

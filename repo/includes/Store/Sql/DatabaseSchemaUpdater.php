@@ -74,24 +74,32 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$updater->dropExtensionTable( 'wb_texts_per_lang' );
 
 			$updater->addExtensionTable(
-				'wb_items_per_site',
+				'wb_terms',
 				$this->getScriptPath( 'Wikibase', $db->getType() )
 			);
 			$updater->addExtensionTable(
 				'wb_id_counters',
 				$this->getScriptPath( 'wb_id_counters', $db->getType() )
+			);
+			$updater->addExtensionTable(
+				'wb_items_per_site',
+				$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 			);
 
 			$this->store->rebuild();
 		} elseif ( !$db->tableExists( 'wb_items_per_site', __METHOD__ ) ) {
 			// Clean installation
 			$updater->addExtensionTable(
-				'wb_items_per_site',
+				'wb_terms',
 				$this->getScriptPath( 'Wikibase', $db->getType() )
 			);
 			$updater->addExtensionTable(
 				'wb_id_counters',
 				$this->getScriptPath( 'wb_id_counters', $db->getType() )
+			);
+			$updater->addExtensionTable(
+				'wb_items_per_site',
+				$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 			);
 
 			$this->store->rebuild();
