@@ -4,7 +4,6 @@ namespace Wikibase\Lib;
 
 use ExtensionRegistry;
 use MediaWiki\Hook\ExtensionTypesHook;
-use MediaWiki\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Hook\UnitTestsListHook;
 use ResourceLoader;
 
@@ -18,7 +17,6 @@ use ResourceLoader;
  */
 final class LibHooks implements
 	UnitTestsListHook,
-	ResourceLoaderRegisterModulesHook,
 	ExtensionTypesHook
 {
 

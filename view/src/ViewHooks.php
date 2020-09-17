@@ -3,7 +3,6 @@
 namespace Wikibase\View;
 
 use ExtensionRegistry;
-use MediaWiki\Hook\ResourceLoaderRegisterModulesHook;
 use MediaWiki\Hook\UnitTestsListHook;
 use ResourceLoader;
 
@@ -12,7 +11,7 @@ use ResourceLoader;
  *
  * @license GPL-2.0-or-later
  */
-final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModulesHook {
+final class ViewHooks implements UnitTestsListHook {
 
 	/**
 	 * Callback called after extension registration,
