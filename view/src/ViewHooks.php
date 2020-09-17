@@ -4,6 +4,7 @@ namespace Wikibase\View;
 
 use ExtensionRegistry;
 use MediaWiki\Hook\UnitTestsListHook;
+use MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook;
 use ResourceLoader;
 
 /**
@@ -11,7 +12,7 @@ use ResourceLoader;
  *
  * @license GPL-2.0-or-later
  */
-final class ViewHooks implements UnitTestsListHook {
+final class ViewHooks implements UnitTestsListHook, ResourceLoaderRegisterModulesHook {
 
 	/**
 	 * Callback called after extension registration,
