@@ -4,6 +4,8 @@
 			"Filipinayzd"
 		]
 	},
+	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipabayad",
 	"wikibase-rc-wikibase-edit-letter": "D"
 }
