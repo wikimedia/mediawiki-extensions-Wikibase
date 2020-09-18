@@ -884,7 +884,7 @@ return call_user_func( function() {
 			'scripts' => [
 				'dist/wikibase.termbox.main.js',
 			],
-			'targets' => 'mobile',
+			'targets' => [ 'desktop', 'mobile' ],
 			'dependencies' => [
 				'wikibase.termbox.styles',
 				'wikibase.getLanguageNameByCode',
@@ -904,7 +904,7 @@ return call_user_func( function() {
 			'skinStyles' => [
 				'minerva' => '../../resources/wikibase/termbox/minerva.less',
 			],
-			'targets' => 'mobile'
+			'targets' => [ 'desktop', 'mobile' ],
 		],
 
 		'wikibase.tainted-ref' => [
