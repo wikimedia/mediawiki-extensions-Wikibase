@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\Store\EntityTermLookupBase;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 
 /**
  * A {@link PrefetchingTermLookup} that only supports properties,
@@ -23,6 +23,8 @@ use Wikibase\Lib\Store\EntityTermLookupBase;
  * @license GPL-2.0-or-later
  */
 class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements PrefetchingTermLookup {
+
+	use StatsdMonitoring;
 
 	/** @var DatabaseTermInLangIdsResolver */
 	private $termInLangIdsResolver;
@@ -82,9 +84,7 @@ class PrefetchingPropertyTermLookup extends EntityTermLookupBase implements Pref
 			return;
 		}
 
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.PrefetchingPropertyTermLookup_prefetchTerms'
-		);
+		$this->incrementForQuery( 'PrefetchingPropertyTermLookup_prefetchTerms' );
 
 		// Fetch up to 20 (as suggested by the DBA) entities each time:
 		// https://phabricator.wikimedia.org/T246159#5919892

@@ -3,11 +3,11 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\Lib\Store\MatchingTermsLookup;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\Store\TermIndexSearchCriteria;
 use Wikibase\Lib\TermIndexEntry;
 use Wikimedia\Rdbms\IDatabase;
@@ -21,6 +21,8 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @license GPL-2.0-or-later
  */
 class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
+
+	use StatsdMonitoring;
 
 	/** @var ILoadBalancer */
 	private $lb;
@@ -72,9 +74,7 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 
 		$results = $this->criteriaToQueryResults( $dbr, $criteria, $termType, $entityType, $options );
 
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.MatchingTermsLookup_getMatchingTerms'
-		);
+		$this->incrementForQuery( 'MatchingTermsLookup_getMatchingTerms' );
 
 		if ( isset( $options['LIMIT'] ) && $options['LIMIT'] > 0 ) {
 			return $this->buildTermResult( $results, $options['LIMIT'] );
