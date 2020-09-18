@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use JobQueueGroup;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Term\Fingerprint;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikibase\Lib\StringNormalizer;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -22,6 +22,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 
 	use FingerprintableEntityTermStoreTrait;
+	use StatsdMonitoring;
 
 	/** @var ILoadBalancer */
 	private $loadBalancer;
@@ -54,10 +55,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	}
 
 	public function storeTerms( ItemId $itemId, Fingerprint $fingerprint ) {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.ItemTermStore_storeTerms'
-		);
-
+		$this->incrementForQuery( 'ItemTermStore_storeTerms' );
 		$termInLangIdsToClean = $this->acquireAndInsertTerms( $itemId, $fingerprint );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );
 	}
@@ -160,9 +158,7 @@ class DatabaseItemTermStoreWriter implements ItemTermStoreWriter {
 	}
 
 	public function deleteTerms( ItemId $itemId ) {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.ItemTermStore_deleteTerms'
-		);
+		$this->incrementForQuery( 'ItemTermStore_deleteTerms' );
 
 		$termInLangIdsToClean = $this->deleteTermsWithoutClean( $itemId );
 		$this->submitJobToCleanTermStorageRowsIfUnused( $termInLangIdsToClean );

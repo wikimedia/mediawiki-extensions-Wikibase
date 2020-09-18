@@ -4,15 +4,17 @@ namespace Wikibase\Lib\Store\Sql\Terms;
 
 use BagOStuff;
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\AbstractTermPropertyLabelResolver;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 
 /**
  * Resolves and caches property labels (which are unique per language) into entity IDs
  * through DatabaseTermIdsResolver api.
  */
 class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResolver {
+
+	use StatsdMonitoring;
 
 	/**
 	 * @var DatabaseTermInLangIdsResolver
@@ -45,9 +47,7 @@ class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResol
 	}
 
 	protected function loadProperties(): array {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.CachedDatabasePropertyLabelResolver_loadProperties'
-		);
+		$this->incrementForQuery( 'CachedDatabasePropertyLabelResolver_loadProperties' );
 		$termsByPropertyId = $this->dbTermInLangIdsResolver->resolveTermsViaJoin(
 			'wbt_property_terms',
 			'wbpt_term_in_lang_id',
