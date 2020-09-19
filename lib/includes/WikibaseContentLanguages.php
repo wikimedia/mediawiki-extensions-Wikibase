@@ -123,6 +123,10 @@ class WikibaseContentLanguages {
 					'hai', // T138131
 					'haz', // T155374
 					'hbo', // T155368
+					'ja-hani', // T195816
+					'ja-hira', // T195816
+					'ja-hrkt', // T195816
+					'ja-kana', // T195816
 					'kjh', // T155377
 					'kld', // T198366
 					'koy', // T125066
@@ -141,6 +145,9 @@ class WikibaseContentLanguages {
 					'nrf-je', // T165648
 					'nsk', // T250246
 					'nxm', // T167745
+					'ojp', // T195816
+					'ojp-hani', // T195816
+					'ojp-hira', // T195816
 					'ood', // T155423
 					'otk', // T137809
 					'peo', // T189427
