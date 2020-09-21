@@ -12,7 +12,7 @@
 	url = https://phabricator.wikimedia.org/source/wikibase-data-model.git
 [submodule "view/lib/wikibase-termbox"]
 	path = view/lib/wikibase-termbox
-	url = https://phabricator.wikimedia.org/source/wikibase-termbox
+	url = https://gerrit.wikimedia.org/r/wikibase/termbox
 
 [submodule "lib/resources/wikibase-api"]
 	path = lib/resources/wikibase-api
