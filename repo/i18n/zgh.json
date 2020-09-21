@@ -3,6 +3,7 @@
 		"authors": [
 			"Amara-Amaziɣ",
 			"Aslmad mohamed belarhzali",
+			"Brahim-essaidi",
 			"YesIn"
 		]
 	},
@@ -11,5 +12,6 @@
 	"wikibase-label-empty": "ⵓⵔ ⵉⵍⵍⵉ ⴰⵡⴷ ⵢⴰⵏ ⵢⵉⵙⵎ ⵓⵏⵎⵉⵍ",
 	"wikibase-description-empty": "ⴰⵡⴷ ⵢⴰⵏ ⵓⴳⵍⴰⵎ ⵓⵔ ⵉⵜⵜⵓⴼⴽⵉ",
 	"wikibase-sitelinks-special": "ⵉⵙⵉⵜⵏ ⵢⴰⴹⵏ",
-	"wikibase-statementview-rank-normal": "ⴰⵏⵎⴰⵍⴰ ⴰⵎⴰⴳⵏⵓ"
+	"wikibase-statementview-rank-normal": "ⴰⵏⵎⴰⵍⴰ ⴰⵎⴰⴳⵏⵓ",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "ⴰⵔⵎ ⴷⴰⵖ"
 }
