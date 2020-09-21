@@ -171,11 +171,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	 * @param string &$html the HTML to mangle
 	 */
 	public function onOutputPageBeforeHTML( $out, &$html ): void {
-		// TODO: !$out->isArticle() should not need to be part of the guard condition.
-		// A browser test in another repository (termbox) relies on `wbUserSpecifiedLanguages` to be propagated
-		// to the JS code on a non entity page which does not make sense. It does no harm for now and will be
-		// removed in a follow-up.
-		if ( !$out->isArticle() && !$this->entityViewChecker->hasEntityView( $out ) ) {
+		if ( !$this->entityViewChecker->hasEntityView( $out ) ) {
 			return;
 		}
 

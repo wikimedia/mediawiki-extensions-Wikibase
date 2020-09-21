@@ -162,7 +162,6 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonEntityViewPages() {
 		$out = $this->newOutputPage();
-		$out->setArticleFlag( false );
 		$this->userLanguageLookup->expects( $this->never() )
 			->method( 'getUserSpecifiedLanguages' );
 		$this->userLanguageLookup->expects( $this->never() )
