@@ -3,10 +3,10 @@
 namespace Wikibase\Lib\Store\Sql\Terms;
 
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use stdClass;
+use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
 
@@ -17,6 +17,8 @@ use Wikimedia\Rdbms\IResultWrapper;
  * @license GPL-2.0-or-later
  */
 class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
+
+	use StatsdMonitoring;
 
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;
@@ -177,9 +179,7 @@ class DatabaseTermInLangIdsResolver implements TermInLangIdsResolver {
 		array $languages = null,
 		array $joinConditions = []
 	): IResultWrapper {
-		MediaWikiServices::getInstance()->getStatsdDataFactory()->increment(
-			'wikibase.repo.term_store.DatabaseTermIdsResolver_selectTermsViaJoin'
-		);
+		$this->incrementForQuery( 'DatabaseTermIdsResolver_selectTermsViaJoin' );
 		if ( $types !== null ) {
 			$conditions['wbtl_type_id'] = $this->lookupTypeIds( $types );
 		}
