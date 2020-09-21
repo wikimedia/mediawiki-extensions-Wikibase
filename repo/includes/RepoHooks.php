@@ -40,6 +40,7 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityHandler;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\InfoActionHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
 use Wikibase\Repo\Hooks\SidebarBeforeOutputHookHandler;
@@ -543,7 +544,7 @@ final class RepoHooks {
 	public static function onOutputPageBodyAttributes( OutputPage $out, Skin $skin, array &$bodyAttrs ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
-			$wikibaseRepo->getEntityContentFactory(),
+			new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() ),
 			$wikibaseRepo->getEntityIdParser()
 		);
 

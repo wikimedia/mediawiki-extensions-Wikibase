@@ -6,7 +6,7 @@ use OutputPage;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
-use Wikibase\Repo\Content\EntityContentFactory;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 
 /**
  * Allows retrieving an EntityId based on a previously propagated OutputPage.
@@ -17,17 +17,17 @@ use Wikibase\Repo\Content\EntityContentFactory;
 class OutputPageEntityIdReader {
 
 	/**
-	 * @var EntityContentFactory
+	 * @var OutputPageEntityViewChecker
 	 */
-	private $entityContentFactory;
+	private $entityViewChecker;
 
 	/**
 	 * @var EntityIdParser
 	 */
 	private $entityIdParser;
 
-	public function __construct( EntityContentFactory $entityContentFactory, EntityIdParser $entityIdParser ) {
-		$this->entityContentFactory = $entityContentFactory;
+	public function __construct( OutputPageEntityViewChecker $entityViewChecker, EntityIdParser $entityIdParser ) {
+		$this->entityViewChecker = $entityViewChecker;
 		$this->entityIdParser = $entityIdParser;
 	}
 
@@ -37,8 +37,7 @@ class OutputPageEntityIdReader {
 	 * @return EntityId|null
 	 */
 	public function getEntityIdFromOutputPage( OutputPage $out ) {
-		$title = $out->getTitle();
-		if ( !$title || !$this->entityContentFactory->isEntityContentModel( $title->getContentModel() ) ) {
+		if ( !$this->entityViewChecker->hasEntityView( $out ) ) {
 			return null;
 		}
 

@@ -19,6 +19,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\UserLanguageLookup;
 use Wikibase\Repo\Hooks\Helpers\OutputPageEditability;
+use Wikibase\Repo\Hooks\Helpers\OutputPageEntityViewChecker;
 use Wikibase\Repo\Hooks\Helpers\UserPreferredContentLanguagesLookup;
 use Wikibase\Repo\Hooks\OutputPageBeforeHTMLHookHandler;
 use Wikibase\Repo\Hooks\OutputPageEntityIdReader;
@@ -59,6 +60,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $isExternallyRendered;
 
+	/**
+	 * @var MockObject|OutputPageEntityViewChecker
+	 */
+	private $entityViewChecker;
+
 	protected function setUp(): void {
 		parent::setUp();
 		$this->itemId = new ItemId( 'Q1' );
@@ -76,6 +82,11 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->preferredLanguageLookup = $this->createMock( UserPreferredContentLanguagesLookup::class );
 		$this->preferredLanguageLookup->method( 'getLanguages' )
 			->willReturn( [ [ $this->uiLanguageCode, 'de', 'es', 'ru' ] ] );
+
+		$this->entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
+		$this->entityViewChecker->expects( $this->any() )
+			->method( 'hasEntityView' )
+			->willReturn( true );
 	}
 
 	/**
@@ -107,7 +118,8 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 			'',
 			$this->editability,
 			$this->isExternallyRendered,
-			$this->preferredLanguageLookup
+			$this->preferredLanguageLookup,
+			$this->entityViewChecker
 		);
 	}
 
@@ -148,16 +160,19 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( [ 'es', 'ru' ], $wbUserSpecifiedLanguages );
 	}
 
-	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonArticles() {
+	public function testOutputPageBeforeHTMLHookHandlerShouldNotWorkOnNonEntityViewPages() {
 		$out = $this->newOutputPage();
+		$out->setArticleFlag( false );
 		$this->userLanguageLookup->expects( $this->never() )
 			->method( 'getUserSpecifiedLanguages' );
 		$this->userLanguageLookup->expects( $this->never() )
 			->method( 'getAllUserLanguages' );
 
 		$html = '';
-		$out->setTitle( Title::makeTitle( 0, 'OutputPageBeforeHTMLHookHandlerTest' ) );
-		$out->setArticleFlag( false );
+		$this->entityViewChecker = $this->createMock( OutputPageEntityViewChecker::class );
+		$this->entityViewChecker->expects( $this->once() )
+			->method( 'hasEntityView' )
+			->willReturn( false );
 
 		$this->getHookHandler()->onOutputPageBeforeHTML( $out, $html );
 
