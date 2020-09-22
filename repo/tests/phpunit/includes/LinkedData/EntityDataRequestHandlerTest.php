@@ -56,6 +56,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		parent::setUp();
 
 		$this->interfaceTitle = Title::newFromText( "Special:EntityDataRequestHandlerTest" );
+		// ensure the namespace name doesn’t get translated
+		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 
 		$this->obLevel = ob_get_level();
 	}
@@ -168,6 +170,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 			$this->interfaceTitle,
 			$extensions,
 			[
+				// “Special” needs no translation because we override the content language
 				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
 				'/{entity_id}.json&revision={revision_id}',
 			],
