@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
+use MockHttpTrait;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -14,8 +15,10 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 trait FederatedPropertiesTestTrait {
+	use MockHttpTrait;
 
 	protected function setSourceWikiUnavailable() {
+		$this->installMockHttp( $this->makeFakeHttpRequest( '', 0 ) );
 		$this->setWbSetting( 'federatedPropertiesSourceScriptUrl', '255.255.255.255/' );
 	}
 
