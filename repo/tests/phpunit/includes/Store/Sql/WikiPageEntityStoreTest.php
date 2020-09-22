@@ -604,6 +604,33 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$this->assertFalse( $store->isWatching( $user, $itemId ) );
 	}
 
+	public function testUpdateWatchlist_withoutWatchlistRights() {
+		/** @var WikiPageEntityStore $store */
+		list( $store, ) = $this->createStoreAndLookup();
+
+		$user = User::newFromName( "WikiPageEntityStoreTestUser2" );
+
+		if ( $user->getId() === 0 ) {
+			$user->addToDatabase();
+		}
+
+		$item = new Item();
+		$store->saveEntity( $item, 'testing', $user, EDIT_NEW );
+
+		$itemId = $item->getId();
+
+		MediaWikiServices::getInstance()->getPermissionManager()
+			->overrideUserRightsForTesting( $user, [ /* no viewmywatchlist, no editmywatchlist */ ] );
+
+		$store->updateWatchlist( $user, $itemId, true );
+		$this->assertTrue( $store->isWatching( $user, $itemId ),
+			"should allow watching even without editmywatchlist right" );
+
+		$store->updateWatchlist( $user, $itemId, false );
+		$this->assertTrue( $store->isWatching( $user, $itemId ),
+			"should not allow unwatching without editmywatchlist right" );
+	}
+
 	protected function newEntity() {
 		$item = new Item();
 		return $item;
