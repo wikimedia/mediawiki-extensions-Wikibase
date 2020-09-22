@@ -114,6 +114,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$uriManager = new EntityDataUriManager(
 			$this->getPageTitle(),
 			$supportedExtensions,
+			$wikibaseRepo->getSettings()->getSetting( 'entityDataCachePaths' ),
 			$titleLookup
 		);
 

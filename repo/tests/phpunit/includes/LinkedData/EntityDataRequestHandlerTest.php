@@ -78,6 +78,8 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	 * @return EntityDataRequestHandler
 	 */
 	protected function newHandler() {
+		global $wgScriptPath;
+
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
@@ -165,6 +167,10 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 		$uriManager = new EntityDataUriManager(
 			$this->interfaceTitle,
 			$extensions,
+			[
+				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
+				'/{entity_id}.json&revision={revision_id}',
+			],
 			$titleLookup
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
@@ -200,6 +206,7 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	protected function makeOutputPage( array $params, array $headers ) {
 		// construct request
 		$request = new FauxRequest( $params );
+		$request->setRequestURL( 'https://repo.example/wiki/Special:EntityData/Q1.ttl' );
 		$request->response()->header( 'Status: 200 OK', true, 200 ); // init/reset
 
 		foreach ( $headers as $name => $value ) {
@@ -349,30 +356,43 @@ class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
 	}
 
 	public function testCacheHeaderIsSetWithRevision() {
-		$output = $this->makeOutputPage( [ 'revision' => EntityDataTestProvider::ITEM_REVISION_ID ], [] );
+		$params = [ 'revision' => EntityDataTestProvider::ITEM_REVISION_ID ];
+		$subpage = 'Q42.json';
+		$output = $this->makeOutputPage( $params, [] );
+		/** @var FauxRequest $request */
 		$request = $output->getRequest();
+		'@phan-var FauxRequest $request';
+		$request->setRequestUrl(
+			$this->interfaceTitle->getSubpage( $subpage )->getLocalURL( $params ) );
 
 		/** @var FauxResponse $response */
 		$response = $request->response();
 
 		$handler = $this->newHandler();
 		ob_start();
-		$handler->handleRequest( 'Q42.json', $request, $output );
+		$handler->handleRequest( $subpage, $request, $output );
 		ob_end_clean();
 
 		$this->assertStringContainsString( 'public', $response->getHeader( 'Cache-Control' ) );
 	}
 
 	public function testCacheHeaderIsNotSetWithoutRevision() {
-		$output = $this->makeOutputPage( [], [] );
+		$params = [];
+		$subpage = 'Q42.json';
+		$output = $this->makeOutputPage( $params, [] );
 		$request = $output->getRequest();
+		/** @var FauxRequest $request */
+		$request = $output->getRequest();
+		'@phan-var FauxRequest $request';
+		$request->setRequestUrl(
+			$this->interfaceTitle->getSubpage( $subpage )->getLocalURL( $params ) );
 
 		/** @var FauxResponse $response */
 		$response = $request->response();
 
 		$handler = $this->newHandler();
 		ob_start();
-		$handler->handleRequest( 'Q42.json', $request, $output );
+		$handler->handleRequest( $subpage, $request, $output );
 		ob_end_clean();
 
 		$this->assertStringContainsString( 'no-cache', $response->getHeader( 'Cache-Control' ) );
