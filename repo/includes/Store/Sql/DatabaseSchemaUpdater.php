@@ -155,7 +155,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 		$updater->addExtensionTable(
 			'wb_changes_dispatch',
-			$this->getScriptPath( 'changes_dispatch', $type )
+			$this->getScriptPath( 'wb_changes_dispatch', $type )
 		);
 	}
 
