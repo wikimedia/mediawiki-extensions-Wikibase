@@ -75,6 +75,10 @@ but with a setup that also extracts them as a separate Git repository
 (using [git filter-repo][]) right from the beginning.
 This removes a source of uncertainty for new projects.
 
+Publishing these packages as separate repositories to GitHub is done for the following benfits:
+* being able to see their isolated history and contributers, e.g. [wikibase changes contributors][]
+* being able to run their tests in CI in isolation without surrounding Wikibase code being present, e.g. [wikibase changes Travis CI][]
+
 [mediawiki/vendor]: https://gerrit.wikimedia.org/g/mediawiki/vendor/
 [T254920]: https://phabricator.wikimedia.org/T254920
 [Symfony blog post]: https://symfony.com/blog/symfony2-components-as-standalone-packages
@@ -83,3 +87,5 @@ This removes a source of uncertainty for new projects.
 [git filter-repo]: https://github.com/newren/git-filter-repo/
 [wikibase/changes]: https://packagist.org/packages/wikibase/changes
 [T256058]: https://phabricator.wikimedia.org/T256058
+[wikibase changes contributors]: https://github.com/wikimedia/wikibase-changes/graphs/contributors
+[wikibase changes Travis CI]: https://travis-ci.org/github/wikimedia/wikibase-changes
