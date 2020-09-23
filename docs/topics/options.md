@@ -581,11 +581,23 @@ Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of 
 
 DEFAULT: [$wgRCMaxAge].
 
-
 ### changeVisibilityNotificationJobBatchSize {#repo_changeVisibilityNotificationJobBatchSize}
 Batch size (how many revisions per job) to use when pushing `ChangeVisibilityNotification` jobs to clients.
 
 DEFAULT: ```3```.
+
+### propagatePageDeletion {#repo_propagatePageDeletion}
+Whether to propagate page deletion to client wikis.
+
+DEFAULT: ```false```.
+
+
+### deleteNotificationClientRCMaxAge {#repo_deleteNotificationClientRCMaxAge}
+Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
+
+Example: On entity-page deletion the DeleteDispatcher hook is called and creates a DispatchChangeDeletionNotification job which in turn collects the revision rows from `archive` using this threshold.
+
+DEFAULT: [$wgRCMaxAge].
 
 Client Settings
 ----------------------------------------------------------------------------------------
