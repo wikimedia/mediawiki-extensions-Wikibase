@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Gott wisst",
+			"Heahwrita",
 			"Hogweard",
 			"JJohnson1701",
 			"Ladsgroup"
@@ -10,7 +11,7 @@
 	"wikibase-edit": "ādihtan",
 	"wikibase-add": "besettan",
 	"wikibase-label-empty": "Nis nǣnig mearc gesett",
-	"wikibase-description-empty": "Nǣnig gemearcung nis gīet gemearcod.",
+	"wikibase-description-empty": "Nænig gemearcung nis giet gemearcod",
 	"wikibase-sitelinks-special": "Ōðre webbstedas",
 	"wikibase-statementview-rank-normal": "Gewunelic hād",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}",
