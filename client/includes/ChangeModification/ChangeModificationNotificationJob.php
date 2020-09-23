@@ -9,7 +9,7 @@ use Wikibase\Client\RecentChanges\RecentChangeFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 use Wikibase\Lib\Changes\RepoRevisionIdentifierFactory;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\ILBFactory;
 use Wikimedia\Rdbms\IResultWrapper;
 
 /**
@@ -22,9 +22,9 @@ use Wikimedia\Rdbms\IResultWrapper;
 abstract class ChangeModificationNotificationJob extends Job {
 
 	/**
-	 * @var ILoadBalancer
+	 * @var ILBFactory
 	 */
-	protected $loadBalancer;
+	protected $lbFactory;
 
 	/**
 	 * @var RepoRevisionIdentifier[]
@@ -33,10 +33,10 @@ abstract class ChangeModificationNotificationJob extends Job {
 
 	/**
 	 * @param string $jobName Name of this job.
-	 * @param ILoadBalancer $loadBalancer
+	 * @param ILBFactory $lbFactory
 	 * @param array $params Contains the revisionIdentifiersJson to act upon.
 	 */
-	public function __construct( string $jobName, ILoadBalancer $loadBalancer, array $params = [] ) {
+	public function __construct( string $jobName, ILBFactory $lbFactory, array $params = [] ) {
 		parent::__construct( $jobName, $params );
 
 		Assert::parameterType( 'array', $params, '$params' );
@@ -48,7 +48,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 
 		$this->revisionIdentifiers = $this->unpackRevisionIdentifiers( $params['revisionIdentifiersJson'] );
 
-		$this->loadBalancer = $loadBalancer;
+		$this->lbFactory = $lbFactory;
 	}
 
 	/**
@@ -119,7 +119,7 @@ abstract class ChangeModificationNotificationJob extends Job {
 		string $entityIdSerialization,
 		array $revisionIdentifiers
 	): IResultWrapper {
-		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->lbFactory->getMainLB()->getConnection( DB_REPLICA );
 		$rcParamPattern = $dbr->buildLike(
 			$dbr->anyString(),
 			'"', $entityIdSerialization, '"',
