@@ -16,7 +16,6 @@ use Wikimedia\Rdbms\ILBFactory;
 class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 
 	private $batchSize;
-	private $lbFactory;
 
 	/**
 	 * Constructs a ChangeDeletionNotificationJob for the repo revisions given.
@@ -26,9 +25,8 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 * @param array $params Contains the name of the repo, revisionIdentifiersJson to redact
 	 */
 	public function __construct( ILBFactory $lbFactory, int $batchSize, array $params = [] ) {
-		parent::__construct( 'ChangeDeletionNotification', $lbFactory->getMainLB(), $params );
+		parent::__construct( 'ChangeDeletionNotification', $lbFactory, $params );
 
-		$this->lbFactory = $lbFactory;
 		$this->batchSize = $batchSize;
 	}
 
@@ -52,7 +50,7 @@ class ChangeDeletionNotificationJob extends ChangeModificationNotificationJob {
 	 */
 	protected function modifyChanges( array $relevantChanges ): void {
 
-		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
+		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_MASTER );
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
 			$dbw->delete(

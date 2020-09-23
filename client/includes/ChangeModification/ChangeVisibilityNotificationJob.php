@@ -7,7 +7,7 @@ namespace Wikibase\Client\ChangeModification;
 use MediaWiki\MediaWikiServices;
 use Title;
 use Wikimedia\Assert\Assert;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Job for notifying a client wiki of a batch of revision visibility changes on the repository.
@@ -18,18 +18,17 @@ use Wikimedia\Rdbms\LBFactory;
 class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob {
 
 	private $batchSize;
-	private $lbFactory;
 
 	/**
 	 * Constructs a ChangeVisibilityNotificationJob for the repo revisions given.
 	 *
-	 * @param LBFactory $lbFactory
+	 * @param ILBFactory $lbFactory
 	 * @param int $batchSize
 	 * @param array $params Contains the name of the repo, revisionIdentifiersJson to redact
 	 *   and the visibilityBitFlag to set.
 	 */
-	public function __construct( LBFactory $lbFactory, int $batchSize, array $params = [] ) {
-		parent::__construct( 'ChangeVisibilityNotification', $lbFactory->getMainLB(), $params );
+	public function __construct( ILBFactory $lbFactory, int $batchSize, array $params = [] ) {
+		parent::__construct( 'ChangeVisibilityNotification', $lbFactory, $params );
 
 		Assert::parameter(
 			isset( $params['visibilityBitFlag'] ),
@@ -37,7 +36,6 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 			'$params[\'visibilityBitFlag\'] not set.'
 		);
 
-		$this->lbFactory = $lbFactory;
 		$this->batchSize = $batchSize;
 	}
 
@@ -57,7 +55,7 @@ class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob 
 	protected function modifyChanges( array $relevantChanges ): void {
 		$visibilityBitFlag = $this->params['visibilityBitFlag'];
 
-		$dbw = $this->loadBalancer->getConnection( DB_MASTER );
+		$dbw = $this->lbFactory->getMainLB()->getConnection( DB_MASTER );
 
 		foreach ( array_chunk( $relevantChanges, $this->batchSize ) as $rcIdBatch ) {
 			$dbw->update(
