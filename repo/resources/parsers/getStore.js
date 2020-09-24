@@ -17,11 +17,6 @@
 			ApiBasedValueParser = getApiBasedValueParserConstructor( apiCaller ),
 			parserStore = new vp.ValueParserStore( vp.NullParser );
 
-		parserStore.registerDataValueParser(
-			vp.StringParser,
-			dv.StringValue.TYPE
-		);
-
 		// API-based parsers
 		// FIXME: Get this configuration from the backend.
 		var parserIdToDataValueType = {
@@ -46,6 +41,7 @@
 			'commonsMedia',
 			'geo-shape',
 			'tabular-data',
+			'string',
 			'url',
 			'external-id'
 		];
