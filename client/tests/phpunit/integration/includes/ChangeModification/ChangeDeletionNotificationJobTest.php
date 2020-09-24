@@ -62,6 +62,7 @@ class ChangeDeletionNotificationJobTest extends RecentChangesModificationTest {
 	 * @dataProvider revisionIdentifierProvider
 	 */
 	public function testRun( array $expectedDeleted, array $revisionIdentifiers ): void {
+		$this->markTestSkipped( 'Broken due to Actor changes, see T263785' );
 		$this->initRecentChanges();
 		$beforeCount = $this->countRevisions();
 
