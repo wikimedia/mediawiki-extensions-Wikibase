@@ -8,12 +8,12 @@
 			"Ladsgroup"
 		]
 	},
-	"wikibase-edit": "ādihtan",
+	"wikibase-edit": "adiht",
 	"wikibase-add": "besettan",
-	"wikibase-label-empty": "Nis nǣnig mearc gesett",
+	"wikibase-label-empty": "Nis nænig mearc gesett",
 	"wikibase-description-empty": "Nænig gemearcung nis giet gemearcod",
-	"wikibase-sitelinks-special": "Ōðre webbstedas",
-	"wikibase-statementview-rank-normal": "Gewunelic hād",
+	"wikibase-sitelinks-special": "Oðre webbstedas",
+	"wikibase-statementview-rank-normal": "Gewunelic had",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|fruma|frumena}}",
 	"wikibase-redirect-source-and-target-are-the-same": "Hit is unmeaht to forþwisienne an þing to him sylfum",
 	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Eft anginne",

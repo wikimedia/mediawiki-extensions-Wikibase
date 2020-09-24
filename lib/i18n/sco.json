@@ -3,10 +3,11 @@
 		"authors": [
 			"AmaryllisGardener",
 			"John Reid",
+			"MJL",
 			"Macofe"
 		]
 	},
-	"wikibase-deletedentity-item": "Deletit eetem",
+	"wikibase-deletedentity-item": "Deletit item",
 	"wikibase-deletedentity-property": "Deletit property",
 	"wikibase-deletedentity-query": "Deletit query",
 	"wikibase-error-unexpected": "Error: $1.",
@@ -75,6 +76,6 @@
 	"wikibase-entity-summary-wbsetsitelink-remove": "Remuived airtin tae [$2]",
 	"wikibase-entity-summary-wblinktitles-create": "Creatit this entity tae connect pages",
 	"wikibase-entity-summary-wblinktitles-connect": "Addit a leid airtin tae connect pages",
-	"wikibase-item-summary-wblinktitles-create": "Cræftit this eetem fer tae connect pages",
+	"wikibase-item-summary-wblinktitles-create": "Cræftit this item fer tae connect pages",
 	"wikibase-item-summary-wblinktitles-connect": "Eikit ae leid airtin fer tae connect pages"
 }
