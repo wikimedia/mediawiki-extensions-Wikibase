@@ -575,12 +575,10 @@ return call_user_func( function() {
 		'valueParsers.parsers' => $wikibaseDatavaluesSrcPaths + [
 			'scripts' => [
 				'valueParsers/parsers/ValueParser.js',
-
-				'valueParsers/parsers/BoolParser.js',
-				'valueParsers/parsers/FloatParser.js',
-				'valueParsers/parsers/IntParser.js',
 				'valueParsers/parsers/NullParser.js',
-				'valueParsers/parsers/StringParser.js',
+				// we do not use any of the actual parsers (StringParser etc.);
+				// instead, we use the PHP parsers via the wbparsevalue API
+				// (wired up in repo/resources/parsers/getStore.js)
 			],
 			'dependencies' => [
 				'dataValues.values',
