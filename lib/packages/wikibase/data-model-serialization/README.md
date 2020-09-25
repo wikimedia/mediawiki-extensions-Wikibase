@@ -109,7 +109,7 @@ For a full CI run
 ## Authors
 
 Wikibase DataModel Serialization has been written by [Thomas PT](https://github.com/Tpt) as volunteer
-and by [Jeroen De Dauw](https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw) as
+and by [Jeroen De Dauw](https://www.EntropyWins.wtf) as
 [Wikimedia Germany](https://wikimedia.de) employee for the [Wikidata project](https://wikidata.org/).
 
 ## Links
