@@ -13,7 +13,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\Lib\StringNormalizer;
-use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\Rdbms\ILBFactory;
 
 /**
  * Factory for creating writer objects relating to the 2019 SQL based terms storage.
@@ -34,7 +34,7 @@ class TermStoreWriterFactory {
 	private $stringNormalizer;
 
 	/**
-	 * @var LBFactory
+	 * @var ILBFactory
 	 */
 	private $loadbalancerFactory;
 
@@ -56,7 +56,7 @@ class TermStoreWriterFactory {
 	public function __construct(
 		EntitySource $localEntitySource,
 		StringNormalizer $stringNormalizer,
-		LBFactory $loadbalancerFactory,
+		ILBFactory $loadbalancerFactory,
 		WANObjectCache $wanCache,
 		JobQueueGroup $jobQueueGroup,
 		LoggerInterface $logger
