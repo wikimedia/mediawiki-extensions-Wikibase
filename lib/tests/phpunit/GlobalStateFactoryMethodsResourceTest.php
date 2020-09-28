@@ -2,8 +2,12 @@
 
 namespace Wikibase\Lib\Tests;
 
+use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
+use Psr\Log\LoggerInterface;
+use Wikibase\Lib\FormatterCacheFactory;
+use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -54,6 +58,30 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 		}
 		WikibaseSettings::getRepoSettings();
 		$this->assertTrue( true );
+	}
+
+	/**
+	 * @dataProvider cacheTypeProvider
+	 */
+	public function testFormatterCacheFactory( $sharedCacheType ): void {
+		$logger = $this->createMock( LoggerInterface::class );
+		$factory = new FormatterCacheFactory(
+			$sharedCacheType,
+			$logger,
+			$this->createMock( IBufferingStatsdDataFactory::class ),
+			'secret'
+		);
+		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
+	}
+
+	public function cacheTypeProvider(): array {
+		return [
+			[ CACHE_ANYTHING ],
+			[ CACHE_NONE ],
+			[ CACHE_DB ],
+			[ CACHE_MEMCACHED ],
+			[ CACHE_ACCEL ],
+		];
 	}
 
 	private function disallowDBAccess() {

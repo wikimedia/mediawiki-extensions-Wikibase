@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client;
 
-use CachedBagOStuff;
 use CentralIdLookup;
 use DataValues\Deserializers\DataValueDeserializer;
 use DataValues\Geo\Values\GlobeCoordinateValue;
@@ -94,6 +93,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
@@ -106,8 +106,6 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\SimpleCacheWithBagOStuff;
-use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
@@ -292,6 +290,9 @@ final class WikibaseClient {
 
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
+
+	/** @var FormatterCacheFactory|null */
+	private $formatterCacheFactory = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -1266,40 +1267,22 @@ final class WikibaseClient {
 		);
 	}
 
-	/**
-	 * @fixme this is duplicated in WikibaseRepo...
-	 */
 	public function getFormatterCache(): CacheInterface {
-		global $wgSecretKey;
+		return $this->getFormatterCacheFactory()->getFormatterCache();
+	}
 
-		$cacheType = $this->settings->getSetting( 'sharedCacheType' );
-		$cacheSecret = hash( 'sha256', $wgSecretKey );
-
-		// Get out default shared cache wrapped in an in memory cache
-		$bagOStuff = ObjectCache::getInstance( $cacheType );
-		if ( !$bagOStuff instanceof CachedBagOStuff ) {
-			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+	public function getFormatterCacheFactory(): FormatterCacheFactory {
+		if ( $this->formatterCacheFactory === null ) {
+			global $wgSecretKey;
+			$cacheSecret = hash( 'sha256', $wgSecretKey );
+			$this->formatterCacheFactory = new FormatterCacheFactory(
+				$this->settings->getSetting( 'sharedCacheType' ),
+				$this->getLogger(),
+				MediaWikiServices::getInstance()->getStatsdDataFactory(),
+				$cacheSecret
+			);
 		}
-
-		// XXX: 'wikibase.repo.formatter.' is used intentionally so that this cache is actually shared between repo and client.
-		$cache = new SimpleCacheWithBagOStuff(
-			$bagOStuff,
-			'wikibase.repo.formatter.',
-			$cacheSecret
-		);
-
-		$cache->setLogger( $this->getLogger() );
-
-		$cache = new StatsdRecordingSimpleCache(
-			$cache,
-			MediaWikiServices::getInstance()->getStatsdDataFactory(),
-			[
-				'miss' => 'wikibase.repo.formatterCache.miss',
-				'hit' => 'wikibase.repo.formatterCache.hit'
-			]
-		);
-
-		return $cache;
+		return $this->formatterCacheFactory;
 	}
 
 	public function getEntityIdLookup(): EntityIdLookup {
