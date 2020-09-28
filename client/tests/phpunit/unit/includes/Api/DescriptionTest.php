@@ -42,19 +42,23 @@ class DescriptionTest extends TestCase {
 	/**
 	 * @dataProvider provideExecute
 	 * @param bool $allowLocalShortDesc
+	 * @param bool $forceLocalShortDesc
 	 * @param array $params
 	 * @param array $requestedPageIds
-	 * @param array $localDescriptions
-	 * @param array $centralDescriptions
-	 * @param int $fitLimit
+	 * @param int|null $fitLimit
+	 * @param array $expectedPageIds
+	 * @param array $expectedSources
+	 * @param array $descriptions
+	 * @param array $actualSources
 	 * @param array $expectedResult
 	 * @param int $expectedContinue
 	 */
 	public function testExecute(
-		$allowLocalShortDesc,
+		bool $allowLocalShortDesc,
+		bool $forceLocalShortDesc,
 		array $params,
 		array $requestedPageIds,
-		$fitLimit,
+		?int $fitLimit,
 		array $expectedPageIds,
 		array $expectedSources,
 		array $descriptions,
@@ -64,8 +68,8 @@ class DescriptionTest extends TestCase {
 	) {
 		$descriptionLookup = $this->getDescriptionLookup( $expectedPageIds, $expectedSources,
 			$descriptions, $actualSources );
-		$module = $this->getModule( $allowLocalShortDesc, $params, $requestedPageIds, $fitLimit,
-			$descriptionLookup );
+		$module = $this->getModule( $allowLocalShortDesc, $forceLocalShortDesc, $params,
+			$requestedPageIds, $fitLimit, $descriptionLookup );
 		$module->execute();
 		$this->assertSame( $expectedResult, $this->resultData );
 		$this->assertSame( $expectedContinue, $this->continueEnumParameter );
@@ -77,6 +81,7 @@ class DescriptionTest extends TestCase {
 		return [
 			'empty' => [
 				'allow local descriptions' => false,
+				'force local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [],
 				'fit limit' => null,
@@ -89,6 +94,7 @@ class DescriptionTest extends TestCase {
 			],
 			'local disallowed' => [
 				'allow local descriptions' => false,
+				'force local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
 				'fit limit' => null,
@@ -104,6 +110,7 @@ class DescriptionTest extends TestCase {
 			],
 			'prefer local' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5, 6 ],
 				'fit limit' => null,
@@ -119,8 +126,26 @@ class DescriptionTest extends TestCase {
 				],
 				'expected continuation value' => null,
 			],
+			'force local' => [
+				'allow local descriptions' => true,
+				'force local descriptions' => true,
+				'API params' => [],
+				'requested page IDs' => [ 1, 2, 3, 4, 5, 6 ],
+				'fit limit' => null,
+				'expected page IDs' => [ 1, 2, 3, 4, 5, 6 ],
+				'expected sources' => [ $local ],
+				'actual descriptions by page ID' => [ 1 => 'L1', 2 => 'L2', 3 => 'L3' ],
+				'actual sources by page ID' => [ 1 => $local, 2 => $local, 3 => $local ],
+				'expected results' => [
+					1 => [ 'description' => 'L1', 'descriptionsource' => 'local' ],
+					2 => [ 'description' => 'L2', 'descriptionsource' => 'local' ],
+					3 => [ 'description' => 'L3', 'descriptionsource' => 'local' ]
+				],
+				'expected continuation value' => null,
+			],
 			'prefer central' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [ 'prefersource' => 'central' ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5, 6 ],
 				'fit limit' => null,
@@ -138,6 +163,7 @@ class DescriptionTest extends TestCase {
 			],
 			'continuation #1' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
 				'fit limit' => 2,
@@ -154,6 +180,7 @@ class DescriptionTest extends TestCase {
 			],
 			'continuation #2' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [ 'continue' => 2 ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
 				'fit limit' => 2,
@@ -169,6 +196,7 @@ class DescriptionTest extends TestCase {
 			],
 			'continuation #3' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [ 'continue' => 4 ],
 				'requested page IDs' => [ 1, 2, 3, 4, 5 ],
 				'fit limit' => 2,
@@ -183,6 +211,7 @@ class DescriptionTest extends TestCase {
 			],
 			'continuation with exact fit' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [ 'continue' => 2 ],
 				'requested page IDs' => [ 1, 2, 3, 4 ],
 				'fit limit' => 2,
@@ -198,6 +227,7 @@ class DescriptionTest extends TestCase {
 			],
 			'limit' => [
 				'allow local descriptions' => true,
+				'force local descriptions' => false,
 				'API params' => [],
 				'requested page IDs' => range( 1, 600 ),
 				'fit limit' => null,
@@ -252,18 +282,19 @@ class DescriptionTest extends TestCase {
 	 * mock write results and continuation value into member variables of the test for inspection.
 	 *
 	 * @param bool $allowLocalShortDesc
+	 * @param bool $forceLocalShortDesc
 	 * @param array $params API parameters for the module (unprefixed)
 	 * @param array $requestedPageIds
 	 * @param int|null $fitLimit
 	 * @param DescriptionLookup $descriptionLookup
-	 * @return Description
-	 *
+	 * @return MockObject
 	 */
 	private function getModule(
-		$allowLocalShortDesc,
+		bool $allowLocalShortDesc,
+		bool $forceLocalShortDesc,
 		array $params,
 		array $requestedPageIds,
-		$fitLimit,
+		?int $fitLimit,
 		DescriptionLookup $descriptionLookup
 	) {
 		$main = $this->getMockBuilder( ApiMain::class )
@@ -307,6 +338,7 @@ class DescriptionTest extends TestCase {
 			->getMock();
 		$modulePrivate = TestingAccessWrapper::newFromObject( $module );
 		$modulePrivate->allowLocalShortDesc = $allowLocalShortDesc;
+		$modulePrivate->forceLocalShortDesc = $forceLocalShortDesc;
 		$modulePrivate->descriptionLookup = $descriptionLookup;
 		$module->expects( $this->any() )
 			->method( 'getParameter' )

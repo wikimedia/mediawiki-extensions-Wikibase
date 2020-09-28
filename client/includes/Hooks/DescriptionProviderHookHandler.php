@@ -17,12 +17,15 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 
 	private $descriptionLookup;
 	private $allowLocalShortDesc;
+	private $forceLocalShortDesc;
 
 	public function __construct(
 		bool $allowLocalShortDesc,
+		bool $forceLocalShortDesc,
 		DescriptionLookup $descriptionLookup
 	) {
 		$this->allowLocalShortDesc = $allowLocalShortDesc;
+		$this->forceLocalShortDesc = $forceLocalShortDesc;
 		$this->descriptionLookup = $descriptionLookup;
 	}
 
@@ -32,6 +35,8 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 	): void {
 		if ( !$this->allowLocalShortDesc ) {
 			$sources = [ DescriptionLookup::SOURCE_CENTRAL ];
+		} elseif ( $this->forceLocalShortDesc ) {
+			$sources = [ DescriptionLookup::SOURCE_LOCAL ];
 		} else {
 			$sources = [ DescriptionLookup::SOURCE_CENTRAL, DescriptionLookup::SOURCE_LOCAL ];
 		}
@@ -53,8 +58,9 @@ class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHo
 	public static function factory(): DescriptionProviderHookHandler {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$allowLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'allowLocalShortDesc' );
+		$forceLocalShortDesc = $wikibaseClient->getSettings()->getSetting( 'forceLocalShortDesc' );
 		$descriptionLookup = $wikibaseClient->getDescriptionLookup();
-		return new DescriptionProviderHookHandler( $allowLocalShortDesc, $descriptionLookup );
+		return new DescriptionProviderHookHandler( $allowLocalShortDesc, $forceLocalShortDesc, $descriptionLookup );
 	}
 
 }
