@@ -265,7 +265,8 @@ $.valueview = $.valueview || {};
 		 * @return {string|dataValues.DataValue|null} Returns either the current raw value as a
 		 *  string that needs to be parsed first, or an already parsed DataValue object (e.g. from a
 		 *  client-side parser, but that should be avoided), or null if the expert is sure there is
-		 *  nothing to parse.
+		 *  nothing to parse. The expert may apply minor sanitization to the unparsed string value
+		 *  if it is sure the sanitization is compatible with all parsers.
 		 */
 		rawValue: util.abstractMember,
 
