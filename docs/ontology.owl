@@ -299,7 +299,7 @@
   </owl:ObjectProperty>
 
   <owl:ObjectProperty rdf:about="&wikibase;referenceValueNormalized">
-      <rdfs:label>referenceValue</rdfs:label>
+      <rdfs:label>referenceValueNormalized</rdfs:label>
       <rdfs:comment>Link between Wikibase Property and reference normalized value predicate.</rdfs:comment>
       <rdfs:domain rdf:resource="&wikibase;Property"/>
   </owl:ObjectProperty>
