@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
@@ -13,8 +12,8 @@ use Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper;
 use Wikibase\Repo\FederatedProperties\ApiRequestException;
 use Wikibase\Repo\FederatedProperties\FederatedPropertiesException;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
+use Wikibase\Repo\Tests\HttpResponseMockerTrait;
 use Wikibase\Repo\WikibaseRepo;
-use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @covers \Wikibase\Repo\FederatedProperties\ApiEntitySearchHelper
@@ -24,6 +23,8 @@ use function GuzzleHttp\Psr7\stream_for;
  * @license GPL-2.0-or-later
  */
 class ApiEntitySearchHelperTest extends TestCase {
+
+	use HttpResponseMockerTrait;
 
 	private $responseDataFiles = [
 		'api-entity-search-helper-test-data-emptyResponse.json',
@@ -63,7 +64,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( $requestParams )
-			->willReturn( $this->newMockResponse( $responseDataFile, $statusCode ) );
+			->willReturn( $this->newMockResponse( json_encode( $this->data[ $responseDataFile ] ), $statusCode ) );
 		return $api;
 	}
 
@@ -219,17 +220,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 		}
 	}
 
-	private function newMockResponse( $responseDataFile, $statusCode ) {
-		$mwResponse = $this->createMock( ResponseInterface::class );
-		$mwResponse->expects( $this->any() )
-			->method( 'getStatusCode' )
-			->willReturn( $statusCode );
-		$mwResponse->expects( $this->any() )
-			->method( 'getBody' )
-			->willReturn( stream_for( json_encode( $this->data[ $responseDataFile ] ) ) );
-		return $mwResponse;
-	}
-
 	private function getResponseDataForId( $searchResponses, $resultId ) {
 		//convert $searchResponse to array
 		$searchResponses = \GuzzleHttp\json_decode( \GuzzleHttp\json_encode( $searchResponses ), true );
@@ -365,4 +355,5 @@ class ApiEntitySearchHelperTest extends TestCase {
 			],
 		];
 	}
+
 }

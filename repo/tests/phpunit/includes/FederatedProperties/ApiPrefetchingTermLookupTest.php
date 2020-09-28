@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -12,7 +11,7 @@ use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Repo\FederatedProperties\ApiEntityLookup;
 use Wikibase\Repo\FederatedProperties\ApiPrefetchingTermLookup;
 use Wikibase\Repo\FederatedProperties\GenericActionApiClient;
-use function GuzzleHttp\Psr7\stream_for;
+use Wikibase\Repo\Tests\HttpResponseMockerTrait;
 
 /**
  * @covers \Wikibase\Repo\FederatedProperties\ApiPrefetchingTermLookup
@@ -22,6 +21,8 @@ use function GuzzleHttp\Psr7\stream_for;
  * @license GPL-2.0-or-later
  */
 class ApiPrefetchingTermLookupTest extends TestCase {
+
+	use HttpResponseMockerTrait;
 
 	private $responseDataFiles = [
 		'q42-en' => 'api-prefetching-term-lookup-test-data-q42-en.json',
@@ -167,8 +168,8 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 				[ $this->getRequestParameters( [ $this->p31->getSerialization() ] ) ]
 			)
 			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( $this->responseDataFiles[ 'p18-en' ], 200 ),
-				$this->newMockResponse( $this->responseDataFiles[ 'p31-en' ], 200 )
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 )
 			);
 
 		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
@@ -193,8 +194,8 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 				[ $this->getRequestParameters( [ $this->p31->getSerialization() ] ) ]
 			)
 			->willReturnOnConsecutiveCalls(
-				$this->newMockResponse( $this->responseDataFiles[ 'p18-en' ], 200 ),
-				$this->newMockResponse( $this->responseDataFiles[ 'p31-en' ], 200 )
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p18-en' ] ] ), 200 ),
+				$this->newMockResponse( json_encode( $this->data[ $this->responseDataFiles[ 'p31-en' ] ] ), 200 )
 			);
 
 		$apiLookup = new ApiPrefetchingTermLookup( new ApiEntityLookup( $api ) );
@@ -284,19 +285,9 @@ class ApiPrefetchingTermLookupTest extends TestCase {
 		$api->expects( $this->once() )
 			->method( 'get' )
 			->with( $this->getRequestParameters( $ids ) )
-			->willReturn( $this->newMockResponse( $responseDataFile, 200 ) );
+			->willReturn( $this->newMockResponse( json_encode( $this->data[ $responseDataFile ] ), 200 ) );
 
 		return $api;
 	}
 
-	private function newMockResponse( $responseDataFile, $statusCode ) {
-		$mwResponse = $this->createMock( ResponseInterface::class );
-		$mwResponse->expects( $this->any() )
-			->method( 'getStatusCode' )
-			->willReturn( $statusCode );
-		$mwResponse->expects( $this->any() )
-			->method( 'getBody' )
-			->willReturn( stream_for( json_encode( $this->data[ $responseDataFile ] ) ) );
-		return $mwResponse;
-	}
 }
