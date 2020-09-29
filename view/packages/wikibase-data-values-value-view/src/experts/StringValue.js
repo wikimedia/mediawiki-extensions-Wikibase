@@ -64,7 +64,7 @@ module.exports = ( function( $, vv ) {
 		 * @return {string}
 		 */
 		rawValue: function() {
-			return this.$input.val().replace( /^\s*|\s*$/g, '' );
+			return this.$input.val();
 		},
 
 		/**
