@@ -140,7 +140,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 	 * @dataProvider provideGetRecentChangeId
 	 */
 	public function testGetRecentChangeId( $expected, array $changeData ) {
-		$this->markTestSkipped( 'Broken due to Actor changes, see T263785' );
 		$connectionManager = new SessionConsistentConnectionManager(
 			MediaWikiServices::getInstance()->getDBLoadBalancer()
 		);

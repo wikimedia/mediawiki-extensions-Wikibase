@@ -31,7 +31,6 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 	 * @dataProvider revisionIdentifierProvider
 	 */
 	public function testRun( array $expectedRedactedTitles, array $revisionIdentifiers, $visibilityBitFlag ) {
-		$this->markTestSkipped( 'Broken due to Actor changes, see T263785' );
 		$this->initRecentChanges();
 
 		$job = new ChangeVisibilityNotificationJob(
@@ -49,7 +48,6 @@ class ChangeVisibilityNotificationJobTest extends RecentChangesModificationTest 
 	}
 
 	public function testRun_recentChangeFactoryRoundtrip() {
-		$this->markTestSkipped( 'Broken due to Actor changes, see T263785' );
 		$this->initRecentChanges();
 
 		$recentChangeFactory = new RecentChangeFactory(
