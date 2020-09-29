@@ -10,10 +10,7 @@ CREATE TABLE /*_*/wb_changes (
   change_revision_id INT UNSIGNED NOT NULL,
   change_user_id INT UNSIGNED NOT NULL,
   change_info MEDIUMBLOB NOT NULL,
-  INDEX wb_changes_change_type (change_type),
   INDEX wb_changes_change_time (change_time),
-  INDEX wb_changes_change_object_id (change_object_id),
-  INDEX wb_changes_change_user_id (change_user_id),
   INDEX wb_changes_change_revision_id (change_revision_id),
   PRIMARY KEY(change_id)
 ) /*$wgDBTableOptions*/;

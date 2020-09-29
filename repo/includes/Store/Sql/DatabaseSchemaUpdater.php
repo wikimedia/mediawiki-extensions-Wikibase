@@ -113,6 +113,12 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 
 		$this->updateChangesSubscriptionTable( $updater );
+
+		$updater->dropExtensionIndex(
+			'wb_changes',
+			'wb_changes_change_type',
+			$this->getUpdateScriptPath( 'patch-wb_changes-drop-change_type_index', $db->getType() )
+		);
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
