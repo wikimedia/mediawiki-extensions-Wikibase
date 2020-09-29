@@ -11,13 +11,11 @@ matrix:
     - env: DBTYPE=sqlite LANG=ru WB=both
       php: 7.3
     - env: DBTYPE=sqlite LANG=en WB=client
-      php: 7.2
+      php: 7.3
     - env: DBTYPE=mysql LANG=en WB=repo
-      php: 7.2
+      php: 7.3
     - env: DBTYPE=sqlite LANG=ar WB=both
       php: 7.3
-    - env: DBTYPE=mysql LANG=en WB=both
-      php: 7.2
     - env: DBTYPE=mysql LANG=en WB=both
       php: 7.3
 
