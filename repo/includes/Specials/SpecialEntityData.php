@@ -6,7 +6,6 @@ use HttpError;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
-use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -101,26 +100,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
-		// build a mapping of formats to file extensions and include HTML
-		$supportedExtensions = [];
-		$supportedExtensions['html'] = 'html';
-		foreach ( $this->entityDataFormatProvider->getSupportedFormats() as $format ) {
-			$ext = $this->entityDataFormatProvider->getExtension( $format );
-
-			if ( $ext !== null ) {
-				$supportedExtensions[$format] = $ext;
-			}
-		}
-
-		$uriManager = new EntityDataUriManager(
-			$this->getPageTitle(),
-			$supportedExtensions,
-			$wikibaseRepo->getSettings()->getSetting( 'entityDataCachePaths' ),
-			$titleLookup
-		);
-
 		return new EntityDataRequestHandler(
-			$uriManager,
+			$wikibaseRepo->getEntityDataUriManager(),
 			$wikibaseRepo->getHtmlCacheUpdater(),
 			$titleLookup,
 			$entityIdParser,

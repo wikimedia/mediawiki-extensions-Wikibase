@@ -79,6 +79,7 @@ use Wikibase\Repo\EntityIdHtmlLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
+use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
 use Wikibase\Repo\Notifications\ChangeNotifier;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
@@ -815,6 +816,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testGetEntityDataFormatProvider() {
 		$service = $this->getWikibaseRepo()->getEntityDataFormatProvider();
 		$this->assertInstanceOf( EntityDataFormatProvider::class, $service );
+	}
+
+	public function testGetEntityDataUriManager() {
+		$service = $this->getWikibaseRepo()->getEntityDataUriManager();
+		$this->assertInstanceOf( EntityDataUriManager::class, $service );
 	}
 
 	public function testGetEntityParserOutputGeneratorFactory() {
