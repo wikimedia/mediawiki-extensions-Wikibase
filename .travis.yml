@@ -9,15 +9,15 @@ matrix:
   fast_finish: true
   include:
     - env: DBTYPE=sqlite LANG=ru WB=both
-      php: 7.3
+      php: 7.3.19
     - env: DBTYPE=sqlite LANG=en WB=client
-      php: 7.3
+      php: 7.3.19
     - env: DBTYPE=mysql LANG=en WB=repo
-      php: 7.3
+      php: 7.3.19
     - env: DBTYPE=sqlite LANG=ar WB=both
-      php: 7.3
+      php: 7.3.19
     - env: DBTYPE=mysql LANG=en WB=both
-      php: 7.3
+      php: 7.3.19
 
 before_script:
     - bash ./build/travis/install.sh
