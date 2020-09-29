@@ -27,12 +27,13 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 	}
 
 	public function provideGetRecentChangeId() {
+		// Note: this provides change data without rc_user(_text);
+		// those fields will be filled in by newChange(),
+		// because data providers run before the test DB has been set up
 		return [
 			'same' => [ true, [
 				'rc_id' => 4353,
 				'rc_timestamp' => '20111111111111',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
@@ -50,8 +51,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			'irrelevant differences' => [ true, [
 				'rc_id' => 1117,
 				'rc_timestamp' => '20111111111111',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Test',
 				'rc_comment' => 'Kittens', // ignored
@@ -69,8 +68,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			'repo change mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111111111',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
@@ -88,8 +85,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			'local timestamp mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111112233',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Test',
 				'rc_comment' => 'Testing',
@@ -107,8 +102,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			'local title mismatch' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20111111111111',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Kittens',
 				'rc_comment' => 'Testing',
@@ -126,8 +119,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			'external change exists but not from repo' => [ false, [
 				'rc_id' => 17,
 				'rc_timestamp' => '20121212121212',
-				'rc_user' => 23,
-				'rc_user_text' => 'Test',
 				'rc_namespace' => 0,
 				'rc_title' => 'Kittens',
 				'rc_comment' => 'Testing',
@@ -171,11 +162,13 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 			$changeData['rc_params'] = serialize( $changeData['rc_params'] );
 		}
 
+		$user = $this->getTestUser()->getUser();
+
 		$defaults = [
 			'rc_id' => 0,
 			'rc_timestamp' => '20000000000000',
-			'rc_user' => 0,
-			'rc_user_text' => '',
+			'rc_user' => $user->getId(),
+			'rc_user_text' => $user->getName(),
 			'rc_namespace' => 0,
 			'rc_title' => '',
 			'rc_comment' => '',
@@ -219,8 +212,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 	private function initRecentChanges() {
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
@@ -239,8 +230,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20121212121212',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',
@@ -259,8 +248,6 @@ class RecentChangesFinderTest extends \MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'Test',
 			'rc_comment' => 'Testing',

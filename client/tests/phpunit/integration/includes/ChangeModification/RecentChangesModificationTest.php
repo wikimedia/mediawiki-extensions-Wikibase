@@ -87,11 +87,13 @@ abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCas
 			$changeData['rc_params'] = serialize( $changeData['rc_params'] );
 		}
 
+		$user = $this->getTestUser()->getUser();
+
 		$defaults = [
 			'rc_id' => 0,
 			'rc_timestamp' => '20000000000000',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
+			'rc_user' => $user->getId(),
+			'rc_user_text' => $user->getName(),
 			'rc_namespace' => 0,
 			'rc_title' => '',
 			'rc_comment' => 'Testing',
