@@ -221,11 +221,13 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 			$changeData['rc_params'] = serialize( $changeData['rc_params'] );
 		}
 
+		$user = $this->getTestUser()->getUser();
+
 		$defaults = [
 			'rc_id' => 0,
 			'rc_timestamp' => '20000000000000',
-			'rc_user' => 0,
-			'rc_user_text' => '',
+			'rc_user' => $user->getId(),
+			'rc_user_text' => $user->getName(),
 			'rc_namespace' => 0,
 			'rc_title' => '',
 			'rc_comment' => '',
@@ -276,8 +278,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-001',
 			'rc_comment' => 'Testing',
@@ -297,8 +297,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-002',
 			'rc_comment' => 'Testing',
@@ -318,8 +316,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20121212121212',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-003',
 			'rc_comment' => 'Testing',
@@ -339,8 +335,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111111',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-004',
 			'rc_comment' => 'Testing',
@@ -360,8 +354,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111115',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-005',
 			'rc_comment' => 'Testing',
@@ -381,8 +373,6 @@ class ChangeVisibilityNotificationJobTest extends MediaWikiTestCase {
 
 		$change = $this->newChange( [
 			'rc_timestamp' => '20111111111115',
-			'rc_user' => 23,
-			'rc_user_text' => 'Test',
 			'rc_namespace' => 0,
 			'rc_title' => 'UNIQ-006',
 			'rc_comment' => 'Testing',
