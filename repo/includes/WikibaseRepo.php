@@ -2154,11 +2154,14 @@ class WikibaseRepo {
 		);
 	}
 
-	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
+	public function getEntityDataFormatProvider(): EntityDataFormatProvider {
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$formats = $this->settings->getSetting( 'entityDataFormats' );
 		$entityDataFormatProvider->setAllowedFormats( $formats );
+		return $entityDataFormatProvider;
+	}
 
+	public function getEntityParserOutputGeneratorFactory(): EntityParserOutputGeneratorFactory {
 		$services = MediaWikiServices::getInstance();
 
 		return new EntityParserOutputGeneratorFactory(
@@ -2167,7 +2170,7 @@ class WikibaseRepo {
 			$this->getEntityTitleLookup(),
 			$this->getLanguageFallbackChainFactory(),
 			TemplateFactory::getDefaultInstance(),
-			$entityDataFormatProvider,
+			$this->getEntityDataFormatProvider(),
 			// FIXME: Should this be done for all usages of this lookup, or is the impact of
 			// CachingPropertyInfoLookup enough?
 			new InProcessCachingDataTypeLookup( $this->getPropertyDataTypeLookup() ),

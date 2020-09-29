@@ -10,7 +10,6 @@ use MWException;
 use OutputPage;
 use SpecialPage;
 use ViewAction;
-use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -112,10 +111,10 @@ class ViewEntityAction extends ViewAction {
 		if ( !isset( $variables['wbEntityId'] ) ) {
 			return;
 		}
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
 		$subPagePrefix = $variables['wbEntityId'] . '.';
-		$entityDataFormatProvider = new EntityDataFormatProvider();
-		foreach ( $settings->getSetting( 'entityDataFormats' ) as $format ) {
+		$repo = WikibaseRepo::getDefaultInstance();
+		$entityDataFormatProvider = $repo->getEntityDataFormatProvider();
+		foreach ( $entityDataFormatProvider->getAllowedFormats() as $format ) {
 			$ext = $entityDataFormatProvider->getExtension( $format );
 			$mime = $entityDataFormatProvider->getMimeType( $format );
 			if ( $ext === null || $mime === null ) {
