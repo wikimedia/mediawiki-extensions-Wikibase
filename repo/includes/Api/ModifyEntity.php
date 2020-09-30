@@ -6,11 +6,13 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use ApiMain;
+use ApiUsageException;
 use LogicException;
 use MWContentSerializationException;
 use Status;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\StringNormalizer;
@@ -292,7 +294,7 @@ abstract class ModifyEntity extends ApiBase {
 		$this->validateAlteringEntityById( $entityId );
 
 		// Try to find the entity or fail and create it, or die in the process
-		$entity = $this->entitySavingHelper->loadEntity( $entityId );
+		$entity = $this->loadEntityFromSavingHelper( $entityId );
 		$entityRevId = $this->entitySavingHelper->getBaseRevisionId();
 
 		if ( $entity->getId() === null ) {
@@ -342,6 +344,34 @@ abstract class ModifyEntity extends ApiBase {
 	 * @return ChangeOp
 	 */
 	abstract protected function getChangeOp( array $preparedParameters, EntityDocument $entity ): ChangeOp;
+
+	/**
+	 * Try to find the entity or fail and create it, or die in the process.
+	 *
+	 * @param EntityId|null $entityId
+	 *
+	 * @return EntityDocument
+	 * @throws ApiUsageException
+	 */
+	private function loadEntityFromSavingHelper( ?EntityId $entityId ): EntityDocument {
+		$entity = $this->entitySavingHelper->loadEntity( $entityId, EntitySavingHelper::NO_FRESH_ID );
+
+		if ( $entity->getId() === null ) {
+			// Make sure the user is allowed to create an entity before attempting to assign an id
+			$permStatus = $this->permissionChecker->getPermissionStatusForEntity(
+				$this->getUser(),
+				EntityPermissionChecker::ACTION_EDIT,
+				$entity
+			);
+			if ( !$permStatus->isOK() ) {
+				$this->errorReporter->dieStatus( $permStatus, 'permissiondenied' );
+			}
+
+			$entity = $this->entitySavingHelper->loadEntity( $entityId, EntitySavingHelper::ASSIGN_FRESH_ID );
+		}
+
+		return $entity;
+	}
 
 	/**
 	 * Check the rights for the user accessing the module.
