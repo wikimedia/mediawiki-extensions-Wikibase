@@ -91,13 +91,6 @@
 		 * @see jQuery.ui.TemplatedWidget._create
 		 */
 		_create: function () {
-			if (
-				$( '.wikibase-entitytermsview' ).attr( 'data-server-rendered' ) === true ||
-				$( '.wikibase-entitytermsview.renderer-fallback' ).length > 0
-			) {
-				// Do not override when termbox v2 is enabled: T261488
-				return;
-			}
 			if ( !( this.options.value instanceof datamodel.Fingerprint )
 				|| !Array.isArray( this.options.userLanguages )
 			) {

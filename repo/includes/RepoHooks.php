@@ -85,9 +85,15 @@ final class RepoHooks {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$entityNamespaceLookup = $repo->getEntityNamespaceLookup();
 		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() );
+		$useNewTermbox = $repo->getSettings()->getSetting( 'termboxEnabled' );
 
 		if ( $isEntityTitle ) {
 			$out->addModules( 'wikibase.mobile' );
+
+			if ( $useNewTermbox ) {
+				$out->addModules( 'wikibase.termbox' );
+				$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
+			}
 		}
 	}
 
