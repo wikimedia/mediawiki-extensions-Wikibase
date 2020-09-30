@@ -31,6 +31,9 @@ use Wikibase\Repo\SummaryFormatter;
  */
 class EntitySavingHelper extends EntityLoadingHelper {
 
+	public const ASSIGN_FRESH_ID = 'assignFreshId';
+	public const NO_FRESH_ID = 'noFreshId';
+
 	/**
 	 * @var SummaryFormatter
 	 */
@@ -140,10 +143,19 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @param EntityId|null $entityId ID of the entity to load. If not given, the ID is taken
 	 *        from the request parameters. If $entityId is given, the 'baserevid' parameter must
 	 *        belong to it.
+	 * @param string $assignFreshId Whether to allow assigning entity ids to new entities.
+	 *        Either of the ASSIGN_FRESH_ID/NO_FRESH_ID constants.
+	 *        NOTE: We usually need to assign an ID early, for things like the ClaimIdGenerator.
 	 *
 	 * @return EntityDocument
 	 */
-	public function loadEntity( EntityId $entityId = null ) {
+	public function loadEntity( EntityId $entityId = null, $assignFreshId = self::ASSIGN_FRESH_ID ) {
+		if ( !in_array( $assignFreshId, [ self::ASSIGN_FRESH_ID, self::NO_FRESH_ID ] ) ) {
+			throw new InvalidArgumentException(
+				'$assignFreshId must be either of the EntitySavingHelper::ASSIGN_FRESH_ID/NO_FRESH_ID constants.'
+			);
+		}
+
 		$params = $this->apiModule->extractRequestParams();
 
 		if ( !$entityId ) {
@@ -203,7 +215,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 				);
 			}
 
-			$entity = $this->createEntity( $new, $entityId );
+			$entity = $this->createEntity( $new, $entityId, $assignFreshId );
 
 			$this->entitySavingFlags = EDIT_NEW;
 			$this->baseRevisionId = 0;
@@ -232,13 +244,15 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @param string|null $entityType The type of entity to create. Optional if an ID is given.
 	 * @param EntityId|null $customId Optionally assigns a specific ID instead of generating a new
 	 *  one.
+	 * @param string $assignFreshId Either of the ASSIGN_FRESH_ID/NO_FRESH_ID constants
+	 *               NOTE: We usually need to assign an ID early, for things like the ClaimIdGenerator.
 	 *
 	 * @throws InvalidArgumentException when entity type and ID are given but do not match.
 	 * @throws ApiUsageException
 	 * @throws LogicException
 	 * @return EntityDocument
 	 */
-	private function createEntity( $entityType, EntityId $customId = null ) {
+	private function createEntity( $entityType, EntityId $customId = null, $assignFreshId = self::ASSIGN_FRESH_ID ) {
 		if ( $customId ) {
 			$entityType = $customId->getEntityType();
 		} elseif ( !$entityType ) {
@@ -272,9 +286,8 @@ class EntitySavingHelper extends EntityLoadingHelper {
 			}
 
 			$entity->setId( $customId );
-		} else {
+		} elseif ( $assignFreshId === self::ASSIGN_FRESH_ID ) {
 			try {
-				// NOTE: We need to assign an ID early, for things like the ClaimIdGenerator.
 				$this->entityStore->assignFreshId( $entity );
 			} catch ( StorageException $e ) {
 				$this->errorReporter->dieError(
