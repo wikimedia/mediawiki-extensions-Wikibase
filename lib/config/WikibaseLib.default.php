@@ -7,8 +7,8 @@
  *
  * This file assigns the default values to all Wikibase Lib settings.
  *
- * This file is NOT an entry point the WikibaseLib extension. Use WikibaseLib.php.
- * It should furthermore not be included from outside the extension.
+ * This file is NOT an entry point to the Wikibase extension.
+ * It should not be included from outside the extension.
  *
  * @license GPL-2.0-or-later
  */

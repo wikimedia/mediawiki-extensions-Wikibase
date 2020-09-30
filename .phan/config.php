@@ -15,7 +15,6 @@ $cfg['file_list'] = array_merge(
 		'lib/config/WikibaseLib.default.php',
 		'lib/WikibaseLib.datatypes.php',
 		'lib/WikibaseLib.entitytypes.php',
-		'lib/WikibaseLib.php',
 		'repo/config/Wikibase.default.php',
 		'repo/config/Wikibase.searchindex.php',
 		'repo/Wikibase.i18n.alias.php',
