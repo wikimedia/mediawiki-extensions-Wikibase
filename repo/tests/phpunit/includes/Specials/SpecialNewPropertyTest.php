@@ -102,28 +102,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		);
 	}
 
-	public function propertyTermsMigrationStageProvider() {
-		return [
-			[ MIGRATION_OLD ],
-			[ MIGRATION_WRITE_BOTH ],
-			[ MIGRATION_WRITE_NEW ],
-			[ MIGRATION_NEW ]
-		];
-	}
-
-	/**
-	 * @dataProvider propertyTermsMigrationStageProvider
-	 */
-	public function testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel(
-		$propertyTermsMigrationStage
-	) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$oldConfig = $settings->getSetting( 'tmpPropertyTermsMigrationStage' );
-		$settings->setSetting(
-			'tmpPropertyTermsMigrationStage',
-			$propertyTermsMigrationStage
-		);
-
+	public function testFailsAndDisplaysAnError_WhenTryToCreateSecondPropertyWithTheSameLabel() {
 		$formData = [
 			SpecialNewProperty::FIELD_LANG => 'en',
 			SpecialNewProperty::FIELD_LABEL => 'label',
@@ -136,8 +115,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		list( $html ) = $this->executeSpecialPage( '', new \FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-conflict: label, en, ' );
-
-		$settings->setSetting( 'tmpPropertyTermsMigrationStage', $oldConfig );
 	}
 
 	public function provideValidEntityCreationRequests() {

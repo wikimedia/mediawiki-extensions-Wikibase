@@ -250,32 +250,7 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		];
 	}
 
-	public function maxItemTermsMigrationStageProvider() {
-		return [
-			[ MIGRATION_OLD ],
-			[ MIGRATION_WRITE_BOTH ],
-			[ MIGRATION_WRITE_NEW ],
-			[ MIGRATION_NEW ]
-		];
-	}
-
-	/**
-	 * @dataProvider maxItemTermsMigrationStageProvider
-	 */
-	public function testErrorBeingDisplayed_WhenItemWithTheSameLabelAndDescriptionInThisLanguageAlreadyExists(
-		$maxItemTermsMigrationStage
-	) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$oldConfig = $settings->getSetting( 'tmpItemTermsMigrationStages' );
-		$settings->setSetting(
-			'tmpItemTermsMigrationStages',
-			[ 'max' => $maxItemTermsMigrationStage ]
-		);
-
-		if ( $maxItemTermsMigrationStage < MIGRATION_WRITE_NEW && $this->db->getType() === 'mysql' ) {
-			$this->markTestSkipped( 'MySQL doesn\'t support self-joins on temporary tables' );
-		}
-
+	public function testErrorBeingDisplayed_WhenItemWithTheSameLabelAndDescriptionInThisLanguageAlreadyExists() {
 		$formData = [
 			SpecialNewItem::FIELD_LANG => 'en',
 			SpecialNewItem::FIELD_LABEL => 'label1',
@@ -287,8 +262,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(wikibase-validator-label-with-description-conflict: label1, en, ' );
-
-		$settings->setSetting( 'tmpItemTermsMigrationStages', $oldConfig );
 	}
 
 	public function testErrorAboutNonExistentPageIsDisplayed_WhenSiteExistsButPageDoesNot() {

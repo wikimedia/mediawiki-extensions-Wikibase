@@ -82,7 +82,6 @@ use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
-use Wikibase\DataModel\Services\Term\PropertyTermStoreWriter;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -141,7 +140,6 @@ use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\TermIndexItemTermStoreWriter;
-use Wikibase\Lib\Store\TermIndexPropertyTermStoreWriter;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
@@ -211,7 +209,6 @@ use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
-use Wikibase\Repo\Store\NullTermsCollisionDetector;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
@@ -1481,8 +1478,8 @@ class WikibaseRepo {
 			$this->getLabelDescriptionDuplicateDetector(),
 			$this->getTermsCollisionDetectorFactory(),
 			$this->getTermLookup(),
-			$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
-			$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' )
+			[ 'max' => MIGRATION_NEW ],
+			MIGRATION_NEW
 		);
 	}
 
@@ -1501,18 +1498,11 @@ class WikibaseRepo {
 	}
 
 	public function getPropertyTermsCollisionDetector() {
-		if ( $this->getSettings()->getSetting( 'tmpPropertyTermsMigrationStage' ) > MIGRATION_WRITE_BOTH ) {
-			return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
-		}
-
-		return new NullTermsCollisionDetector();
+		return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Property::ENTITY_TYPE );
 	}
 
 	public function getItemTermsCollisionDetector() {
-		if ( $this->getSettings()->getSetting( 'tmpItemTermsMigrationStages' )['max'] > MIGRATION_WRITE_BOTH ) {
-			return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
-		}
-		return new NullTermsCollisionDetector();
+		return $this->getTermsCollisionDetectorFactory()->getTermsCollisionDetector( Item::ENTITY_TYPE );
 	}
 
 	/**
@@ -1522,8 +1512,8 @@ class WikibaseRepo {
 		return new EntityConstraintProvider(
 			$this->getLabelDescriptionDuplicateDetector(),
 			$this->getStore()->getSiteLinkConflictLookup(),
-			$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
-			$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' )
+			[ 'max' => MIGRATION_NEW ],
+			MIGRATION_NEW
 		);
 	}
 
@@ -1846,24 +1836,9 @@ class WikibaseRepo {
 			return [ new ThrowingEntityTermStoreWriter() ];
 		}
 
-		$propertyTermsMigrationStage = $this->settings->getSetting( 'tmpPropertyTermsMigrationStage' );
-
-		$old = new PropertyTermStoreWriterAdapter( $this->getOldPropertyTermStoreWriter() );
 		$new = new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
 
-		switch ( $propertyTermsMigrationStage ) {
-			case MIGRATION_OLD:
-				return [ 'old' => $old ];
-			case MIGRATION_WRITE_NEW:
-			case MIGRATION_WRITE_BOTH:
-				return [ 'new' => $new, 'old' => $old ];
-			case MIGRATION_NEW:
-				return [ 'new' => $new ];
-			default:
-				throw new UnexpectedValueException(
-					'Unknown migration stage: ' . $propertyTermsMigrationStage
-				);
-		}
+		return [ 'new' => $new ];
 	}
 
 	/**
@@ -1874,7 +1849,7 @@ class WikibaseRepo {
 			return [ new ThrowingEntityTermStoreWriter() ];
 		}
 
-		$itemTermsMigrationStages = $this->settings->getSetting( 'tmpItemTermsMigrationStages' );
+		$itemTermsMigrationStages = [ 'max' => MIGRATION_NEW ];
 		$oldItemTermStore = $this->getOldItemTermStoreWriter();
 		$newItemTermStore = $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter();
 
@@ -1942,13 +1917,6 @@ class WikibaseRepo {
 			JobQueueGroup::singleton(),
 			$this->getLogger()
 		);
-	}
-
-	/**
-	 * @return PropertyTermStoreWriter for the OLD term storage schema (wb_terms)
-	 */
-	private function getOldPropertyTermStoreWriter(): PropertyTermStoreWriter {
-		return new TermIndexPropertyTermStoreWriter( $this->getStore()->getTermIndex() );
 	}
 
 	/**
@@ -2471,10 +2439,10 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'maxSerializedEntitySize' ),
 				$this->settings->getSetting( 'useTermsTableSearchFields' ),
 				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-				$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-				$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
-				$this->settings->getSetting( 'tmpItemSearchMigrationStage' ),
-				$this->settings->getSetting( 'tmpPropertySearchMigrationStage' )
+				true,
+				[ 'max' => MIGRATION_NEW ],
+				MIGRATION_NEW,
+				MIGRATION_NEW
 			);
 		}
 		return $this->dataAccessSettings;

@@ -43,7 +43,6 @@ use Wikibase\Lib\Interactors\TermSearchInteractor;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\StringNormalizer;
@@ -483,30 +482,11 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 		$this->assertEquals( 'repodb', $wikibaseClient->getDatabaseDomainNameOfLocalRepo() );
 	}
 
-	/**
-	 * @dataProvider getPropertyLabelResolverClassPerMigrationStage
-	 */
-	public function testGetPropertyLabelResolver_newSchemaMigrationStage(
-		$migrationStage,
-		$propertyResolverClassName
-	) {
-		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'tmpPropertyTermsMigrationStage', $migrationStage );
-
-		$wikibaseClient = $this->getWikibaseClient( $settings );
+	public function testGetPropertyLabelResolver() {
 		$this->assertInstanceOf(
-			$propertyResolverClassName,
-			$wikibaseClient->getPropertyLabelResolver()
+			CachedDatabasePropertyLabelResolver::class,
+			$this->getWikibaseClient()->getPropertyLabelResolver()
 		);
-	}
-
-	public function getPropertyLabelResolverClassPerMigrationStage() {
-		return [
-			[ MIGRATION_OLD, MatchingTermsLookupPropertyLabelResolver::class ],
-			[ MIGRATION_WRITE_BOTH, MatchingTermsLookupPropertyLabelResolver::class ],
-			[ MIGRATION_WRITE_NEW, CachedDatabasePropertyLabelResolver::class ],
-			[ MIGRATION_NEW, CachedDatabasePropertyLabelResolver::class ]
-		];
 	}
 
 	/**

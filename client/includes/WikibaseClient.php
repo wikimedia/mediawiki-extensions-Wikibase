@@ -112,12 +112,10 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackPropertyOrderProvider;
 use Wikibase\Lib\Store\HttpUrlPropertyOrderProvider;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
-use Wikibase\Lib\Store\MatchingTermsLookupPropertyLabelResolver;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityRedirectChecker;
 use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
@@ -482,10 +480,10 @@ final class WikibaseClient {
 			$this->settings->getSetting( 'maxSerializedEntitySize' ),
 			$this->settings->getSetting( 'useTermsTableSearchFields' ),
 			$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-			$this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW,
-			$this->settings->getSetting( 'tmpItemTermsMigrationStages' ),
-			$this->settings->getSetting( 'tmpItemSearchMigrationStage' ),
-			$this->settings->getSetting( 'tmpPropertySearchMigrationStage' )
+			true,
+			[ 'max' => MIGRATION_NEW ],
+			MIGRATION_NEW,
+			MIGRATION_NEW
 		);
 	}
 
@@ -1316,27 +1314,16 @@ final class WikibaseClient {
 			$cacheKeyPrefix = $this->settings->getSetting( 'sharedCacheKeyPrefix' );
 			$cacheType = $this->settings->getSetting( 'sharedCacheType' );
 			$cacheDuration = $this->settings->getSetting( 'sharedCacheDuration' );
-			$useNormalizedStore = $this->settings->getSetting( 'tmpPropertyTermsMigrationStage' ) >= MIGRATION_WRITE_NEW;
 
 			// Cache key needs to be language specific
 			$cacheKey = $cacheKeyPrefix . ':TermPropertyLabelResolver' . '/' . $languageCode;
 
-			if ( $useNormalizedStore ) {
-				$this->propertyLabelResolver = $this->getCachedDatabasePropertyLabelResolver(
-					$languageCode,
-					ObjectCache::getInstance( $cacheType ),
-					$cacheDuration,
-					$cacheKey
-				);
-			} else {
-				$this->propertyLabelResolver = new MatchingTermsLookupPropertyLabelResolver(
-					$languageCode,
-					$this->getPropertyTermIndex(),
-					ObjectCache::getInstance( $cacheType ),
-					$cacheDuration,
-					$cacheKey
-				);
-			}
+			$this->propertyLabelResolver = $this->getCachedDatabasePropertyLabelResolver(
+				$languageCode,
+				ObjectCache::getInstance( $cacheType ),
+				$cacheDuration,
+				$cacheKey
+			);
 		}
 
 		return $this->propertyLabelResolver;
@@ -1400,32 +1387,6 @@ final class WikibaseClient {
 
 	private function getWANObjectCache() {
 		return MediaWikiServices::getInstance()->getMainWANObjectCache();
-	}
-
-	/**
-	 * @deprecated Must switch to using non legacy term storage
-	 * Currently used by:
-	 *  - getpropertyLabelResolver - Which already has a compatibility layer in place
-	 *
-	 * @return TermSqlIndex
-	 */
-	private function getPropertyTermIndex() {
-		// TODO: Add special 'optimization' for case item and properties come from the single source to save
-		// an instance? Uses of both seem rather exclusive, though, don't they?
-
-		$propertySource = $this->getPropertySource();
-
-		$index = new TermSqlIndex(
-			$this->getStringNormalizer(),
-			$this->getEntityIdParser(),
-			$propertySource
-		);
-
-		// TODO: Are these important? Copied blindly over from DirectSqlStore::getTermIndex
-		$index->setUseSearchFields( $this->settings->getSetting( 'useTermsTableSearchFields' ) );
-		$index->setForceWriteSearchFields( $this->settings->getSetting( 'forceWriteTermsTableSearchFields' ) );
-
-		return $index;
 	}
 
 	private function getItemSource() {

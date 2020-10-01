@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Api;
 
 use ApiUsageException;
 use ContentHandler;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Api\EditEntity
@@ -22,7 +21,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'wb_terms';
 		$this->tablesUsed[] = 'wbt_type';
 		$this->tablesUsed[] = 'wbt_text';
 		$this->tablesUsed[] = 'wbt_text_in_lang';
@@ -39,22 +37,8 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		ContentHandler::cleanupHandlersCache();
 	}
 
-	public function propertyLabelConflictTestProvider() {
-		return [
-			[ MIGRATION_WRITE_NEW, 'modification-failed' ],
-			[ MIGRATION_NEW, 'modification-failed' ]
-		];
-	}
-
-	/**
-	 * @dataProvider propertyLabelConflictTestProvider
-	 */
-	public function testNewPropertyLabelConflict( $migrationStage, $expectedFailureCode ) {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'tmpPropertyTermsMigrationStage',
-			$migrationStage
-		);
-
+	public function testNewPropertyLabelConflict() {
+		$expectedFailureCode = 'modification-failed';
 		$params = [
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
@@ -73,14 +57,8 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
-	/**
-	 * @dataProvider propertyLabelConflictTestProvider
-	 */
-	public function testExistingPropertyLabelConflict( $migrationStage, $expectedFailureCode ) {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'tmpPropertyTermsMigrationStage',
-			$migrationStage
-		);
+	public function testExistingPropertyLabelConflict() {
+		$expectedFailureCode = 'modification-failed';
 
 		$params = [
 			'action' => 'wbeditentity',
@@ -118,22 +96,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
-	public function itemLabelWithoutDescriptionNotConflictingTestProvider() {
-		return [
-			[ [ 'max' => MIGRATION_WRITE_NEW ], ],
-			[ [ 'max' => MIGRATION_NEW ], ]
-		];
-	}
-
-	/**
-	 * @dataProvider itemLabelWithoutDescriptionNotConflictingTestProvider
-	 */
-	public function testItemLabelWithoutDescriptionNotConflicting( $migrationStage ) {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'tmpItemTermsMigrationStages',
-			$migrationStage
-		);
-
+	public function testItemLabelWithoutDescriptionNotConflicting() {
 		$params = [
 			'action' => 'wbeditentity',
 			'data' => json_encode( [
@@ -148,21 +111,8 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->assertArrayHasKey( 'success', $result );
 	}
 
-	public function itemLabelDescriptionConflictTestProvider() {
-		return [
-			[ [ 'max' => MIGRATION_WRITE_NEW ], 'modification-failed' ],
-			[ [ 'max' => MIGRATION_NEW ], 'modification-failed' ]
-		];
-	}
-
-	/**
-	 * @dataProvider itemLabelDescriptionConflictTestProvider
-	 */
-	public function testNewItemLabelDescriptionConflict( $migrationStage, $expectedFailureCode ) {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'tmpItemTermsMigrationStages',
-			$migrationStage
-		);
+	public function testNewItemLabelDescriptionConflict() {
+		$expectedFailureCode = 'modification-failed';
 
 		$params = [
 			'action' => 'wbeditentity',
@@ -182,15 +132,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 		$this->doTestQueryExceptions( $params, $expectedException );
 	}
 
-	/**
-	 * @dataProvider itemLabelDescriptionConflictTestProvider
-	 */
-	public function testExistingItemLabelDescriptionConflict( $migrationStage, $expectedFailureCode ) {
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
-			'tmpItemTermsMigrationStages',
-			$migrationStage
-		);
-
+	public function testExistingItemLabelDescriptionConflict() {
 		$params = [
 			'action' => 'wbeditentity',
 			'new' => 'item',
@@ -221,7 +163,7 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 
 		$expectedException = [
 			'type' => ApiUsageException::class,
-			'code' => $expectedFailureCode,
+			'code' => 'modification-failed',
 		];
 		// Repeating the same request with the same label and description should fail.
 		$this->doTestQueryExceptions( $params, $expectedException );
