@@ -12,22 +12,9 @@ Writing to the secondary storage happens through a deferred update after each ed
 Briefly in code:
  - ItemTermStoreWriter and PropertyTermStoreWriter are the interfaces at the bottom of the term storage tree.
    - These interfaces are provided by the `data-model-services` [vendor component]
-   - Implementations exist to write to the new and legacy storage.
  - [EntityTermStoreWriter] joins these stores in an interface that can generically save either Item or Property terms.
 
-The storage system is currently decided using the `tmpItemTermsMigrationStages` and `tmpPropertyTermsMigrationStage` repo settings.
-
-### Legacy Secondary Storage
-
-This currently the default storage mechanism when using Wikibase.
-
-In the past (pre 2020) terms were stored in a single large database table called wb_terms.
-This table lacked clear design and eventually became too big to touch for wikidata.org.
-Between 2019 and 2020 a migration process was carried out (and is still being carried out) migrating the terms to a new schema (see below).
-
-The "Epic" task for this was https://phabricator.wikimedia.org/T208425 - *[EPIC] Kill the wb_terms table*
-
-### New Secondary Storage
+### Secondary Storage
 
 The storage is made up of multiple normalized tables, all prefixed with "wbt_".DatabaseTermInLangIdsAcquirer
 The tables were created by [term_store.sql] which includes some documentation.
