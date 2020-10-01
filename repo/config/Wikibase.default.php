@@ -27,11 +27,8 @@ return [
 	// Timeout for SSR-Server in seconds
 	'ssrServerTimeout' => 3,
 
-	// feature flag for termbox on mobile
+	// feature flag for termbox
 	'termboxEnabled' => false,
-
-	// feature flag for termbox on desktop
-	'termboxDesktopEnabled' => false,
 
 	// debug flag for termbox ssr
 	'termboxUserSpecificSsrEnabled' => true,

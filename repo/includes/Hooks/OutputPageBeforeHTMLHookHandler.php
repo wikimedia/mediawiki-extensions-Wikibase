@@ -178,14 +178,6 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 		$html = $this->replacePlaceholders( $out, $html );
 		$this->addJsUserLanguages( $out );
 		$html = $this->showOrHideEditLinks( $out, $html );
-		$this->addTermboxModules( $out );
-	}
-
-	private function addTermboxModules( OutputPage $out ) {
-		if ( $this->isExternallyRendered ) {
-			$out->addModules( 'wikibase.termbox' );
-			$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
-		}
 	}
 
 	/**
