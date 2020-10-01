@@ -30,7 +30,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
-use Wikibase\Lib\Store\Sql\Terms\TermStoreDelegatingMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
@@ -318,14 +317,8 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 
 	public function getTermSearchInteractorFactory(): TermSearchInteractorFactory {
 		if ( $this->termSearchInteractorFactory === null ) {
-			$delegatingMatchingTermsLookup = new TermStoreDelegatingMatchingTermsLookup(
-				$this->getTermIndex(),
-				$this->getMatchingTermsLookup(),
-				$this->dataAccessSettings->itemSearchMigrationStage(),
-				$this->dataAccessSettings->propertySearchMigrationStage()
-			);
 			$this->termSearchInteractorFactory = new MatchingTermsSearchInteractorFactory(
-				$delegatingMatchingTermsLookup,
+				$this->getMatchingTermsLookup(),
 				$this->genericServices->getLanguageFallbackChainFactory(),
 				$this->getPrefetchingTermLookup()
 			);
