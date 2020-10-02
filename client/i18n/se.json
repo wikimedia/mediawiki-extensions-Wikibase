@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Jon Harald Søby (WMNO)"
+			"Jon Harald Søby (WMNO)",
+			"Yupik"
 		]
 	},
+	"wikibase-rc-hide-wikidata-hide": "Čiega",
 	"wikibase-otherprojects": "Eará prošeavttaide"
 }
