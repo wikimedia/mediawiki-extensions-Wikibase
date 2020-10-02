@@ -7,9 +7,7 @@ use FauxResponse;
 use NullStatsdDataFactory;
 use SpecialPageExecutor;
 use Status;
-use ValueValidators\Result;
 use WebRequest;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Diff\EntityDiffer;
@@ -21,7 +19,6 @@ use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\EditEntity\EditFilterHookRunner;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
-use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
 use Wikibase\Repo\Specials\SpecialSetLabelDescriptionAliases;
 use Wikibase\Repo\Store\EntityPermissionChecker;
@@ -106,41 +103,12 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				$maxLength,
 				self::$languageCodes,
 				$this->getIdParser(),
-				$this->getLabelDescriptionDuplicateDetector(),
 				$this->createMock( TermsCollisionDetectorFactory::class ),
 				$this->createMock( TermLookup::class ),
 				[],
 				0
 			)
 		);
-	}
-
-	/**
-	 * @return LabelDescriptionDuplicateDetector
-	 */
-	private function getLabelDescriptionDuplicateDetector() {
-		$detector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$detector->expects( $this->any() )
-			->method( 'detectLabelDescriptionConflicts' )
-			->will( $this->returnCallback( function(
-				$entityType,
-				array $labels,
-				array $descriptions,
-				EntityId $ignoreEntityId = null
-			) {
-				$errors = [];
-
-				$errors = array_merge( $errors, $this->detectDupes( $labels ) );
-				$errors = array_merge( $errors, $this->detectDupes( $descriptions ) );
-
-				$result = empty( $errors ) ? Result::newSuccess() : Result::newError( $errors );
-				return $result;
-			} ) );
-
-		return $detector;
 	}
 
 	/**

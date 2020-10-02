@@ -29,7 +29,6 @@ use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\ChangeOp\ChangeOpFactoryProvider;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
-use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
@@ -245,15 +244,10 @@ class MergeItemsTest extends \MediaWikiTestCase {
 	 * @return TermValidatorFactory
 	 */
 	private function getTermValidatorFactory() {
-		$dupeDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
-			->disableOriginalConstructor()
-			->getMock();
-
 		return new TermValidatorFactory(
 			100,
 			[ 'en', 'de', 'fr' ],
 			new ItemIdParser(),
-			$dupeDetector,
 			$this->createMock( TermsCollisionDetectorFactory::class ),
 			$this->createMock( TermLookup::class ),
 			[],

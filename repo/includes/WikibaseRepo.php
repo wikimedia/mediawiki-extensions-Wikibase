@@ -1475,7 +1475,6 @@ class WikibaseRepo {
 			$maxLength,
 			$languages,
 			$this->getEntityIdParser(),
-			$this->getLabelDescriptionDuplicateDetector(),
 			$this->getTermsCollisionDetectorFactory(),
 			$this->getTermLookup(),
 			[ 'max' => MIGRATION_NEW ],
