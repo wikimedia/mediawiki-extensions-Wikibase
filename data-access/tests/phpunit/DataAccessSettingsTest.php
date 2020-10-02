@@ -19,9 +19,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			true,
 			false,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
-			MIGRATION_OLD,
-			MIGRATION_OLD
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
@@ -36,9 +34,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			$useSearchFields,
 			$forceWriteSearchFields,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
-			MIGRATION_OLD,
-			MIGRATION_OLD
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
 
 		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
@@ -118,9 +114,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 			true,
 			false,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			$itemTermsMigrationStages,
-			MIGRATION_OLD,
-			MIGRATION_OLD
+			$itemTermsMigrationStages
 		);
 
 		$this->assertSame( $expectedReturn, $settings->useNormalizedItemTerms( $numericItemId ) );

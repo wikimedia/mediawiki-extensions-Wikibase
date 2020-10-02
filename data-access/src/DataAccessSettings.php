@@ -43,40 +43,24 @@ class DataAccessSettings {
 	private $itemTermsMigrationStages;
 
 	/**
-	 * @var int
-	 */
-	private $itemSearchMigrationStage;
-
-	/**
-	 * @var int
-	 */
-	private $propertySearchMigrationStage;
-
-	/**
 	 * @param int $maxSerializedEntitySizeInKiloBytes
 	 * @param bool $useSearchFields
 	 * @param bool $forceWriteSearchFields
 	 * @param bool $useNormalizedPropertyTerms TODO: Temporary until we get rid of wb_terms
 	 * @param array $itemTermsMigrationStages TODO: Temporary until we get rid of wb_terms
-	 * @param int $itemSearchMigrationStage TODO: Temporary until we get rid of wb_terms
-	 * @param int $propertySearchMigrationStage TODO: Temporary until we get rid of wb_terms
 	 */
 	public function __construct(
 		int $maxSerializedEntitySizeInKiloBytes,
 		bool $useSearchFields,
 		bool $forceWriteSearchFields,
 		bool $useNormalizedPropertyTerms,
-		array $itemTermsMigrationStages,
-		int $itemSearchMigrationStage = MIGRATION_OLD,
-		int $propertySearchMigrationStage = MIGRATION_OLD
+		array $itemTermsMigrationStages
 	) {
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
 		$this->useSearchFields = $useSearchFields;
 		$this->forceWriteSearchFields = $forceWriteSearchFields;
 		$this->useNormalizedPropertyTerms = $useNormalizedPropertyTerms;
 		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
-		$this->itemSearchMigrationStage = $itemSearchMigrationStage;
-		$this->propertySearchMigrationStage = $propertySearchMigrationStage;
 	}
 
 	/**
@@ -153,14 +137,6 @@ class DataAccessSettings {
 	 */
 	public function getItemTermsMigrationStages(): array {
 		return $this->itemTermsMigrationStages;
-	}
-
-	public function itemSearchMigrationStage() {
-		return $this->itemSearchMigrationStage;
-	}
-
-	public function propertySearchMigrationStage() {
-		return $this->propertySearchMigrationStage;
 	}
 
 }

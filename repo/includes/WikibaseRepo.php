@@ -2440,9 +2440,7 @@ class WikibaseRepo {
 				$this->settings->getSetting( 'useTermsTableSearchFields' ),
 				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
 				true,
-				[ 'max' => MIGRATION_NEW ],
-				MIGRATION_NEW,
-				MIGRATION_NEW
+				[ 'max' => MIGRATION_NEW ]
 			);
 		}
 		return $this->dataAccessSettings;
