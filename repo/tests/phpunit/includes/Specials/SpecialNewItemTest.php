@@ -48,7 +48,6 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 
 		// @todo This list should be stored somewhere, DRY
 		$tables = [
-			'wb_terms',
 			'wbt_type',
 			'wbt_text',
 			'wbt_text_in_lang',

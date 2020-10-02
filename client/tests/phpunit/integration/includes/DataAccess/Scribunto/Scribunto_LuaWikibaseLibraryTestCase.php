@@ -141,7 +141,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 			$this->markTestSkipped( "Skipping because a local wb_terms table"
 				. " is not available on a WikibaseClient only instance." );
 		}
-		$this->tablesUsed[] = 'wb_terms';
 
 		parent::setUp();
 

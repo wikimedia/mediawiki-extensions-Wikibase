@@ -22,7 +22,6 @@ class EditEntityFingerprintUniquenessIntegrationTest extends WikibaseApiTestCase
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->tablesUsed[] = 'wb_terms';
 		$this->tablesUsed[] = 'wbt_type';
 		$this->tablesUsed[] = 'wbt_text';
 		$this->tablesUsed[] = 'wbt_text_in_lang';

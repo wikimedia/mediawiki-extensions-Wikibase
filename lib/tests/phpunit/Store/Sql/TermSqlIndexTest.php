@@ -35,12 +35,12 @@ class TermSqlIndexTest extends \MediaWikiTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->markTestSkipped( "wb_terms is no more!" );
+
 		if ( !WikibaseSettings::isRepoEnabled() ) {
 			$this->markTestSkipped( "Skipping because a local wb_terms table"
 				. " is not available on a WikibaseClient only instance." );
 		}
-
-		$this->tablesUsed[] = 'wb_terms';
 	}
 
 	/**

@@ -36,14 +36,9 @@ trait WikibaseTablesUsed {
 	}
 
 	private function markAnyTermsStorageUsed() {
-		$this->markLegacyTermsTableUsed();
 		$this->markTableUsed( 'wbt_item_terms' );
 		$this->markTableUsed( 'wbt_property_terms' );
 		$this->markSharedTermsTablesUsed();
-	}
-
-	private function markLegacyTermsTableUsed() {
-		$this->markTableUsed( 'wb_terms' );
 	}
 
 	private function markSharedTermsTablesUsed() {
