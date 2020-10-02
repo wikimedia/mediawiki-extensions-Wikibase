@@ -9,9 +9,11 @@ use Title;
 use Wikibase\Client\Tests\Integration\DataAccess\WikibaseDataAccessTestItemSetUpHelper;
 use Wikibase\Client\Tests\Mocks\MockClientStore;
 use Wikibase\Client\WikibaseClient;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Lib\WikibaseSettings;
+use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
+use Wikimedia\TestingAccessWrapper;
 
 if ( !ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 	/**
@@ -137,11 +139,6 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	}
 
 	protected function setUp(): void {
-		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because a local wb_terms table"
-				. " is not available on a WikibaseClient only instance." );
-		}
-
 		parent::setUp();
 
 		self::doMock();
@@ -155,7 +152,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		);
 
 		$this->setContentLang( 'de' );
-		$this->primeTermsTable();
+		$this->overridePropertyLabelResolver();
 
 		// Make sure <maplink> can be used, even if Kartographer is not installed.
 		$this->addMaplinkParserTag();
@@ -174,23 +171,25 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 		self::unMock();
 	}
 
-	private function primeTermsTable() {
-		$db = wfGetDB( DB_MASTER );
-		$db->insert(
-			'wb_terms',
-			[
-				'term_full_entity_id' => 'P342',
-				'term_entity_id' => 342,
-				'term_entity_type' => 'property',
-				'term_language' => 'de',
-				'term_type' => 'label',
-				'term_text' => 'LuaTestStringProperty',
-				'term_search_key' => 'fooo'
-			]
-		);
+	private function overridePropertyLabelResolver(): void {
+		$wikibaseClient = TestingAccessWrapper::newFromObject( WikibaseClient::getDefaultInstance() );
+
+		$propertyLabelResolver = $this->createMock( PropertyLabelResolver::class );
+		$propertyLabelResolver->expects( $this->any() )
+			->method( 'getPropertyIdsForLabels' )
+			->willReturnCallback( function ( array $labels ): array {
+				if ( in_array( 'LuaTestStringProperty', $labels ) ) {
+					return [
+						'LuaTestStringProperty' => new PropertyId( 'P342' )
+					];
+				}
+				return [];
+			} );
+
+		$wikibaseClient->propertyLabelResolver = $propertyLabelResolver;
 	}
 
-	private function addMaplinkParserTag() {
+	private function addMaplinkParserTag(): void {
 		$engine = $this->getEngine();
 		if ( !in_array( 'maplink', $engine->getParser()->getTags() ) ) {
 			$engine->getParser()->setHook(
