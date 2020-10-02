@@ -32,7 +32,6 @@ use Wikibase\Lib\Store\CachingPrefetchingTermLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingPropertyTermLookup;
-use Wikibase\Lib\Store\Sql\Terms\TermStoresDelegatingPrefetchingItemTermLookup;
 use Wikibase\Lib\WikibaseContentLanguages;
 
 return [
@@ -58,12 +57,7 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function( SingleEntitySourceServices $entitySourceServices ) {
 			$termIdsResolver = $entitySourceServices->getTermInLangIdsResolver();
-
-			return new TermStoresDelegatingPrefetchingItemTermLookup(
-				$entitySourceServices->getDataAccessSettings(),
-				new PrefetchingItemTermLookup( $termIdsResolver ),
-				$entitySourceServices->getTermIndexPrefetchingTermLookup()
-			);
+			return new PrefetchingItemTermLookup( $termIdsResolver );
 		},
 	],
 	'property' => [
@@ -88,11 +82,6 @@ return [
 		},
 		Def::PREFETCHING_TERM_LOOKUP_CALLBACK => function( SingleEntitySourceServices $entitySourceServices ) {
 			global $wgSecretKey;
-
-			// Legacy wb_terms mode
-			if ( !$entitySourceServices->getDataAccessSettings()->useNormalizedPropertyTerms() ) {
-				return $entitySourceServices->getTermIndexPrefetchingTermLookup();
-			}
 
 			$mwServices = MediaWikiServices::getInstance();
 			$cacheSecret = hash( 'sha256', $wgSecretKey );
