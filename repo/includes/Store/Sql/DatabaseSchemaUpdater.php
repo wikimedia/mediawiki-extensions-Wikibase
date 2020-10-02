@@ -18,8 +18,6 @@ use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
 use Wikibase\Lib\Store\Sql\WikiPageEntityRevisionLookup;
-use Wikibase\Repo\Maintenance\PopulateTermFullEntityId;
-use Wikibase\Repo\Maintenance\RebuildTermsSearchKey;
 use Wikibase\Repo\RangeTraversable;
 use Wikibase\Repo\Store\ItemTermsRebuilder;
 use Wikibase\Repo\Store\PropertyTermsRebuilder;
@@ -75,10 +73,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 
 		$updater->addExtensionTable(
-			'wb_terms',
-			$this->getScriptPath( 'Wikibase', $db->getType() )
-		);
-		$updater->addExtensionTable(
 			'wb_id_counters',
 			$this->getScriptPath( 'wb_id_counters', $db->getType() )
 		);
@@ -87,7 +81,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			$this->getScriptPath( 'wb_items_per_site', $db->getType() )
 		);
 
-		$this->updateTermsTable( $updater, $db );
 		$this->updateItemsPerSiteTable( $updater, $db );
 		$this->updateChangesTable( $updater, $db );
 
@@ -175,6 +168,14 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				$this->getUpdateScriptPath( 'MakeIpsSitePageLarger', $db->getType() )
 			);
 		}
+
+		// creates wb_item_per_site.ips_row_id.
+		$updater->addExtensionField(
+			'wb_items_per_site',
+			'ips_row_id',
+			$this->getUpdateScriptPath( 'AddRowIDs', $db->getType() )
+		);
+
 		$updater->dropExtensionIndex(
 			'wb_items_per_site',
 			'wb_ips_site_page',
@@ -391,103 +392,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 
 		throw new MWException( "Could not find schema script '$name'" );
-	}
-
-	/**
-	 * Applies updates to the wb_terms table.
-	 *
-	 * @param DatabaseUpdater $updater
-	 * @param IDatabase $db
-	 */
-	private function updateTermsTable( DatabaseUpdater $updater, IDatabase $db ) {
-		// ---- Update from 0.1 or 0.2. ----
-		if ( !$db->fieldExists( 'wb_terms', 'term_search_key', __METHOD__ ) ) {
-			$updater->addExtensionField(
-				'wb_terms',
-				'term_search_key',
-				$this->getUpdateScriptPath( 'AddTermsSearchKey', $db->getType() )
-			);
-
-			$updater->addPostDatabaseUpdateMaintenance( RebuildTermsSearchKey::class );
-		}
-
-		// creates wb_terms.term_row_id
-		// and also wb_item_per_site.ips_row_id.
-		$updater->addExtensionField(
-			'wb_terms',
-			'term_row_id',
-			$this->getUpdateScriptPath( 'AddRowIDs', $db->getType() )
-		);
-
-		// add weight to wb_terms
-		$updater->addExtensionField(
-			'wb_terms',
-			'term_weight',
-			$this->getUpdateScriptPath( 'AddTermsWeight', $db->getType() )
-		);
-
-		// ---- Update from 0.4 ----
-
-		// NOTE: this update doesn't work on SQLite, but it's not needed there anyway.
-		if ( $db->getType() !== 'sqlite' ) {
-			// make term_row_id BIGINT
-			$updater->modifyExtensionField(
-				'wb_terms',
-				'term_row_id',
-				$this->getUpdateScriptPath( 'MakeRowIDsBig', $db->getType() )
-			);
-		}
-
-		// updated indexes
-		$updater->dropExtensionIndex(
-			'wb_terms',
-			'wb_terms_entity_type',
-			$this->getUpdateScriptPath( 'DropUnusedTermIndexes', $db->getType() )
-		);
-
-		// T159851
-		$updater->addExtensionField(
-			'wb_terms',
-			'term_full_entity_id',
-			$this->getUpdateScriptPath( 'AddTermsFullEntityId', $db->getType() )
-		);
-
-		$updater->dropExtensionIndex(
-			'wb_terms',
-			'term_search',
-			$this->getUpdateScriptPath( 'DropNotFullEntityIdTermIndexes', $db->getType() )
-		);
-
-		// T202265
-		$updater->addExtensionIndex(
-			'wb_terms',
-			'tmp1',
-			$this->getUpdateScriptPath( 'AddWbTermsTmp1Index', $db->getType() )
-		);
-
-		// T204836
-		$updater->addExtensionIndex(
-			'wb_terms',
-			'wb_terms_entity_id',
-			$this->getUpdateScriptPath( 'AddWbTermsEntityIdIndex', $db->getType() )
-		);
-
-		// T204837
-		$updater->addExtensionIndex(
-			'wb_terms',
-			'wb_terms_text',
-			$this->getUpdateScriptPath( 'AddWbTermsTextIndex', $db->getType() )
-		);
-
-		// T204838
-		$updater->addExtensionIndex(
-			'wb_terms',
-			'wb_terms_search_key',
-			$this->getUpdateScriptPath( 'AddWbTermsSearchKeyIndex', $db->getType() )
-		);
-
-		$updater->addPostDatabaseUpdateMaintenance( PopulateTermFullEntityId::class );
-		// TODO: drop old column as now longer needed (but only if all rows got the new column populated!)
 	}
 
 	/**
