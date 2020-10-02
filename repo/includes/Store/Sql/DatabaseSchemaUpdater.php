@@ -105,6 +105,8 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			] );
 		}
 
+		$updater->dropExtensionTable( 'wb_terms' );
+
 		$this->updateChangesSubscriptionTable( $updater );
 
 		$updater->dropExtensionIndex(
