@@ -308,7 +308,6 @@ class SqlStore implements Store {
 	 */
 	public function clear() {
 		$this->newSiteLinkStore()->clear();
-		$this->getTermIndex()->clear();
 	}
 
 	/**
