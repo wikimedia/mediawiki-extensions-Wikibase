@@ -33,7 +33,6 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 		parent::setUp();
 		$this->setUserLang( 'qqx' );
 		$tables = [
-			'wb_terms',
 			'wbt_type',
 			'wbt_text',
 			'wbt_text_in_lang',

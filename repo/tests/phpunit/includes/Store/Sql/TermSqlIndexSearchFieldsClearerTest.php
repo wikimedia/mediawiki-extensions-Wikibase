@@ -21,14 +21,11 @@ class TermSqlIndexSearchFieldsClearerTest extends \MediaWikiTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-
-		$this->tablesUsed[] = 'wb_terms';
-		$this->clearTermsTable();
-		$this->insertTerms();
+		$this->markTestSkipped( "wb_terms is no more!" );
 	}
 
 	private function clearTermsTable() {
-		wfGetDB( DB_MASTER )->delete( 'wb_terms', '*' );
+	 	wfGetDB( DB_MASTER )->delete( 'wb_terms', '*' );
 	}
 
 	private function insertTerms() {
@@ -67,7 +64,7 @@ class TermSqlIndexSearchFieldsClearerTest extends \MediaWikiTestCase {
 			'term_weight' => 0.1,
 		];
 
-		wfGetDB( DB_MASTER )->insert( 'wb_terms', $terms );
+		//wfGetDB( DB_MASTER )->insert( 'wb_terms', $terms );
 	}
 
 	/**
