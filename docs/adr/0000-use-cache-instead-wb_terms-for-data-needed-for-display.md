@@ -31,3 +31,25 @@ As there is no reliable benchmark in place, it is possible that the new way of d
 Increased use of memcached in Wikidata production environment might impact the performance of the caching system, e.g. in case there is huge amount of entries being added to cache because of the new approach.
 
 Use the cache is going to be to used for storing the data that is changing (edited), possible cache invalidation mechanism should be considered. This is left out for the more specific ADR document.
+
+## Appendix
+
+The `wb_terms` table has been removed in 2020.
+
+It used to look like this:
+
+```
++---------------------+---------------------+------+-----+---------+----------------+
+| Field               | Type                | Null | Key | Default | Extra          |
++---------------------+---------------------+------+-----+---------+----------------+
+| term_row_id         | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
+| term_entity_id      | int(10) unsigned    | NO   | MUL | NULL    |                |
+| term_full_entity_id | varbinary(32)       | YES  | MUL | NULL    |                |
+| term_entity_type    | varbinary(32)       | NO   |     | NULL    |                |
+| term_language       | varbinary(32)       | NO   | MUL | NULL    |                |
+| term_type           | varbinary(32)       | NO   |     | NULL    |                |
+| term_text           | varbinary(255)      | NO   | MUL | NULL    |                |
+| term_search_key     | varbinary(255)      | NO   | MUL | NULL    |                |
+| term_weight         | float unsigned      | NO   |     | 0       |                |
++---------------------+---------------------+------+-----+---------+----------------+
+```
