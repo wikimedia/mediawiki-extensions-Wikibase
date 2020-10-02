@@ -16,9 +16,7 @@ class DataAccessSettingsFactory {
 			true,
 			false,
 			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY,
-			MIGRATION_OLD,
-			MIGRATION_OLD
+			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
 		);
 	}
 
