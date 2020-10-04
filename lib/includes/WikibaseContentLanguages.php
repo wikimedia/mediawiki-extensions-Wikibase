@@ -57,6 +57,8 @@ class WikibaseContentLanguages {
 	}
 
 	public static function getDefaultTermsLanguages() {
+		// Note: this list is also the basis of getDefaultMonolingualTextLanguages(); custom
+		// (non-MediaWikiContentLanguages) terms languages also become monolingual text languages.
 		return new UnionContentLanguages(
 			new MediaWikiContentLanguages(),
 			new StaticContentLanguages(
@@ -87,7 +89,7 @@ class WikibaseContentLanguages {
 		// but will be fixed in T124758.
 		return new DifferenceContentLanguages(
 			new UnionContentLanguages(
-				new MediaWikiContentLanguages(),
+				self::getDefaultTermsLanguages(),
 				new StaticContentLanguages( [
 					// Special ISO 639-2 codes
 					'und', 'mis', 'mul', 'zxx',
