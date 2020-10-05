@@ -34,7 +34,7 @@ class FormatterCacheFactoryTest extends TestCase {
 		$cache->set( 'key', $sharedCacheType );
 
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $cache );
-		$this->assertEquals( $sharedCacheType, $cache->get( 'key', $sharedCacheType ) );
+		$this->assertEquals( $sharedCacheType, $cache->get( 'key' ) );
 	}
 
 	public function cacheTypeProvider(): array {
