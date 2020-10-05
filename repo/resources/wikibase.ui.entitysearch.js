@@ -51,12 +51,15 @@
 		 * @param {HTMLElement} input Search box node
 		 */
 		function removeSuggestionContext( input ) {
-			var context = $.data( input, 'suggestionsContext' );
+			var context = $( input ).data( 'suggestionsContext' );
 
-			if ( context ) {
+			if ( context && !context._wbDisabled ) {
 				// Native fetch() updates/re-sets the data attribute with the suggestion context.
 				context.config.fetch = function () {};
-				$.removeData( input, 'suggestionsContext' );
+				// Flag as disabled so we don't keep overwriting `fetch`, but don't
+				// delete context completely, in case there are some requests still
+				// in-flight. T105637
+				context._wbDisabled = true;
 			}
 		}
 
