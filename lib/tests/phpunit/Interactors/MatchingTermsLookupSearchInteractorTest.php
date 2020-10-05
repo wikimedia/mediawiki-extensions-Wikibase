@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Interactors;
 
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -11,7 +12,6 @@ use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\TermSearchOptions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\Tests\Store\MockMatchingTermsLookup;
@@ -79,10 +79,10 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 	/**
 	 * Get a lookup that always returns a pt label and description suffixed by the entity ID
 	 *
-	 * @return BufferingTermIndexTermLookup
+	 * @return PrefetchingTermLookup
 	 */
-	private function getMockBufferingTermLookup() {
-		$mock = $this->getMockBuilder( BufferingTermIndexTermLookup::class )
+	private function getMockPrefetchingTermLookup() {
+		$mock = $this->getMockBuilder( PrefetchingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$mock->expects( $this->any() )
@@ -177,7 +177,7 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$interactor = new MatchingTermsLookupSearchInteractor(
 			$this->getMockTermIndex(),
 			$this->getMockLanguageFallbackChainFactory(),
-			$this->getMockBufferingTermLookup(),
+			$this->getMockPrefetchingTermLookup(),
 			'pt'
 		);
 

@@ -46,7 +46,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getDataAccessSettings', DataAccessSettings::class, true ],
 			[ 'getEntitySource', EntitySource::class, true ],
 			[ 'getTermInLangIdsResolver', TermInLangIdsResolver::class, false ],
-			[ 'getTermIndexPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 		];
 	}
 

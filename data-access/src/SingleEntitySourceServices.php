@@ -17,7 +17,6 @@ use Wikibase\DataModel\Services\EntityId\EntityIdComposer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
-use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
@@ -30,7 +29,6 @@ use Wikibase\Lib\Store\Sql\Terms\DatabaseMatchingTermsLookup;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTermInLangIdsResolver;
 use Wikibase\Lib\Store\Sql\Terms\DatabaseTypeIdsStore;
 use Wikibase\Lib\Store\Sql\Terms\PrefetchingItemTermLookup;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityDataLoader;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
@@ -86,9 +84,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	private $entityRevisionLookup = null;
 
 	private $termSearchInteractorFactory = null;
-
-	private $termIndex = null;
-	private $termIndexPrefetchingTermLookup = null;
 
 	private $prefetchingTermLookup = null;
 
@@ -345,37 +340,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			$this->entityIdComposer,
 			$logger
 		);
-	}
-
-	private function getTermIndex() {
-		if ( $this->termIndex === null ) {
-			$this->termIndex = new TermSqlIndex(
-				$this->genericServices->getStringNormalizer(),
-				$this->entityIdParser,
-				$this->entitySource
-			);
-
-			$this->termIndex->setUseSearchFields( $this->dataAccessSettings->useSearchFields() );
-			$this->termIndex->setForceWriteSearchFields( $this->dataAccessSettings->forceWriteSearchFields() );
-
-		}
-
-		return $this->termIndex;
-	}
-
-	/**
-	 * @deprecated This will be removed once wb_terms related code has been removed from Wikibase
-	 * @return BufferingTermIndexTermLookup
-	 */
-	public function getTermIndexPrefetchingTermLookup() : PrefetchingTermLookup {
-		if ( $this->termIndexPrefetchingTermLookup === null ) {
-
-			$this->termIndexPrefetchingTermLookup = new BufferingTermIndexTermLookup(
-				$this->getTermIndex(), // TODO: customize buffer sizes
-				1000
-			);
-		}
-		return $this->termIndexPrefetchingTermLookup;
 	}
 
 	public function getPrefetchingTermLookup() {

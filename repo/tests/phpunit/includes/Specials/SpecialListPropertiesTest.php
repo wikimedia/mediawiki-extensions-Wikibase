@@ -5,12 +5,12 @@ namespace Wikibase\Repo\Tests\Specials;
 use Language;
 use SpecialPageTestBase;
 use Title;
+use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageNameLookup;
-use Wikibase\Lib\Store\BufferingTermIndexTermLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -55,10 +55,10 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 	}
 
 	/**
-	 * @return BufferingTermIndexTermLookup
+	 * @return PrefetchingTermLookup
 	 */
-	private function getBufferingTermLookup() {
-		$lookup = $this->getMockBuilder( BufferingTermIndexTermLookup::class )
+	private function getPrefetchingTermLookup() {
+		$lookup = $this->getMockBuilder( PrefetchingTermLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
 		$lookup->expects( $this->any() )
@@ -101,7 +101,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$this->getEntityTitleLookup(),
 			$languageNameLookup
 		);
-		$bufferingTermLookup = $this->getBufferingTermLookup();
+		$bufferingTermLookup = $this->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
 			$bufferingTermLookup,
