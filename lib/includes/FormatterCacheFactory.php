@@ -10,7 +10,6 @@ use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 
 /**
- *
  * Factory for accessing the shared cache
  *
  * @license GPL-2.0-or-later
@@ -52,38 +51,31 @@ class FormatterCacheFactory {
 	) {
 		$this->formatterCacheType = $formatterCacheType;
 		$this->logger = $logger;
-		$this->cacheSecret = $cacheSecret;
 		$this->statsdDataFactory = $statsdDataFactory;
+		$this->cacheSecret = $cacheSecret;
 	}
 
-	/**
-	 * @return CacheInterface
-	 */
 	public function getFormatterCache(): CacheInterface {
-
-		// Get the default shared cache wrapped in an in memory cache
 		$bagOStuff = ObjectCache::getInstance( $this->formatterCacheType );
 		if ( !$bagOStuff instanceof CachedBagOStuff ) {
-			$bagOStuff = new CachedBagOStuff( $bagOStuff );
+			$bagOStuff = new CachedBagOStuff( $bagOStuff ); // wrap in an in-memory cache
 		}
 
 		$cache = new SimpleCacheWithBagOStuff(
 			$bagOStuff,
-			'wikibase.repo.formatter.',
+			'wikibase.repo.formatter.', // intentionally shared between repo and client
 			$this->cacheSecret
 		);
 
 		$cache->setLogger( $this->logger );
 
-		$cache = new StatsdRecordingSimpleCache(
+		return new StatsdRecordingSimpleCache(
 			$cache,
 			$this->statsdDataFactory,
 			[
-				"miss" => 'wikibase.repo.formatterCache.miss',
-				"hit" => 'wikibase.repo.formatterCache.hit'
+				'miss' => 'wikibase.repo.formatterCache.miss',
+				'hit' => 'wikibase.repo.formatterCache.hit',
 			]
 		);
-
-		return $cache;
 	}
 }

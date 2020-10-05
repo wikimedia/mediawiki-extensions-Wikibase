@@ -2484,14 +2484,14 @@ class WikibaseRepo {
 	}
 
 	public function getFormatterCacheFactory(): FormatterCacheFactory {
+		global $wgSecretKey;
+
 		if ( $this->formatterCacheFactory === null ) {
-			global $wgSecretKey;
-			$cacheSecret = hash( 'sha256', $wgSecretKey );
 			$this->formatterCacheFactory = new FormatterCacheFactory(
 				$this->settings->getSetting( 'sharedCacheType' ),
 				$this->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				$cacheSecret
+				hash( 'sha256', $wgSecretKey )
 			);
 		}
 		return $this->formatterCacheFactory;
