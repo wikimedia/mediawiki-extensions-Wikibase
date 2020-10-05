@@ -23,12 +23,12 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 	private $statsKeys;
 
 	/**
-	 * @param CacheInterface $innner
+	 * @param CacheInterface $inner
 	 * @param StatsdDataFactoryInterface $stats
 	 * @param string[] $statsKeys
 	 */
 	public function __construct(
-		CacheInterface $innner,
+		CacheInterface $inner,
 		StatsdDataFactoryInterface $stats,
 		array $statsKeys
 	) {
@@ -42,7 +42,7 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 			'$statsKeys',
 			'$statsKeys needs to have a \'hit\' value'
 		);
-		$this->inner = $innner;
+		$this->inner = $inner;
 		$this->stats = $stats;
 		$this->statsKeys = $statsKeys;
 	}
