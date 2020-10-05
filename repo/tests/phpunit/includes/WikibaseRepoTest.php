@@ -25,7 +25,6 @@ use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\DeserializerFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
@@ -65,6 +64,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\LinkTargetEntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
+use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\StringNormalizer;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\Api\ApiHelperFactory;
@@ -715,6 +715,15 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	private function getWikibaseRepoWithCustomEntitySourceDefinitions( EntitySourceDefinitions $entitySourceDefinitions ) {
+		return new WikibaseRepo(
+			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			new DataTypeDefinitions( [] ),
+			new EntityTypeDefinitions( [] ),
+			$entitySourceDefinitions
+		);
+	}
+
 	private function getTestSettings( $settingsArray ) {
 		$settings = new SettingsArray( $settingsArray );
 		$settings->setSetting( 'localEntitySourceName', 'test' );
@@ -1092,70 +1101,48 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		return $settings;
 	}
 
-	public function testGetPropertyTermStoreWriters() {
+	public function testGetPropertyTermStoreWriter_withLocalProperties() {
 		$repo = $this->getWikibaseRepo();
-		$writers = $repo->getPropertyTermStoreWriters();
-
-		$this->assertCount( 1, $writers );
-		$this->assertArrayHasKey( 'new', $writers );
+		$writer = $repo->getPropertyTermStoreWriter();
+		$this->assertNotInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
 
-	public function testGetItemTermStoreWriters() {
+	public function testGetPropertyTermStoreWriter_withoutLocalProperties() {
+		$repo = $this->getWikibaseRepoWithCustomEntitySourceDefinitions( new EntitySourceDefinitions( [
+			new EntitySource(
+				'test',
+				false,
+				[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+				'',
+				'',
+				'',
+				''
+			),
+		], new EntityTypeDefinitions( [] ) ) );
+		$writer = $repo->getPropertyTermStoreWriter();
+		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
+	}
+
+	public function testGetItemTermStoreWriter_withLocalItems() {
 		$repo = $this->getWikibaseRepo();
-
-		$writers = $repo->getItemTermStoreWriters();
-
-		$this->assertCount( 1, $writers );
-		$this->assertArrayNotHasKey( 'old', $writers );
-		$this->assertArrayHasKey( 'new', $writers );
+		$writer = $repo->getItemTermStoreWriter();
+		$this->assertNotInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
 
-	public function provideTestGetItemTermStoreArrayForWriters() {
-		yield 'Everything Old' => [
-			[ 'max' => MIGRATION_OLD ],
-			[ 'old' => [ Int32EntityId::MAX => 'old' ], 'new' => [] ]
-		];
-		yield 'Everything New' => [
-			[ 'max' => MIGRATION_NEW ],
-			[ 'old' => [], 'new' => [ Int32EntityId::MAX => 'new' ] ]
-		];
-		yield 'Two stages' => [
-			[
-			'100' => MIGRATION_NEW,
-			'max' => MIGRATION_OLD,
-			],
-			[ 'old' => [ Int32EntityId::MAX => 'old' ], 'new' => [ '100' => 'new' ] ]
-		];
-		yield 'Four stages' => [
-			[
-			'100' => MIGRATION_NEW,
-			'1000' => MIGRATION_WRITE_NEW,
-			'10000' => MIGRATION_WRITE_BOTH,
-			'max' => MIGRATION_OLD,
-			],
-			[
-				'old' => [ '1000' => 'old', '10000' => 'old', Int32EntityId::MAX => 'old' ],
-				'new' => [ '100' => 'new', '1000' => 'new', '10000' => 'new' ]
-			]
-		];
-	}
-
-	/**
-	 * This test doesnt check the per item configuration and due to the wrapped services doing that would be a bit evil.
-	 * This only tests that we get the correct resulting writer objects.
-	 * For testing of the other logic see testGetItemTermStoreArrayForWriters
-	 *
-	 * @group Addshore
-	 *
-	 * @dataProvider provideTestGetItemTermStoreArrayForWriters
-	 */
-	public function testGetItemTermStoreArrayForWriters( $stages, $expected ) {
-		$currentSettings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$repo = $this->getWikibaseRepoWithCustomSettings( $currentSettings );
-
-		$array = $repo->getItemTermStoreArrayForWriters( $stages, 'old', 'new' );
-
-		$this->assertEquals( $expected, $array );
+	public function testGetItemTermStoreWriter_withoutLocalItems() {
+		$repo = $this->getWikibaseRepoWithCustomEntitySourceDefinitions( new EntitySourceDefinitions( [
+			new EntitySource(
+				'test',
+				false,
+				[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+				'',
+				'',
+				'',
+				''
+			),
+		], new EntityTypeDefinitions( [] ) ) );
+		$writer = $repo->getItemTermStoreWriter();
+		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
 
 	public function entitySourceBasedFederationProvider() {
