@@ -38,7 +38,6 @@ use SiteLookup;
 use SpecialPage;
 use StubObject;
 use Title;
-use UnexpectedValueException;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -59,7 +58,6 @@ use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
-use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\Property;
@@ -81,7 +79,6 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Services\Statement\GuidGenerator;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidValidator;
-use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\InternalSerialization\DeserializerFactory as InternalDeserializerFactory;
 use Wikibase\Lib\Changes\EntityChangeFactory;
@@ -110,7 +107,6 @@ use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\Modules\SettingsValueProvider;
 use Wikibase\Lib\PropertyInfoDataTypeLookup;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\ByIdDispatchingItemTermStoreWriter;
 use Wikibase\Lib\Store\CachingPropertyOrderProvider;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityContentDataCodec;
@@ -139,7 +135,6 @@ use Wikibase\Lib\Store\Sql\Terms\TermStoreWriterFactory;
 use Wikibase\Lib\Store\Sql\TypeDispatchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\WikiPageEntityMetaDataLookup;
-use Wikibase\Lib\Store\TermIndexItemTermStoreWriter;
 use Wikibase\Lib\Store\ThrowingEntityTermStoreWriter;
 use Wikibase\Lib\Store\TitleLookupBasedEntityArticleIdLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityExistenceChecker;
@@ -1813,7 +1808,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new ItemHandler(
-			$this->getItemTermStoreWriters(),
+			$this->getItemTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
@@ -1827,84 +1822,20 @@ class WikibaseRepo {
 		);
 	}
 
-	/**
-	 * @return EntityTermStoreWriter[]
-	 */
-	public function getPropertyTermStoreWriters(): array {
+	public function getPropertyTermStoreWriter(): EntityTermStoreWriter {
 		if ( !in_array( Property::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
-			return [ new ThrowingEntityTermStoreWriter() ];
+			return new ThrowingEntityTermStoreWriter();
 		}
 
-		$new = new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
-
-		return [ 'new' => $new ];
+		return new PropertyTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter() );
 	}
 
-	/**
-	 * @return EntityTermStoreWriter[]
-	 */
-	public function getItemTermStoreWriters(): array {
+	public function getItemTermStoreWriter(): EntityTermStoreWriter {
 		if ( !in_array( Item::ENTITY_TYPE, $this->getLocalEntitySource()->getEntityTypes() ) ) {
-			return [ new ThrowingEntityTermStoreWriter() ];
+			return new ThrowingEntityTermStoreWriter();
 		}
 
-		$itemTermsMigrationStages = [ 'max' => MIGRATION_NEW ];
-		$oldItemTermStore = $this->getOldItemTermStoreWriter();
-		$newItemTermStore = $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter();
-
-		$arrayForWriters = $this->getItemTermStoreArrayForWriters( $itemTermsMigrationStages, $oldItemTermStore, $newItemTermStore );
-
-		$writers = [];
-		if ( $arrayForWriters['old'] !== [] ) {
-			$writers[ 'old' ] = new ItemTermStoreWriterAdapter(
-				new ByIdDispatchingItemTermStoreWriter( $arrayForWriters['old'], false )
-			);
-		}
-		if ( $arrayForWriters['new'] !== [] ) {
-			$writers[ 'new' ] = new ItemTermStoreWriterAdapter(
-				new ByIdDispatchingItemTermStoreWriter( $arrayForWriters['new'], false )
-			);
-		}
-
-		return $writers;
-	}
-
-	/**
-	 * @param array $itemTermsMigrationStages
-	 * @param mixed|ItemTermStoreWriter $oldItemTermStore
-	 * @param mixed|ItemTermStoreWriter $newItemTermStore
-	 * @return array
-	 */
-	public function getItemTermStoreArrayForWriters( $itemTermsMigrationStages, $oldItemTermStore, $newItemTermStore ): array {
-		$oldStores = [];
-		$newStores = [];
-
-		foreach ( $itemTermsMigrationStages as $maxId => $migrationStage ) {
-			if ( $maxId === 'max' ) {
-				$maxId = Int32EntityId::MAX;
-			} elseif ( !is_int( $maxId ) ) {
-				throw new Exception( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
-			}
-			switch ( $migrationStage ) {
-				case MIGRATION_OLD:
-					$oldStores[ $maxId ] = $oldItemTermStore;
-					break;
-				case MIGRATION_WRITE_NEW:
-				case MIGRATION_WRITE_BOTH:
-					$oldStores[ $maxId ] = $oldItemTermStore;
-					$newStores[ $maxId ] = $newItemTermStore;
-					break;
-				case MIGRATION_NEW:
-					$newStores[ $maxId ] = $newItemTermStore;
-					break;
-				default:
-					throw new UnexpectedValueException(
-						'Unknown migration stage: ' . $migrationStage
-					);
-			}
-		}
-
-		return [ 'old' => $oldStores, 'new' => $newStores ];
+		return new ItemTermStoreWriterAdapter( $this->getNewTermStoreWriterFactory()->newItemTermStoreWriter() );
 	}
 
 	public function getNewTermStoreWriterFactory(): TermStoreWriterFactory {
@@ -1916,13 +1847,6 @@ class WikibaseRepo {
 			JobQueueGroup::singleton(),
 			$this->getLogger()
 		);
-	}
-
-	/**
-	 * @return ItemTermStoreWriter for the OLD term storage schema (wb_terms)
-	 */
-	private function getOldItemTermStoreWriter(): ItemTermStoreWriter {
-		return new TermIndexItemTermStoreWriter( $this->getStore()->getTermIndex() );
 	}
 
 	/**
@@ -1948,7 +1872,7 @@ class WikibaseRepo {
 		$legacyFormatDetector = $this->getLegacyFormatDetectorCallback();
 
 		return new PropertyHandler(
-			$this->getPropertyTermStoreWriters(),
+			$this->getPropertyTermStoreWriter(),
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
