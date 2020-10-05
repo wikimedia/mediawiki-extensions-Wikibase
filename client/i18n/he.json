@@ -68,7 +68,7 @@
 	"wikibase-replicationnote": "יש לשים לב שייתכן שייקח מספר דקות עד שהשינויים יוצגו בכל אתרי הוויקי.",
 	"wikibase-watchlist-show-changes-pref": "הצגת עריכות שנעשו ב{{GRAMMAR:תחילית|{{WBREPONAME}}}} ברשימת המעקב",
 	"wikibase-error-deserialize-error": "הוצאת נתונים מהסדרה לא עבדה.",
-	"wikibase-error-serialize-error": "כשל בהכנת נתונים לשמירה",
+	"wikibase-error-serialize-error": "הסדרת הנתונים נכשלה.",
 	"wikibase-error-invalid-entity-id": "המזהה \"$2\" אינו ידוע למערכת. נא להשתמש במזהה ישות תקין.",
 	"wikibase-error-exceeded-entity-access-limit": "נעשתה גישה ליותר מדי ישויות {{WBREPONAME}}.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "יותר מדי קריאות ל־\"mw.wikibase.getReferencedEntityId\", המספר המרבי המותר הוא {{PLURAL:$2|קריאה אחת|$2 קריאות}}.",

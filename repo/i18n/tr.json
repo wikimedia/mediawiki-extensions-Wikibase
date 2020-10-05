@@ -483,9 +483,13 @@
 	"wikibase-federated-properties-leaving-site-notice-notice": "Bu, federe bir özelliktir. Ayrıntılarını görüntülemek için $1 yönlendirileceksiniz.",
 	"wikibase-federated-properties-leaving-site-notice-header": "Yerel Wikibase'e ayrılıyor",
 	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Bana bu mesajı bir daha gösterme",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Tekrar dene",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle bu ifadeyi düzenleyemezsiniz.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Düzenleme başarısız oldu",
 	"special-setaliases-parameterized": "$1 takma adlarına bakın",
 	"special-setlabel-parameterized": "$1 etiketine bakın",
 	"special-setdescription-parameterized": "$1 açıklamasına bakın",
 	"special-setlabeldescriptionaliases-parameterized": "$1 etiketini, açıklamayı ve takma adlarına bakın",
-	"wikibase-federated-properties-local-property-api-error-message": "Birleşik özellikler etkinken bu API'yi kullanan özelliklerle etkileşim kuramazsınız"
+	"wikibase-federated-properties-local-property-api-error-message": "Birleşik özellikler etkinken bu API'yi kullanan özelliklerle etkileşim kuramazsınız",
+	"wikibase-federated-properties-failed-request-api-error-message": "Federasyon kaynak vikisine yapılan başarısız bir istek nedeniyle istek başarısız oldu."
 }
