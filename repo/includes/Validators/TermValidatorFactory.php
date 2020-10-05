@@ -11,7 +11,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
-use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 
 /**
@@ -38,11 +37,6 @@ class TermValidatorFactory {
 	private $idParser;
 
 	/**
-	 * @var LabelDescriptionDuplicateDetector
-	 */
-	private $duplicateDetector;
-
-	/**
 	 * @var TermsCollisionDetectorFactory
 	 */
 	private $termsCollisionDetectorFactory;
@@ -62,7 +56,6 @@ class TermValidatorFactory {
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
-	 * @param LabelDescriptionDuplicateDetector $duplicateDetector
 	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
 	 * @param TermLookup $termLookup
 	 * @param array $itemTermsMigrationStages
@@ -74,7 +67,6 @@ class TermValidatorFactory {
 		$maxLength,
 		array $languageCodes,
 		EntityIdParser $idParser,
-		LabelDescriptionDuplicateDetector $duplicateDetector,
 		TermsCollisionDetectorFactory $termsCollisionDetectorFactory,
 		TermLookup $termLookup,
 		array $itemTermsMigrationStages,
@@ -87,7 +79,6 @@ class TermValidatorFactory {
 		$this->maxLength = $maxLength;
 		$this->languageCodes = $languageCodes;
 		$this->idParser = $idParser;
-		$this->duplicateDetector = $duplicateDetector;
 		$this->termsCollisionDetectorFactory = $termsCollisionDetectorFactory;
 		$this->termLookup = $termLookup;
 		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
@@ -155,10 +146,6 @@ class TermValidatorFactory {
 
 					if ( $entityNumericId > $maxId ) {
 						continue;
-					}
-
-					if ( $migrationStage < MIGRATION_WRITE_NEW ) {
-						$itemValidators[] = new LabelDescriptionUniquenessValidator( $this->duplicateDetector );
 					}
 
 					break;

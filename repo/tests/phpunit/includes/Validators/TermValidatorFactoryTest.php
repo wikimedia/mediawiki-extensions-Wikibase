@@ -12,7 +12,6 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Tests\ChangeOp\ChangeOpTestMockProvider;
 use Wikibase\Repo\Validators\ByIdFingerprintUniquenessValidator;
 use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -54,13 +53,10 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 	 * @return TermValidatorFactory
 	 */
 	private function newFactory( $maxLength = self::MAX_LENGTH, array $languageCodes = [] ) {
-		$mockProvider = new ChangeOpTestMockProvider( $this );
-
 		return new TermValidatorFactory(
 			$maxLength,
 			$languageCodes,
 			new BasicEntityIdParser(),
-			$mockProvider->getMockLabelDescriptionDuplicateDetector(),
 			$this->createMock( TermsCollisionDetectorFactory::class ),
 			$this->createMock( TermLookup::class ),
 			[],
