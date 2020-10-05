@@ -3,6 +3,7 @@
 namespace Wikibase\DataAccess\Tests;
 
 use Wikibase\DataAccess\DataAccessSettings;
+use Wikibase\DataModel\Entity\Int32EntityId;
 
 /**
  * @covers \Wikibase\DataAccess\DataAccessSettings
@@ -17,9 +18,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 		$settings = new DataAccessSettings(
 			1,
 			true,
-			false,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			false
 		);
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
@@ -32,9 +31,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 		$settings = new DataAccessSettings(
 			1,
 			$useSearchFields,
-			$forceWriteSearchFields,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			$forceWriteSearchFields
 		);
 
 		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
@@ -50,74 +47,25 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 		];
 	}
 
-	/**
-	 * @dataProvider provideBoolean
-	 */
-	public function testNormalizedPropertyTerms( $useNormalizedPropertyTerms ) {
+	public function testNormalizedPropertyTerms() {
 		$settings = new DataAccessSettings(
 			1,
 			true,
-			false,
-			$useNormalizedPropertyTerms,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			false
 		);
 
-		$this->assertSame( $useNormalizedPropertyTerms, $settings->useNormalizedPropertyTerms() );
+		$this->assertTrue( $settings->useNormalizedPropertyTerms() );
 	}
 
-	public function provideBoolean() {
-		return [ [ false ], [ true ] ];
-	}
-
-	public function provideUseNormalizedItemTermsTest() {
-		$itemTermsMigrationStages = [
-			2 => MIGRATION_NEW,
-			4 => MIGRATION_WRITE_NEW,
-			6 => MIGRATION_WRITE_BOTH,
-			'max' => MIGRATION_OLD
-		];
-
-		return [
-
-			'item id falls in MIGRATION_NEW stage' => [
-				'itemTermsMigrationStages' => $itemTermsMigrationStages,
-				'numericItemId' => 1,
-				'expectedReturn' => true
-			],
-
-			'item id falls in MIGRATION_WRITE_NEW stage' => [
-				'itemTermsMigrationStages' => $itemTermsMigrationStages,
-				'numericItemId' => 3,
-				'expectedReturn' => true
-			],
-
-			'item id falls in MIGRATION_WRITE_BOTH stage' => [
-				'itemTermsMigrationStages' => $itemTermsMigrationStages,
-				'numericItemId' => 5,
-				'expectedReturn' => false
-			],
-
-			'item id falls in MIGRATION_OLD stage' => [
-				'itemTermsMigrationStages' => $itemTermsMigrationStages,
-				'numericItemId' => 7,
-				'expectedReturn' => false
-			]
-		];
-	}
-
-	/**
-	 * @dataProvider provideUseNormalizedItemTermsTest
-	 */
-	public function testUseNormalizedItemTerms( $itemTermsMigrationStages, $numericItemId, $expectedReturn ) {
+	public function testUseNormalizedItemTerms() {
 		$settings = new DataAccessSettings(
 			1,
 			true,
-			false,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			$itemTermsMigrationStages
+			false
 		);
 
-		$this->assertSame( $expectedReturn, $settings->useNormalizedItemTerms( $numericItemId ) );
+		$this->assertTrue( $settings->useNormalizedItemTerms( 1 ) );
+		$this->assertTrue( $settings->useNormalizedItemTerms( Int32EntityId::MAX ) );
 	}
 
 }

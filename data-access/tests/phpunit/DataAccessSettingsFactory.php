@@ -14,9 +14,7 @@ class DataAccessSettingsFactory {
 		return new DataAccessSettings(
 			100,
 			true,
-			false,
-			DataAccessSettings::PROPERTY_TERMS_UNNORMALIZED,
-			DataAccessSettings::ITEM_TERMS_UNNORMALIZED_STAGE_ONLY
+			false
 		);
 	}
 
