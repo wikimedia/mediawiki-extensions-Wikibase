@@ -27,77 +27,71 @@ class MwHttpRequestToResponseInterfaceAdapter implements ResponseInterface {
 		$this->mwHttpRequest = $mwHttpRequest;
 	}
 
-	public function getProtocolVersion() {
+	public function getProtocolVersion(): void {
 		// This is not accessible via MWHttpRequest, but it is set in its protected `respVersion` property.
 		// If this is ever needed, it can get exposed in MWHttpRequest.
 		throw new LogicException( __METHOD__ . ' is not implemented' );
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withProtocolVersion( $version ) {
+	public function withProtocolVersion( $version ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	public function getHeaders() {
+	public function getHeaders(): array {
 		return $this->mwHttpRequest->getResponseHeaders();
 	}
 
-	public function hasHeader( $name ) {
+	public function hasHeader( $name ): bool {
 		return isset( $this->mwHttpRequest->getResponseHeaders()[$name] );
 	}
 
-	public function getHeader( $name ) {
+	public function getHeader( $name ): array {
 		return $this->hasHeader( $name ) ? $this->mwHttpRequest->getResponseHeaders()[$name] : [];
 	}
 
-	public function getHeaderLine( $name ) {
+	public function getHeaderLine( $name ): string {
 		return $this->hasHeader( $name )
 			? implode( ',', $this->mwHttpRequest->getResponseHeaders()[$name] )
 			: '';
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withHeader( $name, $value ) {
+	public function withHeader( $name, $value ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withAddedHeader( $name, $value ) {
+	public function withAddedHeader( $name, $value ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withoutHeader( $name ) {
+	public function withoutHeader( $name ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	public function getBody() {
+	public function getBody(): StreamInterface {
 		return stream_for( $this->mwHttpRequest->getContent() );
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withBody( StreamInterface $body ) {
+	public function withBody( StreamInterface $body ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	public function getStatusCode() {
+	public function getStatusCode(): int {
 		return $this->mwHttpRequest->getStatus();
 	}
 
-	// @phan-suppress-next-line PhanTypeMissingReturn
-	public function withStatus( $code, $reasonPhrase = '' ) {
+	public function withStatus( $code, $reasonPhrase = '' ): void {
 		$this->throwExceptionForBuilderMethod( __METHOD__ );
 	}
 
-	public function getReasonPhrase() {
+	public function getReasonPhrase(): string {
 		return ''; // not exposed through MWHttpRequest, unlikely to ever be useful
 	}
 
-	private function throwExceptionForBuilderMethod( string $method ) {
+	private function throwExceptionForBuilderMethod( string $method ): void {
 		throw new LogicException( "Builder method $method is not supported." );
 	}
 
-	private function validateHasResponse( MWHttpRequest $mwHttpRequest ) {
+	private function validateHasResponse( MWHttpRequest $mwHttpRequest ): void {
 		// MWHttpRequest objects contain request information, but also contain response information after calling `execute`.
 		// The best way of determining whether a MWHttpRequest contains response information is to check whether its headers list is empty.
 		if ( empty( $mwHttpRequest->getResponseHeaders() ) ) {
