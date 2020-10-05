@@ -2437,9 +2437,7 @@ class WikibaseRepo {
 			$this->dataAccessSettings = new DataAccessSettings(
 				$this->settings->getSetting( 'maxSerializedEntitySize' ),
 				$this->settings->getSetting( 'useTermsTableSearchFields' ),
-				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' ),
-				true,
-				[ 'max' => MIGRATION_NEW ]
+				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
 			);
 		}
 		return $this->dataAccessSettings;
