@@ -223,8 +223,8 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 1, 1, 'precision' );
 
 		$html = $formatter->format( $value );
-		$this->assertEquals( 1, substr_count( $html, '>precision<' ), 'precision' );
-		$this->assertEquals( 2, substr_count( $html, '>1<' ), 'before' );
+		$this->assertSame( 1, substr_count( $html, '>precision<' ), 'precision' );
+		$this->assertSame( 2, substr_count( $html, '>1<' ), 'before' );
 	}
 
 	public function testGivenValidTimeValueWithInvalidBeforeAndAfter_formatEchoesTimeValueFields() {
@@ -232,9 +232,9 @@ class TimeDetailsFormatterTest extends \PHPUnit\Framework\TestCase {
 		$value = $this->getTimeValue( '+2001-01-01T00:00:00Z', 0, 'before', 'after', TimeValue::PRECISION_DAY );
 
 		$html = $formatter->format( $value );
-		$this->assertEquals( 1, substr_count( $html, '>11<' ), 'precision' );
-		$this->assertEquals( 1, substr_count( $html, '>before<' ), 'before' );
-		$this->assertEquals( 1, substr_count( $html, '>after<' ), 'after' );
+		$this->assertSame( 1, substr_count( $html, '>11<' ), 'precision' );
+		$this->assertSame( 1, substr_count( $html, '>before<' ), 'before' );
+		$this->assertSame( 1, substr_count( $html, '>after<' ), 'after' );
 	}
 
 }

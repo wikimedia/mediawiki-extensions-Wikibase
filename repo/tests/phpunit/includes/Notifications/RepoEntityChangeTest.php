@@ -58,19 +58,19 @@ class RepoEntityChangeTest extends ChangeRowTest {
 		$entityChange = $this->newEntityChange( new ItemId( 'Q7' ) );
 		$entityChange->setMetadataFromRC( $rc, 8 );
 
-		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
-		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
-		$this->assertEquals( 'Q7', $entityChange->getObjectId(), 'object_id' );
-		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
-		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
+		$this->assertSame( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
+		$this->assertSame( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+		$this->assertSame( 'Q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertSame( $timestamp, $entityChange->getTime(), 'timestamp' );
+		$this->assertSame( 'Test!', $entityChange->getComment(), 'comment' );
 
 		$metadata = $entityChange->getMetadata();
-		$this->assertEquals( 8, $metadata['central_user_id'], 'central_user_id' );
-		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
-		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
-		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
-		$this->assertEquals( 1, $metadata['bot'], 'bot' );
-		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+		$this->assertSame( 8, $metadata['central_user_id'], 'central_user_id' );
+		$this->assertSame( 3, $metadata['parent_id'], 'parent_id' );
+		$this->assertSame( 6, $metadata['page_id'], 'page_id' );
+		$this->assertSame( 5, $metadata['rev_id'], 'rev_id' );
+		$this->assertSame( 1, $metadata['bot'], 'bot' );
+		$this->assertSame( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
 	public function testSetRevisionInfo() {
@@ -94,18 +94,18 @@ class RepoEntityChangeTest extends ChangeRowTest {
 
 		$entityChange->setRevisionInfo( $revRecord, 8 );
 
-		$this->assertEquals( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
-		$this->assertEquals( 7, $entityChange->getField( 'user_id' ), 'user_id' );
-		$this->assertEquals( 'Q7', $entityChange->getObjectId(), 'object_id' );
-		$this->assertEquals( $timestamp, $entityChange->getTime(), 'timestamp' );
-		$this->assertEquals( 'Test!', $entityChange->getComment(), 'comment' );
+		$this->assertSame( 5, $entityChange->getField( 'revision_id' ), 'revision_id' );
+		$this->assertSame( 7, $entityChange->getField( 'user_id' ), 'user_id' );
+		$this->assertSame( 'Q7', $entityChange->getObjectId(), 'object_id' );
+		$this->assertSame( $timestamp, $entityChange->getTime(), 'timestamp' );
+		$this->assertSame( 'Test!', $entityChange->getComment(), 'comment' );
 
 		$metadata = $entityChange->getMetadata();
-		$this->assertEquals( 8, $metadata['central_user_id'], 'central_user_id' );
-		$this->assertEquals( 3, $metadata['parent_id'], 'parent_id' );
-		$this->assertEquals( 6, $metadata['page_id'], 'page_id' );
-		$this->assertEquals( 5, $metadata['rev_id'], 'rev_id' );
-		$this->assertEquals( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
+		$this->assertSame( 8, $metadata['central_user_id'], 'central_user_id' );
+		$this->assertSame( 3, $metadata['parent_id'], 'parent_id' );
+		$this->assertSame( 6, $metadata['page_id'], 'page_id' );
+		$this->assertSame( 5, $metadata['rev_id'], 'rev_id' );
+		$this->assertSame( 'Mr. Kittens', $metadata['user_text'], 'user_text' );
 	}
 
 	public function testSetTimestamp() {
@@ -116,6 +116,6 @@ class RepoEntityChangeTest extends ChangeRowTest {
 
 		$timestamp = '20140523' . '174422';
 		$change->setTimestamp( $timestamp );
-		$this->assertEquals( $timestamp, $change->getTime() );
+		$this->assertSame( $timestamp, $change->getTime() );
 	}
 }

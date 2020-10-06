@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\Notifications;
 
 use Wikibase\Lib\Changes\ItemChangeTrait;

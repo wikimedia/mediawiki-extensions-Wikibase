@@ -176,8 +176,8 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		$changeHandler = $this->getChangeHandler();
 		$changeHandler->handleChanges( $changes );
 
-		$this->assertEquals( count( $changes ), $spy->handleChangeCallCount );
-		$this->assertEquals( 1, $spy->handleChangesCallCount );
+		$this->assertSame( count( $changes ), $spy->handleChangeCallCount );
+		$this->assertSame( 1, $spy->handleChangesCallCount );
 	}
 
 	/**
@@ -501,7 +501,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 		foreach ( $expected as $k => $exp ) {
 			$up = $updates[$k];
-			$this->assertEquals( array_keys( $exp ), array_keys( $up ), $k );
+			$this->assertSame( array_keys( $exp ), array_keys( $up ), $k );
 		}
 	}
 
@@ -618,7 +618,7 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 			if ( $k !== 'scheduleRefreshLinks' ) {
 				$this->assertSame( '20171122040506', $act['rootJobTimestamp'], "$k/rootJobTimestamp" );
 			}
-			$this->assertEquals( $exp['rootJobSignature'], $act['rootJobSignature'], "$k/rootJobSignature" );
+			$this->assertSame( $exp['rootJobSignature'], $act['rootJobSignature'], "$k/rootJobSignature" );
 		}
 	}
 

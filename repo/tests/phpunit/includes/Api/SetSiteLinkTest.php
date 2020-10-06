@@ -473,7 +473,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 
 		$siteLink = $siteLinks[$linkSite];
 
-		$this->assertEquals( $linkSite, $siteLink['site'],
+		$this->assertSame( $linkSite, $siteLink['site'],
 			"Returned incorrect site"
 		);
 
@@ -481,7 +481,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$expectedSiteLink = $expected['value'][$linkSite];
 
 			$this->assertArrayHasKey( 'url', $siteLink );
-			$this->assertEquals( $expectedSiteLink['title'], $siteLink['title'],
+			$this->assertSame( $expectedSiteLink['title'], $siteLink['title'],
 				"Returned incorrect title"
 			);
 
@@ -496,7 +496,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 		// -- check any warnings ----------------------------------------------
 		if ( array_key_exists( 'warning', $expected ) ) {
 			$this->assertArrayHasKey( 'warnings', $result, "Missing 'warnings' section in response." );
-			$this->assertEquals( $expected['warning'], $result['warnings']['messages']['0']['name'] );
+			$this->assertSame( $expected['warning'], $result['warnings']['messages']['0']['name'] );
 			$this->assertArrayHasKey( 'html', $result['warnings']['messages'] );
 		}
 
@@ -605,7 +605,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 	}
 
 	public function testUserCannotSetSiteLinkWhenTheyLackPermission() {
@@ -655,7 +655,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( 'Another Cool Page', $result['entity']['sitelinks']['enwiki']['title'] );
 	}
 

@@ -325,7 +325,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 	}
 
 	public function testUserCannotSetAliasesWhenTheyLackPermission() {
@@ -378,7 +378,7 @@ class SetAliasesTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( 'an alias', $result['entity']['aliases']['en'][0]['value'] );
 	}
 

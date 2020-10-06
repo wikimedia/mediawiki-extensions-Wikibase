@@ -385,14 +385,14 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 	private function getValidatorMock() {
 		/** @var MockObject|ValueValidator $validatorMock */
 		$validatorMock = $this->createMock( ValueValidator::class );
-		$validatorMock->method( 'validate' )->will(
-			$this->returnCallback(
-				function ( $value ) {
+		$validatorMock->method( 'validate' )->willReturnCallback(
+			function ( $value ) {
 				if ( $value === 'TOO_LONG_ERROR' ) {
 					return Result::newError( [ Error::newError( 'This is the too long error', null, 'too-long' ) ] );
 				}
 				return Result::newSuccess();
-			 } ) );
+			}
+		);
 
 		return $validatorMock;
 	}
