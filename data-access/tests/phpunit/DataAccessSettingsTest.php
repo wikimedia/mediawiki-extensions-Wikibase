@@ -16,42 +16,15 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testConvertsMaxSerializedEntitySizeFromKiloBytesToBytes() {
 		$settings = new DataAccessSettings(
-			1,
-			true,
-			false
+			1
 		);
 
 		$this->assertEquals( 1024, $settings->maxSerializedEntitySizeInBytes() );
 	}
 
-	/**
-	 * @dataProvider provideTwoBooleans
-	 */
-	public function testSearchFieldsGetters( $useSearchFields, $forceWriteSearchFields ) {
-		$settings = new DataAccessSettings(
-			1,
-			$useSearchFields,
-			$forceWriteSearchFields
-		);
-
-		$this->assertSame( $useSearchFields, $settings->useSearchFields() );
-		$this->assertSame( $forceWriteSearchFields, $settings->forceWriteSearchFields() );
-	}
-
-	public function provideTwoBooleans() {
-		return [
-			[ false, false ],
-			[ false, true ],
-			[ true, false ],
-			[ true, true ],
-		];
-	}
-
 	public function testNormalizedPropertyTerms() {
 		$settings = new DataAccessSettings(
-			1,
-			true,
-			false
+			1
 		);
 
 		$this->assertTrue( $settings->useNormalizedPropertyTerms() );
@@ -59,9 +32,7 @@ class DataAccessSettingsTest extends \PHPUnit\Framework\TestCase {
 
 	public function testUseNormalizedItemTerms() {
 		$settings = new DataAccessSettings(
-			1,
-			true,
-			false
+			1
 		);
 
 		$this->assertTrue( $settings->useNormalizedItemTerms( 1 ) );

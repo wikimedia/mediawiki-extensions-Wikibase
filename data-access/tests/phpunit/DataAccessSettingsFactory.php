@@ -12,9 +12,7 @@ class DataAccessSettingsFactory {
 
 	public static function anySettings(): DataAccessSettings {
 		return new DataAccessSettings(
-			100,
-			true,
-			false
+			100
 		);
 	}
 

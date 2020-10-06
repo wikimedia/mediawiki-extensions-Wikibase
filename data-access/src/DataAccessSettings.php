@@ -14,29 +14,10 @@ class DataAccessSettings {
 	 */
 	private $maxSerializedEntitySizeInBytes;
 
-	/**
-	 * @var bool
-	 */
-	private $useSearchFields;
-
-	/**
-	 * @var bool
-	 */
-	private $forceWriteSearchFields;
-
-	/**
-	 * @param int $maxSerializedEntitySizeInKiloBytes
-	 * @param bool $useSearchFields
-	 * @param bool $forceWriteSearchFields
-	 */
 	public function __construct(
-		int $maxSerializedEntitySizeInKiloBytes,
-		bool $useSearchFields,
-		bool $forceWriteSearchFields
+		int $maxSerializedEntitySizeInKiloBytes
 	) {
 		$this->maxSerializedEntitySizeInBytes = $maxSerializedEntitySizeInKiloBytes * 1024;
-		$this->useSearchFields = $useSearchFields;
-		$this->forceWriteSearchFields = $forceWriteSearchFields;
 	}
 
 	/**
@@ -44,20 +25,6 @@ class DataAccessSettings {
 	 */
 	public function maxSerializedEntitySizeInBytes() {
 		return $this->maxSerializedEntitySizeInBytes;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function useSearchFields() {
-		return $this->useSearchFields;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function forceWriteSearchFields() {
-		return $this->forceWriteSearchFields;
 	}
 
 	/**
