@@ -1504,10 +1504,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityConstraintProvider() {
 		return new EntityConstraintProvider(
-			$this->getLabelDescriptionDuplicateDetector(),
-			$this->getStore()->getSiteLinkConflictLookup(),
-			[ 'max' => MIGRATION_NEW ],
-			MIGRATION_NEW
+			$this->getStore()->getSiteLinkConflictLookup()
 		);
 	}
 
