@@ -10,14 +10,11 @@ use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LegacyEntityTermStoreReader;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\TermIndex;
 
 /**
  * Store interface. All interaction with store Wikibase does on top
@@ -49,40 +46,6 @@ interface Store {
 	 * Removes all data from the store.
 	 */
 	public function clear();
-
-	/**
-	 * Use of this method indicates cases that should be migrated away from the expectation
-	 * that all of this functionality is provided by a single class. Or that said thing needs
-	 * to select one of the more specific services mentioned in the deprecated message.
-	 *
-	 * @deprecated Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter directly.
-	 *
-	 * @return TermIndex
-	 */
-	public function getTermIndex();
-
-	/**
-	 * Use of this method represents cases that still need to be migrated away from
-	 * using the legacy terms storage.
-	 *
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An exact alternative MAY NOT be available.
-	 *
-	 * @return LegacyEntityTermStoreReader
-	 */
-	public function getLegacyEntityTermStoreReader();
-
-	/**
-	 * This method will result in having 0 calls post migration as the service used
-	 * to write to the term store changes in WikibaseRepo::getItemTermStoreWriter
-	 * and WikibaseRepo::getPropertyTermStoreWriter
-	 *
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An alternative will be available
-	 *
-	 * @return EntityTermStoreWriter
-	 */
-	public function getLegacyEntityTermStoreWriter();
 
 	/**
 	 * @return ItemsWithoutSitelinksFinder

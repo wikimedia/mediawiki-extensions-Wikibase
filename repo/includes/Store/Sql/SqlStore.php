@@ -26,9 +26,6 @@ use Wikibase\Lib\Store\EntityRevisionCache;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LabelConflictFinder;
-use Wikibase\Lib\Store\LegacyEntityTermStoreReader;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
@@ -39,11 +36,8 @@ use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
 use Wikibase\Lib\Store\Sql\SiteLinkTable;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
-use Wikibase\Lib\Store\Sql\TermSqlIndex;
-use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Store\TypeDispatchingEntityRevisionLookup;
 use Wikibase\Lib\Store\TypeDispatchingEntityStore;
-use Wikibase\Lib\StringNormalizer;
 use Wikibase\Repo\Store\DispatchingEntityStoreWatcher;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -117,11 +111,6 @@ class SqlStore implements Store {
 	private $propertyInfoTable = null;
 
 	/**
-	 * @var TermIndex|LabelConflictFinder|null
-	 */
-	private $termIndex = null;
-
-	/**
 	 * @var PrefetchingWikiPageEntityMetaDataAccessor|null
 	 */
 	private $entityPrefetcher = null;
@@ -171,19 +160,7 @@ class SqlStore implements Store {
 	 */
 	private $idGenerator;
 
-	/**
-	 * @var bool
-	 */
-	private $useSearchFields;
-
-	/**
-	 * @var bool
-	 */
-	private $forceWriteSearchFields;
-
 	private $entitySource;
-
-	private $dataAccessSettings;
 
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
@@ -224,70 +201,6 @@ class SqlStore implements Store {
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->useSearchFields = true;
-		$this->forceWriteSearchFields = false;
-		$this->dataAccessSettings = $repo->getDataAccessSettings();
-	}
-
-	/**
-	 * @see Store::getTermIndex
-	 *
-	 * If you need a TermIndex implementation for a EntityHandler, when the entity handler
-	 * doesn't do anything with the TermIndex please use a NulLTermIndex.
-	 *
-	 * @deprecated Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter directly.
-	 *
-	 * @return TermSqlIndex
-	 */
-	public function getTermIndex() {
-		if ( !$this->termIndex ) {
-			$this->termIndex = $this->newTermIndex();
-		}
-
-		return $this->termIndex;
-	}
-
-	/**
-	 * @see Store::getLegacyEntityTermStoreReader
-	 *
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An exact alternative MAY NOT be available.
-	 *
-	 * @return LegacyEntityTermStoreReader
-	 */
-	public function getLegacyEntityTermStoreReader() {
-		return $this->getTermIndex();
-	}
-
-	/**
-	 * @see Store::getLegacyEntityTermStoreWriter
-	 *
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An alternative will be available
-	 *
-	 * @return EntityTermStoreWriter
-	 */
-	public function getLegacyEntityTermStoreWriter() {
-		return $this->getTermIndex();
-	}
-
-	/**
-	 * @return TermSqlIndex
-	 */
-	private function newTermIndex() {
-		//TODO: Get $stringNormalizer from WikibaseRepo?
-		//      Can't really pass this via the constructor...
-		// TODO: why this creating its own instance? It probably should have the "multi repository/source" one?
-		$stringNormalizer = new StringNormalizer();
-		$termSqlIndex = new TermSqlIndex(
-			$stringNormalizer,
-			$this->entityIdParser,
-			$this->entitySource
-		);
-		$termSqlIndex->setUseSearchFields( $this->useSearchFields );
-		$termSqlIndex->setForceWriteSearchFields( $this->forceWriteSearchFields );
-
-		return $termSqlIndex;
 	}
 
 	/**
