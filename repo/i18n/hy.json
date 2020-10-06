@@ -40,5 +40,6 @@
 	"wikibase-newitem-fieldset": "Ստեղծել նոր տարր",
 	"wikibase-newentity-language": "Լեզու.",
 	"special-mergeitems": "Միացնել երկու տարր",
+	"wikibase-entity-save-error-heading": "Ինչ-որ սխալ է տեղի ունեցել",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Չեղարկել"
 }
