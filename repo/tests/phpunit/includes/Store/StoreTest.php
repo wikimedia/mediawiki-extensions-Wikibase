@@ -7,7 +7,6 @@ use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Lib\Changes\ChangeStore;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\TermIndex;
@@ -72,13 +71,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testNewTermCache( Store $store ) {
 		$this->assertInstanceOf( TermIndex::class, $store->getTermIndex() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetLabelConflictFinder( Store $store ) {
-		$this->assertInstanceOf( LabelConflictFinder::class, $store->getLabelConflictFinder() );
 	}
 
 	/**

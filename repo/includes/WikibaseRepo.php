@@ -1516,13 +1516,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return LabelDescriptionDuplicateDetector
-	 */
-	private function getLabelDescriptionDuplicateDetector() {
-		return new LabelDescriptionDuplicateDetector( $this->getStore()->getLabelConflictFinder() );
-	}
-
-	/**
 	 * @return SiteLookup
 	 */
 	public function getSiteLookup() {
