@@ -385,7 +385,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 		$this->assertArrayHasKey( 'redirected', $result );
 
 		if ( $redirect ) {
-			$this->assertEquals( 1, $result['redirected'] );
+			$this->assertSame( 1, $result['redirected'] );
 		} else {
 			$this->assertSame( 0, $result['redirected'] );
 		}

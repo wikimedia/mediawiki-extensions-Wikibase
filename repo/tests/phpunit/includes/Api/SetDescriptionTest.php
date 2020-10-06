@@ -102,7 +102,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 	}
 
 	public function testUserCannotSetDescriptionWhenTheyLackPermission() {
@@ -152,7 +152,7 @@ class SetDescriptionTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( 'some description', $result['entity']['descriptions']['en']['value'] );
 	}
 

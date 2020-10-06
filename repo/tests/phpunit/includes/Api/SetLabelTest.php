@@ -102,7 +102,7 @@ class SetLabelTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 	}
 
 	public function testUserCannotSetLabelWhenTheyLackPermission() {
@@ -147,7 +147,7 @@ class SetLabelTest extends ModifyTermTestCase {
 			$userWithAllPermissions
 		);
 
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 		$this->assertSame( 'a label', $result['entity']['labels']['en']['value'] );
 	}
 

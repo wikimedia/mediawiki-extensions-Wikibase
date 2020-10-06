@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wikibase\Repo\Tests\Notifications;
 
 use User;

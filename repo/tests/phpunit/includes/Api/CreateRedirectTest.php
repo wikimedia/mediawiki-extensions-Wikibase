@@ -202,7 +202,7 @@ class CreateRedirectTest extends \MediaWikiTestCase {
 
 	private function assertSuccess( $result ) {
 		$this->assertArrayHasKey( 'success', $result );
-		$this->assertEquals( 1, $result['success'] );
+		$this->assertSame( 1, $result['success'] );
 	}
 
 	public function setRedirectProvider_success() {

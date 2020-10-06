@@ -116,7 +116,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
-		$this->assertEquals( 1, $res->numRows(), 'row count' );
+		$this->assertSame( 1, $res->numRows(), 'row count' );
 
 		$row = (array)$res->current();
 		$this->assertTrue( is_numeric( $row['change_id'] ) );
@@ -133,7 +133,7 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 		unset( $row['change_time'] );
 		unset( $expected['change_time'] );
 
-		$this->assertEquals( $expected, $row );
+		$this->assertSame( $expected, $row );
 
 		$this->assertIsInt( $change->getId() );
 	}
@@ -170,11 +170,11 @@ class SqlChangeStoreTest extends \MediaWikiTestCase {
 
 		$res = $db->select( 'wb_changes', '*', [], __METHOD__ );
 
-		$this->assertEquals( 1, $res->numRows(), 'row count' );
+		$this->assertSame( 1, $res->numRows(), 'row count' );
 
 		$row = (array)$res->current();
 
-		$this->assertEquals( $expected, $row );
+		$this->assertSame( $expected, $row );
 	}
 
 	private function getEntityChangeFactory() {
