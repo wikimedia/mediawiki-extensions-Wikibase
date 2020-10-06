@@ -235,8 +235,7 @@ class SqlStore implements Store {
 	 * If you need a TermIndex implementation for a EntityHandler, when the entity handler
 	 * doesn't do anything with the TermIndex please use a NulLTermIndex.
 	 *
-	 * @depreacted Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter
-	 * or getLabelConflictFinder directly.
+	 * @deprecated Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter directly.
 	 *
 	 * @return TermSqlIndex
 	 */
@@ -269,18 +268,6 @@ class SqlStore implements Store {
 	 * @return EntityTermStoreWriter
 	 */
 	public function getLegacyEntityTermStoreWriter() {
-		return $this->getTermIndex();
-	}
-
-	/**
-	 * @see Store::getLabelConflictFinder
-	 *
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An alternative will be available
-	 *
-	 * @return LabelConflictFinder
-	 */
-	public function getLabelConflictFinder() {
 		return $this->getTermIndex();
 	}
 

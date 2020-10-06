@@ -11,7 +11,6 @@ use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\EntityTermStoreWriter;
-use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\LegacyEntityTermStoreReader;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Store\PropertyInfoLookup;
@@ -56,8 +55,7 @@ interface Store {
 	 * that all of this functionality is provided by a single class. Or that said thing needs
 	 * to select one of the more specific services mentioned in the deprecated message.
 	 *
-	 * @depreacted Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter
-	 * or getLabelConflictFinder directly.
+	 * @deprecated Use getLegacyEntityTermStoreReader, getLegacyEntityTermStoreWriter directly.
 	 *
 	 * @return TermIndex
 	 */
@@ -85,14 +83,6 @@ interface Store {
 	 * @return EntityTermStoreWriter
 	 */
 	public function getLegacyEntityTermStoreWriter();
-
-	/**
-	 * @deprecated This will stop working once Wikibase migrates away from wb_terms
-	 * An alternative will be available
-	 *
-	 * @return LabelConflictFinder
-	 */
-	public function getLabelConflictFinder();
 
 	/**
 	 * @return ItemsWithoutSitelinksFinder

@@ -15,7 +15,6 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\Lib\Store\EntityStoreWatcher;
-use Wikibase\Lib\Store\LabelConflictFinder;
 use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\PropertyInfoStore;
 use Wikibase\Lib\Store\SiteLinkStore;
@@ -81,11 +80,6 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 	public function testGetTermIndex() {
 		$service = $this->newInstance()->getTermIndex();
 		$this->assertInstanceOf( TermIndex::class, $service );
-	}
-
-	public function testGetLabelConflictFinder() {
-		$service = $this->newInstance()->getLabelConflictFinder();
-		$this->assertInstanceOf( LabelConflictFinder::class, $service );
 	}
 
 	public function testNewSiteLinkStore() {
