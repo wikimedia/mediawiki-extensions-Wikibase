@@ -2359,9 +2359,7 @@ class WikibaseRepo {
 	public function getDataAccessSettings() {
 		if ( $this->dataAccessSettings === null ) {
 			$this->dataAccessSettings = new DataAccessSettings(
-				$this->settings->getSetting( 'maxSerializedEntitySize' ),
-				$this->settings->getSetting( 'useTermsTableSearchFields' ),
-				$this->settings->getSetting( 'forceWriteTermsTableSearchFields' )
+				$this->settings->getSetting( 'maxSerializedEntitySize' )
 			);
 		}
 		return $this->dataAccessSettings;
