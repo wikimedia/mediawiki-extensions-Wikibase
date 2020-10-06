@@ -104,9 +104,7 @@ class SpecialSetLabelDescriptionAliasesTest extends SpecialWikibaseRepoPageTestB
 				self::$languageCodes,
 				$this->getIdParser(),
 				$this->createMock( TermsCollisionDetectorFactory::class ),
-				$this->createMock( TermLookup::class ),
-				[],
-				0
+				$this->createMock( TermLookup::class )
 			)
 		);
 	}

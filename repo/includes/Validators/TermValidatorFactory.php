@@ -6,9 +6,7 @@ use InvalidArgumentException;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Int32EntityId;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
@@ -46,20 +44,12 @@ class TermValidatorFactory {
 	 */
 	private $termLookup;
 
-	/** @var array */
-	private $itemTermsMigrationStages;
-
-	/** @var int */
-	private $propertyTermsMigrationStage;
-
 	/**
 	 * @param int $maxLength The maximum length of terms.
 	 * @param string[] $languageCodes A list of valid language codes
 	 * @param EntityIdParser $idParser
 	 * @param TermsCollisionDetectorFactory $termsCollisionDetectorFactory
 	 * @param TermLookup $termLookup
-	 * @param array $itemTermsMigrationStages
-	 * @param int $propertyTermsMigrationStage
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -68,9 +58,7 @@ class TermValidatorFactory {
 		array $languageCodes,
 		EntityIdParser $idParser,
 		TermsCollisionDetectorFactory $termsCollisionDetectorFactory,
-		TermLookup $termLookup,
-		array $itemTermsMigrationStages,
-		int $propertyTermsMigrationStage
+		TermLookup $termLookup
 	) {
 		if ( !is_int( $maxLength ) || $maxLength <= 0 ) {
 			throw new InvalidArgumentException( '$maxLength must be a positive integer.' );
@@ -81,8 +69,6 @@ class TermValidatorFactory {
 		$this->idParser = $idParser;
 		$this->termsCollisionDetectorFactory = $termsCollisionDetectorFactory;
 		$this->termLookup = $termLookup;
-		$this->itemTermsMigrationStages = $itemTermsMigrationStages;
-		$this->propertyTermsMigrationStage = $propertyTermsMigrationStage;
 	}
 
 	/**
@@ -92,15 +78,9 @@ class TermValidatorFactory {
 	 */
 	public function getFingerprintUniquenessValidator( string $entityType ): ?ValueValidator {
 		if ( in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
-			$fingerprintUniquenessValidator = new FingerprintUniquenessValidator(
+			return new FingerprintUniquenessValidator(
 				$this->termsCollisionDetectorFactory->getTermsCollisionDetector( $entityType ),
 				$this->termLookup
-			);
-
-			return new ByIdFingerprintUniquenessValidator(
-				$this->itemTermsMigrationStages,
-				$this->propertyTermsMigrationStage,
-				$fingerprintUniquenessValidator
 			);
 		}
 
@@ -120,42 +100,8 @@ class TermValidatorFactory {
 	 * @return FingerprintValidator
 	 */
 	public function getFingerprintValidator( $entityType, EntityId $entityId ) {
-		$notEqualValidator = new LabelDescriptionNotEqualValidator();
-
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
-
-		switch ( $entityType ) {
-			case Item::ENTITY_TYPE:
-				$itemValidators = [ $notEqualValidator ];
-
-				if ( !$entityId instanceof ItemId ) {
-					$entityIdClass = get_class( $entityId );
-					throw new InvalidArgumentException( "\$entityId can only be ItemId. {$entityIdClass} given" );
-				}
-
-				// Only validate label and description uniqueness in old store when we are actually still reading from it.
-				// Validation of fingerprint uniqueness in new store are differently done
-				// see ChangeOpFingerprintResult::validate
-				$entityNumericId = $entityId->getNumericId();
-				foreach ( $this->itemTermsMigrationStages as $maxId => $migrationStage ) {
-					if ( $maxId === 'max' ) {
-						$maxId = Int32EntityId::MAX;
-					} elseif ( !is_int( $maxId ) ) {
-						throw new InvalidArgumentException( "'{$maxId}' in tmpItemTermsMigrationStages is not integer" );
-					}
-
-					if ( $entityNumericId > $maxId ) {
-						continue;
-					}
-
-					break;
-				}
-
-				return new CompositeFingerprintValidator( $itemValidators );
-
-			default:
-				return $notEqualValidator;
-		}
+		return new LabelDescriptionNotEqualValidator();
 	}
 
 	/**
