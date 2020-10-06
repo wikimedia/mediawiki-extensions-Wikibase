@@ -6,7 +6,6 @@ use DataValues\Deserializers\DataValueDeserializer;
 use LogicException;
 use MediaWiki\Storage\NameTableStore;
 use PHPUnit\Framework\MockObject\MockObject;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\GenericServices;
 use Wikibase\DataAccess\PrefetchingTermLookup;
@@ -43,7 +42,6 @@ class SingleEntitySourceServicesTest extends \PHPUnit\Framework\TestCase {
 			[ 'getPrefetchingTermLookup', PrefetchingTermLookup::class, true ],
 			[ 'getEntityPrefetcher', EntityPrefetcher::class, true ],
 			[ 'getPropertyInfoLookup', PropertyInfoLookup::class, true ],
-			[ 'getDataAccessSettings', DataAccessSettings::class, true ],
 			[ 'getEntitySource', EntitySource::class, true ],
 			[ 'getTermInLangIdsResolver', TermInLangIdsResolver::class, false ],
 		];

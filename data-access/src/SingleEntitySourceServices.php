@@ -180,19 +180,6 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	}
 
 	/**
-	 * @deprecated This should not be used, and was introduced only to fix an UBN on master.
-	 * This is currently used to create a TermStoresDelegatingPrefetchingItemTermLookup,
-	 * when that service construction should actually be moved to within this class.
-	 * The TermStoresDelegatingPrefetchingItemTermLookup service will be going away once we remove
-	 * all wb_terms migration related code, and thus we will remove this method after that point.
-	 *
-	 * @return DataAccessSettings
-	 */
-	public function getDataAccessSettings() : DataAccessSettings {
-		return $this->dataAccessSettings;
-	}
-
-	/**
 	 * It would be nice to only return hint against the TermInLangIdsResolver interface here,
 	 * but current users need a method only provided by DatabaseTermInLangIdsResolver
 	 * @return DatabaseTermInLangIdsResolver
