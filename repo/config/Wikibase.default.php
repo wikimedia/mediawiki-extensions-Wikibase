@@ -290,12 +290,6 @@ return [
 	// List of properties that, if in a qualifier, will be used for indexing quantities
 	'searchIndexQualifierPropertiesForQuantity' => [],
 
-	// Use search-related fields of wb_terms table
-	'useTermsTableSearchFields' => true,
-
-	// Override useTermsTableSearchFields for writing
-	'forceWriteTermsTableSearchFields' => false,
-
 	// Change it to a positive number so it becomes effective
 	'dispatchLagToMaxLagFactor' => 0,
 

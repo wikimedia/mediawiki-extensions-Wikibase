@@ -110,20 +110,6 @@ The type of cache to use for the shared object cache. Use `CACHE_XXX` constants.
 
 DEFAULT: [$wgMainCacheType]
 
-### wb_terms
-
-The [wb_terms] table is DEPRECATED and will be removed in the future.
-
-#### useTermsTableSearchFields {#common_useTermsTableSearchFields}
-Whether to use the search-related fields (`term_search_key` and `term_weight`) of the [wb_terms] table.
-
-This should not be disabled unless some other search backend is used.
-
-#### forceWriteTermsTableSearchFields
-If true, write search-related fields of the [wb_terms] table even if they are not used.
-
-Useful if you want to experiment with [useTermsTableSearchFields] and don’t want missed updates in the table.
-
 ### Miscellaneous
 
 #### entitySources {#common_entitySources}
@@ -948,7 +934,6 @@ DEFAULT: array mapping each well-known name to `null`.
 [Scribunto]: (https://www.mediawiki.org/wiki/Scribunto)
 [siteLinkGroups]: #common_siteLinkGroups
 [entitySources]: #common_entitySources
-[useTermsTableSearchFields]: #common_useTermsTableSearchFields
 [sharedCacheKeyPrefix]: #common_sharedCacheKeyPrefix
 [termboxEnabled]: #repo_termboxEnabled
 [client dataBridgeEnabled]: #client_dataBridgeEnabled
