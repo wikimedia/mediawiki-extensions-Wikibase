@@ -135,15 +135,7 @@ return [
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
-			$repoSettings = $repo->getSettings();
-			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
-					wfLogWarning(
-						'Using wb_terms table for wbsearchentities API action ' .
-						'but not using search-related fields of terms table. ' .
-						'This results in degraded search experience, ' .
-						'please enable the useTermsTableSearchFields setting.'
-					);
-			}
+
 			return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
 					[
 						new Wikibase\Repo\Api\EntityIdSearchHelper(
@@ -243,14 +235,6 @@ return [
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
-			if ( !$repoSettings->getSetting( 'useTermsTableSearchFields' ) ) {
-				wfLogWarning(
-					'Using wb_terms table for wbsearchentities API action ' .
-					'but not using search-related fields of terms table. ' .
-					'This results in degraded search experience, ' .
-					'please enable the useTermsTableSearchFields setting.'
-				);
-			}
 
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
 				new Wikibase\Repo\Api\CombinedEntitySearchHelper(
