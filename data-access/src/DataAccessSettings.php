@@ -27,49 +27,4 @@ class DataAccessSettings {
 		return $this->maxSerializedEntitySizeInBytes;
 	}
 
-	/**
-	 * Whether to read property terms from the new, normalized schema,
-	 * rather than from the old wb_terms table.
-	 *
-	 * The new schema is accessed through classes like
-	 * {@link DatabasePropertyTermStoreWriter} and {@link PrefetchingPropertyTermLookup},
-	 * the old one through classes like {@link TermSqlIndex}
-	 * and {@link BufferingTermIndexTermLookup}.
-	 *
-	 * This is a temporary setting used during the transition period.
-	 * Eventually, the normalized schema will be the only one supported.
-	 *
-	 * @return bool Always true.
-	 * @deprecated Will be completely removed soon.
-	 */
-	public function useNormalizedPropertyTerms() {
-		return true;
-	}
-
-	/**
-	 * Whether to read item terms from the new, normalized schema,
-	 * rather than from the old wb_terms table.
-	 *
-	 * The new schema is accessed through classes like
-	 * {@link DatabaseItemTermStoreWriter} and {@link PrefetchingItemTermLookup},
-	 * the old one through classes like {@link TermSqlIndex}
-	 * and {@link BufferingTermIndexTermLookup}.
-	 *
-	 * During migraiton of item terms, we have different stages on for different, subsequent ranges
-	 * of item ids. That is why this method takes a numeric entity id.
-	 *
-	 * @return bool Always true.
-	 * @deprecated Will be completely removed soon.
-	 */
-	public function useNormalizedItemTerms( int $numericItemId ): bool {
-		return true;
-	}
-
-	/**
-	 * @return array The mapping of maxId to migration stages of item terms
-	 */
-	public function getItemTermsMigrationStages(): array {
-		return [ 'max' => MIGRATION_NEW ];
-	}
-
 }
