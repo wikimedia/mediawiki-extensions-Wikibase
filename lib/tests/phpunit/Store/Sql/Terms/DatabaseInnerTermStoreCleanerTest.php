@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types=1 );
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use MediaWikiIntegrationTestCase;
@@ -46,24 +47,10 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$typeId = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'a label' ] );
-		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'eine Bezeichnung' ] );
-		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
-		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
-		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
-		$termInLang2Id = $this->db->insertId();
+
+		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
+		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLanguage( [ $text1Id => 'en', $text2Id => 'de' ] );
+		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermInLang( [ $textInLang1Id => $typeId, $textInLang2Id => $typeId ] );
 
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id, $termInLang2Id ] );
 
@@ -77,234 +64,130 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$type1Id = $this->db->insertId();
+
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'description' ] );
 		$type2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'some text' ] );
-		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'etwas Text' ] );
-		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
-		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
-		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $type1Id, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $type2Id, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $type1Id, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
-		$termInLang3Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $type2Id, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
-		$termInLang4Id = $this->db->insertId();
 
+		// insert two texts into wbt_text
+		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'some text', 'etwas Text' ] );
+
+		// insert into wbt_text_in_lang
+		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLanguage( [ $text1Id => 'en', $text2Id => 'de' ] );
+
+		// both texts are label & description in wbt_term_in_lang
+		[ $termInLang1Id, $termInLang2Id, $termInLang3Id, $termInLang4Id ] = $this->insertTermInLang(
+			[
+				$textInLang1Id => [ $type1Id, $type2Id ],
+				$textInLang2Id => [ $type1Id, $type2Id ]
+			]
+		);
+
+		// remove the first and the last one
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id, $termInLang4Id ] );
 
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_id',
-			'*',
-			[ [ $text1Id ], [ $text2Id ] ],
-			[ 'ORDER BY' => 'wbx_id' ]
-		);
-		$this->assertSelect(
-			'wbt_text_in_lang',
-			'wbxl_id',
-			'*',
-			[ [ $textInLang1Id ], [ $textInLang2Id ] ],
-			[ 'ORDER BY' => 'wbxl_id' ]
-		);
-		$this->assertSelect(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			'*',
-			[ [ $termInLang2Id ], [ $termInLang3Id ] ],
-			[ 'ORDER BY' => 'wbtl_id' ]
-		);
+		// The two initial inserts remain
+		$this->assertTextsTableReturns( [ $text1Id, $text2Id ] );
+		$this->assertTextsInLangTableReturns( [ $textInLang1Id, $textInLang2Id ] );
+
+		// the first and the last is removed from wbt_term_in_lang
+		$this->assertTermInLangTableReturns( [ $termInLang2Id, $termInLang3Id ] );
 	}
 
 	public function testCleanupOneTextInLangButNoText() {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$typeId = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
-		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
-		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
-		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
-		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'fr', 'wbxl_text_id' => $text1Id ] );
-		$textInLang3Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
-		$termInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang3Id ] );
-		$termInLang3Id = $this->db->insertId();
 
+		// insert two texts into wbt_text
+		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'text', 'Text' ] );
+
+		// insert into wbt_text_in_lang
+		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLanguage( [ $text1Id => 'en', $text2Id => 'de' ] );
+		// text1 has one additional
+		[ $textInLang3Id ] = $this->insertTextsInLanguage( [ $text1Id => 'fr' ] );
+
+		// all terms are the same type
+		[ $termInLang1Id, $termInLang2Id, $termInLang3Id ] = $this->insertTermInLang(
+			[
+				$textInLang1Id => $typeId,
+				$textInLang2Id => $typeId,
+				$textInLang3Id => $typeId
+			]
+		);
+
+		// remove term_in_lang with 'en' language
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $textInLang1Id and $termInLang1Id gone,
-		// but $text1Id still there because referenced by $termInLang3Id
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_id',
-			'*',
-			[ [ $text1Id ], [ $text2Id ] ],
-			[ 'ORDER BY' => 'wbx_id' ]
-		);
-		$this->assertSelect(
-			'wbt_text_in_lang',
-			'wbxl_id',
-			'*',
-			[ [ $textInLang2Id ], [ $textInLang3Id ] ],
-			[ 'ORDER BY' => 'wbxl_id' ]
-		);
-		$this->assertSelect(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			'*',
-			[ [ $termInLang2Id ], [ $termInLang3Id ] ],
-			[ 'ORDER BY' => 'wbtl_id' ]
-		);
+		$this->assertTextsInLangTableReturns( [ $textInLang2Id, $textInLang3Id ] );
+		$this->assertTermInLangTableReturns( [ $termInLang2Id, $termInLang3Id ] );
+
+		// but $text1Id is still there because referenced by $termInLang3Id
+		$this->assertTextsTableReturns( [ $text1Id, $text2Id ] );
 	}
 
 	public function testCleanupOneText() {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$typeId = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'text' ] );
-		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'Text' ] );
-		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
-		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
-		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang2Id ] );
-		$termInLang2Id = $this->db->insertId();
+
+		// insert two texts into wbt_text
+		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'text', 'Text' ] );
+
+		// insert into wbt_text_in_lang and term_in_lang
+		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLanguage( [ $text1Id => 'en', $text2Id => 'de' ] );
+		[ $termInLang1Id, $termInLang2Id ] = $this->insertTermInLang( [ $textInLang1Id => $typeId, $textInLang2Id => $typeId ] );
 
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $textId1, $textInLang1Id and $termInLang1Id gone
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_id',
-			'*',
-			[ [ $text2Id ] ]
-		);
-		$this->assertSelect(
-			'wbt_text_in_lang',
-			'wbxl_id',
-			'*',
-			[ [ $textInLang2Id ] ]
-		);
-		$this->assertSelect(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			'*',
-			[ [ $termInLang2Id ] ]
-		);
+		$this->assertTextsTableReturns( [ $text2Id ] );
+		$this->assertTextsInLangTableReturns( [ $textInLang2Id ] );
+		$this->assertTermInLangTableReturns( [ $termInLang2Id ] );
 	}
 
 	public function testCleanupLeavesUnrelatedTextsUntouched() {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$typeId = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'a label' ] );
-		$text1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'eine Bezeichnung' ] );
-		$text2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $text1Id ] );
-		$textInLang1Id = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $text2Id ] );
-		$textInLang2Id = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeId, 'wbtl_text_in_lang_id' => $textInLang1Id ] );
-		$termInLang1Id = $this->db->insertId();
 
+		[ $text1Id, $text2Id ] = $this->insertTexts( [ 'a label', 'eine Bezeichnung' ] );
+		[ $textInLang1Id, $textInLang2Id ] = $this->insertTextsInLanguage( [ $text1Id => 'en', $text2Id => 'de' ] );
+		[ $termInLang1Id ] = $this->insertTermInLang( [ $textInLang1Id => $typeId ] );
+
+		// remove the first
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLang1Id ] );
 
 		// $text2Id and $textInLang2Id are not used by any term_in_lang,
 		// but we should not attempt to clean them up
-		$this->assertSelect(
-			'wbt_text',
-			'wbx_id',
-			'*',
-			[ [ $text2Id ] ]
-		);
-		$this->assertSelect(
-			'wbt_text_in_lang',
-			'wbxl_id',
-			'*',
-			[ [ $textInLang2Id ] ]
-		);
+		$this->assertTextsTableReturns( [ $text2Id ] );
+		$this->assertTextsInLangTableReturns( [ $textInLang2Id ] );
+		$this->assertTermInLangTableReturns( [] );
 	}
 
 	public function testT237984_sharedTextInLangIdsAreNotDeleted() {
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'label' ] );
 		$typeIdLabel = $this->db->insertId();
+
 		$this->db->insert( 'wbt_type',
 			[ 'wby_name' => 'description' ] );
 		$typeIdDescription = $this->db->insertId();
 
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'someText' ] );
-		$textId = $this->db->insertId();
+		[ $textId ] = $this->insertTexts( [ 'someText' ] );
 
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $textId ] );
-		$textInLangIdSingleUse1 = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $textId ] );
-		$textInLangIdSingleUse2 = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'fr', 'wbxl_text_id' => $textId ] );
-		$textInLangIdShared = $this->db->insertId();
+		[ $textInLangIdSingleUse1 ] = $this->insertTextsInLanguage( [ $textId => 'en' ] );
+		[ $textInLangIdSingleUse2 ] = $this->insertTextsInLanguage( [ $textId => 'de' ] );
+		[ $textInLangIdShared ] = $this->insertTextsInLanguage( [ $textId => 'fr' ] );
 
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdSingleUse1 ] );
-		$termInLangIdToDelete1 = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdSingleUse2 ] );
-		$termInLangIdToDelete2 = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
-		$termInLangIdToDelete3 = $this->db->insertId();
-
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdDescription, 'wbtl_text_in_lang_id' => $textInLangIdShared ] );
-		$termInLangIdToRemain = $this->db->insertId();
+		[ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToDelete3, $termInLangIdToRemain ] = $this->insertTermInLang(
+			[
+				$textInLangIdSingleUse1 => $typeIdLabel,
+				$textInLangIdSingleUse2 => $typeIdLabel,
+				$textInLangIdShared => [ $typeIdLabel, $typeIdDescription ]
+			]
+		);
 
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [
 			$termInLangIdToDelete1,
@@ -312,19 +195,10 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			$termInLangIdToDelete3,
 		] );
 
-		$this->assertSelect(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			'*',
-			[ [ $termInLangIdToRemain ] ]
-		);
+		$this->assertTextsTableReturns( [ $textId ] );
+		$this->assertTermInLangTableReturns( [ $termInLangIdToRemain ] );
 		// This row should not be deleted, as it is still used by $termInLangIdToRemain
-		$this->assertSelect(
-			'wbt_text_in_lang',
-			'wbxl_id',
-			'*',
-			[ [ $textInLangIdShared ] ]
-		);
+		$this->assertTextsInLangTableReturns( [ $textInLangIdShared ] );
 	}
 
 	public function testT237984_sharedTextIdsAreNotDeleted() {
@@ -332,49 +206,92 @@ class DatabaseInnerTermStoreCleanerTest extends MediaWikiIntegrationTestCase {
 			[ 'wby_name' => 'label' ] );
 		$typeIdLabel = $this->db->insertId();
 
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'someText1' ] );
-		$textIdSingleUse = $this->db->insertId();
-		$this->db->insert( 'wbt_text',
-			[ 'wbx_text' => 'someText2' ] );
-		$textIdShared = $this->db->insertId();
+		[ $textIdSingleUse, $textIdShared ] = $this->insertTexts( [ 'someText1', 'someText2' ] );
 
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'en', 'wbxl_text_id' => $textIdSingleUse ] );
-		$textInLangIdToDelete1 = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'de', 'wbxl_text_id' => $textIdShared ] );
-		$textInLangIdToDelete2 = $this->db->insertId();
-		$this->db->insert( 'wbt_text_in_lang',
-			[ 'wbxl_language' => 'fr', 'wbxl_text_id' => $textIdShared ] );
-		$textInLangIdToRemain3 = $this->db->insertId();
+		// insert a language for each, and one additional for the shared
+		[ $textInLangIdToDelete1, $textInLangIdToDelete2 ] = $this->insertTextsInLanguage(
+			[
+				$textIdSingleUse => 'en',
+				$textIdShared => 'de'
+			]
+		);
+		[ $textInLangIdToRemain3 ] = $this->insertTextsInLanguage( [ $textIdShared => 'fr' ] );
 
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToDelete1 ] );
-		$termInLangIdToDelete1 = $this->db->insertId();
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToDelete2 ] );
-		$termInLangIdToDelete2 = $this->db->insertId();
-
-		$this->db->insert( 'wbt_term_in_lang',
-			[ 'wbtl_type_id' => $typeIdLabel, 'wbtl_text_in_lang_id' => $textInLangIdToRemain3 ] );
-		$termInLangIdToRemain3 = $this->db->insertId();
+		[ $termInLangIdToDelete1, $termInLangIdToDelete2, $termInLangIdToRemain3 ] = $this->insertTermInLang(
+			[
+				$textInLangIdToDelete1 => $typeIdLabel,
+				$textInLangIdToDelete2 => $typeIdLabel,
+				$textInLangIdToRemain3 => $typeIdLabel
+			]
+		);
 
 		$this->getCleaner()->cleanTermInLangIds( $this->db, $this->db, [ $termInLangIdToDelete1, $termInLangIdToDelete2 ] );
 
-		$this->assertSelect(
-			'wbt_term_in_lang',
-			'wbtl_id',
-			'*',
-			[ [ $termInLangIdToRemain3 ] ]
-		);
 		// This row should not be deleted, as it is still used by $textIdShared
+		$this->assertTermInLangTableReturns( [ $termInLangIdToRemain3 ] );
+		$this->assertTextsTableReturns( [ $textIdShared ] );
+	}
+
+	private function assertInDatabase( array $elements, $table, $field ) {
 		$this->assertSelect(
-			'wbt_text',
-			'wbx_id',
+			$table,
+			$field,
 			'*',
-			[ [ $textIdShared ] ]
+			array_map(
+				function( $element ) {
+					return [ $element ];
+				},
+				$elements
+			),
+			[ 'ORDER BY' => $field ]
 		);
+	}
+
+	private function assertTextsTableReturns( array $elements ) {
+		$this->assertInDatabase( $elements, 'wbt_text', 'wbx_id' );
+	}
+
+	private function assertTextsInLangTableReturns( array $elements ) {
+		$this->assertInDatabase( $elements, 'wbt_text_in_lang', 'wbxl_id' );
+	}
+
+	private function assertTermInLangTableReturns( array $elements ) {
+		$this->assertInDatabase( $elements, 'wbt_term_in_lang', 'wbtl_id' );
+	}
+
+	private function insertTexts( array $texts ): array {
+		$ids = [];
+		foreach ( $texts as $text ) {
+			$this->db->insert( 'wbt_text',
+				[ 'wbx_text' => $text ] );
+			$ids[] = $this->db->insertId();
+		}
+		return $ids;
+	}
+
+	private function insertTextsInLanguage( array $texts ): array {
+		$ids = [];
+		foreach ( $texts as $textId => $language ) {
+			$this->db->insert( 'wbt_text_in_lang',
+				[ 'wbxl_language' => $language, 'wbxl_text_id' => $textId ] );
+			$ids[] = $this->db->insertId();
+		}
+		return $ids;
+	}
+
+	private function insertTermInLang( array $texts ): array {
+		$ids = [];
+		foreach ( $texts as $textInLangId => $typeId ) {
+			if ( !is_array( $typeId ) ) {
+				$typeId = [ $typeId ];
+			}
+			foreach ( $typeId as $id ) {
+				$this->db->insert( 'wbt_term_in_lang',
+					[ 'wbtl_type_id' => $id, 'wbtl_text_in_lang_id' => $textInLangId ] );
+				$ids[] = $this->db->insertId();
+			}
+		}
+		return $ids;
 	}
 
 }
