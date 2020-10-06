@@ -12,7 +12,7 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
-use Wikibase\Repo\Validators\ByIdFingerprintUniquenessValidator;
+use Wikibase\Repo\Validators\FingerprintUniquenessValidator;
 use Wikibase\Repo\Validators\FingerprintValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
@@ -58,9 +58,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 			$languageCodes,
 			new BasicEntityIdParser(),
 			$this->createMock( TermsCollisionDetectorFactory::class ),
-			$this->createMock( TermLookup::class ),
-			[],
-			0
+			$this->createMock( TermLookup::class )
 		);
 	}
 
@@ -74,12 +72,12 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 			'item is supported' => [
 				'entityType' => Item::ENTITY_TYPE,
-				'expectedValidatorType' => ByIdFingerprintUniquenessValidator::class
+				'expectedValidatorType' => FingerprintUniquenessValidator::class
 			],
 
 			'property is supported' => [
 				'entityType' => Property::ENTITY_TYPE,
-				'expectedValidatorType' => ByIdFingerprintUniquenessValidator::class
+				'expectedValidatorType' => FingerprintUniquenessValidator::class
 			]
 
 		];

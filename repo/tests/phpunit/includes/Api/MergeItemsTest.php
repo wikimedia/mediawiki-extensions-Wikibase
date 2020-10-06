@@ -249,9 +249,7 @@ class MergeItemsTest extends \MediaWikiTestCase {
 			[ 'en', 'de', 'fr' ],
 			new ItemIdParser(),
 			$this->createMock( TermsCollisionDetectorFactory::class ),
-			$this->createMock( TermLookup::class ),
-			[],
-			0
+			$this->createMock( TermLookup::class )
 		);
 	}
 
