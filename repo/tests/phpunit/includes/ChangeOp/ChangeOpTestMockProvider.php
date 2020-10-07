@@ -26,11 +26,10 @@ use Wikibase\DataModel\Statement\StatementGuid;
 use Wikibase\Lib\DataType;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\DataTypeValidatorFactory;
-use Wikibase\Repo\LabelDescriptionDuplicateDetector;
 use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
-use Wikibase\Repo\Validators\LabelDescriptionUniquenessValidator;
+use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
 use Wikibase\Repo\Validators\NullFingerprintValidator;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\SnakValidator;
@@ -316,87 +315,6 @@ class ChangeOpTestMockProvider {
 		return Result::newSuccess();
 	}
 
-	public function detectLabelDescriptionConflicts(
-		$entityType,
-		array $labels,
-		array $descriptions = null,
-		EntityId $entityId = null
-	) {
-		if ( $entityId && $entityId->getSerialization() === 'P666' ) {
-			// simulated conflicts always conflict with P666, so if these are
-			// ignored as self-conflicts, we don't need to check any labels.
-			$labels = [];
-		}
-
-		foreach ( $labels as $lang => $text ) {
-			if ( $descriptions !== null
-				&& ( !isset( $descriptions[$lang] ) || $descriptions[$lang] !== 'DUPE' )
-			) {
-				continue;
-			}
-
-			if ( $text === 'DUPE' ) {
-				return Result::newError( [
-					Error::newError(
-						'found conflicting terms',
-						'label',
-						'label-with-description-conflict',
-						[
-							'label',
-							$lang,
-							$text,
-							'P666'
-						]
-					)
-				] );
-			}
-		}
-
-		return Result::newSuccess();
-	}
-
-	/**
-	 * Returns a duplicate detector that will, consider the string "DUPE" to be a duplicate,
-	 * unless a specific $returnValue is given. The same value is returned for calls to
-	 * detectLabelConflicts() and detectLabelDescriptionConflicts().
-	 *
-	 * @param null|Result|Error[] $returnValue
-	 *
-	 * @return LabelDescriptionDuplicateDetector
-	 */
-	public function getMockLabelDescriptionDuplicateDetector( $returnValue = null ) {
-		if ( is_array( $returnValue ) ) {
-			if ( empty( $returnValue ) ) {
-				$returnValue = Result::newSuccess();
-			} else {
-				$returnValue = Result::newError( $returnValue );
-			}
-		}
-
-		if ( $returnValue instanceof Result ) {
-			$detectLabelConflicts = $detectLabelDescriptionConflicts = function() use ( $returnValue ) {
-				return $returnValue;
-			};
-		} else {
-			$detectLabelConflicts = [ $this, 'detectLabelConflicts' ];
-			$detectLabelDescriptionConflicts = [ $this, 'detectLabelDescriptionConflicts' ];
-		}
-
-		$dupeDetector = $this->getMockBuilder( LabelDescriptionDuplicateDetector::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$dupeDetector->expects( TestCase::any() )
-			->method( 'detectLabelConflicts' )
-			->will( TestCase::returnCallback( $detectLabelConflicts ) );
-
-		$dupeDetector->expects( TestCase::any() )
-			->method( 'detectLabelDescriptionConflicts' )
-			->will( TestCase::returnCallback( $detectLabelDescriptionConflicts ) );
-
-		return $dupeDetector;
-	}
-
 	/**
 	 * @return SiteLinkConflictLookup
 	 */
@@ -426,21 +344,20 @@ class ChangeOpTestMockProvider {
 
 	/**
 	 * Returns a mock fingerprint validator. If $entityType is Item::ENTITY_TYPE,
-	 * the validator will detect an error for any fingerprint that contains the string "DUPE"
-	 * for both the description and the label for a given language.
+	 * the validator will detect an error if the label and the description are
+	 * the same in any language.
 	 *
 	 * For other entity types, the validator will consider any fingerprint valid.
 	 *
 	 * @see getMockLabelDescriptionDuplicateDetector()
 	 *
 	 * @param string $entityType
-	 *
-	 * @return LabelDescriptionUniquenessValidator|NullFingerprintValidator
+	 * @return LabelDescriptionNotEqualValidator|NullFingerprintValidator
 	 */
 	public function getMockFingerprintValidator( $entityType ) {
 		switch ( $entityType ) {
 			case Item::ENTITY_TYPE:
-				return new LabelDescriptionUniquenessValidator( $this->getMockLabelDescriptionDuplicateDetector() );
+				return new LabelDescriptionNotEqualValidator();
 
 			default:
 				return new NullFingerprintValidator();
