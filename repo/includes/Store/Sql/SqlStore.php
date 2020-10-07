@@ -224,8 +224,8 @@ class SqlStore implements Store {
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );
 		$this->cacheDuration = $settings->getSetting( 'sharedCacheDuration' );
-		$this->useSearchFields = $settings->getSetting( 'useTermsTableSearchFields' );
-		$this->forceWriteSearchFields = $settings->getSetting( 'forceWriteTermsTableSearchFields' );
+		$this->useSearchFields = true;
+		$this->forceWriteSearchFields = false;
 		$this->dataAccessSettings = $repo->getDataAccessSettings();
 	}
 

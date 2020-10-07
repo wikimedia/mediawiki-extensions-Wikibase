@@ -7,7 +7,6 @@ use Maintenance;
 use MediaWiki\MediaWikiServices;
 use Onoi\MessageReporter\ObservableMessageReporter;
 use Wikibase\Repo\Store\Sql\TermSqlIndexSearchFieldsClearer;
-use Wikibase\Repo\WikibaseRepo;
 
 $basePath = getenv( 'MW_INSTALL_PATH' ) !== false ? getenv( 'MW_INSTALL_PATH' ) : __DIR__ . '/../../../..';
 
@@ -87,19 +86,7 @@ class ClearTermSqlIndexSearchFields extends Maintenance {
 	 * @return bool
 	 */
 	private function searchFieldsWritten() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-
-		if ( $settings->getSetting( 'useTermsTableSearchFields' ) ) {
-			// fields are actively used
-			return true;
-		}
-
-		if ( $settings->getSetting( 'forceWriteTermsTableSearchFields' ) ) {
-			// fields are not used, but still written to
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	private function getTermSqlIndexSearchFieldsClearer() {
