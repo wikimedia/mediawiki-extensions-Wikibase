@@ -48,7 +48,7 @@ class RemoveTermsInLanguage extends Maintenance {
 			try {
 				$entityId = $repo->getEntityIdParser()->parse( $idSerialization );
 			} catch ( InvalidArgumentException $e ) {
-				$this->fatalError( "Invalid property id: " . $idSerialization );
+				$this->fatalError( "Invalid entity id: " . $idSerialization );
 			}
 
 			$entityRevision = $entityRevisionLookup->getEntityRevision(
