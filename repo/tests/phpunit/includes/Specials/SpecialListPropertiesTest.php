@@ -101,10 +101,10 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$this->getEntityTitleLookup(),
 			$languageNameLookup
 		);
-		$bufferingTermLookup = $this->getPrefetchingTermLookup();
+		$termLookup = $this->getPrefetchingTermLookup();
 		$languageFallbackChainFactory = new LanguageFallbackChainFactory();
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup(
-			$bufferingTermLookup,
+			$termLookup,
 			$languageFallbackChainFactory->newFromLanguage(
 				$language,
 				LanguageFallbackChainFactory::FALLBACK_ALL
@@ -119,7 +119,7 @@ class SpecialListPropertiesTest extends SpecialPageTestBase {
 			$labelDescriptionLookup,
 			$entityIdFormatter,
 			$this->getEntityTitleLookup(),
-			$bufferingTermLookup,
+			$termLookup,
 			$languageFallbackChainFactory
 		);
 
