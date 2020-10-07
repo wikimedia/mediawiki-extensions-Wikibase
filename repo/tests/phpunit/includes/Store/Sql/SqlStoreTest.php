@@ -21,7 +21,6 @@ use Wikibase\Lib\Store\SiteLinkStore;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\SqlChangeStore;
-use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
@@ -75,11 +74,6 @@ class SqlStoreTest extends MediaWikiIntegrationTestCase {
 			$wikibaseServices,
 			new EntitySource( 'testsource', 'testdb', [], '', '', '', '' )
 		);
-	}
-
-	public function testGetTermIndex() {
-		$service = $this->newInstance()->getTermIndex();
-		$this->assertInstanceOf( TermIndex::class, $service );
 	}
 
 	public function testNewSiteLinkStore() {

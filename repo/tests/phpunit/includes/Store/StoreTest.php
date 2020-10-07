@@ -9,7 +9,6 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
-use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\ItemsWithoutSitelinksFinder;
@@ -64,13 +63,6 @@ class StoreTest extends \MediaWikiTestCase {
 	 */
 	public function testItemsWithoutSitelinksFinder( Store $store ) {
 		$this->assertInstanceOf( ItemsWithoutSitelinksFinder::class, $store->newItemsWithoutSitelinksFinder() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testNewTermCache( Store $store ) {
-		$this->assertInstanceOf( TermIndex::class, $store->getTermIndex() );
 	}
 
 	/**
