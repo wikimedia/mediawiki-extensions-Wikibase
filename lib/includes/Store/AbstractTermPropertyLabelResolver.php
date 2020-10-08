@@ -84,7 +84,7 @@ abstract class AbstractTermPropertyLabelResolver implements PropertyLabelResolve
 
 	/**
 	 * Returns a map of labels to EntityIds for all Properties currently defined.
-	 * The information is taking from the cache if possible, and loaded from a TermIndex if not.
+	 * The information is taking from the cache if possible, and loaded from a MatchingTermsLookup if not.
 	 *
 	 * @param string $recache Flag, set to 'recache' to fetch fresh data from the database.
 	 *

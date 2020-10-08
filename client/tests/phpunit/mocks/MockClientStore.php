@@ -11,10 +11,8 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\PropertyInfoLookup;
-use Wikibase\Lib\Store\TermIndex;
 use Wikibase\Lib\Tests\MockRepository;
 use Wikibase\Lib\Tests\Store\MockPropertyInfoLookup;
-use Wikibase\Lib\Tests\Store\MockTermIndex;
 
 /**
  * (Incomplete) ClientStore mock
@@ -76,14 +74,6 @@ class MockClientStore implements ClientStore {
 	 */
 	public function getSubscriptionManager() {
 		return new NullSubscriptionManager();
-	}
-
-	/**
-	 * @return TermIndex
-	 */
-	private function getTermIndex() {
-		// FIXME: Incomplete
-		return new MockTermIndex( [] );
 	}
 
 	/**

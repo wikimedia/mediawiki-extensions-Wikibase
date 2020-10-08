@@ -7,7 +7,7 @@ use Wikibase\DataModel\Entity\Property;
 
 /**
  * Resolves property labels (which are unique per language) into entity IDs
- * using a TermIndex.
+ * using a MatchingTermsLookup.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler

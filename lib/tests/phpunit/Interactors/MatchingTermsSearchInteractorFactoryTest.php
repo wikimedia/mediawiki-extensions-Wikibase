@@ -6,7 +6,7 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\Lib\Interactors\MatchingTermsLookupSearchInteractor;
 use Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\Store\TermIndex;
+use Wikibase\Lib\Store\MatchingTermsLookup;
 
 /**
  * @covers \Wikibase\Lib\Interactors\MatchingTermsSearchInteractorFactory
@@ -20,7 +20,7 @@ class MatchingTermsSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCa
 
 	public function testNewInteractorReturnsTermIndexSearchInteractorInstance() {
 		$factory = new MatchingTermsSearchInteractorFactory(
-			$this->createMock( TermIndex::class ),
+			$this->createMock( MatchingTermsLookup::class ),
 			new LanguageFallbackChainFactory(),
 			$this->createMock( PrefetchingTermLookup::class )
 		);
@@ -30,7 +30,7 @@ class MatchingTermsSearchInteractorFactoryTest extends \PHPUnit\Framework\TestCa
 
 	public function testNewInteractorReturnsFreshInstanceOnMultipleCalls() {
 		$factory = new MatchingTermsSearchInteractorFactory(
-			$this->createMock( TermIndex::class ),
+			$this->createMock( MatchingTermsLookup::class ),
 			new LanguageFallbackChainFactory(),
 			$this->createMock( PrefetchingTermLookup::class )
 		);

@@ -3,11 +3,11 @@
 namespace Wikibase\Lib\Tests\Store;
 
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataAccess\NullPrefetchingTermLookup;
+use Wikibase\DataAccess\Tests\FakePrefetchingTermLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\Store\EntityTermLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -55,7 +55,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 	}
 
 	public function testGetLabel_entityNotFound() {
-		$termLookup = $this->getTermLookup();
+		$termLookup = new NullPrefetchingTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
@@ -64,7 +64,7 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 	}
 
 	public function testGetDescription_entityNotFound() {
-		$termLookup = $this->getTermLookup();
+		$termLookup = new NullPrefetchingTermLookup();
 		$fallbackChain = $this->getLanguageFallbackChain( 'zh' );
 
 		$labelDescriptionLookup = new LanguageFallbackLabelDescriptionLookup( $termLookup, $fallbackChain );
@@ -124,50 +124,6 @@ class LanguageFallbackLabelDescriptionLookupTest extends MediaWikiIntegrationTes
 	}
 
 	private function getTermLookup() {
-		return new EntityTermLookup( $this->getTermIndex() );
+		return new FakePrefetchingTermLookup();
 	}
-
-	private function getTermIndex() {
-		$terms = [
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q116' ),
-				'termType' => 'label',
-				'termLanguage' => 'en',
-				'termText' => 'New York City'
-			] ),
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q116' ),
-				'termType' => 'label',
-				'termLanguage' => 'es',
-				'termText' => 'New York City'
-			] ),
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q116' ),
-				'termType' => 'description',
-				'termLanguage' => 'en',
-				'termText' => 'Big Apple'
-			] ),
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q117' ),
-				'termType' => 'label',
-				'termLanguage' => 'en',
-				'termText' => 'Berlin'
-			] ),
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q118' ),
-				'termType' => 'label',
-				'termLanguage' => 'zh-cn',
-				'termText' => '测试'
-			] ),
-			new TermIndexEntry( [
-				'entityId' => new ItemId( 'Q118' ),
-				'termType' => 'description',
-				'termLanguage' => 'zh-cn',
-				'termText' => 'zh-cn description'
-			] ),
-		];
-
-		return new MockTermIndex( $terms );
-	}
-
 }
