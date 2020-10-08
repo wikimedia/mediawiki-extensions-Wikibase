@@ -180,57 +180,54 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 			$this->assertTrue( $resultToTest instanceof TermSearchResult );
 
-			if ( $expectedResult[ 'match' ][ 'type' ] === 'entityId' ) {
+			if ( $expectedResult->match->type === 'entityId' ) {
 
 				$this->assertEquals(
 					new Term(
-						'qid', $expectedResult[ 'match' ][ 'text' ] ),
+						'qid', $expectedResult->match->text ),
 						$resultToTest->getMatchedTerm()
 					);
 			} else {
 
 				$this->assertEquals(
 					new Term(
-						$expectedResult[ 'match' ][ 'language' ],
-						$expectedResult[ 'match' ][ 'text' ]
+						$expectedResult->match->language,
+						$expectedResult->match->text
 					),
 					$resultToTest->getMatchedTerm()
 				);
 			}
 			$this->assertEquals(
-				$expectedResult[ 'match' ][ 'type' ],
+				$expectedResult->match->type,
 				$resultToTest->getMatchedTermType()
 			);
 			$this->assertEquals(
-				new PropertyId( $expectedResult[ 'id' ] ),
+				new PropertyId( $expectedResult->id ),
 				$resultToTest->getEntityId()
 			);
 			$this->assertEquals(
-				array_key_exists( 'label', $expectedResult ) ? new Term( $langCode, $expectedResult[ 'label' ] ) : null,
+				isset( $expectedResult->label ) ? new Term( $langCode, $expectedResult->label ) : null,
 				$resultToTest->getDisplayLabel()
 			);
 			$this->assertEquals(
-				array_key_exists( 'description', $expectedResult ) ? new Term( $langCode, $expectedResult[ 'description' ] ) : null,
+				isset( $expectedResult->description ) ? new Term( $langCode, $expectedResult->description ) : null,
 				$resultToTest->getDisplayDescription()
 			);
 			$this->assertEquals(
-				$expectedResult['datatype'],
+				$expectedResult->datatype,
 				$resultToTest->getMetaData()[PropertyDataTypeSearchHelper::DATATYPE_META_DATA_KEY]
 			);
 		}
 	}
 
-	private function getResponseDataForId( $searchResponses, $resultId ) {
-		//convert $searchResponse to array
-		$searchResponses = \GuzzleHttp\json_decode( \GuzzleHttp\json_encode( $searchResponses ), true );
-		foreach ( $searchResponses as $response ) {
-			if ( $response['id'] === $resultId ) {
-				return $response;
-
-			}
+	private function getResponseDataForId( array $searchResponses, $resultId ) {
+		$searchResponses = array_filter( $searchResponses, function ( $response ) use ( $resultId ) {
+			return $response->id === $resultId;
+		} );
+		if ( count( $searchResponses ) > 1 ) {
+			throw new RuntimeException( 'Ambigious search responses for id ' . $resultId );
 		}
-
-		return [];
+		return array_shift( $searchResponses );
 	}
 
 	/**
