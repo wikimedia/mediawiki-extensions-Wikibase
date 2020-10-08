@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kenrick95",
+			"RXerself",
 			"Rachmat.Wahidi",
 			"Rachmat04"
 		]
@@ -9,12 +10,12 @@
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Penanganan nilai data \"$1\" belum didukung.",
 	"valueview-expert-unsupportedvalue-unsupporteddatatype": "Penanganan nilai data untuk tipe data \"$1\" belum didukung.",
 	"valueview-expert-emptyvalue-empty": "kosong",
-	"valueview-expert-globecoordinateinput-precision": "Kepersisan:",
+	"valueview-expert-globecoordinateinput-precision": "Tingkat ketelitian:",
 	"valueview-expert-globecoordinateinput-nullprecision": "tak tentu",
 	"valueview-expert-globecoordinateinput-customprecision": "istimewa ($1)",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregorian",
 	"valueview-expert-timevalue-calendar-julian": "Julian",
-	"valueview-expert-timeinput-precision": "Kepersisan:",
+	"valueview-expert-timeinput-precision": "Tingkat ketelitian:",
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Bahasa (diperlukan):",
