@@ -9,7 +9,7 @@
 * @subpage md_docs_storage_terms
 * @subpage md_docs_storage_terms-caching
 
-## SQL Tables
+## SQL Tables {#sql_tables}
 
 **Repo**
 
