@@ -416,8 +416,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testResolvePropertyId() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because a local wb_terms table"
-				. " is not available on a WikibaseClient only instance." );
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
 		$cacheSplit = false;
@@ -441,8 +440,7 @@ class Scribunto_LuaWikibaseLibraryTest extends Scribunto_LuaWikibaseLibraryTestC
 
 	public function testResolvePropertyId_labelNotFound() {
 		if ( !WikibaseSettings::isRepoEnabled() ) {
-			$this->markTestSkipped( "Skipping because a local wb_terms table"
-				. " is not available on a WikibaseClient only instance." );
+			$this->markTestSkipped( "Skipping because WikibaseClient doesn't have local term store tables." );
 		}
 
 		$luaWikibaseLibrary = $this->newScribuntoLuaWikibaseLibrary();
