@@ -12,6 +12,7 @@ use Language;
 use MediaWiki\MediaWikiServices;
 use MWContentSerializationException;
 use MWException;
+use ParserCache;
 use ParserOutput;
 use Revision;
 use SearchEngine;
@@ -687,6 +688,34 @@ abstract class EntityHandler extends ContentHandler {
 		}
 
 		return $fieldsData;
+	}
+
+	/**
+	 * Produce page output suitable for indexing.
+	 * Does not include HTML.
+	 *
+	 * @param WikiPage $page
+	 * @param ParserCache|null $cache
+	 * @return bool|ParserOutput|null
+	 */
+	public function getParserOutputForIndexing( WikiPage $page, ParserCache $cache = null ) {
+		$parserOptions = $page->makeParserOptions( 'canonical' );
+		if ( $cache ) {
+			$parserOutput = $cache->get( $page, $parserOptions );
+			if ( $parserOutput ) {
+				return $parserOutput;
+			}
+		}
+
+		$renderer = MediaWikiServices::getInstance()->getRevisionRenderer();
+		$revisionRecord = $this->latestRevision( $page );
+		$parserOutput = $renderer->getRenderedRevision( $revisionRecord, $parserOptions )
+			// this will call EntityContent::getParserOutput() with $generateHtml = false
+			->getRevisionParserOutput( [
+				'generate-html' => false,
+			] );
+		// since we didn’t generate HTML, don’t call $cache->save()
+		return $parserOutput;
 	}
 
 }
