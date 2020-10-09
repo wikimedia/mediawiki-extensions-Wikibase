@@ -5,6 +5,7 @@ namespace Wikibase\Repo\FederatedProperties;
 
 use Http;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Http\MwHttpRequestToResponseInterfaceAdapter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
