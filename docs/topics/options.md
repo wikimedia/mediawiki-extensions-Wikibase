@@ -944,7 +944,6 @@ DEFAULT: array mapping each well-known name to `null`.
 [purgeCacheBatchSize]: #client_purgeCacheBatchSize
 [wikiPageUpdaterDbBatchSize]: #client_wikiPageUpdaterDbBatchSize
 [siteGlobalID]: #client_siteGlobalID
-[wb_terms]: @ref md_docs_sql_wb_terms
 [entitysources topic]: @ref md_docs_topics_entitysources
 [wbc_entity_usage]: @ref md_docs_sql_wbc_entity_usage
 [reference URL]: https://www.wikidata.org/wiki/Property:P854
