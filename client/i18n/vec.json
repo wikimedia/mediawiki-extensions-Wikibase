@@ -71,5 +71,6 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Varda}} ełemento",
 	"wikibase-client-data-bridge-dialog-title": "Modìfega \"$1\"",
 	"wikibase-client-data-bridge-permissions-error-info": "Pì detaji",
+	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Ocio!:</strong> no te si ndà drento a el to profiło utente. El to indiriso IP el sarà publego se te fè calche modifega. Se te te <strong>loghi</strong> o te te<strong>noti</strong>, łe to contribusion łe vegnarà atribuìe al nome del to profiło utente, oltre che vère altri vantaji.",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Sèvita a modìfegare sensa ver faxesto l'entrada"
 }
