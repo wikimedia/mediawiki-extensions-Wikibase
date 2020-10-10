@@ -109,6 +109,7 @@ class WikibaseContentLanguages {
 					'cnr', // T185800
 					'cop', // T155371
 					'crb', // T220284
+					'crl', // T264532
 					'dag', // T240098
 					'el-cy', // T198674
 					'ett', // T125066
