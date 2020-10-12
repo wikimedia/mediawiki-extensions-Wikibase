@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
+			"Батыр Комдошев",
 			"Толуш"
 		]
 	},
-	"wikibase-edit": "тӱзедер"
+	"wikibase-edit": "тӱзедер",
+	"wikibase-add": "кожор"
 }
