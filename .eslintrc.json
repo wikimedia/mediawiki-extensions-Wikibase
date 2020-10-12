@@ -6,11 +6,8 @@
 		"wikimedia/mediawiki"
 	],
 	"globals": {
-		"module": false,
 		"dataTypes": false,
 		"dataValues": false,
-		"OO": false,
-		"require": false,
 		"util": false,
 		"valueFormatters": false,
 		"valueParsers": false,
