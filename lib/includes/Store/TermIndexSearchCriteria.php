@@ -7,7 +7,8 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * Object representing search criteria while performing a search in the term index.
+ * Object representing search criteria while performing a search
+ * in the term store (formerly known as the term index).
  * Instances might be incomplete (have null values for some of the fields).
  *
  * @license GPL-2.0-or-later
