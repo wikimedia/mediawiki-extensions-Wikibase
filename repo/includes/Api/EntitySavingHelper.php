@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
@@ -104,39 +106,27 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		$this->defaultRetrievalMode = LookupConstants::LATEST_FROM_MASTER;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getBaseRevisionId() {
+	public function getBaseRevisionId(): int {
 		return $this->baseRevisionId;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getSaveFlags() {
+	public function getSaveFlags(): int {
 		return $this->entitySavingFlags;
 	}
 
-	/**
-	 * @return EntityFactory|null
-	 */
-	public function getEntityFactory() {
+	public function getEntityFactory(): ?EntityFactory {
 		return $this->entityFactory;
 	}
 
-	public function setEntityFactory( EntityFactory $entityFactory ) {
+	public function setEntityFactory( EntityFactory $entityFactory ): void {
 		$this->entityFactory = $entityFactory;
 	}
 
-	/**
-	 * @return EntityStore|null
-	 */
-	public function getEntityStore() {
+	public function getEntityStore(): ?EntityStore {
 		return $this->entityStore;
 	}
 
-	public function setEntityStore( EntityStore $entityStore ) {
+	public function setEntityStore( EntityStore $entityStore ): void {
 		$this->entityStore = $entityStore;
 	}
 
@@ -148,9 +138,11 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *        Either of the ASSIGN_FRESH_ID/NO_FRESH_ID constants.
 	 *        NOTE: We usually need to assign an ID early, for things like the ClaimIdGenerator.
 	 *
+	 * @throws ApiUsageException
+	 *
 	 * @return EntityDocument
 	 */
-	public function loadEntity( EntityId $entityId = null, $assignFreshId = self::ASSIGN_FRESH_ID ) {
+	public function loadEntity( ?EntityId $entityId = null, $assignFreshId = self::ASSIGN_FRESH_ID ): EntityDocument {
 		if ( !in_array( $assignFreshId, [ self::ASSIGN_FRESH_ID, self::NO_FRESH_ID ] ) ) {
 			throw new InvalidArgumentException(
 				'$assignFreshId must be either of the EntitySavingHelper::ASSIGN_FRESH_ID/NO_FRESH_ID constants.'
@@ -232,10 +224,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 		return $entity;
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function isEntityCreationSupported() {
+	private function isEntityCreationSupported(): bool {
 		return $this->entityStore !== null && $this->entityFactory !== null;
 	}
 
@@ -253,7 +242,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @throws LogicException
 	 * @return EntityDocument
 	 */
-	private function createEntity( $entityType, EntityId $customId = null, $assignFreshId = self::ASSIGN_FRESH_ID ) {
+	private function createEntity( $entityType, EntityId $customId = null, $assignFreshId = self::ASSIGN_FRESH_ID ): EntityDocument {
 		if ( $customId ) {
 			$entityType = $customId->getEntityType();
 		} elseif ( !$entityType ) {
@@ -328,7 +317,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 * @return Status the status of the save operation, as returned by EditEntityHandler::attemptSave()
 	 * @see  EditEntityHandler::attemptSave()
 	 */
-	public function attemptSaveEntity( EntityDocument $entity, $summary, $flags = 0 ) {
+	public function attemptSaveEntity( EntityDocument $entity, $summary, int $flags = 0 ): Status {
 		if ( !$this->apiModule->isWriteMode() ) {
 			// sanity/safety check
 			throw new LogicException(
@@ -413,7 +402,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @param Status $status The status to report
 	 */
-	private function handleSaveStatus( Status $status ) {
+	private function handleSaveStatus( Status $status ): void {
 		$value = $status->getValue();
 		$errorCode = null;
 
@@ -457,7 +446,7 @@ class EntitySavingHelper extends EntityLoadingHelper {
 	 *
 	 * @throws ApiUsageException If $status->isOK() returns false.
 	 */
-	private function handleStatus( Status $status, $errorCode ) {
+	private function handleStatus( Status $status, $errorCode ): void {
 		if ( $status->isGood() ) {
 			return;
 		} elseif ( $status->isOK() ) {
