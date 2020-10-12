@@ -56,7 +56,7 @@ describe( 'the Tainted icon', () => {
 		ItemPage.clickEditOnStatement( 0, propertyId );
 
 		assert(
-			ItemPage.taintedRefIcon.waitForExist( 500, true ),
+			ItemPage.taintedRefIcon.waitForExist( { timeout: 500, reverse: true } ),
 			'Tainted Icon should not be visible on entering edit mode'
 		);
 

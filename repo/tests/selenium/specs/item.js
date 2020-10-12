@@ -62,7 +62,7 @@ describe( 'item', function () {
 
 		// focus still on reference value input, can save entire statement from there
 		browser.keys( [ 'Enter' ] );
-		ItemPage.valueInputField.waitForExist( null, true );
+		ItemPage.valueInputField.waitForExist( { reverse: true } );
 	} );
 
 	// skip this until further investigation of flakiness T227266
