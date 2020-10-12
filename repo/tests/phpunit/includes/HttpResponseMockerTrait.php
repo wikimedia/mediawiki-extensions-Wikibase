@@ -21,15 +21,15 @@ trait HttpResponseMockerTrait {
 			->method( 'getContents' )
 			->willReturn( $response );
 
-		$mwResponse = $this->createMock( ResponseInterface::class );
-		$mwResponse->expects( $this->any() )
+		$httpResponse = $this->createMock( ResponseInterface::class );
+		$httpResponse->expects( $this->any() )
 			->method( 'getStatusCode' )
 			->willReturn( $statusCode );
-		$mwResponse->expects( $this->any() )
+		$httpResponse->expects( $this->any() )
 			->method( 'getBody' )
 			->willReturn( $mockStream );
 
-		return $mwResponse;
+		return $httpResponse;
 	}
 
 }
