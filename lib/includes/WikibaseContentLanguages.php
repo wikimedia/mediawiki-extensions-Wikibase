@@ -122,6 +122,7 @@ class WikibaseContentLanguages {
 					'fuf', // T155429
 					'gez', // T155373
 					'gil', // T241424
+					'gml', // T217131
 					'gmy', // T155421
 					'hai', // T138131
 					'haz', // T155374
