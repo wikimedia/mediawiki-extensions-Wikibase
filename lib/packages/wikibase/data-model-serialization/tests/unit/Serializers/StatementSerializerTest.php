@@ -51,7 +51,11 @@ class StatementSerializerTest extends DispatchableSerializerTest {
 				]
 			] ) );
 
-		return new StatementSerializer( $snakSerializerFake, $snaksSerializerFake, $referencesSerializerFake );
+		return new StatementSerializer(
+			$snakSerializerFake,
+			$snaksSerializerFake,
+			$referencesSerializerFake
+		);
 	}
 
 	public function serializableProvider() {

@@ -52,7 +52,9 @@ class SnakListDeserializer implements Deserializer {
 		foreach ( $serialization as $key => $snakArray ) {
 			if ( is_string( $key ) ) {
 				if ( !is_array( $snakArray ) ) {
-					throw new DeserializationException( "The snaks per property \"$key\" should be an array" );
+					throw new DeserializationException(
+						"The snaks per property \"$key\" should be an array"
+					);
 				}
 
 				foreach ( $snakArray as $snakSerialization ) {

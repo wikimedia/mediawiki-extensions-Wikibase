@@ -70,15 +70,17 @@ class DeserializerFactoryTest extends TestCase {
 	}
 
 	public function testNewStatementDeserializer() {
-		$this->assertTrue( $this->buildDeserializerFactory()->newStatementDeserializer()->isDeserializerFor(
-			[
-				'mainsnak' => [
-					'snaktype' => 'novalue',
-					'property' => 'P42'
-				],
-				'type' => 'claim'
-			]
-		) );
+		$this->assertTrue(
+			$this->buildDeserializerFactory()->newStatementDeserializer()->isDeserializerFor(
+				[
+					'mainsnak' => [
+						'snaktype' => 'novalue',
+						'property' => 'P42'
+					],
+					'type' => 'claim'
+				]
+			)
+		);
 	}
 
 	public function testStatementListDeserializer() {

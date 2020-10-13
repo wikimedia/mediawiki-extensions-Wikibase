@@ -52,7 +52,9 @@ class StatementListDeserializer implements Deserializer {
 		foreach ( $serialization as $key => $statementArray ) {
 			if ( is_string( $key ) ) {
 				if ( !is_array( $statementArray ) ) {
-					throw new DeserializationException( "The statements per property \"$key\" should be an array" );
+					throw new DeserializationException(
+						"The statements per property \"$key\" should be an array"
+					);
 				}
 
 				foreach ( $statementArray as $statementSerialization ) {

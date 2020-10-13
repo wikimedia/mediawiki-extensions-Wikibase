@@ -98,8 +98,10 @@ class PropertySerializer implements DispatchableSerializer {
 		$fingerprint = $property->getFingerprint();
 
 		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
-		$serialization['descriptions'] = $this->termListSerializer->serialize( $fingerprint->getDescriptions() );
-		$serialization['aliases'] = $this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
+		$serialization['descriptions'] =
+			$this->termListSerializer->serialize( $fingerprint->getDescriptions() );
+		$serialization['aliases'] =
+			$this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
 	}
 
 	private function addStatementListToSerialization( Property $property, array &$serialization ) {

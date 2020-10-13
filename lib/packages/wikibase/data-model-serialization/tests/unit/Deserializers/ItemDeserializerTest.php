@@ -51,7 +51,9 @@ class ItemDeserializerTest extends DispatchableDeserializerTest {
 					'values' => [ 'foo', 'bar' ]
 				]
 			] ) )
-			->will( $this->returnValue( new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) ) );
+			->will( $this->returnValue(
+				new AliasGroupList( [ new AliasGroup( 'en', [ 'foo', 'bar' ] ) ] ) )
+			);
 
 		$statement = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement->setGuid( 'test' );

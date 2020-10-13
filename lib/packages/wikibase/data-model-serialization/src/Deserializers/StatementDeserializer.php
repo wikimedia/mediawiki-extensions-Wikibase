@@ -129,7 +129,9 @@ class StatementDeserializer implements DispatchableDeserializer {
 
 	private function setGuidFromSerialization( array $serialization, Statement $statement ) {
 		if ( !is_string( $serialization['id'] ) ) {
-			throw new DeserializationException( 'The id ' . $serialization['id'] . ' is not a valid GUID.' );
+			throw new DeserializationException(
+				'The id ' . $serialization['id'] . ' is not a valid GUID.'
+			);
 		}
 
 		$statement->setGuid( $serialization['id'] );
@@ -150,7 +152,9 @@ class StatementDeserializer implements DispatchableDeserializer {
 
 	private function setRankFromSerialization( array $serialization, Statement $statement ) {
 		if ( !array_key_exists( $serialization['rank'], self::$rankIds ) ) {
-			throw new DeserializationException( 'The rank ' . $serialization['rank'] . ' is not a valid rank.' );
+			throw new DeserializationException(
+				'The rank ' . $serialization['rank'] . ' is not a valid rank.'
+			);
 		}
 
 		$statement->setRank( self::$rankIds[$serialization['rank']] );

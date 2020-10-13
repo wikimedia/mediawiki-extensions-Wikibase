@@ -62,7 +62,8 @@ class AliasGroupListSerializer implements Serializer {
 		$serialization = [];
 
 		foreach ( $aliasGroupList->getIterator() as $aliasGroup ) {
-			$serialization[$aliasGroup->getLanguageCode()] = $this->aliasGroupSerializer->serialize( $aliasGroup );
+			$serialization[$aliasGroup->getLanguageCode()] =
+				$this->aliasGroupSerializer->serialize( $aliasGroup );
 		}
 
 		if ( $this->useObjectsForMaps ) {
