@@ -119,8 +119,10 @@ class ItemSerializer implements DispatchableSerializer {
 		$fingerprint = $item->getFingerprint();
 
 		$serialization['labels'] = $this->termListSerializer->serialize( $fingerprint->getLabels() );
-		$serialization['descriptions'] = $this->termListSerializer->serialize( $fingerprint->getDescriptions() );
-		$serialization['aliases'] = $this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
+		$serialization['descriptions'] =
+			$this->termListSerializer->serialize( $fingerprint->getDescriptions() );
+		$serialization['aliases'] =
+			$this->aliasGroupListSerializer->serialize( $fingerprint->getAliasGroups() );
 	}
 
 	private function addStatementListToSerialization( Item $item, array &$serialization ) {
@@ -131,7 +133,8 @@ class ItemSerializer implements DispatchableSerializer {
 		$serialization['sitelinks'] = [];
 
 		foreach ( $item->getSiteLinkList()->toArray() as $siteLink ) {
-			$serialization['sitelinks'][$siteLink->getSiteId()] = $this->siteLinkSerializer->serialize( $siteLink );
+			$serialization['sitelinks'][$siteLink->getSiteId()] =
+				$this->siteLinkSerializer->serialize( $siteLink );
 		}
 
 		if ( $this->useObjectsForMaps ) {

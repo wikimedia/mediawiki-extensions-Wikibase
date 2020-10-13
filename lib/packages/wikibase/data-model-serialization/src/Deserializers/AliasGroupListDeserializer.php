@@ -45,7 +45,9 @@ class AliasGroupListDeserializer implements Deserializer {
 		foreach ( $serialization as $languageCode => $aliasGroupSerialization ) {
 			$this->assertAttributeIsArray( $serialization, $languageCode );
 
-			$aliasGroupList->setGroup( $this->deserializeAliasGroup( $aliasGroupSerialization, $languageCode ) );
+			$aliasGroupList->setGroup(
+				$this->deserializeAliasGroup( $aliasGroupSerialization, $languageCode )
+			);
 		}
 
 		return $aliasGroupList;

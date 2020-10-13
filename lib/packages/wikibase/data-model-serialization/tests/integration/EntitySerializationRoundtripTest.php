@@ -36,7 +36,9 @@ class EntitySerializationRoundtripTest extends TestCase {
 		$withAliases->setAliases( 'fr', [ 'Cat' ] );
 
 		$withStatements = new Item();
-		$withStatements->getStatements()->addNewStatement( new PropertyNoValueSnak( 42 ), null, null, 'guid' );
+		$withStatements->getStatements()->addNewStatement(
+			new PropertyNoValueSnak( 42 ), null, null, 'guid'
+		);
 
 		$withSiteLinks = new Item();
 		$withSiteLinks->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Nyan Cat' );

@@ -29,7 +29,8 @@ class StatementListSerializationRoundtripTest extends TestCase {
 		);
 
 		$serialization = $serializerFactory->newStatementListSerializer()->serialize( $statements );
-		$newStatements = $deserializerFactory->newStatementListDeserializer()->deserialize( $serialization );
+		$newStatements = $deserializerFactory->newStatementListDeserializer()
+			->deserialize( $serialization );
 		$this->assertEquals( $statements, $newStatements );
 	}
 
