@@ -110,7 +110,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	 * @return array [ EntityStore, EntityLookup ]
 	 */
 	protected function createStoreAndLookup() {
-		// make sure the term index is empty to avoid conflicts.
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		//NOTE: we want to test integration of WikiPageEntityRevisionLookup and WikiPageEntityStore here!
@@ -1028,7 +1027,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createStoreForItemsOnly() {
-		// make sure the term index is empty to avoid conflicts.
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$itemSource = new EntitySource(
@@ -1069,7 +1067,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createStoreForCustomEntitySource() {
-		// make sure the term index is empty to avoid conflicts.
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$customSource = new EntitySource(

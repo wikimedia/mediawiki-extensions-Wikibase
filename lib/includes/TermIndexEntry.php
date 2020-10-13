@@ -8,7 +8,8 @@ use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterAssertionException;
 
 /**
- * Object representing a term index entry.
+ * Object representing an entry in the term store
+ * (formerly known as the term index).
  *
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
