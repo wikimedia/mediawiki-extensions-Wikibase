@@ -42,7 +42,15 @@ class EntityIdRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			[ 'test' => 'http://test/item/' ],
 			[ 'test' => 'http://test/data/' ],
 			new EntitySourceDefinitions( [
-				new EntitySource( 'test', 'testdb', [ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ], 'http://test/item/', '', '', '' )
+				new EntitySource(
+					'test',
+					'testdb',
+					[ 'item' => [ 'namespaceId' => 3000, 'slot' => 'main' ] ],
+					'http://test/item/',
+					'',
+					'',
+					''
+				)
 			], new EntityTypeDefinitions( [] ) ),
 			'test',
 			[ 'test' => '' ],

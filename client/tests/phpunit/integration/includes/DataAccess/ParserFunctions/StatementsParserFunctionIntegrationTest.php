@@ -168,7 +168,10 @@ class StatementsParserFunctionIntegrationTest extends MediaWikiIntegrationTestCa
 	public function testStatementsParserFunction_multipleValues() {
 		$result = $this->parseWikitextToHtml( '{{#statements:P342|from=Q32489}}' );
 
-		$this->assertSame( "<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>", $result->getText( [ 'unwrap' => true ] ) );
+		$this->assertSame(
+			"<p><span><span>Lua&#160;:)</span>, <span>Lua&#160;:)</span></span>\n</p>",
+			$result->getText( [ 'unwrap' => true ] )
+		);
 
 		$usageAccumulator = $this->newParserOutputUsageAccumulator( $result );
 		$this->assertArrayEquals(

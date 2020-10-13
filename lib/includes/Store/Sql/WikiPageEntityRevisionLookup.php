@@ -194,7 +194,8 @@ class WikiPageEntityRevisionLookup extends DBAccessBase implements EntityRevisio
 					throw new InconsistentRedirectException(
 						$revisionId,
 						$slot,
-						"Revision '$revisionId' is marked as revision of page redirecting to another, but no redirect entity data found in slot '$slot'."
+						"Revision '$revisionId' is marked as revision of page redirecting to another," .
+						" but no redirect entity data found in slot '$slot'."
 					);
 				}
 

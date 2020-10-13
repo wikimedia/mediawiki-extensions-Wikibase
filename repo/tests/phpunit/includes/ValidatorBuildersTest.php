@@ -457,7 +457,11 @@ class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
 			// generic wikibase entity
 			'Existing property entity' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( self::EXISTING_PROPERTY_ID ) ), true ],
-			'Missing property entity' => [ 'wikibase-entity', new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ), false ],
+			'Missing property entity' => [
+				'wikibase-entity',
+				new EntityIdValue( new PropertyId( self::NON_EXISTING_PROPERTY_ID ) ),
+				false
+			],
 			'Existing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::EXISTING_ITEM_ID ) ), true ],
 			'Missing item entity' => [ 'wikibase-entity', new EntityIdValue( new ItemId( self::NON_EXISTING_ITEM_ID ) ), false ],
 			'Expected EntityId, StringValue supplied' => [ 'wikibase-entity', new StringValue( self::EXISTING_ITEM_ID ), false ],

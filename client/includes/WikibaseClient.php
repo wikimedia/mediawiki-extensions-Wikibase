@@ -706,7 +706,10 @@ final class WikibaseClient {
 	// TODO: current settings (especially (foreign) repositories blob) might be quite confusing
 	// Having a "entitySources" or so setting might be better, and would also allow unifying
 	// the way these are configured in Repo and in Client parts
-	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
+	private static function getEntitySourceDefinitionsFromSettings(
+		SettingsArray $settings,
+		EntityTypeDefinitions $entityTypeDefinitions
+	) {
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 

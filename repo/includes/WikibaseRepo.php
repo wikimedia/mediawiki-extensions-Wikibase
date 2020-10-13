@@ -424,7 +424,10 @@ class WikibaseRepo {
 		);
 	}
 
-	private static function getEntitySourceDefinitionsFromSettings( SettingsArray $settings, EntityTypeDefinitions $entityTypeDefinitions ) {
+	private static function getEntitySourceDefinitionsFromSettings(
+		SettingsArray $settings,
+		EntityTypeDefinitions $entityTypeDefinitions
+	) {
 		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
 			$configParser = new EntitySourceDefinitionsConfigParser();
 

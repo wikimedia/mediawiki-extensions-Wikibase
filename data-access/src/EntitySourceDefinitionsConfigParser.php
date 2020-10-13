@@ -85,7 +85,9 @@ class EntitySourceDefinitionsConfigParser {
 			}
 
 			if ( !is_string( $sourceData['repoDatabase'] ) && $sourceData['repoDatabase'] !== false ) {
-				throw new InvalidArgumentException( 'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.' );
+				throw new InvalidArgumentException(
+					'Symbolic database name of entity source "' . $sourceName . '" should be a string or false.'
+				);
 			}
 
 			if ( !array_key_exists( 'baseUri', $sourceData ) ) {
@@ -93,7 +95,9 @@ class EntitySourceDefinitionsConfigParser {
 			}
 
 			if ( !is_string( $sourceData['baseUri'] ) ) {
-				throw new InvalidArgumentException( 'URI base of entities from entity source "' . $sourceName . '" should be a string.' );
+				throw new InvalidArgumentException(
+					'URI base of entities from entity source "' . $sourceName . '" should be a string.'
+				);
 			}
 
 			if ( !array_key_exists( 'interwikiPrefix', $sourceData ) ) {
