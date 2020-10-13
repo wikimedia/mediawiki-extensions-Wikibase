@@ -36,7 +36,11 @@ class FingerprintPatcherTest extends TestCase {
 		return $fingerprint;
 	}
 
-	private function assertFingerprintResultsFromPatch( Fingerprint $expected, Fingerprint $original, EntityDiff $patch ) {
+	private function assertFingerprintResultsFromPatch(
+		Fingerprint $expected,
+		Fingerprint $original,
+		EntityDiff $patch
+	) {
 		$this->assertTrue( $expected->equals( $this->getPatchedFingerprint( $original, $patch ) ) );
 	}
 
