@@ -8,7 +8,7 @@
 	<rule ref="Generic.CodeAnalysis" />
 	<rule ref="Generic.Files.LineLength">
 		<properties>
-			<property name="lineLimit" value="114" />
+			<property name="lineLimit" value="120" />
 		</properties>
 	</rule>
 
