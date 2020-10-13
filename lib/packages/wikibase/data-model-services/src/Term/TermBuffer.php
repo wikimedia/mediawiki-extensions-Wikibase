@@ -19,7 +19,8 @@ interface TermBuffer {
 	 * The source from which to fetch would typically be supplied to the buffer's constructor.
 	 *
 	 * @param EntityId[] $entityIds
-	 * @param string[] $termTypes The desired term types, i.e. any of TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS
+	 * @param string[] $termTypes The desired term types,
+	 * i.e. any of TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS
 	 * @param string[] $languageCodes The desired languages.
 	 */
 	public function prefetchTerms( array $entityIds, array $termTypes, array $languageCodes );

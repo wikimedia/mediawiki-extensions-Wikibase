@@ -40,8 +40,12 @@ class SuffixEntityIdParserTest extends TestCase {
 			'extra stuff after ID' => [ 'http://acme.test/entity/', 'http://acme.test/entity/Q14#foo' ],
 			'input is shorter than prefix' => [ 'http://acme.test/entity/', 'http://acme.test/' ],
 			'input is same as prefix' => [ 'http://acme.test/entity/', 'http://acme.test/entity/' ],
-			'input is lexicographically smaller than prefix' => [ 'http://acme.test/entity/', 'http://aaaa.test/entity/Q14' ],
-			'input is lexicographically greater than prefix' => [ 'http://acme.test/entity/', 'http://cccc.test/entity/Q14' ],
+			'input is lexicographically smaller than prefix' => [
+				'http://acme.test/entity/', 'http://aaaa.test/entity/Q14'
+			],
+			'input is lexicographically greater than prefix' => [
+				'http://acme.test/entity/', 'http://cccc.test/entity/Q14'
+			],
 		];
 	}
 
