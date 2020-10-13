@@ -62,7 +62,10 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 		$writer = new NTriplesRdfWriter();
 		$writer->prefix( 'www', "http://www.test/" );
 		$writer->prefix( $directClaimNamespace, "http://acme.test/prop/" );
-		$writer->prefix( $vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM_NORM], "http://acme.test/prop-normalized/" );
+		$writer->prefix(
+			$vocabulary->propertyNamespaceNames[''][RdfVocabulary::NSP_DIRECT_CLAIM_NORM],
+			"http://acme.test/prop-normalized/"
+		);
 
 		$writer->start();
 		$writer->about( 'www', 'Q1' );
@@ -77,8 +80,22 @@ class ExternalIdentifierRdfBuilderTest extends \PHPUnit\Framework\TestCase {
 			new StringValue( 'XY-23' )
 		);
 
-		$builder->addValue( $writer, $directClaimNamespace, 'P1', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP1 );
-		$builder->addValue( $writer, $directClaimNamespace, 'P345', 'DUMMY', RdfVocabulary::NS_VALUE, $snakP345 );
+		$builder->addValue(
+			$writer,
+			$directClaimNamespace,
+			'P1',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$snakP1
+		);
+		$builder->addValue(
+			$writer,
+			$directClaimNamespace,
+			'P345',
+			'DUMMY',
+			RdfVocabulary::NS_VALUE,
+			$snakP345
+		);
 
 		$expected = [
 			'<http://www.test/Q1> <http://acme.test/prop-normalized/P1> <http://xyzzy.test/vocab/AB%26123> .',

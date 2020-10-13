@@ -109,7 +109,9 @@ return [
 					'hit' => 'wikibase.prefetchingPropertyTermLookupCache.hit'
 				]
 			);
-			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup( $entitySourceServices->getEntityRevisionLookup() );
+			$redirectResolvingRevisionLookup = new RedirectResolvingLatestRevisionLookup(
+				$entitySourceServices->getEntityRevisionLookup()
+			);
 
 			return new CachingPrefetchingTermLookup(
 				$cache,

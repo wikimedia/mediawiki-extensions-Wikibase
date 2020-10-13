@@ -60,7 +60,7 @@ class GlobeCoordinateRdfBuilder implements ValueSnakRdfBuilder {
 			//    All RDFS Literals of type geo:wktLiteral shall consist of an optional URI
 			//    identifying the coordinate reference system followed by Simple Features Well Known
 			//   Text (WKT) describing a geometric value.
-			// Example: "<http://www.opengis.net/def/crs/EPSG/0/4326> Point(33.95 -83.38)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
+			// Ex: "<http://www.opengis.net/def/crs/EPSG/0/4326> Point(33.95 -83.38)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>
 			$point = "<$globe> $point";
 		}
 

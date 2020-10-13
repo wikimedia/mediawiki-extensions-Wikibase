@@ -96,7 +96,13 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			http_build_query( $this->getRequestParams( $entityId, $revision, $language, $editLink, $preferredLanguages ) );
 	}
 
-	private function getRequestParams( EntityId $entityId, $revision, $language, $editLink, TermLanguageFallbackChain $preferredLanguages ) {
+	private function getRequestParams(
+		EntityId $entityId,
+		$revision,
+		$language,
+		$editLink,
+		TermLanguageFallbackChain $preferredLanguages
+	) {
 		return [
 			'entity' => $entityId->getSerialization(),
 			'revision' => $revision,

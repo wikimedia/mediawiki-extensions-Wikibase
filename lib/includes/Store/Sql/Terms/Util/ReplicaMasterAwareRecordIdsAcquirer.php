@@ -189,10 +189,10 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 
 			if ( count( $records ) === $recordsCount ) {
 				// Edge case. When it couldn't find the row but it couldn't insert it either.
-				// This can happen when this code tries to read the id and can't find it then another thread inserts data at the same time so
-				// this code can't insert it either but then it tries to read it again and given the lock mode of REPEATABLE_READ,
-				// which is the default for MySQL, the code end up not being be able to read the id again and gets stuck in an infinite loop.
-				// To avoid this, we read it with CONN_TRX_AUTOCOMMIT
+				// This can happen when this code tries to read the id and can't find it then another thread inserts data at the
+				// same time so this code can't insert it either but then it tries to read it again and given the lock mode of
+				// REPEATABLE_READ, which is the default for MySQL, the code end up not being be able to read the id again and
+				// gets stuck in an infinite loop. To avoid this, we read it with CONN_TRX_AUTOCOMMIT
 				// Surprisingly it's not too rare not to happen in production: T247553
 
 				$dbw = $this->getLoadBalancer()->getConnection(

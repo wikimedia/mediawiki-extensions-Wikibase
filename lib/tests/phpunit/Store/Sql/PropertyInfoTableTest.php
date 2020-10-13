@@ -89,7 +89,10 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame(
 			[
 				'P123' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'string', 'foo' => 'bar' ],
-				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+				'P456' => [
+					PropertyInfoLookup::KEY_DATA_TYPE => 'external-id',
+					PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1'
+				],
 			],
 			$table->getAllPropertyInfo()
 		);
@@ -118,7 +121,10 @@ class PropertyInfoTableTest extends MediaWikiIntegrationTestCase {
 
 		$this->assertSame(
 			[
-				'P456' => [ PropertyInfoLookup::KEY_DATA_TYPE => 'external-id', PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1' ],
+				'P456' => [
+					PropertyInfoLookup::KEY_DATA_TYPE => 'external-id',
+					PropertyInfoLookup::KEY_FORMATTER_URL => 'http://foo.bar/$1'
+				],
 			],
 			$table->getPropertyInfoForDataType( 'external-id' )
 		);

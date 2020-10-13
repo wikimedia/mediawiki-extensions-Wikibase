@@ -150,8 +150,16 @@ class PrefetchingItemTermLookupTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testPrefetchTerms_SameTermsTwice() {
-		$this->lookup->prefetchTerms( [ $this->i1 ], [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ], [ 'en' ] );
-		$this->lookup->prefetchTerms( [ $this->i1 ], [ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ], [ 'en' ] );
+		$this->lookup->prefetchTerms(
+			[ $this->i1 ],
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ],
+			[ 'en' ]
+		);
+		$this->lookup->prefetchTerms(
+			[ $this->i1 ],
+			[ TermTypes::TYPE_LABEL, TermTypes::TYPE_DESCRIPTION, TermTypes::TYPE_ALIAS ],
+			[ 'en' ]
+		);
 		$this->assertTrue( true ); // no error
 	}
 

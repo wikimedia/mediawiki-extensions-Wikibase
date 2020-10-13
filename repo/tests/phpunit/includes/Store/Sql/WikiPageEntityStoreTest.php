@@ -977,7 +977,12 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 		$store = $this->createStoreForItemsOnly();
 		$this->expectException( InvalidArgumentException::class );
 
-		$store->saveEntity( new Property( new PropertyId( 'P123' ), null, 'string' ), 'testing', $this->getTestUser()->getUser(), EDIT_NEW );
+		$store->saveEntity(
+			new Property( new PropertyId( 'P123' ), null, 'string' ),
+			'testing',
+			$this->getTestUser()->getUser(),
+			EDIT_NEW
+		);
 	}
 
 	public function testDeleteEntityFails_GivenEntityIdFromOtherSource() {

@@ -464,7 +464,8 @@ class WikiPageEntityRevisionLookupTest extends EntityRevisionLookupTestCase {
 		} catch ( InconsistentRedirectException $exception ) {
 			$this->assertInstanceOf( InconsistentRedirectException::class, $exception );
 			$this->assertSame(
-				"Revision '2000' is marked as revision of page redirecting to another, but no redirect entity data found in slot 'mediainfo'.",
+				"Revision '2000' is marked as revision of page redirecting to another," .
+				" but no redirect entity data found in slot 'mediainfo'.",
 				$exception->getMessage()
 			);
 			$this->assertSame( $revId, $exception->getRevisionId() );

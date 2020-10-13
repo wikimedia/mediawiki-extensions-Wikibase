@@ -50,7 +50,9 @@ class DatabaseUsageCheckingTermStoreCleanerTest extends MediaWikiIntegrationTest
 		$termInLangIdToDelete = 546562;
 		$this->insertItemTermRow( $itemId, $stillUsedItemTermInLang );
 		$this->insertPropertyTermRow( $propertyId, $stillUsedPropertyTermInLang );
-		$this->innerCleaner->expects( $this->once() )->method( 'cleanTermInLangIds' )->with( $this->db, $this->db, [ $termInLangIdToDelete ] );
+		$this->innerCleaner->expects( $this->once() )
+			->method( 'cleanTermInLangIds' )
+			->with( $this->db, $this->db, [ $termInLangIdToDelete ] );
 		$cleaner = $this->getCleaner();
 		$cleaner->cleanTermInLangIds( [ $termInLangIdToDelete, $stillUsedItemTermInLang, $stillUsedPropertyTermInLang ] );
 	}
