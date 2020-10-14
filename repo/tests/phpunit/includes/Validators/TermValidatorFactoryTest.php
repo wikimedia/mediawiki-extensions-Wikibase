@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Store\TermsCollisionDetectorFactory;
 use Wikibase\Repo\Validators\FingerprintUniquenessValidator;
-use Wikibase\Repo\Validators\FingerprintValidator;
+use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -101,7 +101,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$validator = $builders->getFingerprintValidator();
 
-		$this->assertInstanceOf( FingerprintValidator::class, $validator );
+		$this->assertInstanceOf( LabelDescriptionNotEqualValidator::class, $validator );
 
 		$dupeTerms = new TermList( [ new Term( 'en', 'DUPE' ) ] );
 		$blaTerms = new TermList( [ new Term( 'en', 'bla' ) ] );

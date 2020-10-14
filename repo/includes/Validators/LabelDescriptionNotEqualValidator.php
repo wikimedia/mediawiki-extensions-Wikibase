@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\TermList;
  * @license GPL-2.0-or-later
  * @author Greta Doci
  */
-class LabelDescriptionNotEqualValidator implements EntityValidator, FingerprintValidator {
+class LabelDescriptionNotEqualValidator implements EntityValidator {
 
 	/**
 	 * @see EntityValidator::validate()
@@ -35,8 +35,6 @@ class LabelDescriptionNotEqualValidator implements EntityValidator, FingerprintV
 	}
 
 	/**
-	 * @see FingerprintValidator::validateFingerprint()
-	 *
 	 * @param TermList $labels
 	 * @param TermList $descriptions
 	 * @param EntityId $entityId

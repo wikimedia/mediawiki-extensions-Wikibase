@@ -94,7 +94,7 @@ class TermValidatorFactory {
 	 *       checks in ADDITION to the ones performed by the validators
 	 *       returned by the getLabelValidator() etc functions below.
 	 *
-	 * @return FingerprintValidator
+	 * @return LabelDescriptionNotEqualValidator
 	 */
 	public function getFingerprintValidator() {
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
