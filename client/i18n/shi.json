@@ -6,6 +6,8 @@
 			"Lhoussine AIT TAYFST"
 		]
 	},
+	"wikibase-comment-update": "{{WBREPONAME}} item tbuddel",
+	"wikibase-dataitem": "{{WBREPONAME}} taɣawsa",
 	"wikibase-editlinks": "Snfl ilikn",
 	"wikibase-editlinkstitle": "Snfl ilinkn igrutlayn",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
@@ -13,5 +15,5 @@
 	"wikibase-rc-hide-wikidata-show": "Ml",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Asnfl n {{WBREPONAME}}",
-	"wikibase-otherprojects": "G isnta yaḍni"
+	"wikibase-otherprojects": "Ɣ isnta yaḍni"
 }
