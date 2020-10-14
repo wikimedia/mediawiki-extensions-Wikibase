@@ -170,8 +170,7 @@ class ChangeOpDescription extends ChangeOpBase {
 		if ( $entity instanceof LabelsProvider ) {
 			$validator = $this->termValidatorFactory->getLabelDescriptionNotEqualValidator();
 
-			// Check if the new fingerprint of the entity is valid (e.g. if the combination
-			// of label and description  is still unique)
+			// Check if the new fingerprint of the entity is valid
 			$descriptions = clone $entity->getDescriptions();
 			$this->updateDescriptions( $descriptions );
 
