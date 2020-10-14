@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\DataModel\Term\TermList;
@@ -37,15 +36,13 @@ class LabelDescriptionNotEqualValidator implements EntityValidator {
 	/**
 	 * @param TermList $labels
 	 * @param TermList $descriptions
-	 * @param EntityId $entityId
 	 * @param string[]|null $languageCodes
 	 *
 	 * @return Result
 	 */
-	public function validateFingerprint(
+	public function validateLabelAndDescription(
 		TermList $labels,
 		TermList $descriptions,
-		EntityId $entityId,
 		array $languageCodes = null
 	) {
 		$labels = $labels->toTextArray();

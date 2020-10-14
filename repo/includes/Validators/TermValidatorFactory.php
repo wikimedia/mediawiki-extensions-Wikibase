@@ -71,9 +71,7 @@ class TermValidatorFactory {
 	}
 
 	/**
-	 * Not to be confused with getFingerprintValidator(). This function returns fingerprint
-	 * uniqueness validator that validates uniqueness in the term store.
-	 * While getFingerprintValidator() returns Fingerprint validators to be applied on entire entity.
+	 * This function returns a fingerprint uniqueness validator that validates uniqueness in the term store.
 	 */
 	public function getFingerprintUniquenessValidator( string $entityType ): ?ValueValidator {
 		if ( in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
@@ -87,16 +85,15 @@ class TermValidatorFactory {
 	}
 
 	/**
-	 * Returns a validator for checking an (updated) fingerprint.
-	 * May be used to apply global uniqueness checks.
+	 * Returns a validator for checking distinctness of labels & descriptions
 	 *
-	 * @note The fingerprint validator provided here is intended to apply
+	 * @note The validator provided here is intended to apply
 	 *       checks in ADDITION to the ones performed by the validators
 	 *       returned by the getLabelValidator() etc functions below.
 	 *
 	 * @return LabelDescriptionNotEqualValidator
 	 */
-	public function getFingerprintValidator() {
+	public function getLabelDescriptionNotEqualValidator() {
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		return new LabelDescriptionNotEqualValidator();
 	}

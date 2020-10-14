@@ -6,7 +6,6 @@ use InvalidArgumentException;
 use ValueValidators\ValueValidator;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
@@ -96,21 +95,20 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		}
 	}
 
-	public function testGetFingerprintValidator() {
+	public function testGetLabelDescriptionNotEqualValidator() {
 		$builders = $this->newFactory();
 
-		$validator = $builders->getFingerprintValidator();
+		$validator = $builders->getLabelDescriptionNotEqualValidator();
 
 		$this->assertInstanceOf( LabelDescriptionNotEqualValidator::class, $validator );
 
 		$dupeTerms = new TermList( [ new Term( 'en', 'DUPE' ) ] );
 		$blaTerms = new TermList( [ new Term( 'en', 'bla' ) ] );
-		$q99 = new ItemId( 'Q99' );
 
-		$result = $validator->validateFingerprint( $dupeTerms, $blaTerms, $q99 );
+		$result = $validator->validateLabelAndDescription( $dupeTerms, $blaTerms );
 		$this->assertTrue( $result->isValid(), 'isValid(good)' );
 
-		$result = $validator->validateFingerprint( $dupeTerms, $dupeTerms, $q99 );
+		$result = $validator->validateLabelAndDescription( $dupeTerms, $dupeTerms );
 		$this->assertFalse( $result->isValid(), 'isValid(bad): label/description' );
 	}
 

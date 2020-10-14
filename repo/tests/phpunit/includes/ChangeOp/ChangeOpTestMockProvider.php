@@ -344,7 +344,7 @@ class ChangeOpTestMockProvider {
 	/**
 	 * @return LabelDescriptionNotEqualValidator
 	 */
-	public function getMockFingerprintValidator() {
+	public function getLabelDescriptionNotEqualValidator() {
 		return new LabelDescriptionNotEqualValidator();
 	}
 
@@ -353,7 +353,7 @@ class ChangeOpTestMockProvider {
 	 * The validators consider the string "INVALID" to be invalid, and "DUPE" to be duplicates.
 	 *
 	 * @see getMockTermValidator()
-	 * @see getMockFingerprintValidator()
+	 * @see getLabelDescriptionNotEqualValidator()
 	 *
 	 * @return TermValidatorFactory
 	 */
@@ -363,9 +363,9 @@ class ChangeOpTestMockProvider {
 			->getMock();
 
 		$mock->expects( TestCase::any() )
-			->method( 'getFingerprintValidator' )
+			->method( 'getLabelDescriptionNotEqualValidator' )
 			->will( TestCase::returnCallback(
-				[ $this, 'getMockFingerprintValidator' ]
+				[ $this, 'getLabelDescriptionNotEqualValidator' ]
 			) );
 
 		$mock->expects( TestCase::any() )

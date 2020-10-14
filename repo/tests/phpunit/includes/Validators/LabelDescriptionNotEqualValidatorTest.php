@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Tests\Validators;
 
 use ValueValidators\Result;
 use Wikibase\DataModel\Entity\Item;
-use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
@@ -68,10 +67,9 @@ class LabelDescriptionNotEqualValidatorTest extends \PHPUnit\Framework\TestCase 
 			$descriptionsTermList->setTextForLanguage( $languageCode, $description );
 		}
 
-		$result = $validator->validateFingerprint(
+		$result = $validator->validateLabelAndDescription(
 			$labelsTermList,
 			$descriptionsTermList,
-			new ItemId( 'Q1' ),
 			$languages
 		);
 
