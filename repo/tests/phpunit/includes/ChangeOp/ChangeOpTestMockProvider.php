@@ -30,7 +30,6 @@ use Wikibase\Repo\Store\SiteLinkConflictLookup;
 use Wikibase\Repo\Validators\CompositeValidator;
 use Wikibase\Repo\Validators\DataValueValidator;
 use Wikibase\Repo\Validators\LabelDescriptionNotEqualValidator;
-use Wikibase\Repo\Validators\NullFingerprintValidator;
 use Wikibase\Repo\Validators\RegexValidator;
 use Wikibase\Repo\Validators\SnakValidator;
 use Wikibase\Repo\Validators\TermValidatorFactory;
@@ -343,25 +342,10 @@ class ChangeOpTestMockProvider {
 	}
 
 	/**
-	 * Returns a mock fingerprint validator. If $entityType is Item::ENTITY_TYPE,
-	 * the validator will detect an error if the label and the description are
-	 * the same in any language.
-	 *
-	 * For other entity types, the validator will consider any fingerprint valid.
-	 *
-	 * @see getMockLabelDescriptionDuplicateDetector()
-	 *
-	 * @param string $entityType
-	 * @return LabelDescriptionNotEqualValidator|NullFingerprintValidator
+	 * @return LabelDescriptionNotEqualValidator
 	 */
-	public function getMockFingerprintValidator( $entityType ) {
-		switch ( $entityType ) {
-			case Item::ENTITY_TYPE:
-				return new LabelDescriptionNotEqualValidator();
-
-			default:
-				return new NullFingerprintValidator();
-		}
+	public function getMockFingerprintValidator() {
+		return new LabelDescriptionNotEqualValidator();
 	}
 
 	/**

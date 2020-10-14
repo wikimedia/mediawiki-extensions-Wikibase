@@ -4,7 +4,6 @@ namespace Wikibase\Repo\Validators;
 
 use InvalidArgumentException;
 use ValueValidators\ValueValidator;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -73,8 +72,8 @@ class TermValidatorFactory {
 
 	/**
 	 * Not to be confused with getFingerprintValidator(). This function returns fingerprint
-	 * uniqueness validator that validates uniqueness only in new store. While getFingerprintValidator()
-	 * returns Fingerprint validators to be applied on entire entity, including uniqueness checks in old store.
+	 * uniqueness validator that validates uniqueness in the term store.
+	 * While getFingerprintValidator() returns Fingerprint validators to be applied on entire entity.
 	 */
 	public function getFingerprintUniquenessValidator( string $entityType ): ?ValueValidator {
 		if ( in_array( $entityType, [ Item::ENTITY_TYPE, Property::ENTITY_TYPE ] ) ) {
@@ -95,11 +94,9 @@ class TermValidatorFactory {
 	 *       checks in ADDITION to the ones performed by the validators
 	 *       returned by the getLabelValidator() etc functions below.
 	 *
-	 * @param string $entityType
-	 *
 	 * @return FingerprintValidator
 	 */
-	public function getFingerprintValidator( $entityType, EntityId $entityId ) {
+	public function getFingerprintValidator() {
 		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		return new LabelDescriptionNotEqualValidator();
 	}
