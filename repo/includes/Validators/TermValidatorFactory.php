@@ -94,7 +94,6 @@ class TermValidatorFactory {
 	 * @return LabelDescriptionNotEqualValidator
 	 */
 	public function getLabelDescriptionNotEqualValidator() {
-		//TODO: Make this configurable. Use a builder. Allow more types to register.
 		return new LabelDescriptionNotEqualValidator();
 	}
 
