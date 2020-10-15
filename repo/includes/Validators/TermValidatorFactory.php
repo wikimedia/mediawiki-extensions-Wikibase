@@ -123,11 +123,9 @@ class TermValidatorFactory {
 	}
 
 	/**
-	 * @param string $entityType
-	 *
 	 * @return ValueValidator
 	 */
-	public function getAliasValidator( $entityType ) {
+	public function getAliasValidator() {
 		$validators = $this->getCommonTermValidators( 'alias-' );
 
 		return new CompositeValidator( $validators, true );

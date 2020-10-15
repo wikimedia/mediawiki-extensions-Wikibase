@@ -136,7 +136,7 @@ class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 		$result = $builders->getDescriptionValidator()->validate( $string );
 		$this->assertSame( $expected, $result->isValid() );
 
-		$result = $builders->getAliasValidator( $entityType )->validate( $string );
+		$result = $builders->getAliasValidator()->validate( $string );
 		$this->assertSame( $expected, $result->isValid() );
 	}
 

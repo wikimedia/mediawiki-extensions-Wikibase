@@ -280,7 +280,7 @@ class SpecialNewItem extends SpecialNewEntity {
 		}
 
 		if ( $formData[self::FIELD_ALIASES] !== [] ) {
-			$validator = $this->termValidatorFactory->getAliasValidator( $this->getEntityType() );
+			$validator = $this->termValidatorFactory->getAliasValidator();
 			foreach ( $formData[self::FIELD_ALIASES] as $alias ) {
 				$result = $validator->validate( $alias );
 				if ( !$result->isValid() ) {
