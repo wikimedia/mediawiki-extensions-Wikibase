@@ -39,32 +39,4 @@ interface MatchingTermsLookup {
 		array $options = []
 	);
 
-	/**
-	 * Returns the terms that match the provided conditions ranked with the 'most important' / top first.
-	 * Will only return one TermIndexEntry per Entity
-	 *
-	 * $terms is an array of Term objects. Terms are joined by OR.
-	 * The fields of the terms are joined by AND.
-	 *
-	 * A default can be provided for termType and entityType via the corresponding
-	 * method parameters.
-	 *
-	 * @param TermIndexSearchCriteria[] $criteria
-	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
-	 * @param array $options
-	 *        Accepted options are:
-	 *        - caseSensitive: boolean, default true
-	 *        - prefixSearch: boolean, default false
-	 *        - LIMIT: int, defaults to none
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	public function getTopMatchingTerms(
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
-	);
-
 }

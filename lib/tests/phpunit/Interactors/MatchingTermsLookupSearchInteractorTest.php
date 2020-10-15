@@ -372,6 +372,18 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 
 		$results = $interactor->searchForEntities( ...$params );
 
+		$results = array_filter( $results, function ( $result, $index ) use ( $results ) {
+			foreach ( $results as $lowerIndex => $earlierResult ) {
+				if ( $lowerIndex >= $index ) {
+					break;
+				}
+				if ( $result->getEntityId()->equals( $earlierResult->getEntityId() ) ) {
+					return false;
+				}
+			}
+			return true;
+		}, ARRAY_FILTER_USE_BOTH );
+
 		$this->assertCount(
 			count( $expectedTermsDetails ),
 			$results,

@@ -67,47 +67,6 @@ class MockMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * Returns the same as getMatchingTerms simply making sure only one term
-	 * is returned per EntityId. This is the first term.
-	 * Weighting does not affect the order of return by this method.
-	 *
-	 * @param TermIndexSearchCriteria[] $criteria
-	 * @param string|string[]|null $termType
-	 * @param string|string[]|null $entityType
-	 * @param array $options
-	 *
-	 * @return TermIndexEntry[]
-	 */
-	public function getTopMatchingTerms(
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
-	) {
-		$options['orderByWeight'] = true;
-
-		if ( array_key_exists( 'LIMIT', $options ) ) {
-			$limit = $options['LIMIT'];
-		}
-		$options['LIMIT'] = 2500;
-
-		$terms = $this->getMatchingTerms( $criteria, $termType, $entityType, $options );
-		$previousEntityIdSerializations = [];
-		$returnTerms = [];
-		foreach ( $terms as $termIndexEntry ) {
-			if ( !in_array( $termIndexEntry->getEntityId()->getSerialization(), $previousEntityIdSerializations ) ) {
-				$returnTerms[] = $termIndexEntry;
-				$previousEntityIdSerializations[] = $termIndexEntry->getEntityId()->getSerialization();
-			}
-		}
-
-		if ( isset( $limit ) && count( $returnTerms ) > $limit ) {
-			$returnTerms = array_slice( $returnTerms, 0, $limit );
-		}
-		return $returnTerms;
-	}
-
-	/**
 	 * @param TermIndexEntry $term
 	 * @param TermIndexSearchCriteria[] $templates
 	 * @param array $options
