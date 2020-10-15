@@ -233,19 +233,6 @@ class DatabaseMatchingTermsLookup implements MatchingTermsLookup {
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	public function getTopMatchingTerms(
-		array $criteria,
-		$termType = null,
-		$entityType = null,
-		array $options = []
-	) {
-		// The new term store doesn't support order by weight.
-		return $this->getMatchingTerms( $criteria, $termType, $entityType, $options );
-	}
-
-	/**
 	 * @param object $termRow
 	 *
 	 * @return EntityId|null
