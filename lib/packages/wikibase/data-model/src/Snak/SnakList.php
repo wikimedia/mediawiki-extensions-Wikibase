@@ -18,8 +18,6 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
- *
- * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
  */
 class SnakList extends ArrayObject implements Comparable, Hashable {
 

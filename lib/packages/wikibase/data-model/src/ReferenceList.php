@@ -24,8 +24,6 @@ use Wikibase\DataModel\Snak\Snak;
  * @author H. Snater < mediawiki@snater.com >
  * @author Thiemo Kreuz
  * @author Bene* < benestar.wikimedia@gmail.com >
- *
- * @phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
  */
 class ReferenceList implements Comparable, Countable, IteratorAggregate, Serializable {
 
