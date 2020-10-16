@@ -638,4 +638,47 @@ class ItemContentTest extends EntityContentTestCase {
 		$this->assertInstanceOf( ParserOutput::class, $parserOutput );
 	}
 
+	private function setLanguageCodeEnglish() {
+		$this->setMwGlobals( 'wgLanguageCode', 'en' );
+	}
+
+	public function testGetSummaryText() {
+		$this->setLanguageCodeEnglish();
+
+		$labels = $this->newBlank();
+		$labels->getItem()->setLabel( 'de', 'Will get chosen' );
+		$labels->getItem()->setLabel( 'sv', 'Boo' );
+		$this->assertEquals( 'Will get chosen', $labels->getTextForSummary() );
+	}
+
+	public function testGetSummaryTextGetsCurrentLanguage() {
+		$this->setLanguageCodeEnglish();
+
+		$labels = $this->newBlank();
+		$labels->getItem()->setLabel( 'de', 'Moo' );
+		$labels->getItem()->setLabel( 'en', 'Will get chosen' );
+		$this->assertEquals( 'Will get chosen', $labels->getTextForSummary() );
+	}
+
+	public function testSummaryGetsCutOffIfTooLong() {
+		$this->setLanguageCodeEnglish();
+
+		$labels = $this->newBlank();
+		$labels->getItem()->setLabel( 'en', 'Will get chosen' );
+		$this->assertEquals( 'Will ge...', $labels->getTextForSummary( 10 ) );
+	}
+
+	public function testGetSummaryNoLabelsReturnsEmptyString() {
+		$labels = $this->newBlank();
+		$this->assertSame( '', $labels->getTextForSummary() );
+	}
+
+	public function testGetSummaryRedirect() {
+		$itemContent = new ItemContent(
+			null,
+			new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
+			Title::newFromText( 'Item:Q2' )
+		);
+		$this->assertSame( '#REDIRECT [[Item:Q2]]', $itemContent->getTextForSummary() );
+	}
 }
