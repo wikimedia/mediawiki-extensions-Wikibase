@@ -280,6 +280,21 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
 					],
+					[
+						'entityId' => new ItemId( 'Q111' ),
+						'term' => new Term( 'en', 'Foo' ),
+						'termtype' => 'description',
+					],
+					[
+						'entityId' => new ItemId( 'Q111' ),
+						'term' => new Term( 'en', 'Foo' ),
+						'termtype' => 'alias',
+					],
+					[
+						'entityId' => new ItemId( 'Q111' ),
+						'term' => new Term( 'en', 'FOO' ),
+						'termtype' => 'alias',
+					],
 				],
 			],
 			'Q111 Foo en aliases match case sensitive' => [
@@ -293,6 +308,16 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 						'term' => new Term( 'en', 'Foo' ),
 						'termtype' => 'label',
 					],
+					[
+						'entityId' => new ItemId( 'Q111' ),
+						'term' => new Term( 'en', 'Foo' ),
+						'termtype' => 'description',
+					],
+					[
+						'entityId' => new ItemId( 'Q111' ),
+						'term' => new Term( 'en', 'Foo' ),
+						'termtype' => 'alias',
+					],
 				],
 			],
 			'Q555 Ta en-ca with fallback aliases only' => [
@@ -304,6 +329,11 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 					[
 						'entityId' => new ItemId( 'Q555' ),
 						'term' => new Term( 'en-ca', 'TAAA' ),
+						'termtype' => 'alias',
+					],
+					[
+						'entityId' => new ItemId( 'Q555' ),
+						'term' => new Term( 'en-ca', 'Taa' ),
 						'termtype' => 'alias',
 					],
 				],
@@ -328,6 +358,11 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 						'entityId' => new PropertyId( 'P22' ),
 						'term' => new Term( 'en', 'Lama' ),
 						'termtype' => 'label' ,
+					],
+					[
+						'entityId' => new PropertyId( 'P22' ),
+						'term' => new Term( 'en', 'La-description' ),
+						'termtype' => 'description' ,
 					],
 				],
 			],
@@ -371,18 +406,6 @@ class MatchingTermsLookupSearchInteractorTest extends \PHPUnit\Framework\TestCas
 		$interactor = $this->newTermSearchInteractor( $caseSensitive, $prefixSearch, $limit );
 
 		$results = $interactor->searchForEntities( ...$params );
-
-		$results = array_filter( $results, function ( $result, $index ) use ( $results ) {
-			foreach ( $results as $lowerIndex => $earlierResult ) {
-				if ( $lowerIndex >= $index ) {
-					break;
-				}
-				if ( $result->getEntityId()->equals( $earlierResult->getEntityId() ) ) {
-					return false;
-				}
-			}
-			return true;
-		}, ARRAY_FILTER_USE_BOTH );
 
 		$this->assertCount(
 			count( $expectedTermsDetails ),
