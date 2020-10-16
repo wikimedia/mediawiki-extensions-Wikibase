@@ -64,7 +64,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSetGuid( Statement $statement ) {
 		$statement->setGuid( 'foo-bar-baz' );
-		$this->assertEquals( 'foo-bar-baz', $statement->getGuid() );
+		$this->assertSame( 'foo-bar-baz', $statement->getGuid() );
 	}
 
 	/**
@@ -73,10 +73,10 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	public function testGetGuid( Statement $statement ) {
 		$guid = $statement->getGuid();
 		$this->assertTrue( $guid === null || is_string( $guid ) );
-		$this->assertEquals( $guid, $statement->getGuid() );
+		$this->assertSame( $guid, $statement->getGuid() );
 
 		$statement->setGuid( 'foobar' );
-		$this->assertEquals( 'foobar', $statement->getGuid() );
+		$this->assertSame( 'foobar', $statement->getGuid() );
 	}
 
 	public function testHashStability() {
@@ -110,7 +110,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	public function testSerialize( Statement $statement ) {
 		$copy = unserialize( serialize( $statement ) );
 
-		$this->assertEquals( $statement->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
+		$this->assertSame( $statement->getHash(), $copy->getHash(), 'Serialization roundtrip should not affect hash' );
 	}
 
 	public function testGuidDoesNotAffectHash() {
@@ -120,7 +120,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 		$statement1 = new Statement( new PropertyNoValueSnak( 42 ) );
 		$statement1->setGuid( 'statement1' );
 
-		$this->assertEquals( $statement0->getHash(), $statement1->getHash() );
+		$this->assertSame( $statement0->getHash(), $statement1->getHash() );
 	}
 
 	/**
@@ -206,7 +206,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 
 		$statement->setReferences( $references );
 
-		$this->assertEquals( $references, $statement->getReferences() );
+		$this->assertSame( $references, $statement->getReferences() );
 	}
 
 	/**
@@ -250,7 +250,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testSetRank( Statement $statement ) {
 		$statement->setRank( Statement::RANK_DEPRECATED );
-		$this->assertEquals( Statement::RANK_DEPRECATED, $statement->getRank() );
+		$this->assertSame( Statement::RANK_DEPRECATED, $statement->getRank() );
 	}
 
 	/**
@@ -265,7 +265,7 @@ class StatementTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetPropertyId( Statement $statement ) {
-		$this->assertEquals(
+		$this->assertSame(
 			$statement->getMainSnak()->getPropertyId(),
 			$statement->getPropertyId()
 		);

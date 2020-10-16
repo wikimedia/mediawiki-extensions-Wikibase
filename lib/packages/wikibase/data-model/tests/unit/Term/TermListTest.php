@@ -76,7 +76,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 
 	public function testGivenNoTerms_toTextArrayReturnsEmptyArray() {
 		$list = new TermList();
-		$this->assertEquals( [], $list->toTextArray() );
+		$this->assertSame( [], $list->toTextArray() );
 	}
 
 	public function testGivenTerms_toTextArrayReturnsTermsInFormat() {
@@ -85,7 +85,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 			new Term( 'de', 'bar' ),
 		] );
 
-		$this->assertEquals(
+		$this->assertSame(
 			[
 				'en' => 'foo',
 				'de' => 'bar',
@@ -100,7 +100,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		] );
 
 		foreach ( $list as $key => $term ) {
-			$this->assertEquals( 'en', $key );
+			$this->assertSame( 'en', $key );
 			$this->assertEquals( new Term( 'en', 'foo' ), $term );
 		}
 	}
@@ -415,8 +415,8 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		$terms = new TermList();
 		$terms->addAll( [ $enTerm, $deTerm ] );
 
-		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
-		$this->assertEquals( $deTerm, $terms->getByLanguage( 'de' ) );
+		$this->assertSame( $enTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertSame( $deTerm, $terms->getByLanguage( 'de' ) );
 	}
 
 	public function testWhenAddingTermsToAListThatDoesContainThem_theyOverrideTheExistingOnes() {
@@ -427,7 +427,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		$terms = new TermList( [ $enTerm ] );
 		$terms->addAll( [ $newEnTerm ] );
 
-		$this->assertEquals( $newEnTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertSame( $newEnTerm, $terms->getByLanguage( 'en' ) );
 	}
 
 	public function testWhenAddingTerms_existingOnesAreNotLost() {
@@ -437,7 +437,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		$terms = new TermList( [ $enTerm ] );
 		$terms->addAll( [ $deTerm ] );
 
-		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertSame( $enTerm, $terms->getByLanguage( 'en' ) );
 	}
 
 	public function testCanAddTermIterables() {
@@ -446,7 +446,7 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 		$terms = new TermList();
 		$terms->addAll( new TermList( [ $enTerm ] ) );
 
-		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertSame( $enTerm, $terms->getByLanguage( 'en' ) );
 	}
 
 	public function testWhenAddingEmptyTerms_theyRemoveExistingOnes() {
@@ -463,8 +463,8 @@ class TermListTest extends \PHPUnit\Framework\TestCase {
 
 		$terms = new TermList( new TermList( [ $enTerm, $deTerm ] ) );
 
-		$this->assertEquals( $enTerm, $terms->getByLanguage( 'en' ) );
-		$this->assertEquals( $deTerm, $terms->getByLanguage( 'de' ) );
+		$this->assertSame( $enTerm, $terms->getByLanguage( 'en' ) );
+		$this->assertSame( $deTerm, $terms->getByLanguage( 'de' ) );
 	}
 
 	public function testWhenProvidingNonTerms_constructorThrowsException() {

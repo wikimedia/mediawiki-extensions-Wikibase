@@ -63,7 +63,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 
 		$statements = new StatementByGuidMap( [ $statement ] );
 
-		$this->assertEquals( $statement, $statements->getStatementByGuid( 'some guid' ) );
+		$this->assertSame( $statement, $statements->getStatementByGuid( 'some guid' ) );
 	}
 
 	public function testGivenGuidOfNotPresentStatement_getStatementByGuidReturnsNull() {
@@ -160,7 +160,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 			'other guid' => $statement2
 		];
 
-		$this->assertEquals( $expectedStatements, $iteratedStatements );
+		$this->assertSame( $expectedStatements, $iteratedStatements );
 	}
 
 	public function testGivenNotPresentStatement_addStatementAddsIt() {
@@ -179,7 +179,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 
 		$statements->addStatement( $statement2 );
 
-		$this->assertEquals( $statement2, $statements->getStatementByGuid( 'some guid' ) );
+		$this->assertSame( $statement2, $statements->getStatementByGuid( 'some guid' ) );
 	}
 
 	public function testToArray() {
@@ -193,7 +193,7 @@ class StatementByGuidMapTest extends \PHPUnit\Framework\TestCase {
 			'other guid' => $statement2
 		];
 
-		$this->assertEquals( $expectedStatements, $statementMap->toArray() );
+		$this->assertSame( $expectedStatements, $statementMap->toArray() );
 	}
 
 }

@@ -138,7 +138,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$list = new StatementList( $statement );
 
 		foreach ( $list as $statementFormList ) {
-			$this->assertEquals( $statement, $statementFormList );
+			$this->assertSame( $statement, $statementFormList );
 		}
 	}
 
@@ -340,7 +340,7 @@ class StatementListTest extends \PHPUnit\Framework\TestCase {
 		$object = new ArrayObject( $statementArray );
 		$list = new StatementList( $object );
 
-		$this->assertEquals(
+		$this->assertSame(
 			$statementArray,
 			array_values( $list->toArray() )
 		);

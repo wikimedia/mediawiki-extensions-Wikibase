@@ -31,7 +31,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetSiteId( $siteId ) {
 		$siteLink = new SiteLink( $siteId, 'Wikidata' );
-		$this->assertEquals( $siteId, $siteLink->getSiteId() );
+		$this->assertSame( $siteId, $siteLink->getSiteId() );
 	}
 
 	public function siteIdProvider() {
@@ -67,7 +67,7 @@ class SiteLinkTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetPageName( $pageName ) {
 		$siteLink = new SiteLink( 'enwiki', $pageName );
-		$this->assertEquals( $pageName, $siteLink->getPageName() );
+		$this->assertSame( $pageName, $siteLink->getPageName() );
 	}
 
 	public function pageNameProvider() {

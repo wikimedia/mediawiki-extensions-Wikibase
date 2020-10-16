@@ -40,10 +40,10 @@ class MapValueHasherTest extends \PHPUnit\Framework\TestCase {
 		unset( $map1['foo'] );
 		$map1[] = $map0['foo'];
 
-		$this->assertEquals( $hash, $hasher->hash( $map1 ) );
+		$this->assertSame( $hash, $hasher->hash( $map1 ) );
 
 		$map4 = new ArrayObject( $map0 );
-		$this->assertEquals( $hash, $hasher->hash( $map4 ) );
+		$this->assertSame( $hash, $hasher->hash( $map4 ) );
 
 		$map2 = $map0;
 		unset( $map2['foo'] );

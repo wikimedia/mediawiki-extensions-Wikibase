@@ -62,7 +62,7 @@ class EntityIdValueTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetType( EntityIdValue $id ) {
-		$this->assertEquals( 'wikibase-entityid', $id->getType() );
+		$this->assertSame( 'wikibase-entityid', $id->getType() );
 	}
 
 	/**

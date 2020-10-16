@@ -80,10 +80,10 @@ class EntityRedirectTest extends \PHPUnit\Framework\TestCase {
 	 * @param bool $expected
 	 */
 	public function testEquals( EntityRedirect $a, $b, $expected ) {
-		$this->assertEquals( $expected, $a->equals( $b ), '$a->equals( $b )' );
+		$this->assertSame( $expected, $a->equals( $b ), '$a->equals( $b )' );
 
 		if ( $b instanceof EntityRedirect ) {
-			$this->assertEquals( $expected, $b->equals( $a ), '$b->equals( $a )' );
+			$this->assertSame( $expected, $b->equals( $a ), '$b->equals( $a )' );
 		}
 	}
 

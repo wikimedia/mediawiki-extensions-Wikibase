@@ -127,7 +127,7 @@ class DerivedPropertyValueSnakTest extends \PHPUnit\Framework\TestCase {
 			[ 'foo' => new StringValue( 'foo' ), 'bar' => new StringValue( 'bar' ) ]
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			'a:2:{i:0;s:5:"P9001";i:1;C:22:"DataValues\StringValue":2:{bc}}',
 			$snak->serialize()
 		);
