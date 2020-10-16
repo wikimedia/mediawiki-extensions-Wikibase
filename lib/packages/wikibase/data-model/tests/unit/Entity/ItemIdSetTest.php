@@ -27,7 +27,7 @@ class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetSerializations( array $itemIds, array $expected ) {
 		$set = new ItemIdSet( $itemIds );
-		$this->assertEquals( $expected, $set->getSerializations() );
+		$this->assertSame( $expected, $set->getSerializations() );
 	}
 
 	public function serializationsProvider() {
@@ -48,7 +48,7 @@ class ItemIdSetTest extends \PHPUnit\Framework\TestCase {
 			new ItemId( 'Q1' ),
 			new ItemId( 'Q2' ),
 		] );
-		$this->assertEquals( 2, $set->count() );
+		$this->assertSame( 2, $set->count() );
 	}
 
 	public function testGivenNotSetId_hasReturnsFalse() {

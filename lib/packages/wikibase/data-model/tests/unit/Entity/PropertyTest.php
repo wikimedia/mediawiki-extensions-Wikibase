@@ -617,7 +617,7 @@ class PropertyTest extends \PHPUnit\Framework\TestCase {
 			$property->getId(),
 			'cleared Property should keep its id'
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$clone->getDataTypeId(),
 			$property->getDataTypeId(),
 			'cleared Property should keep its data type'

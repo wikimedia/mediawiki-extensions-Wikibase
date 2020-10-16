@@ -92,7 +92,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetHashIsStable( Reference $reference ) {
-		$this->assertEquals( $reference->getHash(), $reference->getHash() );
+		$this->assertSame( $reference->getHash(), $reference->getHash() );
 	}
 
 	/**
@@ -100,7 +100,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testGetHashIsTheSameForInstanceWithSameValue( Reference $reference ) {
 		$newRef = unserialize( serialize( $reference ) );
-		$this->assertEquals( $newRef->getHash(), $reference->getHash() );
+		$this->assertSame( $newRef->getHash(), $reference->getHash() );
 	}
 
 	/**
@@ -174,7 +174,7 @@ class ReferenceTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider unorderedReferenceProvider
 	 */
 	public function testUnorderedReference( Reference $unorderedReference, Reference $orderedReference ) {
-		$this->assertEquals( $unorderedReference->getHash(), $orderedReference->getHash() );
+		$this->assertSame( $unorderedReference->getHash(), $orderedReference->getHash() );
 	}
 
 	public function testReferenceEqualsItself() {

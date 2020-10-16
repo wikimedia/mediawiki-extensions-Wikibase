@@ -85,7 +85,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertEquals( $snak, $newInstance );
 		$this->assertEquals( $snak->getPropertyId(), $newInstance->getPropertyId() );
-		$this->assertEquals( $snak->getType(), $newInstance->getType() );
+		$this->assertSame( $snak->getType(), $newInstance->getType() );
 	}
 
 	/**
@@ -95,7 +95,7 @@ class SnakTest extends \PHPUnit\Framework\TestCase {
 	public function testGetHash( Snak $snak ) {
 		$hash = $snak->getHash();
 		$this->assertIsString( $hash );
-		$this->assertEquals( $hash, $snak->getHash() );
+		$this->assertSame( $hash, $snak->getHash() );
 	}
 
 	/**

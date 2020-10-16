@@ -23,7 +23,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 	public function testCanConstructId( $idSerialization, $normalizedIdSerialization ) {
 		$id = new ItemId( $idSerialization );
 
-		$this->assertEquals(
+		$this->assertSame(
 			$normalizedIdSerialization,
 			$id->getSerialization()
 		);
@@ -123,7 +123,7 @@ class ItemIdTest extends \PHPUnit\Framework\TestCase {
 	 */
 	public function testNewFromNumber( $number ) {
 		$id = ItemId::newFromNumber( $number );
-		$this->assertEquals( 'Q' . $number, $id->getSerialization() );
+		$this->assertSame( 'Q' . $number, $id->getSerialization() );
 	}
 
 	public function numericIdProvider() {

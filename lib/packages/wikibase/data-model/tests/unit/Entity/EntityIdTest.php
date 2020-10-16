@@ -72,7 +72,7 @@ class EntityIdTest extends \PHPUnit\Framework\TestCase {
 		$serialization = 'C:32:"Wikibase\DataModel\Entity\ItemId":4:{Q123}';
 		$id = new ItemId( 'q123' );
 
-		$this->assertEquals(
+		$this->assertSame(
 			serialize( $id ),
 			$serialization
 		);

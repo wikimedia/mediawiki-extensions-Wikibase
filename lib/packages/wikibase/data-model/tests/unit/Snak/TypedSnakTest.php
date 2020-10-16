@@ -25,7 +25,7 @@ class TypedSnakTest extends \PHPUnit\Framework\TestCase {
 		$typedSnak = new TypedSnak( $snak, $dataTypeId );
 
 		$this->assertEquals( $snak, $typedSnak->getSnak() );
-		$this->assertEquals( $dataTypeId, $typedSnak->getDataTypeId() );
+		$this->assertSame( $dataTypeId, $typedSnak->getDataTypeId() );
 	}
 
 }

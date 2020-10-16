@@ -125,7 +125,7 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 			}
 
 			$this->assertFalse( $array->hasSnak( $element ) );
-			$this->assertEquals( --$elementCount, $array->count() );
+			$this->assertSame( --$elementCount, $array->count() );
 		}
 
 		$element = new PropertyNoValueSnak( new PropertyId( 'P42' ) );
@@ -149,13 +149,13 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 			++$elementCount;
 		}
 
-		$this->assertEquals( !$array->hasSnak( $element ), $array->addSnak( $element ) );
+		$this->assertSame( !$array->hasSnak( $element ), $array->addSnak( $element ) );
 
-		$this->assertEquals( $elementCount, $array->count() );
+		$this->assertSame( $elementCount, $array->count() );
 
 		$this->assertFalse( $array->addSnak( $element ) );
 
-		$this->assertEquals( $elementCount, $array->count() );
+		$this->assertSame( $elementCount, $array->count() );
 	}
 
 	public function orderByPropertyProvider() {
