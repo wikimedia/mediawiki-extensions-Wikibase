@@ -90,14 +90,15 @@ class ReferenceList implements Comparable, Countable, IteratorAggregate, Seriali
 	/**
 	 * @since 1.1
 	 *
-	 * @param Snak[]|Snak $snaks
-	 * @param Snak [$snak2,...]
+	 * @param Snak ...$snaks
+	 * (passing a single Snak[] is still supported but deprecated)
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function addNewReference( $snaks = [] /*...*/ ) {
-		if ( $snaks instanceof Snak ) {
-			$snaks = func_get_args();
+	public function addNewReference( ...$snaks ) {
+		if ( count( $snaks ) === 1 && is_array( $snaks[0] ) ) {
+			// TODO stop supporting this
+			$snaks = $snaks[0];
 		}
 
 		$this->addReference( new Reference( $snaks ) );

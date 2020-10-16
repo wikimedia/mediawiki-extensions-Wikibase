@@ -1,5 +1,15 @@
 # Wikibase DataModel release notes
 
+## Version 9.6.0 (development)
+
+* `ReferenceList::addNewReference()`, `Statement::addNewReference()` and the `StatementList` constructor
+  supported being called with a variadic argument list, with a single array argument,
+  or (in the case of `StatementList`) with a single `Traversable` argument.
+  The latter two forms are now deprecated (though they still work);
+  please update your code:
+  for instance, change `->addNewReference( [ $x, $y ] )` to `->addNewReference( $x, $y )`,
+  and `->addNewReference( $snaks )` to `->addNewReference( ...$snaks )`.
+
 ## Version 9.5.1 (2020-06-03)
 
 * Updated release notes
