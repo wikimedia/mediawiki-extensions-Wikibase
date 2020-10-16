@@ -21,6 +21,7 @@ use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -90,6 +91,11 @@ class ResultBuilder {
 	private $missingEntityCounter = -1;
 
 	/**
+	 * @var JsonDataTypeInjector
+	 */
+	private $dataTypeInjector;
+
+	/**
 	 * @param ApiResult $result
 	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param SerializerFactory $serializerFactory
@@ -117,6 +123,12 @@ class ResultBuilder {
 
 		$this->modifier = new SerializationModifier();
 		$this->callbackFactory = new CallbackFactory();
+
+		$this->dataTypeInjector = new JsonDataTypeInjector(
+			$this->modifier,
+			$this->callbackFactory,
+			$dataTypeLookup
+		);
 	}
 
 	/**
@@ -378,7 +390,7 @@ class ResultBuilder {
 			$serialization = $this->injectEntitySerializationWithSiteLinkUrls( $serialization );
 		}
 		$serialization = $this->sortEntitySerializationSiteLinks( $serialization );
-		$serialization = $this->injectEntitySerializationWithDataTypes( $serialization );
+		$serialization = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $serialization );
 		$serialization = $this->filterEntitySerializationUsingSiteIds( $serialization, $filterSiteIds );
 		if ( !empty( $termFallbackChains ) ) {
 			$serialization = $this->addEntitySerializationFallbackInfo( $serialization, $termFallbackChains );
@@ -432,34 +444,6 @@ class ResultBuilder {
 	private function sortEntitySerializationSiteLinks( array $serialization ) {
 		if ( isset( $serialization['sitelinks'] ) ) {
 			ksort( $serialization['sitelinks'] );
-		}
-		return $serialization;
-	}
-
-	private function injectEntitySerializationWithDataTypes( array $serialization ) {
-		$modifyPaths = [
-			'claims/*/*/mainsnak',
-			'*/*/claims/*/*/mainsnak', // statements on subentities
-		];
-		$groupedSnakModifyPaths = [
-			'claims/*/*/qualifiers',
-			'claims/*/*/references/*/snaks',
-			'*/*/claims/*/*/qualifiers',
-			'*/*/claims/*/*/references/*/snaks',
-		];
-		foreach ( $modifyPaths as $modifyPath ) {
-			$serialization = $this->modifier->modifyUsingCallback(
-				$serialization,
-				$modifyPath,
-				$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
-			);
-		}
-
-		foreach ( $groupedSnakModifyPaths as $groupedSnakModifyPath ) {
-			$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-				$serialization,
-				$groupedSnakModifyPath
-			);
 		}
 		return $serialization;
 	}
@@ -871,10 +855,9 @@ class ResultBuilder {
 			);
 		}
 
-		$values = $this->modifier->modifyUsingCallback(
+		$values = $this->dataTypeInjector->getArrayWithDataTypesInSnakAtPath(
 			$values,
-			'*/*/mainsnak',
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+			'*/*/mainsnak'
 		);
 
 		if ( $this->addMetaData ) {
@@ -904,10 +887,9 @@ class ResultBuilder {
 			$value = $this->getClaimsArrayWithMetaData( $value );
 		}
 
-		$value = $this->modifier->modifyUsingCallback(
+		$value = $this->dataTypeInjector->getArrayWithDataTypesInSnakAtPath(
 			$value,
-			'mainsnak',
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+			'mainsnak'
 		);
 
 		$this->setValue( null, 'claim', $value );
@@ -923,19 +905,20 @@ class ResultBuilder {
 		array $array,
 		$claimPath = ''
 	) {
-		$array = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+		$array = $this->dataTypeInjector->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$array,
 			$claimPath . 'references/*/snaks'
 		);
-		$array = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
+		$array = $this->dataTypeInjector->getArrayWithDataTypesInGroupedSnakListAtPath(
 			$array,
 			$claimPath . 'qualifiers'
 		);
-		$array = $this->modifier->modifyUsingCallback(
+
+		$array = $this->dataTypeInjector->getArrayWithDataTypesInSnakAtPath(
 			$array,
-			$claimPath . 'mainsnak',
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
+			$claimPath . 'mainsnak'
 		);
+
 		return $array;
 	}
 
@@ -998,27 +981,13 @@ class ResultBuilder {
 
 		$value = $serializer->serialize( $reference );
 
-		$value = $this->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
+		$value = $this->dataTypeInjector->getArrayWithDataTypesInGroupedSnakListAtPath( $value, 'snaks' );
 
 		if ( $this->addMetaData ) {
 			$value = $this->getReferenceArrayWithMetaData( $value );
 		}
 
 		$this->setValue( null, 'reference', $value );
-	}
-
-	/**
-	 * @param array $array
-	 * @param string $path
-	 *
-	 * @return array
-	 */
-	private function getArrayWithDataTypesInGroupedSnakListAtPath( array $array, $path ) {
-		return $this->modifier->modifyUsingCallback(
-			$array,
-			$path,
-			$this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup )
-		);
 	}
 
 	private function getReferenceArrayWithMetaData( array $array ) {

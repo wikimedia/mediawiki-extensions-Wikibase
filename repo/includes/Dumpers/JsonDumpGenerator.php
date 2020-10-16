@@ -41,24 +41,14 @@ class JsonDumpGenerator extends DumpGenerator {
 	private $entityLookup;
 
 	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $dataTypeLookup;
-
-	/**
-	 * @var CallbackFactory
-	 */
-	private $callbackFactory;
-
-	/**
-	 * @var SerializationModifier
-	 */
-	private $modifier;
-
-	/**
 	 * @var bool
 	 */
 	private $useSnippets = false;
+
+	/**
+	 * @var JsonDataTypeInjector
+	 */
+	private $dataTypeInjector;
 
 	/**
 	 * @param resource $out
@@ -80,10 +70,12 @@ class JsonDumpGenerator extends DumpGenerator {
 
 		$this->entitySerializer = $entitySerializer;
 		$this->entityLookup = $lookup;
-		$this->dataTypeLookup = $dataTypeLookup;
 
-		$this->callbackFactory = new CallbackFactory();
-		$this->modifier = new SerializationModifier();
+		$this->dataTypeInjector = new JsonDataTypeInjector(
+			new SerializationModifier(),
+			new CallbackFactory(),
+			$dataTypeLookup
+		);
 	}
 
 	/**
@@ -141,7 +133,7 @@ class JsonDumpGenerator extends DumpGenerator {
 
 		$data = $this->entitySerializer->serialize( $entity );
 
-		$data = $this->injectEntitySerializationWithDataTypes( $data );
+		$data = $this->dataTypeInjector->injectEntitySerializationWithDataTypes( $data );
 
 		// HACK: replace empty arrays with objects at the first level of the array
 		foreach ( $data as &$element ) {
@@ -155,46 +147,6 @@ class JsonDumpGenerator extends DumpGenerator {
 		$json = $this->encode( $data );
 
 		return $json;
-	}
-
-	/**
-	 * @param array $serialization
-	 *
-	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
-	 *
-	 * @return array
-	 */
-	private function injectEntitySerializationWithDataTypes( array $serialization ) {
-		$serialization = $this->modifier->modifyUsingCallback(
-			$serialization,
-			'claims/*/*/mainsnak',
-			$this->callbackFactory->getCallbackToAddDataTypeToSnak( $this->dataTypeLookup )
-		);
-		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-			$serialization,
-			'claims/*/*/qualifiers'
-		);
-		$serialization = $this->getArrayWithDataTypesInGroupedSnakListAtPath(
-			$serialization,
-			'claims/*/*/references/*/snaks'
-		);
-		return $serialization;
-	}
-
-	/**
-	 * @param array $array
-	 * @param string $path
-	 *
-	 * @todo FIXME duplicated / similar code in Repo ResultBuilder
-	 *
-	 * @return array
-	 */
-	private function getArrayWithDataTypesInGroupedSnakListAtPath( array $array, $path ) {
-		return $this->modifier->modifyUsingCallback(
-			$array,
-			$path,
-			$this->callbackFactory->getCallbackToAddDataTypeToSnaksGroupedByProperty( $this->dataTypeLookup )
-		);
 	}
 
 	/**
