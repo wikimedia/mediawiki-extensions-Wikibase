@@ -143,6 +143,9 @@ return call_user_func( function() {
 		],
 
 		'formatterCacheVersion' => null,
+
+		// enable implicit usage on the description of a page in its content language (T191831)
+		'enableImplicitDescriptionUsage' => false,
 	];
 
 	// Some defaults depend on information not available at this time.

@@ -73,12 +73,24 @@ Overview of events that trigger updates to usage tracking:
  - [ArticleDeleteComplete]
    - Prune all entries, unsubscribe unused entries
 
-### Virtual usages
+### Usages not stored in the database
 
-*Virtual usages* are usages which are not stored in any database,
-but synthesized based on a change to an entity and the diff introduced by that change.
+There are two kinds of usages that are not stored in the database, but created on-the-fly.
+(Their names are admittedly far from ideal,
+and could probably be improved to make the difference between them clearer.)
+
+#### Virtual usages
+
+*Virtual usages* are synthesized based on a change to an entity and the diff introduced by that change.
 [AffectedPagesFinder] adds virtual usages when an item’s sitelink for the local wiki is edited,
 based on the old and new title in the sitelink, so that both get updated.
+
+#### Implicit usages
+
+*Implicit usages* are synthesized based on the “steady state” of the entity data,
+not directly related to any change to the entity.
+[ImplicitDescriptionUsageLookup] adds implicit usages on the descriptions of items linked to local pages,
+so that description edits are added to the recent changes even if the descriptions are not used directly.
 
 ### Repo side usage tracking
 
@@ -93,3 +105,4 @@ To do this, the client wiki must, whenever a page is edited, determine which ent
 [ParserCacheSave]: https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSave
 [ArticleDeleteComplete]: https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
 [AffectedPagesFinder]: @ref Wikibase::Client::Changes::AffectedPagesFinder
+[ImplicitDescriptionUsageLookup]: @ref Wikibase::Client::Usage::ImplicitDescriptionUsageLookup
