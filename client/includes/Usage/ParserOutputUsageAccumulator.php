@@ -68,13 +68,6 @@ class ParserOutputUsageAccumulator extends UsageAccumulator {
 
 		$usages = [];
 		foreach ( $usageIdentities as $usageIdentity => $value ) {
-			if ( $value instanceof EntityUsage ) {
-				// TODO: Remove this after 2019-12-12
-				// Backwards compat: We used to store actual EntityUsage objects in there
-				$usages[] = $value;
-
-				continue;
-			}
 			$usages[] = $this->entityUsageFactory->newFromIdentity( $usageIdentity );
 		}
 

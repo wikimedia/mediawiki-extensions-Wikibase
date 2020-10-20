@@ -41,22 +41,6 @@ class ParserOutputUsageAccumulatorTest extends \PHPUnit\Framework\TestCase {
 		$this->assertNotNull( $parserOutput->getExtensionData( 'wikibase-entity-usage' ) );
 	}
 
-	public function testAddGetUsageLegacyData() {
-		$parserOutput = new ParserOutput();
-		$acc = new ParserOutputUsageAccumulator(
-			$parserOutput,
-			$this->newEntityUsageFactory()
-		);
-
-		$entityUsage = new EntityUsage( new ItemId( 'Q5' ), EntityUsage::LABEL_USAGE );
-		$parserOutput->setExtensionData( 'wikibase-entity-usage', [ $entityUsage ] );
-
-		$this->assertSame(
-			[ $entityUsage->getIdentityString() => $entityUsage ],
-			$acc->getUsages()
-		);
-	}
-
 	public function testDeduplicatorIsCalledOnce() {
 		$deduplicator = $this->getMockBuilder( UsageDeduplicator::class )
 			->disableOriginalConstructor()
