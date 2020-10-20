@@ -68,6 +68,7 @@
 	"wikibase-snakformatter-property-not-found": "Билгало $1 цакарий, лело хаамийн тайпа билгалдаккха цало.",
 	"wikibase-entity-summary-wbsetitem": "Керла элемент кхоьллина",
 	"wikibase-entity-summary-wbcreateredirect": "ДӀасхьажорг $4 тӀе",
+	"wikibase-entity-summary-wbeditentity-update": "Хийцина чулацам",
 	"wikibase-entity-summary-wbsetreference": "Хьостан тӀе хьажорг билгалйина",
 	"wikibase-entity-summary-wbsetreference-add": "Дехаран тӀетоьхна хьажорг",
 	"wikibase-entity-summary-wbsetreference-set": "Дехаран хьажорг хийцина",
