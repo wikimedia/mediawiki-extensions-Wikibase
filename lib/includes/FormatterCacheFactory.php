@@ -5,9 +5,9 @@ namespace Wikibase\Lib;
 
 use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
-use ObjectCache;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
+use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
 
 /**
  * Factory for accessing the shared cache
@@ -37,31 +37,38 @@ class FormatterCacheFactory {
 	private $statsdDataFactory;
 
 	/**
+	 * @var FormatterCacheServiceFactory
+	 */
+	private $serviceFactory;
+
+	/**
 	 * @param int|string $formatterCacheType
 	 * @param LoggerInterface $logger
 	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param string $cacheSecret
+	 * @param FormatterCacheServiceFactory $serviceFactory
 	 */
 	public function __construct(
 		$formatterCacheType,
 		LoggerInterface $logger,
 		IBufferingStatsdDataFactory $statsdDataFactory,
-		string $cacheSecret
-
+		string $cacheSecret,
+		FormatterCacheServiceFactory $serviceFactory
 	) {
 		$this->formatterCacheType = $formatterCacheType;
 		$this->logger = $logger;
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->cacheSecret = $cacheSecret;
+		$this->serviceFactory = $serviceFactory;
 	}
 
 	public function getFormatterCache(): CacheInterface {
-		$bagOStuff = ObjectCache::getInstance( $this->formatterCacheType );
+		$bagOStuff = $this->serviceFactory->newSharedCache( $this->formatterCacheType );
 		if ( !$bagOStuff instanceof CachedBagOStuff ) {
-			$bagOStuff = new CachedBagOStuff( $bagOStuff ); // wrap in an in-memory cache
+			$bagOStuff = $this->serviceFactory->newInMemoryCache( $bagOStuff ); // wrap in an in-memory cache
 		}
 
-		$cache = new SimpleCacheWithBagOStuff(
+		$cache = $this->serviceFactory->newCache(
 			$bagOStuff,
 			'wikibase.repo.formatter.', // intentionally shared between repo and client
 			$this->cacheSecret
@@ -69,7 +76,7 @@ class FormatterCacheFactory {
 
 		$cache->setLogger( $this->logger );
 
-		return new StatsdRecordingSimpleCache(
+		return $this->serviceFactory->newStatsdRecordingCache(
 			$cache,
 			$this->statsdDataFactory,
 			[
