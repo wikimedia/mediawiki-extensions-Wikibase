@@ -367,6 +367,9 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 	public function testHasReferenceHash( ReferenceList $references ) {
 		$this->assertFalse( $references->hasReferenceHash( '~=[,,_,,]:3' ) );
 
+		/**
+		 * @var Reference $reference
+		 */
 		foreach ( $references as $reference ) {
 			$this->assertTrue( $references->hasReferenceHash( $reference->getHash() ) );
 		}

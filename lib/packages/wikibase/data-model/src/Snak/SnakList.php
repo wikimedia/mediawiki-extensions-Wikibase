@@ -208,6 +208,9 @@ class SnakList extends ArrayObject implements Comparable {
 	 */
 	public function offsetUnset( $index ) {
 		if ( $this->offsetExists( $index ) ) {
+			/**
+			 * @var Snak $element
+			 */
 			$element = $this->offsetGet( $index );
 			$hash = $element->getHash();
 			unset( $this->offsetHashes[$hash] );
