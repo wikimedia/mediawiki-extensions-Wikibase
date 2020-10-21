@@ -71,7 +71,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 			$logger,
 			$this->createMock( IBufferingStatsdDataFactory::class ),
 			'secret',
-			new FormatterCacheServiceFactory()
+			new FormatterCacheServiceFactory(),
+			null
 		);
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
 	}

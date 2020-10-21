@@ -141,6 +141,8 @@ return call_user_func( function() {
 			'publicationDate' => null,
 			'retrievedDate' => null,
 		],
+
+		'formatterCacheVersion' => null,
 	];
 
 	// Some defaults depend on information not available at this time.
