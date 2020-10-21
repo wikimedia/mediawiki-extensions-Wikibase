@@ -187,7 +187,7 @@
 	"wikibase-newproperty-fieldset": "Прављење новог својства",
 	"wikibase-newproperty-datatype": "Врста податка:",
 	"wikibase-newproperty-invalid-datatype": "Наведена је неважећа врста податка.",
-	"wikibase-newproperty-pick-data-type": "(изаберите врсту података)",
+	"wikibase-newproperty-pick-data-type": "(изаберите тип података)",
 	"wikibase-description-helppage": "Help:Опис",
 	"wikibase-label-helppage": "Help:Назив",
 	"special-newitem": "Нова ставка",
