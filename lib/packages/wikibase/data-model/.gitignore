@@ -12,3 +12,5 @@ build/
 
 .floo
 .flooignore
+
+.phpunit.result.cache
