@@ -3,7 +3,6 @@
 namespace Wikibase\DataModel\Snak;
 
 use Comparable;
-use Immutable;
 use Serializable;
 use Wikibase\DataModel\PropertyIdProvider;
 
@@ -16,7 +15,7 @@ use Wikibase\DataModel\PropertyIdProvider;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Snak extends Serializable, Immutable, Comparable, PropertyIdProvider {
+interface Snak extends Serializable, Comparable, PropertyIdProvider {
 
 	/**
 	 * Returns a string that can be used to identify the type of snak.
