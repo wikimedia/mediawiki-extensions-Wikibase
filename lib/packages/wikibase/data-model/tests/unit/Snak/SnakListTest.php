@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Tests\Snak;
 
 use Comparable;
 use DataValues\StringValue;
-use Hashable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -345,10 +344,6 @@ class SnakListTest extends \PHPUnit\Framework\TestCase {
 				false
 			],
 		];
-	}
-
-	public function testHashableInterface() {
-		$this->assertInstanceOf( Hashable::class, new SnakList() );
 	}
 
 	public function testGetHash() {
