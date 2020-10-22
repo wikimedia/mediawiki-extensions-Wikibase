@@ -6,6 +6,7 @@ use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
+use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
 use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
 use Wikibase\Lib\WikibaseContentLanguages;
@@ -69,7 +70,8 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 			$sharedCacheType,
 			$logger,
 			$this->createMock( IBufferingStatsdDataFactory::class ),
-			'secret'
+			'secret',
+			new FormatterCacheServiceFactory()
 		);
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
 	}

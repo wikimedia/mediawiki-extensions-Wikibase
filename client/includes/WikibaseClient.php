@@ -93,6 +93,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
 use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
@@ -1274,7 +1275,8 @@ final class WikibaseClient {
 				$this->settings->getSetting( 'sharedCacheType' ),
 				$this->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
-				hash( 'sha256', $wgSecretKey )
+				hash( 'sha256', $wgSecretKey ),
+				new FormatterCacheServiceFactory()
 			);
 		}
 		return $this->formatterCacheFactory;

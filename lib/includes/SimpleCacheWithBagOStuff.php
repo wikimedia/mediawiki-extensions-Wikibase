@@ -14,7 +14,7 @@ use Traversable;
 /**
  * @license GPL-2.0-or-later
  */
-final class SimpleCacheWithBagOStuff implements CacheInterface {
+class SimpleCacheWithBagOStuff implements CacheInterface {
 
 	use LoggerAwareTrait;
 
