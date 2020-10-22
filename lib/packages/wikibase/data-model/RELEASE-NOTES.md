@@ -9,6 +9,7 @@
   please update your code:
   for instance, change `->addNewReference( [ $x, $y ] )` to `->addNewReference( $x, $y )`,
   and `->addNewReference( $snaks )` to `->addNewReference( ...$snaks )`.
+* `Statement`, `Reference`, `SnakList` and `Snak` no longer depend on the `Hashable` and `Immutable` interfaces from `DataValues/DataValues`.
 
 ## Version 9.5.1 (2020-06-03)
 
