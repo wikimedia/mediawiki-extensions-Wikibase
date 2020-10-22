@@ -886,7 +886,6 @@ return call_user_func( function() {
 			'dependencies' => [
 				'wikibase.termbox.styles',
 				'wikibase.getLanguageNameByCode',
-				'wikibase.entityPage.entityLoaded',
 				'wikibase.WikibaseContentLanguages',
 				'wikibase.getUserLanguages',
 				'mw.config.values.wbRepo',
