@@ -9,6 +9,7 @@
 			"Muhdnurhidayat",
 			"Pizza1016",
 			"SNN95",
+			"Tofeiku",
 			"Zulfadli51"
 		]
 	},
@@ -28,6 +29,7 @@
 	"wikibase-dataitem": "Item {{WBREPONAME}}",
 	"wikibase-editlinks": "Sunting pautan",
 	"wikibase-editlinkstitle": "Sunting pautan antara bahasa",
+	"wikibase-addlinkstitle": "Tambah pautan antara bahasa",
 	"wikibase-linkitem-addlinks": "Tambah pautan",
 	"wikibase-linkitem-alreadylinked": "Halaman yang anda ingin pautkan itu sudah dilampirkan dengan satu [$1 perkara] di repositori data pusat yang berpaut dengan [[$2]] di tapak ini. Setiap perkara hanya boleh berlampirkan satu halaman setapak. Sila pilih halaman yang lain untuk dipautkan.",
 	"wikibase-linkitem-close": "Tutup dialog dan muat semula halaman",
@@ -56,10 +58,23 @@
 	"unconnectedpages": "Laman yang tidak bersambung dengan perkara",
 	"wikibase-unconnectedpages-format-row": "($1 pautan antara bahasa pada halaman ini)",
 	"wikibase-unconnectedpages-submit": "Pergi",
+	"pageswithbadges": "Laman dengan lencana",
+	"wikibase-pageswithbadges-badge": "Lencana:",
 	"wikibase-pageinfo-entity-id": "ID Perkara Wikidata",
 	"wikibase-pageinfo-entity-id-none": "Tiada",
+	"wikibase-pageinfo-description-local": "Keterangan tempatan",
+	"wikibase-pageinfo-description-central": "Keterangan pusat",
+	"wikibase-pageinfo-entity-usage": "Entiti {{WBREPONAME}} yang digunakan dalam halaman",
+	"wikibase-pageinfo-entity-usage-L-with-modifier": "Label: $1",
+	"wikibase-pageinfo-entity-usage-D": "Beberapa keterangan",
+	"wikibase-pageinfo-entity-usage-D-with-modifier": "Keterangan: $1",
+	"wikibase-pageinfo-entity-usage-T": "Tajuk",
+	"wikibase-pageinfo-entity-usage-C": "Beberapa kenyataan",
+	"wikibase-pageinfo-entity-usage-C-with-modifier": "Kenyataan: $1",
+	"wikibase-pageinfo-entity-usage-O": "Lain-lain (Kenyataan)",
 	"wikibase-property-render-error": "Sifat $1 gagal dihasilkan: $2",
 	"wikibase-otherprojects": "Dalam projek lain",
 	"wikibase-sitelinks-sitename-columnheading": "Bahasa",
-	"wikibase-sitelinks-link-columnheading": "Halaman terpaut"
+	"wikibase-sitelinks-link-columnheading": "Halaman terpaut",
+	"wikibase-client-data-bridge-error-reload-page": "Muat semula laman"
 }
