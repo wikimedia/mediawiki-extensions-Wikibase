@@ -246,12 +246,9 @@ class InfoActionHookHandler implements InfoActionHook {
 	private function formatEntityUsage( IContextSource $context, array $usage ) {
 		$usageAspectsByEntity = [];
 		$entities = [];
-		foreach ( $usage as $key => $entityUsage ) {
+		foreach ( $usage as $entityUsage ) {
 			$entityId = $entityUsage->getEntityId()->getSerialization();
 			$entities[$entityId] = $entityUsage->getEntityId();
-			if ( !isset( $usageAspectsByEntity[$entityId] ) ) {
-				$usageAspectsByEntity[$entityId] = [];
-			}
 			$usageAspectsByEntity[$entityId][] = [
 				$entityUsage->getAspect(),
 				$entityUsage->getModifier()
