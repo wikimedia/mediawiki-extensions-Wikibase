@@ -228,15 +228,20 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$titleFactory = $this->createMock( TitleFactory::class );
 
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromID' )
-			->will( $this->returnCallback( function( $id ) use ( $titlesById ) {
-				if ( isset( $titlesById[$id] ) ) {
-					return Title::newFromText( $titlesById[$id] );
-				} else {
-					throw new InvalidArgumentException( 'Unknown ID: ' . $id );
+		$titleFactory->method( 'newFromIDs' )
+			->willReturnCallback( function ( array $ids ) use ( $titlesById ) {
+				$titles = [];
+				foreach ( $ids as $id ) {
+					if ( isset( $titlesById[$id] ) ) {
+						$title = Title::newFromText( $titlesById[$id] );
+						$title->resetArticleID( $id );
+						$titles[] = $title;
+					} else {
+						throw new InvalidArgumentException( 'Unknown ID: ' . $id );
+					}
 				}
-			} ) );
+				return $titles;
+			} );
 
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromText' )
@@ -585,17 +590,18 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		$titleFactory = $this->getMockBuilder( TitleFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$titleFactory->expects( $this->any() )
-			->method( 'newFromID' )
-			->will( $this->returnCallback(
-				function( $id ) {
-					// NOTE: the fake title construction influences the expected hash values
-					// defined in provideHandleChange_rootJobParams!
+		$titleFactory->method( 'newFromIDs' )
+			->willReturnCallback( function ( array $ids ) {
+				// NOTE: the fake title construction influences the expected hash values
+				// defined in provideHandleChange_rootJobParams!
+				$titles = [];
+				foreach ( $ids as $id ) {
 					$title = Title::makeTitle( NS_MAIN, 'Page_No_' . $id );
 					$title->resetArticleID( $id );
-					return $title;
+					$titles[] = $title;
 				}
-			) );
+				return $titles;
+			} );
 
 		$handler = new ChangeHandler(
 			$affectedPagesFinder,
