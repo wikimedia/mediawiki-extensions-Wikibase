@@ -279,8 +279,7 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * Filters updates based on namespace. This removes duplicates, non-existing pages, and pages from
-	 * namespaces that are not considered "enabled" by the namespace checker.
+	 * Filters updates. This removes duplicates and non-existing pages.
 	 *
 	 * @param Traversable $usages A traversable of PageEntityUsages.
 	 *
