@@ -122,6 +122,9 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		if ( !$this->propagateChangeVisibility ) {
 			return;
 		}
+		if ( $this->localClientDatabases === [] ) {
+			return;
+		}
 		// Check if $title is in a wikibase namespace
 		if ( !$this->entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return;
