@@ -107,7 +107,7 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 	}
 
 	/**
-	 * @param string[] $rowAspects
+	 * @param string[][] $rowAspects
 	 * @param IContextSource $context
 	 *
 	 * @return string HTML
@@ -146,12 +146,9 @@ class EditActionHookHandler implements EditPage__showStandardInputs_optionsHook 
 		$usageAspectsByEntity = [];
 		$entityIds = [];
 
-		foreach ( $usages as $key => $entityUsage ) {
+		foreach ( $usages as $entityUsage ) {
 			$entityId = $entityUsage->getEntityId()->getSerialization();
 			$entityIds[$entityId] = $entityUsage->getEntityId();
-			if ( !isset( $usageAspectsByEntity[$entityId] ) ) {
-				$usageAspectsByEntity[$entityId] = [];
-			}
 			$usageAspectsByEntity[$entityId][] = [
 				$entityUsage->getAspect(),
 				$entityUsage->getModifier()
