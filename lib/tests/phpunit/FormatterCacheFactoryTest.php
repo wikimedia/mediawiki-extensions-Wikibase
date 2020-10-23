@@ -6,6 +6,7 @@ namespace Wikibase\Lib\Tests;
 use BagOStuff;
 use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
+use Iterator;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
@@ -85,7 +86,8 @@ class FormatterCacheFactoryTest extends TestCase {
 			$this->mockLogger,
 			$this->mockIBufferingStatsdDataFactory,
 			$cacheSecret,
-			$serviceFactory
+			$serviceFactory,
+			null
 		);
 
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
@@ -135,10 +137,47 @@ class FormatterCacheFactoryTest extends TestCase {
 			$this->mockLogger,
 			$this->mockIBufferingStatsdDataFactory,
 			$cacheSecret,
-			$serviceFactory
+			$serviceFactory,
+			null
 		);
 
 		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
+	}
+
+	/**
+	 * @dataProvider provideVersionTestData
+	 */
+	public function testFormatterCacheFactoryLeveragesVersionCorrectly( $version, $cacheKey ): void {
+		$sharedCacheType = CACHE_DB;
+		$cacheSecret = 'secret';
+
+		$mockInMemoryCache = $this->createMock( CachedBagOStuff::class );
+
+		$serviceFactory = $this->createMock( FormatterCacheServiceFactory::class );
+
+		$serviceFactory
+			->expects( $this->once() )
+			->method( 'newInMemoryCache' )
+			->willReturn( $mockInMemoryCache );
+		$serviceFactory->expects( $this->once() )
+			->method( 'newCache' )
+			->with( $mockInMemoryCache, $cacheKey, $cacheSecret );
+
+		$factory = new FormatterCacheFactory(
+			$sharedCacheType,
+			$this->mockLogger,
+			$this->mockIBufferingStatsdDataFactory,
+			$cacheSecret,
+			$serviceFactory,
+			$version
+		);
+
+		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
+	}
+
+	public function provideVersionTestData(): Iterator {
+		yield 'no version' => [ null, 'wikibase.repo.formatter.' ];
+		yield 'with version' => [ 5, 'wikibase.repo.formatter.5.' ];
 	}
 
 }

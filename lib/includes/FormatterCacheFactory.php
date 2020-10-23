@@ -42,24 +42,32 @@ class FormatterCacheFactory {
 	private $serviceFactory;
 
 	/**
+	 * @var int|null
+	 */
+	private $formatterCacheVersion;
+
+	/**
 	 * @param int|string $formatterCacheType
 	 * @param LoggerInterface $logger
 	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param string $cacheSecret
 	 * @param FormatterCacheServiceFactory $serviceFactory
+	 * @param int|null $formatterCacheVersion
 	 */
 	public function __construct(
 		$formatterCacheType,
 		LoggerInterface $logger,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		string $cacheSecret,
-		FormatterCacheServiceFactory $serviceFactory
+		FormatterCacheServiceFactory $serviceFactory,
+		?int $formatterCacheVersion
 	) {
 		$this->formatterCacheType = $formatterCacheType;
 		$this->logger = $logger;
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->cacheSecret = $cacheSecret;
 		$this->serviceFactory = $serviceFactory;
+		$this->formatterCacheVersion = $formatterCacheVersion;
 	}
 
 	public function getFormatterCache(): CacheInterface {
@@ -68,9 +76,14 @@ class FormatterCacheFactory {
 			$bagOStuff = $this->serviceFactory->newInMemoryCache( $bagOStuff ); // wrap in an in-memory cache
 		}
 
+		$prefix = 'wikibase.repo.formatter.'; // intentionally shared between repo and client
+		if ( $this->formatterCacheVersion !== null ) {
+			$prefix .= "$this->formatterCacheVersion.";
+		}
+
 		$cache = $this->serviceFactory->newCache(
 			$bagOStuff,
-			'wikibase.repo.formatter.', // intentionally shared between repo and client
+			$prefix,
 			$this->cacheSecret
 		);
 

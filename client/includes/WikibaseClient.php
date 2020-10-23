@@ -1276,7 +1276,8 @@ final class WikibaseClient {
 				$this->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				hash( 'sha256', $wgSecretKey ),
-				new FormatterCacheServiceFactory()
+				new FormatterCacheServiceFactory(),
+				$this->settings->getSetting( 'formatterCacheVersion' )
 			);
 		}
 		return $this->formatterCacheFactory;
