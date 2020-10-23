@@ -23,7 +23,6 @@ $cfg['file_list'] = array_merge(
 		'repo/WikibaseRepo.datatypes.php',
 		'repo/WikibaseRepo.entitytypes.php',
 		'view/resources.php',
-		'view/WikibaseView.php',
 		'Wikibase.php',
 	]
 );
