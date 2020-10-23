@@ -1,6 +1,6 @@
 <?php
 
-namespace  Wikibase\Lib\Store;
+namespace Wikibase\Lib\Store;
 
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
@@ -13,11 +13,11 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  *
  * @note The class uses immutable cache approach: cached data never changes once persisted.
  *       For this purpose we not only include Item ID in cache key construction, but also
- *       Item's current revision ID. Revisions never change, the cached data doesn not need
- *       to change as well, what means that we don't need to purge caches. As soon as new revision
+ *       Item's current revision ID. Revisions never change, the cached data does not need
+ *       to change either, which means that we don't need to purge caches. As soon as new revision
  *       is created, cache key will change and old cache data will eventually be purged by
- *       the caching system (eg. APC, Memcached, ...) as Least Recently Used  as soon as no code
- *       will request it.
+ *       the caching system (eg. APC, Memcached, ...) based on a Least Recently Used strategy
+ *       as soon as no code will request it anymore.
  */
 class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionLookup {
 
