@@ -338,7 +338,6 @@ return [
 
 	'dataBridgeEnabled' => false,
 
-	'propagateChangeVisibility' => false,
 	'changeVisibilityNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 	'changeVisibilityNotificationJobBatchSize' => 3,
 

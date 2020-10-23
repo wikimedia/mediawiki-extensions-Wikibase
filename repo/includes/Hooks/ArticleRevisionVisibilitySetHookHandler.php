@@ -56,11 +56,6 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 	private $localClientDatabases;
 
 	/**
-	 * @var bool
-	 */
-	private $propagateChangeVisibility;
-
-	/**
 	 * @var int
 	 */
 	private $clientRCMaxAge;
@@ -82,7 +77,6 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		TitleFactory $titleFactory,
 		array $localClientDatabases,
 		callable $jobQueueGroupFactory,
-		bool $propagateChangeVisibility,
 		int $clientRCMaxAge,
 		int $jobBatchSize
 	) {
@@ -92,7 +86,6 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		$this->titleFactory = $titleFactory;
 		$this->localClientDatabases = $localClientDatabases;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
-		$this->propagateChangeVisibility = $propagateChangeVisibility;
 		$this->clientRCMaxAge = $clientRCMaxAge;
 		$this->jobBatchSize = $jobBatchSize;
 	}
@@ -107,7 +100,6 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 			$titleFactory,
 			$wbRepo->getSettings()->getSetting( 'localClientDatabases' ),
 			'JobQueueGroup::singleton',
-			$wbRepo->getSettings()->getSetting( 'propagateChangeVisibility' ),
 			$wbRepo->getSettings()->getSetting( 'changeVisibilityNotificationClientRCMaxAge' ),
 			$wbRepo->getSettings()->getSetting( 'changeVisibilityNotificationJobBatchSize' )
 		);
@@ -119,12 +111,10 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 	 * @param int[][] $visibilityChangeMap
 	 */
 	public function onArticleRevisionVisibilitySet( $title, $ids, $visibilityChangeMap ): void {
-		if ( !$this->propagateChangeVisibility ) {
-			return;
-		}
 		if ( $this->localClientDatabases === [] ) {
 			return;
 		}
+
 		// Check if $title is in a wikibase namespace
 		if ( !$this->entityNamespaceLookup->isEntityNamespace( $title->getNamespace() ) ) {
 			return;

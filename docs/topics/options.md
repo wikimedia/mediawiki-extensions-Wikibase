@@ -562,11 +562,6 @@ The set url path should allow access to both `index.php` and `api.php`
 
 DEFAULT: ```https://www.wikidata.org/w/```
 
-### propagateChangeVisibility {#repo_propagateChangeVisibility}
-Whether to propagate changes in revision visibility to client wikis.
-
-DEFAULT: ```false```.
-
 ### changeVisibilityNotificationClientRCMaxAge {#repo_changeVisibilityNotificationClientRCMaxAge}
 Value of the `$wgRCMaxAge` setting, which specifies the max age (in seconds) of entries in the `recentchanges` table, on the client wikis.
 

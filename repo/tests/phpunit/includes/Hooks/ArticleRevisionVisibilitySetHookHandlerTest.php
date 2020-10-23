@@ -58,14 +58,6 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 			];
 
 		return [
-			'No jobs dispatched: Propagation disabled' => [
-				'expectedJobs' => null,
-				'revisionIds' => [ 12 ],
-				'visibilityChangeMap' => $visibilityChangeMap,
-				'isEntityNamespace' => true,
-				'batchSize' => 12,
-				'propagateChangeVisibility' => false,
-			],
 			'No jobs dispatched: Non-entity namespace' => [
 				'expectedJobs' => null,
 				'revisionIds' => [ 12 ],
@@ -191,8 +183,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		array $revisionIds,
 		array $visibilityChangeMap,
 		bool $isEntityNamespace = true,
-		int $batchSize = 3,
-		bool $propagateChangeVisibility = true
+		int $batchSize = 3
 	) {
 		$wikiIds = [ 'dummywiki', 'another_wiki' ];
 		$jobQueueGroupFactoryCallCount = 0;
@@ -204,7 +195,6 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 			$this->newTitleFactory(),
 			$wikiIds,
 			$this->newJobQueueGroupFactory( $jobQueueGroupFactoryCallCount, $wikiIds, $expectedJobParams ),
-			$propagateChangeVisibility,
 			86400,
 			$batchSize
 		);
