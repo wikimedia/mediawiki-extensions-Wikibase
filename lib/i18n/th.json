@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aefgh39622",
 			"Ans",
 			"Horus"
 		]
@@ -31,8 +32,18 @@
 	"wikibase-snakview-snaktypeselector-somevalue": "ไม่ทราบ",
 	"wikibase-snakview-snaktypeselector-novalue": "ค่าว่าง",
 	"wikibase-undeserializable-value": "ค่าดังกล่าวไม่ถูกต้อง และไม่สามารถแสดงผลค่าได้",
+	"datatypes-type-string": "สตริง",
+	"datatypes-type-quantity": "ปริมาณ",
+	"datatypes-type-number": "หมายเลข",
+	"datatypes-type-mediawiki-title": "ชื่อเรื่อง MediaWiki",
+	"datatypes-type-unknown": "ไม่ระบุ",
+	"datatypes-type-boolean": "บูลีน",
+	"datatypes-type-globe-coordinate": "พิกัดภูมิศาสตร์",
+	"datatypes-type-time": "เวลา",
 	"datatypes-type-wikibase-item": "สิ่งหนึ่ง",
 	"datatypes-type-wikibase-property": "คุณลักษณะ",
+	"datatypes-type-commonsMedia": "ไฟล์สื่อคอมมอนส์",
+	"datatypes-type-geo-shape": "รูปร่างเรขาคณิต",
 	"version-wikibase": "วิกิฐานข้อมูล",
 	"wikibase-time-precision-Gannum": "$1 พันล้านปีก่อนคริสตกาล",
 	"wikibase-time-precision-Mannum": "$1 ล้านปีก่อนคริสตกาล",
