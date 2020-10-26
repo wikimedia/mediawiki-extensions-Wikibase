@@ -73,6 +73,13 @@ Overview of events that trigger updates to usage tracking:
  - [ArticleDeleteComplete]
    - Prune all entries, unsubscribe unused entries
 
+### Virtual usages
+
+*Virtual usages* are usages which are not stored in any database,
+but synthesized based on a change to an entity and the diff introduced by that change.
+[AffectedPagesFinder] adds virtual usages when an item’s sitelink for the local wiki is edited,
+based on the old and new title in the sitelink, so that both get updated.
+
 ### Repo side usage tracking
 
 Each repo tracks which client uses which entity. This is done in the [wb_changes_subscription] table.
@@ -85,3 +92,4 @@ To do this, the client wiki must, whenever a page is edited, determine which ent
 [LinksUpdateComplete]: https://www.mediawiki.org/wiki/Manual:Hooks/LinksUpdateComplete
 [ParserCacheSave]: https://www.mediawiki.org/wiki/Manual:Hooks/ParserCacheSave
 [ArticleDeleteComplete]: https://www.mediawiki.org/wiki/Manual:Hooks/ArticleDeleteComplete
+[AffectedPagesFinder]: @ref Wikibase::Client::Changes::AffectedPagesFinder
