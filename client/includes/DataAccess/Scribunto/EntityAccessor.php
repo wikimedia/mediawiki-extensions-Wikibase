@@ -4,6 +4,8 @@ namespace Wikibase\Client\DataAccess\Scribunto;
 
 use InvalidArgumentException;
 use Language;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Serializers\Serializer;
 use Wikibase\Client\Serializer\ClientEntitySerializer;
 use Wikibase\Client\Serializer\ClientStatementListSerializer;
@@ -75,6 +77,11 @@ class EntityAccessor {
 	private $fineGrainedLuaTracking;
 
 	/**
+	 * @var LoggerInterface
+	 */
+	private $logger;
+
+	/**
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityLookup $entityLookup
 	 * @param UsageAccumulator $usageAccumulator
@@ -97,7 +104,8 @@ class EntityAccessor {
 		TermLanguageFallbackChain $termFallbackChain,
 		Language $language,
 		ContentLanguages $termsLanguages,
-		$fineGrainedLuaTracking
+		$fineGrainedLuaTracking,
+		LoggerInterface $logger = null
 	) {
 		$this->entityIdParser = $entityIdParser;
 		$this->entityLookup = $entityLookup;
@@ -109,6 +117,7 @@ class EntityAccessor {
 		$this->language = $language;
 		$this->termsLanguages = $termsLanguages;
 		$this->fineGrainedLuaTracking = $fineGrainedLuaTracking;
+		$this->logger = $logger ?: new NullLogger();
 	}
 
 	/**
@@ -148,10 +157,7 @@ class EntityAccessor {
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
-			// We probably hit a double redirect
-			wfLogWarning(
-				'Encountered a UnresolvedRedirectException when trying to load ' . $prefixedEntityId
-			);
+			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;
 		}
@@ -186,10 +192,7 @@ class EntityAccessor {
 		try {
 			return $this->entityLookup->hasEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
-			// We probably hit a double redirect
-			wfLogWarning(
-				'Encountered a UnresolvedRedirectException when trying to check the existence of ' . $prefixedEntityId
-			);
+			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return false;
 		}
@@ -215,10 +218,7 @@ class EntityAccessor {
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
 		} catch ( RevisionedUnresolvedRedirectException $ex ) {
-			// We probably hit a double redirect
-			wfLogWarning(
-				'Encountered a UnresolvedRedirectException when trying to load ' . $prefixedEntityId
-			);
+			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;
 		}
@@ -257,6 +257,18 @@ class EntityAccessor {
 		return new ClientStatementListSerializer(
 			$this->statementSerializer,
 			$this->dataTypeLookup
+		);
+	}
+
+	/**
+	 * @see RevisionedUnresolvedRedirectException
+	 * @param $prefixedEntityId
+	 */
+	private function logPossibleDoubleRedirect( $prefixedEntityId ) {
+		$this->logger->info( 'Unresolved redirect encountered loading {prefixedEntityId}. This is typically cleaned up asynchronously.',
+			[
+				'prefixedEntityId' => $prefixedEntityId
+			]
 		);
 	}
 

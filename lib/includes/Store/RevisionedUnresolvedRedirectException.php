@@ -9,6 +9,9 @@ use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
  * Exception indicating that an attempt was made to access a redirected EntityId
  * without resolving the redirect first.
  *
+ * In the case of double-redirects on wikidata they are currently handled by bots asynchronously
+ * @see https://www.wikidata.org/wiki/Help:Redirects
+ *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
