@@ -42,8 +42,9 @@ abstract class UsageAccumulator {
 	}
 
 	/**
-	 * Registers the usage of an entity's local page title, e.g. to refer to
-	 * the corresponding page on the local wiki.
+	 * Registers the usage of an entity's local page title,
+	 * i.e. the title of the local (client) page linked to the entity,
+	 * e.g. to refer to the corresponding page on the local wiki.
 	 *
 	 * @param EntityId $id
 	 */
