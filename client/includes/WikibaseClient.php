@@ -1123,7 +1123,9 @@ final class WikibaseClient {
 		return new AffectedPagesFinder(
 			$this->getStore()->getUsageLookup(),
 			new TitleFactory(),
-			$this->settings->getSetting( 'siteGlobalID' )
+			MediaWikiServices::getInstance()->getLinkBatchFactory(),
+			$this->settings->getSetting( 'siteGlobalID' ),
+			$this->getLogger()
 		);
 	}
 

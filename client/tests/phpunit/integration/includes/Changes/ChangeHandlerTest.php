@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use SiteLookup;
@@ -44,7 +45,9 @@ class ChangeHandlerTest extends MediaWikiIntegrationTestCase {
 		return new AffectedPagesFinder(
 			$usageLookup,
 			$titleFactory,
+			MediaWikiServices::getInstance()->getLinkBatchFactory(),
 			'enwiki',
+			null,
 			false
 		);
 	}
