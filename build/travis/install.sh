@@ -29,7 +29,7 @@ cd ..
 
 cp $originalDirectory/build/travis/composer.local.json composer.local.json
 
-composer self-update
+composer self-update --1 # TODO: Allow using Composer version 2: T266455
 composer install
 
 # Try composer install again... this tends to fail from time to time
