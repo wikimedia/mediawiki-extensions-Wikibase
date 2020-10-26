@@ -861,7 +861,7 @@ class WikibaseRepo {
 				$dbName,
 				$repoName
 			),
-			LoggerFactory::getInstance( 'Wikibase' )
+			$this->getLogger()
 		);
 	}
 
@@ -965,7 +965,7 @@ class WikibaseRepo {
 		$retrievingLookup = new EntityRetrievingDataTypeLookup( $this->getEntityLookup() );
 		return new PropertyInfoDataTypeLookup(
 			$infoLookup,
-			LoggerFactory::getInstance( 'Wikibase' ),
+			$this->getLogger(),
 			$retrievingLookup
 		);
 	}
