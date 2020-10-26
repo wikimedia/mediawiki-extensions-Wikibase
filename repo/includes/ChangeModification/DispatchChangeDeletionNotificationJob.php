@@ -178,6 +178,9 @@ class DispatchChangeDeletionNotificationJob extends Job {
 	 * @inheritDoc
 	 */
 	public function run() {
+		if ( $this->localClientDatabases === [] ) {
+			return true;
+		}
 		$entityId = $this->entityContentFactory->getEntityIdForTitle( $this->getTitle() );
 		if ( $entityId === null ) {
 			$this->logger->warning( "Job should not be queued for non-entity pages." );
