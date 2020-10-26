@@ -4,7 +4,6 @@ namespace Wikibase\Client\Changes;
 
 use Hooks;
 use InvalidArgumentException;
-use LinkBatch;
 use Psr\Log\LoggerInterface;
 use SiteLookup;
 use Title;
@@ -155,8 +154,6 @@ class ChangeHandler {
 		if ( $titlesToUpdate === [] ) {
 			return;
 		}
-
-		( new LinkBatch( $titlesToUpdate ) )->execute();
 
 		// NOTE: deduplicate
 		$titleBatchSignature = $this->getTitleBatchSignature( $titlesToUpdate );
