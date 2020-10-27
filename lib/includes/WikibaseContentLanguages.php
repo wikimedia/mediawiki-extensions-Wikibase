@@ -144,6 +144,7 @@ class WikibaseContentLanguages {
 					'mnc', // T137808
 					'moe', // T151129
 					'non', // T137115
+					'non-runr', // T265782
 					'nr', // T155430
 					'nrf-gg', // T165648
 					'nrf-je', // T165648
