@@ -102,6 +102,7 @@ class WikibaseContentLanguages {
 					'bdr', // T234330
 					'bnn', // T174230
 					'brx', // T155369
+					'cal', // T266423
 					'ccp', // T210311
 					'chn', // T155370
 					'ckt', // T240097
