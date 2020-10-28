@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
+use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
 use Wikibase\Client\Usage\SubscriptionManager;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
@@ -41,7 +42,7 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$wikibaseClient = WikibaseClient::getDefaultInstance();
+		$wikibaseClient = WikibaseClient::getDefaultInstance( 'reset' );
 
 		$wikibaseServices = $this->createMock( WikibaseServices::class );
 
@@ -63,6 +64,11 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 			wfWikiID(),
 			'en'
 		);
+	}
+
+	public static function tearDownAfterClass(): void {
+		// ensure we don’t leave an instance with non-default settings behind
+		WikibaseClient::getDefaultInstance( 'reset' );
 	}
 
 	/**
@@ -100,6 +106,27 @@ class DirectSqlStoreTest extends \MediaWikiTestCase {
 		$store = $this->newStore();
 
 		$this->assertInstanceOf( SubscriptionManager::class, $store->getSubscriptionManager() );
+	}
+
+	/** @dataProvider provideBooleans */
+	public function testGetUsageLookup( bool $enableImplicitDescriptionUsage ) {
+		$this->mergeMwGlobalArrayValue( 'wgWBClientSettings', [
+			'enableImplicitDescriptionUsage' => $enableImplicitDescriptionUsage,
+		] );
+
+		$store = $this->newStore();
+		$usageLookup = $store->getUsageLookup();
+
+		if ( $enableImplicitDescriptionUsage ) {
+			$this->assertInstanceOf( ImplicitDescriptionUsageLookup::class, $usageLookup );
+		} else {
+			$this->assertNotInstanceOf( ImplicitDescriptionUsageLookup::class, $usageLookup );
+		}
+	}
+
+	public function provideBooleans() {
+		yield [ true ];
+		yield [ false ];
 	}
 
 }
