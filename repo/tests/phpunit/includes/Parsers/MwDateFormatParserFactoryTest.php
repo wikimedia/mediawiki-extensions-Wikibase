@@ -91,8 +91,6 @@ class MwDateFormatParserFactoryTest extends TestCase {
 			'both' => null,
 		];
 
-		$cases = [];
-
 		foreach ( $this->getLanguageCodes() as $languageCode ) {
 			$language = Language::factory( $languageCode );
 
@@ -113,7 +111,7 @@ class MwDateFormatParserFactoryTest extends TestCase {
 						TimeValue::CALENDAR_GREGORIAN
 					);
 
-					$cases[] = [
+					yield [
 						$input,
 						$expected,
 						$languageCode,
@@ -123,8 +121,6 @@ class MwDateFormatParserFactoryTest extends TestCase {
 				}
 			}
 		}
-
-		return $cases;
 	}
 
 	private function getLanguageCodes() {

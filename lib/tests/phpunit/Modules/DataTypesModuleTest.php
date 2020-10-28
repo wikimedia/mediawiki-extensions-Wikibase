@@ -19,8 +19,6 @@ use Wikibase\Lib\Modules\DataTypesModule;
 class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 
 	public function provideDataTypesModuleAndResourceDefinition() {
-		$dataTypeFactory = new DataTypeFactory( [ 'url' => 'string' ] );
-
 		$validResourceDefinitions = [
 			[
 				'datatypesconfigvarname' => 'foo',
@@ -30,18 +28,13 @@ class DataTypesModuleTest extends \PHPUnit\Framework\TestCase {
 			],
 			[
 				'datatypesconfigvarname' => 'bar123',
-				'datatypefactory' => $dataTypeFactory
+				'datatypefactory' => new DataTypeFactory( [ 'url' => 'string' ] )
 			],
 		];
 
-		$cases = [];
-
 		foreach ( $validResourceDefinitions as $definition ) {
-			$instance = new DataTypesModule( $definition );
-			$cases[] = [ $instance, $definition ];
+			yield [ new DataTypesModule( $definition ), $definition ];
 		}
-
-		return $cases;
 	}
 
 	/**

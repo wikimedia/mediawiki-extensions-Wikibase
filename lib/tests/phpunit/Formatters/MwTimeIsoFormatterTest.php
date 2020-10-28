@@ -525,15 +525,13 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 			],
 		];
 
-		$argLists = [];
-
 		foreach ( $tests as $args ) {
 			$timestamp = $args[0];
 			$precision = $args[1];
 			$expected = $args[2] ?? $timestamp;
 			$languageCode = $args[3] ?? 'en';
 
-			$argLists[] = [
+			yield [
 				$expected,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $gregorian ),
 				$languageCode
@@ -551,7 +549,7 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 		];
 
 		foreach ( $languageCodes as $languageCode ) {
-			$argLists[] = [
+			yield [
 				'3333',
 				new TimeValue(
 					'+0000000000003333-01-01T00:00:00Z',
@@ -562,8 +560,6 @@ class MwTimeIsoFormatterTest extends MediaWikiIntegrationTestCase {
 				$languageCode
 			];
 		}
-
-		return $argLists;
 	}
 
 	/**

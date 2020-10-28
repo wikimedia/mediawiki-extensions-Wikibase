@@ -22,48 +22,43 @@ use FormatJson;
 class PermissionsTest extends PermissionsTestCase {
 
 	public function provideReadPermissions() {
-		return [
-			[ //0
-				null, // normal permissions
-				null // no error
-			],
+		yield 'normal permissions, no error' => [ null, null ];
 
-			[ //1
-				[ // permissions
-					'*'    => [ 'read' => false ],
-					'user' => [ 'read' => false ]
-				],
-				'readapidenied' // error
+		yield [
+			'permissions' => [
+				'*'    => [ 'read' => false ],
+				'user' => [ 'read' => false ]
 			],
+			'error' => 'readapidenied'
 		];
 	}
 
 	public function provideEditPermissions() {
-		return array_merge( $this->provideReadPermissions(), [
-			[ //2
-				[ // permissions
-					'*'    => [ 'edit' => false ],
-					'user' => [ 'edit' => false ]
-				],
-				'permissiondenied' // error
-			],
+		yield from $this->provideReadPermissions();
 
-			[ //3
-				[ // permissions
-					'*'    => [ 'writeapi' => false ],
-					'user' => [ 'writeapi' => false ]
-				],
-				'writeapidenied' // error
+		yield [
+			'permissions' => [
+				'*'    => [ 'edit' => false ],
+				'user' => [ 'edit' => false ]
 			],
+			'error' => 'permissiondenied'
+		];
 
-			[ //4
-				[ // permissions
-					'*'    => [ 'read' => false ],
-					'user' => [ 'read' => false ]
-				],
-				'readapidenied' // error
+		yield [
+			'permissions' => [
+				'*'    => [ 'writeapi' => false ],
+				'user' => [ 'writeapi' => false ]
 			],
-		] );
+			'error' => 'writeapidenied'
+		];
+
+		yield [
+			'permissions' => [
+				'*'    => [ 'read' => false ],
+				'user' => [ 'read' => false ]
+			],
+			'error' => 'readapidenied'
+		];
 	}
 
 	/**
@@ -78,17 +73,15 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	public function provideCreateEntityPermissions() {
-		$permissions = $this->provideEditPermissions();
+		yield from $this->provideEditPermissions();
 
-		$permissions[] = [ //5
-			[ // permissions
+		yield [
+			'permissions' => [
 				'*'    => [ 'createpage' => false ],
 				'user' => [ 'createpage' => false ]
 			],
-			'permissiondenied' // error
+			'error' => 'permissiondenied'
 		];
-
-		return $permissions;
 	}
 
 	/**
@@ -108,17 +101,15 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	public function provideCreatePropertyPermissions() {
-		$permissions = $this->provideEditPermissions();
+		yield from $this->provideEditPermissions();
 
-		$permissions[] = [ //5
-			[ // permissions
+		yield [
+			'permissions' => [
 				'*'    => [ 'property-create' => false ],
 				'user' => [ 'property-create' => false ]
 			],
-			'permissiondenied' // error
+			'error' => 'permissiondenied'
 		];
-
-		return $permissions;
 	}
 
 	/**
@@ -139,17 +130,15 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	public function provideItemTermPermissions() {
-		$permissions = $this->provideEditPermissions();
+		yield from $this->provideEditPermissions();
 
-		$permissions[] = [ //5
-			[ // permissions
+		yield [
+			'permissions' => [
 				'*'    => [ 'item-term' => false ],
 				'user' => [ 'item-term' => false ]
 			],
-			'permissiondenied' // error
+			'error' => 'permissiondenied'
 		];
-
-		return $permissions;
 	}
 
 	/**
@@ -179,17 +168,15 @@ class PermissionsTest extends PermissionsTestCase {
 	}
 
 	public function provideMergeItemsPermissions() {
-		$permissions = $this->provideEditPermissions();
+		yield from $this->provideEditPermissions();
 
-		$permissions[] = [ #5
-			[ # permissions
+		yield [
+			'permissions' => [
 				'*'    => [ 'item-merge' => false ],
 				'user' => [ 'item-merge' => false ]
 			],
-			'permissiondenied' # error
+			'error' => 'permissiondenied'
 		];
-
-		return $permissions;
 	}
 
 	/**

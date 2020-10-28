@@ -225,22 +225,18 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 				[ '+1999-03-00T00:00:00Z', TimeValue::PRECISION_MONTH, $gregorian, 'cs' ],
 		];
 
-		$argLists = [];
-
 		foreach ( $valid as $value => $expected ) {
 			$timestamp = $expected[0];
 			$precision = $expected[1] ?? TimeValue::PRECISION_DAY;
 			$calendarModel = $expected[2] ?? $gregorian;
 			$languageCode = $expected[3] ?? 'en';
 
-			$argLists[] = [
+			yield [
 				(string)$value,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel ),
 				$languageCode
 			];
 		}
-
-		return $argLists;
 	}
 
 	/**
@@ -357,22 +353,18 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			],
 		];
 
-		$cases = [];
-
 		foreach ( $valid as $value => $args ) {
 			$options = $args[0];
 			$timestamp = $args[1];
 			$precision = $args[2];
 			$calendarModel = $args[3] ?? TimeValue::CALENDAR_GREGORIAN;
 
-			$cases[] = [
+			yield [
 				(string)$value,
 				$options,
 				new TimeValue( $timestamp, 0, 0, 0, $precision, $calendarModel )
 			];
 		}
-
-		return $cases;
 	}
 
 	/**
@@ -386,7 +378,7 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function localizedMonthNameProvider() {
-		$testCases = [
+		yield from [
 			// Nominative month names.
 			[ '1 deMonth7 2013', 'de', '1 enMonth7 2013' ],
 			[ '1 afMonth1 1999', 'af', '1 enMonth1 1999' ],
@@ -448,12 +440,10 @@ class TimeParserFactoryTest extends \PHPUnit\Framework\TestCase {
 			for ( $i = 1; $i <= 12; $i++ ) {
 				$expected = 'enMonth' . $i;
 
-				$testCases[] = [ $languageCode . 'Month' . $i, $languageCode, $expected ];
-				$testCases[] = [ $languageCode . 'Month' . $i . 'Gen', $languageCode, $expected ];
+				yield [ $languageCode . 'Month' . $i, $languageCode, $expected ];
+				yield [ $languageCode . 'Month' . $i . 'Gen', $languageCode, $expected ];
 			}
 		}
-
-		return $testCases;
 	}
 
 	/**
