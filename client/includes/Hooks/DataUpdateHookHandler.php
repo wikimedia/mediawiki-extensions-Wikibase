@@ -162,9 +162,7 @@ class DataUpdateHookHandler implements
 			// schedule the usage updates in the job queue, to avoid writing to the database
 			// during a GET request.
 
-			$currentUsages = $this->reindexEntityUsages(
-				$this->usageLookup->getUsagesForPage( $title->getArticleID() )
-			);
+			$currentUsages = $this->usageLookup->getUsagesForPage( $title->getArticleID() );
 			$newUsages = array_diff_key( $usages, $currentUsages );
 			if ( $newUsages === [] ) {
 				return;

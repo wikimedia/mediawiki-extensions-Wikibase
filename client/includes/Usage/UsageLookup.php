@@ -18,9 +18,12 @@ interface UsageLookup {
 	/**
 	 * Get the entities used on the given page.
 	 *
+	 * The returned array uses the {@link EntityUsage::getIdentityString() identity string}
+	 * as the key, so that a specific usage can be found quickly.
+	 *
 	 * @param int $pageId
 	 *
-	 * @return EntityUsage[]
+	 * @return EntityUsage[] keyed by identity string
 	 * @throws UsageTrackerException
 	 */
 	public function getUsagesForPage( $pageId );
