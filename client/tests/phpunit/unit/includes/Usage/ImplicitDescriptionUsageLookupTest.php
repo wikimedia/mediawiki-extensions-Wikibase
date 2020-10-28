@@ -60,7 +60,11 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$usageLookup = $this->createMock( UsageLookup::class );
 		$usageLookup->method( 'getUsagesForPage' )
 			->with( $pageId )
-			->willReturn( $explicitUsage ? [ $explicitUsage ] : [] );
+			->willReturn(
+				$explicitUsage
+					? [ $explicitUsage->getIdentityString() => $explicitUsage ]
+					: []
+			);
 
 		return new ImplicitDescriptionUsageLookup(
 			$usageLookup,
@@ -82,8 +86,10 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
 
 		$this->assertCount( 2, $usages );
-		$this->assertSame( $explicitUsage, $usages[0] );
-		$implicitUsage = $usages[1];
+		$this->assertSame( $explicitUsage, reset( $usages ) );
+		$this->assertSame( $explicitUsage->getIdentityString(), key( $usages ) );
+		$implicitUsage = next( $usages );
+		$this->assertSame( $implicitUsage->getIdentityString(), key( $usages ) );
 		$this->assertSame( $itemId, $implicitUsage->getEntityId() );
 		$this->assertSame( EntityUsage::DESCRIPTION_USAGE, $implicitUsage->getAspect() );
 		$this->assertSame( self::TEST_CONTENT_LANGUAGE, $implicitUsage->getModifier() );
@@ -104,7 +110,8 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
 
 		$this->assertCount( 1, $usages );
-		$this->assertSame( $explicitUsage, $usages[0] );
+		$this->assertEquals( $explicitUsage, reset( $usages ) );
+		$this->assertSame( $explicitUsage->getIdentityString(), key( $usages ) );
 	}
 
 	public function testGetUsagesForPage_doesNothingForUnlinkedPage() {
