@@ -82,8 +82,6 @@ class NamespaceChecker {
 	}
 
 	/**
-	 * Get enabled namespaces
-	 *
 	 * @return int[]
 	 */
 	public function getEnabledNamespaces() {
@@ -91,8 +89,6 @@ class NamespaceChecker {
 	}
 
 	/**
-	 * Get excluded namespaces
-	 *
 	 * @return int[]
 	 */
 	public function getExcludedNamespaces() {

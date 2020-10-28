@@ -56,8 +56,6 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 	}
 
 	/**
-	 * Set the context.
-	 *
 	 * @param IContextSource $context
 	 */
 	public function setContext( $context ): void {

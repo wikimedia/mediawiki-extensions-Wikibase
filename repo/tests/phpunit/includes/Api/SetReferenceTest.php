@@ -291,7 +291,7 @@ class SetReferenceTest extends WikibaseApiTestCase {
 	 * Unserializes a serialized Reference object (if not unserialized already).
 	 *
 	 * @param array|Reference $reference
-	 * @return Reference Reference
+	 * @return Reference
 	 */
 	protected function unserializeReference( $reference ): Reference {
 		if ( is_array( $reference ) ) {
