@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"ArenaL5",
 			"Athena in Wonderland",
 			"Banjo",
 			"Elisardojm",
@@ -71,7 +72,7 @@
 	"wikibase-alias-edit-placeholder": "escriba un pseudónimo",
 	"wikibase-label-input-help-message": "Introduza a etiqueta desta entidade en $1.",
 	"wikibase-entitytermsview-input-help-message": "Insira unha etiqueta para esta entidade, unha descrición breve e nomes alternativos por idioma.",
-	"wikibase-statementsection-statements": "Afirmacións",
+	"wikibase-statementsection-statements": "Declaracións",
 	"wikibase-statementsection-identifiers": "Identificadores",
 	"wikibase-sitelinks": "Ligazón do sitio",
 	"wikibase-sitelinkgroupview-input-help-message": "Engadir ligazón a un sitio mediante a especificación dun sitio web e unha páxina dese sitio, editar ou eliminar as ligazóns a sitios existentes.",
