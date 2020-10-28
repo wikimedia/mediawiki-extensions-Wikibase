@@ -192,6 +192,8 @@ class AffectedPagesFinder {
 	 * @param EntityChange $change
 	 *
 	 * @return Traversable of PageEntityUsages
+	 *
+	 * @see @ref md_docs_topics_usagetracking for details about virtual usages
 	 */
 	private function getAffectedPages( EntityChange $change ) {
 		$entityId = $change->getEntityId();
@@ -208,6 +210,7 @@ class AffectedPagesFinder {
 		$usages = iterator_to_array( $usages, true );
 		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
+		// if title changed, add virtual usages for both old and new title
 		if ( $change instanceof ItemChange && in_array( EntityUsage::TITLE_USAGE, $changedAspects ) ) {
 			$diffChangedAspects = $change->getCompactDiff();
 			$namesFromDiff = $this->getPagesReferencedInDiff(
