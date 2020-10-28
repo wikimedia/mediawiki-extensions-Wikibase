@@ -143,8 +143,18 @@ class ChangeHandler {
 			]
 		);
 
+		// if no usages we can abort early
+		if ( $usagesPerPage === [] ) {
+			return;
+		}
+
 		// Run all updates on all affected pages
 		$titlesToUpdate = $this->getTitlesForUsages( $usagesPerPage );
+
+		// if no titles we can abort early
+		if ( $titlesToUpdate === [] ) {
+			return;
+		}
 
 		( new LinkBatch( $titlesToUpdate ) )->execute();
 
