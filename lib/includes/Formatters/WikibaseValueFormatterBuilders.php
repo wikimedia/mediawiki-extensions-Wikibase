@@ -8,7 +8,6 @@ use DataValues\Geo\Formatters\GlobeCoordinateFormatter;
 use DataValues\Geo\Formatters\LatLongFormatter;
 use InvalidArgumentException;
 use Language;
-use Psr\SimpleCache\CacheInterface;
 use RequestContext;
 use ValueFormatters\DecimalFormatter;
 use ValueFormatters\FormatterOptions;
@@ -20,6 +19,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
+use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -97,7 +97,7 @@ class WikibaseValueFormatterBuilders {
 	private $entityRevisionLookup;
 
 	/**
-	 * @var CacheInterface
+	 * @var TermFallbackCacheFacade
 	 */
 	private $cache;
 
@@ -157,7 +157,7 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $itemUriParser,
 		string $geoShapeStorageBaseUrl,
 		string $tabularDataStorageBaseUrl,
-		CacheInterface $formatterCache,
+		TermFallbackCacheFacade $formatterCache,
 		int $cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -292,8 +292,7 @@ class WikibaseValueFormatterBuilders {
 			$this->cache,
 			new RedirectResolvingLatestRevisionLookup( $this->entityRevisionLookup ),
 			$this->getNonCachingLookup( $options ),
-			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN ),
-			$this->cacheTtlInSeconds
+			$options->getOption( FormatterLabelDescriptionLookupFactory::OPT_LANGUAGE_FALLBACK_CHAIN )
 		);
 	}
 

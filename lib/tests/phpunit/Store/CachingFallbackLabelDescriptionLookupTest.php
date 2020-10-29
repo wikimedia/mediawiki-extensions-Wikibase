@@ -9,6 +9,7 @@ use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
@@ -53,11 +54,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 1, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertSame( self::TEST_LABEL, $lookup->getLabel( $itemId )->getText() );
@@ -73,11 +76,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$lookup->getLabel( $itemId );
@@ -109,11 +114,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertSame( self::TEST_LABEL, $lookup->getLabel( $itemId )->getText() );
@@ -130,11 +137,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$lookup->getLabel( $itemId );
@@ -151,11 +160,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertNull( $lookup->getLabel( $itemId ) );
@@ -172,11 +183,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$revLookup->reveal(),
 			$this->prophesize( FallbackLabelDescriptionLookup::class )->reveal(),
-			$fallbackChain->reveal(),
-			$ttlInSeconds
+			$fallbackChain->reveal()
 		);
 
 		$this->assertNull( $lookup->getLabel( $itemId ) );
@@ -193,11 +206,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 1, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertSame( self::TEST_DESCRIPTION, $lookup->getDescription( $itemId )->getText() );
@@ -213,11 +228,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$lookup->getDescription( $itemId );
@@ -249,11 +266,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttlInSeconds = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertSame( self::TEST_DESCRIPTION, $lookup->getDescription( $itemId )->getText() );
@@ -270,11 +289,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ttl = 10;
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttl
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttl
+			$this->newFallbackChain()
 		);
 
 		$lookup->getDescription( $itemId );
@@ -291,11 +312,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ldLookup = $this->prophesize( FallbackLabelDescriptionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 99, $itemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			$ttlInSeconds
+			$this->newFallbackChain()
 		);
 
 		$this->assertNull( $lookup->getDescription( $itemId ) );
@@ -312,11 +335,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$revLookup = $this->prophesize( RedirectResolvingLatestRevisionLookup::class );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				$ttlInSeconds
+			),
 			$revLookup->reveal(),
 			$this->prophesize( FallbackLabelDescriptionLookup::class )->reveal(),
-			$fallbackChain->reveal(),
-			$ttlInSeconds
+			$fallbackChain->reveal()
 		);
 
 		$this->assertNull( $lookup->getDescription( $itemId ) );
@@ -335,11 +360,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 			->willReturn( null );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				self::TTL
+			),
 			$revLookup->reveal(),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			self::TTL
+			$this->newFallbackChain()
 		);
 
 		$got = $lookup->getDescription( $itemId );
@@ -354,11 +381,13 @@ class CachingFallbackLabelDescriptionLookupTest extends TestCase {
 		$ldLookup->getLabel( $redirectsToItemId )->willReturn( $expectedLabel );
 
 		$lookup = new CachingFallbackLabelDescriptionLookup(
-			$this->cache->reveal(),
+			new TermFallbackCacheFacade(
+				$this->cache->reveal(),
+				self::TTL
+			),
 			$this->newRedirectResolvingLatestRevisionLookup( 2, $redirectsToItemId ),
 			$ldLookup->reveal(),
-			$this->newFallbackChain(),
-			self::TTL
+			$this->newFallbackChain()
 		);
 
 		$gotLabel = $lookup->getLabel( $itemId );

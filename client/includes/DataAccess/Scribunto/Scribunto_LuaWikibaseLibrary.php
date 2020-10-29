@@ -303,8 +303,7 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 			$wikibaseClient->getFormatterCache(),
 			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
 			$nonCachingLookup,
-			$this->getLanguageFallbackChain(),
-			$wikibaseClient->getSettings()->getSetting( 'sharedCacheDuration' )
+			$this->getLanguageFallbackChain()
 		);
 
 		$usageTrackingLabelDescriptionLookup = new UsageTrackingLanguageFallbackLabelDescriptionLookup(
