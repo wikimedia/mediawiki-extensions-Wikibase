@@ -19,7 +19,6 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\EntityId\EntityIdLabelFormatter;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingTermLookup;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\EntityExistenceChecker;
@@ -30,6 +29,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -157,7 +157,7 @@ class WikibaseValueFormatterBuilders {
 		EntityIdParser $itemUriParser,
 		string $geoShapeStorageBaseUrl,
 		string $tabularDataStorageBaseUrl,
-		TermFallbackCacheFacade $formatterCache,
+		TermFallbackCacheFacade $termFallbackCacheFacade,
 		int $cacheTtlInSeconds,
 		EntityLookup $entityLookup,
 		EntityRevisionLookup $entityRevisionLookup,
@@ -185,7 +185,7 @@ class WikibaseValueFormatterBuilders {
 		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityLookup = $entityLookup;
-		$this->cache = $formatterCache;
+		$this->cache = $termFallbackCacheFacade;
 		$this->snakFormat = new SnakFormat();
 		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 		$this->kartographerEmbeddingHandler = $kartographerEmbeddingHandler;

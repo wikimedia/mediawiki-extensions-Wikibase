@@ -2,7 +2,7 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Lib\FormatterCache;
+namespace Wikibase\Lib\TermFallbackCache;
 
 use BagOStuff;
 use CachedBagOStuff;
@@ -15,10 +15,10 @@ use Wikibase\Lib\StatsdRecordingSimpleCache;
 /**
  * @license GPL-2.0-or-later
  */
-class FormatterCacheServiceFactory {
+class TermFallbackCacheServiceFactory {
 
-	public function newSharedCache( $formatterCacheType ): BagOStuff {
-		return ObjectCache::getInstance( $formatterCacheType );
+	public function newSharedCache( $termFallbackCacheType ): BagOStuff {
+		return ObjectCache::getInstance( $termFallbackCacheType );
 	}
 
 	public function newInMemoryCache( BagOStuff $bagOStuff ): CachedBagOStuff {

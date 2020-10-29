@@ -12,10 +12,10 @@ use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 
 /**
  * This TermLookup allows exposes language based lookups for getLabel and getDescription
@@ -37,7 +37,7 @@ use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 class CachingFallbackBasedTermLookup implements TermLookup {
 
 	/** @var TermFallbackCacheFacade */
-	private $formatterCache;
+	private $termFallbackCache;
 
 	/** @var RedirectResolvingLatestRevisionLookup */
 	private $redirectResolvingLatestRevisionLookup;
@@ -55,13 +55,13 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	private $lookups;
 
 	public function __construct(
-		TermFallbackCacheFacade $formatterCache,
+		TermFallbackCacheFacade $termFallbackCacheFacade,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingLatestRevisionLookup,
 		LanguageFallbackLabelDescriptionLookupFactory $lookupFactory,
 		LanguageFactory $languageFactory,
 		ContentLanguages $contentLanguages
 	) {
-		$this->formatterCache = $formatterCache;
+		$this->termFallbackCache = $termFallbackCacheFacade;
 		$this->redirectResolvingLatestRevisionLookup = $redirectResolvingLatestRevisionLookup;
 		$this->lookupFactory = $lookupFactory;
 		$this->languageFactory = $languageFactory;
@@ -96,7 +96,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 
 		list( $revisionId, $targetEntityId ) = $resolutionResult;
 
-		$termFallback = $this->formatterCache->get( $targetEntityId, $revisionId, $languageCode, $termType );
+		$termFallback = $this->termFallbackCache->get( $targetEntityId, $revisionId, $languageCode, $termType );
 
 		// We have already cached the fact that there is no value for this term
 		if ( $termFallback === null ) {
@@ -108,7 +108,7 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 			$termFallback = $this->lookupWithoutCache( $targetEntityId, $language, $termType );
 
 			// this can be stored in cache, either the term or null
-			$this->formatterCache->set( $termFallback, $targetEntityId, $revisionId, $languageCode, $termType );
+			$this->termFallbackCache->set( $termFallback, $targetEntityId, $revisionId, $languageCode, $termType );
 
 			if ( $termFallback === null ) {
 				return null;

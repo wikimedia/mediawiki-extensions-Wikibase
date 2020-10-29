@@ -344,5 +344,5 @@ return [
 	'propagatePageDeletion' => false,
 	'deleteNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 
-	'formatterCacheVersion' => null,
+	'termFallbackCacheVersion' => null,
 ];

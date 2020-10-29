@@ -6,9 +6,9 @@ use IBufferingStatsdDataFactory;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
-use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
-use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
+use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -64,17 +64,17 @@ class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase
 	/**
 	 * @dataProvider cacheTypeProvider
 	 */
-	public function testFormatterCacheFactory( $sharedCacheType ): void {
+	public function testTermFallbackCacheFactory( $sharedCacheType ): void {
 		$logger = $this->createMock( LoggerInterface::class );
-		$factory = new FormatterCacheFactory(
+		$factory = new TermFallbackCacheFactory(
 			$sharedCacheType,
 			$logger,
 			$this->createMock( IBufferingStatsdDataFactory::class ),
 			'secret',
-			new FormatterCacheServiceFactory(),
+			new TermFallbackCacheServiceFactory(),
 			null
 		);
-		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getFormatterCache() );
+		$this->assertInstanceOf( StatsdRecordingSimpleCache::class, $factory->getTermFallbackCache() );
 	}
 
 	public function cacheTypeProvider(): array {

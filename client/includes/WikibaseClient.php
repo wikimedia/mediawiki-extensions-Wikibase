@@ -92,9 +92,6 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
-use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
@@ -123,6 +120,9 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityTitleTextLookup;
 use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use Wikibase\Lib\StringNormalizer;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
+use Wikibase\Lib\TermFallbackCacheFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Lib\WikibaseSettings;
@@ -290,8 +290,8 @@ final class WikibaseClient {
 	/** @var ReferenceFormatterFactory|null */
 	private $referenceFormatterFactory = null;
 
-	/** @var FormatterCacheFactory|null */
-	private $formatterCacheFactory = null;
+	/** @var TermFallbackCacheFactory|null */
+	private $termFallbackCacheFactory = null;
 
 	/**
 	 * @warning This is for use with bootstrap code in WikibaseClient.datatypes.php only!
@@ -334,7 +334,7 @@ final class WikibaseClient {
 				$this->getRepoItemUriParser(),
 				$this->settings->getSetting( 'geoShapeStorageBaseUrl' ),
 				$this->settings->getSetting( 'tabularDataStorageBaseUrl' ),
-				$this->getFormatterCache(),
+				$this->getTermFallbackCache(),
 				$this->settings->getSetting( 'sharedCacheDuration' ),
 				$this->getEntityLookup(),
 				$this->getStore()->getEntityRevisionLookup(),
@@ -1265,27 +1265,27 @@ final class WikibaseClient {
 		);
 	}
 
-	public function getFormatterCache(): TermFallbackCacheFacade {
+	public function getTermFallbackCache(): TermFallbackCacheFacade {
 		return new TermFallbackCacheFacade(
-			$this->getFormatterCacheFactory()->getFormatterCache(),
+			$this->getTermFallbackCacheFactory()->getTermFallbackCache(),
 			$this->getSettings()->getSetting( 'sharedCacheDuration' )
 		);
 	}
 
-	public function getFormatterCacheFactory(): FormatterCacheFactory {
+	public function getTermFallbackCacheFactory(): TermFallbackCacheFactory {
 		global $wgSecretKey;
 
-		if ( $this->formatterCacheFactory === null ) {
-			$this->formatterCacheFactory = new FormatterCacheFactory(
+		if ( $this->termFallbackCacheFactory === null ) {
+			$this->termFallbackCacheFactory = new TermFallbackCacheFactory(
 				$this->settings->getSetting( 'sharedCacheType' ),
 				$this->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory(),
 				hash( 'sha256', $wgSecretKey ),
-				new FormatterCacheServiceFactory(),
-				$this->settings->getSetting( 'formatterCacheVersion' )
+				new TermFallbackCacheServiceFactory(),
+				$this->settings->getSetting( 'termFallbackCacheVersion' )
 			);
 		}
-		return $this->formatterCacheFactory;
+		return $this->termFallbackCacheFactory;
 	}
 
 	public function getEntityIdLookup(): EntityIdLookup {

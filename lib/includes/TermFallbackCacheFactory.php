@@ -7,19 +7,19 @@ use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
-use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 
 /**
  * Factory for accessing the shared cache
  *
  * @license GPL-2.0-or-later
  */
-class FormatterCacheFactory {
+class TermFallbackCacheFactory {
 
 	/**
 	 * @var int|string
 	 */
-	private $formatterCacheType;
+	private $termFallbackCacheType;
 
 	/**
 	 * @var LoggerInterface
@@ -37,48 +37,48 @@ class FormatterCacheFactory {
 	private $statsdDataFactory;
 
 	/**
-	 * @var FormatterCacheServiceFactory
+	 * @var TermFallbackCacheServiceFactory
 	 */
 	private $serviceFactory;
 
 	/**
 	 * @var int|null
 	 */
-	private $formatterCacheVersion;
+	private $cacheVersion;
 
 	/**
-	 * @param int|string $formatterCacheType
+	 * @param int|string $cacheType
 	 * @param LoggerInterface $logger
 	 * @param IBufferingStatsdDataFactory $statsdDataFactory
 	 * @param string $cacheSecret
-	 * @param FormatterCacheServiceFactory $serviceFactory
-	 * @param int|null $formatterCacheVersion
+	 * @param TermFallbackCacheServiceFactory $serviceFactory
+	 * @param int|null $cacheVersion
 	 */
 	public function __construct(
-		$formatterCacheType,
+		$cacheType,
 		LoggerInterface $logger,
 		IBufferingStatsdDataFactory $statsdDataFactory,
 		string $cacheSecret,
-		FormatterCacheServiceFactory $serviceFactory,
-		?int $formatterCacheVersion
+		TermFallbackCacheServiceFactory $serviceFactory,
+		?int $cacheVersion
 	) {
-		$this->formatterCacheType = $formatterCacheType;
+		$this->termFallbackCacheType = $cacheType;
 		$this->logger = $logger;
 		$this->statsdDataFactory = $statsdDataFactory;
 		$this->cacheSecret = $cacheSecret;
 		$this->serviceFactory = $serviceFactory;
-		$this->formatterCacheVersion = $formatterCacheVersion;
+		$this->cacheVersion = $cacheVersion;
 	}
 
-	public function getFormatterCache(): CacheInterface {
-		$bagOStuff = $this->serviceFactory->newSharedCache( $this->formatterCacheType );
+	public function getTermFallbackCache(): CacheInterface {
+		$bagOStuff = $this->serviceFactory->newSharedCache( $this->termFallbackCacheType );
 		if ( !$bagOStuff instanceof CachedBagOStuff ) {
 			$bagOStuff = $this->serviceFactory->newInMemoryCache( $bagOStuff ); // wrap in an in-memory cache
 		}
 
 		$prefix = 'wikibase.repo.formatter.'; // intentionally shared between repo and client
-		if ( $this->formatterCacheVersion !== null ) {
-			$prefix .= "$this->formatterCacheVersion.";
+		if ( $this->cacheVersion !== null ) {
+			$prefix .= "$this->cacheVersion.";
 		}
 
 		$cache = $this->serviceFactory->newCache(

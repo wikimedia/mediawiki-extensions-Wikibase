@@ -142,7 +142,7 @@ return call_user_func( function() {
 			'retrievedDate' => null,
 		],
 
-		'formatterCacheVersion' => null,
+		'termFallbackCacheVersion' => null,
 
 		// enable implicit usage on the description of a page in its content language (T191831)
 		'enableImplicitDescriptionUsage' => false,

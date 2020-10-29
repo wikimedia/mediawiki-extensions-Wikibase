@@ -13,10 +13,10 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermTypes;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 
 /**
  * @covers \Wikibase\Client\DataAccess\Scribunto\CachingFallbackBasedTermLookup

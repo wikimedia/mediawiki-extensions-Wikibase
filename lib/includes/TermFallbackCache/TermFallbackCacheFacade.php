@@ -1,7 +1,7 @@
 <?php
 
 declare( strict_types=1 );
-namespace Wikibase\Lib\FormatterCache;
+namespace Wikibase\Lib\TermFallbackCache;
 
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,8 +10,8 @@ use Wikibase\Lib\Store\TermCacheKeyBuilder;
 
 /**
  * TermFallbackCacheFacade is class to allow for simplified
- * interaction with the shared cache used for storing
- * TermFallback objects (also known as the formatter cache).
+ * interaction with the shared cache used for storing TermFallback objects
+ * (also known as the term fallback cache or formatter cache).
  *
  * The cache returns TermFallbackCacheFacade::NO_VALUE in the
  * case there is no entry in the cache.

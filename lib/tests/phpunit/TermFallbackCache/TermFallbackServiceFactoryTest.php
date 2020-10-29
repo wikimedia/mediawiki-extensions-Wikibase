@@ -2,25 +2,25 @@
 
 declare( strict_types = 1 );
 
-namespace Wikibase\Lib\Tests\FormatterCache;
+namespace Wikibase\Lib\Tests\TermFallbackCache;
 
 use BagOStuff;
 use CachedBagOStuff;
 use IBufferingStatsdDataFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
-use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
 use Wikibase\Lib\SimpleCacheWithBagOStuff;
 use Wikibase\Lib\StatsdRecordingSimpleCache;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory;
 
 /**
- * @covers \Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory
+ * @covers \Wikibase\Lib\TermFallbackCache\TermFallbackCacheServiceFactory
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  */
-class FormatterCacheServiceFactoryTest extends TestCase {
+class TermFallbackServiceFactoryTest extends TestCase {
 
 	public function testNewSharedCache() {
 		$sut = $this->createSUT();
@@ -62,7 +62,7 @@ class FormatterCacheServiceFactoryTest extends TestCase {
 	}
 
 	private function createSUT() {
-		return new FormatterCacheServiceFactory();
+		return new TermFallbackCacheServiceFactory();
 	}
 
 }

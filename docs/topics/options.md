@@ -110,8 +110,8 @@ The type of cache to use for the shared object cache. Use `CACHE_XXX` constants.
 
 DEFAULT: [$wgMainCacheType]
 
-#### formatterCacheVersion {#common_formatterCacheVersion}
-Integer value to be appended to the shared cache prefix. Can be used to invalidate the formatter cache by incrementing/changing this value.
+#### termFallbackCacheVersion {#common_termFallbackCacheVersion}
+Integer value to be appended to the shared cache prefix. Can be used to invalidate the term fallback cache by incrementing/changing this value.
 
 DEFAULT: null
 
