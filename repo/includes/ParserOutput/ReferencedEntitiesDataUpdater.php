@@ -44,13 +44,6 @@ class ReferencedEntitiesDataUpdater implements EntityParserOutputUpdater {
 	public function updateParserOutput( ParserOutput $parserOutput, EntityDocument $entity ) {
 		$entityIds = $this->entityReferenceExtractor->extractEntityIds( $entity );
 
-		/**
-		 * Needed and used in EntityParserOutputGenerator, for getEntityInfo, to allow this data to
-		 * be accessed later in processing.
-		 *
-		 * @see EntityParserOutputGenerator::getEntityInfo
-		 */
-		$parserOutput->setExtensionData( 'referenced-entities', $entityIds );
 		$this->addLinksToParserOutput( $parserOutput, $entityIds );
 	}
 

@@ -9,7 +9,6 @@ use SpecialPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Entity\PropertyDataTypeMatcher;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
@@ -50,14 +49,8 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 				'kitten item',
 				[ 'http://an.url.com', 'https://another.url.org' ],
 				[ 'File:This_is_a_file.pdf', 'File:Selfie.jpg' ],
-				[
-					new ItemId( 'Q42' ),
-					new ItemId( 'Q35' ),
-					new PropertyId( 'P42' ),
-					new PropertyId( 'P10' )
-				],
 			],
-			[ new Item(), null, [], [], [] ]
+			[ new Item(), null, [], [] ]
 		];
 	}
 
@@ -66,7 +59,6 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 	 * string|null $titleText
 	 * string[] $externalLinks
 	 * string[] $images
-	 * EntityId[] $referencedEntities
 	 *
 	 * @dataProvider provideTestGetParserOutput
 	 */
@@ -74,8 +66,7 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 		EntityDocument $entity,
 		$titleText,
 		array $externalLinks,
-		array $images,
-		array $referencedEntities
+		array $images
 	) {
 		$this->entityViewFactory = $this->mockEntityViewFactory( true );
 		$entityParserOutputGenerator = $this->newEntityParserOutputGenerator( $titleText );
@@ -119,11 +110,6 @@ class FullEntityParserOutputGeneratorTest extends EntityParserOutputGeneratorTes
 //			array_keys( $parserOutput->getLinks()[NS_MAIN] ),
 //			'badges'
 //		);
-
-		$this->assertArrayEquals(
-			$referencedEntities,
-			$parserOutput->getExtensionData( 'referenced-entities' )
-		);
 
 		$alternateLinks = null;
 		if ( $entity->getId() ) {
