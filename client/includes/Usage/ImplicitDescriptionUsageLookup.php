@@ -89,23 +89,14 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		}
 		$contentLanguage = $title->getPageLanguage()->getCode();
 
-		foreach ( $usages as $usage ) {
-			if (
-				$usage->getAspect() === EntityUsage::DESCRIPTION_USAGE &&
-				$usage->getModifier() === $contentLanguage &&
-				$usage->getEntityId()->equals( $entityId )
-			) {
-				// there already is an explicit usage, nothing to do
-				return $usages;
-			}
-		}
-
-		// there is no explicit usage, add the implicit one
-		$usages[] = new EntityUsage(
+		$usage = new EntityUsage(
 			$entityId,
 			EntityUsage::DESCRIPTION_USAGE,
 			$contentLanguage
 		);
+		// this might replace an existing usage but that’s okay
+		$usages[$usage->getIdentityString()] = $usage;
+
 		return $usages;
 	}
 
