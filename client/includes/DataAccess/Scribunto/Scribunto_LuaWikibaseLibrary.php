@@ -25,6 +25,7 @@ use Wikibase\DataModel\Services\Lookup\EntityAccessLimitException;
 use Wikibase\DataModel\Services\Lookup\EntityRetrievingClosestReferencedEntityIdLookup;
 use Wikibase\Lib\Store\CachingFallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Store\PropertyOrderProvider;
 use Wikibase\Lib\Store\RedirectResolvingLatestRevisionLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -324,13 +325,24 @@ class Scribunto_LuaWikibaseLibrary extends Scribunto_LuaLibraryBase {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$settings = $wikibaseClient->getSettings();
 
+		$termLookup = new CachingFallbackBasedTermLookup(
+			$wikibaseClient->getFormatterCache(),
+			new RedirectResolvingLatestRevisionLookup( $wikibaseClient->getStore()->getEntityRevisionLookup() ),
+			new LanguageFallbackLabelDescriptionLookupFactory(
+				$wikibaseClient->getLanguageFallbackChainFactory(),
+				$wikibaseClient->getTermLookup()
+			),
+			$mediaWikiServices->getLanguageFactory(),
+			$wikibaseClient->getTermsLanguages()
+		);
+
 		return new WikibaseLanguageIndependentLuaBindings(
 			$wikibaseClient->getStore()->getSiteLinkLookup(),
 			$wikibaseClient->getEntityIdLookup(),
 			$settings,
 			$this->getUsageAccumulator(),
 			$this->getEntityIdParser(),
-			$wikibaseClient->getTermLookup(),
+			$termLookup,
 			$wikibaseClient->getTermsLanguages(),
 			new EntityRetrievingClosestReferencedEntityIdLookup(
 				$wikibaseClient->getStore()->getEntityLookup(),
