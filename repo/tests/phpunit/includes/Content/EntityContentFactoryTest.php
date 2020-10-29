@@ -55,13 +55,9 @@ class EntityContentFactoryTest extends \MediaWikiTestCase {
 	}
 
 	public function contentModelsProvider() {
-		$argLists = [];
-
-		$argLists[] = [ [], [] ];
-		$argLists[] = [ [ 'Foo' => 'Bar' ], [] ];
-		$argLists[] = [ WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] ];
-
-		return $argLists;
+		yield [ [], [] ];
+		yield [ [ 'Foo' => 'Bar' ], [] ];
+		yield [ WikibaseRepo::getDefaultInstance()->getContentModelMappings(), [] ];
 	}
 
 	public function provideInvalidConstructorArguments() {

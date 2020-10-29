@@ -36,25 +36,21 @@ class EntityIdValueParserTest extends StringValueParserTest {
 	 * @inheritDoc
 	 */
 	public function validInputProvider() {
-		$argLists = [];
-
 		$valid = [
 			'q1' => new EntityIdValue( new ItemId( 'q1' ) ),
 			'p1' => new EntityIdValue( new PropertyId( 'p1' ) ),
 		];
 
 		foreach ( $valid as $value => $expected ) {
-			$argLists[] = [ $value, $expected ];
+			yield [ $value, $expected ];
 		}
-
-		return array_merge( $argLists );
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	public function invalidInputProvider() {
-		$argLists = parent::invalidInputProvider();
+		yield from parent::invalidInputProvider();
 
 		$invalid = [
 			'foo',
@@ -69,10 +65,8 @@ class EntityIdValueParserTest extends StringValueParserTest {
 		];
 
 		foreach ( $invalid as $value ) {
-			$argLists[] = [ $value ];
+			yield [ $value ];
 		}
-
-		return $argLists;
 	}
 
 }

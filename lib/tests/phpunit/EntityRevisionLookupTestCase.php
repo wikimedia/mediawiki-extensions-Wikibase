@@ -51,11 +51,9 @@ abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 	 * @return EntityRedirect[]
 	 */
 	protected function getTestRedirects() {
-		$redirects = [];
-
-		$redirects[] = new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) );
-
-		return $redirects;
+		return [
+			new EntityRedirect( new ItemId( 'Q23' ), new ItemId( 'Q42' ) ),
+		];
 	}
 
 	protected function resolveLogicalRevision( $revision ) {
@@ -137,14 +135,9 @@ abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
 	}
 
 	public function provideGetEntityRevision_redirect() {
-		$redirects = $this->getTestRedirects();
-		$cases = [];
-
-		foreach ( $redirects as $redirect ) {
-			$cases[] = [ $redirect->getEntityId(), $redirect->getTargetId() ];
+		foreach ( $this->getTestRedirects() as $redirect ) {
+			yield [ $redirect->getEntityId(), $redirect->getTargetId() ];
 		}
-
-		return $cases;
 	}
 
 	/**

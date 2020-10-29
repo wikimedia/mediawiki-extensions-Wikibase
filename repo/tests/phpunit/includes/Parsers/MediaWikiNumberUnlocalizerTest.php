@@ -61,14 +61,11 @@ class MediaWikiNumberUnlocalizerTest extends \PHPUnit\Framework\TestCase {
 			'ar', 'fa', 'my', 'pi', 'ne', 'kn', // different numerals
 		];
 
-		$cases = [];
 		foreach ( $languages as $lang ) {
 			foreach ( $numbers as $num ) {
-				$cases[] = [ $num, $lang ];
+				yield [ $num, $lang ];
 			}
 		}
-
-		return $cases;
 	}
 
 	/**
