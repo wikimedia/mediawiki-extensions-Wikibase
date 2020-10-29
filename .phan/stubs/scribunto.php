@@ -61,13 +61,13 @@ class Scribunto_LuaLibraryBase {
 	}
 
 	/**
-	 * @return Parser parser
+	 * @return Parser
 	 */
 	protected function getParser() {
 	}
 
 	/**
-	 * @return ParserOptions parser options
+	 * @return ParserOptions
 	 */
 	protected function getParserOptions() {
 	}

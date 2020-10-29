@@ -2362,7 +2362,6 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * Get entity search helper callbacks.
 	 * @return callable[]
 	 */
 	public function getEntitySearchHelperCallbacks() {

@@ -182,7 +182,6 @@ class UpdateUnits extends Maintenance {
 	}
 
 	/**
-	 * Set base URI
 	 * @param string $uri
 	 */
 	public function setBaseUri( $uri ) {
