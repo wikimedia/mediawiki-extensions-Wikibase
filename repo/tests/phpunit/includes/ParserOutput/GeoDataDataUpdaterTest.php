@@ -231,6 +231,7 @@ class GeoDataDataUpdaterTest extends \MediaWikiTestCase {
 		$coord->primary = true;
 
 		$coordinatesOutput->addPrimary( $coord );
+		$coordinatesOutput->setToParserOutput( $parserOutput );
 
 		$updater = $this->getUpdaterWithStatements( [ 'P625', 'P10' ] );
 		$updater->updateParserOutput( $parserOutput );

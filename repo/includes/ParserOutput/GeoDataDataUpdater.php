@@ -105,6 +105,7 @@ class GeoDataDataUpdater implements StatementDataUpdater {
 		}
 
 		$this->addSecondaryCoordinates( $coordinatesOutput, $primaryCoordKey );
+		$coordinatesOutput->setToParserOutput( $parserOutput );
 	}
 
 	/**
