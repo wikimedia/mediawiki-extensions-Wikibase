@@ -206,8 +206,6 @@ class AffectedPagesFinder {
 			array_merge( $changedAspects, [ EntityUsage::ALL_USAGE ] )
 		);
 
-		// @todo: use iterators throughout!
-		$usages = iterator_to_array( $usages, true );
 		$usages = $this->transformAllPageEntityUsages( $usages, $entityId, $changedAspects );
 
 		// if title changed, add virtual usages for both old and new title
@@ -229,17 +227,17 @@ class AffectedPagesFinder {
 			$mergedUsages = [];
 			$this->mergeUsagesInto( $usages, $mergedUsages );
 			$this->mergeUsagesInto( $usagesFromDiff, $mergedUsages );
-			$usages = $mergedUsages;
+			$usages = new ArrayIterator( $mergedUsages );
 		}
 
-		return new ArrayIterator( $usages );
+		return $usages;
 	}
 
 	/**
-	 * @param PageEntityUsages[] $from
+	 * @param iterable<PageEntityUsages> $from
 	 * @param PageEntityUsages[] &$into Array to merge into
 	 */
-	private function mergeUsagesInto( array $from, array &$into ) {
+	private function mergeUsagesInto( iterable $from, array &$into ) {
 		foreach ( $from as $pageEntityUsages ) {
 			$key = $pageEntityUsages->getPageId();
 
@@ -357,27 +355,23 @@ class AffectedPagesFinder {
 	}
 
 	/**
-	 * @param PageEntityUsages[] $usages
+	 * @param iterable<PageEntityUsages> $usages
 	 * @param EntityId $entityId
 	 * @param string[] $changedAspects
 	 *
-	 * @return PageEntityUsages[]
+	 * @return iterable<PageEntityUsages>
 	 */
-	private function transformAllPageEntityUsages( array $usages, EntityId $entityId, array $changedAspects ) {
+	private function transformAllPageEntityUsages( iterable $usages, EntityId $entityId, array $changedAspects ): iterable {
 		$aspectTransformer = new UsageAspectTransformer();
 		$aspectTransformer->setRelevantAspects( $entityId, $changedAspects );
-
-		$transformed = [];
 
 		foreach ( $usages as $key => $usagesOnPage ) {
 			$transformedUsagesOnPage = $aspectTransformer->transformPageEntityUsages( $usagesOnPage );
 
 			if ( !$transformedUsagesOnPage->isEmpty() ) {
-				$transformed[$key] = $transformedUsagesOnPage;
+				yield $key => $transformedUsagesOnPage;
 			}
 		}
-
-		return $transformed;
 	}
 
 }
