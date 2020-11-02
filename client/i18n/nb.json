@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"4ing",
 			"Danmichaelo",
 			"Event",
 			"Jeblad",
@@ -68,7 +69,7 @@
 	"wikibase-error-invalid-entity-id": "ID-en «$2» er ukjent for systemet. Bruk en gyldig entitets-ID.",
 	"wikibase-error-exceeded-entity-access-limit": "For mange {{WBREPONAME}}-elementer hentet.",
 	"wikibase-error-exceeded-referenced-entity-id-limit": "For mange «mw.wikibase.getReferencedEntityId»-kall, opptil $2 {{PLURAL:$2|tillates}}.",
-	"unconnectedpages": "Sider som ikke er knyttet til elementer.",
+	"unconnectedpages": "Sider som ikke er knyttet til elementer",
 	"unconnectedpages-summary": "Denne siden lister sider uten tilknyttet dataelement (i navnerom som støtter tilknyttede elementer). Listen er sortert på fallende side-ID, slik at nyere sider listes først.",
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|språklenke|språklenker}} på siden)",
 	"wikibase-unconnectedpages-submit": "Vis sider",
