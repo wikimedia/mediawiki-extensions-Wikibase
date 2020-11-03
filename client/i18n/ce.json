@@ -89,5 +89,6 @@
 	"notification-link-text-view-item": "{{GENDER:$1|Хьажа}} элемент",
 	"unresolved-property-category": "Мегаш йоцу билгалонаш йолу агӀонаш",
 	"connected-redirect-category": "{{grammar:genitive|{{WBREPONAME}}}} элементаца йихкина йолу дӀасахьажоргаш",
-	"connected-redirect-category-desc": "ХӀокху категорино гойту агӀонаш-дӀасахьажоргаш, {{grammar:genitive|{{WBREPONAME}}}} тӀера элементаца йихкина йолу."
+	"connected-redirect-category-desc": "ХӀокху категорино гойту агӀонаш-дӀасахьажоргаш, {{grammar:genitive|{{WBREPONAME}}}} тӀера элементаца йихкина йолу.",
+	"wikibase-client-data-bridge-dialog-title": "Хийца $1"
 }
