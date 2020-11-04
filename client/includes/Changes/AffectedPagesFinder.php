@@ -289,17 +289,22 @@ class AffectedPagesFinder {
 	 * @return PageEntityUsages[]
 	 */
 	private function filterUpdates( Traversable $usages ) {
-		$titlesToUpdate = [];
+		$usagesByPageId = [];
 
 		/** @var PageEntityUsages $pageEntityUsages */
 		foreach ( $usages as $pageEntityUsages ) {
-			$title = $this->titleFactory->newFromID( $pageEntityUsages->getPageId() );
-			if ( !$title || ( $this->checkPageExistence && !$title->exists() ) ) {
+			$usagesByPageId[$pageEntityUsages->getPageId()] = $pageEntityUsages;
+		}
+
+		$titlesToUpdate = [];
+
+		foreach ( $this->titleFactory->newFromIDs( array_keys( $usagesByPageId ) ) as $title ) {
+			if ( $this->checkPageExistence && !$title->exists() ) {
 				continue;
 			}
 
-			$key = $pageEntityUsages->getPageId();
-			$titlesToUpdate[$key] = $pageEntityUsages;
+			$pageId = $title->getArticleID();
+			$titlesToUpdate[$pageId] = $usagesByPageId[$pageId];
 		}
 
 		return $titlesToUpdate;

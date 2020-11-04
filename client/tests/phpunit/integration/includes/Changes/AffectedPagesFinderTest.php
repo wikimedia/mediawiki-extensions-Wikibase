@@ -46,11 +46,15 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$titleFactory = $this->createMock( TitleFactory::class );
 
 		$titleFactory->expects( $this->any() )
-			->method( 'newFromID' )
-			->will( $this->returnCallback( function( $id ) {
-				$title = Title::makeTitle( NS_MAIN, "$id" );
-				$title->resetArticleID( $id );
-				return $title;
+			->method( 'newFromIDs' )
+			->will( $this->returnCallback( function( array $ids ) {
+				$titles = [];
+				foreach ( $ids as $id ) {
+					$title = Title::makeTitle( NS_MAIN, "$id" );
+					$title->resetArticleID( $id );
+					$titles[] = $title;
+				}
+				return $titles;
 			} ) );
 
 		$titleFactory->expects( $this->any() )

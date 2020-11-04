@@ -236,16 +236,13 @@ class ChangeHandler {
 	 * @return Title[]
 	 */
 	private function getTitlesForUsages( $usagesPerPage ) {
-		$titles = [];
+		$pageIds = [];
 
 		foreach ( $usagesPerPage as $usages ) {
-			$title = $this->titleFactory->newFromID( $usages->getPageId() );
-			if ( $title ) {
-				$titles[] = $title;
-			}
+			$pageIds[] = $usages->getPageId();
 		}
 
-		return $titles;
+		return $this->titleFactory->newFromIDs( $pageIds );
 	}
 
 	/**
