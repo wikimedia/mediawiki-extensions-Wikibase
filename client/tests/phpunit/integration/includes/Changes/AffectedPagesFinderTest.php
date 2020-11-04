@@ -1,10 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Integration\Changes;
 
 use ArrayIterator;
 use DataValues\DataValue;
 use DataValues\StringValue;
+use LinkBatch;
+use MediaWiki\Cache\LinkBatchFactory;
 use Title;
 use TitleFactory;
 use Traversable;
@@ -65,6 +69,18 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		return $titleFactory;
 	}
 
+	private function getLinkBatchFactory(): LinkBatchFactory {
+		$linkBatch = $this->createMock( LinkBatch::class );
+		$linkBatch->method( 'execute' )
+			->willReturn( null );
+
+		$linkBatchFactory = $this->createMock( LinkBatchFactory::class );
+		$linkBatchFactory->method( 'newLinkBatch' )
+			->willReturn( $linkBatch );
+
+		return $linkBatchFactory;
+	}
+
 	private function getAffectedPagesFinder( array $usage, array $expectedAspects ) {
 		$usageLookup = $this->createMock( UsageLookup::class );
 
@@ -76,7 +92,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$usageLookup,
 			$this->getTitleFactory(),
+			$this->getLinkBatchFactory(),
 			'enwiki',
+			null,
 			false
 		);
 
@@ -513,7 +531,9 @@ class AffectedPagesFinderTest extends \MediaWikiTestCase {
 		$affectedPagesFinder = new AffectedPagesFinder(
 			$this->getSiteLinkUsageLookup( $pageTitle ),
 			new TitleFactory(),
+			$this->getLinkBatchFactory(),
 			'enwiki',
+			null,
 			false
 		);
 

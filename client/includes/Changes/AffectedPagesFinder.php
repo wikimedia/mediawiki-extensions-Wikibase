@@ -1,10 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Changes;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use MediaWiki\Cache\LinkBatchFactory;
 use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Title;
 use TitleFactory;
 use Traversable;
@@ -13,7 +17,6 @@ use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\UsageAspectTransformer;
 use Wikibase\Client\Usage\UsageLookup;
-use Wikibase\Client\WikibaseClient;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Changes\Change;
 use Wikibase\Lib\Changes\EntityChange;
@@ -36,15 +39,13 @@ class AffectedPagesFinder {
 	 */
 	private $titleFactory;
 
+	/** @var LinkBatchFactory */
+	private $linkBatchFactory;
+
 	/**
 	 * @var string
 	 */
 	private $siteId;
-
-	/**
-	 * @var bool
-	 */
-	private $checkPageExistence;
 
 	/**
 	 * @var LoggerInterface
@@ -52,9 +53,16 @@ class AffectedPagesFinder {
 	private $logger;
 
 	/**
+	 * @var bool
+	 */
+	private $checkPageExistence;
+
+	/**
 	 * @param UsageLookup $usageLookup
 	 * @param TitleFactory $titleFactory
+	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param string $siteId
+	 * @param LoggerInterface|null $logger
 	 * @param bool $checkPageExistence To disable slow filtering that is not relevant in test
 	 *  scenarios. Not meant to be used in production!
 	 *
@@ -63,23 +71,17 @@ class AffectedPagesFinder {
 	public function __construct(
 		UsageLookup $usageLookup,
 		TitleFactory $titleFactory,
-		$siteId,
-		$checkPageExistence = true
+		LinkBatchFactory $linkBatchFactory,
+		string $siteId,
+		?LoggerInterface $logger = null,
+		bool $checkPageExistence = true
 	) {
-		if ( !is_string( $siteId ) ) {
-			throw new InvalidArgumentException( '$siteId must be a string' );
-		}
-
-		if ( !is_bool( $checkPageExistence ) ) {
-			throw new InvalidArgumentException( '$checkPageExistence must be a boolean' );
-		}
-
 		$this->usageLookup = $usageLookup;
 		$this->titleFactory = $titleFactory;
+		$this->linkBatchFactory = $linkBatchFactory;
 		$this->siteId = $siteId;
+		$this->logger = $logger ?: new NullLogger();
 		$this->checkPageExistence = $checkPageExistence;
-		// TODO inject me
-		$this->logger = WikibaseClient::getDefaultInstance()->getLogger();
 	}
 
 	/**
@@ -334,6 +336,9 @@ class AffectedPagesFinder {
 			list( $aspect, $modifier ) = EntityUsage::splitAspectKey( $aspect );
 			$usagesForItem[] = new EntityUsage( $entityId, $aspect, $modifier );
 		}
+
+		// bulk-load the page IDs into the LinkCache
+		$this->linkBatchFactory->newLinkBatch( $titles )->execute();
 
 		$usagesPerPage = [];
 		foreach ( $titles as $title ) {
