@@ -23,6 +23,7 @@
 			globecoordinate: dv.GlobeCoordinateValue.TYPE,
 			monolingualtext: dv.MonolingualTextValue.TYPE,
 			quantity: dv.QuantityValue.TYPE,
+			string: dv.StringValue.TYPE,
 			time: dv.TimeValue.TYPE,
 			'wikibase-entityid': datamodel.EntityId.TYPE
 		};
@@ -41,7 +42,6 @@
 			'commonsMedia',
 			'geo-shape',
 			'tabular-data',
-			'string',
 			'url',
 			'external-id'
 		];
