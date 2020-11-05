@@ -62,5 +62,6 @@
 	"wikibase-otherprojects-beta-description": "Adaugă secțiunea „{{int:wikibase-otherprojects}}” în cadrul barei laterale, care oferă legături către alte proiecte ale Wikimediei pe baza datelor furnizate de {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Limbă",
 	"wikibase-sitelinks-link-columnheading": "Pagină legată",
-	"notification-header-page-connection": "Pagina <strong>$3</strong> a fost {{GENDER:$2|conectată}} la {{PLURAL:$4|-1=un element {{WBREPONAME}}|elementul {{WBREPONAME}} $4}}, unde pot fi colectate date relevante pentru subiect."
+	"notification-header-page-connection": "Pagina <strong>$3</strong> a fost {{GENDER:$2|conectată}} la {{PLURAL:$4|-1=un element {{WBREPONAME}}|elementul {{WBREPONAME}} $4}}, unde pot fi colectate date relevante pentru subiect.",
+	"notification-link-text-view-item": "{{GENDER:$1|Vezi}} elementul"
 }
