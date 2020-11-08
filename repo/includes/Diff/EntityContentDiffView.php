@@ -144,6 +144,9 @@ class EntityContentDiffView extends DifferenceEngine {
 	 */
 	public function generateContentDiffBody( Content $old, Content $new ) {
 		if ( ( $old instanceof EntityContent ) && ( $new instanceof EntityContent ) ) {
+			// add common CSS, the diff may include entity links with labels, including fallback indicators
+			$this->getOutput()->addModuleStyles( [ 'wikibase.common' ] );
+
 			$diff = $old->getDiff( $new );
 			return $this->diffVisualizer->visualizeEntityContentDiff( $diff );
 		} elseif ( ( $old instanceof EntityContent ) !== ( $new instanceof EntityContent ) ) {
