@@ -3,7 +3,7 @@ import Entity from '@/datamodel/Entity';
 import EntityRevision from '@/datamodel/EntityRevision';
 import { Store } from 'vuex';
 import Application from '@/store/Application';
-import { EntityState } from '@/store/entity';
+import { EntityState } from './EntityState';
 import { Actions, Context, Getters } from 'vuex-smart-module';
 import { EntityMutations } from '@/store/entity/mutations';
 import { statementModule } from '@/store/statements';

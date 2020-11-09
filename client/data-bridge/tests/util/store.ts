@@ -1,10 +1,10 @@
 import { rootModule } from '@/store';
 import { RootActions } from '@/store/actions';
-import { EntityState } from '@/store/entity';
+import { EntityState } from '@/store/entity/EntityState';
 import { RootGetters } from '@/store/getters';
 import Application from '@/store/Application';
 import { NS_ENTITY } from '@/store/namespaces';
-import { BaseState } from '@/store/state';
+import { BaseState } from '@/store/BaseState';
 import { Store } from 'vuex';
 import {
 	Actions,

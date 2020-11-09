@@ -2,7 +2,7 @@ import {
 	DataValue,
 	DataValueType,
 } from '@wmde/wikibase-datamodel-types';
-import { StatementState } from '@/store/statements';
+import { StatementState } from '@/store/statements/StatementState';
 import clone from '@/store/clone';
 import UpdateMutationStrategy from '@/change-op/statement-mutation/strategies/UpdateMutationStrategy';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
