@@ -10,6 +10,7 @@
 			"Ladsgroup",
 			"Macofe",
 			"Mirin",
+			"NMaia",
 			"Psychoslave",
 			"Rafaneta",
 			"Robin van der Vliet",
@@ -69,7 +70,7 @@
 	"wikibase-alias-edit-placeholder": "enigi kromnomon",
 	"wikibase-label-input-help-message": "Enskribu la etikedon por ĉi tiu ero en $1",
 	"wikibase-statementsection-statements": "Deklaroj",
-	"wikibase-statementsection-identifiers": "Identigi",
+	"wikibase-statementsection-identifiers": "Identigiloj",
 	"wikibase-sitelinks": "Retejaj ligiloj",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|ero|eroj}}",
 	"wikibase-sitelinks-empty": "Neniu paĝo estas ligita al ĉi tiu ero.",
@@ -300,5 +301,7 @@
 	"wikibase-pageinfo-subscription-none": "Nenio",
 	"wikibase-pageinfo-wb-claims": "Nombro de asertoj en ĉi tiu ento",
 	"wikibase-search-bad-entity-type": "Malĝusta entotipo: $1",
-	"wikibase-entity-save-error-heading": "Io misfunkciis"
+	"wikibase-shortcopyrightwarning-heading": "Permesila atribuo",
+	"wikibase-entity-save-error-heading": "Io misfunkciis",
+	"wikibase-tainted-ref-popper-help-link-text": "Helpo"
 }

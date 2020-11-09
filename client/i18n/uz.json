@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"CoderSI",
+			"Malikxan",
 			"Nataev",
 			"Sociologist"
 		]
@@ -24,5 +25,6 @@
 	"wikibase-rc-show-wikidata-pref": "Yangi oʻzgarishlar roʻyxatida Vikimaʼlumotlarga oid tahrirlarni koʻrsatish",
 	"wikibase-rc-wikibase-edit-title": "Vikimaʼlumotlarga oid tahrir",
 	"wikibase-replicationnote": "Iltimos, eʼtibor bering, oʻzgarishlar barcha viki-loyihalarda koʻrsatilishi uchun bir necha daqiqa kerak boʻlishi mumkin",
-	"wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin"
+	"wikibase-watchlist-show-changes-pref": "Vikimaʼlumotlarga oid tahrirlar kuzatuv roʻyxatimda koʻrsatilsin",
+	"wikibase-otherprojects": "Boshqa loyihalarda"
 }
