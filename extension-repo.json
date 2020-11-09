@@ -279,6 +279,9 @@
 		"WikibaseNS": "repo/Wikibase.i18n.namespaces.php",
 		"wikibaserepomagic": "repo/WikibaseRepo.i18n.magic.php"
 	},
+	"ServiceWiringFiles": [
+		"repo/WikibaseRepo.ServiceWiring.php"
+	],
 	"QUnitTestModule": {
 		"remoteExtPath": "Wikibase",
 		"localBasePath": "",
