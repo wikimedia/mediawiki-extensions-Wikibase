@@ -122,11 +122,29 @@ class CachingFallbackBasedTermLookup implements TermLookup {
 	}
 
 	public function getLabels( EntityId $entityId, array $languageCodes ) {
-		throw new LogicException( 'Not implemented' );
+		$labels = [];
+
+		foreach ( $languageCodes as $languageCode ) {
+			$label = $this->getLabel( $entityId, $languageCode );
+			if ( $label !== null ) {
+				$labels[$languageCode] = $label;
+			}
+		}
+
+		return $labels;
 	}
 
 	public function getDescriptions( EntityId $entityId, array $languageCodes ) {
-		throw new LogicException( 'Not implemented' );
+		$descriptions = [];
+
+		foreach ( $languageCodes as $languageCode ) {
+			$description = $this->getDescription( $entityId, $languageCode );
+			if ( $description !== null ) {
+				$descriptions[$languageCode] = $description;
+			}
+		}
+
+		return $descriptions;
 	}
 
 	private function getLookup( Language $language ): LanguageFallbackLabelDescriptionLookup {

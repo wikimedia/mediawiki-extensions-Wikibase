@@ -4,7 +4,6 @@ declare( strict_types=1 );
 namespace Wikibase\Client\Tests\Unit\DataAccess\Scribunto;
 
 use Language;
-use LogicException;
 use MediaWiki\Languages\LanguageFactory;
 use MediaWiki\MediaWikiServices;
 use PHPUnit\Framework\TestCase;
@@ -68,18 +67,6 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			$this->languageFactory,
 			$this->contentLanguages
 		);
-	}
-
-	public function testGetLabelsThrows() {
-		$lookup = $this->getLookup();
-		$this->expectException( LogicException::class );
-		$lookup->getLabels( new ItemId( 'Q1' ), [] );
-	}
-
-	public function testGetDescriptionsThrows() {
-		$lookup = $this->getLookup();
-		$this->expectException( LogicException::class );
-		$lookup->getDescriptions( new ItemId( 'Q1' ), [ 'de' ] );
 	}
 
 	public function testGetLabelChecksTheCacheAndUsesIfValueThere() {
@@ -262,6 +249,35 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 			'hat',
 			$lookup->getLabel( $itemTwoId, $language->getCode() )
 		);
+	}
+
+	/** @dataProvider provideTermTypes */
+	public function testReturnsExistingTermsForMultipleLanguageCodes( string $termType ) {
+		$getOne = $termType === TermTypes::TYPE_LABEL ? 'getLabel' : 'getDescription';
+		$getMultiple = $termType === TermTypes::TYPE_LABEL ? 'getLabels' : 'getDescriptions';
+
+		$itemId = new ItemId( 'Q1' );
+		$enTerm = $this->getTermFallback( 'cat', 'en' );
+
+		$this->contentLanguages->method( 'hasLanguage' )
+			->willReturnCallback( function ( $languageCode ) {
+				return $languageCode === 'en';
+			} );
+		$this->mockHasContentLanguage( true );
+		$this->mockCacheEmpty( $itemId );
+		$this->mockInternalLookupWithContent( $itemId, $enTerm, $getOne );
+
+		$lookup = $this->getLookup();
+
+		$this->assertEquals(
+			[ 'en' => 'cat' ],
+			$lookup->$getMultiple( $itemId, [ 'en', 'sv' ] )
+		);
+	}
+
+	public function provideTermTypes() {
+		yield [ TermTypes::TYPE_LABEL ];
+		yield [ TermTypes::TYPE_DESCRIPTION ];
 	}
 
 	private function mockCacheWithContent( string $term, $itemId ): void {
