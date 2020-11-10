@@ -7,6 +7,7 @@ use MediaWiki\MediaWikiServices;
 use ObjectCache;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\ClientStore;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Store\UsageUpdater;
 use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
 use Wikibase\Client\Usage\Sql\SqlSubscriptionManager;
@@ -169,6 +170,9 @@ class DirectSqlStore implements ClientStore {
 	/** @var bool */
 	private $enableImplicitDescriptionUsage;
 
+	/** @var bool */
+	private $allowLocalShortDesc;
+
 	/**
 	 * @param EntityChangeFactory $entityChangeFactory
 	 * @param EntityIdParser $entityIdParser
@@ -210,6 +214,7 @@ class DirectSqlStore implements ClientStore {
 		$this->entityUsagePerPageLimit = $settings->getSetting( 'entityUsagePerPageLimit' );
 		$this->addEntityUsagesBatchSize = $settings->getSetting( 'addEntityUsagesBatchSize' );
 		$this->enableImplicitDescriptionUsage = $settings->getSetting( 'enableImplicitDescriptionUsage' );
+		$this->allowLocalShortDesc = $settings->getSetting( 'allowLocalShortDesc' );
 	}
 
 	/**
@@ -282,6 +287,12 @@ class DirectSqlStore implements ClientStore {
 				$this->usageLookup = new ImplicitDescriptionUsageLookup(
 					$this->usageLookup,
 					$services->getTitleFactory(),
+					$this->allowLocalShortDesc,
+					new DescriptionLookup(
+						$this->entityIdLookup,
+						$this->wikibaseServices->getTermBuffer(),
+						$services->getPageProps()
+					),
 					$services->getLinkBatchFactory(),
 					$this->siteId,
 					$this->getSiteLinkLookup()

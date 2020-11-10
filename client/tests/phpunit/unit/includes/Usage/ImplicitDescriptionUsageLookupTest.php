@@ -11,6 +11,7 @@ use MediaWiki\Cache\LinkBatchFactory;
 use PHPUnit\Framework\TestCase;
 use Title;
 use TitleFactory;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
 use Wikibase\Client\Usage\PageEntityUsages;
@@ -35,7 +36,9 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 
 	private function makeLookupForGetUsagesForPage(
 		?ItemId $itemId,
-		?EntityUsage $explicitUsage
+		?EntityUsage $explicitUsage,
+		bool $allowLocalShortDesc,
+		?string $localShortDesc
 	) {
 		$globalSiteId = 'wiki';
 		$contentLanguage = self::TEST_CONTENT_LANGUAGE;
@@ -53,6 +56,10 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$titleFactory->method( 'newFromID' )
 			->with( $pageId )
 			->willReturn( $title );
+		$descriptionLookup = $this->createMock( DescriptionLookup::class );
+		$descriptionLookup->method( 'getDescription' )
+			->with( $title, DescriptionLookup::SOURCE_LOCAL )
+			->willReturn( $localShortDesc );
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->method( 'getItemIdForLink' )
 			->with( $globalSiteId, $titleText )
@@ -69,6 +76,8 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		return new ImplicitDescriptionUsageLookup(
 			$usageLookup,
 			$titleFactory,
+			$allowLocalShortDesc,
+			$descriptionLookup,
 			$this->createMock( LinkBatchFactory::class ),
 			$globalSiteId,
 			$siteLinkLookup
@@ -80,7 +89,9 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$explicitUsage = new EntityUsage( $itemId, EntityUsage::SITELINK_USAGE );
 		$usageLookup = $this->makeLookupForGetUsagesForPage(
 			$itemId,
-			$explicitUsage
+			$explicitUsage,
+			false,
+			null
 		);
 
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
@@ -104,7 +115,63 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		);
 		$usageLookup = $this->makeLookupForGetUsagesForPage(
 			$itemId,
-			$explicitUsage
+			$explicitUsage,
+			false,
+			null
+		);
+
+		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
+
+		$this->assertCount( 1, $usages );
+		$this->assertEquals( $explicitUsage, reset( $usages ) );
+		$this->assertSame( $explicitUsage->getIdentityString(), key( $usages ) );
+	}
+
+	public function testGetUsagesForPage_ignoresLocalDescriptionIfNotAllowed() {
+		$itemId = new ItemId( 'Q123' );
+		$usageLookup = $this->makeLookupForGetUsagesForPage(
+			$itemId,
+			null,
+			false,
+			'local short description'
+		);
+
+		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
+
+		$this->assertCount( 1, $usages );
+		$implicitUsage = reset( $usages );
+		$this->assertSame( $implicitUsage->getIdentityString(), key( $usages ) );
+		$this->assertSame( $itemId, $implicitUsage->getEntityId() );
+		$this->assertSame( EntityUsage::DESCRIPTION_USAGE, $implicitUsage->getAspect() );
+		$this->assertSame( self::TEST_CONTENT_LANGUAGE, $implicitUsage->getModifier() );
+	}
+
+	public function testGetUsagesForPage_doesNotAddImplicitUsageWithLocalDescription() {
+		$itemId = new ItemId( 'Q123' );
+		$usageLookup = $this->makeLookupForGetUsagesForPage(
+			$itemId,
+			null,
+			true,
+			'local short description'
+		);
+
+		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
+
+		$this->assertEmpty( $usages );
+	}
+
+	public function testGetUsagesForPage_doesNotRemoveExplicitUsageWithLocalDescription() {
+		$itemId = new ItemId( 'Q123' );
+		$explicitUsage = new EntityUsage(
+			$itemId,
+			EntityUsage::DESCRIPTION_USAGE,
+			self::TEST_CONTENT_LANGUAGE
+		);
+		$usageLookup = $this->makeLookupForGetUsagesForPage(
+			$itemId,
+			$explicitUsage,
+			true,
+			'local short description'
 		);
 
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
@@ -115,7 +182,7 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 	}
 
 	public function testGetUsagesForPage_doesNothingForUnlinkedPage() {
-		$usageLookup = $this->makeLookupForGetUsagesForPage( null, null );
+		$usageLookup = $this->makeLookupForGetUsagesForPage( null, null, false, null );
 
 		$usages = $usageLookup->getUsagesForPage( self::TEST_PAGE_ID );
 
@@ -157,43 +224,8 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 				[ $globalSiteId, 'Page 789', $entityIds[3]->getNumericId() ],
 				[ $globalSiteId, 'Deleted page', $entityIds[4]->getNumericId() ],
 			] );
-		// The mocked titles will have a page ID matching the page title,
-		// and page language code lang-x-pageID:
-		// For example, title Page 123 = page ID 123 = language lang-x-123
-		$titleFactory = $this->createMock( TitleFactory::class );
-		$titleFactory->method( 'newFromDBkey' )
-			->willReturnCallback( function ( $pageName ) {
-				if ( strpos( $pageName, 'Page ' ) === 0 ) {
-					$pageId = (int)substr( $pageName, 5 );
-				} else {
-					$pageId = 0;
-				}
-				$title = $this->createMock( Title::class );
-				$title->method( 'getArticleID' )
-					->willReturn( $pageId );
-				$language = $this->createMock( Language::class );
-				$language->method( 'getCode' )
-					->willReturn( "lang-x-$pageId" );
-				$title->method( 'getPageLanguage' )
-					->willReturn( $language );
-				return $title;
-			} );
-		$linkBatchFactory = $this->createMock( LinkBatchFactory::class );
-		$linkBatchFactory->expects( $this->once() )
-			->method( 'newLinkBatch' )
-			->willReturnCallback( function ( array $titles ) {
-				// assert that it’s called with the right (mocked) titles
-				$pageIds = [];
-				foreach ( $titles as $title ) {
-					$pageIds[] = $title->getArticleID();
-				}
-				$this->assertSame( [ 123, 456, 789, 0 ], $pageIds );
-
-				$linkBatch = $this->createMock( LinkBatch::class );
-				$linkBatch->expects( $this->once() )
-					->method( 'execute' );
-				return $linkBatch;
-			} );
+		$titleFactory = $this->mockTitleFactory();
+		$linkBatchFactory = $this->mockLinkBatchFactory( [ 123, 456, 789, 0 ] );
 		$usageLookup = $this->createMock( UsageLookup::class );
 		$pageEntityUsages123 = new PageEntityUsages( 123, [
 			new EntityUsage(
@@ -222,6 +254,8 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$pageEntityUsages = ( new ImplicitDescriptionUsageLookup(
 			$usageLookup,
 			$titleFactory,
+			false,
+			$this->createMock( DescriptionLookup::class ),
 			$linkBatchFactory,
 			$globalSiteId,
 			$siteLinkLookup
@@ -313,6 +347,8 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$actualPages = ( new ImplicitDescriptionUsageLookup(
 			$usageLookup,
 			$this->createMock( TitleFactory::class ),
+			false,
+			$this->createMock( DescriptionLookup::class ),
 			$this->createMock( LinkBatchFactory::class ),
 			'wiki',
 			$this->createMock( SiteLinkLookup::class )
@@ -333,6 +369,63 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		yield 'all' => [ [ EntityUsage::ALL_USAGE ] ];
 	}
 
+	public function testGetPagesUsing_filtersByLocalDescription() {
+		$globalSiteId = 'wiki';
+		$aspects = [ EntityUsage::DESCRIPTION_USAGE ];
+		$entityIds = [
+			// linked to a page without local description (should have implicit usage)
+			new ItemId( 'Q1234' ),
+			// linked to a page with local description (should not have implicit usage)
+			new ItemId( 'Q5678' ),
+		];
+		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
+		$siteLinkLookup->method( 'getLinks' )
+			->with( [ 1234, 5678 ], [ $globalSiteId ] )
+			->willReturn( [
+				[ $globalSiteId, 'Page 1234', $entityIds[0]->getNumericId() ],
+				[ $globalSiteId, 'Page 5678', $entityIds[1]->getNumericId() ],
+			] );
+		$descriptionLookup = $this->createMock( DescriptionLookup::class );
+		$descriptionLookup->expects( $this->once() )
+			->method( 'getDescriptions' )
+			->with( $this->callback( function ( array $titles ) {
+				$this->assertCount( 2, $titles );
+				$this->assertSame( 1234, $titles[0]->getArticleID() );
+				$this->assertSame( 5678, $titles[1]->getArticleID() );
+				return true;
+			} ), DescriptionLookup::SOURCE_LOCAL )
+			->willReturn( [ 5678 => 'local description' ] );
+		$titleFactory = $this->mockTitleFactory();
+		$linkBatchFactory = $this->mockLinkBatchFactory( [ 1234, 5678 ] );
+		$usageLookup = $this->createMock( UsageLookup::class );
+		$usageLookup->method( 'getPagesUsing' )
+			->with( $entityIds, $aspects )
+			->willReturn( new ArrayIterator( [] ) );
+
+		$pageEntityUsages = ( new ImplicitDescriptionUsageLookup(
+			$usageLookup,
+			$titleFactory,
+			true,
+			$descriptionLookup,
+			$linkBatchFactory,
+			$globalSiteId,
+			$siteLinkLookup
+		) )->getPagesUsing( $entityIds, $aspects );
+
+		$pageEntityUsages = iterator_to_array( $pageEntityUsages );
+		$this->assertCount( 1, $pageEntityUsages );
+		/** @var PageEntityUsages $pageEntityUsages1234 */
+		'@phan-var PageEntityUsages $pageEntityUsages1234';
+		$pageEntityUsages1234 = $pageEntityUsages[0];
+		$this->assertSame( 1234, $pageEntityUsages1234->getPageId() );
+		$usages1234 = array_values( $pageEntityUsages1234->getUsages() );
+		$this->assertCount( 1, $usages1234 );
+		$implicitUsage = $usages1234[0];
+		$this->assertEquals( $entityIds[0], $implicitUsage->getEntityId() );
+		$this->assertSame( EntityUsage::DESCRIPTION_USAGE, $implicitUsage->getAspect() );
+		$this->assertSame( 'lang-x-1234', $implicitUsage->getModifier() );
+	}
+
 	public function testGetUnusedEntities() {
 		$entityIds = [ new ItemId( 'Q123' ) ];
 		$expectedUsages = [ 'opaque sentinel' ];
@@ -344,12 +437,67 @@ class ImplicitDescriptionUsageLookupTest extends TestCase {
 		$actualUsages = ( new ImplicitDescriptionUsageLookup(
 			$usageLookup,
 			$this->createMock( TitleFactory::class ),
+			false,
+			$this->createMock( DescriptionLookup::class ),
 			$this->createMock( LinkBatchFactory::class ),
 			'wiki',
 			$this->createMock( SiteLinkLookup::class )
 		) )->getUnusedEntities( $entityIds );
 
 		$this->assertSame( $expectedUsages, $actualUsages );
+	}
+
+	/**
+	 * Create a mock {@link TitleFactory}, returning titles with a page ID
+	 * matching the page title, and page language code lang-x-pageID:
+	 * For example, title Page 123 = page ID 123 = language lang-x-123.
+	 */
+	private function mockTitleFactory(): TitleFactory {
+		$titleFactory = $this->createMock( TitleFactory::class );
+		$titleFactory->method( 'newFromDBkey' )
+			->willReturnCallback( function ( $pageName ) {
+				if ( strpos( $pageName, 'Page ' ) === 0 ) {
+					$pageId = (int)substr( $pageName, 5 );
+				} else {
+					$pageId = 0;
+				}
+				$title = $this->createMock( Title::class );
+				$title->method( 'getArticleID' )
+					->willReturn( $pageId );
+				$language = $this->createMock( Language::class );
+				$language->method( 'getCode' )
+					->willReturn( "lang-x-$pageId" );
+				$title->method( 'getPageLanguage' )
+					->willReturn( $language );
+				return $title;
+			} );
+		return $titleFactory;
+	}
+
+	/**
+	 * Create a mock {@link LinkBatchFactory}, which asserts that
+	 * {@link LinkBatchFactory::newLinkBatch()} is called with the expected page IDs
+	 * and then returns a link batch that does nothing on execute.
+	 * @param int[] $expectedPageIds
+	 */
+	private function mockLinkBatchFactory( array $expectedPageIds ): LinkBatchFactory {
+		$linkBatchFactory = $this->createMock( LinkBatchFactory::class );
+		$linkBatchFactory->expects( $this->once() )
+			->method( 'newLinkBatch' )
+			->willReturnCallback( function ( array $titles ) use ( $expectedPageIds ) {
+				// assert that it’s called with the right (mocked) titles
+				$pageIds = [];
+				foreach ( $titles as $title ) {
+					$pageIds[] = $title->getArticleID();
+				}
+				$this->assertSame( $expectedPageIds, $pageIds );
+
+				$linkBatch = $this->createMock( LinkBatch::class );
+				$linkBatch->expects( $this->once() )
+					->method( 'execute' );
+				return $linkBatch;
+			} );
+		return $linkBatchFactory;
 	}
 
 }

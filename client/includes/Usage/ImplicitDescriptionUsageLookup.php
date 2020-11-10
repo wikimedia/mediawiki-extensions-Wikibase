@@ -7,6 +7,7 @@ namespace Wikibase\Client\Usage;
 use MediaWiki\Cache\LinkBatchFactory;
 use TitleFactory;
 use Traversable;
+use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\SiteLinkLookup;
@@ -26,7 +27,8 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  *
  * This class implements one kind of implicit usage:
  * if a client page is linked to an item, it has an implicit usage
- * on that item’s description in the client wiki’s content language.
+ * on that item’s description in the client wiki’s content language,
+ * unless the client page also has a local description overriding the central one.
  * This is because the description is used, for example,
  * as part of the search result for the page (typically on mobile),
  * even if it is never used in the page itself.
@@ -44,6 +46,12 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 	/** @var TitleFactory */
 	private $titleFactory;
 
+	/** @var bool */
+	private $allowLocalShortDesc;
+
+	/** @var DescriptionLookup */
+	private $descriptionLookup;
+
 	/** @var LinkBatchFactory */
 	private $linkBatchFactory;
 
@@ -56,6 +64,10 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 	/**
 	 * @param UsageLookup $usageLookup The underlying/inner lookup.
 	 * @param TitleFactory $titleFactory
+	 * @param bool $allowLocalShortDesc The 'allowLocalShortDesc' client setting.
+	 * If true, only pages with a local description will get an implicit usage.
+	 * @param DescriptionLookup $descriptionLookup Used to look up local descriptions.
+	 * Unused if $allowLocalShortDesc is false.
 	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param string $globalSiteId The global site ID of the client wiki.
 	 * @param SiteLinkLookup $siteLinkLookup
@@ -63,12 +75,16 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 	public function __construct(
 		UsageLookup $usageLookup,
 		TitleFactory $titleFactory,
+		bool $allowLocalShortDesc,
+		DescriptionLookup $descriptionLookup,
 		LinkBatchFactory $linkBatchFactory,
 		string $globalSiteId,
 		SiteLinkLookup $siteLinkLookup
 	) {
 		$this->usageLookup = $usageLookup;
 		$this->titleFactory = $titleFactory;
+		$this->allowLocalShortDesc = $allowLocalShortDesc;
+		$this->descriptionLookup = $descriptionLookup;
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->globalSiteId = $globalSiteId;
 		$this->siteLinkLookup = $siteLinkLookup;
@@ -80,6 +96,15 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		if ( !$title ) {
 			return $usages;
 		}
+
+		if (
+			$this->allowLocalShortDesc &&
+			$this->descriptionLookup->getDescription( $title, DescriptionLookup::SOURCE_LOCAL )
+		) {
+			// central short description overridden locally, no implicit usage
+			return $usages;
+		}
+
 		$entityId = $this->siteLinkLookup->getItemIdForLink(
 			$this->globalSiteId,
 			$title->getPrefixedText()
@@ -87,6 +112,7 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		if ( !$entityId ) {
 			return $usages;
 		}
+
 		$contentLanguage = $title->getPageLanguage()->getCode();
 
 		$usage = new EntityUsage(
@@ -190,13 +216,25 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		$titles = array_map( [ $this->titleFactory, 'newFromDBkey' ], array_column( $links, 1 ) );
 		$this->linkBatchFactory->newLinkBatch( $titles )->execute();
 
+		if ( $this->allowLocalShortDesc ) {
+			// look up which of them have local descriptions
+			$localShortDescriptions = $this->descriptionLookup->getDescriptions(
+				$titles,
+				DescriptionLookup::SOURCE_LOCAL
+			);
+			// (any page ID that exists in $localShortDescriptions overrides the central description
+			// locally and should therefore not have an implicit usage)
+		} else {
+			$localShortDescriptions = [];
+		}
+
 		$itemIdsByPageId = [];
 		foreach ( $links as [ $siteId, $pageName, $itemId ] ) {
 			// note: this creates a new Title and looks up its page ID in the link cache;
 			// this is simpler than finding the right existing Title in the $titles we have
 			// (the $pageName is probably not exactly in DB key form)
 			$pageId = $this->titleFactory->newFromDBkey( $pageName )->getArticleID();
-			if ( $pageId ) {
+			if ( $pageId && !isset( $localShortDescriptions[$pageId] ) ) {
 				$itemIdsByPageId[$pageId] = ItemId::newFromNumber( $itemId );
 			}
 		}
@@ -204,7 +242,7 @@ class ImplicitDescriptionUsageLookup implements UsageLookup {
 		$contentLanguagesByPageId = [];
 		foreach ( $titles as $title ) {
 			$pageId = $title->getArticleID();
-			if ( $pageId ) {
+			if ( $pageId && !isset( $localShortDescriptions[$pageId] ) ) {
 				$contentLanguagesByPageId[$pageId] = $title->getPageLanguage()->getCode();
 			}
 		}
