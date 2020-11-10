@@ -848,7 +848,7 @@ class EditEntityActionTest extends ActionTestCase {
 
 		self::resetTestItem( $handle );
 
-		$this->applyPermissions( $permissions );
+		$this->mergeMwGlobalArrayValue( 'wgGroupPermissions', $permissions );
 
 		$page = $this->getTestItemPage( $handle );
 
@@ -889,28 +889,5 @@ class EditEntityActionTest extends ActionTestCase {
 			$this->user = $user;
 			ApiQueryInfo::resetTokenCache();
 		}
-	}
-
-	/**
-	 * @param array[] $permissions
-	 */
-	private function applyPermissions( array $permissions ) {
-		global $wgGroupPermissions;
-
-		if ( $permissions === [] ) {
-			return;
-		}
-
-		foreach ( $permissions as $group => $rights ) {
-			if ( !isset( $wgGroupPermissions[ $group ] ) ) {
-				$wgGroupPermissions[ $group ] = [];
-			}
-
-			$wgGroupPermissions[ $group ] = array_merge( $wgGroupPermissions[ $group ], $rights );
-		}
-
-		// reset rights cache
-		$this->user->clearInstanceCache();
-		$this->resetServices();
 	}
 }
