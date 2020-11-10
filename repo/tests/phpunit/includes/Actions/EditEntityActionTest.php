@@ -33,8 +33,6 @@ class EditEntityActionTest extends ActionTestCase {
 
 		// Remove handlers for the "OutputPageParserOutput" hook
 		$this->mergeMwGlobalArrayValue( 'wgHooks', [ 'OutputPageParserOutput' => [] ] );
-
-		$this->overrideMwServices();
 	}
 
 	public function testActionForPage() {
@@ -913,6 +911,6 @@ class EditEntityActionTest extends ActionTestCase {
 
 		// reset rights cache
 		$this->user->clearInstanceCache();
-		$this->overrideMwServices();
+		$this->resetServices();
 	}
 }
