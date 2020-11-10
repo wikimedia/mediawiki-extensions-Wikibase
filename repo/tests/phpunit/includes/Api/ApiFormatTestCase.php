@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiMain;
 use FauxRequest;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use User;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
@@ -25,7 +26,7 @@ use Wikimedia\ObjectFactory;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Addshore
  */
-abstract class ApiFormatTestCase extends \MediaWikiTestCase {
+abstract class ApiFormatTestCase extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var PropertyId|null

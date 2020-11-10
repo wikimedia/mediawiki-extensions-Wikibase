@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use ApiUsageException;
 use Exception;
+use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -29,7 +30,7 @@ use Wikibase\Repo\Api\EntityLoadingHelper;
  * @author Addshore
  * @author Daniel Kinzler
  */
-class EntityLoadingHelperTest extends \MediaWikiTestCase {
+class EntityLoadingHelperTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param array $params

@@ -4,6 +4,7 @@ namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use JobQueueGroup;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -28,7 +29,7 @@ use Wikimedia\Rdbms\ILBFactory;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseMatchingTermsLookupTest extends \MediaWikiIntegrationTestCase {
+class DatabaseMatchingTermsLookupTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var IDatabase
 	 */

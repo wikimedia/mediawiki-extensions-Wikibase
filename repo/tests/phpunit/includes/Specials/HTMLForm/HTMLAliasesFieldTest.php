@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
 
 /**
@@ -10,7 +11,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLAliasesField;
  * @group Wikibase
  * @license GPL-2.0-or-later
  */
-class HTMLAliasesFieldTest extends \MediaWikiTestCase {
+class HTMLAliasesFieldTest extends MediaWikiIntegrationTestCase {
 
 	public function testThrowsExceptionIfFilterCallbackParameterIsSet_WhenCreated() {
 		$this->expectException( \Exception::class );

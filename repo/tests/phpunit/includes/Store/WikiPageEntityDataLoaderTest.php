@@ -7,6 +7,7 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Storage\BlobAccessException;
 use MediaWiki\Storage\BlobStore;
 use MediaWiki\Storage\SlotRecord;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -24,7 +25,7 @@ use Wikibase\Lib\Store\StorageException;
  *
  * @license GPL-2.0-or-later
  */
-class WikiPageEntityDataLoaderTest extends \MediaWikiTestCase {
+class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 	public function testGivenRevisionContainingEntityData_loadEntityDataFromWikiPageRevisionReturnsEntityRevisionAndNull() {
 		$revisionId = 123;

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use OutputPage;
 use Title;
 use User;
@@ -17,7 +18,7 @@ use Wikibase\Repo\OutputPageJsConfigBuilder;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class OutputPageJsConfigBuilderTest extends \MediaWikiTestCase {
+class OutputPageJsConfigBuilderTest extends MediaWikiIntegrationTestCase {
 
 	public function testBuild() {
 		$this->setMwGlobals( [ 'wgEditSubmitButtonLabelPublish' => false ] );

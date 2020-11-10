@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Store\Sql;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\Client\RecentChanges\RecentChangesFinder;
 use Wikibase\Client\Store\Sql\DirectSqlStore;
 use Wikibase\Client\Usage\ImplicitDescriptionUsageLookup;
@@ -35,7 +36,7 @@ use Wikibase\Lib\WikibaseSettings;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DirectSqlStoreTest extends \MediaWikiTestCase {
+class DirectSqlStoreTest extends MediaWikiIntegrationTestCase {
 
 	protected function newStore() {
 		$entityChangeFactory = $this->getMockBuilder( EntityChangeFactory::class )

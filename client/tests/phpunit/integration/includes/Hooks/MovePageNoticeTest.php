@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
+use MediaWikiIntegrationTestCase;
 use MovePageForm;
 use OutputPage;
 use Title;
@@ -23,7 +24,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Marius Hoch < hoo@online.de >
  */
-class MovePageNoticeTest extends \MediaWikiTestCase {
+class MovePageNoticeTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

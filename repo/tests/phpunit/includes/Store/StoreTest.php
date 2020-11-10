@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\Lib\Changes\ChangeStore;
@@ -29,7 +30,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StoreTest extends \MediaWikiTestCase {
+class StoreTest extends MediaWikiIntegrationTestCase {
 
 	public function instanceProvider() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();

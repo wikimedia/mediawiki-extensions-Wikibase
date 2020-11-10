@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use NullLockManager;
 use Psr\Log\NullLogger;
 use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
@@ -17,7 +18,7 @@ use Wikibase\Repo\Store\Sql\LockManagerSqlChangeDispatchCoordinator;
  *
  * @license GPL-2.0-or-later
  */
-class LockManagerSqlChangeDispatchCoordinatorTest extends \MediaWikiTestCase {
+class LockManagerSqlChangeDispatchCoordinatorTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

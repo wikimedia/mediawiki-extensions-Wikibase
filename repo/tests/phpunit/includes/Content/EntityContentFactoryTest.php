@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Content;
 use InvalidArgumentException;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use OutOfBoundsException;
 use Title;
 use Wikibase\DataAccess\EntitySource;
@@ -35,7 +36,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class EntityContentFactoryTest extends \MediaWikiTestCase {
+class EntityContentFactoryTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider contentModelsProvider

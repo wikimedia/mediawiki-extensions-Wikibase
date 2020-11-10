@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWikiIntegrationTestCase;
 use stdClass;
 use Wikibase\Repo\Store\Sql\DispatchStats;
 
@@ -15,7 +16,7 @@ use Wikibase\Repo\Store\Sql\DispatchStats;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class DispatchStatsTest extends \MediaWikiTestCase {
+class DispatchStatsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Creates and loads a DispatchStats object, injecting test data into

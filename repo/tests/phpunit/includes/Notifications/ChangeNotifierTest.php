@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Notifications;
 use Content;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
+use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Title;
 use User;
@@ -28,7 +29,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ChangeNotifierTest extends \MediaWikiTestCase {
+class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 
 	private function getChangeNotifier( $expectNotifications = 1 ) {
 		$changeTransmitter = $this->createMock( ChangeTransmitter::class );

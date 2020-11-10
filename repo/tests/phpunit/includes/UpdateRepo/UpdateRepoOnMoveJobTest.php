@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\UpdateRepo;
 
 use HashSiteStore;
+use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use Psr\Log\NullLogger;
 use Site;
@@ -38,7 +39,7 @@ use Wikibase\Repo\UpdateRepo\UpdateRepoOnMoveJob;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoOnMoveJobTest extends \MediaWikiTestCase {
+class UpdateRepoOnMoveJobTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetSummary() {
 		$job = new UpdateRepoOnMoveJob(

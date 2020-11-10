@@ -9,6 +9,7 @@ use FauxResponse;
 use HashSiteStore;
 use HtmlCacheUpdater;
 use HttpError;
+use MediaWikiIntegrationTestCase;
 use OutputPage;
 use Psr\Log\NullLogger;
 use RequestContext;
@@ -40,7 +41,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityDataRequestHandlerTest extends \MediaWikiTestCase {
+class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var Title

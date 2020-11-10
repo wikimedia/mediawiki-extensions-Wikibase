@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
@@ -21,7 +22,7 @@ use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class ItemsPerSiteBuilderTest extends \MediaWikiTestCase {
+class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 
 	const BATCH_SIZE = 5;
 

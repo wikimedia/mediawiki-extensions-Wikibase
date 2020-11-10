@@ -4,6 +4,7 @@ namespace Wikibase\Client\Tests\Integration\RecentChanges;
 
 use Language;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWikiIntegrationTestCase;
 use RecentChange;
 use Wikibase\Client\RecentChanges\ExternalChange;
 use Wikibase\Client\RecentChanges\ExternalChangeFactory;
@@ -23,7 +24,7 @@ use Wikibase\DataModel\Entity\ItemId;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class ExternalChangeFactoryTest extends \MediaWikiTestCase {
+class ExternalChangeFactoryTest extends MediaWikiIntegrationTestCase {
 
 	private function getExternalChangeFactory() {
 		return new ExternalChangeFactory(

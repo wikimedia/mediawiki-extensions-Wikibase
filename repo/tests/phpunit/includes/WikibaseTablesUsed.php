@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 /**
- * Should be used in conjunction with MediaWikiTestCase
+ * Should be used in conjunction with MediaWikiIntegrationTestCase
  *
  * @license GPL-2.0-or-later
  */
@@ -17,7 +17,7 @@ trait WikibaseTablesUsed {
 		$this->markAnyTermsStorageUsed();
 		$this->markPropertyInfoTableUsed();
 		$this->markItemsPerSiteTableUsed();
-		// Adding the page table means MediaWikiTestCase will reset all content related tables
+		// Adding the page table means MediaWikiIntegrationTestCase will reset all content related tables
 		$this->markTableUsed( 'page' );
 	}
 

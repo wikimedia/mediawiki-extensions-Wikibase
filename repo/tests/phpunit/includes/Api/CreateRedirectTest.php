@@ -7,6 +7,7 @@ use ApiUsageException;
 use FauxRequest;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Status;
 use Title;
@@ -39,7 +40,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class CreateRedirectTest extends \MediaWikiTestCase {
+class CreateRedirectTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var MockRepository|null

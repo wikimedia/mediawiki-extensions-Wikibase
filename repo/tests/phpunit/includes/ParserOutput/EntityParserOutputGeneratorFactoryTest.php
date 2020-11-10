@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\ParserOutput;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use NullStatsdDataFactory;
 use RepoGroup;
 use Serializers\Serializer;
@@ -27,7 +28,7 @@ use Wikibase\View\Template\TemplateFactory;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
+class EntityParserOutputGeneratorFactoryTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetEntityParserOutputGenerator() {
 		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();

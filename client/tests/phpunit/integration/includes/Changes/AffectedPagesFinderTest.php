@@ -9,6 +9,7 @@ use DataValues\DataValue;
 use DataValues\StringValue;
 use LinkBatch;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWikiIntegrationTestCase;
 use Title;
 use TitleFactory;
 use Traversable;
@@ -34,7 +35,7 @@ use Wikibase\Lib\Tests\Changes\TestChanges;
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Daniel Kinzler
  */
-class AffectedPagesFinderTest extends \MediaWikiTestCase {
+class AffectedPagesFinderTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * Returns a TitleFactory that generates Title objects based on the assumption

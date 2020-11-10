@@ -6,6 +6,7 @@ use ApiMain;
 use ApiQuery;
 use ApiTestContext;
 use FauxRequest;
+use MediaWikiIntegrationTestCase;
 use User;
 use Wikibase\Client\Api\ApiClientInfo;
 use Wikibase\Lib\SettingsArray;
@@ -24,7 +25,7 @@ use Wikibase\Lib\SettingsArray;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class ApiClientInfoTest extends \MediaWikiTestCase {
+class ApiClientInfoTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var ApiTestContext

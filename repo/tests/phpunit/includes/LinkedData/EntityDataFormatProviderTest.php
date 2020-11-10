@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\LinkedData;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 
 /**
@@ -15,7 +16,7 @@ use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
  * @author Daniel Kinzler
  * @author Marius Hoch < hoo@online.de >
  */
-class EntityDataFormatProviderTest extends \MediaWikiTestCase {
+class EntityDataFormatProviderTest extends MediaWikiIntegrationTestCase {
 
 	private static $apiMimeTypes = [
 		'application/vnd.php.serialized',

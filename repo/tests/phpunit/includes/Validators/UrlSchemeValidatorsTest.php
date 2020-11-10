@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Validators;
 
+use MediaWikiIntegrationTestCase;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
 use Wikibase\Repo\Validators\UrlSchemeValidators;
@@ -18,7 +19,7 @@ use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class UrlSchemeValidatorsTest extends \MediaWikiTestCase {
+class UrlSchemeValidatorsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider validUrlProvider

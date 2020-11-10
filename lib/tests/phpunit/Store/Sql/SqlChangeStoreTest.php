@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -27,7 +28,7 @@ use Wikibase\Lib\WikibaseSettings;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class SqlChangeStoreTest extends \MediaWikiTestCase {
+class SqlChangeStoreTest extends MediaWikiIntegrationTestCase {
 
 	public function saveChangeInsertProvider() {
 		$factory = $this->getEntityChangeFactory();

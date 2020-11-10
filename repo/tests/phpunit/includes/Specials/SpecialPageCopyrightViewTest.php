@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Specials;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use Message;
 use Wikibase\Repo\CopyrightMessageBuilder;
 use Wikibase\Repo\Specials\SpecialPageCopyrightView;
@@ -16,7 +17,7 @@ use Wikibase\Repo\Specials\SpecialPageCopyrightView;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SpecialPageCopyrightViewTest extends \MediaWikiTestCase {
+class SpecialPageCopyrightViewTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider getHtmlProvider

@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Diff;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Statement\Statement;
@@ -19,7 +20,7 @@ use Wikibase\Repo\Diff\ClaimDifference;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class ClaimDifferenceTest extends \MediaWikiTestCase {
+class ClaimDifferenceTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetReferenceChanges() {
 		$expected = new Diff( [

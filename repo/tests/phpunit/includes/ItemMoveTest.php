@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use MovePage;
 use TestSites;
 use Title;
@@ -24,7 +25,7 @@ use WikitextContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author John Erling Blad < jeblad@gmail.com >
  */
-class ItemMoveTest extends \MediaWikiTestCase {
+class ItemMoveTest extends MediaWikiIntegrationTestCase {
 
 	//@todo: make this a baseclass to use with all types of entities.
 

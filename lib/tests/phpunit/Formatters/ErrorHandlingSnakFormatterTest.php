@@ -6,6 +6,7 @@ use DataValues\StringValue;
 use DataValues\UnDeserializableValue;
 use Exception;
 use Language;
+use MediaWikiIntegrationTestCase;
 use ValueFormatters\Exceptions\MismatchingDataValueTypeException;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
@@ -27,7 +28,7 @@ use Wikibase\Lib\Formatters\SnakFormatter;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ErrorHandlingSnakFormatterTest extends \MediaWikiTestCase {
+class ErrorHandlingSnakFormatterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param Exception|null $throw
