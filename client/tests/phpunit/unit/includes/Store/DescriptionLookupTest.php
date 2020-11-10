@@ -12,7 +12,6 @@ use Wikibase\Client\Store\DescriptionLookup;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Term\TermBuffer;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikimedia\ScopedCallback;
 
 /**
  * @covers \Wikibase\Client\Store\DescriptionLookup
@@ -156,11 +155,10 @@ class DescriptionLookupTest extends TestCase {
 	 * @return DescriptionLookup
 	 */
 	private function makeDescriptionLookup( $localDescriptions, $centralDescriptions ) {
-		$scope = $this->mockPageProps( $localDescriptions );
+		$pageProps = $this->mockPageProps( $localDescriptions );
 		$idLookup = $this->getIdLookup( $centralDescriptions );
 		$termBuffer = $this->getTermBuffer( $centralDescriptions );
-		$descriptionLookup = new DescriptionLookup( $idLookup, $termBuffer );
-		$descriptionLookup->scope = $scope;
+		$descriptionLookup = new DescriptionLookup( $idLookup, $termBuffer, $pageProps );
 		return $descriptionLookup;
 	}
 
@@ -200,9 +198,9 @@ class DescriptionLookupTest extends TestCase {
 	 *
 	 * @param array $localDescriptions page id => description
 	 *
-	 * @return ScopedCallback
+	 * @return PageProps
 	 */
-	private function mockPageProps( array $localDescriptions ) {
+	private function mockPageProps( array $localDescriptions ): PageProps {
 		$pageProps = $this->getMockBuilder( PageProps::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -219,7 +217,7 @@ class DescriptionLookupTest extends TestCase {
 					return $description !== null;
 				} );
 			} );
-		return PageProps::overrideInstance( $pageProps );
+		return $pageProps;
 	}
 
 	/**

@@ -1304,7 +1304,8 @@ final class WikibaseClient {
 		if ( $this->descriptionLookup === null ) {
 			$this->descriptionLookup = new DescriptionLookup(
 				$this->getEntityIdLookup(),
-				$this->getTermBuffer()
+				$this->getTermBuffer(),
+				MediaWikiServices::getInstance()->getPageProps()
 			);
 		}
 		return $this->descriptionLookup;

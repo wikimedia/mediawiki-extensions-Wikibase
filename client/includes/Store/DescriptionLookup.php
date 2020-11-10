@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Store;
 
 use InvalidArgumentException;
@@ -43,9 +45,17 @@ class DescriptionLookup {
 	 */
 	private $termLookup;
 
-	public function __construct( EntityIdLookup $idLookup, TermBuffer $termLookup ) {
+	/** @var PageProps */
+	private $pageProps;
+
+	public function __construct(
+		EntityIdLookup $idLookup,
+		TermBuffer $termLookup,
+		PageProps $pageProps
+	) {
 		$this->idLookup = $idLookup;
 		$this->termLookup = $termLookup;
+		$this->pageProps = $pageProps;
 	}
 
 	/**
@@ -118,7 +128,7 @@ class DescriptionLookup {
 		if ( !$titlesByPageId ) {
 			return [];
 		}
-		return PageProps::getInstance()->getProperties( $titlesByPageId, self::LOCAL_PROPERTY_NAME );
+		return $this->pageProps->getProperties( $titlesByPageId, self::LOCAL_PROPERTY_NAME );
 	}
 
 	/**
