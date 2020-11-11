@@ -7,6 +7,9 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * A service interface for buffering terms.
  *
+ * Typically implemented in conjunction with {@link TermLookup},
+ * and (like that interface) does not apply language fallbacks.
+ *
  * @since 1.1
  *
  * @license GPL-2.0-or-later
