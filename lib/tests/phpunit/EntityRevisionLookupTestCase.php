@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
@@ -23,7 +24,7 @@ use Wikibase\Lib\Store\StorageException;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-abstract class EntityRevisionLookupTestCase extends \MediaWikiTestCase {
+abstract class EntityRevisionLookupTestCase extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @return EntityRevision[]

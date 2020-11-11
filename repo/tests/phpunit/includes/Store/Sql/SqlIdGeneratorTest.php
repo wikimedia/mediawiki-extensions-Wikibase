@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 
 /**
@@ -17,7 +18,7 @@ use Wikibase\Repo\Store\Sql\SqlIdGenerator;
  * @license GPL-2.0-or-later
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SqlIdGeneratorTest extends \MediaWikiTestCase {
+class SqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetNewId_noReservedIds() {
 		$generator = new SqlIdGenerator( MediaWikiServices::getInstance()->getDBLoadBalancer() );

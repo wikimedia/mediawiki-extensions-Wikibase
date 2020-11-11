@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Diff;
 use Content;
 use DerivativeContext;
 use Language;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -23,7 +24,7 @@ use Wikibase\Repo\Diff\EntityContentDiffView;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class EntityContentDiffViewTest extends \MediaWikiTestCase {
+class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 
 	public function testConstructor() {
 		new EntityContentDiffView( RequestContext::getMain() );

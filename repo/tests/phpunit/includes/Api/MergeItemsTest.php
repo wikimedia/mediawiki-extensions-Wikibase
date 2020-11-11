@@ -8,6 +8,7 @@ use FauxRequest;
 use HashSiteStore;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use SiteLookup;
 use Status;
 use TestSites;
@@ -50,7 +51,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Addshore
  * @author Lucie-Aimée Kaffee
  */
-class MergeItemsTest extends \MediaWikiTestCase {
+class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var MockRepository|null

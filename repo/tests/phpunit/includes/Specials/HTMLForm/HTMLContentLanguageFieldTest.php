@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Specials\HTMLForm;
 
+use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
 
 /**
@@ -10,7 +11,7 @@ use Wikibase\Repo\Specials\HTMLForm\HTMLContentLanguageField;
  * @license GPL-2.0-or-later
  * @group Wikibase
  */
-class HTMLContentLanguageFieldTest extends \MediaWikiTestCase {
+class HTMLContentLanguageFieldTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideVariantsToDefineOptionsForTheField

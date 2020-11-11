@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql;
 
 use InvalidArgumentException;
+use MediaWikiIntegrationTestCase;
 use TitleValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +21,7 @@ use Wikibase\Lib\WikibaseSettings;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Katie Filbert < aude.wiki@gmail.com >
  */
-class SiteLinkTableTest extends \MediaWikiTestCase {
+class SiteLinkTableTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var SiteLinkTable

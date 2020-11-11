@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests\Store\Sql\Terms;
 
 use HashBagOStuff;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Term\PropertyLabelResolver;
 use Wikibase\Lib\Store\Sql\Terms\CachedDatabasePropertyLabelResolver;
@@ -15,7 +16,7 @@ use Wikibase\Lib\TermIndexEntry;
  * @group Wikibase
  * @group WikibaseStore
  */
-class CachedDatabasePropertyLabelResolverTest extends \MediaWikiTestCase {
+class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $lang

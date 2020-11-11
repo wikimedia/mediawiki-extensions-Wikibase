@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Content;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Diff\EntityDiff;
 use Wikibase\Repo\Content\EntityContentDiff;
@@ -17,7 +18,7 @@ use Wikibase\Repo\Content\EntityContentDiff;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityContentDiffTest extends \MediaWikiTestCase {
+class EntityContentDiffTest extends MediaWikiIntegrationTestCase {
 
 	public function provideConstruction() {
 		return [

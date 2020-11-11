@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Tests\Api;
 use ApiBase;
 use ApiMain;
 use FauxRequest;
+use MediaWikiIntegrationTestCase;
 use Message;
 use ReflectionMethod;
 
@@ -18,7 +19,7 @@ use ReflectionMethod;
  * @license GPL-2.0-or-later
  * @author Lucie-Aimée Kaffee
  */
-class ApiConventionsTest extends \MediaWikiTestCase {
+class ApiConventionsTest extends MediaWikiIntegrationTestCase {
 
 	public function wikibaseApiModuleProvider() {
 		foreach ( $GLOBALS['wgAPIModules'] as $moduleName => $moduleClass ) {

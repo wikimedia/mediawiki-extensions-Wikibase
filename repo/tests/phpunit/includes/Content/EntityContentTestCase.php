@@ -7,6 +7,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\Patcher\PatcherException;
 use InvalidArgumentException;
+use MediaWikiIntegrationTestCase;
 use RuntimeException;
 use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -30,7 +31,7 @@ use WikiPage;
  * @author John Erling Blad < jeblad@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class EntityContentTestCase extends \MediaWikiTestCase {
+abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
 	private $originalGroupPermissions;
 

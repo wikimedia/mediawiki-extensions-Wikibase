@@ -3,6 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use InvalidArgumentException;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\PageEntityUsages;
 use Wikibase\Client\Usage\Sql\EntityUsageTable;
@@ -23,7 +24,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @author Daniel Kinzler
  * @author Marius Hoch
  */
-class EntityUsageTableTest extends \MediaWikiTestCase {
+class EntityUsageTableTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

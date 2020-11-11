@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Rdf;
 
+use MediaWikiIntegrationTestCase;
 use PageProps;
 use SiteLookup;
 use Title;
@@ -35,7 +36,7 @@ use Wikimedia\Purtle\RdfWriter;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class RdfBuilderTest extends \MediaWikiTestCase {
+class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var NTriplesRdfTestHelper

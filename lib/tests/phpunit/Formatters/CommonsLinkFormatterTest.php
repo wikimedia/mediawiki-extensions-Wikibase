@@ -5,6 +5,7 @@ namespace Wikibase\Lib\Tests\Formatters;
 use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
+use MediaWikiIntegrationTestCase;
 use ValueFormatters\FormatterOptions;
 use Wikibase\Lib\Formatters\CommonsLinkFormatter;
 
@@ -19,7 +20,7 @@ use Wikibase\Lib\Formatters\CommonsLinkFormatter;
  * @license GPL-2.0-or-later
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  */
-class CommonsLinkFormatterTest extends \MediaWikiTestCase {
+class CommonsLinkFormatterTest extends MediaWikiIntegrationTestCase {
 
 	public function commonsLinkFormatProvider() {
 		return [

@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Tests\LinkedData;
 
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
@@ -20,7 +21,7 @@ use Wikibase\Repo\LinkedData\EntityDataUriManager;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityDataUriManagerTest extends \MediaWikiTestCase {
+class EntityDataUriManagerTest extends MediaWikiIntegrationTestCase {
 
 	protected function makeUriManager() {
 		$titleLookup = $this->createMock( EntityTitleLookup::class );

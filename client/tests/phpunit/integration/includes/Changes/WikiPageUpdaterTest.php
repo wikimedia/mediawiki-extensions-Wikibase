@@ -6,6 +6,7 @@ use HTMLCacheUpdateJob;
 use Job;
 use JobQueueGroup;
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
+use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Log\NullLogger;
 use RefreshLinksJob;
@@ -25,7 +26,7 @@ use Wikibase\Lib\Changes\EntityChange;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikiPageUpdaterTest extends \MediaWikiTestCase {
+class WikiPageUpdaterTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @return JobQueueGroup|MockObject

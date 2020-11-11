@@ -12,6 +12,7 @@ use Language;
 use LogicException;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
 use RuntimeException;
@@ -48,7 +49,7 @@ use WikitextContent;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class EntityHandlerTestCase extends \MediaWikiTestCase {
+abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 	abstract public function getModelId();
 

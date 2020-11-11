@@ -2,6 +2,7 @@
 
 namespace Wikibase\Client\Tests\Integration\Changes;
 
+use MediaWikiIntegrationTestCase;
 use Psr\Log\NullLogger;
 use Wikibase\Client\Changes\ChangeRunCoalescer;
 use Wikibase\DataModel\Entity\Item;
@@ -28,7 +29,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ChangeRunCoalescerTest extends \MediaWikiTestCase {
+class ChangeRunCoalescerTest extends MediaWikiIntegrationTestCase {
 
 	private function getChangeRunCoalescer() {
 		$entityRevisionLookup = $this->getEntityRevisionLookup();

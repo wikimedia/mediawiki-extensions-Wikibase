@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use Wikibase\Lib\LanguageWithConversion;
 
@@ -14,7 +15,7 @@ use Wikibase\Lib\LanguageWithConversion;
  * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
  */
-class LanguageWithConversionTest extends \MediaWikiTestCase {
+class LanguageWithConversionTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param LanguageWithConversion $obj

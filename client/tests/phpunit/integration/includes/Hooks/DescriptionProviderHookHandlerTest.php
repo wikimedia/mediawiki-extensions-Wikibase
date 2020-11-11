@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Client\Tests\Integration\Hooks;
 
 use MediaWiki\Rest\Entity\SearchResultPageIdentityValue;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Hooks\DescriptionProviderHookHandler;
 use Wikibase\Client\Store\DescriptionLookup;
 
@@ -13,7 +14,7 @@ use Wikibase\Client\Store\DescriptionLookup;
  * @group Database
  * @group Wikibase
  */
-class DescriptionProviderHookHandlerTest extends \MediaWikiTestCase {
+class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideDescriptionProviderTestData

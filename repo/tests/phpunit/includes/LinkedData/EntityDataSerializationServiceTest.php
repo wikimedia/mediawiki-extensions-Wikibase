@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\LinkedData;
 
 use DataValues\Serializers\DataValueSerializer;
 use HashSiteStore;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -37,7 +38,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class EntityDataSerializationServiceTest extends \MediaWikiTestCase {
+class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 
 	const URI_BASE = 'http://acme.test/';
 	const URI_BASE_PROPS = 'http://prop.test/';

@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\Tests\Store\Sql;
 
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
 
 /**
@@ -16,7 +17,7 @@ use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
  *
  * @license GPL-2.0-or-later
  */
-class UpsertSqlIdGeneratorTest extends \MediaWikiTestCase {
+class UpsertSqlIdGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

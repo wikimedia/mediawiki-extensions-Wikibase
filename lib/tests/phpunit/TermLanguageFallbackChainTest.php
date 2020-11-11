@@ -3,6 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageWithConversion;
@@ -17,7 +18,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  * @author Liangent < liangent@gmail.com >
  * @author Thiemo Kreuz
  */
-class TermLanguageFallbackChainTest extends \MediaWikiTestCase {
+class TermLanguageFallbackChainTest extends MediaWikiIntegrationTestCase {
 
 	public function testFilteringOutInvalidLanguages() {
 		$chainOfTestLanguageCodes = [

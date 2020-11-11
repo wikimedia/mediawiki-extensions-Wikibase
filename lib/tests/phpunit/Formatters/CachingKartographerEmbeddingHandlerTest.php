@@ -7,6 +7,7 @@ use DataValues\Geo\Values\LatLongValue;
 use ExtensionRegistry;
 use Language;
 use MediaWiki\MediaWikiServices;
+use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOutput;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
@@ -21,7 +22,7 @@ use Xml;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class CachingKartographerEmbeddingHandlerTest extends \MediaWikiTestCase {
+class CachingKartographerEmbeddingHandlerTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
