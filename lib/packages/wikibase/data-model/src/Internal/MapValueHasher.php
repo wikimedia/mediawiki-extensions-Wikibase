@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Internal;
 
-use Hashable;
 use InvalidArgumentException;
 use Traversable;
 
@@ -27,7 +26,7 @@ class MapValueHasher {
 	 *
 	 * @since 0.1
 	 *
-	 * @param Traversable|Hashable[] $map
+	 * @param Traversable $map
 	 *
 	 * @return string
 	 * @throws InvalidArgumentException
@@ -39,9 +38,6 @@ class MapValueHasher {
 
 		$hashes = [];
 
-		/**
-		 * @var Hashable $hashable
-		 */
 		foreach ( $map as $hashable ) {
 			$hashes[] = $hashable->getHash();
 		}

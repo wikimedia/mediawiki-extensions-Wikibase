@@ -2,7 +2,6 @@
 
 namespace Wikibase\DataModel\Tests;
 
-use Hashable;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -369,7 +368,7 @@ class ReferenceListTest extends \PHPUnit\Framework\TestCase {
 		$this->assertFalse( $references->hasReferenceHash( '~=[,,_,,]:3' ) );
 
 		/**
-		 * @var Hashable $reference
+		 * @var Reference $reference
 		 */
 		foreach ( $references as $reference ) {
 			$this->assertTrue( $references->hasReferenceHash( $reference->getHash() ) );

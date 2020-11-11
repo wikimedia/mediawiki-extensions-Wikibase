@@ -4,7 +4,6 @@ namespace Wikibase\DataModel\Snak;
 
 use ArrayObject;
 use Comparable;
-use Hashable;
 use InvalidArgumentException;
 use Traversable;
 use Wikibase\DataModel\Internal\MapValueHasher;
@@ -19,7 +18,7 @@ use Wikibase\DataModel\Internal\MapValueHasher;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Addshore
  */
-class SnakList extends ArrayObject implements Comparable, Hashable {
+class SnakList extends ArrayObject implements Comparable {
 
 	/**
 	 * Maps snak hashes to their offsets.
@@ -144,8 +143,6 @@ class SnakList extends ArrayObject implements Comparable, Hashable {
 	}
 
 	/**
-	 * @see Hashable::getHash
-	 *
 	 * The hash is purely value based. Order of the elements in the array is not held into account.
 	 *
 	 * @since 0.1
@@ -212,7 +209,7 @@ class SnakList extends ArrayObject implements Comparable, Hashable {
 	public function offsetUnset( $index ) {
 		if ( $this->offsetExists( $index ) ) {
 			/**
-			 * @var Hashable $element
+			 * @var Snak $element
 			 */
 			$element = $this->offsetGet( $index );
 			$hash = $element->getHash();
