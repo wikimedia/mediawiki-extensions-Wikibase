@@ -26,6 +26,7 @@ use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookup;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\FormatterLabelDescriptionLookupFactory;
 use Wikibase\Lib\Formatters\SnakFormatter;
@@ -620,7 +621,10 @@ class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function createCache() {
-		return $this->prophesize( CacheInterface::class )->reveal();
+		return new TermFallbackCacheFacade(
+			$this->prophesize( CacheInterface::class )->reveal(),
+			10
+		);
 	}
 
 }

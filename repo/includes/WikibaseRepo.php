@@ -31,7 +31,6 @@ use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use ObjectCache;
 use Psr\Log\LoggerInterface;
-use Psr\SimpleCache\CacheInterface;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
@@ -89,6 +88,7 @@ use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\FormatterCache\FormatterCacheServiceFactory;
+use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\FormatterCacheFactory;
 use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\Formatters\EntityIdLinkFormatter;
@@ -2390,8 +2390,11 @@ class WikibaseRepo {
 		return $searchTypes;
 	}
 
-	public function getFormatterCache(): CacheInterface {
-		return $this->getFormatterCacheFactory()->getFormatterCache();
+	public function getFormatterCache(): TermFallbackCacheFacade {
+		return new TermFallbackCacheFacade(
+			$this->getFormatterCacheFactory()->getFormatterCache(),
+			$this->getSettings()->getSetting( 'sharedCacheDuration' )
+		);
 	}
 
 	public function getFormatterCacheFactory(): FormatterCacheFactory {

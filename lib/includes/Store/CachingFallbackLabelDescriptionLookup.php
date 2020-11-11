@@ -2,10 +2,10 @@
 
 namespace Wikibase\Lib\Store;
 
-use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
+use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -26,15 +26,8 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private const LABEL = 'label';
 	private const DESCRIPTION = 'description';
 
-	const FIELD_LANGUAGE = 'language';
-	const FIELD_VALUE = 'value';
-	const FIELD_REQUEST_LANGUAGE = 'requestLanguage';
-	const FIELD_SOURCE_LANGUAGE = 'sourceLanguage';
-
-	const NO_VALUE = 'no value in cache';
-
 	/**
-	 * @var CacheInterface
+	 * @var TermFallbackCacheFacade
 	 */
 	private $cache;
 
@@ -54,29 +47,21 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 	private $termLanguageFallbackChain;
 
 	/**
-	 * @var int
-	 */
-	private $cacheTtlInSeconds;
-
-	/**
-	 * @param CacheInterface $cache
+	 * @param TermFallbackCacheFacade $fallbackCache
 	 * @param RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup
 	 * @param FallbackLabelDescriptionLookup $labelDescriptionLookup
 	 * @param TermLanguageFallbackChain $termLanguageFallbackChain
-	 * @param int $cacheTtlInSeconds
 	 */
 	public function __construct(
-		CacheInterface $cache,
+		TermFallbackCacheFacade $fallbackCache,
 		RedirectResolvingLatestRevisionLookup $redirectResolvingRevisionLookup,
 		FallbackLabelDescriptionLookup $labelDescriptionLookup,
-		TermLanguageFallbackChain $termLanguageFallbackChain,
-		$cacheTtlInSeconds
+		TermLanguageFallbackChain $termLanguageFallbackChain
 	) {
-		$this->cache = $cache;
+		$this->cache = $fallbackCache;
 		$this->redirectResolvingRevisionLookup = $redirectResolvingRevisionLookup;
 		$this->labelDescriptionLookup = $labelDescriptionLookup;
 		$this->termLanguageFallbackChain = $termLanguageFallbackChain;
-		$this->cacheTtlInSeconds = $cacheTtlInSeconds;
 	}
 
 	/**
@@ -125,62 +110,17 @@ class CachingFallbackLabelDescriptionLookup implements FallbackLabelDescriptionL
 
 		list( $revisionId, $targetEntityId ) = $resolutionResult;
 
-		$cacheKey = $this->buildCacheKey( $targetEntityId, $revisionId, $languageCode, $termName );
-		$result = $this->cache->get( $cacheKey, self::NO_VALUE );
-		if ( $result === self::NO_VALUE ) {
-			$term = $termName === self::LABEL
+		$termFallback = $this->cache->get( $targetEntityId, $revisionId, $languageCode, $termName );
+		if ( $termFallback === TermFallbackCacheFacade::NO_VALUE ) {
+			$termFallback = $termName === self::LABEL
 				? $this->labelDescriptionLookup->getLabel( $targetEntityId )
 				: $this->labelDescriptionLookup->getDescription( $targetEntityId );
 
-			$serialization = $this->serialize( $term );
+			$this->cache->set( $termFallback, $targetEntityId, $revisionId, $languageCode, $termName );
 
-			$this->cache->set( $cacheKey, $serialization, $this->cacheTtlInSeconds );
-
-			return $term;
+			return $termFallback;
 		}
 
-		if ( $result === null ) {
-			return $result;
-		}
-
-		$term = $this->unserialize( $result );
-
-		return $term;
+		return $termFallback;
 	}
-
-	/**
-	 * @param TermFallback|null $termFallback
-	 * @return array|null
-	 */
-	private function serialize( TermFallback $termFallback = null ) {
-		if ( $termFallback === null ) {
-			return null;
-		}
-
-		return [
-			self::FIELD_LANGUAGE => $termFallback->getActualLanguageCode(),
-			self::FIELD_VALUE => $termFallback->getText(),
-			self::FIELD_REQUEST_LANGUAGE => $termFallback->getLanguageCode(),
-			self::FIELD_SOURCE_LANGUAGE => $termFallback->getSourceLanguageCode(),
-		];
-	}
-
-	/**
-	 * @param array|null $serialized
-	 * @return null|TermFallback
-	 */
-	private function unserialize( $serialized ) {
-		if ( $serialized === null ) {
-			return null;
-		}
-
-		$termData = $serialized;
-		return new TermFallback(
-			$termData[self::FIELD_REQUEST_LANGUAGE],
-			$termData[self::FIELD_VALUE],
-			$termData[self::FIELD_LANGUAGE],
-			$termData[self::FIELD_SOURCE_LANGUAGE]
-		);
-	}
-
 }
