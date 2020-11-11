@@ -3,6 +3,7 @@
 		"authors": [
 			"Amire80",
 			"Ans",
+			"Balyozxane",
 			"Bináris",
 			"Jeblad",
 			"Katie Filbert",
@@ -70,7 +71,7 @@
 	"wikibase-rc-wikibase-edit-legend": "{{notranslate}}\nUsed as legend on [[Special:RecentChanges]] and [[Special:Watchlist]].\n\nRefers to {{msg-mw|Wikibase-rc-wikibase-edit-title}}.",
 	"wikibase-rc-wikibase-edit-title": "Tooltip for {{msg-mw|wikibase-rc-wikibase-edit-letter}}.\n\nSee also:\n* {{msg-mw|Recentchanges-label-newpage}}\n* {{msg-mw|Recentchanges-label-minor}}\n* {{msg-mw|Recentchanges-label-bot}}\n* {{msg-mw|Recentchanges-label-unpatrolled}}\n{{Identical|Edit}}",
 	"wikibase-rcfilters-hide-wikibase-label": "Label for \"Wikidata edits\" filter on ChangesList pages (such as RecentChanges).",
-	"wikibase-rcfilters-hide-wikibase-description": "Description for 'Wikidata edits' filter on ChangesList pages (such as RecentChanges)",
+	"wikibase-rcfilters-hide-wikibase-description": "Guhertinên ji rûpela {{WBREPONAME}}yê tên.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores": "Tooltip shown when hovering over a 'Wikidata edits' filter tag, when a ORES filter is also selected.\n* 'Contribution quality' is based on {{msg-mw|Ores-rcfilters-damaging-title}}.\n* 'User intent' is based on {{msg-mw|Ores-rcfilters-goodfaith-title}}.",
 	"wikibase-rcfilters-hide-wikibase-conflicts-ores-global": "Message shown in the result area when both an ORES filter and the 'Wikidata edits' filter are selected.  This indicates that no results will be shown because propagated Wikidata edits do not have ORES scores available.\n\n* \"Wikidata edits\" is {{msg-mw|wikibase-rcfilters-hide-wikibase-label}}.\n* \"Contribution quality\" is based on {{msg-mw|Ores-rcfilters-damaging-title}}.\n* \"User intent\" is based on {{msg-mw|Ores-rcfilters-goodfaith-title}}.\n* \"Active Filters\" is based on {{msg-mw|rcfilters-activefilters}}.",
 	"wikibase-rcfilters-damaging-conflicts-hide-wikibase": "Tooltip shown when hovering over a 'Contribution quality predictions' filter tag, when the 'Wikidata edits' filter is selected and there is a conflict.  Propagated Wikidata edits do not have ORES scores avaialble.  Parameters:\n* $1 - Comma-separated string of selected Type of Change filters, e.g. \"Wikidata edits\"\n* $2 - Count of selected Type of Change filters, for PLURAL",

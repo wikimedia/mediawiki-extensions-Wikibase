@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"ArenaL5",
 			"Armando-Martin",
 			"Canaan9801",
 			"Csbotero",
@@ -114,8 +115,8 @@
 	"wikibase-sitelinks-link-columnheading": "Página enlazada",
 	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conexión|Conexiones}} con {{WBREPONAME}}",
 	"echo-pref-tooltip-wikibase-action": "Notificarme cuando alguien conecta una página que {{GENDER:|he creado}} a un elemento de {{WBREPONAME}}.",
-	"notification-header-page-connection": "La página <strong>$3</strong> se {{GENDER:$2|conectó}} {{PLURAL:$4|-1=a un elemento de {{WBREPONAME}}|al elemento $4 de {{WBREPONAME}}}}, que contiene datos relevantes para el tema.",
-	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra página|otras $4 páginas|100=otras 99 o más páginas}} fueron {{GENDER:$2|conectadas}} a elementos de {{WBREPONAME}}.",
+	"notification-header-page-connection": "La página <strong>$3</strong> se {{GENDER:$2|conectó}} {{PLURAL:$4|-1=a un elemento de {{WBREPONAME}}|al elemento $4 de {{WBREPONAME}}}}, donde se pueden obtener datos relevantes para el tema.",
+	"notification-bundle-header-page-connection": "<strong>$3</strong> y {{PLURAL:$4|otra página|otras $4 páginas|100=otras 99 o más páginas}} fueron {{GENDER:$2|conectadas}} a elementos de {{WBREPONAME}}, donde se pueden obtener datos relevantes para los temas.",
 	"notification-link-text-view-item": "{{GENDER:$1|Ver}} elemento",
 	"notification-subject-page-connection": "Una página {{GENDER:$3|creada por ti}} en {{SITENAME}} se {{GENDER:$2|conectó}} a un elemento de {{WBREPONAME}}",
 	"unresolved-property-category": "Páginas con propiedades no resueltas",
@@ -124,7 +125,7 @@
 	"connected-redirect-category-desc": "Esta categoría enumera las páginas de redirección conectadas con algún elemento de {{WBREPONAME}}.",
 	"wikibase-client-data-bridge-dialog-title": "Editar $1",
 	"wikibase-client-data-bridge-permissions-error-info": "Más detalles",
-	"wikibase-client-data-bridge-blocked-on-repo-body": "<p>El bloque estuvo hecho por $1. La razón dada es <em>$2</em>.</p>\n<ul>\n</li>Inicio de bloque: $6</li>\n</ul>\n<p><strong>¿Qué puedo hacer?</strong></p>\n<p>\nPuedes contactar $4 o otro [$9 administrador] discutir el bloque.\nNo puedes usar el función de \"{{int:emailuser}}\" a menos que un correo electrónico válido es especificado en tu [[Special:Preferences|account preferences]]y no está bloqueado de usas.\nSu dirección IP es $3, y el ID de bloque es $5.\nPor favor incluya todo todos los detalles anteriores en cualquier consulta que hagas.\n</p>",
+	"wikibase-client-data-bridge-blocked-on-repo-body": "<p>El bloqueo fue realizado por $1. La razón dada es <em>$2</em>.</p>\n<ul>\n</li>Inicio del bloqueo: $8</li>\n</li>Fin del bloqueo: $6</li>\n</ul>\n<p><strong>¿Qué puedo hacer?</strong></p>\n<p>\nPuedes contactar con $4 u otro [$9 administrador] para discutir el bloqueo.\nPuedes usar la función de «{{int:emailuser}}» si hay un correo electrónico válido en tus [[Special:Preferences|preferencias]] y no se te ha prohibido usar esta función.\nEl ID de bloqueo es #$5.\nPor favor incluye todos estos datos en cualquier consulta que hagas.\n</p>",
 	"wikibase-client-data-bridge-permissions-error-unknown-head": "Error de permiso desconocido",
 	"wikibase-client-data-bridge-references-heading": "Referencias",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Usted no se ha identificado",
