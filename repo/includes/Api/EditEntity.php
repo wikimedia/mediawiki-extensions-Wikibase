@@ -19,6 +19,7 @@ use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
@@ -155,7 +156,11 @@ class EditEntity extends ModifyEntity {
 		$this->editSummaryHelper = $editSummaryHelper;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		DataTypeDefinitions $dataTypeDefinitions
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		return new self(
@@ -166,7 +171,7 @@ class EditEntity extends ModifyEntity {
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getEntityFactory(),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
-			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
+			$dataTypeDefinitions->getTypeIds(),
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
