@@ -44,11 +44,10 @@ class DeleteDispatcherTest extends TestCase {
 			->willReturn( null );
 
 		return [
-			'no client databases' => [ 1, [], true, $wikiPage, $entityContentFactoryNotCalled ],
-			'no archive records' => [ 0,  $this->localClientDatabases, true, $wikiPage, $entityContentFactoryNotCalled ],
-			'propagatePageDeletion false' => [ 1, $this->localClientDatabases, false, $wikiPage, $entityContentFactoryNotCalled ],
-			'wiki-page has no title' => [ 1, $this->localClientDatabases, true, $wikiPageNoTitle, $entityContentFactoryNotCalled ],
-			'not an entity page' => [ 1, $this->localClientDatabases, true, $wikiPage, $entityContentFactory ]
+			'no client databases' => [ 1, [], $wikiPage, $entityContentFactoryNotCalled ],
+			'no archive records' => [ 0,  $this->localClientDatabases, $wikiPage, $entityContentFactoryNotCalled ],
+			'wiki-page has no title' => [ 1, $this->localClientDatabases, $wikiPageNoTitle, $entityContentFactoryNotCalled ],
+			'not an entity page' => [ 1, $this->localClientDatabases, $wikiPage, $entityContentFactory ]
 		];
 	}
 
@@ -56,22 +55,19 @@ class DeleteDispatcherTest extends TestCase {
 	 * @dataProvider earlyAbortProvider
 	 * @param int $archivedRecordsCount
 	 * @param string[] $clients
-	 * @param bool $propagatePageDeletion
 	 * @param WikiPage $wikiPage
 	 * @param EntityContentFactory $entityContentFactory
 	 */
 	public function testShouldNotSpawnDeleteDispatchJobAndAbortEarly(
 		int $archivedRecordsCount,
 		array $clients,
-		bool $propagatePageDeletion,
 		WikiPage $wikiPage,
 		EntityContentFactory $entityContentFactory
 	) {
 		$deleteDispatcher = new DeleteDispatcher(
 			$this->newJobQueueGroupFactoryNeverCalled(),
 			$entityContentFactory,
-			$clients,
-			$propagatePageDeletion
+			$clients
 		);
 		$status = $deleteDispatcher->onArticleDeleteComplete(
 			$wikiPage,
@@ -101,7 +97,7 @@ class DeleteDispatcherTest extends TestCase {
 			->with( $title )
 			->willReturn( $entityId );
 
-		$deleteDispatcher = new DeleteDispatcher( $factory, $entityContentFactory, $this->localClientDatabases, true );
+		$deleteDispatcher = new DeleteDispatcher( $factory, $entityContentFactory, $this->localClientDatabases );
 
 		$wikiPage = $this->createMock( WikiPage::class );
 
