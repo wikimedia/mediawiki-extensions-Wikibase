@@ -594,6 +594,13 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->assertContains( 'form', $enabled );
 	}
 
+	private function setEntityTypeDefinitions( EntityTypeDefinitions $entityTypeDefinitions ): void {
+		$this->setService(
+			'WikibaseRepo.EntityTypeDefinitions',
+			$entityTypeDefinitions
+		);
+	}
+
 	public function testGetExceptionLocalizer() {
 		$localizer = $this->getWikibaseRepo()->getExceptionLocalizer();
 		$this->assertInstanceOf( ExceptionLocalizer::class, $localizer );
@@ -702,9 +709,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getWikibaseRepo() {
+		$this->setEntityTypeDefinitions( $this->entityTypeDefinitions );
 		return new WikibaseRepo(
 			$this->settings,
-			$this->entityTypeDefinitions,
 			$this->entitySourceDefinitions
 		);
 	}

@@ -35,7 +35,6 @@ return [
 		);
 	},
 
-	/** Do not (yet) use this service directly. Get it from the WikibaseRepo instance instead. */
 	'WikibaseRepo.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';

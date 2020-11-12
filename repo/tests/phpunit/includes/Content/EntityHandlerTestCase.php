@@ -50,6 +50,15 @@ use WikitextContent;
  */
 abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
+	public function setUp(): void {
+		parent::setUp();
+
+		$this->setService(
+			'WikibaseRepo.EntityTypeDefinitions',
+			$this->getEntityTypeDefinitions()
+		);
+	}
+
 	abstract public function getModelId();
 
 	/**
@@ -67,7 +76,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
-			$this->getEntityTypeDefinitions(),
 			new EntitySourceDefinitions(
 				[ new EntitySource(
 					'test',
@@ -81,7 +89,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 					'',
 					''
 				) ],
-				new EntityTypeDefinitions( [] )
+				$this->getEntityTypeDefinitions()
 			)
 		);
 	}
