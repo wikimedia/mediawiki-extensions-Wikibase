@@ -166,7 +166,7 @@ class EditEntity extends ModifyEntity {
 			$wikibaseRepo->getEntityIdParser(),
 			$wikibaseRepo->getEntityFactory(),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
-			$wikibaseRepo->getDataTypeDefinitions()->getTypeIds(),
+			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
 			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),

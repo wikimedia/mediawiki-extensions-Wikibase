@@ -451,7 +451,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -485,7 +484,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -542,7 +540,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -700,7 +697,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	private function getWikibaseRepo() {
 		return new WikibaseRepo(
 			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			$this->getEntitySourceDefinitions()
 		);
@@ -715,7 +711,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitions );
 		return new WikibaseRepo(
 			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			new DataTypeDefinitions( [] ),
 			$entityTypeDefinitions,
 			$this->getEntitySourceDefinitions( 'test', $entityTypeDefinitions )
 		);
@@ -724,7 +719,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	private function getWikibaseRepoWithCustomEntitySourceDefinitions( EntitySourceDefinitions $entitySourceDefinitions ) {
 		return new WikibaseRepo(
 			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			$entitySourceDefinitions
 		);
@@ -852,7 +846,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetDataTypeDefinitions() {
-		$dataTypeDefinitions = $this->getWikibaseRepo()->getDataTypeDefinitions();
+		$dataTypeDefinitions = WikibaseRepo::getDataTypeDefinitions();
 		$this->assertInstanceOf( DataTypeDefinitions::class, $dataTypeDefinitions );
 	}
 
@@ -953,7 +947,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -998,7 +991,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			new EntitySourceDefinitions( [
 				new EntitySource(
@@ -1096,7 +1088,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	private function getWikibaseRepoWithCustomSettings( SettingsArray $settings ) {
 		return new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			$this->getEntitySourceDefinitions( 'local' )
 		);
@@ -1187,7 +1178,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 		$wikibaseRepo = new WikibaseRepo(
 			$settings,
-			new DataTypeDefinitions( [] ),
 			$this->entityTypeDefinitions,
 			$this->getEntitySourceDefinitions()
 		);

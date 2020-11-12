@@ -164,9 +164,10 @@ class AddUnitConversions extends Maintenance {
 	 * @param string $format File extension or MIME type of the output format.
 	 */
 	public function initializeWriter( $baseUri, $format ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$this->rdfVocabulary = $this->createRdfVocabulary( $baseUri,
-				$wikibaseRepo->getDataTypeDefinitions()->getRdfTypeUris() );
+		$this->rdfVocabulary = $this->createRdfVocabulary(
+			$baseUri,
+			WikibaseRepo::getDataTypeDefinitions()->getRdfTypeUris()
+		);
 		$this->rdfWriter = $this->createRdfWriter( $format );
 
 		$ns = $this->rdfVocabulary->getNamespaces();

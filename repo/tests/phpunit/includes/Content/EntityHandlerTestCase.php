@@ -26,7 +26,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityContent;
@@ -68,7 +67,6 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
-			new DataTypeDefinitions( [] ),
 			$this->getEntityTypeDefinitions(),
 			new EntitySourceDefinitions(
 				[ new EntitySource(

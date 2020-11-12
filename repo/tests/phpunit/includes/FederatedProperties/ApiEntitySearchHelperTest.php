@@ -51,7 +51,7 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 	private function getNewApiSearchHelper( $api, $dataTypes = null ) {
 		if ( $dataTypes === null ) {
-			$dataTypes = WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getTypeIds();
+			$dataTypes = WikibaseRepo::getDataTypeDefinitions()->getTypeIds();
 		}
 		return new ApiEntitySearchHelper( $api, $dataTypes );
 	}

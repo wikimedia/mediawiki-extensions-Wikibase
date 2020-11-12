@@ -229,7 +229,7 @@ return [
 			return new PropertyRdfBuilder(
 				$vocabulary,
 				$writer,
-				WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getRdfDataTypes()
+				WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
 			);
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {

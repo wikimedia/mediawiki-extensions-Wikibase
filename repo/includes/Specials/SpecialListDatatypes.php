@@ -64,7 +64,7 @@ class SpecialListDatatypes extends SpecialWikibasePage {
 	}
 
 	protected function getDataTypeIdsAndValues() {
-		return WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getValueTypes();
+		return WikibaseRepo::getDataTypeDefinitions()->getValueTypes();
 	}
 
 	protected function getHtmlForDataTypeId( $dataTypeId, $valueType ) {
