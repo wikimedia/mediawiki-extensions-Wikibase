@@ -9,7 +9,7 @@ use Wikibase\DataModel\Term\Term;
  * Looks up the label or description of an entity.
  *
  * Like for {@link LabelLookup},
- * implementations may or may not apply language fallbacks.
+ * it depends on the implementation whether language fallbacks are applied or not.
  *
  * @since 1.1
  *
