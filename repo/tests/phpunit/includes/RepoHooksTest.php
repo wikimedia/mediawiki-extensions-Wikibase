@@ -68,32 +68,51 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$wikibaseMobileNewTermboxStyles = [ 'wikibase.termbox.styles' ];
 		$wikibaseMobile = [ 'wikibase.mobile' ];
 
-		return [
-			'mobile entity page' => [
-				$wikibaseMobile,
-				[],
-				true,
-				false
-			],
-			'mobile non-entity page' => [
-				[],
-				[],
-				false,
-				false
-			],
-			'termbox entity page' => [
-				$wikibaseMobileNewTermbox,
-				$wikibaseMobileNewTermboxStyles,
-				true,
-				true
-			],
-			'termbox non-entity page' => [
-				[],
-				[],
-				false,
-				true
-			]
+		$entityNamespaces = WikibaseRepo::getDefaultInstance()
+			->getEntityNamespaceLookup()
+			->getEntityNamespaces();
+		$itemNamespace = $entityNamespaces['item'];
+
+		yield 'mobile entity page' => [
+			'expectedModules' => $wikibaseMobile,
+			'expectedModuleStyles' => [],
+			'namespace' => $itemNamespace,
+			'useNewTermbox' => false,
 		];
+		yield 'mobile non-entity page' => [
+			'expectedModules' => [],
+			'expectedModuleStyles' => [],
+			'namespace' => NS_TALK,
+			'useNewTermbox' => false,
+		];
+		yield 'termbox entity page' => [
+			'expectedModules' => $wikibaseMobileNewTermbox,
+			'expectedModuleStyles' => $wikibaseMobileNewTermboxStyles,
+			'namespace' => $itemNamespace,
+			'useNewTermbox' => true,
+		];
+		yield 'termbox non-entity page' => [
+			'expectedModules' => [],
+			'expectedModuleStyles' => [],
+			'namespace' => NS_TALK,
+			'useNewTermbox' => true,
+		];
+
+		if ( isset( $entityNamespaces['lexeme'] ) ) {
+			yield 'non-termbox entity page' => [
+				'expectedModules' => $wikibaseMobile,
+				'expectedModuleStyles' => [],
+				'namespace' => $entityNamespaces['lexeme'],
+				'useNewTermbox' => true,
+			];
+		} elseif ( isset( $entityNamespaces['mediainfo'] ) ) {
+			yield 'non-termbox entity page' => [
+				'expectedModules' => $wikibaseMobile,
+				'expectedModuleStyles' => [],
+				'namespace' => $entityNamespaces['mediainfo'],
+				'useNewTermbox' => true,
+			];
+		}
 	}
 
 	/**
@@ -102,15 +121,9 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 	public function testOnBeforePageDisplayMobile(
 		array $expectedModules,
 		array $expectedModuleStyles,
-		$isEntityNamespace,
-		$useNewTermbox
+		int $namespace,
+		bool $useNewTermbox
 	) {
-		if ( $isEntityNamespace ) {
-			$namespace = array_values( WikibaseRepo::getDefaultInstance()->getLocalEntityNamespaces() )[0];
-		} else {
-			$namespace = NS_TALK;
-		}
-
 		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getNamespace' )
