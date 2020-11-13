@@ -6,6 +6,11 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\Term;
 
 /**
+ * Looks up the label or description of an entity.
+ *
+ * Like for {@link LabelLookup},
+ * it depends on the implementation whether language fallbacks are applied or not.
+ *
  * @since 1.1
  *
  * @license GPL-2.0-or-later
