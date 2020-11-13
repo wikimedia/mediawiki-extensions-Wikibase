@@ -259,7 +259,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetValueParserFactoryReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getValueParserFactory();
+		$returnValue = WikibaseRepo::getValueParserFactory();
 		$this->assertInstanceOf( ValueParserFactory::class, $returnValue );
 	}
 

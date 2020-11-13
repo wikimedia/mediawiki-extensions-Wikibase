@@ -108,7 +108,11 @@ class ParseValue extends ApiBase {
 		$this->errorReporter = $errorReporter;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		ValueParserFactory $valueParserFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
@@ -116,7 +120,7 @@ class ParseValue extends ApiBase {
 			$mainModule,
 			$moduleName,
 			$wikibaseRepo->getDataTypeFactory(),
-			$wikibaseRepo->getValueParserFactory(),
+			$valueParserFactory,
 			$wikibaseRepo->getDataTypeValidatorFactory(),
 			$wikibaseRepo->getExceptionLocalizer(),
 			$wikibaseRepo->getValidatorErrorLocalizer(),
@@ -158,7 +162,7 @@ class ParseValue extends ApiBase {
 		// Parsers are registered by datatype.
 		// Note: parser used to be addressed by a name independent of datatype, using the 'parser'
 		// parameter. For backwards compatibility, parsers are also registered under their old names
-		// in the ValueParserFactory (WikibaseRepo::getValueParserFactory).
+		// in the ValueParserFactory (see WikibaseRepo.ServiceWiring.php).
 		$name = $params['datatype'] ?: $params['parser'];
 
 		if ( empty( $name ) && isset( $params['property'] ) ) {

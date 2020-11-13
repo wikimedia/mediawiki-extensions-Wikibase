@@ -62,7 +62,10 @@
 		},
 		"wbparsevalue": {
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
-			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory",
+			"services": [
+				"WikibaseRepo.ValueParserFactory"
+			]
 		},
 		"wbremoveclaims": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",

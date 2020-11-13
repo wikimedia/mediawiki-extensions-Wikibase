@@ -41,7 +41,6 @@ use Title;
 use User;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
-use ValueParsers\NullParser;
 use Wikibase\DataAccess\AliasTermBuffer;
 use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataAccess\EntitySource;
@@ -243,11 +242,6 @@ class WikibaseRepo {
 	 * @var DataTypeFactory|null
 	 */
 	private $dataTypeFactory = null;
-
-	/**
-	 * @var ValueParserFactory|null
-	 */
-	private $valueParserFactory = null;
 
 	/**
 	 * @var SnakFactory|null
@@ -665,34 +659,9 @@ class WikibaseRepo {
 		return $this->dataTypeFactory;
 	}
 
-	/**
-	 * @return ValueParserFactory
-	 */
-	public function getValueParserFactory() {
-		if ( $this->valueParserFactory === null ) {
-			$dataTypeDefinitions = self::getDataTypeDefinitions();
-			$callbacks = $dataTypeDefinitions->getParserFactoryCallbacks();
-
-			// For backwards-compatibility, also register parsers under legacy names,
-			// for use with the deprecated 'parser' parameter of the wbparsevalue API module.
-			$prefixedCallbacks = $dataTypeDefinitions->getParserFactoryCallbacks(
-				DataTypeDefinitions::PREFIXED_MODE
-			);
-			if ( isset( $prefixedCallbacks['VT:wikibase-entityid'] ) ) {
-				$callbacks['wikibase-entityid'] = $prefixedCallbacks['VT:wikibase-entityid'];
-			}
-			if ( isset( $prefixedCallbacks['VT:globecoordinate'] ) ) {
-				$callbacks['globecoordinate'] = $prefixedCallbacks['VT:globecoordinate'];
-			}
-			// 'null' is not a datatype. Kept for backwards compatibility.
-			$callbacks['null'] = function() {
-				return new NullParser();
-			};
-
-			$this->valueParserFactory = new ValueParserFactory( $callbacks );
-		}
-
-		return $this->valueParserFactory;
+	public static function getValueParserFactory( ContainerInterface $services = null ): ValueParserFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.ValueParserFactory' );
 	}
 
 	/**
