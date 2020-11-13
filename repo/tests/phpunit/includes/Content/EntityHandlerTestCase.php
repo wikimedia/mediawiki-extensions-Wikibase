@@ -88,12 +88,21 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		);
 	}
 
+	/**
+	 * When overloading this you probably want to merge the parent call results in
+	 * (i.e. inherit the wikibase entity types) unless you are sure of what you are doing.
+	 * Mind that in the real world this is done by the WikibaseRepoEntityTypes hook.
+	 */
+	protected function getEntityTypeDefinitionsConfiguration(): array {
+		return array_merge_recursive(
+			require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php',
+			require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php'
+		);
+	}
+
 	protected function getEntityTypeDefinitions() {
 		return new EntityTypeDefinitions(
-			array_merge_recursive(
-				require __DIR__ . '/../../../../../lib/WikibaseLib.entitytypes.php',
-				require __DIR__ . '/../../../../WikibaseRepo.entitytypes.php'
-			)
+			$this->getEntityTypeDefinitionsConfiguration()
 		);
 	}
 
