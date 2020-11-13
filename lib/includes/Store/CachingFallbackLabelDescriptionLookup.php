@@ -5,7 +5,7 @@ namespace Wikibase\Lib\Store;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Term\TermFallback;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**

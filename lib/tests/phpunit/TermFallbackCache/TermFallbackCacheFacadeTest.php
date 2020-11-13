@@ -1,18 +1,18 @@
 <?php
 
 declare( strict_types = 1 );
-namespace Wikibase\Lib\Tests\FormatterCache;
+namespace Wikibase\Lib\Tests\TermFallbackCache;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\DataModel\Term\TermTypes;
-use Wikibase\Lib\FormatterCache\TermFallbackCacheFacade;
-use Wikibase\Lib\FormatterCache\TermFallbackSerializerTrait;
+use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
+use Wikibase\Lib\TermFallbackCache\TermFallbackSerializerTrait;
 
 /**
- * @covers \Wikibase\Lib\FormatterCache\TermFallbackCacheFacade
+ * @covers \Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade
  *
  * @group Wikibase
  *

@@ -6,9 +6,14 @@ With the migration to the new SQL database schema for storing terms, caching bec
 
 ## Term Cache Containing Language Fallbacks
 
-The so-called "Formatter Cache" contains serialized [TermFallback] objects as its values, which contain the requested languages, as well as the actual language of the [Term] object in case of a fallback. The intended main use case is to provide terms for formatted statement values (i.e. mainly Item terms) via services such as [CachingFallbackLabelDescriptionLookup], but it is also used in the corresponding Lua code for term lookups with language fallbacks.
+The so-called "TermFallback Cache" contains serialized [TermFallback] objects as its values, which contain the requested languages, as well as the actual language of the [Term] object in case of a fallback. The intended main use case is to provide terms for formatted statement values (i.e. mainly Item terms) via services such as [CachingFallbackLabelDescriptionLookup].
+It is also used in the corresponding Lua code for term lookups. It is used both for those with and without fallbacks to reduce load.
 
-This cache consists of the wiki's [configured shared cache] (shared across sites) wrapped in an in-process cache, which can be seen in [WikibaseRepo::getFormatterCache()] and [WikibaseClient::getFormatterCache()]. The shared cache provides consistent cache contents across connected wikis and reduces load on the database, while the outer in-memory cache avoids expensive repeated lookups within the same request.
+It should be accessed using the TermFallbackCacheFacade.
+
+This cache consists of the wiki's [configured shared cache] (shared across sites) wrapped in an in-process cache, which can be seen in [WikibaseRepo::getTermFallbackCache()] and [WikibaseClient::getTermFallbackCache()]. The shared cache provides consistent cache contents across connected wikis and reduces load on the database, while the outer in-memory cache avoids expensive repeated lookups within the same request.
+
+This used to be called the formatter cache. The cache key (and metrics collection) still use this string: `wikibase.repo.formatter`.
 
 ## Property Term Cache (without Language Fallbacks)
 
@@ -27,6 +32,6 @@ Cache entries are considered immutable which means that they don't change once t
 [TermCacheKeyBuilder]: @ref Wikibase::Lib::Store::TermCacheKeyBuilder
 [TermFallback]: @ref Wikibase::DataModel::Term::TermFallback
 [Term]: @ref Wikibase::DataModel::Term::Term
-[WikibaseClient::getFormatterCache()]: @ref Wikibase::Client::WikibaseClient::getFormatterCache()
-[WikibaseRepo::getFormatterCache()]: @ref Wikibase::Repo::WikibaseRepo::getFormatterCache()
+[WikibaseClient::getTermFallbackCache()]: @ref Wikibase::Client::WikibaseClient::getTermFallbackCache()
+[WikibaseRepo::getTermFallbackCache()]: @ref Wikibase::Repo::WikibaseRepo::getTermFallbackCache()
 [WikibaseLib.entitytypes.php]: @ref WikibaseLib.entitytypes.php
