@@ -239,11 +239,6 @@ class WikibaseRepo {
 	private $settings;
 
 	/**
-	 * @var DataTypeFactory|null
-	 */
-	private $dataTypeFactory = null;
-
-	/**
 	 * @var SnakFactory|null
 	 */
 	private $snakFactory = null;
@@ -595,7 +590,7 @@ class WikibaseRepo {
 			$valueFormatterBuilders,
 			$this->getStore()->getPropertyInfoLookup(),
 			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
+			self::getDataTypeFactory()
 		);
 	}
 
@@ -648,15 +643,9 @@ class WikibaseRepo {
 		return $wgLang;
 	}
 
-	/**
-	 * @return DataTypeFactory
-	 */
-	public function getDataTypeFactory() {
-		if ( $this->dataTypeFactory === null ) {
-			$this->dataTypeFactory = new DataTypeFactory( self::getDataTypeDefinitions()->getValueTypes() );
-		}
-
-		return $this->dataTypeFactory;
+	public static function getDataTypeFactory( ContainerInterface $services = null ): DataTypeFactory {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataTypeFactory' );
 	}
 
 	public static function getValueParserFactory( ContainerInterface $services = null ): ValueParserFactory {
@@ -947,7 +936,7 @@ class WikibaseRepo {
 		if ( $this->snakFactory === null ) {
 			$this->snakFactory = new SnakFactory(
 				$this->getPropertyDataTypeLookup(),
-				$this->getDataTypeFactory(),
+				self::getDataTypeFactory(),
 				$this->getDataValueFactory()
 			);
 		}
@@ -994,7 +983,7 @@ class WikibaseRepo {
 	public function getChangeOpFactoryProvider() {
 		$snakValidator = new SnakValidator(
 			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory(),
+			self::getDataTypeFactory(),
 			$this->getDataTypeValidatorFactory()
 		);
 
@@ -1163,7 +1152,7 @@ class WikibaseRepo {
 				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				$this->getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
-				$this->getDataTypeFactory()
+				self::getDataTypeFactory()
 			);
 		}
 
@@ -1355,7 +1344,7 @@ class WikibaseRepo {
 			[], // XXX: do we want $this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks()
 			$valueFormatterFactory,
 			$this->getPropertyDataTypeLookup(),
-			$this->getDataTypeFactory()
+			self::getDataTypeFactory()
 		);
 
 		$options = new FormatterOptions();
@@ -2067,7 +2056,7 @@ class WikibaseRepo {
 			$statementGrouperBuilder->getStatementGrouper(),
 			$propertyOrderProvider,
 			$this->getSiteLookup(),
-			$this->getDataTypeFactory(),
+			self::getDataTypeFactory(),
 			TemplateFactory::getDefaultInstance(),
 			$this->getLanguageNameLookup(),
 			new MediaWikiLanguageDirectionalityLookup(),

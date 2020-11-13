@@ -90,7 +90,7 @@ return call_user_func( function() {
 		'mw.config.values.wbDataTypes' => $moduleTemplate + [
 			'class' => DataTypesModule::class,
 			'datatypefactory' => function() {
-				return WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
+				return WikibaseRepo::getDataTypeFactory();
 			},
 			'datatypesconfigvarname' => 'wbDataTypes',
 		],

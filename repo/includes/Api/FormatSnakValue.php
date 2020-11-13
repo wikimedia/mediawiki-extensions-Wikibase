@@ -16,6 +16,7 @@ use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\DataValueFactory;
 use Wikibase\Lib\Formatters\OutputFormatSnakFormatterFactory;
 use Wikibase\Lib\Formatters\OutputFormatValueFormatterFactory;
@@ -44,6 +45,9 @@ class FormatSnakValue extends ApiBase {
 	 */
 	private $snakFormatterFactory;
 
+	/** @var DataTypeFactory */
+	private $dataTypeFactory;
+
 	/**
 	 * @var DataValueFactory
 	 */
@@ -61,6 +65,7 @@ class FormatSnakValue extends ApiBase {
 	 * @param string $moduleName
 	 * @param OutputFormatValueFormatterFactory $valueFormatterFactory
 	 * @param OutputFormatSnakFormatterFactory $snakFormatterFactory
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param DataValueFactory $dataValueFactory
 	 * @param ApiErrorReporter $apiErrorReporter
 	 */
@@ -69,6 +74,7 @@ class FormatSnakValue extends ApiBase {
 		string $moduleName,
 		OutputFormatValueFormatterFactory $valueFormatterFactory,
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
+		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
 		ApiErrorReporter $apiErrorReporter
 	) {
@@ -76,11 +82,16 @@ class FormatSnakValue extends ApiBase {
 
 		$this->valueFormatterFactory = $valueFormatterFactory;
 		$this->snakFormatterFactory = $snakFormatterFactory;
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		DataTypeFactory $dataTypeFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
@@ -89,6 +100,7 @@ class FormatSnakValue extends ApiBase {
 			$moduleName,
 			$wikibaseRepo->getValueFormatterFactory(),
 			$wikibaseRepo->getSnakFormatterFactory(),
+			$dataTypeFactory,
 			$wikibaseRepo->getDataValueFactory(),
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
@@ -266,7 +278,7 @@ class FormatSnakValue extends ApiBase {
 				self::PARAM_REQUIRED => true,
 			],
 			'datatype' => [
-				self::PARAM_TYPE => WikibaseRepo::getDefaultInstance()->getDataTypeFactory()->getTypeIds(),
+				self::PARAM_TYPE => $this->dataTypeFactory->getTypeIds(),
 				self::PARAM_REQUIRED => false,
 			],
 			'property' => [

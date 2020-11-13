@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 use MediaWiki\MediaWikiServices;
 use ValueParsers\NullParser;
 use Wikibase\Lib\DataTypeDefinitions;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ValueParserFactory;
@@ -25,6 +26,12 @@ return [
 		return new DataTypeDefinitions(
 			$dataTypes,
 			$settings->getSetting( 'disabledDataTypes' )
+		);
+	},
+
+	'WikibaseRepo.DataTypeFactory' => function ( MediaWikiServices $services ): DataTypeFactory {
+		return new DataTypeFactory(
+			WikibaseRepo::getDataTypeDefinitions( $services )->getValueTypes()
 		);
 	},
 
