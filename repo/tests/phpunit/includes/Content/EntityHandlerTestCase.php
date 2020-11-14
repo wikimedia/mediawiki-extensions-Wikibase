@@ -100,7 +100,10 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	protected function getEntityTypeDefinitions() {
+	/**
+	 * Get the EntityTypeDefinitions configured in getEntityTypeDefinitionsConfiguration()
+	 */
+	final protected function getEntityTypeDefinitions(): EntityTypeDefinitions {
 		return new EntityTypeDefinitions(
 			$this->getEntityTypeDefinitionsConfiguration()
 		);
