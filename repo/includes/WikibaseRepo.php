@@ -1996,7 +1996,8 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return int[] An array mapping entity type identifiers to namespace numbers.
+	 * @return (int|string)[] An array mapping entity type identifiers to
+	 * namespace numbers and optional slots.
 	 */
 	public function getLocalEntityNamespaces() {
 		return $this->settings->getSetting( 'entityNamespaces' );
