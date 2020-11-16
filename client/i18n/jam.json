@@ -5,9 +5,9 @@
 			"Katxis"
 		]
 	},
-	"tooltip-t-wikibase": "Lingk tu don kanekop dieta ripazitri aitem",
+	"tooltip-t-wikibase": "Link fi di database entry",
 	"wikibase-comment-update": "{{WBREPONAME}} aitem chienj",
-	"wikibase-dataitem": "{{WBREPONAME}} aitem",
+	"wikibase-dataitem": "{{WBREPONAME}} entry",
 	"wikibase-editlinks": "Change up di link dem",
 	"wikibase-editlinkstitle": "Change up di language link dem",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",

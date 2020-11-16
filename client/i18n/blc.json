@@ -6,5 +6,7 @@
 	},
 	"tooltip-t-wikibase": "ti mntaliwa ulh ti item",
 	"wikibase-dataitem": "{{WBREPONAME}} item",
-	"wikibase-editlinks": "qw'lasiitucw wa mntaliwa ts"
+	"wikibase-editlinks": "qw'lasiitucw wa mntaliwa ts",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} siqw'lasiitucw tc"
 }
