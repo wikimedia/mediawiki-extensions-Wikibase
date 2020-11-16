@@ -22,7 +22,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -90,12 +90,16 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
 
-		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		// general EntityTitleLookup interface
+		$entityContentFactory->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
+		// EntityContentFactory-specific method – should be unused since we configure no page props
+		$entityContentFactory->expects( $this->never() )
+			->method( 'newFromEntity' );
 
 		$entityDataFormatProvider = new EntityDataFormatProvider();
 		$serializerFactory = new SerializerFactory(
@@ -111,7 +115,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$service = new EntityDataSerializationService(
 			$mockRepository,
-			$titleLookup,
+			$entityContentFactory,
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
@@ -175,7 +179,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
 				'/{entity_id}.json&revision={revision_id}',
 			],
-			$titleLookup
+			$entityContentFactory
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
@@ -184,7 +188,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$mockHtmlCacheUpdater,
-			$titleLookup,
+			$entityContentFactory,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,

@@ -69,11 +69,6 @@ class EntityDataRequestHandler {
 	private $entityRedirectLookup;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -116,7 +111,7 @@ class EntityDataRequestHandler {
 	/**
 	 * @param EntityDataUriManager $uriManager
 	 * @param HtmlCacheUpdater $htmlCacheUpdater
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleLookup|null $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -132,7 +127,7 @@ class EntityDataRequestHandler {
 	public function __construct(
 		EntityDataUriManager $uriManager,
 		HtmlCacheUpdater $htmlCacheUpdater,
-		EntityTitleLookup $entityTitleLookup,
+		?EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,
@@ -147,7 +142,6 @@ class EntityDataRequestHandler {
 	) {
 		$this->uriManager = $uriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityRedirectLookup = $entityRedirectLookup;

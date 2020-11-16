@@ -20,7 +20,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -65,12 +65,16 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	private function newRequestHandler() {
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
-		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		// general EntityTitleLookup interface
+		$entityContentFactory->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
+		// EntityContentFactory-specific method – should be unused since we configure no page props
+		$entityContentFactory->expects( $this->never() )
+			->method( 'newFromEntity' );
 
 		$dataTypeLookup = $this->createMock( PropertyDataTypeLookup::class );
 		$dataTypeLookup->expects( $this->any() )
@@ -91,7 +95,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$serializationService = new EntityDataSerializationService(
 			$mockRepository,
-			$titleLookup,
+			$entityContentFactory,
 			$dataTypeLookup,
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
@@ -131,7 +135,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$title,
 			$supportedExtensions,
 			[],
-			$titleLookup
+			$entityContentFactory
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
@@ -143,7 +147,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$mockHtmlCacheUpdater,
-			$titleLookup,
+			$entityContentFactory,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
