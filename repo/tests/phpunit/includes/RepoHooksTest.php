@@ -39,7 +39,7 @@ use Wikimedia\AtEase\AtEase;
  */
 class RepoHooksTest extends MediaWikiIntegrationTestCase {
 
-	/* private */ const FAKE_NS_ID = 4557;
+	private const FAKE_NS_ID = 4557;
 
 	private $saveAllowImport = false;
 
@@ -97,22 +97,12 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 			'namespace' => NS_TALK,
 			'useNewTermbox' => true,
 		];
-
-		if ( isset( $entityNamespaces['lexeme'] ) ) {
-			yield 'non-termbox entity page' => [
-				'expectedModules' => $wikibaseMobile,
-				'expectedModuleStyles' => [],
-				'namespace' => $entityNamespaces['lexeme'],
-				'useNewTermbox' => true,
-			];
-		} elseif ( isset( $entityNamespaces['mediainfo'] ) ) {
-			yield 'non-termbox entity page' => [
-				'expectedModules' => $wikibaseMobile,
-				'expectedModuleStyles' => [],
-				'namespace' => $entityNamespaces['mediainfo'],
-				'useNewTermbox' => true,
-			];
-		}
+		yield 'non-termbox entity page' => [
+			'expectedModules' => $wikibaseMobile,
+			'expectedModuleStyles' => [],
+			'namespace' => self::FAKE_NS_ID,
+			'useNewTermbox' => true,
+		];
 	}
 
 	/**
@@ -124,6 +114,8 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		int $namespace,
 		bool $useNewTermbox
 	) {
+		global $wgWBRepoSettings;
+
 		$title = $this->createMock( Title::class );
 		$title->expects( $this->once() )
 			->method( 'getNamespace' )
@@ -133,9 +125,16 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 		$context->setTitle( $title );
 
 		$outputPage = new OutputPage( $context );
-
 		$skin = $this->createMock( SkinTemplate::class );
-		$this->getSettings()->setSetting( 'termboxEnabled', $useNewTermbox );
+
+		// we can’t use $this->getSettings()->setSetting() for entityNamespaces,
+		// those are only read when the WikibaseRepo singleton is created
+		$settings = $wgWBRepoSettings;
+		$settings['entityNamespaces']['fakeEntityType'] = self::FAKE_NS_ID;
+		$settings['termboxEnabled'] = $useNewTermbox;
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		WikibaseRepo::resetClassStatics();
+
 		RepoHooks::onBeforePageDisplayMobile(
 			$outputPage,
 			$skin
