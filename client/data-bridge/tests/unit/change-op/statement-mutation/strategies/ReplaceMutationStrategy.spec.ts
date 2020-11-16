@@ -6,7 +6,7 @@ import {
 import ReplaceMutationStrategy from '@/change-op/statement-mutation/strategies/ReplaceMutationStrategy';
 import StatementMutationError from '@/change-op/statement-mutation/StatementMutationError';
 import { PathToSnak } from '@/store/statements/PathToSnak';
-import { StatementState } from '@/store/statements';
+import { StatementState } from '@/store/statements/StatementState';
 import clone from '@/store/clone';
 
 describe( 'ReplaceMutationStrategy', () => {

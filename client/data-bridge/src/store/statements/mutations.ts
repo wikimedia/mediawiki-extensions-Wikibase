@@ -1,5 +1,5 @@
 import { StatementMap } from '@wmde/wikibase-datamodel-types';
-import { StatementState } from '@/store/statements';
+import { StatementState } from './StatementState';
 import { Mutations } from 'vuex-smart-module';
 import EntityId from '@/datamodel/EntityId';
 import Vue from 'vue';

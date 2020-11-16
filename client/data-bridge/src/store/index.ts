@@ -4,7 +4,7 @@ import Application from '@/store/Application';
 import { RootActions } from '@/store/actions';
 import { RootGetters } from '@/store/getters';
 import { RootMutations } from '@/store/mutations';
-import { BaseState } from '@/store/state';
+import { BaseState } from './BaseState';
 import { createStore as smartCreateStore, Module } from 'vuex-smart-module';
 import ServiceContainer from '@/services/ServiceContainer';
 import { NS_ENTITY, NS_STATEMENTS } from '@/store/namespaces';

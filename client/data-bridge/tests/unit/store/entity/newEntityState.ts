@@ -1,4 +1,4 @@
-import { EntityState } from '@/store/entity';
+import { EntityState } from '@/store/entity/EntityState';
 
 export default function newEntityState( entity: Partial<EntityState> = {} ): EntityState {
 	return {

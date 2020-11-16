@@ -1,5 +1,5 @@
 import { Mutations } from 'vuex-smart-module';
-import { EntityState } from '@/store/entity';
+import { EntityState } from './EntityState';
 import Entity from '@/datamodel/Entity';
 
 export class EntityMutations extends Mutations<EntityState> {

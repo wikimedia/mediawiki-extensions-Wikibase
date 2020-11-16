@@ -27,7 +27,7 @@ import newMockServiceContainer from '../services/newMockServiceContainer';
 import newMockTracker from '../../util/newMockTracker';
 import newApplicationState from './newApplicationState';
 import { MainSnakPath } from '@/store/statements/MainSnakPath';
-import { StatementState } from '@/store/statements';
+import { StatementState } from '@/store/statements/StatementState';
 import MediaWikiPurge from '@/definitions/MediaWikiPurge';
 import { getMockBridgeRepoConfig } from '../../util/mocks';
 import { budge } from '../../util/timer';
