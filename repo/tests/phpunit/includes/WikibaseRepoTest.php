@@ -113,9 +113,19 @@ use Wikimedia\TestingAccessWrapper;
 class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 	/**
+	 * @var SettingsArray
+	 */
+	private $settings;
+
+	/**
 	 * @var EntityTypeDefinitions
 	 */
 	private $entityTypeDefinitions;
+
+	/**
+	 * @var EntitySourceDefinitions
+	 */
+	private $entitySourceDefinitions;
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -125,7 +135,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
 
+		$this->settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
 		$this->entityTypeDefinitions = new EntityTypeDefinitions( [] );
+		$this->entitySourceDefinitions = $this->getDefaultEntitySourceDefinitions( 'local' );
 	}
 
 	private function disallowDBAccess() {
@@ -444,15 +456,10 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetLocalEntityTypes() {
+		$this->settings->setSetting( 'localEntitySourceName', 'local' );
 		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'localEntitySourceName', 'local' );
-
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			new EntitySourceDefinitions( [
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
 				new EntitySource(
 					'local',
 					false,
@@ -466,8 +473,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 					'',
 					''
 				)
-			], $this->entityTypeDefinitions )
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
 
@@ -479,13 +489,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetLocalEntityNamespaceLookup() {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( 'localEntitySourceName', 'local' );
-
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			new EntitySourceDefinitions( [
+		$this->settings->setSetting( 'localEntitySourceName', 'local' );
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
 				new EntitySource(
 					'local',
 					false,
@@ -508,8 +514,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 					'',
 					''
 				)
-			], $this->entityTypeDefinitions )
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$localEntityTypes = $wikibaseRepo->getLocalEntityTypes();
 
@@ -535,13 +544,8 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			new EntitySourceDefinitions( [
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
 				new EntitySource(
 					'local',
 					false,
@@ -576,8 +580,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 					'lex',
 					'lexwiki'
 				)
-			], $this->entityTypeDefinitions )
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$enabled = $wikibaseRepo->getEnabledEntityTypes();
 		$this->assertContains( 'foo', $enabled );
@@ -696,58 +703,29 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 	private function getWikibaseRepo() {
 		return new WikibaseRepo(
-			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
+			$this->settings,
 			$this->entityTypeDefinitions,
-			$this->getEntitySourceDefinitions()
+			$this->entitySourceDefinitions
 		);
 	}
 
-	/**
-	 * @param array[] $entityTypeDefinitions
-	 *
-	 * @return WikibaseRepo
-	 */
-	private function getWikibaseRepoWithCustomEntityTypeDefinitions( $entityTypeDefinitions = [] ) {
-		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitions );
-		return new WikibaseRepo(
-			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			$entityTypeDefinitions,
-			$this->getEntitySourceDefinitions( 'test', $entityTypeDefinitions )
-		);
-	}
-
-	private function getWikibaseRepoWithCustomEntitySourceDefinitions( EntitySourceDefinitions $entitySourceDefinitions ) {
-		return new WikibaseRepo(
-			$this->getTestSettings( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() ),
-			$this->entityTypeDefinitions,
-			$entitySourceDefinitions
-		);
-	}
-
-	private function getTestSettings( $settingsArray ) {
-		$settings = new SettingsArray( $settingsArray );
-		$settings->setSetting( 'localEntitySourceName', 'test' );
-		return $settings;
-	}
-
-	private function getEntitySourceDefinitions(
-		string $sourceName = 'test',
-		EntityTypeDefinitions $entityTypeDefinitions = null
-	) {
+	private function getDefaultEntitySourceDefinitions( string $sourceName ) {
 		return new EntitySourceDefinitions(
-			[ new EntitySource(
-				$sourceName,
-				false,
-				[
-					'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-					'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-				],
-				'',
-				'',
-				'',
-				''
-			) ],
-			$entityTypeDefinitions ?? $this->entityTypeDefinitions
+			[
+				new EntitySource(
+					$sourceName,
+					false,
+					[
+						'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
+						'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+					],
+					'',
+					'',
+					'',
+					''
+				)
+			],
+			$this->entityTypeDefinitions
 		);
 	}
 
@@ -869,14 +847,15 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	 * @return DataValueFactory
 	 */
 	private function getDataValueFactory() {
-		return $this->getWikibaseRepoWithCustomEntityTypeDefinitions( [
+		$this->entityTypeDefinitions = new EntityTypeDefinitions( [
 			'item' => [
 				EntityTypeDefinitions::ENTITY_ID_PATTERN => ItemId::PATTERN,
 				EntityTypeDefinitions::ENTITY_ID_BUILDER => function ( $serialization ) {
 					return new ItemId( $serialization );
 				},
 			],
-		] )->getDataValueFactory();
+		] );
+		return $this->getWikibaseRepo()->getDataValueFactory();
 	}
 
 	public function dataValueProvider() {
@@ -942,13 +921,8 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 	public function testGetEntityTypeToRepositoryMapping() {
 		$this->entityTypeDefinitions = $this->getEntityTypeDefinitionsWithSubentities();
-
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			new EntitySourceDefinitions( [
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
 				new EntitySource(
 					'local',
 					false,
@@ -972,8 +946,11 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 					'lex',
 					'lexwiki'
 				)
-			], $this->entityTypeDefinitions )
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$this->assertEquals(
 			[
@@ -987,37 +964,33 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetConceptBaseUris() {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$this->entitySourceDefinitions = new EntitySourceDefinitions( [
+			new EntitySource(
+				'local',
+				false,
+				[
+					'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
+					'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
+				],
+				'http://local.wiki/entity/',
+				'',
+				'',
+				''
+			),
+			new EntitySource(
+				'bazwiki',
+				'bazdb',
+				[
+					'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
+				],
+				'http://baz.wiki/entity/',
+				'baz',
+				'baz',
+				'bazwiki'
+			)
+		], $this->entityTypeDefinitions );
 
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			new EntitySourceDefinitions( [
-				new EntitySource(
-					'local',
-					false,
-					[
-						'foo' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-						'bar' => [ 'namespaceId' => 220, 'slot' => 'main' ],
-					],
-					'http://local.wiki/entity/',
-					'',
-					'',
-					''
-				),
-				new EntitySource(
-					'bazwiki',
-					'bazdb',
-					[
-						'baz' => [ 'namespaceId' => 250, 'slot' => 'main' ],
-					],
-					'http://baz.wiki/entity/',
-					'baz',
-					'baz',
-					'bazwiki'
-				)
-			], $this->entityTypeDefinitions )
-		);
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		$this->assertEquals(
 			[ 'local' => 'http://local.wiki/entity/', 'bazwiki' => 'http://baz.wiki/entity/' ],
@@ -1047,8 +1020,8 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testNewFederatedPropertiesServiceFactoryDoesntFatal() {
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$settings = $this->getSettingsCopyWithSettingSet( 'federatedPropertiesEnabled', true );
-		$wbRepo = $this->getWikibaseRepoWithCustomSettings( $settings );
+		$this->settings->setSetting( 'federatedPropertiesEnabled', true );
+		$wbRepo = $this->getWikibaseRepo();
 
 		$wbRepo->newFederatedPropertiesServiceFactory();
 		$this->addToAssertionCount( 1 );
@@ -1070,8 +1043,8 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	public function testParameterLessFunctionCallsForFederatedPropertiesThrowExceptionWhenDisabled( $methodName ) {
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
-		$settings = $this->getSettingsCopyWithSettingSet( 'federatedPropertiesEnabled', false );
-		$wbRepo = $this->getWikibaseRepoWithCustomSettings( $settings );
+		$this->settings->setSetting( 'federatedPropertiesEnabled', false );
+		$wbRepo = $this->getWikibaseRepo();
 
 		$reflectionClass = new ReflectionClass( $wbRepo );
 
@@ -1085,20 +1058,6 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	private function getWikibaseRepoWithCustomSettings( SettingsArray $settings ) {
-		return new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			$this->getEntitySourceDefinitions( 'local' )
-		);
-	}
-
-	private function getSettingsCopyWithSettingSet( $settingName, $settingValue ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting( $settingName, $settingValue );
-		return $settings;
-	}
-
 	public function testGetPropertyTermStoreWriter_withLocalProperties() {
 		$repo = $this->getWikibaseRepo();
 		$writer = $repo->getPropertyTermStoreWriter();
@@ -1106,22 +1065,23 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetPropertyTermStoreWriter_withoutLocalProperties() {
-		$repo = $this->getWikibaseRepoWithCustomEntitySourceDefinitions(
-			new EntitySourceDefinitions(
-				[
-					new EntitySource(
-						'test',
-						false,
-						[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
-						'',
-						'',
-						'',
-						''
-					),
-				],
-				$this->entityTypeDefinitions
-			)
+		$this->settings->setSetting( 'localEntitySourceName', 'test' );
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
+					'test',
+					false,
+					[ 'item' => [ 'namespaceId' => 100, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					''
+				),
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$repo = $this->getWikibaseRepo();
 		$writer = $repo->getPropertyTermStoreWriter();
 		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
@@ -1133,22 +1093,23 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetItemTermStoreWriter_withoutLocalItems() {
-		$repo = $this->getWikibaseRepoWithCustomEntitySourceDefinitions(
-			new EntitySourceDefinitions(
-				[
-					new EntitySource(
-						'test',
-						false,
-						[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
-						'',
-						'',
-						'',
-						''
-					),
-				],
-				$this->entityTypeDefinitions
-			)
+		$this->settings->setSetting( 'localEntitySourceName', 'test' );
+		$this->entitySourceDefinitions = new EntitySourceDefinitions(
+			[
+				new EntitySource(
+					'test',
+					false,
+					[ 'property' => [ 'namespaceId' => 200, 'slot' => 'main' ] ],
+					'',
+					'',
+					'',
+					''
+				),
+			],
+			$this->entityTypeDefinitions
 		);
+
+		$repo = $this->getWikibaseRepo();
 		$writer = $repo->getItemTermStoreWriter();
 		$this->assertInstanceOf( ThrowingEntityTermStoreWriter::class, $writer );
 	}
@@ -1164,23 +1125,18 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider entitySourceBasedFederationProvider
 	 */
 	public function testWikibaseServicesParameterLessFunctionCalls( $entitySourceBasedFederation ) {
-		$settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
-		$settings->setSetting(
+		$this->settings->setSetting(
 			'repositories',
 			[ '' => [
 				'database' => 'dummy',
 				'base-uri' => null,
 				'prefix-mapping' => [ '' => '' ],
-				'entity-namespaces' => $settings->getSetting( 'entityNamespaces' ),
+				'entity-namespaces' => $this->settings->getSetting( 'entityNamespaces' ),
 			] ]
 		);
-		$settings->setSetting( 'useEntitySourceBasedFederation', $entitySourceBasedFederation );
+		$this->settings->setSetting( 'useEntitySourceBasedFederation', $entitySourceBasedFederation );
 
-		$wikibaseRepo = new WikibaseRepo(
-			$settings,
-			$this->entityTypeDefinitions,
-			$this->getEntitySourceDefinitions()
-		);
+		$wikibaseRepo = $this->getWikibaseRepo();
 
 		// Make sure (as good as we can) that all functions can be called without
 		// exceptions/ fatals and nothing accesses the database or does http requests.
