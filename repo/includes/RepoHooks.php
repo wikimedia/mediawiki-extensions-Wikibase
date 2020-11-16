@@ -32,6 +32,8 @@ use SkinTemplate;
 use StubUserLang;
 use Title;
 use User;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
@@ -82,16 +84,20 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplayMobile( OutputPage $out, Skin $skin ) {
-		$title = $out->getTitle();
 		$repo = WikibaseRepo::getDefaultInstance();
 		$entityNamespaceLookup = $repo->getEntityNamespaceLookup();
-		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $title->getNamespace() );
-		$useNewTermbox = $repo->getSettings()->getSetting( 'termboxEnabled' );
+		$namespace = $out->getTitle()->getNamespace();
+		$isEntityTitle = $entityNamespaceLookup->isNamespaceWithEntities( $namespace );
 
 		if ( $isEntityTitle ) {
 			$out->addModules( 'wikibase.mobile' );
 
-			if ( $useNewTermbox ) {
+			$useNewTermbox = $repo->getSettings()->getSetting( 'termboxEnabled' );
+			$entityType = $entityNamespaceLookup->getEntityType( $namespace );
+			$isEntityTypeWithTermbox = $entityType === Item::ENTITY_TYPE
+				|| $entityType === Property::ENTITY_TYPE;
+
+			if ( $useNewTermbox && $isEntityTypeWithTermbox ) {
 				$out->addModules( 'wikibase.termbox' );
 				$out->addModuleStyles( [ 'wikibase.termbox.styles' ] );
 			}
