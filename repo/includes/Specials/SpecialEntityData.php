@@ -103,7 +103,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 		return new EntityDataRequestHandler(
 			$wikibaseRepo->getEntityDataUriManager(),
 			$wikibaseRepo->getHtmlCacheUpdater(),
-			$titleLookup,
 			$entityIdParser,
 			$entityRevisionLookup,
 			$entityRedirectLookup,
