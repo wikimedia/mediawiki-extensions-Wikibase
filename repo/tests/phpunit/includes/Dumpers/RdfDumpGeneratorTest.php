@@ -7,7 +7,6 @@ use MediaWikiIntegrationTestCase;
 use MWException;
 use Site;
 use SiteLookup;
-use Title;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -18,8 +17,8 @@ use Wikibase\DataModel\Services\Entity\NullEntityPrefetcher;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\NullEntityRdfBuilder;
@@ -93,33 +92,6 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
 	private function getTestData() {
 		return $this->helper->getTestData();
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->getMockBuilder( EntityTitleLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
-			} ) );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitlesForIds' )
-			->will( $this->returnCallback( function( array $entityIds ) {
-				$titles = [];
-				foreach ( $entityIds as $entityId ) {
-					$titles[ $entityId->getSerialization() ] = Title::newFromText(
-						$entityId->getSerialization()
-					);
-				}
-				return $titles;
-			} ) );
-
-		return $entityTitleLookup;
 	}
 
 	/**
@@ -231,7 +203,7 @@ class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 				[ 'test' => '', 'foreign' => 'foreign' ],
 				[ 'test' => 'en-x-test' ]
 			),
-			$this->getEntityTitleLookup()
+			$this->createMock( EntityContentFactory::class )
 		);
 	}
 

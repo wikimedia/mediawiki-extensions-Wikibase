@@ -7,7 +7,7 @@ use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\DataModel\Services\EntityId\EntityIdPager;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Dumpers\DumpGenerator;
 use Wikibase\Repo\Dumpers\RdfDumpGenerator;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
@@ -61,10 +61,8 @@ class DumpRdf extends DumpEntities {
 	 */
 	private $hasHadServicesSet = false;
 
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $titleLookup;
+	/** @var EntityContentFactory */
+	private $entityContentFactory;
 
 	public function __construct() {
 		parent::__construct();
@@ -89,7 +87,7 @@ class DumpRdf extends DumpEntities {
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
 		EntityRevisionLookup $entityRevisionLookup,
 		RdfVocabulary $rdfVocabulary,
-		$titleLookup
+		EntityContentFactory $entityContentFactory
 	) {
 		parent::setDumpEntitiesServices(
 			$sqlEntityIdPagerFactory,
@@ -102,7 +100,7 @@ class DumpRdf extends DumpEntities {
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
 		$this->revisionLookup = $entityRevisionLookup;
 		$this->rdfVocabulary = $rdfVocabulary;
-		$this->titleLookup = $titleLookup;
+		$this->entityContentFactory = $entityContentFactory;
 		$this->hasHadServicesSet = true;
 	}
 
@@ -183,7 +181,7 @@ class DumpRdf extends DumpEntities {
 			$this->entityRdfBuilderFactory,
 			$this->entityPrefetcher,
 			$this->rdfVocabulary,
-			$this->titleLookup,
+			$this->entityContentFactory,
 			$labeler
 		);
 	}
