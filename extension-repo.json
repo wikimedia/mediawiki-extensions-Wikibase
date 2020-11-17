@@ -277,6 +277,7 @@
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Repo\\Tests\\": "repo/tests/phpunit/includes/",
 		"Wikibase\\Repo\\Tests\\Maintenance\\": "repo/tests/phpunit/maintenance/",
+		"Wikibase\\Repo\\Tests\\Unit\\": "repo/tests/phpunit/unit/",
 		"Wikibase\\Lib\\Tests\\": "lib/tests/phpunit/",
 		"Wikibase\\Lib\\Tests\\Changes\\": "lib/packages/wikibase/changes/tests/",
 		"Wikibase\\DataAccess\\Tests\\": "data-access/tests/phpunit/",
