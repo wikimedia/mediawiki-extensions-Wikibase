@@ -116,7 +116,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 				return new PropertyRdfBuilder(
 					$vocabulary,
 					$writer,
-					WikibaseRepo::getDefaultInstance()->getDataTypeDefinitions()->getRdfDataTypes()
+					WikibaseRepo::getDataTypeDefinitions()->getRdfDataTypes()
 				);
 			}
 		];

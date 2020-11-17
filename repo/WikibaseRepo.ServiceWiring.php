@@ -8,7 +8,6 @@ use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\WikibaseSettings;
 
 return [
-	/** Do not (yet) use this service directly. Get it from the WikibaseRepo instance instead. */
 	'WikibaseRepo.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
 		$baseDataTypes = require __DIR__ . '/../lib/WikibaseLib.datatypes.php';
 		$repoDataTypes = require __DIR__ . '/WikibaseRepo.datatypes.php';

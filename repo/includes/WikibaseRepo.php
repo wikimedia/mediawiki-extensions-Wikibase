@@ -30,6 +30,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Site\MediaWikiPageNameNormalizer;
 use MWException;
 use ObjectCache;
+use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use RequestContext;
 use Serializers\Serializer;
@@ -309,11 +310,6 @@ class WikibaseRepo {
 	private $wikibaseContentLanguages = null;
 
 	/**
-	 * @var DataTypeDefinitions
-	 */
-	private $dataTypeDefinitions;
-
-	/**
 	 * @var EntityTypeDefinitions
 	 */
 	private $entityTypeDefinitions;
@@ -405,14 +401,12 @@ class WikibaseRepo {
 	private static function newInstance() {
 		$mwServices = MediaWikiServices::getInstance();
 
-		$dataTypeDefinitions = $mwServices->getService( 'WikibaseRepo.DataTypeDefinitions' );
 		$entityTypeDefinitions = $mwServices->getService( 'WikibaseRepo.EntityTypeDefinitions' );
 
 		$settings = WikibaseSettings::getRepoSettings();
 
 		return new self(
 			$settings,
-			$dataTypeDefinitions,
 			$entityTypeDefinitions,
 			self::getEntitySourceDefinitionsFromSettings( $settings, $entityTypeDefinitions )
 		);
@@ -613,12 +607,10 @@ class WikibaseRepo {
 
 	public function __construct(
 		SettingsArray $settings,
-		DataTypeDefinitions $dataTypeDefinitions,
 		EntityTypeDefinitions $entityTypeDefinitions,
 		EntitySourceDefinitions $entitySourceDefinitions
 	) {
 		$this->settings = $settings;
-		$this->dataTypeDefinitions = $dataTypeDefinitions;
 		$this->entityTypeDefinitions = $entityTypeDefinitions;
 		$this->entitySourceDefinitions = $entitySourceDefinitions;
 	}
@@ -667,7 +659,7 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeFactory() {
 		if ( $this->dataTypeFactory === null ) {
-			$this->dataTypeFactory = new DataTypeFactory( $this->dataTypeDefinitions->getValueTypes() );
+			$this->dataTypeFactory = new DataTypeFactory( self::getDataTypeDefinitions()->getValueTypes() );
 		}
 
 		return $this->dataTypeFactory;
@@ -678,11 +670,12 @@ class WikibaseRepo {
 	 */
 	public function getValueParserFactory() {
 		if ( $this->valueParserFactory === null ) {
-			$callbacks = $this->dataTypeDefinitions->getParserFactoryCallbacks();
+			$dataTypeDefinitions = self::getDataTypeDefinitions();
+			$callbacks = $dataTypeDefinitions->getParserFactoryCallbacks();
 
 			// For backwards-compatibility, also register parsers under legacy names,
 			// for use with the deprecated 'parser' parameter of the wbparsevalue API module.
-			$prefixedCallbacks = $this->dataTypeDefinitions->getParserFactoryCallbacks(
+			$prefixedCallbacks = $dataTypeDefinitions->getParserFactoryCallbacks(
 				DataTypeDefinitions::PREFIXED_MODE
 			);
 			if ( isset( $prefixedCallbacks['VT:wikibase-entityid'] ) ) {
@@ -1198,7 +1191,7 @@ class WikibaseRepo {
 	public function getSnakFormatterFactory() {
 		if ( $this->snakFormatterFactory === null ) {
 			$this->snakFormatterFactory = new OutputFormatSnakFormatterFactory(
-				$this->dataTypeDefinitions->getSnakFormatterFactoryCallbacks(),
+				self::getDataTypeDefinitions()->getSnakFormatterFactoryCallbacks(),
 				$this->getValueFormatterFactory(),
 				$this->getPropertyDataTypeLookup(),
 				$this->getDataTypeFactory()
@@ -1263,7 +1256,7 @@ class WikibaseRepo {
 	 */
 	private function newValueFormatterFactory() {
 		return new OutputFormatValueFormatterFactory(
-			$this->dataTypeDefinitions->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
+			self::getDataTypeDefinitions()->getFormatterFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE ),
 			$this->getContentLanguage(),
 			new LanguageFallbackChainFactory()
 		);
@@ -1275,7 +1268,7 @@ class WikibaseRepo {
 	public function getValueSnakRdfBuilderFactory() {
 		if ( $this->valueSnakRdfBuilderFactory === null ) {
 			$this->valueSnakRdfBuilderFactory = new ValueSnakRdfBuilderFactory(
-				$this->dataTypeDefinitions->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
+				self::getDataTypeDefinitions()->getRdfBuilderFactoryCallbacks( DataTypeDefinitions::PREFIXED_MODE )
 			);
 		}
 
@@ -1306,7 +1299,7 @@ class WikibaseRepo {
 				$nodeNamespacePrefixes,
 				$predicateNamespacePrefixes,
 				$languageCodes,
-				$this->dataTypeDefinitions->getRdfTypeUris(),
+				self::getDataTypeDefinitions()->getRdfTypeUris(),
 				$this->settings->getSetting( 'pagePropertiesRdf' ) ?: [],
 				$this->getSettings()->getSetting( 'rdfDataRightsUrl' )
 			);
@@ -2124,15 +2117,13 @@ class WikibaseRepo {
 	 */
 	public function getDataTypeValidatorFactory() {
 		return new BuilderBasedDataTypeValidatorFactory(
-			$this->dataTypeDefinitions->getValidatorFactoryCallbacks()
+			self::getDataTypeDefinitions()->getValidatorFactoryCallbacks()
 		);
 	}
 
-	/**
-	 * @return DataTypeDefinitions
-	 */
-	public function getDataTypeDefinitions() {
-		return $this->dataTypeDefinitions;
+	public static function getDataTypeDefinitions( ContainerInterface $services = null ): DataTypeDefinitions {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.DataTypeDefinitions' );
 	}
 
 	public function getWikibaseContentLanguages() {
@@ -2287,7 +2278,7 @@ class WikibaseRepo {
 	}
 
 	public function getPropertyValueExpertsModule() {
-		return new PropertyValueExpertsModule( $this->getDataTypeDefinitions() );
+		return new PropertyValueExpertsModule( self::getDataTypeDefinitions() );
 	}
 
 	/**
