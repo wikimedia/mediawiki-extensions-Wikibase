@@ -840,7 +840,7 @@ final class RepoHooks {
 	 */
 	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$dataTypes = $wikibaseRepo->getDataTypeFactory()->getTypes();
+		$dataTypes = WikibaseRepo::getDataTypeFactory()->getTypes();
 		$propertyTypes = [];
 
 		foreach ( $dataTypes as $id => $type ) {

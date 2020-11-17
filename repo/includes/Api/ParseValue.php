@@ -111,6 +111,7 @@ class ParseValue extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		DataTypeFactory $dataTypeFactory,
 		ValueParserFactory $valueParserFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -119,7 +120,7 @@ class ParseValue extends ApiBase {
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getDataTypeFactory(),
+			$dataTypeFactory,
 			$valueParserFactory,
 			$wikibaseRepo->getDataTypeValidatorFactory(),
 			$wikibaseRepo->getExceptionLocalizer(),

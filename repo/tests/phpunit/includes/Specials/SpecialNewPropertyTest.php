@@ -60,6 +60,7 @@ class SpecialNewPropertyTest extends SpecialNewEntityTestCase {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
+			$wikibaseRepo->getDataTypeFactory(),
 			$wikibaseRepo->getPropertyTermsCollisionDetector()
 		);
 	}

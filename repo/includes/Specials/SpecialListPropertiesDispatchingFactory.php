@@ -3,6 +3,7 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\WikibaseRepo;
@@ -21,7 +22,9 @@ class SpecialListPropertiesDispatchingFactory {
 	 * @return SpecialListFederatedProperties|SpecialListProperties
 	 * @throws \MWException
 	 */
-	public static function factory() {
+	public static function factory(
+		DataTypeFactory $dataTypeFactory
+	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
@@ -39,7 +42,7 @@ class SpecialListPropertiesDispatchingFactory {
 		$entityIdFormatter = $wikibaseRepo->getEntityIdHtmlLinkFormatterFactory()
 			->getEntityIdFormatter( $wikibaseRepo->getUserLanguage() );
 		return new SpecialListProperties(
-			$wikibaseRepo->getDataTypeFactory(),
+			$dataTypeFactory,
 			$wikibaseRepo->getStore()->getPropertyInfoLookup(),
 			$labelDescriptionLookup,
 			$entityIdFormatter,

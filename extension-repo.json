@@ -39,7 +39,10 @@
 		},
 		"wbformatvalue": {
 			"class": "\\Wikibase\\Repo\\Api\\FormatSnakValue",
-			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
+			"services": [
+				"WikibaseRepo.DataTypeFactory"
+			]
 		},
 		"wbgetclaims": {
 			"class": "\\Wikibase\\Repo\\Api\\GetClaims",
@@ -64,6 +67,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory",
 			"services": [
+				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.ValueParserFactory"
 			]
 		},
@@ -157,7 +161,10 @@
 		},
 		"NewProperty": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialNewProperty",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialNewProperty::factory",
+			"services": [
+				"WikibaseRepo.DataTypeFactory"
+			]
 		},
 		"ItemByTitle": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemByTitle",
@@ -221,7 +228,10 @@
 			"factory": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges::factory"
 		},
 		"ListProperties": {
-			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialListPropertiesDispatchingFactory::factory",
+			"services": [
+				"WikibaseRepo.DataTypeFactory"
+			]
 		}
 	},
 	"GroupPermissions": {

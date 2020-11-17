@@ -254,7 +254,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetDataTypeFactoryReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getDataTypeFactory();
+		$returnValue = WikibaseRepo::getDataTypeFactory();
 		$this->assertInstanceOf( DataTypeFactory::class, $returnValue );
 	}
 

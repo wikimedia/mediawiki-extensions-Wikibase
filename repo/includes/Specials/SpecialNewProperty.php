@@ -7,6 +7,7 @@ use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
@@ -33,6 +34,9 @@ class SpecialNewProperty extends SpecialNewEntity {
 	const FIELD_DESCRIPTION = 'description';
 	const FIELD_ALIASES = 'aliases';
 
+	/** @var DataTypeFactory */
+	private $dataTypeFactory;
+
 	/**
 	 * @var TermsCollisionDetector
 	 */
@@ -44,6 +48,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 		SummaryFormatter $summaryFormatter,
 		EntityTitleLookup $entityTitleLookup,
 		MediawikiEditEntityFactory $editEntityFactory,
+		DataTypeFactory $dataTypeFactory,
 		TermsCollisionDetector $termsCollisionDetector
 	) {
 		parent::__construct(
@@ -56,10 +61,13 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$editEntityFactory
 		);
 
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->termsCollisionDetector = $termsCollisionDetector;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		DataTypeFactory $dataTypeFactory
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$settings = $wikibaseRepo->getSettings();
@@ -75,6 +83,7 @@ class SpecialNewProperty extends SpecialNewEntity {
 			$wikibaseRepo->getSummaryFormatter(),
 			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->newEditEntityFactory(),
+			$dataTypeFactory,
 			$wikibaseRepo->getPropertyTermsCollisionDetector()
 		);
 	}
@@ -108,15 +117,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 		return $property;
 	}
 
-	/**
-	 * @param string $dataType
-	 *
-	 * @return bool
-	 */
-	private function dataTypeExists( $dataType ) {
-		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
-
-		return in_array( $dataType, $dataTypeFactory->getTypeIds() );
+	private function dataTypeExists( string $dataType ): bool {
+		return in_array( $dataType, $this->dataTypeFactory->getTypeIds() );
 	}
 
 	/**
@@ -154,9 +156,8 @@ class SpecialNewProperty extends SpecialNewEntity {
 			]
 		];
 
-		$dataTypeFactory = WikibaseRepo::getDefaultInstance()->getDataTypeFactory();
 		$selector = new DataTypeSelector(
-			$dataTypeFactory->getTypes(),
+			$this->dataTypeFactory->getTypes(),
 			$this->getLanguage()->getCode()
 		);
 

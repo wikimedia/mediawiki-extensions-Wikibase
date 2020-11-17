@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\Specials\SpecialListProperties;
 use Wikibase\Repo\Specials\SpecialListPropertiesDispatchingFactory;
@@ -23,7 +24,9 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', true );
 
-		$specialPage = SpecialListPropertiesDispatchingFactory::factory();
+		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
+			new DataTypeFactory( [] )
+		);
 
 		$this->assertInstanceOf( SpecialListFederatedProperties::class, $specialPage );
 	}
@@ -32,7 +35,9 @@ class SpecialListPropertiesDispatchingFactoryTest extends TestCase {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$wikibaseRepo->getSettings()->setSetting( 'federatedPropertiesEnabled', false );
 
-		$specialPage = SpecialListPropertiesDispatchingFactory::factory();
+		$specialPage = SpecialListPropertiesDispatchingFactory::factory(
+			new DataTypeFactory( [] )
+		);
 
 		$this->assertInstanceOf( SpecialListProperties::class, $specialPage );
 	}
