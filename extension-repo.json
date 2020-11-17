@@ -18,7 +18,10 @@
 		},
 		"wbeditentity": {
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
-			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory",
+			"services": [
+				"WikibaseRepo.DataTypeDefinitions"
+			]
 		},
 		"wbcreateredirect": {
 			"class": "\\Wikibase\\Repo\\Api\\CreateRedirect",
@@ -186,7 +189,12 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialSetSiteLink::factory"
 		},
-		"ListDatatypes": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
+		"ListDatatypes": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialListDatatypes",
+			"services": [
+				"WikibaseRepo.DataTypeDefinitions"
+			]
+		},
 		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
 		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
 		"EntityPage": {
