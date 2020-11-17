@@ -403,19 +403,12 @@ class WikibaseRepo {
 	 * @return self
 	 */
 	private static function newInstance() {
-		$dataTypeDefinitionsArray = self::getDefaultDataTypes();
-		Hooks::run( 'WikibaseRepoDataTypes', [ &$dataTypeDefinitionsArray ] );
+		$mwServices = MediaWikiServices::getInstance();
 
-		$entityTypeDefinitionsArray = self::getDefaultEntityTypes();
-		Hooks::run( 'WikibaseRepoEntityTypes', [ &$entityTypeDefinitionsArray ] );
+		$dataTypeDefinitions = $mwServices->getService( 'WikibaseRepo.DataTypeDefinitions' );
+		$entityTypeDefinitions = $mwServices->getService( 'WikibaseRepo.EntityTypeDefinitions' );
 
 		$settings = WikibaseSettings::getRepoSettings();
-
-		$dataTypeDefinitions = new DataTypeDefinitions(
-			$dataTypeDefinitionsArray,
-			$settings->getSetting( 'disabledDataTypes' )
-		);
-		$entityTypeDefinitions = new EntityTypeDefinitions( $entityTypeDefinitionsArray );
 
 		return new self(
 			$settings,
@@ -678,23 +671,6 @@ class WikibaseRepo {
 		}
 
 		return $this->dataTypeFactory;
-	}
-
-	private static function getDefaultDataTypes() {
-		$baseDataTypes = require __DIR__ . '/../../lib/WikibaseLib.datatypes.php';
-		$repoDataTypes = require __DIR__ . '/../WikibaseRepo.datatypes.php';
-
-		return array_merge_recursive( $baseDataTypes, $repoDataTypes );
-	}
-
-	/**
-	 * @return array[]
-	 */
-	private static function getDefaultEntityTypes() {
-		$baseEntityTypes = require __DIR__ . '/../../lib/WikibaseLib.entitytypes.php';
-		$repoEntityTypes = require __DIR__ . '/../WikibaseRepo.entitytypes.php';
-
-		return array_merge_recursive( $baseEntityTypes, $repoEntityTypes );
 	}
 
 	/**
