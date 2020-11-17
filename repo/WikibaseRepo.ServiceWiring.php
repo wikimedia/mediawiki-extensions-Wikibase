@@ -3,9 +3,12 @@
 declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
+use ValueParsers\NullParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\ValueParserFactory;
+use Wikibase\Repo\WikibaseRepo;
 
 return [
 	'WikibaseRepo.DataTypeDefinitions' => function ( MediaWikiServices $services ): DataTypeDefinitions {
@@ -35,5 +38,28 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.ValueParserFactory' => function ( MediaWikiServices $services ): ValueParserFactory {
+		$dataTypeDefinitions = WikibaseRepo::getDataTypeDefinitions( $services );
+		$callbacks = $dataTypeDefinitions->getParserFactoryCallbacks();
+
+		// For backwards-compatibility, also register parsers under legacy names,
+		// for use with the deprecated 'parser' parameter of the wbparsevalue API module.
+		$prefixedCallbacks = $dataTypeDefinitions->getParserFactoryCallbacks(
+			DataTypeDefinitions::PREFIXED_MODE
+		);
+		if ( isset( $prefixedCallbacks['VT:wikibase-entityid'] ) ) {
+			$callbacks['wikibase-entityid'] = $prefixedCallbacks['VT:wikibase-entityid'];
+		}
+		if ( isset( $prefixedCallbacks['VT:globecoordinate'] ) ) {
+			$callbacks['globecoordinate'] = $prefixedCallbacks['VT:globecoordinate'];
+		}
+		// 'null' is not a datatype. Kept for backwards compatibility.
+		$callbacks['null'] = function() {
+			return new NullParser();
+		};
+
+		return new ValueParserFactory( $callbacks );
 	},
 ];
