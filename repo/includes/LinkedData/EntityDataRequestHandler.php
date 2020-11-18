@@ -17,7 +17,6 @@ use Wikibase\DataModel\Services\Lookup\EntityRedirectLookupException;
 use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
@@ -69,11 +68,6 @@ class EntityDataRequestHandler {
 	private $entityRedirectLookup;
 
 	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
-
-	/**
 	 * @var EntityDataFormatProvider
 	 */
 	private $entityDataFormatProvider;
@@ -116,7 +110,6 @@ class EntityDataRequestHandler {
 	/**
 	 * @param EntityDataUriManager $uriManager
 	 * @param HtmlCacheUpdater $htmlCacheUpdater
-	 * @param EntityTitleLookup $entityTitleLookup
 	 * @param EntityIdParser $entityIdParser
 	 * @param EntityRevisionLookup $entityRevisionLookup
 	 * @param EntityRedirectLookup $entityRedirectLookup
@@ -132,7 +125,6 @@ class EntityDataRequestHandler {
 	public function __construct(
 		EntityDataUriManager $uriManager,
 		HtmlCacheUpdater $htmlCacheUpdater,
-		EntityTitleLookup $entityTitleLookup,
 		EntityIdParser $entityIdParser,
 		EntityRevisionLookup $entityRevisionLookup,
 		EntityRedirectLookup $entityRedirectLookup,
@@ -147,7 +139,6 @@ class EntityDataRequestHandler {
 	) {
 		$this->uriManager = $uriManager;
 		$this->htmlCacheUpdater = $htmlCacheUpdater;
-		$this->entityTitleLookup = $entityTitleLookup;
 		$this->entityIdParser = $entityIdParser;
 		$this->entityRevisionLookup = $entityRevisionLookup;
 		$this->entityRedirectLookup = $entityRedirectLookup;

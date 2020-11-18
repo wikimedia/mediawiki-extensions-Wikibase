@@ -184,7 +184,6 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 		$handler = new EntityDataRequestHandler(
 			$uriManager,
 			$mockHtmlCacheUpdater,
-			$titleLookup,
 			$wikibaseRepo->getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
