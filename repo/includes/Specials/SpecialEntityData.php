@@ -2,6 +2,7 @@
 
 namespace Wikibase\Repo\Specials;
 
+use HtmlCacheUpdater;
 use HttpError;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -45,7 +46,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
-	public static function factory(): self {
+	public static function factory( HtmlCacheUpdater $htmlCacheUpdater ): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -77,7 +78,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$entityDataRequestHandler = new EntityDataRequestHandler(
 			$wikibaseRepo->getEntityDataUriManager(),
-			$wikibaseRepo->getHtmlCacheUpdater(),
+			$htmlCacheUpdater,
 			$entityIdParser,
 			$entityRevisionLookup,
 			$entityRedirectLookup,

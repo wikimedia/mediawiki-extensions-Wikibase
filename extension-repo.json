@@ -208,7 +208,10 @@
 		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
 		"EntityData": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityData",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
+			"services": [
+				"HtmlCacheUpdater"
+			]
 		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
