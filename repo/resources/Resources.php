@@ -292,7 +292,7 @@ return call_user_func( function() {
 
 		'wikibase.experts.modules' => $moduleTemplate + [
 				'factory' => function () {
-					return WikibaseRepo::getDefaultInstance()->getPropertyValueExpertsModule();
+					return WikibaseRepo::getPropertyValueExpertsModule();
 				}
 		],
 

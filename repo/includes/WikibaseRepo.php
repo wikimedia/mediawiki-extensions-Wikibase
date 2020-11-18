@@ -2236,8 +2236,9 @@ class WikibaseRepo {
 		return $this->entitySourceDefinitions->getConceptBaseUris();
 	}
 
-	public function getPropertyValueExpertsModule() {
-		return new PropertyValueExpertsModule( self::getDataTypeDefinitions() );
+	public static function getPropertyValueExpertsModule( ContainerInterface $services = null ): PropertyValueExpertsModule {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.PropertyValueExpertsModule' );
 	}
 
 	/**

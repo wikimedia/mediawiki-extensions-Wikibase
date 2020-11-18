@@ -7,6 +7,7 @@ use ValueParsers\NullParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Modules\PropertyValueExpertsModule;
 use Wikibase\Lib\WikibaseSettings;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -44,6 +45,10 @@ return [
 		$services->getHookContainer()->run( 'WikibaseRepoEntityTypes', [ &$entityTypes ] );
 
 		return new EntityTypeDefinitions( $entityTypes );
+	},
+
+	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {
+		return new PropertyValueExpertsModule( WikibaseRepo::getDataTypeDefinitions( $services ) );
 	},
 
 	'WikibaseRepo.ValueParserFactory' => function ( MediaWikiServices $services ): ValueParserFactory {
