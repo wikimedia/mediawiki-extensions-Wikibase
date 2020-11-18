@@ -23,6 +23,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialEntityData extends SpecialWikibasePage {
 
+	public const SPECIAL_PAGE_NAME = 'EntityData';
+
 	/**
 	 * @var EntityDataRequestHandler|null
 	 */
@@ -34,7 +36,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 	private $entityDataFormatProvider = null;
 
 	public function __construct() {
-		parent::__construct( 'EntityData' );
+		parent::__construct( self::SPECIAL_PAGE_NAME );
 	}
 
 	/**
