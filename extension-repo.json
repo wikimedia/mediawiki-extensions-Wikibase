@@ -206,7 +206,10 @@
 			]
 		},
 		"DispatchStats": "Wikibase\\Repo\\Specials\\SpecialDispatchStats",
-		"EntityData": "Wikibase\\Repo\\Specials\\SpecialEntityData",
+		"EntityData": {
+			"class": "Wikibase\\Repo\\Specials\\SpecialEntityData",
+			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory"
+		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::factory"

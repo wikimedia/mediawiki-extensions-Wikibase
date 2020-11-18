@@ -50,14 +50,14 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	const URI_DATA = 'http://data.acme.test/';
 
 	protected function newSpecialPage() {
-		$page = new SpecialEntityData();
+		$page = new SpecialEntityData(
+			$this->newRequestHandler(),
+			$this->newEntityDataFormatProvider()
+		);
 
 		// why is this needed?
 		$page->getContext()->setOutput( new OutputPage( $page->getContext() ) );
 		$page->getContext()->setLanguage( 'qqx' );
-
-		$page->setRequestHandler( $this->newRequestHandler() );
-		$page->setEntityDataFormatProvider( $this->newEntityDataFormatProvider() );
 
 		return $page;
 	}

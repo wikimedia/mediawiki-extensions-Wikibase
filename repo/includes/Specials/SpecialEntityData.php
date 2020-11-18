@@ -26,58 +26,31 @@ class SpecialEntityData extends SpecialWikibasePage {
 	public const SPECIAL_PAGE_NAME = 'EntityData';
 
 	/**
-	 * @var EntityDataRequestHandler|null
+	 * @var EntityDataRequestHandler
 	 */
-	private $requestHandler = null;
+	private $requestHandler;
 
 	/**
-	 * @var EntityDataFormatProvider|null
+	 * @var EntityDataFormatProvider
 	 */
-	private $entityDataFormatProvider = null;
+	private $entityDataFormatProvider;
 
-	public function __construct() {
+	public function __construct(
+		EntityDataRequestHandler $requestHandler,
+		EntityDataFormatProvider $entityDataFormatProvider
+	) {
 		parent::__construct( self::SPECIAL_PAGE_NAME );
-	}
 
-	/**
-	 * Sets the request handler to be used by the special page.
-	 * May be used when a particular instance of EntityDataRequestHandler is already
-	 * known, e.g. during testing.
-	 *
-	 * If no request handler is set using this method, a default handler is created
-	 * on demand by initDependencies().
-	 *
-	 * @param EntityDataRequestHandler $requestHandler
-	 */
-	public function setRequestHandler( EntityDataRequestHandler $requestHandler ) {
 		$this->requestHandler = $requestHandler;
+		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
-	/**
-	 * Initialize any un-initialized members from global context.
-	 * In particular, this initializes $this->requestHandler
-	 *
-	 * This is called by
-	 */
-	protected function initDependencies() {
-		if ( $this->requestHandler === null ) {
-			$this->requestHandler = $this->newDefaultRequestHandler();
-		}
-	}
-
-	/**
-	 * Creates a EntityDataRequestHandler based on global defaults.
-	 *
-	 * @return EntityDataRequestHandler
-	 */
-	private function newDefaultRequestHandler() {
+	public static function factory(): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		if ( $this->entityDataFormatProvider === null ) {
-			$this->entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
-		}
+		$entityDataFormatProvider = $wikibaseRepo->getEntityDataFormatProvider();
 
 		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
@@ -90,7 +63,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
-			$this->entityDataFormatProvider,
+			$entityDataFormatProvider,
 			$wikibaseRepo->getCompactBaseDataModelSerializerFactory(),
 			$wikibaseRepo->getCompactEntitySerializer(),
 			$wikibaseRepo->getSiteLookup(),
@@ -98,18 +71,18 @@ class SpecialEntityData extends SpecialWikibasePage {
 		);
 
 		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataCdnMaxAge' );
-		$formats = $this->entityDataFormatProvider->getAllowedFormats();
+		$formats = $entityDataFormatProvider->getAllowedFormats();
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
 
-		return new EntityDataRequestHandler(
+		$entityDataRequestHandler = new EntityDataRequestHandler(
 			$wikibaseRepo->getEntityDataUriManager(),
 			$wikibaseRepo->getHtmlCacheUpdater(),
 			$entityIdParser,
 			$entityRevisionLookup,
 			$entityRedirectLookup,
 			$serializationService,
-			$this->entityDataFormatProvider,
+			$entityDataFormatProvider,
 			$wikibaseRepo->getLogger(),
 			$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
@@ -117,6 +90,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wgUseCdn,
 			$wgApiFrameOptions
 		);
+
+		return new self( $entityDataRequestHandler, $entityDataFormatProvider );
 	}
 
 	/**
@@ -127,8 +102,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 	 * @throws HttpError
 	 */
 	public function execute( $subPage ) {
-		$this->initDependencies();
-
 		// If there is no ID, show an HTML form
 		// TODO: Don't do this if HTML is not acceptable according to HTTP headers.
 		if ( !$this->requestHandler->canHandleRequest( $subPage, $this->getRequest() ) ) {
@@ -152,17 +125,6 @@ class SpecialEntityData extends SpecialWikibasePage {
 			'wikibase-entitydata-text',
 			[ $this->getOutput()->getLanguage()->commaList( $supportedFormats ) ]
 		);
-	}
-
-	/**
-	 * @param EntityDataFormatProvider $entityDataFormatProvider
-	 *
-	 * TODO: Inject them
-	 */
-	public function setEntityDataFormatProvider(
-		EntityDataFormatProvider $entityDataFormatProvider
-	) {
-		$this->entityDataFormatProvider = $entityDataFormatProvider;
 	}
 
 }
