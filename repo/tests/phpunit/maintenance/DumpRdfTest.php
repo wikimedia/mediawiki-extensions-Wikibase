@@ -5,10 +5,8 @@ namespace Wikibase\Repo\Tests\Maintenance;
 use DataValues\StringValue;
 use MediaWikiLangTestCase;
 use TestSites;
-use Title;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
-use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
@@ -34,8 +32,8 @@ use Wikibase\DataModel\Term\Fingerprint;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Maintenance\DumpRdf;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Store\Sql\SqlEntityIdPagerFactory;
@@ -179,7 +177,7 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 				[ '' => '' ],
 				[ '' => '' ]
 			),
-			$this->getEntityTitleLookup()
+			$this->createMock( EntityContentFactory::class )
 		);
 
 		return $dumpScript;
@@ -301,20 +299,6 @@ class DumpRdfTest extends MediaWikiLangTestCase {
 
 	private function fixLineEndings( $string ) {
 		return preg_replace( '~(*BSR_ANYCRLF)\R~', "\n", $string );
-	}
-
-	/**
-	 * @return EntityTitleLookup
-	 */
-	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
-			->method( 'getTitleForId' )
-			->will( $this->returnCallback( function( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
-			} ) );
-
-		return $entityTitleLookup;
 	}
 
 }

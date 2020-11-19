@@ -20,9 +20,9 @@ use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Lib\Tests\MockRepository;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\Rdf\RdfVocabulary;
@@ -90,12 +90,16 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'wikibase-item' ) );
 
-		$titleLookup = $this->createMock( EntityTitleLookup::class );
-		$titleLookup->expects( $this->any() )
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		// general EntityTitleLookup interface
+		$entityContentFactory->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
+		// EntityContentFactory-specific method – should be unused since we configure no page props
+		$entityContentFactory->expects( $this->never() )
+			->method( 'newFromEntity' );
 
 		$serializerFactory = new SerializerFactory(
 			new DataValueSerializer(),
@@ -110,7 +114,7 @@ class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 
 		return new EntityDataSerializationService(
 			$this->getMockRepository(),
-			$titleLookup,
+			$entityContentFactory,
 			$dataTypeLookup,
 			$rdfBuilder,
 			$wikibaseRepo->getEntityRdfBuilderFactory(),

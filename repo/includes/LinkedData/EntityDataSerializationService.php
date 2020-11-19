@@ -8,7 +8,6 @@ use ApiResult;
 use DerivativeContext;
 use DerivativeRequest;
 use MWException;
-use PageProps;
 use RequestContext;
 use Serializers\Serializer;
 use SiteLookup;
@@ -18,9 +17,9 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
 use Wikibase\Repo\Rdf\RdfBuilder;
@@ -50,10 +49,8 @@ class EntityDataSerializationService {
 	 */
 	private $entityLookup = null;
 
-	/**
-	 * @var EntityTitleLookup
-	 */
-	private $entityTitleLookup;
+	/** @var EntityContentFactory */
+	private $entityContentFactory;
 
 	/**
 	 * @var SerializerFactory
@@ -102,7 +99,7 @@ class EntityDataSerializationService {
 
 	public function __construct(
 		EntityLookup $entityLookup,
-		EntityTitleLookup $entityTitleLookup,
+		EntityContentFactory $entityContentFactory,
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
 		EntityRdfBuilderFactory $entityRdfBuilderFactory,
@@ -113,7 +110,7 @@ class EntityDataSerializationService {
 		RdfVocabulary $rdfVocabulary
 	) {
 		$this->entityLookup = $entityLookup;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityContentFactory = $entityContentFactory;
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
 		$this->entityRdfBuilderFactory = $entityRdfBuilderFactory;
@@ -216,7 +213,7 @@ class EntityDataSerializationService {
 				$entityRevision->getTimestamp()
 			);
 
-			$rdfBuilder->addEntityPageProps( $entityRevision->getEntity()->getId() );
+			$rdfBuilder->addEntityPageProps( $entityRevision->getEntity() );
 
 			$rdfBuilder->addEntity( $entityRevision->getEntity() );
 			$rdfBuilder->resolveMentionedEntities( $this->entityLookup );
@@ -362,10 +359,8 @@ class EntityDataSerializationService {
 			$this->getFlavor( $flavorName ),
 			$rdfWriter,
 			new HashDedupeBag(),
-			$this->entityTitleLookup
+			$this->entityContentFactory
 		);
-
-		$rdfBuilder->setPageProps( PageProps::getInstance() );
 
 		return $rdfBuilder;
 	}
@@ -392,7 +387,7 @@ class EntityDataSerializationService {
 
 		$resultBuilder = new ResultBuilder(
 			$res,
-			$this->entityTitleLookup,
+			$this->entityContentFactory,
 			$this->serializerFactory,
 			$this->entitySerializer,
 			$this->siteLookup,

@@ -3,7 +3,6 @@
 namespace Wikibase\Repo\Tests\Rdf;
 
 use MediaWikiIntegrationTestCase;
-use PageProps;
 use SiteLookup;
 use Title;
 use Wikibase\DataAccess\EntitySource;
@@ -13,6 +12,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Rdf\DedupeBag;
 use Wikibase\Repo\Rdf\EntityRdfBuilderFactory;
 use Wikibase\Repo\Rdf\HashDedupeBag;
@@ -25,6 +26,7 @@ use Wikibase\Repo\Rdf\SiteLinksRdfBuilder;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Purtle\NTriplesRdfWriter;
 use Wikimedia\Purtle\RdfWriter;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\Rdf\RdfBuilder
@@ -140,6 +142,12 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 
 		$siteLookup = $this->getTestData()->getSiteLookup();
 
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		// this default EntityContentFactory expects that page props are disabled;
+		// for tests with page props, override it with TestingAccessWrapper afterwards
+		$entityContentFactory->expects( $this->never() )
+			->method( 'newFromEntity' );
+
 		// Note: using the actual factory here makes this an integration test!
 		// FIXME: we want to inject an ExternalIdentifierRdfBuilder here somehow!
 		$valueBuilderFactory = WikibaseRepo::getDefaultInstance()->getValueSnakRdfBuilderFactory();
@@ -153,7 +161,7 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 			$produce,
 			$emitter,
 			$dedup,
-			$this->getEntityTitleLookup()
+			$entityContentFactory
 		);
 
 		$builder->startDocument();
@@ -409,29 +417,21 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	/**
-	 * @return PageProps
-	 */
-	private function getPropsMock() {
-		$propsMock = $this->getMockBuilder( PageProps::class )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$propsMock->method( 'getProperties' )
-			->willReturnCallback( function ( Title $title, $propertyNames ) {
-				$props = [];
-				foreach ( $propertyNames as $prop ) {
-					if ( $prop[0] == 'X' ) {
-						continue;
-					}
-					$props[$prop] = "test$prop";
-					// Numeric one
-					$props["len$prop"] = strlen( $prop );
-				}
-				return [ 'fakeID' => $props ];
+	private function getContentFactoryMock(): EntityContentFactory {
+		$contentFactoryMock = $this->createMock( EntityContentFactory::class );
+		$contentFactoryMock->method( 'newFromEntity' )
+			->willReturnCallback( function ( EntityDocument $entity ): EntityContent {
+				$contentMock = $this->createMock( EntityContent::class );
+				$contentMock->method( 'getEntityPageProperties' )
+					->willReturn( [
+						'claims' => 'testclaims',
+						'lenclaims' => strlen( 'claims' ),
+						'sitelinks' => 'testsitelinks',
+						'lensitelinks' => strlen( 'sitelinks' ),
+					] );
+				return $contentMock;
 			} );
-
-		return $propsMock;
+		return $contentFactoryMock;
 	}
 
 	/**
@@ -456,9 +456,10 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL, null, $vocab );
 
-		$builder->setPageProps( $this->getPropsMock() );
+		TestingAccessWrapper::newFromObject( $builder )->entityContentFactory
+			= $this->getContentFactoryMock();
 
-		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' ) );
 		$data = $builder->getRDF();
 
 		$this->helper->assertNTriplesEqualsDataset( $name, $data );
@@ -483,18 +484,14 @@ class RdfBuilderTest extends MediaWikiIntegrationTestCase {
 		);
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL & ~RdfProducer::PRODUCE_PAGE_PROPS, null, $vocab );
 
-		$builder->setPageProps( $this->getPropsMock() );
-
-		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' ) );
 		$data = $builder->getRDF();
 		$this->assertSame( "", $data, "Should return empty string" );
 
 		// Props disabled by config of vocabulary
 		$builder = $this->newRdfBuilder( RdfProducer::PRODUCE_ALL );
 
-		$builder->setPageProps( $this->getPropsMock() );
-
-		$builder->addEntityPageProps( $this->getEntityData( 'Q9' )->getId() );
+		$builder->addEntityPageProps( $this->getEntityData( 'Q9' ) );
 		$data = $builder->getRDF();
 		$this->assertSame( "", $data, "Should return empty string" );
 	}

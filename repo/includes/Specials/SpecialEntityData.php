@@ -55,12 +55,11 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$entityRevisionLookup = $wikibaseRepo->getEntityRevisionLookup();
 		$entityRedirectLookup = $wikibaseRepo->getStore()->getEntityRedirectLookup();
-		$titleLookup = $wikibaseRepo->getEntityTitleLookup();
 		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getStore()->getEntityLookup(),
-			$titleLookup,
+			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getValueSnakRdfBuilderFactory(),
 			$wikibaseRepo->getEntityRdfBuilderFactory(),
