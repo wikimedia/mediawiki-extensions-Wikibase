@@ -142,7 +142,8 @@ class RdfVocabulary {
 	 * @param string[] $canonicalLanguageCodes Mapping of non-standard to canonical language codes.
 	 * @param string[] $dataTypeUris Mapping of property data type IDs to their URIs,
 	 *                 if different from the default mapping.
-	 * @param string[][] $pagePropertyDefs Mapping of page props: pageProp => wikibase predicate
+	 * @param string[][] $pagePropertyDefs Mapping of page props, e.g.:
+	 *                 pageProp => [ 'name' => wikibase predicate, 'type' => integer ]
 	 *                 All predicates will be prefixed with wikibase:
 	 * @param string $licenseUrl
 	 */
@@ -507,7 +508,7 @@ class RdfVocabulary {
 	 * Get the map of configured page properties
 	 * @return string[][]
 	 */
-	public function getPageProperties() {
+	public function getPagePropertyDefs() {
 		return $this->pagePropertyDefs;
 	}
 

@@ -219,8 +219,8 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 	 *
 	 * @return string[][]
 	 */
-	public function getPageProperties() {
-		return $this->vocabulary->getPageProperties();
+	public function getPagePropertyDefs() {
+		return $this->vocabulary->getPagePropertyDefs();
 	}
 
 	/**
@@ -329,16 +329,16 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		if ( !$this->shouldProduce( RdfProducer::PRODUCE_PAGE_PROPS ) ) {
 			return;
 		}
-		$props = $this->getPageProperties();
-		if ( !$props ) {
+		$pagePropertyDefs = $this->getPagePropertyDefs();
+		if ( !$pagePropertyDefs ) {
 			return;
 		}
 		$content = $this->entityContentFactory->newFromEntity( $entity );
-		$entityProps = array_intersect_key(
+		$entityPageProperties = array_intersect_key(
 			$content->getEntityPageProperties(),
-			$props
+			$pagePropertyDefs
 		);
-		if ( !$entityProps ) {
+		if ( !$entityPageProperties ) {
 			return;
 		}
 
@@ -346,17 +346,17 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 		$entityRepositoryName = $this->vocabulary->getEntityRepositoryName( $entityId );
 		$entityLName = $this->vocabulary->getEntityLName( $entityId );
 
-		foreach ( $entityProps as $name => $value ) {
-			if ( !isset( $props[$name]['name'] ) ) {
+		foreach ( $entityPageProperties as $name => $value ) {
+			if ( !isset( $pagePropertyDefs[$name]['name'] ) ) {
 				continue;
 			}
 
-			if ( isset( $props[$name]['type'] ) ) {
-				settype( $value, $props[$name]['type'] );
+			if ( isset( $pagePropertyDefs[$name]['type'] ) ) {
+				settype( $value, $pagePropertyDefs[$name]['type'] );
 			}
 
 			$this->writer->about( $this->vocabulary->dataNamespaceNames[$entityRepositoryName], $entityLName )
-				->say( RdfVocabulary::NS_ONTOLOGY, $props[$name]['name'] )
+				->say( RdfVocabulary::NS_ONTOLOGY, $pagePropertyDefs[$name]['name'] )
 				->value( $value );
 		}
 	}
