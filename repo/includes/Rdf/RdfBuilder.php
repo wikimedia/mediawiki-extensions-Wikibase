@@ -334,10 +334,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 			return;
 		}
 		$content = $this->entityContentFactory->newFromEntity( $entity );
-		$entityPageProperties = array_intersect_key(
-			$content->getEntityPageProperties(),
-			$pagePropertyDefs
-		);
+		$entityPageProperties = $content->getEntityPageProperties();
 		if ( !$entityPageProperties ) {
 			return;
 		}
