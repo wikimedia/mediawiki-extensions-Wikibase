@@ -72,7 +72,7 @@ class ChangeOpDeserializerFactoryTest extends \PHPUnit\Framework\TestCase {
 			),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			new SiteLinkTargetProvider( $wikibaseRepo->getSiteLookup(), [] ),
-			$wikibaseRepo->getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser(),
 			$wikibaseRepo->getStringNormalizer(),
 			[]
 		);

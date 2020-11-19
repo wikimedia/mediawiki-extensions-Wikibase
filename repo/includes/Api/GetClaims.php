@@ -88,7 +88,11 @@ class GetClaims extends ApiBase {
 		$this->entityLoadingHelper = $entityLoadingHelperInstantiator( $this );
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
@@ -97,7 +101,7 @@ class GetClaims extends ApiBase {
 			$moduleName,
 			$wikibaseRepo->getStatementGuidValidator(),
 			$wikibaseRepo->getStatementGuidParser(),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );

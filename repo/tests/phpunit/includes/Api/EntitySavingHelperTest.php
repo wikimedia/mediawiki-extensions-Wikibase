@@ -140,7 +140,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 			'allowCreation' => true,
 			'params' => [ 'entity' => 'M7' ],
 			'entityId' => new MediaInfoId( 'M7' ),
-			'EntityIdParser' => WikibaseRepo::getDefaultInstance()->getEntityIdParser()
+			'EntityIdParser' => WikibaseRepo::getEntityIdParser()
 		] );
 
 		$return = $helper->loadEntity();

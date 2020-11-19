@@ -75,14 +75,18 @@ class MergeItems extends ApiBase {
 		$this->resultBuilder = $resultBuilderInstantiator( $this );
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
 		return new self(
 			$mainModule,
 			$moduleName,
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->newItemMergeInteractor( $mainModule->getContext() ),
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			function ( $module ) use ( $apiHelperFactory ) {

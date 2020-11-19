@@ -61,14 +61,19 @@ class ListSubscribers extends ApiQueryBase {
 		$this->siteLookup = $siteLookup;
 	}
 
-	public static function factory( ApiQuery $apiQuery, string $moduleName, SiteLookup $siteLookup ): self {
+	public static function factory(
+		ApiQuery $apiQuery,
+		string $moduleName,
+		SiteLookup $siteLookup,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelper = $wikibaseRepo->getApiHelperFactory( $apiQuery->getContext() );
 		return new self(
 			$apiQuery,
 			$moduleName,
 			$apiHelper->getErrorReporter( $apiQuery ),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$siteLookup
 		);
 	}

@@ -7,6 +7,7 @@ namespace Wikibase\Repo\Api;
 use ApiBase;
 use ApiMain;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
@@ -81,14 +82,18 @@ class RemoveClaims extends ApiBase {
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);

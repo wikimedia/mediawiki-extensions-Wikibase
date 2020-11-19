@@ -49,9 +49,11 @@ class SpecialEntityPage extends SpecialWikibasePage {
 		];
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityIdParser $entityIdParser
+	): self {
 		return new self(
-			WikibaseRepo::getDefaultInstance()->getEntityIdParser(),
+			$entityIdParser,
 			WikibaseRepo::getDefaultInstance()->getEntityTitleLookup()
 		);
 	}

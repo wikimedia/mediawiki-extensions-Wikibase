@@ -112,13 +112,13 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 
 	public static function factory(
 		InterwikiLookup $interwikiLookup,
-		SpecialPageFactory $specialPageFactory
+		SpecialPageFactory $specialPageFactory,
+		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
 		$context = RequestContext::getMain();
 
-		$entityIdParser = $wikibaseRepo->getEntityIdParser();
 		return new self(
 			$wikibaseRepo->getEntityExistenceChecker(),
 			$entityIdParser,

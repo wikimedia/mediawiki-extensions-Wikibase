@@ -52,7 +52,6 @@ use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataAccess\SingleEntitySourceServices;
 use Wikibase\DataAccess\WikibaseServices;
 use Wikibase\DataModel\DeserializerFactory;
-use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Entity\EntityIdValue;
@@ -258,11 +257,6 @@ class WikibaseRepo {
 	private $entityDeserializer = null;
 
 	/**
-	 * @var EntityIdParser|null
-	 */
-	private $entityIdParser = null;
-
-	/**
 	 * @var EntityIdComposer|null
 	 */
 	private $entityIdComposer = null;
@@ -461,7 +455,7 @@ class WikibaseRepo {
 
 		return new ValidatorBuilders(
 			$this->getEntityLookup(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$urlSchemes,
 			$this->getItemVocabularyBaseUri(),
 			$this->getMonolingualTextLanguages(),
@@ -680,7 +674,7 @@ class WikibaseRepo {
 
 		return new EntityChangeFactory(
 			$this->getEntityDiffer(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$changeClasses,
 			RepoEntityChange::class,
 			$this->getLogger()
@@ -942,17 +936,9 @@ class WikibaseRepo {
 		return $this->snakFactory;
 	}
 
-	/**
-	 * @return EntityIdParser
-	 */
-	public function getEntityIdParser() {
-		if ( $this->entityIdParser === null ) {
-			$this->entityIdParser = new DispatchingEntityIdParser(
-				self::getEntityTypeDefinitions()->getEntityIdBuilders()
-			);
-		}
-
-		return $this->entityIdParser;
+	public static function getEntityIdParser( ContainerInterface $services = null ): EntityIdParser {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.EntityIdParser' );
 	}
 
 	/**
@@ -972,7 +958,7 @@ class WikibaseRepo {
 	 * @return StatementGuidParser
 	 */
 	public function getStatementGuidParser() {
-		return new StatementGuidParser( $this->getEntityIdParser() );
+		return new StatementGuidParser( self::getEntityIdParser() );
 	}
 
 	/**
@@ -1030,7 +1016,7 @@ class WikibaseRepo {
 				$this->getSiteLookup(),
 				$this->settings->getSetting( 'specialSiteLinkGroups' )
 			),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getStringNormalizer(),
 			$this->settings->getSetting( 'siteLinkGroups' )
 		);
@@ -1059,7 +1045,7 @@ class WikibaseRepo {
 	 */
 	public function getStatementGuidValidator() {
 		if ( $this->statementGuidValidator === null ) {
-			$this->statementGuidValidator = new StatementGuidValidator( $this->getEntityIdParser() );
+			$this->statementGuidValidator = new StatementGuidValidator( self::getEntityIdParser() );
 		}
 
 		return $this->statementGuidValidator;
@@ -1109,7 +1095,7 @@ class WikibaseRepo {
 
 			$this->store = new SqlStore(
 				$this->getEntityChangeFactory(),
-				$this->getEntityIdParser(),
+				self::getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getEntityIdLookup(),
 				$this->getEntityTitleLookup(),
@@ -1360,7 +1346,7 @@ class WikibaseRepo {
 			$valueFormatter,
 			$snakFormatter,
 			$this->getContentLanguage(),
-			$this->getEntityIdParser()
+			self::getEntityIdParser()
 		);
 
 		return $formatter;
@@ -1398,7 +1384,7 @@ class WikibaseRepo {
 		return new TermValidatorFactory(
 			$maxLength,
 			$languages,
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getTermsCollisionDetectorFactory(),
 			$this->getTermLookup()
 		);
@@ -1562,7 +1548,7 @@ class WikibaseRepo {
 	 */
 	public function getEntityContentDataCodec() {
 		return new EntityContentDataCodec(
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getStorageEntitySerializer(),
 			$this->getInternalFormatEntityDeserializer(),
 			$this->settings->getSetting( 'maxSerializedEntitySize' ) * 1024
@@ -1576,7 +1562,7 @@ class WikibaseRepo {
 	public function getBaseDataModelDeserializerFactory() {
 		return new DeserializerFactory(
 			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser()
+			self::getEntityIdParser()
 		);
 	}
 
@@ -1586,7 +1572,7 @@ class WikibaseRepo {
 	private function getInternalFormatDeserializerFactory() {
 		return new InternalDeserializerFactory(
 			$this->getDataValueDeserializer(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getAllTypesEntityDeserializer()
 		);
 	}
@@ -1702,7 +1688,7 @@ class WikibaseRepo {
 				// TODO this should perhaps be factored out into a class
 				if ( isset( $value['id'] ) ) {
 					try {
-						return new EntityIdValue( $this->getEntityIdParser()->parse( $value['id'] ) );
+						return new EntityIdValue( self::getEntityIdParser()->parse( $value['id'] ) );
 					} catch ( EntityIdParsingException $parsingException ) {
 						throw new InvalidArgumentException(
 							'Can not parse id \'' . $value['id'] . '\' to build EntityIdValue with',
@@ -1729,7 +1715,7 @@ class WikibaseRepo {
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$siteLinkStore,
 			$this->getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
@@ -1793,7 +1779,7 @@ class WikibaseRepo {
 			$codec,
 			$constraintProvider,
 			$errorLocalizer,
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->getEntityIdLookup(),
 			$this->getLanguageFallbackLabelDescriptionLookupFactory(),
 			$propertyInfoStore,
@@ -1872,7 +1858,7 @@ class WikibaseRepo {
 			$this->newEditEntityFactory( $context ),
 			$this->getBaseDataModelSerializerFactory(),
 			$this->getAllTypesEntitySerializer(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			MediaWikiServices::getInstance()->getPermissionManager(),
 			$this->getStore()->getEntityByLinkedTitleLookup(),
 			$this->getEntityFactory(),
@@ -2261,7 +2247,7 @@ class WikibaseRepo {
 			// TODO: extract
 			$singleSourceServices[$source->getSourceName()] = new SingleEntitySourceServices(
 				$genericServices,
-				$this->getEntityIdParser(),
+				self::getEntityIdParser(),
 				$this->getEntityIdComposer(),
 				$this->getDataValueDeserializer(),
 				$nameTableStoreFactory->getSlotRoles( $source->getDatabaseName() ),
@@ -2377,7 +2363,7 @@ class WikibaseRepo {
 	public function getLinkTargetEntityIdLookup(): LinkTargetEntityIdLookup {
 		return new EntityLinkTargetEntityIdLookup(
 			$this->getEntityNamespaceLookup(),
-			$this->getEntityIdParser(),
+			self::getEntityIdParser(),
 			$this->entitySourceDefinitions,
 			$this->getLocalEntitySource()
 		);
