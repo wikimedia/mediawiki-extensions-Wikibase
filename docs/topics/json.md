@@ -8,7 +8,7 @@ For a specification of the semantics of the data structures described here, see 
 
 Changes to the JSON format are subject to [Stable Interface Policy].
 
-**NOTE: The canonical copy of this document is in Wikibase.git. Changes can be requested by filing a ticket on [https://phabricator.wikimedia.org Phabricator].**
+**NOTE: The canonical copy of this document is in Wikibase.git. Changes can be requested by filing a ticket on [Phabricator](https://phabricator.wikimedia.org).**
 
 ## JSON Flavor {#json_flavour}
 
@@ -201,7 +201,7 @@ while for labels and descriptions the record is associated directly with the lan
 ```
 
 A Statement consists of a main Snak, a (possibly empty) list of qualifier Snaks, and a (possibly empty) list of references.
-A Statement is always associated with a Property (semantically, the Statement is ''about'' the Property), and there can be multiple Statements about the same Property in a single Entity.
+A Statement is always associated with a Property (semantically, the Statement is *about* the Property), and there can be multiple Statements about the same Property in a single Entity.
 This is represented by a map structure that uses Property IDs as keys, and maps them to lists of Statement records.
 
 A Statement record uses the following fields:
@@ -209,14 +209,14 @@ A Statement record uses the following fields:
 * id
   * An arbitrary identifier for the Statement, which is unique across the repository. No assumptions can and shall be made about the identifier's structure, and no guarantees are given that the format will stay the same.
 * type
-  * Always ''statement''. (Historically, ''claim'' used to be another valid value here.)
-* ''mainsnak''
+  * Always *statement*. (Historically, *claim* used to be another valid value here.)
+* mainsnak
   * The Snak representing the value to be associated with the property. See @ref #json_snaks below. The Property specified in the main Snak must be the same as the Property the Statement is associated with.
 * rank
-  * The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either ''preferred'', ''normal'' or ''deprecated''.
+  * The rank expresses whether this value will be used in queries, and shown be visible per default on a client system. The value is either *preferred*, *normal* or *deprecated*.
 * qualifiers
   * Qualifiers provide a context for the primary value, such as the point in time of measurement. Qualifiers are given as lists of snaks, each associated with one property. See @ref #json_qualifiers below.
-* ''references''
+* references
   * References record provenance information for the data in the main Snak and qualifiers. They are given as a list of reference records; see @ref #json_referneces below.
 
 (Historically, there was a distinction between Claims, which had only a main snak and qualifiers, and Statements, which also had references.
@@ -267,18 +267,18 @@ Traces of this distinction may still be found in the serialization or in outdate
 }
 ```
 
-A Snak provides some kind of information about a specific Property of a given Entity. Currently, there are three kinds of Snaks: ''value'', ''somevalue'' or ''novalue''.    A ''value'' snak represents a specific value for the property, which ''novalue'' and ''somevalue'' only express that there is no, or respectively some unknown, value.
+A Snak provides some kind of information about a specific Property of a given Entity. Currently, there are three kinds of Snaks: *value*, *somevalue* or *novalue*.    A *value* snak represents a specific value for the property, which *novalue* and *somevalue* only express that there is no, or respectively some unknown, value.
 
 A Snak is represented by providing the following fields:
 
 * snaktype
-  * The type of the snak. Currently, this is one of ''value'', ''somevalue'' or ''novalue''.
+  * The type of the snak. Currently, this is one of *value*, *somevalue* or *novalue*.
 * property
   * The ID of the property this Snak is about.
 * datatype
-  * The ''datatype'' field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on https://www.wikidata.org/wiki/Special:ListDatatypes.
+  * The *datatype* field indicates how the value of the Snak can be interpreted. The datatypes could be any other of the datatypes listed on https://www.wikidata.org/wiki/Special:ListDatatypes.
 * datavalue
-  * If the snaktype is ''value'', there is a ''datavalue'' field that contains the actual value the Snak associates with the Property. See @ref #json_datavalues below.
+  * If the snaktype is *value*, there is a *datavalue* field that contains the actual value the Snak associates with the Property. See @ref #json_datavalues below.
 
 #### Data Values {#json_datavalues}
 
@@ -303,9 +303,9 @@ A Snak is represented by providing the following fields:
 Data value records represent a value of a specific type. They consist of two fields:
 
 * type
-  * The value type. This defines the structure of the ''value'' field, and is not to be confused with the Snak's data type (which is derived from the Snak's Property's data type). The value type does not allow for interpretation of the value, only for processing of the raw structure. As an example, a link to a web page may use the data type “url”, but have the value type “string”.
+  * The value type. This defines the structure of the *value* field, and is not to be confused with the Snak's data type (which is derived from the Snak's Property's data type). The value type does not allow for interpretation of the value, only for processing of the raw structure. As an example, a link to a web page may use the data type “url”, but have the value type “string”.
 * value
-  * The actual value. This field may contain a single string, a number, or a complex structure. The structure is defined by the ''type'' field.
+  * The actual value. This field may contain a single string, a number, or a complex structure. The structure is defined by the *type* field.
 
 Some value types and their structure are defined in the following sections.
 
@@ -336,11 +336,11 @@ Strings are given as simple string literals.
 Entity IDs are used to reference entities on the same repository. They are represented
 by a map structure containing three fields:
 
-* ''entity-type'': defines the type of the entity, such as ''item'' or ''property''.
-* ''id'': the full entity ID.
-* ''numeric-id'': for some entity types, the numeric part of the entity ID.
+* *entity-type*: defines the type of the entity, such as *item* or *property*.
+* *id*: the full entity ID.
+* *numeric-id*: for some entity types, the numeric part of the entity ID.
 
-''WARNING'': not all entity IDs have a numeric ID – using the full ID is highly recommended.
+**WARNING**: not all entity IDs have a numeric ID – using the full ID is highly recommended.
 
 ##### globecoordinate {#json_datavalues_globe}
 
@@ -365,7 +365,7 @@ by a map structure containing three fields:
   * The coordinate's precision, in (fractions of) degrees, given as a float literal (or an equivalent string).
 * globe
   * The URI of a reference globe. This would typically refer to a data item on wikidata.org. This is usually just an indication of the celestial body (e.g. Q2 = earth), but could be more specific, like WGS 84 or ED50.
-* altitude (''DEPRECATED'')
+* altitude (**DEPRECATED**)
   * No longer used. Will be dropped in the future.
 
 ##### quantity {#json_datavalues_quantity}
@@ -412,35 +412,35 @@ Quantity values are given as a map with the following fields:
 Time values are given as a map with the following fields:
 * time
   * The format and interpretation of this string depends on the calendar model. Currently, only Julian and Gregorian dates are supported.
-  * The format used for Gregorian and Julian dates use a notation resembling ISO 8601. E.g. ''“+1994-01-01T00:00:00Z”''. The year is represented by at least four digits, zeros are added on the left side as needed. Years BCE are represented as negative numbers, using the historical numbering, in which year 0 is undefined, and the year 1 BCE is represented as ''-0001,'' the year 44 BCE is represented as ''-0044'', etc., like XSD 1.0 (ISO 8601:1988) does. In contrast, the [RDF mapping] relies on XSD 1.1 (ISO 8601:2004) dates that use the [proleptic Gregorian calendar] and [astronomical year numbering], where the year 1 BCE is represented as ''+0000'' and the year 44 BCE is represented as ''-0043''. See Wikipedia for more information about the [year zero and ISO 8601].
+  * The format used for Gregorian and Julian dates use a notation resembling ISO 8601. E.g. *“+1994-01-01T00:00:00Z”*. The year is represented by at least four digits, zeros are added on the left side as needed. Years BCE are represented as negative numbers, using the historical numbering, in which year 0 is undefined, and the year 1 BCE is represented as *-0001*, the year 44 BCE is represented as *-0044*, etc., like XSD 1.0 (ISO 8601:1988) does. In contrast, the [RDF mapping] relies on XSD 1.1 (ISO 8601:2004) dates that use the [proleptic Gregorian calendar] and [astronomical year numbering], where the year 1 BCE is represented as *+0000* and the year 44 BCE is represented as *-0043*. See Wikipedia for more information about the [year zero and ISO 8601].
   * Month and day may be 00 if they are unknown or insignificant. The day of the month may have values between 0 and 31 for any month, to accommodate “leap dates” like February 30. Hour, minute, and second are currently unused and should always be 00.
-  * ''Note'': more calendar models using a completely different notation may be supported in the future. Candidates include [Julian day] and the [Hebrew calendar].
-  * ''Note'': the notation for Julian and Gregorian dates may be changed to omit any unknown or insignificant parts. E.g. if only the year 1952 is known, this may in the future be represented as just “''+1952''” instead of currently ''“+1952-00-00T00:00:00Z”'' (which some libraries may turn into something like 1951-12-31) and the 19th century may be represented as “''+18**''”.
+  * *Note*: more calendar models using a completely different notation may be supported in the future. Candidates include [Julian day] and the [Hebrew calendar].
+  * *Note*: the notation for Julian and Gregorian dates may be changed to omit any unknown or insignificant parts. E.g. if only the year 1952 is known, this may in the future be represented as just *“+1952”* instead of currently *“+1952-00-00T00:00:00Z”* (which some libraries may turn into something like 1951-12-31) and the 19th century may be represented as *“+18”*.
 * timezone
   * Signed integer. Currently unused, and should always be 0. In the future, timezone information will be given as an offset from UTC in minutes. For dates before the modern implementation of UTC in 1972, this is the offset of the time zone from UTC. Before the implementation of time zones, this is the longitude of the place of the event, expressed in the range &minus;180° to 180° (positive is east of Greenwich), multiplied by 4 to convert to minutes.
 * calendarmodel
-  * A URI of a calendar model, such as ''gregorian'' or ''julian''. Typically given as the URI of a data item on the repository
+  * A URI of a calendar model, such as *gregorian* or *julian*. Typically given as the URI of a data item on the repository
 * precision
   * To what unit is the given date/time significant? Given as an integer indicating one of the following units:
-** 0: 1 Gigayear
-** 1: 100 Megayears
-** 2: 10 Megayears
-** 3: Megayear
-** 4: 100 Kiloyears
-** 5: 10 Kiloyears
-** 6: millennium (see [Wikibase/DataModel#Dates and times] for details)
-** 7: century (see [Wikibase/DataModel#Dates and times] for details)
-** 8: 10 years
-** 9: years
-** 10: months
-** 11: days
-** 12: hours ''(unused)''
-** 13: minutes ''(unused)''
-** 14: seconds ''(unused)''
-* ''before''
-  * Begin of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
-* ''after''
-  * End of an uncertainty range, given in the unit defined by the ''precision'' field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
+    * 0: 1 Gigayear
+    * 1: 100 Megayears
+    * 2: 10 Megayears
+    * 3: Megayear
+    * 4: 100 Kiloyears
+    * 5: 10 Kiloyears
+    * 6: millennium (see [Wikibase/DataModel#Dates and times] for details)
+    * 7: century (see [Wikibase/DataModel#Dates and times] for details)
+    * 8: 10 years
+    * 9: years
+    * 10: months
+    * 11: days
+    * 12: hours (*unused*)
+    * 13: minutes (*unused*)
+    * 14: seconds (*unused*)
+* *before*
+  * Begin of an uncertainty range, given in the unit defined by the *precision* field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
+* *after*
+  * End of an uncertainty range, given in the unit defined by the *precision* field. This cannot be used to represent a duration. (Currently unused, may be dropped in the future)
 
 ### Qualifiers {#json_qualifiers}
 
@@ -538,7 +538,7 @@ resulting in a map which associates property IDs with one list of snaks each.
 References provide provenance/authority information for the main Snak and qualifiers of an individual Statement.
 Each reference is a set of Snaks structured in a similar way to how qualifiers are represented:
 Snaks about the same property are grouped together in a list and made accessible by putting all these lists into a map,
-using the property IDs as keys. By ''snaks-order'' the order of those snaks is shown by their property IDs.
+using the property IDs as keys. By *snaks-order* the order of those snaks is shown by their property IDs.
 
 ## Sitelinks {#json_sitelinks}
 
@@ -584,9 +584,9 @@ Sitelinks are given as records for each site identifier. Each such record contai
   * The site ID.
 * title
   * The page title.
-* ''badges''
+* badges
   * Any “badges” associated with the page (such as “featured article”). Badges are given as a list of item IDs.
-* ''url''
+* url
   * Optionally, the full URL of the page may be included.
 
 ## Example {#json_example}
