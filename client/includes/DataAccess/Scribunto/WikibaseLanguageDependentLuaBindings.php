@@ -62,6 +62,7 @@ class WikibaseLanguageDependentLuaBindings {
 			// TODO: verify this catch is still needed
 			return [ null, null ];
 		} catch ( LabelDescriptionLookupException $ex ) {
+			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			return [ null, null ];
 		}
 
@@ -92,6 +93,7 @@ class WikibaseLanguageDependentLuaBindings {
 			// TODO: verify this catch is still needed
 			return [ null, null ];
 		} catch ( LabelDescriptionLookupException $ex ) {
+			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			return [ null, null ];
 		}
 

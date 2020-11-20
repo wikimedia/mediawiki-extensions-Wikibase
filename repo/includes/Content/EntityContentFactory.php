@@ -219,6 +219,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 		} catch ( OutOfBoundsException $ex ) {
 			// Not an entity content model
 		} catch ( EntityIdParsingException $ex ) {
+			// @phan-suppress-previous-line PhanPluginDuplicateCatchStatementBody
 			// Not a valid entity page title.
 		}
 

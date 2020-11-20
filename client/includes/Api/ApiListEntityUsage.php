@@ -136,6 +136,7 @@ class ApiListEntityUsage extends ApiQueryGeneratorBase {
 
 		}
 		if ( $entry ) {
+			// @phan-suppress-next-line PhanPossiblyUndeclaredVariable
 			$this->formatPageData( $row, $currentPageId, $entry, $result );
 		}
 	}

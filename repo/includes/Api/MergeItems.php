@@ -134,9 +134,7 @@ class MergeItems extends ApiBase {
 			$this->mergeItems( $fromId, $toId, $ignoreConflicts, $summary, $params['bot'] );
 		} catch ( EntityIdParsingException $ex ) {
 			$this->errorReporter->dieException( $ex, 'invalid-entity-id' );
-		} catch ( ItemMergeException $ex ) {
-			$this->handleException( $ex, $ex->getErrorCode() );
-		} catch ( RedirectCreationException $ex ) {
+		} catch ( ItemMergeException | RedirectCreationException $ex ) {
 			$this->handleException( $ex, $ex->getErrorCode() );
 		}
 	}

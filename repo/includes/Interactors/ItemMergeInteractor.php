@@ -219,9 +219,7 @@ class ItemMergeInteractor {
 			}
 
 			return $revision->getEntity();
-		} catch ( StorageException $ex ) {
-			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( StorageException | RevisionedUnresolvedRedirectException $ex ) {
 			throw new ItemMergeException( $ex->getMessage(), 'cant-load-entity-content', $ex );
 		}
 	}

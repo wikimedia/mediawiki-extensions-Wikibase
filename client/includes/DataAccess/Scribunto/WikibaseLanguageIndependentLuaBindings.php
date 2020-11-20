@@ -290,9 +290,7 @@ class WikibaseLanguageIndependentLuaBindings {
 	public function getReferencedEntityId( EntityId $fromId, PropertyId $propertyId, array $toIds ) {
 		try {
 			$res = $this->referencedEntityIdLookup->getReferencedEntityId( $fromId, $propertyId, $toIds );
-		} catch ( MaxReferenceDepthExhaustedException $e ) {
-			return false;
-		} catch ( MaxReferencedEntityVisitsExhaustedException $e ) {
+		} catch ( MaxReferenceDepthExhaustedException | MaxReferencedEntityVisitsExhaustedException $e ) {
 			return false;
 		}
 

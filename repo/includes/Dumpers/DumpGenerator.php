@@ -309,11 +309,7 @@ abstract class DumpGenerator {
 				if ( $this->limit && $dumpCount >= $this->limit ) {
 					break;
 				}
-			} catch ( EntityLookupException $ex ) {
-				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
-			} catch ( StorageException $ex ) {
-				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
-			} catch ( LogicException $ex ) {
+			} catch ( EntityLookupException | StorageException | LogicException $ex ) {
 				$this->exceptionHandler->handleException( $ex, 'failed-to-dump', 'Failed to dump ' . $entityId );
 			}
 		}
