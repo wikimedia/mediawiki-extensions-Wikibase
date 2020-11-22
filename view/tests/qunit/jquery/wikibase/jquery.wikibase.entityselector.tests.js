@@ -231,7 +231,7 @@
 		var done = assert.async(),
 			hookStub = sinon.stub( mw, 'hook' ),
 			hook = 'HOOK_NAME',
-			emtpyValue = '',
+			emptyValue = '',
 			suggestions = [ { id: '[ID]', label: '[LABEL]', description: '[DESCRIPTION]' } ],
 			promise = $.Deferred().resolve( suggestions ).promise(),
 			$entitySelector = newTestEntitySelector( { searchHookName: hook } ),
@@ -246,7 +246,7 @@
 			callback( suggestions );
 		} } );
 
-		$entitySelector.val( emtpyValue );
+		$entitySelector.val( emptyValue );
 		entitySelector._showDefaultSuggestions();
 
 		assert.deepEqual( updateMenuSpy.getCall( 0 ).args[ 0 ], suggestions, 'Then _updateMenu is called with suggestions' );

@@ -138,7 +138,7 @@ class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 		);
 
 		return [
-			'from emtpy' => [ $empty, $itemContent, $insTags ],
+			'from empty' => [ $empty, $itemContent, $insTags ],
 			'to empty' => [ $itemContent, $empty, $delTags ],
 			'changed' => [ $itemContent, $itemContent2, $changeTags ],
 			'to redirect' => [ $itemContent, $redirectContent, $toRedirTags ],
