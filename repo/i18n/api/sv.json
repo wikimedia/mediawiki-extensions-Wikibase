@@ -7,6 +7,7 @@
 			"McDutchie",
 			"Peki01",
 			"Rockyfelle",
+			"Sabelöga",
 			"WikiPhoenix"
 		]
 	},
@@ -101,8 +102,8 @@
 	"apihelp-wbgetentities-example-11": "Hämta objektet för sidan \"<var>Berlin</var>\" och webbplatsen \"<var>enwiki</var>\" efter att ha normaliserat titeln från \"<var>berlin</var>\"",
 	"apihelp-wbgetentities-example-12": "Hämta webbplatslänkar för objekt <samp>Q42</samp>",
 	"apihelp-wbgetentities-example-13": "Hämta entiteter med ID <samp>Q42</samp> och visa endast webbplatslänkar från \"<var>enwiki</var>\"",
-	"apihelp-wblinktitles-description": "Kopplar ihop två sidor på två olika wikis med ett Wikibase-objekt",
-	"apihelp-wblinktitles-summary": "Kopplar ihop två sidor på två olika wikis med ett Wikibase-objekt.",
+	"apihelp-wblinktitles-description": "Kopplar ihop två sidor på två olika wikier med ett Wikibase-objekt",
+	"apihelp-wblinktitles-summary": "Kopplar ihop två sidor på två olika wikier med ett Wikibase-objekt.",
 	"apihelp-wblinktitles-param-tosite": "En identifierare för webbplatsen på vilken sidan finns.\nAnvänds tillsammans med <var>totitle</var> för att göra en komplett webbplatslänk.",
 	"apihelp-wblinktitles-param-totitle": "Titeln på sidan att associera.\nAnvänd tillsammans med <var>tosite</var> för att göra en komplett webbplatslänk.",
 	"apihelp-wblinktitles-param-fromsite": "En identifierare för webbplatsen på vilken sidan finns.\nAnvänds tillsammans med <var>fromtitle</var> för att göra en komplett webbplatslänk.",

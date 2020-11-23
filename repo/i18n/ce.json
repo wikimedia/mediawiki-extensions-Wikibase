@@ -140,6 +140,7 @@
 	"wikibase-setaliases-label": "Харц цӀе:",
 	"wikibase-setaliases-submit": "Язъе харц цӀерш",
 	"special-setlabeldescriptionaliases": "ХӀоттае билгало, хаам а, псевдонимаш а (синонимаш)",
+	"wikibase-setlabeldescriptionaliases-introfull": "Ахьа язъеш ю цӀерш, хаамаш, харц цӀерш [[:$1]] \"$2\" маттахь. Харц цӀерш массийтта елахь уьш екъало <code>|</code> хьаьркашца.",
 	"wikibase-setlabeldescriptionaliases-label-label": "Билгало:",
 	"wikibase-setlabeldescriptionaliases-description-label": "Цуьнах лаьцна:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Харц цӀерш:",
