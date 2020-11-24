@@ -373,7 +373,7 @@
 	"wikibase-self-conflict-patched": "Redigeringen ble lappet inn i den nyeste versjonen, og overstyrte noen av dine egne mellomliggende endringer.",
 	"wikibase-conflict-patched": "Redigeringen ble lappet inn i den nyeste versjonen.",
 	"wikibase-save-unresolved-redirect": "Støtte på en uløst omdirigering fra $1 til $2 under forsøk på å lagre en endring.",
-	"wikibase-restoreold": "tilbakestill",
+	"wikibase-restoreold": "gjenopprett",
 	"wikibase-entity-summary-restore": "Gjenoppretter revisjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Fjerner revisjon $3 av [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|diskusjon]])",
 	"wikibase-non-entity-diff": "Kan ikke vise diff for en entitet med ikke-entitets-innhold.",
