@@ -356,6 +356,7 @@
 	},
 	"JobClasses": {
 		"CleanTermsIfUnused": "Wikibase\\Lib\\Store\\Sql\\Terms\\CleanTermsIfUnusedJob::getJobSpecification",
+		"PurgeEntityData": "Wikibase\\Repo\\PurgeEntityDataJob::newFromGlobalState",
 		"UpdateRepoOnMove": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnMoveJob",
 		"UpdateRepoOnDelete": "Wikibase\\Repo\\UpdateRepo\\UpdateRepoOnDeleteJob",
 		"DispatchChangeDeletionNotification": "Wikibase\\Repo\\ChangeModification\\DispatchChangeDeletionNotificationJob"
@@ -626,6 +627,7 @@
 		"ApiQuery::moduleManager": "\\Wikibase\\Repo\\RepoHooks::onApiQueryModuleManager",
 		"ArticleDeleteComplete": [
 			"DeleteDispatcher",
+			"EntityDataPurger",
 			"\\Wikibase\\Repo\\RepoHooks::onArticleDeleteComplete"
 		],
 		"ArticleRevisionVisibilitySet": [

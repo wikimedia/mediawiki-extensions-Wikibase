@@ -5,12 +5,16 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\Hooks;
 
 use HtmlCacheUpdater;
+use IJobSpecification;
+use JobQueueGroup;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Title;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\EntityDataPurger;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
+use WikiPage;
 
 /**
  * @covers \Wikibase\Repo\Hooks\EntityDataPurger
@@ -20,6 +24,20 @@ use Wikibase\Repo\LinkedData\EntityDataUriManager;
  * @license GPL-2.0-or-later
  */
 class EntityDataPurgerTest extends TestCase {
+
+	private function mockJobQueueGroupFactory( JobQueueGroup $jobQueueGroup = null ): callable {
+		$factory = $this->getMockBuilder( stdClass::class )
+			->addMethods( [ 'factory' ] )
+			->getMock();
+		if ( $jobQueueGroup !== null ) {
+			$factory->method( 'factory' )
+				->willReturn( $jobQueueGroup );
+		} else {
+			$factory->expects( $this->never() )
+				->method( 'factory' );
+		}
+		return [ $factory, 'factory' ];
+	}
 
 	public function testGivenEntityIdLookupReturnsNull_handlerDoesNothing() {
 		$title = Title::newFromText( 'Project:About' );
@@ -34,7 +52,12 @@ class EntityDataPurgerTest extends TestCase {
 		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 		$htmlCacheUpdater->expects( $this->never() )
 			->method( 'purgeUrls' );
-		$purger = new EntityDataPurger( $entityIdLookup, $entityDataUriManager, $htmlCacheUpdater );
+		$purger = new EntityDataPurger(
+			$entityIdLookup,
+			$entityDataUriManager,
+			$htmlCacheUpdater,
+			$this->mockJobQueueGroupFactory()
+		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
 	}
@@ -56,7 +79,12 @@ class EntityDataPurgerTest extends TestCase {
 		$htmlCacheUpdater->expects( $this->once() )
 			->method( 'purgeUrls' )
 			->with( [ 'urlA/Q1/1', 'urlB/Q1/1' ] );
-		$purger = new EntityDataPurger( $entityIdLookup, $entityDataUriManager, $htmlCacheUpdater );
+		$purger = new EntityDataPurger(
+			$entityIdLookup,
+			$entityDataUriManager,
+			$htmlCacheUpdater,
+			$this->mockJobQueueGroupFactory()
+		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1 ], [] );
 	}
@@ -90,8 +118,65 @@ class EntityDataPurgerTest extends TestCase {
 				'urlA/Q1/2', 'urlB/Q1/2',
 				'urlA/Q1/3', 'urlB/Q1/3',
 			] );
-		$purger = new EntityDataPurger( $entityIdLookup, $entityDataUriManager, $htmlCacheUpdater );
+		$purger = new EntityDataPurger(
+			$entityIdLookup,
+			$entityDataUriManager,
+			$htmlCacheUpdater,
+			$this->mockJobQueueGroupFactory()
+		);
 
 		$purger->onArticleRevisionVisibilitySet( $title, [ 1, 2, 3 ], [] );
+	}
+
+	public function testDeletionHandlerPushesJob() {
+		$title = Title::makeTitle( 0, 'Q123' );
+		$wikiPage = $this->createMock( WikiPage::class );
+		$wikiPage->method( 'getTitle' )
+			->willReturn( $title );
+
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
+		$entityIdLookup->method( 'getEntityIdForTitle' )
+			->with( $title )
+			->willReturn( new ItemId( 'Q123' ) );
+		$entityDataUriManager = $this->createMock( EntityDataUriManager::class );
+		$entityDataUriManager->expects( $this->never() )
+			->method( 'getPotentiallyCachedUrls' );
+		$htmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
+		$htmlCacheUpdater->expects( $this->never() )
+			->method( 'purgeUrls' );
+
+		$jobQueueGroup = $this->createMock( JobQueueGroup::class );
+		$jobQueueGroup->expects( $this->once() )
+			->method( 'lazyPush' )
+			->with( $this->callback( function ( IJobSpecification $specification ) {
+				$this->assertSame( 'PurgeEntityData', $specification->getType() );
+				$expectedParams = [
+					'namespace' => 0,
+					'title' => 'Q123',
+					'pageId' => 123,
+					'entityId' => 'Q123',
+				];
+				$actualParams = $specification->getParams();
+				ksort( $expectedParams );
+				ksort( $actualParams );
+				$this->assertSame( $expectedParams, $actualParams );
+				return true;
+			} ) );
+
+		$purger = new EntityDataPurger(
+			$entityIdLookup,
+			$entityDataUriManager,
+			$htmlCacheUpdater,
+			$this->mockJobQueueGroupFactory( $jobQueueGroup )
+		);
+
+		$purger->onArticleDeleteComplete(
+			$wikiPage,
+			// unused
+			null, null,
+			123,
+			// unused
+			null, null, null
+		);
 	}
 }
