@@ -7,9 +7,9 @@ However, Wikibase settings are placed in associative arrays, `$wgWBRepoSettings`
 
 So, if the setting `foo` is described below, you would need to use ```$wgWBRepoSettings['foo']``` or ```$wgWBClientSettings['foo']``` in LocalSettings.php.
 
-Default settings in each Wikibase settings array are setup buy loading WikibaseLib.default.php followed by the default settings file for either:
+Default settings in each Wikibase settings array are setup by loading WikibaseLib.default.php followed by the default settings file for either:
  - Wikibase.default.php (for Repos)
- - WikibaseClient.default.php (For Clients)
+ - WikibaseClient.default.php (for Clients)
 
 [TOC]
 
