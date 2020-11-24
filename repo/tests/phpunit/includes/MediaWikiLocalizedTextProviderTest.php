@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests;
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\Repo\MediaWikiLocalizedTextProvider;
+use Wikibase\View\RawMessageParameter;
 
 /**
  * @covers \Wikibase\Repo\MediaWikiLocalizedTextProvider
@@ -56,10 +57,16 @@ class MediaWikiLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 			'expectedValue' => '(VALUE)',
 		];
 
-		yield 'param with unsafe markup' => [
+		yield 'param with unsafe html' => [
 			'messageKey' => 'parentheses',
 			'params' => [ '<script>alert("hi")</script>' ],
 			'expectedValue' => '(&lt;script&gt;alert(&quot;hi&quot;)&lt;/script&gt;)',
+		];
+
+		yield 'raw parameter that is not escaped' => [
+			'messageKey' => 'parentheses',
+			'params' => [ new RawMessageParameter( '<b>hi</b>' ) ],
+			'expectedValue' => '(<b>hi</b>)',
 		];
 	}
 

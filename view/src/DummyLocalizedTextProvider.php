@@ -23,7 +23,9 @@ class DummyLocalizedTextProvider implements LocalizedTextProvider {
 	public function getEscaped( $key, array $params = [] ) {
 		return $this->get(
 			htmlspecialchars( $key ),
-			array_map( 'htmlspecialchars', $params )
+			array_map( function ( $param ) {
+				return $param instanceof RawMessageParameter ? $param->getContents() : htmlspecialchars( $param );
+			}, $params )
 		);
 	}
 

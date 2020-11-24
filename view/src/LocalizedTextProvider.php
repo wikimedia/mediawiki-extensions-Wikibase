@@ -22,7 +22,7 @@ interface LocalizedTextProvider {
 
 	/**
 	 * @param string $key
-	 * @param string[] $params Parameters that could be used for generating the text
+	 * @param array<string|RawMessageParameter> $params Parameters that could be used for generating the text
 	 *
 	 * @return string The HTML-escaped localized text
 	 */

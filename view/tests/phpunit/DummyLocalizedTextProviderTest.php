@@ -3,6 +3,7 @@
 namespace Wikibase\View\Tests;
 
 use Wikibase\View\DummyLocalizedTextProvider;
+use Wikibase\View\RawMessageParameter;
 
 /**
  * @covers \Wikibase\View\DummyLocalizedTextProvider
@@ -59,6 +60,12 @@ class DummyLocalizedTextProviderTest extends \PHPUnit\Framework\TestCase {
 			'messageKey' => 'some-message-key',
 			'params' => [ 'foo', '<bar />' ],
 			'expectedValue' => '(some-message-key: foo, &lt;bar /&gt;)',
+		];
+
+		yield [
+			'messageKey' => 'some-message-key',
+			'params' => [ 'foo', new RawMessageParameter( '<bar />' ) ],
+			'expectedValue' => '(some-message-key: foo, <bar />)',
 		];
 	}
 
