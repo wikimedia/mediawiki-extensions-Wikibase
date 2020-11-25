@@ -160,7 +160,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->willReturn( $responseHeaders );
 
 		$this->logger->expects( $this->once() )
-			->method( 'error' )
+			->method( 'notice' )
 			->with(
 				'{class}: encountered a bad response from the remote renderer',
 				[
@@ -206,7 +206,7 @@ class TermboxRemoteRendererTest extends TestCase {
 			->willReturn( $responseHeaders );
 
 		$this->logger->expects( $this->once() )
-			->method( 'error' )
+			->method( 'notice' )
 			->with(
 				'{class}: encountered a bad response from the remote renderer',
 				[
