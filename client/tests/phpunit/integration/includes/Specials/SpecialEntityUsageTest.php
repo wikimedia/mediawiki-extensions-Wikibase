@@ -8,6 +8,7 @@ use MediaWiki\Languages\LanguageConverterFactory;
 use MediaWiki\MediaWikiServices;
 use SpecialPageTestBase;
 use Title;
+use TrivialLanguageConverter;
 use Wikibase\Client\Specials\SpecialEntityUsage;
 use Wikibase\Client\WikibaseClient;
 use Wikimedia\Rdbms\FakeResultWrapper;
@@ -67,9 +68,15 @@ class SpecialEntityUsageTest extends SpecialPageTestBase {
 	}
 
 	private function languageConverterFactory(): LanguageConverterFactory {
-		return new LanguageConverterFactory( false, function () {
-			return new LanguageQqx();
-		} );
+		$languageConverterFactory = $this
+			->getMockBuilder( LanguageConverterFactory::class )
+			->disableOriginalConstructor()
+			->onlyMethods( [ 'getLanguageConverter' ] )
+			->getMock();
+		$languageConverterFactory->method( 'getLanguageConverter' )
+			->willReturn( new TrivialLanguageConverter( new LanguageQqx() ) );
+
+		return $languageConverterFactory;
 	}
 
 	public function testExecuteWithValidParam() {
