@@ -46,7 +46,8 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 					'page_random' => 0,
 					'page_latest' => 0,
 					'page_len' => 1,
-					'page_is_redirect' => 0
+					'page_is_redirect' => 0,
+					'page_touched' => $dbw->timestamp(),
 				];
 
 				// Make Q105 a redirect
@@ -63,7 +64,8 @@ class SqlItemsWithoutSitelinksFinderTest extends MediaWikiIntegrationTestCase {
 				'page_random' => 0,
 				'page_latest' => 0,
 				'page_len' => 1,
-				'page_is_redirect' => 0
+				'page_is_redirect' => 0,
+				'page_touched' => $dbw->timestamp(),
 			];
 
 			$dbw->insert(
