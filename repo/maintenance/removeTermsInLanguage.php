@@ -40,13 +40,14 @@ class RemoveTermsInLanguage extends Maintenance {
 		$idSerializations = $this->getOption( 'entity-id' );
 		$language = $this->getOption( 'language' );
 
+		$entityIdParser = WikibaseRepo::getEntityIdParser();
 		$entityRevisionLookup = $repo->getEntityRevisionLookup();
 		$entityStore = $repo->getEntityStore();
 
 		foreach ( $idSerializations as $idSerialization ) {
 
 			try {
-				$entityId = $repo->getEntityIdParser()->parse( $idSerialization );
+				$entityId = $entityIdParser->parse( $idSerialization );
 			} catch ( InvalidArgumentException $e ) {
 				$this->fatalError( "Invalid entity id: " . $idSerialization );
 			}

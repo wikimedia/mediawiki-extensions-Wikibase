@@ -4,6 +4,8 @@ declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
 use ValueParsers\NullParser;
+use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -33,6 +35,12 @@ return [
 	'WikibaseRepo.DataTypeFactory' => function ( MediaWikiServices $services ): DataTypeFactory {
 		return new DataTypeFactory(
 			WikibaseRepo::getDataTypeDefinitions( $services )->getValueTypes()
+		);
+	},
+
+	'WikibaseRepo.EntityIdParser' => function ( MediaWikiServices $services ): EntityIdParser {
+		return new DispatchingEntityIdParser(
+			WikibaseRepo::getEntityTypeDefinitions( $services )->getEntityIdBuilders()
 		);
 	},
 

@@ -124,7 +124,12 @@ class GetEntities extends ApiBase {
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
-	public static function factory( ApiMain $apiMain, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
+	public static function factory(
+		ApiMain $apiMain,
+		string $moduleName,
+		IBufferingStatsdDataFactory $stats,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
@@ -145,7 +150,7 @@ class GetEntities extends ApiBase {
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$wikibaseRepo->getEntityRevisionLookup(),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$stats,
 			$wikibaseRepo->inFederatedPropertyMode()
 		);

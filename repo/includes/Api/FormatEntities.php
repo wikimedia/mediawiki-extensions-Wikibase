@@ -70,13 +70,18 @@ class FormatEntities extends ApiBase {
 		$this->dataFactory = $dataFactory;
 	}
 
-	public static function factory( ApiMain $apiMain, string $moduleName, IBufferingStatsdDataFactory $dataFactory ): self {
+	public static function factory(
+		ApiMain $apiMain,
+		string $moduleName,
+		IBufferingStatsdDataFactory $dataFactory,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 		return new self(
 			$apiMain,
 			$moduleName,
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->getEntityIdHtmlLinkFormatterFactory(),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),

@@ -346,7 +346,7 @@ abstract class DumpEntities extends Maintenance {
 			throw new MWException( "Failed to open ID file: $listFile" );
 		}
 
-		$stream = new EntityIdReader( new LineReader( $input ), WikibaseRepo::getDefaultInstance()->getEntityIdParser() );
+		$stream = new EntityIdReader( new LineReader( $input ), WikibaseRepo::getEntityIdParser() );
 		$stream->setExceptionHandler( $exceptionReporter );
 
 		return $stream;

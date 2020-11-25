@@ -135,7 +135,7 @@ class SpecialRedirectEntityTest extends SpecialPageTestBase {
 			} ) );
 
 		return new SpecialRedirectEntity(
-			$wikibaseRepo->getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $this->user ),
 			new ItemRedirectCreationInteractor(

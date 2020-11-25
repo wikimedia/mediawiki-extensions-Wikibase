@@ -147,7 +147,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 		return new EntityDataRequestHandler(
 			$uriManager,
 			$mockHtmlCacheUpdater,
-			$wikibaseRepo->getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser(),
 			$mockRepository,
 			$mockRepository,
 			$serializationService,

@@ -153,7 +153,7 @@ class SpecialMergeItemsTest extends SpecialPageTestBase {
 
 		$titleLookup = $this->getEntityTitleLookup();
 		$specialPage = new SpecialMergeItems(
-			$wikibaseRepo->getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser(),
 			$exceptionLocalizer,
 			new TokenCheckInteractor( $this->user ),
 			new ItemMergeInteractor(

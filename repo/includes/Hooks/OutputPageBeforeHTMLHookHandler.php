@@ -7,6 +7,7 @@ use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
@@ -131,7 +132,9 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 	/**
 	 * @return self
 	 */
-	public static function factory(): self {
+	public static function factory(
+		EntityIdParser $entityIdParser
+	): self {
 		global $wgLang, $wgCookiePrefix;
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -147,7 +150,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new LanguageNameLookup( $wgLang->getCode() ),
 			new OutputPageEntityIdReader(
 				$entityViewChecker,
-				$wikibaseRepo->getEntityIdParser()
+				$entityIdParser
 			),
 			$wikibaseRepo->getEntityFactory(),
 			$wgCookiePrefix,

@@ -557,7 +557,7 @@ final class RepoHooks {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$outputPageEntityIdReader = new OutputPageEntityIdReader(
 			new OutputPageEntityViewChecker( $wikibaseRepo->getEntityContentFactory() ),
-			$wikibaseRepo->getEntityIdParser()
+			WikibaseRepo::getEntityIdParser()
 		);
 
 		$entityId = $outputPageEntityIdReader->getEntityIdFromOutputPage( $out );

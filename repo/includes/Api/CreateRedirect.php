@@ -70,13 +70,18 @@ class CreateRedirect extends ApiBase {
 		$this->permissionManager = $permissionManager;
 	}
 
-	public static function factory( ApiMain $apiMain, string $moduleName, PermissionManager $permissionManager ): self {
+	public static function factory(
+		ApiMain $apiMain,
+		string $moduleName,
+		PermissionManager $permissionManager,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 		return new self(
 			$apiMain,
 			$moduleName,
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$wikibaseRepo->newItemRedirectCreationInteractor( $apiMain->getUser(), $apiMain->getContext() ),
 			$permissionManager

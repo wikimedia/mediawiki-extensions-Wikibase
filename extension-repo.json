@@ -14,27 +14,33 @@
 		"wbavailablebadges": "\\Wikibase\\Repo\\Api\\AvailableBadges",
 		"wbcreateclaim": {
 			"class": "\\Wikibase\\Repo\\Api\\CreateClaim",
-			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\CreateClaim::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbeditentity": {
 			"class": "\\Wikibase\\Repo\\Api\\EditEntity",
 			"factory": "\\Wikibase\\Repo\\Api\\EditEntity::factory",
 			"services": [
-				"WikibaseRepo.DataTypeDefinitions"
+				"WikibaseRepo.DataTypeDefinitions",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"wbcreateredirect": {
 			"class": "\\Wikibase\\Repo\\Api\\CreateRedirect",
 			"factory": "\\Wikibase\\Repo\\Api\\CreateRedirect::factory",
 			"services": [
-				"PermissionManager"
+				"PermissionManager",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"wbformatentities": {
 			"class": "\\Wikibase\\Repo\\Api\\FormatEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatEntities::factory",
 			"services": [
-				"StatsdDataFactory"
+				"StatsdDataFactory",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"wbformatvalue": {
@@ -46,13 +52,17 @@
 		},
 		"wbgetclaims": {
 			"class": "\\Wikibase\\Repo\\Api\\GetClaims",
-			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbgetentities": {
 			"class": "\\Wikibase\\Repo\\Api\\GetEntities",
 			"factory": "\\Wikibase\\Repo\\Api\\GetEntities::factory",
 			"services": [
-				"StatsdDataFactory"
+				"StatsdDataFactory",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"wblinktitles": {
@@ -61,7 +71,10 @@
 		},
 		"wbmergeitems": {
 			"class": "\\Wikibase\\Repo\\Api\\MergeItems",
-			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\MergeItems::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbparsevalue": {
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
@@ -73,15 +86,24 @@
 		},
 		"wbremoveclaims": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",
-			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbremovequalifiers": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
-			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbremovereferences": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveReferences",
-			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbsearchentities": {
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
@@ -98,12 +120,16 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetClaim",
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
 			"services": [
-				"StatsdDataFactory"
+				"StatsdDataFactory",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"wbsetclaimvalue": {
 			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",
-			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbsetdescription": {
 			"class": "\\Wikibase\\Repo\\Api\\SetDescription",
@@ -115,11 +141,17 @@
 		},
 		"wbsetqualifier": {
 			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
-			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbsetreference": {
 			"class": "\\Wikibase\\Repo\\Api\\SetReference",
-			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"wbsetsitelink": {
 			"class": "\\Wikibase\\Repo\\Api\\SetSiteLink",
@@ -135,7 +167,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\ListSubscribers",
 			"factory": "\\Wikibase\\Repo\\Api\\ListSubscribers::factory",
 			"services": [
-				"SiteLookup"
+				"SiteLookup",
+				"WikibaseRepo.EntityIdParser"
 			]
 		}
 	},
@@ -172,7 +205,10 @@
 		},
 		"GoToLinkedPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialGoToLinkedPage::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"ItemDisambiguation": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialItemDisambiguation",
@@ -210,12 +246,16 @@
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityData",
 			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityData::factory",
 			"services": [
-				"HtmlCacheUpdater"
+				"HtmlCacheUpdater",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"EntityPage": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialEntityPage",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialEntityPage::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"MyLanguageFallbackChain": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMyLanguageFallbackChain",
@@ -223,11 +263,17 @@
 		},
 		"MergeItems": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialMergeItems",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialMergeItems::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"RedirectEntity": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity",
-			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::factory"
+			"factory": "Wikibase\\Repo\\Specials\\SpecialRedirectEntity::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"AvailableBadges": {
 			"class": "Wikibase\\Repo\\Specials\\SpecialAvailableBadges",
@@ -484,7 +530,8 @@
 			"factory": "\\Wikibase\\Repo\\Hooks\\HtmlPageLinkRendererEndHookHandler::factory",
 			"services": [
 				"InterwikiLookup",
-				"SpecialPageFactory"
+				"SpecialPageFactory",
+				"WikibaseRepo.EntityIdParser"
 			]
 		},
 		"LabelPrefetch": {
@@ -496,7 +543,10 @@
 		},
 		"OutputPageBeforeHTML": {
 			"class": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler",
-			"factory": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::factory"
+			"factory": "Wikibase\\Repo\\Hooks\\OutputPageBeforeHTMLHookHandler::factory",
+			"services": [
+				"WikibaseRepo.EntityIdParser"
+			]
 		},
 		"OutputPageJsConfig": {
 			"class": "\\Wikibase\\Repo\\Hooks\\OutputPageJsConfigHookHandler",

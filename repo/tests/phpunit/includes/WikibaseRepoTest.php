@@ -370,7 +370,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetEntityIdParserReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getEntityIdParser();
+		$returnValue = WikibaseRepo::getEntityIdParser();
 		$this->assertInstanceOf( EntityIdParser::class, $returnValue );
 	}
 

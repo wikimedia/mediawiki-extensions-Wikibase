@@ -77,13 +77,15 @@ class SpecialGoToLinkedPage extends SpecialWikibasePage {
 		$this->entityLookup = $entityLookup;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			$wikibaseRepo->getSiteLookup(),
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$wikibaseRepo->getStore()->getEntityRedirectLookup(),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->getStore()->getEntityLookup()
 		);
 	}

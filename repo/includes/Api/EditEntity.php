@@ -159,7 +159,8 @@ class EditEntity extends ModifyEntity {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		DataTypeDefinitions $dataTypeDefinitions
+		DataTypeDefinitions $dataTypeDefinitions,
+		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
@@ -168,7 +169,7 @@ class EditEntity extends ModifyEntity {
 			$moduleName,
 			$wikibaseRepo->getTermsLanguages(),
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->getEntityFactory(),
 			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			$dataTypeDefinitions->getTypeIds(),

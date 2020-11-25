@@ -113,7 +113,8 @@ abstract class SpecialWikibaseRepoPage extends SpecialWikibasePage {
 	 * @throws UserInputException
 	 */
 	protected function parseEntityId( $rawId ) {
-		$idParser = WikibaseRepo::getDefaultInstance()->getEntityIdParser();
+		// TODO inject this!
+		$idParser = WikibaseRepo::getEntityIdParser();
 
 		try {
 			$id = $idParser->parse( $rawId );

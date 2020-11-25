@@ -15,6 +15,7 @@ use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
 use OutOfBoundsException;
+use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\StatementListProvidingEntity;
 use Wikibase\DataModel\Services\Statement\StatementGuidParser;
 use Wikibase\DataModel\Services\Statement\StatementGuidParsingException;
@@ -103,14 +104,19 @@ class SetClaim extends ApiBase {
 		$this->federatedPropertiesEnabled = $federatedPropertiesEnabled;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName, IBufferingStatsdDataFactory $stats ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		IBufferingStatsdDataFactory $stats,
+		EntityIdParser $entityIdParser
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 
 		$modificationHelper = new StatementModificationHelper(
 			$wikibaseRepo->getSnakFactory(),
-			$wikibaseRepo->getEntityIdParser(),
+			$entityIdParser,
 			$wikibaseRepo->getStatementGuidValidator(),
 			$apiHelperFactory->getErrorReporter( $mainModule )
 		);
