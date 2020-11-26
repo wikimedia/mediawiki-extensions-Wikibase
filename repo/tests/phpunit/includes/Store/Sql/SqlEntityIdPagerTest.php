@@ -91,7 +91,8 @@ class SqlEntityIdPagerTest extends MediaWikiIntegrationTestCase {
 			'page_random' => 0,
 			'page_latest' => 0,
 			'page_len' => 1,
-			'page_is_redirect' => $isRedirect ? 1 : 0
+			'page_is_redirect' => $isRedirect ? 1 : 0,
+			'page_touched' => $this->db->timestamp(),
 		];
 	}
 

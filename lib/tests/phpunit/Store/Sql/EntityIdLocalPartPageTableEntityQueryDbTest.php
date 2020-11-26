@@ -34,6 +34,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				'page_random' => 1,
 				'page_latest' => 1,
 				'page_len' => 1,
+				'page_touched' => $this->db->timestamp(),
 			]
 		);
 		$this->db->insert(
@@ -45,6 +46,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				'page_random' => 2,
 				'page_latest' => 221,
 				'page_len' => 2,
+				'page_touched' => $this->db->timestamp(),
 			]
 		);
 		$this->db->insert(
