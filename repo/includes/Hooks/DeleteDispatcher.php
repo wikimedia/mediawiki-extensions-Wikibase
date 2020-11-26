@@ -25,25 +25,19 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	/** @var array */
 	private $localClientDatabases;
 
-	/** @var bool */
-	private $propagatePageDeletion;
-
 	/**
 	 * @param callable $jobQueueGroupFactory
 	 * @param EntityContentFactory $entityContentFactory
 	 * @param array $localClientDatabases
-	 * @param bool $propagatePageDeletion
 	 */
 	public function __construct(
 		callable $jobQueueGroupFactory,
 		EntityContentFactory $entityContentFactory,
-		array $localClientDatabases,
-		bool $propagatePageDeletion
+		array $localClientDatabases
 	) {
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->localClientDatabases = $localClientDatabases;
-		$this->propagatePageDeletion = $propagatePageDeletion;
 	}
 
 	public static function factory(): self {
@@ -51,8 +45,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		return new self(
 			'JobQueueGroup::singleton',
 			$repo->getEntityContentFactory(),
-			$repo->getSettings()->getSetting( 'localClientDatabases' ),
-			$repo->getSettings()->getSetting( 'propagatePageDeletion' )
+			$repo->getSettings()->getSetting( 'localClientDatabases' )
 		);
 	}
 
@@ -60,7 +53,7 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 	 * @inheritDoc
 	 */
 	public function onArticleDeleteComplete( $wikiPage, $user, $reason, $id, $content, $logEntry, $archivedRevisionCount ) {
-		if ( !$this->propagatePageDeletion || $archivedRevisionCount === 0 || empty( $this->localClientDatabases ) ) {
+		if ( $archivedRevisionCount === 0 || empty( $this->localClientDatabases ) ) {
 			return true;
 		}
 
