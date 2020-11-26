@@ -61,7 +61,7 @@ class TermboxRemoteRenderer implements TermboxRenderer {
 			if ( $status === 0 ) {
 				$this->reportFailureOfRequest( 'Request failed with status 0. Usually this means network failure or timeout' );
 			} else {
-				$this->logger->error(
+				$this->logger->notice(
 					'{class}: encountered a bad response from the remote renderer',
 					[
 						'class' => __CLASS__,
