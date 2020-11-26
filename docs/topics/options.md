@@ -201,6 +201,11 @@ Should a separate DB connection be used to generate entity IDs?  (See @ref md_do
 
 DEFAULT: ```false```
 
+#### idGeneratorLogging {#repo_idGeneratorLogging}
+Should each entity ID generator usage be logged? (Wikibase.IdGenerator channel, INFO level.)
+
+DEFAULT: ```false```
+
 #### badgeItems
 Items allowed to be used as badges.
 
