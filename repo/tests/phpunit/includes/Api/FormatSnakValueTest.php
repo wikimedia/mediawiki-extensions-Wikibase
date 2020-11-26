@@ -294,28 +294,27 @@ class FormatSnakValueTest extends ApiTestCase {
 	}
 
 	public function provideInvalidParameters() {
-		$valueFormatAndDataTypeMismatch = [
+		yield 'FORMAT_TYPE_MISMATCH' => [ [
 			'action' => 'wbformatvalue',
 			'generate' => SnakFormatter::FORMAT_HTML,
-			'datatype' => 'wikibase-entityid',
 			'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"Q10-F3"}}',
 			'datatype' => 'wikibase-item',
-			'options' => json_encode( [ 'lang' => 'qqx' ] )
-		];
+			'options' => json_encode( [ 'lang' => 'qqx' ] ),
+		] ];
 
-		$badDataValueFormat = [
+		yield 'BAD_DATA_VALUE_FORMAT' => [ [
 			'action' => 'wbformatvalue',
 			'generate' => SnakFormatter::FORMAT_HTML,
-			'datatype' => 'wikibase-entityid',
 			'datavalue' => '{"type":"wikibase-entityid", "value": {"id":"X10-F3"}}',
 			'datatype' => 'wikibase-item',
-			'options' => json_encode( [ 'lang' => 'qqx' ] )
-		];
+			'options' => json_encode( [ 'lang' => 'qqx' ] ),
+		] ];
 
-		return [
-			'FORMAT_TYPE_MISMATCH' => [ $valueFormatAndDataTypeMismatch ],
-			'BAD_DATA_VALUE_FORMAT' => [ $badDataValueFormat ]
-		];
+		yield 'TYPE_UNKNOWN' => [ [
+			'action' => 'wbformatvalue',
+			'generate' => SnakFormatter::FORMAT_PLAIN,
+			'datavalue' => '{"type":"unknown", "value": "123"}',
+		] ];
 	}
 
 	/**
