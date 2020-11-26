@@ -151,9 +151,11 @@ class EntityContentDiffViewTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider itemProvider
 	 */
 	public function testGenerateContentDiffBody( ItemContent $itemContent, ItemContent $itemContent2, array $matchers ) {
-		$html = $this->newDiffView()->generateContentDiffBody( $itemContent, $itemContent2 );
+		$diffView = $this->newDiffView();
+		$html = $diffView->generateContentDiffBody( $itemContent, $itemContent2 );
 
 		$this->assertIsString( $html );
+		$this->assertContains( 'wikibase.common', $diffView->getOutput()->getModuleStyles() );
 		foreach ( $matchers as $name => $matcher ) {
 			$this->assertStringContainsString( $matcher, $html, $name );
 		}
