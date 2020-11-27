@@ -677,32 +677,32 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testNewItemHandler_noTransform() {
+		$this->settings->setSetting( 'transformLegacyFormatOnExport', false );
 		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
 
 		$handler = $wikibaseRepo->newItemHandler();
 		$this->assertNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_noTransform() {
+		$this->settings->setSetting( 'transformLegacyFormatOnExport', false );
 		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', false );
 
 		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewItemHandler_withTransform() {
+		$this->settings->setSetting( 'transformLegacyFormatOnExport', true );
 		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
 
 		$handler = $wikibaseRepo->newItemHandler();
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
 	}
 
 	public function testNewPropertyHandler_withTransform() {
+		$this->settings->setSetting( 'transformLegacyFormatOnExport', true );
 		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting( 'transformLegacyFormatOnExport', true );
 
 		$handler = $wikibaseRepo->newPropertyHandler();
 		$this->assertNotNull( $handler->getLegacyExportFormatDetector() );
@@ -779,16 +779,9 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testNewPropertyInfoBuilder() {
+		$this->settings->setSetting( 'formatterUrlProperty', 'P123' );
+		$this->settings->setSetting( 'canonicalUriProperty', 'P321' );
 		$wikibaseRepo = $this->getWikibaseRepo();
-		$wikibaseRepo->getSettings()->setSetting(
-			'formatterUrlProperty',
-			'P123'
-		);
-
-		$wikibaseRepo->getSettings()->setSetting(
-			'canonicalUriProperty',
-			'P321'
-		);
 
 		$builder = $wikibaseRepo->newPropertyInfoBuilder();
 
