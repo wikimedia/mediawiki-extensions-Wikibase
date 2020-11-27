@@ -6,10 +6,10 @@ use IJobSpecification;
 use JobQueueGroup;
 use JobSpecification;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Title;
-use User;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
@@ -28,7 +28,7 @@ abstract class UpdateRepo {
 	private $repoDB;
 
 	/**
-	 * @var User
+	 * @var UserIdentity
 	 */
 	protected $user;
 
@@ -61,7 +61,7 @@ abstract class UpdateRepo {
 	 * @param string $repoDB IDatabase name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $title Title in the client that has been changed
 	 */
@@ -69,7 +69,7 @@ abstract class UpdateRepo {
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
-		User $user,
+		UserIdentity $user,
 		$siteId,
 		Title $title
 	) {
