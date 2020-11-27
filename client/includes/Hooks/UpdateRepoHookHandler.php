@@ -146,7 +146,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
-			User::newFromIdentity( $user ),
+			$user,
 			$this->siteGlobalID,
 			Title::newFromLinkTarget( $title )
 		);
@@ -161,7 +161,7 @@ class UpdateRepoHookHandler implements PageMoveCompleteHook, ArticleDeleteComple
 			$this->repoDatabase,
 			$this->siteLinkLookup,
 			$this->logger,
-			User::newFromIdentity( $user ),
+			$user,
 			$this->siteGlobalID,
 			Title::newFromLinkTarget( $old ),
 			Title::newFromLinkTarget( $new )

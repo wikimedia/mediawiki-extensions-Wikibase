@@ -2,9 +2,9 @@
 
 namespace Wikibase\Client\UpdateRepo;
 
+use MediaWiki\User\UserIdentity;
 use Psr\Log\LoggerInterface;
 use Title;
-use User;
 use Wikibase\Lib\Store\SiteLinkLookup;
 
 /**
@@ -24,7 +24,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 	 * @param string $repoDB Database name of the repo
 	 * @param SiteLinkLookup $siteLinkLookup
 	 * @param LoggerInterface $logger
-	 * @param User $user
+	 * @param UserIdentity $user
 	 * @param string $siteId Global id of the client wiki
 	 * @param Title $oldTitle
 	 * @param Title $newTitle
@@ -33,7 +33,7 @@ class UpdateRepoOnMove extends UpdateRepo {
 		$repoDB,
 		SiteLinkLookup $siteLinkLookup,
 		LoggerInterface $logger,
-		User $user,
+		UserIdentity $user,
 		$siteId,
 		Title $oldTitle,
 		Title $newTitle
