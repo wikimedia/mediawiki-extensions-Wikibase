@@ -1,11 +1,14 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use IJobSpecification;
 use JobQueue;
 use JobQueueGroup;
 use MediaWiki\Revision\RevisionRecord;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Title;
 use User;
@@ -24,19 +27,23 @@ use WikiPage;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
+class UpdateRepoHookHandlerTest extends TestCase {
 
 	public function doArticleDeleteCompleteProvider() {
-		return [
-			'Success' => [
-				true, true, new ItemId( 'Q42' )
-			],
-			'propagateChangesToRepo set to false' => [
-				false, false, new ItemId( 'Q42' )
-			],
-			'Not connected to an item' => [
-				false, true, null
-			],
+		yield 'Success' => [
+			'expectsSuccess' => true,
+			'propagateChangesToRepo' => true,
+			'itemId' => new ItemId( 'Q42' ),
+		];
+		yield 'propagateChangesToRepo set to false' => [
+			'expectsSuccess' => false,
+			'propagateChangesToRepo' => false,
+			'itemId' => new ItemId( 'Q42' ),
+		];
+		yield 'Not connected to an item' => [
+			'expectsSuccess' => false,
+			'propagateChangesToRepo' => true,
+			'itemId' => null,
 		];
 	}
 
@@ -44,15 +51,14 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider doArticleDeleteCompleteProvider
 	 */
 	public function testDoArticleDeleteComplete(
-		$expectsSuccess,
-		$propagateChangesToRepo,
-		ItemId $itemId = null
-	) {
+		bool $expectsSuccess,
+		bool $propagateChangesToRepo,
+		?ItemId $itemId
+	): void {
 		$handler = $this->newUpdateRepoHookHandlers(
 			true,
-			$expectsSuccess,
+			$expectsSuccess ? 'UpdateRepoOnDelete' : null,
 			$propagateChangesToRepo,
-			'UpdateRepoOnDelete',
 			$itemId
 		);
 		$title = $this->getTitle();
@@ -75,19 +81,47 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	public function doPageMoveCompleteProvider() {
-		return [
-			'Success' => [
-				true, true, true, new ItemId( 'Q42' )
-			],
-			'Page is moved into a non-Wikibase NS' => [
-				false, false, true, new ItemId( 'Q42' )
-			],
-			'propagateChangesToRepo set to false' => [
-				false, true, false, new ItemId( 'Q42' )
-			],
-			'Not connected to an item' => [
-				false, true, false, null
-			],
+		yield 'Regular move with redirect' => [
+			'jobName' => 'UpdateRepoOnMove',
+			'isWikibaseEnabled' => true,
+			'propagateChangesToRepo' => true,
+			'itemId' => new ItemId( 'Q42' ),
+			'redirectExists' => true,
+		];
+		yield 'Move without redirect' => [
+			'jobName' => 'UpdateRepoOnMove',
+			'isWikibaseEnabled' => true,
+			'propagateChangesToRepo' => true,
+			'itemId' => new ItemId( 'Q42' ),
+			'redirectExists' => false,
+		];
+		yield 'Moved into non-Wikibase NS with redirect' => [
+			'jobName' => null,
+			'isWikibaseEnabled' => false,
+			'propagateChangesToRepo' => true,
+			'itemId' => new ItemId( 'Q42' ),
+			'redirectExists' => true,
+		];
+		yield 'Moved into non-Wikibase NS without redirect' => [
+			'jobName' => 'UpdateRepoOnDelete',
+			'isWikibaseEnabled' => false,
+			'propagateChangesToRepo' => true,
+			'itemId' => new ItemId( 'Q42' ),
+			'redirectExists' => false,
+		];
+		yield 'propagateChangesToRepo set to false' => [
+			'jobName' => null,
+			'isWikibaseEnabled' => true,
+			'propagateChangesToRepo' => false,
+			'itemId' => new ItemId( 'Q42' ),
+			'redirectExists' => true,
+		];
+		yield 'Not connected to an item' => [
+			'jobName' => null,
+			'isWikibaseEnabled' => true,
+			'propagateChangesToRepo' => false,
+			'itemId' => null,
+			'redirectExists' => true,
 		];
 	}
 
@@ -95,16 +129,16 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	 * @dataProvider doPageMoveCompleteProvider
 	 */
 	public function testDoPageMoveComplete(
-		$expectsSuccess,
-		$isWikibaseEnabled,
-		$propagateChangesToRepo,
-		ItemId $itemId = null
-	) {
+		?string $jobName,
+		bool $isWikibaseEnabled,
+		bool $propagateChangesToRepo,
+		?ItemId $itemId,
+		bool $redirectExists
+	): void {
 		$handler = $this->newUpdateRepoHookHandlers(
 			$isWikibaseEnabled,
-			$expectsSuccess,
+			$jobName,
 			$propagateChangesToRepo,
-			'UpdateRepoOnMove',
 			$itemId
 		);
 		$oldTitle = $this->getTitle();
@@ -116,14 +150,14 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 				$newTitle,
 				$this->createMock( User::class ),
 				0,
-				0,
+				$redirectExists ? 1 : 0,
 				'',
 				$this->createMock( RevisionRecord::class )
 			)
 		);
 
 		$this->assertSame(
-			$expectsSuccess,
+			$jobName !== null,
 			isset( $newTitle->wikibasePushedMoveToRepo ) && $newTitle->wikibasePushedMoveToRepo,
 			'Move got propagated to repo.'
 		);
@@ -132,10 +166,7 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 			'Should not touch $oldTitle' );
 	}
 
-	/**
-	 * @return Title
-	 */
-	private function getTitle() {
+	private function getTitle(): Title {
 		// get a Title mock with all methods mocked except the magics __get and __set to
 		// allow the DeprecationHelper trait methods to work and handle non-existing class variables
 		// correctly, see UpdateRepoHookHandlers.php:doArticleDeleteComplete
@@ -151,12 +182,11 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 	}
 
 	private function newUpdateRepoHookHandlers(
-		$isWikibaseEnabled,
-		$expectsJobToBePushed,
-		$propagateChangesToRepo,
-		$jobName,
-		ItemId $itemId = null
-	) {
+		bool $isWikibaseEnabled,
+		?string $jobName,
+		bool $propagateChangesToRepo,
+		?ItemId $itemId
+	): UpdateRepoHookHandler {
 		$namespaceChecker = $this->getMockBuilder( NamespaceChecker::class )
 			->disableOriginalConstructor()
 			->getMock();
@@ -175,13 +205,20 @@ class UpdateRepoHookHandlerTest extends \PHPUnit\Framework\TestCase {
 		$jobQueueGroup = $this->getMockBuilder( JobQueueGroup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$jobQueueGroup->expects( $expectsJobToBePushed ? $this->once() : $this->never() )
-			->method( 'push' )
-			->with( $this->isInstanceOf( IJobSpecification::class ) );
-		$jobQueueGroup->expects( $expectsJobToBePushed ? $this->once() : $this->never() )
-			->method( 'get' )
-			->with( $jobName )
-			->will( $this->returnValue( $jobQueue ) );
+		if ( $jobName !== null ) {
+			$jobQueueGroup->expects( $this->once() )
+				->method( 'push' )
+				->with( $this->isInstanceOf( IJobSpecification::class ) );
+			$jobQueueGroup->expects( $this->once() )
+				->method( 'get' )
+				->with( $jobName )
+				->will( $this->returnValue( $jobQueue ) );
+		} else {
+			$jobQueueGroup->expects( $this->never() )
+				->method( 'push' );
+			$jobQueueGroup->expects( $this->never() )
+				->method( 'get' );
+		}
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup->expects( $this->any() )
