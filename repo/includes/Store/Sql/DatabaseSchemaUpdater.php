@@ -311,12 +311,16 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			}
 		);
 
+		// Tables have potentially only just been created and we may need to wait, T268944
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$lbFactory->waitForReplication();
+
 		$rebuilder = new PropertyTermsRebuilder(
 			$wikibaseRepo->getNewTermStoreWriterFactory()->newPropertyTermStoreWriter(),
 			$sqlEntityIdPagerFactory->newSqlEntityIdPager( [ 'property' ] ),
 			$reporter,
 			$reporter,
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$lbFactory,
 			$wikibaseRepo->getPropertyLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
 			250,
 			2
@@ -358,12 +362,16 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 		}
 		$highestId = (int)$highestId->id_value;
 
+		// Tables have potentially only just been created and we may need to wait, T268944
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		$lbFactory->waitForReplication();
+
 		$rebuilder = new ItemTermsRebuilder(
 			$wikibaseRepo->getNewTermStoreWriterFactory()->newItemTermStoreWriter(),
 			self::newItemIdIterator( $highestId ),
 			$reporter,
 			$reporter,
-			MediaWikiServices::getInstance()->getDBLoadBalancerFactory(),
+			$lbFactory,
 			$wikibaseRepo->getItemLookup( Store::LOOKUP_CACHING_RETRIEVE_ONLY ),
 			250,
 			2
