@@ -112,6 +112,7 @@ class WikibaseContentLanguages {
 					'crb', // T220284
 					'crl', // T264532
 					'dag', // T240098
+					'dru', // T267915
 					'el-cy', // T198674
 					'ett', // T125066
 					'eya', // T155372
