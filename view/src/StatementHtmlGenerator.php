@@ -195,12 +195,12 @@ class StatementHtmlGenerator {
 		$referenceCount = count( $statement->getReferences() );
 
 		if ( !array_key_exists( $referenceCount, $this->referenceHeadings ) ) {
-			$this->referenceHeadings[ $referenceCount ] = htmlspecialchars( $this->textProvider->get(
+			$this->referenceHeadings[ $referenceCount ] = $this->textProvider->getEscaped(
 				'wikibase-statementview-references-counter',
 				[
 					$this->numberLocalizer->localizeNumber( $referenceCount ),
 				]
-			) );
+			);
 		}
 
 		return $this->referenceHeadings[ $referenceCount ];
@@ -221,7 +221,7 @@ class StatementHtmlGenerator {
 				'wikibase-rankselector',
 				'ui-state-disabled',
 				'wikibase-rankselector-' . $rankName,
-				htmlspecialchars( $this->textProvider->get( 'wikibase-statementview-rank-' . $rankName ) )
+				$this->textProvider->getEscaped( 'wikibase-statementview-rank-' . $rankName )
 			);
 
 			$this->statementRankSelector[ $rank ] = $rankSelector;

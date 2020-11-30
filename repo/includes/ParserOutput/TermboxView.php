@@ -64,9 +64,7 @@ class TermboxView implements CacheableEntityTermsView {
 	}
 
 	public function getTitleHtml( EntityId $entityId = null ) {
-		return htmlspecialchars(
-			$this->textProvider->get( 'parentheses', [ $entityId->getSerialization() ] )
-		);
+		return $this->textProvider->getEscaped( 'parentheses', [ $entityId->getSerialization() ] );
 	}
 
 	/**

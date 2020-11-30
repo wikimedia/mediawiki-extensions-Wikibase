@@ -142,14 +142,14 @@ class SnakHtmlGenerator {
 	 * @return string HTML
 	 */
 	private function getInvalidSnakMessage() {
-		return htmlspecialchars( $this->textProvider->get( 'wikibase-snakformat-invalid-value' ) );
+		return $this->textProvider->getEscaped( 'wikibase-snakformat-invalid-value' );
 	}
 
 	/**
 	 * @return string HTML
 	 */
 	private function getPropertyNotFoundMessage() {
-		return htmlspecialchars( $this->textProvider->get( 'wikibase-snakformat-propertynotfound' ) );
+		return $this->textProvider->getEscaped( 'wikibase-snakformat-propertynotfound' );
 	}
 
 }
