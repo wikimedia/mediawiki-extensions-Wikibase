@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Class for collection of ChangeOp results
+ * @license GPL-2.0-or-later
  */
 class ChangeOpsResult implements ChangeOpResult {
 

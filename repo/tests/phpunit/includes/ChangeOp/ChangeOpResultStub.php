@@ -8,6 +8,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpResult;
 
 /**
  * Stub class providing ChangeOpResults for tests
+ * @license GPL-2.0-or-later
  */
 class ChangeOpResultStub implements ChangeOpResult {
 

@@ -12,6 +12,7 @@ use Wikibase\Client\WikibaseClient;
 
 /**
  * Description Provider Hook Handler for Search Results
+ * @license GPL-2.0-or-later
  */
 class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHook {
 

@@ -9,6 +9,7 @@ namespace Wikibase\Repo\Tests\Parsers;
  * trait provided by core, but that's deprecated as of 1.34.
  *
  * @todo Get rid of this trait as soon as DataValues moves away from withered PHPUnit.
+ * @license GPL-2.0-or-later
  */
 trait PHPUnit4CompatTrait {
 	public function setExpectedException( $name, $message = '', $code = null ) {

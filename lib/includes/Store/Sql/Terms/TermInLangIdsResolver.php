@@ -7,6 +7,7 @@ namespace Wikibase\Lib\Store\Sql\Terms;
  * the inverse of {@link TermInLangIdsAcquirer}.
  *
  * @see @ref md_docs_storage_terms
+ * @license GPL-2.0-or-later
  */
 interface TermInLangIdsResolver {
 

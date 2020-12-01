@@ -17,6 +17,7 @@ use Wikibase\Lib\TermIndexEntry;
  * A description is an explanation of what the page is about, in the content language of the page,
  * short enough that it can be used in interface elements such as dropdowns to contextualize or
  * disambiguate pages.
+ * @license GPL-2.0-or-later
  */
 class DescriptionLookup {
 

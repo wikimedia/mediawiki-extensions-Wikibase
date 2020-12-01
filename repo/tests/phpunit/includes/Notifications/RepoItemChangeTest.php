@@ -11,6 +11,7 @@ use Wikibase\Repo\Notifications\RepoItemChange;
 /**
  * Class RepoEntityChangeTest
  * @group Wikibase
+ * @license GPL-2.0-or-later
  */
 class RepoItemChangeTest extends ChangeRowTest {
 	private function newItemChange( ItemId $itemId ): RepoItemChange {

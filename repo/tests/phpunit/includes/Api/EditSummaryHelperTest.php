@@ -15,6 +15,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
  * @group WikibaseAPI
  *
  * @covers \Wikibase\Repo\Api\EditSummaryHelper
+ * @license GPL-2.0-or-later
  */
 class EditSummaryHelperTest extends \PHPUnit\Framework\TestCase {
 	public function provideChangeOpResultsForPrepareEditSummary() {

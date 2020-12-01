@@ -7,6 +7,7 @@ use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Holds only generic info on whether entity was changed or not
+ * @license GPL-2.0-or-later
  */
 class GenericChangeOpResult implements ChangeOpResult {
 

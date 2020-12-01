@@ -9,6 +9,7 @@ use Wikibase\Repo\ChangeOp\DummyChangeOpResult;
  *
  * @group Wikibase
  * @group ChangeOp
+ * @license GPL-2.0-or-later
  */
 class DummyChangeOpResultTest extends \PHPUnit\Framework\TestCase {
 

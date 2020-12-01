@@ -41,7 +41,7 @@ class OutputPageJsConfigHookHandler implements OutputPageBeforeHTMLHook {
 	private $badgeItems;
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	private $stringLimit;
 

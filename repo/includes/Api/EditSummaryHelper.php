@@ -10,6 +10,7 @@ use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
 
 /**
  * Helper methods for preparing summary instance for editing entity activity
+ * @license GPL-2.0-or-later
  */
 class EditSummaryHelper {
 

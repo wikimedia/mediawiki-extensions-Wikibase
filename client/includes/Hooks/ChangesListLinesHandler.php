@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Client\Hooks;
 
-use ChangesList;
 use EnhancedChangesList;
 use MediaWiki\Hook\EnhancedChangesListModifyBlockLineDataHook;
 use MediaWiki\Hook\EnhancedChangesListModifyLineDataHook;

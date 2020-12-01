@@ -15,6 +15,7 @@ use Wikibase\Lib\TermIndexEntry;
  *
  * @group Wikibase
  * @group WikibaseStore
+ * @license GPL-2.0-or-later
  */
 class CachedDatabasePropertyLabelResolverTest extends MediaWikiIntegrationTestCase {
 

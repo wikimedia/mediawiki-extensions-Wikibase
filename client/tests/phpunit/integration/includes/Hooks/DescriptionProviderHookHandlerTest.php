@@ -13,6 +13,7 @@ use Wikibase\Client\Store\DescriptionLookup;
  * @covers \Wikibase\Client\Hooks\DescriptionProviderHookHandler
  * @group Database
  * @group Wikibase
+ * @license GPL-2.0-or-later
  */
 class DescriptionProviderHookHandlerTest extends MediaWikiIntegrationTestCase {
 

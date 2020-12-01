@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityId;
  *
  * Suitable as a result for a no-op ChangeOp implementation
  * @see  NullChangeOp
+ * @license GPL-2.0-or-later
  */
 class DummyChangeOpResult extends GenericChangeOpResult {
 

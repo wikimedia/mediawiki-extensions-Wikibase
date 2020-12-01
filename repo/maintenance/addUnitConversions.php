@@ -85,7 +85,7 @@ class AddUnitConversions extends Maintenance {
 	protected $builder;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $dryRun;
 

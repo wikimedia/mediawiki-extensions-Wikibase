@@ -3,7 +3,6 @@
 declare( strict_types = 1 );
 namespace Wikibase\Repo\FederatedProperties;
 
-use Http;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Http\MwHttpRequestToResponseInterfaceAdapter;
 use Psr\Http\Message\ResponseInterface;
@@ -15,6 +14,7 @@ use Psr\Log\LoggerInterface;
  * This uses MediaWiki's HttpRequestFactory to take advantage of built-in http settings such as timeouts, proxies
  * etc. It uses an adapter to ResponseInterface to allow for consumers to also be compatible with other http clients
  * such as Guzzle.
+ * @license GPL-2.0-or-later
  */
 class GenericActionApiClient {
 

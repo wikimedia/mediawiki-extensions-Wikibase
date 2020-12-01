@@ -2,11 +2,12 @@
 
 namespace Wikibase\Client\Tests\Integration;
 
-use CirrusSearch\CirrusSearch;
 use CirrusSearch\HashSearchConfig;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Exists;
 use Elastica\Query\MatchAll;
+use Elastica\Query\MoreLikeThis;
 use ExtensionRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
@@ -20,6 +21,7 @@ use Wikibase\Client\MoreLikeWikibase;
  * @covers \Wikibase\Client\MoreLikeWikibase
  * @group Wikibase
  * @group WikibaseClient
+ * @license GPL-2.0-or-later
  */
 class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 
@@ -44,8 +46,8 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 			'single page morelike w/wikibase' => [
 				'morelikewithwikibase:Some page',
 				( new BoolQuery() )
-					->addFilter( new \Elastica\Query\Exists( 'wikibase_item' ) )
-					->addMust( ( new \Elastica\Query\MoreLikeThis() )
+					->addFilter( new Exists( 'wikibase_item' ) )
+					->addMust( ( new MoreLikeThis() )
 						->setParams( [
 							'min_doc_freq' => 2,
 							'max_doc_freq' => null,

@@ -12,6 +12,7 @@ use Wikibase\Lib\Changes\RepoRevisionIdentifier;
 /**
  * Extend this class in order to set up integration tests against the
  * `recentchanges` table
+ * @license GPL-2.0-or-later
  */
 abstract class RecentChangesModificationTest extends MediaWikiIntegrationTestCase {
 

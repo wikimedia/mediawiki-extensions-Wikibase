@@ -18,6 +18,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
  *
  * @group Wikibase
  * @group WikibaseClient
+ * @license GPL-2.0-or-later
  */
 class DescriptionLookupTest extends TestCase {
 

@@ -11,6 +11,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpsResult;
  *
  * @group Wikibase
  * @group ChangeOp
+ * @license GPL-2.0-or-later
  */
 class ChangeOpResultTraversalTest extends \PHPUnit\Framework\TestCase {
 

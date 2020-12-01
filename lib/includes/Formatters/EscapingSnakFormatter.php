@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Lib\Formatters;
 
 use Wikibase\DataModel\Snak\Snak;
-use Wikimedia\Assert\Assert;
 use Wikimedia\Assert\ParameterTypeException;
 
 /**

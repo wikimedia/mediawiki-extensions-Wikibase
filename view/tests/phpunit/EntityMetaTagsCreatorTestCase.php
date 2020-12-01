@@ -10,6 +10,7 @@ use Wikibase\View\EntityMetaTagsCreator;
  * @group Wikibase
  *
  * @covers \Wikibase\View\EntityMetaTags
+ * @license GPL-2.0-or-later
  */
 abstract class EntityMetaTagsCreatorTestCase extends TestCase {
 

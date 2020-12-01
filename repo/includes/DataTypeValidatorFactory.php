@@ -8,6 +8,7 @@ use ValueValidators\ValueValidator;
  * A factory providing ValueValidators based on DataType id.
  *
  * @author Adrian Heine <adrian.heine@wikimedia.de>
+ * @license GPL-2.0-or-later
  */
 interface DataTypeValidatorFactory {
 
