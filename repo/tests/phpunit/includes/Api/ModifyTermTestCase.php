@@ -14,8 +14,9 @@ use ApiUsageException;
  */
 abstract class ModifyTermTestCase extends WikibaseApiTestCase {
 
+	/** @var string */
 	protected static $testAction;
-	protected static $testId;
+	/** @var bool */
 	private static $hasSetup;
 
 	protected function setUp(): void {

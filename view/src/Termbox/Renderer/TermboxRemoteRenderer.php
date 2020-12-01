@@ -15,17 +15,22 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  */
 class TermboxRemoteRenderer implements TermboxRenderer {
 
+	/** @var HttpRequestFactory */
 	private $requestFactory;
+	/** @var string */
 	private $ssrServerUrl;
+	/** @var LoggerInterface */
 	private $logger;
+	/** @var StatsdDataFactoryInterface */
 	private $stats;
 
+	/** @var int|float */
 	private $ssrServerTimeout;
 	public const HTTP_STATUS_OK = 200;
 
 	public function __construct(
 		HttpRequestFactory $requestFactory,
-		$ssrServerUrl,
+		string $ssrServerUrl,
 		$ssrServerTimeout,
 		LoggerInterface $logger,
 		StatsdDataFactoryInterface $stats

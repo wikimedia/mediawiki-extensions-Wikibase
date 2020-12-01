@@ -5,9 +5,12 @@ namespace Wikibase\DataAccess;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Property;
+use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\Interactors\DispatchingTermSearchInteractorFactory;
+use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikimedia\Assert\Assert;
 
@@ -26,6 +29,7 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	 */
 	private $entitySourceDefinitions;
 
+	/** @var GenericServices */
 	private $genericServices;
 
 	/**
@@ -33,14 +37,19 @@ class MultipleEntitySourceServices implements WikibaseServices, EntityStoreWatch
 	 */
 	private $singleSourceServices;
 
+	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
 
+	/** @var TermSearchInteractorFactory|null */
 	private $termSearchInteractorFactory = null;
 
+	/** @var PrefetchingTermLookup|null */
 	private $prefetchingTermLookup = null;
 
+	/** @var EntityPrefetcher|null */
 	private $entityPrefetcher = null;
 
+	/** @var EntityNamespaceLookup|null */
 	private $entityNamespaceLookup = null;
 
 	/**

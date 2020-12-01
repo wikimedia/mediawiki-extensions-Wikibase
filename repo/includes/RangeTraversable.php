@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo;
 
 /**
@@ -9,14 +11,12 @@ namespace Wikibase\Repo;
  */
 class RangeTraversable implements \IteratorAggregate {
 
+	/** @var int */
 	private $startingNumber;
+	/** @var int|null */
 	private $inclusiveUpperBound;
 
-	/**
-	 * @param int $startingNumber
-	 * @param int|null $inclusiveUpperBound
-	 */
-	public function __construct( $startingNumber = 1, $inclusiveUpperBound = null ) {
+	public function __construct( int $startingNumber = 1, int $inclusiveUpperBound = null ) {
 		$this->startingNumber = $startingNumber;
 		$this->inclusiveUpperBound = $inclusiveUpperBound;
 	}

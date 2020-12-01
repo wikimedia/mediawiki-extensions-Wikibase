@@ -42,8 +42,10 @@ abstract class DumpEntities extends Maintenance {
 	 */
 	private $logFileHandle = false;
 
+	/** @var string[] */
 	private $existingEntityTypes = [];
 
+	/** @var string[] */
 	private $entityTypesToExcludeFromOutput = [];
 
 	public function __construct() {

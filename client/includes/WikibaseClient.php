@@ -283,8 +283,10 @@ final class WikibaseClient {
 	 */
 	private $entitySourceDefinitions;
 
+	/** @var DescriptionLookup|null */
 	private $descriptionLookup = null;
 
+	/** @var PropertyLabelResolver|null */
 	private $propertyLabelResolver = null;
 
 	/** @var ReferenceFormatterFactory|null */

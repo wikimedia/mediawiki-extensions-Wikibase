@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,33 +12,35 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class ChangeOpLabelResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
 
+	/** @var string */
 	private $languageCode;
-	private $newLabel;
+	/** @var string|null */
 	private $oldLabel;
+	/** @var string|null */
+	private $newLabel;
 
-	/**
-	 * @param EntityId|null $entityId
-	 * @param string $languageCode
-	 * @param $oldLabel
-	 * @param $newLabel
-	 * @param bool $isEntityChanged
-	 */
-	public function __construct( $entityId, $languageCode, $oldLabel, $newLabel, $isEntityChanged = false ) {
+	public function __construct(
+		?EntityId $entityId,
+		string $languageCode,
+		?string $oldLabel,
+		?string $newLabel,
+		bool $isEntityChanged = false
+	) {
 		parent::__construct( $entityId, $isEntityChanged );
 		$this->languageCode = $languageCode;
 		$this->oldLabel = $oldLabel;
 		$this->newLabel = $newLabel;
 	}
 
-	public function getLanguageCode() {
+	public function getLanguageCode(): string {
 		return $this->languageCode;
 	}
 
-	public function getNewLabel() {
+	public function getNewLabel(): ?string {
 		return $this->newLabel;
 	}
 
-	public function getOldLabel() {
+	public function getOldLabel(): ?string {
 		return $this->oldLabel;
 	}
 

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Hooks;
 
 use Html;
@@ -37,9 +39,13 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook {
 
+	/** @var EntityContentFactory */
 	private $entityContentFactory;
+	/** @var EntityIdLookup */
 	private $entityIdLookup;
+	/** @var EntityLookup */
 	private $entityLookup;
+	/** @var LanguageFallbackChainFactory */
 	private $fallbackChainFactory;
 
 	public function __construct(

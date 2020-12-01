@@ -33,6 +33,7 @@ use WikiPage;
  */
 abstract class EntityContentTestCase extends MediaWikiIntegrationTestCase {
 
+	/** @var array */
 	private $originalGroupPermissions;
 
 	/**

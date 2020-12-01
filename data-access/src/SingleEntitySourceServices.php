@@ -20,8 +20,10 @@ use Wikibase\Lib\Interactors\TermSearchInteractorFactory;
 use Wikibase\Lib\Store\EntityContentDataCodec;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityRevision;
+use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStoreWatcher;
 use Wikibase\Lib\Store\MatchingTermsLookup;
+use Wikibase\Lib\Store\PropertyInfoLookup;
 use Wikibase\Lib\Store\Sql\EntityIdLocalPartPageTableEntityQuery;
 use Wikibase\Lib\Store\Sql\PrefetchingWikiPageEntityMetaDataAccessor;
 use Wikibase\Lib\Store\Sql\PropertyInfoTable;
@@ -59,8 +61,10 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $entityIdParser;
 
+	/** @var EntityIdComposer */
 	private $entityIdComposer;
 
+	/** @var Deserializer */
 	private $dataValueDeserializer;
 
 	/**
@@ -72,7 +76,11 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 * @var EntitySource
 	 */
 	private $entitySource;
+
+	/** @var callable[] */
 	private $deserializerFactoryCallbacks;
+
+	/** @var callable[] */
 	private $entityMetaDataAccessorCallbacks;
 
 	/**
@@ -80,11 +88,16 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $prefetchingTermLookupCallbacks;
 
+	/** @var NameTableStore */
 	private $slotRoleStore;
+
+	/** @var EntityRevisionLookup|null */
 	private $entityRevisionLookup = null;
 
+	/** @var TermSearchInteractorFactory|null */
 	private $termSearchInteractorFactory = null;
 
+	/** @var PrefetchingTermLookup|null */
 	private $prefetchingTermLookup = null;
 
 	/**
@@ -92,9 +105,13 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 */
 	private $entityMetaDataAccessor = null;
 
+	/** @var PropertyInfoLookup|null */
 	private $propertyInfoLookup = null;
 
+	/** @var callable[] */
 	private $entityRevisionLookupFactoryCallbacks;
+
+	/** @var EntityNamespaceLookup|null */
 	private $entityNamespaceLookup;
 
 	public function __construct(

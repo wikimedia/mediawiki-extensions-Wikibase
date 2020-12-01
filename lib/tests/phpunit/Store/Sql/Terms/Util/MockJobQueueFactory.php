@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Store\Sql\Terms\Util;
 
 use IJobSpecification;
@@ -12,14 +14,16 @@ use Wikibase\Lib\Store\Sql\Terms\CleanTermsIfUnusedJob;
  */
 class MockJobQueueFactory {
 
+	/** @var TestCase */
 	private $test;
 
 	public function __construct( TestCase $test ) {
-
 		$this->test = $test;
 	}
 
-	public function getJobQueueGroupMockExpectingTermInLangsIds( $expectedTermInLangIdsToClean = null ) {
+	public function getJobQueueGroupMockExpectingTermInLangsIds(
+		array $expectedTermInLangIdsToClean = null
+	): JobQueueGroup {
 		$jobQueueGroupMock = $this->getMockJobQueue();
 
 		if ( $expectedTermInLangIdsToClean != null ) {
@@ -39,7 +43,7 @@ class MockJobQueueFactory {
 		return $jobQueueGroupMock;
 	}
 
-	public function getJobQueueMockExpectingNoCalls() {
+	public function getJobQueueMockExpectingNoCalls(): JobQueueGroup {
 		$jobQueueGroupMock = $this->getMockJobQueue();
 
 		$jobQueueGroupMock->expects( $this->test->never() )->method( 'push' );

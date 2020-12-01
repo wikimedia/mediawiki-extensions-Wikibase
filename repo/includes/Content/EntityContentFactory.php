@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Content;
 
 use Hooks;
@@ -49,8 +51,11 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 */
 	private $entityHandlers = [];
 
+	/** @var EntitySourceDefinitions */
 	private $entitySourceDefinitions;
+	/** @var EntitySource */
 	private $localEntitySource;
+	/** @var Title[] */
 	private $titleForIdCache;
 
 	/**
@@ -85,21 +90,21 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 *
 	 * @return bool If the given content model ID is a known entity content model.
 	 */
-	public function isEntityContentModel( $contentModel ) {
+	public function isEntityContentModel( string $contentModel ): bool {
 		return in_array( $contentModel, $this->entityContentModels );
 	}
 
 	/**
 	 * @return string[] A list of content model IDs used to represent Wikibase entities.
 	 */
-	public function getEntityContentModels() {
+	public function getEntityContentModels(): array {
 		return array_values( $this->entityContentModels );
 	}
 
 	/**
 	 * @return string[] A list of entity type IDs used for Wikibase entities.
 	 */
-	public function getEntityTypes() {
+	public function getEntityTypes(): array {
 		return array_keys( $this->entityContentModels );
 	}
 
@@ -113,7 +118,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws InvalidArgumentException
 	 * @return Title
 	 */
-	public function getTitleForId( EntityId $id ) {
+	public function getTitleForId( EntityId $id ): Title {
 		if ( isset( $this->titleForIdCache[ $id->getSerialization() ] ) ) {
 			return $this->titleForIdCache[ $id->getSerialization() ];
 		}
@@ -135,7 +140,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @param EntityId $id
 	 * @return null|Title
 	 */
-	private function getTitleForFederatedId( EntityId $id ) {
+	private function getTitleForFederatedId( EntityId $id ): ?Title {
 		if ( $this->entityNotFromLocalEntitySource( $id ) ) {
 			$interwiki = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() )->getInterwikiPrefix();
 			if ( $this->interwikiLookup && $this->interwikiLookup->isValidInterwiki( $interwiki ) ) {
@@ -161,7 +166,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws InvalidArgumentException
 	 * @return Title[]
 	 */
-	public function getTitlesForIds( array $ids ) {
+	public function getTitlesForIds( array $ids ): array {
 		Assert::parameterElementType( 'Wikibase\DataModel\Entity\EntityId', $ids, '$ids' );
 		$titles = [];
 		$idsByType = [];
@@ -193,7 +198,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 		return $titles;
 	}
 
-	private function entityNotFromLocalEntitySource( EntityId $id ) {
+	private function entityNotFromLocalEntitySource( EntityId $id ): bool {
 		$entitySource = $this->entitySourceDefinitions->getSourceForEntityType( $id->getEntityType() );
 		return $entitySource->getSourceName() !== $this->localEntitySource->getSourceName();
 	}
@@ -208,7 +213,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 *
 	 * @return EntityId|null
 	 */
-	public function getEntityIdForTitle( Title $title ) {
+	public function getEntityIdForTitle( Title $title ): ?EntityId {
 		$contentModel = $title->getContentModel();
 
 		Hooks::run( 'GetEntityContentModelForTitle', [ $title, &$contentModel ] );
@@ -237,7 +242,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws StorageException
 	 * @return EntityId[] Entity IDs, keyed by page IDs.
 	 */
-	public function getEntityIds( array $titles ) {
+	public function getEntityIds( array $titles ): array {
 		$entityIds = [];
 
 		foreach ( $titles as $title ) {
@@ -263,7 +268,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return int
 	 */
-	public function getNamespaceForType( $entityType ) {
+	public function getNamespaceForType( string $entityType ): int {
 		$handler = $this->getContentHandlerForType( $entityType );
 		return $handler->getEntityNamespace();
 	}
@@ -276,7 +281,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return string the role name of the slot
 	 */
-	public function getSlotRoleForType( $entityType ) {
+	public function getSlotRoleForType( string $entityType ): string {
 		$handler = $this->getContentHandlerForType( $entityType );
 		return $handler->getEntitySlotRole();
 	}
@@ -289,7 +294,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
 	 * @return EntityHandler
 	 */
-	public function getContentHandlerForType( $entityType ) {
+	public function getContentHandlerForType( string $entityType ): EntityHandler {
 		if ( !isset( $this->entityHandlerFactoryCallbacks[$entityType] ) ) {
 			throw new OutOfBoundsException( 'No content handler defined for entity type ' . $entityType );
 		}
@@ -316,7 +321,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @throws OutOfBoundsException if no entity handler is defined for the given content model.
 	 * @return EntityHandler
 	 */
-	public function getEntityHandlerForContentModel( $contentModel ) {
+	public function getEntityHandlerForContentModel( string $contentModel ): EntityHandler {
 		$entityTypePerModel = array_flip( $this->entityContentModels );
 
 		if ( !isset( $entityTypePerModel[$contentModel] ) ) {
@@ -332,9 +337,9 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 * @param string $entityType
 	 *
 	 * @throws OutOfBoundsException if no content model is defined for the given entity type.
-	 * @return int
+	 * @return string
 	 */
-	public function getContentModelForType( $entityType ) {
+	public function getContentModelForType( string $entityType ): string {
 		if ( !isset( $this->entityContentModels[$entityType] ) ) {
 			throw new OutOfBoundsException( 'No content model defined for entity type ' . $entityType );
 		}
@@ -351,7 +356,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 *
 	 * @return EntityContent
 	 */
-	public function newFromEntity( EntityDocument $entity ) {
+	public function newFromEntity( EntityDocument $entity ): EntityContent {
 		$handler = $this->getContentHandlerForType( $entity->getType() );
 		return $handler->makeEntityContent( new EntityInstanceHolder( $entity ) );
 	}
@@ -366,7 +371,7 @@ class EntityContentFactory implements EntityTitleStoreLookup, EntityIdLookup {
 	 *
 	 * @return EntityContent|null
 	 */
-	public function newFromRedirect( EntityRedirect $redirect ) {
+	public function newFromRedirect( EntityRedirect $redirect ): ?EntityContent {
 		$handler = $this->getContentHandlerForType( $redirect->getEntityId()->getEntityType() );
 		return $handler->makeEntityRedirectContent( $redirect );
 	}

@@ -1,6 +1,7 @@
 <?php
 
 declare( strict_types = 1 );
+
 namespace Wikibase\Repo\FederatedProperties;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -13,6 +14,7 @@ use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
  */
 class FederatedPropertiesEntityIdFormatter implements EntityIdFormatter {
 
+	/** @var EntityIdFormatter */
 	private $innerFormatter;
 
 	public function __construct( EntityIdFormatter $innerFormatter ) {

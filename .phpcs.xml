@@ -29,9 +29,6 @@
 		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 			patches from being merged. -->
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
-
-		<!-- more-or-less temporarily excluded (T268827) -->
-		<exclude name="MediaWiki.Commenting.PropertyDocumentation" />
 	</rule>
 
 	<!-- Disallows any content outside of <?php … ?> tags. -->

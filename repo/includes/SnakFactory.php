@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo;
 
 use DataValues\DataValue;
@@ -23,8 +25,11 @@ use Wikibase\Lib\DataValueFactory;
  */
 class SnakFactory {
 
+	/** @var PropertyDataTypeLookup */
 	private $dataTypeLookup;
+	/** @var DataTypeFactory */
 	private $dataTypeFactory;
+	/** @var DataValueFactory */
 	private $dataValueFactory;
 
 	public function __construct(
@@ -49,7 +54,7 @@ class SnakFactory {
 	 * @throws OutOfBoundsException from getType
 	 * @throws InvalidArgumentException from newDataValue, newDataValue and newSnak
 	 */
-	public function newSnak( PropertyId $propertyId, $snakType, $rawValue = null ) {
+	public function newSnak( PropertyId $propertyId, string $snakType, $rawValue = null ): Snak {
 		$dataTypeId = $this->dataTypeLookup->getDataTypeIdForProperty( $propertyId );
 		$dataType = $this->dataTypeFactory->getType( $dataTypeId );
 		$valueType = $dataType->getDataValueType();
@@ -77,7 +82,7 @@ class SnakFactory {
 	 * @return Snak
 	 * @throws InvalidArgumentException
 	 */
-	private function createSnak( PropertyId $propertyId, $snakType, DataValue $value = null ) {
+	private function createSnak( PropertyId $propertyId, string $snakType, DataValue $value = null ): Snak {
 		switch ( $snakType ) {
 			case 'value':
 				if ( $value === null ) {

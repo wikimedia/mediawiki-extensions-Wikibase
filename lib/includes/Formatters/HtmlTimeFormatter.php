@@ -24,7 +24,7 @@ use ValueFormatters\ValueFormatterBase;
  */
 class HtmlTimeFormatter extends ValueFormatterBase {
 
-	private static $calendarKeys = [
+	private const CALENDAR_KEYS = [
 		TimeValue::CALENDAR_GREGORIAN => 'wikibase-time-calendar-gregorian',
 		TimeValue::CALENDAR_JULIAN => 'wikibase-time-calendar-julian',
 	];
@@ -137,8 +137,8 @@ class HtmlTimeFormatter extends ValueFormatterBase {
 	 * @return string HTML
 	 */
 	private function formatCalendarName( $calendarModel ) {
-		if ( array_key_exists( $calendarModel, self::$calendarKeys ) ) {
-			$key = self::$calendarKeys[$calendarModel];
+		if ( array_key_exists( $calendarModel, self::CALENDAR_KEYS ) ) {
+			$key = self::CALENDAR_KEYS[$calendarModel];
 			$lang = $this->getOption( ValueFormatter::OPT_LANG );
 			$msg = wfMessage( $key )->inLanguage( $lang );
 

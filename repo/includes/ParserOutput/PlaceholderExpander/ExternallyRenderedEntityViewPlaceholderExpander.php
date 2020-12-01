@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput\PlaceholderExpander;
 
 use OutputPage;
@@ -21,20 +23,28 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 	// render the root element and give client side re-rendering a chance
 	public const FALLBACK_HTML = '<div class="wikibase-entitytermsview renderer-fallback"></div>';
 
+	/** @var OutputPage */
 	private $outputPage;
 
+	/** @var TermboxRequestInspector */
 	private $requestInspector;
 
+	/** @var TermboxRenderer */
 	private $termboxRenderer;
 
+	/** @var OutputPageEntityIdReader */
 	private $entityIdReader;
 
+	/** @var RepoSpecialPageLinker */
 	private $specialPageLinker;
 
+	/** @var LanguageFallbackChainFactory */
 	private $languageFallbackChainFactory;
 
+	/** @var OutputPageRevisionIdReader */
 	private $revisionIdReader;
 
+	/** @var bool */
 	private $enableUserSpecificSSR;
 
 	public function __construct(
@@ -45,7 +55,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		RepoSpecialPageLinker $specialPageLinker,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		OutputPageRevisionIdReader $revisionIdReader,
-		$enableUserSpecificSSR
+		bool $enableUserSpecificSSR
 	) {
 		$this->outputPage = $outputPage;
 		$this->requestInspector = $requestInspector;
@@ -57,7 +67,7 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		$this->enableUserSpecificSSR = $enableUserSpecificSSR;
 	}
 
-	public function getHtmlForPlaceholder( $name ) {
+	public function getHtmlForPlaceholder( $name ): string {
 		if ( $name !== TermboxView::TERMBOX_PLACEHOLDER ) {
 			throw new \RuntimeException( "Unknown placeholder: $name" );
 		}
@@ -65,17 +75,14 @@ class ExternallyRenderedEntityViewPlaceholderExpander implements PlaceholderExpa
 		return $this->getHtml() ?: self::FALLBACK_HTML;
 	}
 
-	private function getHtml() {
+	private function getHtml(): ?string {
 		return ( $this->requestInspector->isDefaultRequest( $this->outputPage )
 			|| !$this->enableUserSpecificSSR )
 			? $this->outputPage->getProperty( TermboxView::TERMBOX_MARKUP )
 			: $this->rerenderTermbox();
 	}
 
-	/**
-	 * @return string|null
-	 */
-	private function rerenderTermbox() {
+	private function rerenderTermbox(): ?string {
 		$revision = $this->revisionIdReader->getRevisionFromOutputPage( $this->outputPage );
 
 		if ( $revision === EntityRevision::UNSAVED_REVISION ) {

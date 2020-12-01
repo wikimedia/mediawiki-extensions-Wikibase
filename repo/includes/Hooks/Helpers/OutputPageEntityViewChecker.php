@@ -12,6 +12,7 @@ use Wikibase\Repo\Content\EntityContentFactory;
  */
 class OutputPageEntityViewChecker {
 
+	/** @var EntityContentFactory */
 	private $entityContentFactory;
 
 	public function __construct( EntityContentFactory $entityContentFactory ) {

@@ -44,8 +44,10 @@ class EntitySource {
 	 */
 	private $conceptBaseUri;
 
+	/** @var string */
 	private $rdfNodeNamespacePrefix;
 
+	/** @var string */
 	private $rdfPredicateNamespacePrefix;
 
 	/**

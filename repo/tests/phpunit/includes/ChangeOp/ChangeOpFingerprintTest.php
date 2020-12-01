@@ -78,7 +78,7 @@ class ChangeOpFingerprintTest extends TestCase {
 
 	public function testApply() {
 		$innerChangeOpResult = $this->createMock( ChangeOpsResult::class );
-		$innerChangeOpResult->method( 'getChangeOpsResults' )->willReturn( $this->createMock( ChangeOps::class ) );
+		$innerChangeOpResult->method( 'getChangeOpsResults' )->willReturn( [ $this->createMock( ChangeOps::class ) ] );
 
 		$this->innerChangeOp->method( 'apply' )
 			->willReturn( $innerChangeOpResult );

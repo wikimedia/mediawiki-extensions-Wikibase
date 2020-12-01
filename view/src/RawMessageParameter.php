@@ -11,6 +11,7 @@ namespace Wikibase\View;
  */
 class RawMessageParameter {
 
+	/** @var string */
 	private $contents;
 
 	public function __construct( string $contents ) {

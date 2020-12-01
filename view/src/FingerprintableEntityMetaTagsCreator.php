@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\View;
 
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -15,6 +17,7 @@ use Wikimedia\Assert\Assert;
  */
 class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 
+	/** @var TermLanguageFallbackChain */
 	private $termLanguageFallbackChain;
 
 	public function __construct( TermLanguageFallbackChain $termLanguageFallbackChain ) {
@@ -41,12 +44,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 		return $metaTags;
 	}
 
-	/**
-	 * @param FingerprintProvider $entity
-	 *
-	 * @return string|null
-	 */
-	private function getDescriptionText( FingerprintProvider $entity ) {
+	private function getDescriptionText( FingerprintProvider $entity ): ?string {
 		$descriptions = $entity->getFingerprint()
 			->getDescriptions()
 			->toTextArray();
@@ -64,7 +62,7 @@ class FingerprintableEntityMetaTagsCreator implements EntityMetaTagsCreator {
 	 * @return string|null
 	 * @suppress PhanTypeMismatchDeclaredParam,PhanUndeclaredMethod Intersection type
 	 */
-	private function getTitleText( FingerprintProvider $entity ) {
+	private function getTitleText( FingerprintProvider $entity ): ?string {
 		$labels = $entity->getFingerprint()
 			->getLabels()
 			->toTextArray();

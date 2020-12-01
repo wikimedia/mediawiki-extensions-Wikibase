@@ -6,12 +6,14 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
+use Psr\Log\LoggerInterface;
 
 /**
  * @license GPL-2.0-or-later
  */
 trait ItemChangeTrait {
 	// declare some EntityChange members, mainly for Phan
+	/** @var LoggerInterface */
 	protected $logger;
 
 	abstract public function getCompactDiff();

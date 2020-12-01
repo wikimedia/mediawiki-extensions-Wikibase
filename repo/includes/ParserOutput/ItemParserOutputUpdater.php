@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput;
 
 use ParserOutput;
@@ -11,6 +13,7 @@ use Wikibase\DataModel\Entity\Item;
  */
 class ItemParserOutputUpdater implements EntityParserOutputUpdater {
 
+	/** @var StatementDataUpdater */
 	private $statementDataUpdater;
 
 	public function __construct( StatementDataUpdater $statementDataUpdater ) {

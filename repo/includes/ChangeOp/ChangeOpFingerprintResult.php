@@ -3,6 +3,7 @@
 namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\Repo\Validators\TermValidatorFactory;
 
 /**
@@ -24,15 +25,15 @@ class ChangeOpFingerprintResult extends ChangeOpsResult {
 		$this->termValidatorFactory = $termValidatorFactory;
 	}
 
-	public function getChangeOpsResults() {
+	public function getChangeOpsResults(): array {
 		return $this->innerChangeOpsResult->getChangeOpsResults();
 	}
 
-	public function getEntityId() {
+	public function getEntityId(): ?EntityId {
 		return $this->innerChangeOpsResult->getEntityId();
 	}
 
-	public function isEntityChanged() {
+	public function isEntityChanged(): bool {
 		return $this->innerChangeOpsResult->isEntityChanged();
 	}
 

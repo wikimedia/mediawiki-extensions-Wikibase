@@ -218,7 +218,7 @@ class MergeItems extends ApiBase {
 			],
 			'ignoreconflicts' => [
 				self::PARAM_ISMULTI => true,
-				self::PARAM_TYPE => ChangeOpsMerge::$conflictTypes,
+				self::PARAM_TYPE => ChangeOpsMerge::CONFLICT_TYPES,
 				self::PARAM_REQUIRED => false,
 			],
 			'summary' => [
