@@ -203,6 +203,7 @@ use Wikibase\Repo\Search\Fields\NoFieldDefinitions;
 use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
+use Wikibase\Repo\Store\LoggingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
@@ -1059,28 +1060,38 @@ class WikibaseRepo {
 	}
 
 	public function newIdGenerator() : IdGenerator {
-		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'original' ) {
-			return new SqlIdGenerator(
-				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->getSettings()->getSetting( 'reservedIds' ),
-				$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
+		switch ( $this->getSettings()->getSetting( 'idGenerator' ) ) {
+			case 'original':
+				$idGenerator = new SqlIdGenerator(
+					MediaWikiServices::getInstance()->getDBLoadBalancer(),
+					$this->getSettings()->getSetting( 'reservedIds' ),
+					$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
+				);
+				break;
+			case 'mysql-upsert':
+				// We could make sure the 'upsert' generator is only being used with mysql dbs here,
+				// but perhaps that is an unnecessary check? People will realize when the DB query for
+				// ID selection fails anyway...
+				$idGenerator = new UpsertSqlIdGenerator(
+					MediaWikiServices::getInstance()->getDBLoadBalancer(),
+					$this->getSettings()->getSetting( 'reservedIds' ),
+					$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
+				);
+				break;
+			default:
+				throw new InvalidArgumentException(
+					'idGenerator config option must be either \'original\' or \'mysql-upsert\''
+				);
+		}
+
+		if ( $this->getSettings()->getSetting( 'idGeneratorLogging' ) ) {
+			$idGenerator = new LoggingIdGenerator(
+				$idGenerator,
+				LoggerFactory::getInstance( 'Wikibase.IdGenerator' )
 			);
 		}
 
-		if ( $this->getSettings()->getSetting( 'idGenerator' ) === 'mysql-upsert' ) {
-			// We could make sure the 'upsert' generator is only being used with mysql dbs here,
-			// but perhaps that is an unnecessary check? People will realize when the DB query for
-			// ID selection fails anyway...
-			return new UpsertSqlIdGenerator(
-				MediaWikiServices::getInstance()->getDBLoadBalancer(),
-				$this->getSettings()->getSetting( 'reservedIds' ),
-				$this->getSettings()->getSetting( 'idGeneratorSeparateDbConnection' )
-			);
-		}
-
-		throw new InvalidArgumentException(
-			'idGenerator config option must be either \'original\' or \'mysql-upsert\''
-		);
+		return $idGenerator;
 	}
 
 	/**
