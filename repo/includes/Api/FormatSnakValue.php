@@ -13,6 +13,7 @@ use DataValues\StringValue;
 use InvalidArgumentException;
 use LogicException;
 use ValueFormatters\FormatterOptions;
+use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -126,9 +127,9 @@ class FormatSnakValue extends ApiBase {
 				503,
 				[ 'property' => $params['property'] ]
 			);
-		} catch ( InvalidArgumentException $invalidArgumentException ) {
+		} catch ( InvalidArgumentException | FormattingException $exception ) {
 			$this->errorReporter->dieException(
-				$invalidArgumentException,
+				$exception,
 				'param-illegal'
 			);
 		}
