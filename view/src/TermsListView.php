@@ -82,10 +82,10 @@ class TermsListView {
 	public function getListViewHtml( $contentHtml ) {
 		return $this->templateFactory->render(
 			'wikibase-entitytermsforlanguagelistview',
-			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-language' ) ),
-			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-label' ) ),
-			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-description' ) ),
-			htmlspecialchars( $this->textProvider->get( 'wikibase-entitytermsforlanguagelistview-aliases' ) ),
+			$this->textProvider->getEscaped( 'wikibase-entitytermsforlanguagelistview-language' ),
+			$this->textProvider->getEscaped( 'wikibase-entitytermsforlanguagelistview-label' ),
+			$this->textProvider->getEscaped( 'wikibase-entitytermsforlanguagelistview-description' ),
+			$this->textProvider->getEscaped( 'wikibase-entitytermsforlanguagelistview-aliases' ),
 			$contentHtml
 		);
 	}

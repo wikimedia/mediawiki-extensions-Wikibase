@@ -98,7 +98,7 @@ class StatementSectionsView {
 		// TODO: Add link to SpecialPage that allows adding a new statement.
 		return $this->templateFactory->render(
 			'wb-section-heading',
-			htmlspecialchars( $this->textProvider->get( $messageKey ) ),
+			$this->textProvider->getEscaped( $messageKey ),
 			$id,
 			$className
 		);

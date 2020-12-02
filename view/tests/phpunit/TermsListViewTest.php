@@ -152,20 +152,6 @@ class TermsListViewTest extends \PHPUnit\Framework\TestCase {
 		$this->assertStringNotContainsString( '&amp;', $html, 'no double escaping' );
 	}
 
-	public function testGetTermsListView_isEscaped() {
-		$textProvider = $this->createMock( LocalizedTextProvider::class );
-		$textProvider->method( 'get' )
-			->will( $this->returnCallback( function( $key ) {
-				return $key === 'wikibase-entitytermsforlanguagelistview-language' ? '"RAW"' : "($key)";
-			} ) );
-
-		$view = $this->getTermsListView( 0, $textProvider );
-		$html = $view->getHtml( new TermList(), new TermList(), new AliasGroupList(), [] );
-
-		$this->assertStringContainsString( '&quot;RAW&quot;', $html );
-		$this->assertStringNotContainsString( '"RAW"', $html );
-	}
-
 	public function testGetTermsListView_noAliasesProvider() {
 		$labels = $this->getTermList( '<LABEL>' );
 		$descriptions = $this->getTermList( '<DESCRIPTION>' );

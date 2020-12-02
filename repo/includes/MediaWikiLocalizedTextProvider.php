@@ -38,6 +38,16 @@ class MediaWikiLocalizedTextProvider implements LocalizedTextProvider {
 
 	/**
 	 * @param string $key
+	 * @param string[] $params Parameters that could be used for generating the text
+	 *
+	 * @return string The localized text
+	 */
+	public function getEscaped( $key, array $params = [] ) {
+		return ( new Message( $key, $params, $this->language ) )->escaped();
+	}
+
+	/**
+	 * @param string $key
 	 *
 	 * @return bool
 	 */

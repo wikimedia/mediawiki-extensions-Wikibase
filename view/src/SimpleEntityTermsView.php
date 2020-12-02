@@ -181,7 +181,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 
 		if ( $entityId !== null ) {
 			$id = $entityId->getSerialization();
-			$idInParenthesesHtml = htmlspecialchars( $this->textProvider->get( 'parentheses', [ $id ] ) );
+			$idInParenthesesHtml = $this->textProvider->getEscaped( 'parentheses', [ $id ] );
 
 			$label = null;
 			try {
@@ -198,7 +198,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 		return $this->templateFactory->render(
 			'wikibase-title',
 			$isEmpty ? 'wb-empty' : '',
-			$isEmpty ? htmlspecialchars( $this->textProvider->get( 'wikibase-label-empty' ) ) : $labelHtml,
+			$isEmpty ? $this->textProvider->getEscaped( 'wikibase-label-empty' ) : $labelHtml,
 			$idInParenthesesHtml
 		);
 	}
@@ -210,7 +210,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 	 */
 	private function getDescriptionHtml( Term $description = null ) {
 		if ( $description === null ) {
-			return htmlspecialchars( $this->textProvider->get( 'wikibase-description-empty' ) );
+			return $this->textProvider->getEscaped( 'wikibase-description-empty' );
 		}
 		return $this->htmlTermRenderer->renderTerm( $description );
 	}
@@ -232,7 +232,7 @@ class SimpleEntityTermsView implements EntityTermsView {
 			$aliasesHtml .= $this->templateFactory->render(
 				'wikibase-entitytermsview-aliases-alias',
 				htmlspecialchars( $alias ),
-				htmlspecialchars( $this->textProvider->get( 'wikibase-aliases-separator' ) )
+				$this->textProvider->getEscaped( 'wikibase-aliases-separator' )
 			);
 		}
 

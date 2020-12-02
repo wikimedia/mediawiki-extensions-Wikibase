@@ -139,7 +139,7 @@ class SiteLinksView {
 	private function getHtmlForSectionHeading( $heading ) {
 		$html = $this->templateFactory->render(
 			'wb-section-heading',
-			htmlspecialchars( $this->textProvider->get( $heading ) ),
+			$this->textProvider->getEscaped( $heading ),
 			'sitelinks', // ID - TODO: should not be added if output page is not the entity's page
 			$heading
 		);
@@ -168,15 +168,15 @@ class SiteLinksView {
 			'wikibase-sitelinkgroupview',
 			// TODO: support entity-id as prefix for element IDs.
 			htmlspecialchars( 'sitelinks-' . $group, ENT_QUOTES ),
-			htmlspecialchars( $this->textProvider->get( 'wikibase-sitelinks-' . $group ) ),
-			htmlspecialchars( $this->textProvider->get( 'parentheses', [
+			$this->textProvider->getEscaped( 'wikibase-sitelinks-' . $group ),
+			$this->textProvider->getEscaped( 'parentheses', [
 				$this->textProvider->get(
 					'wikibase-sitelinks-counter',
 					[
 						$this->numberLocalizer->localizeNumber( $count ),
 					]
 				)
-			] ) ),
+			] ),
 			$this->templateFactory->render(
 				'wikibase-sitelinklistview',
 				$this->getHtmlForSiteLinks( $siteLinksForTable, $group === 'special' )

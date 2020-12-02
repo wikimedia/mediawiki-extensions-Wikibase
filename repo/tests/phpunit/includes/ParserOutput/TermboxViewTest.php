@@ -14,6 +14,7 @@ use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\ParserOutput\TermboxView;
 use Wikibase\Repo\ParserOutput\TextInjector;
+use Wikibase\View\DummyLocalizedTextProvider;
 use Wikibase\View\EntityTermsView;
 use Wikibase\View\LocalizedTextProvider;
 use Wikibase\View\SpecialPageLinker;
@@ -170,12 +171,8 @@ class TermboxViewTest extends TestCase {
 
 	public function testGetTitleHtml_returnsHtmlWithEntityId() {
 		$entityId = new ItemId( 'Q42' );
-		$decoratedIdSerialization = '( ' . $entityId->getSerialization() . ')';
 
-		$textProvider = $this->newLocalizedTextProvider();
-		$textProvider->method( 'get' )
-			->with( 'parentheses', [ $entityId->getSerialization() ] )
-			->willReturn( $decoratedIdSerialization );
+		$textProvider = new DummyLocalizedTextProvider();
 
 		$termbox = $this->newTermbox(
 			$this->newTermboxRenderer(),
@@ -184,7 +181,7 @@ class TermboxViewTest extends TestCase {
 		);
 
 		$this->assertSame(
-			$decoratedIdSerialization,
+			'(parentheses: Q42)',
 			$termbox->getTitleHtml( $entityId )
 		);
 	}
