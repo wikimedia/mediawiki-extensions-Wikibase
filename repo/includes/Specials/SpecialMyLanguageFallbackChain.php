@@ -102,7 +102,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 
 			if ( $sourceLanguage ) {
 				$sourceLanguageName = Language::fetchLanguageName( $sourceLanguage->getCode(), $inLanguage );
-				$msgHtml = wfMessage(
+				$msgHtml = $this->msg(
 					'wikibase-mylanguagefallbackchain-converted-item',
 					$language->getHtmlCode(),
 					$languageName,
@@ -110,7 +110,7 @@ class SpecialMyLanguageFallbackChain extends SpecialPage {
 					$sourceLanguageName
 				)->parse();
 			} else {
-				$msgHtml = wfMessage(
+				$msgHtml = $this->msg(
 					'wikibase-mylanguagefallbackchain-verbatim-item',
 					$language->getHtmlCode(),
 					$languageName

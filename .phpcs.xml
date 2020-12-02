@@ -36,7 +36,6 @@
 
 		<!-- more-or-less temporarily excluded (T268827) -->
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation" />
-		<exclude name="MediaWiki.Usage.ExtendClassUsage.FunctionVarUsage" />
 	</rule>
 
 	<!-- BEGIN rules copied from wikibase-codesniffer (T268827) -->
