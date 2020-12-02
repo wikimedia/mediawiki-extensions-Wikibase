@@ -104,7 +104,7 @@ class DataTypeDefinitions {
 	 */
 	private function filterDisabledDataTypes( array $dataTypeDefinitions, array $disabledTypes ) {
 		foreach ( $dataTypeDefinitions as $id => $def ) {
-			if ( 0 === strpos( $id, 'PT' ) ) {
+			if ( strpos( $id, 'PT' ) === 0 ) {
 				if ( in_array( substr( $id, 3 ), $disabledTypes ) ) {
 					unset( $dataTypeDefinitions[$id] );
 				}
