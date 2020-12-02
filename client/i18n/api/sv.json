@@ -19,5 +19,6 @@
 	"apihelp-query+description-example-central": "Hämta beskrivningen för sidan \"London\", helst den centrala beskrivningen om det finns någon.",
 	"apihelp-query+wikibase-description": "Hämta information om Wikibase-klienten och det tillhörande Wikibase-centralförvaret.",
 	"apihelp-query+wikibase-example": "Hämta URL-sökvägen och annan information om Wikibase-klienten och centralförvaret.",
-	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats."
+	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats.",
+	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-formatering."
 }
