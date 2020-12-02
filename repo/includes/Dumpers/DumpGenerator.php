@@ -79,7 +79,7 @@ abstract class DumpGenerator {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( $out, EntityPrefetcher $entityPrefetcher ) {
-		if ( !is_resource( $out ) ) {
+		if ( !$out ) {
 			throw new InvalidArgumentException( '$out must be a file handle!' );
 		}
 
