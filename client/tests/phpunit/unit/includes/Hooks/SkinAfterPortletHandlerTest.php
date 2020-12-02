@@ -153,6 +153,9 @@ class SkinAfterPortletHandlerTest extends TestCase {
 			->method( 'exists' )
 			->will( $this->returnValue( true ) );
 		$title->expects( $this->any() )
+			->method( 'canExist' )
+			->will( $this->returnValue( true ) );
+		$title->expects( $this->any() )
 			->method( 'getNamespace' )
 			->will( $this->returnValue( 0 ) );
 
