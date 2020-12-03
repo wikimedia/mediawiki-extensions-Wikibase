@@ -23,7 +23,6 @@ use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\EntityTypeDefinitions;
@@ -123,29 +122,29 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	abstract protected function getHandler( SettingsArray $settings = null );
 
 	/**
+	 * Create a new entity content from the given document.
+	 *
+	 * This function is called from data providers and must not rely on services being set up;
+	 * in particular, it must not call {@link getHandler}.
+	 *
 	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( EntityDocument $entity = null ) {
-		if ( !$entity ) {
-			$entity = $this->newEntity();
-		}
-
-		$handler = $this->getHandler();
-		return $handler->makeEntityContent( new EntityInstanceHolder( $entity ) );
-	}
+	abstract protected function newEntityContent( EntityDocument $entity = null ): EntityContent;
 
 	/**
+	 * Create a new entity redirect content from the given IDs, if possible.
+	 *
+	 * This function is called from data providers and must not rely on services being set up;
+	 * in particular, it must not call {@link getHandler}.
+	 *
 	 * @param EntityId $id
 	 * @param EntityId $target
 	 *
-	 * @return EntityContent
+	 * @return EntityContent|null
 	 */
-	protected function newRedirectContent( EntityId $id, EntityId $target ) {
-		$handler = $this->getHandler();
-		return $handler->makeEntityRedirectContent( new EntityRedirect( $id, $target ) );
-	}
+	abstract protected function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent;
 
 	/**
 	 * @param EntityId|null $id

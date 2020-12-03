@@ -4,6 +4,7 @@ namespace Wikibase\Repo\Tests\Content;
 
 use DataValues\StringValue;
 use MWException;
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
@@ -84,8 +85,8 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$item2 = $this->newEntity();
 		$item2->setLabel( 'en', 'Bar' );
 
-		$itemContent1 = $this->newRedirectItemContent( $item1->getId(), new ItemId( 'Q112' ) );
-		$itemContent2 = $this->newRedirectItemContent( $item1->getId(), new ItemId( 'Q113' ) );
+		$itemContent1 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q112' ) );
+		$itemContent2 = $this->newRedirectContent( $item1->getId(), new ItemId( 'Q113' ) );
 
 		$content1 = $this->newEntityContent( $item1 );
 		$content2 = $itemContent1;
@@ -101,35 +102,27 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	}
 
 	/**
-	 * @param ItemId $id
-	 * @param ItemId $targetId
-	 *
-	 * @return ItemContent
-	 */
-	protected function newRedirectItemContent( ItemId $id, ItemId $targetId ) {
-		$redirect = new EntityRedirect( $id, $targetId );
-
-		$handler = $this->getHandler();
-		$title = $handler->getTitleForId( $redirect->getTargetId() );
-
-		// set content model to avoid db call to look up content model when
-		// constructing ItemContent in the tests, especially in the data providers.
-		$title->setContentModel( $handler->getModelID() );
-
-		return ItemContent::newFromRedirect( $redirect, $title );
-	}
-
-	/**
 	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( EntityDocument $entity = null ) {
+	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}
 
-		return $this->getHandler()->makeEntityContent( new EntityInstanceHolder( $entity ) );
+		return new ItemContent( new EntityInstanceHolder( $entity ) );
+	}
+
+	protected function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
+		$redirect = new EntityRedirect( $id, $target );
+
+		$title = Title::makeTitle( 100, $target->getSerialization() );
+		// set content model to avoid db call to look up content model when
+		// constructing ItemContent in the tests, especially in the data providers.
+		$title->setContentModel( ItemContent::CONTENT_MODEL_ID );
+
+		return new ItemContent( null, $redirect, $title );
 	}
 
 	public function testMakeEntityRedirectContent() {
