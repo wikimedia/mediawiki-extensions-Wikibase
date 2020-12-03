@@ -18,7 +18,15 @@
 	"apihelp-query+description-example": "Hämta beskrivningen för sidan \"London\".",
 	"apihelp-query+description-example-central": "Hämta beskrivningen för sidan \"London\", helst den centrala beskrivningen om det finns någon.",
 	"apihelp-query+wikibase-description": "Hämta information om Wikibase-klienten och det tillhörande Wikibase-centralförvaret.",
+	"apihelp-query+wikibase-summary": "Hämta information om Wikibase-klienten och det associerade Wikibase-centralförvaret.",
 	"apihelp-query+wikibase-example": "Hämta URL-sökvägen och annan information om Wikibase-klienten och centralförvaret.",
 	"apihelp-query+wikibase-param-prop": "Vilka egenskaper att hämta:\n;<kbd>url</kbd>: Bas-URL, skript-sökväg och artikel-sökväg för Wikibase-centralförvaret.\n;<kbd>siteid</kbd>: siteid för denna webbplats.",
+	"apihelp-wbformatreference-summary": "Formaterar en referens som visas för användare.",
+	"apihelp-wbformatreference-example-1": "Formaterar en tom referens med hjälp av Data Bridge-stil till HTML.",
+	"apihelp-wbformatreference-example-2": "Formaterar en referens som innehåller en sträng med hjälp av Data Bridge-stil till HTML.",
+	"apihelp-wbformatreference-param-reference": "Referensen som ett JSON-objekt.",
+	"apihelp-wbformatreference-param-style": "Stilen som referensen formateras i.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "Stilen som används av [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Inte avsedd för allmänt bruk.",
+	"apihelp-wbformatreference-param-outputformat": "Formatet som resultatet ska returneras i.",
 	"apihelp-wbformatreference-paramvalue-outputformat-html": "HTML-formatering."
 }
