@@ -20,10 +20,6 @@
 			* It does not understand "@param <type> [$optional,…]. -->
 		<exclude name="MediaWiki.Commenting.FunctionComment" />
 
-		<!-- We disagree with the idea of certain characters making comments "illegal" and blocking
-			patches from being merged. This behaves especially bad on code examples. -->
-		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
-
 		<!-- Starting a function's body with an empty line can be helpful after a very large header.
 			The code is not guaranteed to be easier to read if this is disallowed. -->
 		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
