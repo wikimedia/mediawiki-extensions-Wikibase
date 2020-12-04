@@ -20,77 +20,6 @@ module.exports = ( function( $, vv ) {
 	];
 
 	/**
-	 * Rounds a given precision for being able to use it as internal "constant".
-	 * @ignore
-	 *
-	 * @param {number} precision
-	 * @return {number}
-	 */
-	function roundPrecision( precision ) {
-		return parseFloat( precision.toPrecision( 6 ) );
-	}
-
-	/**
-	 * @param {number} precision
-	 * @return {string}
-	 */
-	function getPrecisionLabel( precision ) {
-		var presets = {
-			'to an arcminute': 1 / 60,
-			'to an arcsecond': 1 / 3600,
-			'to 1/10 of an arcsecond': 1 / 36000,
-			'to 1/100 of an arcsecond': 1 / 360000,
-			'to 1/1000 of an arcsecond': 1 / 3600000,
-			'1/10000\'': 1 / 36000000
-		};
-
-		for ( var label in presets ) {
-			if ( Math.abs( precision - presets[label] ) < 0.000000000001 ) {
-				return label;
-			}
-		}
-
-		return '±' + roundPrecision( precision ) + '°';
-	}
-
-	/**
-	 * Returns the original precision level for an unrounded precision.
-	 * @ignore
-	 *
-	 * @param {number} precision
-	 * @return {number|null}
-	 */
-	function getPrecisionSetting( precision ) {
-		var actualPrecision = null,
-			roundedPrecision = roundPrecision( precision );
-
-		$.each( PRECISIONS, function( i, precision ) {
-			if ( roundPrecision( precision ) === roundedPrecision ) {
-				actualPrecision = roundedPrecision;
-				return false;
-			}
-		} );
-
-		return actualPrecision;
-	}
-
-	/**
-	 * @ignore
-	 *
-	 * @return {Object[]}
-	 */
-	function getPrecisionValues() {
-		var precisionValues = [];
-		$.each( PRECISIONS, function( i, precision ) {
-			precisionValues.unshift( {
-				value: roundPrecision( precision ),
-				label: getPrecisionLabel( precision )
-			} );
-		} );
-		return precisionValues;
-	}
-
-	/**
 	 * `Valueview` expert handling input of `GlobeCoordinate` values.
 	 * @class jQuery.valueview.experts.GlobeCoordinateValue
 	 * @extends jQuery.valueview.experts.StringValue
@@ -120,7 +49,7 @@ module.exports = ( function( $, vv ) {
 
 		this.precisionRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-precision',
-			getPrecisionValues(),
+			this._getPrecisionValues(),
 			function( newPrecisionLevel ) {
 				self._viewNotifier.notify( 'change' );
 			},
@@ -141,12 +70,12 @@ module.exports = ( function( $, vv ) {
 					};
 				}
 
-				return getPrecisionSetting( precision ) || {
+				return self._getPrecisionSetting( precision ) || {
 					custom: true,
 					value: precision,
 					label: self._messageProvider.getMessage(
 						'valueview-expert-globecoordinateinput-customprecision',
-						[ getPrecisionLabel( precision ) ]
+						[ self._getPrecisionLabel( precision ) ]
 					)
 				};
 			},
@@ -215,6 +144,84 @@ module.exports = ( function( $, vv ) {
 			}
 
 			PARENT.prototype.destroy.call( this );
+		},
+
+		/**
+		 * Rounds a given precision for being able to use it as internal "constant".
+		 * @ignore
+		 * @private
+		 *
+		 * @param {number} precision
+		 * @return {number}
+		 */
+		_roundPrecision: function( precision ) {
+			return parseFloat( precision.toPrecision( 6 ) );
+		},
+
+		/**
+		 * @private
+		 *
+		 * @param {number} precision
+		 * @return {string}
+		 */
+		_getPrecisionLabel: function( precision ) {
+			var presets = {
+				'to an arcminute': 1 / 60,
+				'to an arcsecond': 1 / 3600,
+				'to 1/10 of an arcsecond': 1 / 36000,
+				'to 1/100 of an arcsecond': 1 / 360000,
+				'to 1/1000 of an arcsecond': 1 / 3600000,
+				'1/10000\'': 1 / 36000000
+			};
+
+			for ( var label in presets ) {
+				if ( Math.abs( precision - presets[label] ) < 0.000000000001 ) {
+					return label;
+				}
+			}
+
+			return '±' + this._roundPrecision( precision ) + '°';
+		},
+
+		/**
+		 * Returns the original precision level for an unrounded precision.
+		 * @ignore
+		 * @private
+		 *
+		 * @param {number} precision
+		 * @return {number|null}
+		 */
+		_getPrecisionSetting: function( precision ) {
+			var self = this,
+				actualPrecision = null,
+				roundedPrecision = this._roundPrecision( precision );
+
+			$.each( PRECISIONS, function( i, precision ) {
+				if ( self._roundPrecision( precision ) === roundedPrecision ) {
+					actualPrecision = roundedPrecision;
+					return false;
+				}
+			} );
+
+			return actualPrecision;
+		},
+
+		/**
+		 * @ignore
+		 * @private
+		 *
+		 * @return {Object[]}
+		 */
+		_getPrecisionValues: function() {
+			var self = this,
+				precisionValues = [];
+			$.each( PRECISIONS, function( i, precision ) {
+				precisionValues.unshift( {
+					value: self._roundPrecision( precision ),
+					label: self._getPrecisionLabel( precision )
+				} );
+			} );
+			return precisionValues;
 		}
 	} );
 
