@@ -8,8 +8,6 @@
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceSameLine" />
 		<exclude name="PSR2.Classes.ClassDeclaration.FirstInterfaceSameLine" />
 
-		<!-- BEGIN rules copied from wikibase-codesniffer (T268827) -->
-
 		<!-- The function comment sniff is way to rigorous about way to many details that need
 			exceptions:
 			* It complains about missing documentation on fully self-explanatory function headers
@@ -32,16 +30,9 @@
 			patches from being merged. -->
 		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
 
-		<!-- END rules copied from wikibase-codesniffer (T268827) -->
-
 		<!-- more-or-less temporarily excluded (T268827) -->
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation" />
 	</rule>
-
-	<!-- BEGIN rules copied from wikibase-codesniffer (T268827) -->
-
-	<!-- NOTE: We purposely decided against additional Generic.CodeAnalysis.… sniffs, because they
-		all have possible exceptions, and are not meant to block patches from being merged. -->
 
 	<!-- Disallows any content outside of <?php … ?> tags. -->
 	<rule ref="Generic.Files.InlineHTML" />
@@ -60,10 +51,6 @@
 	<!-- NOTE: Do not add the Squiz.Strings.DoubleQuoteUsage sniff. Even if we encourage to prefer
 		single quotes, we don't think double quotes should block patches from being merged. -->
 
-	<!-- END rules copied from wikibase-codesniffer (T268827) -->
-
-	<!-- BEGIN equivalent rules based on wikibase-codesniffer (T268827) -->
-
 	<rule ref="MediaWiki.Classes.FullQualifiedClassName">
 		<severity>5</severity>
 		<properties>
@@ -77,8 +64,6 @@
 		</properties>
 	</rule>
 
-	<!-- END equivalent rules based on wikibase-codesniffer (T268827) -->
-
 	<rule ref="Generic.Files.LineLength">
 		<properties>
 			<property name="lineLimit" value="140" />
@@ -89,6 +74,8 @@
 	<rule ref="Generic.Classes.DuplicateClassName">
 		<exclude-pattern>Scribunto_LuaWikibaseLibraryTestCase</exclude-pattern>
 	</rule>
+	<!-- NOTE: We purposely decided against additional Generic.CodeAnalysis.… sniffs, because they
+		all have possible exceptions, and are not meant to block patches from being merged. -->
 	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement">
 		<exclude-pattern>WikibaseClient\.example\.php</exclude-pattern>
 	</rule>
