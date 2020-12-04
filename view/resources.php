@@ -744,6 +744,12 @@ return call_user_func( function() {
 				'valueview-expert-globecoordinateinput-precision',
 				'valueview-expert-globecoordinateinput-nullprecision',
 				'valueview-expert-globecoordinateinput-customprecision',
+				'valueview-expert-globecoordinateinput-precisionlabel-arcminute',
+				'valueview-expert-globecoordinateinput-precisionlabel-arcsecond',
+				'valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond',
+				'valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond',
+				'valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond',
+				'valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond',
 			],
 		],
 
