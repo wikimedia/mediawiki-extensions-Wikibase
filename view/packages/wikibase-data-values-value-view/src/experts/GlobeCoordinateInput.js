@@ -166,17 +166,17 @@ module.exports = ( function( $, vv ) {
 		 */
 		_getPrecisionLabel: function( precision ) {
 			var presets = {
-				'to an arcminute': 1 / 60,
-				'to an arcsecond': 1 / 3600,
-				'to 1/10 of an arcsecond': 1 / 36000,
-				'to 1/100 of an arcsecond': 1 / 360000,
-				'to 1/1000 of an arcsecond': 1 / 3600000,
-				'1/10000\'': 1 / 36000000
+				'valueview-expert-globecoordinateinput-precisionlabel-arcminute': 1 / 60,
+				'valueview-expert-globecoordinateinput-precisionlabel-arcsecond': 1 / 3600,
+				'valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond': 1 / 36000,
+				'valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond': 1 / 360000,
+				'valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond': 1 / 3600000,
+				'valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond': 1 / 36000000
 			};
 
-			for ( var label in presets ) {
-				if ( Math.abs( precision - presets[label] ) < 0.000000000001 ) {
-					return label;
+			for ( var labelMsg in presets ) {
+				if ( Math.abs( precision - presets[labelMsg] ) < 0.000000000001 ) {
+					return this._messageProvider.getMessage( labelMsg );
 				}
 			}
 
