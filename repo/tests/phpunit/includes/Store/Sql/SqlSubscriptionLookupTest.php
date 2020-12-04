@@ -44,7 +44,7 @@ class SqlSubscriptionLookupTest extends MediaWikiIntegrationTestCase {
 
 		$this->insertSubscriptions( $subscriptions );
 
-		$lookup = new \Wikibase\Repo\Store\Sql\SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
+		$lookup = new SqlSubscriptionLookup( MediaWikiServices::getInstance()->getDBLoadBalancer() );
 
 		$subscriptions = $lookup->getSubscriptions( 'enwiki', [
 			new PropertyId( 'P1' ),

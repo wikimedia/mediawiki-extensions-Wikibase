@@ -24,7 +24,12 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\EntityId\EntityIdFormatter;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\Formatters\LabelsProviderEntityIdHtmlLinkFormatter;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\Api\CombinedEntitySearchHelper;
+use Wikibase\Repo\Api\EntityIdSearchHelper;
+use Wikibase\Repo\Api\EntityTermSearchHelper;
+use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 use Wikibase\Repo\ChangeOp\Deserialization\ItemChangeOpDeserializer;
 use Wikibase\Repo\ChangeOp\Deserialization\PropertyChangeOpDeserializer;
 use Wikibase\Repo\Content\ItemContent;
@@ -136,18 +141,18 @@ return [
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 
-			return new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+			return new CombinedEntitySearchHelper(
 					[
-						new Wikibase\Repo\Api\EntityIdSearchHelper(
+						new EntityIdSearchHelper(
 							$repo->getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
-							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
 								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
-						new Wikibase\Repo\Api\EntityTermSearchHelper(
+						new EntityTermSearchHelper(
 							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
 						)
 					]
@@ -236,19 +241,19 @@ return [
 			$repo = WikibaseRepo::getDefaultInstance();
 			$repoSettings = $repo->getSettings();
 
-			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
-				new Wikibase\Repo\Api\CombinedEntitySearchHelper(
+			return new PropertyDataTypeSearchHelper(
+				new CombinedEntitySearchHelper(
 					[
-						new Wikibase\Repo\Api\EntityIdSearchHelper(
+						new EntityIdSearchHelper(
 							$repo->getEntityLookup(),
 							WikibaseRepo::getEntityIdParser(),
-							new Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup(
+							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
 								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
-						new Wikibase\Repo\Api\EntityTermSearchHelper(
+						new EntityTermSearchHelper(
 							$repo->newTermSearchInteractor( $repo->getUserLanguage()->getCode() )
 						)
 					]
