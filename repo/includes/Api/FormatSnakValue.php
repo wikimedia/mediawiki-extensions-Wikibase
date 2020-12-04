@@ -122,7 +122,9 @@ class FormatSnakValue extends ApiBase {
 			$formattedValue = $this->formatValue( $params, $value, $dataTypeId );
 		} catch ( FederatedPropertiesException $ex ) {
 			$this->errorReporter->dieException(
-				new FederatedPropertiesException( wfMessage( 'wikibase-federated-properties-failed-request-api-error-message' )->text() ),
+				new FederatedPropertiesException(
+					$this->msg( 'wikibase-federated-properties-failed-request-api-error-message' )->text()
+				),
 				'federated-properties-failed-request',
 				503,
 				[ 'property' => $params['property'] ]
