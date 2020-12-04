@@ -49,7 +49,7 @@ class UpdateUnits extends Maintenance {
 
 	/**
 	 * Should we silence the error output for tests?
-	 * @var boolean
+	 * @var bool
 	 */
 	public $silent;
 

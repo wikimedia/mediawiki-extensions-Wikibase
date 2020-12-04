@@ -4,6 +4,7 @@ namespace Wikibase\Repo\ChangeOp;
 
 /**
  * Provides traversal interfaces of ChangeOpResult tree
+ * @license GPL-2.0-or-later
  */
 trait ChangeOpResultTraversal {
 

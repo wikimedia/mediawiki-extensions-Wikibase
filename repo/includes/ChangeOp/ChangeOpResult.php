@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 /**
  * Each ChangeOp applied will return an instance of ChangeOpResult
  * @see https://gerrit.wikimedia.org/r/#/c/mediawiki/extensions/Wikibase/+/518721/
+ * @license GPL-2.0-or-later
  */
 interface ChangeOpResult {
 

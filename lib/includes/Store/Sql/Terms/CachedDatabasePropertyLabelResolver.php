@@ -11,6 +11,7 @@ use Wikibase\Lib\Store\Sql\Terms\Util\StatsdMonitoring;
 /**
  * Resolves and caches property labels (which are unique per language) into entity IDs
  * through DatabaseTermIdsResolver api.
+ * @license GPL-2.0-or-later
  */
 class CachedDatabasePropertyLabelResolver extends AbstractTermPropertyLabelResolver {
 

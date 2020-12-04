@@ -10,6 +10,7 @@ use ValueParsers\ValueParser;
 
 /**
  * Class to parse localized era from values.
+ * @license GPL-2.0-or-later
  */
 class MwEraParser extends EraParser {
 

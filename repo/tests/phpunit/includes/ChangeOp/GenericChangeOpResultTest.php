@@ -11,6 +11,7 @@ use Wikibase\Repo\ChangeOp\GenericChangeOpResult;
  *
  * @group Wikibase
  * @group ChangeOp
+ * @license GPL-2.0-or-later
  */
 class GenericChangeOpResultTest extends \PHPUnit\Framework\TestCase {
 

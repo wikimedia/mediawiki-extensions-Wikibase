@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\Property;
  * Helper for mapping columns names of item/property in term storage
  *
  * @see DatabaseTermStoreWriterBase
+ * @license GPL-2.0-or-later
  */
 class NormalizedTermStorageMapping {
 

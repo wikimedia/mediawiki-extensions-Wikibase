@@ -9,6 +9,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 
 /**
  * Utility class to format entity links with labels for usage in hooks.
+ * @license GPL-2.0-or-later
  */
 class DefaultEntityLinkFormatter implements EntityLinkFormatter {
 

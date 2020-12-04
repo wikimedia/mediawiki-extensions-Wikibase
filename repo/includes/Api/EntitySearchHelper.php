@@ -6,6 +6,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 
 /**
  * Generic interface for searching entities.
+ * @license GPL-2.0-or-later
  */
 interface EntitySearchHelper {
 

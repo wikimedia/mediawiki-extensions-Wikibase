@@ -16,6 +16,7 @@ use Wikibase\Repo\Parsers\MwEraParser;
  * @group ValueParsers
  * @group Wikibase
  * @group TimeParsers
+ * @license GPL-2.0-or-later
  */
 class MwEraParserTest extends StringValueParserTest {
 	use PHPUnit4CompatTrait;

@@ -13,6 +13,7 @@ use Wikibase\Repo\Api\PropertyDataTypeSearchHelper;
 
 /**
  * Helper class to search for entities via an api from another wikibase instance
+ * @license GPL-2.0-or-later
  */
 class ApiEntitySearchHelper implements EntitySearchHelper {
 

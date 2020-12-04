@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 
 /**
  * Class ChangeOpLabelResult
+ * @license GPL-2.0-or-later
  */
 class ChangeOpLabelResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
 

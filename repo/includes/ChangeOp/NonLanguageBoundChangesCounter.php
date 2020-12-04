@@ -7,6 +7,7 @@ namespace Wikibase\Repo\ChangeOp;
  * (not instance of {@link LanguageBoundChangeOpResult}) in {@link ChangeOpResult} tree.
  *
  * Does not count non-leaf nodes (instances of {@link ChangeOpsResult}).
+ * @license GPL-2.0-or-later
  */
 class NonLanguageBoundChangesCounter {
 
