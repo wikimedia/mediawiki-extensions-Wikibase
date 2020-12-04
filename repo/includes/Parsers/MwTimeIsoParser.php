@@ -30,7 +30,7 @@ class MwTimeIsoParser extends StringValueParser {
 	 * @var array message keys showing the number of 0s that need to be appended to years when
 	 *      parsed with the given message keys
 	 */
-	private static $precisionMsgKeys = [
+	private const PRECISION_MSG_KEYS = [
 		TimeValue::PRECISION_YEAR1G => [
 			'wikibase-time-precision-Gannum',
 			'wikibase-time-precision-BCE-Gannum',
@@ -55,12 +55,12 @@ class MwTimeIsoParser extends StringValueParser {
 		],
 	];
 
-	private static $paddedZeros = [
+	private const PADDED_ZEROS = [
 		TimeValue::PRECISION_YEAR1G => 9,
 		TimeValue::PRECISION_YEAR1M => 6,
 		TimeValue::PRECISION_YEAR1K => 3,
 		TimeValue::PRECISION_YEAR100 => 2,
-		TimeValue::PRECISION_YEAR10 => 0
+		TimeValue::PRECISION_YEAR10 => 0,
 	];
 
 	/**
@@ -121,7 +121,7 @@ class MwTimeIsoParser extends StringValueParser {
 	 * @return TimeValue|bool
 	 */
 	private function reconvertOutputString( $value, Language $lang ) {
-		foreach ( self::$precisionMsgKeys as $precision => $msgKeysGroup ) {
+		foreach ( self::PRECISION_MSG_KEYS as $precision => $msgKeysGroup ) {
 			foreach ( $msgKeysGroup as $msgKey ) {
 				$res = $this->parseFromOutputString(
 					$lang,
@@ -244,7 +244,7 @@ class MwTimeIsoParser extends StringValueParser {
 				continue;
 			}
 			$number = $lang->parseFormattedNumber( $number );
-			$year = $number . str_repeat( '0', self::$paddedZeros[$precision] );
+			$year = $number . str_repeat( '0', self::PADDED_ZEROS[$precision] );
 
 			if ( ctype_digit( $year ) ) {
 				// IsoTimestampParser works only with digit only years (it uses \d{1,16} to match)

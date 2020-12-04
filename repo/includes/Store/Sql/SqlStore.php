@@ -160,6 +160,7 @@ class SqlStore implements Store {
 	 */
 	private $idGenerator;
 
+	/** @var EntitySource */
 	private $entitySource;
 
 	/**

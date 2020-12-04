@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib\Tests\Changes;
 
 use CentralIdLookup;
@@ -23,14 +25,14 @@ use User;
  */
 class MockRepoClientCentralIdLookup extends CentralIdLookup {
 	/**
-	 * @param int Factor to multiply by to go from this wiki to the central ID
+	 * @var int Factor to multiply by to go from this wiki to the central ID
 	 */
 	private $toCentralFactor;
 
 	/**
 	 * @param bool $isRepo True if this is the repo, false otherwise
 	 */
-	public function __construct( $isRepo ) {
+	public function __construct( bool $isRepo ) {
 		if ( $isRepo ) {
 			$this->toCentralFactor = -1;
 		} else {

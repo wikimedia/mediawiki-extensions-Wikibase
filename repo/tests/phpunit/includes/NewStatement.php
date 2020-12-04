@@ -43,6 +43,7 @@ class NewStatement {
 	 */
 	private $rank = Statement::RANK_NORMAL;
 
+	/** @var string|bool|null */
 	private $guid;
 
 	/**

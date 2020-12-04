@@ -17,6 +17,7 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class ChangeVisibilityNotificationJob extends ChangeModificationNotificationJob {
 
+	/** @var int */
 	private $batchSize;
 
 	/**

@@ -15,6 +15,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class PermissionsTestCase extends WikibaseApiTestCase {
 
+	/** @var bool */
 	private static $hasSetup;
 
 	protected function setUp(): void {

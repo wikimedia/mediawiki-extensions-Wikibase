@@ -65,6 +65,7 @@ class WikiPageEntityStore implements EntityStore {
 	 */
 	private $revisionStore;
 
+	/** @var EntitySource */
 	private $entitySource;
 
 	/**

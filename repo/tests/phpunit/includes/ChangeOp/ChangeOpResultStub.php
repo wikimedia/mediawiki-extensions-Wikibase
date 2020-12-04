@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\Tests\ChangeOp;
 
 use ValueValidators\Result;
@@ -12,25 +14,26 @@ use Wikibase\Repo\ChangeOp\ChangeOpResult;
  */
 class ChangeOpResultStub implements ChangeOpResult {
 
+	/** @var bool */
 	public $isEntityChanged;
+	/** @var EntityId|null */
 	public $entityId;
 
-	/**
-	 * @param EntityId|null $entityId
-	 * @param bool $isEntityChanged
-	 * @param array|null $validationErrors
-	 */
-	public function __construct( EntityId $entityId = null, $isEntityChanged = false, array $validationErrors = null ) {
+	public function __construct(
+		EntityId $entityId = null,
+		bool $isEntityChanged = false,
+		array $validationErrors = null
+	) {
 		$this->isEntityChanged = $isEntityChanged;
 		$this->entityId = $entityId;
 		$this->validationErrors = $validationErrors;
 	}
 
-	public function getEntityId() {
+	public function getEntityId(): ?EntityId {
 		return $this->entityId;
 	}
 
-	public function isEntityChanged() {
+	public function isEntityChanged(): bool {
 		return $this->isEntityChanged;
 	}
 

@@ -158,7 +158,7 @@ class ItemMergeInteractor {
 		$this->validateEntities( $fromItem, $toItem );
 
 		// strip any bad values from $ignoreConflicts
-		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::$conflictTypes );
+		$ignoreConflicts = array_intersect( $ignoreConflicts, ChangeOpsMerge::CONFLICT_TYPES );
 
 		try {
 			$changeOps = $this->mergeFactory->newMergeOps(

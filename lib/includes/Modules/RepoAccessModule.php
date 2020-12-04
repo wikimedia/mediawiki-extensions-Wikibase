@@ -18,6 +18,7 @@ use Wikibase\Lib\WikibaseSettings;
  */
 class RepoAccessModule extends ResourceLoaderModule {
 
+	/** @var string[] */
 	protected $targets = [ 'desktop', 'mobile' ];
 
 	/**

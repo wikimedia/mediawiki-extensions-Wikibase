@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ChangeOp;
 
 use ValueValidators\Result;
@@ -11,7 +13,9 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class ChangeOpsResult implements ChangeOpResult {
 
+	/** @var ChangeOpResult[] */
 	private $changeOpResults;
+	/** @var EntityId|null */
 	private $entityId;
 
 	/**
@@ -23,15 +27,15 @@ class ChangeOpsResult implements ChangeOpResult {
 		$this->changeOpResults = $changeOpResults;
 	}
 
-	public function getChangeOpsResults() {
+	public function getChangeOpsResults(): array {
 		return $this->changeOpResults;
 	}
 
-	public function getEntityId() {
+	public function getEntityId(): ?EntityId {
 		return $this->entityId;
 	}
 
-	public function isEntityChanged() {
+	public function isEntityChanged(): bool {
 		foreach ( $this->changeOpResults as $result ) {
 			if ( $result->isEntityChanged() ) {
 				return true;

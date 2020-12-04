@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\DataAccess;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -29,9 +31,7 @@ use Wikimedia\Assert\Assert;
  */
 class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 
-	/**
-	 * EntityRevisionLookup[]
-	 */
+	/** @var EntityRevisionLookup[] */
 	private $lookups;
 
 	public function __construct( array $lookups ) {
@@ -65,11 +65,7 @@ class ByTypeDispatchingEntityRevisionLookup implements EntityRevisionLookup {
 		return $lookup->getLatestRevisionId( $entityId, $mode );
 	}
 
-	/**
-	 * @param EntityId $entityId
-	 * @return EntityRevisionLookup|null
-	 */
-	private function getLookupForEntity( EntityId $entityId ) {
+	private function getLookupForEntity( EntityId $entityId ): ?EntityRevisionLookup {
 		$entityType = $entityId->getEntityType();
 		if ( !array_key_exists( $entityType, $this->lookups ) ) {
 			return null;

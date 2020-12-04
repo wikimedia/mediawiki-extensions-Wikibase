@@ -16,9 +16,12 @@ use Wikibase\Client\WikibaseClient;
  */
 class DescriptionProviderHookHandler implements SearchResultProvideDescriptionHook {
 
-	private $descriptionLookup;
+	/** @var bool */
 	private $allowLocalShortDesc;
+	/** @var bool */
 	private $forceLocalShortDesc;
+	/** @var DescriptionLookup */
+	private $descriptionLookup;
 
 	public function __construct(
 		bool $allowLocalShortDesc,

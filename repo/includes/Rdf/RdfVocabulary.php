@@ -74,16 +74,16 @@ class RdfVocabulary {
 	// Ranks
 	const WIKIBASE_RANK_BEST = 'BestRank';
 
-	public static $rankMap = [
+	const RANK_MAP = [
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
 		Statement::RANK_PREFERRED => 'PreferredRank',
 	];
-	// Value properties
+	/** @var string[] Value properties */
 	public $claimToValue = [];
-	// Value properties for normalized values
+	/** @var string[] Value properties for normalized values */
 	public $claimToValueNormalized = [];
-	// Value properties for normalized values, including for direct claims
+	/** @var string[] Value properties for normalized values, including for direct claims */
 	public $normalizedPropertyValueNamespace = [];
 
 	/**
@@ -97,8 +97,10 @@ class RdfVocabulary {
 	 */
 	public $entityNamespaceNames = [];
 
+	/** @var string[] */
 	public $dataNamespaceNames = [];
 
+	/** @var string[][] */
 	public $statementNamespaceNames = [];
 
 	/**
@@ -128,8 +130,10 @@ class RdfVocabulary {
 	 */
 	private $pagePropertyDefs;
 
+	/** @var string */
 	private $licenseUrl;
 
+	/** @var string[] */
 	private $sourceNameByEntityType;
 
 	/**

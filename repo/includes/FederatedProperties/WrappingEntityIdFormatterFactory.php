@@ -13,6 +13,7 @@ use Wikibase\View\EntityIdFormatterFactory;
  */
 class WrappingEntityIdFormatterFactory implements EntityIdFormatterFactory {
 
+	/** @var EntityIdFormatterFactory */
 	private $inner;
 
 	public function __construct( EntityIdFormatterFactory $inner ) {

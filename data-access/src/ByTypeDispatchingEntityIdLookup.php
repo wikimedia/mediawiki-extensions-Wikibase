@@ -23,6 +23,7 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 	 */
 	private $entityContentModels;
 
+	/** @var ServiceByTypeDispatcher */
 	private $serviceDispatcher;
 
 	public function __construct( array $entityContentModels, array $lookups, EntityIdLookup $defaultLookup ) {
@@ -61,21 +62,13 @@ class ByTypeDispatchingEntityIdLookup implements EntityIdLookup {
 		return $lookup->getEntityIdForTitle( $title );
 	}
 
-	/**
-	 * @param Title $title
-	 * @return string
-	 */
-	private function getContentModelForTitle( Title $title ) {
+	private function getContentModelForTitle( Title $title ): string {
 		$contentModel = $title->getContentModel();
 		Hooks::run( 'GetEntityContentModelForTitle', [ $title, &$contentModel ] );
 		return $contentModel;
 	}
 
-	/**
-	 * @param string $contentModel
-	 * @return EntityIdLookup
-	 */
-	private function getLookupForContentModel( $contentModel ) {
+	private function getLookupForContentModel( string $contentModel ): EntityIdLookup {
 		$entityType = array_search( $contentModel, $this->entityContentModels, true );
 
 		return $this->serviceDispatcher->getServiceForType( $entityType );

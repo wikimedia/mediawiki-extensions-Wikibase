@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib;
 
 use Liuggio\StatsdClient\Factory\StatsdDataFactoryInterface;
@@ -15,11 +17,13 @@ use Wikimedia\Assert\Assert;
  */
 class StatsdRecordingSimpleCache implements CacheInterface {
 
-	/* private */const DEFAULT_VALUE = __CLASS__ . '-default';
+	private const DEFAULT_VALUE = __CLASS__ . '-default';
 
+	/** @var CacheInterface */
 	private $inner;
+	/** @var StatsdDataFactoryInterface */
 	private $stats;
-	/** @var array */
+	/** @var string[] */
 	private $statsKeys;
 
 	/**
@@ -47,11 +51,11 @@ class StatsdRecordingSimpleCache implements CacheInterface {
 		$this->statsKeys = $statsKeys;
 	}
 
-	private function recordMisses( $count ) {
+	private function recordMisses( int $count ): void {
 		$this->stats->updateCount( $this->statsKeys['miss'], $count );
 	}
 
-	private function recordHits( $count ) {
+	private function recordHits( int $count ): void {
 		$this->stats->updateCount( $this->statsKeys['hit'], $count );
 	}
 

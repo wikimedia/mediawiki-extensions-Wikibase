@@ -19,7 +19,9 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class PrefetchingPropertyTermLookup extends PrefetchingEntityTermLookupBase {
 
+	/** @var string */
 	protected $entityIdClass = PropertyId::class;
+	/** @var string */
 	protected $statsPrefix = 'PrefetchingPropertyTermLookup';
 
 	protected function makeMapping(): NormalizedTermStorageMapping {

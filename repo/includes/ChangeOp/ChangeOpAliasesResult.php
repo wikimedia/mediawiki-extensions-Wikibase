@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ChangeOp;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -10,33 +12,42 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class ChangeOpAliasesResult extends GenericChangeOpResult implements LanguageBoundChangeOpResult {
 
+	/** @var string */
 	private $languageCode;
+	/** @var string[] */
 	private $oldAliases;
+	/** @var string[] */
 	private $newAliases;
 
 	/**
 	 * @param EntityId|null $entityId
 	 * @param string $languageCode
-	 * @param array $oldAliases
-	 * @param array $newAliases
+	 * @param string[] $oldAliases
+	 * @param string[] $newAliases
 	 * @param bool $isEntityChanged
 	 */
-	public function __construct( $entityId, $languageCode, $oldAliases, $newAliases, $isEntityChanged = false ) {
+	public function __construct(
+		?EntityId $entityId,
+		string $languageCode,
+		array $oldAliases,
+		array $newAliases,
+		bool $isEntityChanged = false
+	) {
 		parent::__construct( $entityId, $isEntityChanged );
 		$this->languageCode = $languageCode;
 		$this->oldAliases = $oldAliases;
 		$this->newAliases = $newAliases;
 	}
 
-	public function getLanguageCode() {
+	public function getLanguageCode(): string {
 		return $this->languageCode;
 	}
 
-	public function getNewAliases() {
+	public function getNewAliases(): array {
 		return $this->newAliases;
 	}
 
-	public function getOldAliases() {
+	public function getOldAliases(): array {
 		return $this->oldAliases;
 	}
 

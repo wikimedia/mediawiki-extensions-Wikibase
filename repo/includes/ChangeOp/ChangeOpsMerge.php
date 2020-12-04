@@ -64,7 +64,7 @@ class ChangeOpsMerge {
 	 */
 	private $siteLookup;
 
-	public static $conflictTypes = [ 'description', 'sitelink', 'statement' ];
+	public const CONFLICT_TYPES = [ 'description', 'sitelink', 'statement' ];
 
 	/**
 	 * @var StatementsMerger
@@ -114,7 +114,7 @@ class ChangeOpsMerge {
 	 * @throws InvalidArgumentException
 	 */
 	private function assertValidIgnoreConflictValues( array $ignoreConflicts ) {
-		if ( array_diff( $ignoreConflicts, self::$conflictTypes ) ) {
+		if ( array_diff( $ignoreConflicts, self::CONFLICT_TYPES ) ) {
 			throw new InvalidArgumentException(
 				'$ignoreConflicts array can only contain "description" and or "sitelink" and or "statement" values'
 			);

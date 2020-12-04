@@ -11,15 +11,19 @@ use Wikimedia\Assert\Assert;
  */
 class ServiceByTypeDispatcher {
 
+	/** @var callable[] */
 	private $callbacks;
 
 	/**
 	 * Map of entity types to services that were created by the respective callback
+	 * @var object[]
 	 */
 	private $services;
 
+	/** @var object */
 	private $defaultService;
 
+	/** @var string */
 	private $type;
 
 	/**

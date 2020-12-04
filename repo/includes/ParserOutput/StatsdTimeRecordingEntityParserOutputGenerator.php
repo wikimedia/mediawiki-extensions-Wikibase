@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Repo\ParserOutput;
 
 use InvalidArgumentException;
@@ -12,8 +14,11 @@ use Wikibase\Lib\Store\EntityRevision;
  */
 class StatsdTimeRecordingEntityParserOutputGenerator implements EntityParserOutputGenerator {
 
+	/** @var EntityParserOutputGenerator */
 	private $inner;
+	/** @var StatsdDataFactoryInterface */
 	private $stats;
+	/** @var string */
 	private $timingPrefix;
 
 	/**
@@ -24,7 +29,7 @@ class StatsdTimeRecordingEntityParserOutputGenerator implements EntityParserOutp
 	public function __construct(
 		EntityParserOutputGenerator $inner,
 		StatsdDataFactoryInterface $stats,
-		$timingPrefix
+		string $timingPrefix
 	) {
 		$this->inner = $inner;
 		$this->stats = $stats;

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Wikibase\Lib;
 
 use Wikibase\DataModel\Entity\EntityId;
@@ -29,7 +31,7 @@ class TermIndexEntry {
 	const FIELD_LANGUAGE = 'termLanguage';
 	const FIELD_TEXT = 'termText';
 
-	private static $fieldNames = [
+	private const FIELD_NAMES = [
 		self::FIELD_ENTITY,
 		self::FIELD_TYPE,
 		self::FIELD_LANGUAGE,
@@ -80,10 +82,10 @@ class TermIndexEntry {
 
 	private function assertConstructFieldsAreCorrect( array $fields ) {
 		Assert::parameter(
-			count( $fields ) === count( self::$fieldNames ) &&
-			empty( array_diff( self::$fieldNames, array_keys( $fields ) ) ),
+			count( $fields ) === count( self::FIELD_NAMES ) &&
+			empty( array_diff( self::FIELD_NAMES, array_keys( $fields ) ) ),
 			'$fields',
-			'must contain the following keys: ' . implode( ', ', self::$fieldNames )
+			'must contain the following keys: ' . implode( ', ', self::FIELD_NAMES )
 		);
 		Assert::parameter(
 			is_string( $fields[self::FIELD_TYPE] ) &&
@@ -108,38 +110,23 @@ class TermIndexEntry {
 		);
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getTermType() {
+	public function getTermType(): string {
 		return $this->termType;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getLanguage() {
+	public function getLanguage(): string {
 		return $this->termLanguage;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getText() {
+	public function getText(): string {
 		return $this->termText;
 	}
 
-	/**
-	 * @return EntityId
-	 */
-	public function getEntityId() {
+	public function getEntityId(): EntityId {
 		return $this->entityId;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getEntityType() {
+	public function getEntityType(): string {
 		return $this->entityId->getEntityType();
 	}
 
@@ -156,7 +143,7 @@ class TermIndexEntry {
 		$aValues = self::getFieldValuesForCompare( $a );
 		$bValues = self::getFieldValuesForCompare( $b );
 
-		foreach ( self::$fieldNames as $n ) {
+		foreach ( self::FIELD_NAMES as $n ) {
 			if ( $aValues[$n] !== $bValues[$n] ) {
 				return $aValues[$n] <=> $bValues[$n];
 			}
@@ -174,10 +161,7 @@ class TermIndexEntry {
 		];
 	}
 
-	/**
-	 * @return Term
-	 */
-	public function getTerm() {
+	public function getTerm(): Term {
 		return new Term( $this->getLanguage(), $this->getText() );
 	}
 

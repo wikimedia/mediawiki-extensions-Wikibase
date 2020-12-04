@@ -24,7 +24,7 @@ class HTMLAliasesField extends HTMLTextField {
 	 */
 	private $stringNormalizer;
 
-	private $defaultParameters = [
+	private const DEFAULT_PARAMETERS = [
 		'placeholder-message' => 'wikibase-aliases-edit-placeholder',
 		'label-message' => 'wikibase-aliases-edit-label',
 	];
@@ -53,7 +53,7 @@ class HTMLAliasesField extends HTMLTextField {
 
 		$params['type'] = 'text';
 
-		parent::__construct( array_merge( $this->defaultParameters, $params ) );
+		parent::__construct( array_merge( self::DEFAULT_PARAMETERS, $params ) );
 
 		$this->stringNormalizer = new StringNormalizer();
 	}

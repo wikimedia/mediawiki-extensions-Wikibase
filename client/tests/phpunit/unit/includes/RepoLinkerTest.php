@@ -2,7 +2,6 @@
 
 namespace Wikibase\Client\Tests\Unit;
 
-use InvalidArgumentException;
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataAccess\EntitySourceDefinitions;
@@ -106,23 +105,6 @@ class RepoLinkerTest extends \PHPUnit\Framework\TestCase {
 				'Kategorie:Dreißigjähriger_Krieg' ],
 			[ '//www.example.com/wiki/Why%3F_(American_band)', $settings[0],
 				'Why? (American band)' ]
-		];
-	}
-
-	/**
-	 * @dataProvider getPageUrlInvalidProvider
-	 */
-	public function testGetPageUrlInvalidThrowsException( array $settings, $page ) {
-		$repoLinker = $this->getRepoLinkerForSettings( $settings );
-		$this->expectException( InvalidArgumentException::class );
-		$repoLinker->getPageUrl( $page );
-	}
-
-	public function getPageUrlInvalidProvider() {
-		$settings = $this->getRepoSettings();
-
-		return [
-			[ $settings[0], [] ]
 		];
 	}
 

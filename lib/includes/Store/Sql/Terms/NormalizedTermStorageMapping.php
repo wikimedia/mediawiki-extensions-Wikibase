@@ -15,8 +15,11 @@ use Wikibase\DataModel\Entity\Property;
  */
 class NormalizedTermStorageMapping {
 
+	/** @var string */
 	protected $tablePrefix;
+	/** @var string */
 	protected $entityType;
+	/** @var string */
 	private $tableName;
 
 	public function __construct( string $tablePrefix, string $tableName, string $entityType ) {
