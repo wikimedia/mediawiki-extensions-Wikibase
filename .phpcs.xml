@@ -54,15 +54,9 @@
 		<exclude-pattern>tests*Test*\.php</exclude-pattern>
 	</rule>
 
-	<!-- Disallows ?>. See http://www.php-fig.org/psr/psr-2/#files -->
-	<rule ref="PSR2.Files.ClosingTag" />
-
 	<!-- NOTE: We can not use the Squiz.Arrays.ArrayBracketSpacing sniff because it conflicts with
 		the MediaWiki style that encourages to use spaces inside brackets, see
 		https://www.mediawiki.org/wiki/Manual:Coding_conventions/JavaScript#Whitespace -->
-
-	<!-- Makes sure control structures like if ( … ), for ( …; …; … ) etc. properly use spaces. -->
-	<rule ref="Squiz.ControlStructures.ControlSignature" />
 
 	<rule ref="Squiz.Functions.GlobalFunction" />
 
