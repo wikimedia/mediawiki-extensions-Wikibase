@@ -7,15 +7,18 @@
  */
 
 const assert = require( 'assert' );
+const process = require( 'process' );
 const semver = require( 'semver' );
 const requireFromUrl = require( 'require-from-url/sync' );
 const packageJson = require( '../package.json' );
 
+const branch = process.env.ZUUL_BRANCH || 'master';
+
 const mwVue = requireFromUrl(
-	'https://raw.githubusercontent.com/wikimedia/mediawiki/master/resources/lib/vue/vue.common.prod.js',
+	`https://raw.githubusercontent.com/wikimedia/mediawiki/${branch}/resources/lib/vue/vue.common.prod.js`,
 );
 const mwVuex = requireFromUrl(
-	'https://raw.githubusercontent.com/wikimedia/mediawiki/master/resources/lib/vuex/vuex.js',
+	`https://raw.githubusercontent.com/wikimedia/mediawiki/${branch}/resources/lib/vuex/vuex.js`,
 );
 
 assert( semver.satisfies( mwVue.version, packageJson.dependencies.vue ) );
