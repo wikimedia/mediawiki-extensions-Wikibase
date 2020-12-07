@@ -2,8 +2,10 @@
 	"@metadata": {
 		"authors": [
 			"Geraki",
+			"NikosLikomitros",
 			"Nikosgranturismogt",
 			"Nikosguard",
+			"Norhorn",
 			"Protnet",
 			"Xaris333"
 		]
@@ -14,6 +16,12 @@
 	"valueview-expert-globecoordinateinput-precision": "Ακρίβεια:",
 	"valueview-expert-globecoordinateinput-nullprecision": "Αδιευκρίνιστο",
 	"valueview-expert-globecoordinateinput-customprecision": "ειδικό ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "σε ένα λεπτό της μοίρας",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "σε ένα δευτερόλεπτο της μοίρας",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "σε 1/10 δευτερολέπτου της μοίρας",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "σε 1/100 δευτερολέπτου της μοίρας",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "σε 1/1000 δευτερολέπτου της μοίρας",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Γρηγοριανό",
 	"valueview-expert-timevalue-calendar-julian": "Ιουλιανό",
 	"valueview-expert-timeinput-precision": "Ακρίβεια:",

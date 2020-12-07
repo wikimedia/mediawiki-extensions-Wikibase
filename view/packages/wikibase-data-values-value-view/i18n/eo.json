@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Javiero",
 			"Robin van der Vliet"
 		]
 	},
 	"valueview-expert-globecoordinateinput-precision": "Precizeco:",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoria",
 	"valueview-expert-timevalue-calendar-julian": "Julia",
 	"valueview-expert-timeinput-precision": "Precizeco:",

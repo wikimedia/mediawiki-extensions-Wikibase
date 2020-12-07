@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"1917 Ekim Devrimi",
 			"Hedda",
+			"MuratTheTurkish",
 			"Uncitoyen",
 			"Uğurkent"
 		]
@@ -12,6 +14,12 @@
 	"valueview-expert-globecoordinateinput-precision": "Kesinlik:",
 	"valueview-expert-globecoordinateinput-nullprecision": "belirtilmemiş",
 	"valueview-expert-globecoordinateinput-customprecision": "özel ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "bir ark dakikaya",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "bir saniyeye",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "bir saniyenin 1/10'a kadar",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "bir saniyenin 1/100'ü kadar",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "bir saniyenin 1/1000'ine kadar",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoryen",
 	"valueview-expert-timevalue-calendar-julian": "Jülyen",
 	"valueview-expert-timeinput-precision": "Kesinlik:",

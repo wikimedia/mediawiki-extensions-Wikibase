@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"A2093064",
+			"Kly",
 			"Liuxinyu970226",
 			"Simon Shek",
 			"Stevenliuyi",
@@ -15,6 +16,12 @@
 	"valueview-expert-globecoordinateinput-precision": "精度：",
 	"valueview-expert-globecoordinateinput-nullprecision": "未指定",
 	"valueview-expert-globecoordinateinput-customprecision": "特殊 ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "為弧分",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "為弧秒",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "為 1/10 弧秒",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "為 1/100 弧秒",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "為 1/1000 弧秒",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "格里曆",
 	"valueview-expert-timevalue-calendar-julian": "儒略曆",
 	"valueview-expert-timeinput-precision": "精度：",

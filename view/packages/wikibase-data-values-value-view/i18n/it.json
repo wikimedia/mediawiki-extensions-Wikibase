@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Beta16"
+			"Beta16",
+			"Costabile"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "La gestione dei valori \"$1\" non è ancora supportata.",
@@ -10,6 +11,12 @@
 	"valueview-expert-globecoordinateinput-precision": "Precisione:",
 	"valueview-expert-globecoordinateinput-nullprecision": "non specificato",
 	"valueview-expert-globecoordinateinput-customprecision": "speciale ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcminute": "ad un arcominuto",
+	"valueview-expert-globecoordinateinput-precisionlabel-arcsecond": "ad un arcosecondo",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenth-of-arcsecond": "a 1/10 di un arcosecondo",
+	"valueview-expert-globecoordinateinput-precisionlabel-hundredth-of-arcsecond": "a 1/100 di un arcosecondo",
+	"valueview-expert-globecoordinateinput-precisionlabel-thousandth-of-arcsecond": "a 1/1000 di un arcosecondo",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriano",
 	"valueview-expert-timevalue-calendar-julian": "Giuliano",
 	"valueview-expert-timeinput-precision": "Precisione:",
