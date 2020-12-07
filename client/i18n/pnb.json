@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abbas dhothar",
 			"Khalid Mahmood"
 		]
 	},
 	"tooltip-t-wikibase": "ریپوزیٹری آئیٹم نال جوڑ",
-	"wikibase-comment-update": "آئیٹم بدل دتی",
+	"wikibase-comment-update": "{{WBREPONAME}} آئیٹم بدل دتی",
 	"wikibase-dataitem": "وکی ڈاٹا آئیٹم",
 	"wikibase-editlinks": "جوڑ لکھو",
 	"wikibase-editlinkstitle": "بولیاں دے آپسی جوڑ لکھو",
