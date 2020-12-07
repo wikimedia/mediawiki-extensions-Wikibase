@@ -154,25 +154,11 @@ class MwTimeIsoParser extends StringValueParser {
 		}
 
 		$isBceMsg = $this->isBceMsg( $msgKey );
-		$msgRegexp = $this->getRegexpFromMessageText( $msgText );
+		$msgRegexps = $this->getRegexpsFromMessageText( $msgText );
 
-		if ( preg_match(
-			'@^\s*' . $msgRegexp . '\s*$@i',
-			$value,
-			$matches
-		) ) {
-			return $this->chooseAndParseNumber(
-				$lang,
-				array_slice( $matches, 1 ),
-				$precision,
-				$isBceMsg
-			);
-		}
-
-		// If the msg string ends with BCE also check for BC
-		if ( substr_compare( $msgRegexp, 'BCE', -3 ) === 0 ) {
+		foreach ( $msgRegexps as $msgRegexp ) {
 			if ( preg_match(
-				'@^\s*' . substr( $msgRegexp, 0, -1 ) . '\s*$@i',
+				'@^\s*' . $msgRegexp . '\s*$@i',
 				$value,
 				$matches
 			) ) {
@@ -183,21 +169,21 @@ class MwTimeIsoParser extends StringValueParser {
 					$isBceMsg
 				);
 			}
-
 		}
 
 		return null;
 	}
 
 	/**
-	 * Creates a regular expression snippet from a given message.
+	 * Creates regular expression snippets from a given message.
 	 * This replaces $1 with (.+?) and also expands PLURAL clauses
 	 * so that we can match for every combination of these.
+	 * Callers should try each returned regex in turn.
 	 *
 	 * @param string $msgText
-	 * @return string
+	 * @return string[]
 	 */
-	private function getRegexpFromMessageText( $msgText ) {
+	private function getRegexpsFromMessageText( string $msgText ): array {
 		static $pluralRegex = null;
 		if ( $pluralRegex === null ) {
 			// We need to match on a preg_quoted string here, so double quote
@@ -205,25 +191,48 @@ class MwTimeIsoParser extends StringValueParser {
 				'.*?' . preg_quote( preg_quote( '}}' ) ) . '@';
 		}
 
-		// Quote regexp
-		$regex = preg_quote( $msgText, '@' );
+		$regexes = [ $msgText ];
 
-		// Expand the PLURAL cases
-		$regex = preg_replace_callback(
-			$pluralRegex,
-			function ( $matches ) {
-				// Change "{{PLURAL:$1" to "(?:" and "}}" to ")"
-				$replace = str_replace( '\{\{PLURAL\:\$1\|', '(?:', $matches[0] );
-				$replace = str_replace( '\}\}', ')', $replace );
+		foreach ( $regexes as $regex ) {
+			// If the msg string contains tags, also try parsing without them
+			$regexWithoutTags = strip_tags( $regex );
+			if ( $regexWithoutTags !== $regex ) {
+				$regexes[] = $regexWithoutTags;
+			}
+		}
 
-				// Unescape the pipes within the PLURAL clauses
-				return str_replace( '\|', '|', $replace );
-			},
-			$regex
-		);
+		foreach ( $regexes as &$regex ) {
+			// Quote regexp
+			$regex = preg_quote( $regex, '@' );
 
-		// Make sure we match for all $1s
-		return str_replace( '\$1', '(.+?)', $regex );
+			// Expand the PLURAL cases
+			$regex = preg_replace_callback(
+				$pluralRegex,
+				function ( $matches ) {
+					// Change "{{PLURAL:$1" to "(?:" and "}}" to ")"
+					$replace = str_replace( '\{\{PLURAL\:\$1\|', '(?:', $matches[0] );
+					$replace = str_replace( '\}\}', ')', $replace );
+
+					// Unescape the pipes within the PLURAL clauses
+					return str_replace( '\|', '|', $replace );
+				},
+				$regex
+			);
+
+			// Make sure we match for all $1s
+			$regex = str_replace( '\$1', '(.+?)', $regex );
+		}
+
+		unset( $regex ); // remove referenceness
+
+		foreach ( $regexes as $regex ) {
+			// If the msg string ends with BCE also check for BC
+			if ( substr_compare( $regex, 'BCE', -3 ) === 0 ) {
+				$regexes[] = substr( $regex, 0, -1 );
+			}
+		}
+
+		return $regexes;
 	}
 
 	/**

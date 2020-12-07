@@ -101,6 +101,8 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 			'wikibase-time-precision-BCE-Mannum' => '$1 мільйон{{PLURAL:$1||ів|и}} років до н.е.',
 			// With $1 in the PLURAL case
 			'wikibase-time-precision-BCE-century' => '{{PLURAL:$1|$1 one|$1 more|$1 evenmore}} precision-BCE-century',
+			// With tags
+			'wikibase-time-precision-century' => '$1<sup>e{{PLURAL:$1|r|}}</sup> siècle',
 			// A random template in the message
 			'wikibase-time-precision-10annum' => '$1 precision-10annum{{PLURAL:$1||s}} {{dummy|1|2|3}}',
 
@@ -169,6 +171,10 @@ class MwTimeIsoParserTest extends StringValueParserTest {
 				[ '+1000-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
 			'12. century' =>
 				[ '+1200-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
+			'9e siècle' =>
+				[ '+900-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
+			'9<sup>e</sup> siècle' =>
+				[ '+900-00-00T00:00:00Z', TimeValue::PRECISION_YEAR100, $julian ],
 			'1980s' =>
 				[ '+1980-00-00T00:00:00Z', TimeValue::PRECISION_YEAR10, ],
 			'1990 precision-10annum {{dummy|1|2|3}}' =>
