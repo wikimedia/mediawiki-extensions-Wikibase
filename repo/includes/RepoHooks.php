@@ -75,6 +75,11 @@ final class RepoHooks {
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$out->addModules( 'wikibase.ui.entitysearch' );
 		}
+
+		if ( $settings->getSetting( 'wikibasePingback' ) ) {
+			// Will send pingback in the future
+			// WikibasePingback::schedulePingback();
+		}
 	}
 
 	/**

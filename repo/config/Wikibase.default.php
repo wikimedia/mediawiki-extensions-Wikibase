@@ -353,4 +353,6 @@ return [
 	'deleteNotificationClientRCMaxAge' => $GLOBALS['wgRCMaxAge'],
 
 	'termFallbackCacheVersion' => null,
+
+	'wikibasePingback' => $GLOBALS['wgPingback'],
 ];
