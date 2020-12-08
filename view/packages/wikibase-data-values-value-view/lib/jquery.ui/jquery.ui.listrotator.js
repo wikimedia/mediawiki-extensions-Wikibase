@@ -4,6 +4,7 @@
 /**
  * Measures the maximum width of a container according to a list of strings. The width is
  * determined by the widest string.
+ *
  * @ignore
  *
  * @param {jQuery} $container
@@ -28,6 +29,7 @@ function measureMaximumStringWidths( $container, strings ) {
  * addition, clicking the current value reveals a drop-down list to directly select a value from the
  * list values.
  * (uses `jQuery.ui.menu`, `jQuery.ui.position`)
+ *
  * @class jQuery.ui.listrotator
  * @extends jQuery.Widget
  * @uses jQuery.ui
@@ -83,6 +85,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Node of the current list item section.
+	 *
 	 * @property {jQuery}
 	 * @protected
 	 * @readonly
@@ -98,6 +101,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Node of the menu opening when clicking on the "current" section.
+	 *
 	 * @property {jQuery}
 	 * @protected
 	 * @readonly
@@ -265,6 +269,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Create the drop-down menu assigned to the "current" section.
+	 *
 	 * @protected
 	 */
 	_createMenu: function() {
@@ -350,6 +355,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Sets a new value rotating to the new value.
+	 *
 	 * @protected
 	 *
 	 * @param {*} newValue
@@ -407,6 +413,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Shows the drop-down menu.
+	 *
 	 * @protected
 	 */
 	_showMenu: function() {
@@ -433,6 +440,7 @@ $.widget( 'ui.listrotator', {
 
 	/**
 	 * Hides the drop-down menu.
+	 *
 	 * @protected
 	 */
 	_hideMenu: function() {

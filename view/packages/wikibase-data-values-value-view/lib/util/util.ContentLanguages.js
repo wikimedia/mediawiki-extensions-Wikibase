@@ -6,6 +6,7 @@ this.util = this.util || {};
 	/**
 	 * A service storing information about the languages available for the content.
 	 * Uses `util.inherit`.
+	 *
 	 * @class util.ContentLanguages
 	 * @abstract
 	 * @uses util

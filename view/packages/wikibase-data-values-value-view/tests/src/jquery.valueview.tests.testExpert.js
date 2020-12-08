@@ -9,6 +9,7 @@ jQuery.valueview.tests.testExpert = ( function( $, QUnit, valueview, Notifier ) 
 
  /**
   * Tests different aspects of a valueview expert.
+  *
   * @since 0.1
   *
   * TODO: Test error cases.
@@ -165,12 +166,14 @@ function testExpert( testDefinition ) {
 
  /**
   * Object holding all fields required by testExpert's first argument's object.
+  *
   * @since 0.1
   * @property {Object}
   */
 testExpert.basicTestDefinition = {
 	/**
 	 * A jQuery.valueview.Expert implementation's constructor to be tested.
+	 *
 	 * @property {Function}
 	 */
 	expertConstructor: valueview.experts.StringValue

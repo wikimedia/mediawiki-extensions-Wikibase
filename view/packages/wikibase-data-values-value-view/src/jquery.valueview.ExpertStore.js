@@ -17,6 +17,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 	/**
 	 * Store managing `jQuery.valueview.Expert` instances.
+	 *
 	 * @class jQuery.valueview.ExpertStore
 	 * @since 0.1
 	 * @license GNU GPL v2+
@@ -38,6 +39,7 @@ jQuery.valueview = jQuery.valueview || {};
 		/**
 		 * Default `Expert` constructor to be returned when no `Expert` is registered for a specific
 		 * purpose.
+		 *
 		 * @property {Function|null}
 		 * @private
 		 */

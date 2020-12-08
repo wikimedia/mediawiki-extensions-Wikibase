@@ -6,6 +6,7 @@ jQuery.fn.autocompletestring = ( function () {
 	 * "complete" string and an "incomplete" - latter is supposed to consist out of the first
 	 * letter(s) of the "complete" string. The form element is filled with the "complete" string
 	 * while a text selection is applied to the characters missing in the "incomplete" string.
+	 *
 	 * @member jQuery.fn
 	 * @method autocompletestring
 	 * @license GNU GPL v2+
@@ -37,6 +38,7 @@ jQuery.fn.autocompletestring = ( function () {
 
 	/**
 	 * Creates a text selection.
+	 *
 	 * @ignore
 	 *
 	 * @param {Object} node

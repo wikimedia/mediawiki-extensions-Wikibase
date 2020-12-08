@@ -3,6 +3,7 @@
 
 /**
  * Rulers used for measuring the input content.
+ *
  * @property {jQuery}
  * @ignore
  */
@@ -10,6 +11,7 @@ var $rulerX, $rulerY;
 
 /**
  * Initializes the rulers used for measuring the input content.
+ *
  * @ignore
  */
 function initRulers() {
@@ -49,6 +51,7 @@ function initRulers() {
 
 /**
  * Destroys the rulers.
+ *
  * @ignore
  */
 function destroyRulers() {
@@ -64,6 +67,7 @@ function destroyRulers() {
 
 /**
  * Copy styles that affect spacing from one element to another.
+ *
  * @ignore
  *
  * @param {jQuery} $from
@@ -97,6 +101,7 @@ function copySpaceAffectingStyles( $from, $to ) {
 
 /**
  * Escapes HTML entities.
+ *
  * @ignore
  *
  * @param {string} text
@@ -188,6 +193,7 @@ $.fn.inputautoexpand = function( options ) {
 
 /**
  * Manages expanding input elements.
+ *
  * @class jQuery.AutoExpandInput
  * @uses jQuery.event.special.eachchange
  * @private
@@ -236,6 +242,7 @@ $.AutoExpandInput = function( element, options ) {
 $.extend( $.AutoExpandInput.prototype, {
 	/**
 	 * The input element the auto-expand mechanism is initialized on.
+	 *
 	 * @property {jQuery}
 	 * @private
 	 * @readonly
@@ -244,6 +251,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Options.
+	 *
 	 * @property {Object}
 	 * @private
 	 */
@@ -251,6 +259,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Caching the previous input to simply abort expanding when it did not change.
+	 *
 	 * @property {string}
 	 * @private
 	 */
@@ -258,6 +267,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * The input element's node name.
+	 *
 	 * @property {string}
 	 * @private
 	 */
@@ -289,6 +299,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Expands/Contracts the input element's width.
+	 *
 	 * @private
 	 */
 	_expandWidth: function() {
@@ -318,6 +329,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Expands/Contracts the input element's height.
+	 *
 	 * @private
 	 */
 	_expandHeight: function() {
@@ -345,6 +357,7 @@ $.extend( $.AutoExpandInput.prototype, {
 	 * Calculates the width which would be required for the input field if the given text was
 	 * inserted. This does not consider the comfort zone given in the options and doesn't check
 	 * for min/max width restraints.
+	 *
 	 * @private
 	 *
 	 * @param {string} text
@@ -357,6 +370,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Returns the minimum width the input element may have assigned.
+	 *
 	 * @private
 	 *
 	 * @return {number}
@@ -378,6 +392,7 @@ $.extend( $.AutoExpandInput.prototype, {
 	/**
 	 * Calculates the height the given text would require to not show any scrollbar within the input
 	 * element.
+	 *
 	 * @private
 	 *
 	 * @param {string} text
@@ -413,6 +428,7 @@ $.extend( $.AutoExpandInput.prototype, {
 
 	/**
 	 * Returns the width to add to the input element to prevent jitters when resizing while typing.
+	 *
 	 * @private
 	 *
 	 * @return {number}

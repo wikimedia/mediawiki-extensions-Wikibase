@@ -11,6 +11,7 @@
 	/**
 	 * `Valueview` expert based on `StringValue` expert but with a jQuery suggester loaded for
 	 * offering the user auto completion features.
+	 *
 	 * @class jQuery.valueview.experts.SuggestedStringValue
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1

@@ -9,6 +9,7 @@ var PARENT = $.Widget;
  * Helper for defining a valueview member function which will just call a valueview's Expert's
  * member function and return the value received from that function. If the valueview does not have
  * an expert currently, nothing will be done.
+ *
  * @ignore
  *
  * @param {string} fnName Name of the function in jQuery.valueview.Expert
@@ -121,6 +122,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Current, accepted value. Might be "behind" the `Expert`'s raw value until the raw value gets
 	 * parsed and the parsed result set as the new accepted value.
+	 *
 	 * @property {dataValues.DataValue|null}
 	 * @private
 	 */
@@ -130,6 +132,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Most current formatted value. Might be "behind" the `Expert`'s raw value as well as the
 	 * `valueview`'s parsed `DataValue` since formatting might involve an asynchronous
 	 * request.
+	 *
 	 * @property {string} HTML
 	 * @private
 	 */
@@ -137,6 +140,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Plain text version of the value to be shown when the user starts editing.
+	 *
 	 * @property {string} Plain text
 	 * @private
 	 */
@@ -144,6 +148,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * The DOM node containing the actual value representation. This is the `Expert`'s viewport.
+	 *
 	 * @property {jQuery}
 	 * @readonly
 	 */
@@ -151,6 +156,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Value from before edit mode.
+	 *
 	 * @property {dataValues.DataValue|null}
 	 * @private
 	 */
@@ -167,6 +173,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * available when in edit mode, otherwise it is `null`.
 	 * Can also be `null` if the current value has a data value type unknown to the expert store
 	 * given in the `expertStore` option.
+	 *
 	 * @property {jQuery.valueview.Expert|null}
 	 * @private
 	 */
@@ -174,6 +181,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Timeout id of the currently running `setTimeout` function that delays the parser API request.
+	 *
 	 * @property {number}
 	 * @private
 	 */
@@ -220,7 +228,7 @@ $.widget( 'valueview.valueview', PARENT, {
 		// Build widget's basic dom:
 		this.element.addClass( this.widgetBaseClass );
 		this.$value = $( '<div/>', {
-			'class': this.widgetBaseClass + '-value'
+			class: this.widgetBaseClass + '-value'
 		} );
 
 		// Set initial value if provided in options:
@@ -252,9 +260,10 @@ $.widget( 'valueview.valueview', PARENT, {
 	},
 
 	/**
+	 * @param key
+	 * @param value
 	 * @see jQuery.Widget._setOption
 	 * @protected
-	 *
 	 * @throws {Error} when trying to set an option that cannot be set after initialization.
 	 */
 	_setOption: function( key, value ) {
@@ -500,6 +509,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Returns the current value formatted as plain text.
+	 *
 	 * @since 0.4
 	 *
 	 * @return {string}
@@ -530,6 +540,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Will update the constructor currently used for creating an `Expert`, if one is needed.
+	 *
 	 * @private
 	 *
 	 * @throws {Error} if no `Expert` store being an instance of `jQuery.valueview.ExpertStore` is
@@ -556,6 +567,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	 * Will update the `Expert` responsible for handling the value type of the current value. If
 	 * there is no value set currently (empty value), the expert will be chosen based on the
 	 * `dataTypeId` or `dataValueType` option of the `valueview` widget.
+	 *
 	 * @private
 	 */
 	_updateExpert: function() {
@@ -674,6 +686,7 @@ $.widget( 'valueview.valueview', PARENT, {
 	/**
 	 * Will take the current raw value of the `valueview`'s `Expert` and parse and format it using
 	 * the `valueParserStore`, `plaintextFormatter` and `htmlFormatter` injected via the options.
+	 *
 	 * @private
 	 */
 	_updateValue: function() {
@@ -713,6 +726,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Renders an error message.
+	 *
 	 * @private
 	 *
 	 * @param {string} message HTML error message.
@@ -725,6 +739,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Parses the current raw value.
+	 *
 	 * @private
 	 *
 	 * @return {Object} jQuery.Promise
@@ -832,6 +847,7 @@ $.widget( 'valueview.valueview', PARENT, {
 
 	/**
 	 * Formats a specific data value.
+	 *
 	 * @private
 	 *
 	 * @param {dataValues.DataValue} dataValue

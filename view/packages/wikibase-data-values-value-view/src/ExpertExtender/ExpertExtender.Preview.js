@@ -3,6 +3,7 @@
 
 	/**
 	 * An `ExpertExtender` module which shows a preview of a value.
+	 *
 	 * @class jQuery.valueview.ExpertExtender.Preview
 	 * @since 0.6
 	 * @license GNU GPL v2+

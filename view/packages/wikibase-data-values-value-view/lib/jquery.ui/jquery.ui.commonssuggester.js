@@ -11,6 +11,7 @@
 	 * Commons suggester.
 	 * Enhances an input box with suggestion functionality for Wikimedia Commons asset names.
 	 * (uses `util.highlightSubstring`)
+	 *
 	 * @class jQuery.ui.commonssuggester
 	 * @extends jQuery.ui.suggester
 	 * @uses util
@@ -51,6 +52,7 @@
 
 		/**
 		 * Initializes the default source pointing to the "query" API module on Wikimedia Commons.
+		 *
 		 * @protected
 		 *
 		 * @return {Function}
@@ -90,6 +92,7 @@
 
 		/**
 		 * Be smart on the commons search results and put an exactly matching file name on top
+		 *
 		 * @private
 		 *
 		 * @param {Array} resultList Results from the search API response

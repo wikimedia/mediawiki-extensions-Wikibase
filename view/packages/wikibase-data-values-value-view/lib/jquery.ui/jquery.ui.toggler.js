@@ -10,6 +10,7 @@ var iconClass = 'ui-icon-triangle-1-';
 /**
  * Whether page is rendered in rtl context. This, however, depends on the css class "rtl"
  * being assigned to the body element.
+ *
  * @property {boolean} isRtl=false
  * @ignore
  */
@@ -17,6 +18,7 @@ var isRtl = false;
 
 /**
  * Whether the user client supports CSS3 transformation.
+ *
  * @property {boolean} browserSupportsTransform=false
  * @ignore
  */
@@ -38,6 +40,7 @@ $( document ).ready( function() {
  * The toggler hides a references subject node an toggles its visibility whenever clicking the
  * element the toggler is initialized on. The toggler considers the subject's current "display"
  * style, so if it is set to "none", it is considered invisible initially.
+ *
  * @class jQuery.ui.toggler
  * @extends jQuery.Widget
  * @uses jQuery.animateWithEvent
@@ -73,6 +76,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * The node subject to getting toggled.
+	 *
 	 * @property {jQuery}
 	 * @protected
 	 * @readonly
@@ -81,6 +85,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * The toggler's icon.
+	 *
 	 * @property {jQuery}
 	 * @protected
 	 * @readonly
@@ -157,6 +162,7 @@ $.widget( 'ui.toggler', {
 	/**
 	 * Returns status of toggler.
 	 * Is true when toggler is collapsed.
+	 *
 	 * @return {boolean}
 	 */
 	isCollapsed: function() {
@@ -185,6 +191,7 @@ $.widget( 'ui.toggler', {
 
 	/**
 	 * Reflects the toggler's subject visibility in the toggler's icon.
+	 *
 	 * @private
 	 *
 	 * @param {boolean} [inverted]

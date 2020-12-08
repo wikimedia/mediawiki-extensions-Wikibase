@@ -3,6 +3,7 @@
 
 	/**
 	 * Event id used for data binding and as namespace.
+	 *
 	 * @property {string}
 	 * @ignore
 	 */
@@ -10,6 +11,7 @@
 
 	/**
 	 * Name(s) of events that are in fact supported by the client.
+	 *
 	 * @property {string}
 	 * @ignore
 	 */
@@ -19,6 +21,7 @@
 
 	/**
 	 * Checks whether a handler with a given event id has already been triggered.
+	 *
 	 * @ignore
 	 *
 	 * @param {string} eventId
@@ -37,6 +40,7 @@
 	/**
 	 * Returns the value of a jQuery element or null if the element does not feature retrieving its
 	 * value via .val().
+	 *
 	 * @ignore
 	 *
 	 * @param {jQuery} $elem
@@ -54,6 +58,7 @@
 
 	/**
 	 * Assigns a namespace to a string of one or more event names separated by a space character.
+	 *
 	 * @ignore
 	 *
 	 * @param {string} eventNames
@@ -74,6 +79,7 @@
 	/**
 	 * Returns a string of on or more event names to be used for detecting any instant changes of an
 	 * input box. This should be just 'input' in recent browsers.
+	 *
 	 * @ignore
 	 *
 	 * @return {string}

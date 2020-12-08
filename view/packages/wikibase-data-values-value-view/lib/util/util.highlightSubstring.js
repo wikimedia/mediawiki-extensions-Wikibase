@@ -5,6 +5,7 @@ this.util = this.util || {};
 
 /**
  * Escapes a string to be used in a regular expression.
+ *
  * @ignore
  *
  * @param {string} value

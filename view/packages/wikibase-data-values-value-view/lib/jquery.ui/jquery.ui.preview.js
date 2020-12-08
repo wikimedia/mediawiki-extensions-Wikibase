@@ -4,6 +4,7 @@
 /**
  * Preview widget whose visible content may be switched between a spinner animation and a value.
  * If the value to be set is empty, the widget will display an appropriate message.
+ *
  * @class jQuery.ui.preview
  * @extends jQuery.Widget
  * @license GNU GPL v2+
@@ -38,6 +39,7 @@ $.widget( 'ui.preview', {
 
 	/**
 	 * The node of the previewed value.
+	 *
 	 * @property {jQuery}
 	 * @readonly
 	 */

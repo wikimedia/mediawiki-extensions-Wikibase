@@ -12,6 +12,7 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 	/**
 	 * Valueview expert for tests. Simply overwrites all abstract functions with some mock
 	 * functions. A raw value can be set, all values are accepted.
+	 *
 	 * @since 0.1
 	 *
 	 * @constructor
@@ -20,6 +21,7 @@ jQuery.valueview.tests = jQuery.valueview.tests || {};
 	vv.tests.MockExpert = vv.expert( 'Mock', PARENT, {
 		/**
 		 * Current value.
+		 *
 		 * @property {*}
 		 */
 		value: null,

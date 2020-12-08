@@ -5,6 +5,7 @@ util.HashMessageProvider = ( function() {
 
 	/**
 	 * Providing messages using specified default message
+	 *
 	 * @class util.HashMessageProvider
 	 * @since 0.13.0
 	 * @license GNU GPL v2+

@@ -57,6 +57,7 @@
 
 		/**
 		 * Cache for .facade() member.
+		 *
 		 * @property {jQuery.PurposedCallbacks.Facade}
 		 * @ignore
 		 */
@@ -64,6 +65,7 @@
 
 		/**
 		 * Field names are purposes, each holding a jQuery.Callbacks instance.
+		 *
 		 * @property {Object}
 		 * @ignore
 		 */
@@ -165,7 +167,7 @@
 		 *
 		 * @param {*} context
 		 * @param {string|string[]} purposes
-		 * @param {array} [args]
+		 * @param {Array} [args]
 		 * @return {*}
 		 *
 		 * @throws {Error} in case `purposes` were defined in the constructor and a purpose given
@@ -218,6 +220,7 @@
 	 * Facade of `jQuery.PurposedCallbacks` which only allows access to the `add`, `remove`, `has`
 	 * and `purposes` members. This is to `jQuery.PurposedCallbacks` what the "Promise" is to
 	 * `jQuery.Deferred`.
+	 *
 	 * @class jQuery.PurposedCallbacks.Facade
 	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >

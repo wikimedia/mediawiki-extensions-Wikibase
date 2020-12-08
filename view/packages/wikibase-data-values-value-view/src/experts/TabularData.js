@@ -9,6 +9,7 @@ module.exports = ( function( $, vv ) {
 	 * `tabular-data` data type is using the `String` data value type.
 	 * This expert is based on the `StringValue` expert but will add a drop-down for choosing
 	 * Commons data sources. It will also display the value as a link to Commons.
+	 *
 	 * @class jQuery.valueview.experts.TabularData
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1

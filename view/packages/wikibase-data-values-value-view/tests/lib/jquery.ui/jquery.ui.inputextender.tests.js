@@ -37,21 +37,21 @@
 	/**
 	 * Convenience function for testing behavior before/after/during showing and hiding extension.
 	 *
-	 *     @example
-	 *     showAndHideExtensionAgain( assert, newTestInputextender(), {
-	 *         afterCallingShowExtension: function( instance ) {},
-	 *         whenFullyShown: function() { instance },
-	 *         afterCallingHideExtension: function( instance ) {},
-	 *         whenFullyHiddenAgain: function( instance ) {}
-	 *     } );
-	 *
+	 * @example
+	 * showAndHideExtensionAgain( assert, newTestInputextender(), {
+	 * afterCallingShowExtension: function( instance ) {},
+	 * whenFullyShown: function() { instance },
+	 * afterCallingHideExtension: function( instance ) {},
+	 * whenFullyHiddenAgain: function( instance ) {}
+	 * } );
+	 * @param assert
 	 * @param {jQuery.ui.inputextender} instance
 	 * @param {Object} [hideControl] jQuery.Promise. If given, then the "hide" action will only be
-	 *        done after the promise got resolved. If the promise gets rejected, then the hide
-	 *        action will never be performed.
+	 * done after the promise got resolved. If the promise gets rejected, then the hide
+	 * action will never be performed.
 	 * @param {Object} callbacks
 	 * @return {Object} jQuery.Promise Resolved after final hiding is done. Can be rejected in case
-	 *         a hideControl has been injected and gets rejected.
+	 * a hideControl has been injected and gets rejected.
 	 */
 	function showAndHideExtensionAgain( assert, instance, hideControl, callbacks ) {
 		var deferred = $.Deferred();

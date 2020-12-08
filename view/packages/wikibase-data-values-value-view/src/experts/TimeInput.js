@@ -39,6 +39,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 
 	/**
 	 * `Valueview` expert handling input of `Time` values.
+	 *
 	 * @class jQuery.valueview.experts.TimeInput
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
@@ -125,6 +126,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 
 		/**
 		 * The preview widget.
+		 *
 		 * @property {jQuery.valueview.ExpertExtender.Preview}
 		 */
 		preview: null,

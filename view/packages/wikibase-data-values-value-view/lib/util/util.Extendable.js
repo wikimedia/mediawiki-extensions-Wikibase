@@ -5,6 +5,7 @@ this.util = this.util || {};
 
 	/**
 	 * A simple event-like system for plugging in extensions.
+	 *
 	 * @class util.Extendable
 	 * @uses jQuery
 	 * @license GNU GPL v2+
@@ -22,6 +23,7 @@ this.util = this.util || {};
 	util.Extendable.prototype = {
 		/**
 		 * The list of registered extensions.
+		 *
 		 * @private
 		 *
 		 * @property {Object[]} [_extensions=[]]

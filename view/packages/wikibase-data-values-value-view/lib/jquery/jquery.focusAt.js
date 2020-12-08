@@ -5,6 +5,7 @@ jQuery.fn.focusAt = ( function() {
 	 * Calculates the position within a string relative to a string's start (0). Can take a position
 	 * relative to the strings start (positive number) or relative to the strings end (negative
 	 * number).
+	 *
 	 * @ignore
 	 *
 	 * @param {number} relativePosition
@@ -22,6 +23,7 @@ jQuery.fn.focusAt = ( function() {
 
 	/**
 	 * Helper which will normalize a given position or throw an error if it is an invalid one.
+	 *
 	 * @ignore
 	 *
 	 * @param {number|string} position Either a number specifying the position or one of the strings
@@ -47,6 +49,7 @@ jQuery.fn.focusAt = ( function() {
 	/**
 	 * Will set the caret to a given position within an input box.
 	 * (see http://stackoverflow.com/questions/512528/set-cursor-position-in-html-textbox)
+	 *
 	 * @ignore
 	 *
 	 * @param {HTMLElement} elem

@@ -5,6 +5,7 @@ module.exports = ( function( $, vv ) {
 
 	/**
 	 * `Valueview` expert for adding `String` data value support to `valueview` widget.
+	 *
 	 * @class jQuery.valueview.experts.StringValue
 	 * @extends jQuery.valueview.Expert
 	 * @since 0.1
@@ -18,6 +19,7 @@ module.exports = ( function( $, vv ) {
 		/**
 		 * The nodes of the input element. The input element will be used to display the value
 		 * during edit mode.
+		 *
 		 * @property {jQuery}
 		 * @protected
 		 * @readonly
@@ -84,6 +86,7 @@ module.exports = ( function( $, vv ) {
 
 		/**
 		 * Will resize the input box to fit its current content.
+		 *
 		 * @protected
 		 */
 		_resizeInput: function() {

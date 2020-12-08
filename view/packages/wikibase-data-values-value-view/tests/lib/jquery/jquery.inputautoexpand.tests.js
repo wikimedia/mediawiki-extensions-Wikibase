@@ -13,7 +13,7 @@
 	 */
 	var newTestInputAutoExpand = function() {
 		var $input = $( '<input/>', {
-			'class': 'test_inputautoexpand',
+			class: 'test_inputautoexpand',
 			width: '20px',
 			type: 'text'
 		} )
@@ -40,7 +40,7 @@
 	 */
 	var newTestTextareaAutoExpand = function() {
 		var $textarea = $( '<textarea/>', {
-			'class': 'test_inputautoexpand',
+			class: 'test_inputautoexpand',
 			width: '20px'
 		} )
 		// Append to body to be able to detect the element width:

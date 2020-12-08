@@ -8,6 +8,7 @@
 
 	/**
 	 * Creates an input element suitable for testing.
+	 *
 	 * @return {jQuery}
 	 */
 	function createTestInput() {

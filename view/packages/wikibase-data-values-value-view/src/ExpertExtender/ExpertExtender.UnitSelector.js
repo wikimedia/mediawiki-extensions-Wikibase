@@ -5,6 +5,7 @@
 
 	/**
 	 * An `ExpertExtender` module for selecting a quantity's unit.
+	 *
 	 * @class jQuery.valueview.ExpertExtender.UnitSelector
 	 * @since 0.15.0
 	 * @license GNU GPL v2+

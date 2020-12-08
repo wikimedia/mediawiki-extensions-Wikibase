@@ -144,6 +144,7 @@ $.valueview = $.valueview || {};
 		 * A unique UI class for this `Expert` definition. Should be used to prefix classes on DOM
 		 * nodes within the `Expert`'s view port. If a new `Expert` definition will be created
 		 * using `jQuery.valueview.Expert()`, then this will be set by that function.
+		 *
 		 * @property {string}
 		 * @readonly
 		 */
@@ -152,6 +153,7 @@ $.valueview = $.valueview || {};
 		/**
 		 * The DOM node which has to be updated by the `draw()` function. Displays current state
 		 * and/or input elements for user interaction during `valueview`'s edit mode.
+		 *
 		 * @property {jQuery}
 		 * @protected
 		 * @readonly
@@ -160,6 +162,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Object representing the state of the related `valueview`.
+		 *
 		 * @property {ViewState}
 		 * @protected
 		 */
@@ -167,6 +170,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Object for publishing changes to the outside.
+		 *
 		 * @property {util.Notifier}
 		 * @protected
 		 */
@@ -174,6 +178,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * The `Expert`'s options, received through the constructor.
+		 *
 		 * @property {Object} [_options={}]
 		 * @protected
 		 */
@@ -181,6 +186,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Message provider used to fetch messages
+		 *
 		 * @property {util.MessageProvider}
 		 * @protected
 		 */
@@ -201,6 +207,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Will be called initially for new `Expert` instances.
+		 *
 		 * @since 0.5
 		 */
 		init: function() {
@@ -211,6 +218,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Custom `Expert` initialization routine.
+		 *
 		 * @protected
 		 */
 		_init: function() {},

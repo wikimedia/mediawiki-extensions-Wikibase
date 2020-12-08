@@ -2,6 +2,7 @@ jQuery.valueview = jQuery.valueview || {};
 
 /**
  * Container for basic jQuery.valueview.Expert implementations.
+ *
  * @class jQuery.valueview.experts
  * @singleton
  * @since 0.1

@@ -21,7 +21,7 @@
 	 */
 	function generateInputElement( attributes ) {
 		return $( '<input/>', $.extend( {
-			'class': 'test_eachchange',
+			class: 'test_eachchange',
 			type: 'text',
 			name: 'test',
 			value: ''
@@ -40,10 +40,10 @@
 	QUnit.test(
 		'Initialization',
 		function( assert ) {
-			var $input = $( '<input/>', { 'class': 'test_eachchange', type: 'text' } ),
-				$inputNoType = $( '<input/>', { 'class': 'test_eachchange' } ),
-				$textarea = $( '<textarea/>', { 'class': 'test_eachchange' } ),
-				$div = $( '<div/>', { 'class': 'test_eachchange' } ),
+			var $input = $( '<input/>', { class: 'test_eachchange', type: 'text' } ),
+				$inputNoType = $( '<input/>', { class: 'test_eachchange' } ),
+				$textarea = $( '<textarea/>', { class: 'test_eachchange' } ),
+				$div = $( '<div/>', { class: 'test_eachchange' } ),
 				$object = $( {} );
 
 			assert.strictEqual(

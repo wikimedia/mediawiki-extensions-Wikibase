@@ -5,6 +5,7 @@ util.Notifier = ( function() {
 
 	/**
 	 * Tracks the current notifications for the `Notifier`'s current function.
+	 *
 	 * @property {string[]}
 	 * @ignore
 	 */
@@ -55,7 +56,7 @@ util.Notifier = ( function() {
 		 * function defined for that string.
 		 *
 		 * @param {string} notification
-		 * @param {array} [args=[]] Optional arguments that will be provided to the callback.
+		 * @param {Array} [args=[]] Optional arguments that will be provided to the callback.
 		 * @return {boolean} Whether a notification has been sent. false if the notification has not
 		 *         been registered in the constructor.
 		 */

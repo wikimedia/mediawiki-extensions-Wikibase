@@ -62,6 +62,7 @@ jQuery.valueview.tests.MockViewState = ( function( $, util ) {
 		},
 
 		/**
+		 * @param key
 		 * @see ViewState.option
 		 */
 		option: function( key ) {
