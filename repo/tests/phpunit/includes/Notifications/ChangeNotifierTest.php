@@ -63,7 +63,7 @@ class ChangeNotifierTest extends MediaWikiIntegrationTestCase {
 	 * @return ItemContent
 	 */
 	protected function makeItemRedirectContent( ItemId $id, ItemId $target ) {
-		$title = Title::newFromText( $target->getSerialization() );
+		$title = Title::newFromTextThrow( $target->getSerialization() );
 		return ItemContent::newFromRedirect( new EntityRedirect( $id, $target ), $title );
 	}
 

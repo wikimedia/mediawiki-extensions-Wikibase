@@ -197,7 +197,7 @@ class EntityByTitleHelperTest extends \PHPUnit\Framework\TestCase {
 
 		// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
 		// XXX: The Normalized title is passed by via reference to $title...
-		$this->assertEquals( Title::newFromText( $title )->getPrefixedText(), $title );
+		$this->assertEquals( Title::newFromTextThrow( $title )->getPrefixedText(), $title );
 	}
 
 	public function notEnoughInputProvider() {

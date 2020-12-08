@@ -204,7 +204,7 @@ abstract class Scribunto_LuaWikibaseLibraryTestCase extends Scribunto_LuaEngineT
 	 * @return Title
 	 */
 	protected function getTestTitle() {
-		return Title::newFromText( 'WikibaseClientDataAccessTest' );
+		return Title::newFromTextThrow( 'WikibaseClientDataAccessTest' );
 	}
 
 	/**

@@ -73,8 +73,8 @@ class MoreLikeWikibaseTest extends MediaWikiIntegrationTestCase {
 	public function testApply( $term, $expectedQuery, $mltUsed ) {
 		// Inject fake pages for MoreLikeFeature::collectTitles() to find
 		$linkCache = MediaWikiServices::getInstance()->getLinkCache();
-		$linkCache->addGoodLinkObj( 12345, Title::newFromText( 'Some page' ) );
-		$linkCache->addGoodLinkObj( 23456, Title::newFromText( 'Other page' ) );
+		$linkCache->addGoodLinkObj( 12345, Title::newFromTextThrow( 'Some page' ) );
+		$linkCache->addGoodLinkObj( 23456, Title::newFromTextThrow( 'Other page' ) );
 
 		// @todo Use a HashConfig with explicit values?
 		$config = new HashSearchConfig( [ 'CirrusSearchMoreLikeThisTTL' => 600 ], [ 'inherit' ] );

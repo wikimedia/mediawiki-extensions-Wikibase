@@ -26,7 +26,7 @@ class DeleteDispatcherTest extends TestCase {
 	private $localClientDatabases = [ 'asdfwiki', 'somewiki' ];
 
 	public function earlyAbortProvider() {
-		$title = Title::newFromText( 'some cool page' );
+		$title = Title::newFromTextThrow( 'some cool page' );
 		$wikiPage = $this->createMock( WikiPage::class );
 		$wikiPage->method( 'getTitle' )
 			->willReturn( $title );
@@ -86,7 +86,7 @@ class DeleteDispatcherTest extends TestCase {
 		$id = 1;
 		$archivedRevisionCount = 1234;
 		$entityId = new ItemId( 'Q123' );
-		$title = Title::newFromText( $entityId->getSerialization() );
+		$title = Title::newFromTextThrow( $entityId->getSerialization() );
 		$expectedJobParams = [ "pageId" => $id, "archivedRevisionCount" => $archivedRevisionCount ];
 
 		$factory = $this->newJobQueueGroupFactory( $expectedJobParams );

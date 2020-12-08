@@ -65,13 +65,13 @@ class PageHistoryPagerHookHandlerTest extends TestCase {
 	/** @var IResultWrapper|null */
 	private $resultWrapper;
 
-	/** @var Title|null */
+	/** @var Title */
 	private $title;
 
 	protected function setUp(): void {
 		$this->entityId = new ItemId( 'Q1' );
 		$this->entity = new Item( $this->entityId );
-		$this->title = Title::newFromText( $this->entityId->getSerialization() );
+		$this->title = Title::newFromTextThrow( $this->entityId->getSerialization() );
 
 		$this->pager = $this->createMock( HistoryPager::class );
 		$this->resultWrapper = $this->createMock( IResultWrapper::class );

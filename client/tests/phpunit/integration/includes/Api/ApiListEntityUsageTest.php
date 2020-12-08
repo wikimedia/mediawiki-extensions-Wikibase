@@ -55,7 +55,7 @@ class ApiListEntityUsageTest extends MediaWikiLangTestCase {
 			$db->delete( $table, '*' );
 
 			foreach ( $rows as $row ) {
-				$title = Title::newFromText( $row['page_title'], $row['page_namespace'] );
+				$title = Title::newFromTextThrow( $row['page_title'], $row['page_namespace'] );
 				$page = WikiPage::factory( $title );
 				$page->insertOn( $db, $row['page_id'] );
 			}

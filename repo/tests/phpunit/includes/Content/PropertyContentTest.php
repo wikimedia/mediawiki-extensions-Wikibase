@@ -194,7 +194,7 @@ class PropertyContentTest extends EntityContentTestCase {
 		//       got rid of the rest of the storage logic.
 		$this->entityStore->assignFreshId( $content->getEntity() );
 
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];

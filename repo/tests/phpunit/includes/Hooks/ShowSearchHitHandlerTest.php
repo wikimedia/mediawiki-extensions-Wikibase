@@ -101,7 +101,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
 		$searchResult = $this->createMock( SearchResult::class );
-		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
+		$searchResult->method( 'getTitle' )->willReturn( Title::newFromTextThrow( 'Test', NS_TALK ) );
 		$handler = $this->getShowSearchHitHandler();
 		$handler->onShowSearchHit(
 			$searchPage,

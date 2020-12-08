@@ -200,7 +200,7 @@ class PropertyParserFunctionIntegrationTest extends MediaWikiIntegrationTestCase
 	private function parseWikitextToHtml( $wikiText, $title = 'WikibaseClientDataAccessTest' ) {
 		$popt = new ParserOptions( User::newFromId( 0 ), Language::factory( 'en' ) );
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
-		return $parser->parse( $wikiText, Title::newFromText( $title ), $popt, Parser::OT_HTML );
+		return $parser->parse( $wikiText, Title::newFromTextThrow( $title ), $popt, Parser::OT_HTML );
 	}
 
 }

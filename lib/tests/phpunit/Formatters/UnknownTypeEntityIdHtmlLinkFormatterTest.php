@@ -51,7 +51,7 @@ class UnknownTypeEntityIdHtmlLinkFormatterTest extends TestCase {
 
 		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
 
-		$title = Title::newFromText( 'Q42' );
+		$title = Title::newFromTextThrow( 'Q42' );
 		$entityTitleLookup->expects( $this->once() )
 			->method( 'getTitleForId' )
 			->with( $entityId )

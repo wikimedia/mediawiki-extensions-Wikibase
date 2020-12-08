@@ -35,20 +35,20 @@ class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testGetPropertyOrder( $text, $expected ) {
 		$this->makeWikiPage( 'MediaWiki:Wikibase-SortedProperties', $text );
-		$instance = new WikiPagePropertyOrderProvider( Title::newFromText( 'MediaWiki:Wikibase-SortedProperties' ) );
+		$instance = new WikiPagePropertyOrderProvider( Title::newFromTextThrow( 'MediaWiki:Wikibase-SortedProperties' ) );
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( $expected, $propertyOrder );
 	}
 
 	private function makeWikiPage( $name, $text ) {
-		$title = Title::newFromText( $name );
+		$title = Title::newFromTextThrow( $name );
 		$wikiPage = WikiPage::factory( $title );
 		$wikiPage->doEditContent( new WikitextContent( $text ), 'test' );
 	}
 
 	public function testGetPropertyOrder_pageDoesNotExist() {
 		$instance = new WikiPagePropertyOrderProvider(
-			Title::newFromText( 'MediaWiki:WikiPagePropertyOrderProviderTest-DoesNotExist' )
+			Title::newFromTextThrow( 'MediaWiki:WikiPagePropertyOrderProviderTest-DoesNotExist' )
 		);
 		$propertyOrder = $instance->getPropertyOrder();
 		$this->assertSame( null, $propertyOrder );

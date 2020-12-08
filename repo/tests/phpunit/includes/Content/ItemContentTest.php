@@ -488,7 +488,7 @@ class ItemContentTest extends EntityContentTestCase {
 	public function testGetParserOutput_redirect() {
 		$content = $this->newRedirect( new ItemId( 'Q5' ), new ItemId( 'Q123' ) );
 
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
 		$html = $parserOutput->getText();
@@ -617,7 +617,7 @@ class ItemContentTest extends EntityContentTestCase {
 		//       got rid of the rest of the storage logic.
 		$this->entityStore->assignFreshId( $content->getEntity() );
 
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 		$parserOutput = $content->getParserOutput( $title );
 
 		$expectedUsedOptions = [ 'userlang', 'wb', 'termboxVersion' ];
@@ -670,7 +670,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$itemContent = new ItemContent(
 			null,
 			new EntityRedirect( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ),
-			Title::newFromText( 'Item:Q2' )
+			Title::newFromTextThrow( 'Item:Q2' )
 		);
 		$this->assertSame( '#REDIRECT [[Item:Q2]]', $itemContent->getTextForSummary() );
 	}

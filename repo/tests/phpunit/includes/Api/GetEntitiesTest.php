@@ -367,7 +367,7 @@ class GetEntitiesTest extends WikibaseApiTestCase {
 		);
 		$this->assertEquals(
 			// Normalization in unit tests is actually using Title::getPrefixedText instead of a real API call
-			\Title::newFromText( $params['titles'] )->getPrefixedText(),
+			\Title::newFromTextThrow( $params['titles'] )->getPrefixedText(),
 			$result['normalized']['n']['to']
 		);
 	}

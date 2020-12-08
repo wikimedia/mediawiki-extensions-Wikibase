@@ -270,7 +270,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 
 	public function richWikitextSnakProvider() {
 		$genericSnaks = $this->getGenericSnaks();
-		$namespacedFileName = Title::newFromText( 'A_file name.jpg', NS_FILE )->getPrefixedText();
+		$namespacedFileName = Title::newFromTextThrow( 'A_file name.jpg', NS_FILE )->getPrefixedText();
 
 		$cases = [
 			'monolingualtext' => [

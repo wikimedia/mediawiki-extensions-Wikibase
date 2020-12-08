@@ -328,7 +328,7 @@ class StatementGroupRendererFactoryTest extends \PHPUnit\Framework\TestCase {
 
 		$parser = MediaWikiServices::getInstance()->getParserFactory()->create();
 
-		$parser->setTitle( Title::newFromText( 'Cat' ) );
+		$parser->setTitle( Title::newFromTextThrow( 'Cat' ) );
 		$parser->startExternalParse( null, $parserOptions, $outputType );
 
 		return $parser;

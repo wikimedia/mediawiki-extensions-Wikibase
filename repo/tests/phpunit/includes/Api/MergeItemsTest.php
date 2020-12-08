@@ -139,7 +139,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
 		$entityTitleStoreLookup->method( 'getTitleForId' )
 			->willReturnCallback( function( EntityId $entityId ) {
-				return Title::newFromText( $entityId->getSerialization() );
+				return Title::newFromTextThrow( $entityId->getSerialization() );
 			} );
 
 		return $entityTitleStoreLookup;

@@ -25,7 +25,7 @@ use Wikibase\Lib\Store\SiteLinkLookup;
 class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 
 	public function testGetSiteLinksForPageTitle_unknownTitle() {
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup
@@ -52,7 +52,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 	}
 
 	public function testGetSiteLinksForPageTitle_unknownEntity() {
-		$title = Title::newFromText( 'Foo' );
+		$title = Title::newFromTextThrow( 'Foo' );
 
 		$siteLinkLookup = $this->createMock( SiteLinkLookup::class );
 		$siteLinkLookup
@@ -81,7 +81,7 @@ class SiteLinksForDisplayLookupTest extends \MediaWikiUnitTestCase {
 	}
 
 	public function testGetSiteLinksForPageTitle_knownEntity() {
-		$title = Title::newFromText( 'Foo sr' );
+		$title = Title::newFromTextThrow( 'Foo sr' );
 		$item = new Item( new ItemId( 'Q1' ) );
 		$item->setLabel( 'en', 'Foo' );
 		$links = $item->getSiteLinkList();

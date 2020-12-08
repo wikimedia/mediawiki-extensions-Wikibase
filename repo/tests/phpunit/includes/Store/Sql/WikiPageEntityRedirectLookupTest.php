@@ -81,7 +81,7 @@ class WikiPageEntityRedirectLookupTest extends MediaWikiIntegrationTestCase {
 
 		$wikiText = '#REDIRECT [[' . $title->getFullText() . ']]';
 
-		$page = WikiPage::factory( Title::newFromText( 'Help:WikiPageEntityMetaDataLookupTest' ) );
+		$page = WikiPage::factory( Title::newFromTextThrow( 'Help:WikiPageEntityMetaDataLookupTest' ) );
 		$page->doEditContent(
 			ContentHandler::makeContent( $wikiText, $page->getTitle() ),
 			'test',

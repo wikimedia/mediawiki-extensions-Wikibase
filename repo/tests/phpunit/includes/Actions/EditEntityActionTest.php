@@ -251,7 +251,7 @@ class EditEntityActionTest extends ActionTestCase {
 		// -- bad page -----------------------------------
 		yield 'non-existing page' => [
 			'edit', // action
-			Title::newFromText( 'XXX', $this->getItemNamespace() ),
+			Title::newFromTextThrow( 'XXX', $this->getItemNamespace() ),
 			[ // params
 				'restore' => [ 'London', 0 ], // ok revision
 			],
@@ -631,7 +631,7 @@ class EditEntityActionTest extends ActionTestCase {
 		// -- bad page -----------------------------------
 		yield 'non-existing page' => [
 			'submit', // action
-			Title::newFromText( 'XXX', $this->getItemNamespace() ),
+			Title::newFromTextThrow( 'XXX', $this->getItemNamespace() ),
 			[ // params
 				'wpSave' => 1,
 				'wpEditToken' => true, // automatic token

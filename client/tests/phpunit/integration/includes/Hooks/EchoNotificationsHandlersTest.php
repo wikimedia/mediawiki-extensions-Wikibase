@@ -100,7 +100,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$setEn = $changes['set-enwiki-sitelink'];
 		$changeEn = $changes['change-enwiki-sitelink'];
 
-		Title::newFromText( 'Emmy' )->resetArticleID( 0 );
+		Title::newFromTextThrow( 'Emmy' )->resetArticleID( 0 );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $setEn ),
 			"Failed asserting that non-existing 'Emmy' does not create an event"
@@ -123,7 +123,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$handlers = $this->getHandlers( $settings );
 
-		Title::newFromText( 'Emmy2' )->resetArticleID( 0 );
+		Title::newFromTextThrow( 'Emmy2' )->resetArticleID( 0 );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $changeEn ),
 			"Failed asserting that non-existing 'Emmy2' does not create an event"
@@ -148,7 +148,7 @@ class EchoNotificationsHandlersTest extends MediaWikiIntegrationTestCase {
 		$settings->setSetting( 'sendEchoNotification', true );
 		$handlers = $this->getHandlers( $settings );
 
-		Title::newFromText( 'Duummy2' )->resetArticleID( 0 );
+		Title::newFromTextThrow( 'Duummy2' )->resetArticleID( 0 );
 		$this->assertFalse(
 			$handlers->doWikibaseHandleChange( $changeDe ),
 			"Failed asserting that 'Duummy' does not create an event"
