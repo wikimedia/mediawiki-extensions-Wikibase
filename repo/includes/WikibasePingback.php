@@ -5,6 +5,7 @@ namespace Wikibase\Repo;
 
 use Config;
 use DeferredUpdates;
+use ExtensionRegistry;
 use FormatJson;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
@@ -50,12 +51,23 @@ class WikibasePingback {
 	private $host;
 
 	/**
+	 * @var ExtensionRegistry
+	 */
+	private $extensionRegistry;
+
+	/**
 	 * @param Config|null $config
 	 * @param LoggerInterface|null $logger
+	 * @param ExtensionRegistry|null $extensionRegistry
 	 */
-	public function __construct( Config $config = null, LoggerInterface $logger = null ) {
+	public function __construct(
+		Config $config = null,
+		LoggerInterface $logger = null,
+		ExtensionRegistry $extensionRegistry = null
+	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
+		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		$this->key = 'WikibasePingback-' . MW_VERSION;
 		$this->host = 'https://www.mediawiki.org/beacon/event';
 	}
@@ -131,6 +143,38 @@ class WikibasePingback {
 		return true;
 	}
 
+	private function getTrackedExtensions(): array {
+		$extensions = [
+			'WikibaseManifest' => 'WBM',
+			'EntitySchema' => 'ENS',
+			'PropertySuggester' => 'PS',
+			'WikibaseImport' => 'WBI',
+			'WikibaseLexeme' => 'WBL',
+			'WikibaseQualityConstraints' => 'WBQC',
+			'WikibaseCirrusSearch' => 'WBCS',
+			'WikibaseMediaInfo' => 'WBMI',
+			'OAuth' => 'OA',
+			'ConfirmEdit' => 'CE',
+			'Nuke' => 'NKE',
+			'UniversalLanguageSelector' => 'ULS',
+			'CLDR' => 'CLDR',
+			'VisualEditor' => 'VE',
+			'Scribunto' => 'SCRI',
+			'SyntaxHighlight' => 'SH',
+			'Babel' => 'BBL',
+			'Auth_remoteuser' => 'AR',
+			'ArticlePlaceholder' => 'AP'
+		];
+
+		$currentExtensions = array_keys( $this->extensionRegistry->getAllThings() );
+
+		return array_reduce( $currentExtensions, function ( $tracked, $current ) use ( $extensions ) {
+			return array_key_exists( $current, $extensions )
+				? array_merge( $tracked, [ $extensions[ $current ] ] )
+				: $tracked;
+		}, [] );
+	}
+
 	/**
 	 * Collect basic data about this MediaWiki installation and return it
 	 * as an associative array conforming to the Pingback schema on MetaWiki
@@ -144,12 +188,14 @@ class WikibasePingback {
 	 * @return array
 	 */
 	public function getSystemInfo() {
+		$extensions = $this->getTrackedExtensions();
+
 		$event = [
 			'database'   => $this->config->get( 'DBtype' ),
 			'mediawiki'  => MW_VERSION,
 			'items'  => '', //TODO: type string
 			'federation'  => '', //TODO: type boolean
-			'extensions'  => '', //TODO: type array
+			'extensions'  => $extensions,
 		];
 
 		$limit = ini_get( 'memory_limit' );
