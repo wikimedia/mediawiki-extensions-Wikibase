@@ -1,16 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
+			"Abbas dhothar",
 			"Khalid Mahmood",
 			"Ladsgroup"
 		]
 	},
 	"wikibase-edit": "لکھو",
 	"wikibase-add": "جوڑو",
+	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ہور بولیاں وچ",
 	"wikibase-label-empty": "کوئی سرخی نہیں",
 	"wikibase-description-empty": "کوئی گل نہیں دسی گئی",
 	"wikibase-statementsection-statements": "واتاں",
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
-	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}"
+	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}",
+	"wikibase-entityselector-more": "ہور"
 }

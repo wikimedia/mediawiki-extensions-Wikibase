@@ -6,7 +6,7 @@
 		]
 	},
 	"tooltip-t-wikibase": "Link fi di database entry",
-	"wikibase-comment-update": "{{WBREPONAME}} aitem chienj",
+	"wikibase-comment-update": "Dem change up a {{WBREPONAME}} entry",
 	"wikibase-dataitem": "{{WBREPONAME}} entry",
 	"wikibase-editlinks": "Change up di link dem",
 	"wikibase-editlinkstitle": "Change up di language link dem",
@@ -14,6 +14,6 @@
 	"wikibase-rc-hide-wikidata-hide": "Aid",
 	"wikibase-rc-hide-wikidata-show": "Shuo",
 	"wikibase-rc-wikibase-edit-letter": "D",
-	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} edit",
+	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} change",
 	"wikibase-otherprojects": "Adaels prajek"
 }

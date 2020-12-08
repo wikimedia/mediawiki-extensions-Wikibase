@@ -15,5 +15,6 @@
 	"wikibase-rc-hide-wikidata-show": "وکھاؤ",
 	"wikibase-rc-wikibase-edit-letter": "ڈاٹا",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} لکھت",
-	"wikibase-otherprojects": "ہور ویونت"
+	"wikibase-otherprojects": "ہور ویونت",
+	"wikibase-client-data-bridge-permissions-error-info": "ہور تفصیل"
 }
