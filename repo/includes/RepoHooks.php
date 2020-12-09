@@ -67,6 +67,8 @@ final class RepoHooks {
 	 * Handler for the BeforePageDisplay hook, simply injects wikibase.ui.entitysearch module
 	 * replacing the native search box with the entity selector widget.
 	 *
+	 * It additionally schedules a WikibasePingback
+	 *
 	 * @param OutputPage $out
 	 * @param Skin $skin
 	 */
@@ -77,8 +79,7 @@ final class RepoHooks {
 		}
 
 		if ( $settings->getSetting( 'wikibasePingback' ) ) {
-			// Will send pingback in the future
-			// WikibasePingback::schedulePingback();
+			WikibasePingback::schedulePingback();
 		}
 	}
 
