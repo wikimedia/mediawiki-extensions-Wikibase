@@ -35,18 +35,21 @@ class WikibasePingbackTest extends TestCase {
 		$this->assertEquals( [ 'BBL', 'VE' ], $actual );
 	}
 
-	public function testGetSystemInfo_getsFederatedPropertiesEnabledSetting() {
+	public function testGetSystemInfo_getsRepoSettings() {
 		$config = $this->createMock( Config::class );
 		$logger = $this->createMock( LoggerInterface::class );
 		$wikibaseRepoSettings = $this->createMock( SettingsArray::class );
 
-		$wikibaseRepoSettings->method( 'getSetting' )
-			->with( 'federatedPropertiesEnabled' )
+		$wikibaseRepoSettings
+			->method( 'getSetting' )
+			->withConsecutive( [ 'federatedPropertiesEnabled' ], [ 'termboxEnabled' ] )
 			->willReturn( true );
 
 		$pingback = new WikibasePingback( $config, $logger, null, $wikibaseRepoSettings );
-		$actual = $pingback->getSystemInfo()['federation'];
+		$federationActual = $pingback->getSystemInfo()['federation'];
+		$termboxActual = $pingback->getSystemInfo()['termbox'];
 
-		$this->assertTrue( $actual );
+		$this->assertTrue( $federationActual );
+		$this->assertTrue( $termboxActual );
 	}
 }

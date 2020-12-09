@@ -203,7 +203,8 @@ class WikibasePingback {
 			'mediawiki'  => MW_VERSION,
 			'items'  => '', //TODO: type string
 			'federation'  => $federation,
-			'extensions'  => $extensions
+			'extensions'  => $extensions,
+			'termbox' => $this->wikibaseRepoSettings->getSetting( 'termboxEnabled' )
 		];
 
 		$limit = ini_get( 'memory_limit' );
