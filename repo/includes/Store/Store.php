@@ -28,9 +28,9 @@ use Wikibase\Lib\Store\Sql\EntityChangeLookup;
  */
 interface Store {
 
-	const LOOKUP_CACHING_ENABLED = '';
-	const LOOKUP_CACHING_DISABLED = 'uncached';
-	const LOOKUP_CACHING_RETRIEVE_ONLY = 'retrieve-only';
+	public const LOOKUP_CACHING_ENABLED = '';
+	public const LOOKUP_CACHING_DISABLED = 'uncached';
+	public const LOOKUP_CACHING_RETRIEVE_ONLY = 'retrieve-only';
 
 	/**
 	 * @return SiteLinkStore

@@ -14,9 +14,9 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class PropertyRdfBuilder implements EntityRdfBuilder {
 
-	const OBJECT_PROPERTY = 'ObjectProperty';
-	const DATATYPE_PROPERTY = 'DatatypeProperty';
-	const NO_NORMALIZATION = null;
+	public const OBJECT_PROPERTY = 'ObjectProperty';
+	private const DATATYPE_PROPERTY = 'DatatypeProperty';
+	private const NO_NORMALIZATION = null;
 
 	/**
 	 * @var RdfVocabulary

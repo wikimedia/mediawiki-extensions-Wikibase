@@ -30,12 +30,12 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialNewItem extends SpecialNewEntity {
 
-	const FIELD_LANG = 'lang';
-	const FIELD_LABEL = 'label';
-	const FIELD_DESCRIPTION = 'description';
-	const FIELD_ALIASES = 'aliases';
-	const FIELD_SITE = 'site';
-	const FIELD_PAGE = 'page';
+	public const FIELD_LANG = 'lang';
+	public const FIELD_LABEL = 'label';
+	public const FIELD_DESCRIPTION = 'description';
+	public const FIELD_ALIASES = 'aliases';
+	public const FIELD_SITE = 'site';
+	public const FIELD_PAGE = 'page';
 
 	/**
 	 * @var SiteLookup

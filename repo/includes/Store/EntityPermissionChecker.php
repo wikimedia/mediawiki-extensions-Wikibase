@@ -17,15 +17,15 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 interface EntityPermissionChecker {
 
-	const ACTION_READ = 'read';
+	public const ACTION_READ = 'read';
 
-	const ACTION_EDIT = 'edit';
+	public const ACTION_EDIT = 'edit';
 
-	const ACTION_EDIT_TERMS = 'term';
+	public const ACTION_EDIT_TERMS = 'term';
 
-	const ACTION_MERGE = 'merge';
+	public const ACTION_MERGE = 'merge';
 
-	const ACTION_REDIRECT = 'redirect';
+	public const ACTION_REDIRECT = 'redirect';
 
 	/**
 	 * Check whether the given user has the permission to perform the given action on an entity.

@@ -22,14 +22,14 @@ class TermIndexEntry {
 	/**
 	 * Term type enum.
 	 */
-	const TYPE_LABEL = 'label';
-	const TYPE_ALIAS = 'alias';
-	const TYPE_DESCRIPTION = 'description';
+	public const TYPE_LABEL = 'label';
+	public const TYPE_ALIAS = 'alias';
+	public const TYPE_DESCRIPTION = 'description';
 
-	const FIELD_ENTITY = 'entityId';
-	const FIELD_TYPE = 'termType';
-	const FIELD_LANGUAGE = 'termLanguage';
-	const FIELD_TEXT = 'termText';
+	public const FIELD_ENTITY = 'entityId';
+	public const FIELD_TYPE = 'termType';
+	public const FIELD_LANGUAGE = 'termLanguage';
+	public const FIELD_TEXT = 'termText';
 
 	private const FIELD_NAMES = [
 		self::FIELD_ENTITY,

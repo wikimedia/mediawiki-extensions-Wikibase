@@ -24,17 +24,17 @@ class DescriptionLookup {
 	/**
 	 * Local description, in the form of a {{SHORTDESC:...}} parser function.
 	 */
-	const SOURCE_LOCAL = 'local';
+	public const SOURCE_LOCAL = 'local';
 
 	/**
 	 * Central description, from a associated Wikibase repo installation.
 	 */
-	const SOURCE_CENTRAL = 'central';
+	public const SOURCE_CENTRAL = 'central';
 
 	/**
 	 * page_props key.
 	 */
-	const LOCAL_PROPERTY_NAME = 'wikibase-shortdesc';
+	public const LOCAL_PROPERTY_NAME = 'wikibase-shortdesc';
 
 	/**
 	 * @var EntityIdLookup

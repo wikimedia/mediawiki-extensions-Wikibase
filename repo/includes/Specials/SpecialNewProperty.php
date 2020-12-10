@@ -28,11 +28,11 @@ use Wikibase\Repo\WikibaseRepo;
  * @author John Erling Blad < jeblad@gmail.com >
  */
 class SpecialNewProperty extends SpecialNewEntity {
-	const FIELD_LANG = 'lang';
-	const FIELD_DATATYPE = 'datatype';
-	const FIELD_LABEL = 'label';
-	const FIELD_DESCRIPTION = 'description';
-	const FIELD_ALIASES = 'aliases';
+	public const FIELD_LANG = 'lang';
+	public const FIELD_DATATYPE = 'datatype';
+	public const FIELD_LABEL = 'label';
+	public const FIELD_DESCRIPTION = 'description';
+	public const FIELD_ALIASES = 'aliases';
 
 	/** @var DataTypeFactory */
 	private $dataTypeFactory;
