@@ -15,7 +15,7 @@ use Wikibase\Client\WikibaseClient;
  */
 class ParserOutputUsageAccumulator extends UsageAccumulator {
 
-	const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
+	private const EXTENSION_DATA_KEY = 'wikibase-entity-usage';
 
 	/**
 	 * @var ParserOutput

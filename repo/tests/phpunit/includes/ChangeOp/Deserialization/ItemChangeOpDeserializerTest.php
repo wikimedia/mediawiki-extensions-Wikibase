@@ -35,9 +35,9 @@ class ItemChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
 	use ClaimsChangeOpDeserializationTester;
 
-	const SITE_ID = 'some-wiki';
+	private const SITE_ID = 'some-wiki';
 
-	const SITELINK_GROUP = 'testwikis';
+	private const SITELINK_GROUP = 'testwikis';
 
 	public function testGivenEmptyArray_changesNothingOnEntity() {
 		$item = new Item( new ItemId( 'Q123' ) );

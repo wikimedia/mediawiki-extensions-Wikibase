@@ -32,7 +32,7 @@ use Wikimedia\Rdbms\ILBFactory;
  */
 class EntityUsageTable {
 
-	const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
+	public const DEFAULT_TABLE_NAME = 'wbc_entity_usage';
 
 	/**
 	 * @var EntityIdParser

@@ -32,7 +32,7 @@ use WikiPage;
 class HistoryEntityActionTest extends \PHPUnit\Framework\TestCase {
 
 	/** @see \LanguageQqx */
-	const DUMMY_LANGUAGE = 'qqx';
+	private const DUMMY_LANGUAGE = 'qqx';
 
 	/**
 	 * @param Title $title

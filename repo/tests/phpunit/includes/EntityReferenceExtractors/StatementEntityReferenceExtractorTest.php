@@ -25,7 +25,7 @@ use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
  * @license GPL-2.0-or-later
  */
 class StatementEntityReferenceExtractorTest extends TestCase {
-	const UNIT_PREFIX = 'unit:';
+	private const UNIT_PREFIX = 'unit:';
 
 	/**
 	 * @dataProvider statementsAndExtractedIdsProvider

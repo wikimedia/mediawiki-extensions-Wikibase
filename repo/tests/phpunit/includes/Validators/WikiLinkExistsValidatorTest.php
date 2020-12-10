@@ -19,8 +19,8 @@ use WikitextContent;
  * @license GPL-2.0-or-later
  */
 class WikiLinkExistsValidatorTest extends MediaWikiIntegrationTestCase {
-	const EXISTING_PAGE = "Foo";
-	const NONEXISTENT_PAGE = "Foo.NOT-FOUND";
+	private const EXISTING_PAGE = "Foo";
+	private const NONEXISTENT_PAGE = "Foo.NOT-FOUND";
 
 	/**
 	 * @dataProvider provideValidate()

@@ -26,11 +26,11 @@ use Wikibase\Repo\SiteLinkTargetProvider;
  */
 class SiteLinksChangeOpDeserializerTest extends \PHPUnit\Framework\TestCase {
 
-	const SITE_ID = 'somewiki';
+	private const SITE_ID = 'somewiki';
 
-	const SITE_LINK_TITLE = 'Some Article';
+	private const SITE_LINK_TITLE = 'Some Article';
 
-	const BADGE_ITEM_ID = 'Q3000';
+	private const BADGE_ITEM_ID = 'Q3000';
 
 	/**
 	 * @return SiteLinkBadgeChangeOpSerializationValidator

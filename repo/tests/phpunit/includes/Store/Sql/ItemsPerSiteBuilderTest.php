@@ -24,7 +24,7 @@ use Wikibase\Repo\Store\Sql\ItemsPerSiteBuilder;
  */
 class ItemsPerSiteBuilderTest extends MediaWikiIntegrationTestCase {
 
-	const BATCH_SIZE = 5;
+	private const BATCH_SIZE = 5;
 
 	/**
 	 * @return ItemId

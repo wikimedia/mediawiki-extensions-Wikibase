@@ -27,7 +27,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
  */
 class TermValidatorFactoryTest extends \PHPUnit\Framework\TestCase {
 
-	const MAX_LENGTH = 8;
+	private const MAX_LENGTH = 8;
 
 	/**
 	 * @dataProvider invalidConstructorArgumentProvider

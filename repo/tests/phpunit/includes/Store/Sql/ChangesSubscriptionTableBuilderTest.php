@@ -23,7 +23,7 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ChangesSubscriptionTableBuilderTest extends MediaWikiIntegrationTestCase {
 
-	const TABLE_NAME = 'wb_changes_subscription';
+	private const TABLE_NAME = 'wb_changes_subscription';
 
 	protected function setUp(): void {
 		$this->tablesUsed[] = self::TABLE_NAME;

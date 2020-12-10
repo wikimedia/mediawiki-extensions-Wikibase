@@ -17,8 +17,8 @@ use Wikibase\Repo\Validators\InterWikiLinkExistsValidator;
  */
 class InterWikiLinkExistsValidatorTest extends \PHPUnit\Framework\TestCase {
 
-	const EXISTING_PAGE = "Foo.map";
-	const NONEXISTENT_PAGE = "Foo.NOT-FOUND.map";
+	private const EXISTING_PAGE = "Foo.map";
+	private const NONEXISTENT_PAGE = "Foo.NOT-FOUND.map";
 
 	/**
 	 * @return MediaWikiPageNameNormalizer

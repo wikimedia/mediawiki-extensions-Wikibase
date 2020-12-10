@@ -18,8 +18,8 @@ use Wikibase\Repo\Rdf\RdfVocabulary;
  * @author Daniel Kinzler
  */
 class EntityDataTestProvider {
-	const ITEM_REVISION_ID = 4242;
-	const PROPERTY_REVISON_ID = 4243;
+	public const ITEM_REVISION_ID = 4242;
+	public const PROPERTY_REVISON_ID = 4243;
 
 	/**
 	 * @return EntityRevision[]

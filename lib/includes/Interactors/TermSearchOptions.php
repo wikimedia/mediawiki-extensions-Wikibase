@@ -11,7 +11,7 @@ use Wikimedia\Assert\Assert;
  */
 class TermSearchOptions {
 
-	const HARD_LIMIT = 2500;
+	private const HARD_LIMIT = 2500;
 
 	/**
 	 * @var bool do a case sensitive search

@@ -24,7 +24,7 @@ class RecentChangeFactory {
 	 * Classification of Wikibase changes in the rc_source column of the
 	 * recentchanges table.
 	 */
-	const SRC_WIKIBASE = 'wb';
+	public const SRC_WIKIBASE = 'wb';
 
 	/**
 	 * @var Language

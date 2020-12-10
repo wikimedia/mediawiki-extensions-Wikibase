@@ -26,7 +26,7 @@ class SitesModule extends ResourceLoaderModule {
 	/**
 	 * How many seconds the result of getSiteDetails() is cached.
 	 */
-	const SITE_DETAILS_TTL = 3600; // 1 hour
+	private const SITE_DETAILS_TTL = 3600; // 1 hour
 
 	/**
 	 * @var SettingsArray

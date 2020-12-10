@@ -20,7 +20,7 @@ class EntityDiffChangedAspects implements Serializable {
 	/**
 	 * Increases whenever the array format (self::toArray) changes
 	 */
-	const ARRAYFORMATVERSION = 1;
+	public const ARRAYFORMATVERSION = 1;
 
 	/**
 	 * Language codes of the labels that changed (added, removed or updated)

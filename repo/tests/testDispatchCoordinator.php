@@ -34,7 +34,7 @@ class TestDispatchCoordinator extends Maintenance {
 	 */
 	private $cache;
 
-	const TABLE_PREFIX = 'fake_';
+	private const TABLE_PREFIX = 'fake_';
 
 	public function __construct() {
 		parent::__construct();

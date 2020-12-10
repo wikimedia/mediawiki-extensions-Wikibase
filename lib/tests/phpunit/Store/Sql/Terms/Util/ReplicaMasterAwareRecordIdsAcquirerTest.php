@@ -16,9 +16,9 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class ReplicaMasterAwareRecordIdsAcquirerTest extends TestCase {
 
-	const TABLE_DDL_FILE_PATH = __DIR__ . '/ReplicaMasterAwareRecordIdsAcquirerTest_tableDDL.sql';
-	const TABLE_NAME = 'replica_master_aware_record_ids_acquirer_test';
-	const ID_COLUMN = 'id';
+	private const TABLE_DDL_FILE_PATH = __DIR__ . '/ReplicaMasterAwareRecordIdsAcquirerTest_tableDDL.sql';
+	private const TABLE_NAME = 'replica_master_aware_record_ids_acquirer_test';
+	private const ID_COLUMN = 'id';
 
 	/**
 	 * @var IDatabase

@@ -43,8 +43,8 @@ use Wikimedia\Purtle\RdfWriter;
  */
 class RdfDumpGeneratorTest extends MediaWikiIntegrationTestCase {
 
-	const URI_BASE = 'http://acme.test/';
-	const URI_DATA = 'http://data.acme.test/';
+	private const URI_BASE = 'http://acme.test/';
+	private const URI_DATA = 'http://data.acme.test/';
 
 	/**
 	 * @var NTriplesRdfTestHelper

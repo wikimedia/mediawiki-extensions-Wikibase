@@ -19,9 +19,9 @@ use Wikimedia\Rdbms\IDatabase;
  */
 class DatabaseTermInLangIdsResolverTest extends TestCase {
 
-	const TYPE_LABEL = 1;
-	const TYPE_DESCRIPTION = 2;
-	const TYPE_ALIAS = 3;
+	private const TYPE_LABEL = 1;
+	private const TYPE_DESCRIPTION = 2;
+	private const TYPE_ALIAS = 3;
 
 	/** @var TypeIdsResolver */
 	private $typeIdsResolver;
