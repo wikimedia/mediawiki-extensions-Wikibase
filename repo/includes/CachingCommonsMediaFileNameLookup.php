@@ -15,7 +15,7 @@ use Wikimedia\Assert\Assert;
  */
 class CachingCommonsMediaFileNameLookup {
 
-	const CACHE_DURATION = 600;
+	private const CACHE_DURATION = 600;
 
 	/**
 	 * @var MediaWikiPageNameNormalizer

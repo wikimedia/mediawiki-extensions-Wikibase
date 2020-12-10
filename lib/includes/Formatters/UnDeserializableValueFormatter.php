@@ -17,7 +17,7 @@ use ValueFormatters\ValueFormatterBase;
  */
 class UnDeserializableValueFormatter extends ValueFormatterBase {
 
-	const OPT_MESSAGE_KEY = 'unDeserializableMessage';
+	private const OPT_MESSAGE_KEY = 'unDeserializableMessage';
 
 	/**
 	 * @param FormatterOptions|null $options

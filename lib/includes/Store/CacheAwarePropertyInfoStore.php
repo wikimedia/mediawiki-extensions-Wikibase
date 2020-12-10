@@ -21,9 +21,9 @@ use Wikibase\DataModel\Entity\PropertyId;
  */
 class CacheAwarePropertyInfoStore implements PropertyInfoStore {
 
-	const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
+	private const SINGLE_PROPERTY_CACHE_KEY_SEPARATOR = ':';
 
-	const CACHE_CLASS = 'CacheAwarePropertyInfoStore';
+	public const CACHE_CLASS = 'CacheAwarePropertyInfoStore';
 
 	/**
 	 * @var PropertyInfoStore

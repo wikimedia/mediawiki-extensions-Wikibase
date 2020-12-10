@@ -15,7 +15,7 @@ interface PropertyInfoStore {
 	/**
 	 * Key to use in the info array for the property's canonical URI pattern
 	 */
-	const KEY_CANONICAL_URI = 'canonicalURI';
+	public const KEY_CANONICAL_URI = 'canonicalURI';
 
 	/**
 	 * Update the info for the given property.

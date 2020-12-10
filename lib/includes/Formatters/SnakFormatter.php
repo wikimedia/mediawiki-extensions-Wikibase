@@ -18,7 +18,7 @@ interface SnakFormatter {
 	/**
 	 * Options key for controlling the output language.
 	 */
-	const OPT_LANG = ValueFormatter::OPT_LANG;
+	public const OPT_LANG = ValueFormatter::OPT_LANG;
 
 	/**
 	 * Output format types.
@@ -27,29 +27,29 @@ interface SnakFormatter {
 	 * to a concrete formatter based on any of these (in order to support more nuanced
 	 * formats in the future).
 	 */
-	const FORMAT_PLAIN = 'text/plain';
-	const FORMAT_WIKI = 'text/x-wiki';
-	const FORMAT_HTML = 'text/html';
-	const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
-	const FORMAT_HTML_VERBOSE = 'text/html; disposition=verbose';
-	const FORMAT_HTML_VERBOSE_PREVIEW = 'text/html; disposition=verbose-preview';
+	public const FORMAT_PLAIN = 'text/plain';
+	public const FORMAT_WIKI = 'text/x-wiki';
+	public const FORMAT_HTML = 'text/html';
+	public const FORMAT_HTML_DIFF = 'text/html; disposition=diff';
+	public const FORMAT_HTML_VERBOSE = 'text/html; disposition=verbose';
+	public const FORMAT_HTML_VERBOSE_PREVIEW = 'text/html; disposition=verbose-preview';
 
 	/**
 	 * Options key for controlling error handling.
 	 */
-	const OPT_ON_ERROR = 'on-error';
+	public const OPT_ON_ERROR = 'on-error';
 
 	/**
 	 * Value for the OPT_ON_ERROR option indicating that recoverable
 	 * errors should cause a warning to be show to the user.
 	 */
-	const ON_ERROR_WARN = 'warn';
+	public const ON_ERROR_WARN = 'warn';
 
 	/**
 	 * Value for the OPT_ON_ERROR option indicating that recoverable
 	 * errors should cause the formatting to fail with an exception
 	 */
-	const ON_ERROR_FAIL = 'fail';
+	public const ON_ERROR_FAIL = 'fail';
 
 	/**
 	 * @param Snak $snak

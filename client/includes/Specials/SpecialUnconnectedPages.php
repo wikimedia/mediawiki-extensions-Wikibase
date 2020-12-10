@@ -26,7 +26,7 @@ class SpecialUnconnectedPages extends QueryPage {
 	/**
 	 * @var int maximum supported offset
 	 */
-	const MAX_OFFSET = 10000;
+	private const MAX_OFFSET = 10000;
 
 	/**
 	 * @var NamespaceChecker|null

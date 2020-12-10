@@ -21,7 +21,7 @@ use Wikibase\DataModel\Statement\Statement;
  */
 class NewStatement {
 
-	const GENERATE_GUID = true;
+	private const GENERATE_GUID = true;
 
 	/**
 	 * @var PropertyId

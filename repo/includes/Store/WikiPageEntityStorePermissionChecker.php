@@ -22,7 +22,7 @@ use Wikibase\Lib\Store\EntityTitleLookup;
  */
 class WikiPageEntityStorePermissionChecker implements EntityPermissionChecker {
 
-	const ACTION_MW_CREATE = 'create';
+	private const ACTION_MW_CREATE = 'create';
 
 	/**
 	 * @var EntityNamespaceLookup

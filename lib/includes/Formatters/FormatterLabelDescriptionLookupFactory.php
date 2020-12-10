@@ -27,7 +27,7 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  */
 class FormatterLabelDescriptionLookupFactory {
 
-	const OPT_LANGUAGE_FALLBACK_CHAIN = 'languages';
+	public const OPT_LANGUAGE_FALLBACK_CHAIN = 'languages';
 
 	/**
 	 * @var TermLookup

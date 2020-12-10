@@ -11,7 +11,7 @@ use Elastica\Query\Exists;
  * @license GPL-2.0-or-later
  */
 class MoreLikeWikibase extends MoreLikeFeature {
-	const MORE_LIKE_THIS_JUST_WIKIBASE = 'morelikewithwikibase';
+	private const MORE_LIKE_THIS_JUST_WIKIBASE = 'morelikewithwikibase';
 
 	protected function getKeywords() {
 		return [ self::MORE_LIKE_THIS_JUST_WIKIBASE ];
