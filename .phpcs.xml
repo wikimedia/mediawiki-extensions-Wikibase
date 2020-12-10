@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <ruleset>
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="PSR12.Properties.ConstantVisibility.NotFound" />
+		<exclude name="PSR12.Properties.ConstantVisibility.NotFound">
+			<exclude-pattern>stubs/cirrussearch\.php</exclude-pattern>
+		</exclude>
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceWrongIndent" />
 		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed" />
 		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />

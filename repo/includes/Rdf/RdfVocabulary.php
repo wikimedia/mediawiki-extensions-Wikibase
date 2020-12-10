@@ -19,66 +19,72 @@ use Wikimedia\Assert\Assert;
 class RdfVocabulary {
 
 	// Change this when changing data format!
-	const FORMAT_VERSION = '1.0.0';
-	const ONTOLOGY_VERSION = '1.0';
+	public const FORMAT_VERSION = '1.0.0';
+	private const ONTOLOGY_VERSION = '1.0';
 
-	const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
-	const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
+	private const ONTOLOGY_BASE_URI = 'http://wikiba.se/ontology';
+	public const NS_ONTOLOGY = 'wikibase'; // wikibase ontology (shared)
+
 	// Nodes
-	const NS_ENTITY = ''; // concept uris
-	const NS_DATA = 'data'; // document uris
-	const NS_STATEMENT = 's'; // statement
-	const NS_REFERENCE = 'ref'; // reference
-	const NS_VALUE = 'v'; // value
+	public const NS_ENTITY = ''; // concept uris
+	public const NS_DATA = 'data'; // document uris
+	public const NS_STATEMENT = 's'; // statement
+	public const NS_REFERENCE = 'ref'; // reference
+	public const NS_VALUE = 'v'; // value
+
 	// Predicates
-	const NSP_DIRECT_CLAIM = 't'; // direct assertion entity -> value
-	const NSP_DIRECT_CLAIM_NORM = 'tn'; // direct assertion entity -> value, normalized
-	const NSP_CLAIM = 'p'; // entity -> statement
-	const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
-	const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
-	const NSP_CLAIM_VALUE_NORM = 'psn'; // statement -> deep value, normalized
-	const NSP_QUALIFIER = 'pq'; // statement -> qualifier
-	const NSP_QUALIFIER_VALUE = 'pqv'; // statement ->  qualifier deep value
-	const NSP_QUALIFIER_VALUE_NORM = 'pqn'; // statement ->  qualifier deep value, normalized
-	const NSP_REFERENCE = 'pr'; // reference -> simple value
-	const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
-	const NSP_REFERENCE_VALUE_NORM = 'prn'; // reference -> deep value, normalized
-	const NSP_NOVALUE = 'no'; // novalue class
+	public const NSP_DIRECT_CLAIM = 't'; // direct assertion entity -> value
+	public const NSP_DIRECT_CLAIM_NORM = 'tn'; // direct assertion entity -> value, normalized
+	public const NSP_CLAIM = 'p'; // entity -> statement
+	public const NSP_CLAIM_STATEMENT = 'ps'; // statement -> simple value
+	public const NSP_CLAIM_VALUE = 'psv'; // statement -> deep value
+	public const NSP_CLAIM_VALUE_NORM = 'psn'; // statement -> deep value, normalized
+	public const NSP_QUALIFIER = 'pq'; // statement -> qualifier
+	public const NSP_QUALIFIER_VALUE = 'pqv'; // statement ->  qualifier deep value
+	public const NSP_QUALIFIER_VALUE_NORM = 'pqn'; // statement ->  qualifier deep value, normalized
+	public const NSP_REFERENCE = 'pr'; // reference -> simple value
+	public const NSP_REFERENCE_VALUE = 'prv'; // reference -> deep value
+	public const NSP_REFERENCE_VALUE_NORM = 'prn'; // reference -> deep value, normalized
+	public const NSP_NOVALUE = 'no'; // novalue class
+
 	// other prefixes
-	const NS_SKOS = 'skos'; // SKOS vocabulary
-	const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
-	const NS_CC = 'cc'; // Creative Commons
-	const NS_GEO = 'geo'; // prefix for geolocations
-	const NS_PROV = 'prov'; // for provenance
-	const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
-	const SCHEMA_ORG_URI = 'http://schema.org/';
-	const CC_URI = 'http://creativecommons.org/ns#';
+	public const NS_SKOS = 'skos'; // SKOS vocabulary
+	public const NS_SCHEMA_ORG = 'schema'; // schema.org vocabulary
+	public const NS_CC = 'cc'; // Creative Commons
+	public const NS_GEO = 'geo'; // prefix for geolocations
+	public const NS_PROV = 'prov'; // for provenance
+	private const SKOS_URI = 'http://www.w3.org/2004/02/skos/core#';
+	private const SCHEMA_ORG_URI = 'http://schema.org/';
+	private const CC_URI = 'http://creativecommons.org/ns#';
+
 	// External URIs
 	//FIXME: get from config
-	const MEDIA_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
+	private const MEDIA_URI = 'http://commons.wikimedia.org/wiki/Special:FilePath/';
 	//FIXME: get from config
-	const COMMONS_DATA_URI = 'http://commons.wikimedia.org/data/main/';
-	const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
-	const PROV_URI = 'http://www.w3.org/ns/prov#';
+	private const COMMONS_DATA_URI = 'http://commons.wikimedia.org/data/main/';
+	private const GEO_URI = 'http://www.opengis.net/ont/geosparql#';
+	private const PROV_URI = 'http://www.w3.org/ns/prov#';
 
 	// Gregorian calendar link.
 	// I'm not very happy about hardcoding it here but see no better way so far.
 	// See also DataValues\TimeValue\TimeFormatter::XXX_CALENDAR constants.
-	const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
-	const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
+	private const GREGORIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985727';
+	private const JULIAN_CALENDAR = 'http://www.wikidata.org/entity/Q1985786';
+
 	/**
 	 * URI for unit "1"
 	 * See: https://phabricator.wikimedia.org/T105432
 	 */
-	const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
+	public const ONE_ENTITY = 'http://www.wikidata.org/entity/Q199';
 	// Ranks
-	const WIKIBASE_RANK_BEST = 'BestRank';
+	public const WIKIBASE_RANK_BEST = 'BestRank';
 
-	const RANK_MAP = [
+	public const RANK_MAP = [
 		Statement::RANK_DEPRECATED => 'DeprecatedRank',
 		Statement::RANK_NORMAL => 'NormalRank',
 		Statement::RANK_PREFERRED => 'PreferredRank',
 	];
+
 	/** @var string[] Value properties */
 	public $claimToValue = [];
 	/** @var string[] Value properties for normalized values */
