@@ -8,6 +8,7 @@
 			"Hello71",
 			"Metroitendo",
 			"Peter17",
+			"Thibaut120094",
 			"Urhixidur",
 			"Verdy p",
 			"Wladek92",
@@ -32,7 +33,7 @@
 	"valueview-expert-timeinput-calendar": "Calendrier :",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Langue (obligatoire) :",
-	"valueview-expertextender-unitsuggester-label": "Unité (facultatif) :",
+	"valueview-expertextender-unitsuggester-label": "Unité (facultative) :",
 	"valueview-preview-label": "sera affiché comme :",
 	"valueview-preview-novalue": "aucune valeur valide reconnue",
 	"valueview-listrotator-manually": "définir manuellement"

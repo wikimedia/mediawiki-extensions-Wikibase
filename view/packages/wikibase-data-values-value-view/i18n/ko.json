@@ -13,6 +13,7 @@
 	"valueview-expert-globecoordinateinput-precision": "정밀도:",
 	"valueview-expert-globecoordinateinput-nullprecision": "지정되지 않음",
 	"valueview-expert-globecoordinateinput-customprecision": "특수 ($1)",
+	"valueview-expert-globecoordinateinput-precisionlabel-tenthousandth-of-arcsecond": "1/10000'",
 	"valueview-expert-timevalue-calendar-gregorian": "그레고리력",
 	"valueview-expert-timevalue-calendar-julian": "율리우스력",
 	"valueview-expert-timeinput-precision": "정밀도:",
