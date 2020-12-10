@@ -26,7 +26,7 @@ class ReplicaMasterAwareRecordIdsAcquirer {
 	 * master database to find existing items, bypassing replica database
 	 * completely.
 	 */
-	const FLAG_IGNORE_REPLICA = 0x1;
+	public const FLAG_IGNORE_REPLICA = 0x1;
 
 	/**
 	 * @var ILBFactory

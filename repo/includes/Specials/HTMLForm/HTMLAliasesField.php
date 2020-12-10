@@ -17,7 +17,7 @@ use Wikibase\Lib\StringNormalizer;
  */
 class HTMLAliasesField extends HTMLTextField {
 
-	const DELIMITER = '|';
+	private const DELIMITER = '|';
 
 	/**
 	 * @var StringNormalizer

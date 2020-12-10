@@ -11,7 +11,7 @@ use ParserOutput;
  * @license GPL-2.0-or-later
  */
 class TermboxVersionParserCacheValueRejector {
-	const TERMBOX_VERSION_KEY = 'termboxVersion';
+	private const TERMBOX_VERSION_KEY = 'termboxVersion';
 	/** @var TermboxFlag */
 	private $flag;
 

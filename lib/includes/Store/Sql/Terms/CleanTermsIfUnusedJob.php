@@ -30,8 +30,8 @@ class CleanTermsIfUnusedJob extends Job {
 	/** @var TermStoreCleaner */
 	private $termInLangIdsCleaner;
 
-	const JOB_NAME = 'CleanTermsIfUnused';
-	const TERM_IN_LANG_IDS = 'termInLangIds';
+	public const JOB_NAME = 'CleanTermsIfUnused';
+	public const TERM_IN_LANG_IDS = 'termInLangIds';
 
 	/**
 	 * @param Title $unused But required due to the code in Job::factory currently.

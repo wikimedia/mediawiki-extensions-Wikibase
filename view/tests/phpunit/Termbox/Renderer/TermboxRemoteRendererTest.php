@@ -43,8 +43,8 @@ class TermboxRemoteRendererTest extends TestCase {
 		$this->stats = $this->createMock( StatsdDataFactoryInterface::class );
 	}
 
-	/** private */ const SSR_URL = 'https://ssr/termbox';
-	/** private */ const SSR_TIMEOUT = 3;
+	private const SSR_URL = 'https://ssr/termbox';
+	private const SSR_TIMEOUT = 3;
 
 	public function testGetContentWithSaneParameters_returnsRequestResponse() {
 		$content = 'hello from server!';

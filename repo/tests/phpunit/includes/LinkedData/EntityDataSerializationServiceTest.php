@@ -40,10 +40,10 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EntityDataSerializationServiceTest extends MediaWikiIntegrationTestCase {
 
-	const URI_BASE = 'http://acme.test/';
-	const URI_BASE_PROPS = 'http://prop.test/';
-	const URI_DATA = 'http://data.acme.test/';
-	const URI_DATA_PROPS = 'http://data.prop.test/';
+	public const URI_BASE = 'http://acme.test/';
+	private const URI_BASE_PROPS = 'http://prop.test/';
+	public const URI_DATA = 'http://data.acme.test/';
+	private const URI_DATA_PROPS = 'http://data.prop.test/';
 
 	/**
 	 * Returns a MockRepository. The following entities are defined:

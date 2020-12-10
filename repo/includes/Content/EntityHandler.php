@@ -46,7 +46,7 @@ abstract class EntityHandler extends ContentHandler {
 	 * Bump the version when making incompatible changes
 	 * to parser output.
 	 */
-	const PARSER_VERSION = 3;
+	public const PARSER_VERSION = 3;
 
 	/**
 	 * @var FieldDefinitions

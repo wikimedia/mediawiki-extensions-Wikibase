@@ -56,7 +56,7 @@ abstract class EntityContent extends AbstractContent {
 	 *
 	 * @note: must not collide with the EDIT_XXX flags defined by MediaWiki core in Defines.php.
 	 */
-	const EDIT_IGNORE_CONSTRAINTS = 1024;
+	public const EDIT_IGNORE_CONSTRAINTS = 1024;
 
 	/**
 	 * @see Content::isValid()

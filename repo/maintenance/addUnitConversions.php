@@ -34,7 +34,7 @@ class AddUnitConversions extends Maintenance {
 	/**
 	 * Max chunk of values processed by one query
 	 */
-	const MAX_QUERY_CHUNK = 100;
+	private const MAX_QUERY_CHUNK = 100;
 
 	/**
 	 * @var RdfVocabulary

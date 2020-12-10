@@ -39,8 +39,8 @@ class EntityDataRequestHandler {
 	 *
 	 * @todo Hard maximum could be configurable somehow.
 	 */
-	const MINIMUM_MAX_AGE = 0;
-	const MAXIMUM_MAX_AGE = 2678400; // 31 days
+	private const MINIMUM_MAX_AGE = 0;
+	private const MAXIMUM_MAX_AGE = 2678400; // 31 days
 
 	/**
 	 * @var EntityDataSerializationService

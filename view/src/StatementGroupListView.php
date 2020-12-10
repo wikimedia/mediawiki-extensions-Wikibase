@@ -41,7 +41,7 @@ class StatementGroupListView {
 	 */
 	private $statementHtmlGenerator;
 
-	const ID_PREFIX_SEPARATOR = '-';
+	public const ID_PREFIX_SEPARATOR = '-';
 
 	public function __construct(
 		PropertyOrderProvider $propertyOrderProvider,

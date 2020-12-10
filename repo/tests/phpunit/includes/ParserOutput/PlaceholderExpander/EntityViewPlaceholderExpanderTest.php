@@ -26,7 +26,7 @@ use Wikibase\View\Template\TemplateFactory;
  */
 class EntityViewPlaceholderExpanderTest extends \PHPUnit\Framework\TestCase {
 
-	/* private */ const COOKIE_PREFIX = 'testwiki-';
+	private const COOKIE_PREFIX = 'testwiki-';
 
 	/**
 	 * @param User $user

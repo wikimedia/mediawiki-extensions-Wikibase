@@ -17,10 +17,10 @@ use Wikibase\DataModel\Entity\EntityId;
  */
 class EntityChange extends DiffChange {
 
-	const UPDATE = 'update';
-	const ADD = 'add';
-	const REMOVE = 'remove';
-	const RESTORE = 'restore';
+	public const UPDATE = 'update';
+	public const ADD = 'add';
+	public const REMOVE = 'remove';
+	public const RESTORE = 'restore';
 
 	/**
 	 * @var EntityId|null

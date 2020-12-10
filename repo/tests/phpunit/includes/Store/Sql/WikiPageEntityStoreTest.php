@@ -60,7 +60,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
-	const FAKE_NS_ID = 654;
+	private const FAKE_NS_ID = 654;
 
 	protected function tearDown(): void {
 		parent::tearDown();

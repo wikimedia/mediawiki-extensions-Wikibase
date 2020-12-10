@@ -21,9 +21,9 @@ class EntityChangeLookup extends DBAccessBase implements ChunkAccess {
 	/**
 	 * Flag to indicate that we need to query a master database.
 	 */
-	const FROM_MASTER = 'master';
+	public const FROM_MASTER = 'master';
 
-	const FROM_REPLICA = 'replica';
+	public const FROM_REPLICA = 'replica';
 
 	/**
 	 * @var EntityChangeFactory
