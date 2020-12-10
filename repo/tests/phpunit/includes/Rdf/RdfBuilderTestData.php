@@ -31,11 +31,11 @@ use Wikimedia\Purtle\NTriplesRdfWriter;
  */
 class RdfBuilderTestData {
 
-	const URI_BASE = 'http://acme.test/';
-	const URI_DATA = 'http://data.acme.test/';
+	public const URI_BASE = 'http://acme.test/';
+	public const URI_DATA = 'http://data.acme.test/';
 
-	const URI_BASE_FOREIGN = 'http://foreign.test/';
-	const URI_DATA_FOREIGN = 'http://data.foreign.test/';
+	private const URI_BASE_FOREIGN = 'http://foreign.test/';
+	private const URI_DATA_FOREIGN = 'http://data.foreign.test/';
 
 	/**
 	 * @var EntityContentDataCodec|null

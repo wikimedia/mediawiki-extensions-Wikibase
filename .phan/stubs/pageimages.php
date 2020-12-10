@@ -12,7 +12,7 @@ use Title;
  */
 
 class PageImages {
-	const PROP_NAME_FREE = 'page_image_free';
+	public const PROP_NAME_FREE = 'page_image_free';
 
 	/**
 	 * @param Title $title

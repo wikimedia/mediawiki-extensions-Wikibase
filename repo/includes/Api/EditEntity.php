@@ -46,9 +46,9 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class EditEntity extends ModifyEntity {
 
-	const PARAM_DATA = 'data';
+	public const PARAM_DATA = 'data';
 
-	const PARAM_CLEAR = 'clear';
+	public const PARAM_CLEAR = 'clear';
 
 	/**
 	 * @var ContentLanguages

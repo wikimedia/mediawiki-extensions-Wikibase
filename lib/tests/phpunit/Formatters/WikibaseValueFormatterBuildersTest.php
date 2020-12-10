@@ -53,11 +53,11 @@ use Wikibase\Lib\TermFallbackCache\TermFallbackCacheFacade;
  */
 class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 
-	const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
+	private const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
 
-	const TABULAR_DATA_STORAGE_FRONTEND_URL = '//commons2.wikimedia.org/wiki/';
+	private const TABULAR_DATA_STORAGE_FRONTEND_URL = '//commons2.wikimedia.org/wiki/';
 
-	const CACHE_TTL_IN_SECONDS = 10;
+	private const CACHE_TTL_IN_SECONDS = 10;
 
 	protected function setUp(): void {
 		parent::setUp();

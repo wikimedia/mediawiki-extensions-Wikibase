@@ -26,8 +26,8 @@ class CachingPrefetchingTermLookupTest extends TestCase {
 
 	use TermCacheKeyBuilder;
 
-	const TEST_REVISION = 666;
-	const TEST_LANGUAGE = 'en';
+	private const TEST_REVISION = 666;
+	private const TEST_LANGUAGE = 'en';
 
 	/** @var CacheInterface */
 	private $cache;

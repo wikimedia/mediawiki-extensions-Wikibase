@@ -14,9 +14,9 @@ use ValueParsers\ValueParser;
  */
 class MwEraParser extends EraParser {
 
-	const FORMAT_NAME = 'mw-era';
+	public const FORMAT_NAME = 'mw-era';
 
-	const MESSAGE_KEY = 'wikibase-time-precision-BCE';
+	public const MESSAGE_KEY = 'wikibase-time-precision-BCE';
 
 	/**
 	 * @var Language

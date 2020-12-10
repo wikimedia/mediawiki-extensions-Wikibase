@@ -19,7 +19,7 @@ use Wikibase\Lib\Store\TitleLookupBasedEntityUrlLookup;
  */
 class TitleLookupBasedEntityUrlLookupTest extends TestCase {
 
-	const Q123_URL = 'http://some-wikibase/wiki/Item:Q123';
+	private const Q123_URL = 'http://some-wikibase/wiki/Item:Q123';
 
 	public function provideExpectedAndTitleOrNullForFullURL() {
 		yield [ self::Q123_URL, $this->getMockTitle( 'getFullURL', self::Q123_URL ) ];

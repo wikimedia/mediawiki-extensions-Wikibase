@@ -37,9 +37,9 @@ class SpecialItemByTitleTest extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
-	const EXISTING_WIKI = 'dewiki';
-	const EXISTING_PAGE = 'Gefunden';
-	const EXISTING_ITEM_ID = 'Q123';
+	private const EXISTING_WIKI = 'dewiki';
+	private const EXISTING_PAGE = 'Gefunden';
+	private const EXISTING_ITEM_ID = 'Q123';
 
 	/**
 	 * @return EntityTitleLookup|MockObject

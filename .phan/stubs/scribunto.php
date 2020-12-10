@@ -75,7 +75,7 @@ class Scribunto_LuaLibraryBase {
 	/**
 	 * @return array Lua package
 	 */
-	function register() {
+	public function register() {
 	}
 
 }
@@ -86,7 +86,7 @@ class ScribuntoException extends MWException {
 	 * @param string $messageName
 	 * @param array $params
 	 */
-	function __construct( $messageName, $params = [] ) {
+	public function __construct( $messageName, $params = [] ) {
 	}
 
 }

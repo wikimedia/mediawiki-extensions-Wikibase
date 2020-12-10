@@ -17,7 +17,7 @@ use Wikibase\Repo\DataTypeSelector;
 class DataTypeSelectorTest extends \PHPUnit\Framework\TestCase {
 
 	/** @see \LanguageQqx */
-	const DUMMY_LANGUAGE = 'qqx';
+	private const DUMMY_LANGUAGE = 'qqx';
 
 	/**
 	 * @param string $propertyType

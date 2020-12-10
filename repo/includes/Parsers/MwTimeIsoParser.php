@@ -24,7 +24,7 @@ use ValueParsers\ValueParser;
  */
 class MwTimeIsoParser extends StringValueParser {
 
-	const FORMAT_NAME = 'mw-time-iso';
+	private const FORMAT_NAME = 'mw-time-iso';
 
 	/**
 	 * @var array message keys showing the number of 0s that need to be appended to years when
