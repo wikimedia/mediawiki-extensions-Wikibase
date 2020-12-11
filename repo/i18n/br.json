@@ -7,6 +7,7 @@
 			"Gwenn-Ael",
 			"Ladsgroup",
 			"Macofe",
+			"MuratTheTurkish",
 			"Pymouss",
 			"Y-M D"
 		]
@@ -118,7 +119,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Asantiñ a ran d'an termenoù-se evit ma degasadennoù da zont. Arabat diskouez ar c'hemenn-mañ din ken.",
 	"wikibase-entityselector-more": "muioc'h",
 	"wikibase-entityselector-notfound": "N'eus bet kavet netra o klotañ",
-	"wikibase-anonymouseditwarning": "Diwallit : N'oc'h ket kevreet. Gallout a raio an holl gwelet ho [https://en.wikipedia.org/wiki/IP_address chomlec'h IP] ma kemmit an disterañ tra. Ma <strong>[[Special:UserLogin|kevreit]]</strong> pe ma <strong>[[Special:CreateAccount|krouit ur gont]]</strong>, e vo stag ho kemmoù ouzh hoc'h anv implijer, ouzhpenn traoù mat all.",
+	"wikibase-anonymouseditwarning": "Diwallit : N'oc'h ket kevreet. Gallout a raio an holl gwelet ho [https://br.wikipedia.org/wiki/Chomlec’h_IP chomlec'h IP] ma kemmit an disterañ tra. Ma <strong>[[Special:UserLogin|kevreit]]</strong> pe ma <strong>[[Special:CreateAccount|krouit ur gont]]</strong>, e vo stag ho kemmoù ouzh hoc'h anv implijer, ouzhpenn traoù mat all.",
 	"wikibase-anonymouseditwarning-heading": "N'oc'h ket kevreet",
 	"wikibase-anonymouseditwarning-message": "Evel m'emaoc'h e vo gwelet ho chomlec'h IP gant an holl ma kemmit tra pe dra. Ma kevreit pe ma krout ur gont e vo stag ho kemmoù ouzh hoc'h anv implijer, ouzhpenn traoù mat all.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Kemenn din bep tro ma n'on ket kevreet.",

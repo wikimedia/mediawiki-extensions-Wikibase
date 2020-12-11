@@ -4,6 +4,7 @@
 			"Enolp",
 			"Fitoschido",
 			"Macofe",
+			"MuratTheTurkish",
 			"Xuacu"
 		]
 	},
@@ -114,7 +115,7 @@
 	"wikibase-copyrighttooltip-acknowledge": "Aceuto estes condiciones pa les mios futures ediciones. Nun volver a amosar esti mensaxe.",
 	"wikibase-entityselector-more": "más",
 	"wikibase-entityselector-notfound": "Nun s'atoparon coincidencies.",
-	"wikibase-anonymouseditwarning": "Avisu: Nun aniciasti sesión.\nLa to [https://en.wikipedia.org/wiki/IP_address direición IP] Veráse públicamente si realices ediciones. Si <strong>[[Special:UserLogin|anicies sesión]]</strong> o <strong>[[Special:CreateAccount|crees una cuenta]]</strong>, les tos ediciones van atribuyise a un nome d'usuariu, ente otros beneficios.",
+	"wikibase-anonymouseditwarning": "Avisu: Nun aniciasti sesión.\nLa to [https://ast.wikipedia.org/wiki/Direición_IP direición IP] Veráse públicamente si realices ediciones. Si <strong>[[Special:UserLogin|anicies sesión]]</strong> o <strong>[[Special:CreateAccount|crees una cuenta]]</strong>, les tos ediciones van atribuyise a un nome d'usuariu, ente otros beneficios.",
 	"wikibase-anonymouseditwarning-heading": "Nun aniciasti sesión",
 	"wikibase-anonymouseditwarning-message": "Anguaño la to dirección IP va ser visible públicamente si faes dalguna edición. Si anicies sesión o crees una cuenta les tos ediciones van atribuise al to nome d'usuariu, ente otros beneficios.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Avisame cuando nun tenga sesión aniciada.",

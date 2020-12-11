@@ -7,6 +7,7 @@
 			"Ladsgroup",
 			"Lloffiwr",
 			"Macofe",
+			"MuratTheTurkish",
 			"Robin Owain"
 		]
 	},
@@ -59,7 +60,7 @@
 	"wikibase-snakview-variations-novalue-label": "dim gwerth",
 	"wikibase-snakview-snaktypeselector-value": "gwerth o'ch dewis chi",
 	"wikibase-entityselector-more": "mwy",
-	"wikibase-anonymouseditwarning": "Dalier sylw: Nid ydych wedi mewngofnodi.\nFe fydd eich cyfeiriad IP yn ymddangos ar hanes golygu'r endid data.",
+	"wikibase-anonymouseditwarning": "Dalier sylw: Nid ydych wedi mewngofnodi. Bydd eich [https://cy.wikipedia.org/wiki/Cyfeiriad_IP cyfeiriad IP] i'w weld yn gyhoeddus os gwnewch unrhyw olygiadau. Os ydych <strong>[[Special:UserLogin|mewngofnodi]]</strong> neu <strong>[[Special:CreateAccount|yn creu cyfrif]]</strong>, bydd eich golygiadau yn cael eu priodoli i enw defnyddiwr, ymhlith  buddion eraill.",
 	"wikibase-validator-bad-type": "$2 yn lle $1",
 	"wikibase-validator-too-long": "Ni all fod yn hwy {{PLURAL:$1||nag un|na $1}} nod o hyd",
 	"wikibase-validator-unknown-unit": "Uned anhysbys: $1",
