@@ -13,6 +13,7 @@ use MWCryptRand;
 use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * Send information about this Wikibase instance to TODO.
@@ -56,18 +57,26 @@ class WikibasePingback {
 	private $extensionRegistry;
 
 	/**
+	 * @var SettingsArray
+	 */
+	private $wikibaseRepoSettings;
+
+	/**
 	 * @param Config|null $config
 	 * @param LoggerInterface|null $logger
 	 * @param ExtensionRegistry|null $extensionRegistry
+	 * @param SettingsArray|null $wikibaseRepoSettings
 	 */
 	public function __construct(
 		Config $config = null,
 		LoggerInterface $logger = null,
-		ExtensionRegistry $extensionRegistry = null
+		ExtensionRegistry $extensionRegistry = null,
+		SettingsArray $wikibaseRepoSettings = null
 	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
 		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
+		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getDefaultInstance()->getSettings();
 		$this->key = 'WikibasePingback-' . MW_VERSION;
 		$this->host = 'https://www.mediawiki.org/beacon/event';
 	}
@@ -77,9 +86,7 @@ class WikibasePingback {
 	 * @return bool
 	 */
 	private function shouldSend() {
-		return WikibaseRepo::getDefaultInstance()
-			->getSettings()
-			->getSetting( 'wikibasePingback' ) && !$this->checkIfSent();
+		return $this->wikibaseRepoSettings->getSetting( 'wikibasePingback' ) && !$this->checkIfSent();
 	}
 
 	/**
@@ -189,13 +196,14 @@ class WikibasePingback {
 	 */
 	public function getSystemInfo() {
 		$extensions = $this->getTrackedExtensions();
+		$federation = $this->wikibaseRepoSettings->getSetting( 'federatedPropertiesEnabled' );
 
 		$event = [
 			'database'   => $this->config->get( 'DBtype' ),
 			'mediawiki'  => MW_VERSION,
 			'items'  => '', //TODO: type string
-			'federation'  => '', //TODO: type boolean
-			'extensions'  => $extensions,
+			'federation'  => $federation,
+			'extensions'  => $extensions
 		];
 
 		$limit = ini_get( 'memory_limit' );
