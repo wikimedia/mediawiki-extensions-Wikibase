@@ -33,7 +33,7 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			'/wiki/$1',
 			'/w'
 		);
-		$handler = new SkinAfterBottomScriptsHandler( $client, $repoLinker );
+		$handler = new SkinAfterBottomScriptsHandler( 'en', $repoLinker, $client->getTermLookup() );
 
 		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams', '1022523983' );
 		$actual = $handler->createSchema(

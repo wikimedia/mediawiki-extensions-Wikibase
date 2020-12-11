@@ -9,27 +9,25 @@ use PageImages\PageImages;
 use Title;
 
 use Wikibase\Client\RepoLinker;
-use Wikibase\Client\WikibaseClient;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikibase\DataModel\Services\Lookup\EntityLookupException;
-use Wikibase\DataModel\Term\FingerprintProvider;
+use Wikibase\DataModel\Services\Lookup\TermLookup;
+use Wikibase\DataModel\Services\Lookup\TermLookupException;
 
 /**
  * @license GPL-2.0-or-later
  */
 class SkinAfterBottomScriptsHandler {
-	/** @var WikibaseClient */
-	private $client;
+	/** @var string */
+	private $langCode;
 	/** @var RepoLinker */
 	private $repoLinker;
+	/** @var TermLookup */
+	private $termLookup;
 
-	/**
-	 * @param WikibaseClient $client
-	 */
-	public function __construct( WikibaseClient $client, RepoLinker $repoLinker ) {
-		$this->client = $client;
+	public function __construct( string $langCode, RepoLinker $repoLinker, TermLookup $termLookup ) {
+		$this->langCode = $langCode;
 		$this->repoLinker = $repoLinker;
+		$this->termLookup = $termLookup;
 	}
 
 	/**
@@ -46,8 +44,7 @@ class SkinAfterBottomScriptsHandler {
 	) {
 		$entityConceptUri = $this->repoLinker->getEntityConceptUri( $entityId );
 		$imageFile = $this->queryPageImage( $title );
-		$entityDocument = $this->lookupEntityDocument( $entityId );
-		$description = $this->getDescription( $entityDocument );
+		$description = $this->getDescription( $entityId );
 		$schema = $this->createSchema(
 			$title, $revisionTimestamp, $entityConceptUri, $imageFile, $description
 		);
@@ -112,20 +109,6 @@ class SkinAfterBottomScriptsHandler {
 	}
 
 	/**
-	 * @param EntityId $entityId
-	 *
-	 * @return EntityDocument|null
-	 */
-	private function lookupEntityDocument( EntityId $entityId ) {
-		try {
-			$entityLookup = $this->client->getStore()->getEntityLookup();
-			return $entityLookup->getEntity( $entityId );
-		} catch ( EntityLookupException $ex ) {
-			return null;
-		}
-	}
-
-	/**
 	 * If available, query the canonical page image injected into the og:image meta tag. It's
 	 * important that the schema image match the page meta image since the schema describes the page.
 	 * @param Title $title
@@ -140,22 +123,14 @@ class SkinAfterBottomScriptsHandler {
 		return PageImages::getPageImage( $title ) ?: null;
 	}
 
-	/**
-	 * @param EntityDocument|null $entity
-	 *
-	 * @return string
-	 */
-	private function getDescription( EntityDocument $entity = null ) {
-		if ( !$entity || !( $entity instanceof FingerprintProvider ) ) {
+	private function getDescription( EntityId $entityId ): string {
+		try {
+			$description = $this->termLookup->getDescription( $entityId, $this->langCode );
+		} catch ( TermLookupException $exception ) {
 			return '';
 		}
 
-		$langCode = $this->client->getContentLanguage()->getCode();
-		$fingerprint = $entity->getFingerprint();
-		if ( !$fingerprint->hasDescription( $langCode ) ) {
-			return '';
-		}
-		return $fingerprint->getDescription( $langCode )->getText();
+		return $description ?: '';
 	}
 
 }
