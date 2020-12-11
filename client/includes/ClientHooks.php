@@ -195,7 +195,11 @@ final class ClientHooks {
 			return true;
 		}
 
-		$handler = new SkinAfterBottomScriptsHandler( $client, $client->newRepoLinker() );
+		$handler = new SkinAfterBottomScriptsHandler(
+			$client->getContentLanguage()->getCode(),
+			$client->newRepoLinker(),
+			$client->getTermLookup()
+		);
 		$revisionTimestamp = $out->getRevisionTimestamp();
 		$html .= $handler->createSchemaElement(
 			$title,
