@@ -14,6 +14,7 @@ use MWCryptRand;
 use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
+use SiteStats;
 use Wikibase\Lib\SettingsArray;
 use Wikimedia\Rdbms\LBFactory;
 
@@ -29,7 +30,12 @@ class WikibasePingback {
 	 *   payload. The schema lives on MetaWiki, at
 	 *   <https://meta.wikimedia.org/wiki/Schema:WikibasePingback>
 	 */
-	private const SCHEMA_REV = 20763766;
+	private const SCHEMA_REV = 20782637;
+
+	/**
+	 * @var int The minimum number of entities in a non-empty Wikibase
+	 */
+	private const MINIMUM_NUMBER_OF_ENTITIES = 10;
 
 	/** @var LoggerInterface */
 	protected $logger;
@@ -225,11 +231,12 @@ class WikibasePingback {
 	public function getSystemInfo() {
 		$extensions = $this->getTrackedExtensions();
 		$federation = $this->wikibaseRepoSettings->getSetting( 'federatedPropertiesEnabled' );
+		$hasEntities = SiteStats::pages() > self::MINIMUM_NUMBER_OF_ENTITIES;
 
 		$event = [
 			'database'   => $this->config->get( 'DBtype' ),
 			'mediawiki'  => MW_VERSION,
-			'items'  => '', // TODO: type string
+			'hasEntities'  => $hasEntities,
 			'federation'  => $federation,
 			'extensions'  => $extensions,
 			'termbox' => $this->wikibaseRepoSettings->getSetting( 'termboxEnabled' )

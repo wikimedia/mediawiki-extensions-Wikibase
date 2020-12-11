@@ -55,6 +55,14 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$this->assertTrue( $termboxActual );
 	}
 
+	public function testGetSystemInfo_determinesIfWikibaseHasEntities() {
+		$this->populateSiteStats();
+		$pingback = $this->getPingback();
+		$hasEntities = $pingback->getSystemInfo()['hasEntities'];
+
+		$this->assertTrue( $hasEntities );
+	}
+
 	private function getPingback(
 		HttpRequestFactory $requestFactory = null,
 		Config $config = null,
@@ -88,5 +96,10 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 			$requestFactory,
 			$loadBalancerFactory
 		);
+	}
+
+	private function populateSiteStats() {
+		$db = wfGetDB( DB_MASTER );
+		$db->update( 'site_stats', [ 'ss_total_pages' => 11 ], [ 'ss_row_id' => 1 ], __METHOD__ );
 	}
 }
