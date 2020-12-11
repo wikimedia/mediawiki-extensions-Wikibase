@@ -23,9 +23,9 @@ class WikibasePingback {
 	/**
 	 * @var int Revision ID of the JSON schema that describes the pingback
 	 *   payload. The schema lives on MetaWiki, at
-	 *   <https://meta.wikimedia.org/wiki/Schema:MediaWikiPingback>. TODO WHERE
+	 *   <https://meta.wikimedia.org/wiki/Schema:WikibasePingback>
 	 */
-	private const SCHEMA_REV = 0;
+	private const SCHEMA_REV = 20763766;
 
 	/** @var LoggerInterface */
 	protected $logger;
@@ -146,7 +146,10 @@ class WikibasePingback {
 	public function getSystemInfo() {
 		$event = [
 			'database'   => $this->config->get( 'DBtype' ),
-			'MediaWiki'  => MW_VERSION,
+			'mediawiki'  => MW_VERSION,
+			'items'  => '', //TODO: type string
+			'federation'  => '', //TODO: type boolean
+			'extensions'  => '', //TODO: type array
 		];
 
 		$limit = ini_get( 'memory_limit' );
