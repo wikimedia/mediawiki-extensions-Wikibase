@@ -1131,7 +1131,7 @@ class WikibaseRepo {
 	private function getItemVocabularyBaseUri(): string {
 		//@todo: We currently use the local repo concept URI here. This should be configurable,
 		// to e.g. allow 3rd parties to use Wikidata as their vocabulary repo.
-		return $this->getEntitySourceDefinitions()
+		return self::getEntitySourceDefinitions()
 			->getSourceForEntityType( Item::ENTITY_TYPE )
 			->getConceptBaseUri();
 	}

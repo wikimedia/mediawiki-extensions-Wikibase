@@ -107,7 +107,10 @@
 		},
 		"wbsearchentities": {
 			"class": "\\Wikibase\\Repo\\Api\\SearchEntities",
-			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory"
+			"factory": "\\Wikibase\\Repo\\Api\\SearchEntities::factory",
+			"services": [
+				"WikibaseRepo.EntitySourceDefinitions"
+			]
 		},
 		"wbsetaliases": {
 			"class": "\\Wikibase\\Repo\\Api\\SetAliases",

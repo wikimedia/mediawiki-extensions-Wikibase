@@ -231,8 +231,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
-		$propertySource = $wikibaseRepo
-			->getEntitySourceDefinitions()
+		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
 		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign properties, skip this part
@@ -244,8 +243,6 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 				$updater->output( "..." . $msg . "\n" );
 			}
 		);
-
-		$propertySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( 'property' );
 
 		$table = new PropertyInfoTable(
 			$wikibaseRepo->getEntityIdComposer(),
@@ -293,8 +290,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
-		$propertySource = $wikibaseRepo
-			->getEntitySourceDefinitions()
+		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
 		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign properties, skip this part
@@ -333,8 +329,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	public static function rebuildItemTerms( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
-		$itemSource = $wikibaseRepo
-			->getEntitySourceDefinitions()
+		$itemSource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'item' );
 		if ( $itemSource->getSourceName() !== $localEntitySourceName ) {
 			// Foreign items, skip this part
