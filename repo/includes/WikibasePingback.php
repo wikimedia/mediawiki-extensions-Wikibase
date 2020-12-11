@@ -7,6 +7,7 @@ use Config;
 use DeferredUpdates;
 use ExtensionRegistry;
 use FormatJson;
+use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MWCryptRand;
@@ -14,6 +15,7 @@ use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
 use Wikibase\Lib\SettingsArray;
+use Wikimedia\Rdbms\LBFactory;
 
 /**
  * Send information about this Wikibase instance to TODO.
@@ -62,21 +64,38 @@ class WikibasePingback {
 	private $wikibaseRepoSettings;
 
 	/**
+	 * @var HttpRequestFactory
+	 */
+	private $requestFactory;
+
+	/**
+	 * @var LBFactory|null
+	 */
+	private $loadBalancerFactory;
+
+	/**
 	 * @param Config|null $config
 	 * @param LoggerInterface|null $logger
 	 * @param ExtensionRegistry|null $extensionRegistry
 	 * @param SettingsArray|null $wikibaseRepoSettings
+	 * @param HttpRequestFactory|null $requestFactory
+	 * @param LBFactory|null $loadBalancerFactory
 	 */
 	public function __construct(
 		Config $config = null,
 		LoggerInterface $logger = null,
 		ExtensionRegistry $extensionRegistry = null,
-		SettingsArray $wikibaseRepoSettings = null
+		SettingsArray $wikibaseRepoSettings = null,
+		HTTPRequestFactory $requestFactory = null,
+		LBFactory $loadBalancerFactory = null
 	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
 		$this->extensionRegistry = $extensionRegistry ?: ExtensionRegistry::getInstance();
 		$this->wikibaseRepoSettings = $wikibaseRepoSettings ?: WikibaseRepo::getDefaultInstance()->getSettings();
+		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$this->loadBalancerFactory = $loadBalancerFactory ?: MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+
 		$this->key = 'WikibasePingback-' . MW_VERSION;
 		$this->host = 'https://www.mediawiki.org/beacon/event';
 	}
@@ -94,7 +113,10 @@ class WikibasePingback {
 	 * @return bool
 	 */
 	private function checkIfSent() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->loadBalancerFactory
+			->getMainLB()
+			->getConnection( DB_REPLICA );
+
 		$timestamp = $dbr->selectField(
 			'updatelog',
 			'ul_value',
@@ -117,7 +139,10 @@ class WikibasePingback {
 	 * @return bool
 	 */
 	private function markSent() {
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->loadBalancerFactory
+			->getMainLB()
+			->getConnection( DB_MASTER );
+
 		$timestamp = time();
 		return $dbw->upsert(
 			'updatelog',
@@ -142,7 +167,10 @@ class WikibasePingback {
 			return false;  // throttled
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = $this->loadBalancerFactory
+			->getMainLB()
+			->getConnection( DB_MASTER );
+
 		if ( !$dbw->lock( $this->key, __METHOD__, 0 ) ) {
 			return false;  // already in progress
 		}
@@ -201,7 +229,7 @@ class WikibasePingback {
 		$event = [
 			'database'   => $this->config->get( 'DBtype' ),
 			'mediawiki'  => MW_VERSION,
-			'items'  => '', //TODO: type string
+			'items'  => '', // TODO: type string
 			'federation'  => $federation,
 			'extensions'  => $extensions,
 			'termbox' => $this->wikibaseRepoSettings->getSetting( 'termboxEnabled' )
@@ -239,12 +267,18 @@ class WikibasePingback {
 	 */
 	private function getOrCreatePingbackId() {
 		if ( !$this->id ) {
-			$id = wfGetDB( DB_REPLICA )->selectField(
+			$dbr = $this->loadBalancerFactory
+				->getMainLB()
+				->getConnection( DB_REPLICA );
+
+			$id = $dbr->selectField(
 				'updatelog', 'ul_value', [ 'ul_key' => 'WikibasePingback' ], __METHOD__ );
 
 			if ( $id === false ) {
 				$id = MWCryptRand::generateHex( 32 );
-				$dbw = wfGetDB( DB_MASTER );
+				$dbw = $this->loadBalancerFactory
+					->getMainLB()
+					->getConnection( DB_MASTER );
 				$dbw->insert(
 					'updatelog',
 					[ 'ul_key' => 'WikibasePingback', 'ul_value' => $id ],
@@ -283,7 +317,7 @@ class WikibasePingback {
 		$json = FormatJson::encode( $data );
 		$queryString = rawurlencode( str_replace( ' ', '\u0020', $json ) ) . ';';
 		$url = $this->host . '?' . $queryString;
-		$response = MediaWikiServices::getInstance()->getHttpRequestFactory()->post( $url, [], __METHOD__ );
+		$response = $this->requestFactory->post( $url, [], __METHOD__ );
 		return $response !== null;
 	}
 
