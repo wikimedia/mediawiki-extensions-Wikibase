@@ -9,6 +9,7 @@ use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
@@ -76,14 +77,15 @@ class SpecialNewItem extends SpecialNewEntity {
 		$this->termsCollisionDetector = $termsCollisionDetector;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $repoSettings
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$settings = $wikibaseRepo->getSettings();
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' )
+			$repoSettings->getSetting( 'dataRightsUrl' ),
+			$repoSettings->getSetting( 'dataRightsText' )
 		);
 
 		return new self(

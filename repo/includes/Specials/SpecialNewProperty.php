@@ -8,6 +8,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
@@ -66,15 +67,15 @@ class SpecialNewProperty extends SpecialNewEntity {
 	}
 
 	public static function factory(
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$settings = $wikibaseRepo->getSettings();
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' )
+			$repoSettings->getSetting( 'dataRightsUrl' ),
+			$repoSettings->getSetting( 'dataRightsText' )
 		);
 
 		return new self(

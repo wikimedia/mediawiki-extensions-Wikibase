@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Hooks;
 
 use MediaWiki\Page\Hook\ArticleDeleteCompleteHook;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\ChangeModification\DispatchChangeDeletionNotificationJob;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -40,12 +41,14 @@ class DeleteDispatcher implements ArticleDeleteCompleteHook {
 		$this->localClientDatabases = $localClientDatabases;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $repoSettings
+	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 		return new self(
 			'JobQueueGroup::singleton',
 			$repo->getEntityContentFactory(),
-			$repo->getSettings()->getSetting( 'localClientDatabases' )
+			$repoSettings->getSetting( 'localClientDatabases' )
 		);
 	}
 

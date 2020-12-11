@@ -20,6 +20,7 @@ use Wikibase\DataModel\Services\Lookup\LabelDescriptionLookupException;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityExistenceChecker;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
@@ -113,7 +114,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 	public static function factory(
 		InterwikiLookup $interwikiLookup,
 		SpecialPageFactory $specialPageFactory,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		// NOTE: keep in sync with fallback chain construction in LabelPrefetchHookHandler::factory
@@ -132,8 +134,8 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$wikibaseRepo->getEntityUrlLookup(),
 			$wikibaseRepo->getLinkTargetEntityIdLookup(),
-			$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
-			$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' )
+			$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+			$repoSettings->getSetting( 'federatedPropertiesEnabled' )
 		);
 	}
 

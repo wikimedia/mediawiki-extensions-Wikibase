@@ -389,7 +389,7 @@ class SetSiteLinkTest extends WikibaseApiTestCase {
 			self::$otherItemId = $badge->getId();
 		}
 
-		$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
+		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
 			self::$gaItemId->getSerialization() => '',
 			self::$faItemId->getSerialization() => '',
 			'Q99999' => '', // Just in case we have a wrong config

@@ -34,7 +34,7 @@ class ParameterizedDescriptionTraitTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function setFederatedPropertiesEnabled() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( 'federatedPropertiesEnabled', true );
 	}
 

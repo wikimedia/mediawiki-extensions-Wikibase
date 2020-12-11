@@ -32,7 +32,7 @@ class TermboxFlag {
 
 	public static function getInstance(): self {
 		return new self(
-			WikibaseRepo::getDefaultInstance()->getSettings(),
+			WikibaseRepo::getSettings(),
 			ExtensionRegistry::getInstance()
 		);
 	}

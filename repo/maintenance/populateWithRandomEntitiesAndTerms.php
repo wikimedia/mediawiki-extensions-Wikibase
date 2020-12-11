@@ -96,8 +96,7 @@ class PopulateWithRandomEntitiesAndTerms extends Maintenance {
 	}
 
 	public function execute() {
-		if ( WikibaseRepo::getDefaultInstance()
-			 ->getSettings()
+		if ( WikibaseRepo::getSettings()
 			 ->getSetting( 'enablePopulateWithRandomEntitiesAndTermsScript' ) !== true
 		) {
 			$this->output(

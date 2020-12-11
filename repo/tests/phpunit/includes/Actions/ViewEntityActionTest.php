@@ -195,7 +195,7 @@ class ViewEntityActionTest extends ActionTestCase {
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );
 		$page = $this->getTestItemPage( 'Berlin' );
 		$itemId = $page->getTitle()->getText();
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting( 'entityDataFormats', [ 'json', 'turtle', 'html' ] );
+		WikibaseRepo::getSettings()->setSetting( 'entityDataFormats', [ 'json', 'turtle', 'html' ] );
 
 		$output = $this->executeViewAction( $page, [] );
 		$this->assertHasLinkAlternate( $output, $itemId, 'json', 'application/json' );

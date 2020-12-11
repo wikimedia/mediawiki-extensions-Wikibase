@@ -196,8 +196,7 @@ class SqlStore implements Store {
 		$this->entitySource = $entitySource;
 
 		//TODO: inject settings
-		$repo = WikibaseRepo::getDefaultInstance();
-		$settings = $repo->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$this->cacheKeyPrefix = $settings->getSetting( 'sharedCacheKeyPrefix' );
 		$this->cacheKeyGroup = $settings->getSetting( 'sharedCacheKeyGroup' );
 		$this->cacheType = $settings->getSetting( 'sharedCacheType' );

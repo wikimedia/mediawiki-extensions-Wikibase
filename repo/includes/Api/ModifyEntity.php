@@ -107,7 +107,7 @@ abstract class ModifyEntity extends ApiBase {
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $this->getContext() );
-		$settings = $wikibaseRepo->getSettings();
+		$settings = WikibaseRepo::getSettings();
 
 		//TODO: provide a mechanism to override the services
 		$this->errorReporter = $apiHelperFactory->getErrorReporter( $this );

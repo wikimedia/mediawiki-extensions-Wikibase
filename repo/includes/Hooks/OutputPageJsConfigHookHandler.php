@@ -77,7 +77,7 @@ class OutputPageJsConfigHookHandler implements OutputPageBeforeHTMLHook {
 
 	public static function factory(): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
+		$settings = WikibaseRepo::getSettings();
 
 		return new self(
 			$wikibaseRepo->getEntityNamespaceLookup(),

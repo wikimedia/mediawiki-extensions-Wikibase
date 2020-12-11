@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Site;
 use SiteLookup;
 use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\SiteLinkLookup;
 use Wikibase\Repo\SiteLinkTargetProvider;
@@ -91,12 +92,14 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 		$this->groups = $siteLinkGroups;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $repoSettings
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteLookup(),
-			$wikibaseRepo->getSettings()->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		return new self(
@@ -106,7 +109,7 @@ class SpecialItemByTitle extends SpecialWikibasePage {
 			$wikibaseRepo->getStore()->newSiteLinkStore(),
 			$siteLinkTargetProvider,
 			$wikibaseRepo->getLogger(),
-			$wikibaseRepo->getSettings()->getSetting( 'siteLinkGroups' )
+			$repoSettings->getSetting( 'siteLinkGroups' )
 		);
 	}
 

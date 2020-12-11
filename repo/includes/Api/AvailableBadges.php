@@ -3,8 +3,9 @@
 namespace Wikibase\Repo\Api;
 
 use ApiBase;
+use ApiMain;
 use ApiResult;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * API module to query available badge items.
@@ -14,6 +15,18 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class AvailableBadges extends ApiBase {
 
+	/** @var SettingsArray */
+	private $repoSettings;
+
+	public function __construct(
+		ApiMain $mainModule,
+		string $moduleName,
+		SettingsArray $repoSettings
+	) {
+		parent::__construct( $mainModule, $moduleName );
+		$this->repoSettings = $repoSettings;
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -21,7 +34,7 @@ class AvailableBadges extends ApiBase {
 		$this->getMain()->setCacheMode( 'public' );
 		$this->getMain()->setCacheMaxAge( 3600 );
 
-		$badgeItems = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'badgeItems' );
+		$badgeItems = $this->repoSettings->getSetting( 'badgeItems' );
 		$idStrings = array_keys( $badgeItems );
 		ApiResult::setIndexedTagName( $idStrings, 'badge' );
 		$this->getResult()->addValue(

@@ -69,7 +69,7 @@ trait ParameterizedDescriptionTrait {
 	}
 
 	protected function setEditableEntities( array $entities = [ 'item', 'property' ] ) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 
 		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$this->unsetKey( 'property', $entities );

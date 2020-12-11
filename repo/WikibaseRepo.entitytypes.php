@@ -239,7 +239,6 @@ return [
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
-			$repoSettings = $repo->getSettings();
 
 			return new PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(

@@ -37,6 +37,7 @@ use Wikibase\DataModel\Entity\Property;
 use Wikibase\Lib\Formatters\AutoCommentFormatter;
 use Wikibase\Lib\LibHooks;
 use Wikibase\Lib\ParserFunctions\CommaSeparatedList;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\Sql\EntityChangeLookup;
 use Wikibase\Repo\Api\MetaDataBridgeConfig;
@@ -73,7 +74,7 @@ final class RepoHooks {
 	 * @param Skin $skin
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		if ( $settings->getSetting( 'enableEntitySearchUI' ) === true ) {
 			$out->addModules( 'wikibase.ui.entitysearch' );
 		}
@@ -98,7 +99,7 @@ final class RepoHooks {
 		if ( $isEntityTitle ) {
 			$out->addModules( 'wikibase.mobile' );
 
-			$useNewTermbox = $repo->getSettings()->getSetting( 'termboxEnabled' );
+			$useNewTermbox = WikibaseRepo::getSettings()->getSetting( 'termboxEnabled' );
 			$entityType = $entityNamespaceLookup->getEntityType( $namespace );
 			$isEntityTypeWithTermbox = $entityType === Item::ENTITY_TYPE
 				|| $entityType === Property::ENTITY_TYPE;
@@ -205,7 +206,7 @@ final class RepoHooks {
 			return false;
 		}
 
-		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		if ( $entitySource->getSourceName() === $localEntitySourceName ) {
 			return true;
 		}
@@ -845,7 +846,7 @@ final class RepoHooks {
 	 * @param array &$data
 	 */
 	public static function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteinfo $api, array &$data ) {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$repoSettings = WikibaseRepo::getSettings();
 		$dataTypes = WikibaseRepo::getDataTypeFactory()->getTypes();
 		$propertyTypes = [];
 
@@ -855,16 +856,16 @@ final class RepoHooks {
 
 		$data['wikibase-propertytypes'] = $propertyTypes;
 
-		$conceptBaseUri = $wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' );
+		$conceptBaseUri = $repoSettings->getSetting( 'conceptBaseUri' );
 		$data['wikibase-conceptbaseuri'] = $conceptBaseUri;
 
-		$geoShapeStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'geoShapeStorageBaseUrl' );
+		$geoShapeStorageBaseUrl = $repoSettings->getSetting( 'geoShapeStorageBaseUrl' );
 		$data['wikibase-geoshapestoragebaseurl'] = $geoShapeStorageBaseUrl;
 
-		$tabularDataStorageBaseUrl = $wikibaseRepo->getSettings()->getSetting( 'tabularDataStorageBaseUrl' );
+		$tabularDataStorageBaseUrl = $repoSettings->getSetting( 'tabularDataStorageBaseUrl' );
 		$data['wikibase-tabulardatastoragebaseurl'] = $tabularDataStorageBaseUrl;
 
-		$sparqlEndpoint = $wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' );
+		$sparqlEndpoint = $repoSettings->getSetting( 'sparqlEndpoint' );
 		if ( is_string( $sparqlEndpoint ) ) {
 			$data['wikibase-sparql'] = $sparqlEndpoint;
 		}
@@ -933,7 +934,7 @@ final class RepoHooks {
 		if ( isset( $revisionInfo['model'] ) ) {
 			$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 			$contentModels = $wikibaseRepo->getContentModelMappings();
-			$allowImport = $wikibaseRepo->getSettings()->getSetting( 'allowEntityImport' );
+			$allowImport = WikibaseRepo::getSettings()->getSetting( 'allowEntityImport' );
 
 			if ( !$allowImport && in_array( $revisionInfo['model'], $contentModels ) ) {
 				// Skip entities.
@@ -956,7 +957,7 @@ final class RepoHooks {
 	public static function onSidebarBeforeOutput( Skin $skin, array &$sidebar ): void {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$hookHandler = new SidebarBeforeOutputHookHandler(
-			$repo->getSettings()->getSetting( 'conceptBaseUri' ),
+			WikibaseRepo::getSettings()->getSetting( 'conceptBaseUri' ),
 			$repo->getEntityIdLookup(),
 			$repo->getEntityLookup(),
 			$repo->getEntityNamespaceLookup(),
@@ -1067,7 +1068,7 @@ final class RepoHooks {
 	 */
 	public static function onApiMaxLagInfo( array &$lagInfo ) {
 
-		$dispatchLagToMaxLagFactor = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+		$dispatchLagToMaxLagFactor = WikibaseRepo::getSettings()->getSetting(
 			'dispatchLagToMaxLagFactor'
 		);
 
@@ -1133,11 +1134,9 @@ final class RepoHooks {
 				'meta',
 				[
 					'class' => MetaDataBridgeConfig::class,
-					'factory' => function( ApiQuery $apiQuery, $moduleName ) {
-						$repo = WikibaseRepo::getDefaultInstance();
-
+					'factory' => function( ApiQuery $apiQuery, string $moduleName, SettingsArray $repoSettings ) {
 						return new MetaDataBridgeConfig(
-							$repo->getSettings(),
+							$repoSettings,
 							$apiQuery,
 							$moduleName,
 							function ( string $pagename ): ?string {
@@ -1146,6 +1145,9 @@ final class RepoHooks {
 							}
 						);
 					},
+					'services' => [
+						'WikibaseRepo.Settings',
+					],
 				]
 			);
 		}

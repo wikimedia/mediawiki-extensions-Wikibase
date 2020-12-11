@@ -63,12 +63,11 @@ class TestDispatchCoordinator extends Maintenance {
 		}
 
 		$this->cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
 		$iterations = (int)$this->getOption( 'number', 30 );
 		$this->createFakeTables( $iterations );
 
-		$coordinatorOne = $this->createCoordinator( $wikibaseRepo->getSettings() );
+		$coordinatorOne = $this->createCoordinator( WikibaseRepo::getSettings() );
 		$coordinatorOne->initState( $this->getClientWikis() );
 
 		for ( $i = 1; $i <= $iterations; $i++ ) {

@@ -68,8 +68,9 @@ class DispatchChangeDeletionNotificationJob extends Job {
 		$repo = WikibaseRepo::getDefaultInstance();
 
 		$this->batchSize = $mwServices->getMainConfig()->get( 'UpdateRowsPerQuery' );
-		$this->clientRCMaxAge = $repo->getSettings()->getSetting( 'deleteNotificationClientRCMaxAge' );
-		$this->localClientDatabases = $repo->getSettings()->getSetting( 'localClientDatabases' );
+		$repoSettings = WikibaseRepo::getSettings( $mwServices );
+		$this->clientRCMaxAge = $repoSettings->getSetting( 'deleteNotificationClientRCMaxAge' );
+		$this->localClientDatabases = $repoSettings->getSetting( 'localClientDatabases' );
 
 		$this->initServices(
 			$mwServices->getDBLoadBalancerFactory(),

@@ -134,15 +134,15 @@ class AddUnitConversions extends Maintenance {
 			$this->out = fopen( $this->getOption( 'output' ), 'w' );
 		}
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		$settings = WikibaseRepo::getSettings();
 		$endPoint = $this->getOption( 'sparql',
-				$wikibaseRepo->getSettings()->getSetting( 'sparqlEndpoint' ) );
+				$settings->getSetting( 'sparqlEndpoint' ) );
 		if ( !$endPoint ) {
 			$this->fatalError( 'SPARQL endpoint should be supplied in config or parameters' );
 		}
 
 		$baseUri = $this->getOption( 'base-uri',
-				$wikibaseRepo->getSettings()->getSetting( 'conceptBaseUri' ) );
+				$settings->getSetting( 'conceptBaseUri' ) );
 
 		$this->client = new SparqlClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
 		$this->client->appendUserAgent( __CLASS__ );

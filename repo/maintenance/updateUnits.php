@@ -72,14 +72,14 @@ class UpdateUnits extends Maintenance {
 		$format = $this->getOption( 'format', 'json' );
 		$checkUsage = $this->hasOption( 'check-usage' );
 
-		$repo = WikibaseRepo::getDefaultInstance();
+		$repoSettings = WikibaseRepo::getSettings();
 		$endPoint = $this->getOption( 'sparql',
-			$repo->getSettings()->getSetting( 'sparqlEndpoint' ) );
+			$repoSettings->getSetting( 'sparqlEndpoint' ) );
 		if ( !$endPoint ) {
 			$this->fatalError( 'SPARQL endpoint not defined' );
 		}
 		$this->setBaseUri( $this->getOption( 'base-uri',
-			$repo->getSettings()->getSetting( 'conceptBaseUri' ) ) );
+			$repoSettings->getSetting( 'conceptBaseUri' ) ) );
 		$this->client = new SparqlClient( $endPoint, MediaWikiServices::getInstance()->getHttpRequestFactory() );
 		$this->client->appendUserAgent( __CLASS__ );
 

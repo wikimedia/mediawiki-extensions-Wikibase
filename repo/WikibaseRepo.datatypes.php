@@ -214,7 +214,7 @@ return call_user_func( function() {
 		'VT:monolingualtext' => [
 			'expert-module' => 'jquery.valueview.experts.MonolingualText',
 			'validator-factory-callback' => function() {
-				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getSettings()
 					->getSetting( 'string-limits' )['VT:monolingualtext'];
 				$maxLength = $constraints['length'];
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
@@ -273,7 +273,7 @@ return call_user_func( function() {
 			'expert-module' => 'jquery.valueview.experts.StringValue',
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getSettings()
 					->getSetting( 'string-limits' )['VT:string'];
 				$maxLength = $constraints['length'];
 				// max length is also used in MetaDataBridgeConfig, make sure to keep in sync
@@ -331,7 +331,7 @@ return call_user_func( function() {
 		'PT:url' => [
 			'validator-factory-callback' => function() {
 				$factory = WikibaseRepo::getDefaultValidatorBuilders();
-				$constraints = WikibaseRepo::getDefaultInstance()->getSettings()
+				$constraints = WikibaseRepo::getSettings()
 					->getSetting( 'string-limits' )['PT:url'];
 				$maxLength = $constraints['length'];
 				return $factory->buildUrlValidators( $maxLength );

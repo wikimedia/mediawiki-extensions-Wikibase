@@ -291,6 +291,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 
 	private function getExternallyRenderedEntityViewPlaceholderExpander( OutputPage $out ) {
 		$repo = WikibaseRepo::getDefaultInstance();
+		$repoSettings = WikibaseRepo::getSettings();
 		$languageFallbackChainFactory = $repo->getLanguageFallbackChainFactory();
 
 		return new ExternallyRenderedEntityViewPlaceholderExpander(
@@ -298,8 +299,8 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new TermboxRequestInspector( $languageFallbackChainFactory ),
 			new TermboxRemoteRenderer(
 				MediaWikiServices::getInstance()->getHttpRequestFactory(),
-				$repo->getSettings()->getSetting( 'ssrServerUrl' ),
-				$repo->getSettings()->getSetting( 'ssrServerTimeout' ),
+				$repoSettings->getSetting( 'ssrServerUrl' ),
+				$repoSettings->getSetting( 'ssrServerTimeout' ),
 				$repo->getLogger(),
 				MediaWikiServices::getInstance()->getStatsdDataFactory()
 			),
@@ -307,7 +308,7 @@ class OutputPageBeforeHTMLHookHandler implements OutputPageBeforeHTMLHook {
 			new RepoSpecialPageLinker(),
 			$languageFallbackChainFactory,
 			new OutputPageRevisionIdReader(),
-			$repo->getSettings()->getSetting( 'termboxUserSpecificSsrEnabled' )
+			$repoSettings->getSetting( 'termboxUserSpecificSsrEnabled' )
 		);
 	}
 

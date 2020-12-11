@@ -134,7 +134,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 		$this->disallowDBAccess();
 		$this->disallowHttpAccess();
 
-		$this->settings = new SettingsArray( WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy() );
+		$this->settings = new SettingsArray( WikibaseRepo::getSettings()->getArrayCopy() );
 		$this->entityTypeDefinitions = new EntityTypeDefinitions( [] );
 		$this->entitySourceDefinitions = $this->getDefaultEntitySourceDefinitions( 'local' );
 	}
@@ -404,7 +404,7 @@ class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testGetSettingsReturnType() {
-		$returnValue = $this->getWikibaseRepo()->getSettings();
+		$returnValue = WikibaseRepo::getSettings();
 		$this->assertInstanceOf( SettingsArray::class, $returnValue );
 	}
 
