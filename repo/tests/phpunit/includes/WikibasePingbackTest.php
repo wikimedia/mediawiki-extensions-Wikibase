@@ -1,5 +1,6 @@
 <?php
 
+declare( strict_types=1 );
 namespace Wikibase\Repo\Tests;
 
 use Config;
@@ -7,10 +8,13 @@ use ExtensionRegistry;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
+use TestLogger;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLBFactory;
 use Wikibase\Lib\Tests\Store\Sql\Terms\Util\FakeLoadBalancer;
 use Wikibase\Repo\WikibasePingback;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  *
@@ -21,6 +25,20 @@ use Wikibase\Repo\WikibasePingback;
  * @license GPL-2.0-or-later
  */
 class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
+
+	private const TEST_KEY = 'TEST_KEY';
+
+	public function setUp(): void {
+		parent::setUp();
+
+		global $wgWBRepoSettings;
+
+		$settings = $wgWBRepoSettings;
+		$settings['wikibasePingback'] = true;
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		WikibaseRepo::resetClassStatics();
+		$this->tablesUsed[] = 'updatelog';
+	}
 
 	public function testGetSystemInfo() {
 		$systemInfo = $this->getPingback()->getSystemInfo();
@@ -61,6 +79,86 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		$hasEntities = $pingback->getSystemInfo()['hasEntities'];
 
 		$this->assertTrue( $hasEntities );
+	}
+
+	public function testWikibasePingbackSchedules() {
+		$timestamp = time();
+
+		$logger = new TestLogger( true );
+
+		$currentTime = $this->getPingbackTime();
+		$this->assertFalse( $currentTime );
+
+		// first time there no row - it should pingback as soon as this code is run
+		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->once(), $logger ) );
+
+		$currentTime = $this->getPingbackTime();
+		$this->assertGreaterThanOrEqual( $currentTime, $timestamp );
+
+		// this won't trigger it
+		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->never(), $logger ) );
+
+		$this->assertSame( $currentTime, $this->getPingbackTime() );
+
+		// moving back time we should trigger the next one
+		$this->upsertTimestampRow( $timestamp - (int)WikibasePingback::HEARBEAT_TIMEOUT );
+
+		// should trigger
+		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->once(), $logger ) );
+
+		$buffer = $logger->getBuffer();
+		$this->assertCount( 2, $buffer );
+		$this->assertSame(
+			$buffer[0],
+			[
+				LogLevel::DEBUG,
+				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')'
+			]
+		);
+		$this->assertSame(
+			$buffer[1],
+			[
+				LogLevel::DEBUG,
+				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')'
+			]
+		);
+		$logger->clearBuffer();
+	}
+
+	private function upsertTimestampRow( $timestamp ) {
+		return $this->db->upsert(
+			'updatelog',
+			[ 'ul_key' => self::TEST_KEY, 'ul_value' => $timestamp ],
+			'ul_key',
+			[ 'ul_value' => $timestamp ],
+			__METHOD__
+		);
+	}
+
+	private function getPingbackTime() {
+		return $this->db->selectField(
+			'updatelog',
+			'ul_value',
+			[ 'ul_key' => self::TEST_KEY ],
+			__METHOD__
+		);
+	}
+
+	public function getPingbackWithRequestExpectation( $expectation, $logger ) {
+		$requestFactory = $this->createMock( HttpRequestFactory::class );
+		$requestFactory->expects( $expectation )
+			->method( 'post' )
+			->willReturn( true );
+
+		return new WikibasePingback(
+			null,
+			$logger,
+			null,
+			null,
+			$requestFactory,
+			new FakeLBFactory( [ 'lb' => new FakeLoadBalancer( [ 'dbr' => $this->db ] ) ] ),
+			self::TEST_KEY
+		);
 	}
 
 	private function getPingback(

@@ -86,6 +86,7 @@ class WikibasePingback {
 	 * @param SettingsArray|null $wikibaseRepoSettings
 	 * @param HttpRequestFactory|null $requestFactory
 	 * @param LBFactory|null $loadBalancerFactory
+	 * @param string|null $key
 	 */
 	public function __construct(
 		Config $config = null,
@@ -93,7 +94,8 @@ class WikibasePingback {
 		ExtensionRegistry $extensionRegistry = null,
 		SettingsArray $wikibaseRepoSettings = null,
 		HTTPRequestFactory $requestFactory = null,
-		LBFactory $loadBalancerFactory = null
+		LBFactory $loadBalancerFactory = null,
+		string $key = null
 	) {
 		$this->config = $config ?: RequestContext::getMain()->getConfig();
 		$this->logger = $logger ?: LoggerFactory::getInstance( __CLASS__ );
@@ -102,7 +104,7 @@ class WikibasePingback {
 		$this->requestFactory = $requestFactory ?: MediaWikiServices::getInstance()->getHttpRequestFactory();
 		$this->loadBalancerFactory = $loadBalancerFactory ?: MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
 
-		$this->key = 'WikibasePingback-' . MW_VERSION;
+		$this->key = $key ?: 'WikibasePingback-' . MW_VERSION;
 		$this->host = 'https://www.mediawiki.org/beacon/event';
 	}
 
@@ -129,11 +131,12 @@ class WikibasePingback {
 			[ 'ul_key' => $this->key ],
 			__METHOD__
 		);
+
 		if ( $timestamp === false ) {
 			return false;
 		}
 		// send heartbeat ping if last ping was over a month ago
-		if ( time() - (int)$timestamp > self::HEARBEAT_TIMEOUT ) {
+		if ( time() - (int)$timestamp >= self::HEARBEAT_TIMEOUT ) {
 			return false;
 		}
 		return true;
@@ -354,10 +357,14 @@ class WikibasePingback {
 	 */
 	public static function schedulePingback() {
 		DeferredUpdates::addCallableUpdate( function () {
-			$instance = new WikibasePingback;
-			if ( $instance->shouldSend() ) {
-				$instance->sendPingback();
-			}
+			WikibasePingback::doSchedule();
 		} );
+	}
+
+	public static function doSchedule( WikibasePingback $instance = null ) {
+		$instance = $instance ?: new WikibasePingback;
+		if ( $instance->shouldSend() ) {
+			$instance->sendPingback();
+		}
 	}
 }
