@@ -7,28 +7,36 @@
 		<exclude name="MediaWiki.Commenting.FunctionAnnotations.UnrecognizedAnnotation" />
 		<exclude name="PSR2.Classes.ClassDeclaration.InterfaceSameLine" />
 		<exclude name="PSR2.Classes.ClassDeclaration.FirstInterfaceSameLine" />
+	</rule>
 
-		<!-- The function comment sniff is way to rigorous about way to many details that need
-			exceptions:
-			* It complains about missing documentation on fully self-explanatory function headers
-			  with strict type hints.
-			* It complains about missing documentation if there is a proper @see tag.
-			* It complains about duplicate spaces in "@param <type>  $<var>", but removing these
-			  doesn't make the code easier to read.
-			* It does not understand "@param <type> [$optional,…]. -->
-		<exclude name="MediaWiki.Commenting.FunctionComment" />
+	<!-- The function comment sniff is way to rigorous about way to many details that need
+		exceptions:
+		* It complains about missing documentation on fully self-explanatory function headers
+		  with strict type hints.
+		* It complains about missing documentation if there is a proper @see tag.
+		* It complains about duplicate spaces in "@param <type>  $<var>", but removing these
+		  doesn't make the code easier to read.
+		* It does not understand "@param <type> [$optional,…]. -->
+	<rule ref="MediaWiki.Commenting.FunctionComment">
+		<severity>0</severity>
+	</rule>
 
-		<!-- Starting a function's body with an empty line can be helpful after a very large header.
-			The code is not guaranteed to be easier to read if this is disallowed. -->
-		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
+	<!-- Starting a function's body with an empty line can be helpful after a very large header.
+		The code is not guaranteed to be easier to read if this is disallowed. -->
+	<rule ref="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions">
+		<severity>0</severity>
+	</rule>
 
-		<!-- Even if we encourage to use a space in "function ()", we don't think this sniff should
-			block patches from being merged. -->
-		<exclude name="MediaWiki.WhiteSpace.SpaceAfterClosure" />
+	<!-- Even if we encourage to use a space in "function ()", we don't think this sniff should
+		block patches from being merged. -->
+	<rule ref="MediaWiki.WhiteSpace.SpaceAfterClosure">
+		<severity>0</severity>
+	</rule>
 
-		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
-			patches from being merged. -->
-		<exclude name="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment" />
+	<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
+		patches from being merged. -->
+	<rule ref="MediaWiki.WhiteSpace.SpaceBeforeSingleLineComment">
+		<severity>0</severity>
 	</rule>
 
 	<!-- Disallows any content outside of <?php … ?> tags. -->
