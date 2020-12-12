@@ -24,13 +24,13 @@ use Wikibase\Repo\Api\EntityIdSearchHelper;
  */
 class EntityIdSearchHelperTest extends \PHPUnit\Framework\TestCase {
 
-	const EXISTING_LOCAL_ITEM = 'Q111';
-	const FOREIGN_REPO_PREFIX = 'foreign';
-	const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
-	const EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX = 'Q2';
-	const DEFAULT_LANGUAGE = 'pt';
-	const DEFAULT_LABEL = 'ptLabel';
-	const DEFAULT_DESCRIPTION = 'ptDescription';
+	private const EXISTING_LOCAL_ITEM = 'Q111';
+	private const FOREIGN_REPO_PREFIX = 'foreign';
+	private const EXISTING_FOREIGN_ITEM = 'foreign:Q2';
+	private const EXISTING_FOREIGN_ITEM_WITHOUT_REPOSITORY_PREFIX = 'Q2';
+	private const DEFAULT_LANGUAGE = 'pt';
+	private const DEFAULT_LABEL = 'ptLabel';
+	private const DEFAULT_DESCRIPTION = 'ptDescription';
 
 	/**
 	 * Get a lookup that always returns a pt label and description

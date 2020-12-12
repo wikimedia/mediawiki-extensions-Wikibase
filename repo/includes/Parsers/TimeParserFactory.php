@@ -25,7 +25,7 @@ class TimeParserFactory {
 	/**
 	 * Default, canonical language code. In the MediaWiki world this is always English.
 	 */
-	const CANONICAL_LANGUAGE_CODE = 'en';
+	private const CANONICAL_LANGUAGE_CODE = 'en';
 
 	/**
 	 * @var ParserOptions

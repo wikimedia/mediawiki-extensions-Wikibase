@@ -57,7 +57,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $nonExistingEntityIdHtmlFormatter;
 
-	const SOME_TRANSLITERATED_TEXT = 'some-transliterated-text';
+	private const SOME_TRANSLITERATED_TEXT = 'some-transliterated-text';
 
 	protected function setUp(): void {
 		parent::setUp();

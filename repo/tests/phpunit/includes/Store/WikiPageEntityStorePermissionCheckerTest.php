@@ -29,10 +29,10 @@ use Wikibase\Repo\Store\WikiPageEntityStorePermissionChecker;
  */
 class WikiPageEntityStorePermissionCheckerTest extends MediaWikiIntegrationTestCase {
 
-	const EXISTING_ITEM_ID = 'Q2';
-	const NON_EXISTING_ITEM_ID = 'Q3';
-	const EXISTING_PROPERTY_ID = 'P2';
-	const NON_EXISTING_PROPERTY_ID = 'P3';
+	private const EXISTING_ITEM_ID = 'Q2';
+	private const NON_EXISTING_ITEM_ID = 'Q3';
+	private const EXISTING_PROPERTY_ID = 'P2';
+	private const NON_EXISTING_PROPERTY_ID = 'P3';
 
 	/**
 	 * @dataProvider provideExistingEntities

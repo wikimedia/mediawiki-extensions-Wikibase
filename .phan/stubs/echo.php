@@ -7,7 +7,7 @@
  */
 
 class EchoAttributeManager {
-	const ATTR_LOCATORS = 'user-locators';
+	public const ATTR_LOCATORS = 'user-locators';
 }
 
 class EchoEvent {

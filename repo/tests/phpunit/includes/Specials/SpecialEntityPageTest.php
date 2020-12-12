@@ -25,8 +25,8 @@ use Wikibase\Repo\Specials\SpecialEntityPage;
  */
 class SpecialEntityPageTest extends SpecialPageTestBase {
 
-	const LOCAL_ENTITY_PAGE_URL = 'https://local.wiki/local-entity-page';
-	const FOREIGN_ENTITY_PAGE_URL = 'https://foreign.wiki/Special:EntityPage/entity-id';
+	private const LOCAL_ENTITY_PAGE_URL = 'https://local.wiki/local-entity-page';
+	private const FOREIGN_ENTITY_PAGE_URL = 'https://foreign.wiki/Special:EntityPage/entity-id';
 
 	protected function setUp(): void {
 		parent::setUp();

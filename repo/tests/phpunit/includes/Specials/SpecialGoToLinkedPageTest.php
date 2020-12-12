@@ -32,7 +32,7 @@ class SpecialGoToLinkedPageTest extends SpecialPageTestBase {
 	use HtmlAssertionHelpers;
 
 	/** @see \LanguageQqx */
-	const DUMMY_LANGUAGE = 'qqx';
+	private const DUMMY_LANGUAGE = 'qqx';
 
 	/**
 	 * @return SiteLinkLookup

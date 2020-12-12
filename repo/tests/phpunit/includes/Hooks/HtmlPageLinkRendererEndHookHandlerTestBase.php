@@ -36,24 +36,24 @@ use Wikibase\Repo\Hooks\HtmlPageLinkRendererEndHookHandler;
  */
 abstract class HtmlPageLinkRendererEndHookHandlerTestBase extends MediaWikiIntegrationTestCase {
 
-	const ITEM_WITH_LABEL = 'Q1';
-	const ITEM_WITHOUT_LABEL = 'Q11';
-	const ITEM_DELETED = 'Q111';
-	const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
-	const ITEM_FOREIGN = 'foo:Q2';
-	const ITEM_FOREIGN_NO_DATA = 'foo:Q22';
-	const ITEM_FOREIGN_NO_PREFIX = 'Q2';
-	const ITEM_FOREIGN_NO_DATA_NO_PREFIX = 'Q22';
-	const PROPERTY_WITH_LABEL = 'P1';
+	protected const ITEM_WITH_LABEL = 'Q1';
+	protected const ITEM_WITHOUT_LABEL = 'Q11';
+	protected const ITEM_DELETED = 'Q111';
+	protected const ITEM_LABEL_NO_DESCRIPTION = 'Q1111';
+	protected const ITEM_FOREIGN = 'foo:Q2';
+	protected const ITEM_FOREIGN_NO_DATA = 'foo:Q22';
+	protected const ITEM_FOREIGN_NO_PREFIX = 'Q2';
+	protected const ITEM_FOREIGN_NO_DATA_NO_PREFIX = 'Q22';
+	protected const PROPERTY_WITH_LABEL = 'P1';
 
-	const FOREIGN_REPO_PREFIX = 'foo';
-	const UNKNOWN_FOREIGN_REPO = 'bar';
+	protected const FOREIGN_REPO_PREFIX = 'foo';
+	protected const UNKNOWN_FOREIGN_REPO = 'bar';
 
-	const DUMMY_LABEL = 'linkbegin-label';
-	const DUMMY_LABEL_FOREIGN_ITEM = 'linkbegin-foreign-item-label';
+	protected const DUMMY_LABEL = 'linkbegin-label';
+	protected const DUMMY_LABEL_FOREIGN_ITEM = 'linkbegin-foreign-item-label';
 
-	const DUMMY_DESCRIPTION = 'linkbegin-description';
-	const DUMMY_DESCRIPTION_FOREIGN_ITEM = 'linkbegin-foreign-item-description';
+	protected const DUMMY_DESCRIPTION = 'linkbegin-description';
+	protected const DUMMY_DESCRIPTION_FOREIGN_ITEM = 'linkbegin-foreign-item-description';
 
 	protected function setUp(): void {
 		parent::setUp();

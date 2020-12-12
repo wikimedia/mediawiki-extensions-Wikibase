@@ -20,7 +20,7 @@ abstract class SpecialModifyTermTestCase extends SpecialPageTestBase {
 
 	use HtmlAssertionHelpers;
 
-	const USER_LANGUAGE = 'en';
+	private const USER_LANGUAGE = 'en';
 
 	protected function setUp(): void {
 		parent::setUp();

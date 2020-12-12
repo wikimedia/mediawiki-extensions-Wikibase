@@ -38,14 +38,14 @@ use Wikibase\Repo\ValidatorBuilders;
  */
 class ValidatorBuildersTest extends \PHPUnit\Framework\TestCase {
 
-	const GEO_SHAPE_STORAGE_API_URL = 'http://some.wiki/api.php';
+	private const GEO_SHAPE_STORAGE_API_URL = 'http://some.wiki/api.php';
 
-	const TABULAR_DATA_STORAGE_API_URL = 'http://another.wiki/api.php';
+	private const TABULAR_DATA_STORAGE_API_URL = 'http://another.wiki/api.php';
 
-	const EXISTING_ITEM_ID = 'Q8';
-	const NON_EXISTING_ITEM_ID = 'Q3';
-	const EXISTING_PROPERTY_ID = 'P8';
-	const NON_EXISTING_PROPERTY_ID = 'P3';
+	private const EXISTING_ITEM_ID = 'Q8';
+	private const NON_EXISTING_ITEM_ID = 'Q3';
+	private const EXISTING_PROPERTY_ID = 'P8';
+	private const NON_EXISTING_PROPERTY_ID = 'P3';
 
 	private function newValidatorBuilders() {
 		return new ValidatorBuilders(

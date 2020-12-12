@@ -46,8 +46,8 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class SpecialEntityDataTest extends SpecialPageTestBase {
 
-	const URI_BASE = 'http://acme.test/';
-	const URI_DATA = 'http://data.acme.test/';
+	private const URI_BASE = 'http://acme.test/';
+	private const URI_DATA = 'http://data.acme.test/';
 
 	protected function newSpecialPage() {
 		$page = new SpecialEntityData(

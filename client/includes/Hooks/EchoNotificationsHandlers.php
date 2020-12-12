@@ -26,7 +26,7 @@ class EchoNotificationsHandlers {
 	/**
 	 * Type of notification
 	 */
-	const NOTIFICATION_TYPE = 'page-connection';
+	public const NOTIFICATION_TYPE = 'page-connection';
 
 	/**
 	 * @var RepoLinker
