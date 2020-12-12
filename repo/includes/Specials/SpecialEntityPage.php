@@ -83,7 +83,6 @@ class SpecialEntityPage extends SpecialWikibasePage {
 		$title = $this->entityTitleLookup->getTitleForId( $entityId );
 
 		if ( $title === null ) {
-			// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 			throw new HttpError( 400, $this->msg( 'wikibase-entitypage-bad-id', $id ) );
 		}
 

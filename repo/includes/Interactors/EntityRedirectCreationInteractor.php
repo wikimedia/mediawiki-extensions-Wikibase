@@ -238,15 +238,15 @@ abstract class EntityRedirectCreationInteractor {
 		$summary = $this->summaryFormatter->formatSummary( $summary );
 		$flags = 0;
 		if ( $bot ) {
-			$flags = $flags | EDIT_FORCE_BOT;
+			$flags |= EDIT_FORCE_BOT;
 		}
 		$title = $this->entityTitleLookup->getTitleForId( $redirect->getEntityId() );
 
 		if ( !$title->exists() && $title->isDeletedQuick() ) {
 			// Allow creating new pages as redirects, but only if they existed before.
-			$flags = $flags | EDIT_NEW;
+			$flags |= EDIT_NEW;
 		} else {
-			$flags = $flags | EDIT_UPDATE;
+			$flags |= EDIT_UPDATE;
 		}
 
 		$hookStatus = $this->editFilterHookRunner->run( $redirect, $this->user, $summary );

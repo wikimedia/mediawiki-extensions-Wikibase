@@ -189,7 +189,6 @@ class EntityDataRequestHandler {
 	 *        redirect logic is currently implemented in OutputPage.
 	 *
 	 * @throws HttpError
-	 * @suppress SecurityCheck-DoubleEscaped
 	 */
 	public function handleRequest( $doc, WebRequest $request, OutputPage $output ) {
 		// No matter what: The response is always public
@@ -288,7 +287,6 @@ class EntityDataRequestHandler {
 
 		if ( $canonicalFormat === null ) {
 			$msg = wfMessage( 'wikibase-entitydata-unsupported-format', $format );
-			// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 			throw new HttpError( 415, $msg );
 		}
 
@@ -350,7 +348,6 @@ class EntityDataRequestHandler {
 		if ( $format === null ) {
 			$mimeTypes = implode( ', ', $this->entityDataFormatProvider->getSupportedMimeTypes() );
 			$msg = $output->msg( 'wikibase-entitydata-not-acceptable', $mimeTypes );
-			// @phan-suppress-next-line SecurityCheck-DoubleEscaped
 			throw new HttpError( 406, $msg );
 		}
 
@@ -370,7 +367,6 @@ class EntityDataRequestHandler {
 	 *
 	 * @return array list( EntityRevision, RedirectRevision|null )
 	 * @throws HttpError
-	 * @suppress SecurityCheck-DoubleEscaped
 	 */
 	private function getEntityRevision( EntityId $id, $revision, $allowRedirects = false ) {
 		$prefixedId = $id->getSerialization();

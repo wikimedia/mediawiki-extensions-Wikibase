@@ -157,8 +157,8 @@ class ChangeRunCoalescer {
 			$ids[] = $change->getId();
 			$meta = $change->getMetadata();
 
-			$minor &= isset( $meta['minor'] ) && (bool)$meta['minor'];
-			$bot &= isset( $meta['bot'] ) && (bool)$meta['bot'];
+			$minor = $minor && isset( $meta['minor'] ) && (bool)$meta['minor'];
+			$bot = $bot && isset( $meta['bot'] ) && (bool)$meta['bot'];
 		}
 
 		$lastmeta = $last->getMetadata();

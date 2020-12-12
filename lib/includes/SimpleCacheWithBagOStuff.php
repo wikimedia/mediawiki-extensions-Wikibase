@@ -213,9 +213,9 @@ class SimpleCacheWithBagOStuff implements CacheInterface {
 		$this->assertKeysAreValid( $keys );
 		$result = true;
 		foreach ( $keys as $key ) {
-			$result &= $this->delete( $key );
+			$result = $this->delete( $key ) && $result;
 		}
-		return (bool)$result;
+		return $result;
 	}
 
 	/**

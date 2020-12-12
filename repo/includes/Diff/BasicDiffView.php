@@ -163,6 +163,7 @@ class BasicDiffView implements DiffView {
 	protected function generateDiffHeaderHtml( $name ) {
 		$html = Html::openElement( 'tr' );
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
+		// @phan-suppress-next-line PhanPluginDuplicateAdjacentStatement
 		$html .= Html::element( 'td', [ 'colspan' => '2', 'class' => 'diff-lineno' ], $name );
 		$html .= Html::closeElement( 'tr' );
 

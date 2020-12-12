@@ -378,7 +378,7 @@ class EditEntityAction extends ViewEntityAction {
 	}
 
 	private function displayUndoDiff( EntityContentDiff $diff ) {
-		$tableClass = 'diff diff-contentalign-' . htmlspecialchars( $this->getTitle()->getPageLanguage()->alignStart() );
+		$tableClass = 'diff diff-contentalign-' . $this->getTitle()->getPageLanguage()->alignStart();
 
 		// add common CSS, the diff may include entity links with labels, including fallback indicators
 		$this->getOutput()->addModuleStyles( [ 'wikibase.common' ] );

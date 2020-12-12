@@ -38,6 +38,7 @@ class SpecialDispatchStats extends SpecialWikibasePage {
 	protected function outputStateRow( $label, $state ) {
 		$lang = $this->getContext()->getLanguage();
 
+		// @phan-suppress-next-line SecurityCheck-DoubleEscaped T270000
 		$this->outputRow( [
 			$label,
 			$state->chd_site ?? '-',
