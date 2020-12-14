@@ -3,6 +3,7 @@
 
 /**
  * Flips a complete position specification to be used by jQuery.ui.position (1.8).
+ *
  * @ignore
  *
  * @param {Object} position
@@ -161,6 +162,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Counter for the number of pending requests.
+	 *
 	 * @property {number}
 	 * @protected
 	 */
@@ -168,6 +170,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Current search term.
+	 *
 	 * @property {string}
 	 * @protected
 	 */
@@ -177,6 +180,7 @@ $.widget( 'ui.suggester', {
 	 * Caches whether searching is in progress by either storing the ID of the timer used to delay
 	 * the actual search request or by storing a boolean "true" while the actual search request is
 	 * in progress.
+	 *
 	 * @property {number|boolean} [_searching=false]
 	 * @protected
 	 */
@@ -233,6 +237,8 @@ $.widget( 'ui.suggester', {
 	},
 
 	/**
+	 * @param key
+	 * @param value
 	 * @see jQuery.Widget._setOption
 	 * @protected
 	 */
@@ -260,6 +266,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Renders the menu and attaches the menu's event handlers.
+	 *
 	 * @protected
 	 *
 	 * @param {jQuery.ui.ooMenu} ooMenu
@@ -295,6 +302,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Attaches input event handlers to the input element.
+	 *
 	 * @protected
 	 */
 	_attachInputEventHandlers: function() {
@@ -383,6 +391,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Attaches event listeners to the `window` object.
+	 *
 	 * @protected
 	 */
 	_attachWindowEventHandlers: function() {
@@ -444,6 +453,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Handles moving through the list of suggestions using arrow keys.
+	 *
 	 * @protected
 	 *
 	 * @param {string} direction (either "previous" or "next")
@@ -468,6 +478,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Shifts the suggestions menu focus by one item.
+	 *
 	 * @protected
 	 *
 	 * @param {string} direction
@@ -498,6 +509,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Handler called when the suggestion menu focus is to be shifted off the end of the list.
+	 *
 	 * @protected
 	 *
 	 * @param {string} direction
@@ -559,6 +571,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Clears the timeout used to delay searching if there is an active timer.
+	 *
 	 * @protected
 	 */
 	_clearTimeout: function() {
@@ -569,6 +582,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Updates the menu.
+	 *
 	 * @protected
 	 *
 	 * @param {string[]} suggestions
@@ -581,6 +595,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Updates the suggestion menu with the received suggestions.
+	 *
 	 * @protected
 	 *
 	 * @param {string[]} suggestions
@@ -598,6 +613,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Updates the menu's visibility.
+	 *
 	 * @protected
 	 */
 	_updateMenuVisibility: function() {
@@ -610,6 +626,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Instantiates a menu item instance from a suggestion.
+	 *
 	 * @protected
 	 *
 	 * @param {string} suggestion
@@ -622,6 +639,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Retrieves the suggestions for a specific search term.
+	 *
 	 * @protected
 	 *
 	 * @param {string} term
@@ -642,6 +660,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Filters an array using a specific search term.
+	 *
 	 * @protected
 	 *
 	 * @param {string} term
@@ -667,6 +686,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Escapes a string to be used in a regular expression.
+	 *
 	 * @protected
 	 *
 	 * @param {string} value
@@ -678,6 +698,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Shows the suggester menu.
+	 *
 	 * @protected
 	 */
 	_open: function() {
@@ -693,6 +714,7 @@ $.widget( 'ui.suggester', {
 
 	/**
 	 * Hides the suggester menu.
+	 *
 	 * @protected
 	 */
 	_close: function() {

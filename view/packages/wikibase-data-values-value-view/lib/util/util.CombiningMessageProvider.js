@@ -5,6 +5,7 @@ util.CombiningMessageProvider = ( function() {
 
 	/**
 	 * Providing messages using two `MessageProvider`s
+	 *
 	 * @class util.CombiningMessageProvider
 	 * @since 0.13.0
 	 * @license GNU GPL v2+

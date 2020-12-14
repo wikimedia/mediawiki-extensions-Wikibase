@@ -21,6 +21,7 @@ module.exports = ( function( $, vv ) {
 
 	/**
 	 * `Valueview` expert handling input of `GlobeCoordinate` values.
+	 *
 	 * @class jQuery.valueview.experts.GlobeCoordinateValue
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
@@ -148,6 +149,7 @@ module.exports = ( function( $, vv ) {
 
 		/**
 		 * Rounds a given precision for being able to use it as internal "constant".
+		 *
 		 * @ignore
 		 * @private
 		 *
@@ -185,6 +187,7 @@ module.exports = ( function( $, vv ) {
 
 		/**
 		 * Returns the original precision level for an unrounded precision.
+		 *
 		 * @ignore
 		 * @private
 		 *

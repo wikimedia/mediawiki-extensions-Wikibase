@@ -4,6 +4,7 @@
 /**
  * Caches whether the widget is used in a rtl context. This, however, depends on using an "rtl"
  * class on the document body like it is done in MediaWiki.
+ *
  * @property {boolean} [IS_RTL=false]
  * @ignore
  */
@@ -16,6 +17,7 @@ $( document ).ready( function() {
 /**
  * Collection for keeping track which input extender widgets have their extension shown at the
  * moment.
+ *
  * @property {jQuery.ui.inputextender} [inputExtendersWithVisibleExtension=Object]
  * @ignore
  */
@@ -48,6 +50,7 @@ var inputExtendersWithVisibleExtension = ( function() {
  *
  * The input extender extends an input element with additional contents displayed underneath the.
  * (uses `jQuery.animateWithEvent`, `jQuery.ui.position`)
+ *
  * @class jQuery.ui.inputextender
  * @extends jQuery.Widget
  * @uses jQuery.event.special.eachchange
@@ -130,6 +133,7 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Whether the input extender is in its extended state right now.
+	 *
 	 * @property {boolean} [_isExtended=false]
 	 * @protected
 	 */
@@ -137,6 +141,7 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Whether the input extender is visible
+	 *
 	 * @property {boolean} [_extensionIsVisible=false]
 	 * @protected
 	 */
@@ -144,6 +149,7 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Caches the timeout when the actual input extender animation should kick in.
+	 *
 	 * @property {number}
 	 * @protected
 	 */
@@ -152,6 +158,7 @@ $.widget( 'ui.inputextender', {
 	/**
 	 * Caches the element's offset to determine whether the input extension has to be
 	 * repositioned on draw() calls.
+	 *
 	 * @property {Object}
 	 * @protected
 	 */
@@ -437,6 +444,7 @@ $.widget( 'ui.inputextender', {
 
 	/**
 	 * Repositions the extension.
+	 *
 	 * @protected
 	 */
 	_reposition: function() {
@@ -451,6 +459,7 @@ $.widget( 'ui.inputextender', {
 
 		/**
 		 * Flips the position string in RTL context.
+		 *
 		 * @param {string} string
 		 * @return {string}
 		 */
@@ -486,7 +495,7 @@ $.widget( 'ui.inputextender', {
 		var self = this;
 		var $closeButton = this._buildExtensionCloseButton();
 		var $extension = $( '<div/>', {
-			'class': this.widgetBaseClass + '-extension ui-widget-content'
+			class: this.widgetBaseClass + '-extension ui-widget-content'
 		} );
 
 		$closeButton.append( this.options.content );
@@ -559,6 +568,7 @@ $.widget( 'ui.inputextender', {
 
 /**
  * Returns all the widget instances with currently visible extensions.
+ *
  * @member jQuery.ui.inputextender
  * @method getInstancesWithVisibleExtensions
  * @static
@@ -573,6 +583,7 @@ $.ui.inputextender.getInstancesWithVisibleExtensions = function() {
  * Will redraw all currently visible extensions of all input extender instances.
  * This is useful when changing the DOM, making sure that extensions are still next to their
  * input boxes in case position of the input boxes has changed.
+ *
  * @member jQuery.ui.inputextender
  * @method redrawVisibleExtensions
  * @static

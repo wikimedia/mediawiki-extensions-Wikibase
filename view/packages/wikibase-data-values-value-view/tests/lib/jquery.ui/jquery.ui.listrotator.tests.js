@@ -8,6 +8,8 @@
 
 	/**
 	 * Factory for creating an listrotator widget suitable for testing.
+	 *
+	 * @param options
 	 */
 	var newTestListrotator = function( options ) {
 		options = $.extend( {

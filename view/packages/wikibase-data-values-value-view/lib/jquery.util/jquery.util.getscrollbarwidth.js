@@ -2,6 +2,7 @@ jQuery.util = jQuery.util || {};
 
 /**
  * Utility function retrieving the width of the browser's scrollbar.
+ *
  * @member jQuery.util
  * @method getscrollbarwidth
  * @license GNU GPL v2+

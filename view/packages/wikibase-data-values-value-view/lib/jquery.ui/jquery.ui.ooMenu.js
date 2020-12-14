@@ -5,6 +5,7 @@
  * jQuery.ui.ooMenu provides an object-oriented menu structure. Menu items are managed using
  * specific objects instead of DOM elements.
  * (uses `jQuery.util.getscrollbarwidth`, `util.inherit`)
+ *
  * @class jQuery.ui.ooMenu
  * @extends jQuery.Widget
  * @uses jQuery.util
@@ -84,9 +85,10 @@ $.widget( 'ui.ooMenu', {
 	},
 
 	/**
+	 * @param key
+	 * @param value
 	 * @see jQuery.Widget._setOption
 	 * @protected
-	 *
 	 * @throws {Error} when trying to set `items` or `customItems` option with improper values.
 	 */
 	_setOption: function( key, value ) {
@@ -115,6 +117,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Updates the menu content.
+	 *
 	 * @protected
 	 */
 	_refresh: function() {
@@ -135,6 +138,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Evaluates whether a custom item is supposed to be visible or not.
+	 *
 	 * @protected
 	 *
 	 * @param {jQuery.ui.ooMenu.CustomItem} customItem
@@ -146,6 +150,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Appends an item to the menu.
+	 *
 	 * @protected
 	 *
 	 * @param {jQuery.ui.ooMenu.Item} item
@@ -321,6 +326,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Returns whether there is an active menu item.
+	 *
 	 * @protected
 	 *
 	 * @return {boolean}
@@ -345,6 +351,7 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Moves focus in a specific direction.
+	 *
 	 * @protected
 	 *
 	 * @param {string} direction Either "next" or "prev".
@@ -373,6 +380,8 @@ $.widget( 'ui.ooMenu', {
 
 	/**
 	 * Selects an item.
+	 *
+	 * @param event
 	 */
 	select: function( event ) {
 		var $item = this.element.children( '.ui-state-hover' );
@@ -396,6 +405,7 @@ $.widget( 'ui.ooMenu', {
 
 /**
  * Default menu item.
+ *
  * @class jQuery.ui.ooMenu.Item
  * @license GNU GPL v2+
  * @author H. Snater < mediawiki@snater.com >
@@ -464,6 +474,7 @@ $.extend( Item.prototype, {
 
 /**
  * Customizable menu item.
+ *
  * @class jQuery.ui.ooMenu.CustomItem
  * @extends jQuery.ui.ooMenu.Item
  * @license GNU GPL v2+
@@ -527,6 +538,7 @@ CustomItem = util.inherit(
 		},
 
 		/**
+		 * @param menu
 		 * @return {Function|boolean}
 		 */
 		getVisibility: function( menu ) {

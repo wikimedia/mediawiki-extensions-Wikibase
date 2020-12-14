@@ -149,6 +149,7 @@
 
 	/**
 	 * Array of test definitions as provider for "expertStoreRegistrationTest".
+	 *
 	 * @property {Object[]}
 	 */
 	var expertStoreRegistrationTestCases = [

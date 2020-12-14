@@ -3,6 +3,7 @@
 
 	/**
 	 * An `ExpertExtender` module which wraps another module in a container.
+	 *
 	 * @class jQuery.valueview.ExpertExtender.Container
 	 * @since 0.6
 	 * @license GNU GPL v2+
@@ -67,6 +68,7 @@
 
 		/**
 		 * A helper function for calling the child just like `util.Extendable` does.
+		 *
 		 * @private
 		 *
 		 * @param {string} method

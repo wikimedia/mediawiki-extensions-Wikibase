@@ -5,6 +5,7 @@
 	'use strict';
 
 	/**
+	 * @param mockSearchResult
 	 * @return {jQuery}
 	 */
 	var newTestSuggester = function( mockSearchResult ) {

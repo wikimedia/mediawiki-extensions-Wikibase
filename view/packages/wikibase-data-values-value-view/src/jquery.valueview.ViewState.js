@@ -8,6 +8,7 @@ $.valueview = $.valueview || {};
 	 * functions to actively change the view. It serves as a state object to inform subsystems of
 	 * the `valueview`'s current status. Those subsystems should not have full access to the entire
 	 * view though since interaction in both directions would very likely mess things up.
+	 *
 	 * @class ViewState
 	 * @license GNU GPL v2+
 	 * @author Daniel Werner < daniel.a.r.werner@gmail.com >
@@ -29,6 +30,7 @@ $.valueview = $.valueview || {};
 	$.extend( SELF.prototype, {
 		/**
 		 * The widget object whose status is represented.
+		 *
 		 * @property {jQuery.valueview}
 		 * @private
 		 */
@@ -54,6 +56,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Returns the related `valueview`'s current value. Does not allow to change the value.
+		 *
 		 * @see jQuery.valueview.value
 		 *
 		 * @return {dataValues.DataValue|null}
@@ -64,6 +67,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Returns the related `valueview`'s current formatted value.
+		 *
 		 * @see jQuery.valueview.getFormattedValue
 		 *
 		 * @return {string}
@@ -74,6 +78,7 @@ $.valueview = $.valueview || {};
 
 		/**
 		 * Returns the related `valueview`'s current plain text value.
+		 *
 		 * @see jQuery.valueview.getTextValue
 		 * @since 0.4
 		 *
@@ -86,6 +91,7 @@ $.valueview = $.valueview || {};
 		/**
 		 * Returns the options or a specific option of the related `valueview`. Does not allow
 		 * to set any option.
+		 *
 		 * @see jQuery.Widget.option
 		 *
 		 * @param {string} [key]

@@ -9,6 +9,7 @@ module.exports = ( function( $, vv ) {
 	 * `CommonsMedia` data type is using the `String` data value type.
 	 * This expert is based on the ``StringValue` expert but will add a drop-down for choosing
 	 * Commons media sources. It will also display the value as a link to Commons.
+	 *
 	 * @class jQuery.valueview.experts.CommonsMediaType
 	 * @extends jQuery.valueview.experts.StringValue
 	 * @since 0.1
