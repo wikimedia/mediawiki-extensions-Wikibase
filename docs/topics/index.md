@@ -17,6 +17,7 @@ This directory collects some documentation of specific topics:
 * @subpage md_docs_topics_mediawiki - MediaWiki integration, decisions and notable points
 * @subpage md_docs_topics_globals - PHP globals
 * @subpage md_docs_topics_options - Wikibase settings & configuration
+* @subpage md_docs_topics_pingback
 * @subpage md_docs_topics_public-apis
 * @subpage md_docs_topics_repo-client-relationship
 * @subpage md_docs_topics_rdf-binding
