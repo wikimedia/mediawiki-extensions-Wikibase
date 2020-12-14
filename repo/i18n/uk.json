@@ -135,7 +135,7 @@
 	"wikibase-anonymouseditwarning-heading": "Ви не ввійшли в систему",
 	"wikibase-anonymouseditwarning-message": "Наразі Ваша IP-адреса буде публічно видима, якщо Ви редагуєте. Якщо Ви створите обліковий запис (або ввійдете із наявним), редагування будуть приписані Вашому імені користувача, разом з іншими перевагами.",
 	"wikibase-anonymouseditwarning-dismiss-persist": "Попереджати мене кожного разу, коли я не входжу в систему.",
-	"wikibase-anonymouseditwarning-dismiss-button": "Редагувати без авторизації",
+	"wikibase-anonymouseditwarning-dismiss-button": "Редагувати без автентифікації",
 	"wikibase-move-error": "Ви не можете перейменовувати сторінки з простору або у простір назв даних.",
 	"wikibase-validator-invalid": "Недійсне значення",
 	"wikibase-validator-missing-field": "Відсутнє обов'язкове поле «$1»",
@@ -468,5 +468,16 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Вилучити застереження",
 	"wikibase-tainted-ref-tainted-icon-title": "Це твердження має певні потенційні проблеми.",
 	"wikibase-federated-properties-search-api-error-message": "Властивості тимчасово недоступні.",
-	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Список властивостей у $2]"
+	"wikibase-federated-properties-save-api-error-message": "Ваше збереження не вдалось, через помилку запиту до вікі-джерела федерації.",
+	"wikibase-federated-properties-source-wiki-api-error-message": "Твердження про цей елемент тимчасово недоступні через помилку запиту до вікі-джерела федерації. Будь ласка, перезавантажте сторінку.",
+	"wikibase-federated-properties-special-list-of-properties-notice": "Цей Wikibase використовує федеративні властивості із зовнішнього джерела. Ви можете перейти на нього тут: $1.",
+	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 Список властивостей у $2]",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "Скасувати",
+	"wikibase-federated-properties-leaving-site-notice-continue": "Продовжити до вікі-джерела",
+	"wikibase-federated-properties-leaving-site-notice-notice": "Це федеративна властивість. Вас буде перенаправлено на $1 для перегляду її деталей.",
+	"wikibase-federated-properties-leaving-site-notice-header": "Залишення локального Wikibase",
+	"wikibase-federated-properties-leaving-site-notice-checkbox-label": "Не показувати це повідомлення знову",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Спробувати знову",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "Ви не можете редагувати це твердження через помилку запиту до вікі-джерела федерації.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Помилка редагування"
 }

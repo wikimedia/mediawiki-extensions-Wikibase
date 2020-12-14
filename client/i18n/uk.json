@@ -152,7 +152,7 @@
 	"wikibase-client-data-bridge-references-heading": "Примітки",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "Ви не ввійшли в систему",
 	"wikibase-client-data-bridge-anonymous-edit-warning-message": "<strong>Увага:</strong> ви не авторизовані. Ваша IP-адреса буде публічно видима, якщо ви зробите якісь редагування. Якщо ви <strong>авторизуєтеся</strong> чи <strong>створите обліковий запис</strong>, ваші редагування позначатимуться вашим іменем користувача і ви отримаєте інші переваги.",
-	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редагувати без авторизації",
+	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "Редагувати без автентифікації",
 	"wikibase-client-data-bridge-anonymous-edit-warning-login": "Увійти або зареєструватися",
 	"wikibase-client-data-bridge-license-heading": "Використання і ліцензія",
 	"wikibase-client-data-bridge-license-body": "<p>Зміна цього значення змінить його також і на сайті {{WBREPONAME}}, а також, можливо, і в іншомовних вікі.</p>\n<p>Натискаючи «{{int:$1}}», ви погоджуєтесь із [$2 умовами користування], а також даєте невідкличну згоду на публікацію вашого внеску на умовах [$3 $4].</p>",

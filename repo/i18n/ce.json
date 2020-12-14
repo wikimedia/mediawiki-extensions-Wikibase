@@ -154,6 +154,8 @@
 	"wikibase-modifyentity-id": "ID:",
 	"wikibase-modifyterm-language": "Метта код:",
 	"special-mergeitems": "Цхьаьнатоха шиъ элемент",
+	"wikibase-mergeitems-intro": "Ахьа шиъ элемент вовшахтохахь, ерриге цӀерш, хаамаш, харц цӀерш, хьажоргаш, цхьана элемент чуьра вукхунна чу дохур ду.",
+	"wikibase-mergeitems-fromid": "Вовшахтуху идентификатор",
 	"wikibase-mergeitems-submit": "Цхьаьнатоха элементаш",
 	"wikibase-itemmerge-cant-load-entity-content": "Элемент чуяккха цаелира.",
 	"wikibase-itemmerge-cant-merge-self": "Элемент цхьаьнатухила дац.",
