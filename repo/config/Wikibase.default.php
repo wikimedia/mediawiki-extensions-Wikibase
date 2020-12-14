@@ -354,5 +354,5 @@ return [
 
 	'termFallbackCacheVersion' => null,
 
-	'wikibasePingback' => $GLOBALS['wgPingback'],
+	'wikibasePingback' => false,
 ];
