@@ -11,6 +11,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MediaWikiServices;
 use MWCryptRand;
+use MWTimestamp;
 use ObjectCache;
 use Psr\Log\LoggerInterface;
 use RequestContext;
@@ -136,7 +137,7 @@ class WikibasePingback {
 			return false;
 		}
 		// send heartbeat ping if last ping was over a month ago
-		if ( time() - (int)$timestamp >= self::HEARBEAT_TIMEOUT ) {
+		if ( MWTimestamp::time() - (int)$timestamp >= self::HEARBEAT_TIMEOUT ) {
 			return false;
 		}
 		return true;
@@ -152,7 +153,8 @@ class WikibasePingback {
 			->getMainLB()
 			->getConnection( DB_MASTER );
 
-		$timestamp = time();
+		$timestamp = MWTimestamp::time();
+
 		return $dbw->upsert(
 			'updatelog',
 			[ 'ul_key' => $this->key, 'ul_value' => $timestamp ],

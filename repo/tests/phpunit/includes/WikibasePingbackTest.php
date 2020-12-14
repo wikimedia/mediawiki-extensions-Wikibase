@@ -7,6 +7,7 @@ use Config;
 use ExtensionRegistry;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWikiIntegrationTestCase;
+use MWTimestamp;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use TestLogger;
@@ -82,8 +83,7 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public function testWikibasePingbackSchedules() {
-		$timestamp = time();
-
+		MWTimestamp::setFakeTime( '20000101010000' );
 		$logger = new TestLogger( true );
 
 		$currentTime = $this->getPingbackTime();
@@ -93,15 +93,14 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->once(), $logger ) );
 
 		$currentTime = $this->getPingbackTime();
-		$this->assertGreaterThanOrEqual( $currentTime, $timestamp );
+		$this->assertIsNumeric( $currentTime );
 
 		// this won't trigger it
 		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->never(), $logger ) );
-
 		$this->assertSame( $currentTime, $this->getPingbackTime() );
 
-		// moving back time we should trigger the next one
-		$this->upsertTimestampRow( $timestamp - (int)WikibasePingback::HEARBEAT_TIMEOUT );
+		// move forward one month
+		MWTimestamp::setFakeTime( '20000201010000' );
 
 		// should trigger
 		WikibasePingback::doSchedule( $this->getPingbackWithRequestExpectation( $this->once(), $logger ) );
@@ -122,17 +121,8 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 				'Wikibase\Repo\WikibasePingback::sendPingback: pingback sent OK (' . self::TEST_KEY . ')'
 			]
 		);
+		MWTimestamp::setFakeTime( false );
 		$logger->clearBuffer();
-	}
-
-	private function upsertTimestampRow( $timestamp ) {
-		return $this->db->upsert(
-			'updatelog',
-			[ 'ul_key' => self::TEST_KEY, 'ul_value' => $timestamp ],
-			'ul_key',
-			[ 'ul_value' => $timestamp ],
-			__METHOD__
-		);
 	}
 
 	private function getPingbackTime() {
@@ -197,7 +187,6 @@ class WikibasePingbackTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function populateSiteStats() {
-		$db = wfGetDB( DB_MASTER );
-		$db->update( 'site_stats', [ 'ss_total_pages' => 11 ], [ 'ss_row_id' => 1 ], __METHOD__ );
+		$this->db->update( 'site_stats', [ 'ss_total_pages' => 11 ], [ 'ss_row_id' => 1 ], __METHOD__ );
 	}
 }
