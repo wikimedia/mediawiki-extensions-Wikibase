@@ -73,22 +73,27 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 		}
 		$repoSettings['localEntitySourceName'] = 'test';
 
+		$entityTypeDefinitions = $this->getEntityTypeDefinitions();
+		$entityNamespaceIdsAndSlots = [];
+		$namespaceId = 100;
+		foreach ( $entityTypeDefinitions->getEntityTypes() as $entityType ) {
+			$entityNamespaceIdsAndSlots[$entityType] = [ 'namespaceId' => $namespaceId, 'slot' => 'main' ];
+			$namespaceId += 100;
+		}
+
 		return new WikibaseRepo(
 			new SettingsArray( $repoSettings ),
 			new EntitySourceDefinitions(
 				[ new EntitySource(
 					'test',
 					'testdb',
-					[
-						'item' => [ 'namespaceId' => 100, 'slot' => 'main' ],
-						'property' => [ 'namespaceId' => 200, 'slot' => 'main' ],
-					],
+					$entityNamespaceIdsAndSlots,
 					'',
 					'',
 					'',
 					''
 				) ],
-				$this->getEntityTypeDefinitions()
+				$entityTypeDefinitions
 			)
 		);
 	}
