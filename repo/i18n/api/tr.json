@@ -5,6 +5,7 @@
 			"BaRaN6161 TURK",
 			"HakanIST",
 			"Incelemeelemani",
+			"MuratTheTurkish",
 			"Sezgin İbiş",
 			"Stultiwikia"
 		]
@@ -196,7 +197,7 @@
 	"apihelp-query+wbsearch-param-strictlanguage": "Dil yedeğini devre dışı bırakıp bırakmayacağınız",
 	"apihelp-query+wbsearch-param-type": "Bu tür varlığı arayın.",
 	"apihelp-query+wbsearch-param-limit": "Azami sonuç sayısı",
-	"apihelp-query+wbsearch-example-1": "\"abc\"yi İngilizce dil içinde tip ve limit varsayılanlarıyla ara",
+	"apihelp-query+wbsearch-example-1": "\"abc\" ile İngilizce dil içinde tür ve sınır varsayılanlarıyla arayın",
 	"apihelp-query+wbsearch-example-2": "\"\"İngilizce dil 50 sınırı ile abc için arama",
 	"apihelp-query+wbsearch-example-3": "Tür özelliği için \"alphabet\" için İngilizce ara",
 	"apihelp-query+wbsearch-example-4": "Jeneratör olarak İngilizce dilinde \"alphabet\" için arama yap",
