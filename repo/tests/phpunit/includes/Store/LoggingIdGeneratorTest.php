@@ -28,7 +28,7 @@ class LoggingIdGeneratorTest extends MediaWikiIntegrationTestCase {
 			'new' => 'item',
 			'data' => '{}',
 		];
-		$this->setMwGlobals( 'wgRequest', new FauxRequest( $requestPostValues, true ) );
+		$this->setRequest( new FauxRequest( $requestPostValues, true ) );
 
 		$idGenerator = $this->createMock( IdGenerator::class );
 		$idGenerator->expects( $this->once() )
@@ -63,7 +63,7 @@ class LoggingIdGeneratorTest extends MediaWikiIntegrationTestCase {
 			'new' => 'item',
 			'data' => '{}',
 		];
-		$this->setMwGlobals( 'wgRequest', new FauxRequest( $requestPostValues, true ) );
+		$this->setRequest( new FauxRequest( $requestPostValues, true ) );
 
 		$exception = new LogicException();
 		$idGenerator = $this->createMock( IdGenerator::class );
