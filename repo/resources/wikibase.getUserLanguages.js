@@ -17,7 +17,7 @@
 	 * preferred language, and thus the UI language (currently wgUserLanguage).
 	 */
 	wb.getUserLanguages = function () {
-		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages' ),
+		var userLanguages = mw.config.get( 'wbUserSpecifiedLanguages', [] ),
 			isUlsDefined = mw.uls && $.uls && $.uls.data,
 			languages;
 
