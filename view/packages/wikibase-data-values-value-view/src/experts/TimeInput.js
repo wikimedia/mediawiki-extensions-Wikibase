@@ -6,15 +6,20 @@ module.exports = ( function( $, vv, TimeValue ) {
 	/**
 	 * @ignore
 	 *
+	 * @param {util.MessageProvider} messageProvider
 	 * @return {Object[]} [{ value: <{number}>, label: <{string}>}, ...]
 	 */
-	function getPrecisionValues() {
+	function getPrecisionValues( messageProvider ) {
 		var precisionValues = [],
 			dayPrecision = TimeValue.getPrecisionById( 'DAY' );
 		$.each( TimeValue.PRECISIONS, function( precisionValue, precision ) {
+			var label;
 			if ( precisionValue <= dayPrecision ) {
 				// TODO: Remove this check as soon as time values are supported.
-				precisionValues.unshift( { value: precisionValue, label: precision.text } );
+				label = messageProvider.getMessage(
+					'valueview-expert-timeinput-precision-' + precision.id.toLowerCase()
+				) || precision.text;
+				precisionValues.unshift( { value: precisionValue, label: label } );
 			}
 		} );
 		return precisionValues;
@@ -68,7 +73,7 @@ module.exports = ( function( $, vv, TimeValue ) {
 
 		this.precisionRotator = new vv.ExpertExtender.Listrotator(
 			this.uiBaseClass + '-precision',
-			getPrecisionValues(),
+			getPrecisionValues( this._messageProvider ),
 			this._onRotatorChange.bind( this ),
 			function() {
 				var value = self.viewState().value();
