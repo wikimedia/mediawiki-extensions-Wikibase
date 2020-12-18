@@ -311,7 +311,7 @@ class BeforePageDisplayHandlerTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		$user->expects( $this->any() )
-			->method( 'isLoggedIn' )
+			->method( 'isRegistered' )
 			->will( $this->returnValue( $loggedIn ) );
 
 		return $user;

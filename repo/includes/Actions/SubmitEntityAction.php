@@ -312,7 +312,7 @@ class SubmitEntityAction extends EditEntityAction {
 	private function doWatch( Title $title ) {
 		$user = $this->getUser();
 
-		if ( $user->isLoggedIn()
+		if ( $user->isRegistered()
 			&& $user->getOption( 'watchdefault' )
 			&& !$user->isWatched( $title, User::IGNORE_USER_RIGHTS )
 		) {
