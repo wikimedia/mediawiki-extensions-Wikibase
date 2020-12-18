@@ -59,8 +59,6 @@ class WikiPageEntityStoreTest extends MediaWikiIntegrationTestCase {
 
 	use LocalRepoDbTestHelper;
 
-	private const FAKE_NS_ID = 654;
-
 	/**
 	 * @return EntityHandler
 	 */

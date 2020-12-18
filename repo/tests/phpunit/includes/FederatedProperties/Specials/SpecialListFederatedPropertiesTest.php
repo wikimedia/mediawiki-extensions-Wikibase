@@ -18,11 +18,6 @@ use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
  */
 class SpecialListFederatedPropertiesTest extends SpecialPageTestBase {
 
-	/**
-	 * @var string|null
-	 */
-	private $oldFederatedPropertiesSourceScriptUrl;
-
 	protected function setUp(): void {
 		parent::setUp();
 		$this->setMwGlobals( 'wgLanguageCode', 'qqx' );

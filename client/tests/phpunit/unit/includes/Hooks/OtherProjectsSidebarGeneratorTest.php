@@ -28,7 +28,6 @@ use Wikibase\DataModel\Term\Term;
  */
 class OtherProjectsSidebarGeneratorTest extends \PHPUnit\Framework\TestCase {
 
-	private const TEST_ITEM_ID = 'Q123';
 	private const BADGE_ITEM_ID = 'Q4242';
 	private const BADGE_ITEM_LABEL = 'Badge Label';
 	private const BADGE_CSS_CLASS = 'badge-class';

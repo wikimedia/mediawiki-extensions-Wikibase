@@ -30,7 +30,11 @@ class MonolingualTextParser extends StringValueParser {
 	 */
 	protected function stringParse( $value ) {
 		if ( !$this->options->hasOption( 'valuelang' ) ) {
-			throw new ParseException( 'Cannot construct a MonolingualTextValue without a language code.' );
+			throw new ParseException(
+				'Cannot construct a MonolingualTextValue without a language code.',
+				$value,
+				self::FORMAT_NAME
+			);
 		}
 
 		$lang = $this->getOption( 'valuelang' );
@@ -38,7 +42,7 @@ class MonolingualTextParser extends StringValueParser {
 		try {
 			return new MonolingualTextValue( trim( $lang ), trim( $value ) );
 		} catch ( IllegalValueException $ex ) {
-			throw new ParseException( $ex->getMessage() );
+			throw new ParseException( $ex->getMessage(), $value, self::FORMAT_NAME );
 		}
 	}
 

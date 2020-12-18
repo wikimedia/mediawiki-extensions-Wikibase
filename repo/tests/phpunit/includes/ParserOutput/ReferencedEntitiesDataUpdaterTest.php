@@ -26,8 +26,6 @@ use Wikibase\Repo\WikibaseRepo;
  */
 class ReferencedEntitiesDataUpdaterTest extends MediaWikiIntegrationTestCase {
 
-	private const UNIT_PREFIX = 'unit:';
-
 	public function addDBData() {
 		foreach ( [ 'P1', 'Q1', 'Q20', 'Q21', 'Q22' ] as $pageName ) {
 			if ( $pageName[0] === 'P' ) {

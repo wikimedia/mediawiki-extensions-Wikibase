@@ -31,8 +31,6 @@ use Wikibase\View\ViewPlaceHolderEmitter;
  */
 class TermboxViewTest extends TestCase {
 
-	private $entityRevisionLookup;
-
 	public function testGetHtmlReturnsPlaceholderMarker() {
 		$marker = 'termbox-marker';
 		$textInjector = $this->createMock( TextInjector::class );
