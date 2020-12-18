@@ -22,12 +22,6 @@ use Wikimedia\TestingAccessWrapper;
  */
 class HtmlPageLinkRendererEndHookHandlerTest extends HtmlPageLinkRendererEndHookHandlerTestBase {
 
-	protected function setUp(): void {
-		parent::setUp();
-
-		$this->markTestSkipped( 'T269608' );
-	}
-
 	/**
 	 * @dataProvider validContextProvider
 	 */

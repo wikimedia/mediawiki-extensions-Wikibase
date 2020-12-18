@@ -239,7 +239,7 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		// Only continue on pages with edit summaries (histories / diffs) or on special pages.
 		// Don't run this code when accessing it through the api (eg. for parsing) as the title is
 		// set to a special page dummy in api.php, see https://phabricator.wikimedia.org/T111346
-		if ( defined( 'MW_API' ) || !$this->shouldConvert( $outTitle, $context ) ) {
+		if ( $this->isApiRequest() || !$this->shouldConvert( $outTitle, $context ) ) {
 			return true;
 		}
 
@@ -465,6 +465,16 @@ class HtmlPageLinkRendererEndHookHandler implements HtmlPageLinkRendererEndHook 
 		}
 
 		return null;
+	}
+
+	/**
+	 * Whether this is an API request.
+	 *
+	 * @return bool
+	 */
+	private function isApiRequest(): bool {
+		return defined( 'MW_API' )
+			&& MW_API !== 'TEST'; // T269608
 	}
 
 	/**
