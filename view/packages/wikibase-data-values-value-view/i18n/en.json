@@ -34,7 +34,7 @@
 	"valueview-expert-timeinput-precision-day": "day",
 	"valueview-expert-timeinput-precision-hour": "hour",
 	"valueview-expert-timeinput-precision-minute": "minute",
-	"valueview-expert-timeinput-precision-second:": "second",
+	"valueview-expert-timeinput-precision-second": "second",
 	"valueview-expert-timeinput-calendar": "Calendar:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Language (mandatory):",
