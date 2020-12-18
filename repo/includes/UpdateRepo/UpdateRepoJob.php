@@ -172,7 +172,7 @@ abstract class UpdateRepoJob extends Job {
 	 */
 	private function getUser( $name ) {
 		$user = User::newFromName( $name );
-		if ( !$user || !$user->isLoggedIn() ) {
+		if ( !$user || !$user->isRegistered() ) {
 			$this->logger->debug( 'User {name} doesn\'t exist.', [ 'name' => $name ] );
 			return false;
 		}

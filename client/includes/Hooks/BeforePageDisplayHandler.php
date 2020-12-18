@@ -116,7 +116,7 @@ class BeforePageDisplayHandler implements BeforePageDisplayHook {
 
 	private function hasLinkItemWidget( User $user, OutputPage $out, Title $title, $actionName ) {
 		if (
-			$out->getLanguageLinks() !== [] || !$user->isLoggedIn()
+			$out->getLanguageLinks() !== [] || !$user->isRegistered()
 			|| !$this->hasEditOrAddLinks( $out, $title, $actionName )
 		) {
 			return false;

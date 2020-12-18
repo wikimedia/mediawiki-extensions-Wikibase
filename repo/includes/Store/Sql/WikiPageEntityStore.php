@@ -525,7 +525,7 @@ class WikiPageEntityStore implements EntityStore {
 		$title = $this->getTitleForEntity( $id );
 
 		if (
-			$user->isLoggedIn() &&
+			$user->isRegistered() &&
 			$title &&
 			( $watch != $user->isWatched( $title, User::IGNORE_USER_RIGHTS ) )
 		) {
