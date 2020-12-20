@@ -39,8 +39,8 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		$user->setId( 123456789 );
 		$this->user = $user;
 
+		$this->setRequest( new FauxRequest() );
 		$this->setMwGlobals( [
-			'wgRequest' => new FauxRequest(),
 			'wgGroupPermissions' => [ '*' => [ 'edit' => true, 'read' => true ] ]
 		] );
 
