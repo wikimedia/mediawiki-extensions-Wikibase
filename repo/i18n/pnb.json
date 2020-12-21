@@ -9,11 +9,15 @@
 	"wikibase-edit": "لکھو",
 	"wikibase-add": "جوڑو",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ہور بولیاں وچ",
+	"wikibase-entitytermsforlanguagelistview-language": "بولی",
 	"wikibase-label-empty": "کوئی سرخی نہیں",
 	"wikibase-description-empty": "کوئی گل نہیں دسی گئی",
+	"wikibase-content-language-edit-label": "بولی:",
 	"wikibase-statementsection-statements": "واتاں",
 	"wikibase-sitelinks-special": "ہور سائیٹاں",
 	"wikibase-statementview-rank-normal": "نارمل رینک",
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}",
-	"wikibase-entityselector-more": "ہور"
+	"wikibase-entityselector-more": "ہور",
+	"wikibase-itembytitle-lookup-page": "صفحہ:",
+	"wikibase-newentity-language": "بولی:"
 }

@@ -5,11 +5,13 @@
 		]
 	},
 	"wikibase-client-desc": "A̠kpa̠ndang za mat a̠ngan Wikibase wu",
+	"tooltip-t-wikibase": "A̠fwop naat a̠ngga a̠gigyang data",
 	"wikibase-after-page-move-queued": "[$1 Kyang {{WBREPONAME}}] hu ku bwuo bi̠n ma̠ng peji jini na ntyia̠ shyim di̠ mi̠n beang a̠ghyang. Ma̠sa̠kut lyen nyia̠ si̠ huni na si̠ nnyia̠ kiki wa.",
 	"wikibase-comment-update": "A̠ shai a̠ngga {{WBREPONAME}}",
 	"wikibase-dataitem": "A̠ngga {{WBREPONAME}}",
 	"wikibase-editlinks": "Jhyuk a̠ka̠fwop",
 	"wikibase-editlinkstitle": "Jhyuk a̠ka̠fwop ntung lilyem",
+	"wikibase-linkitem-addlinks": "Mbeang a̠ka̠fwop",
 	"wikibase-linkitem-input-site": "A̠lyem:",
 	"wikibase-linkitem-input-page": "Peji:",
 	"wikibase-linkitem-confirmitem-button": "Nwuak shim",
