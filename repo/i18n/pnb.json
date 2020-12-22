@@ -7,6 +7,7 @@
 		]
 	},
 	"wikibase-edit": "لکھو",
+	"wikibase-cancel": "منسوخ کرو",
 	"wikibase-add": "جوڑو",
 	"wikibase-entitytermsview-entitytermsforlanguagelistview-toggler": "ہور بولیاں وچ",
 	"wikibase-entitytermsforlanguagelistview-language": "بولی",
@@ -19,5 +20,7 @@
 	"wikibase-statementview-references-counter": "$1 {{PLURAL:$1|اتہ پتہ|اتے پتے}}",
 	"wikibase-entityselector-more": "ہور",
 	"wikibase-itembytitle-lookup-page": "صفحہ:",
-	"wikibase-newentity-language": "بولی:"
+	"wikibase-newentity-language": "بولی:",
+	"wikibase-pageinfo-subscription-none": "کوئی نئیں",
+	"wikibase-federated-properties-leaving-site-notice-cancel": "رد کرو"
 }

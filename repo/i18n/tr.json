@@ -271,7 +271,7 @@
 	"wikibase-setlabeldescriptionaliases-description-label": "Açıklama:",
 	"wikibase-setlabeldescriptionaliases-aliases-label": "Diğer adları:",
 	"wikibase-setlabeldescriptionaliases-submit": "Etiketi, açıklamayı ve diğer adları ayarla",
-	"special-setsitelink": "Öğe site bağlantısı ayarla",
+	"special-setsitelink": "Öğe için site bağlantısı ayarla",
 	"wikibase-setsitelink-introfull": "[[:$1]] için $2 dilinde bir sitebağlantısı ayarlıyorsunuz.",
 	"wikibase-setsitelink-intro": "Bu form bir ögenin sitebağlantısını ayarlamanızı sağlar. Bunun için ögenin kimliği numarasını (örn. Q23), bir site kimliği (örn. \"enwiki\") ve bir site bağlantısı eklemeniz gereklidir.",
 	"wikibase-setsitelink-intro-badges": "Ayrıca, bu site bağlantısı için aşağıda listelenen rozetleri ayarlayabilirsiniz.",
