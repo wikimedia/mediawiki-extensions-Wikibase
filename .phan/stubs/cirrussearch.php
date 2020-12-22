@@ -204,7 +204,7 @@ namespace CirrusSearch {
 	}
 
 	class SearchConfig implements \Config {
-		const INDEX_BASE_NAME = 'CirrusSearchIndexBaseName';
+		public const INDEX_BASE_NAME = 'CirrusSearchIndexBaseName';
 
 		/**
 		 * @return bool true
@@ -246,10 +246,10 @@ namespace CirrusSearch {
 	}
 
 	class Searcher {
-		const HIGHLIGHT_PRE_MARKER = '';
-		const HIGHLIGHT_PRE = '<span class="searchmatch">';
-		const HIGHLIGHT_POST_MARKER = '';
-		const HIGHLIGHT_POST = '</span>';
+		public const HIGHLIGHT_PRE_MARKER = '';
+		public const HIGHLIGHT_PRE = '<span class="searchmatch">';
+		public const HIGHLIGHT_POST_MARKER = '';
+		public const HIGHLIGHT_POST = '</span>';
 
 		/**
 		 * @return Search\SearchContext
@@ -272,7 +272,7 @@ namespace CirrusSearch {
 		 * @param string|null $param2
 		 * @param string|null $param3
 		 */
-		function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
+		public function addWarning( $message, $param1 = null, $param2 = null, $param3 = null );
 	}
 }
 
@@ -320,9 +320,9 @@ namespace CirrusSearch\Parser\AST {
 
 namespace CirrusSearch\Profile {
 	class SearchProfileService {
-		const RESCORE = 'rescore';
-		const RESCORE_FUNCTION_CHAINS = 'rescore_function_chains';
-		const FT_QUERY_BUILDER = 'ft_query_builder';
+		public const RESCORE = 'rescore';
+		public const RESCORE_FUNCTION_CHAINS = 'rescore_function_chains';
+		public const FT_QUERY_BUILDER = 'ft_query_builder';
 
 		/**
 		 * @param string $type
@@ -416,7 +416,7 @@ namespace CirrusSearch\Query\Builder {
 
 namespace CirrusSearch\Search {
 	class CirrusIndexField {
-		const NOOP_HINT = 'noop';
+		public const NOOP_HINT = 'noop';
 	}
 
 	class Filters {
@@ -430,7 +430,7 @@ namespace CirrusSearch\Search {
 	}
 
 	class TextIndexField {
-		const POSITION_INCREMENT_GAP = 10;
+		public const POSITION_INCREMENT_GAP = 10;
 
 		/**
 		 * @param SearchConfig $config
