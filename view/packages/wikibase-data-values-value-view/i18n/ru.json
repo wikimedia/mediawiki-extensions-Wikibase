@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Alexandr Efremov",
+			"Kareyac",
 			"Mailman",
 			"Okras",
 			"Putnik"
@@ -16,6 +17,20 @@
 	"valueview-expert-timevalue-calendar-gregorian": "Григорианский",
 	"valueview-expert-timevalue-calendar-julian": "Юлианский",
 	"valueview-expert-timeinput-precision": "Точность:",
+	"valueview-expert-timeinput-precision-year1g": "миллиард лет",
+	"valueview-expert-timeinput-precision-year100m": "сто миллионов лет",
+	"valueview-expert-timeinput-precision-year10m": "десять миллионов лет",
+	"valueview-expert-timeinput-precision-year1m": "миллион лет",
+	"valueview-expert-timeinput-precision-year100k": "100 000 лет",
+	"valueview-expert-timeinput-precision-year10k": "10 000 лет",
+	"valueview-expert-timeinput-precision-year1k": "тысячелетие",
+	"valueview-expert-timeinput-precision-year100": "столетие",
+	"valueview-expert-timeinput-precision-year10": "десятилетие",
+	"valueview-expert-timeinput-precision-year": "год",
+	"valueview-expert-timeinput-precision-month": "месяц",
+	"valueview-expert-timeinput-precision-day": "день",
+	"valueview-expert-timeinput-precision-hour": "час",
+	"valueview-expert-timeinput-precision-minute": "минута",
 	"valueview-expert-timeinput-calendar": "Календарь:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Язык (обязательно):",

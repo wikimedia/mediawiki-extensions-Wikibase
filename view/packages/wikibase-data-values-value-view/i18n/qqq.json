@@ -5,6 +5,7 @@
 			"Daniel Werner < daniel.a.r.werner@gmail.com >",
 			"H. Snater < mediawiki@snater.com >",
 			"Liuxinyu970226",
+			"Robby",
 			"Shirayuki",
 			"Umherirrender"
 		]
@@ -33,10 +34,10 @@
 	"valueview-expert-timeinput-precision-year1k": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-precision-year100": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-precision-year10": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
-	"valueview-expert-timeinput-precision-year": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
-	"valueview-expert-timeinput-precision-month": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
-	"valueview-expert-timeinput-precision-day": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
-	"valueview-expert-timeinput-precision-hour": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
+	"valueview-expert-timeinput-precision-year": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}\n{{identical|Year}}",
+	"valueview-expert-timeinput-precision-month": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}\n{{identical|Month}}",
+	"valueview-expert-timeinput-precision-day": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}\n{{identical|Day}}",
+	"valueview-expert-timeinput-precision-hour": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}\n{{identical|Hour}}",
 	"valueview-expert-timeinput-precision-minute": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-precision-second": "Label for a certain precision when entering a time value, displayed following {{msg-mw|valueview-expert-timeinput-precision}}",
 	"valueview-expert-timeinput-calendar": "Label for the user interface element used to select a specific calendar (e.g. Gregorian, Julian) entering a time value.\n\nThe calendar is not localized at this time.\n{{Identical|Calendar}}",
