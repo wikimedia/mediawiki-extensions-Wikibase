@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Kambai Akau"
 		]
 	},
 	"wikibase-edit": "jhyuk",
 	"wikibase-add": "mbeang",
-	"wikibase-label-empty": "Á̠ nwuak lebet bah",
-	"wikibase-description-empty": "Á̠ ku nwuak wa̠i a̠lyiat bah",
-	"wikibase-sitelinks-special": "A̠ka̠vwuo á̠ghyang",
+	"wikibase-label-empty": "Á̱ nwuak lebet bah",
+	"wikibase-description-empty": "Á̱ ku nwuak wa̱i a̱lyiat bah",
+	"wikibase-sitelinks-special": "A̱ka̱vwuo á̱ghyang",
 	"wikibase-statementview-rank-normal": "Shi taada"
 }

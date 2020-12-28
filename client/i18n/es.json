@@ -138,6 +138,7 @@
 	"wikibase-client-data-bridge-saving-error-heading": "No se pudieron guardar los cambios",
 	"wikibase-client-data-bridge-unknown-error-heading": "Se produjo un error",
 	"wikibase-client-data-bridge-error-reload-bridge": "Recargar",
+	"wikibase-client-data-bridge-error-reload-page": "Recargar la página",
 	"wikibase-client-data-bridge-error-go-back": "Volver",
 	"wikibase-client-data-bridge-error-retry-save": "Reintentar guardado",
 	"wikibase-client-data-bridge-thank-you-head": "Gracias por la edición.",

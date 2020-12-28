@@ -38,5 +38,12 @@
 	"apihelp-query+wikibase-summary": "Pigghie le 'mbormaziune sus a 'u client Wikibase e l'archivije Wikibase associate.",
 	"apihelp-query+wikibase-example": "Pigghie 'u percorse URL e otre 'mbormaziune sus a 'u client e l'archivije Wikibase.",
 	"apihelp-query+wikibase-param-prop": "Ce probbietà ha pigghià:\n;<kbd>url</kbd>: URL base, percorse de script e de le vôsce de l'archivije Wikibase\n;<kbd>siteid</kbd>: l'idendificatore de stu site.",
+	"apihelp-wbformatreference-summary": "Formatte 'nu referimende pe fà 'ndrucà a le utinde.",
+	"apihelp-wbformatreference-example-1": "Formatte 'nu referimende vacande ausanne 'u stile Data Brindge jndr'à l'HTML.",
+	"apihelp-wbformatreference-example-2": "Formatte 'nu referimende ca tène 'na stringhe ausanne 'u stile Data Brindge jndr'à l'HTML.",
+	"apihelp-wbformatreference-param-reference": "'U referimende cumme 'nu oggette JSON.",
+	"apihelp-wbformatreference-param-style": "'U stile jndr'à 'u quale formattà 'u referimende.",
+	"apihelp-wbformatreference-paramvalue-style-internal-data-bridge": "'U stile ausate da [[mw:Special:MyLanguage/Wikidata Bridge|Data Bridge]]. Nò ausate pe use generice.",
+	"apihelp-wbformatreference-param-outputformat": "'U formate jndr'à 'u quale 'u resultate avessa essere turnate.",
 	"apihelp-wbformatreference-paramvalue-outputformat-html": "Marcatore HTML."
 }

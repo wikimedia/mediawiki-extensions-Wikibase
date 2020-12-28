@@ -67,7 +67,7 @@
 	"wikibase-statementsection-identifiers": "Identifikatorar",
 	"wikibase-sitelinks": "Nettstadlenkjer",
 	"wikibase-sitelinkgroupview-input-help-message": "Legg til ei nettstadlenkje ved å oppgje ein nettstad og ei side på denne nettstaden, endra eller fjerna eksisterande nettstadlenkjer.",
-	"wikibase-sitelinks-counter": "($1 {{PLURAL:$1|éi oppføring|$1 oppføringar}})",
+	"wikibase-sitelinks-counter": "({{PLURAL:$1|éi oppføring|$1 oppføringar}})",
 	"wikibase-sitelinks-empty": "Inga side er knytt til dette elementet.",
 	"wikibase-sitelinks-special": "Andre nettstader",
 	"wikibase-badgeselector-badge-placeholder-title": "Klikk for å gje lenkja eit teikn",

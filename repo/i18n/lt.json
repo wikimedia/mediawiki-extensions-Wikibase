@@ -310,7 +310,7 @@
 	"wikibase-api-unresolved-redirect": "Duotasis esybės ID remiasi nukreipimu, kuris nėra palaikomas šiame kontekste.",
 	"wikibase-api-no-such-sitelink": "Nepavyko rasti tinklapio nuorodos į „$1“, kai buvo bandoma redaguoti ženkliukus.",
 	"wikibase-api-tags-invalid": "Žymų parametrai negalimi.",
-	"wikibase-api-target-not-empty": "Nukreipimas gali būti sukurtas tik tuščiai esybei.",
+	"wikibase-api-target-not-empty": "Nukreipimas gali būti sukurtas tik tuščiai arba pašalintai esybei.",
 	"wikibase-api-target-is-redirect": "Nukreipimo taikinys negali būti irgi nukreipimas.",
 	"wikibase-api-target-is-incompatible": "Bandoma nukreipti į kito pobūdžio esmenį.",
 	"wikibase-api-cant-redirect": "Nepavyko sukurti nukreipimo (tikriausiai nukreipimai tarp šio tipo esybių nėra palaikomi apskritai).",

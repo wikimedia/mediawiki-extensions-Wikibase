@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Salvemm el lombard"
+		]
+	},
+	"wikibase-edit": "fà un cambiament",
+	"wikibase-add": "Sgionta",
+	"wikibase-label-empty": "Nissuna eticheta definida",
+	"wikibase-description-empty": "Nissuna descrizzion definida",
+	"wikibase-sitelinks-special": "Alter sit",
+	"wikibase-statementview-rank-normal": "Nivel normal"
+}

@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Salvemm el lombard"
+		]
+	},
+	"tooltip-t-wikibase": "Conligament a l'element conness de l'archivi di dati",
+	"wikibase-comment-update": "L'element {{WBREPONAME}} a l'è cambiad",
+	"wikibase-dataitem": "Element {{WBREPONAME}}",
+	"wikibase-editlinks": "Cambia i conligament",
+	"wikibase-editlinkstitle": "Cambia i conligament interlinguistegh",
+	"wikibase-linkitem-addlinks": "Sgionta di conligament",
+	"wikibase-rc-hide-wikidata": "\n$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Scond",
+	"wikibase-rc-hide-wikidata-show": "Fà vedè",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Porta un cambiament a {{WBREPONAME}}",
+	"wikibase-otherprojects": "In di alter proget"
+}
