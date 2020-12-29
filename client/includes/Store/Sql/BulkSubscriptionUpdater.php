@@ -39,7 +39,7 @@ class BulkSubscriptionUpdater {
 	private $repoConnectionManager;
 
 	/**
-	 * @var string The local wiki's global ID, to be used as the subscriber ID in the repo's subecription table.
+	 * @var string The local wiki's global ID, to be used as the subscriber ID in the repo's subscription table.
 	 */
 	private $subscriberWikiId;
 
