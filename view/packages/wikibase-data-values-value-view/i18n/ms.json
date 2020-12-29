@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Anakmalaysia"
+			"Anakmalaysia",
+			"Tofeiku"
 		]
 	},
 	"valueview-expert-unsupportedvalue-unsupporteddatavalue": "Pengelolaan nilai \"$1\" belum disokong.",
@@ -11,6 +12,20 @@
 	"valueview-expert-timevalue-calendar-gregorian": "Gregory",
 	"valueview-expert-timevalue-calendar-julian": "Julius",
 	"valueview-expert-timeinput-precision": "Kepersisan:",
+	"valueview-expert-timeinput-precision-year1g": "bilion tahun",
+	"valueview-expert-timeinput-precision-year100m": "ratus juta tahun",
+	"valueview-expert-timeinput-precision-year10m": "sepuluh juta tahun",
+	"valueview-expert-timeinput-precision-year1m": "juta tahun",
+	"valueview-expert-timeinput-precision-year100k": "100,000 tahun",
+	"valueview-expert-timeinput-precision-year10k": "10,000 tahun",
+	"valueview-expert-timeinput-precision-year1k": "alaf",
+	"valueview-expert-timeinput-precision-year100": "abad",
+	"valueview-expert-timeinput-precision-year10": "dekad",
+	"valueview-expert-timeinput-precision-year": "tahun",
+	"valueview-expert-timeinput-precision-month": "bulan",
+	"valueview-expert-timeinput-precision-day": "hari",
+	"valueview-expert-timeinput-precision-hour": "jam",
+	"valueview-expert-timeinput-precision-minute": "minit",
 	"valueview-expert-timeinput-calendar": "Kalendar:",
 	"valueview-preview-label": "akan dipaparkan sebagai:",
 	"valueview-preview-novalue": "tiada nilai sah yang dikenali"

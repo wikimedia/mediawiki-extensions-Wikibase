@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Jopparn",
+			"Sabelöga",
 			"Tobulos1",
 			"WikiPhoenix"
 		]
@@ -15,6 +16,20 @@
 	"valueview-expert-timevalue-calendar-gregorian": "Gregoriansk",
 	"valueview-expert-timevalue-calendar-julian": "Juliansk",
 	"valueview-expert-timeinput-precision": "Precision:",
+	"valueview-expert-timeinput-precision-year1g": "biljoner år",
+	"valueview-expert-timeinput-precision-year100m": "hundra miljoner år",
+	"valueview-expert-timeinput-precision-year10m": "tiomiljoner år",
+	"valueview-expert-timeinput-precision-year1m": "miljoner år",
+	"valueview-expert-timeinput-precision-year100k": "100,000 år",
+	"valueview-expert-timeinput-precision-year10k": "10,000 år",
+	"valueview-expert-timeinput-precision-year1k": "årtusende",
+	"valueview-expert-timeinput-precision-year100": "århundrade",
+	"valueview-expert-timeinput-precision-year10": "årtionde",
+	"valueview-expert-timeinput-precision-year": "år",
+	"valueview-expert-timeinput-precision-month": "månad",
+	"valueview-expert-timeinput-precision-day": "dag",
+	"valueview-expert-timeinput-precision-hour": "timme",
+	"valueview-expert-timeinput-precision-minute": "minut",
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Språk (obligatoriskt):",

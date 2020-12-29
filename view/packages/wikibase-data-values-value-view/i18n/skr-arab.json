@@ -5,6 +5,12 @@
 		]
 	},
 	"valueview-expert-emptyvalue-empty": "خالی",
+	"valueview-expert-timeinput-precision-year1g": "ارب سال",
+	"valueview-expert-timeinput-precision-year100m": "ݙاہ کروڑ سال",
+	"valueview-expert-timeinput-precision-year10m": "ہک کروڑ سال",
+	"valueview-expert-timeinput-precision-year1m": "ݙاہ لکھ سال",
+	"valueview-expert-timeinput-precision-year100k": "١٠٠,٠٠٠ سال",
+	"valueview-expert-timeinput-precision-year10k": "١٠,٠٠٠ سال",
 	"valueview-expert-timeinput-precision-year1k": "ہزاریہ",
 	"valueview-expert-timeinput-precision-year100": "صدی",
 	"valueview-expert-timeinput-precision-year10": "ݙاہاکا",

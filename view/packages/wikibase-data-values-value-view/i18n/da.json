@@ -21,6 +21,7 @@
 	"valueview-expert-timeinput-precision-month": "måned",
 	"valueview-expert-timeinput-precision-day": "dag",
 	"valueview-expert-timeinput-precision-hour": "time",
+	"valueview-expert-timeinput-precision-minute": "minut",
 	"valueview-expert-timeinput-calendar": "Kalender:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Sprog (obligatorisk):",

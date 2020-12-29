@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"ElangoRamanujam"
+		]
+	},
+	"valueview-expert-timeinput-precision-year1g": "பில்லியன் ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year100m": "நுாறு மில்லியன் ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year10m": "பத்து மில்லியன் ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year1m": "மில்லியன் ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year100k": "100,000 ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year10k": "10,000 ஆண்டுகள்",
+	"valueview-expert-timeinput-precision-year1k": "நுாற்றாண்டு",
+	"valueview-expert-timeinput-precision-year": "ஆண்டு",
+	"valueview-expert-timeinput-precision-month": "மாதம்",
+	"valueview-expert-timeinput-precision-day": "நாள்",
+	"valueview-expert-timeinput-precision-hour": "மணி",
+	"valueview-expert-timeinput-precision-minute": "நிமிடம்"
+}

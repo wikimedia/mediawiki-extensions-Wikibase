@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			")8",
 			"Li3939108",
 			"Linforest",
 			"Liuxinyu970226",
@@ -17,6 +18,11 @@
 	"valueview-expert-timevalue-calendar-gregorian": "格里历",
 	"valueview-expert-timevalue-calendar-julian": "儒略历",
 	"valueview-expert-timeinput-precision": "精度：",
+	"valueview-expert-timeinput-precision-year": "年",
+	"valueview-expert-timeinput-precision-month": "月",
+	"valueview-expert-timeinput-precision-day": "日",
+	"valueview-expert-timeinput-precision-hour": "小时",
+	"valueview-expert-timeinput-precision-minute": "分",
 	"valueview-expert-timeinput-calendar": "日历：",
 	"valueview-expertextender-languageselector-languagetemplate": "$1（$2）",
 	"valueview-expertextender-languageselector-label": "语言（必填）：",
