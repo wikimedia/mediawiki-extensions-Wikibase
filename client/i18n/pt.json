@@ -169,6 +169,22 @@
 	"wikibase-client-data-bridge-unsupported-datatype-error-head": "A edição do valor de $1 não é suportada neste momento",
 	"wikibase-client-data-bridge-unsupported-datatype-error-body": "$1 tem o tipo de dados $2 em {{WBREPONAME}}. A edição deste tipo de dados não é suportada neste momento.",
 	"wikibase-client-data-bridge-deprecated-statement-error-head": "A edição do valor de $1 não é suportada neste momento",
+	"wikibase-client-data-bridge-deprecated-statement-error-body": "O valor da propriedade $1 foi <em>descontinuado</em> em {{WBREPONAME}}. Neste momento a edição de valores <em>descontinuados</em> não é suportada.",
+	"wikibase-client-data-bridge-ambiguous-statement-error-head": "Neste momento, a edição de vários valores não é suportada",
+	"wikibase-client-data-bridge-ambiguous-statement-error-body": "Neste momento, a propriedade $1 não pode ser editada porque contém mais de um valor.",
+	"wikibase-client-data-bridge-somevalue-error-head": "Neste momento, a edição do valor da propriedade $1 não é suportada",
+	"wikibase-client-data-bridge-somevalue-error-body": "A propriedade $1 está marcada como tendo <i>valor desconhecido</i> em {{WBREPONAME}}. Neste momento, a edição de valores marcados <i>valor desconhecido</i> não é possível.",
+	"wikibase-client-data-bridge-novalue-error-head": "Neste momento, a edição do valor da propriedade $1 não é suportada",
+	"wikibase-client-data-bridge-novalue-error-body": "A propriedade $1 está marcada como <i>sem valor</i> em {{WBREPONAME}}. Neste momento, a edição de valores marcados <i>sem valor</i> não é possível.",
 	"wikibase-client-data-bridge-saving-error-heading": "Não foi possível gravar as alterações",
-	"wikibase-client-data-bridge-error-go-back": "Voltar"
+	"wikibase-client-data-bridge-saving-error-message": "Não foi possível gravar as suas alterações devido a um erro. Tente gravar novamente, por favor.",
+	"wikibase-client-data-bridge-edit-conflict-error-heading": "Conflito de edições detetado",
+	"wikibase-client-data-bridge-edit-conflict-error-message": "Outro utilizador acaba de editar este valor e publicar as alterações. As suas mudanças não podem ser aplicadas. Refresque a página para obter o novo valor, por favor.",
+	"wikibase-client-data-bridge-unknown-error-heading": "Ocorreu um problema",
+	"wikibase-client-data-bridge-unknown-error-message": "Ocorreu um erro e o valor selecionado não pode ser editado neste momento. Tente recarregar, por favor.",
+	"wikibase-client-data-bridge-error-report": "<p>Se o erro persistir [$1 reporte este problema], por favor, incluindo as seguintes informações:</p>\n<ul>\n<li>$2</li>\n<li>$3 de $4</li>\n<li>Código do erro: $5</li>\n</ul>",
+	"wikibase-client-data-bridge-error-reload-bridge": "Recarregar",
+	"wikibase-client-data-bridge-error-reload-page": "Recarregar a página",
+	"wikibase-client-data-bridge-error-go-back": "Voltar",
+	"wikibase-client-data-bridge-error-retry-save": "Voltar a tentar gravar"
 }
