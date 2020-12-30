@@ -186,5 +186,16 @@
 	"wikibase-client-data-bridge-error-reload-bridge": "Recarregar",
 	"wikibase-client-data-bridge-error-reload-page": "Recarregar a página",
 	"wikibase-client-data-bridge-error-go-back": "Voltar",
-	"wikibase-client-data-bridge-error-retry-save": "Voltar a tentar gravar"
+	"wikibase-client-data-bridge-error-retry-save": "Voltar a tentar gravar",
+	"wikibase-client-data-bridge-login-warning": "Depois de iniciar sessão, <strong>feche este separador e volte ao separador original, por favor,</strong> para voltar a tentar gravar.",
+	"wikibase-client-data-bridge-reference-note": "A edição de referências será possível em {{WBREPONAME}} depois de gravar",
+	"wikibase-client-data-bridge-thank-you-head": "Agradecemos a sua edição!",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-body": "Pode editar referências para esta propriedade em {{WBREPONAME}} clicando no botão abaixo.",
+	"wikibase-client-data-bridge-thank-you-edit-reference-on-repo-button": "Editar referência em {{WBREPONAME}}",
+	"wikibase-client-data-bridge-saving-error-assertuser-heading": "Não tem sessão iniciada",
+	"wikibase-client-data-bridge-saving-error-assertuser-message": "Pode publicar as suas mudanças sem iniciar uma sessão. Neste caso, o seu endereço IP será registado no historial de edições da página. Também pode voltar a entrar e tentar publicar outra vez.",
+	"wikibase-client-data-bridge-saving-error-assertuser-publish": "Publicar sem iniciar sessão",
+	"wikibase-client-data-bridge-saving-error-assertuser-save": "Gravar sem iniciar sessão",
+	"wikibase-client-data-bridge-saving-error-assertuser-login": "Entrar (abre num separador novo)",
+	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Continuar a editar"
 }
