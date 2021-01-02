@@ -9,7 +9,6 @@ use ApiQuery;
 use Exception;
 use FauxRequest;
 use MediaWiki\Languages\LanguageNameUtils;
-use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 use RequestContext;
 use Wikibase\Lib\StaticContentLanguages;
@@ -57,7 +56,7 @@ class MetaContentLanguagesTest extends TestCase {
 			'wbcontentlanguages'
 		);
 
-		$this->expectException( Warning::class );
+		$this->expectWarning();
 		$api->execute();
 	}
 

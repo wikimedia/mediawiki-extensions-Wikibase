@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Tests\FederatedProperties;
 
 use MediaWiki\Revision\RevisionRecord;
-use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 use Wikibase\DataAccess\PrefetchingTermLookup;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -58,7 +57,7 @@ class SummaryParsingPrefetchHelperTest extends TestCase {
 			->method( 'prefetchTerms' )
 			->willThrowException( new ApiRequestException( 'oh no!' ) );
 
-		$this->expectException( Warning::class );
+		$this->expectWarning();
 		$helper->prefetchFederatedProperties( $rows, [ 'en' ], [ TermTypes::TYPE_LABEL ] );
 	}
 
