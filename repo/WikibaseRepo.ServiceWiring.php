@@ -4,13 +4,18 @@ declare( strict_types = 1 );
 
 use MediaWiki\MediaWikiServices;
 use ValueParsers\NullParser;
+use Wikibase\DataAccess\EntitySourceDefinitions;
+use Wikibase\DataAccess\EntitySourceDefinitionsConfigParser;
 use Wikibase\DataModel\Entity\DispatchingEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Modules\PropertyValueExpertsModule;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\WikibaseSettings;
+use Wikibase\Repo\EntitySourceDefinitionsLegacyRepoSettingsParser;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
 use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -44,6 +49,33 @@ return [
 		);
 	},
 
+	'WikibaseRepo.EntitySourceDefinitions' => function ( MediaWikiServices $services ): EntitySourceDefinitions {
+		$settings = WikibaseRepo::getSettings( $services );
+		$entityTypeDefinitions = WikibaseRepo::getEntityTypeDefinitions( $services );
+
+		if ( $settings->hasSetting( 'entitySources' ) && !empty( $settings->getSetting( 'entitySources' ) ) ) {
+			$configParser = new EntitySourceDefinitionsConfigParser();
+
+			return $configParser->newDefinitionsFromConfigArray(
+				$settings->getSetting( 'entitySources' ),
+				$entityTypeDefinitions
+			);
+		}
+
+		$parser = new EntitySourceDefinitionsLegacyRepoSettingsParser();
+
+		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
+
+			return $configParser->initializeDefaults(
+				$parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
+				$entityTypeDefinitions
+			);
+		}
+
+		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
+	},
+
 	'WikibaseRepo.EntityTypeDefinitions' => function ( MediaWikiServices $services ): EntityTypeDefinitions {
 		$baseEntityTypes = require __DIR__ . '/../lib/WikibaseLib.entitytypes.php';
 		$repoEntityTypes = require __DIR__ . '/WikibaseRepo.entitytypes.php';
@@ -57,6 +89,10 @@ return [
 
 	'WikibaseRepo.PropertyValueExpertsModule' => function ( MediaWikiServices $services ): PropertyValueExpertsModule {
 		return new PropertyValueExpertsModule( WikibaseRepo::getDataTypeDefinitions( $services ) );
+	},
+
+	'WikibaseRepo.Settings' => function ( MediaWikiServices $services ): SettingsArray {
+		return WikibaseSettings::getRepoSettings();
 	},
 
 	'WikibaseRepo.ValueParserFactory' => function ( MediaWikiServices $services ): ValueParserFactory {

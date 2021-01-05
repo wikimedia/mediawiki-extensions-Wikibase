@@ -66,7 +66,7 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 	 * @return WikibaseRepo
 	 */
 	protected function getWikibaseRepo( SettingsArray $settings = null ) {
-		$repoSettings = WikibaseRepo::getDefaultInstance()->getSettings()->getArrayCopy();
+		$repoSettings = WikibaseRepo::getSettings()->getArrayCopy();
 
 		if ( $settings ) {
 			$repoSettings = array_merge( $repoSettings, $settings->getArrayCopy() );
@@ -81,21 +81,22 @@ abstract class EntityHandlerTestCase extends MediaWikiIntegrationTestCase {
 			$namespaceId += 100;
 		}
 
-		return new WikibaseRepo(
-			new SettingsArray( $repoSettings ),
-			new EntitySourceDefinitions(
-				[ new EntitySource(
-					'test',
-					'testdb',
-					$entityNamespaceIdsAndSlots,
-					'',
-					'',
-					'',
-					''
-				) ],
-				$entityTypeDefinitions
-			)
-		);
+		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( $repoSettings ) );
+
+		$this->setService( 'WikibaseRepo.EntitySourceDefinitions', new EntitySourceDefinitions(
+			[ new EntitySource(
+				'test',
+				'testdb',
+				$entityNamespaceIdsAndSlots,
+				'',
+				'',
+				'',
+				''
+			) ],
+			$entityTypeDefinitions
+		) );
+
+		return new WikibaseRepo();
 	}
 
 	/**
