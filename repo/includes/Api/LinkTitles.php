@@ -12,6 +12,7 @@ use Status;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\SiteLinkList;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
@@ -79,14 +80,17 @@ class LinkTitles extends ApiBase {
 		$this->entitySavingHelper = $entitySavingHelperInstantiator( $this );
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		SettingsArray $repoSettings
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		return new self(
@@ -94,7 +98,7 @@ class LinkTitles extends ApiBase {
 			$moduleName,
 			$siteLinkTargetProvider,
 			$apiHelperFactory->getErrorReporter( $mainModule ),
-			$settings->getSetting( 'siteLinkGroups' ),
+			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );

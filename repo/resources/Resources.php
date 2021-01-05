@@ -190,7 +190,7 @@ return call_user_func( function() {
 				[
 					"name" => "repo/resources/config.json",
 					"callback" => function () {
-						$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+						$settings = WikibaseRepo::getSettings();
 						return [
 							'geoShapeStorageApiEndpoint' => $settings->getSetting( 'geoShapeStorageApiEndpointUrl' )
 						];
@@ -314,7 +314,7 @@ return call_user_func( function() {
 						'name' => 'federatedPropertiesHostWikibase.json',
 						'callback' => function () {
 							return parse_url(
-								WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
+								WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' ),
 								PHP_URL_HOST
 							);
 						},

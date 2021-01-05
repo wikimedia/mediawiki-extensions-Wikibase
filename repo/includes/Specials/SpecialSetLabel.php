@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Summary;
 use Wikibase\Repo\ChangeOp\ChangeOps;
@@ -39,14 +40,15 @@ class SpecialSetLabel extends SpecialModifyTerm {
 		);
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $repoSettings
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		$settings = $wikibaseRepo->getSettings();
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' )
+			$repoSettings->getSetting( 'dataRightsUrl' ),
+			$repoSettings->getSetting( 'dataRightsText' )
 		);
 
 		return new self(

@@ -3,7 +3,7 @@
 namespace Wikibase\Repo\Tests\Api;
 
 use ApiTestCase;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Lib\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\Api\AvailableBadges
@@ -24,22 +24,13 @@ class AvailableBadgesTest extends ApiTestCase {
 		'Q999' => ''
 	];
 
-	private static $oldBadgeItems;
-
 	protected function setUp(): void {
 		parent::setUp();
 
 		// Allow some badges for testing
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		self::$oldBadgeItems = $settings->getSetting( 'badgeItems' );
-		$settings->setSetting( 'badgeItems', self::$badgeItems );
-	}
-
-	protected function tearDown(): void {
-		parent::tearDown();
-
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'badgeItems', self::$oldBadgeItems );
+		$this->setService( 'WikibaseRepo.Settings', new SettingsArray( [
+			'badgeItems' => self::$badgeItems,
+		] ) );
 	}
 
 	public function testExecute() {

@@ -41,7 +41,7 @@ class SearchEntitiesTest extends \PHPUnit\Framework\TestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( 'federatedPropertiesEnabled', false );
 	}
 

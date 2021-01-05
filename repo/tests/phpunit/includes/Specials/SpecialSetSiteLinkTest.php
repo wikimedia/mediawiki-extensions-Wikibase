@@ -66,7 +66,7 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 	protected function newSpecialPage() {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$siteLookup = $wikibaseRepo->getSiteLookup();
-		$settings = $wikibaseRepo->getSettings();
+		$settings = WikibaseRepo::getSettings();
 
 		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
@@ -107,13 +107,13 @@ class SpecialSetSiteLinkTest extends SpecialPageTestBase {
 			$this->addBadgeMatcher();
 		}
 
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		self::$oldBadgeItemsSetting = $settings->getSetting( 'badgeItems' );
 		$settings->setSetting( 'badgeItems', [ self::$badgeId => '' ] );
 	}
 
 	protected function tearDown(): void {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( 'badgeItems', self::$oldBadgeItemsSetting );
 
 		parent::tearDown();

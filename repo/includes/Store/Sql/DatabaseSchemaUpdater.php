@@ -230,7 +230,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 	 */
 	public static function rebuildPropertyInfo( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
 		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
@@ -289,7 +289,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	public static function rebuildPropertyTerms( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$propertySource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'property' );
 		if ( $propertySource->getSourceName() !== $localEntitySourceName ) {
@@ -328,7 +328,7 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 
 	public static function rebuildItemTerms( DatabaseUpdater $updater ) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$localEntitySourceName = $wikibaseRepo->getSettings()->getSetting( 'localEntitySourceName' );
+		$localEntitySourceName = WikibaseRepo::getSettings()->getSetting( 'localEntitySourceName' );
 		$itemSource = WikibaseRepo::getEntitySourceDefinitions()
 			->getSourceForEntityType( 'item' );
 		if ( $itemSource->getSourceName() !== $localEntitySourceName ) {

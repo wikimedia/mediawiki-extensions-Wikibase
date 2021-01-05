@@ -604,7 +604,7 @@ class MediawikiEditEntity implements EditEntity {
 	 * @return bool
 	 */
 	private function entityTypeIsReadOnly( EntityDocument $entity ) {
-		$readOnlyTypes = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'readOnlyEntityTypes' );
+		$readOnlyTypes = WikibaseRepo::getSettings()->getSetting( 'readOnlyEntityTypes' );
 
 		return in_array( $entity->getType(), $readOnlyTypes );
 	}

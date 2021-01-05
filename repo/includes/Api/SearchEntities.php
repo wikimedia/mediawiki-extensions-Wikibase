@@ -164,7 +164,7 @@ class SearchEntities extends ApiBase {
 		 * This is deliberately not tested and thus not injected as for federated properties we "don't care much" and for default Wikibase
 		 * this is already covered by the SearchEntitiesTest.
 		 */
-		if ( !WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+		if ( !WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$entry['repository'] = $this->getRepositoryOrEntitySourceName( $entityId );
 		}
 

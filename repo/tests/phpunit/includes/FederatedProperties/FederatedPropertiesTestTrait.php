@@ -32,7 +32,7 @@ trait FederatedPropertiesTestTrait {
 	}
 
 	private function setWbSettingInSettings( string $name, $value ) {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$settings->setSetting( $name, $value );
 	}
 
@@ -50,7 +50,7 @@ trait FederatedPropertiesTestTrait {
 	}
 
 	public function testFederatedPropertiesEnabled() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
+		$settings = WikibaseRepo::getSettings();
 		$this->assertSame( true, $settings->getSetting( 'federatedPropertiesEnabled' ) );
 	}
 

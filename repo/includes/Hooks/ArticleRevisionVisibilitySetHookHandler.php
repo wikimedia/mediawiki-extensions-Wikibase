@@ -13,6 +13,7 @@ use MediaWiki\Revision\RevisionRecord;
 use Title;
 use TitleFactory;
 use Wikibase\Lib\Changes\RepoRevisionIdentifier;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -90,7 +91,11 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 		$this->jobBatchSize = $jobBatchSize;
 	}
 
-	public static function factory( RevisionLookup $revisionLookup, TitleFactory $titleFactory ) {
+	public static function factory(
+		RevisionLookup $revisionLookup,
+		TitleFactory $titleFactory,
+		SettingsArray $repoSettings
+	) {
 		$wbRepo = WikibaseRepo::getDefaultInstance();
 
 		return new self(
@@ -98,10 +103,10 @@ class ArticleRevisionVisibilitySetHookHandler implements ArticleRevisionVisibili
 			$wbRepo->getEntityContentFactory(),
 			$wbRepo->getLocalEntityNamespaceLookup(),
 			$titleFactory,
-			$wbRepo->getSettings()->getSetting( 'localClientDatabases' ),
+			$repoSettings->getSetting( 'localClientDatabases' ),
 			'JobQueueGroup::singleton',
-			$wbRepo->getSettings()->getSetting( 'changeVisibilityNotificationClientRCMaxAge' ),
-			$wbRepo->getSettings()->getSetting( 'changeVisibilityNotificationJobBatchSize' )
+			$repoSettings->getSetting( 'changeVisibilityNotificationClientRCMaxAge' ),
+			$repoSettings->getSetting( 'changeVisibilityNotificationJobBatchSize' )
 		);
 	}
 

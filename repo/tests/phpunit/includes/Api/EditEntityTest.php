@@ -78,7 +78,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			self::$idMap['%Q32%'] = $badge->getId()->getSerialization();
 		}
 
-		$wikibaseRepo->getSettings()->setSetting( 'badgeItems', [
+		WikibaseRepo::getSettings()->setSetting( 'badgeItems', [
 			self::$idMap['%Q42%'] => '',
 			self::$idMap['%Q149%'] => '',
 			'Q99999' => '', // Just in case we have a wrong config
@@ -1270,11 +1270,11 @@ class EditEntityTest extends WikibaseApiTestCase {
 	}
 
 	public function testGivenReadOnlyType_errorIsShownAndNoEditHappened() {
-		$oldSetting = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+		$oldSetting = WikibaseRepo::getSettings()->getSetting(
 			'readOnlyEntityTypes'
 		);
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+		WikibaseRepo::getSettings()->setSetting(
 			'readOnlyEntityTypes',
 			[ 'item' ]
 		);
@@ -1299,7 +1299,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 			);
 		}
 
-		WikibaseRepo::getDefaultInstance()->getSettings()->setSetting(
+		WikibaseRepo::getSettings()->setSetting(
 			'readOnlyEntityTypes',
 			$oldSetting
 		);

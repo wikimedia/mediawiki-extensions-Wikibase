@@ -11,6 +11,7 @@ use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
 use Wikibase\Lib\Summary;
@@ -121,21 +122,22 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 	}
 
-	public static function factory(): self {
+	public static function factory(
+		SettingsArray $repoSettings
+	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$siteLookup = $wikibaseRepo->getSiteLookup();
-		$settings = $wikibaseRepo->getSettings();
 
 		$siteLinkChangeOpFactory = $wikibaseRepo->getChangeOpFactoryProvider()->getSiteLinkChangeOpFactory();
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$siteLookup,
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		$copyrightView = new SpecialPageCopyrightView(
 			new CopyrightMessageBuilder(),
-			$settings->getSetting( 'dataRightsUrl' ),
-			$settings->getSetting( 'dataRightsText' )
+			$repoSettings->getSetting( 'dataRightsUrl' ),
+			$repoSettings->getSetting( 'dataRightsText' )
 		);
 
 		$labelDescriptionLookupFactory = $wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory();
@@ -146,8 +148,8 @@ class SpecialSetSiteLink extends SpecialModifyEntity {
 			$wikibaseRepo->newEditEntityFactory(),
 			$siteLookup,
 			$siteLinkTargetProvider,
-			$settings->getSetting( 'siteLinkGroups' ),
-			$settings->getSetting( 'badgeItems' ),
+			$repoSettings->getSetting( 'siteLinkGroups' ),
+			$repoSettings->getSetting( 'badgeItems' ),
 			$labelDescriptionLookupFactory,
 			$siteLinkChangeOpFactory
 		);

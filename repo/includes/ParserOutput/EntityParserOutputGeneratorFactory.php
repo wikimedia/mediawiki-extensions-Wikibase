@@ -177,7 +177,7 @@ class EntityParserOutputGeneratorFactory {
 		);
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+		if ( WikibaseRepo::getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$pog = new FederatedPropertiesEntityParserOutputGenerator(
 				$pog,
 				$userLanguage,

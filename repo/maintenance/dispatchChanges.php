@@ -231,7 +231,8 @@ class DispatchChanges extends Maintenance {
 		}
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$defaultMaxTime = $wikibaseRepo->getSettings()->getSetting( 'dispatchMaxTime' );
+		$repoSettings = WikibaseRepo::getSettings();
+		$defaultMaxTime = $repoSettings->getSetting( 'dispatchMaxTime' );
 
 		if ( $defaultMaxTime == 0 ) {
 			$this->log( 'dispatchMaxTime 0, so exiting early and not performing dispatch operations.' );
@@ -240,11 +241,11 @@ class DispatchChanges extends Maintenance {
 
 		$maxTime = (int)$this->getOption( 'max-time', $defaultMaxTime );
 		$maxPasses = (int)$this->getOption( 'max-passes', $maxTime < PHP_INT_MAX ? PHP_INT_MAX : 1 );
-		$delay = (int)$this->getOption( 'idle-delay', $wikibaseRepo->getSettings()->getSetting( 'dispatchIdleDelay' ) );
+		$delay = (int)$this->getOption( 'idle-delay', $repoSettings->getSetting( 'dispatchIdleDelay' ) );
 		$selectedClients = $this->getOption( 'client' );
 
 		$clientWikis = $this->getClientWikis(
-			$wikibaseRepo->getSettings()->getSetting( 'localClientDatabases' )
+			$repoSettings->getSetting( 'localClientDatabases' )
 		);
 
 		if ( empty( $clientWikis ) ) {
@@ -260,7 +261,7 @@ class DispatchChanges extends Maintenance {
 		$dispatcher = $this->newChangeDispatcher(
 			$clientWikis,
 			$wikibaseRepo->getStore()->getEntityChangeLookup(),
-			$wikibaseRepo->getSettings(),
+			$repoSettings,
 			$wikibaseRepo->getLogger()
 		);
 

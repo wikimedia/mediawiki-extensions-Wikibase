@@ -5,6 +5,7 @@ namespace Wikibase\Repo\Specials;
 use HtmlCacheUpdater;
 use HttpError;
 use Wikibase\DataModel\Entity\EntityIdParser;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
@@ -49,7 +50,8 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 	public static function factory(
 		HtmlCacheUpdater $htmlCacheUpdater,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		SettingsArray $repoSettings
 	): self {
 		global $wgUseCdn, $wgApiFrameOptions;
 
@@ -73,7 +75,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$wikibaseRepo->getRdfVocabulary()
 		);
 
-		$maxAge = $wikibaseRepo->getSettings()->getSetting( 'dataCdnMaxAge' );
+		$maxAge = $repoSettings->getSetting( 'dataCdnMaxAge' );
 		$formats = $entityDataFormatProvider->getAllowedFormats();
 
 		$defaultFormat = empty( $formats ) ? 'html' : $formats[0];
@@ -87,7 +89,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 			$serializationService,
 			$entityDataFormatProvider,
 			$wikibaseRepo->getLogger(),
-			$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
+			$repoSettings->getSetting( 'entityTypesWithoutRdfOutput' ),
 			$defaultFormat,
 			$maxAge,
 			$wgUseCdn,

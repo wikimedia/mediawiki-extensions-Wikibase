@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace Wikibase\Repo\Specials;
 
 use Wikibase\Lib\DataTypeFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\FederatedProperties\SpecialListFederatedProperties;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,13 +24,14 @@ class SpecialListPropertiesDispatchingFactory {
 	 * @throws \MWException
 	 */
 	public static function factory(
-		DataTypeFactory $dataTypeFactory
+		DataTypeFactory $dataTypeFactory,
+		SettingsArray $repoSettings
 	) {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 
-		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+		if ( $repoSettings->getSetting( 'federatedPropertiesEnabled' ) ) {
 			return new SpecialListFederatedProperties(
-				$wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesSourceScriptUrl' )
+				$repoSettings->getSetting( 'federatedPropertiesSourceScriptUrl' )
 			);
 		}
 

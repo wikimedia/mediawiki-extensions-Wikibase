@@ -60,7 +60,7 @@ class RepoHooksTest extends MediaWikiIntegrationTestCase {
 	 * @return SettingsArray
 	 */
 	private function getSettings() {
-		return WikibaseRepo::getDefaultInstance()->getSettings();
+		return WikibaseRepo::getSettings();
 	}
 
 	public function onBeforePageDisplayProviderMobile() {

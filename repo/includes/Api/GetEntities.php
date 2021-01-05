@@ -12,6 +12,7 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Services\Entity\EntityPrefetcher;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\DivergingEntityIdException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -128,15 +129,15 @@ class GetEntities extends ApiBase {
 		ApiMain $apiMain,
 		string $moduleName,
 		IBufferingStatsdDataFactory $stats,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		SettingsArray $repoSettings
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$settings = $wikibaseRepo->getSettings();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $apiMain->getContext() );
 
 		$siteLinkTargetProvider = new SiteLinkTargetProvider(
 			$wikibaseRepo->getSiteLookup(),
-			$settings->getSetting( 'specialSiteLinkGroups' )
+			$repoSettings->getSetting( 'specialSiteLinkGroups' )
 		);
 
 		return new self(
@@ -146,7 +147,7 @@ class GetEntities extends ApiBase {
 			$wikibaseRepo->getLanguageFallbackChainFactory(),
 			$siteLinkTargetProvider,
 			$wikibaseRepo->getStore()->getEntityPrefetcher(),
-			$settings->getSetting( 'siteLinkGroups' ),
+			$repoSettings->getSetting( 'siteLinkGroups' ),
 			$apiHelperFactory->getErrorReporter( $apiMain ),
 			$apiHelperFactory->getResultBuilder( $apiMain ),
 			$wikibaseRepo->getEntityRevisionLookup(),

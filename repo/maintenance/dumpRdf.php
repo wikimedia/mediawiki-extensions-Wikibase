@@ -116,7 +116,7 @@ class DumpRdf extends DumpEntities {
 			$this->setServices(
 				$sqlEntityIdPagerFactory,
 				$wikibaseRepo->getEnabledEntityTypes(),
-				$wikibaseRepo->getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
+				WikibaseRepo::getSettings()->getSetting( 'entityTypesWithoutRdfOutput' ),
 				$wikibaseRepo->getStore()->getEntityPrefetcher(),
 				$wikibaseRepo->getPropertyDataTypeLookup(),
 				$wikibaseRepo->getValueSnakRdfBuilderFactory(),
