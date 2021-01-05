@@ -7,7 +7,7 @@ use Wikibase\Lib\TermIndexEntry;
 /**
  * Service interface for detecting label conflicts.
  *
- * @depreacted Conflict detection for new term storage is done in ChangeOps
+ * @deprecated Conflict detection for new term storage is done in ChangeOps
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -20,7 +20,7 @@ interface LabelConflictFinder {
 	 * If $aliases is not null (but possibly empty), conflicts between aliases and labels
 	 * are also considered.
 	 *
-	 * @depreacted Conflict detection for new term storage is done in ChangeOps
+	 * @deprecated Conflict detection for new term storage is done in ChangeOps
 	 *
 	 * @note implementations must return *some* conflicts if there are *any* conflicts,
 	 * but are not required to return *all* conflicts.
@@ -41,7 +41,7 @@ interface LabelConflictFinder {
 	 * same entity. From this it follows that labels with no corresponding description
 	 * cannot contribute to a conflicts.
 	 *
-	 * @depreacted Conflict detection for new term storage is done in ChangeOps
+	 * @deprecated Conflict detection for new term storage is done in ChangeOps
 	 *
 	 * @note implementations must return *some* conflicts if there are *any* conflicts,
 	 * but are not required to return *all* conflicts.
