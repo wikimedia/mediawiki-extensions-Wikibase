@@ -53,7 +53,7 @@ class WikibasePingback {
 	/**
 	 * @var int
 	 */
-	public const HEARBEAT_TIMEOUT = 60 * 60 * 24 * 30;
+	public const HEARTBEAT_TIMEOUT = 60 * 60 * 24 * 30;
 
 	/**
 	 * @var string
@@ -137,7 +137,7 @@ class WikibasePingback {
 			return false;
 		}
 		// send heartbeat ping if last ping was over a month ago
-		if ( MWTimestamp::time() - (int)$timestamp >= self::HEARBEAT_TIMEOUT ) {
+		if ( MWTimestamp::time() - (int)$timestamp >= self::HEARTBEAT_TIMEOUT ) {
 			return false;
 		}
 		return true;
