@@ -31,8 +31,7 @@ class NormalizedTermStorageMapping {
 	/**
 	 * Returns the name of the entity reference column
 	 *
-	 * @example wbit_item_id / wbpt_property_id
-	 * @return string
+	 * @return string e.g. wbit_item_id / wbpt_property_id
 	 */
 	public function getEntityIdColumn(): string {
 		return $this->tablePrefix . '_' . $this->entityType . '_id';
@@ -41,8 +40,7 @@ class NormalizedTermStorageMapping {
 	/**
 	 * Returns the name of the id column
 	 *
-	 * @example wbit_id / wbpt_id
-	 * @return string
+	 * @return string e.g. wbit_id / wbpt_id
 	 */
 	public function getRowIdColumn(): string {
 		return $this->tablePrefix . '_id';
@@ -51,8 +49,7 @@ class NormalizedTermStorageMapping {
 	/**
 	 * Returns the name of the <entity>_term_in_lang id column
 	 *
-	 * @example wbit_term_in_lang_id / wbpt_term_in_lang_id
-	 * @return string
+	 * @return string e.g. wbit_term_in_lang_id / wbpt_term_in_lang_id
 	 */
 	public function getTermInLangIdColumn(): string {
 		return $this->tablePrefix . '_term_in_lang_id';
