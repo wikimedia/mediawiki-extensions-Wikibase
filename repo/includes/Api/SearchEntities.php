@@ -90,7 +90,11 @@ class SearchEntities extends ApiBase {
 		$this->errorReporter = $errorReporter;
 	}
 
-	public static function factory( ApiMain $mainModule, string $moduleName ): self {
+	public static function factory(
+		ApiMain $mainModule,
+		string $moduleName,
+		EntitySourceDefinitions $entitySourceDefinitions
+	): self {
 		$repo = WikibaseRepo::getDefaultInstance();
 		$entitySearchHelper = new TypeDispatchingEntitySearchHelper(
 			$repo->getEntitySearchHelperCallbacks(),
@@ -104,7 +108,7 @@ class SearchEntities extends ApiBase {
 			$entitySearchHelper,
 			null,
 			$repo->getTermsLanguages(),
-			$repo->getEntitySourceDefinitions(),
+			$entitySourceDefinitions,
 			$repo->getEntityTitleTextLookup(),
 			$repo->getEntityUrlLookup(),
 			$repo->getEntityArticleIdLookup(),

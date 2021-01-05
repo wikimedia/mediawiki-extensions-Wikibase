@@ -198,7 +198,7 @@ final class RepoHooks {
 			return false;
 		}
 
-		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType(
+		$entitySource = WikibaseRepo::getEntitySourceDefinitions()->getSourceForEntityType(
 			$entityType
 		);
 		if ( $entitySource === null ) {
@@ -813,7 +813,7 @@ final class RepoHooks {
 		}
 
 		// If the entity type is not from the local source, don't check anything else
-		$entitySource = $wikibaseRepo->getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
+		$entitySource = WikibaseRepo::getEntitySourceDefinitions()->getSourceForEntityType( $expectedEntityType );
 		if ( $entitySource->getSourceName() !== $wikibaseRepo->getLocalEntitySource()->getSourceName() ) {
 			return true;
 		}
