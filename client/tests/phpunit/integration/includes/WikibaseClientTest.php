@@ -193,18 +193,12 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	public function testGetLangLinkHandlerFactoryReturnType() {
 		$settings = clone WikibaseClient::getDefaultInstance()->getSettings();
 
+		$settings->setSetting( 'itemAndPropertySourceName', 'test' );
 		$settings->setSetting( 'siteGroup', 'wikipedia' );
 		$settings->setSetting( 'siteGlobalID', 'enwiki' );
 		$settings->setSetting( 'languageLinkSiteGroup', 'wikipedia' );
 
-		$entityTypeDefinitions = new EntityTypeDefinitions( [] );
-		$wikibaseClient = new WikibaseClient(
-			$settings,
-			new DataTypeDefinitions( [] ),
-			$entityTypeDefinitions,
-			$this->getSiteLookup(),
-			$this->getEntitySourceDefinitions()
-		);
+		$wikibaseClient = $this->getWikibaseClient( $settings );
 
 		$factory = $wikibaseClient->getLangLinkHandlerFactory();
 		$this->assertInstanceOf( LangLinkHandlerFactory::class, $factory );
@@ -495,6 +489,8 @@ class WikibaseClientTest extends MediaWikiIntegrationTestCase {
 	private function getWikibaseClient( SettingsArray $settings = null ) {
 		if ( $settings === null ) {
 			$settings = WikibaseClient::getDefaultInstance()->getSettings();
+			// Don't mutate settings of default instance
+			$settings = clone $settings;
 			$settings->setSetting( 'itemAndPropertySourceName', 'test' );
 		}
 		return new WikibaseClient(
