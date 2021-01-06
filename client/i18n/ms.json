@@ -26,7 +26,7 @@
 	"wikibase-comment-sitelink-change": "Pautan bahasa diubah daripada $1 kepada $2",
 	"wikibase-comment-sitelink-remove": "Pautan bahasa dibuang: $1",
 	"wikibase-comment-multi": "$1 perubahan",
-	"wikibase-dataitem": "Item {{WBREPONAME}}",
+	"wikibase-dataitem": "Butir {{WBREPONAME}}",
 	"wikibase-editlinks": "Sunting pautan",
 	"wikibase-editlinkstitle": "Sunting pautan antara bahasa",
 	"wikibase-addlinkstitle": "Tambah pautan antara bahasa",

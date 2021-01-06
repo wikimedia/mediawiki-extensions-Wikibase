@@ -142,7 +142,7 @@
 	"wikibase-newproperty-datatype": "Jenis data:",
 	"wikibase-newproperty-invalid-datatype": "Jenis data yang dinyatakan tidak sah",
 	"special-newitem": "Cipta perkara baru",
-	"wikibase-newitem-summary": "Pastikan sama ada [[Special:Search|perkara itu sudah wujud]] atauy tidak!<br />Anda harus membuat [[{{int:Wikibase-label-helppage}}|label]] dan [[{{int:Wikibase-description-helppage}}|keterangan]] untuk semua perkara baru.",
+	"wikibase-newitem-summary": "Pastikan [[Special:Search|periksa jika butir tersebut sudah wujud]]!<br />Anda patut cipta [[{{int:Wikibase-label-helppage}}|label]] dan [[{{int:Wikibase-description-helppage}}|keterangan]] untuk semua butir baru.",
 	"wikibase-newitem-fieldset": "Cipta perkara baru",
 	"wikibase-newitem-site": "Tapak halaman terpaut pertama",
 	"wikibase-newitem-page": "Nama halaman terpaut pertama",
