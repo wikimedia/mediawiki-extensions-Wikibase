@@ -44,8 +44,9 @@ This includes modifications such as:
 ## Top Level Structure {#json_structure}
 
 Different entities have different top level structures and are made up of different components.
+Entity types provided by extensions may have an entirely different structure.
 
-The example below is for an Item. Properties will not include sitelinks. Custom entity types may have an entirely different structure.
+The example below is for an Item.
 
 ```json
 {
@@ -61,12 +62,31 @@ The example below is for an Item. Properties will not include sitelinks. Custom 
 }
 ```
 
-The JSON representation consists of the following fields in the top level structure:
+Properties will not include sitelinks, but will include a datatype.
+
+
+```json
+{
+  "id": "P30",
+  "type": "property",
+  "datatype": "wikibase-item"
+  "labels": {},
+  "descriptions": {},
+  "aliases": {},
+  "claims": {},
+  "lastrevid": 195301614,
+  "modified": "2020-02-10T12:42:02Z"
+}
+```
+
+These JSON representations consist of the following fields in the top level structure:
 
 * id
   * The canonical ID of the entity.
 * type
   * The entity type identifier. “item” for data items, and “property” for properties.
+* datatype
+  * The datatype to be used with the Property (Properties only)
 * labels
   * Contains the labels in different languages, see @ref #json_fingerprint.
 * descriptions
@@ -76,7 +96,7 @@ The JSON representation consists of the following fields in the top level struct
 * claims
   * Contains any number of statements, groups by property. Note: WikibaseMediaInfo uses the "statements" key instead. See @ref #json_statements.
 * sitelinks
-  * Contains sitelinks to pages on different sites describing the item, see @ref #json_sitelinks.
+  * Contains sitelinks to pages on different sites describing the item, see @ref #json_sitelinks (Items only).
 
 API modules currently handle the revision and date modified slightly differently using the fields below.
 
