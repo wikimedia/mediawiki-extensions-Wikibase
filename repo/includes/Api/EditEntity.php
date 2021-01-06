@@ -6,7 +6,6 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use ApiUsageException;
-use Deserializers\Deserializer;
 use Title;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -20,7 +19,6 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
-use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\LookupConstants;
 use Wikibase\Lib\Summary;
@@ -31,10 +29,7 @@ use Wikibase\Repo\ChangeOp\ChangeOpException;
 use Wikibase\Repo\ChangeOp\ChangeOpResult;
 use Wikibase\Repo\ChangeOp\Deserialization\ChangeOpDeserializationException;
 use Wikibase\Repo\ChangeOp\EntityChangeOpProvider;
-use Wikibase\Repo\ChangeOp\FingerprintChangeOpFactory;
 use Wikibase\Repo\ChangeOp\NonLanguageBoundChangesCounter;
-use Wikibase\Repo\ChangeOp\SiteLinkChangeOpFactory;
-use Wikibase\Repo\ChangeOp\StatementChangeOpFactory;
 use Wikibase\Repo\Store\Store;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -56,39 +51,14 @@ class EditEntity extends ModifyEntity {
 	private $termsLanguages;
 
 	/**
-	 * @var FingerprintChangeOpFactory
-	 */
-	private $termChangeOpFactory;
-
-	/**
-	 * @var StatementChangeOpFactory
-	 */
-	private $statementChangeOpFactory;
-
-	/**
-	 * @var SiteLinkChangeOpFactory
-	 */
-	private $siteLinkChangeOpFactory;
-
-	/**
 	 * @var EntityRevisionLookup
 	 */
 	private $revisionLookup;
 
 	/**
-	 * @var Deserializer
-	 */
-	private $statementDeserializer;
-
-	/**
 	 * @var EntityIdParser
 	 */
 	private $idParser;
-
-	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
 
 	/**
 	 * @var string[]
@@ -113,12 +83,7 @@ class EditEntity extends ModifyEntity {
 	 * @param ContentLanguages $termsLanguages
 	 * @param EntityRevisionLookup $revisionLookup
 	 * @param EntityIdParser $idParser
-	 * @param EntityFactory $entityFactory
-	 * @param Deserializer $statementDeserializer
 	 * @param string[] $propertyDataTypes
-	 * @param FingerprintChangeOpFactory $termChangeOpFactory
-	 * @param StatementChangeOpFactory $statementChangeOpFactory
-	 * @param SiteLinkChangeOpFactory $siteLinkChangeOpFactory
 	 * @param EntityChangeOpProvider $entityChangeOpProvider
 	 * @param EditSummaryHelper $editSummaryHelper
 	 * @param bool $federatedPropertiesEnabled
@@ -130,12 +95,7 @@ class EditEntity extends ModifyEntity {
 		ContentLanguages $termsLanguages,
 		EntityRevisionLookup $revisionLookup,
 		EntityIdParser $idParser,
-		EntityFactory $entityFactory,
-		Deserializer $statementDeserializer,
 		array $propertyDataTypes,
-		FingerprintChangeOpFactory $termChangeOpFactory,
-		StatementChangeOpFactory $statementChangeOpFactory,
-		SiteLinkChangeOpFactory $siteLinkChangeOpFactory,
 		EntityChangeOpProvider $entityChangeOpProvider,
 		EditSummaryHelper $editSummaryHelper,
 		bool $federatedPropertiesEnabled
@@ -145,13 +105,8 @@ class EditEntity extends ModifyEntity {
 		$this->termsLanguages = $termsLanguages;
 		$this->revisionLookup = $revisionLookup;
 		$this->idParser = $idParser;
-		$this->entityFactory = $entityFactory;
-		$this->statementDeserializer = $statementDeserializer;
 		$this->propertyDataTypes = $propertyDataTypes;
 
-		$this->termChangeOpFactory = $termChangeOpFactory;
-		$this->statementChangeOpFactory = $statementChangeOpFactory;
-		$this->siteLinkChangeOpFactory = $siteLinkChangeOpFactory;
 		$this->entityChangeOpProvider = $entityChangeOpProvider;
 		$this->editSummaryHelper = $editSummaryHelper;
 	}
@@ -163,19 +118,13 @@ class EditEntity extends ModifyEntity {
 		EntityIdParser $entityIdParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		return new self(
 			$mainModule,
 			$moduleName,
 			$wikibaseRepo->getTermsLanguages(),
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			$entityIdParser,
-			$wikibaseRepo->getEntityFactory(),
-			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			$dataTypeDefinitions->getTypeIds(),
-			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
-			$changeOpFactoryProvider->getStatementChangeOpFactory(),
-			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			$wikibaseRepo->getEntityChangeOpProvider(),
 			new EditSummaryHelper(
 				new ChangedLanguagesCollector(),

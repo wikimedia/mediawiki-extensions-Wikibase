@@ -118,19 +118,13 @@ class EditEntityClearChangeOpValidateIntegrationTest extends MediaWikiIntegratio
 		$request = new \FauxRequest( $params );
 
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-		$changeOpFactoryProvider = $wikibaseRepo->getChangeOpFactoryProvider();
 		return new EditEntity(
 			new \ApiMain( $request ),
 			'test',
 			$wikibaseRepo->getTermsLanguages(),
 			$wikibaseRepo->getEntityRevisionLookup( Store::LOOKUP_CACHING_DISABLED ),
 			WikibaseRepo::getEntityIdParser(),
-			$wikibaseRepo->getEntityFactory(),
-			$wikibaseRepo->getExternalFormatStatementDeserializer(),
 			WikibaseRepo::getDataTypeDefinitions()->getTypeIds(),
-			$changeOpFactoryProvider->getFingerprintChangeOpFactory(),
-			$changeOpFactoryProvider->getStatementChangeOpFactory(),
-			$changeOpFactoryProvider->getSiteLinkChangeOpFactory(),
 			$wikibaseRepo->getEntityChangeOpProvider(),
 			new EditSummaryHelper(
 				new ChangedLanguagesCollector(),
