@@ -6,7 +6,6 @@ use Comparable;
 use InvalidArgumentException;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\PropertyIdProvider;
-use Wikibase\DataModel\Reference;
 use Wikibase\DataModel\ReferenceList;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Snak\SnakList;
@@ -55,7 +54,7 @@ class Statement implements Comparable, PropertyIdProvider {
 	private $references;
 
 	/**
-	 * @var integer, element of the Statement::RANK_ enum
+	 * @var int element of the Statement::RANK_ enum
 	 */
 	private $rank = self::RANK_NORMAL;
 
