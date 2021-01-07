@@ -41,7 +41,7 @@
 		"data-values/number": ">=0.1 <0.11",
 		"data-values/time": "~1.0|~0.2",
 		"phpunit/phpunit": "~8.0",
-		"wikibase/wikibase-codesniffer": "~1.2.0"
+		"mediawiki/mediawiki-codesniffer": "33.0.0"
 	},
 	"suggest": {
 		"data-values/geo": "Needed for deserialization of geographical values",
