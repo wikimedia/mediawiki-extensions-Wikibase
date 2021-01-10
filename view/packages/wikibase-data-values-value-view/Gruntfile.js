@@ -96,10 +96,18 @@ module.exports = function ( grunt ) {
 				webpack: { mode: 'development' },
 				singleRun: true,
 				logLevel: 'DEBUG',
-				frameworks: [ 'qunit' ]
+				frameworks: [ 'qunit' ],
+				customLaunchers: {
+					ChromeCustom: {
+						base: 'ChromeHeadless',
+						// Chrome requires --no-sandbox in Docker/CI.
+						// Wikimedia CI images expose CHROMIUM_FLAGS which sets that.
+						flags: ( process.env.CHROMIUM_FLAGS || '' ).split( ' ' )
+					}
+				}
 			},
 			all: {
-				browsers: [ 'ChromeHeadless', 'FirefoxHeadless' ]
+				browsers: [ 'ChromeCustom', 'FirefoxHeadless' ]
 			}
 		}
 	} );
