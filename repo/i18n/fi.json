@@ -6,6 +6,7 @@
 			"Elseweyr",
 			"Harriv",
 			"Ladsgroup",
+			"Moj",
 			"Nedergard",
 			"Nike",
 			"Olli",
@@ -311,5 +312,6 @@
 	"action-property-create": "luoda ominaisuuksia",
 	"right-property-create": "Luoda ominaisuuksia",
 	"wikibase-federated-properties-leaving-site-notice-cancel": "Peruuta",
-	"wikibase-federated-properties-leaving-site-notice-continue": "Jatka lähdewikiin"
+	"wikibase-federated-properties-leaving-site-notice-continue": "Jatka lähdewikiin",
+	"special-setlabeldescriptionaliases-parameterized": "Aseta kohteelle/ominaisuudelle nimi, kuvaus ja/tai aliaksia"
 }
