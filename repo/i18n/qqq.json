@@ -128,6 +128,8 @@
 	"wikibase-undo-badpage": "Message shown when the user attempts to undo the difference between two revisions belonging to different pages. The first argument is the name of the page, the second is the revision id.\n\nParameters:\n* $1 - the title of the page\n* $2 - the revision id number",
 	"wikibase-undo-firstrev": "Message shown when the user attempts to undo the very first revision of a page, that is, the page's creation.",
 	"wikibase-undo-nocontent": "Message shown when the content of one of the revisions needed for undo could not be loaded.\nThis may happen if there is an error in the storage backend, or if the respective revision has been hidden (oversighted) or deleted.\n* $1 - the title of the page\n* $2 - the revision ID",
+	"wikibase-undo-redirect-latestredirect": "Message shown when the user attempts to undo a non-redirect edit (either a regular edit or one that turned a redirect back into a non-redirect page), but the page is currently a redirect.",
+	"wikibase-undo-redirect-latestnoredirect": "Message shown when the user attempts to undo a redirect edit (either one that turned a non-redirect page into a redirect or one that changed the target of a redirect), but the page is currently not a redirect.",
 	"wikibase-summary-generated": "Label of the field for the edit summary, shown when undoing an edit/restoring a revision of a Wikibase entity",
 	"wikibase-disambiguation-title": "Disambiguation page title. Parameters:\n* $1 - the label of the item being disambiguated",
 	"wikibase-aliases-input-help-message": "Bubble help message for entering the aliases of the data set used for a specific item.\n\nParameters:\n* $1 - (Unused) language name\n{{Related|Wikibase-input-help-message}}",
