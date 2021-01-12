@@ -120,9 +120,13 @@ class SubmitEntityAction extends EditEntityAction {
 		 */
 		list( $olderRevision, $newerRevision, $latestRevision ) = $revisions->getValue();
 		$patchedContent = $this->getPatchContent( $olderRevision, $newerRevision, $latestRevision );
+		if ( !$patchedContent->isOK() ) {
+			$this->showUndoErrorPage( $patchedContent );
+			return;
+		}
 		$latestContent = $latestRevision->getContent( SlotRecord::MAIN );
 
-		if ( $patchedContent->equals( $latestContent ) ) {
+		if ( $patchedContent->getValue()->equals( $latestContent ) ) {
 			$status = Status::newGood();
 			$status->warning( 'wikibase-empty-undo' );
 		} else {
@@ -143,7 +147,7 @@ class SubmitEntityAction extends EditEntityAction {
 			}
 
 			$editToken = $request->getText( 'wpEditToken' );
-			$status = $this->attemptSave( $title, $patchedContent, $summary,
+			$status = $this->attemptSave( $title, $patchedContent->getValue(), $summary,
 				$undidRevId, $undidAfterRevId ?: $restoreId, $editToken );
 		}
 
@@ -159,7 +163,7 @@ class SubmitEntityAction extends EditEntityAction {
 	 * @param RevisionRecord $newerRevision
 	 * @param RevisionRecord $latestRevision
 	 *
-	 * @return EntityContent
+	 * @return Status containing EntityContent
 	 */
 	private function getPatchContent(
 		RevisionRecord $olderRevision,
@@ -178,7 +182,13 @@ class SubmitEntityAction extends EditEntityAction {
 		'@phan-var EntityContent $newerContent';
 		'@phan-var EntityContent $latestContent';
 
-		return $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) );
+		if ( $newerContent->isRedirect() !== $latestContent->isRedirect() ) {
+			return Status::newFatal( $latestContent->isRedirect()
+				? 'wikibase-undo-redirect-latestredirect'
+				: 'wikibase-undo-redirect-latestnoredirect' );
+		}
+
+		return Status::newGood( $latestContent->getPatchedCopy( $newerContent->getDiff( $olderContent ) ) );
 	}
 
 	/**
