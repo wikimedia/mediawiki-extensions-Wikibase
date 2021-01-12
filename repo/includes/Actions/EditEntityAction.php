@@ -277,22 +277,16 @@ class EditEntityAction extends ViewEntityAction {
 			$omitted = $diff->count() - $appDiff->count();
 
 			if ( !$appDiff->isEmpty() ) {
-				$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 				$this->getOutput()->addWikiMsg( $omitted > 0 ? 'wikibase-partial-undo' : 'undo-success' );
-				$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			}
 
 			if ( $omitted > 0 ) {
-				$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 				$this->getOutput()->addWikiMsg( 'wikibase-omitted-undo-ops', $omitted );
-				$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			}
 		}
 
 		if ( $appDiff->isEmpty() ) {
-			$this->getOutput()->addHTML( Html::openElement( 'p' ) );
 			$this->getOutput()->addWikiMsg( 'wikibase-empty-undo' );
-			$this->getOutput()->addHTML( Html::closeElement( 'p' ) );
 			return;
 		}
 
