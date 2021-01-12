@@ -52,9 +52,8 @@ class TermFallbackCacheFacade {
 	 * @param string $languageCode
 	 * @param string $termType
 	 * @return false|TermFallback|null
-	 *
-	 * @example returning null indicates we have already checked the database and stored it's null response in the cache.
-	 * @example returning false indicates there is no cache entry.
+	 *  - returning null indicates we have already checked the database and stored it's null response in the cache.
+	 *  - returning false indicates there is no cache entry.
 	 */
 	public function get( EntityId $targetEntityId, int $revisionId, string $languageCode, string $termType ) {
 		$cacheKey = $this->buildCacheKey( $targetEntityId, $revisionId, $languageCode, $termType );
