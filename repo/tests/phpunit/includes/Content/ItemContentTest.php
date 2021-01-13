@@ -462,7 +462,7 @@ class ItemContentTest extends EntityContentTestCase {
 		$cases['empty to redir'] = [ $empty, $emptyToRedirDiff, $redir ];
 		$cases['entity to redir'] = [ $spam, $spamToRedirDiff, $redir ];
 		$cases['redir to entity'] = [ $redir, $redirToSpamDiff, $spam ];
-		$cases['redir with entity clash'] = [ $spam, $emptyToRedirDiff, null ];
+		$cases['redir with entity clash'] = [ $spam, $emptyToRedirDiff, $redir ];
 
 		return $cases;
 	}

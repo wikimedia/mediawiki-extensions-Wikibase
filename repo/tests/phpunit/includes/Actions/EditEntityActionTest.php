@@ -348,6 +348,19 @@ class EditEntityActionTest extends ActionTestCase {
 			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
 		];
 
+		yield 'undo form for redirect with legal undo and undoafter '
+			. 'where latest revision is not redirect and non-redirect data is discarded' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+			  'undo' => -1, // previous revision
+			  'undoafter' => -2, // redirect revision
+			],
+			false, // post
+			null, // user
+			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
+		];
+
 		yield 'undo form for redirect with illegal undo where latest revision is redirect' => [
 			'edit', // action
 			'Berlin2', // handle
@@ -764,6 +777,24 @@ class EditEntityActionTest extends ActionTestCase {
 			],
 		];
 
+		yield 'undo form for redirect with legal undo and undoafter '
+			. 'where latest revision is not redirect and non-redirect data is discarded' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+				'undoafter' => -2, // redirect revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
 		yield 'submit for redirect with illegal undo where latest revision is redirect' => [
 			'submit', // action
 			'Berlin2', // handle
@@ -992,6 +1023,27 @@ class EditEntityActionTest extends ActionTestCase {
 				'labels' => [],
 			]
 		];
+
+		yield 'undo last two revisions and turn back into redirect' => [
+			'Berlin3', //handle
+			[
+				'undo' => 0, // current revision
+				'undoafter' => -2, // redirect revision
+			],
+			[ //expected
+				'redirect' => 'Berlin',
+			]
+		];
+
+		yield 'undo second-to-last revision and turn back into redirect' => [
+			'Berlin3', //handle
+			[
+				'undo' => -1, // previous revision
+			],
+			[ //expected
+				'redirect' => 'Berlin',
+			]
+		];
 	}
 
 	/**
@@ -1017,6 +1069,12 @@ class EditEntityActionTest extends ActionTestCase {
 		$out = $this->callAction( 'submit', $page, $params, true );
 
 		$this->assertRegExp( '![:/=]Q\d+$!', $out->getRedirect(), 'successful operation should return a redirect' );
+
+		if ( isset( $expected['redirect'] ) ) {
+			$targetHandle = $this->loadTestRedirect( $handle );
+			$this->assertSame( $expected['redirect'], $targetHandle );
+			return;
+		}
 
 		$item = $this->loadTestItem( $handle );
 

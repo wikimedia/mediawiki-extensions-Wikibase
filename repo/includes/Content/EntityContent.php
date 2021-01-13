@@ -524,29 +524,26 @@ abstract class EntityContent extends AbstractContent {
 	public function getPatchedCopy( EntityContentDiff $patch ) {
 		$handler = $this->getContentHandler();
 
-		if ( $this->isRedirect() ) {
-			$entityAfterPatch = $this->makeEmptyEntity();
-			$entityAfterPatch->setId( $this->getEntityId() );
-		} else {
-			$entityAfterPatch = $this->getEntity()->copy();
-		}
-
-		$patcher = WikibaseRepo::getDefaultInstance()->getEntityPatcher();
-		$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
-
 		$redirAfterPatch = $this->getPatchedRedirect( $patch->getRedirectDiff() );
 
-		if ( $redirAfterPatch !== null && !$entityAfterPatch->isEmpty() ) {
-			throw new PatcherException( 'EntityContent must not contain Entity data as well as'
-				. ' a redirect after applying the patch!' );
-		} elseif ( $redirAfterPatch ) {
+		if ( $redirAfterPatch ) {
 			$patched = $handler->makeEntityRedirectContent( $redirAfterPatch );
 
 			if ( !$patched ) {
 				throw new PatcherException( 'Cannot create a redirect using content model '
-					. $this->getModel() . '!' );
+				                            . $this->getModel() . '!' );
 			}
 		} else {
+			if ( $this->isRedirect() ) {
+				$entityAfterPatch = $this->makeEmptyEntity();
+				$entityAfterPatch->setId( $this->getEntityId() );
+			} else {
+				$entityAfterPatch = $this->getEntity()->copy();
+			}
+
+			$patcher = WikibaseRepo::getDefaultInstance()->getEntityPatcher();
+			$patcher->patchEntity( $entityAfterPatch, $patch->getEntityDiff() );
+
 			$patched = $handler->makeEntityContent( new EntityInstanceHolder( $entityAfterPatch ) );
 		}
 
