@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Eleassar",
 			"HairyFotr",
 			"Pinky sl"
 		]
@@ -15,7 +16,7 @@
 	"valueview-expert-timeinput-calendar": "Koledar:",
 	"valueview-expertextender-languageselector-languagetemplate": "$1 ($2)",
 	"valueview-expertextender-languageselector-label": "Jezik (obvezno):",
-	"valueview-expertextender-unitsuggester-label": "Enota (neobvezno)",
+	"valueview-expertextender-unitsuggester-label": "Enota (izbirno)",
 	"valueview-preview-label": "bo izpisano kot:",
 	"valueview-preview-novalue": "nobena veljavna vrednost ni prepoznana",
 	"valueview-listrotator-manually": "nastavi ročno"
