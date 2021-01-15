@@ -167,7 +167,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 			$this->getConstraintProvider(),
 			new GuidGenerator(),
 			$wikibaseRepo->getStatementGuidValidator(),
-			$wikibaseRepo->getStatementGuidParser(),
+			WikibaseRepo::getStatementGuidParser(),
 			$this->getSnakValidator(),
 			$this->getTermValidatorFactory(),
 			new HashSiteStore( TestSites::getSites() ),

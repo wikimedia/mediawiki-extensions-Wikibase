@@ -59,7 +59,8 @@
 			"class": "\\Wikibase\\Repo\\Api\\GetClaims",
 			"factory": "\\Wikibase\\Repo\\Api\\GetClaims::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbgetentities": {
@@ -97,21 +98,24 @@
 			"class": "\\Wikibase\\Repo\\Api\\RemoveClaims",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveClaims::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbremovequalifiers": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveQualifiers",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveQualifiers::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbremovereferences": {
 			"class": "\\Wikibase\\Repo\\Api\\RemoveReferences",
 			"factory": "\\Wikibase\\Repo\\Api\\RemoveReferences::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbsearchentities": {
@@ -133,14 +137,16 @@
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaim::factory",
 			"services": [
 				"StatsdDataFactory",
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbsetclaimvalue": {
 			"class": "\\Wikibase\\Repo\\Api\\SetClaimValue",
 			"factory": "\\Wikibase\\Repo\\Api\\SetClaimValue::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbsetdescription": {
@@ -155,14 +161,16 @@
 			"class": "\\Wikibase\\Repo\\Api\\SetQualifier",
 			"factory": "\\Wikibase\\Repo\\Api\\SetQualifier::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbsetreference": {
 			"class": "\\Wikibase\\Repo\\Api\\SetReference",
 			"factory": "\\Wikibase\\Repo\\Api\\SetReference::factory",
 			"services": [
-				"WikibaseRepo.EntityIdParser"
+				"WikibaseRepo.EntityIdParser",
+				"WikibaseRepo.StatementGuidParser"
 			]
 		},
 		"wbsetsitelink": {

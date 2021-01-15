@@ -903,11 +903,9 @@ class WikibaseRepo {
 		return $this->entityIdComposer;
 	}
 
-	/**
-	 * @return StatementGuidParser
-	 */
-	public function getStatementGuidParser() {
-		return new StatementGuidParser( self::getEntityIdParser() );
+	public static function getStatementGuidParser( ContainerInterface $services = null ): StatementGuidParser {
+		return ( $services ?: MediaWikiServices::getInstance() )
+			->get( 'WikibaseRepo.StatementGuidParser' );
 	}
 
 	/**
@@ -924,7 +922,7 @@ class WikibaseRepo {
 			$this->getEntityConstraintProvider(),
 			new GuidGenerator(),
 			$this->getStatementGuidValidator(),
-			$this->getStatementGuidParser(),
+			self::getStatementGuidParser(),
 			$snakValidator,
 			$this->getTermValidatorFactory(),
 			$this->getSiteLookup(),
@@ -1981,7 +1979,7 @@ class WikibaseRepo {
 		$statementGrouperBuilder = new StatementGrouperBuilder(
 			self::getSettings()->getSetting( 'statementSections' ),
 			$this->getPropertyDataTypeLookup(),
-			$this->getStatementGuidParser()
+			self::getStatementGuidParser()
 		);
 
 		$propertyOrderProvider = new CachingPropertyOrderProvider(

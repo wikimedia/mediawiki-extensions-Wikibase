@@ -85,7 +85,8 @@ class RemoveClaims extends ApiBase {
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
-		EntityIdParser $entityIdParser
+		EntityIdParser $entityIdParser,
+		StatementGuidParser $statementGuidParser
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$apiHelperFactory = $wikibaseRepo->getApiHelperFactory( $mainModule->getContext() );
@@ -104,7 +105,7 @@ class RemoveClaims extends ApiBase {
 			$apiHelperFactory->getErrorReporter( $mainModule ),
 			$changeOpFactoryProvider->getStatementChangeOpFactory(),
 			$modificationHelper,
-			$wikibaseRepo->getStatementGuidParser(),
+			$statementGuidParser,
 			function ( $module ) use ( $apiHelperFactory ) {
 				return $apiHelperFactory->getResultBuilder( $module );
 			},
