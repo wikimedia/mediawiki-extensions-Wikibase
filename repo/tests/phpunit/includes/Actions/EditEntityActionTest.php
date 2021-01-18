@@ -294,7 +294,7 @@ class EditEntityActionTest extends ActionTestCase {
 		];
 
 		// -- show undo form for redirect -----------------------------------
-		yield 'undo form for redirect with legal undo' => [
+		yield 'undo form for redirect with legal undo where latest revision is redirect' => [
 			'edit', // action
 			'Berlin2', // handle
 			[ // params
@@ -306,6 +306,90 @@ class EditEntityActionTest extends ActionTestCase {
 			[ // expectedProps
 				'moduleStyles' => [ 'wikibase.common' ],
 			],
+		];
+
+		yield 'undo form for redirect with legal undo and undoafter where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision where label was "London"
+			],
+			false, // post
+			null, // user
+			'/undo-success.*London<\/ins>/s', // htmlPattern: should be a success and add London (/s = PCRE_DOTALL)
+		];
+
+		yield 'undo form for redirect with legal undo where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => 0, // current revision
+			],
+			false, // post
+			null, // user
+			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
+			[ // expectedProps
+				'moduleStyles' => [ 'wikibase.common' ],
+			],
+		];
+
+		yield 'undo form for redirect with legal undo and undoafter where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision identical to previous revision
+			],
+			false, // post
+			null, // user
+			'/undo-success.*USA<\/del>/s', // htmlPattern: should be a success and remove German description (/s = PCRE_DOTALL)
+		];
+
+		yield 'undo form for redirect with illegal undo where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => -1, // previous revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo and undoafter where latest revision is redirect' => [
+			'edit', // action
+			'Berlin2', // handle
+			[ // params
+				'undo' => -1, // previous revision
+				'undoafter' => -4, // earlier revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => -2, // revision that edited redirect target
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'undo form for redirect with illegal undo and undoafter where latest revision is not redirect' => [
+			'edit', // action
+			'Berlin3', // handle
+			[ // params
+				'undo' => -2, // revision with redirect target
+				'undoafter' => -4, // non-redirect revision
+			],
+			false, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
 		];
 	}
 
@@ -610,6 +694,127 @@ class EditEntityActionTest extends ActionTestCase {
 			null, // user
 			'/id="[^"]*\bwb-item\b[^"]*"/', // htmlPattern: should show item
 		];
+
+		// -- redirect -----------------------------------
+		yield 'submit for redirect with legal undo where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo and undoafter where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with legal undo and undoafter where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => 0, // current revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			null, // htmlPattern
+			[
+				'redirect' => '![:/=]Q\d+$!' // expect success and redirect to page
+			],
+		];
+
+		yield 'submit for redirect with illegal undo where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo and undoafter where latest revision is redirect' => [
+			'submit', // action
+			'Berlin2', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -1, // previous revision
+				'undoafter' => -4, // earlier revision
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -2,
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
+
+		yield 'submit for redirect with illegal undo and undoafter where latest revision is not redirect' => [
+			'submit', // action
+			'Berlin3', // handle
+			[ // params
+				'wpSave' => 1,
+				'wpEditToken' => true, // automatic token
+				'undo' => -2,
+				'undoafter' => -4,
+			],
+			true, // post
+			null, // user
+			'/wikibase-undo-redirect-latestnoredirect/', // htmlPattern: should contain error
+		];
 	}
 
 	/**
@@ -773,6 +978,16 @@ class EditEntityActionTest extends ActionTestCase {
 				'descriptions' => [
 					'de' => 'Stadt in Deutschland',
 				],
+			]
+		];
+
+		yield 'undo last revision and revert redirect' => [
+			'Berlin2', //handle
+			[
+				'undo' => 0, // current revision
+			],
+			[ //expected
+				'labels' => [],
 			]
 		];
 	}
