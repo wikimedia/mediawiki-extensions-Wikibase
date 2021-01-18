@@ -101,7 +101,7 @@
 	"wikibase-snakformat-invalid-value": "Neveljavna vrednost.",
 	"wikibase-snakformat-propertynotfound": "Lastnosti ni mogoče najti.",
 	"wikibase-shortcopyrightwarning": "S klikom gumba »$1« izražate strinjanje s [[$2|pogoji uporabe]] in nepreklicno privoljujete v objavo svojega prispevka pod licenco $3.",
-	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa prihodnja urejanja. Tega sporočila ne prikaži več.",
+	"wikibase-copyrighttooltip-acknowledge": "Te pogoje sprejmem za vsa svoja prihodnja urejanja. Tega sporočila ne prikaži več.",
 	"wikibase-entityselector-more": "več",
 	"wikibase-anonymouseditwarning": "Opozorilo: niste prijavljeni. Vaš [https://sl.wikipedia.org/wiki/IP-naslov IP-naslov] bo javno viden, če naredite kakršno koli urejanje. Če se <strong>[[Special:UserLogin|prijavite]]</strong> ali <strong>[[Special:CreateAccount|ustvarite račun]]</strong>, bodo vaša urejanja pripisana vašemu uporabniškemu imenu skupaj z drugimi prednostmi.",
 	"wikibase-move-error": "Strani v imenskem prostoru podatkov ne morete prestavljati, prav tako tudi ne morete strani prestavljati vanj.",

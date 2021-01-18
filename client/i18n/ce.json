@@ -48,7 +48,7 @@
 	"wikibase-rc-wikibase-edit-title": "Викихаамашкахь бина хийцам",
 	"wikibase-rcfilters-hide-wikibase-label": "{{WBREPONAME}} нисдарш",
 	"wikibase-rcfilters-hide-wikibase-description": "{{WBREPONAME}} чохь бина хийцамаш.",
-	"wikibase-replicationnote": "Дехар до, тидам бар бина хийцам гучу ца болуш масийтта минот яла там бу массо вики-проекташкахь.",
+	"wikibase-replicationnote": "Дехар до, тидам бар, хийцам гучу ца болуш масийтта минот яла там бу массо вики-проекташкахь.",
 	"wikibase-watchlist-show-changes-pref": "{{grammar:genitive|{{WBREPONAME}}}} чура хийцамаш гайта тергаме могӀам чохь",
 	"wikibase-error-deserialize-error": "Хаамашна десериализаци ян цаделира.",
 	"wikibase-error-serialize-error": "Хаамашна сериализаци ян цаделира.",
