@@ -61,6 +61,15 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 	 */
 	private static $testItems = [];
 
+	/**
+	 * @var bool[] List of items that have redirects in their revision history,
+	 * with logical handles as keys.
+	 */
+	private const TEST_ITEMS_WITH_REDIRECTS = [
+		'Berlin2' => true,
+		'Berlin3' => true,
+	];
+
 	private function makeTestItemData() {
 		$items = [];
 
@@ -318,11 +327,15 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 
 			// check current data
 			$page = $this->getTestItemPage( $handle );
-			if ( $page->getLatest() == $item->revid ) {
-				return; // revid didn't change
+			if (
+				$page->getLatest() == $item->revid
+				&& !isset( self::TEST_ITEMS_WITH_REDIRECTS[$handle] )
+			) {
+				return; // current data is fresh
 			}
 
-			// delete current data
+			// delete current data (either the data itself is stale,
+			// or a redirect target may have been reset in the meantime)
 			$page->doDeleteArticleReal( "Testing", $this->getTestSysop()->getUser() );
 		}
 
@@ -334,18 +347,27 @@ class ActionTestCase extends MediaWikiIntegrationTestCase {
 		self::$testItems[ $handle ] = $item;
 	}
 
-	/**
-	 * Deletes and re-creates the given test item.
-	 *
-	 * @param string $handle
-	 * @return Item
-	 */
-	protected function loadTestItem( $handle ) {
+	protected function loadTestItem( string $handle ): Item {
 		$page = $this->getTestItemPage( $handle );
 		/** @var ItemContent $content */
 		$content = $page->getContent();
 
 		return $content->getItem();
+	}
+
+	protected function loadTestRedirect( string $handle ): string {
+		$page = $this->getTestItemPage( $handle );
+		/** @var ItemContent $content */
+		$content = $page->getContent();
+		$target = $content->getEntityRedirect()->getTargetId();
+
+		foreach ( self::$testItems as $otherHandle => $testItem ) {
+			if ( $testItem instanceof Item && $testItem->getId()->equals( $target ) ) {
+				return $otherHandle;
+			}
+		}
+
+		throw new RuntimeException( "No handle found for target $target of redirect $handle" );
 	}
 
 	/**
