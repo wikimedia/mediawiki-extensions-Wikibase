@@ -107,6 +107,7 @@ export class RootGetters extends Getters<Application> {
 			`Item title: ${this.state.entityTitle}`,
 			`Property: ${this.state.targetProperty}`,
 			`Error message: ${this.state.applicationErrors[ 0 ].type}`,
+			`Approximate time of request: ${( new Date() ).toISOString()}`,
 			'Debug information:',
 			'```',
 			stackTrace,

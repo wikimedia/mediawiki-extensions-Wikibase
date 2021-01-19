@@ -333,6 +333,10 @@ describe( 'root/getters', () => {
 
 	describe( 'reportIssueTemplateBody', () => {
 		it( 'builds a string matching the snapshot', () => {
+			const mockDate = new Date( 1610992715298 );
+			const spy = jest
+				.spyOn( global, 'Date' )
+				.mockImplementation( () => mockDate as any );
 			const pageUrl = 'https://bg.client.example.com/wiki/Дъглас_Адамс';
 			const entityTitle = `Item:${entityId}`;
 			const applicationState = newApplicationState( {
@@ -345,7 +349,9 @@ describe( 'root/getters', () => {
 				state: applicationState,
 			} );
 
-			expect( getters.reportIssueTemplateBody ).toMatchSnapshot();
+			const actualReportIssueTemplateBody = getters.reportIssueTemplateBody;
+			spy.mockRestore();
+			expect( actualReportIssueTemplateBody ).toMatchSnapshot();
 		} );
 
 		it( 'serializes Error objects with information', () => {

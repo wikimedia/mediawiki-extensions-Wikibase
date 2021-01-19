@@ -5,6 +5,7 @@ exports[`root/getters reportIssueTemplateBody builds a string matching the snaps
 Item title: Item:Q42
 Property: P23
 Error message: APPLICATION_LOGIC_ERROR
+Approximate time of request: 2021-01-18T17:58:35.298Z
 Debug information:
 \`\`\`
 [
