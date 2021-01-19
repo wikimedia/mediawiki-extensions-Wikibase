@@ -15,14 +15,17 @@ $basePath =
 require_once $basePath . '/maintenance/Maintenance.php';
 
 /**
- * Update the conversion table for units.
- * Base unit types for Wikidata:
- * Q223662,Q208469
- * SI base unit,SI derived unit
- * TODO: add support to non-SI units
- * Example run:
+ * Generate the conversion table for units,
+ * optionally filtered to units of a certain type.
+ *
+ * This script retrieves and emits the conversion data into coherent units.
+ * For instance, the millimetre is equal to 1/1000 of the coherent unit metre
+ * (also an SI base unit), while the ampere hour is equal to 3600 of the
+ * coherent unit coulomb, the product of the SI base units ampere and second.
+ *
+ * Example usage:
  * mwscript extensions/WikidataBuildResources/extensions/Wikibase/repo/maintenance/updateUnits.php
- *   --wiki wikidatawiki  --base-unit-types Q223662,Q208469 --base-uri http://www.wikidata.org/entity/
+ *   --wiki wikidatawiki --base-uri http://www.wikidata.org/entity/
  *   --unit-class Q1978718 > unitConversion.json
  *
  * @license GPL-2.0-or-later
@@ -55,9 +58,8 @@ class UpdateUnits extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addDescription( "Update unit conversion table." );
+		$this->addDescription( "Generate unit conversion table, optionally filtered by type." );
 
-		$this->addOption( 'base-unit-types', 'Types of base units.', true, true );
 		$this->addOption( 'base-uri', 'Base URI for the data.', false, true );
 		$this->addOption( 'unit-class', 'Class for units.', false, true );
 		$this->addOption( 'format', 'Output format "json" (default) or "csv".', false, true );
@@ -97,7 +99,7 @@ class UpdateUnits extends Maintenance {
 		} else {
 			$unitUsage = null;
 		}
-		$baseUnits = $this->getBaseUnits( $filter );
+		$coherentUnits = $this->getCoherentUnits( $filter );
 
 		$convertUnits = [];
 		$reconvert = [];
@@ -109,7 +111,7 @@ class UpdateUnits extends Maintenance {
 		$convertableUnits = $this->getConvertableUnits( $filter );
 		foreach ( $convertableUnits as $unit ) {
 			$converted =
-				$this->convertUnit( $unit, $convertUnits, $baseUnits, $unitUsage, $reconvert );
+				$this->convertUnit( $unit, $convertUnits, $coherentUnits, $unitUsage, $reconvert );
 			if ( $converted ) {
 				$unitName = substr( $unit['unit'], $this->baseLen );
 				$convertUnits[$unitName] = $converted;
@@ -118,13 +120,13 @@ class UpdateUnits extends Maintenance {
 
 		$this->reduceUnits( $reconvert, $convertUnits );
 
-		// Add base units
-		foreach ( $baseUnits as $base => $baseData ) {
-			$convertUnits[$base] = [
+		// Add coherent units
+		foreach ( $coherentUnits as $coherentUnitName => $coherentUnitData ) {
+			$convertUnits[$coherentUnitName] = [
 				'factor' => "1",
-				'unit' => $base,
-				'label' => $baseData['unitLabel'],
-				'siLabel' => $baseData['unitLabel']
+				'unit' => $coherentUnitName,
+				'label' => $coherentUnitData['unitLabel'],
+				'siLabel' => $coherentUnitData['unitLabel']
 			];
 		}
 
@@ -148,11 +150,11 @@ class UpdateUnits extends Maintenance {
 	}
 
 	/**
-	 * Reduce units that are not in term of base units into base units.
-	 * If some units are not reducible to base units, warning will be issued.
+	 * Reduce units that are not in term of coherent units into coherent units.
+	 * If some units are not reducible to coherent units, warnings are issued.
 	 * @param array $reconvert List of units to be reduced
 	 * @param array &$convertUnits List of unit conversion configs, will be modified if
-	 *                             it is possible to reduce the unit to base units.
+	 *                             it is possible to reduce the unit to coherent units.
 	 */
 	private function reduceUnits( $reconvert, &$convertUnits ) {
 		while ( $reconvert ) {
@@ -176,7 +178,7 @@ class UpdateUnits extends Maintenance {
 		if ( $reconvert ) {
 			// still have unconverted units
 			foreach ( $reconvert as $name => $unit ) {
-				$this->error( "Weird base unit: {$unit['unit']} reduces to {$unit['siUnit']} which is not base!" );
+				$this->error( "Weird conversion: {$unit['unit']} reduces to {$unit['siUnit']} which is not coherent!" );
 			}
 		}
 	}
@@ -190,7 +192,7 @@ class UpdateUnits extends Maintenance {
 	}
 
 	/**
-	 * Convert unit that does not reduce to a basic unit.
+	 * Convert unit that does not reduce to a coherent unit.
 	 *
 	 * @param string[] $unit
 	 * @param array[] $convertUnits List of units already converted
@@ -219,46 +221,39 @@ class UpdateUnits extends Maintenance {
 	 * Create conversion data for a single unit.
 	 * @param string[] $unit Unit data
 	 * @param string[] $convertUnits Already converted data
-	 * @param array[] $baseUnits Base unit list
+	 * @param array[] $coherentUnits Ultimate target units
 	 * @param string[]|null $unitUsage Unit usage data
 	 * @param string[][] &$reconvert Array collecting units that require re-conversion later,
-	 *                 due to their target unit not being base.
+	 *                 due to their target unit not being coherent.
 	 * @return string[]|null Produces conversion data for the unit or null if not possible.
 	 */
-	public function convertUnit( $unit, $convertUnits, $baseUnits, $unitUsage, &$reconvert ) {
+	public function convertUnit( $unit, $convertUnits, $coherentUnits, $unitUsage, &$reconvert ) {
 		$unit['unit'] = substr( $unit['unit'], $this->baseLen );
 		$unit['siUnit'] = substr( $unit['siUnit'], $this->baseLen );
-
-		if ( $unit['unitLabel'][0] == 'Q' ) {
-			// Skip exotic units that have no English name for now.
-			// TODO: drop this
-			$this->error( "Exotic unit: {$unit['unit']} has no English label, skipping for now." );
-			return null;
-		}
 
 		if ( isset( $convertUnits[$unit['unit']] ) ) {
 			// done already
 			return null;
 		}
 		if ( $unit['unit'] == $unit['siUnit'] ) {
-			// base unit
+			// coherent unit
 			if ( $unit['si'] != 1 ) {
 				$this->error( "Weird unit: {$unit['unit']} is {$unit['si']} of itself!" );
 				return null;
 			}
-			if ( !isset( $baseUnits[$unit['siUnit']] ) ) {
-				$this->error( "Weird unit: {$unit['unit']} is self-referring but not base!" );
+			if ( !isset( $coherentUnits[$unit['siUnit']] ) ) {
+				$this->error( "Weird unit: {$unit['unit']} is self-referring but not coherent!" );
 				return null;
 			}
 		}
 
-		if ( $unitUsage && !isset( $baseUnits[$unit['unit']] ) && !isset( $unitUsage[$unit['unit']] ) ) {
+		if ( $unitUsage && !isset( $coherentUnits[$unit['unit']] ) && !isset( $unitUsage[$unit['unit']] ) ) {
 			$this->error( "Low usage unit {$unit['unit']}, skipping..." );
 			return null;
 		}
 
-		if ( !isset( $baseUnits[$unit['siUnit']] ) ) {
-			// target unit is not actually base
+		if ( !isset( $coherentUnits[$unit['siUnit']] ) ) {
+			// target unit is not actually coherent
 			$reconvert[$unit['unit']] = $unit;
 		} else {
 			return [
@@ -324,33 +319,29 @@ UQUERY;
 	}
 
 	/**
-	 * Get base units
+	 * Get coherent units (those with a conversion factor of 1 to themselves).
 	 * @param string $filter Unit filter
 	 * @return array[]
 	 */
-	private function getBaseUnits( $filter ) {
-		$types =
-			str_replace( [ ',', 'Q' ], [ ' ', 'wd:Q' ], $this->getOption( 'base-unit-types' ) );
-
-		$baseQuery = <<<QUERY
+	private function getCoherentUnits( $filter ) {
+		$query = <<<QUERY
 SELECT ?unit ?unitLabel WHERE {
-  VALUES ?class {  $types }
-  ?unit wdt:P31 ?class .
+  ?unit wdt:P31 wd:Q69197847 .
   $filter
   SERVICE wikibase:label {
     bd:serviceParam wikibase:language "en" .
   }
 }
 QUERY;
-		$baseUnitsData = $this->client->query( $baseQuery );
-		'@phan-var array[] $baseUnitsData';
-		$baseUnits = [];
+		$coherentUnitsData = $this->client->query( $query );
+		'@phan-var array[] $coherentUnitsData';
+		$coherentUnits = [];
 		// arrange better lookup
-		foreach ( $baseUnitsData as $base ) {
-			$item = substr( $base['unit'], $this->baseLen );
-			$baseUnits[$item] = $base;
+		foreach ( $coherentUnitsData as $coherent ) {
+			$item = substr( $coherent['unit'], $this->baseLen );
+			$coherentUnits[$item] = $coherent;
 		}
-		return $baseUnits;
+		return $coherentUnits;
 	}
 
 	/**
