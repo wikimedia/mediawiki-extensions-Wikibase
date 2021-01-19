@@ -80,7 +80,14 @@ class ChangesListLinesHandler implements
 			}
 
 			// fixme: inject formatter and flags into a changes list formatter
-			$flag = $changesList->recentChangesFlags( [ 'wikibase-edit' => true ], '' );
+			$flag = $changesList->recentChangesFlags(
+				[
+					'wikibase-edit' => true,
+					'minor' => $rc->getAttribute( 'rc_minor' ),
+					'bot' => $rc->getAttribute( 'rc_bot' ),
+				],
+				''
+			);
 			$lang = $changesList->getLanguage();
 			$user = $changesList->getUser();
 			$line = $this->formatter->format( $externalChange, $rc->getTitle(), $rc->counter, $flag, $lang, $user );
