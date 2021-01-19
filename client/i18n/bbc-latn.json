@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Herryz",
+			"NoiX180",
 			"Salomo Christian Hutajulu"
 		]
 	},
@@ -13,7 +14,7 @@
 	"wikibase-linkitem-addlinks": "Tamba tautan",
 	"wikibase-rc-hide-wikidata": "$1{{WBREOPNAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Bunihon",
-	"wikibase-rc-hide-wikidata-show": "patudu",
+	"wikibase-rc-hide-wikidata-show": "Patudu",
 	"wikibase-rc-wikibase-edit-letter": "D",
 	"wikibase-rc-wikibase-edit-title": "Patota {{WBREPONAME}}",
 	"wikibase-otherprojects": "Di bagasan siulaon na asing"

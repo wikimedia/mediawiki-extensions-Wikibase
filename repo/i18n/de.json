@@ -109,6 +109,8 @@
 	"wikibase-undo-badpage": "Die Versionsnummer ist falsch: Die Version $2 gehört nicht zur Seite [[:$1]].",
 	"wikibase-undo-firstrev": "Das Erstellen einer Seite kann nicht rückgängig gemacht werden.",
 	"wikibase-undo-nocontent": "Inhalt der Seite $1 in Version $2 kann nicht geladen werden",
+	"wikibase-undo-redirect-latestredirect": "Nicht-weitergeleitete Bearbeitung kann nicht rückgängig gemacht werden, wenn die letzte Version eine Weiterleitung ist",
+	"wikibase-undo-redirect-latestnoredirect": "Bearbeitung einer Weiterleitung kann nicht rückgängig gemacht werden, wenn die letzte Revision keine Weiterleitung ist",
 	"wikibase-summary-generated": "Zusammenfassung (wird an eine automatisch erzeugte Zusammenfassung angehängt):",
 	"wikibase-disambiguation-title": "Begriffsklärung für „$1“",
 	"wikibase-aliases-input-help-message": "Um dieses Objekt leichter wiederzufinden, kannst du alternative Namen eingeben.",
