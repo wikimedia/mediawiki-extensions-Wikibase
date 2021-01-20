@@ -11,6 +11,8 @@
 	"wikibase-editlinkstitle": "Хэсэ алдандолани поктова калаори",
 	"wikibase-linkitem-addlinks": "Поктова аӈговори",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
+	"wikibase-rc-hide-wikidata-hide": "Дяяори",
+	"wikibase-rc-hide-wikidata-show": "Ичэвэмбури",
 	"wikibase-rc-wikibase-edit-letter": "д",
 	"wikibase-rc-wikibase-edit-title": "{{WBREPONAME}} калаори"
 }

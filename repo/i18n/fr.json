@@ -137,6 +137,8 @@
 	"wikibase-undo-badpage": "Numéro de version erroné : la version $2 n’appartient pas à [[:$1]].",
 	"wikibase-undo-firstrev": "Impossible d’annuler la création de la page",
 	"wikibase-undo-nocontent": "Impossible de charger le contenu de la version $2 de la page $1",
+	"wikibase-undo-redirect-latestredirect": "Impossible d’annuler une modification autre qu’une redirection si la dernière révision est une redirection",
+	"wikibase-undo-redirect-latestnoredirect": "Impossible d’annuler une modification de redirection si la dernière révision n’est pas une redirection",
 	"wikibase-summary-generated": "Résumé (sera ajouté à un résumé généré automatiquement) :",
 	"wikibase-disambiguation-title": "Homonymie pour « $1 »",
 	"wikibase-aliases-input-help-message": "Pour rendre cette entité plus facile à trouver, vous pouvez entrer d’autres noms possibles.",
