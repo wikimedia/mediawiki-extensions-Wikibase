@@ -1,4 +1,5 @@
 {
+	"root": true,
 	"extends": "wikimedia",
 	"env": {
 		"browser": true,
@@ -18,11 +19,26 @@
 	},
 	"rules": {
 		"dot-notation": "off",
-		"indent": [ "error", "tab", { "SwitchCase": 1, "MemberExpression": "off" } ],
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1,
+				"MemberExpression": "off"
+			}
+		],
 		"new-cap": "off",
 		"no-underscore-dangle": "off",
-		"no-use-before-define": [ "error", "nofunc" ],
-		"no-unused-vars": [ "error", { "args": "none" } ],
+		"no-use-before-define": [
+			"error",
+			"nofunc"
+		],
+		"no-unused-vars": [
+			"error",
+			{
+				"args": "none"
+			}
+		],
 		"no-useless-concat": "off",
 		"one-var": "off",
 		"operator-linebreak": "off",

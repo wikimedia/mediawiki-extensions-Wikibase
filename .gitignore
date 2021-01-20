@@ -35,3 +35,4 @@ project.index
 ## Sublime
 sublime-*
 sftp-config.json
+/.eslintcache

@@ -38,10 +38,10 @@
 		"wikimedia/purtle": "^1.0.7"
 	},
 	"require-dev": {
-		"jakub-onderka/php-parallel-lint": "1.0.0",
-		"jakub-onderka/php-console-highlighter": "0.3.2",
 		"mediawiki/minus-x": "0.3.1",
-		"wikibase/wikibase-codesniffer": "^0.3.0"
+		"php-parallel-lint/php-console-highlighter": "0.3.2",
+		"php-parallel-lint/php-parallel-lint": "1.0.0",
+		"wikibase/wikibase-codesniffer": "0.5.1"
 	},
 	"conflict": {
 		"mediawiki/mediawiki": "<1.25"

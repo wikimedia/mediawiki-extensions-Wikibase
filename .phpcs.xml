@@ -1,6 +1,19 @@
 <?xml version="1.0"?>
 <ruleset>
-	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase" />
+	<rule ref="./vendor/wikibase/wikibase-codesniffer/Wikibase">
+		<exclude name="MediaWiki.Commenting.LicenseComment.DeprecatedLicenseTag" />
+		<exclude name="MediaWiki.Commenting.LicenseComment.InvalidLicenseTag" />
+		<exclude name="MediaWiki.Commenting.LicenseComment.LicenseTagNonFileComment" />
+		<exclude name="MediaWiki.Commenting.MissingCovers.MissingCovers" />
+		<exclude name="MediaWiki.Commenting.PhpunitAnnotations.ForbiddenTestWith" />
+		<exclude name="MediaWiki.Commenting.PhpunitAnnotations.NotTestClass" />
+		<exclude name="MediaWiki.Usage.ForbiddenFunctions.assert" />
+		<exclude name="MediaWiki.Usage.ForbiddenFunctions.join" />
+		<exclude name="MediaWiki.Usage.ForbiddenFunctions.shell_exec" />
+		<exclude name="Wikibase.Commenting.DisallowedDocTags.Found" />
+		<exclude name="Wikibase.Namespaces.FullQualifiedClassName.Found" />
+		<exclude name="Wikibase.Namespaces.UnusedUse.Found" />
+	</rule>
 
 	<rule ref="Generic.Files.LineLength">
 		<properties>
