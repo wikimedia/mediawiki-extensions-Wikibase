@@ -200,7 +200,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		);
 
 		$handler->onArticleRevisionVisibilitySet(
-			$this->newTitle(),
+			$this->newTitle( 42 ),
 			$revisionIds,
 			$visibilityChangeMap
 		);
@@ -263,12 +263,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		$titleFactory->expects( $this->any() )
 			->method( 'newFromID' )
 			->willReturnCallback( function ( int $id ): Title {
-				$title = $this->createMock( Title::class );
-				$title->expects( $this->any() )
-					->method( 'getText' )
-					->willReturn( 'Q' . ( 1000 + $id ) );
-
-				return $title;
+				return $this->newTitle( $id );
 			} );
 
 		return $titleFactory;
@@ -284,9 +279,7 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 					return null;
 				}
 
-				$revisionRecord = new MutableRevisionRecord(
-					$this->createMock( Title::class )
-				);
+				$revisionRecord = new MutableRevisionRecord( $this->newTitle( 42 ) );
 
 				$revisionRecord->setTimestamp( $this->getMwTimestamp() );
 				if ( $id === 408 ) {
@@ -302,12 +295,20 @@ class ArticleRevisionVisibilitySetHookHandlerTest extends \PHPUnit\Framework\Tes
 		return $revisionLookup;
 	}
 
-	private function newTitle(): Title {
+	private function newTitle( int $id ): Title {
 		$title = $this->createMock( Title::class );
 		$title->expects( $this->any() )
 			->method( 'getNamespace' )
 			->willReturn( 0 );
-
+		$title->expects( $this->any() )
+			->method( 'getText' )
+			->willReturn( 'Q' . ( 1000 + $id ) );
+		$title->expects( $this->any() )
+			->method( 'getArticleId' )
+			->willReturn( $id );
+		$title->expects( $this->any() )
+			->method( 'getId' )
+			->willReturn( $id );
 		return $title;
 	}
 
