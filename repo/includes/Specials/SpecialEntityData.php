@@ -64,6 +64,7 @@ class SpecialEntityData extends SpecialWikibasePage {
 
 		$serializationService = new EntityDataSerializationService(
 			$wikibaseRepo->getStore()->getEntityLookup(),
+			$wikibaseRepo->getEntityTitleLookup(),
 			$wikibaseRepo->getEntityContentFactory(),
 			$wikibaseRepo->getPropertyDataTypeLookup(),
 			$wikibaseRepo->getValueSnakRdfBuilderFactory(),

@@ -22,6 +22,7 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -90,14 +91,18 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
 
-		$entityContentFactory = $this->createMock( EntityContentFactory::class );
-		// general EntityTitleLookup interface
-		$entityContentFactory->expects( $this->any() )
+		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
+		$entityTitleLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
 			} ) );
-		// EntityContentFactory-specific method – should be unused since we configure no page props
+
+		$entityContentFactory = $this->createMock( EntityContentFactory::class );
+		// implements EntityTitleLookup but should never be used as such (T269603)
+		$entityContentFactory->expects( $this->never() )
+			->method( 'getTitleForId' );
+		// should also be unused since we configure no page props
 		$entityContentFactory->expects( $this->never() )
 			->method( 'newFromEntity' );
 
@@ -115,6 +120,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$service = new EntityDataSerializationService(
 			$mockRepository,
+			$entityTitleLookup,
 			$entityContentFactory,
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
@@ -179,7 +185,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
 				'/{entity_id}.json&revision={revision_id}',
 			],
-			$entityContentFactory
+			$entityTitleLookup
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
