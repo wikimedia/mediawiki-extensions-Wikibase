@@ -92,7 +92,7 @@ class SpecialUnconnectedPages extends QueryPage {
 		}
 		if ( $title !== null ) {
 			$conds[] = 'page_title >= ' . $dbr->addQuotes( $title->getDBkey() );
-			$conds[] = 'page_namespace = ' . (int)$title->getNamespace();
+			$conds[] = 'page_namespace = ' . $title->getNamespace();
 		}
 		$wbNamespaces = $checker->getWikibaseNamespaces();
 		$ns = $this->getRequest()->getIntOrNull( 'namespace' );

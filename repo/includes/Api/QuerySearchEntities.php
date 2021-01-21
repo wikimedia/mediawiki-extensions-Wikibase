@@ -92,7 +92,7 @@ class QuerySearchEntities extends ApiQueryGeneratorBase {
 			$title = $this->titleLookup->getTitleForId( $match->getEntityId() );
 
 			$values = [
-				'ns' => intval( $title->getNamespace() ),
+				'ns' => $title->getNamespace(),
 				'title' => $title->getPrefixedText(),
 				'pageid' => intval( $title->getArticleID() ),
 				'displaytext' => $match->getMatchedTerm()->getText(),
