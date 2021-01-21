@@ -105,7 +105,7 @@ class BasicDiffView implements DiffView {
 		//TODO: use WordLevelDiff!
 		$html = Html::openElement( 'tr' );
 		if ( $oldValue !== null ) {
-			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker' ], '-' );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '−' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-deletedline' ],
 				Html::rawElement( 'div', [], $this->getDeletedLine( $oldValue, $path ) ) );
 		}
@@ -113,7 +113,7 @@ class BasicDiffView implements DiffView {
 			if ( $oldValue === null ) {
 				$html .= Html::rawElement( 'td', [ 'colspan' => '2' ], '&nbsp;' );
 			}
-			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker' ], '+' );
+			$html .= Html::rawElement( 'td', [ 'class' => 'diff-marker', 'data-marker' => '+' ] );
 			$html .= Html::rawElement( 'td', [ 'class' => 'diff-addedline' ],
 				Html::rawElement( 'div', [], $this->getAddedLine( $newValue, $path ) ) );
 		}
