@@ -5,9 +5,7 @@ namespace Wikibase\Client\Usage\Sql;
 use Exception;
 use InvalidArgumentException;
 use Wikibase\Client\Usage\SubscriptionManager;
-use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
-use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -48,7 +46,6 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param EntityId[] $entityIds
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws UsageTrackerException
 	 * @throws Exception
 	 */
 	public function subscribe( $subscriber, array $entityIds ) {
@@ -59,22 +56,10 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		$subscriptions = $this->idsToString( $entityIds );
 		$dbw = $this->connectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
-
-		try {
-			$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $subscriptions );
-			$newSubscriptions = array_diff( $subscriptions, $oldSubscriptions );
-			$this->insertSubscriptions( $dbw, $subscriber, $newSubscriptions );
-
-			$dbw->endAtomic( __METHOD__ );
-		} catch ( Exception $ex ) {
-			$dbw->rollback( __METHOD__ );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
-		}
+		$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $subscriptions );
+		$newSubscriptions = array_diff( $subscriptions, $oldSubscriptions );
+		$this->insertSubscriptions( $dbw, $subscriber, $newSubscriptions );
+		$dbw->endAtomic( __METHOD__ );
 	}
 
 	/**
@@ -84,7 +69,6 @@ class SqlSubscriptionManager implements SubscriptionManager {
 	 * @param EntityId[] $entityIds The entities to subscribe to.
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws UsageTrackerException
 	 * @throws Exception
 	 */
 	public function unsubscribe( $subscriber, array $entityIds ) {
@@ -95,22 +79,10 @@ class SqlSubscriptionManager implements SubscriptionManager {
 		$unsubscriptions = $this->idsToString( $entityIds );
 		$dbw = $this->connectionManager->getWriteConnectionRef();
 		$dbw->startAtomic( __METHOD__ );
-
-		try {
-			$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $unsubscriptions );
-			$obsoleteSubscriptions = array_intersect( $unsubscriptions, $oldSubscriptions );
-			$this->deleteSubscriptions( $dbw, $subscriber, $obsoleteSubscriptions );
-
-			$dbw->endAtomic( __METHOD__ );
-		} catch ( Exception $ex ) {
-			$dbw->rollback( __METHOD__ );
-
-			if ( $ex instanceof DBError ) {
-				throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-			} else {
-				throw $ex;
-			}
-		}
+		$oldSubscriptions = $this->querySubscriptions( $dbw, $subscriber, $unsubscriptions );
+		$obsoleteSubscriptions = array_intersect( $unsubscriptions, $oldSubscriptions );
+		$this->deleteSubscriptions( $dbw, $subscriber, $obsoleteSubscriptions );
+		$dbw->endAtomic( __METHOD__ );
 	}
 
 	/**

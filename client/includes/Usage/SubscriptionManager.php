@@ -20,8 +20,6 @@ interface SubscriptionManager {
 	 *
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
-	 *
-	 * @throws UsageTrackerException
 	 */
 	public function subscribe( $subscriber, array $entityIds );
 
@@ -30,8 +28,6 @@ interface SubscriptionManager {
 	 *
 	 * @param string $subscriber Global site ID of the subscriber
 	 * @param EntityId[] $entityIds The entities to subscribe to.
-	 *
-	 * @throws UsageTrackerException
 	 */
 	public function unsubscribe( $subscriber, array $entityIds );
 
