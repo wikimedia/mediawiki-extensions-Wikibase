@@ -42,8 +42,12 @@ The entity types repository is an associative array mapping entity type identifi
   * A callable that returns an [EntityHandler] instance supporting this entity type
 * entity-factory-callback (repo only)
   * A callback for creating an empty entity of this type
+* entity-store-factory-callback (repo only)
+  * A callable for creating an [EntityStore] for entities of this type. Takes the default store and an [EntityRevisionLookup] as arguments.
 * entity-revision-lookup-factory-callback (repo only)
   * A callback for creating an [EntityRevisionLookup] for and entity of this type, with first and only argument being the default lookup, which will be an instance of EntityRevisionLookup.
+* entity-title-store-lookup-factory-callback (repo only)
+  * A callback for creating an [EntityTitleStoreLookup] for entities of this type, with the first and only argument being the default lookup.
 * entity-metadata-accessor-callback
   * A callback for creating a [WikiPageEntityMetaDataAccessor] for an entity of this type, with the arguments being the wiki database name (string|false), and the repository name (string)
 * js-deserializer-factory-function (repo only)
@@ -62,6 +66,12 @@ The entity types repository is an associative array mapping entity type identifi
   * A callable that returns [EntityIdFormatter] instance. Takes a Language object as argument.
 * entity-reference-extractor-callback
   * A callable that builds and returns [EntityReferenceExtractors] instance which extract ids of referenced entities from an entity. Can be used to determine which other entities an entity links to (e.g. in "What links here").
+* entity-differ-strategy-builder (repo and client)
+  * A callback for creating an [EntityDifferStrategy], called without arguments. (The differ strategy is itself responsible for determining whether it can diff a certain entity type or not.)
+* entity-patcher-strategy-builder (repo only)
+  * A callback for creating an [EntityPatcherStrategy], called without arguments. (The patcher strategy is itself responsible for determining whether it can patch a certain entity type or not.)
+* entity-diff-visualizer-callback (repo only)
+  * A callback for creating an [EntityDiffVisualizer] for entities of this type. Called with five arguments: a MessageLocalizer, a [ClaimDiffer], a [ClaimDifferenceVisualizer], a SiteLookup, and an [EntityIdFormatter].
 * sub-entity-types (optional) (repo and client)
   * An array of strings listing the sub entity types that this entity type contains.
 * fulltext-search-context (repo only)
@@ -74,6 +84,18 @@ The entity types repository is an associative array mapping entity type identifi
   * A callback for creating an [EntityIdLookup] to resolve Title instances to EntityIds for entities of this types
 * prefetching-term-lookup-callback
   * A callable that returns a [PrefetchingTermLookup] instance. When no callback is provided for an entity type, a `NullPrefetchingTermLookup` is used as a fallback. The `PrefetchingTermLookup` is used to prefetch terms for all entities that appear on the page in all languages in the `TermLanguageFallbackChain` to minimize the number of term lookups when an entity page is being rendered. This happens in `LanguageFallbackLabelDescriptionLookupFactory::newLabelDescriptionLookup`.
+* meta-tags-creator-callback (repo only)
+  * A callable for creating an [EntityMetaTagsCreator] for entities of this type. Takes a Language object as argument.
+* article-id-lookup-callback (repo only)
+  * A callable for creating an [EntityArticleIdLookup] for entities of this type, called without arguments.
+* title-text-lookup-callback (repo only)
+  * A callable for creating an [EntityTitleTextLookup] for entities of this type, called without arguments.
+* url-lookup-callback (repo only)
+  * A callable for creating an [EntityUrlLookup] for entities of this type, called without arguments.
+* existence-checker-callback (repo only)
+  * A callable for creating an [EntityExistenceChecker] for entities of this type, called without arguments.
+* redirect-checker-callback (repo only)
+  * A callable for creating an [EntityRedirectChecker] for entities of this type, called without arguments.
 
 Extensions that wish to register an entity type should use the [WikibaseRepoEntityTypes] and/or [WikibaseClientEntityTypes] hooks to provide additional entity type definitions. (See @ref md_docs_topics_hooks-php)
 
@@ -100,3 +122,16 @@ The entity type definitions themselves are wrapped by the [EntityTypeDefinitions
 [EntityIdFormatter]: @ref Wikibase::DataModel::Services::EntityId::EntityIdFormatter
 [EntityReferenceExtractors]: @ref Wikibase::Repo::EntityReferenceExtractors::EntityReferenceExtractor
 [PrefetchingTermLookup]: @ref Wikibase::DataAccess::PrefetchingTermLookup
+[EntityStore]: @ref Wikibase::Lib::Store::EntityStore
+[EntityTitleStoreLookup]: @ref Wikibase::Repo::Store::EntityTitleStoreLookup
+[EntityMetaTagsCreator]: @ref Wikibase::View::EntityMetaTagsCreator
+[EntityDifferStrategy]: @ref Wikibase::DataModel::Services::Diff::EntityDifferStrategy
+[EntityPatcherStrategy]: @ref Wikibase::DataModel::Services::Diff::EntityPatcherStrategy
+[EntityDiffVisualizer]: @ref Wikibase::Repo::Diff::EntityDiffVisualizer
+[ClaimDiffer]: @ref Wikibase::Repo::Diff::ClaimDiffer
+[ClaimDifferenceVisualizer]: @ref Wikibase::Repo::Diff::ClaimDifferenceVisualizer
+[EntityArticleIdLookup]: @ref Wikibase::Lib::Store::EntityArticleIdLookup
+[EntityTitleTextLookup]: @ref Wikibase::Lib::Store::EntityTitleTextLookup
+[EntityUrlLookup]: @ref Wikibase::Lib::Store::EntityUrlLookup
+[EntityExistenceChecker]: @ref Wikibase::Lib::Store::EntityExistenceChecker
+[EntityRedirectChecker]: @ref Wikibase::Lib::Store::EntityRedirectChecker

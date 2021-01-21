@@ -2,6 +2,7 @@
 
 namespace Wikibase\Lib\Tests;
 
+use ReflectionClass;
 use Wikibase\Lib\EntityTypeDefinitions;
 
 /**
@@ -44,6 +45,35 @@ class EntityTypeDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$this->assertSame( [
 			'foo-id-pattern' => 'new-foo-id',
 		], $definitions->getEntityIdBuilders() );
+	}
+
+	/** @dataProvider provideFieldNames */
+	public function testFieldDocumented( string $fieldName ) {
+		$documentation = $this->getEntityTypesDocumentation();
+		// don’t use $this->assertStringContainsString(), it prints the whole haystack each time
+		if ( strpos( $documentation, $fieldName ) === false ) {
+			$this->fail( "No documentation found in entitytypes.md for '$fieldName'" );
+		} else {
+			$this->addToAssertionCount( 1 );
+		}
+	}
+
+	public function provideFieldNames() {
+		$class = new ReflectionClass( EntityTypeDefinitions::class );
+		// TODO PHP8: use $class->getConstants( ReflectionClassConstant::IS_PUBLIC )
+		foreach ( $class->getReflectionConstants() as $constant ) {
+			if ( $constant->isPublic() ) {
+				yield $constant->getName() => [ $constant->getValue() ];
+			}
+		}
+	}
+
+	private function getEntityTypesDocumentation(): string {
+		static $documentation = null;
+		if ( $documentation === null ) {
+			$documentation = file_get_contents( __DIR__ . '/../../../docs/topics/entitytypes.md' );
+		}
+		return $documentation;
 	}
 
 }
