@@ -27,7 +27,7 @@
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
-		"php": "^7.0",
+		"php": "^7.0|^8.0",
 		"wikibase/data-model": "~9.0|~8.0",
 		"wikibase/data-model-serialization": "~2.0",
 		"serialization/serialization": "~4.0|~3.2"
