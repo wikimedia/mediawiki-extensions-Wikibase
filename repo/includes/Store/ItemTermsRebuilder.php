@@ -7,8 +7,8 @@ use Onoi\MessageReporter\MessageReporter;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\ItemLookup;
 use Wikibase\DataModel\Services\Lookup\ItemLookupException;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Services\Term\ItemTermStoreWriter;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Rdbms\ILBFactory;
 
 /**
@@ -108,7 +108,7 @@ class ItemTermsRebuilder {
 		foreach ( $itemIds as $itemId ) {
 			try {
 				$item = $this->itemLookup->getItemForId( $itemId );
-			} catch ( RevisionedUnresolvedRedirectException $entityRedirectException ) {
+			} catch ( UnresolvedEntityRedirectException $entityRedirectException ) {
 				// Nothing to do, ignore
 				continue;
 			} catch ( ItemLookupException $exception ) {

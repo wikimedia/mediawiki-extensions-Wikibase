@@ -10,8 +10,8 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikimedia\Purtle\RdfWriter;
 
 /**
@@ -466,7 +466,7 @@ class RdfBuilder implements EntityRdfBuilder, EntityMentionListener {
 				}
 
 				$this->addEntityStub( $entity );
-			} catch ( RevisionedUnresolvedRedirectException $ex ) {
+			} catch ( UnresolvedEntityRedirectException $ex ) {
 				// NOTE: this may add more entries to the end of entitiesResolved
 				$target = $ex->getRedirectTargetId();
 				$this->addEntityRedirect( $id, $target );
