@@ -20,12 +20,12 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Tests\MockRepository;
 
 /**
@@ -471,7 +471,7 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 		$entityLookup->expects( $this->once() )
 			->method( $lookupMethodCalled )
 			->with( $entityId )
-			->willThrowException( new RevisionedUnresolvedRedirectException( $entityId, $entityId ) );
+			->willThrowException( new UnresolvedEntityRedirectException( $entityId, $entityId ) );
 
 		$logger = $this->createMock( LoggerInterface::class );
 		$logger->expects( $this->once() )

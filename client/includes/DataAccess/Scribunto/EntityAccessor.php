@@ -14,9 +14,9 @@ use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\Lib\ContentLanguages;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\TermLanguageFallbackChain;
 
 /**
@@ -156,7 +156,7 @@ class EntityAccessor {
 		}
 		try {
 			$entityObject = $this->entityLookup->getEntity( $entityId );
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;
@@ -191,7 +191,7 @@ class EntityAccessor {
 		$this->usageAccumulator->addOtherUsage( $entityId );
 		try {
 			return $this->entityLookup->hasEntity( $entityId );
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return false;
@@ -217,7 +217,7 @@ class EntityAccessor {
 
 		try {
 			$entity = $this->entityLookup->getEntity( $entityId );
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			$this->logPossibleDoubleRedirect( $prefixedEntityId );
 
 			return null;
@@ -261,7 +261,7 @@ class EntityAccessor {
 	}
 
 	/**
-	 * @see RevisionedUnresolvedRedirectException
+	 * @see UnresolvedEntityRedirectException
 	 * @param $prefixedEntityId
 	 */
 	private function logPossibleDoubleRedirect( $prefixedEntityId ) {

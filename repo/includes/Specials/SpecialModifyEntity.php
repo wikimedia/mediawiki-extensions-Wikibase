@@ -7,10 +7,10 @@ use HTMLForm;
 use Status;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\Lib\MessageException;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityTitleLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\Store\StorageException;
 use Wikibase\Lib\Summary;
 use Wikibase\Lib\UserInputException;
@@ -99,7 +99,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 					'Entity ID "' . $id->getSerialization() . '" is unknown'
 				);
 			}
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
 				[ $id->getSerialization() ],
@@ -135,7 +135,7 @@ abstract class SpecialModifyEntity extends SpecialWikibaseRepoPage {
 					'Entity ID "' . $id->getSerialization() . '" is unknown'
 				);
 			}
-		} catch ( RevisionedUnresolvedRedirectException $ex ) {
+		} catch ( UnresolvedEntityRedirectException $ex ) {
 			throw new UserInputException(
 				'wikibase-wikibaserepopage-unresolved-redirect',
 				[ $id->getSerialization() ],
