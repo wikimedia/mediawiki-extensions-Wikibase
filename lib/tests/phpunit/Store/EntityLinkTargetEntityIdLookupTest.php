@@ -35,6 +35,10 @@ class EntityLinkTargetEntityIdLookupTest extends TestCase {
 			new TitleValue( 0, 'Special:EntityPage/Q1', '', self::ITEM_SOURCE_INTERWIKI_PREFIX ),
 			new ItemId( 'Q1' ),
 		];
+		yield 'interwiki special entity page for known entity source and no parsable ID' => [
+			new TitleValue( 0, 'Special:EntityPage', '', self::ITEM_SOURCE_INTERWIKI_PREFIX ),
+			null,
+		];
 		yield 'interwiki special entity page for unknown entity source' => [
 			new TitleValue( 0, 'Special:EntityPage/Q1', '', 'unknown' ),
 			null,
