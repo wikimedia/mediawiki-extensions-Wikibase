@@ -532,7 +532,7 @@ Definition for unit conversion storage.
 
 Should be in the format [ObjectFactory] understands.
 
-EXAMPLE: ```[ 'class' => 'Wikibase\\Lib\\JsonUnitStorage', 'args' => [ 'myUnits.json' ] ]```
+EXAMPLE: ```[ 'class' => 'Wikibase\Lib\Units\JsonUnitStorage', 'args' => [ __DIR__ . '/myUnits.json' ] ]```
 
 #### canonicalLanguageCodes
 Special non-canonical languages and their BCP 47 mappings
