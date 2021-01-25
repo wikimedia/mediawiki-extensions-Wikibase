@@ -57,7 +57,10 @@ class EntityLinkTargetEntityIdLookup implements LinkTargetEntityIdLookup {
 
 	private function getEntityIdFromExternalLink( LinkTarget $linkTarget ): ?EntityId {
 		$potentialSpecialEntityPageParts = explode( '/', $linkTarget->getText(), 2 );
-		if ( $potentialSpecialEntityPageParts[0] !== self::SPECIAL_ENTITY_PAGE ) {
+		if (
+			$potentialSpecialEntityPageParts[0] !== self::SPECIAL_ENTITY_PAGE ||
+			count( $potentialSpecialEntityPageParts ) < 2
+		) {
 			return null;
 		}
 
