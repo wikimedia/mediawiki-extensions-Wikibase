@@ -10,8 +10,10 @@ use ApiUsageException;
 use DataValues\DataValue;
 use DataValues\IllegalValueException;
 use DataValues\StringValue;
+use IBufferingStatsdDataFactory;
 use InvalidArgumentException;
 use LogicException;
+use NullStatsdDataFactory;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\FormattingException;
 use ValueFormatters\ValueFormatter;
@@ -59,6 +61,9 @@ class FormatSnakValue extends ApiBase {
 	 */
 	private $errorReporter;
 
+	/** @var IBufferingStatsdDataFactory */
+	private $stats;
+
 	/**
 	 * @see ApiBase::__construct
 	 *
@@ -69,6 +74,7 @@ class FormatSnakValue extends ApiBase {
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param DataValueFactory $dataValueFactory
 	 * @param ApiErrorReporter $apiErrorReporter
+	 * @param IBufferingStatsdDataFactory|null $stats
 	 */
 	public function __construct(
 		ApiMain $mainModule,
@@ -77,7 +83,8 @@ class FormatSnakValue extends ApiBase {
 		OutputFormatSnakFormatterFactory $snakFormatterFactory,
 		DataTypeFactory $dataTypeFactory,
 		DataValueFactory $dataValueFactory,
-		ApiErrorReporter $apiErrorReporter
+		ApiErrorReporter $apiErrorReporter,
+		IBufferingStatsdDataFactory $stats = null
 	) {
 		parent::__construct( $mainModule, $moduleName );
 
@@ -86,11 +93,13 @@ class FormatSnakValue extends ApiBase {
 		$this->dataTypeFactory = $dataTypeFactory;
 		$this->dataValueFactory = $dataValueFactory;
 		$this->errorReporter = $apiErrorReporter;
+		$this->stats = $stats ?: new NullStatsdDataFactory();
 	}
 
 	public static function factory(
 		ApiMain $mainModule,
 		string $moduleName,
+		IBufferingStatsdDataFactory $stats,
 		DataTypeFactory $dataTypeFactory
 	): self {
 		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
@@ -103,7 +112,8 @@ class FormatSnakValue extends ApiBase {
 			$wikibaseRepo->getSnakFormatterFactory(),
 			$dataTypeFactory,
 			$wikibaseRepo->getDataValueFactory(),
-			$apiHelperFactory->getErrorReporter( $mainModule )
+			$apiHelperFactory->getErrorReporter( $mainModule ),
+			$stats
 		);
 	}
 
@@ -240,6 +250,7 @@ class FormatSnakValue extends ApiBase {
 
 			if ( is_array( $options ) ) {
 				foreach ( $options as $name => $value ) {
+					$this->stats->increment( "wikibase.repo.api.formatvalue.options.$name" );
 					$formatterOptions->setOption( $name, $value );
 				}
 			}

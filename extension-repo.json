@@ -52,6 +52,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\FormatSnakValue",
 			"factory": "\\Wikibase\\Repo\\Api\\FormatSnakValue::factory",
 			"services": [
+				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory"
 			]
 		},
@@ -89,6 +90,7 @@
 			"class": "\\Wikibase\\Repo\\Api\\ParseValue",
 			"factory": "\\Wikibase\\Repo\\Api\\ParseValue::factory",
 			"services": [
+				"StatsdDataFactory",
 				"WikibaseRepo.DataTypeFactory",
 				"WikibaseRepo.ValueParserFactory"
 			]
