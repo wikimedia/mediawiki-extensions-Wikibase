@@ -411,7 +411,7 @@ return call_user_func( function() {
 				$snakFormat = new SnakFormat();
 
 				if ( $snakFormat->getBaseFormat( $format ) === SnakFormatter::FORMAT_HTML ) {
-					$logger = LoggerFactory::getInstance( 'Wikibase.NewItemIdFormatter' );
+					$logger = LoggerFactory::getInstance( 'Wikibase' );
 					try {
 						return new EntityIdValueFormatter( $factory->newItemIdHtmlLinkFormatter( $options ) );
 					} catch ( \Exception $e ) {
