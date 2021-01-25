@@ -4,7 +4,8 @@
 			"AnakngAraw",
 			"Ianlopez1115",
 			"Jojit fb",
-			"Sky Harbor"
+			"Sky Harbor",
+			"Yivangamer"
 		]
 	},
 	"wikibase-client-desc": "Kliyente para sa dugtong na Wikibase",
@@ -13,6 +14,7 @@
 	"wikibase-dataitem": "Item na {{WBREPONAME}}",
 	"wikibase-editlinks": "Baguhin ang mga kawing",
 	"wikibase-editlinkstitle": "Baguhin ang mga kawing inter-wika",
+	"wikibase-linkitem-addlinks": "Magdagdag ng kawing",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
 	"wikibase-rc-hide-wikidata-hide": "Itago",
 	"wikibase-rc-hide-wikidata-show": "Ipakita",

@@ -13,6 +13,8 @@
 	"wikibase-dataitem": "Викидарий элемент",
 	"wikibase-editlinks": "ТӀатовжамаш нийсдар",
 	"wikibase-editlinkstitle": "Метташта юкъера тӀатовжамаш нийсдар",
+	"wikibase-addlinkstitle": "Интервики-тӏатовжамаш тӀатоха, ер оагӀув кхыча меттала йолча Википеден разделашкара оагӀонашца хоттаргйолаш",
+	"wikibase-linkitem-addlinks": "ТӀатовжамаш тӀатоха",
 	"wikibase-linkitem-input-page": "ОагIув:",
 	"wikibase-linkitem-confirmitem-button": "Бакъде",
 	"wikibase-rc-hide-wikidata": "$1 {{WBREPONAME}}",
