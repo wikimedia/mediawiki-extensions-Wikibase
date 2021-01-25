@@ -21,8 +21,6 @@ interface UsageTracker {
 	 * @param EntityUsage[] $usages A list of entity usages.
 	 *
 	 * @see @ref md_docs_topics_usagetracking for details.
-	 *
-	 * @throws UsageTrackerException
 	 */
 	public function addUsedEntities( $pageId, array $usages );
 
@@ -35,7 +33,6 @@ interface UsageTracker {
 	 *
 	 * @see @ref md_docs_topics_usagetracking for details.
 	 *
-	 * @throws UsageTrackerException
 	 * @return EntityUsage[] Usages that have been removed
 	 */
 	public function replaceUsedEntities( $pageId, array $usages );
@@ -45,7 +42,6 @@ interface UsageTracker {
 	 *
 	 * @param int $pageId
 	 *
-	 * @throws UsageTrackerException
 	 * @return EntityUsage[] the pruned usages
 	 */
 	public function pruneUsages( $pageId );

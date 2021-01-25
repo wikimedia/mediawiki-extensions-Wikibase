@@ -8,10 +8,8 @@ use Traversable;
 use Wikibase\Client\Usage\EntityUsage;
 use Wikibase\Client\Usage\UsageLookup;
 use Wikibase\Client\Usage\UsageTracker;
-use Wikibase\Client\Usage\UsageTrackerException;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikimedia\Rdbms\DBError;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\SessionConsistentConnectionManager;
 
@@ -149,7 +147,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityUsage[] $usages
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws UsageTrackerException
 	 */
 	public function addUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
@@ -170,23 +167,17 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
 		$db = $this->connectionManager->getWriteConnection();
+		$usageTable = $this->newUsageTable( $db );
+		// queryUsages guarantees this to be identity string => EntityUsage
+		$oldUsages = $usageTable->queryUsages( $pageId );
 
-		try {
-			$usageTable = $this->newUsageTable( $db );
-			// queryUsages guarantees this to be identity string => EntityUsage
-			$oldUsages = $usageTable->queryUsages( $pageId );
+		$newUsages = $this->reindexEntityUsages( $usages );
 
-			$newUsages = $this->reindexEntityUsages( $usages );
+		$added = array_diff_key( $newUsages, $oldUsages );
 
-			$added = array_diff_key( $newUsages, $oldUsages );
-
-			// Actually add the new entries
-			$usageTable->addUsages( $pageId, $added );
-		} catch ( DBError $ex ) {
-			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-		} finally {
-			$this->connectionManager->releaseConnection( $db );
-		}
+		// Actually add the new entries
+		$usageTable->addUsages( $pageId, $added );
+		$this->connectionManager->releaseConnection( $db );
 	}
 
 	/**
@@ -198,7 +189,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @return EntityUsage[] Usages that have been removed
 	 *
 	 * @throws InvalidArgumentException
-	 * @throws UsageTrackerException
 	 */
 	public function replaceUsedEntities( $pageId, array $usages ) {
 		if ( !is_int( $pageId ) ) {
@@ -208,27 +198,20 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
 		$db = $this->connectionManager->getWriteConnection();
+		$usageTable = $this->newUsageTable( $db );
+		// queryUsages guarantees this to be identity string => EntityUsage
+		$oldUsages = $usageTable->queryUsages( $pageId );
 
-		try {
-			$usageTable = $this->newUsageTable( $db );
-			// queryUsages guarantees this to be identity string => EntityUsage
-			$oldUsages = $usageTable->queryUsages( $pageId );
+		$usages = $this->handleDisabledUsages( $usages );
+		$newUsages = $this->reindexEntityUsages( $usages );
 
-			$usages = $this->handleDisabledUsages( $usages );
-			$newUsages = $this->reindexEntityUsages( $usages );
+		$removed = array_diff_key( $oldUsages, $newUsages );
+		$added = array_diff_key( $newUsages, $oldUsages );
 
-			$removed = array_diff_key( $oldUsages, $newUsages );
-			$added = array_diff_key( $newUsages, $oldUsages );
-
-			$usageTable->removeUsages( $pageId, $removed );
-			$usageTable->addUsages( $pageId, $added );
-
-			return $removed;
-		} catch ( DBError $ex ) {
-			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-		} finally {
-			$this->connectionManager->releaseConnection( $db );
-		}
+		$usageTable->removeUsages( $pageId, $removed );
+		$usageTable->addUsages( $pageId, $added );
+		$this->connectionManager->releaseConnection( $db );
+		return $removed;
 	}
 
 	/**
@@ -237,23 +220,16 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 *
 	 * @return EntityUsage[]
-	 * @throws UsageTrackerException
 	 */
 	public function pruneUsages( $pageId ) {
 		// NOTE: while logically we'd like the below to be atomic, we don't wrap it in a
 		// transaction to prevent long lock retention during big updates.
 		$db = $this->connectionManager->getWriteConnection();
+		$usageTable = $this->newUsageTable( $db );
+		$pruned = $usageTable->pruneUsages( $pageId );
 
-		try {
-			$usageTable = $this->newUsageTable( $db );
-			$pruned = $usageTable->pruneUsages( $pageId );
-
-			return $pruned;
-		} catch ( DBError $ex ) {
-			throw new UsageTrackerException( $ex->getMessage(), $ex->getCode(), $ex );
-		} finally {
-			$this->connectionManager->releaseConnection( $db );
-		}
+		$this->connectionManager->releaseConnection( $db );
+		return $pruned;
 	}
 
 	/**
@@ -262,7 +238,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param int $pageId
 	 *
 	 * @return EntityUsage[] EntityUsage identity string => EntityUsage
-	 * @throws UsageTrackerException
 	 */
 	public function getUsagesForPage( $pageId ) {
 		$db = $this->connectionManager->getReadConnection();
@@ -282,7 +257,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param string[] $aspects
 	 *
 	 * @return Traversable A traversable over PageEntityUsages grouped by page.
-	 * @throws UsageTrackerException
 	 */
 	public function getPagesUsing( array $entityIds, array $aspects = [] ) {
 		if ( empty( $entityIds ) ) {
@@ -305,7 +279,6 @@ class SqlUsageTracker implements UsageTracker, UsageLookup {
 	 * @param EntityId[] $entityIds
 	 *
 	 * @return EntityId[]
-	 * @throws UsageTrackerException
 	 */
 	public function getUnusedEntities( array $entityIds ) {
 		if ( empty( $entityIds ) ) {
