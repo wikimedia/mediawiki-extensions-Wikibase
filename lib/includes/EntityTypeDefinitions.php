@@ -11,8 +11,7 @@ use InvalidArgumentException;
  * EntityTypeDefinitions provides a one-stop interface for defining entity types.
  * Each entity type is defined using a "entity type definition" array.
  *
- * The fields of a definition array can be seen in the follow doc file:
- * @see docs/entitytypes.wiki
+ * @see @ref md_docs_topics_entitytypes for the fields of a definition array
  *
  * @license GPL-2.0-or-later
  * @author Bene* < benestar.wikimedia@gmail.com >
