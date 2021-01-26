@@ -18,6 +18,7 @@ use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Statement\StatementListProvider;
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\TermFallback;
@@ -25,7 +26,6 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Search\ExtendedResult;
 use Wikibase\Repo\WikibaseRepo;
@@ -108,7 +108,7 @@ class ShowSearchHitHandler implements ShowSearchHitHook, ShowSearchHitTitleHook 
 
 		try {
 			$entity = $this->getEntity( $title );
-		} catch ( RevisionedUnresolvedRedirectException $exception ) {
+		} catch ( UnresolvedEntityRedirectException $exception ) {
 			return;
 		}
 

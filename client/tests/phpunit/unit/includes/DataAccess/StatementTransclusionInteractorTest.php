@@ -14,13 +14,13 @@ use Wikibase\DataModel\Entity\EntityIdValue;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\Lib\Formatters\SnakFormatter;
 use Wikibase\Lib\Store\EntityRevision;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\RevisionBasedEntityLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 
 /**
  * @covers \Wikibase\Client\DataAccess\StatementTransclusionInteractor
@@ -232,7 +232,7 @@ class StatementTransclusionInteractorTest extends \PHPUnit\Framework\TestCase {
 					case 'Q42':
 						return new EntityRevision( new Item( new ItemId( 'Q42' ) ) );
 					case 'Q43':
-						throw new RevisionedUnresolvedRedirectException(
+						throw new UnresolvedEntityRedirectException(
 							$entityId,
 							new ItemId( 'Q404' )
 						);

@@ -15,12 +15,12 @@ use Title;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
+use Wikibase\DataModel\Services\Lookup\UnresolvedEntityRedirectException;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
-use Wikibase\Lib\Store\RevisionedUnresolvedRedirectException;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
@@ -329,7 +329,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
-	 * Searches of items with Double Redirects result in RevisionedUnresolvedRedirectException
+	 * Searches of items with Double Redirects result in UnresolvedEntityRedirectException
 	 * being thrown by the EntityLookup, this should be handled and not bubble up to the ui.
 	 *
 	 * @see https://phabricator.wikimedia.org/T251880
@@ -340,7 +340,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$lookup = $this->getEntityLookup();
 		$lookup->expects( $this->any() )
 			->method( 'getEntity' )
-			->willThrowException( new RevisionedUnresolvedRedirectException( new ItemId( 'Q1' ), new ItemId( 'Q2' ), "" ) );
+			->willThrowException( new UnresolvedEntityRedirectException( new ItemId( 'Q1' ), new ItemId( 'Q2' ) ) );
 		$showHandler = $this->getShowSearchHitHandler( [], $lookup );
 
 		$link = '<a>link</a>';
