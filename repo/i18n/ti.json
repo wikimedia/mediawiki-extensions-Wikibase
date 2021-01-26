@@ -7,6 +7,7 @@
 	"wikibase-entity-item": "ውልቀ ነገር",
 	"wikibase-edit": "ኣመዓራርይ",
 	"wikibase-save": "ኣቐምጥ",
+	"wikibase-publish": "ኣሕትም",
 	"wikibase-cancel": "ኣትርፍ",
 	"wikibase-add": "ወስኽ",
 	"wikibase-entitytermsforlanguagelistview-description": "መግለጺ",
@@ -16,5 +17,8 @@
 	"wikibase-diffview-link-name": "ሽም",
 	"wikibase-sitelink-page-edit-placeholder": "ገጽ",
 	"wikibase-remove": "ኣልግስ",
-	"wikibase-entityselector-more": "ተወሳኺ"
+	"wikibase-entityselector-more": "ተወሳኺ",
+	"wikibase-newentity-language": "ቋንቋ፦",
+	"wikibase-newentity-description": "መግለጺ፦",
+	"wikibase-setlabeldescriptionaliases-description-label": "መግለጺ፦"
 }
