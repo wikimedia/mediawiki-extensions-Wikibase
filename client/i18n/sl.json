@@ -30,7 +30,7 @@
 	"wikibase-linkitem-failure": "Med povezovanjem s stranjo je prišlo do neznane napake.",
 	"wikibase-linkitem-title": "Poveži s stranjo",
 	"wikibase-linkitem-linkpage": "Poveži s stranjo",
-	"wikibase-linkitem-selectlink": "Prosimo, izberite spletišče in stran, ki jo želite povezati na to stran.",
+	"wikibase-linkitem-selectlink": "Prosimo, izberite spletišče in stran, ki jo želite povezati s to stranjo.",
 	"wikibase-linkitem-input-site": "Jezik:",
 	"wikibase-linkitem-input-page": "Stran:",
 	"wikibase-linkitem-confirmitem-text": "Stran, ki ste jo izbrali, je že povezana z [$1 objektom v naši centralni zbirki podatkov]. Prosimo, potrdite, da {{PLURAL:$2|je stran|sta strani|so strani}}, {{PLURAL:$2|prikazana|prikazani|prikazane}} spodaj, {{PLURAL:$2|tista|tisti|tiste}}, ki jih želite povezati na to stran.",
