@@ -43,7 +43,7 @@ class WrappingEntityIdFormatterFactoryTest extends TestCase {
 		return $this->createMock( Language::class );
 	}
 
-	private function newWrappingEntityIdFormatterFactory() : WrappingEntityIdFormatterFactory {
+	private function newWrappingEntityIdFormatterFactory(): WrappingEntityIdFormatterFactory {
 		return new WrappingEntityIdFormatterFactory( $this->mockEntityIdFormatterFactory() );
 	}
 

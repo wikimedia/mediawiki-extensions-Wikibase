@@ -38,7 +38,7 @@ class SummaryParsingPrefetchHelper {
 	 * @param array $languageCodes
 	 * @param array $termTypes
 	 */
-	public function prefetchFederatedProperties( $rows, array $languageCodes, array $termTypes ) : void {
+	public function prefetchFederatedProperties( $rows, array $languageCodes, array $termTypes ): void {
 		$resultProperties = $this->extractSummaryProperties( $rows );
 		if ( empty( $resultProperties ) ) {
 			return;
@@ -60,7 +60,7 @@ class SummaryParsingPrefetchHelper {
 	 * @param IResultWrapper|array $result
 	 * @return PropertyId[]
 	 */
-	public function extractSummaryProperties( $result ) : array {
+	public function extractSummaryProperties( $result ): array {
 		$propertyIds = [];
 		foreach ( $result as $revisionRow ) {
 

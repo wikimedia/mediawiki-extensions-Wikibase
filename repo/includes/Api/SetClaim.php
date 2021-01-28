@@ -205,7 +205,7 @@ class SetClaim extends ApiBase {
 	private function statementMainSnakAlreadyExists(
 		Statement $statement,
 		StatementList $existingStatements
-	) : bool {
+	): bool {
 		$propertyId = $statement->getPropertyId();
 		$mainSnak = $statement->getMainSnak();
 		foreach ( $existingStatements as $existingStatement ) {

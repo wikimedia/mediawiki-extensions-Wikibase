@@ -128,7 +128,7 @@ class DataAccessSnakFormatterOutputFormatTest extends \PHPUnit\Framework\TestCas
 	 * In order to get to there right values, this method mimics (private)
 	 * WikibaseClient::getRepoItemUriParser and WikibaseClient::getItemSource.
 	 */
-	private function getGlobalConceptBaseUriForUnits() : string {
+	private function getGlobalConceptBaseUriForUnits(): string {
 		$wikibaseClient = WikibaseClient::getDefaultInstance();
 		$wikibaseClient = TestingAccessWrapper::newFromObject( $wikibaseClient );
 

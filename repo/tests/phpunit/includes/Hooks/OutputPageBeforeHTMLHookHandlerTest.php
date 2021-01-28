@@ -292,7 +292,7 @@ class OutputPageBeforeHTMLHookHandlerTest extends MediaWikiIntegrationTestCase {
 		return $this->mockEditability( false );
 	}
 
-	private function getUserLanguageLookupReturnsSpecifiedLangs() : UserLanguageLookup {
+	private function getUserLanguageLookupReturnsSpecifiedLangs(): UserLanguageLookup {
 		$userLanguageLookup = $this->createMock( UserLanguageLookup::class );
 		$userLanguageLookup->expects( $this->once() )
 			->method( 'getUserSpecifiedLanguages' )
