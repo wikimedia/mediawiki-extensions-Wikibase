@@ -326,7 +326,7 @@
 	"wikibase-entitypage-text": "Questa pagina chì la redirinsg a l'entità de la pagina in d'un archivi che la ghe parten. Per piesé fornìss l'ID de l'entità in de l'URL cont el doprà la sintassi sotpagina.",
 	"wikibase-entitypage-bad-id": "ID minga valid: $1.",
 	"wikibase-error-entity-too-big": "L'entità l'è tropa granda. La grandezza massima permetuda l'è $1.",
-	"wikibase-parse-error": "Valor ind un formad minga sgiust.",
+	"wikibase-parse-error": "Valor in d'un formad minga sgiust.",
 	"wikibase-parse-error-coordinate": "El valor di coordinad l'è in d'un formad minga sgiust.",
 	"wikibase-parse-error-entity-id": "L'ID de l'entità l'è in d'un formad minga sgiust.",
 	"wikibase-parse-error-quantity": "La quantità l'è in d'un formad minga sgiust.",
