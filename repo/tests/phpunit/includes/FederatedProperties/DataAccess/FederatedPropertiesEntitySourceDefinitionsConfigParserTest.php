@@ -46,10 +46,6 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParserTest extends TestCas
 
 	/**
 	 * @dataProvider entitySourceProvider
-	 *
-	 * @param EntitySourceDefinitions $sourceDefinitions
-	 * @param EntityTypeDefinitions $entityTypeDefinitions
-	 * @param SettingsArray $settings
 	 */
 	public function testFederatedPropertiesInitializesDefaults(
 		EntitySourceDefinitions $sourceDefinitions,

@@ -243,8 +243,6 @@ class ChangeOpAliasesTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider validateProvider
-	 *
-	 * @param ChangeOpAliases $changeOpAliases
 	 */
 	public function testValidate( ChangeOpAliases $changeOpAliases ) {
 		$entity = new Item();

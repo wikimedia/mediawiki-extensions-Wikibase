@@ -58,8 +58,6 @@ class EntityChangeTest extends ChangeRowTest {
 
 	/**
 	 * @dataProvider changeProvider
-	 *
-	 * @param EntityChange $entityChange
 	 */
 	public function testGetType( EntityChange $entityChange ) {
 		$this->assertIsString( $entityChange->getType() );

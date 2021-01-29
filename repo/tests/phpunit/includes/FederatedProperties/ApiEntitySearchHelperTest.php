@@ -70,13 +70,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 	/**
 	 * @dataProvider filteringResultsResponseProvider
-	 *
-	 * @param $params
-	 * @param string $responseDataFile
-	 * @param $expectedResultsEntityIds
-	 * @param $dataTypes
-	 * @param string $langCode
-	 * @param $shouldThrowError
 	 */
 	public function testGetRankedSearchResultsFiltering(
 		array $params,
@@ -151,10 +144,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 	/**
 	 * @dataProvider paramsAndExpectedResponseProvider
-	 * @param string $responseDataFile
-	 * @param int $expectedResultCount
-	 * @param array $expectedResultsEntityId
-	 * @throws ApiRequestException
 	 */
 	public function testGetRankedSearchResults(
 		string $langCode,
@@ -237,9 +226,6 @@ class ApiEntitySearchHelperTest extends TestCase {
 
 	/**
 	 * @dataProvider invalidParamsAndUnexpectedResponseProvider
-	 * @param string $responseDataFile
-	 * @param int $expectedResultCount
-	 * @param array $expectedResultsEntityId
 	 */
 	public function testApiResponseStructureIsValid(
 		string $langCode,

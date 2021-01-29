@@ -4,7 +4,6 @@ namespace Wikibase\Lib\Tests\Changes;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpChange;
-use Exception;
 use Wikibase\DataModel\Services\Diff\ItemDiff;
 use Wikibase\Lib\Changes\EntityChange;
 use Wikibase\Lib\Changes\EntityDiffChangedAspectsFactory;
@@ -49,8 +48,6 @@ class ItemChangeTest extends EntityChangeTest {
 
 	/**
 	 * @dataProvider changeProvider
-	 *
-	 * @param ItemChange $change
 	 */
 	public function testGetSiteLinkDiff( ItemChange $change ) {
 		$siteLinkDiff = $change->getSiteLinkDiff();
@@ -103,9 +100,6 @@ class ItemChangeTest extends EntityChangeTest {
 
 	/**
 	 * @dataProvider changeBackwardsCompatProvider
-	 *
-	 * @param ItemChange $change
-	 * @throws Exception
 	 */
 	public function testGetSiteLinkDiffBackwardsCompat( ItemChange $change ) {
 		//NOTE: Disable developer warnings that may get triggered by

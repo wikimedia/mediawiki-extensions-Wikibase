@@ -55,9 +55,6 @@ class EntityContentDiffTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideConstruction
-	 *
-	 * @param EntityDiff $entityDiff
-	 * @param Diff $redirectDiff
 	 */
 	public function testConstruction( EntityDiff $entityDiff, Diff $redirectDiff ) {
 		$diff = new EntityContentDiff( $entityDiff, $redirectDiff, Item::ENTITY_TYPE );

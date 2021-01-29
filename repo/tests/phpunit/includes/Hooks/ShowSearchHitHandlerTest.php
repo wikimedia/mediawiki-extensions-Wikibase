@@ -268,12 +268,6 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider getPlainSearches
-	 * @param string $title
-	 * @param string[] $labels
-	 * @param string $displayLanguage
-	 * @param string[] $languages
-	 * @param string $expected
-	 * @throws MWException
 	 */
 	public function testShowSearchHitPlain(
 		string $title,

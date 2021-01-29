@@ -456,10 +456,6 @@ class EntityAccessorTest extends \PHPUnit\Framework\TestCase {
 
 	/**
 	 * @dataProvider doubleRedirectMethodProvider
-	 * @param EntityId $entityId
-	 * @param string $methodName
-	 * @param array $methodParameters
-	 * @param string $lookupMethodCalled
 	 */
 	public function testGetEntityStatementsLogsDoubleRedirects(
 		EntityId $entityId,
