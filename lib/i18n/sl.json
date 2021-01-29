@@ -108,7 +108,7 @@
 	"wikibase-entity-summary-wbsetqualifier-add": "{{PLURAL:$1|Dodan kvalifikator|Dodani kvalifikatorji}}",
 	"wikibase-entity-summary-wbsetqualifier-update": "Sprememba {{PLURAL:$1|kvalifikatorja|kvalifikatorjev}}",
 	"wikibase-entity-summary-wbremovequalifiers-remove": "Odstranitev {{PLURAL:$1|kvalifikatorja|kvalifikatorjev}}",
-	"wikibase-entity-summary-wbremovereferences-remove": "Odstranitev {{PLURAL:$1|sklica|sklicev}} pri trditvi",
+	"wikibase-entity-summary-wbremovereferences-remove": "Odstranitev {{PLURAL:$3|sklica|sklicev}} pri trditvi",
 	"wikibase-entity-summary-wbmergeitems-from": "Združitev iz predmeta $3",
 	"wikibase-entity-summary-wbmergeitems-to": "Združitev predmeta v $3",
 	"wikibase-property-summary-wbcreate-new": "Ustvarjena nova Lastnost",

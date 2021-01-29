@@ -48,7 +48,7 @@
 	"wikibase-rcfilters-hide-wikibase-label": "Urejanja v {{GRAMMAR:mestnik|{{WBREPONAME}}}}",
 	"wikibase-rcfilters-hide-wikibase-description": "Urejanja, ki so narejena v projektu {{WBREPONAME}}.",
 	"wikibase-replicationnote": "Spremembe se bodo na vseh wikijih morda prikazale šele po več minutah.",
-	"wikibase-watchlist-show-changes-pref": "Pokaži urejanja {{GRAMMAR:rodilnik|{{WBREPONAME}}}} v spisku nadzorov",
+	"wikibase-watchlist-show-changes-pref": "Na spisku nadzorov pokaži urejanja Wikipodatkov",
 	"wikibase-error-serialize-error": "Serializacija podatkov ni uspela.",
 	"wikibase-error-invalid-entity-id": "ID-ja »$2« sistem ne pozna. Prosimo, vnesite veljaven ID entitete.",
 	"unconnectedpages": "Strani, ki niso povezane z objekti",

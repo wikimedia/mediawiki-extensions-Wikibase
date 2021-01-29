@@ -195,6 +195,8 @@
 	"wikibase-restoreold": "obnovi",
 	"wikibase-entity-summary-restore": "Obnova redakcije $3 {{gender:$4|avtorja|avtorice|avtorja/avtorice}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]]",
 	"wikibase-entity-summary-undo": "Razveljavi redakcijo $3 {{gender:$4|avtorja|avtorice|avtorja/avtorice}} [[Special:Contributions/$4|{{GENDER:$4|$4}}]] ([[User talk:$4|pogovor]])",
+	"wikibase-noentity": "Ta predmet ne obstaja. Ali je kam izginil, lahko ugotovite s [{{fullurl:{{#Special:Log}}|page={{FULLPAGENAMEE}}}} pregledom povezanih dnevnikov].",
+	"wikibase-noentity-createone": "Lahko tudi [[$1|ustvarite novega]].",
 	"wikibase-listdatatypes-wikibase-item-head": "Predmet",
 	"wikibase-listdatatypes-wikibase-property-head": "Lastnost",
 	"wikibase-listdatatypes-globe-coordinate-head": "Koordinate",
