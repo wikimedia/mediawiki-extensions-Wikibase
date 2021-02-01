@@ -185,7 +185,7 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 		return $store->getWikiPageForEntity( $item->getId() );
 	}
 
-	protected function initArchive() : array {
+	protected function initArchive(): array {
 		$page = $this->createItemWithPage();
 		$revisionRecordId = $page->getRevisionRecord()->getId();
 		$pageId = $page->getId();

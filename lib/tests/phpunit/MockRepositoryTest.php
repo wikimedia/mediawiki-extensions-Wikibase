@@ -701,7 +701,7 @@ class MockRepositoryTest extends TestCase {
 		$this->assertEquals( $redirectsTo, $gotTargetId );
 	}
 
-	private function getUserMock() : User {
+	private function getUserMock(): User {
 		$u = $this->getMockBuilder( User::class )
 			->setMethods( [ 'getName' ] )
 			->getMock();

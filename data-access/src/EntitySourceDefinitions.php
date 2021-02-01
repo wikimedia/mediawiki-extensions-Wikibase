@@ -101,7 +101,7 @@ class EntitySourceDefinitions {
 	 * @param string $entityType Entity type or sub type
 	 * @return EntitySource|null EntitySource or null if no EntitySource configured for the type
 	 */
-	public function getSourceForEntityType( string $entityType ) : ?EntitySource {
+	public function getSourceForEntityType( string $entityType ): ?EntitySource {
 		if ( array_key_exists( $entityType, $this->subEntityTypeMap ) ) {
 			$entityType = $this->subEntityTypeMap[$entityType];
 		}

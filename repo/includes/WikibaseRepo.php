@@ -711,7 +711,7 @@ class WikibaseRepo {
 		return $this->getEntityContentFactory();
 	}
 
-	public function getLocalRepoWikiPageMetaDataAccessor() : WikiPageEntityMetaDataAccessor {
+	public function getLocalRepoWikiPageMetaDataAccessor(): WikiPageEntityMetaDataAccessor {
 		$entityNamespaceLookup = $this->getEntityNamespaceLookup();
 		$repoName = ''; // Empty string here means this only works for the local repo
 		$dbName = false; // false means the local database
@@ -1005,7 +1005,7 @@ class WikibaseRepo {
 			->get( 'WikibaseRepo.Settings' );
 	}
 
-	public function newIdGenerator() : IdGenerator {
+	public function newIdGenerator(): IdGenerator {
 		switch ( self::getSettings()->getSetting( 'idGenerator' ) ) {
 			case 'original':
 				$idGenerator = new SqlIdGenerator(
@@ -1069,7 +1069,7 @@ class WikibaseRepo {
 	/**
 	 * @return EntitySource The entity source of the local repository
 	 */
-	public function getLocalEntitySource() : EntitySource {
+	public function getLocalEntitySource(): EntitySource {
 		$localEntitySourceName = self::getSettings()->getSetting( 'localEntitySourceName' );
 		$sources = self::getEntitySourceDefinitions()->getSources();
 		foreach ( $sources as $source ) {

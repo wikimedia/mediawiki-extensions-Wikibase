@@ -99,7 +99,7 @@ class TermStoreWriterFactory {
 		);
 	}
 
-	private function newTermInLangIdsResolver( TypeIdsResolver $typeResolver, TypeIdsLookup $typeLookup ) : TermInLangIdsResolver {
+	private function newTermInLangIdsResolver( TypeIdsResolver $typeResolver, TypeIdsLookup $typeLookup ): TermInLangIdsResolver {
 		return new DatabaseTermInLangIdsResolver(
 			$typeResolver,
 			$typeLookup,
@@ -109,7 +109,7 @@ class TermStoreWriterFactory {
 		);
 	}
 
-	private function newTermInLangIdsAcquirer( TypeIdsAcquirer $typeAcquirer ) : TermInLangIdsAcquirer {
+	private function newTermInLangIdsAcquirer( TypeIdsAcquirer $typeAcquirer ): TermInLangIdsAcquirer {
 		return new DatabaseTermInLangIdsAcquirer(
 			$this->loadbalancerFactory,
 			$typeAcquirer,
@@ -117,7 +117,7 @@ class TermStoreWriterFactory {
 		);
 	}
 
-	private function newTypeIdsStore() : DatabaseTypeIdsStore {
+	private function newTypeIdsStore(): DatabaseTypeIdsStore {
 		return new DatabaseTypeIdsStore(
 			$this->loadbalancerFactory->getMainLB(),
 			$this->wanCache

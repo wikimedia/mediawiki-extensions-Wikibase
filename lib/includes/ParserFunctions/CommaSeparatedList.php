@@ -12,7 +12,7 @@ class CommaSeparatedList {
 
 	public const NAME = "commaSeparatedList";
 
-	public static function handle( Parser $parser, string ...$words ) : string {
+	public static function handle( Parser $parser, string ...$words ): string {
 		return $parser->getTargetLanguage()->commaList( $words );
 	}
 }

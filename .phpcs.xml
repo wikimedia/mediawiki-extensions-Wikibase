@@ -122,6 +122,12 @@
 	</rule>
 	<rule ref="Generic.Metrics.NestingLevel" />
 
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing">
+		<properties>
+			<property name="spacesCountBeforeColon" value="0" />
+		</properties>
+	</rule>
+
 	<file>.</file>
 	<arg name="extensions" value="php" />
 	<arg name="encoding" value="UTF-8" />

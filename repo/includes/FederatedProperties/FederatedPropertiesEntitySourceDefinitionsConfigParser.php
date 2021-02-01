@@ -40,7 +40,7 @@ class FederatedPropertiesEntitySourceDefinitionsConfigParser {
 	 * @param EntitySource[] $sources
 	 * @return EntitySource
 	 */
-	private function getLocalEntitySource( array $sources ) : EntitySource {
+	private function getLocalEntitySource( array $sources ): EntitySource {
 		$result = array_filter(
 			$sources,
 			function ( $entitySource ) {

@@ -82,7 +82,7 @@ class DatabaseItemTermStoreWriterTest extends MediaWikiIntegrationTestCase {
 
 	private function getItemTermStoreWriter(
 		$jobQueueMockOverride = null
-	) : DatabaseItemTermStoreWriter {
+	): DatabaseItemTermStoreWriter {
 		if ( $jobQueueMockOverride === null ) {
 			$jobQueue = $this->jobQueueMock;
 		} else {

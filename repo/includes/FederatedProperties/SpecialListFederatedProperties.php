@@ -36,17 +36,17 @@ class SpecialListFederatedProperties extends SpecialWikibasePage {
 		$this->getOutput()->addHTML( $this->htmlNoticeWidget( $subPage ) );
 	}
 
-	private function htmlNoticeWidget( ?string $dataTypeId ) : string {
+	private function htmlNoticeWidget( ?string $dataTypeId ): string {
 		return ( new MessageWidget( [ 'label' => new HtmlSnippet( $this->htmlNoticeLabel( $dataTypeId ) ) ] ) )->toString();
 	}
 
-	private function htmlNoticeLabel( ?string $dataTypeId ) : string {
+	private function htmlNoticeLabel( ?string $dataTypeId ): string {
 		return wfMessage( 'wikibase-federated-properties-special-list-of-properties-notice' )
 			->rawParams( $this->htmlLinkToRemotePage( $dataTypeId ) )
 			->escaped();
 	}
 
-	private function htmlLinkToRemotePage( ?string $dataTypeId ) : string {
+	private function htmlLinkToRemotePage( ?string $dataTypeId ): string {
 		$specialPage = 'Special:ListProperties';
 		if ( $dataTypeId ) {
 			$specialPage .= '/' . wfEscapeWikiText( $dataTypeId );

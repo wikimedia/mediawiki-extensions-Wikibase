@@ -332,7 +332,7 @@ class ViewFactory {
 		);
 	}
 
-	private function newToolbarEditSectionGenerator() : ToolbarEditSectionGenerator {
+	private function newToolbarEditSectionGenerator(): ToolbarEditSectionGenerator {
 		return new ToolbarEditSectionGenerator(
 			$this->specialPageLinker,
 			$this->templateFactory,

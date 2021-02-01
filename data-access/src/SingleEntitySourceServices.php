@@ -178,14 +178,14 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	/**
 	 * @return EntitySource The EntitySource object for this set of services
 	 */
-	public function getEntitySource() : EntitySource {
+	public function getEntitySource(): EntitySource {
 		return $this->entitySource;
 	}
 
 	/**
 	 * @return EntityNamespaceLookup The EntityNamespaceLookup object for this EntitySource
 	 */
-	public function getEntityNamespaceLookup() : EntityNamespaceLookup {
+	public function getEntityNamespaceLookup(): EntityNamespaceLookup {
 		if ( $this->entityNamespaceLookup === null ) {
 			$this->entityNamespaceLookup = new EntityNamespaceLookup(
 				$this->entitySource->getEntityNamespaceIds(),
@@ -201,7 +201,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 	 * but current users need a method only provided by DatabaseTermInLangIdsResolver
 	 * @return DatabaseTermInLangIdsResolver
 	 */
-	public function getTermInLangIdsResolver() : DatabaseTermInLangIdsResolver {
+	public function getTermInLangIdsResolver(): DatabaseTermInLangIdsResolver {
 		$mediaWikiServices = MediaWikiServices::getInstance();
 		$logger = LoggerFactory::getInstance( 'Wikibase' );
 

@@ -149,7 +149,7 @@ class ApiEntityLookupTest extends TestCase {
 		$entityLookup->fetchEntities( [ $this->p1, $this->p18 ] );
 	}
 
-	private function newMockApi( string $responseDataFile, array $ids ) : GenericActionApiClient {
+	private function newMockApi( string $responseDataFile, array $ids ): GenericActionApiClient {
 		$api = $this->createMock( GenericActionApiClient::class );
 		$api->expects( $this->once() )
 			->method( 'get' )

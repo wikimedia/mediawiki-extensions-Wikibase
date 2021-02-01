@@ -19,6 +19,6 @@ interface EntityMetaTagsCreator {
 	 * @param EntityDocument $entity
 	 * @return array An entity meta tags array (See above)
 	 */
-	public function getMetaTags( EntityDocument $entity ) : array;
+	public function getMetaTags( EntityDocument $entity ): array;
 
 }
