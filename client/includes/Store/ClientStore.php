@@ -70,16 +70,6 @@ interface ClientStore {
 	public function getPropertyInfoLookup();
 
 	/**
-	 * Removes all data from the store.
-	 */
-	public function clear();
-
-	/**
-	 * Rebuilds all data in the store.
-	 */
-	public function rebuild();
-
-	/**
 	 * Returns an EntityPrefetcher which can be used to prefetch a list of entity
 	 * ids in case we need to for example load a batch of entity ids.
 	 *

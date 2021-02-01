@@ -408,23 +408,6 @@ class DirectSqlStore implements ClientStore {
 	}
 
 	/**
-	 * @see ClientStore::clear
-	 *
-	 * Does nothing.
-	 */
-	public function clear() {
-		// noop
-	}
-
-	/**
-	 * @see ClientStore::rebuild
-	 *
-	 * Does nothing.
-	 */
-	public function rebuild() {
-	}
-
-	/**
 	 * @see ClientStore::getPropertyInfoLookup
 	 *
 	 * @return PropertyInfoLookup

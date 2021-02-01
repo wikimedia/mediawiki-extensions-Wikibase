@@ -88,18 +88,6 @@ class MockClientStore implements ClientStore {
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	public function clear() {
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function rebuild() {
-	}
-
-	/**
 	 * @return MockRepository
 	 */
 	private function getMockRepository() {
