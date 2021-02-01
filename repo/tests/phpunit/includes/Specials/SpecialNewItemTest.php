@@ -11,6 +11,7 @@ use SiteStore;
 use ValueValidators\Error;
 use ValueValidators\Result;
 use ValueValidators\ValueValidator;
+use WebResponse;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
@@ -316,6 +317,41 @@ class SpecialNewItemTest extends SpecialNewEntityTestCase {
 		list( $html ) = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
 
 		$this->assertHtmlContainsErrorMessage( $html, '(htmlform-invalid-input)' );
+	}
+
+	public function testIdGeneratorRateLimit() {
+		$this->mergeMwGlobalArrayValue( 'wgRateLimits', [ 'wikibase-idgenerator' => [
+			'anon' => [ 1, 60 ],
+			'user' => [ 1, 60 ],
+		] ] );
+		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
+		WikibaseRepo::getSettings()->setSetting( 'idGeneratorRateLimiting', true );
+
+		$formData = [
+			SpecialNewItem::FIELD_LANG => 'en',
+			SpecialNewItem::FIELD_LABEL => 'rate limit test item',
+		];
+
+		/** @var WebResponse $response */
+		[ , $response ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		$firstItemId = $this->extractEntityIdFromUrl( $response->getHeader( 'location' ) );
+		$firstId = $firstItemId->getNumericId();
+
+		[ $html, $response ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		$this->assertNull( $response->getHeader( 'location' ) );
+		$this->assertStringContainsString( '(actionthrottledtext)', $html );
+
+		$this->mergeMwGlobalArrayValue( 'wgRateLimits', [ 'wikibase-idgenerator' => [
+			'anon' => [ 60, 60 ],
+			'user' => [ 60, 60 ],
+		] ] );
+
+		[ , $response ] = $this->executeSpecialPage( '', new FauxRequest( $formData, true ) );
+		$secondItemId = $this->extractEntityIdFromUrl( $response->getHeader( 'location' ) );
+		$secondId = $secondItemId->getNumericId();
+
+		$this->assertSame( $firstId + 1, $secondId,
+			'Failed request should not have consumed item ID' );
 	}
 
 	/**

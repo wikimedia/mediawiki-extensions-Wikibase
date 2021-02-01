@@ -332,6 +332,15 @@ return [
 	 */
 	'idGeneratorLogging' => false,
 
+	/**
+	 * Whether rate limiting should be applied to the entity ID generator.
+	 *
+	 * @var bool
+	 * @see https://phabricator.wikimedia.org/T272032
+	 * @see \Wikibase\Repo\WikibaseRepo::newIdGenerator
+	 */
+	'idGeneratorRateLimiting' => false,
+
 	'entityTypesWithoutRdfOutput' => [],
 
 	'entitySources' => [],

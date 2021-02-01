@@ -683,6 +683,11 @@
 		],
 		"WikibaseRepoEntityTypes": "\\Wikibase\\Repo\\Hooks\\FederatedPropertiesWikibaseRepoEntityTypesHookHandler::onWikibaseRepoEntityTypes"
 	},
+	"RateLimits": {
+		"wikibase-idgenerator": {
+			"&inherit-create-edit": "This marker value tells RepoHooks::onRegistration to copy the rate limits from 'create' or 'edit'."
+		}
+	},
 	"callback": "\\Wikibase\\Repo\\RepoHooks::onRegistration",
 	"manifest_version": 2
 }

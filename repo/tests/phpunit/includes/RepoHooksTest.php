@@ -574,4 +574,131 @@ XML
 		$this->assertArrayHasKey( 'wb-dismissleavingsitenotice', $preferences );
 	}
 
+	public function testInheritDefaultRateLimits_default() {
+		$rateLimits = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'wikibase-idgenerator' => [
+				'&inherit-create-edit' => 'ignored',
+			],
+		];
+		RepoHooks::inheritDefaultRateLimits( $rateLimits );
+
+		$expected = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'wikibase-idgenerator' => [ // like 'edit'
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+		];
+		$this->assertArrayEquals( $expected, $rateLimits, false, true );
+	}
+
+	public function testInheritDefaultRateLimits_create() {
+		$rateLimits = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'create' => [ // lower than 'edit'
+				'ip' => [ 1, 60 ],
+				'newbie' => [ 1, 60 ],
+				'user' => [ 5, 60 ],
+			],
+			'wikibase-idgenerator' => [
+				'&inherit-create-edit' => 'ignored',
+			],
+		];
+		RepoHooks::inheritDefaultRateLimits( $rateLimits );
+
+		$expected = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'create' => [
+				'ip' => [ 1, 60 ],
+				'newbie' => [ 1, 60 ],
+				'user' => [ 5, 60 ],
+			],
+			'wikibase-idgenerator' => [ // like 'create'
+				'ip' => [ 1, 60 ],
+				'newbie' => [ 1, 60 ],
+				'user' => [ 5, 60 ],
+			],
+		];
+		$this->assertArrayEquals( $expected, $rateLimits, false, true );
+	}
+
+	public function testInheritDefaultRateLimits_partialOverride() {
+		$rateLimits = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			// like $rateLimits['wikibase-idgenerator']['user'] = ...;
+			'wikibase-idgenerator' => [
+				'&inherit-create-edit' => 'ignored',
+				'user' => [ 60, 60 ],
+			],
+		];
+		RepoHooks::inheritDefaultRateLimits( $rateLimits );
+
+		$expected = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'wikibase-idgenerator' => [
+				'ip' => [ 8, 60 ], // like 'edit'
+				'newbie' => [ 8, 60 ], // like 'edit'
+				'user' => [ 60, 60 ], // custom value
+			],
+		];
+		$this->assertArrayEquals( $expected, $rateLimits, false, true );
+	}
+
+	public function testInheritDefaultRateLimits_fullOverride() {
+		$rateLimits = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			// like $rateLimits['wikibase-idgenerator'] = ...;
+			'wikibase-idgenerator' => [
+				'ip' => [ 1, 60 ],
+				'newbie' => [ 1, 60 ],
+				'user' => [ 5, 60 ],
+			],
+		];
+		RepoHooks::inheritDefaultRateLimits( $rateLimits );
+
+		$expected = [
+			'edit' => [
+				'ip' => [ 8, 60 ],
+				'newbie' => [ 8, 60 ],
+				'user' => [ 90, 60 ],
+			],
+			'wikibase-idgenerator' => [
+				'ip' => [ 1, 60 ],
+				'newbie' => [ 1, 60 ],
+				'user' => [ 5, 60 ],
+			],
+		];
+		$this->assertArrayEquals( $expected, $rateLimits, false, true );
+	}
+
 }
