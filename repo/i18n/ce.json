@@ -187,6 +187,7 @@
 	"wikibase-redirectentity-submit": "ДӀасахьажор",
 	"wikibase-api-no-such-sitelink": "'$1' cайтан тӀе иштта хьажорг цакарий",
 	"wikibase-restoreold": "меттахӀоттае",
+	"wikibase-entity-summary-restore": "МеттахӀоьттина {{GENDER:$4|декъашхочуьнан}} $3 верси  [[Special:Contributions/$4|$4]]",
 	"wikibase-listdatatypes-wikibase-item-head": "Элемент",
 	"wikibase-listdatatypes-wikibase-property-head": "Билгало",
 	"wikibase-listdatatypes-commonsmedia-head": "Викигуламера медиа",
