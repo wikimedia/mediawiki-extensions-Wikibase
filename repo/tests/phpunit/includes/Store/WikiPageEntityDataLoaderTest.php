@@ -27,6 +27,8 @@ use Wikibase\Lib\Store\StorageException;
  */
 class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
+	private const WIKI_ID = 'testwiki';
+
 	public function testGivenRevisionContainingEntityData_loadEntityDataFromWikiPageRevisionReturnsEntityRevisionAndNull() {
 		$revisionId = 123;
 		$slotRole = 'main';
@@ -42,7 +44,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
@@ -71,7 +73,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
@@ -97,7 +99,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		$this->expectException( StorageException::class );
 
@@ -118,7 +120,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 		$codec = $this->createMock( EntityContentDataCodec::class );
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
@@ -139,7 +141,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 		$codec = $this->createMock( EntityContentDataCodec::class );
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		list( $entityRevision, $redirect ) = $loader->loadEntityDataFromWikiPageRevision( $revision, $slotRole, 0 );
 
@@ -160,7 +162,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 
 		$blobStore = $this->createMock( BlobStore::class );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		$this->expectException( StorageException::class );
 
@@ -182,7 +184,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 			->method( 'getBlob' )
 			->willThrowException( new BlobAccessException() );
 
-		$loader = new WikiPageEntityDataLoader( $codec, $blobStore );
+		$loader = new WikiPageEntityDataLoader( $codec, $blobStore, self::WIKI_ID );
 
 		$this->expectException( StorageException::class );
 
@@ -195,6 +197,7 @@ class WikiPageEntityDataLoaderTest extends MediaWikiIntegrationTestCase {
 		$revision = $this->createMock( RevisionRecord::class );
 		$revision
 			->method( 'getId' )
+			->with( self::WIKI_ID )
 			->willReturn( $revisionId );
 		$revision
 			->method( 'hasSlot' )
