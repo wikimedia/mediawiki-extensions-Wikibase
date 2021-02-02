@@ -27,9 +27,17 @@ class WikiPageEntityDataLoader {
 	 */
 	private $blobStore;
 
-	public function __construct( EntityContentDataCodec $contentCodec, BlobStore $blobStore ) {
+	/** @var string|false */
+	private $wikiId;
+
+	public function __construct(
+		EntityContentDataCodec $contentCodec,
+		BlobStore $blobStore,
+		$wikiId = false
+	) {
 		$this->contentCodec = $contentCodec;
 		$this->blobStore = $blobStore;
+		$this->wikiId = $wikiId;
 	}
 
 	/**
@@ -76,7 +84,7 @@ class WikiPageEntityDataLoader {
 		if ( $entity ) {
 			$entityRevision = new EntityRevision(
 				$entity,
-				$revision->getId(),
+				$revision->getId( $this->wikiId ),
 				$revision->getTimestamp()
 			);
 
@@ -86,7 +94,7 @@ class WikiPageEntityDataLoader {
 
 			if ( !$redirect ) {
 				throw new StorageException(
-					'The serialized data of revision ' . $revision->getId()
+					'The serialized data of revision ' . $revision->getId( $this->wikiId )
 					. ' contains neither an Entity nor an EntityRedirect!'
 				);
 			}

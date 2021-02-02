@@ -253,7 +253,7 @@ class SingleEntitySourceServices implements EntityStoreWatcher {
 			// as a default it should go in the wiring files for each entity type. See: T246451
 			$wikiPageEntityRevisionStoreLookup = new WikiPageEntityRevisionLookup(
 				$metaDataAccessor,
-				new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $databaseName ) ),
+				new WikiPageEntityDataLoader( $codec, $blobStoreFactory->newBlobStore( $databaseName ), $databaseName ),
 				$revisionStoreFactory->getRevisionStore( $databaseName ),
 				$databaseName
 			);
