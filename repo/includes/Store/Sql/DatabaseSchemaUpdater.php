@@ -123,6 +123,12 @@ class DatabaseSchemaUpdater implements LoadExtensionSchemaUpdatesHook {
 			'wb_changes_change_type',
 			$this->getUpdateScriptPath( 'patch-wb_changes-drop-change_type_index', $db->getType() )
 		);
+
+		$updater->modifyExtensionField(
+			'wb_changes_dispatch',
+			'chd_seen',
+			$this->getUpdateScriptPath( 'patch-wb_changes_dispatch-make-chd_seen-unsigned', $db->getType() )
+		);
 	}
 
 	private function updateChangesSubscriptionTable( DatabaseUpdater $dbUpdater ): void {
