@@ -66,5 +66,9 @@
 	"wikibase-client-data-bridge-references-heading": "ߦߟߌߡߊߛߙߋ",
 	"wikibase-client-data-bridge-anonymous-edit-warning-heading": "ߌ ߜߊ߲߬ߞߎ߲߬ߣߍ߲߫ ߕߍ߫",
 	"wikibase-client-data-bridge-anonymous-edit-warning-proceed": "ߌ ߜߊ߲߬ߞߎ߲߬ߓߊߟߌ ߕߏ߫ ߞߵߊ߬ ߡߊߦߟߍ߬ߡߊ߲߫",
-	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ߌ ߜߊ߲߬ߞߎ߲߫ ߥߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬"
+	"wikibase-client-data-bridge-anonymous-edit-warning-login": "ߌ ߜߊ߲߬ߞߎ߲߫ ߥߟߊ߫ ߖߊ߬ߕߋ߬ߘߊ ߟߊߞߊ߬",
+	"wikibase-client-data-bridge-bailout-suggestion-go-to-repo-button": "ߡߐ߬ߟߐ߲ ߡߊߦߟߍ߬ߡߊ߲߫ {{WBREPONAME}} ߞߊ߲߬",
+	"wikibase-client-data-bridge-bailout-suggestion-edit-article": "ߡߍ߲ ߟߐ߬ ߕߐ߫ ߦߋ߫ ߞߙߊߞߏ߫ ߟߊߓߊ߯ߙߊߣߍ߲ ߡߊ߬߸ ߊ߬ ߘߌ߫ ߛߋ߫ ߓߍ߲߬ ߠߊ߫ ߞߊ߬ ߘߌ߲߬ߞߌ߬ߙߊ߬ ߟߊߓߊ߯ߙߊߣߍ߲ ߡߐ߬ߟߐ߲ ߖߏ߬ߛߌ߫ [$1 ߞߎߡߘߊ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߟߊ߲] ߘߐ߫. ߣߴߊ߬ ߕߘߍ߬ ߘߊ߫ ߞߴߊ߬ ߓߍ߯ ߘߌ߫ ߛߋ߫ ߓߍ߲߬ ߠߊ߫߸ ߒ߬ ߧߴߊ߬ ߢߌߣߌ߲߫ ߠߴߌ ߝߍ߬ ߞߴߌ ߦߋ߫ ߡߐ߬ߟߐ߲ ߝߙߊ߬ {{WBREPONAME}} ߟߊ߫ ߌߞߘߐ߫߸ ߛߊ߲ߝߍ߫ ߞߘߎ ߟߊ߫.",
+	"wikibase-client-data-bridge-unsupported-datatype-error-head": "ߡߐ߬ߟߐ߲߬ ߡߊ߬ߦߟߍߡߊ߲ ߘߤߊ߬ߝߍ߲߫ ߕߍ߫ $1 ߦߋ߫ ߥߊ߯ߕߌߣߍ߲ ߣߌ߲߬ ߠߊ߫.",
+	"wikibase-client-data-bridge-thank-you-head": "ߌ ߣߌ߫ ߗߋ߫ ߌ ߟߊ߫ ߡߊ߬ߦߟߍ߬ߡߊ߲߬ߠߌ߲ ߠߊ߫߹"
 }

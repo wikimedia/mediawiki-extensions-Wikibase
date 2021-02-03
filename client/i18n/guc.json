@@ -5,8 +5,11 @@
 		]
 	},
 	"tooltip-t-wikibase": "Süpüshii a'ttalee epe'ipajaanüka eere outkajain atüjayaakalu'u",
+	"wikibase-comment-update": "Awanajaanüsü wane süpüshii tüü {{WBREPONAME}}",
 	"wikibase-dataitem": "Süpüshii tüü {{WBREPONAME}}",
 	"wikibase-editlinks": "Anaataa e'ttaaleekalirua",
 	"wikibase-editlinkstitle": "Anaataa tü a'ttaleekalu'u kojuyaka anüikii",
-	"wikibase-linkitem-addlinks": "Akoo’omüinjaa a'ttaleekalu'u"
+	"wikibase-linkitem-addlinks": "Akoo’omüinjaa a'ttaleekalu'u",
+	"wikibase-rc-wikibase-edit-letter": "D",
+	"wikibase-rc-wikibase-edit-title": "Anaataa tüü {{WBREPONAME}}"
 }

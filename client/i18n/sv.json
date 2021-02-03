@@ -11,6 +11,7 @@
 			"Sabelöga",
 			"Skalman",
 			"Stryn",
+			"Thurs",
 			"Tölvuforritari",
 			"WikiPhoenix"
 		]
@@ -86,7 +87,7 @@
 	"wikibase-pageswithbadges-badge": "Märke:",
 	"wikibase-pageswithbadges-submit": "Visa sidor",
 	"entityusage": "Entitetsanvändning",
-	"entityusage-summary": "Den här sidan listar sidor aanvänder den angivna entiteten (t.ex. Q42). Listan sorteras sjunkande efter sid-ID, så nyare sidor listas fördt.",
+	"entityusage-summary": "Den här sidan listar sidor som använder den angivna entiteten (t.ex. Q42). Listan sorteras sjunkande efter sid-ID, så nyare sidor listas först.",
 	"wikibase-entityusage-invalid-id": "$1 är inte ett giltigt entitets-ID.",
 	"wikibase-entityusage-legend": "Lista över sidor som använder en viss entitet",
 	"wikibase-entityusage-entity": "Entitet:",

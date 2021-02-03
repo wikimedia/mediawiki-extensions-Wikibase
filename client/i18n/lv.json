@@ -96,5 +96,6 @@
 	"wikibase-client-data-bridge-error-reload-page": "Pārlādēt lapu",
 	"wikibase-client-data-bridge-error-go-back": "Atpakaļ",
 	"wikibase-client-data-bridge-error-retry-save": "Mēģināt saglabāt vēlreiz",
+	"wikibase-client-data-bridge-thank-you-head": "Paldies par tavu labojumu!",
 	"wikibase-client-data-bridge-saving-error-assertuser-editing": "Turpināt labošanu"
 }
