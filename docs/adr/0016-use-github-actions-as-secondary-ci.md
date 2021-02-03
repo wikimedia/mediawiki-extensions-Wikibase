@@ -1,4 +1,4 @@
-# 16) Use GitHub Actions as secondary CI system for Wikibase
+# 16) Use GitHub Actions as secondary CI system for Wikibase {#adr_0016}
 
 Date: 2021-01-06
 
