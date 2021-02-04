@@ -5,7 +5,7 @@
 CREATE TABLE /*_*/wb_changes_dispatch (
   chd_site BLOB NOT NULL,
   chd_db BLOB NOT NULL,
-  chd_seen INTEGER DEFAULT 0 NOT NULL,
+  chd_seen INTEGER UNSIGNED DEFAULT 0 NOT NULL,
   chd_touched BLOB DEFAULT '00000000000000' NOT NULL,
   chd_lock BLOB DEFAULT NULL,
   chd_disabled SMALLINT UNSIGNED DEFAULT 0 NOT NULL,

@@ -19,7 +19,7 @@
 				"name": "chd_seen",
 				"type": "integer",
 				"comment": "last change ID examined (dispatch state)",
-				"options": { "notnull": true, "default": 0 }
+				"options": { "unsigned": true, "notnull": true, "default": 0 }
 			},
 			{
 				"name": "chd_touched",

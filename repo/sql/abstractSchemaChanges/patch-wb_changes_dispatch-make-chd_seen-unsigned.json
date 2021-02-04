@@ -1,0 +1,96 @@
+{
+	"before": {
+		"name": "wb_changes_dispatch",
+		"comment": "Change dispatch state",
+		"columns": [
+			{
+				"name": "chd_site",
+				"type": "binary",
+				"comment": "client wiki's global site ID",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+				"name": "chd_db",
+				"type": "binary",
+				"comment": "client wiki's logical database name",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+				"name": "chd_seen",
+				"type": "integer",
+				"comment": "last change ID examined (dispatch state)",
+				"options": { "notnull": true, "default": 0 }
+			},
+			{
+				"name": "chd_touched",
+				"type": "binary",
+				"comment": "end of last dispatch pass (informative)",
+				"options": { "length": 14, "notnull": true, "default": "00000000000000" }
+			},
+			{
+				"name": "chd_lock",
+				"type": "binary",
+				"comment": "name of global lock (dispatch state)",
+				"options": { "length": 64, "notnull": false }
+			},
+			{
+				"name": "chd_disabled",
+				"type": "mwtinyint",
+				"comment": "flag for temporarily disabling a client",
+				"options": { "unsigned": true, "notnull": true, "default": 0 }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_changes_dispatch_chd_seen", "columns": [ "chd_seen" ], "unique": false },
+			{ "name": "wb_changes_dispatch_chd_touched", "columns": [ "chd_touched" ], "unique": false }
+		],
+		"pk": [ "chd_site" ]
+	},
+	"after": {
+		"name": "wb_changes_dispatch",
+		"comment": "Change dispatch state",
+		"columns": [
+			{
+				"name": "chd_site",
+				"type": "binary",
+				"comment": "client wiki's global site ID",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+				"name": "chd_db",
+				"type": "binary",
+				"comment": "client wiki's logical database name",
+				"options": { "length": 32, "notnull": true }
+			},
+			{
+				"name": "chd_seen",
+				"type": "integer",
+				"comment": "last change ID examined (dispatch state)",
+				"options": { "unsigned": true, "notnull": true, "default": 0 }
+			},
+			{
+				"name": "chd_touched",
+				"type": "binary",
+				"comment": "end of last dispatch pass (informative)",
+				"options": { "length": 14, "notnull": true, "default": "00000000000000" }
+			},
+			{
+				"name": "chd_lock",
+				"type": "binary",
+				"comment": "name of global lock (dispatch state)",
+				"options": { "length": 64, "notnull": false }
+			},
+			{
+				"name": "chd_disabled",
+				"type": "mwtinyint",
+				"comment": "flag for temporarily disabling a client",
+				"options": { "unsigned": true, "notnull": true, "default": 0 }
+			}
+		],
+		"indexes": [
+			{ "name": "wb_changes_dispatch_chd_seen", "columns": [ "chd_seen" ], "unique": false },
+			{ "name": "wb_changes_dispatch_chd_touched", "columns": [ "chd_touched" ], "unique": false }
+		],
+		"pk": [ "chd_site" ]
+	}
+}
