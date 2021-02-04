@@ -13,7 +13,7 @@
 	"wikibase-after-page-move-queued": "[$1 Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}}], povezan s to stranjo, bo v kratkem samodejno posodobljen. Pomnite, da se to morda ne zgodi takoj.",
 	"wikibase-comment-add": "Ustvarjen je bil predmet v Wikipodatkih.",
 	"wikibase-comment-remove": "Povezan objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} izbrisan. Jezikovne povezave odstranjene.",
-	"wikibase-comment-linked": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je bil povezan s to stranjo.",
+	"wikibase-comment-linked": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je povezan s to stranjo.",
 	"wikibase-comment-unlink": "Stran je bila razvezana od objekta v {{GRAMMAR:mestnik|{{WBREPONAME}}}}. Jezikovne povezave odstranjene.",
 	"wikibase-comment-restore": "Povezan objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}}je obnovljen. Jezikovne povezave so obnovljene.",
 	"wikibase-comment-update": "Objekt v {{GRAMMAR:mestnik|{{WBREPONAME}}}} je spremenjen.",
