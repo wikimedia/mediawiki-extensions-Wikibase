@@ -16,6 +16,8 @@ use Wikibase\DataModel\Snak\SnakList;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
+use Wikibase\Repo\Tests\NewItem;
+use Wikibase\Repo\Tests\NewStatement;
 
 /**
  * @covers \Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor
@@ -83,6 +85,22 @@ class StatementEntityReferenceExtractorTest extends TestCase {
 			],
 			[ new PropertyId( 'P1' ), new ItemId( 'Q21' ), new ItemId( 'Q22' ) ],
 		];
+	}
+
+	public function testSeparateIdsPerCall() {
+		$p1 = new PropertyId( 'P1' );
+		$p2 = new PropertyId( 'P2' );
+		$statement1 = NewStatement::noValueFor( $p1 );
+		$statement2 = NewStatement::noValueFor( $p2 );
+		$item1 = NewItem::withStatement( $statement1 )->build();
+		$item2 = NewItem::withStatement( $statement2 )->build();
+
+		$extractor = new StatementEntityReferenceExtractor( $this->getMockEntityIdParser() );
+		$ids1 = $extractor->extractEntityIds( $item1 );
+		$ids2 = $extractor->extractEntityIds( $item2 );
+
+		$this->assertSame( [ $p1 ], $ids1 );
+		$this->assertSame( [ $p2 ], $ids2 );
 	}
 
 	private function getMockEntityIdParser() {
