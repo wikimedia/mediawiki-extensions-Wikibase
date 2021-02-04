@@ -10,10 +10,13 @@ const DEV_MODE = process.env.WEBPACK_TARGET === 'dev';
  * in dev it is still webpack's job to make them available
  */
 function externals() {
-	return DEV_MODE ? [] : [
-		'vue',
-		'vuex',
-	];
+	if ( DEV_MODE ) {
+		return [];
+	}
+
+	// get external packages from @wmde/lib-version-check config
+	const package = require( './package.json' );
+	return Object.keys( package.config.remoteVersion );
 }
 
 module.exports = {
