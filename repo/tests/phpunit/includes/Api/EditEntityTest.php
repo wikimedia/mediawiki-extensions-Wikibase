@@ -10,6 +10,7 @@ use ReadOnlyError;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -1303,6 +1304,48 @@ class EditEntityTest extends WikibaseApiTestCase {
 			'readOnlyEntityTypes',
 			$oldSetting
 		);
+	}
+
+	public function testIdGeneratorRateLimit() {
+		$this->mergeMwGlobalArrayValue( 'wgRateLimits', [ 'wikibase-idgenerator' => [
+			'anon' => [ 1, 60 ],
+			'user' => [ 1, 60 ],
+		] ] );
+		$this->setMwGlobals( 'wgMainCacheType', 'hash' );
+		WikibaseRepo::getSettings()->setSetting( 'idGeneratorRateLimiting', true );
+
+		$params = [
+			'action' => 'wbeditentity',
+			'data' => json_encode( [
+				'labels' => [ 'en' => [ 'value' => 'rate limit test item', 'language' => 'en' ] ],
+			] ),
+			'new' => 'item',
+		];
+
+		[ $result ] = $this->doApiRequestWithToken( $params );
+		$firstItemId = $result['entity']['id'];
+		$firstId = ( new ItemId( $firstItemId ) )->getNumericId();
+
+		try {
+			$this->doApiRequestWithToken( $params );
+			$this->fail( 'Expected second request to hit ID generation rate limit' );
+		} catch ( ApiUsageException $e ) {
+			$expected = wfMessage( 'actionthrottledtext' )->parse();
+			$expected = preg_replace( '/\s+/', ' ', $expected );
+			$this->assertStringContainsString( $expected, $e->getMessage() );
+		}
+
+		$this->mergeMwGlobalArrayValue( 'wgRateLimits', [ 'wikibase-idgenerator' => [
+			'anon' => [ 60, 60 ],
+			'user' => [ 60, 60 ],
+		] ] );
+
+		[ $result ] = $this->doApiRequestWithToken( $params );
+		$secondItemId = $result['entity']['id'];
+		$secondId = ( new ItemId( $secondItemId ) )->getNumericId();
+
+		$this->assertSame( $firstId + 1, $secondId,
+			'Failed request should not have consumed item ID' );
 	}
 
 }

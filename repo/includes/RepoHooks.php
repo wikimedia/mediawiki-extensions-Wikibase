@@ -1170,7 +1170,7 @@ final class RepoHooks {
 	}
 
 	public static function onRegistration() {
-		global $wgResourceModules;
+		global $wgResourceModules, $wgRateLimits;
 
 		LibHooks::onRegistration();
 		ViewHooks::onRegistration();
@@ -1179,5 +1179,25 @@ final class RepoHooks {
 			$wgResourceModules,
 			require __DIR__ . '/../resources/Resources.php'
 		);
+		self::inheritDefaultRateLimits( $wgRateLimits );
+	}
+
+	/**
+	 * Make the 'wikibase-idgenerator' rate limit inherit the 'create' rate limit,
+	 * or the 'edit' rate limit if no 'create' limit is defined,
+	 * unless the 'wikibase-idgenerator' rate limit was itself customized.
+	 *
+	 * @param array $rateLimits should be $wgRateLimits or a similar array
+	 */
+	public static function inheritDefaultRateLimits( array &$rateLimits ) {
+		if ( isset( $rateLimits['wikibase-idgenerator']['&inherit-create-edit'] ) ) {
+			unset( $rateLimits['wikibase-idgenerator']['&inherit-create-edit'] );
+			$limits = $rateLimits['create'] ?? $rateLimits['edit'] ?? [];
+			foreach ( $limits as $group => $limit ) {
+				if ( !isset( $rateLimits['wikibase-idgenerator'][$group] ) ) {
+					$rateLimits['wikibase-idgenerator'][$group] = $limit;
+				}
+			}
+		}
 	}
 }

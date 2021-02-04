@@ -201,6 +201,7 @@ use Wikibase\Repo\Store\EntityPermissionChecker;
 use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Store\IdGenerator;
 use Wikibase\Repo\Store\LoggingIdGenerator;
+use Wikibase\Repo\Store\RateLimitingIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlIdGenerator;
 use Wikibase\Repo\Store\Sql\SqlStore;
 use Wikibase\Repo\Store\Sql\UpsertSqlIdGenerator;
@@ -1028,6 +1029,13 @@ class WikibaseRepo {
 				throw new InvalidArgumentException(
 					'idGenerator config option must be either \'original\' or \'mysql-upsert\''
 				);
+		}
+
+		if ( self::getSettings()->getSetting( 'idGeneratorRateLimiting' ) ) {
+			$idGenerator = new RateLimitingIdGenerator(
+				$idGenerator,
+				RequestContext::getMain()
+			);
 		}
 
 		if ( self::getSettings()->getSetting( 'idGeneratorLogging' ) ) {
