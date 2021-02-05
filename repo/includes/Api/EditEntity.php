@@ -6,17 +6,14 @@ namespace Wikibase\Repo\Api;
 
 use ApiMain;
 use ApiUsageException;
+use Serializers\Exceptions\SerializationException;
 use Title;
 use Wikibase\DataModel\Entity\ClearableEntity;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Statement\StatementListProvider;
-use Wikibase\DataModel\Term\AliasesProvider;
-use Wikibase\DataModel\Term\DescriptionsProvider;
-use Wikibase\DataModel\Term\LabelsProvider;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\DataTypeDefinitions;
 use Wikibase\Lib\Store\EntityRevisionLookup;
@@ -256,7 +253,26 @@ class EditEntity extends ModifyEntity {
 			$changeOpResult = $this->applyChangeOp( $changeOp, $entity );
 		}
 
-		$this->buildResult( $entity );
+		try {
+			$this->getResult()->addValue( null, 'entity',
+				$this->getResultBuilder()->getModifiedEntityArray( $entity, 'all', null, [], [] ) );
+
+			if ( $entity instanceof StatementListProvider &&
+			    $this->getResult()->getResultData( [ 'entity', 'claims' ] ) === null
+			) {
+				// temporarily add statements data under 'claims' for
+				// backwards compatibility of MediaInfo entities (T271105)
+				// TODO delete this whole block
+				$this->getResultBuilder()->addStatements( $entity->getStatements(), 'entity' );
+			}
+		} catch ( SerializationException $e ) {
+			$this->addWarning(
+			'wikibase-editentity-warning-serializeresult',
+				null,
+				[ 'exceptionMessage' => $e->getMessage() ]
+			);
+		}
+
 		return $this->getSummary( $preparedParameters, $entity, $changeOpResult );
 	}
 
@@ -301,30 +317,6 @@ class EditEntity extends ModifyEntity {
 			return $this->entityChangeOpProvider->newEntityChangeOp( $entity->getType(), $data );
 		} catch ( ChangeOpDeserializationException $exception ) {
 			$this->errorReporter->dieException( $exception, $exception->getErrorCode() );
-		}
-	}
-
-	private function buildResult( EntityDocument $entity ): void {
-		$builder = $this->getResultBuilder();
-
-		if ( $entity instanceof LabelsProvider ) {
-			$builder->addLabels( $entity->getLabels(), 'entity' );
-		}
-
-		if ( $entity instanceof DescriptionsProvider ) {
-			$builder->addDescriptions( $entity->getDescriptions(), 'entity' );
-		}
-
-		if ( $entity instanceof AliasesProvider ) {
-			$builder->addAliasGroupList( $entity->getAliasGroups(), 'entity' );
-		}
-
-		if ( $entity instanceof Item ) {
-			$builder->addSiteLinkList( $entity->getSiteLinkList(), 'entity' );
-		}
-
-		if ( $entity instanceof StatementListProvider ) {
-			$builder->addStatements( $entity->getStatements(), 'entity' );
 		}
 	}
 

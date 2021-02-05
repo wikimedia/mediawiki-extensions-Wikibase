@@ -285,6 +285,7 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 	 * @param array $actual
 	 * @param bool $expectEmptyArrays Should we expect empty arrays or just ignore them?
 	 */
+	// phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 	protected function assertEntityEquals( array $expected, array $actual, $expectEmptyArrays = true ) {
 		if ( isset( $expected['id'] ) && !empty( $expected['id'] ) ) {
 			$this->assertEquals( $expected['id'], $actual['id'], 'id' );
@@ -294,6 +295,9 @@ abstract class WikibaseApiTestCase extends ApiTestCase {
 		}
 		if ( isset( $expected['type'] ) ) {
 			$this->assertEquals( $expected['type'], $actual['type'], 'type' );
+		}
+		if ( isset( $expected['datatype'] ) ) {
+			$this->assertSame( $expected['datatype'], $actual['datatype'], 'datatype' );
 		}
 
 		if ( isset( $expected['labels'] ) ) {

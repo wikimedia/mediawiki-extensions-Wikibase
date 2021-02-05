@@ -375,7 +375,7 @@ class ResultBuilder {
 	 *
 	 * @return array
 	 */
-	private function getModifiedEntityArray(
+	public function getModifiedEntityArray(
 		EntityDocument $entity,
 		$props,
 		?array $filterSiteIds,

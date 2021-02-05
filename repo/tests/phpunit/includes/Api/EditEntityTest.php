@@ -98,7 +98,7 @@ class EditEntityTest extends WikibaseApiTestCase {
 				'e' => [ 'type' => 'item' ] ],
 			'new property' => [ // make sure if we pass in a valid type it is accepted
 				'p' => [ 'new' => 'property', 'data' => '{"datatype":"string"}' ],
-				'e' => [ 'type' => 'property' ] ],
+				'e' => [ 'type' => 'property', 'datatype' => 'string' ] ],
 			'new property with data' => [ // this is our current example in the api doc
 				'p' => [
 					'new' => 'property',
@@ -106,7 +106,12 @@ class EditEntityTest extends WikibaseApiTestCase {
 						. '"descriptions":{"en-gb":{"language":"en-gb","value":"Propertydescription"}},'
 						. '"datatype":"string"}'
 				],
-				'e' => [ 'type' => 'property' ] ],
+				'e' => [
+					'type' => 'property',
+					'datatype' => 'string',
+					'labels' => [ 'en-gb' => 'Propertylabel' ],
+					'descriptions' => [ 'en-gb' => 'Propertydescription' ],
+				] ],
 			'add a sitelink..' => [ // make sure if we pass in a valid id it is accepted
 				'p' => [
 					'data' => '{"sitelinks":{"dewiki":{"site":"dewiki",'

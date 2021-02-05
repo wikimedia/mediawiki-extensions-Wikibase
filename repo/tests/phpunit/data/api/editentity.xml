@@ -13,7 +13,6 @@
 				<alias language="uk" value="&#x410;&#x435;&#x440;&#x43E;&#x301;&#x431;&#x443;&#x441;"/>
 			</language>
 		</aliases>
-		<sitelinks/>
 		<claims>
 			<property id="$propertyIdUnderTest">
 				<claim type="statement" id="$itemIdUnderTest$26D08148-75F5-4AD1-B340-3A6A2F32C202"
@@ -50,5 +49,6 @@
 				</claim>
 			</property>
 		</claims>
+		<sitelinks/>
 	</entity>
 </api>
