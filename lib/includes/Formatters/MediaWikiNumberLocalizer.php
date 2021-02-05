@@ -32,7 +32,15 @@ class MediaWikiNumberLocalizer implements NumberLocalizer {
 	 * @return string
 	 */
 	public function localizeNumber( $number ) {
-		return $this->language->formatNum( $number );
+		$number = (string)$number;
+		$formatted = $this->language->formatNum( $number );
+		if ( $this->language->parseFormattedNumber( $formatted ) === $number ) {
+			return $formatted;
+		} else {
+			// loss of precision during formatting (T268456),
+			// fall back to unformatted number
+			return $number;
+		}
 	}
 
 }
