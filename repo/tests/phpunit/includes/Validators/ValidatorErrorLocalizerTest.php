@@ -76,8 +76,8 @@ class ValidatorErrorLocalizerTest extends \PHPUnit\Framework\TestCase {
 			[ Result::newError( [] ) ],
 			[ Result::newError( [ Error::newError( 'Bla bla' ) ] ) ],
 			[ Result::newError( [
-				Error::newError( 'Foo' ),
-				Error::newError( 'Bar' ),
+				Error::newError( 'Foo', null, 'too-long' ),
+				Error::newError( 'Foo', null, 'too-short' ),
 			] ) ],
 		];
 	}
