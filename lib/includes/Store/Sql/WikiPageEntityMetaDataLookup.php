@@ -239,39 +239,16 @@ class WikiPageEntityMetaDataLookup extends DBAccessBase implements WikiPageEntit
 	private function selectRevisionInformationById( EntityId $entityId, $revisionId, $connType ) {
 		$db = $this->getConnection( $connType );
 
-		$join = [];
-		$join['page'] = [ 'INNER JOIN', 'rev_page=page_id' ];
-
-		$this->logger->debug(
-			'{method}: Looking up revision {revisionId} of {entityId}.',
-			[
-				'method' => __METHOD__,
-				'revisionId' => $revisionId,
-				'entityId' => $entityId,
-			]
-		);
-
-		$fields = $this->selectFields();
-
-		// Attach the appropriate role name.
-		// This could as well come from the database, if the query was written accordingly.
-		$roleName = $this->entityNamespaceLookup->getEntitySlotRole(
-			$entityId->getEntityType()
-		);
-		$fields['role_name'] = $db->addQuotes( $roleName );
-
-		$row = $db->selectRow(
-			[ 'revision', 'page' ],
-			$fields,
-			[ 'rev_id' => $revisionId ],
-			__METHOD__,
-			[],
-			$join
+		$rows = $this->pageTableEntityQuery->selectRows(
+			$this->selectFields(),
+			[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => $revisionId ] ] ],
+			[ $entityId ],
+			$db
 		);
 
 		$this->releaseConnection( $db );
 
-		return $row;
+		return $this->processRows( [ $entityId ], $rows )[$entityId->getSerialization()];
 	}
 
 	/**

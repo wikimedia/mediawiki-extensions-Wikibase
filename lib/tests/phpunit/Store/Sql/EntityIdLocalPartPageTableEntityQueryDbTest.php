@@ -23,6 +23,7 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 	protected function setUp(): void {
 		parent::setUp();
 		$this->tablesUsed[] = 'page';
+		$this->tablesUsed[] = 'revision';
 		$this->tablesUsed[] = 'slots';
 		$this->tablesUsed[] = 'slot_roles';
 		$this->db->insert(
@@ -47,6 +48,13 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 				'page_latest' => 221,
 				'page_len' => 2,
 				'page_touched' => $this->db->timestamp(),
+			]
+		);
+		$this->db->insert( // insert an older revision for one tests (no other revisions)
+			'revision',
+			[
+				'rev_id' => 220,
+				'rev_page' => $this->db->insertId(),
 			]
 		);
 		$this->db->insert(
@@ -146,6 +154,14 @@ class EntityIdLocalPartPageTableEntityQueryDbTest extends MediaWikiIntegrationTe
 						'page_namespace' => 2,
 					],
 				],
+			],
+			[
+				[ 'page_namespace' ],
+				[ 'revision' => [ 'INNER JOIN', [ 'rev_page=page_id', 'rev_id' => 220 ] ] ],
+				[
+					$this->getMockEntityId( 'entityTypeTwo', 'localPartTwo' ),
+				],
+				[],
 			],
 		];
 	}
