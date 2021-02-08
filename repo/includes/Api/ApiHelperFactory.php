@@ -4,8 +4,10 @@ namespace Wikibase\Repo\Api;
 
 use ApiBase;
 use MediaWiki\Permissions\PermissionManager;
+use MediaWiki\Revision\RevisionLookup;
 use Serializers\Serializer;
 use SiteLookup;
+use TitleFactory;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -84,6 +86,12 @@ class ApiHelperFactory {
 	 */
 	private $permissionManager;
 
+	/** @var RevisionLookup */
+	private $revisionLookup;
+
+	/** @var TitleFactory */
+	private $titleFactory;
+
 	/**
 	 * @var EntityByLinkedTitleLookup|null
 	 */
@@ -111,6 +119,8 @@ class ApiHelperFactory {
 	 * @param Serializer $entitySerializer
 	 * @param EntityIdParser $idParser
 	 * @param PermissionManager $permissionManager
+	 * @param RevisionLookup $revisionLookup,
+	 * @param TitleFactory $titleFactory
 	 * @param EntityByLinkedTitleLookup|null $entityByLinkedTitleLookup
 	 * @param EntityFactory|null $entityFactory
 	 * @param EntityStore|null $entityStore
@@ -127,6 +137,8 @@ class ApiHelperFactory {
 		Serializer $entitySerializer,
 		EntityIdParser $idParser,
 		PermissionManager $permissionManager,
+		RevisionLookup $revisionLookup,
+		TitleFactory $titleFactory,
 		EntityByLinkedTitleLookup $entityByLinkedTitleLookup = null,
 		EntityFactory $entityFactory = null,
 		EntityStore $entityStore = null
@@ -142,6 +154,8 @@ class ApiHelperFactory {
 		$this->entitySerializer = $entitySerializer;
 		$this->idParser = $idParser;
 		$this->permissionManager = $permissionManager;
+		$this->revisionLookup = $revisionLookup;
+		$this->titleFactory = $titleFactory;
 		$this->entityByLinkedTitleLookup = $entityByLinkedTitleLookup;
 		$this->entityFactory = $entityFactory;
 		$this->entityStore = $entityStore;
@@ -194,8 +208,11 @@ class ApiHelperFactory {
 	public function getEntitySavingHelper( ApiBase $apiBase ) {
 		$helper = new EntitySavingHelper(
 			$apiBase,
+			$this->revisionLookup,
+			$this->titleFactory,
 			$this->idParser,
 			$this->entityRevisionLookup,
+			$this->entityTitleStoreLookup,
 			$this->getErrorReporter( $apiBase ),
 			$this->summaryFormatter,
 			$this->editEntityFactory,
@@ -230,8 +247,11 @@ class ApiHelperFactory {
 	public function getEntityLoadingHelper( ApiBase $apiBase ) {
 		$helper = new EntityLoadingHelper(
 			$apiBase,
+			$this->revisionLookup,
+			$this->titleFactory,
 			$this->idParser,
 			$this->entityRevisionLookup,
+			$this->entityTitleStoreLookup,
 			$this->getErrorReporter( $apiBase )
 		);
 

@@ -7,8 +7,10 @@ use FauxRequest;
 use LogicException;
 use MediaWiki\Debug\DeprecatablePropertyArray;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\RevisionRecord;
 use RequestContext;
 use Status;
+use Title;
 use User;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,6 +19,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Lib\Store\BadRevisionException;
 use Wikibase\Lib\Store\EntityStore;
 use Wikibase\MediaInfo\DataModel\MediaInfo;
 use Wikibase\MediaInfo\DataModel\MediaInfoId;
@@ -210,7 +213,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$helper = $this->newEntitySavingHelper( [
 			'params' => [ 'baserevid' => 17 ],
 			'entityId' => $itemId,
-			'revision' => $revision,
+			'entityRevision' => $revision,
 		] );
 
 		$return = $helper->loadEntity( $itemId );
@@ -218,6 +221,75 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 
 		$this->assertSame( 17, $helper->getBaseRevisionId() );
 		$this->assertSame( EDIT_UPDATE, $helper->getSaveFlags() );
+	}
+
+	public function testLoadEntity_BadRevisionException_wrongPage() {
+		$id = new ItemId( 'Q1' );
+		$revisionId = 123;
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPageAsLinkTarget' )
+			->willReturn( Title::makeTitle( 0, 'Q2' ) );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => [ 'baserevid' => $revisionId ],
+			'entityId' => $id,
+			'revisionId' => $revisionId,
+			'entityTitle' => Title::makeTitle( 0, 'Q1' ),
+			'revision' => $revision,
+			'exception' => new BadRevisionException(),
+			'dieExceptionCode' => 'nosuchrevid',
+		] );
+
+		$this->expectException( ApiUsageException::class );
+		$helper->loadEntity( $id );
+	}
+
+	public function testLoadEntity_BadRevisionException_entityWithoutTitle() {
+		$id = new ItemId( 'Q1' );
+		$revisionId = 123;
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPageAsLinkTarget' )
+			->willReturn( Title::makeTitle( 0, 'Q2' ) );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => [ 'baserevid' => $revisionId ],
+			'entityId' => $id,
+			'revisionId' => $revisionId,
+			'entityTitle' => null,
+			'revision' => $revision,
+			'exception' => new BadRevisionException(),
+			'dieExceptionCode' => 'nosuchrevid',
+		] );
+
+		$this->expectException( ApiUsageException::class );
+		$helper->loadEntity( $id );
+	}
+
+	public function testLoadEntity_BadRevisionException_matches() {
+		$this->skipIfEntityTypeNotKnown( 'mediainfo' );
+
+		$id = new MediaInfoId( 'M1' );
+		$title = Title::makeTitle( 0, 'M1' );
+		$revisionId = 123;
+		$revision = $this->createMock( RevisionRecord::class );
+		$revision->method( 'getPageAsLinkTarget' )
+			->willReturn( $title );
+
+		$helper = $this->newEntityLoadingHelper( [
+			'params' => [ 'baserevid' => $revisionId ],
+			'entityId' => $id,
+			'revisionId' => $revisionId,
+			'entityTitle' => $title,
+			'revision' => $revision,
+			'allowCreation' => true,
+		] );
+
+		$return = $helper->loadEntity( $id );
+		$this->assertNotNull( $return, 'should return an empty entity' );
+		$this->assertTrue( $return->isEmpty(), 'entity should be empty' );
+
+		$this->assertSame( 0, $helper->getBaseRevisionId() );
+		$this->assertSame( EDIT_NEW, $helper->getSaveFlags() );
 	}
 
 	public function testAttemptSave() {
@@ -279,12 +351,13 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 	/**
 	 * @param array $config Associative configuration array. Known keys:
 	 *   - params: request parameters, as an associative array
-	 *   - revision: revision ID for EntityRevision
 	 *   - isWriteMode: return value for isWriteMode
 	 *   - EntityIdParser: the parser to use for entity ids
 	 *   - entityId: The ID expected by getEntityRevision
-	 *   - revision: EntityRevision to return from getEntityRevisions
+	 *   - entityRevision: EntityRevision to return from getEntityRevisions
 	 *   - exception: Exception to throw from getEntityRevisions
+	 *   - revisionId: The ID expected by RevisionLookup
+	 *   - revision: RevisionRecord to return from RevisionLookup
 	 *   - dieErrorCode: The error code expected by dieError
 	 *   - dieExceptionCode: The error code expected by dieException
 	 *   - newEditEntityCalls: expected number of calls to newEditEntity
@@ -297,13 +370,23 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 		$apiModule->method( 'isWriteMode' )
 			->willReturn( $config['writeMode'] ?? true );
 
+		$services = MediaWikiServices::getInstance();
 		$helper = new EntitySavingHelper(
 			$apiModule,
+			$this->getMockRevisionLookup(
+				$config['revisionId'] ?? null,
+				$config['revision'] ?? null
+			),
+			$services->getTitleFactory(),
 			$config['EntityIdParser'] ?? new ItemIdParser(),
 			$this->getMockEntityRevisionLookup(
 				$config['entityId'] ?? null,
-				$config['revision'] ?? null,
+				$config['entityRevision'] ?? null,
 				$config['exception'] ?? null
+			),
+			$this->getMockEntityTitleStoreLookup(
+				$config['entityId'] ?? null,
+				$config['entityTitle'] ?? null
 			),
 			$this->getMockErrorReporter(
 				$config['dieExceptionCode'] ?? null,
@@ -314,7 +397,7 @@ class EntitySavingHelperTest extends EntityLoadingHelperTest {
 				$config['newEditEntityCalls'] ?? null,
 				$config['attemptSaveStatus'] ?? null
 			),
-			MediaWikiServices::getInstance()->getPermissionManager()
+			$services->getPermissionManager()
 		);
 
 		if ( $config['allowCreation'] ?? false ) {
