@@ -29,8 +29,8 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ResultBuilder;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 
 /**
  * @covers \Wikibase\Repo\Api\ResultBuilder
@@ -63,8 +63,8 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 			->method( 'getPrefixedText' )
 			->will( $this->returnValue( 'MockPrefixedText' ) );
 
-		$mockEntityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$mockEntityTitleLookup->expects( $this->any() )
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		$entityTitleStoreLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnValue( $mockTitle ) );
 
@@ -83,7 +83,7 @@ class ResultBuilderTest extends \PHPUnit\Framework\TestCase {
 
 		$builder = new ResultBuilder(
 			$result,
-			$mockEntityTitleLookup,
+			$entityTitleStoreLookup,
 			$serializerFactory,
 			$serializerFactory->newItemSerializer(),
 			new HashSiteStore(),

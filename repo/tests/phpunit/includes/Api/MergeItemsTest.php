@@ -136,15 +136,15 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @return EntityTitleStoreLookup
 	 */
-	private function getEntityTitleLookup() {
-		$entityTitleLookup = $this->createMock( EntityTitleStoreLookup::class );
-		$entityTitleLookup->expects( $this->any() )
+	private function getEntityTitleStoreLookup() {
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		$entityTitleStoreLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $entityId ) {
 				return Title::newFromText( $entityId->getSerialization() );
 			} ) );
 
-		return $entityTitleLookup;
+		return $entityTitleStoreLookup;
 	}
 
 	/**
@@ -176,7 +176,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 
 		$apiResultBuilder = new ResultBuilder(
 			$main->getResult(),
-			$this->getEntityTitleLookup(),
+			$this->getEntityTitleStoreLookup(),
 			$this->getMockBuilder( SerializerFactory::class )
 				->disableOriginalConstructor()
 				->getMock(),
@@ -201,7 +201,7 @@ class MergeItemsTest extends MediaWikiIntegrationTestCase {
 				$wikibaseRepo->getSummaryFormatter(),
 				$main->getUser(),
 				$this->getMockRedirectCreationInteractor( $expectedRedirect ),
-				$this->getEntityTitleLookup(),
+				$this->getEntityTitleStoreLookup(),
 				MediaWikiServices::getInstance()->getPermissionManager()
 			),
 			$errorReporter,

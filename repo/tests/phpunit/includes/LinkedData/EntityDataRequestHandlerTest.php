@@ -22,13 +22,13 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
 use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Rdf\RdfVocabulary;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\WikibaseRepo;
 
 /**
@@ -91,8 +91,8 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 			->method( 'getDataTypeIdForProperty' )
 			->will( $this->returnValue( 'string' ) );
 
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		$entityTitleStoreLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
@@ -120,7 +120,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$service = new EntityDataSerializationService(
 			$mockRepository,
-			$entityTitleLookup,
+			$entityTitleStoreLookup,
 			$entityContentFactory,
 			new InMemoryDataTypeLookup(),
 			$rdfBuilder,
@@ -185,7 +185,7 @@ class EntityDataRequestHandlerTest extends MediaWikiIntegrationTestCase {
 				$wgScriptPath . '/index.php?title=Special:EntityDataRequestHandlerTest' .
 				'/{entity_id}.json&revision={revision_id}',
 			],
-			$entityTitleLookup
+			$entityTitleStoreLookup
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 

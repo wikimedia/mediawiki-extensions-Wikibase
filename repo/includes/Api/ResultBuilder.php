@@ -19,9 +19,9 @@ use Wikibase\DataModel\Term\TermList;
 use Wikibase\Lib\Serialization\CallbackFactory;
 use Wikibase\Lib\Serialization\SerializationModifier;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Dumpers\JsonDataTypeInjector;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -46,9 +46,9 @@ class ResultBuilder {
 	private $result;
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
-	private $entityTitleLookup;
+	private $entityTitleStoreLookup;
 
 	/**
 	 * @var SerializerFactory
@@ -97,7 +97,7 @@ class ResultBuilder {
 
 	/**
 	 * @param ApiResult $result
-	 * @param EntityTitleLookup $entityTitleLookup
+	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param SerializerFactory $serializerFactory
 	 * @param Serializer $entitySerializer
 	 * @param SiteLookup $siteLookup
@@ -106,7 +106,7 @@ class ResultBuilder {
 	 */
 	public function __construct(
 		ApiResult $result,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		SerializerFactory $serializerFactory,
 		Serializer $entitySerializer,
 		SiteLookup $siteLookup,
@@ -114,7 +114,7 @@ class ResultBuilder {
 		$addMetaData = null
 	) {
 		$this->result = $result;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->serializerFactory = $serializerFactory;
 		$this->entitySerializer = $entitySerializer;
 		$this->siteLookup = $siteLookup;
@@ -341,7 +341,7 @@ class ResultBuilder {
 	}
 
 	private function addPageInfoToRecord( array $record, EntityRevision $entityRevision ): array {
-		$title = $this->entityTitleLookup->getTitleForId( $entityRevision->getEntity()->getId() );
+		$title = $this->entityTitleStoreLookup->getTitleForId( $entityRevision->getEntity()->getId() );
 		$record['pageid'] = $title->getArticleID();
 		$record['ns'] = $title->getNamespace();
 		$record['title'] = $title->getPrefixedText();

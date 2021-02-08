@@ -20,7 +20,6 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Content\EntityContentFactory;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\LinkedData\EntityDataRequestHandler;
@@ -28,6 +27,7 @@ use Wikibase\Repo\LinkedData\EntityDataSerializationService;
 use Wikibase\Repo\LinkedData\EntityDataUriManager;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Specials\SpecialEntityData;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\Tests\LinkedData\EntityDataTestProvider;
 use Wikibase\Repo\WikibaseRepo;
 
@@ -66,8 +66,8 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 	private function newRequestHandler() {
 		$mockRepository = EntityDataTestProvider::getMockRepository();
 
-		$entityTitleLookup = $this->createMock( EntityTitleLookup::class );
-		$entityTitleLookup->expects( $this->any() )
+		$entityTitleStoreLookup = $this->createMock( EntityTitleStoreLookup::class );
+		$entityTitleStoreLookup->expects( $this->any() )
 			->method( 'getTitleForId' )
 			->will( $this->returnCallback( function( EntityId $id ) {
 				return Title::newFromText( $id->getEntityType() . ':' . $id->getSerialization() );
@@ -100,7 +100,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 
 		$serializationService = new EntityDataSerializationService(
 			$mockRepository,
-			$entityTitleLookup,
+			$entityTitleStoreLookup,
 			$entityContentFactory,
 			$dataTypeLookup,
 			$rdfBuilder,
@@ -141,7 +141,7 @@ class SpecialEntityDataTest extends SpecialPageTestBase {
 			$title,
 			$supportedExtensions,
 			[],
-			$entityTitleLookup
+			$entityTitleStoreLookup
 		);
 		$mockHtmlCacheUpdater = $this->createMock( HtmlCacheUpdater::class );
 
