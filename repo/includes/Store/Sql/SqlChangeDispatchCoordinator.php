@@ -354,7 +354,8 @@ class SqlChangeDispatchCoordinator implements ChangeDispatchCoordinator {
 
 		$where = [
 			'( chd_touched < ' . $dbr->addQuotes( $freshDispatchTime ) . // and wasn't touched too recently or
-				' OR ( ' . (int)$maxId . ' - chd_seen ) > ' . (int)$this->batchSize . ') ' , // or it's lagging by more than batchSize
+				// or it's lagging by more than batchSize
+				' OR ( ' . (int)$maxId . ' - CAST(chd_seen AS SIGNED) ) > ' . (int)$this->batchSize . ') ' ,
 			'chd_seen < ' . (int)$maxId, // and not fully up to date.
 			'chd_disabled = 0' // and not disabled
 		];
