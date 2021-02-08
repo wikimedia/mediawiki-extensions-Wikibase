@@ -455,6 +455,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Отстрани предупредување",
 	"wikibase-tainted-ref-tainted-icon-title": "Исказов има извесни потенцијални проблеми.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Пронајдена е дуплирана главна спојница. Не го додадов исказот.",
+	"wikibase-editentity-warning-serializeresult": "Не можев да ги серијализирам податоците на единицата за исходот.",
 	"wikibase-federated-properties-search-api-error-message": "Својствата се привремено недостапни.",
 	"wikibase-federated-properties-save-api-error-message": "Зачувувањето не успеа поради неуспешно барање до здруженото изворно вики.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Исказите за овој предмет се привремено недостапни поради неуспешно барање од изворното здружено вики. Превчитајте ја страницата.",

@@ -450,6 +450,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Toeu via l'avis",
 	"wikibase-tainted-ref-tainted-icon-title": "Questa dichiarazzion chì la gh'hà di problema potenziai",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Rilevad element prinicipal duplicad. Dichiarazzion principal sgiontada no.",
+	"wikibase-editentity-warning-serializeresult": "Impossibil dispon in serie i dati de l'entità per el risultad.",
 	"wikibase-federated-properties-search-api-error-message": "Proprietà temporanement minga disponibil.",
 	"wikibase-federated-properties-save-api-error-message": "El to salvament l'è fallad per via d'una richiesta fallada al wiki de origin de la federazzion.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "La dichiarazzion sora quell'element chì l'è temporaneament minga disponibil per via d'una richiesta fallada al wiki de origin de la federazzion. Per piesè sgiorna la pagina.",

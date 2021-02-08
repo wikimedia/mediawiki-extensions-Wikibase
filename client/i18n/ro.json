@@ -31,6 +31,8 @@
 	"wikibase-linkitem-addlinks": "Adaugă legături",
 	"wikibase-linkitem-close": "Închide caseta de dialog și reîncarcă pagina",
 	"wikibase-linkitem-failure": "A apărut o eroare necunoscută în timpul creării legăturii către pagina precizată.",
+	"wikibase-linkitem-title": "Leagă de pagină",
+	"wikibase-linkitem-linkpage": "Leagă de pagină",
 	"wikibase-linkitem-selectlink": "Alegeți un site și o pagină pe care doriți să le asociați acestei pagini.",
 	"wikibase-linkitem-input-site": "Limbă:",
 	"wikibase-linkitem-input-page": "Pagină:",
@@ -62,6 +64,7 @@
 	"wikibase-otherprojects-beta-description": "Adaugă secțiunea „{{int:wikibase-otherprojects}}” în cadrul barei laterale, care oferă legături către alte proiecte ale Wikimediei pe baza datelor furnizate de {{WBREPONAME}}.",
 	"wikibase-sitelinks-sitename-columnheading": "Limbă",
 	"wikibase-sitelinks-link-columnheading": "Pagină legată",
+	"echo-category-title-wikibase-action": "{{PLURAL:$1|Conectare|Conectări}} cu {{WBREPONAME}}",
 	"notification-header-page-connection": "Pagina <strong>$3</strong> a fost {{GENDER:$2|conectată}} la {{PLURAL:$4|-1=un element {{WBREPONAME}}|elementul {{WBREPONAME}} $4}}, unde pot fi colectate date relevante pentru subiect.",
 	"notification-bundle-header-page-connection": "<strong>$3</strong> și {{PLURAL:$4|încă o altă pagină|$4 alte pagini|100=99+ de alte pagini}} au fost {{GENDER:$2|conectate}} la elemente {{WBREPONAME}}, unde pot fi colectate date relevante pentru subiect.",
 	"notification-link-text-view-item": "{{GENDER:$1|Vezi}} elementul"

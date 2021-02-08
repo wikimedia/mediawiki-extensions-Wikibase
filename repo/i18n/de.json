@@ -479,6 +479,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Warnung entfernen",
 	"wikibase-tainted-ref-tainted-icon-title": "Diese Aussage hat einige potenzielle Probleme.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Doppelter Hauptsnak entdeckt. Aussage wurde nicht hinzugefügt.",
+	"wikibase-editentity-warning-serializeresult": "Entitätsdaten für das Ergebnis konnten nicht serialisiert werden.",
 	"wikibase-federated-properties-search-api-error-message": "Eigenschaften vorübergehend nicht verfügbar.",
 	"wikibase-federated-properties-save-api-error-message": "Dein Speichern ist aufgrund einer fehlgeschlagenen Anforderung an das Verbundquellen-Wiki fehlgeschlagen.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Aussagen zu diesem Datenobjekt sind aufgrund einer fehlgeschlagenen Anfrage an das Verbundquellen-Wiki vorübergehend nicht verfügbar. Bitte aktualisiere die Seite.",
