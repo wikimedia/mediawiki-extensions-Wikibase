@@ -23,7 +23,7 @@ if [ "$WB" != "repo" ]; then
 fi
 git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr --depth 1
 
-cp -r $originalDirectory Wikibase
+cp -rT $originalDirectory Wikibase
 
 cd ..
 
