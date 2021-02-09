@@ -125,7 +125,7 @@
 	"wikibase-validator-bad-type": "$2 уместо $1",
 	"wikibase-validator-too-long": "Не сме бити дуже од {{PLURAL:$1|једног знака|$1 знакова}}",
 	"wikibase-validator-label-too-long": "Ознака не сме да буде дужа од {{PLURAL:$1|једног знака|$1 знака|$1 знакова}}",
-	"wikibase-validator-too-short": "Мора бити најмање {{PLURAL:$1|један знак|$1 знакова}}",
+	"wikibase-validator-too-short": "Мора имати бар {{PLURAL:$1|1=један знак|$1 знак|$1 знака|$1 знакова}}",
 	"wikibase-validator-too-high": "Ван опсега, не сме бити веће од $1",
 	"wikibase-validator-too-low": "Ван опсега, не сме бити мање од $1",
 	"wikibase-validator-malformed-value": "Неисправан унос: $1",
