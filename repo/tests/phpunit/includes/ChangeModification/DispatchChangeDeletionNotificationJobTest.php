@@ -5,7 +5,6 @@ namespace Wikibase\Repo\Tests\ChangeModification;
 
 use IJobSpecification;
 use JobQueueGroup;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use MWTimestamp;
 use Psr\Log\LoggerInterface;
@@ -94,12 +93,10 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 	 * @return DispatchChangeDeletionNotificationJob
 	 */
 	private function getJobAndInitialize( Title $title, array $params, $logger, $factory ): DispatchChangeDeletionNotificationJob {
-		$mwServices = MediaWikiServices::getInstance();
 		$repo = WikibaseRepo::getDefaultInstance();
 
 		$job = new DispatchChangeDeletionNotificationJob( $title, $params );
 		$job->initServices(
-			$mwServices->getDBLoadBalancerFactory(),
 			$repo->getEntityContentFactory(),
 			$logger,
 			$factory
@@ -116,7 +113,9 @@ class DispatchChangeDeletionNotificationJobTest extends MediaWikiIntegrationTest
 			$jobQueueGroup = $this->createMock( JobQueueGroup::class );
 			$jobQueueGroup->expects( $this->once() )
 				->method( 'push' )
-				->willReturnCallback( function ( IJobSpecification $job ) use ( $expectedIds ) {
+				->willReturnCallback( function ( array $jobs ) use ( $expectedIds ) {
+					$this->assertCount( 1, $jobs );
+					$job = $jobs[0];
 					$this->assertInstanceOf( IJobSpecification::class, $job );
 					$this->assertSame( 'ChangeDeletionNotification', $job->getType() );
 
