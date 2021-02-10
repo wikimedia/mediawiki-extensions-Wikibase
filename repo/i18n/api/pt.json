@@ -3,7 +3,8 @@
 		"authors": [
 			"Athena in Wonderland",
 			"Fúlvio",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Consulta os objetos de emblemas disponíveis.",
@@ -75,7 +76,7 @@
 	"apihelp-wbgetentities-summary": "Obter os dados de várias entidades Wikibase",
 	"apihelp-wbgetentities-param-ids": "Os identificadores das entidades das quais serão obtidos os dados",
 	"apihelp-wbgetentities-param-sites": "O identificador do sítio onde reside a página correspondente\nUsar em conjunto com o título (<code>title</code>), mas indicar só um sítio para vários títulos ou só um título para vários sítios.",
-	"apihelp-wbgetentities-param-titles": "O título dá página correspondente\nUsar em conjunto com <code>sites</code>, mas indicar só um sítio para vários títulos ou só um título para vários sítios.",
+	"apihelp-wbgetentities-param-titles": "O título dá página correspondente.\nUsar em conjunto com <code>sites</code>, mas indicar só um sítio para vários títulos ou só um título para vários sítios.",
 	"apihelp-wbgetentities-param-redirects": "Indica se os redirecionamentos devem ser resolvidos.\nSe definido como não (\"no\"), os redirecionamentos serão tratados como entidades eliminadas.",
 	"apihelp-wbgetentities-param-props": "Os nomes das propriedades a serem obtidas de cada entidade.\nSerão também filtradas por quaisquer línguas indicadas.",
 	"apihelp-wbgetentities-param-languages": "Por omissão, os valores internacionalizados são devolvidos nas línguas disponíveis.\nEste parâmetro permite filtrá-los para obter apenas uma ou mais línguas, fornecendo um ou mais códigos de língua.",

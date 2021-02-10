@@ -3,6 +3,7 @@
 		"authors": [
 			"Macofe",
 			"Pippinu",
+			"SaldırganSincap",
 			"Sarvaturi"
 		]
 	},
@@ -62,7 +63,7 @@
 	"apihelp-wbgetentities-description": "Pigghia li dati di cchiù ntità di Wikibase.",
 	"apihelp-wbgetentities-param-ids": "L'ID di la ntità dî quali s'hannu a pigghiari li dati",
 	"apihelp-wbgetentities-param-sites": "L'idintificaturi dû situ supra ô quali s'attrova la pàggina\nAdupirari nzèmmula a 'title', pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
-	"apihelp-wbgetentities-param-titles": "Lu tìtulu di la pàggina currispunnenti\nAdupirari nzèmmula a 'sites', pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
+	"apihelp-wbgetentities-param-titles": "Lu tìtulu di la pàggina currispunnenti.\nAdupirari nzèmmula a <code>sites</code>, pirò dari sulu un situ pi tanti tìtuli o puru tanti siti pûn sulu tìtulu.",
 	"apihelp-wbgetentities-param-redirects": "Si li rimanni s'hannu a arrisòrviri o puru no.\nSi è mpustatu a \"no\", li rimanni sunnu trattati comu ntità cancillati.",
 	"apihelp-wbgetentities-param-props": "Li noma dî prupità di pigghiari d'ogni ntità.\nSù macari filtrati a pàrtiri dî lingui spicificati.",
 	"apihelp-wbgetentities-param-languages": "Pi mpustazzioni pridifinuta li valuri ntirnazziunalizzati sù arriturnati nta tutti li lingui dispunìbbili.\nStu paràmitru cunzenti di filtràrili lassannu sulu una o cchiù lingui, spicificannu unu o cchiù còdici di lingua.",

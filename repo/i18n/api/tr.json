@@ -6,6 +6,7 @@
 			"HakanIST",
 			"Incelemeelemani",
 			"MuratTheTurkish",
+			"SaldırganSincap",
 			"Sezgin İbiş",
 			"Stultiwikia"
 		]
@@ -80,8 +81,8 @@
 	"apihelp-wbgetentities-description": "Birden çok Wikibase varlığı için veri alır.",
 	"apihelp-wbgetentities-summary": "Birden çok Wikibase varlığı için veri alır.",
 	"apihelp-wbgetentities-param-ids": "Verileri almak için varlıkların kimlikleri",
-	"apihelp-wbgetentities-param-sites": "İlgili sayfanın bulunduğu sitenin tanımlayıcısı\n<code>title</code> ile birlikte kullanın, ancak birkaç başlık için yalnızca bir site veya bir başlık için birkaç site verin.",
-	"apihelp-wbgetentities-param-titles": "İlgili sayfanın başlığı\n<code>sites</code> ile birlikte kullanın, ancak birkaç başlık için yalnızca bir site veya bir başlık için birkaç site verin.",
+	"apihelp-wbgetentities-param-sites": "İlgili sayfanın bulunduğu sitenin tanımlayıcısı.\n<code>title</code> ile birlikte kullanın, ancak birkaç başlık için yalnızca bir site veya bir başlık için birkaç site verin.",
+	"apihelp-wbgetentities-param-titles": "İlgili sayfanın başlığı.\n<code>sites</code> ile birlikte kullanın, ancak birkaç başlık için yalnızca bir site veya bir başlık için birkaç site verin.",
 	"apihelp-wbgetentities-param-redirects": "Yönlendirmelerin çözülüp çözülmeyeceği.\n\"no\" olarak ayarlanırsa, yönlendirmeler silinmiş varlıklar gibi ele alınır.",
 	"apihelp-wbgetentities-param-props": "Her varlıktan geri alınacak özelliklerin adları.\nVerilen dillere göre daha fazla filtrelenecektir.",
 	"apihelp-wbgetentities-param-languages": "Varsayılan olarak uluslararası değerler kullanılabilir tüm dillerde döndürülür.\nBu parametre, bir veya daha fazla dil kodu sağlayarak bunların bir veya daha fazla dile filtrelenmesini sağlar.",

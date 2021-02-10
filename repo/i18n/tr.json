@@ -477,6 +477,7 @@
 	"wikibase-tainted-ref-popper-remove-warning": "Uyarıyı kaldır",
 	"wikibase-tainted-ref-tainted-icon-title": "Bu ifadenin bazı potansiyel sorunları var.",
 	"wikibase-setclaim-warning-duplicatemainsnak": "Çift ana yılan tespit edildi. Açıklama eklenmedi.",
+	"wikibase-editentity-warning-serializeresult": "Sonuç için varlık verileri seri hale getirilemedi.",
 	"wikibase-federated-properties-search-api-error-message": "Özellikler geçici olarak kullanılamıyor.",
 	"wikibase-federated-properties-save-api-error-message": "Federasyon kaynağı vikiye yapılan başarısız bir istek nedeniyle kaydınız başarısız oldu.",
 	"wikibase-federated-properties-source-wiki-api-error-message": "Federasyon kaynağı vikiye yapılan başarısız bir istek nedeniyle bu öğeyle ilgili ifadeler geçici olarak kullanılamıyor. Lütfen sayfayı yenileyin.",

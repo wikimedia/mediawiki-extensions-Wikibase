@@ -6,7 +6,8 @@
 			"Predatorix",
 			"Tiin",
 			"ToBeFree",
-			"Twagner"
+			"Twagner",
+			"Wolfdietmann"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Fragt verfügbare Auszeichnungs-Datenobjekte ab.",
@@ -75,6 +76,8 @@
 	"apihelp-wbgetentities-description": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
 	"apihelp-wbgetentities-summary": "Ruft die Daten für mehrere Wikibase-Objekte ab.",
 	"apihelp-wbgetentities-param-ids": "Die Kennungen der Objekte, von denen die Daten abgerufen werden sollen",
+	"apihelp-wbgetentities-param-sites": "Identifier für die Site, auf der sich die entsprechende Seite befindet.\nZusammen mit <code>title</code> verwenden, aber nur eine Site für mehrere Titel oder mehrere Sites für einen Titel angeben.",
+	"apihelp-wbgetentities-param-titles": "Der Titel der entsprechenden Seite.\nZusammen mit <code>sites</code> benutzen, setze aber nur eine Site für mehrere Titel oder mehrere Sites für einen Titel.",
 	"apihelp-wbgetentities-param-redirects": "Ob Weiterleitungen aufgelöst werden sollen.\nFalls auf „no“ festgelegt, werden Weiterleitungen wie gelöschte Objekte behandelt.",
 	"apihelp-wbgetentities-example-1": "Ruft Objekte mit der Kennung <samp>Q42</samp> mit allen verfügbaren Attributen in allen verfügbaren Sprachen ab",
 	"apihelp-wbgetentities-example-4": "Ruft Objekte mit der Kennung <samp>Q42</samp> ab, mit allen verfügbaren Attributen auf Englisch.",

@@ -5,7 +5,8 @@
 			"Daud I.F. Argana",
 			"Farras",
 			"Macofe",
-			"Rachmat04"
+			"Rachmat04",
+			"SaldırganSincap"
 		]
 	},
 	"apihelp-wbavailablebadges-description": "Permintaan (''query'') atas butir lencana yang tersedia",
@@ -79,7 +80,7 @@
 	"apihelp-wbgetentities-summary": "Mendapatkan data untuk beberapa entitas Wikibase.",
 	"apihelp-wbgetentities-param-ids": "Penanda entitas untuk mendapatkan data dari",
 	"apihelp-wbgetentities-param-sites": "Penanda untuk situs ini terletak pada laman terkait yang ada\nGunakan bersama dengan 'title' namun hanya bisa memberikan hasil satu situs untuk beberapa judul atau beberapa situs untuk satu judul.",
-	"apihelp-wbgetentities-param-titles": "Judul untuk laman terkait\nGunakan bersama dengan 'sites', namun hanya berikan satu situs untuk beberapa judul atau beberapa situs untuk satu judul.",
+	"apihelp-wbgetentities-param-titles": "Judul untuk laman terkait.\nGunakan bersama dengan <code>sites</code>, namun hanya berikan satu situs untuk beberapa judul atau beberapa situs untuk satu judul.",
 	"apihelp-wbgetentities-param-redirects": "Apabila pengalihan harus diselesaikan.\nJika diatur sebagai \"no\", pengalihan akan diperlakukan seperti entitas yang dihapus.",
 	"apihelp-wbgetentities-param-props": "Nama dari atribut yang didapatkan dari setiap entitas.\nAkan disaring secara lebih lanjut dengan semua bahasa yang disediakan.",
 	"apihelp-wbgetentities-param-languages": "Dengan pengaturan standar, nilai internasionalisasi akan dikembalikan ke semua bahasa yang tersedia.\nParameter ini memungkinkan untuk penyaringan menjadi satu atau beberapa bahasa dengan menyediakan satu atau beberapa kode bahasa.",

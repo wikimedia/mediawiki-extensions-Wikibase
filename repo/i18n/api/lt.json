@@ -4,6 +4,7 @@
 			"Albertas",
 			"Eitvys200",
 			"Macofe",
+			"SaldırganSincap",
 			"Zygimantus"
 		]
 	},
@@ -69,7 +70,7 @@
 	"apihelp-wbgetentities-description": "Gauna keletos Wikibase esybių duomenis.",
 	"apihelp-wbgetentities-param-ids": "ID esybių, iš kurių paimti duomenis",
 	"apihelp-wbgetentities-param-sites": "Identifikatorius tinklapio, kuriame yra atitinkamas puslapis.\nNaudoti kartu su 'title', bet nurodyti tik vieną tinklapį keliems pavadinimams arba keliems tinklapiams vieną pavadinimą.",
-	"apihelp-wbgetentities-param-titles": "Atitinkamo puslapio pavadinimas\nNaudoti kartu su 'sites', bet pateikti tik vieną tinklapį keliems pavadinimams arba kelis tinklapius vienam pavadinimui.",
+	"apihelp-wbgetentities-param-titles": "Atitinkamo puslapio pavadinimas.\nNaudoti kartu su <code>sites</code>, bet pateikti tik vieną tinklapį keliems pavadinimams arba kelis tinklapius vienam pavadinimui.",
 	"apihelp-wbgetentities-param-redirects": "Ar nukreipimai turėtų būti vykdomi.\nJeigu nustatyta į \"no\", nukreipimai bus traktuojami kaip ištrintos esybės.",
 	"apihelp-wbgetentities-param-props": "Vardai savybių, skirtų grįžti iš kiekvienos esybės.\nToliau bus filtruojama pagal pateiktas kalbas.",
 	"apihelp-wbgetentities-param-languages": "Pagal nutylėjimą grąžinamos internacionalizuotos reikšmės visomis prieinamomis kalbomis.\nŠis parametras leidžia nufiltruoti viena ar kita kalba, pateikiant vieną ar daugiau kalbos kodų.",

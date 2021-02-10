@@ -8,6 +8,7 @@
 			"Mervat Salman",
 			"Moud hosny",
 			"Mr. Ibrahem",
+			"SaldırganSincap",
 			"ديفيد",
 			"محمد أحمد عبد الفتاح"
 		]
@@ -83,7 +84,7 @@
 	"apihelp-wbgetentities-summary": "الحصول على البيانات لكيانات ويكيبيس متعددة.",
 	"apihelp-wbgetentities-param-ids": "أرقام الكيانات للحصول على البيانات منها",
 	"apihelp-wbgetentities-param-sites": "معرف للموقع حيث توجد الصفحة المناظرة\nاستخدم مع <code>title</code>، لكن فقط اعط موقع واحد لعدة عناوين أو مواقع متعددة لعنوان واحد.",
-	"apihelp-wbgetentities-param-titles": "عنوان الصفحة المناظرة\nاستخدم مع <code>sites</code>، لكن فقط اعط موقع واحد لعدة عناوين أو مواقع متعددة لعنوان واحد.",
+	"apihelp-wbgetentities-param-titles": "عنوان الصفحة المناظرة.\nاستخدم مع <code>sites</code>، لكن فقط اعط موقع واحد لعدة عناوين أو مواقع متعددة لعنوان واحد.",
 	"apihelp-wbgetentities-param-redirects": "ما إذا كان يتم حل التحويلات.\nلو مضبوط ل\"no\"، فالتحويلات سيتم التعامل معها ككيانات محذوفة.",
 	"apihelp-wbgetentities-param-props": "أسماء الخصائص للحصول عليها من كل كيان.\nستتم فلترتها أيضا حسب أي لغات معطاة.",
 	"apihelp-wbgetentities-param-languages": "افتراضيا القيم المترجمة يتم إرجاعها بكل اللغات المتوفرة.\nهذا المعامل يسمح بفلترة هذه إلى لغة واحدة أو أكثر عن طريق توفير كود لغة واحد أو أكثر.",

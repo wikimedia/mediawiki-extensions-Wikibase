@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Macofe",
+			"SaldırganSincap",
 			"Xuacu"
 		]
 	},
@@ -74,7 +75,7 @@
 	"apihelp-wbgetentities-summary": "Recibe los datos pa múltiples entidaes de Wikibase.",
 	"apihelp-wbgetentities-param-ids": "Los IDs de les entidaes de les que recibir os datos",
 	"apihelp-wbgetentities-param-sites": "Identificador pal sitiu nel que ta la páxina correspondiente\nUsar xunto con <code>title</code> (títulu), pero sólo da un sitiu pa dellos títulos o dellos sitios pa un títulu.",
-	"apihelp-wbgetentities-param-titles": "El títulu de la páxina correspondiente\nUsar xunto con <code>sites</code> (sitios), pero sólo da un sitiu pa dellos títulos o dellos sitios pa un títulu.",
+	"apihelp-wbgetentities-param-titles": "El títulu de la páxina correspondiente.\nUsar xunto con <code>sites</code> (sitios), pero sólo da un sitiu pa dellos títulos o dellos sitios pa un títulu.",
 	"apihelp-wbgetentities-param-redirects": "Si les redireiciones tienen de resolves.\nSi se configura como «non», les redireiciones trataránse como entidaes borraes.",
 	"apihelp-wbgetentities-param-props": "Los nomes de les propiedaes a recuperar de cada entidá.\nFiltriaráse más poles llingües indicaes.",
 	"apihelp-wbgetentities-param-languages": "De mou predetermináu, los valores internacionalizaos devuélvense'n toles llingües disponibles.\nEsti parámetru permite filtriar esto pa dexar sólo una llingua o más indicando unu o más códigos de llingua.",

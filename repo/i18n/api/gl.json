@@ -4,6 +4,7 @@
 			"Amire80",
 			"Elisardojm",
 			"Macofe",
+			"SaldırganSincap",
 			"Toliño"
 		]
 	},
@@ -76,7 +77,7 @@
 	"apihelp-wbgetentities-summary": "Obtén a información para múltiples entidades de Wikibase",
 	"apihelp-wbgetentities-param-ids": "Identificadores das entidades das que obter os datos",
 	"apihelp-wbgetentities-param-sites": "Identificador para o sitio no que reside a páxina correspondente\nUsar xunto con <code>title</code> (título), pero indicar só un sitio para varios títulos ou varios sitios para un título.",
-	"apihelp-wbgetentities-param-titles": "Título da páxina correspondente\nUsar xunto con <code>sites</code> (sitios), pero só indicar un sitio para varios títulos ou varios sitios para un título.",
+	"apihelp-wbgetentities-param-titles": "Título da páxina correspondente.\nUsar xunto con <code>sites</code> (sitios), pero só indicar un sitio para varios títulos ou varios sitios para un título.",
 	"apihelp-wbgetentities-param-redirects": "Se as redireccións deben ser resoltas.\nSe se fixa a \"non\", as redireccións serán tratadas como entidades borradas.",
 	"apihelp-wbgetentities-param-props": "Nomes das propiedades a obter de cada entidade.\nFiltrarase máis polos idiomas indicados.",
 	"apihelp-wbgetentities-param-languages": "Por defecto os valores internacionalizados devólvense en todos os idiomas dispoñibles.\nEste parámetro permite filtrar isto para deixar só un ou máis idiomas indicando un ou máis códigos de idioma.",
