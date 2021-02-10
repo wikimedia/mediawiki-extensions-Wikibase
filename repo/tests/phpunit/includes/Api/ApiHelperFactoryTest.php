@@ -12,7 +12,6 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\ApiHelperFactory;
 use Wikibase\Repo\Api\EntityLoadingHelper;
@@ -20,6 +19,7 @@ use Wikibase\Repo\Api\EntitySavingHelper;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 
 /**
@@ -47,7 +47,7 @@ class ApiHelperFactoryTest extends \PHPUnit\Framework\TestCase {
 			->getMock();
 
 		return new ApiHelperFactory(
-			$this->createMock( EntityTitleLookup::class ),
+			$this->createMock( EntityTitleStoreLookup::class ),
 			$this->createMock( ExceptionLocalizer::class ),
 			new InMemoryDataTypeLookup(),
 			new HashSiteStore(),

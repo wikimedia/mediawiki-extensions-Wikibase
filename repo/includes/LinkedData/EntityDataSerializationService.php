@@ -17,7 +17,6 @@ use Wikibase\DataModel\SerializerFactory;
 use Wikibase\DataModel\Services\Lookup\EntityLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Lib\Store\EntityRevision;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Lib\Store\RedirectRevision;
 use Wikibase\Repo\Api\ResultBuilder;
 use Wikibase\Repo\Content\EntityContentFactory;
@@ -27,6 +26,7 @@ use Wikibase\Repo\Rdf\RdfBuilder;
 use Wikibase\Repo\Rdf\RdfProducer;
 use Wikibase\Repo\Rdf\RdfVocabulary;
 use Wikibase\Repo\Rdf\ValueSnakRdfBuilderFactory;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikimedia\Purtle\RdfWriterFactory;
 
 /**
@@ -50,8 +50,8 @@ class EntityDataSerializationService {
 	 */
 	private $entityLookup = null;
 
-	/** @var EntityTitleLookup */
-	private $entityTitleLookup;
+	/** @var EntityTitleStoreLookup */
+	private $entityTitleStoreLookup;
 
 	/** @var EntityContentFactory */
 	private $entityContentFactory;
@@ -103,7 +103,7 @@ class EntityDataSerializationService {
 
 	public function __construct(
 		EntityLookup $entityLookup,
-		EntityTitleLookup $entityTitleLookup,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		EntityContentFactory $entityContentFactory,
 		PropertyDataTypeLookup $propertyLookup,
 		ValueSnakRdfBuilderFactory $valueSnakRdfBuilderFactory,
@@ -115,7 +115,7 @@ class EntityDataSerializationService {
 		RdfVocabulary $rdfVocabulary
 	) {
 		$this->entityLookup = $entityLookup;
-		$this->entityTitleLookup = $entityTitleLookup;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->entityContentFactory = $entityContentFactory;
 		$this->propertyLookup = $propertyLookup;
 		$this->valueSnakRdfBuilderFactory = $valueSnakRdfBuilderFactory;
@@ -393,7 +393,7 @@ class EntityDataSerializationService {
 
 		$resultBuilder = new ResultBuilder(
 			$res,
-			$this->entityTitleLookup,
+			$this->entityTitleStoreLookup,
 			$this->serializerFactory,
 			$this->entitySerializer,
 			$this->siteLookup,

@@ -13,9 +13,9 @@ use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\Store\EntityByLinkedTitleLookup;
 use Wikibase\Lib\Store\EntityRevisionLookup;
 use Wikibase\Lib\Store\EntityStore;
-use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EditEntity\MediawikiEditEntityFactory;
 use Wikibase\Repo\Localizer\ExceptionLocalizer;
+use Wikibase\Repo\Store\EntityTitleStoreLookup;
 use Wikibase\Repo\SummaryFormatter;
 
 /**
@@ -30,9 +30,9 @@ use Wikibase\Repo\SummaryFormatter;
 class ApiHelperFactory {
 
 	/**
-	 * @var EntityTitleLookup
+	 * @var EntityTitleStoreLookup
 	 */
-	private $titleLookup;
+	private $entityTitleStoreLookup;
 
 	/**
 	 * @var ExceptionLocalizer
@@ -100,7 +100,7 @@ class ApiHelperFactory {
 	private $entityStore;
 
 	/**
-	 * @param EntityTitleLookup $titleLookup
+	 * @param EntityTitleStoreLookup $entityTitleStoreLookup
 	 * @param ExceptionLocalizer $exceptionLocalizer
 	 * @param PropertyDataTypeLookup $dataTypeLookup
 	 * @param SiteLookup $siteLookup
@@ -116,7 +116,7 @@ class ApiHelperFactory {
 	 * @param EntityStore|null $entityStore
 	 */
 	public function __construct(
-		EntityTitleLookup $titleLookup,
+		EntityTitleStoreLookup $entityTitleStoreLookup,
 		ExceptionLocalizer $exceptionLocalizer,
 		PropertyDataTypeLookup $dataTypeLookup,
 		SiteLookup $siteLookup,
@@ -131,7 +131,7 @@ class ApiHelperFactory {
 		EntityFactory $entityFactory = null,
 		EntityStore $entityStore = null
 	) {
-		$this->titleLookup = $titleLookup;
+		$this->entityTitleStoreLookup = $entityTitleStoreLookup;
 		$this->exceptionLocalizer = $exceptionLocalizer;
 		$this->dataTypeLookup = $dataTypeLookup;
 		$this->siteLookup = $siteLookup;
@@ -157,7 +157,7 @@ class ApiHelperFactory {
 	public function getResultBuilder( ApiBase $api ) {
 		return new ResultBuilder(
 			$api->getResult(),
-			$this->titleLookup,
+			$this->entityTitleStoreLookup,
 			$this->serializerFactory,
 			$this->entitySerializer,
 			$this->siteLookup,
