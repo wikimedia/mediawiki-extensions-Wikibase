@@ -46,7 +46,9 @@ class StatementEntityReferenceExtractor implements EntityReferenceExtractor {
 			$this->processStatement( $statement );
 		}
 
-		return array_values( $this->entityIds );
+		$entityIds = array_values( $this->entityIds );
+		$this->entityIds = [];
+		return $entityIds;
 	}
 
 	private function processStatement( Statement $statement ) {
