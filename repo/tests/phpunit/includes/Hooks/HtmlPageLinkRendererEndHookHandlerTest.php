@@ -7,7 +7,7 @@ use Language;
 use MediaWiki\Interwiki\InterwikiLookup;
 use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use SpecialPage;
 use Title;
@@ -42,7 +42,7 @@ use Wikibase\Repo\WikibaseRepo;
  *
  * @license GPL-2.0-or-later
  */
-class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
+class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	const ITEM_WITH_LABEL = 'Q1';
 	const ITEM_WITHOUT_LABEL = 'Q11';
@@ -297,7 +297,7 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 		$handler = $this->newInstance();
 
 		$title = Title::makeTitle(
-			0,
+			NS_MAIN,
 			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX
@@ -324,11 +324,11 @@ class HtmlPageLinkRendererEndHookHandlerTest extends MediaWikiTestCase {
 	}
 
 	public function testGivenIdFromOtherSourceWithoutLabelAndDesc_idIsUsedAsLinkTextAndWikitextLinkIsUsedInLinkTitle() {
-		$prefixedText = 'exptectedtPrefixedText';
+		$prefixedText = 'expectedPrefixedText';
 		$handler = $this->newInstance( $prefixedText );
 
 		$title = Title::makeTitle(
-			0,
+			NS_MAIN,
 			'Special:EntityPage/' . self::ITEM_FOREIGN_NO_DATA_NO_PREFIX,
 			'',
 			self::FOREIGN_REPO_PREFIX

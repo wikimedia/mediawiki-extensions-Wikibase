@@ -7,8 +7,8 @@ namespace Wikibase\Client\Tests\Integration\Hooks;
 use HashSiteStore;
 use Language;
 use MediaWiki\HookContainer\HookContainer;
+use MediaWikiIntegrationTestCase;
 use MediaWikiSite;
-use MediaWikiTestCase;
 use ParserOutput;
 use Psr\Log\NullLogger;
 use Site;
@@ -51,7 +51,7 @@ use Wikibase\Lib\Tests\MockRepository;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class ParserOutputUpdateHookHandlerTest extends MediaWikiTestCase {
+class ParserOutputUpdateHookHandlerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param string $globalId

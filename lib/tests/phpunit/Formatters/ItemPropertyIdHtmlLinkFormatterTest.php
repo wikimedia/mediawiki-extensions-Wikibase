@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests\Formatters;
 
 use HamcrestPHPUnitIntegration;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Title;
@@ -12,10 +12,13 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Formatters\ItemPropertyIdHtmlLinkFormatter;
+use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlBrokenLinkFormatter;
 use Wikibase\Lib\Formatters\NonExistingEntityIdHtmlFormatter;
 use Wikibase\Lib\LanguageFallbackIndicator;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityTitleLookup;
+use Wikibase\Lib\Store\EntityTitleTextLookup;
+use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 
 /**
@@ -27,7 +30,7 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
  *
  * @license GPL-2.0-or-later
  */
-class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
+class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiIntegrationTestCase {
 	use HamcrestPHPUnitIntegration;
 
 	/** @var EntityTitleLookup|ObjectProphecy */
@@ -49,11 +52,17 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 	 */
 	protected $transliterationMap = [];
 
+	/**
+	 * @var NonExistingEntityIdHtmlFormatter
+	 */
+	private $nonExistingEntityIdHtmlFormatter;
+
 	const SOME_TRANSLITERATED_TEXT = 'some-transliterated-text';
 
 	protected function setUp(): void {
 		parent::setUp();
 
+		$this->nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
 		$this->entityTitleLookup = $this->prophesize( EntityTitleLookup::class );
 		$this->labelDescriptionLookup = $this->prophesize(
 			LanguageFallbackLabelDescriptionLookup::class
@@ -146,8 +155,7 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new ItemId( 'Q1' ) );
 
-		$nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
-		$expectedResult = $nonExistingEntityIdHtmlFormatter->formatEntityId( new ItemId( 'Q1' ) );
+		$expectedResult = $this->nonExistingEntityIdHtmlFormatter->formatEntityId( new ItemId( 'Q1' ) );
 		$this->assertEquals( $expectedResult, $result );
 	}
 
@@ -226,7 +234,8 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		$formatter = new ItemPropertyIdHtmlLinkFormatter(
 			$this->createMock( LanguageFallbackLabelDescriptionLookup::class ),
 			$entityTitleLookup,
-			$this->createMock( LanguageNameLookup::class )
+			$this->createMock( LanguageNameLookup::class ),
+			$this->nonExistingEntityIdHtmlFormatter
 		);
 
 		$expectedPattern = '/^Q123' . preg_quote( wfMessage( 'word-separator' )->text(), '/' ) . '.*>' .
@@ -308,15 +317,38 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		);
 	}
 
-	public function testPropertyDoesNotExist_DelegatesFormattingToNonExistingEntityIdHtmlFormatter() {
+	public function testPropertyDoesNotExist_DelegatesFormattingToNonExistingEntityIdHtmlBrokenLinkFormatter() {
 		$this->givenPropertyDoesNotExist( 'P1' );
+
+		$this->nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlBrokenLinkFormatter(
+			'wikibase-deletedentity-',
+			$this->getEntityTitleTextLookup( 'P1' ),
+			$this->getEntityUrlLookup()
+		);
 
 		$entityIdHtmlLinkFormatter = $this->createFormatter();
 		$result = $entityIdHtmlLinkFormatter->formatEntityId( new PropertyId( 'P1' ) );
 
-		$nonExistingEntityIdHtmlFormatter = new NonExistingEntityIdHtmlFormatter( 'wikibase-deletedentity-' );
-		$expectedResult = $nonExistingEntityIdHtmlFormatter->formatEntityId( new PropertyId( 'P1' ) );
+		$expectedResult = $this->nonExistingEntityIdHtmlFormatter->formatEntityId( new PropertyId( 'P1' ) );
 		$this->assertEquals( $expectedResult, $result );
+	}
+
+	private function getEntityTitleTextLookup( $entityId ) {
+		$entityTitleTextLookup = $this->createMock( EntityTitleTextLookup::class );
+		$entityTitleTextLookup
+			->expects( $this->any() )
+			->method( 'getPrefixedText' )
+			->willReturn( 'Property:' . $entityId );
+		return $entityTitleTextLookup;
+	}
+
+	private function getEntityUrlLookup() {
+		$entityUrlLookup = $this->createMock( EntityUrlLookup::class );
+		$entityUrlLookup
+			->expects( $this->any() )
+			->method( 'getFullUrl' )
+			->willReturn( 'http://someUrl.com' );
+		return $entityUrlLookup;
 	}
 
 	public function testGivenPropertyLabelInFallbackLanguageExists_UsesThatLabelAsTheText() {
@@ -408,7 +440,8 @@ class ItemPropertyIdHtmlLinkFormatterTest extends MediaWikiTestCase {
 		return new ItemPropertyIdHtmlLinkFormatter(
 			$this->labelDescriptionLookup->reveal(),
 			$this->entityTitleLookup->reveal(),
-			$this->languageNameLookup->reveal()
+			$this->languageNameLookup->reveal(),
+			$this->nonExistingEntityIdHtmlFormatter
 		);
 	}
 

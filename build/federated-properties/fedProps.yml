@@ -26,6 +26,7 @@
         name: "{{ item }}"
         state: present
       loop:
+          - "setuptools"
           - "docker-compose"
 
     - name: Ensure user 'mediawiki' exists and belongs to the 'docker' group
@@ -68,6 +69,14 @@
           dest: "{{ MW_PATH }}"
           version: "master"
 
+    - name: Ensure .htaccess is in place
+      copy:
+          src: "files/htaccess"
+          dest: "{{ MW_PATH }}/.htaccess"
+          mode: 0644
+      tags:
+          - source
+
     - name: Ensure symbolic link for script dir is in place
       file:
           src: "/var/www/html"
@@ -96,6 +105,11 @@
     - name: Run 'composer install' on mediawiki core
       composer:
           command: install
+          working_dir: "{{ MW_PATH }}"
+
+    - name: Run 'composer update' on mediawiki core
+      composer:
+          command: update
           working_dir: "{{ MW_PATH }}"
 
     - name: Ensure docker is started

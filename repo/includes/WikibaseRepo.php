@@ -180,6 +180,8 @@ use Wikibase\Repo\EditEntity\MediawikiEditFilterHookRunner;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
 use Wikibase\Repo\EntityReferenceExtractors\StatementEntityReferenceExtractor;
 use Wikibase\Repo\FederatedProperties\ApiServiceFactory;
+use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntitySourceDefinitionsConfigParser;
+use Wikibase\Repo\FederatedProperties\WrappingEntityIdFormatterFactory;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Interactors\ItemMergeInteractor;
 use Wikibase\Repo\Interactors\ItemRedirectCreationInteractor;
@@ -222,6 +224,7 @@ use Wikibase\Repo\Validators\TermValidatorFactory;
 use Wikibase\Repo\Validators\ValidatorErrorLocalizer;
 use Wikibase\Repo\View\RepoSpecialPageLinker;
 use Wikibase\Repo\View\WikibaseHtmlSnakFormatterFactory;
+use Wikibase\View\EntityIdFormatterFactory;
 use Wikibase\View\Template\TemplateFactory;
 use Wikibase\View\ViewFactory;
 use Wikimedia\ObjectFactory;
@@ -391,6 +394,7 @@ class WikibaseRepo {
 		self::$validatorBuilders = null;
 		self::$valueFormatterBuilders = null;
 		self::$snakFormatterBuilders = null;
+		ApiServiceFactory::resetClassStatics();
 	}
 
 	/**
@@ -430,6 +434,16 @@ class WikibaseRepo {
 		}
 
 		$parser = new EntitySourceDefinitionsLegacyRepoSettingsParser();
+
+		if ( $settings->getSetting( 'federatedPropertiesEnabled' ) ) {
+			$configParser = new FederatedPropertiesEntitySourceDefinitionsConfigParser( $settings );
+
+			return $configParser->initializeDefaults(
+				$parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions ),
+				$entityTypeDefinitions
+			);
+		}
+
 		return $parser->newDefinitionsFromSettings( $settings, $entityTypeDefinitions );
 	}
 
@@ -2116,14 +2130,18 @@ class WikibaseRepo {
 	}
 
 	/**
-	 * @return EntityIdHtmlLinkFormatterFactory
+	 * @return EntityIdFormatterFactory
 	 */
 	public function getEntityIdHtmlLinkFormatterFactory() {
-		return new EntityIdHtmlLinkFormatterFactory(
+		$factory = new EntityIdHtmlLinkFormatterFactory(
 			$this->getEntityTitleLookup(),
 			$this->getLanguageNameLookup(),
 			$this->entityTypeDefinitions->get( EntityTypeDefinitions::ENTITY_ID_HTML_LINK_FORMATTER_CALLBACK )
 		);
+		if ( $this->inFederatedPropertyMode() ) {
+			$factory = new WrappingEntityIdFormatterFactory( $factory );
+		}
+		return $factory;
 	}
 
 	public function getEntityViewFactory() {

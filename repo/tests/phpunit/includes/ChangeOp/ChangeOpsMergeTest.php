@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\ChangeOp;
 
 use HashSiteStore;
 use InvalidArgumentException;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Site;
 use TestSites;
@@ -39,7 +39,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Addshore
  */
-class ChangeOpsMergeTest extends MediaWikiTestCase {
+class ChangeOpsMergeTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var ChangeOpTestMockProvider

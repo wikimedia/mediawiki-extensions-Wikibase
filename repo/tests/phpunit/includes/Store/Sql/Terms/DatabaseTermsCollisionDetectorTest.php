@@ -2,7 +2,7 @@
 
 namespace Wikibase\Repo\Tests\Store\Sql\Terms;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\Lib\Store\Sql\Terms\StaticTypeIdsStore;
@@ -19,7 +19,7 @@ use Wikimedia\Rdbms\IMaintainableDatabase;
  *
  * @license GPL-2.0-or-later
  */
-class DatabaseTermsCollisionDetectorTest extends MediaWikiTestCase {
+class DatabaseTermsCollisionDetectorTest extends MediaWikiIntegrationTestCase {
 
 	private const TYPE_LABEL = 1;
 	private const TYPE_DESCRIPTION = 2;

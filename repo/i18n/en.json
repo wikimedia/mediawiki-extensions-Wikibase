@@ -507,9 +507,14 @@
 	"wikibase-federated-properties-source-wiki-api-error-message": "Statements about this item are temporarily unavailable due to a failed request to the federation source Wiki. Please refresh the page.",
 	"wikibase-federated-properties-special-list-of-properties-notice": "This Wikibase uses federated properties from an external source. You can access the $1.",
 	"wikibase-federated-properties-special-list-of-properties-source-ref": "[$1 List of Properties on $2]",
+	"wikibase-federated-properties-edit-request-failed-notice-try-again": "Try again",
+	"wikibase-federated-properties-edit-request-failed-notice-notice": "You cannot edit this statement due to a failed request to the federation source Wiki.",
+	"wikibase-federated-properties-edit-request-failed-notice-header": "Editing failed",
 	"special-setaliases-parameterized": "Set $1 aliases",
 	"special-setlabel-parameterized": "Set $1 label",
 	"special-setdescription-parameterized": "Set $1 description",
 	"special-setlabeldescriptionaliases-parameterized": "Set $1 label, description and aliases",
-	"special-parameterized-description-separator": "/"
+	"special-parameterized-description-separator": "/",
+	"wikibase-federated-properties-local-property-api-error-message": "You can not interact with properties using this API while federated properties is enabled",
+	"wikibase-federated-properties-failed-request-api-error-message": "The request failed due to a failed request to the federation source wiki."
 }

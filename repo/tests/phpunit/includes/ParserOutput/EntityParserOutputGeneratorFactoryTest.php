@@ -11,13 +11,11 @@ use Wikibase\Lib\Formatters\CachingKartographerEmbeddingHandler;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\EntityReferenceExtractors\EntityReferenceExtractorDelegator;
-use Wikibase\Repo\FederatedProperties\FederatedPropertiesEntityParserOutputGenerator;
 use Wikibase\Repo\LinkedData\EntityDataFormatProvider;
 use Wikibase\Repo\ParserOutput\DispatchingEntityMetaTagsCreatorFactory;
 use Wikibase\Repo\ParserOutput\DispatchingEntityViewFactory;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGenerator;
 use Wikibase\Repo\ParserOutput\EntityParserOutputGeneratorFactory;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\View\Template\TemplateFactory;
 
 /**
@@ -37,16 +35,6 @@ class EntityParserOutputGeneratorFactoryTest extends \MediaWikiTestCase {
 		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
 
 		$this->assertInstanceOf( EntityParserOutputGenerator::class, $instance );
-	}
-
-	public function testGetFederatedPropertiesEntityParserOutputGenerator() {
-		$settings = WikibaseRepo::getDefaultInstance()->getSettings();
-		$settings->setSetting( 'federatedPropertiesEnabled', true );
-
-		$parserOutputGeneratorFactory = $this->getEntityParserOutputGeneratorFactory();
-		$instance = $parserOutputGeneratorFactory->getEntityParserOutputGenerator( Language::factory( 'en' ) );
-
-		$this->assertInstanceOf( FederatedPropertiesEntityParserOutputGenerator::class, $instance );
 	}
 
 	private function getEntityParserOutputGeneratorFactory() {

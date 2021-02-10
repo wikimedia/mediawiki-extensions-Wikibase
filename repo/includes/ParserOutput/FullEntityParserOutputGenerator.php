@@ -75,7 +75,7 @@ class FullEntityParserOutputGenerator implements EntityParserOutputGenerator {
 	 */
 	private $languageCode;
 
-	/*
+	/**
 	 * @var Language
 	 */
 	private $language;

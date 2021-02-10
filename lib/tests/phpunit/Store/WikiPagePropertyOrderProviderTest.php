@@ -2,7 +2,7 @@
 
 namespace Wikibase\Lib\Tests\Store;
 
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\Lib\Store\WikiPagePropertyOrderProvider;
 use WikiPage;
@@ -19,7 +19,7 @@ use WikitextContent;
  * @author Lucie-Aimée Kaffee
  * @author Marius Hoch
  */
-class WikiPagePropertyOrderProviderTest extends MediaWikiTestCase {
+class WikiPagePropertyOrderProviderTest extends MediaWikiIntegrationTestCase {
 
 	public function provideGetPropertyOrder() {
 		return WikiTextPropertyOrderProviderTestHelper::provideGetPropertyOrder();

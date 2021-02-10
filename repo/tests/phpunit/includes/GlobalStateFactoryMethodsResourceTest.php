@@ -9,7 +9,7 @@ use IContextSource;
 use LanguageQqx;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Traversable;
 use WebRequest;
@@ -32,7 +32,7 @@ use Wikimedia\TestingAccessWrapper;
  * @license GPL-2.0-or-later
  * @author Marius Hoch
  */
-class GlobalStateFactoryMethodsResourceTest extends MediaWikiTestCase {
+class GlobalStateFactoryMethodsResourceTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();

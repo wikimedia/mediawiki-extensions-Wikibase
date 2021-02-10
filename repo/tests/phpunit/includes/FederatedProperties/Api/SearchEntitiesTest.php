@@ -1,7 +1,7 @@
 <?php
 
 declare( strict_types = 1 );
-namespace Wikibase\Repo\Tests\Api;
+namespace Wikibase\Repo\Tests\FederatedProperties\Api;
 
 /**
  * @covers \Wikibase\Repo\Api\SearchEntities
@@ -16,7 +16,7 @@ namespace Wikibase\Repo\Tests\Api;
  * @license GPL-2.0-or-later
  * @author Tobias Andersson
  */
-class SearchEntitiesFederatedPropertiesTest extends FederatedPropertiesApiTestCase {
+class SearchEntitiesTest extends FederatedPropertiesApiTestCase {
 
 	public function testFederatedPropertiesFailure() {
 		$this->setSourceWikiUnavailable();

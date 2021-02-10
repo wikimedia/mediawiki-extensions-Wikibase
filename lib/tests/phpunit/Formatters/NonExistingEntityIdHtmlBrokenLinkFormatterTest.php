@@ -28,13 +28,13 @@ class NonExistingEntityIdHtmlBrokenLinkFormatterTest extends MediaWikiIntegratio
 	public function provideTestFormatEntityIdBrokenLink() {
 		yield [
 			new ItemId( 'Q1' ),
-			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">'
-			. 'Q1(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span></a>'
+			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">Q1</a>'
+			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-item))</span>'
 		];
 		yield [
 			new PropertyId( 'P99' ),
-			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">'
-			. 'P99(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span></a>'
+			'<a title="(red-link-title: someTitle)" href="http://someurl.com" class="new">P99</a>'
+			. '(word-separator)<span class="wb-entity-undefinedinfo">(parentheses: (somePrefix-property))</span>'
 		];
 	}
 

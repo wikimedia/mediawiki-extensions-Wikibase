@@ -4,7 +4,7 @@ namespace Wikibase\Repo\Tests\Store\Sql;
 
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use stdClass;
 use Wikibase\DataAccess\EntitySource;
 use Wikibase\DataModel\Entity\EntityId;
@@ -35,7 +35,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @license GPL-2.0-or-later
  * @author Marius Hoch < hoo@online.de >
  */
-class WikiPageEntityMetaDataLookupTest extends MediaWikiTestCase {
+class WikiPageEntityMetaDataLookupTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var EntityRevision[]

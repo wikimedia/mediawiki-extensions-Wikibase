@@ -12,7 +12,7 @@ use DataValues\TimeValue;
 use DataValues\UnboundedQuantityValue;
 use DataValues\UnDeserializableValue;
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Psr\SimpleCache\CacheInterface;
 use Title;
 use ValueFormatters\FormatterOptions;
@@ -50,7 +50,7 @@ use Wikibase\Lib\Store\EntityUrlLookup;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class WikibaseValueFormatterBuildersTest extends MediaWikiTestCase {
+class WikibaseValueFormatterBuildersTest extends MediaWikiIntegrationTestCase {
 
 	const GEO_SHAPE_STORAGE_FRONTEND_URL = '//commons.wikimedia.org/wiki/';
 

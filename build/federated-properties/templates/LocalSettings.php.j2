@@ -1,13 +1,17 @@
 <?php
-$wgServer = '{{ PROTOCOL }}://{{ SERVER_NAME }}{{ PORT }}';
+$wgServer = '{{ SCHEME }}://{{ SERVER_NAME }}{{ PORT }}';
 
 # Developer mode and debugging
-error_reporting( -1 );
-ini_set( 'display_errors', 1 );
-$wgShowExceptionDetails = true;
-$wgShowSQLErrors = true;
-$wgDebugDumpSql  = true;
-$wgShowDBErrorBacktrace = true;
+if ( {{ DEV_ERROR_REPORTING }} ) {
+	error_reporting( -1 );
+	ini_set( 'display_errors', 1 );
+	$wgShowExceptionDetails = true;
+	$wgShowSQLErrors = true;
+	$wgDebugDumpSql  = true;
+	$wgShowDBErrorBacktrace = true;
+} else {
+	ini_set( 'display_errors', 0 );
+}
 
 ## Database settings
 ## Environment variables will be substituted in here.
@@ -38,6 +42,9 @@ $wgArticlePath = "/wiki/$1";
 #Set Secret
 $wgSecretKey = "secretkey";
 
+// https://phabricator.wikimedia.org/T235554#6435256
+$wgDisableOutputCompression  = true;
+
 ## RC Age
 # https://www.mediawiki.org/wiki/Manual:
 # Items in the recentchanges table are periodically purged; entries older than this many seconds will go.
@@ -48,11 +55,10 @@ $wgRCMaxAge = 365 * 24 * 3600;
 wfLoadSkin( 'Vector' );
 
 ## Wikibase
-# Load Wikibase repo, client & lib with the example / default settings.
-require_once "$IP/extensions/Wikibase/lib/WikibaseLib.php";
-require_once "$IP/extensions/Wikibase/repo/Wikibase.php";
+# Load Wikibase repo & client with the example / default settings.
+wfLoadExtension( 'WikibaseRepository', "$IP/extensions/Wikibase/extension-repo.json" );
+wfLoadExtension( 'WikibaseClient', "$IP/extensions/Wikibase/extension-client.json" );
 require_once "$IP/extensions/Wikibase/repo/ExampleSettings.php";
-require_once "$IP/extensions/Wikibase/client/WikibaseClient.php";
 require_once "$IP/extensions/Wikibase/client/ExampleSettings.php";
 
 # UniversalLanguageSelector
@@ -63,7 +69,28 @@ wfLoadExtension( 'cldr' );
 
 # Federated Properties
 $wgWBRepoSettings['federatedPropertiesEnabled'] = true;
-$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_URL }}";
+$wgWBRepoSettings['federatedPropertiesSourceScriptUrl'] = "{{ SOURCE_REPO_SCHEME }}://{{ SOURCE_REPO_HOST }}/w/";
+
+if('{{ FEDPROPS_INTERWIKI_PREFIX }}' !== 'wikidata') {
+	$wgWBRepoSettings['entitySources'] = [
+		'local' => [
+			'entityNamespaces' => [ 'item' => 120 ],
+			'repoDatabase' => false,
+			'baseUri' => 'http://{{ SERVER_NAME }}/entity/',
+			'interwikiPrefix' => '',
+			'rdfNodeNamespacePrefix' => 'wd',
+			'rdfPredicateNamespacePrefix' => 'wdt',
+		],
+		'fedprops' => [
+			'entityNamespaces' => [ 'property' => 122 ],
+			'repoDatabase' => false,
+			'baseUri' => 'http://{{ SOURCE_REPO_HOST }}/entity/',
+			'interwikiPrefix' => '{{ FEDPROPS_INTERWIKI_PREFIX }}',
+			'rdfNodeNamespacePrefix' => 'fpwd',
+			'rdfPredicateNamespacePrefix' => 'fpwd',
+		],
+	];
+}
 
 # simulate source API errors via request header
 if( isset ( $_SERVER['HTTP_X_FEDPROPS_SOURCEAPIRESPONSE'] ) ) {

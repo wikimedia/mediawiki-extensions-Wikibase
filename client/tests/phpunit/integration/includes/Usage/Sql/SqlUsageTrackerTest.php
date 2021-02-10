@@ -3,7 +3,7 @@
 namespace Wikibase\Client\Tests\Integration\Usage\Sql;
 
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Client\Tests\Integration\Usage\UsageLookupContractTester;
 use Wikibase\Client\Tests\Integration\Usage\UsageTrackerContractTester;
 use Wikibase\Client\Usage\EntityUsage;
@@ -24,7 +24,7 @@ use Wikimedia\Rdbms\SessionConsistentConnectionManager;
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
  */
-class SqlUsageTrackerTest extends MediaWikiTestCase {
+class SqlUsageTrackerTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var SqlUsageTracker

@@ -176,10 +176,12 @@ class EntityParserOutputGeneratorFactory {
 			'wikibase.repo.ParserOutputGenerator.timing'
 		);
 
-		if ( WikibaseRepo::getDefaultInstance()->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
+		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
+		if ( $wikibaseRepo->getSettings()->getSetting( 'federatedPropertiesEnabled' ) ) {
 			$pog = new FederatedPropertiesEntityParserOutputGenerator(
 				$pog,
-				$userLanguage
+				$userLanguage,
+				$wikibaseRepo->newFederatedPropertiesServiceFactory()->getApiEntityLookup()
 			);
 		}
 

@@ -3,7 +3,7 @@
 namespace Wikibase\Lib\Tests;
 
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MWException;
 use RequestContext;
 use User;
@@ -18,7 +18,7 @@ use Wikibase\Lib\LanguageFallbackChainFactory;
  * @license GPL-2.0-or-later
  * @author Liangent < liangent@gmail.com >
  */
-class LanguageFallbackChainFactoryTest extends MediaWikiTestCase {
+class LanguageFallbackChainFactoryTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @param array $expectedItems

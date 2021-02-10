@@ -14,7 +14,7 @@ use DataValues\UnknownValue;
 use Deserializers\Deserializer;
 use LogicException;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ReflectionClass;
 use ReflectionMethod;
 use RequestContext;
@@ -96,6 +96,7 @@ use Wikibase\Repo\ValueParserFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\LBFactory;
+use Wikimedia\TestingAccessWrapper;
 
 /**
  * @covers \Wikibase\Repo\WikibaseRepo
@@ -107,7 +108,7 @@ use Wikimedia\Rdbms\LBFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class WikibaseRepoTest extends MediaWikiTestCase {
+class WikibaseRepoTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
@@ -1261,6 +1262,113 @@ class WikibaseRepoTest extends MediaWikiTestCase {
 		return [
 			'newFederatedPropertiesServiceFactory'
 		];
+	}
+
+	public function testGetEntitySourceDefinitionsFromSettingsParsesSettings() {
+		$settingsArray = [
+			'federatedPropertiesEnabled' => false,
+			'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
+			'localEntitySourceName' => 'local',
+			'entitySources' =>
+				[
+					'local' => [
+						'entityNamespaces' => [ 'item' => 100, 'property' => 200 ],
+						'repoDatabase' => false,
+						'baseUri' => 'http://example.com/entity/',
+						'rdfNodeNamespacePrefix' => 'wd',
+						'rdfPredicateNamespacePrefix' => 'wdt',
+						'interwikiPrefix' => 'localwiki'
+					]
+				]
+
+		];
+		$settings = new SettingsArray( $settingsArray );
+		$wrapper = TestingAccessWrapper::newFromClass( WikibaseRepo::class );
+		$sourceDefinitions = $wrapper->getEntitySourceDefinitionsFromSettings( $settings, new EntityTypeDefinitions( [] ) );
+
+		if ( $sourceDefinitions instanceof EntitySourceDefinitions ) {
+
+			$itemSource = $sourceDefinitions->getSourceForEntityType( 'item' );
+
+			$this->assertSame( 'local', $itemSource->getSourceName() );
+			$this->assertSame( 'http://example.com/entity/', $itemSource->getConceptBaseUri() );
+			$this->assertSame( 'wdt', $itemSource->getRdfPredicateNamespacePrefix() );
+			$this->assertSame( 'wd', $itemSource->getRdfNodeNamespacePrefix() );
+			$this->assertSame( 'localwiki', $itemSource->getInterwikiPrefix() );
+			$this->assertSame( [ 'item' => 100, 'property' => 200 ], $itemSource->getEntityNamespaceIds() );
+			$this->assertSame( [ 'item' => 'main', 'property' => 'main' ], $itemSource->getEntitySlotNames() );
+			$this->assertSame( [ 'item', 'property' ], $itemSource->getEntityTypes() );
+		}
+	}
+
+	public function testGetEntitySourceDefinitionsFromSettingsInitializesFederatedPropertiesDefaults() {
+		$settingsArray = [
+			'federatedPropertiesEnabled' => true,
+			'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
+			'localEntitySourceName' => 'local',
+			'entityNamespaces' => [ 'item' => 120, 'property' => 122 ],
+			'changesDatabase' => false,
+			'conceptBaseUri' => 'http://localhost/entity/',
+			'foreignRepositories' => []
+		];
+		$settings = new SettingsArray( $settingsArray );
+		$wrapper = TestingAccessWrapper::newFromClass( WikibaseRepo::class );
+		$sourceDefinitions = $wrapper->getEntitySourceDefinitionsFromSettings( $settings, new EntityTypeDefinitions( [] ) );
+
+		if ( $sourceDefinitions instanceof EntitySourceDefinitions ) {
+
+			$itemSource = $sourceDefinitions->getSourceForEntityType( 'item' );
+
+			$this->assertSame( 'local', $itemSource->getSourceName() );
+			$this->assertSame( 'http://localhost/entity/', $itemSource->getConceptBaseUri() );
+			$this->assertSame( '', $itemSource->getRdfPredicateNamespacePrefix() );
+			$this->assertSame( 'wd', $itemSource->getRdfNodeNamespacePrefix() );
+			$this->assertSame( '', $itemSource->getInterwikiPrefix() );
+			$this->assertSame( [ 'item' => 120 ], $itemSource->getEntityNamespaceIds() );
+			$this->assertSame( [ 'item' => 'main' ], $itemSource->getEntitySlotNames() );
+			$this->assertSame( [ 'item' ], $itemSource->getEntityTypes() );
+
+			$propertySource = $sourceDefinitions->getSourceForEntityType( 'property' );
+
+			$this->assertSame( 'fedprops', $propertySource->getSourceName() );
+			$this->assertSame( 'http://www.wikidata.org/entity/', $propertySource->getConceptBaseUri() );
+			$this->assertSame( 'fpwd', $propertySource->getRdfPredicateNamespacePrefix() );
+			$this->assertSame( 'fpwd', $propertySource->getRdfNodeNamespacePrefix() );
+			$this->assertSame( 'wikidata', $propertySource->getInterwikiPrefix() );
+			$this->assertSame( [ 'property' => 122 ], $propertySource->getEntityNamespaceIds() ); // uses wikidata default not config
+			$this->assertSame( [ 'property' => 'main' ], $propertySource->getEntitySlotNames() );
+			$this->assertSame( [ 'property' ], $propertySource->getEntityTypes() );
+		}
+	}
+
+	public function testGetEntitySourceDefinitionsFromSettingsDefaultsToLegacyParser() {
+		$settingsArray = [
+			'federatedPropertiesEnabled' => false,
+			'federatedPropertiesSourceScriptUrl' => 'https://www.wikidata.org/w/',
+			'localEntitySourceName' => 'local',
+			'entityNamespaces' => [ 'item' => 120, 'property' => 122 ],
+			'changesDatabase' => false,
+			'conceptBaseUri' => 'http://localhost/entity/',
+			'foreignRepositories' => []
+		];
+
+		$settings = new SettingsArray( $settingsArray );
+		$wrapper = TestingAccessWrapper::newFromClass( WikibaseRepo::class );
+		$sourceDefinitions = $wrapper->getEntitySourceDefinitionsFromSettings( $settings, new EntityTypeDefinitions( [] ) );
+
+		if ( $sourceDefinitions instanceof EntitySourceDefinitions ) {
+
+			$itemSource = $sourceDefinitions->getSourceForEntityType( 'item' );
+
+			$this->assertSame( 'local', $itemSource->getSourceName() );
+			$this->assertSame( 'http://localhost/entity/', $itemSource->getConceptBaseUri() );
+			$this->assertSame( '', $itemSource->getRdfPredicateNamespacePrefix() );
+			$this->assertSame( 'wd', $itemSource->getRdfNodeNamespacePrefix() );
+			$this->assertSame( '', $itemSource->getInterwikiPrefix() );
+			$this->assertSame( [ 'item' => 120, 'property' => 122 ], $itemSource->getEntityNamespaceIds() );
+			$this->assertSame( [ 'item' => 'main', 'property' => 'main' ], $itemSource->getEntitySlotNames() );
+			$this->assertSame( [ 'item', 'property' ], $itemSource->getEntityTypes() );
+		}
 	}
 
 }

@@ -6,7 +6,7 @@ use DataValues\NumberValue;
 use DataValues\StringValue;
 use InvalidArgumentException;
 use MediaWiki\MediaWikiServices;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use ParserOptions;
 use ValueFormatters\FormatterOptions;
 use ValueFormatters\ValueFormatter;
@@ -24,7 +24,7 @@ use Wikibase\Lib\Formatters\CommonsInlineImageFormatter;
  * @author Adrian Heine <adrian.heine@wikimedia.de>
  * @author Marius Hoch
  */
-class CommonsInlineImageFormatterTest extends MediaWikiTestCase {
+class CommonsInlineImageFormatterTest extends MediaWikiIntegrationTestCase {
 
 	public function commonsInlineImageFormatterProvider() {
 		$fileUrl = '.*//upload\.wikimedia\.org/wikipedia/commons/.*/120px-Example\.jpg';
