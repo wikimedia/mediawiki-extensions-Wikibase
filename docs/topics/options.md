@@ -631,7 +631,7 @@ DEFAULT: Same as [siteGlobalID] wikibase setting
 Site name of the connected repository wiki.
 
 The default is to assume client and repo are same wiki, so defaults to global [$wgSitename] setting.
-If not the same wiki, defaults to 'Wikidata'.
+If not the same wiki, defaults to 'Wikibase'.
 This setting can also be set to an i18n message key and will be handled as a message, if the message key exists so that the repo site name can be translatable.
 
 DEFAULT: [$wgSitename]
