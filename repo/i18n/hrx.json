@@ -7,5 +7,7 @@
 	},
 	"wikibase-edit": "beaarvete",
 	"wikibase-add": "adizioneere",
-	"wikibase-sitelinks-special": "Annre Websites"
+	"wikibase-description-empty": "Keen Beschreivung forhande",
+	"wikibase-sitelinks-special": "Annre Websites",
+	"wikibase-statementview-rank-normal": "Normaler rank"
 }

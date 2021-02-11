@@ -64,6 +64,7 @@
 	"wikibase-entitytermsview-input-help-message": "Язъе хӀокхунна цӀе а, доца цуьнах лаьцна а хӀора маттана альтернативан цӀерш а.",
 	"wikibase-statementsection-statements": "ТIечIагIдалар",
 	"wikibase-sitelinks": "Сайтийн тӀе йолу хьажоргийн могӀам",
+	"wikibase-sitelinkgroupview-input-help-message": "Сайт а, оцу сайт тӀера агӀо а билгалайина тӀетоха арахьара сайт тӀе хьажорг. Йолуш йолу сайт тӀе хьажоргаш нисъе я дӀаяха.",
 	"wikibase-sitelinks-counter": "$1 {{PLURAL:$1|дӀаяздар}}",
 	"wikibase-sitelinks-empty": "Цхьа агӀо кхуза хьажорг йолуш яц.",
 	"wikibase-sitelinks-special": "ХӀокху элементах тесна йолу кхечу сайташкара агӀонаш",

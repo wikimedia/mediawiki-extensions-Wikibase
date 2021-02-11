@@ -55,6 +55,8 @@
 	"wikibase-unconnectedpages-format-row": "($1 {{PLURAL:$1|medjezikovna povezava|medjezikovni povezavi|medjezikovne povezave|medjezikovnih povezav}} na strani)",
 	"wikibase-unconnectedpages-submit": "Prikaži strani",
 	"pageswithbadges": "Strani z značkami",
+	"pageswithbadges-summary": "Na tej strani so navedene strani z značkami (npr. dobri članki ali izbrani članki). Seznam je razvrščen padajoče po ID oznaki strani, tako da so novejše strani navedene najprej.",
+	"wikibase-pageswithbadges-legend": "Seznam strani z izbrano značko",
 	"wikibase-pageswithbadges-badge": "Značka:",
 	"wikibase-pageswithbadges-submit": "Prikaži strani",
 	"entityusage": "Uporaba objekta",
