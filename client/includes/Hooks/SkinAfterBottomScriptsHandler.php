@@ -5,9 +5,9 @@ namespace Wikibase\Client\Hooks;
 use ExtensionRegistry;
 use File;
 use Html;
+use MediaWiki\Revision\RevisionLookup;
 use PageImages\PageImages;
 use Title;
-
 use Wikibase\Client\RepoLinker;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Services\Lookup\TermLookup;
@@ -23,11 +23,19 @@ class SkinAfterBottomScriptsHandler {
 	private $repoLinker;
 	/** @var TermLookup */
 	private $termLookup;
+	/** @var RevisionLookup */
+	private $revisionLookup;
 
-	public function __construct( string $langCode, RepoLinker $repoLinker, TermLookup $termLookup ) {
+	public function __construct(
+		string $langCode,
+		RepoLinker $repoLinker,
+		TermLookup $termLookup,
+		RevisionLookup $revisionLookup
+	) {
 		$this->langCode = $langCode;
 		$this->repoLinker = $repoLinker;
 		$this->termLookup = $termLookup;
+		$this->revisionLookup = $revisionLookup;
 	}
 
 	/**
@@ -71,6 +79,8 @@ class SkinAfterBottomScriptsHandler {
 		File $imageFile = null,
 		$description = null
 		) {
+		$revisionRecord = $this->revisionLookup->getFirstRevision( $title );
+		$schemaTimestamp = $revisionRecord ? $revisionRecord->getTimestamp() : null;
 		$schema = [
 			'@context' => 'https://schema.org',
 			'@type' => 'Article',
@@ -90,7 +100,7 @@ class SkinAfterBottomScriptsHandler {
 					'url' => wfMessage( 'wikibase-page-schema-publisher-logo-url' )->text()
 				]
 			],
-			'datePublished' => wfTimestamp( TS_ISO_8601, $title->getEarliestRevTime() )
+			'datePublished' => wfTimestamp( TS_ISO_8601, $schemaTimestamp )
 		];
 
 		if ( $revisionTimestamp ) {

@@ -3,6 +3,8 @@
 namespace Wikibase\Client\Tests\Unit\Hooks;
 
 use File;
+use MediaWiki\Revision\RevisionLookup;
+use MediaWiki\Revision\RevisionRecord;
 use Title;
 
 use Wikibase\Client\Hooks\SkinAfterBottomScriptsHandler;
@@ -33,9 +35,14 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 			'/wiki/$1',
 			'/w'
 		);
-		$handler = new SkinAfterBottomScriptsHandler( 'en', $repoLinker, $client->getTermLookup() );
+		$handler = new SkinAfterBottomScriptsHandler(
+			'en',
+			$repoLinker,
+			$client->getTermLookup(),
+			$this->createMockRevisionLookup( '1022523983' )
+		);
 
-		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams', '1022523983' );
+		$title = $this->mockTitle( 'https://de.wikipedia.org/wiki', 'Douglas Adams' );
 		$actual = $handler->createSchema(
 			$title, $revisionTimestamp, 'https://www.wikidata.org/entity/Q42', $image, $description
 		);
@@ -116,18 +123,28 @@ class SkinAfterBottomScriptsHandlerTest extends \PHPUnit\Framework\TestCase {
 	/**
 	 * @param string $baseURL
 	 * @param string $text
-	 * @param string|null $earliestRevTimestamp
 	 * @return Title
 	 */
-	private function mockTitle( $baseURL, $titleText, $earliestRevTimestamp = null ) {
+	private function mockTitle( $baseURL, $titleText ) {
 		$mock = $this->createMock( Title::class );
 		$mock->method( 'getFullURL' )
 			->willReturn( $baseURL . '/' . str_replace( ' ', '_', $titleText ) );
 		$mock->method( 'getText' )
 			->willReturn( $titleText );
-		$mock->method( 'getEarliestRevTime' )
-			->willReturn( $earliestRevTimestamp );
 		return $mock;
+	}
+
+	/**
+	 * @param string|null $timestamp
+	 */
+	private function createMockRevisionLookup( $timestamp ) {
+		$revisionRecord = $this->createMock( RevisionRecord::class );
+		$revisionRecord->method( 'getTimestamp' )
+			->willReturn( $timestamp );
+		$mockRevLookup = $this->createMock( RevisionLookup::class );
+		$mockRevLookup->method( 'getFirstRevision' )
+			->willReturn( $revisionRecord );
+		return $mockRevLookup;
 	}
 
 }

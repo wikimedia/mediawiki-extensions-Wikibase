@@ -197,7 +197,8 @@ final class ClientHooks {
 		$handler = new SkinAfterBottomScriptsHandler(
 			$client->getContentLanguage()->getCode(),
 			$client->newRepoLinker(),
-			$client->getTermLookup()
+			$client->getTermLookup(),
+			MediaWikiServices::getInstance()->getRevisionLookup()
 		);
 		$revisionTimestamp = $out->getRevisionTimestamp();
 		$html .= $handler->createSchemaElement(
