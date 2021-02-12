@@ -234,7 +234,6 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 		$this->lookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
-			->with( $this->anything() )
 			->willReturn( $this->factoryReturnLookup );
 
 		$lookup = $this->getLookup();
@@ -288,7 +287,6 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 	private function mockHasContentLanguage( bool $return ) {
 		$this->contentLanguages
 			->method( 'hasLanguage' )
-			->with( $this->anything() )
 			->willReturn( $return );
 	}
 
@@ -334,7 +332,6 @@ class CachingFallbackBasedTermLookupTest extends TestCase {
 
 		$this->lookupFactory->expects( $this->once() )
 			->method( 'newLabelDescriptionLookup' )
-			->with( $this->anything() )
 			->willReturn( $this->factoryReturnLookup );
 	}
 }
